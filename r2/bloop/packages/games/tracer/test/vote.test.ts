@@ -77,4 +77,13 @@ describe('tracer voting', () => {
     expect(s2.scores['__proto__']).toBe(1);
     expect(s2.scores['p2']).toBe(1);
   });
+
+  it('does not count an absent "__proto__" player as having voted', () => {
+    const weird = ['p1', '__proto__'];
+    const s0 = tracer.init('s', weird, content);
+    const { state: s1 } = tracer.reduce(s0, vote('p1', '__proto__'));
+    expect(s1.phase).toBe('vote'); // __proto__ has NOT voted yet — must not reveal
+    const { state: s2 } = tracer.reduce(s1, vote('__proto__', 'p1'));
+    expect(s2.phase).toBe('reveal');
+  });
 });

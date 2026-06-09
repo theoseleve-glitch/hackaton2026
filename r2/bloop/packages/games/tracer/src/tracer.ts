@@ -67,7 +67,7 @@ export const tracer: GameModule<TracerState, TracerAction, TracerView, TracerCon
       prompts: shuffled,
       round: 0,
       phase: 'vote',
-      votes: {},
+      votes: emptyPlayerMap<PlayerId>(),
       scores,
     };
   },
@@ -81,7 +81,9 @@ export const tracer: GameModule<TracerState, TracerAction, TracerView, TracerCon
       if (!state.players.includes(action.target) || action.target === playerId) {
         return { state, effects: [] };
       }
-      const votes = { ...state.votes, [playerId]: action.target };
+      const votes = Object.assign(emptyPlayerMap<PlayerId>(), state.votes, {
+        [playerId]: action.target,
+      });
       const next = { ...state, votes };
       if (state.players.every((p) => votes[p] !== undefined)) {
         return resolveReveal(next);
