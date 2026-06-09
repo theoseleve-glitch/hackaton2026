@@ -19,6 +19,8 @@ import '../features/trips/domain/trip_repository.dart';
 import '../shared/models/models.dart';
 import '../shared/services/map_search_service.dart';
 import '../shared/services/routing_service.dart';
+import '../product_modules/ecodrive/application/ecodrive_providers.dart';
+import '../product_modules/ecodrive/domain/eco_driving_analyzer.dart';
 
 /// Central dependency wiring. Every repository switches between its Supabase
 /// implementation (when .env is configured) and a mock (demo mode).
@@ -95,8 +97,22 @@ final analyticsRepositoryProvider = Provider<AnalyticsRepository>(
       : ConsoleAnalyticsRepository(),
 );
 
-final scoringServiceProvider =
-    Provider<ScoringService>((ref) => const BasicTripScoringService());
+/// Scoring strategy selected by the active product mode: EcoDrive uses the
+/// eco-driving service (with the chosen vehicle), Terroir the discovery service,
+/// otherwise the neutral platform scoring. This makes the shared
+/// `/summary/:tripId` screen show the eco-score automatically in EcoDrive mode.
+final scoringServiceProvider = Provider<ScoringService>((ref) {
+  switch (ref.watch(productModeProvider)) {
+    case ProductContext.ecodrive:
+      return BasicEcoDrivingScoringService(
+        vehicle: ref.watch(selectedEcoVehicleProvider),
+      );
+    case ProductContext.terroir:
+      return BasicDiscoveryScoringService();
+    case ProductContext.common:
+      return const BasicTripScoringService();
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Auth state

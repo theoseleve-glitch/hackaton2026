@@ -1,13 +1,14 @@
-import 'dart:math' as math;
-
-import '../../../core/constants/app_constants.dart';
 import '../../../features/scoring/domain/scoring_service.dart';
 import '../../../shared/models/models.dart';
+import 'eco_scoring_engine.dart';
+import 'eco_vehicle_type.dart';
+import 'fuel_co2_estimator.dart';
 
-/// EcoDrive-specific analysis of a GPS track. Detects harsh accelerations
-/// and braking, speed regularity, and estimates fuel/CO2. Pure function —
-/// fully unit-testable.
+/// EcoDrive-specific summary of a GPS track: harsh events, speed regularity and
+/// an (approximate) fuel/CO2 estimate. Thin compatibility wrapper over
+/// [EcoScoringEngine] + [FuelCo2Estimator] — pure and unit-testable.
 class EcoDrivingMetrics {
+  /// Creates a metrics bundle.
   const EcoDrivingMetrics({
     required this.harshAccelerationCount,
     required this.harshBrakingCount,
@@ -20,81 +21,98 @@ class EcoDrivingMetrics {
     this.elevationGain,
   });
 
+  /// Harsh acceleration events (`a > +2.0 m/s²`).
   final int harshAccelerationCount;
+
+  /// Harsh braking events (`a < -2.5 m/s²`).
   final int harshBrakingCount;
-  final double averageSpeed; // m/s
+
+  /// Mean speed across the trip, in m/s.
+  final double averageSpeed;
+
+  /// Variance of per-segment speeds, in (m/s)².
   final double speedVariance;
+
+  /// Total driven distance, in metres.
   final double distanceMeters;
+
+  /// Estimated fuel consumed, in litres (0 for electric).
   final double fuelEstimateLiters;
+
+  /// Estimated CO2 emitted, in kilograms.
   final double co2EstimateKg;
-  final int speedingDurationSeconds; // needs speed-limit data — placeholder
+
+  /// Seconds spent over the speed limit — requires speed-limit data (0 until
+  /// then). Placeholder for a future map-matched implementation.
+  final int speedingDurationSeconds;
+
+  /// Optional cumulative elevation gain in metres (null until altitude is used).
   final double? elevationGain;
 }
 
+/// Computes [EcoDrivingMetrics] from a GPS track.
+///
+/// Delegates harsh-event detection and speed statistics to [EcoScoringEngine]
+/// and fuel/CO2 to [FuelCo2Estimator] for [vehicle], so there is a single
+/// source of truth for the eco maths.
 class EcoDrivingAnalyzer {
+  /// Creates an analyzer. Defaults estimate fuel for a petrol vehicle.
   const EcoDrivingAnalyzer({
-    this.harshAccelThresholdMps2 = 2.5,
-    this.harshBrakeThresholdMps2 = -3.0,
+    this.engine = const EcoScoringEngine(),
+    this.estimator = const FuelCo2Estimator(),
+    this.vehicle = EcoVehicleType.petrol,
   });
 
-  final double harshAccelThresholdMps2;
-  final double harshBrakeThresholdMps2;
+  /// The scoring engine that detects harsh events and computes speed stats.
+  final EcoScoringEngine engine;
 
+  /// The fuel/CO2 estimator.
+  final FuelCo2Estimator estimator;
+
+  /// Vehicle type used for the fuel/CO2 estimate.
+  final EcoVehicleType vehicle;
+
+  /// Analyses [points] into an [EcoDrivingMetrics] bundle.
   EcoDrivingMetrics analyze(List<GpsTrackPoint> points) {
-    var harshAccel = 0, harshBrake = 0;
-    var distance = 0.0;
-    final speeds = <double>[];
-
-    for (var i = 0; i < points.length; i++) {
-      final s = points[i].speedMps;
-      if (s != null) speeds.add(s);
-      if (i == 0) continue;
-      distance += points[i - 1].point.distanceTo(points[i].point);
-      final prev = points[i - 1].speedMps;
-      final dt = points[i]
-          .recordedAt
-          .difference(points[i - 1].recordedAt)
-          .inMilliseconds /
-          1000.0;
-      if (prev != null && s != null && dt > 0) {
-        final accel = (s - prev) / dt;
-        if (accel >= harshAccelThresholdMps2) harshAccel++;
-        if (accel <= harshBrakeThresholdMps2) harshBrake++;
-      }
-    }
-
-    var avg = 0.0, variance = 0.0;
-    if (speeds.isNotEmpty) {
-      avg = speeds.reduce((a, b) => a + b) / speeds.length;
-      variance =
-          speeds.map((s) => math.pow(s - avg, 2) as double).reduce((a, b) => a + b) /
-              speeds.length;
-    }
-
-    // Consumption penalty for jerky driving (very rough heuristic).
-    const basePer100 = AppConstants.defaultFuelLitersPer100Km;
-    final jerkPenalty = 1 + (harshAccel + harshBrake) * 0.01;
-    final fuel = distance / 1000 * basePer100 / 100 * jerkPenalty;
-
+    final r = engine.score(EcoScoringInput(points: points));
+    final est = estimator.estimateForRoute(
+      vehicle: vehicle,
+      distanceMeters: r.distanceMeters.round(),
+      durationSeconds: r.durationSeconds,
+    );
     return EcoDrivingMetrics(
-      harshAccelerationCount: harshAccel,
-      harshBrakingCount: harshBrake,
-      averageSpeed: avg,
-      speedVariance: variance,
-      distanceMeters: distance,
-      fuelEstimateLiters: double.parse(fuel.toStringAsFixed(2)),
-      co2EstimateKg: double.parse(
-          (fuel * AppConstants.co2KgPerFuelLiter).toStringAsFixed(2)),
+      harshAccelerationCount: r.harshAccelerationCount,
+      harshBrakingCount: r.harshBrakingCount,
+      averageSpeed: r.avgSpeedMps,
+      speedVariance: r.speedVariance,
+      distanceMeters: r.distanceMeters,
+      fuelEstimateLiters: double.parse(est.fuelLiters.toStringAsFixed(2)),
+      co2EstimateKg: double.parse(est.co2Kg.toStringAsFixed(2)),
     );
   }
 }
 
-/// Eco-driving score /100 + main advice, built on EcoDrivingAnalyzer.
+/// Eco-driving [ScoringService]: turns a finished trip's GPS trace into a
+/// `/100` score, one actionable advice, and a rich `metrics` map.
+///
+/// This is the EcoDrive plug-in for the platform's scoring extension point. It
+/// is selected by `scoringServiceProvider` when the product mode is EcoDrive.
 class BasicEcoDrivingScoringService implements ScoringService {
-  const BasicEcoDrivingScoringService(
-      [this.analyzer = const EcoDrivingAnalyzer()]);
+  /// Creates the service. [vehicle] drives the fuel/CO2 estimate.
+  const BasicEcoDrivingScoringService({
+    this.vehicle = EcoVehicleType.petrol,
+    this.engine = const EcoScoringEngine(),
+    this.estimator = const FuelCo2Estimator(),
+  });
 
-  final EcoDrivingAnalyzer analyzer;
+  /// Vehicle type used for fuel/CO2 estimation.
+  final EcoVehicleType vehicle;
+
+  /// The pure scoring engine.
+  final EcoScoringEngine engine;
+
+  /// The fuel/CO2 estimator.
+  final FuelCo2Estimator estimator;
 
   @override
   TripScoreResult scoreTrip({
@@ -107,41 +125,45 @@ class BasicEcoDrivingScoringService implements ScoringService {
         adviceText: 'Trajet trop court pour une analyse écoconduite.',
       );
     }
-    final m = analyzer.analyze(trackPoints);
-    final km = math.max(m.distanceMeters / 1000, 0.5);
 
-    final accelScore =
-        (100 - (m.harshAccelerationCount / km) * 25).clamp(0, 100).round();
-    final brakeScore =
-        (100 - (m.harshBrakingCount / km) * 25).clamp(0, 100).round();
-    final stabilityScore = (100 - m.speedVariance * 4).clamp(0, 100).round();
-    final overall =
-        ((accelScore + brakeScore + stabilityScore * 2) / 4).round();
+    final r = engine.score(EcoScoringInput(points: trackPoints));
+    final est = estimator.estimateForRoute(
+      vehicle: vehicle,
+      distanceMeters: r.distanceMeters.round(),
+      durationSeconds: r.durationSeconds,
+    );
 
-    String advice;
-    if (accelScore <= brakeScore && accelScore <= stabilityScore) {
-      advice = 'Accélérez plus progressivement pour économiser du carburant.';
-    } else if (brakeScore <= stabilityScore) {
-      advice = 'Anticipez davantage pour éviter les freinages brusques.';
-    } else if (overall < 80) {
-      advice = 'Maintenez une vitesse plus régulière (régulateur conseillé).';
-    } else {
-      advice = 'Excellente conduite souple — continuez ainsi !';
-    }
+    // APPROX: smoother driving is credited up to ~15% savings versus an
+    // aggressive baseline, scaled by the overall score. Not a measured figure.
+    final savedFraction = (r.overall / 100.0) * 0.15;
+    final fuelSaved = est.fuelLiters * savedFraction;
+    final co2Saved = est.co2Kg * savedFraction;
 
     return TripScoreResult(
-      scoreOverall: overall,
-      adviceText: advice,
+      scoreOverall: r.overall,
+      adviceText: r.advice,
       metrics: {
-        'harshAccelerationCount': m.harshAccelerationCount,
-        'harshBrakingCount': m.harshBrakingCount,
-        'averageSpeed': m.averageSpeed,
-        'speedVariance': m.speedVariance,
-        'fuelEstimate': m.fuelEstimateLiters,
-        'co2Estimate': m.co2EstimateKg,
-        'scoreAcceleration': accelScore,
-        'scoreBraking': brakeScore,
-        'scoreSpeedStability': stabilityScore,
+        // Existing keys (kept stable for the dashboard + tests).
+        'harshAccelerationCount': r.harshAccelerationCount,
+        'harshBrakingCount': r.harshBrakingCount,
+        'averageSpeed': r.avgSpeedMps,
+        'speedVariance': r.speedVariance,
+        'fuelEstimate': double.parse(est.fuelLiters.toStringAsFixed(2)),
+        'co2Estimate': double.parse(est.co2Kg.toStringAsFixed(2)),
+        'scoreAcceleration': r.acceleration,
+        'scoreBraking': r.braking,
+        'scoreSpeedStability': r.speedStability,
+        // New keys from the upgraded 5-component engine.
+        'scoreRouteEfficiency': r.routeEfficiency,
+        'scoreSpeedCompliance': r.speedCompliance,
+        'distanceMeters': r.distanceMeters,
+        'durationSeconds': r.durationSeconds,
+        'estimatedFuelSavedLiters':
+            double.parse(fuelSaved.toStringAsFixed(2)),
+        'estimatedCo2SavedKg': double.parse(co2Saved.toStringAsFixed(2)),
+        'vehicleType': vehicle.name,
+        if (est.kwh != null)
+          'kwhEstimate': double.parse(est.kwh!.toStringAsFixed(2)),
       },
     );
   }
