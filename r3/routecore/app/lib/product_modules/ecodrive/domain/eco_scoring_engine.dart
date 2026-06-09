@@ -214,7 +214,9 @@ class EcoScoringEngine {
       wasStopped = isStopped;
 
       if (hasLimits) {
-        final limitKmh = limits[i];
+        // Score segment a->b against the limit at its START point (limits[i-1]);
+        // the final point's limit is the one dropped.
+        final limitKmh = limits[i - 1];
         if (limitKmh > 0 && v * 3.6 > limitKmh) overLimitSeconds += dt;
       }
     }

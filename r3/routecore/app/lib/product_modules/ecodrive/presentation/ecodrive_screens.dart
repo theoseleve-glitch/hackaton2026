@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/providers.dart';
+import '../../../features/analytics/domain/analytics_repository.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../features/scoring/domain/scoring_service.dart';
 import '../../../features/tracking/presentation/tracking_controller.dart';
@@ -45,9 +46,16 @@ class EcoCompareScreen extends ConsumerWidget {
                       if (rawOptions.isEmpty) {
                         return Center(
                           child: FilledButton(
-                            onPressed: () => ref
-                                .read(routePlannerProvider.notifier)
-                                .computeOptions(),
+                            onPressed: () {
+                              ref.read(analyticsRepositoryProvider).logEvent(
+                                    AnalyticsEvents.ecodriveRouteSearchStarted,
+                                    productContext: ProductContext.ecodrive,
+                                    properties: {'vehicle': vehicle.name},
+                                  );
+                              ref
+                                  .read(routePlannerProvider.notifier)
+                                  .computeOptions();
+                            },
                             child: const Text('Calculer les options'),
                           ),
                         );
@@ -92,13 +100,13 @@ class EcoCompareScreen extends ConsumerWidget {
                                     .read(routePlannerProvider.notifier)
                                     .selectOption(o);
                                 ref.read(analyticsRepositoryProvider).logEvent(
-                                  'ecodrive_route_option_selected',
-                                  productContext: ProductContext.ecodrive,
-                                  properties: {
-                                    'mode': o.routeMode.name,
-                                    'vehicle': vehicle.name,
-                                  },
-                                );
+                                      AnalyticsEvents.ecodriveRouteOptionSelected,
+                                      productContext: ProductContext.ecodrive,
+                                      properties: {
+                                        'mode': o.routeMode.name,
+                                        'vehicle': vehicle.name,
+                                      },
+                                    );
                               },
                             ),
                           const SizedBox(height: 12),
@@ -142,6 +150,8 @@ class EcoCompareScreen extends ConsumerWidget {
           destinationLabel: planner.destinationLabel,
           productContext: ProductContext.ecodrive,
         );
+    // ecodrive_trip_started / _trip_completed are emitted by TrackingController
+    // at the real lifecycle moments (start/stop), guarded by product mode.
     if (context.mounted) context.push('/tracking/${trip.id}');
   }
 }
@@ -201,7 +211,8 @@ class _RouteOptionCard extends StatelessWidget {
     final showDelta = ecoCo2Reference != null &&
         option.routeMode != RouteMode.eco &&
         co2 != null;
-    final delta = showDelta ? (co2 - ecoCo2Reference!) : null;
+    // `co2`/`ecoCo2Reference` are guaranteed non-null when `showDelta` is true.
+    final delta = showDelta ? (co2! - ecoCo2Reference!) : null;
     return Card(
       color: option.routeMode == RouteMode.eco ? Colors.green.shade50 : null,
       child: ListTile(
@@ -273,11 +284,18 @@ class _SavingsBanner extends StatelessWidget {
 ///
 /// The enterprise/fleet version aggregates eco-scores by organization — data
 /// model prepared in the DB; UI out of scope for the MVP (see `docs/ECODRIVE.md`).
-class EcoDashboardScreen extends ConsumerWidget {
+class EcoDashboardScreen extends ConsumerStatefulWidget {
   const EcoDashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EcoDashboardScreen> createState() => _EcoDashboardScreenState();
+}
+
+class _EcoDashboardScreenState extends ConsumerState<EcoDashboardScreen> {
+  bool _logged = false;
+
+  @override
+  Widget build(BuildContext context) {
     final tracking = ref.watch(trackingControllerProvider);
     final vehicle = ref.watch(selectedEcoVehicleProvider);
     final TripScoreResult? score = tracking.points.length >= 2
@@ -292,13 +310,27 @@ class EcoDashboardScreen extends ConsumerWidget {
           )
         : null;
 
-    if (score != null) {
-      // Score + advice are surfaced together here.
-      ref.read(analyticsRepositoryProvider).logEvent(
-        'eco_score_viewed',
-        productContext: ProductContext.ecodrive,
-        properties: {'score': score.scoreOverall},
-      );
+    // Fire the view events ONCE per screen entry (not on every rebuild), via a
+    // post-frame callback so no async work happens during build.
+    if (score != null && !_logged) {
+      _logged = true;
+      final analytics = ref.read(analyticsRepositoryProvider);
+      final overall = score.scoreOverall;
+      final advice = score.adviceText;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        analytics.logEvent(
+          AnalyticsEvents.ecodriveScoreViewed,
+          productContext: ProductContext.ecodrive,
+          properties: {'score': overall},
+        );
+        if (advice != null) {
+          analytics.logEvent(
+            AnalyticsEvents.ecodriveAdviceViewed,
+            productContext: ProductContext.ecodrive,
+            properties: {'advice': advice},
+          );
+        }
+      });
     }
 
     return Scaffold(
@@ -321,6 +353,7 @@ class _DashboardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final m = score.metrics;
     final compliance = m['scoreSpeedCompliance'];
+    final isEv = m['kwhEstimate'] != null;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -365,11 +398,18 @@ class _DashboardBody extends StatelessWidget {
             Icons.speed,
             'Vitesse moyenne',
             '${((m['averageSpeed'] as double? ?? 0) * 3.6).toStringAsFixed(0)} km/h'),
-        _metricTile(Icons.local_gas_station, 'Carburant estimé',
-            '${m['fuelEstimate']} L'),
+        if (isEv)
+          _metricTile(Icons.bolt, 'Énergie estimée', '${m['kwhEstimate']} kWh')
+        else
+          _metricTile(Icons.local_gas_station, 'Carburant estimé',
+              '${m['fuelEstimate']} L'),
         _metricTile(Icons.cloud, 'CO₂ estimé', '${m['co2Estimate']} kg'),
-        _metricTile(Icons.savings, 'Carburant économisé (est.)',
-            '${m['estimatedFuelSavedLiters']} L'),
+        if (isEv)
+          _metricTile(Icons.savings, 'Énergie économisée (est.)',
+              '${m['estimatedKwhSavedKwh']} kWh')
+        else
+          _metricTile(Icons.savings, 'Carburant économisé (est.)',
+              '${m['estimatedFuelSavedLiters']} L'),
         _metricTile(Icons.eco, 'CO₂ évité (est.)',
             '${m['estimatedCo2SavedKg']} kg'),
         const SizedBox(height: 16),

@@ -15,6 +15,14 @@ class AnalyticsEvents {
   static const tripCompleted = 'trip_completed';
   static const ecoScoreViewed = 'eco_score_viewed';
   static const terroirRouteGenerated = 'terroir_route_generated';
+
+  // EcoDrive product events (brief-mandated exact names).
+  static const ecodriveRouteSearchStarted = 'ecodrive_route_search_started';
+  static const ecodriveRouteOptionSelected = 'ecodrive_route_option_selected';
+  static const ecodriveTripStarted = 'ecodrive_trip_started';
+  static const ecodriveTripCompleted = 'ecodrive_trip_completed';
+  static const ecodriveScoreViewed = 'ecodrive_score_viewed';
+  static const ecodriveAdviceViewed = 'ecodrive_advice_viewed';
 }
 
 abstract class AnalyticsRepository {

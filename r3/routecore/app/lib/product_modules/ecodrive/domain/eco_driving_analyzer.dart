@@ -162,8 +162,11 @@ class BasicEcoDrivingScoringService implements ScoringService {
             double.parse(fuelSaved.toStringAsFixed(2)),
         'estimatedCo2SavedKg': double.parse(co2Saved.toStringAsFixed(2)),
         'vehicleType': vehicle.name,
-        if (est.kwh != null)
+        if (est.kwh != null) ...{
           'kwhEstimate': double.parse(est.kwh!.toStringAsFixed(2)),
+          'estimatedKwhSavedKwh':
+              double.parse((est.kwh! * savedFraction).toStringAsFixed(2)),
+        },
       },
     );
   }

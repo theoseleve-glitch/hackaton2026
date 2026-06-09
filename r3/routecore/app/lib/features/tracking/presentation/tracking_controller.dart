@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../analytics/domain/analytics_repository.dart';
 import '../../../app/providers.dart';
 import '../../../shared/models/models.dart';
 
@@ -59,7 +60,14 @@ class TrackingController extends Notifier<TrackingState> {
     }
     await ref
         .read(analyticsRepositoryProvider)
-        .logEvent('trip_started', properties: {'tripId': tripId});
+        .logEvent(AnalyticsEvents.tripStarted, properties: {'tripId': tripId});
+    if (ref.read(productModeProvider) == ProductContext.ecodrive) {
+      await ref.read(analyticsRepositoryProvider).logEvent(
+            AnalyticsEvents.ecodriveTripStarted,
+            productContext: ProductContext.ecodrive,
+            properties: {'tripId': tripId},
+          );
+    }
 
     _startedAt = DateTime.now();
     state = TrackingState(tripId: tripId, isTracking: true);
@@ -97,7 +105,15 @@ class TrackingController extends Notifier<TrackingState> {
       }
       await ref
           .read(analyticsRepositoryProvider)
-          .logEvent('trip_completed', properties: {'tripId': tripId});
+          .logEvent(AnalyticsEvents.tripCompleted,
+              properties: {'tripId': tripId});
+      if (ref.read(productModeProvider) == ProductContext.ecodrive) {
+        await ref.read(analyticsRepositoryProvider).logEvent(
+              AnalyticsEvents.ecodriveTripCompleted,
+              productContext: ProductContext.ecodrive,
+              properties: {'tripId': tripId},
+            );
+      }
     }
     state = state.copyWith(isTracking: false);
     return tripId;

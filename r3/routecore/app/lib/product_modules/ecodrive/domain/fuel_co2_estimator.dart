@@ -57,6 +57,8 @@ class FuelCo2Estimator {
     final profile = EcoVehicleProfile.of(vehicle);
     final distanceKm = distanceMeters / 1000.0;
     final hours = durationSeconds <= 0 ? 0.0 : durationSeconds / 3600.0;
+    // Intentional fallback: with no usable duration, assume a 70 km/h average
+    // (the efficient band, multiplier ~1.0) rather than fabricate a speed.
     final avgKmh = hours <= 0 ? 70.0 : distanceKm / hours;
     final m = _speedMultiplier(avgKmh);
 

@@ -110,7 +110,7 @@ class TripSummaryScreen extends ConsumerWidget {
     // The active ScoringService (selected by product mode) decides what the
     // metrics map contains; this screen renders whatever it produced — no
     // dependency on any product module.
-    final score = ref.read(scoringServiceProvider).scoreTrip(
+    final score = ref.watch(scoringServiceProvider).scoreTrip(
           trip: Trip(
             id: tripId,
             userId: 'current',
@@ -191,6 +191,7 @@ class _EcoSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final compliance = metrics['scoreSpeedCompliance'];
+    final isEv = metrics['kwhEstimate'] != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -205,9 +206,10 @@ class _EcoSummarySection extends StatelessWidget {
         if (compliance is int) _ScoreBar('Respect des limites', compliance),
         const SizedBox(height: 8),
         ListTile(
-          leading: const Icon(Icons.local_gas_station),
-          title: const Text('Carburant estimé'),
-          trailing: Text('${_n('fuelEstimate')} L'),
+          leading: Icon(isEv ? Icons.bolt : Icons.local_gas_station),
+          title: Text(isEv ? 'Énergie estimée' : 'Carburant estimé'),
+          trailing: Text(
+              isEv ? '${_n('kwhEstimate')} kWh' : '${_n('fuelEstimate')} L'),
         ),
         ListTile(
           leading: const Icon(Icons.cloud),
@@ -217,8 +219,9 @@ class _EcoSummarySection extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.savings, color: Colors.green),
           title: const Text('Économie estimée'),
-          trailing: Text(
-              '${_n('estimatedFuelSavedLiters')} L · ${_n('estimatedCo2SavedKg')} kg'),
+          trailing: Text(isEv
+              ? '${_n('estimatedKwhSavedKwh')} kWh · ${_n('estimatedCo2SavedKg')} kg'
+              : '${_n('estimatedFuelSavedLiters')} L · ${_n('estimatedCo2SavedKg')} kg'),
         ),
       ],
     );
