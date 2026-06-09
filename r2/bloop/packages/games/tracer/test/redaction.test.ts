@@ -59,4 +59,27 @@ describe('tracer view redaction', () => {
     const v = tracer.view(state, 'p1');
     expect(v.phase).toBe('over');
   });
+
+  it('gives unknown viewers (spectators) a safe view with no secrets', () => {
+    const s0 = tracer.init('s', players, content);
+    const s1 = tracer.reduce(s0, {
+      type: 'action', playerId: 'p1', action: { kind: 'vote', target: 'p3' }, at: 0,
+    }).state;
+    const v = tracer.view(s1, 'spectator-x');
+    if (v.phase !== 'vote') throw new Error('expected vote view');
+    expect(v.myVote).toBeNull();
+    expect(JSON.stringify(v)).not.toContain('"myVote":"p3"');
+  });
+
+  it('shows every viewer the same hasVoted map', () => {
+    const s0 = tracer.init('s', players, content);
+    const s1 = tracer.reduce(s0, {
+      type: 'action', playerId: 'p2', action: { kind: 'vote', target: 'p1' }, at: 0,
+    }).state;
+    const views = [...players, 'spectator-x'].map((p) => tracer.view(s1, p));
+    for (const v of views) {
+      if (v.phase !== 'vote') throw new Error('expected vote view');
+      expect(v.hasVoted).toEqual({ p1: false, p2: true, p3: false });
+    }
+  });
 });

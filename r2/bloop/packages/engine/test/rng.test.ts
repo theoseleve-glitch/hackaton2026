@@ -24,6 +24,14 @@ describe('createRng', () => {
       expect(v).toBeLessThan(1);
     }
   });
+
+  it('matches pinned golden values (replay compatibility across versions)', () => {
+    // Changing the PRNG implementation breaks replay of stored event logs.
+    const r = createRng('room-ABCD');
+    expect(r()).toBeCloseTo(0.06625232240185142, 12);
+    expect(r()).toBeCloseTo(0.5166024933569133, 12);
+    expect(r()).toBeCloseTo(0.02813275600783527, 12);
+  });
 });
 
 describe('shuffle', () => {
@@ -35,5 +43,10 @@ describe('shuffle', () => {
     expect(out1).toEqual(out2);
     expect([...out1].sort()).toEqual([...items].sort());
     expect(frozen).toEqual(items);
+  });
+
+  it('handles empty and single-element arrays', () => {
+    expect(shuffle(createRng('s'), [])).toEqual([]);
+    expect(shuffle(createRng('s'), ['only'])).toEqual(['only']);
   });
 });

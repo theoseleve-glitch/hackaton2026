@@ -38,8 +38,20 @@ describe('tracer phases', () => {
     let state = tracer.init('s', players, content);
     for (let i = 0; i < 3; i++) state = playRound(state);
     const { state: still, effects } = tracer.reduce(state, { type: 'deadline', at: 99 });
-    expect(still).toEqual(state);
+    expect(still).toBe(state);
     expect(effects).toEqual([]);
+  });
+
+  it('carries scores forward across rounds', () => {
+    const s0 = tracer.init('s', players, content);
+    const voted = tracer.reduce(s0, {
+      type: 'action', playerId: 'p1', action: { kind: 'vote', target: 'p2' }, at: 0,
+    }).state;
+    const revealed = tracer.reduce(voted, { type: 'deadline', at: 1 }).state;
+    const next = tracer.reduce(revealed, { type: 'deadline', at: 2 }).state;
+    expect(next.phase).toBe('vote');
+    expect(next.round).toBe(1);
+    expect(next.scores).toEqual({ p1: 0, p2: 1 });
   });
 
   it('ignores playerLeft/playerRejoined without crashing', () => {

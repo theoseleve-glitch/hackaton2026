@@ -41,6 +41,11 @@ export interface GameModule<S, A, V, C = unknown> {
   maxPlayers: number;
   init(seed: string, players: PlayerId[], content: ContentPack<C>): S;
   reduce(state: S, event: GameEvent<A>): ReduceResult<S>;
+  /**
+   * Per-player projection. `viewer` may be ANY string, including a
+   * non-player (spectator, unknown id): implementations must return a
+   * non-leaking projection for unknown viewers.
+   */
   view(state: S, viewer: PlayerId): V;
   /** Duration in ms of the current phase, or null when untimed. */
   phaseDurationMs(state: S): number | null;
