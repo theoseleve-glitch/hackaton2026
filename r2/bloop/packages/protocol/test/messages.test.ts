@@ -56,3 +56,42 @@ describe('serverMessageSchema', () => {
     ).toBe(false);
   });
 });
+
+describe('validation boundary', () => {
+  it('rejects an oversized nickname', () => {
+    const msg = {
+      type: 'hello',
+      protocolVersion: PROTOCOL_VERSION,
+      profile: { nickname: 'x'.repeat(21), avatar: 'fox-3' },
+    };
+    expect(clientMessageSchema.safeParse(msg).success).toBe(false);
+  });
+
+  it('rejects hello without a profile', () => {
+    const msg = { type: 'hello', protocolVersion: PROTOCOL_VERSION };
+    expect(clientMessageSchema.safeParse(msg).success).toBe(false);
+  });
+
+  it('rejects zero, negative, and non-integer protocol versions', () => {
+    for (const protocolVersion of [0, 1.5, -1]) {
+      const msg = {
+        type: 'hello',
+        protocolVersion,
+        profile: { nickname: 'a', avatar: '' },
+      };
+      expect(clientMessageSchema.safeParse(msg).success).toBe(false);
+    }
+  });
+
+  it('rejects an oversized gameId', () => {
+    const msg = { type: 'startGame', gameId: 'x'.repeat(65) };
+    expect(clientMessageSchema.safeParse(msg).success).toBe(false);
+  });
+
+  it('strips unknown keys instead of keeping them', () => {
+    const msg = { type: 'startGame', gameId: 'tracer', evil: 'x' };
+    const parsed = clientMessageSchema.parse(msg);
+    expect(parsed).toEqual({ type: 'startGame', gameId: 'tracer' });
+    expect('evil' in parsed).toBe(false);
+  });
+});
