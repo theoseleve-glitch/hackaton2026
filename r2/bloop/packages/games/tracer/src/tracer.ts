@@ -46,7 +46,15 @@ function resolveReveal(state: TracerState): ReduceResult<TracerState> {
 }
 
 function nextRound(state: TracerState): ReduceResult<TracerState> {
-  return { state, effects: [] }; // completed in Task 7
+  const round = state.round + 1;
+  if (round >= state.config.totalRounds) {
+    const over: TracerState = { ...state, phase: 'over' };
+    return { state: over, effects: [{ type: 'gameOver', scores: over.scores }] };
+  }
+  return {
+    state: { ...state, round, phase: 'vote', votes: emptyPlayerMap<PlayerId>() },
+    effects: [],
+  };
 }
 
 export const tracer: GameModule<TracerState, TracerAction, TracerView, TracerContent> = {
