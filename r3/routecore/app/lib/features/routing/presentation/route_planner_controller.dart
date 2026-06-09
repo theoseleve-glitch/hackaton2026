@@ -1,0 +1,116 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../app/providers.dart';
+import '../../../shared/models/models.dart';
+
+/// Holds the current planning session: origin/destination, selected mode,
+/// computed options and the selected option. Shared by Home, Map,
+/// RouteOptions and the product modules.
+class RoutePlannerState {
+  const RoutePlannerState({
+    this.origin,
+    this.destination,
+    this.originLabel,
+    this.destinationLabel,
+    this.routeMode = RouteMode.fastest,
+    this.maxDetourMinutes,
+    this.preferredPoiCategories = const [],
+    this.options = const AsyncValue.data([]),
+    this.selectedOption,
+  });
+
+  final GeoPoint? origin;
+  final GeoPoint? destination;
+  final String? originLabel;
+  final String? destinationLabel;
+  final RouteMode routeMode;
+  final int? maxDetourMinutes;
+  final List<String> preferredPoiCategories;
+  final AsyncValue<List<RouteOption>> options;
+  final RouteOption? selectedOption;
+
+  bool get isReady => origin != null && destination != null;
+
+  RoutePlannerState copyWith({
+    GeoPoint? origin,
+    GeoPoint? destination,
+    String? originLabel,
+    String? destinationLabel,
+    RouteMode? routeMode,
+    int? maxDetourMinutes,
+    List<String>? preferredPoiCategories,
+    AsyncValue<List<RouteOption>>? options,
+    RouteOption? selectedOption,
+    bool clearSelection = false,
+  }) =>
+      RoutePlannerState(
+        origin: origin ?? this.origin,
+        destination: destination ?? this.destination,
+        originLabel: originLabel ?? this.originLabel,
+        destinationLabel: destinationLabel ?? this.destinationLabel,
+        routeMode: routeMode ?? this.routeMode,
+        maxDetourMinutes: maxDetourMinutes ?? this.maxDetourMinutes,
+        preferredPoiCategories:
+            preferredPoiCategories ?? this.preferredPoiCategories,
+        options: options ?? this.options,
+        selectedOption:
+            clearSelection ? null : (selectedOption ?? this.selectedOption),
+      );
+}
+
+class RoutePlannerController extends Notifier<RoutePlannerState> {
+  @override
+  RoutePlannerState build() => const RoutePlannerState();
+
+  void setOrigin(AddressSearchResult r) =>
+      state = state.copyWith(origin: r.point, originLabel: r.label);
+
+  void setDestination(AddressSearchResult r) =>
+      state = state.copyWith(destination: r.point, destinationLabel: r.label);
+
+  void setMode(RouteMode mode) => state = state.copyWith(routeMode: mode);
+
+  void setMaxDetour(int? minutes) =>
+      state = state.copyWith(maxDetourMinutes: minutes);
+
+  void setPreferredCategories(List<String> slugs) =>
+      state = state.copyWith(preferredPoiCategories: slugs);
+
+  void selectOption(RouteOption option) {
+    state = state.copyWith(selectedOption: option);
+    ref.read(analyticsRepositoryProvider).logEvent(
+      'route_option_selected',
+      properties: {'mode': option.routeMode.name, 'provider': option.provider},
+    );
+  }
+
+  Future<void> computeOptions() async {
+    if (!state.isReady) return;
+    state = state.copyWith(
+        options: const AsyncValue.loading(), clearSelection: true);
+    await ref.read(analyticsRepositoryProvider).logEvent(
+      'route_search_started',
+      properties: {'mode': state.routeMode.name},
+    );
+    try {
+      final request = RouteRequest(
+        origin: state.origin!,
+        destination: state.destination!,
+        routeMode: state.routeMode,
+        maxDetourMinutes: state.maxDetourMinutes,
+        preferredPoiCategories: state.preferredPoiCategories.isEmpty
+            ? null
+            : state.preferredPoiCategories,
+      );
+      final options =
+          await ref.read(routingServiceProvider).getRouteOptions(request);
+      state = state.copyWith(options: AsyncValue.data(options));
+    } catch (e, st) {
+      state = state.copyWith(options: AsyncValue.error(e, st));
+    }
+  }
+}
+
+final routePlannerProvider =
+    NotifierProvider<RoutePlannerController, RoutePlannerState>(
+        RoutePlannerController.new);
