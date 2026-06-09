@@ -107,8 +107,32 @@ export const tracer: GameModule<TracerState, TracerAction, TracerView, TracerCon
     return { state, effects: [] };
   },
 
-  view(state, _viewer) {
-    return { phase: 'over', scores: state.scores }; // completed in Task 8
+  view(state, viewer) {
+    const prompt = state.prompts[state.round] ?? '';
+    if (state.phase === 'vote') {
+      const hasVoted = emptyPlayerMap<boolean>();
+      for (const p of state.players) hasVoted[p] = state.votes[p] !== undefined;
+      return {
+        phase: 'vote',
+        round: state.round,
+        totalRounds: state.config.totalRounds,
+        prompt,
+        hasVoted,
+        myVote: state.votes[viewer] ?? null,
+        scores: state.scores,
+      };
+    }
+    if (state.phase === 'reveal') {
+      return {
+        phase: 'reveal',
+        round: state.round,
+        totalRounds: state.config.totalRounds,
+        prompt,
+        tally: tallyVotes(state),
+        scores: state.scores,
+      };
+    }
+    return { phase: 'over', scores: state.scores };
   },
 
   phaseDurationMs(state) {
