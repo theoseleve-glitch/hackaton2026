@@ -34,7 +34,9 @@ r3/routecore/
 
 1. Installer [Flutter](https://docs.flutter.dev/get-started/install) (≥ 3.44).
 2. `cd r3/routecore/app && flutter pub get`
-3. Copier `.env.example` vers `.env` :
+3. **Obligatoire** — copier `.env.example` vers `.env` (sinon le build échoue
+   avec `unable to locate asset entry: .env`, car le fichier est bundlé comme
+   asset pour Android/iOS) :
 
 ```
 SUPABASE_URL=            # vide = mode démo complet (mocks)
@@ -45,8 +47,13 @@ GOOGLE_MAPS_API_KEY=
 OPENROUTESERVICE_API_KEY=
 ```
 
-4. `flutter run` (Windows, Android). **Sans aucune configuration, l'app tourne
-   en mode démo** : auth mock, POI mock, routing mock, GPS simulé Lyon→Vienne.
+4. `flutter run` (Android, iOS, Windows). **Sans aucune configuration, l'app
+   tourne en mode démo** : auth mock, POI mock, routing mock, GPS simulé
+   Lyon→Vienne.
+
+> iOS : le dossier `ios/` est prêt (permissions localisation incluses dans
+> `Info.plist`), mais le build nécessite un Mac avec Xcode — le premier
+> `flutter run` sur macOS exécutera `pod install` automatiquement.
 
 ## Commandes utiles
 
@@ -71,7 +78,7 @@ sont stables). Aucune clé n'est hardcodée.
 
 ## État actuel
 
-- ✅ App compile, `flutter analyze` propre, 15 tests verts
+- ✅ App compile (Android/iOS/Windows scaffoldés), `flutter analyze` propre, 15 tests verts
 - ✅ 11 écrans navigables + écrans Terroir (plan/résultats) et EcoDrive (comparaison/dashboard)
 - ✅ Migrations PostGIS + RLS + fonctions SQL + seed
 - 🔶 Mocké : routing, recherche d'adresse, GPS desktop, carte (placeholder CustomPaint)

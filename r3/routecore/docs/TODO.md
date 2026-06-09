@@ -26,5 +26,8 @@
 
 ## Infra
 - [ ] CI (flutter analyze + test) sur la branche r3
-- [ ] iOS : `flutter create --platforms=ios` + permissions Info.plist
-- [ ] Permissions Android : ACCESS_FINE_LOCATION dans AndroidManifest
+- [x] iOS : projet généré + permissions localisation dans Info.plist
+- [x] Permissions Android : ACCESS_FINE_LOCATION dans AndroidManifest
+- [ ] Premier build iOS sur macOS (Xcode + `pod install` génèrent le Podfile ;
+      vérifier le deployment target ≥ 13 exigé par geolocator/supabase)
+- [ ] Icônes/launch screens spécifiques par produit (Terroir/EcoDrive)

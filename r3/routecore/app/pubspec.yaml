@@ -23,4 +23,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    # .env doit exister au build (copiez .env.example -> .env, voir README).
+    # Volontairement déclaré en asset : flutter_dotenv ne lit que le bundle
+    # sur Android/iOS — sans cette ligne, la config serait ignorée sur mobile.
     - .env
