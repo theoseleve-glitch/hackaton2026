@@ -26,15 +26,22 @@ export interface ReduceResult<S> {
  * The platform's core contract (spec §4). Pure TypeScript only:
  * no Cloudflare imports, no I/O, no Date.now/Math.random — all
  * nondeterminism enters via seed and event timestamps.
+ *
+ * Contract decisions:
+ * - The player roster is fixed at init; there is no mid-game join event by
+ *   design. Disconnections surface as playerLeft/playerRejoined events.
+ * - Modules never see wall-clock time. phaseDurationMs is a pure function of
+ *   state; the shell converts it to an absolute deadline when a phase is
+ *   entered, persists it, and re-arms alarms after rehydration.
  */
-export interface GameModule<S, A, V> {
+export interface GameModule<S, A, V, C = unknown> {
   id: string;
   version: number;
   minPlayers: number;
   maxPlayers: number;
-  init(seed: string, players: PlayerId[], content: ContentPack): S;
+  init(seed: string, players: PlayerId[], content: ContentPack<C>): S;
   reduce(state: S, event: GameEvent<A>): ReduceResult<S>;
   view(state: S, viewer: PlayerId): V;
-  /** ms remaining for the current phase, or null when untimed. */
-  deadline(state: S): number | null;
+  /** Duration in ms of the current phase, or null when untimed. */
+  phaseDurationMs(state: S): number | null;
 }

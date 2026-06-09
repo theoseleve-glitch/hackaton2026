@@ -15,7 +15,7 @@ const counter: GameModule<CounterState, CounterAction, number> = {
       ? { state: { n: state.n + 1 }, effects: [] }
       : { state, effects: [] },
   view: (state) => state.n,
-  deadline: () => null,
+  phaseDurationMs: () => null,
 };
 
 const content: ContentPack = { id: 'none', version: 1, data: {} };
