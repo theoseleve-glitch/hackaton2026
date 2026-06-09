@@ -28,9 +28,9 @@ describe('createRng', () => {
   it('matches pinned golden values (replay compatibility across versions)', () => {
     // Changing the PRNG implementation breaks replay of stored event logs.
     const r = createRng('room-ABCD');
-    expect(r()).toBeCloseTo(0.06625232240185142, 12);
-    expect(r()).toBeCloseTo(0.5166024933569133, 12);
-    expect(r()).toBeCloseTo(0.02813275600783527, 12);
+    expect(r()).toBe(0.06625232240185142);
+    expect(r()).toBe(0.5166024933569133);
+    expect(r()).toBe(0.02813275600783527);
   });
 });
 

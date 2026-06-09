@@ -42,4 +42,12 @@ describe('leakedSecrets', () => {
     const state = mod.init('s', viewers, content);
     expect(leakedSecrets(mod, state, viewers, secrets)).toEqual([]);
   });
+
+  it('throws on an empty secret value instead of matching everything', () => {
+    const mod = makeModule(false);
+    const state = mod.init('s', viewers, content);
+    expect(() =>
+      leakedSecrets(mod, state, viewers, [{ value: '' }]),
+    ).toThrow(/empty secret/);
+  });
 });

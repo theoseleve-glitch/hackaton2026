@@ -45,4 +45,22 @@ describe('replay', () => {
     for (const e of events.slice(2)) state = counter.reduce(state, e).state;
     expect(state).toEqual(full);
   });
+
+  it('drops effects during replay (rehydration must not re-emit them)', () => {
+    const effectful: GameModule<CounterState, CounterAction, number> = {
+      ...counter,
+      reduce: (state, event) =>
+        event.type === 'action'
+          ? {
+              state: { n: state.n + 1 },
+              effects: [{ type: 'analytics', name: 'inc' }],
+            }
+          : { state, effects: [] },
+    };
+    const events = [
+      { type: 'action' as const, playerId: 'p1', action: { kind: 'inc' as const }, at: 0 },
+    ];
+    const result = replay(effectful, 's', ['p1'], content, events);
+    expect(result).toEqual({ n: 1 }); // replay returns state only — no effects channel exists
+  });
 });

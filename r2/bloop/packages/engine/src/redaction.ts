@@ -7,6 +7,9 @@ import type { GameModule, PlayerId } from './types.js';
  * non-owner's view — role assignments, secret words, answer keys. Not
  * suitable for secrets that legitimately appear elsewhere in views (e.g.
  * player ids): those need field-level assertions in the game's own tests.
+ * Matching is substring containment on the serialized view: overlapping
+ * non-secret content can produce false positives — they fail loud and are
+ * safe to investigate, never silently pass.
  */
 export function leakedSecrets<S, A, V, C>(
   module: GameModule<S, A, V, C>,
@@ -18,6 +21,9 @@ export function leakedSecrets<S, A, V, C>(
   for (const viewer of viewers) {
     const json = JSON.stringify(module.view(state, viewer));
     for (const secret of secrets) {
+      if (secret.value === '') {
+        throw new Error('leakedSecrets: empty secret value is not auditable');
+      }
       if (secret.owner === viewer) continue;
       // match the value as it would be escaped inside a JSON string
       const escaped = JSON.stringify(secret.value).slice(1, -1);

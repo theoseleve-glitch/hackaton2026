@@ -60,4 +60,18 @@ describe('tracer phases', () => {
     const back = tracer.reduce(left.state, { type: 'playerRejoined', playerId: 'p1', at: 1 });
     expect(back.state).toEqual(s0);
   });
+
+  it('gameOver effect scores do not alias live state', () => {
+    let state = tracer.init('s', players, content);
+    for (let i = 0; i < 2; i++) {
+      state = tracer.reduce(state, { type: 'deadline', at: 0 }).state;
+      state = tracer.reduce(state, { type: 'deadline', at: 1 }).state;
+    }
+    const revealed = tracer.reduce(state, { type: 'deadline', at: 0 }).state;
+    const { state: over, effects } = tracer.reduce(revealed, { type: 'deadline', at: 1 });
+    const effect = effects.find((e) => e.type === 'gameOver');
+    if (!effect || effect.type !== 'gameOver') throw new Error('expected gameOver');
+    effect.scores['p1'] = 999;
+    expect(over.scores['p1']).not.toBe(999);
+  });
 });
