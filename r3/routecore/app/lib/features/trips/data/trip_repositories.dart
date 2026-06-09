@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 
 import '../../../core/errors/app_exception.dart';
+import '../../../core/logging/app_logger.dart';
 import '../../../shared/models/models.dart';
 import '../domain/trip_repository.dart';
 
@@ -64,11 +65,13 @@ class SupabaseTripRepository implements TripRepository {
 
   @override
   Future<void> updateTrip(Trip trip) async {
+    // toUtc(): local DateTimes serialize without offset, which timestamptz
+    // would interpret in the server's zone.
     await _client.from('trips').update({
       'status': trip.status.name,
       'selected_route_id': trip.selectedRouteId,
-      'started_at': trip.startedAt?.toIso8601String(),
-      'ended_at': trip.endedAt?.toIso8601String(),
+      'started_at': trip.startedAt?.toUtc().toIso8601String(),
+      'ended_at': trip.endedAt?.toUtc().toIso8601String(),
     }).eq('id', trip.id);
   }
 
@@ -96,19 +99,26 @@ class SupabaseTrackingRepository implements TrackingRepository {
   SupabaseTrackingRepository(this._client);
 
   final SupabaseClient _client;
+  static const _log = AppLogger('tracking');
 
   @override
   Future<void> addTrackPoint(GpsTrackPoint p) async {
-    await _client.rpc('add_gps_track_point', params: {
-      'p_trip_id': p.tripId,
-      'lat': p.latitude,
-      'lng': p.longitude,
-      'p_speed_mps': p.speedMps,
-      'p_accuracy_meters': p.accuracyMeters,
-      'p_altitude_meters': p.altitudeMeters,
-      'p_heading': p.heading,
-      'p_recorded_at': p.recordedAt.toIso8601String(),
-    });
+    // Called fire-and-forget from the tracking loop: a lost point must never
+    // crash the app, so failures are logged here, not rethrown.
+    try {
+      await _client.rpc('add_gps_track_point', params: {
+        'p_trip_id': p.tripId,
+        'lat': p.latitude,
+        'lng': p.longitude,
+        'p_speed_mps': p.speedMps,
+        'p_accuracy_meters': p.accuracyMeters,
+        'p_altitude_meters': p.altitudeMeters,
+        'p_heading': p.heading,
+        'p_recorded_at': p.recordedAt.toUtc().toIso8601String(),
+      });
+    } catch (e) {
+      _log.warn('addTrackPoint failed (point dropped): $e');
+    }
   }
 
   @override
@@ -128,6 +138,8 @@ class SupabaseTrackingRepository implements TrackingRepository {
         longitude: 0,
         speedMps: (m['speed_mps'] as num?)?.toDouble(),
         accuracyMeters: (m['accuracy_meters'] as num?)?.toDouble(),
+        altitudeMeters: (m['altitude_meters'] as num?)?.toDouble(),
+        heading: (m['heading'] as num?)?.toDouble(),
         recordedAt: DateTime.parse(m['recorded_at'] as String),
       );
     }).toList();

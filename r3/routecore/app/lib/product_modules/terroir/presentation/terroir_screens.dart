@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/providers.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
+import '../domain/terroir_analytics.dart';
 import '../domain/terroir_relevance_scorer.dart';
 
 /// Step 1 of the Terroir flow: accepted detour + experience preferences.
@@ -84,7 +85,7 @@ class TerroirPlanScreen extends ConsumerWidget {
                     notifier.setMaxDetour(detour);
                     await notifier.computeOptions();
                     await ref.read(analyticsRepositoryProvider).logEvent(
-                          'terroir_route_generated',
+                          TerroirAnalyticsEvents.routeGenerated,
                           productContext: ProductContext.terroir,
                           properties: {
                             'maxDetourMinutes': detour,
@@ -119,8 +120,12 @@ final terroirRankedPoisProvider =
     maxDetourMinutes: planner.maxDetourMinutes ?? 20,
     preferredCategorySlugs: planner.preferredPoiCategories,
     categorySlugByPoiId: {
+      // Supabase RPC rows carry the slug directly; mock/table rows carry the
+      // category uuid and need the lookup.
       for (final item in raw)
-        item.poi.id: slugByCategoryId[item.poi.categoryId] ?? ''
+        item.poi.id: item.poi.categorySlug ??
+            slugByCategoryId[item.poi.categoryId] ??
+            ''
     },
   );
 });

@@ -1,6 +1,8 @@
 import '../../../shared/models/models.dart';
 
-/// Known event names (free-form names are also allowed).
+/// Known core event names (free-form names are also allowed).
+/// Product-specific events live in their module (TerroirAnalyticsEvents,
+/// EcoDriveAnalyticsEvents) to keep the core neutral.
 class AnalyticsEvents {
   const AnalyticsEvents._();
 
@@ -13,8 +15,6 @@ class AnalyticsEvents {
   static const poiFavorited = 'poi_favorited';
   static const tripStarted = 'trip_started';
   static const tripCompleted = 'trip_completed';
-  static const ecoScoreViewed = 'eco_score_viewed';
-  static const terroirRouteGenerated = 'terroir_route_generated';
 }
 
 abstract class AnalyticsRepository {

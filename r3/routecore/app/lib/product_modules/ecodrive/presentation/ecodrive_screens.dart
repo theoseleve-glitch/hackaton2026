@@ -8,13 +8,21 @@ import '../../../features/scoring/domain/scoring_service.dart';
 import '../../../features/tracking/presentation/tracking_controller.dart';
 import '../../../shared/models/models.dart';
 import '../domain/eco_driving_analyzer.dart';
+import '../domain/ecodrive_analytics.dart';
 
 /// Compares fast / short / eco options side by side with CO2 + fuel.
-class EcoCompareScreen extends ConsumerWidget {
+class EcoCompareScreen extends ConsumerStatefulWidget {
   const EcoCompareScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EcoCompareScreen> createState() => _EcoCompareScreenState();
+}
+
+class _EcoCompareScreenState extends ConsumerState<EcoCompareScreen> {
+  bool _creatingTrip = false; // double-tap guard
+
+  @override
+  Widget build(BuildContext context) {
     final planner = ref.watch(routePlannerProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Comparer les trajets')),
@@ -83,28 +91,38 @@ class EcoCompareScreen extends ConsumerWidget {
                     FilledButton.icon(
                       icon: const Icon(Icons.play_arrow),
                       label: const Text('Lancer le trajet'),
-                      onPressed: planner.selectedOption == null
-                          ? null
-                          : () async {
-                              final user = ref
-                                  .read(authControllerProvider)
-                                  .valueOrNull;
-                              if (user == null) return;
-                              final trip = await ref
-                                  .read(tripRepositoryProvider)
-                                  .createTrip(
-                                    userId: user.id,
-                                    origin: planner.origin!,
-                                    destination: planner.destination!,
-                                    originLabel: planner.originLabel,
-                                    destinationLabel:
-                                        planner.destinationLabel,
-                                    productContext: ProductContext.ecodrive,
-                                  );
-                              if (context.mounted) {
-                                context.push('/tracking/${trip.id}');
-                              }
-                            },
+                      onPressed:
+                          planner.selectedOption == null || _creatingTrip
+                              ? null
+                              : () async {
+                                  final user = ref
+                                      .read(authControllerProvider)
+                                      .valueOrNull;
+                                  if (user == null) return;
+                                  setState(() => _creatingTrip = true);
+                                  try {
+                                    final trip = await ref
+                                        .read(tripRepositoryProvider)
+                                        .createTrip(
+                                          userId: user.id,
+                                          origin: planner.origin!,
+                                          destination: planner.destination!,
+                                          originLabel: planner.originLabel,
+                                          destinationLabel:
+                                              planner.destinationLabel,
+                                          productContext:
+                                              ProductContext.ecodrive,
+                                        );
+                                    if (context.mounted) {
+                                      context.push('/tracking/${trip.id}');
+                                    }
+                                  } finally {
+                                    if (mounted) {
+                                      setState(
+                                          () => _creatingTrip = false);
+                                    }
+                                  }
+                                },
                     ),
                     OutlinedButton.icon(
                       icon: const Icon(Icons.dashboard),
@@ -122,30 +140,46 @@ class EcoCompareScreen extends ConsumerWidget {
 /// Driver dashboard: eco-score of the latest tracked trip + key metrics.
 /// The "enterprise/fleet" version will aggregate eco_scores by organization
 /// — structure prepared in the DB (partner_organizations), UI out of scope.
-class EcoDashboardScreen extends ConsumerWidget {
+class EcoDashboardScreen extends ConsumerStatefulWidget {
   const EcoDashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final tracking = ref.watch(trackingControllerProvider);
-    final TripScoreResult? score = tracking.points.length >= 2
-        ? const BasicEcoDrivingScoringService().scoreTrip(
-            trip: Trip(
-              id: tracking.tripId ?? 'last',
-              userId: 'current',
-              origin: const GeoPoint(latitude: 0, longitude: 0),
-              destination: const GeoPoint(latitude: 0, longitude: 0),
-            ),
-            trackPoints: tracking.points,
-          )
-        : null;
+  ConsumerState<EcoDashboardScreen> createState() =>
+      _EcoDashboardScreenState();
+}
+
+class _EcoDashboardScreenState extends ConsumerState<EcoDashboardScreen> {
+  TripScoreResult? _computeScore(TrackingState tracking) =>
+      tracking.points.length >= 2
+          ? const BasicEcoDrivingScoringService().scoreTrip(
+              trip: Trip(
+                id: tracking.tripId ?? 'last',
+                userId: 'current',
+                origin: const GeoPoint(latitude: 0, longitude: 0),
+                destination: const GeoPoint(latitude: 0, longitude: 0),
+              ),
+              trackPoints: tracking.points,
+            )
+          : null;
+
+  @override
+  void initState() {
+    super.initState();
+    // Side effect kept out of build(): log the view exactly once per visit.
+    final score = _computeScore(ref.read(trackingControllerProvider));
     if (score != null) {
       ref.read(analyticsRepositoryProvider).logEvent(
-            'eco_score_viewed',
+            EcoDriveAnalyticsEvents.ecoScoreViewed,
             productContext: ProductContext.ecodrive,
             properties: {'score': score.scoreOverall},
           );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tracking = ref.watch(trackingControllerProvider);
+    final TripScoreResult? score = _computeScore(tracking);
     return Scaffold(
       appBar: AppBar(title: const Text('Dashboard conducteur')),
       body: score == null

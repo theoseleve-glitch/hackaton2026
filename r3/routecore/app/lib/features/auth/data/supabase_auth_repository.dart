@@ -75,9 +75,13 @@ class SupabaseUserRepository implements UserRepository {
 
   @override
   Future<void> updateProfile(UserProfile profile) async {
-    await _client
-        .from('profiles')
-        .update(profile.toJson()..remove('id'))
-        .eq('id', profile.id);
+    // Explicit payload matching the column-level GRANT of migration 0004
+    // (email is trigger-synced from auth.users, never client-written).
+    await _client.from('profiles').update({
+      'display_name': profile.displayName,
+      'preferred_product_mode': profile.preferredProductMode?.name,
+      'privacy_consent_accepted': profile.privacyConsentAccepted,
+      'location_consent_accepted': profile.locationConsentAccepted,
+    }).eq('id', profile.id);
   }
 }

@@ -24,8 +24,13 @@ class GeolocatorLocationRepository implements LocationRepository {
 
   @override
   Stream<GpsTrackPoint> watchPosition(
-      {required String tripId, required String userId}) {
-    return Geolocator.getPositionStream(
+      {required String tripId, required String userId}) async* {
+    // Same permission gate as getCurrentPosition: a denied permission or a
+    // disabled service surfaces as a stream error the consumer can handle.
+    if (!await _permissions.ensurePermission()) {
+      throw const PermissionException('Permission de localisation refusée.');
+    }
+    yield* Geolocator.getPositionStream(
       locationSettings: const LocationSettings(distanceFilter: 10),
     ).map((pos) => GpsTrackPoint(
           id: '$tripId-${pos.timestamp.millisecondsSinceEpoch}',

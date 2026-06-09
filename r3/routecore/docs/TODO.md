@@ -8,6 +8,8 @@
       (actuellement labels seulement pour les listes)
 - [ ] Persister UserProfile (consentements, mode préféré) vers Supabase
       depuis Settings/Onboarding
+- [ ] Persistance des RouteOption en base : mapping dédié requis
+      (uuid serveur + points PostGIS — le json local n'est pas le format DB)
 - [ ] Migrer `anonKey` → `publishableKey` (dépréciation supabase_flutter)
 - [ ] Suppression de compte (RGPD) — voir PRIVACY_NOTES.md
 - [ ] Écran favoris (repository prêt, pas d'écran liste)

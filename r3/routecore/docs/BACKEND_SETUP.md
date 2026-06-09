@@ -11,7 +11,9 @@ Option A — SQL Editor (rapide) : copier/exécuter dans l'ordre :
 1. `supabase/migrations/0001_init.sql` (PostGIS, enums, tables, index)
 2. `supabase/migrations/0002_rls.sql` (Row Level Security)
 3. `supabase/migrations/0003_functions.sql` (nearby_pois, pois_along_route, create_trip, add_gps_track_point)
-4. `supabase/seed.sql` (POI fictifs de démo)
+4. `supabase/migrations/0004_security_fixes.sql` (anti-escalade de rôle,
+   vérification de propriété du trip, durcissement route_options/admin)
+5. `supabase/seed.sql` (POI fictifs de démo)
 
 Option B — CLI :
 ```

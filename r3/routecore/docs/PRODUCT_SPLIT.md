@@ -15,6 +15,8 @@
 - `domain/terroir_relevance_scorer.dart` : score de pertinence POI
   (poiRelevanceScore, detourMinutes, sponsoredRankBoost + placeholders
   openingNow, localAuthenticityScore, seasonalScore)
+- `domain/discovery_scoring_service.dart` : score découverte (placeholder)
+- `domain/terroir_analytics.dart` : événements analytics du module
 - `presentation/terroir_screens.dart` : TerroirPlanScreen (détour 10/20/45,
   type d'expérience), TerroirResultsScreen (POI classés, badge Partenaire)
 - Routes : `/terroir/plan`, `/terroir/results`
@@ -28,8 +30,15 @@
 - `domain/eco_driving_analyzer.dart` : EcoDrivingAnalyzer (accélérations/
   freinages brusques, vitesse moyenne, variance, carburant/CO2),
   BasicEcoDrivingScoringService (score /100 + conseil principal)
+- `domain/ecodrive_analytics.dart` : événements analytics du module
 - `presentation/ecodrive_screens.dart` : EcoCompareScreen (rapide/court/éco),
   EcoDashboardScreen (conducteur ; carte "entreprise" en placeholder)
+
+### Point d'assemblage core ↔ modules
+
+`app/lib/app/product_registry.dart` (comme router.dart) : les écrans core
+(Home, TripSummary) lisent ce registre au lieu de connaître les produits.
+Pour brancher un module sur l'accueil : ajoutez une `ProductHomeEntry`.
 - Routes : `/ecodrive/compare`, `/ecodrive/dashboard`
 - Analytics : `eco_score_viewed`
 - DB dédiée : `eco_scores` (+ `metrics` jsonb extensible)

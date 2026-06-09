@@ -4,7 +4,8 @@ import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 import '../core/env/env.dart';
 import '../core/permissions/location_permission_service.dart';
 import '../features/analytics/data/analytics_repositories.dart';
-import '../features/analytics/domain/analytics_repository.dart';
+import '../features/analytics/domain/analytics_repository.dart'
+    show AnalyticsRepository, AnalyticsEvents;
 import '../features/auth/data/mock_auth_repository.dart';
 import '../features/auth/data/supabase_auth_repository.dart';
 import '../features/auth/domain/auth_repository.dart';
@@ -102,17 +103,13 @@ final scoringServiceProvider =
 // Auth state
 // ---------------------------------------------------------------------------
 
-class AuthController extends Notifier<AsyncValue<UserProfile?>> {
+/// AsyncNotifier so callers can `await ref.read(authControllerProvider.future)`
+/// to get the restored session (the splash screen depends on this — a plain
+/// Notifier returning loading() synchronously made restoration unreachable).
+class AuthController extends AsyncNotifier<UserProfile?> {
   @override
-  AsyncValue<UserProfile?> build() {
-    _restore();
-    return const AsyncValue.loading();
-  }
-
-  Future<void> _restore() async {
-    final user = await ref.read(authRepositoryProvider).currentUser();
-    state = AsyncValue.data(user);
-  }
+  Future<UserProfile?> build() =>
+      ref.read(authRepositoryProvider).currentUser();
 
   Future<void> signIn(String email, String password) async {
     state = const AsyncValue.loading();
@@ -121,10 +118,11 @@ class AuthController extends Notifier<AsyncValue<UserProfile?>> {
           .read(authRepositoryProvider)
           .signInWithPassword(email, password);
       await ref.read(analyticsRepositoryProvider).logEvent(
-            'login_completed',
+            AnalyticsEvents.loginCompleted,
             userId: user.id,
           );
       state = AsyncValue.data(user);
+      await syncConsent();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -136,8 +134,35 @@ class AuthController extends Notifier<AsyncValue<UserProfile?>> {
       final user =
           await ref.read(authRepositoryProvider).signUp(email, password);
       state = AsyncValue.data(user);
+      await syncConsent();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
+    }
+  }
+
+  /// Two-way sync between the in-memory consent flag and the profile row:
+  /// hydrates the flag after a restored/new session (so a returning user is
+  /// not asked again), and persists a locally-granted consent (onboarding
+  /// happens before login, so it can only be saved here).
+  Future<void> syncConsent() async {
+    final user = state.valueOrNull;
+    if (user == null) return;
+    try {
+      final repo = ref.read(userRepositoryProvider);
+      final profile = await repo.getProfile(user.id);
+      if (profile == null) return;
+      final local = ref.read(consentAcceptedProvider);
+      if (profile.locationConsentAccepted && !local) {
+        ref.read(consentAcceptedProvider.notifier).state = true;
+      } else if (local && !profile.locationConsentAccepted) {
+        await repo.updateProfile(profile.copyWith(
+          locationConsentAccepted: true,
+          privacyConsentAccepted: true,
+        ));
+      }
+    } catch (_) {
+      // Consent sync must never block auth; the Settings toggle remains the
+      // manual fallback.
     }
   }
 
@@ -148,8 +173,7 @@ class AuthController extends Notifier<AsyncValue<UserProfile?>> {
 }
 
 final authControllerProvider =
-    NotifierProvider<AuthController, AsyncValue<UserProfile?>>(
-        AuthController.new);
+    AsyncNotifierProvider<AuthController, UserProfile?>(AuthController.new);
 
 /// Product mode chosen by the user (Settings / Onboarding).
 final productModeProvider =

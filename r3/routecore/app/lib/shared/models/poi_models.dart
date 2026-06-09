@@ -36,6 +36,7 @@ class Poi {
     required this.categoryId,
     required this.latitude,
     required this.longitude,
+    this.categorySlug,
     this.description,
     this.address,
     this.city,
@@ -56,7 +57,14 @@ class Poi {
   final String id;
   final String name;
   final String? description;
+
+  /// UUID of the category when read from a table; may be empty for RPC rows
+  /// that only return the slug — use [categorySlug] first when filtering.
   final String categoryId;
+
+  /// Category slug when the source provides it (nearby_pois /
+  /// pois_along_route RPCs); null for table reads.
+  final String? categorySlug;
   final double latitude;
   final double longitude;
   final String? address;

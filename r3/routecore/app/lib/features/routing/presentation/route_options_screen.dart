@@ -6,11 +6,19 @@ import '../../../app/providers.dart';
 import '../../../shared/models/models.dart';
 import 'route_planner_controller.dart';
 
-class RouteOptionsScreen extends ConsumerWidget {
+class RouteOptionsScreen extends ConsumerStatefulWidget {
   const RouteOptionsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<RouteOptionsScreen> createState() =>
+      _RouteOptionsScreenState();
+}
+
+class _RouteOptionsScreenState extends ConsumerState<RouteOptionsScreen> {
+  bool _creatingTrip = false; // double-tap guard
+
+  @override
+  Widget build(BuildContext context) {
     final planner = ref.watch(routePlannerProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Itinéraires')),
@@ -56,22 +64,34 @@ class RouteOptionsScreen extends ConsumerWidget {
               child: FilledButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Créer le trajet et démarrer'),
-                onPressed: () async {
-                  final user = ref.read(authControllerProvider).valueOrNull;
-                  if (user == null) return;
-                  final trip =
-                      await ref.read(tripRepositoryProvider).createTrip(
-                            userId: user.id,
-                            origin: planner.origin!,
-                            destination: planner.destination!,
-                            originLabel: planner.originLabel,
-                            destinationLabel: planner.destinationLabel,
-                            productContext: ref.read(productModeProvider),
-                          );
-                  if (context.mounted) {
-                    context.push('/tracking/${trip.id}');
-                  }
-                },
+                onPressed: _creatingTrip
+                    ? null
+                    : () async {
+                        final user =
+                            ref.read(authControllerProvider).valueOrNull;
+                        if (user == null) return;
+                        setState(() => _creatingTrip = true);
+                        try {
+                          final trip = await ref
+                              .read(tripRepositoryProvider)
+                              .createTrip(
+                                userId: user.id,
+                                origin: planner.origin!,
+                                destination: planner.destination!,
+                                originLabel: planner.originLabel,
+                                destinationLabel: planner.destinationLabel,
+                                productContext:
+                                    ref.read(productModeProvider),
+                              );
+                          if (context.mounted) {
+                            context.push('/tracking/${trip.id}');
+                          }
+                        } finally {
+                          if (mounted) {
+                            setState(() => _creatingTrip = false);
+                          }
+                        }
+                      },
               ),
             ),
     );

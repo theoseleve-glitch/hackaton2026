@@ -45,8 +45,18 @@ class SettingsScreen extends ConsumerWidget {
             subtitle: const Text(
                 'Le suivi GPS est désactivé sans ce consentement.'),
             value: consent,
-            onChanged: (v) =>
-                ref.read(consentAcceptedProvider.notifier).state = v,
+            onChanged: (v) async {
+              ref.read(consentAcceptedProvider.notifier).state = v;
+              // Persist so the choice survives restarts (RGPD: revocable).
+              final u = ref.read(authControllerProvider).valueOrNull;
+              if (u == null) return;
+              final repo = ref.read(userRepositoryProvider);
+              final profile = await repo.getProfile(u.id);
+              if (profile != null) {
+                await repo.updateProfile(
+                    profile.copyWith(locationConsentAccepted: v));
+              }
+            },
           ),
           ListTile(
             leading: const Icon(Icons.delete_outline),

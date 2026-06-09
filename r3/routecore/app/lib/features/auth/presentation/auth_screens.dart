@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/config.dart';
 import '../../../app/providers.dart';
+import '../../analytics/domain/analytics_repository.dart'
+    show AnalyticsEvents;
 import '../../../shared/models/models.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -17,16 +19,29 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(analyticsRepositoryProvider).logEvent('app_opened');
-    Future.delayed(const Duration(milliseconds: 600), _redirect);
+    ref.read(analyticsRepositoryProvider).logEvent(AnalyticsEvents.appOpened);
+    _redirect();
   }
 
   Future<void> _redirect() async {
+    // Await actual session restoration (AsyncNotifier future) instead of a
+    // blind delay — otherwise a valid Supabase session is never seen here.
+    UserProfile? user;
+    try {
+      user = await ref.read(authControllerProvider.future);
+      if (user != null) {
+        // Hydrate the consent flag from the profile so a returning user
+        // does not have to re-accept at every launch.
+        await ref.read(authControllerProvider.notifier).syncConsent();
+      }
+    } catch (_) {
+      user = null; // restoration failed -> treat as signed out
+    }
+    // Keep the splash visible at least briefly.
+    await Future<void>.delayed(const Duration(milliseconds: 400));
     if (!mounted) return;
-    final auth = ref.read(authControllerProvider);
-    final consent = ref.read(consentAcceptedProvider);
-    final user = auth.valueOrNull;
     if (user == null) {
+      final consent = ref.read(consentAcceptedProvider);
       context.go(consent ? '/login' : '/onboarding');
     } else {
       context.go('/home');
@@ -95,7 +110,7 @@ class OnboardingScreen extends ConsumerWidget {
                 ref.read(consentAcceptedProvider.notifier).state = true;
                 ref
                     .read(analyticsRepositoryProvider)
-                    .logEvent('onboarding_completed');
+                    .logEvent(AnalyticsEvents.onboardingCompleted);
                 context.go('/login');
               },
               child: const Text("J'accepte et je continue"),

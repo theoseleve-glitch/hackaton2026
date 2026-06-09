@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/providers.dart';
 import '../../../shared/models/models.dart';
+import '../../analytics/domain/analytics_repository.dart'
+    show AnalyticsEvents;
 
 final poiCategoriesProvider = FutureProvider<List<PoiCategory>>(
     (ref) => ref.read(poiRepositoryProvider).getCategories());
@@ -76,7 +78,7 @@ class PoiListScreen extends ConsumerWidget {
                           subtitle: Text(p.city ?? ''),
                           onTap: () {
                             ref.read(analyticsRepositoryProvider).logEvent(
-                              'poi_viewed',
+                              AnalyticsEvents.poiViewed,
                               properties: {'poiId': p.id},
                             );
                             context.push('/poi/${p.id}');
@@ -146,7 +148,7 @@ class PoiDetailScreen extends ConsumerWidget {
                       await ref.read(favoriteRepositoryProvider).addFavorite(
                           user.id, FavoriteTargetType.poi, p.id);
                       ref.read(analyticsRepositoryProvider).logEvent(
-                        'poi_favorited',
+                        AnalyticsEvents.poiFavorited,
                         properties: {'poiId': p.id},
                       );
                       if (context.mounted) {

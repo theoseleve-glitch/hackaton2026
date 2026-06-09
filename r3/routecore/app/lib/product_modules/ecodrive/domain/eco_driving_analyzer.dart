@@ -146,16 +146,3 @@ class BasicEcoDrivingScoringService implements ScoringService {
     );
   }
 }
-
-/// Placeholder discovery scoring for Terroir (counts POIs visited later).
-class BasicDiscoveryScoringService implements ScoringService {
-  @override
-  TripScoreResult scoreTrip({
-    required Trip trip,
-    required List<GpsTrackPoint> trackPoints,
-  }) =>
-      const TripScoreResult(
-        scoreOverall: 60,
-        adviceText: 'Score découverte — à enrichir avec les POI visités.',
-      );
-}

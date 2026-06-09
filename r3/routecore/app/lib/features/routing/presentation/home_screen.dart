@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/product_registry.dart';
 import '../../../app/providers.dart';
 import '../../../shared/models/models.dart';
 import 'route_planner_controller.dart';
@@ -31,19 +34,15 @@ class HomeScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          if (mode != ProductContext.common)
+          // Neutral: the card comes from the product registry (assembly
+          // layer), the core screen knows nothing about specific products.
+          if (productEntryFor(mode) case final ProductHomeEntry entry)
             Card(
               child: ListTile(
-                leading: Icon(mode == ProductContext.terroir
-                    ? Icons.local_florist
-                    : Icons.eco),
-                title: Text(mode == ProductContext.terroir
-                    ? 'Mode Terroir — trajets de découverte locale'
-                    : 'Mode Écoconduite — trajets sobres'),
+                leading: Icon(entry.icon),
+                title: Text(entry.title),
                 trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push(mode == ProductContext.terroir
-                    ? '/terroir/plan'
-                    : '/ecodrive/compare'),
+                onTap: () => context.push(entry.route),
               ),
             ),
           const SizedBox(height: 8),
@@ -120,6 +119,8 @@ class _AddressField extends ConsumerStatefulWidget {
 class _AddressFieldState extends ConsumerState<_AddressField> {
   final _controller = TextEditingController();
   List<AddressSearchResult> _results = [];
+  Timer? _debounce;
+  int _searchSeq = 0; // drop out-of-order responses
 
   @override
   void initState() {
@@ -129,14 +130,21 @@ class _AddressFieldState extends ConsumerState<_AddressField> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _controller.dispose();
     super.dispose();
   }
 
+  void _onChanged(String query) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 300), () => _search(query));
+  }
+
   Future<void> _search(String query) async {
+    final seq = ++_searchSeq;
     final results =
         await ref.read(mapSearchServiceProvider).searchAddress(query);
-    if (mounted) setState(() => _results = results);
+    if (mounted && seq == _searchSeq) setState(() => _results = results);
   }
 
   @override
@@ -150,7 +158,7 @@ class _AddressFieldState extends ConsumerState<_AddressField> {
             labelText: widget.label,
             prefixIcon: const Icon(Icons.search),
           ),
-          onChanged: _search,
+          onChanged: _onChanged,
         ),
         for (final r in _results)
           ListTile(
@@ -158,6 +166,10 @@ class _AddressFieldState extends ConsumerState<_AddressField> {
             leading: const Icon(Icons.location_on, size: 18),
             title: Text(r.label),
             onTap: () {
+              // Cancel any pending debounce so a stale search can't reopen
+              // the suggestion list after selection.
+              _debounce?.cancel();
+              _searchSeq++;
               widget.onSelected(r);
               _controller.text = r.label;
               setState(() => _results = []);

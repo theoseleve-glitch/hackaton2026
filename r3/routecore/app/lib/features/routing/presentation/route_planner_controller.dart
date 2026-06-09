@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/providers.dart';
 import '../../../shared/models/models.dart';
+import '../../analytics/domain/analytics_repository.dart'
+    show AnalyticsEvents;
 
 /// Holds the current planning session: origin/destination, selected mode,
 /// computed options and the selected option. Shared by Home, Map,
@@ -38,6 +40,7 @@ class RoutePlannerState {
     String? destinationLabel,
     RouteMode? routeMode,
     int? maxDetourMinutes,
+    bool clearMaxDetour = false,
     List<String>? preferredPoiCategories,
     AsyncValue<List<RouteOption>>? options,
     RouteOption? selectedOption,
@@ -49,7 +52,9 @@ class RoutePlannerState {
         originLabel: originLabel ?? this.originLabel,
         destinationLabel: destinationLabel ?? this.destinationLabel,
         routeMode: routeMode ?? this.routeMode,
-        maxDetourMinutes: maxDetourMinutes ?? this.maxDetourMinutes,
+        // `??` cannot reset a nullable field, hence the explicit clear flag.
+        maxDetourMinutes:
+            clearMaxDetour ? null : (maxDetourMinutes ?? this.maxDetourMinutes),
         preferredPoiCategories:
             preferredPoiCategories ?? this.preferredPoiCategories,
         options: options ?? this.options,
@@ -59,6 +64,10 @@ class RoutePlannerState {
 }
 
 class RoutePlannerController extends Notifier<RoutePlannerState> {
+  // Monotonic id so a stale computeOptions() can never overwrite the result
+  // of a newer one.
+  int _computeSeq = 0;
+
   @override
   RoutePlannerState build() => const RoutePlannerState();
 
@@ -70,8 +79,9 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
 
   void setMode(RouteMode mode) => state = state.copyWith(routeMode: mode);
 
-  void setMaxDetour(int? minutes) =>
-      state = state.copyWith(maxDetourMinutes: minutes);
+  void setMaxDetour(int? minutes) => state = minutes == null
+      ? state.copyWith(clearMaxDetour: true)
+      : state.copyWith(maxDetourMinutes: minutes);
 
   void setPreferredCategories(List<String> slugs) =>
       state = state.copyWith(preferredPoiCategories: slugs);
@@ -79,17 +89,18 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
   void selectOption(RouteOption option) {
     state = state.copyWith(selectedOption: option);
     ref.read(analyticsRepositoryProvider).logEvent(
-      'route_option_selected',
+      AnalyticsEvents.routeOptionSelected,
       properties: {'mode': option.routeMode.name, 'provider': option.provider},
     );
   }
 
   Future<void> computeOptions() async {
     if (!state.isReady) return;
+    final seq = ++_computeSeq;
     state = state.copyWith(
         options: const AsyncValue.loading(), clearSelection: true);
     await ref.read(analyticsRepositoryProvider).logEvent(
-      'route_search_started',
+      AnalyticsEvents.routeSearchStarted,
       properties: {'mode': state.routeMode.name},
     );
     try {
@@ -104,8 +115,10 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
       );
       final options =
           await ref.read(routingServiceProvider).getRouteOptions(request);
+      if (seq != _computeSeq) return; // superseded by a newer request
       state = state.copyWith(options: AsyncValue.data(options));
     } catch (e, st) {
+      if (seq != _computeSeq) return;
       state = state.copyWith(options: AsyncValue.error(e, st));
     }
   }

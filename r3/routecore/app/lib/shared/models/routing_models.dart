@@ -67,6 +67,9 @@ class RouteOption {
   final String provider;
   final Map<String, dynamic> metadata;
 
+  // NOTE: this json shape is the app-local wire format (used by tests and
+  // future caching). Persisting into the route_options table requires a
+  // dedicated mapping (uuid ids, PostGIS points) — see docs/TODO.md.
   factory RouteOption.fromJson(Map<String, dynamic> json) => RouteOption(
         id: json['id'] as String,
         origin: GeoPoint.fromJson(json['origin'] as Map<String, dynamic>),

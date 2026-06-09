@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +19,7 @@ class MapScreen extends ConsumerStatefulWidget {
 
 class _MapScreenState extends ConsumerState<MapScreen> {
   List<Poi> _pois = [];
+  String? _loadError;
 
   @override
   void initState() {
@@ -41,7 +43,10 @@ class _MapScreenState extends ConsumerState<MapScreen> {
         if (mounted) setState(() => _pois = pois);
       }
     } catch (_) {
-      // Empty map is acceptable; errors are non-fatal here.
+      // Non-fatal, but tell the user why the map is empty.
+      if (mounted) {
+        setState(() => _loadError = 'Impossible de charger les POI.');
+      }
     }
   }
 
@@ -63,11 +68,13 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           polyline: polyline,
           pois: _pois,
         ),
-        child: _pois.isEmpty && !planner.isReady
-            ? const Center(
-                child: Text('Aucune donnée à afficher.\n'
-                    'Choisissez un départ et une destination.'))
-            : null,
+        child: _loadError != null && _pois.isEmpty
+            ? Center(child: Text(_loadError!))
+            : _pois.isEmpty && !planner.isReady
+                ? const Center(
+                    child: Text('Aucune donnée à afficher.\n'
+                        'Choisissez un départ et une destination.'))
+                : null,
       ),
     );
   }
@@ -145,6 +152,6 @@ class _MapPainter extends CustomPainter {
   bool shouldRepaint(covariant _MapPainter old) =>
       old.origin != origin ||
       old.destination != destination ||
-      old.polyline.length != polyline.length ||
-      old.pois.length != pois.length;
+      !listEquals(old.polyline, polyline) ||
+      !listEquals(old.pois, pois);
 }
