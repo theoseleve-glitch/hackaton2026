@@ -60,4 +60,21 @@ describe('tracer voting', () => {
     const after = tracer.reduce(revealed, vote('p1', 'p2')).state;
     expect(after.votes).toEqual(revealed.votes);
   });
+
+  it('awards no points when the deadline fires with zero votes', () => {
+    const s0 = tracer.init('s', players, content);
+    const { state: s1 } = tracer.reduce(s0, { type: 'deadline', at: 0 });
+    expect(s1.phase).toBe('reveal');
+    expect(s1.scores).toEqual({ p1: 0, p2: 0, p3: 0 });
+  });
+
+  it('keeps a "__proto__" player id from corrupting tallies', () => {
+    const weird = ['__proto__', 'p2'];
+    const s0 = tracer.init('s', weird, content);
+    const s1 = tracer.reduce(s0, vote('__proto__', 'p2')).state;
+    const { state: s2 } = tracer.reduce(s1, vote('p2', '__proto__'));
+    expect(s2.phase).toBe('reveal');
+    expect(s2.scores['__proto__']).toBe(1);
+    expect(s2.scores['p2']).toBe(1);
+  });
 });
