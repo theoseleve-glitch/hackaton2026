@@ -94,17 +94,21 @@ These were decided explicitly and are not open for relitigation during implement
 Every mini-game is one pure TypeScript package implementing:
 
 ```ts
-interface GameModule<State, Event> {
+interface GameModule<State, Action, View, Content = unknown> {
   id: string;
   version: number;
   minPlayers: number;
   maxPlayers: number;
-  init(seed: string, players: PlayerId[], content: ContentPack): State;
-  reduce(state: State, event: GameEvent<Event>): { state: State; effects: Effect[] }; // pure
-  view(state: State, viewer: PlayerId): ClientView;  // per-player redaction
-  deadline(state: State): number | null;             // next phase timer, ms
+  init(seed: string, players: PlayerId[], content: ContentPack<Content>): State;
+  reduce(state: State, event: GameEvent<Action>): { state: State; effects: Effect[] }; // pure
+  view(state: State, viewer: PlayerId): View;        // per-player redaction
+  phaseDurationMs(state: State): number | null;      // current phase duration, ms
 }
 ```
+
+(`phaseDurationMs` is a pure per-phase duration — modules never see wall-clock
+time; the shell converts it to an absolute deadline on phase entry, persists it,
+and re-arms alarms after rehydration.)
 
 Rules that make the contract load-bearing:
 
