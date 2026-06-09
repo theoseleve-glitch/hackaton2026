@@ -8,6 +8,7 @@ import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../features/scoring/domain/scoring_service.dart';
 import '../../../features/tracking/presentation/tracking_controller.dart';
 import '../../../shared/models/models.dart';
+import '../application/eco_history.dart';
 import '../application/ecodrive_providers.dart';
 import '../domain/eco_driving_analyzer.dart';
 import '../domain/eco_vehicle_type.dart';
@@ -310,14 +311,32 @@ class _EcoDashboardScreenState extends ConsumerState<EcoDashboardScreen> {
           )
         : null;
 
-    // Fire the view events ONCE per screen entry (not on every rebuild), via a
-    // post-frame callback so no async work happens during build.
-    if (score != null && !_logged) {
+    // Record the trip + fire the view events ONCE per screen entry (not on
+    // every rebuild), via a post-frame callback so no async/state mutation
+    // happens during build. Trips with < 2 GPS points are unscoreable
+    // (score == null) and are intentionally not recorded.
+    final tripId = tracking.tripId;
+    if (score != null && tripId != null && !_logged) {
       _logged = true;
       final analytics = ref.read(analyticsRepositoryProvider);
+      final history = ref.read(ecoHistoryProvider.notifier);
       final overall = score.scoreOverall;
       final advice = score.adviceText;
+      final m = score.metrics;
+      final entry = EcoTripRecord(
+        tripId: tripId,
+        scoreOverall: overall,
+        distanceMeters: (m['distanceMeters'] as num?)?.toDouble() ??
+            tracking.distanceMeters,
+        vehicle: vehicle,
+        recordedAt: DateTime.now(),
+        adviceText: advice,
+        fuelEstimateLiters: (m['fuelEstimate'] as num?)?.toDouble(),
+        co2EstimateKg: (m['co2Estimate'] as num?)?.toDouble(),
+        kwhEstimate: (m['kwhEstimate'] as num?)?.toDouble(),
+      );
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        history.record(entry);
         analytics.logEvent(
           AnalyticsEvents.ecodriveScoreViewed,
           productContext: ProductContext.ecodrive,
@@ -420,6 +439,17 @@ class _DashboardBody extends StatelessWidget {
             subtitle: Text('À venir : agrégation des éco-scores par flotte '
                 '(modèle de données préparé). Voir docs/ECODRIVE.md.'),
           ),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          icon: const Icon(Icons.history),
+          label: const Text('Mes trajets'),
+          onPressed: () => context.push('/ecodrive/history'),
+        ),
+        FilledButton.icon(
+          icon: const Icon(Icons.add_road),
+          label: const Text('Nouveau trajet'),
+          onPressed: () => context.go('/home'),
         ),
       ],
     );

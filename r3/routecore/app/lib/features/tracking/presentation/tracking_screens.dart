@@ -48,9 +48,12 @@ class TripTrackingScreen extends ConsumerWidget {
                 icon: const Icon(Icons.stop),
                 label: const Text('Arrêter le trajet'),
                 onPressed: () async {
+                  final ecoMode = ref.read(productModeProvider) ==
+                      ProductContext.ecodrive;
                   final id = await controller.stop();
                   if (context.mounted && id != null) {
-                    context.pushReplacement('/summary/$id');
+                    context.pushReplacement(
+                        ecoMode ? '/ecodrive/dashboard' : '/summary/$id');
                   }
                 },
               ),

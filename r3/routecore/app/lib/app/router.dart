@@ -9,6 +9,7 @@ import '../features/routing/presentation/route_options_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/tracking/presentation/tracking_screens.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
+import '../product_modules/ecodrive/presentation/eco_history_screen.dart';
 import '../product_modules/terroir/presentation/terroir_screens.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -52,6 +53,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/ecodrive/dashboard',
           builder: (_, __) => const EcoDashboardScreen()),
+      GoRoute(
+          path: '/ecodrive/history',
+          builder: (_, __) => const EcoHistoryScreen()),
     ],
   );
 });
