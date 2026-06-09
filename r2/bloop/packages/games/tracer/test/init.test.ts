@@ -34,5 +34,9 @@ describe('tracer.init', () => {
     };
     const s = tracer.init('s', players, tiny);
     expect(s.config.totalRounds).toBe(1);
+    const empty: ContentPack<TracerContent> = {
+      id: 'e', version: 1, data: { prompts: [] },
+    };
+    expect(tracer.init('s', players, empty).config.totalRounds).toBe(0);
   });
 });
