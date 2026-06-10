@@ -18,6 +18,8 @@ RC-racing app (codename RaceLab; public-name candidate **GripLab**, D19): setup 
 - `packages/engine`: `npm test` green before every commit that touches engine/kb. A KB rule that fails taxonomy validation is a build error, not a warning.
 - Commit messages: no double quotes (PowerShell 5.1 mangles them in `git commit -m`).
 - Never `git add -A` (it sweeps SETUP_RC/, r2/ and personal files from the parent repo). Stage explicit paths from `RaceLab/`.
+- **Never bulk-edit source files with `Get-Content`/`Set-Content`** — PS 5.1 reads UTF-8 as Windows-1252 and mojibakes every non-ASCII char. Use the Edit tool, or `[System.IO.File]::ReadAllText/WriteAllText` with `UTF8Encoding($false)`.
+- Expo SDK 56 quirk: monorepo imports from outside the app root need `experiments.onDemandFilesystem: false` in app.json *in addition to* metro `watchFolders`.
 
 ## Methods that proved themselves here (reuse them)
 - **Probe technique** for opaque PDF forms: render each field's name onto the sheet + dump widget coordinates, then map visually (`packages/pdf/src/probe.ts`, `rects.ts`).
@@ -39,6 +41,7 @@ Answer three questions and act on at least one:
 3. **Leverage**: did I do anything manually twice that should be a script? Make it one.
 
 ## Current state (update this section when it changes)
-- ✅ Concept docs, optimized plan, 63-rule KB (HUDY-sourced), deterministic chatbot (`npm run chat`, all tests green), MP11 chassis spec + template + pdf-map, PDF fill PoC verified, naming decision (GripLab, pending William sign-off).
-- ⏭ Next build: hard-coded MP11 MVP screens (garage / sheet editor / chatbot UI wired to `packages/engine`); more chassis extractions; NLU lexicon growth from real phrasings; So Dialed benchmark (needs a phone).
+- ✅ Concept docs, optimized plan, 63-rule KB (HUDY-sourced), deterministic chatbot (all tests green), MP11 chassis spec + template + pdf-map, PDF fill PoC verified, naming decision (GripLab, pending William sign-off).
+- ✅ Engine refactored platform-agnostic (KBData injected, `npm run bundle` → kb/bundle.json). **Expo MVP app live in `apps/mobile`** (SDK 56): garage / schema-driven sheet editor (rendered from template JSON) / engineer chat wired to the engine — typecheck + Metro web export green. Run: `cd apps/mobile && npx expo start` (phone via Expo Go, or `--web`).
+- ⏭ Next build: device run + UI polish (William's DA), setup persistence (AsyncStorage) + versioning, session log screen, more chassis extractions, NLU lexicon growth, So Dialed benchmark (needs a phone).
 - 🔒 Blocked on humans: Théo onboarding + velocity calibration, dev accounts, brand sign-off.

@@ -41,8 +41,11 @@ npm install
 npm run chat                # interactive chatbot REPL (talk to your race engineer)
 npm run chat -- scenarios/01-push-mid-corner-low-grip.json   # with that session context
 npm run cli -- scenarios/01-push-mid-corner-low-grip.json    # one-shot card
+npm run bundle              # recompile packages/kb/bundle.json (run after ANY KB change)
 npm test                    # NLU cases + scripted conversations + 10 eval scenarios
 ```
+
+**Architecture (since the app refactor):** the core (`index.ts` surface — chat, engineer, nlu, retrieval, guard, offline, data) is pure data + pure functions with zero node built-ins, so it bundles into React Native unchanged. All knowledge is injected as `KBData`; node tooling loads it via `node-kb.ts` (fs/yaml/zod live only there), the app imports the pre-compiled `packages/kb/bundle.json`.
 
 ### Status
 
