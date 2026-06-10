@@ -23,3 +23,8 @@ const REGISTRY = new Map<string, GameEntry>([
 export function lookupGame(gameId: string): GameEntry | null {
   return REGISTRY.get(gameId) ?? null;
 }
+
+/** Every registered entry — drives the generic CI audits (redaction I5; future schema audits). */
+export function listGames(): ReadonlyArray<readonly [string, GameEntry]> {
+  return [...REGISTRY.entries()];
+}
