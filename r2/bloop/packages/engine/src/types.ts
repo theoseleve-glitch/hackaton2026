@@ -40,6 +40,14 @@ export interface GameModule<S, A, V, C = unknown> {
   minPlayers: number;
   maxPlayers: number;
   init(seed: string, players: PlayerId[], content: ContentPack<C>): S;
+  /**
+   * Pure transition. CONTRACT (shell no-op detection — server-shell review I4):
+   * to REJECT/IGNORE an event, return the SAME state reference you were given
+   * (`{ state, effects: [] }`), never a fresh-but-equal copy. The shell skips
+   * append/broadcast/re-arm exactly when `after === before`; any NEW reference
+   * is an ACCEPTED event — logged and broadcast (alarms still re-arm only on a
+   * phaseKey change, so an equal-but-fresh state cannot churn timers).
+   */
   reduce(state: S, event: GameEvent<A>): ReduceResult<S>;
   /**
    * Per-player projection. `viewer` may be ANY string, including a
