@@ -16,7 +16,7 @@ export const MAX_NICKNAME_CHARS = 20;
  * (design §9.2). sanitizeGameText lands with the game loop in Plan 2c.
  */
 export function sanitizeNickname(input: string): string | null {
-  const trimmed = input.trim().slice(0, MAX_NICKNAME_CHARS);
+  const trimmed = [...input.trim()].slice(0, MAX_NICKNAME_CHARS).join('');
   if (trimmed.length === 0) return null;
   const matches = matcher.getAllMatches(trimmed);
   if (matches.length === 0) return trimmed;

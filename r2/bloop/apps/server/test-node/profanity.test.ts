@@ -20,4 +20,14 @@ describe('sanitizeNickname (the single text boundary, design §3.4)', () => {
     expect(sanitizeNickname('FuCk')).toBeNull();
     expect(sanitizeNickname('   ')).toBeNull();
   });
+
+  it('never splits surrogate pairs at the cap (code-point slice)', () => {
+    const name = 'x' + '😀'.repeat(25);
+    const out = sanitizeNickname(name);
+    expect(out).toBe('x' + '😀'.repeat(19));
+  });
+
+  it('ships censored-but-present when profanity has punctuation residue', () => {
+    expect(sanitizeNickname('fuck!!!')).toBe('****!!!');
+  });
 });
