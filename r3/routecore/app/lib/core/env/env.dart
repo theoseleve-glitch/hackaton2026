@@ -12,6 +12,12 @@ class Env {
   static String get mapProvider =>
       dotenv.maybeGet('MAP_PROVIDER') ?? 'mock';
 
+  /// Which product experience this build boots into:
+  /// common (neutral core screens) / echappee (L'Échappée) / ecodrive.
+  /// Keeps the core neutral — each dev sets their own flavor in .env.
+  static String get productFlavor =>
+      dotenv.maybeGet('PRODUCT_FLAVOR') ?? 'common';
+
   static String get mapboxAccessToken =>
       dotenv.maybeGet('MAPBOX_ACCESS_TOKEN') ?? '';
   static String get googleMapsApiKey =>

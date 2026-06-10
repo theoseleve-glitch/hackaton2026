@@ -175,9 +175,19 @@ class AuthController extends AsyncNotifier<UserProfile?> {
 final authControllerProvider =
     AsyncNotifierProvider<AuthController, UserProfile?>(AuthController.new);
 
-/// Product mode chosen by the user (Settings / Onboarding).
-final productModeProvider =
-    StateProvider<ProductContext>((ref) => ProductContext.common);
+/// Product mode chosen by the user (Settings / Onboarding). Defaults to the
+/// build flavor (PRODUCT_FLAVOR) so an Échappée build creates terroir trips.
+final productModeProvider = StateProvider<ProductContext>((ref) {
+  switch (Env.productFlavor) {
+    case 'echappee':
+    case 'terroir':
+      return ProductContext.terroir;
+    case 'ecodrive':
+      return ProductContext.ecodrive;
+    default:
+      return ProductContext.common;
+  }
+});
 
 /// Whether the user accepted location + privacy consent during onboarding.
 final consentAcceptedProvider = StateProvider<bool>((ref) => false);

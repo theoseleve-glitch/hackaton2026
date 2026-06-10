@@ -8,6 +8,7 @@ export 'components/echappee_category_chip.dart';
 export 'components/echappee_detour_card.dart';
 export 'components/echappee_empty_state.dart';
 export 'components/echappee_loading_state.dart';
+export 'components/echappee_logo.dart';
 export 'components/echappee_partner_badge.dart';
 export 'components/echappee_poi_card.dart';
 export 'components/echappee_route_option_card.dart';

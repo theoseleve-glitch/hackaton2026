@@ -8,13 +8,20 @@ import '../features/routing/presentation/home_screen.dart';
 import '../features/routing/presentation/route_options_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/tracking/presentation/tracking_screens.dart';
+import '../core/env/env.dart';
 import '../product_modules/echappee/presentation/design_system_preview_screen.dart';
+import '../product_modules/echappee/presentation/echappee_flow_screens.dart';
+import '../product_modules/echappee/presentation/echappee_map_screens.dart';
+import '../product_modules/echappee/presentation/echappee_splash_screen.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
 import '../product_modules/terroir/presentation/terroir_screens.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: '/splash',
+    // The build flavor decides which experience boots; the neutral core
+    // screens stay available for the common/ecodrive flavors.
+    initialLocation:
+        Env.productFlavor == 'echappee' ? '/echappee/splash' : '/splash',
     routes: [
       GoRoute(path: '/splash', builder: (_, __) => const SplashScreen()),
       GoRoute(
@@ -49,6 +56,34 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/echappee/design',
           builder: (_, __) => const EchappeeDesignSystemPreviewScreen()),
+      GoRoute(
+          path: '/echappee/splash',
+          builder: (_, __) => const EchappeeSplashScreen()),
+      GoRoute(
+          path: '/echappee/onboarding',
+          builder: (_, __) => const EchappeeOnboardingScreen()),
+      GoRoute(
+          path: '/echappee/login',
+          builder: (_, __) => const EchappeeLoginScreen()),
+      GoRoute(
+          path: '/echappee/home',
+          builder: (_, __) => const EchappeeHomeScreen()),
+      GoRoute(
+          path: '/echappee/detour',
+          builder: (_, __) => const EchappeeDetourScreen()),
+      GoRoute(
+          path: '/echappee/categories',
+          builder: (_, __) => const EchappeeCategoriesScreen()),
+      GoRoute(
+          path: '/echappee/routes',
+          builder: (_, __) => const EchappeeRouteOptionsScreen()),
+      GoRoute(
+          path: '/echappee/map',
+          builder: (_, __) => const EchappeeMapScreen()),
+      GoRoute(
+          path: '/echappee/poi/:id',
+          builder: (_, state) =>
+              EchappeePoiDetailScreen(poiId: state.pathParameters['id']!)),
       // --- product module: EcoDrive ---
       GoRoute(
           path: '/ecodrive/compare',
