@@ -4,5 +4,11 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["app/**/*.ts", "app/**/*.tsx", "src/**/*.ts", "src/**/*.tsx", "test-node/**/*.ts", "expo-env.d.ts", ".expo/types/**/*.ts"]
+  "include": [
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "test-node/**/*.ts"
+  ]
 }
