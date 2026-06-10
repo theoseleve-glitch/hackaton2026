@@ -6,7 +6,8 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "vitest run --passWithNoTests",
-    "typecheck": "pnpm -r --no-bail exec tsc --noEmit"
+    "typecheck": "pnpm -r --no-bail exec tsc --noEmit",
+    "check:billing": "node scripts/check-billing.mjs"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
