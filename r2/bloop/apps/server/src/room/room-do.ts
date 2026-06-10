@@ -3,12 +3,15 @@ import { clientMessageSchema, type ClientMessage, type ErrorCode, type RoomPlaye
 import type { Env } from '../types.js';
 import { acceptsProtocol } from './protocol-window.js';
 import { sanitizeNickname } from './profanity.js';
-import { Store } from './store.js';
+import { pickNextHost } from './host.js';
+import { Store, type Seat } from './store.js';
 import { hashToken, newReconnectToken } from './tokens.js';
 
 export const MAX_PLAYERS = 16;
 /** UTF-16 code units, not bytes — deliberate cheap cap (review M2); true bytes <= 3x. */
 export const MAX_MSG_CHARS = 4096;
+/** Disconnect grace (§3.5): inside the spec's 60–120s band. */
+export const GRACE_MS = 90_000;
 
 /** Hibernation attachment: IDs ONLY (real limit 16 KiB — review I1). Profiles/host/grace live in SQLite roster, so attachment and roster cannot drift. */
 interface Attachment { cid: string; playerId?: string; state: 'pending' | 'joined' }
@@ -64,11 +67,12 @@ export class RoomDO extends DurableObject<Env> {
       case 'hello': return this.onHello(ws, att, msg);
       case 'startGame': return this.onStartGame(ws, att);
       case 'action': return this.sendError(ws, 'BAD_MESSAGE'); // no game loop until Plan 2c
-      case 'leave': ws.close(1000, 'bye'); return; // full leave semantics: Task 6
+      case 'leave': return this.onLeave(ws, att);
     }
   }
 
   private async onHello(ws: WebSocket, att: Attachment, msg: HelloMessage): Promise<void> {
+    if (att.state === 'joined') return this.sendError(ws, 'BAD_MESSAGE');
     const meta = this.store.getMeta();
     if (meta === null) { ws.close(1011, 'no-room'); return; } // destroyed under an open socket
     // (a) version handshake against the version PINNED at creation
@@ -81,6 +85,12 @@ export class RoomDO extends DurableObject<Env> {
     const nickname = sanitizeNickname(msg.profile.nickname);
     if (nickname === null) return this.sendError(ws, 'BAD_MESSAGE');
     const now = Date.now();
+    // reconnect-token reclaim comes before the fresh-join path (§3.5)
+    if (msg.reconnectToken !== undefined) {
+      const seat = this.store.findSeatByTokenHash(await hashToken(msg.reconnectToken));
+      if (seat !== null) return this.reclaimSeat(ws, att, seat, msg.reconnectToken, now);
+      // invalid or expired token -> fall through to a fresh join
+    }
     // fresh join: lobby only (roster freezes at startGame in Plan 2c)
     if (this.store.rosterSize() >= MAX_PLAYERS) return this.sendError(ws, 'ROOM_FULL');
     const playerId = crypto.randomUUID(); // server-minted, never client-supplied
@@ -102,6 +112,100 @@ export class RoomDO extends DurableObject<Env> {
     if (seat === null) return this.sendError(ws, 'BAD_MESSAGE'); // hello first
     if (!seat.isHost) return this.sendError(ws, 'NOT_HOST');
     this.sendError(ws, 'UNKNOWN_GAME'); // 2c seam: registry lookup + module init replace this
+  }
+
+  private async reclaimSeat(ws: WebSocket, att: Attachment, seat: Seat, token: string, now: number): Promise<void> {
+    const old = this.socketFor(seat.playerId);
+    if (old !== null && old !== ws) {
+      const oldAtt = old.deserializeAttachment() as Attachment;
+      // strip identity FIRST so the old socket's close handler no-ops
+      old.serializeAttachment({ cid: oldAtt.cid, state: 'pending' } satisfies Attachment);
+      old.close(4001, 'superseded');
+    }
+    this.store.setConnected(seat.playerId, true, null); // cancels the grace deadline
+    this.store.patchMeta({ lastActivityAt: now });
+    ws.serializeAttachment({ cid: att.cid, playerId: seat.playerId, state: 'joined' } satisfies Attachment);
+    // stable token for the seat's life (design §9.3 default; rotation deferred)
+    this.send(ws, { type: 'welcome', playerId: seat.playerId, reconnectToken: token });
+    this.broadcastLobby(); // the resync: fresh lobby right after welcome
+    await this.armAlarm(); // drop the now-moot grace deadline eagerly
+  }
+
+  private onLeave(ws: WebSocket, att: Attachment): void {
+    if (att.state === 'joined' && att.playerId !== undefined) {
+      const seat = this.store.getSeat(att.playerId);
+      if (seat !== null) this.removeSeat(seat, Date.now());
+    }
+    ws.serializeAttachment({ cid: att.cid, state: 'pending' } satisfies Attachment);
+    ws.close(1000, 'bye');
+  }
+
+  async webSocketClose(ws: WebSocket): Promise<void> {
+    const att = ws.deserializeAttachment() as Attachment;
+    if (att.state !== 'joined' || att.playerId === undefined) return; // pending/left/superseded
+    const seat = this.store.getSeat(att.playerId);
+    if (seat === null || !seat.connected) return; // already removed or already in grace
+    const now = Date.now();
+    this.store.setConnected(seat.playerId, false, now + GRACE_MS);
+    this.store.patchMeta({ lastActivityAt: now });
+    this.broadcastLobby(); // seat greys out — NOT freed
+    await this.armAlarm();
+  }
+
+  async webSocketError(ws: WebSocket): Promise<void> {
+    await this.webSocketClose(ws);
+  }
+
+  /**
+   * Everything due at `now`. PUBLIC so in-runtime tests drive time directly
+   * instead of sleeping. Plan 2c seam: the §6 AlarmQueue EDF multiplexer
+   * replaces this computed sweep (adding the 'phase' timer kind); the
+   * persisted truth it loads from — roster.grace_until + meta.lastActivityAt
+   * — is already in place.
+   */
+  async sweep(now: number): Promise<void> {
+    if (this.store.getMeta() === null) return;
+    for (const seat of this.store.listSeats()) {
+      if (seat.graceUntil !== null && seat.graceUntil <= now) {
+        // Lobby semantics: the seat is freed. While a game runs (Plan 2c),
+        // this instead emits a playerLeft event into the game loop.
+        this.removeSeat(seat, now);
+      }
+    }
+  }
+
+  async alarm(): Promise<void> {
+    await this.sweep(Date.now());
+    await this.armAlarm();
+  }
+
+  /** Remove a seat + migrate host + tell the lobby. Shared by leave and grace expiry. */
+  private removeSeat(seat: Seat, now: number): void {
+    this.store.removePlayer(seat.playerId);
+    if (seat.isHost) {
+      const next = pickNextHost(this.store.listSeats());
+      if (next !== null) this.store.setHost(next);
+    }
+    this.store.patchMeta({ lastActivityAt: now });
+    this.broadcastLobby();
+  }
+
+  private socketFor(playerId: string): WebSocket | null {
+    for (const ws of this.ctx.getWebSockets()) {
+      const att = ws.deserializeAttachment() as Attachment;
+      if (att.state === 'joined' && att.playerId === playerId) return ws;
+    }
+    return null;
+  }
+
+  /** Single alarm = earliest pending deadline. Task 7 adds the TTL horizon. */
+  private async armAlarm(): Promise<void> {
+    let earliest: number | null = null;
+    for (const seat of this.store.listSeats()) {
+      if (seat.graceUntil !== null && (earliest === null || seat.graceUntil < earliest)) earliest = seat.graceUntil;
+    }
+    if (earliest === null) await this.ctx.storage.deleteAlarm();
+    else await this.ctx.storage.setAlarm(earliest);
   }
 
   // ---- outbound ----

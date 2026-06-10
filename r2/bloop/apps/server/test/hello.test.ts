@@ -79,4 +79,19 @@ describe('hello flow (§3.3): handshake, profanity boundary, lobby, host gating'
     sendJson(socks[0]!, { type: 'startGame', gameId: 'tracer' });
     expect(await expectError(socks[0]!)).toBe('UNKNOWN_GAME');
   });
+
+  it('rider: a second hello on an already-joined socket returns BAD_MESSAGE and the roster does not grow', async () => {
+    const code = await createRoomViaApi();
+    const sock = await join(code, 'Anna');
+    await expectWelcome(sock);
+    const lobby1 = await expectLobby(sock);
+    // send hello again on the SAME socket
+    sendJson(sock, { type: 'hello', protocolVersion: PROTOCOL_VERSION, profile: { nickname: 'Anna2', avatar: 'a0' } });
+    expect(await expectError(sock)).toBe('BAD_MESSAGE');
+    // roster must not have grown — verify via a fresh join that broadcasts the lobby
+    const sock2 = await join(code, 'Bert');
+    await expectWelcome(sock2);
+    const lobby2 = await expectLobby(sock2); // lobby after Bert joins (Anna is still there)
+    expect(lobby2.players).toHaveLength(lobby1.players.length + 1); // only Bert was added, not a duplicate Anna
+  });
 });
