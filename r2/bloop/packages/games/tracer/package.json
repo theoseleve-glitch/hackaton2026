@@ -6,6 +6,7 @@
   "exports": { ".": "./src/index.ts" },
   "dependencies": {
     "@bloop/engine": "workspace:*",
+    "@bloop/kit": "workspace:*",
     "zod": "^4.0.0"
   }
 }

@@ -1,5 +1,6 @@
 import type { Effect, GameModule, PlayerId, ReduceResult } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
+import { emptyPlayerMap } from '@bloop/kit';
 import {
   DEFAULT_CONFIG,
   type TracerAction,
@@ -9,16 +10,6 @@ import {
 
 export interface TracerContent {
   prompts: string[];
-}
-
-/**
- * Player-keyed maps use null prototypes: player IDs are untrusted strings,
- * and assigning obj['__proto__'] on a default-prototype object silently
- * corrupts the map instead of creating a key. Null-proto objects stay
- * JSON-serializable, unlike Map.
- */
-function emptyPlayerMap<V>(): Record<PlayerId, V> {
-  return Object.create(null) as Record<PlayerId, V>;
 }
 
 function tallyVotes(state: TracerState): Record<PlayerId, number> {
