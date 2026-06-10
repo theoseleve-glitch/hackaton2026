@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,7 +10,8 @@ import {
   View,
 } from "react-native";
 import { RaceEngineerChat } from "../../../../packages/engine/src";
-import type { ContextBundle } from "../../../../packages/engine/src";
+import type { ContextBundle, OutcomeEvent } from "../../../../packages/engine/src";
+import type { TrackInfo } from "../../../../packages/sessions/src";
 import { KB, MP11_ID } from "../kb";
 import { colors, radius } from "../theme";
 
@@ -24,29 +25,87 @@ const GRIPS: Grip[] = ["green", "medium", "high", "blue_groove"];
 
 interface Props {
   setup: Record<string, string | number>;
+  /** Base version the draft is branched from — stamped onto recommendations
+   *  at trial time for outcome attribution. */
+  setupVersionId: string;
+  /** Live session track: when set, the chat advises on it (grip chips hide). */
+  sessionTrack?: TrackInfo | null;
+  /** Whether a session is live — outcomes are only persisted when it is. */
+  sessionLive?: boolean;
+  /** Fired when the driver rates an advised change (better/same/worse). */
+  onOutcome?: (e: OutcomeEvent) => void;
 }
 
-export function EngineerScreen({ setup }: Props) {
+export function EngineerScreen({
+  setup,
+  setupVersionId,
+  sessionTrack = null,
+  sessionLive = false,
+  onOutcome,
+}: Props) {
   const [grip, setGrip] = useState<Grip>("medium");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const scrollRef = useRef<ScrollView>(null);
 
-  // A chat session is pinned to the setup + grip it started with; changing
-  // grip starts a fresh session (the engineer must never advise on stale state).
-  const chat = useMemo(() => {
+  // The chat instance lives for the whole mount: the dialogue (pending
+  // recommendation, mode, option queue) must survive tab switches, sheet
+  // edits and condition changes. Context updates go IN PLACE via
+  // chat.updateTrack / chat.updateSetup — never by rebuilding the chat.
+  const chatRef = useRef<RaceEngineerChat | null>(null);
+  const onOutcomeRef = useRef(onOutcome);
+  onOutcomeRef.current = onOutcome;
+
+  const track: ContextBundle["track"] = sessionTrack
+    ? {
+        name: sessionTrack.name,
+        surface: sessionTrack.surface,
+        grip: sessionTrack.grip,
+        conditions: [...sessionTrack.conditions],
+      }
+    : { name: "My track", surface: "clay", grip, conditions: gripConditions(grip) };
+
+  if (chatRef.current === null) {
     const bundle: ContextBundle = {
       chassis_template_id: MP11_ID,
       setup: { ...setup },
-      track: { name: "My track", surface: "clay", grip, conditions: gripConditions(grip) },
+      setup_version_id: setupVersionId,
+      track,
       feedback: { tags: [] },
       mode: "practice",
     };
-    const c = new RaceEngineerChat(bundle, KB);
-    setMessages(c.greeting().map((text) => ({ role: "engineer", text })));
-    return c;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grip, setup]);
+    chatRef.current = new RaceEngineerChat(bundle, KB, {
+      onOutcome: (e) => onOutcomeRef.current?.(e),
+    });
+  }
+  const chat = chatRef.current;
+
+  // greeting once, after mount (never set state during render)
+  const greeted = useRef(false);
+  useEffect(() => {
+    if (!greeted.current) {
+      greeted.current = true;
+      setMessages(chat.greeting().map((text) => ({ role: "engineer", text })));
+    }
+  }, [chat]);
+
+  // conditions changed (session started/updated, or grip chip tapped):
+  // update the chat in place and show the acknowledgement — the pending
+  // recommendation survives.
+  const trackKey = JSON.stringify(track);
+  const lastTrackKey = useRef(trackKey);
+  useEffect(() => {
+    if (lastTrackKey.current === trackKey) return;
+    lastTrackKey.current = trackKey;
+    const ack = chat.updateTrack(JSON.parse(trackKey) as ContextBundle["track"]);
+    setMessages((prev) => [...prev, ...ack.map((text): Message => ({ role: "engineer", text }))]);
+  }, [trackKey, chat]);
+
+  // sheet edits / saves / loads refresh the setup silently; the CURRENT
+  // recommendation keeps its trial-time version attribution (engine-side).
+  useEffect(() => {
+    chat.updateSetup({ ...setup }, setupVersionId);
+  }, [setup, setupVersionId, chat]);
 
   const send = (text: string) => {
     const trimmed = text.trim();
@@ -62,20 +121,30 @@ export function EngineerScreen({ setup }: Props) {
       style={styles.root}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <View style={styles.gripRow}>
-        <Text style={styles.gripLabel}>Track grip</Text>
-        {GRIPS.map((g) => (
-          <Pressable
-            key={g}
-            style={[styles.gripChip, grip === g && styles.gripChipActive]}
-            onPress={() => setGrip(g)}
-          >
-            <Text style={[styles.gripText, grip === g && styles.gripTextActive]}>
-              {g.replace("_", " ")}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
+      {sessionTrack ? (
+        <View style={styles.gripRow}>
+          <Text style={styles.sessionBanner} numberOfLines={1}>
+            Session: <Text style={styles.sessionBannerStrong}>{sessionTrack.name}</Text>
+            {" · "}
+            {sessionTrack.grip.replace("_", " ")} grip
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.gripRow}>
+          <Text style={styles.gripLabel}>Track grip</Text>
+          {GRIPS.map((g) => (
+            <Pressable
+              key={g}
+              style={[styles.gripChip, grip === g && styles.gripChipActive]}
+              onPress={() => setGrip(g)}
+            >
+              <Text style={[styles.gripText, grip === g && styles.gripTextActive]}>
+                {g.replace("_", " ")}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
 
       <ScrollView ref={scrollRef} style={styles.feed} contentContainerStyle={{ padding: 14 }}>
         {messages.map((m, i) => (
@@ -84,6 +153,12 @@ export function EngineerScreen({ setup }: Props) {
           </View>
         ))}
       </ScrollView>
+
+      {!sessionLive && (
+        <Text style={styles.noSessionHint}>
+          ⚠ No session live — outcomes won't be saved. Start one in the Sessions tab 🏁
+        </Text>
+      )}
 
       <View style={styles.quickRow}>
         {["better", "same", "worse"].map((q) => (
@@ -139,6 +214,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   gripLabel: { color: colors.sub, fontSize: 12, marginRight: 4 },
+  sessionBanner: { color: colors.sub, fontSize: 12, flex: 1 },
+  sessionBannerStrong: { color: colors.accent, fontWeight: "700" },
   gripChip: {
     backgroundColor: colors.cardAlt,
     borderRadius: 999,
@@ -166,6 +243,12 @@ const styles = StyleSheet.create({
   you: { backgroundColor: colors.accent, alignSelf: "flex-end" },
   bubbleText: { color: colors.text, fontSize: 14, lineHeight: 20 },
   youText: { color: "#fff" },
+  noSessionHint: {
+    color: colors.warn,
+    fontSize: 11,
+    paddingHorizontal: 14,
+    paddingBottom: 6,
+  },
   quickRow: { flexDirection: "row", gap: 8, paddingHorizontal: 14, paddingBottom: 8 },
   quick: {
     backgroundColor: colors.cardAlt,

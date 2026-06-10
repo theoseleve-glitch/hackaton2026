@@ -1,5 +1,9 @@
 # RaceLab packages
 
+## `sessions/` — Race log + learning loop (D22)
+
+Pure data + pure functions, no I/O. A session = one track day: TrackInfo (name/surface/grip/conditions) + append-only **runs** (setup version raced, laps, feedback) + **outcome records** (the engineer's better/same/worse verdicts). Hardened invariants: frozen per-record **track snapshots at log time** (changing grip never falsifies history), denormalized `setup_name`, discriminated `addRun`/`recordOutcome` results (dropped data is impossible to miss), write-time NaN guards, deep-freeze surviving deserialize, never-wipe discriminated persistence. `npm test` = 57 checks.
+
 ## `sheets/` — Setup versioning + diff (D21)
 
 Pure data + pure functions, no I/O — bundles into the app unchanged. Immutable, deep-frozen, append-only `versions[]` with `parent_id` lineage (kit baseline = locked root, globally-unique ids); ONE mutable `draft` branched from a base version; **diffs always computed, never stored** — draft-vs-base IS the editor's orange highlights, the same function powers "vs" compare and diff-vs-kit. Versioned serialization with a discriminated result (`corrupt` / `unknown_format` / `wrong_template`) so a format bump can never silently wipe history. Survived an adversarial review fan-out (3 ⛔ findings fixed pre-commit). `npm test` = 31 checks.

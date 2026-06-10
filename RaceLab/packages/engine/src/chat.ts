@@ -20,18 +20,34 @@ const PHASE_QUESTION =
 const PROBLEM_PROMPT =
   'Describe what the car is doing — like you\'d tell your pit man. e.g. "it pushes mid-corner", "loose on power out of the infield", "bounces through the braking bumps".';
 
+export interface OutcomeEvent {
+  outcome: "better" | "same" | "worse";
+  option: RecommendationOption | null;
+  /** The setup version the change was trialed AGAINST, captured when the
+   *  recommendation was presented — not when the driver rated it (a save or
+   *  load in between must not mis-attribute the outcome). */
+  setup_version_id: string | null;
+}
+
+export interface ChatHooks {
+  onOutcome?: (e: OutcomeEvent) => void;
+}
+
 export class RaceEngineerChat {
   private state: State = "awaiting_problem";
   private bundle: ContextBundle;
   private pendingSymptoms: FeedbackTag[] = [];
   private queue: RecommendationOption[] = [];
   private current?: RecommendationOption;
+  private currentVersionId: string | null = null; // stamped at trial time
   private data: KBData;
   private template;
+  private hooks: ChatHooks;
 
-  constructor(bundle: ContextBundle, data: KBData) {
+  constructor(bundle: ContextBundle, data: KBData, hooks: ChatHooks = {}) {
     this.bundle = bundle;
     this.data = data;
+    this.hooks = hooks;
     this.template = getTemplate(data, bundle.chassis_template_id);
   }
 
@@ -41,6 +57,21 @@ export class RaceEngineerChat {
       `Session: ${conditionsEcho(this.bundle)}.`,
       PROBLEM_PROMPT,
     ];
+  }
+
+  /** Update the track context IN PLACE — the dialogue (pending recommendation,
+   *  mode, queue) survives. Returns an acknowledgement line for the feed. */
+  updateTrack(track: ContextBundle["track"]): string[] {
+    this.bundle.track = { ...track, conditions: [...track.conditions] };
+    return [`📍 Conditions updated: ${conditionsEcho(this.bundle)}.`];
+  }
+
+  /** Refresh the setup values (and their base version) without resetting the
+   *  conversation — call after the driver edits/saves/loads a sheet. The
+   *  CURRENT recommendation keeps its trial-time version attribution. */
+  updateSetup(setup: ContextBundle["setup"], setupVersionId?: string): void {
+    this.bundle.setup = { ...setup };
+    this.bundle.setup_version_id = setupVersionId;
   }
 
   handle(rawInput: string): string[] {
@@ -176,6 +207,9 @@ export class RaceEngineerChat {
 
   private presentNext(first: boolean): string[] {
     this.current = this.queue.shift();
+    // trial-time attribution: whatever base version the setup had when this
+    // recommendation goes on the car is what the outcome belongs to
+    this.currentVersionId = this.bundle.setup_version_id ?? null;
     if (!this.current) {
       this.state = "awaiting_problem";
       return [
@@ -197,6 +231,7 @@ export class RaceEngineerChat {
   private onOutcome(input: string): string[] {
     const lower = input.toLowerCase();
     if (/better|good|fixed|solved|works/.test(lower)) {
+      this.hooks.onOutcome?.({ outcome: "better", option: this.current ?? null, setup_version_id: this.currentVersionId });
       this.state = "awaiting_problem";
       return [
         "✅ Keep it — note it on the setup sheet so the change is traceable.",
@@ -204,9 +239,11 @@ export class RaceEngineerChat {
       ];
     }
     if (/worse|bad|horrible/.test(lower)) {
+      this.hooks.onOutcome?.({ outcome: "worse", option: this.current ?? null, setup_version_id: this.currentVersionId });
       return [`↩ Revert that first (${this.current?.revert ?? "put it back"}). One variable at a time.`, ...this.presentNext(false)];
     }
     if (/same|no change|nothing|identical/.test(lower)) {
+      this.hooks.onOutcome?.({ outcome: "same", option: this.current ?? null, setup_version_id: this.currentVersionId });
       return ["↩ Revert it — a change that does nothing is just wear. Next:", ...this.presentNext(false)];
     }
     // driver described a NEW problem instead of an outcome

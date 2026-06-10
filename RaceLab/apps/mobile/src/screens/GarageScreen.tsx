@@ -6,11 +6,20 @@ import { KB, MP11 } from "../kb";
 interface Props {
   versionCount: number;
   activeName: string;
+  sessionCount: number;
+  sessionLive: boolean;
   onOpenSheet: () => void;
   onAskEngineer: () => void;
 }
 
-export function GarageScreen({ versionCount, activeName, onOpenSheet, onAskEngineer }: Props) {
+export function GarageScreen({
+  versionCount,
+  activeName,
+  sessionCount,
+  sessionLive,
+  onOpenSheet,
+  onAskEngineer,
+}: Props) {
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
       <Text style={styles.h1}>Garage</Text>
@@ -20,6 +29,10 @@ export function GarageScreen({ versionCount, activeName, onOpenSheet, onAskEngin
         <Text style={styles.model}>{MP11.model}</Text>
         <Text style={styles.meta}>
           1/8 nitro buggy · {versionCount} saved version{versionCount > 1 ? "s" : ""} · active: “{activeName}”
+        </Text>
+        <Text style={styles.meta}>
+          {sessionCount} session{sessionCount === 1 ? "" : "s"} logged
+          {sessionLive ? <Text style={styles.live}> · session live</Text> : null}
         </Text>
 
         <View style={styles.row}>
@@ -59,6 +72,7 @@ const styles = StyleSheet.create({
   brand: { color: colors.accent, fontSize: 13, fontWeight: "700", letterSpacing: 2 },
   model: { color: colors.text, fontSize: 24, fontWeight: "800", marginTop: 2 },
   meta: { color: colors.sub, fontSize: 13, marginTop: 6 },
+  live: { color: colors.accent, fontSize: 13, fontWeight: "700" },
   row: { flexDirection: "row", gap: 10, marginTop: 16 },
   btn: { borderRadius: radius.md, paddingVertical: 11, paddingHorizontal: 16 },
   btnPrimary: { backgroundColor: colors.accent },

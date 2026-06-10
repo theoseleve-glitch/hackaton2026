@@ -63,6 +63,9 @@ export interface FeedbackTag {
 export interface ContextBundle {
   chassis_template_id: string;
   setup: Record<string, string | number>;
+  /** Saved version the setup values came from — stamped onto recommendations
+   *  at TRIAL time so outcomes attribute to the right baseline. */
+  setup_version_id?: string;
   track: {
     name: string;
     surface: string;

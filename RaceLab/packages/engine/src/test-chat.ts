@@ -1,4 +1,4 @@
-import { RaceEngineerChat } from "./chat";
+import { RaceEngineerChat, type OutcomeEvent } from "./chat";
 import { loadKBData } from "./node-kb";
 import type { ContextBundle } from "./types";
 
@@ -77,6 +77,90 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
   chat.handle("pushes mid corner");
   const r = chat.handle("actually now it bounces through the braking bumps");
   expect("new problem interrupts outcome loop", r, /Try ONE change/);
+}
+
+// 7. Outcome hook fires on better/worse with the current option, never for new problems
+{
+  const events: OutcomeEvent[] = [];
+  const chat = new RaceEngineerChat(freshBundle(), data, {
+    onOutcome: (e) => events.push(e),
+  });
+  chat.handle("it pushes mid-corner everywhere");
+  chat.handle("worse");
+  chat.handle("better");
+  if (events.length === 2) {
+    console.log("✓ outcome hook fired twice for worse → better");
+  } else {
+    failures++;
+    console.log(`✗ outcome hook fired twice for worse → better\n    expected 2 events, got ${events.length}`);
+  }
+  if (events[0]?.outcome === "worse" && typeof events[0]?.option?.setting === "string" && events[0].option.setting.length > 0) {
+    console.log("✓ first event is worse with option.setting defined");
+  } else {
+    failures++;
+    console.log(`✗ first event is worse with option.setting defined\n    got: ${JSON.stringify(events[0])}`);
+  }
+  if (events[1]?.outcome === "better") {
+    console.log("✓ second event is better");
+  } else {
+    failures++;
+    console.log(`✗ second event is better\n    got: ${JSON.stringify(events[1])}`);
+  }
+  // a plain new-problem message must NOT fire the hook — neither as a fresh
+  // complaint nor as a new-problem interrupt mid-outcome
+  const before = events.length;
+  chat.handle("it pushes mid-corner everywhere"); // fresh complaint → recommendation
+  chat.handle("actually now it bounces through the braking bumps"); // interrupt while awaiting outcome
+  if (events.length === before) {
+    console.log("✓ no event for plain new-problem messages");
+  } else {
+    failures++;
+    console.log(`✗ no event for plain new-problem messages\n    expected ${before} events, got ${events.length}`);
+  }
+}
+
+// 8. Trial-time version attribution: outcome carries the base version the
+//    recommendation was presented against, even if the setup is updated
+//    (saved/loaded) between trial and rating.
+{
+  const events: OutcomeEvent[] = [];
+  const bundle = { ...freshBundle(), setup_version_id: "sv-trial-base" };
+  const chat = new RaceEngineerChat(bundle, data, { onOutcome: (e) => events.push(e) });
+  chat.handle("it pushes mid-corner everywhere"); // recommendation presented
+  chat.updateSetup({ ...bundle.setup, front_sway_bar: 2.2 }, "sv-after-save"); // driver saved mid-loop
+  chat.handle("better");
+  if (events[0]?.setup_version_id === "sv-trial-base") {
+    console.log("✓ outcome attributes to the TRIAL-time version, not the rating-time one");
+  } else {
+    failures++;
+    console.log(`✗ outcome attributes to the TRIAL-time version\n    got: ${events[0]?.setup_version_id}`);
+  }
+  // next recommendation after the save attributes to the new base
+  chat.handle("still pushes mid corner");
+  chat.handle("worse");
+  if (events[1]?.setup_version_id === "sv-after-save") {
+    console.log("✓ next recommendation attributes to the refreshed base version");
+  } else {
+    failures++;
+    console.log(`✗ next recommendation attributes to the refreshed base\n    got: ${events[1]?.setup_version_id}`);
+  }
+}
+
+// 9. updateTrack mid-conversation preserves the pending recommendation
+{
+  const events: OutcomeEvent[] = [];
+  const chat = new RaceEngineerChat(freshBundle(), data, { onOutcome: (e) => events.push(e) });
+  chat.handle("it pushes mid-corner everywhere"); // pending recommendation
+  const ack = chat.updateTrack({ name: "Club Track", surface: "clay", grip: "blue_groove", conditions: ["high_grip", "blue_groove"] });
+  expect("updateTrack acknowledges new conditions", ack, /Conditions updated.*blue.?groove/i);
+  const r = chat.handle("better");
+  expect("pending recommendation survives updateTrack", r, /Keep it/);
+  if (events.length === 1 && events[0].option !== null) {
+    console.log("✓ outcome hook still fires after updateTrack");
+  } else {
+    failures++;
+    console.log(`✗ outcome hook still fires after updateTrack\n    got ${events.length} events`);
+  }
 }
 
 console.log(failures === 0 ? "\nCHAT: all conversation tests passed" : `\nCHAT: ${failures} failures`);
