@@ -1,5 +1,6 @@
 import { SELF } from 'cloudflare:test';
 import { PROTOCOL_VERSION, serverMessageSchema, type ServerMessage } from '@bloop/protocol';
+import type { TracerView } from '@bloop/game-tracer';
 
 export async function createRoomViaApi(): Promise<string> {
   const res = await SELF.fetch('https://bloop.test/rooms', { method: 'POST' });
@@ -10,6 +11,8 @@ export async function createRoomViaApi(): Promise<string> {
 export interface TestSocket {
   ws: WebSocket;
   next(): Promise<ServerMessage>;
+  /** Empty the receive queue without waiting (expectSilence support). */
+  drain(): ServerMessage[];
   closed: Promise<number>; // resolves with the close code
 }
 
@@ -39,6 +42,7 @@ export async function connect(code: string): Promise<TestSocket> {
         waiters.push((msg) => { clearTimeout(timer); resolve(msg); });
       });
     },
+    drain: () => queue.splice(0, queue.length),
     closed,
   };
 }
@@ -83,6 +87,30 @@ export interface JoinedRoom {
   code: string;
   socks: TestSocket[];
   welcomes: Array<{ playerId: string; reconnectToken: string }>;
+}
+
+export interface TracerViewMsg { view: TracerView; deadlineAt: number | null }
+
+export async function expectTracerView(sock: TestSocket): Promise<TracerViewMsg> {
+  const msg = await sock.next();
+  if (msg.type !== 'view') throw new Error(`expected view, got ${msg.type}`);
+  return { view: msg.view as TracerView, deadlineAt: msg.deadlineAt };
+}
+
+/** Asserts NOTHING arrives for `ms` (I4: rejected events are completely silent). */
+export async function expectSilence(sock: TestSocket, ms = 300): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+  const pending = sock.drain();
+  if (pending.length > 0) throw new Error(`expected silence, got ${pending.map((m) => m.type).join(',')}`);
+}
+
+/** setupRoom + host starts tracer + drains everyone's initial view. */
+export async function startTracer(nicknames: string[]): Promise<JoinedRoom & { views: TracerViewMsg[] }> {
+  const room = await setupRoom(nicknames);
+  sendJson(room.socks[0]!, { type: 'startGame', gameId: 'tracer' });
+  const views: TracerViewMsg[] = [];
+  for (const s of room.socks) views.push(await expectTracerView(s));
+  return { ...room, views };
 }
 
 /** Create a room and join players in order, draining every welcome/lobby so all queues start empty. */

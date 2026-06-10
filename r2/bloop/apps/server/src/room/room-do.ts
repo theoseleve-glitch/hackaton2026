@@ -1,9 +1,12 @@
 import { DurableObject } from 'cloudflare:workers';
+import { replay, type Effect, type GameEvent } from '@bloop/engine';
 import { clientMessageSchema, type ClientMessage, type ErrorCode, type RoomPlayer, type ServerMessage } from '@bloop/protocol';
 import type { Env } from '../types.js';
+import { AlarmQueue, nextPhaseDeadline } from './alarm-mux.js';
 import { acceptsProtocol } from './protocol-window.js';
 import { sanitizeNickname } from './profanity.js';
 import { pickNextHost } from './host.js';
+import { lookupGame, type GameEntry } from './registry.js';
 import { Store, type Seat } from './store.js';
 import { hashToken, newReconnectToken } from './tokens.js';
 
@@ -21,6 +24,11 @@ export const UNBORN_TTL_MS = 120_000;
 interface Attachment { cid: string; playerId?: string; state: 'pending' | 'joined' }
 
 type HelloMessage = Extract<ClientMessage, { type: 'hello' }>;
+type StartGameMessage = Extract<ClientMessage, { type: 'startGame' }>;
+type ActionMessage = Extract<ClientMessage, { type: 'action' }>;
+
+/** In-memory cache of the running game. Losing it to eviction is CORRECT, not a bug: rehydrate() rebuilds it from (seed, roster, content, event log). */
+interface GameRuntime { entry: GameEntry; state: unknown }
 
 function safeJson(raw: string): unknown {
   try { return JSON.parse(raw); } catch { return null; }
@@ -28,11 +36,12 @@ function safeJson(raw: string): unknown {
 
 export class RoomDO extends DurableObject<Env> {
   private readonly store: Store;
+  private game: GameRuntime | null = null;
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
     this.store = new Store(ctx.storage.sql);
-    this.store.migrate(); // sync + idempotent; 2c seam: AlarmQueue.load(...) joins here
+    this.store.migrate(); // sync + idempotent. (No AlarmQueue.load: the EDF queue is DERIVED from persisted truth per use — see loadQueue.)
   }
 
   /**
@@ -47,6 +56,7 @@ export class RoomDO extends DurableObject<Env> {
     // C3: idFromName(code) is immortal — a freed code reuses THIS object, which
     // may still hold hibernating sockets from a previous party. Evict them.
     this.closeAllSockets(1011, 'stale-room');
+    this.game = null; // C3 companion: a stale runtime cache must not leak into the new party
     this.store.setMeta({
       code: input.code, protocolVersion: input.protocolVersion, status: 'lobby',
       createdAt: input.createdAt, lastActivityAt: input.createdAt,
@@ -66,7 +76,7 @@ export class RoomDO extends DurableObject<Env> {
     return new Response(null, { status: 101, webSocket: pair[0] });
   }
 
-  /** The single input boundary (§3.3): size cap -> zod -> route. Token-bucket rate limit: Plan 2c. */
+  /** The single input boundary (§3.3): size cap -> zod -> route. Token-bucket rate limit: Plan 2d. */
   async webSocketMessage(ws: WebSocket, raw: string | ArrayBuffer): Promise<void> {
     const att = ws.deserializeAttachment() as Attachment;
     if (typeof raw !== 'string' || raw.length > MAX_MSG_CHARS) return this.sendError(ws, 'BAD_MESSAGE');
@@ -75,8 +85,8 @@ export class RoomDO extends DurableObject<Env> {
     const msg = parsed.data;
     switch (msg.type) {
       case 'hello': return this.onHello(ws, att, msg);
-      case 'startGame': return this.onStartGame(ws, att);
-      case 'action': return this.sendError(ws, 'BAD_MESSAGE'); // no game loop until Plan 2c
+      case 'startGame': return this.onStartGame(ws, att, msg);
+      case 'action': return this.onAction(ws, att, msg);
       case 'leave': return this.onLeave(ws, att);
     }
   }
@@ -101,7 +111,9 @@ export class RoomDO extends DurableObject<Env> {
       if (seat !== null) return this.reclaimSeat(ws, att, seat, msg.reconnectToken, now);
       // invalid or expired token -> fall through to a fresh join
     }
-    // fresh join: lobby only (roster freezes at startGame in Plan 2c)
+    // fresh join: lobby or between games only — the game roster froze at
+    // startGame (design §3.3d; ROOM_FULL reused per §9.7)
+    if (meta.status === 'playing') return this.sendError(ws, 'ROOM_FULL');
     if (this.store.rosterSize() >= MAX_PLAYERS) return this.sendError(ws, 'ROOM_FULL');
     const playerId = crypto.randomUUID(); // server-minted, never client-supplied
     const reconnectToken = newReconnectToken(); // lives only on the device
@@ -117,11 +129,117 @@ export class RoomDO extends DurableObject<Env> {
     this.broadcastLobby();
   }
 
-  private onStartGame(ws: WebSocket, att: Attachment): void {
+  /** Design §4.1/§4.5: validate -> seed -> init -> persist binding -> broadcast views. NOTHING is appended: init is re-derivable from (seed, roster, content). */
+  private async onStartGame(ws: WebSocket, att: Attachment, msg: StartGameMessage): Promise<void> {
     const seat = att.playerId === undefined ? null : this.store.getSeat(att.playerId);
     if (seat === null) return this.sendError(ws, 'BAD_MESSAGE'); // hello first
     if (!seat.isHost) return this.sendError(ws, 'NOT_HOST');
-    this.sendError(ws, 'UNKNOWN_GAME'); // 2c seam: registry lookup + module init replace this
+    const meta = this.store.getMeta();
+    if (meta === null || meta.status === 'playing') return this.sendError(ws, 'BAD_MESSAGE');
+    const entry = lookupGame(msg.gameId);
+    if (entry === null) return this.sendError(ws, 'UNKNOWN_GAME');
+    // the roster freezes NOW from connected seats; in-grace seats sit this one out
+    const roster = this.store.listSeats().filter((s) => s.connected).map((s) => s.playerId);
+    if (roster.length < entry.module.minPlayers || roster.length > entry.module.maxPlayers) {
+      return this.sendError(ws, 'BAD_MESSAGE');
+    }
+    const at = Date.now();
+    const seed = crypto.randomUUID(); // unguessable; persisted so init and every replay agree
+    const state = entry.module.init(seed, roster, entry.content);
+    const dur = entry.module.phaseDurationMs(state);
+    this.store.clearEvents(); // a previous game's log must never replay into this one
+    this.store.patchMeta({
+      status: 'playing', gameId: entry.module.id, gameVersion: entry.module.version, seed,
+      contentRef: { gameId: entry.module.id, contentId: entry.content.id, version: entry.content.version },
+      roster, phaseKey: entry.module.phaseKey(state),
+      deadlineAt: dur === null ? null : at + dur, lastActivityAt: at,
+    });
+    this.game = { entry, state };
+    this.broadcastViews(this.game);
+    await this.armAlarm();
+  }
+
+  /** Design §4.2: per-game zod -> server-stamped GameEvent -> the applyEvent funnel. */
+  private async onAction(ws: WebSocket, att: Attachment, msg: ActionMessage): Promise<void> {
+    if (att.state !== 'joined' || att.playerId === undefined) return this.sendError(ws, 'BAD_MESSAGE');
+    const meta = this.store.getMeta();
+    if (meta === null || meta.status !== 'playing') return this.sendError(ws, 'BAD_MESSAGE');
+    const rt = this.rehydrate();
+    if (rt === null) return this.sendError(ws, 'BAD_MESSAGE');
+    // Per-game payload validation; the module never sees junk. (Free-text
+    // scrubbing — sanitizeGameText — joins here when a text game lands.)
+    const action = rt.entry.actionSchema.safeParse(msg.payload);
+    if (!action.success) return this.sendError(ws, 'BAD_MESSAGE');
+    await this.applyEvent(rt, { type: 'action', playerId: att.playerId, action: action.data, at: Date.now() });
+  }
+
+  /**
+   * C1 fix (adversarial review): live state is ONLY ever built by game code.
+   * Rehydration = replay(init, full event log) — every player-keyed map is
+   * reconstructed null-prototype by the module itself. Deliberately NO
+   * snapshot path: a tracer game is < ~60 events and reduce is microseconds,
+   * so replay-from-zero is the simple, pollution-proof choice at party scale.
+   * (Seam: if a marathon game ever needs snapshots, they must round-trip
+   * through a module-aware revive — never bare JSON.parse.)
+   */
+  private rehydrate(): GameRuntime | null {
+    if (this.game !== null) return this.game;
+    const meta = this.store.getMeta();
+    if (meta === null || meta.gameId === null || meta.seed === null || meta.roster === null) return null;
+    const entry = lookupGame(meta.gameId);
+    if (entry === null || entry.module.version !== meta.gameVersion) return null; // killed/bumped mid-game: unrecoverable, room TTLs out
+    const state = replay(entry.module, meta.seed, meta.roster, entry.content, this.store.listEvents());
+    this.game = { entry, state };
+    return this.game;
+  }
+
+  /**
+   * The single funnel for EVERY game event (action/deadline/playerLeft/
+   * playerRejoined). I4 contract: a module rejects by returning the SAME
+   * reference -> nothing logged, broadcast, or re-armed. Accepted events:
+   * PERSIST BEFORE BROADCAST (spec §7), re-arm iff phaseKey changed (§0.1).
+   */
+  private async applyEvent(rt: GameRuntime, event: GameEvent<unknown>): Promise<void> {
+    const before = rt.state;
+    const keyBefore = rt.entry.module.phaseKey(before);
+    const { state: after, effects } = rt.entry.module.reduce(before, event);
+    if (after === before) return; // rejected by reference (I4) — keeps the log replay-clean
+    const meta = this.store.getMeta();
+    if (meta === null) return; // room wiped under our feet — drop the event
+    this.store.appendEvent(event); // (1) durable log entry — BEFORE any socket send
+    rt.state = after;
+    const keyAfter = rt.entry.module.phaseKey(after);
+    const deadlineAt = nextPhaseDeadline(keyBefore, keyAfter, rt.entry.module.phaseDurationMs(after), event.at, meta.deadlineAt);
+    this.store.patchMeta({ phaseKey: keyAfter, deadlineAt }); // (2) timer truth persisted
+    for (const eff of effects as Effect[]) this.runEffect(eff); // (3) effects
+    this.broadcastViews(rt); // (4) per-player redacted views — strictly after the append
+    await this.armAlarm(); // (5) the earliest timer may have moved
+  }
+
+  /** Effects are descriptions; the shell executes them. replay() drops historical effects, so eviction never re-runs these. */
+  private runEffect(eff: Effect): void {
+    if (eff.type === 'analytics') {
+      // 2c: log-only. Analytics Engine binding is a later seam — never PostHog from the DO (spec §3).
+      console.log(`[analytics] ${eff.name}`, JSON.stringify(eff.props ?? {}));
+    } else {
+      // gameOver: between-games state; host may startGame again. The terminal
+      // view + deadlineAt:null IS the client signal (design §4.3) — no extra
+      // protocol message. 'ended' stays reserved for an explicit close flow.
+      this.store.patchMeta({ status: 'roundOver' });
+    }
+  }
+
+  /** Redaction by construction (spec §4): each socket only ever receives view(state, ITS OWN playerId). */
+  private broadcastViews(rt: GameRuntime): void {
+    const deadlineAt = this.store.getMeta()?.deadlineAt ?? null;
+    for (const ws of this.ctx.getWebSockets()) {
+      const att = ws.deserializeAttachment() as Attachment;
+      if (att.state === 'joined' && att.playerId !== undefined) this.sendView(ws, rt, att.playerId, deadlineAt);
+    }
+  }
+
+  private sendView(ws: WebSocket, rt: GameRuntime, playerId: string, deadlineAt: number | null): void {
+    this.send(ws, { type: 'view', gameId: rt.entry.module.id, view: rt.entry.module.view(rt.state, playerId), deadlineAt });
   }
 
   private async reclaimSeat(ws: WebSocket, att: Attachment, seat: Seat, token: string, now: number): Promise<void> {
@@ -167,34 +285,59 @@ export class RoomDO extends DurableObject<Env> {
   }
 
   /**
-   * Everything due at `now`. PUBLIC so in-runtime tests drive time directly
-   * instead of sleeping. Plan 2c seam: the §6 AlarmQueue EDF multiplexer
-   * replaces this computed sweep (adding the 'phase' timer kind); the
-   * persisted truth it loads from — roster.grace_until + meta.lastActivityAt
-   * — is already in place.
+   * Everything due at `now`, earliest-deadline-first over {phase, grace, ttl}
+   * (§6). PUBLIC so in-runtime tests drive forged time directly. The queue is
+   * DERIVED from persisted truth (meta.phaseKey/deadlineAt, roster.grace_until,
+   * meta.lastActivityAt) — no timers table to drift, and a retry re-derives a
+   * self-consistent queue (C2). Per-timer error isolation lands in Task 8.
    */
   async sweep(now: number): Promise<void> {
     if (this.store.getMeta() === null) return;
-    for (const seat of this.store.listSeats()) {
-      if (seat.graceUntil !== null && seat.graceUntil <= now) {
-        // Lobby semantics: the seat is freed. While a game runs (Plan 2c),
-        // this instead emits a playerLeft event into the game loop.
-        this.removeSeat(seat, now);
-      }
+    for (const t of this.loadQueue().due(now)) {
+      if (t.kind === 'phase') await this.firePhase(t.key, now);
+      else if (t.kind === 'grace') await this.fireGrace(t.key, now);
+      else await this.fireTtl(now);
+      if (this.store.getMeta() === null) return; // ttl wiped the room; alarm already deleted
     }
-    // TTL janitor (§5.4): empty rooms get the short unborn window, otherwise 45
-    // min idle. removeSeat above refreshes lastActivityAt, so a just-emptied
-    // room lives one more unborn window before the wipe.
-    const latest = this.store.getMeta();
-    if (latest !== null) {
-      const ttl = this.store.rosterSize() === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS;
-      if (now - latest.lastActivityAt >= ttl) await this.destroyRoom();
-    }
+    await this.armAlarm();
   }
 
   async alarm(): Promise<void> {
     await this.sweep(Date.now());
-    await this.armAlarm();
+  }
+
+  private loadQueue(): AlarmQueue {
+    const meta = this.store.getMeta();
+    if (meta === null) throw new Error('loadQueue: no room'); // callers guard
+    const seats = this.store.listSeats();
+    return AlarmQueue.fromRoom({
+      phase: meta.deadlineAt !== null && meta.phaseKey !== null ? { key: meta.phaseKey, fireAt: meta.deadlineAt } : null,
+      graces: seats.flatMap((s) => (s.graceUntil === null ? [] : [{ playerId: s.playerId, fireAt: s.graceUntil }])),
+      ttlFireAt: meta.lastActivityAt + (seats.length === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS),
+    });
+  }
+
+  /** Phase deadline -> a server-stamped `deadline` GameEvent. The phaseKey guard makes a stale/duplicate alarm a no-op (§6.2). */
+  private async firePhase(key: string, now: number): Promise<void> {
+    const rt = this.rehydrate();
+    if (rt === null) return;
+    if (rt.entry.module.phaseKey(rt.state) !== key) return; // the phase already advanced
+    await this.applyEvent(rt, { type: 'deadline', at: now });
+  }
+
+  /** Grace expiry: idempotent vs the roster — a retry finds the seat gone or its deadline cleared. */
+  private async fireGrace(playerId: string, now: number): Promise<void> {
+    const seat = this.store.getSeat(playerId);
+    if (seat === null || seat.graceUntil === null || seat.graceUntil > now) return;
+    this.removeSeat(seat, now); // Task 6 upgrades this to seatDeparted (playerLeft game event)
+  }
+
+  /** TTL: re-checks PERSISTED idleness — a grace fired earlier in this sweep refreshed lastActivityAt and saves the room. Destroy is terminal: a retry no-ops on null meta. */
+  private async fireTtl(now: number): Promise<void> {
+    const meta = this.store.getMeta();
+    if (meta === null) return;
+    const ttl = this.store.rosterSize() === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS;
+    if (now - meta.lastActivityAt >= ttl) await this.destroyRoom();
   }
 
   /** Remove a seat + migrate host + tell the lobby. Shared by leave and grace expiry. */
@@ -216,19 +359,10 @@ export class RoomDO extends DurableObject<Env> {
     return null;
   }
 
-  /**
-   * Single alarm = earliest pending deadline (grace deadlines vs the TTL
-   * horizon). Activity does NOT re-arm eagerly: an early alarm just sweeps
-   * nothing and re-arms later — the design §6.2 ttl-branch pattern.
-   */
+  /** Single alarm = the EDF queue's earliest timer (always exists: ttl). */
   private async armAlarm(): Promise<void> {
-    const meta = this.store.getMeta();
-    if (meta === null) { await this.ctx.storage.deleteAlarm(); return; }
-    let earliest = meta.lastActivityAt + (this.store.rosterSize() === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS);
-    for (const seat of this.store.listSeats()) {
-      if (seat.graceUntil !== null && seat.graceUntil < earliest) earliest = seat.graceUntil;
-    }
-    await this.ctx.storage.setAlarm(earliest);
+    if (this.store.getMeta() === null) { await this.ctx.storage.deleteAlarm(); return; }
+    await this.ctx.storage.setAlarm(this.loadQueue().earliest().fireAt);
   }
 
   /**
@@ -243,6 +377,7 @@ export class RoomDO extends DurableObject<Env> {
     this.closeAllSockets(1000, 'room-closed');
     await this.ctx.storage.deleteAlarm();
     await this.ctx.storage.deleteAll();
+    this.game = null; // the in-memory runtime dies with the room
     this.store.migrate();
   }
 
@@ -252,7 +387,7 @@ export class RoomDO extends DurableObject<Env> {
     const players: RoomPlayer[] = this.store.listSeats().map((s) => ({
       id: s.playerId, profile: s.profile, connected: s.connected, isHost: s.isHost,
     }));
-    const lobby: ServerMessage = { type: 'lobby', players, gameId: null };
+    const lobby: ServerMessage = { type: 'lobby', players, gameId: this.store.getMeta()?.gameId ?? null };
     for (const ws of this.ctx.getWebSockets()) {
       if ((ws.deserializeAttachment() as Attachment).state === 'joined') this.send(ws, lobby);
     }

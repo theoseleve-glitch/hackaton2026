@@ -72,11 +72,11 @@ describe('hello flow (§3.3): handshake, profanity boundary, lobby, host gating'
     expect(await expectError(extra)).toBe('ROOM_FULL');
   });
 
-  it('gates startGame on the host flag (UNKNOWN_GAME until the 2c registry)', async () => {
+  it('gates startGame on the host flag; unregistered gameIds are UNKNOWN_GAME', async () => {
     const { socks } = await setupRoom(['Host', 'Guest']);
     sendJson(socks[1]!, { type: 'startGame', gameId: 'tracer' });
     expect(await expectError(socks[1]!)).toBe('NOT_HOST');
-    sendJson(socks[0]!, { type: 'startGame', gameId: 'tracer' });
+    sendJson(socks[0]!, { type: 'startGame', gameId: 'nopes' });
     expect(await expectError(socks[0]!)).toBe('UNKNOWN_GAME');
   });
 
