@@ -19,6 +19,8 @@ export const GRACE_MS = 90_000;
 export const ROOM_TTL_MS = 45 * 60_000;
 /** Created-but-never-joined rooms free their code fast (replaces the design's reserved-code sweep — I3 removed the 'reserved' state). */
 export const UNBORN_TTL_MS = 120_000;
+/** C2: when a timer handler throws, the alarm re-arms no earlier than now + this backoff — one failure must neither starve other timers nor hot-loop the DO. */
+export const ALARM_RETRY_MS = 5_000;
 
 /** Hibernation attachment: IDs ONLY (real limit 16 KiB — review I1). Profiles/host/grace live in SQLite roster, so attachment and roster cannot drift. */
 interface Attachment { cid: string; playerId?: string; state: 'pending' | 'joined' }
@@ -210,7 +212,7 @@ export class RoomDO extends DurableObject<Env> {
     rt.state = after;
     const keyAfter = rt.entry.module.phaseKey(after);
     const deadlineAt = nextPhaseDeadline(keyBefore, keyAfter, rt.entry.module.phaseDurationMs(after), event.at, meta.deadlineAt);
-    this.store.patchMeta({ phaseKey: keyAfter, deadlineAt }); // (2) timer truth persisted
+    this.store.patchMeta({ phaseKey: keyAfter, deadlineAt, lastActivityAt: event.at }); // (2) timer truth + activity bump — the 45-min TTL must never reap a LIVE game
     for (const eff of effects as Effect[]) this.runEffect(eff); // (3) effects
     this.broadcastViews(rt); // (4) per-player redacted views — strictly after the append
     await this.armAlarm(); // (5) the earliest timer may have moved
@@ -298,19 +300,26 @@ export class RoomDO extends DurableObject<Env> {
   /**
    * Everything due at `now`, earliest-deadline-first over {phase, grace, ttl}
    * (§6). PUBLIC so in-runtime tests drive forged time directly. The queue is
-   * DERIVED from persisted truth (meta.phaseKey/deadlineAt, roster.grace_until,
-   * meta.lastActivityAt) — no timers table to drift, and a retry re-derives a
-   * self-consistent queue (C2). Per-timer error isolation lands in Task 8.
+   * DERIVED from persisted truth — a retry re-derives a self-consistent queue
+   * (C2 idempotency). Each timer is error-isolated (review C2): a throw is
+   * caught, the remaining due timers still fire, and the alarm re-arms with a
+   * floor so a past-due broken timer cannot hot-loop the alarm.
    */
   async sweep(now: number): Promise<void> {
     if (this.store.getMeta() === null) return;
+    let failed = false;
     for (const t of this.loadQueue().due(now)) {
-      if (t.kind === 'phase') await this.firePhase(t.key, now);
-      else if (t.kind === 'grace') await this.fireGrace(t.key, now);
-      else await this.fireTtl(now);
+      try {
+        if (t.kind === 'phase') await this.firePhase(t.key, now);
+        else if (t.kind === 'grace') await this.fireGrace(t.key, now);
+        else await this.fireTtl(now);
+      } catch (err) {
+        failed = true;
+        console.error(`[alarm] timer ${t.kind}:${t.key} failed`, err);
+      }
       if (this.store.getMeta() === null) return; // ttl wiped the room; alarm already deleted
     }
-    await this.armAlarm();
+    await this.armAlarm(failed ? now + ALARM_RETRY_MS : 0);
   }
 
   async alarm(): Promise<void> {
@@ -380,10 +389,10 @@ export class RoomDO extends DurableObject<Env> {
     return null;
   }
 
-  /** Single alarm = the EDF queue's earliest timer (always exists: ttl). */
-  private async armAlarm(): Promise<void> {
+  /** Single alarm = the EDF queue's earliest timer (always exists: ttl), floored to notBefore after a failed sweep (C2). */
+  private async armAlarm(notBefore = 0): Promise<void> {
     if (this.store.getMeta() === null) { await this.ctx.storage.deleteAlarm(); return; }
-    await this.ctx.storage.setAlarm(this.loadQueue().earliest().fireAt);
+    await this.ctx.storage.setAlarm(Math.max(this.loadQueue().earliest().fireAt, notBefore));
   }
 
   /**
