@@ -12,6 +12,8 @@ import type { PlayerId } from '@bloop/engine';
  * appear in any non-owner view, and the owner-only echo is always
  * `buffer[viewer] ?? null` — never an indexed lookup that could return a
  * foreign player's value.
+ * The result omits values that never occurred (no zero entries) — zero-seed
+ * separately if a view needs a full roster, as tracer's tallyVotes does.
  */
 export function tally<T extends string>(buffer: Record<PlayerId, T>): Record<T, number> {
   const counts = Object.create(null) as Record<T, number>;

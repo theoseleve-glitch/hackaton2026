@@ -23,4 +23,9 @@ describe('tally', () => {
     expect(t['__proto__']).toBe(2);
     expect(Object.keys(t)).toEqual(['__proto__']);
   });
+
+  it('omits values that never occurred (no zero entries)', () => {
+    const votes = Object.assign(emptyPlayerMap<string>(), { p1: 'p2' });
+    expect(tally(votes)['p1']).toBeUndefined();
+  });
 });

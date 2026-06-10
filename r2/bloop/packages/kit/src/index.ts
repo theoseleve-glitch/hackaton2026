@@ -9,3 +9,4 @@ export {
 export { nextActiveSeat } from './rotation.js';
 export { tally } from './tally.js';
 export { gameOver } from './effects.js';
+export { normalizeText } from './text.js';
