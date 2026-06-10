@@ -16,6 +16,7 @@ const counter: GameModule<CounterState, CounterAction, number> = {
       : { state, effects: [] },
   view: (state) => state.n,
   phaseDurationMs: () => null,
+  phaseKey: () => 'count',
 };
 
 const content: ContentPack = { id: 'none', version: 1, data: {} };

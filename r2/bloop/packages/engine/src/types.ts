@@ -49,4 +49,16 @@ export interface GameModule<S, A, V, C = unknown> {
   view(state: S, viewer: PlayerId): V;
   /** Duration in ms of the current phase, or null when untimed. */
   phaseDurationMs(state: S): number | null;
+  /**
+   * Stable, pure identifier for the current timed-phase *instance*. The shell
+   * re-arms its single alarm iff phaseKey changes across a reduce(): the key
+   * must change whenever a NEW deadline should start (entering a phase, or
+   * re-entering the same phase kind for a new round/turn) and must NOT change
+   * for in-phase progress that keeps the running deadline (e.g. a vote
+   * arriving mid-vote-phase). Deterministic from state only — no clock, no
+   * randomness. Treat the string as logged: it must NEVER embed a secret
+   * (words, roles, ballots, answers). Convention: colon-delimited segments,
+   * e.g. "vote:0", "reveal:2"; the terminal phase is the bare string "over".
+   */
+  phaseKey(state: S): string;
 }

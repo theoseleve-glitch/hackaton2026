@@ -19,6 +19,7 @@ function makeModule(leaky: boolean): GameModule<SpyState, never, unknown> {
         ? { youAre: state.word }
         : { youAre: 'civilian' },
     phaseDurationMs: () => null,
+    phaseKey: () => 'play',
   };
 }
 

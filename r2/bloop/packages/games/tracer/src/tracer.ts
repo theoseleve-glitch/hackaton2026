@@ -140,4 +140,8 @@ export const tracer: GameModule<TracerState, TracerAction, TracerView, TracerCon
     if (state.phase === 'reveal') return state.config.revealMs;
     return null;
   },
+
+  phaseKey(state) {
+    return state.phase === 'over' ? 'over' : `${state.phase}:${state.round}`;
+  },
 };
