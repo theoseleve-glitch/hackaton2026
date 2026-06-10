@@ -86,8 +86,8 @@
 
 | Parameter | Type | Options / Unit | Kit default | Notes |
 |---|---|---|---|---|
-| Suspension holder bushing FF | enum | insert `A`/`B` × orientation grid (sheet diagram) | A, neutral | adjusts arm sweep/kick-up |
-| Suspension holder bushing FR | enum | insert `A`/`B` × orientation grid | A, neutral | |
+| Suspension holder bushing FF | enum | insert `A`/`B` × orientation grid (sheet diagram) | A (manual step 22) | adjusts arm sweep/kick-up |
+| Suspension holder bushing FR | enum | insert `A`/`B` × orientation grid | B (manual step 21) | |
 | Camber | number | deg. | -1° (typ. baseline) | sheet also records turnbuckle exposed mm |
 | Camber link length | number | mm | ~8mm thread exposed | front upper adjust rod 5×38mm |
 | Caster / spacer | number | mm (spacer under hub carrier) | — | "Spacer ___mm" on sheet |
@@ -106,8 +106,8 @@
 
 | Parameter | Type | Options / Unit | Kit default | Notes |
 |---|---|---|---|---|
-| Suspension holder bushing RF | enum | insert `A`/`B`/`C` × orientation grid | B, neutral | anti-squat / toe-in adjust |
-| Suspension holder bushing RR | enum | insert `A`/`B`/`C` × orientation grid | B, neutral | |
+| Suspension holder bushing RF | enum | insert `A`/`B`/`C` × orientation grid | B (manual step 10) | anti-squat / toe-in adjust |
+| Suspension holder bushing RR | enum | insert `A`/`B`/`C` × orientation grid | B (manual step 9) | |
 | Camber | number | deg. | -2° (typ. baseline) | + exposed mm on turnbuckle |
 | Camber link length | number | mm | ~12mm thread exposed | rear upper adjust rod 5×38mm |
 | Wheelbase | number | mm (hub spacer position F/R) | spacer rear of hub | "Wheelbase ___mm" on sheet |
