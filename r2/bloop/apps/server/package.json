@@ -9,9 +9,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bloop/engine": "workspace:*",
+    "@bloop/game-tracer": "workspace:*",
+    "@bloop/kit": "workspace:*",
     "@bloop/protocol": "workspace:*",
     "hono": "^4.12.0",
-    "obscenity": "^0.4.6"
+    "obscenity": "^0.4.6",
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "0.12.21",

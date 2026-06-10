@@ -17,6 +17,15 @@ importers:
 
   apps/server:
     dependencies:
+      '@bloop/engine':
+        specifier: workspace:*
+        version: link:../../packages/engine
+      '@bloop/game-tracer':
+        specifier: workspace:*
+        version: link:../../packages/games/tracer
+      '@bloop/kit':
+        specifier: workspace:*
+        version: link:../../packages/kit
       '@bloop/protocol':
         specifier: workspace:*
         version: link:../../packages/protocol
@@ -26,6 +35,9 @@ importers:
       obscenity:
         specifier: ^0.4.6
         version: 0.4.6
+      zod:
+        specifier: ^4.0.0
+        version: 4.4.3
     devDependencies:
       '@cloudflare/vitest-pool-workers':
         specifier: 0.12.21
