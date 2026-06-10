@@ -42,15 +42,15 @@
 
 ---
 
-## Pillar 3 — AI Race Engineer (V1) — full spec in `04_AI_RACE_ENGINEER_SPEC.md`
+## Pillar 3 — Race Engineer chatbot (V1) — full spec in `04_AI_RACE_ENGINEER_SPEC.md`
 
-- Chat + structured recommendations: *which component to change or modification to try*, given **track, surface, weather, grip, your current setup, your feedback, and your history**.
+- A conversational advisor: *which component to change or modification to try*, given **track, surface, weather, grip, your current setup, your feedback, and your history**.
+- **100% on-device and deterministic — no external API, no LLM (D18).** Our own chatbot: deterministic NLU parses the driver's words ("it pushes mid-corner") into symptom/phase tags, asks the one clarifying question a real engineer would, retrieves from the KB, and renders the card. Works with zero connectivity, $0 per recommendation, instant.
 - **Scope: chassis tuning only** (D13). Engine/needle questions get a hard canned refusal until V2's engine database exists.
-- **Grounded on our curated tuning knowledge base** (D6) — deterministic retrieval over ~80 YAML rules (no vector store); every recommendation cites its cause→effect rule. Out-of-KB questions get an honest refusal, not a guess.
-- **Works offline** (D13): the KB ships on-device; with no signal, a deterministic tag→rule lookup renders a templated recommendation card. The LLM adds prose and multi-factor arbitration when online; queued otherwise.
-- **Output contract**: ONE primary change (+ ≤2 ranked alternatives), each with: what & how much, the mechanism (why), expected effect, how to revert, confidence level.
-- **Learning loop**: after the next run, the user rates the change better/same/worse → stored as `(setup delta, conditions, outcome)` → future advice is personalized per driver and per track.
-- **Safety rails**: every proposed value validated against the chassis template's enums/ranges *outside* the LLM; race-day mode only proposes high-confidence, fast-reversible changes.
+- **Grounded on our curated tuning knowledge base** (D6) — deterministic retrieval over the sourced YAML rules (no vector store); every recommendation cites its cause→effect rule. Out-of-KB questions get an honest refusal, not a guess.
+- **Output contract**: ONE primary change (+ ranked alternatives held in reserve), each with: what & how much, the mechanism (why), expected effect, how to revert, confidence level.
+- **Outcome loop**: the chatbot asks better/same/worse after the run — "worse" → revert + next ranked option; "better" → keep + log to the sheet; stored as `(setup delta, conditions, outcome)` for per-driver/per-track personalization.
+- **Safety rails**: proposed values come from the chassis template's enums/ranges by construction; race-day mode only proposes high-confidence, fast-reversible changes ("stick with what you have" is a valid answer).
 
 ## Pillar 4 — Sharing (V1.0 lean per D10) — full spec in `05_SOCIAL_SPEC.md`
 
@@ -66,7 +66,7 @@
 |---|---|
 | Auth | Email + Apple/Google sign-in. **Local data is never gated behind a live session** — cached user ID; only network calls need a fresh token (test the "airplane mode for 48h" path) |
 | Track database | Create/search tracks: name, GPS, surface type (clay / hard-packed / loam / astro / carpet / grass), indoor/outdoor, photos, notes. Weather backfilled from Open-Meteo's historical API at sync time when captured offline |
-| Monetization | **V1.0 launches free** (D16); AI capped at 5 recs/month server-side. **Pro $3.99/mo / $34.99/yr ships in V1.1** (unlimited AI + learning loop, unlimited cars/setups, full history) |
+| Monetization | **V1.0 launches free** (D16). The advisor is deterministic and on-device (D18) → zero marginal cost → **advisor unlimited even in free tier**. **Pro $3.99/mo / $34.99/yr ships in V1.1**: unlimited cars/setups, full version history, analytics |
 | Store compliance | In-app account deletion, privacy policy, Play data-safety form — built in Phase 2, not bolted on at submission (D17) |
 | Platforms | iOS + Android (Expo/React Native), single codebase. Play closed test (14-day clock) running from week 4 |
 | Languages | i18n wired from the first screen, EN shipped; FR fast-follow = translation, not retrofit. AI answers in the user's locale; KB stays EN (D17) |
@@ -90,4 +90,4 @@ So we never argue about it mid-build:
 
 ## V1 Definition of Done
 
-A racer can: create their car → load the kit setup → drive to a track with no signal → start a session → log a run with lap times and "pushes mid-corner" → get a grounded recommendation **even offline** (deterministic card; richer with signal) → apply it, comment it → mark it "better" → back home, share the setup link and a friend imports it into their app. PDF export fills the manufacturer sheet. Both stores live, free tier with server-metered AI.
+A racer can: create their car → load the kit setup → drive to a track with no signal → start a session → log a run and tell the chatbot "it pushes mid-corner" → get a grounded recommendation **fully offline, no API anywhere** → apply it, comment it → answer "better" → back home, share the setup link and a friend imports it into their app. PDF export fills the manufacturer sheet. Both stores live, advisor free and unlimited.

@@ -4,25 +4,18 @@ import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
-  invalidCitations,
   raceDayFilter,
-  settingUnknownToTemplate,
 } from "./guard.js";
 import { buildOfflineCard, conditionsEcho } from "./offline.js";
-import type { ContextBundle, Recommendation, RecommendationOption } from "./types.js";
-
-export interface EngineerOptions {
-  online?: boolean;
-}
+import type { ContextBundle, Recommendation } from "./types.js";
 
 /**
- * The pipeline of docs/04 §4: scope check → deterministic retrieval →
- * offline card OR LLM → deterministic guard → contract-shaped output.
+ * The pipeline of docs/04 §4 (D18: fully deterministic, no API):
+ * scope check → deterministic retrieval → race-day filter → templated card.
+ * Every card is built directly from retrieved KB rules, so citations are
+ * valid and settings template-known by construction.
  */
-export async function recommend(
-  bundle: ContextBundle,
-  opts: EngineerOptions = {},
-): Promise<Recommendation> {
+export function recommend(bundle: ContextBundle): Recommendation {
   const taxonomy = loadTaxonomy();
   const rules = loadRules();
   const kbErrors = validateRulesAgainstTaxonomy(rules, taxonomy);
@@ -46,7 +39,9 @@ export async function recommend(
 
   if (scored.length === 0) {
     const message =
-      bundle.mode === "race_day" ? DO_NOTHING_MESSAGE : `${OUT_OF_KB_MESSAGE} Closest area to investigate: tires/inserts for this surface — the most common cause when no chassis rule matches.`;
+      bundle.mode === "race_day"
+        ? DO_NOTHING_MESSAGE
+        : `${OUT_OF_KB_MESSAGE} Closest area to investigate: tires/inserts for this surface — the most common cause when no chassis rule matches.`;
     return {
       kind: bundle.mode === "race_day" ? "do_nothing" : "refusal",
       source: "offline_deterministic",
@@ -55,35 +50,7 @@ export async function recommend(
     };
   }
 
-  const retrievedIds = new Set(scored.map(({ rule }) => rule.id));
-
-  // 4. Online path: LLM reasons over ONLY the retrieved rules, then is guard-checked
-  if (opts.online) {
-    const { llmRecommend } = await import("./llm.js");
-    const out = await llmRecommend(bundle, scored.map((s) => s.rule));
-
-    if (out.decision === "do_nothing") {
-      return { kind: "do_nothing", source: "llm", message: out.reason ?? DO_NOTHING_MESSAGE, conditions_echo: echo };
-    }
-    if (out.decision === "refuse_out_of_kb" || !out.primary) {
-      return { kind: "refusal", source: "llm", message: out.reason ?? OUT_OF_KB_MESSAGE, conditions_echo: echo };
-    }
-
-    const guardProblems = guardCheck([out.primary, ...out.alternatives], retrievedIds, template);
-    if (guardProblems.length === 0) {
-      return {
-        kind: "recommendation",
-        source: "llm",
-        primary: out.primary,
-        alternatives: out.alternatives.slice(0, 2),
-        conditions_echo: echo,
-      };
-    }
-    // Guard violation: never ship an unverifiable answer — fall back to the deterministic card
-    console.error(`[guard] LLM output rejected (${guardProblems.join("; ")}) — falling back to offline card`);
-  }
-
-  // 5. Offline deterministic card
+  // 4. Templated card from the top-ranked rules (distinct settings)
   const card = buildOfflineCard(scored, bundle);
   if (!card) {
     return { kind: "refusal", source: "offline_deterministic", message: OUT_OF_KB_MESSAGE, conditions_echo: echo };
@@ -95,24 +62,4 @@ export async function recommend(
     alternatives: card.alternatives,
     conditions_echo: echo,
   };
-}
-
-function guardCheck(
-  options: RecommendationOption[],
-  retrievedIds: Set<string>,
-  template: ReturnType<typeof loadChassisTemplate>,
-): string[] {
-  const problems: string[] = [];
-  for (const opt of options) {
-    if (opt.citations.length === 0) problems.push(`${opt.setting}: no citations`);
-    const bad = invalidCitations(opt, retrievedIds);
-    if (bad.length > 0) problems.push(`${opt.setting}: cites non-retrieved rules ${bad.join(",")}`);
-    if (settingUnknownToTemplate(opt.setting, template)) {
-      problems.push(`${opt.setting}: setting not on chassis template ${template.template_id}`);
-    }
-  }
-  const settings = options.map((o) => o.setting);
-  if (new Set(settings).size !== settings.length) problems.push("duplicate settings across options");
-  if (options.length > 3) problems.push("more than 1 primary + 2 alternatives");
-  return problems;
 }

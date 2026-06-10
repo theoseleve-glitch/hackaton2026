@@ -68,7 +68,7 @@ That feedback loop — per-driver, per-track, per-conditions memory — is somet
 - [ ] Weather auto-capture per session (Open-Meteo: temp, humidity, rain, wind) + manual track temp / grip level
 - [ ] PDF export on the manufacturer's sheet layout
 - [ ] Setup sharing (link + public/private), import a shared setup into your garage
-- [ ] Free tier with server-metered AI cap (subscriptions move to V1.1 — D16)
+- [ ] Free tier with **unlimited advisor** (deterministic, $0/rec — D18; subscriptions move to V1.1 — D16)
 
 ### V2 — moat building (3–6 months)
 - [ ] Community track pages: "setups run here, in these conditions"
@@ -97,7 +97,7 @@ That feedback loop — per-driver, per-track, per-conditions memory — is somet
 
 ### How we keep it grounded (no hallucinated advice)
 - **Tuning knowledge base**: a structured cause→effect graph of RC tuning (e.g., "thicker front diff oil → more on-power steering, less off-power steering"), curated by William. **We already have a head start: the SETUP_RC nomenclature knowledge base (Kyosho Inferno MP11) gets generalized into this.**
-- AI (Claude via API) is **grounded on this KB with RAG** — it reasons over our verified tuning facts, current conditions, and the user's history. It does not free-associate from training data.
+- The advisor is **our own deterministic engine over this KB** (D18) — pure-function retrieval over verified tuning facts, current conditions, and the user's history. No model anywhere, so nothing can free-associate.
 - Every recommendation cites which KB rules it used → auditable, and the KB improves when advice is wrong.
 
 ### Learning loop
@@ -138,7 +138,7 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 | Backend | **Next.js (App Router) API on Vercel** | Zero-ops, fast to ship, easy cron (weather snapshots), good AI SDK story. |
 | Database | **Neon Postgres** (Vercel Marketplace) | Serverless Postgres, branchable for dev. |
 | Auth | **Clerk** | Apple/Google/email sign-in solved in a day. |
-| AI | **Claude API (latest Sonnet-tier) via Vercel AI SDK / AI Gateway** | Best reasoning for the engineer persona; structured output for the recommendation contract; KB grounding via RAG. |
+| Advisor | **None — our own deterministic engine** (`packages/engine`: TypeScript NLU + dialogue state machine + KB retrieval), runs in-app | D18: no API, no key, no latency, no cost, fully offline. The LLM variant is preserved in git history (`d8a8b81`) as a possible V2 premium layer. |
 | Weather | **Open-Meteo** | Free, no key, hourly forecast + history. |
 | Payments | **RevenueCat** | Cross-platform subscriptions without store-API pain. |
 | File storage | **Vercel Blob** | Setup photos, exported PDFs. |
@@ -155,7 +155,7 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 ### Phase 0 — Validate the bet (Weeks 1–2)
 | William | Théo |
 |---|---|
-| ⚠️ **Name check (blocker)**: racelab.app collision — clear it or switch to backup name before any more branding | **Throwaway AI prototype** (a script, not an app): MP11 template + first 30 KB rules + hardcoded context bundle → Claude structured output |
+| ⚠️ **Name check (blocker)**: racelab.app collision — clear it or switch to backup name before any more branding | ✅ **DONE — advisor prototype built** (`packages/engine`): 63 KB rules (HUDY-sourced), deterministic NLU + chatbot, eval 10/10 + NLU 19/19 + dialogue tests green, zero APIs (D18) |
 | First **30 KB rules** + the 5-scenario So Dialed benchmark (install Premium, feed it real scenarios, save answers) | Eval harness (runs the scenario set against the prototype; lives on in CI) |
 | Recruit **2 club fast-guys** as eval reviewers / founding creators | Repo + Expo skeleton; **create Apple & Google developer accounts** (lead times start now — D17) |
 | Design system + core screens (sheet editor first) | Schema-driven sheet renderer PoC (JSON template → form UI) |
@@ -174,7 +174,7 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 ### Phase 2 — AI in the app + compliance (Weeks 6–8)
 | William | Théo |
 |---|---|
-| Eval pass with the 2 club reviewers; AI advice UX polish (present / accept / revert / rate) | AI pipeline in-app: deterministic retrieval + **on-device offline card path** + server LLM path + guard layer (template-enum validator) + learning-loop storage |
+| Eval pass with the 2 club reviewers; advisor UX polish (present / accept / revert / rate) | Port `packages/engine` into the app (it's plain TypeScript — no server work): chatbot screen, learning-loop storage, NLU lexicon growth from beta transcripts |
 | Chassis templates 5–8 | Session mode complete (runs, laps, tags), computed diff view, weather backfill |
 | Beta recruitment (local clubs, FB groups) — target 20 testers | Auth (local data never session-gated), share link (publish snapshot → static PDF page), import/fork, **account deletion + privacy policy + data-safety form**, analytics/crash |
 
@@ -183,7 +183,7 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 ### Phase 3 — Launch (Weeks 9–10)
 | William | Théo |
 |---|---|
-| Store listings, 3 demo videos ("RaceLab fixed my mid-corner push"), seed content: our raced setups + founders' sheets published | Free-tier AI metering server-side, store submissions (expect review iterations — UGC + AI advice), crash triage, PDF export (MP11 acroform + generic layout) |
+| Store listings, 3 demo videos ("RaceLab fixed my mid-corner push"), seed content: our raced setups + founders' sheets published | Store submissions (expect review iterations — UGC), crash triage, PDF export (MP11 acroform + generic layout) |
 
 **Gate D: 20 active beta users, crash-free > 99%, Play 14-day test complete → public launch. V1.1 (~2 weeks later): Pro subscription (RevenueCat), props/comments+moderation, profiles/follows, faithful PDF maps for remaining chassis.**
 
@@ -191,13 +191,13 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 
 ## 9. Monetization
 
-**V1.0 launches free** with the AI capped at 5 recommendations/month (server-metered — needed for cost control anyway); **Pro ships in V1.1** ~2 weeks post-launch when there are users to convert (D16 — IAP out of the launch-review critical path). Target model:
+**V1.0 launches free with an unlimited advisor** — D18 makes each recommendation cost $0, so there is nothing to meter; the advisor becomes the acquisition hook. **Pro ships in V1.1** ~2 weeks post-launch when there are users to convert (D16 — IAP out of the launch-review critical path) and sells unlimited cars/setups, full version history and analytics. Target model:
 
 | | **Free** | **Pro — $3.99/mo or $34.99/yr** |
 |---|---|---|
 | Cars | 2 | Unlimited |
 | Setups | 10 | Unlimited |
-| AI Race Engineer | 5 recommendations/month | Unlimited + learning loop + weather-aware |
+| Race Engineer chatbot | **Unlimited** (deterministic, $0/rec — D18) | Unlimited + learning loop + per-track history |
 | Setup diff & history | Last 3 versions | Full timeline |
 | PDF export | ✅ | ✅ |
 | Sessions/race log | ✅ | ✅ + analytics |
@@ -240,7 +240,7 @@ Rationale: free tier is genuinely useful (better retention than So Dialed's), bu
 
 **Théo:**
 1. Read `docs/` + challenge the Decisions log (D1–D17) — it's cheap now
-2. Throwaway AI prototype + eval harness (Gate A is yours to make fail-fast)
+2. ✅ Done: advisor prototype + eval harness live in `packages/engine` (`npm test`) — your job is to break it: feed it real pit-lane phrasings and file NLU gaps
 3. Create Apple + Google developer accounts (lead times start immediately)
 4. Expo skeleton + schema-driven renderer PoC
 

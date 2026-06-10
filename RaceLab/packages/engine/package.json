@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "RaceLab AI Race Engineer — KB-grounded chassis tuning recommendations (Gate A prototype)",
+  "description": "RaceLab Race Engineer — deterministic, on-device, no-API chassis tuning chatbot (D18)",
   "scripts": {
+    "chat": "tsx src/cli-chat.ts",
     "cli": "tsx src/cli.ts",
     "eval": "tsx src/eval.ts",
-    "eval:online": "tsx src/eval.ts --online",
+    "test": "tsx src/test-nlu.ts && tsx src/test-chat.ts && tsx src/eval.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.74.0",
     "yaml": "^2.6.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@types/node": "^24.0.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.7.0",
-    "@types/node": "^24.0.0"
+    "typescript": "^5.7.0"
   }
 }

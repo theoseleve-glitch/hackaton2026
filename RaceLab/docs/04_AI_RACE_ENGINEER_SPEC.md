@@ -1,6 +1,6 @@
-# 04 — AI Race Engineer · Spec
+# 04 — Race Engineer Chatbot · Spec
 
-> The #1 differentiator. This spec defines the V1 behavior (core, committed) and names which parts are exploratory. Mantra: **grounded or silent, one change at a time, learns from every run.**
+> The #1 differentiator. This spec defines the V1 behavior (core, committed) and names which parts are exploratory. Mantra: **grounded or silent, one change at a time, learns from every run.** Per **D18** the whole advisor is **deterministic, on-device, and API-free** — built and passing tests in `packages/engine`.
 
 ## 1. What it is / is not
 
@@ -8,7 +8,7 @@
 |---|---|
 | A race engineer that proposes **one concrete change** and explains the mechanism | A generic chatbot that chats about RC |
 | **Condition-aware**: track, surface, weather, grip, time of day | Advice in a vacuum (So Dialed's model) |
-| **Grounded** on a curated tuning KB, citing its rules | Freeform LLM knowledge ("trust me bro") |
+| **Our own deterministic dialogue over a curated KB**, citing its rules | An LLM, an API dependency, or freeform model knowledge ("trust me bro") |
 | **Learning**: closes the loop on every recommendation | Stateless Q&A |
 | Humble: confidence levels, refusals, "stick with what you have" | Always-has-an-answer |
 
@@ -57,33 +57,34 @@ Targets: **~80 rules** for V1, 1/8 offroad first (D14): diffs, shock oil/pistons
 
 ## 4. Pipeline (Théo owns)
 
+**One path, fully on-device, fully deterministic (D18). No API, no model, no server.**
+
 ```
-request → context bundle assembly (local data + weather, cached/backfilled)
-        → symptom mapping (tags → KB symptom nodes, deterministic)
-        → retrieval = PURE FUNCTION over the YAML KB (symptom × setting-space ×
-          conditions × chassis scope filter, capped at N rules) — NO vector store,
-          NO embeddings: ~80 structured rules don't need semantic search (D13)
-        → engine-scope check: engine/needle symptom → canned refusal, stop here (D13)
-        ├─ OFFLINE PATH (no signal — the default at most tracks):
-        │    top matched rule(s) → templated recommendation card rendered on-device
-        │    (each rule already carries effects, magnitude_guidance,
-        │     reversal_cost_minutes, confidence, sources). $0, instant.
-        │    Request queued for LLM enrichment when signal returns.
-        └─ ONLINE PATH:
-             LLM call (Claude, structured output): reason over ONLY retrieved rules
-             + bundle + history → multi-factor arbitration, tailored prose
-        → guard layer (deterministic, post-LLM):
-            · proposed value must exist in the chassis template's enum options /
-              numeric range (the template IS the bounds database — D13)
-            · race-day mode: reject low-confidence or slow-to-reverse outputs
-              → "stick with what you have"
-        → response rendered with citations + confidence + revert info
-        → outcome capture on next run (better/same/worse) → history store
+driver text → deterministic NLU (pit-lane vocabulary → symptom × phase tags
+              + condition hints; longest/most-specific patterns first so
+              "loose under braking" ≠ "loose on power")
+            → engine-scope check: needle/plug/mixture keywords → canned refusal (D13)
+            → dialogue state machine:
+                · no symptom found → re-prompt with examples
+                · symptom but no phase → ask the ONE clarifying question
+                  a real engineer asks ("when does it do that?")
+            → retrieval = PURE FUNCTION over the YAML KB (symptom × phase ×
+              conditions × chassis scope; counter-indicated rules excluded;
+              NO vector store, NO embeddings)
+            → race-day filter: only high-confidence + fast-reversible rules
+              survive; empty result → "stick with what you have"
+            → templated card from the top rule (each rule already carries
+              effects, magnitude_guidance, reversal_cost_minutes, confidence,
+              sources — the card is the rule, rendered). $0, instant, offline.
+            → outcome loop: better → keep + log to sheet · worse/same →
+              revert + next ranked option (distinct setting), until the
+              list is dry → "look at tires"
+            → every (setup delta, conditions, outcome) stored → history store
 ```
 
-Notes: the LLM **cannot cite a rule that wasn't retrieved** (citation IDs validated against the retrieval set). If retrieval returns nothing relevant → honest refusal template: *"I don't have a verified rule for that. Closest thing I know: …"*. LLM calls are server-side (key security, usage metering for the free-tier cap); the deterministic offline path runs entirely on-device against the bundled KB.
+Notes: citations are valid **by construction** — the card is rendered from the retrieved rule itself, so there is nothing to hallucinate and nothing to guard post-hoc. If retrieval returns nothing → honest refusal: *"I don't have a verified rule for that — check tires/inserts for this surface first."* The implementation lives in `packages/engine` (`nlu.ts`, `chat.ts`, `retrieval.ts`, `guard.ts`, `offline.ts`). An LLM-backed variant existed and was removed per D18 (git `d8a8b81`) — a possible V2 premium layer for richer prose, never a dependency.
 
-## 5. Output contract (structured, enforced via schema)
+## 5. Output contract (produced directly from KB rule fields — D18)
 
 ```json
 {
@@ -102,7 +103,7 @@ Notes: the LLM **cannot cite a rule that wasn't retrieved** (citation IDs valida
 }
 ```
 
-Hard rules: exactly **one primary**. ≤2 alternatives. `do_nothing_option` replaces everything when confidence is insufficient on race day. Chat is available around the recommendation (follow-up questions, "explain like I'm new"), but advice always lands in this shape.
+Hard rules: exactly **one primary**; ranked alternatives are held in reserve and surfaced one at a time by the outcome loop. `do_nothing_option` replaces everything when confidence is insufficient on race day. The dialogue around the card (clarifying questions, mode switches, outcome capture) is the deterministic state machine in `packages/engine/src/chat.ts` — advice always lands in this shape.
 
 ## 6. Learning loop
 
@@ -127,7 +128,7 @@ Used three ways: (1) injected into future prompts for this driver/track — *"la
 
 ## 9. Cost & free tier
 
-Sonnet-tier model via AI Gateway; context bundle is compact (structured sheet + retrieved rules ≈ small). Estimate ≪ $0.02/recommendation → Pro at $3.99/mo is comfortably margin-positive even at heavy use; free tier capped at 5 recs/month (metered server-side).
+**$0 per recommendation, by construction (D18).** No model, no API key, no server round-trip, no metering infrastructure. Consequence for monetization: the advisor is **unlimited in the free tier** — it becomes the acquisition hook; Pro sells unlimited cars/setups, full version history and analytics instead of advice quota.
 
 ## 10. Cold start (no learning data on day 1)
 

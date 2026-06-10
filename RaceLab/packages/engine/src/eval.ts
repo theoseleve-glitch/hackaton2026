@@ -15,12 +15,6 @@ interface Scenario {
   bundle: ContextBundle;
 }
 
-const online = process.argv.includes("--online");
-if (online && !process.env.ANTHROPIC_API_KEY) {
-  console.error("--online requires ANTHROPIC_API_KEY");
-  process.exit(1);
-}
-
 const scenariosDir = join(dirname(fileURLToPath(import.meta.url)), "..", "scenarios");
 const files = readdirSync(scenariosDir).filter((f) => f.endsWith(".json")).sort();
 const kbIds = new Set(loadRules().map((r) => r.id));
@@ -33,7 +27,7 @@ for (const file of files) {
   const problems: string[] = [];
   let rec: Recommendation;
   try {
-    rec = await recommend(scenario.bundle, { online });
+    rec = recommend(scenario.bundle);
   } catch (err) {
     failures.push(`✗ ${file}: threw ${(err as Error).message}`);
     console.log(`✗ ${scenario.name} — THREW`);
@@ -74,5 +68,5 @@ for (const file of files) {
   }
 }
 
-console.log(`\n${passed}/${files.length} scenarios passed (${online ? "ONLINE LLM" : "OFFLINE deterministic"} path)`);
+console.log(`\n${passed}/${files.length} scenarios passed (deterministic engine, no API)`);
 if (failures.length > 0) process.exit(1);

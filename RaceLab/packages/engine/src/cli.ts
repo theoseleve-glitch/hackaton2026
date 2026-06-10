@@ -2,18 +2,15 @@ import { readFileSync } from "node:fs";
 import { recommend } from "./engineer.js";
 import type { ContextBundle, Recommendation, RecommendationOption } from "./types.js";
 
-const args = process.argv.slice(2);
-const online = args.includes("--online");
-const file = args.find((a) => !a.startsWith("--"));
+const file = process.argv.slice(2).find((a) => !a.startsWith("--"));
 
 if (!file) {
-  console.error("Usage: npm run cli -- <scenario.json> [--online]");
+  console.error("Usage: npm run cli -- <scenario.json>");
   process.exit(1);
 }
 
 const bundle = JSON.parse(readFileSync(file, "utf8")).bundle as ContextBundle;
-const rec = await recommend(bundle, { online });
-render(rec);
+render(recommend(bundle));
 
 function render(rec: Recommendation): void {
   console.log(`\n🏁 RaceLab Race Engineer  [${rec.source}]`);
