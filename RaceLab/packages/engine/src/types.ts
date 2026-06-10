@@ -68,12 +68,17 @@ export interface ContextBundle {
     surface: string;
     grip: "green" | "medium" | "high" | "blue_groove";
     conditions: string[]; // taxonomy condition tags, e.g. ["low_grip","dusty","bumpy"]
+    evolution?: "improving" | "stable" | "degrading"; // grip trend over the day
   };
   weather?: {
     air_temp_c?: number;
     humidity_pct?: number;
     wind_kmh?: number;
     rain_risk_pct?: number;
+  };
+  tyres?: {
+    wear?: "new" | "light" | "medium" | "worn";
+    run_count?: number;
   };
   feedback: { tags: FeedbackTag[]; text?: string };
   mode: "practice" | "race_day";

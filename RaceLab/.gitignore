@@ -6,3 +6,4 @@ node_modules/
 # personal files accidentally dropped in the project folder
 TOEIC*.pdf
 packages/pdf/out/
+.verify/

@@ -3,6 +3,9 @@
  *  the app unchanged. Feed it packages/kb/bundle.json as KBData. */
 export { RaceEngineerChat } from "./chat";
 export { recommend } from "./engineer";
+export { buildReport } from "./report";
+export type { EngineerReport } from "./report";
+export { drivingTips } from "./driving-tips";
 export { parseFeedback } from "./nlu";
 export { assertValidKBData, getTemplate, validateRulesAgainstTaxonomy } from "./data";
 export type { KBData } from "./data";

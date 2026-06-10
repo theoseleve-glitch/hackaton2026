@@ -3,22 +3,28 @@ import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetEditorScreen } from "./src/screens/SheetEditorScreen";
 import { EngineerScreen } from "./src/screens/EngineerScreen";
+import { RunsScreen } from "./src/screens/RunsScreen";
+import { CompareScreen } from "./src/screens/CompareScreen";
 import { useSheets } from "./src/store";
+import { useLogbook } from "./src/logstore";
 import { colors } from "./src/theme";
 
-type Tab = "garage" | "sheet" | "engineer";
+type Tab = "garage" | "sheet" | "runs" | "compare" | "engineer";
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: "garage", label: "Garage", icon: "🏠" },
   { id: "sheet", label: "Sheet", icon: "📋" },
+  { id: "runs", label: "Runs", icon: "🏁" },
+  { id: "compare", label: "Compare", icon: "⚖️" },
   { id: "engineer", label: "Engineer", icon: "🔧" },
 ];
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("garage");
   const { state, update } = useSheets();
+  const { logbook, updateLogbook } = useLogbook();
 
-  if (!state) {
+  if (!state || !logbook) {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
         <ActivityIndicator color={colors.accent} />
@@ -46,6 +52,10 @@ export default function App() {
           />
         )}
         {tab === "sheet" && <SheetEditorScreen state={state} update={update} />}
+        {tab === "runs" && (
+          <RunsScreen sheets={state} logbook={logbook} updateLogbook={updateLogbook} />
+        )}
+        {tab === "compare" && <CompareScreen sheets={state} logbook={logbook} />}
         {tab === "engineer" && <EngineerScreen setup={state.draft} />}
       </View>
 
