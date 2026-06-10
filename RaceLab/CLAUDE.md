@@ -42,6 +42,7 @@ Answer three questions and act on at least one:
 
 ## Current state (update this section when it changes)
 - ✅ Concept docs, optimized plan, 63-rule KB (HUDY-sourced), deterministic chatbot (all tests green), MP11 chassis spec + template + pdf-map, PDF fill PoC verified, naming decision (GripLab, pending William sign-off).
-- ✅ Engine refactored platform-agnostic (KBData injected, `npm run bundle` → kb/bundle.json). **Expo MVP app live in `apps/mobile`** (SDK 56): garage / schema-driven sheet editor (rendered from template JSON) / engineer chat wired to the engine — typecheck + Metro web export green. Run: `cd apps/mobile && npx expo start` (phone via Expo Go, or `--web`).
-- ⏭ Next build: device run + UI polish (William's DA), setup persistence (AsyncStorage) + versioning, session log screen, more chassis extractions, NLU lexicon growth, So Dialed benchmark (needs a phone).
+- ✅ Engine refactored platform-agnostic (KBData injected, `npm run bundle` → kb/bundle.json). **Expo MVP app live in `apps/mobile`** (SDK 56): garage / schema-driven sheet editor / engineer chat — typecheck + Metro web export green. Run: `cd apps/mobile && npx expo start` (phone via Expo Go, or `--web`).
+- ✅ **Versioned sheets shipped (D21, `packages/sheets`, 31 tests):** AsyncStorage persistence, immutable lineage, draft-vs-base orange highlights, "vs" compare, starred pins, locked kit baseline + diff-vs-kit. So Dialed teardown archived (`docs/06`), D20 positioning logged.
+- ⏭ Next build: device run + UI polish (William's DA), session log screen + outcome capture wired to the chatbot, more chassis extractions, NLU lexicon growth, So Dialed benchmark on a phone (eval scenarios vs Arcy).
 - 🔒 Blocked on humans: Théo onboarding + velocity calibration, dev accounts, brand sign-off.

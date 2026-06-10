@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors, radius } from "../theme";
 import { MP11, label } from "../kb";
+import {
+  diffVersions,
+  diffVsKit,
+  draftDiff,
+  loadVersion,
+  renameDraft,
+  saveVersion,
+  setValue,
+  toggleStar,
+} from "../../../../packages/sheets/src";
+import type { ChangedField, SheetsState } from "../../../../packages/sheets/src";
 
 /**
- * Schema-driven sheet editor: the form below is 100% rendered from the
- * chassis template JSON (D5) — adding a chassis is data, not code.
+ * Schema-driven sheet editor over the D21 model: the form is rendered from
+ * the chassis template JSON; the draft diffs live against its base version
+ * (changed fields highlighted), starred settings pin to the top, the locked
+ * kit baseline is one tap away.
  */
 
 type Setup = Record<string, string | number>;
+type Mode = "editor" | "versions" | "kit" | { compare: { a: string; b: string } };
 
 interface Props {
-  setup: Setup;
-  onChange: (id: string, value: string | number) => void;
+  state: SheetsState;
+  update: (fn: (prev: SheetsState) => SheetsState) => void;
 }
 
 const SECTIONS: { title: string; match: (id: string) => boolean }[] = [
@@ -35,12 +49,58 @@ interface FieldDef {
   step?: number;
 }
 
-export function SheetEditorScreen({ setup, onChange }: Props) {
+export function SheetEditorScreen({ state, update }: Props) {
+  const [mode, setMode] = useState<Mode>("editor");
+  const changes = useMemo(() => draftDiff(state), [state]);
+  const changedMap = useMemo(
+    () => new Map(changes.map((c) => [c.field, c.from])),
+    [changes],
+  );
+
+  if (mode === "versions") {
+    return (
+      <VersionsView
+        state={state}
+        onBack={() => setMode("editor")}
+        onLoad={(id) => {
+          update((prev) => loadVersion(prev, id));
+          setMode("editor");
+        }}
+        onCompare={(a, b) => setMode({ compare: { a, b } })}
+      />
+    );
+  }
+  if (mode === "kit") {
+    return (
+      <DiffView
+        title="Draft vs kit setup"
+        changes={diffVsKit(state)}
+        fromLabel="kit"
+        toLabel={state.draft_name}
+        onBack={() => setMode("editor")}
+      />
+    );
+  }
+  if (typeof mode === "object") {
+    const a = state.versions.find((v) => v.id === mode.compare.a);
+    const b = state.versions.find((v) => v.id === mode.compare.b);
+    return (
+      <DiffView
+        title="Compare versions"
+        changes={diffVersions(state, mode.compare.a, mode.compare.b)}
+        fromLabel={a?.name ?? "?"}
+        toLabel={b?.name ?? "?"}
+        onBack={() => setMode("versions")}
+      />
+    );
+  }
+
   const fields = Object.entries(MP11.fields).filter(
     ([, f]) => (f as FieldDef).type !== "alias" && (f as FieldDef).type !== "derived",
   ) as [string, FieldDef][];
 
-  const used = new Set<string>();
+  const starredFields = fields.filter(([id]) => state.starred.includes(id));
+  const used = new Set<string>(state.starred);
   const grouped = SECTIONS.map((s) => ({
     title: s.title,
     fields: fields.filter(([id]) => {
@@ -51,18 +111,80 @@ export function SheetEditorScreen({ setup, onChange }: Props) {
   }));
   grouped.push({ title: "Other", fields: fields.filter(([id]) => !used.has(id)) });
 
+  const onChange = (id: string, value: string | number) =>
+    update((prev) => setValue(prev, id, value));
+  const onStar = (id: string) => update((prev) => toggleStar(prev, id));
+
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
-      <Text style={styles.h1}>
-        {MP11.model} <Text style={styles.h1Sub}>setup sheet</Text>
+      <TextInput
+        style={styles.nameInput}
+        value={state.draft_name}
+        onChangeText={(t) => update((prev) => renameDraft(prev, t))}
+        placeholder="Setup name"
+        placeholderTextColor={colors.sub}
+      />
+      <Text style={styles.baseInfo}>
+        based on “{state.versions.find((v) => v.id === state.draft_base_id)?.name ?? "?"}”
+        {changes.length > 0 ? (
+          <Text style={{ color: colors.accent }}>  ·  {changes.length} change{changes.length > 1 ? "s" : ""}</Text>
+        ) : (
+          "  ·  no changes"
+        )}
       </Text>
+
+      <View style={styles.actions}>
+        <Pressable
+          style={[styles.action, changes.length === 0 && styles.actionDisabled]}
+          disabled={changes.length === 0}
+          onPress={() => update((prev) => saveVersion(prev, new Date().toISOString()).state)}
+        >
+          <Text style={styles.actionText}>💾 Save version</Text>
+        </Pressable>
+        <Pressable style={styles.action} onPress={() => setMode("versions")}>
+          <Text style={styles.actionText}>🗂 Versions ({state.versions.length})</Text>
+        </Pressable>
+        <Pressable style={styles.action} onPress={() => setMode("kit")}>
+          <Text style={styles.actionText}>vs kit</Text>
+        </Pressable>
+      </View>
+
+      {starredFields.length > 0 && (
+        <View>
+          <Text style={styles.section}>★ Starred</Text>
+          {starredFields.map(([id, field]) => (
+            <Field
+              key={id}
+              id={id}
+              field={field}
+              value={state.draft[id]}
+              was={changedMap.has(id) ? changedMap.get(id) : undefined}
+              changed={changedMap.has(id)}
+              starred
+              onChange={onChange}
+              onStar={onStar}
+            />
+          ))}
+        </View>
+      )}
+
       {grouped.map(
         (section) =>
           section.fields.length > 0 && (
             <View key={section.title}>
               <Text style={styles.section}>{section.title}</Text>
               {section.fields.map(([id, field]) => (
-                <Field key={id} id={id} field={field} value={setup[id]} onChange={onChange} />
+                <Field
+                  key={id}
+                  id={id}
+                  field={field}
+                  value={state.draft[id]}
+                  was={changedMap.has(id) ? changedMap.get(id) : undefined}
+                  changed={changedMap.has(id)}
+                  starred={false}
+                  onChange={onChange}
+                  onStar={onStar}
+                />
               ))}
             </View>
           ),
@@ -71,23 +193,146 @@ export function SheetEditorScreen({ setup, onChange }: Props) {
   );
 }
 
+function VersionsView({
+  state,
+  onBack,
+  onLoad,
+  onCompare,
+}: {
+  state: SheetsState;
+  onBack: () => void;
+  onLoad: (id: string) => void;
+  onCompare: (a: string, b: string) => void;
+}) {
+  const [pick, setPick] = useState<string | null>(null);
+  const ordered = [...state.versions].reverse();
+  return (
+    <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
+      <BackBar title="Versions" onBack={onBack} />
+      <Text style={styles.hint}>
+        {pick ? "Now tap the version to compare it against." : "Tap “vs” on a version, then tap another, to compare. Load branches your draft from that version."}
+      </Text>
+      {ordered.map((v) => {
+        const parent = state.versions.find((p) => p.id === v.parent_id);
+        const nChanges = v.parent_id ? diffVersions(state, v.parent_id, v.id).length : 0;
+        const isBase = v.id === state.draft_base_id;
+        return (
+          <Pressable
+            key={v.id}
+            style={[styles.versionCard, pick === v.id && styles.versionPicked]}
+            onPress={() => {
+              if (pick && pick !== v.id) {
+                onCompare(pick, v.id);
+                setPick(null);
+              }
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={styles.versionName}>
+                {v.locked ? "🔒 " : ""}
+                {v.name}
+                {isBase ? <Text style={{ color: colors.accent }}>  · draft base</Text> : null}
+              </Text>
+              <Text style={styles.versionMeta}>
+                {new Date(v.created_at).toLocaleString()}
+                {parent ? `  ·  +${nChanges} vs “${parent.name}”` : "  ·  baseline"}
+              </Text>
+            </View>
+            <Pressable style={styles.smallBtn} onPress={() => onLoad(v.id)}>
+              <Text style={styles.smallBtnText}>load</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.smallBtn, pick === v.id && styles.smallBtnActive]}
+              onPress={() => setPick(pick === v.id ? null : v.id)}
+            >
+              <Text style={[styles.smallBtnText, pick === v.id && { color: "#fff" }]}>vs</Text>
+            </Pressable>
+          </Pressable>
+        );
+      })}
+    </ScrollView>
+  );
+}
+
+function DiffView({
+  title,
+  changes,
+  fromLabel,
+  toLabel,
+  onBack,
+}: {
+  title: string;
+  changes: ChangedField[];
+  fromLabel: string;
+  toLabel: string;
+  onBack: () => void;
+}) {
+  return (
+    <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
+      <BackBar title={title} onBack={onBack} />
+      <Text style={styles.hint}>
+        “{fromLabel}” → “{toLabel}” · {changes.length} difference{changes.length === 1 ? "" : "s"}
+      </Text>
+      {changes.length === 0 && <Text style={styles.versionMeta}>Identical setups.</Text>}
+      {changes.map((c) => (
+        <View key={c.field} style={styles.diffRow}>
+          <Text style={styles.diffField}>{label(c.field)}</Text>
+          <Text style={styles.diffValues}>
+            <Text style={{ color: colors.sub }}>{fmt(c.from)}</Text>
+            <Text style={{ color: colors.accent }}>  →  {fmt(c.to)}</Text>
+          </Text>
+        </View>
+      ))}
+    </ScrollView>
+  );
+}
+
+function BackBar({ title, onBack }: { title: string; onBack: () => void }) {
+  return (
+    <View style={styles.backBar}>
+      <Pressable onPress={onBack} hitSlop={10}>
+        <Text style={styles.backText}>‹ back</Text>
+      </Pressable>
+      <Text style={styles.backTitle}>{title}</Text>
+    </View>
+  );
+}
+
+function fmt(v: string | number | undefined): string {
+  return v === undefined ? "—" : String(v);
+}
+
 function Field({
   id,
   field,
   value,
+  was,
+  changed,
+  starred,
   onChange,
+  onStar,
 }: {
   id: string;
   field: FieldDef;
   value: string | number | undefined;
+  was: string | number | undefined;
+  changed: boolean;
+  starred: boolean;
   onChange: (id: string, value: string | number) => void;
+  onStar: (id: string) => void;
 }) {
   return (
-    <View style={styles.field}>
-      <Text style={styles.label}>
-        {label(id)}
-        {field.unit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
-      </Text>
+    <View style={[styles.field, changed && styles.fieldChanged]}>
+      <View style={styles.labelRow}>
+        <Text style={styles.label}>
+          {label(id)}
+          {field.unit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
+          {changed ? <Text style={styles.was}>   was {fmt(was)}</Text> : null}
+        </Text>
+        <Pressable onPress={() => onStar(id)} hitSlop={8}>
+          <Text style={[styles.star, starred && styles.starOn]}>{starred ? "★" : "☆"}</Text>
+        </Pressable>
+      </View>
       {field.options ? (
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.chips}>
@@ -155,8 +400,24 @@ function Stepper({
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
-  h1: { color: colors.text, fontSize: 24, fontWeight: "800", marginBottom: 4 },
-  h1Sub: { color: colors.sub, fontWeight: "500" },
+  nameInput: {
+    color: colors.text,
+    fontSize: 22,
+    fontWeight: "800",
+    paddingVertical: 2,
+  },
+  baseInfo: { color: colors.sub, fontSize: 12, marginTop: 2, marginBottom: 10 },
+  actions: { flexDirection: "row", gap: 8, marginBottom: 6 },
+  action: {
+    backgroundColor: colors.cardAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 999,
+    paddingVertical: 7,
+    paddingHorizontal: 13,
+  },
+  actionDisabled: { opacity: 0.4 },
+  actionText: { color: colors.text, fontSize: 13, fontWeight: "600" },
   section: {
     color: colors.accent,
     fontSize: 13,
@@ -174,8 +435,13 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 8,
   },
-  label: { color: colors.text, fontSize: 14, fontWeight: "600", marginBottom: 8 },
+  fieldChanged: { borderColor: colors.accent },
+  labelRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8 },
+  label: { color: colors.text, fontSize: 14, fontWeight: "600", flex: 1 },
+  was: { color: colors.accent, fontSize: 11, fontWeight: "400" },
   unit: { color: colors.sub, fontSize: 12, fontWeight: "400" },
+  star: { color: colors.sub, fontSize: 18, paddingLeft: 8 },
+  starOn: { color: colors.warn },
   chips: { flexDirection: "row", gap: 6 },
   chip: {
     backgroundColor: colors.cardAlt,
@@ -210,4 +476,45 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
+  backBar: { flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 10 },
+  backText: { color: colors.accent, fontSize: 15, fontWeight: "700" },
+  backTitle: { color: colors.text, fontSize: 18, fontWeight: "800" },
+  hint: { color: colors.sub, fontSize: 12, marginBottom: 12 },
+  versionCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    padding: 12,
+    marginBottom: 8,
+  },
+  versionPicked: { borderColor: colors.accent },
+  versionName: { color: colors.text, fontSize: 14, fontWeight: "700" },
+  versionMeta: { color: colors.sub, fontSize: 11, marginTop: 2 },
+  smallBtn: {
+    backgroundColor: colors.cardAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 999,
+    paddingVertical: 5,
+    paddingHorizontal: 11,
+  },
+  smallBtnActive: { backgroundColor: colors.accent, borderColor: colors.accent },
+  smallBtnText: { color: colors.text, fontSize: 12, fontWeight: "600" },
+  diffRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    padding: 12,
+    marginBottom: 6,
+  },
+  diffField: { color: colors.text, fontSize: 13, fontWeight: "600", flex: 1 },
+  diffValues: { fontSize: 13, fontWeight: "700" },
 });

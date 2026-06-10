@@ -1,5 +1,9 @@
 # RaceLab packages
 
+## `sheets/` — Setup versioning + diff (D21)
+
+Pure data + pure functions, no I/O — bundles into the app unchanged. Immutable, deep-frozen, append-only `versions[]` with `parent_id` lineage (kit baseline = locked root, globally-unique ids); ONE mutable `draft` branched from a base version; **diffs always computed, never stored** — draft-vs-base IS the editor's orange highlights, the same function powers "vs" compare and diff-vs-kit. Versioned serialization with a discriminated result (`corrupt` / `unknown_format` / `wrong_template`) so a format bump can never silently wipe history. Survived an adversarial review fan-out (3 ⛔ findings fixed pre-commit). `npm test` = 31 checks.
+
 ## `pdf/` — Setup-sheet PDF export (D12: fill, never redraw)
 
 Reference implementation of the per-chassis `pdf_map` pipeline against the real Kyosho MP11 editable sheet:

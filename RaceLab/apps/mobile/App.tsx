@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetEditorScreen } from "./src/screens/SheetEditorScreen";
 import { EngineerScreen } from "./src/screens/EngineerScreen";
-import { MP11, kitSetup } from "./src/kb";
+import { useSheets } from "./src/store";
 import { colors } from "./src/theme";
 
 type Tab = "garage" | "sheet" | "engineer";
@@ -16,10 +16,15 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("garage");
-  const [setup, setSetup] = useState<Record<string, string | number>>(() => kitSetup(MP11));
+  const { state, update } = useSheets();
 
-  const onChange = (id: string, value: string | number) =>
-    setSetup((prev) => ({ ...prev, [id]: value }));
+  if (!state) {
+    return (
+      <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
+        <ActivityIndicator color={colors.accent} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.root}>
@@ -34,13 +39,14 @@ export default function App() {
       <View style={styles.body}>
         {tab === "garage" && (
           <GarageScreen
-            setupCount={Object.keys(setup).length}
+            versionCount={state.versions.length}
+            activeName={state.draft_name}
             onOpenSheet={() => setTab("sheet")}
             onAskEngineer={() => setTab("engineer")}
           />
         )}
-        {tab === "sheet" && <SheetEditorScreen setup={setup} onChange={onChange} />}
-        {tab === "engineer" && <EngineerScreen setup={setup} />}
+        {tab === "sheet" && <SheetEditorScreen state={state} update={update} />}
+        {tab === "engineer" && <EngineerScreen setup={state.draft} />}
       </View>
 
       <View style={styles.tabbar}>

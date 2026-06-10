@@ -4,12 +4,13 @@ import { colors, radius } from "../theme";
 import { KB, MP11 } from "../kb";
 
 interface Props {
-  setupCount: number;
+  versionCount: number;
+  activeName: string;
   onOpenSheet: () => void;
   onAskEngineer: () => void;
 }
 
-export function GarageScreen({ setupCount, onOpenSheet, onAskEngineer }: Props) {
+export function GarageScreen({ versionCount, activeName, onOpenSheet, onAskEngineer }: Props) {
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
       <Text style={styles.h1}>Garage</Text>
@@ -17,7 +18,9 @@ export function GarageScreen({ setupCount, onOpenSheet, onAskEngineer }: Props) 
       <View style={styles.card}>
         <Text style={styles.brand}>{MP11.brand.toUpperCase()}</Text>
         <Text style={styles.model}>{MP11.model}</Text>
-        <Text style={styles.meta}>1/8 nitro buggy · {setupCount} settings on sheet</Text>
+        <Text style={styles.meta}>
+          1/8 nitro buggy · {versionCount} saved version{versionCount > 1 ? "s" : ""} · active: “{activeName}”
+        </Text>
 
         <View style={styles.row}>
           <Pressable style={[styles.btn, styles.btnPrimary]} onPress={onOpenSheet}>
