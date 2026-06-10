@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest run --passWithNoTests",
     "typecheck": "pnpm -r --no-bail exec tsc --noEmit",
-    "check:billing": "node scripts/check-billing.mjs"
+    "check:billing": "node scripts/check-billing.mjs",
+    "check": "pnpm run test && pnpm --filter @bloop/server run test && pnpm run typecheck && pnpm run check:billing && pnpm --filter @bloop/server run check:bundle"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
