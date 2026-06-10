@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Deterministic, locale-independent normalization for equality compares
  * (e.g. impostor guess vs secret word): Unicode-decompose (NFD), strip
  * combining diacritics, lowercase, drop everything except letters / digits /
