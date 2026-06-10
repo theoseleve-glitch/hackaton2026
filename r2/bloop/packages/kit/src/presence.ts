@@ -18,7 +18,12 @@ export function initPresence(players: readonly PlayerId[]): Presence {
   return p;
 }
 
-/** Copy-on-write flip. Never deletes roster keys, never touches scores. */
+/**
+ * Copy-on-write flip. Never deletes roster keys, never touches scores.
+ * Callers MUST pass roster ids only (the shell guarantees playerLeft /
+ * playerRejoined fire for roster players); a non-roster id would silently
+ * add a key.
+ */
 export function setConnected(p: Presence, id: PlayerId, v: boolean): Presence {
   return Object.assign(emptyPlayerMap<boolean>(), p, { [id]: v });
 }

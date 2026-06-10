@@ -28,6 +28,13 @@ describe('presence', () => {
     expect(connectedPlayers(roster, p)).toEqual(['p2', 'p3']);
     expect(connectedPlayers(roster, initPresence(roster))).toEqual(roster);
   });
+
+  it('stays null-proto and pollution-safe with a "__proto__" id', () => {
+    const p = setConnected(initPresence(['p1', '__proto__']), '__proto__', false);
+    expect(p['__proto__']).toBe(false);
+    expect(Object.getPrototypeOf(p)).toBeNull();
+    expect(allActed(['__proto__'], p)).toBe(true); // entry present (false ≠ undefined)
+  });
 });
 
 describe('allActed', () => {

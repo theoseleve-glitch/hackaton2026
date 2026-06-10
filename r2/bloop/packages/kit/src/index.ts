@@ -6,3 +6,4 @@ export {
   setConnected,
   type Presence,
 } from './presence.js';
+export { nextActiveSeat } from './rotation.js';
