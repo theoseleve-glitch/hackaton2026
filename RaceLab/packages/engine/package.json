@@ -1,0 +1,23 @@
+{
+  "name": "racelab-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "RaceLab AI Race Engineer — KB-grounded chassis tuning recommendations (Gate A prototype)",
+  "scripts": {
+    "cli": "tsx src/cli.ts",
+    "eval": "tsx src/eval.ts",
+    "eval:online": "tsx src/eval.ts --online",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.74.0",
+    "yaml": "^2.6.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

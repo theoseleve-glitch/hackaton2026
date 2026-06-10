@@ -1,0 +1,620 @@
+# Geometry rules — source: HUDY Off-Road Set-Up Book p.10-31
+# downstops, ride height, camber, track-width, caster, toe, ackermann, roll center, kick-up, anti-squat, wheelbase
+
+# ---- Downstops (p.10) ----
+- id: kb-downstop-front-higher-201
+  setting: front_downstop
+  direction: increase   # arm higher, less travel
+  effects:
+    - { axis: on_power_steering, change: more }
+    - { axis: direction_change_response, change: more }
+    - { axis: rear_weight_transfer, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "1mm at a time, identical left/right."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.10 §1.1"]
+  scope: [1-8-offroad]
+
+- id: kb-downstop-front-lower-202
+  setting: front_downstop
+  direction: decrease   # arm lower, more travel
+  effects:
+    - { axis: rear_traction_exit, change: more }
+    - { axis: rearward_weight_transfer, change: more }
+    - { axis: bumpy_handling, change: better }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy]
+    reduced_on: [smooth]
+  counter_indications: []
+  magnitude_guidance: "1mm at a time, identical left/right."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.10 §1.1"]
+  scope: [1-8-offroad]
+
+- id: kb-downstop-rear-higher-203
+  setting: rear_downstop
+  direction: increase
+  effects:
+    - { axis: forward_weight_transfer_braking, change: less }
+    - { axis: stability_braking, change: more }
+  addresses:
+    - { symptom: unstable_braking, phase: braking }
+    - { symptom: oversteer, phase: corner_entry }
+  conditions:
+    amplified_on: [smooth]
+    reduced_on: [bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "1mm at a time, identical left/right."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.10 §1.1"]
+  scope: [1-8-offroad]
+
+- id: kb-downstop-rear-lower-204
+  setting: rear_downstop
+  direction: decrease
+  effects:
+    - { axis: steering_corner_entry, change: more }
+    - { axis: turn_in, change: more }
+    - { axis: stability_braking, change: less }
+    - { axis: bumpy_handling, change: better }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: braking }
+  conditions:
+    amplified_on: [bumpy]
+    reduced_on: []
+  counter_indications: [unstable_braking]
+  magnitude_guidance: "1mm at a time, identical left/right."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.10 §1.1"]
+  scope: [1-8-offroad]
+
+# ---- Ride height (p.12) ----
+- id: kb-rideheight-lower-205
+  setting: ride_height
+  direction: decrease
+  effects:
+    - { axis: overall_stability, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, blue_groove]
+    reduced_on: [bumpy, rough]
+  counter_indications: [bottoming]
+  magnitude_guidance: "1mm at a time via spring preload ONLY — never via downstop screws (HUDY p.13)."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.12 §1.2"]
+  scope: [1-8-offroad]
+
+- id: kb-rideheight-higher-206
+  setting: ride_height
+  direction: increase
+  effects:
+    - { axis: overall_stability, change: less }
+    - { axis: bottoming, change: less }
+  addresses:
+    - { symptom: bottoming, phase: rough_section }
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, big_jumps]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "1mm at a time via spring preload ONLY."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.12 §1.2"]
+  scope: [1-8-offroad]
+
+- id: kb-rideheight-rake-rearward-207
+  setting: ride_height_rake
+  direction: front_higher_than_rear
+  effects:
+    - { axis: rear_weight_transfer_on_power, change: more }
+    - { axis: stability, change: more }
+    - { axis: steering, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: twitchy }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5-1mm difference at a time, via preload."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.12 §1.2"]
+  scope: [1-8-offroad]
+
+- id: kb-rideheight-rake-forward-208
+  setting: ride_height_rake
+  direction: front_lower_than_rear
+  effects:
+    - { axis: steering, change: more }
+    - { axis: rear_traction, change: less }
+    - { axis: nosedive_off_jumps, change: more_likely }
+  addresses:
+    - { symptom: understeer, phase: off_power }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: []
+    reduced_on: [big_jumps]
+  counter_indications: [nosedive_jumps, oversteer]
+  magnitude_guidance: "0.5-1mm difference at a time, via preload. May cause nose-diving off jumps."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.12 §1.2"]
+  scope: [1-8-offroad]
+
+# ---- Camber (p.14) ----
+- id: kb-camber-front-more-negative-209
+  setting: front_camber
+  direction: decrease   # more negative
+  effects:
+    - { axis: steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.5° at a time. Re-check front toe after changing camber (they interact). Front camber should make tires wear flat."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.14 §1.3"]
+  scope: [1-8-offroad]
+
+- id: kb-camber-rear-less-negative-210
+  setting: rear_camber
+  direction: increase   # less negative (toward 0)
+  effects:
+    - { axis: rear_traction_entry_corner, change: more_up_to_a_point }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: oversteer, phase: mid_corner }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "0.5° at a time. WARNING: if the shock gets too vertical and traction lets go, it lets go abruptly — don't go past ~-1°."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.14 §1.3"]
+  scope: [1-8-offroad]
+
+# ---- Track-width (p.16) ----
+- id: kb-trackwidth-front-wider-211
+  setting: front_track_width
+  direction: increase
+  effects:
+    - { axis: front_grip, change: less }
+    - { axis: understeer, change: more }
+    - { axis: steering_response, change: slower }
+    - { axis: traction_roll_resistance, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy }
+  conditions:
+    amplified_on: [high_grip, blue_groove]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "1mm per side at a time, symmetric left/right."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.16 §1.4"]
+  scope: [1-8-offroad]
+
+- id: kb-trackwidth-front-narrower-212
+  setting: front_track_width
+  direction: decrease
+  effects:
+    - { axis: front_grip, change: more }
+    - { axis: steering_response, change: faster }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "1mm per side at a time, symmetric."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.16 §1.4"]
+  scope: [1-8-offroad]
+
+- id: kb-trackwidth-rear-wider-213
+  setting: rear_track_width
+  direction: increase
+  effects:
+    - { axis: rear_grip_entry, change: more }
+    - { axis: high_speed_on_power_steering, change: more }
+    - { axis: traction_roll_resistance, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "1mm per side at a time, symmetric."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.16 §1.4"]
+  scope: [1-8-offroad]
+
+# ---- Caster (p.18) ----
+- id: kb-caster-less-214
+  setting: caster
+  direction: decrease   # more vertical
+  effects:
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: straight_line_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: off_power }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One caster-block step (typically 2°). HUDY: shallower caster on smooth high-grip, steeper on slippery/rough."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.18 §1.6"]
+  scope: [1-8-offroad]
+
+- id: kb-caster-more-215
+  setting: caster
+  direction: increase   # more inclined
+  effects:
+    - { axis: straight_line_stability, change: more }
+    - { axis: off_power_steering_entry, change: less }
+    - { axis: bumpy_stability, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: oversteer, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, low_grip, dusty]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One caster-block step (typically 2°)."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.18 §1.6"]
+  scope: [1-8-offroad]
+
+# ---- Toe (p.20) ----
+- id: kb-toe-front-less-216
+  setting: front_toe
+  direction: decrease   # less toe-in / toward toe-out
+  effects:
+    - { axis: steering_entry, change: more }
+    - { axis: steering_response, change: faster }
+    - { axis: stability_acceleration, change: less }
+    - { axis: ease_of_driving, change: harder }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [twitchy, hard_to_drive]
+  magnitude_guidance: "0.5° at a time, both steering rods equally."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.20 §1.6"]
+  scope: [1-8-offroad]
+
+- id: kb-toe-front-more-217
+  setting: front_toe
+  direction: increase   # more toe-in
+  effects:
+    - { axis: ease_of_driving, change: easier }
+  addresses:
+    - { symptom: twitchy }
+    - { symptom: hard_to_drive }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5° at a time."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.20 §1.6"]
+  scope: [1-8-offroad]
+
+- id: kb-toe-rear-more-218
+  setting: rear_toe
+  direction: increase   # more toe-in
+  effects:
+    - { axis: stability_on_power_exit_braking, change: more }
+    - { axis: rear_traction_retention, change: more }
+    - { axis: top_speed, change: less }
+    - { axis: understeer, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: unstable_braking, phase: braking }
+  conditions:
+    amplified_on: [low_grip, dusty]
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5-1° at a time (typically 2.5-3.5° total). Rear should NEVER have toe-out."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.20 §1.6"]
+  scope: [1-8-offroad]
+
+- id: kb-toe-rear-less-219
+  setting: rear_toe
+  direction: decrease   # less toe-in (never below 0)
+  effects:
+    - { axis: top_speed, change: more }
+    - { axis: stability_on_power_exit, change: less }
+  addresses: []
+  conditions:
+    amplified_on: [high_grip, fast_open]
+    reduced_on: [low_grip]
+  counter_indications: [oversteer, unstable_braking]
+  magnitude_guidance: "0.5° at a time; never go to toe-out at the rear."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.20 §1.6"]
+  scope: [1-8-offroad]
+
+# ---- Ackermann (p.22) ----
+- id: kb-ackermann-forward-220
+  setting: ackermann
+  direction: forward_holes   # sharper angle
+  effects:
+    - { axis: steering_response, change: smoother }
+  addresses:
+    - { symptom: twitchy }
+    - { symptom: hard_to_drive }
+  conditions:
+    amplified_on: [fast_open, smooth]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One hole; re-check front toe after (HUDY)."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.22 §1.7.1"]
+  scope: [1-8-offroad]
+
+- id: kb-ackermann-rearward-221
+  setting: ackermann
+  direction: rearward_holes   # shallower angle
+  effects:
+    - { axis: initial_steering_response, change: quicker }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One hole; re-check front toe after."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.22 §1.7.1"]
+  scope: [1-8-offroad]
+
+# ---- Roll center (p.24-25) ----
+- id: kb-rollcenter-front-lower-222
+  setting: front_roll_center
+  direction: lower   # camber link in UPPER shock-tower holes
+  effects:
+    - { axis: steering_into_corner, change: more }
+    - { axis: responsiveness, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One hole at a time; re-check front camber after (HUDY)."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.24 §1.8.1"]
+  scope: [1-8-offroad]
+
+- id: kb-rollcenter-front-higher-223
+  setting: front_roll_center
+  direction: higher   # camber link in LOWER shock-tower holes
+  effects:
+    - { axis: steering_into_corner, change: less }
+    - { axis: responsiveness, change: less }
+  addresses:
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, blue_groove]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One hole at a time; HUDY recommends for high-grip conditions. Re-check camber."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.24 §1.8.1"]
+  scope: [1-8-offroad]
+
+- id: kb-rollcenter-rear-higher-224
+  setting: rear_roll_center
+  direction: higher   # camber link in LOWER tower holes
+  effects:
+    - { axis: on_power_traction, change: more }
+    - { axis: traction_roll_entry, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: traction_roll, phase: corner_entry }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "One hole at a time; re-check rear camber after."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.25 §1.8.2"]
+  scope: [1-8-offroad]
+
+- id: kb-rollcenter-rear-lower-225
+  setting: rear_roll_center
+  direction: lower   # camber link in UPPER tower holes
+  effects:
+    - { axis: steering_into_corner, change: more }
+    - { axis: rear_traction_into_corner, change: less }
+    - { axis: traction_roll_mid_exit, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: traction_roll, phase: corner_exit }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [oversteer]
+  magnitude_guidance: "One hole at a time; re-check rear camber after."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.25 §1.8.2"]
+  scope: [1-8-offroad]
+
+# ---- Kick-up (p.29) ----
+- id: kb-kickup-more-226
+  setting: front_kickup
+  direction: increase
+  effects:
+    - { axis: bumpy_handling, change: better }
+    - { axis: steering_response, change: less }
+    - { axis: front_weight_transfer_braking, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: twitchy, phase: braking }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One holder/bushing step, both sides."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.29 §1.10"]
+  scope: [1-8-offroad]
+
+- id: kb-kickup-less-227
+  setting: front_kickup
+  direction: decrease
+  effects:
+    - { axis: steering_response, change: more }
+    - { axis: smooth_handling, change: better }
+  addresses:
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "One holder/bushing step, both sides."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.29 §1.10"]
+  scope: [1-8-offroad]
+
+# ---- Anti-squat (p.30) ----
+- id: kb-antisquat-more-228
+  setting: rear_anti_squat
+  direction: increase
+  effects:
+    - { axis: rear_traction_acceleration, change: more }
+    - { axis: rear_traction_off_power, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy]
+  counter_indications: [oversteer]   # off-power rear traction drops
+  magnitude_guidance: "One bushing/holder step (≈1°), both sides."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.30 §1.11"]
+  scope: [1-8-offroad]
+
+- id: kb-antisquat-less-229
+  setting: rear_anti_squat
+  direction: decrease   # flatter arm
+  effects:
+    - { axis: rear_traction_off_power, change: more }
+    - { axis: rear_traction_on_power, change: less }
+    - { axis: bumpy_handling, change: better }
+  addresses:
+    - { symptom: oversteer, phase: off_power }
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One bushing/holder step (≈1°), both sides."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.30 §1.11"]
+  scope: [1-8-offroad]
+
+# ---- Wheelbase (p.31) ----
+- id: kb-wheelbase-shorter-230
+  setting: wheelbase
+  direction: decrease   # fewer spacers in front of rear upright
+  effects:
+    - { axis: on_power_traction, change: more }
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: steering_response, change: more }
+    - { axis: on_power_exit, change: slight_push }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open, bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "Move one shim at a time, both sides."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.31 §1.12"]
+  scope: [1-8-offroad]
+
+- id: kb-wheelbase-longer-231
+  setting: wheelbase
+  direction: increase
+  effects:
+    - { axis: stability, change: more }
+    - { axis: bumps_ruts_handling, change: better }
+    - { axis: on_power_steering_exit, change: more }
+    - { axis: initial_steering_off_power, change: slower }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [fast_open, bumpy]
+    reduced_on: [technical_tight]
+  counter_indications: [understeer]   # entry push gets worse
+  magnitude_guidance: "Move one shim at a time, both sides."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.31 §1.12"]
+  scope: [1-8-offroad]

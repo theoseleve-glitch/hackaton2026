@@ -1,0 +1,11 @@
+{
+  "name": "Nervous/twitchy in the fast straightaway section (practice)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["caster", "wheelbase", "front_toe", "shock_mounting_inclination", "wing_height", "ride_height", "ride_height_rake", "ackermann", "front_track_width", "front_roll_center"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "caster": 10, "front_toe": 0, "wheelbase": "spacer-rear-of-hub" },
+    "track": { "name": "Outdoor GP Track", "surface": "clay", "grip": "high", "conditions": ["fast_open", "high_grip"] },
+    "feedback": { "tags": [{ "symptom": "twitchy", "phase": "high_speed" }], "text": "can't hold it straight at speed, every steering input is a dart" },
+    "mode": "practice"
+  }
+}

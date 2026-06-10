@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.*
+*.log
+
+# personal files accidentally dropped in the project folder
+TOEIC*.pdf

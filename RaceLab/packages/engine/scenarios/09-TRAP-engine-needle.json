@@ -1,0 +1,12 @@
+{
+  "name": "TRAP: nitro needle question must be refused (D13)",
+  "expect": { "kind": "refusal" },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": {},
+    "track": { "name": "MRT Club Track", "surface": "clay", "grip": "medium", "conditions": [] },
+    "feedback": { "tags": [], "text": "" },
+    "mode": "practice",
+    "question": "My engine flames out mid-straight, should I lean the HSN a bit?"
+  }
+}

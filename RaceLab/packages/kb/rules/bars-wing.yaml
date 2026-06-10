@@ -1,0 +1,193 @@
+# Anti-roll bars & rear wing — source: HUDY Off-Road Set-Up Book p.32-33
+
+- id: kb-swaybar-front-softer-301
+  setting: front_sway_bar
+  direction: decrease   # thinner wire
+  effects:
+    - { axis: front_chassis_roll, change: more }
+    - { axis: front_traction, change: more }
+    - { axis: rear_traction, change: less }
+    - { axis: off_power_steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: understeer, phase: off_power }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, blue_groove]
+  counter_indications: [oversteer, traction_roll]
+  magnitude_guidance: "One wire step (0.1mm), e.g. 2.3 → 2.2mm."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.32 §1.13"]
+  scope: [1-8-offroad]
+
+- id: kb-swaybar-front-stiffer-302
+  setting: front_sway_bar
+  direction: increase   # thicker wire
+  effects:
+    - { axis: front_chassis_roll, change: less }
+    - { axis: front_traction, change: less }
+    - { axis: off_power_steering_entry, change: less }
+    - { axis: steering_response, change: quicker }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: oversteer, phase: off_power }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, blue_groove, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One wire step (0.1mm), e.g. 2.3 → 2.4mm."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.32 §1.13"]
+  scope: [1-8-offroad]
+
+- id: kb-swaybar-rear-softer-303
+  setting: rear_sway_bar
+  direction: decrease
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: front_traction, change: less }
+    - { axis: on_power_steering, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One wire step (0.1mm), e.g. 2.8 → 2.7mm."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.32 §1.13"]
+  scope: [1-8-offroad]
+
+- id: kb-swaybar-rear-stiffer-304
+  setting: rear_sway_bar
+  direction: increase
+  effects:
+    - { axis: rear_traction, change: less }
+    - { axis: front_traction, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: high_speed_chicane_response, change: quicker }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: sluggish_steering, phase: high_speed }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One wire step (0.1mm), e.g. 2.8 → 2.9mm. May cause oversteer."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.32 §1.13"]
+  scope: [1-8-offroad]
+
+# ---- Rear wing (p.33) ----
+- id: kb-wing-rearward-305
+  setting: wing_position
+  direction: rearward
+  effects:
+    - { axis: rear_traction, change: more }
+  addresses:
+    - { symptom: oversteer, phase: high_speed }
+    - { symptom: no_forward_bite, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "One mounting position or add shims behind the wing posts."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]
+
+- id: kb-wing-forward-306
+  setting: wing_position
+  direction: forward
+  effects:
+    - { axis: rear_traction, change: less }
+  addresses:
+    - { symptom: understeer, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: []
+  counter_indications: [oversteer]
+  magnitude_guidance: "One mounting position."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]
+
+- id: kb-wing-steeper-307
+  setting: wing_angle
+  direction: increase   # steeper
+  effects:
+    - { axis: traction_high_speed, change: more }
+    - { axis: nosedive_jumps, change: less }
+  addresses:
+    - { symptom: nosedive_jumps, phase: jumps }
+    - { symptom: oversteer, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open, big_jumps]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One angle position step."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]
+
+- id: kb-wing-flatter-308
+  setting: wing_angle
+  direction: decrease   # flatter
+  effects:
+    - { axis: jump_attitude, change: more_level }
+  addresses:
+    - { symptom: poor_bump_handling, phase: jumps }
+  conditions:
+    amplified_on: [big_jumps]
+    reduced_on: []
+  counter_indications: [nosedive_jumps]
+  magnitude_guidance: "One angle position step; flattens the car over jumps."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]
+
+- id: kb-wing-higher-309
+  setting: wing_height
+  direction: increase
+  effects:
+    - { axis: stability_high_speed, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: [technical_tight]
+  counter_indications: []
+  magnitude_guidance: "One mounting position."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]
+
+- id: kb-wing-lower-310
+  setting: wing_height
+  direction: decrease
+  effects:
+    - { axis: stability_low_speed, change: more }
+  addresses:
+    - { symptom: twitchy, phase: low_speed }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open]
+  counter_indications: []
+  magnitude_guidance: "One mounting position."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.33 §1.14"]
+  scope: [1-8-offroad]

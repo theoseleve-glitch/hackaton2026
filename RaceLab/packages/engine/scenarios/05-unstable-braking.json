@@ -1,0 +1,11 @@
+{
+  "name": "Rear swaps under braking into tight corners (practice)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["rear_toe", "rear_downstop", "front_diff_oil", "rear_anti_squat"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_diff_oil": 5000, "rear_toe": 2.5, "rear_downstop": -5 },
+    "track": { "name": "MRT Club Track", "surface": "clay", "grip": "medium", "conditions": ["smooth"] },
+    "feedback": { "tags": [{ "symptom": "unstable_braking", "phase": "braking" }], "text": "rear wanders side to side every time I brake hard for the hairpin" },
+    "mode": "practice"
+  }
+}
