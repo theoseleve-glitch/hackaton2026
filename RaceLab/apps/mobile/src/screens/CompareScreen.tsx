@@ -17,12 +17,15 @@ import { colors, radius } from "../theme";
 interface Props {
   sheets: SheetsState;
   logbook: LogbookState;
+  /** preselected pair (e.g. "vs prev" from a run card); remount with a key to apply */
+  initialA?: string;
+  initialB?: string;
 }
 
-export function CompareScreen({ sheets, logbook }: Props) {
+export function CompareScreen({ sheets, logbook, initialA, initialB }: Props) {
   const runs = [...logbook.runs].reverse(); // newest first
-  const [aId, setAId] = useState<string | undefined>(runs[1]?.id);
-  const [bId, setBId] = useState<string | undefined>(runs[0]?.id);
+  const [aId, setAId] = useState<string | undefined>(initialA ?? runs[1]?.id);
+  const [bId, setBId] = useState<string | undefined>(initialB ?? runs[0]?.id);
 
   const comparison = useMemo(() => {
     const a = logbook.runs.find((r) => r.id === aId);

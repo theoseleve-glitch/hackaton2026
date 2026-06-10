@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { RaceEngineerChat } from "../../../../packages/engine/src";
 import type { ContextBundle } from "../../../../packages/engine/src";
+import { bundleFromRun, lastRun } from "../../../../packages/logbook/src";
+import type { LogbookState } from "../../../../packages/logbook/src";
 import { KB, MP11_ID } from "../kb";
 import { colors, radius } from "../theme";
 
@@ -24,29 +26,38 @@ const GRIPS: Grip[] = ["green", "medium", "high", "blue_groove"];
 
 interface Props {
   setup: Record<string, string | number>;
+  logbook?: LogbookState;
 }
 
-export function EngineerScreen({ setup }: Props) {
-  const [grip, setGrip] = useState<Grip>("medium");
+export function EngineerScreen({ setup, logbook }: Props) {
+  const last = logbook ? lastRun(logbook) : undefined;
+  const [grip, setGrip] = useState<Grip>(last?.conditions.grip ?? "medium");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const scrollRef = useRef<ScrollView>(null);
 
   // A chat session is pinned to the setup + grip it started with; changing
   // grip starts a fresh session (the engineer must never advise on stale state).
+  // When a run is logged at this grip, the session inherits its full context
+  // (track, conditions, tyres, history) — the log feeds the chat (D22). The
+  // chat always advises on the CURRENT draft setup, not the run's old sheet.
+  const fromLastRun = last !== undefined && last.conditions.grip === grip;
   const chat = useMemo(() => {
-    const bundle: ContextBundle = {
-      chassis_template_id: MP11_ID,
-      setup: { ...setup },
-      track: { name: "My track", surface: "clay", grip, conditions: gripConditions(grip) },
-      feedback: { tags: [] },
-      mode: "practice",
-    };
+    const bundle: ContextBundle =
+      last && logbook && last.conditions.grip === grip
+        ? { ...bundleFromRun(last, setup, logbook, { mode: "practice" }), feedback: { tags: [] } }
+        : {
+            chassis_template_id: MP11_ID,
+            setup: { ...setup },
+            track: { name: "My track", surface: "clay", grip, conditions: gripConditions(grip) },
+            feedback: { tags: [] },
+            mode: "practice",
+          };
     const c = new RaceEngineerChat(bundle, KB);
     setMessages(c.greeting().map((text) => ({ role: "engineer", text })));
     return c;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grip, setup]);
+  }, [grip, setup, logbook]);
 
   const send = (text: string) => {
     const trimmed = text.trim();
@@ -76,6 +87,12 @@ export function EngineerScreen({ setup }: Props) {
           </Pressable>
         ))}
       </View>
+      {fromLastRun && last && (
+        <Text style={styles.contextLine}>
+          📒 context from your last run: {last.track.name} · {last.track.surface}
+          {last.tyres?.wear ? ` · ${last.tyres.wear} tyres` : ""}
+        </Text>
+      )}
 
       <ScrollView ref={scrollRef} style={styles.feed} contentContainerStyle={{ padding: 14 }}>
         {messages.map((m, i) => (
@@ -139,6 +156,13 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   gripLabel: { color: colors.sub, fontSize: 12, marginRight: 4 },
+  contextLine: {
+    color: colors.sub,
+    fontSize: 11,
+    fontStyle: "italic",
+    paddingHorizontal: 14,
+    paddingTop: 6,
+  },
   gripChip: {
     backgroundColor: colors.cardAlt,
     borderRadius: 999,

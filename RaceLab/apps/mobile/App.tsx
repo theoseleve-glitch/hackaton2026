@@ -21,6 +21,7 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("garage");
+  const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
   const { state, update } = useSheets();
   const { logbook, updateLogbook } = useLogbook();
 
@@ -53,10 +54,26 @@ export default function App() {
         )}
         {tab === "sheet" && <SheetEditorScreen state={state} update={update} />}
         {tab === "runs" && (
-          <RunsScreen sheets={state} logbook={logbook} updateLogbook={updateLogbook} />
+          <RunsScreen
+            sheets={state}
+            logbook={logbook}
+            updateLogbook={updateLogbook}
+            onCompare={(a, b) => {
+              setComparePair({ a, b });
+              setTab("compare");
+            }}
+          />
         )}
-        {tab === "compare" && <CompareScreen sheets={state} logbook={logbook} />}
-        {tab === "engineer" && <EngineerScreen setup={state.draft} />}
+        {tab === "compare" && (
+          <CompareScreen
+            key={comparePair ? `${comparePair.a}:${comparePair.b}` : "default"}
+            sheets={state}
+            logbook={logbook}
+            initialA={comparePair?.a}
+            initialB={comparePair?.b}
+          />
+        )}
+        {tab === "engineer" && <EngineerScreen setup={state.draft} logbook={logbook} />}
       </View>
 
       <View style={styles.tabbar}>

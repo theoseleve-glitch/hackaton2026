@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { parseFeedback } from "../../../../packages/engine/src";
 import type { FeedbackTag } from "../../../../packages/engine/src";
 import type {
   Bumpiness,
@@ -60,9 +61,27 @@ export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCan
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [phase, setPhase] = useState<string | undefined>();
   const [note, setNote] = useState("");
+  const [autoTagged, setAutoTagged] = useState(false);
 
   const toggleSymptom = (s: string) =>
     setSymptoms((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
+
+  // The engine's deterministic NLU reads the note as you type: "pushes mid
+  // corner" lights up understeer + mid_corner. Additive only — it never
+  // un-selects something the driver tapped.
+  const onNoteChange = (text: string) => {
+    setNote(text);
+    const parsed = parseFeedback(text);
+    if (parsed.tags.length === 0) return;
+    setSymptoms((prev) => {
+      const next = [...prev];
+      for (const t of parsed.tags) if (!next.includes(t.symptom)) next.push(t.symptom);
+      return next.length === prev.length ? prev : next;
+    });
+    const suggestedPhase = parsed.tags.find((t) => t.phase)?.phase;
+    if (suggestedPhase) setPhase((prev) => prev ?? suggestedPhase);
+    setAutoTagged(true);
+  };
 
   const save = () => {
     const tags: FeedbackTag[] = symptoms.map((symptom) => (phase ? { symptom, phase } : { symptom }));
@@ -158,7 +177,13 @@ export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCan
           </>
         )}
         <View style={{ height: 8 }} />
-        <LabeledInput label="Note" value={note} onChangeText={setNote} placeholder='e.g. "pushes once tyres heat up"' />
+        <LabeledInput
+          label="Note"
+          value={note}
+          onChangeText={onNoteChange}
+          placeholder='e.g. "pushes once tyres heat up"'
+        />
+        {autoTagged && <Text style={styles.autoTag}>🏷 auto-tagged from your note — tap a chip to correct me</Text>}
       </Section>
 
       <View style={styles.actions}>
@@ -186,6 +211,7 @@ const styles = StyleSheet.create({
   setupBannerLabel: { color: colors.sub, fontSize: 11, textTransform: "uppercase", letterSpacing: 0.8 },
   setupBannerName: { color: colors.text, fontSize: 15, fontWeight: "700", marginTop: 2 },
   hint: { color: colors.sub, fontSize: 12, marginTop: 8, marginBottom: 4 },
+  autoTag: { color: colors.good, fontSize: 11, marginTop: 6, fontStyle: "italic" },
   actions: { flexDirection: "row", gap: 10, marginTop: 6 },
   btn: { flex: 1, borderRadius: radius.md, paddingVertical: 12, alignItems: "center" },
   btnPrimary: { backgroundColor: colors.accent },
