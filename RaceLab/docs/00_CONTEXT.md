@@ -1,0 +1,91 @@
+# 00 — Context
+
+> Everything you need to know to contribute to RaceLab without having been in the early conversations. If a decision isn't logged here, it hasn't been made.
+
+## 1. What is RaceLab
+
+A mobile app for RC car racers (1/8 nitro & e-buggy, 1/10 offroad, onroad…) built around four pillars, in this order:
+
+1. **Save setups** — digital setup sheets per chassis, versioned, with photos.
+2. **Comment setups** — notes/commentary attached to every sheet and every change ("worked great once the track grooved up").
+3. **AI Race Engineer** — a chatbot that tells you *which component to change or modification to try*, aware of the track you're on, the weather, the surface type, and your driver feedback. Grounded on a curated tuning knowledge base — not generic LLM chat.
+4. **Share** — publish your setups, browse and fork others', follow fast drivers. **"The Strava of RC."**
+
+Artistic direction / visual identity: **already done** (William).
+
+## 2. The team
+
+| Who | Owns |
+|---|---|
+| **William** | Product direction, design/DA, chassis template content, tuning knowledge base, AI prompt design & evals, monetization, community |
+| **Théo** | Architecture, mobile app, backend, sync/offline, AI pipeline integration, store releases |
+| **Claude (AI pair)** | Decision support, doc upkeep, implementation. Used in-session with subagent fan-outs; during build phase, parallel terminals with strict area ownership (see §6) |
+
+## 3. Competitor teardown — So Dialed
+
+The incumbent ([sodialed.com](https://www.sodialed.com/), iOS + Android). What they have — **don't underestimate them**:
+
+- Setup recording for **600+ cars** (1/5 to 1/28 scale: offroad, onroad, oval, drift, drag), kit setups preloaded for 60+ popular buggies (Associated, TLR, Tekno, Schumacher, Kyosho, XRAY…)
+- An **"AI Mechanic"** chat that knows your entered setup, kit defaults, and common community values
+- Race log, public/private setup sharing, gear/speed-run/fuel calculators, export to manufacturer PDF layouts
+- Freemium: free for casual use; **$2.99/mo or $29.99/yr** for unlimited cars/setups/AI
+
+Their structural weaknesses (= our attack surface):
+
+| Weakness | Why it matters |
+|---|---|
+| AI has **no condition context** (no weather, no surface, no grip evolution) | Real tuning decisions are 80% conditions |
+| AI has **no learning loop** — it never finds out if its advice worked | Generic advice forever; ours compounds |
+| **No real social layer** — sharing is a flat public/private flag | No feed, no following, no forks, no track communities → no network effect |
+| Race log is **after-the-fact data entry**, not a race-day companion | The between-heats moment is where racers actually need help |
+| No setup **diffing/lineage** | Comparing two sheets = eyeballing two PDFs |
+| 600-car breadth = shallow everywhere | We go deep on 1/8 + 1/10 offroad first |
+
+**Action item (William):** install So Dialed Premium, feed its AI Mechanic 5 real tuning scenarios, save its answers — that's the benchmark our engineer must visibly beat.
+
+## 4. Decisions log
+
+| # | Decision | Rationale | Date |
+|---|---|---|---|
+| D1 | Name: **RaceLab** | "Lab" = the experiment/learn loop. ⚠️ Pending trademark & app-store collision check before launch branding | 2026-06-10 |
+| D2 | Positioning: **"Strava of RC"** — utility (setup storage + AI) wrapped in a social/progress layer | Utility gets installs; social keeps them | 2026-06-10 |
+| D3 | Launch scope: **1/8 & 1/10 offroad first** (~15–20 chassis), not 600 cars | Quality > breadth; it's where we race and can validate | 2026-06-10 |
+| D4 | **Offline-first is a hard requirement** | RC tracks have terrible connectivity; only the AI call may require network | 2026-06-10 |
+| D5 | Setup sheets are **schema-driven JSON** (one template per chassis) | New chassis = new data file, no code | 2026-06-10 |
+| D6 | AI is **KB-grounded (RAG), one-change-at-a-time, with a learning loop** — never freeform LLM advice | Trust is the product; see `04_AI_RACE_ENGINEER_SPEC.md` | 2026-06-10 |
+| D7 | Concept phase: single-session work with AI subagent fan-outs. Build phase: parallel terminals **with area ownership + contracts-first + git as sync** (no "terminals watching each other") | Coherence now, parallelism later | 2026-06-10 |
+| D8 | Core vs exploratory features kept in **two separate files** (`02` vs `03`); promotion requires a logged team decision | Keeps committed scope honest | 2026-06-10 |
+| D9 | Monetization: freemium, AI + advanced analytics behind Pro (~$3.99/mo / $34.99/yr) | Match So Dialed's price point, win on value; AI tokens are our main cost | 2026-06-10 |
+
+*(Add new rows here. Théo: anything you want to challenge, challenge before code exists — it's cheap now.)*
+
+## 5. Prior art we own
+
+- **SETUP_RC** (separate project, `hackaton2026/SETUP_RC`): generates Kyosho Inferno MP11 setup-sheet PDFs with AI grounded on a *nomenclature knowledge base*. **Reuse:** the MP11 nomenclature/KB work seeds RaceLab's chassis templates and tuning KB; the PDF generation experience seeds the export pipeline.
+
+## 6. How we work (build phase)
+
+1. **Contracts first.** `packages/schema` (data model + API types + chassis template format) is written and agreed before splitting.
+2. **Area ownership.** One person/terminal = one area (`apps/mobile`, `apps/api`, `packages/kb`…). Nobody edits outside their area.
+3. **Git is the sync medium.** Own branch/worktree, small commits, frequent merges. Need to know the state of someone's work? Pull. Never read uncommitted sibling files.
+4. **Docs are the source of truth.** Scope disagreements get resolved in `02`/`03` + the Decisions log, not in code comments.
+
+## 7. Glossary (RC racing terms used across the docs)
+
+| Term | Meaning |
+|---|---|
+| **Setup sheet** | The full record of a car's tunable settings (suspension, diffs, tires, gearing…). Manufacturers publish blank sheets per chassis |
+| **1/8, 1/10** | Scale classes. 1/8 offroad = nitro buggy, e-buggy, truggy. 1/10 offroad = 2WD/4WD buggy, stadium truck, SC |
+| **Diff oil (F/C/R)** | Silicone oil viscosity in front/center/rear differentials (e.g. 7000/10000/5000 cSt) — major handling lever |
+| **Shock oil / pistons / springs** | Damper tuning trio; controls how the car absorbs bumps and transfers weight |
+| **Camber / toe / droop / ride height** | Geometry settings, measured in degrees/mm |
+| **Blue groove** | High-grip rubbered-in line that forms on dirt as a race day progresses; grip evolves hour-by-hour |
+| **TQ** | Top Qualifier — fastest in qualifying |
+| **A-main / B-main** | Finals, ranked. "Bumping up" = winning the B to start the A. The emotional core of club racing |
+| **Heat / round** | A qualifying run group. Between your heats you have 10–40 min to wrench ("the thrash") |
+| **Marshaling** | After your heat you flip crashed cars back over for the next heat. Mandatory club duty |
+| **Transponder** | Personal timing chip; lap times go through MyLaps/Speedhive; live results often on LiveRC |
+| **HSN/LSN** | High/low-speed needles on a nitro carb — engine tune. Too lean = destroyed engine |
+| **Traction compound / sauce** | Tire additive; legal at some tracks, banned at others |
+| **Rocket round / IFMAR points** | Qualifying formats: best-single-run vs points-per-round |
+| **Tech inspection** | Pre/post-race legality check (weight, width, tires…) — failing = DQ |
