@@ -1,0 +1,23 @@
+{
+  "name": "@bloop/server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bloop/protocol": "workspace:*",
+    "hono": "^4.12.0",
+    "obscenity": "^0.4.6"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.12.21",
+    "@cloudflare/workers-types": "^4.20260610.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.0",
+    "wrangler": "^4.72.0"
+  }
+}
