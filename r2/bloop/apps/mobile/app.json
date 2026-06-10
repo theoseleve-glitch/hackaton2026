@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "bloop",
+    "slug": "bloop",
+    "version": "0.0.1",
+    "scheme": "bloop",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": { "image": "./assets/splash-icon.png", "resizeMode": "contain", "backgroundColor": "#FFF9F0" },
+    "android": { "adaptiveIcon": { "foregroundImage": "./assets/android-icon-foreground.png", "backgroundColor": "#FFF9F0" } },
+    "plugins": ["expo-router"]
+  }
+}
