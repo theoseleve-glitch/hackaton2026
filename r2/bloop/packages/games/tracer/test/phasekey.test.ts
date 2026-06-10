@@ -52,4 +52,12 @@ describe('tracer.phaseKey', () => {
       for (const p of players) expect(key).not.toContain(p);
     }
   });
+
+  it('flips vote->reveal on the all-voted early-resolution path too', () => {
+    let state = tracer.init('s', players, content);
+    state = tracer.reduce(state, { type: 'action', playerId: 'p1', action: { kind: 'vote', target: 'p2' }, at: 0 }).state;
+    state = tracer.reduce(state, { type: 'action', playerId: 'p2', action: { kind: 'vote', target: 'p1' }, at: 1 }).state;
+    state = tracer.reduce(state, { type: 'action', playerId: 'p3', action: { kind: 'vote', target: 'p1' }, at: 2 }).state;
+    expect(tracer.phaseKey(state)).toBe('reveal:0');
+  });
 });

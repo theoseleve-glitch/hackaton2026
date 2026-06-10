@@ -24,4 +24,9 @@ describe('normalizeText', () => {
     expect(once).toBe('numero 10');
     expect(normalizeText(once)).toBe(once);
   });
+
+  it('documents the ligature limit: œ/ß pass through undecomposed', () => {
+    expect(normalizeText('cœur')).toBe('cœur');
+    expect(normalizeText('cœur')).not.toBe(normalizeText('coeur'));
+  });
 });

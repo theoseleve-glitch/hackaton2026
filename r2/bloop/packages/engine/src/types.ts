@@ -58,7 +58,9 @@ export interface GameModule<S, A, V, C = unknown> {
    * arriving mid-vote-phase). Deterministic from state only — no clock, no
    * randomness. Treat the string as logged: it must NEVER embed a secret
    * (words, roles, ballots, answers). Convention: colon-delimited segments,
-   * e.g. "vote:0", "reveal:2"; the terminal phase is the bare string "over".
+   * e.g. "vote:0", "reveal:2" — richer multi-segment schemes are welcome for
+   * per-turn/per-beat games ("clue:r0:t3", "reveal:r1:gold"); the terminal
+   * phase is the bare string "over".
    */
   phaseKey(state: S): string;
 }
