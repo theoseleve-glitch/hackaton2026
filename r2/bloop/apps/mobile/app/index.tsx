@@ -7,6 +7,7 @@ import type { PlayerProfile } from '@bloop/protocol';
 import { AVATARS } from '../src/avatars';
 import { Avatar } from '../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton, ToastHost } from '../src/components/ui';
+import { GameCarousel } from '../src/components/GameCarousel';
 import { CodeInput } from '../src/components/room';
 import { roomsUrl, SERVER_URL } from '../src/config';
 import type { SessionToast } from '../src/net/session';
@@ -21,6 +22,7 @@ export default function Home() {
   const [code, setCode] = useState('');
   const [creating, setCreating] = useState(false);
   const [toast, setToast] = useState<SessionToast | null>(null);
+  const [soonMsg, setSoonMsg] = useState<string | null>(null);
   const oops = (text: string) => setToast((t) => ({ seq: (t?.seq ?? 0) + 1, kind: 'error', text }));
 
   useEffect(() => {
@@ -70,6 +72,18 @@ export default function Home() {
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: tokens.layout.screenPadding, gap: tokens.spacing.xxl, alignItems: 'stretch' }}>
           <AppText role="titleL" style={{ textAlign: 'center', marginTop: tokens.spacing.xxl }}>BLOOP 🫧</AppText>
+
+          {/* Game carousel hero */}
+          <GameCarousel
+            onPlay={() => { void createRoom(); }}
+            onSoon={(_id) => {
+              setSoonMsg('Coming soon 👀');
+              setTimeout(() => setSoonMsg(null), 2_000);
+            }}
+          />
+          {soonMsg !== null && (
+            <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>{soonMsg}</AppText>
+          )}
 
           {/* Identity card — the only "onboarding" (§4.2) */}
           <View style={{ backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding, gap: tokens.spacing.lg, ...tokens.elevation.e1 }}>
