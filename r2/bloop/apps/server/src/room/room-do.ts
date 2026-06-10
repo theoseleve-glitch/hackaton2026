@@ -256,13 +256,24 @@ export class RoomDO extends DurableObject<Env> {
     // stable token for the seat's life (design §9.3 default; rotation deferred)
     this.send(ws, { type: 'welcome', playerId: seat.playerId, reconnectToken: token });
     this.broadcastLobby(); // the resync: fresh lobby right after welcome
+    // Mid-game resync (§3.5): offer playerRejoined to the module (most ignore
+    // it — I4 then skips append/broadcast), and ALWAYS send the returning
+    // phone its current personal view so it catches up regardless.
+    const meta = this.store.getMeta();
+    if (meta !== null && meta.gameId !== null && meta.status !== 'lobby') {
+      const rt = this.rehydrate();
+      if (rt !== null) {
+        await this.applyEvent(rt, { type: 'playerRejoined', playerId: seat.playerId, at: now });
+        this.sendView(ws, rt, seat.playerId, this.store.getMeta()?.deadlineAt ?? null);
+      }
+    }
     await this.armAlarm(); // drop the now-moot grace deadline eagerly
   }
 
-  private onLeave(ws: WebSocket, att: Attachment): void {
+  private async onLeave(ws: WebSocket, att: Attachment): Promise<void> {
     if (att.state === 'joined' && att.playerId !== undefined) {
       const seat = this.store.getSeat(att.playerId);
-      if (seat !== null) this.removeSeat(seat, Date.now());
+      if (seat !== null) await this.seatDeparted(seat, Date.now());
     }
     ws.serializeAttachment({ cid: att.cid, state: 'pending' } satisfies Attachment);
     ws.close(1000, 'bye');
@@ -329,7 +340,17 @@ export class RoomDO extends DurableObject<Env> {
   private async fireGrace(playerId: string, now: number): Promise<void> {
     const seat = this.store.getSeat(playerId);
     if (seat === null || seat.graceUntil === null || seat.graceUntil > now) return;
-    this.removeSeat(seat, now); // Task 6 upgrades this to seatDeparted (playerLeft game event)
+    await this.seatDeparted(seat, now);
+  }
+
+  /** Leave/grace-expiry shared path (design §4 roster events): free the seat (host migration + lobby), then surface the departure to a running game as a playerLeft event. Tracer ignores it (I4 keeps the log clean); presence-aware games react. */
+  private async seatDeparted(seat: Seat, now: number): Promise<void> {
+    const playing = this.store.getMeta()?.status === 'playing';
+    this.removeSeat(seat, now);
+    if (playing) {
+      const rt = this.rehydrate();
+      if (rt !== null) await this.applyEvent(rt, { type: 'playerLeft', playerId: seat.playerId, at: now });
+    }
   }
 
   /** TTL: re-checks PERSISTED idleness — a grace fired earlier in this sweep refreshed lastActivityAt and saves the room. Destroy is terminal: a retry no-ops on null meta. */
