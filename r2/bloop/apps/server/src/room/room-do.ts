@@ -7,6 +7,7 @@ import { acceptsProtocol } from './protocol-window.js';
 import { sanitizeNickname } from './profanity.js';
 import { pickNextHost } from './host.js';
 import { lookupGame, type GameEntry } from './registry.js';
+import { RateLimiter } from './ratelimit.js';
 import { Store, type Seat } from './store.js';
 import { hashToken, newReconnectToken } from './tokens.js';
 
@@ -39,6 +40,8 @@ function safeJson(raw: string): unknown {
 export class RoomDO extends DurableObject<Env> {
   private readonly store: Store;
   private game: GameRuntime | null = null;
+  /** §7.4 per-connection buckets, keyed by attachment cid. In-memory by design — see ratelimit.ts: hibernation implies idleness implies a full bucket. */
+  private readonly limiters = new Map<string, RateLimiter>();
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
@@ -78,9 +81,25 @@ export class RoomDO extends DurableObject<Env> {
     return new Response(null, { status: 101, webSocket: pair[0] });
   }
 
-  /** The single input boundary (§3.3): size cap -> zod -> route. Token-bucket rate limit: Plan 2d. */
+  private limiterFor(cid: string): RateLimiter {
+    let lim = this.limiters.get(cid);
+    if (lim === undefined) {
+      lim = new RateLimiter();
+      this.limiters.set(cid, lim);
+    }
+    return lim;
+  }
+
+  /** The single input boundary (§3.3/§7.4): rate limit FIRST -> size cap -> zod -> route. */
   async webSocketMessage(ws: WebSocket, raw: string | ArrayBuffer): Promise<void> {
     const att = ws.deserializeAttachment() as Attachment;
+    // (0) Token bucket BEFORE any parsing — a flood must cost us ~nothing (§7.4).
+    const verdict = this.limiterFor(att.cid).check(Date.now());
+    if (verdict !== 'ok') {
+      if (verdict === 'warn') this.sendError(ws, 'BAD_MESSAGE'); // once per connection, then silence
+      else if (verdict === 'close') ws.close(1008, 'rate-limit'); // sustained abuse: policy violation
+      return; // 'drop': silent
+    }
     if (typeof raw !== 'string' || raw.length > MAX_MSG_CHARS) return this.sendError(ws, 'BAD_MESSAGE');
     const parsed = clientMessageSchema.safeParse(safeJson(raw));
     if (!parsed.success) return this.sendError(ws, 'BAD_MESSAGE');
@@ -283,6 +302,7 @@ export class RoomDO extends DurableObject<Env> {
 
   async webSocketClose(ws: WebSocket): Promise<void> {
     const att = ws.deserializeAttachment() as Attachment;
+    this.limiters.delete(att.cid); // bucket dies with the socket (cids are never reused)
     if (att.state !== 'joined' || att.playerId === undefined) return; // pending/left/superseded
     const seat = this.store.getSeat(att.playerId);
     if (seat === null || !seat.connected) return; // already removed or already in grace
@@ -408,6 +428,7 @@ export class RoomDO extends DurableObject<Env> {
     await this.ctx.storage.deleteAlarm();
     await this.ctx.storage.deleteAll();
     this.game = null; // the in-memory runtime dies with the room
+    this.limiters.clear(); // C3 hygiene: no stale buckets on this immortal DO id
     this.store.migrate();
   }
 
