@@ -222,7 +222,9 @@ class EcoScoringEngine {
     }
 
     final km = totalMeters / 1000.0;
-    final safeKm = km <= 0 ? 1e-9 : km;
+    // Per-km event rates are unreliable below ~1 km (a couple of events on a
+    // very short hop would otherwise crush the score), so floor the denominator.
+    final safeKm = math.max(km, 1.0);
 
     final mean =
         speeds.isEmpty ? 0.0 : speeds.reduce((s, e) => s + e) / speeds.length;
