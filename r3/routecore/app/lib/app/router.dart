@@ -8,6 +8,7 @@ import '../features/routing/presentation/home_screen.dart';
 import '../features/routing/presentation/route_options_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/tracking/presentation/tracking_screens.dart';
+import '../product_modules/echappee/presentation/design_system_preview_screen.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
 import '../product_modules/terroir/presentation/terroir_screens.dart';
 
@@ -38,13 +39,16 @@ final routerProvider = Provider<GoRouter>((ref) {
           builder: (_, state) =>
               TripSummaryScreen(tripId: state.pathParameters['tripId']!)),
       GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
-      // --- product module: Terroir ---
+      // --- product module: Terroir (marque: L'Échappée) ---
       GoRoute(
           path: '/terroir/plan',
           builder: (_, __) => const TerroirPlanScreen()),
       GoRoute(
           path: '/terroir/results',
           builder: (_, __) => const TerroirResultsScreen()),
+      GoRoute(
+          path: '/echappee/design',
+          builder: (_, __) => const EchappeeDesignSystemPreviewScreen()),
       // --- product module: EcoDrive ---
       GoRoute(
           path: '/ecodrive/compare',

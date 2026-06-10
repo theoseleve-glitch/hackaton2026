@@ -30,7 +30,7 @@ const productHomeEntries = [
   ProductHomeEntry(
     mode: ProductContext.terroir,
     icon: Icons.local_florist,
-    title: 'Mode Terroir — trajets de découverte locale',
+    title: 'L\'Échappée — le GPS des routes qui respirent',
     route: '/terroir/plan',
   ),
   ProductHomeEntry(

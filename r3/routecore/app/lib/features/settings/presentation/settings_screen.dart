@@ -69,6 +69,13 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const Divider(),
           ListTile(
+            leading: const Icon(Icons.palette_outlined),
+            title: const Text('Design system L\'Échappée'),
+            subtitle: const Text('Vitrine des composants (dev)'),
+            onTap: () => context.push('/echappee/design'),
+          ),
+          const Divider(),
+          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Se déconnecter'),
             onTap: () async {
