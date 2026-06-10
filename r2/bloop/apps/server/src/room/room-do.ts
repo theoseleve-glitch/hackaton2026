@@ -12,6 +12,10 @@ export const MAX_PLAYERS = 16;
 export const MAX_MSG_CHARS = 4096;
 /** Disconnect grace (§3.5): inside the spec's 60–120s band. */
 export const GRACE_MS = 90_000;
+/** §5.4: idle rooms are janitored after 45 min; codes become reusable. */
+export const ROOM_TTL_MS = 45 * 60_000;
+/** Created-but-never-joined rooms free their code fast (replaces the design's reserved-code sweep — I3 removed the 'reserved' state). */
+export const UNBORN_TTL_MS = 120_000;
 
 /** Hibernation attachment: IDs ONLY (real limit 16 KiB — review I1). Profiles/host/grace live in SQLite roster, so attachment and roster cannot drift. */
 interface Attachment { cid: string; playerId?: string; state: 'pending' | 'joined' }
@@ -44,6 +48,7 @@ export class RoomDO extends DurableObject<Env> {
     // may still hold hibernating sockets from a previous party. Evict them.
     this.closeAllSockets(1011, 'stale-room');
     this.store.setMeta({ code: input.code, protocolVersion: input.protocolVersion, status: 'lobby', createdAt: input.createdAt, lastActivityAt: input.createdAt });
+    await this.armAlarm(); // unborn-TTL horizon from birth — no alarm-less zombie rooms
     return { created: true, protocolVersion: input.protocolVersion };
   }
 
@@ -172,6 +177,14 @@ export class RoomDO extends DurableObject<Env> {
         this.removeSeat(seat, now);
       }
     }
+    // TTL janitor (§5.4): empty rooms get the short unborn window, otherwise 45
+    // min idle. removeSeat above refreshes lastActivityAt, so a just-emptied
+    // room lives one more unborn window before the wipe.
+    const latest = this.store.getMeta();
+    if (latest !== null) {
+      const ttl = this.store.rosterSize() === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS;
+      if (now - latest.lastActivityAt >= ttl) await this.destroyRoom();
+    }
   }
 
   async alarm(): Promise<void> {
@@ -198,14 +211,34 @@ export class RoomDO extends DurableObject<Env> {
     return null;
   }
 
-  /** Single alarm = earliest pending deadline. Task 7 adds the TTL horizon. */
+  /**
+   * Single alarm = earliest pending deadline (grace deadlines vs the TTL
+   * horizon). Activity does NOT re-arm eagerly: an early alarm just sweeps
+   * nothing and re-arms later — the design §6.2 ttl-branch pattern.
+   */
   private async armAlarm(): Promise<void> {
-    let earliest: number | null = null;
+    const meta = this.store.getMeta();
+    if (meta === null) { await this.ctx.storage.deleteAlarm(); return; }
+    let earliest = meta.lastActivityAt + (this.store.rosterSize() === 0 ? UNBORN_TTL_MS : ROOM_TTL_MS);
     for (const seat of this.store.listSeats()) {
-      if (seat.graceUntil !== null && (earliest === null || seat.graceUntil < earliest)) earliest = seat.graceUntil;
+      if (seat.graceUntil !== null && seat.graceUntil < earliest) earliest = seat.graceUntil;
     }
-    if (earliest === null) await this.ctx.storage.deleteAlarm();
-    else await this.ctx.storage.setAlarm(earliest);
+    await this.ctx.storage.setAlarm(earliest);
+  }
+
+  /**
+   * Review C3 fix, in THIS order: close every socket (hibernating ones
+   * included — deleteAll does not terminate them), THEN deleteAlarm (deleteAll
+   * does not clear it, and a dangling alarm would wake the wiped room), THEN
+   * deleteAll, THEN re-create the empty schema so this immortal DO instance
+   * keeps serving — the next createRoom() on this code finds a cleanly
+   * claimable object.
+   */
+  private async destroyRoom(): Promise<void> {
+    this.closeAllSockets(1000, 'room-closed');
+    await this.ctx.storage.deleteAlarm();
+    await this.ctx.storage.deleteAll();
+    this.store.migrate();
   }
 
   // ---- outbound ----
