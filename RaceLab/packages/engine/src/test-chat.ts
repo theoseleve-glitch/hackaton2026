@@ -1,7 +1,10 @@
-import { RaceEngineerChat } from "./chat.js";
-import type { ContextBundle } from "./types.js";
+import { RaceEngineerChat } from "./chat";
+import { loadKBData } from "./node-kb";
+import type { ContextBundle } from "./types";
 
 /** Scripted conversation test for the deterministic chatbot (D18). */
+
+const data = loadKBData();
 
 function freshBundle(): ContextBundle {
   return {
@@ -26,7 +29,7 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
 
 // 1. Full happy path: complaint with phase → one change → worse → revert + next → better
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   expect("greets with session context", chat.greeting(), /green grip clay/);
   const r1 = chat.handle("it pushes mid-corner everywhere");
   expect("one change proposed with citation", r1, /Try ONE change[\s\S]*source: kb-/);
@@ -39,7 +42,7 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
 
 // 2. Missing phase → clarifying question → phase answer → recommendation
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   const r1 = chat.handle("the car is loose");
   expect("asks WHEN when phase missing", r1, /When does it do that\?/);
   const r2 = chat.handle("on power out of corners");
@@ -48,14 +51,14 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
 
 // 3. Engine-scope refusal (D13)
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   const r = chat.handle("should I lean the HSN? engine keeps flaming out");
   expect("nitro needle question refused", r, /🚫.*Engine tuning/s);
 }
 
 // 4. Race-day mode filters to fast-reversible
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   chat.handle("race day");
   const r = chat.handle("no forward bite out of corners");
   expect("race-day still answers (fast-reversible exists)", r, /Try ONE change|stick with what you have/i);
@@ -63,14 +66,14 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
 
 // 5. Unparseable input → re-prompt, not nonsense
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   const r = chat.handle("the vibes are off");
   expect("unknown symptom → asks again", r, /couldn't pin the symptom/);
 }
 
 // 6. New problem mid-outcome is handled
 {
-  const chat = new RaceEngineerChat(freshBundle());
+  const chat = new RaceEngineerChat(freshBundle(), data);
   chat.handle("pushes mid corner");
   const r = chat.handle("actually now it bounces through the braking bumps");
   expect("new problem interrupts outcome loop", r, /Try ONE change/);

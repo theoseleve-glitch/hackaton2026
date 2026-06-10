@@ -1,9 +1,9 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadRules } from "./kb.js";
-import { recommend } from "./engineer.js";
-import type { ContextBundle, Recommendation } from "./types.js";
+import { loadKBData } from "./node-kb";
+import { recommend } from "./engineer";
+import type { ContextBundle, Recommendation } from "./types";
 
 interface Scenario {
   name: string;
@@ -17,7 +17,8 @@ interface Scenario {
 
 const scenariosDir = join(dirname(fileURLToPath(import.meta.url)), "..", "scenarios");
 const files = readdirSync(scenariosDir).filter((f) => f.endsWith(".json")).sort();
-const kbIds = new Set(loadRules().map((r) => r.id));
+const kbData = loadKBData();
+const kbIds = new Set(kbData.rules.map((r) => r.id));
 
 let passed = 0;
 const failures: string[] = [];
@@ -27,7 +28,7 @@ for (const file of files) {
   const problems: string[] = [];
   let rec: Recommendation;
   try {
-    rec = recommend(scenario.bundle);
+    rec = recommend(scenario.bundle, kbData);
   } catch (err) {
     failures.push(`✗ ${file}: threw ${(err as Error).message}`);
     console.log(`✗ ${scenario.name} — THREW`);

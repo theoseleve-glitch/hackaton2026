@@ -4,7 +4,7 @@ import type {
   KBRule,
   RecommendationOption,
   Taxonomy,
-} from "./types.js";
+} from "./types";
 
 /** D13: engine/needle questions get a hard canned refusal — checked BEFORE anything else. */
 export function engineScopeViolation(bundle: ContextBundle, taxonomy: Taxonomy): string | null {

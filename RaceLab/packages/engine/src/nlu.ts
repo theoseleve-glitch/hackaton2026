@@ -1,4 +1,4 @@
-import type { FeedbackTag } from "./types.js";
+import type { FeedbackTag } from "./types";
 
 /**
  * Deterministic NLU (D18): driver free text → feedback tags + condition hints.

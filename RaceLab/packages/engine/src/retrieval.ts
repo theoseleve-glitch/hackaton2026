@@ -1,4 +1,4 @@
-import type { ChassisTemplate, ContextBundle, KBRule } from "./types.js";
+import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
 
 export interface ScoredRule {
   rule: KBRule;

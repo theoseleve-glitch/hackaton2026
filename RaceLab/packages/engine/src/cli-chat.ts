@@ -1,7 +1,8 @@
 import { createInterface } from "node:readline/promises";
 import { readFileSync } from "node:fs";
-import { RaceEngineerChat } from "./chat.js";
-import type { ContextBundle } from "./types.js";
+import { RaceEngineerChat } from "./chat";
+import { loadKBData } from "./node-kb";
+import type { ContextBundle } from "./types";
 
 const file = process.argv.slice(2).find((a) => !a.startsWith("--"));
 
@@ -26,7 +27,7 @@ const bundle: ContextBundle = file
   ? (JSON.parse(readFileSync(file, "utf8")).bundle as ContextBundle)
   : defaultBundle;
 
-const chat = new RaceEngineerChat(bundle);
+const chat = new RaceEngineerChat(bundle, loadKBData());
 for (const line of chat.greeting()) console.log(line);
 
 const rl = createInterface({ input: process.stdin, output: process.stdout });

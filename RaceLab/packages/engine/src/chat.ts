@@ -1,9 +1,9 @@
-import { loadChassisTemplate, loadRules, loadTaxonomy } from "./kb.js";
-import { parseFeedback } from "./nlu.js";
-import { retrieve } from "./retrieval.js";
-import { engineScopeViolation, raceDayFilter, DO_NOTHING_MESSAGE } from "./guard.js";
-import { conditionsEcho, ruleToOption } from "./offline.js";
-import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types.js";
+import { getTemplate, type KBData } from "./data";
+import { parseFeedback } from "./nlu";
+import { retrieve } from "./retrieval";
+import { engineScopeViolation, raceDayFilter, DO_NOTHING_MESSAGE } from "./guard";
+import { conditionsEcho, ruleToOption } from "./offline";
+import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types";
 
 /**
  * RaceLab's deterministic race-engineer chatbot (D18) — no API, no model.
@@ -26,13 +26,13 @@ export class RaceEngineerChat {
   private pendingSymptoms: FeedbackTag[] = [];
   private queue: RecommendationOption[] = [];
   private current?: RecommendationOption;
-  private taxonomy = loadTaxonomy();
-  private rules = loadRules();
+  private data: KBData;
   private template;
 
-  constructor(bundle: ContextBundle) {
+  constructor(bundle: ContextBundle, data: KBData) {
     this.bundle = bundle;
-    this.template = loadChassisTemplate(bundle.chassis_template_id);
+    this.data = data;
+    this.template = getTemplate(data, bundle.chassis_template_id);
   }
 
   greeting(): string[] {
@@ -54,7 +54,7 @@ export class RaceEngineerChat {
     // engine-scope refusal beats everything (D13)
     const refusal = engineScopeViolation(
       { ...this.bundle, question: input, feedback: { tags: [], text: input } },
-      this.taxonomy,
+      this.data.taxonomy,
     );
     if (refusal) return [`🚫 ${refusal}`];
 
@@ -151,7 +151,7 @@ export class RaceEngineerChat {
 
   private recommendFor(tags: FeedbackTag[]): string[] {
     this.bundle.feedback = { tags, text: "" };
-    let scored = retrieve(this.rules, this.bundle, this.template);
+    let scored = retrieve(this.data.rules, this.bundle, this.template);
     if (this.bundle.mode === "race_day") {
       scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
     }

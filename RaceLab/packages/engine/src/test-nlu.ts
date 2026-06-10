@@ -1,4 +1,4 @@
-import { parseFeedback } from "./nlu.js";
+import { parseFeedback } from "./nlu";
 
 interface Case {
   text: string;

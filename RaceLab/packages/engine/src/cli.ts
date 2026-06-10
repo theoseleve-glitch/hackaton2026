@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
-import { recommend } from "./engineer.js";
-import type { ContextBundle, Recommendation, RecommendationOption } from "./types.js";
+import { recommend } from "./engineer";
+import { loadKBData } from "./node-kb";
+import type { ContextBundle, Recommendation, RecommendationOption } from "./types";
 
 const file = process.argv.slice(2).find((a) => !a.startsWith("--"));
 
@@ -10,7 +11,7 @@ if (!file) {
 }
 
 const bundle = JSON.parse(readFileSync(file, "utf8")).bundle as ContextBundle;
-render(recommend(bundle));
+render(recommend(bundle, loadKBData()));
 
 function render(rec: Recommendation): void {
   console.log(`\n🏁 RaceLab Race Engineer  [${rec.source}]`);

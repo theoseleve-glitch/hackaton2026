@@ -1,36 +1,31 @@
-import { loadChassisTemplate, loadRules, loadTaxonomy, validateRulesAgainstTaxonomy } from "./kb.js";
-import { retrieve } from "./retrieval.js";
+import { getTemplate, type KBData } from "./data";
+import { retrieve } from "./retrieval";
 import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
   raceDayFilter,
-} from "./guard.js";
-import { buildOfflineCard, conditionsEcho } from "./offline.js";
-import type { ContextBundle, Recommendation } from "./types.js";
+} from "./guard";
+import { buildOfflineCard, conditionsEcho } from "./offline";
+import type { ContextBundle, Recommendation } from "./types";
 
 /**
- * The pipeline of docs/04 §4 (D18: fully deterministic, no API):
+ * The pipeline of docs/04 §4 (D18: fully deterministic, no API, no I/O):
  * scope check → deterministic retrieval → race-day filter → templated card.
- * Every card is built directly from retrieved KB rules, so citations are
- * valid and settings template-known by construction.
+ * Pure function of (bundle, data) — runs identically in node and in the app.
  */
-export function recommend(bundle: ContextBundle): Recommendation {
-  const taxonomy = loadTaxonomy();
-  const rules = loadRules();
-  const kbErrors = validateRulesAgainstTaxonomy(rules, taxonomy);
-  if (kbErrors.length > 0) throw new Error(`KB validation failed:\n${kbErrors.join("\n")}`);
-  const template = loadChassisTemplate(bundle.chassis_template_id);
+export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
+  const template = getTemplate(data, bundle.chassis_template_id);
   const echo = conditionsEcho(bundle);
 
   // 1. Engine-scope refusal (D13) — before anything else
-  const refusal = engineScopeViolation(bundle, taxonomy);
+  const refusal = engineScopeViolation(bundle, data.taxonomy);
   if (refusal) {
     return { kind: "refusal", source: "offline_deterministic", message: refusal, conditions_echo: echo };
   }
 
   // 2. Deterministic retrieval
-  let scored = retrieve(rules, bundle, template);
+  let scored = retrieve(data.rules, bundle, template);
 
   // 3. Race-day mode: filter the candidate pool BEFORE choosing
   if (bundle.mode === "race_day") {

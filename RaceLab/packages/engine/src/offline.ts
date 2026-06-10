@@ -1,5 +1,5 @@
-import type { ContextBundle, KBRule, RecommendationOption } from "./types.js";
-import type { ScoredRule } from "./retrieval.js";
+import type { ContextBundle, KBRule, RecommendationOption } from "./types";
+import type { ScoredRule } from "./retrieval";
 
 /**
  * Offline deterministic path (D13): each KB rule already carries everything the
