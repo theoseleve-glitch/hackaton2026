@@ -1,11 +1,26 @@
+import type { GameEvent } from '@bloop/engine';
 import type { PlayerProfile } from '@bloop/protocol';
+
+/** Stamped on every event row; bump + write an upcaster when event/state shapes change (§5.3 — upcasters are a later seam). */
+export const EVENTS_SCHEMA_VERSION = 1;
+
+export interface ContentRef { gameId: string; contentId: string; version: number }
 
 export interface RoomMeta {
   code: string;
   protocolVersion: number; // pinned at creation, never re-pinned (§3.3/§7.3)
-  status: 'lobby'; // 2c adds 'playing' | 'roundOver' | 'ended' with the game loop
+  status: 'lobby' | 'playing' | 'roundOver' | 'ended'; // 'ended' reserved for an explicit close flow
   createdAt: number;
-  lastActivityAt: number; // drives the TTL janitor (§5.4)
+  lastActivityAt: number; // TTL janitor truth (§5.4); bumped on EVERY applied game event (Task 8)
+  // -- game binding (null until startGame) --
+  gameId: string | null;
+  gameVersion: number | null;
+  seed: string | null; // crypto-random at startGame; reused by every replay
+  contentRef: ContentRef | null; // which pack init used (static built-in for 2c; R2 later)
+  roster: string[] | null; // FROZEN player order at init (engine: roster fixed at init)
+  // -- phase/timer authority (written on every phase entry) --
+  phaseKey: string | null; // alarm idempotency guard (§6)
+  deadlineAt: number | null; // absolute ms; survives eviction — never recomputed from "now"
 }
 
 export interface Seat {
@@ -27,13 +42,20 @@ interface RosterRow extends Record<string, SqlStorageValue> {
 export class Store {
   constructor(private readonly sql: SqlStorage) {}
 
-  /** Idempotent; re-run after destroyRoom() and at createRoom() entry (C3 ghost states). 2c adds events/snapshots tables (§5.1) here. */
+  /** Idempotent; re-run after destroyRoom() and at createRoom() entry (C3 ghost states). */
   migrate(): void {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS room_meta (k TEXT PRIMARY KEY, v TEXT NOT NULL)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS roster (
       player_id TEXT PRIMARY KEY, profile_json TEXT NOT NULL, is_host INTEGER NOT NULL,
       connected INTEGER NOT NULL, reconnect_hash TEXT NOT NULL, joined_at INTEGER NOT NULL,
       grace_until INTEGER
+    )`);
+    // §5.1 event log. Plain INTEGER PRIMARY KEY (rowid): we only ever wipe the
+    // WHOLE log (clearEvents), never delete rows, so AUTOINCREMENT's
+    // no-rowid-reuse guarantee buys nothing. No snapshots table: C1 — replay-from-zero.
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS events (
+      seq INTEGER PRIMARY KEY, at INTEGER NOT NULL, kind TEXT NOT NULL,
+      payload_json TEXT NOT NULL, schema_version INTEGER NOT NULL
     )`);
   }
 
@@ -90,6 +112,29 @@ export class Store {
   /** Exactly one host: flips is_host on for playerId, off for everyone else. */
   setHost(playerId: string): void {
     this.sql.exec(`UPDATE roster SET is_host = (player_id = ?)`, playerId);
+  }
+
+  /** A single synchronous INSERT — commits with the turn, BEFORE any broadcast (§5.2). */
+  appendEvent(event: GameEvent<unknown>): void {
+    this.sql.exec(
+      `INSERT INTO events (at, kind, payload_json, schema_version) VALUES (?, ?, ?, ?)`,
+      event.at, event.type, JSON.stringify(event), EVENTS_SCHEMA_VERSION,
+    );
+  }
+
+  /** Full log in seq order. Parsed events feed ONLY reduce()/replay() — parsed JSON never becomes live state itself (C1). */
+  listEvents(): GameEvent<unknown>[] {
+    return this.sql.exec<{ payload_json: string }>(`SELECT payload_json FROM events ORDER BY seq ASC`)
+      .toArray().map((r) => JSON.parse(r.payload_json) as GameEvent<unknown>);
+  }
+
+  eventCount(): number {
+    return Number(this.sql.exec<{ n: number }>(`SELECT COUNT(*) AS n FROM events`).one().n);
+  }
+
+  /** startGame wipes the previous game's log — game N's events must never replay into game N+1. */
+  clearEvents(): void {
+    this.sql.exec(`DELETE FROM events`);
   }
 }
 

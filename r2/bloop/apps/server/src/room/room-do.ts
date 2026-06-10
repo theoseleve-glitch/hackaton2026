@@ -47,7 +47,12 @@ export class RoomDO extends DurableObject<Env> {
     // C3: idFromName(code) is immortal — a freed code reuses THIS object, which
     // may still hold hibernating sockets from a previous party. Evict them.
     this.closeAllSockets(1011, 'stale-room');
-    this.store.setMeta({ code: input.code, protocolVersion: input.protocolVersion, status: 'lobby', createdAt: input.createdAt, lastActivityAt: input.createdAt });
+    this.store.setMeta({
+      code: input.code, protocolVersion: input.protocolVersion, status: 'lobby',
+      createdAt: input.createdAt, lastActivityAt: input.createdAt,
+      gameId: null, gameVersion: null, seed: null, contentRef: null, roster: null,
+      phaseKey: null, deadlineAt: null,
+    });
     await this.armAlarm(); // unborn-TTL horizon from birth — no alarm-less zombie rooms
     return { created: true, protocolVersion: input.protocolVersion };
   }
