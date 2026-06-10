@@ -53,25 +53,35 @@ sources: ["Kyosho MP11 manual p.34", "Tekno tuning guide §diffs"]
 scope: [1/8_offroad]           # some rules are class- or even chassis-specific
 ```
 
-Targets: **~150 rules** covering 1/8 + 1/10 offroad for V1 (diffs, shock oil/pistons/springs, sway bars, camber/toe/droop/ride height, ackermann, tires by surface, wing, gearing, weight distribution). Every rule reviewed by William before it can be cited. The KB is versioned in-repo (`packages/kb`) — rules are data, PRs are reviews.
+Targets: **~80 rules** for V1, 1/8 offroad first (D14): diffs, shock oil/pistons/springs, sway bars, camber/toe/droop/ride height, ackermann, tires by surface, wing, gearing, weight distribution. **Engine/needle rules are explicitly excluded in V1** (D13) — those questions get a canned refusal until a per-engine safe-range database exists. Every rule reviewed by William before it can be cited. The KB is versioned in-repo (`packages/kb`) — rules are data, PRs are reviews — **and ships inside the app bundle** for the offline path.
 
 ## 4. Pipeline (Théo owns)
 
 ```
-request → context bundle assembly (local data + weather API)
+request → context bundle assembly (local data + weather, cached/backfilled)
         → symptom mapping (tags → KB symptom nodes, deterministic)
-        → retrieval (KB rules matching symptom × setting-space × conditions × chassis scope)
-        → LLM call (Claude, structured output): reason over ONLY retrieved rules + bundle + history
+        → retrieval = PURE FUNCTION over the YAML KB (symptom × setting-space ×
+          conditions × chassis scope filter, capped at N rules) — NO vector store,
+          NO embeddings: ~80 structured rules don't need semantic search (D13)
+        → engine-scope check: engine/needle symptom → canned refusal, stop here (D13)
+        ├─ OFFLINE PATH (no signal — the default at most tracks):
+        │    top matched rule(s) → templated recommendation card rendered on-device
+        │    (each rule already carries effects, magnitude_guidance,
+        │     reversal_cost_minutes, confidence, sources). $0, instant.
+        │    Request queued for LLM enrichment when signal returns.
+        └─ ONLINE PATH:
+             LLM call (Claude, structured output): reason over ONLY retrieved rules
+             + bundle + history → multi-factor arbitration, tailored prose
         → guard layer (deterministic, post-LLM):
-            · numeric bounds per setting per chassis (hard floor/ceiling from template)
-            · safety-critical settings (nitro needles!): LLM may say direction, NEVER a number
-              beyond factory safe range; lean advice requires a temp reading present
-            · race-day mode: reject low-confidence or slow-to-reverse outputs → "stick with what you have"
+            · proposed value must exist in the chassis template's enum options /
+              numeric range (the template IS the bounds database — D13)
+            · race-day mode: reject low-confidence or slow-to-reverse outputs
+              → "stick with what you have"
         → response rendered with citations + confidence + revert info
         → outcome capture on next run (better/same/worse) → history store
 ```
 
-Notes: the LLM **cannot cite a rule that wasn't retrieved** (citation IDs validated against the retrieval set). If retrieval returns nothing relevant → honest refusal template: *"I don't have a verified rule for that. Closest thing I know: …"*. All AI calls server-side (key security, KB freshness, usage metering for the free-tier cap).
+Notes: the LLM **cannot cite a rule that wasn't retrieved** (citation IDs validated against the retrieval set). If retrieval returns nothing relevant → honest refusal template: *"I don't have a verified rule for that. Closest thing I know: …"*. LLM calls are server-side (key security, usage metering for the free-tier cap); the deterministic offline path runs entirely on-device against the bundled KB.
 
 ## 5. Output contract (structured, enforced via schema)
 
@@ -110,10 +120,10 @@ Used three ways: (1) injected into future prompts for this driver/track — *"la
 
 ## 8. Evaluation (gate before launch — William owns)
 
-- **Eval set: 50 real scenarios** (setup + conditions + symptom → known-good expert answer), built from our own racing + club experts + published pro guidance.
-- Pass bar: ≥80% expert-rated "would help or neutral", **0** dangerous outputs, 100% citation validity (every cited rule exists and was retrieved), refusal triggers correctly on all 5 out-of-KB traps included in the set.
-- Benchmark: same 50 scenarios fed to So Dialed's AI Mechanic and to vanilla ChatGPT — we publish nothing unless we visibly beat both.
-- Re-run on every KB/prompt/model change (CI job).
+- **Eval set: 25 real scenarios** (setup + conditions + symptom → known-good expert answer) **+ 5 out-of-KB traps** (D14), built from our own racing + 2 club fast-guys recruited as reviewers by week 2 (the same people who become founding creators — one ask, two roles).
+- Pass bar: ≥80% expert-rated "would help or neutral", **0** dangerous outputs, 100% citation validity (every cited rule exists and was retrieved), refusal triggers correctly on all 5 traps (incl. engine-tuning questions).
+- Benchmark: same scenarios fed to So Dialed's AI Mechanic and to vanilla ChatGPT — we publish nothing unless we visibly beat both. **The benchmark starts in week 1–2 with the throwaway AI prototype (D15), not in week 8.**
+- The eval harness is built alongside the prototype; re-run on every KB/prompt/model change (CI job).
 
 ## 9. Cost & free tier
 

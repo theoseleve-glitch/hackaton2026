@@ -1,29 +1,29 @@
 # 05 — Sharing & Social · Spec
 
-> The #2 differentiator ("Strava of RC"). V1 ships a deliberately lean social core — sharing, forking, profiles, follows — designed so the full Strava layer (feed, leaderboards, clubs — exploratory §A) can bolt on without remodeling. **Principle: utility first, social wraps utility.** Strava worked because the GPS log was useful alone; our setup vault + AI must be useful alone.
+> The #2 differentiator ("Strava of RC"). **Per D10, V1.0 ships only §1.1–1.2 (share link + fork/import); §1.3–1.4 (profiles, follows, props, comments) are V1.1** — fully specced here so the schema is built for them from day one, but not in the launch build. **Principle: utility first, social wraps utility.** Strava worked because the GPS log was useful alone; our setup vault + AI must be useful alone.
 
-## 1. V1 scope (committed)
+## 1. Scope (§1.1–1.2 = V1.0 · §1.3–1.4 = V1.1)
 
 ### 1.1 Publishing a setup
 - Visibility: **private** (default) · **unlisted** (share link) · **public** (discoverable).
 - A published setup carries its context, because a sheet without conditions is noise: chassis + class, track (optional), surface, grip, weather snapshot, date, the author's comments, and — when the run was logged — **attached results** (finish position, best lap; manual in V1, transponder-verified once lap import B2 lands).
 - **Embargo option**: "publish after the event" — racers hide their sheets before big races; respect the culture or the fast guys won't share.
-- Share link opens a clean read-only web view (the only web surface in V1) → every shared setup is a marketing page with an install CTA.
+- Share link opens a **static page embedding the rendered sheet (PDF/PNG from Blob) + install CTA** (D10). No public API, no schema-driven web renderer in V1.0 — the PDF pipeline already exists, the page is one template. The real read-only web view is V1.5. Publishing creates a **server-side snapshot at publish time** (D11) — shared sheets don't depend on live replication.
 
 ### 1.2 Browsing & importing ("fork")
 - Search/filter public setups: chassis → track → surface/conditions → recency/popularity.
 - **Import = fork**: the sheet copies into your garage with provenance kept ("forked from @driver's sheet, 2026-06-07, Track X"). The app immediately shows the **diff vs your current sheet** — and (exploratory C3) the AI explains which deltas matter for you.
 - Same-template forks map 1:1. Cross-version forks (MP10 → MP11) come later with the field-mapping layer (A1) — V1 blocks them with a clear message rather than silently mismapping.
 
-### 1.3 Profiles & following
+### 1.3 Profiles & following (V1.1)
 - Profile = identity: avatar, home track, classes raced, **garage** (chassis owned, photos), shared setups, race history (public results only).
 - **Follow** drivers. Notifications, deliberately scarce in V1 (2 types only): *driver you follow published a setup for a chassis you own* · *someone forked/commented your setup*. Chassis-scoped relevance beats a noisy firehose.
 - Privacy defaults: profile public, garage public, setups private, results public. Everything toggleable.
 
-### 1.4 Props & comments
+### 1.4 Props & comments (V1.1)
 - Threaded comments on shared setups — the pit-lane Q&A ("what pistons up front?") captured where the sheet lives. Author can pin an answer.
 - Props with RC-native reactions: **Dialed** 🔧 (clean/fast), **Send it** 🚀, **Tough break** 💥 (DNF empathy — half of nitro racing is carnage and commiseration is the glue).
-- Moderation V1: report button + author-deletes-on-own-setup + our admin tools. Nothing fancier until volume demands it.
+- Moderation (required by Apple UGC guideline 1.2 the moment comments ship): content filtering + report button + **block user** (hides their content, prevents interaction) + author-deletes-on-own-setup + admin tools + published contact info. This burden is exactly why comments are V1.1, not V1.0 (D10).
 
 ## 2. Why this beats So Dialed's sharing
 

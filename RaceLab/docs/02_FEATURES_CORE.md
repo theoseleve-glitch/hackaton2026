@@ -9,7 +9,7 @@
 ## Pillar 1 — Setup storage (MVP)
 
 ### 1.1 Garage
-- Add cars from a **chassis template catalog** (launch list ~15–20: Kyosho MP10/MP11, Associated RC8B4/B7, TLR 8IGHT-X/22 5.0, Tekno NB48/EB48 2.1, Mugen MBX8R, Xray XB8/XB4, Sworkz…). Car = template + name + photo + notes.
+- Add cars from a **chassis template catalog** (launch list **6–8 chassis** — the ones our clubs race, MP11 first; D14. Candidates: Kyosho MP11/MP10, Associated RC8B4, TLR 8IGHT-X, Tekno NB48 2.1, Mugen MBX8R, Xray XB8 — final pick by club survey). Car = template + name + photo + notes. More chassis post-launch = pure data (D5).
 - Each template ships with the **manufacturer kit setup** preloaded as the baseline sheet.
 
 ### 1.2 Setup sheets
@@ -17,11 +17,11 @@
 - CRUD: create, duplicate ("start from Q2 sheet"), rename, archive. Photos per sheet (chassis shots, shock build).
 - **Versioning**: every save is a version; the timeline of a car's setups is browsable. (This powers diffing and the AI's history — it is not optional polish.)
 
-### 1.3 Offline-first (hard requirement, D4)
-- All storage/editing/browsing of your own data works with **zero connectivity**. Local DB is source of truth; background sync when online. Only the AI call and social features may require network.
+### 1.3 Offline-first (hard requirement, D4 — architecture per D11)
+- All storage/editing/browsing of your own data works with **zero connectivity**. Local SQLite is the **only** source of truth; an append-only outbox backs up to the cloud when online; restore on fresh install. **No bidirectional sync in V1** — there is nothing to merge (one phone, immutable setup versions). Even the AI has an offline path (D13).
 
 ### 1.4 PDF export (V1)
-- Export any sheet onto the manufacturer's blank layout (pixel-faithful). Credibility feature — racers trust the familiar sheet — and the escape hatch that kills lock-in fear.
+- Export any sheet onto the manufacturer's blank layout — by **filling it, never redrawing it** (D12): AcroForm field-filling where the blank has form fields (MP11 does — verified), coordinate overlay on flat blanks. Per-chassis cost = a `pdf_map` data file. Generic RaceLab layout as fallback for unmapped chassis. Generated server-side (you print at home, not trackside).
 
 ---
 
@@ -45,18 +45,18 @@
 ## Pillar 3 — AI Race Engineer (V1) — full spec in `04_AI_RACE_ENGINEER_SPEC.md`
 
 - Chat + structured recommendations: *which component to change or modification to try*, given **track, surface, weather, grip, your current setup, your feedback, and your history**.
-- **Grounded on our curated tuning knowledge base via RAG** (D6) — every recommendation cites its cause→effect rule. Out-of-KB questions get an honest refusal, not a guess.
+- **Scope: chassis tuning only** (D13). Engine/needle questions get a hard canned refusal until V2's engine database exists.
+- **Grounded on our curated tuning knowledge base** (D6) — deterministic retrieval over ~80 YAML rules (no vector store); every recommendation cites its cause→effect rule. Out-of-KB questions get an honest refusal, not a guess.
+- **Works offline** (D13): the KB ships on-device; with no signal, a deterministic tag→rule lookup renders a templated recommendation card. The LLM adds prose and multi-factor arbitration when online; queued otherwise.
 - **Output contract**: ONE primary change (+ ≤2 ranked alternatives), each with: what & how much, the mechanism (why), expected effect, how to revert, confidence level.
 - **Learning loop**: after the next run, the user rates the change better/same/worse → stored as `(setup delta, conditions, outcome)` → future advice is personalized per driver and per track.
-- **Safety rails**: numeric bounds enforced *outside* the LLM for safety-critical settings (nitro needles especially); race-day mode only proposes high-confidence, fast-reversible changes.
+- **Safety rails**: every proposed value validated against the chassis template's enums/ranges *outside* the LLM; race-day mode only proposes high-confidence, fast-reversible changes.
 
-## Pillar 4 — Sharing / social (V1) — full spec in `05_SOCIAL_SPEC.md`
+## Pillar 4 — Sharing (V1.0 lean per D10) — full spec in `05_SOCIAL_SPEC.md`
 
-- **Publish a setup** (public / unlisted link / private), with conditions context and — when available — attached results.
-- **Browse & import**: find setups by chassis / track / conditions; import ("fork") one into your garage, the app shows the diff vs your current sheet.
-- **Profiles & following**: driver profile (garage, shared setups, race history); follow drivers; chassis-scoped notifications ("new MP11 setup from someone you follow").
-- **Props & comments** on shared setups — the pit-lane conversation, captured.
-- V1 social is deliberately lean: feed/clubs/leaderboards are exploratory (see `03 §A`) until the utility core is loved.
+- **Publish a setup** as an **unlisted share link** (or keep private), with conditions context and — when available — attached results. The link is a static page embedding the rendered sheet (PDF/PNG) + install CTA — no public API, no web app in V1.0.
+- **Import ("fork")**: open a shared setup in the app, import it into your garage with provenance kept; the app shows the diff vs your current sheet.
+- **V1.1+ (already specced, deliberately deferred):** public discovery/search, profiles & following, props, threaded comments (requires Apple UGC 1.2 compliance: filtering + report + block), chassis-scoped notifications. Feed/clubs/leaderboards remain exploratory (`03 §A`).
 
 ---
 
@@ -64,11 +64,12 @@
 
 | Feature | Detail |
 |---|---|
-| Auth | Email + Apple/Google sign-in (store requirement for social features) |
-| Track database | Create/search tracks: name, GPS, surface type (clay / hard-packed / loam / astro / carpet / grass), indoor/outdoor, photos, notes |
-| Subscriptions | Freemium per D9. Free: 2 cars, 10 setups, 5 AI recs/month, last-3-versions diff. **Pro $3.99/mo / $34.99/yr**: unlimited everything, full AI + learning loop, full history/analytics |
-| Platforms | iOS + Android (Expo/React Native), single codebase |
-| Languages | EN first; FR fast-follow (we're French — and France has a huge offroad scene) |
+| Auth | Email + Apple/Google sign-in. **Local data is never gated behind a live session** — cached user ID; only network calls need a fresh token (test the "airplane mode for 48h" path) |
+| Track database | Create/search tracks: name, GPS, surface type (clay / hard-packed / loam / astro / carpet / grass), indoor/outdoor, photos, notes. Weather backfilled from Open-Meteo's historical API at sync time when captured offline |
+| Monetization | **V1.0 launches free** (D16); AI capped at 5 recs/month server-side. **Pro $3.99/mo / $34.99/yr ships in V1.1** (unlimited AI + learning loop, unlimited cars/setups, full history) |
+| Store compliance | In-app account deletion, privacy policy, Play data-safety form — built in Phase 2, not bolted on at submission (D17) |
+| Platforms | iOS + Android (Expo/React Native), single codebase. Play closed test (14-day clock) running from week 4 |
+| Languages | i18n wired from the first screen, EN shipped; FR fast-follow = translation, not retrofit. AI answers in the user's locale; KB stays EN (D17) |
 
 ---
 
@@ -76,13 +77,17 @@
 
 So we never argue about it mid-build:
 
-- ❌ 600-chassis coverage (launch list only; community templates later)
+- ❌ 600-chassis coverage (6–8 at launch; community templates later)
 - ❌ Live timing integration (MyLaps/LiveRC import is exploratory — manual lap entry in V1)
 - ❌ Feed/clubs/leaderboards/challenges (exploratory §A)
+- ❌ Profiles, follows, props, comments, public discovery (V1.1 — D10)
+- ❌ Bidirectional multi-device sync (V2 — D11; V1 = backup/restore)
+- ❌ Subscriptions/payments (V1.1 — D16)
+- ❌ Engine/nitro-needle AI advice (V2 — D13)
 - ❌ Voice input, photo-based AI (tire wear, broken parts) (exploratory §C)
 - ❌ Onroad-specific depth (templates may exist, but tuning KB targets offroad first)
-- ❌ Web app (mobile only; share links open a read-only web view at most)
+- ❌ Web app / public API (share links are static PDF-backed pages — D10)
 
 ## V1 Definition of Done
 
-A racer can: create their car → load the kit setup → drive to a track with no signal → start a session → log a run with lap times and "pushes mid-corner" → *(network for this step)* get one grounded recommendation → apply it, comment it → mark it "better" → back home, publish the setup and a friend forks it. PDF export matches the manufacturer sheet. Both stores, subscriptions live.
+A racer can: create their car → load the kit setup → drive to a track with no signal → start a session → log a run with lap times and "pushes mid-corner" → get a grounded recommendation **even offline** (deterministic card; richer with signal) → apply it, comment it → mark it "better" → back home, share the setup link and a friend imports it into their app. PDF export fills the manufacturer sheet. Both stores live, free tier with server-metered AI.
