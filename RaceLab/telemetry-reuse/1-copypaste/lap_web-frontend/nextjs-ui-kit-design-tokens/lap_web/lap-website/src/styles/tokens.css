@@ -1,0 +1,353 @@
+:root {
+  /* ── Base Colors ──────────────────── */
+  --asphalt: #000000;
+  --concrete: #141414;
+  --chalk: #F0EDE5;
+  --steel: #949494;
+
+  /* ── Accent Colors ────────────────── */
+  --acid-green: #22C55E;
+  --safety-red: #FF2A2A;
+  --marshal-yellow: #FACC15;
+  --pit-orange: #C9A84C;
+  --racing-purple: #8B5CF6;
+  --racing-red: #DC2626;
+
+  /* ── Active accent (overridden per room via data-accent) ── */
+  --accent: var(--chalk);
+
+  /* ── Font Stacks ─────────────────── */
+  --font-display: "Space Grotesk", "Arial Black", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Space Mono", "Fira Code", "Courier New", monospace;
+
+  /* ── Typography Scale (rem, base = 16px) ── */
+  --text-monument-xl: clamp(3.75rem, 12vw, 12.25rem);
+  --text-h1: clamp(3rem, 6vw, 5.25rem);
+  --text-h2: clamp(2.25rem, 4vw, 3.5rem);
+  --text-h3: clamp(1.5rem, 2.5vw, 2rem);
+  --text-h4: clamp(1.25rem, 2vw, 1.5rem);
+  --text-h5: clamp(1.0625rem, 1.5vw, 1.25rem);
+  --text-h6: 1rem;
+  --text-body: clamp(1.0625rem, 1.3vw, 1.25rem);
+  --text-overline: 0.6875rem;
+  --text-caption: 0.8125rem;
+  --text-telemetry: 0.6875rem;
+  --text-tiny: 0.5625rem;
+
+  /* ── Line Heights ──────────────────── */
+  --lh-display: 0.85;
+  --lh-heading: 1.15;
+  --lh-body: 1.72;
+  --lh-label: 1.2;
+
+  /* ── Letter Spacing ────────────────── */
+  --ls-display: -0.02em;
+  --ls-wide: 0.12em;
+  --ls-medium: 0.08em;
+  --ls-xwide: 0.15em;
+
+  /* ── Max Line Length ───────────────── */
+  --max-prose: 65ch;
+  --max-wide: 90ch;
+  --max-tooltip: 18rem;
+
+  /* ── Muted Text (WCAG AA: 4.58:1 on #000) ── */
+  --text-muted: #9CA3AF;
+  --text-primary: var(--chalk);
+  --text-secondary: var(--steel);
+  --bg-primary: var(--asphalt);
+  --bg-secondary: var(--concrete);
+  --bg-tertiary: color-mix(in srgb, var(--concrete) 88%, var(--chalk));
+  --bg-hover: rgba(240, 237, 229, 0.06);
+  --bg-card: var(--concrete);
+  --green: var(--acid-green);
+  --success-dim: color-mix(in srgb, var(--acid-green) 20%, transparent);
+  --yellow: var(--marshal-yellow);
+  --red: var(--safety-red);
+  --blue: var(--chart-series-2);
+  --cyan: var(--chart-series-2);
+  --purple: var(--racing-purple);
+  --border: var(--border-color-default);
+  --border-subtle: var(--border-color-muted);
+  --accent-dim: color-mix(in srgb, var(--accent) 22%, transparent);
+  --font-telemetry: var(--font-mono);
+
+  /* ── Spacing (4px base unit) ─────── */
+  --space-px: 1px;
+  --space-0-5: 4px;
+  --space-1: 8px;
+  --space-1-5: 12px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  /* ── Grid ──────────────────────────── */
+  --grid-columns: 12;
+  --grid-gutter: clamp(20px, 2vw, 32px);
+  --grid-margin: clamp(16px, 6vw, 8vw);
+
+  /* ── Z-Layers ─────────────────────── */
+  --z-base: 0;
+  --z-panels: 10;
+  --z-stamps: 20;
+  --z-delta: 30;
+  --z-hud: 35;
+  --z-drs: 36;
+  --z-finish-line: 37;
+  --z-sector: 40;
+  --z-timecode: 50;
+  --z-nav: 60;
+  --z-overlay: 100;
+  --z-cursor: 999;
+
+  /* ── Timing ────────────────────────── */
+  --duration-micro: 420ms;
+  --duration-room: 900ms;
+  --duration-monument: 1400ms;
+  --duration-sector-gate: 400ms;
+  --duration-drs: 2000ms;
+  --duration-pit: 600ms;
+  --duration-finish: 600ms;
+
+  /* ── Easing ────────────────────────── */
+  --ease-inertia: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-anticipate: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* ── Narrative Easing ─────────────── */
+  --ease-sector-gate: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-pit-enter: cubic-bezier(0.8, 0, 1, 1);
+  --ease-pit-exit: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Layered background system */
+  --bg-radial-1: radial-gradient(1200px 720px at 10% -10%, rgba(201, 168, 76, 0.04), transparent 68%);
+  --bg-radial-2: none;
+  --bg-radial-3: none;
+  --bg-grid: linear-gradient(rgba(240, 237, 229, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 237, 229, 0.06) 1px, transparent 1px);
+
+  /* ── Elevation (e0–e4) ─────────────── */
+  --shadow-e0: none;
+  --shadow-e1: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-e2: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-e3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-e4: 0 16px 48px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.35);
+
+  /* ── Border ────────────────────────── */
+  --border-width-default: 1px;
+  --border-width-thick: 2px;
+  --border-color-default: rgba(148, 148, 148, 0.2);
+  --border-color-muted: rgba(148, 148, 148, 0.1);
+  --border-color-focus: var(--accent);
+  --border-color-error: var(--safety-red);
+
+  /* ── Radius ────────────────────────── */
+  --radius-0: 0px;
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --radius-3: 12px;
+  --radius-4: 16px;
+  --radius-full: 9999px;
+
+  /* ── Semantic Colors ───────────────── */
+  --color-success: var(--acid-green);
+  --color-warning: var(--marshal-yellow);
+  --color-error: var(--safety-red);
+  --color-info: var(--racing-purple);
+  --color-brand: var(--pit-orange);
+
+  /* ── Chart Palette ─────────────────── */
+  --chart-series-1: #22C55E;
+  --chart-series-2: #3B82F6;
+  --chart-series-3: #F59E0B;
+  --chart-series-4: #EF4444;
+  --chart-series-5: #A78BFA;
+  --chart-series-6: #EC4899;
+  --chart-alert: var(--safety-red);
+  --chart-reference: rgba(240, 237, 229, 0.3);
+
+  /* ── Focus Ring ────────────────────── */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--accent);
+
+  /* ── Touch Target ──────────────────── */
+  --touch-min: 44px;
+}
+
+*:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ── Single-accent enforcement per room ── */
+[data-accent="none"]    { --accent: var(--chalk); }
+[data-accent="green"]   { --accent: var(--acid-green); }
+[data-accent="red"]     { --accent: var(--safety-red); }
+[data-accent="yellow"]  { --accent: var(--marshal-yellow); }
+[data-accent="orange"]  { --accent: var(--pit-orange); }
+[data-accent="purple"]  { --accent: var(--racing-purple); }
+[data-accent="racing-red"] { --accent: var(--racing-red); }
+
+/* ── High-Contrast Mode (outdoor/sunlight use) ── */
+@media (prefers-contrast: more) {
+  :root {
+    --asphalt: #000000;
+    --concrete: #0A0A0A;
+    --chalk: #FFFFFF;
+    --steel: #D4D4D4;
+    --text-muted: #BBBBBB;
+    --border-color-default: rgba(255, 255, 255, 0.4);
+    --border-color-muted: rgba(255, 255, 255, 0.25);
+    --chart-reference: rgba(255, 255, 255, 0.5);
+    --acid-green: #00FF66;
+    --safety-red: #FF3333;
+    --marshal-yellow: #FFE033;
+  }
+}
+
+.high-contrast {
+  --asphalt: #000000;
+  --concrete: #0A0A0A;
+  --chalk: #FFFFFF;
+  --steel: #D4D4D4;
+  --text-muted: #BBBBBB;
+  --border-color-default: rgba(255, 255, 255, 0.4);
+  --border-color-muted: rgba(255, 255, 255, 0.25);
+  --chart-reference: rgba(255, 255, 255, 0.5);
+  --acid-green: #00FF66;
+  --safety-red: #FF3333;
+  --marshal-yellow: #FFE033;
+}
+
+/* ── Lenis Smooth Scroll ─────────────────── */
+html.lenis, html.lenis body {
+  scroll-behavior: auto;
+}
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+/* ── Hide Native Scrollbar (replaced by CustomScrollbar) ── */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Section Background Color Transitions ── */
+main#main-content {
+  transition: background-color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-bg-tint="warm"]    { background-color: #080604; }
+[data-bg-tint="cool"]    { background-color: #040608; }
+[data-bg-tint="gold"]    { background-color: #0a0804; }
+[data-bg-tint="neutral"] { background-color: #000000; }
+
+/* ── Ambient gradient blobs ─────────────── */
+@keyframes ambientDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(3%, -4%) scale(1.05); }
+  66%  { transform: translate(-2%, 3%) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.ambient-blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+  animation: ambientDrift 25s ease-in-out infinite;
+  will-change: transform;
+  z-index: 0;
+}
+
+/* ── Section divider ────────────────────── */
+.section-divider {
+  position: relative;
+  height: 1px;
+  margin: 0 auto;
+  max-width: 90%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.15) 20%,
+    rgba(201, 168, 76, 0.3) 50%,
+    rgba(201, 168, 76, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+/* ── Card hover lift ───────────────────── */
+.card-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-color: rgba(201, 168, 76, 0.2);
+}
+
+/* ── Link underline reveal ──────────────── */
+.link-reveal {
+  position: relative;
+  text-decoration: none;
+}
+.link-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent, var(--pit-orange));
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-reveal:hover::after {
+  width: 100%;
+}
+
+/* ── CTA glow pulse on hover ────────────── */
+.cta-glow {
+  position: relative;
+}
+.cta-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  opacity: 0;
+  background: var(--pit-orange);
+  filter: blur(16px);
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+.cta-glow:hover::before {
+  opacity: 0.15;
+}
+
+/* ── Reduced Motion: disable all custom animations ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  main#main-content {
+    transition: none;
+  }
+}

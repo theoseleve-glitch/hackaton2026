@@ -1,0 +1,1832 @@
+# Telemetry → RaceLab reuse handoff
+
+Audit of the entire LAP/Telemetry codebase (`C:\Users\Admin\Documents\Telemetry`, ~8 sub-repos) against the RaceLab brief (`../CONTEXT.md`), 2026-06-11. Every directory was scanned, every candidate finding re-verified by reading the actual code, and a completeness pass hunted for misses.
+
+## How this folder is organized
+
+- `1-copypaste/<source-area>/<item>/` — code that fits the RaceLab stack (Expo RN + TypeScript, Next.js App Router on Vercel, Neon Postgres, Clerk, Claude via AI SDK, Open-Meteo, RevenueCat) directly. Lift it, rename LAP domain words, wire it up.
+- `2-schemes/<source-area>/<item>/` — wrong language/framework (mostly Python, some Kotlin/Swift/Astro) but the **design** is the deliverable: data models, pipelines, guard rails, sync patterns. Read these; don't try to run them.
+- Inside each item folder, files keep their original path relative to the Telemetry root, so you can always trace provenance. A few files appear in more than one item on purpose — each item folder is self-contained.
+- `_items.json` — machine-readable index of everything below (same metadata, same file lists).
+
+## Read this first — what LAP does NOT give you
+
+1. **The LLM layer is 100% greenfield.** There are no prompt templates, no LLM structured-output schemas, no RAG/retrieval code, and no LLM eval harness anywhere in LAP (verified by workspace-wide grep). What LAP provides is the *deterministic* half of the AI Race Engineer: rule-as-data schema, safe condition evaluation, confidence gating, signed rule bundles, and the prescription→outcome learning loop. The Claude/Vercel-AI-SDK side (prompt assembly, retrieved-rules-only constraint, citations/refusal logic, 50-scenario eval gate) must be built from scratch.
+2. **Versioned setup sheets are greenfield.** LAP has no versioned-setup data model at all. The closest analog is the manufacturer-preset catalog → user-instance pattern (`template-catalog-instance-pattern`), which seeds the chassis-template design but nothing more.
+3. **PDF export has a design precedent, not code.** The print-CSS-HTML → PDF pipeline (`pdf-sheet-export-pipeline`) shows the architecture; the renderer chain itself (WeasyPrint/wkhtmltopdf) doesn't run on Vercel.
+
+## Highest-value items (start here)
+
+| Item | Category | Why |
+|---|---|---|
+| `2-schemes/lap-backend/coaching-rules-engine` | scheme | Near-complete blueprint for the ~150-rule tuning KB: strict rule schema, no-eval condition AST (portable to TS verbatim), confidence gate, fail-loud templating |
+| `2-schemes/lap-backend/prescription-outcome-loop` | scheme | The (change, conditions, outcome) learning-loop data model — RaceLab's data moat, already worked out |
+| `2-schemes/lap_web-backend/conditions-weather-engine` + `2-schemes/analysis-ops-docs/v2-open-meteo-conditions-impl` | scheme | Open-Meteo client + weather-snapshot + grip/conditions modelling — exactly the session weather capture RaceLab needs |
+| `2-schemes/lap_web-backend/offline-dual-store-sqlite-pg` | scheme | The same schema in local SQLite + server Postgres with idempotent client-side migrations — RaceLab's offline-first hard requirement, worked end-to-end |
+| `2-schemes/mobile/android-upload-queue-sync` + `2-schemes/datalogger/desktop-offline-sync-queue` | scheme | Two independent implementations of the offline outbox/sync-queue pattern (retry, idempotency, crash safety) |
+| `2-schemes/lap-schemas/*` | scheme | Contracts-first shared schema package with CI sync gates — the exact `packages/schema` discipline RaceLab plans |
+| `1-copypaste/lap_web-frontend/*` | copypaste | Typed API client envelope, React Query key factory, entitlements/quota gating, design tokens — in-stack Next.js/TS |
+| `2-schemes/datalogger/gps-track-fingerprint-recognition` | scheme | "Which track am I at?" GPS matching — track auto-suggestion for session start |
+
+---
+
+**Inventory: 12 copy-pastable items - 60 scheme items - 376 files.**
+
+## Category 1 - Copy-pastable (12 items)
+
+TypeScript / Next.js / React code that fits the RaceLab stack directly. Lift, rename, wire up.
+
+### Area: lap_web-backend
+
+### share-card-react-kit
+
+- **Folder:** `1-copypaste/lap_web-backend/share-card-react-kit/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/src`
+- **Language:** TypeScript/React
+
+**What it is:** Figma-exported React + TypeScript + Tailwind UI kit for gamified share surfaces: ShareableCard (fixed 1200px social-share layout), RacingBadge, DriverProfileCard, AchievementUnlockOverlay/Toast, LevelUpModal, Leaderboard, StreakTracker, BrandGuide — all props-driven with zero backend coupling, plus a complete shadcn/ui component set and CSS-variable theme tokens (styles/theme.css).
+
+**Why RaceLab wants it:** RaceLab's OG-style share cards and Season Wrapped on the Next.js share page (its only web surface): these components drop into a Next.js App Router project nearly as-is, needing only reskin and RC-racing data props. The shadcn/ui set and token structure also seed the web design system.
+
+**Verifier evidence:** Verified: lap_web/src is a standalone Figma Make export (package.json name "@figma/my-make-file", Vite + Tailwind v4 + motion 12) with fully props-driven gamification components — ShareableCard.tsx is a fixed 1200px, aspect-ratio 1200/630 (exact OG dimensions) social card taking driverName/track/bestLap/badges props with onDownload/onShare callbacks and no API or store imports; RacingBadge/DriverProfileCard/AchievementUnlockOverlay/LevelUpModal/StreakTracker/Leaderboard likewise import only ./ui/* (shadcn), lucide-react, and motion/react. This is exactly RaceLab's pillar-4 share-card / Season Wrapped material for its only web surface (Next.js share page), liftable with reskin + RC data props. Caveats that don't kill the claim but trim it: BrandGuide.tsx is coupled to the Figma SVG dump (imports/svg-zpcr1lt0nh) and is LAP brand content; the GitHub* components are a throwaway earlier iteration; the full shadcn ui/ set and theme.css are the stock shadcn export with zero unique value (the team should scaffold via shadcn CLI), so only the primitives the custom components actually import are worth copying.
+
+**How to adapt:** These drop into the Next.js App Router share page as client components — add "use client" to everything importing motion/react, and install motion, lucide-react, plus the few Radix packages the included shadcn primitives need (or better: scaffold shadcn via CLI and keep only the custom components; ui/* and theme.css here are the stock shadcn export included only so the kit renders out of the box). App.tsx is the demo harness — keep it as prop-shape/sample-data documentation, not as an app entry. Rebrand: hardcoded hex palette (#C9A84C gold, #22C55E green, etc.), "LAP COACH" header and "lap-coach.racing" footer in ShareableCard, and the licenseLevel tiers need RaceLab equivalents; RacingBadge's ~50 badge icons are keyed by LAP telemetry-coaching titles ("Trail Braker", "Telemetry Explorer") — keep the title-to-SVG-icon map + hexagon frame + locked-state mechanism, swap in RC-racing achievement content. Important: ShareableCard is a DOM component at OG aspect ratio, fine for the share page and client-side download (html-to-image), but for actual og:image meta tags re-implement its layout with @vercel/og/Satori, since motion, group-hover, and drop-shadow filters won't run there. Excluded deliberately: BrandGuide.tsx + src/imports/* (coupled to Figma SVG dumps, LAP brand content), GitHubBadge/GitHubProfileCard/GitHubShareableCard (earlier GitHub-themed iteration), and the remaining ~40 stock shadcn ui files.
+
+**Files:**
+- `lap_web/src/app/components/ShareableCard.tsx`
+- `lap_web/src/app/components/RacingBadge.tsx`
+- `lap_web/src/app/components/DriverProfileCard.tsx`
+- `lap_web/src/app/components/AchievementUnlockOverlay.tsx`
+- `lap_web/src/app/components/AchievementToast.tsx`
+- `lap_web/src/app/components/AchievementCard.tsx`
+- `lap_web/src/app/components/LevelUpModal.tsx`
+- `lap_web/src/app/components/Leaderboard.tsx`
+- `lap_web/src/app/components/StreakTracker.tsx`
+- `lap_web/src/app/components/PointsAnimation.tsx`
+- `lap_web/src/app/components/ChallengeCard.tsx`
+- `lap_web/src/app/components/UserProfile.tsx`
+- `lap_web/src/app/App.tsx`
+- `lap_web/src/app/components/ui/button.tsx`
+- `lap_web/src/app/components/ui/card.tsx`
+- `lap_web/src/app/components/ui/badge.tsx`
+- `lap_web/src/app/components/ui/progress.tsx`
+- `lap_web/src/app/components/ui/avatar.tsx`
+- `lap_web/src/app/components/ui/tabs.tsx`
+- `lap_web/src/app/components/ui/utils.ts`
+- `lap_web/src/styles/theme.css`
+
+---
+
+### Area: lap_web-frontend
+
+### typed-api-client-envelope
+
+- **Folder:** `1-copypaste/lap_web-frontend/typed-api-client-envelope/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/api-client.ts`
+- **Language:** TypeScript
+
+**What it is:** Typed fetch API client (with sibling http-envelope.ts): standard {ok,data,error,meta} envelope parsing into a typed ApiError (code, status, field details, request_id), client-generated X-Request-Id, in-flight GET deduplication, single deduped 401-refresh-and-replay, cache:'no-store' ghost-row fix, and api.get/post/put/patch/delete wrappers.
+
+**Why RaceLab wants it:** Base TS API client for both apps/mobile and the share web page; swap the silent-refresh hook for Clerk's getToken() and keep everything else (envelope contract, ApiError, request-id tracing, GET coalescing).
+
+**Verifier evidence:** Verified: api-client.ts (155 lines) + http-envelope.ts (70 lines) are framework-free TypeScript over fetch — typed ApiError with code/status/field-details/request_id, {ok,data,error,meta} envelope parsing with HTML-stripped fallback errors, in-flight GET coalescing via a Map, a deduped single 401-refresh-and-replay, client X-Request-Id, and a documented cache:'no-store' ghost-row fix. LAP coupling is limited to three localized touchpoints (auth-store getAccessToken, dynamic import of silentRefresh/clearAuthState, a CSRF double-submit cookie read), all inside buildHeaders() and the 401 branch, exactly what the claim says to replace with Clerk's getToken(). The envelope contract and error model are directly adoptable for both apps/mobile and the share web page; the sibling test file mostly exercises LAP's silent-refresh and references a stale API, so it is excluded.
+
+**How to adapt:** Move the Envelope/ApiError types into packages/schema and write a tiny Next.js route helper that emits the same {ok,data,error,meta:{request_id}} shape so mobile and the share page share one contract. Turn the client into a factory that takes a token-getter: pass Clerk's getToken() (useAuth on mobile, session token on web), delete the CSRF document.cookie block (document is undefined in React Native and Bearer auth needs no double-submit), and replace the entire silent-refresh 401 branch with one getToken({skipCache:true}) + replay since Clerk auto-refreshes — auth-store.ts/auth.ts are intentionally NOT copied. Replace window.dispatchEvent(new CustomEvent(SESSION_EXPIRED_EVENT)) with a small EventEmitter or Zustand flag (RN has window but no CustomEvent). Use expo-crypto's Crypto.randomUUID for X-Request-Id on mobile — the existing typeof-guard would otherwise silently drop request IDs in RN. Keep cache:'no-store' for the Next.js share page (it also opts out of Next fetch caching); it is a harmless no-op in RN. For offline-first, treat this client as the online transport underneath the sqlite sync layer, not as the app's data access API.
+
+**Files:**
+- `lap_web/lap-website/src/lib/api-client.ts`
+- `lap_web/lap-website/src/lib/http-envelope.ts`
+
+---
+
+### react-query-key-factory
+
+- **Folder:** `1-copypaste/lap_web-frontend/react-query-key-factory/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/query-keys.ts`
+- **Language:** TypeScript
+
+**What it is:** Centralized React Query key factory: per-domain root keys (sessions, tracks, drivers, billing, exports) with nested typed factories for scoped invalidation (queryKeys.sessions.detail(id), .all).
+
+**Why RaceLab wants it:** Drop-in pattern for RaceLab's query/cache layer over setups, sessions, tracks, comments — rename domains and keep the structure; also a clean seam for the offline-sync invalidation story.
+
+**Verifier evidence:** Read the file: 95 lines, zero imports, pure TypeScript (`export const queryKeys = {...} as const` with literal tuple factories) — fully decoupled from LAP infra and framework-agnostic enough to drop into Expo RN + React Query. Several domain roots map 1:1 to RaceLab (sessions.list/detail/laps, tracks, billing.usage for free-tier metering, exports, setup). Caveat: ~half the leaf keys are LAP telemetry concepts (speedTrace, gpsTrace, ggData, corners, cornerReplay, drivingAnalyzer, leaderboard, karts) that must be deleted, and the underlying pattern is the standard TanStack key-factory convention — so it's a thin but genuine drop-in, not a design asset.
+
+**How to adapt:** Keep the structure (per-domain root key + nested typed factories with `as const` for scoped invalidateQueries) and the sessions/tracks/billing/exports/setup roots; delete all telemetry-specific leaves (speedTrace, gpsTrace, ggData, corners, cornerReplay, drivingAnalyzer, leaderboard, karts, weekends, jobs) since RC lap times are manual entry. Add RaceLab domains: setups (all/list/detail/versions/diff), comments, kbRules/aiAdvice, weather(trackId), social (feed/followers/forks). Wire `billing.usage` to the RevenueCat-backed free-tier meter (AI calls 5/month). For offline-first, make these keys the single invalidation seam: after the expo-sqlite sync layer applies a pulled batch, invalidate by domain root (e.g. queryKeys.sessions.all) rather than per-entity; consider keying list factories on the local DB revision counter so sync completion is the only cache-busting event. Put the file in packages/schema (or a shared packages/query) so apps/mobile and any web read-only surface share identical keys.
+
+**Files:**
+- `lap_web/lap-website/src/lib/query-keys.ts`
+
+---
+
+### entitlements-quota-gating
+
+- **Folder:** `1-copypaste/lap_web-frontend/entitlements-quota-gating/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/entitlements-store.ts`
+- **Language:** TypeScript (React)
+
+**What it is:** Complete client-side plan-gating system: Zustand entitlements snapshot usable outside React, FEATURE_MAP boolean gates + per-feature UPGRADE_TIERS with upgrade URLs, canUseFeature/getRemainingQuota/getUpgradeInfo helpers (fail-closed), plus hooks/useEntitlements.ts (snake_case→camelCase mapper from /me), hooks/useUserPlan.ts (cached usage/quota with 60s staleTime, no-retry-on-401), and components/billing/ (QuotaCounter 'X/Y remaining' badge with low/zero states, UsageDashboard, UpgradeBanner).
+
+**Why RaceLab wants it:** Directly serves RaceLab's free-tier metering (5 AI calls/month): replace LAP meter keys with ai_calls/setups, source entitlements from RevenueCat-backed API instead of /me — the store, guard helpers, and quota UI logic port nearly verbatim (QuotaCounter needs RN styling on mobile).
+
+**Verifier evidence:** Verified the claim by reading all seven files. entitlements-store.ts imports only zustand and the hooks only add @tanstack/react-query plus a thin api-client wrapper — all compatible with Expo RN and Next.js, so the store, guard helpers (canUseFeature/getRemainingQuota/getUpgradeInfo), and cached-usage hooks port nearly verbatim after swapping LAP's ~30 telemetry-domain entitlement fields for RaceLab meters. The claim's "fail-closed" assertion is accurate for unloaded entitlements (line 87 returns false), but unknown feature keys return true (line 111) — a fail-open default the team must flip. The four billing components are web-DOM/Tailwind (next/link, raw SVG ring, DOM focus trap) so only their logic ports to mobile, which the claim already acknowledged; net, copypaste stands for the store+hooks core with the components as logic-reference.
+
+**How to adapt:** Replace the Entitlements interface fields with RaceLab's (ai_calls_per_month/used/remaining, setup_sheet limits), FEATURE_MAP keys with your gated features, and UPGRADE_TIERS URLs with RevenueCat paywall triggers; on mobile, populate the zustand store from Purchases.getCustomerInfo() entitlements plus a server /me usage fetch, keeping the store-outside-React pattern so guards work in your sync layer and API client. Swap the two `@/lib/api-client` imports (api.get/apiFetch) for your own fetch wrapper — LAP's client is excluded as it is coupled to their env/auth. Two bugs to fix when porting: the doc comment on canUseFeature says "fail open" but the code correctly fails closed; and unknown feature keys return true (line 111) — flip to false given hard 5/month AI metering. The four billing components are web-DOM (next/link, Tailwind with LAP tokens, raw SVG, DOM focus trap): QuotaCounter's 20%-low/zero badge logic and UsageDashboard's stroke-dashoffset ring math port to RN via react-native-svg, BillingStateBanner's status→banner config map adapts cleanly to RevenueCat states (BILLING_ISSUE/grace period), but rebuild the markup natively; UpgradeBanner+useFocusTrap are reusable as-is only on the Next.js web share surface. zustand and TanStack Query both run in Expo RN, so the store and both hooks need no architectural changes.
+
+**Files:**
+- `lap_web/lap-website/src/lib/entitlements-store.ts`
+- `lap_web/lap-website/src/hooks/useEntitlements.ts`
+- `lap_web/lap-website/src/hooks/useUserPlan.ts`
+- `lap_web/lap-website/src/components/billing/QuotaCounter.tsx`
+- `lap_web/lap-website/src/components/billing/UpgradeBanner.tsx`
+- `lap_web/lap-website/src/components/billing/UsageDashboard.tsx`
+- `lap_web/lap-website/src/components/billing/BillingStateBanner.tsx`
+- `lap_web/lap-website/src/hooks/useFocusTrap.ts`
+
+---
+
+### unit-prefs-format-utils
+
+- **Folder:** `1-copypaste/lap_web-frontend/unit-prefs-format-utils/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/unit-preferences.ts`
+- **Language:** TypeScript
+
+**What it is:** Zustand+localStorage unit-preference store (km/h-mph, °C-°F, metric-imperial) with pure conversion/format helpers; sibling format-utils.ts has formatLapTime (m:ss.mmm), date and speed formatters used across the app.
+
+**Why RaceLab wants it:** RaceLab needs exactly these: manual lap-time formatting, track-temp °C/°F display per user preference. Swap localStorage persistence for expo-sqlite/AsyncStorage on mobile; conversion functions are pure TS.
+
+**Verifier evidence:** Verified by reading all three files. `unit-preferences.ts` has exactly one import (`create` from `zustand`, which works in React Native) and zero LAP-infra imports; its conversion helpers (convertTemp/formatTemp °C↔°F, convertSpeed, convertDistance) are pure functions with a consistent em-dash null contract. `format-utils.ts` has ZERO imports and contains `formatLapTime` (m:ss.mmm with padded seconds, sub-60s "45.123s" form) which matches RaceLab's manual-lap-time display need exactly; the sibling vitest file `__tests__/format-utils.test.ts` documents the contract (60s boundary, padding, null/NaN → em dash) and runs in any TS test setup. The only LAP coupling is two droppable functions (`scoreColor` uses LAP Tailwind tokens like `text-acid-green`; `scoreGrade` is LAP's 0-100 scoring) — the rest lifts as-is. Value is modest (small utilities), but it squarely fits the copypaste definition: standalone TS, stack-compatible, decoupled.
+
+**How to adapt:** Put both files in packages/schema or a shared packages/utils so mobile and the Next.js API share one formatting contract. In unit-preferences.ts, replace the localStorage loadPrefs/savePrefs pair with zustand's persist middleware + createJSONStorage over AsyncStorage (or an expo-sqlite-backed storage) — the store shape and setters stay identical; also guard the SSR branch (`typeof window === 'undefined'`) is then unnecessary. Delete `scoreColor`/`scoreGrade` from format-utils.ts (LAP-specific Tailwind tokens and scoring) and likely `mpsToKmh`/`mps2ToG` (RC cars have no speed/accel telemetry); keep `formatLapTime`, the date formatters, `convertTemp`/`formatTemp`, and `convertDistance`. Consider extending unit prefs with RaceLab-specific units later (e.g. track temp is the primary °C/°F consumer; speed pref can be dropped). Keep the em-dash-for-null convention app-wide — the test file pins it.
+
+**Files:**
+- `lap_web/lap-website/src/lib/format-utils.ts`
+- `lap_web/lap-website/src/lib/unit-preferences.ts`
+- `lap_web/lap-website/src/__tests__/format-utils.test.ts`
+
+---
+
+### seo-og-metadata-helpers
+
+- **Folder:** `1-copypaste/lap_web-frontend/seo-og-metadata-helpers/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/seo.ts`
+- **Language:** TypeScript (Next.js)
+
+**What it is:** generateSeoMetadata(): route-map-driven Next.js Metadata builder (title/description/canonical/noindex/OG) with per-page overrides and an OG-image URL builder (?title=&eyebrow= against an image endpoint); og-templates.ts defines a small OG card design system (1200x630, fonts, colors, layout variants per page type).
+
+**Why RaceLab wants it:** Direct base for RaceLab's only web surface — the read-only share page: per-setup metadata + dynamic OG share-card URLs. Replace routeMap entries and point the image builder at a Vercel OG route.
+
+**Verifier evidence:** seo.ts is 64 lines of real Next.js App Router code (`import type { Metadata } from 'next'`) consumed by 15+ pages, including the dynamic-route pattern RaceLab needs: insights/[slug]/page.tsx calls generateSeoMetadata('/insights', { title, metaDescription }) inside generateMetadata — the exact shape of a per-setup read-only share page. Its only dependencies are a plain data file (route-map.ts, whose RouteEntry interface is the contract) and a standalone validated SITE_URL helper (site-url.ts), so it lifts cleanly into apps/api's Next.js app. Caveats verified: og-templates.ts is unused config (imported nowhere in the repo), and the OG image endpoint it targets (lap_web/lap-og-worker/src/index.tsx) is a placeholder SVG Cloudflare Worker with no rendering logic worth porting — so the value is the metadata builder + URL/token scaffolding, not a finished OG pipeline.
+
+**How to adapt:** Replace routeMap entries in route-map.ts with RaceLab's handful of web routes (share page, maybe landing); keep the RouteEntry interface and the override-fallback chain in generateSeoMetadata as-is. For the share page, call generateSeoMetadata from generateMetadata in app/s/[shareId]/page.tsx with per-setup overrides AND an explicit canonical override (or pass the full pathname) — LAP's dynamic pages pass the parent path, which would give every setup the same canonical URL if copied blindly. Rewrite buildOgImageUrl to point at a local Next.js route (app/api/og/route.tsx) using next/og ImageResponse instead of the OG_WORKER_ORIGIN env/Cloudflare worker — the LAP worker is only a placeholder SVG, so the OG renderer must be built fresh; OG_DEFAULTS/OG_TEMPLATES in og-templates.ts (1200x630, padding, font/color tokens, layout variants per page type) is a reasonable starting token set for that ImageResponse JSX, but note it is dead code in LAP (never imported) and the colors/fonts are LAP branding to swap. site-url.ts is drop-in: just change DEFAULT_SITE_URL and keep its https/no-path validation. No secrets in any of these files.
+
+**Files:**
+- `lap_web/lap-website/src/lib/seo.ts`
+- `lap_web/lap-website/src/lib/site-url.ts`
+- `lap_web/lap-website/src/data/route-map.ts`
+- `lap_web/lap-website/src/lib/og-templates.ts`
+
+---
+
+### nextjs-ui-kit-design-tokens
+
+- **Folder:** `1-copypaste/lap_web-frontend/nextjs-ui-kit-design-tokens/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/components/ui`
+- **Language:** TypeScript (React) + CSS
+
+**What it is:** 40+ generic Tailwind UI primitives (Button, Modal, Toast/ToastProvider, DataTable, FormField, EmptyState, Skeleton, Badge, Dropdown, Tooltip, UndoToast, AutoSaveIndicator) plus styles/tokens.css — a disciplined CSS-variable design-token system (color/typography/spacing scale) enforced by lint scripts and mapped into tailwind.config.ts.
+
+**Why RaceLab wants it:** UI kit for the RaceLab share web page and any web admin; the token-file + tailwind-mapping discipline (and AutoSaveIndicator/UndoToast patterns for setup editing) carries over with a re-skin. Not usable in React Native directly.
+
+**Verifier evidence:** Verified by reading 10+ files: the core primitives (Button, Modal+useFocusTrap, Toast/ToastProvider with aria-live and severity durations, UndoToast with zustand + progress timer, generic sortable DataTable&lt;T&gt;, FormField with aria-describedby error wiring, AutoSaveIndicator, Avatar with initials hashing) are 'use client' React/Tailwind components whose only imports are react and next/link — directly droppable into a Next.js App Router project for RaceLab's share page and web admin. tokens.css is a genuine token system (color/type clamp scale/spacing/elevation/z-layers/focus-ring/44px touch targets, prefers-contrast and reduced-motion variants) mapped 1:1 in tailwind.config.ts and enforced by scripts/lint-design-tokens.mjs, exactly as claimed. The scanner's caveats also check out: ~19 of 43 components ARE LAP/marketing-coupled (Breadcrumb/SectionTabs import @/data/route-map, Placard imports @/experience/state/store, PricingTable imports @/data/pricing, plus marketing flourishes like StampButton/MarqueeStrip/MonumentText/ScrutineeringStamp) — those are excluded from the copy list, leaving a clean ~24-component kit.
+
+**How to adapt:** Web-only: use this kit for apps/api's share read-only pages and any admin surface — none of it ports to React Native, but the token VALUES (colors, spacing scale, type scale) should be re-exported as a TS theme object in packages/schema so the Expo app and web stay visually consistent. Copy tokens.css + tailwind.config.ts together — component classNames reference token-mapped names (chalk, steel, concrete, acid-green, pit-orange, font-telemetry, shadow-e2, z-overlay, rounded-2) and break without the mapping; the dark racing palette even suits RC racing, rename tokens only if rebranding. Strip the site-specific tail of tokens.css (lines ~232-341: Lenis smooth-scroll, hidden native scrollbar, ambient-blob/section-divider/cta-glow marketing classes) and keep the :root token block, data-accent switcher, prefers-contrast, and reduced-motion sections. UndoToast requires zustand (add the dep or rewrite on React context like ToastProvider); Modal requires the included useFocusTrap hook; ErrorBlock has a hardcoded default supportHref='/app/account/support' to change. Excluded ~19 LAP-coupled/marketing components (Breadcrumb, SectionTabs, PricingTable, Placard, MonumentText, FaqAccordion, PitButton, StampButton, ScrutineeringStamp, MarqueeStrip, AnimatedCounter, AppFooter, TrackCard, ChartTooltip, etc.) — do not fetch them later without removing their @/data and @/experience imports. The two lint-*.mjs scripts are generic, standalone Node scripts; wire them into CI to keep the token discipline (lint-design-tokens.mjs scans src/app + src/components, adjust SCAN_DIRS/EXEMPT_PATHS for the monorepo layout).
+
+**Files:**
+- `lap_web/lap-website/src/components/ui/AutoSaveIndicator.tsx`
+- `lap_web/lap-website/src/components/ui/Avatar.tsx`
+- `lap_web/lap-website/src/components/ui/Badge.tsx`
+- `lap_web/lap-website/src/components/ui/Button.tsx`
+- `lap_web/lap-website/src/components/ui/Card.tsx`
+- `lap_web/lap-website/src/components/ui/DataTable.tsx`
+- `lap_web/lap-website/src/components/ui/Dropdown.tsx`
+- `lap_web/lap-website/src/components/ui/EmptyState.tsx`
+- `lap_web/lap-website/src/components/ui/ErrorBlock.tsx`
+- `lap_web/lap-website/src/components/ui/FormField.tsx`
+- `lap_web/lap-website/src/components/ui/FormSection.tsx`
+- `lap_web/lap-website/src/components/ui/Input.tsx`
+- `lap_web/lap-website/src/components/ui/Modal.tsx`
+- `lap_web/lap-website/src/components/ui/PageHeader.tsx`
+- `lap_web/lap-website/src/components/ui/RadioCard.tsx`
+- `lap_web/lap-website/src/components/ui/Section.tsx`
+- `lap_web/lap-website/src/components/ui/Skeleton.tsx`
+- `lap_web/lap-website/src/components/ui/SkeletonTable.tsx`
+- `lap_web/lap-website/src/components/ui/Spinner.tsx`
+- `lap_web/lap-website/src/components/ui/Toast.tsx`
+- `lap_web/lap-website/src/components/ui/ToastProvider.tsx`
+- `lap_web/lap-website/src/components/ui/Tooltip.tsx`
+- `lap_web/lap-website/src/components/ui/Truncate.tsx`
+- `lap_web/lap-website/src/components/ui/UndoToast.tsx`
+- `lap_web/lap-website/src/hooks/useFocusTrap.ts`
+- `lap_web/lap-website/src/styles/tokens.css`
+- `lap_web/lap-website/src/styles/reduced-motion.css`
+- `lap_web/lap-website/tailwind.config.ts`
+- `lap_web/lap-website/scripts/lint-design-tokens.mjs`
+- `lap_web/lap-website/scripts/lint-spacing-tokens.mjs`
+
+---
+
+### indexeddb-offline-read-cache
+
+- **Folder:** `1-copypaste/lap_web-frontend/indexeddb-offline-read-cache/`
+- **Source:** ``
+- **Language:** TypeScript
+
+**What it is:** IndexedDB-backed offline read cache (141 lines) with deliberate constraints: read-only offline viewing (no cached mutations), explicit LRU budgets (max 20 summaries ~2KB, max 3 full details ~50KB, ~200KB total), summaries-vs-details two-store split.
+
+**Why RaceLab wants it:** Drop-in for the RaceLab read-only share-page web surface and the pattern (budgeted read-only tier separate from the writable sync layer) for offline viewing of followed drivers public setups in the mobile app.
+
+**Verifier evidence:** Added from completeness-critic finding (low): in-stack TS, decoupled, wrongly rejected. The only TypeScript offline-storage code in the entire LAP codebase.
+
+**How to adapt:** Usable as-is on the web share surface (rename types). On mobile, IndexedDB does not exist - keep the budget/eviction/two-tier design but back it with expo-sqlite or MMKV. Do NOT grow it into the sync layer; its value is precisely that the read cache is a separate, bounded concern.
+
+**Files:**
+- `lap_web/lap-website/src/lib/session-cache.ts`
+
+---
+
+### Area: web-misc
+
+### hmac-email-token-lib
+
+- **Folder:** `1-copypaste/web-misc/hmac-email-token-lib/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-website/functions/_lib/waitlist-token.ts`
+- **Language:** TypeScript
+
+**What it is:** Self-contained HMAC-SHA256 signed-token library using only Web Crypto (no Node/CF imports): sign/verify email confirmation tokens with TTL, separate no-expiry unsubscribe tokens with cryptographic domain separation, base64url codec, constant-time comparison, single-null failure mode to avoid oracle leaks. Works identically on Vercel Edge/Node and is already unit-tested (src/__tests__/api-waitlist*.test.ts).
+
+**Why RaceLab wants it:** Share-link tokens for read-only public setup pages (the only web surface), email confirmation, and one-click unsubscribe in any RaceLab email flow — drop into apps/api as-is.
+
+**Verifier evidence:** Verified: lap-website/functions/_lib/waitlist-token.ts has zero import statements and uses only Web Crypto / platform globals (crypto.subtle at lines 56-67, btoa/atob, TextEncoder), which exist identically on Vercel Edge and Node 18+, so it runs unmodified in a Next.js App Router route. It delivers exactly what the claim says: HMAC-SHA256 sign/verify with TTL, no-expiry unsubscribe tokens with domain separation (payload prefix 'unsubscribe.'), base64url codec, constant-time tag comparison, and a single-null failure mode to prevent confirmation oracles. The only LAP coupling is cosmetic (the word 'waitlist', a hardcoded /api/waitlist/unsubscribe path in buildUnsubscribeUrl, a Cloudflare-routing comment). The companion tests were checked and excluded: they test the Cloudflare Pages Functions handlers (onRequestGet with env + Resend fetch mocks), not the pure library contract.
+
+**How to adapt:** Drop into apps/api (e.g. lib/signed-token.ts) and rename the 'waitlist' identifiers; the only required edit is the hardcoded '/api/waitlist/unsubscribe' path inside buildUnsubscribeUrl. For RaceLab share links, sign the setup-version/share ID instead of an email, and note HMAC tokens are not individually revocable — if users must be able to un-share a setup, prefer a random unguessable ID stored in Neon (revocable row) and keep this lib for email confirmation/unsubscribe. Add a purpose prefix to EVERY payload (e.g. 'confirm.', 'share.'), not just unsubscribe — the confirmation payload `${email}.${expiry}` currently lacks one, leaving a theoretical cross-protocol edge. btoa() throws on non-Latin1 input, fine for emails/IDs but swap in a TextEncoder-based base64url if you ever sign arbitrary Unicode. Clerk already handles auth email verification, so the confirm-token flow applies to marketing/notification emails, not signup. Read the WAITLIST_TOKEN_SECRET equivalent from process.env in Next.js rather than a request-scoped env object.
+
+**Files:**
+- `lap-website/functions/_lib/waitlist-token.ts`
+
+---
+
+### drip-email-engine
+
+- **Folder:** `1-copypaste/web-misc/drip-email-engine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-website/functions/_lib/waitlist-drip`
+- **Language:** TypeScript
+
+**What it is:** Pure-TS lifecycle email engine: drip-scheduler.ts (sibling file) is a tested pure function deciding which of N emails is due given confirmedAt/stage/now, anchored to confirmation date with one-step-per-run catch-up; handler.ts runs the cycle over injected callbacks (sendEmail, updateContactStage, getUnsubUrl) with per-recipient error capture and idempotent stage bumps. Email modules export SUBJECT + bodies(unsubUrl) -> {html, text}.
+
+**Why RaceLab wants it:** Onboarding/retention drip for RaceLab driven by a Vercel Cron route — swap the LAP email copy modules, wire callbacks to Resend + Neon; the scheduler/handler/email-module contract ports unchanged.
+
+**Verifier evidence:** Verified: drip-scheduler.ts is a 33-line pure function with zero imports; handler.ts imports only the scheduler and email modules and runs entirely over injected callbacks (sendEmail/updateContactStage/getUnsubUrl) with per-recipient error capture — no Cloudflare, Resend, or env coupling in any _lib file (the platform glue is isolated in functions/_scheduled/waitlist-drip.ts, correctly excluded). Vitest suites for both layers document the contract (anchored d1/d7/d14 thresholds, one-step-per-run catch-up, idempotent stage bumps), and the email modules are pure functions of unsubUrl with no secrets. Caveat kept in mind: email drip is growth infra rather than a RaceLab pillar, but it directly serves free-tier-to-paid onboarding/retention and the engine is domain-neutral TS that lifts with only copy rewrites, so copypaste stands.
+
+**How to adapt:** Use scheduler+handler unchanged behind a Vercel Cron route (vercel.json crons -> apps/api/app/api/cron/drip/route.ts): load contacts from a Neon table (email, confirmed_at, drip_stage int, unsubscribed bool), wire sendEmail to Resend (or your ESP) and updateContactStage to a Neon UPDATE — do NOT port the excluded _scheduled/waitlist-drip.ts, which encodes drip stage into Resend's first_name field as 'drip:N' (a Cloudflare/Resend-API workaround you don't need with a real DB). Rewrite all three email-N.ts bodies entirely — current copy is LAP sim-racing marketing (founding rate, iRacing, July beta); only keep the SUBJECT + bodies(unsubUrl) -> {html, text} module shape the handler's EMAIL_MODULES map compiles against, and adjust DRIP_THRESHOLDS_DAYS/stage count to your sequence. waitlist-token.ts (HMAC-signed, stateless, TTL'd tokens via crypto.subtle — works on Node 18+/Vercel edge with no changes) covers one-click unsubscribe URLs for getUnsubUrl; the secret is parameterized, no hardcoded keys anywhere. The two vitest files port as-is (fix relative import paths) and double as the contract spec — note the deliberate one-email-per-cron-run catch-up posture that prevents blasting all overdue emails after a cron outage. This is onboarding/retention growth infra, not a core pillar — schedule it after V1 features, but it is genuinely drop-in.
+
+**Files:**
+- `lap-website/functions/_lib/drip-scheduler.ts`
+- `lap-website/functions/_lib/waitlist-drip/handler.ts`
+- `lap-website/functions/_lib/waitlist-drip/email-1.ts`
+- `lap-website/functions/_lib/waitlist-drip/email-2.ts`
+- `lap-website/functions/_lib/waitlist-drip/email-3.ts`
+- `lap-website/functions/_lib/waitlist-token.ts`
+- `lap-website/src/__tests__/drip-scheduler.test.ts`
+- `lap-website/src/__tests__/waitlist-drip-handler.test.ts`
+
+---
+
+### og-svg-share-card-builder
+
+- **Folder:** `1-copypaste/web-misc/og-svg-share-card-builder/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-website/src/utils/og-svg.ts`
+- **Language:** TypeScript
+
+**What it is:** Zero-dependency 1200x630 OG share-card generator that emits an SVG string (XML escaping, greedy word-wrap to tspans, eyebrow/title/brand-footer layout) — explicitly avoids satori/sharp/canvas. Served by a thin endpoint at src/pages/og/blog/[slug].svg.ts that just returns the string with image/svg+xml.
+
+**Why RaceLab wants it:** Setup-share OG cards and Season Wrapped cards on the share-link web pages: rewrite as a Next.js route handler returning the SVG string; the builder function ports with a content swap. (SVG og:image works on Slack/Discord/Mastodon; for FB/X RaceLab may still want @vercel/og, but this is the cheap v1.)
+
+**Verifier evidence:** og-svg.ts is 74 lines of pure TypeScript with zero runtime dependencies — its single import is type-only (BlogPostIndexEntry/BlogCategory), and the body (escapeXml, greedy word-wrap to tspans, 1200x630 eyebrow/title/brand-footer SVG template) is framework-free and directly liftable into a Next.js route handler. The serving endpoint [slug].svg.ts is Astro-specific but is just `new Response(svg, {Content-Type: image/svg+xml})`, a trivial rewrite. OG/share-card generation is an explicitly listed high-value target for RaceLab's setup-share and Season Wrapped pages, and all LAP coupling is swappable content strings (labels, brand text, hex colors), not business logic.
+
+**How to adapt:** Replace the type-only import from ../data/blog-index with a local RaceLab interface (just title + an eyebrow string; do NOT copy LAP's blog-index.ts — it is marketing content). Swap CATEGORY_LABELS, the 'LAP' footer text/tagline, and hex colors for RaceLab branding, then serve from a Next.js App Router route handler (e.g. app/og/setup/[id]/route.ts) returning new Response(svg, { headers: { 'Content-Type': 'image/svg+xml; charset=utf-8' } }). Caveat the file's own header comment overstates: SVG og:image is NOT rendered by Facebook, X, or iMessage (Slack/Discord/Mastodon are fine), so since RaceLab is already on Vercel, treat @vercel/og (satori -> PNG) as the production default and keep this builder as the zero-dependency v1/fallback — escapeXml and wrapTitle still reuse verbatim either way. Note wrapTitle is a char-count heuristic (36 chars at 68px, no glyph measurement); re-tune maxCharsPerLine if you change font size, and be aware single words longer than the budget will overflow rather than hyphenate.
+
+**Files:**
+- `lap-website/src/utils/og-svg.ts`
+- `lap-website/src/pages/og/blog/[slug].svg.ts`
+
+---
+
+### cookieless-analytics-collector
+
+- **Folder:** `1-copypaste/web-misc/cookieless-analytics-collector/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-website/src/scripts`
+- **Language:** TypeScript
+
+**What it is:** Small analytics utilities: posthog.ts (cookieless PostHog config object — memory persistence, no autocapture, no session recording, so no consent banner needed on load), marketing-collector.ts (anonymous first-party event batcher with field whitelisting, no-credentials fetch + keepalive, swallow-all-errors posture), marketing-events.ts and sentry.ts init. Rest of the directory is GSAP/scroll motion (useless).
+
+**Why RaceLab wants it:** RaceLab uses PostHog + Sentry: the cookieless init profile and the never-break-the-page first-party event collector pattern port to the share-page web surface and Next.js API with import.meta.env -> process.env renames.
+
+**Verifier evidence:** Verified: posthog.ts (45 lines) is a cookieless PostHog profile — persistence:'memory', autocapture:false, disable_session_recording:true — whose whole point is needing no consent banner on anonymous pages; sentry.ts is an error-capture-only profile (tracesSampleRate:0, integrations:[]); marketing-collector.ts is a fully standalone TS batcher (field whitelist to {event,path,properties}, no-credentials fetch, keepalive:true, 50-event cap, swallow-all-errors) with a Vitest suite pinning that contract. Only LAP coupling is import.meta.env.PUBLIC_* names and one endpoint string, so these port to RaceLab's PostHog+Sentry share-page surface with renames. I cut marketing-events.ts from the claim (LAP funnel vocabulary: SignupSource of LAP page paths, hardcoded /register regex) and confirmed the rest of the directory is GSAP/scroll motion (gsap-loader.ts lazy-loads gsap/ScrollTrigger) — correctly useless. Value is small (~150 lines) but it is exactly the copypaste definition: decoupled standalone TS utilities that fit the stack.
+
+**How to adapt:** Rename import.meta.env.PUBLIC_* to process.env.NEXT_PUBLIC_* and replace the module-load side effects (the `if (typeof window !== 'undefined') init()` blocks) with explicit init calls from a client component on the public share page — that is the one RaceLab surface where the cookieless no-consent PostHog profile applies; the Expo app should use posthog-react-native/sentry-expo instead, carrying over only the option values. For Next.js, prefer @sentry/nextjs but keep this option profile (tracesSampleRate 0, no Replay/BrowserTracing) to stay lean on share pages. In marketing-collector.ts, repoint `/api/v1/marketing-events` to a Next.js route handler writing to Neon if first-party event mirroring is wanted at all — otherwise PostHog alone suffices and this file is optional; the whitelist + keepalive + never-throw posture is the part worth keeping verbatim. In the copied test file, keep only the first describe block ('marketing-collector') and delete the two LAP-funnel describe blocks (they import waitlist/download/marketing-events files that are not part of the handoff). Strip the LAP ADR-019 references in comments; no secrets in any file (everything is env-var driven, hardcoded values are public hosts only).
+
+**Files:**
+- `lap-website/src/scripts/posthog.ts`
+- `lap-website/src/scripts/sentry.ts`
+- `lap-website/src/scripts/marketing-collector.ts`
+- `lap-website/src/__tests__/marketing-collector.test.ts`
+
+---
+
+## Category 2 - Schemes to adapt (60 items)
+
+Wrong language or framework (mostly Python, Kotlin, Swift), but the architecture / data model / pipeline is worth porting to the RaceLab stack. Read these, don't run them.
+
+### Area: analysis-ops-docs
+
+### conditions-engine-spec
+
+- **Folder:** `2-schemes/analysis-ops-docs/conditions-engine-spec/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/LAP_V1_CONDITIONS_ENGINE_SPEC.md`
+- **Language:** markdown
+
+**What it is:** Complete design spec for a weather-driven track-conditions engine: 10 Open-Meteo hourly inputs + 5 derived metrics (track-temp estimate, hours-since-rain, drying rate, days-since-significant-rain), an ordered 10-rule classifier (dry/damp/wet/greasy incl. the oil-rejection 'first rain after dry spell' rule), mu lookup ladders, an explainability output contract (dominant_factor + rationale + raw_inputs + classifier_version), infinite-TTL caching keyed on (lat,lon,date), and 15 cited research sources.
+
+**Why RaceLab wants it:** Blueprint for RaceLab's conditions engine: exact Open-Meteo fields and endpoints to fetch, how to derive track temp and drying state from free weather data, a deterministic rule structure with per-rule confidence, and the explainability/output-schema discipline the AI race engineer's context bundle needs (surface grip + temp + weather snapshot). The output hierarchy (user-provided grip level wins > weather classifier > fallback) is exactly RaceLab's manual-grip-override design.
+
+**Verifier evidence:** Verified against the actual file: §2 defines the exact user-override hierarchy (user grip field wins > weather classifier > fallback) that matches RaceLab's manual-grip-level design; §4 enumerates 10 concrete Open-Meteo hourly fields plus 5 derived metrics with formulas (track-temp estimate T_air + 12.0·(W_solar/1000)·(1-0.5·cloud) - 0.15·wind, Penman-style drying rate, days-since-rain); §5 is an ordered 10-rule classifier with per-rule confidence including the research-cited oil-rejection rule 5b; §8-§10 give an explainability output contract (dominant_factor/rationale/raw_inputs/confidence/source/classifier_version), infinite-TTL (lat,lon,date) caching, and 15 citations. It is markdown spec with Python dataclasses, not liftable TS/SQL, so not copypaste — but it is a load-bearing design doc that directly saves RaceLab design time on its conditions engine and the weather portion of the AI context bundle. The irrelevant parts (§7 spatial μ over racing-line mesh, OCP gates, §11 LAP lint/E2E backlog noise) are easily ignored and don't dilute the core value.
+
+**How to adapt:** Use §2, §4, §5, §8, §9 only; skip §7 (spatial μ over racing-line 3D mesh), the OCP verification gates, and the §11 V1.5 items about Next lint/E2E — those are LAP-specific. Port the rule engine as a pure TypeScript function in apps/api with the WeatherCondition contract as a Zod schema in packages/schema; keep the explainability fields (dominant_factor, rationale, raw_inputs, confidence, source, classifier_version) verbatim — they slot directly into the AI race engineer's context bundle and citation/confidence discipline. The spec uses Open-Meteo's archive API for historical sessions; RaceLab also needs the forecast endpoint (api.open-meteo.com/v1/forecast) for live race-day snapshots — the field names (precipitation, temperature_2m, shortwave_radiation, cloudcover, windspeed_10m, relative_humidity_2m, dewpoint_2m) are identical across both. Replace the file-based cache with a Neon table keyed (round(lat,2), round(lon,2), date) — infinite TTL for past dates, short TTL for forecast data. Recalibrate the classification thresholds and the label→grip ladders per RaceLab surface (clay/astro/carpet have very different moisture behavior than kart tarmac; clay can be BEST slightly damp), and bypass the weather classifier entirely for indoor tracks (use only air temp/humidity). The 'weather said X, you felt Y' driver-feedback calibration loop in §11 maps naturally onto RaceLab's feedback tags and (change, conditions, outcome) triples.
+
+**Files:**
+- `LAP_V1_CONDITIONS_ENGINE_SPEC.md`
+
+---
+
+### adr-architecture-decisions
+
+- **Folder:** `2-schemes/analysis-ops-docs/adr-architecture-decisions/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/docs/roadmap/02-ARCHITECTURE-DECISIONS.md`
+- **Language:** markdown
+
+**What it is:** 19 locked ADRs for the LAP rebuild: ADR-004 contracts-first schema registry (Pydantic source -> OpenAPI -> generated TS/Swift, CI fails on drift), ADR-006 canonical SessionManifest with provenance + data-quality block, ADR-008 cohort privacy (opt-in, k>=20, anonymized aggregates), ADR-009 rules compiled to a versioned portable JSON bundle fetched by clients, ADR-010 offline-first contract table, ADR-011 Clerk auth + 15min/7day JWT + keychain storage, ADR-012 single idempotent ingestion endpoint, ADR-013 the coaching-rule YAML format (detection condition, severity_rule, per-difficulty explanation templates, prescription with measurable success_condition), ADR-014 server-owned track/car catalog with canonical equivalence mapping and offline catalog cache.
+
+**Why RaceLab wants it:** The single most reusable design document for RaceLab: ADR-013 is a ready-made template for the ~150 KB rules (symptom detection -> severity -> per-level explanation -> prescription with revert/success criteria); ADR-004 is the packages/schema contracts-first discipline; ADR-011 literally chose Clerk with the same rationale; ADR-010/014 model the offline-first + cached-catalog contract RaceLab's expo-sqlite sync layer needs; ADR-008 is the privacy pattern for public setup aggregation.
+
+**Verifier evidence:** Verified: the file contains ADR-001..019 exactly as claimed, and the high-value sections are real and load-bearing. ADR-013 (lines 534-585) defines a strict, versioned rule format — detection condition + evidence thresholds, severity_rule, beginner/intermediate/advanced explanation templates, prescription with a machine-checkable SuccessCondition (metric/comparison/target_pct/measurement_window) — and it is hardened into a Pydantic extra="forbid" schema (lap-backend/coaching/library/rule_schema.py) backing ~70 production rule YAMLs, including rules/adaptation/setup_change_regression.yaml which is almost literally a RaceLab KB rule (setup change → lap-time regression → revert protocol). ADR-005's ActionPrescription/ActionOutcome pair is the (change, conditions, outcome)-triple loop RaceLab needs, ADR-008 gives the k>=20 opt-in anonymized-aggregate privacy pattern, ADR-009/010/014 give the versioned-portable-rules-bundle + per-feature offline-contract table + server-owned catalog with offline cache, and ADR-011 chose Clerk with the same JWT/keychain model. It is markdown design doc (plus Python implementation), not stack-compatible code, so scheme, not copypaste; caveat: roughly a third of the doc (ADR-001/002/007/016-019) is LAP-internal process and telemetry plumbing that is noise for RaceLab.
+
+**How to adapt:** Treat ADR-013 as the template for the ~150 KB rules: keep the detection -> severity_rule -> per-level explanation_template -> prescription-with-success_condition -> transfer_profile shape, but replace telemetry signals with what RaceLab actually has (driver feedback/symptom tags, manual lap-time deltas, conditions); the included setup_change_regression.yaml shows exactly how a setup-change rule reads in this format. Re-implement rule_schema.py as a zod schema in packages/kb with .strict() (the extra="forbid" equivalent) so YAML/JSON typos fail at load time, and keep the "canonical fixture validates in CI" test pattern from ADR-013's T181 note. ADR-004's Pydantic->OpenAPI->TS chain collapses in a TS-only monorepo: one zod source in packages/schema with a CI drift check is the same discipline at lower cost. Steal directly: UUIDv7 for offline client-generated IDs (ADR-003), the ADR-010 per-feature must-work-offline table as a written contract for the expo-sqlite sync layer, ADR-014's server-owned catalog + cached-offline-copy + admin-curated equivalence mapping for tracks/chassis, ADR-008's opt-in/k>=20/anonymized-aggregate/no-relative-queries rules for public setup stats, and ADR-005's SuccessCondition+ActionOutcome pair as the schema for (change, conditions, outcome) triples feeding the AI. Ignore ADR-001/002/007 (FastAPI, repo reorg, telemetry timestamp fusion) and ADR-016-019 (LAP review-loop process, PostHog-vs-Plausible) — internal noise. No secrets in any of the three files.
+
+**Files:**
+- `docs/roadmap/02-ARCHITECTURE-DECISIONS.md`
+- `lap-backend/coaching/library/rule_schema.py`
+- `lap-backend/coaching/library/rules/adaptation/setup_change_regression.yaml`
+
+---
+
+### pre-race-briefing-design
+
+- **Folder:** `2-schemes/analysis-ops-docs/pre-race-briefing-design/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/docs/superpowers/specs/2026-06-07-pre-race-briefing-design.md`
+- **Language:** markdown
+
+**What it is:** Approved design for 'Race Brief': user enters track + race datetime + session type, system assembles a briefing from Open-Meteo forecast windowed on race time (16-day horizon), condition verdict via the rules classifier, a 3-tier data gate (personal data -> community data with k-anon -> weather-only preview + upload prompt), deterministic advice rule tables (weather x corner-class -> input advice strings), personalized focus from recent session history, and a full graceful-degradation table (never 500, label provenance, stale-cache fallbacks).
+
+**Why RaceLab wants it:** Direct architectural template for the AI race engineer's context-bundle assembly and degradation behavior: forecast-windowed weather for a session, deterministic symptom/advice mapping BEFORE any LLM, tiered responses based on how much user data exists (maps to RaceLab's honest-refusal-on-empty-retrieval), provenance labels and confidence on every block. Half the optimizer/3D content is irrelevant but the briefing endpoint design is load-bearing.
+
+**Verifier evidence:** Verified by reading the full spec. Sections 1, 6, 8, and 9 are a load-bearing architectural template for RaceLab's AI race engineer: Open-Meteo forecast windowed on a user-entered race datetime (16-day horizon, "opens at D-16" handling), deterministic weather-x-corner-class advice rule tables explicitly placed BEFORE any LLM, a 3-tier data gate (personal -> community k-anon with 404-no-leak semantics -> weather-only preview + upload prompt) that maps to honest-refusal/degraded-answer behavior, and a complete never-500 degradation matrix with per-block provenance labels and stale-cache fallbacks. Roughly half the doc (CasADi 2D OCP solver, grip surfaces, Celery artifact pipeline, 3D line rendering) is useless-by-default racing-line/telemetry content, and the spec is markdown tied to a Python/Flask/Celery codebase, so it cannot be copypaste — but the briefing-endpoint design would genuinely save the dev team design time.
+
+**How to adapt:** Read only Sections 1, 6, 8, 9; skip Sections 4, 5, 7 entirely (CasADi solver, racing-line artifacts, 3D frontend — RC cars have no telemetry or racing lines). Port Section 6 as a Next.js App Router route handler with a Zod response schema in packages/schema: race_at + session_type intake, Open-Meteo forecast windowed on session time (same free API, 16-day horizon applies identically), and response assembled as independent blocks each carrying provenance + confidence. Reuse the 3-tier gate as RaceLab's data-availability ladder: user's own (change, conditions, outcome) history -> aggregated public-setup community data (apply the k-anonymity + fail-closed/404 no-existence-leak idea) -> weather-only + "log a session" prompt, which implements the honest-refusal requirement. Keep the deterministic rule-table layer (symptom/weather -> advice strings, exhaustively table-tested) in front of the Claude call, and adopt the Section 8 degradation matrix verbatim as the API contract (never 500, stale-cache weather with a stale marker, per-block omission with explainer text). Section 9's degraded-mode contract tests map directly onto the 50-scenario CI eval gate. Ignore all LAP code anchors (telemetry_tool paths, alembic heads, Celery, FeatureGate) — they are Python/Flask infra that does not transfer.
+
+**Files:**
+- `docs/superpowers/specs/2026-06-07-pre-race-briefing-design.md`
+
+---
+
+### coaching-audit-kb-survey
+
+- **Folder:** `2-schemes/analysis-ops-docs/coaching-audit-kb-survey/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/COACHING_AUDIT.md`
+- **Language:** markdown
+
+**What it is:** Empirical audit of all 13 coaching modules across the LAP repos, with verbatim schema samples: the 67-rule YAML library (detection.condition, severity_rule, mustache explanation templates per difficulty, prescription.drill_template_id, expected_gain, transfer_profile), the 156-entry CORNER_TIPS template dict keyed (cause, severity, vehicle_class) with progressive_steps + symptom_check, the 20-drill library with per-difficulty success criteria, and the ~30-cause JSON taxonomy.
+
+**Why RaceLab wants it:** A survey of three generations of rule-based coaching architecture with concrete schema examples — saves RaceLab's KB team from re-deriving the rule format, the (cause, severity, chassis) template keying, progressive multi-step prescriptions, and the lesson that multiple parallel rule registries become orphaned dead code (pick ONE canonical rule store).
+
+**Verifier evidence:** Verified the audit's verbatim samples against the real artifacts: the 67 YAML rules exist (lap-backend/coaching/library/rules/, 9 categories) and the quoted rule body matches early_braking_entry_speed_loss.yaml exactly; rule_schema.py is a locked Pydantic RuleSpec (detection.condition + evidence_required gates, severity bands, per-difficulty mustache explanation templates, prescription with drill_template_id + expected_gain + success_condition, transfer_profile) — structurally the exact rule format RaceLab's ~150-rule KB needs, with rule_id+rule_version on each emitted CoachingInsight serving as the citation mechanism. One rule, adaptation/setup_change_regression.yaml, is literally setup-change-regression detection with a revert-by-default protocol — a near-direct template for RaceLab's (change, conditions, outcome) triples and revert-cost output. It is markdown + Python + telemetry-domain content, so not copypaste, but the rule schema, (cause, severity, vehicle_class) template keying, and the documented failure mode (3 parallel production engines + an orphaned 2,453-line registry quartet) are genuinely design-time-saving — scheme confirmed.
+
+**How to adapt:** Port RuleSpec (rule_schema.py) to a Zod schema in packages/schema with .strict() (the Pydantic extra="forbid" equivalent — typo'd YAML keys fail at load, not at runtime) and keep it the SINGLE source of truth for packages/kb: the audit's central lesson is that LAP grew three parallel production coaching engines plus an orphaned 2,453-line registry — pick one canonical rule store on day one. Re-key the template scheme from (cause, severity, vehicle_class) to (symptom, severity, chassis); causes.json's {symptom, diagnosis, root_cause, severity_thresholds, unit} shape is your deterministic symptom-mapping layer, and evidence_required (min_occurrences/min_sessions/window_days) is a ready-made anti-noise gate before the AI is allowed to fire advice. rule_runner.py shows the retrieval-to-render flow worth copying conceptually: condition predicate -> per-difficulty template -> loud failure on missing template vars, emitting rule_id+rule_version per insight (your citation IDs); replace mustache regex with simple TS string interpolation and the compiled condition DSL (condition_compiler.py) with either json-logic or pre-compiled predicates per rule. setup_change_regression.yaml is the most transferable single rule — its revert-by-default protocol (regression >= threshold after N clean laps -> revert) maps directly onto RaceLab's revert-cost output; the other 66 rules' CONTENT is full-telemetry driving technique (entry_speed, slip angle) and does NOT transfer, only the format does. The 156-entry CORNER_TIPS dict (2,149 lines, Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/corner_tips.py) was omitted for size — the verbatim sample in COACHING_AUDIT.md section 2 fully shows its keying and progressive_steps pattern; drills.py is included instead as the compact example of per-difficulty prescriptions with success criteria.
+
+**Files:**
+- `COACHING_AUDIT.md`
+- `lap-backend/coaching/library/rule_schema.py`
+- `lap-backend/coaching/library/rule_runner.py`
+- `lap-backend/coaching/library/condition_compiler.py`
+- `lap-backend/coaching/library/rules/braking/early_braking_entry_speed_loss.yaml`
+- `lap-backend/coaching/library/rules/adaptation/setup_change_regression.yaml`
+- `Analysis/V2_claude_ai/telemetry_tool/coaching/taxonomy/causes.json`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/drills.py`
+
+---
+
+### crowd-grip-canonical-track-plans
+
+- **Folder:** `2-schemes/analysis-ops-docs/crowd-grip-canonical-track-plans/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/docs/superpowers/plans/2026-06-02-crowd-sourced-grip-corrected-plan.md`
+- **Language:** markdown
+
+**What it is:** Master plan (plus sibling TDD plan 2026-06-02-ws2-canonical-track-id-datalogger.md) for crowd-sourced track data: canonical track ID as a typed UUID value object emitting byte-identical OpenAPI (no client regen), SUGGEST/VALIDATION-mode resolver that records drift in an append-only ledger instead of overwriting client-submitted IDs, k-anonymity gate on community data (distinct-contributor counts, default k=3, 404-not-403 to avoid existence leaks, fail-closed dark launch), and contributor-attribution side tables.
+
+**Why RaceLab wants it:** Design patterns for RaceLab's community track database and public setup sharing: canonical track identity with non-destructive client/server reconciliation (relevant to offline-first sync where mobile creates tracks locally), and the k-anon/404 privacy gate pattern for aggregated community data (track condition stats, setup popularity) without leaking individual racers' data.
+
+**Verifier evidence:** Verified both docs plus the as-built embodiment in datalogger/backend. The master plan's §2 decision table contains a non-obvious community-data privacy design directly matching RaceLab's social pillar: k-anon gating on COUNT(DISTINCT contributor) via a dedicated contributor side table (row/session counts double-count repeat uploads; online averaging cannot recover distinct counts), hashed contributor IDs, default k=3 env-tunable, 404-not-403 to avoid existence leaks, fail-closed dark launch. The sibling TDD plan + resolver.py + migration 0004 document a SUGGEST/VALIDATION-mode reconciliation pattern (client pre-resolves against a versioned local LUT, server re-resolves, disagreements go to an append-only drift ledger enforced by a plpgsql trigger, client-submitted ID never overwritten, plus an unresolved_canonicals curator-triage table) that maps directly onto RaceLab's offline-first mobile-created tracks reconciling to a canonical track DB. Implementation is Python/SQLAlchemy/Pydantic and half the master plan is LAP repo-audit noise, so it is not copypaste — but the two design clusters would otherwise cost real design time, so scheme is correct.
+
+**How to adapt:** Read these for two patterns, ignore the LAP repo bookkeeping (alembic heads, Celery, R3F, launch gates). (1) Canonical track reconciliation for offline-first: when the Expo app creates a track locally and the sync layer later matches it to a canonical track (by GPS proximity), follow the SUGGEST/VALIDATION model — never overwrite the client-submitted track ID during sync; write a row to an append-only track_id_drifts table (Neon, enforce with the plpgsql BEFORE UPDATE trigger quoted verbatim in the TDD plan — it runs unchanged on Neon; keep UPDATE-only so GDPR cascade deletes still work) and surface it as a merge suggestion in the UI; also keep an unresolved_tracks table with occurrence counts for admin triage, and a version stamp on the canonical track list so client/server skew is detectable. (2) For any community aggregate (track condition stats, setup popularity), gate reads on COUNT(DISTINCT hashed contributor_id) from a contributor side table written at ingest — not on row counts — with k>=3 from an env var, return 404 (not 403) below threshold, and ship the endpoint fail-closed/dark until real contributor volume exists. The Python CanonicalTrackId value object translates to a TS branded type (type TrackId = string & { __brand: 'TrackId' }) in packages/schema with a plain-string Zod schema so the wire contract stays a bare UUID string; the resolver.py drift-detection rule "only report drift when BOTH sides resolved" carries over to avoid false conflicts on unknown tracks.
+
+**Files:**
+- `docs/superpowers/plans/2026-06-02-crowd-sourced-grip-corrected-plan.md`
+- `docs/superpowers/plans/2026-06-02-ws2-canonical-track-id-datalogger.md`
+- `datalogger/backend/app/resolver.py`
+- `datalogger/backend/alembic/versions/0004_drift_tracking.py`
+
+---
+
+### trackreco-track-registry-schema
+
+- **Folder:** `2-schemes/analysis-ops-docs/trackreco-track-registry-schema/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/Analysis/trackreco-main/schemas/master_track.schema.json`
+- **Language:** json
+
+**What it is:** JSON Schema for a canonical track-venue registry record (venue_id, canonical_name, aliases, country/locality/address, lat/lon, indoor-outdoor status, karting status, official website/contacts, provenance + confidence + review_status), backed by the SQLAlchemy domain model in src/trackreco_platform/domain/models.py (Venue, VenueAlias, Layout, LayoutVersion with draft->review->active/published state machine, ReviewAction, PublishHistory, AuditMixin).
+
+**Why RaceLab wants it:** Field-level template for RaceLab's track database entity: name + aliases, GPS, indoor/outdoor, surface/status enums, moderation workflow (review_status) for community-contributed tracks, and created_by/updated_by audit columns. The schema needs pruning of imagery-pipeline provenance fields, so scheme rather than copypaste.
+
+**Verifier evidence:** Verified: the JSON schema exists but is heavily polluted with discovery-pipeline provenance — its required fields include acceptance_confidence_score, acceptance_reason_codes, source_count, karting_status, recurring_venue_status, and it has no surface enum, so it is nowhere near liftable JSON (not copypaste). The real value is in the backing domain model (src/trackreco_platform/domain/models.py + enums.py): Venue + separate VenueAlias table (uq_venue_alias, source_ref), and a complete versioned-entity-with-moderation pattern (Layout.active_version_id pointer, immutable LayoutVersion rows with version/supersedes_layout_version_id/immutable_hash, ReviewStatus state machine draft->in_review->changes_requested->approved/rejected, append-only ReviewAction + PublishHistory with publish/unpublish/rollback, AuditMixin) that maps directly onto RaceLab's setup-sheet versioning/publishing and community-track moderation needs. That is a worked data-model reference, not just generic CRUD, so scheme stands — but Python/SQLAlchemy/PostGIS, so never copypaste.
+
+**How to adapt:** Treat models.py/enums.py as the load-bearing reference, not the JSON schema. For the RaceLab track entity (packages/schema + Neon, Drizzle/Prisma): copy the Venue + VenueAlias shape (separate alias table with unique(track_id, alias) and a source_ref column), keep lat/lon + indoor/outdoor + address/contact fields from master_track.schema.json, add the missing surface enum (clay/astro/carpet/...) and photos, and drop every imagery/discovery field (acceptance_*, evidence_ids, osm_refs, parser_versions, *_geom, source_*, karting_status, existing_status, recurring_venue_status) — the schema's required list is pipeline-driven, ignore it. Reuse the versioning triad as the template for setup sheets AND community-track moderation: parent row with active_version_id, immutable version rows with integer version + supersedes pointer + content hash, the ReviewStatus enum for moderating community-submitted tracks, and append-only ReviewAction/PublishHistory tables (publish/unpublish/rollback with previous_version pointer) for the publish lifecycle; the supersedes pointer generalizes to RaceLab's fork-lineage DAG by allowing cross-parent references. Map AuditMixin's created_by/updated_by to Clerk user IDs. ImageryAsset/WorkingAreaVersion/ExtractionRun/ValidationReport in models.py are satellite-extraction machinery — ignore them entirely.
+
+**Files:**
+- `Analysis/trackreco-main/schemas/master_track.schema.json`
+- `Analysis/trackreco-main/src/trackreco_platform/domain/models.py`
+- `Analysis/trackreco-main/src/trackreco_platform/domain/enums.py`
+
+---
+
+### v2-open-meteo-conditions-impl
+
+- **Folder:** `2-schemes/analysis-ops-docs/v2-open-meteo-conditions-impl/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/Analysis/V2_claude_ai/telemetry_tool/meteo_service.py`
+- **Language:** python
+
+**What it is:** Working Open-Meteo client (no API key): fetch_current_weather, fetch_historical_weather (archive API), get_weather_forecast(lat, lon, hours), estimate_track_conditions(weather), unified track-location lookup (user tracks + predefined geocode cache), offline fallback estimates; paired with the rules classifier implementation at telemetry_tool/conditions/classifier.py.
+
+**Why RaceLab wants it:** Reference implementation of exactly the weather integration RaceLab needs (live + forecast + historical Open-Meteo, condition estimation, per-track lat/lon resolution, offline fallback) — wrong language (Python; RaceLab needs a TS port for the Next.js API), so scheme: port the endpoint parameters, derived metrics, and fallback behavior.
+
+**Verifier evidence:** Verified: meteo_service.py is a working keyless Open-Meteo client covering current+forecast+historical with non-obvious date routing (forecast past_days for <=92 days vs archive API for older, avoiding the archive's data lag) plus a weather->track-conditions estimator (track temp, grip score, dry/damp/greasy/wet) that maps directly onto RaceLab's auto-captured weather snapshot + grip level. The paired conditions/ package is even stronger: P1-P10 raw inputs, D1-D5 derived metrics (Penman drying-rate, days-since-rain), 10 ordered rules with per-rule confidence, user-override-wins hierarchy, safe fallback with confidence=0.0, and an explainable WeatherCondition output (dominant_factor, rationale, source, raw_inputs) that feeds an AI context bundle — exactly RaceLab's deterministic conditions layer. It is Python with kart/tarmac-specific outputs (mu_scale ladders, tire compounds), so scheme, not copypaste.
+
+**How to adapt:** Port to TypeScript as a packages/weather util consumed by Next.js route handlers: keep the exact Open-Meteo endpoint params (hourly field list, wind_speed_unit, timezone) and especially meteo_service.py's _pick_historical_strategy routing (forecast ?current= for now, forecast &past_days=N for dates <=92 days back, archive-api for older) — it works around the archive API's multi-day lag. Reuse the never-expiring historical cache keyed on (lat/lon rounded to 2dp, date), but store payloads in Neon or Vercel KV instead of filesystem; cache the untrimmed multi-day archive and trim per-session so same-day sessions share one fetch. Define the WeatherCondition output shape (label, confidence, dominant_factor, rationale, source user|weather|fallback, raw_inputs) as a Zod schema in packages/schema — the rationale + raw_inputs explainability fields slot straight into the AI Race Engineer context bundle, and the hierarchy (manual user grip entry always wins; API failure -> safe default with confidence=0.0) matches RaceLab's manual-grip-first, honest-degradation philosophy. The D1-D5 derived metrics (track-temp estimate from air temp/solar/cloud/wind, hours-since-rain, Penman-style drying-rate, days-since-significant-rain) transfer well to outdoor clay/astro grip estimation, but re-derive all rule thresholds and DISCARD the kart-on-tarmac outputs: mu_scale ladders, tire compound recommendations (wet/inter/soft) and coaching strings are domain-wrong for RC; also gate the whole classifier on track surface/indoor flag (indoor carpet tracks should skip weather classification). LAP_V1_CONDITIONS_ENGINE_SPEC.md sections 3-6 document the physical grounding and rule rationale (incl. the oil-rejection first-rain-after-dry-spell rule) — treat it as the design doc, the Python files as reference implementations. No secrets in any file (Open-Meteo is keyless).
+
+**Files:**
+- `Analysis/V2_claude_ai/telemetry_tool/meteo_service.py`
+- `Analysis/V2_claude_ai/telemetry_tool/conditions/classifier.py`
+- `Analysis/V2_claude_ai/telemetry_tool/conditions/derived_metrics.py`
+- `Analysis/V2_claude_ai/telemetry_tool/conditions/open_meteo.py`
+- `Analysis/V2_claude_ai/telemetry_tool/conditions/types.py`
+- `LAP_V1_CONDITIONS_ENGINE_SPEC.md`
+
+---
+
+### v2-coaching-taxonomy-templates
+
+- **Folder:** `2-schemes/analysis-ops-docs/v2-coaching-taxonomy-templates/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/Analysis/V2_claude_ai/telemetry_tool/coaching/taxonomy/causes.json`
+- **Language:** json
+
+**What it is:** Machine-readable cause taxonomy (~30 causes in 10 categories, each with symptom / diagnosis / root_cause / severity_thresholds {mild,moderate,severe} / unit) plus the sibling templates package (corner_tips.py 156 templated tips keyed by cause+severity+vehicle_class, drills.py 20 drills with per-difficulty success criteria, confidence_frames.py, symptoms.py).
+
+**Why RaceLab wants it:** Structural template for RaceLab's deterministic symptom-mapping layer and KB rule content: the symptom->diagnosis->root_cause->thresholded-severity JSON shape is exactly what the symptom tagger feeding retrieval needs. Content is car-driving-technique specific and must be rewritten for RC setup symptoms (loose/pushy/traction-roll), so scheme not copypaste.
+
+**Verifier evidence:** Verified: causes.json (canonical copy at telemetry_tool/shared/coaching_taxonomy/; the claimed coaching/taxonomy path is now a deprecation shim) defines ~26 causes in 5 categories, each with symptom/diagnosis/root_cause (validated 9-value enum)/severity_thresholds{mild,moderate,severe}/unit, and causes.py provides a Pydantic-validated loader with a deterministic get_severity() tier classifier — exactly the data shape RaceLab's deterministic symptom-mapping + KB-rule layer needs. The surrounding content system is equally instructive: corner_tips.py keys 156 templated remediations by (cause_id, severity, vehicle_class) with progressive_steps + symptom_check, drills.py cross-links via applicable_causes with per-difficulty success_criteria, and confidence_frames.py keys tone by root_cause. Not copypaste: every entry is real-car driver-technique coaching driven by telemetry-measured deltas (units like meters_early, mps2_below_capability, release_rate_mps3) that cannot exist in a manual-lap-time RC app, and the code is Python/Pydantic; the structure, not the content, is the value.
+
+**How to adapt:** Use these as the structural blueprint for packages/kb: keep the categories -> causes -> {symptom, diagnosis, root_cause, severity_thresholds, unit} JSON shape but rewrite all content for RC setup symptoms (loose/pushy/traction-roll, traction on clay vs carpet, etc.) and re-key vehicle_class to chassis class (1/8 nitro, 1/8 e-buggy, 1/10 offroad). Port CauseDefinition's Pydantic validation to a Zod schema in packages/schema; the root_cause enum validator and required-threshold-keys check are the exact guard-rail pattern for KB content CI. Severity in RaceLab cannot come from telemetry deltas — drive get_severity() from driver feedback-tag intensity or manual lap-time variance instead, and replace telemetry units (meters_early, mps2) with setup-relevant ones (clicks, mm, degrees, weight-oil cst). The (cause_id, severity, class) template keying maps directly onto KB-rule retrieval keys for the RAG layer, and drills.py's applicable_causes cross-reference is the pattern for linking rules to recommended setup changes with revert cost. Deliberately excluded: coaching/analyzers/* (pandas/numpy telemetry-trace symptom detection, no equivalent input in RaceLab) and the coaching/taxonomy + coaching/templates shim files (deprecated re-exports of the shared/coaching_taxonomy files listed).
+
+**Files:**
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/causes.json`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/causes.py`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/corner_tips.py`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/drills.py`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/symptoms.py`
+- `Analysis/V2_claude_ai/telemetry_tool/shared/coaching_taxonomy/templates/confidence_frames.py`
+
+---
+
+### Area: datalogger
+
+### gps-track-fingerprint-recognition
+
+- **Folder:** `2-schemes/datalogger/gps-track-fingerprint-recognition/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/backend/app/fingerprint.py`
+- **Language:** Python
+
+**What it is:** Self-contained (~155-line, numpy-only) track recognition from a raw WGS84 GPS trace: equirectangular projection, 200-point length-normalized signed-curvature signature, FFT circular cross-correlation with 8x sub-bin upsampling, 0.85 similarity + 5% length gates. Paired with routers/recognize.py (POST /v1/recognize, SUGGEST-only mode returning ranked candidates with confidence + length_diff_pct; no-match traces feed an unresolved-triage table) and tests/test_fingerprint.py + test_recognize_eval.py (threshold validation against an 8-track GT corpus: self-match top-1 from rotated start, zero cross-track false accepts).
+
+**Why RaceLab wants it:** Track database auto-suggest-by-GPS, almost verbatim: a racer records one lap walking/driving the RC track perimeter, the algorithm matches it against stored track fingerprints. The whole math is dependency-light and ports to TypeScript in an afternoon; the suggest-only-until-thresholds-validated rollout discipline and the unresolved-triage feedback loop are the load-bearing design decisions.
+
+**Verifier evidence:** Verified: datalogger/backend/app/fingerprint.py is a 155-line numpy-only module (equirectangular projection, 200-point length-normalized signed-curvature signature, FFT circular cross-correlation with 8x sub-bin upsampling, 0.85 similarity + 5% length gates) with zero LAP-infra coupling; routers/recognize.py implements SUGGEST-only ranked candidates (mode="suggest", confidence kept separate from similarity "for future calibration") and upserts no-match traces into an unresolved_canonicals triage table with occurrence_count; test_recognize_eval.py enforces rotated-start self-match top-1 plus zero cross-track false accepts against an 8-track GT corpus. This is exactly the "track recognition/matching by GPS" overlap on the hunt list, and the signal-processing design (start-offset invariance via circular correlation, resample-before-differentiate noise handling, length gate) plus the suggest-only rollout and triage feedback loop are non-generic decisions a RaceLab dev team would otherwise design from scratch. It is Python (FastAPI/SQLAlchemy/alembic), so it cannot be copypasted into the Expo/Next.js stack — scheme, not copypaste.
+
+**How to adapt:** Port fingerprint.py to a standalone TS utility in packages/schema or a server-only lib in apps/api — it is plain math (arrays + FFT; use a small FFT lib or a direct O(n^2) circular correlation, n=200 is tiny) and the unit tests in test_fingerprint.py document the exact contract (circle => constant 2*pi signature, start-offset and world-rotation invariance, length gate). Store fingerprints as a float8[]/jsonb column on the tracks table (see migration 0006 for the shape: fingerprint array + length_m + source + unique(track, source)) and expose a Next.js route that returns ranked suggestions, never auto-assigns — copy the suggest-only-until-thresholds-validated discipline and the unresolved-triage upsert (occurrence_count + best below-threshold confidence) as the curation feedback loop for user-submitted tracks. Two RaceLab-specific cautions: (1) at RC scale (~100-300 m perimeter) consumer GPS noise is a far larger fraction of feature size than on full-size circuits, so re-run the eval-gate idea (self-match top-1, zero cross-accepts) on real RC walk-the-track traces before trusting the 0.85/5% thresholds; (2) for V1 the cheap first filter is plain Haversine proximity to stored track GPS — use the curvature fingerprint as the second stage to disambiguate rebuilt layouts at the same venue, which is common at clay offroad clubs. test_recognize_eval.py contains a hardcoded local Windows GT-corpus path; it is included as a pattern to read, not to run.
+
+**Files:**
+- `datalogger/backend/app/fingerprint.py`
+- `datalogger/backend/app/routers/recognize.py`
+- `datalogger/backend/tests/test_fingerprint.py`
+- `datalogger/backend/tests/test_recognize_eval.py`
+- `datalogger/backend/alembic/versions/0006_track_fingerprints.py`
+
+---
+
+### canonical-registry-alias-resolver
+
+- **Folder:** `2-schemes/datalogger/canonical-registry-alias-resolver/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/backend/app/models.py`
+- **Language:** Python
+
+**What it is:** Canonical entity registry data model: tracks/cars tables with per-source alias tables ((source_id, raw_id, raw_layout) -> canonical_id), a stateless resolver (resolver.py), a versioned LUT snapshot endpoint (routers/registry.py, GET /registry/snapshot?since= with 304 Not-Modified), drift detection (client resolves first, server re-resolves and records disagreements in an append-only canonical_drifts ledger, never overwrites), and an unresolved_canonicals triage table with occurrence-count upserts. Seed data in backend/seed/*.json, DDL in alembic/versions/0002-0006.
+
+**Why RaceLab wants it:** RaceLab's track database needs exactly this shape: canonical track records, alias/duplicate merging (users will name the same club track differently), versioned read-only reference data the mobile app caches offline, and a curator triage queue for unmatched entries. The client-resolves/server-validates/drift-ledger pattern is a proven answer to offline-first reference-data conflicts.
+
+**Verifier evidence:** Verified end-to-end: app/models.py defines canonical Track/Car tables plus alias tables keyed (sim_id, raw_id, raw_layout) -> canonical_id, an append-only canonical_drifts ledger (enforced by a plpgsql UPDATE-blocking trigger in app/ddl.py / migration 0005), and an unresolved_canonicals triage table with a unique constraint used for occurrence-count upserts in routers/bundles.py (on_conflict_do_update, lines 132-144). resolver.py implements the client-resolves/server-re-validates/never-overwrite pattern with a monotonic LUT version, and routers/registry.py serves GET /registry/snapshot?since= with 304 Not-Modified for offline client caching. This is exactly the shape RaceLab's track DB needs (users naming the same club track differently, offline-cached reference data, curator triage), but it is Python/FastAPI/SQLAlchemy/Alembic — wrong stack for copypaste, so scheme is correct.
+
+**How to adapt:** Port the data model 1:1 to Neon/Drizzle: tracks (canonical) + track_aliases, canonical_drifts (append-only — use the PG trigger from ddl.py verbatim, it is plain plpgsql), and unresolved_canonicals with the unique constraint + ON CONFLICT occurrence_count+1 upsert as the curator triage queue. Replace sim_id with a source discriminator (e.g. 'user_entry') and note the key difference: LAP aliases are exact-match strings from deterministic sims, while RaceLab gets free-text user names + GPS, so resolution should be normalized-name match plus GPS-proximity, with misses landing in unresolved_canonicals exactly as bundles.py does. The registry snapshot endpoint becomes a Next.js route handler the Expo app calls to refresh its expo-sqlite-cached track LUT; keep the since/304 pattern but use an integer version or ETag instead of LAP's string timestamp compare (since >= current_version is brittle). The core invariant to preserve from resolver.py: mobile resolves offline against its cached LUT, server re-resolves on sync, disagreements append to the drift ledger with both LUT versions recorded, and the client's submitted value is never overwritten. Do NOT port the track_fingerprints / curvature-recognizer parts (models.py TrackFingerprint, routers/recognize.py) — that is telemetry-driven matching irrelevant to manual-entry RC racing. admin.py endpoints are unauthenticated in LAP v1 (single operator); RaceLab must gate the triage routes behind Clerk roles.
+
+**Files:**
+- `datalogger/backend/app/models.py`
+- `datalogger/backend/app/resolver.py`
+- `datalogger/backend/app/routers/registry.py`
+- `datalogger/backend/app/routers/bundles.py`
+- `datalogger/backend/app/routers/admin.py`
+- `datalogger/backend/app/ddl.py`
+- `datalogger/backend/alembic/versions/0002_canonical_registry.py`
+- `datalogger/backend/alembic/versions/0004_drift_tracking.py`
+- `datalogger/backend/alembic/versions/0005_drift_ledger_append_only.py`
+- `datalogger/backend/seed/canonical_tracks.json`
+
+---
+
+### idempotent-sync-ingest-api
+
+- **Folder:** `2-schemes/datalogger/idempotent-sync-ingest-api/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/backend/app/envelope.py`
+- **Language:** Python
+
+**What it is:** Server side of an offline-first sync contract: Idempotency-Key header parsed as UUID, deterministic per-row UUIDv5 derivation from (batch_envelope, row_key) so partial-batch replays dedupe row-by-row, sync_envelopes audit table, ON CONFLICT DO NOTHING insert pattern that resolves concurrent retries without IntegrityError, uniform response envelope ({ok, envelope_id, already_seen} / typed error codes), 409 missing-parent-session semantics, and a sync_failures dead-letter audit table. routers/ingest.py implements five replay-safe batch endpoints; backend/README.md documents the full wire contract; bundle_validator.py adds sha256-manifest-verified file-bundle upload.
+
+**Why RaceLab wants it:** Direct blueprint for RaceLab's hard-requirement sync layer (expo-sqlite -> Next.js API -> Neon): every mutation idempotent via client-generated envelope UUIDs, per-row UUIDv5 for batch replays, already_seen replay acks, dead-letter store. This design is what makes flaky-connectivity-at-the-track sync safe; reimplement in TS route handlers.
+
+**Verifier evidence:** Verified every element of the claim: envelope.py implements Idempotency-Key parsing as UUID with typed 400 (code "missing_envelope_id"), deterministic per-row UUIDv5 via derive_envelope_id(batch_envelope, row_key), and record_envelope with on_conflict_do_nothing(index_elements=["envelope_id"]) explicitly commented as resolving concurrent-retry races without IntegrityError; routers/ingest.py has the five replay-safe endpoints all following the documented skeleton (already_seen check -> dual ON CONFLICT on business natural key AND envelope PK -> IntegrityError treated as replay -> 409 missing_session for parent ordering); models.py defines the sync_envelopes audit and sync_failures dead-letter tables; README.md documents the full wire contract ({ok, envelope_id, already_seen}, typed error codes). It is Python/FastAPI/SQLAlchemy so cannot be copypaste, but this end-to-end idempotent-batch-sync design (including the client-side durable queue with ack/nack and the RETRY/PERMANENT_FAILURE/AUTH_FAILURE transport taxonomy in src/lap_coach_logger/sync/) is precisely the expo-sqlite -> Next.js -> Neon sync layer RaceLab must build, and the per-row UUIDv5 partial-batch-replay trick plus race-safe conflict handling are non-obvious details a team would otherwise discover the hard way.
+
+**How to adapt:** Reimplement the wire contract in Next.js App Router route handlers backed by Neon: an Idempotency-Key middleware (uuid.validate), a sync_envelopes table with envelope_id UUID PK plus a sync_failures dead-letter table (DDL is in models.py lines 198-231), and Drizzle/raw-SQL INSERT ... ON CONFLICT DO NOTHING on BOTH the envelope PK and the business natural key (e.g. (session_id, lap_number) for manual lap times) — the dual-conflict + treat-unique-violation-as-replay pattern in ingest.py is the load-bearing part. Use uuidv5 (npm `uuid` v5 with the batch envelope as namespace) to derive per-row IDs so a partially-applied batch replays cleanly row-by-row; keep the uniform {ok, envelope_id, already_seen} / typed-error-code response shape and the 409 missing-parent semantics so the client knows to re-send the parent session first. On mobile, replace the JSON-file SyncQueue with an expo-sqlite outbox table but keep its semantics exactly: client-generated envelope UUID per mutation, enqueue-dedupe, peek/ack/nack with max-retry eviction to a local dead-letter store, and the four-way TransportOutcome taxonomy (SUCCESS / RETRY / PERMANENT_FAILURE / AUTH_FAILURE — map AUTH_FAILURE to Clerk re-auth instead of device tokens). Note this design is append-only (sessions/laps/events), which happens to fit RaceLab well because setup saves are immutable versions; it does NOT give you mutable-document conflict resolution, so any in-place edits (profile, track notes) still need a last-write-wins or version-check layer on top. bundle_validator.py is secondary: its sha256-per-file manifest + manifest-hash-as-idempotency-key pattern is worth borrowing for multi-file (photo) uploads to Vercel Blob, but skip its LAP-specific telemetry file inventory.
+
+**Files:**
+- `datalogger/backend/app/envelope.py`
+- `datalogger/backend/app/routers/ingest.py`
+- `datalogger/backend/app/models.py`
+- `datalogger/backend/README.md`
+- `datalogger/backend/app/bundle_validator.py`
+- `datalogger/src/lap_coach_logger/sync/queue.py`
+- `datalogger/src/lap_coach_logger/sync/http_transport.py`
+
+---
+
+### desktop-offline-sync-queue
+
+- **Folder:** `2-schemes/datalogger/desktop-offline-sync-queue/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/sync`
+- **Language:** Python
+
+**What it is:** Client side of the sync contract: thread-safe disk-persisted queue (queue.py) with duplicate-envelope rejection, ack/nack with max-retry drop, a background drain client (client.py) that batches same-type envelopes, tracks connection state (unknown/online/offline/auth_failed) and last-sync status for UI display, a permanent-failure store (failure_store.py), typed endpoint routing (endpoints.py), and dataclass envelope schemas (schema.py) mirroring the server tables.
+
+**Why RaceLab wants it:** The mobile-side pattern RaceLab needs over expo-sqlite: persistent outbound queue as local source of truth, idempotent envelope IDs minted on device, exponential-backoff drain loop, dead-letter handling, and surfaced sync-state for offline UX. Python threading translates cleanly to a TS background-sync task.
+
+**Verifier evidence:** Verified: this is a complete, well-factored Python reference implementation of an offline-first outbound sync layer — persisted dedup queue with ack/nack and max-retry drop (queue.py), four-outcome transport taxonomy SUCCESS/RETRY/PERMANENT_FAILURE/AUTH_FAILURE with capped exponential backoff (http_transport.py), background drain loop with a connection-state machine (unknown/online/offline/auth_failed) surfaced for UI (client.py), categorized dead-letter store with manual retry/discard ("never silently drop data", failure_store.py), and a typed endpoint routing table (endpoints.py). It encodes hard-won contract decisions RaceLab faces identically: device-minted UUID envelope IDs + Idempotency-Key header, server replay signaled as HTTP 200 + {already_seen:true} with 409 reserved for ordering preconditions (laps-before-parent-session — same problem as setup-versions-before-parent-sheet), and auth failures parked in the queue rather than burning retries. Wrong language for copypaste, and one claim correction: client.py sends one envelope at a time (true batching is an explicit TODO in _peek_batch), but the design is squarely the actively-hunted "offline-first sync queue on mobile" overlap and clearly "scheme", not generic boilerplate.
+
+**How to adapt:** Port the architecture, not the code: replace the JSON-file queue with an expo-sqlite outbox table (envelope_id as PRIMARY KEY gives dedup for free) and the Python daemon thread with a drain loop triggered on app-foreground + NetInfo connectivity-change + expo background fetch. Keep the four-outcome taxonomy verbatim (success / retry / permanent_failure / auth_failure) with its semantics: auth failures stay queued without consuming retries (Clerk token refresh then resume), permanent 4xx and exhausted retries go to a user-visible dead-letter table with categorized counts and manual retry/discard — never silent drops. Keep the idempotency contract: UUID envelope IDs minted on device, sent as an Idempotency-Key header; the Next.js API should dedupe via a sync_envelopes table and return 200 + {already_seen:true} on replay, reserving 409 for ordering preconditions (e.g. a setup version arriving before its parent sheet) — the comment in http_transport.py lines 107-111 documents why this beats 409-as-success. Replace the LAP payload dataclasses (sim/fuel/sector fields are irrelevant) with Zod schemas in packages/schema for RaceLab payload types (setup_version, session, run, comment), and translate endpoints.py's EndpointSpec table into a typed const record so the drain loop stays contract-free. Two warts to fix in the port: retry_failure reaches into the queue's private _seen_ids (make dedup-removal a first-class queue method), and same-type batching is unimplemented despite max_batch_size in the spec table (implement peek_many over SQLite from day one). Note this module is push-only — RaceLab still needs the pull/merge + conflict-resolution half of sync, which LAP never built; the server-side contract context, if wanted, is in datalogger/docs/superpowers/specs/2026-04-15-connected-v1-master-spec.md (not included: mostly LAP telemetry bundle ingest).
+
+**Files:**
+- `datalogger/src/lap_coach_logger/sync/queue.py`
+- `datalogger/src/lap_coach_logger/sync/client.py`
+- `datalogger/src/lap_coach_logger/sync/http_transport.py`
+- `datalogger/src/lap_coach_logger/sync/failure_store.py`
+- `datalogger/src/lap_coach_logger/sync/endpoints.py`
+- `datalogger/src/lap_coach_logger/sync/schema.py`
+
+---
+
+### coaching-rules-bundle-engine
+
+- **Folder:** `2-schemes/datalogger/coaching-rules-bundle-engine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/coaching`
+- **Language:** Python
+
+**What it is:** Server-authors-rules / client-executes-rules architecture (ADR-009/010, documented in COACHING_RULES.md): a versioned JSON rule bundle (schema_version, bundle_id, compiled_at, rules[] each with id/category/condition/insight/min_corroborating_laps), a recursive condition DSL evaluator (feature_threshold with lt/lte/gt/gte/eq + and/or composition; missing feature = dormant not crash; unknown operator = loud error), three-tier load fallback (network -> 7-day disk cache with signature verification -> embedded baseline bundle), and per-rule failure isolation (one rotten rule never blocks the bundle). Plus surface_policy.py severity gating deciding which insights surface vs log silently.
+
+**Why RaceLab wants it:** Strongest precedent in the codebase for RaceLab's ~150-rule KB: same scale (80-150 rules), same schema discipline (stable rule ids cited in outputs, versioned bundles, category-driven presentation), and the condition-DSL + deterministic-evaluation layer maps onto the deterministic symptom-mapping and guard stages of the AI race engineer pipeline. The offline bundle-cache fallback also fits packages/kb shipped to mobile.
+
+**Verifier evidence:** Verified by reading the files: rules_engine.py (760 lines) implements exactly the claimed design — frozen Rule/RuleBundle types with schema_version/bundle_id/compiled_at and stable rule ids + category, a recursive condition DSL (feature_threshold lt/lte/gt/gte/eq plus and/or) with the deliberate asymmetry "missing/non-numeric feature = dormant (False), unknown operator/malformed condition = loud RuleConditionError", and load_bundle_with_fallback with a BundleSource enum (FRESH_SERVER/FRESH_CACHE/STALE_CACHE/NO_BUNDLE) plus signature-verified disk cache and rollback-safe compiled_at comparison; surface_policy.py is a pure deterministic surfacing function (critical-alert suppression, carryover TTL, hysteresis improvement_ratio, cooldown). It is Python desktop-client code (urllib, pathlib, Qt-thread queue), so copypaste is excluded, but the rule-bundle schema discipline, dormant-vs-loud DSL semantics, and offline fallback chain map directly onto RaceLab's ~150-rule KB, deterministic symptom-mapping/guard stages, and offline-first packages/kb — concrete decisions the team would otherwise design from scratch. Caveat: COACHING_RULES.md documents an embedded-baseline third tier and per-rule failure isolation, but the code as written raises on a bad rule at parse time and bottoms out at NO_BUNDLE, so treat those as documented intent rather than implemented behavior.
+
+**How to adapt:** Port the bundle/rule shape to Zod schemas in packages/schema (schema_version, bundle_id, compiled_at, rules[] with stable id + category + condition + insight) — stable rule ids are what the AI engineer cites, and forward-compat "ignore unknown fields" lets the server add metadata without forcing app releases. Reimplement evaluate_condition as a ~50-line TS function and reuse it twice: in the deterministic symptom-mapping stage (symptom tags -> candidate KB rules) and as the numeric guard layer (per-chassis bounds expressed as feature_threshold conditions); keep the dormant-vs-loud semantics (missing data = rule silently inapplicable; malformed rule = error to Sentry, never silent). Map load_bundle_with_fallback to packages/kb: ship a baseline KB bundle in the app binary, cache fetched bundles in expo-sqlite with a TTL, compare compiled_at so a server rollback never downgrades the client, and surface a BundleSource-style enum so the UI can show a "KB out of date" state offline. CorroborationGate/InsightCooldownFilter and the hysteresis specifics in surface_policy are live-telemetry-overlay concerns — skip them — but the pure-function (previousState, message, now) -> state pattern in surface_policy is a clean model for deciding which AI insights surface vs log. Do NOT copy the rest of the coaching directory (corner_insights, plan_engine, readiness, post_session_summary): it is real-telemetry lap-trace processing, irrelevant to RC manual lap times. Note the doc/code discrepancy on per-rule failure isolation flagged in reasoning; RaceLab should actually implement skip-and-log per rule rather than failing the whole bundle.
+
+**Files:**
+- `datalogger/COACHING_RULES.md`
+- `datalogger/src/lap_coach_logger/coaching/rules_engine.py`
+- `datalogger/src/lap_coach_logger/coaching/surface_policy.py`
+- `datalogger/src/lap_coach_logger/coaching/policy_config.py`
+
+---
+
+### deterministic-setup-coach
+
+- **Folder:** `2-schemes/datalogger/deterministic-setup-coach/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/core/setup_coach.py`
+- **Language:** Python
+
+**What it is:** Deterministic setup advisor (with setup_calculations.py + setup_tools.py): free-text symptom aliases normalized to a canonical issue-tag vocabulary (understeer->front_limited, wheelspin->traction_limited, etc.), structured SetupVector extraction from native setup files (numeric + categorical features + available levers), and a heuristic rule table scoring (lever, direction) candidates per issue tag with weights, prior boosts away from extreme current values, and human-readable rationale strings attached to every recommendation.
+
+**Why RaceLab wants it:** This is RaceLab pillar-3 step 1 in miniature: driver feedback tags -> canonical symptoms -> retrieval of applicable setting changes -> scored recommendations with cited rationale, all deterministic before any LLM. The tag-alias normalization map, lever/direction/weight rule shape, and dont-push-past-bounds prior are directly reusable design for the symptom mapping + guard layer.
+
+**Verifier evidence:** Verified: setup_coach.py contains the _ISSUE_ALIASES free-text-to-canonical-tag map (understeer->front_limited, wheelspin->traction_limited) and a three-state recommendation snapshot (no_setup / foundation_only / heuristic_scored) with explicit honest-refusal notes when no rules match; setup_calculations.py contains a 28-entry _HEURISTIC_RULES table of (issue_tag, lever, direction, weight, rationale), _LEVER_STEP_RULES per-lever step/digits/unit, a _prior_boost that favors moves away from extreme current values, and score_heuristic_candidates that aggregates per (lever,direction), caps confidence at 0.95, and attaches rationale + suggested value + diff_hint. This is exactly RaceLab pillar 3's deterministic layer (symptom mapping -> rule retrieval -> scored, cited, bounded recommendations -> refusal on empty match) in miniature, plus setup_tools.py's build_setup_diff is the pillar-1 changed-params-only diff with per-param effect text. It is Python entangled with sim telemetry bundles (TelemetrySample, parquet loaders, ACC/iRacing file roots), so not copypaste — but the data shapes and pipeline are genuinely instructive design.
+
+**How to adapt:** Port the design, not the code: re-express _ISSUE_ALIASES and the _HEURISTIC_RULES (issue_tag, lever, direction, weight, rationale) tuples as typed TS/Zod data in packages/kb — the RC symptom vocabulary (understeer/oversteer/traction/bottoming) and most levers (camber, toe, springs, ARB, ride height, diff) transfer almost one-to-one to RC chassis. Replace telemetry-derived tagging (derive_issue_tags, build_lap_metrics, all TelemetrySample/parquet/sim-folder code — irrelevant, RC has no telemetry) with manual driver feedback tags as the sole tag source. Generalize _LEVER_STEP_RULES + _prior_boost into per-chassis numeric bounds/step tables in packages/schema; that becomes the deterministic guard layer that clamps Claude's structured output. Reuse SetupRecommendationCandidate/Snapshot field shapes (direction, confidence, rationale, likely_effect, suggested_value, diff_hint, status, notes) as the AI SDK structured-output schema, including the explicit no-match note as the honest-refusal path. build_setup_diff's changed-keys-only diff with per-key describe_setup_effect annotation is the blueprint for the pillar-1 setup diff view — compute it over flattened canonical keys (canonical_feature_key shows the flattening discipline) of two setup versions.
+
+**Files:**
+- `datalogger/src/lap_coach_logger/core/setup_coach.py`
+- `datalogger/src/lap_coach_logger/core/setup_calculations.py`
+- `datalogger/src/lap_coach_logger/core/setup_tools.py`
+
+---
+
+### lut-distribution-offline-cache
+
+- **Folder:** `2-schemes/datalogger/lut-distribution-offline-cache/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/normalization`
+- **Language:** Python
+
+**What it is:** Client-side mirror of the canonical registry: bundled LUT JSON shipped with the binary (normalization/lut/), a loader merging the base LUT with the freshest backend snapshot, and the desktop-side CanonicalResolver. Sibling track_catalog.py implements the generic offline reference-data primitive: atomic .partial+rename download, never-raises structural validation, load-or-None cache read so half-cached data can never reach consumers. scripts/sync_lut_from_backend.py refreshes the bundled copy.
+
+**Why RaceLab wants it:** Pattern for shipping the RaceLab track database and chassis-template/KB reference data to an offline-first mobile app: embed a baseline snapshot, version-gate refreshes against the server, validate atomically before swapping. Modest but real design savings.
+
+**Verifier evidence:** Verified on disk: track_catalog.py implements the claimed three-primitive offline reference-data contract (atomic .partial+rename download, never-raises validation returning TrackCatalogStatus, load-or-None cache read) with the explicit invariant that half-cached data must never reach consumers; lut_loader.py implements bundled-baseline-plus-merged-server-snapshot with content-hash versioning, and sync_lut_from_backend.py embeds the latest backend seed at build time. All Python/desktop (PySide logger), so not copypaste, and the individual primitives are near-generic — but the composite design maps directly onto RaceLab's hard offline-first requirement for shipping chassis templates, ~150 KB rules, and track seed data with version-gated refreshes. Excluded: mapper.py (sim-telemetry field mapping, useless-by-default) and the lut/*.json data files (multi-sim alias resolution has no RC analogue).
+
+**How to adapt:** Read these as a design pattern, not runnable code: for RaceLab, bundle baseline chassis templates / KB rules / track seed as JSON in the Expo app (or pre-seeded expo-sqlite rows) with a content-hash version, expose a Next.js route like GET /api/reference/snapshot returning {version, entities}, fetch best-effort on launch, and preserve the two invariants encoded here: (1) never-raises structural validation that returns a status object instead of throwing, and (2) validated-then-atomic-swap so partially-synced reference data can never reach consumers — in expo-sqlite that means validate fully, then replace inside one transaction (replacing the .partial+rename file trick). sync_lut_from_backend.py translates to a monorepo build step copying packages/kb and packages/schema seed JSON into apps/mobile assets, stamped with date+hash. resolver.py's one load-bearing idea is the offline-first split "client resolves first, server validates but does not overwrite" — useful for offline track assignment reconciliation. Ignore the multi-sim alias data model entirely (RaceLab tracks/chassis are first-party canonical, no raw-string aliasing problem), and do not port mapper.py (real-telemetry processing, irrelevant to manual RC lap times).
+
+**Files:**
+- `datalogger/src/lap_coach_logger/track_catalog.py`
+- `datalogger/src/lap_coach_logger/normalization/lut_loader.py`
+- `datalogger/src/lap_coach_logger/normalization/resolver.py`
+- `datalogger/scripts/sync_lut_from_backend.py`
+
+---
+
+### webapp-contract-types
+
+- **Folder:** `2-schemes/datalogger/webapp-contract-types/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/backend/contract/webapp-types.ts`
+- **Language:** TypeScript
+
+**What it is:** Hand-maintained TS mirror of the backend's Pydantic schemas (SessionSummary/SessionDetail/LapOut/AnalysisJson/RegistryTrack/UnresolvedCanonical...), generated-from-openapi.json discipline documented in the header (npx openapi-typescript), shipped as a contract/ directory with a companion handoff doc (docs/webapp-contract-v2.md) including display fallback rules for null canonical fields.
+
+**Why RaceLab wants it:** Although TypeScript, the types are LAP-domain-shaped (sims, fuel, telemetry quality) so not copypaste; the value is the contracts-first discipline for packages/schema: single openapi/zod source of truth, nullable-canonical-with-raw-fallback display rules, and the documented handoff format between backend and client teams.
+
+**Verifier evidence:** Verified both files. webapp-types.ts is genuinely a contracts-first artifact: header documents regeneration via `npx openapi-typescript .../openapi.json` (lines 1-12), and the companion handoff doc (datalogger/docs/webapp-contract-v2.md) adds documented display rules for null canonical fields (canonical name primary, raw string + "[?]" badge fallback), a CI type-drift guard, a migration checklist, and known-limitations notes — a coherent backend-to-client contract discipline RaceLab needs for packages/schema. The RegistryTrack/RegistryCar alias model plus UnresolvedCanonical/CanonicalDrift curation tables are directly instructive for RaceLab's track database (GPS/raw-name -> canonical track resolution with honest unresolved states). Not copypaste: the domain literals are sim-racing-specific (CarClass GT3/GT4/Hypercar, fuel_used_l, telemetry_gaps_count) and the source of truth is a Python/OpenAPI backend, not zod.
+
+**How to adapt:** For RaceLab's packages/schema, replace OpenAPI-as-source-of-truth with zod schemas (which the Vercel AI SDK structured-output path needs anyway): zod is canonical, TS types are inferred and consumed by apps/mobile and apps/api, and you replicate the CI drift guard from webapp-contract-v2.md (regenerate types in CI, diff against committed, fail on drift). Reuse the nullable-canonical + raw-fallback pattern verbatim for the track DB: canonical_track_id/name nullable on a session, raw user-entered track name always preserved, UI shows canonical when resolved else raw + "unresolved" badge; mirror RegistryTrack.aliases ((sim_id, raw_id) -> canonical) as ((source, raw_name/GPS cluster) -> canonical track), and keep an UnresolvedCanonical-style occurrence-count table to drive track-DB curation. Note the doc's known-limitation about denormalized-at-write canonical fields not being retroactively updated — decide explicitly whether RaceLab re-resolves on registry updates, since offline-first sync makes retroactive rewrites harder. Ignore all LAP domain content (CarClass, AnalysisJson telemetry quality, fuel, parquet download) — RC lap times are manual and there is no telemetry. The handoff-doc format itself (display rules + migration checklist + breaking changes + known limitations, versioned per contract change) is worth adopting as the template for backend-to-mobile contract changes even inside the monorepo.
+
+**Files:**
+- `datalogger/backend/contract/webapp-types.ts`
+- `datalogger/docs/webapp-contract-v2.md`
+
+---
+
+### connected-v1-master-spec
+
+- **Folder:** `2-schemes/datalogger/connected-v1-master-spec/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/docs/superpowers/specs/2026-04-15-connected-v1-master-spec.md`
+- **Language:** Markdown
+
+**What it is:** Cross-repo design doc covering the entire Connected v1 system: gap analysis, canonical car/track ID design, registry tables, bundle upload endpoint, OpenAPI-as-single-source-of-truth contract strategy, and rollout sequencing across desktop/backend/webapp. docs/webapp-contract-v2.md is the resulting consumer handoff. Other docs/superpowers specs/plans (QML rewrite, race strategy window, overlays) are LAP-desktop-specific.
+
+**Why RaceLab wants it:** Load-bearing reference when designing RaceLab's track-DB + sync + shared-schema architecture: it documents the why behind canonical IDs, alias tables, drift validation, and contract publication, including the failure modes that motivated each (raw-string divergence across sources = RaceLab's user-entered track names problem).
+
+**Verifier evidence:** Verified: the file is a 16-section cross-repo design spec (Markdown, Python/FastAPI-targeted, so not copypaste) whose core content is directly transferable: SQL DDL for canonical cars/tracks registries with alias tables keyed (source, raw_id, raw_layout), a server-side resolver that never rejects on miss (NULL canonical + sync_failures log + GET /v1/admin/unresolved curator queue + idempotent backfill script), content-hash Idempotency-Key upload with already_seen replay semantics, and OpenAPI-snapshot + openapi-typescript + CI-drift-guard contract discipline with documented rationale (10 open decisions D1-D10, risks, failure modes). This is precisely RaceLab's problem shape for the track DB (divergent user-entered track names = divergent sim raw strings) and chassis registry; the companion docs/webapp-contract-v2.md shows the consumer side incl. TSX fallback rendering for unresolved canonicals and additive-only versioning rules. The telemetry-parquet/MinIO/bundle-multipart sections are LAP-specific noise but do not dilute the load-bearing design.
+
+**How to adapt:** Read these as design references, not code. Map cars->chassis templates and tracks->RaceLab tracks: keep the canonical-row + alias-table pattern but key aliases by source (user-entered name, GPS match, import) instead of sim_id; the never-reject-on-unresolved + admin unresolved-queue + idempotent backfill loop is the right model for GPS-based track matching that improves over time, and the write-time denormalization rule (car_class/track_layout frozen at upload, no retroactive rewrite) is worth copying verbatim for setup-sheet snapshots. The content-hash Idempotency-Key + already_seen replay contract (section 5.2-5.3) maps directly to the expo-sqlite sync queue's upsert semantics. Skip sections 5.4 (MinIO), 7 (PySide6 desktop), and all telemetry-parquet material; RC racing has none of it. Replace the OpenAPI->openapi-typescript codegen pipeline with RaceLab's Zod-first packages/schema, but keep the CI guard that fails when committed types drift from the source of truth, the additive-only/nullable-new-fields rule, and the backend-ships-first release ordering. No secrets in either file (env values are placeholders).
+
+**Files:**
+- `datalogger/docs/superpowers/specs/2026-04-15-connected-v1-master-spec.md`
+- `datalogger/docs/webapp-contract-v2.md`
+
+---
+
+### evaluation-gate-pattern
+
+- **Folder:** `2-schemes/datalogger/evaluation-gate-pattern/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/datalogger/EVALUATION_GATE.md`
+- **Language:** Markdown
+
+**What it is:** Readiness-gate discipline: a checklist of 40+ correctness requirements (state machine, bundle integrity, schema, quality gates, lap classification) where every checklist row maps 1-to-1 to a named pytest in tests/test_evaluation_gate.py, and the build is declared ready only on exit code 0. backend/tests/test_recognize_eval.py applies the same idea to algorithm thresholds (validate against a GT corpus before enabling auto-accept).
+
+**Why RaceLab wants it:** Direct template for RaceLab's '50 AI scenarios in CI' eval gate: requirement-IDs mapped 1:1 to scenario tests, gate-only fast CI target, and the rule that a feature (auto-accept, AI advice) stays in suggest-only mode until its eval corpus passes. The specific checks are telemetry-specific; the structure is the reusable part.
+
+**Verifier evidence:** datalogger/EVALUATION_GATE.md is exactly as claimed: 48 requirement IDs (RG-01..RG-48) each mapped 1:1 to a named pytest in tests/test_evaluation_gate.py (verified: 49 test functions, RG IDs listed in its docstring), with a gate-only fast CI target, a GitHub Actions workflow, a release-note template, and an explicit definition of "evaluation-ready" plus scope exclusions. backend/tests/test_recognize_eval.py (~130 lines) validates algorithm thresholds (0.85 similarity / 5% length) against an 8-track GT corpus before the recognizer leaves suggest-only mode, including a deliberately non-vacuous design (length gate disabled so the shape check is tested on its own) and graceful skip when the corpus is absent. The checklist CONTENT is telemetry/sim-specific (FSM states, bundle files, ACC/iRacing adapters) and useless to RaceLab, but the gate STRUCTURE is a direct, concrete template for RaceLab's hard requirement of a "50 AI scenarios in CI" eval gate — not copypaste (Markdown + Python pytest), but genuinely design-time-saving scheme material.
+
+**How to adapt:** Use EVALUATION_GATE.md as the literal template for RaceLab's AI-advisor eval gate: replace the 10 telemetry sections with RAG-pipeline sections (symptom mapping, retrieval precision, guard-layer bounds, refusal-on-empty-retrieval, citation integrity, structured-output schema validity), assign each of the ~50 scenarios a requirement ID (e.g. AI-01..AI-50) that maps 1:1 to a named test, and keep the doc's three best ideas: a fast gate-only CI target separate from the full suite, an explicit "what passing means" contract, and a "known scope exclusions" table. Port test_recognize_eval.py's pattern to TypeScript (Vitest/Jest) as the scenario-corpus runner: load a versioned GT corpus of scenario JSON files, assert per-scenario pass plus aggregate top-1/no-false-accept style metrics, skip with a clear reason when the corpus is missing, and copy the anti-vacuous trick of disabling one filter to prove the other discriminates alone. Adopt the gating rule wholesale: any AI feature (auto-apply suggestions, new KB rules) ships suggest-only until its eval corpus passes in CI, and the gate exit code is the sole readiness signal. Do not port any of the checklist's telemetry content (FSM, bundles, lap classification) — only the structure.
+
+**Files:**
+- `datalogger/EVALUATION_GATE.md`
+- `datalogger/backend/tests/test_recognize_eval.py`
+
+---
+
+### Area: lap_web-backend
+
+### conditions-weather-engine
+
+- **Folder:** `2-schemes/lap_web-backend/conditions-weather-engine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/conditions`
+- **Language:** Python
+
+**What it is:** Open-Meteo archive API client (no key, filesystem cache with atomic writes, 429/5xx retry backoff) plus a rule-based track-conditions classifier: derives D1-D5 metrics (track temp estimate, hours since rain, cumulative solar, drying rate) from hourly/daily weather and classifies dry/damp/wet/greasy with user-override precedence and a safe-dry fallback when the API fails.
+
+**Why RaceLab wants it:** Blueprint for RaceLab's weather snapshot auto-capture + manual grip-level override + conditions context for the AI engineer. The exact Open-Meteo endpoints, field lists, cache keying (rounded lat/lon + date), and override/fallback precedence transfer directly; only the language is wrong.
+
+**Verifier evidence:** Verified: open_meteo.py is a keyless Open-Meteo client with cache keying (round(lat,2), round(lon,2), date), atomic .tmp→os.replace writes, and 0.5/1/2s backoff on 429/network errors; classifier.py implements a 10-rule first-match-wins dry/damp/wet/greasy classifier with user-override precedence (source="user", confidence=1.0) and a safe-dry fallback (confidence=0.0, rationale string) when the API or geo-resolution fails — exactly the weather-snapshot + manual-grip-override + AI-conditions-context design RaceLab needs. It is Python (Flask-era LAP backend), so not copypaste, but the D1-D5 derived metrics (track-temp estimate, hours/days-since-rain, Penman drying index), the rule ladder with per-rule confidences (incl. the non-obvious oil-rejection "first rain after dry spell" rule), and the explainability contract (dominant_factor, rationale, raw_inputs, classifier_version, source enum) would save the dev team real design time. The companion spec LAP_V1_CONDITIONS_ENGINE_SPEC.md documents endpoints, field lists, thresholds, caching policy, and research citations; the spatial-μ/mesh modules in the same package are racing-line physics and excluded as useless to RaceLab.
+
+**How to adapt:** Port to TypeScript in apps/api as a pure module: derived_metrics functions translate near-1:1, and the rule table in classifier.py should become a data-driven array evaluated first-match-wins; put the WeatherCondition-equivalent type in packages/schema (keep label, confidence, dominant_factor, rationale, raw_inputs, source: "weather"|"user", classifier_version — drop mu_scale, the §6 grip ladders, and the entire §7 spatial layer, which are kart/tarmac physics RaceLab doesn't need). LAP hits the archive endpoint (archive-api.open-meteo.com/v1/archive) for historical sessions; RaceLab's session-day capture should use api.open-meteo.com/v1/forecast with past_days to cover the trailing 48h window plus forecast in one call, reusing the same hourly field list (temperature_2m, precipitation, cloudcover, windspeed_10m, winddirection_10m, shortwave_radiation, relative_humidity_2m, dewpoint_2m) and the separate 30-day daily precipitation_sum call for the days-since-rain metric. Replace the filesystem cache with a weather-snapshot JSON column persisted on the session row at capture time (offline-first: snapshot once, store locally, sync); the rounded-lat/lon+date immutable-cache idea still applies server-side for archive backfills. Lat/lon comes straight from RaceLab's track table, so skip track_centroid.py; gate the whole classifier on track.indoor === false (carpet tracks are weather-independent) and keep the user's manual grip level as the always-wins override exactly as classifier.py does. The classified label + derived metrics (hours since rain, drying rate, track-temp estimate) plus the rationale string slot directly into the AI race engineer's context bundle, and the confidence/raw_inputs/version fields match RaceLab's citation+confidence guard-rail philosophy. No secrets in any file.
+
+**Files:**
+- `LAP_V1_CONDITIONS_ENGINE_SPEC.md`
+- `lap_web/telemetry_tool/conditions/open_meteo.py`
+- `lap_web/telemetry_tool/conditions/derived_metrics.py`
+- `lap_web/telemetry_tool/conditions/classifier.py`
+- `lap_web/telemetry_tool/conditions/types.py`
+
+---
+
+### legacy-meteo-service
+
+- **Folder:** `2-schemes/lap_web-backend/legacy-meteo-service/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/meteo_service.py`
+- **Language:** Python
+
+**What it is:** Simpler standalone weather service: fetch current weather, historical weather by date, hourly forecast, and convert weather to a track-condition assessment with offline fallback estimates. Related siblings weather_timeline.py / weather_correlation.py / condition_tracking.py build session weather timelines and correlate conditions with pace.
+
+**Why RaceLab wants it:** The live+forecast fetch shape and weather-to-track-condition mapping match RaceLab's session weather snapshot and the (change, conditions, outcome) triples for the AI. Superseded in design quality by the conditions/ package; use as secondary reference.
+
+**Verifier evidence:** meteo_service.py is a genuinely instructive, self-contained Open-Meteo service: it encodes the non-obvious three-way historical routing (today/future via forecast API, <=92 days via forecast?past_days, older via archive API), the exact query params for current/hourly/forecast fetches (temperature_2m, relative_humidity_2m, rain, cloud_cover, precipitation_probability, weather_code), a WMO code->description table, rain-risk tiering, and estimate_track_conditions() mapping a weather snapshot to track_temp_est/grip_score/track_state — directly matching RaceLab's session weather snapshot + conditions-for-AI needs. It is Python (Flask backend, sqlite conn args), so not copypaste; sibling weather_timeline.py adds the hourly->per-run interpolation pattern, while weather_correlation.py (generic Pearson) and condition_tracking.py (telemetry-derived lap metrics) add nothing for RC. Claim confirmed as scheme.
+
+**How to adapt:** Port to a TypeScript Open-Meteo client in apps/api (server route or shared util): replicate the three-endpoint date routing verbatim (forecast for today/future, forecast?past_days for dates up to 92 days back, archive API for older — this quirk is the main time-saver), keep the WMO weather-code map and the snapshot field names (air_temp_c, humidity_pct, wind_speed_mps, rain_mm, cloud_cover_pct, weather_code) as a Zod schema in packages/schema so mobile and API agree. Rework estimate_track_conditions for RC: drop car tire compounds (wet/inter/soft/medium/hard) and the solar track-temp model for indoor tracks; key the heuristic on RaceLab's surface enum (clay/astro/carpet) and indoor/outdoor flag, and emit track_state + grip_level as defaults the user can override with their manual grip entry. weather_timeline.py is read-only inspiration: its linear-interpolation of one hourly fetch to multiple per-run timestamps (nearest hour for categorical weather_code) is the right design for auto-snapshotting each run in a race day with a single API call — ignore its pandas usage and RaceChrono CSV header parsing. Ignore get_all_track_locations/get_known_tracks (LAP SQLite-specific). Store the raw snapshot JSON per run in expo-sqlite (offline-first) and sync to Neon; the derived conditions feed the AI context bundle.
+
+**Files:**
+- `lap_web/telemetry_tool/meteo_service.py`
+- `lap_web/telemetry_tool/weather_timeline.py`
+
+---
+
+### entitlements-usage-metering
+
+- **Folder:** `2-schemes/lap_web-backend/entitlements-usage-metering/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/auth/entitlements.py`
+- **Language:** Python
+
+**What it is:** Single-source-of-truth plan entitlement matrix (free/racer/world_class with per-feature flags and -1=unlimited), METRIC_TO_ENTITLEMENT mapping, and auth/usage.py monthly usage counters with atomic ON CONFLICT increment, per-period keys (YYYY-MM), and a usage snapshot API returning used/limit/remaining/resets. Migration 019 adds plan_definitions, usage_events (append-only), usage_monthly, and entitlement_overrides for grandfathering/promos.
+
+**Why RaceLab wants it:** Directly instructive for RaceLab's free tier metering (5 AI calls/month via RevenueCat entitlements): the plan-matrix + monthly-counter + override-table + snapshot-endpoint design is exactly what the apps/api needs, just rewritten in TS over Neon.
+
+**Verifier evidence:** Verified: entitlements.py is a 788-line Flask/psycopg module implementing a plan matrix (free/racer/world_class, -1=unlimited), three-layer resolution (entitlement_overrides > plan_definitions table > code defaults), and a race-safe check_and_record_quota() using SELECT FOR UPDATE; usage.py implements YYYY-MM period counters with atomic ON CONFLICT increments and a used/limit/remaining/resets snapshot; migration 019 creates plan_definitions (seeded), append-only usage_events, pre-aggregated usage_monthly (unique on workspace/period/event_type), and entitlement_overrides with expires_at for grandfathering/promos. It is Python/Flask/SQLAlchemy so not copypaste, but the complete metering design — including the standardized 429 QUOTA_EXCEEDED response with upgrade CTA and the concurrency-safe check-then-record pattern — is directly what RaceLab needs for its 5-AI-calls/month free tier, and RevenueCat does not provide per-call metering, so this saves real design time.
+
+**How to adapt:** Port the design, not the code: define the plan matrix as a typed constant in packages/schema (RaceLab only needs ~3 keys: ai_calls_per_month, setup_sheet limits, photo storage), and translate migration 019's four tables (plan_definitions, usage_events, usage_monthly, entitlement_overrides) to plain Neon SQL DDL — drop the workspace_id/RLS layer and scope by Clerk user_id instead. Replace get_user_plan_tier/subscription_status with the RevenueCat entitlement (synced via RevenueCat webhook into a users.plan column), but keep server-side metering exactly as designed here since RevenueCat does not count API calls. In the Next.js route handler, replace the SELECT FOR UPDATE pattern with a single atomic statement that works better with serverless pooling: INSERT INTO usage_monthly ... ON CONFLICT DO UPDATE SET total = usage_monthly.total + 1 WHERE usage_monthly.total < $limit RETURNING total (row returned = allowed), then append to usage_events. Keep the dual event-log + monthly-aggregate model (events for analytics/audit, aggregate for fast checks), the entitlement_overrides table with expires_at for promos/grandfathering, and the uniform 429 response shape {used, limit, remaining, resets_at, upgrade_tier} — the mobile paywall and AI-engineer screen can render directly from it. Ignore the Flask decorators, g/request globals, and the mid-request-commit RLS comment — all LAP-specific. No secrets in any of the three files.
+
+**Files:**
+- `lap_web/telemetry_tool/auth/entitlements.py`
+- `lap_web/telemetry_tool/auth/usage.py`
+- `lap_web/telemetry_tool/alembic/versions/019_core_data_model.py`
+
+---
+
+### subscription-state-machine
+
+- **Folder:** `2-schemes/lap_web-backend/subscription-state-machine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/billing/state_machine.py`
+- **Language:** Python
+
+**What it is:** Validated subscription state machine (free/trialing/active/past_due/unpaid/canceled/paused/expired) with allowed-transition tables, per-state grace days, provider-status-to-internal-state mapping, audit logging, and transition-triggered emails.
+
+**Why RaceLab wants it:** Stripe-specific code is out per rules, but the state-machine-with-grace-periods design maps cleanly onto RevenueCat webhook events for RaceLab subscriptions; saves design time on edge states (past_due grace, cancel-then-reactivate).
+
+**Verifier evidence:** Verified: lap_web/telemetry_tool/billing/state_machine.py is a 186-line validated subscription state machine with a SUBSCRIPTION_STATES transition table including per-state grace_days (past_due=7, canceled=30), a STRIPE_STATUS_MAP provider-to-internal mapping, and transition_subscription() that validates transitions, sets/clears grace_period_end, writes an audit_log row, and fires per-transition emails. It is Python/Flask with raw psycopg SQL and Stripe coupling, so not copypaste, but the design is more than generic CRUD: the adjacent modules complete a coherent billing architecture — entitlements.py has a GRACE_POLICY matrix (billing state x action category = degraded access during grace, not binary lockout) plus centralized route-to-quota metering with atomic check_and_record_quota (exactly RaceLab's metered 5 AI calls/month pattern), and billing_tasks.py shows provider reconciliation healing through the same validated transition function, 7-day-warn/14-day-downgrade grace sweeps, and webhook retry with exponential backoff + deadletter. This saves the RaceLab team real design time on subscription edge states and free-tier metering, so the scheme classification stands.
+
+**How to adapt:** Read these as design docs, not code to run. Replace STRIPE_STATUS_MAP with a RevenueCat webhook-event mapping (INITIAL_PURCHASE/RENEWAL -> active, CANCELLATION -> canceled, BILLING_ISSUE -> past_due, EXPIRATION -> expired, UNCANCELLATION -> active) and treat RevenueCat as the source of truth: keep the local state machine as a Neon-stored projection healed by a periodic reconciliation job against the RevenueCat REST API (port _reconcile_stripe_impl to a Vercel Cron route), and loosen strict transition rejection because webhooks can arrive out of order — order by event timestamp or accept any provider-asserted state during reconciliation. Implement SUBSCRIPTION_STATES, GRACE_POLICY, and PLAN_ENTITLEMENTS as typed consts in packages/schema (single source of truth for mobile gating UI and API enforcement), and enforce them in Next.js route handlers rather than a Flask before_request hook. For the free tier's 5 AI calls/month, port check_and_record_quota as one atomic SQL statement (INSERT INTO usage_monthly ... ON CONFLICT DO UPDATE ... RETURNING) checked server-side in the AI endpoint — the LAP files show why check-then-record must be atomic. Ignore the inline HTML email bodies and LAP-specific route tables; no secrets are hardcoded (Stripe key comes from env).
+
+**Files:**
+- `lap_web/telemetry_tool/billing/state_machine.py`
+- `lap_web/telemetry_tool/web/middleware/entitlements.py`
+- `lap_web/telemetry_tool/tasks/billing_tasks.py`
+- `lap_web/telemetry_tool/auth/entitlements.py`
+
+---
+
+### pg-data-model-migrations
+
+- **Folder:** `2-schemes/lap_web-backend/pg-data-model-migrations/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/alembic/versions`
+- **Language:** Python/SQL
+
+**What it is:** 60 sequential migrations building the full SaaS data model: drivers/tracks/sessions/laps, auth + OAuth, workspaces with Postgres RLS multi-tenancy (incl. FORCE RLS on owner, fix for the prod superuser bypass), usage/audit/stripe-event dedup tables, soft deletes, composite indexes, rollup tables, webhook retry columns, dead-letter queue, domain CHECK constraints, canonical track IDs.
+
+**Why RaceLab wants it:** A worked example of the exact relational shape RaceLab needs on Neon (users, tracks, sessions, runs/laps, usage counters, audit) plus hard-won multi-tenancy lessons (RLS bypass when running as superuser, FORCE RLS, soft-delete + retention columns). DDL is embedded in Python alembic so not copy-paste, but the schema decisions are.
+
+**Verifier evidence:** Verified: 60 sequential Alembic migrations exist and contain exactly what was claimed. High-value, non-obvious lessons are documented in the files themselves: 034 fixes a real prod multi-tenancy hole ("RLS was silently bypassed in production" because the app connected as table owner — fixed with FORCE ROW LEVEL SECURITY), 044 fixes RLS policies referencing the wrong GUC name which made all rows in 5 tables invisible, 006 shows the zero-downtime tenant-column rollout (backfill → NOT NULL → DEFAULT current_setting('app.current_workspace_id')), 021 has a usage_counters table with UNIQUE(workspace_id, metric, period) matching RaceLab's free-tier metering, and 017's session_weather_laps (weather_code, grip_score, track_state, track_temp_est_c) mirrors RaceLab's conditions snapshot. It is all Python/SQLAlchemy DDL coupled to LAP's workspace model and mixed with telemetry-only tables (gps_traces, corner_metrics, race strategy), so not copypaste — but the schema decisions and RLS failure modes are genuinely instructive for a multi-tenant SaaS on Neon.
+
+**How to adapt:** Read these as a design reference, not runnable code: re-express the decisions as Drizzle/Prisma SQL migrations on Neon. If you use Postgres RLS for tenant isolation (set a per-request GUC like app.current_user_id from the Clerk JWT), two production bugs documented here are the payoff: (1) RLS silently does NOT apply to the table owner — Neon's default role owns its tables, so you need FORCE ROW LEVEL SECURITY (file 034); (2) a policy referencing a GUC name your middleware doesn't actually set makes every row invisible, so keep the setting name in one shared constant (file 044); file 006 shows the safe rollout order for adding a tenant column to existing tables. Lift the usage_counters shape (tenant_id, metric, period, count, UNIQUE on the triple) verbatim for the 5-AI-calls/month meter, and flatten session_weather_laps into a per-run conditions row (weather_code, rain_mm, grip level, track_temp, track_state) since RaceLab has manual laps, not per-lap weather. From 001, only the drivers/tracks/sessions/laps spine, tracks' GPS bbox/start-coords columns (track matching), session_weather, vehicle_setups, and session_annotations are relevant — ignore gps_traces, corner_metrics, stints, and all race_* tables. One hard mismatch: these migrations use server-side autoincrement integer PKs, which breaks offline-first sync — RaceLab needs client-generated UUIDs plus updated_at/deleted_at on every synced table (035's deleted_at partial-index pattern generalizes), so copy the relational shape but not the key strategy.
+
+**Files:**
+- `lap_web/telemetry_tool/alembic/versions/001_initial_schema.py`
+- `lap_web/telemetry_tool/alembic/versions/006_backfill_workspace_id.py`
+- `lap_web/telemetry_tool/alembic/versions/007_enable_rls.py`
+- `lap_web/telemetry_tool/alembic/versions/017_session_weather_laps.py`
+- `lap_web/telemetry_tool/alembic/versions/021_community_email.py`
+- `lap_web/telemetry_tool/alembic/versions/032_retention_audit_pseudonym.py`
+- `lap_web/telemetry_tool/alembic/versions/034_force_rls_on_owner.py`
+- `lap_web/telemetry_tool/alembic/versions/036_domain_check_constraints.py`
+- `lap_web/telemetry_tool/alembic/versions/044_fix_rls_setting_name.py`
+- `lap_web/telemetry_tool/alembic/versions/060_tracks_canonical_id.py`
+
+---
+
+### deterministic-coaching-taxonomy
+
+- **Folder:** `2-schemes/lap_web-backend/deterministic-coaching-taxonomy/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/coaching`
+- **Language:** Python + JSON
+
+**What it is:** Fully deterministic (no-LLM) coaching pipeline: taxonomy/causes.json defines 26 causes across 5 categories, each with symptom description, diagnosis text, root_cause class, severity thresholds, and unit; analyzers/ detect symptoms with a 3-tier data-availability fallback; composers/ rank by impact, cap focus areas at 2 (focus_limiter), reframe with confidence (confidence_framer), and assemble progressive session goals from template libraries (drills, narratives, mental imagery).
+
+**Why RaceLab wants it:** The closest existing analog to RaceLab's AI Race Engineer front half: deterministic symptom mapping feeding a structured rule KB. The causes.json shape (symptom/diagnosis/root_cause/severity_thresholds/unit) is nearly the schema RaceLab's ~150 KB rules need (content must be rewritten for RC setup), and focus-limiting + confidence-framing are exactly the guard-layer/UX patterns specified.
+
+**Verifier evidence:** Verified: taxonomy/causes.json defines 26 causes in 5 categories, each with symptom/diagnosis/root_cause/severity_thresholds{mild,moderate,severe}/unit — a working analog of the rule-record schema RaceLab's ~150-rule KB needs, with a Pydantic-validated loader and threshold-graded severity (taxonomy/causes.py). The pipeline matches RaceLab's specified front half: deterministic detectors emit Symptom{id, evidence, confidence} (analyzers/symptom_detector.py), focus_limiter.py enforces max-2 recommendations with a 30% significance ratio + same-category merge + deferred list, and corner_diagnosis.py has a causal-chain suppression map (child symptom suppressed when root-cause parent present) — all genuinely design-time-saving patterns. It is Python + pandas operating on telemetry channels (steering angle, lateral accel, throttle %) that RaceLab has none of, and the coaching content is on-track driving technique, so it cannot be lifted — scheme, not copypaste.
+
+**How to adapt:** Treat causes.json as the template for packages/kb rule records: keep symptom/diagnosis/root_cause/severity_thresholds/unit, but add the fields RaceLab needs (applicable chassis templates, recommended setting deltas with numeric min/max bounds for the guard layer, citation id, revert cost) and validate with zod in packages/schema instead of Pydantic, rewriting all content for RC setup. Replace the pandas telemetry analyzers entirely: RaceLab's deterministic symptom mapping inputs are driver feedback tags + manual lap-time stats + conditions, not channel data, but keep the Symptom{id, evidence, confidence} emission contract since it feeds retrieval and citations cleanly. Port focus_limiter (cap 2, 30% significance ratio, merge same category, defer the rest) as a pure TS function in the guard layer — it is exactly the "don't overwhelm the racer" UX rule. corner_diagnosis.py's _CAUSAL_PARENT suppression map (only read the first ~110 lines) is the pattern for collapsing co-occurring symptoms to one root cause before KB retrieval, and its per-vehicle-class threshold tables are the analog of per-chassis bounds. confidence_framer + confidence_frames show tone-guarding keyed by root_cause class — useful as system-prompt/output-postprocessing inspiration; models.py is only worth skimming for the SessionCoaching/FocusArea structured-output shape (confidence field, deferred areas) — ignore its telemetry physics dataclasses.
+
+**Files:**
+- `lap_web/telemetry_tool/coaching/taxonomy/causes.json`
+- `lap_web/telemetry_tool/coaching/taxonomy/causes.py`
+- `lap_web/telemetry_tool/coaching/analyzers/symptom_detector.py`
+- `lap_web/telemetry_tool/coaching/composers/focus_limiter.py`
+- `lap_web/telemetry_tool/coaching/composers/confidence_framer.py`
+- `lap_web/telemetry_tool/coaching/templates/confidence_frames.py`
+- `lap_web/telemetry_tool/coaching/composers/session_composer.py`
+- `lap_web/telemetry_tool/coaching/corner_diagnosis.py`
+- `lap_web/telemetry_tool/coaching/models.py`
+
+---
+
+### api-infrastructure
+
+- **Folder:** `2-schemes/lap_web-backend/api-infrastructure/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/web`
+- **Language:** Python
+
+**What it is:** Flask API infrastructure: standard {ok,data,error,meta} envelope with request IDs (api_utils.py), Redis sliding-window rate limiter with plan-tier multipliers and fail-open (rate_limit.py), stateless keyset cursor pagination with base64url composite cursors (pagination.py), Idempotency-Key response replay with processing locks (idempotency.py), HMAC time-limited signed download URLs (signed_urls.py), Pydantic v2 request/response schemas, and HMAC pseudonymization for logs (privacy/pseudonym.py).
+
+**Why RaceLab wants it:** Direct design templates for RaceLab's Next.js API routes: response envelope, plan-aware rate limiting of AI calls, cursor pagination for feeds, idempotency keys for the offline sync layer's retried writes, and signed URLs for share links / Vercel Blob downloads. All would be rewritten in TS but the semantics are settled here.
+
+**Verifier evidence:** Verified: this is Flask/Python/Redis code (e.g. `from flask import g, jsonify, request` in api_utils.py, Redis Lua sliding-window in rate_limit.py), so never copypaste — but the API-infrastructure semantics are settled and directly load-bearing for RaceLab: idempotency.py implements exactly the Idempotency-Key replay contract (cache 2xx-4xx 24h, never cache 5xx, SET NX processing lock, 409 IDEMPOTENCY_CONFLICT) that RaceLab's offline-first sync layer needs for retried writes; api_utils.py defines the {ok,data,error,meta} envelope plus a billing_error contract with machine-readable reason_codes (FEATURE_LOCKED/LIMIT_EXCEEDED/TRIAL_ENDED) for free-tier gating UX. Two files the scanner missed strengthen it further: queries/usage.py (usage_events + usage_monthly ON CONFLICT upsert — the exact data model for metering 5 AI calls/month) and middleware/entitlements.py (centralized route→feature/quota mapping + a billing_state × action-category grace-period matrix that maps cleanly onto RevenueCat entitlement states). These are not patterns a team would want to re-derive from scratch under launch pressure, so scheme stands.
+
+**How to adapt:** Read these for semantics, not code: rewrite as Next.js App Router route-handler middleware in apps/api, defining the {ok,data,error,meta} envelope, error-code catalog, and billing reason_code contract as Zod schemas in packages/schema so mobile and API share them. Idempotency is the highest-value piece: have the expo-sqlite sync queue generate a UUID Idempotency-Key per queued mutation and replicate the exact flow (replay cached response, SET NX lock → 409 on concurrent duplicate, cache only <500 responses, 24h TTL) on Upstash/Vercel KV. For rate limiting, don't port the Lua script — use @upstash/ratelimit and keep only the plan-tier multiplier + per-route tier table idea; for the 5/month AI quota, port queries/usage.py's usage_events + usage_monthly upsert directly to Neon SQL. In entitlements.py, swap the Stripe billing_state rows (active/trialing/past_due/...) of the GRACE_POLICY matrix for RevenueCat entitlement states, keeping the centralized route→feature/quota mapping so pricing changes stay a one-file config edit. signed_urls.py is only relevant as the token pattern for read-only share links — Vercel Blob already issues its own signed download URLs. No secrets in any listed file (signed_urls.py contains a hardcoded LAP domain as a default base URL; harmless, strip when porting).
+
+**Files:**
+- `lap_web/telemetry_tool/web/api_utils.py`
+- `lap_web/telemetry_tool/web/idempotency.py`
+- `lap_web/telemetry_tool/web/pagination.py`
+- `lap_web/telemetry_tool/web/rate_limit.py`
+- `lap_web/telemetry_tool/web/middleware/entitlements.py`
+- `lap_web/telemetry_tool/web/queries/usage.py`
+- `lap_web/telemetry_tool/web/signed_urls.py`
+
+---
+
+### desktop-sync-queue
+
+- **Folder:** `2-schemes/lap_web-backend/desktop-sync-queue/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/desktop_sync`
+- **Language:** Python
+
+**What it is:** Client-side cloud sync: local SQLite sync_queue table (pending → uploading → uploaded | failed, plus entitlement-gated 'skipped'), attempt_count/max_attempts with next_retry_at backoff, SHA-256 checksums per bundle, additive ALTER TABLE column evolution, background worker, and plan-entitlement checks before auto-sync.
+
+**Why RaceLab wants it:** RaceLab's hard offline-first requirement needs exactly this: an expo-sqlite outbox/queue with status machine, retry backoff, checksum integrity, and tier-gated auto-sync. One of the few places in LAP where the mobile-relevant sync problem is already solved end-to-end.
+
+**Verifier evidence:** Verified: queue.py defines a local SQLite sync_queue with the exact claimed state machine (pending → uploading → uploaded | failed, plus entitlement-gated 'skipped' with promote_skipped/promote_all_skipped), attempt_count/max_attempts CASE-based failure handling, next_retry_at gating in get_pending, and idempotent additive ALTER TABLE evolution (_BETA_COLUMNS). worker.py implements the background drain loop with exponential backoff (5^attempt capped at 30 min), permanent-vs-transient failure split, and BUNDLE_DUPLICATE→mark_uploaded idempotency via SHA-256 content checksums; entitlements.py adds a server-trusted SyncPolicy cache (1h TTL, offline fallback to last-known tier, conservative free default) that directly maps to RaceLab's tier-gated sync. It is Python with urllib/threading/Tkinter-host coupling so not copypaste, but it is a complete, worked design for the push half of RaceLab's hard offline-first requirement plus free-tier gating — more than generic boilerplate, hence scheme.
+
+**How to adapt:** Port the sync_queue DDL and state machine verbatim to an expo-sqlite outbox table (statuses pending/uploading/uploaded/failed/skipped, attempt_count/max_attempts, next_retry_at, checksum); replace the Python daemon thread with an AppState/NetInfo-triggered drain plus expo-background-task, keeping drain_once's eligibility query (status='pending' AND next_retry_at <= now). Keep three load-bearing patterns: (1) duplicate-upload idempotency — server detects content-hash/UUID duplicates and the client maps that error to success (worker.py BUNDLE_DUPLICATE branch); (2) permanent vs transient failure split (missing local resource → failed immediately, network/HTTP → backoff retry); (3) entitlements.py's server-trusted policy cache with offline fallback to last-known tier and conservative free default — map it to RevenueCat CustomerInfo instead of GET /api/v1/me, and auth via Clerk tokens instead of the DeviceToken pairing flow (auth.py deliberately excluded — irrelevant to Clerk). Important scope caveat: this is a one-way upload outbox for immutable blobs, NOT bidirectional sync — it fits RaceLab's append-only setup versions and session uploads well, but pull-down sync and conflict resolution for mutable entities (track notes, profile) still need their own design. bundle_builder.py's manifest-with-per-file-sha256 pattern is iRacing-IBT-specific and was left out; borrow only the idea of a checksummed manifest if bundling setup photos.
+
+**Files:**
+- `lap_web/telemetry_tool/desktop_sync/queue.py`
+- `lap_web/telemetry_tool/desktop_sync/worker.py`
+- `lap_web/telemetry_tool/desktop_sync/entitlements.py`
+- `lap_web/telemetry_tool/desktop_sync/hooks.py`
+
+---
+
+### pdf-sheet-export-pipeline
+
+- **Folder:** `2-schemes/lap_web-backend/pdf-sheet-export-pipeline/`
+- **Source:** ``
+- **Language:** Python
+
+**What it is:** Pixel-faithful report export pipeline: self-contained single-file HTML renderer (all assets embedded as base64 data-URIs, deterministic identical-inputs->identical-bytes, @media print CSS, graceful per-section degradation) + HTML->PDF converter with a documented backend-priority chain (WeasyPrint > pdfkit > wkhtmltopdf) and offline-rendering guarantee, plus a per-user saved export-template data model.
+
+**Why RaceLab wants it:** Direct architectural precedent for RaceLab pillar-1 PDF setup-sheet export: render the manufacturer blank-sheet layout as print-CSS HTML from the schema-driven setup JSON, then convert to PDF server-side. The export-templates migration is the analog of per-chassis blank-sheet layouts.
+
+**Verifier evidence:** Added from completeness-critic finding (high severity): the audit had zero kept coverage of PDF export, RaceLab pillar 1.
+
+**How to adapt:** On Vercel, replace the WeasyPrint/wkhtmltopdf chain with @react-pdf/renderer or Playwright-in-a-function (or an external render service); keep the two load-bearing ideas: (1) layout lives in one deterministic print-CSS HTML/JSX template per chassis, data injected from the setup JSON; (2) export templates are data (DB rows), not code. The MP11_EditableSetupSheet.pdf in the RaceLab repo is the target layout to reproduce.
+
+**Files:**
+- `lap_web/telemetry_tool/reporting_html.py`
+- `lap_web/telemetry_tool/reporting_pdf.py`
+- `lap_web/telemetry_tool/alembic/versions/015_export_templates.py`
+
+---
+
+### annotations-comments-model
+
+- **Folder:** `2-schemes/lap_web-backend/annotations-comments-model/`
+- **Source:** ``
+- **Language:** Python + TSX
+
+**What it is:** Session annotations module (388 lines): CRUD comments on sessions anchorable to a specific lap and distance, typed annotations (annotation_type), tag-based organization with tag autocomplete, full-text search across all annotations; plus the matching Next.js annotations UI page.
+
+**Why RaceLab wants it:** RaceLab pillar 2 (comments) nearly verbatim: timestamped, searchable, typed comments anchored to an entity - swap (session, lap, distance) anchors for (setup version, parameter/section) anchors. Searchable + taggable is exactly what feeding comments to the AI context bundle requires.
+
+**Verifier evidence:** Added from completeness-critic finding (medium): wrongly rejected by first pass; it is the only direct pillar-2 precedent in the codebase.
+
+**How to adapt:** Port the table design (entity_id, anchor fields, annotation_type, tags[], created_at, full-text index) to Drizzle/Neon and mirror it in the expo-sqlite local schema. Keep tag autocomplete (distinct tags query) and text search; on Postgres use a tsvector column or pg_trgm. The TSX page shows a workable list/filter/search UI shape for the mobile comments screen.
+
+**Files:**
+- `lap_web/telemetry_tool/annotations.py`
+- `lap_web/lap-website/src/app/app/annotations/page.tsx`
+
+---
+
+### offline-dual-store-sqlite-pg
+
+- **Folder:** `2-schemes/lap_web-backend/offline-dual-store-sqlite-pg/`
+- **Source:** ``
+- **Language:** Python
+
+**What it is:** Dual-store data layer: the same domain schema living in local SQLite (desktop offline mode) and server Postgres (SaaS mode). schema.py = ~30-table SQLite schema; migrate.py = idempotent ensure_schema() client-side migrations (no alembic on clients); sql_compat.py = automatic SQLite->Postgres SQL dialect translation (:name -> %(name)s, INSERT OR IGNORE -> ON CONFLICT DO NOTHING) so one query layer serves both stores.
+
+**Why RaceLab wants it:** This is RaceLab D4 (offline-first hard requirement) worked end-to-end: expo-sqlite local DB as source of truth mirroring the Neon schema, idempotent client-side migrations, and a write-once-run-on-both-stores query discipline.
+
+**Verifier evidence:** Added from completeness-critic finding (medium): the sync queues were kept by the audit but the local-schema/migration/dialect-compat half of offline-first was buried in a wholesale useless classification.
+
+**How to adapt:** For Expo: replicate ensure_schema() as a versioned migration runner over expo-sqlite (PRAGMA user_version), keep table parity with the Drizzle/Neon schema, and generate both from one source of truth in packages/schema instead of hand-maintaining the compat shim. sql_compat.py matters as a cautionary design: better to define queries once in a dialect-neutral layer (Drizzle supports both sqlite and pg dialects) than to regex-translate at call time.
+
+**Files:**
+- `lap_web/telemetry_tool/db/schema.py`
+- `lap_web/telemetry_tool/db/migrate.py`
+- `lap_web/telemetry_tool/db/sql_compat.py`
+
+---
+
+### template-catalog-instance-pattern
+
+- **Folder:** `2-schemes/lap_web-backend/template-catalog-instance-pattern/`
+- **Source:** ``
+- **Language:** Python + TSX
+
+**What it is:** Manufacturer-preset catalog -> user-instance creation pattern: karts catalog migration (curated manufacturer/model presets as seeded data), karts routes (list catalog, create user vehicle from a preset, then customize), and the Next.js create-from-preset flow.
+
+**Why RaceLab wants it:** The seed of RaceLab D5/pillar 1: chassis-template catalog (~15-20 templates shipping with manufacturer kit setups preloaded) -> user creates a Car from a template -> setup sheets instantiate from the template schema. LAP has no versioned-setup model (that part is greenfield), but this catalog->instance flow is the closest existing analog.
+
+**Verifier evidence:** Added from completeness-critic finding (medium): the audit left pillar 1 with zero kept items; this pattern is scheme-grade per the area scanner itself.
+
+**How to adapt:** Model ChassisTemplate as seeded rows (brand, model, scale, class, sheet schema JSON, PDF layout ref) exactly like the karts catalog; Car creation = fork of the template kit setup as version 1. Keep catalog data in packages/schema as versioned JSON files so new chassis = data PR, no code. The create-from-preset UI flow (pick brand -> pick model -> name it -> instant usable defaults) translates directly to React Native.
+
+**Files:**
+- `lap_web/telemetry_tool/alembic/versions/012_karts_catalog.py`
+- `lap_web/telemetry_tool/web/routes/karts.py`
+- `lap_web/lap-website/src/app/app/karts/new/page.tsx`
+- `lap_web/lap-website/src/app/app/karts/page.tsx`
+
+---
+
+### Area: lap_web-frontend
+
+### auth-token-session-flow
+
+- **Folder:** `2-schemes/lap_web-frontend/auth-token-session-flow/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/auth.ts`
+- **Language:** TypeScript (React)
+
+**What it is:** Full client auth flow against a custom JWT backend: in-memory access token (never localStorage) + httpOnly-cookie silent refresh with deduped in-flight promise and capped backoff, BroadcastChannel cross-tab token/logout sync (auth-store.ts), AuthGuard with profile-completeness gate, SessionExpiredModal triggered by a custom event from the API client, 2FA challenge handling.
+
+**Why RaceLab wants it:** Clerk replaces the token mechanics in RaceLab, so not copypaste — but the session-expired UX (event → modal → retry instead of hard redirect), cross-tab logout broadcast, and refresh-race dedup are battle-tested designs worth mirroring around Clerk.
+
+**Verifier evidence:** Verified: auth.ts implements deduped silent refresh with a comment documenting the single-use refresh-token rotation race; auth-store.ts does BroadcastChannel cross-tab token/logout sync; api-client.ts dispatches a SESSION_EXPIRED_EVENT on unrecoverable 401 which AuthGuard.tsx turns into a retry-capable SessionExpiredModal rather than a hard redirect. Clerk obsoletes the token mechanics (getToken() handles caching/refresh/dedup, and Clerk syncs sessions across tabs), and RaceLab's only web surface is unauthenticated share pages, so the claim is right that this is not copypaste. It earns scheme on the strength of api-client.ts + http-envelope.ts — a battle-tested typed envelope client (ApiError with code/status/details/requestId, HTML-error-body fallback, X-Request-Id tracing, in-flight GET coalescing, documented cache:'no-store' stale-after-DELETE bug) which is exactly the hunted-for "API client patterns in TS" — plus the session-expired-recovery UX and the profile-completeness onboarding gate in AuthGuard.
+
+**How to adapt:** Do NOT port auth.ts/auth-store.ts logic — Clerk's getToken() (clerk-expo on mobile, @clerk/nextjs on API) already does token caching, refresh dedup, and cross-tab sync; read them only for the refresh-rotation race comment and the in-memory-not-localStorage rationale. The durable asset is api-client.ts + http-envelope.ts: keep the {ok,data,error,meta} envelope contract in packages/schema, the ApiError(code, status, details, requestId) normalization with HTML/non-JSON fallback, client-generated X-Request-Id, and in-flight GET coalescing; replace the 401-silentRefresh-replay block with `Authorization: Bearer ${await getToken()}` per request, and drop the CSRF double-submit (unneeded with Clerk bearer tokens). Reuse the AuthGuard pattern of event -> non-destructive modal -> retry instead of hard sign-out, but in offline-first RN a failed request with no connectivity must route to an "offline/queued" state, never "session expired" — only an explicit Clerk session-invalid signal should show the modal. The profile-completeness gate (redirect to onboarding while display_name is empty) maps cleanly to Clerk publicMetadata or a local profile row check at the navigator root. Components use LAP Tailwind tokens (bg-gold, font-monument) and an i18n hook — restyle, do not lift.
+
+**Files:**
+- `lap_web/lap-website/src/lib/api-client.ts`
+- `lap_web/lap-website/src/lib/http-envelope.ts`
+- `lap_web/lap-website/src/lib/auth.ts`
+- `lap_web/lap-website/src/lib/auth-store.ts`
+- `lap_web/lap-website/src/components/auth/AuthGuard.tsx`
+- `lap_web/lap-website/src/components/auth/SessionExpiredModal.tsx`
+
+---
+
+### sessions-weekends-ui
+
+- **Folder:** `2-schemes/lap_web-frontend/sessions-weekends-ui/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/app/sessions`
+- **Language:** TypeScript (React)
+
+**What it is:** Session list (1,263-line page: filterable/sortable DataTable, bulk actions, skeleton loading) and session detail with lazy-loaded tab sections (Suspense + dynamic imports per tab); sibling weekends/ groups sessions into race-day events. Detail content itself is telemetry-chart heavy.
+
+**Why RaceLab wants it:** The list/detail/lazy-tab architecture and the weekend→sessions grouping mirror RaceLab's 'session = race day at a track with runs' model; reuse the information architecture, not the telemetry tabs.
+
+**Verifier evidence:** Confirmed scheme, but narrower than claimed. The list page is largely generic React Query table boilerplate, and its most sophisticated code (optimistic bulk-delete via Promise.allSettled with partial rollback, hover prefetch) is server-state-over-HTTP architecture that contradicts RaceLab's offline-first expo-sqlite design — so not copypaste and not the instructive part. What IS load-bearing: (1) the domain vocabulary at sessions/page.tsx lines 48-66 — session types practice/qualifying/heat/final and track states dry/wet/damp/green/rubbered/dusty map almost 1:1 onto RC run types (practice/qual/main) and grip states; (2) groupSessionsByEvent() (same-track-within-3-days clustering) paired with an explicit Weekend entity {name, track_id, start_date, end_date, notes, sessions_count} — a worked example of modeling race-day grouping both implicitly and explicitly, exactly RaceLab's "session = race day at a track" decision; (3) the list IA (table/calendar/grouped view modes, URL-synced filters). The 105KB session detail page is telemetry/gamification-heavy and its lazy-tab pattern is generic, so it is excluded.
+
+**How to adapt:** Read these for the data model and IA, do not port the code: RaceLab mobile reads from local SQLite, so replace all TanStack-Query-over-HTTP plumbing (optimistic mutations, prefetch-on-hover, URL-synced filter state) with local DB queries + the sync layer. Steal three things: (1) the type/condition badge vocabularies (sessions/page.tsx lines 48-66) as starting enums for RaceLab run types (practice/qual/main) and grip states (green/rubbered/dusty/wet are real RC clay/carpet terms) in packages/schema; (2) the dual grouping design — RaceLab's Session already IS the explicit "race day" entity (like LAP's Weekend: name, track_id, start/end date, notes, runs_count), and groupSessionsByEvent's same-track-within-N-days clustering is a useful fallback for auto-grouping multi-day events; (3) the three list view modes (table / calendar / grouped-by-event) as the session-history screen IA in RN (FlatList + section headers instead of DataTable). Ignore everything telemetry-specific (scores, grades, best-lap columns, re-analyze/recoach actions) and the entire session detail page. No secrets in these files; styling uses LAP-proprietary design tokens that should not be copied.
+
+**Files:**
+- `lap_web/lap-website/src/app/app/sessions/page.tsx`
+- `lap_web/lap-website/src/app/app/weekends/page.tsx`
+- `lap_web/lap-website/src/app/app/weekends/new/page.tsx`
+
+---
+
+### coaching-contract-types
+
+- **Folder:** `2-schemes/lap_web-frontend/coaching-contract-types/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/types/contracts.ts`
+- **Language:** TypeScript (generated)
+
+**What it is:** Auto-generated TS types from backend JSON Schemas (single-source contracts with a regenerate script) defining a structured AI-coaching output: ranked FocusItems with severity and cost, per-corner cue items with phase/severity, NextRunItems typed by intent (incl. anti_overload), StorylineItems with explicit Detected/NotTriggered/Insufficient states, and ValidationChecks with measurable targets.
+
+**Why RaceLab wants it:** Two-fold value for the AI Race Engineer: (1) the schema-first JSON-Schema→TS codegen discipline for packages/schema, (2) the structured-advice contract shape — severity-ranked recommendations, explicit not-triggered/insufficient states, and measurable validation checks — maps onto RaceLab's structured Claude output with confidence + guard layer.
+
+**Verifier evidence:** Verified: contracts.ts is a dependency-free generated TS file whose CoachingContract section encodes a genuinely instructive structured-advice contract — StorylineItem states "Detected/NotTriggered/Insufficient/Unregistered" plus not_evaluable_corners (honest-refusal/insufficient-data states), NextRunItem item_type "anti_overload" (don't overload the user with changes), severity+rank+cost_ms on FocusItems, and ValidationCheck.measurable_target for next-run verification — all of which map directly onto RaceLab's AI Race Engineer output (confidence, revert cost, guard layer, honest refusal). It is NOT copypaste because the entities are lap/corner/phase-domain (entry/brake_release/apex), not setup-parameter-domain, and the other half of the file (OptimizerContract trajectory deltas, SessionContract telemetry ChannelTags, parquet SidecarRef, iRacing source) is useless-by-default telemetry material. The claimed second value (JSON-Schema→TS codegen discipline via generate_ts.py + a pytest drift gate) exists and works, but is weakly relevant in RaceLab's all-TS monorepo where a shared Zod package replaces cross-language codegen.
+
+**How to adapt:** Read only the CoachingContract half of contracts.ts; ignore OptimizerContract/SessionContract/ChannelTag entirely (real-telemetry and racing-line concepts that do not exist in RaceLab). Re-express the contract as a Zod schema in packages/schema and feed it to the Vercel AI SDK's structured output (generateObject): map FocusItem severity/rank/cost_ms to recommendation severity + revert-cost, replace corner_id/phase with setup-parameter + chassis-section, keep the StorylineItem state enum (Detected/NotTriggered/Insufficient) as the per-symptom honesty layer that backs empty-retrieval refusal, keep anti_overload as a hard cap on simultaneous setup changes per advice response, and turn ValidationCheck.measurable_target into "verify on next run" checks tied to RaceLab feedback tags and manual lap times. Do not port the Python generator — in an all-TS monorepo Zod gives you the TS types and the structured-output JSON Schema from one source; the only transferable idea from generate_ts.py is the CI drift gate (a test that fails loudly when a committed generated artifact diverges from its source), worth mirroring for any generated KB or eval fixtures. No secrets in any of the three files.
+
+**Files:**
+- `lap_web/lap-website/src/types/contracts.ts`
+- `lap_web/telemetry_tool/web/schemas/contracts/_schemas/coaching.schema.json`
+- `lap_web/telemetry_tool/web/schemas/contracts/_scripts/generate_ts.py`
+
+---
+
+### share-card-canvas
+
+- **Folder:** `2-schemes/lap_web-frontend/share-card-canvas/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/components/app/gamification/ShareCardCanvas.tsx`
+- **Language:** TypeScript (React)
+
+**What it is:** Client-side shareable session card: styled DOM card composing driver/track/date/session-type, best lap, score/grade, lap count, badges with tiered colors, downloaded as PNG via html2canvas; sibling ShareableCard and badge components.
+
+**Why RaceLab wants it:** Content-model and composition reference for RaceLab share cards / Season Wrapped (driver + track + conditions + result + badges); RaceLab would render server-side via Vercel OG or react-native-view-shot instead of html2canvas.
+
+**Verifier evidence:** Verified: ShareCardCanvas.tsx is a 'use client' React DOM component locked to LAP's custom Tailwind tokens (font-telemetry, text-steel, bg-gold), an html2canvas download via a Function('return import(...)') hack, and navigator.share — none of which run in Expo RN or in Vercel OG/satori (which also rejects the grid grid-cols-4 stats row and textShadow), so it fails the "minor renames" bar for copypaste. But the card's content model maps almost 1:1 onto RaceLab's pillar-4 share cards: 1200x630 OG aspect with scaled live preview, brand header + session type, driver/track/date, tier-colored accent propagated through badge/trim/glow, 4-stat row, top-4 unlocked badge strip, branded footer. RacingBadge.tsx adds a category->color system and hexagonal badge frame with per-badge icon registry, locked state, and fallback icon — a worked design for RaceLab achievements/Season Wrapped.
+
+**How to adapt:** Treat these as a design spec, not running code. Re-implement server-side in apps/api as a Vercel OG (@vercel/og / satori) route on the share link: convert the grid-cols-4 stats row to flexbox, drop textShadow, and replace LAP Tailwind tokens (font-telemetry/text-steel/bg-gold are LAP tailwind.config customs) with inline styles or satori's tw subset; in the mobile app use react-native-view-shot + expo-sharing for an in-app preview instead of html2canvas/navigator.share. Keep the transferable design: 1200x630 content model with scaled live preview (maxWidth + aspectRatio), tier->accent-color map driving badge/trim/glow, top-4 unlocked badge strip, branded footer. Swap LAP-only fields — score/100, consistency CV%, license levels N–S are telemetry-derived — for RaceLab's conditions (surface/grip/temp), result, and chassis. RacingBadge's icon registry is keyed by display-title string (brittle); key badges by id in packages/schema instead. ShareableCard.tsx was deliberately excluded as a ~90% duplicate of ShareCardCanvas.
+
+**Files:**
+- `lap_web/lap-website/src/components/app/gamification/ShareCardCanvas.tsx`
+- `lap_web/lap-website/src/components/app/gamification/RacingBadge.tsx`
+
+---
+
+### e2e-tier-gating-harness
+
+- **Folder:** `2-schemes/lap_web-frontend/e2e-tier-gating-harness/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/e2e`
+- **Language:** TypeScript (Playwright)
+
+**What it is:** Playwright suite with helpers/ that mock auth + per-tier entitlement snapshots via page.route() (demo/racer/world_class), plus real-API login helpers from env-var credentials; specs cover feature gating (demo sees upgrade prompts), tenant isolation, upgrade flow, SEO meta, and critical paths.
+
+**Why RaceLab wants it:** The mock-entitlements-per-tier harness is the right pattern for testing RaceLab's free-tier limits and share-page gating in CI; specs themselves are LAP-route-specific.
+
+**Verifier evidence:** The harness is real and decoupled-looking but LAP-shaped: helpers/auth.ts logs in via POST /auth/login with env-var passwords and helpers/api-mocks.ts fulfills /api/v1/auth/me + /api/v1/account/entitlements with LAP tiers (demo/racer/world_class) and the {ok,data,error,meta} envelope — none of which survives a Clerk + RevenueCat + mobile-first stack, so not copypaste. The per-tier page.route() mocking itself is generic Playwright any senior dev knows; the durable value is the test-matrix design: dual-layer gating (UI sees upgrade prompt under mocked entitlements; backend independently returns 403 with machine-readable PLAN_REQUIRED and -1=unlimited quota sentinel under real tokens) plus tenant-isolation's IDOR sequential-ID scan and cross-tenant list-exclusion checks, which map directly onto RaceLab's free-tier metering and private/unlisted/public setup sharing. The other ~25 specs are LAP-telemetry-domain (certification, corner-replay, compare, visual-regression PNG snapshots) and upgrade-flow.spec.ts is Stripe-specific with a defect (checkoutCalled set but never asserted), so only 5 files convey the design.
+
+**How to adapt:** Read these as a test-plan, not runnable code. (1) Playwright only applies to RaceLab's two web surfaces — the read-only share pages and the Next.js API routes; mobile gating UX needs Maestro/Detox or RN component tests instead. (2) Replace the password loginAsUser() with Clerk's @clerk/testing helpers (testing tokens / signInWithTestUser); keep the pattern of three pre-provisioned tier accounts driven by env vars. (3) RevenueCat is the entitlement source of truth, so expose your own GET /api/me/entitlements snapshot (booleans + numeric limits, keep the -1 = unlimited sentinel) and mock that per tier for UI tests, exactly as api-mocks.ts does. (4) Preserve the dual-layer discipline: mocked-entitlement UI tests AND separate real-token API tests asserting 403 plus a machine-readable error code (PLAN_REQUIRED / LIMIT_EXCEEDED) — mocked UI tests alone would let server-side metering bugs (the 5 AI calls/month cap) ship. (5) Port tenant-isolation.spec.ts's three checks (cross-tenant fetch returns 403/404, list exclusion between users, sequential-ID IDOR scan) to setup-sheet visibility: private sheets, unlisted share tokens, and fork lineage must all be covered; use UUIDs/slugs so the IDOR scan becomes random-token probing. Do NOT copy upgrade-flow.spec.ts's pattern — its checkout test sets a flag it never asserts, and Stripe web checkout is irrelevant to RevenueCat.
+
+**Files:**
+- `lap_web/lap-website/e2e/helpers/api-mocks.ts`
+- `lap_web/lap-website/e2e/helpers/auth.ts`
+- `lap_web/lap-website/e2e/feature-gating.spec.ts`
+- `lap_web/lap-website/e2e/rbac-gates.spec.ts`
+- `lap_web/lap-website/e2e/tenant-isolation.spec.ts`
+
+---
+
+### Area: lap-backend
+
+### coaching-rules-engine
+
+- **Folder:** `2-schemes/lap-backend/coaching-rules-engine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/coaching/library`
+- **Language:** Python
+
+**What it is:** Declarative coaching-rules engine: Pydantic rule schema (ADR-013) with detection condition, evidence thresholds, severity, per-difficulty explanation templates, and prescription with machine-checkable success_condition; an AST-whitelisted safe condition compiler (no eval escapes, exposes referenced variable names); a rule runner with mustache-style templating that fails loudly on missing context vars; and a confidence gate (FULL vs TENTATIVE based on occurrences-in-session + sessions-in-window evidence).
+
+**Why RaceLab wants it:** Direct architecture blueprint for RaceLab's ~150-rule KB and deterministic retrieval/guard pipeline: rule-as-data with strict schema validation at load time, safe condition evaluation, evidence-based confidence levels (maps to citations+confidence), and templated explanations per skill level. Python, so scheme not copypaste, but would save substantial design time on packages/kb.
+
+**Verifier evidence:** Verified: the path contains a complete declarative rules engine — strict Pydantic RuleSpec with detection condition, evidence thresholds, per-difficulty explanation templates, and a machine-checkable prescription.success_condition (rule_schema.py); an AST-whitelist safe condition evaluator exposing referenced_names (condition_compiler.py); a closed feature namespace that fails on variable typos at load time (features.py); and a FULL/TENTATIVE evidence-based confidence gate (confidence_gate.py). Two files the first pass missed add value: compiler.py defines a language-neutral tagged-JSON condition-AST format (FORMAT_VERSION-pinned) a TS evaluator can adopt verbatim, and bundle.py shows content-addressed + HMAC-signed rule-bundle distribution useful for an offline-first client. It is all Python (Pydantic, ast module), so not copypaste, and the 78 YAML rule bodies are sim-telemetry content (apex speed, brake channels, tire temps) that is useless for RC cars — but the engine architecture maps one-to-one onto RaceLab's ~150-rule KB + deterministic guard + citations/confidence pipeline and would save real design time.
+
+**How to adapt:** Port the design, not the code, into packages/kb: mirror RuleSpec as a Zod .strict() schema (load + validate all ~150 rules in CI with duplicate-id detection, exactly like rule_loader.py), and replace telemetry fields (must_have_channels, expected_gain_kmh, apex_speed) with RC concepts — symptom tags, chassis setup parameters, surface/grip/temp conditions. Do NOT parse expression strings in TS; instead author/ship conditions in the tagged-JSON AST grammar from compiler.py ({"type":"compare"|"binop"|"boolop"|"var"|"const"}) and write a small recursive evaluator — this gives the same no-eval safety with less work. Keep three load-bearing patterns verbatim: the closed feature/variable namespace so rule typos fail in CI not production (features.py), the FULL vs TENTATIVE evidence gate (occurrences-in-session + sessions-in-window) feeding the advisor's confidence field (confidence_gate.py), and the fail-loud mustache templating per skill level (rule_runner.py). prescription.success_condition is the template for RaceLab's (change, conditions, outcome) triples — a machine-checkable target the app can verify in later sessions. bundle.py's content-addressed SHA-256 version + HMAC signing is a ready-made scheme for syncing KB versions to the offline-first expo-sqlite client (skip the HMAC if rules only ever ship inside the app bundle). Ignore the other 77 YAML rule files — sim-racing telemetry content, only the one exemplar included shows the authoring format.
+
+**Files:**
+- `lap-backend/coaching/library/rule_schema.py`
+- `lap-backend/coaching/library/rule_loader.py`
+- `lap-backend/coaching/library/condition_compiler.py`
+- `lap-backend/coaching/library/features.py`
+- `lap-backend/coaching/library/rule_runner.py`
+- `lap-backend/coaching/library/confidence_gate.py`
+- `lap-backend/coaching/library/compiler.py`
+- `lap-backend/coaching/library/bundle.py`
+- `lap-backend/coaching/library/rules/braking/late_braking_apex_speed_loss.yaml`
+
+---
+
+### coaching-rule-yaml-corpus
+
+- **Folder:** `2-schemes/lap-backend/coaching-rule-yaml-corpus/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/coaching/library/rules`
+- **Language:** YAML
+
+**What it is:** ~68 authored coaching rules across 8 categories (braking, throttle, cornering, consistency, adaptation, endurance, tire_fuel, strategy), each with detection condition, severity rule, 3-level explanation templates, drill prescription with success_condition, and sim-vs-real transfer profile.
+
+**Why RaceLab wants it:** Rule CONTENT is sim-racing telemetry technique coaching — not transferable to RC setup advice. But the corpus demonstrates how to author a rules KB at scale: consistent ID namespace (br.late_braking.apex_speed_loss), versioned rules, category taxonomy, and caveat/transfer annotations. Useful as the authoring template for RaceLab's setup-tuning rule corpus.
+
+**Verifier evidence:** Verified: 67 authored YAML rules across 9 category dirs, each with a locked schema — namespaced versioned ID (e.g. br.late_braking.apex_speed_loss), detection (signal + safe expression condition + must_have_channels + evidence_required thresholds), severity_rule, 3-level explanation templates with {{var}} placeholders, prescription with drill + measurable success_condition (metric/comparison/target_pct/measurement_window), and sim-vs-real transfer_profile with caveats. Sibling files enforce the discipline: Pydantic extra="forbid" schema emitting JSON Schema (rule_schema.py), startup loader with duplicate-ID detection (rule_loader.py), and an AST-whitelisted condition compiler exposing referenced_names (condition_compiler.py). The rule CONTENT is sim-racing telemetry (apex speed, tire temp) and useless to RC, but the authoring template directly maps to RaceLab's ~150-rule setup KB: detection condition = deterministic symptom mapping, evidence thresholds = confidence/honest-refusal gating, success_condition = the (change, conditions, outcome) triple, load-time validation = the CI eval gate. Not copypaste (Python + LAP telemetry domain), clearly not useless.
+
+**How to adapt:** Do NOT port the rule content — it is sim-racing telemetry coaching; author RaceLab's ~150 setup rules fresh, but reuse the schema shape. In packages/kb: port RuleSpec to a Zod schema (z.strictObject mirrors Pydantic extra="forbid" so YAML/JSON typos fail at build time), keep namespaced versioned IDs (e.g. setup.oversteer.corner_entry), replace must_have_channels with applicability fields (chassis template, surface, class), keep evidence_required-style thresholds to drive confidence scoring and the honest-refusal path, and keep prescription.success_condition verbatim in spirit — it is exactly RaceLab's (change, conditions, outcome) triple and gives the AI engineer a measurable revert/keep criterion. Run the loader's validate-all-rules + duplicate-ID check as a CI step alongside the 50-scenario eval gate. For detection conditions, prefer Zod-validated structured condition objects over string expressions in TS (avoids needing a safe-eval), but keep the referenced_names idea: deriving which context variables a rule reads is what lets you assemble the minimal RAG context bundle per rule. One content exception: setup_change_regression.yaml's revert-protocol logic (regression threshold + minimum clean-lap sample before keep/revert) transfers conceptually to RC setup workflow and is worth reading for the advice itself.
+
+**Files:**
+- `lap-backend/coaching/library/rule_schema.py`
+- `lap-backend/coaching/library/rule_loader.py`
+- `lap-backend/coaching/library/condition_compiler.py`
+- `lap-backend/coaching/library/rules/braking/late_braking_apex_speed_loss.yaml`
+- `lap-backend/coaching/library/rules/adaptation/setup_change_regression.yaml`
+- `lap-backend/coaching/library/rules/tire_fuel/cold_tire_mistakes_first_3_laps.yaml`
+
+---
+
+### rule-eval-test-harness
+
+- **Folder:** `2-schemes/lap-backend/rule-eval-test-harness/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/tests`
+- **Language:** Python
+
+**What it is:** Test suite mirroring source layout; the standout pattern is per-rule eval tests (tests/test_rule_*.py) run against curated YAML session fixtures (tests/fixtures/coaching/sessions/*.yaml, e.g. sebring_amateur, spa_24h_stint_2_thermal), plus a false-positive audit test (test_rule_fp_audit.py), OpenAPI zero-drift tests, and migration round-trip tests.
+
+**Why RaceLab wants it:** Maps directly to RaceLab's 'eval gate: 50 scenarios in CI' requirement — scenario fixtures as data files, one assertion file per KB rule, plus an FP-rate audit across the whole library. The structure (fixture scenario -> expected rule fires / does not fire) is the eval-harness design RaceLab needs, just re-expressed in TS/vitest.
+
+**Verifier evidence:** Verified: the suite contains exactly the claimed eval-harness pattern — per-rule fire/no-fire tests (tests/test_rule_early_braking_entry_speed_loss.py asserts the rule fires at 88% of reference entry speed and stays silent at 96%), YAML scenario fixtures whose comments document the designed firing set and deliberate non-fires (tests/fixtures/coaching/sessions/sebring_amateur.yaml: tuned to fire 3 of 10 braking rules), and fixture-level eval tests that pin the exact fired-rule set, assert negatives, sanity-check too-lenient/too-aggressive bounds, and verify no unrendered {{placeholders}} (tests/test_braking_rules_against_sebring.py). This maps directly onto RaceLab's "eval gate: 50 scenarios in CI" for its ~150 KB rules, but it is Python/pytest against a Pydantic/FastAPI stack, so it is a design to re-express in TS/vitest, not liftable code — hence scheme, not copypaste. Caveat: test_rule_fp_audit.py is more LAP-coupled than the claim implied (nightly Celery-beat Slack alert over a flagged_false_positive column), though the per-rule user-flagged-FP-rate audit concept remains instructive.
+
+**How to adapt:** Re-express in TS/vitest inside packages/kb: rule spec = zod schema (mirror rule_schema.py's strict extra-forbid Pydantic model: id, versioned condition DSL over named features, evidence_required thresholds, per-difficulty explanation templates, prescription with measurable success_condition); scenario fixtures = JSON/YAML files where keys are the feature/context values RaceLab derives from setup + conditions + feedback tags, with comments documenting which rules MUST fire and MUST NOT fire. Keep the three-layer test structure: (1) one test file per KB rule with a minimal fire case and a near-threshold no-fire case plus structural checks (loads via loader, only known feature names, explanation variants distinct), (2) one test per scenario fixture pinning the exact fired set with negative assertions and a too-lenient/too-aggressive bound, (3) a rendered-output check that no {{placeholder}} survives templating — that is the CI eval gate. Do NOT port test_rule_fp_audit.py's code (Celery beat + Slack + Alembic/SQLite); port the concept: a user-flagged false_positive boolean on each AI advice record in Neon, aggregate FP rate per rule_id, alert/fail when a rule crosses ~10%. Note this harness only covers the deterministic pre-LLM rule-firing layer; RaceLab still needs a separate eval for the Claude reasoning step (retrieved-rules-only grounding, refusal on empty retrieval), which this codebase does not provide.
+
+**Files:**
+- `lap-backend/tests/test_rule_early_braking_entry_speed_loss.py`
+- `lap-backend/tests/test_braking_rules_against_sebring.py`
+- `lap-backend/tests/test_rule_fp_audit.py`
+- `lap-backend/tests/fixtures/coaching/sessions/sebring_amateur.yaml`
+- `lap-backend/tests/fixtures/coaching/sessions/spa_24h_stint_2_thermal.yaml`
+- `lap-backend/coaching/library/rule_schema.py`
+- `lap-backend/coaching/library/rules/braking/early_braking_entry_speed_loss.yaml`
+
+---
+
+### signed-rules-bundle
+
+- **Folder:** `2-schemes/lap-backend/signed-rules-bundle/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/coaching/library/bundle.py`
+- **Language:** Python
+
+**What it is:** Content-addressed, HMAC-signed rules-bundle wire format: canonical JSON (sorted keys, compact separators), bundle_version = SHA-256 of the unsigned body (clients skip re-download on string equality), HMAC-SHA256 signature covering body + version so stale-rules-under-fresh-version tampering breaks verification.
+
+**Why RaceLab wants it:** Strong pattern for shipping RaceLab's KB and chassis schema templates to offline-first mobile clients: content-addressed versioning gives free cache invalidation in expo-sqlite, and signing prevents tampered advice bundles. ~80 lines, trivially re-expressed in TS.
+
+**Verifier evidence:** Verified: bundle.py is an ~80-line, dependency-free Python module (only hashlib/hmac/json) implementing canonical JSON, content-addressed bundle_version (SHA-256 of the canonical unsigned body), and HMAC-SHA256 signing that covers bundle_version so stale-rules-under-fresh-version spoofing breaks verification — exactly as claimed, with the spoof case explicitly tested in tests/test_coaching_bundle.py (test_verify_bundle_raises_when_bundle_version_tampered). Not copypaste because it is Python, but it is a genuine scheme: RaceLab must ship chassis schema templates (and optionally KB subsets) to offline-first expo-sqlite clients, and content-addressing-as-version gives zero-bookkeeping cache invalidation while the version-covered-by-signature detail is a subtle design point teams typically miss. The serving endpoint adds an instructive posture (503 rather than serving unsigned when the secret is unconfigured; version=latest param reserved for future pinning).
+
+**How to adapt:** Re-express in TypeScript inside packages/schema as a shared util used by both apps/api (sign) and apps/mobile (verify/cache): the critical porting trap is canonical JSON — JS JSON.stringify does NOT sort keys, so use an RFC 8785 (JCS) implementation or json-stable-stringify identically on both sides, or the client-recomputed hash will never match. Use node:crypto on the Next.js side and expo-crypto (SHA-256) on mobile; store bundle_version in expo-sqlite and send it as an ETag-style query/header so unchanged bundles return 304/skip-download. One real design correction for RaceLab: LAP verifies with a shared HMAC secret because its clients are trusted; a mobile app binary cannot hold a shared secret safely, so if on-device verification matters, swap HMAC for an Ed25519 signature (tweetnacl/expo-crypto) with the public key in the app — keep everything else (canonical bytes, content-addressed version, signature covering version + format_version) unchanged. Also copy the endpoint posture from coaching.py's get_rules_bundle: refuse to serve unsigned with a 503 when the signing key is unconfigured, and reserve a version param now to allow pinned-version retrieval later without a wire-format break; ignore the rest of coaching.py (insight flagging) — it is LAP-specific. The test file is included because it documents the exact tamper/spoof contract the TS port should reproduce.
+
+**Files:**
+- `lap-backend/coaching/library/bundle.py`
+- `lap-backend/tests/test_coaching_bundle.py`
+- `lap-backend/app/routers/coaching.py`
+
+---
+
+### orm-data-model-migrations
+
+- **Folder:** `2-schemes/lap-backend/orm-data-model-migrations/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/infra/orm.py`
+- **Language:** Python/SQL
+
+**What it is:** Full SQLAlchemy 2.0 data model (~30 tables) plus ~40 Alembic migrations (alembic/versions/): users (clerk_user_id, subscription_status, stripe_customer_id, trial_ended_at), driver_profiles, sessions (JSONB manifest + status + failure_reason), laps (session_id, lap_number, time_ms, sector_times JSONB, valid flag), coach_session_notes (free-text annotation, author SET NULL to preserve history), admin_audit_log (append-only, no-delete FK), target_events, weakness/prescription/outcome tables. UUIDv7 everywhere, JSON-with-JSONB-variant for SQLite test parity, one migration per schema change.
+
+**Why RaceLab wants it:** Reference data model for RaceLab's Neon schema: sessions/runs/laps shape (lap as session_id+number+time_ms is exactly RaceLab's manual lap-time model), session-note/comment table design, audit log, and the UUIDv7 + JSONB + migration-per-change discipline. SQLAlchemy/Alembic syntax doesn't port, the schema does.
+
+**Verifier evidence:** Verified: orm.py is a real ~30-table SQLAlchemy 2.0 model whose core subset maps almost 1:1 onto RaceLab needs — users keyed by clerk_user_id (RaceLab also uses Clerk) with subscription_status/trial_ended_at, laps as (session_id, lap_number, time_ms, sector_times JSONB, valid) with UNIQUE(session_id, lap_number) which is exactly RaceLab's manual lap-time shape, coach_session_notes (free-text comment, author FK ON DELETE SET NULL so history survives user erasure), append-only admin_audit_log (no-cascade FK, "audit is forever"), track_layouts with GPS + master_track_id canonicalization + track_equivalences, and upload_queue_items (state machine + attempt_count + next_retry_at + unique idempotency_key) which is the right outbox shape for RaceLab's offline-first sync. It is Python/Alembic so it cannot be copypaste, but the docstrings carry non-obvious, load-bearing design rationale (cascade-vs-SET-NULL decisions, JSONB-vs-join-table tradeoffs, idempotent job re-fire constraints, dialect-guarded GIN jsonb_path_ops index) that is well above generic CRUD. Sim-specific tables (telemetry_artifacts, stint_records, strategy_plans/events, iracing_calendar_entries, driver_progress_snapshots, transfer_links) are useless to RaceLab and should be ignored.
+
+**How to adapt:** Read orm.py as a reference schema, not code to port: translate the relevant tables into Neon Postgres DDL (or Drizzle schema in packages/schema). Reuse directly: users keyed by clerk_user_id (swap stripe_customer_id for a RevenueCat app_user_id, keep subscription_status + trial_ended_at), laps as (session_id, lap_number, time_ms, UNIQUE(session_id, lap_number)) for manual lap entry, the coach_session_notes pattern (author FK ON DELETE SET NULL preserves comment history through account deletion — apply to RaceLab comments), the append-only admin_audit_log (no-cascade FK), and track_layouts' master_track_id canonicalization idea for the track DB. UUIDv7 PKs everywhere is the key enabler for offline-first: clients can mint IDs in expo-sqlite and sync without remapping. upload_queue_items' state machine (state, attempt_count, next_retry_at, unique idempotency_key) is the correct shape for the mobile sync outbox even though here it lives server-side. The GIN jsonb_path_ops migration shows the right index for JSONB containment queries — directly applicable to querying setup-sheet params on Neon. Skip everything sim-telemetry-specific (telemetry_artifacts, stint/strategy/progress-snapshot/transfer-link/iRacing tables); also note 'one migration per schema change with a rationale docstring' as the discipline to adopt. No secrets in any listed file.
+
+**Files:**
+- `lap-backend/infra/orm.py`
+- `lap-backend/alembic/versions/a486bfbde9e9_t058_add_users_table.py`
+- `lap-backend/alembic/versions/6995cae20177_t063_add_laps.py`
+- `lap-backend/alembic/versions/a7d9f3e1c5b8_t173_add_coach_session_notes.py`
+- `lap-backend/alembic/versions/d1a4b8c7e2f5_t197_add_admin_audit_log.py`
+- `lap-backend/alembic/versions/b3d7a1e9c5f8_t025_add_transfer_links_divergence_gin.py`
+
+---
+
+### clerk-auth-provisioning
+
+- **Folder:** `2-schemes/lap-backend/clerk-auth-provisioning/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/app/deps.py`
+- **Language:** Python
+
+**What it is:** Clerk auth integration: JWKS client with TTL cache + lock (infra/clerk.py), bearer JWT verification by kid, lazy user auto-provisioning on first verified token (with PostHog identify only on the provision branch), Svix-signature-verified Clerk webhooks (infra/clerk_webhooks.py, app/routers/webhooks.py) syncing user lifecycle events, plus require_admin and require_active_subscription dependency guards.
+
+**Why RaceLab wants it:** RaceLab also uses Clerk. On Next.js the SDK replaces the JWKS/JWT code, but the patterns transfer directly: lazy provision-on-first-auth into your own users table, Clerk webhook sync for deletes/email changes, and composable route guards (auth -> admin -> active-subscription) as middleware layers.
+
+**Verifier evidence:** Verified all claimed files. The Python/FastAPI code itself is not liftable, and the JWKS client (infra/clerk.py) and Svix HMAC verification are boilerplate fully replaced by @clerk/nextjs and the svix npm package, but the design is genuinely instructive: dual-path user sync (lazy provision-on-first-verified-token in deps.py get_current_user, which closes the race where a new user calls the API before the user.created webhook arrives, plus idempotent webhook apply for created/deleted in clerk_webhooks.py), an own users mirror table keyed by clerk_user_id with a decoupled internal UUIDv7 PK, PostHog identify fired only on the provision branch, and composable guards (auth -> require_admin -> require_active_subscription) backed by a pure 35-line grace-period function in domain/billing.py. RaceLab uses Clerk + Postgres + PostHog and needs exactly this user-sync and tiered-gate design, so this saves real design time even though zero lines port directly.
+
+**How to adapt:** Read these for the patterns, not the code. On Next.js, replace all JWT/JWKS verification with @clerk/nextjs auth() in middleware/route handlers, and replace verify_svix_signature with the svix npm package per Clerk's webhook docs (do verify the raw request body before JSON parsing, as webhooks.py does). Keep the dual-path sync: a getOrCreateUser(clerkUserId, email) helper called on first authenticated request (idempotent upsert into Neon, internal UUIDv7 id separate from clerk_user_id) PLUS a /api/webhooks/clerk route handling user.created/user.deleted/email-change — webhook-only sync races against the user's first API call, lazy-only sync misses deletes. Copy the PostHog-identify-only-on-the-provision-branch trick verbatim in spirit so person profiles aren't rewritten per request. For the subscription gate, swap the Stripe status frozenset for RevenueCat entitlement checks but keep the shape: a single requireEntitlement() guard layered over auth, with the grace-period logic as a pure, unit-testable function like domain/billing.py (note RevenueCat has built-in billing grace periods, so decide whether server-side soft grace is additive or redundant). I excluded infra/clerk.py (JWKS TTL cache) as SDK-replaced noise. No secrets in any included file; secrets are read from config/env.
+
+**Files:**
+- `lap-backend/app/deps.py`
+- `lap-backend/infra/clerk_webhooks.py`
+- `lap-backend/app/routers/webhooks.py`
+- `lap-backend/domain/billing.py`
+
+---
+
+### stripe-billing-gating
+
+- **Folder:** `2-schemes/lap-backend/stripe-billing-gating/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/app/routers/billing.py`
+- **Language:** Python
+
+**What it is:** Stripe subscription lifecycle: checkout + portal endpoints, signature-verified webhooks for subscription created/updated/deleted and invoice payment events flipping users.subscription_status, a pure-function 48h grace period after trial end (domain/billing.py), HTTP 402 gating dependency, nightly billing reconcile job (infra/billing_reconcile.py), seat-quantity proration helper.
+
+**Why RaceLab wants it:** RaceLab uses RevenueCat, so the Stripe code itself is out. The DESIGN transfers: entitlement status denormalized onto the user row, webhook-driven status sync with a periodic reconcile job as drift safety-net, soft grace period before hard paywall, and 402-based gating — same shape RaceLab needs for RevenueCat webhooks + free-tier enforcement.
+
+**Verifier evidence:** All claimed components verified in code (with corrected paths: domain/billing.py and infra/billing_reconcile.py at repo root, not under app/). billing.py implements signature-verified Stripe webhooks flipping a denormalized users.subscription_status with an explicit never-5xx-on-ghost-users rule; deps.py has a 402 gate over {active, trialing} with a separately-layered pure 48h grace function (domain/billing.py) keyed on trial_ended_at; infra/billing_reconcile.py is a drift-detection safety net (log-only — claim slightly overstates it as a fixing job; repair is a separate admin force-sync endpoint). It is all Python/FastAPI/Stripe so nothing is copy-pasteable into the Expo/Next.js/RevenueCat stack, but the entitlement-sync design (webhook -> denormalized status column -> gate dependency -> reconcile net -> soft grace) is exactly the shape RaceLab needs for RevenueCat webhooks plus free-tier enforcement, and it is precisely test-documented.
+
+**How to adapt:** Read these as a design reference, not code to port. Map the shape to RevenueCat: a Next.js route handler (apps/api) receives RevenueCat webhooks (verify the Authorization header secret, analogous to Stripe-Signature), translates RC event types (INITIAL_PURCHASE/RENEWAL/CANCELLATION/EXPIRATION/BILLING_ISSUE) into a small status vocabulary, and writes a denormalized entitlement_status column on the Neon users table — never 500 on unknown app_user_ids because RC retries like Stripe does. Reimplement is_in_grace_period as a pure TS util in packages/schema with the same test matrix (test_billing_grace_period.py is the contract spec — note the trial_ended_at marker that gives grace only to trial-lapsers, not lapsed paid customers), and gate paid features (AI calls beyond 5/month) with a 402-returning helper that checks {active, trialing} OR grace. Add a Vercel Cron job that pages RevenueCat's subscriber API and logs status drift (log-only, like billing_reconcile.py), plus a manual per-user force-sync admin action as the repair tool. Ignore the seat-proration and B2B/checkout-session specifics (Stripe Checkout, promo codes, seat quantities) — RevenueCat and the V1 single-tier model make them moot. deps.py is included mainly for the require_active_subscription gate and the Clerk-JWT-to-local-user resolution pattern, which transfers to Clerk middleware on Next.js; its Redis/pairing/blob wiring is LAP-specific noise.
+
+**Files:**
+- `lap-backend/app/routers/billing.py`
+- `lap-backend/domain/billing.py`
+- `lap-backend/app/deps.py`
+- `lap-backend/infra/billing_reconcile.py`
+- `lap-backend/tests/test_billing_grace_period.py`
+
+---
+
+### api-core-plumbing
+
+- **Folder:** `2-schemes/lap-backend/api-core-plumbing/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/app`
+- **Language:** Python
+
+**What it is:** Core API platform patterns outside routers: canonical ErrorCode StrEnum as single source of wire-shape error strings (error_codes.py), tamper-evident base64url cursor pagination keyed to user_id with fail-closed restart semantics (cursor.py), env-backed feature flags (flags.py), Redis idempotency-key cache for ingest (infra/idempotency_cache.py), HTTP metrics middleware, structlog setup, pydantic-settings Config with SecretStr.
+
+**Why RaceLab wants it:** Each is a small, well-reasoned pattern worth porting to the Next.js API layer: typed error-code catalog shared via packages/schema, signed cursor pagination for setup-version timelines, idempotency keys for the offline sync layer's replayed mutations. Design value, not code value.
+
+**Verifier evidence:** All Python/FastAPI, so never copypaste, but several files carry real design value for RaceLab: deps.py implements Clerk JWKS verification with JIT user provisioning (clerk_user_id -> local Postgres row, PostHog identify only on the provision branch) plus a require_active_subscription gate with grace period — the exact Clerk/Neon/PostHog identity-and-entitlement problem RaceLab must solve. cursor.py documents a per-user-bound, fail-closed cursor pagination scheme that maps directly to setup-version timelines, and rate_limit.py documents tiered read/write/ingest buckets with rationale. However, about half the original claim is generic boilerplate a senior dev writes blind (flags.py is a 29-line env truthy check, logging.py is 23 lines of structlog config, http_metrics.py is a Prometheus counter irrelevant to a PostHog/Sentry stack, config.py is plain pydantic-settings), so the claim holds only on a trimmed file set.
+
+**How to adapt:** deps.py is the highest-value read: on Next.js, @clerk/nextjs middleware replaces the hand-rolled JWKS/RS256 verification, but port the JIT-provisioning pattern (look up clerk_user_id in Neon, auto-create the user row on first authed request instead of trusting webhook ordering, fire PostHog identify only on the create branch) and the entitlement-gate dependency, swapping Stripe statuses for RevenueCat entitlements plus a grace-period check. Port cursor.py as a TS utility for setup-version timeline pagination, but fix its keying: it signs with sha256(user_id||ts), which anyone who knows a user_id can forge — RaceLab's social features expose user ids, so use HMAC with a server secret; keep the good parts (deterministic encoding, fail-closed decode that silently restarts pagination instead of 401ing). The idempotency cache concept fits the offline-sync replay layer (store response by Idempotency-Key with 24h TTL, replay verbatim on hit) but implement it as a Neon table or Upstash KV and scope the key by user_id — the LAP version is globally keyed, so cross-user key collisions would replay another user's response. error_codes.py's flat wire-shape catalog translates to a string-literal union exported from packages/schema so mobile and API share one error vocabulary. Skip flags.py (use PostHog feature flags), logging.py, http_metrics.py, and config.py — generic or replaced by the Vercel/PostHog/Sentry stack.
+
+**Files:**
+- `lap-backend/app/deps.py`
+- `lap-backend/app/cursor.py`
+- `lap-backend/app/rate_limit.py`
+- `lap-backend/app/error_codes.py`
+- `lap-backend/infra/idempotency_cache.py`
+
+---
+
+### prescription-outcome-loop
+
+- **Folder:** `2-schemes/lap-backend/prescription-outcome-loop/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/infra/prescription_generator.py`
+- **Language:** Python
+
+**What it is:** Closed advice-efficacy loop (cluster: prescription_generator.py, outcome_checker.py, outcome_persistence.py, efficacy_aggregation.py, weakness_episode_opener.py, episode_decay.py + flag-wrong endpoints/aggregation): rule fires -> weakness episode with recurrence count -> idempotent prescription carrying a machine-checkable success_condition (metric/comparison/target_pct/window) -> pure outcome evaluator returns met/not_met/inconclusive -> efficacy scores aggregated per prescription, per driver, and per RULE across the user base; users can flag advice as wrong, aggregated for operator review of bad rules.
+
+**Why RaceLab wants it:** This IS RaceLab's '(change, conditions, outcome) triples' subsystem and the AI engineer's accountability layer: every recommendation ships with a falsifiable success condition, outcomes are evaluated deterministically, and per-rule efficacy across all users tells you which KB rules are bad. The flag-as-wrong -> per-rule aggregation -> admin review loop is exactly the feedback mechanism a KB-grounded advisor needs. Highest-value scheme item in the repo alongside the rules engine.
+
+**Verifier evidence:** Verified the full closed loop exists as claimed: weakness_episode_opener.py merges per (driver_id, library_rule_id, corner_tag) with Celery-retry-safe recurrence counting; prescription_generator.py is idempotent per episode and copies the rule's SuccessCondition (metric/comparison/target_pct/measurement_window) into a JSON column; outcome_checker.py is a pure met/not_met/inconclusive evaluator; outcome_persistence.py writes ActionOutcome with binary efficacy and clamped confidence propagation; efficacy_aggregation.py computes per-prescription/per-driver/per-RULE means (per-rule = cross-user-base rule-health signal); coaching_flag_aggregation.py + the POST /{id}/flag-wrong endpoint implement the false-positive feedback loop with >10% FP alerting. It is Python/SQLAlchemy so not copypaste, but the design (falsifiable success condition on every recommendation, deterministic outcome evaluation, episode confidence decay, per-rule efficacy and flag aggregation) maps directly onto RaceLab's (change, conditions, outcome) triples and KB-rule accountability, and is far from generic CRUD.
+
+**How to adapt:** Read ADR-005 sections 5.1-5.4 of 02-ARCHITECTURE-DECISIONS.md first — it gives the canonical Pydantic field shapes for WeaknessEpisode / ActionPrescription / SuccessCondition / ActionOutcome (the rest of that doc is LAP-specific; ignore it). Port as Neon Postgres tables + Drizzle/SQL in packages/schema: every AI Race Engineer recommendation row carries a JSON success_condition; since RC cars have no telemetry, the observed metric becomes manual lap times (e.g. best/avg lap improves >=X% in next session at same track) or a driver feedback tag clearing — keep the evaluator a pure TS function with the three-valued met/not_met/inconclusive verdict and the rule that inconclusive persists nothing. Replace the Celery-retry idempotency rationale with offline-sync idempotency: same pattern (existing-row check keyed on episode/recommendation id, sessions_affected dedup) protects against replayed sync mutations. Per-rule AVG(efficacy) + sample_size across all users is your KB-rule health dashboard; pair it with the first-flag-wins flagged_wrong_at timestamp and the >10% FP-rate aggregation (run as a Vercel cron, alert to admin instead of Slack). The unique constraint on action_outcomes.prescription_id and recording the ACTUAL clamped confidence delta (not the nominal one) are load-bearing details worth keeping.
+
+**Files:**
+- `lap-backend/infra/weakness_episode_opener.py`
+- `lap-backend/infra/prescription_generator.py`
+- `lap-backend/infra/outcome_checker.py`
+- `lap-backend/infra/outcome_persistence.py`
+- `lap-backend/infra/efficacy_aggregation.py`
+- `lap-backend/infra/episode_decay.py`
+- `lap-backend/infra/coaching_flag_aggregation.py`
+- `lap-backend/coaching/library/rule_schema.py`
+- `docs/roadmap/02-ARCHITECTURE-DECISIONS.md`
+
+---
+
+### ops-policy-docs
+
+- **Folder:** `2-schemes/lap-backend/ops-policy-docs/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-backend/docs`
+- **Language:** Markdown
+
+**What it is:** Backend ops policy docs: error budget with SLO math tied to load tests, API deprecation policy (v1 stays primary, v2 ships additively), disaster recovery, secret rotation, and a dated security audit.
+
+**Why RaceLab wants it:** Generic but competent templates for RaceLab's eventual ops discipline; the additive-versioning deprecation doctrine is mildly relevant to packages/schema versioning. Low priority — would save hours, not days.
+
+**Verifier evidence:** Five Markdown ops docs, no code. Two carry real design value for RaceLab: security-audit-2026-04-27.md is a worked IDOR/access-control audit methodology (auth-dep check per route, ownership verification on every UUID path param, 404-vs-403 status parity, and a two-JWT cross-tenant fuzzer recipe) that maps directly onto RaceLab's private/unlisted/public setup-sharing surface; api-deprecation-policy.md codifies additive versioning with RFC 8594 Sunset/Deprecation headers and a 410-sunset lifecycle, mildly useful for packages/schema contract discipline. The other three (disaster-recovery, secret-rotation, error-budget) are LAP-infra-bound (pg_dump→R2, Celery, Stripe) or generic ops boilerplate made obsolete by Neon PITR and Vercel rollbacks, so they are excluded.
+
+**How to adapt:** Treat the security audit as a pre-launch checklist template, not a report: once setup sharing ships, audit every Next.js API route for (a) Clerk auth on non-public routes, (b) ownership/visibility check on every resource ID param honoring the private/unlisted/public model (unlisted = capability-URL, must not be enumerable), (c) uniform 404 on both missing and forbidden to avoid existence leaks; then wire the two-JWT cross-tenant fuzzer (user A's token against user B's setup/session/comment IDs, assert 404) into CI alongside the 50-scenario AI eval gate. From the deprecation policy, adopt only the doctrine: published API/schema shapes are contract-locked, changes ship additively as new versions, and retirement is a separate deliberate decision — apply this to packages/schema versioning and the sync protocol (old app builds keep syncing offline-queued data long after an API change). Ignore the DR, secret-rotation, and error-budget docs: Neon point-in-time restore and Vercel instant rollback replace the pg_dump/R2 playbooks, and the rotation runbooks target Stripe/R2 rather than RevenueCat/Vercel Blob. No secrets found in any file.
+
+**Files:**
+- `lap-backend/docs/security-audit-2026-04-27.md`
+- `lap-backend/docs/api-deprecation-policy.md`
+
+---
+
+### Area: lap-schemas
+
+### schema-registry-discipline
+
+- **Folder:** `2-schemes/lap-schemas/schema-registry-discipline/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/README.md`
+- **Language:** Markdown/Make/Python
+
+**What it is:** Registry-level discipline docs and tooling: README (one Pydantic source -> OpenAPI -> per-language codegen, generated artifacts gitignored), VERSIONING.md (calver YYYY.MM.N, precise definition of breaking vs additive, breaking changes ship as a parallel v2/ namespace instead of a version bump), CLAUDE.md conventions (frozen+extra=forbid models, UUIDv7, UTC RFC3339, no raw dict fields), FROZEN.md, Makefile, and generate_openapi.py (40-line Pydantic->OpenAPI 3.1 components emitter).
+
+**Why RaceLab wants it:** Direct design template for RaceLab packages/schema: contracts-first layout, what counts as breaking for offline clients that cannot be force-updated, additive-only evolution rules, and namespace-based major versions. Critical for an offline-first app where stale mobile clients keep reading old wire formats.
+
+**Verifier evidence:** Verified by reading all cited files: VERSIONING.md contains a precise 5-condition breaking-change taxonomy (field removal/rename, type narrowing, enum shrinkage, bound tightening, optional-to-required) plus the parallel-vN-namespace rule for breaking changes, which directly answers how RaceLab must evolve wire formats for offline-first clients that cannot be force-updated. CLAUDE.md adds concrete conventions (frozen + extra='forbid', UUIDv7 ids, UTC RFC3339, no raw dict fields) that map 1:1 onto Zod strict schemas. Nothing is copy-pasteable: the substantive content is Markdown policy, and the tooling (generate_openapi.py, Makefile, schema-sync.yml) is Python/Make plumbing for a Pydantic-to-Swift/Kotlin codegen pipeline that a TS-only monorepo would never run. Not useless: this is a load-bearing spec set, more rigorous than what a team typically improvises for a contracts-first packages/schema.
+
+**How to adapt:** Skip the entire Pydantic -> OpenAPI -> per-language codegen pipeline (generate_openapi.py, Makefile, schema-sync.yml): RaceLab is TypeScript end-to-end, so packages/schema should be Zod schemas imported directly by apps/mobile and apps/api — no codegen layer needed. Port the POLICY instead: adopt VERSIONING.md's breaking-change definition verbatim, extending 'existing consumer' to include rows already persisted in expo-sqlite and queued offline sync payloads; enforce additive-only changes at v1 and ship any breaking change as a parallel v2/ export namespace in the package (old clients can never be force-updated, so the old schema must keep parsing). Translate CLAUDE.md conventions to Zod: .strict() everywhere (= extra='forbid'), UUIDv7 string ids generated client-side for offline creates, UTC ISO-8601/RFC3339 datetimes, no z.record/untyped JSON fields in wire contracts (the chassis setup-sheet JSON should still be schema-driven per template, not a raw blob). Keep a CI gate analogous to schema-sync.yml: typecheck packages/schema, run contract tests, and regenerate any derived artifacts (e.g., JSON Schemas fed to Claude structured output) without committing them. FROZEN.md was deliberately excluded — it is LAP status bookkeeping, but its lesson is worth repeating: LAP's production backend drifted to an embedded, disjoint schema set, so wire RaceLab's API and mobile to packages/schema from day one.
+
+**Files:**
+- `lap-schemas/VERSIONING.md`
+- `lap-schemas/README.md`
+- `lap-schemas/CLAUDE.md`
+
+---
+
+### schema-sync-ci-gate
+
+- **Folder:** `2-schemes/lap-schemas/schema-sync-ci-gate/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/.github/workflows/schema-sync.yml`
+- **Language:** YAML/Bash
+
+**What it is:** CI job that regenerates openapi.json and all three language bindings end-to-end on every push/PR and fails if any codegen step errors, plus an opt-in advisory post-commit hook (.githooks/post-commit) that prints regen commands whenever a commit touches a model file.
+
+**Why RaceLab wants it:** The 'schema change that cannot cleanly codegen to every consumer fails CI before reaching consumers' gate is exactly what RaceLab's packages/schema needs (Zod -> mobile + API + KB consumers). Toolchain (uv/Java/openapi-generator) is LAP-specific; the gate pattern transfers.
+
+**Verifier evidence:** The yml itself is thin: it regenerates openapi.json + TS/Swift/Kotlin bindings and fails only if a codegen step errors — there is no `git diff --exit-code` drift check, and lap-schemas/FROZEN.md records codegen "4 days stale at audit", proving the gate did not actually keep consumers in sync. The post-commit hook is advisory-only (always `exit 0`). The genuinely instructive design in this package is the schema-registry discipline around it, especially VERSIONING.md: calver for internal contract packages, a 5-rule taxonomy of wire-breaking changes, and parallel-namespace (v1/ vs v2/) breaking-change migration — directly applicable to RaceLab's contracts-first packages/schema and versioned setup-sheet schemas. Kept as scheme on that basis, with the gate's weakness flagged.
+
+**How to adapt:** RaceLab's schema source is Zod in TypeScript with TS-only consumers (apps/mobile, apps/api, packages/kb), so LAP's multi-language codegen problem (Pydantic -> OpenAPI -> openapi-generator for Swift/Kotlin via uv/Java) disappears; the equivalent CI gate is just typecheck/build of every workspace, which Turborepo gives nearly for free. If you DO generate artifacts (e.g., JSON Schema exported from Zod for chassis setup-sheet templates, or OpenAPI from API routes), add the step LAP's workflow is missing: regenerate in CI then `git diff --exit-code` so stale committed outputs fail the build — LAP's gate only proved codegen runs, and their own FROZEN.md shows bindings drifted 4 days anyway. The real takeaway is VERSIONING.md: adopt its breaking-change taxonomy (removed/renamed required field, type narrowing, enum shrink, bound tightening, optional->required) as the PR-review checklist for packages/schema, and use its parallel-namespace pattern (schema/v1, schema/v2 side by side, old namespace frozen until all consumers migrate) for setup-sheet schema versions — critical for offline-first clients that may sync data written under an old schema version. Calver vs semver is a taste call; the namespace-not-version-number signaling of contract breaks is the load-bearing idea. The post-commit advisory hook is replaceable with a husky/lint-staged or turbo task that flags schema-file changes lacking regenerated outputs.
+
+**Files:**
+- `lap-schemas/VERSIONING.md`
+- `lap-schemas/.github/workflows/schema-sync.yml`
+- `lap-schemas/.githooks/post-commit`
+
+---
+
+### session-lap-models
+
+- **Folder:** `2-schemes/lap-schemas/session-lap-models/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/session.py`
+- **Language:** Python (Pydantic v2)
+
+**What it is:** Session/lap data-model cluster: SessionManifest (client-declared capture metadata: app/device/track/car/environment/objective, started/ended), SessionDetail (status polling read-model uploaded->processing->ready->failed), session_record.py (processed summary: best/avg lap ms, total/valid laps), lap_record.py (lap_number, time_ms, sector_times_ms, valid flag, string flags tuple), session_context.py (car+track+layout+conditions), timeline.py (cursor-paginated per-session list rows with additive string badges).
+
+**Why RaceLab wants it:** Maps directly onto RaceLab session mode: session = race day, runs, manual lap times. LapRecord is precisely the manual-lap-entry shape (nullable time, valid flag, free-string flags); SessionContext is the conditions bundle the AI engineer consumes; the manifest-vs-processed-record split and the cursor-paginated timeline with non-enum badges are reusable API designs.
+
+**Verifier evidence:** Verified the files. The claim oversells: session.py's SessionManifest is dominated by telemetry-capture metadata inapplicable to RaceLab (telemetry_checksums, sample_rate_hz, DataQuality with GPS fix/channel-completeness, SensorConfigSnapshot, sim SourceTag like "iracing"/"acc", fuel/stint SessionStrategySection), its uploaded->processing->ready->failed status model exists only because telemetry bundles need server processing (RaceLab sessions are client-authored manual entries), and SessionContext's "conditions" is a single optional free string — not the AI conditions bundle the claim describes. What survives is genuinely in the declared high-value overlap: lap_record.py (nullable time_ms int, valid flag, additive string-tuple flags — exactly the manual-lap shape), session_record.py's summary aggregates (best/avg_lap_ms, total vs valid laps, consistency_index), and timeline.py's documented list-row design (lighter-than-record rows, additive string badges with stated enum-avoidance rationale, null-terminated cursor). Python/Pydantic, so scheme at best — kept, but with a much narrower scope than claimed.
+
+**How to adapt:** Deliberately excluded session.py itself: SessionManifest/SessionDetail encode a telemetry-upload processing pipeline (checksums, sample rates, sensor config, GPS data-quality, sim sources, uploaded->processing->ready status) that would mislead an offline-first manual-entry app — RaceLab rows are authored locally in expo-sqlite and synced, never "processed". Port the four kept shapes to Zod in packages/schema: keep lap times as nullable integer milliseconds with a separate `valid` boolean and additive string-array `flags` (matches manual entry where a lap can exist without a time), and keep the total_laps vs valid_laps distinction in session summaries. Insert the missing middle tier — LAP has session->laps only; RaceLab needs session (race day) -> runs (practice/qual/main) -> laps, so hang LapRecord-style rows off a run_id, not session_id. Replace SessionContext's free-string `conditions` with a structured weather-snapshot + grip + track-temp object for the AI context bundle. Reuse timeline.py's two patterns verbatim: badges as open strings (not enums) so new badges ship without client updates, and `next_cursor: string | null` as the sole pagination terminal. The repo-wide discipline (frozen models, extra="forbid", UUIDv7 ids, UTC RFC3339 datetimes) maps to Zod .strict() schemas and uuidv7 ids in the contracts-first package.
+
+**Files:**
+- `lap-schemas/python/src/lap_schemas/v1/lap_record.py`
+- `lap-schemas/python/src/lap_schemas/v1/session_record.py`
+- `lap-schemas/python/src/lap_schemas/v1/timeline.py`
+- `lap-schemas/python/src/lap_schemas/v1/session_context.py`
+
+---
+
+### coaching-pipeline-contracts
+
+- **Folder:** `2-schemes/lap-schemas/coaching-pipeline-contracts/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/action_prescription.py`
+- **Language:** Python (Pydantic v2)
+
+**What it is:** The KB-grounded coaching contract chain: coaching_rule.py (public rule index split from the heavy rule bundle for caching; category/difficulty/version), coaching_insight.py (every insight cites rule_id+rule_version, carries observation+evidence tuple+confidence 0-1+severity+flagged_false_positive), action_prescription.py (priority p0-p2, status lifecycle proposed->accepted->completed/skipped/expired, rationale, expected SessionContext, machine-checkable SuccessCondition), success_condition.py (metric/target/comparison/measurement_window), action_outcome.py (measured_value, delta_vs_baseline, efficacy score 0-1, success_condition_met), weakness_episode.py (recurring weakness with recurrence_count, confidence decay/day, status open->improving->resolved->dormant, links to insights+prescriptions), next_actions.py (post-session debrief bundle).
+
+**Why RaceLab wants it:** The most valuable cluster in the area for the AI Race Engineer: rule-cited insights with confidence = the citations+confidence requirement; prescription+success-condition+outcome = exactly the (change, conditions, outcome) triple RaceLab feeds back into RAG; false-positive flagging and confidence decay are ready-made guard/feedback patterns. Translate Pydantic -> Zod nearly field-for-field.
+
+**Verifier evidence:** Verified by reading all files: this is Pydantic v2 Python (so never copypaste), but the contract chain is a genuinely instructive closed loop, not boilerplate. CoachingInsight pins rule_id + rule_version with confidence (0-1), evidence tuple, and flagged_false_positive — exactly RaceLab's citations+confidence+guard requirement; ActionPrescription (p0-p2, proposed->accepted->in_progress->completed/skipped/expired) carries a machine-checkable SuccessCondition (metric / gte|lte|within_pct / measurement_window next_session..next_7_days) and ActionOutcome records measured_value, delta_vs_baseline, and efficacy 0-1 — the (change, conditions, outcome) triple RaceLab must feed back into RAG. WeaknessEpisode adds recurrence_count, confidence_decay_per_day (default 0.02), and an open->improving->resolved->dormant lifecycle for recurring problems, and coaching_rule.py's docstring documents a deliberate rule-index-vs-bundle split for caching. The models are small but the lifecycle/feedback design decisions would otherwise cost the dev team real design time.
+
+**How to adapt:** Port these Pydantic models to Zod in packages/schema nearly field-for-field: frozen/extra=forbid becomes z.object(...).strict(), Literal unions become z.enum, UUID7 becomes a branded z.string().uuid(). Rename the domain: insight -> AI recommendation, prescription -> proposed setup change, drill_template_id -> setup parameter path, SessionContext (car_id/track_id/layout/conditions) -> chassis + track + surface/grip/temp + weather snapshot; replace LAP's EnvironmentTag (sim_practice/real_race...) and corner_tag with RC run types (practice/qual/main) and handling-symptom tags. The load-bearing patterns to keep verbatim: (1) every AI insight cites rule_id AND rule_version with confidence 0-1 plus a user-settable flagged_false_positive bool; (2) every accepted change gets a machine-checkable SuccessCondition and later an ActionOutcome (measured_value, delta_vs_baseline, efficacy 0-1) — that record IS the (change, conditions, outcome) triple to index for RAG; (3) WeaknessEpisode's recurrence_count + confidence_decay_per_day + open/improving/resolved/dormant lifecycle handles recurring handling complaints without re-alerting. Note that RaceLab lap times are manual, so SuccessCondition metrics must be things like best/avg lap or a driver-feedback tag, and outcome measurement may need a manual confirm step rather than auto-evaluation. The companion KB rule file format (id/version/category/detection condition/evidence thresholds/severity mapping, YAML) lives in docs/roadmap/02-ARCHITECTURE-DECISIONS.md under ADR-013 if the team wants the rule-authoring side too; the trivial enum deps (environment.py, weakness_category.py) were omitted as LAP-specific.
+
+**Files:**
+- `lap-schemas/python/src/lap_schemas/v1/coaching_rule.py`
+- `lap-schemas/python/src/lap_schemas/v1/coaching_insight.py`
+- `lap-schemas/python/src/lap_schemas/v1/action_prescription.py`
+- `lap-schemas/python/src/lap_schemas/v1/success_condition.py`
+- `lap-schemas/python/src/lap_schemas/v1/action_outcome.py`
+- `lap-schemas/python/src/lap_schemas/v1/weakness_episode.py`
+- `lap-schemas/python/src/lap_schemas/v1/next_actions.py`
+- `lap-schemas/python/src/lap_schemas/v1/session_context.py`
+
+---
+
+### ts-codegen-package
+
+- **Folder:** `2-schemes/lap-schemas/ts-codegen-package/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/typescript`
+- **Language:** TypeScript/JSON
+
+**What it is:** @lap/schemas npm workspace package: ~20-line package.json exposing types-only exports ('.' -> generated/schema.d.ts), generate:ts (openapi-typescript) and check:types (tsc --noEmit --strict on the generated file) scripts. The 6950-line generated schema.d.ts is openapi-typescript output of the full LAP API surface (admin/billing/coaching paths) — generated, gitignored, and LAP-domain-coupled.
+
+**Why RaceLab wants it:** Not copypaste despite being TS: the only committed code is wrapper config whose source of truth is the Python models, and the generated types are LAP's API. The pattern — types-only workspace package + typecheck-the-generated-output script — transfers to RaceLab packages/schema if any OpenAPI-driven codegen is used; with a Zod-first package most of this is unnecessary.
+
+**Verifier evidence:** Verified: typescript/ commits only a 21-line package.json (types-only exports -> generated/schema.d.ts, generate:ts + check:types scripts) plus .gitignore; the 6950-line schema.d.ts is gitignored openapi-typescript output of LAP's API (admin/billing/refund Stripe paths), so nothing here is copypaste. The wrapper alone is the tool's documented default usage and would be useless, but the surrounding schema-registry discipline at the repo root is genuinely instructive and is an explicit hunt item: README.md (single source -> TS/Swift/Kotlin codegen, generated artifacts gitignored), VERSIONING.md (calver, a precise 5-criterion breaking-change definition, frozen-v1/parallel-v2 namespace procedure), and schema-sync.yml (CI job that regenerates every consumer binding on each push so a contract change that breaks any consumer fails before merge). Kept as scheme but re-aimed at those design files rather than the wrapper.
+
+**How to adapt:** Do not replicate the Pydantic->OpenAPI->openapi-typescript chain: RaceLab's packages/schema should be Zod-first (Zod types feed both the API and the AI SDK structured-output schemas), making the typescript/ wrapper itself unnecessary. What transfers: (1) the CI discipline in schema-sync.yml — one job per PR that rebuilds every downstream consumer of the contracts (apps/api typecheck, apps/mobile typecheck, drizzle/SQL types) so an unbuildable contract change fails before merge; (2) VERSIONING.md's breaking-change taxonomy (removed/renamed required field, type narrowing, enum shrink, bound tightening, optional->required) and its frozen-v1/parallel-v2 namespace procedure — this maps almost one-to-one onto versioning chassis setup-sheet JSON schemas, where every previously saved sheet must keep parsing forever, so bump a schemaVersion per chassis template instead of mutating v1; (3) the convention notes in lap-schemas/CLAUDE.md (strict typing, UUIDv7 ids, UTC RFC3339 datetimes, extra='forbid'-style closed schemas) as defaults for packages/schema. The generated 6950-line schema.d.ts is LAP's API surface and must not be copied; if RaceLab ever does adopt OpenAPI codegen, the only pattern worth keeping from package.json is typechecking the generated output with tsc --noEmit --strict as a CI gate.
+
+**Files:**
+- `lap-schemas/README.md`
+- `lap-schemas/VERSIONING.md`
+- `lap-schemas/.github/workflows/schema-sync.yml`
+- `lap-schemas/CLAUDE.md`
+- `lap-schemas/typescript/package.json`
+
+---
+
+### pydantic-contract-test-discipline
+
+- **Folder:** `2-schemes/lap-schemas/pydantic-contract-test-discipline/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-schemas/python/tests`
+- **Language:** Python (pytest)
+
+**What it is:** 40+ model-contract test files enforcing a stated discipline: every wire model gets at least three behavioral tests (happy path, minimal/alternate form, rejection of an invalid value), with rationale-bearing docstrings (e.g. test_organization.py proves email strip+lowercase at the boundary and that the pattern still rejects malformed shapes). Also tests the repo's own meta-tooling (post-commit hook, CI workflow, pyproject).
+
+**Why RaceLab wants it:** Wrong language, right discipline: apply the same 3-tests-per-schema rule to RaceLab's Zod schemas in packages/schema (parse/safeParse happy, minimal, reject), including testing boundary normalizers — cheap insurance for an offline-first sync layer where bad data persists locally.
+
+**Verifier evidence:** Verified: ~40 pytest files in lap-schemas/python/tests enforce a real, non-generic contract-testing discipline — test_organization.py tests boundary normalizers (strip+lowercase email) with rationale docstrings explaining the failure mode they prevent; test_session.py pins additive-non-breaking schema evolution (new optional fields must default to None AND survive JSON round-trip, so old payloads keep validating); test_user.py pins frozen/extra=forbid strictness and enum rejection; test_schema_sync_workflow.py asserts the CI workflow regenerates all codegen targets (TS/Swift/Kotlin). It is Python/pydantic so not copypaste, but the discipline plus the sibling VERSIONING.md (precise 5-condition definition of "breaking" for a wire-schema package, namespace-based v1/v2 breaking-change procedure) directly hits the hunt item "shared-schema package layout, codegen, versioning discipline" and is exactly what an offline-first packages/schema needs, since stale payloads persist in expo-sqlite. This is more than boilerplate a senior dev writes by default — most teams do not pin schema evolution or test their own codegen-sync CI.
+
+**How to adapt:** Port the discipline, not the code: in packages/schema, give every Zod wire schema at least three vitest cases (safeParse happy path, minimal/alternate form, rejection of an invalid value), each with a comment stating WHY the rule exists (the test_organization.py pattern — e.g. z.string().trim().toLowerCase().pipe(z.string().email()) tested for both normalization and continued rejection). Copy the schema-evolution rule from test_session.py: every additive field gets two pinned tests — old payload without the field still parses with the documented default, and a parse→serialize→parse round-trip preserves it — this is the cheap insurance for offline-first where expo-sqlite holds payloads written by old app versions. Adopt VERSIONING.md nearly verbatim: its 5-condition definition of "breaking" and the namespace procedure (export v1/v2 schema namespaces in parallel rather than mutating v1; sync layer reads both during migration) is the single highest-value artifact here. Replicate test_user.py with z.strictObject (unknown-key rejection, literal-union rejection) and test_ids.py with a branded UUIDv7 type. The test_schema_sync_workflow.py idea translates to a CI test asserting generated artifacts (JSON Schema / OpenAPI emitted from Zod, or drizzle types) are regenerated and committed in sync. Ignore the LAP domain content of the other ~34 test files (telemetry samples, coaching insights, endurance events) — only the pattern transfers.
+
+**Files:**
+- `lap-schemas/python/tests/test_organization.py`
+- `lap-schemas/python/tests/test_session.py`
+- `lap-schemas/python/tests/test_user.py`
+- `lap-schemas/python/tests/test_ids.py`
+- `lap-schemas/python/tests/test_lap_record.py`
+- `lap-schemas/python/tests/test_schema_sync_workflow.py`
+- `lap-schemas/VERSIONING.md`
+- `lap-schemas/CLAUDE.md`
+
+---
+
+### track-catalog-wire-contract
+
+- **Folder:** `2-schemes/lap-schemas/track-catalog-wire-contract/`
+- **Source:** ``
+- **Language:** Python (pydantic) + TSX
+
+**What it is:** Wire contract for a server-curated track catalog exposed for offline client caching: master_track_id, name, layout, length, start/finish GPS + heading, sector checkpoints, paginated list envelope (38 lines, pydantic). Plus the Next.js track list/detail pages.
+
+**Why RaceLab wants it:** Converts nearly field-for-field to a Zod schema for RaceLab track database (name, GPS, surface, indoor/outdoor) with offline-cached catalog semantics; the UI pages show a workable track-DB surface.
+
+**Verifier evidence:** Added from completeness-critic finding (low): concrete wire contract for the catalog-distribution pattern the audit kept elsewhere only as architecture docs.
+
+**How to adapt:** Rewrite as Zod in packages/schema; replace sim-specific fields (sector checkpoints, start/finish heading) with RC fields (surface enum clay/hard-packed/loam/astro/carpet/grass, indoor/outdoor, photos[], notes). Keep master_track_id + paginated catalog envelope for offline sync of the track DB.
+
+**Files:**
+- `lap-schemas/python/src/lap_schemas/v1/track_catalog.py`
+- `lap_web/lap-website/src/app/app/tracks/page.tsx`
+- `lap_web/lap-website/src/app/app/tracks/[id]/page.tsx`
+
+---
+
+### Area: mobile
+
+### android-upload-queue-sync
+
+- **Folder:** `2-schemes/mobile/android-upload-queue-sync/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload`
+- **Language:** Kotlin
+
+**What it is:** Persistent offline upload pipeline: Room-backed queue (UploadQueueEntity with state/attempt_count/next_retry_at/chunks_sent), idempotent enqueue reusing the session UUIDv7 as the server Idempotency-Key (insert-or-ignore preserves in-flight progress), pure-Kotlin orchestration tick mapping Success/Retryable/PermanentFailure to queue states with a 10-attempt cap, capped-doubling backoff with additive 0-25% jitter (BackoffSchedule), and connectivity/auth-restore 'kick' policies that wake the WorkManager queue. Scenario tests cover airplane-mode resume, force-kill resume, and 422 permanent failure.
+
+**Why RaceLab wants it:** Blueprint for RaceLab's offline-first sync push layer (expo-sqlite queue draining to Next.js API): the queue schema, idempotency-key dedupe contract, retry/permanent-failure state machine, backoff curve, and 'kick on connectivity/auth-restore' triggers translate 1:1 to a TS background-sync worker.
+
+**Verifier evidence:** Every element of the claim checks out in the actual code: UploadQueueEntity.kt is a Room table with state/attempt_count/next_retry_at/last_http_code/last_error/chunks_sent and the session UUIDv7 as both PK and persisted Idempotency-Key; IdempotentUploadEnqueuer.kt uses INSERT-OR-IGNORE (rowid -1 sentinel) to preserve in-flight progress on re-enqueue; UploadOrchestration.kt is a pure-Kotlin tick mapping Success/Retryable/PermanentFailure to queue states with MAX_ATTEMPTS_BEFORE_PERMANENT=10; BackoffSchedule.kt implements the 1s-60s capped-doubling curve with additive 0-25% jitter (with a written rationale for additive over full jitter); Connectivity/AuthRestoreKickPolicy implement the kick-on-transition-into-positive-state rule; and AirplaneModeResumeUploadTest/ForceKillResumeUploadTest/PermanentFailure422ScenarioTest exist and document the cross-contract properties. It is Kotlin+Room+WorkManager+Hilt so it cannot be copypasted into Expo RN/TS, but the design is a non-trivial, heavily annotated blueprint for exactly RaceLab's hard offline-first sync push requirement (queue schema, idempotency dedupe contract, retry state machine, backoff, wake triggers), so "scheme" is the right call.
+
+**How to adapt:** Port the design, not the code: create an expo-sqlite table mirroring UploadQueueEntity (entity_id UUIDv7 PK doubling as the Idempotency-Key header AND natural FIFO sort key — no enqueued_at column needed; state, attempt_count, next_retry_at, last_http_code, last_error) and use INSERT OR IGNORE so re-enqueue never clobbers an in-flight row's key or progress. Reimplement UploadOrchestration.runOnce as a pure TS function over a DAO interface (trivially Jest-testable, exactly like the JVM-testable Kotlin kernel here) with the same Success/Retryable/PermanentFailure -> queued/failed_permanent/completed state machine and 10-attempt cap; copy BackoffSchedule's 1s,2s,4s,8s,16s,30s,60s curve with additive 0-25% jitter verbatim. Replace WorkManager with a foreground drain loop plus expo-background-task, and map the two kick policies to @react-native-community/netinfo (kick on transition into connected) and Clerk's auth listener (kick on transition into signed-in) — the transition-into-positive-state rule and the dedupe-at-scheduler note (WorkManager KEEP -> a 'drain already running' mutex in TS) carry over directly. On the Next.js side, enforce the Idempotency-Key with a unique constraint in Neon and return the original result on replay. Drop the chunked-upload parts (chunks_total/chunks_sent, BundleMultipartBuilder) — RaceLab pushes small JSON mutations, not multi-MB telemetry bundles — but replicate the three scenario tests (airplane-mode resume, force-kill resume, 422 permanent) in Jest with a scripted uploader fake; the included AirplaneModeResumeUploadTest shows the pattern. Note the scanner's claimed path was slightly off (files live under app/src/main/kotlin/... and app/src/test/kotlin/..., split across upload/ and data/ packages).
+
+**Files:**
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/UploadQueueEntity.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/UploadQueueDao.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/UploadOrchestration.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/BackoffSchedule.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/IdempotentUploadEnqueuer.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/ConnectivityKickPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/AuthRestoreKickPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/UploadWorkScheduling.kt`
+- `lap-mobile-android/app/src/test/kotlin/com/lap/mobile/upload/AirplaneModeResumeUploadTest.kt`
+
+---
+
+### android-crash-safe-local-data-layer
+
+- **Folder:** `2-schemes/mobile/android-crash-safe-local-data-layer/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data`
+- **Language:** Kotlin
+
+**What it is:** Local-first session persistence: sessions table keyed by UUIDv7 with a state machine (armed/recording/finalizing/completed/failed), heartbeat journal (5s cadence) plus startup JournalReconciler that flags rows with stale heartbeats (12x cadence) as crashed and offers finalize-from-journal recovery, CrashSafeBuffer with dual size/time flush triggers bounding worst-case data loss, orphan temp-file reconciler, and Room migrations with a tested MigrationPolicy.
+
+**Why RaceLab wants it:** Design reference for RaceLab's expo-sqlite source-of-truth: UUIDv7 client-generated IDs (sync-friendly, FIFO-sortable), session lifecycle state machine, startup reconciliation of interrupted writes, and bounded-loss flush policy all apply to offline session/setup-sheet persistence even without telemetry.
+
+**Verifier evidence:** All claimed components verified in code: UUIDv7-keyed sessions table (SessionEntity.kt imports UUID7 from lap-schemas), typed state machine with explicit allowed-transition sets (RecordingState.kt), 5s heartbeat journal with 12x-cadence stale detection (SessionJournalEntity.kt, JournalReconciler.kt), dual size/time-trigger CrashSafeBuffer, orphan reconciler, and a 10-step Room migration history with a tested strict-prod/destructive-dev MigrationPolicy. It is Kotlin/Room so copypaste is impossible, and the crash-safety machinery (journal, buffer, finalize-from-journal) over-sells relevance — it exists for 50Hz telemetry streams, while RaceLab's manual lap times and setup-sheet saves are small transactional SQLite writes that are inherently crash-safe. What earns "scheme" is the offline-first sync design the scanner under-weighted: UploadQueueEntity persists the client UUIDv7 as an idempotency key so retries replay the exact key the server first saw, gets FIFO ordering for free from UUIDv7's timestamp prefix (no enqueued_at column, JVM-testable kernel in UploadQueueOrdering.kt), tracks attempt_count/next_retry_at/last_http_code with terminal-state skipping, and the Migrations.kt file shows a disciplined offline-cache schema (signed rule_bundle for offline rules = direct analog of RaceLab's packages/kb cache; append-only feedback log queued for upload) — exactly the sync-layer design RaceLab must build on expo-sqlite.
+
+**How to adapt:** Read these as design docs, not code. Port to expo-sqlite/TS: (1) generate UUIDv7 client-side for every session/setup-version row — it doubles as the sync idempotency key (persist it so retries replay the identical key the server deduped on) and gives FIFO queue ordering by primary key with no extra timestamp column; (2) model the sync queue on upload_queue's columns (state, attempt_count, next_retry_at, last_http_code, last_error) with terminal states (completed/failed_permanent) skipped at dequeue so a dead row never blocks younger ones; (3) copy the migration discipline — full SQL migration history in one searchable file, strict ordered migrations in prod and destructive-rebuild allowed only in dev, mirroring Drizzle/expo-sqlite migration runners; (4) the rule_bundle table (version + signature + fetched_at, TTL checked at read time) is a ready-made shape for caching the RaceLab KB rules offline, and coaching_feedback's append-only indexed-by-recorded_at log is the shape for offline feedback tags awaiting sync. SKIP the heartbeat journal, CrashSafeBuffer, and finalize-from-journal recovery — those exist only because LAP streams high-frequency telemetry into large files mid-session; RaceLab's row-sized writes don't need them. The RecordingState allowed-transitions pattern (enum + canTransitionTo + documented recovery edge) is worth reusing for sync-record lifecycle states rather than recording states.
+
+**Files:**
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/Migrations.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/MigrationPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/UploadQueueEntity.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/UploadQueueOrdering.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/SessionEntity.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/RecordingState.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/SessionJournalEntity.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/data/JournalReconciler.kt`
+
+---
+
+### android-auth-offline-policy
+
+- **Folder:** `2-schemes/mobile/android-auth-offline-policy/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/auth`
+- **Language:** Kotlin
+
+**What it is:** Auth/session token flow: encrypted token storage, OkHttp TokenAuthenticator + TokenRefresher with refresh-token rotation (both halves persisted per RFC 6749), session-expired detection policy, and OfflineCapturePolicy — the two-predicate contract that recording NEVER requires auth while upload attempts are gated on Authenticated, paired with AuthRestoreKickPolicy and ProfileSyncTriggerPolicy (in sibling account/) firing only on the Anonymous->Authenticated transition.
+
+**Why RaceLab wants it:** Clerk replaces the token plumbing, but the offline-auth interplay is exactly RaceLab's problem: users must edit setups/log sessions at the track with no signal or expired session, with sync draining when auth returns. The pure-predicate policy split (can-record vs can-sync) and transition-triggered sync are worth copying as design.
+
+**Verifier evidence:** Verified: all files are Kotlin/Hilt/OkHttp (wrong stack, so never copypaste), and the raw token plumbing (TokenAuthenticator 401 handling, EncryptedSharedPreferences storage, refresh rotation per RFC 6749) is exactly what Clerk's Expo SDK replaces. But the policy layer is genuinely load-bearing design for RaceLab's hard offline-first requirement: OfflineCapturePolicy.kt encodes the two-predicate contract (permitsRecordingStart always true — local capture NEVER auth-gated — vs permitsUploadAttempt == Authenticated), AuthRestoreKickPolicy.kt drains the sync queue exactly on transitions into Authenticated (including null→Authenticated cold launch, explicitly not on silent token rotation), and SessionExpiredPolicy.kt + LogoutUseCase.kt encode the contract teams commonly get wrong: passive session expiry clears credentials ONLY and preserves the local DB + queued uploads (enforced structurally — the handler's constructor takes only token storage), while explicit logout wipes in a locked order (cancel in-flight sync → clear tokens → reset DB), with an explicit userInitiatedLogout flag distinguishing the expiry modal from normal sign-out. The extensive KDoc rationale makes these five small files read as a design doc, which is what earns scheme rather than useless.
+
+**How to adapt:** Do NOT port the token plumbing (TokenAuthenticator/TokenRefresher/SecureTokenStorage — deliberately excluded): Clerk's Expo SDK owns storage, refresh, and rotation. Port the POLICIES as pure TS functions (trivially unit-testable, no RN imports) in apps/mobile or packages/schema: (1) map AuthState to a two-value view derived from Clerk's isSignedIn — setup edits and session/lap logging into expo-sqlite must never check it, only the sync-queue drainer does; (2) in a useAuth effect that tracks the previous state, kick the sync drainer on shouldKickQueue(prev, curr) semantics — fire on signedOut→signedIn AND on the first observation after cold launch with a cached session, never on Clerk's silent token refresh; (3) when Clerk reports the session invalid (passive expiry), clear auth state only — never touch the local SQLite DB or the outbound sync queue, since unsynced track-day data must survive and drain after re-login; (4) on explicit sign-out, enforce the order stop-sync-workers → Clerk signOut → wipe local DB, each step idempotent; (5) gate the "session expired, sign in again" UI on (prevSignedIn && !currSignedIn && !userInitiatedSignOut) so it never appears after a normal logout. The KDoc comments in these files explain the why for each rule — have the dev team read them as a spec, not run them.
+
+**Files:**
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/auth/OfflineCapturePolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/auth/SessionExpiredPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/upload/AuthRestoreKickPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/account/ProfileSyncTriggerPolicy.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/auth/LogoutUseCase.kt`
+
+---
+
+### android-server-authored-rules-engine
+
+- **Folder:** `2-schemes/mobile/android-server-authored-rules-engine/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching`
+- **Language:** Kotlin
+
+**What it is:** Client side of LAP's coaching pipeline: versioned server-compiled RuleBundle (80-150 rules, YAML-authored server-side, JSON on the wire, lexicographic ISO-8601 freshness compare, ignoreUnknownKeys forward-compat), recursive JSON condition DSL evaluator (feature_threshold/and/or; missing feature = dormant, malformed condition = loud failure), strict opt-in applicable_to platform tags, min_corroborating_laps anti-noise gate, Room bundle cache, global 30s prompt throttle, and a user-feedback store on each insight.
+
+**Why RaceLab wants it:** Closest existing analogue to RaceLab's ~150-rule KB + deterministic symptom mapping: versioned KB bundle distribution/caching, deterministic dormant-vs-error evaluation semantics, corroboration thresholds for noisy rules, and per-rule applicability tags map directly onto the AI race engineer's retrieval layer (packages/kb) and its guard philosophy.
+
+**Verifier evidence:** Verified: all claimed mechanisms exist in the Kotlin source. Rule.kt defines the KB-rule schema (recursive JSON condition DSL, opaque insight payload, strict opt-in applicable_to tags, min_corroborating_laps anti-noise gate); RulesEngine.kt implements the documented dormant-vs-loud semantics (missing feature returns false, malformed condition throws RuleBundleException.Condition); RuleBundle.kt/RuleBundleCache.kt implement versioned bundle distribution with ISO-8601 lexicographic freshness and byte-for-byte signature-verified caching; CoachingFeedbackStore.kt encodes a weak/strong feedback-signal design (DISMISSED vs FLAGGED_WRONG, append-only, clear-after-upload). It is Kotlin so copypaste is impossible, and the telemetry session wiring is irrelevant to RC racing, but the rule-schema, applicability-tag, evaluation-semantics, bundle-versioning, and feedback-loop designs map directly onto RaceLab's packages/kb and guard-layer decisions — the KDoc is essentially an embedded design spec with decision rationale, well above generic boilerplate.
+
+**How to adapt:** Read these as a design spec for packages/kb, not as code to port. (1) Re-express the Rule shape as a Zod schema: id, category, recursive condition DSL, insight payload, applicable_to tags, min_corroborating threshold — for RaceLab, applicable_to becomes chassis-template/surface/power-class tags and the strict opt-in semantics (untagged rule is EXCLUDED) is the load-bearing decision to keep; condition predicates become symptom/feedback-tag and conditions matchers instead of telemetry feature thresholds. (2) Preserve the dormant-vs-loud split: missing input data means the rule silently doesn't retrieve (dormant), while a malformed rule throws — wire that throw into the 50-scenario CI eval gate so bad KB authoring fails the build, mirroring the empty-retrieval-equals-honest-refusal philosophy. (3) The versioned-bundle pattern (schema_version, bundle_id, compiled_at in UTC ISO-8601 compared lexicographically; cache stores verbatim bytes so signature verification round-trips; TTL miss returns null, signature mismatch escalates) is directly reusable if the compiled KB is ever shipped to the Expo client for offline symptom mapping in expo-sqlite; BundleSource's four-way fresh/fresh-cache/stale-cache/no-bundle states map cleanly to offline-first UX banners. (4) CoachingFeedbackStore's two-kind log (dismissed = weak signal, flagged-wrong = strong signal, append-only, clear-after-successful-upload) is a ready-made design for capturing advice outcomes feeding the (change, conditions, outcome) triples. Skip SessionCoachingHook.kt, OkHttpRuleBundleClient.kt, the throttle, and all UI/test files — telemetry-session and Android-specific plumbing with no RC analogue.
+
+**Files:**
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/Rule.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/RuleBundle.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/RulesEngine.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/RuleBundleSubset.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/RuleBundleCache.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/BundleSource.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/CoachingFeedbackStore.kt`
+- `lap-mobile-android/app/src/main/kotlin/com/lap/mobile/coaching/InsightPromptPayload.kt`
+
+---
+
+### ios-chunked-upload-coordinator
+
+- **Folder:** `2-schemes/mobile/ios-chunked-upload-coordinator/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/mobile-ios/LapCoachMobileApp/Services/UploadCoordinator.swift`
+- **Language:** Swift
+
+**What it is:** Actor-based resumable upload coordinator: register -> upload-chunks -> finalize protocol against the Flask backend, per-session persisted progress (remoteSessionID, lastUploadedChunkIndex, totalChunkCount) so retries resume mid-file, fixed retry ladder (15s..1h) with retryable-vs-permanent error split, max-2 concurrent uploads, and background-URLSession completion-handler bookkeeping (with NetworkService.swift as the HTTP seam).
+
+**Why RaceLab wants it:** Pattern reference for RaceLab's large-file sync (setup photos, share-card assets to Vercel Blob): resumable chunking with persisted high-water mark, normalize-on-enqueue state repair, and bounded concurrency. Simpler and less rigorous than the Android queue, so secondary to it.
+
+**Verifier evidence:** Verified: UploadCoordinator.swift is a 300-line Swift actor implementing exactly the claimed design — register/upload-chunks/finalize protocol, persisted high-water mark (RecordedSession.lastUploadedChunkIndex/totalChunkCount/remoteSessionID/retryCount/nextRetryAt in Models/Session.swift), fixed retry ladder [15s,60s,300s,900s,3600s], retryable-vs-permanent split (NetworkServiceError.isRetryable: 408/429/5xx retry; syncUnavailable and URLError.cancelled permanent), max-2 concurrency, normalizeForEnqueue state repair plus chunk-count-drift repair. It is Swift against a Flask backend so nothing is liftable, but the durable per-item upload state machine with resume-across-restart semantics (isReadyForRetry, sessionsReadyForUpload(at:)) is a compact, complete reference for RaceLab's hard offline-first sync/upload queue — a named high-value hunt item — and goes beyond generic retry boilerplate (state repair on enqueue and persisted nextRetryAt are the parts teams get wrong). Scheme confirmed, with the caveat that the chunking protocol itself does not transfer to Vercel Blob.
+
+**How to adapt:** Port the persisted state machine, not the protocol: model an expo-sqlite "outbox" table with the RecordedSession upload columns (uploadState enum pending/registering/uploading/finalizing/uploaded/failed, remoteId, retryCount, nextRetryAt, lastAttemptAt, lastError) and replicate isReadyForRetry + the on-launch resume query (sessionsReadyForUpload) as the sync layer's drain trigger. Drop the chunk high-water mark for photos — RaceLab images are small, so whole-file retry against @vercel/blob client uploads (token-exchange multipart) replaces the register/chunks/finalize dance; keep register/finalize only if you need a server-side Neon row created before/after the Blob put. Keep three behaviors verbatim: normalize-on-enqueue state repair (reset transient states left by a killed app), the retryable-vs-permanent error taxonomy (retry 408/429/5xx and network errors, never retry 4xx/auth/cancel), and bounded concurrency (2) in the queue pump. The background-URLSession completion-handler bookkeeping is iOS-native-only; in Expo, drain the queue on app-foreground/NetInfo-reconnect events instead. Note: the first-pass scanner flags a more rigorous Android upload queue elsewhere in this repo — treat this Swift version as the compact readable reference and dedupe against that one in the handoff.
+
+**Files:**
+- `mobile-ios/LapCoachMobileApp/Services/UploadCoordinator.swift`
+- `mobile-ios/LapCoachMobileApp/Services/NetworkService.swift`
+- `mobile-ios/LapCoachMobileApp/Models/Session.swift`
+
+---
+
+### lap-mobile-generated-prescription-models
+
+- **Folder:** `2-schemes/mobile/lap-mobile-generated-prescription-models/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-mobile`
+- **Language:** Swift
+
+**What it is:** Retired repo containing only openapi-generator Swift output of the LAP coaching schema. The interesting cluster is the closed-loop coaching data model: ActionPrescription (priority, rationale, status lifecycle proposed->accepted->completed/skipped/expired, expectedContext, successCondition, validUntil) -> SessionContext/EnvironmentTag (car, track, conditions) -> ActionOutcome (measuredValue, deltaVsBaseline, successConditionMet, prescriptionEfficacyScore 0-1, confidenceChange), plus WeaknessEpisode/DriverProgressSnapshot.
+
+**Why RaceLab wants it:** The prescription->expected-conditions->measured-outcome schema is a ready-made shape for RaceLab's (change, conditions, outcome) triples that feed the AI race engineer, including efficacy scoring to learn which setup changes worked. The generated Swift itself is disposable; the canonical schema source lives in lap-schemas (another audit area).
+
+**Verifier evidence:** Repo contains only 24 openapi-generator Swift models — no app code — so copypaste is impossible, but the claimed closed-loop data model is real and verified: ActionPrescription has the proposed->accepted->in_progress->completed/skipped/expired lifecycle, expectedContext (car/track/conditions/EnvironmentTag), a machine-checkable SuccessCondition (metric, gte/lte/within_pct, measurement window next_session/next_3_sessions/next_7_days) and validUntil; ActionOutcome closes the loop with measuredValue, deltaVsBaseline, successConditionMet, prescriptionEfficacyScore (NumericRule-bounded 0-1) and confidenceChange. This is exactly the (change, conditions, outcome) triple + efficacy-learning shape RaceLab's AI race engineer needs, and CoachingInsight (ruleId/ruleVersion/evidence/confidence/flaggedFalsePositive) is a ready citation+confidence output schema. Caveat confirmed: the canonical source is duplicated in lap-schemas (python/src/lap_schemas/v1/action_prescription.py etc.), so these Swift files are only the design reference if that audit area doesn't already carry it.
+
+**How to adapt:** Read these as a data-model spec, not code: re-express the loop as Zod schemas in packages/schema plus Neon tables (setup_change_proposals, change_outcomes), and dedupe against lap-schemas/python/src/lap_schemas/v1/ (action_prescription.py, action_outcome.py) which is the canonical, better-documented source if that audit area is in the handoff. Rename to RaceLab vocabulary: ActionPrescription -> setup-change recommendation (keep priority, rationale, status lifecycle, validUntil expiry); SessionContext -> conditions snapshot (swap car/track/layout for chassis + track surface/grip/temp + weather snapshot); SuccessCondition metric must target manually-entered lap times or driver feedback tags since RC has no telemetry. Keep the key ideas verbatim: machine-evaluable SuccessCondition (comparison enum + measurement window) so outcome scoring is deterministic, efficacyScore 0-1 + confidenceChange to learn which changes worked, and CoachingInsight's ruleId/ruleVersion/evidence/confidence/flaggedFalsePositive as the AI engineer's structured-output + citation schema. WeaknessEpisode's confidence-decay/recurrence/status pattern adapts well to persistent handling symptoms (e.g. chronic corner-entry push). Ignore everything telemetry-derived in the rest of the folder (TelemetrySample, SensorConfig, LapRecord, DriverProgressSnapshot skill dimensions) and do not port the Swift Codable boilerplate.
+
+**Files:**
+- `lap-mobile/Generated/Models/ActionPrescription.swift`
+- `lap-mobile/Generated/Models/ActionOutcome.swift`
+- `lap-mobile/Generated/Models/SuccessCondition.swift`
+- `lap-mobile/Generated/Models/SessionContext.swift`
+- `lap-mobile/Generated/Models/EnvironmentTag.swift`
+- `lap-mobile/Generated/Models/CoachingInsight.swift`
+- `lap-mobile/Generated/Models/WeaknessEpisode.swift`
+
+---
+
+### Area: web-misc
+
+### double-optin-waitlist-flow
+
+- **Folder:** `2-schemes/web-misc/double-optin-waitlist-flow/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-website/functions/api`
+- **Language:** TypeScript (Cloudflare Pages Functions)
+
+**What it is:** Complete GDPR double-opt-in flow: POST /api/waitlist (validate + consent checkbox + Turnstile siteverify + sign token + send confirm email, contact NOT stored until click), GET /confirm (verify token, commit to Resend audience, all token failures fold into one redirect to avoid a confirmation oracle), GET /unsubscribe, plus a for-schools B2B form with reply-to routing. Fail-closed on missing secrets, 303 POST->GET redirects, 502-vs-400 error semantics.
+
+**Why RaceLab wants it:** Design template for any RaceLab email capture / account-email verification: true double-opt-in sequencing, anti-enumeration uniform responses, bot-gating before spending email quota. Handlers are CF Pages-shaped (onRequestPost(context)) so port the design, not the files.
+
+**Verifier evidence:** Verified by reading all four handlers plus the _lib token module. The handlers are Cloudflare Pages Functions (export async function onRequestPost(context) with env from Pages bindings) coupled to Resend's /emails and /audiences APIs and Cloudflare Turnstile siteverify — none of which are in the RaceLab stack, and Clerk already owns account-email verification, so this is not copypaste. But the design is genuinely load-bearing and well past generic CRUD: true double-opt-in where the contact is only stored after the confirm click, all token failure modes folded into one 303 redirect to prevent a confirmation oracle, HMAC-signed stateless tokens with constant-time comparison and cryptographic domain separation between confirm (7-day expiry) and unsubscribe (deliberately no expiry, GDPR Art. 7) purposes, fail-closed on any missing secret, and 502-vs-400 semantics distinguishing upstream failure from user error. waitlist-token.ts itself is dependency-free Web Crypto TypeScript (crypto.subtle, btoa/atob) that would run unchanged in a Next.js route handler, which strengthens the scheme value.
+
+**How to adapt:** Port each onRequestPost/onRequestGet(context) handler to a Next.js App Router route handler (export async function POST(req: Request) in app/api/.../route.ts) reading secrets from process.env instead of Pages bindings; waitlist-token.ts works as-is in Next.js on Node 18+ or edge runtime (crypto.subtle and btoa/atob are global), just rename. Do NOT use this for account verification — Clerk handles that; the applicable RaceLab surfaces are (a) any pre-launch waitlist/newsletter capture, (b) unsubscribe links on any outbound email digests, and (c) the domain-separation + constant-time-verify HMAC pattern as capability tokens for unlisted setup-share links. Swap Resend audience calls for whatever ESP they pick, and Turnstile for their bot gate (e.g. Cloudflare Turnstile works fine on Vercel too, or Vercel BotID) — keep the ordering: bot-gate BEFORE spending email quota, store contact only AFTER the click. Preserve the four invariants documented in the file comments: fail-closed when any secret is missing, one uniform response for every token failure, no-expiry unsubscribe tokens, and soft opt-out (flag, not delete) for audit trail. functions/api/for-schools.ts was reviewed and excluded as a generic contact form; its one reusable idea (load-bearing notification email returns 502 on failure, courtesy receipt is best-effort) is noted here so the file need not be copied.
+
+**Files:**
+- `lap-website/functions/_lib/waitlist-token.ts`
+- `lap-website/functions/api/waitlist.ts`
+- `lap-website/functions/api/waitlist/confirm.ts`
+- `lap-website/functions/api/waitlist/unsubscribe.ts`
+
+---
+
+### hardened-signup-endpoint
+
+- **Folder:** `2-schemes/web-misc/hardened-signup-endpoint/`
+- **Source:** `C:/Users/Admin/Documents/Telemetry/lap-waitlist/functions/api/signup.ts`
+- **Language:** TypeScript (Cloudflare Pages Function + D1)
+
+**What it is:** Audit-remediated public endpoint with 8 explicit defense layers: method gate, Content-Type whitelist, body-size cap, rate limit (Workers binding with D1 sliding-window fallback using atomic INSERT-then-COUNT in one batch transaction — fixes a documented check-then-insert race), NFKC normalization + metachar rejection, tight email regex, uniform anti-enumeration {success:true} for fresh and duplicate, structured-JSON failure logging with an email_send_failed_at retry stamp. Companion SQLite DDL in migrations/0001-0003 (signups table with id-as-position, rate_limit_log evolution).
+
+**Why RaceLab wants it:** Blueprint for every unauthenticated RaceLab API route and for free-tier metering: the insert-first atomic rate limiter translates directly to Neon Postgres (or expo-sqlite), and the layered-validation + uniform-response checklist is exactly what the AI-call metering endpoint needs. CF bindings (D1Database, PagesFunction, waitUntil) make it non-copypaste.
+
+**Verifier evidence:** Verified: signup.ts is exactly as claimed — a hardened public endpoint with 8 explicit defense layers (method gate, Content-Type whitelist, 2KB body cap, rate limit, NFKC+metachar rejection, tight email regex, uniform {success:true} for fresh and duplicate, structured failure logging with email_send_failed_at retry stamp). It is hard-coupled to Cloudflare (PagesFunction<Env>, D1Database, ctx.waitUntil, db.batch, cf-connecting-ip), so it cannot be copypaste. It clears the 'scheme' bar because of the non-obvious, battle-tested rate-limiter design: migrations 0002→0003 document a live hammer-test failure (15 parallel POSTs, zero 429s) caused by a check-then-insert race plus epoch-seconds (ip,ts) PK + INSERT OR IGNORE silently deduping same-second bursts, fixed by insert-FIRST-then-COUNT in one atomic batch transaction — directly relevant to RaceLab's AI-call metering on Neon.
+
+**How to adapt:** Treat this as the checklist for every unauthenticated RaceLab route (share-link page, signup) and for the free-tier AI-call meter, not as code to lift. Port to a Next.js App Router Route Handler: PagesFunction -> route handler, cf-connecting-ip -> x-forwarded-for, ctx.waitUntil -> waitUntil from @vercel/functions. The key transplant is the insert-first atomic limiter: on Neon use one statement, e.g. WITH ins AS (INSERT INTO usage_log(user_id, ts) VALUES ($1, now()) RETURNING 1) SELECT count(*) FROM usage_log WHERE user_id=$1 AND ts > $window — for the 5-calls/month meter key on Clerk userId with a monthly window instead of IP/60s, and keep the 'count includes my own insert, compare with >' semantics plus the probabilistic cleanup sweep (or a Vercel cron). Keep the uniform-response anti-enumeration pattern verbatim for any email-accepting endpoint. Discard lines 216-338 (renderConfirmationHtml/Text + sendConfirmationEmail): LAP-branded Resend marketing email, irrelevant to RaceLab. No secrets in any of the four files (API keys are env-bound).
+
+**Files:**
+- `lap-waitlist/functions/api/signup.ts`
+- `lap-waitlist/migrations/0001_create_waitlist.sql`
+- `lap-waitlist/migrations/0002_rate_limit_and_email_status.sql`
+- `lap-waitlist/migrations/0003_rate_limit_drop_pk.sql`
+
+---
+
+## Category 3 - Evaluated and rejected (do not re-mine)
+
+Everything below was looked at and ruled out, so the dev team does not waste time re-auditing LAP. Two tiers: items a verifier read in depth and killed, and regions the scanners classified useless at a coarse grain.
+
+### Rejected after in-depth verification
+
+- **track-car-catalog** (`C:/Users/Admin/Documents/Telemetry/lap-backend/coaching/catalog`) - Read loader.py, equivalence.py, the backing ORM tables, and sample YAMLs.
+- **tiered-rate-limiting** (`C:/Users/Admin/Documents/Telemetry/lap-backend/app/rate_limit.py`) - The file is FastAPI middleware (Python) whose backing limiter (lap-backend/infra/rate_limiter.py) is a textbook 31-line Redis fixed-window INCR+EXPIRE that its own docstring calls the "cheapest scheme...
+- **gdpr-export-retention** (`C:/Users/Admin/Documents/Telemetry/lap-backend/app/routers/me.py`) - me.py is generic FastAPI CRUD plus a serialize-tables-to-zip GDPR export and a cascade delete with one 409 guard — patterns any senior dev knows, not architecture worth studying.
+- **track-fingerprint-matching** (`C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/track_detection.py`) - The matcher's entire design presupposes a driven GPS lap trace: compute_track_fingerprint() hard-requires RaceChrono telemetry columns ("Latitude (deg)", "Lap #", "Distance (m)") and the match gates (±6% median lap-length tolerance, bbox IoU ≥ 0.75, start/finish proximity with 200 m saturation) are meaningless for RaceLab's single phone-GPS point — the claim itself admits the RaceLab version is "simplified — no laps needed, just proximity", which reduces to a trivial haversine nearest-track query any senior dev knows.
+- **sqlite-pg-dual-store** (`C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/db`) - The claim's analogy is false: sql_compat.py is a call-time regex shim (gated on USE_PG, with a hardcoded _PG_CONFLICT_TARGETS dict of 20 LAP table names and a _BOOL_COLUMNS set) that lets ONE Python codebase run against either SQLite or Postgres as alternative deployments — RaceLab's offline-first problem is two TS codebases (expo-sqlite mobile + Neon API) joined by a sync protocol, and this directory contains no sync machinery at all (no queues, conflict resolution, or change tracking).
+- **session-annotations** (`C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/annotations.py`) - annotations.py is generic single-table SQLite CRUD: the claimed "full-text search" is actually a LIKE '%q%' scan over body/title/tags_json (lines 188-203), tags are a JSON-string column, and there is no author/user column at all (single-user desktop design).
+- **pdf-report-generation** (`C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/reporting_pdf.py`) - The file (430 lines + 500 lines of inline tests) is purely a Python runtime-environment workaround: it probes for WeasyPrint at import (catching OSError for missing GTK DLLs on Windows), falls back to pdfkit, then to a `shutil.which("wkhtmltopdf")` subprocess — a backend chain that exists solely because desktop Python deployments can't guarantee native renderers.
+- **gamification-engine** (`C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/gamification`) - The code is exactly what the scanner described (verified xp.py's floor(sqrt(xp/100)) formula, streaks.py's daily-streak rules, achievements.py's 15 threshold checks, licence.py's 6-tier ladder, and migration 041's three tables), but it is generic gamification any senior dev designs in an afternoon — quadratic XP curve, Duolingo-style streak counter, ON CONFLICT DO NOTHING unlock log.
+- **tracks-db-ui** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/app/tracks`) - The five files are plain web CRUD tightly bound to LAP infra: list page with TanStack Query optimistic delete (the verbatim pattern from TanStack docs, onMutate/cancelQueries/snapshot/rollback), a detail page editing only `name` and `has_joker`, and an evolution page built on telemetry-derived data RaceLab cannot have (sector times, per-corner avg_time_loss_s/avg_min_speed_mps, pipeline scores).
+- **annotations-comments-ui** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/app/annotations/page.tsx`) - The file (lap_web/lap-website/src/app/app/annotations/page.tsx, 158 lines) is plain CRUD list UI: a TanStack useQuery fetch of /annotations, a useMemo substring filter over three fields, and a DataTable with badge colors and row-click navigation — exactly the "generic pattern any senior dev knows" that the rules classify as useless rather than scheme.
+- **karts-preset-catalog-crud** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/app/karts`) - The three pages are flat hardcoded-field CRUD: new/page.tsx prefills an 8-field form (name/number/manufacturer/model/engine/power_hp/weight_kg/notes) from a fetched Record<segment, PresetKart[]> catalog with a single "name is required" validation; page.tsx is list+search+optimistic delete; [id]/page.tsx is inline edit.
+- **offline-read-cache** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/session-cache.ts`) - session-cache.ts is 141 lines of generic promise-wrapped IndexedDB (a browser-only API that does not exist in React Native), and its claimed "oldest-eviction" is not actually implemented — `_cachedAt` is stamped but never read; eviction deletes the first openCursor() entry, i.e.
+- **nextjs-route-handler-abuse-guard** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/api`) - The directory is a marketing-site lead funnel plus Stripe checkout: leads/route.ts wires lead-validation/lead-abuse/lead-challenge/lead-delivery, and the three billing/* routes are raw Stripe Checkout calls (RaceLab uses RevenueCat).
+- **lap-og-worker-stub** (`C:/Users/Admin/Documents/Telemetry/lap_web/lap-og-worker`) - The entire worker is a 33-line self-declared placeholder (comment in src/index.tsx: "Placeholder SVG - replace with satori + resvg-wasm for PNG output") that returns a hardcoded SVG with three text elements plus Cache-Control/nosniff/CSP headers; package.json contains only wrangler and wrangler.toml is 3 lines.
+- **track-car-catalogs** (`C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/track_catalog.py`) - Read all three files: track_catalog.py (38 lines), car_catalog.py (37 lines), track_day_create.py (33 lines).
+- **users-orgs-notes-auth** (`C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/organization.py`) - All six files are thin Pydantic v2 wire shapes (user.py is 19 lines; pairing.py is three token-string models) whose only substance is docstring rationale for length bounds and a nullable author FK — generic patterns, not transferable design.
+- **transfer-link-feedback-patterns** (`C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/transfer_link.py`) - Read transfer_link.py, bridge_suggest.py, and divergence_point.py.
+- **android-core-observability** (`C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/core`) - The directory contains 18 Android-Kotlin files (Hilt @Inject/@Singleton, android.content.SharedPreferences, io.sentry.SentryOptions imports) implementing a textbook decorator pattern: OptOutAwareAnalyticsReporter/OptOutAwareSentryReporter check a boolean preference per call before delegating, plus NoOp fallbacks gated by placeholder-key sniffing (isRealPostHogKey checks for "phc_" prefix and a "placeholder" substring), a generic Result<T,E>/DomainError sealed class, and a two-branch CrashFreeUsersGate.
+- **ios-track-model-store** (`C:/Users/Admin/Documents/Telemetry/mobile-ios/LapCoachMobileApp/Models/Track.swift`) - Track.swift is 62 lines: Track {id, name, city, startFinishLine?, notes}, a textbook haversine on GeoPoint, and 3 hardcoded kart circuits; the companion TrackStore.swift is 26 lines of UserDefaults JSON persistence filtering out default-library ids.
+- **membership-pricing-config** (`C:/Users/Admin/Documents/Telemetry/lap-website/src/data/membership.ts`) - membership.ts is 87 lines of LAP marketing copy: a MEMBERSHIP const with display-string prices ('€19.90'), a FeatureGroup[] of telemetry-coaching feature bullets, and an FAQ array, consumed only by Astro marketing pages (pricing.astro, waitlist.astro, components/pricing/*).
+- **transactional-email-templates** (`C:/Users/Admin/Documents/Telemetry/lap-waitlist/emails`) - The four files in lap-waitlist/emails (01-welcome, 02-nurture-manifesto, 03-nurture-pattern, 04-launch-day, each .html + .md) are 100% LAP launch marketing copy in French (Founding-50 pricing, June 8 launch, City Kart Nantes) wrapped in ~40 lines of textbook table-layout email boilerplate.
+- **track-svg-renderer** (`C:/Users/Admin/Documents/Telemetry/com_tool/lap-track-svg`) - The package is a LAP Coach Instagram marketing-poster generator (README: "Branded SVG composers for LAP Coach Instagram content"; fixtures like post-09-founding-counter.yaml and ig-profile.yaml are launch-campaign posts) plus telemetry loaders (loaders.py reads RaceBox GPS-logger CSVs and FastF1 F1 data) — both useless-by-default categories.
+- **gamification-engagement-specs** (`C:/Users/Admin/Documents/Telemetry/docs/superpowers/specs/2026-06-07-gamification-vision-design.md`) - The doc's entire substance is telemetry-gated: corner stars require analyzer corner scores and theoretical corner-time deltas (§2), the technique tree requires detecting driving patterns like "trail-braking signature on >=3 corners" in telemetry, quests are auto-generated from coaching-engine output, and career gates use consistency-CV and pillar scores — none of which exist in RaceLab, where lap times are manual entry.
+- **archive-html-pdf-reporting** (`C:/Users/Admin/Documents/Telemetry/Analysis/archive/v2/reporting_pdf.py`) - Read all 833 lines of Analysis/archive/v2/reporting_pdf.py: it is a generic Python HTML-to-PDF wrapper whose entire design is import-time probing of three local rendering backends (WeasyPrint, pdfkit, wkhtmltopdf binary on PATH) plus A4/margin options and output sanity checks (PDF magic bytes, min file size).
+
+### Classified useless by area scanners
+
+**lap-backend** - lap-backend is the frozen (2026-05-11) FastAPI+Celery+Postgres V2 backend for LAP (~95k LOC, 342 tests), covering session ingest, a YAML coaching-rules engine, prescriptions/outcomes, Clerk auth, Stripe billing, orgs, and admin tooling. Everything is Python, so nothing is copypaste for RaceLab's TypeScript stack, but it is the single richest "scheme" source in the LAP codebase: the declarative rule library + confidence gate + signed bundle + prescription→outcome→efficacy loop is a near-complete blueprint for RaceLab's KB-grounded AI race engineer (deterministic retrieval, guard rails, eval gates, outcome triples), and the Clerk provisioning, subscription gating, tiered rate limiting, and UUIDv7/JSONB data-model discipline map directly to the planned Next.js/Neon backend. Telemetry processing, sim-racing bridges, and ops plumbing are useless for RaceLab.
+
+- `C:/Users/Admin/Documents/Telemetry/lap-backend/app/routers/sessions.py` - RC cars have no telemetry and RaceLab lap times are manual entry in V1 — the entire capture/upload/async-processing pipeline is out of scope. (The idempotency-key pattern it uses is already captured in api-core-plumbing.)
+- `C:/Users/Admin/Documents/Telemetry/lap-backend/domain` - All of it operates on continuous telemetry channels or sim-racing endurance strategy — no RaceLab analog exists (manual lap times, no channels, no stints/fuel). domain/billing.py is the one exception, covered in stripe-billing-gating.
+- `C:/Users/Admin/Documents/Telemetry/lap-backend/app/routers` - Sim-integration is explicitly out of scope for RaceLab; orgs/coach-seats is a B2B team model RaceLab V1 doesn't have (its social layer is follower-based, not seat-based) — the invite-token flow could be revisited if teams ever land, but not now. The valuable pieces of these surfaces (cursor pagination, notes table, prescription loop) are already captured by other items.
+- `C:/Users/Admin/Documents/Telemetry/lap-backend/scripts` - LAP-specific deploy/ops plumbing on a different stack (Celery/R2/Prometheus vs Vercel); RaceLab gets CI/observability from Vercel+Sentry+PostHog defaults. The k6 scripts are JS but trivially regenerated and endpoint-coupled.
+
+**lap_web-backend** - The old deployed V2 monorepo backend: a Python Flask SaaS (telemetry_tool/, 60 alembic migrations) plus a Figma-exported React share-card kit (src/), data dumps, and ops/validation scripts. The bulk (telemetry pipeline, vehicle physics, optimizers) is useless for RaceLab, but it contains mature, directly-instructive designs for almost every RaceLab pillar: Open-Meteo conditions engine, plan entitlements + monthly usage metering, GPS track fingerprint matching, annotation/comment model, a deterministic symptom-to-cause coaching taxonomy that prefigures the AI Race Engineer's rule layer, an offline upload sync queue, and API infrastructure (envelopes, keyset pagination, idempotency keys, signed share URLs). Note: the sibling lap-backend repo likely contains newer copies of some of this (weather, auth, entitlements), so dedupe against that area's findings.
+
+- `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool/auth` - Clerk replaces this entire surface in RaceLab; password/JWT/OAuth/TOTP code has no home. The only salvageable idea (workspace RLS) is already captured by the migrations item. Strictly skip.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/telemetry_tool` - RC cars have no telemetry and lap times are manual in V1 — real-telemetry processing, vehicle physics, and racing-line optimization are useless-by-default per the brief. lap_oracle's 'setup' module is sim-physics parameter mapping, not setup-sheet management.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/scripts` - LAP-specific research and deploy plumbing (Cloudflare/VPS/Stripe) with no transferable design beyond what the entitlements and migrations items already capture.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/tools` - Telemetry-pipeline parity testing for a system RaceLab doesn't have; not an LLM eval harness despite the 'harness' name.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/data` - Raw telemetry session data and kart/car calibration dumps — explicitly useless-by-default for RaceLab; covers both data/ and fixtures/.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/alembic` - Telemetry-channel bookkeeping for a feature RaceLab lacks; the one generic idea (tracks workspace RLS) duplicates patterns already in the main migration chain item.
+
+**lap_web-frontend** - Production V2 Next.js 14 webapp (~120 routes) plus a stub Cloudflare OG-image worker. Because this is the one LAP surface already in RaceLab's language/framework (TypeScript + React + Next.js App Router + TanStack Query + Zustand), it is the richest copypaste source in the whole codebase: typed API client with envelope parsing, React Query key factory, a complete client-side entitlements/quota-gating system, unit/lap-time formatting utilities, and Next.js SEO/OG metadata helpers. A second tier of scheme-grade material covers the exact UX/data-model patterns RaceLab needs (track DB cards with GPS, annotation/comment lists, create-vehicle-from-manufacturer-preset flow, share-card composition, tier-mocked Playwright gating tests). Roughly half the repo — telemetry charts, 3D/GSAP 'experience' layer, marketing funnel, Stripe plumbing — is useless for RaceLab.
+
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/components/app/charts` - RC cars have no telemetry — lap times are manual entry in RaceLab V1; the entire trace/G-G/corner-analysis machinery has no target.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/experience` - Marketing-site eye candy specific to LAP's web brand; no RaceLab V1 surface needs any of it.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/(marketing)` - LAP-specific marketing copy, funnel experiments, and content-QA tooling — RaceLab is a mobile product with a single share-page web surface.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/lib/stripe-billing.ts` - RaceLab uses RevenueCat; the metering/limits design worth keeping already lives in the entitlements item, not here.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/app/admin` - Not a RaceLab V1 pillar; PostHog covers product analytics out of the box.
+- `C:/Users/Admin/Documents/Telemetry/lap_web/lap-website/src/i18n` - Localization is not in RaceLab's V1 scope, and the pattern is trivial to recreate if it ever is.
+
+**lap-schemas** - lap-schemas is LAP's frozen contracts-first schema registry: 101 Pydantic v2 models (one file per domain concept, frozen+extra=forbid, UUIDv7 IDs) -> OpenAPI 3.1 -> TypeScript/Swift/Kotlin codegen, with a calver+namespace versioning policy and a CI gate that fails any schema change that cannot regenerate all targets. There is no honest copypaste here — the only committed source is Python, and the generated TS is LAP-API-coupled — but the registry/versioning/CI discipline maps 1:1 onto RaceLab's planned packages/schema, and the coaching contract chain (rule -> insight -> prescription -> success condition -> measured outcome) is the single best in-house blueprint for the AI Race Engineer's (change, conditions, outcome) data model.
+
+- `C:/Users/Admin/Documents/Telemetry/lap-schemas/kotlin` - RaceLab is TypeScript end-to-end (Expo RN + Next.js + shared TS package), so Kotlin/Swift binding generation and cross-language wire-parity testing have no consumer. Only salvageable idea — round-trip serialization tests against the canonical wire format — is already covered by a shared Zod package in a single-language monorepo.
+- `C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/telemetry_sample.py` - RC cars have no telemetry and lap times are manual in RaceLab V1, so sample/sensor/data-quality/ingest schemas have no analog; the strategy/endurance/benchmark/skill analytics are full-scale-motorsport-specific products with no RaceLab counterpart.
+- `C:/Users/Admin/Documents/Telemetry/lap-schemas/python/src/lap_schemas/v1/billing.py` - RaceLab uses RevenueCat, not Stripe Checkout, and this file carries no metering/free-tier-limit design (seat caps are enforced via the org schema, covered elsewhere). Nothing instructive beyond keep-plan-literals-canonical-and-map-server-side.
+
+**mobile** - Three native mobile codebases, all wrong-stack for RaceLab (Expo RN): lap-mobile-android is a frozen but exceptionally well-built Kotlin/Compose capture app (~21.8K LOC, 218 tests, TDD-built with unusually rich design-rationale comments); mobile-ios is an active SwiftUI scaffold with a chunked resumable-upload coordinator; lap-mobile is a retired repo containing only openapi-generated Swift models. Nothing is copy-pasteable, but the Android repo's offline-first architecture (crash-safe journal -> idempotent persistent upload queue -> backoff/auth-kick policies) and its server-authored versioned rules-engine are first-rate design references for RaceLab's sync layer and AI-engineer KB pipeline; the telemetry capture/BLE/HUD halves are useless for RC racing.
+
+- `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/capture` - RC cars have no telemetry and lap times are manual entry in RaceLab V1 — GPS/IMU/BLE capture, UBX parsing, and telemetry bundling have no counterpart.
+- `C:/Users/Admin/Documents/Telemetry/lap-mobile-android/app/src/main/kotlin/com/lap/mobile/dashboard` - Entirely driven by live telemetry that RaceLab does not have; no in-car HUD exists in the product.
+- `C:/Users/Admin/Documents/Telemetry/lap-mobile-android` - Wrong UI framework (Compose vs React Native) and LAP-specific app chrome; the repo is also explicitly frozen pointing at a dead API host. Nothing here transfers beyond what the other items capture.
+- `C:/Users/Admin/Documents/Telemetry/mobile-ios` - Telemetry capture, BLE GPS hardware, and GPS-derived lap timing have no RC equivalent (manual lap times in V1); the SwiftUI views are wrong-framework LAP chrome.
+
+**datalogger** - The datalogger area is a Python/PySide6 Windows desktop telemetry logger for sim racing plus a FastAPI+Postgres backend ("Connected v1"). The telemetry capture, live processing, strategy engine, and Qt/QML UI (the bulk of src/) are useless for RaceLab, but the backend is a goldmine of directly relevant designs: GPS-trace track recognition (curvature fingerprint + cross-correlation matching, suggest-only mode), a canonical track/car registry with alias resolution + drift detection + unresolved-triage queue, and a fully idempotent offline-first sync contract (envelope UUIDs, replay-safe batch ingest) with its matching desktop persistent queue. The coaching subsystem (server-authored versioned JSON rule bundles, condition DSL, offline fallback, per-rule failure isolation) and the deterministic setup-coach (symptom tags -> scored setup-lever recommendations with rationales) are near-exact architectural precedents for RaceLab's AI race engineer pipeline. Everything is Python, so nothing qualifies as copypaste except one LAP-coupled TS contract file; the value here is almost entirely scheme-level.
+
+- `C:/Users/Admin/Documents/Telemetry/datalogger/backend/app/auth.py` - RaceLab uses Clerk, which replaces this entire layer (token issuance, session cookies, password hashing); hand-rolled FastAPI auth carries no design RaceLab should copy over Clerk's primitives.
+- `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/core` - RC cars have no telemetry and RaceLab lap times are manual entry in V1, so telemetry-derived lap segmentation, strategy, and live processing have no consumer. The only faint echo (dry/damp/wet condition-window classification in strategy_weather.py) is too thin and sim-coupled to bank on.
+- `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/adapters` - Pure telemetry acquisition from PC racing sims — no analogue exists in RC racing and RaceLab has no desktop capture surface.
+- `C:/Users/Admin/Documents/Telemetry/datalogger/src/lap_coach_logger/ui` - Windows desktop Qt UI and game-overlay machinery — wrong platform, wrong framework, and no overlay concept in a mobile RC app. Despite the in-repo 'RaceLab-style floating windows' naming, nothing transfers.
+- `C:/Users/Admin/Documents/Telemetry/datalogger/installer` - Windows installer and desktop build plumbing — RaceLab ships via Expo/EAS and Vercel; nothing here applies.
+
+**web-misc** - This area is LAP's marketing/comms surface: the Astro marketing site (lap-website), the Founding-50 waitlist (lap-waitlist, CF Pages + D1 + Resend), a pre-launch redirect worker (lap-coach-coming-soon), and content tooling (com_tool: Python track-SVG poster renderer + Remotion launch video). Marketing content itself is useless for RaceLab, but buried in the plumbing are several genuinely portable TypeScript modules — an HMAC email-token library, a dependency-injected drip-email engine, a zero-dependency OG share-card SVG builder, and a cookieless analytics collector — plus instructive schemes for double-opt-in email flows, hardened public endpoints with SQL-backed rate limiting, and GPS-trace-to-SVG track silhouettes.
+
+- `C:/Users/Admin/Documents/Telemetry/lap-website` - Sim-racing marketing copy, LAP brand identity, and Astro framework — none of it transfers to an Expo+Next.js RC-racing product.
+- `C:/Users/Admin/Documents/Telemetry/lap-waitlist` - LAP launch-specific landing UI and Cloudflare path-routing plumbing; no RaceLab applicability beyond what is already captured in the signup/email items.
+- `C:/Users/Admin/Documents/Telemetry/lap-coach-coming-soon` - Pure LAP/Cloudflare deploy plumbing for a launch-window stunt; RaceLab has no equivalent need on Vercel.
+- `C:/Users/Admin/Documents/Telemetry/com_tool/lap-launch-video` - One-off marketing video with LAP-specific content and footage; not relevant to RaceLab V1 (only revisit the Remotion scaffold idea if Season Wrapped ever becomes an animated video rather than static share cards).
+
+**analysis-ops-docs** - This area is the LAP workspace's analysis/ops/docs layer: root-level audit+spec markdown, the 6-month roadmap ADRs, superpowers design specs/plans, two Python analysis forks (V2_claude_ai engine fork, trackreco satellite track-extraction platform), loop-ops email scripts, raw iRacing session dumps, and an empty retired webapp scaffold. There is zero copypaste-grade TypeScript here, but the documentation layer is unusually valuable for RaceLab: the Open-Meteo conditions-engine spec, the ADR set (contracts-first schema codegen, Clerk auth, offline-first contract, YAML coaching-rule format), the pre-race-briefing context-assembly design, and the track-venue registry schema are direct design blueprints for RaceLab's weather engine, AI race engineer KB, track database, and shared-schema package. Everything telemetry/physics/3D/optimizer-shaped (the bulk of the code by volume) is useless for an RC app with manual lap times.
+
+- `C:/Users/Admin/Documents/Telemetry/ATLAS.md` - LAP-internal repo housekeeping and telemetry-physics product specs; nothing transfers to an RC app with manual lap entry. (CONDITIONS_ENGINE_SPEC and COACHING_AUDIT are carved out as separate scheme items.)
+- `C:/Users/Admin/Documents/Telemetry/docs/roadmap` - LAP business planning, autonomous-dev-loop operations, and racing-line/optimizer physics — all explicitly out of scope for RaceLab.
+- `C:/Users/Admin/Documents/Telemetry/Analysis/trackreco-main` - Satellite-imagery geometry extraction and GPS-lap reconstruction have no counterpart in RaceLab — RC tracks are small venues entered manually with photos; no centimeter geometry is needed.
+- `C:/Users/Admin/Documents/Telemetry/Analysis/V2_claude_ai` - Telemetry capture/processing, vehicle physics, and 3D track visualization are all useless-by-default for RaceLab; additionally this copy is a known-stale fork of code audited elsewhere.
+- `C:/Users/Admin/Documents/Telemetry/Analysis/V1` - Dead telemetry-processing prototypes for sim/kart data; nothing applies to manual-lap-time RC racing.
+- `C:/Users/Admin/Documents/Telemetry/ops` - Dev-loop alerting plumbing and LAP-specific data reprocessing; RaceLab has no equivalent need and would use Sentry/PostHog alerts anyway.
+- `C:/Users/Admin/Documents/Telemetry/lap-webapp` - Empty — nothing to reuse. Confirmed only node_modules remains.
+- `C:/Users/Admin/Documents/Telemetry/LapCoachLogger_sessions` - Raw sim telemetry data dumps — useless by definition for RaceLab.
+
