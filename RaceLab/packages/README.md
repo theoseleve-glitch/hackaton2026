@@ -1,5 +1,16 @@
 # RaceLab packages
 
+## `pdf/` — Setup-sheet PDF export (D12: fill, never redraw)
+
+Reference implementation of the per-chassis `pdf_map` pipeline against the real Kyosho MP11 editable sheet:
+
+- `src/list-fields.ts` — enumerate a blank sheet's AcroForm fields
+- `src/probe.ts` — render every field's own name onto the sheet (how the map was built)
+- `src/rects.ts` — dump checkbox widget coordinates (column/row matching for opaque names)
+- `src/fill.ts` — **the demo**: canonical setup JSON + `kb/chassis/inferno-mp11.pdf-map.json` → filled, flattened official sheet (`npm run fill` → `out/demo-setup.pdf`). Verified pixel-faithful: 51 fields land exactly where they belong, including the diff-table checkboxes.
+
+Finding: only ~49 of the MP11 sheet's visual boxes are real form fields — the rest (bushing grids, hub widths, clutch springs…) need D12's overlay mode. Completing the map is data entry, not code.
+
 ## `kb/` — Tuning Knowledge Base (data only)
 
 The AI race engineer's brain (docs/04 §3). Pure data, reviewed by William, ships inside the app bundle for the offline path (D13).

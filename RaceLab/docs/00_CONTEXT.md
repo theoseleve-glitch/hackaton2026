@@ -68,7 +68,7 @@ Their structural weaknesses (= our attack surface):
 
 *(Add new rows here. Théo: anything you want to challenge, challenge before code exists — it's cheap now.)*
 
-> ⚠️ **D1 escalation (name):** an established sim-racing telemetry product already operates as **RaceLab (racelab.app)** — same name, adjacent racing category. The name check is now a **this-week blocker**: clear it or pick the backup name *before* any further branding/store-asset work.
+> ✅ **D1 resolved → D19.** The collision is confirmed: [racelab.app](https://racelab.app/) is an active, paid sim-racing overlay suite (iRacing/ACC/F1, €4.90/mo) — same name, racing-software category. **D19 (2026-06-10): "RaceLab" stays as the internal/repo codename only; the public app name candidate #1 is "GripLab"** — no software collision found, grip is the product's core concept, and keeping the "-Lab" element preserves most of the existing visual identity. Checked and rejected: "Blue Groove" (crowded inside RC: parts brands, raceways, body makers), "TQ Lab" (multiple exact-string products). Before store assets: William's brand sign-off + domain/TM final check on GripLab. No further branding investment in the "RaceLab" wordmark.
 
 ## 5. Prior art we own
 
