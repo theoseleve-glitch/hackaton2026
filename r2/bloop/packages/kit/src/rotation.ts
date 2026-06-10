@@ -8,6 +8,8 @@ import type { Presence } from './presence.js';
  * result degenerates to (fromIndex + 1) % order.length: non-deadlocking by
  * design; the shell's empty-room/grace logic ends the game, the rotation
  * itself never spins forever.
+ * `fromIndex` must be a valid index into `order` (or -1 for "before the
+ * first turn"); out-of-range values are not part of the contract.
  */
 export function nextActiveSeat(
   order: readonly PlayerId[],

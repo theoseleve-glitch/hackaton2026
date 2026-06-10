@@ -28,4 +28,10 @@ describe('nextActiveSeat', () => {
     expect(nextActiveSeat(order, 1, p)).toEqual({ index: 2, wrapped: false });
     expect(nextActiveSeat(order, 3, p)).toEqual({ index: 0, wrapped: true });
   });
+
+  it('returns to the sole survivor with wrapped=true (lap boundary holds)', () => {
+    let p = initPresence(order);
+    for (const id of ['p2', 'p3', 'p4']) p = setConnected(p, id, false);
+    expect(nextActiveSeat(order, 0, p)).toEqual({ index: 0, wrapped: true });
+  });
 });
