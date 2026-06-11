@@ -5,6 +5,16 @@ import '../models/models.dart';
 abstract class RoutingService {
   Future<List<RouteOption>> getRouteOptions(RouteRequest request);
 
+  /// One route passing through [vias] in order — the « échappée » line that
+  /// actually drives past the chosen haltes. Returns null when the provider
+  /// cannot produce it (callers then fall back to the direct route).
+  Future<RouteOption?> getRouteVia({
+    required GeoPoint origin,
+    required List<GeoPoint> vias,
+    required GeoPoint destination,
+    String? vehicleType,
+  });
+
   /// Decodes [RouteOption.polyline] into points for map display.
   List<GeoPoint> getRoutePolyline(RouteOption option);
 
@@ -51,6 +61,34 @@ class MockRoutingService implements RoutingService {
       provider: 'mock',
       metadata: const {'polylineFormat': 'latlng-list'},
     );
+  }
+
+  @override
+  Future<RouteOption?> getRouteVia({
+    required GeoPoint origin,
+    required List<GeoPoint> vias,
+    required GeoPoint destination,
+    String? vehicleType,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    final points = [origin, ...vias, destination];
+    var meters = 0.0;
+    for (var i = 0; i < points.length - 1; i++) {
+      meters += points[i].distanceTo(points[i + 1]);
+    }
+    meters *= 1.2; // roads are never straight lines
+    final option = RouteOption(
+      id: 'mock-via',
+      origin: origin,
+      destination: destination,
+      polyline: points.map((p) => '${p.latitude},${p.longitude}').join(';'),
+      distanceMeters: meters.round(),
+      durationSeconds: (meters / (60 / 3.6)).round(),
+      routeMode: RouteMode.discovery,
+      provider: 'mock',
+      metadata: {'polylineFormat': 'latlng-list', 'viaCount': vias.length},
+    );
+    return estimateRouteMetrics(option, vehicleType: vehicleType);
   }
 
   @override

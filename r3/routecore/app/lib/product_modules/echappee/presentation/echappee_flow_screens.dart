@@ -6,9 +6,8 @@ import '../../../app/providers.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
 import '../../terroir/domain/terroir_analytics.dart';
-import '../../terroir/presentation/terroir_screens.dart'
-    show terroirRankedPoisProvider;
 import '../design_system/design_system.dart';
+import '../domain/echappee_itinerary.dart';
 import 'echappee_page.dart';
 
 export 'echappee_atelier.dart';
@@ -218,14 +217,15 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
       );
     }
     final fastest = _byMode(options, RouteMode.fastest) ?? options.first;
-    final echappee = _byMode(options, RouteMode.discovery) ??
+    // L'échappée réelle : la route OSRM qui passe par les haltes choisies
+    // sous budget détour (et plus la simple alternative la plus longue).
+    final itinerary = ref.watch(echappeeItineraryProvider).valueOrNull;
+    final echappee = itinerary?.route ??
+        _byMode(options, RouteMode.discovery) ??
         _byMode(options, RouteMode.eco) ??
         options.first;
-    final stops =
-        ref.watch(terroirRankedPoisProvider).valueOrNull ?? const [];
-    final detourMinutes = stops
-        .fold<double>(0, (sum, stop) => sum + stop.detourMinutesEstimate)
-        .round();
+    final stops = itinerary?.stops ?? const <PoiAlongRoute>[];
+    final detourMinutes = itinerary?.detourMinutes ?? 0;
     final selectedId = planner.selectedOption?.id;
     return ListView(
       padding: const EdgeInsets.all(EchappeeSpacing.screen),
@@ -243,7 +243,9 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
           title: 'Échappée recommandée',
           duration: _formatDuration(echappee.durationSeconds),
           distance: _formatDistance(echappee.distanceMeters),
-          subtitle: '${stops.length} haltes · +$detourMinutes min',
+          subtitle: stops.isEmpty
+              ? 'On cherche tes haltes…'
+              : '${stops.length} haltes · +$detourMinutes min',
           isEchappee: true,
           selected: selectedId == echappee.id,
           onTap: () => notifier.selectOption(echappee),
@@ -251,9 +253,12 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
         const SizedBox(height: EchappeeSpacing.s16),
         Center(
           child: Text(
-            'Trajet total estimé · '
-            '${_formatDuration(echappee.durationSeconds)}'
-            ' + $detourMinutes min',
+            detourMinutes == 0
+                ? 'Trajet total estimé · '
+                    '${_formatDuration(echappee.durationSeconds)}'
+                : 'Trajet total estimé · '
+                    '${_formatDuration(echappee.durationSeconds)}'
+                    ' dont +$detourMinutes min de détour',
             style: EchappeeTypography.bodySmall,
             textAlign: TextAlign.center,
           ),

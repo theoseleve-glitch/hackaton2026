@@ -10,12 +10,14 @@ abstract class PoiRepository {
     List<String>? categorySlugs,
   });
 
-  /// MVP: corridor around the straight origin->destination segment.
-  /// See pois_along_route() SQL function and ARCHITECTURE.md for limits.
+  /// Corridor search. With [routePolyline] the corridor follows the real
+  /// road geometry (pois_along_polyline() SQL function / local filtering);
+  /// without it, falls back to the straight origin->destination segment.
   Future<List<PoiAlongRoute>> poisAlongRoute(
     GeoPoint origin,
     GeoPoint destination, {
     double corridorMeters,
     List<String>? categorySlugs,
+    List<GeoPoint>? routePolyline,
   });
 }

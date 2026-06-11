@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../../core/logging/app_logger.dart';
 import '../models/models.dart';
 
 /// Provider-agnostic address search. Implementations: mock (dev),
-/// Mapbox/Google/OpenRouteService placeholders. Selected via MAP_PROVIDER.
+/// Nominatim (OSM, free), Mapbox placeholder. Selected via MAP_PROVIDER.
 abstract class MapSearchService {
   Future<List<AddressSearchResult>> searchAddress(String query);
   Future<AddressSearchResult?> reverseGeocode(GeoPoint point);
@@ -52,6 +57,119 @@ class MockMapSearchService implements MapSearchService {
       longitude: point.longitude,
       provider: 'mock',
     );
+  }
+}
+
+/// Real geocoding via Nominatim (nominatim.openstreetmap.org) — free, no
+/// key, same OSM stack as the tiles and OSRM. Usage policy: identify with a
+/// User-Agent and stay under 1 request/second (enforced below). Falls back
+/// to the mock on any network/parse failure so the app keeps working
+/// offline.
+class NominatimMapSearchService extends MockMapSearchService {
+  NominatimMapSearchService({http.Client? client, this.baseUrl})
+      : _client = client ?? http.Client();
+
+  final http.Client _client;
+  final String? baseUrl;
+  static const _log = AppLogger('nominatim');
+  static const _userAgent = 'routecore-echappee/0.1 (dev build)';
+  static const _minInterval = Duration(milliseconds: 1100);
+  DateTime? _lastCall;
+
+  String get _base => baseUrl ?? 'https://nominatim.openstreetmap.org';
+
+  /// Nominatim policy: max 1 req/s. The UI debounce already spaces calls;
+  /// this is the hard guarantee.
+  Future<void> _throttle() async {
+    final last = _lastCall;
+    if (last != null) {
+      final wait = _minInterval - DateTime.now().difference(last);
+      if (wait > Duration.zero) await Future<void>.delayed(wait);
+    }
+    _lastCall = DateTime.now();
+  }
+
+  @override
+  Future<List<AddressSearchResult>> searchAddress(String query) async {
+    final q = query.trim();
+    if (q.isEmpty) return [];
+    try {
+      await _throttle();
+      final uri = Uri.parse('$_base/search').replace(queryParameters: {
+        'q': q,
+        'format': 'jsonv2',
+        'limit': '6',
+        'countrycodes': 'fr',
+        'accept-language': 'fr',
+      });
+      final res = await _client.get(uri,
+          headers: {'User-Agent': _userAgent}).timeout(
+        const Duration(seconds: 6),
+      );
+      if (res.statusCode != 200) {
+        throw Exception('Nominatim HTTP ${res.statusCode}');
+      }
+      return parseSearchResults(jsonDecode(res.body) as List<dynamic>);
+    } catch (e) {
+      _log.warn('falling back to mock search: $e');
+      return super.searchAddress(query);
+    }
+  }
+
+  @override
+  Future<AddressSearchResult?> reverseGeocode(GeoPoint point) async {
+    try {
+      await _throttle();
+      final uri = Uri.parse('$_base/reverse').replace(queryParameters: {
+        'lat': '${point.latitude}',
+        'lon': '${point.longitude}',
+        'format': 'jsonv2',
+        'accept-language': 'fr',
+      });
+      final res = await _client.get(uri,
+          headers: {'User-Agent': _userAgent}).timeout(
+        const Duration(seconds: 6),
+      );
+      if (res.statusCode != 200) {
+        throw Exception('Nominatim HTTP ${res.statusCode}');
+      }
+      final json = jsonDecode(res.body) as Map<String, dynamic>;
+      final results = parseSearchResults([json]);
+      return results.isEmpty ? null : results.first;
+    } catch (e) {
+      _log.warn('falling back to mock reverse geocode: $e');
+      return super.reverseGeocode(point);
+    }
+  }
+
+  /// Pure mapping Nominatim JSON -> results (unit-tested). Labels keep the
+  /// first two segments of display_name ("Annecy, Haute-Savoie") — the full
+  /// string drowns the UI in region/postcode noise.
+  static List<AddressSearchResult> parseSearchResults(List<dynamic> json) {
+    final results = <AddressSearchResult>[];
+    for (final raw in json) {
+      final row = raw as Map<String, dynamic>;
+      final lat = double.tryParse('${row['lat']}');
+      final lon = double.tryParse('${row['lon']}');
+      if (lat == null || lon == null) continue;
+      final display = (row['display_name'] as String? ?? '').trim();
+      final parts = display.split(',').map((s) => s.trim()).toList();
+      final label = switch (parts.length) {
+        0 => display,
+        1 => parts.first,
+        _ => '${parts[0]}, ${parts[1]}',
+      };
+      if (label.isEmpty) continue;
+      results.add(AddressSearchResult(
+        id: '${row['place_id'] ?? '$lat,$lon'}',
+        label: label,
+        latitude: lat,
+        longitude: lon,
+        provider: 'nominatim',
+        rawData: row,
+      ));
+    }
+    return results;
   }
 }
 

@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 import '../../../core/constants/app_constants.dart';
 import '../../../core/errors/app_exception.dart';
 import '../../../shared/models/models.dart';
+import '../../routing/domain/detour_planner.dart';
 import '../domain/poi_repository.dart';
 import 'mock_poi_dataset.dart';
 
@@ -56,8 +57,25 @@ class SupabasePoiRepository implements PoiRepository {
   Future<List<PoiAlongRoute>> poisAlongRoute(
       GeoPoint origin, GeoPoint destination,
       {double corridorMeters = AppConstants.defaultRouteCorridorMeters,
-      List<String>? categorySlugs}) async {
+      List<String>? categorySlugs,
+      List<GeoPoint>? routePolyline}) async {
     try {
+      // Prefer the real-geometry corridor when the polyline is known; the
+      // straight-segment RPC remains as fallback (older DB schemas).
+      if (routePolyline != null && routePolyline.length >= 2) {
+        try {
+          final rows = await _client.rpc('pois_along_polyline', params: {
+            'polyline': [
+              for (final p in routePolyline) [p.latitude, p.longitude],
+            ],
+            'corridor_meters': corridorMeters,
+            'category_slugs': categorySlugs,
+          });
+          return _alongRouteRows(rows as List);
+        } on PostgrestException {
+          // Function not deployed yet — fall through to the segment RPC.
+        }
+      }
       final rows = await _client.rpc('pois_along_route', params: {
         'origin_lat': origin.latitude,
         'origin_lng': origin.longitude,
@@ -66,7 +84,13 @@ class SupabasePoiRepository implements PoiRepository {
         'corridor_meters': corridorMeters,
         'category_slugs': categorySlugs,
       });
-      return (rows as List).map((r) {
+      return _alongRouteRows(rows as List);
+    } on PostgrestException catch (e) {
+      throw NetworkException('POI sur trajet impossible: ${e.message}', e);
+    }
+  }
+
+  List<PoiAlongRoute> _alongRouteRows(List rows) => rows.map((r) {
         final map = r as Map<String, dynamic>;
         final distance = (map['distance_from_route_meters'] as num).toDouble();
         return PoiAlongRoute(
@@ -77,10 +101,6 @@ class SupabasePoiRepository implements PoiRepository {
           relevanceScore: 0, // computed by product-specific scorers
         );
       }).toList();
-    } on PostgrestException catch (e) {
-      throw NetworkException('POI sur trajet impossible: ${e.message}', e);
-    }
-  }
 
   Poi _poiFromRpcRow(Map<String, dynamic> r) => Poi(
         id: (r['poi_id'] ?? r['id']) as String,
@@ -143,11 +163,15 @@ class MockPoiRepository implements PoiRepository {
   Future<List<PoiAlongRoute>> poisAlongRoute(
       GeoPoint origin, GeoPoint destination,
       {double corridorMeters = AppConstants.defaultRouteCorridorMeters,
-      List<String>? categorySlugs}) async {
+      List<String>? categorySlugs,
+      List<GeoPoint>? routePolyline}) async {
     await Future<void>.delayed(const Duration(milliseconds: 250));
+    final hasPolyline = routePolyline != null && routePolyline.length >= 2;
     final result = <PoiAlongRoute>[];
     for (final p in pois.where((p) => _matchesCategory(p, categorySlugs))) {
-      final d = _distanceToSegment(p.point, origin, destination);
+      final d = hasPolyline
+          ? DetourPlanner.distanceToPolyline(p.point, routePolyline)
+          : _distanceToSegment(p.point, origin, destination);
       if (d <= corridorMeters) {
         result.add(PoiAlongRoute(
           poi: p,

@@ -7,12 +7,12 @@ import 'package:go_router/go_router.dart';
 import '../../../app/providers.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
-import '../../terroir/presentation/terroir_screens.dart'
-    show terroirRankedPoisProvider;
 import '../design_system/design_system.dart';
 import '../domain/echappee_carnets.dart';
+import '../domain/echappee_itinerary.dart';
 import '../domain/echappee_moods.dart';
 import 'echappee_carnets_section.dart';
+import 'echappee_home_sections.dart';
 import 'echappee_page.dart';
 
 /// Titre Fraunces h1 avec UN mot accentué en Clay Red italique.
@@ -52,6 +52,7 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   static const _searchDebounceDelay = Duration(milliseconds: 300);
   static const _computeDebounceDelay = Duration(milliseconds: 800);
 
+  final _scrollController = ScrollController();
   final _originController = TextEditingController();
   final _destinationController = TextEditingController();
   List<AddressSearchResult> _originSuggestions = const [];
@@ -81,6 +82,7 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   void dispose() {
     _searchDebounce?.cancel();
     _computeDebounce?.cancel();
+    _scrollController.dispose();
     _originController.dispose();
     _destinationController.dispose();
     super.dispose();
@@ -159,12 +161,21 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   void _toggleMood(String moodId, bool selected) {
     setState(
         () => selected ? _moodIds.add(moodId) : _moodIds.remove(moodId));
-    ref
-        .read(routePlannerProvider.notifier)
-        .setPreferredCategories(EchappeeMood.slugsFor(_moodIds));
+    final notifier = ref.read(routePlannerProvider.notifier);
+    notifier.setPreferredCategories(EchappeeMood.slugsFor(_moodIds));
+    notifier.setPreferredTags(EchappeeMood.tagsFor(_moodIds));
   }
 
   // -- Actions -------------------------------------------------------------------
+
+  /// CTA du footer sombre : remonte à l'atelier, prêt à composer.
+  void _scrollToAtelier() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOutCubic,
+    );
+  }
 
   void _createEchappee() {
     // Flush l'estimation en attente pour arriver sur des routes fraîches.
@@ -197,6 +208,7 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
     notifier.setMaxDetour(carnet.detourMinutes);
     notifier
         .setPreferredCategories(EchappeeMood.slugsFor(carnet.moodIds.toSet()));
+    notifier.setPreferredTags(EchappeeMood.tagsFor(carnet.moodIds.toSet()));
     notifier.setMode(RouteMode.discovery);
     notifier.computeOptions();
     setState(() {
@@ -369,12 +381,16 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   }
 
   Widget _estimationSection(RoutePlannerState planner) {
-    final stops = planner.isReady
-        ? ref.watch(terroirRankedPoisProvider).valueOrNull?.length
-        : null;
+    final itinerary =
+        planner.isReady ? ref.watch(echappeeItineraryProvider).valueOrNull : null;
+    final stops = itinerary?.stops.length;
     final fastest = _fastestOption(planner.options.valueOrNull);
+    // L'échappée réelle (via les haltes) quand elle est prête, sinon le
+    // direct le temps du calcul.
+    final routed = itinerary?.route ?? fastest;
     final duration =
-        fastest == null ? '…' : _formatDuration(fastest.durationSeconds);
+        routed == null ? '…' : _formatDuration(routed.durationSeconds);
+    final detour = itinerary?.detourMinutes;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -384,7 +400,9 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
         ),
         const SizedBox(height: EchappeeSpacing.s4),
         Text(
-          'Trajet total estimé · $duration + $_detourMinutes min',
+          detour == null || detour == 0
+              ? 'Trajet total estimé · $duration'
+              : 'Trajet total estimé · $duration (+$detour min de détour)',
           style: EchappeeTypography.bodySmall
               .copyWith(color: EchappeeColors.textSecondary),
         ),
@@ -438,6 +456,7 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           ],
         ),
         body: ListView(
+          controller: _scrollController,
           padding: const EdgeInsets.all(EchappeeSpacing.screen),
           children: [
             const EchappeeEyebrow('Le GPS des routes qui respirent'),
@@ -451,16 +470,44 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
               style: EchappeeTypography.body
                   .copyWith(color: EchappeeColors.textSecondary),
             ),
-            const SizedBox(height: EchappeeSpacing.section),
-            _atelierCard(planner),
-            const SizedBox(height: EchappeeSpacing.section),
-            EchappeeCarnetsSection(onCarnetTap: _applyCarnet),
-            const SizedBox(height: EchappeeSpacing.section),
+            const SizedBox(height: EchappeeSpacing.s8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  foregroundColor: EchappeeColors.primary,
+                ),
+                onPressed: () => _applyCarnet(EchappeeCarnet.all.first),
+                icon: const Icon(Icons.east, size: 16),
+                label: Text(
+                  'Voir une échappée d\'exemple',
+                  style: EchappeeTypography.body.copyWith(
+                    color: EchappeeColors.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: EchappeeSpacing.s8),
             const Center(
               child: Text(
                 '2 400 lieux choisis à la main · +12 min en moyenne',
                 style: EchappeeTypography.bodySmall,
               ),
+            ),
+            const SizedBox(height: EchappeeSpacing.section),
+            _atelierCard(planner),
+            const SizedBox(height: EchappeeSpacing.section),
+            EchappeeCarnetsSection(onCarnetTap: _applyCarnet),
+            const SizedBox(height: EchappeeSpacing.section),
+            const EchappeeHowItWorksSection(),
+            const SizedBox(height: EchappeeSpacing.section),
+            const EchappeeManifesteSection(),
+            const SizedBox(height: EchappeeSpacing.section),
+            EchappeeFooterCta(
+              onCreate: _scrollToAtelier,
+              onExample: () => _applyCarnet(EchappeeCarnet.all.first),
             ),
           ],
         ),

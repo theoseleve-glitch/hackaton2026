@@ -48,6 +48,80 @@ class OsrmRoutingService extends MockRoutingService {
     }
   }
 
+  @override
+  Future<RouteOption?> getRouteVia({
+    required GeoPoint origin,
+    required List<GeoPoint> vias,
+    required GeoPoint destination,
+    String? vehicleType,
+  }) async {
+    try {
+      final coords = [origin, ...vias, destination]
+          .map((p) => '${p.longitude},${p.latitude}')
+          .join(';');
+      final uri = Uri.parse(
+        '$_base/route/v1/driving/$coords'
+        '?overview=full&geometries=geojson&alternatives=false',
+      );
+      final res = await _client.get(uri).timeout(const Duration(seconds: 8));
+      if (res.statusCode != 200) {
+        throw Exception('OSRM HTTP ${res.statusCode}');
+      }
+      final option = parseViaRoute(
+        jsonDecode(res.body) as Map<String, dynamic>,
+        origin: origin,
+        destination: destination,
+        viaCount: vias.length,
+        vehicleType: vehicleType,
+      );
+      if (option == null) throw Exception('OSRM: no via route');
+      return option;
+    } catch (e) {
+      _log.warn('falling back to mock via routing: $e');
+      return super.getRouteVia(
+        origin: origin,
+        vias: vias,
+        destination: destination,
+        vehicleType: vehicleType,
+      );
+    }
+  }
+
+  /// Pure mapping OSRM JSON -> the échappée route through the haltes
+  /// (unit-tested).
+  RouteOption? parseViaRoute(
+    Map<String, dynamic> json, {
+    required GeoPoint origin,
+    required GeoPoint destination,
+    required int viaCount,
+    String? vehicleType,
+  }) {
+    final routes =
+        (json['routes'] as List? ?? const []).cast<Map<String, dynamic>>();
+    if (routes.isEmpty) return null;
+    final r = routes.first;
+    final geometry = r['geometry'] as Map<String, dynamic>;
+    final coords = (geometry['coordinates'] as List)
+        .cast<List>()
+        // GeoJSON is [lng, lat]; polyline format is `lat,lng;...`.
+        .map((c) => '${(c[1] as num).toDouble()},${(c[0] as num).toDouble()}')
+        .join(';');
+    return estimateRouteMetrics(
+      RouteOption(
+        id: 'osrm-via',
+        origin: origin,
+        destination: destination,
+        polyline: coords,
+        distanceMeters: (r['distance'] as num).round(),
+        durationSeconds: (r['duration'] as num).round(),
+        routeMode: RouteMode.discovery,
+        provider: 'osrm',
+        metadata: {'polylineFormat': 'latlng-list', 'viaCount': viaCount},
+      ),
+      vehicleType: vehicleType,
+    );
+  }
+
   /// Pure mapping OSRM JSON -> RouteOptions (unit-tested).
   /// fastest = main route; shortest = alternative with min distance;
   /// eco = min-distance route with eco metrics (gentler consumption);

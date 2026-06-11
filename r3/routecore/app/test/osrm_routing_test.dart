@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routecore/shared/models/models.dart';
 import 'package:routecore/shared/services/osrm_routing_service.dart';
+import 'package:routecore/shared/services/routing_service.dart';
 
 void main() {
   const lyon = GeoPoint(latitude: 45.7640, longitude: 4.8357);
@@ -81,6 +82,74 @@ void main() {
     test('empty routes -> empty list (caller falls back to mock)', () {
       const request = RouteRequest(origin: lyon, destination: valence);
       expect(service.parseRoutes({'routes': []}, request), isEmpty);
+    });
+  });
+
+  group('OsrmRoutingService.parseViaRoute', () {
+    final service = OsrmRoutingService();
+
+    final viaFixture = {
+      'code': 'Ok',
+      'routes': [
+        {
+          'distance': 118400.0,
+          'duration': 6120.0,
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [4.8357, 45.7640],
+              [4.7670, 45.4630], // halte 1
+              [4.8470, 45.0730], // halte 2
+              [4.8924, 44.9334],
+            ],
+          },
+        },
+      ],
+    };
+
+    test('maps the échappée route through the haltes', () {
+      final option = service.parseViaRoute(
+        viaFixture,
+        origin: lyon,
+        destination: valence,
+        viaCount: 2,
+      );
+      expect(option, isNotNull);
+      expect(option!.routeMode, RouteMode.discovery);
+      expect(option.provider, 'osrm');
+      expect(option.distanceMeters, 118400);
+      expect(option.durationSeconds, 6120);
+      expect(option.metadata['viaCount'], 2);
+      final points = service.getRoutePolyline(option);
+      expect(points, hasLength(4));
+      expect(points[1].latitude, closeTo(45.4630, 1e-6),
+          reason: 'la ligne passe par la halte');
+    });
+
+    test('no route -> null (caller falls back to direct)', () {
+      expect(
+        service.parseViaRoute({'routes': []},
+            origin: lyon, destination: valence, viaCount: 1),
+        isNull,
+      );
+    });
+  });
+
+  group('MockRoutingService.getRouteVia', () {
+    test('synthesizes a polyline through the vias', () async {
+      const via = GeoPoint(latitude: 45.4, longitude: 5.2);
+      final option = await MockRoutingService().getRouteVia(
+        origin: lyon,
+        vias: const [via],
+        destination: valence,
+      );
+      expect(option, isNotNull);
+      expect(option!.routeMode, RouteMode.discovery);
+      final points = MockRoutingService().getRoutePolyline(option);
+      expect(points, hasLength(3));
+      expect(points[1], via);
+      expect(option.durationSeconds, greaterThan(0));
+      expect(option.estimatedCo2Kg, isNotNull);
     });
   });
 }

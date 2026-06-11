@@ -17,6 +17,7 @@ class RoutePlannerState {
     this.routeMode = RouteMode.fastest,
     this.maxDetourMinutes,
     this.preferredPoiCategories = const [],
+    this.preferredPoiTags = const [],
     this.options = const AsyncValue.data([]),
     this.selectedOption,
   });
@@ -28,6 +29,10 @@ class RoutePlannerState {
   final RouteMode routeMode;
   final int? maxDetourMinutes;
   final List<String> preferredPoiCategories;
+
+  /// Affinity tags (mood vocabulary) refining the relevance scoring beyond
+  /// the category filter — e.g. « vignoble » vs any producer.
+  final List<String> preferredPoiTags;
   final AsyncValue<List<RouteOption>> options;
   final RouteOption? selectedOption;
 
@@ -42,6 +47,7 @@ class RoutePlannerState {
     int? maxDetourMinutes,
     bool clearMaxDetour = false,
     List<String>? preferredPoiCategories,
+    List<String>? preferredPoiTags,
     AsyncValue<List<RouteOption>>? options,
     RouteOption? selectedOption,
     bool clearSelection = false,
@@ -57,6 +63,7 @@ class RoutePlannerState {
             clearMaxDetour ? null : (maxDetourMinutes ?? this.maxDetourMinutes),
         preferredPoiCategories:
             preferredPoiCategories ?? this.preferredPoiCategories,
+        preferredPoiTags: preferredPoiTags ?? this.preferredPoiTags,
         options: options ?? this.options,
         selectedOption:
             clearSelection ? null : (selectedOption ?? this.selectedOption),
@@ -85,6 +92,9 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
 
   void setPreferredCategories(List<String> slugs) =>
       state = state.copyWith(preferredPoiCategories: slugs);
+
+  void setPreferredTags(List<String> tags) =>
+      state = state.copyWith(preferredPoiTags: tags);
 
   void selectOption(RouteOption option) {
     state = state.copyWith(selectedOption: option);

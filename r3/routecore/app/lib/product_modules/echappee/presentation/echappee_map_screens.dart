@@ -9,8 +9,8 @@ import '../../../features/analytics/domain/analytics_repository.dart'
     show AnalyticsEvents;
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
-import '../../terroir/presentation/terroir_screens.dart';
 import '../design_system/design_system.dart';
+import '../domain/echappee_itinerary.dart';
 import 'echappee_page.dart';
 
 part 'echappee_map_osm.dart';
@@ -89,12 +89,15 @@ class EchappeeMapScreen extends ConsumerWidget {
         ),
       );
     }
-    final rankedAsync = ref.watch(terroirRankedPoisProvider);
-    final pois = [
-      for (final item in rankedAsync.valueOrNull ?? const <PoiAlongRoute>[])
-        item.poi,
-    ];
-    final option = _displayOption(planner);
+    final itineraryAsync = ref.watch(echappeeItineraryProvider);
+    final itinerary = itineraryAsync.valueOrNull;
+    final stops = itinerary?.stops ?? const <PoiAlongRoute>[];
+    final pois = [for (final item in stops) item.poi];
+    // Numéros de halte dans le sens de la route (1, 2, 3…).
+    final stopNumbers = {
+      for (var i = 0; i < pois.length; i++) pois[i].id: i + 1,
+    };
+    final option = _displayOption(planner, itinerary);
     final polyline = option == null
         ? const <GeoPoint>[]
         : ref.read(routingServiceProvider).getRoutePolyline(option);
@@ -111,6 +114,7 @@ class EchappeeMapScreen extends ConsumerWidget {
                 destination: planner.destination!,
                 polyline: polyline,
                 pois: pois,
+                stopNumbers: stopNumbers,
               ),
             ),
             SafeArea(
@@ -132,7 +136,7 @@ class EchappeeMapScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  rankedAsync.when(
+                  itineraryAsync.when(
                     loading: () => const _MapMessageCard(
                         child: EchappeeLoadingState()),
                     error: (_, __) => const _MapMessageCard(
@@ -142,7 +146,8 @@ class EchappeeMapScreen extends ConsumerWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    data: (items) => _HaltesPanel(items: items),
+                    data: (it) =>
+                        _HaltesPanel(items: it?.stops ?? const []),
                   ),
                   const SizedBox(height: EchappeeSpacing.s12),
                   Padding(
@@ -164,11 +169,13 @@ class EchappeeMapScreen extends ConsumerWidget {
     );
   }
 
-  /// Option à tracer : la sélection du planner, sinon l'option découverte
-  /// (à défaut la première) pour dessiner quand même la route.
-  RouteOption? _displayOption(RoutePlannerState planner) {
+  /// Option à tracer : la sélection du planner, sinon l'échappée calculée
+  /// (la route qui passe par les haltes), à défaut la première option.
+  RouteOption? _displayOption(
+      RoutePlannerState planner, EchappeeItinerary? itinerary) {
     final selected = planner.selectedOption;
     if (selected != null) return selected;
+    if (itinerary != null) return itinerary.route;
     final options = planner.options.valueOrNull ?? const <RouteOption>[];
     if (options.isEmpty) return null;
     return options.firstWhere(
@@ -268,8 +275,8 @@ class _HaltesPanel extends StatelessWidget {
     final title = items.isEmpty
         ? 'Aucune halte sur ce tronçon — la route est à toi.'
         : items.length == 1
-            ? 'On a trouvé 1 halte sur ta route.'
-            : 'On a trouvé ${items.length} haltes sur ta route.';
+            ? 'Ton échappée passe par 1 halte choisie.'
+            : 'Ton échappée passe par ${items.length} haltes choisies.';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

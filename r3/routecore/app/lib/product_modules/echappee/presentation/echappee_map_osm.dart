@@ -9,12 +9,16 @@ class _EchappeeOsmMap extends StatelessWidget {
     required this.destination,
     required this.polyline,
     required this.pois,
+    this.stopNumbers = const {},
   });
 
   final GeoPoint origin;
   final GeoPoint destination;
   final List<GeoPoint> polyline;
   final List<Poi> pois;
+
+  /// Ordre de conduite des haltes (poi.id -> 1, 2, 3…) — badge sur le marker.
+  final Map<String, int> stopNumbers;
 
   static const double _endpointSize = 20;
   static const double _poiMarkerSize = 36;
@@ -132,20 +136,52 @@ class _EchappeeOsmMap extends StatelessWidget {
   Marker _poiMarker(BuildContext context, Poi poi) {
     final style = _styleFor(poi.categorySlug);
     final borderColor = poi.isSponsored ? EchappeeColors.accent : style.color;
+    final number = stopNumbers[poi.id];
     return Marker(
       point: _toLatLng(poi.point),
       width: _poiMarkerSize,
       height: _poiMarkerSize,
       child: GestureDetector(
         onTap: () => context.push('/echappee/poi/${poi.id}'),
-        child: Container(
-          decoration: BoxDecoration(
-            color: EchappeeColors.surface,
-            shape: BoxShape.circle,
-            border: Border.all(color: borderColor, width: _poiMarkerBorder),
-            boxShadow: EchappeeShadows.sm,
-          ),
-          child: Icon(style.icon, size: _poiIconSize, color: style.color),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: _poiMarkerSize,
+              height: _poiMarkerSize,
+              decoration: BoxDecoration(
+                color: EchappeeColors.surface,
+                shape: BoxShape.circle,
+                border:
+                    Border.all(color: borderColor, width: _poiMarkerBorder),
+                boxShadow: EchappeeShadows.sm,
+              ),
+              child: Icon(style.icon, size: _poiIconSize, color: style.color),
+            ),
+            if (number != null)
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: EchappeeColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    '$number',
+                    style: EchappeeTypography.caption.copyWith(
+                      color: EchappeeColors.surface,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      height: 1,
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

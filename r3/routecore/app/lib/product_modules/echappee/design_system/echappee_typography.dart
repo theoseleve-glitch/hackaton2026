@@ -5,9 +5,9 @@ import 'echappee_colors.dart';
 /// L'Échappée type scale. Fraunces porte l'émotion (onboarding, moments
 /// forts), Inter porte la clarté (UI, navigation, métadonnées).
 ///
-/// Les fichiers de police ne sont pas embarqués (voir
-/// docs/DESIGN_SYSTEM_ECHAPPEE.md pour les installer) : des fallbacks serif/
-/// sans-serif système prennent le relais tant qu'ils sont absents.
+/// Les polices sont embarquées (assets/fonts, statiques Google Fonts OFL,
+/// déclarées dans pubspec.yaml) ; les fallbacks serif/sans-serif système
+/// restent en filet de sécurité.
 abstract final class EchappeeTypography {
   static const headingFont = 'Fraunces';
   static const bodyFont = 'Inter';

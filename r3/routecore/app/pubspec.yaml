@@ -30,3 +30,24 @@ flutter:
     # Volontairement déclaré en asset : flutter_dotenv ne lit que le bundle
     # sur Android/iOS — sans cette ligne, la config serait ignorée sur mobile.
     - .env
+
+  # Identité L'Échappée : Fraunces porte l'émotion, Inter porte la clarté
+  # (voir docs/DESIGN_SYSTEM_ECHAPPEE.md). Statiques Google Fonts (OFL).
+  fonts:
+    - family: Fraunces
+      fonts:
+        - asset: assets/fonts/Fraunces-600.ttf
+          weight: 600
+        - asset: assets/fonts/Fraunces-Italic-600.ttf
+          weight: 600
+          style: italic
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-400.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-500.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-600.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-700.ttf
+          weight: 700

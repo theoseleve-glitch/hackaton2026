@@ -49,6 +49,10 @@ final locationRepositoryProvider = Provider<LocationRepository>(
 
 final mapSearchServiceProvider = Provider<MapSearchService>((ref) {
   switch (Env.mapProvider) {
+    case 'osrm':
+    case 'nominatim':
+      // Pile OSM complète : tuiles OSM + routage OSRM + géocodage Nominatim.
+      return NominatimMapSearchService();
     case 'mapbox':
       return MapboxMapSearchService();
     default:
