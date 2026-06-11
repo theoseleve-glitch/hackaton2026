@@ -19,6 +19,7 @@ import '../features/trips/data/trip_repositories.dart';
 import '../features/trips/domain/trip_repository.dart';
 import '../shared/models/models.dart';
 import '../shared/services/map_search_service.dart';
+import '../shared/services/osrm_routing_service.dart';
 import '../shared/services/routing_service.dart';
 
 /// Central dependency wiring. Every repository switches between its Supabase
@@ -57,6 +58,8 @@ final mapSearchServiceProvider = Provider<MapSearchService>((ref) {
 
 final routingServiceProvider = Provider<RoutingService>((ref) {
   switch (Env.mapProvider) {
+    case 'osrm':
+      return OsrmRoutingService(); // routes réelles, gratuit, sans clé
     case 'mapbox':
       return MapboxRoutingService();
     case 'google':

@@ -1,9 +1,14 @@
 # TODO
 
 ## Core
-- [ ] Implémenter un vrai provider (Mapbox conseillé) : MapSearchService +
-      RoutingService + décodeur de polyline encodée
-- [ ] Remplacer le placeholder carte par flutter_map ou mapbox_maps_flutter
+- [x] Routing réel : OsrmRoutingService (OSRM démo public, géométrie routière
+      réelle, fallback mock hors-ligne) — MAP_PROVIDER=osrm
+- [ ] Production : self-host OSRM ou passer sur Mapbox/ORS (le serveur démo
+      OSRM est limité à un usage léger) ; géocodage réel (MapSearchService
+      encore mock — brancher Nominatim/Mapbox Geocoding)
+- [x] Carte réelle : flutter_map + tuiles OSM (écran carte L'Échappée)
+- [ ] Production tuiles : passer sur un fournisseur avec SLA (MapTiler,
+      Stadia…) — la policy OSM interdit le trafic lourd
 - [ ] Lire les colonnes geography (WKB) dans SupabaseTripRepository._fromRow
       (actuellement labels seulement pour les listes)
 - [ ] Persister UserProfile (consentements, mode préféré) vers Supabase

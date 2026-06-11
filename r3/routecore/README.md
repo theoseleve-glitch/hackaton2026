@@ -41,7 +41,9 @@ r3/routecore/
 ```
 SUPABASE_URL=            # vide = mode démo complet (mocks)
 SUPABASE_ANON_KEY=
-MAP_PROVIDER=mock        # mock / mapbox / google / openrouteservice
+MAP_PROVIDER=osrm        # osrm (routes réelles, gratuit sans clé) / mock /
+                         # mapbox / google / openrouteservice
+PRODUCT_FLAVOR=common    # common / echappee (L'Échappée) / ecodrive
 MAPBOX_ACCESS_TOKEN=
 GOOGLE_MAPS_API_KEY=
 OPENROUTESERVICE_API_KEY=

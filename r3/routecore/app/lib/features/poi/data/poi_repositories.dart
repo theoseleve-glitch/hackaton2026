@@ -6,6 +6,7 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/errors/app_exception.dart';
 import '../../../shared/models/models.dart';
 import '../domain/poi_repository.dart';
+import 'mock_poi_dataset.dart';
 
 class SupabasePoiRepository implements PoiRepository {
   SupabasePoiRepository(this._client);
@@ -105,29 +106,9 @@ class SupabasePoiRepository implements PoiRepository {
 /// In-memory POIs mirroring supabase/seed.sql — keeps the app fully usable
 /// without a backend.
 class MockPoiRepository implements PoiRepository {
-  static const categories = [
-    PoiCategory(id: 'c1', name: 'Producteur', slug: 'producer', productContext: ProductContext.terroir, iconName: 'agriculture'),
-    PoiCategory(id: 'c2', name: 'Marché', slug: 'market', productContext: ProductContext.terroir, iconName: 'storefront'),
-    PoiCategory(id: 'c3', name: 'Artisan', slug: 'artisan', productContext: ProductContext.terroir, iconName: 'handyman'),
-    PoiCategory(id: 'c4', name: 'Restaurant local', slug: 'restaurant', productContext: ProductContext.terroir, iconName: 'restaurant'),
-    PoiCategory(id: 'c5', name: 'Village', slug: 'village', productContext: ProductContext.terroir, iconName: 'church'),
-    PoiCategory(id: 'c6', name: 'Point de vue', slug: 'viewpoint', productContext: ProductContext.terroir, iconName: 'landscape'),
-    PoiCategory(id: 'c7', name: 'Événement', slug: 'event', productContext: ProductContext.terroir, iconName: 'celebration'),
-    PoiCategory(id: 'c8', name: 'Borne de recharge', slug: 'ev-charger', productContext: ProductContext.ecodrive, iconName: 'ev_station'),
-    PoiCategory(id: 'c10', name: 'Station-service', slug: 'gas-station', productContext: ProductContext.common, iconName: 'local_gas_station'),
-  ];
+  static const List<PoiCategory> categories = mockPoiCategories;
 
-  static const pois = [
-    Poi(id: 'p1', name: 'Ferme des Coteaux', categoryId: 'c1', latitude: 45.62, longitude: 4.82, city: 'Vienne', description: 'Vente directe de fromages de chèvre fermiers.', tags: ['fromage', 'bio'], isVerified: true, source: 'mock'),
-    Poi(id: 'p2', name: 'Marché de Condrieu', categoryId: 'c2', latitude: 45.463, longitude: 4.767, city: 'Condrieu', description: 'Marché de producteurs le dimanche matin.', isVerified: true, source: 'mock'),
-    Poi(id: 'p3', name: 'Atelier Poterie du Pilat', categoryId: 'c3', latitude: 45.40, longitude: 4.65, city: 'Pélussin', description: 'Céramiste, démonstrations et boutique.', isVerified: true, source: 'mock'),
-    Poi(id: 'p4', name: 'Auberge de la Vallée', categoryId: 'c4', latitude: 45.25, longitude: 4.85, city: 'Saint-Vallier', description: 'Cuisine du terroir, produits 100% locaux.', isVerified: true, isSponsored: true, source: 'mock'),
-    Poi(id: 'p5', name: 'Village de Malleval', categoryId: 'c5', latitude: 45.409, longitude: 4.729, city: 'Malleval', description: 'Village médiéval perché classé.', isVerified: true, source: 'mock'),
-    Poi(id: 'p6', name: 'Belvédère de Pierre-Aiguille', categoryId: 'c6', latitude: 45.07, longitude: 4.833, city: 'Crozes-Hermitage', description: 'Vue panoramique sur les vignobles.', isVerified: true, source: 'mock'),
-    Poi(id: 'p7', name: 'Fête de la Pogne', categoryId: 'c7', latitude: 45.044, longitude: 4.892, city: 'Romans-sur-Isère', description: 'Fête gourmande annuelle.', isVerified: true, source: 'mock'),
-    Poi(id: 'p8', name: 'Borne Rapide A7 Sud', categoryId: 'c8', latitude: 44.93, longitude: 4.89, city: 'Valence', description: 'Recharge DC 150 kW.', isVerified: true, source: 'mock'),
-    Poi(id: 'p10', name: 'Station du Rhône', categoryId: 'c10', latitude: 45.32, longitude: 4.842, city: 'Chanas', description: 'Carburants + GPL.', isVerified: true, source: 'mock'),
-  ];
+  static const List<Poi> pois = mockPoiDataset;
 
   @override
   Future<List<PoiCategory>> getCategories({ProductContext? context}) async =>
@@ -183,6 +164,7 @@ class MockPoiRepository implements PoiRepository {
 
   bool _matchesCategory(Poi p, List<String>? slugs) {
     if (slugs == null || slugs.isEmpty) return true;
+    if (p.categorySlug != null) return slugs.contains(p.categorySlug);
     final cat = categories.where((c) => c.id == p.categoryId).firstOrNull;
     return cat != null && slugs.contains(cat.slug);
   }

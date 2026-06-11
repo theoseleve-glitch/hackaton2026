@@ -1,7 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 
 import '../../../app/providers.dart';
 import '../../../features/analytics/domain/analytics_repository.dart'
@@ -12,6 +13,7 @@ import '../../terroir/presentation/terroir_screens.dart';
 import '../design_system/design_system.dart';
 import 'echappee_page.dart';
 
+part 'echappee_map_osm.dart';
 part 'echappee_map_poi_detail.dart';
 
 /// Style d'affichage d'une catégorie de halte : label, icône, couleur token.
@@ -88,26 +90,27 @@ class EchappeeMapScreen extends ConsumerWidget {
       );
     }
     final rankedAsync = ref.watch(terroirRankedPoisProvider);
-    final selected = planner.selectedOption;
-    final polyline = selected == null
+    final pois = [
+      for (final item in rankedAsync.valueOrNull ?? const <PoiAlongRoute>[])
+        item.poi,
+    ];
+    final option = _displayOption(planner);
+    final polyline = option == null
         ? const <GeoPoint>[]
-        : ref.read(routingServiceProvider).getRoutePolyline(selected);
+        : ref.read(routingServiceProvider).getRoutePolyline(option);
     return EchappeePage(
       child: Scaffold(
         body: Stack(
           children: [
             Positioned.fill(
-              child: CustomPaint(
-                painter: _EchappeeMapPainter(
-                  origin: planner.origin,
-                  destination: planner.destination,
-                  polyline: polyline,
-                  pois: [
-                    for (final item in rankedAsync.valueOrNull ??
-                        const <PoiAlongRoute>[])
-                      item.poi,
-                  ],
-                ),
+              child: _EchappeeOsmMap(
+                // Recrée la carte quand la route ou les haltes changent :
+                // l'initialCameraFit recadre alors l'ensemble des points.
+                key: ValueKey('${option?.id}-${pois.length}'),
+                origin: planner.origin!,
+                destination: planner.destination!,
+                polyline: polyline,
+                pois: pois,
               ),
             ),
             SafeArea(
@@ -116,6 +119,19 @@ class EchappeeMapScreen extends ConsumerWidget {
                 children: [
                   _MapTopBar(planner: planner),
                   const Spacer(),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      right: EchappeeSpacing.screen,
+                      bottom: EchappeeSpacing.s4,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '© OpenStreetMap',
+                        style: EchappeeTypography.bodySmall,
+                      ),
+                    ),
+                  ),
                   rankedAsync.when(
                     loading: () => const _MapMessageCard(
                         child: EchappeeLoadingState()),
@@ -145,6 +161,19 @@ class EchappeeMapScreen extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  /// Option à tracer : la sélection du planner, sinon l'option découverte
+  /// (à défaut la première) pour dessiner quand même la route.
+  RouteOption? _displayOption(RoutePlannerState planner) {
+    final selected = planner.selectedOption;
+    if (selected != null) return selected;
+    final options = planner.options.valueOrNull ?? const <RouteOption>[];
+    if (options.isEmpty) return null;
+    return options.firstWhere(
+      (o) => o.routeMode == RouteMode.discovery,
+      orElse: () => options.first,
     );
   }
 
