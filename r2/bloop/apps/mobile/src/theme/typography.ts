@@ -1,10 +1,12 @@
 // apps/mobile/src/theme/typography.ts
+// Brand Book v1.0 §4: Fredoka = display & logo; DM Sans = UI & body.
+// Caveat (sticker labels) lands with the first sticker component. Size scale kept from 3a.
 export const fontFamily = {
-  display: 'Baloo2_800ExtraBold',  // hero numbers, screen titles, "BLOOP!" shouts
-  displaySemi: 'Baloo2_600SemiBold',
-  ui: 'Inter_600SemiBold',         // buttons, labels, list items
-  body: 'Inter_400Regular',        // paragraphs, helper text
-  bodyMedium: 'Inter_500Medium',
+  display: 'Fredoka_700Bold',      // hero numbers, screen titles, "BLOOP!" shouts
+  displaySemi: 'Fredoka_600SemiBold',
+  ui: 'DMSans_700Bold',            // buttons, labels, badges (book: Button = DM Sans 700)
+  body: 'DMSans_400Regular',       // paragraphs, helper text
+  bodyMedium: 'DMSans_500Medium',
 } as const;
 
 export const type = {

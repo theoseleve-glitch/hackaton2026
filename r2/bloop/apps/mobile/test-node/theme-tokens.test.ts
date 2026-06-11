@@ -48,12 +48,12 @@ describe('design-system tokens (docs/designs/2026-06-10-mobile-design-system.md 
 
   it('type scale + font families per §2.4', () => {
     expect(fontFamily).toEqual({
-      display: 'Baloo2_800ExtraBold', displaySemi: 'Baloo2_600SemiBold',
-      ui: 'Inter_600SemiBold', body: 'Inter_400Regular', bodyMedium: 'Inter_500Medium',
+      display: 'Fredoka_700Bold', displaySemi: 'Fredoka_600SemiBold',
+      ui: 'DMSans_700Bold', body: 'DMSans_400Regular', bodyMedium: 'DMSans_500Medium',
     });
-    expect(type.displayXL).toEqual({ fontSize: 48, lineHeight: 52, fontFamily: 'Baloo2_800ExtraBold', letterSpacing: 0.5 });
-    expect(type.body).toEqual({ fontSize: 16, lineHeight: 24, fontFamily: 'Inter_400Regular' });
-    expect(type.overline).toEqual({ fontSize: 11, lineHeight: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 });
+    expect(type.displayXL).toEqual({ fontSize: 48, lineHeight: 52, fontFamily: 'Fredoka_700Bold', letterSpacing: 0.5 });
+    expect(type.body).toEqual({ fontSize: 16, lineHeight: 24, fontFamily: 'DMSans_400Regular' });
+    expect(type.overline).toEqual({ fontSize: 11, lineHeight: 14, fontFamily: 'DMSans_700Bold', letterSpacing: 1.2 });
   });
 
   it('elevation + outline per §2.5/§2.6 (sticker = hard offset, no blur)', () => {

@@ -1,6 +1,6 @@
 import '../src/polyfills';
-import { Baloo2_600SemiBold, Baloo2_700Bold, Baloo2_800ExtraBold } from '@expo-google-fonts/baloo-2';
-import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { Fredoka_600SemiBold, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
+import { DMSans_400Regular, DMSans_500Medium, DMSans_700Bold } from '@expo-google-fonts/dm-sans';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -11,8 +11,8 @@ import { ThemeProvider } from '../src/theme/ThemeProvider';
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    Baloo2_600SemiBold, Baloo2_700Bold, Baloo2_800ExtraBold,
-    Inter_400Regular, Inter_500Medium, Inter_600SemiBold,
+    Fredoka_600SemiBold, Fredoka_700Bold,
+    DMSans_400Regular, DMSans_500Medium, DMSans_700Bold,
   });
   if (!loaded) return <View style={{ flex: 1, backgroundColor: lightTheme.bg }} />;
   return (

@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@bloop/protocol": "workspace:*",
-    "@expo-google-fonts/baloo-2": "^0.4.2",
-    "@expo-google-fonts/inter": "^0.4.2",
+    "@expo-google-fonts/dm-sans": "^0.4.2",
+    "@expo-google-fonts/fredoka": "^0.4.1",
     "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~55.0.26",
     "expo-constants": "~55.0.16",
