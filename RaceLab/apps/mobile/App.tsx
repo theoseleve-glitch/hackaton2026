@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Modal, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetScreen } from "./src/screens/SheetScreen";
 import { TracksScreen } from "./src/screens/TracksScreen";
@@ -7,6 +7,7 @@ import { RunsScreen } from "./src/screens/RunsScreen";
 import { EngineerHubScreen } from "./src/screens/EngineerHubScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
+import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { TrialBanner } from "./src/components/TrialBanner";
 import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
@@ -33,12 +34,13 @@ export default function App() {
   const [runsStartInForm, setRunsStartInForm] = useState(false);
   const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
   const [engineerRunId, setEngineerRunId] = useState<string | undefined>();
+  const [showSettings, setShowSettings] = useState(false);
 
   const { garage, updateGarage } = useGarage();
   const { logbook, updateLogbook } = useLogbook();
   const { tracks, updateTracks } = useTracks();
   const { reports, addReport } = useReports();
-  const { account, completeOnboarding } = useAccount();
+  const { account, setAccount, completeOnboarding } = useAccount();
 
   if (!garage || !logbook || !tracks || !reports || !account) {
     return (
@@ -64,9 +66,23 @@ export default function App() {
         <Text style={styles.logo}>
           Race<Text style={{ color: colors.accent }}>Lab</Text>
         </Text>
-        <Text style={styles.headerSub}>pit-side · offline · no API</Text>
+        <View style={styles.headerRight}>
+          <Text style={styles.headerSub}>pit-side · offline · no API</Text>
+          <Pressable onPress={() => setShowSettings(true)} hitSlop={10}>
+            <Text style={styles.gear}>⚙️</Text>
+          </Pressable>
+        </View>
       </View>
       <TrialBanner daysLeft={trialDaysLeft(account, new Date().toISOString())} />
+
+      <Modal visible={showSettings} animationType="slide" onRequestClose={() => setShowSettings(false)}>
+        <SettingsScreen
+          account={account}
+          setAccount={setAccount}
+          logbook={logbook}
+          onClose={() => setShowSettings(false)}
+        />
+      </Modal>
 
       <View style={styles.body}>
         {comparePair ? (
@@ -92,7 +108,6 @@ export default function App() {
                   setRunsStartInForm(true);
                   setTab("runs");
                 }}
-                onAskEngineer={() => setTab("engineer")}
               />
             )}
             {tab === "sheet" && (
@@ -170,7 +185,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   logo: { color: colors.text, fontSize: 20, fontWeight: "900", letterSpacing: 0.5 },
+  headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
   headerSub: { color: colors.sub, fontSize: 11 },
+  gear: { fontSize: 16 },
   body: { flex: 1 },
   tabbar: {
     flexDirection: "row",

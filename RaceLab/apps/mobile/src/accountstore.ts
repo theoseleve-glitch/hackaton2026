@@ -3,8 +3,18 @@ import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "racelab:account";
 
-const LEVELS = ["beginner", "club", "regional", "pro"] as const;
+export const LEVELS = ["beginner", "club", "regional", "pro"] as const;
 export type ExperienceLevel = (typeof LEVELS)[number];
+
+export const LANGS = ["en", "fr"] as const;
+export type Lang = (typeof LANGS)[number];
+export const UNITS = ["metric", "imperial"] as const;
+export type Units = (typeof UNITS)[number];
+
+export interface Prefs {
+  lang?: Lang;
+  units?: Units;
+}
 
 export interface Account {
   email?: string;
@@ -13,6 +23,7 @@ export interface Account {
   level?: ExperienceLevel;
   trial_started_at?: string;
   onboarded: boolean;
+  prefs?: Prefs;
 }
 
 export const PRICING = { monthly_eur: 9.99, annual_eur: 99.99, trial_days: 15 } as const;
@@ -36,6 +47,14 @@ function asLevel(value: unknown): ExperienceLevel | undefined {
   return LEVELS.includes(value as ExperienceLevel) ? (value as ExperienceLevel) : undefined;
 }
 
+function asPrefs(value: unknown): Prefs | undefined {
+  if (typeof value !== "object" || value === null) return undefined;
+  const o = value as Record<string, unknown>;
+  const lang = LANGS.includes(o.lang as Lang) ? (o.lang as Lang) : undefined;
+  const units = UNITS.includes(o.units as Units) ? (o.units as Units) : undefined;
+  return lang === undefined && units === undefined ? undefined : { lang, units };
+}
+
 function parseAccount(raw: string): { ok: true; account: Account } | { ok: false; reason: string } {
   let data: unknown;
   try {
@@ -57,6 +76,7 @@ function parseAccount(raw: string): { ok: true; account: Account } | { ok: false
       country: typeof o.country === "string" ? o.country : undefined,
       level: asLevel(o.level),
       trial_started_at: typeof o.trial_started_at === "string" ? o.trial_started_at : undefined,
+      prefs: asPrefs(o.prefs),
     },
   };
 }

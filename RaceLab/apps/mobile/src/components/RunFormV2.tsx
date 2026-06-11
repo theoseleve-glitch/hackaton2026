@@ -121,6 +121,8 @@ export function RunFormV2(props: RunFormV2Props) {
   const setup = setups.find((s) => s.id === selection.setup_version_id);
 
   const [type, setType] = useState<RunType>("practice");
+  const [position, setPosition] = useState("");
+  const [entrants, setEntrants] = useState("");
   const [grip, setGrip] = useState<Grip>("medium");
   const [bumpiness, setBumpiness] = useState<Bumpiness | undefined>();
   const [dusty, setDusty] = useState(false);
@@ -205,6 +207,8 @@ export function RunFormV2(props: RunFormV2Props) {
       laps: num(lapsCount) ?? (lapsList.length > 0 ? lapsList.length : undefined),
       laps_list: lapsList.length > 0 ? lapsList : undefined,
       fuel_used_cc: car.power === "nitro" ? num(fuelUsed) : undefined,
+      position: type !== "practice" ? num(position) : undefined,
+      entrants: type !== "practice" ? num(entrants) : undefined,
     };
     const hasResult = Object.values(result).some((v) => v !== undefined);
     props.onSave({
@@ -278,6 +282,21 @@ export function RunFormV2(props: RunFormV2Props) {
 
       <Section title="Session">
         <ChipRow options={RUN_TYPES} value={type} onSelect={setType} />
+        {type !== "practice" && (
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: "row", gap: 8 }}>
+              <View style={{ flex: 1 }}>
+                <LabeledInput label="Finished P" value={position} onChangeText={setPosition} keyboardType="numeric" placeholder="e.g. 2" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <LabeledInput label="Field size" value={entrants} onChangeText={setEntrants} keyboardType="numeric" placeholder="e.g. 12" />
+              </View>
+            </View>
+            <Text style={{ color: colors.sub, fontSize: 11, marginTop: 4, fontStyle: "italic" }}>
+              your result feeds career stats — podiums get their moment 🏆
+            </Text>
+          </View>
+        )}
       </Section>
 
       <Section title="Conditions">

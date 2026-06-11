@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
 import { CORNER_FEATURES, TRACK_TRAITS } from "../../../../packages/tracks/src";
 import type {
   CornerDirection,
@@ -61,6 +62,8 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [corners, setCorners] = useState<CornerSpec[]>(initial?.corners ?? []);
   const [lat, setLat] = useState(initial?.gps !== undefined ? String(initial.gps.lat) : "");
   const [lon, setLon] = useState(initial?.gps !== undefined ? String(initial.gps.lon) : "");
+  const [locating, setLocating] = useState(false);
+  const [locError, setLocError] = useState<string | null>(null);
   const [lengthM, setLengthM] = useState(initial?.length_m !== undefined ? String(initial.length_m) : "");
   const [widthM, setWidthM] = useState(initial?.width_m !== undefined ? String(initial.width_m) : "");
   const [photoUris, setPhotoUris] = useState<string[]>(initial?.photo_uris ?? []);
@@ -229,6 +232,40 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
       {showMore && (
         <View style={styles.foldBody}>
           <Text style={styles.hint}>GPS — lets the run log pull weather automatically</Text>
+          <Pressable
+            style={styles.locateBtn}
+            disabled={locating}
+            onPress={() => {
+              void (async () => {
+                setLocError(null);
+                setLocating(true);
+                try {
+                  const perm = await Location.requestForegroundPermissionsAsync();
+                  if (!perm.granted) {
+                    setLocError("Location permission denied — you can still type coordinates below.");
+                    return;
+                  }
+                  const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+                  setLat(pos.coords.latitude.toFixed(5));
+                  setLon(pos.coords.longitude.toFixed(5));
+                } catch {
+                  setLocError("Could not get a fix — move outdoors or type coordinates below.");
+                } finally {
+                  setLocating(false);
+                }
+              })();
+            }}
+          >
+            {locating ? (
+              <ActivityIndicator color={colors.accent} size="small" />
+            ) : (
+              <Text style={styles.locateText}>
+                {lat && lon ? "📍 Update to my current location" : "📍 Use my current location"}
+              </Text>
+            )}
+          </Pressable>
+          {locError && <Text style={styles.locError}>{locError}</Text>}
+          {lat !== "" && lon !== "" && <Text style={styles.locSet}>Pinned at {lat}, {lon}</Text>}
           <View style={styles.twoCol}>
             <View style={{ flex: 1 }}>
               <LabeledInput label="Latitude" value={lat} onChangeText={setLat} keyboardType="decimal-pad" placeholder="e.g. 48.85" />
@@ -423,6 +460,18 @@ const styles = StyleSheet.create({
   addRowBtn: { borderWidth: 1, borderColor: colors.border, borderStyle: "dashed", borderRadius: radius.md, paddingVertical: 10, alignItems: "center", marginTop: 2 },
   addRowText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
   twoCol: { flexDirection: "row", gap: 8 },
+  locateBtn: {
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderStyle: "dashed",
+    borderRadius: radius.md,
+    paddingVertical: 11,
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  locateText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
+  locError: { color: colors.warn, fontSize: 11, marginBottom: 4 },
+  locSet: { color: colors.good, fontSize: 11, marginBottom: 4 },
   photoRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 4 },
   thumbWrap: { position: "relative" },
   thumb: { ...thumbBox },

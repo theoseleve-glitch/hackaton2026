@@ -55,7 +55,10 @@ export interface RunResult {
   /** 0–100; lap-to-lap consistency. Manual in V1 (timing import is exploratory). */
   consistency_pct?: number;
   laps?: number;
+  /** finishing position in a competitive session (1 = win) */
   position?: number;
+  /** field size the position was scored against ("P2 of 12") */
+  entrants?: number;
   mistakes?: number;
   /** 1 (fighting the car) … 5 (could drive it all day) */
   driver_confidence?: number;

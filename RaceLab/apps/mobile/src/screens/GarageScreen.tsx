@@ -20,10 +20,9 @@ interface Props {
   logbook: LogbookState;
   onOpenSheet: (carId: string) => void;
   onLogRun: (carId: string) => void;
-  onAskEngineer: () => void;
 }
 
-export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLogRun, onAskEngineer }: Props) {
+export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLogRun }: Props) {
   const [modal, setModal] = useState<null | "new" | { edit: CarEntity }>(null);
   const stats = seasonStats(logbook);
 
@@ -54,7 +53,6 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
           onEdit={() => setModal({ edit: car })}
           onOpenSheet={() => onOpenSheet(car.id)}
           onLogRun={() => onLogRun(car.id)}
-          onAskEngineer={onAskEngineer}
         />
       ))}
 
@@ -93,14 +91,12 @@ function CarCard({
   onEdit,
   onOpenSheet,
   onLogRun,
-  onAskEngineer,
 }: {
   car: CarEntity;
   logbook: LogbookState;
   onEdit: () => void;
   onOpenSheet: () => void;
   onLogRun: () => void;
-  onAskEngineer: () => void;
 }) {
   // this car's runs only (legacy runs without car_id belong to the legacy car)
   const carRuns = {
@@ -138,9 +134,6 @@ function CarCard({
         </Pressable>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onOpenSheet}>
           <Text style={styles.btnGhostText}>Setup sheet</Text>
-        </Pressable>
-        <Pressable style={[styles.btn, styles.btnGhost]} onPress={onAskEngineer}>
-          <Text style={styles.btnGhostText}>Engineer</Text>
         </Pressable>
       </View>
     </View>

@@ -1,7 +1,7 @@
 import type { SetupValues } from "../../sheets/src/sheets";
 import { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 import { compareRuns } from "./compare";
-import { carStatus, seasonStats } from "./insights";
+import { carStatus, driverStats, seasonStats } from "./insights";
 import { lapStats } from "./laps";
 import { groupBySetup, sortRuns } from "./sort";
 import {
@@ -129,6 +129,26 @@ check("carStatus: last run rated better → dialed", carStatus(s).kind === "dial
   check("seasonStats: best lap + which setup did it", stats.best_lap_s === 33.8 && stats.best_lap_setup === "Softer front");
   check("seasonStats: better streak counts rated runs from the end", stats.better_streak === 1);
   check("seasonStats: empty log is all zeros", seasonStats(initLogbook()).runs === 0 && seasonStats(initLogbook()).better_streak === 0);
+}
+
+// — driver record (driverStats: career vs yearly, podiums/wins from competitive runs only)
+{
+  let d = initLogbook();
+  d = addRun(d, runFixture({ created_at: "2025-08-10T14:00:00.000Z", type: "main", result: { position: 1, entrants: 12, best_lap_s: 34.5 } }), "2025-08-10T14:00:00.000Z").state;
+  d = addRun(d, runFixture({ type: "qualifier", result: { position: 3 } }), T0).state;
+  d = addRun(d, runFixture({ created_at: T1, type: "main", result: { position: 5 } }), T1).state;
+  d = addRun(d, runFixture({ created_at: T2, result: { position: 2, best_lap_s: 33.2 } }), T2).state; // practice: position ignored
+  const career = driverStats(d);
+  check(
+    "driverStats career: races/podiums/wins across years, practice never scores",
+    career.runs === 4 && career.races === 3 && career.podiums === 2 && career.wins === 1,
+  );
+  check("driverStats career: best lap may come from practice", career.best_lap_s === 33.2);
+  const y26 = driverStats(d, "2026");
+  check("driverStats yearly: only that year counts", y26.runs === 3 && y26.races === 2 && y26.podiums === 1 && y26.wins === 0);
+  check("driverStats: empty log is all zeros", driverStats(initLogbook()).races === 0 && driverStats(initLogbook()).podiums === 0);
+  const rt = deserializeLogbook(serializeLogbook(d));
+  check("position + entrants survive the round-trip", rt.ok && rt.state.runs[0].result?.position === 1 && rt.state.runs[0].result?.entrants === 12);
 }
 
 // — delete

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { sheetProfile } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
-import { kitVersionId, loadVersion, renameDraft } from "../../../../packages/sheets/src";
+import { draftDiff, getVersion, kitVersionId, loadVersion, renameDraft } from "../../../../packages/sheets/src";
+import type { SheetsState } from "../../../../packages/sheets/src";
 import { KB } from "../kb";
 import { loadCarSheets, useCarSheets } from "../store";
 import { colors, radius } from "../theme";
@@ -83,22 +84,26 @@ function CarPicker({ garage, onPick }: { garage: GarageState; onPick: (id: strin
   );
 }
 
-/** One car's sheet area: badges from typology, "+ New setup" pill, editor. */
+/** One car's sheet area: the setups LIST is the landing surface (Théo's test
+ *  pass) — tap a setup to open its detail in the editor; the draft you were
+ *  working on keeps its own row on top. */
 function CarSheets({ car, onBack }: { car: CarEntity; onBack: () => void }) {
   const { state, update } = useCarSheets(car.id, car.template_id);
   const profile = sheetProfile(car);
   const template = KB.templates[car.template_id] ?? KB.templates["generic-offroad"];
+  const [mode, setMode] = useState<"list" | "detail">("list");
 
   const newSetup = () => {
     // a fresh setup = draft branched from the locked kit baseline (D21)
     update((prev) => renameDraft(loadVersion(prev, kitVersionId(prev.template_id)), "New setup"));
+    setMode("detail");
   };
 
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Pressable onPress={onBack} hitSlop={10}>
-          <Text style={styles.back}>‹ {car.name}</Text>
+        <Pressable onPress={() => (mode === "detail" ? setMode("list") : onBack())} hitSlop={10}>
+          <Text style={styles.back}>{mode === "detail" ? "‹ Setups" : `‹ ${car.name}`}</Text>
         </Pressable>
         <View style={styles.badges}>
           {profile.badges.map((b) => (
@@ -111,14 +116,72 @@ function CarSheets({ car, onBack }: { car: CarEntity; onBack: () => void }) {
           <Text style={styles.newBtnText}>＋ New setup</Text>
         </Pressable>
       </View>
-      {state ? (
-        <SheetEditorScreen state={state} update={update} template={template} profile={profile} />
-      ) : (
+      {!state ? (
         <View style={{ padding: 20 }}>
           <Text style={styles.empty}>Loading sheets…</Text>
         </View>
+      ) : mode === "detail" ? (
+        <SheetEditorScreen state={state} update={update} template={template} profile={profile} />
+      ) : (
+        <SetupList
+          state={state}
+          onOpenDraft={() => setMode("detail")}
+          onOpenVersion={(id) => {
+            update((prev) => loadVersion(prev, id));
+            setMode("detail");
+          }}
+        />
       )}
     </View>
+  );
+}
+
+/** The landing list: working draft on top, then every saved version. */
+function SetupList({
+  state,
+  onOpenDraft,
+  onOpenVersion,
+}: {
+  state: SheetsState;
+  onOpenDraft: () => void;
+  onOpenVersion: (id: string) => void;
+}) {
+  const edits = draftDiff(state).length;
+  const base = getVersion(state, state.draft_base_id);
+  const versions = [...state.versions].reverse();
+
+  return (
+    <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
+      <Pressable style={styles.draftRow} onPress={onOpenDraft}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.draftLabel}>WORKING DRAFT</Text>
+          <Text style={styles.verName}>{state.draft_name}</Text>
+          <Text style={styles.verMeta}>
+            based on {base?.name ?? "kit"}
+            {edits > 0 ? ` · ${edits} unsaved change${edits > 1 ? "s" : ""}` : " · untouched"}
+          </Text>
+        </View>
+        <Text style={styles.chev}>›</Text>
+      </Pressable>
+
+      <Text style={styles.listSection}>Saved setups · {versions.length}</Text>
+      {versions.map((v) => (
+        <Pressable key={v.id} style={styles.verRow} onPress={() => onOpenVersion(v.id)}>
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+              <Text style={styles.verName}>{v.name}</Text>
+              {v.locked && <Text style={styles.kitBadge}>KIT</Text>}
+            </View>
+            <Text style={styles.verMeta}>{v.created_at.slice(0, 10)}{v.note ? ` · ${v.note}` : ""}</Text>
+          </View>
+          <Text style={styles.chev}>›</Text>
+        </Pressable>
+      ))}
+      <Text style={styles.listHint}>
+        Tap a setup to read or edit it — saving always creates a new version, the original stays
+        untouched. Compare and lineage live inside the detail view.
+      </Text>
+    </ScrollView>
   );
 }
 
@@ -169,4 +232,49 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   newBtnText: { color: "#fff", fontWeight: "800", fontSize: 12 },
+  draftRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderRadius: radius.md,
+    padding: 14,
+    marginBottom: 12,
+  },
+  draftLabel: { color: colors.accent, fontSize: 9, fontWeight: "800", letterSpacing: 1, marginBottom: 3 },
+  listSection: {
+    color: colors.sub,
+    fontSize: 11,
+    fontWeight: "800",
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    marginBottom: 8,
+  },
+  verRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    paddingVertical: 11,
+    paddingHorizontal: 14,
+    marginBottom: 6,
+  },
+  verName: { color: colors.text, fontSize: 15, fontWeight: "700" },
+  verMeta: { color: colors.sub, fontSize: 11, marginTop: 2 },
+  kitBadge: {
+    color: colors.sub,
+    fontSize: 8,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 3,
+    paddingHorizontal: 3,
+    paddingVertical: 1,
+    overflow: "hidden",
+  },
+  listHint: { color: colors.sub, fontSize: 11, lineHeight: 16, marginTop: 10, fontStyle: "italic" },
 });

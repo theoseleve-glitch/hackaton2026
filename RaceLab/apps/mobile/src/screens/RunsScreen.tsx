@@ -10,14 +10,16 @@ import {
   sortRuns,
 } from "../../../../packages/logbook/src";
 import type { LogbookState, Outcome, RunEntry, RunSortKey } from "../../../../packages/logbook/src";
-import { deserialize, serialize } from "../../../../packages/sheets/src";
+import { deserialize, initSheets, renameDraft, saveVersion, serialize } from "../../../../packages/sheets/src";
 import { addTrack, getTrack, upsertRecord } from "../../../../packages/tracks/src";
 import type { TrackEntity, TracksState } from "../../../../packages/tracks/src";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NewCarForm } from "../components/NewCarForm";
+import { PodiumSplash } from "../components/PodiumSplash";
 import { RunFormV2 } from "../components/RunFormV2";
 import { TrackForm } from "../components/TrackForm";
 import { sheetsKeyForCar } from "../garagestore";
+import { KB } from "../kb";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
@@ -58,6 +60,7 @@ export function RunsScreen(props: Props) {
   const [popup, setPopup] = useState<Popup>(null);
   const [sortKey, setSortKey] = useState<RunSortKey | "setup">("date");
   const [selected, setSelected] = useState<string[]>([]);
+  const [podium, setPodium] = useState<number | null>(null);
 
   // — selection for the form (parent-owned, popup creations update it)
   const last = lastRun(logbook);
@@ -105,6 +108,11 @@ export function RunsScreen(props: Props) {
       );
     }
     setInForm(false);
+    // bragging rights: competitive top-3 gets its moment (item from Théo's test pass)
+    const p = run.result?.position;
+    if (run.type !== "practice" && p !== undefined && p >= 1 && p <= 3) {
+      setPodium(p);
+    }
   };
 
   // ——— form mode ———
@@ -158,6 +166,7 @@ export function RunsScreen(props: Props) {
         <Modal visible={popup === "setup"} animationType="slide" transparent onRequestClose={() => setPopup(null)}>
           <NewSetupPopup
             carId={sel.car_id}
+            templateId={garage.cars.find((c) => c.id === sel.car_id)?.template_id}
             onClose={() => setPopup(null)}
             onCreated={(versionId, name) => {
               setCarSetups((prev) => [{ id: versionId, name }, ...prev]);
@@ -187,6 +196,7 @@ export function RunsScreen(props: Props) {
 
   return (
     <View style={styles.root}>
+      {podium !== null && <PodiumSplash position={podium} onDone={() => setPodium(null)} />}
       <View style={styles.header}>
         <Text style={styles.title}>
           Run log <Text style={styles.count}>· {logbook.runs.length}</Text>
@@ -319,10 +329,12 @@ function feelingColor(v: number): string {
 /** "New setup" popup: snapshots the car's current draft as a named version. */
 function NewSetupPopup({
   carId,
+  templateId,
   onClose,
   onCreated,
 }: {
   carId?: string;
+  templateId?: string;
   onClose: () => void;
   onCreated: (versionId: string, name: string) => void;
 }) {
@@ -333,18 +345,21 @@ function NewSetupPopup({
     if (!carId) return;
     const key = sheetsKeyForCar(carId);
     const raw = await AsyncStorage.getItem(key);
-    if (!raw) {
-      setError("Open this car's setup sheet once first — its kit baseline initializes there.");
-      return;
+    let base;
+    if (raw) {
+      const parsed = deserialize(raw, JSON.parse(raw).state.template_id);
+      if (!parsed.ok) {
+        setError("Could not read this car's sheets.");
+        return;
+      }
+      base = parsed.state;
+    } else {
+      // car never opened in the Sheet tab: start it from its kit baseline here
+      const template = KB.templates[templateId ?? ""] ?? KB.templates["generic-offroad"];
+      base = initSheets(template, new Date().toISOString());
     }
-    const sheetsMod = await import("../../../../packages/sheets/src");
-    const parsed = deserialize(raw, JSON.parse(raw).state.template_id);
-    if (!parsed.ok) {
-      setError("Could not read this car's sheets.");
-      return;
-    }
-    const renamed = sheetsMod.renameDraft(parsed.state, name.trim() || "New setup");
-    const { state, saved } = sheetsMod.saveVersion(renamed, new Date().toISOString());
+    const renamed = renameDraft(base, name.trim() || "New setup");
+    const { state, saved } = saveVersion(renamed, new Date().toISOString());
     const versionId = saved?.id ?? state.draft_base_id;
     await AsyncStorage.setItem(key, serialize(state)).catch(() => {});
     onCreated(versionId, saved?.name ?? (name.trim() || "New setup"));

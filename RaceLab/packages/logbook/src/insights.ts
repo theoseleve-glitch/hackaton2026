@@ -39,6 +39,44 @@ export interface SeasonStats {
   better_streak: number;
 }
 
+/** Career/yearly driver record: the bragging numbers, straight from the log. */
+export interface DriverStats {
+  runs: number;
+  tracks: number;
+  /** competitive sessions logged (qualifier + main) */
+  races: number;
+  /** competitive finishes in the top 3 */
+  podiums: number;
+  /** competitive finishes in P1 */
+  wins: number;
+  best_lap_s?: number;
+  best_lap_track?: string;
+}
+
+/** year is a 4-digit string ("2026"); omitted = whole career. */
+export function driverStats(state: LogbookState, year?: string): DriverStats {
+  const runs = year === undefined ? state.runs : state.runs.filter((r) => r.created_at.startsWith(year));
+  const competitive = runs.filter((r) => r.type === "qualifier" || r.type === "main");
+  const placed = competitive.filter((r) => r.result?.position !== undefined);
+
+  let best: RunEntry | undefined;
+  for (const r of runs) {
+    const lap = r.result?.best_lap_s;
+    if (lap === undefined) continue;
+    if (!best || lap < best.result!.best_lap_s!) best = r;
+  }
+
+  return {
+    runs: runs.length,
+    tracks: new Set(runs.map((r) => r.track.name)).size,
+    races: competitive.length,
+    podiums: placed.filter((r) => r.result!.position! <= 3).length,
+    wins: placed.filter((r) => r.result!.position! === 1).length,
+    best_lap_s: best?.result?.best_lap_s,
+    best_lap_track: best?.track.name,
+  };
+}
+
 export function seasonStats(state: LogbookState): SeasonStats {
   const runs = state.runs;
   const tracks = new Set(runs.map((r) => r.track.name)).size;

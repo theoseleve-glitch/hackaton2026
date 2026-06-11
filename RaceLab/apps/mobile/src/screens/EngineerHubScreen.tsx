@@ -235,33 +235,42 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     );
   }
 
-  // ——— list ———
+  // ——— list: the 3 tools ARE the section; history comes after ———
   const ordered = [...reports].reverse();
   return (
     <View style={styles.root}>
       <View style={styles.header}>
         <Text style={styles.h1}>Engineer</Text>
-        <View style={{ flexDirection: "row", gap: 6 }}>
-          <Pressable style={styles.pillGhost} onPress={() => setView({ k: "plan_form" })}>
-            <Text style={styles.pillGhostText}>🏆 Plan a race</Text>
-          </Pressable>
-          <Pressable style={styles.pill} onPress={() => setView({ k: "new_report" })}>
-            <Text style={styles.pillText}>＋ New report</Text>
-          </Pressable>
-        </View>
       </View>
 
-      {ordered.length === 0 ? (
-        <View style={styles.center}>
-          <Text style={styles.emptyTitle}>No reports yet</Text>
+      <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
+        <FeatureCard
+          icon="🔧"
+          title="Setup engineer"
+          desc="Pick a run — I read the setup, conditions, tyres and your feedback, then propose up to 3 grounded changes."
+          onPress={() => setView({ k: "new_report" })}
+        />
+        <FeatureCard
+          icon="🏆"
+          title="Race planner"
+          desc="Compound your training runs with the race-day forecast into a final-hours plan."
+          onPress={() => setView({ k: "plan_form" })}
+        />
+        <FeatureCard
+          icon="⛽"
+          title="Pit strategy"
+          desc="Fuel windows, stint stretching, tyre cliff — when to box and why."
+          onPress={() => setView({ k: "strategy_form" })}
+        />
+
+        <Text style={styles.sectionTitle}>Past reports</Text>
+        {ordered.length === 0 ? (
           <Text style={styles.emptyText}>
-            Generate a report from a logged run: the engineer reads the setup, the conditions, the
-            tyres and your feedback — then proposes up to 3 grounded changes. Test, log, come back.
+            Nothing yet. Every report, race plan and strategy you generate lands here — ask, test,
+            come back with more data. That loop is the whole job.
           </Text>
-        </View>
-      ) : (
-        <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-          {ordered.map((r) => (
+        ) : (
+          ordered.map((r) => (
             <Pressable key={r.id} style={styles.card} onPress={() => setView({ k: "view", saved: r })}>
               <Text style={styles.cardKind}>
                 {r.kind === "race_plan" ? "🏆 RACE PLAN" : r.kind === "strategy" ? "⛽ STRATEGY" : "🔧 REPORT"}
@@ -272,10 +281,33 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
                 {r.report ? ` · ${r.report.kind === "report" ? `confidence ${r.report.confidence}` : r.report.kind}` : ""}
               </Text>
             </Pressable>
-          ))}
-        </ScrollView>
-      )}
+          ))
+        )}
+      </ScrollView>
     </View>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  desc,
+  onPress,
+}: {
+  icon: string;
+  title: string;
+  desc: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable style={styles.featureCard} onPress={onPress}>
+      <Text style={styles.featureIcon}>{icon}</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.featureTitle}>{title}</Text>
+        <Text style={styles.featureDesc}>{desc}</Text>
+      </View>
+      <Text style={styles.featureChev}>›</Text>
+    </Pressable>
   );
 }
 
@@ -446,6 +478,30 @@ const styles = StyleSheet.create({
   },
   back: { color: colors.accent, fontSize: 14, fontWeight: "700" },
   headerTitle: { color: colors.text, fontSize: 15, fontWeight: "800", flex: 1 },
+  featureCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderRadius: radius.lg,
+    padding: 16,
+    marginBottom: 10,
+  },
+  featureIcon: { fontSize: 26 },
+  featureTitle: { color: colors.text, fontSize: 16, fontWeight: "800" },
+  featureDesc: { color: colors.sub, fontSize: 12, lineHeight: 17, marginTop: 3 },
+  featureChev: { color: colors.accent, fontSize: 24, fontWeight: "700" },
+  sectionTitle: {
+    color: colors.sub,
+    fontSize: 11,
+    fontWeight: "800",
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    marginTop: 14,
+    marginBottom: 8,
+  },
   cta: {
     backgroundColor: colors.accent,
     borderRadius: radius.md,
