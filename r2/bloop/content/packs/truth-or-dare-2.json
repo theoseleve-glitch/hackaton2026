@@ -532,7 +532,7 @@
       "minAge": 13,
       "text": {
         "fr": "Traverse la pièce en démarche de défilé haute couture, aller-retour, regard d'acier obligatoire.",
-        "en": "Walk the length of the room like a runway model, there and back, steel gaze mandatory."
+        "en": "Walk the length of the room like a runway model, there and back, steely gaze mandatory."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1014,7 +1014,7 @@
       "minAge": 16,
       "text": {
         "fr": "Quel énorme red flag as-tu ignoré juste parce que la personne te plaisait beaucoup trop ?",
-        "en": "What giant red flag did you ignore just because the person was way too attractive?"
+        "en": "What giant red flag did you ignore just because you were way too into the person?"
       },
       "props": false,
       "tags": ["funny", "deep"]
@@ -1091,8 +1091,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la chose la plus gênante que tu aies faite pour attirer l'attention d'un crush ?",
-        "en": "What's the most embarrassing thing you've ever done to get a crush's attention?"
+        "fr": "Raconte le plan le plus désespéré que tu aies monté pour attirer l'attention d'un crush. Est-ce que ça a marché ?",
+        "en": "Tell us the most desperate scheme you've ever pulled to get a crush's attention. Did it actually work?"
       },
       "props": false,
       "tags": ["funny"]
@@ -1301,6 +1301,71 @@
       "text": {
         "fr": "Quel est le dernier truc que tu as liké à 2 h du matin en espérant que personne ne le voie jamais ?",
         "en": "What's the last thing you liked at 2 a.m. while praying nobody would ever see it?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-031",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà inventé une excuse pour écourter un date ? Donne l'excuse officielle… puis la vraie raison.",
+        "en": "Have you ever made up an excuse to cut a date short? Give us the official excuse… then the real reason."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-032",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Combien de temps as-tu fait durer une relation ou une situationship en sachant que c'était mort ? Qu'est-ce qui te retenait ?",
+        "en": "How long did you keep a relationship or situationship going after you knew it was dead? What kept you there?"
+      },
+      "props": false,
+      "tags": ["funny", "deep"]
+    },
+    {
+      "id": "fun-t-party-033",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà menti sur ton âge, ton prénom ou ton métier à quelqu'un en soirée ? Présente-nous ton faux personnage.",
+        "en": "Have you ever lied about your age, name, or job to a stranger on a night out? Introduce us to the character."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-034",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qui dans cette pièce envoie les messages les plus incontrôlables dans le groupe à 3 h du matin ? Cites-en un de mémoire.",
+        "en": "Who in this room sends the most unhinged 3 a.m. messages in the group chat? Quote one from memory."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-035",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà entraîné ta technique de bisou sur ta main, un miroir ou un oreiller ? Assume l'époque et la méthode.",
+        "en": "Did you ever practice kissing on your hand, a mirror, or a pillow? Own the era and the method."
       },
       "props": false,
       "tags": ["funny"]
@@ -1695,6 +1760,71 @@
       },
       "props": false,
       "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-031",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Démontre ta meilleure technique de bisou sur le dos de ta main, bruitages inclus. Le groupe note le réalisme.",
+        "en": "Demonstrate your best kissing technique on the back of your hand, sound effects included. The room grades the realism."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-032",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Écris un message risqué à ton crush ou à ton dernier match, montre-le au groupe… puis décide en direct : envoyer ou supprimer. Le groupe commente.",
+        "en": "Type a risky text to your crush or your latest match, show the room… then decide live: send or delete. The room provides commentary."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-033",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Rejoue ta démarche du lendemain de soirée : traverse le salon, chaussures à la main, en saluant un voisin imaginaire.",
+        "en": "Reenact your morning-after walk of shame: cross the living room, shoes in hand, greeting an imaginary neighbor."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-034",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Joue la scène : le joueur de ton choix te laisse en vu depuis trois jours. Confronte-le maintenant, en direct. Il doit improviser ses excuses.",
+        "en": "Act it out: the player of your choice has left you on read for three days. Confront them right now, live. They must improvise their excuses."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-035",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais ta tête de flagrant délit face à tes parents à 2 h du matin, puis improvise l'excuse exacte que tu donnerais. Le groupe juge si tu survis.",
+        "en": "Make your best 'caught by your parents at 2 a.m.' face, then improvise the exact excuse you'd give. The room decides if you survive."
+      },
+      "props": false,
+      "tags": ["funny"]
     }
 ,
     {
@@ -1926,7 +2056,7 @@
       "minAge": 16,
       "text": {
         "fr": "À quel moment es-tu le plus fier ou la plus fière de ton/ta partenaire ? Donne un exemple précis.",
-        "en": "When are you at your absolute proudest of your partner? Give one specific example."
+        "en": "When do you feel proudest of your partner? Give one specific example."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2408,11 +2538,11 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Fais à ton/ta partenaire le compliment que tu es normalement trop timide pour dire en face. Là, tout de suite, dans les yeux.",
-        "en": "Give your partner the compliment you're normally too shy to say to their face. Right now, eyes locked."
+        "fr": "Quel geste anodin en public est en réalité votre code secret pour « on s'en va » ? Révèle-le au groupe — il vous en faudra un nouveau dès ce soir.",
+        "en": "What innocent-looking gesture is secretly your couple's code for 'let's get out of here'? Reveal it to the room — you'll be needing a new one tonight."
       },
       "props": false,
-      "tags": ["couple", "spicy", "deep"]
+      "tags": ["couple", "spicy", "funny"]
     },
     {
       "id": "lov-t-spicy-006",
@@ -2655,8 +2785,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Week-end « ne pas déranger » rien que vous deux : raconte la première heure, strictement en vocabulaire tous publics.",
-        "en": "A 'do not disturb' weekend, just you two: walk us through hour one — strictly family-friendly vocabulary."
+        "fr": "C'est quoi votre alibi officiel quand vous quittez une soirée « tôt » tous les deux ? Le groupe note la crédibilité de l'alibi sur 10.",
+        "en": "What's your official cover story when you two leave a party 'early'? The room rates the alibi's believability out of 10."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -2890,11 +3020,11 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Écris un mot doux (ou pimenté) sur la paume de ton/ta partenaire avec ton doigt. Il ou elle doit le deviner à voix haute.",
-        "en": "Spell a sweet (or spicy) word on your partner's palm with your finger. They must guess it out loud."
+        "fr": "Fais monter la température avec UNE seule phrase tous publics adressée à ton/ta partenaire. Le groupe lit le thermomètre imaginaire : tiède, chaud, ou canicule.",
+        "en": "Raise the temperature with ONE family-friendly sentence aimed at your partner. The room reads the imaginary thermometer: lukewarm, hot, or heatwave."
       },
       "props": false,
-      "tags": ["couple", "spicy", "physical"]
+      "tags": ["couple", "spicy", "funny"]
     },
     {
       "id": "lov-d-spicy-018",
@@ -2903,11 +3033,11 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Fais à ton/ta partenaire LE regard « on rentre ? » pendant 10 secondes. Le groupe doit deviner le message exact.",
-        "en": "Give your partner THE 'shall we head home?' look for 10 seconds. The room has to guess the exact message."
+        "fr": "Improvise 15 secondes de danse de séduction devant ton/ta partenaire assis, qui doit garder un visage d'examinateur du permis. Le groupe désigne qui a craqué en premier.",
+        "en": "Improvise 15 seconds of a seductive dance for your seated partner, who must keep the face of a driving-test examiner. The room rules on who broke first."
       },
       "props": false,
-      "tags": ["couple", "spicy", "funny"]
+      "tags": ["couple", "spicy", "physical", "funny"]
     },
     {
       "id": "lov-d-spicy-019",

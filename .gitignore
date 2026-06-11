@@ -21,3 +21,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Vercel + tooling local state
+.vercel/
+.playwright-mcp/
+*.tsbuildinfo

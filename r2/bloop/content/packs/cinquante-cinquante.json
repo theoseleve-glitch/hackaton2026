@@ -706,6 +706,1414 @@
       ],
       "tone": "classic",
       "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-morning-045",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Le matin, j'ai déjà…", "en": "In the morning, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…snoozé jusqu'à la panique réelle", "en": "…snoozed straight into genuine panic" }, "crowdYesPct": 75 },
+        { "id": "b", "text": { "fr": "…mis deux chaussettes différentes sans le savoir", "en": "…left in mismatched socks without knowing" }, "crowdYesPct": 62 },
+        { "id": "c", "text": { "fr": "…bu mon café trop vite et regretté aussitôt", "en": "…chugged coffee too fast and instantly regretted it" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…répondu à un mail important à moitié endormi", "en": "…answered an important email half asleep" }, "crowdYesPct": 47 },
+        { "id": "e", "text": { "fr": "…cherché mes lunettes en les portant", "en": "…hunted for the glasses already on my face" }, "crowdYesPct": 53 },
+        { "id": "f", "text": { "fr": "…découvert à midi que mon t-shirt était à l'envers", "en": "…found out at noon my shirt was inside out" }, "crowdYesPct": 24 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "fails"]
+    },
+    {
+      "id": "cc-timetravel-046",
+      "targetYesPct": 55,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Avec une machine à remonter le temps, je…", "en": "With a time machine, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…retournerais effacer un message gênant", "en": "…go back and unsend one embarrassing text" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…irais voir les dinosaures malgré le danger", "en": "…visit the dinosaurs despite the danger" }, "crowdYesPct": 41 },
+        { "id": "c", "text": { "fr": "…me donnerais les numéros du loto", "en": "…hand myself the lottery numbers" }, "crowdYesPct": 78 },
+        { "id": "d", "text": { "fr": "…irais espionner mon propre futur mariage", "en": "…spy on my own future wedding" }, "crowdYesPct": 35 },
+        { "id": "e", "text": { "fr": "…éviterais soigneusement mon moi du passé", "en": "…carefully avoid bumping into past me" }, "crowdYesPct": 52 },
+        { "id": "f", "text": { "fr": "…ne changerais rien du tout", "en": "…change absolutely nothing" }, "crowdYesPct": 23 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "dreams"]
+    },
+    {
+      "id": "cc-wedding-047",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "À un mariage, j'ai déjà…", "en": "At a wedding, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…pleuré avant même les mariés", "en": "…cried before the couple did" }, "crowdYesPct": 38 },
+        { "id": "b", "text": { "fr": "…douté du DJ dès la première chanson", "en": "…doubted the DJ from song one" }, "crowdYesPct": 56 },
+        { "id": "c", "text": { "fr": "…resservi du gâteau sans demander", "en": "…gone back for cake without asking" }, "crowdYesPct": 49 },
+        { "id": "d", "text": { "fr": "…esquivé le bouquet comme une balle de match", "en": "…dodged the bouquet like a dodgeball" }, "crowdYesPct": 27 },
+        { "id": "e", "text": { "fr": "…inventé des paroles sur la piste", "en": "…faked the lyrics on the dance floor" }, "crowdYesPct": 61 },
+        { "id": "f", "text": { "fr": "…noté mentalement ce que je ferais mieux", "en": "…mentally noted what I'd do better" }, "crowdYesPct": 70 }
+      ],
+      "tone": "classic",
+      "tags": ["party", "awkward"]
+    },
+    {
+      "id": "cc-internet-048",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "Sur internet, j'ai déjà…", "en": "On the internet, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…cliqué sur 'tout accepter' sans lire", "en": "…clicked 'accept all' without reading" }, "crowdYesPct": 94 },
+        { "id": "b", "text": { "fr": "…regardé un tuto puis rien fait du tout", "en": "…watched a tutorial and then done nothing" }, "crowdYesPct": 86 },
+        { "id": "c", "text": { "fr": "…laissé un article au panier pour toujours", "en": "…left something in the cart forever" }, "crowdYesPct": 81 },
+        { "id": "d", "text": { "fr": "…googlé mes symptômes et paniqué", "en": "…googled my symptoms and panicked" }, "crowdYesPct": 74 },
+        { "id": "e", "text": { "fr": "…liké un vieux post par accident en stalkant", "en": "…liked an old post by accident while lurking" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…commenté juste pour gagner un débat", "en": "…commented purely to win an argument" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "relatable"]
+    },
+    {
+      "id": "cc-fame-049",
+      "targetYesPct": 30,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour devenir célèbre, je…", "en": "To get famous, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…lancerais une chaîne sur ma vie quotidienne", "en": "…start a channel about my daily life" }, "crowdYesPct": 36 },
+        { "id": "b", "text": { "fr": "…participerais à une télé-réalité", "en": "…join a reality show" }, "crowdYesPct": 26 },
+        { "id": "c", "text": { "fr": "…laisserais un paparazzi me suivre une semaine", "en": "…let paparazzi follow me for a week" }, "crowdYesPct": 19 },
+        { "id": "d", "text": { "fr": "…chanterais l'hymne dans un stade plein", "en": "…sing the anthem in a packed stadium" }, "crowdYesPct": 23 },
+        { "id": "e", "text": { "fr": "…raconterais mes secrets dans un livre", "en": "…spill my secrets in a memoir" }, "crowdYesPct": 14 },
+        { "id": "f", "text": { "fr": "…changerais de prénom pour un plus 'vendeur'", "en": "…change my name to something more 'marketable'" }, "crowdYesPct": 9 }
+      ],
+      "tone": "classic",
+      "tags": ["dreams", "absurd"]
+    },
+    {
+      "id": "cc-whitelies-050",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "Petit mensonge : j'ai déjà dit…", "en": "Little white lie: I have said…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…'j'allais justement t'appeler'", "en": "…'I was just about to call you'" }, "crowdYesPct": 72 },
+        { "id": "b", "text": { "fr": "…'c'est super bon' devant un plat très moyen", "en": "…'this is delicious' about a very mid dish" }, "crowdYesPct": 83 },
+        { "id": "c", "text": { "fr": "…'je suis à 5 minutes' depuis mon canapé", "en": "…'I'm five minutes away' from my couch" }, "crowdYesPct": 66 },
+        { "id": "d", "text": { "fr": "…'j'ai pas vu ton message' en l'ayant lu deux fois", "en": "…'I didn't see your text' after reading it twice" }, "crowdYesPct": 59 },
+        { "id": "e", "text": { "fr": "…'ça me va très bien' pour abréger chez le coiffeur", "en": "…'I love it' just to end the haircut faster" }, "crowdYesPct": 51 },
+        { "id": "f", "text": { "fr": "…'je connais, ouais' pour un film jamais vu", "en": "…'oh yeah I've seen it' about a movie I never saw" }, "crowdYesPct": 77 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-newyear-051",
+      "targetYesPct": 20,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté bonnes résolutions, j'ai déjà…", "en": "New Year's resolutions: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tenu une résolution toute l'année", "en": "…kept one going the entire year" }, "crowdYesPct": 12 },
+        { "id": "b", "text": { "fr": "…pris la même résolution trois ans de suite", "en": "…made the same resolution three years running" }, "crowdYesPct": 48 },
+        { "id": "c", "text": { "fr": "…abandonné avant la fin janvier", "en": "…quit before January even ended" }, "crowdYesPct": 65 },
+        { "id": "d", "text": { "fr": "…écrit ma liste quelque part puis perdu la liste", "en": "…written them down and lost the list" }, "crowdYesPct": 31 },
+        { "id": "e", "text": { "fr": "…pris une résolution à minuit, abandonnée le 2", "en": "…made one at midnight and dropped it on the 2nd" }, "crowdYesPct": 26 },
+        { "id": "f", "text": { "fr": "…imposé une résolution à quelqu'un d'autre", "en": "…assigned a resolution to someone else" }, "crowdYesPct": 17 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "fails"]
+    },
+    {
+      "id": "cc-coffee-052",
+      "targetYesPct": 60,
+      "askKind": "agree",
+      "stem": { "fr": "Sur le café…", "en": "About coffee…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…avant le premier café, ne me demandez rien", "en": "…before the first cup, ask me nothing" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…le déca, c'est de la figuration", "en": "…decaf is just role-play" }, "crowdYesPct": 46 },
+        { "id": "c", "text": { "fr": "…la machine du bureau fait un café tristement correct", "en": "…the office machine makes sadly acceptable coffee" }, "crowdYesPct": 57 },
+        { "id": "d", "text": { "fr": "…un café à 16 h, c'est une nuit blanche garantie", "en": "…coffee after 4 p.m. means a sleepless night" }, "crowdYesPct": 41 },
+        { "id": "e", "text": { "fr": "…les boissons caramel-chantilly ne sont plus du café", "en": "…caramel-whip drinks stopped being coffee" }, "crowdYesPct": 52 },
+        { "id": "f", "text": { "fr": "…le thé est une boisson de gens patients", "en": "…tea is a drink for patient people" }, "crowdYesPct": 35 }
+      ],
+      "tone": "classic",
+      "tags": ["food", "opinions"]
+    },
+    {
+      "id": "cc-driving-053",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Au volant ou en voiture, j'ai déjà…", "en": "Behind the wheel or riding along, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…remercié d'un geste puis râlé dans la même minute", "en": "…waved thanks and muttered insults in the same minute" }, "crowdYesPct": 54 },
+        { "id": "b", "text": { "fr": "…chanté plus fort que l'autoradio", "en": "…out-sung the car radio" }, "crowdYesPct": 73 },
+        { "id": "c", "text": { "fr": "…contredit le GPS et perdu", "en": "…argued with the GPS and lost" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…fait semblant de connaître la route", "en": "…pretended to know the way" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…tourné 20 minutes pour une place 'parfaite'", "en": "…circled 20 minutes for the 'perfect' spot" }, "crowdYesPct": 36 },
+        { "id": "f", "text": { "fr": "…klaxonné puis fait semblant que c'était pas moi", "en": "…honked and then pretended it wasn't me" }, "crowdYesPct": 22 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life"]
+    },
+    {
+      "id": "cc-roommates-054",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "En colocation ou en famille, j'ai déjà…", "en": "Living with other people, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…décrété mentalement 'mon' étagère du frigo", "en": "…mentally claimed 'my' fridge shelf" }, "crowdYesPct": 52 },
+        { "id": "b", "text": { "fr": "…lavé une seule casserole : la mienne", "en": "…washed exactly one pan: mine" }, "crowdYesPct": 33 },
+        { "id": "c", "text": { "fr": "…passé l'aspirateur très tôt par pure vengeance", "en": "…vacuumed very early out of pure revenge" }, "crowdYesPct": 28 },
+        { "id": "d", "text": { "fr": "…caché mes snacks dans ma chambre", "en": "…hidden my snacks in my bedroom" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…accusé le chat pour un truc cassé", "en": "…blamed the cat for something I broke" }, "crowdYesPct": 17 },
+        { "id": "f", "text": { "fr": "…convoqué une réunion de crise pour la vaisselle", "en": "…called a crisis meeting about the dishes" }, "crowdYesPct": 23 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "confessions"]
+    },
+    {
+      "id": "cc-haircut-055",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Chez le coiffeur, j'ai déjà…", "en": "At the hairdresser's, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit 'juste les pointes' et perdu 10 centimètres", "en": "…said 'just a trim' and lost four inches" }, "crowdYesPct": 61 },
+        { "id": "b", "text": { "fr": "…hoché la tête sans rien entendre sous le séchoir", "en": "…nodded along hearing nothing under the dryer" }, "crowdYesPct": 70 },
+        { "id": "c", "text": { "fr": "…montré une photo de star avec espoir", "en": "…shown a celebrity photo with real hope" }, "crowdYesPct": 56 },
+        { "id": "d", "text": { "fr": "…détesté la coupe et laissé un pourboire quand même", "en": "…hated the cut and tipped anyway" }, "crowdYesPct": 48 },
+        { "id": "e", "text": { "fr": "…attendu de rentrer pour me recoiffer moi-même", "en": "…waited to get home to restyle it myself" }, "crowdYesPct": 66 },
+        { "id": "f", "text": { "fr": "…repoussé le rendez-vous jusqu'au stade critique", "en": "…postponed the appointment until critical mass" }, "crowdYesPct": 74 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "awkward"]
+    },
+    {
+      "id": "cc-doctor-056",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "Chez le médecin, j'ai déjà…", "en": "At the doctor's, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…minimisé ('non non, ça va') alors que non", "en": "…downplayed it ('no no, I'm fine') when I wasn't" }, "crowdYesPct": 55 },
+        { "id": "b", "text": { "fr": "…guéri mystérieusement dans la salle d'attente", "en": "…mysteriously healed in the waiting room" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…cru avoir mieux googlé que le diagnostic", "en": "…believed I had out-googled the diagnosis" }, "crowdYesPct": 36 },
+        { "id": "d", "text": { "fr": "…répété mes symptômes avant d'entrer", "en": "…rehearsed my symptoms before walking in" }, "crowdYesPct": 43 },
+        { "id": "e", "text": { "fr": "…menti sur le sport ('oui oui, régulièrement')", "en": "…lied about exercising ('oh yes, regularly')" }, "crowdYesPct": 60 },
+        { "id": "f", "text": { "fr": "…retrouvé ma vraie question une fois dehors", "en": "…remembered my actual question once outside" }, "crowdYesPct": 31 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "awkward"]
+    },
+    {
+      "id": "cc-superpower-057",
+      "targetYesPct": 50,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Si j'avais un superpouvoir, je…", "en": "If I had a superpower, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…l'utiliserais surtout pour des trucs paresseux", "en": "…use it mostly for lazy stuff" }, "crowdYesPct": 67 },
+        { "id": "b", "text": { "fr": "…garderais le secret même pour mes proches", "en": "…keep it secret even from family" }, "crowdYesPct": 31 },
+        { "id": "c", "text": { "fr": "…en ferais un métier rémunéré", "en": "…monetize it immediately" }, "crowdYesPct": 53 },
+        { "id": "d", "text": { "fr": "…tricherais à un jeu avec, au moins une fois", "en": "…use it to cheat at a game at least once" }, "crowdYesPct": 58 },
+        { "id": "e", "text": { "fr": "…finirais par le regretter", "en": "…end up regretting it" }, "crowdYesPct": 27 },
+        { "id": "f", "text": { "fr": "…sauverais le monde, mais après le week-end", "en": "…save the world, but after the weekend" }, "crowdYesPct": 46 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "dreams"]
+    },
+    {
+      "id": "cc-birthday-058",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Pour un anniversaire, j'ai déjà…", "en": "Birthday-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…chanté 'joyeux anniversaire' sans savoir où regarder", "en": "…sung 'happy birthday' with nowhere safe to look" }, "crowdYesPct": 78 },
+        { "id": "b", "text": { "fr": "…recyclé un cadeau reçu", "en": "…re-gifted a present" }, "crowdYesPct": 54 },
+        { "id": "c", "text": { "fr": "…oublié un anniversaire malgré la notification", "en": "…forgotten a birthday despite the reminder" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…prétendu que la surprise en était une", "en": "…pretended the surprise party was a surprise" }, "crowdYesPct": 42 },
+        { "id": "e", "text": { "fr": "…soufflé les bougies de quelqu'un d'autre", "en": "…blown out someone else's candles" }, "crowdYesPct": 18 },
+        { "id": "f", "text": { "fr": "…répondu 'merci' aux vœux avec trois jours de retard", "en": "…replied 'thanks' three days late to the wishes" }, "crowdYesPct": 70 }
+      ],
+      "tone": "classic",
+      "tags": ["party", "relatable"]
+    },
+    {
+      "id": "cc-future-059",
+      "targetYesPct": 65,
+      "askKind": "agree",
+      "stem": { "fr": "D'ici dix ans…", "en": "Within ten years…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…on parlera aux assistants IA comme à des potes", "en": "…we'll talk to AI assistants like friends" }, "crowdYesPct": 58 },
+        { "id": "b", "text": { "fr": "…les voitures se conduiront toutes seules en ville", "en": "…cars will drive themselves around town" }, "crowdYesPct": 49 },
+        { "id": "c", "text": { "fr": "…on paiera tout sans jamais toucher d'argent liquide", "en": "…we'll pay for everything without touching cash" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…les écrans pliables seront partout", "en": "…folding screens will be everywhere" }, "crowdYesPct": 41 },
+        { "id": "e", "text": { "fr": "…on regrettera 'l'époque d'avant'", "en": "…we'll be nostalgic for 'the before times'" }, "crowdYesPct": 69 },
+        { "id": "f", "text": { "fr": "…quelqu'un marchera sur Mars", "en": "…someone will walk on Mars" }, "crowdYesPct": 35 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "opinions"]
+    },
+    {
+      "id": "cc-streaming-060",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "Devant une série, j'ai déjà…", "en": "Watching a series, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…répondu 'oui je regarde' à l'écran accusateur", "en": "…clicked 'yes, still watching' at the judgy prompt" }, "crowdYesPct": 88 },
+        { "id": "b", "text": { "fr": "…enchaîné 'un dernier épisode' jusqu'à 3 h", "en": "…chained 'one last episode' until 3 a.m." }, "crowdYesPct": 83 },
+        { "id": "c", "text": { "fr": "…spoilé quelqu'un sans le vouloir", "en": "…accidentally spoiled someone" }, "crowdYesPct": 57 },
+        { "id": "d", "text": { "fr": "…relancé une série déjà vue au lieu d'une nouvelle", "en": "…rewatched an old show instead of starting a new one" }, "crowdYesPct": 79 },
+        { "id": "e", "text": { "fr": "…regardé la fin en avance en cachette", "en": "…secretly skipped ahead to the ending" }, "crowdYesPct": 33 },
+        { "id": "f", "text": { "fr": "…avancé sans l'autre puis fait l'innocent", "en": "…watched ahead without my person and played innocent" }, "crowdYesPct": 48 }
+      ],
+      "tone": "classic",
+      "tags": ["movies", "tech"]
+    },
+    {
+      "id": "cc-books-061",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté lecture, j'ai déjà…", "en": "Book-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…affirmé avoir lu un classique jamais ouvert", "en": "…claimed to have read a classic I never opened" }, "crowdYesPct": 51 },
+        { "id": "b", "text": { "fr": "…acheté un livre pour la couverture", "en": "…bought a book purely for the cover" }, "crowdYesPct": 56 },
+        { "id": "c", "text": { "fr": "…abandonné un livre à 30 pages de la fin", "en": "…quit a book 30 pages from the end" }, "crowdYesPct": 39 },
+        { "id": "d", "text": { "fr": "…lu la dernière page en premier", "en": "…read the last page first" }, "crowdYesPct": 28 },
+        { "id": "e", "text": { "fr": "…entretenu une pile 'à lire' pendant des années", "en": "…maintained a 'to read' pile for years" }, "crowdYesPct": 62 },
+        { "id": "f", "text": { "fr": "…pleuré sur un livre dans un lieu public", "en": "…cried over a book in public" }, "crowdYesPct": 24 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-plane-062",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En avion, j'ai déjà…", "en": "On a plane, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…applaudi à l'atterrissage", "en": "…clapped on landing" }, "crowdYesPct": 42 },
+        { "id": "b", "text": { "fr": "…regardé le film du voisin sans le son", "en": "…watched my neighbor's movie with no sound" }, "crowdYesPct": 58 },
+        { "id": "c", "text": { "fr": "…gardé ma ceinture bien après le signal", "en": "…kept my seatbelt on long after the sign" }, "crowdYesPct": 65 },
+        { "id": "d", "text": { "fr": "…mené une guerre silencieuse pour l'accoudoir", "en": "…fought a silent armrest war" }, "crowdYesPct": 61 },
+        { "id": "e", "text": { "fr": "…suivi les consignes de sécurité par politesse", "en": "…watched the safety demo out of politeness" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…sursauté au moindre 'bing' de cabine", "en": "…flinched at every cabin 'bing'" }, "crowdYesPct": 37 }
+      ],
+      "tone": "classic",
+      "tags": ["travel"]
+    },
+    {
+      "id": "cc-hotel-063",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "À l'hôtel, j'ai déjà…", "en": "At a hotel, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…embarqué tous les mini-savons", "en": "…taken every mini soap" }, "crowdYesPct": 72 },
+        { "id": "b", "text": { "fr": "…testé le lit en étoile de mer immédiatement", "en": "…starfished the bed immediately" }, "crowdYesPct": 79 },
+        { "id": "c", "text": { "fr": "…ouvert tous les tiroirs sans raison", "en": "…opened every drawer for no reason" }, "crowdYesPct": 64 },
+        { "id": "d", "text": { "fr": "…pris le buffet du petit-déj' comme un défi sportif", "en": "…treated the breakfast buffet like competitive sport" }, "crowdYesPct": 58 },
+        { "id": "e", "text": { "fr": "…adopté mentalement le peignoir pour toujours", "en": "…mentally adopted the bathrobe forever" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…demandé le wifi avant de dire bonjour", "en": "…asked for the wifi before saying hello" }, "crowdYesPct": 51 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "relatable"]
+    },
+    {
+      "id": "cc-believe-064",
+      "targetYesPct": 35,
+      "askKind": "agree",
+      "stem": { "fr": "Sans preuve, je crois que…", "en": "No proof, but I believe…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…les fantômes existent peut-être", "en": "…ghosts might be real" }, "crowdYesPct": 39 },
+        { "id": "b", "text": { "fr": "…on n'est pas seuls dans l'univers", "en": "…we are not alone in the universe" }, "crowdYesPct": 58 },
+        { "id": "c", "text": { "fr": "…mon horoscope tombe parfois trop juste", "en": "…my horoscope is sometimes too accurate" }, "crowdYesPct": 31 },
+        { "id": "d", "text": { "fr": "…toucher du bois, ça aide vraiment", "en": "…knocking on wood actually helps" }, "crowdYesPct": 36 },
+        { "id": "e", "text": { "fr": "…certains lieux portent la poisse", "en": "…some places are genuinely jinxed" }, "crowdYesPct": 44 },
+        { "id": "f", "text": { "fr": "…les objets disparaissent exprès", "en": "…objects vanish on purpose" }, "crowdYesPct": 26 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "opinions"]
+    },
+    {
+      "id": "cc-videocall-065",
+      "targetYesPct": 80,
+      "askKind": "didYou",
+      "stem": { "fr": "En visio, j'ai déjà…", "en": "On a video call, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…parlé en muet avec conviction", "en": "…delivered a whole speech on mute" }, "crowdYesPct": 85 },
+        { "id": "b", "text": { "fr": "…gardé le bas de pyjama hors champ", "en": "…kept pajama bottoms out of frame" }, "crowdYesPct": 71 },
+        { "id": "c", "text": { "fr": "…fixé mon propre visage au lieu des autres", "en": "…stared at my own face instead of the others" }, "crowdYesPct": 77 },
+        { "id": "d", "text": { "fr": "…dit 'on m'entend ?' au moins mille fois", "en": "…said 'can you hear me?' at least a thousand times" }, "crowdYesPct": 91 },
+        { "id": "e", "text": { "fr": "…coupé la caméra pour aller grignoter", "en": "…turned the camera off to go snack" }, "crowdYesPct": 66 },
+        { "id": "f", "text": { "fr": "…simulé un problème de connexion", "en": "…faked a connection problem" }, "crowdYesPct": 39 }
+      ],
+      "tone": "classic",
+      "tags": ["work", "tech"]
+    },
+    {
+      "id": "cc-spider-066",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Face à une araignée, j'ai déjà…", "en": "Faced with a spider, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…évacué la pièce en la lui laissant", "en": "…evacuated and surrendered the room" }, "crowdYesPct": 47 },
+        { "id": "b", "text": { "fr": "…appelé quelqu'un de plus courageux", "en": "…called in someone braver" }, "crowdYesPct": 53 },
+        { "id": "c", "text": { "fr": "…perdu sa trace et donc le sommeil", "en": "…lost track of it and therefore lost sleep" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…fait le déménagement diplomatique au verre", "en": "…done the diplomatic glass-and-paper relocation" }, "crowdYesPct": 62 },
+        { "id": "e", "text": { "fr": "…crié plus fort que nécessaire", "en": "…screamed louder than strictly necessary" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…négocié à voix haute avec elle", "en": "…negotiated with it out loud" }, "crowdYesPct": 29 }
+      ],
+      "tone": "classic",
+      "tags": ["fear", "home"]
+    },
+    {
+      "id": "cc-noshame-067",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Sans aucune fierté, j'ai déjà…", "en": "No pride here: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…mangé des pâtes trois soirs de suite", "en": "…eaten pasta three nights in a row" }, "crowdYesPct": 74 },
+        { "id": "b", "text": { "fr": "…porté la 'tenue d'intérieur' pour une course rapide", "en": "…worn the 'house outfit' on a quick errand" }, "crowdYesPct": 68 },
+        { "id": "c", "text": { "fr": "…repoussé une lessive en rachetant des chaussettes", "en": "…postponed laundry by buying new socks" }, "crowdYesPct": 23 },
+        { "id": "d", "text": { "fr": "…mis un réveil de sieste de 20 min et dormi 2 h", "en": "…set a 20-minute nap alarm and slept two hours" }, "crowdYesPct": 59 },
+        { "id": "e", "text": { "fr": "…abandonné un panier en ligne par flemme de me lever", "en": "…abandoned an online cart too lazy to grab my card" }, "crowdYesPct": 44 },
+        { "id": "f", "text": { "fr": "…chuchoté 'je peux pas parler' chez moi, seul", "en": "…whispered 'I can't talk right now' at home, alone" }, "crowdYesPct": 31 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-beach-068",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "À la plage ou à la piscine, j'ai déjà…", "en": "At the beach or pool, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…crié dans l'eau froide puis menti ('elle est bonne')", "en": "…screamed at the cold water then lied ('it's lovely')" }, "crowdYesPct": 63 },
+        { "id": "b", "text": { "fr": "…fait semblant d'être à l'aise en eau profonde", "en": "…faked being fine in deep water" }, "crowdYesPct": 37 },
+        { "id": "c", "text": { "fr": "…perdu un objet dans le sable pour toujours", "en": "…lost something in the sand forever" }, "crowdYesPct": 49 },
+        { "id": "d", "text": { "fr": "…gardé mon t-shirt 'par style'", "en": "…kept my t-shirt on 'for style'" }, "crowdYesPct": 28 },
+        { "id": "e", "text": { "fr": "…bu la tasse devant tout le monde", "en": "…wiped out swallowing water in front of everyone" }, "crowdYesPct": 55 },
+        { "id": "f", "text": { "fr": "…enterré quelqu'un qui n'avait rien demandé", "en": "…buried someone who never asked for it" }, "crowdYesPct": 42 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "awkward"]
+    },
+    {
+      "id": "cc-paidtrip-069",
+      "targetYesPct": 15,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Si on me payait le voyage, je…", "en": "If the trip were fully paid, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…partirais sur Mars sans billet retour", "en": "…move to Mars one-way" }, "crowdYesPct": 9 },
+        { "id": "b", "text": { "fr": "…passerais six mois en Antarctique", "en": "…spend six months in Antarctica" }, "crowdYesPct": 21 },
+        { "id": "c", "text": { "fr": "…ferais le tour du monde sans avion", "en": "…circle the globe with no planes" }, "crowdYesPct": 33 },
+        { "id": "d", "text": { "fr": "…vivrais un mois dans un monastère silencieux", "en": "…live a month in a silent monastery" }, "crowdYesPct": 17 },
+        { "id": "e", "text": { "fr": "…traverserais l'Atlantique en voilier", "en": "…sail across the Atlantic" }, "crowdYesPct": 26 },
+        { "id": "f", "text": { "fr": "…dormirais une semaine dans une station spatiale", "en": "…spend a week on a space station" }, "crowdYesPct": 41 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "challenges"]
+    },
+    {
+      "id": "cc-allagree-070",
+      "targetYesPct": 90,
+      "askKind": "agree",
+      "stem": { "fr": "On est tous d'accord…", "en": "We can all agree…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…un câlin de plus de 5 secondes, ça répare", "en": "…a hug longer than five seconds fixes things" }, "crowdYesPct": 86 },
+        { "id": "b", "text": { "fr": "…entendre son prénom bien prononcé, ça fait plaisir", "en": "…hearing your name said right feels good" }, "crowdYesPct": 91 },
+        { "id": "c", "text": { "fr": "…une playlist parfaite peut sauver une journée", "en": "…the perfect playlist can save a day" }, "crowdYesPct": 94 },
+        { "id": "d", "text": { "fr": "…le silence après le départ des invités est délicieux", "en": "…the silence after guests leave is delicious" }, "crowdYesPct": 82 },
+        { "id": "e", "text": { "fr": "…un compliment d'inconnu vaut double", "en": "…a compliment from a stranger counts double" }, "crowdYesPct": 77 },
+        { "id": "f", "text": { "fr": "…s'étirer le matin, c'est du luxe gratuit", "en": "…a morning stretch is free luxury" }, "crowdYesPct": 71 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "opinions"]
+    },
+    {
+      "id": "cc-photos-071",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Avec l'appareil photo, j'ai déjà…", "en": "Camera-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…pris 30 selfies pour en garder un", "en": "…taken 30 selfies to keep one" }, "crowdYesPct": 66 },
+        { "id": "b", "text": { "fr": "…gardé 12 000 photos 'à trier un jour'", "en": "…hoarded 12,000 photos 'to sort someday'" }, "crowdYesPct": 74 },
+        { "id": "c", "text": { "fr": "…fait refaire la photo de groupe rien que pour moi", "en": "…asked to retake the group photo just for me" }, "crowdYesPct": 52 },
+        { "id": "d", "text": { "fr": "…photographié un plat avant la première bouchée", "en": "…photographed the meal before the first bite" }, "crowdYesPct": 70 },
+        { "id": "e", "text": { "fr": "…découvert un inconnu très net au premier plan", "en": "…found a very sharp stranger in the foreground" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…filmé un concert sans jamais revoir la vidéo", "en": "…filmed a concert and never watched the video" }, "crowdYesPct": 61 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "relatable"]
+    },
+    {
+      "id": "cc-host-072",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En recevant des invités, j'ai déjà…", "en": "Hosting guests, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit 'reste encore un peu' en priant pour le départ", "en": "…said 'stay a bit longer' while praying for the exit" }, "crowdYesPct": 49 },
+        { "id": "b", "text": { "fr": "…servi une 'recette de famille' issue d'internet", "en": "…served a 'family recipe' straight off the internet" }, "crowdYesPct": 41 },
+        { "id": "c", "text": { "fr": "…relancé la playlist pour masquer un blanc", "en": "…restarted the playlist to cover an awkward silence" }, "crowdYesPct": 36 },
+        { "id": "d", "text": { "fr": "…juré que le plat raté était 'censé être comme ça'", "en": "…sworn the failed dish was 'meant to be like that'" }, "crowdYesPct": 31 },
+        { "id": "e", "text": { "fr": "…compté les parts pour me garder la plus grosse", "en": "…counted portions to keep the biggest for myself" }, "crowdYesPct": 26 },
+        { "id": "f", "text": { "fr": "…fait la visite en évitant la pièce du chaos", "en": "…given the tour while skipping the chaos room" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "party"]
+    },
+    {
+      "id": "cc-elevator-073",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "Dans un ascenseur, j'ai déjà…", "en": "In an elevator, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…fixé les numéros d'étage comme un grand film", "en": "…stared at the floor numbers like gripping cinema" }, "crowdYesPct": 76 },
+        { "id": "b", "text": { "fr": "…appuyé sur 'fermer' en voyant quelqu'un arriver", "en": "…pressed 'close' seeing someone coming" }, "crowdYesPct": 41 },
+        { "id": "c", "text": { "fr": "…dit 'au revoir' à des inconnus en sortant", "en": "…said goodbye to complete strangers on the way out" }, "crowdYesPct": 52 },
+        { "id": "d", "text": { "fr": "…annoncé mon étage à voix haute pour rien", "en": "…announced my floor out loud for no reason" }, "crowdYesPct": 29 },
+        { "id": "e", "text": { "fr": "…pris l'ascenseur pour un seul étage", "en": "…ridden it for a single floor" }, "crowdYesPct": 64 },
+        { "id": "f", "text": { "fr": "…paniqué une seconde à un petit à-coup", "en": "…panicked for a second at a tiny jolt" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "daily-life"]
+    },
+    {
+      "id": "cc-plants-074",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Avec les plantes, j'ai déjà…", "en": "Plant-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tué un cactus, pourtant réputé immortel", "en": "…killed a cactus, allegedly immortal" }, "crowdYesPct": 46 },
+        { "id": "b", "text": { "fr": "…installé une plante en 'soins intensifs' à la fenêtre", "en": "…moved a plant to the 'ICU' by the window" }, "crowdYesPct": 39 },
+        { "id": "c", "text": { "fr": "…arrosé deux fois par culpabilité, noyade incluse", "en": "…double-watered out of guilt, drowning included" }, "crowdYesPct": 53 },
+        { "id": "d", "text": { "fr": "…acheté une plante 'facile' morte en un mois", "en": "…bought an 'easy' plant that died within a month" }, "crowdYesPct": 58 },
+        { "id": "e", "text": { "fr": "…gardé une plante morte 'au cas où'", "en": "…kept a dead plant 'just in case'" }, "crowdYesPct": 33 },
+        { "id": "f", "text": { "fr": "…baptisé une plante d'un prénom humain", "en": "…given a plant a human name" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "fails"]
+    },
+    {
+      "id": "cc-commitment-075",
+      "targetYesPct": 25,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Niveau engagement, je…", "en": "Commitment-wise, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…me ferais tatouer sur un coup de tête", "en": "…get a tattoo on impulse" }, "crowdYesPct": 18 },
+        { "id": "b", "text": { "fr": "…adopterais un animal cette année", "en": "…adopt a pet this year" }, "crowdYesPct": 38 },
+        { "id": "c", "text": { "fr": "…signerais pour vivre à l'étranger dès demain", "en": "…sign up to move abroad starting tomorrow" }, "crowdYesPct": 29 },
+        { "id": "d", "text": { "fr": "…changerais complètement de coiffure ce soir", "en": "…completely change my haircut tonight" }, "crowdYesPct": 24 },
+        { "id": "e", "text": { "fr": "…signerais 40 ans dans la même boîte", "en": "…commit to 40 years at one company" }, "crowdYesPct": 11 },
+        { "id": "f", "text": { "fr": "…planterais un arbre pour mes 80 ans", "en": "…plant a tree for my 80th birthday" }, "crowdYesPct": 56 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "dreams"]
+    },
+    {
+      "id": "cc-gossip-076",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau potins, j'ai déjà…", "en": "Gossip-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…juré 'je le dis à personne' puis l'avoir dit", "en": "…sworn 'I won't tell a soul' and told a soul" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…baissé la voix alors qu'on était seuls", "en": "…lowered my voice with nobody else around" }, "crowdYesPct": 63 },
+        { "id": "c", "text": { "fr": "…demandé 'mais qui ? dis-moi qui !' trop intensément", "en": "…asked 'who? tell me WHO!' a bit too intensely" }, "crowdYesPct": 69 },
+        { "id": "d", "text": { "fr": "…fait l'étonné en connaissant déjà toute l'histoire", "en": "…acted shocked while knowing the whole story" }, "crowdYesPct": 72 },
+        { "id": "e", "text": { "fr": "…perdu le fil de qui sort avec qui", "en": "…lost track of who's dating whom" }, "crowdYesPct": 51 },
+        { "id": "f", "text": { "fr": "…lancé 'faut que je te raconte un truc' sans suite", "en": "…opened with 'I have tea' and never delivered" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-noargue-077",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": { "fr": "Personne ne dira le contraire…", "en": "Nobody will argue with this…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…une sieste imprévue, c'est la meilleure des siestes", "en": "…an unplanned nap is the best nap" }, "crowdYesPct": 89 },
+        { "id": "b", "text": { "fr": "…un colis en avance, c'est une fête", "en": "…an early package is a national holiday" }, "crowdYesPct": 86 },
+        { "id": "c", "text": { "fr": "…les pâtes des autres ont meilleur goût", "en": "…someone else's pasta tastes better" }, "crowdYesPct": 78 },
+        { "id": "d", "text": { "fr": "…retrouver un objet perdu rend euphorique", "en": "…finding a lost thing is pure euphoria" }, "crowdYesPct": 96 },
+        { "id": "e", "text": { "fr": "…le côté frais de l'oreiller est un luxe", "en": "…the cool side of the pillow is luxury" }, "crowdYesPct": 92 },
+        { "id": "f", "text": { "fr": "…le pain offert au resto est le meilleur pain", "en": "…free restaurant bread is the best bread" }, "crowdYesPct": 82 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable"]
+    },
+    {
+      "id": "cc-concert-078",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "En concert ou festival, j'ai déjà…", "en": "At a concert or festival, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…chanté un refrain sans connaître les couplets", "en": "…sung the chorus knowing none of the verses" }, "crowdYesPct": 67 },
+        { "id": "b", "text": { "fr": "…hissé quelqu'un sur mes épaules et regretté", "en": "…shouldered someone up and instantly regretted it" }, "crowdYesPct": 22 },
+        { "id": "c", "text": { "fr": "…payé un prix scandaleux pour une boisson tiède", "en": "…paid an outrageous price for a warm drink" }, "crowdYesPct": 73 },
+        { "id": "d", "text": { "fr": "…perdu mon groupe dès la première chanson", "en": "…lost my group during the first song" }, "crowdYesPct": 48 },
+        { "id": "e", "text": { "fr": "…versé une larme sur le morceau final", "en": "…teared up at the closer" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…fait la queue aux toilettes plus longtemps que le set", "en": "…queued for toilets longer than the set lasted" }, "crowdYesPct": 53 }
+      ],
+      "tone": "classic",
+      "tags": ["music", "party"]
+    },
+    {
+      "id": "cc-dating-079",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "En rencard, j'ai déjà…", "en": "On a date, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…envoyé 'aide-moi' aux copains depuis les toilettes", "en": "…texted 'help me' from the bathroom" }, "crowdYesPct": 33, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…fait durer exprès parce que c'était trop bien", "en": "…stretched the night out because it was going great" }, "crowdYesPct": 48 },
+        { "id": "c", "text": { "fr": "…inventé un faux 'demain je me lève tôt'", "en": "…invented a fake early morning" }, "crowdYesPct": 56, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…oublié le prénom en plein milieu", "en": "…blanked on their name mid-date" }, "crowdYesPct": 24, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…commandé léger puis dévoré en rentrant", "en": "…ordered light and feasted at home after" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…proposé un deuxième rencard sur place", "en": "…proposed a second date on the spot" }, "crowdYesPct": 52 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "awkward"]
+    },
+    {
+      "id": "cc-language-080",
+      "targetYesPct": 30,
+      "askKind": "didYou",
+      "stem": { "fr": "En langue étrangère, j'ai déjà…", "en": "In a foreign language, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…commandé 'la même chose que lui' par sécurité", "en": "…ordered 'same as them' to be safe" }, "crowdYesPct": 42 },
+        { "id": "b", "text": { "fr": "…prétendu être bilingue sur un CV", "en": "…claimed fluency on a résumé" }, "crowdYesPct": 27 },
+        { "id": "c", "text": { "fr": "…répondu 'yes yes' à une question ouverte", "en": "…answered 'yes yes' to an open question" }, "crowdYesPct": 64 },
+        { "id": "d", "text": { "fr": "…abandonné une appli de langues en pleine série de feu", "en": "…abandoned a language app mid hot-streak" }, "crowdYesPct": 56 },
+        { "id": "e", "text": { "fr": "…rêvé dans une autre langue", "en": "…dreamed in another language" }, "crowdYesPct": 34 },
+        { "id": "f", "text": { "fr": "…chanté des paroles inventées avec l'accent", "en": "…sung made-up lyrics with full accent" }, "crowdYesPct": 74 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "fails"]
+    },
+    {
+      "id": "cc-sickday-081",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "Quand je suis malade, j'ai déjà…", "en": "When sick, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…pris une voix encore plus malade au téléphone", "en": "…upgraded my sick voice on the phone" }, "crowdYesPct": 72 },
+        { "id": "b", "text": { "fr": "…juré de ne plus jamais tenir ma santé pour acquise", "en": "…sworn never to take my health for granted again" }, "crowdYesPct": 77 },
+        { "id": "c", "text": { "fr": "…prescrit moi-même 'ça ira avec une bonne nuit'", "en": "…self-prescribed 'a good night's sleep will fix it'" }, "crowdYesPct": 81 },
+        { "id": "d", "text": { "fr": "…regardé des séries 'parce que repos obligatoire'", "en": "…binged shows 'because rest is mandatory'" }, "crowdYesPct": 69 },
+        { "id": "e", "text": { "fr": "…refusé d'admettre que c'était la grippe", "en": "…refused to admit it was the flu" }, "crowdYesPct": 54 },
+        { "id": "f", "text": { "fr": "…exigé qu'on me plaigne, fort", "en": "…demanded loud sympathy" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "relatable"]
+    },
+    {
+      "id": "cc-cookies-082",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "Avec un paquet de gâteaux, j'ai déjà…", "en": "With a pack of cookies, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…promis 'juste un', sincèrement, puis fini le paquet", "en": "…promised 'just one,' sincerely, then finished the pack" }, "crowdYesPct": 87 },
+        { "id": "b", "text": { "fr": "…replié l'emballage pour faire croire qu'il en reste", "en": "…refolded the wrapper to suggest leftovers" }, "crowdYesPct": 62 },
+        { "id": "c", "text": { "fr": "…caché le paquet de moi-même", "en": "…hidden the pack from myself" }, "crowdYesPct": 49 },
+        { "id": "d", "text": { "fr": "…mangé debout pour que ça compte moins", "en": "…eaten standing up so it counts less" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…versé les miettes directement dans la bouche", "en": "…poured the crumbs straight into my mouth" }, "crowdYesPct": 78 },
+        { "id": "f", "text": { "fr": "…accusé le reste de la maison", "en": "…blamed the rest of the household" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["food", "confessions"]
+    },
+    {
+      "id": "cc-memory-083",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Question mémoire, j'ai déjà…", "en": "Memory-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…ouvert le frigo en oubliant pourquoi", "en": "…opened the fridge and forgotten why" }, "crowdYesPct": 81 },
+        { "id": "b", "text": { "fr": "…raconté une histoire à la personne qui me l'a apprise", "en": "…told a story back to the person who told me" }, "crowdYesPct": 63 },
+        { "id": "c", "text": { "fr": "…douté de la porte fermée à 200 mètres de chez moi", "en": "…doubted the locked door from 200 meters away" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…retenu une pub entière mais pas mes codes", "en": "…memorized a whole jingle but not my passwords" }, "crowdYesPct": 69 },
+        { "id": "e", "text": { "fr": "…appelé quelqu'un par le prénom du chien", "en": "…called someone by the dog's name" }, "crowdYesPct": 44 },
+        { "id": "f", "text": { "fr": "…perdu le mot exact en plein… voilà, en plein truc", "en": "…lost the exact word mid-… you know, mid-thing" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "fails"]
+    },
+    {
+      "id": "cc-heroic-084",
+      "targetYesPct": 10,
+      "askKind": "wouldYou",
+      "stem": { "fr": "En vrai héros, je…", "en": "True hero stuff: I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…entrerais dans une maison en feu pour un inconnu", "en": "…run into a burning house for a stranger" }, "crowdYesPct": 23 },
+        { "id": "b", "text": { "fr": "…donnerais un rein à un ami", "en": "…give a kidney to a friend" }, "crowdYesPct": 34 },
+        { "id": "c", "text": { "fr": "…désamorcerais une bombe avec un tuto", "en": "…defuse a bomb with a tutorial" }, "crowdYesPct": 8 },
+        { "id": "d", "text": { "fr": "…ferais face à un ours pour protéger le groupe", "en": "…face down a bear to protect the group" }, "crowdYesPct": 14 },
+        { "id": "e", "text": { "fr": "…plongerais dans un fleuve glacé pour un chien", "en": "…dive into an icy river for a dog" }, "crowdYesPct": 29 },
+        { "id": "f", "text": { "fr": "…prendrais les commandes d'un avion sans pilote", "en": "…take over a pilotless plane" }, "crowdYesPct": 18 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "challenges"]
+    },
+    {
+      "id": "cc-queues-085",
+      "targetYesPct": 55,
+      "askKind": "agree",
+      "stem": { "fr": "Sur les files d'attente…", "en": "About queues…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…changer de file porte malheur, l'autre ralentit", "en": "…switching lines is cursed, the new one slows down" }, "crowdYesPct": 61 },
+        { "id": "b", "text": { "fr": "…les gens qui doublent méritent un tribunal spécial", "en": "…line-cutters deserve a special court" }, "crowdYesPct": 74 },
+        { "id": "c", "text": { "fr": "…dix minutes d'attente, c'est le maximum acceptable", "en": "…ten minutes is the maximum acceptable wait" }, "crowdYesPct": 52 },
+        { "id": "d", "text": { "fr": "…faire la queue à deux, c'est moitié moins long", "en": "…queueing with a friend makes it half as long" }, "crowdYesPct": 67 },
+        { "id": "e", "text": { "fr": "…réserver une place pour 5 personnes, c'est abusé", "en": "…saving spots for five people is too far" }, "crowdYesPct": 57 },
+        { "id": "f", "text": { "fr": "…une file qui avance vite rend presque joyeux", "en": "…a fast-moving line sparks actual joy" }, "crowdYesPct": 83 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "opinions"]
+    },
+    {
+      "id": "cc-sunday-086",
+      "targetYesPct": 80,
+      "askKind": "didYou",
+      "stem": { "fr": "Le dimanche soir, j'ai déjà…", "en": "On Sunday night, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…senti la déprime du dimanche arriver pile à 18 h", "en": "…felt the Sunday scaries land at 6 p.m. sharp" }, "crowdYesPct": 77 },
+        { "id": "b", "text": { "fr": "…repoussé l'organisation de la semaine à lundi", "en": "…postponed planning the week until Monday" }, "crowdYesPct": 82 },
+        { "id": "c", "text": { "fr": "…regretté de n'avoir rien fait du week-end", "en": "…regretted doing nothing all weekend" }, "crowdYesPct": 71 },
+        { "id": "d", "text": { "fr": "…préparé un lundi 'nouvelle vie'", "en": "…planned a 'new me' Monday" }, "crowdYesPct": 66 },
+        { "id": "e", "text": { "fr": "…veillé tard exprès pour étirer le week-end", "en": "…stayed up late just to stretch the weekend" }, "crowdYesPct": 85 },
+        { "id": "f", "text": { "fr": "…repassé en boucle une gêne vieille de dix ans", "en": "…replayed a ten-year-old embarrassment on loop" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "relatable"]
+    },
+    {
+      "id": "cc-genie-087",
+      "targetYesPct": 70,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Face à un génie et trois vœux, je…", "en": "Facing a genie with three wishes, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…demanderais d'abord plus de vœux, évidemment", "en": "…wish for more wishes first, obviously" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…garderais un vœu de secours pendant des années", "en": "…save one emergency wish for years" }, "crowdYesPct": 72 },
+        { "id": "c", "text": { "fr": "…choisirais la richesse avant l'amour", "en": "…pick rich before romance" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…traquerais le piège dans chaque formulation", "en": "…lawyer-proof every wording for traps" }, "crowdYesPct": 76 },
+        { "id": "e", "text": { "fr": "…gaspillerais un vœu par accident en parlant", "en": "…waste a wish by accident mid-sentence" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…demanderais un talent plutôt qu'un objet", "en": "…wish for a talent over a thing" }, "crowdYesPct": 53 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "dreams"]
+    },
+    {
+      "id": "cc-apology-088",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau excuses, j'ai déjà…", "en": "Apology-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit pardon à un meuble percuté", "en": "…apologized to furniture I bumped into" }, "crowdYesPct": 58 },
+        { "id": "b", "text": { "fr": "…présenté des excuses sans savoir pourquoi", "en": "…apologized with no idea what for" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…attendu des semaines que l'autre s'excuse en premier", "en": "…waited weeks for the other person to go first" }, "crowdYesPct": 39 },
+        { "id": "d", "text": { "fr": "…préparé des excuses puis tout oublié face à la personne", "en": "…rehearsed an apology and blanked in person" }, "crowdYesPct": 33 },
+        { "id": "e", "text": { "fr": "…transformé mes excuses en nouvelle dispute", "en": "…turned an apology into a brand-new argument" }, "crowdYesPct": 26 },
+        { "id": "f", "text": { "fr": "…envoyé un mème en guise de réconciliation", "en": "…sent a meme as a peace treaty" }, "crowdYesPct": 43 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "relatable"]
+    },
+    {
+      "id": "cc-school-089",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "À l'école, j'ai déjà…", "en": "Back in school, I…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…copié avec des regards stratégiques au plafond", "en": "…copied with strategic ceiling-gazing in between" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…écrit des infos capitales sur ma main", "en": "…inked vital info on my hand" }, "crowdYesPct": 63 },
+        { "id": "c", "text": { "fr": "…fouillé mon sac pour esquiver la question", "en": "…rummaged in my bag to dodge the question" }, "crowdYesPct": 67 },
+        { "id": "d", "text": { "fr": "…juré que le devoir était 'resté à la maison'", "en": "…claimed the homework was 'left at home'" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…eu un fou rire au pire moment possible", "en": "…cracked up at the worst possible moment" }, "crowdYesPct": 84 },
+        { "id": "f", "text": { "fr": "…gardé l'exposé pour la veille au soir", "en": "…saved the presentation for the night before" }, "crowdYesPct": 77 }
+      ],
+      "tone": "classic",
+      "tags": ["school", "confessions"]
+    },
+    {
+      "id": "cc-luck-090",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté chance, j'ai déjà…", "en": "Luck-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…trouvé un billet par terre", "en": "…found cash on the ground" }, "crowdYesPct": 54 },
+        { "id": "b", "text": { "fr": "…gagné un truc à une tombola", "en": "…won something at a raffle" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…enchaîné les feux verts en étant en retard", "en": "…hit every green light while running late" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…gratté un ticket gagnant… de 2 €", "en": "…scratched a winning ticket… worth two bucks" }, "crowdYesPct": 66 },
+        { "id": "e", "text": { "fr": "…perdu à pile ou face cinq fois de suite", "en": "…lost a coin toss five times straight" }, "crowdYesPct": 28 },
+        { "id": "f", "text": { "fr": "…touché du bois juste au cas où", "en": "…knocked on wood just in case" }, "crowdYesPct": 73 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life"]
+    },
+    {
+      "id": "cc-meetings-091",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "En réunion, j'ai déjà…", "en": "In meetings, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…répété ma phrase en boucle jusqu'à rater le moment", "en": "…mentally rehearsed my line until the moment passed" }, "crowdYesPct": 68 },
+        { "id": "b", "text": { "fr": "…dessiné des spirales très professionnelles", "en": "…drawn extremely professional spirals" }, "crowdYesPct": 73 },
+        { "id": "c", "text": { "fr": "…dit 'pour rebondir' sans avoir rien écouté", "en": "…said 'to build on that' having heard nothing" }, "crowdYesPct": 51 },
+        { "id": "d", "text": { "fr": "…espéré très fort que la réunion s'annule", "en": "…prayed hard for a cancellation" }, "crowdYesPct": 88 },
+        { "id": "e", "text": { "fr": "…posé une question dont la réponse venait d'être donnée", "en": "…asked a question that was just answered" }, "crowdYesPct": 44 },
+        { "id": "f", "text": { "fr": "…prolongé la réunion avec 'une dernière chose'", "en": "…extended it with 'one last thing'" }, "crowdYesPct": 36 }
+      ],
+      "tone": "classic",
+      "tags": ["work"]
+    },
+    {
+      "id": "cc-ibet-092",
+      "targetYesPct": 40,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Je parie que je…", "en": "I bet I could…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tiendrais 24 h sans me plaindre", "en": "…go 24 hours without complaining" }, "crowdYesPct": 35 },
+        { "id": "b", "text": { "fr": "…ferais rire un inconnu dans la minute", "en": "…make a stranger laugh within a minute" }, "crowdYesPct": 48 },
+        { "id": "c", "text": { "fr": "…réussirais un créneau parfait du premier coup", "en": "…nail a parallel park first try" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…citerais dix capitales sans erreur", "en": "…name ten capitals without a miss" }, "crowdYesPct": 56 },
+        { "id": "e", "text": { "fr": "…monterais un meuble suédois sans la notice", "en": "…build flat-pack furniture without the manual" }, "crowdYesPct": 29 },
+        { "id": "f", "text": { "fr": "…battrais tout le monde ici au bras de fer", "en": "…beat everyone in this room at arm wrestling" }, "crowdYesPct": 21 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "party"]
+    },
+    {
+      "id": "cc-winter-093",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "En hiver, j'ai déjà…", "en": "In winter, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…refusé de sortir d'une couverture par principe", "en": "…refused to leave a blanket on principle" }, "crowdYesPct": 79 },
+        { "id": "b", "text": { "fr": "…cumulé capuche ET bonnet ET plaid", "en": "…stacked hood AND beanie AND blanket" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…annulé un plan à cause de la pluie seule", "en": "…cancelled plans over rain alone" }, "crowdYesPct": 70 },
+        { "id": "d", "text": { "fr": "…élu le radiateur meilleur ami", "en": "…made the radiator my best friend" }, "crowdYesPct": 58 },
+        { "id": "e", "text": { "fr": "…fait le sprint thermique du canapé au lit", "en": "…done the thermal sprint from couch to bed" }, "crowdYesPct": 76 },
+        { "id": "f", "text": { "fr": "…mangé une glace par grand froid, par principe", "en": "…eaten ice cream in freezing cold as a statement" }, "crowdYesPct": 41 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "relatable"]
+    },
+    {
+      "id": "cc-summer-094",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En été, j'ai déjà…", "en": "In summer, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…collé mes jambes à une chaise en plastique", "en": "…fused my legs to a plastic chair" }, "crowdYesPct": 66 },
+        { "id": "b", "text": { "fr": "…dormi avec le ventilateur en face directe", "en": "…slept with the fan aimed point-blank" }, "crowdYesPct": 71 },
+        { "id": "c", "text": { "fr": "…récolté un coup de soleil à la forme ridicule", "en": "…earned a sunburn with a ridiculous shape" }, "crowdYesPct": 59 },
+        { "id": "d", "text": { "fr": "…dit 'il fait chaud' quarante fois en un jour", "en": "…said 'it's so hot' forty times in one day" }, "crowdYesPct": 77 },
+        { "id": "e", "text": { "fr": "…mis un pull car la clim était trop forte", "en": "…put on a sweater because the AC was too strong" }, "crowdYesPct": 52 },
+        { "id": "f", "text": { "fr": "…promis 'l'an prochain je pars en juin' sans le faire", "en": "…sworn 'next year I'll book June' and never did" }, "crowdYesPct": 39 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "travel"]
+    },
+    {
+      "id": "cc-cringe-095",
+      "targetYesPct": 90,
+      "askKind": "didYou",
+      "stem": { "fr": "Moment gênant universel : j'ai déjà…", "en": "Universal cringe: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…oublié comment marcher en me sachant observé", "en": "…forgotten how to walk knowing people were watching" }, "crowdYesPct": 87 },
+        { "id": "b", "text": { "fr": "…répondu 'toi aussi' à 'bon anniversaire'", "en": "…said 'you too' to 'happy birthday'" }, "crowdYesPct": 74 },
+        { "id": "c", "text": { "fr": "…ri et dit 'oui' sans avoir compris la question", "en": "…laughed and said 'yes' to a question I didn't catch" }, "crowdYesPct": 91 },
+        { "id": "d", "text": { "fr": "…tiré une porte que quelqu'un tenait déjà", "en": "…pulled a door someone was already holding" }, "crowdYesPct": 68 },
+        { "id": "e", "text": { "fr": "…dit 'au revoir' puis marché dans la même direction", "en": "…said goodbye, then walked the same direction" }, "crowdYesPct": 84 },
+        { "id": "f", "text": { "fr": "…trébuché puis fixé le sol d'un air accusateur", "en": "…tripped and glared accusingly at the floor" }, "crowdYesPct": 79 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "relatable"]
+    },
+    {
+      "id": "cc-kids-096",
+      "targetYesPct": 30,
+      "askKind": "agree",
+      "stem": { "fr": "Sur les enfants…", "en": "About kids…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…les goûters d'enfants battent nos apéros", "en": "…kids' snacks beat our appetizers" }, "crowdYesPct": 34 },
+        { "id": "b", "text": { "fr": "…un enfant dans l'avion, c'est la loterie du vol", "en": "…a kid on a plane is the flight lottery" }, "crowdYesPct": 62 },
+        { "id": "c", "text": { "fr": "…les dessins animés actuels sont faits pour les parents", "en": "…today's cartoons are secretly made for the parents" }, "crowdYesPct": 41 },
+        { "id": "d", "text": { "fr": "…'il est très éveillé' veut dire 'bon courage'", "en": "…'he's very spirited' means 'good luck'" }, "crowdYesPct": 56 },
+        { "id": "e", "text": { "fr": "…les enfants posent les meilleures questions", "en": "…kids ask the best questions" }, "crowdYesPct": 73 },
+        { "id": "f", "text": { "fr": "…je gagnerais un débat contre un enfant de 5 ans", "en": "…I would win a debate against a five-year-old" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["opinions", "absurd"]
+    },
+    {
+      "id": "cc-grandparents-097",
+      "targetYesPct": 85,
+      "askKind": "agree",
+      "stem": { "fr": "Chez les grands-parents…", "en": "At the grandparents'…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…refuser de manger est tout simplement impossible", "en": "…refusing food is simply impossible" }, "crowdYesPct": 89 },
+        { "id": "b", "text": { "fr": "…la télé est réglée à un volume non négociable", "en": "…the TV volume is non-negotiable" }, "crowdYesPct": 82 },
+        { "id": "c", "text": { "fr": "…il existe un placard à biscuits magiquement infini", "en": "…a magically infinite cookie cupboard exists" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…on repart toujours avec un sac de provisions", "en": "…you always leave with a bag of supplies" }, "crowdYesPct": 86 },
+        { "id": "e", "text": { "fr": "…la housse du canapé ne se discute pas", "en": "…the couch cover is beyond questioning" }, "crowdYesPct": 71 },
+        { "id": "f", "text": { "fr": "…chaque visite inclut la saga d'un voisin inconnu", "en": "…every visit includes the saga of an unknown neighbor" }, "crowdYesPct": 64 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "nostalgia"]
+    },
+    {
+      "id": "cc-procrastinate-098",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Pour éviter une corvée, j'ai déjà…", "en": "To dodge one chore, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…nettoyé tout le reste de la maison", "en": "…cleaned the entire rest of the house" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…trié mes mails comme si c'était urgent", "en": "…reorganized my inbox like it was urgent" }, "crowdYesPct": 57 },
+        { "id": "c", "text": { "fr": "…regardé une heure de vidéos 'pour me motiver'", "en": "…watched 'motivation' videos for an hour" }, "crowdYesPct": 73 },
+        { "id": "d", "text": { "fr": "…décrété que c'était un problème pour moi-du-futur", "en": "…declared it future-me's problem" }, "crowdYesPct": 81 },
+        { "id": "e", "text": { "fr": "…écrit une liste de tâches incluant 'faire une liste'", "en": "…written a to-do list including 'write list'" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…attendu que quelqu'un d'autre craque en premier", "en": "…waited for someone else to crack first" }, "crowdYesPct": 68 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "relatable"]
+    },
+    {
+      "id": "cc-spy-099",
+      "targetYesPct": 20,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Si j'étais espion·ne, je…", "en": "If I were a spy, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tiendrais un interrogatoire sans craquer", "en": "…survive an interrogation without cracking" }, "crowdYesPct": 22 },
+        { "id": "b", "text": { "fr": "…saurais semer une filature", "en": "…shake off a tail" }, "crowdYesPct": 27 },
+        { "id": "c", "text": { "fr": "…garderais ma couverture devant ma famille", "en": "…keep my cover even with my family" }, "crowdYesPct": 17 },
+        { "id": "d", "text": { "fr": "…résisterais à raconter ma vie cool en soirée", "en": "…resist bragging about my cool life at parties" }, "crowdYesPct": 12 },
+        { "id": "e", "text": { "fr": "…réussirais l'épreuve de tir du premier coup", "en": "…pass the marksmanship test first try" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…déjouerais un détecteur de mensonges", "en": "…beat a lie detector" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "challenges"]
+    },
+    {
+      "id": "cc-emails-100",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "Dans mes messages pro ou scolaires, j'ai déjà…", "en": "In work or school emails, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…écrit 'bien cordialement' en serrant les dents", "en": "…signed 'best regards' through gritted teeth" }, "crowdYesPct": 77 },
+        { "id": "b", "text": { "fr": "…relu un mail de deux lignes pendant dix minutes", "en": "…proofread a two-line email for ten minutes" }, "crowdYesPct": 72 },
+        { "id": "c", "text": { "fr": "…mis quelqu'un en copie comme une menace", "en": "…cc'd someone as a threat" }, "crowdYesPct": 45 },
+        { "id": "d", "text": { "fr": "…répondu 'bien reçu' sans ouvrir la pièce jointe", "en": "…replied 'received, thanks' without opening the file" }, "crowdYesPct": 66 },
+        { "id": "e", "text": { "fr": "…commencé par 'comme convenu' sans rien de convenu", "en": "…opened with 'as discussed' when nothing was discussed" }, "crowdYesPct": 38 },
+        { "id": "f", "text": { "fr": "…transféré avec 'voir ci-dessous' pour esquiver", "en": "…forwarded with 'see below' to dodge the work" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["work"]
+    },
+    {
+      "id": "cc-adulting-101",
+      "targetYesPct": 80,
+      "askKind": "agree",
+      "stem": { "fr": "Être adulte, c'est surtout…", "en": "Being an adult is mostly…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dire 'la semaine prochaine ce sera plus calme' à vie", "en": "…saying 'next week will be calmer' forever" }, "crowdYesPct": 83 },
+        { "id": "b", "text": { "fr": "…s'enthousiasmer pour un nouvel électroménager", "en": "…getting excited about a new appliance" }, "crowdYesPct": 78 },
+        { "id": "c", "text": { "fr": "…posséder un tiroir rempli de câbles mystérieux", "en": "…owning a drawer full of mystery cables" }, "crowdYesPct": 87 },
+        { "id": "d", "text": { "fr": "…choisir le resto selon le niveau de fatigue", "en": "…picking the restaurant by fatigue level" }, "crowdYesPct": 73 },
+        { "id": "e", "text": { "fr": "…googler 'mal de dos' plus souvent que prévu", "en": "…googling 'back pain' more than expected" }, "crowdYesPct": 68 },
+        { "id": "f", "text": { "fr": "…applaudir intérieurement quand un plan s'annule", "en": "…silently cheering when plans get cancelled" }, "crowdYesPct": 91 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "opinions"]
+    },
+    {
+      "id": "cc-freenight-102",
+      "targetYesPct": 25,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour une nuit gratuite, je dormirais…", "en": "For a free night, I'd sleep…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dans un manoir réputé hanté", "en": "…in a famously haunted manor" }, "crowdYesPct": 36 },
+        { "id": "b", "text": { "fr": "…dans une tente en pleine tempête", "en": "…in a tent through a storm" }, "crowdYesPct": 28 },
+        { "id": "c", "text": { "fr": "…dans un musée après la fermeture", "en": "…in a museum after closing" }, "crowdYesPct": 52 },
+        { "id": "d", "text": { "fr": "…dans un phare isolé sans réseau", "en": "…in a remote lighthouse with no signal" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…dans un cimetière, près de l'entrée quand même", "en": "…in a graveyard, near the gate though" }, "crowdYesPct": 14 },
+        { "id": "f", "text": { "fr": "…dans une grotte avec un guide à distance", "en": "…in a cave with a remote guide" }, "crowdYesPct": 21 }
+      ],
+      "tone": "classic",
+      "tags": ["fear", "challenges"]
+    },
+    {
+      "id": "cc-fashion-103",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté style, j'ai déjà…", "en": "Style-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…gardé l'étiquette pour pouvoir rendre 'au cas où'", "en": "…kept the tag on 'just in case'" }, "crowdYesPct": 53 },
+        { "id": "b", "text": { "fr": "…racheté deux fois le même vêtement exprès", "en": "…bought the same item twice on purpose" }, "crowdYesPct": 44 },
+        { "id": "c", "text": { "fr": "…souffert toute la soirée dans des chaussures neuves", "en": "…suffered all night in new shoes" }, "crowdYesPct": 71 },
+        { "id": "d", "text": { "fr": "…porté du noir 'parce que ça va avec tout'", "en": "…worn all black 'because it goes with everything'" }, "crowdYesPct": 65 },
+        { "id": "e", "text": { "fr": "…demandé un avis en n'écoutant que les compliments", "en": "…asked for opinions and heard only the compliments" }, "crowdYesPct": 58 },
+        { "id": "f", "text": { "fr": "…adopté une tendance pile quand elle se démodait", "en": "…joined a trend exactly as it died" }, "crowdYesPct": 37 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-smallwins-104",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Victoire du quotidien : j'ai déjà…", "en": "Daily win: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…rattrapé un objet qui tombait, en mode super-héros", "en": "…caught a falling object like a superhero" }, "crowdYesPct": 69 },
+        { "id": "b", "text": { "fr": "…plié le drap-housse presque correctement", "en": "…folded the fitted sheet almost correctly" }, "crowdYesPct": 33 },
+        { "id": "c", "text": { "fr": "…deviné le code wifi du premier coup", "en": "…guessed the wifi password first try" }, "crowdYesPct": 21 },
+        { "id": "d", "text": { "fr": "…fini un baume à lèvres jusqu'au bout", "en": "…finished a lip balm to the very end" }, "crowdYesPct": 27 },
+        { "id": "e", "text": { "fr": "…garé la voiture en un seul mouvement fluide", "en": "…parked in one fluid motion" }, "crowdYesPct": 62 },
+        { "id": "f", "text": { "fr": "…sorti la réplique parfaite au bon moment, pour une fois", "en": "…landed the perfect comeback in real time, for once" }, "crowdYesPct": 56 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable"]
+    },
+    {
+      "id": "cc-decisions-105",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "Question décisions, j'ai déjà…", "en": "Decision-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laissé pile ou face trancher un truc important", "en": "…let a coin flip decide something important" }, "crowdYesPct": 39 },
+        { "id": "b", "text": { "fr": "…mis 40 minutes à choisir un film puis abandonné", "en": "…spent 40 minutes picking a movie, then given up" }, "crowdYesPct": 74 },
+        { "id": "c", "text": { "fr": "…commandé 'comme d'habitude' par peur du regret", "en": "…ordered 'the usual' out of fear of regret" }, "crowdYesPct": 68 },
+        { "id": "d", "text": { "fr": "…sondé tout le monde puis fait l'inverse", "en": "…polled everyone and done the opposite" }, "crowdYesPct": 51 },
+        { "id": "e", "text": { "fr": "…changé trois fois de tenue avant de sortir", "en": "…changed outfits three times before leaving" }, "crowdYesPct": 58 },
+        { "id": "f", "text": { "fr": "…acheté les deux pour ne pas choisir", "en": "…bought both to avoid choosing" }, "crowdYesPct": 42 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "fails"]
+    },
+    {
+      "id": "cc-matchday-106",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "Devant un match, j'ai déjà…", "en": "Watching a match, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…crié des consignes que personne n'appliquera", "en": "…shouted tactics nobody will ever use" }, "crowdYesPct": 47 },
+        { "id": "b", "text": { "fr": "…expliqué une règle que je maîtrisais à moitié", "en": "…explained a rule I half understood" }, "crowdYesPct": 52 },
+        { "id": "c", "text": { "fr": "…quitté la pièce au pire moment possible", "en": "…left the room at the worst possible moment" }, "crowdYesPct": 41 },
+        { "id": "d", "text": { "fr": "…adopté une équipe juste pour l'ambiance", "en": "…adopted a team just for the vibes" }, "crowdYesPct": 57 },
+        { "id": "e", "text": { "fr": "…juré 'dernière saison que je regarde'", "en": "…sworn 'this is my last season watching'" }, "crowdYesPct": 33 },
+        { "id": "f", "text": { "fr": "…pleuré pour un sport que je ne pratique même pas", "en": "…cried over a sport I do not even play" }, "crowdYesPct": 28 }
+      ],
+      "tone": "classic",
+      "tags": ["sport", "relatable"]
+    },
+    {
+      "id": "cc-lostitem-107",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "En cherchant un objet, j'ai déjà…", "en": "Hunting for a lost item, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…accusé tout le monde avant de le trouver sur moi", "en": "…accused everyone before finding it on me" }, "crowdYesPct": 67 },
+        { "id": "b", "text": { "fr": "…vérifié trois fois le même tiroir", "en": "…checked the same drawer three times" }, "crowdYesPct": 84 },
+        { "id": "c", "text": { "fr": "…fini par le trouver 'au seul endroit possible'", "en": "…found it in 'the only possible place', last" }, "crowdYesPct": 72 },
+        { "id": "d", "text": { "fr": "…rangé en cherchant et perdu autre chose", "en": "…tidied while searching and lost something else" }, "crowdYesPct": 55 },
+        { "id": "e", "text": { "fr": "…abandonné puis trouvé en cherchant autre chose", "en": "…given up, then found it looking for something else" }, "crowdYesPct": 78 },
+        { "id": "f", "text": { "fr": "…soupçonné brièvement une force surnaturelle", "en": "…briefly suspected supernatural forces" }, "crowdYesPct": 49 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "fails"]
+    },
+    {
+      "id": "cc-petlife-108",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "Avec un animal de compagnie, j'ai déjà…", "en": "With a pet, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…pris une voix spéciale rien que pour lui", "en": "…used a special voice reserved for them" }, "crowdYesPct": 79 },
+        { "id": "b", "text": { "fr": "…présenté l'animal aux invités avant les humains", "en": "…introduced the pet before the humans" }, "crowdYesPct": 58 },
+        { "id": "c", "text": { "fr": "…annulé mon propre mouvement pour ne pas le réveiller", "en": "…cancelled my own movement not to wake them" }, "crowdYesPct": 71 },
+        { "id": "d", "text": { "fr": "…partagé un secret avec lui", "en": "…told them a secret" }, "crowdYesPct": 64 },
+        { "id": "e", "text": { "fr": "…créé un album photo ou un compte dédié", "en": "…made them a photo album or an account" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…dépensé plus pour lui que pour moi", "en": "…spent more on them than on myself" }, "crowdYesPct": 51 }
+      ],
+      "tone": "classic",
+      "tags": ["animals", "relatable"]
+    },
+    {
+      "id": "cc-serious-109",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": { "fr": "Soyons sérieux deux secondes…", "en": "Serious for two seconds…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…rire ensemble soude plus que n'importe quel discours", "en": "…laughing together bonds more than any speech" }, "crowdYesPct": 92 },
+        { "id": "b", "text": { "fr": "…un bon repas partagé arrange beaucoup de choses", "en": "…a good shared meal fixes a lot" }, "crowdYesPct": 96 },
+        { "id": "c", "text": { "fr": "…tout le monde a besoin d'entendre 'bien joué'", "en": "…everyone needs to hear 'well done' sometimes" }, "crowdYesPct": 88 },
+        { "id": "d", "text": { "fr": "…prendre des nouvelles, ça change tout", "en": "…checking in costs nothing and changes everything" }, "crowdYesPct": 84 },
+        { "id": "e", "text": { "fr": "…dire merci au chauffeur met de bonne humeur", "en": "…thanking the bus driver lifts your mood" }, "crowdYesPct": 79 },
+        { "id": "f", "text": { "fr": "…chaque groupe d'amis a besoin d'un organisateur héroïque", "en": "…every friend group needs one heroic planner" }, "crowdYesPct": 73 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "opinions"]
+    },
+    {
+      "id": "cc-3am-110",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "À 3 h du matin, j'ai déjà…", "en": "At 3 a.m., I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…ressorti une honte vieille de dix ans", "en": "…revisited a decade-old embarrassment" }, "crowdYesPct": 62 },
+        { "id": "b", "text": { "fr": "…glissé dans une spirale de vidéos sans aucun rapport", "en": "…fallen down a totally unrelated video spiral" }, "crowdYesPct": 70 },
+        { "id": "c", "text": { "fr": "…préparé mentalement un discours de récompense", "en": "…mentally drafted an award speech" }, "crowdYesPct": 36 },
+        { "id": "d", "text": { "fr": "…eu une idée géniale, illisible au matin", "en": "…had a genius idea, unreadable by morning" }, "crowdYesPct": 48 },
+        { "id": "e", "text": { "fr": "…entendu un bruit et choisi le déni stratégique", "en": "…heard a noise and chosen strategic denial" }, "crowdYesPct": 53 },
+        { "id": "f", "text": { "fr": "…commencé un nouveau hobby imaginaire", "en": "…started an imaginary new hobby" }, "crowdYesPct": 41 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "confessions"]
+    },
+    {
+      "id": "cc-organized-111",
+      "targetYesPct": 30,
+      "askKind": "didYou",
+      "stem": { "fr": "Organisation extrême : j'ai déjà…", "en": "Peak organization: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…planifié des vacances avec un tableur", "en": "…planned a vacation with a spreadsheet" }, "crowdYesPct": 26 },
+        { "id": "b", "text": { "fr": "…classé mes applis par couleur", "en": "…sorted my apps by color" }, "crowdYesPct": 33 },
+        { "id": "c", "text": { "fr": "…minuté une soirée heure par heure", "en": "…scheduled a night out hour by hour" }, "crowdYesPct": 21 },
+        { "id": "d", "text": { "fr": "…plastifié ou affiché un planning à la maison", "en": "…laminated or wall-posted a home schedule" }, "crowdYesPct": 16 },
+        { "id": "e", "text": { "fr": "…créé des sous-dossiers de sous-dossiers", "en": "…made subfolders of subfolders" }, "crowdYesPct": 39 },
+        { "id": "f", "text": { "fr": "…préparé ma tenue la veille comme à l'école", "en": "…laid out tomorrow's outfit like a school kid" }, "crowdYesPct": 45 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life"]
+    },
+    {
+      "id": "cc-talent-112",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Talent inutile : je sais…", "en": "Useless talent: I can…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…imiter au moins un animal de façon convaincante", "en": "…do at least one convincing animal impression" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…réciter une pub entière de mon enfance", "en": "…recite a full jingle from my childhood" }, "crowdYesPct": 63 },
+        { "id": "c", "text": { "fr": "…faire un bruit bizarre que peu de gens savent faire", "en": "…make one weird sound most people can't" }, "crowdYesPct": 51 },
+        { "id": "d", "text": { "fr": "…deviner l'heure à 15 minutes près sans montre", "en": "…guess the time within 15 minutes, no watch" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…chanter un générique de dessin animé par cœur", "en": "…sing a cartoon theme from memory" }, "crowdYesPct": 70 },
+        { "id": "f", "text": { "fr": "…plier un t-shirt en deux secondes", "en": "…fold a t-shirt in two seconds" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "relatable"]
+    },
+    {
+      "id": "cc-waiting-113",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "En attendant quelqu'un, j'ai déjà…", "en": "While waiting for someone, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…envoyé 't'es où ?' en étant moi-même en retard", "en": "…texted 'where are you?' while late myself" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…simulé une grande occupation sur mon téléphone", "en": "…performed deep phone busyness" }, "crowdYesPct": 88 },
+        { "id": "c", "text": { "fr": "…enchaîné trois positions 'naturelles'", "en": "…cycled through three 'natural' poses" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…répété la première phrase que j'allais dire", "en": "…rehearsed my opening line" }, "crowdYesPct": 70 },
+        { "id": "e", "text": { "fr": "…regardé l'heure sans la voir", "en": "…checked the time without registering it" }, "crowdYesPct": 83 },
+        { "id": "f", "text": { "fr": "…marché jusqu'au coin de rue et revenu, l'air détaché", "en": "…strolled to the corner and back, casually" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "daily-life"]
+    },
+    {
+      "id": "cc-cheapskate-114",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Par radinerie assumée, j'ai déjà…", "en": "In proud cheapskate mode, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…coupé le tube de crème en deux pour le finir", "en": "…cut the tube in half to scrape it out" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…marché 20 minutes pour éviter un parking payant", "en": "…walked 20 minutes to dodge a parking fee" }, "crowdYesPct": 68 },
+        { "id": "c", "text": { "fr": "…empilé les cartes de fidélité de tous les magasins", "en": "…stacked loyalty apps for every store" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…attendu les soldes pour un truc à 15 €", "en": "…waited for the sales on a $15 item" }, "crowdYesPct": 72 },
+        { "id": "e", "text": { "fr": "…fait des réserves de serviettes au fast-food", "en": "…pocketed the fast-food napkins" }, "crowdYesPct": 48 },
+        { "id": "f", "text": { "fr": "…comparé trois sites pour économiser 1,50 €", "en": "…compared three sites to save a dollar fifty" }, "crowdYesPct": 77 }
+      ],
+      "tone": "classic",
+      "tags": ["money", "confessions"]
+    },
+    {
+      "id": "cc-roadtrip-115",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "En road trip, j'ai déjà…", "en": "On a road trip, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…promis 'on s'arrête au prochain' pendant 100 km", "en": "…promised 'next stop for sure' for 60 miles" }, "crowdYesPct": 51 },
+        { "id": "b", "text": { "fr": "…géré la playlist comme un métier à plein temps", "en": "…treated DJ duty as a full-time job" }, "crowdYesPct": 58 },
+        { "id": "c", "text": { "fr": "…dormi pile pendant le plus beau paysage", "en": "…slept through exactly the best scenery" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…lancé un jeu de voiture abandonné en cinq minutes", "en": "…started a car game abandoned in five minutes" }, "crowdYesPct": 63 },
+        { "id": "e", "text": { "fr": "…dévalisé une station-service entière", "en": "…eaten an entire gas station" }, "crowdYesPct": 37 },
+        { "id": "f", "text": { "fr": "…raté la sortie en pleine discussion", "en": "…missed the exit mid-conversation" }, "crowdYesPct": 70 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "party"]
+    },
+    {
+      "id": "cc-compliments-116",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "Face à un compliment, j'ai déjà…", "en": "Receiving a compliment, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…renvoyé un compliment pas du tout équivalent", "en": "…fired back a wildly uneven compliment" }, "crowdYesPct": 66 },
+        { "id": "b", "text": { "fr": "…dit 'oh c'est vieux, ça m'a coûté trois euros'", "en": "…said 'oh this old thing, it cost three bucks'" }, "crowdYesPct": 79 },
+        { "id": "c", "text": { "fr": "…repensé au compliment plusieurs jours après", "en": "…replayed it happily for days" }, "crowdYesPct": 84 },
+        { "id": "d", "text": { "fr": "…soupçonné une demande de service imminente", "en": "…suspected an incoming favor request" }, "crowdYesPct": 61 },
+        { "id": "e", "text": { "fr": "…répondu 'toi aussi' à 'belle coupe' en pilote auto", "en": "…answered 'you too' to 'nice haircut' on autopilot" }, "crowdYesPct": 72 },
+        { "id": "f", "text": { "fr": "…noté le compliment quelque part, en secret", "en": "…secretly written it down somewhere" }, "crowdYesPct": 33 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "relatable"]
+    },
+    {
+      "id": "cc-cookingshow-117",
+      "targetYesPct": 20,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Devant un jury de cuisine, je…", "en": "In front of cooking-show judges, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…défendrais mon plat raté avec aplomb", "en": "…defend my failed dish with total confidence" }, "crowdYesPct": 32 },
+        { "id": "b", "text": { "fr": "…tenterais un dressage 'gastronomique'", "en": "…attempt 'fine-dining' plating" }, "crowdYesPct": 26 },
+        { "id": "c", "text": { "fr": "…finirais dans les temps sans rien oublier au four", "en": "…finish on time with nothing left in the oven" }, "crowdYesPct": 18 },
+        { "id": "d", "text": { "fr": "…goûterais tout sans grimacer", "en": "…taste everything without flinching" }, "crowdYesPct": 23 },
+        { "id": "e", "text": { "fr": "…gagnerais au moins une épreuve", "en": "…win at least one round" }, "crowdYesPct": 14 },
+        { "id": "f", "text": { "fr": "…pleurerais avant la fin de l'émission", "en": "…cry before the episode ends" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["food", "challenges"]
+    },
+    {
+      "id": "cc-gettingolder-118",
+      "targetYesPct": 70,
+      "askKind": "agree",
+      "stem": { "fr": "En vieillissant…", "en": "As we get older…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…on comprend enfin les parents", "en": "…we finally understand our parents" }, "crowdYesPct": 74 },
+        { "id": "b", "text": { "fr": "…une soirée réussie finit avant minuit", "en": "…a great night ends before midnight" }, "crowdYesPct": 67 },
+        { "id": "c", "text": { "fr": "…on développe un avis très ferme sur les matelas", "en": "…we develop strong mattress opinions" }, "crowdYesPct": 78 },
+        { "id": "d", "text": { "fr": "…les bruits mystérieux du corps deviennent un sujet", "en": "…mysterious body sounds become a topic" }, "crowdYesPct": 63 },
+        { "id": "e", "text": { "fr": "…on choisit le confort sans aucune honte", "en": "…we choose comfort with zero shame" }, "crowdYesPct": 81 },
+        { "id": "f", "text": { "fr": "…on dit 'la musique est trop forte' sans ironie", "en": "…we say 'the music is too loud' unironically" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "opinions"]
+    },
+    {
+      "id": "cc-adrenaline-119",
+      "targetYesPct": 50,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Sous adrénaline, je…", "en": "Chasing adrenaline, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…ferais un saut à l'élastique", "en": "…bungee jump" }, "crowdYesPct": 39 },
+        { "id": "b", "text": { "fr": "…descendrais de vrais rapides en rafting", "en": "…raft real whitewater" }, "crowdYesPct": 56 },
+        { "id": "c", "text": { "fr": "…ferais le parcours le plus haut de l'accrobranche", "en": "…do the top course at a treetop park" }, "crowdYesPct": 71 },
+        { "id": "d", "text": { "fr": "…piloterais un kart comme si c'était la F1", "en": "…drive a go-kart like it's F1" }, "crowdYesPct": 76 },
+        { "id": "e", "text": { "fr": "…caresserais une raie dans un bassin tactile", "en": "…pet a stingray at a touch tank" }, "crowdYesPct": 62 },
+        { "id": "f", "text": { "fr": "…monterais dans le grand huit le plus violent du parc", "en": "…ride the park's most violent coaster" }, "crowdYesPct": 49 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "fear"]
+    },
+    {
+      "id": "cc-moving-120",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "En déménagement, j'ai déjà…", "en": "Moving house, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…écrit 'divers' sur la moitié des cartons", "en": "…labeled half the boxes 'misc'" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…gardé un carton fermé pendant un an", "en": "…kept one box sealed for a year" }, "crowdYesPct": 57 },
+        { "id": "c", "text": { "fr": "…payé les copains en pizza", "en": "…paid the helpers in pizza" }, "crowdYesPct": 69 },
+        { "id": "d", "text": { "fr": "…juré 'plus jamais autant d'affaires'", "en": "…sworn 'never this much stuff again'" }, "crowdYesPct": 73 },
+        { "id": "e", "text": { "fr": "…cassé un objet et caché les preuves", "en": "…broken something and hidden the evidence" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…redécouvert des trésors oubliés", "en": "…rediscovered forgotten treasure" }, "crowdYesPct": 78 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "fails"]
+    },
+    {
+      "id": "cc-quiz-121",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "En quiz ou culture G, j'ai déjà…", "en": "Quiz nights, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…répondu une énorme bêtise avec assurance", "en": "…confidently delivered total nonsense" }, "crowdYesPct": 49 },
+        { "id": "b", "text": { "fr": "…connu la réponse une seconde trop tard", "en": "…known the answer one second too late" }, "crowdYesPct": 56 },
+        { "id": "c", "text": { "fr": "…contesté la carte-réponse officielle", "en": "…disputed the official answer card" }, "crowdYesPct": 38 },
+        { "id": "d", "text": { "fr": "…brillé sur une question de dessin animé", "en": "…shone on a cartoon question" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…accusé ma propre équipe", "en": "…blamed my own team" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…vraiment gagné quelque chose à un quiz de bar", "en": "…actually won something at a real pub quiz" }, "crowdYesPct": 24 }
+      ],
+      "tone": "classic",
+      "tags": ["games", "party"]
+    },
+    {
+      "id": "cc-nature-122",
+      "targetYesPct": 45,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Version nature, je…", "en": "Nature mode: I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…partirais camper sans réservation", "en": "…go camping with zero booking" }, "crowdYesPct": 41 },
+        { "id": "b", "text": { "fr": "…boirais l'eau d'un torrent 'super claire'", "en": "…drink from a 'super clear' stream" }, "crowdYesPct": 23 },
+        { "id": "c", "text": { "fr": "…ferais une randonnée de plus de 20 km", "en": "…hike more than 20 km in a day" }, "crowdYesPct": 48 },
+        { "id": "d", "text": { "fr": "…toucherais un ver de terre sans gant", "en": "…touch an earthworm bare-handed" }, "crowdYesPct": 57 },
+        { "id": "e", "text": { "fr": "…dormirais à la belle étoile sans tente", "en": "…sleep under the stars, no tent" }, "crowdYesPct": 52 },
+        { "id": "f", "text": { "fr": "…mangerais une plante identifiée par une appli", "en": "…eat a plant identified by an app" }, "crowdYesPct": 17 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "travel"]
+    },
+    {
+      "id": "cc-horror-123",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "Devant un film d'horreur, j'ai déjà…", "en": "Watching a horror movie, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…crié des conseils au personnage", "en": "…shouted advice at the character" }, "crowdYesPct": 58 },
+        { "id": "b", "text": { "fr": "…regardé entre mes doigts", "en": "…watched through my fingers" }, "crowdYesPct": 63 },
+        { "id": "c", "text": { "fr": "…vérifié derrière le rideau de douche après", "en": "…checked behind the shower curtain afterward" }, "crowdYesPct": 53 },
+        { "id": "d", "text": { "fr": "…baissé le son pour avoir moins peur", "en": "…lowered the volume to be less scared" }, "crowdYesPct": 47 },
+        { "id": "e", "text": { "fr": "…juré 'même pas peur' en mentant", "en": "…claimed 'not even scared', lying" }, "crowdYesPct": 68 },
+        { "id": "f", "text": { "fr": "…dormi avec une lumière allumée, à l'âge adulte", "en": "…slept with a light on, as an adult" }, "crowdYesPct": 41 }
+      ],
+      "tone": "classic",
+      "tags": ["movies", "fear"]
+    },
+    {
+      "id": "cc-trends-124",
+      "targetYesPct": 30,
+      "askKind": "didYou",
+      "stem": { "fr": "Pour les tendances, j'ai déjà…", "en": "Trend-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…testé une recette virale ratée", "en": "…tried a viral recipe that flopped" }, "crowdYesPct": 36 },
+        { "id": "b", "text": { "fr": "…acheté un gadget vu dans une vidéo", "en": "…bought a gadget straight from a video" }, "crowdYesPct": 42 },
+        { "id": "c", "text": { "fr": "…appris une danse en cachette", "en": "…secretly learned a dance trend" }, "crowdYesPct": 27 },
+        { "id": "d", "text": { "fr": "…sorti un mot d'ado pour paraître à jour", "en": "…dropped teen slang to sound current" }, "crowdYesPct": 48 },
+        { "id": "e", "text": { "fr": "…fait semblant de connaître la référence du moment", "en": "…faked knowing the reference of the week" }, "crowdYesPct": 56 },
+        { "id": "f", "text": { "fr": "…lancé une tendance, enfin selon moi", "en": "…started a trend, well, according to me" }, "crowdYesPct": 12 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "confessions"]
+    },
+    {
+      "id": "cc-promises-125",
+      "targetYesPct": 80,
+      "askKind": "didYou",
+      "stem": { "fr": "Promesse classique : j'ai déjà dit…", "en": "Classic promise: I have said…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…'je me couche tôt ce soir' puis non", "en": "…'early night tonight' and then no" }, "crowdYesPct": 88 },
+        { "id": "b", "text": { "fr": "…'demain je m'y mets sérieusement'", "en": "…'tomorrow I'm really starting'" }, "crowdYesPct": 84 },
+        { "id": "c", "text": { "fr": "…'c'est la dernière fois que je dis oui'", "en": "…'this is the last time I say yes'" }, "crowdYesPct": 75 },
+        { "id": "d", "text": { "fr": "…'on se fait un truc bientôt' sans jamais de date", "en": "…'let's hang out soon' with no date ever" }, "crowdYesPct": 81 },
+        { "id": "e", "text": { "fr": "…'je ne raconterai plus cette histoire' puis si", "en": "…'I'll stop telling that story' and then told it" }, "crowdYesPct": 64 },
+        { "id": "f", "text": { "fr": "…'plus jamais je ne veille aussi tard' un matin difficile", "en": "…'never staying up that late again' on a rough morning" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "confessions"]
+    },
+    {
+      "id": "cc-borrowed-126",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau prêts, j'ai déjà…", "en": "Borrowing-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…gardé un livre prêté assez longtemps pour l'adopter", "en": "…kept a borrowed book long enough to adopt it" }, "crowdYesPct": 47 },
+        { "id": "b", "text": { "fr": "…rendu un Tupperware des mois plus tard", "en": "…returned a food container months later" }, "crowdYesPct": 53 },
+        { "id": "c", "text": { "fr": "…'oublié' de rendre un chargeur", "en": "…'forgotten' to return a charger" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…prêté un stylo en sachant qu'il était perdu", "en": "…lent a pen knowing it was gone forever" }, "crowdYesPct": 67 },
+        { "id": "e", "text": { "fr": "…réclamé 2 € avec une gêne immense", "en": "…asked for two bucks back with immense awkwardness" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…emprunté un pull devenu mystérieusement mien", "en": "…borrowed a hoodie that mysteriously became mine" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "money"]
+    },
+    {
+      "id": "cc-convinced-127",
+      "targetYesPct": 15,
+      "askKind": "agree",
+      "stem": { "fr": "Je suis convaincu·e que…", "en": "I'm convinced that…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…je pourrais poser un avion si on me guidait", "en": "…I could land a plane if talked through it" }, "crowdYesPct": 22 },
+        { "id": "b", "text": { "fr": "…mon wifi me déteste personnellement", "en": "…my wifi personally hates me" }, "crowdYesPct": 35 },
+        { "id": "c", "text": { "fr": "…je survivrais très bien dans un film d'horreur", "en": "…I'd do great in a horror movie" }, "crowdYesPct": 18 },
+        { "id": "d", "text": { "fr": "…je connais un raccourci que le GPS ignore", "en": "…I know a shortcut the GPS doesn't" }, "crowdYesPct": 28 },
+        { "id": "e", "text": { "fr": "…mon micro-ondes a une touche que personne ne comprend", "en": "…my microwave has a button nobody understands" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…je pourrais devenir sommelier en six mois", "en": "…I could become a sommelier in six months" }, "crowdYesPct": 13 }
+      ],
+      "tone": "classic",
+      "tags": ["absurd", "opinions"]
+    },
+    {
+      "id": "cc-citylife-128",
+      "targetYesPct": 60,
+      "askKind": "agree",
+      "stem": { "fr": "En ville…", "en": "City life…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…traverser au rouge piéton est un sport local", "en": "…jaywalking is a local sport" }, "crowdYesPct": 63 },
+        { "id": "b", "text": { "fr": "…les klaxons sont une langue à part entière", "en": "…honking is its own language" }, "crowdYesPct": 71 },
+        { "id": "c", "text": { "fr": "…une place assise dans le métro, c'est une victoire", "en": "…scoring a metro seat counts as winning" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…tout le monde marche trop lentement sauf moi", "en": "…everyone walks too slow except me" }, "crowdYesPct": 55 },
+        { "id": "e", "text": { "fr": "…un brunch vaut bien une heure de queue", "en": "…brunch is worth an hour-long line" }, "crowdYesPct": 38 },
+        { "id": "f", "text": { "fr": "…le voisin du dessus déplace des meubles chaque nuit", "en": "…the upstairs neighbor rearranges furniture nightly" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["daily-life", "opinions"]
+    },
+    {
+      "id": "cc-firstimpression-129",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Première impression : j'ai déjà…", "en": "First impressions: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…répété une poignée de main dans ma tête", "en": "…mentally rehearsed a handshake" }, "crowdYesPct": 39 },
+        { "id": "b", "text": { "fr": "…raté le combo bise-ou-main lamentablement", "en": "…botched the hug-or-handshake combo" }, "crowdYesPct": 66 },
+        { "id": "c", "text": { "fr": "…ri trop fort à une blague moyenne du nouveau groupe", "en": "…over-laughed at the new group's mid joke" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…glissé un faux 'moi aussi j'adore' pour m'intégrer", "en": "…dropped a fake 'I love that too' to fit in" }, "crowdYesPct": 52 },
+        { "id": "e", "text": { "fr": "…oublié mon propre prénom une demi-seconde", "en": "…blanked on my own name for half a second" }, "crowdYesPct": 26 },
+        { "id": "f", "text": { "fr": "…analysé mon 'enchanté' pendant tout le trajet retour", "en": "…analyzed my own 'nice to meet you' all the way home" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["awkward", "social"]
+    },
+    {
+      "id": "cc-gifts-130",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté cadeaux, j'ai déjà…", "en": "Gift-wise, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit 'fallait pas' en le pensant vraiment", "en": "…said 'you shouldn't have' and meant it literally" }, "crowdYesPct": 48 },
+        { "id": "b", "text": { "fr": "…gardé un cadeau moche par loyauté", "en": "…kept an ugly gift out of loyalty" }, "crowdYesPct": 67 },
+        { "id": "c", "text": { "fr": "…réutilisé du papier cadeau soigneusement déplié", "en": "…reused carefully unwrapped gift paper" }, "crowdYesPct": 54 },
+        { "id": "d", "text": { "fr": "…acheté le cadeau le matin même", "en": "…bought the gift the same morning" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…ajouté mon propre cadeau à la liste commune", "en": "…added my own gift to the group list" }, "crowdYesPct": 33 },
+        { "id": "f", "text": { "fr": "…surjoué la surprise avec talent", "en": "…oversold the surprise with real talent" }, "crowdYesPct": 62 }
+      ],
+      "tone": "classic",
+      "tags": ["party", "confessions"]
+    },
+    {
+      "id": "cc-littlefears-131",
+      "targetYesPct": 75,
+      "askKind": "agree",
+      "stem": { "fr": "Petites peurs valides…", "en": "Valid little fears…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…entendre 'on peut se parler ?' donne des sueurs froides", "en": "…hearing 'can we talk?' triggers cold sweat" }, "crowdYesPct": 86 },
+        { "id": "b", "text": { "fr": "…le mannequin de vitrine bouge dès qu'on tourne le dos", "en": "…the store mannequin moves when you look away" }, "crowdYesPct": 21 },
+        { "id": "c", "text": { "fr": "…la jambe qui dépasse du lit est en danger", "en": "…the leg outside the blanket is in danger" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…le 'vu' sans réponse est une micro-tragédie", "en": "…being left on read is a micro-tragedy" }, "crowdYesPct": 73 },
+        { "id": "e", "text": { "fr": "…une convocation sans objet, c'est forcément grave", "en": "…a meeting invite with no subject is definitely doom" }, "crowdYesPct": 79 },
+        { "id": "f", "text": { "fr": "…le silence soudain des enfants annonce une catastrophe", "en": "…sudden silence from kids announces disaster" }, "crowdYesPct": 82 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "fear"]
+    },
+    {
+      "id": "cc-finale-132",
+      "targetYesPct": 50,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour finir en beauté, je…", "en": "To end on a high note, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…referais une partie de ce jeu tout de suite", "en": "…play another round of this game right now" }, "crowdYesPct": 72 },
+        { "id": "b", "text": { "fr": "…assumerais le discours de fin de soirée", "en": "…volunteer the end-of-party speech" }, "crowdYesPct": 34 },
+        { "id": "c", "text": { "fr": "…défierais le gagnant en revanche immédiate", "en": "…challenge the winner to an instant rematch" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…accepterais un gage choisi par le perdant", "en": "…take a dare chosen by the loser" }, "crowdYesPct": 46 },
+        { "id": "e", "text": { "fr": "…jurerais que les pourcentages étaient truqués", "en": "…swear the percentages were rigged" }, "crowdYesPct": 53 },
+        { "id": "f", "text": { "fr": "…admettrais que la foule avait raison", "en": "…admit the crowd was right all along" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["party", "meta"]
     }
   ]
 }

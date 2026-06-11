@@ -13,13 +13,34 @@
         "en": "Touch your ear before every sentence you say."
       },
       "decoys": [
-        { "fr": "Touche ta tête avant de poser une question.", "en": "Touch your head before asking a question." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." },
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." },
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." },
-        { "fr": "Souris dès que quelqu'un parle au détective.", "en": "Smile whenever someone talks to the detective." }
+        {
+          "fr": "Touche ta tête avant de poser une question.",
+          "en": "Touch your head before asking a question."
+        },
+        {
+          "fr": "Croise les bras dès que quelqu'un te regarde.",
+          "en": "Cross your arms whenever someone looks at you."
+        },
+        {
+          "fr": "Hoche la tête chaque fois qu'on dit ton prénom.",
+          "en": "Nod every time someone says your name."
+        },
+        {
+          "fr": "Cligne des yeux deux fois avant de répondre.",
+          "en": "Blink twice before answering."
+        },
+        {
+          "fr": "Garde toujours une main dans le dos.",
+          "en": "Always keep one hand behind your back."
+        },
+        {
+          "fr": "Pointe du doigt la personne à qui tu parles.",
+          "en": "Point at the person you're talking to."
+        },
+        {
+          "fr": "Souris dès que quelqu'un parle au détective.",
+          "en": "Smile whenever someone talks to the detective."
+        }
       ]
     },
     {
@@ -32,13 +53,34 @@
         "en": "Never touch your face — not even for a heroic itch."
       },
       "decoys": [
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Garde tes mains bien visibles, posées sur tes genoux.", "en": "Always keep your hands visible, resting on your knees." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." },
-        { "fr": "Frotte-toi les mains quand on te pose une question.", "en": "Rub your hands together whenever you're asked a question." },
-        { "fr": "Couvre ta bouche quand tu ris.", "en": "Cover your mouth when you laugh." },
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." },
-        { "fr": "Garde les deux pieds bien à plat au sol.", "en": "Keep both feet flat on the floor." }
+        {
+          "fr": "Garde toujours une main dans le dos.",
+          "en": "Always keep one hand behind your back."
+        },
+        {
+          "fr": "Garde tes mains bien visibles, posées sur tes genoux.",
+          "en": "Always keep your hands visible, resting on your knees."
+        },
+        {
+          "fr": "Croise les bras dès que quelqu'un te regarde.",
+          "en": "Cross your arms whenever someone looks at you."
+        },
+        {
+          "fr": "Frotte-toi les mains quand on te pose une question.",
+          "en": "Rub your hands together whenever you're asked a question."
+        },
+        {
+          "fr": "Couvre ta bouche quand tu ris.",
+          "en": "Cover your mouth when you laugh."
+        },
+        {
+          "fr": "Cligne des yeux deux fois avant de répondre.",
+          "en": "Blink twice before answering."
+        },
+        {
+          "fr": "Garde les deux pieds bien à plat au sol.",
+          "en": "Keep both feet flat on the floor."
+        }
       ]
     },
     {
@@ -51,13 +93,34 @@
         "en": "Always hold your phone in your left hand, even when voting."
       },
       "decoys": [
-        { "fr": "Serre ton téléphone contre ta poitrine entre deux votes.", "en": "Hug your phone to your chest between votes." },
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Pose ton téléphone face cachée dès que tu ne t'en sers pas.", "en": "Put your phone face-down whenever you're not using it." },
-        { "fr": "Regarde ton poignet avant de répondre.", "en": "Glance at your wrist before answering." },
-        { "fr": "Fais un pouce en l'air après chaque phrase.", "en": "Give a thumbs-up after every sentence." },
-        { "fr": "Recoiffe-toi dès que quelqu'un sort son téléphone.", "en": "Fix your hair whenever someone pulls out a phone." },
-        { "fr": "Tapote deux fois ta cuisse avant de dire un prénom.", "en": "Tap your thigh twice before saying a name." }
+        {
+          "fr": "Serre ton téléphone contre ta poitrine entre deux votes.",
+          "en": "Hug your phone to your chest between votes."
+        },
+        {
+          "fr": "Tape une fois dans tes mains chaque fois que tu ris.",
+          "en": "Clap once every time you laugh."
+        },
+        {
+          "fr": "Pose ton téléphone face cachée dès que tu ne t'en sers pas.",
+          "en": "Put your phone face-down whenever you're not using it."
+        },
+        {
+          "fr": "Regarde ton poignet avant de répondre.",
+          "en": "Glance at your wrist before answering."
+        },
+        {
+          "fr": "Fais un pouce en l'air après chaque phrase.",
+          "en": "Give a thumbs-up after every sentence."
+        },
+        {
+          "fr": "Recoiffe-toi dès que quelqu'un sort son téléphone.",
+          "en": "Fix your hair whenever someone pulls out a phone."
+        },
+        {
+          "fr": "Tapote deux fois ta cuisse avant de dire un prénom.",
+          "en": "Tap your thigh twice before saying a name."
+        }
       ]
     },
     {
@@ -70,13 +133,34 @@
         "en": "Clap twice, loudly, every time someone stands up."
       },
       "decoys": [
-        { "fr": "Applaudis chaque fois que quelqu'un s'assoit.", "en": "Clap whenever someone sits down." },
-        { "fr": "Étire tes bras quand quelqu'un dit un chiffre.", "en": "Stretch your arms whenever someone says a number." },
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Lève-toi à moitié quand quelqu'un dit « non ».", "en": "Half-stand whenever someone says \"no\"." },
-        { "fr": "Gratte-toi le nez quand quelqu'un rit.", "en": "Scratch your nose whenever someone laughs." },
-        { "fr": "Regarde le plafond quand tu ris.", "en": "Look at the ceiling when you laugh." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." }
+        {
+          "fr": "Applaudis chaque fois que quelqu'un s'assoit.",
+          "en": "Clap whenever someone sits down."
+        },
+        {
+          "fr": "Étire tes bras quand quelqu'un dit un chiffre.",
+          "en": "Stretch your arms whenever someone says a number."
+        },
+        {
+          "fr": "Hoche la tête chaque fois qu'on dit ton prénom.",
+          "en": "Nod every time someone says your name."
+        },
+        {
+          "fr": "Lève-toi à moitié quand quelqu'un dit « non ».",
+          "en": "Half-stand whenever someone says \"no\"."
+        },
+        {
+          "fr": "Gratte-toi le nez quand quelqu'un rit.",
+          "en": "Scratch your nose whenever someone laughs."
+        },
+        {
+          "fr": "Regarde le plafond quand tu ris.",
+          "en": "Look at the ceiling when you laugh."
+        },
+        {
+          "fr": "Pointe du doigt la personne à qui tu parles.",
+          "en": "Point at the person you're talking to."
+        }
       ]
     },
     {
@@ -89,13 +173,34 @@
         "en": "Keep both feet flat on the floor every single second of the round."
       },
       "decoys": [
-        { "fr": "Croise les jambes dès que tu t'assois.", "en": "Cross your legs whenever you sit down." },
-        { "fr": "Ne reste jamais immobile : balance-toi doucement.", "en": "Never stand still: keep gently swaying." },
-        { "fr": "Mets les mains sur les hanches quand tu es debout.", "en": "Put your hands on your hips whenever you stand." },
-        { "fr": "Penche-toi en arrière quand on te parle.", "en": "Lean back whenever someone talks to you." },
-        { "fr": "Ton dos ne doit jamais toucher le dossier.", "en": "Your back must never touch the backrest." },
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Oriente toujours tes pieds vers la porte.", "en": "Always point your feet toward the door." }
+        {
+          "fr": "Croise les jambes dès que tu t'assois.",
+          "en": "Cross your legs whenever you sit down."
+        },
+        {
+          "fr": "Ne reste jamais immobile : balance-toi doucement.",
+          "en": "Never stand still: keep gently swaying."
+        },
+        {
+          "fr": "Mets les mains sur les hanches quand tu es debout.",
+          "en": "Put your hands on your hips whenever you stand."
+        },
+        {
+          "fr": "Penche-toi en arrière quand on te parle.",
+          "en": "Lean back whenever someone talks to you."
+        },
+        {
+          "fr": "Ton dos ne doit jamais toucher le dossier.",
+          "en": "Your back must never touch the backrest."
+        },
+        {
+          "fr": "Mords ta lèvre dès que tu trouves quelque chose drôle.",
+          "en": "Bite your lip whenever you find something funny."
+        },
+        {
+          "fr": "Oriente toujours tes pieds vers la porte.",
+          "en": "Always point your feet toward the door."
+        }
       ]
     },
     {
@@ -108,13 +213,34 @@
         "en": "Raise your hand and wait a beat before speaking, like you're back in school."
       },
       "decoys": [
-        { "fr": "Touche ta tête avant de poser une question.", "en": "Touch your head before asking a question." },
-        { "fr": "Fais un pouce en l'air après chaque phrase.", "en": "Give a thumbs-up after every sentence." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." },
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." },
-        { "fr": "Lève l'index quand tu es d'accord.", "en": "Raise one finger when you agree." },
-        { "fr": "Ferme les yeux quand on te pose une question.", "en": "Close your eyes whenever you're asked a question." },
-        { "fr": "Touche ton genou avant de répondre.", "en": "Touch your knee before answering." }
+        {
+          "fr": "Touche ta tête avant de poser une question.",
+          "en": "Touch your head before asking a question."
+        },
+        {
+          "fr": "Fais un pouce en l'air après chaque phrase.",
+          "en": "Give a thumbs-up after every sentence."
+        },
+        {
+          "fr": "Pince-toi le bras pour t’empêcher de rire.",
+          "en": "Pinch your arm to stop yourself from laughing."
+        },
+        {
+          "fr": "Lève les sourcils de façon exagérée quand on te surprend.",
+          "en": "Raise your eyebrows dramatically whenever you're surprised."
+        },
+        {
+          "fr": "Lève l'index quand tu es d'accord.",
+          "en": "Raise one finger when you agree."
+        },
+        {
+          "fr": "Ferme les yeux quand on te pose une question.",
+          "en": "Close your eyes whenever you're asked a question."
+        },
+        {
+          "fr": "Touche ton genou avant de répondre.",
+          "en": "Touch your knee before answering."
+        }
       ]
     },
     {
@@ -127,13 +253,34 @@
         "en": "Subtly copy the detective's posture: arms, legs, lean."
       },
       "decoys": [
-        { "fr": "Copie la posture de ton voisin de gauche.", "en": "Copy the posture of the player on your left." },
-        { "fr": "Souris dès que quelqu'un parle au détective.", "en": "Smile whenever someone talks to the detective." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." },
-        { "fr": "Penche-toi en arrière quand on te parle.", "en": "Lean back whenever someone talks to you." },
-        { "fr": "Tiens ton menton quand quelqu'un d'autre parle.", "en": "Hold your chin while someone else is talking." },
-        { "fr": "Tourne légèrement le dos au détective.", "en": "Keep your back slightly turned to the detective." },
-        { "fr": "Mets les mains sur les hanches quand tu es debout.", "en": "Put your hands on your hips whenever you stand." }
+        {
+          "fr": "Copie la posture de ton voisin de gauche.",
+          "en": "Copy the posture of the player on your left."
+        },
+        {
+          "fr": "Souris dès que quelqu'un parle au détective.",
+          "en": "Smile whenever someone talks to the detective."
+        },
+        {
+          "fr": "Fais un clin d’œil à la fin de chaque phrase.",
+          "en": "Wink at the end of every sentence."
+        },
+        {
+          "fr": "Penche-toi en arrière quand on te parle.",
+          "en": "Lean back whenever someone talks to you."
+        },
+        {
+          "fr": "Tiens ton menton quand quelqu'un d'autre parle.",
+          "en": "Hold your chin while someone else is talking."
+        },
+        {
+          "fr": "Tourne légèrement le dos au détective.",
+          "en": "Keep your back slightly turned to the detective."
+        },
+        {
+          "fr": "Mets les mains sur les hanches quand tu es debout.",
+          "en": "Put your hands on your hips whenever you stand."
+        }
       ]
     },
     {
@@ -146,13 +293,34 @@
         "en": "Cover your mouth with both hands whenever you laugh."
       },
       "decoys": [
-        { "fr": "Gratte-toi le nez quand quelqu'un rit.", "en": "Scratch your nose whenever someone laughs." },
-        { "fr": "Regarde le plafond quand tu ris.", "en": "Look at the ceiling when you laugh." },
-        { "fr": "Tape sur ta cuisse quand tu ris.", "en": "Slap your thigh when you laugh." },
-        { "fr": "Ris en silence total, épaules qui tremblent uniquement.", "en": "Laugh in total silence, trembling shoulders only." },
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Frotte-toi les mains quand on te pose une question.", "en": "Rub your hands together whenever you're asked a question." },
-        { "fr": "Ne touche jamais ton visage.", "en": "Never touch your face." }
+        {
+          "fr": "Gratte-toi le nez quand quelqu'un rit.",
+          "en": "Scratch your nose whenever someone laughs."
+        },
+        {
+          "fr": "Regarde le plafond quand tu ris.",
+          "en": "Look at the ceiling when you laugh."
+        },
+        {
+          "fr": "Tape sur ta cuisse quand tu ris.",
+          "en": "Slap your thigh when you laugh."
+        },
+        {
+          "fr": "Ris en silence total, épaules qui tremblent uniquement.",
+          "en": "Laugh in total silence, trembling shoulders only."
+        },
+        {
+          "fr": "Fais un signe de paix quand quelqu’un te regarde.",
+          "en": "Flash a peace sign whenever someone looks at you."
+        },
+        {
+          "fr": "Frotte-toi les mains quand on te pose une question.",
+          "en": "Rub your hands together whenever you're asked a question."
+        },
+        {
+          "fr": "Ne touche jamais ton visage.",
+          "en": "Never touch your face."
+        }
       ]
     },
     {
@@ -165,13 +333,34 @@
         "en": "End every one of your sentences with a confident thumbs-up."
       },
       "decoys": [
-        { "fr": "Fais un clin d'œil après chaque phrase.", "en": "Wink after every sentence." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." },
-        { "fr": "Lève la main avant de parler.", "en": "Raise your hand before speaking." },
-        { "fr": "Fais OK avec les doigts quand on te remercie.", "en": "Flash an OK sign whenever someone thanks you." },
-        { "fr": "Fais des guillemets avec les doigts sur chaque adjectif.", "en": "Air-quote every adjective with your fingers." },
-        { "fr": "Étire tes bras quand quelqu'un dit un chiffre.", "en": "Stretch your arms whenever someone says a number." },
-        { "fr": "Tapote deux fois ta cuisse avant de dire un prénom.", "en": "Tap your thigh twice before saying a name." }
+        {
+          "fr": "Fais un clin d'œil après chaque phrase.",
+          "en": "Wink after every sentence."
+        },
+        {
+          "fr": "Montre tes paumes ouvertes quand on te pose une question.",
+          "en": "Show your open palms whenever you're asked a question."
+        },
+        {
+          "fr": "Lève la main avant de parler.",
+          "en": "Raise your hand before speaking."
+        },
+        {
+          "fr": "Fais OK avec les doigts quand on te remercie.",
+          "en": "Flash an OK sign whenever someone thanks you."
+        },
+        {
+          "fr": "Fais des guillemets avec les doigts sur chaque adjectif.",
+          "en": "Air-quote every adjective with your fingers."
+        },
+        {
+          "fr": "Étire tes bras quand quelqu'un dit un chiffre.",
+          "en": "Stretch your arms whenever someone says a number."
+        },
+        {
+          "fr": "Tapote deux fois ta cuisse avant de dire un prénom.",
+          "en": "Tap your thigh twice before saying a name."
+        }
       ]
     },
     {
@@ -184,13 +373,34 @@
         "en": "Check your wrist before every answer, watch or no watch."
       },
       "decoys": [
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." },
-        { "fr": "Touche ton genou avant de répondre.", "en": "Touch your knee before answering." },
-        { "fr": "Touche ta tête avant de poser une question.", "en": "Touch your head before asking a question." },
-        { "fr": "Regarde la porte avant de répondre.", "en": "Glance at the door before answering." },
-        { "fr": "Ferme les yeux quand on te pose une question.", "en": "Close your eyes whenever you're asked a question." },
-        { "fr": "Frotte-toi les mains quand on te pose une question.", "en": "Rub your hands together whenever you're asked a question." },
-        { "fr": "Inspire profondément, bien fort, avant de répondre.", "en": "Take a loud, deep breath before answering." }
+        {
+          "fr": "Fais un check imaginaire en l’air après chaque blague.",
+          "en": "Fist-bump the air after every joke."
+        },
+        {
+          "fr": "Touche ton genou avant de répondre.",
+          "en": "Touch your knee before answering."
+        },
+        {
+          "fr": "Racle-toi la gorge discrètement avant chaque prise de parole.",
+          "en": "Clear your throat quietly before you speak."
+        },
+        {
+          "fr": "Regarde la porte avant de répondre.",
+          "en": "Glance at the door before answering."
+        },
+        {
+          "fr": "Ferme les yeux quand on te pose une question.",
+          "en": "Close your eyes whenever you're asked a question."
+        },
+        {
+          "fr": "Fais un petit signe de la main avant de poser une question.",
+          "en": "Give a little wave before asking a question."
+        },
+        {
+          "fr": "Inspire profondément, bien fort, avant de répondre.",
+          "en": "Take a loud, deep breath before answering."
+        }
       ]
     },
     {
@@ -203,13 +413,34 @@
         "en": "Hold your chin and look profound whenever someone else is talking."
       },
       "decoys": [
-        { "fr": "Penche-toi en arrière quand on te parle.", "en": "Lean back whenever someone talks to you." },
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." },
-        { "fr": "Fronce les sourcils dès qu'on pose une question.", "en": "Frown whenever a question is asked." },
-        { "fr": "Ferme les yeux quand on te pose une question.", "en": "Close your eyes whenever you're asked a question." },
-        { "fr": "Tapote ta tempe avant de donner un avis.", "en": "Tap your temple before giving an opinion." },
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." }
+        {
+          "fr": "Croise les mains dès que tu finis de parler.",
+          "en": "Fold your hands the moment you finish talking."
+        },
+        {
+          "fr": "Touche ton coude quand quelqu’un dit « détective ».",
+          "en": "Touch your elbow whenever someone says \"detective\"."
+        },
+        {
+          "fr": "Regarde tes chaussures quand on prononce ton prénom.",
+          "en": "Look at your shoes whenever your name comes up."
+        },
+        {
+          "fr": "Fronce les sourcils dès qu'on pose une question.",
+          "en": "Frown whenever a question is asked."
+        },
+        {
+          "fr": "Hausse les épaules chaque fois qu’on cite un chiffre.",
+          "en": "Shrug whenever someone says a number."
+        },
+        {
+          "fr": "Tapote ta tempe avant de donner un avis.",
+          "en": "Tap your temple before giving an opinion."
+        },
+        {
+          "fr": "Croise les doigts quand quelqu’un parle de toi.",
+          "en": "Cross your fingers whenever someone talks about you."
+        }
       ]
     },
     {
@@ -222,13 +453,34 @@
         "en": "Snap a military salute whenever a detective's first name is said."
       },
       "decoys": [
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Souris dès que quelqu'un parle au détective.", "en": "Smile whenever someone talks to the detective." },
-        { "fr": "Lève ton verre, même vide, quand quelqu'un dit « détective ».", "en": "Raise your glass, even empty, whenever someone says \"detective\"." },
-        { "fr": "Tapote deux fois ta cuisse avant de dire un prénom.", "en": "Tap your thigh twice before saying a name." },
-        { "fr": "Lève-toi à moitié quand quelqu'un dit « non ».", "en": "Half-stand whenever someone says \"no\"." },
-        { "fr": "Fais un pouce en l'air après chaque phrase.", "en": "Give a thumbs-up after every sentence." },
-        { "fr": "Fais une petite révérence quand quelqu'un entre dans la pièce.", "en": "Give a little bow whenever someone enters the room." }
+        {
+          "fr": "Pointe le sol du doigt quand tu n’es pas d’accord.",
+          "en": "Point at the floor whenever you disagree."
+        },
+        {
+          "fr": "Pose ta main sur ton cœur quand tu jures que c’est vrai.",
+          "en": "Put your hand on your heart whenever you swear it's true."
+        },
+        {
+          "fr": "Lève ton verre, même vide, quand quelqu'un dit « détective ».",
+          "en": "Raise your glass, even empty, whenever someone says \"detective\"."
+        },
+        {
+          "fr": "Tends les bras en croix quand tu es surpris.",
+          "en": "Spread your arms wide whenever you're surprised."
+        },
+        {
+          "fr": "Lève-toi à moitié quand quelqu'un dit « non ».",
+          "en": "Half-stand whenever someone says \"no\"."
+        },
+        {
+          "fr": "Pointe-toi du pouce quand tu parles de toi.",
+          "en": "Jab a thumb at yourself whenever you talk about yourself."
+        },
+        {
+          "fr": "Fais une petite révérence quand quelqu'un entre dans la pièce.",
+          "en": "Give a little bow whenever someone enters the room."
+        }
       ]
     },
     {
@@ -241,13 +493,34 @@
         "en": "Make finger air-quotes every time you say an adjective."
       },
       "decoys": [
-        { "fr": "Fais des guillemets uniquement quand tu cites quelqu'un.", "en": "Air-quote only when you're quoting someone." },
-        { "fr": "Étire tes bras quand quelqu'un dit un chiffre.", "en": "Stretch your arms whenever someone says a number." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." },
-        { "fr": "Fais un pouce en l'air après chaque phrase.", "en": "Give a thumbs-up after every sentence." },
-        { "fr": "Tapote deux fois ta cuisse avant de dire un prénom.", "en": "Tap your thigh twice before saying a name." },
-        { "fr": "Compte sur tes doigts dès que tu listes des choses.", "en": "Count on your fingers whenever you list things." },
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." }
+        {
+          "fr": "Fais des guillemets uniquement quand tu cites quelqu'un.",
+          "en": "Air-quote only when you're quoting someone."
+        },
+        {
+          "fr": "Lève le poing quand quelqu’un est d’accord avec toi.",
+          "en": "Raise a fist whenever someone agrees with you."
+        },
+        {
+          "fr": "Assieds-toi toujours au bord de ton siège.",
+          "en": "Always sit on the very edge of your seat."
+        },
+        {
+          "fr": "Garde une main dans ta poche en toutes circonstances.",
+          "en": "Keep one hand in your pocket at all times."
+        },
+        {
+          "fr": "Garde tes coudes collés au corps quand tu parles.",
+          "en": "Keep your elbows pinned to your sides while talking."
+        },
+        {
+          "fr": "Compte sur tes doigts dès que tu listes des choses.",
+          "en": "Count on your fingers whenever you list things."
+        },
+        {
+          "fr": "Tiens toujours un objet dans ta main (verre, coussin…).",
+          "en": "Always hold something in your hand (cup, cushion…)."
+        }
       ]
     },
     {
@@ -260,13 +533,34 @@
         "en": "Your back must never touch a backrest, wall, or cushion."
       },
       "decoys": [
-        { "fr": "Reste debout dès que le détective est debout.", "en": "Stand whenever the detective stands." },
-        { "fr": "Garde les deux pieds bien à plat au sol.", "en": "Keep both feet flat on the floor." },
-        { "fr": "Croise les jambes dès que tu t'assois.", "en": "Cross your legs whenever you sit down." },
-        { "fr": "Penche-toi en arrière quand on te parle.", "en": "Lean back whenever someone talks to you." },
-        { "fr": "Mets les mains sur les hanches quand tu es debout.", "en": "Put your hands on your hips whenever you stand." },
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Change de façon de t'asseoir chaque fois que quelqu'un rit.", "en": "Change how you're sitting every time someone laughs." }
+        {
+          "fr": "Reste debout dès que le détective est debout.",
+          "en": "Stand whenever the detective stands."
+        },
+        {
+          "fr": "Garde les deux pieds bien à plat au sol.",
+          "en": "Keep both feet flat on the floor."
+        },
+        {
+          "fr": "Croise les jambes dès que tu t'assois.",
+          "en": "Cross your legs whenever you sit down."
+        },
+        {
+          "fr": "Garde les talons décollés du sol quand tu es assis.",
+          "en": "Keep your heels off the floor whenever you sit."
+        },
+        {
+          "fr": "Penche la tête sur le côté quand on te pose une question.",
+          "en": "Tilt your head whenever you're asked a question."
+        },
+        {
+          "fr": "Fronce les sourcils pendant les histoires des autres.",
+          "en": "Frown during other people's stories."
+        },
+        {
+          "fr": "Change de façon de t'asseoir chaque fois que quelqu'un rit.",
+          "en": "Change how you're sitting every time someone laughs."
+        }
       ]
     },
     {
@@ -279,13 +573,34 @@
         "en": "Scratch the tip of your nose every time someone laughs."
       },
       "decoys": [
-        { "fr": "Couvre ta bouche quand tu ris.", "en": "Cover your mouth when you laugh." },
-        { "fr": "Regarde le plafond quand tu ris.", "en": "Look at the ceiling when you laugh." },
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Tousse une fois quand quelqu'un dit « non ».", "en": "Cough once whenever someone says \"no\"." },
-        { "fr": "Recoiffe-toi dès que quelqu'un sort son téléphone.", "en": "Fix your hair whenever someone pulls out a phone." },
-        { "fr": "Frotte-toi les mains quand on te pose une question.", "en": "Rub your hands together whenever you're asked a question." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." }
+        {
+          "fr": "Couvre ta bouche quand tu ris.",
+          "en": "Cover your mouth when you laugh."
+        },
+        {
+          "fr": "Bouge les lèvres en silence pendant que les autres parlent.",
+          "en": "Silently mouth along while other people talk."
+        },
+        {
+          "fr": "Tape doucement du pied quand la conversation s’éternise.",
+          "en": "Tap your foot whenever the conversation drags."
+        },
+        {
+          "fr": "Tousse une fois quand quelqu'un dit « non ».",
+          "en": "Cough once whenever someone says \"no\"."
+        },
+        {
+          "fr": "Recoiffe-toi dès que quelqu'un sort son téléphone.",
+          "en": "Fix your hair whenever someone pulls out a phone."
+        },
+        {
+          "fr": "Fais craquer tes doigts avant de te lever.",
+          "en": "Crack your knuckles before standing up."
+        },
+        {
+          "fr": "Roule des épaules dès qu’un silence s’installe.",
+          "en": "Roll your shoulders whenever a silence sets in."
+        }
       ]
     },
     {
@@ -298,13 +613,34 @@
         "en": "Look up at the ceiling, deeply inspired, before every answer."
       },
       "decoys": [
-        { "fr": "Regarde tes chaussures avant de répondre.", "en": "Stare at your shoes before answering." },
-        { "fr": "Cligne des yeux deux fois avant de répondre.", "en": "Blink twice before answering." },
-        { "fr": "Ferme les yeux quand on te pose une question.", "en": "Close your eyes whenever you're asked a question." },
-        { "fr": "Regarde ton poignet avant de répondre.", "en": "Glance at your wrist before answering." },
-        { "fr": "Touche ton genou avant de répondre.", "en": "Touch your knee before answering." },
-        { "fr": "Touche ta tête avant de poser une question.", "en": "Touch your head before asking a question." },
-        { "fr": "Regarde la fenêtre quand tu dis « je ne sais pas ».", "en": "Look at the window whenever you say \"I don't know\"." }
+        {
+          "fr": "Regarde tes chaussures avant de répondre.",
+          "en": "Stare at your shoes before answering."
+        },
+        {
+          "fr": "Frotte-toi les yeux quand quelqu’un répète une question.",
+          "en": "Rub your eyes whenever a question gets repeated."
+        },
+        {
+          "fr": "Cligne très lentement des yeux quand on te fixe.",
+          "en": "Blink in slow motion whenever someone stares at you."
+        },
+        {
+          "fr": "Regarde ton poignet avant de répondre.",
+          "en": "Glance at your wrist before answering."
+        },
+        {
+          "fr": "Mets ta main en visière quand tu cherches quelqu’un des yeux.",
+          "en": "Shield your eyes like a sailor when scanning the room."
+        },
+        {
+          "fr": "Tape-toi le torse deux fois quand on te félicite.",
+          "en": "Thump your chest twice whenever you're praised."
+        },
+        {
+          "fr": "Regarde la fenêtre quand tu dis « je ne sais pas ».",
+          "en": "Look at the window whenever you say \"I don't know\"."
+        }
       ]
     },
     {
@@ -317,13 +653,34 @@
         "en": "Tap your thigh twice right before saying anyone's first name."
       },
       "decoys": [
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Fais un salut militaire quand on dit le prénom du détective.", "en": "Salute whenever someone says the detective's name." },
-        { "fr": "Touche ton coude quand tu parles de quelqu'un d'absent.", "en": "Touch your elbow when mentioning someone who isn't here." },
-        { "fr": "Fais un pouce en l'air après chaque phrase.", "en": "Give a thumbs-up after every sentence." },
-        { "fr": "Pointe du doigt la personne à qui tu parles.", "en": "Point at the person you're talking to." },
-        { "fr": "Lève la main avant de parler.", "en": "Raise your hand before speaking." },
-        { "fr": "Étire tes bras quand quelqu'un dit un chiffre.", "en": "Stretch your arms whenever someone says a number." }
+        {
+          "fr": "Fais mine d’épousseter ton épaule après chaque bonne réponse.",
+          "en": "Brush off your shoulder after every good answer."
+        },
+        {
+          "fr": "Fais un salut militaire quand on dit le prénom du détective.",
+          "en": "Salute whenever someone says the detective's name."
+        },
+        {
+          "fr": "Touche ton coude quand tu parles de quelqu'un d'absent.",
+          "en": "Touch your elbow when mentioning someone who isn't here."
+        },
+        {
+          "fr": "Trace un rond dans l’air quand tu expliques quelque chose.",
+          "en": "Draw a circle in the air whenever you explain something."
+        },
+        {
+          "fr": "Compte tes arguments sur tes doigts.",
+          "en": "Count your points out on your fingers."
+        },
+        {
+          "fr": "Lève la main avant de parler.",
+          "en": "Raise your hand before speaking."
+        },
+        {
+          "fr": "Claque des doigts quand tu te souviens de quelque chose.",
+          "en": "Snap your fingers whenever you remember something."
+        }
       ]
     },
     {
@@ -336,13 +693,34 @@
         "en": "Stretch loudly, arms to the sky, whenever a number is said."
       },
       "decoys": [
-        { "fr": "Bâille poliment chaque fois qu'on parle d'argent.", "en": "Yawn politely whenever money comes up." },
-        { "fr": "Tape deux fois dans tes mains quand quelqu'un se lève.", "en": "Clap twice whenever someone stands up." },
-        { "fr": "Lève-toi à moitié quand quelqu'un dit « non ».", "en": "Half-stand whenever someone says \"no\"." },
-        { "fr": "Regarde le plafond quand tu ris.", "en": "Look at the ceiling when you laugh." },
-        { "fr": "Craque tes doigts avant de donner un avis.", "en": "Crack your knuckles before giving an opinion." },
-        { "fr": "Mets les mains sur les hanches quand tu es debout.", "en": "Put your hands on your hips whenever you stand." },
-        { "fr": "Gratte-toi le nez quand quelqu'un rit.", "en": "Scratch your nose whenever someone laughs." }
+        {
+          "fr": "Bâille poliment chaque fois qu'on parle d'argent.",
+          "en": "Yawn politely whenever money comes up."
+        },
+        {
+          "fr": "Tape deux fois dans tes mains quand quelqu'un se lève.",
+          "en": "Clap twice whenever someone stands up."
+        },
+        {
+          "fr": "Pince tes doigts quand tu dis « un peu ».",
+          "en": "Pinch your fingers together whenever you say \"a little\"."
+        },
+        {
+          "fr": "Lève deux doigts quand tu donnes deux options.",
+          "en": "Hold up two fingers whenever you offer two options."
+        },
+        {
+          "fr": "Craque tes doigts avant de donner un avis.",
+          "en": "Crack your knuckles before giving an opinion."
+        },
+        {
+          "fr": "Masse-toi les tempes quand la conversation devient sérieuse.",
+          "en": "Massage your temples whenever things get serious."
+        },
+        {
+          "fr": "Tapote tes lèvres avec un doigt avant de donner un avis.",
+          "en": "Tap your lips with one finger before giving an opinion."
+        }
       ]
     },
     {
@@ -355,13 +733,34 @@
         "en": "Nod nonstop like their number-one fan whenever a detective is talking."
       },
       "decoys": [
-        { "fr": "Hoche la tête chaque fois qu'on dit ton prénom.", "en": "Nod every time someone says your name." },
-        { "fr": "Souris dès que quelqu'un parle au détective.", "en": "Smile whenever someone talks to the detective." },
-        { "fr": "Penche-toi en arrière quand on te parle.", "en": "Lean back whenever someone talks to you." },
-        { "fr": "Tiens ton menton quand quelqu'un d'autre parle.", "en": "Hold your chin while someone else is talking." },
-        { "fr": "Fais non de la tête, tout doucement, quand un détective parle.", "en": "Shake your head, very gently, whenever a detective talks." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." },
-        { "fr": "Ferme les yeux quand on te pose une question.", "en": "Close your eyes whenever you're asked a question." }
+        {
+          "fr": "Ferme un œil quand tu essaies de te souvenir d’un truc.",
+          "en": "Close one eye whenever you try to remember something."
+        },
+        {
+          "fr": "Gratte-toi la nuque quand tu ne sais pas quoi répondre.",
+          "en": "Scratch the back of your neck whenever you're stumped."
+        },
+        {
+          "fr": "Regarde en haut à gauche avant chaque réponse.",
+          "en": "Glance up and to the left before every answer."
+        },
+        {
+          "fr": "Tiens ton menton quand quelqu'un d'autre parle.",
+          "en": "Hold your chin while someone else is talking."
+        },
+        {
+          "fr": "Fais non de la tête, tout doucement, quand un détective parle.",
+          "en": "Shake your head, very gently, whenever a detective talks."
+        },
+        {
+          "fr": "Tapote le bout de tes doigts les uns contre les autres, l’air calculateur.",
+          "en": "Steeple your fingertips together, looking calculating."
+        },
+        {
+          "fr": "Fais semblant d’écrire dans un carnet imaginaire pendant les débats.",
+          "en": "Scribble in an imaginary notebook during arguments."
+        }
       ]
     },
     {
@@ -374,13 +773,34 @@
         "en": "Whenever you're standing, hands on hips like a superhero."
       },
       "decoys": [
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Debout, garde les bras croisés.", "en": "When standing, keep your arms crossed." },
-        { "fr": "Garde les deux pieds bien à plat au sol.", "en": "Keep both feet flat on the floor." },
-        { "fr": "Mets-toi sur la pointe des pieds quand tu attends une réponse.", "en": "Stand on tiptoe while waiting for an answer." },
-        { "fr": "Lève-toi à moitié quand quelqu'un dit « non ».", "en": "Half-stand whenever someone says \"no\"." },
-        { "fr": "Reste debout dès que le détective est debout.", "en": "Stand whenever the detective stands." },
-        { "fr": "Tape deux fois dans tes mains quand quelqu'un se lève.", "en": "Clap twice whenever someone stands up." }
+        {
+          "fr": "Fais un roulement de tambour sur tes genoux quand quelqu’un hésite.",
+          "en": "Drumroll on your knees whenever someone hesitates."
+        },
+        {
+          "fr": "Debout, garde les bras croisés.",
+          "en": "When standing, keep your arms crossed."
+        },
+        {
+          "fr": "Soulève un chapeau imaginaire après chaque bonne blague.",
+          "en": "Tip an imaginary hat after every good joke."
+        },
+        {
+          "fr": "Mets-toi sur la pointe des pieds quand tu attends une réponse.",
+          "en": "Stand on tiptoe while waiting for an answer."
+        },
+        {
+          "fr": "Mime une larme d’émotion à la fin des histoires touchantes.",
+          "en": "Mime wiping away a tear after touching stories."
+        },
+        {
+          "fr": "Reste debout dès que le détective est debout.",
+          "en": "Stand whenever the detective stands."
+        },
+        {
+          "fr": "Tape deux fois dans tes mains quand quelqu'un se lève.",
+          "en": "Clap twice whenever someone stands up."
+        }
       ]
     },
     {
@@ -393,13 +813,34 @@
         "en": "Keep your right hand balled into a casual fist at all times."
       },
       "decoys": [
-        { "fr": "Garde toujours une main dans le dos.", "en": "Always keep one hand behind your back." },
-        { "fr": "Croise les doigts en permanence, comme un menteur prudent.", "en": "Keep your fingers crossed at all times, like a cautious liar." },
-        { "fr": "Ne touche jamais ton visage.", "en": "Never touch your face." },
-        { "fr": "Garde les mains dans tes poches dès que tu es debout.", "en": "Keep your hands in your pockets whenever you stand." },
-        { "fr": "Tiens ton téléphone uniquement de la main gauche.", "en": "Only hold your phone in your left hand." },
-        { "fr": "Frotte-toi les mains quand on te pose une question.", "en": "Rub your hands together whenever you're asked a question." },
-        { "fr": "Croise les bras dès que quelqu'un te regarde.", "en": "Cross your arms whenever someone looks at you." }
+        {
+          "fr": "Fais le geste « encore » avec le doigt après chaque anecdote.",
+          "en": "Twirl your finger like \"encore\" after every anecdote."
+        },
+        {
+          "fr": "Croise les doigts en permanence, comme un menteur prudent.",
+          "en": "Keep your fingers crossed at all times, like a cautious liar."
+        },
+        {
+          "fr": "Ne touche jamais ton visage.",
+          "en": "Never touch your face."
+        },
+        {
+          "fr": "Garde les mains dans tes poches dès que tu es debout.",
+          "en": "Keep your hands in your pockets whenever you stand."
+        },
+        {
+          "fr": "Tiens ton téléphone uniquement de la main gauche.",
+          "en": "Only hold your phone in your left hand."
+        },
+        {
+          "fr": "Pose ton poing sur ton cœur quand quelqu’un te remercie.",
+          "en": "Press your fist to your heart whenever someone thanks you."
+        },
+        {
+          "fr": "Étouffe un bâillement dès que quelqu’un raconte sa vie.",
+          "en": "Stifle a yawn whenever someone tells a long story."
+        }
       ]
     },
     {
@@ -412,13 +853,34 @@
         "en": "Never say the word \"yes\" — always find another way to agree."
       },
       "decoys": [
-        { "fr": "Interdiction de dire « non ».", "en": "Never say the word \"no\"." },
-        { "fr": "Réponds à chaque question par une question.", "en": "Answer every question with a question." },
-        { "fr": "Interdiction de prononcer le prénom des joueurs.", "en": "Never say another player's first name." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Interdiction de dire « je ».", "en": "Never say the word \"I\"." },
-        { "fr": "Parle uniquement au passé.", "en": "Only speak in the past tense." },
-        { "fr": "Répète le dernier mot de la personne qui vient de parler.", "en": "Repeat the last word of whoever just spoke." }
+        {
+          "fr": "Interdiction de dire « non ».",
+          "en": "Never say the word \"no\"."
+        },
+        {
+          "fr": "Réponds à chaque question par une question.",
+          "en": "Answer every question with a question."
+        },
+        {
+          "fr": "Interdiction de prononcer le prénom des joueurs.",
+          "en": "Never say another player's first name."
+        },
+        {
+          "fr": "Termine chaque phrase par « voilà ».",
+          "en": "End every sentence with \"you know\"."
+        },
+        {
+          "fr": "Interdiction de dire « je ».",
+          "en": "Never say the word \"I\"."
+        },
+        {
+          "fr": "Parle uniquement au passé.",
+          "en": "Only speak in the past tense."
+        },
+        {
+          "fr": "Répète le dernier mot de la personne qui vient de parler.",
+          "en": "Repeat the last word of whoever just spoke."
+        }
       ]
     },
     {
@@ -431,13 +893,34 @@
         "en": "Saying \"no\" is completely forbidden — find stylish new ways to refuse."
       },
       "decoys": [
-        { "fr": "Interdiction de dire « oui ».", "en": "Never say the word \"yes\"." },
-        { "fr": "Interdiction de dire « je ».", "en": "Never say the word \"I\"." },
-        { "fr": "Interdiction de poser des questions.", "en": "Never ask a question." },
-        { "fr": "Interdiction de prononcer le prénom des joueurs.", "en": "Never say another player's first name." },
-        { "fr": "Remplace tous les chiffres par « beaucoup ».", "en": "Replace every number with \"a lot\"." },
-        { "fr": "Réponds en trois mots maximum.", "en": "Answer in three words or fewer." },
-        { "fr": "Interdiction de dire le mot « règle ».", "en": "Never say the word \"rule\"." }
+        {
+          "fr": "Interdiction de dire « oui ».",
+          "en": "Never say the word \"yes\"."
+        },
+        {
+          "fr": "Interdiction de dire « je ».",
+          "en": "Never say the word \"I\"."
+        },
+        {
+          "fr": "Interdiction de poser des questions.",
+          "en": "Never ask a question."
+        },
+        {
+          "fr": "Interdiction de prononcer le prénom des joueurs.",
+          "en": "Never say another player's first name."
+        },
+        {
+          "fr": "Remplace tous les chiffres par « beaucoup ».",
+          "en": "Replace every number with \"a lot\"."
+        },
+        {
+          "fr": "Réponds en trois mots maximum.",
+          "en": "Answer in three words or fewer."
+        },
+        {
+          "fr": "Interdiction de dire le mot « règle ».",
+          "en": "Never say the word \"rule\"."
+        }
       ]
     },
     {
@@ -450,13 +933,34 @@
         "en": "Only refer to yourself in the third person, like a diva."
       },
       "decoys": [
-        { "fr": "Remplace « je » par « nous ».", "en": "Replace \"I\" with \"we\"." },
-        { "fr": "Interdiction de dire « je ».", "en": "Never say the word \"I\"." },
-        { "fr": "Parle uniquement au passé.", "en": "Only speak in the past tense." },
-        { "fr": "Appelle tout le monde « chef ».", "en": "Call everyone \"boss\"." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Ajoute « selon mes sources » à chaque affirmation.", "en": "Add \"according to my sources\" to every statement." }
+        {
+          "fr": "Remplace « je » par « nous ».",
+          "en": "Replace \"I\" with \"we\"."
+        },
+        {
+          "fr": "Commence chaque réponse par « écoute… ».",
+          "en": "Start every answer with \"listen…\"."
+        },
+        {
+          "fr": "Parle uniquement au passé.",
+          "en": "Only speak in the past tense."
+        },
+        {
+          "fr": "Appelle tout le monde « chef ».",
+          "en": "Call everyone \"boss\"."
+        },
+        {
+          "fr": "Exagère tout : ajoute « au moins mille fois ».",
+          "en": "Exaggerate everything: add \"at least a thousand times\"."
+        },
+        {
+          "fr": "Commence chaque réponse par « alors ».",
+          "en": "Start every answer with \"well\"."
+        },
+        {
+          "fr": "Ajoute « selon mes sources » à chaque affirmation.",
+          "en": "Add \"according to my sources\" to every statement."
+        }
       ]
     },
     {
@@ -469,13 +973,34 @@
         "en": "Casually sneak a food word into every single sentence."
       },
       "decoys": [
-        { "fr": "Glisse un nom d'animal dans chaque phrase.", "en": "Sneak an animal into every sentence." },
-        { "fr": "Glisse la météo dans chaque réponse.", "en": "Work the weather into every answer." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Ajoute « selon mes sources » à chaque affirmation.", "en": "Add \"according to my sources\" to every statement." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." },
-        { "fr": "Glisse un titre de chanson dans chaque réponse.", "en": "Sneak a song title into every answer." }
+        {
+          "fr": "Glisse un nom d'animal dans chaque phrase.",
+          "en": "Sneak an animal into every sentence."
+        },
+        {
+          "fr": "Glisse la météo dans chaque réponse.",
+          "en": "Work the weather into every answer."
+        },
+        {
+          "fr": "Cite ta mère une fois par réponse.",
+          "en": "Quote your mom once per answer."
+        },
+        {
+          "fr": "Ajoute « selon mes sources » à chaque affirmation.",
+          "en": "Add \"according to my sources\" to every statement."
+        },
+        {
+          "fr": "Termine chaque phrase par « voilà ».",
+          "en": "End every sentence with \"you know\"."
+        },
+        {
+          "fr": "Dis « wow » à chaque chiffre prononcé.",
+          "en": "Say \"wow\" whenever a number is mentioned."
+        },
+        {
+          "fr": "Glisse un titre de chanson dans chaque réponse.",
+          "en": "Sneak a song title into every answer."
+        }
       ]
     },
     {
@@ -488,13 +1013,34 @@
         "en": "No number may leave your mouth: say \"a lot\" instead."
       },
       "decoys": [
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." },
-        { "fr": "Arrondis tous les chiffres à la dizaine supérieure.", "en": "Round every number up to the nearest ten." },
-        { "fr": "Interdiction de dire « oui ».", "en": "Never say the word \"yes\"." },
-        { "fr": "Interdiction de dire « non ».", "en": "Never say the word \"no\"." },
-        { "fr": "Interdiction de prononcer le prénom des joueurs.", "en": "Never say another player's first name." },
-        { "fr": "Réponds en trois mots maximum.", "en": "Answer in three words or fewer." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." }
+        {
+          "fr": "Dis « wow » à chaque chiffre prononcé.",
+          "en": "Say \"wow\" whenever a number is mentioned."
+        },
+        {
+          "fr": "Arrondis tous les chiffres à la dizaine supérieure.",
+          "en": "Round every number up to the nearest ten."
+        },
+        {
+          "fr": "Interdiction de dire « oui ».",
+          "en": "Never say the word \"yes\"."
+        },
+        {
+          "fr": "Interdiction de dire « non ».",
+          "en": "Never say the word \"no\"."
+        },
+        {
+          "fr": "Glisse « du coup » dans chaque phrase.",
+          "en": "Work \"basically\" into every sentence."
+        },
+        {
+          "fr": "Réponds en trois mots maximum.",
+          "en": "Answer in three words or fewer."
+        },
+        {
+          "fr": "Exagère tout : ajoute « au moins mille fois ».",
+          "en": "Exaggerate everything: add \"at least a thousand times\"."
+        }
       ]
     },
     {
@@ -507,13 +1053,34 @@
         "en": "Before every answer, compliment whoever asked you the question."
       },
       "decoys": [
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Remercie pour chaque question avant de répondre.", "en": "Say thank you for every question before answering." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Réponds à chaque question par une question.", "en": "Answer every question with a question." },
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." }
+        {
+          "fr": "Réponds d'abord « bonne question » à toute question.",
+          "en": "Say \"good question\" before answering anything."
+        },
+        {
+          "fr": "Remercie pour chaque question avant de répondre.",
+          "en": "Say thank you for every question before answering."
+        },
+        {
+          "fr": "Commence chaque réponse par « alors ».",
+          "en": "Start every answer with \"well\"."
+        },
+        {
+          "fr": "Cite ta mère une fois par réponse.",
+          "en": "Quote your mom once per answer."
+        },
+        {
+          "fr": "Réponds à chaque question par une question.",
+          "en": "Answer every question with a question."
+        },
+        {
+          "fr": "Compte à voix haute jusqu'à deux avant de répondre.",
+          "en": "Count out loud to two before answering."
+        },
+        {
+          "fr": "Soupire bruyamment avant chaque réponse.",
+          "en": "Sigh loudly before every answer."
+        }
       ]
     },
     {
@@ -526,13 +1093,34 @@
         "en": "Add \"according to my sources\" to every claim, even about your own life."
       },
       "decoys": [
-        { "fr": "Termine chaque affirmation par « c'est scientifique ».", "en": "End every claim with \"that's science\"." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Appelle tout le monde « chef ».", "en": "Call everyone \"boss\"." },
-        { "fr": "Parle de toi à la troisième personne.", "en": "Talk about yourself in the third person." },
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." }
+        {
+          "fr": "Termine chaque affirmation par « c'est scientifique ».",
+          "en": "End every claim with \"that's science\"."
+        },
+        {
+          "fr": "Commence chaque histoire par « il était une fois ».",
+          "en": "Start every story with \"once upon a time\"."
+        },
+        {
+          "fr": "Commence chaque désaccord par « alors là, non ».",
+          "en": "Open every disagreement with \"absolutely not\"."
+        },
+        {
+          "fr": "Interdiction de dire l’heure qu’il est.",
+          "en": "Never say what time it is."
+        },
+        {
+          "fr": "Appelle tout le monde « chef ».",
+          "en": "Call everyone \"boss\"."
+        },
+        {
+          "fr": "Parle de toi à la troisième personne.",
+          "en": "Talk about yourself in the third person."
+        },
+        {
+          "fr": "Interdiction de prononcer un nom de couleur.",
+          "en": "Never say the name of a color."
+        }
       ]
     },
     {
@@ -545,13 +1133,34 @@
         "en": "Never quite finish your sentences when answering a detective…"
       },
       "decoys": [
-        { "fr": "Réponds en trois mots maximum.", "en": "Answer in three words or fewer." },
-        { "fr": "Réponds à chaque question par une question.", "en": "Answer every question with a question." },
-        { "fr": "Chuchote dès que tu dis un lieu.", "en": "Whisper whenever you say a place name." },
-        { "fr": "Parle uniquement si on te pose une question.", "en": "Only speak when asked a question." },
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Marque une pause théâtrale de trois secondes au milieu de chaque réponse.", "en": "Take a dramatic three-second pause mid-answer, every time." },
-        { "fr": "Parle uniquement au passé.", "en": "Only speak in the past tense." }
+        {
+          "fr": "Interdiction de dire les jours de la semaine.",
+          "en": "Never say a day of the week."
+        },
+        {
+          "fr": "Glisse une plainte dans chaque conversation.",
+          "en": "Work a complaint into every conversation."
+        },
+        {
+          "fr": "Chuchote dès que tu dis un lieu.",
+          "en": "Whisper whenever you say a place name."
+        },
+        {
+          "fr": "Parle uniquement si on te pose une question.",
+          "en": "Only speak when asked a question."
+        },
+        {
+          "fr": "Compte à voix haute jusqu'à deux avant de répondre.",
+          "en": "Count out loud to two before answering."
+        },
+        {
+          "fr": "Marque une pause théâtrale de trois secondes au milieu de chaque réponse.",
+          "en": "Take a dramatic three-second pause mid-answer, every time."
+        },
+        {
+          "fr": "Glisse le mot « magnifique » dans chaque phrase.",
+          "en": "Work the word \"gorgeous\" into every sentence."
+        }
       ]
     },
     {
@@ -564,13 +1173,34 @@
         "en": "Call everyone \"boss\", even the detectives. Especially the detectives."
       },
       "decoys": [
-        { "fr": "Appelle tout le monde par un surnom inventé.", "en": "Call everyone by a made-up nickname." },
-        { "fr": "Interdiction de prononcer le prénom des joueurs.", "en": "Never say another player's first name." },
-        { "fr": "Dis « madame » ou « monsieur » à tout le monde.", "en": "Call everyone \"sir\" or \"madam\"." },
-        { "fr": "Termine tes réponses au détective par son prénom.", "en": "End every answer to the detective with their first name." },
-        { "fr": "Répète le dernier mot de la personne qui vient de parler.", "en": "Repeat the last word of whoever just spoke." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Fais un compliment avant chaque réponse.", "en": "Pay a compliment before every answer." }
+        {
+          "fr": "Appelle tout le monde par un surnom inventé.",
+          "en": "Call everyone by a made-up nickname."
+        },
+        {
+          "fr": "Glisse un proverbe inventé dans chaque explication.",
+          "en": "Drop a made-up proverb into every explanation."
+        },
+        {
+          "fr": "Dis « madame » ou « monsieur » à tout le monde.",
+          "en": "Call everyone \"sir\" or \"madam\"."
+        },
+        {
+          "fr": "Termine tes réponses au détective par son prénom.",
+          "en": "End every answer to the detective with their first name."
+        },
+        {
+          "fr": "Répète le dernier mot de la personne qui vient de parler.",
+          "en": "Repeat the last word of whoever just spoke."
+        },
+        {
+          "fr": "Glisse une marque connue dans chaque phrase.",
+          "en": "Drop a brand name into every sentence."
+        },
+        {
+          "fr": "Fais un compliment avant chaque réponse.",
+          "en": "Pay a compliment before every answer."
+        }
       ]
     },
     {
@@ -583,13 +1213,34 @@
         "en": "Drop a sincere \"wow\" every time anyone says a number."
       },
       "decoys": [
-        { "fr": "Remplace tous les chiffres par « beaucoup ».", "en": "Replace every number with \"a lot\"." },
-        { "fr": "Répète chaque chiffre que tu entends.", "en": "Repeat every number you hear." },
-        { "fr": "Dis « incroyable » quand on cite un prénom.", "en": "Say \"unbelievable\" whenever a name is mentioned." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." }
+        {
+          "fr": "Remplace tous les chiffres par « beaucoup ».",
+          "en": "Replace every number with \"a lot\"."
+        },
+        {
+          "fr": "Répète chaque chiffre que tu entends.",
+          "en": "Repeat every number you hear."
+        },
+        {
+          "fr": "Dis « incroyable » quand on cite un prénom.",
+          "en": "Say \"unbelievable\" whenever a name is mentioned."
+        },
+        {
+          "fr": "Compare tout à un film.",
+          "en": "Compare everything to a movie."
+        },
+        {
+          "fr": "Réponds d'abord « bonne question » à toute question.",
+          "en": "Say \"good question\" before answering anything."
+        },
+        {
+          "fr": "Soupire bruyamment avant chaque réponse.",
+          "en": "Sigh loudly before every answer."
+        },
+        {
+          "fr": "Glisse un nom de ville dans chaque réponse.",
+          "en": "Drop a city name into every answer."
+        }
       ]
     },
     {
@@ -602,13 +1253,34 @@
         "en": "Replace \"I\" with \"we\", like a rock star in an interview."
       },
       "decoys": [
-        { "fr": "Parle de toi à la troisième personne.", "en": "Talk about yourself in the third person." },
-        { "fr": "Parle uniquement au passé.", "en": "Only speak in the past tense." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Interdiction de poser des questions.", "en": "Never ask a question." },
-        { "fr": "Appelle tout le monde « chef ».", "en": "Call everyone \"boss\"." },
-        { "fr": "Ajoute « selon mes sources » à chaque affirmation.", "en": "Add \"according to my sources\" to every statement." },
-        { "fr": "Glisse un mot de nourriture dans chaque phrase.", "en": "Sneak a food word into every sentence." }
+        {
+          "fr": "Parle de toi à la troisième personne.",
+          "en": "Talk about yourself in the third person."
+        },
+        {
+          "fr": "Glisse un mot de sport dans chaque explication.",
+          "en": "Work a sports word into every explanation."
+        },
+        {
+          "fr": "Murmure le premier mot de chaque phrase.",
+          "en": "Whisper the first word of every sentence."
+        },
+        {
+          "fr": "Interdiction de poser des questions.",
+          "en": "Never ask a question."
+        },
+        {
+          "fr": "Allonge exagérément les voyelles des mots importants.",
+          "en": "Streeetch the vowels of every important word."
+        },
+        {
+          "fr": "Termine tes phrases en baissant la voix jusqu’au murmure.",
+          "en": "Trail every sentence off into a whisper."
+        },
+        {
+          "fr": "Glisse un mot de nourriture dans chaque phrase.",
+          "en": "Sneak a food word into every sentence."
+        }
       ]
     },
     {
@@ -621,13 +1293,34 @@
         "en": "Quote your mom in every answer: \"like my mom always says…\"."
       },
       "decoys": [
-        { "fr": "Cite un proverbe (inventé ou non) dans chaque réponse.", "en": "Drop a proverb (real or invented) into every answer." },
-        { "fr": "Ajoute « selon mes sources » à chaque affirmation.", "en": "Add \"according to my sources\" to every statement." },
-        { "fr": "Fais un compliment avant chaque réponse.", "en": "Pay a compliment before every answer." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." },
-        { "fr": "Commence tes anecdotes par « à l'époque ».", "en": "Start every anecdote with \"back in my day\"." },
-        { "fr": "Glisse un mot de nourriture dans chaque phrase.", "en": "Sneak a food word into every sentence." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." }
+        {
+          "fr": "Cite un proverbe (inventé ou non) dans chaque réponse.",
+          "en": "Drop a proverb (real or invented) into every answer."
+        },
+        {
+          "fr": "Articule exagérément quand tu parles au détective.",
+          "en": "Over-enunciate every word you say to the detective."
+        },
+        {
+          "fr": "Fais un compliment avant chaque réponse.",
+          "en": "Pay a compliment before every answer."
+        },
+        {
+          "fr": "Répète deux fois le mot le plus important de ta phrase.",
+          "en": "Say the most important word of each sentence twice."
+        },
+        {
+          "fr": "Commence tes anecdotes par « à l'époque ».",
+          "en": "Start every anecdote with \"back in my day\"."
+        },
+        {
+          "fr": "Glisse un mot de nourriture dans chaque phrase.",
+          "en": "Sneak a food word into every sentence."
+        },
+        {
+          "fr": "Parle de plus en plus vite au fil de chaque phrase.",
+          "en": "Speed up steadily over the course of every sentence."
+        }
       ]
     },
     {
@@ -640,13 +1333,34 @@
         "en": "Never say another player's first name. Get creative."
       },
       "decoys": [
-        { "fr": "Interdiction de dire « oui ».", "en": "Never say the word \"yes\"." },
-        { "fr": "Interdiction de dire « non ».", "en": "Never say the word \"no\"." },
-        { "fr": "Interdiction de dire « je ».", "en": "Never say the word \"I\"." },
-        { "fr": "Interdiction de dire le mot « règle ».", "en": "Never say the word \"rule\"." },
-        { "fr": "Interdiction de poser des questions.", "en": "Never ask a question." },
-        { "fr": "Réponds en trois mots maximum.", "en": "Answer in three words or fewer." },
-        { "fr": "Parle uniquement au passé.", "en": "Only speak in the past tense." }
+        {
+          "fr": "Marque un silence après chaque prénom que tu prononces.",
+          "en": "Pause dramatically after every name you say."
+        },
+        {
+          "fr": "Invente un fait scientifique douteux par histoire.",
+          "en": "Drop one dodgy scientific fact into every story."
+        },
+        {
+          "fr": "Glisse un prénom de célébrité dans chaque explication.",
+          "en": "Name-drop a celebrity in every explanation."
+        },
+        {
+          "fr": "Interdiction de dire le mot « règle ».",
+          "en": "Never say the word \"rule\"."
+        },
+        {
+          "fr": "Raconte tout comme si ça s’était passé « l’été dernier ».",
+          "en": "Claim everything happened \"last summer\"."
+        },
+        {
+          "fr": "Imite un cri d’animal quand on ne te croit pas.",
+          "en": "Make an animal noise whenever no one believes you."
+        },
+        {
+          "fr": "Prends une voix grave pour répondre au détective.",
+          "en": "Put on a deep voice whenever you answer the detective."
+        }
       ]
     },
     {
@@ -659,13 +1373,34 @@
         "en": "Say \"good question!\" before answering literally any question."
       },
       "decoys": [
-        { "fr": "Fais un compliment avant chaque réponse.", "en": "Pay a compliment before every answer." },
-        { "fr": "Remercie pour chaque question avant de répondre.", "en": "Say thank you for every question before answering." },
-        { "fr": "Réponds à chaque question par une question.", "en": "Answer every question with a question." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." },
-        { "fr": "Répète le dernier mot de la personne qui vient de parler.", "en": "Repeat the last word of whoever just spoke." }
+        {
+          "fr": "Réponds au détective sur un ton de présentateur météo.",
+          "en": "Answer the detective like a weather forecaster."
+        },
+        {
+          "fr": "Remercie pour chaque question avant de répondre.",
+          "en": "Say thank you for every question before answering."
+        },
+        {
+          "fr": "Réponds le plus vite possible, comme un commissaire-priseur.",
+          "en": "Answer as fast as a livestream auctioneer."
+        },
+        {
+          "fr": "Chuchote uniquement les prénoms, dis le reste normalement.",
+          "en": "Whisper only people's names; say everything else normally."
+        },
+        {
+          "fr": "Réponds au détective en chantonnant.",
+          "en": "Sing-song your answers to the detective."
+        },
+        {
+          "fr": "Dis « sans blague » après chaque révélation.",
+          "en": "Say \"no way\" after every revelation."
+        },
+        {
+          "fr": "Réponds « ça se tient » à chaque argument.",
+          "en": "Reply \"fair point\" to every argument."
+        }
       ]
     },
     {
@@ -678,13 +1413,34 @@
         "en": "Drop to a conspiratorial whisper whenever you say a place name."
       },
       "decoys": [
-        { "fr": "Chuchote chaque fois que tu dis un prénom.", "en": "Whisper whenever you say a first name." },
-        { "fr": "Hausse la voix sur le dernier mot de chaque phrase.", "en": "Get louder on the last word of every sentence." },
-        { "fr": "Prends un accent dès que tu parles au détective.", "en": "Put on an accent whenever you talk to the detective." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." },
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." },
-        { "fr": "Prononce les noms de marques avec un accent anglais.", "en": "Say all brand names in a fancy French accent." },
-        { "fr": "Ne finis jamais tes phrases face au détective.", "en": "Never finish your sentences when talking to the detective." }
+        {
+          "fr": "Chuchote chaque fois que tu dis un prénom.",
+          "en": "Whisper whenever you say a first name."
+        },
+        {
+          "fr": "Hausse la voix sur le dernier mot de chaque phrase.",
+          "en": "Get louder on the last word of every sentence."
+        },
+        {
+          "fr": "Prends un accent dès que tu parles au détective.",
+          "en": "Put on an accent whenever you talk to the detective."
+        },
+        {
+          "fr": "Dis « j’le savais » dès que quelque chose se confirme.",
+          "en": "Say \"called it\" whenever anything gets confirmed."
+        },
+        {
+          "fr": "Dis « attends, quoi ? » à chaque changement de sujet.",
+          "en": "Say \"wait, what?\" at every topic change."
+        },
+        {
+          "fr": "Prononce les noms de marques avec un accent anglais.",
+          "en": "Say all brand names in a fancy French accent."
+        },
+        {
+          "fr": "Ne finis jamais tes phrases face au détective.",
+          "en": "Never finish your sentences when talking to the detective."
+        }
       ]
     },
     {
@@ -697,13 +1453,34 @@
         "en": "Before speaking, repeat the previous speaker's last word. Word."
       },
       "decoys": [
-        { "fr": "Répète la question entière avant d'y répondre.", "en": "Repeat the whole question before answering." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Termine chaque phrase par un prénom, n'importe lequel.", "en": "End every sentence with someone's first name, any name." },
-        { "fr": "Exagère tout : ajoute « au moins mille fois ».", "en": "Exaggerate everything: add \"at least a thousand times\"." }
+        {
+          "fr": "Répète la question entière avant d'y répondre.",
+          "en": "Repeat the whole question before answering."
+        },
+        {
+          "fr": "Murmure « suspect… » quand quelqu’un se justifie.",
+          "en": "Mutter \"suspicious…\" whenever someone explains themselves."
+        },
+        {
+          "fr": "Dis « noté » quand on te donne une info.",
+          "en": "Say \"noted\" whenever you're given information."
+        },
+        {
+          "fr": "Réagis à toute bonne nouvelle par « enfin ».",
+          "en": "React to any good news with \"finally\"."
+        },
+        {
+          "fr": "Interdiction de dire « mais ».",
+          "en": "Never say the word \"but\"."
+        },
+        {
+          "fr": "Termine chaque phrase par un prénom, n'importe lequel.",
+          "en": "End every sentence with someone's first name, any name."
+        },
+        {
+          "fr": "Interdiction de dire « très ».",
+          "en": "Never say the word \"very\"."
+        }
       ]
     },
     {
@@ -716,13 +1493,34 @@
         "en": "End every sentence with \"you know\". You know."
       },
       "decoys": [
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Termine chaque phrase par « bref ».", "en": "End every sentence with \"anyway\"." },
-        { "fr": "Remplace « je » par « nous ».", "en": "Replace \"I\" with \"we\"." },
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." },
-        { "fr": "Répète le dernier mot de la personne qui vient de parler.", "en": "Repeat the last word of whoever just spoke." }
+        {
+          "fr": "Interdiction de dire « truc » et « machin ».",
+          "en": "Never say \"thing\" or \"stuff\"."
+        },
+        {
+          "fr": "Termine chaque phrase par « bref ».",
+          "en": "End every sentence with \"anyway\"."
+        },
+        {
+          "fr": "Remplace « je » par « nous ».",
+          "en": "Replace \"I\" with \"we\"."
+        },
+        {
+          "fr": "Interdiction de dire « genre ».",
+          "en": "Never say \"like\" as a filler."
+        },
+        {
+          "fr": "Dis « affirmatif » et « négatif » au lieu de oui et non.",
+          "en": "Say \"affirmative\" and \"negative\" instead of yes and no."
+        },
+        {
+          "fr": "Exprime tes opinions sous forme de questions.",
+          "en": "Phrase all your opinions as questions."
+        },
+        {
+          "fr": "Parle de tout au conditionnel (« je dirais que… »).",
+          "en": "Speak only in the conditional (\"I would say…\")."
+        }
       ]
     },
     {
@@ -735,13 +1533,34 @@
         "en": "When a detective asks you a question, answer with a question first."
       },
       "decoys": [
-        { "fr": "Interdiction de poser des questions.", "en": "Never ask a question." },
-        { "fr": "Ne finis jamais tes phrases face au détective.", "en": "Never finish your sentences when talking to the detective." },
-        { "fr": "Réponds en trois mots maximum.", "en": "Answer in three words or fewer." },
-        { "fr": "Termine tes réponses au détective par son prénom.", "en": "End every answer to the detective with their first name." },
-        { "fr": "Prends un accent dès que tu parles au détective.", "en": "Put on an accent whenever you talk to the detective." },
-        { "fr": "Parle uniquement si on te pose une question.", "en": "Only speak when asked a question." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." }
+        {
+          "fr": "Mets tous tes verbes au futur.",
+          "en": "Put all your verbs in the future tense."
+        },
+        {
+          "fr": "Ne finis jamais tes phrases face au détective.",
+          "en": "Never finish your sentences when talking to the detective."
+        },
+        {
+          "fr": "Termine chaque réponse par « …je crois ».",
+          "en": "End every answer with \"…I think\"."
+        },
+        {
+          "fr": "Termine tes réponses au détective par son prénom.",
+          "en": "End every answer to the detective with their first name."
+        },
+        {
+          "fr": "Prends un accent dès que tu parles au détective.",
+          "en": "Put on an accent whenever you talk to the detective."
+        },
+        {
+          "fr": "Parle uniquement si on te pose une question.",
+          "en": "Only speak when asked a question."
+        },
+        {
+          "fr": "Réponds d’abord faux, puis corrige-toi.",
+          "en": "Answer wrong first, then correct yourself."
+        }
       ]
     },
     {
@@ -754,13 +1573,34 @@
         "en": "Exaggerate everything: work \"at least a thousand times\" into every answer."
       },
       "decoys": [
-        { "fr": "Remplace tous les chiffres par « beaucoup ».", "en": "Replace every number with \"a lot\"." },
-        { "fr": "Dis « wow » à chaque chiffre prononcé.", "en": "Say \"wow\" whenever a number is mentioned." },
-        { "fr": "Minimise tout : ajoute « ou presque » à chaque phrase.", "en": "Downplay everything: add \"ish\" to every sentence." },
-        { "fr": "Ajoute « selon mes sources » à chaque affirmation.", "en": "Add \"according to my sources\" to every statement." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Glisse un mot de nourriture dans chaque phrase.", "en": "Sneak a food word into every sentence." },
-        { "fr": "Parle de toi à la troisième personne.", "en": "Talk about yourself in the third person." }
+        {
+          "fr": "Donne une réponse différente si on te repose la même question.",
+          "en": "Change your answer whenever a question is asked twice."
+        },
+        {
+          "fr": "Chantonne le prénom des gens au lieu de le dire.",
+          "en": "Sing people's names instead of saying them."
+        },
+        {
+          "fr": "Minimise tout : ajoute « ou presque » à chaque phrase.",
+          "en": "Downplay everything: add \"ish\" to every sentence."
+        },
+        {
+          "fr": "Termine tes histoires par un « ta-daa ».",
+          "en": "End your stories with a \"ta-daa\"."
+        },
+        {
+          "fr": "Fais un bruitage pour accompagner tes gestes.",
+          "en": "Add sound effects to your own gestures."
+        },
+        {
+          "fr": "Fredonne dès qu’un silence s’installe.",
+          "en": "Hum whenever a silence sets in."
+        },
+        {
+          "fr": "Claque la langue avant de donner ton avis.",
+          "en": "Click your tongue before giving an opinion."
+        }
       ]
     },
     {
@@ -773,13 +1613,34 @@
         "en": "Heave a long, Oscar-worthy sigh before every answer."
       },
       "decoys": [
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Racle-toi la gorge avant chaque réponse.", "en": "Clear your throat before every answer." },
-        { "fr": "Commence chaque réponse par « alors ».", "en": "Start every answer with \"well\"." },
-        { "fr": "Glousse avant chaque réponse.", "en": "Giggle before every answer." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Fais un compliment avant chaque réponse.", "en": "Pay a compliment before every answer." },
-        { "fr": "Ne finis jamais tes phrases face au détective.", "en": "Never finish your sentences when talking to the detective." }
+        {
+          "fr": "Dis « ding ding ding » quand quelqu’un a raison.",
+          "en": "Go \"ding ding ding\" whenever someone gets something right."
+        },
+        {
+          "fr": "Racle-toi la gorge avant chaque réponse.",
+          "en": "Clear your throat before every answer."
+        },
+        {
+          "fr": "Dis « roulement de tambour » avant chaque annonce.",
+          "en": "Say \"drumroll please\" before every announcement."
+        },
+        {
+          "fr": "Glousse avant chaque réponse.",
+          "en": "Giggle before every answer."
+        },
+        {
+          "fr": "Compte à rebours « 3, 2, 1 » avant les réponses importantes.",
+          "en": "Count down \"3, 2, 1\" before big answers."
+        },
+        {
+          "fr": "Prends une grande inspiration sonore avant chaque phrase.",
+          "en": "Take a loud, deep breath before every sentence."
+        },
+        {
+          "fr": "Dis « point final » à la fin de tes déclarations.",
+          "en": "Say \"period\" at the end of your statements."
+        }
       ]
     },
     {
@@ -792,13 +1653,34 @@
         "en": "Open everything you say with a looong, drawn-out \"sooooo…\"."
       },
       "decoys": [
-        { "fr": "Commence chaque phrase par « écoute ».", "en": "Start every sentence with \"listen\"." },
-        { "fr": "Réponds d'abord « bonne question » à toute question.", "en": "Say \"good question\" before answering anything." },
-        { "fr": "Compte à voix haute jusqu'à deux avant de répondre.", "en": "Count out loud to two before answering." },
-        { "fr": "Soupire bruyamment avant chaque réponse.", "en": "Sigh loudly before every answer." },
-        { "fr": "Termine chaque phrase par « voilà ».", "en": "End every sentence with \"you know\"." },
-        { "fr": "Cite ta mère une fois par réponse.", "en": "Quote your mom once per answer." },
-        { "fr": "Commence tes réponses par « petite précision ».", "en": "Start your answers with \"fun fact\"." }
+        {
+          "fr": "Commence chaque phrase par « écoute ».",
+          "en": "Start every sentence with \"listen\"."
+        },
+        {
+          "fr": "Minimise tout (« pas mal », « bof », « ça va »).",
+          "en": "Downplay everything (\"not bad\", \"meh\", \"it's fine\")."
+        },
+        {
+          "fr": "Donne une note sur dix à tout ce qu’on mentionne.",
+          "en": "Rate everything mentioned out of ten."
+        },
+        {
+          "fr": "Décris tout comme « légendaire ».",
+          "en": "Describe everything as \"legendary\"."
+        },
+        {
+          "fr": "Trouve un inconvénient à chaque bonne nouvelle.",
+          "en": "Find a downside to every piece of good news."
+        },
+        {
+          "fr": "Annonce ton pourcentage de batterie avant de parler.",
+          "en": "Report your phone's battery percentage before you speak."
+        },
+        {
+          "fr": "Commence tes réponses par « petite précision ».",
+          "en": "Start your answers with \"fun fact\"."
+        }
       ]
     },
     {
@@ -811,13 +1693,34 @@
         "en": "Never answer the detective directly: relay your answer through another player."
       },
       "decoys": [
-        { "fr": "Ne regarde jamais le détective dans les yeux.", "en": "Never make eye contact with the detective." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." },
-        { "fr": "Glisse la météo dans chaque réponse au détective.", "en": "Work the weather into every answer you give the detective." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.", "en": "Always address the whole group, never one single person." }
+        {
+          "fr": "Ne regarde jamais le détective dans les yeux.",
+          "en": "Never make eye contact with the detective."
+        },
+        {
+          "fr": "Réponds au détective en trois mots maximum.",
+          "en": "Answer the detective in three words or fewer."
+        },
+        {
+          "fr": "Change de place chaque fois que le détective te parle.",
+          "en": "Change seats whenever the detective talks to you."
+        },
+        {
+          "fr": "Glisse la météo dans chaque réponse au détective.",
+          "en": "Work the weather into every answer you give the detective."
+        },
+        {
+          "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.",
+          "en": "Ignore the first question you're asked; only answer the second."
+        },
+        {
+          "fr": "Répète la question à voix haute avant d'y répondre.",
+          "en": "Repeat the question out loud before answering it."
+        },
+        {
+          "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.",
+          "en": "Always address the whole group, never one single person."
+        }
       ]
     },
     {
@@ -830,13 +1733,34 @@
         "en": "Always share the opinion of the player to your right, even when they flip."
       },
       "decoys": [
-        { "fr": "Contredis poliment ton voisin de gauche.", "en": "Politely contradict the player on your left." },
-        { "fr": "Commence ta réponse par le prénom du joueur précédent.", "en": "Start your answer with the previous speaker's name." },
-        { "fr": "Consulte le groupe avant toute réponse.", "en": "Check with the group before any answer." },
-        { "fr": "Aie toujours le dernier mot dans chaque échange.", "en": "Always get the last word in every exchange." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Ne parle jamais en premier : réponds seulement.", "en": "Never speak first: only respond." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." }
+        {
+          "fr": "Contredis poliment ton voisin de gauche.",
+          "en": "Politely contradict the player on your left."
+        },
+        {
+          "fr": "Commence ta réponse par le prénom du joueur précédent.",
+          "en": "Start your answer with the previous speaker's name."
+        },
+        {
+          "fr": "Consulte le groupe avant toute réponse.",
+          "en": "Check with the group before any answer."
+        },
+        {
+          "fr": "Aie toujours le dernier mot dans chaque échange.",
+          "en": "Always get the last word in every exchange."
+        },
+        {
+          "fr": "Remercie quiconque dit ton prénom.",
+          "en": "Thank anyone who says your name."
+        },
+        {
+          "fr": "Ne parle jamais en premier : réponds seulement.",
+          "en": "Never speak first: only respond."
+        },
+        {
+          "fr": "Ne regarde jamais la personne qui parle.",
+          "en": "Never look at whoever is speaking."
+        }
       ]
     },
     {
@@ -849,13 +1773,34 @@
         "en": "Get the youngest player's permission before answering any detective."
       },
       "decoys": [
-        { "fr": "Consulte le groupe avant toute réponse.", "en": "Check with the group before any answer." },
-        { "fr": "Traite le joueur le plus âgé comme le patron de la soirée.", "en": "Treat the oldest player like the boss of the evening." },
-        { "fr": "Fais passer tes réponses au détective par un autre joueur.", "en": "Relay your answers to the detective through another player." },
-        { "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.", "en": "Always address the whole group, never one single person." },
-        { "fr": "Vouvoie le détective.", "en": "Address the detective as \"sir\" or \"ma'am\"." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." }
+        {
+          "fr": "Consulte le groupe avant toute réponse.",
+          "en": "Check with the group before any answer."
+        },
+        {
+          "fr": "Traite le joueur le plus âgé comme le patron de la soirée.",
+          "en": "Treat the oldest player like the boss of the evening."
+        },
+        {
+          "fr": "Fais passer tes réponses au détective par un autre joueur.",
+          "en": "Relay your answers to the detective through another player."
+        },
+        {
+          "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.",
+          "en": "Always address the whole group, never one single person."
+        },
+        {
+          "fr": "Vouvoie le détective.",
+          "en": "Address the detective as \"sir\" or \"ma'am\"."
+        },
+        {
+          "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.",
+          "en": "Ignore the first question you're asked; only answer the second."
+        },
+        {
+          "fr": "Change de place chaque fois que le détective te parle.",
+          "en": "Change seats whenever the detective talks to you."
+        }
       ]
     },
     {
@@ -868,13 +1813,34 @@
         "en": "Always get the last word, even if it's just \"so yeah\"."
       },
       "decoys": [
-        { "fr": "Ne parle jamais en premier : réponds seulement.", "en": "Never speak first: only respond." },
-        { "fr": "Commence ta réponse par le prénom du joueur précédent.", "en": "Start your answer with the previous speaker's name." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Coupe la parole une fois par conversation, puis excuse-toi longuement.", "en": "Interrupt once per conversation, then apologize profusely." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Prends chaque question comme un reproche.", "en": "Treat every question like an accusation." }
+        {
+          "fr": "Ne parle jamais en premier : réponds seulement.",
+          "en": "Never speak first: only respond."
+        },
+        {
+          "fr": "Commence ta réponse par le prénom du joueur précédent.",
+          "en": "Start your answer with the previous speaker's name."
+        },
+        {
+          "fr": "Répète la question à voix haute avant d'y répondre.",
+          "en": "Repeat the question out loud before answering it."
+        },
+        {
+          "fr": "Coupe la parole une fois par conversation, puis excuse-toi longuement.",
+          "en": "Interrupt once per conversation, then apologize profusely."
+        },
+        {
+          "fr": "Réponds au détective en trois mots maximum.",
+          "en": "Answer the detective in three words or fewer."
+        },
+        {
+          "fr": "Remercie quiconque dit ton prénom.",
+          "en": "Thank anyone who says your name."
+        },
+        {
+          "fr": "Prends chaque question comme un reproche.",
+          "en": "Treat every question like an accusation."
+        }
       ]
     },
     {
@@ -887,13 +1853,34 @@
         "en": "Lean in dramatically, riveted, toward whoever the detective questions."
       },
       "decoys": [
-        { "fr": "Éloigne-toi discrètement quand le détective approche.", "en": "Drift away whenever the detective comes close." },
-        { "fr": "Garde toujours un joueur entre toi et le détective.", "en": "Always keep another player between you and the detective." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." },
-        { "fr": "Fige-toi quand le détective regarde son téléphone.", "en": "Freeze whenever the detective checks their phone." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." },
-        { "fr": "Applaudis chaque question du détective.", "en": "Applaud every question the detective asks." }
+        {
+          "fr": "Éloigne-toi discrètement quand le détective approche.",
+          "en": "Drift away whenever the detective comes close."
+        },
+        {
+          "fr": "Garde toujours un joueur entre toi et le détective.",
+          "en": "Always keep another player between you and the detective."
+        },
+        {
+          "fr": "Serre la main de quiconque est d’accord avec toi.",
+          "en": "Shake hands with anyone who agrees with you."
+        },
+        {
+          "fr": "Ne regarde jamais la personne qui parle.",
+          "en": "Never look at whoever is speaking."
+        },
+        {
+          "fr": "Fige-toi quand le détective regarde son téléphone.",
+          "en": "Freeze whenever the detective checks their phone."
+        },
+        {
+          "fr": "Ris dès que le détective rit.",
+          "en": "Laugh whenever the detective laughs."
+        },
+        {
+          "fr": "Applaudis chaque question du détective.",
+          "en": "Applaud every question the detective asks."
+        }
       ]
     },
     {
@@ -906,13 +1893,34 @@
         "en": "Warmly thank anyone who says your name. Every single time."
       },
       "decoys": [
-        { "fr": "Présente-toi à nouveau à chaque personne qui te parle.", "en": "Re-introduce yourself to anyone who talks to you." },
-        { "fr": "Excuse-toi quand quelqu'un prononce ton prénom.", "en": "Apologize whenever someone says your name." },
-        { "fr": "Commence ta réponse par le prénom du joueur précédent.", "en": "Start your answer with the previous speaker's name." },
-        { "fr": "Propose à boire à quiconque te pose une question.", "en": "Offer a drink to anyone who asks you a question." },
-        { "fr": "Claque des doigts quand un autre joueur répond bien.", "en": "Snap your fingers when another player nails an answer." },
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Appelle le détective par un mauvais prénom.", "en": "Call the detective by the wrong name." }
+        {
+          "fr": "Présente-toi à nouveau à chaque personne qui te parle.",
+          "en": "Re-introduce yourself to anyone who talks to you."
+        },
+        {
+          "fr": "Excuse-toi quand quelqu'un prononce ton prénom.",
+          "en": "Apologize whenever someone says your name."
+        },
+        {
+          "fr": "Félicite la personne qui vient de parler, quoi qu’elle ait dit.",
+          "en": "Congratulate whoever just spoke, no matter what they said."
+        },
+        {
+          "fr": "Demande la permission du groupe avant de te lever.",
+          "en": "Ask the room's permission before standing up."
+        },
+        {
+          "fr": "Claque des doigts quand un autre joueur répond bien.",
+          "en": "Snap your fingers when another player nails an answer."
+        },
+        {
+          "fr": "Traite le détective comme une célébrité.",
+          "en": "Treat the detective like a celebrity."
+        },
+        {
+          "fr": "Appelle le détective par un mauvais prénom.",
+          "en": "Call the detective by the wrong name."
+        }
       ]
     },
     {
@@ -925,13 +1933,34 @@
         "en": "Treat the detectives like A-list stars: be dazzled by everything they say."
       },
       "decoys": [
-        { "fr": "Applaudis chaque question du détective.", "en": "Applaud every question the detective asks." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." },
-        { "fr": "Vouvoie le détective.", "en": "Address the detective as \"sir\" or \"ma'am\"." },
-        { "fr": "Appelle le détective par un mauvais prénom.", "en": "Call the detective by the wrong name." },
-        { "fr": "Éloigne-toi discrètement quand le détective approche.", "en": "Drift away whenever the detective comes close." },
-        { "fr": "Ne regarde jamais le détective dans les yeux.", "en": "Never make eye contact with the detective." },
-        { "fr": "Fige-toi quand le détective regarde son téléphone.", "en": "Freeze whenever the detective checks their phone." }
+        {
+          "fr": "Applaudis chaque question du détective.",
+          "en": "Applaud every question the detective asks."
+        },
+        {
+          "fr": "Ris dès que le détective rit.",
+          "en": "Laugh whenever the detective laughs."
+        },
+        {
+          "fr": "Vouvoie le détective.",
+          "en": "Address the detective as \"sir\" or \"ma'am\"."
+        },
+        {
+          "fr": "Appelle le détective par un mauvais prénom.",
+          "en": "Call the detective by the wrong name."
+        },
+        {
+          "fr": "Éloigne-toi discrètement quand le détective approche.",
+          "en": "Drift away whenever the detective comes close."
+        },
+        {
+          "fr": "Ne regarde jamais le détective dans les yeux.",
+          "en": "Never make eye contact with the detective."
+        },
+        {
+          "fr": "Fige-toi quand le détective regarde son téléphone.",
+          "en": "Freeze whenever the detective checks their phone."
+        }
       ]
     },
     {
@@ -944,13 +1973,34 @@
         "en": "Always keep at least one player between you and the nearest detective."
       },
       "decoys": [
-        { "fr": "Éloigne-toi discrètement quand le détective approche.", "en": "Drift away whenever the detective comes close." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." },
-        { "fr": "Ne regarde jamais le détective dans les yeux.", "en": "Never make eye contact with the detective." },
-        { "fr": "Arrange-toi pour être toujours dans le dos du détective.", "en": "Always position yourself behind the detective's back." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." },
-        { "fr": "Reste à portée de bras du même joueur toute la manche.", "en": "Stay within arm's reach of the same player all round." }
+        {
+          "fr": "Souhaite bonne chance à quiconque va répondre au détective.",
+          "en": "Wish good luck to anyone about to answer the detective."
+        },
+        {
+          "fr": "Propose ton aide dès que quelqu’un cherche quelque chose.",
+          "en": "Offer to help whenever someone is looking for something."
+        },
+        {
+          "fr": "Complimente la tenue de la personne qui te pose une question.",
+          "en": "Compliment the outfit of whoever asks you a question."
+        },
+        {
+          "fr": "Arrange-toi pour être toujours dans le dos du détective.",
+          "en": "Always position yourself behind the detective's back."
+        },
+        {
+          "fr": "Penche-toi vers la personne que le détective interroge.",
+          "en": "Lean toward whoever the detective is questioning."
+        },
+        {
+          "fr": "Salue le détective chaque fois qu’il s’approche de toi.",
+          "en": "Greet the detective every time they come near you."
+        },
+        {
+          "fr": "Reste à portée de bras du même joueur toute la manche.",
+          "en": "Stay within arm's reach of the same player all round."
+        }
       ]
     },
     {
@@ -963,13 +2013,34 @@
         "en": "Address the detectives — and only them — as \"sir\" or \"ma'am\", suspiciously politely."
       },
       "decoys": [
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Appelle le détective par un mauvais prénom.", "en": "Call the detective by the wrong name." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Applaudis chaque question du détective.", "en": "Applaud every question the detective asks." },
-        { "fr": "Présente-toi à nouveau à chaque personne qui te parle.", "en": "Re-introduce yourself to anyone who talks to you." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." },
-        { "fr": "Glisse la météo dans chaque réponse au détective.", "en": "Work the weather into every answer you give the detective." }
+        {
+          "fr": "Traite le détective comme une célébrité.",
+          "en": "Treat the detective like a celebrity."
+        },
+        {
+          "fr": "Fais comme si tu n’entendais pas la première phrase du détective.",
+          "en": "Pretend not to hear the detective's first sentence."
+        },
+        {
+          "fr": "Demande au détective comment il va avant de lui répondre.",
+          "en": "Ask the detective how they're doing before answering them."
+        },
+        {
+          "fr": "Avant de répondre, consulte ton voisin à voix basse.",
+          "en": "Whisper with your neighbor before giving any answer."
+        },
+        {
+          "fr": "Présente-toi à nouveau à chaque personne qui te parle.",
+          "en": "Re-introduce yourself to anyone who talks to you."
+        },
+        {
+          "fr": "Attribue chacune de tes idées à un autre joueur.",
+          "en": "Credit every idea you have to another player."
+        },
+        {
+          "fr": "Glisse la météo dans chaque réponse au détective.",
+          "en": "Work the weather into every answer you give the detective."
+        }
       ]
     },
     {
@@ -982,13 +2053,34 @@
         "en": "Never meet a detective's eyes. Find the windows fascinating."
       },
       "decoys": [
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." },
-        { "fr": "Éloigne-toi discrètement quand le détective approche.", "en": "Drift away whenever the detective comes close." },
-        { "fr": "Garde toujours un joueur entre toi et le détective.", "en": "Always keep another player between you and the detective." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." },
-        { "fr": "Fixe le détective sans cligner quand il te parle.", "en": "Stare at the detective without blinking when they talk to you." },
-        { "fr": "Fige-toi quand le détective regarde son téléphone.", "en": "Freeze whenever the detective checks their phone." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." }
+        {
+          "fr": "Demande au groupe de voter dès qu’une décision se présente.",
+          "en": "Call for a group vote whenever any decision comes up."
+        },
+        {
+          "fr": "Désigne un « témoin » pour confirmer chacune de tes histoires.",
+          "en": "Appoint a \"witness\" to confirm every story you tell."
+        },
+        {
+          "fr": "Garde toujours un joueur entre toi et le détective.",
+          "en": "Always keep another player between you and the detective."
+        },
+        {
+          "fr": "Excuse-toi auprès du groupe quand tu n’as pas la réponse.",
+          "en": "Apologize to the room whenever you don't know the answer."
+        },
+        {
+          "fr": "Fixe le détective sans cligner quand il te parle.",
+          "en": "Stare at the detective without blinking when they talk to you."
+        },
+        {
+          "fr": "Tourne légèrement le dos au détective quand il s’approche.",
+          "en": "Turn slightly away whenever the detective comes close."
+        },
+        {
+          "fr": "Fais mine d’être très occupé dès que le détective te regarde.",
+          "en": "Suddenly look very busy whenever the detective looks at you."
+        }
       ]
     },
     {
@@ -1001,13 +2093,34 @@
         "en": "Politely applaud, golf-clap style, every question a detective asks."
       },
       "decoys": [
-        { "fr": "Claque des doigts quand un autre joueur répond bien.", "en": "Snap your fingers when another player nails an answer." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." },
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Applaudis les réponses, jamais les questions.", "en": "Applaud answers, never questions." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." }
+        {
+          "fr": "Claque des doigts quand un autre joueur répond bien.",
+          "en": "Snap your fingers when another player nails an answer."
+        },
+        {
+          "fr": "Chuchote à ton voisin chaque fois que le détective prend la parole.",
+          "en": "Whisper to your neighbor whenever the detective starts talking."
+        },
+        {
+          "fr": "Résume ce que la personne précédente a dit avant de parler.",
+          "en": "Summarize what the previous speaker said before you talk."
+        },
+        {
+          "fr": "Applaudis les réponses, jamais les questions.",
+          "en": "Applaud answers, never questions."
+        },
+        {
+          "fr": "Applaudis la personne qui prend la parole après toi.",
+          "en": "Applaud whoever speaks right after you."
+        },
+        {
+          "fr": "Remercie « le public » à la fin de tes histoires.",
+          "en": "Thank \"the audience\" at the end of your stories."
+        },
+        {
+          "fr": "Penche-toi vers la personne que le détective interroge.",
+          "en": "Lean toward whoever the detective is questioning."
+        }
       ]
     },
     {
@@ -1020,13 +2133,34 @@
         "en": "Freeze like a statue the moment a detective looks at their phone."
       },
       "decoys": [
-        { "fr": "Fige-toi quand quelqu'un dit le mot « règle ».", "en": "Freeze whenever anyone says the word \"rule\"." },
-        { "fr": "Change de place chaque fois que le détective te parle.", "en": "Change seats whenever the detective talks to you." },
-        { "fr": "Éloigne-toi discrètement quand le détective approche.", "en": "Drift away whenever the detective comes close." },
-        { "fr": "Tousse une fois quand un détective prend des notes.", "en": "Cough once whenever a detective takes notes." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." },
-        { "fr": "Imite le dernier geste de la personne qui a parlé.", "en": "Copy the last gesture of whoever just spoke." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." }
+        {
+          "fr": "Fige-toi quand quelqu'un dit le mot « règle ».",
+          "en": "Freeze whenever anyone says the word \"rule\"."
+        },
+        {
+          "fr": "Présente les joueurs avec de faux titres (« directeur des snacks »).",
+          "en": "Introduce players with fake fancy titles (\"VP of Snacks\")."
+        },
+        {
+          "fr": "Tends un micro imaginaire à qui tu poses une question.",
+          "en": "Hold an imaginary mic to anyone you ask a question."
+        },
+        {
+          "fr": "Tousse une fois quand un détective prend des notes.",
+          "en": "Cough once whenever a detective takes notes."
+        },
+        {
+          "fr": "Réponds toujours en premier aux questions de groupe.",
+          "en": "Always be first to answer group questions."
+        },
+        {
+          "fr": "Imite le dernier geste de la personne qui a parlé.",
+          "en": "Copy the last gesture of whoever just spoke."
+        },
+        {
+          "fr": "Encourage bruyamment quiconque hésite à répondre.",
+          "en": "Loudly cheer on anyone hesitating to answer."
+        }
       ]
     },
     {
@@ -1039,13 +2173,34 @@
         "en": "Treat every question you're asked as a mild personal accusation."
       },
       "decoys": [
-        { "fr": "Réponds à chaque question avec un enthousiasme démesuré.", "en": "Answer every question with wildly excessive enthusiasm." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Ne parle jamais en premier : réponds seulement.", "en": "Never speak first: only respond." },
-        { "fr": "Aie toujours le dernier mot dans chaque échange.", "en": "Always get the last word in every exchange." },
-        { "fr": "Consulte le groupe avant toute réponse.", "en": "Check with the group before any answer." }
+        {
+          "fr": "Réponds à chaque question avec un enthousiasme démesuré.",
+          "en": "Answer every question with wildly excessive enthusiasm."
+        },
+        {
+          "fr": "Fais remarquer qui n’a pas encore parlé.",
+          "en": "Keep pointing out who hasn't spoken yet."
+        },
+        {
+          "fr": "Excuse-toi auprès des objets que tu bouscules.",
+          "en": "Apologize to any object you bump into."
+        },
+        {
+          "fr": "Annonce « je vais être honnête » avant chaque avis.",
+          "en": "Announce \"I'm going to be honest\" before every opinion."
+        },
+        {
+          "fr": "Remercie quiconque te contredit.",
+          "en": "Thank anyone who contradicts you."
+        },
+        {
+          "fr": "Aie toujours le dernier mot dans chaque échange.",
+          "en": "Always get the last word in every exchange."
+        },
+        {
+          "fr": "Demande qu’on t’explique chaque blague.",
+          "en": "Ask for every joke to be explained."
+        }
       ]
     },
     {
@@ -1058,13 +2213,34 @@
         "en": "Snap your fingers, poetry-slam style, whenever a player finishes an answer."
       },
       "decoys": [
-        { "fr": "Applaudis chaque question du détective.", "en": "Applaud every question the detective asks." },
-        { "fr": "Fais un high-five à ton voisin quand quelqu'un répond bien.", "en": "High-five your neighbor whenever someone nails an answer." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." },
-        { "fr": "Imite le dernier geste de la personne qui a parlé.", "en": "Copy the last gesture of whoever just spoke." },
-        { "fr": "Propose à boire à quiconque te pose une question.", "en": "Offer a drink to anyone who asks you a question." }
+        {
+          "fr": "Dis « elle est bonne » au lieu de rire.",
+          "en": "Say \"good one\" instead of laughing."
+        },
+        {
+          "fr": "Fais un high-five à ton voisin quand quelqu'un répond bien.",
+          "en": "High-five your neighbor whenever someone nails an answer."
+        },
+        {
+          "fr": "Ris uniquement de tes propres blagues.",
+          "en": "Only laugh at your own jokes."
+        },
+        {
+          "fr": "Applaudis au lieu de rire.",
+          "en": "Applaud instead of laughing."
+        },
+        {
+          "fr": "Dis au revoir solennellement à quiconque quitte la pièce.",
+          "en": "Bid a solemn farewell to anyone who leaves the room."
+        },
+        {
+          "fr": "Imite le dernier geste de la personne qui a parlé.",
+          "en": "Copy the last gesture of whoever just spoke."
+        },
+        {
+          "fr": "Demande « tu étais où ? » à quiconque revient dans la pièce.",
+          "en": "Demand \"where were you?\" from anyone who comes back."
+        }
       ]
     },
     {
@@ -1077,13 +2253,34 @@
         "en": "Call the detective by a slightly wrong name. The same wrong name, every time."
       },
       "decoys": [
-        { "fr": "Présente-toi à nouveau à chaque personne qui te parle.", "en": "Re-introduce yourself to anyone who talks to you." },
-        { "fr": "Appelle chaque joueur par le prénom de son voisin.", "en": "Call every player by the name of the person next to them." },
-        { "fr": "Vouvoie le détective.", "en": "Address the detective as \"sir\" or \"ma'am\"." },
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Commence ta réponse par le prénom du joueur précédent.", "en": "Start your answer with the previous speaker's name." },
-        { "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.", "en": "Always address the whole group, never one single person." }
+        {
+          "fr": "Annonce l’arrivée de chacun comme un majordome.",
+          "en": "Announce each arrival like a royal butler."
+        },
+        {
+          "fr": "Appelle chaque joueur par le prénom de son voisin.",
+          "en": "Call every player by the name of the person next to them."
+        },
+        {
+          "fr": "Fais les présentations entre les gens, même s’ils se connaissent.",
+          "en": "Introduce people to each other even though they all know each other."
+        },
+        {
+          "fr": "Demande des nouvelles de la famille à chaque retour dans la pièce.",
+          "en": "Ask after their family every time someone returns."
+        },
+        {
+          "fr": "Accuse en retour quiconque accuse quelqu’un.",
+          "en": "Counter-accuse anyone who accuses someone."
+        },
+        {
+          "fr": "Déclare-toi témoin de tout incident mentionné.",
+          "en": "Claim you witnessed every incident mentioned."
+        },
+        {
+          "fr": "Demande des preuves à chaque affirmation.",
+          "en": "Demand evidence for every claim made."
+        }
       ]
     },
     {
@@ -1096,13 +2293,34 @@
         "en": "Before answering a detective, sweep the room with a long, meaningful look."
       },
       "decoys": [
-        { "fr": "Demande la permission au plus jeune avant de répondre.", "en": "Ask the youngest player's permission before answering." },
-        { "fr": "Fais passer tes réponses au détective par un autre joueur.", "en": "Relay your answers to the detective through another player." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." },
-        { "fr": "Garde toujours un joueur entre toi et le détective.", "en": "Always keep another player between you and the detective." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." }
+        {
+          "fr": "Demande la permission au plus jeune avant de répondre.",
+          "en": "Ask the youngest player's permission before answering."
+        },
+        {
+          "fr": "Fais passer tes réponses au détective par un autre joueur.",
+          "en": "Relay your answers to the detective through another player."
+        },
+        {
+          "fr": "Félicite l’accusateur pour son courage.",
+          "en": "Congratulate every accuser on their bravery."
+        },
+        {
+          "fr": "Répète « moi je ne juge pas » à chaque conflit.",
+          "en": "Declare \"I'm not here to judge\" in every debate."
+        },
+        {
+          "fr": "Range-toi toujours du côté de la majorité.",
+          "en": "Always side with the majority."
+        },
+        {
+          "fr": "Change d’avis dès que deux personnes te regardent.",
+          "en": "Change your mind whenever two people look at you."
+        },
+        {
+          "fr": "Refuse de donner ton avis, renvoie la question.",
+          "en": "Refuse to give opinions; bounce the question back."
+        }
       ]
     },
     {
@@ -1115,13 +2333,34 @@
         "en": "Re-introduce yourself (\"hi, I'm…\") to anyone who speaks to you."
       },
       "decoys": [
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Demande « on se connaît ? » à chaque nouvelle conversation.", "en": "Open every new conversation with \"have we met?\"." },
-        { "fr": "Propose à boire à quiconque te pose une question.", "en": "Offer a drink to anyone who asks you a question." },
-        { "fr": "Appelle le détective par un mauvais prénom.", "en": "Call the detective by the wrong name." },
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Claque des doigts quand un autre joueur répond bien.", "en": "Snap your fingers when another player nails an answer." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." }
+        {
+          "fr": "Demande « un temps de réflexion » avant chaque prise de position.",
+          "en": "Request \"time to think it over\" before taking any side."
+        },
+        {
+          "fr": "Demande « on se connaît ? » à chaque nouvelle conversation.",
+          "en": "Open every new conversation with \"have we met?\"."
+        },
+        {
+          "fr": "Propose un coussin à quiconque s’assoit.",
+          "en": "Offer a cushion to anyone who sits down."
+        },
+        {
+          "fr": "Dis « attention la marche » à quiconque se déplace.",
+          "en": "Warn \"mind the step\" at anyone who walks anywhere."
+        },
+        {
+          "fr": "Propose des snacks dès qu’un silence dure trop longtemps.",
+          "en": "Offer snacks whenever a silence drags on."
+        },
+        {
+          "fr": "Brife les revenants sur « tout ce qu’ils ont raté ».",
+          "en": "Brief returning players on \"everything they missed\"."
+        },
+        {
+          "fr": "Prends des notes imaginaires quand le détective parle.",
+          "en": "Take imaginary notes whenever the detective speaks."
+        }
       ]
     },
     {
@@ -1134,13 +2373,34 @@
         "en": "Offer a drink to anyone who asks you a question."
       },
       "decoys": [
-        { "fr": "Propose une chaise à toute personne debout.", "en": "Offer a chair to anyone left standing." },
-        { "fr": "Remercie quiconque dit ton prénom.", "en": "Thank anyone who says your name." },
-        { "fr": "Présente-toi à nouveau à chaque personne qui te parle.", "en": "Re-introduce yourself to anyone who talks to you." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." },
-        { "fr": "Prends chaque question comme un reproche.", "en": "Treat every question like an accusation." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." },
-        { "fr": "Complimente la tenue de qui te pose une question.", "en": "Compliment the outfit of anyone who questions you." }
+        {
+          "fr": "Propose une chaise à toute personne debout.",
+          "en": "Offer a chair to anyone left standing."
+        },
+        {
+          "fr": "Dis au détective qu’il « chauffe », que ce soit vrai ou non.",
+          "en": "Tell the detective they're \"getting warmer\", true or not."
+        },
+        {
+          "fr": "Demande au détective pourquoi il pose cette question, à chaque fois.",
+          "en": "Ask the detective why they're asking, every single time."
+        },
+        {
+          "fr": "Termine tes réponses au détective par « élémentaire ».",
+          "en": "End your answers to the detective with \"elementary\"."
+        },
+        {
+          "fr": "Prends chaque question comme un reproche.",
+          "en": "Treat every question like an accusation."
+        },
+        {
+          "fr": "Réponds au détective comme en entretien d’embauche.",
+          "en": "Answer the detective like you're in a job interview."
+        },
+        {
+          "fr": "Complimente la tenue de qui te pose une question.",
+          "en": "Compliment the outfit of anyone who questions you."
+        }
       ]
     },
     {
@@ -1153,13 +2413,34 @@
         "en": "Only laugh when a detective laughs — never before, never without them."
       },
       "decoys": [
-        { "fr": "Fige-toi quand le détective regarde son téléphone.", "en": "Freeze whenever the detective checks their phone." },
-        { "fr": "Traite le détective comme une célébrité.", "en": "Treat the detective like a celebrity." },
-        { "fr": "Applaudis chaque question du détective.", "en": "Applaud every question the detective asks." },
-        { "fr": "Garde un sérieux absolu quand le détective te regarde.", "en": "Keep a perfectly straight face whenever the detective looks at you." },
-        { "fr": "Imite le dernier geste de la personne qui a parlé.", "en": "Copy the last gesture of whoever just spoke." },
-        { "fr": "Claque des doigts quand un autre joueur répond bien.", "en": "Snap your fingers when another player nails an answer." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." }
+        {
+          "fr": "Désigne quelqu’un d’autre pour répondre aux questions de groupe.",
+          "en": "Volunteer someone else to answer any group question."
+        },
+        {
+          "fr": "Réponds au détective puis demande-lui « et toi ? ».",
+          "en": "Answer the detective, then ask \"what about you?\"."
+        },
+        {
+          "fr": "Garde toujours un objet (coussin, verre) entre toi et le détective.",
+          "en": "Keep an object (cushion, cup) between you and the detective."
+        },
+        {
+          "fr": "Garde un sérieux absolu quand le détective te regarde.",
+          "en": "Keep a perfectly straight face whenever the detective looks at you."
+        },
+        {
+          "fr": "Suis le détective des yeux où qu’il aille.",
+          "en": "Track the detective with your eyes wherever they go."
+        },
+        {
+          "fr": "Recule d’un pas dès qu’on te pose deux questions de suite.",
+          "en": "Take a step back whenever you get two questions in a row."
+        },
+        {
+          "fr": "Assieds-toi toujours en face du détective.",
+          "en": "Always sit directly opposite the detective."
+        }
       ]
     },
     {
@@ -1172,13 +2453,34 @@
         "en": "Discreetly copy the last gesture of whoever just spoke."
       },
       "decoys": [
-        { "fr": "Imite la posture du détective.", "en": "Mirror the detective's posture." },
-        { "fr": "Penche-toi vers la personne que le détective interroge.", "en": "Lean toward whoever the detective is questioning." },
-        { "fr": "Ne regarde jamais la personne qui parle.", "en": "Never look at whoever is speaking." },
-        { "fr": "Ris dès que le détective rit.", "en": "Laugh whenever the detective laughs." },
-        { "fr": "Fige-toi quand le détective regarde son téléphone.", "en": "Freeze whenever the detective checks their phone." },
-        { "fr": "Commence ta réponse par le prénom du joueur précédent.", "en": "Start your answer with the previous speaker's name." },
-        { "fr": "Répète la question à voix haute avant d'y répondre.", "en": "Repeat the question out loud before answering it." }
+        {
+          "fr": "Imite la posture du détective.",
+          "en": "Mirror the detective's posture."
+        },
+        {
+          "fr": "Lève-toi pour parler, rassieds-toi pour écouter.",
+          "en": "Stand to talk, sit to listen."
+        },
+        {
+          "fr": "Rapproche-toi de la sortie après chaque accusation.",
+          "en": "Drift closer to the exit after every accusation."
+        },
+        {
+          "fr": "Choisis une place et défends-la farouchement toute la manche.",
+          "en": "Claim one seat and defend it fiercely all round."
+        },
+        {
+          "fr": "Fais répéter sa question à quiconque t’interroge.",
+          "en": "Make anyone who questions you repeat the question."
+        },
+        {
+          "fr": "Demande si tout le monde est d’accord avant de changer de sujet.",
+          "en": "Check that everyone agrees before changing the subject."
+        },
+        {
+          "fr": "Donne raison aux deux camps dans chaque débat.",
+          "en": "Take both sides in every argument."
+        }
       ]
     },
     {
@@ -1191,13 +2493,34 @@
         "en": "Answer questions aimed at others, never the ones aimed at you."
       },
       "decoys": [
-        { "fr": "Fais passer tes réponses au détective par un autre joueur.", "en": "Relay your answers to the detective through another player." },
-        { "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.", "en": "Ignore the first question you're asked; only answer the second." },
-        { "fr": "Ne parle jamais en premier : réponds seulement.", "en": "Never speak first: only respond." },
-        { "fr": "Aie toujours le dernier mot dans chaque échange.", "en": "Always get the last word in every exchange." },
-        { "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.", "en": "Always address the whole group, never one single person." },
-        { "fr": "Consulte le groupe avant toute réponse.", "en": "Check with the group before any answer." },
-        { "fr": "Réponds au détective en trois mots maximum.", "en": "Answer the detective in three words or fewer." }
+        {
+          "fr": "Imite le rire de la dernière personne qui a ri.",
+          "en": "Copy the laugh of whoever laughed last."
+        },
+        {
+          "fr": "Arrête-toi net de rire dès que quelqu’un te regarde.",
+          "en": "Stop laughing dead the moment anyone looks at you."
+        },
+        {
+          "fr": "Souris en permanence, quoi qu’il arrive.",
+          "en": "Smile non-stop, no matter what happens."
+        },
+        {
+          "fr": "Ris poliment à toutes les blagues, même les nulles.",
+          "en": "Laugh politely at every joke, even the terrible ones."
+        },
+        {
+          "fr": "Réponds au détective en regardant son front.",
+          "en": "Answer the detective while staring at their forehead."
+        },
+        {
+          "fr": "Acquiesce bruyamment à tout ce que dit ton voisin de gauche.",
+          "en": "Loudly agree with everything your left-hand neighbor says."
+        },
+        {
+          "fr": "Réclame le soutien moral du groupe après chaque question difficile.",
+          "en": "Request moral support from the room after every hard question."
+        }
       ]
     }
   ]

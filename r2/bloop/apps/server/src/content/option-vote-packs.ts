@@ -250,7 +250,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
       "en": "Only eat breakfast foods"
     },
     "optionB": {
-      "fr": "Ne manger que des plats de dîner",
+      "fr": "Ne manger que des plats du soir",
       "en": "Only eat dinner foods"
     }
   },
@@ -280,7 +280,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     "id": "wyr-call-vs-voicemail",
     "optionA": {
       "fr": "Devoir appeler pour la moindre question",
-      "en": "Have to phone-call for every tiny question"
+      "en": "Have to make a real phone call for every tiny question"
     },
     "optionB": {
       "fr": "Recevoir uniquement des vocaux de 5 minutes",
@@ -291,7 +291,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     "id": "wyr-spicy-everything-vs-bland-everything",
     "optionA": {
       "fr": "Que tous tes plats soient ultra pimentés",
-      "en": "Have every meal be blisteringly hot-spiced"
+      "en": "Have every meal be blisteringly spicy"
     },
     "optionB": {
       "fr": "Que tous tes plats soient totalement fades",
@@ -723,7 +723,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
       "en": "Always be overdressed for the occasion"
     },
     "optionB": {
-      "fr": "Être toujours pas assez habillé pour l'occasion",
+      "fr": "Ne jamais être assez habillé pour l'occasion",
       "en": "Always be underdressed for the occasion"
     }
   },
@@ -767,7 +767,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
       "en": "Friends who always show up unannounced"
     },
     "optionB": {
-      "fr": "Des soirées plannifiées 3 mois à l'avance, sans exception",
+      "fr": "Des soirées planifiées 3 mois à l'avance, sans exception",
       "en": "Hangouts that must be booked 3 months ahead"
     }
   },
@@ -1850,14 +1850,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-fondue-solo-vs-bbq-rain",
+    "id": "wyr-no-microwave-vs-no-freezer",
     "optionA": {
-      "fr": "Une raclette en solo un soir de canicule",
-      "en": "A solo cheese fondue on a heatwave night"
+      "fr": "Ne plus jamais utiliser de micro-ondes",
+      "en": "Never use a microwave again"
     },
     "optionB": {
-      "fr": "Un barbecue sous la pluie battante",
-      "en": "A barbecue in pouring rain"
+      "fr": "Ne plus jamais utiliser de congélateur",
+      "en": "Never use a freezer again"
     }
   },
   {
@@ -1900,7 +1900,7 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
       "en": "Pasta that's always crunchy in the middle"
     },
     "optionB": {
-      "fr": "Du riz toujours collant-bouillie",
+      "fr": "Du riz toujours collant comme de la bouillie",
       "en": "Rice that's always mushy porridge"
     }
   },
@@ -2215,12 +2215,672 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-host-podcast-noone-vs-guest-top-podcast",
     "optionA": {
-      "fr": "Animer ton podcast que personne n'écoute, mais adoré de toi",
+      "fr": "Animer un podcast que tu adores mais que personne n'écoute",
       "en": "Host your own podcast that nobody listens to"
     },
     "optionB": {
-      "fr": "Être invité une fois au plus gros podcast du monde, stressé",
+      "fr": "Être invité une seule fois dans le plus gros podcast du monde",
       "en": "Be a guest once on the world's biggest podcast"
+    }
+  },
+  {
+    "id": "wyr-knee-maracas-vs-teeth-castanets",
+    "optionA": {
+      "fr": "Que tes genoux fassent des maracas à chaque pas",
+      "en": "Your knees rattle like maracas with every step"
+    },
+    "optionB": {
+      "fr": "Que tes dents claquent en rythme flamenco quand tu as froid",
+      "en": "Your teeth clack out flamenco rhythms when you're cold"
+    }
+  },
+  {
+    "id": "wyr-cool-pillow-vs-instant-hot-shower",
+    "optionA": {
+      "fr": "Que ton oreiller soit toujours du côté frais",
+      "en": "Your pillow is always the cool side"
+    },
+    "optionB": {
+      "fr": "Que ta douche soit chaude dès la première seconde",
+      "en": "Your shower runs hot the second you turn it on"
+    }
+  },
+  {
+    "id": "wyr-endless-gum-vs-loyal-pen",
+    "optionA": {
+      "fr": "Un chewing-gum qui ne perd jamais son goût",
+      "en": "Gum that never loses its flavor"
+    },
+    "optionB": {
+      "fr": "Un stylo qui ne meurt jamais et ne se fait jamais voler",
+      "en": "A pen that never dies and never gets stolen"
+    }
+  },
+  {
+    "id": "wyr-lagging-shadow-vs-room-echo",
+    "optionA": {
+      "fr": "Que ton ombre bouge avec 2 secondes de retard",
+      "en": "Your shadow moves on a 2-second delay"
+    },
+    "optionB": {
+      "fr": "Que ta voix résonne légèrement dans chaque pièce",
+      "en": "Your voice slightly echoes in every room"
+    }
+  },
+  {
+    "id": "wyr-lost-socks-return-vs-tupperware-lids-match",
+    "optionA": {
+      "fr": "Retrouver toutes les chaussettes disparues de ta vie",
+      "en": "Every sock you ever lost comes back"
+    },
+    "optionB": {
+      "fr": "Que chaque tupperware retrouve son couvercle, à vie",
+      "en": "Every Tupperware matches its lid, forever"
+    }
+  },
+  {
+    "id": "wyr-mosquito-truce-vs-no-stubbed-toes",
+    "optionA": {
+      "fr": "Que les moustiques signent une trêve avec toi",
+      "en": "Mosquitoes declare a permanent truce with you"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais te cogner le petit orteil",
+      "en": "Never stub your little toe again"
+    }
+  },
+  {
+    "id": "wyr-negotiate-wifi-vs-negotiate-traffic-lights",
+    "optionA": {
+      "fr": "Pouvoir négocier avec ta box internet",
+      "en": "Be able to negotiate with your wifi router"
+    },
+    "optionB": {
+      "fr": "Pouvoir négocier avec les feux rouges",
+      "en": "Be able to negotiate with traffic lights"
+    }
+  },
+  {
+    "id": "wyr-daily-levitation-vs-rps-immortal",
+    "optionA": {
+      "fr": "Léviter à 5 cm du sol, 5 secondes par jour",
+      "en": "Levitate two inches off the ground, 5 seconds a day"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais perdre à pierre-feuille-ciseaux",
+      "en": "Never lose rock-paper-scissors again"
+    }
+  },
+  {
+    "id": "wyr-cloud-sculptor-vs-stone-skipper",
+    "optionA": {
+      "fr": "Sculpter les nuages par la pensée",
+      "en": "Sculpt clouds with your mind"
+    },
+    "optionB": {
+      "fr": "Que tes ricochets fassent toujours 20 rebonds",
+      "en": "Every stone you skip bounces 20 times"
+    }
+  },
+  {
+    "id": "wyr-inflatable-furniture-vs-edible-cutlery",
+    "optionA": {
+      "fr": "Que tous tes meubles soient gonflables",
+      "en": "All your furniture is inflatable"
+    },
+    "optionB": {
+      "fr": "Que tous tes couverts soient comestibles, et à finir",
+      "en": "All your cutlery is edible, and you must finish it"
+    }
+  },
+  {
+    "id": "wyr-sneeze-new-accent-vs-yawn-slow-motion",
+    "optionA": {
+      "fr": "Changer d'accent pendant 10 minutes à chaque éternuement",
+      "en": "Each sneeze gives you a random accent for 10 minutes"
+    },
+    "optionB": {
+      "fr": "Parler au ralenti pendant 1 minute à chaque bâillement",
+      "en": "Each yawn makes you talk in slow motion for a minute"
+    }
+  },
+  {
+    "id": "wyr-parking-fairy-vs-full-bars",
+    "optionA": {
+      "fr": "Toujours trouver une place de parking juste devant",
+      "en": "Always find a parking spot right out front"
+    },
+    "optionB": {
+      "fr": "Toujours capter du réseau, même au fond d'une cave",
+      "en": "Always have full signal bars, even in a basement"
+    }
+  },
+  {
+    "id": "wyr-night-shuffling-furniture-vs-clingy-plants",
+    "optionA": {
+      "fr": "Que tes meubles se déplacent un peu chaque nuit",
+      "en": "Your furniture shifts slightly every night"
+    },
+    "optionB": {
+      "fr": "Que tes plantes te suivent lentement dans la maison",
+      "en": "Your houseplants slowly follow you around"
+    }
+  },
+  {
+    "id": "wyr-float-when-laughing-vs-sparks-when-annoyed",
+    "optionA": {
+      "fr": "Décoller de 3 cm quand tu ris trop fort",
+      "en": "Float an inch off the ground when you really laugh"
+    },
+    "optionB": {
+      "fr": "Faire de petites étincelles quand tu t'agaces",
+      "en": "Shoot tiny harmless sparks when you're annoyed"
+    }
+  },
+  {
+    "id": "wyr-stairs-are-slides-vs-sidewalks-are-walkways",
+    "optionA": {
+      "fr": "Que tous les escaliers aient aussi un toboggan",
+      "en": "Every staircase comes with a slide"
+    },
+    "optionB": {
+      "fr": "Que tous les trottoirs soient des tapis roulants",
+      "en": "Every sidewalk is a moving walkway"
+    }
+  },
+  {
+    "id": "wyr-no-pasta-vs-no-rice",
+    "optionA": {
+      "fr": "Ne plus jamais manger de pâtes",
+      "en": "Never eat pasta again"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais manger de riz",
+      "en": "Never eat rice again"
+    }
+  },
+  {
+    "id": "wyr-round-foods-only-vs-beige-foods-only",
+    "optionA": {
+      "fr": "Ne manger que des aliments ronds",
+      "en": "Only eat round foods"
+    },
+    "optionB": {
+      "fr": "Ne manger que des aliments beiges",
+      "en": "Only eat beige foods"
+    }
+  },
+  {
+    "id": "wyr-silent-restaurants-vs-standing-restaurants",
+    "optionA": {
+      "fr": "Que tous les restos soient silencieux comme une biblio",
+      "en": "Every restaurant is library-silent"
+    },
+    "optionB": {
+      "fr": "Que tous les restos soient debout, sans chaises",
+      "en": "Every restaurant is standing room only"
+    }
+  },
+  {
+    "id": "wyr-always-ripe-avocado-vs-perfect-banana",
+    "optionA": {
+      "fr": "Que tous tes avocats soient mûrs à point",
+      "en": "Every avocado you open is perfectly ripe"
+    },
+    "optionB": {
+      "fr": "Que tes bananes soient toujours exactement comme tu aimes",
+      "en": "Every banana is exactly how you like it"
+    }
+  },
+  {
+    "id": "wyr-no-tongue-burns-vs-no-cheek-bites",
+    "optionA": {
+      "fr": "Ne plus jamais te brûler la langue",
+      "en": "Never burn your tongue on hot food again"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais te mordre l'intérieur de la joue",
+      "en": "Never bite the inside of your cheek again"
+    }
+  },
+  {
+    "id": "wyr-cook-for-50-vs-dishes-for-50",
+    "optionA": {
+      "fr": "Cuisiner un dîner pour 50 personnes",
+      "en": "Cook dinner for 50 people"
+    },
+    "optionB": {
+      "fr": "Faire la vaisselle d'un dîner de 50 personnes",
+      "en": "Do the dishes after a 50-person dinner"
+    }
+  },
+  {
+    "id": "wyr-popcorn-only-sweet-vs-crepes-only-savory",
+    "optionA": {
+      "fr": "Un monde où le popcorn n'existe qu'en sucré",
+      "en": "A world where popcorn only comes sweet"
+    },
+    "optionB": {
+      "fr": "Un monde où les crêpes n'existent qu'en salé",
+      "en": "A world where pancakes only come savory"
+    }
+  },
+  {
+    "id": "wyr-nothing-melted-vs-nothing-crispy",
+    "optionA": {
+      "fr": "Plus jamais rien de fondant (adieu la raclette)",
+      "en": "Nothing melty ever again (goodbye grilled cheese)"
+    },
+    "optionB": {
+      "fr": "Plus jamais rien de croustillant (adieu les chips)",
+      "en": "Nothing crispy ever again (goodbye chips)"
+    }
+  },
+  {
+    "id": "wyr-bbq-legend-vs-pastry-wizard",
+    "optionA": {
+      "fr": "Devenir une légende du barbecue",
+      "en": "Become a backyard barbecue legend"
+    },
+    "optionB": {
+      "fr": "Devenir un magicien de la pâtisserie",
+      "en": "Become a pastry wizard"
+    }
+  },
+  {
+    "id": "wyr-picnic-ants-vs-bbq-wasp",
+    "optionA": {
+      "fr": "Des fourmis à chaque pique-nique",
+      "en": "Ants at every picnic"
+    },
+    "optionB": {
+      "fr": "Une guêpe têtue à chaque barbecue",
+      "en": "One determined wasp at every barbecue"
+    }
+  },
+  {
+    "id": "wyr-meal-prep-week-vs-decide-daily",
+    "optionA": {
+      "fr": "Manger le même plat préparé toute la semaine",
+      "en": "Eat the same meal-prepped dish all week"
+    },
+    "optionB": {
+      "fr": "Décider chaque repas au jour le jour, courses comprises",
+      "en": "Decide every meal day-of, grocery run included"
+    }
+  },
+  {
+    "id": "wyr-calorie-free-day-vs-dessert-veggies",
+    "optionA": {
+      "fr": "Un jour par semaine où les calories n'existent pas",
+      "en": "One day a week where calories don't exist"
+    },
+    "optionB": {
+      "fr": "Que les légumes aient le goût de ton dessert préféré",
+      "en": "Vegetables taste like your favorite dessert"
+    }
+  },
+  {
+    "id": "wyr-never-hangry-vs-never-food-coma",
+    "optionA": {
+      "fr": "Ne plus jamais être affamé et grognon",
+      "en": "Never get hangry again"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais avoir de coup de barre après manger",
+      "en": "Never get a food coma again"
+    }
+  },
+  {
+    "id": "wyr-home-fries-master-vs-home-barista",
+    "optionA": {
+      "fr": "Réussir des frites de brasserie à la maison",
+      "en": "Make restaurant-grade fries at home"
+    },
+    "optionB": {
+      "fr": "Réussir un café de barista à la maison",
+      "en": "Pull barista-grade coffee at home"
+    }
+  },
+  {
+    "id": "wyr-no-delivery-vs-no-eating-out",
+    "optionA": {
+      "fr": "Ne plus jamais te faire livrer",
+      "en": "Never order delivery again"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais manger au restaurant",
+      "en": "Never eat out again"
+    }
+  },
+  {
+    "id": "wyr-minute-on-mute-vs-camera-suddenly-on",
+    "optionA": {
+      "fr": "Parler une minute en muet à chaque visio",
+      "en": "Talk a full minute on mute in every video call"
+    },
+    "optionB": {
+      "fr": "Découvrir ta caméra allumée une fois par semaine",
+      "en": "Discover your camera was on once a week"
+    }
+  },
+  {
+    "id": "wyr-you-too-waiter-vs-third-what-nod",
+    "optionA": {
+      "fr": "Répondre « vous aussi » au serveur qui dit bon appétit",
+      "en": "Reply 'you too!' when the waiter says enjoy your meal"
+    },
+    "optionB": {
+      "fr": "Abandonner et hocher la tête au troisième « quoi ? »",
+      "en": "Give up and nod after the third 'what?'"
+    }
+  },
+  {
+    "id": "wyr-phone-dies-at-parties-vs-no-trip-photos",
+    "optionA": {
+      "fr": "Que ton tel meure à 21h à chaque soirée",
+      "en": "Your phone dies at 9 p.m. at every party"
+    },
+    "optionB": {
+      "fr": "Zéro photo autorisée pendant tous tes voyages",
+      "en": "Zero photos allowed on any of your trips"
+    }
+  },
+  {
+    "id": "wyr-everyone-knows-your-name-vs-you-know-everyones",
+    "optionA": {
+      "fr": "Tout le monde connaît ton prénom, toi aucun",
+      "en": "Everyone knows your name, you know nobody's"
+    },
+    "optionB": {
+      "fr": "Tu connais tout le monde, personne ne te reconnaît",
+      "en": "You know everyone, nobody remembers you"
+    }
+  },
+  {
+    "id": "wyr-read-receipts-forced-vs-never-shown",
+    "optionA": {
+      "fr": "Tes accusés de lecture sont activés à vie",
+      "en": "Your read receipts are stuck ON forever"
+    },
+    "optionB": {
+      "fr": "Tu ne sais jamais si on a lu tes messages",
+      "en": "You never know if anyone read your texts"
+    }
+  },
+  {
+    "id": "wyr-cartoon-sneeze-vs-whale-stomach",
+    "optionA": {
+      "fr": "Un éternuement de cartoon dans chaque silence",
+      "en": "A cartoon-level sneeze in every silent room"
+    },
+    "optionB": {
+      "fr": "Un ventre qui chante la baleine en plein entretien",
+      "en": "A stomach that sings whale song in every interview"
+    }
+  },
+  {
+    "id": "wyr-always-hosting-vs-always-commuting",
+    "optionA": {
+      "fr": "Toujours recevoir chez toi, ménage compris",
+      "en": "Always host at your place, cleanup included"
+    },
+    "optionB": {
+      "fr": "Toujours traverser la ville pour rejoindre les autres",
+      "en": "Always cross town to meet everyone else"
+    }
+  },
+  {
+    "id": "wyr-smalltalk-champion-vs-deep-talk-only",
+    "optionA": {
+      "fr": "Être champion du small talk, sans vraies conversations",
+      "en": "Master small talk but never have deep conversations"
+    },
+    "optionB": {
+      "fr": "N'avoir que des discussions profondes, même avec le facteur",
+      "en": "Only have deep talks, even with the mail carrier"
+    }
+  },
+  {
+    "id": "wyr-birthday-song-monthly-vs-flashmob-yearly",
+    "optionA": {
+      "fr": "Les serveurs te chantent joyeux anniversaire chaque mois",
+      "en": "Waiters sing you happy birthday every month"
+    },
+    "optionB": {
+      "fr": "Un flashmob en ton honneur une fois par an, en public",
+      "en": "A public flash mob in your honor once a year"
+    }
+  },
+  {
+    "id": "wyr-first-on-dancefloor-vs-last-song-only",
+    "optionA": {
+      "fr": "Ouvrir chaque dancefloor seul pendant 10 minutes",
+      "en": "Open every dance floor alone for 10 minutes"
+    },
+    "optionB": {
+      "fr": "N'avoir le droit de danser que sur la dernière chanson",
+      "en": "Only be allowed to dance on the last song"
+    }
+  },
+  {
+    "id": "wyr-emoji-only-year-vs-no-emoji-ever",
+    "optionA": {
+      "fr": "Écrire uniquement en emojis pendant un an",
+      "en": "Text only in emojis for a year"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais utiliser d'emoji",
+      "en": "Never use an emoji again"
+    }
+  },
+  {
+    "id": "wyr-middle-seat-forever-vs-window-tiny-bladder",
+    "optionA": {
+      "fr": "Toujours le siège du milieu en avion",
+      "en": "Always the middle seat on planes"
+    },
+    "optionB": {
+      "fr": "Toujours le hublot, mais pipi toutes les heures",
+      "en": "Always the window seat, but hourly bathroom runs"
+    }
+  },
+  {
+    "id": "wyr-bus-life-stories-vs-plane-toddlers",
+    "optionA": {
+      "fr": "Les inconnus te racontent leur vie dans chaque bus",
+      "en": "Strangers tell you their life story on every bus"
+    },
+    "optionB": {
+      "fr": "Les bébés d'avion te choisissent comme animateur",
+      "en": "Every plane toddler picks you as the entertainment"
+    }
+  },
+  {
+    "id": "wyr-freestyle-barber-vs-chatty-dentist",
+    "optionA": {
+      "fr": "Un coiffeur qui « improvise » à chaque coupe",
+      "en": "A barber who 'freestyles' every haircut"
+    },
+    "optionB": {
+      "fr": "Un dentiste qui te pose des questions pendant les soins",
+      "en": "A dentist who asks you questions mid-drilling"
+    }
+  },
+  {
+    "id": "wyr-win-but-salty-vs-lose-but-beloved",
+    "optionA": {
+      "fr": "Gagner chaque soirée jeux, potes vexés inclus",
+      "en": "Win every game night, salty friends included"
+    },
+    "optionB": {
+      "fr": "Perdre à chaque fois, mais tout le monde t'adore",
+      "en": "Lose every time, but everyone loves playing with you"
+    }
+  },
+  {
+    "id": "wyr-year-at-sea-vs-year-in-space",
+    "optionA": {
+      "fr": "Passer un an sur un voilier",
+      "en": "Spend a year on a sailboat"
+    },
+    "optionB": {
+      "fr": "Passer un an dans une station spatiale",
+      "en": "Spend a year on a space station"
+    }
+  },
+  {
+    "id": "wyr-gifted-but-bored-vs-passionate-but-bad",
+    "optionA": {
+      "fr": "Être doué pour un truc qui t'ennuie",
+      "en": "Be gifted at something that bores you"
+    },
+    "optionB": {
+      "fr": "Être passionné par un truc où tu es nul",
+      "en": "Be passionate about something you're bad at"
+    }
+  },
+  {
+    "id": "wyr-honesty-day-vs-invisibility-day",
+    "optionA": {
+      "fr": "Un jour où tout le monde te répond en toute honnêteté",
+      "en": "One day where everyone answers you with total honesty"
+    },
+    "optionB": {
+      "fr": "Un jour où tu es complètement invisible",
+      "en": "One day where you're completely invisible"
+    }
+  },
+  {
+    "id": "wyr-new-country-every-2-years-vs-hometown-dream-house",
+    "optionA": {
+      "fr": "Changer de pays tous les deux ans",
+      "en": "Move to a new country every two years"
+    },
+    "optionB": {
+      "fr": "Rester dans ta ville natale, maison de rêve incluse",
+      "en": "Stay in your hometown, dream house included"
+    }
+  },
+  {
+    "id": "wyr-one-hit-wonder-vs-respected-unknown",
+    "optionA": {
+      "fr": "Écrire UN tube planétaire, puis plus rien",
+      "en": "Write ONE global hit, then nothing"
+    },
+    "optionB": {
+      "fr": "Être un artiste respecté que le grand public ignore",
+      "en": "Be a respected artist the mainstream never finds"
+    }
+  },
+  {
+    "id": "wyr-master-your-emotions-vs-read-everyone-elses",
+    "optionA": {
+      "fr": "Contrôler parfaitement tes émotions",
+      "en": "Fully control your own emotions"
+    },
+    "optionB": {
+      "fr": "Lire parfaitement celles des autres",
+      "en": "Perfectly read everyone else's"
+    }
+  },
+  {
+    "id": "wyr-year-without-mirrors-vs-year-without-socials",
+    "optionA": {
+      "fr": "Un an sans aucun miroir",
+      "en": "A year without a single mirror"
+    },
+    "optionB": {
+      "fr": "Un an sans aucun réseau social",
+      "en": "A year without any social media"
+    }
+  },
+  {
+    "id": "wyr-secrets-of-history-vs-secrets-of-the-ocean",
+    "optionA": {
+      "fr": "Connaître tous les secrets de l'Histoire",
+      "en": "Learn every secret of human history"
+    },
+    "optionB": {
+      "fr": "Connaître tous les secrets de l'océan",
+      "en": "Learn every secret of the ocean"
+    }
+  },
+  {
+    "id": "wyr-infinite-patience-vs-infinite-courage",
+    "optionA": {
+      "fr": "Une patience infinie",
+      "en": "Infinite patience"
+    },
+    "optionB": {
+      "fr": "Un courage infini",
+      "en": "Infinite courage"
+    }
+  },
+  {
+    "id": "wyr-perfect-routine-vs-never-same-day",
+    "optionA": {
+      "fr": "La même journée parfaite, en boucle",
+      "en": "The same perfect routine, on repeat"
+    },
+    "optionB": {
+      "fr": "Jamais deux journées pareilles, galères comprises",
+      "en": "Never the same day twice, chaos included"
+    }
+  },
+  {
+    "id": "wyr-purpose-revealed-vs-purpose-chosen",
+    "optionA": {
+      "fr": "Qu'on te révèle ta vocation, garantie juste",
+      "en": "Be told your true calling, guaranteed right"
+    },
+    "optionB": {
+      "fr": "Chercher toute ta vie, mais choisir librement",
+      "en": "Keep searching forever, but choose freely"
+    }
+  },
+  {
+    "id": "wyr-fails-forgotten-vs-wins-remembered",
+    "optionA": {
+      "fr": "Que tout le monde oublie aussitôt tes échecs",
+      "en": "Everyone instantly forgets your fails"
+    },
+    "optionB": {
+      "fr": "Que tout le monde retienne toujours tes réussites",
+      "en": "Everyone always remembers your wins"
+    }
+  },
+  {
+    "id": "wyr-genius-one-day-a-month-vs-ten-percent-smarter",
+    "optionA": {
+      "fr": "Être un génie un jour par mois",
+      "en": "Be a genius one day a month"
+    },
+    "optionB": {
+      "fr": "Être 10 % plus malin tous les jours",
+      "en": "Be 10% smarter every single day"
+    }
+  },
+  {
+    "id": "wyr-four-day-week-vs-six-hour-days",
+    "optionA": {
+      "fr": "La semaine de quatre jours",
+      "en": "A four-day workweek"
+    },
+    "optionB": {
+      "fr": "Des journées de six heures",
+      "en": "Six-hour workdays"
+    }
+  },
+  {
+    "id": "wyr-one-dream-home-vs-five-city-flats",
+    "optionA": {
+      "fr": "Une maison de rêve, mais tu ne déménages plus jamais",
+      "en": "One dream home, but you can never move"
+    },
+    "optionB": {
+      "fr": "Des petits apparts dans cinq villes du monde",
+      "en": "Modest flats in five cities around the world"
     }
   }
 ] },
@@ -2364,7 +3024,7 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
       "fr": "L'eau pétillante",
       "en": "Sparkling water"
     },
-    "emoji": "💦",
+    "emoji": "🫧",
     "debateStarter": {
       "fr": "C'est juste de l'eau qui a pris des grands airs.",
       "en": "It's water that went to private school."
@@ -3347,7 +4007,7 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     "emoji": "🍅",
     "debateStarter": {
       "fr": "Six mois d'efforts pour trois tomates hors de prix.",
-      "en": "Six months of work for three priceless tomatoes."
+      "en": "Six months of work for three wildly expensive tomatoes."
     }
   },
   {
@@ -5166,7 +5826,7 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏛️",
     "debateStarter": {
-      "fr": "Une langue morte qui ne sert qu'à briller en dîner, des années après.",
+      "fr": "Une langue morte qui ne sert qu'à briller aux dîners, des années après.",
       "en": "A dead language that pays off only at dinner parties."
     }
   },
@@ -5801,7 +6461,7 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
       "en": "Right-coded"
     },
     "prompt": {
-      "fr": "Le paddle",
+      "fr": "Le stand-up paddle",
       "en": "Paddleboarding"
     },
     "emoji": "🏄",
@@ -6566,7 +7226,7 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛒",
     "debateStarter": {
-      "fr": "Le test de civilisation à une pièce de un euro.",
+      "fr": "Le test de civilisation à une pièce d'un euro.",
       "en": "Civilization's one-quarter morality test."
     }
   },

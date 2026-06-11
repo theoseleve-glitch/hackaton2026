@@ -422,6 +422,2148 @@
       ],
       "tags": ["home", "silly"],
       "spicy": 0
+    },
+    {
+      "id": "q_alarm_count",
+      "question": { "fr": "Combien d'alarmes tu programmes pour te lever le matin ?", "en": "How many alarms do you set to get up in the morning?" },
+      "answers": [
+        { "fr": "Une seule, comme un adulte", "en": "Just one, like an adult" },
+        { "fr": "Trois, bien espacées", "en": "Three, carefully spaced" },
+        { "fr": "Une symphonie entière", "en": "An entire symphony" }
+      ],
+      "decoys": [
+        { "fr": "Combien de rappels tu mets pour un seul rendez-vous ?", "en": "How many reminders do you set for a single appointment?" },
+        { "fr": "Combien de minuteurs tu lances quand tu cuisines ?", "en": "How many timers do you run while cooking?" },
+        { "fr": "Combien de sonneries tu laisses passer avant de décrocher ?", "en": "How many rings do you let pass before picking up?" },
+        { "fr": "Combien de notifications tu reçois pendant un seul dîner ?", "en": "How many notifications do you get during a single dinner?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe très tôt dans la journée.", "en": "It happens very early in the day." },
+        { "fr": "Le bouton snooze est en danger.", "en": "The snooze button is in danger." }
+      ],
+      "tags": ["habits", "sleep"],
+      "spicy": 0
+    },
+    {
+      "id": "q_animal_swap",
+      "question": { "fr": "Tu échangerais ta vie avec quel animal ?", "en": "Which animal would you swap lives with?" },
+      "answers": [
+        { "fr": "Un chat d'appartement, le rêve", "en": "An indoor cat — the dream" },
+        { "fr": "Un oiseau, pour la liberté", "en": "A bird, for the freedom" },
+        { "fr": "Un panda : manger et dormir", "en": "A panda: eat and sleep" }
+      ],
+      "decoys": [
+        { "fr": "Quel animal te ressemble le plus au réveil ?", "en": "Which animal do you most resemble when you wake up?" },
+        { "fr": "Quel animal ferait le meilleur coloc ?", "en": "Which animal would make the best roommate?" },
+        { "fr": "Quel animal tu étais dans une vie antérieure ?", "en": "Which animal were you in a past life?" },
+        { "fr": "Quel animal devrait te représenter sur ton CV ?", "en": "Which animal should represent you on your résumé?" }
+      ],
+      "hints": [
+        { "fr": "C'est une question de mode de vie, pas de ressemblance.", "en": "It's about lifestyle, not resemblance." },
+        { "fr": "Tu rends ta vie d'humain à l'accueil.", "en": "You hand in your human life at the front desk." }
+      ],
+      "tags": ["hypothetical", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_late_excuse",
+      "question": { "fr": "C'est quoi ton excuse classique quand tu es en retard ?", "en": "What's your go-to excuse when you're running late?" },
+      "answers": [
+        { "fr": "Les transports, toujours", "en": "Traffic. Always traffic." },
+        { "fr": "La vérité, aussi gênante soit-elle", "en": "The truth, however embarrassing" },
+        { "fr": "Une urgence inventée sur mesure", "en": "A custom-built fake emergency" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ton excuse pour annuler une soirée ?", "en": "What's your excuse for bailing on a night out?" },
+        { "fr": "C'est quoi ton excuse pour partir tôt d'une fête ?", "en": "What's your excuse for leaving a party early?" },
+        { "fr": "C'est quoi ton excuse pour ne pas répondre aux messages ?", "en": "What's your excuse for not answering texts?" },
+        { "fr": "C'est quoi ton excuse pour sécher le sport ?", "en": "What's your excuse for skipping the gym?" }
+      ],
+      "hints": [
+        { "fr": "Tout le monde t'attend quelque part.", "en": "Everyone is waiting for you somewhere." },
+        { "fr": "Tu arriveras, mais pas à l'heure.", "en": "You'll get there — just not on time." }
+      ],
+      "tags": ["social", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_message_reply",
+      "question": { "fr": "Tu mets combien de temps à répondre à un message ?", "en": "How long does it take you to reply to a text?" },
+      "answers": [
+        { "fr": "Moins d'une minute, toujours", "en": "Under a minute, every time" },
+        { "fr": "Quelques heures, le temps de vivre", "en": "A few hours — I have a life to live" },
+        { "fr": "Trois à cinq jours ouvrés", "en": "Three to five business days" }
+      ],
+      "decoys": [
+        { "fr": "Tu mets combien de temps à choisir un film le soir ?", "en": "How long does it take you to pick a movie at night?" },
+        { "fr": "Tu mets combien de temps à sortir du lit après le réveil ?", "en": "How long does it take you to get out of bed after waking up?" },
+        { "fr": "Tu mets combien de temps à commander quand tout a l'air bon ?", "en": "How long does it take you to order when everything on the menu looks good?" },
+        { "fr": "Tu mets combien de temps à pardonner après une dispute ?", "en": "How long does it take you to forgive after an argument?" }
+      ],
+      "hints": [
+        { "fr": "Quelqu'un attend de tes nouvelles.", "en": "Someone is waiting to hear from you." },
+        { "fr": "Vu à 14 h 32. Toujours rien.", "en": "Seen at 2:32pm. Still nothing." }
+      ],
+      "tags": ["tech", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_daily_dish",
+      "question": { "fr": "Tu pourrais manger quel plat tous les jours sans craquer ?", "en": "What dish could you eat every single day without cracking?" },
+      "answers": [
+        { "fr": "Des pâtes, à l'infini", "en": "Pasta, forever" },
+        { "fr": "Des tacos, sans hésiter", "en": "Tacos, no hesitation" },
+        { "fr": "Une pizza, et je signe où ?", "en": "Pizza — where do I sign?" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ton plat signature en cuisine ?", "en": "What's your signature dish in the kitchen?" },
+        { "fr": "Tu commandes quoi quand tu ne veux pas réfléchir ?", "en": "What do you order when you don't want to think?" },
+        { "fr": "C'est quoi le plat qui te rappelle ton enfance ?", "en": "What dish takes you straight back to childhood?" },
+        { "fr": "Tu choisis quoi au resto pour un premier rendez-vous ?", "en": "What do you pick at a restaurant on a first date?" }
+      ],
+      "hints": [
+        { "fr": "Il faut penser sur le très long terme.", "en": "Think long-term. Very long-term." },
+        { "fr": "Tous les jours. Vraiment tous les jours.", "en": "Every day. Literally every day." }
+      ],
+      "tags": ["food"],
+      "spicy": 0
+    },
+    {
+      "id": "q_battery_now",
+      "question": { "fr": "Ton téléphone est à combien de batterie, là, tout de suite ?", "en": "What's your phone battery at, right now?" },
+      "answers": [
+        { "fr": "Au-dessus de 80 %, discipline", "en": "Above 80% — discipline" },
+        { "fr": "Autour de 50 %, ça vit", "en": "Around 50%, it's fine" },
+        { "fr": "En mode survie, sous 15 %", "en": "Survival mode, under 15%" }
+      ],
+      "decoys": [
+        { "fr": "Ton niveau d'énergie est à combien aujourd'hui ?", "en": "What's your energy level at today?" },
+        { "fr": "Ta motivation du lundi matin est à combien ?", "en": "What's your Monday-morning motivation at?" },
+        { "fr": "Ta jauge de patience est à combien ce soir ?", "en": "Where's your patience meter tonight?" },
+        { "fr": "Ta batterie sociale est à combien cette semaine ?", "en": "How full is your social battery this week?" }
+      ],
+      "hints": [
+        { "fr": "Un objet précis est concerné.", "en": "A specific object is involved." },
+        { "fr": "Le chargeur n'est jamais loin, normalement.", "en": "The charger should be nearby, in theory." }
+      ],
+      "tags": ["tech", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_useless_talent",
+      "question": { "fr": "C'est quoi ton talent le plus inutile ?", "en": "What's your most useless talent?" },
+      "answers": [
+        { "fr": "Des imitations étonnamment précises", "en": "Surprisingly accurate impressions" },
+        { "fr": "Une mémoire absurde pour les détails", "en": "An absurd memory for tiny details" },
+        { "fr": "Aucun, et c'est triste", "en": "None, and it's tragic" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ton talent caché ?", "en": "What's your hidden talent?" },
+        { "fr": "Tu ferais quoi comme numéro dans un télé-crochet ?", "en": "What would your talent-show act be?" },
+        { "fr": "C'est quoi le talent que tout le monde te reconnaît ?", "en": "What's the one talent everyone agrees you have?" },
+        { "fr": "C'est quoi ton tour préféré pour impressionner en soirée ?", "en": "What's your go-to party trick?" }
+      ],
+      "hints": [
+        { "fr": "Ça n'impressionne même pas les recruteurs.", "en": "It doesn't even impress recruiters." },
+        { "fr": "Zéro utilité, cent pour cent fierté.", "en": "Zero usefulness, one hundred percent pride." }
+      ],
+      "tags": ["self", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_lost_keys",
+      "question": { "fr": "Combien de fois par semaine tu cherches tes clés ?", "en": "How many times a week do you hunt for your keys?" },
+      "answers": [
+        { "fr": "Jamais, chaque chose a sa place", "en": "Never — everything has its place" },
+        { "fr": "Deux ou trois fois, classique", "en": "Two or three times, standard" },
+        { "fr": "C'est mon cardio quotidien", "en": "It's my daily cardio" }
+      ],
+      "decoys": [
+        { "fr": "Combien de fois par semaine tu oublies pourquoi tu es entré dans une pièce ?", "en": "How many times a week do you forget why you walked into a room?" },
+        { "fr": "Combien de fois par semaine tu perds le fil en pleine phrase ?", "en": "How many times a week do you lose your train of thought mid-sentence?" },
+        { "fr": "Combien de fois par semaine tu cherches le téléphone que tu as dans la main ?", "en": "How many times a week do you look for the phone that's already in your hand?" },
+        { "fr": "Combien de fois par semaine tu rates une marche ?", "en": "How many times a week do you miss a step on the stairs?" }
+      ],
+      "hints": [
+        { "fr": "Ça arrive souvent juste avant de sortir.", "en": "It usually happens right before leaving." },
+        { "fr": "Le canapé les avale, c'est prouvé.", "en": "The couch eats them. It's been proven." }
+      ],
+      "tags": ["habits", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_spider_home",
+      "question": { "fr": "Tu fais quoi quand tu croises une araignée chez toi ?", "en": "What do you do when you find a spider in your home?" },
+      "answers": [
+        { "fr": "Je l'escorte dehors poliment", "en": "I politely escort it outside" },
+        { "fr": "Pacte de non-agression immédiat", "en": "Immediate non-aggression pact" },
+        { "fr": "Je déménage, c'est chez elle maintenant", "en": "I move out — it lives there now" }
+      ],
+      "decoys": [
+        { "fr": "Tu fais quoi quand une guêpe entre dans la pièce ?", "en": "What do you do when a wasp flies into the room?" },
+        { "fr": "Tu fais quoi quand une souris traverse ta cuisine ?", "en": "What do you do when a mouse darts across your kitchen?" },
+        { "fr": "Tu fais quoi quand un moustique te nargue à 2 h du matin ?", "en": "What do you do when a mosquito taunts you at 2am?" },
+        { "fr": "Tu fais quoi quand un pigeon entre par la fenêtre ?", "en": "What do you do when a pigeon comes in through the window?" }
+      ],
+      "hints": [
+        { "fr": "Ça ne vole pas, ça grimpe.", "en": "It doesn't fly — it climbs." },
+        { "fr": "Huit pattes et une mauvaise réputation.", "en": "Eight legs and a bad reputation." }
+      ],
+      "tags": ["home", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_karaoke_song",
+      "question": { "fr": "Tu choisis quoi comme chanson au karaoké ?", "en": "What song do you go for at karaoke?" },
+      "answers": [
+        { "fr": "Un classique que tout le monde connaît", "en": "A classic everyone knows" },
+        { "fr": "Une ballade triste, à fond", "en": "A sad ballad, full volume" },
+        { "fr": "Un truc impossible, pour le drame", "en": "Something impossible, for the drama" }
+      ],
+      "decoys": [
+        { "fr": "Tu mets quoi comme chanson pour te motiver le matin ?", "en": "What song do you put on to hype yourself up in the morning?" },
+        { "fr": "Tu mets quoi comme première chanson en road trip ?", "en": "What's your first song on a road trip?" },
+        { "fr": "C'est quoi la chanson que tu connais par cœur sans fierté ?", "en": "What song do you know every word to, no pride attached?" },
+        { "fr": "Tu choisirais quoi comme musique d'entrée sur un ring ?", "en": "What would your walk-out song be in a boxing ring?" }
+      ],
+      "hints": [
+        { "fr": "Il y a un micro dans l'histoire.", "en": "There's a microphone involved." },
+        { "fr": "Les paroles défilent sur un écran.", "en": "The lyrics scroll across a screen." }
+      ],
+      "tags": ["music", "party"],
+      "spicy": 0
+    },
+    {
+      "id": "q_group_chat_role",
+      "question": { "fr": "C'est quoi ton rôle dans le groupe WhatsApp ?", "en": "What's your role in the group chat?" },
+      "answers": [
+        { "fr": "Le moteur de l'ambiance", "en": "The engine of the vibe" },
+        { "fr": "Observateur silencieux", "en": "Silent observer" },
+        { "fr": "Présent une fois sur dix", "en": "Present one time out of ten" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ton rôle en soirée ?", "en": "What's your role at a party?" },
+        { "fr": "C'est quoi ton rôle dans l'organisation des vacances ?", "en": "What's your role in planning the group trip?" },
+        { "fr": "C'est quoi ton rôle dans un projet de groupe ?", "en": "What's your role in a group project?" },
+        { "fr": "C'est quoi ton rôle dans les débats de famille ?", "en": "What's your role in family debates?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe dans ta poche.", "en": "It happens in your pocket." },
+        { "fr": "Les notifications y naissent par centaines.", "en": "Notifications are born there by the hundreds." }
+      ],
+      "tags": ["social", "tech"],
+      "spicy": 0
+    },
+    {
+      "id": "q_dance_floor",
+      "question": { "fr": "Tu mets combien de temps avant d'aller danser en soirée ?", "en": "How long before you hit the dance floor at a party?" },
+      "answers": [
+        { "fr": "Dix secondes, montre en main", "en": "Ten seconds, timed" },
+        { "fr": "Une heure d'échauffement mental", "en": "An hour of mental warm-up" },
+        { "fr": "Ça n'arrive jamais", "en": "It simply never happens" }
+      ],
+      "decoys": [
+        { "fr": "Tu mets combien de temps avant de chanter à un karaoké ?", "en": "How long before you grab the mic at karaoke?" },
+        { "fr": "Tu mets combien de temps avant de tutoyer un inconnu ?", "en": "How long before you're on a first-name basis with a stranger?" },
+        { "fr": "Tu mets combien de temps avant de raconter ta vie à quelqu'un ?", "en": "How long before you tell someone your whole life story?" },
+        { "fr": "Tu mets combien de temps avant de pleurer devant un film triste ?", "en": "How long into a sad movie before you cry?" }
+      ],
+      "hints": [
+        { "fr": "Il faut de la musique.", "en": "Music is required." },
+        { "fr": "Tes pieds sont les principaux concernés.", "en": "Your feet are the main characters." }
+      ],
+      "tags": ["party", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_real_breakfast",
+      "question": { "fr": "Tu manges quoi au petit-déj, en vrai ?", "en": "What do you actually eat for breakfast?" },
+      "answers": [
+        { "fr": "Un truc sucré vite fait", "en": "Something sweet, grabbed fast" },
+        { "fr": "Du salé, comme un champion", "en": "Savory, like a champion" },
+        { "fr": "Rien : café et espoir", "en": "Nothing: coffee and hope" }
+      ],
+      "decoys": [
+        { "fr": "Tu grignotes quoi devant une série ?", "en": "What do you snack on during a show?" },
+        { "fr": "Tu manges quoi à 16 h quand la faim attaque ?", "en": "What do you eat when the 4pm hunger hits?" },
+        { "fr": "Tu prends quoi en premier dans un buffet ?", "en": "What do you grab first at a buffet?" },
+        { "fr": "Tu manges quoi en cachette des autres ?", "en": "What do you eat in secret?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe avant 10 h, en théorie.", "en": "It happens before 10am, in theory." },
+        { "fr": "Le repas le plus important, paraît-il.", "en": "The most important meal of the day, allegedly." }
+      ],
+      "tags": ["food", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_head_age",
+      "question": { "fr": "Tu as quel âge dans ta tête ?", "en": "How old are you in your head?" },
+      "answers": [
+        { "fr": "12 ans, grand maximum", "en": "Twelve, tops" },
+        { "fr": "Mon âge réel, équilibre", "en": "My actual age — balance" },
+        { "fr": "75 ans un dimanche soir", "en": "Seventy-five on a Sunday night" }
+      ],
+      "decoys": [
+        { "fr": "Quel âge tu donnerais à ton sens de l'humour ?", "en": "How old would you say your sense of humor is?" },
+        { "fr": "À quel âge tu te vois enfin organisé ?", "en": "At what age do you see yourself finally being organized?" },
+        { "fr": "Quel âge a ta playlist la plus écoutée ?", "en": "How old is your most-played playlist?" },
+        { "fr": "À quel âge tu comptes arrêter les soirées ?", "en": "At what age do you plan to retire from parties?" }
+      ],
+      "hints": [
+        { "fr": "L'état civil n'est pas d'accord.", "en": "Your birth certificate disagrees." },
+        { "fr": "Ça se passe entre tes deux oreilles.", "en": "It's all happening between your ears." }
+      ],
+      "tags": ["self", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_password_same",
+      "question": { "fr": "Tu utilises le même mot de passe partout ?", "en": "Do you use the same password everywhere?" },
+      "answers": [
+        { "fr": "Oui, j'aime le danger", "en": "Yes — I like to live dangerously" },
+        { "fr": "Non, je suis très sérieux là-dessus", "en": "No, I'm very serious about this" },
+        { "fr": "Je refuse de répondre, par sécurité", "en": "I decline to answer, for security reasons" }
+      ],
+      "decoys": [
+        { "fr": "Tu lis vraiment les conditions d'utilisation ?", "en": "Do you actually read the terms and conditions?" },
+        { "fr": "Tu fais des sauvegardes de ton téléphone ?", "en": "Do you back up your phone?" },
+        { "fr": "Tu installes les mises à jour dès qu'on te le demande ?", "en": "Do you install updates the moment you're asked?" },
+        { "fr": "Tu éteins vraiment ton ordi le soir ?", "en": "Do you actually shut down your computer at night?" }
+      ],
+      "hints": [
+        { "fr": "Ta banque aimerait connaître la réponse.", "en": "Your bank would love to know the answer." },
+        { "fr": "« 123456 » n'est pas une personnalité.", "en": "'123456' is not a personality." }
+      ],
+      "tags": ["tech", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_trip_role",
+      "question": { "fr": "En voyage de groupe, tu es qui ?", "en": "On a group trip, who are you?" },
+      "answers": [
+        { "fr": "L'organisateur en chef", "en": "The planner-in-chief" },
+        { "fr": "L'ambiance sur pattes", "en": "The vibes on legs" },
+        { "fr": "Le passager passif mais adorable", "en": "The passive but adorable passenger" }
+      ],
+      "decoys": [
+        { "fr": "En soirée jeux de société, tu es qui ?", "en": "At board game night, who are you?" },
+        { "fr": "Au resto en groupe, tu es qui ?", "en": "At a big group dinner, who are you?" },
+        { "fr": "En randonnée, tu es qui ?", "en": "On a hike, who are you?" },
+        { "fr": "Dans un déménagement entre potes, tu es qui ?", "en": "When friends move apartments, who are you?" }
+      ],
+      "hints": [
+        { "fr": "Il faut faire des valises.", "en": "Packing is involved." },
+        { "fr": "Quelqu'un a réservé les billets. Ce n'est peut-être pas toi.", "en": "Someone booked the tickets. Possibly not you." }
+      ],
+      "tags": ["travel", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_dishes_wait",
+      "question": { "fr": "La vaisselle sale attend combien de temps chez toi ?", "en": "How long do dirty dishes wait at your place?" },
+      "answers": [
+        { "fr": "Zéro minute, lavée direct", "en": "Zero minutes — washed on sight" },
+        { "fr": "Une nuit, grand max", "en": "One night, tops" },
+        { "fr": "Trop longtemps, on ne juge pas", "en": "Too long. No judging." }
+      ],
+      "decoys": [
+        { "fr": "Ton linge propre attend combien de temps dans le panier ?", "en": "How long does clean laundry sit in the basket?" },
+        { "fr": "Tes poubelles attendent combien de temps avant de descendre ?", "en": "How long does the trash wait before going out?" },
+        { "fr": "Ton lit reste défait combien de temps ?", "en": "How long does your bed stay unmade?" },
+        { "fr": "Tes mails importants attendent combien de temps une réponse ?", "en": "How long do important emails wait for a reply?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe dans la cuisine.", "en": "It happens in the kitchen." },
+        { "fr": "L'évier a une mémoire.", "en": "The sink remembers." }
+      ],
+      "tags": ["home", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_crowd_spot",
+      "question": { "fr": "Au concert, tu te places où ?", "en": "At a concert, where do you stand?" },
+      "answers": [
+        { "fr": "Tout devant, au contact", "en": "Right at the front, in the thick of it" },
+        { "fr": "Au milieu, stratégique", "en": "In the middle, strategic" },
+        { "fr": "Au fond, près de la sortie", "en": "At the back, near the exit" }
+      ],
+      "decoys": [
+        { "fr": "Au cinéma, tu t'assois où ?", "en": "At the movies, where do you sit?" },
+        { "fr": "En réunion, tu te mets où ?", "en": "In a meeting room, where do you sit?" },
+        { "fr": "Dans le bus, tu vas où ?", "en": "On the bus, where do you go?" },
+        { "fr": "À une fête où tu ne connais personne, tu te poses où ?", "en": "At a party where you know no one, where do you park yourself?" }
+      ],
+      "hints": [
+        { "fr": "Il faudra rester debout longtemps.", "en": "You'll be standing for a while." },
+        { "fr": "Les enceintes décident pour tes oreilles.", "en": "The speakers make the decision for your ears." }
+      ],
+      "tags": ["music", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_quit_series",
+      "question": { "fr": "Tu abandonnes une série au bout de combien de temps ?", "en": "How long before you give up on a TV show?" },
+      "answers": [
+        { "fr": "Très vite, la vie est courte", "en": "Very fast — life is short" },
+        { "fr": "Je laisse une vraie chance", "en": "I give it a real chance" },
+        { "fr": "Jamais : je vais au bout en souffrant", "en": "Never: I finish it and I suffer" }
+      ],
+      "decoys": [
+        { "fr": "Tu abandonnes un livre au bout de combien de temps ?", "en": "How long before you give up on a book?" },
+        { "fr": "Tu abandonnes un régime au bout de combien de temps ?", "en": "How long before you give up on a diet?" },
+        { "fr": "Tu abandonnes un jeu trop dur au bout de combien d'essais ?", "en": "How many tries before you give up on a hard video game level?" },
+        { "fr": "Tu abandonnes une file d'attente au bout de combien de minutes ?", "en": "How many minutes before you give up on a queue?" }
+      ],
+      "hints": [
+        { "fr": "Le canapé est impliqué.", "en": "The couch is involved." },
+        { "fr": "« Épisode suivant dans 5… 4… 3… »", "en": "'Next episode in 5… 4… 3…'" }
+      ],
+      "tags": ["tech", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_selfie_tries",
+      "question": { "fr": "Il te faut combien d'essais pour une photo de toi correcte ?", "en": "How many attempts does a decent photo of you take?" },
+      "answers": [
+        { "fr": "Un seul, talent naturel", "en": "One. Natural talent." },
+        { "fr": "Une dizaine, soyons honnêtes", "en": "About ten, let's be honest" },
+        { "fr": "On ne compte plus depuis longtemps", "en": "We stopped counting long ago" }
+      ],
+      "decoys": [
+        { "fr": "Il te faut combien d'essais pour une crêpe correcte ?", "en": "How many attempts does a decent pancake take?" },
+        { "fr": "Il te faut combien d'essais pour un créneau parfait ?", "en": "How many attempts does a clean parallel park take?" },
+        { "fr": "Il te faut combien d'essais pour retenir un prénom ?", "en": "How many attempts does remembering a new name take?" },
+        { "fr": "Il te faut combien d'essais pour une bonne légende Instagram ?", "en": "How many attempts does a good Instagram caption take?" }
+      ],
+      "hints": [
+        { "fr": "L'angle change tout, paraît-il.", "en": "The angle changes everything, apparently." },
+        { "fr": "La caméra frontale est ton juge.", "en": "The front camera is your judge." }
+      ],
+      "tags": ["tech", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_found_money",
+      "question": { "fr": "Tu trouves 50 € par terre dans la rue : tu fais quoi ?", "en": "You find $50 on the sidewalk: what do you do?" },
+      "answers": [
+        { "fr": "Je cherche le propriétaire, juré", "en": "I look for the owner, I swear" },
+        { "fr": "Hop, dans la poche", "en": "Straight into the pocket" },
+        { "fr": "Je paie une tournée", "en": "Drinks are on me" }
+      ],
+      "decoys": [
+        { "fr": "On te rend 50 € que tu avais oubliés : tu fais quoi ?", "en": "Someone pays back $50 you'd forgotten about: what do you do?" },
+        { "fr": "Tu gagnes 50 € à un jeu à gratter : tu fais quoi ?", "en": "You win $50 on a scratch card: what do you do?" },
+        { "fr": "Tu trouves 50 € dans une vieille veste : tu fais quoi ?", "en": "You find $50 in an old jacket: what do you do?" },
+        { "fr": "Un distributeur te donne 50 € en trop : tu fais quoi ?", "en": "An ATM gives you an extra $50: what do you do?" }
+      ],
+      "hints": [
+        { "fr": "C'est ton jour de chance, en théorie.", "en": "It's your lucky day, in theory." },
+        { "fr": "Le trottoir offre, ta conscience observe.", "en": "The sidewalk provides; your conscience watches." }
+      ],
+      "tags": ["money", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_apocalypse_asset",
+      "question": { "fr": "C'est quoi ton plus grand atout en cas d'apocalypse ?", "en": "What's your biggest asset in an apocalypse?" },
+      "answers": [
+        { "fr": "Mon sang-froid légendaire", "en": "My legendary composure" },
+        { "fr": "Je cours étonnamment vite", "en": "I run surprisingly fast" },
+        { "fr": "Aucun, je pars en premier", "en": "None — I'm the first to go" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ton plus grand atout en entretien d'embauche ?", "en": "What's your biggest asset in a job interview?" },
+        { "fr": "C'est quoi ton plus grand atout dans un débat ?", "en": "What's your biggest asset in an argument?" },
+        { "fr": "C'est quoi ton plus grand atout en soirée quiz ?", "en": "What's your biggest asset at trivia night?" },
+        { "fr": "C'est quoi ton plus grand atout pour survivre à un repas de famille tendu ?", "en": "What's your biggest asset for surviving a tense family dinner?" }
+      ],
+      "hints": [
+        { "fr": "Le contexte est légèrement dramatique.", "en": "The setting is slightly dramatic." },
+        { "fr": "Fin du monde, début de ton CV de survie.", "en": "End of the world, start of your survival résumé." }
+      ],
+      "tags": ["hypothetical", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_cheat_board",
+      "question": { "fr": "Tu as déjà triché à un jeu de société ?", "en": "Have you ever cheated at a board game?" },
+      "answers": [
+        { "fr": "Jamais, je suis un exemple", "en": "Never — I'm a role model" },
+        { "fr": "Une ou deux fois, pour la bonne cause", "en": "Once or twice, for a good cause" },
+        { "fr": "Plus souvent que je ne l'avouerai", "en": "More often than I'll ever admit" }
+      ],
+      "decoys": [
+        { "fr": "Tu as déjà fait semblant de connaître une chanson ?", "en": "Have you ever faked knowing a song?" },
+        { "fr": "Tu as déjà ri à une blague pas comprise ?", "en": "Have you ever laughed at a joke you didn't get?" },
+        { "fr": "Tu as déjà recyclé un cadeau qu'on t'avait offert ?", "en": "Have you ever regifted a present?" },
+        { "fr": "Tu as déjà fait semblant d'être occupé pour éviter quelqu'un ?", "en": "Have you ever pretended to be busy to avoid someone?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe autour d'une table.", "en": "It happens around a table." },
+        { "fr": "La banque du Monopoly a porté plainte.", "en": "The Monopoly bank has pressed charges." }
+      ],
+      "tags": ["social", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_cold_shower",
+      "question": { "fr": "Tu tiendrais combien de temps sous une douche froide ?", "en": "How long could you last in a cold shower?" },
+      "answers": [
+        { "fr": "Trois secondes, et encore", "en": "Three seconds, if that" },
+        { "fr": "Une minute, en criant", "en": "One minute, screaming" },
+        { "fr": "Facile, je le fais déjà", "en": "Easy — I already do it" }
+      ],
+      "decoys": [
+        { "fr": "Tu tiendrais combien de temps sans café ?", "en": "How long could you last without coffee?" },
+        { "fr": "Tu tiendrais combien de temps en gainage ?", "en": "How long could you hold a plank?" },
+        { "fr": "Tu tiendrais combien de temps dans un sauna ?", "en": "How long could you last in a sauna?" },
+        { "fr": "Tu tiendrais combien de temps à fixer quelqu'un sans rire ?", "en": "How long could you hold eye contact without laughing?" }
+      ],
+      "hints": [
+        { "fr": "Il paraît que c'est bon pour la santé.", "en": "It's supposedly good for you." },
+        { "fr": "Le robinet est tourné du mauvais côté.", "en": "The tap is turned the wrong way." }
+      ],
+      "tags": ["habits", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_ikea_build",
+      "question": { "fr": "Un meuble en kit à monter : tu t'en sors comment ?", "en": "Flat-pack furniture: how do you fare?" },
+      "answers": [
+        { "fr": "Méthodique, comme un pro", "en": "Methodical, like a pro" },
+        { "fr": "Ça tient, on ne pose pas de questions", "en": "It stands. We don't ask questions." },
+        { "fr": "J'appelle à l'aide au bout de dix minutes", "en": "I call for help within ten minutes" }
+      ],
+      "decoys": [
+        { "fr": "Les impôts en ligne : tu t'en sors comment ?", "en": "Filing taxes online: how do you fare?" },
+        { "fr": "Un barbecue à allumer : tu t'en sors comment ?", "en": "Lighting a barbecue: how do you fare?" },
+        { "fr": "Une crevaison de vélo : tu t'en sors comment ?", "en": "A flat bike tire: how do you fare?" },
+        { "fr": "Un nœud de cravate : tu t'en sors comment ?", "en": "Tying a tie: how do you fare?" }
+      ],
+      "hints": [
+        { "fr": "Il y a une notice. En théorie.", "en": "There are instructions. In theory." },
+        { "fr": "Il restera toujours une vis mystère.", "en": "There's always one mystery screw left over." }
+      ],
+      "tags": ["home", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_pet_voice",
+      "question": { "fr": "Tu prends une voix spéciale pour parler aux animaux ?", "en": "Do you use a special voice to talk to animals?" },
+      "answers": [
+        { "fr": "Oui, et je ne m'excuserai pas", "en": "Yes, and I will not apologize" },
+        { "fr": "Non, on se parle d'égal à égal", "en": "No — we speak as equals" },
+        { "fr": "Seulement quand personne ne regarde", "en": "Only when no one's watching" }
+      ],
+      "decoys": [
+        { "fr": "Tu parles à tes plantes ?", "en": "Do you talk to your plants?" },
+        { "fr": "Tu parles à ton GPS ?", "en": "Do you talk back to your GPS?" },
+        { "fr": "Tu parles à la télé pendant un match ?", "en": "Do you yell at the TV during a game?" },
+        { "fr": "Tu engueules ton ordi quand il rame ?", "en": "Do you scold your computer when it lags?" }
+      ],
+      "hints": [
+        { "fr": "Le ton monte dans les aigus.", "en": "The pitch goes way up." },
+        { "fr": "« Qui c'est le bon toutou ? Qui c'est ? »", "en": "'Who's a good boy? Who is?'" }
+      ],
+      "tags": ["pets", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_outfit_repeat",
+      "question": { "fr": "Tu portes le même haut combien de jours d'affilée ?", "en": "How many days in a row do you wear the same top?" },
+      "answers": [
+        { "fr": "Un jour, hygiène d'abord", "en": "One day. Hygiene first." },
+        { "fr": "Deux-trois jours, réaliste", "en": "Two or three days, realistically" },
+        { "fr": "Le test de l'odeur décide", "en": "The sniff test decides" }
+      ],
+      "decoys": [
+        { "fr": "Tu manges le même plat combien de jours d'affilée ?", "en": "How many days in a row do you eat the same meal?" },
+        { "fr": "Tu gardes le même pyjama combien de nuits d'affilée ?", "en": "How many nights in a row do you keep the same pajamas?" },
+        { "fr": "Tu repousses ta lessive combien de jours d'affilée ?", "en": "How many days in a row do you put off laundry?" },
+        { "fr": "Tu gardes les mêmes draps combien de semaines d'affilée ?", "en": "How many weeks in a row do you keep the same sheets?" }
+      ],
+      "hints": [
+        { "fr": "Personne n'a rien remarqué, si ?", "en": "Nobody noticed, right?" },
+        { "fr": "Tu le portes peut-être en ce moment même.", "en": "You might be wearing it right now." }
+      ],
+      "tags": ["fashion", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_gym_real",
+      "question": { "fr": "Tu vas vraiment à la salle de sport combien de fois par mois ?", "en": "How many times a month do you actually go to the gym?" },
+      "answers": [
+        { "fr": "Zéro, et j'assume", "en": "Zero, and I own it" },
+        { "fr": "Quatre ou cinq fois, sérieux", "en": "Four or five times, for real" },
+        { "fr": "Tous les jours, évidemment (non)", "en": "Every day, obviously (no)" }
+      ],
+      "decoys": [
+        { "fr": "Ton vélo sort combien de fois par mois ?", "en": "How many times a month does your bike leave the house?" },
+        { "fr": "Ton four sert combien de fois par mois ?", "en": "How many times a month does your oven get used?" },
+        { "fr": "Ton aspirateur tourne combien de fois par mois ?", "en": "How many times a month does your vacuum run?" },
+        { "fr": "Ta belle vaisselle sert combien de fois par an ?", "en": "How many times a year does the fancy dinnerware come out?" }
+      ],
+      "hints": [
+        { "fr": "L'abonnement, lui, est bien débité chaque mois.", "en": "The membership fee shows up every month, though." },
+        { "fr": "Les haltères ne se soulèvent pas toutes seules.", "en": "The dumbbells won't lift themselves." }
+      ],
+      "tags": ["sport", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_first_app",
+      "question": { "fr": "C'est quoi la première appli que tu ouvres le matin ?", "en": "What's the first app you open in the morning?" },
+      "answers": [
+        { "fr": "Les messages, priorité humaine", "en": "Messages — humans first" },
+        { "fr": "Un réseau social, en pilote automatique", "en": "A social app, on autopilot" },
+        { "fr": "Mes mails, oui je sais", "en": "My email. Yes, I know." }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi la dernière appli que tu fermes le soir ?", "en": "What's the last app you close at night?" },
+        { "fr": "C'est quoi l'appli que tu ouvres aux toilettes ?", "en": "What's the app you open in the bathroom?" },
+        { "fr": "C'est quoi l'appli qui dévore ta batterie ?", "en": "What's the app devouring your battery?" },
+        { "fr": "C'est quoi l'appli que tu ne pourrais jamais supprimer ?", "en": "Which app could you never delete?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe sous la couette.", "en": "It happens under the covers." },
+        { "fr": "Avant même le brossage de dents.", "en": "Before you've even brushed your teeth." }
+      ],
+      "tags": ["tech", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_call_parents",
+      "question": { "fr": "Tu appelles tes parents combien de fois par semaine ?", "en": "How many times a week do you call your parents?" },
+      "answers": [
+        { "fr": "Tous les jours ou presque", "en": "Every day, or close to it" },
+        { "fr": "Une fois, le rituel", "en": "Once — it's the ritual" },
+        { "fr": "Moins que je ne devrais", "en": "Less than I should" }
+      ],
+      "decoys": [
+        { "fr": "Tu arroses tes plantes combien de fois par semaine ?", "en": "How many times a week do you water your plants?" },
+        { "fr": "Tu commandes à manger combien de fois par semaine ?", "en": "How many times a week do you order takeout?" },
+        { "fr": "Tu vérifies ton compte en banque combien de fois par semaine ?", "en": "How many times a week do you check your bank account?" },
+        { "fr": "Tu prends des nouvelles de tes amis d'enfance combien de fois par an ?", "en": "How many times a year do you check in on your childhood friends?" }
+      ],
+      "hints": [
+        { "fr": "Quelqu'un connaît ton plat préféré par cœur.", "en": "Someone who knows your favorite meal by heart." },
+        { "fr": "« Allô ? Tu manges bien, au moins ? »", "en": "'Hello? Are you eating enough?'" }
+      ],
+      "tags": ["social", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_wifi_ask",
+      "question": { "fr": "Tu demandes le code wifi au bout de combien de temps chez quelqu'un ?", "en": "How long before you ask for the wifi password at someone's place?" },
+      "answers": [
+        { "fr": "Dans les cinq premières minutes", "en": "Within the first five minutes" },
+        { "fr": "Au bout d'une petite heure", "en": "After about an hour" },
+        { "fr": "Jamais, je suis poli", "en": "Never — I'm polite" }
+      ],
+      "decoys": [
+        { "fr": "Tu ouvres le frigo de tes potes au bout de combien de temps ?", "en": "How long before you open a friend's fridge uninvited?" },
+        { "fr": "Tu t'étales dans le canapé comme chez toi au bout de combien de temps ?", "en": "How long before you sprawl on the couch like you live there?" },
+        { "fr": "Tu demandes où sont les toilettes au bout de combien de temps ?", "en": "How long before you ask where the bathroom is?" },
+        { "fr": "Tu proposes de l'aide en cuisine au bout de combien de temps ?", "en": "How long before you offer to help in the kitchen?" }
+      ],
+      "hints": [
+        { "fr": "C'est une question de survie moderne.", "en": "It's a matter of modern survival." },
+        { "fr": "Quatre petites barres de bonheur t'attendent.", "en": "Four little bars of happiness await." }
+      ],
+      "tags": ["tech", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_expired_yogurt",
+      "question": { "fr": "Un yaourt périmé depuis combien de jours, tu le manges quand même ?", "en": "How many days past its date will you still eat a yogurt?" },
+      "answers": [
+        { "fr": "Zéro, aucune négociation", "en": "Zero. No negotiation." },
+        { "fr": "Deux-trois jours, soyons souples", "en": "Two or three days, let's be flexible" },
+        { "fr": "Le nez décide, pas le calendrier", "en": "The nose decides, not the calendar" }
+      ],
+      "decoys": [
+        { "fr": "Tu gardes les restes au frigo combien de jours ?", "en": "How many days do leftovers live in your fridge?" },
+        { "fr": "Tu laisses mûrir un avocat combien de jours avant d'abandonner ?", "en": "How many days do you let an avocado ripen before giving up?" },
+        { "fr": "Le pain de la veille, tu le manges pendant combien de jours ?", "en": "How many days will you keep eating day-old bread?" },
+        { "fr": "Une banane tachetée, tu la tolères combien de jours ?", "en": "How many days do you tolerate a spotty banana?" }
+      ],
+      "hints": [
+        { "fr": "Le frigo est le théâtre du drame.", "en": "The fridge is the scene of the drama." },
+        { "fr": "Tout se joue autour d'une petite date imprimée.", "en": "It all comes down to a tiny printed date." }
+      ],
+      "tags": ["food", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_celebrity_dinner",
+      "question": { "fr": "Tu invites quelle célébrité, vivante ou morte, à dîner ?", "en": "Which celebrity, living or dead, do you invite to dinner?" },
+      "answers": [
+        { "fr": "Une légende de la musique", "en": "A music legend" },
+        { "fr": "Un génie scientifique", "en": "A scientific genius" },
+        { "fr": "Quelqu'un de très drôle, priorité ambiance", "en": "Someone hilarious — vibes first" }
+      ],
+      "decoys": [
+        { "fr": "Tu choisis quelle célébrité comme coloc pour un an ?", "en": "Which celebrity would you pick as a roommate for a year?" },
+        { "fr": "Tu voudrais quelle célébrité comme prof particulier ?", "en": "Which celebrity would you want as a private tutor?" },
+        { "fr": "Tu confierais le discours de ton mariage à quelle célébrité ?", "en": "Which celebrity would you trust with your wedding speech?" },
+        { "fr": "Quelle célébrité ferait le meilleur président ?", "en": "Which celebrity would make the best president?" }
+      ],
+      "hints": [
+        { "fr": "Il faudra prévoir un couvert de plus.", "en": "You'll need to set an extra place." },
+        { "fr": "Le menu compte moins que la conversation.", "en": "The menu matters less than the conversation." }
+      ],
+      "tags": ["hypothetical", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_rich_work",
+      "question": { "fr": "Tu gagnes 10 millions : tu continues à travailler ?", "en": "You win ten million: do you keep working?" },
+      "answers": [
+        { "fr": "Oui, j'aime ce que je fais", "en": "Yes — I actually like what I do" },
+        { "fr": "Oui, mais à mi-temps, soyons fous", "en": "Yes, but part-time, let's go wild" },
+        { "fr": "Ma lettre de démission est déjà prête", "en": "My resignation letter is pre-written" }
+      ],
+      "decoys": [
+        { "fr": "On te paie pareil pour rester chez toi : tu vas quand même au bureau ?", "en": "You get paid the same to stay home: do you still go to the office?" },
+        { "fr": "Tu pourrais prendre ta retraite demain : tu le ferais ?", "en": "You could retire tomorrow: would you?" },
+        { "fr": "Ton travail devient optionnel à vie : tu y retournes lundi ?", "en": "Work becomes optional forever: are you showing up Monday?" },
+        { "fr": "Une IA peut faire ton travail à ta place : tu la laisses faire ?", "en": "An AI can do your job for you: do you let it?" }
+      ],
+      "hints": [
+        { "fr": "Une très grosse somme vient de tomber.", "en": "A very large sum just landed." },
+        { "fr": "Pense jackpot, pas plan de carrière.", "en": "Think jackpot, not career plan." }
+      ],
+      "tags": ["money", "work"],
+      "spicy": 0
+    },
+    {
+      "id": "q_socks_sandals",
+      "question": { "fr": "Chaussettes dans les sandales : crime ou confort ?", "en": "Socks with sandals: crime or comfort?" },
+      "answers": [
+        { "fr": "Crime. Prison directe.", "en": "Crime. Straight to jail." },
+        { "fr": "Confort assumé, jugez-moi", "en": "Pure comfort — judge away" },
+        { "fr": "Uniquement à la maison, rideaux fermés", "en": "Only at home, curtains closed" }
+      ],
+      "decoys": [
+        { "fr": "Le jogging au restaurant : crime ou confort ?", "en": "Sweatpants at a restaurant: crime or comfort?" },
+        { "fr": "Le pyjama pour aller à la boulangerie : crime ou confort ?", "en": "Pajamas on a coffee run: crime or comfort?" },
+        { "fr": "Les crocs en soirée : crime ou confort ?", "en": "Crocs at a party: crime or comfort?" },
+        { "fr": "Le maillot de foot en dehors du stade : crime ou confort ?", "en": "A sports jersey far from any stadium: crime or comfort?" }
+      ],
+      "hints": [
+        { "fr": "C'est un débat de mode qui divise les familles.", "en": "It's a fashion debate that splits families." },
+        { "fr": "Tes orteils sont au chaud, ton honneur moins.", "en": "Your toes are warm; your dignity, less so." }
+      ],
+      "tags": ["fashion", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_morning_night",
+      "question": { "fr": "Tu es plutôt du matin ou du soir ?", "en": "Are you a morning person or a night owl?" },
+      "answers": [
+        { "fr": "Du matin, opérationnel à 7 h", "en": "Morning — fully operational by 7am" },
+        { "fr": "Du soir, clairement", "en": "Night, clearly" },
+        { "fr": "Ni l'un ni l'autre : 14 h-16 h max", "en": "Neither: I peak from 2 to 4pm" }
+      ],
+      "decoys": [
+        { "fr": "Tu es le plus productif à quel moment de la journée ?", "en": "What time of day are you most productive?" },
+        { "fr": "Tu préfères faire du sport à quel moment ?", "en": "When do you prefer to work out?" },
+        { "fr": "Douche du matin ou douche du soir ?", "en": "Morning shower or evening shower?" },
+        { "fr": "Tu cales tes rendez-vous tôt ou tard ?", "en": "Do you book your appointments early or late?" }
+      ],
+      "hints": [
+        { "fr": "Ton réveil et ton oreiller ont chacun un avis.", "en": "Your alarm and your pillow both have opinions." },
+        { "fr": "Alouette ou hibou, il faut choisir.", "en": "Lark or owl — pick a side." }
+      ],
+      "tags": ["self", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_grocery_snack",
+      "question": { "fr": "Tu entames tes courses avant de passer à la caisse ?", "en": "Do you start eating your groceries before checkout?" },
+      "answers": [
+        { "fr": "Jamais, c'est sacré", "en": "Never — that's sacred" },
+        { "fr": "Seulement en cas d'urgence", "en": "Only in an emergency" },
+        { "fr": "Systématiquement, zéro honte", "en": "Every single time, zero shame" }
+      ],
+      "decoys": [
+        { "fr": "Tu goûtes ce que tu cuisines avant de servir ?", "en": "Do you taste-test while cooking before serving?" },
+        { "fr": "Tu manges parfois le dessert avant le plat ?", "en": "Do you ever eat dessert before the main?" },
+        { "fr": "Tu piques des frites dans l'assiette des autres ?", "en": "Do you steal fries off other people's plates?" },
+        { "fr": "Tu ouvres les snacks du trajet avant même de démarrer ?", "en": "Do you open the road-trip snacks before leaving the driveway?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe entre les rayons.", "en": "It happens somewhere in the aisles." },
+        { "fr": "Le ticket de caisse arrive après la première bouchée.", "en": "The receipt comes after the first bite." }
+      ],
+      "tags": ["food", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_plane_seat",
+      "question": { "fr": "Dans l'avion : hublot ou couloir ?", "en": "On a plane: window or aisle?" },
+      "answers": [
+        { "fr": "La fenêtre, toujours", "en": "The window, always" },
+        { "fr": "Le couloir, stratégique", "en": "The aisle — strategic" },
+        { "fr": "Même la place du milieu ne me fait pas peur", "en": "Even the middle seat doesn't scare me" }
+      ],
+      "decoys": [
+        { "fr": "Dans le train, tu réserves quelle place ?", "en": "On a train, which seat do you book?" },
+        { "fr": "En classe, tu t'installais où ?", "en": "In school, where did you sit in class?" },
+        { "fr": "Dans une salle d'attente, tu t'assois où ?", "en": "In a waiting room, where do you sit?" },
+        { "fr": "En open space, tu choisirais quel bureau ?", "en": "In an open-plan office, which desk would you pick?" }
+      ],
+      "hints": [
+        { "fr": "Pense altitude de croisière.", "en": "Think cruising altitude." },
+        { "fr": "Le chariot de snacks arrive dans dix minutes.", "en": "The snack cart is ten minutes away." }
+      ],
+      "tags": ["travel"],
+      "spicy": 0
+    },
+    {
+      "id": "q_ghosts_believe",
+      "question": { "fr": "Tu crois aux fantômes ?", "en": "Do you believe in ghosts?" },
+      "answers": [
+        { "fr": "Non, et je dors très bien", "en": "No, and I sleep just fine" },
+        { "fr": "Non… mais je laisse une lumière allumée", "en": "No… but I do leave a light on" },
+        { "fr": "Oui, j'ai des preuves personnelles", "en": "Yes — I have personal evidence" }
+      ],
+      "decoys": [
+        { "fr": "Tu crois aux extraterrestres ?", "en": "Do you believe in aliens?" },
+        { "fr": "Tu crois à la malchance du vendredi 13 ?", "en": "Do you believe Friday the 13th is unlucky?" },
+        { "fr": "Tu crois aux signes astrologiques ?", "en": "Do you believe in star signs?" },
+        { "fr": "Tu crois que ton téléphone t'écoute ?", "en": "Do you believe your phone is listening to you?" }
+      ],
+      "hints": [
+        { "fr": "Le sujet fait frissonner les soirées pyjama.", "en": "It's a sleepover-classic shiver topic." },
+        { "fr": "Un craquement de plancher à 3 h du matin. C'était quoi ?", "en": "A floorboard creak at 3am. What was that?" }
+      ],
+      "tags": ["beliefs", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_wikipedia_2am",
+      "question": { "fr": "Tu finis sur quel genre de page Wikipédia à 2 h du matin ?", "en": "What kind of Wikipedia page do you end up on at 2am?" },
+      "answers": [
+        { "fr": "Des mystères et des disparitions", "en": "Unsolved mysteries and disappearances" },
+        { "fr": "Des animaux dont j'ignorais l'existence", "en": "Animals I didn't know existed" },
+        { "fr": "Aucune idée de comment je suis arrivé là", "en": "No idea how I even got there" }
+      ],
+      "decoys": [
+        { "fr": "Tu regardes quel genre de vidéos à 2 h du matin ?", "en": "What kind of videos are you watching at 2am?" },
+        { "fr": "C'est quoi ton genre de documentaire préféré ?", "en": "What's your documentary genre of choice?" },
+        { "fr": "Tu t'endors sur quel genre de podcast ?", "en": "What podcast genre do you fall asleep to?" },
+        { "fr": "Ton historique de recherche révélerait quoi sur toi ?", "en": "What would your search history reveal about you?" }
+      ],
+      "hints": [
+        { "fr": "L'insomnie ouvre des portes étranges.", "en": "Insomnia opens strange doors." },
+        { "fr": "Tout a commencé par un lien bleu innocent.", "en": "It all started with one innocent blue link." }
+      ],
+      "tags": ["tech", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_split_bill",
+      "question": { "fr": "L'addition en groupe, on la divise comment ?", "en": "Group dinner bill: how do we split it?" },
+      "answers": [
+        { "fr": "À parts égales, simplicité", "en": "Evenly — keep it simple" },
+        { "fr": "Chacun paie ce qu'il a pris, au centime", "en": "Everyone pays their exact share, to the cent" },
+        { "fr": "Je fais semblant de chercher ma carte", "en": "I do the slow wallet reach" }
+      ],
+      "decoys": [
+        { "fr": "Le airbnb entre potes, on le paie comment ?", "en": "A group Airbnb bill: how do we divide it?" },
+        { "fr": "Le cadeau commun, on s'organise comment ?", "en": "The group gift: how do we organize it?" },
+        { "fr": "L'essence du covoiturage, on la partage comment ?", "en": "Gas money on a carpool: how do we share it?" },
+        { "fr": "Les tournées au bar, ça marche comment dans votre groupe ?", "en": "Bar rounds: how do they work in your group?" }
+      ],
+      "hints": [
+        { "fr": "Le moment gênant arrive en fin de repas.", "en": "The awkward moment comes at the end of the meal." },
+        { "fr": "Quelqu'un sort la calculatrice. C'est peut-être toi.", "en": "Someone pulls out the calculator. Possibly you." }
+      ],
+      "tags": ["money", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_borrowed_return",
+      "question": { "fr": "Tu rends les affaires qu'on te prête au bout de combien de temps ?", "en": "How long before you return stuff people lend you?" },
+      "answers": [
+        { "fr": "Une semaine max, parole", "en": "A week max, promise" },
+        { "fr": "Quand on me les réclame", "en": "When they ask for it back" },
+        { "fr": "Rendre ? Pardon ?", "en": "Return? Sorry, what?" }
+      ],
+      "decoys": [
+        { "fr": "Tu rends un Tupperware au bout de combien de temps ?", "en": "How long before you return a Tupperware?" },
+        { "fr": "Tu rends un livre à la bibliothèque au bout de combien de temps ?", "en": "How long before you return a library book?" },
+        { "fr": "Tu renvoies un achat qui ne va pas au bout de combien de temps ?", "en": "How long before you send back an online order that doesn't fit?" },
+        { "fr": "Tu donnes suite à un « on se fait un truc bientôt » au bout de combien de temps ?", "en": "How long before you follow up on a 'we should hang out soon'?" }
+      ],
+      "hints": [
+        { "fr": "Ce n'était pas un cadeau, à la base.", "en": "It wasn't a gift, technically." },
+        { "fr": "Quelqu'un attend son bien en silence.", "en": "Someone is silently waiting for their stuff." }
+      ],
+      "tags": ["social", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_song_repeat",
+      "question": { "fr": "Tu peux écouter la même chanson combien de fois d'affilée ?", "en": "How many times in a row can you play the same song?" },
+      "answers": [
+        { "fr": "Deux fois, après j'ai honte", "en": "Twice — then the shame kicks in" },
+        { "fr": "Dix fois, facile", "en": "Ten times, easy" },
+        { "fr": "Jusqu'à la détester", "en": "Until I hate it" }
+      ],
+      "decoys": [
+        { "fr": "Tu peux raconter la même anecdote combien de fois au même groupe ?", "en": "How many times can you tell the same story to the same friends?" },
+        { "fr": "Tu peux enchaîner combien de « juste une dernière partie » ?", "en": "How many 'one last game's can you chain?" },
+        { "fr": "Tu peux dire « je pars dans 5 minutes » combien de fois de suite ?", "en": "How many times in a row can you say 'leaving in 5 minutes'?" },
+        { "fr": "Tu peux relire le même livre combien de fois ?", "en": "How many times can you reread the same book?" }
+      ],
+      "hints": [
+        { "fr": "Tes voisins connaissent le refrain maintenant.", "en": "Your neighbors know the chorus by now." },
+        { "fr": "Le bouton repeat chauffe dangereusement.", "en": "The repeat button is overheating." }
+      ],
+      "tags": ["music", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_nap_ideal",
+      "question": { "fr": "C'est quoi ta sieste idéale ?", "en": "What's your ideal nap?" },
+      "answers": [
+        { "fr": "Vingt minutes chrono, scientifique", "en": "Twenty minutes sharp — scientific" },
+        { "fr": "Deux heures, voyage complet", "en": "Two hours — a full journey" },
+        { "fr": "Le concept m'échappe complètement", "en": "The concept is completely lost on me" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ta grasse matinée idéale ?", "en": "What's your ideal sleep-in?" },
+        { "fr": "C'est quoi ta pause déjeuner idéale ?", "en": "What's your ideal lunch break?" },
+        { "fr": "C'est quoi ta séance de sport idéale ?", "en": "What's your ideal workout?" },
+        { "fr": "C'est quoi ta séance de méditation idéale ?", "en": "What's your ideal meditation session?" }
+      ],
+      "hints": [
+        { "fr": "Ça se pratique de préférence en début d'après-midi.", "en": "Best practiced in the early afternoon." },
+        { "fr": "Le canapé est l'équipement officiel.", "en": "The couch is the official equipment." }
+      ],
+      "tags": ["sleep", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_no_recipe",
+      "question": { "fr": "Tu sais cuisiner combien de plats sans recette ?", "en": "How many dishes can you cook without a recipe?" },
+      "answers": [
+        { "fr": "Trois ou quatre, du solide", "en": "Three or four, solid ones" },
+        { "fr": "Un seul, mais c'est un triomphe", "en": "Just one, but it's a triumph" },
+        { "fr": "Zéro, et tout le monde le sait", "en": "Zero, and everyone knows it" }
+      ],
+      "decoys": [
+        { "fr": "Tu connais combien de cocktails par cœur ?", "en": "How many cocktails can you mix from memory?" },
+        { "fr": "Tu connais combien de blagues racontables à table ?", "en": "How many jokes can you actually tell at dinner?" },
+        { "fr": "Tu maîtrises combien de pas de danse présentables ?", "en": "How many dance moves can you pull off in public?" },
+        { "fr": "Tu sais réparer combien de trucs dans une maison ?", "en": "How many things can you actually fix around the house?" }
+      ],
+      "hints": [
+        { "fr": "Les casseroles sont concernées.", "en": "Pots and pans are involved." },
+        { "fr": "Sans tuto, sans filet : toi face aux fourneaux.", "en": "No tutorial, no safety net — just you and the stove." }
+      ],
+      "tags": ["food", "skills"],
+      "spicy": 0
+    },
+    {
+      "id": "q_movie_sleep",
+      "question": { "fr": "Tu t'endors au bout de combien de temps devant un film le soir ?", "en": "How long into a movie do you fall asleep at night?" },
+      "answers": [
+        { "fr": "Jamais, je tiens jusqu'au bout", "en": "Never — I last to the very end" },
+        { "fr": "À la moitié, c'est rituel", "en": "Halfway through, like clockwork" },
+        { "fr": "Dans les cinq premières minutes, record", "en": "Within the first five minutes — record pace" }
+      ],
+      "decoys": [
+        { "fr": "Tu t'endors au bout de combien de temps en voiture comme passager ?", "en": "How long into a car ride do you fall asleep as a passenger?" },
+        { "fr": "Tu t'endors au bout de combien de temps en réunion qui s'éternise ?", "en": "How long into a never-ending meeting before you doze off?" },
+        { "fr": "Tu t'endors au bout de combien de temps dans l'avion ?", "en": "How long into a flight do you fall asleep?" },
+        { "fr": "Tu t'endors combien de temps après avoir dit « juste un épisode » ?", "en": "How long after saying 'just one episode' do you fall asleep?" }
+      ],
+      "hints": [
+        { "fr": "Le canapé gagne toujours à la fin.", "en": "The couch always wins in the end." },
+        { "fr": "Tu demanderas le résumé demain matin.", "en": "You'll be asking for the plot summary tomorrow." }
+      ],
+      "tags": ["habits", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_bad_gift",
+      "question": { "fr": "Tu réagis comment à un cadeau raté ?", "en": "How do you react to a terrible gift?" },
+      "answers": [
+        { "fr": "Oscar de la meilleure joie simulée", "en": "Oscar-worthy fake delight" },
+        { "fr": "Mon visage me trahit instantanément", "en": "My face betrays me instantly" },
+        { "fr": "Je dis la vérité, avec amour", "en": "I tell the truth, lovingly" }
+      ],
+      "decoys": [
+        { "fr": "Tu réagis comment à une coupe ratée chez le coiffeur ?", "en": "How do you react to a bad haircut at the salon?" },
+        { "fr": "Tu réagis comment à un plat raté qu'on a cuisiné pour toi ?", "en": "How do you react to a botched meal someone cooked for you?" },
+        { "fr": "Tu réagis comment au diaporama de 200 photos de vacances ?", "en": "How do you react to a 200-photo vacation slideshow?" },
+        { "fr": "Tu réagis comment à une blague qui tombe à plat ?", "en": "How do you react when someone's joke lands flat?" }
+      ],
+      "hints": [
+        { "fr": "Il y a du papier cadeau dans l'histoire.", "en": "Wrapping paper is involved." },
+        { "fr": "« Il ne fallait pas… vraiment pas. »", "en": "'You shouldn't have. Really. You shouldn't have.'" }
+      ],
+      "tags": ["social", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_self_checkout",
+      "question": { "fr": "Caisse automatique ou caissier humain ?", "en": "Self-checkout or human cashier?" },
+      "answers": [
+        { "fr": "Automatique, vitesse avant tout", "en": "Self-checkout — speed above all" },
+        { "fr": "Humain, pour le petit bonjour", "en": "Human, for the little hello" },
+        { "fr": "Celle où il y a le moins de queue", "en": "Whichever line is shorter" }
+      ],
+      "decoys": [
+        { "fr": "Commander en ligne ou en magasin ?", "en": "Shopping online or in-store?" },
+        { "fr": "Distributeur ou guichet avec un humain à la banque ?", "en": "ATM or bank teller?" },
+        { "fr": "Borne de commande ou comptoir au fast-food ?", "en": "Kiosk or counter at a fast-food place?" },
+        { "fr": "Chatbot ou conseiller au téléphone ?", "en": "Chatbot or human support on the phone?" }
+      ],
+      "hints": [
+        { "fr": "Ça se joue au supermarché.", "en": "This one happens at the supermarket." },
+        { "fr": "« Article non reconnu. Veuillez patienter. »", "en": "'Unexpected item in the bagging area.'" }
+      ],
+      "tags": ["habits", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_stairs_elevator",
+      "question": { "fr": "Trois étages à monter : escaliers ou ascenseur ?", "en": "Three floors up: stairs or elevator?" },
+      "answers": [
+        { "fr": "Escaliers, fierté sportive", "en": "Stairs — athletic pride" },
+        { "fr": "Ascenseur, sans culpabilité", "en": "Elevator, guilt-free" },
+        { "fr": "Ça dépend qui regarde", "en": "Depends who's watching" }
+      ],
+      "decoys": [
+        { "fr": "Cinq cents mètres à faire : à pied ou en voiture ?", "en": "Five hundred meters to go: walk or drive?" },
+        { "fr": "Vélo ou métro pour aller au travail ?", "en": "Bike or metro to get to work?" },
+        { "fr": "Marcher sur l'escalator ou se laisser porter ?", "en": "Walk up the escalator or just ride it?" },
+        { "fr": "Porter les courses en un voyage ou en deux ?", "en": "Carry the groceries in one trip or two?" }
+      ],
+      "hints": [
+        { "fr": "Il y a un bouton, et il tente tout le monde.", "en": "There's a button, and it tempts everyone." },
+        { "fr": "Tes mollets votent non, le petit « ding » vote oui.", "en": "Your calves vote no; the little ding votes yes." }
+      ],
+      "tags": ["habits", "sport"],
+      "spicy": 0
+    },
+    {
+      "id": "q_spoilers",
+      "question": { "fr": "Tu vas lire les spoilers exprès ?", "en": "Do you look up spoilers on purpose?" },
+      "answers": [
+        { "fr": "Jamais, le suspense est sacré", "en": "Never — suspense is sacred" },
+        { "fr": "Seulement quand je stresse trop", "en": "Only when the stress gets too much" },
+        { "fr": "Toujours, je veux savoir où je mets les pieds", "en": "Always — I need to know what I'm walking into" }
+      ],
+      "decoys": [
+        { "fr": "Tu lis la dernière page d'un livre en premier ?", "en": "Do you read the last page of a book first?" },
+        { "fr": "Tu regardes les avis avant de choisir un resto ?", "en": "Do you check the reviews before picking a restaurant?" },
+        { "fr": "Tu secoues les cadeaux avant de les ouvrir ?", "en": "Do you shake presents before opening them?" },
+        { "fr": "Tu regardes le score avant de voir le match en replay ?", "en": "Do you check the score before watching a game on replay?" }
+      ],
+      "hints": [
+        { "fr": "Le suspense est en danger de mort.", "en": "Suspense is in mortal danger." },
+        { "fr": "Tu sauras qui meurt à la fin avant tout le monde.", "en": "You'll know who dies at the end before everyone else." }
+      ],
+      "tags": ["habits", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_guilty_music",
+      "question": { "fr": "C'est quoi ton plaisir coupable musical ?", "en": "What's your guilty-pleasure music?" },
+      "answers": [
+        { "fr": "Des tubes des années 2000", "en": "Early-2000s bangers" },
+        { "fr": "De la pop ultra sucrée", "en": "Aggressively sugary pop" },
+        { "fr": "Coupable ? J'assume tout.", "en": "Guilty? I regret nothing." }
+      ],
+      "decoys": [
+        { "fr": "Tu mets quoi quand tu es seul en voiture ?", "en": "What do you blast when you're alone in the car?" },
+        { "fr": "C'est quoi la bande-son de ta douche ?", "en": "What's your shower soundtrack?" },
+        { "fr": "Tu écoutes quoi pour nettoyer l'appart ?", "en": "What do you put on to clean the apartment?" },
+        { "fr": "C'est quoi le son qui te met direct de bonne humeur ?", "en": "What music instantly puts you in a good mood?" }
+      ],
+      "hints": [
+        { "fr": "Ton historique d'écoute garde le secret.", "en": "Your listening history keeps the secret." },
+        { "fr": "Playlist privée, volume maximal.", "en": "Private playlist, maximum volume." }
+      ],
+      "tags": ["music", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_hiccup_cure",
+      "question": { "fr": "C'est quoi ta technique anti-hoquet ?", "en": "What's your hiccup cure?" },
+      "answers": [
+        { "fr": "Une astuce de grand-mère infaillible", "en": "An infallible grandma trick" },
+        { "fr": "Un truc trouvé sur Internet à 1 h du matin", "en": "Something found online at 1am" },
+        { "fr": "Rien : je subis et j'attends", "en": "Nothing — I endure and wait" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi ta technique anti-insomnie ?", "en": "What's your can't-sleep cure?" },
+        { "fr": "C'est quoi ta technique contre le mal des transports ?", "en": "What's your motion-sickness fix?" },
+        { "fr": "C'est quoi ta technique contre le trac ?", "en": "What's your stage-fright trick?" },
+        { "fr": "C'est quoi ta technique pour stopper un fou rire au mauvais moment ?", "en": "What's your trick for killing a laughing fit at the worst moment?" }
+      ],
+      "hints": [
+        { "fr": "Ça arrive sans prévenir et ça rythme tes phrases.", "en": "It arrives unannounced and punctuates your sentences." },
+        { "fr": "*Hips* — voilà l'indice.", "en": "*Hic* — there's your clue." }
+      ],
+      "tags": ["silly", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_run_for_bus",
+      "question": { "fr": "Tu cours pour attraper un bus ?", "en": "Do you run to catch a bus?" },
+      "answers": [
+        { "fr": "Sprint olympique, toujours", "en": "Olympic sprint, every time" },
+        { "fr": "Petit jogging digne", "en": "A dignified little jog" },
+        { "fr": "Jamais : il y en aura un autre", "en": "Never — there'll be another one" }
+      ],
+      "decoys": [
+        { "fr": "Tu accélères quand le feu piéton clignote ?", "en": "Do you speed up when the crosswalk light starts blinking?" },
+        { "fr": "Tu cours quand on sonne à la porte ?", "en": "Do you run when the doorbell rings?" },
+        { "fr": "Tu te lèves dès que l'avion atterrit ?", "en": "Do you jump up the second the plane lands?" },
+        { "fr": "Tu fonces quand une caisse se libère au supermarché ?", "en": "Do you dash when a new checkout lane opens?" }
+      ],
+      "hints": [
+        { "fr": "Le chauffeur t'a vu. Peut-être.", "en": "The driver saw you. Maybe." },
+        { "fr": "Les portes se ferment dans trois… deux…", "en": "Doors closing in three… two…" }
+      ],
+      "tags": ["relatable", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_birthdays_memory",
+      "question": { "fr": "Tu connais combien d'anniversaires par cœur ?", "en": "How many birthdays do you know by heart?" },
+      "answers": [
+        { "fr": "Une bonne dizaine, je suis fiable", "en": "A good ten — I'm reliable" },
+        { "fr": "Trois, famille proche uniquement", "en": "Three — immediate family only" },
+        { "fr": "Sans les notifications, zéro", "en": "Without notifications? Zero." }
+      ],
+      "decoys": [
+        { "fr": "Tu connais combien de numéros de téléphone par cœur ?", "en": "How many phone numbers do you know by heart?" },
+        { "fr": "Tu retiens vraiment combien de codes PIN ?", "en": "How many PINs do you actually remember?" },
+        { "fr": "Tu connais les prénoms de combien de tes voisins ?", "en": "How many of your neighbors' names do you know?" },
+        { "fr": "Tu connais combien d'adresses par cœur ?", "en": "How many addresses do you know by heart?" }
+      ],
+      "hints": [
+        { "fr": "Les réseaux sociaux ont tué cette compétence.", "en": "Social media killed this skill." },
+        { "fr": "Quelque part, un gâteau attend que tu t'en souviennes.", "en": "Somewhere, a cake is waiting for you to remember." }
+      ],
+      "tags": ["social", "memory"],
+      "spicy": 0
+    },
+    {
+      "id": "q_ready_time",
+      "question": { "fr": "Il te faut combien de temps pour être prêt à sortir ?", "en": "How long does it take you to get ready to go out?" },
+      "answers": [
+        { "fr": "Dix minutes chrono", "en": "Ten minutes flat" },
+        { "fr": "Une heure, je ne négocie pas", "en": "An hour — non-negotiable" },
+        { "fr": "Ça dépend pour qui", "en": "Depends who it's for" }
+      ],
+      "decoys": [
+        { "fr": "Il te faut combien de temps pour faire ta valise ?", "en": "How long does it take you to pack a suitcase?" },
+        { "fr": "Il te faut combien de temps pour écrire un message important ?", "en": "How long does it take you to write an important text?" },
+        { "fr": "Il te faut combien de temps pour rendre l'appart présentable avant des invités ?", "en": "How long to make the apartment guest-ready?" },
+        { "fr": "Il te faut combien de temps pour faire les courses de la semaine ?", "en": "How long does the weekly grocery run take you?" }
+      ],
+      "hints": [
+        { "fr": "Le miroir et toi avez rendez-vous.", "en": "You and the mirror have an appointment." },
+        { "fr": "Quelqu'un klaxonne déjà en bas.", "en": "Someone's already honking downstairs." }
+      ],
+      "tags": ["habits", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_cancel_joy",
+      "question": { "fr": "Une soirée annulée à la dernière minute : tu ressens quoi ?", "en": "Plans get cancelled last minute: what do you feel?" },
+      "answers": [
+        { "fr": "Une vraie déception", "en": "Genuine disappointment" },
+        { "fr": "Un soulagement coupable", "en": "Guilty relief" },
+        { "fr": "Le meilleur moment de ma semaine", "en": "The highlight of my week" }
+      ],
+      "decoys": [
+        { "fr": "Une réunion annulée à la dernière minute : tu ressens quoi ?", "en": "A meeting gets cancelled last minute: what do you feel?" },
+        { "fr": "Le cours de sport est annulé : tu ressens quoi ?", "en": "Your workout class gets cancelled: what do you feel?" },
+        { "fr": "Le repas de famille est reporté : tu ressens quoi ?", "en": "The family dinner gets postponed: what do you feel?" },
+        { "fr": "Ton vol est décalé d'un jour : tu ressens quoi ?", "en": "Your flight gets moved by a day: what do you feel?" }
+      ],
+      "hints": [
+        { "fr": "La notification est tombée, ton cœur a fait un truc.", "en": "The notification dropped, and your heart did a thing." },
+        { "fr": "Le pyjama reprend ses droits à 19 h.", "en": "Pajamas reclaim the throne at 7pm." }
+      ],
+      "tags": ["social", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_elevator_stranger",
+      "question": { "fr": "Tu fais quoi dans un ascenseur avec un inconnu ?", "en": "What do you do in an elevator with a stranger?" },
+      "answers": [
+        { "fr": "Je fixe n'importe quoi sauf la personne", "en": "I stare intently at anything but the person" },
+        { "fr": "Petit sourire, puis silence", "en": "Polite smile, then silence" },
+        { "fr": "Je lance la conversation, évidemment", "en": "I start a conversation, obviously" }
+      ],
+      "decoys": [
+        { "fr": "Tu fais quoi dans une salle d'attente bondée ?", "en": "What do you do in a packed waiting room?" },
+        { "fr": "Tu fais quoi assis à côté d'un inconnu dans le train ?", "en": "What do you do seated next to a stranger on a train?" },
+        { "fr": "Tu fais quoi pendant que le coiffeur te coupe les cheveux ?", "en": "What do you do while the hairdresser cuts your hair?" },
+        { "fr": "Tu fais quoi quand tu aperçois un collègue dans la rue ?", "en": "What do you do when you spot a coworker on the street?" }
+      ],
+      "hints": [
+        { "fr": "Le trajet dure douze secondes. Une éternité.", "en": "The ride lasts twelve seconds. An eternity." },
+        { "fr": "Ding. Enfin libéré.", "en": "Ding. Sweet freedom." }
+      ],
+      "tags": ["social", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_sunday_6am",
+      "question": { "fr": "Qu'est-ce qui peut te faire lever à 6 h un dimanche ?", "en": "What could get you up at 6am on a Sunday?" },
+      "answers": [
+        { "fr": "Un avion à prendre, et encore", "en": "A flight to catch — barely" },
+        { "fr": "De la bouffe gratuite, promise solennellement", "en": "Free food, solemnly promised" },
+        { "fr": "Rien. Absolument rien.", "en": "Nothing. Absolutely nothing." }
+      ],
+      "decoys": [
+        { "fr": "Qu'est-ce qui peut te faire sortir sous une pluie battante ?", "en": "What could get you outside in pouring rain?" },
+        { "fr": "Qu'est-ce qui peut te faire traverser la ville un soir de semaine ?", "en": "What could get you across town on a weeknight?" },
+        { "fr": "Qu'est-ce qui peut te faire faire la queue pendant deux heures ?", "en": "What could make you stand in line for two hours?" },
+        { "fr": "Qu'est-ce qui peut te faire quitter une soirée avant minuit ?", "en": "What could make you leave a party before midnight?" }
+      ],
+      "hints": [
+        { "fr": "Le jour le plus sacré du repos est en jeu.", "en": "The most sacred day of rest is at stake." },
+        { "fr": "Le soleil n'est même pas encore levé.", "en": "The sun isn't even up yet." }
+      ],
+      "tags": ["sleep", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_pizza_crust",
+      "question": { "fr": "Tu manges la croûte de la pizza ?", "en": "Do you eat the pizza crust?" },
+      "answers": [
+        { "fr": "Jusqu'à la dernière miette", "en": "Down to the last crumb" },
+        { "fr": "Seulement avec une sauce", "en": "Only with a dipping sauce" },
+        { "fr": "Jamais, ça reste au bord de l'assiette", "en": "Never — it stays at the edge of the plate" }
+      ],
+      "decoys": [
+        { "fr": "Tu finis toujours ton assiette ?", "en": "Do you always clean your plate?" },
+        { "fr": "Tu manges le pain avant l'arrivée des plats ?", "en": "Do you eat the bread basket before the food arrives?" },
+        { "fr": "Tu manges les frites trop cuites du fond ?", "en": "Do you eat the overdone fries at the bottom?" },
+        { "fr": "Tu finis les assiettes des autres ?", "en": "Do you finish other people's plates?" }
+      ],
+      "hints": [
+        { "fr": "Le débat se joue sur les bords.", "en": "The debate lives on the outer rim." },
+        { "fr": "La partie sans fromage, abandonnée par tant de gens.", "en": "The cheeseless part so many leave behind." }
+      ],
+      "tags": ["food", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_phone_drops",
+      "question": { "fr": "Ton écran de téléphone a survécu à combien de chutes ?", "en": "How many drops has your phone screen survived?" },
+      "answers": [
+        { "fr": "Zéro, je suis très soigneux", "en": "Zero — I'm extremely careful" },
+        { "fr": "Quelques accidents, rien de grave", "en": "A few accidents, nothing serious" },
+        { "fr": "On frôle la fin tragique", "en": "We're nearing the tragic end" }
+      ],
+      "decoys": [
+        { "fr": "Tes lunettes de soleil survivent à combien d'étés ?", "en": "How many summers do your sunglasses survive?" },
+        { "fr": "Tes écouteurs survivent combien de mois ?", "en": "How many months do your earbuds survive?" },
+        { "fr": "Tes chargeurs survivent combien de temps ?", "en": "How long do your phone chargers survive?" },
+        { "fr": "Ta valise a survécu à combien de voyages ?", "en": "How many trips has your suitcase survived?" }
+      ],
+      "hints": [
+        { "fr": "La gravité est l'ennemie jurée.", "en": "Gravity is the sworn enemy." },
+        { "fr": "Ce petit bruit au contact du carrelage…", "en": "That little sound it makes meeting the tile floor…" }
+      ],
+      "tags": ["tech", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_food_share",
+      "question": { "fr": "Est-ce que tu partages ton dessert ?", "en": "Do you share your dessert?" },
+      "answers": [
+        { "fr": "Avec plaisir, vraiment", "en": "Gladly, honestly" },
+        { "fr": "Une bouchée. Une.", "en": "One bite. One." },
+        { "fr": "Non négociable. Jamais.", "en": "Non-negotiable. Never." }
+      ],
+      "decoys": [
+        { "fr": "Tu prêtes tes vêtements préférés ?", "en": "Do you lend out your favorite clothes?" },
+        { "fr": "Tu prêtes ton chargeur en soirée ?", "en": "Do you lend your charger at a party?" },
+        { "fr": "Tu donnes tes bonnes adresses de restos ?", "en": "Do you give away your best restaurant finds?" },
+        { "fr": "Tu prêtes tes livres ?", "en": "Do you lend your books?" }
+      ],
+      "hints": [
+        { "fr": "Ça arrive en fin de repas.", "en": "It happens at the end of a meal." },
+        { "fr": "Une cuillère ennemie s'approche de ton assiette.", "en": "An enemy spoon is approaching your plate." }
+      ],
+      "tags": ["food", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_winter_summer",
+      "question": { "fr": "Été ou hiver ?", "en": "Summer or winter?" },
+      "answers": [
+        { "fr": "Le chaud, toujours", "en": "Heat, always" },
+        { "fr": "Le froid : on peut toujours se couvrir", "en": "Cold — you can always add layers" },
+        { "fr": "Ni l'un ni l'autre : 21 °C à vie", "en": "Neither: 21°C for life" }
+      ],
+      "decoys": [
+        { "fr": "Tu préfères avoir trop chaud ou trop froid ?", "en": "Would you rather be too hot or too cold?" },
+        { "fr": "Vacances au soleil ou au ski ?", "en": "Sun holiday or ski trip?" },
+        { "fr": "Canicule ou tempête de neige ?", "en": "Heatwave or snowstorm?" },
+        { "fr": "C'est quoi ta météo idéale pour un week-end ?", "en": "What's your ideal weekend weather?" }
+      ],
+      "hints": [
+        { "fr": "Ton armoire change deux fois par an pour ça.", "en": "Your wardrobe flips twice a year over this." },
+        { "fr": "Maillot de bain contre bonnet : le duel.", "en": "Swimsuit versus beanie: the duel." }
+      ],
+      "tags": ["debate", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_dentist_floss",
+      "question": { "fr": "Tu mens à ton dentiste sur le fil dentaire ?", "en": "Do you lie to your dentist about flossing?" },
+      "answers": [
+        { "fr": "Non, je suis irréprochable là-dessus", "en": "No — I'm genuinely virtuous on this one" },
+        { "fr": "Un petit oui de politesse", "en": "A polite little yes" },
+        { "fr": "On ment tous les deux et on le sait", "en": "We both lie, and we both know it" }
+      ],
+      "decoys": [
+        { "fr": "Tu mens au médecin sur ton hygiène de vie ?", "en": "Do you lie to your doctor about your lifestyle?" },
+        { "fr": "Tu mens au coach sur tes étirements à la maison ?", "en": "Do you lie to your trainer about stretching at home?" },
+        { "fr": "Tu mens sur « oui oui, j'ai vu ce film » ?", "en": "Do you lie about having seen that movie everyone loves?" },
+        { "fr": "Tu mens sur ta consommation de légumes ?", "en": "Do you lie about how many vegetables you eat?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe une fois par an, dans un fauteuil qui s'incline.", "en": "It happens once a year, in a chair that reclines." },
+        { "fr": "Un petit fil blanc est au cœur de l'affaire.", "en": "A little white string is at the heart of the case." }
+      ],
+      "tags": ["habits", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_daily_steps",
+      "question": { "fr": "Tu fais combien de pas par jour, vraiment ?", "en": "How many steps a day do you really take?" },
+      "answers": [
+        { "fr": "Dix mille, objectif atteint", "en": "Ten thousand — target hit" },
+        { "fr": "Quelques milliers, sans héroïsme", "en": "A few thousand, nothing heroic" },
+        { "fr": "Mon appli a pitié de moi", "en": "My tracking app pities me" }
+      ],
+      "decoys": [
+        { "fr": "Tu débloques ton téléphone combien de fois par jour ?", "en": "How many times a day do you unlock your phone?" },
+        { "fr": "Tu reçois combien de notifications par jour ?", "en": "How many notifications do you get a day?" },
+        { "fr": "Tu scrolles combien de mètres par jour ?", "en": "How many meters do you scroll a day?" },
+        { "fr": "Tu fais combien de clics par jour au travail ?", "en": "How many clicks a day at work?" }
+      ],
+      "hints": [
+        { "fr": "Ta montre ou ton téléphone tient les comptes.", "en": "Your watch or your phone keeps the score." },
+        { "fr": "Dix mille, paraît-il. Paraît-il.", "en": "Ten thousand, allegedly. Allegedly." }
+      ],
+      "tags": ["sport", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_water_glasses",
+      "question": { "fr": "Tu bois combien de verres d'eau par jour ?", "en": "How many glasses of water do you drink a day?" },
+      "answers": [
+        { "fr": "Huit, comme le manuel le demande", "en": "Eight, just like the manual says" },
+        { "fr": "Deux ou trois, en comptant large", "en": "Two or three, counting generously" },
+        { "fr": "Le café compte ?", "en": "Does coffee count?" }
+      ],
+      "decoys": [
+        { "fr": "Tu manges combien de fruits par semaine ?", "en": "How many pieces of fruit do you eat a week?" },
+        { "fr": "Tu fais combien de pauses étirement par jour de télétravail ?", "en": "How many stretch breaks per remote-work day?" },
+        { "fr": "Tu manges combien de portions de légumes par jour ?", "en": "How many servings of vegetables a day?" },
+        { "fr": "Tu fais combien de minutes de sport par jour ?", "en": "How many minutes of exercise a day?" }
+      ],
+      "hints": [
+        { "fr": "Ton corps en est fait à 60 %.", "en": "Your body is 60% made of it." },
+        { "fr": "Transparent, gratuit, et pourtant si négligé.", "en": "Clear, free, and yet so neglected." }
+      ],
+      "tags": ["habits", "health"],
+      "spicy": 0
+    },
+    {
+      "id": "q_emoji_top",
+      "question": { "fr": "C'est quoi ton emoji le plus utilisé ?", "en": "What's your most-used emoji?" },
+      "answers": [
+        { "fr": "Celui qui pleure de rire", "en": "The crying-laughing one" },
+        { "fr": "Le pouce, efficace", "en": "The thumbs-up — efficient" },
+        { "fr": "Un cœur, quelque part", "en": "Some kind of heart" }
+      ],
+      "decoys": [
+        { "fr": "C'est quoi l'emoji que tu détestes ?", "en": "Which emoji do you hate?" },
+        { "fr": "C'est quoi le dernier emoji que tu as envoyé ?", "en": "What's the last emoji you sent?" },
+        { "fr": "C'est quoi l'emoji qui te représente le mieux ?", "en": "Which emoji represents you best?" },
+        { "fr": "Tu réponds quoi quand tu ne sais pas quoi répondre ?", "en": "What do you reply when you don't know what to say?" }
+      ],
+      "hints": [
+        { "fr": "Ton clavier connaît la réponse par cœur.", "en": "Your keyboard knows the answer by heart." },
+        { "fr": "Petit, souvent jaune, absolument partout.", "en": "Small, usually yellow, absolutely everywhere." }
+      ],
+      "tags": ["tech", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_voice_notes",
+      "question": { "fr": "Les vocaux de cinq minutes : tu en penses quoi ?", "en": "Five-minute voice notes: what's your take?" },
+      "answers": [
+        { "fr": "J'adore, c'est du contenu gratuit", "en": "Love them — free entertainment" },
+        { "fr": "Acceptable en cas de crise uniquement", "en": "Acceptable in emergencies only" },
+        { "fr": "Crime contre l'humanité", "en": "A crime against humanity" }
+      ],
+      "decoys": [
+        { "fr": "Les stories en 40 épisodes : tu en penses quoi ?", "en": "40-part stories: what's your take?" },
+        { "fr": "Les groupes de plus de 20 personnes : tu en penses quoi ?", "en": "Group chats with 20+ people: what's your take?" },
+        { "fr": "Les gens qui répondent uniquement en GIF : tu en penses quoi ?", "en": "People who reply only in GIFs: what's your take?" },
+        { "fr": "Les pavés de texte de trois écrans : tu en penses quoi ?", "en": "Three-screen text walls: what's your take?" }
+      ],
+      "hints": [
+        { "fr": "Il faut des écouteurs pour consommer ça.", "en": "You need headphones to consume these." },
+        { "fr": "Appuie sur play et installe-toi confortablement.", "en": "Press play and get comfortable." }
+      ],
+      "tags": ["tech", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_plane_clap",
+      "question": { "fr": "Tu applaudis quand l'avion atterrit ?", "en": "Do you clap when the plane lands?" },
+      "answers": [
+        { "fr": "Oui, c'est la moindre des politesses", "en": "Yes — it's basic good manners" },
+        { "fr": "Seulement quand c'était sportif", "en": "Only when it got dicey" },
+        { "fr": "Jamais, et je juge fort", "en": "Never, and I judge loudly" }
+      ],
+      "decoys": [
+        { "fr": "Tu applaudis à la fin d'un film au cinéma ?", "en": "Do you clap at the end of a movie in the theater?" },
+        { "fr": "Tu applaudis au feu d'artifice ?", "en": "Do you clap at fireworks?" },
+        { "fr": "Tu applaudis quand quelqu'un casse un verre au resto ?", "en": "Do you clap when someone drops a glass at a restaurant?" },
+        { "fr": "Tu applaudis à la fin d'une visio ?", "en": "Do you clap at the end of a video call?" }
+      ],
+      "hints": [
+        { "fr": "Le geste se produit à 200 km/h au sol.", "en": "It happens at 200 km/h on the ground." },
+        { "fr": "Le pilote ne t'entend pas, promis.", "en": "The pilot can't hear you, promise." }
+      ],
+      "tags": ["travel", "debate"],
+      "spicy": 0
+    },
+    {
+      "id": "q_resto_same",
+      "question": { "fr": "Tu commandes toujours la même chose au resto ?", "en": "Do you always order the same thing at a restaurant?" },
+      "answers": [
+        { "fr": "Oui : pourquoi risquer le bonheur ?", "en": "Yes — why gamble with happiness?" },
+        { "fr": "Je varie, aventurier du menu", "en": "I mix it up — menu adventurer" },
+        { "fr": "Je veux changer, je reprends pareil", "en": "I plan to change, then order the same" }
+      ],
+      "decoys": [
+        { "fr": "Tu prends toujours le même trajet pour aller au travail ?", "en": "Do you always take the same route to work?" },
+        { "fr": "Tu pars toujours en vacances au même endroit ?", "en": "Do you always vacation in the same place?" },
+        { "fr": "Tu achètes toujours la même marque de céréales ?", "en": "Do you always buy the same brand of cereal?" },
+        { "fr": "Tu écoutes toujours les mêmes playlists ?", "en": "Do you always listen to the same playlists?" }
+      ],
+      "hints": [
+        { "fr": "Le serveur connaît peut-être déjà la réponse.", "en": "The waiter may already know the answer." },
+        { "fr": "Le menu, tu le regardes par politesse.", "en": "You only read the menu to be polite." }
+      ],
+      "tags": ["food", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_phone_panic",
+      "question": { "fr": "Combien de temps avant de paniquer quand tu ne trouves plus ton téléphone ?", "en": "How long before you panic when you can't find your phone?" },
+      "answers": [
+        { "fr": "Trois secondes, alerte générale", "en": "Three seconds — full red alert" },
+        { "fr": "Une minute, je reste digne", "en": "A minute — I stay composed" },
+        { "fr": "Aucune panique, ça me fait des vacances", "en": "No panic — it's a little holiday" }
+      ],
+      "decoys": [
+        { "fr": "Combien de temps avant de paniquer quand tu ne trouves plus ton portefeuille ?", "en": "How long before you panic when you can't find your wallet?" },
+        { "fr": "Combien de temps avant de paniquer quand le wifi tombe ?", "en": "How long before you panic when the wifi goes down?" },
+        { "fr": "Combien de temps avant de paniquer quand tu perds tes potes en festival ?", "en": "How long before you panic when you lose your friends at a festival?" },
+        { "fr": "Combien de temps avant de paniquer quand le pilote annonce des turbulences ?", "en": "How long before you panic when the pilot announces turbulence?" }
+      ],
+      "hints": [
+        { "fr": "Tape tes poches. Encore. Encore une fois.", "en": "Pat your pockets. Again. One more time." },
+        { "fr": "Il était dans ta main il y a dix secondes.", "en": "It was in your hand ten seconds ago." }
+      ],
+      "tags": ["tech", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_movie_rewatch",
+      "question": { "fr": "Tu as revu ton film préféré combien de fois ?", "en": "How many times have you rewatched your favorite movie?" },
+      "answers": [
+        { "fr": "Deux ou trois fois, raisonnable", "en": "Two or three times — reasonable" },
+        { "fr": "Une dizaine, et fier de moi", "en": "A dozen, and proud" },
+        { "fr": "Je connais les dialogues par cœur", "en": "I can recite the dialogue by heart" }
+      ],
+      "decoys": [
+        { "fr": "Tu as revu la même série en entier combien de fois ?", "en": "How many times have you rewatched a whole series?" },
+        { "fr": "Tu revisionnes tes propres stories combien de fois ?", "en": "How many times do you rewatch your own stories?" },
+        { "fr": "Tu as recommencé le même jeu vidéo combien de fois ?", "en": "How many times have you restarted the same video game?" },
+        { "fr": "Tu regardes la même vidéo de recette combien de fois avant de la rater quand même ?", "en": "How many times do you watch the same recipe video before failing it anyway?" }
+      ],
+      "hints": [
+        { "fr": "Le suspense a disparu depuis longtemps.", "en": "The suspense died a long time ago." },
+        { "fr": "Tu connais la fin. Tu y retournes quand même.", "en": "You know the ending. You go back anyway." }
+      ],
+      "tags": ["habits", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_slow_walkers",
+      "question": { "fr": "Tu fais quoi derrière des gens qui marchent lentement ?", "en": "What do you do behind slow walkers?" },
+      "answers": [
+        { "fr": "Je m'adapte, zen absolu", "en": "I match their pace — total zen" },
+        { "fr": "Dépassement par la chaussée s'il faut", "en": "Overtake via the road if I must" },
+        { "fr": "Soupirs sonores réglementaires", "en": "Regulation-volume sighing" }
+      ],
+      "decoys": [
+        { "fr": "Tu fais quoi derrière quelqu'un de très lent à la caisse ?", "en": "What do you do behind a very slow person at checkout?" },
+        { "fr": "Tu fais quoi coincé derrière un tracteur sur la route ?", "en": "What do you do stuck behind a tractor on the road?" },
+        { "fr": "Tu fais quoi quand des touristes bloquent l'escalator ?", "en": "What do you do when tourists block the escalator?" },
+        { "fr": "Tu fais quoi quand quelqu'un s'arrête net devant toi pour regarder son téléphone ?", "en": "What do you do when someone stops dead in front of you to check their phone?" }
+      ],
+      "hints": [
+        { "fr": "Le trottoir devient un circuit de F1 mental.", "en": "The sidewalk becomes a mental F1 circuit." },
+        { "fr": "Trois de front. Évidemment, trois de front.", "en": "Three abreast. Of course they're three abreast." }
+      ],
+      "tags": ["relatable", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_shopping_cart",
+      "question": { "fr": "Tu ramènes toujours le caddie à sa place ?", "en": "Do you always return the shopping cart?" },
+      "answers": [
+        { "fr": "Toujours, c'est mon code d'honneur", "en": "Always — it's my code of honor" },
+        { "fr": "Sauf s'il pleut des cordes", "en": "Unless it's absolutely pouring" },
+        { "fr": "Je le confie au vent", "en": "I entrust it to the wind" }
+      ],
+      "decoys": [
+        { "fr": "Tu remets la barre de séparation pour le suivant à la caisse ?", "en": "Do you put the divider down for the next person at checkout?" },
+        { "fr": "Tu remets les poids à leur place à la salle ?", "en": "Do you re-rack your weights at the gym?" },
+        { "fr": "Tu rapportes ton plateau au fast-food ?", "en": "Do you bus your own tray at a fast-food place?" },
+        { "fr": "Tu remets les articles à leur place quand tu changes d'avis en magasin ?", "en": "Do you put items back where they belong when you change your mind in a store?" }
+      ],
+      "hints": [
+        { "fr": "Le parking du supermarché te regarde.", "en": "The supermarket parking lot is watching." },
+        { "fr": "Un test de moralité à quatre roues.", "en": "A four-wheeled morality test." }
+      ],
+      "tags": ["habits", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_sudden_rain",
+      "question": { "fr": "Il pleut d'un coup et tu n'as rien prévu : tu fais quoi ?", "en": "Sudden downpour, you're unprepared: what do you do?" },
+      "answers": [
+        { "fr": "Je cours, dignité optionnelle", "en": "I run — dignity optional" },
+        { "fr": "J'attends sous un porche, philosophe", "en": "I wait it out under a doorway, philosophically" },
+        { "fr": "Je continue à marcher : je sécherai", "en": "I keep walking — I'll dry" }
+      ],
+      "decoys": [
+        { "fr": "Tu rates le dernier bus : tu fais quoi ?", "en": "You miss the last bus: what do you do?" },
+        { "fr": "Le vent retourne ton parapluie : tu fais quoi ?", "en": "The wind flips your umbrella inside out: what do you do?" },
+        { "fr": "Ton vélo crève à mi-chemin : tu fais quoi ?", "en": "Your bike gets a flat halfway there: what do you do?" },
+        { "fr": "Tu es enfermé dehors sans tes clés : tu fais quoi ?", "en": "You're locked out without your keys: what do you do?" }
+      ],
+      "hints": [
+        { "fr": "Le ciel a pris une décision unilatérale.", "en": "The sky made a unilateral decision." },
+        { "fr": "Ta coiffure vit ses derniers instants.", "en": "Your hairstyle is living its final moments." }
+      ],
+      "tags": ["relatable", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_door_check",
+      "question": { "fr": "Tu vérifies combien de fois que la porte est bien fermée ?", "en": "How many times do you check that the door is really locked?" },
+      "answers": [
+        { "fr": "Zéro : je ferme et je vis ma vie", "en": "Zero — I lock it and live my life" },
+        { "fr": "Une vérification, deux max", "en": "One check, two tops" },
+        { "fr": "Il m'arrive de revenir de la rue pour vérifier", "en": "Sometimes I come back from down the street to check" }
+      ],
+      "decoys": [
+        { "fr": "Tu vérifies ton réveil combien de fois avant de dormir ?", "en": "How many times do you double-check your alarm before sleeping?" },
+        { "fr": "Tu vérifies ton billet combien de fois avant d'embarquer ?", "en": "How many times do you check your ticket before boarding?" },
+        { "fr": "Tu vérifies le four combien de fois avant de partir ?", "en": "How many times do you check the stove before leaving?" },
+        { "fr": "Tu relis un message combien de fois avant de l'envoyer ?", "en": "How many times do you reread a text before sending it?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe sur le palier, clé en main.", "en": "It happens on the doorstep, key in hand." },
+        { "fr": "Clic. Re-clic. Juste pour être sûr.", "en": "Click. Click again. Just to be sure." }
+      ],
+      "tags": ["habits", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_grudge_level",
+      "question": { "fr": "Tu es rancunier à quel point ?", "en": "How good are you at holding a grudge?" },
+      "answers": [
+        { "fr": "Pas du tout, j'oublie en une heure", "en": "Not at all — I forget within the hour" },
+        { "fr": "Je pardonne, mais je note", "en": "I forgive, but I take notes" },
+        { "fr": "J'ai un dossier ouvert depuis 2014", "en": "I have an open file from 2014" }
+      ],
+      "decoys": [
+        { "fr": "Tu es têtu à quel point ?", "en": "How stubborn are you?" },
+        { "fr": "Tu es susceptible à quel point ?", "en": "How easily offended are you?" },
+        { "fr": "Tu es radin à quel point ?", "en": "How cheap are you?" },
+        { "fr": "Tu es compétitif à quel point ?", "en": "How competitive are you?" }
+      ],
+      "hints": [
+        { "fr": "L'éléphant n'a rien à t'apprendre côté mémoire.", "en": "Elephants could take memory lessons from you." },
+        { "fr": "Tu te souviens de QUI a fini le gâteau en 2019.", "en": "You remember WHO finished the cake in 2019." }
+      ],
+      "tags": ["self", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_sleep_talk",
+      "question": { "fr": "Tu parles en dormant ?", "en": "Do you talk in your sleep?" },
+      "answers": [
+        { "fr": "Jamais, sommeil de marbre", "en": "Never — I sleep like marble" },
+        { "fr": "Il paraît que oui", "en": "Apparently, yes" },
+        { "fr": "Au point d'avoir des témoins", "en": "Enough that there are witnesses" }
+      ],
+      "decoys": [
+        { "fr": "Tu ronfles ?", "en": "Do you snore?" },
+        { "fr": "Tu fais du somnambulisme ?", "en": "Do you sleepwalk?" },
+        { "fr": "Tu grinces des dents la nuit ?", "en": "Do you grind your teeth at night?" },
+        { "fr": "Tu voles toute la couette ?", "en": "Do you steal the whole duvet?" }
+      ],
+      "hints": [
+        { "fr": "Toi-même, tu n'en sauras jamais rien.", "en": "You yourself will never truly know." },
+        { "fr": "Tes nuits ont une bande-son.", "en": "Your nights have a soundtrack." }
+      ],
+      "tags": ["sleep", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_clothes_chair",
+      "question": { "fr": "Il y a quoi sur la chaise de ta chambre ?", "en": "What's on the chair in your bedroom?" },
+      "answers": [
+        { "fr": "Rien, tout est rangé", "en": "Nothing — everything's put away" },
+        { "fr": "Quelques affaires en transit", "en": "A few things in transit" },
+        { "fr": "Un empilement qui défie la gravité", "en": "A pile that defies gravity" }
+      ],
+      "decoys": [
+        { "fr": "Il y a quoi sur ta table de chevet ?", "en": "What's on your nightstand?" },
+        { "fr": "Il y a quoi au fond de ton placard ?", "en": "What's in the back of your closet?" },
+        { "fr": "Il y a quoi sur le siège passager de ta voiture ?", "en": "What's on the passenger seat of your car?" },
+        { "fr": "Il y a quoi dans le tiroir fourre-tout de ta cuisine ?", "en": "What's in your kitchen junk drawer?" }
+      ],
+      "hints": [
+        { "fr": "Ni propre ni sale : un troisième état de la matière.", "en": "Not clean, not dirty: a third state of matter." },
+        { "fr": "Aucun invité ne s'y est assis depuis des années.", "en": "No guest has actually sat on it in years." }
+      ],
+      "tags": ["home", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_resto_alone",
+      "question": { "fr": "Tu pourrais aller au resto tout seul ?", "en": "Could you eat at a restaurant alone?" },
+      "answers": [
+        { "fr": "Oui, je le fais déjà avec joie", "en": "Yes — I already do it happily" },
+        { "fr": "Avec un livre ou un écran, oui", "en": "With a book or a screen, yes" },
+        { "fr": "Plutôt sauter le repas", "en": "I'd rather skip the meal" }
+      ],
+      "decoys": [
+        { "fr": "Tu pourrais aller au cinéma tout seul ?", "en": "Could you go to the movies alone?" },
+        { "fr": "Tu pourrais partir en vacances tout seul ?", "en": "Could you go on vacation alone?" },
+        { "fr": "Tu pourrais aller à un concert tout seul ?", "en": "Could you go to a concert alone?" },
+        { "fr": "Tu pourrais aller à un mariage sans connaître personne ?", "en": "Could you attend a wedding knowing absolutely no one?" }
+      ],
+      "hints": [
+        { "fr": "Une table pour un, et alors ?", "en": "Table for one — so what?" },
+        { "fr": "Le serveur enlève le deuxième couvert.", "en": "The waiter removes the second place setting." }
+      ],
+      "tags": ["social", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_sneeze_style",
+      "question": { "fr": "Ton éternuement, il est comment ?", "en": "What's your sneeze like?" },
+      "answers": [
+        { "fr": "Discret, à peine audible", "en": "Tiny — barely audible" },
+        { "fr": "Standard, rien à signaler", "en": "Standard issue, nothing to report" },
+        { "fr": "Tout l'immeuble est prévenu", "en": "The whole building gets notified" }
+      ],
+      "decoys": [
+        { "fr": "Ton rire, il est comment ?", "en": "What's your laugh like?" },
+        { "fr": "Ton bâillement, il est comment ?", "en": "What's your yawn like?" },
+        { "fr": "Ta voix au réveil, elle est comment ?", "en": "What's your morning voice like?" },
+        { "fr": "Ton « allô » au téléphone, il est comment ?", "en": "What's your phone 'hello' like?" }
+      ],
+      "hints": [
+        { "fr": "Ça arrive par surprise, souvent en série.", "en": "It strikes by surprise, often in multiples." },
+        { "fr": "À tes souhaits, au fait.", "en": "Bless you, by the way." }
+      ],
+      "tags": ["silly", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_google_symptoms",
+      "question": { "fr": "Tu googles tes symptômes avant d'aller chez le médecin ?", "en": "Do you google your symptoms before seeing a doctor?" },
+      "answers": [
+        { "fr": "Non, je préfère ne pas savoir", "en": "No — I'd rather not know" },
+        { "fr": "Un petit coup d'œil, pour préparer", "en": "A quick look, just to prepare" },
+        { "fr": "Évidemment, recherche approfondie", "en": "Obviously — deep research conducted" }
+      ],
+      "decoys": [
+        { "fr": "Tu googles la réponse pendant un quiz entre potes ?", "en": "Do you google the answer mid-trivia with friends?" },
+        { "fr": "Tu googles comment réparer avant d'appeler un pro ?", "en": "Do you google the fix before calling a repairman?" },
+        { "fr": "Tu googles le film pendant le film ?", "en": "Do you google the movie while watching the movie?" },
+        { "fr": "Tu googles ton propre nom de temps en temps ?", "en": "Do you google your own name now and then?" }
+      ],
+      "hints": [
+        { "fr": "La salle d'attente peut commencer à trembler.", "en": "The waiting room should brace itself." },
+        { "fr": "Internet dit que c'est soit rien, soit très grave.", "en": "The internet says it's either nothing or extremely serious." }
+      ],
+      "tags": ["tech", "health"],
+      "spicy": 0
+    },
+    {
+      "id": "q_lose_game",
+      "question": { "fr": "Tu réagis comment quand tu perds à un jeu ?", "en": "How do you react when you lose a game?" },
+      "answers": [
+        { "fr": "Bon perdant exemplaire", "en": "A model good sport" },
+        { "fr": "Je souris, mais je bous à l'intérieur", "en": "I smile while boiling inside" },
+        { "fr": "On ne rejoue plus jamais", "en": "We are never playing again" }
+      ],
+      "decoys": [
+        { "fr": "Tu réagis comment quand ton équipe perd un match ?", "en": "How do you react when your team loses a match?" },
+        { "fr": "Tu réagis comment quand on te pique ta place de parking ?", "en": "How do you react when someone snipes your parking spot?" },
+        { "fr": "Tu réagis comment quand ton plat arrive en dernier au resto ?", "en": "How do you react when your dish arrives last at the restaurant?" },
+        { "fr": "Tu réagis comment quand on devine la chute de ta blague ?", "en": "How do you react when someone guesses your punchline?" }
+      ],
+      "hints": [
+        { "fr": "Le plateau de jeu retient son souffle.", "en": "The game board is holding its breath." },
+        { "fr": "« C'est qu'un jeu », paraît-il.", "en": "'It's just a game,' apparently." }
+      ],
+      "tags": ["social", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_video_camera",
+      "question": { "fr": "En visio : caméra allumée ou éteinte ?", "en": "On video calls: camera on or off?" },
+      "answers": [
+        { "fr": "Allumée, transparence totale", "en": "On — full transparency" },
+        { "fr": "Ça dépend de qui est là", "en": "Depends who's in there" },
+        { "fr": "Éteinte, mystère assumé", "en": "Off — embracing the mystery" }
+      ],
+      "decoys": [
+        { "fr": "En visio : micro coupé ou ouvert ?", "en": "On video calls: muted or live mic?" },
+        { "fr": "Ton fond en visio : vrai appart ou flou ?", "en": "Video call background: real room or blur?" },
+        { "fr": "Ton statut en ligne : visible ou caché ?", "en": "Your online status: visible or hidden?" },
+        { "fr": "La localisation partagée : activée ou jamais ?", "en": "Location sharing: on or never?" }
+      ],
+      "hints": [
+        { "fr": "Le télétravail a inventé ce dilemme.", "en": "Remote work invented this dilemma." },
+        { "fr": "Coiffé en haut, pyjama en bas.", "en": "Business on top, pajamas below." }
+      ],
+      "tags": ["work", "tech"],
+      "spicy": 0
+    },
+    {
+      "id": "q_desk_state",
+      "question": { "fr": "Ton bureau, il ressemble à quoi en ce moment ?", "en": "What does your desk look like right now?" },
+      "answers": [
+        { "fr": "Minimaliste, zéro objet superflu", "en": "Minimalist — nothing extra" },
+        { "fr": "Bazar organisé : je retrouve tout", "en": "Organized chaos: I can find everything" },
+        { "fr": "Zone sinistrée, n'approchez pas", "en": "Disaster zone, do not approach" }
+      ],
+      "decoys": [
+        { "fr": "L'intérieur de ta voiture ressemble à quoi ?", "en": "What does the inside of your car look like?" },
+        { "fr": "Ton frigo ressemble à quoi en ce moment ?", "en": "What does your fridge look like right now?" },
+        { "fr": "Tes dossiers sur l'ordi ressemblent à quoi ?", "en": "What do your computer folders look like?" },
+        { "fr": "Ton placard de rangement ressemble à quoi ?", "en": "What does your storage closet look like?" }
+      ],
+      "hints": [
+        { "fr": "C'est là que le travail est censé se faire.", "en": "It's where the work allegedly happens." },
+        { "fr": "Le clavier est quelque part là-dessous.", "en": "The keyboard is under there somewhere." }
+      ],
+      "tags": ["work", "home"],
+      "spicy": 0
+    },
+    {
+      "id": "q_bag_bottom",
+      "question": { "fr": "Il y a quoi au fond de ton sac ?", "en": "What's at the bottom of your bag?" },
+      "answers": [
+        { "fr": "L'essentiel, rien de plus", "en": "The essentials, nothing more" },
+        { "fr": "Des tickets de caisse de 2019", "en": "Receipts from 2019" },
+        { "fr": "Un écosystème complet", "en": "A complete ecosystem" }
+      ],
+      "decoys": [
+        { "fr": "Il y a quoi dans les poches de ton manteau d'hiver ?", "en": "What's in your winter coat pockets?" },
+        { "fr": "Il y a quoi dans ta boîte à gants ?", "en": "What's in your glove compartment?" },
+        { "fr": "Il y a quoi sous ton lit ?", "en": "What's under your bed?" },
+        { "fr": "Il y a quoi entre les coussins de ton canapé ?", "en": "What's between your couch cushions?" }
+      ],
+      "hints": [
+        { "fr": "Il faut plonger la main à l'aveugle pour le savoir.", "en": "You have to reach in blind to find out." },
+        { "fr": "Ça se porte à l'épaule ou sur le dos.", "en": "You carry it on your shoulder or your back." }
+      ],
+      "tags": ["home", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_morning_grumpy",
+      "question": { "fr": "Il te faut combien de temps le matin avant d'être fréquentable ?", "en": "How long after waking up before you're fit for human contact?" },
+      "answers": [
+        { "fr": "Zéro, je suis immédiatement charmant", "en": "Zero — I'm instantly charming" },
+        { "fr": "Un café et vingt minutes", "en": "One coffee and twenty minutes" },
+        { "fr": "Ne pas m'adresser la parole avant midi", "en": "Do not address me before noon" }
+      ],
+      "decoys": [
+        { "fr": "Il te faut combien de temps pour récupérer après une grosse soirée ?", "en": "How long do you need to recover after a big night out?" },
+        { "fr": "Il te faut combien de temps pour te remettre d'un film triste ?", "en": "How long to recover from a sad movie?" },
+        { "fr": "Il te faut combien de temps pour décompresser après le travail ?", "en": "How long to decompress after work?" },
+        { "fr": "Il te faut combien de temps pour te dégeler à une fête où tu ne connais personne ?", "en": "How long before you warm up at a party where you barely know anyone?" }
+      ],
+      "hints": [
+        { "fr": "La machine met du temps à démarrer.", "en": "The machine takes a while to boot." },
+        { "fr": "Tout se joue entre l'oreiller et le premier café.", "en": "It all happens between the pillow and the first coffee." }
+      ],
+      "tags": ["self", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_compliment_react",
+      "question": { "fr": "Tu réagis comment à un compliment ?", "en": "How do you handle a compliment?" },
+      "answers": [
+        { "fr": "Merci, tout simplement", "en": "A simple thank-you" },
+        { "fr": "Je le renvoie immédiatement", "en": "I deflect it right back" },
+        { "fr": "Panique interne, sourire externe", "en": "Internal panic, external smile" }
+      ],
+      "decoys": [
+        { "fr": "Tu réagis comment à une photo surprise de toi ?", "en": "How do you handle a surprise photo of you?" },
+        { "fr": "Tu réagis comment quand il faut te présenter devant un groupe ?", "en": "How do you handle introducing yourself to a group?" },
+        { "fr": "Tu réagis comment à un grand merci très sincère ?", "en": "How do you handle a long, heartfelt thank-you?" },
+        { "fr": "Tu réagis comment quand on te cite tes propres mots ?", "en": "How do you handle someone quoting you back to yourself?" }
+      ],
+      "hints": [
+        { "fr": "C'est gratuit, c'est gentil, et pourtant ça déstabilise.", "en": "It's free, it's kind, and somehow destabilizing." },
+        { "fr": "« J'adore ta chemise. » Et là, ton cerveau plante.", "en": "'Love your shirt.' And your brain bluescreens." }
+      ],
+      "tags": ["social", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_streak_apps",
+      "question": { "fr": "Ton record de jours d'affilée sur une appli (langue, sport…), c'est combien ?", "en": "What's your longest daily streak on an app (language, workouts…)?" },
+      "answers": [
+        { "fr": "Trois jours, paix à son âme", "en": "Three days, rest in peace" },
+        { "fr": "Quelques semaines honorables", "en": "A few honorable weeks" },
+        { "fr": "Des centaines, je suis intouchable", "en": "Hundreds — I'm untouchable" }
+      ],
+      "decoys": [
+        { "fr": "Ton record de jours sans commander à manger, c'est combien ?", "en": "What's your record for days without ordering takeout?" },
+        { "fr": "Ton record de jours sans réseaux sociaux, c'est combien ?", "en": "What's your record for days off social media?" },
+        { "fr": "Ton record de jours à tenir un journal, c'est combien ?", "en": "What's your record for keeping up a daily journal?" },
+        { "fr": "Ton record de jours sans dépenser un centime, c'est combien ?", "en": "What's your record for days without spending a cent?" }
+      ],
+      "hints": [
+        { "fr": "La régularité est devenue un jeu vidéo.", "en": "Consistency became a video game." },
+        { "fr": "Rate un jour et la chouette verte pleure.", "en": "Miss one day and the green owl cries." }
+      ],
+      "tags": ["tech", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_cash_pocket",
+      "question": { "fr": "Tu as du liquide sur toi, là ?", "en": "Do you have any cash on you right now?" },
+      "answers": [
+        { "fr": "Oui, toujours, on ne sait jamais", "en": "Yes, always — you never know" },
+        { "fr": "Un fond de secours symbolique", "en": "A symbolic emergency stash" },
+        { "fr": "Plus depuis des années", "en": "Not in years" }
+      ],
+      "decoys": [
+        { "fr": "Tu as une batterie externe sur toi ?", "en": "Do you carry a power bank?" },
+        { "fr": "Tu as un stylo qui marche sur toi ?", "en": "Do you have a working pen on you?" },
+        { "fr": "Tu as des mouchoirs sur toi ?", "en": "Do you carry tissues?" },
+        { "fr": "Tu as un snack de secours dans ton sac ?", "en": "Is there an emergency snack in your bag?" }
+      ],
+      "hints": [
+        { "fr": "Le sans-contact a presque tué ce réflexe.", "en": "Contactless payment nearly killed this habit." },
+        { "fr": "Des pièces, des billets… tu te souviens ?", "en": "Coins, banknotes — remember those?" }
+      ],
+      "tags": ["money", "habits"],
+      "spicy": 0
+    },
+    {
+      "id": "q_old_cables",
+      "question": { "fr": "Tu as combien de vieux câbles qui ne servent plus à rien ?", "en": "How many old cables do you own that serve no purpose?" },
+      "answers": [
+        { "fr": "Zéro, je trie sans pitié", "en": "Zero — I purge mercilessly" },
+        { "fr": "Un petit sac de « au cas où »", "en": "One small bag of 'just in case'" },
+        { "fr": "Un tiroir entier de mystères", "en": "An entire drawer of mysteries" }
+      ],
+      "decoys": [
+        { "fr": "Tu as combien de stylos qui n'écrivent plus ?", "en": "How many dead pens do you own?" },
+        { "fr": "Tu as combien de jeux de société incomplets ?", "en": "How many board games with missing pieces?" },
+        { "fr": "Tu as combien de clés dont tu ignores la porte ?", "en": "How many keys to unknown doors do you own?" },
+        { "fr": "Tu as combien de pots d'épices jamais ouverts ?", "en": "How many never-opened spice jars?" }
+      ],
+      "hints": [
+        { "fr": "Ils appartiennent à des appareils disparus depuis longtemps.", "en": "They belong to devices long gone." },
+        { "fr": "Celui du vieux Nokia est encore là, on ne sait jamais.", "en": "The old Nokia one is still there, just in case." }
+      ],
+      "tags": ["home", "tech"],
+      "spicy": 0
+    },
+    {
+      "id": "q_horror_after",
+      "question": { "fr": "Tu fais quoi après un film d'horreur ?", "en": "What do you do after a horror movie?" },
+      "answers": [
+        { "fr": "Je dors comme un bébé", "en": "I sleep like a baby" },
+        { "fr": "Inspection complète de l'appartement", "en": "Full apartment inspection" },
+        { "fr": "Lumière allumée et vidéos de chatons", "en": "Lights on and kitten videos" }
+      ],
+      "decoys": [
+        { "fr": "Tu fais quoi après un documentaire vraiment dérangeant ?", "en": "What do you do after a genuinely disturbing documentary?" },
+        { "fr": "Tu fais quoi après un bruit bizarre en pleine nuit ?", "en": "What do you do after hearing a weird noise at night?" },
+        { "fr": "Tu fais quoi après un article sur les araignées de ta région ?", "en": "What do you do after reading an article about local spiders?" },
+        { "fr": "Tu fais quoi après un cauchemar ultra réaliste ?", "en": "What do you do after a hyper-realistic nightmare?" }
+      ],
+      "hints": [
+        { "fr": "Le générique est fini, pas la peur.", "en": "The credits ended; the fear didn't." },
+        { "fr": "Le couloir sombre est devenu un boss de fin.", "en": "The dark hallway is now a final boss." }
+      ],
+      "tags": ["silly", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_famous_for",
+      "question": { "fr": "Tu deviendrais célèbre pour quoi ?", "en": "What would you end up famous for?" },
+      "answers": [
+        { "fr": "Un talent que personne ne soupçonne", "en": "A talent nobody suspects" },
+        { "fr": "Un fail filmé malgré moi", "en": "A fail caught on camera" },
+        { "fr": "Aucune idée, mais j'accepte la gloire", "en": "No idea, but I accept the fame" }
+      ],
+      "decoys": [
+        { "fr": "Tu gagnerais quel record du monde ?", "en": "What world record could you actually win?" },
+        { "fr": "Ton groupe d'amis te décernerait quel trophée ?", "en": "What award would your friend group give you?" },
+        { "fr": "Ton documentaire Netflix parlerait de quoi ?", "en": "What would your Netflix documentary be about?" },
+        { "fr": "On se souviendrait de toi pour quoi au lycée ?", "en": "What would your high school remember you for?" }
+      ],
+      "hints": [
+        { "fr": "Les paparazzis se préparent.", "en": "The paparazzi are warming up." },
+        { "fr": "Tes quinze minutes de gloire sont en chargement.", "en": "Your fifteen minutes are loading." }
+      ],
+      "tags": ["hypothetical", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_invent_lyrics",
+      "question": { "fr": "Tu inventes les paroles quand tu ne les connais pas ?", "en": "Do you make up lyrics when you don't know them?" },
+      "answers": [
+        { "fr": "Non, je me tais dignement", "en": "No — I go dignified-silent" },
+        { "fr": "Je yaourte avec une assurance totale", "en": "I gibberish along with total confidence" },
+        { "fr": "Ma version est meilleure que l'originale", "en": "My version is better than the original" }
+      ],
+      "decoys": [
+        { "fr": "Tu inventes des règles quand tu expliques un jeu à moitié connu ?", "en": "Do you invent rules when explaining a game you half-know?" },
+        { "fr": "Tu brodes quand tu racontes une anecdote ?", "en": "Do you embellish when telling a story?" },
+        { "fr": "Tu fais semblant de t'y connaître en vin au resto ?", "en": "Do you fake wine knowledge at restaurants?" },
+        { "fr": "Tu improvises l'itinéraire quand on te demande ton chemin ?", "en": "Do you improvise directions when someone asks the way?" }
+      ],
+      "hints": [
+        { "fr": "Le refrain arrive et c'est l'improvisation totale.", "en": "The chorus hits and it's total improv." },
+        { "fr": "La la la… quelque chose… mon cœur…", "en": "La la la… something something… my heart…" }
+      ],
+      "tags": ["music", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_sea_entry",
+      "question": { "fr": "Tu entres comment dans l'eau froide à la plage ?", "en": "How do you get into cold water at the beach?" },
+      "answers": [
+        { "fr": "Plongeon direct, pas de pitié", "en": "Straight dive, no mercy" },
+        { "fr": "Centimètre par centimètre, en commentant ma douleur", "en": "Inch by inch, narrating my pain" },
+        { "fr": "Je regarde les autres depuis ma serviette", "en": "I watch the others from my towel" }
+      ],
+      "decoys": [
+        { "fr": "Tu arrives comment dans une soirée où tout le monde est déjà là ?", "en": "How do you enter a party where everyone's already there?" },
+        { "fr": "Tu te lances comment dans un nouveau projet ?", "en": "How do you start a new project?" },
+        { "fr": "Tu abordes comment une piste de danse vide ?", "en": "How do you approach an empty dance floor?" },
+        { "fr": "Tu attaques comment un lundi matin ?", "en": "How do you enter a Monday morning?" }
+      ],
+      "hints": [
+        { "fr": "Ça se passe en maillot de bain.", "en": "Swimwear is required." },
+        { "fr": "Le premier orteil rend le verdict.", "en": "The first toe delivers the verdict." }
+      ],
+      "tags": ["travel", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_birthday_song",
+      "question": { "fr": "Tu fais quoi pendant qu'on te chante « Joyeux anniversaire » ?", "en": "What do you do while people sing you 'Happy Birthday'?" },
+      "answers": [
+        { "fr": "Je savoure chaque seconde", "en": "I soak up every second" },
+        { "fr": "Sourire figé, regard qui cherche la sortie", "en": "Frozen smile, eyes scanning for exits" },
+        { "fr": "Je chante avec eux, pour moi-même", "en": "I sing along — to myself, for myself" }
+      ],
+      "decoys": [
+        { "fr": "Tu fais quoi pendant un toast porté en ton honneur ?", "en": "What do you do during a toast in your honor?" },
+        { "fr": "Tu fais quoi pendant qu'on lit ton CV à voix haute en entretien ?", "en": "What do you do while they read your CV aloud in an interview?" },
+        { "fr": "Tu fais quoi pendant qu'on te filme en train d'ouvrir un cadeau ?", "en": "What do you do while being filmed opening a present?" },
+        { "fr": "Tu fais quoi pendant des applaudissements qui te sont destinés ?", "en": "What do you do during applause meant for you?" }
+      ],
+      "hints": [
+        { "fr": "Ça dure trente secondes et une éternité à la fois.", "en": "It lasts thirty seconds and an eternity at once." },
+        { "fr": "Les bougies attendent ton souffle.", "en": "The candles are waiting for your breath." }
+      ],
+      "tags": ["social", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_waiter_call",
+      "question": { "fr": "Tu t'y prends comment pour appeler le serveur ?", "en": "How do you get the waiter's attention?" },
+      "answers": [
+        { "fr": "Un regard, ça suffit", "en": "Eye contact — that's all it takes" },
+        { "fr": "Le petit signe de main discret", "en": "The discreet little hand raise" },
+        { "fr": "J'attends d'être remarqué, parfois très longtemps", "en": "I wait to be noticed, sometimes for ages" }
+      ],
+      "decoys": [
+        { "fr": "Tu t'y prends comment pour héler un taxi ?", "en": "How do you hail a cab?" },
+        { "fr": "Tu t'y prends comment pour poser une question en réunion ?", "en": "How do you ask a question in class or a meeting?" },
+        { "fr": "Tu t'y prends comment pour attirer l'attention d'un chat ?", "en": "How do you get a cat's attention?" },
+        { "fr": "Tu t'y prends comment pour saluer quelqu'un de loin dans la rue ?", "en": "How do you greet someone from across the street?" }
+      ],
+      "hints": [
+        { "fr": "Ton verre est vide depuis vingt minutes.", "en": "Your glass has been empty for twenty minutes." },
+        { "fr": "« S'il vous plaît ?… » Trop tard, il est reparti.", "en": "'Excuse me?…' Too late, he's gone again." }
+      ],
+      "tags": ["social", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_hold_door",
+      "question": { "fr": "Tu tiens la porte même si la personne est encore loin ?", "en": "Do you hold the door even when the person is still far away?" },
+      "answers": [
+        { "fr": "Oui, et j'assume le silence gênant", "en": "Yes — and I own the awkward wait" },
+        { "fr": "Seulement à distance raisonnable", "en": "Only at a reasonable distance" },
+        { "fr": "Je lâche et je fuis sans me retourner", "en": "I let go and flee without looking back" }
+      ],
+      "decoys": [
+        { "fr": "Tu retiens l'ascenseur quand quelqu'un court vers toi ?", "en": "Do you hold the elevator when someone's running for it?" },
+        { "fr": "Tu laisses passer la personne qui n'a que deux articles à la caisse ?", "en": "Do you let the two-item person skip you in line?" },
+        { "fr": "Tu dis « pardon » même quand c'est l'autre qui te rentre dedans ?", "en": "Do you apologize even when the other person bumps into YOU?" },
+        { "fr": "Tu rends leur sourire aux inconnus dans la rue ?", "en": "Do you smile back at strangers on the street?" }
+      ],
+      "hints": [
+        { "fr": "La politesse a parfois un coût social élevé.", "en": "Politeness sometimes has a steep social cost." },
+        { "fr": "L'autre se sent obligé de trottiner. Tu connais ce trot.", "en": "Now they have to do the little jog. You know the one." }
+      ],
+      "tags": ["social", "relatable"],
+      "spicy": 0
+    },
+    {
+      "id": "q_movie_quotes",
+      "question": { "fr": "Tu places combien de répliques de films par jour ?", "en": "How many movie quotes do you drop a day?" },
+      "answers": [
+        { "fr": "Aucune, je parle normalement", "en": "None — I speak like a normal person" },
+        { "fr": "Une ou deux, bien choisies", "en": "One or two, well chosen" },
+        { "fr": "Je communique uniquement comme ça", "en": "It's my entire communication system" }
+      ],
+      "decoys": [
+        { "fr": "Tu places combien de jeux de mots par jour ?", "en": "How many puns do you drop a day?" },
+        { "fr": "Tu places combien de « ça me rappelle » par jour ?", "en": "How many 'that reminds me of' stories a day?" },
+        { "fr": "Tu cites combien de proverbes de grand-mère par jour ?", "en": "How many grandma proverbs do you quote a day?" },
+        { "fr": "Tu fredonnes combien de génériques par jour ?", "en": "How many theme songs do you hum a day?" }
+      ],
+      "hints": [
+        { "fr": "Le grand écran a colonisé ton vocabulaire.", "en": "The big screen colonized your vocabulary." },
+        { "fr": "« Je suis ton père », et autres classiques.", "en": "'I am your father,' and other classics." }
+      ],
+      "tags": ["silly", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_socks_mismatch",
+      "question": { "fr": "Tu portes des chaussettes dépareillées ?", "en": "Do you wear mismatched socks?" },
+      "answers": [
+        { "fr": "Jamais, question de principe", "en": "Never — it's a matter of principle" },
+        { "fr": "Seulement par accident de lessive", "en": "Only by laundry accident" },
+        { "fr": "C'est un mode de vie", "en": "It's a lifestyle" }
+      ],
+      "decoys": [
+        { "fr": "Tu portes des vêtements troués à la maison ?", "en": "Do you wear clothes with holes at home?" },
+        { "fr": "Tu sors en pantoufles jusqu'à la boîte aux lettres ?", "en": "Do you go out in slippers as far as the mailbox?" },
+        { "fr": "Tu gardes ton pyjama toute la journée le dimanche ?", "en": "Do you stay in pajamas all Sunday?" },
+        { "fr": "Tu remets le pull qui gratte parce qu'il est joli ?", "en": "Do you re-wear the itchy sweater because it looks good?" }
+      ],
+      "hints": [
+        { "fr": "La preuve se cache dans tes chaussures.", "en": "The evidence hides inside your shoes." },
+        { "fr": "La machine à laver en a mangé une, pas l'autre.", "en": "The washing machine ate one, not the other." }
+      ],
+      "tags": ["fashion", "silly"],
+      "spicy": 0
+    },
+    {
+      "id": "q_meme_ratio",
+      "question": { "fr": "Quel pourcentage de tes conversations passe par des memes ?", "en": "What percentage of your conversations happen via memes?" },
+      "answers": [
+        { "fr": "Moins de 10 %, je rédige", "en": "Under 10% — I write full sentences" },
+        { "fr": "La moitié, équilibre sain", "en": "Half — a healthy balance" },
+        { "fr": "Les mots sont devenus optionnels", "en": "Words have become optional" }
+      ],
+      "decoys": [
+        { "fr": "Quel pourcentage de tes « mdr » sont automatiques ?", "en": "What percentage of your 'lol's are automatic?" },
+        { "fr": "Quel pourcentage de tes conversations parlent de bouffe ?", "en": "What percentage of your conversations are about food?" },
+        { "fr": "Quel pourcentage de tes messages commencent par « dsl du retard » ?", "en": "What percentage of your texts start with 'sorry for the late reply'?" },
+        { "fr": "Quel pourcentage de tes discussions sont des débats inutiles ?", "en": "What percentage of your chats are pointless debates?" }
+      ],
+      "hints": [
+        { "fr": "Une image vaut mille « mdr ».", "en": "A picture is worth a thousand 'lol's." },
+        { "fr": "Ta galerie est une bibliothèque de réactions.", "en": "Your camera roll is a reaction library." }
+      ],
+      "tags": ["tech", "social"],
+      "spicy": 0
+    },
+    {
+      "id": "q_admin_call",
+      "question": { "fr": "Passer un coup de fil administratif, ça te fait quoi ?", "en": "Making an official phone call (bank, doctor…): how does it feel?" },
+      "answers": [
+        { "fr": "Rien, je gère en trente secondes", "en": "Nothing — handled in thirty seconds" },
+        { "fr": "Je répète ma première phrase trois fois avant", "en": "I rehearse my opening line three times first" },
+        { "fr": "Je le repousse depuis trois semaines", "en": "I've been putting it off for three weeks" }
+      ],
+      "decoys": [
+        { "fr": "Renvoyer un plat froid au resto, ça te fait quoi ?", "en": "Sending a cold dish back at a restaurant: how does it feel?" },
+        { "fr": "Négocier un prix, ça te fait quoi ?", "en": "Haggling over a price: how does it feel?" },
+        { "fr": "Demander son chemin à un inconnu, ça te fait quoi ?", "en": "Asking a stranger for directions: how does it feel?" },
+        { "fr": "Réclamer un remboursement, ça te fait quoi ?", "en": "Asking for a refund: how does it feel?" }
+      ],
+      "hints": [
+        { "fr": "Il y a une musique d'attente dans l'histoire.", "en": "Hold music is involved." },
+        { "fr": "« Votre appel est important pour nous. »", "en": "'Your call is important to us.'" }
+      ],
+      "tags": ["relatable", "self"],
+      "spicy": 0
+    },
+    {
+      "id": "q_gift_shopping",
+      "question": { "fr": "Tu pars acheter un cadeau pour quelqu'un : tu reviens avec quoi ?", "en": "You go out to buy someone a gift: what do you come home with?" },
+      "answers": [
+        { "fr": "Juste le cadeau, focus total", "en": "Just the gift — total focus" },
+        { "fr": "Le cadeau et un petit truc pour moi", "en": "The gift, plus a little something for me" },
+        { "fr": "Que des trucs pour moi, oups", "en": "Only things for me. Oops." }
+      ],
+      "decoys": [
+        { "fr": "Tu sors chercher du pain : tu reviens avec quoi ?", "en": "You pop out for bread: what do you come home with?" },
+        { "fr": "Tu entres « juste pour regarder » dans un magasin : tu ressors avec quoi ?", "en": "You walk in 'just to browse': what do you walk out with?" },
+        { "fr": "Tu ouvres l'appli de livraison pour un plat : tu commandes quoi au final ?", "en": "You open the delivery app for one dish: what do you end up ordering?" },
+        { "fr": "Tu vas à la pharmacie pour un médicament : tu ressors avec quoi ?", "en": "You go to the pharmacy for aspirin: what do you leave with?" }
+      ],
+      "hints": [
+        { "fr": "L'intention de départ était généreuse.", "en": "The original intention was generous." },
+        { "fr": "L'anniversaire de quelqu'un d'autre, ton nouveau pull.", "en": "Someone else's birthday; your new sweater." }
+      ],
+      "tags": ["money", "silly"],
+      "spicy": 0
     }
   ]
 }

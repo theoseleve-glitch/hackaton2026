@@ -1096,15 +1096,15 @@
       "intensity": "classic"
     },
     {
-      "id": "roue-talent-002",
+      "id": "roue-habit-002",
       "kind": "wheel100",
       "prompt": {
-        "fr": "Cite un talent qui se situe exactement ici sur la roue.",
-        "en": "Name a skill that sits exactly here on the wheel."
+        "fr": "Cite une petite habitude qui se situe exactement ici sur la roue.",
+        "en": "Name a little habit that sits exactly here on the wheel."
       },
-      "low": { "fr": "Parfaitement inutile", "en": "Completely useless" },
-      "high": { "fr": "Sauve des vies", "en": "Saves lives" },
-      "tags": ["debate"],
+      "low": { "fr": "Craquante chez un coloc", "en": "Adorable in a roommate" },
+      "high": { "fr": "Motif de déménagement immédiat", "en": "Reason to move out overnight" },
+      "tags": ["social", "debate"],
       "intensity": "classic"
     },
     {
@@ -1657,6 +1657,174 @@
       "low": { "fr": "Vaut des heures de queue", "en": "Worth queueing hours for" },
       "high": { "fr": "Pas une minute d'attente", "en": "Not worth one minute in line" },
       "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-ooo-091",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Rédige à voix haute ton message d'absence automatique pour qu'il mérite exactement cette note.",
+        "en": "Compose your out-of-office reply out loud so it deserves exactly this score."
+      },
+      "low": { "fr": "« Parti. Reviendrai. Peut-être. »", "en": "\"Gone. Back. Maybe.\"" },
+      "high": { "fr": "Poésie d'entreprise primée", "en": "Award-winning corporate poetry" },
+      "tags": ["work", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-proposal-092",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise une demande en mariage qui mérite exactement cette note.",
+        "en": "Improvise a marriage proposal worth exactly this score."
+      },
+      "low": { "fr": "Par texto, avec une faute", "en": "By text, with a typo" },
+      "high": { "fr": "Flash mob et feu d'artifice", "en": "Flash mob and fireworks" },
+      "tags": ["love", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-realitytv-093",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente un concept de téléréalité qui mérite exactement cette note.",
+        "en": "Invent a reality-TV concept that deserves exactly this score."
+      },
+      "low": { "fr": "Déprogrammée avant la diffusion", "en": "Cancelled before it airs" },
+      "high": { "fr": "Phénomène de société", "en": "A national obsession" },
+      "tags": ["culture", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-podcast-094",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Pitche un podcast et son titre pour qu'ils valent exactement cette note.",
+        "en": "Pitch a podcast and its title worth exactly this score."
+      },
+      "low": { "fr": "Deux auditeurs : toi et ta mère", "en": "Two listeners: you and your mom" },
+      "high": { "fr": "Numéro 1 de tous les classements", "en": "Top of every chart" },
+      "tags": ["culture", "pitch"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-fortune-095",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lis une prédiction de biscuit chinois avec exactement ce niveau de sagesse.",
+        "en": "Read out a fortune-cookie prediction with exactly this much wisdom."
+      },
+      "low": { "fr": "« Tu manges un biscuit. »", "en": "\"You are eating a cookie.\"" },
+      "high": { "fr": "Change une vie entière", "en": "Changes someone's whole life" },
+      "tags": ["humor", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-groupchat-096",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Propose un nom de groupe WhatsApp pour cette équipe, digne exactement de cette note.",
+        "en": "Propose a group-chat name for this crew that deserves exactly this score."
+      },
+      "low": { "fr": "« Nouveau groupe (3) »", "en": "\"New group (3)\"" },
+      "high": { "fr": "Légendaire, personne n'ose le changer", "en": "So iconic nobody dares rename it" },
+      "tags": ["social", "group"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-ride-097",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une attraction de parc exactement aussi intense que cette note.",
+        "en": "Describe a theme-park ride exactly this intense."
+      },
+      "low": { "fr": "Carrousel pour escargots", "en": "Carousel for snails" },
+      "high": { "fr": "Décharge à signer avant de monter", "en": "Liability waiver required" },
+      "tags": ["humor", "travel"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-yearbook-098",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente une citation pour ta photo d'album de promo, digne exactement de cette note.",
+        "en": "Invent a yearbook quote that deserves exactly this score."
+      },
+      "low": { "fr": "« J'étais là. »", "en": "\"I was here.\"" },
+      "high": { "fr": "Citée à chaque remise de diplômes depuis", "en": "Quoted at every graduation since" },
+      "tags": ["humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-meme-099",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Explique un mème à une grand-mère avec exactement ce niveau de clarté.",
+        "en": "Explain a meme to a grandma with exactly this much clarity."
+      },
+      "low": { "fr": "Elle s'inquiète pour toi", "en": "She's worried about you now" },
+      "high": { "fr": "Elle le partage avant toi", "en": "She shares it before you do" },
+      "tags": ["humor", "tech"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-transit-100",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un trajet en transports en commun qui mérite exactement cette note.",
+        "en": "Describe a public-transit ride worth exactly this score."
+      },
+      "low": { "fr": "Aisselle inconnue à 8h du matin", "en": "Stranger's armpit at 8 a.m." },
+      "high": { "fr": "Wagon vide, place au soleil", "en": "Empty car, sunny window seat" },
+      "tags": ["daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-moving-101",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un déménagement organisé exactement aussi bien que cette note.",
+        "en": "Describe a house move that is exactly this well organized."
+      },
+      "low": { "fr": "Cartons sans étiquette, amis disparus", "en": "Unlabeled boxes, friends gone AWOL" },
+      "high": { "fr": "Précision militaire, fini avant midi", "en": "Military precision, done by noon" },
+      "tags": ["daily", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-romance-102",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais une déclaration d'amour à un objet du quotidien avec exactement ce niveau de romantisme.",
+        "en": "Declare your love to an everyday object with exactly this much romance."
+      },
+      "low": { "fr": "Lu sur une liste de courses", "en": "Read off a shopping list" },
+      "high": { "fr": "Shakespeare prend des notes", "en": "Shakespeare takes notes" },
+      "tags": ["love", "improv", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-event-049",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un événement qui se situe exactement ici sur la roue.",
+        "en": "Name an event that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Paradis des introvertis", "en": "Introvert paradise" },
+      "high": { "fr": "Paradis des extravertis", "en": "Extrovert paradise" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-app-050",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une appli qui se situe exactement ici sur la roue.",
+        "en": "Name an app that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Ouverte une fois par an", "en": "Opened once a year" },
+      "high": { "fr": "Greffée à la main", "en": "Surgically attached to your hand" },
+      "tags": ["tech", "daily"],
       "intensity": "classic"
     }
   ]

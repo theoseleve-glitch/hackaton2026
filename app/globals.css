@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+/*
+  BACKED — design system in code.
+  Archetype: Technical × Brutalist · "motorsport sponsorship war room".
+  After this file, components use TOKENS, not arbitrary values.
+*/
+
+@theme {
+  /* === TYPOGRAPHY ===
+     Archivo (engineered grotesque) carries display AND text.
+     JetBrains Mono is the telemetry / pit-wall voice. */
+  --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", sans-serif;
+  --font-text: var(--font-archivo), "Archivo", "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+
+  --text-display-2xl: 7.25rem;
+  --text-display-2xl--line-height: 0.84;
+  --text-display-2xl--letter-spacing: -0.045em;
+  --text-display-2xl--font-weight: 800;
+
+  --text-display-xl: 5.25rem;
+  --text-display-xl--line-height: 0.88;
+  --text-display-xl--letter-spacing: -0.04em;
+  --text-display-xl--font-weight: 800;
+
+  --text-display-lg: 3.75rem;
+  --text-display-lg--line-height: 0.92;
+  --text-display-lg--letter-spacing: -0.035em;
+  --text-display-lg--font-weight: 800;
+
+  --text-display: 2.75rem;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
+
+  --text-h1: 2.125rem;
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.022em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.18;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h2--font-weight: 650;
+
+  --text-h3: 1.1875rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 600;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-body--letter-spacing: 0em;
+  --text-body--font-weight: 400;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-small--letter-spacing: 0em;
+  --text-small--font-weight: 400;
+
+  --text-caption: 0.72rem;
+  --text-caption--line-height: 1.35;
+  --text-caption--letter-spacing: 0.16em;
+  --text-caption--font-weight: 500;
+
+  /* === COLOR === charcoal + ivory + fuel-orange · sponsor-gold · track-red === */
+  --color-paper: #080807; /* deep charcoal background */
+  --color-paper-2: #050504; /* deeper well */
+  --color-ink: #f7f0e6; /* warm ivory type */
+  --color-ink-dim: #cfc7b9; /* secondary type */
+  --color-accent: #ff5a1f; /* signature fuel orange — action / CTA */
+  --color-accent-dim: #e64e15; /* hover */
+  --color-accent-press: #cc4310; /* active */
+  --color-gold: #f2b84b; /* sponsor gold — money / value */
+  --color-danger: #e6392e; /* track red — impact, used sparingly */
+  --color-surface: #151412; /* graphite cards, raised */
+  --color-surface-2: #1e1c19; /* deeper card / modal */
+  --color-border: #2b2925; /* carbon-grey hairlines */
+  --color-line: #1c1a17; /* faint gridlines */
+  --color-mute: #a69f94; /* sand-grey captions, telemetry labels */
+
+  /* === RADII === sharp, technical */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* === MOTION === */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 560ms;
+  --duration-cinematic: 1100ms;
+}
+
+@layer base {
+  html {
+    font-feature-settings: "ss01", "ss03", "cv11", "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto; /* Lenis handles smoothing */
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Branded scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper-2);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border: 2px solid var(--color-paper-2);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-dim);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) var(--color-paper-2);
+  }
+
+  /* Custom cursor: native hidden only once JS mounts the dot (no-JS keeps native) */
+  body.cursor-ready {
+    cursor: none;
+  }
+  @media (hover: none), (pointer: coarse) {
+    body.cursor-ready {
+      cursor: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* === MOTIF UTILITIES === the telemetry / pit-wall language */
+@utility telemetry {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--color-mute);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Faint engineering gridlines — applied to atmospheric panels */
+@utility gridlines {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-line) 100%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-line) 100%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 64px 64px;
+}
+
+/* Hairline divider tied to the brand */
+@utility hairline {
+  border-color: var(--color-border);
+}
+
+/* Full-bleed film grain (paired with <Grain/>) */
+@layer utilities {
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+  }
+}

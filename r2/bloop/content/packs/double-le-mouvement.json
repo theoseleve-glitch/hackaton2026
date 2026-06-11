@@ -711,7 +711,7 @@
       "id": "dlm-045-aquagym-coach",
       "text": {
         "fr": "Un prof d'aquagym qui se donne plus que tout le bassin réuni",
-        "en": "An aqua aerobics coach giving more than the whole pool combined"
+        "en": "An aqua aerobics coach with more energy than the entire pool combined"
       },
       "hint": {
         "fr": "Compte à voix haute, sourire bloqué, éclaboussures d'enthousiasme.",
@@ -1099,7 +1099,7 @@
       },
       "hint": {
         "fr": "Souffle héroïque, vertiges, test mou décevant, re-souffle.",
-        "en": "Heroic blowing, dizziness, sad squish test, blow again."
+        "en": "Heroic lungfuls, dizziness, sad squish test, back to puffing."
       },
       "category": "everyday",
       "difficulty": 2,
@@ -1163,7 +1163,7 @@
       },
       "hint": {
         "fr": "Souffle expert, fumée dans les yeux, victoire enfumée.",
-        "en": "Expert blowing, smoke in the eyes, smoky victory."
+        "en": "Expert puffs, smoke in the eyes, smoke-flavored victory."
       },
       "category": "everyday",
       "difficulty": 1,
@@ -1627,7 +1627,7 @@
       },
       "hint": {
         "fr": "Hésitation, collision de nez frôlée, troisième tentative fatale.",
-        "en": "Hesitation, near nose collision, fatal third attempt."
+        "en": "Commit to the handshake, pivot to the hug, fatal third attempt."
       },
       "category": "cringe",
       "difficulty": 1,
@@ -1746,6 +1746,262 @@
       "intensity": "safe",
       "props": false,
       "tags": ["funny", "cringe", "wedding", "dance"]
+    },
+    {
+      "id": "dlm-110-disco-hip",
+      "text": {
+        "fr": "Un danseur disco dont la hanche se bloque en plein geste Travolta",
+        "en": "A disco dancer whose hip locks up mid Travolta point"
+      },
+      "hint": {
+        "fr": "Doigt vers le ciel, craquement, finir le show d'un seul côté du corps.",
+        "en": "Finger to the sky, audible crack, finish the show using one side only."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "retro", "physical"]
+    },
+    {
+      "id": "dlm-111-kpop-elevator",
+      "text": {
+        "fr": "Une chorégraphie de K-pop entière dans un ascenseur bondé",
+        "en": "A full K-pop choreography inside a packed elevator"
+      },
+      "hint": {
+        "fr": "Grands mouvements, espace minuscule, excuses entre chaque pose.",
+        "en": "Big moves, tiny space, tiny apologies between every pose."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "kpop", "physical"]
+    },
+    {
+      "id": "dlm-112-monday-dance",
+      "text": {
+        "fr": "Une danse interprétative du lundi matin",
+        "en": "An interpretive dance of Monday morning"
+      },
+      "hint": {
+        "fr": "Réveil, café, transports, l'âme qui quitte le corps — en boucle.",
+        "en": "Alarm, coffee, commute, soul leaving the body — on repeat."
+      },
+      "category": "dance",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "artsy", "relatable"]
+    },
+    {
+      "id": "dlm-113-haka-petanque",
+      "text": {
+        "fr": "Un haka complet avant une partie de pétanque tranquille",
+        "en": "A full rugby haka before a friendly round of mini-golf"
+      },
+      "hint": {
+        "fr": "Intensité maximale, frappes sur les cuisses, regard de guerrier, lancer délicat.",
+        "en": "Maximum intensity, thigh slaps, warrior glare, then the gentlest putt."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "loud", "sport"]
+    },
+    {
+      "id": "dlm-114-dramatic-death",
+      "text": {
+        "fr": "Une scène de mort dramatique qui dure beaucoup trop longtemps",
+        "en": "A dramatic death scene that goes on way too long"
+      },
+      "hint": {
+        "fr": "Touché ! Adieux, faux départ, re-adieux, mort finale en fanfare.",
+        "en": "Hit! Farewell, false ending, more farewells, grand finale collapse."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "drama", "theatrical"]
+    },
+    {
+      "id": "dlm-115-cape-door",
+      "text": {
+        "fr": "Un super-héros dont la cape se coince dans une porte au décollage",
+        "en": "A superhero whose cape gets stuck in a door at takeoff"
+      },
+      "hint": {
+        "fr": "Pose héroïque, décollage avorté, étranglement, sortie discrète.",
+        "en": "Heroic pose, failed launch, choke, sneak away quietly."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "superhero", "fail"]
+    },
+    {
+      "id": "dlm-116-ring-volcano",
+      "text": {
+        "fr": "Porter un anneau minuscule mais très lourd jusqu'au bord d'un volcan",
+        "en": "Carrying a tiny but very heavy ring to the edge of a volcano"
+      },
+      "hint": {
+        "fr": "Chaque pas pèse une tonne, l'anneau murmure, hésitation au bord.",
+        "en": "Every step weighs a ton, the ring whispers, big hesitation at the edge."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "epic", "parody"]
+    },
+    {
+      "id": "dlm-117-shampoo-ad",
+      "text": {
+        "fr": "Tourner une pub de shampoing : ralenti et crinière au vent",
+        "en": "Starring in a shampoo commercial: slow motion, mane in the wind"
+      },
+      "hint": {
+        "fr": "Mouvements de crinière exagérés, même sans crinière.",
+        "en": "Exaggerated mane flips, even if you have no mane."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "slowmo", "glam"]
+    },
+    {
+      "id": "dlm-118-sweater-stuck",
+      "text": {
+        "fr": "Rester coincé dans un pull trop petit en cabine d'essayage",
+        "en": "Getting stuck in a too-small sweater in the fitting room"
+      },
+      "hint": {
+        "fr": "Confiance, blocage aux épaules, combat à l'aveugle, appel à l'aide muet.",
+        "en": "Confidence, shoulder lock, blind wrestling, silent cry for help."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "awkward", "relatable"]
+    },
+    {
+      "id": "dlm-119-hiccup-wedding",
+      "text": {
+        "fr": "Une crise de hoquet pendant les vœux à un mariage",
+        "en": "A hiccup attack right in the middle of the wedding vows"
+      },
+      "hint": {
+        "fr": "Solennité, hic, apnée héroïque, hic encore plus fort.",
+        "en": "Solemn face, hic, heroic breath-hold, even louder hic."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "awkward", "loud"]
+    },
+    {
+      "id": "dlm-120-squeaky-library",
+      "text": {
+        "fr": "Des baskets neuves qui couinent dans une bibliothèque silencieuse",
+        "en": "Brand-new sneakers squeaking through a dead-silent library"
+      },
+      "hint": {
+        "fr": "Chaque pas couine, marche au ralenti, tentative de glissade — pire.",
+        "en": "Every step squeaks, slow-motion walking, try sliding instead — worse."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "awkward", "quiet"]
+    },
+    {
+      "id": "dlm-121-laugh-unheard",
+      "text": {
+        "fr": "Rire très fort à une blague que tu n'as pas entendue",
+        "en": "Laughing way too hard at a joke you didn't hear"
+      },
+      "hint": {
+        "fr": "Rire en décalé, scanner le groupe, rire encore quand tout le monde s'arrête.",
+        "en": "Delayed laugh, scan the group, keep laughing after everyone stops."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "awkward", "social"]
+    },
+    {
+      "id": "dlm-122-javelin-keep",
+      "text": {
+        "fr": "Un lanceur de javelot qui oublie de lâcher le javelot",
+        "en": "A javelin thrower who forgets to let go of the javelin"
+      },
+      "hint": {
+        "fr": "Course d'élan énorme, décollage AVEC le javelot.",
+        "en": "Massive run-up, take off WITH the javelin."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sport", "fail"]
+    },
+    {
+      "id": "dlm-123-chairlift-fail",
+      "text": {
+        "fr": "Un skieur débutant qui rate la descente du télésiège",
+        "en": "A first-time skier failing the chairlift dismount"
+      },
+      "hint": {
+        "fr": "Préparation stressée, glissade, chute, embouteillage derrière toi.",
+        "en": "Nervous prep, slide, wipeout, pile-up forming behind you."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "winter", "fail"]
+    },
+    {
+      "id": "dlm-124-duck-crossing",
+      "text": {
+        "fr": "Une maman canard qui fait traverser l'autoroute à ses canetons",
+        "en": "A mother duck herding her ducklings across the highway"
+      },
+      "hint": {
+        "fr": "Compter les petits, stopper le trafic d'une aile autoritaire.",
+        "en": "Count the babies, stop traffic with one bossy wing."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "wholesome"]
+    },
+    {
+      "id": "dlm-125-hamster-wheel",
+      "text": {
+        "fr": "Un hamster qui prépare les JO sur une roue qui grince",
+        "en": "A hamster training for the Olympics on a squeaky wheel"
+      },
+      "hint": {
+        "fr": "Échauffement sérieux, sprint, la roue grince, chute, on remonte.",
+        "en": "Serious warm-up, sprint, wheel squeals, crash, back on the wheel."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "sport"]
     }
   ]
 }

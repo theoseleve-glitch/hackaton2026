@@ -1,0 +1,8 @@
+# Keep deploys lean — source docs / generated PDF aren't served routes.
+docs/
+*.pdf
+*.jpeg
+*.png
+templates/
+*.md
+!public/**

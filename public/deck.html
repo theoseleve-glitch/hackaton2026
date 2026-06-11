@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fuel the Season — Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#080807; --paper2:#050504; --ink:#f7f0e6; --dim:#cfc7b9;
+    --orange:#ff5a1f; --gold:#f2b84b; --red:#e6392e;
+    --surface:#151412; --border:#2b2925; --line:#1c1a17; --mute:#a69f94;
+    --ac:var(--orange);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--paper2); color:var(--ink);
+    font-family:"Archivo","Helvetica Neue",sans-serif;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    -webkit-font-smoothing:antialiased;}
+  .deck{display:flex; flex-direction:column; align-items:center; gap:28px; padding:40px 0;}
+
+  .slide{
+    position:relative; width:1280px; height:720px; flex:0 0 auto;
+    background:var(--paper); overflow:hidden;
+    padding:72px 84px 64px; display:flex; flex-direction:column;
+    border:1px solid var(--border);
+  }
+  /* faint engineering gridlines */
+  .slide::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 90% at 70% 0%, #000 28%, transparent 78%);
+            mask-image:radial-gradient(120% 90% at 70% 0%, #000 28%, transparent 78%);
+  }
+  /* accent glow */
+  .slide::after{
+    content:""; position:absolute; right:-12%; top:-22%; width:760px; height:460px;
+    background:var(--ac); opacity:.10; filter:blur(150px); border-radius:50%; pointer-events:none;
+  }
+  .slide>*{position:relative; z-index:1;}
+
+  .eyebrow{display:flex; align-items:center; gap:14px;
+    font-family:"JetBrains Mono",monospace; font-size:15px; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--mute);}
+  .eyebrow .mark{display:inline-block; width:11px; height:11px; background:var(--ac);}
+  .eyebrow .idx{color:var(--dim);} .eyebrow .sl{color:var(--mute);}
+
+  .body{flex:1; display:flex; flex-direction:column; justify-content:center; gap:26px; padding:18px 0;}
+
+  h1{font-weight:800; letter-spacing:-.035em; line-height:.94; font-size:84px;}
+  h2{font-weight:800; letter-spacing:-.03em; line-height:.96; font-size:62px; max-width:20ch;}
+  .lead{font-size:25px; line-height:1.5; color:var(--dim); max-width:60ch; font-weight:400;}
+  .lead b{color:var(--ink); font-weight:700;}
+  .hl{color:var(--ac);}
+  .gold{color:var(--gold);} .red{color:var(--red);} .orange{color:var(--orange);}
+
+  ul{list-style:none; display:flex; flex-direction:column; gap:14px; max-width:64ch;}
+  li{display:flex; gap:16px; align-items:flex-start; font-size:23px; line-height:1.4; color:var(--ink);}
+  li .n{font-family:"JetBrains Mono",monospace; font-size:15px; color:var(--ac); padding-top:6px; min-width:26px;}
+  li.dim{color:var(--dim);}
+
+  .grid{display:grid; gap:1px; background:var(--border); border:1px solid var(--border);}
+  .cell{background:var(--paper); padding:26px 28px; display:flex; flex-direction:column; gap:8px;}
+  .cell .v{font-family:"JetBrains Mono",monospace; font-weight:500; font-size:52px; line-height:1; letter-spacing:-.02em;}
+  .cell .k{font-size:16px; color:var(--mute);}
+  .cols3{grid-template-columns:repeat(3,1fr);} .cols4{grid-template-columns:repeat(4,1fr);}
+
+  .mono{font-family:"JetBrains Mono",monospace;}
+  .tag{display:inline-flex; align-items:center; gap:8px; font-family:"JetBrains Mono",monospace;
+    font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--ac);
+    border:1px solid var(--ac); padding:7px 12px; border-radius:3px; width:max-content;}
+
+  .ladder{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); max-width:980px;}
+  .rung{background:var(--paper); padding:26px; display:flex; flex-direction:column; gap:14px;}
+  .rung.feat{background:rgba(255,90,31,.05); box-shadow:inset 0 0 0 1px var(--ac);}
+  .rung .price{font-family:"JetBrains Mono",monospace; font-size:46px; font-weight:500; letter-spacing:-.02em;}
+  .rung .nm{font-family:"JetBrains Mono",monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute);}
+  .rung small{display:block; font-size:16px; color:var(--dim); line-height:1.5; margin-top:4px;}
+
+  .row{display:flex; gap:26px; align-items:center;}
+  .arrow{color:var(--ac); font-family:"JetBrains Mono",monospace; font-size:26px;}
+
+  .foot{display:flex; width:100%; justify-content:space-between; align-items:center;
+    font-family:"JetBrains Mono",monospace; font-size:13px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mute); border-top:1px solid var(--border); padding-top:18px;}
+  .foot .bars{display:inline-flex; align-items:flex-end; gap:3px; margin-right:8px; vertical-align:-2px;}
+  .foot .bars i{display:block; width:4px; background:var(--orange);}
+  .foot .bars i:nth-child(1){height:7px;} .foot .bars i:nth-child(2){height:12px;} .foot .bars i:nth-child(3){height:18px;}
+
+  /* COVER */
+  .cover{align-items:flex-start; justify-content:center;}
+  .cover .wm{font-weight:900; letter-spacing:-.04em; line-height:.84;}
+  .cover .wm .a{font-size:148px;} .cover .wm .b{font-size:88px; letter-spacing:.02em;}
+  .cover .tag2{font-size:30px; color:var(--orange); font-weight:700; margin-top:18px;}
+  .cover .neg{font-family:"JetBrains Mono",monospace; font-size:19px; color:var(--dim); margin-top:26px; letter-spacing:.02em; line-height:1.7;}
+
+  @page{ size:1280px 720px; margin:0; }
+  @media print{
+    html,body{background:#fff;}
+    .deck{gap:0; padding:0;}
+    .slide{border:0; page-break-after:always; break-after:page;}
+    .slide:last-child{page-break-after:auto;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 01 COVER -->
+  <section class="slide cover" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">01</span><span class="sl">/</span> FUEL THE SEASON · PITCH</div>
+    <div class="body">
+      <div class="wm"><div class="a">FUEL</div><div class="b mono" style="color:var(--mute)">THE SEASON</div></div>
+      <div class="tag2">Turn performance into sponsor money.</div>
+      <div class="neg"><b style="color:var(--ink)">Not a website builder. Not a template. Not an agency.</b><br/>The athlete pitch, rebuilt for underfunded competitors.</div>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>fuel-the-season.vercel.app</span></div>
+  </section>
+
+  <!-- 02 PROBLEM -->
+  <section class="slide" style="--ac:var(--red)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">02</span><span class="sl">/</span> THE PROBLEM</div>
+    <div class="body">
+      <h1>Talent doesn't lose.<br/><span class="hl">Presentation does.</span></h1>
+      <p class="lead">A driver spends <b>€15,000</b> chasing a season — then pitches sponsors with a Word doc and a logo on a shirt.</p>
+      <p class="lead">Athletes don't lose sponsorship for a lack of talent. They lose because they can't package their value commercially. <b>They have the results. They can't sell the story.</b></p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>02 / 14</span></div>
+  </section>
+
+  <!-- 03 STATUS QUO -->
+  <section class="slide" style="--ac:var(--red)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">03</span><span class="sl">/</span> THE STATUS QUO</div>
+    <div class="body">
+      <h2>How athletes pitch sponsors today.</h2>
+      <ul>
+        <li><span class="n">01</span>Ugly PDF media kits &amp; dead Instagram bios</li>
+        <li><span class="n">02</span>"Logo on a shirt" offers — no measurable value</li>
+        <li><span class="n">03</span>No clear ask, no packages, no follow-up</li>
+        <li><span class="n">04</span>Parents losing evenings to amateur marketing</li>
+        <li><span class="n">05</span>Agencies charging €1k–5k they can't afford</li>
+      </ul>
+      <p class="lead"><b>The money's on the table. Nobody can reach it.</b></p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>03 / 14</span></div>
+  </section>
+
+  <!-- 04 SOLUTION -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">04</span><span class="sl">/</span> THE SOLUTION</div>
+    <div class="body">
+      <h1>Fuel the Season.</h1>
+      <p class="lead">We turn an athlete's results, story and funding goal into a <b>sponsor-ready website, media kit and outreach campaign</b> — built to raise the money to compete.</p>
+      <div class="grid cols3" style="max-width:1000px">
+        <div class="cell"><span class="v hl">Site</span><span class="k">+ PDF media kit</span></div>
+        <div class="cell"><span class="v hl">Packages</span><span class="k">+ outreach messages</span></div>
+        <div class="cell"><span class="v hl">Targets</span><span class="k">+ follow-up system</span></div>
+      </div>
+      <p class="lead mono" style="font-size:18px"><span class="hl">→</span> The athlete pitch, rebuilt for the sponsor era.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>04 / 14</span></div>
+  </section>
+
+  <!-- 05 DIFFERENTIATION -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">05</span><span class="sl">/</span> WHY WE'RE DIFFERENT</div>
+    <div class="body">
+      <h2>Not a builder. Not a template. <span class="hl">Not an agency.</span></h2>
+      <ul>
+        <li class="dim"><span class="n">—</span><b style="color:var(--ink)">Templates</b>&nbsp; still make you write the story, set the price, send it.</li>
+        <li class="dim"><span class="n">—</span><b style="color:var(--ink)">Marketplaces</b>&nbsp; wait for sponsors to find you.</li>
+        <li class="dim"><span class="n">—</span><b style="color:var(--ink)">Agencies</b>&nbsp; cost €1k–5k.</li>
+      </ul>
+      <div class="tag">THE WEDGE · A DATA-BACKED ROI REPORT AFTER EVERY EVENT</div>
+      <p class="lead">Sponsorship in sport is a black box. We quantify it. <b>Agency-quality, athlete-built, a tenth of the price.</b></p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>05 / 14</span></div>
+  </section>
+
+  <!-- 06 LIVE PROOF -->
+  <section class="slide" style="--ac:var(--gold)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">06</span><span class="sl">/</span> LIVE PROOF</div>
+    <div class="body">
+      <h2>Built it on myself. <span class="hl">Here's the receipt.</span></h2>
+      <p class="lead"><b>Théo Stipa</b> — Nantes, 22 — the engineer in the cockpit. Came to racing through science and precision, podium in both championships as a rookie, building the analytics that prove sponsor ROI.</p>
+      <p class="lead mono" style="font-size:19px"><span class="hl">→</span> See the real generated kit: <b>fuel-the-season.vercel.app/kit/jules</b></p>
+      <p class="lead"><b>From thin intake to sponsor-ready in minutes. Proof, not promises.</b></p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>06 / 14</span></div>
+  </section>
+
+  <!-- 07 HOW IT WORKS -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">07</span><span class="sl">/</span> HOW IT WORKS</div>
+    <div class="body">
+      <h2>Intake <span class="hl">→</span> campaign in minutes.</h2>
+      <ul>
+        <li><span class="n">01</span>Athlete fills a 10-min intake — results, story, goal, reach, assets.</li>
+        <li><span class="n">02</span>AI generates the full campaign.</li>
+        <li><span class="n">03</span>Founder review — the quality gate.</li>
+        <li><span class="n">04</span>Live site + PDF + outreach delivered.</li>
+      </ul>
+      <p class="lead mono" style="font-size:18px">Next.js + AI generation + instant deploy — built to scale to self-serve.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>07 / 14</span></div>
+  </section>
+
+  <!-- 08 MARKET -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">08</span><span class="sl">/</span> MARKET</div>
+    <div class="body">
+      <h2>Start where the pain is sharpest.</h2>
+      <p class="lead"><b class="hl">Beachhead:</b> young motorsport drivers, rental → owner kart. High cost, sponsorship near-mandatory, weak current materials — and a founder who lives it (FRKC grid, P2 in his championship).</p>
+      <p class="lead"><b class="hl">Expansion:</b> the same engine → swimmers, triathletes, combat sports, climbers, sailing — every underfunded individual athlete who has to sell their story.</p>
+      <p class="lead mono" style="font-size:18px">I start where I have an edge. The engine serves every underfunded athlete.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>08 / 14</span></div>
+  </section>
+
+  <!-- 09 TRACTION -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">09</span><span class="sl">/</span> TRACTION · THE 2-DAY SCORE</div>
+    <div class="body">
+      <h2>Selling this weekend, <span class="hl">not "someday."</span></h2>
+      <p class="lead"><b class="hl">Capture</b> (build at night): real product + example kits ready, intake live, pre-sell so cash lands in the sell window.</p>
+      <p class="lead"><b class="hl">Sell</b> (warm-first): <b>17 named prospects</b> from my own grid + parent channels; free-preview DMs → €49 to keep, direct ask for hot leads.</p>
+      <div class="row"><div class="cell" style="background:var(--surface); border:1px solid var(--border); padding:18px 24px"><span class="mono" style="color:var(--mute); font-size:14px">LIVE NUMBER</span><span class="mono" style="font-size:24px">€ collected · replies · calls</span></div></div>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>09 / 14</span></div>
+  </section>
+
+  <!-- 10 PRICING -->
+  <section class="slide" style="--ac:var(--gold)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">10</span><span class="sl">/</span> PRICING</div>
+    <div class="body">
+      <h2>Less than a set of tyres.</h2>
+      <div class="ladder">
+        <div class="rung"><span class="nm">Starter · 01</span><span class="price">€49</span><small>Live page + outreach script</small></div>
+        <div class="rung feat"><span class="nm">Full · 02</span><span class="price gold">€99</span><small>Page + media kit + 3 packages + 10 messages + target list</small></div>
+        <div class="rung"><span class="nm">Premium · 03</span><span class="price">€199</span><small>Everything in Full + call + revisions</small></div>
+      </div>
+      <p class="lead mono" style="font-size:18px">Later: SaaS €19–29/mo · clubs &amp; academies €99–299/mo. &nbsp;<span class="gold">Agencies: €1k–5k.</span></p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>10 / 14</span></div>
+  </section>
+
+  <!-- 11 REVENUE -->
+  <section class="slide" style="--ac:var(--gold)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">11</span><span class="sl">/</span> REVENUE</div>
+    <div class="body">
+      <h2>From cash this weekend to <span class="hl">€240k/yr.</span></h2>
+      <div class="grid cols3" style="max-width:1040px">
+        <div class="cell"><span class="v gold">€200–300</span><span class="k">~3 sales this weekend — real validation</span></div>
+        <div class="cell"><span class="v gold">€210k</span><span class="k">ARR run-rate by month 12 (€99 + €15/mo)</span></div>
+        <div class="cell"><span class="v gold">€240k+</span><span class="k">/yr at 1,000 active athletes</span></div>
+      </div>
+      <p class="lead mono" style="font-size:18px">One-time cash + recurring subscription + club deals.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>11 / 14</span></div>
+  </section>
+
+  <!-- 12 UNIT ECONOMICS -->
+  <section class="slide" style="--ac:var(--gold)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">12</span><span class="sl">/</span> UNIT ECONOMICS</div>
+    <div class="body">
+      <div class="row" style="gap:40px; align-items:flex-end">
+        <div><span class="mono gold" style="font-size:128px; font-weight:500; letter-spacing:-.03em; line-height:.85">~94%</span></div>
+        <h2 style="font-size:40px; max-width:14ch; padding-bottom:10px">gross margin — and it holds at scale.</h2>
+      </div>
+      <ul>
+        <li><span class="n">—</span>Per kit: AI ~€0.20 (≈0.3% of price); all-in COGS ~<b>€1–1.75</b> incl. Stripe.</li>
+        <li><span class="n">—</span>At 100 / 1,000 / 10,000 users, margin stays <b>~94%</b> — static pages, AI only on generation.</li>
+      </ul>
+      <p class="lead mono" style="font-size:17px">Biggest variable cost is Stripe, not AI. The constraint at scale is CAC &amp; support — never infra.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>12 / 14</span></div>
+  </section>
+
+  <!-- 13 ROADMAP -->
+  <section class="slide" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">13</span><span class="sl">/</span> ROADMAP</div>
+    <div class="body">
+      <h2>From hand-built to self-serve.</h2>
+      <ul>
+        <li><span class="n mono hl">P0</span><b>This weekend</b>&nbsp;— Wizard-of-Oz: real product, manual delivery, real sales.</li>
+        <li><span class="n mono hl">P1</span><b>Weeks 1–4</b>&nbsp;— semi-automated pipeline, &lt;30 min/kit.</li>
+        <li><span class="n mono hl">P2</span><b>Months 2–3</b>&nbsp;— self-serve MVP + subscriptions. Founder out of the loop.</li>
+        <li><span class="n mono hl">P3</span><b>Months 4–6</b>&nbsp;— the sponsorship OS: outreach tracker, page analytics, follow-up, multi-sport.</li>
+        <li><span class="n mono hl">P4</span><b>Month 6+</b>&nbsp;— club/academy B2B2C + federation partnerships.</li>
+      </ul>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>13 / 14</span></div>
+  </section>
+
+  <!-- 14 CLOSE -->
+  <section class="slide cover" style="--ac:var(--orange)">
+    <div class="eyebrow"><span class="mark"></span><span class="idx">14</span><span class="sl">/</span> THE ASK</div>
+    <div class="body">
+      <h1 style="font-size:118px">Raise your <span class="hl">season.</span></h1>
+      <p class="lead" style="font-size:27px; max-width:54ch">Every talented athlete is underfunded for one reason: they couldn't sell their story. <b>Fuel the Season fixes that</b> — this weekend, for less than a set of tyres.</p>
+      <p class="tag2" style="font-size:24px; color:var(--orange); font-weight:700">Build the athlete pitch. Raise the season.</p>
+    </div>
+    <div class="foot"><span><span class="bars"><i></i><i></i><i></i></span>FUEL THE SEASON</span><span>fuel-the-season.vercel.app</span></div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -118,7 +118,7 @@
       "difficulty": 1,
       "spicy": 0,
       "tags": ["nourriture", "quotidien"],
-      "exampleWords": { "fr": ["pain", "céréales", "lait", "beurre", "sucre", "fromage"], "en": ["bread", "cereal", "milk", "sugar", "tea", "eggs"] }
+      "exampleWords": { "fr": ["pain", "céréales", "lessive", "biscuits", "sucre", "riz"], "en": ["bread", "cereal", "shampoo", "toothpaste", "pasta", "eggs"] }
     },
     {
       "id": "jdt-trousse-015",
@@ -168,11 +168,11 @@
     {
       "id": "jdt-mer-020",
       "theme": { "fr": "Un animal qui vit dans la mer", "en": "A sea creature" },
-      "letters": { "fr": ["C", "R", "M", "B", "P", "T", "D", "H"], "en": ["S", "C", "O", "W", "T", "D", "J", "L"] },
+      "letters": { "fr": ["C", "R", "M", "B", "P", "T", "D", "H"], "en": ["S", "C", "O", "W", "T", "D", "M", "L"] },
       "difficulty": 1,
       "spicy": 0,
       "tags": ["animaux", "nature"],
-      "exampleWords": { "fr": ["crabe", "requin", "méduse", "baleine", "pieuvre", "dauphin"], "en": ["shark", "crab", "octopus", "whale", "turtle", "jellyfish"] }
+      "exampleWords": { "fr": ["crabe", "requin", "méduse", "baleine", "pieuvre", "dauphin"], "en": ["shark", "crab", "octopus", "whale", "turtle", "manatee"] }
     },
     {
       "id": "jdt-hiver-021",
@@ -245,6 +245,708 @@
       "spicy": 0,
       "tags": ["voyage"],
       "exampleWords": { "fr": ["passeport", "valise", "bagages", "contrôle", "douane", "avion"], "en": ["passport", "boarding pass", "security", "terminal", "customs", "gate"] }
+    },
+    {
+      "id": "jdt-jardin-030",
+      "theme": { "fr": "On en trouve dans un jardin", "en": "Things you find in a garden" },
+      "letters": { "fr": ["T", "F", "A", "R", "P", "H", "B"], "en": ["G", "F", "S", "W", "B", "R", "H", "L"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["maison", "nature"],
+      "exampleWords": { "fr": ["tondeuse", "fleurs", "arrosoir", "râteau", "pelouse", "brouette"], "en": ["grass", "shovel", "wheelbarrow", "bees", "rake", "hose"] }
+    },
+    {
+      "id": "jdt-corps-031",
+      "theme": { "fr": "Une partie du corps", "en": "A body part" },
+      "letters": { "fr": ["C", "P", "O", "M", "T", "G"], "en": ["A", "E", "F", "H", "S", "T"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien"],
+      "exampleWords": { "fr": ["coude", "pied", "oreille", "menton", "tête", "genou"], "en": ["ankle", "elbow", "finger", "hip", "shoulder", "thumb"] }
+    },
+    {
+      "id": "jdt-enville-032",
+      "theme": { "fr": "On en voit en ville", "en": "Things you see in a city" },
+      "letters": { "fr": ["B", "T", "P", "F", "M", "V", "L"], "en": ["B", "T", "S", "P", "C", "L", "M"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien", "monde"],
+      "exampleWords": { "fr": ["bus", "trottoir", "piétons", "feu rouge", "mairie", "lampadaire"], "en": ["buildings", "taxis", "skyscrapers", "pigeons", "crosswalks", "lampposts"] }
+    },
+    {
+      "id": "jdt-instruments-033",
+      "theme": { "fr": "Un instrument de musique", "en": "A musical instrument" },
+      "letters": { "fr": ["T", "C", "G", "V", "H", "B", "P"], "en": ["T", "C", "G", "V", "H", "B", "P", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["musique", "culture"],
+      "exampleWords": { "fr": ["trompette", "clarinette", "guitare", "violon", "harpe", "batterie"], "en": ["trumpet", "cello", "guitar", "violin", "harp", "drums"] }
+    },
+    {
+      "id": "jdt-rond-034",
+      "theme": { "fr": "C'est rond", "en": "It's round" },
+      "letters": { "fr": ["B", "P", "O", "R", "L", "T", "M"], "en": ["B", "P", "W", "M", "C", "D", "O"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets", "formes"],
+      "exampleWords": { "fr": ["ballon", "pizza", "orange", "roue", "lune", "tomate"], "en": ["balloon", "pancake", "wheel", "marble", "coin", "donut"] }
+    },
+    {
+      "id": "jdt-zoo-035",
+      "theme": { "fr": "On en voit au zoo", "en": "Things you see at the zoo" },
+      "letters": { "fr": ["G", "L", "P", "S", "T", "O", "C"], "en": ["G", "L", "P", "T", "E", "C", "M"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["animaux"],
+      "exampleWords": { "fr": ["girafe", "lion", "panda", "singe", "tigre", "otarie"], "en": ["giraffe", "lion", "penguin", "tiger", "elephant", "meerkat"] }
+    },
+    {
+      "id": "jdt-bebetes-036",
+      "theme": { "fr": "Un insecte ou une petite bête", "en": "A bug or a creepy-crawly" },
+      "letters": { "fr": ["F", "C", "M", "A", "P", "S", "G"], "en": ["B", "C", "M", "A", "S", "W", "F", "G"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["animaux", "nature"],
+      "exampleWords": { "fr": ["fourmi", "coccinelle", "moustique", "araignée", "papillon", "sauterelle"], "en": ["beetle", "caterpillar", "mosquito", "ant", "spider", "wasp"] }
+    },
+    {
+      "id": "jdt-ecole-037",
+      "theme": { "fr": "Ça fait partie de l'école", "en": "It's part of school life" },
+      "letters": { "fr": ["C", "T", "R", "P", "B", "D", "E"], "en": ["C", "T", "L", "P", "H", "B", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["ecole", "quotidien"],
+      "exampleWords": { "fr": ["cantine", "tableau", "récré", "préau", "bulletin", "dictée"], "en": ["cafeteria", "teachers", "lockers", "playground", "homework", "detention"] }
+    },
+    {
+      "id": "jdt-chambre-038",
+      "theme": { "fr": "On en trouve dans une chambre", "en": "Things in a bedroom" },
+      "letters": { "fr": ["L", "C", "O", "R", "M", "A", "P", "T"], "en": ["B", "P", "L", "C", "M", "W", "D", "A"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["maison", "objets"],
+      "exampleWords": { "fr": ["lit", "couette", "oreiller", "rideaux", "matelas", "armoire"], "en": ["bed", "pillow", "lamp", "closet", "mattress", "wardrobe"] }
+    },
+    {
+      "id": "jdt-outils-039",
+      "theme": { "fr": "Un outil de bricolage", "en": "A tool from the toolbox" },
+      "letters": { "fr": ["M", "P", "S", "T", "C", "E"], "en": ["H", "S", "W", "P", "D", "C", "T"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets", "maison"],
+      "exampleWords": { "fr": ["marteau", "perceuse", "scie", "tournevis", "clé", "échelle"], "en": ["hammer", "screwdriver", "wrench", "pliers", "drill", "chisel"] }
+    },
+    {
+      "id": "jdt-anniv-040",
+      "theme": { "fr": "On en voit à une fête d'anniversaire", "en": "Things at a birthday party" },
+      "letters": { "fr": ["B", "G", "C", "P", "S", "D"], "en": ["B", "C", "P", "G", "S", "D", "M"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["fete"],
+      "exampleWords": { "fr": ["bougies", "gâteau", "cadeaux", "piñata", "serpentins", "déco"], "en": ["balloons", "candles", "presents", "goodie bags", "streamers", "decorations"] }
+    },
+    {
+      "id": "jdt-ciel-041",
+      "theme": { "fr": "On peut le voir dans le ciel", "en": "Things you can see in the sky" },
+      "letters": { "fr": ["N", "E", "A", "S", "C", "M", "F"], "en": ["S", "C", "M", "R", "P", "B", "H"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nature"],
+      "exampleWords": { "fr": ["nuages", "étoiles", "avion", "soleil", "comète", "montgolfière"], "en": ["stars", "clouds", "moon", "rainbow", "planes", "helicopters"] }
+    },
+    {
+      "id": "jdt-hopital-042",
+      "theme": { "fr": "On en trouve dans un hôpital", "en": "Things in a hospital" },
+      "letters": { "fr": ["I", "M", "B", "S", "P", "C", "A"], "en": ["S", "N", "B", "W", "M", "P", "D", "A"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien"],
+      "exampleWords": { "fr": ["infirmière", "médicament", "béquilles", "seringue", "pansement", "ambulance"], "en": ["stethoscope", "nurses", "bandages", "wheelchair", "medicine", "doctors"] }
+    },
+    {
+      "id": "jdt-muscu-043",
+      "theme": { "fr": "On en voit à la salle de sport", "en": "Things you see at the gym" },
+      "letters": { "fr": ["H", "T", "M", "B", "V", "S", "C", "P"], "en": ["D", "T", "M", "B", "S", "W", "L", "P"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["sport", "quotidien"],
+      "exampleWords": { "fr": ["haltères", "tapis de course", "miroirs", "banc", "vestiaire", "coach"], "en": ["dumbbells", "treadmill", "mirrors", "bench", "squats", "weights"] }
+    },
+    {
+      "id": "jdt-garage-044",
+      "theme": { "fr": "Ça traîne dans un garage", "en": "Stuff lying around in a garage" },
+      "letters": { "fr": ["V", "P", "C", "E", "B", "T", "M"], "en": ["B", "T", "L", "P", "C", "S", "W"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["maison", "objets"],
+      "exampleWords": { "fr": ["vélo", "pneus", "cartons", "échelle", "bidons", "tondeuse"], "en": ["bikes", "tools", "ladder", "paint cans", "cobwebs", "spare parts"] }
+    },
+    {
+      "id": "jdt-noel-045",
+      "theme": { "fr": "Ça fait penser à Noël", "en": "It screams Christmas" },
+      "letters": { "fr": ["S", "C", "G", "B", "L", "M", "P"], "en": ["S", "C", "R", "T", "E", "M", "G"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["fete", "hiver"],
+      "exampleWords": { "fr": ["sapin", "cadeaux", "guirlandes", "bougies", "lutins", "Père Noël"], "en": ["Santa", "carols", "reindeer", "tinsel", "elves", "mistletoe"] }
+    },
+    {
+      "id": "jdt-halloween-046",
+      "theme": { "fr": "Ça fait penser à Halloween", "en": "It screams Halloween" },
+      "letters": { "fr": ["C", "B", "S", "F", "M", "V", "T"], "en": ["P", "C", "W", "S", "G", "B", "M", "V"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["fete"],
+      "exampleWords": { "fr": ["citrouille", "bonbons", "sorcière", "fantôme", "momie", "vampire"], "en": ["pumpkin", "costumes", "witch", "skeleton", "ghost", "bats"] }
+    },
+    {
+      "id": "jdt-mariage-047",
+      "theme": { "fr": "On en voit à un mariage", "en": "Things you see at a wedding" },
+      "letters": { "fr": ["B", "R", "M", "D", "C", "P", "T", "F"], "en": ["B", "C", "D", "R", "S", "V", "F", "G"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["fete", "social"],
+      "exampleWords": { "fr": ["bouquet", "robe", "mariée", "dragées", "champagne", "témoins"], "en": ["bride", "cake", "dress", "rings", "speeches", "vows"] }
+    },
+    {
+      "id": "jdt-foret-048",
+      "theme": { "fr": "On en trouve en forêt", "en": "Things you find in a forest" },
+      "letters": { "fr": ["C", "A", "M", "S", "B", "F", "E", "R"], "en": ["T", "M", "S", "B", "F", "L", "O", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nature"],
+      "exampleWords": { "fr": ["champignons", "arbres", "mousse", "sanglier", "biche", "fougères"], "en": ["trees", "moss", "squirrels", "bears", "ferns", "logs"] }
+    },
+    {
+      "id": "jdt-brulant-049",
+      "theme": { "fr": "C'est brûlant, attention !", "en": "It's burning hot, careful!" },
+      "letters": { "fr": ["S", "F", "C", "B", "P", "T", "R"], "en": ["S", "F", "C", "L", "O", "B", "T"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien"],
+      "exampleWords": { "fr": ["soupe", "four", "café", "braises", "poêle", "radiateur"], "en": ["sun", "frying pan", "coffee", "lava", "oven", "bonfire"] }
+    },
+    {
+      "id": "jdt-roues-050",
+      "theme": { "fr": "Ça a des roues", "en": "It has wheels" },
+      "letters": { "fr": ["V", "T", "C", "B", "S", "M", "P", "R"], "en": ["T", "S", "B", "C", "W", "M", "R", "L"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets"],
+      "exampleWords": { "fr": ["vélo", "trottinette", "camion", "brouette", "skate", "poussette"], "en": ["tractor", "scooter", "bus", "cart", "wheelchair", "lorry"] }
+    },
+    {
+      "id": "jdt-doux-051",
+      "theme": { "fr": "C'est tout doux", "en": "It's soft and fluffy" },
+      "letters": { "fr": ["C", "P", "L", "V", "M", "O", "D"], "en": ["P", "B", "C", "F", "K", "S", "M"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets", "quotidien"],
+      "exampleWords": { "fr": ["coussin", "peluche", "lapin", "velours", "mousse", "doudou"], "en": ["pillow", "blanket", "cotton", "fleece", "kitten", "marshmallow"] }
+    },
+    {
+      "id": "jdt-sentbon-108",
+      "theme": { "fr": "Ça sent incroyablement bon", "en": "Things that smell amazing" },
+      "letters": { "fr": ["C", "P", "L", "V", "S", "F", "M"], "en": ["C", "B", "L", "S", "F", "P", "R"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien", "sens"],
+      "exampleWords": { "fr": ["café", "pain chaud", "lavande", "vanille", "savon", "fleurs"], "en": ["coffee", "fresh bread", "lavender", "sunscreen", "flowers", "popcorn"] }
+    },
+    {
+      "id": "jdt-cinema-053",
+      "theme": { "fr": "On en trouve au cinéma", "en": "Things at the movie theater" },
+      "letters": { "fr": ["P", "E", "B", "S", "F", "C", "G"], "en": ["P", "S", "T", "C", "A", "N", "M"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["culture", "sortie"],
+      "exampleWords": { "fr": ["pop-corn", "écran", "billets", "siège", "film", "glaces"], "en": ["popcorn", "screen", "tickets", "candy", "aisle", "nachos"] }
+    },
+    {
+      "id": "jdt-piscine-054",
+      "theme": { "fr": "On en voit à la piscine", "en": "Things you see at the pool" },
+      "letters": { "fr": ["B", "M", "P", "T", "S", "L", "C", "E"], "en": ["S", "T", "L", "G", "D", "F", "W", "C"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["ete", "sport"],
+      "exampleWords": { "fr": ["bouée", "maillot", "plongeoir", "toboggan", "serviette", "lunettes"], "en": ["swimsuit", "towel", "lifeguard", "goggles", "diving board", "floaties"] }
+    },
+    {
+      "id": "jdt-openspace-055",
+      "theme": { "fr": "On en trouve dans un bureau", "en": "Things in an office" },
+      "letters": { "fr": ["O", "C", "I", "P", "S", "B", "T", "R"], "en": ["P", "C", "M", "S", "D", "K", "F", "W"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["quotidien", "travail"],
+      "exampleWords": { "fr": ["ordinateur", "clavier", "imprimante", "post-it", "souris", "trombone"], "en": ["printer", "coffee", "meetings", "stapler", "desk", "keyboard"] }
+    },
+    {
+      "id": "jdt-capitales-056",
+      "theme": { "fr": "Une capitale", "en": "A capital city" },
+      "letters": { "fr": ["B", "L", "M", "P", "R", "A", "T"], "en": ["B", "L", "M", "P", "R", "A", "T", "C"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["monde", "culture"],
+      "exampleWords": { "fr": ["Berlin", "Lisbonne", "Madrid", "Paris", "Rome", "Athènes"], "en": ["Bangkok", "London", "Moscow", "Prague", "Reykjavik", "Athens"] }
+    },
+    {
+      "id": "jdt-fleurarbre-057",
+      "theme": { "fr": "Une fleur ou un arbre", "en": "A flower or a tree" },
+      "letters": { "fr": ["C", "R", "T", "L", "M", "P", "O", "S"], "en": ["O", "R", "T", "L", "M", "P", "D", "S"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["nature"],
+      "exampleWords": { "fr": ["coquelicot", "rose", "tulipe", "lilas", "muguet", "pivoine"], "en": ["oak", "rose", "tulip", "lily", "maple", "daisy"] }
+    },
+    {
+      "id": "jdt-oiseaux-058",
+      "theme": { "fr": "Un oiseau", "en": "A bird" },
+      "letters": { "fr": ["M", "P", "C", "A", "H", "F"], "en": ["P", "S", "C", "O", "F", "E", "H", "D"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["animaux", "nature"],
+      "exampleWords": { "fr": ["moineau", "pigeon", "corbeau", "aigle", "hibou", "flamant rose"], "en": ["parrot", "swan", "crow", "owl", "falcon", "eagle"] }
+    },
+    {
+      "id": "jdt-monuments-059",
+      "theme": { "fr": "Un monument ou un lieu célèbre", "en": "A famous landmark" },
+      "letters": { "fr": ["T", "P", "C", "M", "S", "A", "B"], "en": ["S", "T", "P", "C", "B", "E", "M", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "monde"],
+      "exampleWords": { "fr": ["Tour Eiffel", "Pyramides", "Colisée", "Mont-Saint-Michel", "Sphinx", "Arc de Triomphe"], "en": ["Stonehenge", "Taj Mahal", "Pyramids", "Colosseum", "Big Ben", "Grand Canyon"] }
+    },
+    {
+      "id": "jdt-glaces-060",
+      "theme": { "fr": "Un parfum de glace", "en": "An ice cream flavor" },
+      "letters": { "fr": ["C", "P", "F", "M", "V", "N", "A"], "en": ["C", "P", "S", "M", "V", "L", "B", "R"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["nourriture"],
+      "exampleWords": { "fr": ["chocolat", "pistache", "fraise", "menthe", "vanille", "noisette"], "en": ["caramel", "pistachio", "strawberry", "mint", "vanilla", "bubblegum"] }
+    },
+    {
+      "id": "jdt-sandwich-061",
+      "theme": { "fr": "Ça se met dans un sandwich", "en": "Things you put in a sandwich" },
+      "letters": { "fr": ["T", "J", "F", "S", "C", "P", "M", "O"], "en": ["T", "H", "C", "L", "M", "P", "B", "O"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nourriture"],
+      "exampleWords": { "fr": ["tomate", "jambon", "fromage", "salade", "cornichons", "mayonnaise"], "en": ["tuna", "ham", "cheese", "lettuce", "mustard", "pickles"] }
+    },
+    {
+      "id": "jdt-epices-062",
+      "theme": { "fr": "Une herbe ou une épice", "en": "A herb or a spice" },
+      "letters": { "fr": ["C", "P", "B", "T", "M", "S", "G", "R"], "en": ["C", "P", "B", "T", "M", "S", "G", "R"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["nourriture"],
+      "exampleWords": { "fr": ["cannelle", "paprika", "basilic", "thym", "muscade", "gingembre"], "en": ["cinnamon", "pepper", "basil", "thyme", "mint", "ginger"] }
+    },
+    {
+      "id": "jdt-montagne-063",
+      "theme": { "fr": "On en voit à la montagne", "en": "Things you see in the mountains" },
+      "letters": { "fr": ["S", "N", "C", "R", "T", "M", "V", "A"], "en": ["S", "C", "T", "R", "G", "P", "H", "W"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nature", "vacances"],
+      "exampleWords": { "fr": ["sommet", "neige", "chalet", "refuge", "télésiège", "marmotte"], "en": ["summit", "cliffs", "trails", "rocks", "goats", "hikers"] }
+    },
+    {
+      "id": "jdt-festival-064",
+      "theme": { "fr": "On en voit dans un festival de musique", "en": "Things at a music festival" },
+      "letters": { "fr": ["S", "T", "C", "F", "G", "M", "L", "B"], "en": ["S", "T", "C", "F", "W", "M", "L", "B"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["musique", "fete"],
+      "exampleWords": { "fr": ["scène", "tente", "camping", "foule", "gobelets", "lumières"], "en": ["stage", "tents", "crowds", "food trucks", "wristbands", "mosh pit"] }
+    },
+    {
+      "id": "jdt-hotel-065",
+      "theme": { "fr": "On en trouve dans une chambre d'hôtel", "en": "Things in a hotel room" },
+      "letters": { "fr": ["M", "S", "T", "C", "P", "L", "R", "O"], "en": ["M", "T", "S", "R", "P", "K", "B", "H"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["voyage"],
+      "exampleWords": { "fr": ["minibar", "serviettes", "télévision", "coffre-fort", "peignoir", "room service"], "en": ["minibar", "towels", "slippers", "room service", "pillows", "key card"] }
+    },
+    {
+      "id": "jdt-barbecue-066",
+      "theme": { "fr": "On en voit à un barbecue", "en": "Things at a barbecue" },
+      "letters": { "fr": ["S", "B", "C", "M", "G", "P", "F", "T"], "en": ["B", "S", "G", "C", "R", "T", "M", "H"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["ete", "nourriture"],
+      "exampleWords": { "fr": ["saucisses", "brochettes", "charbon", "merguez", "grille", "pinces"], "en": ["burgers", "sausages", "grill", "charcoal", "ribs", "tongs"] }
+    },
+    {
+      "id": "jdt-prise-067",
+      "theme": { "fr": "Ça se branche sur une prise", "en": "Things you plug into the wall" },
+      "letters": { "fr": ["T", "A", "L", "C", "F", "M", "S", "R"], "en": ["T", "L", "C", "F", "M", "H", "S", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets", "maison"],
+      "exampleWords": { "fr": ["télé", "aspirateur", "lampe", "chargeur", "four", "micro-ondes"], "en": ["toaster", "lamp", "charger", "fan", "microwave", "dishwasher"] }
+    },
+    {
+      "id": "jdt-mains-068",
+      "theme": { "fr": "Ça se fait avec les mains", "en": "Things you do with your hands" },
+      "letters": { "fr": ["C", "T", "D", "P", "A", "S", "E", "L"], "en": ["C", "T", "W", "P", "S", "K", "D", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["actions"],
+      "exampleWords": { "fr": ["claquer", "tricoter", "dessiner", "peindre", "applaudir", "écrire"], "en": ["clap", "type", "wave", "paint", "sew", "knit"] }
+    },
+    {
+      "id": "jdt-matin-069",
+      "theme": { "fr": "Ça fait partie du rituel du matin", "en": "It's part of the morning routine" },
+      "letters": { "fr": ["S", "D", "C", "B", "R", "P", "M"], "en": ["S", "B", "C", "T", "W", "D", "M", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["quotidien", "actions"],
+      "exampleWords": { "fr": ["snoozer", "douche", "café", "bâiller", "râler", "petit-déj"], "en": ["shower", "breakfast", "coffee", "toast", "waking up", "makeup"] }
+    },
+    {
+      "id": "jdt-soiree-070",
+      "theme": { "fr": "Ça arrive à toutes les soirées", "en": "It happens at every party" },
+      "letters": { "fr": ["D", "M", "P", "S", "R", "C", "V", "G"], "en": ["D", "S", "P", "M", "L", "C", "N", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["fete", "humour"],
+      "exampleWords": { "fr": ["danse", "musique trop forte", "pizza", "selfies", "retardataires", "gobelets"], "en": ["dancing", "snacks", "playlist fights", "music", "latecomers", "charades"] }
+    },
+    {
+      "id": "jdt-fonddusac-071",
+      "theme": { "fr": "On le retrouve au fond d'un sac", "en": "Things found at the bottom of a bag" },
+      "letters": { "fr": ["M", "C", "T", "B", "S", "E", "P", "L"], "en": ["C", "R", "K", "T", "G", "P", "L", "H"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["mouchoirs", "clés", "tickets", "briquet", "stylo", "lingettes"], "en": ["crumbs", "receipts", "keys", "tissues", "gum", "hair ties"] }
+    },
+    {
+      "id": "jdt-disparait-072",
+      "theme": { "fr": "Ça disparaît toujours mystérieusement", "en": "Things that mysteriously vanish" },
+      "letters": { "fr": ["C", "S", "B", "T", "L", "E", "M", "P"], "en": ["S", "P", "L", "R", "H", "K", "T", "M"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour"],
+      "exampleWords": { "fr": ["chaussettes", "stylos", "briquets", "télécommande", "lunettes", "élastiques"], "en": ["socks", "pens", "lighters", "remote", "hair ties", "Tupperware lids"] }
+    },
+    {
+      "id": "jdt-retard-073",
+      "theme": { "fr": "Une excuse de retard, crédible ou pas", "en": "An excuse for being late, believable or not" },
+      "letters": { "fr": ["B", "P", "R", "T", "M", "G", "C", "A"], "en": ["T", "A", "B", "C", "W", "D", "K", "P"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["bus raté", "panne", "réveil", "trafic", "grève", "clés perdues"], "en": ["traffic", "alarm", "bus", "construction", "weather", "keys"] }
+    },
+    {
+      "id": "jdt-coloc-074",
+      "theme": { "fr": "Ça déclenche une guerre en coloc", "en": "Things that start a flatmate war" },
+      "letters": { "fr": ["V", "B", "F", "M", "P", "C", "L", "D"], "en": ["D", "N", "B", "F", "T", "L", "M", "C"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "maison"],
+      "exampleWords": { "fr": ["vaisselle", "bruit", "frigo pillé", "ménage", "poubelles", "lessive"], "en": ["dishes", "noise", "bills", "fridge raids", "trash", "thermostat"] }
+    },
+    {
+      "id": "jdt-semblant-075",
+      "theme": { "fr": "On fait tous semblant d'aimer ça", "en": "Things we all pretend to like" },
+      "letters": { "fr": ["R", "S", "J", "C", "L", "B", "T", "M"], "en": ["K", "S", "J", "M", "N", "G", "O", "H"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour"],
+      "exampleWords": { "fr": ["réunions", "smoothies verts", "jogging", "camping", "lundis", "brocolis"], "en": ["kale", "small talk", "jogging", "meditation", "networking", "gym"] }
+    },
+    {
+      "id": "jdt-invites-076",
+      "theme": { "fr": "On le cache quand des invités arrivent", "en": "Things you hide when guests come over" },
+      "letters": { "fr": ["L", "V", "C", "B", "P", "F", "M", "D"], "en": ["L", "D", "P", "M", "C", "T", "S", "B"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "maison"],
+      "exampleWords": { "fr": ["linge sale", "vaisselle", "cartons de pizza", "bazar", "pyjama", "désordre"], "en": ["laundry", "dishes", "pizza boxes", "mess", "clutter", "takeout boxes"] }
+    },
+    {
+      "id": "jdt-collection-077",
+      "theme": { "fr": "Ça se collectionne", "en": "Things people collect" },
+      "letters": { "fr": ["T", "P", "C", "M", "F", "A", "V", "B"], "en": ["S", "C", "F", "V", "B", "T", "M", "P"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["objets", "loisirs"],
+      "exampleWords": { "fr": ["timbres", "pin's", "cartes", "magnets", "figurines", "vinyles"], "en": ["stamps", "coins", "figurines", "vinyl records", "trading cards", "mugs"] }
+    },
+    {
+      "id": "jdt-repasfamille-078",
+      "theme": { "fr": "Il y en a à chaque repas de famille", "en": "At every family dinner, there's…" },
+      "letters": { "fr": ["T", "D", "G", "P", "Q", "R", "S", "C"], "en": ["L", "A", "G", "P", "S", "T", "D", "N"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "famille"],
+      "exampleWords": { "fr": ["tonton blagueur", "débats", "gratin", "politique", "questions gênantes", "chamailleries"], "en": ["leftovers", "awkward questions", "gossip", "politics", "seconds", "dad jokes"] }
+    },
+    {
+      "id": "jdt-casse-079",
+      "theme": { "fr": "Ça lâche toujours au pire moment", "en": "It breaks at the worst possible moment" },
+      "letters": { "fr": ["T", "V", "L", "C", "I", "A", "P", "O"], "en": ["P", "W", "H", "S", "C", "L", "E", "I"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["téléphone", "voiture", "lacet", "chargeur", "imprimante", "pneu"], "en": ["phone", "wifi", "heels", "shoelaces", "charger", "elevator"] }
+    },
+    {
+      "id": "jdt-valise-080",
+      "theme": { "fr": "On l'oublie toujours en partant en voyage", "en": "Things you always forget when packing" },
+      "letters": { "fr": ["B", "C", "P", "L", "M", "A", "S", "T"], "en": ["C", "T", "S", "P", "U", "A", "M", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["voyage", "humour"],
+      "exampleWords": { "fr": ["brosse à dents", "chargeur", "pansements", "lunettes", "maillot", "adaptateur"], "en": ["charger", "toothbrush", "sunscreen", "passport", "umbrella", "adapter"] }
+    },
+    {
+      "id": "jdt-resolutions-081",
+      "theme": { "fr": "Une bonne résolution jamais tenue", "en": "A New Year's resolution nobody keeps" },
+      "letters": { "fr": ["S", "L", "E", "M", "C", "R", "A", "D"], "en": ["G", "R", "S", "D", "E", "L", "M", "W"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["sport", "lecture", "économiser", "méditer", "courir", "régime"], "en": ["gym", "running", "saving money", "dieting", "eating healthy", "waking up early"] }
+    },
+    {
+      "id": "jdt-attente-082",
+      "theme": { "fr": "On en voit dans une salle d'attente", "en": "Things in a waiting room" },
+      "letters": { "fr": ["M", "C", "P", "R", "T", "A", "S"], "en": ["M", "C", "P", "R", "T", "W", "S", "F"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["quotidien", "humour"],
+      "exampleWords": { "fr": ["magazines", "chaises", "plantes vertes", "revues", "tickets", "affiches"], "en": ["magazines", "coughing", "posters", "receptionist", "tissues", "fish tank"] }
+    },
+    {
+      "id": "jdt-bouchons-083",
+      "theme": { "fr": "On le fait tous dans les bouchons", "en": "Things we all do in traffic jams" },
+      "letters": { "fr": ["C", "R", "S", "P", "T", "G", "M", "D"], "en": ["S", "H", "M", "D", "R", "C", "T", "P"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["chanter", "râler", "soupirer", "pester", "tapoter le volant", "grignoter"], "en": ["singing", "honking", "munching", "daydreaming", "ranting", "podcasts"] }
+    },
+    {
+      "id": "jdt-nuitblanche-084",
+      "theme": { "fr": "Ça réveille en pleine nuit", "en": "Things that wake you up at night" },
+      "letters": { "fr": ["M", "O", "B", "V", "C", "S", "P", "R"], "en": ["M", "T", "N", "S", "C", "D", "B", "P"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["moustique", "orage", "bébé", "voisins", "cauchemar", "ronflements"], "en": ["mosquitoes", "thunder", "nightmares", "sirens", "car alarms", "dripping taps"] }
+    },
+    {
+      "id": "jdt-incendie-085",
+      "theme": { "fr": "La maison brûle : tu sauves quoi ?", "en": "House on fire: what do you grab?" },
+      "letters": { "fr": ["T", "P", "C", "D", "A", "L", "B", "O"], "en": ["P", "L", "W", "D", "C", "J", "B", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour"],
+      "exampleWords": { "fr": ["téléphone", "photos", "chat", "doudou", "albums", "lunettes"], "en": ["phone", "laptop", "wallet", "dog", "cat", "jewelry"] }
+    },
+    {
+      "id": "jdt-pirates-086",
+      "theme": { "fr": "On en voit dans un film de pirates", "en": "Things in a pirate movie" },
+      "letters": { "fr": ["T", "P", "C", "B", "S", "I", "N", "M"], "en": ["T", "P", "C", "S", "M", "G", "B", "H"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["culture", "aventure"],
+      "exampleWords": { "fr": ["trésor", "perroquet", "canons", "boussole", "sabre", "mutinerie"], "en": ["treasure", "parrot", "cannons", "ship", "map", "hook"] }
+    },
+    {
+      "id": "jdt-espace-087",
+      "theme": { "fr": "On en trouve dans l'espace", "en": "Things in space" },
+      "letters": { "fr": ["S", "P", "E", "C", "A", "M", "F", "L"], "en": ["S", "P", "A", "M", "C", "R", "N", "G"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["science", "nature"],
+      "exampleWords": { "fr": ["satellites", "planètes", "étoiles", "comètes", "astronaute", "fusée"], "en": ["stars", "planets", "asteroids", "meteors", "rockets", "galaxies"] }
+    },
+    {
+      "id": "jdt-magie-088",
+      "theme": { "fr": "On en trouve dans un monde magique", "en": "Things in a magical world" },
+      "letters": { "fr": ["D", "S", "B", "F", "P", "C", "L", "G"], "en": ["D", "W", "S", "F", "P", "C", "M", "G"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["culture", "fantasy"],
+      "exampleWords": { "fr": ["dragons", "sortilèges", "baguette", "fées", "potions", "licornes"], "en": ["dragons", "wizards", "spells", "fairies", "potions", "mermaids"] }
+    },
+    {
+      "id": "jdt-superheros-089",
+      "theme": { "fr": "Un super-héros ou un super-vilain", "en": "A superhero or a supervillain" },
+      "letters": { "fr": ["S", "B", "T", "C", "H", "M", "I", "W"], "en": ["S", "B", "T", "C", "H", "M", "I", "W"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "pop"],
+      "exampleWords": { "fr": ["Superman", "Batman", "Thor", "Catwoman", "Hulk", "Iron Man"], "en": ["Spider-Man", "Black Panther", "Thanos", "Captain America", "Harley Quinn", "Wolverine"] }
+    },
+    {
+      "id": "jdt-cartoon-090",
+      "theme": { "fr": "Un personnage de dessin animé", "en": "A cartoon character" },
+      "letters": { "fr": ["B", "S", "M", "P", "T", "D", "A", "N"], "en": ["B", "S", "M", "P", "D", "A", "E", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "pop"],
+      "exampleWords": { "fr": ["Bob l'éponge", "Simba", "Mickey", "Pikachu", "Titeuf", "Dory"], "en": ["Bugs Bunny", "SpongeBob", "Moana", "Pikachu", "Donald Duck", "Elsa"] }
+    },
+    {
+      "id": "jdt-jeuxvideo-091",
+      "theme": { "fr": "Un jeu vidéo", "en": "A video game" },
+      "letters": { "fr": ["M", "F", "R", "P", "S", "T", "C", "A"], "en": ["M", "F", "R", "P", "S", "T", "C", "A"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "pop"],
+      "exampleWords": { "fr": ["Mario Kart", "Fortnite", "Roblox", "Pokémon", "Sims", "Tetris"], "en": ["Minecraft", "FIFA", "Roblox", "Pac-Man", "Sonic", "Tomb Raider"] }
+    },
+    {
+      "id": "jdt-applis-092",
+      "theme": { "fr": "Une appli sur ton téléphone", "en": "An app on your phone" },
+      "letters": { "fr": ["I", "S", "T", "W", "C", "G", "N", "D"], "en": ["I", "S", "T", "W", "C", "G", "N", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["pop", "quotidien"],
+      "exampleWords": { "fr": ["Instagram", "Spotify", "TikTok", "WhatsApp", "Chrome", "Deezer"], "en": ["Instagram", "Snapchat", "TikTok", "Waze", "Candy Crush", "Duolingo"] }
+    },
+    {
+      "id": "jdt-series-093",
+      "theme": { "fr": "Une série télé", "en": "A TV series" },
+      "letters": { "fr": ["F", "S", "L", "B", "G", "D", "P", "M"], "en": ["F", "S", "B", "G", "D", "P", "L", "W"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "pop"],
+      "exampleWords": { "fr": ["Friends", "Stranger Things", "Lupin", "Breaking Bad", "Game of Thrones", "Dix pour cent"], "en": ["Friends", "Squid Game", "Bridgerton", "Grey's Anatomy", "Dark", "Wednesday"] }
+    },
+    {
+      "id": "jdt-films-094",
+      "theme": { "fr": "Un film que tout le monde connaît", "en": "A movie everyone knows" },
+      "letters": { "fr": ["T", "A", "S", "H", "I", "J", "M", "R"], "en": ["T", "A", "S", "H", "I", "J", "M", "F"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["culture", "pop"],
+      "exampleWords": { "fr": ["Titanic", "Avatar", "Star Wars", "Harry Potter", "Intouchables", "Jurassic Park"], "en": ["Toy Story", "Avengers", "Shrek", "Home Alone", "Inception", "Jaws"] }
+    },
+    {
+      "id": "jdt-musique-095",
+      "theme": { "fr": "Un artiste ou un groupe de musique", "en": "A singer or a band" },
+      "letters": { "fr": ["B", "S", "A", "M", "J", "D", "C", "R"], "en": ["B", "S", "A", "M", "J", "D", "C", "T"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["culture", "musique"],
+      "exampleWords": { "fr": ["Beyoncé", "Stromae", "Angèle", "Mylène Farmer", "Jul", "Daft Punk"], "en": ["Billie Eilish", "Shakira", "Adele", "Metallica", "Jay-Z", "Drake"] }
+    },
+    {
+      "id": "jdt-villes-096",
+      "theme": { "fr": "Une ville, n'importe où dans le monde", "en": "A city, anywhere in the world" },
+      "letters": { "fr": ["M", "L", "B", "T", "N", "S", "P", "R"], "en": ["M", "L", "B", "T", "N", "S", "C", "D"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["monde"],
+      "exampleWords": { "fr": ["Marseille", "Lyon", "Bordeaux", "Tokyo", "Nantes", "Séville"], "en": ["Miami", "London", "Bangkok", "Toronto", "Nairobi", "Seoul"] }
+    },
+    {
+      "id": "jdt-flotte-097",
+      "theme": { "fr": "Ça flotte sur l'eau", "en": "It floats on water" },
+      "letters": { "fr": ["B", "C", "P", "L", "R", "F", "N", "G"], "en": ["B", "D", "C", "R", "L", "I", "S", "P"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["nature", "objets"],
+      "exampleWords": { "fr": ["bateau", "canard en plastique", "pédalo", "liège", "radeau", "nénuphar"], "en": ["buoy", "rubber duck", "cork", "raft", "lily pad", "surfboard"] }
+    },
+    {
+      "id": "jdt-bruits-098",
+      "theme": { "fr": "Un bruit insupportable", "en": "An unbearable sound" },
+      "letters": { "fr": ["A", "K", "R", "C", "P", "M", "S", "T"], "en": ["A", "S", "C", "D", "N", "L", "V", "P"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour"],
+      "exampleWords": { "fr": ["alarme", "klaxon", "ronflements", "craie sur tableau", "perceuse", "mastication"], "en": ["alarms", "snoring", "chewing", "drilling", "nails on chalkboard", "leaf blowers"] }
+    },
+    {
+      "id": "jdt-invisible-099",
+      "theme": { "fr": "C'est invisible mais ça existe", "en": "It's invisible but it's real" },
+      "letters": { "fr": ["V", "G", "O", "A", "S", "M", "E", "C"], "en": ["W", "G", "A", "S", "E", "O", "M", "T"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["science", "abstrait"],
+      "exampleWords": { "fr": ["vent", "gravité", "ondes", "air", "son", "électricité"], "en": ["wind", "gravity", "atoms", "smells", "electricity", "time"] }
+    },
+    {
+      "id": "jdt-trente-ans-100",
+      "theme": { "fr": "Ça n'existait pas il y a 30 ans", "en": "It didn't exist 30 years ago" },
+      "letters": { "fr": ["S", "T", "I", "E", "W", "L", "P", "V"], "en": ["S", "T", "I", "E", "W", "P", "V", "D"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["smartphones", "TikTok", "influenceurs", "emojis", "wifi", "podcasts"], "en": ["selfies", "TikTok", "Instagram", "e-scooters", "wireless earbuds", "dating apps"] }
+    },
+    {
+      "id": "jdt-mamie-101",
+      "theme": { "fr": "On n'en voit que chez les grands-parents", "en": "You only see it at grandma's house" },
+      "letters": { "fr": ["N", "C", "B", "P", "T", "V", "A", "M"], "en": ["D", "C", "P", "K", "W", "B", "R", "A"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "famille"],
+      "exampleWords": { "fr": ["napperons", "confiture maison", "bibelots", "pendule", "tapisserie", "vaisselier"], "en": ["doilies", "cuckoo clock", "porcelain", "knick-knacks", "rocking chair", "rotary phone"] }
+    },
+    {
+      "id": "jdt-comprendre-102",
+      "theme": { "fr": "On fait semblant de comprendre", "en": "Things we pretend to understand" },
+      "letters": { "fr": ["C", "I", "V", "B", "P", "A", "M", "E"], "en": ["C", "T", "W", "S", "M", "B", "I", "O"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "abstrait"],
+      "exampleWords": { "fr": ["crypto", "impôts", "vin", "bourse", "politique", "art moderne"], "en": ["crypto", "taxes", "wine tasting", "stock market", "mortgages", "offside rule"] }
+    },
+    {
+      "id": "jdt-troisheures-103",
+      "theme": { "fr": "Une raison d'être debout à 3h du matin", "en": "A reason to be awake at 3 a.m." },
+      "letters": { "fr": ["S", "I", "B", "R", "F", "T", "C", "M"], "en": ["S", "I", "B", "O", "N", "P", "C", "W"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["série", "insomnie", "bébé", "révisions", "frigo", "cauchemar"], "en": ["snacks", "insomnia", "baby", "overthinking", "Netflix", "weird noises"] }
+    },
+    {
+      "id": "jdt-plusjamais-104",
+      "theme": { "fr": "On a dit « plus jamais »… et on l'a refait", "en": "We said 'never again'… then did it again" },
+      "letters": { "fr": ["S", "M", "R", "C", "P", "F", "A", "B"], "en": ["S", "M", "B", "C", "I", "H", "P", "O"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour"],
+      "exampleWords": { "fr": ["soldes", "marathon de séries", "régime express", "commandes à minuit", "procrastiner", "frange maison"], "en": ["sales shopping", "midnight snacks", "binge-watching", "crash diets", "IKEA assembly", "hitting snooze"] }
+    },
+    {
+      "id": "jdt-lourd-105",
+      "theme": { "fr": "C'est plus lourd qu'un frigo", "en": "It's heavier than a fridge" },
+      "letters": { "fr": ["V", "P", "E", "B", "T", "C", "M", "A"], "en": ["E", "P", "C", "T", "B", "W", "H", "S"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "jury"],
+      "exampleWords": { "fr": ["voiture", "piano", "éléphant", "baleine", "tracteur", "camion"], "en": ["elephant", "piano", "cow", "tank", "boulder", "hippo"] }
+    },
+    {
+      "id": "jdt-minuscule-106",
+      "theme": { "fr": "C'est plus petit qu'une pièce de monnaie", "en": "It's smaller than a coin" },
+      "letters": { "fr": ["F", "G", "P", "M", "B", "E", "C", "V"], "en": ["A", "P", "S", "B", "C", "L", "M", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "jury"],
+      "exampleWords": { "fr": ["fourmi", "graine", "puce", "miette", "bouton", "coccinelle"], "en": ["ant", "pea", "seed", "bead", "crumb", "ladybug"] }
+    },
+    {
+      "id": "jdt-doigts-107",
+      "theme": { "fr": "Ça se mange avec les doigts", "en": "Food you eat with your hands" },
+      "letters": { "fr": ["P", "F", "S", "C", "B", "T", "M", "N"], "en": ["P", "F", "S", "C", "B", "T", "N", "W"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nourriture"],
+      "exampleWords": { "fr": ["pizza", "frites", "sandwich", "chips", "burger", "nuggets"], "en": ["pizza", "fries", "sushi", "cookies", "burrito", "wings"] }
     }
   ]
 }

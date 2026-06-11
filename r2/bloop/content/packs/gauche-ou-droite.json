@@ -76,7 +76,7 @@
     {
       "id": "eau-petillante",
       "text": { "fr": "L'eau pétillante", "en": "Sparkling water" },
-      "emoji": "💦",
+      "emoji": "🫧",
       "category": "food",
       "spicyLevel": 0,
       "debateStarter": {
@@ -620,7 +620,7 @@
       "spicyLevel": 0,
       "debateStarter": {
         "fr": "Six mois d'efforts pour trois tomates hors de prix.",
-        "en": "Six months of work for three priceless tomatoes."
+        "en": "Six months of work for three wildly expensive tomatoes."
       }
     },
     {
@@ -1620,7 +1620,7 @@
       "category": "culture",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Une langue morte qui ne sert qu'à briller en dîner, des années après.",
+        "fr": "Une langue morte qui ne sert qu'à briller aux dîners, des années après.",
         "en": "A dead language that pays off only at dinner parties."
       }
     },
@@ -1967,7 +1967,7 @@
     },
     {
       "id": "paddle",
-      "text": { "fr": "Le paddle", "en": "Paddleboarding" },
+      "text": { "fr": "Le stand-up paddle", "en": "Paddleboarding" },
       "emoji": "🏄",
       "category": "sport",
       "spicyLevel": 0,
@@ -2390,7 +2390,7 @@
       "category": "behavior",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Le test de civilisation à une pièce de un euro.",
+        "fr": "Le test de civilisation à une pièce d'un euro.",
         "en": "Civilization's one-quarter morality test."
       }
     },

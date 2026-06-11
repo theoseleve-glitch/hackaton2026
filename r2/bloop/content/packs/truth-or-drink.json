@@ -822,11 +822,11 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle musique as-tu prétendu adorer juste pour avoir l'air cool devant quelqu'un ?",
-        "en": "What music did you pretend to love just to look cool in front of someone?"
+        "fr": "T'es-tu déjà attribué la blague ou l'idée brillante de quelqu'un d'autre ? La personne est-elle au courant ?",
+        "en": "Ever taken credit for someone else's joke or brilliant idea? Does that someone know?"
       },
       "minAge": 18,
-      "tags": ["music", "lies"]
+      "tags": ["confession", "lies"]
     },
     {
       "id": "totd-t-party-036",
@@ -877,11 +877,11 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la raison la plus futile pour laquelle tu aies arrêté de parler à quelqu'un ?",
-        "en": "What's the most trivial reason you've ever stopped talking to someone?"
+        "fr": "Qu'as-tu emprunté et très commodément 'oublié' de rendre ? Attention : la personne est peut-être dans la pièce.",
+        "en": "What have you borrowed and very conveniently 'forgotten' to return? Careful: the owner might be in this room."
       },
       "minAge": 18,
-      "tags": ["petty", "friendship"]
+      "tags": ["confession", "funny"]
     },
     {
       "id": "totd-t-party-041",
@@ -987,8 +987,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Existe-t-il un groupe de discussion sans certaines personnes de cette pièce ? Tu n'es pas obligé·e de dire qui. Mais tu peux.",
-        "en": "Is there a group chat that excludes some people in this room? You don't have to say who. But you can."
+        "fr": "Existe-t-il un groupe de discussion sans certaines personnes de cette pièce ? Pas de noms — un simple 'oui' suffit largement à semer le chaos.",
+        "en": "Is there a group chat that excludes some people in this room? No names — a simple 'yes' is more than enough chaos."
       },
       "minAge": 18,
       "tags": ["gossip", "secrets"]
@@ -1317,8 +1317,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà eu, même cinq minutes, un mini-crush sur quelqu'un dans cette pièce ? Oui ou non suffit. Le silence aussi parle.",
-        "en": "Have you ever — even for five minutes — had a mini-crush on someone in this room? Yes or no is enough. Silence also speaks."
+        "fr": "As-tu déjà eu, même cinq minutes, un mini-crush sur quelqu'un dans cette pièce ? Un simple oui ou non suffit, promis.",
+        "en": "Have you ever — even for five minutes — had a mini-crush on someone in this room? A simple yes or no is enough, promise."
       },
       "minAge": 18,
       "tags": ["room", "crush"]
