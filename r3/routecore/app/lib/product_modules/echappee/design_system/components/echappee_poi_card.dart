@@ -91,7 +91,15 @@ class EchappeePoiCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(name, style: EchappeeTypography.h3),
+                      // Bornés (1 + 2 lignes) : la card vit dans un carrousel
+                      // à hauteur fixe, un nom ou une raison qui déborde ne
+                      // doit jamais casser la mise en page.
+                      Text(
+                        name,
+                        style: EchappeeTypography.h3,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       const SizedBox(height: EchappeeSpacing.s4),
                       _CategoryLine(
                         category: category,
@@ -104,7 +112,12 @@ class EchappeePoiCard extends StatelessWidget {
                       ],
                       if (reason != null) ...[
                         const SizedBox(height: EchappeeSpacing.s8),
-                        Text(reason!, style: EchappeeTypography.body),
+                        Text(
+                          reason!,
+                          style: EchappeeTypography.body,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ],
                       const SizedBox(height: EchappeeSpacing.s16),
                       Row(

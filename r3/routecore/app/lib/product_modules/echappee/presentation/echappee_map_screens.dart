@@ -70,8 +70,9 @@ class EchappeeMapScreen extends ConsumerWidget {
   static const double _poiCardWidth = 280;
 
   /// L'EchappeePoiCard a une hauteur intrinsèque (image 140 + contenu +
-  /// actions) : le carrousel doit la contenir sans déborder.
-  static const double _carouselHeight = 372;
+  /// actions) : le carrousel doit la contenir sans déborder. Mesurée avec
+  /// les vraies Inter/Fraunces embarquées (plus hautes que les fallbacks).
+  static const double _carouselHeight = 396;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
