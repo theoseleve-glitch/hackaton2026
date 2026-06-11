@@ -37,7 +37,8 @@ export function PrimaryButton({ label, onPress, disabled = false, loading = fals
   return (
     <PopPressable onPress={onPress} disabled={off} style={{
       minHeight: 56, borderRadius: tokens.radii.pill, backgroundColor: off ? theme.surfaceAlt : theme.brand,
-      alignItems: 'center', justifyContent: 'center', paddingHorizontal: tokens.spacing.xxl, ...tokens.elevation.e2,
+      alignItems: 'center', justifyContent: 'center', paddingHorizontal: tokens.spacing.xxl,
+      ...(off ? {} : tokens.elevation.sticker),
     }}>
       {loading
         ? <ActivityIndicator color={theme.textOnBrand} />

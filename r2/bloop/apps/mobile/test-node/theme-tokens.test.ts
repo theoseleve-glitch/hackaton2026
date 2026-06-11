@@ -44,8 +44,8 @@ describe('design-system tokens (docs/designs/2026-06-10-mobile-design-system.md 
     expect(layout).toEqual({ screenPadding: 16, cardPadding: 20, minTouchTarget: 48, maxContentWidth: 480 });
   });
 
-  it('radii per §2.3', () => {
-    expect(radii).toEqual({ none: 0, sm: 8, md: 14, lg: 20, xl: 28, xxl: 36, pill: 999 });
+  it('radii per Brand Book v1.0 §15 (sm 10 / md 14 / lg 22 / xl 28 / pill 999; xxl = our extension)', () => {
+    expect(radii).toEqual({ none: 0, sm: 10, md: 14, lg: 22, xl: 28, xxl: 36, pill: 999 });
   });
 
   it('type scale per §2.4; font families per Brand Book v1.0 §4 (supersedes §2.4 Baloo/Inter)', () => {
@@ -58,9 +58,10 @@ describe('design-system tokens (docs/designs/2026-06-10-mobile-design-system.md 
     expect(type.overline).toEqual({ fontSize: 11, lineHeight: 14, fontFamily: 'DMSans_700Bold', letterSpacing: 1.2 });
   });
 
-  it('elevation + outline per §2.5/§2.6 (sticker = hard offset, no blur)', () => {
-    expect(elevation.sticker).toEqual({ shadowColor: '#1A1714', shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 0, height: 4 }, elevation: 8 });
-    expect(elevation.e2).toEqual({ shadowColor: '#3A2E1E', shadowOpacity: 0.10, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 6 });
+  it('elevation per Brand Book v1.0 §15 (shadow.pop = sticker: 0 4px 0 0 ink; clay = 0 6px 0 ink@18%)', () => {
+    expect(elevation.sticker).toEqual({ shadowColor: '#0F1633', shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 0, height: 4 }, elevation: 8 });
+    expect(elevation.clay).toEqual({ shadowColor: '#0F1633', shadowOpacity: 0.18, shadowRadius: 0, shadowOffset: { width: 0, height: 6 }, elevation: 6 });
+    expect(elevation.e2).toEqual({ shadowColor: '#0F1633', shadowOpacity: 0.10, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 6 });
     expect(outline).toEqual({ hairline: { borderWidth: 1, borderColor: 'border' }, sticker: { borderWidth: 3, borderColor: 'stickerOutline' } });
   });
 });
