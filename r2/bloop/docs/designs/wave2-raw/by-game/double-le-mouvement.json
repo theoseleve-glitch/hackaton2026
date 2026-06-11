@@ -1,0 +1,165 @@
+{
+  "id": "double-le-mouvement",
+  "nameFr": "DOUBLE LE MOUVEMENT",
+  "nameEn": "DUB THE MOVE",
+  "taglineFr": "L'un mime le délire, l'autre le double en direct — le salon note le duo.",
+  "taglineEn": "One friend does the move, the other dubs it live — the room rates the duo.",
+  "template": "NEW:PERFORM_RATE",
+  "players": {
+    "min": 4,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "brief",
+      "durationSec": 15,
+      "description": "Secret pick. The mover (X) sees 2 movement prompts on their phone and picks one (the brief's 'Joueur X choisit'). The dubber (Y) sees a 'YOU ARE THE VOICE' role card — never the prompt. The audience sees 'X is choosing a secret move'. Timeout: auto-pick option A (deterministic, offer[0]). Mover disconnects: turn voided, rotation advances. Dubber disconnects: reassigned to next connected seat."
+    },
+    {
+      "key": "perform",
+      "durationSec": 30,
+      "description": "The standup beat — phones down. X performs the movement in the middle of the room; Y improvises the live sound dub, BLIND (Y never saw the prompt — that mismatch is the comedy engine). All phones show a big countdown; both crew members can tap 'Done' to end early (allActed over connected crew). Timeout: proceed to rating. Mover leaves: turn voided. Dubber leaves: performance finishes solo, scoring proceeds."
+    },
+    {
+      "key": "rate",
+      "durationSec": 15,
+      "description": "Audience stars. Every connected non-crew player casts 1–5 stars into a hidden buffer (first tap locks; counts shown as 'votesIn/votersExpected', never values). Crew sees a suspense card and cannot rate. Ends all-acted or deadline; ballots cast at deadline are used, 0 ballots → default 3.0 stars. Empty audience at phase entry resolves immediately with the default. A leaving rater shrinks the expected set (never stalls the room)."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 7,
+      "description": "The second laugh beat. The secret prompt text flips public for everyone ('THAT was supposed to be a cat?!'), star average + cast count shown, +points burst for BOTH duo members (identical score), ovation badge if unanimous 5 stars. Lap wrap emits analytics round_completed — the shell's interstitial ad boundary. Timeout: next turn (next connected mover, dubber = following seat) or 'over' with gameOver(cloned scores)."
+    }
+  ],
+  "params": {
+    "crewSize": 2,
+    "laps": 1,
+    "promptChoices": 2,
+    "briefMs": 15000,
+    "performMs": 30000,
+    "rateMs": 15000,
+    "revealMs": 7000,
+    "starMultiplier": 20,
+    "ovationBonus": 25,
+    "noVoteDefaultStars": 3,
+    "allowedIntensities": [
+      "safe"
+    ]
+  },
+  "contentItemShape": "One movement prompt (the secret shown to the mover). Shape: { id: string — stable unique id, e.g. \"dlm-001-robot-hiphop\" (no-repeat + report/kill-switch key); text: { fr: string, en: string } — the movement/choreography/mime to perform, max 120 chars, shown ONLY to the mover until reveal; hint: { fr: string, en: string } — optional one-line performance tip rendered under the prompt, mover-only, max 120 chars; category: \"animals\" | \"dance\" | \"sports\" | \"everyday\" | \"cinema\" | \"cringe\"; difficulty: 1 | 2 | 3 — curation metadata, ignored by the reducer; intensity: \"safe\" | \"spicy\" — spicy entries ship in a separate age-gated pack (tone:\"spicy\", minAge 18) and are excluded by DEFAULT_CONFIG allowedIntensities:[\"safe\"]; props: boolean — needs physical objects (filterable); tags: string[] max 8 — freeform (\"funny\",\"physical\",\"meme\",\"tiktok\"). Authoring/publish note: items are authored bilingual {fr,en} as shown; the publish pipeline splits them into single-locale packs per platform convention (data.locale, pack family \"double-le-mouvement-fr\" / \"-en\", shell resolves locale at startGame). Pool sizing lint (synthesis §3.5): >= laps x maxPlayers x promptChoices = 32 entries minimum per intensity tier at defaults.",
+  "sampleItems": [
+    {
+      "id": "dlm-001-robot-hiphop",
+      "text": {
+        "fr": "Un robot qui apprend le hip-hop avec un tuto YouTube",
+        "en": "A robot learning hip-hop from a YouTube tutorial"
+      },
+      "hint": {
+        "fr": "Saccadé au début, fluide à la fin — termine par un dab.",
+        "en": "Stiff at first, smooth by the end — finish with a dab."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": [
+        "funny",
+        "physical",
+        "tiktok"
+      ]
+    },
+    {
+      "id": "dlm-002-cat-cucumber",
+      "text": {
+        "fr": "Un chat qui découvre un concombre posé derrière lui",
+        "en": "A cat discovering a cucumber placed behind it"
+      },
+      "hint": {
+        "fr": "Toilette tranquille de la patte… puis panique verticale.",
+        "en": "Calmly groom your paw… then vertical panic."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": [
+        "funny",
+        "animals",
+        "meme"
+      ]
+    },
+    {
+      "id": "dlm-003-lego-barefoot",
+      "text": {
+        "fr": "Traverser pieds nus un salon couvert de Lego en restant digne",
+        "en": "Crossing a Lego-covered living room barefoot while staying dignified"
+      },
+      "hint": {
+        "fr": "Sourire de façade, agonie intérieure, démarche de flamant rose.",
+        "en": "Polite smile, inner agony, flamingo walk."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": [
+        "funny",
+        "pain",
+        "relatable"
+      ]
+    }
+  ],
+  "physical": "standup",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "roundsDefault": 6,
+  "roundSeconds": 67,
+  "newTemplateSpec": "TEMPLATE PERFORM_RATE (module id \"perform-rate\", version 1) — rotating performance crew + audience star rating. Generic: crewSize 1 (solo mime/charades configs) or 2 (this game: mover X + dubber Y). Pure GameModule<S,A,V,C> per packages/engine/src/types.ts; imports the shared kit (emptyPlayerMap, Presence/connectedPlayers, allActed, nextActiveSeat, gameOver helper) per cross-game synthesis §1. No new event or effect types; no wall-clock, no ambient RNG (all randomness via createRng(seed+'|rot') for rotation, createRng(seed+'|deck') for the prompt deck).\n\nCONFIG (templateParamsSchema addition, .strict()): { crewSize: 1|2 (default 2); laps: int 1..3 (1); promptChoices: int 1..3 (2); briefMs 5000..30000 (15000); performMs 10000..60000 (30000); rateMs 5000..30000 (15000); revealMs 3000..15000 (7000); starMultiplier int 5..50 (20); ovationBonus int 0..100 (25); noVoteDefaultStars 1..5 (3); allowedIntensities ('safe'|'spicy')[] (['safe']) }.\n\nSTATE (all player-keyed maps null-proto via emptyPlayerMap; JSON-safe only):\nPRState = { config; players: PlayerId[] (fixed roster); rotation: PlayerId[] (seeded permutation = mover order); connected: Presence; phase: 'brief'|'perform'|'rate'|'reveal'|'over'; turnSeq: number (monotonic, ++ per turn entry — powers phaseKey); turnIndex: number; lap: number; totalTurns: number (= min(laps*players.length, floor(deck.length/promptChoices)) at init); turnsPlayed: number; mover: PlayerId; dubber: PlayerId|null; voidTurn: boolean; deck: string[] /* HIDDEN: seeded shuffle of prompt ids — leaks upcoming prompts */; cursor: number /* HIDDEN */; offer: string[] /* HIDDEN until reveal: the promptChoices ids offered this turn */; chosenId: string|null /* HIDDEN until reveal */; doneTaps: Record<PlayerId,true> (public booleans, crew only); stars: Record<PlayerId,1|2|3|4|5> /* HIDDEN: audience ballots; promoted at reveal as AGGREGATE only, individual ballots never published */; scores: Record<PlayerId,number>; lastResult: { mover; dubber; promptText; avg; cast; ovation; points }|null }.\n\nACTIONS (zod at DO boundary + reducer guards; zero free text → zero gameplay moderation surface):\nPRAction = { kind:'pick'; index:number } (brief; mover only; 0<=index<promptChoices) | { kind:'done' } (perform; crew only; idempotent) | { kind:'rate'; stars:1|2|3|4|5 } (rate; connected non-crew only; FIRST WRITE LOCKS, duplicates ignored).\n\nEVENTS: standard GameEvent only (action/deadline/playerLeft/playerRejoined). Effects: analytics ('turn_started','prompt_picked'|'prompt_auto','rating_resolved'{avg,cast,ovation},'crew_left','round_completed' on lap wrap = the shell's ad boundary,'pool_exhausted') and gameOver with cloned scores. Rejected events return the SAME state reference (shell no-op contract).\n\nPHASE MACHINE (one turn = brief→perform→rate→reveal; rejection = same-ref no-op; over short-circuits at top of reduce):\nENTER TURN (from init or reveal deadline): turnIndex = nextActiveSeat(rotation, prev, connected); on wrap lap++ and emit round_completed if continuing; if turnsPlayed>=totalTurns or lap>=laps → phase 'over' + gameOver({...scores}). mover=rotation[turnIndex]; dubber = next connected seat after mover excluding mover (null if none → solo fallback); offer = deck[cursor..cursor+promptChoices), cursor+=promptChoices (exhausted → 'over' + pool_exhausted); turnSeq++; stars/doneTaps reset; chosenId=null; voidTurn=false; phase='brief'.\nbrief: pick by mover w/ valid index → chosenId=offer[index], phase='perform'. deadline → chosenId=offer[0] (deterministic auto-pick), phase='perform'. playerLeft(mover) → voidTurn → ENTER TURN (crew_left). playerLeft(dubber) → reassign next connected non-mover seat or null.\nperform: done by crew → doneTaps[p]=true; allActed(connectedCrew, doneTaps) → phase='rate'. deadline → phase='rate'. playerLeft(mover) → voidTurn → ENTER TURN; playerLeft(dubber) → continue (solo finish, scoring unchanged — the room's stars judge it).\nrate (entry guard: expected = connectedPlayers minus crew; empty → resolve immediately with noVoteDefaultStars): rate by expected w/o prior ballot → stars[p]=v; allActed(expected,stars) → RESOLVE. deadline → RESOLVE with cast ballots. playerLeft(rater) → shrink expected, re-check allActed.\nRESOLVE: cast=values(stars); avg = cast.length ? mean(cast) : noVoteDefaultStars; points = round(avg*starMultiplier); if cast.length>=2 && all===5 → ovation, points+=ovationBonus. If !voidTurn: scores[mover]+=points AND if dubber!=null scores[dubber]+=points (identical duo score — cooperative by construction). lastResult set (avg to 1 decimal); turnsPlayed++; phase='reveal'; analytics rating_resolved.\nreveal: actions ignored; deadline → ENTER TURN.\n\nphaseDurationMs: brief→briefMs, perform→performMs, rate→rateMs, reveal→revealMs, over→null. phaseKey: `${phase}:${turnSeq}`, terminal 'over' (synthesis §1.6 turn-rotation rule; never embeds prompt ids/text — secret-safe per types.ts).\n\nVIEW REDACTION (viewer may be ANY string; spectator-safe). Common scaffolding all phases: phase, turnSeq, lap/laps, turnsPlayed/totalTurns, rotation, connected, mover, dubber, scores.\nbrief: mover → offers [{id,text,hint}] (the ONLY view ever containing undisclosed prompt text) + myPick echo. dubber → role:'dubber' card, NO prompt data. audience/unknown → role:'audience', NO prompt data.\nperform: mover → chosenPrompt {text,hint} (own-secret echo) + Done state. dubber → 'DUB IT LIVE' card + doneTaps booleans, NO prompt. others/unknown → 'watch the show' + countdown + doneTaps booleans.\nrate: audience member → star picker + myStars echo (own ballot ?? null, never a foreign lookup) + votesIn/votersExpected COUNTS only. crew/unknown → suspense card + counts, myStars:null. No viewer ever sees another's star value or any prompt data.\nreveal: IDENTICAL public view for all: lastResult (promptText now public, avg, cast, ovation, points), scores, nextMover|null. over: identical final scores/standings.\nHidden-forever: deck, cursor. Hidden-until-reveal: offer, chosenId. Hidden-always-as-individuals: stars (aggregate only). leakedSecrets audit: each offered/chosen prompt text = mover-owned secret until reveal; each star ballot = rater-owned secret forever.\n\nBOUNDS: template minPlayers 3 (mover+dubber+1 rater), maxPlayers 16; this game's config tightens to 4..16. TESTS: (phase,event) table; leakedSecrets as above; field-level 'rate-phase serialized view contains no stars map'; edges 3 & 16 players; mover/dubber disconnect per phase; empty-audience entry; deck exhaustion; same-seed determinism; gameOver no-alias; same-ref rejection. CLIENT (mobile gameRegistry): SecretPick (mover) / RoleCard (dubber, audience) for brief; CountdownStage for perform; StarRater for rate; RevealCard for reveal. REUSE (config-only future games): solo mime rating (crewSize 1), air-band duo (music pack), slow-mo replay (everyday pack, longer performMs), spicy dance pack (intensity gate, minAge 18).",
+  "recommendations": [
+    {
+      "question": "How does the app prompt X with the secret movement (the brief says 'Joueur X choisit')?",
+      "recommendation": "A 15s 'brief' phase shows X two pack prompts on their phone, secretly; X taps one. Deadline auto-picks option A deterministically.",
+      "why": "A curated 2-option pick preserves the brief's player agency ('choisit') without the blank-page stall of free invention, keeps content pack-driven (deterministic, moderated, replayable), and the timeout guarantees a passive X never blocks the room."
+    },
+    {
+      "question": "Does Y (the dubber) see the prompt before or during the dub?",
+      "recommendation": "Never — Y dubs blind. Y's phone shows only a 'YOU ARE THE VOICE' role card and the perform countdown; the prompt reaches Y at reveal like everyone else.",
+      "why": "The comedic engine is the mismatch between movement and improvised sound; an informed dubber collapses into narration. It also halves the redaction surface: only the mover's views ever carry undisclosed prompt text."
+    },
+    {
+      "question": "How does the room score the duo?",
+      "recommendation": "Each connected non-crew player casts 1-5 stars into a hidden buffer (first tap locks). BOTH duo members earn round(avg x 20) points (20-100); unanimous 5-star with >=2 ballots adds +25 ovation bonus each; zero ballots default to 3.0 stars. Rating itself earns nothing.",
+      "why": "Identical duo scores make it cooperative (X picks performable moves, Y commits to the bit); the 20-point floor and 3-star default blunt trolling and AFK rooms; unscored ratings stay honest (same rationale as truth-or-dare's unscored verdict)."
+    },
+    {
+      "question": "When is the secret prompt revealed to the room?",
+      "recommendation": "Only AFTER stars lock, during the reveal phase.",
+      "why": "The room rates the comedy of the performance, not fidelity to a prompt it could second-guess — and the reveal becomes a guaranteed second laugh beat ('THAT was supposed to be a cat?!')."
+    },
+    {
+      "question": "Player count and session length?",
+      "recommendation": "Config minPlayers 4 (template floor 3), sweet spot 4-10; default laps=1 so everyone is mover exactly once and dubber ~once (dubber = next connected seat). At ~67s/turn a 6-player session is ~7 min.",
+      "why": "At 3 players the audience is a single rater (swingy, gameable); at 16 players one lap is ~18 min — acceptable but long, so the catalog copy should steer big rooms elsewhere or a config variant can cap turns."
+    },
+    {
+      "question": "Should the audience also guess what the prompt was (extra mechanic)?",
+      "recommendation": "Defer to v2 as an optional param (typed guess before reveal, closest wins bonus points). v1 ships enum-only actions.",
+      "why": "A guess phase adds the platform's free-text moderation surface (DO obscenity filter, normalizeText compare) and ~20s per turn; v1 keeps zero UGC text and tight TikTok pacing. The template's action union can grow game-locally without contract changes."
+    },
+    {
+      "question": "Spicy content?",
+      "recommendation": "Launch safe-only (spicyLevel 0). A later 'spicy moves' pack ships as a separate age-gated pack id (intensity 'spicy', tone:'spicy', minAge 18) behind the standard flag, selected via allowedIntensities.",
+      "why": "Physical performance prompts escalate fast; the platform's tone gate (template-architecture §2.7: spicy forces minAge>=18) handles it as pure content ops with no code change."
+    }
+  ],
+  "risks": [
+    "NEW template = real code, not config-only: reducer + zod schema + 4 client screens + registry entries on both shell and mobile (Cadence A deploy), scheduled after the four designed games per the build-order doc.",
+    "Redaction is load-bearing: the offered + chosen prompt texts must never reach dubber/audience/spectator views before reveal, and individual star ballots must NEVER be published (aggregate only) — requires leakedSecrets audits and field-level view-serialization tests like hot-seat's.",
+    "The perform phase is unverifiable by the app (phones cannot see the room): an AFK duo just burns 30s. Timers + early 'Done' taps guarantee flow, but fun depends on room energy — mitigate with short performMs and strong host onboarding copy.",
+    "Star griefing/inflation (coordinated 1-star trolling or reflex 5-stars): mitigated by the 20-point floor, shared duo score, unscored ratings and unanimity-gated ovation; monitor avg-star and ovation-rate analytics per pack.",
+    "Loud by design: live vocal dubbing fails in quiet/public venues — catalog description must set the standup-and-noisy expectation (physical: standup).",
+    "Disconnect edges: mover loss voids the turn (no points, feels abrupt — acceptable, mirrors truth-or-dare's active-left rule); dubber loss mid-perform leaves a solo performance still scored as a duo.",
+    "Pack sizing: needs >= laps x maxPlayers x promptChoices = 32 prompts per intensity tier at defaults (authoring lint per synthesis §3.5); exhaustion ends the game gracefully via pool_exhausted.",
+    "3-player rooms (template floor) have one rater — config tightens to 4; the lobby must gate Start on the effective config minPlayers."
+  ]
+}

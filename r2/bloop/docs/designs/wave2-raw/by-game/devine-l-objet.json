@@ -1,0 +1,146 @@
+{
+  "id": "devine-l-objet",
+  "nameFr": "Devine l'Objet",
+  "nameEn": "Guess the Object",
+  "taglineFr": "Un objet secret, zéro mot, 45 secondes pour le faire deviner à la pièce !",
+  "taglineEn": "One secret object, zero words, 45 seconds to make the room guess it!",
+  "template": "NEW:PERFORM_GUESS",
+  "newTemplateSpec": "PERFORM_GUESS — performer-secret prompt + IRL performance + claim-credit + group validation vote. One module backs devine-l-objet AND devine-l-action (and future packs: emotions, jobs, movies, songs) as pure game_config + pack variants.\n\nWHY NO EXISTING TEMPLATE FITS: TRUTH_DARE is the nearest skeleton (rotation, active player, group verdict, pass economy) but its promptText is public-by-design in every view; this mechanic REQUIRES performer-only prompt redaction until the claim. It also needs a guesser-credit action (performer taps WHO guessed it) and dual scoring (performer + guesser), which TRUTH_DARE/HOT_SEAT/INPUT_GUESS lack. Making prompt visibility mode-conditional inside TRUTH_DARE is a redaction footgun (synthesis leakedSecrets discipline). New module; maximal reuse of the shared kit (emptyPlayerMap, Presence, allActed, nextActiveSeat, tally, gameOver helper, phaseKey conventions).\n\nCONTRACT FIT: standard GameModule<S,A,V,C> per packages/engine/src/types.ts. Zero new events or effects. phaseKey per synthesis A1. minPlayers 3 (performer + guesser + >=1 validator), maxPlayers 16.\n\nCONFIG (DEFAULT_CONFIG; catalog params is a partial, .strict() in templateParamsSchema): roundsPerPlayer 2 (laps of the rotation); handoffMs 4000; mimeMs 45000; validateMs 12000; revealMs 6000; passesPerPlayer 1; foundPoints 10; fastBonusPoints 5; validateThreshold 0.5; allowedDifficulties ['easy','medium']; bonusFetch false (reserved v1.1 flag, no-op in v1).\n\nCONTENT C (per-locale pack per synthesis §3.1; bilingual authoring source compiles to sibling -fr/-en packs): { locale: 'fr'|'en'; items: Array<{ id: string; object: string; category: string; difficulty: 'easy'|'medium'|'hard'; tags: string[] }> }. Sizing lint: >= maxPlayers x roundsPerPlayer items per allowed difficulty (16x2 = 32+ each).\n\nSTATE S (HIDDEN marked):\n{ config; players: PlayerId[]; connected: Presence; rotation: PlayerId[] (seeded permutation, createRng(seed+'|rot')); turnIndex: number; turnSeq: number (monotonic, ++ per turn entry); lap: number; performer: PlayerId; phase: 'handoff'|'mime'|'validate'|'reveal'|'over';\n  deck: string[] /* HIDDEN: shuffled item ids, createRng(seed+'|deck') */; cursor: number /* HIDDEN */;\n  current: { id, object, category, difficulty } | null /* object SECRET to non-performer until validate/reveal */;\n  mimeStartedAt: number | null /* event.at at mime entry — powers the fast bonus, deterministic */;\n  claim: { guesser: PlayerId; at: number } | null;\n  votes: Record<PlayerId,'valid'|'invalid'> /* HIDDEN per-voter; counts-only during validate, tally public at reveal */;\n  outcome: 'found'|'contested'|'passed'|'missed'|null;\n  passesLeft: Record<PlayerId, number>; scores: Record<PlayerId, number>;\n  lastResult: { performer; guesser: PlayerId|null; objectText; categoryText; outcome; tally:{valid,invalid}; points:{performer:number, guesser:number}; fast: boolean } | null }\nAll maps null-proto (emptyPlayerMap). JSON-safe only.\n\nACTIONS A (zod at DO boundary + reducer re-guards; rejects return the SAME state reference):\n- { kind:'claimFound', guesser: PlayerId } — mime phase, performer only; guesser must be a roster player, present, != performer; one-shot.\n- { kind:'pass' } — mime phase, performer only, passesLeft[performer] > 0.\n- { kind:'validate', vote:'valid'|'invalid' } — validate phase; eligible = connected AND != performer AND != claim.guesser; first vote locks (no changes).\n\nREDUCER (phase x event; first line: over => same-ref no-op):\n- handoff: actions ignored. deadline => draw item (deck[cursor++]; cursor >= deck.length => early 'over' + gameOver + analytics 'pool_exhausted'), set current, mimeStartedAt = event.at, phase='mime'.\n- mime: claimFound(performer, valid guesser) => claim={guesser, at:event.at}; votes=empty; phase='validate'. pass(performer, passesLeft>0) => outcome='passed'; passesLeft--; build lastResult (points 0/0); phase='reveal'. deadline => outcome='missed'; lastResult; phase='reveal' (no pass burnt). playerLeft(performer) => outcome='missed'; phase='reveal'. Everything else ignored.\n- validate: validate by eligible not-yet-voted => record; if allActed(eligible, votes) => resolve. deadline => resolve with cast votes. RESOLUTION: cast=0 => valid (benefit of the doubt); else valid iff validCount/cast >= validateThreshold (ties => valid). valid => outcome='found'; fast = (claim.at - mimeStartedAt) <= mimeMs/2; award = foundPoints + (fast ? fastBonusPoints : 0); scores[performer]+=award; scores[claim.guesser]+=award. invalid => outcome='contested'; 0/0. Then lastResult; phase='reveal'; analytics 'validated' {outcome, valid, invalid}. playerLeft(voter) shrinks eligible (resolve if remaining all-acted; empty set => valid). performer/guesser leaving never aborts — votes decide.\n- reveal: actions ignored. deadline => enterTurn: nextActiveSeat(rotation, turnIndex, connected) skips disconnected seats; wrapped => lap++ and, if not ending, emit analytics 'round_completed' {round: lap} (the shell's interstitial ad boundary, synthesis §5.4); lap >= roundsPerPlayer => phase='over' + gameOver(cloned scores); else turnSeq++, reset turn fields, phase='handoff'.\n- playerLeft/playerRejoined any phase: flip connected only; seat greyed never freed; scores/passes preserved; rejoiner takes their seat next lap. A disconnected or passive player can never block: every phase is deadline-driven and validate uses connected-filtered allActed.\n\nVIEW V — redaction matrix (viewers: P performer, G credited guesser, O other player, S spectator/disconnected, U unknown id — O/S/U always identical, non-leaking):\n- common (all phases): { phase, turnSeq, lap, roundsPerPlayer, rotation, performer, connected, scores, passesLeft }.\n- handoff: all: youArePerformer flag; no secret exists yet in views (item drawn at mime entry).\n- mime: P: + { objectText: current.object, categoryText, canPass, claimableTargets (present roster minus self) }. O/S/U: + { categoryText ONLY, guessing prompt }. The secret is gated on viewer === performer — never an indexed lookup.\n- validate: ALL: objectText now public (the claim is on the table — voters must know the object), claimedGuesser, votesIn/votersExpected COUNTS only, youCanVote, youVoted = own echo or null (never others' votes).\n- reveal: ALL identical: full lastResult incl. public tally {valid, invalid} and points.\n- over: { phase:'over', scores }.\nleakedSecrets audit secrets = current.object for every non-performer viewer during handoff/mime + ALL undrawn deck objects in every phase + in-flight individual votes during validate. phaseKey/analytics strings NEVER embed item ids or object text.\n\nphaseDurationMs: handoff=handoffMs; mime=mimeMs; validate=validateMs; reveal=revealMs; over=null.\nphaseKey: `${phase}:${turnSeq}` (turnSeq not lap — many turns per lap, synthesis §1.6 uniqueness rule); terminal bare 'over'.\n\nDETERMINISM: all randomness from seed (rotation + deck shuffles); fast-bonus math uses server event.at deltas only; no Date.now/Math.random; replay() must reproduce identical games with the same pinned pack version.\n\nPLATFORM INTEGRATION: templateIdSchema grows 'PERFORM_GUESS'; templateParamsSchema adds the params above; AI gate validates pack schema + sizing + profanity scan as for all packs. One client GameScreen: performer spotlight card (secret object + tap-the-roster claim grid + Pass pip), guesser card (category chip + 'shout your guesses!' + timer ring), validate chips (fair / no way), reveal card (stamp FOUND/PASSED/MISSED/CONTESTED + points burst + next performer). Build AFTER the shared kit + one shipped turn-based game (TRUTH_DARE) so rotation/verdict/redaction patterns are battle-tested.",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "handoff",
+      "durationSec": 4,
+      "description": "Spotlight the next performer: 'Leve-toi, {nickname} !' / 'Stand up, {nickname}!'. No actions; the deadline auto-advances into mime (the secret object is drawn at mime entry). phaseKey handoff:{turnSeq}."
+    },
+    {
+      "key": "mime",
+      "durationSec": 45,
+      "description": "The performer's phone privately shows the secret object; everyone else sees only the public category chip + timer and shouts guesses out loud in the room. The performer taps the avatar of the first correct guesser (claimFound) or Pass (1 per game). Deadline or performer disconnect = MISSED (no pass burnt) straight to reveal — a passive performer never blocks the room. phaseKey mime:{turnSeq}."
+    },
+    {
+      "key": "validate",
+      "durationSec": 12,
+      "description": "Reached only after a claim. The object is revealed to ALL; every present player except the performer and the credited guesser votes 'C'etait bon ? / Fair?' (the brief's vote idea, repurposed as anti-cheat). Resolves on all-acted or deadline: >=50% of cast votes = valid; ties and zero votes = valid (benefit of the doubt); empty voter set auto-validates. phaseKey validate:{turnSeq}."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 6,
+      "description": "Result card for everyone: the object + outcome stamp (FOUND +10/+10, fast bonus +5/+5 each if claimed in the first half of the timer; PASSED / MISSED / CONTESTED = 0) + updated scores + next performer. Deadline advances to the next turn; a lap wrap emits round_completed (the shell's interstitial ad boundary); after roundsPerPlayer laps, 'over' + gameOver with final scores. phaseKey reveal:{turnSeq}."
+    }
+  ],
+  "params": {
+    "roundsPerPlayer": 2,
+    "handoffMs": 4000,
+    "mimeMs": 45000,
+    "validateMs": 12000,
+    "revealMs": 6000,
+    "passesPerPlayer": 1,
+    "foundPoints": 10,
+    "fastBonusPoints": 5,
+    "validateThreshold": 0.5,
+    "allowedDifficulties": [
+      "easy",
+      "medium"
+    ],
+    "bonusFetch": false
+  },
+  "roundsDefault": 2,
+  "roundSeconds": 60,
+  "contentItemShape": "One object card (bilingual authoring source; the pack compiler splits it into sibling single-locale packs devine-l-objet-fr / devine-l-objet-en per synthesis §3.1): { id: string — stable unique id, e.g. 'obj-easy-001' (no-repeat draw key + per-entry report key); object: { fr: string, en: string } — the SECRET object name: visible only to the performer during mime, revealed to everyone at validate/reveal; category: { fr: string, en: string } — public hint chip shown to all players at mime start (keeps rounds fast); difficulty: 'easy' | 'medium' | 'hard' — drawable only if listed in params.allowedDifficulties; tags: string[] — curation metadata, e.g. 'inRoomLikely', 'household', 'tech', 'party'; spicy: 0 | 1 | 2 — item tone, must match the pack's tone (default pack is all 0; a spicy object pack ships as a separate age-gated pack).",
+  "sampleItems": [
+    {
+      "id": "obj-easy-001",
+      "object": {
+        "fr": "une brosse à dents",
+        "en": "a toothbrush"
+      },
+      "category": {
+        "fr": "Salle de bain",
+        "en": "Bathroom"
+      },
+      "difficulty": "easy",
+      "tags": [
+        "household",
+        "inRoomLikely"
+      ],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-007",
+      "object": {
+        "fr": "une perche à selfie",
+        "en": "a selfie stick"
+      },
+      "category": {
+        "fr": "High-tech",
+        "en": "Tech"
+      },
+      "difficulty": "medium",
+      "tags": [
+        "tech",
+        "funny"
+      ],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-013",
+      "object": {
+        "fr": "une boule à facettes",
+        "en": "a disco ball"
+      },
+      "category": {
+        "fr": "Fête",
+        "en": "Party"
+      },
+      "difficulty": "hard",
+      "tags": [
+        "party",
+        "funny"
+      ],
+      "spicy": 0
+    }
+  ],
+  "physical": "mixed",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "recommendations": [
+    {
+      "question": "The brief's open question: should there be an extra vote 'pour être sûr de l'existence de l'objet dans la pièce' (to be sure the object exists in the room)?",
+      "recommendation": "Do NOT ship a standalone pre-mime existence vote. Repurpose the vote idea as the post-claim 12s group VALIDATION vote (the validate phase), and curate the default pack toward common-room objects (tag 'inRoomLikely').",
+      "why": "Objects come from a pre-moderated content pack, so physical presence in the room is unnecessary for the mime to work; a pre-round existence vote adds a dead ~10s beat to EVERY turn with no stakes, killing the TikTok pacing. The validation vote keeps every non-performer engaged each turn and catches the only real cheats (crediting a friend who never guessed, saying the word out loud) — it delivers exactly the assurance the co-founder wanted ('être sûr') where it actually matters."
+    },
+    {
+      "question": "Should the secret object come from a content pack, or be freely chosen by the performer from real objects in the room?",
+      "recommendation": "Pack-driven secret objects.",
+      "why": "Deterministic runtime (hard constraint), zero free-text moderation surface (a player-typed object would be the platform's first gameplay-text input before the INPUT_GUESS moderation path is hardened), curated bilingual comedy, and difficulty tiers. Room-chosen objects also let the performer pick something trivially visible, deflating the game."
+    },
+    {
+      "question": "Is there a salvageable physical twist from the existence-vote idea?",
+      "recommendation": "Reserve a 'bonusFetch' param (default false, no-op in v1): after a validated find, an 8s beat where the first player to physically brandish a matching object earns +5, confirmed by one group tap. Ship in v1.1 only if playtests want more chaos.",
+      "why": "It preserves the room-physical kernel of the co-founder's idea — a real in-room moment phones can't fake, fully on-brand — but it adds a 5th phase and a second mini-vote per turn; pacing must be playtested first."
+    },
+    {
+      "question": "Should devine-l-objet share a template with the sibling devine-l-action brief ('même mécanique')?",
+      "recommendation": "Yes — build PERFORM_GUESS once; devine-l-action and devine-l-objet ship as two game_configs + two content packs on it (action pack vs object pack; objet adds the public category chip, action can leave category empty or use verb groups).",
+      "why": "The brief says the mechanic is identical; one module avoids a near-duplicate reducer/client screen and doubles the catalog leverage of the new template (future packs: emotions, jobs, movies, songs)."
+    },
+    {
+      "question": "Should harder objects score more points?",
+      "recommendation": "Flat 10/10 (+5/+5 fast bonus) in v1; revisit difficulty multipliers (e.g. hard = 15) after playtest data.",
+      "why": "Flat scoring stays legible at a party and avoids fairness arguments; the fast bonus already rewards skill, and the cross-game session leaderboard is placement-based anyway (synthesis §1.7), so internal scale inflation buys nothing."
+    }
+  ],
+  "risks": [
+    "NEW template = real code (Cadence A: module + client GameScreen + server/mobile registry + deploy), not config-only — roughly a one-week build on the shared kit; sequence it after the kit/phaseKey baseline and ideally after TRUTH_DARE ships, so rotation + verdict + redaction patterns are battle-tested.",
+    "Redaction is the load-bearing risk: current.object must never reach a non-performer view, phaseKey, or analytics string before the claim/reveal; mandatory leakedSecrets audit over the undrawn deck, the in-flight object, and individual validate votes.",
+    "IRL honor system: the engine cannot observe the mime; a hostile room can grief via 'invalid' votes — mitigated by ties-to-valid, zero-votes-to-valid, and unscored votes ('funny never cruel': no negative points anywhere); monitor the contested-rate analytic and revisit verdictThreshold if abuse shows.",
+    "Must converge with the parallel devine-l-action design on ONE shared PERFORM_GUESS template and pack schema before either game builds — otherwise the platform gets two near-duplicate modules.",
+    "Pacing at large rooms: 16 players x 2 laps ≈ 32 turns ≈ 30+ min; the game_config should cap maxPlayers at ~12 or auto-scale roundsPerPlayer to 1 at 10+ players (host-tunable rounds is template-architecture §7 Q4).",
+    "Inclusivity: miming excludes shy or low-mobility players; the 1-pass economy is the relief valve and pass/missed cost 0 points — copy must never mock a missed turn; consider an accessibility variant (describe-without-the-word) as a future pack/param.",
+    "Bilingual authoring: runtime packs are single-locale (synthesis §3.1), so the bilingual {fr,en} authoring source must compile into parallel -fr/-en sibling packs with full coverage, enforced by the AI-gate pack validation."
+  ]
+}

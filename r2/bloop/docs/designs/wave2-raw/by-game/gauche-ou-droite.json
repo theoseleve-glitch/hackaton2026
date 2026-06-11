@@ -1,0 +1,135 @@
+{
+  "id": "gauche-ou-droite",
+  "nameFr": "De gauche ou de droite ?",
+  "nameEn": "Left-Coded or Right-Coded?",
+  "taglineFr": "La raclette : de gauche ou de droite ? Vote, regarde la salle se déchirer, puis débats.",
+  "taglineEn": "Is brunch left-coded or right-coded? Vote, watch the room split, then argue it out.",
+  "template": "VOTE",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "vote",
+      "durationSec": 15,
+      "description": "phaseKey vote:r{n}. The item card (huge emoji + text) fills the screen; each player taps one of two big axis buttons (FR 'De gauche'/'De droite', EN 'Left-coded'/'Right-coded' — labels come from the pack's axis field). Votes go into a HIDDEN buffer (synthesis §1.5 convention: owner-only echo myVote = votes[viewer] ?? null, never visible to others pre-reveal). Early-resolve when allActed over the connected player set. Timeout (deadline event): resolve with submitted votes only — non-voters score 0 this round and never block the room."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 7,
+      "description": "phaseKey reveal:r{n}. Atomic reveal in one broadcast: split bars with live-count percentages, avatar chips stacked under each side (unless params.anonymousVotes), majority side crowned, '+1' animation on majority voters. Exact tie shows the 'Égalité parfaite / Dead even' sticker and awards nothing. Pure timed beat — no input accepted; deadline auto-advances to debate (or skips straight to next round / over when params.debateMs = 0). Emits analytics round_revealed."
+    },
+    {
+      "key": "debate",
+      "durationSec": 35,
+      "description": "phaseKey debate:r{n}. Phones show the item's debateStarter one-liner as argument fuel plus the countdown; the talking happens in the room. Anyone may tap 'On passe / Next'; when strictly more than params.debateSkipThreshold (0.5) of CONNECTED players have tapped (allActed-style quorum over the connected set — disconnected players are excluded so they can never stall or distort the quorum), the phase ends early. Timeout (deadline event): advance to next round, or to 'over' after round totalRounds. Emits analytics round_completed at this boundary (the shell's ad-cadence signal, synthesis §5.4)."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "phaseKey 'over' (terminal, untimed — phaseDurationMs returns null). Scoreboard: cumulative herd scores, winner = 'le plus dans le sens du vent / most in tune with the room'. One non-scoring superlative from state.minorityCount: 'L'esprit contraire / The Contrarian' for the player most often in the minority (display-only, never affects points — funny never cruel). gameOver effect emits defensively cloned final scores per the tracer invariant."
+    }
+  ],
+  "params": {
+    "choiceMode": "option",
+    "totalRounds": 7,
+    "voteMs": 15000,
+    "revealMs": 7000,
+    "debateMs": 35000,
+    "debateSkipThreshold": 0.5,
+    "anonymousVotes": false,
+    "pointsMajority": 1,
+    "pointsTie": 0
+  },
+  "contentItemShape": "One pack item = { id: string (kebab-case, unique in pack, e.g. \"raclette\"); text: {fr, en} (the word/object/behavior being judged — short noun phrase, <= 80 chars, rendered huge on the vote card); emoji: string (single emoji, the card's hero visual); category: \"food\" | \"lifestyle\" | \"tech\" | \"culture\" | \"sport\" | \"behavior\" (curation/curriculum metadata, reducer ignores it); spicyLevel: 0 | 1 | 2 (per-item rating; items above the config's allowed tier are never drawn); debateStarter: {fr, en} (one playful one-liner, <= 120 chars, shown during the debate phase to fuel arguments — never names real parties/politicians) }. Pack-level data additionally carries: axis: { left: {fr, en}, right: {fr, en} } (default FR \"De gauche\"/\"De droite\", EN \"Left-coded\"/\"Right-coded\" — the two vote-button labels, pack-defined so sibling packs can mint non-political axes config-only) and locale per the single-locale pack rule (synthesis §3.1): the bilingual authoring source is split at build time into sibling packs gauche-droite-fr and gauche-droite-en following the pack-family convention (template-architecture §2.7); items are NOT translated 1:1 between locales — each locale gets a culturally native item set. Sizing lint (synthesis §3.5): >= totalRounds (7) items per allowed spicy tier, init shuffles with the seeded RNG and caps totalRounds at pool length like tracer.",
+  "sampleItems": [
+    {
+      "id": "raclette",
+      "text": {
+        "fr": "La raclette",
+        "en": "Raclette night"
+      },
+      "emoji": "🧀",
+      "category": "food",
+      "spicyLevel": 0,
+      "debateStarter": {
+        "fr": "Un fromage qu'on partage entre potes… mais à 14 € la demi-meule.",
+        "en": "Cheese you share with the squad… at private-club prices."
+      }
+    },
+    {
+      "id": "trottinette-electrique",
+      "text": {
+        "fr": "Les trottinettes électriques",
+        "en": "E-scooters"
+      },
+      "emoji": "🛴",
+      "category": "tech",
+      "spicyLevel": 0,
+      "debateStarter": {
+        "fr": "Écolo dans le discours, abandonnée en travers du trottoir dans les faits.",
+        "en": "Green in theory, abandoned across the sidewalk in practice."
+      }
+    },
+    {
+      "id": "croissant-au-beurre",
+      "text": {
+        "fr": "Le croissant au beurre",
+        "en": "A butter croissant"
+      },
+      "emoji": "🥐",
+      "category": "food",
+      "spicyLevel": 0,
+      "debateStarter": {
+        "fr": "Patrimoine du peuple ou petit plaisir de bourgeois ?",
+        "en": "Heritage of the people or a bougie little treat?"
+      }
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "recommendations": [
+    {
+      "question": "How should the EN pack culturally adapt left/right humor (the brief's explicit open question)?",
+      "recommendation": "Use the EN-native form of the exact same meme: axis labels 'Left-coded' / 'Right-coded' (live TikTok slang), and a fully localized item set (oat-milk lattes, lifted pickup trucks, golf, thrifting, bottomless brunch) instead of translating French items. Ship as the sibling pack gauche-droite-en under the pack-family + shell locale-resolution convention (template-architecture §2.7); stage the EN config at rolloutPct 5 and watch completion/abandon analytics before promoting.",
+      "why": "A 1:1 translation of 'la raclette' lands flat outside France; '-coded' carries the identical playful political-aesthetic judgment in EN without invoking actual party politics, which keeps the 'funny never cruel' tone portable across countries."
+    },
+    {
+      "question": "Does the vote score anything, and exactly how?",
+      "recommendation": "Herd scoring: at resolve, count L and R over SUBMITTED votes only; if L > R every 'left' voter gets +pointsMajority (1), symmetric for R; exact tie (including the zero-votes degenerate case) awards pointsTie (0) and shows the 'Dead even' splash; timeout non-voters always get 0. Additionally increment a non-scoring state.minorityCount for minority voters, used only for the end-screen 'Contrarian' superlative.",
+      "why": "Rewarding reading the room is the meme's core skill and keeps the leaderboard meaningful under the placement-XP convention (synthesis §1.7); the minority is never penalized below 0, so being the lone weirdo who thinks croissants are right-coded is a badge, not a punishment."
+    },
+    {
+      "question": "Are individual votes public at reveal?",
+      "recommendation": "Public by default (avatar chips under each side), with an anonymousVotes param (default false) reserved for future spicy packs.",
+      "why": "'WHO voted that raclette is right-wing?!' is the entire debate fuel — the stakes are cheese and scooters, not secrets, so public votes maximize the in-room moment at zero social cost."
+    },
+    {
+      "question": "How does the debate phase end without a passive/disconnected player ever blocking?",
+      "recommendation": "Hard debateMs deadline (35s) guaranteed by the shell alarm, plus an early-exit when > 50% of CONNECTED players tap 'On passe / Next' (quorum computed over the connected-filtered expected set, synthesis §1.3).",
+      "why": "The deadline satisfies the platform liveness rule by construction; majority-skip keeps pacing TikTok-native when an item lands flat instead of forcing 35 seconds of dead air."
+    },
+    {
+      "question": "Is this VOTE as-is, or a template extension?",
+      "recommendation": "Ship as VOTE@2 with three small additive params: choiceMode: 'player' | 'option' (tracer's action targets a PlayerId; this game submits one of two pack-defined option ids), debateMs (0 disables the new debate phase), and the majority-scoring branch. Same skeleton, phaseKey discipline, and hidden-buffer convention as tracer; bundle it with the already-planned revealStyle/selfVoteAllowed VOTE generalization (template-architecture §5.3).",
+      "why": "Per the §3.2 effort taxonomy this is 'new-params, small' (~1–2 days), and the option-vote branch permanently unlocks a whole family of binary-judgment / would-you-rather games as config-only catalog entries afterwards."
+    },
+    {
+      "question": "Show a 'what the internet thinks' percentage at reveal?",
+      "recommendation": "Defer to v2. If wanted later, pre-compute a crowdPct per item in the offline content pipeline and store it as pack data (flipping needsOfflineAiPipeline to true for that pack) — never fetched or computed at runtime.",
+      "why": "Fun extra beat, but it adds factual-claim and freshness risk; the core vote-split-debate loop stands entirely on its own."
+    }
+  ],
+  "risks": [
+    "Political divisiveness drift: the format flirts with real politics. Hard editorial rule — items are only objects, foods, and behaviors; never parties, politicians, elections, or live legislation; debateStarters stay absurd. Enforce via the pack safety gate (template-architecture §6.3) plus the human playtest gate before any rollout promotion.",
+    "Not literally zero-code: requires the small VOTE@2 extension (choiceMode 'option' action branch, debate phase + skip quorum, majority-scoring resolver, split-bar reveal layout in the client GameClient). Small per the §3.2 taxonomy, but it must land before this config can ship — schedule it with the planned revealStyle generalization.",
+    "Even-sized small rooms tie often (4 players splitting 2–2), producing scoreless rounds. Acceptable as a running joke ('perfectly balanced'), but monitor tie rate via round_revealed analytics; if ties exceed ~30% of rounds, consider a tie=+1-to-all variant param rather than changing the core rule.",
+    "Debate dead-air with shy groups: mitigated by the debateStarter one-liner and the majority-skip, but playtest whether 35s is too long for cold groups (host-tunable debateMs is a candidate for the future hostTunable allowlist, template-architecture §7 Q4).",
+    "Trend decay: items like e-scooters date within months. Rely on KV pack versioning (synthesis §3.2) for monthly content refreshes with no deploy; keep item categories balanced so a stale tech item never dominates a draw.",
+    "EN meme-transfer uncertainty: 'left-coded/right-coded' is strong in US/UK Gen Z but weaker elsewhere in EN markets; the staged rolloutPct path plus per-locale packs contain the blast radius, and a non-political sibling axis (e.g. 'Boomer-coded or Gen Z-coded') is a pure content fallback on the same template."
+  ],
+  "roundsDefault": 7,
+  "roundSeconds": 57
+}

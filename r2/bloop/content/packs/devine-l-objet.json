@@ -1,0 +1,927 @@
+{
+  "gameId": "devine-l-objet",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "obj-easy-001",
+      "object": { "fr": "une brosse à dents", "en": "a toothbrush" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-002",
+      "object": { "fr": "une télécommande", "en": "a TV remote" },
+      "category": { "fr": "Salon", "en": "Living room" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-003",
+      "object": { "fr": "une fourchette", "en": "a fork" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-004",
+      "object": { "fr": "un parapluie", "en": "an umbrella" },
+      "category": { "fr": "Entrée", "en": "Hallway" },
+      "difficulty": "easy",
+      "tags": ["household", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-005",
+      "object": { "fr": "un oreiller", "en": "a pillow" },
+      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-006",
+      "object": { "fr": "des lunettes de soleil", "en": "a pair of sunglasses" },
+      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "difficulty": "easy",
+      "tags": ["funny", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-007",
+      "object": { "fr": "une guitare", "en": "a guitar" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "difficulty": "easy",
+      "tags": ["music", "party"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-008",
+      "object": { "fr": "un balai", "en": "a broom" },
+      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "difficulty": "easy",
+      "tags": ["household", "cleaning"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-009",
+      "object": { "fr": "un miroir", "en": "a mirror" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-010",
+      "object": { "fr": "un trousseau de clés", "en": "a bunch of keys" },
+      "category": { "fr": "Entrée", "en": "Hallway" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-011",
+      "object": { "fr": "un verre de vin", "en": "a wine glass" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "easy",
+      "tags": ["party", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-012",
+      "object": { "fr": "une chaussette", "en": "a sock" },
+      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "difficulty": "easy",
+      "tags": ["clothing", "funny", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-013",
+      "object": { "fr": "un sèche-cheveux", "en": "a hair dryer" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-014",
+      "object": { "fr": "un livre", "en": "a book" },
+      "category": { "fr": "Salon", "en": "Living room" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-015",
+      "object": { "fr": "une bougie", "en": "a candle" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "easy",
+      "tags": ["decor", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-016",
+      "object": { "fr": "des écouteurs", "en": "a pair of earphones" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "easy",
+      "tags": ["tech", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-017",
+      "object": { "fr": "une casserole", "en": "a saucepan" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-018",
+      "object": { "fr": "une paire de ciseaux", "en": "a pair of scissors" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "easy",
+      "tags": ["office", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-019",
+      "object": { "fr": "une brosse à cheveux", "en": "a hairbrush" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-020",
+      "object": { "fr": "un canapé", "en": "a sofa" },
+      "category": { "fr": "Salon", "en": "Living room" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-021",
+      "object": { "fr": "un ventilateur", "en": "a fan" },
+      "category": { "fr": "Électroménager", "en": "Appliances" },
+      "difficulty": "easy",
+      "tags": ["household", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-022",
+      "object": { "fr": "un grille-pain", "en": "a toaster" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-023",
+      "object": { "fr": "un tube de dentifrice", "en": "a tube of toothpaste" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-024",
+      "object": { "fr": "un ballon de baudruche", "en": "a balloon" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "easy",
+      "tags": ["party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-025",
+      "object": { "fr": "un chargeur de téléphone", "en": "a phone charger" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "easy",
+      "tags": ["tech", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-026",
+      "object": { "fr": "une tasse de café", "en": "a coffee mug" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-027",
+      "object": { "fr": "une plante verte", "en": "a houseplant" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "easy",
+      "tags": ["decor", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-028",
+      "object": { "fr": "un aspirateur", "en": "a vacuum cleaner" },
+      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "difficulty": "easy",
+      "tags": ["household", "cleaning", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-029",
+      "object": { "fr": "un coussin", "en": "a cushion" },
+      "category": { "fr": "Salon", "en": "Living room" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-030",
+      "object": { "fr": "un frigo", "en": "a fridge" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "household", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-031",
+      "object": { "fr": "une couverture", "en": "a blanket" },
+      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-032",
+      "object": { "fr": "un stylo", "en": "a pen" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "easy",
+      "tags": ["office", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-033",
+      "object": { "fr": "une horloge murale", "en": "a wall clock" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "easy",
+      "tags": ["decor"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-034",
+      "object": { "fr": "une paille", "en": "a drinking straw" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "easy",
+      "tags": ["party", "kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-035",
+      "object": { "fr": "un savon", "en": "a bar of soap" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-036",
+      "object": { "fr": "une lampe de chevet", "en": "a bedside lamp" },
+      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-037",
+      "object": { "fr": "un rouleau de papier toilette", "en": "a toilet paper roll" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "funny", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-038",
+      "object": { "fr": "un carton de pizza", "en": "a pizza box" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "easy",
+      "tags": ["party", "funny", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-039",
+      "object": { "fr": "un bonnet", "en": "a beanie" },
+      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "difficulty": "easy",
+      "tags": ["clothing"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-040",
+      "object": { "fr": "une bouteille de ketchup", "en": "a ketchup bottle" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-001",
+      "object": { "fr": "un tire-bouchon", "en": "a corkscrew" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "medium",
+      "tags": ["party", "kitchen", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-002",
+      "object": { "fr": "un décapsuleur", "en": "a bottle opener" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "medium",
+      "tags": ["party", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-003",
+      "object": { "fr": "une manette de jeu", "en": "a game controller" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech", "games", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-004",
+      "object": { "fr": "un fouet de cuisine", "en": "a whisk" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-005",
+      "object": { "fr": "une essoreuse à salade", "en": "a salad spinner" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-006",
+      "object": { "fr": "une pince à épiler", "en": "a pair of tweezers" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "medium",
+      "tags": ["bathroom", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-007",
+      "object": { "fr": "une perche à selfie", "en": "a selfie stick" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-008",
+      "object": { "fr": "un coton-tige", "en": "a cotton swab" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "medium",
+      "tags": ["bathroom", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-009",
+      "object": { "fr": "un fer à repasser", "en": "an iron" },
+      "category": { "fr": "Électroménager", "en": "Appliances" },
+      "difficulty": "medium",
+      "tags": ["household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-010",
+      "object": { "fr": "un cintre", "en": "a clothes hanger" },
+      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "difficulty": "medium",
+      "tags": ["clothing", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-011",
+      "object": { "fr": "une multiprise", "en": "a power strip" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech", "household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-012",
+      "object": { "fr": "une enceinte Bluetooth", "en": "a Bluetooth speaker" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "medium",
+      "tags": ["tech", "party", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-013",
+      "object": { "fr": "une bouillotte", "en": "a hot-water bottle" },
+      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "difficulty": "medium",
+      "tags": ["household", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-014",
+      "object": { "fr": "un masque de nuit", "en": "a sleep mask" },
+      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "difficulty": "medium",
+      "tags": ["funny", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-015",
+      "object": { "fr": "un ouvre-boîte", "en": "a can opener" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-016",
+      "object": { "fr": "une râpe à fromage", "en": "a cheese grater" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-017",
+      "object": { "fr": "une passoire", "en": "a colander" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-018",
+      "object": { "fr": "un rouleau à pâtisserie", "en": "a rolling pin" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-019",
+      "object": { "fr": "une éponge", "en": "a sponge" },
+      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "difficulty": "medium",
+      "tags": ["household", "cleaning", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-020",
+      "object": { "fr": "un pèse-personne", "en": "a bathroom scale" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "medium",
+      "tags": ["bathroom"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-021",
+      "object": { "fr": "un déboucheur à ventouse", "en": "a plunger" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "medium",
+      "tags": ["bathroom", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-022",
+      "object": { "fr": "un trépied", "en": "a tripod" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-023",
+      "object": { "fr": "une agrafeuse", "en": "a stapler" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "medium",
+      "tags": ["office"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-024",
+      "object": { "fr": "un surligneur", "en": "a highlighter" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "medium",
+      "tags": ["office"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-025",
+      "object": { "fr": "un bloc de post-it", "en": "a pad of sticky notes" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "medium",
+      "tags": ["office", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-026",
+      "object": { "fr": "une calculatrice", "en": "a calculator" },
+      "category": { "fr": "Bureau", "en": "Office" },
+      "difficulty": "medium",
+      "tags": ["office"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-027",
+      "object": { "fr": "un jeu de cartes", "en": "a deck of cards" },
+      "category": { "fr": "Jeux", "en": "Games" },
+      "difficulty": "medium",
+      "tags": ["games", "party", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-028",
+      "object": { "fr": "des dés", "en": "a pair of dice" },
+      "category": { "fr": "Jeux", "en": "Games" },
+      "difficulty": "medium",
+      "tags": ["games", "party"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-029",
+      "object": { "fr": "un baume à lèvres", "en": "a lip balm" },
+      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "difficulty": "medium",
+      "tags": ["sneaky", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-030",
+      "object": { "fr": "un flacon de vernis à ongles", "en": "a bottle of nail polish" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "medium",
+      "tags": ["bathroom", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-031",
+      "object": { "fr": "un élastique à cheveux", "en": "a hair tie" },
+      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "difficulty": "medium",
+      "tags": ["sneaky", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-032",
+      "object": { "fr": "un mètre ruban", "en": "a tape measure" },
+      "category": { "fr": "Bricolage", "en": "DIY" },
+      "difficulty": "medium",
+      "tags": ["diy"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-033",
+      "object": { "fr": "un tournevis", "en": "a screwdriver" },
+      "category": { "fr": "Bricolage", "en": "DIY" },
+      "difficulty": "medium",
+      "tags": ["diy"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-034",
+      "object": { "fr": "une ampoule", "en": "a light bulb" },
+      "category": { "fr": "Bricolage", "en": "DIY" },
+      "difficulty": "medium",
+      "tags": ["household", "diy"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-035",
+      "object": { "fr": "une pile", "en": "a battery" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-036",
+      "object": { "fr": "un câble HDMI", "en": "an HDMI cable" },
+      "category": { "fr": "High-tech", "en": "Tech" },
+      "difficulty": "medium",
+      "tags": ["tech"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-037",
+      "object": { "fr": "un glaçon", "en": "an ice cube" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "medium",
+      "tags": ["party", "funny", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-038",
+      "object": { "fr": "une planche à découper", "en": "a cutting board" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-039",
+      "object": { "fr": "un gant de four", "en": "an oven mitt" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-040",
+      "object": { "fr": "un arrosoir", "en": "a watering can" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "medium",
+      "tags": ["decor", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-041",
+      "object": { "fr": "un tapis de yoga", "en": "a yoga mat" },
+      "category": { "fr": "Sport", "en": "Fitness" },
+      "difficulty": "medium",
+      "tags": ["fitness"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-042",
+      "object": { "fr": "un haltère", "en": "a dumbbell" },
+      "category": { "fr": "Sport", "en": "Fitness" },
+      "difficulty": "medium",
+      "tags": ["fitness", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-043",
+      "object": { "fr": "un chapeau de fête", "en": "a party hat" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "medium",
+      "tags": ["party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-044",
+      "object": { "fr": "une guirlande lumineuse", "en": "a string of fairy lights" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "medium",
+      "tags": ["decor", "party"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-001",
+      "object": { "fr": "une lampe à lave", "en": "a lava lamp" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-002",
+      "object": { "fr": "un attrape-rêves", "en": "a dream catcher" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-003",
+      "object": { "fr": "une boule à neige", "en": "a snow globe" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-004",
+      "object": { "fr": "un canard en plastique", "en": "a rubber duck" },
+      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "difficulty": "hard",
+      "tags": ["bathroom", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-005",
+      "object": { "fr": "un extincteur", "en": "a fire extinguisher" },
+      "category": { "fr": "Sécurité", "en": "Safety" },
+      "difficulty": "hard",
+      "tags": ["safety", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-006",
+      "object": { "fr": "un détecteur de fumée", "en": "a smoke detector" },
+      "category": { "fr": "Sécurité", "en": "Safety" },
+      "difficulty": "hard",
+      "tags": ["safety", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-007",
+      "object": { "fr": "une tapette à mouches", "en": "a fly swatter" },
+      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "difficulty": "hard",
+      "tags": ["household", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-008",
+      "object": { "fr": "un gratte-dos", "en": "a back scratcher" },
+      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "difficulty": "hard",
+      "tags": ["funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-009",
+      "object": { "fr": "un rouleau anti-peluches", "en": "a lint roller" },
+      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "difficulty": "hard",
+      "tags": ["clothing", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-010",
+      "object": { "fr": "un désodorisant d'intérieur", "en": "an air freshener" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["household", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-011",
+      "object": { "fr": "un bâton d'encens", "en": "an incense stick" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-012",
+      "object": { "fr": "un cactus", "en": "a cactus" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-013",
+      "object": { "fr": "une boule à facettes", "en": "a disco ball" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "hard",
+      "tags": ["party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-014",
+      "object": { "fr": "un aquarium", "en": "a fish tank" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-015",
+      "object": { "fr": "un cadre photo", "en": "a picture frame" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-016",
+      "object": { "fr": "un appareil à raclette", "en": "a raclette grill" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen", "party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-017",
+      "object": { "fr": "un moulin à poivre", "en": "a pepper grinder" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-018",
+      "object": { "fr": "un presse-agrumes", "en": "a lemon squeezer" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-019",
+      "object": { "fr": "un minuteur de cuisine", "en": "a kitchen timer" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-020",
+      "object": { "fr": "un économe", "en": "a vegetable peeler" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-021",
+      "object": { "fr": "un entonnoir", "en": "a funnel" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-022",
+      "object": { "fr": "un cure-dent", "en": "a toothpick" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "difficulty": "hard",
+      "tags": ["kitchen", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-023",
+      "object": { "fr": "un sous-verre", "en": "a coaster" },
+      "category": { "fr": "Salon", "en": "Living room" },
+      "difficulty": "hard",
+      "tags": ["household", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-024",
+      "object": { "fr": "un abat-jour", "en": "a lampshade" },
+      "category": { "fr": "Déco", "en": "Decor" },
+      "difficulty": "hard",
+      "tags": ["decor", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-025",
+      "object": { "fr": "un paillasson", "en": "a doormat" },
+      "category": { "fr": "Entrée", "en": "Hallway" },
+      "difficulty": "hard",
+      "tags": ["household", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-026",
+      "object": { "fr": "un portemanteau", "en": "a coat rack" },
+      "category": { "fr": "Entrée", "en": "Hallway" },
+      "difficulty": "hard",
+      "tags": ["household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-027",
+      "object": { "fr": "une trousse de secours", "en": "a first-aid kit" },
+      "category": { "fr": "Sécurité", "en": "Safety" },
+      "difficulty": "hard",
+      "tags": ["safety", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-028",
+      "object": { "fr": "un ukulélé", "en": "a ukulele" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "difficulty": "hard",
+      "tags": ["music", "party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-029",
+      "object": { "fr": "des maracas", "en": "a pair of maracas" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "difficulty": "hard",
+      "tags": ["music", "party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-030",
+      "object": { "fr": "une piñata", "en": "a piñata" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "hard",
+      "tags": ["party", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-hard-031",
+      "object": { "fr": "des confettis", "en": "confetti" },
+      "category": { "fr": "Fête", "en": "Party" },
+      "difficulty": "hard",
+      "tags": ["party", "funny"],
+      "spicy": 0
+    }
+  ]
+}

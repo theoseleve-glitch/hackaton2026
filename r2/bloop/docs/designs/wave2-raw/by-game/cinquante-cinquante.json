@@ -1,0 +1,289 @@
+{
+  "id": "cinquante-cinquante",
+  "nameFr": "Cinquante-Cinquante",
+  "nameEn": "Fifty-Fifty",
+  "taglineFr": "Complète la phrase, vise le pourcentage de la foule.",
+  "taglineEn": "Finish the line, hit the crowd's number.",
+  "template": "INPUT_GUESS",
+  "players": {
+    "min": 2,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "pick",
+      "durationSec": 25,
+      "description": "All phones show the round's sentence stem, the ANNOUNCED target split in huge type (e.g. 'Vise 80% OUI / Aim for 80% YES'), and the item's 6 completion cards (display order shuffled once per round from the seeded RNG at init — deterministic and identical for all viewers). Each player secretly taps ONE card; picks live in a HIDDEN buffer (picks: Record<PlayerId, cardIndex>), never visible to other viewers; owner echo is picks[viewer] ?? null. Early-resolve via allActed(connectedPlayers(roster, connected), picks). TIMEOUT: at the deadline the round resolves with whoever picked; non-pickers and disconnected players simply score 0 this round (never auto-assigned a card, never block the room). phaseKey = pick:r{round}."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 12,
+      "description": "Atomic reveal: cards flip to show their pre-computed crowdYesPct, player avatars land on their picked cards, and each card shows its distance d = |crowdYesPct - targetYesPct|. SCORING (exact): every player whose card has the MINIMUM d among picked-able cards (all 6 cards count for distance ranking, but only players who picked score) gets +closestPoints (3); every player on the card with the SECOND-smallest distinct d gets +secondPoints (1); if the winning card's d <= bullseyeWindowPct (2), its pickers each get +bullseyeBonus (2) on top (so a bullseye round pays 5). Distance ties: all tied cards count as 'closest' and all their pickers get the full +3 (no splitting). Non-pickers: 0. Running scores shown. TIMEOUT: deadline auto-advances to the next round's pick, or to 'over' after totalRounds; emits analytics round_completed at the boundary (shell ad cue is the phaseKey transition itself, per synthesis §5.4). phaseKey = reveal:r{round}."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Terminal scoreboard. Untimed (phaseDurationMs returns null), phaseKey = 'over'. Emits the gameOver effect with a defensively CLONED final scores map (gameOver(scores) kit helper). Highest total wins the match; the shell converts placement (not raw points) into session XP per the cross-game convention. Shell may fire the interstitial off the -> over phaseKey transition."
+    }
+  ],
+  "params": {
+    "mode": "crowd-target",
+    "totalRounds": 7,
+    "cardsPerRound": 6,
+    "pickMs": 25000,
+    "revealMs": 12000,
+    "closestPoints": 3,
+    "secondPoints": 1,
+    "bullseyeBonus": 2,
+    "bullseyeWindowPct": 2
+  },
+  "contentItemShape": "One pack item = one round. Authoring (bilingual) shape — the offline pipeline splits it into the platform's single-locale runtime packs (data.locale per synthesis §3.1: cinquante-cinquante-fr / cinquante-cinquante-en) and re-estimates percentages PER LOCALE:\n\n{\n  \"id\": string (kebab, stable, e.g. \"cc-honestly-001\"),\n  \"targetYesPct\": int 1..99 — the ANNOUNCED target split for the round (\"aim for 80% YES\"); authored per item so packs cover extremes (95/5) and coin-flips (50/50),\n  \"askKind\": \"didYou\" | \"agree\" | \"wouldYou\" — how the (fictional, consistent) crowd of 1,000 polled people was asked about each completed sentence: 'is this true for you?' / 'do you agree?' / 'would/could you?'. Drives the reveal copy (\"84% de la foule a dit OUI\"),\n  \"stem\": { \"fr\": string, \"en\": string } — sentence opener shown big, ends with an ellipsis,\n  \"completions\": exactly cardsPerRound (6) entries, each {\n    \"id\": string (\"a\"..\"f\"),\n    \"text\": { \"fr\": string, \"en\": string } — completes the stem grammatically in BOTH languages,\n    \"crowdYesPct\": int 0..100 — PRE-COMPUTED offline (LLM persona-ensemble estimate calibrated on real published polls; provenance stored; never computed at runtime),\n    \"spicy\": 0|1|2 optional (default 0; >0 only allowed in spicy packs)\n  },\n  \"tone\": \"classic\" | \"spicy\" (default classic),\n  \"tags\": string[] optional (curation only; reducer ignores)\n}\n\nPipeline lints (AI gate, hard): all 6 crowdYesPct pairwise distinct by >=3 EXCEPT at most one designed tie pair vs the target; at least one card within 12 of targetYesPct (a winnable round); at most one card inside the bullseye window; pack size >= totalRounds * 9 (~63 items) so no-repeat draw never exhausts a session streak; every string passes the obscenity filter; FR and EN both natural (human gate before rolloutPct > 5).",
+  "sampleItems": [
+    {
+      "id": "cc-honestly-001",
+      "targetYesPct": 80,
+      "askKind": "didYou",
+      "stem": {
+        "fr": "Honnêtement, j'ai déjà…",
+        "en": "Honestly, I have…"
+      },
+      "completions": [
+        {
+          "id": "a",
+          "text": {
+            "fr": "…mangé un truc tombé par terre",
+            "en": "…eaten food that fell on the floor"
+          },
+          "crowdYesPct": 84
+        },
+        {
+          "id": "b",
+          "text": {
+            "fr": "…fait semblant d'être malade pour sécher le boulot ou les cours",
+            "en": "…faked being sick to skip work or school"
+          },
+          "crowdYesPct": 71
+        },
+        {
+          "id": "c",
+          "text": {
+            "fr": "…stalké mon ex sur les réseaux",
+            "en": "…stalked my ex on social media"
+          },
+          "crowdYesPct": 62
+        },
+        {
+          "id": "d",
+          "text": {
+            "fr": "…chanté à fond sous la douche cette semaine",
+            "en": "…belted out a song in the shower this week"
+          },
+          "crowdYesPct": 55
+        },
+        {
+          "id": "e",
+          "text": {
+            "fr": "…menti sur mon âge",
+            "en": "…lied about my age"
+          },
+          "crowdYesPct": 47
+        },
+        {
+          "id": "f",
+          "text": {
+            "fr": "…pleuré devant une pub",
+            "en": "…cried at a commercial"
+          },
+          "crowdYesPct": 38
+        }
+      ],
+      "tone": "classic",
+      "tags": [
+        "confessions"
+      ]
+    },
+    {
+      "id": "cc-everyone-knows-002",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": {
+        "fr": "Tout le monde sait que…",
+        "en": "Everyone knows that…"
+      },
+      "completions": [
+        {
+          "id": "a",
+          "text": {
+            "fr": "…dormir, c'est merveilleux",
+            "en": "…sleeping feels amazing"
+          },
+          "crowdYesPct": 96
+        },
+        {
+          "id": "b",
+          "text": {
+            "fr": "…la pizza bat le brocoli",
+            "en": "…pizza beats broccoli"
+          },
+          "crowdYesPct": 88
+        },
+        {
+          "id": "c",
+          "text": {
+            "fr": "…le lundi est le pire jour de la semaine",
+            "en": "…Monday is the worst day of the week"
+          },
+          "crowdYesPct": 74
+        },
+        {
+          "id": "d",
+          "text": {
+            "fr": "…l'ananas n'a rien à faire sur une pizza",
+            "en": "…pineapple does not belong on pizza"
+          },
+          "crowdYesPct": 54
+        },
+        {
+          "id": "e",
+          "text": {
+            "fr": "…les chats sont meilleurs que les chiens",
+            "en": "…cats are better than dogs"
+          },
+          "crowdYesPct": 41
+        },
+        {
+          "id": "f",
+          "text": {
+            "fr": "…les plateaux-repas d'avion, c'est bon",
+            "en": "…airplane food is actually good"
+          },
+          "crowdYesPct": 12
+        }
+      ],
+      "tone": "classic",
+      "tags": [
+        "opinions",
+        "absurd"
+      ]
+    },
+    {
+      "id": "cc-could-totally-003",
+      "targetYesPct": 30,
+      "askKind": "wouldYou",
+      "stem": {
+        "fr": "Je serais cap de…",
+        "en": "I could totally…"
+      },
+      "completions": [
+        {
+          "id": "a",
+          "text": {
+            "fr": "…parler devant 500 personnes",
+            "en": "…speak in front of 500 people"
+          },
+          "crowdYesPct": 33
+        },
+        {
+          "id": "b",
+          "text": {
+            "fr": "…passer une semaine sans téléphone",
+            "en": "…go a full week without my phone"
+          },
+          "crowdYesPct": 27
+        },
+        {
+          "id": "c",
+          "text": {
+            "fr": "…commander le plat le plus épicé du resto",
+            "en": "…order the spiciest dish on the menu"
+          },
+          "crowdYesPct": 45
+        },
+        {
+          "id": "d",
+          "text": {
+            "fr": "…passer une nuit seul·e en forêt",
+            "en": "…spend a night alone in the forest"
+          },
+          "crowdYesPct": 38
+        },
+        {
+          "id": "e",
+          "text": {
+            "fr": "…gagner un concours de karaoké",
+            "en": "…win a karaoke contest"
+          },
+          "crowdYesPct": 22
+        },
+        {
+          "id": "f",
+          "text": {
+            "fr": "…courir un marathon sans entraînement",
+            "en": "…run a marathon with zero training"
+          },
+          "crowdYesPct": 9
+        }
+      ],
+      "tone": "classic",
+      "tags": [
+        "challenges"
+      ]
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "recommendations": [
+    {
+      "question": "The brief wants the AI to score each player's free-text completion LIVE. How do we keep the mechanic without runtime AI?",
+      "recommendation": "Replace free-text + live judging with a pack-authored hand: each item ships a stem, an announced target split, and 6 pre-written completions each carrying a PRE-COMPUTED crowdYesPct. Players pick the completion they believe lands closest to the target; the reveal flips the true numbers. All three beats of the brief survive: complete the stem, crowd %, closest-to-announced-target wins.",
+      "why": "The engine contract (packages/engine/src/types.ts) forbids any I/O, wall-clock, or ambient randomness in game code; all nondeterminism enters via seed + event timestamps. Live LLM scoring is impossible to replay deterministically; pre-scored cards are."
+    },
+    {
+      "question": "Where do the crowd percentages come from, and will players trust them?",
+      "recommendation": "Offline pipeline: an LLM persona-ensemble (>=20 sampled demographic personas per locale, majority-vote, temperature-varied) estimates each completion's YES %, calibrated against real published polls (YouGov/Ifop-style anchors) with provenance stored per item. Frame it in-game as a consistent fictional crowd: 'On a sondé 1 000 personnes' / 'We polled 1,000 people'. Human spot-check is gate stage 5 before rolloutPct rises.",
+      "why": "A contested number ('no way 84% ate floor food!') is actually the fun if the crowd is a consistent character — but only if the numbers are plausible. Calibration + the AI-packaging gate (template-architecture §6) keeps them defensible without ever running AI at gameplay time."
+    },
+    {
+      "question": "The brief says the target is 'pas nécessairement 50/50 : 80/20, 95/5'. How are targets chosen?",
+      "recommendation": "targetYesPct is authored per item with a pack-level distribution lint: ~1/3 extreme targets (>=90 or <=10), ~1/3 mid (60-85 / 15-40), ~1/3 near coin-flip (40-60). Round order is the seeded shuffle, so every session mixes target flavors. Lint: at least one card within 12 of target, at most one card inside the bullseye window.",
+      "why": "Extreme targets (95/5) play completely differently from coin-flips and are the brief's signature; authoring + lint guarantees the variety instead of hoping the AI generator produces it."
+    },
+    {
+      "question": "New template or reuse?",
+      "recommendation": "Ship as a third mode of INPUT_GUESS: params.mode = 'crowd-target', growing the mode enum in templateParamsSchema plus optional params (pickMs, revealMs, cardsPerRound, point values). Crucially, this mode has ZERO free text, so it can be the FIRST INPUT_GUESS mode built — it needs none of the gameplay-text moderation surface that gates blitz/collab-one-word (template-architecture §3.3).",
+      "why": "The architecture doc's ruling is modes-within-one-template (cf. impostorWordMode, ToD intensities). crowd-target shares the INPUT_GUESS skeleton exactly: per-round prompt, hidden simultaneous buffer, atomic reveal, scoring against pack data — and it de-risks the missing template by shipping its easiest mode first."
+    },
+    {
+      "question": "Can we ever get the original free-completion creativity back?",
+      "recommendation": "Yes, as a v2 'freestyle' sibling mode: players TYPE their own completion, then the ROOM itself votes OUI/NON on each completion live, and the room's % is the score against the target — closest wins. Deterministic (the crowd is the room), no AI, but it requires the hardened text-moderation path, so schedule it after collab-one-word ships.",
+      "why": "It recovers the brief's creative beat with the room as the crowd — fully deterministic — and slots into the same template as one more mode, no contract change."
+    },
+    {
+      "question": "Ties, passive players, disconnects?",
+      "recommendation": "Distance ties: all tied-closest cards pay full closestPoints to their pickers (no splitting — sample item 3 demonstrates a designed 27-vs-33 tie at target 30). Deadline non-pickers score 0 and are never auto-assigned a card. Disconnected players are excluded from allActed's expected set (connectedPlayers), so the phase early-resolves without them; playerLeft never deletes the roster seat or touches scores.",
+      "why": "Platform rule: a disconnected or passive player must never block the room (spec §6 / synthesis §1.3); full-points ties keep the reveal celebratory, never punitive — 'funny never cruel'."
+    },
+    {
+      "question": "Same percentages for FR and EN?",
+      "recommendation": "No — the pipeline re-estimates crowdYesPct per locale when splitting the bilingual authoring source into the single-locale runtime packs (cinquante-cinquante-fr / -en, per the data.locale convention). Rooms are single-locale, so fairness within a room is unaffected.",
+      "why": "FR and EN crowds genuinely answer differently (pineapple pizza polls differently in Paris and Portland); per-locale numbers keep the fictional crowd credible, and the platform already mandates one locale per pack id (synthesis §3.1/§3.3)."
+    },
+    {
+      "question": "Spicy version?",
+      "recommendation": "Default pack is tone classic / minAge 0 (this design, spicyLevel 0). Ship a sibling config 'cinquante-cinquante-after-dark' later: tone spicy, minAge 18, spicy completions only in that pack — same template, same params, pure Cadence-B content op.",
+      "why": "Age-gating is a catalog/config concern (gameConfigSchema refinement: spicy => minAge >= 18); keeping the launch pack safe maximizes reach while the spicy sibling is a zero-code follow-up."
+    }
+  ],
+  "risks": [
+    "Gated on template build: INPUT_GUESS is the one missing template (no module exists yet — template-architecture §3.1). Mitigation: crowd-target is its simplest mode (no text input, no moderation), so it can be the first INPUT_GUESS slice built; everything else (hidden buffer, allActed, phaseKey, tally-style reveal) is proven kit.",
+    "Crowd percentages are AI estimates and will be contested by players ('84%? no way!'). Mitigation: calibrate against real polls, store provenance, frame the crowd as a consistent fictional 1,000-person panel, and lean into the argument as the party moment — but a sloppy pack kills trust fast, so the human gate (stage 5) is load-bearing.",
+    "Content burn: once a group has seen an item's percentages, the round is dead for them. Packs need >= ~63 items (totalRounds x 9 sessions lint), no-repeat seeded draw within a session, and a steady offline-pipeline cadence of fresh packs (Cadence B, no deploy).",
+    "Bilingual authoring vs single-locale runtime: the platform mandates one locale per pack id; the pipeline MUST split the bilingual source and re-estimate percentages per locale, or FR rooms get EN-calibrated numbers.",
+    "Readability at speed: 6 cards + a target + a stem in 25s on a phone is the ceiling; with cardsPerRound > 6 or verbose completions the pick phase degrades. Lint completion length (<= ~60 chars/locale) and keep cardsPerRound at 4-6.",
+    "Tie-sharing point inflation: full points to all tied pickers is generous; the pairwise >=3-distinct lint bounds it to at most one designed tie per item.",
+    "phaseKey/secret hygiene: picks are secrets until reveal — they must never appear in phaseKey or any non-owner view; redaction tests via leakedSecrets on the picks buffer are mandatory (synthesis §1.5 convention)."
+  ],
+  "roundsDefault": 7,
+  "roundSeconds": 37
+}

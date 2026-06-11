@@ -1,0 +1,1663 @@
+{
+  "gameId": "mime-inverse",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "mi-act-001",
+      "action": { "fr": "Tondre la pelouse", "en": "Mowing the lawn" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["tondeuse", "pelouse", "herbe", "jardin"], "en": ["mower", "lawn", "grass", "garden"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["physical", "household"]
+    },
+    {
+      "id": "mi-act-002",
+      "action": { "fr": "Repasser une chemise pleine de plis", "en": "Ironing a hopelessly wrinkled shirt" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["fer", "repasser", "chemise", "plis"], "en": ["iron", "shirt", "board", "wrinkles"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical"]
+    },
+    {
+      "id": "mi-act-003",
+      "action": { "fr": "Étendre le linge mouillé", "en": "Hanging out the wet laundry" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["linge", "étendoir", "pinces", "sécher"], "en": ["laundry", "clothesline", "pegs", "drying"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical"]
+    },
+    {
+      "id": "mi-act-004",
+      "action": { "fr": "Passer l'aspirateur sous le canapé", "en": "Vacuuming under the couch" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["aspirateur", "canapé", "ménage", "poussière"], "en": ["vacuum", "couch", "cleaning", "dust"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical"]
+    },
+    {
+      "id": "mi-act-005",
+      "action": { "fr": "Laver les vitres jusqu'au coin impossible", "en": "Washing the windows, including that impossible corner" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["vitres", "fenêtre", "raclette", "carreaux"], "en": ["window", "glass", "squeegee", "wipe"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical"]
+    },
+    {
+      "id": "mi-act-006",
+      "action": { "fr": "Changer l'ampoule du plafond sur la pointe des pieds", "en": "Changing the ceiling bulb on tiptoe" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["ampoule", "lumière", "plafond", "visser"], "en": ["bulb", "light", "ceiling", "screw"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical"]
+    },
+    {
+      "id": "mi-act-007",
+      "action": { "fr": "Monter un meuble en kit avec trois vis en trop", "en": "Assembling flat-pack furniture with three screws left over" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["meuble", "kit", "notice", "vis"], "en": ["furniture", "flat-pack", "manual", "screws"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-008",
+      "action": { "fr": "Déboucher les toilettes en urgence", "en": "Unclogging the toilet in an emergency" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["ventouse", "toilettes", "bouché", "chasse"], "en": ["plunger", "toilet", "clogged", "flush"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-009",
+      "action": { "fr": "Enfiler une housse de couette en disparaissant à moitié dedans", "en": "Stuffing a duvet into its cover and half disappearing inside" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["couette", "housse", "lit", "secouer"], "en": ["duvet", "cover", "bed", "shake"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-010",
+      "action": { "fr": "Plier un drap-housse correctement", "en": "Folding a fitted sheet properly (allegedly possible)" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["drap", "housse", "plier", "élastique"], "en": ["fitted", "sheet", "fold", "elastic"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-011",
+      "action": { "fr": "Faire tournoyer la pâte à pizza comme un pro", "en": "Spinning pizza dough like a pro" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["pizza", "pâte", "lancer", "pizzaiolo"], "en": ["pizza", "dough", "toss", "spin"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "performance"]
+    },
+    {
+      "id": "mi-act-012",
+      "action": { "fr": "Couper des oignons en pleurant toutes les larmes de son corps", "en": "Chopping onions while crying your eyes out" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["oignon", "couper", "pleurer", "larmes"], "en": ["onion", "chop", "cry", "tears"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-013",
+      "action": { "fr": "Goûter une soupe beaucoup trop chaude", "en": "Taste-testing soup that is way too hot" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["soupe", "chaud", "cuillère", "brûler"], "en": ["soup", "hot", "spoon", "burn"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-014",
+      "action": { "fr": "Passer le contrôle de sécurité à l'aéroport", "en": "Going through airport security" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["aéroport", "portique", "valise", "sécurité"], "en": ["airport", "scanner", "suitcase", "security"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["physical", "situational", "funny"]
+    },
+    {
+      "id": "mi-act-015",
+      "action": { "fr": "Ouvrir un bocal qui refuse de coopérer", "en": "Opening a jar that refuses to cooperate" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["bocal", "couvercle", "ouvrir", "forcer"], "en": ["jar", "lid", "open", "twist"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "physical"]
+    },
+    {
+      "id": "mi-act-016",
+      "action": { "fr": "Faire sauter une crêpe et la rater", "en": "Flipping a pancake and losing it mid-air" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["crêpe", "poêle", "sauter", "retomber"], "en": ["pancake", "pan", "flip", "catch"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-017",
+      "action": { "fr": "Aspirer un spaghetti interminable", "en": "Slurping one never-ending strand of spaghetti" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["spaghetti", "pâtes", "aspirer", "fourchette"], "en": ["spaghetti", "pasta", "slurp", "fork"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-018",
+      "action": { "fr": "Croquer dans un piment beaucoup trop fort", "en": "Biting into a pepper that is way too hot" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["piment", "épicé", "feu", "bouche"], "en": ["pepper", "spicy", "fire", "mouth"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-019",
+      "action": { "fr": "Empiler un sandwich trop haut pour la bouche", "en": "Stacking a sandwich too tall to actually bite" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["sandwich", "pain", "empiler", "bouche"], "en": ["sandwich", "bread", "stack", "bite"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["food", "absurd"]
+    },
+    {
+      "id": "mi-act-020",
+      "action": { "fr": "Faire la course contre une glace qui fond", "en": "Racing an ice cream that melts faster than you can lick" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["glace", "fondre", "cornet", "lécher"], "en": ["ice cream", "melting", "cone", "lick"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-021",
+      "action": { "fr": "Découper un poulet rôti sorti trop tôt du four", "en": "Carving a roast chicken straight out of the oven" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["poulet", "rôti", "découper", "brûlant"], "en": ["chicken", "roast", "carve", "scalding"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["food", "situational"]
+    },
+    {
+      "id": "mi-act-022",
+      "action": { "fr": "Lécher le saladier du gâteau en cachette", "en": "Sneaking licks from the cake-batter bowl" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["gâteau", "pâte", "saladier", "doigt"], "en": ["cake", "batter", "bowl", "finger"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-023",
+      "action": { "fr": "Gérer un barbecue qui s'enflamme d'un coup", "en": "Manning a barbecue that suddenly flares up" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["barbecue", "flammes", "grille", "saucisse"], "en": ["barbecue", "grill", "flames", "sausage"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["food", "situational"]
+    },
+    {
+      "id": "mi-act-024",
+      "action": { "fr": "Écaler un œuf dur encore brûlant", "en": "Peeling a hard-boiled egg fresh out of the pot" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["œuf", "coquille", "écaler", "brûlant"], "en": ["egg", "shell", "peel", "hot"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-025",
+      "action": { "fr": "Sentir un lait qui a largement dépassé sa date", "en": "Sniffing milk that is well past its date" },
+      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "forbidden": { "fr": ["lait", "sentir", "périmé", "frigo"], "en": ["milk", "sniff", "expired", "fridge"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["food", "funny"]
+    },
+    {
+      "id": "mi-act-026",
+      "action": { "fr": "Servir comme en finale de tennis", "en": "Serving for the tennis championship" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["tennis", "raquette", "service", "balle"], "en": ["tennis", "racket", "serve", "ball"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-027",
+      "action": { "fr": "Promener un chien qui tire sur la laisse", "en": "Walking a dog that pulls on the leash" },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["chien", "laisse", "promener"], "en": ["dog", "leash", "walk"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["physical", "animals", "funny"]
+    },
+    {
+      "id": "mi-act-028",
+      "action": { "fr": "Décocher la flèche de la finale olympique", "en": "Loosing the arrow in the Olympic final" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["arc", "flèche", "viser", "corde"], "en": ["bow", "arrow", "aim", "archery"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-029",
+      "action": { "fr": "Soulever des haltères visiblement trop lourds", "en": "Lifting dumbbells that are clearly too heavy" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["haltères", "muscu", "soulever", "lourd"], "en": ["dumbbells", "gym", "lift", "heavy"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-030",
+      "action": { "fr": "Tenir la posture de l'arbre en plein cours de yoga", "en": "Holding tree pose in yoga class, dramatically" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["yoga", "posture", "équilibre", "zen"], "en": ["yoga", "pose", "balance", "zen"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-031",
+      "action": { "fr": "Escalader un mur d'escalade prise par prise", "en": "Scaling a climbing wall hold by hold" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["escalade", "mur", "grimper", "prise"], "en": ["climbing", "wall", "holds", "grip"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-032",
+      "action": { "fr": "Traverser sur un fil de funambule", "en": "Inching across a tightrope" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["funambule", "fil", "équilibre", "cirque"], "en": ["tightrope", "wire", "balance", "circus"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "physical"]
+    },
+    {
+      "id": "mi-act-033",
+      "action": { "fr": "Dévaler une piste de ski et se gameller", "en": "Bombing down a ski slope and wiping out" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["ski", "neige", "piste", "bâtons"], "en": ["ski", "snow", "slope", "poles"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "winter", "funny"]
+    },
+    {
+      "id": "mi-act-034",
+      "action": { "fr": "Remonter un poisson bien trop gros", "en": "Reeling in a fish that is far too big" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["pêche", "poisson", "canne", "moulinet"], "en": ["fishing", "fish", "rod", "reel"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "physical"]
+    },
+    {
+      "id": "mi-act-035",
+      "action": { "fr": "Pagayer dans un canoë qui tourne en rond", "en": "Paddling a canoe that only goes in circles" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["canoë", "pagaie", "ramer", "rivière"], "en": ["canoe", "paddle", "row", "river"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "funny"]
+    },
+    {
+      "id": "mi-act-036",
+      "action": { "fr": "Jongler avec trois balles invisibles", "en": "Juggling three invisible balls" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["jongler", "balles", "cirque", "rattraper"], "en": ["juggling", "balls", "circus", "catch"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "physical"]
+    },
+    {
+      "id": "mi-act-037",
+      "action": { "fr": "Décrocher un strike au bowling", "en": "Rolling the perfect bowling strike" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["bowling", "quilles", "strike", "boule"], "en": ["bowling", "pins", "strike", "ball"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-038",
+      "action": { "fr": "Rater un putt de trente centimètres", "en": "Missing a one-foot putt" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["golf", "putt", "club", "trou"], "en": ["golf", "putt", "club", "hole"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-039",
+      "action": { "fr": "Boxer contre son ombre", "en": "Shadow-boxing like a world champion" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["boxe", "ombre", "gants", "esquive"], "en": ["boxing", "shadow", "gloves", "dodge"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-040",
+      "action": { "fr": "Sauver un hula hoop qui glisse", "en": "Rescuing a slipping hula hoop" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["hula hoop", "cerceau", "hanches", "tourner"], "en": ["hula hoop", "hoop", "hips", "spin"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-041",
+      "action": { "fr": "Faire ses premiers pas sur des patins à glace", "en": "Taking your first wobbly steps on ice skates" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["patins", "glace", "patinoire", "glisser"], "en": ["skates", "ice", "rink", "wobble"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "winter", "funny"]
+    },
+    {
+      "id": "mi-act-042",
+      "action": { "fr": "Lancer le javelot avec un élan théâtral", "en": "Hurling a javelin with a theatrical wind-up" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["javelot", "lancer", "athlétisme", "élan"], "en": ["javelin", "throw", "athletics", "wind-up"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-043",
+      "action": { "fr": "Sortir le carton rouge à un joueur furieux", "en": "Showing a furious player the red card" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["arbitre", "carton", "rouge", "sifflet"], "en": ["referee", "card", "red", "whistle"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "situational"]
+    },
+    {
+      "id": "mi-act-044",
+      "action": { "fr": "Garder les buts pendant les tirs au but", "en": "Goalkeeping a penalty shootout" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["gardien", "but", "penalty", "plonger"], "en": ["goalkeeper", "goal", "penalty", "dive"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-045",
+      "action": { "fr": "Tirer à la corde contre une équipe invisible", "en": "Tug-of-war against an invisible team" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["corde", "tirer", "équipe", "glisser"], "en": ["rope", "tug", "pull", "team"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-046",
+      "action": { "fr": "Mesurer le point à la pétanque au millimètre près", "en": "Measuring a contested bocce point to the millimeter" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["pétanque", "boules", "mesurer", "cochonnet"], "en": ["bocce", "balls", "measure", "jack"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny", "situational"]
+    },
+    {
+      "id": "mi-act-047",
+      "action": { "fr": "Mener un duel d'escrime très théâtral", "en": "Fighting an extremely theatrical fencing duel" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["escrime", "épée", "duel", "touché"], "en": ["fencing", "sword", "duel", "lunge"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "performance"]
+    },
+    {
+      "id": "mi-act-048",
+      "action": { "fr": "Casser une planche au karaté et le regretter aussitôt", "en": "Karate-chopping a board and instantly regretting it" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["karaté", "planche", "casser", "main"], "en": ["karate", "board", "chop", "hand"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-049",
+      "action": { "fr": "Surfer la vague de l'année", "en": "Surfing the wave of the year" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["surf", "vague", "planche", "océan"], "en": ["surf", "wave", "board", "ocean"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "mi-act-050",
+      "action": { "fr": "Nager la brasse dans une piscine bondée", "en": "Breaststroking through a packed pool" },
+      "category": { "fr": "Sport", "en": "Sports" },
+      "forbidden": { "fr": ["nager", "piscine", "brasse", "bondée"], "en": ["swim", "pool", "breaststroke", "crowded"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["sports", "funny"]
+    },
+    {
+      "id": "mi-act-051",
+      "action": { "fr": "Fermer sa valise en s'asseyant dessus", "en": "Sitting on your suitcase to force it shut" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["valise", "asseoir", "fermer", "bagages"], "en": ["suitcase", "sit", "zip", "luggage"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["travel", "funny"]
+    },
+    {
+      "id": "mi-act-052",
+      "action": { "fr": "Chercher frénétiquement son passeport devant le douanier", "en": "Frantically searching for your passport at the customs desk" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["passeport", "douane", "fouiller", "poches"], "en": ["passport", "customs", "search", "pockets"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["travel", "situational"]
+    },
+    {
+      "id": "mi-act-053",
+      "action": { "fr": "Se mettre de la crème solaire dans le dos tout seul", "en": "Sunscreening your own back, solo mission" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["crème", "solaire", "dos", "plage"], "en": ["sunscreen", "back", "rub", "beach"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["travel", "funny"]
+    },
+    {
+      "id": "mi-act-054",
+      "action": { "fr": "Monter dans un hamac sans chavirer", "en": "Boarding a hammock without capsizing" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["hamac", "chavirer", "sieste", "grimper"], "en": ["hammock", "capsize", "nap", "climb"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["travel", "funny"]
+    },
+    {
+      "id": "mi-act-055",
+      "action": { "fr": "Planter une tente en pleine tempête", "en": "Pitching a tent in a rising storm" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["tente", "camping", "piquets", "vent"], "en": ["tent", "camping", "pegs", "wind"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "situational"]
+    },
+    {
+      "id": "mi-act-056",
+      "action": { "fr": "Hocher la tête devant une œuvre d'art incompréhensible", "en": "Nodding wisely at incomprehensible modern art" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["musée", "art", "tableau", "comprendre"], "en": ["museum", "art", "painting", "deep"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-057",
+      "action": { "fr": "S'endormir debout dans le métro", "en": "Falling asleep standing up on the subway" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["métro", "dormir", "debout", "barre"], "en": ["subway", "asleep", "standing", "pole"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-058",
+      "action": { "fr": "Prendre un selfie un peu trop près du bord", "en": "Taking a selfie a little too close to the edge" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["selfie", "photo", "bord", "falaise"], "en": ["selfie", "photo", "edge", "cliff"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["travel", "funny"]
+    },
+    {
+      "id": "mi-act-059",
+      "action": { "fr": "S'extraire d'une rangée d'avion bondée", "en": "Climbing out of a packed airplane row" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["avion", "siège", "rangée", "pardon"], "en": ["plane", "seat", "row", "excuse me"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["travel", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-060",
+      "action": { "fr": "Donner le bain à un chat pas du tout d'accord", "en": "Bathing a cat that strongly disagrees" },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["chat", "bain", "griffes", "mouillé"], "en": ["cat", "bath", "claws", "wet"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["animals", "funny"]
+    },
+    {
+      "id": "mi-act-061",
+      "action": { "fr": "Faire répéter un perroquet têtu", "en": "Coaching a stubborn parrot to talk" },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["perroquet", "répéter", "parler", "oiseau"], "en": ["parrot", "repeat", "talk", "bird"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["animals", "funny"]
+    },
+    {
+      "id": "mi-act-062",
+      "action": { "fr": "Défendre son sandwich contre une mouette", "en": "Defending your sandwich from a seagull" },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["mouette", "sandwich", "plage", "piquer"], "en": ["seagull", "sandwich", "beach", "steal"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["animals", "funny"]
+    },
+    {
+      "id": "mi-act-063",
+      "action": { "fr": "Traire une vache pressée d'en finir", "en": "Milking a cow that wants this over with" },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["vache", "traire", "lait", "ferme"], "en": ["cow", "milking", "udder", "farm"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["animals", "physical"]
+    },
+    {
+      "id": "mi-act-064",
+      "action": { "fr": "Traquer LE moustique à trois heures du matin", "en": "Hunting THE mosquito at 3 a.m." },
+      "category": { "fr": "Animaux", "en": "Animals" },
+      "forbidden": { "fr": ["moustique", "claquer", "bzzz", "nuit"], "en": ["mosquito", "swat", "buzz", "night"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["animals", "funny"]
+    },
+    {
+      "id": "mi-act-065",
+      "action": { "fr": "Dompter un lion de cirque", "en": "Taming a circus lion" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["lion", "dompteur", "cirque", "fouet"], "en": ["lion", "tamer", "circus", "whip"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "animals"]
+    },
+    {
+      "id": "mi-act-066",
+      "action": { "fr": "Avoir l'air très occupé quand le chef passe", "en": "Looking extremely busy when the boss walks by" },
+      "category": { "fr": "Bureau", "en": "Office life" },
+      "forbidden": { "fr": ["chef", "travail", "occupé", "bureau"], "en": ["boss", "work", "busy", "desk"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-067",
+      "action": { "fr": "Faire tout un discours avec le micro coupé", "en": "Delivering a whole speech on mute" },
+      "category": { "fr": "Bureau", "en": "Office life" },
+      "forbidden": { "fr": ["micro", "muet", "visio", "réunion"], "en": ["mute", "mic", "meeting", "call"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "tech", "funny"]
+    },
+    {
+      "id": "mi-act-068",
+      "action": { "fr": "Se battre avec la photocopieuse bloquée", "en": "Battling the jammed photocopier" },
+      "category": { "fr": "Bureau", "en": "Office life" },
+      "forbidden": { "fr": ["photocopieuse", "bourrage", "papier", "coincé"], "en": ["photocopier", "jam", "paper", "stuck"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-069",
+      "action": { "fr": "Diriger un orchestre symphonique au sommet", "en": "Conducting a symphony at full throttle" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["orchestre", "chef", "baguette", "symphonie"], "en": ["orchestra", "conductor", "baton", "symphony"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["music", "performance"]
+    },
+    {
+      "id": "mi-act-070",
+      "action": { "fr": "Porter dix assiettes de trop en plein service", "en": "Balancing ten plates too many mid-service" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["serveur", "assiettes", "plateau", "équilibre"], "en": ["waiter", "plates", "tray", "balance"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-071",
+      "action": { "fr": "Jouer le coiffeur qui vient d'avoir une vision", "en": "Playing the hairdresser who just had a vision" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["coiffeur", "ciseaux", "cheveux", "coupe"], "en": ["hairdresser", "scissors", "hair", "snip"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-072",
+      "action": { "fr": "Peindre un plafond du haut d'une échelle bancale", "en": "Painting a ceiling from a wobbly ladder" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["peinture", "plafond", "échelle", "rouleau"], "en": ["paint", "ceiling", "ladder", "roller"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-073",
+      "action": { "fr": "Présenter une météo catastrophique", "en": "Presenting a catastrophic weather forecast" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["météo", "carte", "présentateur", "nuages"], "en": ["weather", "map", "forecast", "clouds"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "performance"]
+    },
+    {
+      "id": "mi-act-074",
+      "action": { "fr": "Régler la circulation d'un carrefour devenu fou", "en": "Directing traffic at an intersection gone rogue" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["circulation", "carrefour", "sifflet", "voitures"], "en": ["traffic", "intersection", "whistle", "cars"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-075",
+      "action": { "fr": "Écrire au tableau avec une craie qui casse à chaque mot", "en": "Writing on the board with chalk that snaps on every word" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["prof", "craie", "tableau", "casser"], "en": ["teacher", "chalk", "board", "snap"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-076",
+      "action": { "fr": "Scanner des courses à toute vitesse à la caisse", "en": "Speed-scanning groceries at the checkout" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["caisse", "scanner", "bip", "articles"], "en": ["checkout", "scan", "beep", "groceries"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-077",
+      "action": { "fr": "Annoncer des turbulences en restant très zen", "en": "Announcing turbulence while staying suspiciously calm" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["pilote", "avion", "turbulences", "ceinture"], "en": ["pilot", "plane", "turbulence", "seatbelt"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-078",
+      "action": { "fr": "Lancer le colis marqué « fragile » par-dessus le portail", "en": "Yeeting the package marked \"fragile\" over the gate" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["colis", "livreur", "fragile", "lancer"], "en": ["package", "courier", "fragile", "throw"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-079",
+      "action": { "fr": "Suivre une piste à la loupe", "en": "Following a trail with a magnifying glass" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["détective", "loupe", "indice", "enquête"], "en": ["detective", "magnifying glass", "clue", "case"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "performance"]
+    },
+    {
+      "id": "mi-act-080",
+      "action": { "fr": "Rester de garde royale sans craquer de rire", "en": "Standing royal guard while desperately not laughing" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["garde", "royal", "rire", "bouger"], "en": ["guard", "royal", "laugh", "flinch"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "funny"]
+    },
+    {
+      "id": "mi-act-081",
+      "action": { "fr": "Être apiculteur avec une abeille DANS la combinaison", "en": "Beekeeping with a bee INSIDE the suit" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["abeille", "apiculteur", "ruche", "combinaison"], "en": ["bee", "beekeeper", "hive", "suit"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["work", "funny", "animals"]
+    },
+    {
+      "id": "mi-act-082",
+      "action": { "fr": "Dépoussiérer un trésor enfoui au petit pinceau", "en": "Dusting off a buried treasure with a tiny brush" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["archéologue", "fouille", "pinceau", "trésor"], "en": ["archaeologist", "dig", "brush", "treasure"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "performance"]
+    },
+    {
+      "id": "mi-act-083",
+      "action": { "fr": "Abattre un arbre géant à la hache", "en": "Felling a giant tree with an axe" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["bûcheron", "hache", "arbre", "tomber"], "en": ["lumberjack", "axe", "tree", "timber"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-084",
+      "action": { "fr": "Dérouler la grande lance à incendie", "en": "Unrolling the big fire hose" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["pompier", "lance", "incendie", "eau"], "en": ["firefighter", "hose", "fire", "water"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "physical"]
+    },
+    {
+      "id": "mi-act-085",
+      "action": { "fr": "Jouer un solo de guitare les yeux fermés", "en": "Shredding a guitar solo with your eyes closed" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["guitare", "solo", "riff", "scène"], "en": ["guitar", "solo", "riff", "shred"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["music", "performance"]
+    },
+    {
+      "id": "mi-act-086",
+      "action": { "fr": "Tenir la batterie en plein concert de stade", "en": "Drumming through a stadium concert" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["batterie", "baguettes", "concert", "rythme"], "en": ["drums", "sticks", "concert", "beat"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["music", "physical"]
+    },
+    {
+      "id": "mi-act-087",
+      "action": { "fr": "Pousser le contre-ut à l'opéra", "en": "Belting the high note at the opera" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["opéra", "chanter", "note", "voix"], "en": ["opera", "sing", "note", "voice"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["music", "performance"]
+    },
+    {
+      "id": "mi-act-088",
+      "action": { "fr": "Faire monter la pression derrière les platines", "en": "Building the drop behind the decks" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["DJ", "platines", "foule", "drop"], "en": ["DJ", "decks", "crowd", "drop"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["music", "party"]
+    },
+    {
+      "id": "mi-act-089",
+      "action": { "fr": "Chanter au karaoké avec 200 % d'émotion", "en": "Karaoke at 200% emotional commitment" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["karaoké", "micro", "chanson", "refrain"], "en": ["karaoke", "mic", "song", "chorus"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "performance", "funny"]
+    },
+    {
+      "id": "mi-act-090",
+      "action": { "fr": "Danser un slow avec un partenaire invisible", "en": "Slow dancing with an invisible partner" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["slow", "danser", "partenaire", "bal"], "en": ["slow dance", "partner", "prom", "sway"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["party", "funny"]
+    },
+    {
+      "id": "mi-act-091",
+      "action": { "fr": "Passer sous la barre du limbo", "en": "Sneaking under the limbo bar" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["limbo", "barre", "pencher", "dessous"], "en": ["limbo", "bar", "lean", "under"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["party", "physical"]
+    },
+    {
+      "id": "mi-act-092",
+      "action": { "fr": "Se battre avec une cornemuse", "en": "Wrestling a set of bagpipes" },
+      "category": { "fr": "Musique", "en": "Music" },
+      "forbidden": { "fr": ["cornemuse", "souffler", "sac", "Écosse"], "en": ["bagpipes", "blow", "squeeze", "Scotland"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["music", "funny"]
+    },
+    {
+      "id": "mi-act-093",
+      "action": { "fr": "Être le premier sur la piste de danse — et le seul", "en": "Being first on the dance floor — and the only one" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["danser", "seul", "piste", "fête"], "en": ["dancing", "alone", "floor", "party"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-094",
+      "action": { "fr": "Souffler des bougies qui se rallument sans arrêt", "en": "Blowing out candles that keep relighting" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["bougies", "souffler", "gâteau", "anniversaire"], "en": ["candles", "blow", "cake", "birthday"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "funny"]
+    },
+    {
+      "id": "mi-act-095",
+      "action": { "fr": "S'extasier devant un cadeau affreux", "en": "Gushing over a hideous gift" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["cadeau", "ouvrir", "semblant", "génial"], "en": ["gift", "unwrap", "pretend", "amazing"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-096",
+      "action": { "fr": "Frapper une piñata les yeux bandés", "en": "Swinging at a piñata blindfolded" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["piñata", "bâton", "bandeau", "bonbons"], "en": ["piñata", "stick", "blindfold", "candy"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["party", "physical"]
+    },
+    {
+      "id": "mi-act-097",
+      "action": { "fr": "Ouvrir la bouteille de soda que quelqu'un a secouée", "en": "Opening the soda bottle somebody definitely shook" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["soda", "bouteille", "secouée", "mousse"], "en": ["soda", "bottle", "shaken", "fizz"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "funny"]
+    },
+    {
+      "id": "mi-act-098",
+      "action": { "fr": "Retirer LA pièce de la tour de Jenga", "en": "Pulling THE block from the Jenga tower" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["Jenga", "tour", "pièce", "écrouler"], "en": ["Jenga", "tower", "block", "collapse"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "situational"]
+    },
+    {
+      "id": "mi-act-099",
+      "action": { "fr": "Lâcher son téléphone sur son visage au lit", "en": "Dropping your phone on your face in bed" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["téléphone", "visage", "lit", "lâcher"], "en": ["phone", "face", "bed", "drop"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-100",
+      "action": { "fr": "Démêler des écouteurs noués comme un nœud marin", "en": "Untangling earphones tied like a ship's knot" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["écouteurs", "nœud", "fil", "démêler"], "en": ["earphones", "knot", "wires", "untangle"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-101",
+      "action": { "fr": "Taper un mot de passe wifi de quarante caractères", "en": "Typing a forty-character wifi password" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["wifi", "mot de passe", "taper", "erreur"], "en": ["wifi", "password", "typing", "error"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-102",
+      "action": { "fr": "Chercher du réseau le bras tendu vers le ciel", "en": "Chasing phone signal with an arm to the sky" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["réseau", "barres", "capter", "téléphone"], "en": ["signal", "bars", "reception", "phone"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["tech", "physical"]
+    },
+    {
+      "id": "mi-act-103",
+      "action": { "fr": "Reprendre exactement la même photo quarante-sept fois", "en": "Retaking the exact same photo forty-seven times" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["photo", "pose", "recommencer", "parfaite"], "en": ["photo", "pose", "retake", "perfect"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-104",
+      "action": { "fr": "Scroller sans fin à trois heures du matin", "en": "Doomscrolling at three in the morning" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["scroller", "écran", "téléphone", "dormir"], "en": ["scrolling", "screen", "phone", "sleep"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["tech", "situational"]
+    },
+    {
+      "id": "mi-act-105",
+      "action": { "fr": "Être un robot aspirateur coincé dans un coin", "en": "Being a robot vacuum trapped in a corner" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["robot", "aspirateur", "coin", "bloqué"], "en": ["robot", "vacuum", "corner", "stuck"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["tech", "absurd", "funny"]
+    },
+    {
+      "id": "mi-act-106",
+      "action": { "fr": "Essayer un casque VR et attraper le vertige", "en": "Trying a VR headset and instantly getting vertigo" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["VR", "casque", "virtuel", "tomber"], "en": ["VR", "headset", "virtual", "dizzy"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-107",
+      "action": { "fr": "Marcher pieds nus sur un Lego", "en": "Stepping barefoot on a Lego" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["Lego", "pied", "marcher", "crier"], "en": ["Lego", "barefoot", "step", "scream"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-108",
+      "action": { "fr": "Enfiler un jean qui sort du sèche-linge", "en": "Squeezing into jeans fresh from the dryer" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["jean", "serré", "enfiler", "bouton"], "en": ["jeans", "tight", "squeeze", "button"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-109",
+      "action": { "fr": "Chercher ses clés avec vingt minutes de retard", "en": "Hunting for your keys, already twenty minutes late" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["clés", "retard", "chercher", "poches"], "en": ["keys", "late", "search", "pockets"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-110",
+      "action": { "fr": "Retenir un éternuement en plein discours", "en": "Holding in a sneeze during a speech" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["éternuer", "atchoum", "nez", "retenir"], "en": ["sneeze", "achoo", "nose", "hold"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-111",
+      "action": { "fr": "Traverser une plaque de verglas avec dignité", "en": "Crossing black ice with your dignity intact" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["verglas", "glisser", "équilibre", "tomber"], "en": ["black ice", "slip", "balance", "fall"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["winter", "funny", "physical"]
+    },
+    {
+      "id": "mi-act-112",
+      "action": { "fr": "Se réveiller en retard et s'habiller en panique", "en": "Oversleeping and getting dressed in a blind panic" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["réveil", "retard", "habiller", "panique"], "en": ["alarm", "late", "dressing", "panic"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-113",
+      "action": { "fr": "Tenir la porte à quelqu'un de bien trop loin", "en": "Holding the door for someone way too far away" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["porte", "tenir", "loin", "gêne"], "en": ["door", "hold", "far", "awkward"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-114",
+      "action": { "fr": "Hésiter entre la bise et la poignée de main", "en": "The handshake-or-hug standoff" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["bise", "poignée de main", "saluer", "gêne"], "en": ["handshake", "hug", "greeting", "awkward"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-115",
+      "action": { "fr": "Rattraper au ralenti son téléphone qui glisse", "en": "Fumbling your slipping phone in slow motion" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["téléphone", "glisser", "rattraper", "jongler"], "en": ["phone", "slip", "juggle", "catch"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-116",
+      "action": { "fr": "Lutter avec un parapluie retourné par une rafale", "en": "Fighting an umbrella flipped inside out by a gust" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["parapluie", "vent", "retourné", "pluie"], "en": ["umbrella", "gust", "inside out", "rain"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-117",
+      "action": { "fr": "Traverser une toile d'araignée de plein visage", "en": "Walking face-first through a spiderweb" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["toile", "araignée", "visage", "gesticuler"], "en": ["spiderweb", "spider", "face", "flail"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-118",
+      "action": { "fr": "Pousser de toutes ses forces une porte marquée « TIREZ »", "en": "Shoving with all your might on a door marked \"PULL\"" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["porte", "pousser", "tirer", "écriteau"], "en": ["door", "push", "pull", "sign"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-119",
+      "action": { "fr": "Arrêter le micro-ondes à 0:01", "en": "Stopping the microwave at 0:01" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["micro-ondes", "bip", "seconde", "stop"], "en": ["microwave", "beep", "second", "stop"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-120",
+      "action": { "fr": "Attraper le paquet tout en haut de l'étagère", "en": "Reaching the packet on the very top shelf" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["étagère", "attraper", "haut", "pointe des pieds"], "en": ["shelf", "reach", "top", "tiptoe"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["physical", "funny"]
+    },
+    {
+      "id": "mi-act-121",
+      "action": { "fr": "Rester coincé dans son propre pull", "en": "Getting trapped inside your own sweater" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["pull", "coincé", "tête", "manche"], "en": ["sweater", "stuck", "head", "sleeve"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-122",
+      "action": { "fr": "Retirer des bottes beaucoup trop serrées", "en": "Wrestling off boots that are far too tight" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["bottes", "enlever", "tirer", "pied"], "en": ["boots", "pull", "off", "foot"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-123",
+      "action": { "fr": "Retirer un pansement le plus lentement possible", "en": "Peeling off a band-aid as slowly as humanly possible" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["pansement", "arracher", "doucement", "aïe"], "en": ["band-aid", "peel", "slowly", "ouch"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-124",
+      "action": { "fr": "Recevoir un Oscar en larmes", "en": "Accepting an Oscar through heavy tears" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["Oscar", "trophée", "discours", "merci"], "en": ["Oscar", "trophy", "speech", "thank you"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-125",
+      "action": { "fr": "Faire le magicien dont le tour part en vrille", "en": "Playing the magician whose trick goes sideways" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["magicien", "tour", "chapeau", "abracadabra"], "en": ["magician", "trick", "hat", "abracadabra"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-126",
+      "action": { "fr": "Défiler sur un podium avec un sérieux absolu", "en": "Strutting the runway with absolute seriousness" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["défilé", "mannequin", "podium", "démarche"], "en": ["runway", "model", "catwalk", "strut"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-127",
+      "action": { "fr": "Être une statue vivante qui finit par craquer", "en": "Being a living statue who finally cracks" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["statue", "immobile", "bouger", "craquer"], "en": ["statue", "frozen", "move", "crack"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-128",
+      "action": { "fr": "Être un mime enfermé dans une boîte invisible", "en": "Being a mime trapped in an invisible box" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["mime", "boîte", "invisible", "parois"], "en": ["mime", "box", "invisible", "walls"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "absurd"]
+    },
+    {
+      "id": "mi-act-129",
+      "action": { "fr": "Être le super-héros qui n'arrive pas à décoller", "en": "Being the superhero who cannot take off" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["super-héros", "voler", "cape", "décoller"], "en": ["superhero", "fly", "cape", "lift-off"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["absurd", "funny"]
+    },
+    {
+      "id": "mi-act-130",
+      "action": { "fr": "Avancer comme un zombie vers le frigo", "en": "Shuffling like a zombie toward the fridge" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["zombie", "marcher", "bras", "grogner"], "en": ["zombie", "shuffle", "arms", "groan"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["absurd", "funny"]
+    },
+    {
+      "id": "mi-act-131",
+      "action": { "fr": "Jouer un duel de western au ralenti", "en": "Acting out a slow-motion western duel" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["cowboy", "duel", "dégainer", "western"], "en": ["cowboy", "duel", "draw", "western"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-132",
+      "action": { "fr": "Faire ses premiers pas d'astronaute sur la Lune", "en": "Taking an astronaut's first steps on the Moon" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["astronaute", "Lune", "apesanteur", "pas"], "en": ["astronaut", "Moon", "gravity", "steps"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["performance", "physical"]
+    },
+    {
+      "id": "mi-act-133",
+      "action": { "fr": "Saluer le public beaucoup, beaucoup trop longtemps", "en": "Bowing to the audience way, way too long" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["saluer", "public", "applaudir", "rideau"], "en": ["bow", "audience", "applause", "curtain"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-134",
+      "action": { "fr": "Vendre un gadget inutile en télé-achat", "en": "Selling a useless gadget on a shopping channel" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["télé-achat", "vendre", "gadget", "démonstration"], "en": ["infomercial", "sell", "gadget", "demo"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["performance", "funny"]
+    },
+    {
+      "id": "mi-act-135",
+      "action": { "fr": "Se croire poule après un claquement de doigts d'hypnotiseur", "en": "Believing you're a chicken after a hypnotist's snap" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["hypnose", "poule", "transe", "claquement"], "en": ["hypnosis", "chicken", "trance", "snap"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["absurd", "funny"]
+    },
+    {
+      "id": "mi-act-136",
+      "action": { "fr": "Être un T-Rex qui essaie de faire son lit", "en": "Being a T-Rex trying to make the bed" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["T-Rex", "dinosaure", "bras", "lit"], "en": ["T-Rex", "dinosaur", "arms", "bed"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["absurd", "funny"]
+    },
+    {
+      "id": "mi-act-137",
+      "action": { "fr": "Être un robot à 1 % de batterie", "en": "Being a robot down to 1% battery" },
+      "category": { "fr": "Spectacle", "en": "Showbiz" },
+      "forbidden": { "fr": ["robot", "batterie", "ralentir", "éteindre"], "en": ["robot", "battery", "slowing", "shutdown"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["absurd", "performance"]
+    },
+    {
+      "id": "mi-act-138",
+      "action": { "fr": "Ramasser des feuilles un jour de grand vent", "en": "Raking leaves on a very windy day" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["feuilles", "râteau", "vent", "tas"], "en": ["leaves", "rake", "wind", "pile"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "funny"]
+    },
+    {
+      "id": "mi-act-139",
+      "action": { "fr": "Encourager ses plantes en les arrosant", "en": "Pep-talking your plants while watering them" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["plantes", "arroser", "arrosoir", "pousser"], "en": ["plants", "watering", "can", "grow"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-140",
+      "action": { "fr": "Raviver un feu de camp à bout de souffle", "en": "Blowing a dying campfire back to life" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["feu", "braises", "souffler", "camp"], "en": ["campfire", "embers", "blow", "flames"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "physical"]
+    },
+    {
+      "id": "mi-act-141",
+      "action": { "fr": "Construire un bonhomme de neige de zéro", "en": "Building a snowman from scratch" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["neige", "bonhomme", "boules", "carotte"], "en": ["snow", "snowman", "balls", "carrot"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["winter", "outdoors"]
+    },
+    {
+      "id": "mi-act-142",
+      "action": { "fr": "Livrer une bataille de boules de neige épique", "en": "Waging an epic snowball fight" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["neige", "boules", "lancer", "viser"], "en": ["snowballs", "snow", "throw", "dodge"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["winter", "physical", "funny"]
+    },
+    {
+      "id": "mi-act-143",
+      "action": { "fr": "Se faire tremper par une voiture dans une flaque", "en": "Getting soaked by a car hitting a puddle" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["flaque", "voiture", "éclabousser", "trempé"], "en": ["puddle", "car", "splash", "soaked"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-144",
+      "action": { "fr": "Avancer face à un vent de tempête", "en": "Pushing forward into a gale" },
+      "category": { "fr": "Nature", "en": "Outdoors" },
+      "forbidden": { "fr": ["vent", "tempête", "avancer", "pencher"], "en": ["wind", "gale", "lean", "forward"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["physical", "performance"]
+    },
+    {
+      "id": "mi-act-145",
+      "action": { "fr": "Caler trois fois de suite au feu vert", "en": "Stalling three times in a row at a green light" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["caler", "voiture", "embrayage", "feu"], "en": ["stall", "car", "clutch", "light"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-146",
+      "action": { "fr": "Réussir son créneau au quatorzième essai", "en": "Nailing the parallel park on attempt fourteen" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["créneau", "garer", "volant", "marche arrière"], "en": ["parallel parking", "steering", "reverse", "curb"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-147",
+      "action": { "fr": "Grimper une côte à vélo en danseuse", "en": "Grinding up a brutal hill on a bike" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["vélo", "côte", "pédaler", "grimper"], "en": ["bike", "hill", "pedal", "climb"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["physical", "sports"]
+    },
+    {
+      "id": "mi-act-148",
+      "action": { "fr": "Garder l'équilibre quand le bus pile", "en": "Surfing the bus when it slams the brakes" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["bus", "freiner", "équilibre", "barre"], "en": ["bus", "brakes", "balance", "rail"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "physical"]
+    },
+    {
+      "id": "mi-act-149",
+      "action": { "fr": "Dompter une trottinette électrique réglée trop vite", "en": "Taming an e-scooter set way too fast" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["trottinette", "vitesse", "guidon", "freiner"], "en": ["scooter", "speed", "handlebars", "brake"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-150",
+      "action": { "fr": "Gratter un pare-brise entièrement gelé", "en": "Scraping a completely frozen windshield" },
+      "category": { "fr": "Transports", "en": "Getting around" },
+      "forbidden": { "fr": ["pare-brise", "givre", "gratter", "voiture"], "en": ["windshield", "frost", "scrape", "car"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["winter", "physical"]
+    },
+    {
+      "id": "mi-act-151",
+      "action": { "fr": "Maîtriser un tour de potier qui part en vrille", "en": "Wrangling a pottery wheel spinning out of control" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["poterie", "tour", "argile", "vase"], "en": ["pottery", "wheel", "clay", "vase"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["hobby", "funny"]
+    },
+    {
+      "id": "mi-act-152",
+      "action": { "fr": "Tricoter une écharpe qui ne finit jamais", "en": "Knitting a scarf that never ends" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["tricoter", "aiguilles", "laine", "écharpe"], "en": ["knitting", "needles", "wool", "scarf"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["hobby", "funny"]
+    },
+    {
+      "id": "mi-act-153",
+      "action": { "fr": "Rage-quitter une partie de jeu vidéo", "en": "Rage-quitting a video game" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["manette", "jeu", "rage", "perdre"], "en": ["controller", "game", "rage", "lose"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["tech", "funny"]
+    },
+    {
+      "id": "mi-act-154",
+      "action": { "fr": "Découvrir qu'il manque la dernière pièce du puzzle", "en": "Discovering the last puzzle piece is missing" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["puzzle", "pièce", "manquante", "chercher"], "en": ["puzzle", "piece", "missing", "search"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["hobby", "situational"]
+    },
+    {
+      "id": "mi-act-155",
+      "action": { "fr": "Faire décoller un cerf-volant capricieux", "en": "Launching a temperamental kite" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["cerf-volant", "ficelle", "vent", "décoller"], "en": ["kite", "string", "wind", "launch"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "physical"]
+    },
+    {
+      "id": "mi-act-156",
+      "action": { "fr": "Viser le triple 20 aux fléchettes", "en": "Lining up the triple-20 dart" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["fléchettes", "cible", "viser", "lancer"], "en": ["darts", "board", "aim", "throw"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["hobby", "physical"]
+    },
+    {
+      "id": "mi-act-157",
+      "action": { "fr": "Perdre aux échecs contre un enfant de six ans", "en": "Losing at chess to a six-year-old" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["échecs", "mat", "pion", "enfant"], "en": ["chess", "checkmate", "pawn", "kid"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["hobby", "funny"]
+    },
+    {
+      "id": "mi-act-158",
+      "action": { "fr": "Voir la machine à pince lâcher la peluche au dernier moment", "en": "Watching the claw machine drop the plush at the last second" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["pince", "machine", "peluche", "lâcher"], "en": ["claw", "machine", "plush", "drop"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-159",
+      "action": { "fr": "Démarrer une tronçonneuse de mauvaise humeur", "en": "Pull-starting a chainsaw in a bad mood" },
+      "category": { "fr": "Corvées", "en": "Chores" },
+      "forbidden": { "fr": ["tronçonneuse", "démarrer", "cordon", "moteur"], "en": ["chainsaw", "start", "cord", "engine"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["physical", "funny"]
+    },
+    {
+      "id": "mi-act-160",
+      "action": { "fr": "Sculpter un chien en ballon qui couine", "en": "Twisting a squeaky balloon dog" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["ballon", "sculpter", "tordre", "éclater"], "en": ["balloon", "twist", "squeak", "pop"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["party", "performance"]
+    },
+    {
+      "id": "mi-act-161",
+      "action": { "fr": "Gonfler un matelas pneumatique à la pompe à pied", "en": "Foot-pumping an air mattress into existence" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["matelas", "pompe", "pied", "gonfler"], "en": ["air mattress", "pump", "foot", "inflate"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["physical", "funny"]
+    },
+    {
+      "id": "mi-act-162",
+      "action": { "fr": "Gonfler un ballon qui s'échappe en vrille", "en": "Inflating a balloon that escapes mid-puff" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["ballon", "gonfler", "souffler", "échapper"], "en": ["balloon", "inflate", "blow", "escape"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["party", "funny"]
+    },
+    {
+      "id": "mi-act-163",
+      "action": { "fr": "Créer des bulles de savon géantes", "en": "Conjuring giant soap bubbles" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["bulles", "savon", "souffler", "éclater"], "en": ["bubbles", "soap", "blow", "pop"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["outdoors", "performance"]
+    },
+    {
+      "id": "mi-act-164",
+      "action": { "fr": "Avoir du shampoing dans les yeux en pleine douche", "en": "Getting shampoo in your eyes mid-shower" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["shampoing", "yeux", "douche", "rincer"], "en": ["shampoo", "eyes", "shower", "rinse"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-165",
+      "action": { "fr": "Subir une douche qui devient glaciale sans prévenir", "en": "Surviving a shower that goes ice-cold with zero warning" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["douche", "glaciale", "eau", "hurler"], "en": ["shower", "freezing", "water", "yelp"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-166",
+      "action": { "fr": "Se brosser les dents avec beaucoup trop de dentifrice", "en": "Brushing your teeth with way too much toothpaste" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["dents", "brosse", "dentifrice", "mousse"], "en": ["teeth", "brush", "toothpaste", "foam"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-167",
+      "action": { "fr": "Tracer son eye-liner dans un bus qui tressaute", "en": "Drawing eyeliner on a jolting bus" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["maquillage", "eye-liner", "bus", "secousse"], "en": ["makeup", "eyeliner", "bus", "bump"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-168",
+      "action": { "fr": "Mettre des lentilles pour la toute première fois", "en": "Putting in contact lenses for the very first time" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["lentilles", "œil", "doigt", "cligner"], "en": ["contacts", "eye", "finger", "blink"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "mi-act-169",
+      "action": { "fr": "Attendre que son vernis sèche sans rien toucher", "en": "Waiting for nail polish to dry while touching nothing" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["vernis", "ongles", "sécher", "souffler"], "en": ["nail polish", "nails", "dry", "blow"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-170",
+      "action": { "fr": "Réaliser qu'on a envoyé le message à la mauvaise personne", "en": "Realizing the text went to the wrong person" },
+      "category": { "fr": "Techno", "en": "Tech" },
+      "forbidden": { "fr": ["message", "envoyé", "mauvaise", "supprimer"], "en": ["text", "sent", "wrong", "unsend"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["tech", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-171",
+      "action": { "fr": "Oublier pourquoi on est entré dans la pièce", "en": "Forgetting why you walked into the room" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["oublier", "pièce", "pourquoi", "demi-tour"], "en": ["forget", "room", "why", "turn back"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-172",
+      "action": { "fr": "Faire semblant de connaître les paroles en plein concert", "en": "Faking the lyrics in the middle of a concert" },
+      "category": { "fr": "Soirée", "en": "Party" },
+      "forbidden": { "fr": ["paroles", "chanson", "marmonner", "refrain"], "en": ["lyrics", "song", "mumble", "chorus"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["party", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-173",
+      "action": { "fr": "Chercher le début du rouleau de scotch", "en": "Hunting for the start of the tape roll" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["scotch", "rouleau", "ongle", "bord"], "en": ["tape", "roll", "fingernail", "edge"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["household", "funny"]
+    },
+    {
+      "id": "mi-act-174",
+      "action": { "fr": "Ne pas savoir quoi faire de ses mains sur une photo", "en": "Not knowing what to do with your hands in a photo" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["mains", "photo", "pose", "poches"], "en": ["hands", "photo", "pose", "pockets"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-175",
+      "action": { "fr": "Survivre poliment à une histoire interminable", "en": "Politely surviving a never-ending story" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["écouter", "hocher", "sourire", "bâiller"], "en": ["listening", "nodding", "smile", "yawn"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-176",
+      "action": { "fr": "Affronter le distributeur qui a avalé la pièce", "en": "Facing down the vending machine that swallowed your coin" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["distributeur", "pièce", "avaler", "secouer"], "en": ["vending machine", "coin", "swallow", "shake"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-177",
+      "action": { "fr": "Replier une carte routière géante", "en": "Refolding a giant road map" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["carte", "plier", "routière", "pliure"], "en": ["map", "fold", "road", "crease"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["travel", "funny"]
+    },
+    {
+      "id": "mi-act-178",
+      "action": { "fr": "Répondre à un signe de main qui ne vous était pas adressé", "en": "Waving back at a wave that wasn't for you" },
+      "category": { "fr": "Galères", "en": "Mishaps" },
+      "forbidden": { "fr": ["signe", "main", "saluer", "honte"], "en": ["wave", "hand", "hello", "shame"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["awkward", "funny"]
+    },
+    {
+      "id": "mi-act-179",
+      "action": { "fr": "Tester tous les matelas du magasin", "en": "Test-driving every mattress in the store" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["matelas", "magasin", "essayer", "rebondir"], "en": ["mattress", "store", "test", "bounce"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-180",
+      "action": { "fr": "Demander son chemin sans un mot de la langue locale", "en": "Asking for directions with zero words of the local language" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["chemin", "langue", "gestes", "perdu"], "en": ["directions", "language", "gestures", "lost"] },
+      "difficulty": 3,
+      "spicyLevel": 0,
+      "tags": ["travel", "awkward", "funny"]
+    },
+    {
+      "id": "mi-act-181",
+      "action": { "fr": "Guider un groupe de touristes au petit parapluie levé", "en": "Leading a tour group with the tiny raised umbrella" },
+      "category": { "fr": "Métiers", "en": "Jobs" },
+      "forbidden": { "fr": ["guide", "groupe", "parapluie", "suivez"], "en": ["tour guide", "group", "umbrella", "follow"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["work", "travel"]
+    },
+    {
+      "id": "mi-act-182",
+      "action": { "fr": "S'endormir au cinéma et se réveiller en sursaut", "en": "Dozing off at the movies and jolting awake" },
+      "category": { "fr": "Loisirs", "en": "Hobbies" },
+      "forbidden": { "fr": ["cinéma", "dormir", "sursaut", "séance"], "en": ["movies", "doze", "jolt", "screen"] },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": ["situational", "funny"]
+    },
+    {
+      "id": "mi-act-183",
+      "action": { "fr": "Traverser le sable brûlant de la plage", "en": "Tiptoe-dashing across scorching beach sand" },
+      "category": { "fr": "Voyage", "en": "Travel" },
+      "forbidden": { "fr": ["sable", "brûlant", "plage", "sautiller"], "en": ["sand", "scorching", "beach", "hop"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["travel", "physical", "funny"]
+    },
+    {
+      "id": "mi-act-184",
+      "action": { "fr": "Porter cinq sacs de courses en un seul voyage", "en": "Carrying five grocery bags in one single trip" },
+      "category": { "fr": "Quotidien", "en": "Daily life" },
+      "forbidden": { "fr": ["sacs", "courses", "porter", "doigts"], "en": ["bags", "groceries", "carry", "one trip"] },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": ["household", "physical", "funny"]
+    }
+  ]
+}

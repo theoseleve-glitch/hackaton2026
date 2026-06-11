@@ -1,0 +1,192 @@
+{
+  "id": "double-jeu",
+  "nameFr": "Double Jeu",
+  "nameEn": "Double Agent",
+  "taglineFr": "Tout le monde a reçu le même mot… sauf un. Deux votes pour le démasquer.",
+  "taglineEn": "Everyone got the same word… except one. Two votes to unmask them.",
+  "template": "SECRET_ROLE",
+  "players": {
+    "min": 4,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "secretReveal:m{n}",
+      "durationSec": 12,
+      "description": "Each phone privately shows ONLY the player's own secret item (word or theme) on a hold-to-peek card — no role is shown (revealRoleToSelf=false in decoy mode, so even the impostor doesn't know they're the odd one; classic Undercover paranoia). Theme label is public to all. Ends early when all alive&&connected players ack; deadline advances regardless, so a passive/disconnected phone never blocks."
+    },
+    {
+      "key": "discuss:m{n}:p0",
+      "durationSec": 120,
+      "description": "Discussion period 1 (the brief's '2-3 min'): free face-to-face talk — players hint at their item without saying it, hunting for whose hints feel off. Phones show the theme, a countdown ring, and a 'Ready to vote' toggle; all alive&&connected ready → early vote. Deadline forces the vote. No typed text in this phase (talk is IRL), so zero moderation surface."
+    },
+    {
+      "key": "vote:m{n}:p0",
+      "durationSec": 25,
+      "description": "Simultaneous secret vote: tap the avatar you accuse. Ballots buffered in HIDDEN state (impostor-doc redaction rules verbatim: views carry hasVoted booleans + own myVote echo only, never the votes map). Self-vote inert, first vote locks, the impostor votes too (camouflage). Resolves when all alive&&connected voted, or at deadline with abstainers excluded."
+    },
+    {
+      "key": "verdict:m{n}:p0",
+      "durationSec": 8,
+      "description": "Entered ONLY when vote 1 misses (the impostor is not the unique plurality target — tie or all-abstain also counts as a miss, favoring the impostor). Public beat: tally bars + the top accused is dramatically CLEARED ('Pas l'imposteur !'). Display-only, all actions inert; deadline auto-advances to discussion period 2."
+    },
+    {
+      "key": "discuss:m{n}:p1",
+      "durationSec": 90,
+      "description": "Discussion period 2, shorter for escalating urgency (brief's 'une autre période 2-3 min', tuned down because the cleared-suspect info accelerates deduction). Same early-exit and deadline behavior as period 1."
+    },
+    {
+      "key": "vote:m{n}:p1",
+      "durationSec": 25,
+      "description": "Final vote, same rules as vote 1. Unique plurality on the impostor → caught; anything else (tie, wrong target, abstain-out) → the impostor wins, exactly per the brief ('si pas trouvé, l'imposteur gagne'). Always proceeds to finalReveal — never a third period."
+    },
+    {
+      "key": "finalReveal:m{n}",
+      "durationSec": 12,
+      "description": "Atomic full reveal: impostor identity, both secret items (majority + odd one), winning side banner, and exact points awarded. Deadline auto-advances to the next match's secretReveal (fresh item, fresh seeded impostor) or to standings + interstitial ad after matchesPerSession; phaseKey 'over' terminal."
+    }
+  ],
+  "params": {
+    "roundMode": "accusation",
+    "clueMode": "none",
+    "maxVoteRounds": 2,
+    "maxImpostors": 1,
+    "impostorWordMode": "decoy",
+    "revealRoleToSelf": false,
+    "impostorGuessEnabled": false,
+    "secretRevealMs": 12000,
+    "discussMs": 120000,
+    "discuss2Ms": 90000,
+    "voteMs": 25000,
+    "verdictMs": 8000,
+    "finalRevealMs": 12000,
+    "matchesPerSession": 3,
+    "scoring": {
+      "civilianCorrectBallotPerVote": 1,
+      "teamBonusCaughtVote1": 2,
+      "teamBonusCaughtVote2": 1,
+      "impostorSurvivesVote1": 2,
+      "impostorWinsBonus": 3,
+      "impostorDisconnectCivilianConsolation": 1
+    }
+  },
+  "contentItemShape": "One odd-one-out content item (v1 = text only). Every player-visible string is a bilingual map { fr, en }; the offline pipeline splits items into per-locale R2 packs (<base>-fr / <base>-en) per the shell's pack-family convention, so init stays locale-free. Shape: { \"id\": string (stable slug), \"mediaType\": \"text\" (v2 roadmap: \"image\" | \"audio\", adding \"media\": { \"majorityKey\": string, \"impostorKey\": string } — R2 keys to PRE-RENDERED slightly-different assets, never generated at runtime), \"theme\": { fr, en } (PUBLIC label shown to the whole room), \"majority\": { fr, en } (HIDDEN item shown to all civilians), \"impostor\": { fr, en } (HIDDEN slightly-different item shown to the lone impostor — same theme, same abstractness, deliberately close), \"closeness\": \"easy\" | \"medium\" | \"hard\" (calibrated semantic distance: easy = far apart / impostor found fast, hard = nearly identical / impostor thrives; pre-scored offline), \"spicyLevel\": 0 | 1 | 2 (item-level gate; pack tone must match catalog tone) }. Authoring lint: pack must hold >= matchesPerSession items per locale with no duplicate ids; both items <= 3 tokens to fit the reveal card; all strings pass the obscenity scan at authoring time.",
+  "sampleItems": [
+    {
+      "id": "night-out-club-karaoke",
+      "mediaType": "text",
+      "theme": {
+        "fr": "Soirée",
+        "en": "Night out"
+      },
+      "majority": {
+        "fr": "Boîte de nuit",
+        "en": "Nightclub"
+      },
+      "impostor": {
+        "fr": "Bar karaoké",
+        "en": "Karaoke bar"
+      },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "vacation-beach-pool",
+      "mediaType": "text",
+      "theme": {
+        "fr": "Vacances",
+        "en": "Vacation"
+      },
+      "majority": {
+        "fr": "Plage",
+        "en": "Beach"
+      },
+      "impostor": {
+        "fr": "Piscine",
+        "en": "Swimming pool"
+      },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "movies-horror-thriller",
+      "mediaType": "text",
+      "theme": {
+        "fr": "Cinéma",
+        "en": "Movies"
+      },
+      "majority": {
+        "fr": "Film d'horreur",
+        "en": "Horror movie"
+      },
+      "impostor": {
+        "fr": "Thriller",
+        "en": "Thriller"
+      },
+      "closeness": "hard",
+      "spicyLevel": 0
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundSeconds": 240,
+  "roundsDefault": 3,
+  "recommendations": [
+    {
+      "question": "Is this a new template, or the same family as the impostor/SECRET_ROLE design?",
+      "recommendation": "Same family — ship as a SECRET_ROLE game_config plus a small SECRET_ROLE@2 param extension: roundMode:'accusation' (no elimination; each vote asks 'is the unique plurality target the impostor?'), clueMode:'none' (skip the structured clue-turn loop entirely; discussion is IRL free talk), maxVoteRounds:2, revealRoleToSelf:false, impostorGuessEnabled:false. Do NOT create a NEW:ODD_ONE_OUT template.",
+      "why": "The brief is odd-one-out on shared content with hidden buffered votes — exactly impostor's state/redaction skeleton (roles, civilianWord/impostorWord, votes HIDDEN, RevealRecord). The template-architecture doc explicitly blesses small param riders on SECRET_ROLE (the NPC-Infiltrator secretKind precedent, §3.2 'new-params' effort class). A separate template would duplicate ~80% of the reducer and double the registry/catalog surface."
+    },
+    {
+      "question": "The brief says '2-3 min' per period — what exact timers?",
+      "recommendation": "Default discussMs=120s for period 1 and discuss2Ms=90s for period 2, both within the brief's range via the existing SECRET_ROLE discussMs param cap (120s); allow catalog retune 90-180s. Both periods end early when all alive&&connected players tap 'Ready to vote'.",
+      "why": "Respects the brief's core pacing while staying TikTok-native: period 2 starts with the cleared-suspect info already on the table, so it needs less time, and a worst-case match stays under ~5 minutes (12+120+25+8+90+25+12 ≈ 292s)."
+    },
+    {
+      "question": "What exactly counts as 'l'imposteur est trouvé' at a vote?",
+      "recommendation": "Caught = the impostor is the UNIQUE plurality target of that vote. A tie at the top, a wrong unique target, or all-abstain = NOT caught (advances to period 2, or hands the impostor the win on vote 2). No revote sub-phase, no random tiebreak.",
+      "why": "Deterministic and pure (impostor doc §4.5 tie ruling reused verbatim); ties favoring the impostor is dramatic, keeps the reducer tiny, and lets the impostor's own ballot be a real sabotage tool."
+    },
+    {
+      "question": "What is revealed after a missed vote 1?",
+      "recommendation": "Show the public tally and dramatically CLEAR the wrongly-accused top target ('X n'est pas l'imposteur !') in an 8s verdict beat — but never reveal who the impostor is until finalReveal. On a tie, show the tally with 'personne n'est démasqué' and clear nobody.",
+      "why": "Fuels period-2 deduction (the round needs new information to not be a rerun), and it's funny-never-cruel: the accused gets public vindication, not a roast. Risk of making vote 2 trivial in 4-5 player rooms is accepted and monitored (see risks)."
+    },
+    {
+      "question": "Does the impostor know they are the impostor? Does the room know the theme?",
+      "recommendation": "In the default decoy mode, nobody is told their role (revealRoleToSelf:false): every phone just shows 'your item'. The theme label is public to everyone. The impostor discovers they're odd only by listening.",
+      "why": "This is the brief's exact fantasy ('le dernier a un truc légèrement différent' — it never says he knows) and the strongest version of the paranoia: everyone simultaneously defends their item and doubts it. It also kills the 'impostor instantly overacts' failure mode."
+    },
+    {
+      "question": "Keep the impostor-design guess window (caught impostor guesses the civilian word)?",
+      "recommendation": "OFF for v1 (impostorGuessEnabled:false). Ship it later as a config flip once the param exists in SECRET_ROLE@2.",
+      "why": "The brief specifies a clean two-vote structure; the guess window adds 20s + a text-input moderation path and dilutes the 'two votes, that's it' tension. Keeping v1 input-free (votes + taps only) means zero gameplay-text moderation surface."
+    },
+    {
+      "question": "Image / video / music — content-pack strategy?",
+      "recommendation": "v1 ships text-only packs (word/theme pairs, human-curated with AI assist). v2 adds mediaType:'image' — pairs of PRE-RENDERED slightly-different images generated and QA'd by the offline AI pipeline, stored in R2, referenced by key; phones download both-eligible assets at match init and show only their own. Audio (10s royalty-free clips, each player listens on their own phone via the volume-warning pattern) is v3; video is last or never.",
+      "why": "Text proves the loop with zero licensing/sync risk. 'Slightly different' images are a perfect offline-AI job (generate variant + score the visual distance) and strictly forbidden at runtime by the determinism rule. Music/video carry licensing, file-size, and room-audio-chaos costs that don't change the mechanic."
+    },
+    {
+      "question": "Exact scoring — who gets how many points when?",
+      "recommendation": "Per match: each civilian earns +1 per vote round in which their ballot targeted the impostor (max +2). Team catch bonus to EVERY civilian: +2 if caught on vote 1, +1 if caught on vote 2. Impostor: +2 for surviving vote 1 (kept even if caught on vote 2), +3 more for surviving vote 2 (impostor win = 5 total). If THE impostor disconnects past the grace window, the match ends immediately: civilians +1 each, impostor 0. Scores are match-local; the shell owns the session leaderboard and fires the interstitial only at the standings screen after matchesPerSession=3 (impostor doc §5.2 model).",
+      "why": "Rewards individual deduction (your ballot) AND the team outcome, gives the impostor a graded payoff for partial bluffing (so being caught on vote 2 still 'paid'), is computable in one pure pass at finalReveal, and never aliases live state in the gameOver effect."
+    },
+    {
+      "question": "Player count?",
+      "recommendation": "Catalog-tighten to 4-16 (template floor is 3); sweet spot 5-10 in the tile copy.",
+      "why": "With no clue turns, a 3-player room degenerates: the impostor's single ballot forces ties too easily and discussion is a 1-v-1 accusation. game_config minPlayers is exactly the sanctioned tightener (template-architecture §2.6)."
+    }
+  ],
+  "risks": [
+    "Not literally zero-code: needs the SECRET_ROLE@2 param branch (roundMode:'accusation', clueMode:'none', maxVoteRounds, revealRoleToSelf, impostorGuessEnabled). Small and precedented (NPC-Infiltrator secretKind pattern, template-architecture §3.2), but it must land before this config can ship — schedule with the impostor/SECRET_ROLE build, not after.",
+    "120s+90s discussion phases are long versus platform norms (impostor uses 45s); shy or drunk-quiet groups risk dead air. Mitigate with the public theme card, a 'Ready to vote' early-exit, and on-screen nudge copy; watch round-abandon analytics at rolloutPct 5%.",
+    "Verdict info-leak: publicly clearing the wrongly-accused makes vote 2 near-trivial in 4-5 player rooms (one suspect eliminated from a tiny pool). If analytics show vote-2 catch rate >> design target (~55-65%), fall back to tally-only verdict (no explicit clearing) via a config param.",
+    "Pair-closeness calibration is the whole game: too close and the impostor is unfindable (frustration), too far and round 1 is instant (boring). Requires the offline AI pipeline to score semantic distance per pair plus human playtest of every 'hard' item before enabled:true (AI gate stages 2 and 5).",
+    "Ties structurally favor the impostor and the impostor votes too — a coordinated impostor can engineer top-ties. Accepted as a feature (deterministic, dramatic), but cap monitoring: if impostor win rate > ~50% at 6+ players, revisit the tie-counts-as-miss ruling.",
+    "Impostor disconnect mid-match invalidates the round; the reducer must end the match on grace expiry (civilians +1 consolation) using the alive&&connected resolution rule — an unhandled impostor-left path would leave the room hunting a ghost for 4 minutes.",
+    "v2+ media packs: image generation/QA cost, R2 asset weight on party Wi-Fi, music licensing, and multi-phone audio chaos in one room. None block v1 (text-only), but the catalog entry must not promise media in the tile copy until packs exist.",
+    "Bilingual authoring drift: {fr,en} item pairs must stay semantically parallel (same closeness in both locales) or FR and EN rooms play different difficulty curves; the offline pipeline should score closeness per locale, not once."
+  ]
+}

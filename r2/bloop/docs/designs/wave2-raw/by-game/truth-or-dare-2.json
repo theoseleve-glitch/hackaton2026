@@ -1,0 +1,170 @@
+{
+  "id": "truth-or-dare-2",
+  "nameFr": "Action ou Vérité — Fun & Lover",
+  "nameEn": "Truth or Dare — Fun & Lover",
+  "taglineFr": "Deux ambiances : la soirée entre potes, ou le tête-à-tête qui chauffe.",
+  "taglineEn": "Two vibes: party night with the crew, or date night that heats up.",
+  "template": "TRUTH_DARE",
+  "players": {
+    "min": 2,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "choose",
+      "durationSec": 15,
+      "description": "Active player (seeded rotation, disconnected seats skipped) picks Truth or Dare via big chips; everyone else sees the waiting card + rotation rail. Timeout: deterministic seeded auto-pick (createRng(seed+'|coin|'+turnSeq)). phaseKey = `choose:${turnSeq}` where turnSeq is a global monotonic per-turn counter (never the round number — uniqueness rule from the ToD design §2)."
+    },
+    {
+      "key": "prompt",
+      "durationSec": 45,
+      "description": "The drawn prompt (seeded no-repeat deck per `${choice}:${intensity}`, fall-down on tier exhaustion) is shown to the WHOLE room; the active player performs the dare / answers the truth out loud IRL, then taps Done or Chickened, or burns a Pass (if passesLeft > 0). Pass and self-declared Chicken skip the verdict and go straight to score. Timeout: treated as chickened, no pass spent — a passive player never blocks the room. phaseKey = `prompt:${turnSeq}`."
+    },
+    {
+      "key": "verdict",
+      "durationSec": 20,
+      "description": "Reached ONLY after a 'Done' claim. Every present player except the active one votes done/chickened (enum vote, no free text). Ends early when all eligible voters have voted; timeout tallies whatever votes are in. Resolution: 0 votes cast → done (benefit of the doubt); else done iff doneCount/castVotes >= verdictThreshold (0.5, ties → done). If the eligible set is empty at entry (e.g. 2-player room, partner disconnected) resolve immediately as done. Individual votes are HIDDEN (counts only) until score. phaseKey = `verdict:${turnSeq}`."
+    },
+    {
+      "key": "score",
+      "durationSec": 6,
+      "description": "Reveal: DONE/CHICKENED/PASSED stamp, public tally bar, +points burst, mini-leaderboard, 'next up' banner. No actions accepted; deadline advances to the next present player's choose, or to over after the final lap. EXACT SCORING (active player only; voters never score): done+truth = 10 pts; done+dare = 15 pts (10 donePoints + 5 dareBonus); passed = 3 pts (passPoints, one pass consumed); chickened (declared, timed out, voted down, or active left mid-turn) = 0 pts. One ROUND = one full lap of the rotation (~70s × players); roundsDefault counts laps. Lap wrap emits analytics 'round_completed' = the interstitial ad boundary (never mid-lap, never after the final lap). phaseKey = `score:${turnSeq}`."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Untimed terminal phase (phaseDurationMs = null, phaseKey = 'over'). Final ranked leaderboard + podium; gameOver effect carries final scores. Also reached early on total content-pool exhaustion (graceful degrade per ToD design §4)."
+    }
+  ],
+  "params": {
+    "totalRounds": 3,
+    "passesPerPlayer": 2,
+    "allowedIntensities": [
+      "soft",
+      "party"
+    ],
+    "verdictThreshold": 0.5
+  },
+  "contentItemShape": "AUTHORING entry shape (bilingual at authoring; the build pipeline splits it into single-locale R2 packs per cross-game-synthesis §3.1/§3.3 pack-family rule — tod2-fun-fr / tod2-fun-en / tod2-lover-fr / tod2-lover-en, each entry keeping only its locale's text): { id: string — stable unique no-repeat key, format '<pack>-<t|d>-<tier>-<nnn>' (e.g. 'lov-d-spicy-009'); choice: 'truth' | 'dare'; intensity: 'soft' | 'party' | 'spicy' — the template's draw tier (fun pack ships soft+party only, lover pack ships party+spicy only); spicy: 0 | 1 | 2 — catalog rating of THIS entry (fun entries 0-1, lover entries 1-2; must never exceed the pack ceiling — lint in the AI gate); minAge: 13 | 16 | 18 — every intensity:'spicy' entry MUST be 18 (ToD design §6 hard rule); text: { fr: string, en: string } — the prompt verbatim, second person, <= 280 chars, pre-moderated (obscenity-scanned at authoring, never at runtime), judgeable by the room (the verdict phase needs a visible/audible outcome); props?: boolean — needs a phone/object; tags?: string[] — curation metadata ('funny','physical','deep','couple','spicy'); every lover-pack entry carries 'couple'. Runtime shape is the existing TodPromptEntry — no template or reducer change.",
+  "sampleItems": [
+    {
+      "id": "fun-t-soft-001",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel est le truc le plus absurde que tu aies cherché sur Google cette semaine ?",
+        "en": "What's the most ridiculous thing you googled this week?"
+      },
+      "props": false,
+      "tags": [
+        "funny"
+      ]
+    },
+    {
+      "id": "fun-d-party-014",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Laisse la personne à ta droite écrire un message à qui elle veut depuis ton téléphone — tu as 3 secondes pour le relire avant l'envoi.",
+        "en": "Let the person on your right text anyone they want from your phone — you get 3 seconds to read it before it sends."
+      },
+      "props": true,
+      "tags": [
+        "funny",
+        "physical"
+      ]
+    },
+    {
+      "id": "lov-t-party-006",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte le moment exact où tu as su que tu craquais pour ton/ta partenaire — avec tous les détails gênants.",
+        "en": "Describe the exact moment you knew you were falling for your partner — embarrassing details included."
+      },
+      "props": false,
+      "tags": [
+        "couple",
+        "deep"
+      ]
+    },
+    {
+      "id": "lov-d-spicy-009",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Murmure à l'oreille de ton/ta partenaire ce que tu lui réserves pour plus tard ce soir… puis garde un visage parfaitement neutre pendant 10 secondes. Le groupe juge le visage.",
+        "en": "Whisper in your partner's ear what you have planned for them later tonight… then hold a perfectly straight face for 10 seconds. The room judges the face."
+      },
+      "props": false,
+      "tags": [
+        "couple",
+        "spicy",
+        "physical"
+      ]
+    }
+  ],
+  "physical": "mixed",
+  "spicyLevel": 1,
+  "needsOfflineAiPipeline": false,
+  "recommendations": [
+    {
+      "question": "Is truth-or-dare-2 a new game, a new template, or pack variants?",
+      "recommendation": "CONFIRMED: pack variants. Zero new code — two sibling game_config entries on the existing TRUTH_DARE template (docs/designs/2026-06-10-game-truth-or-dare-design.md), shipped via Cadence B only (R2 packs + KV catalog edit, no deploy). The top-level fields of this output describe the FUN mainline config; the LOVER sibling is fully specified below.",
+      "why": "Every mechanic the brief needs already exists in the designed template: turn rotation, Truth/Dare choice, group verdict, pass economy, intensity tiers, deck-draw-without-repeat. The brief's 'deux ambiances' are exactly the content/params axis the template was parameterized for (template-architecture §2.4 TRUTH_DARE params, §3.2 row 6 'config-only per variant')."
+    },
+    {
+      "question": "One Home tile with an ambiance picker, or two tiles?",
+      "recommendation": "Two sibling configs/tiles: `truth-or-dare-fun-2026` (tone:'classic', minAge:13, players 2-16, theme bubblegum/fire, params {totalRounds:3, passesPerPlayer:2, allowedIntensities:['soft','party'], verdictThreshold:0.5}) and `truth-or-dare-lover-2026` (tone:'spicy', minAge:18, players 2-8, theme raw #E0356B/heart, badge NEW, params {totalRounds:4, passesPerPlayer:3, allowedIntensities:['party','spicy'], verdictThreshold:0.5}).",
+      "why": "Age-gating is per-config (gameConfigSchema refinement (c): spicy tone forces minAge>=18) and catalog params are catalog-fixed by default (template-architecture §7 Q4). A single tile cannot be simultaneously family-safe and 18+; an in-lobby ambiance toggle would put 18+ content one tap behind a family tile."
+    },
+    {
+      "question": "Lover variant player range — couples only at 2, or more?",
+      "recommendation": "minPlayers 2, maxPlayers 8 (1 to 4 couples), designed-for and marketed at 2. Lobby copy: 'en couple(s) uniquement'.",
+      "why": "The template floor is already 2 and the 2-player verdict edge (partner alone judges, abstain→done) is fully specced (ToD design §4 edge counts). Prompts say 'ton/ta partenaire' — the phone never needs the pairing, the room knows it. Capping at 8 keeps verdicts intimate and avoids 16-player lover rooms that would misfire socially."
+    },
+    {
+      "question": "How does the brief's spicy 0-1 / 1-2 mapping land on the template's soft/party/spicy tiers?",
+      "recommendation": "Fun pack: soft tier = spicy 0, party tier = spicy 1; it contains NO spicy-tier entries at all. Lover pack: party tier = spicy 1 (tender/flirty), spicy tier = spicy 2 (18+, suggestive); it contains no soft tier. Configs gate accordingly: fun allowedIntensities ['soft','party']; lover ['party','spicy'] behind tone:'spicy' + minAge 18 + the server spicy feature flag (ToD design §6).",
+      "why": "Reuses the template's existing 3-tier system with zero reducer change, and keeping 18+ entries physically out of the fun pack removes the dormant-spicy-tier store-compliance ambiguity that tod-classic carries (a pack may contain spicy; here the fun pack simply doesn't)."
+    },
+    {
+      "question": "Lover pass economy and scoring — same as fun?",
+      "recommendation": "passesPerPlayer: 3 in lover (vs 2 in fun); all scoring identical and NOT config-exposed (template DEFAULT_CONFIG): done+truth 10, done+dare 15 (10+5 dareBonus), passed 3, chickened 0, voters unscored, verdictThreshold 0.5 ties→done.",
+      "why": "Consent-forward design: declining an intimate dare must always feel cheap, so the lover skip economy gets a higher floor (ToD design §9 Q4 flags pass tuning as the playtest knob). Scoring knobs are deliberately absent from templateParamsSchema(TRUTH_DARE) (template-architecture §2.4), so both variants ride the template defaults — no schema change."
+    },
+    {
+      "question": "How far does the lover 18+ (spicy 2) content ceiling go?",
+      "recommendation": "Suggestive, partner-directed, consent-forward; NEVER explicit/graphic, never degrading or coercive, no contact with non-partners, everything skippable via pass. Authoring rubric: every dare must have a room-visible, judgeable outcome (the verdict phase) without the explicit part happening in front of the room — the lov-d-spicy-009 sample (whisper + straight face, room judges the face) is the canonical pattern.",
+      "why": "Brand Book 'funny never cruel' + Apple 1.1 / Google sexual-content tiers (ToD design §6, §9 Q2). The verdict mechanic structurally requires judgeable-in-room outcomes, which conveniently caps explicitness."
+    },
+    {
+      "question": "Tier pacing in lover rooms — the template plays the highest allowed tier first (ToD design §4), so lover rooms open straight at spicy-2. Acceptable?",
+      "recommendation": "Ship v1 as-is (spicy-first with fall-down to party on exhaustion). If playtests confirm the abrupt opening, the fix is a small TRUTH_DARE@2 param `tierProgression: 'fixed-highest' | 'escalate'` (round index maps to ascending tiers: lap 1 party, laps 2+ spicy) — a tiny reducer branch, explicitly NOT a launch blocker. Do not fake escalation with two stacked configs.",
+      "why": "Per-turn/per-round tier selection is exactly ToD design §9 Q1's deferred alternative; respecting the v1 room-fixed ruling keeps this release pure Cadence B. The brief's 'ambiance' wording implies pacing matters, so the @2 param is pre-scoped here."
+    },
+    {
+      "question": "Pack sizing and authoring volume?",
+      "recommendation": "Apply the synthesis §3.5 lint: fun pack >= 48 entries per (choice, tier) (16 players x 3 rounds) = >= 192 per locale; lover pack >= 32 per (choice, tier) (8 players x 4 rounds) = >= 128 per locale. With ~20% headroom: ~460 fun + ~310 lover entries total across FR+EN. needsOfflineAiPipeline is FALSE (no runtime AI, no pre-computed values), but AI-ASSISTED drafting of this volume is recommended — it is optional and must pass the full template-architecture §6 gate (schema + obscenity scan + replay smoke + human FR/EN naturalness sign-off) before enabled:true, rolloutPct 5 then 100.",
+      "why": "~770 bilingual entries is the real cost of this 'zero-code' game; under-sizing triggers tier fall-down or early game end at max rooms (ToD design §4). The §6 gate already exists for exactly this workflow — innuendo-heavy lover content especially needs the human naturalness pass (machine-translated flirting reads as creepy)."
+    }
+  ],
+  "risks": [
+    "Age gate is self-attested on an anonymous platform: minors can lie into the 18+ lover config. Mitigations: server/region feature flag default-OFF for spicy (ToD design §6), non-explicit content ceiling, per-prompt report path keyed by prompt.id, KV pack/config kill switch — but residual risk needs product+legal sign-off before lover ever flips enabled:true (ToD design §9 Q2 is still an open call).",
+    "Store compliance (Apple 1.1 / Google sexual-content tiers): the lover tile existing at all in a 4+/Everyone-rated app may force a rating change; verify the storefront rating strategy before building the packs, not after.",
+    "Lover config started in a non-couple room: 'ton/ta partenaire' prompts misfire socially for a third wheel. Mitigated only softly (lobby copy, 2-8 cap, pass economy) — the engine has no pairing concept and adding one would be new code; accept and monitor abandon analytics.",
+    "2-player verdict feel: the partner alone judges (and could grief). ToD design §9 Q3/Q6 left this open; acceptable for flirty lover stakes but must be playtested — fallback is advisory-only verdicts at 2 players, which would be a template param change.",
+    "Highest-tier-first pacing means lover rooms open at spicy-2 with no warm-up; flagged with a pre-scoped TRUTH_DARE@2 'escalate' param if playtests confirm (see recommendations).",
+    "Content volume (~770 bilingual entries) is the hidden critical path of this 'zero-code' game; AI-drafted entries that skip the human FR/EN naturalness gate will read as machine-mush, worst in the lover register.",
+    "Authoring drift: fun-pack 'party' entries creeping into spicy-2 territory. Enforce per-entry spicy rating <= pack ceiling as a hard lint in the §6 validation gate (entry.spicy in {0,1} for fun, {1,2} for lover; intensity:'spicy' implies minAge 18).",
+    "Single top-level spicyLevel cannot represent both variants: this output's spicyLevel=1 describes the FUN mainline config only; the LOVER sibling config is spicyLevel 2 / tone:'spicy' / minAge 18 — any downstream catalog tooling must take the per-config values from recommendations, not the umbrella number."
+  ]
+}

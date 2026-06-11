@@ -1,0 +1,1663 @@
+{
+  "gameId": "jeu-de-la-note",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "note-food-001",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un plat qui mérite exactement cette note.",
+        "en": "Describe a dish that deserves exactly this score."
+      },
+      "low": { "fr": "Immangeable", "en": "Inedible" },
+      "high": { "fr": "Étoilé Michelin", "en": "Michelin-star" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-cinema-002",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Pitche un film qui mérite exactement cette note.",
+        "en": "Pitch a movie that deserves exactly this score."
+      },
+      "low": { "fr": "Navet absolu", "en": "Bargain-bin disaster" },
+      "high": { "fr": "Palme d'or", "en": "Oscar sweep" },
+      "tags": ["cinema", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-music-003",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Chante (ou fredonne) quelques notes avec exactement ce niveau d'enthousiasme.",
+        "en": "Sing (or hum) a few bars with exactly this much enthusiasm."
+      },
+      "low": { "fr": "Lundi matin, 7h", "en": "Monday, 7 a.m." },
+      "high": { "fr": "Finale de concours de chant", "en": "Stadium encore" },
+      "tags": ["music", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-social-004",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais un compliment à quelqu'un dans la pièce qui vaut exactement cette note.",
+        "en": "Give someone in the room a compliment worth exactly this score."
+      },
+      "low": { "fr": "Légèrement gênant", "en": "Mildly awkward" },
+      "high": { "fr": "Fait monter les larmes", "en": "Brings happy tears" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-travel-005",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris des vacances qui méritent exactement cette note.",
+        "en": "Describe a vacation that deserves exactly this score."
+      },
+      "low": { "fr": "Camping sous l'orage", "en": "Tent in a thunderstorm" },
+      "high": { "fr": "Paradis sur Terre", "en": "Heaven on Earth" },
+      "tags": ["travel", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-story-006",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte un premier rendez-vous (fictif) qui s'est passé exactement comme cette note.",
+        "en": "Tell the story of a (fictional) first date that went exactly this well."
+      },
+      "low": { "fr": "Fuite par la fenêtre des toilettes", "en": "Escaped through the bathroom window" },
+      "high": { "fr": "Final de comédie romantique", "en": "Rom-com finale" },
+      "tags": ["social", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-apology-007",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente des excuses avec exactement ce niveau de sincérité.",
+        "en": "Deliver an apology with exactly this much sincerity."
+      },
+      "low": { "fr": "Désolé… pas désolé", "en": "Sorry not sorry" },
+      "high": { "fr": "À genoux, main sur le cœur", "en": "On one knee, hand on heart" },
+      "tags": ["performance", "social"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-startup-008",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Pitche une idée de start-up qui mérite exactement cette note.",
+        "en": "Pitch a startup idea that deserves exactly this score."
+      },
+      "low": { "fr": "Brûle l'argent des investisseurs", "en": "Sets investor money on fire" },
+      "high": { "fr": "Licorne en six mois", "en": "Unicorn in six months" },
+      "tags": ["work", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-spooky-009",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une maison hantée qui fait exactement aussi peur que cette note.",
+        "en": "Describe a haunted house that is exactly this scary."
+      },
+      "low": { "fr": "Mignonne, en fait", "en": "Honestly adorable" },
+      "high": { "fr": "Cauchemars garantis à vie", "en": "Lifetime supply of nightmares" },
+      "tags": ["story", "spooky"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-absurd-010",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente un super-pouvoir qui mérite exactement cette note d'utilité.",
+        "en": "Invent a superpower that deserves exactly this usefulness score."
+      },
+      "low": { "fr": "Parfaitement inutile", "en": "Completely useless" },
+      "high": { "fr": "Sauve le monde", "en": "Saves the world" },
+      "tags": ["absurd", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-wedding-011",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise un toast de mariage qui mérite exactement cette note.",
+        "en": "Improvise a wedding toast that deserves exactly this score."
+      },
+      "low": { "fr": "Le DJ coupe le micro", "en": "DJ cuts the mic" },
+      "high": { "fr": "Toute la salle en larmes", "en": "Whole room in tears" },
+      "tags": ["performance", "social"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-theory-012",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente une théorie farfelue avec exactement ce niveau de crédibilité.",
+        "en": "Make up a ridiculous theory with exactly this believability score."
+      },
+      "low": { "fr": "Personne n'y croit une seconde", "en": "No one buys a word" },
+      "high": { "fr": "Étrangement convaincant", "en": "Disturbingly convincing" },
+      "tags": ["absurd", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-gift-013",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un cadeau d'anniversaire qui mérite exactement cette note.",
+        "en": "Describe a birthday gift that deserves exactly this score."
+      },
+      "low": { "fr": "Réemballé et offert à quelqu'un d'autre", "en": "Regifted by Monday" },
+      "high": { "fr": "Pleurs de joie", "en": "Tears of joy" },
+      "tags": ["social", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-social-014",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente une excuse pour annuler une soirée qui vaut exactement cette note de crédibilité.",
+        "en": "Make up an excuse for cancelling plans that deserves exactly this believability score."
+      },
+      "low": { "fr": "Personne n'y croit", "en": "No one buys it" },
+      "high": { "fr": "Béton armé", "en": "Airtight" },
+      "tags": ["social", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-food-015",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente un sandwich qui mérite exactement cette note.",
+        "en": "Invent a sandwich that deserves exactly this score."
+      },
+      "low": { "fr": "Crime contre le pain", "en": "A crime against bread" },
+      "high": { "fr": "Chef-d'œuvre entre deux tranches", "en": "Masterpiece between two slices" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-hotel-016",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une chambre d'hôtel qui mérite exactement cette note.",
+        "en": "Describe a hotel room that deserves exactly this score."
+      },
+      "low": { "fr": "La moquette est humide", "en": "The carpet is damp" },
+      "high": { "fr": "Suite présidentielle", "en": "Presidential suite" },
+      "tags": ["travel", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-speech-017",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais un discours de motivation avec exactement ce niveau d'inspiration.",
+        "en": "Give a motivational speech with exactly this much inspiration."
+      },
+      "low": { "fr": "Bof, restez couchés", "en": "Eh, just stay in bed" },
+      "high": { "fr": "On soulève des montagnes", "en": "We move mountains today" },
+      "tags": ["performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-karaoke-018",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une performance de karaoké qui mérite exactement cette note.",
+        "en": "Describe a karaoke performance that deserves exactly this score."
+      },
+      "low": { "fr": "On a débranché la machine", "en": "They unplugged the machine" },
+      "high": { "fr": "Bis ! Bis ! Bis !", "en": "Encore! Encore!" },
+      "tags": ["music", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-tech-019",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Pitche une appli mobile qui mérite exactement cette note d'utilité.",
+        "en": "Pitch a mobile app that deserves exactly this usefulness score."
+      },
+      "low": { "fr": "Supprimée en dix secondes", "en": "Deleted in ten seconds" },
+      "high": { "fr": "Change des vies", "en": "Life-changing" },
+      "tags": ["tech", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-party-020",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une soirée qui mérite exactement cette note.",
+        "en": "Describe a party that deserves exactly this score."
+      },
+      "low": { "fr": "Tout le monde part à 21h30", "en": "Everyone leaves by 9:30" },
+      "high": { "fr": "Racontée pendant des années", "en": "Talked about for years" },
+      "tags": ["social", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-diy-021",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte un montage de meuble en kit qui s'est passé exactement comme cette note.",
+        "en": "Describe assembling flat-pack furniture exactly this successfully."
+      },
+      "low": { "fr": "Il reste douze vis mystère", "en": "Twelve mystery screws left over" },
+      "high": { "fr": "Parfait au niveau à bulle", "en": "Spirit-level perfect" },
+      "tags": ["daily", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-humor-022",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte une blague qui mérite exactement cette note.",
+        "en": "Tell a joke that deserves exactly this score."
+      },
+      "low": { "fr": "Silence de plomb", "en": "Dead silence" },
+      "high": { "fr": "Fou rire général", "en": "Room-wide belly laugh" },
+      "tags": ["humor", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-pizza-023",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Propose une garniture de pizza qui mérite exactement cette note.",
+        "en": "Propose a pizza topping combo that deserves exactly this score."
+      },
+      "low": { "fr": "L'Italie porte plainte", "en": "Italy presses charges" },
+      "high": { "fr": "Approuvée par une nonna", "en": "Nonna-approved" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-tired-024",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue quelqu'un d'exactement aussi fatigué que cette note.",
+        "en": "Act out being exactly this tired."
+      },
+      "low": { "fr": "Frais comme un gardon", "en": "Fresh as a daisy" },
+      "high": { "fr": "Trois nuits blanches d'affilée", "en": "Three all-nighters deep" },
+      "tags": ["performance", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-animal-025",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un chien exactement aussi bien dressé que cette note.",
+        "en": "Describe a dog that is exactly this well trained."
+      },
+      "low": { "fr": "Mange le canapé", "en": "Eats the couch" },
+      "high": { "fr": "Répond aux e-mails", "en": "Answers emails" },
+      "tags": ["animals", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-awkward-026",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue une conversation d'ascenseur exactement aussi gênante que cette note.",
+        "en": "Act out elevator small talk that is exactly this awkward."
+      },
+      "low": { "fr": "Fluide et charmante", "en": "Smooth and charming" },
+      "high": { "fr": "Physiquement insoutenable", "en": "Physically painful" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-weekend-027",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un programme de week-end exactement aussi ambitieux que cette note.",
+        "en": "Describe weekend plans that are exactly this ambitious."
+      },
+      "low": { "fr": "Canapé, plaid, rien", "en": "Couch, blanket, nothing" },
+      "high": { "fr": "Marathon puis sommet alpin", "en": "Marathon, then summit a mountain" },
+      "tags": ["daily", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-sales-028",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Vends-moi ce stylo avec exactement ce niveau de conviction.",
+        "en": "Sell me this pen with exactly this much conviction."
+      },
+      "low": { "fr": "Tu n'en veux même pas toi-même", "en": "You don't even want it yourself" },
+      "high": { "fr": "Vendeur né", "en": "Born closer" },
+      "tags": ["work", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-museum-029",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un musée exactement aussi passionnant que cette note.",
+        "en": "Describe a museum that is exactly this fascinating."
+      },
+      "low": { "fr": "Musée du carton ondulé", "en": "Museum of cardboard" },
+      "high": { "fr": "On y retourne demain", "en": "Going back tomorrow" },
+      "tags": ["culture", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-recipe-030",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une recette exactement aussi compliquée que cette note.",
+        "en": "Describe a recipe that is exactly this complicated."
+      },
+      "low": { "fr": "Verser de l'eau", "en": "Pour water" },
+      "high": { "fr": "Trois jours et un chalumeau", "en": "Three days and a blowtorch" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-password-031",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente à voix haute un mot de passe exactement aussi sécurisé que cette note.",
+        "en": "Invent a password out loud that is exactly this secure."
+      },
+      "low": { "fr": "1234", "en": "1234" },
+      "high": { "fr": "La NSA abandonne", "en": "The NSA gives up" },
+      "tags": ["tech", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-wifi-032",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une connexion wifi exactement aussi bonne que cette note.",
+        "en": "Describe a wifi connection that is exactly this good."
+      },
+      "low": { "fr": "Une barre, debout sur une chaise", "en": "One bar, standing on a chair" },
+      "high": { "fr": "Fibre divine", "en": "Fiber from the gods" },
+      "tags": ["tech", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-plants-033",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un parent de plantes exactement aussi dévoué que cette note.",
+        "en": "Describe a plant parent who is exactly this devoted."
+      },
+      "low": { "fr": "A tué un cactus", "en": "Killed a cactus" },
+      "high": { "fr": "Chante des berceuses au ficus", "en": "Sings lullabies to the ficus" },
+      "tags": ["daily", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-prank-034",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une farce exactement aussi élaborée que cette note.",
+        "en": "Describe a prank that is exactly this elaborate."
+      },
+      "low": { "fr": "« Bouh » dans le couloir", "en": "Saying 'boo' in the hallway" },
+      "high": { "fr": "Six mois de préparation", "en": "Six months in the making" },
+      "tags": ["humor", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-escape-035",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un escape game exactement aussi difficile que cette note.",
+        "en": "Describe an escape room that is exactly this difficult."
+      },
+      "low": { "fr": "La porte est déjà ouverte", "en": "The door is already open" },
+      "high": { "fr": "Personne n'en est jamais sorti", "en": "No one has ever escaped" },
+      "tags": ["games", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-sport-036",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente un sport exactement aussi épuisant que cette note.",
+        "en": "Invent a sport that is exactly this exhausting."
+      },
+      "low": { "fr": "Sieste synchronisée", "en": "Synchronized napping" },
+      "high": { "fr": "Triathlon en montée", "en": "Uphill triathlon" },
+      "tags": ["sport", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-weather-037",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente la météo avec exactement ce niveau de dramatisation.",
+        "en": "Deliver the weather forecast with exactly this much drama."
+      },
+      "low": { "fr": "Plat comme un bulletin de 4h du matin", "en": "Flat as a 4 a.m. bulletin" },
+      "high": { "fr": "L'apocalypse est imminente", "en": "The apocalypse is upon us" },
+      "tags": ["performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-games-038",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une soirée jeux de société exactement aussi compétitive que cette note.",
+        "en": "Describe a board game night that is exactly this competitive."
+      },
+      "low": { "fr": "On laisse gagner tout le monde", "en": "Everyone gets a participation trophy" },
+      "high": { "fr": "Des familles déchirées", "en": "Families torn apart" },
+      "tags": ["games", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-icecream-039",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente un parfum de glace qui mérite exactement cette note.",
+        "en": "Invent an ice cream flavor that deserves exactly this score."
+      },
+      "low": { "fr": "Sorbet cornichon", "en": "Pickle sorbet" },
+      "high": { "fr": "Médaille d'or à Florence", "en": "Gold medal in Florence" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-costume-040",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un déguisement exactement aussi élaboré que cette note.",
+        "en": "Describe a costume that is exactly this elaborate."
+      },
+      "low": { "fr": "Un drap avec deux trous", "en": "A sheet with two holes" },
+      "high": { "fr": "Hollywood appelle", "en": "Hollywood is calling" },
+      "tags": ["party", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-interview-041",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente-toi à un entretien d'embauche avec exactement ce niveau d'assurance.",
+        "en": "Introduce yourself at a job interview with exactly this much confidence."
+      },
+      "low": { "fr": "S'excuse d'exister", "en": "Apologizes for existing" },
+      "high": { "fr": "Recrute le recruteur", "en": "Hires the interviewer" },
+      "tags": ["work", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-fleamarket-042",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une trouvaille de brocante qui vaut exactement cette note.",
+        "en": "Describe a flea market find worth exactly this score."
+      },
+      "low": { "fr": "Carton de câbles mystère", "en": "Box of mystery cables" },
+      "high": { "fr": "Trésor national", "en": "National treasure" },
+      "tags": ["daily", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-lyrics-043",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise une parole de chanson exactement aussi profonde que cette note.",
+        "en": "Improvise a song lyric that is exactly this deep."
+      },
+      "low": { "fr": "La la la", "en": "La la la" },
+      "high": { "fr": "Poète du siècle", "en": "Poet of the century" },
+      "tags": ["music", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-wakeup-044",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Rejoue ton réveil du matin avec exactement ce niveau de grâce.",
+        "en": "Re-enact your morning wake-up with exactly this much grace."
+      },
+      "low": { "fr": "Grognement préhistorique", "en": "Prehistoric groan" },
+      "high": { "fr": "Ballet de comédie musicale", "en": "Broadway ballet" },
+      "tags": ["daily", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-tourist-045",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un touriste exactement aussi bien préparé que cette note.",
+        "en": "Describe a tourist who is exactly this well prepared."
+      },
+      "low": { "fr": "Passeport oublié à la maison", "en": "Forgot the passport" },
+      "high": { "fr": "Classeur plastifié heure par heure", "en": "Laminated hour-by-hour binder" },
+      "tags": ["travel", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-alibi-046",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Donne un alibi exactement aussi solide que cette note.",
+        "en": "Give an alibi that is exactly this solid."
+      },
+      "low": { "fr": "« J'étais… quelque part »", "en": "'I was… somewhere'" },
+      "high": { "fr": "Confirmé par trente témoins", "en": "Thirty witnesses confirm it" },
+      "tags": ["mystery", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-potion-047",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une potion magique exactement aussi puissante que cette note.",
+        "en": "Describe a magic potion that is exactly this powerful."
+      },
+      "low": { "fr": "Goût de tisane tiède", "en": "Tastes like lukewarm tea" },
+      "high": { "fr": "Réécrit les lois de la physique", "en": "Rewrites the laws of physics" },
+      "tags": ["fantasy", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-boss-048",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un boss de jeu vidéo exactement aussi difficile que cette note.",
+        "en": "Describe a video game boss that is exactly this difficult."
+      },
+      "low": { "fr": "Se bat tout seul contre un mur", "en": "Defeats itself" },
+      "high": { "fr": "Invaincu depuis dix ans", "en": "Unbeaten for a decade" },
+      "tags": ["games", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-picnic-049",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un pique-nique exactement aussi idyllique que cette note.",
+        "en": "Describe a picnic that is exactly this idyllic."
+      },
+      "low": { "fr": "Fourmis, puis orage", "en": "Ants, then rain" },
+      "high": { "fr": "Une pub pour la vie elle-même", "en": "A commercial for life itself" },
+      "tags": ["daily", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-sneeze-050",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Éternue (pour de faux) avec exactement ce niveau de dramatisation.",
+        "en": "Fake-sneeze with exactly this much drama."
+      },
+      "low": { "fr": "Discret comme une souris", "en": "Mouse-quiet" },
+      "high": { "fr": "Opéra en trois actes", "en": "Three-act opera" },
+      "tags": ["performance", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-laugh-051",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Ris avec exactement ce niveau de sincérité.",
+        "en": "Laugh with exactly this much sincerity."
+      },
+      "low": { "fr": "Petit rire de visioconférence", "en": "Zoom-meeting chuckle" },
+      "high": { "fr": "Fou rire incontrôlable", "en": "Uncontrollable giggle fit" },
+      "tags": ["performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-hello-052",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Dis bonjour à la pièce avec exactement ce niveau de charisme.",
+        "en": "Greet the room with exactly this much charisma."
+      },
+      "low": { "fr": "Marmonné en regardant le sol", "en": "Mumbled at the floor" },
+      "high": { "fr": "Entrée de rock star", "en": "Rock star entrance" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-menu-053",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lis un plat imaginaire du menu avec exactement ce niveau d'appétit.",
+        "en": "Read out an imaginary menu item with exactly this much appetite."
+      },
+      "low": { "fr": "Bof, une petite salade", "en": "Meh, a side salad" },
+      "high": { "fr": "On commande tout le menu", "en": "One of everything, please" },
+      "tags": ["food", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-map-054",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une carte au trésor exactement aussi cryptique que cette note.",
+        "en": "Describe a treasure map that is exactly this cryptic."
+      },
+      "low": { "fr": "Une flèche vers le jardin", "en": "An arrow pointing at the garden" },
+      "high": { "fr": "Indéchiffrée depuis trois siècles", "en": "Unsolved for three centuries" },
+      "tags": ["mystery", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-resolution-055",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Annonce une bonne résolution exactement aussi réaliste que cette note.",
+        "en": "Announce a New Year's resolution that is exactly this realistic."
+      },
+      "low": { "fr": "Abandonnée le 2 janvier", "en": "Dead by January 2nd" },
+      "high": { "fr": "Déjà planifiée dans l'agenda", "en": "Already in the calendar" },
+      "tags": ["daily", "social"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-campfire-056",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lance une histoire de feu de camp exactement aussi captivante que cette note.",
+        "en": "Start a campfire story that is exactly this gripping."
+      },
+      "low": { "fr": "Tout le monde part se coucher", "en": "Everyone goes to bed" },
+      "high": { "fr": "Plus personne n'ose respirer", "en": "No one dares breathe" },
+      "tags": ["story", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-nap-057",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une sieste exactement aussi réparatrice que cette note.",
+        "en": "Describe a nap that is exactly this restorative."
+      },
+      "low": { "fr": "Réveil pire qu'avant", "en": "Woke up worse" },
+      "high": { "fr": "Renaissance complète", "en": "Full rebirth" },
+      "tags": ["daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-coffee-058",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Commande un café avec exactement ce niveau de complexité.",
+        "en": "Order a coffee with exactly this much complexity."
+      },
+      "low": { "fr": "« Un café. »", "en": "'Coffee. Black.'" },
+      "high": { "fr": "Le barista demande sa mutation", "en": "The barista requests a transfer" },
+      "tags": ["food", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-apartment-059",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais visiter un appartement imaginaire qui mérite exactement cette note.",
+        "en": "Give a tour of an imaginary apartment worth exactly this score."
+      },
+      "low": { "fr": "La douche est dans la cuisine", "en": "The shower is in the kitchen" },
+      "high": { "fr": "Penthouse avec vue panoramique", "en": "Penthouse with a skyline view" },
+      "tags": ["daily", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-band-060",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Propose un nom de groupe de musique qui mérite exactement cette note.",
+        "en": "Pitch a band name that deserves exactly this score."
+      },
+      "low": { "fr": "Les Chaussettes Tièdes", "en": "The Lukewarm Socks" },
+      "high": { "fr": "Stade complet en une heure", "en": "Sells out stadiums in an hour" },
+      "tags": ["music", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-voicemail-061",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Laisse un message vocal exactement aussi clair que cette note.",
+        "en": "Leave a voicemail that is exactly this clear."
+      },
+      "low": { "fr": "Bouillie de mots incompréhensible", "en": "Total word soup" },
+      "high": { "fr": "Diction de présentateur télé", "en": "News-anchor diction" },
+      "tags": ["daily", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-roadtrip-062",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un road trip exactement aussi bien organisé que cette note.",
+        "en": "Describe a road trip that is exactly this well organized."
+      },
+      "low": { "fr": "Panne d'essence au kilomètre 3", "en": "Out of gas by mile two" },
+      "high": { "fr": "Playlists, snacks et plan B", "en": "Playlists, snacks, and a plan B" },
+      "tags": ["travel", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-magic-063",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un tour de magie exactement aussi impressionnant que cette note.",
+        "en": "Describe a magic trick that is exactly this impressive."
+      },
+      "low": { "fr": "On voit la carte dépasser de la manche", "en": "The card is visibly up his sleeve" },
+      "high": { "fr": "La salle hurle de stupeur", "en": "The room screams in disbelief" },
+      "tags": ["performance", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-lesson-064",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais un mini-cours sur le sujet de ton choix avec exactement ce niveau de passion.",
+        "en": "Teach a mini-lesson on anything with exactly this much passion."
+      },
+      "low": { "fr": "Lecture monotone de diapositives", "en": "Monotone slide reading" },
+      "high": { "fr": "Standing ovation en amphi", "en": "Lecture-hall standing ovation" },
+      "tags": ["culture", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-haircut-065",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une nouvelle coupe de cheveux exactement aussi réussie que cette note.",
+        "en": "Describe a new haircut that is exactly this successful."
+      },
+      "low": { "fr": "Bonnet obligatoire pendant six mois", "en": "Hats for six months" },
+      "high": { "fr": "Les passants s'arrêtent dans la rue", "en": "Strangers stop you in the street" },
+      "tags": ["daily", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-mime-066",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Mime un sportif en plein effort avec exactement ce niveau d'intensité.",
+        "en": "Mime an athlete mid-effort with exactly this much intensity."
+      },
+      "low": { "fr": "Échauffement de l'auriculaire", "en": "Warming up one pinky" },
+      "high": { "fr": "Finale olympique", "en": "Olympic final" },
+      "tags": ["sport", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-nego-067",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Négocie une baisse de loyer avec exactement ce niveau de talent.",
+        "en": "Negotiate a rent reduction with exactly this much skill."
+      },
+      "low": { "fr": "Le loyer augmente", "en": "Rent goes up instead" },
+      "high": { "fr": "Le proprio te paie pour rester", "en": "The landlord pays YOU" },
+      "tags": ["daily", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-docu-068",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Commente la pièce comme un documentaire animalier, avec exactement ce niveau de sérieux.",
+        "en": "Narrate this room like a nature documentary with exactly this much gravitas."
+      },
+      "low": { "fr": "Fou rire à chaque phrase", "en": "Giggling through every take" },
+      "high": { "fr": "Voix de légende du documentaire", "en": "Legendary documentary voice" },
+      "tags": ["absurd", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-souvenir-069",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un souvenir de vacances exactement aussi kitsch que cette note.",
+        "en": "Describe a vacation souvenir that is exactly this kitschy."
+      },
+      "low": { "fr": "Sobre et de bon goût", "en": "Tasteful and understated" },
+      "high": { "fr": "Boule à neige dorée qui chante", "en": "A singing gold snow globe" },
+      "tags": ["travel", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-robot-070",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue un robot exactement aussi convaincant que cette note.",
+        "en": "Act like a robot that is exactly this convincing."
+      },
+      "low": { "fr": "Un humain qui dit « bip »", "en": "A human saying 'beep'" },
+      "high": { "fr": "On vérifie tes circuits", "en": "Someone checks you for circuits" },
+      "tags": ["absurd", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-detective-071",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue un détective qui résout l'affaire avec exactement ce niveau de génie.",
+        "en": "Play a detective cracking the case with exactly this much genius."
+      },
+      "low": { "fr": "Accuse le chat", "en": "Accuses the cat" },
+      "high": { "fr": "Sherlock prend des notes", "en": "Sherlock takes notes" },
+      "tags": ["mystery", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-marathon-072",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ta préparation (imaginaire) au marathon avec exactement ce niveau de sérieux.",
+        "en": "Describe your (imaginary) marathon training with exactly this much dedication."
+      },
+      "low": { "fr": "J'ai acheté des baskets, une fois", "en": "I bought sneakers once" },
+      "high": { "fr": "Debout à 4h44, tous les jours", "en": "Up at 4:44 a.m., every day" },
+      "tags": ["sport", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-react-073",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Réagis à un cadeau surprise avec exactement ce niveau de joie.",
+        "en": "React to a surprise gift with exactly this much joy."
+      },
+      "low": { "fr": "« Ah. Des chaussettes. »", "en": "'Oh. Socks.'" },
+      "high": { "fr": "Cris et larmes de bonheur", "en": "Screaming happy tears" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-ad-074",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise une pub télé pour un objet de la pièce, digne exactement de cette note.",
+        "en": "Improvise a TV ad for an object in the room, worth exactly this score."
+      },
+      "low": { "fr": "Diffusée à 3h du matin", "en": "Airs at 3 a.m." },
+      "high": { "fr": "Pub du Super Bowl", "en": "Super Bowl spot" },
+      "tags": ["improv", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-work-075",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Annonce une nouvelle absurde à ton équipe avec exactement ce niveau de professionnalisme.",
+        "en": "Announce absurd news to your team with exactly this much professionalism."
+      },
+      "low": { "fr": "Fou rire dès le premier mot", "en": "Cracks up on word one" },
+      "high": { "fr": "Costume, slides et plan d'action", "en": "Suit, slides, and an action plan" },
+      "tags": ["work", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-rules-076",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Explique les règles d'un jeu inventé avec exactement ce niveau de clarté.",
+        "en": "Explain the rules of a made-up game with exactly this much clarity."
+      },
+      "low": { "fr": "Personne ne comprend rien", "en": "No one understands anything" },
+      "high": { "fr": "Limpide dès la première phrase", "en": "Crystal clear from sentence one" },
+      "tags": ["games", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-birthday-077",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Chante « Joyeux anniversaire » avec exactement ce niveau d'émotion.",
+        "en": "Sing 'Happy Birthday' with exactly this much emotion."
+      },
+      "low": { "fr": "Obligation contractuelle", "en": "Contractual obligation" },
+      "high": { "fr": "Concert hommage", "en": "Tribute concert" },
+      "tags": ["music", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-pet-078",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un animal de compagnie exotique qui est une idée exactement aussi bonne que cette note.",
+        "en": "Describe an exotic pet that is exactly this good an idea."
+      },
+      "low": { "fr": "Appelez les secours", "en": "Call animal control" },
+      "high": { "fr": "Meilleur coloc du monde", "en": "World's best roommate" },
+      "tags": ["animals", "absurd"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-history-079",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte un fait historique (vrai ou inventé) avec exactement ce niveau de crédibilité.",
+        "en": "Share a historical fact (real or invented) with exactly this believability score."
+      },
+      "low": { "fr": "Napoléon avait un jetpack", "en": "Napoleon had a jetpack" },
+      "high": { "fr": "Sorti d'un manuel scolaire", "en": "Straight out of a textbook" },
+      "tags": ["culture", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-gps-080",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue un GPS qui guide avec exactement ce niveau de fiabilité.",
+        "en": "Play a GPS giving directions with exactly this much reliability."
+      },
+      "low": { "fr": "« Tournez… quelque part »", "en": "'Turn… somewhere'" },
+      "high": { "fr": "Précis au centimètre", "en": "Accurate to the centimeter" },
+      "tags": ["tech", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-judge-081",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Commente un plat imaginaire en juré de concours culinaire, avec exactement ce niveau de sévérité.",
+        "en": "Judge an imaginary dish like a cooking-show judge, with exactly this much severity."
+      },
+      "low": { "fr": "Tout est délicieux !", "en": "Everything is delicious!" },
+      "high": { "fr": "Le juré le plus redouté du pays", "en": "The most feared judge on TV" },
+      "tags": ["food", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-bedtime-082",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte une histoire pour endormir avec exactement ce niveau d'efficacité.",
+        "en": "Tell a bedtime story with exactly this much sleep-inducing power."
+      },
+      "low": { "fr": "L'enfant est encore plus réveillé", "en": "The kid is MORE awake now" },
+      "high": { "fr": "Toute la pièce ronfle", "en": "The whole room is snoring" },
+      "tags": ["story", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-invention-083",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente une invention pour la cuisine qui mérite exactement cette note.",
+        "en": "Present a kitchen invention that deserves exactly this score."
+      },
+      "low": { "fr": "Le bureau des brevets a ri", "en": "The patent office laughed" },
+      "high": { "fr": "Dans toutes les cuisines d'ici un an", "en": "In every kitchen within a year" },
+      "tags": ["tech", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-drama-084",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue une scène d'adieu dramatique avec exactement ce niveau de talent.",
+        "en": "Act out a dramatic farewell scene with exactly this much talent."
+      },
+      "low": { "fr": "Téléfilm du dimanche après-midi", "en": "Daytime soap filler" },
+      "high": { "fr": "César de la plus belle larme", "en": "Oscar for Best Single Tear" },
+      "tags": ["performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-whisper-085",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Chuchote une grande nouvelle avec exactement ce niveau de discrétion.",
+        "en": "Whisper big news with exactly this much discretion."
+      },
+      "low": { "fr": "Tout l'immeuble est au courant", "en": "The whole building hears it" },
+      "high": { "fr": "Niveau agent secret", "en": "Spy-grade whisper" },
+      "tags": ["absurd", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-review-086",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise un avis en ligne sur un restaurant imaginaire qui correspond exactement à cette note.",
+        "en": "Improvise an online review for an imaginary restaurant that matches exactly this score."
+      },
+      "low": { "fr": "Une étoile, et encore", "en": "One star, and that's generous" },
+      "high": { "fr": "Cinq étoiles, j'y habite désormais", "en": "Five stars, I live here now" },
+      "tags": ["food", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-packing-087",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ta valise de week-end, préparée exactement comme cette note.",
+        "en": "Describe your weekend packing, done exactly this well."
+      },
+      "low": { "fr": "Une brosse à dents, c'est tout", "en": "One toothbrush, nothing else" },
+      "high": { "fr": "Cubes de rangement étiquetés", "en": "Labeled packing cubes" },
+      "tags": ["travel", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-kids-088",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Anime un anniversaire d'enfants avec exactement ce niveau d'énergie.",
+        "en": "Host a kids' birthday party with exactly this much energy."
+      },
+      "low": { "fr": "Assis dans un coin, en silence", "en": "Sitting quietly in a corner" },
+      "high": { "fr": "Clown professionnel sous caféine", "en": "Caffeinated party clown" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-outfit-089",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une tenue de festival exactement aussi audacieuse que cette note.",
+        "en": "Describe a festival outfit that is exactly this bold."
+      },
+      "low": { "fr": "Jean et t-shirt gris", "en": "Jeans and a gray tee" },
+      "high": { "fr": "Plumes, paillettes et cape", "en": "Feathers, glitter, and a cape" },
+      "tags": ["party", "improv"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-commentary-090",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Commente un match imaginaire avec exactement ce niveau d'excitation.",
+        "en": "Commentate an imaginary match with exactly this much excitement."
+      },
+      "low": { "fr": "Endormi au micro", "en": "Asleep at the mic" },
+      "high": { "fr": "Voix cassée à la troisième minute", "en": "Voice gone by minute three" },
+      "tags": ["sport", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-food-001",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un aliment qui se situe exactement ici sur la roue.",
+        "en": "Name a food that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Petit-déjeuner", "en": "Breakfast food" },
+      "high": { "fr": "Dîner", "en": "Dinner food" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-talent-002",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un talent qui se situe exactement ici sur la roue.",
+        "en": "Name a skill that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Parfaitement inutile", "en": "Completely useless" },
+      "high": { "fr": "Sauve des vies", "en": "Saves lives" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-fame-003",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Name something that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Connu de toute la planète", "en": "Known by the whole planet" },
+      "high": { "fr": "Connu de trois personnes", "en": "Known by three people" },
+      "tags": ["culture", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-temp-004",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Trouve quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Think of something that lands exactly here on the wheel."
+      },
+      "low": { "fr": "Glacial", "en": "Ice cold" },
+      "high": { "fr": "Brûlant", "en": "Scorching hot" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-social-005",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un comportement qui se situe exactement ici sur la roue.",
+        "en": "Name a behavior that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Acceptable à un mariage", "en": "Fine at a wedding" },
+      "high": { "fr": "Uniquement chez soi, volets fermés", "en": "Only at home with the blinds shut" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-idea-006",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Propose une idée qui se situe exactement ici sur la roue.",
+        "en": "Pitch an idea that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Très mauvaise idée", "en": "Terrible idea" },
+      "high": { "fr": "Idée de génie", "en": "Stroke of genius" },
+      "tags": ["absurd", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-culture-007",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite quelque chose qui se trouve exactement ici sur la roue.",
+        "en": "Name something that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Totalement surcoté", "en": "Totally overrated" },
+      "high": { "fr": "Scandaleusement sous-coté", "en": "Criminally underrated" },
+      "tags": ["culture", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-texture-008",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Trouve quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Think of something that lands exactly here on the wheel."
+      },
+      "low": { "fr": "Doux comme un nuage", "en": "Impossibly soft" },
+      "high": { "fr": "Papier de verre", "en": "Sandpaper rough" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-luxury-009",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un objet qui se situe exactement ici sur la roue.",
+        "en": "Name an object that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Premier prix", "en": "Bargain bin" },
+      "high": { "fr": "Grand luxe", "en": "Pure luxury" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-animal-010",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un animal qui se situe exactement ici sur la roue.",
+        "en": "Name an animal that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Adorable", "en": "Adorable" },
+      "high": { "fr": "Terrifiant", "en": "Terrifying" },
+      "tags": ["animals", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-taste-011",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un plat ou un snack qui se situe exactement ici sur la roue.",
+        "en": "Name a dish or snack that sits exactly here on the wheel."
+      },
+      "low": { "fr": "100 % sucré", "en": "Pure sweet" },
+      "high": { "fr": "100 % salé", "en": "Pure savory" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-sport-012",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une activité qui se situe exactement ici sur la roue.",
+        "en": "Name an activity that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Clairement un sport", "en": "Definitely a sport" },
+      "high": { "fr": "Clairement pas un sport", "en": "Definitely not a sport" },
+      "tags": ["sport", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-draw-013",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une chose qui se situe exactement ici sur la roue.",
+        "en": "Name a thing that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Facile à dessiner", "en": "Easy to draw" },
+      "high": { "fr": "Impossible à dessiner", "en": "Impossible to draw" },
+      "tags": ["absurd", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-sound-014",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un bruit qui se situe exactement ici sur la roue.",
+        "en": "Name a sound that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Délicieux pour les oreilles", "en": "Music to the ears" },
+      "high": { "fr": "Insupportable", "en": "Unbearable" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-smell-015",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une odeur qui se situe exactement ici sur la roue.",
+        "en": "Name a smell that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Divine", "en": "Heavenly" },
+      "high": { "fr": "Catastrophique", "en": "Catastrophic" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-job-016",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un métier qui se situe exactement ici sur la roue.",
+        "en": "Name a job that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Métier de rêve", "en": "Dream job" },
+      "high": { "fr": "Cauchemar quotidien", "en": "Daily nightmare" },
+      "tags": ["work", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-date-017",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une activité de rendez-vous qui se situe exactement ici sur la roue.",
+        "en": "Name a date activity that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Follement romantique", "en": "Wildly romantic" },
+      "high": { "fr": "Zéro romantisme", "en": "Zero romance" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-kitchen-018",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un objet de cuisine qui se situe exactement ici sur la roue.",
+        "en": "Name a kitchen object that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Indispensable", "en": "Essential" },
+      "high": { "fr": "Totalement superflu", "en": "Utterly pointless" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-speed-019",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Trouve quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Think of something that lands exactly here on the wheel."
+      },
+      "low": { "fr": "Désespérément lent", "en": "Painfully slow" },
+      "high": { "fr": "Rapide comme l'éclair", "en": "Lightning fast" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-snack-020",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un en-cas qui se situe exactement ici sur la roue.",
+        "en": "Name a snack that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Très sain", "en": "Extremely healthy" },
+      "high": { "fr": "Le cardiologue démissionne", "en": "Your cardiologist resigns" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-fashion-021",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un vêtement ou un accessoire qui se situe exactement ici sur la roue.",
+        "en": "Name a piece of clothing or an accessory that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Complètement démodé", "en": "Hopelessly out of style" },
+      "high": { "fr": "Pointe de la mode", "en": "Cutting-edge fashion" },
+      "tags": ["culture", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-learn-022",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une compétence qui se situe exactement ici sur la roue.",
+        "en": "Name a skill that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Apprise en cinq minutes", "en": "Learned in five minutes" },
+      "high": { "fr": "Une vie entière pour la maîtriser", "en": "A lifetime to master" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-guest-023",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un comportement d'invité qui se situe exactement ici sur la roue.",
+        "en": "Name a houseguest behavior that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Invité de rêve", "en": "Dream guest" },
+      "high": { "fr": "On change les serrures", "en": "We're changing the locks" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-gift-024",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un cadeau qui se situe exactement ici sur la roue.",
+        "en": "Name a gift that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Cadeau parfait", "en": "Perfect gift" },
+      "high": { "fr": "Pire cadeau imaginable", "en": "Worst gift imaginable" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-movie-025",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un film qui se situe exactement ici sur la roue.",
+        "en": "Name a movie that sits exactly here on the wheel."
+      },
+      "low": { "fr": "À voir seul sous un plaid", "en": "Watch alone under a blanket" },
+      "high": { "fr": "À voir en groupe en criant", "en": "Watch with a screaming crowd" },
+      "tags": ["cinema", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-camping-026",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un objet qui se situe exactement ici sur la roue.",
+        "en": "Name an object that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Vital en camping", "en": "Camping essential" },
+      "high": { "fr": "Inutile en pleine nature", "en": "Useless in the woods" },
+      "tags": ["travel", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-excuse-027",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une excuse de retard qui se situe exactement ici sur la roue.",
+        "en": "Name an excuse for being late that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Totalement crédible", "en": "Totally believable" },
+      "high": { "fr": "Complètement absurde", "en": "Completely absurd" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-size-028",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Trouve quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Think of something that lands exactly here on the wheel."
+      },
+      "low": { "fr": "Microscopique", "en": "Microscopic" },
+      "high": { "fr": "Gigantesque", "en": "Colossal" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-song-029",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une chanson qui se situe exactement ici sur la roue.",
+        "en": "Name a song that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Chanson de douche", "en": "Shower song" },
+      "high": { "fr": "Hymne de stade", "en": "Stadium anthem" },
+      "tags": ["music", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-expert-030",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une activité qui se situe exactement ici sur la roue.",
+        "en": "Name an activity that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Pour grands débutants", "en": "Total-beginner friendly" },
+      "high": { "fr": "Réservée aux experts", "en": "Experts only" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-fragile-031",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un objet qui se situe exactement ici sur la roue.",
+        "en": "Name an object that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Casse si on le regarde", "en": "Breaks if you look at it" },
+      "high": { "fr": "Indestructible", "en": "Indestructible" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-convo-032",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un sujet de conversation qui se situe exactement ici sur la roue.",
+        "en": "Name a conversation topic that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Bavardage d'ascenseur", "en": "Elevator small talk" },
+      "high": { "fr": "Grand débat de 3h du matin", "en": "3 a.m. deep talk" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-buy-033",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un achat qui se situe exactement ici sur la roue.",
+        "en": "Name a purchase that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Achat impulsif en caisse", "en": "Checkout-line impulse buy" },
+      "high": { "fr": "Mûri pendant des années", "en": "Agonized over for years" },
+      "tags": ["daily", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-season-034",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une activité qui se situe exactement ici sur la roue.",
+        "en": "Name an activity that sits exactly here on the wheel."
+      },
+      "low": { "fr": "100 % été", "en": "Peak summer" },
+      "high": { "fr": "100 % hiver", "en": "Peak winter" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-chore-035",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une tâche ménagère qui se situe exactement ici sur la roue.",
+        "en": "Name a household chore that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Étrangement satisfaisante", "en": "Weirdly satisfying" },
+      "high": { "fr": "Corvée absolue", "en": "Soul-crushing chore" },
+      "tags": ["daily", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-power-036",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un super-pouvoir qui se situe exactement ici sur la roue.",
+        "en": "Name a superpower that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Complètement inutile", "en": "Utterly useless" },
+      "high": { "fr": "Pouvoir ultime", "en": "Ultimate power" },
+      "tags": ["absurd", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-emoji-037",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un emoji qui se situe exactement ici sur la roue.",
+        "en": "Name an emoji that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Sens limpide", "en": "Crystal clear meaning" },
+      "high": { "fr": "Mystère total", "en": "Total mystery" },
+      "tags": ["tech", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-finger-038",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un plat qui se situe exactement ici sur la roue.",
+        "en": "Name a dish that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Se mange avec les doigts", "en": "Strictly finger food" },
+      "high": { "fr": "Exige couverts et serviette", "en": "Demands cutlery and a napkin" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-hobby-039",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un hobby qui se situe exactement ici sur la roue.",
+        "en": "Name a hobby that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Profondément relaxant", "en": "Deeply relaxing" },
+      "high": { "fr": "Étonnamment stressant", "en": "Surprisingly stressful" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-word-040",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un mot qui se situe exactement ici sur la roue.",
+        "en": "Name a word that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Magnifique à prononcer", "en": "Gorgeous to say" },
+      "high": { "fr": "Désagréable à l'oreille", "en": "Unpleasant to the ear" },
+      "tags": ["culture", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-hide-041",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une cachette qui se situe exactement ici sur la roue.",
+        "en": "Name a hiding spot that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Cachette imbattable", "en": "Unbeatable hiding spot" },
+      "high": { "fr": "Trouvée en deux secondes", "en": "Found in two seconds" },
+      "tags": ["games", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-tech-042",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une technologie qui se situe exactement ici sur la roue.",
+        "en": "Name a technology that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Mamie comprend en une phrase", "en": "Grandma gets it in one sentence" },
+      "high": { "fr": "Même les experts sèchent", "en": "Even the experts are stumped" },
+      "tags": ["tech", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-travel-043",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une destination qui se situe exactement ici sur la roue.",
+        "en": "Name a destination that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Excursion d'une journée", "en": "Easy day trip" },
+      "high": { "fr": "Expédition d'une vie", "en": "Once-in-a-lifetime expedition" },
+      "tags": ["travel", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-collect-044",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un objet qui se situe exactement ici sur la roue.",
+        "en": "Name an object that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Banal du quotidien", "en": "Everyday mundane" },
+      "high": { "fr": "Graal de collectionneur", "en": "Collector's grail" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-pet-045",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un animal de compagnie qui se situe exactement ici sur la roue.",
+        "en": "Name a pet that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Aucun entretien", "en": "Zero maintenance" },
+      "high": { "fr": "Un travail à plein temps", "en": "A full-time job" },
+      "tags": ["animals", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-villain-046",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un trait de caractère qui se situe exactement ici sur la roue.",
+        "en": "Name a personality trait that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Héros de film", "en": "Movie hero material" },
+      "high": { "fr": "Méchant de film", "en": "Movie villain material" },
+      "tags": ["cinema", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-icebreaker-047",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une question brise-glace qui se situe exactement ici sur la roue.",
+        "en": "Name an icebreaker question that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Lance la soirée", "en": "Sparks the party" },
+      "high": { "fr": "Plombe l'ambiance", "en": "Kills the vibe" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-queue-048",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite quelque chose qui se situe exactement ici sur la roue.",
+        "en": "Name something that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Vaut des heures de queue", "en": "Worth queueing hours for" },
+      "high": { "fr": "Pas une minute d'attente", "en": "Not worth one minute in line" },
+      "tags": ["debate"],
+      "intensity": "classic"
+    }
+  ]
+}

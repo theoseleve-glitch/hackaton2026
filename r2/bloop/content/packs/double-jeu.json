@@ -1,0 +1,1672 @@
+{
+  "gameId": "double-jeu",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "viennoiserie-croissant-painchoc",
+      "mediaType": "text",
+      "theme": { "fr": "Viennoiserie", "en": "French bakery" },
+      "majority": { "fr": "Croissant", "en": "Croissant" },
+      "impostor": { "fr": "Pain au chocolat", "en": "Chocolate croissant" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pasta-spaghetti-linguine",
+      "mediaType": "text",
+      "theme": { "fr": "Forme de pâtes", "en": "Pasta shape" },
+      "majority": { "fr": "Spaghetti", "en": "Spaghetti" },
+      "impostor": { "fr": "Linguine", "en": "Linguine" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "coffee-espresso-ristretto",
+      "mediaType": "text",
+      "theme": { "fr": "Café", "en": "Coffee" },
+      "majority": { "fr": "Espresso", "en": "Espresso" },
+      "impostor": { "fr": "Ristretto", "en": "Ristretto" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "hotdrink-chocolat-chailatte",
+      "mediaType": "text",
+      "theme": { "fr": "Boisson chaude", "en": "Hot drink" },
+      "majority": { "fr": "Chocolat chaud", "en": "Hot chocolate" },
+      "impostor": { "fr": "Chai latte", "en": "Chai latte" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "fastfood-burger-hotdog",
+      "mediaType": "text",
+      "theme": { "fr": "Fast-food", "en": "Fast food" },
+      "majority": { "fr": "Burger", "en": "Burger" },
+      "impostor": { "fr": "Hot-dog", "en": "Hot dog" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pizza-margherita-pepperoni",
+      "mediaType": "text",
+      "theme": { "fr": "Pizza", "en": "Pizza" },
+      "majority": { "fr": "Margherita", "en": "Margherita" },
+      "impostor": { "fr": "Pepperoni", "en": "Pepperoni" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sushi-maki-california",
+      "mediaType": "text",
+      "theme": { "fr": "Sushi", "en": "Sushi" },
+      "majority": { "fr": "Maki", "en": "Maki" },
+      "impostor": { "fr": "California roll", "en": "California roll" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dessert-cremebrulee-flan",
+      "mediaType": "text",
+      "theme": { "fr": "Dessert", "en": "Dessert" },
+      "majority": { "fr": "Crème brûlée", "en": "Crème brûlée" },
+      "impostor": { "fr": "Flan", "en": "Flan" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dessertmenu-tiramisu-cheesecake",
+      "mediaType": "text",
+      "theme": { "fr": "Carte des desserts", "en": "Dessert menu" },
+      "majority": { "fr": "Tiramisu", "en": "Tiramisu" },
+      "impostor": { "fr": "Cheesecake", "en": "Cheesecake" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "winterfruit-clementine-mandarine",
+      "mediaType": "text",
+      "theme": { "fr": "Fruit d'hiver", "en": "Winter fruit" },
+      "majority": { "fr": "Clémentine", "en": "Clementine" },
+      "impostor": { "fr": "Mandarine", "en": "Tangerine" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "summerfruit-peche-nectarine",
+      "mediaType": "text",
+      "theme": { "fr": "Fruit d'été", "en": "Summer fruit" },
+      "majority": { "fr": "Pêche", "en": "Peach" },
+      "impostor": { "fr": "Nectarine", "en": "Nectarine" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "legume-courgette-concombre",
+      "mediaType": "text",
+      "theme": { "fr": "Légume vert", "en": "Green vegetable" },
+      "majority": { "fr": "Courgette", "en": "Zucchini" },
+      "impostor": { "fr": "Concombre", "en": "Cucumber" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "fromage-camembert-brie",
+      "mediaType": "text",
+      "theme": { "fr": "Fromage", "en": "Cheese" },
+      "majority": { "fr": "Camembert", "en": "Camembert" },
+      "impostor": { "fr": "Brie", "en": "Brie" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "snack-bagel-donut",
+      "mediaType": "text",
+      "theme": { "fr": "Snack américain", "en": "American snack" },
+      "majority": { "fr": "Bagel", "en": "Bagel" },
+      "impostor": { "fr": "Donut", "en": "Donut" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "eau-gazeuse-plate",
+      "mediaType": "text",
+      "theme": { "fr": "Eau", "en": "Water" },
+      "majority": { "fr": "Eau gazeuse", "en": "Sparkling water" },
+      "impostor": { "fr": "Eau plate", "en": "Still water" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "apero-chips-popcorn",
+      "mediaType": "text",
+      "theme": { "fr": "Apéro", "en": "Snack bowl" },
+      "majority": { "fr": "Chips", "en": "Potato chips" },
+      "impostor": { "fr": "Popcorn", "en": "Popcorn" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "bonbons-oursons-chamallows",
+      "mediaType": "text",
+      "theme": { "fr": "Bonbons", "en": "Candy" },
+      "majority": { "fr": "Oursons gélifiés", "en": "Gummy bears" },
+      "impostor": { "fr": "Chamallows", "en": "Marshmallows" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "glace-sorbet-creme",
+      "mediaType": "text",
+      "theme": { "fr": "Glace", "en": "Frozen dessert" },
+      "majority": { "fr": "Sorbet", "en": "Sorbet" },
+      "impostor": { "fr": "Crème glacée", "en": "Gelato" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "soupe-ramen-pho",
+      "mediaType": "text",
+      "theme": { "fr": "Soupe", "en": "Soup" },
+      "majority": { "fr": "Ramen", "en": "Ramen" },
+      "impostor": { "fr": "Pho", "en": "Pho" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "texmex-tacos-burrito",
+      "mediaType": "text",
+      "theme": { "fr": "Tex-mex", "en": "Tex-mex" },
+      "majority": { "fr": "Tacos", "en": "Tacos" },
+      "impostor": { "fr": "Burrito", "en": "Burrito" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "hiver-raclette-fondue",
+      "mediaType": "text",
+      "theme": { "fr": "Repas d'hiver", "en": "Winter dinner" },
+      "majority": { "fr": "Raclette", "en": "Raclette" },
+      "impostor": { "fr": "Fondue", "en": "Cheese fondue" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "gouter-crepe-gaufre",
+      "mediaType": "text",
+      "theme": { "fr": "Goûter", "en": "Sweet treat" },
+      "majority": { "fr": "Crêpe", "en": "Crepe" },
+      "impostor": { "fr": "Gaufre", "en": "Waffle" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "patisserie-macaron-meringue",
+      "mediaType": "text",
+      "theme": { "fr": "Pâtisserie fine", "en": "Fancy pastry" },
+      "majority": { "fr": "Macaron", "en": "Macaron" },
+      "impostor": { "fr": "Meringue", "en": "Meringue" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "matin-jus-smoothie",
+      "mediaType": "text",
+      "theme": { "fr": "Boisson du matin", "en": "Morning drink" },
+      "majority": { "fr": "Jus d'orange", "en": "Orange juice" },
+      "impostor": { "fr": "Smoothie", "en": "Smoothie" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "the-vert-matcha",
+      "mediaType": "text",
+      "theme": { "fr": "Thé", "en": "Tea" },
+      "majority": { "fr": "Thé vert", "en": "Green tea" },
+      "impostor": { "fr": "Matcha", "en": "Matcha" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sauce-ketchup-bbq",
+      "mediaType": "text",
+      "theme": { "fr": "Sauce", "en": "Sauce" },
+      "majority": { "fr": "Ketchup", "en": "Ketchup" },
+      "impostor": { "fr": "Sauce barbecue", "en": "BBQ sauce" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "condiment-mayo-aioli",
+      "mediaType": "text",
+      "theme": { "fr": "Condiment", "en": "Condiment" },
+      "majority": { "fr": "Mayonnaise", "en": "Mayo" },
+      "impostor": { "fr": "Aïoli", "en": "Aioli" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pique-moutarde-wasabi",
+      "mediaType": "text",
+      "theme": { "fr": "Ça pique", "en": "It burns" },
+      "majority": { "fr": "Moutarde", "en": "Mustard" },
+      "impostor": { "fr": "Wasabi", "en": "Wasabi" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "platpates-carbo-bolo",
+      "mediaType": "text",
+      "theme": { "fr": "Plat de pâtes", "en": "Pasta dish" },
+      "majority": { "fr": "Carbonara", "en": "Carbonara" },
+      "impostor": { "fr": "Bolognaise", "en": "Bolognese" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "healthy-cesar-poke",
+      "mediaType": "text",
+      "theme": { "fr": "Déj healthy", "en": "Healthy lunch" },
+      "majority": { "fr": "Salade César", "en": "Caesar salad" },
+      "impostor": { "fr": "Poke bowl", "en": "Poke bowl" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "oeufs-omelette-brouilles",
+      "mediaType": "text",
+      "theme": { "fr": "Œufs", "en": "Eggs" },
+      "majority": { "fr": "Omelette", "en": "Omelette" },
+      "impostor": { "fr": "Œufs brouillés", "en": "Scrambled eggs" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "side-frites-potatoes",
+      "mediaType": "text",
+      "theme": { "fr": "Accompagnement", "en": "Side dish" },
+      "majority": { "fr": "Frites", "en": "Fries" },
+      "impostor": { "fr": "Potatoes", "en": "Potato wedges" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "poulet-nuggets-tenders",
+      "mediaType": "text",
+      "theme": { "fr": "Poulet frit", "en": "Fried chicken" },
+      "majority": { "fr": "Nuggets", "en": "Nuggets" },
+      "impostor": { "fr": "Tenders", "en": "Tenders" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "chaine-mcdo-burgerking",
+      "mediaType": "text",
+      "theme": { "fr": "Chaîne de fast-food", "en": "Fast-food chain" },
+      "majority": { "fr": "McDo", "en": "McDonald's" },
+      "impostor": { "fr": "Burger King", "en": "Burger King" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "soda-coca-pepsi",
+      "mediaType": "text",
+      "theme": { "fr": "Soda", "en": "Soda" },
+      "majority": { "fr": "Coca", "en": "Coke" },
+      "impostor": { "fr": "Pepsi", "en": "Pepsi" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tartine-nutella-cacahuete",
+      "mediaType": "text",
+      "theme": { "fr": "Pâte à tartiner", "en": "Spread" },
+      "majority": { "fr": "Nutella", "en": "Nutella" },
+      "impostor": { "fr": "Beurre de cacahuète", "en": "Peanut butter" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dimanche-brunch-petitdej",
+      "mediaType": "text",
+      "theme": { "fr": "Repas du dimanche", "en": "Sunday meal" },
+      "majority": { "fr": "Brunch", "en": "Brunch" },
+      "impostor": { "fr": "Petit-déjeuner", "en": "Breakfast" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sucrant-miel-erable",
+      "mediaType": "text",
+      "theme": { "fr": "Sucrant naturel", "en": "Natural sweetener" },
+      "majority": { "fr": "Miel", "en": "Honey" },
+      "impostor": { "fr": "Sirop d'érable", "en": "Maple syrup" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dip-guacamole-houmous",
+      "mediaType": "text",
+      "theme": { "fr": "Dip", "en": "Dip" },
+      "majority": { "fr": "Guacamole", "en": "Guacamole" },
+      "impostor": { "fr": "Houmous", "en": "Hummus" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sucre-painperdu-pancakes",
+      "mediaType": "text",
+      "theme": { "fr": "Petit plaisir sucré", "en": "Sweet fix" },
+      "majority": { "fr": "Pain perdu", "en": "French toast" },
+      "impostor": { "fr": "Pancakes", "en": "Pancakes" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "vacation-beach-pool",
+      "mediaType": "text",
+      "theme": { "fr": "Vacances", "en": "Vacation" },
+      "majority": { "fr": "Plage", "en": "Beach" },
+      "impostor": { "fr": "Piscine", "en": "Swimming pool" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "night-out-club-karaoke",
+      "mediaType": "text",
+      "theme": { "fr": "Soirée", "en": "Night out" },
+      "majority": { "fr": "Boîte de nuit", "en": "Nightclub" },
+      "impostor": { "fr": "Bar karaoké", "en": "Karaoke bar" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ville-paris-lyon",
+      "mediaType": "text",
+      "theme": { "fr": "Grande ville", "en": "Big city" },
+      "majority": { "fr": "Paris", "en": "New York" },
+      "impostor": { "fr": "Lyon", "en": "Boston" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "courses-supermarche-marche",
+      "mediaType": "text",
+      "theme": { "fr": "Courses", "en": "Groceries" },
+      "majority": { "fr": "Supermarché", "en": "Supermarket" },
+      "impostor": { "fr": "Marché", "en": "Farmers market" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tranquille-cafe-salondethe",
+      "mediaType": "text",
+      "theme": { "fr": "Sortie tranquille", "en": "Chill outing" },
+      "majority": { "fr": "Café", "en": "Coffee shop" },
+      "impostor": { "fr": "Salon de thé", "en": "Tea room" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "match-stade-arena",
+      "mediaType": "text",
+      "theme": { "fr": "Soir de match", "en": "Game night venue" },
+      "majority": { "fr": "Stade", "en": "Stadium" },
+      "impostor": { "fr": "Arena", "en": "Arena" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "nature-foret-jungle",
+      "mediaType": "text",
+      "theme": { "fr": "Pleine nature", "en": "Wilderness" },
+      "majority": { "fr": "Forêt", "en": "Forest" },
+      "impostor": { "fr": "Jungle", "en": "Jungle" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sejour-hotel-airbnb",
+      "mediaType": "text",
+      "theme": { "fr": "Logement de vacances", "en": "Vacation stay" },
+      "majority": { "fr": "Hôtel", "en": "Hotel" },
+      "impostor": { "fr": "Airbnb", "en": "Airbnb" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "camping-tente-campingcar",
+      "mediaType": "text",
+      "theme": { "fr": "Camping", "en": "Camping" },
+      "majority": { "fr": "Tente", "en": "Tent" },
+      "impostor": { "fr": "Camping-car", "en": "Campervan" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "transit-metro-tram",
+      "mediaType": "text",
+      "theme": { "fr": "Transport en ville", "en": "City transit" },
+      "majority": { "fr": "Métro", "en": "Subway" },
+      "impostor": { "fr": "Tramway", "en": "Tram" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "trajet-velo-trottinette",
+      "mediaType": "text",
+      "theme": { "fr": "Trajet du matin", "en": "Morning commute" },
+      "majority": { "fr": "Vélo", "en": "Bike" },
+      "impostor": { "fr": "Trottinette", "en": "E-scooter" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "voyage-avion-train",
+      "mediaType": "text",
+      "theme": { "fr": "Long voyage", "en": "Long trip" },
+      "majority": { "fr": "Avion", "en": "Plane" },
+      "impostor": { "fr": "Train", "en": "Train" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "salon-canape-fauteuil",
+      "mediaType": "text",
+      "theme": { "fr": "Salon", "en": "Living room" },
+      "majority": { "fr": "Canapé", "en": "Couch" },
+      "impostor": { "fr": "Fauteuil", "en": "Armchair" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "musee-art-sciences",
+      "mediaType": "text",
+      "theme": { "fr": "Musée", "en": "Museum" },
+      "majority": { "fr": "Musée d'art", "en": "Art museum" },
+      "impostor": { "fr": "Musée des sciences", "en": "Science museum" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "livres-bibliotheque-librairie",
+      "mediaType": "text",
+      "theme": { "fr": "Plein de livres", "en": "Full of books" },
+      "majority": { "fr": "Bibliothèque", "en": "Library" },
+      "impostor": { "fr": "Librairie", "en": "Bookstore" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "gourmand-boulangerie-patisserie",
+      "mediaType": "text",
+      "theme": { "fr": "Boutique gourmande", "en": "Sweet shop" },
+      "majority": { "fr": "Boulangerie", "en": "Bakery" },
+      "impostor": { "fr": "Pâtisserie", "en": "Pastry shop" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pouce-foodtruck-baraque",
+      "mediaType": "text",
+      "theme": { "fr": "Sur le pouce", "en": "Quick bite" },
+      "majority": { "fr": "Food truck", "en": "Food truck" },
+      "impostor": { "fr": "Baraque à frites", "en": "Hot dog stand" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "flemme-drive-livraison",
+      "mediaType": "text",
+      "theme": { "fr": "Flemme de cuisiner", "en": "Too lazy to cook" },
+      "majority": { "fr": "Drive", "en": "Drive-through" },
+      "impostor": { "fr": "Livraison", "en": "Delivery" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "meubles-ikea-brocante",
+      "mediaType": "text",
+      "theme": { "fr": "Meubler l'appart", "en": "Furnishing a flat" },
+      "majority": { "fr": "IKEA", "en": "IKEA" },
+      "impostor": { "fr": "Brocante", "en": "Flea market" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "destination-italie-espagne",
+      "mediaType": "text",
+      "theme": { "fr": "Destination d'été", "en": "Summer destination" },
+      "majority": { "fr": "Italie", "en": "Italy" },
+      "impostor": { "fr": "Espagne", "en": "Spain" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "reve-japon-coree",
+      "mediaType": "text",
+      "theme": { "fr": "Voyage de rêve", "en": "Dream trip" },
+      "majority": { "fr": "Japon", "en": "Japan" },
+      "impostor": { "fr": "Corée du Sud", "en": "South Korea" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "bagages-valise-sacados",
+      "mediaType": "text",
+      "theme": { "fr": "Bagages", "en": "Luggage" },
+      "majority": { "fr": "Valise", "en": "Suitcase" },
+      "impostor": { "fr": "Sac à dos", "en": "Backpack" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "papiers-passeport-cni",
+      "mediaType": "text",
+      "theme": { "fr": "Papiers d'identité", "en": "ID documents" },
+      "majority": { "fr": "Passeport", "en": "Passport" },
+      "impostor": { "fr": "Carte d'identité", "en": "ID card" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "mer-croisiere-voilier",
+      "mediaType": "text",
+      "theme": { "fr": "Vacances en mer", "en": "Sea vacation" },
+      "majority": { "fr": "Croisière", "en": "Cruise" },
+      "impostor": { "fr": "Voilier", "en": "Sailboat" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "animaux-safari-zoo",
+      "mediaType": "text",
+      "theme": { "fr": "Voir des animaux", "en": "Animal watching" },
+      "majority": { "fr": "Safari", "en": "Safari" },
+      "impostor": { "fr": "Zoo", "en": "Zoo" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "montagne-ski-rando",
+      "mediaType": "text",
+      "theme": { "fr": "Montagne", "en": "Mountains" },
+      "majority": { "fr": "Station de ski", "en": "Ski resort" },
+      "impostor": { "fr": "Randonnée", "en": "Hiking" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "detente-sauna-hammam",
+      "mediaType": "text",
+      "theme": { "fr": "Détente", "en": "Spa day" },
+      "majority": { "fr": "Sauna", "en": "Sauna" },
+      "impostor": { "fr": "Hammam", "en": "Steam room" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "mall-ascenseur-escalator",
+      "mediaType": "text",
+      "theme": { "fr": "Centre commercial", "en": "Shopping mall" },
+      "majority": { "fr": "Ascenseur", "en": "Elevator" },
+      "impostor": { "fr": "Escalator", "en": "Escalator" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "deplier-parapluie-parasol",
+      "mediaType": "text",
+      "theme": { "fr": "Objet à déplier", "en": "Things that unfold" },
+      "majority": { "fr": "Parapluie", "en": "Umbrella" },
+      "impostor": { "fr": "Parasol", "en": "Beach umbrella" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "fetes-noel-nouvelan",
+      "mediaType": "text",
+      "theme": { "fr": "Fêtes de fin d'année", "en": "Holiday season" },
+      "majority": { "fr": "Noël", "en": "Christmas" },
+      "impostor": { "fr": "Nouvel An", "en": "New Year's Eve" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "deguise-halloween-carnaval",
+      "mediaType": "text",
+      "theme": { "fr": "Fête déguisée", "en": "Costume party" },
+      "majority": { "fr": "Halloween", "en": "Halloween" },
+      "impostor": { "fr": "Carnaval", "en": "Carnival" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "invitation-anniv-cremaillere",
+      "mediaType": "text",
+      "theme": { "fr": "Invitation", "en": "Party invite" },
+      "majority": { "fr": "Anniversaire", "en": "Birthday party" },
+      "impostor": { "fr": "Crémaillère", "en": "Housewarming" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "occasion-mariage-fiancailles",
+      "mediaType": "text",
+      "theme": { "fr": "Grande occasion", "en": "Big occasion" },
+      "majority": { "fr": "Mariage", "en": "Wedding" },
+      "impostor": { "fr": "Fiançailles", "en": "Engagement party" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "saison-ete-printemps",
+      "mediaType": "text",
+      "theme": { "fr": "Saison préférée", "en": "Favorite season" },
+      "majority": { "fr": "Été", "en": "Summer" },
+      "impostor": { "fr": "Printemps", "en": "Spring" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "meteo-orage-averse",
+      "mediaType": "text",
+      "theme": { "fr": "Météo", "en": "Weather" },
+      "majority": { "fr": "Orage", "en": "Thunderstorm" },
+      "impostor": { "fr": "Averse", "en": "Rain shower" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ciel-neige-grele",
+      "mediaType": "text",
+      "theme": { "fr": "Ciel d'hiver", "en": "Winter sky" },
+      "majority": { "fr": "Neige", "en": "Snow" },
+      "impostor": { "fr": "Grêle", "en": "Hail" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "nuit-feudartifice-feudecamp",
+      "mediaType": "text",
+      "theme": { "fr": "Nuit d'été", "en": "Summer night" },
+      "majority": { "fr": "Feu d'artifice", "en": "Fireworks" },
+      "impostor": { "fr": "Feu de camp", "en": "Campfire" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dehors-piquenique-barbecue",
+      "mediaType": "text",
+      "theme": { "fr": "Repas dehors", "en": "Outdoor meal" },
+      "majority": { "fr": "Pique-nique", "en": "Picnic" },
+      "impostor": { "fr": "Barbecue", "en": "Barbecue" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sensations-parc-feteforaine",
+      "mediaType": "text",
+      "theme": { "fr": "Sortie sensations", "en": "Thrill outing" },
+      "majority": { "fr": "Parc d'attractions", "en": "Theme park" },
+      "impostor": { "fr": "Fête foraine", "en": "Funfair" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "live-concert-festival",
+      "mediaType": "text",
+      "theme": { "fr": "Musique live", "en": "Live music" },
+      "majority": { "fr": "Concert", "en": "Concert" },
+      "impostor": { "fr": "Festival", "en": "Festival" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "groupe-escape-laser",
+      "mediaType": "text",
+      "theme": { "fr": "Activité de groupe", "en": "Group activity" },
+      "majority": { "fr": "Escape game", "en": "Escape room" },
+      "impostor": { "fr": "Laser game", "en": "Laser tag" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "jeudi-bowling-billard",
+      "mediaType": "text",
+      "theme": { "fr": "Sortie du jeudi", "en": "Thursday hangout" },
+      "majority": { "fr": "Bowling", "en": "Bowling" },
+      "impostor": { "fr": "Billard", "en": "Pool" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "jardin-petanque-molkky",
+      "mediaType": "text",
+      "theme": { "fr": "Jeu d'extérieur", "en": "Backyard game" },
+      "majority": { "fr": "Pétanque", "en": "Bocce" },
+      "impostor": { "fr": "Mölkky", "en": "Cornhole" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "movies-horror-thriller",
+      "mediaType": "text",
+      "theme": { "fr": "Cinéma", "en": "Movies" },
+      "majority": { "fr": "Film d'horreur", "en": "Horror movie" },
+      "impostor": { "fr": "Thriller", "en": "Thriller" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "film-romcom-comedie",
+      "mediaType": "text",
+      "theme": { "fr": "Film du dimanche", "en": "Sunday movie" },
+      "majority": { "fr": "Comédie romantique", "en": "Romcom" },
+      "impostor": { "fr": "Comédie", "en": "Comedy" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "geek-scifi-fantasy",
+      "mediaType": "text",
+      "theme": { "fr": "Soirée geek", "en": "Geek night" },
+      "majority": { "fr": "Science-fiction", "en": "Sci-fi" },
+      "impostor": { "fr": "Fantasy", "en": "Fantasy" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "espion-bond-mission",
+      "mediaType": "text",
+      "theme": { "fr": "Film d'espionnage", "en": "Spy movie" },
+      "majority": { "fr": "James Bond", "en": "James Bond" },
+      "impostor": { "fr": "Mission Impossible", "en": "Mission Impossible" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "saga-harrypotter-percy",
+      "mediaType": "text",
+      "theme": { "fr": "Saga ado", "en": "YA saga" },
+      "majority": { "fr": "Harry Potter", "en": "Harry Potter" },
+      "impostor": { "fr": "Percy Jackson", "en": "Percy Jackson" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "anime-disney-pixar",
+      "mediaType": "text",
+      "theme": { "fr": "Dessin animé", "en": "Animated movie" },
+      "majority": { "fr": "Disney", "en": "Disney" },
+      "impostor": { "fr": "Pixar", "en": "Pixar" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sitcom-friends-office",
+      "mediaType": "text",
+      "theme": { "fr": "Sitcom culte", "en": "Cult sitcom" },
+      "majority": { "fr": "Friends", "en": "Friends" },
+      "impostor": { "fr": "The Office", "en": "The Office" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tele-realite-documentaire",
+      "mediaType": "text",
+      "theme": { "fr": "Programme télé", "en": "TV show" },
+      "majority": { "fr": "Télé-réalité", "en": "Reality TV" },
+      "impostor": { "fr": "Documentaire", "en": "Documentary" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "streaming-netflix-disneyplus",
+      "mediaType": "text",
+      "theme": { "fr": "Plateforme de streaming", "en": "Streaming service" },
+      "majority": { "fr": "Netflix", "en": "Netflix" },
+      "impostor": { "fr": "Disney+", "en": "Disney+" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "video-youtube-twitch",
+      "mediaType": "text",
+      "theme": { "fr": "Vidéo en ligne", "en": "Online video" },
+      "majority": { "fr": "YouTube", "en": "YouTube" },
+      "impostor": { "fr": "Twitch", "en": "Twitch" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "reseau-insta-tiktok",
+      "mediaType": "text",
+      "theme": { "fr": "Réseau social", "en": "Social media" },
+      "majority": { "fr": "Instagram", "en": "Instagram" },
+      "impostor": { "fr": "TikTok", "en": "TikTok" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "messages-whatsapp-messenger",
+      "mediaType": "text",
+      "theme": { "fr": "Appli de messages", "en": "Messaging app" },
+      "majority": { "fr": "WhatsApp", "en": "WhatsApp" },
+      "impostor": { "fr": "Messenger", "en": "Messenger" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ballon-foot-futsal",
+      "mediaType": "text",
+      "theme": { "fr": "Ballon rond", "en": "The beautiful game" },
+      "majority": { "fr": "Football", "en": "Soccer" },
+      "impostor": { "fr": "Futsal", "en": "Futsal" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "raquette-tennis-badminton",
+      "mediaType": "text",
+      "theme": { "fr": "Sport de raquette", "en": "Racket sport" },
+      "majority": { "fr": "Tennis", "en": "Tennis" },
+      "impostor": { "fr": "Badminton", "en": "Badminton" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "zen-yoga-pilates",
+      "mediaType": "text",
+      "theme": { "fr": "Séance zen", "en": "Zen workout" },
+      "majority": { "fr": "Yoga", "en": "Yoga" },
+      "impostor": { "fr": "Pilates", "en": "Pilates" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "course-footing-trail",
+      "mediaType": "text",
+      "theme": { "fr": "Course à pied", "en": "Running" },
+      "majority": { "fr": "Footing", "en": "Jogging" },
+      "impostor": { "fr": "Trail", "en": "Trail running" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "salle-muscu-crossfit",
+      "mediaType": "text",
+      "theme": { "fr": "Salle de sport", "en": "The gym" },
+      "majority": { "fr": "Musculation", "en": "Weightlifting" },
+      "impostor": { "fr": "CrossFit", "en": "CrossFit" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "danse-salsa-bachata",
+      "mediaType": "text",
+      "theme": { "fr": "Cours de danse", "en": "Dance class" },
+      "majority": { "fr": "Salsa", "en": "Salsa" },
+      "impostor": { "fr": "Bachata", "en": "Bachata" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "strategie-echecs-dames",
+      "mediaType": "text",
+      "theme": { "fr": "Jeu de stratégie", "en": "Strategy game" },
+      "majority": { "fr": "Échecs", "en": "Chess" },
+      "impostor": { "fr": "Dames", "en": "Checkers" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "console-playstation-xbox",
+      "mediaType": "text",
+      "theme": { "fr": "Console de jeu", "en": "Game console" },
+      "majority": { "fr": "PlayStation", "en": "PlayStation" },
+      "impostor": { "fr": "Xbox", "en": "Xbox" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "societe-monopoly-cluedo",
+      "mediaType": "text",
+      "theme": { "fr": "Jeu de société", "en": "Board game" },
+      "majority": { "fr": "Monopoly", "en": "Monopoly" },
+      "impostor": { "fr": "Cluedo", "en": "Clue" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "casino-poker-blackjack",
+      "mediaType": "text",
+      "theme": { "fr": "Soirée casino", "en": "Casino night" },
+      "majority": { "fr": "Poker", "en": "Poker" },
+      "impostor": { "fr": "Blackjack", "en": "Blackjack" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "bouquin-polar-romance",
+      "mediaType": "text",
+      "theme": { "fr": "Bouquin de vacances", "en": "Beach read" },
+      "majority": { "fr": "Polar", "en": "Crime novel" },
+      "impostor": { "fr": "Romance", "en": "Romance novel" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "genre-rap-rnb",
+      "mediaType": "text",
+      "theme": { "fr": "Style musical", "en": "Music genre" },
+      "majority": { "fr": "Rap", "en": "Rap" },
+      "impostor": { "fr": "RnB", "en": "R&B" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "bruyant-rock-metal",
+      "mediaType": "text",
+      "theme": { "fr": "Concert bruyant", "en": "Loud concert" },
+      "majority": { "fr": "Rock", "en": "Rock" },
+      "impostor": { "fr": "Metal", "en": "Metal" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "electro-techno-house",
+      "mediaType": "text",
+      "theme": { "fr": "Musique électro", "en": "Electronic music" },
+      "majority": { "fr": "Techno", "en": "Techno" },
+      "impostor": { "fr": "House", "en": "House" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "band-guitare-basse",
+      "mediaType": "text",
+      "theme": { "fr": "Instrument de groupe", "en": "Band instrument" },
+      "majority": { "fr": "Guitare", "en": "Guitar" },
+      "impostor": { "fr": "Basse", "en": "Bass" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "touches-piano-synthe",
+      "mediaType": "text",
+      "theme": { "fr": "Instrument à touches", "en": "Keys" },
+      "majority": { "fr": "Piano", "en": "Piano" },
+      "impostor": { "fr": "Synthé", "en": "Synth" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "classique-violon-violoncelle",
+      "mediaType": "text",
+      "theme": { "fr": "Musique classique", "en": "Classical music" },
+      "majority": { "fr": "Violon", "en": "Violin" },
+      "impostor": { "fr": "Violoncelle", "en": "Cello" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "percu-batterie-bongos",
+      "mediaType": "text",
+      "theme": { "fr": "Percussions", "en": "Percussion" },
+      "majority": { "fr": "Batterie", "en": "Drums" },
+      "impostor": { "fr": "Bongos", "en": "Bongos" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "atelier-peinture-dessin",
+      "mediaType": "text",
+      "theme": { "fr": "Atelier créatif", "en": "Art class" },
+      "majority": { "fr": "Peinture", "en": "Painting" },
+      "impostor": { "fr": "Dessin", "en": "Drawing" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "photo-selfie-portrait",
+      "mediaType": "text",
+      "theme": { "fr": "Photo", "en": "Photography" },
+      "majority": { "fr": "Selfie", "en": "Selfie" },
+      "impostor": { "fr": "Portrait", "en": "Portrait" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "neige-ski-snowboard",
+      "mediaType": "text",
+      "theme": { "fr": "Sports d'hiver", "en": "Winter sports" },
+      "majority": { "fr": "Ski", "en": "Ski" },
+      "impostor": { "fr": "Snowboard", "en": "Snowboard" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "glisse-surf-paddle",
+      "mediaType": "text",
+      "theme": { "fr": "Glisse d'été", "en": "Summer water sports" },
+      "majority": { "fr": "Surf", "en": "Surfing" },
+      "impostor": { "fr": "Paddle", "en": "Paddleboarding" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sousleau-plongee-snorkeling",
+      "mediaType": "text",
+      "theme": { "fr": "Sous l'eau", "en": "Underwater" },
+      "majority": { "fr": "Plongée", "en": "Scuba diving" },
+      "impostor": { "fr": "Snorkeling", "en": "Snorkeling" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "hauteur-escalade-accrobranche",
+      "mediaType": "text",
+      "theme": { "fr": "Prendre de la hauteur", "en": "Up in the air" },
+      "majority": { "fr": "Escalade", "en": "Rock climbing" },
+      "impostor": { "fr": "Accrobranche", "en": "Ropes course" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "collectif-basket-handball",
+      "mediaType": "text",
+      "theme": { "fr": "Sport collectif", "en": "Team sport" },
+      "majority": { "fr": "Basket", "en": "Basketball" },
+      "impostor": { "fr": "Handball", "en": "Handball" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "contact-rugby-footus",
+      "mediaType": "text",
+      "theme": { "fr": "Sport de contact", "en": "Contact sport" },
+      "majority": { "fr": "Rugby", "en": "Rugby" },
+      "impostor": { "fr": "Football américain", "en": "American football" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "combat-boxe-mma",
+      "mediaType": "text",
+      "theme": { "fr": "Sport de combat", "en": "Fight night" },
+      "majority": { "fr": "Boxe", "en": "Boxing" },
+      "impostor": { "fr": "MMA", "en": "MMA" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "martial-judo-karate",
+      "mediaType": "text",
+      "theme": { "fr": "Art martial", "en": "Martial art" },
+      "majority": { "fr": "Judo", "en": "Judo" },
+      "impostor": { "fr": "Karaté", "en": "Karate" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "mecanique-f1-motogp",
+      "mediaType": "text",
+      "theme": { "fr": "Sport mécanique", "en": "Motorsport" },
+      "majority": { "fr": "Formule 1", "en": "Formula 1" },
+      "impostor": { "fr": "MotoGP", "en": "MotoGP" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "endurance-tourdefrance-marathon",
+      "mediaType": "text",
+      "theme": { "fr": "Épreuve d'endurance", "en": "Endurance event" },
+      "majority": { "fr": "Tour de France", "en": "Tour de France" },
+      "impostor": { "fr": "Marathon", "en": "Marathon" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "jo-ete-hiver",
+      "mediaType": "text",
+      "theme": { "fr": "Jeux olympiques", "en": "The Olympics" },
+      "majority": { "fr": "JO d'été", "en": "Summer Olympics" },
+      "impostor": { "fr": "JO d'hiver", "en": "Winter Olympics" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "piscine-natation-aquagym",
+      "mediaType": "text",
+      "theme": { "fr": "À la piscine", "en": "At the pool" },
+      "majority": { "fr": "Natation", "en": "Lap swimming" },
+      "impostor": { "fr": "Aquagym", "en": "Aqua aerobics" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "compagnie-chien-chat",
+      "mediaType": "text",
+      "theme": { "fr": "Animal de compagnie", "en": "Pet" },
+      "majority": { "fr": "Chien", "en": "Dog" },
+      "impostor": { "fr": "Chat", "en": "Cat" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "race-labrador-golden",
+      "mediaType": "text",
+      "theme": { "fr": "Race de chien", "en": "Dog breed" },
+      "majority": { "fr": "Labrador", "en": "Labrador" },
+      "impostor": { "fr": "Golden retriever", "en": "Golden retriever" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "citybird-pigeon-tourterelle",
+      "mediaType": "text",
+      "theme": { "fr": "Oiseau des villes", "en": "City bird" },
+      "majority": { "fr": "Pigeon", "en": "Pigeon" },
+      "impostor": { "fr": "Tourterelle", "en": "Dove" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "marin-dauphin-orque",
+      "mediaType": "text",
+      "theme": { "fr": "Animal marin", "en": "Sea creature" },
+      "majority": { "fr": "Dauphin", "en": "Dolphin" },
+      "impostor": { "fr": "Orque", "en": "Orca" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "bzz-abeille-guepe",
+      "mediaType": "text",
+      "theme": { "fr": "Ça bourdonne", "en": "It buzzes" },
+      "majority": { "fr": "Abeille", "en": "Bee" },
+      "impostor": { "fr": "Guêpe", "en": "Wasp" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "felin-lion-tigre",
+      "mediaType": "text",
+      "theme": { "fr": "Gros félin", "en": "Big cat" },
+      "majority": { "fr": "Lion", "en": "Lion" },
+      "impostor": { "fr": "Tigre", "en": "Tiger" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ferme-poule-canard",
+      "mediaType": "text",
+      "theme": { "fr": "Animal de ferme", "en": "Farm animal" },
+      "majority": { "fr": "Poule", "en": "Chicken" },
+      "impostor": { "fr": "Canard", "en": "Duck" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "reptile-crocodile-alligator",
+      "mediaType": "text",
+      "theme": { "fr": "Reptile géant", "en": "Giant reptile" },
+      "majority": { "fr": "Crocodile", "en": "Crocodile" },
+      "impostor": { "fr": "Alligator", "en": "Alligator" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "rongeur-hamster-cochondinde",
+      "mediaType": "text",
+      "theme": { "fr": "Petit rongeur", "en": "Tiny pet rodent" },
+      "majority": { "fr": "Hamster", "en": "Hamster" },
+      "impostor": { "fr": "Cochon d'Inde", "en": "Guinea pig" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "oreilles-lapin-lievre",
+      "mediaType": "text",
+      "theme": { "fr": "Longues oreilles", "en": "Long ears" },
+      "majority": { "fr": "Lapin", "en": "Rabbit" },
+      "impostor": { "fr": "Lièvre", "en": "Hare" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "equestre-cheval-poney",
+      "mediaType": "text",
+      "theme": { "fr": "Centre équestre", "en": "Riding stable" },
+      "majority": { "fr": "Cheval", "en": "Horse" },
+      "impostor": { "fr": "Poney", "en": "Pony" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "primate-singe-gorille",
+      "mediaType": "text",
+      "theme": { "fr": "Primate", "en": "Primate" },
+      "majority": { "fr": "Singe", "en": "Monkey" },
+      "impostor": { "fr": "Gorille", "en": "Gorilla" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "desert-chameau-dromadaire",
+      "mediaType": "text",
+      "theme": { "fr": "Animal du désert", "en": "Desert animal" },
+      "majority": { "fr": "Chameau", "en": "Camel" },
+      "impostor": { "fr": "Dromadaire", "en": "Dromedary" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "seabird-manchot-macareux",
+      "mediaType": "text",
+      "theme": { "fr": "Oiseau marin", "en": "Seabird" },
+      "majority": { "fr": "Manchot", "en": "Penguin" },
+      "impostor": { "fr": "Macareux", "en": "Puffin" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "lycee-maths-physique",
+      "mediaType": "text",
+      "theme": { "fr": "Cours au lycée", "en": "High school class" },
+      "majority": { "fr": "Maths", "en": "Math" },
+      "impostor": { "fr": "Physique", "en": "Physics" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "matiere-histoire-geo",
+      "mediaType": "text",
+      "theme": { "fr": "Matière scolaire", "en": "School subject" },
+      "majority": { "fr": "Histoire", "en": "History" },
+      "impostor": { "fr": "Géographie", "en": "Geography" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "examen-qcm-dissertation",
+      "mediaType": "text",
+      "theme": { "fr": "Examen", "en": "Exam" },
+      "majority": { "fr": "QCM", "en": "Multiple choice" },
+      "impostor": { "fr": "Dissertation", "en": "Essay" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "taf-teletravail-openspace",
+      "mediaType": "text",
+      "theme": { "fr": "Vie de bureau", "en": "Work life" },
+      "majority": { "fr": "Télétravail", "en": "Working from home" },
+      "impostor": { "fr": "Open space", "en": "Open office" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pause-cafe-dej",
+      "mediaType": "text",
+      "theme": { "fr": "Pause au taf", "en": "Work break" },
+      "majority": { "fr": "Pause café", "en": "Coffee break" },
+      "impostor": { "fr": "Pause déj", "en": "Lunch break" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "corvee-vaisselle-lessive",
+      "mediaType": "text",
+      "theme": { "fr": "Corvée", "en": "Chores" },
+      "majority": { "fr": "Vaisselle", "en": "The dishes" },
+      "impostor": { "fr": "Lessive", "en": "Laundry" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "menage-aspirateur-balai",
+      "mediaType": "text",
+      "theme": { "fr": "Ménage", "en": "Cleaning day" },
+      "majority": { "fr": "Aspirateur", "en": "Vacuum" },
+      "impostor": { "fr": "Balai", "en": "Broom" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sommeil-sieste-grassemat",
+      "mediaType": "text",
+      "theme": { "fr": "Rattrapage de sommeil", "en": "Catch-up sleep" },
+      "majority": { "fr": "Sieste", "en": "Nap" },
+      "impostor": { "fr": "Grasse matinée", "en": "Sleeping in" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "rencard-resto-cine",
+      "mediaType": "text",
+      "theme": { "fr": "Premier rencard", "en": "First date" },
+      "majority": { "fr": "Restaurant", "en": "Dinner date" },
+      "impostor": { "fr": "Cinéma", "en": "Movie date" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "smartphone-iphone-samsung",
+      "mediaType": "text",
+      "theme": { "fr": "Smartphone", "en": "Smartphone" },
+      "majority": { "fr": "iPhone", "en": "iPhone" },
+      "impostor": { "fr": "Samsung Galaxy", "en": "Samsung Galaxy" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ecran-laptop-tablette",
+      "mediaType": "text",
+      "theme": { "fr": "Écran nomade", "en": "Portable screen" },
+      "majority": { "fr": "Ordi portable", "en": "Laptop" },
+      "impostor": { "fr": "Tablette", "en": "Tablet" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "assistant-chatgpt-siri",
+      "mediaType": "text",
+      "theme": { "fr": "Assistant virtuel", "en": "Virtual assistant" },
+      "majority": { "fr": "ChatGPT", "en": "ChatGPT" },
+      "impostor": { "fr": "Siri", "en": "Siri" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "audio-ecouteurs-casque",
+      "mediaType": "text",
+      "theme": { "fr": "Pour la musique", "en": "Audio gear" },
+      "majority": { "fr": "Écouteurs", "en": "Earbuds" },
+      "impostor": { "fr": "Casque", "en": "Headphones" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "batterie-chargeur-powerbank",
+      "mediaType": "text",
+      "theme": { "fr": "Batterie faible", "en": "Low battery" },
+      "majority": { "fr": "Chargeur", "en": "Charger" },
+      "impostor": { "fr": "Batterie externe", "en": "Power bank" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "connexion-wifi-4g",
+      "mediaType": "text",
+      "theme": { "fr": "Connexion", "en": "Getting online" },
+      "majority": { "fr": "Wifi", "en": "Wi-Fi" },
+      "impostor": { "fr": "4G", "en": "Mobile data" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "chaussures-baskets-bottes",
+      "mediaType": "text",
+      "theme": { "fr": "Chaussures", "en": "Shoes" },
+      "majority": { "fr": "Baskets", "en": "Sneakers" },
+      "impostor": { "fr": "Bottes", "en": "Boots" },
+      "closeness": "easy",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tenue-jean-jogging",
+      "mediaType": "text",
+      "theme": { "fr": "Tenue du quotidien", "en": "Everyday outfit" },
+      "majority": { "fr": "Jean", "en": "Jeans" },
+      "impostor": { "fr": "Jogging", "en": "Sweatpants" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tete-bonnet-casquette",
+      "mediaType": "text",
+      "theme": { "fr": "Couvre-chef", "en": "Headwear" },
+      "majority": { "fr": "Bonnet", "en": "Beanie" },
+      "impostor": { "fr": "Casquette", "en": "Cap" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "chic-costume-smoking",
+      "mediaType": "text",
+      "theme": { "fr": "Tenue de gala", "en": "Dress code chic" },
+      "majority": { "fr": "Costume", "en": "Suit" },
+      "impostor": { "fr": "Smoking", "en": "Tuxedo" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "haut-pull-hoodie",
+      "mediaType": "text",
+      "theme": { "fr": "Haut d'hiver", "en": "Cozy layer" },
+      "majority": { "fr": "Pull", "en": "Sweater" },
+      "impostor": { "fr": "Sweat à capuche", "en": "Hoodie" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "redoute-dentiste-orthodontiste",
+      "mediaType": "text",
+      "theme": { "fr": "Rendez-vous redouté", "en": "Dreaded appointment" },
+      "majority": { "fr": "Dentiste", "en": "Dentist" },
+      "impostor": { "fr": "Orthodontiste", "en": "Orthodontist" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sante-medecin-pharmacien",
+      "mediaType": "text",
+      "theme": { "fr": "Question santé", "en": "Health visit" },
+      "majority": { "fr": "Médecin", "en": "Doctor" },
+      "impostor": { "fr": "Pharmacien", "en": "Pharmacist" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "vue-lunettes-lentilles",
+      "mediaType": "text",
+      "theme": { "fr": "Problème de vue", "en": "Blurry vision fix" },
+      "majority": { "fr": "Lunettes", "en": "Glasses" },
+      "impostor": { "fr": "Lentilles", "en": "Contacts" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "coupe-coiffeur-barbier",
+      "mediaType": "text",
+      "theme": { "fr": "Nouvelle coupe", "en": "Fresh cut" },
+      "majority": { "fr": "Coiffeur", "en": "Hairdresser" },
+      "impostor": { "fr": "Barbier", "en": "Barber" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "uniforme-pompier-policier",
+      "mediaType": "text",
+      "theme": { "fr": "Métier en uniforme", "en": "Uniform job" },
+      "majority": { "fr": "Pompier", "en": "Firefighter" },
+      "impostor": { "fr": "Policier", "en": "Police officer" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "ete-serveur-barman",
+      "mediaType": "text",
+      "theme": { "fr": "Boulot d'été", "en": "Summer job" },
+      "majority": { "fr": "Serveur", "en": "Waiter" },
+      "impostor": { "fr": "Barman", "en": "Bartender" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "cuisine-chef-patissier",
+      "mediaType": "text",
+      "theme": { "fr": "Métier en cuisine", "en": "Kitchen job" },
+      "majority": { "fr": "Chef cuisinier", "en": "Chef" },
+      "impostor": { "fr": "Pâtissier", "en": "Pastry chef" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "tribunal-avocat-juge",
+      "mediaType": "text",
+      "theme": { "fr": "Au tribunal", "en": "In court" },
+      "majority": { "fr": "Avocat", "en": "Lawyer" },
+      "impostor": { "fr": "Juge", "en": "Judge" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "web-youtubeur-influenceur",
+      "mediaType": "text",
+      "theme": { "fr": "Métier 2.0", "en": "Internet job" },
+      "majority": { "fr": "Youtubeur", "en": "YouTuber" },
+      "impostor": { "fr": "Influenceur", "en": "Influencer" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "sons-dj-beatmaker",
+      "mediaType": "text",
+      "theme": { "fr": "Faiseur de sons", "en": "Music maker" },
+      "majority": { "fr": "DJ", "en": "DJ" },
+      "impostor": { "fr": "Beatmaker", "en": "Beatmaker" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "vert-agriculteur-jardinier",
+      "mediaType": "text",
+      "theme": { "fr": "Main verte", "en": "Green thumb" },
+      "majority": { "fr": "Agriculteur", "en": "Farmer" },
+      "impostor": { "fr": "Jardinier", "en": "Gardener" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "pouvoir-voler-teleportation",
+      "mediaType": "text",
+      "theme": { "fr": "Super-pouvoir", "en": "Superpower" },
+      "majority": { "fr": "Voler", "en": "Flying" },
+      "impostor": { "fr": "Téléportation", "en": "Teleportation" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "heros-batman-ironman",
+      "mediaType": "text",
+      "theme": { "fr": "Super-héros", "en": "Superhero" },
+      "majority": { "fr": "Batman", "en": "Batman" },
+      "impostor": { "fr": "Iron Man", "en": "Iron Man" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "conte-cendrillon-blancheneige",
+      "mediaType": "text",
+      "theme": { "fr": "Conte de fées", "en": "Fairy tale" },
+      "majority": { "fr": "Cendrillon", "en": "Cinderella" },
+      "impostor": { "fr": "Blanche-Neige", "en": "Snow White" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "epoque-pirate-viking",
+      "mediaType": "text",
+      "theme": { "fr": "Aventurier d'époque", "en": "Old-school raider" },
+      "majority": { "fr": "Pirate", "en": "Pirate" },
+      "impostor": { "fr": "Viking", "en": "Viking" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "monstre-zombie-vampire",
+      "mediaType": "text",
+      "theme": { "fr": "Monstre d'Halloween", "en": "Halloween monster" },
+      "majority": { "fr": "Zombie", "en": "Zombie" },
+      "impostor": { "fr": "Vampire", "en": "Vampire" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "hante-fantome-poltergeist",
+      "mediaType": "text",
+      "theme": { "fr": "Maison hantée", "en": "Haunted house" },
+      "majority": { "fr": "Fantôme", "en": "Ghost" },
+      "impostor": { "fr": "Poltergeist", "en": "Poltergeist" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "magie-licorne-pegase",
+      "mediaType": "text",
+      "theme": { "fr": "Créature magique", "en": "Magical creature" },
+      "majority": { "fr": "Licorne", "en": "Unicorn" },
+      "impostor": { "fr": "Pégase", "en": "Pegasus" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "geant-dragon-dinosaure",
+      "mediaType": "text",
+      "theme": { "fr": "Bête géante", "en": "Giant beast" },
+      "majority": { "fr": "Dragon", "en": "Dragon" },
+      "impostor": { "fr": "Dinosaure", "en": "Dinosaur" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "espace-astronaute-cosmonaute",
+      "mediaType": "text",
+      "theme": { "fr": "Conquête spatiale", "en": "Space race" },
+      "majority": { "fr": "Astronaute", "en": "Astronaut" },
+      "impostor": { "fr": "Cosmonaute", "en": "Cosmonaut" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "cosmos-lune-mars",
+      "mediaType": "text",
+      "theme": { "fr": "Destination spatiale", "en": "Space destination" },
+      "majority": { "fr": "La Lune", "en": "The Moon" },
+      "impostor": { "fr": "Mars", "en": "Mars" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "cielnuit-etoilefilante-comete",
+      "mediaType": "text",
+      "theme": { "fr": "Ciel nocturne", "en": "Night sky" },
+      "majority": { "fr": "Étoile filante", "en": "Shooting star" },
+      "impostor": { "fr": "Comète", "en": "Comet" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    },
+    {
+      "id": "dejecole-cantine-lunchbox",
+      "mediaType": "text",
+      "theme": { "fr": "Déj à l'école", "en": "School lunch" },
+      "majority": { "fr": "Cantine", "en": "Cafeteria" },
+      "impostor": { "fr": "Lunchbox", "en": "Packed lunch" },
+      "closeness": "medium",
+      "spicyLevel": 0
+    },
+    {
+      "id": "cartes-uno-huitamericain",
+      "mediaType": "text",
+      "theme": { "fr": "Jeu de cartes", "en": "Card game" },
+      "majority": { "fr": "Uno", "en": "Uno" },
+      "impostor": { "fr": "Huit américain", "en": "Crazy Eights" },
+      "closeness": "hard",
+      "spicyLevel": 0
+    }
+  ]
+}

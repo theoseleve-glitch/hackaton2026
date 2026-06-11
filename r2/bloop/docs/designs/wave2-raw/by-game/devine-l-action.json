@@ -1,0 +1,185 @@
+{
+  "id": "devine-l-action",
+  "nameFr": "Devine l'Action",
+  "nameEn": "Guess the Action",
+  "taglineFr": "Toute la pièce connaît ton action — interdit de te la dire !",
+  "taglineEn": "The whole room knows your action — they just can't say it.",
+  "template": "TRUTH_DARE",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "ready",
+      "durationSec": 6,
+      "description": "Turn entry (rides TRUTH_DARE 'choose' with choiceMode:'fixed-action'). The performer (next connected seat in the seeded rotation) stands up. Helpers' phones show the SECRET action text + the constraint card (channel label + rule + forbidden words if taboo). The performer's phone shows ONLY the constraint card and 'Debout ! / Stand up!'. Ends when the performer taps 'Prêt / Ready' or on deadline (auto-advance — a passive performer never blocks). phaseKey = ready:<turnSeq>."
+    },
+    {
+      "key": "act",
+      "durationSec": 75,
+      "description": "The physical beat (rides TRUTH_DARE 'prompt', promptHiddenFromActive:true). Helpers guide the performer using ONLY the allowed channel (mime / sounds / 3-words / forbidden-words / freeze-frames); the performer physically attempts the action. Performer actions: 'Je l'ai fait ! / I did it!' (declare done) → verdict; 'J'abandonne / Give up' (declare chickened) → score with 0 pts; 'Passer / Pass' (if passesLeft > 0) → score with +2, burns 1 pass. Deadline → auto-fail (0 pts, no pass spent). playerLeft(performer) → auto-fail, advance turn. The action text is NEVER present in the performer's view (leakedSecrets-audited)."
+    },
+    {
+      "key": "verdict",
+      "durationSec": 15,
+      "description": "Group adjudication (TRUTH_DARE verdict, unchanged). Every connected helper votes 'Réussi / Nailed it' or 'Raté / Failed' — did the performer actually do the action, guided only through the allowed channel? Resolves on all-voted OR deadline (abstainers ignored). doneFraction >= 0.5 → réussi; ties → réussi; zero votes cast → réussi (benefit of the doubt — funny never cruel). Individual votes hidden until score; live view shows counts only (votesIn/votersExpected)."
+    },
+    {
+      "key": "score",
+      "durationSec": 7,
+      "description": "Atomic reveal (TRUTH_DARE score). The action text is finally shown to the performer ('L'action était… / The action was…'), verdict stamp, public tally, points burst: réussi → performer +10, EVERY connected helper +5 (cooperative — new helperPoints param); pass → performer +2; fail/give-up/timeout → 0 for all. Deadline → enterTurn (next performer) or 'over' after totalRounds laps of the rotation (gameOver effect with cloned scores). Lap wrap emits analytics round_completed = the interstitial ad slot; the shell keys the ad off the phaseKey transition."
+    }
+  ],
+  "params": {
+    "choiceMode": "fixed-action",
+    "promptHiddenFromActive": true,
+    "totalRounds": 2,
+    "chooseMs": 6000,
+    "promptMs": 75000,
+    "verdictMs": 15000,
+    "scoreMs": 7000,
+    "passesPerPlayer": 1,
+    "donePoints": 10,
+    "helperPoints": 5,
+    "passPoints": 2,
+    "chickenedPoints": 0,
+    "dareBonus": 0,
+    "verdictThreshold": 0.5,
+    "allowedIntensities": [
+      "soft",
+      "party"
+    ]
+  },
+  "contentItemShape": "One pack item = one (secret action × pre-paired help-channel) card. Authoring shape is bilingual; the publish pipeline splits it into per-locale packs (gda-classic-fr / gda-classic-en) per the platform's single-locale data.locale convention. Shape: { id: string (stable unique, e.g. \"gda-party-007\"); action: { fr, en } (imperative secret action the performer must end up doing — shown to helpers only until the score reveal); channel: 'mime' | 'sounds' | 'three-words' | 'taboo' | 'statues' (the allowed help channel, curated per item offline); channelLabel: { fr, en } (big public card title, e.g. \"MIME UNIQUEMENT\" / \"MIME ONLY\"); channelRule: { fr, en } (one-line rule rendered on every phone); forbiddenWords?: { fr: string[3], en: string[3] } (REQUIRED iff channel === 'taboo'; shown ONLY on helper phones — hidden from the performer like the action); intensity: 'soft' | 'party' | 'spicy' (spicy ships only in a separate 18+ age-gated sibling config); difficulty: 1 | 2 | 3 (pre-computed offline by the AI pipeline, human-reviewed); props: boolean (needs physical objects — filterable); tags: string[] }. Redaction contract: action and forbiddenWords are secrets w.r.t. the performer during ready/act/verdict; everything else is public.",
+  "sampleItems": [
+    {
+      "id": "gda-soft-001",
+      "action": {
+        "fr": "Fais semblant de promener un chien invisible qui tire sur sa laisse",
+        "en": "Pretend to walk an invisible dog that keeps pulling on its leash"
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "animals",
+        "physical"
+      ]
+    },
+    {
+      "id": "gda-party-007",
+      "action": {
+        "fr": "Chante « Joyeux anniversaire » à genoux devant la personne la plus proche",
+        "en": "Sing 'Happy Birthday' on your knees to the nearest player"
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": [
+          "chanter",
+          "anniversaire",
+          "genoux"
+        ],
+        "en": [
+          "sing",
+          "birthday",
+          "knees"
+        ]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "music",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-party-012",
+      "action": {
+        "fr": "Danse le robot, puis tombe en panne au milieu de la pièce comme une machine qui s'éteint",
+        "en": "Do the robot dance, then break down mid-room like a dying machine"
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dance",
+        "silly"
+      ]
+    }
+  ],
+  "physical": "standup",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundSeconds": 75,
+  "roundsDefault": 10,
+  "recommendations": [
+    {
+      "question": "THE brief's open question: quel mécanisme de 'moyens d'aide autorisés' (cris, mimes… ?) marchera le mieux ?",
+      "recommendation": "A per-round CONSTRAINT CARD ('Canal d'aide') drawn by the app — but pre-paired with each action at authoring time, not rolled independently at runtime. Launch catalog of 5 channels: (1) MIME ONLY — gestures, zero sound (the genre classic); (2) SOUND EFFECTS ONLY — noises/onomatopoeia, no words; (3) 3 WORDS MAX — each helper has a lifetime budget of 3 spoken words this round, phone shows the budget big; (4) FORBIDDEN WORDS (taboo) — helpers talk freely but may never say the 3 forbidden words displayed ONLY on helper phones; (5) FREEZE FRAMES — helpers strike frozen poses and may only re-pose when the performer claps. V2 channels: DRAW IN THE AIR, and ONE MOUTH (the app secretly designates a single helper allowed to speak — a phone-kept sub-role).",
+      "why": "Pre-pairing (offline, AI-assisted, human-reviewed) guarantees every action × channel combo is feasible AND funny — an independent runtime draw produces duds like a sound-based action under a silent channel. It keeps the runtime 100% deterministic (the card is pack data, shuffled by the seeded deck draw TRUTH_DARE already has), gives content ops a difficulty dial, and each card is a recognizable TikTok format. Taboo and One-Mouth are the most phone-native: the phone genuinely acts as secret-keeper, which plain living-room charades can't replicate."
+    },
+    {
+      "question": "How is success adjudicated with zero runtime AI and no microphone?",
+      "recommendation": "Reuse the TRUTH_DARE group-verdict machinery verbatim: the performer taps 'I did it!', all connected helpers vote Réussi/Raté within 15s, simple majority with ties and zero-votes resolving to réussi. Deadline always resolves; abstainers are ignored.",
+      "why": "Deterministic, never blocks the room (hard constraint), and peer judgment is itself a party beat. Benefit-of-the-doubt defaults match 'funny never cruel'. Any 'the AI decides if you did it' reading of the brief is redesigned away: the room is the referee, the phone is timer + scorer."
+    },
+    {
+      "question": "New template or reuse? (catalog-economics call)",
+      "recommendation": "Ship as TRUTH_DARE@2 — a new-params evolution, NOT a new template and NOT zero-code. New params: promptHiddenFromActive (redacts action text + forbiddenWords from the performer's view), choiceMode:'fixed-action' (skips the Truth/Dare choose phase; repurposes it as the 6s ready beat), helperPoints (cooperative scoring). Content entries gain channel/channelLabel/channelRule/forbiddenWords fields.",
+      "why": "Rotation, turnSeq phaseKey, declare→verdict→score, pass economy, intensity tiers, deck-draw-without-repeat, presence handling and all timeout behaviors map 1:1 onto TRUTH_DARE as designed. The single structural delta is one view-redaction branch + a leakedSecrets test. This follows the architecture doc's own precedent (NPC Infiltrator = content shape + one small param on SECRET_ROLE), and after this deploy every future variant (themed packs, spicy pack) is pure Cadence-B config/content."
+    },
+    {
+      "question": "Helpers score +5 on réussi — doesn't that bias the verdict to 'yes'?",
+      "recommendation": "Accept the generosity bias in v1 and keep helper points contingent on réussi; make the tally public at score so trolling/rubber-stamping is socially visible. Monitor the réussi-rate analytic; if it exceeds ~95% the verdict is dead theater — then add a third verdict option 'on a triché / we cheated' (voids helper points, performer keeps theirs) as a TRUTH_DARE@2.1 param.",
+      "why": "It's a cooperative game: the verdict's real job is stopping blatant fails and channel cheating, not precision refereeing. A punitive accurate-verdict economy would incentivize voting friends down — exactly the cruelty the brand book forbids."
+    },
+    {
+      "question": "Session length and round structure?",
+      "recommendation": "One 'round' as players perceive it = one performer turn, ~75s typical (6 ready + ~45 act, usually ended early by 'I did it!' + 15 verdict + 7 score; 103s absolute worst case). params.totalRounds = 2 laps of the rotation (everyone performs twice) for rooms of 3–7 → 8–14 min sessions; recommend a hostTunable or auto-scale to 1 lap at 8+ players. Pass economy: 1 pass per player (escape hatch for an action you really won't do).",
+      "why": "Keeps the session TikTok-native (many ~75s beats), and the deadline chain guarantees a disconnected or frozen performer costs the room at most one act-timer before the rotation moves on."
+    },
+    {
+      "question": "Spicy content?",
+      "recommendation": "Default config ships soft+party only (spicyLevel 0). A separate sibling game_config ('devine-l-action-spicy') pins an 18+ pack with tone:'spicy', minAge:18, behind the platform age gate — same template, pure config.",
+      "why": "Physical dares escalate fast; keeping spice in a separate age-gated catalog entry matches the gameConfigSchema refinement (spicy ⇒ minAge ≥ 18) and store compliance, with zero extra code."
+    }
+  ],
+  "risks": [
+    "Redaction is the load-bearing surface: the secret action text and taboo forbiddenWords must NEVER appear in the performer's view during ready/act/verdict (only at score reveal). Mandatory leakedSecrets audit treating both as secrets w.r.t. the active player, plus a field-level test that the serialized performer view contains no action/forbiddenWords strings.",
+    "Not pure Cadence-B: requires a TRUTH_DARE@2 code deploy (promptHiddenFromActive, choiceMode, helperPoints params + content-schema fields) before the config can ship. Small, but it is new reducer/view code on the template, not zero code.",
+    "Verdict generosity bias: helpers profit from voting réussi, so the verdict skews yes. Accepted by design (cooperative), but track réussi-rate analytics; >95% means the verdict phase is pure theater and needs the 'we cheated' third option.",
+    "Channel enforcement is social-only — the app cannot hear the room. The constraint card must be unmissable on every phone (big label + 1-line rule every phase) and the verdict copy must say 'vote Raté if the helpers cheated the channel'.",
+    "Physical safety: actions are performed for real in a living room. The offline pipeline must lint out risky verbs (climbing, chugging, running blindfolded, anything involving non-players) and a human must review every pack; props:true items must be filterable per room.",
+    "Pack sizing: deck-draw-without-repeat needs >= maxPlayers x totalRounds entries per intensity tier (16 x 2 = 32 minimum; author 60+ per tier per locale) or the game ends early on pool exhaustion (graceful, but short).",
+    "3-player floor: with only 2 helpers, mime/sounds/taboo still work but the verdict is a 2-vote majority and the ONE MOUTH channel degenerates — that channel is correctly deferred to v2 and should carry a minPlayers hint in pack data.",
+    "Disconnects: performer leaving mid-act resolves as fail-and-advance (never blocks); but a wave of helper disconnects during verdict can empty the voter set → resolves réussi by default, which a griefing duo could exploit in tiny rooms. Acceptable at this stakes level; monitor."
+  ]
+}

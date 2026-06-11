@@ -1,0 +1,285 @@
+{
+  "id": "devine-la-question",
+  "nameFr": "Devine la Question",
+  "nameEn": "Guess the Question",
+  "taglineFr": "Tu as sa réponse. Mais c'était quoi la question ?",
+  "taglineEn": "You've got their answer. But what was the question?",
+  "template": "NEW:REVERSE_GUESS",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "answer:r{n}",
+      "durationSec": 20,
+      "description": "The spotlight player (the 'mystery player', rotating through a seeded seatOrder like HOT_SEAT) privately sees the secret question + 3-4 answer options and picks their honest answer. Everyone else sees only 'X is answering a secret question...' (no question, no options — zero leak). Early exit: answer submitted -> immediately enter guess:h0. Timeout/answerer-left: round is VOIDED (voidRound=true) -> jump to reveal showing 'no answer — round void', 0 points, advance. A passive answerer never blocks the room."
+    },
+    {
+      "key": "guess:r{n}:h0",
+      "durationSec": 20,
+      "description": "Tier 0 (no hint, max points). All players now see the chosen ANSWER text + a seeded-shuffled list of 5 candidate questions (1 real + 4 decoys). Guessers lock ONE candidate (first-write-wins; the lock records tier=0 worth 300 pts if correct). View shows locked: Record<PlayerId,boolean> only — never anyone's pick. Early exit: all connected guessers locked -> reveal. Deadline -> hint 1 revealed, enter h1 (phaseKey change re-arms the alarm)."
+    },
+    {
+      "key": "guess:r{n}:h1",
+      "durationSec": 20,
+      "description": "Tier 1: pre-authored hint #1 (from the content pack) is now public to everyone. Unlocked guessers may still lock (tier=1, 200 pts if correct). Early exit: all locked -> reveal. Deadline -> hint 2 revealed, enter h2."
+    },
+    {
+      "key": "guess:r{n}:h2",
+      "durationSec": 20,
+      "description": "Tier 2 (last chance): hint #2 public. Locks here are worth 100 pts if correct. Early exit: all locked -> reveal. Deadline -> reveal regardless (no-guess players simply score 0 — abstention is free, never blocking)."
+    },
+    {
+      "key": "reveal:r{n}",
+      "durationSec": 8,
+      "description": "Atomic promotion: real question highlighted among the candidates, every guesser's pick + lock tier flips public, +points count-up (gained deltas), mystery player's read-bonus shown. Emits analytics round_revealed. Deadline -> next round's answer, or scoreboard if due/last round."
+    },
+    {
+      "key": "scoreboard:r{n}",
+      "durationSec": 6,
+      "description": "Running-totals beat inserted every scoreboardEvery=2 rounds and always once before over — this is the interstitial ad slot (shell fires AdMob off the phaseKey transition to scoreboard:*, subject to remote-config caps). Deadline -> next round or over."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Terminal, untimed (phaseDurationMs=null). gameOver effect with cloned final scores; shell awards session XP by placement (synthesis §1.7), reducer is a no-op."
+    }
+  ],
+  "params": {
+    "totalRounds": 6,
+    "answerMs": 20000,
+    "hintTiers": 3,
+    "hintIntervalMs": 20000,
+    "revealMs": 8000,
+    "scoreboardMs": 6000,
+    "scoreboardEvery": 2,
+    "decoyCount": 4,
+    "tierPoints": [
+      300,
+      200,
+      100
+    ],
+    "readerPointsPerCorrectGuess": 75,
+    "lockOnSubmit": true
+  },
+  "contentItemShape": "One pack item = { id: string (stable, e.g. \"q_mirror\"); question: {fr,en} — the secret real question (max 140 chars); answers: Array<{fr,en}> of 3-4 honest-answer options the mystery player picks from — each option MUST read as a plausible answer to the real question AND to every decoy (this cross-plausibility is the whole game and the offline-AI scoring target); decoys: Array<{fr,en}> of exactly decoyCount (4) fake questions, same register/length as the real one; hints: Array<{fr,en}> of exactly hintTiers-1 (2) progressive hints about the real question, ordered least->most revealing, never quoting the question verbatim; tags: string[] (theme/curation); spicy?: 0|1|2 (pack-level tone still rules catalog gating). Pack envelope: { locale-parallel FR+EN inline per item as shown (the shell serves the room-locale strings; both locales mandatory per item), version: int, items: Item[] }. Sizing lint: >= totalRounds(6) drawable items minimum, 40+ recommended. At init the module seed-shuffles items, takes totalRounds, and per item seed-shuffles [real + decoys] into a candidates array storing realIndex as HIDDEN state.",
+  "sampleItems": [
+    {
+      "id": "q_mirror",
+      "question": {
+        "fr": "Combien de fois par jour tu te regardes dans le miroir ?",
+        "en": "How many times a day do you check yourself out in the mirror?"
+      },
+      "answers": [
+        {
+          "fr": "Jamais, ou presque",
+          "en": "Almost never"
+        },
+        {
+          "fr": "Deux ou trois fois",
+          "en": "Two or three times"
+        },
+        {
+          "fr": "J'ai arrêté de compter",
+          "en": "I've lost count"
+        }
+      ],
+      "decoys": [
+        {
+          "fr": "Combien de fois par semaine tu fais vraiment du sport ?",
+          "en": "How many times a week do you actually work out?"
+        },
+        {
+          "fr": "Combien de fois tu appuies sur snooze le matin ?",
+          "en": "How many times do you hit snooze in the morning?"
+        },
+        {
+          "fr": "Combien de fois tu as pleuré devant un film ?",
+          "en": "How many times have you cried at a movie?"
+        },
+        {
+          "fr": "Combien de fois tu as ghosté quelqu'un ?",
+          "en": "How many times have you ghosted someone?"
+        }
+      ],
+      "hints": [
+        {
+          "fr": "Ça se passe souvent dans la salle de bain.",
+          "en": "It usually happens in the bathroom."
+        },
+        {
+          "fr": "L'ego est directement concerné.",
+          "en": "Ego is directly involved."
+        }
+      ],
+      "tags": [
+        "habits",
+        "silly"
+      ],
+      "spicy": 0
+    },
+    {
+      "id": "q_lottery_call",
+      "question": {
+        "fr": "Qui tu appellerais en premier si tu gagnais au loto ?",
+        "en": "Who would you call first if you won the lottery?"
+      },
+      "answers": [
+        {
+          "fr": "Ma mère",
+          "en": "My mom"
+        },
+        {
+          "fr": "Mon meilleur pote",
+          "en": "My best friend"
+        },
+        {
+          "fr": "Personne, je disparais",
+          "en": "No one — I'd vanish"
+        }
+      ],
+      "decoys": [
+        {
+          "fr": "Qui tu appellerais pour t'aider à cacher un corps ?",
+          "en": "Who would you call to help you hide a body?"
+        },
+        {
+          "fr": "Qui te connaît le mieux au monde ?",
+          "en": "Who knows you best in the whole world?"
+        },
+        {
+          "fr": "Qui tu préviendrais en premier si tu partais vivre à l'étranger ?",
+          "en": "Who would you tell first if you moved abroad?"
+        },
+        {
+          "fr": "À qui tu confierais ton téléphone déverrouillé ?",
+          "en": "Who would you trust with your unlocked phone?"
+        }
+      ],
+      "hints": [
+        {
+          "fr": "Il y a beaucoup d'argent en jeu.",
+          "en": "There's a lot of money involved."
+        },
+        {
+          "fr": "Tout commence par un petit ticket.",
+          "en": "It all starts with a little ticket."
+        }
+      ],
+      "tags": [
+        "social",
+        "money"
+      ],
+      "spicy": 0
+    },
+    {
+      "id": "q_no_phone",
+      "question": {
+        "fr": "Combien de temps tu tiendrais sans ton téléphone ?",
+        "en": "How long could you last without your phone?"
+      },
+      "answers": [
+        {
+          "fr": "Une heure, grand max",
+          "en": "An hour, tops"
+        },
+        {
+          "fr": "Une journée",
+          "en": "One day"
+        },
+        {
+          "fr": "Une semaine, tranquille",
+          "en": "A week, easy"
+        }
+      ],
+      "decoys": [
+        {
+          "fr": "Combien de temps tu tiendrais dans une émission de télé-réalité ?",
+          "en": "How long would you last on a reality TV show?"
+        },
+        {
+          "fr": "Combien de temps tu tiendrais sans parler du tout ?",
+          "en": "How long could you go without talking at all?"
+        },
+        {
+          "fr": "Combien de temps tu tiendrais sans sucre ?",
+          "en": "How long could you go without sugar?"
+        },
+        {
+          "fr": "Combien de temps tu tiendrais en rando sans te plaindre ?",
+          "en": "How long could you hike without complaining?"
+        }
+      ],
+      "hints": [
+        {
+          "fr": "C'est une dépendance très moderne.",
+          "en": "It's a very modern addiction."
+        },
+        {
+          "fr": "Tu es probablement en train de le tenir, là.",
+          "en": "You're probably holding it right now."
+        }
+      ],
+      "tags": [
+        "habits",
+        "tech"
+      ],
+      "spicy": 0
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundSeconds": 70,
+  "roundsDefault": 6,
+  "newTemplateSpec": "TEMPLATE: REVERSE_GUESS — rotating-spotlight secret-question MCQ with progressive pre-authored hints and tier-decaying scoring. Implements GameModule<RGState, RGAction, RGView, RGContent> on the existing contract (zero amendments: phaseKey A1 + the §1 kit cover everything). minPlayers 3 (1 answerer + 2 guessers minimum for social spread), maxPlayers 16.\n\nSTATE (JSON-safe, null-proto maps via emptyPlayerMap):\nRGConfig { totalRounds:6; answerMs:20000; hintTiers:3; hintIntervalMs:20000; revealMs:8000; scoreboardMs:6000; scoreboardEvery:2; decoyCount:4; tierPoints:[300,200,100]; readerPointsPerCorrectGuess:75 }.\nRGState {\n  config; players: PlayerId[]; seatOrder: PlayerId[] (shuffle(createRng(seed), players));\n  rounds: Array<{ itemId; answerOptions: string[]; candidates: string[] /* seeded shuffle of [realQuestion, ...decoys], PUBLIC from guess phase */; realIndex: number /* HIDDEN until reveal */; hints: string[] /* public once their tier opens */ }> — built at init: shuffle items, take min(totalRounds, items.length), per-round seeded candidate shuffle; locale strings pre-resolved by the shell-selected pack (init is locale-free per synthesis §3.3);\n  round; totalRounds; seatIndex; phase: 'answer'|'guess'|'reveal'|'scoreboard'|'over'; hintTier: number; sinceScoreboard;\n  chosenAnswer: number|null  // HIDDEN during 'answer' (only the answerer's own echo); PUBLIC from 'guess';\n  guesses: Record<PlayerId, { candidateIndex:number; tier:number }>  // HIDDEN buffer until reveal; owner-echo only;\n  voidRound: boolean; scores: Record<PlayerId, number>; connected: Presence (kit §1.2);\n}\n\nACTIONS (zod at DO boundary; no free text anywhere — zero moderation surface):\nRGAction = { kind:'answer'; answerIndex:number } | { kind:'guess'; candidateIndex:number }.\n\nREDUCE TABLE (reject = same state reference, per contract):\n- answer + action(answer) from currentSeat (seatOrder[seatIndex]) with valid index -> set chosenAnswer, phase='guess', hintTier=0. From anyone else, or invalid index: no-op.\n- answer + deadline, OR playerLeft(answerer) while unanswered -> voidRound=true, phase='reveal' (reveal renders 'no answer — round void', all gained=0). Never blocks.\n- guess + action(guess) from a connected non-answerer NOT already in guesses (first-write-wins lock) with valid candidateIndex -> record {candidateIndex, tier: hintTier}. If allActed(expected = connectedPlayers minus answerer, guesses) -> resolveReveal early. Duplicate/answerer/out-of-range: no-op.\n- guess + deadline -> if hintTier+1 < hintTiers: hintTier++ (hint becomes public; phaseKey changes so the shell re-arms hintIntervalMs); else resolveReveal.\n- resolveReveal: for each guesser g with guesses[g].candidateIndex === realIndex: gained[g] = tierPoints[guesses[g].tier]; answerer gained = correctCount * readerPointsPerCorrectGuess (0 if voidRound). scores += gained. Emits analytics round_revealed {round, correct, tierHistogram, voided}; phase='reveal'. Guesses stay in state through reveal (tracer pattern — view recomputes), cleared on startNextRound.\n- reveal + deadline -> advance: last round OR sinceScoreboard<=0 -> phase='scoreboard' (emit analytics round_completed — the spec §8.6 lap boundary), else startNextRound.\n- scoreboard + deadline -> round+1 >= totalRounds ? gameOver (cloned scores) : startNextRound (round++, seatIndex = nextActiveSeat(seatOrder, seatIndex, connected), phase='answer', guesses cleared, chosenAnswer=null, voidRound=false, sinceScoreboard rotated).\n- playerLeft: connected=false; if phase='guess' re-check allActed (their absence may complete the round); if they are the answerer in 'answer', void (above); mid-'guess' answerer leave is harmless (chosenAnswer already public). playerRejoined: connected=true (can only ADD an expected actor — no resolve check needed). over: no-op on everything.\n\nPHASE TIMING: phaseDurationMs = answerMs | hintIntervalMs | revealMs | scoreboardMs | null('over'). phaseKey = 'answer:r{round}' | 'guess:r{round}:h{hintTier}' | 'reveal:r{round}' | 'scoreboard:r{round}' | 'over' — changes per hint tier (re-arms the single alarm, synthesis §1.6 uniqueness rule) and never embeds realIndex or any pick.\n\nVIEW REDACTION MATRIX (viewer may be any string; spectators get the guesser projection minus owned echoes):\n- 'answer': answerer sees { role:'mystery', question (real text), answerOptions, myPick: chosenAnswer-echo }. Guessers/spectators see { role:'guesser'|'spectator', mysteryPlayer: PlayerId, scores } — NO question, NO options, NO candidates (an option list could be paired with later candidates to triangulate).\n- 'guess': everyone sees { mysteryPlayer, chosenAnswerText (public), candidates: string[], hintTier, hintsRevealed: hints[0..hintTier-1], locked: Record<PlayerId,boolean> (booleans ONLY), scores }. Owner echo myGuess = guesses[viewer] ?? null. The answerer's view additionally carries realIndex (it is their own secret; they hold it in the room anyway). NEVER in any guesser/spectator view: realIndex, any other player's guess value.\n- 'reveal': all public — realIndex, per-player { candidateIndex, tier }, gained deltas, voidRound, scores. 'scoreboard'/'over': standings + scores only.\n- Tests: leakedSecrets audit treating each player's guess (namespaced candidate token) as an owner secret during 'guess', plus field-level asserts that serialized guesser/spectator views in 'answer' contain no question/options and in 'guess' contain no realIndex/guesses map. Replay test pins the same pack version (synthesis §3.2).\n\nPARAMS SCHEMA for game_config (templateParamsSchema entry, .strict()): { totalRounds: int 1..10?, answerMs: int 10000..45000?, hintTiers: int 2..4?, hintIntervalMs: int 10000..40000?, decoyCount: int 3..6?, tierPoints: int[] length===hintTiers?, readerPointsPerCorrectGuess: int 0..500?, scoreboardEvery: int 1..8? } — future configs (spicy pack variant, 'sprint' 2-tier mode) are Cadence-B content ops on this one module.\n\nBUILD ORDER FIT: slots after the designed four + INPUT_GUESS; reuses Presence/allActed/nextActiveSeat/tally-conventions/gameOver from the kit and the scoreboard:* ad-slot pattern proven by HOT_SEAT. No new event or effect types.",
+  "recommendations": [
+    {
+      "question": "App-driven progressive hints, player-given hints, or full autonomy without the app? (the co-founder's explicit open question)",
+      "recommendation": "FIRM: app-driven, PRE-AUTHORED progressive hints from the content pack — 2 hints over 3 guess tiers, one revealed per deadline. Reject 'full autonomy' as a product mode, and reject player-given hints as the canonical channel (table talk stays welcome as free social texture: the mystery player's poker face IS an unofficial hint).",
+      "why": "(1) Full autonomy needs no app at all — no timers, no scoring, no reveal beat, no ad slots, no retention; it's a parlor game we'd be giving away, not a Bloop game. (2) Player-given hints violate the never-block rule (a shy or disconnected answerer stalls the room with no deadline semantics), are unscorable, and if typed they open the platform's free-text moderation surface for marginal value. (3) Pre-authored hints are the only version compatible with the deterministic-runtime constraint (no live AI) AND they create the game's signature mechanic: the 300/200/100 tier ladder turns each hint into a risk/reward beat — lock early for glory or wait and play safe. The brief's 'AI gives hints' becomes an offline pipeline that writes the hints into the pack."
+    },
+    {
+      "question": "Hint cadence: the brief suggests every 30 seconds — keep it?",
+      "recommendation": "No — 20 seconds per tier (hintIntervalMs=20000), 3 tiers, worst case 60s of guessing, and the phase ends early the moment every connected guesser has locked.",
+      "why": "30s x 3 tiers = 90s of guessing per round breaks the 'rounds short and TikTok-native' rule (a full round would push 2 minutes). 20s is enough to read 5 candidates and commit, and early-exit-on-allActed means fast tables see ~35-45s rounds in practice."
+    },
+    {
+      "question": "How do guessers express 'the question': free text or multiple choice?",
+      "recommendation": "Multiple choice — 1 real question + 4 pre-authored decoys, seed-shuffled per round. Free-text guessing stays out of v1.",
+      "why": "Free text against a target question is undecidable deterministically (normalizeText can't judge 'is this the same question?'), kills scoring fairness, and opens the gameplay-text moderation path. MCQ is fully deterministic, instantly scorable per tier, and the decoys are themselves the comedy ('Who would you call to hide a body?'). Players still shout wild guesses out loud — the room keeps the improv, the app keeps the score."
+    },
+    {
+      "question": "Guess locking: last-write-wins (HOT_SEAT's choice) or lock-on-submit?",
+      "recommendation": "Lock-on-submit (first write wins), deliberately diverging from HOT_SEAT §4.1.",
+      "why": "The tier ladder is the game: your points are set by WHEN you lock. If picks were editable, the dominant strategy is to 'park' a guess at tier 0 and edit it after every hint, collapsing the risk/reward into everyone scoring tier-0 points with tier-2 information. Locking makes commitment the skill."
+    },
+    {
+      "question": "Does the mystery player score, and does scoring corrupt honest answering?",
+      "recommendation": "Yes: +75 per correct guesser (readerPointsPerCorrectGuess), 0 on a voided round. No honesty enforcement.",
+      "why": "Same alignment trick as HOT_SEAT's readPoints: rewarding the answerer when friends decode them incentivizes picking the answer that is genuinely, recognizably THEM (an arbitrary troll answer scores the answerer nothing). Honesty can't be verified by a reducer anyway — incentive design is the right tool, and 'your friends couldn't find the question' is its own social punishment."
+    },
+    {
+      "question": "Is this a config of an existing template (HOT_SEAT) or new code?",
+      "recommendation": "New template REVERSE_GUESS (Cadence A, one deploy), per the honesty standard of the template-architecture doc §3.2. After it ships, variants (spicy pack, 2-tier 'sprint' mode, themed packs) are pure Cadence-B game_configs.",
+      "why": "HOT_SEAT is simultaneous input on a PUBLIC question; this needs sequential answer->guess phases, a per-round redacted secret (realIndex), hint-tier sub-phases with their own deadlines/phaseKeys, and tier-decaying points — a different state machine, far beyond a 'small reducer branch'. Claiming it as config would repeat the '95% zero-code' overstatement that doc explicitly corrects. It reuses the full engine kit and the proven scoreboard ad-slot pattern, so build cost is one game module, zero contract amendments."
+    },
+    {
+      "question": "What does the offline AI pipeline actually produce?",
+      "recommendation": "Per item: generate decoy questions and hints, then SCORE cross-plausibility (every answer option must read as a sane answer to the real question AND all 4 decoys; hints must narrow without giving away) — auto-reject items below threshold, then run the standard gate (schema, profanity scan, FR/EN naturalness, replay smoke) before any KV flag flip at rolloutPct 5.",
+      "why": "Decoy quality IS the game's difficulty curve and comedy; humans authoring 40+ cross-plausible items in two locales is the bottleneck. This is exactly the template-architecture §6 pipeline — AI as content op behind the same validation gate as a human, never a runtime dependency."
+    }
+  ],
+  "risks": [
+    "Decoy quality is load-bearing: weak decoys make tier-0 trivial (everyone scores 300, no tension), over-clever decoys make it a 20% lottery. Mitigation: offline cross-plausibility scoring + the rolloutPct 5% analytics gate (watch correct-rate by tier; target ~25-40% correct at tier 0, ~70%+ by tier 2).",
+    "New-template cost: this is Cadence-A code (reducer + client screen + registry entries + redaction tests), not a config-only ship; it should slot into the build order after the engine kit and ideally after one rotation game (HOT_SEAT) has proven nextActiveSeat and the scoreboard ad slot.",
+    "Redaction surface: realIndex and the guesses buffer are per-round secrets; a leak (e.g. candidates accidentally ordered real-first, or realIndex in a guesser view) kills the round invisibly. Mandatory leakedSecrets audit + field-level view-serialization tests + seeded candidate shuffle.",
+    "Answerer no-show voids the round (deadline or disconnect during 'answer'): correct for never-block, but a flaky host phone could void several rounds; the shell's grace/rejoin handling plus the 20s answer window keep this rare — monitor voided-round rate at 5% rollout.",
+    "Worst-case round length is ~88s (20+60+8) if nobody locks early; big rooms (12-16) with slow tables may drag — config lever already exists (hintTiers:2 / hintIntervalMs:15000 'sprint' variant as a Cadence-B config).",
+    "Mystery-player trolling (picking a random answer to confuse) is only soft-mitigated by reader points; if analytics show high troll rates, consider a v2 'group calls bluff' verdict — out of scope for v1.",
+    "Tier-camping meta: if playtests show everyone waits for hint 2, the 300/200/100 gradient is too flat — tierPoints is a config param, tune without deploy.",
+    "Bilingual packs: hints and decoys must be NATURAL in both FR and EN (not translated mush) and the cross-plausibility must hold in BOTH locales independently — the §6 gate must run per locale, doubling curation load.",
+    "Item ambiguity vs honesty: answer options must be vague enough to fit 5 questions yet specific enough that the answerer's pick feels personal; this narrow authoring corridor is why the pack needs 40+ vetted items before launch (sizing lint: >= totalRounds, recommended 40+)."
+  ]
+}

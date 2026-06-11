@@ -1,0 +1,1615 @@
+{
+  "gameId": "tu-preferes",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "wyr-sausage-fingers",
+      "optionA": { "fr": "Avoir des saucisses cocktail à la place des doigts", "en": "Have cocktail sausages for fingers" },
+      "optionB": { "fr": "Transpirer de la mayonnaise", "en": "Sweat mayonnaise" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["classic", "gross-funny"]
+    },
+    {
+      "id": "wyr-history-vs-gallery",
+      "optionA": { "fr": "Que tes potes lisent tout ton historique de recherche", "en": "Your friends read your entire search history" },
+      "optionB": { "fr": "Que tes parents fassent défiler toute ta galerie photos", "en": "Your parents scroll through your whole camera roll" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "embarrassing", "debate-starter"]
+    },
+    {
+      "id": "wyr-animals-vs-languages",
+      "optionA": { "fr": "Pouvoir parler avec les animaux", "en": "Be able to talk to animals" },
+      "optionB": { "fr": "Parler couramment toutes les langues du monde", "en": "Speak every human language fluently" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "classic", "debate-starter"]
+    },
+    {
+      "id": "wyr-fly-low-vs-invisible-awkward",
+      "optionA": { "fr": "Voler, mais seulement à 30 cm du sol", "en": "Fly, but only one foot off the ground" },
+      "optionB": { "fr": "Être invisible, mais seulement quand personne ne te regarde", "en": "Be invisible, but only when nobody is looking" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["superpower", "useless-powers"]
+    },
+    {
+      "id": "wyr-no-cheese-vs-no-bread",
+      "optionA": { "fr": "Ne plus jamais manger de fromage", "en": "Never eat cheese again" },
+      "optionB": { "fr": "Ne plus jamais manger de pain", "en": "Never eat bread again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "debate-starter"]
+    },
+    {
+      "id": "wyr-past-vs-future",
+      "optionA": { "fr": "Voyager 100 ans dans le passé", "en": "Travel 100 years into the past" },
+      "optionB": { "fr": "Voyager 100 ans dans le futur", "en": "Travel 100 years into the future" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time-travel", "classic"]
+    },
+    {
+      "id": "wyr-laugh-track-vs-narrator",
+      "optionA": { "fr": "Avoir des rires enregistrés à chacune de tes blagues", "en": "Have a laugh track play after every joke you make" },
+      "optionB": { "fr": "Avoir une voix off qui commente tous tes échecs", "en": "Have a narrator announce every one of your fails" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "daily-life"]
+    },
+    {
+      "id": "wyr-cold-fries-vs-warm-soda",
+      "optionA": { "fr": "Ne manger que des frites froides à vie", "en": "Only eat cold fries for life" },
+      "optionB": { "fr": "Ne boire que du soda tiède à vie", "en": "Only drink lukewarm soda for life" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "gross-funny"]
+    },
+    {
+      "id": "wyr-text-aloud-vs-thoughts-status",
+      "optionA": { "fr": "Que ton téléphone lise tes messages à voix haute en public", "en": "Your phone reads your texts out loud in public" },
+      "optionB": { "fr": "Que tes pensées s'affichent en story pendant 10 min par jour", "en": "Your thoughts post as a story for 10 minutes a day" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "embarrassing"]
+    },
+    {
+      "id": "wyr-rewind-vs-pause",
+      "optionA": { "fr": "Pouvoir rembobiner ta journée une fois par semaine", "en": "Be able to rewind your day once a week" },
+      "optionB": { "fr": "Pouvoir mettre le monde sur pause 10 minutes par jour", "en": "Be able to pause the world 10 minutes a day" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "time-travel"]
+    },
+    {
+      "id": "wyr-crocs-wedding-vs-suit-beach",
+      "optionA": { "fr": "Porter des Crocs à tous les mariages", "en": "Wear Crocs to every wedding" },
+      "optionB": { "fr": "Porter un costume trois-pièces à la plage", "en": "Wear a three-piece suit to the beach" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "daily-life"]
+    },
+    {
+      "id": "wyr-pineapple-pizza-forever",
+      "optionA": { "fr": "Manger de l'ananas sur toutes tes pizzas", "en": "Have pineapple on every pizza you eat" },
+      "optionB": { "fr": "Manger de la pizza froide uniquement", "en": "Only ever eat pizza cold" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["pizza", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-how-vs-know-when",
+      "optionA": { "fr": "Savoir comment tu vas mourir", "en": "Know how you will die" },
+      "optionB": { "fr": "Savoir quand tu vas mourir", "en": "Know when you will die" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["heavy", "classic"]
+    },
+    {
+      "id": "wyr-sing-vs-rhyme",
+      "optionA": { "fr": "Chanter tout ce que tu dis", "en": "Sing everything you say" },
+      "optionB": { "fr": "Parler uniquement en rimes", "en": "Only speak in rhymes" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["speech", "forever"]
+    },
+    {
+      "id": "wyr-ex-toast-vs-boss-karaoke",
+      "optionA": { "fr": "Faire un discours au mariage de ton ex", "en": "Give a toast at your ex's wedding" },
+      "optionB": { "fr": "Faire un karaoké en duo avec ton boss", "en": "Sing a karaoke duet with your boss" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["awkward", "public"]
+    },
+    {
+      "id": "wyr-mind-read-vs-future-10s",
+      "optionA": { "fr": "Lire dans les pensées, sans pouvoir éteindre", "en": "Read minds, with no off switch" },
+      "optionB": { "fr": "Voir 10 secondes dans le futur, en permanence", "en": "See 10 seconds into the future, permanently" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "curse"]
+    },
+    {
+      "id": "wyr-ketchup-everything-vs-no-sauce",
+      "optionA": { "fr": "Mettre du ketchup sur absolument tout ce que tu manges", "en": "Put ketchup on absolutely everything you eat" },
+      "optionB": { "fr": "Ne plus jamais utiliser une seule sauce", "en": "Never use any sauce ever again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["sauce", "forever"]
+    },
+    {
+      "id": "wyr-baby-hands-vs-giant-feet",
+      "optionA": { "fr": "Avoir des mains de bébé", "en": "Have tiny baby hands" },
+      "optionB": { "fr": "Avoir des pieds taille 60", "en": "Have size 20 feet" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "classic"]
+    },
+    {
+      "id": "wyr-reply-all-vs-wrong-chat",
+      "optionA": { "fr": "Répondre à tous avec un ragot destiné à un seul collègue", "en": "Hit reply-all on gossip meant for one coworker" },
+      "optionB": { "fr": "Envoyer ta critique du groupe... dans le groupe", "en": "Send your rant about the group chat... to the group chat" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "awkward", "work"]
+    },
+    {
+      "id": "wyr-restart-life-vs-skip-5y",
+      "optionA": { "fr": "Recommencer ta vie à 10 ans avec tes souvenirs", "en": "Restart life at age 10 with your memories" },
+      "optionB": { "fr": "Recevoir maintenant la vie que tu auras dans 5 ans", "en": "Skip straight to your life 5 years from now" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time-travel", "life-choices"]
+    },
+    {
+      "id": "wyr-wet-socks-vs-sand-bed",
+      "optionA": { "fr": "Avoir les chaussettes mouillées toute la journée", "en": "Have wet socks all day, every day" },
+      "optionB": { "fr": "Avoir du sable dans ton lit toutes les nuits", "en": "Have sand in your bed every single night" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["discomfort", "forever"]
+    },
+    {
+      "id": "wyr-only-breakfast-vs-only-dinner",
+      "optionA": { "fr": "Ne manger que des petits-déjeuners", "en": "Only eat breakfast foods" },
+      "optionB": { "fr": "Ne manger que des plats de dîner", "en": "Only eat dinner foods" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "debate-starter"]
+    },
+    {
+      "id": "wyr-famous-broke-vs-rich-unknown",
+      "optionA": { "fr": "Être célèbre mais fauché", "en": "Be famous but broke" },
+      "optionB": { "fr": "Être riche mais inconnu", "en": "Be rich but unknown" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["fame", "money", "classic"]
+    },
+    {
+      "id": "wyr-clown-commute-vs-pajama-work",
+      "optionA": { "fr": "Aller au travail en costume de clown une fois par mois", "en": "Commute in a full clown costume once a month" },
+      "optionB": { "fr": "Vivre en pyjama, même aux entretiens d'embauche", "en": "Live in pajamas, even at job interviews" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "work"]
+    },
+    {
+      "id": "wyr-call-vs-voicemail",
+      "optionA": { "fr": "Devoir appeler pour la moindre question", "en": "Have to phone-call for every tiny question" },
+      "optionB": { "fr": "Recevoir uniquement des vocaux de 5 minutes", "en": "Only receive 5-minute voice messages" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "pet-peeve"]
+    },
+    {
+      "id": "wyr-spicy-everything-vs-bland-everything",
+      "optionA": { "fr": "Que tous tes plats soient ultra pimentés", "en": "Have every meal be blisteringly hot-spiced" },
+      "optionB": { "fr": "Que tous tes plats soient totalement fades", "en": "Have every meal be completely bland" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["taste", "forever"]
+    },
+    {
+      "id": "wyr-redo-exams-vs-redo-teeth",
+      "optionA": { "fr": "Repasser le bac tous les ans", "en": "Retake your final school exams every year" },
+      "optionB": { "fr": "Aller chez le dentiste tous les mois", "en": "Go to the dentist every month" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["recurring-pain", "school"]
+    },
+    {
+      "id": "wyr-delete-photos-vs-delete-messages",
+      "optionA": { "fr": "Perdre toutes tes photos", "en": "Lose all your photos" },
+      "optionB": { "fr": "Perdre toutes tes conversations", "en": "Lose all your chat histories" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "memories"]
+    },
+    {
+      "id": "wyr-pause-aging-25-vs-65-rich",
+      "optionA": { "fr": "Arrêter de vieillir à 25 ans avec un salaire moyen", "en": "Stop aging at 25 on an average salary" },
+      "optionB": { "fr": "Vieillir normalement mais devenir riche à 65 ans", "en": "Age normally but get rich at 65" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["aging", "money"]
+    },
+    {
+      "id": "wyr-horse-size-duck-vs-duck-size-horses",
+      "optionA": { "fr": "Affronter un canard de la taille d'un cheval", "en": "Fight one horse-sized duck" },
+      "optionB": { "fr": "Affronter cent chevaux de la taille d'un canard", "en": "Fight one hundred duck-sized horses" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["classic", "battle"]
+    },
+    {
+      "id": "wyr-no-coffee-vs-no-snacks",
+      "optionA": { "fr": "Ne plus jamais boire de café ni de thé", "en": "Never drink coffee or tea again" },
+      "optionB": { "fr": "Ne plus jamais grignoter entre les repas", "en": "Never snack between meals again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "habits"]
+    },
+    {
+      "id": "wyr-always-late-vs-always-2h-early",
+      "optionA": { "fr": "Arriver toujours 20 minutes en retard", "en": "Always arrive 20 minutes late" },
+      "optionB": { "fr": "Arriver toujours 2 heures en avance", "en": "Always arrive 2 hours early" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["time", "daily-life"]
+    },
+    {
+      "id": "wyr-one-friend-forever-vs-new-monthly",
+      "optionA": { "fr": "Garder un seul meilleur ami à vie", "en": "Keep one single best friend for life" },
+      "optionB": { "fr": "Changer de groupe d'amis tous les ans", "en": "Get a brand-new friend group every year" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "life-choices"]
+    },
+    {
+      "id": "wyr-glitter-sneeze-vs-confetti-burp",
+      "optionA": { "fr": "Éternuer des paillettes", "en": "Sneeze glitter" },
+      "optionB": { "fr": "Roter des confettis", "en": "Burp confetti" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body", "party"]
+    },
+    {
+      "id": "wyr-soup-fork-vs-steak-spoon",
+      "optionA": { "fr": "Manger toutes tes soupes à la fourchette", "en": "Eat all soup with a fork" },
+      "optionB": { "fr": "Couper toute ta viande à la cuillère", "en": "Cut all steak with a spoon" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["utensils", "forever"]
+    },
+    {
+      "id": "wyr-wifi-vs-hot-water",
+      "optionA": { "fr": "Vivre sans wifi", "en": "Live without wifi" },
+      "optionB": { "fr": "Vivre sans eau chaude", "en": "Live without hot water" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["modern-life", "forever"]
+    },
+    {
+      "id": "wyr-stranger-bless-vs-friend-roast",
+      "optionA": { "fr": "Que des inconnus applaudissent chacune de tes entrées", "en": "Strangers applaud every room you enter" },
+      "optionB": { "fr": "Que tes potes notent tes tenues sur 10 chaque matin", "en": "Your friends rate your outfit out of 10 every morning" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["attention", "daily-life"]
+    },
+    {
+      "id": "wyr-talk-fridge-vs-gps-judge",
+      "optionA": { "fr": "Un frigo qui commente tes choix à voix haute", "en": "A fridge that comments on your choices out loud" },
+      "optionB": { "fr": "Un GPS qui soupire à chaque mauvais virage", "en": "A GPS that sighs at every wrong turn" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["tech", "judgy-objects"]
+    },
+    {
+      "id": "wyr-dessert-first-vs-no-dessert",
+      "optionA": { "fr": "Toujours manger le dessert en premier", "en": "Always eat dessert first" },
+      "optionB": { "fr": "Ne plus jamais manger de dessert", "en": "Never eat dessert again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["dessert", "forever"]
+    },
+    {
+      "id": "wyr-true-love-vs-true-calling",
+      "optionA": { "fr": "Trouver le grand amour mais détester ton travail", "en": "Find true love but hate your job" },
+      "optionB": { "fr": "Trouver le job parfait mais rester célibataire 10 ans", "en": "Find the dream job but stay single for 10 years" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["love", "work", "life-choices"]
+    },
+    {
+      "id": "wyr-loud-chewer-vs-slow-walker",
+      "optionA": { "fr": "Être coincé à vie à côté d'un mâcheur bruyant au bureau", "en": "Sit next to a loud chewer at work for life" },
+      "optionB": { "fr": "Être coincé à vie derrière des marcheurs lents", "en": "Be stuck behind slow walkers for life" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["pet-peeve", "forever"]
+    },
+    {
+      "id": "wyr-teleport-naps-vs-no-sleep",
+      "optionA": { "fr": "Te téléporter, mais ça t'endort 2 heures à l'arrivée", "en": "Teleport anywhere, but arrive needing a 2-hour nap" },
+      "optionB": { "fr": "Ne plus jamais avoir besoin de dormir", "en": "Never need to sleep again" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "trade-off"]
+    },
+    {
+      "id": "wyr-tiny-elephant-vs-giant-hamster",
+      "optionA": { "fr": "Adopter un éléphant de la taille d'un chat", "en": "Adopt a cat-sized elephant" },
+      "optionB": { "fr": "Adopter un hamster de la taille d'un chien", "en": "Adopt a dog-sized hamster" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["animals", "pets"]
+    },
+    {
+      "id": "wyr-cereal-water-vs-juice-cereal",
+      "optionA": { "fr": "Manger tes céréales avec de l'eau", "en": "Eat cereal with water" },
+      "optionB": { "fr": "Boire ton jus d'orange juste après le dentifrice, à vie", "en": "Drink orange juice right after brushing, forever" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["gross-funny", "breakfast"]
+    },
+    {
+      "id": "wyr-group-photo-blink-vs-laugh-snort",
+      "optionA": { "fr": "Avoir les yeux fermés sur toutes les photos de groupe", "en": "Blink in every group photo ever taken" },
+      "optionB": { "fr": "Grogner comme un cochon à chaque fou rire", "en": "Snort like a pig every time you really laugh" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["embarrassing", "forever"]
+    },
+    {
+      "id": "wyr-erase-bad-memory-vs-keep-all",
+      "optionA": { "fr": "Effacer ton pire souvenir", "en": "Erase your worst memory" },
+      "optionB": { "fr": "Revivre ton meilleur souvenir une fois par an", "en": "Relive your best memory once a year" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["memories", "heavy"]
+    },
+    {
+      "id": "wyr-moonwalk-only-vs-lunge-everywhere",
+      "optionA": { "fr": "Entrer dans chaque pièce en moonwalk", "en": "Enter every room doing the moonwalk" },
+      "optionB": { "fr": "Te déplacer uniquement en fentes avant", "en": "Travel everywhere doing lunges" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["movement", "daily-life"]
+    },
+    {
+      "id": "wyr-one-cuisine-vs-random-meals",
+      "optionA": { "fr": "Manger ta cuisine préférée, mais uniquement elle, à vie", "en": "Eat only your favorite cuisine for life" },
+      "optionB": { "fr": "Manger un plat tiré au sort à chaque repas", "en": "Get a randomly assigned dish every single meal" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "gamble"]
+    },
+    {
+      "id": "wyr-no-likes-vs-no-mute",
+      "optionA": { "fr": "Que personne ne like plus jamais ce que tu postes", "en": "Nobody ever likes anything you post again" },
+      "optionB": { "fr": "Ne plus jamais pouvoir quitter un groupe WhatsApp", "en": "Never be able to leave a group chat again" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "forever"]
+    },
+    {
+      "id": "wyr-luck-vs-talent",
+      "optionA": { "fr": "Avoir une chance insolente sans aucun talent", "en": "Have outrageous luck but zero talent" },
+      "optionB": { "fr": "Avoir un talent immense sans aucune chance", "en": "Have immense talent but zero luck" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["classic", "debate-starter"]
+    },
+    {
+      "id": "wyr-meow-end-sentence-vs-jazz-hands",
+      "optionA": { "fr": "Miauler à la fin de chaque phrase", "en": "Meow at the end of every sentence" },
+      "optionB": { "fr": "Faire des jazz hands à chaque bonjour", "en": "Do jazz hands every time you say hello" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["speech", "embarrassing"]
+    },
+    {
+      "id": "wyr-everything-mild-vs-mystery-spice",
+      "optionA": { "fr": "Connaître à l'avance le goût de tout ce que tu manges", "en": "Know exactly how everything tastes before eating it" },
+      "optionB": { "fr": "Que chaque bouchée soit une surprise totale", "en": "Have every bite be a total surprise" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["taste", "gamble"]
+    },
+    {
+      "id": "wyr-bad-wifi-friends-vs-fast-wifi-alone",
+      "optionA": { "fr": "Une coloc géniale avec un wifi catastrophique", "en": "Amazing roommates with terrible wifi" },
+      "optionB": { "fr": "Vivre seul avec la fibre la plus rapide du pays", "en": "Live alone with the fastest internet in the country" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["modern-life", "friendship"]
+    },
+    {
+      "id": "wyr-undo-button-vs-save-point",
+      "optionA": { "fr": "Avoir un bouton 'annuler' pour ta dernière phrase", "en": "Have an undo button for your last sentence" },
+      "optionB": { "fr": "Avoir un point de sauvegarde chaque matin", "en": "Have a save point every morning" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "video-game"]
+    },
+    {
+      "id": "wyr-hiccup-mariachi-vs-yawn-foghorn",
+      "optionA": { "fr": "Qu'un groupe de mariachis apparaisse à chaque hoquet", "en": "A mariachi band appears every time you hiccup" },
+      "optionB": { "fr": "Bâiller avec le son d'une corne de brume", "en": "Yawn with the sound of a foghorn" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "body"]
+    },
+    {
+      "id": "wyr-no-chocolate-vs-no-chips",
+      "optionA": { "fr": "Ne plus jamais manger de chocolat", "en": "Never eat chocolate again" },
+      "optionB": { "fr": "Ne plus jamais manger de chips ni de trucs salés à l'apéro", "en": "Never eat chips or salty snacks again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "snacks"]
+    },
+    {
+      "id": "wyr-forgot-name-vs-wrong-name",
+      "optionA": { "fr": "Oublier le prénom de tout le monde à chaque soirée", "en": "Forget everyone's name at every party" },
+      "optionB": { "fr": "Appeler tout le monde par le prénom de ton ex", "en": "Call everyone by your ex's name" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["awkward", "party"]
+    },
+    {
+      "id": "wyr-read-minds-pets-vs-plants-talk",
+      "optionA": { "fr": "Entendre ce que pensent les chiens et les chats", "en": "Hear what cats and dogs are thinking" },
+      "optionB": { "fr": "Entendre tes plantes te juger", "en": "Hear your houseplants judging you" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["animals", "judgy-objects"]
+    },
+    {
+      "id": "wyr-perfect-memory-vs-perfect-forget",
+      "optionA": { "fr": "Te souvenir de tout, même de ce que tu veux oublier", "en": "Remember everything, even what you want to forget" },
+      "optionB": { "fr": "Pouvoir oublier ce que tu veux, mais perdre aussi du bon", "en": "Forget anything at will, but lose some good with it" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["memories", "trade-off"]
+    },
+    {
+      "id": "wyr-fries-no-salt-vs-popcorn-no-butter",
+      "optionA": { "fr": "Des frites sans sel pour toujours", "en": "Fries with no salt forever" },
+      "optionB": { "fr": "Du pop-corn nature au cinéma pour toujours", "en": "Plain unsalted popcorn at the movies forever" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "snacks"]
+    },
+    {
+      "id": "wyr-stadium-solo-vs-empty-concert",
+      "optionA": { "fr": "Chanter l'hymne national seul dans un stade plein", "en": "Sing the national anthem alone in a packed stadium" },
+      "optionB": { "fr": "Jouer un concert entier devant 3 personnes", "en": "Play a full concert for an audience of 3" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["public", "stage-fright"]
+    },
+    {
+      "id": "wyr-money-past-vs-knowledge-future",
+      "optionA": { "fr": "Retourner en 2010 avec 1000 €", "en": "Go back to 2010 with $1,000" },
+      "optionB": { "fr": "Recevoir aujourd'hui un journal daté de demain", "en": "Get tomorrow's newspaper delivered today" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time-travel", "money"]
+    },
+    {
+      "id": "wyr-everything-sticky-vs-everything-slippery",
+      "optionA": { "fr": "Que tout ce que tu touches devienne légèrement collant", "en": "Everything you touch becomes slightly sticky" },
+      "optionB": { "fr": "Que tout ce que tu touches devienne légèrement glissant", "en": "Everything you touch becomes slightly slippery" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["curse", "forever"]
+    },
+    {
+      "id": "wyr-mystery-kebab-vs-gasstation-sushi",
+      "optionA": { "fr": "Manger le kebab d'un food truck inconnu à 4h du matin", "en": "Eat a 4 a.m. kebab from a mystery food truck" },
+      "optionB": { "fr": "Manger des sushis de station-service en promo", "en": "Eat discount gas station sushi" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["gamble", "gross-funny"]
+    },
+    {
+      "id": "wyr-overdressed-vs-underdressed",
+      "optionA": { "fr": "Être toujours trop habillé pour l'occasion", "en": "Always be overdressed for the occasion" },
+      "optionB": { "fr": "Être toujours pas assez habillé pour l'occasion", "en": "Always be underdressed for the occasion" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["fashion", "forever"]
+    },
+    {
+      "id": "wyr-live-no-music-vs-no-films",
+      "optionA": { "fr": "Vivre sans musique", "en": "Live without music" },
+      "optionB": { "fr": "Vivre sans films ni séries", "en": "Live without movies or shows" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["forever", "classic"]
+    },
+    {
+      "id": "wyr-slowmo-run-vs-fast-talk",
+      "optionA": { "fr": "Courir uniquement au ralenti dramatique", "en": "Only run in dramatic slow motion" },
+      "optionB": { "fr": "Parler en avance rapide quand tu es stressé", "en": "Talk in fast-forward whenever you're nervous" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["movement", "speech"]
+    },
+    {
+      "id": "wyr-banana-pizza-vs-chocolate-pasta",
+      "optionA": { "fr": "Goûter une pizza banane-curry devant tout le monde", "en": "Taste banana-curry pizza in front of everyone" },
+      "optionB": { "fr": "Goûter des pâtes sauce chocolat devant tout le monde", "en": "Taste chocolate-sauce pasta in front of everyone" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["gross-funny", "dare-adjacent"]
+    },
+    {
+      "id": "wyr-popup-friends-vs-scheduled-fun",
+      "optionA": { "fr": "Des potes qui débarquent toujours sans prévenir", "en": "Friends who always show up unannounced" },
+      "optionB": { "fr": "Des soirées plannifiées 3 mois à l'avance, sans exception", "en": "Hangouts that must be booked 3 months ahead" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "pet-peeve"]
+    },
+    {
+      "id": "wyr-perfect-pitch-vs-perfect-aim",
+      "optionA": { "fr": "Avoir l'oreille absolue", "en": "Have perfect pitch" },
+      "optionB": { "fr": "Ne jamais rater un lancer (papier, fléchette, panier)", "en": "Never miss a throw (paper, darts, hoops)" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "skills"]
+    },
+    {
+      "id": "wyr-helium-laugh-vs-villain-laugh",
+      "optionA": { "fr": "Rire en voix d'hélium pour toujours", "en": "Laugh in a helium voice forever" },
+      "optionB": { "fr": "Rire comme un méchant de dessin animé pour toujours", "en": "Laugh like a cartoon villain forever" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "forever"]
+    },
+    {
+      "id": "wyr-eat-same-vs-cook-everything",
+      "optionA": { "fr": "Quelqu'un cuisine pour toi à vie, mais choisit le menu", "en": "A private chef for life, but they pick the menu" },
+      "optionB": { "fr": "Choisir tous tes menus, mais tout cuisiner toi-même", "en": "Pick every menu, but cook everything yourself" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["trade-off", "forever"]
+    },
+    {
+      "id": "wyr-laugh-funeral-vs-cry-comedy",
+      "optionA": { "fr": "Avoir un fou rire incontrôlable aux moments solennels", "en": "Get the giggles at every solemn moment" },
+      "optionB": { "fr": "Pleurer à chaudes larmes devant les pubs", "en": "Sob uncontrollably at every commercial" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["embarrassing", "emotions"]
+    },
+    {
+      "id": "wyr-know-lies-vs-tell-none",
+      "optionA": { "fr": "Détecter tous les mensonges qu'on te dit", "en": "Detect every lie told to you" },
+      "optionB": { "fr": "Ne plus jamais pouvoir mentir, même par politesse", "en": "Never be able to lie again, even politely" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "honesty"]
+    },
+    {
+      "id": "wyr-shoes-wrong-feet-vs-backpack-front",
+      "optionA": { "fr": "Porter tes chaussures inversées pied gauche-droit", "en": "Wear your shoes on the wrong feet" },
+      "optionB": { "fr": "Porter ton sac à dos sur le ventre, toujours", "en": "Wear your backpack on your front, always" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "discomfort"]
+    },
+    {
+      "id": "wyr-onion-no-cry-vs-garlic-no-smell",
+      "optionA": { "fr": "Couper des oignons sans jamais pleurer", "en": "Chop onions without ever crying" },
+      "optionB": { "fr": "Manger de l'ail sans jamais avoir mauvaise haleine", "en": "Eat garlic without ever getting bad breath" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["superpower", "kitchen"]
+    },
+    {
+      "id": "wyr-double-text-vs-left-on-read",
+      "optionA": { "fr": "Toujours envoyer le double message de trop", "en": "Always send one text too many" },
+      "optionB": { "fr": "Toujours laisser les gens sur 'vu' sans le vouloir", "en": "Always leave people on read by accident" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "awkward"]
+    },
+    {
+      "id": "wyr-skip-traffic-vs-skip-queues",
+      "optionA": { "fr": "Ne plus jamais être dans les bouchons", "en": "Never sit in traffic again" },
+      "optionB": { "fr": "Ne plus jamais faire la queue", "en": "Never wait in line again" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "daily-life"]
+    },
+    {
+      "id": "wyr-pigeon-army-vs-seagull-respect",
+      "optionA": { "fr": "Commander une armée de pigeons fidèles", "en": "Command a loyal army of pigeons" },
+      "optionB": { "fr": "Être respecté par toutes les mouettes du monde", "en": "Earn the respect of every seagull on Earth" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["animals", "useless-powers"]
+    },
+    {
+      "id": "wyr-free-restaurants-vs-free-flights",
+      "optionA": { "fr": "Manger gratuitement dans tous les restaurants", "en": "Eat free at every restaurant" },
+      "optionB": { "fr": "Voyager gratuitement dans tous les avions", "en": "Fly free on every plane" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["money", "travel", "debate-starter"]
+    },
+    {
+      "id": "wyr-applause-wake-vs-drumroll-sit",
+      "optionA": { "fr": "Être réveillé chaque matin par une standing ovation", "en": "Wake up daily to a standing ovation" },
+      "optionB": { "fr": "Avoir un roulement de tambour à chaque fois que tu t'assois", "en": "Get a drumroll every time you sit down" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "daily-life"]
+    },
+    {
+      "id": "wyr-best-friend-honest-vs-kind",
+      "optionA": { "fr": "Un meilleur ami brutalement honnête", "en": "A brutally honest best friend" },
+      "optionB": { "fr": "Un meilleur ami adorable qui enjolive tout", "en": "A sweet best friend who sugarcoats everything" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "honesty"]
+    },
+    {
+      "id": "wyr-last-slice-fight-vs-share-dessert",
+      "optionA": { "fr": "Toujours laisser la dernière part aux autres", "en": "Always give up the last slice" },
+      "optionB": { "fr": "Toujours devoir partager ton dessert", "en": "Always have to share your dessert" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["sharing", "forever"]
+    },
+    {
+      "id": "wyr-namedrop-fail-vs-handshake-fail",
+      "optionA": { "fr": "Rater tous tes checks de la main", "en": "Fumble every high five and handshake" },
+      "optionB": { "fr": "Faire la bise du mauvais côté à chaque fois", "en": "Go the wrong way on every cheek kiss or hug" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["awkward", "forever"]
+    },
+    {
+      "id": "wyr-tail-vs-antennae",
+      "optionA": { "fr": "Avoir une queue de chien qui trahit tes émotions", "en": "Have a dog tail that betrays your emotions" },
+      "optionB": { "fr": "Avoir des antennes d'escargot rétractables", "en": "Have retractable snail antennae" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "animals"]
+    },
+    {
+      "id": "wyr-control-dreams-vs-no-nightmares",
+      "optionA": { "fr": "Contrôler tes rêves, cauchemars inclus parfois", "en": "Control your dreams, with the odd nightmare slipping in" },
+      "optionB": { "fr": "Ne plus jamais faire de cauchemars, ni te souvenir des rêves", "en": "Never have nightmares, but never remember dreams" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["dreams", "trade-off"]
+    },
+    {
+      "id": "wyr-burnt-toast-vs-soggy-cereal",
+      "optionA": { "fr": "Que tous tes toasts soient légèrement brûlés", "en": "All your toast comes slightly burnt" },
+      "optionB": { "fr": "Que toutes tes céréales soient déjà ramollies", "en": "All your cereal comes pre-soggy" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["breakfast", "forever"]
+    },
+    {
+      "id": "wyr-old-songs-vs-new-songs",
+      "optionA": { "fr": "N'écouter que des musiques sorties avant ta naissance", "en": "Only listen to music released before you were born" },
+      "optionB": { "fr": "N'écouter que des sorties de moins d'un mois", "en": "Only listen to songs released in the last month" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["music", "forever"]
+    },
+    {
+      "id": "wyr-untangle-cables-vs-peel-stickers",
+      "optionA": { "fr": "Démêler les écouteurs de toute la planète", "en": "Untangle every pair of earbuds on Earth" },
+      "optionB": { "fr": "Décoller proprement toutes les étiquettes du monde", "en": "Peel every sticker in the world off cleanly" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["useless-powers", "satisfying"]
+    },
+    {
+      "id": "wyr-birthday-forgotten-vs-wrong-gift",
+      "optionA": { "fr": "Que tout le monde oublie ton anniversaire", "en": "Everyone forgets your birthday" },
+      "optionB": { "fr": "Recevoir 20 cadeaux, tous complètement à côté", "en": "Get 20 gifts, all of them completely wrong" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["birthday", "awkward"]
+    },
+    {
+      "id": "wyr-taco-tuesday-vs-sunday-roast",
+      "optionA": { "fr": "Un open bar de tacos chaque mardi à vie", "en": "Free unlimited tacos every Tuesday for life" },
+      "optionB": { "fr": "Un grand repas de famille parfait chaque dimanche à vie", "en": "A perfect family feast every Sunday for life" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "family"]
+    },
+    {
+      "id": "wyr-strength-noone-sees-vs-flight-everyone-films",
+      "optionA": { "fr": "Une force surhumaine que personne ne croit jamais", "en": "Super strength that nobody ever believes" },
+      "optionB": { "fr": "Voler, mais uniquement quand on te filme", "en": "Flight, but only while someone is filming you" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["superpower", "useless-powers"]
+    },
+    {
+      "id": "wyr-five-min-anyone-vs-hour-hero",
+      "optionA": { "fr": "5 minutes au téléphone avec ton toi de 2040", "en": "A 5-minute phone call with your 2040 self" },
+      "optionB": { "fr": "Une heure de dîner avec ton idole", "en": "A one-hour dinner with your hero" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time-travel", "icons"]
+    },
+    {
+      "id": "wyr-fork-scratch-vs-balloon-squeak",
+      "optionA": { "fr": "Entendre une fourchette crisser à chaque notification", "en": "Hear fork-on-plate screech with every notification" },
+      "optionB": { "fr": "Entendre un ballon qui couine à chaque appel", "en": "Hear balloon squeaks during every phone call" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "pet-peeve"]
+    },
+    {
+      "id": "wyr-host-everything-vs-guest-everything",
+      "optionA": { "fr": "Toujours être celui qui organise", "en": "Always be the one who organizes everything" },
+      "optionB": { "fr": "Ne jamais rien décider, même pas le resto", "en": "Never get a say in anything, not even the restaurant" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "pet-peeve"]
+    },
+    {
+      "id": "wyr-bottomless-fridge-vs-selfclean-kitchen",
+      "optionA": { "fr": "Un frigo toujours plein mais jamais rangé", "en": "A fridge that's always full but always a mess" },
+      "optionB": { "fr": "Une cuisine qui se nettoie seule mais un frigo vide le dimanche", "en": "A self-cleaning kitchen with an empty fridge on Sundays" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["kitchen", "trade-off"]
+    },
+    {
+      "id": "wyr-real-dino-vs-real-dragon-small",
+      "optionA": { "fr": "Prouver que tu as vu un dinosaure, sans photo", "en": "Prove you saw a dinosaur, with no photo" },
+      "optionB": { "fr": "Avoir un dragon de compagnie de 10 cm qui boude", "en": "Own a 4-inch pet dragon that sulks" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["animals", "fantasy"]
+    },
+    {
+      "id": "wyr-genius-no-proof-vs-average-credit",
+      "optionA": { "fr": "Avoir des idées géniales que personne n'écoute", "en": "Have genius ideas nobody ever listens to" },
+      "optionB": { "fr": "Avoir des idées moyennes que tout le monde applaudit", "en": "Have average ideas everyone applauds" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["recognition", "debate-starter"]
+    },
+    {
+      "id": "wyr-sneeze-confetti-cleanup-vs-rain-cloud",
+      "optionA": { "fr": "Un petit nuage personnel qui pleut quand tu mens", "en": "A tiny personal cloud that rains when you lie" },
+      "optionB": { "fr": "Un projecteur qui s'allume quand tu rougis", "en": "A spotlight that switches on whenever you blush" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["curse", "honesty"]
+    },
+    {
+      "id": "wyr-mom-comments-vs-boss-follows",
+      "optionA": { "fr": "Que ta mère commente tous tes posts", "en": "Your mom comments on all your posts" },
+      "optionB": { "fr": "Que ton boss regarde toutes tes stories", "en": "Your boss watches all your stories" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "family", "work"]
+    },
+    {
+      "id": "wyr-soup-forever-vs-sandwich-forever",
+      "optionA": { "fr": "Ne manger que des plats à la cuillère", "en": "Only eat foods that need a spoon" },
+      "optionB": { "fr": "Ne manger que des plats qui se tiennent à la main", "en": "Only eat foods you can hold in your hand" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "utensils"]
+    },
+    {
+      "id": "wyr-marathon-vs-silence-week",
+      "optionA": { "fr": "Courir un marathon sans entraînement", "en": "Run a marathon with zero training" },
+      "optionB": { "fr": "Passer une semaine entière sans parler", "en": "Go a full week without speaking" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["challenge", "endurance"]
+    },
+    {
+      "id": "wyr-floor-lava-daily-vs-stairs-only",
+      "optionA": { "fr": "Jouer au sol de lave 5 minutes par jour, où que tu sois", "en": "Play floor-is-lava 5 minutes a day, wherever you are" },
+      "optionB": { "fr": "Ne plus jamais prendre d'ascenseur ni d'escalator", "en": "Never use an elevator or escalator again" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["movement", "daily-life"]
+    },
+    {
+      "id": "wyr-ice-cream-winter-vs-raclette-summer",
+      "optionA": { "fr": "Ne manger des glaces qu'en plein hiver", "en": "Only eat ice cream in the dead of winter" },
+      "optionB": { "fr": "Ne manger de raclette qu'en pleine canicule", "en": "Only eat fondue during heatwaves" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["seasons", "forever"]
+    },
+    {
+      "id": "wyr-always-honest-review-vs-always-hype",
+      "optionA": { "fr": "Dire à tes potes ce que tu penses vraiment de leur cuisine", "en": "Tell friends what you really think of their cooking" },
+      "optionB": { "fr": "Faire semblant d'adorer, et en reprendre deux fois", "en": "Pretend to love it, and accept seconds" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["honesty", "friendship"]
+    },
+    {
+      "id": "wyr-button-skip-small-talk-vs-skip-ads",
+      "optionA": { "fr": "Un bouton pour zapper le small talk", "en": "A button that skips small talk" },
+      "optionB": { "fr": "Un bouton pour zapper toutes les pubs", "en": "A button that skips every ad" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "modern-life"]
+    },
+    {
+      "id": "wyr-knight-armor-rain-vs-flippers-shopping",
+      "optionA": { "fr": "Porter une armure complète dès qu'il pleut", "en": "Wear full knight armor whenever it rains" },
+      "optionB": { "fr": "Faire toutes tes courses en palmes", "en": "Do all your grocery runs in swim flippers" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "weather"]
+    },
+    {
+      "id": "wyr-five-star-cook-one-dish-vs-decent-all",
+      "optionA": { "fr": "Cuisiner UN plat au niveau étoilé, et rien d'autre", "en": "Cook ONE dish at Michelin level, and nothing else" },
+      "optionB": { "fr": "Cuisiner tout correctement, jamais exceptionnellement", "en": "Cook everything decently, nothing amazingly" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["skills", "kitchen"]
+    },
+    {
+      "id": "wyr-no-secrets-group-vs-keep-all",
+      "optionA": { "fr": "Que ton groupe d'amis sache tous tes secrets", "en": "Your friend group knows all your secrets" },
+      "optionB": { "fr": "Connaître tous les secrets du groupe sans rien dire", "en": "Know all the group's secrets but can't tell anyone" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["secrets", "friendship"]
+    },
+    {
+      "id": "wyr-live-100-vs-live-twice-50",
+      "optionA": { "fr": "Vivre une vie de 100 ans", "en": "Live one life of 100 years" },
+      "optionB": { "fr": "Vivre deux vies de 50 ans, sans souvenirs entre elles", "en": "Live two 50-year lives, no memories carried over" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["heavy", "philosophy"]
+    },
+    {
+      "id": "wyr-everything-orange-vs-everything-comic-sans",
+      "optionA": { "fr": "Voir le monde entier teinté orange fluo", "en": "See the entire world tinted neon orange" },
+      "optionB": { "fr": "Lire tous les textes du monde en Comic Sans", "en": "Read every text in the world in Comic Sans" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["senses", "forever"]
+    },
+    {
+      "id": "wyr-bottomless-brunch-vs-midnight-snacks",
+      "optionA": { "fr": "Des brunchs illimités mais plus de dîners", "en": "Unlimited brunch but no more dinners" },
+      "optionB": { "fr": "Des snacks de minuit sans conséquences mais plus de brunchs", "en": "Consequence-free midnight snacks but no more brunch" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["meals", "trade-off"]
+    },
+    {
+      "id": "wyr-dance-when-name-vs-freeze-when-photo",
+      "optionA": { "fr": "Danser 5 secondes dès qu'on dit ton prénom", "en": "Dance for 5 seconds whenever your name is said" },
+      "optionB": { "fr": "Te figer en statue dès qu'on te prend en photo", "en": "Freeze like a statue whenever a photo is taken" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body", "embarrassing"]
+    },
+    {
+      "id": "wyr-mentor-vs-clean-slate",
+      "optionA": { "fr": "Recevoir les conseils d'un mentor parfait, obligatoires", "en": "Get advice from a perfect mentor, but you must follow it" },
+      "optionB": { "fr": "Tout décider seul, sans aucun conseil, jamais", "en": "Decide everything alone, no advice, ever" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["life-choices", "trade-off"]
+    },
+    {
+      "id": "wyr-neighbors-drums-vs-neighbors-karaoke",
+      "optionA": { "fr": "Des voisins batteurs qui répètent le matin", "en": "Neighbors who practice drums every morning" },
+      "optionB": { "fr": "Des voisins fans de karaoké le soir", "en": "Neighbors who do karaoke every night" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["neighbors", "sound"]
+    },
+    {
+      "id": "wyr-fancy-water-vs-flat-soda-menu",
+      "optionA": { "fr": "Payer l'eau au prix du champagne au resto", "en": "Pay champagne prices for water at restaurants" },
+      "optionB": { "fr": "Que tous les sodas servis soient éventés", "en": "Every soda you're served is flat" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["drinks", "pet-peeve"]
+    },
+    {
+      "id": "wyr-tshirt-says-mood-vs-forehead-battery",
+      "optionA": { "fr": "Un t-shirt qui affiche ton humeur en temps réel", "en": "A t-shirt that displays your live mood" },
+      "optionB": { "fr": "Une jauge d'énergie sociale visible sur ton front", "en": "A social battery gauge visible on your forehead" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["emotions", "tech"]
+    },
+    {
+      "id": "wyr-win-argument-vs-drop-it",
+      "optionA": { "fr": "Toujours gagner les débats, mais personne ne l'admet", "en": "Always win arguments, but nobody ever admits it" },
+      "optionB": { "fr": "Toujours laisser tomber, mais avoir raison en secret", "en": "Always drop it, but secretly be right" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["debate-starter", "recognition"]
+    },
+    {
+      "id": "wyr-pasta-no-parmesan-vs-tacos-no-crunch",
+      "optionA": { "fr": "Des pâtes sans fromage râpé à vie", "en": "Pasta with no grated cheese for life" },
+      "optionB": { "fr": "Des tacos qui ne croustillent jamais", "en": "Tacos that never crunch" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["forever", "pet-peeve"]
+    },
+    {
+      "id": "wyr-seen-singing-car-vs-talking-alone",
+      "optionA": { "fr": "Être filmé en plein concert solo dans ta voiture", "en": "Get filmed mid-concert singing alone in your car" },
+      "optionB": { "fr": "Être surpris en grande conversation avec toi-même", "en": "Get caught deep in conversation with yourself" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["embarrassing", "caught"]
+    },
+    {
+      "id": "wyr-gravity-off-hour-vs-time-freeze-hour",
+      "optionA": { "fr": "Désactiver la gravité chez toi 1h par jour", "en": "Turn off gravity at home for 1 hour a day" },
+      "optionB": { "fr": "Faire venir n'importe quel animal sauvage 1h par jour, calme", "en": "Summon any wild animal, calm, for 1 hour a day" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["superpower", "fantasy"]
+    },
+    {
+      "id": "wyr-beach-holiday-vs-mountain-holiday",
+      "optionA": { "fr": "Des vacances uniquement à la plage, pour toujours", "en": "Beach holidays only, forever" },
+      "optionB": { "fr": "Des vacances uniquement à la montagne, pour toujours", "en": "Mountain holidays only, forever" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["travel", "classic"]
+    },
+    {
+      "id": "wyr-everything-too-big-vs-too-small",
+      "optionA": { "fr": "Que tous tes vêtements soient deux tailles trop grands", "en": "All your clothes are two sizes too big" },
+      "optionB": { "fr": "Que toutes tes chaussures soient une demi-pointure trop petites", "en": "All your shoes are half a size too small" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "discomfort"]
+    },
+    {
+      "id": "wyr-eat-bug-protein-vs-lab-meat-only",
+      "optionA": { "fr": "Remplacer ta viande par des insectes gastronomiques", "en": "Swap all meat for gourmet insects" },
+      "optionB": { "fr": "Remplacer tous tes légumes par des versions en poudre", "en": "Swap all vegetables for powdered versions" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["future-food", "gross-funny"]
+    },
+    {
+      "id": "wyr-laugh-at-own-jokes-vs-explain-them",
+      "optionA": { "fr": "Rire de tes blagues avant de les finir", "en": "Laugh at your own jokes before finishing them" },
+      "optionB": { "fr": "Devoir expliquer chaque blague que tu fais", "en": "Have to explain every joke you make" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["humor", "awkward"]
+    },
+    {
+      "id": "wyr-speak-baby-vs-speak-yoda",
+      "optionA": { "fr": "Parler aux bébés et qu'ils te répondent", "en": "Talk to babies and have them answer back" },
+      "optionB": { "fr": "Parler comme Yoda dès que tu es fatigué", "en": "Talk like Yoda whenever you're tired" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["speech", "superpower"]
+    },
+    {
+      "id": "wyr-job-love-poor-vs-job-meh-rich",
+      "optionA": { "fr": "Un travail passion payé au minimum", "en": "A dream job at minimum wage" },
+      "optionB": { "fr": "Un travail ennuyeux payé le triple", "en": "A boring job at triple pay" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["work", "money", "classic"]
+    },
+    {
+      "id": "wyr-fries-or-friends-keep-warm",
+      "optionA": { "fr": "Que tes frites restent toujours chaudes", "en": "Your fries always stay hot" },
+      "optionB": { "fr": "Que ta glace ne fonde jamais", "en": "Your ice cream never melts" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["superpower", "snacks"]
+    },
+    {
+      "id": "wyr-loud-typist-vs-pen-clicker",
+      "optionA": { "fr": "Taper au clavier comme si tu le détestais", "en": "Type like the keyboard owes you money" },
+      "optionB": { "fr": "Cliqueter ton stylo dans tous les silences", "en": "Click your pen in every silence" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["pet-peeve", "work"]
+    },
+    {
+      "id": "wyr-stuck-song-vs-stuck-smell",
+      "optionA": { "fr": "Avoir la même chanson en tête pendant un an", "en": "Have the same song stuck in your head for a year" },
+      "optionB": { "fr": "Sentir une odeur de cantine partout pendant un mois", "en": "Smell cafeteria food everywhere for a month" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["senses", "curse"]
+    },
+    {
+      "id": "wyr-read-biography-vs-watch-biopic",
+      "optionA": { "fr": "Lire le livre honnête de ta vie écrit par tes amis", "en": "Read the honest book of your life written by your friends" },
+      "optionB": { "fr": "Regarder le biopic de ta vie casté par tes ennemis", "en": "Watch your life's biopic cast by your enemies" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["self-image", "friendship"]
+    },
+    {
+      "id": "wyr-mustard-ice-cream-vs-sweet-pizza",
+      "optionA": { "fr": "Une boule de glace moutarde offerte à chaque cornet", "en": "A free scoop of mustard ice cream with every cone" },
+      "optionB": { "fr": "Un filet de sirop d'érable sur chaque pizza", "en": "A drizzle of maple syrup on every pizza" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["gross-funny", "combos"]
+    },
+    {
+      "id": "wyr-always-third-wheel-vs-always-photographer",
+      "optionA": { "fr": "Être éternellement la cinquième roue du carrosse", "en": "Forever be the third wheel" },
+      "optionB": { "fr": "Être éternellement le photographe jamais sur la photo", "en": "Forever be the photographer who's never in the photo" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "roles"]
+    },
+    {
+      "id": "wyr-magnetic-hands-vs-velcro-body",
+      "optionA": { "fr": "Avoir les mains légèrement aimantées", "en": "Have slightly magnetic hands" },
+      "optionB": { "fr": "Avoir le dos en velcro", "en": "Have a velcro back" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "useless-powers"]
+    },
+    {
+      "id": "wyr-pause-week-vs-double-weekend",
+      "optionA": { "fr": "Une semaine de vacances surprise par an, sans choisir la date", "en": "A surprise week off yearly, date not your choice" },
+      "optionB": { "fr": "Tous tes week-ends durent 2h de plus", "en": "Every weekend lasts 2 extra hours" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time", "trade-off"]
+    },
+    {
+      "id": "wyr-bread-ends-only-vs-crustless-life",
+      "optionA": { "fr": "Ne manger que les croûtons du pain", "en": "Only eat the end pieces of bread" },
+      "optionB": { "fr": "Ne manger que de la mie sans croûte", "en": "Only eat crustless middle slices" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["bread", "forever"]
+    },
+    {
+      "id": "wyr-whisper-always-vs-shout-always",
+      "optionA": { "fr": "Chuchoter en permanence", "en": "Whisper everything you say" },
+      "optionB": { "fr": "Parler trop fort en permanence", "en": "Say everything slightly too loud" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["speech", "forever"]
+    },
+    {
+      "id": "wyr-socks-sandals-vs-cap-backwards-suit",
+      "optionA": { "fr": "Chaussettes-claquettes à chaque rendez-vous important", "en": "Socks and slides to every important meeting" },
+      "optionB": { "fr": "Casquette à l'envers avec chaque tenue de soirée", "en": "Backwards cap with every formal outfit" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fashion", "forever"]
+    },
+    {
+      "id": "wyr-know-everyone-thinks-you-vs-never-know",
+      "optionA": { "fr": "Savoir exactement ce qu'on pense de toi", "en": "Know exactly what people think of you" },
+      "optionB": { "fr": "Ne jamais le savoir, et ne plus t'en soucier", "en": "Never know, and never worry about it again" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["self-image", "heavy"]
+    },
+    {
+      "id": "wyr-coffee-soup-mug-vs-tea-bowl",
+      "optionA": { "fr": "Boire ton café dans un bol de soupe sale", "en": "Drink your coffee from an unwashed soup bowl" },
+      "optionB": { "fr": "Manger ta soupe dans une tasse à expresso", "en": "Eat your soup from an espresso cup" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["kitchen", "gross-funny"]
+    },
+    {
+      "id": "wyr-friends-see-screen-time-vs-bank",
+      "optionA": { "fr": "Que tes potes voient ton temps d'écran", "en": "Your friends see your screen time stats" },
+      "optionB": { "fr": "Que tes potes voient tes dépenses livraison du mois", "en": "Your friends see your monthly delivery-app spending" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "money", "embarrassing"]
+    },
+    {
+      "id": "wyr-pet-rock-famous-vs-you-famous-1day",
+      "optionA": { "fr": "Que ton animal devienne influenceur, pas toi", "en": "Your pet becomes an influencer, not you" },
+      "optionB": { "fr": "Être mondialement célèbre pendant 24h, puis oublié", "en": "Be world-famous for 24 hours, then forgotten" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fame", "animals"]
+    },
+    {
+      "id": "wyr-one-true-answer-vs-three-wishes-random",
+      "optionA": { "fr": "Une réponse vraie à n'importe quelle question", "en": "One true answer to any question you ask" },
+      "optionB": { "fr": "Trois vœux interprétés par un génie de mauvaise foi", "en": "Three wishes granted by a genie acting in bad faith" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["fantasy", "trade-off"]
+    },
+    {
+      "id": "wyr-everything-al-dente-vs-everything-overcooked",
+      "optionA": { "fr": "Que tout soit légèrement pas assez cuit", "en": "Everything is slightly undercooked" },
+      "optionB": { "fr": "Que tout soit légèrement trop cuit", "en": "Everything is slightly overcooked" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["kitchen", "forever"]
+    },
+    {
+      "id": "wyr-arrive-party-first-vs-leave-last",
+      "optionA": { "fr": "Toujours arriver premier aux soirées, avant les hôtes prêts", "en": "Always arrive first, before the hosts are ready" },
+      "optionB": { "fr": "Ne jamais réussir à partir avant 4h du matin", "en": "Never manage to leave before 4 a.m." },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["party", "awkward"]
+    },
+    {
+      "id": "wyr-bubble-wrap-walk-vs-squeaky-shoes",
+      "optionA": { "fr": "Marcher sur du papier bulle invisible en permanence", "en": "Walk on invisible bubble wrap at all times" },
+      "optionB": { "fr": "Avoir des chaussures qui couinent uniquement dans les silences", "en": "Have shoes that squeak only during silences" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "curse"]
+    },
+    {
+      "id": "wyr-learn-instant-skill-yearly-vs-master-one",
+      "optionA": { "fr": "Apprendre une nouvelle compétence instantanément chaque année", "en": "Instantly learn one new skill every year" },
+      "optionB": { "fr": "Devenir le meilleur du monde dans UNE compétence au choix", "en": "Become world's best at ONE skill of your choice" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["skills", "debate-starter"]
+    },
+    {
+      "id": "wyr-free-michelin-once-vs-kebab-weekly",
+      "optionA": { "fr": "Un restaurant 3 étoiles offert une fois par an", "en": "One free 3-star Michelin dinner a year" },
+      "optionB": { "fr": "Ton plat réconfort préféré offert chaque semaine", "en": "Your favorite comfort meal free every week" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["money", "debate-starter"]
+    },
+    {
+      "id": "wyr-typo-every-text-vs-autocorrect-chaos",
+      "optionA": { "fr": "Une faute de frappe dans chaque message envoyé", "en": "One typo in every text you send" },
+      "optionB": { "fr": "Un correcteur auto qui change un mot au hasard par message", "en": "Autocorrect swaps one random word per message" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "curse"]
+    },
+    {
+      "id": "wyr-grow-shrink-10cm-daily",
+      "optionA": { "fr": "Mesurer 10 cm de plus chaque lundi, reset le dimanche", "en": "Be 4 inches taller every Monday, reset by Sunday" },
+      "optionB": { "fr": "Changer de couleur de cheveux chaque matin, au hasard", "en": "Wake up with a random hair color every morning" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "random"]
+    },
+    {
+      "id": "wyr-rewatch-comfort-vs-always-new",
+      "optionA": { "fr": "Ne regarder que tes séries préférées en boucle", "en": "Only rewatch your favorite shows forever" },
+      "optionB": { "fr": "Ne regarder que des nouveautés, jamais de re-visionnage", "en": "Only watch new things, never rewatch anything" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["entertainment", "forever"]
+    },
+    {
+      "id": "wyr-eat-with-hands-resto-vs-cutlery-burger",
+      "optionA": { "fr": "Manger les pâtes avec les doigts au restaurant", "en": "Eat spaghetti with your hands at restaurants" },
+      "optionB": { "fr": "Manger les burgers au couteau et à la fourchette", "en": "Eat burgers with a knife and fork" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["manners", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-spoils-endings-vs-friend-late",
+      "optionA": { "fr": "Un pote qui spoile la fin de tout", "en": "A friend who spoils the ending of everything" },
+      "optionB": { "fr": "Un pote toujours en retard d'une heure", "en": "A friend who's always an hour late" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "pet-peeve"]
+    },
+    {
+      "id": "wyr-hands-swap-vs-knees-backwards",
+      "optionA": { "fr": "Avoir les mains inversées gauche-droite", "en": "Have your hands swapped left-right" },
+      "optionB": { "fr": "Avoir les coudes qui plient dans les deux sens", "en": "Have elbows that bend both ways" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "weird"]
+    },
+    {
+      "id": "wyr-see-red-flags-vs-see-green-flags",
+      "optionA": { "fr": "Voir les red flags de tout le monde instantanément", "en": "Instantly see everyone's red flags" },
+      "optionB": { "fr": "Voir qui est digne de confiance instantanément", "en": "Instantly see who is trustworthy" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "relationships"]
+    },
+    {
+      "id": "wyr-soft-baguette-vs-hard-croissant",
+      "optionA": { "fr": "Des baguettes toujours molles", "en": "Baguettes that are always floppy" },
+      "optionB": { "fr": "Des croissants toujours rassis", "en": "Croissants that are always stale" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["bakery", "pet-peeve"]
+    },
+    {
+      "id": "wyr-clap-when-plane-lands-vs-talk-cinema",
+      "optionA": { "fr": "Applaudir à chaque atterrissage, même seul", "en": "Clap at every landing, even when alone" },
+      "optionB": { "fr": "Poser des questions à voix haute au cinéma", "en": "Ask questions out loud at the movies" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["public", "embarrassing"]
+    },
+    {
+      "id": "wyr-rain-follows-vs-wind-follows",
+      "optionA": { "fr": "Une bruine fine qui te suit 10 min par jour", "en": "A light drizzle follows you 10 minutes a day" },
+      "optionB": { "fr": "Une rafale qui te décoiffe à chaque moment important", "en": "A gust messes your hair at every important moment" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["weather", "curse"]
+    },
+    {
+      "id": "wyr-all-answers-exams-vs-all-confidence",
+      "optionA": { "fr": "Avoir toutes les bonnes réponses mais douter de tout", "en": "Have all the right answers but doubt everything" },
+      "optionB": { "fr": "Avoir une confiance totale mais te tromper parfois", "en": "Have total confidence but sometimes be wrong" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["psychology", "trade-off"]
+    },
+    {
+      "id": "wyr-no-fries-with-that-vs-no-refill",
+      "optionA": { "fr": "Plus jamais de frites avec ton burger", "en": "Never fries with your burger again" },
+      "optionB": { "fr": "Plus jamais de boisson avec ton menu", "en": "Never a drink with your meal again" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["fast-food", "forever"]
+    },
+    {
+      "id": "wyr-always-give-speech-vs-always-get-roasted",
+      "optionA": { "fr": "Faire le discours à chaque événement de famille", "en": "Give the speech at every family event" },
+      "optionB": { "fr": "Être gentiment chambré à chaque événement de famille", "en": "Get lovingly roasted at every family event" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["family", "public"]
+    },
+    {
+      "id": "wyr-snail-mail-only-vs-calls-only",
+      "optionA": { "fr": "Communiquer uniquement par lettres papier", "en": "Communicate only by handwritten letters" },
+      "optionB": { "fr": "Communiquer uniquement par appels vidéo", "en": "Communicate only by video calls" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["tech", "forever"]
+    },
+    {
+      "id": "wyr-museum-night-vs-zoo-night",
+      "optionA": { "fr": "Passer une nuit enfermé dans un musée", "en": "Spend a night locked in a museum" },
+      "optionB": { "fr": "Passer une nuit enfermé dans un zoo", "en": "Spend a night locked in a zoo" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["adventure", "debate-starter"]
+    },
+    {
+      "id": "wyr-warm-salad-vs-cold-soup",
+      "optionA": { "fr": "Toutes tes salades servies tièdes", "en": "All your salads served warm" },
+      "optionB": { "fr": "Toutes tes soupes servies froides", "en": "All your soups served cold" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["temperature", "pet-peeve"]
+    },
+    {
+      "id": "wyr-wave-back-stranger-vs-hold-door-far",
+      "optionA": { "fr": "Répondre à un coucou qui ne t'était pas destiné, chaque semaine", "en": "Wave back at someone waving past you, weekly" },
+      "optionB": { "fr": "Tenir la porte à quelqu'un trop loin, chaque jour", "en": "Hold the door for someone way too far away, daily" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["awkward", "recurring-pain"]
+    },
+    {
+      "id": "wyr-personal-theme-song-vs-credits-roll",
+      "optionA": { "fr": "Un générique perso qui joue à tes arrivées", "en": "Theme music plays whenever you arrive" },
+      "optionB": { "fr": "Un générique de fin qui défile à tes départs", "en": "End credits roll whenever you leave" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "cinema"]
+    },
+    {
+      "id": "wyr-see-everyones-age-vs-everyones-mood",
+      "optionA": { "fr": "Voir le niveau de batterie sociale des gens", "en": "See everyone's social battery level" },
+      "optionB": { "fr": "Voir le niveau de faim des gens", "en": "See everyone's hunger level" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["superpower", "psychology"]
+    },
+    {
+      "id": "wyr-fondue-solo-vs-bbq-rain",
+      "optionA": { "fr": "Une raclette en solo un soir de canicule", "en": "A solo cheese fondue on a heatwave night" },
+      "optionB": { "fr": "Un barbecue sous la pluie battante", "en": "A barbecue in pouring rain" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["seasons", "gatherings"]
+    },
+    {
+      "id": "wyr-always-shotgun-vs-always-aux",
+      "optionA": { "fr": "Toujours avoir la place passager", "en": "Always get shotgun" },
+      "optionB": { "fr": "Toujours contrôler la musique du trajet", "en": "Always control the road trip playlist" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["roadtrip", "debate-starter"]
+    },
+    {
+      "id": "wyr-t-rex-arms-vs-giraffe-neck",
+      "optionA": { "fr": "Avoir des bras de T-Rex", "en": "Have T-Rex arms" },
+      "optionB": { "fr": "Avoir un cou de girafe", "en": "Have a giraffe neck" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["body-swap", "animals", "classic"]
+    },
+    {
+      "id": "wyr-no-regret-vs-no-fear",
+      "optionA": { "fr": "Ne plus jamais ressentir de regret", "en": "Never feel regret again" },
+      "optionB": { "fr": "Ne plus jamais ressentir de trac", "en": "Never feel stage fright again" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["emotions", "heavy"]
+    },
+    {
+      "id": "wyr-crunchy-pasta-vs-mushy-rice",
+      "optionA": { "fr": "Des pâtes toujours croquantes au centre", "en": "Pasta that's always crunchy in the middle" },
+      "optionB": { "fr": "Du riz toujours collant-bouillie", "en": "Rice that's always mushy porridge" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["kitchen", "forever"]
+    },
+    {
+      "id": "wyr-intro-everyone-vs-remember-noone",
+      "optionA": { "fr": "Devoir présenter tout le monde dans chaque soirée", "en": "Have to introduce everyone at every party" },
+      "optionB": { "fr": "Que personne ne se souvienne jamais de ton métier", "en": "Nobody ever remembers what you do for a living" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["party", "roles"]
+    },
+    {
+      "id": "wyr-shopping-cart-wheel-vs-umbrella-flip",
+      "optionA": { "fr": "Toujours tomber sur le caddie à roue folle", "en": "Always get the cart with the wobbly wheel" },
+      "optionB": { "fr": "Que ton parapluie se retourne à chaque averse", "en": "Your umbrella flips inside out in every storm" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["curse", "daily-life"]
+    },
+    {
+      "id": "wyr-village-mayor-vs-city-anonymous",
+      "optionA": { "fr": "Vivre dans un village où tout le monde te connaît", "en": "Live in a village where everyone knows you" },
+      "optionB": { "fr": "Vivre dans une mégalopole où personne ne te connaît", "en": "Live in a megacity where nobody knows you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["lifestyle", "classic"]
+    },
+    {
+      "id": "wyr-pizza-no-toppings-vs-toppings-no-base",
+      "optionA": { "fr": "Des pizzas uniquement margherita à vie", "en": "Only plain margherita pizza for life" },
+      "optionB": { "fr": "Toutes les garnitures du monde, mais sans pâte", "en": "Every topping imaginable, but no crust" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["pizza", "forever"]
+    },
+    {
+      "id": "wyr-group-decides-outfits-vs-haircut",
+      "optionA": { "fr": "Que ce groupe choisisse tes tenues pendant un mois", "en": "This group picks your outfits for a month" },
+      "optionB": { "fr": "Que ce groupe choisisse ta coupe de cheveux une fois", "en": "This group picks your next haircut once" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "trust"]
+    },
+    {
+      "id": "wyr-everything-tastes-mint-vs-smells-toast",
+      "optionA": { "fr": "Que tout ait un léger goût de menthe", "en": "Everything tastes faintly of mint" },
+      "optionB": { "fr": "Que tout sente légèrement le pain grillé", "en": "Everything smells faintly of toast" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["senses", "forever"]
+    },
+    {
+      "id": "wyr-find-money-vs-find-time",
+      "optionA": { "fr": "Trouver 20 € par terre chaque semaine", "en": "Find a $20 bill on the ground every week" },
+      "optionB": { "fr": "Gagner une heure de sommeil magique chaque nuit", "en": "Gain one magical extra hour of sleep nightly" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["money", "time"]
+    },
+    {
+      "id": "wyr-only-buffets-vs-only-tasting-menus",
+      "optionA": { "fr": "Ne manger qu'en buffet à volonté", "en": "Only ever eat at all-you-can-eat buffets" },
+      "optionB": { "fr": "Ne manger qu'en menu dégustation 12 services", "en": "Only ever eat 12-course tasting menus" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["restaurants", "forever"]
+    },
+    {
+      "id": "wyr-talk-elevator-vs-silent-roadtrip",
+      "optionA": { "fr": "Faire la conversation dans chaque ascenseur", "en": "Make small talk in every elevator ride" },
+      "optionB": { "fr": "Faire 6h de route en silence total", "en": "Take 6-hour road trips in total silence" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["small-talk", "endurance"]
+    },
+    {
+      "id": "wyr-honk-when-stressed-vs-beep-reverse",
+      "optionA": { "fr": "Klaxonner comme une oie quand tu stresses", "en": "Honk like a goose when stressed" },
+      "optionB": { "fr": "Émettre un bip de recul quand tu marches en arrière", "en": "Beep like a truck when walking backwards" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["sound", "body"]
+    },
+    {
+      "id": "wyr-no-deadlines-vs-no-meetings",
+      "optionA": { "fr": "Plus jamais de deadlines", "en": "No more deadlines ever" },
+      "optionB": { "fr": "Plus jamais de réunions", "en": "No more meetings ever" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["work", "debate-starter"]
+    },
+    {
+      "id": "wyr-share-fries-tax-vs-guard-plate",
+      "optionA": { "fr": "Accepter la taxe frites de tous tes potes", "en": "Accept the fry tax from all your friends" },
+      "optionB": { "fr": "Défendre ton assiette, mais ne jamais goûter les leurs", "en": "Guard your plate, but never taste theirs" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["sharing", "friendship"]
+    },
+    {
+      "id": "wyr-always-lose-keys-vs-always-lose-words",
+      "optionA": { "fr": "Chercher tes clés 5 minutes chaque matin", "en": "Spend 5 minutes hunting your keys every morning" },
+      "optionB": { "fr": "Avoir le mot sur le bout de la langue une fois par conversation", "en": "Lose a word on the tip of your tongue every chat" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["recurring-pain", "daily-life"]
+    },
+    {
+      "id": "wyr-trampoline-floor-vs-ballpit-car",
+      "optionA": { "fr": "Que le sol de ton salon soit un trampoline", "en": "Your living room floor is a trampoline" },
+      "optionB": { "fr": "Que ta voiture soit une piscine à balles", "en": "Your car is a ball pit" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["home", "fun"]
+    },
+    {
+      "id": "wyr-read-1000-books-vs-visit-100-countries",
+      "optionA": { "fr": "Avoir lu les 1000 plus grands livres", "en": "Have read the 1,000 greatest books" },
+      "optionB": { "fr": "Avoir visité 100 pays", "en": "Have visited 100 countries" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["travel", "knowledge"]
+    },
+    {
+      "id": "wyr-breakfast-pizza-vs-dinner-cereal",
+      "optionA": { "fr": "Pizza froide au petit-déj tous les jours", "en": "Cold pizza for breakfast every day" },
+      "optionB": { "fr": "Bol de céréales au dîner tous les soirs", "en": "A bowl of cereal for dinner every night" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["meals", "forever"]
+    },
+    {
+      "id": "wyr-misremember-movies-vs-misquote-songs",
+      "optionA": { "fr": "Raconter les films avec la mauvaise fin, convaincu", "en": "Confidently retell movies with the wrong ending" },
+      "optionB": { "fr": "Chanter les paroles fausses, très fort, persuadé", "en": "Belt out wrong lyrics, loudly, fully convinced" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["embarrassing", "entertainment"]
+    },
+    {
+      "id": "wyr-pockets-infinite-vs-never-lose",
+      "optionA": { "fr": "Des poches sans fond comme Mary Poppins", "en": "Bottomless Mary Poppins pockets" },
+      "optionB": { "fr": "Ne plus jamais rien perdre", "en": "Never lose anything again" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["superpower", "daily-life"]
+    },
+    {
+      "id": "wyr-perfect-sleep-4h-vs-normal-9h",
+      "optionA": { "fr": "Dormir 4h et être en pleine forme", "en": "Sleep 4 hours and feel amazing" },
+      "optionB": { "fr": "Dormir 9h de sommeil parfait obligatoire", "en": "Need a mandatory 9 hours of perfect sleep" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["sleep", "trade-off"]
+    },
+    {
+      "id": "wyr-mystery-jam-vs-mystery-cheese",
+      "optionA": { "fr": "Goûter une confiture mystère chaque matin", "en": "Taste a mystery jam every morning" },
+      "optionB": { "fr": "Goûter un fromage mystère chaque soir", "en": "Taste a mystery cheese every night" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["gamble", "daily-life"]
+    },
+    {
+      "id": "wyr-plan-cancelled-joy-vs-surprise-party-dread",
+      "optionA": { "fr": "Que tous tes plans soient annulés au dernier moment", "en": "All your plans get cancelled last minute" },
+      "optionB": { "fr": "Une fête surprise pour toi tous les mois", "en": "A surprise party thrown for you every month" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["party", "introvert-extrovert"]
+    },
+    {
+      "id": "wyr-cloud-bed-vs-water-walk",
+      "optionA": { "fr": "Dormir sur un nuage, mais il pleut parfois dedans", "en": "Sleep on a cloud, but it sometimes rains inside" },
+      "optionB": { "fr": "Marcher sur l'eau, mais seulement quand elle est glacée", "en": "Walk on water, but only when it's freezing" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["fantasy", "trade-off"]
+    },
+    {
+      "id": "wyr-speak-all-instruments-vs-all-sports",
+      "optionA": { "fr": "Savoir jouer de tous les instruments", "en": "Play every musical instrument" },
+      "optionB": { "fr": "Être bon dans tous les sports", "en": "Be good at every sport" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["skills", "classic"]
+    },
+    {
+      "id": "wyr-guac-extra-free-vs-bread-unlimited",
+      "optionA": { "fr": "Le supplément avocat toujours offert", "en": "Extra guac is always free" },
+      "optionB": { "fr": "La corbeille de pain toujours rechargée", "en": "The bread basket is always refilled" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["restaurants", "small-joys"]
+    },
+    {
+      "id": "wyr-always-picked-first-vs-never-picked-last",
+      "optionA": { "fr": "Être capitaine d'équipe à chaque fois, avec la pression", "en": "Be team captain every time, pressure included" },
+      "optionB": { "fr": "Être choisi au milieu, tranquille, pour toujours", "en": "Always get picked comfortably mid, forever" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["roles", "psychology"]
+    },
+    {
+      "id": "wyr-hands-always-cold-vs-phone-always-3pct",
+      "optionA": { "fr": "Avoir toujours les mains froides", "en": "Your hands are always cold" },
+      "optionB": { "fr": "Que ton téléphone affiche toujours 3% de batterie (sans mourir)", "en": "Your phone always shows 3% battery (never dies)" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["curse", "anxiety-funny"]
+    },
+    {
+      "id": "wyr-change-past-one-vs-peek-future-one",
+      "optionA": { "fr": "Changer UNE décision de ton passé", "en": "Change ONE decision in your past" },
+      "optionB": { "fr": "Voir UNE journée précise de ton futur", "en": "See ONE specific day of your future" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["time-travel", "heavy"]
+    },
+    {
+      "id": "wyr-eternal-leftovers-vs-no-leftovers",
+      "optionA": { "fr": "Que tes restes soient meilleurs que le plat original", "en": "Your leftovers always taste better than the original" },
+      "optionB": { "fr": "Que tes plats soient parfaits mais sans jamais de restes", "en": "Your meals are perfect but there are never leftovers" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["kitchen", "small-joys"]
+    },
+    {
+      "id": "wyr-host-podcast-noone-vs-guest-top-podcast",
+      "optionA": { "fr": "Animer ton podcast que personne n'écoute, mais adoré de toi", "en": "Host your own podcast that nobody listens to" },
+      "optionB": { "fr": "Être invité une fois au plus gros podcast du monde, stressé", "en": "Be a guest once on the world's biggest podcast" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["fame", "media"]
+    }
+  ]
+}

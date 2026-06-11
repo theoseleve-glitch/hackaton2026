@@ -1,0 +1,1051 @@
+{
+  "gameId": "loup-garou",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "rolecard-wolf",
+      "type": "roleCard",
+      "role": "wolf",
+      "name": { "fr": "Le Loup-Garou", "en": "The Werewolf" },
+      "text": {
+        "fr": "Chaque nuit, toi et ta meute choisissez une victime — tu vois les votes des autres loups en direct. Le jour, joue les innocents : accuse, détourne, sors ta meilleure tête de villageois. Vous gagnez quand les loups sont aussi nombreux que les survivants.",
+        "en": "Each night, you and your pack pick a victim — you see your fellow wolves' votes live. By day, play innocent: accuse, deflect, perfect your best villager face. You win when the wolves match the survivors in number."
+      },
+      "tags": ["wolf", "night-actor", "v1"]
+    },
+    {
+      "id": "rolecard-villager",
+      "type": "roleCard",
+      "role": "villager",
+      "name": { "fr": "Le Villageois", "en": "The Villager" },
+      "text": {
+        "fr": "Pas de pouvoir, pas de potion, pas d'excuse. Juste ton instinct, ta voix, et de longues nuits à stresser. Observe, débats, vote : c'est toi qui fais tomber les loups. Et tapote ton écran chaque nuit comme tout le monde — personne ne doit deviner qui agit vraiment.",
+        "en": "No powers, no potions, no excuses. Just your gut, your voice, and some long anxious nights. Watch, argue, vote: you're the one who brings the wolves down. And tap your screen every night like everyone else — nobody must guess who's really acting."
+      },
+      "tags": ["village", "v1"]
+    },
+    {
+      "id": "rolecard-seer",
+      "type": "roleCard",
+      "role": "seer",
+      "name": { "fr": "La Voyante", "en": "The Seer" },
+      "text": {
+        "fr": "Chaque nuit, tu sondes l'âme d'un joueur et l'app te révèle son camp : loup ou pas loup. Une information en or — mais si tu parles trop vite, les loups t'offrent un aller simple. Distille tes visions avec art.",
+        "en": "Each night you probe one player's soul and the app whispers their side: wolf or not wolf. Pure gold — but tip your hand too soon and the wolves book you a one-way trip. Leak your visions like an artist."
+      },
+      "tags": ["village", "night-actor", "v1"]
+    },
+    {
+      "id": "rolecard-witch",
+      "type": "roleCard",
+      "role": "witch",
+      "name": { "fr": "La Sorcière", "en": "The Witch" },
+      "text": {
+        "fr": "Tu possèdes deux potions pour toute la partie : une potion de vie pour sauver la victime des loups, et un poison pour éliminer un joueur. Chaque nuit, l'app te montre qui les loups ont croqué — à toi de décider.",
+        "en": "You hold two potions for the whole game: one healing potion to save the wolves' victim, and one poison to take a player out. Each night the app shows you who the wolves bit — your call."
+      },
+      "tags": ["village", "night-actor", "v1"]
+    },
+    {
+      "id": "narration-night-intro-01",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "La nuit tombe sur le village. Tout le monde baisse les yeux sur son téléphone... et personne ne fait confiance à son voisin.",
+        "en": "Night falls on the village. Everyone, eyes down on your phone... and nobody trusts their neighbor."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-02",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Minuit sonne au clocher. Verrouillez vos visages, baissez les yeux : ce qui se passe sur vos écrans ne regarde personne.",
+        "en": "The church bell strikes midnight. Lock your faces, lower your eyes: what happens on your screen is nobody's business."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-03",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Le village s'endort... officiellement. Officieusement, quelqu'un aiguise ses crocs en mode silencieux.",
+        "en": "The village falls asleep... officially. Unofficially, someone is sharpening their fangs on silent mode."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-04",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Chut. Plus un bruit. Même le boulanger a fermé ses volets — et d'habitude, cet homme n'a peur de rien.",
+        "en": "Hush. Not a sound. Even the baker has bolted his shutters — and that man usually fears nothing."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-05",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "La lune se lève, ronde comme une roue de tracteur. Tout le monde sur son téléphone : les héros comme les figurants.",
+        "en": "The moon rises, round as a tractor wheel. Everyone on your phones now: heroes and extras alike."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-06",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Extinction des feux. Si votre voisin louche sur votre écran, c'est soit un loup, soit un malpoli. Dans les deux cas : méfiance.",
+        "en": "Lights out. If your neighbor is squinting at your screen, they're either a wolf or just plain rude. Either way: trust no one."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-07",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "La nuit tombe et le village retient son souffle. Quelque part, une bête consulte le menu.",
+        "en": "Night falls and the village holds its breath. Somewhere out there, a beast is reading the menu."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-08",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Les chouettes hululent, les volets grincent, et tous les téléphones du village s'illuminent en même temps. Coïncidence ? Jamais.",
+        "en": "Owls hoot, shutters creak, and every phone in the village lights up at once. Coincidence? Never."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-09",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "On éteint les bougies. Rappel amical : tapoter son écran d'un air innocent, c'est tout un art. Entraînez-vous.",
+        "en": "Candles out. Friendly reminder: tapping your screen while looking innocent is an art form. Practice it."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-10",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Le village plonge dans le noir. Les honnêtes gens dorment. Les autres pointent au travail.",
+        "en": "The village sinks into darkness. Honest folk go to sleep. The others clock in."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-11",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Nuit noire, sans étoiles. Le genre de nuit où l'on regrette d'avoir construit sa maison si loin de l'église.",
+        "en": "A black, starless night. The kind of night that makes you regret building your house this far from the church."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-12",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Tout le monde ferme les yeux... métaphoriquement. Ici, on baisse le regard sur l'écran et on garde son meilleur visage de marbre.",
+        "en": "Everyone, close your eyes... metaphorically. Around here we drop our gaze to the screen and hold our finest poker face."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-13",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "Le vent se lève. Les poules ont voté à l'unanimité de ne pas sortir cette nuit. Faites comme les poules.",
+        "en": "The wind picks up. The chickens have unanimously voted to stay in tonight. Be like the chickens."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-night-intro-14",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "La nuit recouvre le village comme une couverture trop courte : quelqu'un va forcément dépasser.",
+        "en": "Night settles over the village like a blanket two sizes too small: someone's foot is bound to stick out."
+      },
+      "tags": ["night"]
+    },
+    {
+      "id": "narration-dawn-death-01",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Le soleil se lève sur le village... {victim} ne se réveillera plus jamais. Quelqu'un autour de cette table sait exactement pourquoi.",
+        "en": "The sun rises over the village... {victim} will never wake again. Someone around this table knows exactly why."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-02",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Au petit matin, on a retrouvé les chaussons de {victim} devant la porte. Juste les chaussons.",
+        "en": "At first light, {victim}'s slippers were found by the front door. Just the slippers."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-03",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Le coq chante, le café fume... et {victim} manque à l'appel. Le registre des présences ne pardonne pas, dans ce village.",
+        "en": "The rooster crows, the coffee steams... and {victim} is a no-show. Attendance is unforgiving in this village."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-04",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Mauvaise nouvelle : {victim} ne viendra plus aux réunions du village. Très mauvaise excuse, mais irréfutable.",
+        "en": "Bad news: {victim} won't be attending village meetings anymore. A terrible excuse, yet airtight."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-05",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Cette nuit, les loups ont dîné dehors. Au menu : {victim}. Le village présente ses condoléances et ouvre l'enquête.",
+        "en": "The wolves dined out last night. On the menu: {victim}. The village sends its condolences and opens the investigation."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-06",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "On a beau chercher, {victim} reste introuvable. Les traces de pattes devant la porte, en revanche : très faciles à trouver.",
+        "en": "Search all you like, {victim} is nowhere to be found. The paw prints outside the door, however? Very easy to find."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-07",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "{victim} avait dit « à demain ». La nuit en a décidé autrement.",
+        "en": "{victim} said 'see you tomorrow.' The night had other plans."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-08",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "L'aube se lève sur un village plus silencieux : {victim} a quitté la table. Quelqu'un ici sirote son café d'un air un peu trop détendu.",
+        "en": "Dawn breaks over a quieter village: {victim} has left the table. Someone here is sipping their coffee looking a little too relaxed."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-09",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Avis à la population : {victim} ne répond plus. Ni aux messages, ni à rien. Le village est prié de désigner un coupable.",
+        "en": "Public notice: {victim} is no longer responding. Not to messages, not to anything. The village is kindly asked to produce a culprit."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-10",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Hier soir, {victim} a souhaité une bonne nuit à tout le monde. C'était littéral : une bonne nuit. La dernière.",
+        "en": "Last night, {victim} wished everyone a good night. It was literal: one good night. The last one."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-11",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Le médecin du village est formel : {victim} ne souffre plus de rien. C'est à la fois rassurant et très inquiétant.",
+        "en": "The village doctor is positive: {victim} isn't suffering from anything anymore. Which is both comforting and deeply alarming."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-12",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Triste matin. Il ne reste de {victim} qu'une chaise vide, un potager et beaucoup de questions.",
+        "en": "A sad morning. All that remains of {victim}: an empty chair, a vegetable patch, and a great many questions."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-13",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "{victim} repose désormais au calme. Le reste du village, lui, ne connaîtra plus jamais le calme.",
+        "en": "{victim} now rests in peace. The rest of the village will never know peace again."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-14",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Cette nuit, quelqu'un a rayé {victim} de la liste. Le village retire un couvert et ressort les fourches.",
+        "en": "Last night, someone crossed {victim} off the list. The village removes one place setting and brings out the pitchforks."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-15",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "On murmure que {victim} a croisé la bête de très, très près. Trop près pour témoigner.",
+        "en": "Word is {victim} met the beast up close. Very close. Too close to testify."
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-death-16",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Une aube grise. Le panneau d'affichage annonce : « Disparition : {victim}. Récompense : justice. »",
+        "en": "A gray dawn. The notice board reads: 'Missing: {victim}. Reward: justice.'"
+      },
+      "tags": ["dawn", "death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-01",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Miracle au village : personne n'est mort cette nuit ! Soit les loups sont au régime, soit quelqu'un veille sur vous.",
+        "en": "A village miracle: nobody died last night! Either the wolves are on a diet, or someone is watching over you."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-02",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Le soleil se lève et tout le monde répond à l'appel. Profitez-en : ça ne durera pas.",
+        "en": "The sun rises and everyone answers roll call. Savor it: it won't last."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-03",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Nuit blanche pour les loups, nuit tranquille pour le village. Quelque part, une bête rumine sa frustration.",
+        "en": "A wasted night for the wolves, a quiet one for the village. Somewhere, a beast is sulking into its paws."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-04",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Personne ne manque au petit-déjeuner. Les croissants sont chauds, les sourires très crispés.",
+        "en": "Nobody's missing at breakfast. The croissants are warm; the smiles are extremely tense."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-05",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Zéro victime cette nuit. Le village applaudit poliment, sans trop savoir qui remercier.",
+        "en": "Zero casualties last night. The village applauds politely, not quite sure who to thank."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-06",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Tout le monde est vivant ! Le doyen n'avait pas vu ça depuis... en fait, il n'avait jamais vu ça.",
+        "en": "Everyone's alive! The village elder hasn't seen that since... actually, he has never seen that."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-07",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Les loups sont rentrés bredouilles. Quelque chose — ou quelqu'un — s'est mis en travers de leur chemin.",
+        "en": "The wolves came home empty-pawed. Something — or someone — got in their way."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-08",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "L'aube se lève sur un effectif au complet. Ne vous réjouissez pas trop fort : quelqu'un prend des notes.",
+        "en": "Dawn breaks over a full headcount. Don't celebrate too loudly: someone is taking notes."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-09",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Aucune trace, aucune plainte, aucun drame. Le village est presque déçu. Presque.",
+        "en": "No tracks, no screams, no drama. The village is almost disappointed. Almost."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-10",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Bonne nouvelle : tout le monde s'est réveillé ce matin. Mauvaise nouvelle : les loups aussi.",
+        "en": "Good news: everyone woke up this morning. Bad news: so did the wolves."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-11",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Cette nuit, le malheur est passé... et a trouvé porte close. On dit merci qui ?",
+        "en": "Doom came knocking last night... and found the door bolted. Now, who do we thank?"
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-dawn-nodeath-12",
+      "type": "narration",
+      "slot": "dawn.noDeath",
+      "text": {
+        "fr": "Matin calme. Trop calme. Le genre de calme qui se rembourse avec intérêts.",
+        "en": "A calm morning. Too calm. The kind of calm that gets repaid with interest."
+      },
+      "tags": ["dawn", "no-death"]
+    },
+    {
+      "id": "narration-lynch-wolf-01",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Le village a tranché : {target} était bel et bien un loup ! Sous la chemise, du poil. Bien joué.",
+        "en": "The village has spoken: {target} was indeed a wolf! Fur under the shirt all along. Well played."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-02",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Verdict : LOUP. {target} grognait déjà en quittant la place. Le village respire — pour l'instant.",
+        "en": "Verdict: WOLF. {target} was already growling on the way out. The village breathes again — for now."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-03",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Bingo ! {target} hurlait à la lune en cachette. Une menace de moins, des fourches encore chaudes.",
+        "en": "Bingo! {target} was howling at the moon on the sly. One threat down, pitchforks still warm."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-04",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "{target} a juré, juré n'avoir rien fait... avant de se mettre à hurler. Un loup de moins ! Le village exulte avec modération.",
+        "en": "{target} swore up and down on total innocence... then started howling. One less wolf! The village celebrates responsibly."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-05",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "La justice du village est lente, bruyante et approximative — mais aujourd'hui, elle a eu du flair : {target} était un loup.",
+        "en": "Village justice is slow, loud, and approximate — but today it had a nose for it: {target} was a wolf."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-06",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Sous les huées, {target} a fini par montrer les crocs. Affaire classée, pelage confisqué.",
+        "en": "Under the booing, {target} finally bared those fangs. Case closed, pelt confiscated."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-07",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Et la foule a vu juste : {target}, loup-garou certifié. Quelqu'un ici mérite une tournée de cidre.",
+        "en": "And the mob guessed right: {target}, certified werewolf. Somebody here has earned a round of cider."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-08",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "{target} était un loup ! Comme quoi, les regards fuyants et les alibis bancals, ça finit toujours par se payer.",
+        "en": "{target} was a wolf! Turns out shifty eyes and wobbly alibis catch up with you eventually."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-09",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Un loup démasqué : {target} ! Le village savoure. Quelque part, la meute serre les mâchoires.",
+        "en": "A wolf unmasked: {target}! The village savors the moment. Somewhere, the pack grits its teeth."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-10",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Adieu {target}, et bon débarras : c'était un loup. Le club de tricot du village reprend, un peu plus serein.",
+        "en": "Farewell {target}, and good riddance: that was a wolf. The village knitting circle resumes, slightly calmer."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-11",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "{target} rejoint le mur des loups démasqués. La place du village affiche complet ce soir : tout le monde jure que c'était son idée.",
+        "en": "{target} joins the wall of unmasked wolves. The village square is packed tonight: everyone swears it was their idea."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-wolf-12",
+      "type": "narration",
+      "slot": "lynch.wolf",
+      "text": {
+        "fr": "Les villageois ont voté, le masque est tombé : {target} courait sur quatre pattes après minuit. Plus maintenant.",
+        "en": "The villagers voted, the mask dropped: {target} ran on four legs after midnight. Not anymore."
+      },
+      "tags": ["lynch", "wolf-caught"]
+    },
+    {
+      "id": "narration-lynch-villager-01",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Aïe. {target} n'avait rien d'un loup. Le village regarde ses chaussures ; les loups se retiennent de sourire.",
+        "en": "Ouch. {target} was no wolf at all. The village stares at its shoes; the wolves bite back a grin."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-02",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Verdict : pas loup. Pas même un peu. {target} part en marmonnant « je vous l'avais dit ». Le village note de s'excuser plus tard.",
+        "en": "Verdict: not a wolf. Not even slightly. {target} leaves muttering 'told you so.' The village makes a note to apologize later."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-03",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Oups. {target} n'avait rien fait. La démocratie a parlé, et elle a dit n'importe quoi.",
+        "en": "Whoops. {target} did nothing wrong. Democracy has spoken — utter nonsense, but it has spoken."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-04",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "{target} était du bon côté. Quelque part dans la foule, un loup applaudit un peu trop fort.",
+        "en": "{target} was on the right side. Somewhere in the crowd, a wolf is clapping just a little too hard."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-05",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Erreur judiciaire ! {target} n'y était pour rien. Le village promet de faire mieux demain. Le village promet ça tous les jours.",
+        "en": "Miscarriage of justice! {target} had nothing to do with any of it. The village vows to do better tomorrow. The village vows that every day."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-06",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Le suspense retombe : {target} n'était pas un loup. Juste quelqu'un avec un visage suspect. Ça arrive aux meilleurs.",
+        "en": "The suspense deflates: {target} wasn't a wolf. Just someone with a suspicious face. Happens to the best of us."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-07",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "{target}, victime d'une erreur de casting, quitte la place sous un silence gêné. Les loups, magnanimes, proposent une minute de recueillement.",
+        "en": "{target}, a victim of miscasting, exits to an awkward hush. The wolves, magnanimous, propose a minute of silence."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-08",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Raté. {target} défendait le village. Si ça peut consoler, l'erreur était collective. Ça ne console personne.",
+        "en": "Miss. {target} was defending the village. If it helps, the mistake was collective. It helps no one."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-09",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Le village vient de se priver d'un allié : {target} jouait pour vous. Stratégie audacieuse — voyons si elle paie.",
+        "en": "The village just benched one of its own: {target} was playing for you. Bold strategy — let's see if it pays off."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-10",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Le camp du village perd {target}, qui n'avait pourtant rien à se reprocher. Le porte-parole des loups présente ses remerciements.",
+        "en": "The village team loses {target}, who had nothing to answer for. The wolves' spokesperson extends warm thanks."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-11",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Pas de crocs, pas de poils : {target} était clean. Le village vient d'offrir un jour de congé aux loups.",
+        "en": "No fangs, no fur: {target} was clean. The village just handed the wolves a paid day off."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-12",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "{target} n'était pas un loup. Dans le registre du village, à la ligne « erreurs regrettables », on commence à manquer de place.",
+        "en": "{target} was not a wolf. In the village ledger, under 'regrettable mistakes,' they are running out of room."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-13",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "Zéro croc au compteur : {target} n'était pas un loup, pas même de loin. Demain, on lit la notice avant de voter. Promis.",
+        "en": "Zero fangs on record: {target} was not a wolf, not even remotely. Tomorrow we read the instructions before voting. Promise."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-villager-14",
+      "type": "narration",
+      "slot": "lynch.villager",
+      "text": {
+        "fr": "{target} était un honnête membre du village. Les loups envoient une carte de remerciement, sans adresse d'expéditeur.",
+        "en": "{target} was an honest member of the village. The wolves send a thank-you card, no return address."
+      },
+      "tags": ["lynch", "innocent"]
+    },
+    {
+      "id": "narration-lynch-none-01",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Égalité parfaite : personne n'est éliminé. Le village a transformé un procès en débat sans fin. Classique.",
+        "en": "A perfect tie: nobody is eliminated. The village turned a trial into an endless debate. Classic."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-02",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Vote nul. Le village rentre chez lui, fier de n'avoir rien décidé. Les loups, eux, savent décider.",
+        "en": "The vote is a wash. The village heads home, proud of having decided nothing. The wolves? They know how to decide."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-03",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Pas d'éliminé aujourd'hui : la place du village reste propre, et le danger reste entier.",
+        "en": "No banishment today: the village square stays clean, and the danger stays whole."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-04",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Match nul. Les fourches retournent à la grange, déçues. La nuit, elle, arrive ravie.",
+        "en": "It's a draw. The pitchforks go back to the barn, disappointed. The night, however, arrives delighted."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-05",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Le village n'a pas su trancher. Quelque part, un loup coche « journée parfaite » dans son agenda.",
+        "en": "The village couldn't make up its mind. Somewhere, a wolf checks off 'perfect day' in its planner."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-06",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Indécision générale : personne ne part. C'est beau, la clémence. C'est aussi très risqué.",
+        "en": "General indecision: nobody leaves. Mercy is a beautiful thing. It's also very risky."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-07",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Voix partagées, personne d'éliminé. Le greffier note : « Le village hésite encore. » Il avait noté la même chose hier.",
+        "en": "Split votes, no elimination. The clerk writes: 'The village hesitates again.' He wrote the same thing yesterday."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-08",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Aucune majorité. Le tribunal du village lève la séance : l'air digne, le résultat nul.",
+        "en": "No majority. Village court adjourns — looking dignified, achieving nothing."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-09",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Personne sur le banc des accusés ce soir. La grande gagnante du jour : la nuit qui vient.",
+        "en": "Nobody in the dock tonight. Today's big winner: the night ahead."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-10",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Le village a voté à égalité parfaite — statistiquement impressionnant, stratégiquement catastrophique.",
+        "en": "The village voted to an exact tie — statistically impressive, strategically catastrophic."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-11",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Procès sans verdict. Tout le monde regagne sa chaumière en se promettant d'être plus courageux demain.",
+        "en": "A trial with no verdict. Everyone shuffles back to their cottage, vowing to be braver tomorrow."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-lynch-none-12",
+      "type": "narration",
+      "slot": "lynch.none",
+      "text": {
+        "fr": "Le vote se solde par un grand « bof » collectif. Les loups n'en demandaient pas tant.",
+        "en": "The vote ends in one big collective shrug. The wolves couldn't have asked for more."
+      },
+      "tags": ["lynch", "no-lynch"]
+    },
+    {
+      "id": "narration-over-village-01",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Le dernier loup est tombé ! Le village peut enfin dormir les deux yeux fermés. Tournée générale de tisane.",
+        "en": "The last wolf has fallen! The village can finally sleep with both eyes shut. Herbal tea for everyone — on the house."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-02",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Victoire du village ! Les fourches retournent au foin, et les ragots reprennent leur sujet préféré : les voisins.",
+        "en": "Victory for the village! Pitchforks back to the hay, and the gossip mill returns to its favorite topic: the neighbors."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-03",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Plus un seul loup debout. La place du village organise un bal — strictement interdit aux quadrupèdes.",
+        "en": "Not one wolf left standing. The village square throws a dance — strictly no quadrupeds allowed."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-04",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Le village triomphe ! Comme quoi, crier tous en même temps, ça finit parfois par marcher.",
+        "en": "The village triumphs! Turns out all shouting at once does occasionally work."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-05",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Les loups sont éradiqués. Les survivants s'auto-décernent des médailles ; les disparus auront une jolie plaque.",
+        "en": "The wolves are no more. The survivors award themselves medals; the fallen get a lovely plaque."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-06",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Fin de l'alerte : zéro loup. Le village retourne à ses occupations — pétanque, potins et procès injustifiés.",
+        "en": "All clear: zero wolves. The village returns to its routine — bowling night, gossip, and the occasional unjust trial."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-07",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Le bien l'emporte ! Le doyen ressort l'accordéon, et personne n'a le cœur de l'arrêter. Pas ce soir.",
+        "en": "Good prevails! The elder dusts off the accordion, and nobody has the heart to stop him. Not tonight."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-08",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Village : 1, Meute : 0. La forêt retrouve son silence, la taverne rend la monnaie.",
+        "en": "Village: 1, Pack: 0. The forest returns to silence; the tavern returns your change."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-09",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Les villageois gagnent ! L'enquête fut chaotique, les votes douteux, le résultat impeccable.",
+        "en": "The villagers win! The investigation was chaotic, the votes questionable, the result flawless."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-village-10",
+      "type": "narration",
+      "slot": "over.village",
+      "text": {
+        "fr": "Plus de loups, plus de nuits blanches. Le village grave la date sur le clocher, juste sous les traces de griffes.",
+        "en": "No more wolves, no more sleepless nights. The village carves the date into the bell tower, right below the claw marks."
+      },
+      "tags": ["over", "village-wins"]
+    },
+    {
+      "id": "narration-over-wolves-01",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Les loups sont désormais aussi nombreux que le village. La meute remporte la partie — et la cuisine.",
+        "en": "The wolves now match the village head for head. The pack wins the game — and the kitchen."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-02",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Fin de partie : la meute règne sur le village. Les survivants sont priés de ne pas claquer la porte en partant.",
+        "en": "Game over: the pack rules the village. Survivors are kindly asked not to slam the door on their way out."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-03",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Les loups gagnent ! Pendant tout ce temps, ils votaient avec vous, débattaient avec vous, et riaient. Surtout, ils riaient.",
+        "en": "The wolves win! All this time they voted with you, argued with you, and laughed. Oh, how they laughed."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-04",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Le village a accusé tout le monde, sauf les bons. La meute salue la performance et passe à table.",
+        "en": "The village accused everyone except the right ones. The pack salutes the effort and sits down to dinner."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-05",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Victoire des loups. Le panneau « Bienvenue au village » est remplacé par « Territoire de chasse ».",
+        "en": "The wolves win. The 'Welcome to the village' sign now reads 'Hunting grounds.'"
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-06",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "La pleine lune éclaire un village conquis. Les loups remercient les votants : sans vous, rien n'aurait été possible.",
+        "en": "The full moon shines on a conquered village. The wolves thank the voters: none of this would have been possible without you."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-07",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Les crocs l'emportent ! Morale de l'histoire : la personne la plus sympa de la table était un loup. Évidemment.",
+        "en": "The fangs have it! Moral of the story: the friendliest person at the table was a wolf. Of course they were."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-08",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "La meute triomphe. Quelque part, une voyante soupire : « Je l'avais dit. » Trop tard. Beaucoup trop tard.",
+        "en": "The pack triumphs. Somewhere, a seer sighs, 'I called it.' Too late. Far too late."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-09",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Les loups gagnent à la régulière : patience, mensonges et votes bien placés. Presque admirable. Surtout terrifiant.",
+        "en": "The wolves win fair and square: patience, lies, and well-placed votes. Almost admirable. Mostly terrifying."
+      },
+      "tags": ["over", "wolves-win"]
+    },
+    {
+      "id": "narration-over-wolves-10",
+      "type": "narration",
+      "slot": "over.wolves",
+      "text": {
+        "fr": "Fin de partie : le village appartient aux loups. Le conseil municipal se réunit désormais au clair de lune.",
+        "en": "Game over: the village belongs to the wolves. Town council now meets by moonlight."
+      },
+      "tags": ["over", "wolves-win"]
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "id": "jeu-du-theme",
+  "nameFr": "Le Jeu du Thème",
+  "nameEn": "Last Word Standing",
+  "taglineFr": "Un thème, une lettre, un mot — le dernier debout rafle la mise !",
+  "taglineEn": "One theme, one letter, one word — last one standing takes it all!",
+  "template": "NEW:LAST_STANDING",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "draw",
+      "durationSec": 4,
+      "description": "Round opener: slot-machine reveal of the theme + letter (e.g. 'Les enfants adorent…' + S). alive map resets to all connected players. Deadline -> first survivor's 'say'. Guard at entry: if <2 players connected, go straight to 'over' (gameOver with current scores) — never block the room. phaseKey 'draw:r{round}'."
+    },
+    {
+      "key": "say",
+      "durationSec": 8,
+      "description": "Shot clock on the spotlit survivor, who SHOUTS a word in the theme starting with the letter (nothing is typed — phones never capture the word). Duration decays per completed lap: max(minSayMs, sayMs - lapInRound*sayDecayPerLapMs) = 8s -> 6.5s -> 5s -> 3.5s -> 3s floor, guaranteeing convergence. Actions: 'wordSaid' (spotlight only, stops the clock -> judge) or 'giveUp' (self-eliminate, skip judge -> result). Deadline OR spotlight disconnect -> auto-elimination (outcome 'timeout'/'left') -> result. At turn entry a disconnected-but-alive player is eliminated for the round (outcome 'left') so an absentee can never win by hiding. phaseKey 'say:t{turnSeq}' (turnSeq global monotonic)."
+    },
+    {
+      "key": "judge",
+      "durationSec": 6,
+      "description": "Quick thumbs vote by EVERY other present player — eliminated players join the jury (nobody idle, dilutes rival bias). Action 'judge {vote: valid|reject}', first vote locked, own-vote echo only. Ends early when all eligible voted (all-acted); deadline resolves with votes cast. Rejected iff rejectVotes/castVotes > rejectThreshold (STRICT majority); ties, abstentions and zero votes -> VALID (benefit of the doubt — funny never cruel, anti-griefing). If the eligible-voter set is empty at entry -> auto-valid immediately. Valid: +validWordPoints to spotlight. Rejected: spotlight eliminated. phaseKey 'judge:t{turnSeq}'."
+    },
+    {
+      "key": "result",
+      "durationSec": 2,
+      "description": "Stamp beat: 'VALIDE ✅' flash or '💥 ÉLIMINÉ' bubble-pop on the player's Bloop, with the anonymous tally (counts only, never who voted what). Deadline -> next alive survivor's 'say' (wrapping the rotation increments lapInRound), or 'roundEnd' when aliveCount<=1 or the hard cap (players × maxTurnsPerRoundFactor turns) is hit. phaseKey 'result:t{turnSeq}'."
+    },
+    {
+      "key": "roundEnd",
+      "durationSec": 4,
+      "description": "Survivor crowned: +survivorPoints to the last one standing (cap case: every still-alive player gets it; zero survivors: no bonus). Emits analytics 'round_completed' — the shell's interstitial-ad boundary. Deadline -> next 'draw' (new theme+letter, alive reset) or 'over' after totalRounds / theme-deck exhaustion. phaseKey 'roundEnd:r{round}'."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Untimed terminal (phaseDurationMs = null). Final leaderboard + gameOver effect with scores. phaseKey 'over'."
+    }
+  ],
+  "params": {
+    "totalRounds": 3,
+    "drawMs": 4000,
+    "sayMs": 8000,
+    "sayDecayPerLapMs": 1500,
+    "minSayMs": 3000,
+    "judgeMs": 6000,
+    "resultMs": 2000,
+    "roundEndMs": 4000,
+    "validWordPoints": 1,
+    "survivorPoints": 3,
+    "rejectThreshold": 0.5,
+    "maxTurnsPerRoundFactor": 6,
+    "difficultyCurve": "ascending",
+    "deadPlayersJudge": true,
+    "allowGiveUp": true
+  },
+  "contentItemShape": "One item = one round card in the AUTHORING/master pack (bilingual; the publisher splits it into per-locale runtime packs '<base>-fr' / '<base>-en' per the platform's one-pack-one-locale convention, template-architecture §2.7): { id: string (stable unique id, the no-repeat key, e.g. \"jdt-kids-001\"); theme: { fr: string, en: string } (the category sentence shown to everyone, <=80 chars, SHOUTY-readable at arm's length); letters: { fr: string[], en: string[] } (UPPERCASE letters PRE-SCORED OFFLINE as feasible for this theme in that language — gate: >=15 common words exist per (theme, letter, locale); 6–10 letters per locale; the runtime picks one per round via seeded draw with cross-round no-repeat per theme; lists intentionally differ between locales); difficulty: 1|2|3 (drives the 'ascending' round curve: round 1 easy -> later rounds harder); spicy: 0|1|2 (item-level gate; pack tone = max over items; spicy items require an 18+ config sibling); tags?: string[] (freeform, for themed pack curation); exampleWords?: { fr: string[], en: string[] } (authoring/QA evidence for the feasibility gate — NEVER sent to any client during play: it would prime answers). Runtime per-locale item collapses to { id, theme: string, letters: string[], difficulty, spicy, tags? }.",
+  "sampleItems": [
+    {
+      "id": "jdt-kids-001",
+      "theme": {
+        "fr": "Les enfants adorent…",
+        "en": "Kids absolutely love…"
+      },
+      "letters": {
+        "fr": [
+          "S",
+          "P",
+          "C",
+          "B",
+          "G",
+          "M",
+          "T",
+          "J"
+        ],
+        "en": [
+          "S",
+          "P",
+          "C",
+          "B",
+          "T",
+          "D",
+          "M",
+          "F"
+        ]
+      },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": [
+        "famille",
+        "quotidien"
+      ],
+      "exampleWords": {
+        "fr": [
+          "sucettes",
+          "siffler",
+          "super-héros",
+          "bonbons",
+          "goûter",
+          "toboggan"
+        ],
+        "en": [
+          "sweets",
+          "slides",
+          "superheroes",
+          "balloons",
+          "dinosaurs",
+          "fireworks"
+        ]
+      }
+    },
+    {
+      "id": "jdt-cuisine-007",
+      "theme": {
+        "fr": "On en trouve dans une cuisine",
+        "en": "Things you find in a kitchen"
+      },
+      "letters": {
+        "fr": [
+          "C",
+          "P",
+          "F",
+          "T",
+          "B",
+          "M",
+          "A",
+          "E"
+        ],
+        "en": [
+          "S",
+          "P",
+          "F",
+          "T",
+          "B",
+          "M",
+          "C",
+          "K"
+        ]
+      },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": [
+        "objets",
+        "quotidien"
+      ],
+      "exampleWords": {
+        "fr": [
+          "casserole",
+          "passoire",
+          "fourchette",
+          "torchon",
+          "bouilloire",
+          "éponge"
+        ],
+        "en": [
+          "spatula",
+          "pan",
+          "fridge",
+          "toaster",
+          "blender",
+          "kettle"
+        ]
+      }
+    },
+    {
+      "id": "jdt-date-023",
+      "theme": {
+        "fr": "Ça peut tout gâcher lors d'un premier rendez-vous…",
+        "en": "Things that can ruin a first date…"
+      },
+      "letters": {
+        "fr": [
+          "S",
+          "R",
+          "P",
+          "T",
+          "B",
+          "M"
+        ],
+        "en": [
+          "S",
+          "B",
+          "P",
+          "T",
+          "L",
+          "G"
+        ]
+      },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": [
+        "humour",
+        "relations"
+      ],
+      "exampleWords": {
+        "fr": [
+          "silence",
+          "retard",
+          "parents",
+          "téléphone",
+          "bâillements",
+          "mensonges"
+        ],
+        "en": [
+          "sweat",
+          "burping",
+          "phone",
+          "texting",
+          "lateness",
+          "garlic"
+        ]
+      }
+    }
+  ],
+  "physical": "mixed",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundsDefault": 3,
+  "roundSeconds": 180,
+  "newTemplateSpec": "NEW TEMPLATE: LAST_STANDING (turn-based survival-verdict / battle royale). Pure GameModule<S,A,V,C> per packages/engine/src/types.ts — zero contract amendments, no wall-clock, no ambient RNG, JSON-safe null-proto state, reject-by-same-reference convention. No typed gameplay text => zero new moderation surface (words are spoken aloud in the room; phones are shot clock + jury).\n\nCONFIG (DEFAULT_CONFIG = the game_config.params of this design; all overridable per catalog entry): totalRounds, drawMs, sayMs, sayDecayPerLapMs, minSayMs, judgeMs, resultMs, roundEndMs, validWordPoints, survivorPoints, rejectThreshold, maxTurnsPerRoundFactor, difficultyCurve ('ascending'|'shuffled'), deadPlayersJudge, allowGiveUp.\n\nCONTENT C (runtime, per-locale): { locale: 'fr'|'en', items: [{ id, theme: string, letters: string[], difficulty: 1|2|3, spicy: 0|1|2, tags?: string[] }] }. Authoring lint: items >= totalRounds (recommend >= 3×), every (item, letter) pre-validated for >=15 common words.\n\nSTATE S: { config; players: PlayerId[] (roster fixed at init); rotation: PlayerId[] (seeded permutation = lap order); connected: Record<PlayerId,boolean> (presence — synthesis rule: presence ≠ elimination); phase: 'draw'|'say'|'judge'|'result'|'roundEnd'|'over'; round: number (0-based); turnSeq: number (global monotonic, ++ per say entry); lapInRound: number; turnsThisRound: number; spotIndex: number; spotlight: PlayerId; alive: Record<PlayerId,boolean> (per-round elimination, reset at each draw); current: { itemId, theme, letter } | null (public once drawn — it is shouted in the room anyway); HIDDEN themeDeck: string[] (item ids: shuffle within difficulty buckets via createRng(seed+'|themes'), buckets concatenated 1<2<3 when difficultyCurve='ascending'); HIDDEN themeCursor: number; HIDDEN usedLetters: Record<itemId, string[]> (cross-round letter no-repeat); HIDDEN judgeVotes: Record<PlayerId,'valid'|'reject'> (only tallies ever published); lastTurn: { player, outcome: 'valid'|'rejected'|'timeout'|'gaveUp'|'left', tally: { valid: number, reject: number } } | null; roundWinners: PlayerId[]; scores: Record<PlayerId,number>; wordsValidated: Record<PlayerId,number> }.\n\nACTIONS A (zod-validated at the DO boundary, reducer re-guards — tracer defense in depth): { kind:'wordSaid' } (say phase, spotlight only: stop the clock -> judge, judgeVotes={}); { kind:'giveUp' } (say phase, spotlight only, iff allowGiveUp: alive[spotlight]=false, outcome 'gaveUp' -> result); { kind:'judge', vote:'valid'|'reject' } (judge phase; eligible = present AND !== spotlight AND not yet voted; eliminated players eligible iff deadPlayersJudge; first vote locked; all-acted over the eligible set ends the phase early). All out-of-phase/unknown/duplicate actions silently ignored returning the SAME state reference.\n\nEVENTS / PHASE MACHINE: init -> draw. draw entry: if connectedCount<2 -> over (gameOver, analytics 'room_collapsed'); alive = connected snapshot; item = themeDeck[themeCursor++]; letter = seeded pick createRng(seed+'|letter|'+round+'|'+itemId) over item.letters minus usedLetters[itemId]; deadline -> enterTurn. enterTurn: advance spotIndex through rotation to the next ALIVE player (wrap => lapInRound++); if that player is disconnected, eliminate them immediately (outcome 'left' -> result beat) so an absentee can never outlast the room; turnSeq++, turnsThisRound++, phase='say'. say deadline OR playerLeft(spotlight) -> alive[spotlight]=false, outcome 'timeout'/'left' -> result. judge resolution (all-acted or deadline): cast = votes recorded; cast===0 -> valid; rejected iff rejectCount/cast > rejectThreshold (strict; ties -> valid); valid => scores[spotlight]+=validWordPoints, wordsValidated[spotlight]++, outcome 'valid'; rejected => alive[spotlight]=false, outcome 'rejected'; -> result with tally counts. judge + playerLeft(voter): shrink expected set, resolve if now all-acted, empty set -> auto-valid; playerLeft(spotlight) during judge: resolve with votes cast (claim stands). result deadline: if aliveCount<=1 OR turnsThisRound >= rotation.length×maxTurnsPerRoundFactor -> roundEnd (roundWinners = alive set; each +survivorPoints; zero alive => no bonus); else enterTurn. roundEnd deadline: round++; round>=totalRounds OR themeCursor>=themeDeck.length -> over + gameOver{scores}; else draw. playerRejoined: connected=true only; an eliminated rejoiner stays out for the current round, auto back in next draw. Effects: analytics 'turn_resolved'{outcome}, 'round_completed'{round} at roundEnd (the shell's interstitial boundary — same event name the backbone already consumes), gameOver at over.\n\nphaseDurationMs: draw=drawMs; say=max(minSayMs, sayMs − lapInRound×sayDecayPerLapMs) (pure function of state — decaying shot clock guarantees convergence); judge=judgeMs; result=resultMs; roundEnd=roundEndMs; over=null. phaseKey: 'draw:r{round}' | 'say:t{turnSeq}' | 'judge:t{turnSeq}' | 'result:t{turnSeq}' | 'roundEnd:r{round}' | 'over' — changes exactly when a new deadline must arm; never embeds a secret (theme/letter are public, votes never appear).\n\nVIEW V / REDACTION: common scaffold every phase: { phase, round, totalRounds, turnSeq, rotation, alive, connected, spotlight, current:{theme,letter}, lapInRound, sayMsThisLap, scores, wordsValidated, lastTurn }. say: + youAreSpotlight, canGiveUp (spotlight && allowGiveUp && viewer===spotlight). judge: + youCanVote (viewer present, !==spotlight, not yet voted, deadPlayersJudge gate), myVote (own-vote echo or null — NEVER anyone else's), votesIn (count only), votersExpected (count only). result: + lastTurn (player, outcome, tally COUNTS only — individual votes are never published, even after resolution, mirroring ToD). roundEnd: + roundWinners, pointsAwarded. over: { phase:'over', scores, rotation }. Viewer matrix: spotlight / other-alive / eliminated / disconnected / UNKNOWN id all receive the same public projection differing only in youAreSpotlight/canGiveUp/youCanVote/myVote; unknown viewers get youCanVote=false, myVote=null (spectator-safe per contract). HIDDEN from ALL viewers always: themeDeck, themeCursor, usedLetters, the judgeVotes mapping. Smallest redaction surface of any template — the only secrets are upcoming content and in-flight ballots; redaction audit (leakedSecrets) targets undrawn theme texts + individual votes.\n\nDETERMINISM: all RNG via createRng(seed + suffix) (rotation, theme deck, letter picks); replay() reproduces identical games; chaos/rehydration tests inherit the Plan-2 harness unchanged.\n\nREUSE PAYOFF: 'Name 3 in 5s' (vision concept #8, currently INPUT_GUESS 'blitz') becomes a CONFIG of this template later (params: elimination off / single spotlight per round, judge = green/red peer-tap, sayMs=5000) — resolving template-architecture §7 Q1 by giving the 'TIMED_VERDICT' family a home and shrinking INPUT_GUESS to the collab text game only.",
+  "recommendations": [
+    {
+      "question": "Le mot est-il tapé sur le téléphone ou dit à l'oral ?",
+      "recommendation": "Dit à l'oral, toujours. Le téléphone n'enregistre jamais le mot : il n'est que chrono + jury (boutons pouce vert/rouge).",
+      "why": "Zéro surface de modération UGC (pas de filtre obscenity à brancher, pas de texte persisté), le fun reste dans la pièce (règle plateforme : les téléphones sont des manettes), et taper un mot sous un chrono de 8s tuerait le rythme."
+    },
+    {
+      "question": "Qui valide le mot, et comment trancher les égalités ? (le brief impose le vote de la salle, pas de dictionnaire)",
+      "recommendation": "Rejet uniquement à la majorité STRICTE des votes exprimés (rejectThreshold 0.5, '>' strict) ; égalité, abstentions ou zéro vote => VALIDE. Premier vote verrouillé, pas de changement.",
+      "why": "'Funny never cruel' : le bénéfice du doute protège le joueur sous pression, empêche le griefing par abstention, et reflète exactement la règle ToD 'ties → done' déjà validée par le design system."
+    },
+    {
+      "question": "Que font les joueurs éliminés pendant le reste de la manche ?",
+      "recommendation": "Ils rejoignent le jury (deadPlayersJudge=true) : ils votent sur chaque mot jusqu'à la fin de la manche.",
+      "why": "Règle plateforme 'personne n'est idle' ; en fin de manche le jury élargi dilue le conflit d'intérêt des derniers survivants qui se jugent entre eux ; et regarder en votant, c'est déjà jouer."
+    },
+    {
+      "question": "Comment tirer la lettre sans créer des tours injouables ('Les enfants aiment…' + W) ?",
+      "recommendation": "Pas de tirage A–Z uniforme : chaque thème embarque une liste de lettres pré-validées PAR LANGUE (>=15 mots courants par couple thème×lettre, scoré offline par la pipeline IA + cross-check wordlist) ; le runtime fait un tirage seedé sans répétition dans cette liste.",
+      "why": "La faisabilité dépend de la langue et du thème ; c'est exactement le cas d'usage 'IA offline, jamais au runtime' (needsOfflineAiPipeline=true) — l'équité est pré-calculée, le gameplay reste déterministe."
+    },
+    {
+      "question": "Comment garantir qu'une manche se termine (battle royale = durée variable) ?",
+      "recommendation": "Double sécurité : le chrono de parole décroît à chaque tour de table (8s, −1.5s/tour de table, plancher 3s) + plafond dur de joueurs×6 tours (atteint => tous les survivants prennent le bonus).",
+      "why": "Le chrono qui rétrécit force mathématiquement la convergence ET fabrique la montée de tension TikTok-native (gros timer qui tremble) ; le plafond est la ceinture de sécurité pour qu'aucune salle ne reste coincée."
+    },
+    {
+      "question": "Comment gérer les mots répétés dans la même manche ?",
+      "recommendation": "Par la salle, pas par le moteur : 'Déjà dit = pouce rouge !' affiché en copy UI pendant le vote. Aucun dictionnaire, aucune saisie.",
+      "why": "Les mots sont oraux donc invisibles au moteur ; le brief exclut le dictionnaire ; et policer les répétitions est précisément ce qui rend le jury amusant."
+    },
+    {
+      "question": "Quel template ? (aucun existant n'a la boucle de survie)",
+      "recommendation": "NEW:LAST_STANDING (spec complète fournie), conçu pour absorber ensuite 'Name 3 in 5s' (INPUT_GUESS mode blitz) comme simple config. À construire après les quatre jeux désignés, à la place du mode blitz d'INPUT_GUESS.",
+      "why": "TRUTH_DARE a la rotation+verdict mais pas d'élimination ni de prompt persistant ; INPUT_GUESS blitz a spotlight+chrono+peer-tap mais n'existe pas encore. Le doc template-architecture (§7 Q1) demandait déjà si blitz devait devenir un template TIMED_VERDICT : ce jeu y répond — un template construit, deux jeux du catalogue servis."
+    },
+    {
+      "question": "Minimum de joueurs ?",
+      "recommendation": "3 (le module refuse 2), sweet spot 4–10.",
+      "why": "À 2 joueurs, l'unique juge est l'adversaire direct : conflit d'intérêt total (il rejette tout et gagne). À 3+, le jury contient toujours au moins un non-rival."
+    },
+    {
+      "question": "Barème exact ?",
+      "recommendation": "+1 point par mot validé (validWordPoints), +3 au dernier survivant de la manche (survivorPoints), jurés non scorés. 3 manches par partie.",
+      "why": "Le +1/mot récompense la participation (être éliminé 5e avec 4 mots validés vaut mieux que 1er sorti), le bonus garde l'enjeu battle-royale, et ne pas scorer les votes garde le jury honnête (leçon ToD §5)."
+    },
+    {
+      "question": "Du contenu épicé ?",
+      "recommendation": "Lancer 100% safe (spicyLevel 0). Un pack 'thèmes 18+' arrive ensuite comme config sœur tone:'spicy' + minAge 18 (gating catalogue déjà prévu), sans toucher au code.",
+      "why": "Le mécanisme est déjà drôle en safe ; le gating spicy de la plateforme (schema §2.7 : spicy => minAge>=18) couvre l'extension par pur contenu — c'est exactement la promesse template+pack."
+    }
+  ],
+  "risks": [
+    "Effort honnête : NEW:LAST_STANDING est du vrai code (~1–2 semaines, reducer + client + tests), pas du config-only — à planifier après les quatre jeux désignés ; en compensation il remplace le mode 'blitz' d'INPUT_GUESS et sert deux concepts du catalogue.",
+    "Jury rancunier / kingmaking : un éliminé peut voter 'reject' par dépit. Mitigé par majorité stricte + égalité=valide ; à surveiller via analytics (taux de reject des jurés éliminés vs vivants) ; levier futur : pondérer ou couper deadPlayersJudge par config.",
+    "Triche à l'honneur : le spotlight peut taper 'Mot lancé !' sans rien dire — c'est précisément ce que le jury sanctionne (le vote EST la validation) ; aucun correctif moteur nécessaire, mais le copy UI doit l'expliquer.",
+    "Faisabilité des lettres = qualité-critique : une liste mal scorée crée un tour injouable et le joueur le vit comme une injustice. La gate offline (>=15 mots courants par thème×lettre×langue, LLM + wordlist) est bloquante avant publication, et les listes fr/en divergent volontairement.",
+    "Manches longues à 12–16 joueurs (~5–6 min malgré le chrono décroissant) : prévoir une config catalogue grands groupes (totalRounds 2, sayMs 6000) ou plafonner maxPlayers à 12 sur l'entrée catalogue par défaut.",
+    "Les mots parlés sont non modérables par construction : on s'appuie sur report/kick/block du lobby ; risque résiduel faible car rien n'est persisté ni diffusé hors de la pièce.",
+    "Convention packs mono-locale (synthesis §3.1) vs items bilingues : la pipeline émet un master bilingue puis le publisher le scinde en '<base>-fr'/'<base>-en' — l'étape de split doit vérifier la couverture parallèle des deux locales (gate IA #2).",
+    "Déconnexion du spotlight pendant 'say' = élimination de la manche (pas de la partie) ; un rejoigneur revient à la manche suivante — à communiquer clairement en UI pour ne pas paraître punitif.",
+    "exampleWords ne doit JAMAIS atteindre un client en jeu (ça soufflerait des réponses) : champ strippé au publish, et l'audit de redaction du template doit le cibler avec themeDeck et les votes individuels."
+  ]
+}

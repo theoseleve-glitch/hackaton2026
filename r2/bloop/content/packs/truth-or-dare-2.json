@@ -1,0 +1,3004 @@
+{
+  "gameId": "truth-or-dare-2",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "fun-t-soft-001",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel est le truc le plus absurde que tu aies cherché sur Google cette semaine ?",
+        "en": "What's the most ridiculous thing you googled this week?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-002",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle chanson honteuse écoutes-tu en boucle en secret ? Assume-la maintenant, à voix haute.",
+        "en": "What's the most embarrassing song you secretly play on repeat? Own it right now, out loud."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-003",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "C'est quoi ton record de jours sans douche, et c'était quoi l'excuse officielle ?",
+        "en": "What's your personal record for days without a shower, and what was the official excuse?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-004",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "As-tu déjà fait croire que ton téléphone était mort pour ignorer quelqu'un ? Raconte la fois la plus flagrante.",
+        "en": "Have you ever pretended your phone died to dodge someone? Tell us the most blatant time."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-005",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle association de nourriture adores-tu alors qu'elle dégoûte absolument tout le monde ?",
+        "en": "What food combo do you love that makes literally everyone else gag?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-006",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Décris ta pire époque capillaire avec tous les détails. Le groupe vote si la description suffit ou s'il faut la photo.",
+        "en": "Describe your worst hair era in full detail. The room votes whether the description is enough or the photo is required."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-007",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "As-tu déjà fait une interview de toi-même devant le miroir ? C'était quelle émission ?",
+        "en": "Have you ever interviewed yourself in the mirror? What show were you on?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-008",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel est ton talent le plus inutile ? Décris-le, le groupe décide si une démonstration s'impose.",
+        "en": "What's your most useless talent? Describe it — the room decides if a live demo is required."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-009",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel est le mensonge que tu sors le plus souvent dans la vie de tous les jours ?",
+        "en": "What's the lie you tell most often in everyday life?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-010",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "C'est quoi la dernière chose totalement absurde qui t'a fait pleurer ? Les pubs et les dessins animés comptent.",
+        "en": "What's the last completely ridiculous thing that made you cry? Ads and cartoons count."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-011",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Si ton historique de recherche s'affichait sur le mur, là, maintenant, quelle recherche supplierais-tu d'effacer ?",
+        "en": "If your search history appeared on the wall right now, which search would you beg to delete?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-012",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle bêtise d'enfance ta famille ressort-elle à CHAQUE repas de famille, sans exception ?",
+        "en": "What childhood blunder does your family bring up at every single gathering, without fail?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-013",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Avais-tu un ami imaginaire ? Donne son nom, son caractère, et pourquoi vous vous êtes perdus de vue.",
+        "en": "Did you have an imaginary friend? Name, personality, and why you two eventually drifted apart."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-014",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Sur quelle appli crames-tu le plus d'heures ? Donne le vrai chiffre, pas le chiffre officiel.",
+        "en": "Which app eats most of your hours? Give the real number, not the official one."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-015",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "As-tu déjà applaudi à l'atterrissage d'un avion ? Défends-toi devant le tribunal.",
+        "en": "Have you ever clapped when the plane landed? Defend yourself before the court."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-016",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Pain au chocolat ou chocolatine ? Tranche le débat devant tout le monde et assume les conséquences.",
+        "en": "Pineapple on pizza: genius or crime? Settle it in front of everyone and live with the fallout."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-017",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "As-tu déjà rendu un signe de la main à quelqu'un… qui ne te saluait pas du tout ? Comment as-tu survécu à la honte ?",
+        "en": "Ever waved back at someone who wasn't waving at you at all? How did you survive the shame?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-018",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle est la chose la plus gamine que tu fais encore en secret ?",
+        "en": "What's the most childish thing you still secretly do?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-019",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "C'est quoi ta blessure la plus bête, et comment c'est arrivé ? Reconstitution verbale obligatoire.",
+        "en": "What's the dumbest way you've ever injured yourself? Verbal reenactment required."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-020",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel mot as-tu prononcé de travers pendant des années avant que quelqu'un ose te corriger ?",
+        "en": "What word did you mispronounce for years before someone finally dared to correct you?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-021",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel film adoré de tout le monde trouves-tu secrètement ennuyeux à mourir ?",
+        "en": "Which movie everyone loves do you secretly find boring beyond belief?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-022",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel petit mensonge as-tu déjà sorti ce soir ? Il y en a forcément un.",
+        "en": "What little white lie have you already told tonight? There's definitely one."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-023",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle théorie complètement absurde te semble secrètement un tout petit peu crédible ?",
+        "en": "What completely absurd theory do you secretly find just a tiny bit plausible?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-024",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle chanson fais-tu semblant de connaître en marmonnant les paroles ? Chante-nous ta version, là.",
+        "en": "Which song do you pretend to know by mumbling the lyrics? Sing us your version, right now."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-025",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Affiche ton temps d'écran du jour et lis le chiffre à voix haute, sans aucun commentaire.",
+        "en": "Pull up today's screen time and read the number out loud, no commentary allowed."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-026",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Raconte le rêve le plus bizarre dont tu te souviennes — sans l'arranger pour paraître normal.",
+        "en": "Tell us the weirdest dream you remember — without editing it to sound normal."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-027",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "C'est quoi le pire fond d'écran ou la pire sonnerie que tu aies jamais eu ? Tu assumes cette époque ?",
+        "en": "What's the worst wallpaper or ringtone you've ever had? Do you stand by that era?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-028",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Si tes plantes ou ton animal pouvaient parler, quelle habitude de toi balanceraient-ils en premier ?",
+        "en": "If your pets or plants could talk, which of your habits would they snitch on first?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-029",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel est ton pire message envoyé dans le mauvais groupe ? Raconte la seconde exacte où tu as compris.",
+        "en": "What's your worst message sent to the wrong chat? Walk us through the exact second you realized."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-030",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "As-tu déjà refait un débat sous la douche… et perdu quand même ? Contre qui ?",
+        "en": "Have you ever replayed an argument in the shower… and still lost? Against whom?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-031",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Tu voulais faire quoi comme métier à 7 ans, et à quel moment précis ça a déraillé ?",
+        "en": "What did you want to be at age 7, and at what exact moment did it all go off the rails?"
+      },
+      "props": false,
+      "tags": ["funny", "deep"]
+    },
+    {
+      "id": "fun-t-soft-032",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle est la raison la plus mesquine pour laquelle tu aies boudé quelqu'un ?",
+        "en": "What's the pettiest reason you've ever sulked at someone?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-033",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quelle émission regardes-tu en cachette en sachant très bien que c'est nul ?",
+        "en": "What show do you watch in secret while knowing full well it's trash?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-034",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel fou rire t'a pris au pire moment possible (cours, réunion, cérémonie) ? Qu'est-ce qui l'a déclenché ?",
+        "en": "What's the worst possible moment you got the giggles (class, meeting, ceremony)? What set you off?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-soft-035",
+      "choice": "truth",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Quel snack planques-tu pour ne pas avoir à le partager, et où se trouve la cachette actuelle ?",
+        "en": "What snack do you hide so you don't have to share it, and where's the current stash?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    }
+,
+    {
+      "id": "fun-d-soft-001",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Parle avec une voix de robot jusqu'à ton prochain tour. Aucun bug toléré.",
+        "en": "Speak in a robot voice until your next turn. Zero glitches tolerated."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-002",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Fais ton imitation la plus affectueuse de quelqu'un dans la pièce. Le groupe doit deviner qui en moins de 10 secondes.",
+        "en": "Do your most loving impression of someone in this room. The group has to guess who within 10 seconds."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-003",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Invente et joue une pub de 15 secondes pour l'objet le plus proche de toi, slogan inclus.",
+        "en": "Invent and perform a 15-second commercial for the nearest object, slogan included."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-004",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Fais 10 squats en récitant l'alphabet à l'envers. Le groupe compte les deux en même temps.",
+        "en": "Do 10 squats while reciting the alphabet backwards. The room counts both at once."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-005",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Le groupe choisit un animal : tu ne communiques qu'avec ses cris pendant une minute entière.",
+        "en": "The group picks an animal: communicate only in that animal's sounds for one full minute."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-006",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Traverse la pièce en démarche de défilé haute couture, aller-retour, regard d'acier obligatoire.",
+        "en": "Walk the length of the room like a runway model, there and back, steel gaze mandatory."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-007",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Improvise un rap qui case les prénoms de trois joueurs. Quatre mesures minimum.",
+        "en": "Freestyle a rap that includes three players' first names. Four bars minimum."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-008",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Mets un coussin (ou un livre) en équilibre sur ta tête et traverse la pièce sans le faire tomber.",
+        "en": "Balance a cushion (or a book) on your head and cross the room without dropping it."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-009",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Dis « les chaussettes de l'archiduchesse sont-elles sèches » cinq fois, vite. Chaque erreur : on recommence (3 essais max).",
+        "en": "Say 'she sells seashells by the seashore' five times fast. Every slip means you start over (3 tries max)."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-010",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Rejoue ton entrée dans la pièce de ce soir en slow motion ultra dramatique, bruitages inclus.",
+        "en": "Reenact tonight's entrance into this room in ultra-dramatic slow motion, sound effects included."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-011",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Lance ton faux rire le plus exagéré et tiens-le jusqu'à ce qu'au moins une personne rie pour de vrai.",
+        "en": "Start your most exaggerated fake laugh and keep it going until at least one person genuinely laughs."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-012",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Célèbre comme si tu venais de gagner la Coupe du monde : glissade, cris, interview d'après-match.",
+        "en": "Celebrate like you just won the World Cup: knee slide, screaming, post-match interview."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-013",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "La personne à ta gauche a 30 secondes pour te recoiffer comme elle veut. Tu gardes la coiffure jusqu'à ton prochain tour.",
+        "en": "The player on your left gets 30 seconds to restyle your hair however they want. You keep it until your next turn."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-014",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Le groupe te choisit un accent (québécois, belge, marseillais…) : tu le gardes jusqu'à ton prochain tour.",
+        "en": "The group picks you an accent (pirate, posh British, cowboy…): keep it until your next turn."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-015",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Mime ta routine du matin en accéléré. Le groupe doit deviner chaque étape, même la moins glorieuse.",
+        "en": "Mime your morning routine in fast-forward. The room must guess every step, even the least glorious one."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-016",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Chante tout ce que tu dis jusqu'à ton prochain tour — opéra ou comédie musicale, au choix.",
+        "en": "Sing everything you say until your next turn — opera or musical theatre, your pick."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-017",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Exécute le pire pas de danse que tu connaisses avec une confiance absolue, pendant 20 secondes.",
+        "en": "Perform the worst dance move you know with absolute confidence for 20 seconds."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-018",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Tiens la planche en citant 10 garnitures de pizza. Si tu t'effondres avant la dixième, tu recommences (une seule fois).",
+        "en": "Hold a plank while naming 10 pizza toppings. Collapse before ten and you restart from zero (once)."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-019",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Présente l'objet à ta droite comme un influenceur en plein placement de produit. Code promo obligatoire.",
+        "en": "Present the object on your right like an influencer doing a sponsored post. Promo code mandatory."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-020",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Raconte un souvenir très heureux avec le visage le plus tragique possible pendant 30 secondes.",
+        "en": "Tell a very happy memory while wearing the most tragic face possible for 30 seconds."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-021",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Fais 5 pompes ; à chaque pompe, lance un compliment à un joueur différent.",
+        "en": "Do 5 push-ups; on each one, give a compliment to a different player."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-022",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Fais visiter ce salon comme si c'était un monument historique classé. Anecdotes inventées bienvenues.",
+        "en": "Give a guided tour of this living room as if it were a national landmark. Invented anecdotes welcome."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-023",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Essaie de te lécher le coude avec un engagement total pendant 15 secondes. Le groupe note l'effort.",
+        "en": "Try to lick your own elbow with total commitment for 15 seconds. The room grades the effort."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-024",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Le groupe te sculpte en statue (pose de leur choix). Tiens la pose 30 secondes sans bouger ni rire.",
+        "en": "The group sculpts you into a statue (pose of their choice). Hold it 30 seconds without moving or laughing."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-025",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Lis ta dernière phrase envoyée par message comme une tirade de théâtre classique. Diction parfaite exigée.",
+        "en": "Read the last sentence you texted as a classical theatre monologue. Perfect diction required."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-026",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Présente la météo de demain… des humeurs de chaque joueur. Carte imaginaire et gestes de présentateur inclus.",
+        "en": "Present tomorrow's weather forecast… for each player's mood. Imaginary map and anchor gestures included."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-027",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Enfile des chaussettes sur tes mains et garde-les jusqu'à ton prochain tour, y compris pour utiliser ton téléphone.",
+        "en": "Put socks on your hands and keep them there until your next turn — phone use included."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-028",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Commente tout ce qui se passe dans la pièce comme un commentateur sportif survolté jusqu'à ton prochain tour.",
+        "en": "Commentate everything happening in the room like an overexcited sports announcer until your next turn."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-029",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Improvise 20 secondes d'opéra sur ce que tu as mangé aujourd'hui. Vibrato obligatoire sur le dessert.",
+        "en": "Improvise 20 seconds of opera about what you ate today. Mandatory vibrato on the dessert."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-030",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Lance une dispute véhémente contre un objet de la pièce… et perds le débat de façon humiliante.",
+        "en": "Pick a heated argument with an object in the room… and lose the debate humiliatingly."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-031",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Tu as 30 secondes pour faire rire un joueur désigné par le groupe — sans parler et sans le toucher.",
+        "en": "You have 30 seconds to make a player chosen by the group laugh — no words, no touching."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-032",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Épelle ton prénom complet avec les hanches. Le groupe doit pouvoir lire chaque lettre.",
+        "en": "Spell out your full first name with your hips. The room must be able to read every letter."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-033",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Fais ton rire de grand méchant en trois niveaux : discret, inquiétant, fin du monde.",
+        "en": "Deliver your supervillain laugh in three escalating levels: subtle, unsettling, end of the world."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-soft-034",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Affiche ton emoji le plus utilisé et joue-le en mime intégral pendant 15 secondes.",
+        "en": "Show your most-used emoji, then act it out in full-body mime for 15 seconds."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-soft-035",
+      "choice": "dare",
+      "intensity": "soft",
+      "spicy": 0,
+      "minAge": 13,
+      "text": {
+        "fr": "Tu reçois le prix de « personne la plus dramatique de la soirée ». Fais ton discours en remerciant trois joueurs, larmes en option.",
+        "en": "You've just won the award for 'most dramatic person here'. Give your acceptance speech thanking three players — tears optional."
+      },
+      "props": false,
+      "tags": ["funny"]
+    }
+,
+    {
+      "id": "fun-t-party-001",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qui dans cette pièce appellerais-tu en premier pour venir te chercher à 4 h du matin sans poser de questions ? Et qui en tout dernier ?",
+        "en": "Who in this room would you call first to pick you up at 4 a.m., no questions asked? And who dead last?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-002",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte ton pire date en 30 secondes chrono. Le groupe vote ensuite : le problème, c'était toi ou l'autre ?",
+        "en": "Tell your worst date story in 30 seconds flat. Then the room votes: were you the problem, or were they?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-003",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà ghosté quelqu'un ? Décris ta technique de disparition la plus lâche.",
+        "en": "Have you ever ghosted someone? Describe your most cowardly vanishing act."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-004",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la pire phrase de drague que tu aies vraiment utilisée ? Ressors-la maintenant avec une sincérité totale.",
+        "en": "What's the worst pickup line you've actually used? Deliver it right now with total sincerity."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-005",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Dans un film d'horreur, qui de la pièce survit jusqu'au bout et qui meurt dans les 5 premières minutes ? Justifie.",
+        "en": "In a horror movie, who in this room survives to the end and who dies in the first 5 minutes? Justify."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-006",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Décris (sans la montrer) la photo la plus gênante de ta galerie. Le groupe décide si la description est crédible.",
+        "en": "Describe (without showing it) the most embarrassing photo in your camera roll. The room decides if the description is believable."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-007",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà fouillé le profil du nouveau ou de la nouvelle de ton ex ? Jusqu'où es-tu remonté dans les photos ?",
+        "en": "Have you ever deep-dived your ex's new partner online? How far back in the photos did you scroll?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-008",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel énorme red flag as-tu ignoré juste parce que la personne te plaisait beaucoup trop ?",
+        "en": "What giant red flag did you ignore just because the person was way too attractive?"
+      },
+      "props": false,
+      "tags": ["funny", "deep"]
+    },
+    {
+      "id": "fun-t-party-009",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte ta soirée la plus chaotique : le lieu, le moment exact où ça a basculé, et qui t'a ramené.",
+        "en": "Tell us about your most chaotic night out: the place, the exact moment it tipped over, and who got you home."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-010",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Classe trois joueurs du pire au moins pire en colocataire. Argumente chaque place du podium.",
+        "en": "Rank three players from worst to least-worst roommate. Defend every spot on the podium."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-011",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la raison la plus futile pour laquelle tu as arrêté de voir quelqu'un qui te plaisait vraiment ?",
+        "en": "What's the most trivial reason you stopped seeing someone you actually liked?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-012",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà envoyé un message qui parlait de quelqu'un… directement à cette personne ? Raconte les 10 secondes qui ont suivi.",
+        "en": "Have you ever sent a message about someone… straight to that person? Walk us through the next 10 seconds."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-013",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qui était ton tout premier crush de célébrité ? Défends ce choix aujourd'hui, sans rire.",
+        "en": "Who was your very first celebrity crush? Defend that choice today with a straight face."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-014",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la chose la plus gênante que tu aies faite pour attirer l'attention d'un crush ?",
+        "en": "What's the most embarrassing thing you've ever done to get a crush's attention?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-015",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà fait semblant d'adorer un truc (sport, groupe, jeu) pour plaire à quelqu'un ? Jusqu'où est allé le mensonge ?",
+        "en": "Have you ever pretended to love something (a sport, a band, a game) to impress someone? How deep did the lie go?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-016",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la pire chose que tu aies dite en entretien ou à l'oral ? Redis-la maintenant avec le même aplomb.",
+        "en": "What's the worst thing you've ever said in an interview or an oral exam? Say it again now with the same confidence."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-017",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Ouvre ton appli Notes et lis l'entrée la plus gênante à voix haute. Tu as droit à UN seul veto.",
+        "en": "Open your Notes app and read the most embarrassing entry out loud. You get exactly ONE veto."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-018",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qui ici a l'énergie la plus chaotique en soirée ? Donne une anecdote précise en guise de preuve.",
+        "en": "Who here has the most chaotic night-out energy? Provide one specific story as evidence."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-019",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà pleuré dans les toilettes d'une soirée ? Pour quelle raison, et qui est venu te consoler ?",
+        "en": "Have you ever cried in the bathroom at a party? Over what, and who came to talk you down?"
+      },
+      "props": false,
+      "tags": ["funny", "deep"]
+    },
+    {
+      "id": "fun-t-party-020",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "La dernière fois qu'on t'a surpris en train de mater quelqu'un, comment as-tu tenté de sauver les apparences ?",
+        "en": "Last time you got caught checking someone out, how did you try to play it off?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-021",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "C'est quoi ton toxic trait, d'après tes ex ou tes amis ? Cite-les mot pour mot.",
+        "en": "What's your toxic trait, according to your exes or your friends? Quote them word for word."
+      },
+      "props": false,
+      "tags": ["funny", "deep"]
+    },
+    {
+      "id": "fun-t-party-022",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Montre ta dernière recherche sur un réseau social et justifie-la devant le tribunal.",
+        "en": "Show your most recent social media search and justify it before the court."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-023",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "À qui dans la pièce confierais-tu ton téléphone déverrouillé pendant une heure ? Et à qui jamais de la vie ? Pourquoi ?",
+        "en": "Who in this room would you trust with your unlocked phone for an hour? And who never, ever? Why?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-024",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle vidéo ou note vocale gênante de toi existe quelque part dans la nature ? Décris-la et dis qui la détient.",
+        "en": "What embarrassing video or voice memo of you exists somewhere out there? Describe it and say who's holding it."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-025",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la fois où tu es passé le plus près de te faire virer d'un endroit ? Raconte tout.",
+        "en": "What's the closest you've ever come to getting kicked out of somewhere? Spill everything."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-026",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte ton pire baiser : la technique, l'ambiance, le moment où tu as compris. Aucun prénom requis.",
+        "en": "Describe your worst kiss ever: the technique, the vibe, the moment you knew. No names required."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-027",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle notification serait la plus catastrophique à voir s'afficher sur ton écran, là, devant tout le monde ?",
+        "en": "What notification would be the most catastrophic to pop up on your screen right now, in front of everyone?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-028",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Si tes ex devaient laisser un avis Google sur toi, combien d'étoiles et quel commentaire exactement ?",
+        "en": "If your exes left you a Google review, how many stars and what exactly would the comment say?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-029",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "As-tu déjà eu un crush sur quelqu'un de totalement inapproprié (prof, médecin, ami de tes parents) ? Raconte, sans nom.",
+        "en": "Have you ever had a crush on someone wildly inappropriate (teacher, doctor, your parents' friend)? Tell the story, no names."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-t-party-030",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel est le dernier truc que tu as liké à 2 h du matin en espérant que personne ne le voie jamais ?",
+        "en": "What's the last thing you liked at 2 a.m. while praying nobody would ever see it?"
+      },
+      "props": false,
+      "tags": ["funny"]
+    }
+,
+    {
+      "id": "fun-d-party-001",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Appelle un contact choisi par le groupe et chante-lui « Joyeux anniversaire » en entier. Ce n'est pas son anniversaire.",
+        "en": "Call a contact picked by the group and sing them 'Happy Birthday' all the way through. It is not their birthday."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-002",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe choisit une photo DE TOI dans ta galerie : poste-la en story. Suppression autorisée dans 10 minutes.",
+        "en": "The group picks a photo OF YOU from your gallery: post it to your story. You may delete it in 10 minutes."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-003",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Montre ton pas de danse le plus sensuel avec un engagement total pendant 15 secondes. Le groupe note l'aisance.",
+        "en": "Show your most seductive dance move with full commitment for 15 seconds. The room scores the confidence."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-004",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Mets un genou à terre et fais une sérénade de 20 secondes au joueur d'en face. Regard intense obligatoire.",
+        "en": "Drop to one knee and serenade the player across from you for 20 seconds. Intense eye contact required."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-005",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "La personne à ta gauche a 20 secondes dans ta galerie photos, défilement libre. Les albums cachés restent interdits.",
+        "en": "The player on your left gets 20 seconds in your camera roll, free scrolling. Hidden albums stay off-limits."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-006",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Échange un vêtement visible (haut, pull, accessoire) avec la personne à ta droite jusqu'à ton prochain tour.",
+        "en": "Swap one visible piece of clothing (top, hoodie, accessory) with the player on your right until your next turn."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-007",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Rejoue ta réplique de rupture la plus dramatique (réelle ou rêvée), jouée droit dans les yeux d'un joueur de ton choix.",
+        "en": "Reenact your most dramatic breakup line (real or imagined), performed straight at a player of your choice."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-008",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fixe la personne à ta gauche dans les yeux pendant 30 secondes sans rire. Le premier qui craque fait 5 squats.",
+        "en": "Lock eyes with the player on your left for 30 seconds without laughing. First to crack does 5 squats."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-009",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe choisit un contact : envoie-lui un seul emoji canard 🦆, puis refuse toute explication pendant 10 minutes.",
+        "en": "The group picks a contact: send them a single duck emoji 🦆, then refuse to explain anything for 10 minutes."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-010",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Lis à voix haute les cinq derniers messages d'une conversation choisie par le groupe. Tu peux biper UN seul nom.",
+        "en": "Read aloud the last five messages of a conversation chosen by the group. You may bleep exactly ONE name."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-011",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Imite la façon de draguer de trois joueurs, 10 secondes chacun. Les intéressés n'ont pas le droit de protester avant la fin.",
+        "en": "Impersonate how three players flirt, 10 seconds each. The players in question may not protest until you're done."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-012",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais 30 secondes de stand-up sur l'appart (ou le salon) de ton hôte. L'hôte note la vanne finale sur 10.",
+        "en": "Do 30 seconds of stand-up about the host's place. The host scores your closing joke out of 10."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-013",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais ta tête de selfie officielle et tiens-la 20 secondes pendant que le groupe la note à voix haute.",
+        "en": "Strike your official selfie face and hold it for 20 seconds while the room rates it out loud."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-014",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Laisse la personne à ta droite écrire un message à qui elle veut depuis ton téléphone — tu as 3 secondes pour le relire avant l'envoi.",
+        "en": "Let the person on your right text anyone they want from your phone — you get 3 seconds to read it before it sends."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-015",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe choisit une photo de ta galerie : c'est ton fond d'écran jusqu'à demain. Aucune négociation possible.",
+        "en": "The group picks a photo from your gallery: that's your wallpaper until tomorrow. No negotiation."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-016",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe te compose une cuillère de condiments (comestible, rien de dangereux). Goûte et décris les arômes comme un sommelier.",
+        "en": "The group builds you one spoonful of condiments (edible, nothing dangerous). Taste it and describe the notes like a sommelier."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-017",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Tu ne parles qu'en questions jusqu'à ton prochain tour. Chaque phrase affirmative = 5 jumping jacks immédiats.",
+        "en": "Speak only in questions until your next turn. Every statement = 5 immediate jumping jacks."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-018",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Appelle un parent et annonce-lui très sérieusement que tu te lances dans le yodel professionnel. Tiens 30 secondes.",
+        "en": "Call a parent and announce, dead serious, that you're going pro in yodeling. Hold the bit for 30 seconds."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-019",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Recrée une affiche de film romantique avec le joueur volontaire le plus proche. Tenez la pose 10 secondes, intensité maximale.",
+        "en": "Recreate a romance movie poster with the nearest willing player. Hold the pose for 10 seconds at maximum intensity."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-020",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Montre ton top 3 d'applis les plus utilisées et joue une pub de 10 secondes pour la plus honteuse.",
+        "en": "Show your top 3 most-used apps and perform a 10-second commercial for the most shameful one."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-021",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Montre la dernière photo de toi que tu as failli poster… puis supprimée ou archivée. Explique le renoncement.",
+        "en": "Show the last photo of yourself you almost posted… then deleted or archived. Explain the retreat."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-022",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe rédige ta bio d'appli de rencontre en 30 secondes. Lis-la à voix haute avec une sincérité absolue.",
+        "en": "The group writes your dating-app bio in 30 seconds. Read it out loud with absolute sincerity."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-023",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Imite la personne à ta droite quand elle reçoit un message de son crush. Version longue, avec bruitages.",
+        "en": "Impersonate the player on your right receiving a text from their crush. Extended cut, sound effects included."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-024",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Danse 30 secondes sans aucune musique pendant que tout le monde te regarde dans un silence total.",
+        "en": "Dance for 30 seconds with no music while everyone watches you in total silence."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-025",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Le groupe choisit un mot interdit pour toi jusqu'à ton prochain tour. Chaque oubli = 5 squats, comptés publiquement.",
+        "en": "The group picks one word you're banned from saying until your next turn. Every slip = 5 squats, counted publicly."
+      },
+      "props": false,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-026",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Drague un objet de la pièce pendant 20 secondes comme si c'était l'amour de ta vie. Rupture dramatique en option.",
+        "en": "Flirt with an object in the room for 20 seconds like it's the love of your life. Dramatic breakup optional."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-027",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Lis la liste d'ingrédients d'un produit de la cuisine comme un poème d'amour déchirant.",
+        "en": "Read the ingredients list of any kitchen product as a heartbreaking love poem."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-028",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "La personne à ta gauche te dessine un « tatouage » au feutre lavable sur le bras. Tu le portes fièrement jusqu'à la fin de la partie.",
+        "en": "The player on your left draws you a 'tattoo' in washable marker on your arm. Wear it proudly until the game ends."
+      },
+      "props": true,
+      "tags": ["funny", "physical"]
+    },
+    {
+      "id": "fun-d-party-029",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Enregistre un nouveau message d'accueil de répondeur dicté par le groupe et garde-le pendant 24 heures.",
+        "en": "Record a new voicemail greeting dictated by the group and keep it for 24 hours."
+      },
+      "props": true,
+      "tags": ["funny"]
+    },
+    {
+      "id": "fun-d-party-030",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais ton regard de braise le plus intense à chaque joueur, un par un, 5 secondes chacun, sans jamais rire.",
+        "en": "Give every player your most intense smolder, one by one, 5 seconds each, without ever laughing."
+      },
+      "props": false,
+      "tags": ["funny", "physical"]
+    }
+,
+    {
+      "id": "lov-t-party-001",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qu'as-tu vraiment pensé la toute première fois que tu as vu ton/ta partenaire ? Version non censurée.",
+        "en": "What did you honestly think the very first time you saw your partner? Uncensored version."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-002",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la chose la plus gênante que tu aies faite pour impressionner ton/ta partenaire au tout début ?",
+        "en": "What's the most embarrassing thing you did to impress your partner in the early days?"
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-003",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle habitude de ton/ta partenaire t'agaçait au début… et te fait secrètement craquer maintenant ?",
+        "en": "Which of your partner's habits annoyed you at first… and secretly melts you now?"
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-t-party-004",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel est le trait le plus séduisant de ton/ta partenaire qui n'a strictement rien à voir avec le physique ?",
+        "en": "What's your partner's most attractive trait that has absolutely nothing to do with looks?"
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-005",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle chanson te fait instantanément penser à ton/ta partenaire ? Explique pourquoi, puis fredonne le refrain.",
+        "en": "What song instantly reminds you of your partner? Tell us why, then hum the chorus."
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-t-party-006",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte le moment exact où tu as su que tu craquais pour ton/ta partenaire — avec tous les détails gênants.",
+        "en": "Describe the exact moment you knew you were falling for your partner — embarrassing details included."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-007",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "C'est quoi la dispute la plus ridicule que vous ayez jamais eue ? Assume ta part du ridicule.",
+        "en": "What's the most ridiculous argument you two have ever had? Own your share of the ridiculous."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-008",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Montre la plus vieille photo de vous deux dans ton téléphone et raconte ce jour-là.",
+        "en": "Show the oldest photo of you two on your phone and tell the story of that day."
+      },
+      "props": true,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-009",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qu'as-tu raconté à tes amis juste après votre premier rendez-vous ? Mot pour mot si possible.",
+        "en": "What did you tell your friends right after your first date? Word for word if you can."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-010",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel petit truc fait ton/ta partenaire qui te fait fondre à chaque fois, sans exception ?",
+        "en": "What tiny thing does your partner do that melts you every single time, no exceptions?"
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-011",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quelle est la chose la plus romantique que ton/ta partenaire ait faite… et a probablement oubliée depuis ?",
+        "en": "What's the most romantic thing your partner ever did… and has probably forgotten since?"
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-012",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Sois honnête : qui a écrit en premier, qui est tombé amoureux en premier, qui a dit « je t'aime » en premier ?",
+        "en": "Be honest: who texted first, who fell first, and who said 'I love you' first?"
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-013",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel petit mensonge du début (« j'adore courir », « je suis super ordonné ») n'as-tu jamais avoué ? C'est le moment.",
+        "en": "What early-days white lie ('I love hiking', 'I'm so tidy') have you never confessed? Now's the moment."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-014",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Décris ton/ta partenaire en exactement trois mots, comme à un parfait inconnu. Ton/ta partenaire valide ou conteste.",
+        "en": "Describe your partner in exactly three words, as if to a total stranger. Your partner confirms or contests."
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-t-party-015",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel est votre meilleur souvenir à deux qui n'a pas coûté un seul centime ?",
+        "en": "What's your best memory together that cost absolutely nothing?"
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-016",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "De quoi avais-tu le plus peur en commençant cette relation ? Et cette peur, elle en est où aujourd'hui ?",
+        "en": "What scared you most when this relationship started? And where is that fear now?"
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-017",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel crime vestimentaire de ton/ta partenaire laisses-tu passer uniquement par amour ? Décris la pièce coupable.",
+        "en": "What fashion crime of your partner's do you tolerate purely out of love? Describe the guilty item."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-018",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "À quel moment es-tu le plus fier ou la plus fière de ton/ta partenaire ? Donne un exemple précis.",
+        "en": "When are you at your absolute proudest of your partner? Give one specific example."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-019",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Qu'est-ce que tu racontes de ton/ta partenaire pour frimer quand il ou elle n'est pas là ?",
+        "en": "What do you brag about your partner when they're not in the room?"
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-t-party-020",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "À quel point êtes-vous passés près de ne jamais vous rencontrer ? Raconte le coup du destin.",
+        "en": "How close did you two come to never meeting at all? Tell us the twist of fate."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-021",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel cliché de couple avais-tu juré de ne JAMAIS devenir… que vous incarnez totalement aujourd'hui ?",
+        "en": "Which couple cliché did you swear you'd NEVER become… that you two are now living completely?"
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-022",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel est le surnom le plus absurde que tu donnes à ton/ta partenaire ? Dis-le devant tout le monde — avec LA voix.",
+        "en": "What's the most absurd pet name you call your partner? Say it in front of everyone — with THE voice."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-party-023",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Pour quelle chose n'as-tu jamais vraiment remercié ton/ta partenaire ? Fais-le là, maintenant, pour de vrai.",
+        "en": "What's one thing you've never properly thanked your partner for? Do it here, now, for real."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-024",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Vous deux dans dix ans, honnêtement : décris la scène, le lieu, le niveau de chaos.",
+        "en": "You two in ten years, honestly: describe the scene, the place, the level of chaos."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-party-025",
+      "choice": "truth",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Quel moment de la routine quotidienne de ton/ta partenaire trouves-tu absurdement mignon ?",
+        "en": "What part of your partner's daily routine do you find unreasonably cute?"
+      },
+      "props": false,
+      "tags": ["couple"]
+    }
+,
+    {
+      "id": "lov-d-party-001",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Plonge ton regard dans celui de ton/ta partenaire pendant 30 secondes. Interdiction de parler ou de rire.",
+        "en": "Hold your partner's gaze for 30 full seconds. No talking, no laughing."
+      },
+      "props": false,
+      "tags": ["couple", "physical"]
+    },
+    {
+      "id": "lov-d-party-002",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Danse un slow de 30 secondes avec ton/ta partenaire — sans musique, c'est toi qui fredonnes la chanson.",
+        "en": "Slow dance with your partner for 30 seconds — no music, you're the one humming the song."
+      },
+      "props": false,
+      "tags": ["couple", "physical"]
+    },
+    {
+      "id": "lov-d-party-003",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais à ton/ta partenaire un compliment que tu ne lui as jamais dit à voix haute. Le groupe juge la sincérité.",
+        "en": "Give your partner a compliment you've never said out loud before. The room judges the sincerity."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-d-party-004",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Recréez la pose exacte de votre toute première photo ensemble. De mémoire. Le groupe compare si la photo existe encore.",
+        "en": "Recreate the exact pose from your very first photo together. From memory. The room compares if the photo still exists."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-party-005",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Prends les mains de ton/ta partenaire et dis-lui les trois choses qui te manqueraient le plus. Sans lâcher les mains.",
+        "en": "Hold your partner's hands and tell them the three things you'd miss most about them. Don't let go."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-d-party-006",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Parle à ton/ta partenaire dans une langue inventée pendant 30 secondes. Il ou elle traduit pour le groupe, avec assurance.",
+        "en": "Speak to your partner in an invented language for 30 seconds. They translate for the room — with total confidence."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-007",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais une sérénade d'au moins 20 secondes à ton/ta partenaire, chanson au choix, regard soutenu obligatoire.",
+        "en": "Serenade your partner for at least 20 seconds, any song, sustained eye contact mandatory."
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-d-party-008",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Masse les mains de ton/ta partenaire pendant 60 secondes. Vous gardez tous les deux un visage de poker. Le groupe surveille.",
+        "en": "Give your partner a 60-second hand massage. You both keep a poker face. The room is watching."
+      },
+      "props": false,
+      "tags": ["couple", "physical"]
+    },
+    {
+      "id": "lov-d-party-009",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Rejoue votre rencontre en interprétant LES DEUX rôles, changements de voix inclus.",
+        "en": "Reenact the moment you two met, playing BOTH roles, voice changes included."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-010",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Chuchote ton souvenir préféré de vous deux à l'oreille de ton/ta partenaire. Le groupe juge sur son sourire.",
+        "en": "Whisper your favorite memory of you two into your partner's ear. The room judges by their smile."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-d-party-011",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Ton/ta partenaire vous met en scène pour LA photo de couple la plus kitsch possible. Tenez la pose 15 secondes, le groupe note.",
+        "en": "Your partner stages you both for the cheesiest couple photo pose imaginable. Hold it 15 seconds while the room scores it."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-party-012",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Écris un poème d'amour de deux vers en 60 secondes et déclame-le à ton/ta partenaire comme en finale de slam.",
+        "en": "Write a two-line love poem in 60 seconds and perform it for your partner like it's a slam final."
+      },
+      "props": false,
+      "tags": ["couple"]
+    },
+    {
+      "id": "lov-d-party-013",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais un baisemain à ton/ta partenaire comme un aristocrate du XVIIIe siècle et reste dans le personnage 20 secondes.",
+        "en": "Kiss your partner's hand like an 18th-century aristocrat and stay in character for 20 seconds."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-014",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Serre ton/ta partenaire dans tes bras pendant 20 secondes. Un vrai câlin. Les petites tapes dans le dos sont interdites.",
+        "en": "Hug your partner for 20 seconds. A real hug. Back-pats are strictly forbidden."
+      },
+      "props": false,
+      "tags": ["couple", "physical"]
+    },
+    {
+      "id": "lov-d-party-015",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Imite le rire de ton/ta partenaire jusqu'à ce qu'il ou elle rie pour de vrai. Le groupe chronomètre.",
+        "en": "Imitate your partner's laugh until they genuinely crack up. The room times it."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-016",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Raconte votre premier rendez-vous comme un commentateur sportif : ralentis, statistiques et action décisive inclus.",
+        "en": "Narrate your first date like a sports commentator: slow-mo replays, stats, and the decisive play included."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-017",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Concours de regard avec ton/ta partenaire : le premier qui cligne doit un petit-déjeuner au lit. Le groupe est témoin officiel.",
+        "en": "Staring contest with your partner: first to blink owes breakfast in bed. The room is the official witness."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-party-018",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Ton/ta partenaire a 30 secondes pour te relooker (cheveux, col, manches) en sa version préférée de toi. Tu gardes le résultat.",
+        "en": "Your partner gets 30 seconds to restyle you (hair, collar, sleeves) into their favorite version of you. You keep the result."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-party-019",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Trace un mot doux sur le dos de ton/ta partenaire avec un doigt. Il ou elle doit le deviner devant tout le monde.",
+        "en": "Trace a sweet word on your partner's back with one finger. They have to guess it in front of everyone."
+      },
+      "props": false,
+      "tags": ["couple", "physical"]
+    },
+    {
+      "id": "lov-d-party-020",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Dis « je t'aime » à ton/ta partenaire dans trois émotions imposées par le groupe : en colère, à moitié endormi, télénovela.",
+        "en": "Say 'I love you' to your partner in three emotions chosen by the room: angry, half-asleep, telenovela."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-021",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Échangez vos téléphones. Décris d'abord de mémoire le fond d'écran de ton/ta partenaire, puis vérifiez devant le groupe.",
+        "en": "Swap phones. First describe your partner's wallpaper from memory, then check together in front of the room."
+      },
+      "props": true,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-022",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Dépose un baiser sur le front de ton/ta partenaire et fais-lui une promesse d'une seule phrase pour la semaine prochaine.",
+        "en": "Kiss your partner's forehead and make them a one-sentence promise for next week."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-d-party-023",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Recréez une pose de film romantique culte choisie par le groupe et tenez-la 10 secondes sans rire.",
+        "en": "Recreate an iconic romance movie pose chosen by the room and hold it for 10 seconds without laughing."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-party-024",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Battle de compliments avec ton/ta partenaire pendant 30 secondes, chacun son tour. Le premier qui hésite fait 5 squats.",
+        "en": "Compliment battle with your partner for 30 seconds, alternating turns. First to hesitate does 5 squats."
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-d-party-025",
+      "choice": "dare",
+      "intensity": "party",
+      "spicy": 1,
+      "minAge": 16,
+      "text": {
+        "fr": "Fais rire ton/ta partenaire en 30 secondes en n'utilisant que tes sourcils et tes mains. Pas un seul mot autorisé.",
+        "en": "Make your partner laugh in 30 seconds using only your eyebrows and your hands. Not a single word allowed."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "physical"]
+    }
+,
+    {
+      "id": "lov-t-spicy-001",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quelle tenue de ton/ta partenaire te rend complètement dingue ? Décris-la en détail pendant qu'il ou elle garde un visage neutre.",
+        "en": "Which of your partner's outfits drives you completely crazy? Describe it in detail while they hold a straight face."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-002",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Décris votre soirée idéale en amoureux, du pas de la porte au lendemain matin — uniquement en mots tous publics. Le groupe note ta retenue.",
+        "en": "Describe your ideal night together, from the front door to the next morning — family-friendly words only. The room grades your restraint."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-003",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quelle est la chose la plus sexy que fait ton/ta partenaire sans même s'en rendre compte ?",
+        "en": "What's the sexiest thing your partner does without even realizing it?"
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-004",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel est l'endroit le plus osé où vous vous êtes embrassés ? Plante le décor, sans incriminer personne.",
+        "en": "What's the most daring place you two have ever kissed? Set the scene without incriminating anyone."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-005",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Fais à ton/ta partenaire le compliment que tu es normalement trop timide pour dire en face. Là, tout de suite, dans les yeux.",
+        "en": "Give your partner the compliment you're normally too shy to say to their face. Right now, eyes locked."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "deep"]
+    },
+    {
+      "id": "lov-t-spicy-006",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "C'était quand, la dernière fois que ton/ta partenaire a fait battre ton cœur beaucoup trop vite ? Détails exigés.",
+        "en": "When was the last time your partner made your heart race way too fast? Details required."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "deep"]
+    },
+    {
+      "id": "lov-t-spicy-007",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quelle habitude privée de ton/ta partenaire surprendrait le plus cette pièce ? Ton/ta partenaire dispose d'un veto à usage unique.",
+        "en": "Which of your partner's private habits would surprise this room the most? Your partner holds a single-use veto."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-008",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Combien de rendez-vous avant d'arrêter de jouer la personne parfaite ? Et c'était quoi, le masque : ordonné, zen, sportif ?",
+        "en": "How many dates before you stopped playing the perfect person? And what was the mask: tidy, zen, gym person?"
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-009",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Raconte votre meilleur moment « on a failli se faire griller ». Le décor, la frayeur, l'issue — sans détails interdits.",
+        "en": "Tell us your best 'we almost got caught' moment. The setting, the panic, the escape — no forbidden details."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-010",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Si ton/ta partenaire choisissait ta tenue de ce soir sans aucune contrainte, tu porterais quoi, honnêtement ?",
+        "en": "If your partner picked tonight's outfit for you with zero constraints, what would you honestly be wearing?"
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-011",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel message de ton/ta partenaire n'as-tu jamais supprimé ? Donne l'idée générale, pas la citation exacte.",
+        "en": "Which text from your partner have you never deleted? Give the gist, not the exact quote."
+      },
+      "props": false,
+      "tags": ["couple", "deep", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-012",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel est le « joker célébrité » officiel de ton/ta partenaire ? Et le tien ? Comparez vos niveaux de jalousie en direct.",
+        "en": "Who's your partner's official celebrity hall pass? And yours? Compare jealousy levels live."
+      },
+      "props": false,
+      "tags": ["couple", "funny", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-013",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Raconte votre soirée « romantique » qui a viré au fiasco total. Qui a eu l'idée, et qui a craqué en premier ?",
+        "en": "Tell us about the 'romantic' night that turned into a total fiasco. Whose idea was it, and who cracked first?"
+      },
+      "props": false,
+      "tags": ["couple", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-014",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Décris la façon d'embrasser de ton/ta partenaire en exactement trois mots. Le groupe vote pour savoir si ton/ta partenaire approuve.",
+        "en": "Describe your partner's kissing style in exactly three words. The room votes on whether your partner approves."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-015",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Dis à voix haute une chose que tu rêves d'essayer avec ton/ta partenaire — suggestif autorisé, explicite interdit. Le groupe juge le rougissement.",
+        "en": "Say out loud one thing you'd love to try with your partner — suggestive allowed, explicit forbidden. The room judges the blush."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-016",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Qui de vous deux fait le premier pas le plus souvent ? Réponds pendant que le groupe surveille le visage de ton/ta partenaire.",
+        "en": "Which of you makes the first move more often? Answer while the room watches your partner's face."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-017",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "À quoi pensais-tu exactement pendant votre tout premier baiser ? Version intégrale, panique incluse.",
+        "en": "What exactly was going through your head during your very first kiss? Full version, panic included."
+      },
+      "props": false,
+      "tags": ["couple", "deep"]
+    },
+    {
+      "id": "lov-t-spicy-018",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel est l'atout physique le plus sous-coté de ton/ta partenaire ? Défends ton choix pendant 15 secondes, sans rire.",
+        "en": "What's your partner's most underrated physical feature? Defend your pick for 15 seconds without laughing."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-019",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Avoue une fois où tu as fait le beau ou la belle exprès pour attirer l'œil de ton/ta partenaire. Ça a marché ?",
+        "en": "Confess one time you showed off on purpose to catch your partner's eye. Did it work?"
+      },
+      "props": false,
+      "tags": ["couple", "funny", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-020",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel est votre record de grasse matinée à deux, et qu'est-ce qui vous a finalement sortis du lit ?",
+        "en": "What's your record for a lazy morning in bed together, and what finally got you out of it?"
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-021",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel surnom ton/ta partenaire a-t-il mérité en privé que le groupe peut entendre ce soir ? Le bouton Passe existe pour une raison.",
+        "en": "What nickname has your partner earned in private that the room is allowed to hear tonight? The pass button exists for a reason."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-022",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Note la technique de drague de ton/ta partenaire sur 10, puis justifie la note les yeux dans les yeux.",
+        "en": "Rate your partner's flirting technique out of 10, then justify the score while looking them dead in the eyes."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-023",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quel est le message le plus audacieux que tu aies jamais envoyé à ton/ta partenaire ? Décris l'ambiance, pas le texte.",
+        "en": "What's the boldest message you've ever sent your partner? Describe the vibe, not the words."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-t-spicy-024",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Week-end « ne pas déranger » rien que vous deux : raconte la première heure, strictement en vocabulaire tous publics.",
+        "en": "A 'do not disturb' weekend, just you two: walk us through hour one — strictly family-friendly vocabulary."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-t-spicy-025",
+      "choice": "truth",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Quelle habitude de ton/ta partenaire trouves-tu bizarrement irrésistible ? Plus c'est inattendu, mieux c'est.",
+        "en": "Which of your partner's habits do you find weirdly irresistible? The more unexpected, the better."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    }
+,
+    {
+      "id": "lov-d-spicy-001",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Masse la nuque de ton/ta partenaire pendant 30 secondes en gardant les yeux fixés sur le groupe. Visage parfaitement professionnel.",
+        "en": "Massage your partner's neck for 30 seconds while keeping your eyes locked on the room. Perfectly professional face."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-002",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Embrasse ton/ta partenaire comme dans une fin de film, renversé en arrière inclus. Le groupe note le porté sur 10.",
+        "en": "Kiss your partner like a movie finale, dramatic dip included. The room scores the dip out of 10."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-003",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Chuchote à l'oreille de ton/ta partenaire ce que tu préfères chez lui ou elle physiquement. Sa seule réponse autorisée : une expression de visage, jugée par le groupe.",
+        "en": "Whisper in your partner's ear your favorite thing about them physically. Their only allowed reply: a facial expression, judged by the room."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-d-spicy-004",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Trace la mâchoire de ton/ta partenaire du bout du doigt en récitant ton mot de passe wifi avec ta voix la plus sensuelle.",
+        "en": "Trace your partner's jawline with one fingertip while reciting your wifi password in your most seductive voice."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-005",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Assieds-toi sur les genoux de ton/ta partenaire pendant tout le tour suivant et fais comme si c'était parfaitement normal.",
+        "en": "Sit on your partner's lap for the entire next turn and act like this is perfectly normal."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-006",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Ferme les yeux. Ton/ta partenaire dépose un baiser quelque part (zone tous publics). Devine où sans regarder. Le groupe valide.",
+        "en": "Close your eyes. Your partner places one kiss somewhere (family-friendly zone). Guess where without looking. The room confirms."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-007",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Rejouez votre tout premier baiser avec chorégraphie complète et commentaire de réalisateur en voix off.",
+        "en": "Reenact your very first kiss with full choreography and director's commentary voiceover."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-008",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Fais ton regard le plus incendiaire à ton/ta partenaire pendant 15 secondes. Le groupe note l'intensité sur 10.",
+        "en": "Give your partner your most smoldering look for 15 seconds. The room rates the intensity out of 10."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-d-spicy-009",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Murmure à l'oreille de ton/ta partenaire ce que tu lui réserves pour plus tard ce soir… puis garde un visage parfaitement neutre pendant 10 secondes. Le groupe juge le visage.",
+        "en": "Whisper in your partner's ear what you have planned for them later tonight… then hold a perfectly straight face for 10 seconds. The room judges the face."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-010",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Retire avec un maximum de drame un accessoire ou une couche choisie par ton/ta partenaire — une chaussette compte. Tu fredonnes toi-même ta musique d'ambiance.",
+        "en": "Remove, with maximum drama, one accessory or layer chosen by your partner — a sock counts. You must hum your own mood music."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-011",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Décris à ton/ta partenaire, en mots tous publics, ce que tu ferais s'il n'y avait personne d'autre dans la pièce — raconté comme un roman de gare. Le groupe note le style littéraire sur 10.",
+        "en": "Describe to your partner — family-friendly words only — what you'd do if no one else were in this room, narrated like a trashy romance novel. The room grades the prose out of 10."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-012",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Dis « ce soir, toi et moi » à ton/ta partenaire avec ta voix la plus dangereuse, puis fais un clin d'œil. Le groupe note le clin d'œil.",
+        "en": "Tell your partner 'tonight — you and me' in your most dangerous voice, then wink. The room scores the wink."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-013",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Dépose un baiser dans le cou de ton/ta partenaire. Il ou elle doit garder un visage de marbre. Le groupe désigne qui a craqué en premier.",
+        "en": "Place one kiss on your partner's neck. They must keep a stone face. The room rules on who broke first."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-014",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Envoie à ton/ta partenaire (assis juste là) le compliment le plus osé que tu oses écrire. Il ou elle le lit en silence ; le groupe juge son visage.",
+        "en": "Text your partner (sitting right there) the boldest compliment you dare to write. They read it silently; the room judges their face."
+      },
+      "props": true,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-d-spicy-015",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Prends le visage de ton/ta partenaire entre tes mains et sors la réplique la plus cliché du cinéma romantique sans rire.",
+        "en": "Hold your partner's face in both hands and deliver the cheesiest rom-com line in history without laughing."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-016",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Ton/ta partenaire te chuchote un mini-gage à l'oreille. Exécute-le s'il est montrable en public… sinon 10 squats, sans aucune explication au groupe.",
+        "en": "Your partner whispers a mini-dare in your ear. Do it if it's fit for public viewing… otherwise 10 squats, and you owe the room zero explanation."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-d-spicy-017",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Écris un mot doux (ou pimenté) sur la paume de ton/ta partenaire avec ton doigt. Il ou elle doit le deviner à voix haute.",
+        "en": "Spell a sweet (or spicy) word on your partner's palm with your finger. They must guess it out loud."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-018",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Fais à ton/ta partenaire LE regard « on rentre ? » pendant 10 secondes. Le groupe doit deviner le message exact.",
+        "en": "Give your partner THE 'shall we head home?' look for 10 seconds. The room has to guess the exact message."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-019",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Rejoue en solo, pendant 20 secondes, votre façon de flirter après un verre de vin. Les deux rôles, l'un après l'autre.",
+        "en": "Perform, solo, 20 seconds of how you two flirt after a glass of wine. Both roles, one after the other."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-020",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Échange un vêtement visible avec ton/ta partenaire et porte-le comme à la fashion week jusqu'à ton prochain tour. Défilé d'introduction obligatoire.",
+        "en": "Swap one visible piece of clothing with your partner and wear it like it's fashion week until your next turn. Opening catwalk mandatory."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-021",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Embrasse ton/ta partenaire pendant exactement 10 secondes pendant que le groupe compte à voix haute. Pas une seconde de plus.",
+        "en": "Kiss your partner for exactly 10 seconds while the room counts out loud. Not one second more."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-022",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Chuchote-chante un slow langoureux à l'oreille de ton/ta partenaire. Il ou elle résume la performance en un seul mot.",
+        "en": "Whisper-sing a slow jam into your partner's ear. They sum up the performance in exactly one word."
+      },
+      "props": false,
+      "tags": ["couple", "spicy"]
+    },
+    {
+      "id": "lov-d-spicy-023",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Ton/ta partenaire te dessine un petit cœur au feutre lavable, visible du groupe. Porte-le comme un vieux tatouage de marin.",
+        "en": "Your partner draws a tiny heart on you in washable marker, visible to the room. Wear it like an old sailor tattoo."
+      },
+      "props": true,
+      "tags": ["couple", "spicy", "funny"]
+    },
+    {
+      "id": "lov-d-spicy-024",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Dos à dos avec ton/ta partenaire. À trois, retournez-vous et enchaînez l'étreinte la plus télénovela possible. Tenez 10 secondes.",
+        "en": "Back to back with your partner. On three, spin around and lock into the most telenovela embrace possible. Hold for 10 seconds."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny", "physical"]
+    },
+    {
+      "id": "lov-d-spicy-025",
+      "choice": "dare",
+      "intensity": "spicy",
+      "spicy": 2,
+      "minAge": 18,
+      "text": {
+        "fr": "Annonce au groupe — en mots tous publics — ton programme pour après cette partie. Ton/ta partenaire confirme ou dément d'un pouce.",
+        "en": "Announce to the room — family-friendly words only — your plan for after this game. Your partner confirms or denies with a thumbs up or down."
+      },
+      "props": false,
+      "tags": ["couple", "spicy", "funny"]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "id": "quizz-culture-ge",
+  "nameFr": "Au Pif !",
+  "nameEn": "Ballpark!",
+  "taglineFr": "La culture gé au doigt mouillé : personne ne sait, le plus proche rafle tout.",
+  "taglineEn": "Trivia where nobody knows the answer — closest guess takes it all.",
+  "template": "INPUT_GUESS",
+  "players": {
+    "min": 2,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "guess",
+      "durationSec": 20,
+      "description": "phaseKey `guess:r{n}`. An off-beat culture-gé question with a verified NUMERIC answer is shown (e.g. 'Shortest scheduled commercial flight, in seconds?'). Each player secretly types an integer on a big numeric keypad (max 9 digits, integers only). Guesses live in a HIDDEN buffer `guesses: Record<PlayerId, number>` (synthesis §1.5 HiddenBuffer convention); owner echo is `guesses[viewer] ?? null`, never visible to others. Early-advance when allActed(connectedPlayers) — all connected players submitted. Timeout: on deadline, players who didn't submit simply have no entry (0 pts this round); a disconnected or passive player NEVER blocks the room."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 12,
+      "description": "phaseKey `reveal:r{n}`. Atomic promotion of the hidden buffer: all guesses pop onto an animated number line (client-side animation, no extra server beats), then the TRUE answer slams in, then points fly. Scoring (exact): rank answerers by |guess − answer| ascending, competition ranking — 1st: 100, 2nd: 50, 3rd: 25, everyone else 0; ties share the rank's points and skip the next rank (two tied closest → both 100, next player gets 25); exact hit adds +50 'Pile !' bonus; in the final round all points are ×2 (finalRoundMultiplier). The bilingual funFact punchline is shown ('The T-Rex is closer in time to your phone than to the Stegosaurus'). Advance on deadline only; emits `round_completed` analytics — this transition is the shell's ad-cue boundary (synthesis §5.4)."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "phaseKey `over`, untimed (phaseDurationMs returns null). Final podium with per-match scores; `gameOver` effect carries a defensively CLONED scores map (gameOver() kit helper, synthesis §1.7). Shell shows the interstitial + replay CTA. Session leaderboard XP is placement-based per platform convention, not raw points."
+    }
+  ],
+  "params": {
+    "mode": "closest-number",
+    "totalRounds": 8,
+    "guessMs": 20000,
+    "revealMs": 12000,
+    "pointsByRank": [
+      100,
+      50,
+      25
+    ],
+    "exactBonus": 50,
+    "finalRoundMultiplier": 2,
+    "bustIfOver": false,
+    "maxInputDigits": 9,
+    "earlyAdvanceOnAllSubmitted": true
+  },
+  "contentItemShape": "One pack item = one verified numeric-estimation question. Shape: { id: string (kebab slug), question: { fr, en }, answer: integer (canonical verified truth — the ONLY scoring input, pre-computed offline, never AI at runtime), unit: { fr, en } | null (e.g. {fr:'secondes',en:'seconds'}; null for years), format: 'plain' | 'year' (year renders the reveal as a timeline), scale: 'linear' | 'log' (number-line rendering hint for huge-range answers), funFact: { fr, en } (the reveal punchline — this is where the 'original culture gé' lives; doubles as the answer's justification to settle arguments), tags: string[], difficulty: 1|2|3, spicy: 0|1|2, verifiedAt: 'YYYY-MM' (fact-check stamp), source: string (authoring-only provenance, never shown to players) }. Items are AUTHORED bilingually; the publish pipeline splits them into single-locale packs `quizz-culture-ge-fr` / `quizz-culture-ge-en` per synthesis §3.1 (one pack id = one locale, shell-resolved at startGame). Sizing lint (synthesis §3.5): ≥ totalRounds × 3 items per difficulty tier so a max session never repeats. Hard authoring rule: only time-stable facts — no live populations, prices, or breakable records.",
+  "sampleItems": [
+    {
+      "id": "shortest-flight-seconds",
+      "question": {
+        "fr": "Le vol commercial régulier le plus court du monde relie deux îles écossaises. Sa durée officielle planifiée, en secondes ?",
+        "en": "The world's shortest scheduled commercial flight links two Scottish islands. Its official scheduled duration, in seconds?"
+      },
+      "answer": 90,
+      "unit": {
+        "fr": "secondes",
+        "en": "seconds"
+      },
+      "format": "plain",
+      "scale": "linear",
+      "funFact": {
+        "fr": "Westray → Papa Westray, 2,7 km. Record réel en vol : 53 secondes — plus court que ta story Insta.",
+        "en": "Westray → Papa Westray, 1.7 miles. Real-life record crossing: 53 seconds — shorter than your Insta story."
+      },
+      "tags": [
+        "geography",
+        "transport",
+        "wtf"
+      ],
+      "difficulty": 2,
+      "spicy": 0,
+      "verifiedAt": "2026-05",
+      "source": "Loganair Orkney inter-isles service / Guinness World Records"
+    },
+    {
+      "id": "stego-trex-gap",
+      "question": {
+        "fr": "Combien de MILLIONS d'années séparent le Stégosaure du T-Rex ?",
+        "en": "How many MILLION years separate the Stegosaurus from the T-Rex?"
+      },
+      "answer": 83,
+      "unit": {
+        "fr": "millions d'années",
+        "en": "million years"
+      },
+      "format": "plain",
+      "scale": "linear",
+      "funFact": {
+        "fr": "Le T-Rex (-66 M) est plus proche de ton smartphone que du Stégosaure (-150 M). Oui, Jurassic Park t'a menti.",
+        "en": "The T-Rex (66M yrs ago) is closer in time to your smartphone than to the Stegosaurus (150M). Yes, Jurassic Park lied to you."
+      },
+      "tags": [
+        "science",
+        "dinosaurs",
+        "mindblow"
+      ],
+      "difficulty": 3,
+      "spicy": 0,
+      "verifiedAt": "2026-05",
+      "source": "Stegosaurus ~150 Mya (Late Jurassic) vs T-Rex ~67 Mya (Late Cretaceous)"
+    },
+    {
+      "id": "first-sms-year",
+      "question": {
+        "fr": "En quelle année le tout premier SMS de l'histoire a-t-il été envoyé ?",
+        "en": "In what year was the very first SMS in history sent?"
+      },
+      "answer": 1992,
+      "unit": null,
+      "format": "year",
+      "scale": "linear",
+      "funFact": {
+        "fr": "3 décembre 1992 : « Merry Christmas », envoyé d'un PC vers un Orbitel 901. Le destinataire ne pouvait même pas répondre.",
+        "en": "December 3, 1992: \"Merry Christmas\", sent from a PC to an Orbitel 901. The recipient couldn't even text back."
+      },
+      "tags": [
+        "tech",
+        "history"
+      ],
+      "difficulty": 1,
+      "spicy": 0,
+      "verifiedAt": "2026-05",
+      "source": "Neil Papworth / Vodafone UK"
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundSeconds": 32,
+  "roundsDefault": 8,
+  "recommendations": [
+    {
+      "question": "The brief demands an 'original' general-culture quiz and asks to pick ONE main twist format — which one wins?",
+      "recommendation": "Main format = Twist A, 'closest wins' numeric estimation: every question has a verified numeric answer; everyone secretly types a number; closest takes the round. Original questions = off-beat verifiable numbers + a punchline funFact, not 'capital of France'.",
+      "why": "It removes trivia's core flaw for parties: nobody is ever blocked by not knowing — guessing IS the game, so a 2-player room and a 16-player room both stay live. Zero free-text moderation surface (numeric keypad only), trivially deterministic pure-reducer scoring, and the all-guesses-on-a-number-line reveal is the strongest shareable TikTok moment of the three candidates."
+    },
+    {
+      "question": "What was Twist B and why is it not the main format?",
+      "recommendation": "Twist B = 'fool the others' à la Fibbage: each player writes a fake answer to an obscure question; fakes + truth are shuffled; everyone votes; +80 for finding the truth, +60 per player fooled by your fake. Ship it as a v2 mode 'fool' on this same INPUT_GUESS template and catalog entry.",
+      "why": "Highest comedy ceiling, but it is the platform's heaviest free-text surface: it needs the DO obscenity filter path (synthesis §1.8), normalizeText collision handling (fake == truth, duplicate fakes), and a vote sub-phase. Template-architecture §5.3 says battle-test gameplay-text moderation before leaning on it — closest-number ships sooner and safer."
+    },
+    {
+      "question": "What was Twist C?",
+      "recommendation": "Twist C = 'Le Piège' (hivemind trap): multiple-choice where the pack pre-computes a trap distractor; you score for being right AND for predicting which option the room's majority picks. Keep as a later content-pack flavor, not the main format.",
+      "why": "Weakest differentiation — MCQ still feels like generic trivia — and it depends on offline-pre-computed distractor quality, the hardest content to generate well. The predict-the-room half is fun but is essentially Hot Seat's mechanic; not worth fragmenting the launch."
+    },
+    {
+      "question": "Does this fit an existing template, and what code does it actually need?",
+      "recommendation": "Template = INPUT_GUESS, as a third mode 'closest-number' alongside the designed 'blitz' and 'collab-one-word' (the modes-in-one-template pattern, template-architecture §2.4/§3.3). Extend templateParamsSchema(INPUT_GUESS) with mode 'closest-number' + the params object above. Build closest-number FIRST when INPUT_GUESS lands.",
+      "why": "It is new-params effort (one reveal-resolver branch ranking |guess − answer|, plus a numeric-keypad input view), not a new template — phases, HiddenBuffer, allActed, phaseKey discipline are the template skeleton. It is also the simplest of the three modes (no text, no peer-tap validation, no moderation), so it de-risks the INPUT_GUESS skeleton before the text modes."
+    },
+    {
+      "question": "Exact scoring and anti-runaway balance?",
+      "recommendation": "Per round: rank connected answerers by |guess − answer|; competition ranking with shared ties — 100/50/25/0; exact hit +50 'Pile !'; final round ×2 via finalRoundMultiplier; no answer = 0 and never blocks (allActed over connectedPlayers). Keep bustIfOver=false at launch; flip it on later in a themed 'Juste Prix' sibling config (price-is-right over-bid elimination).",
+      "why": "A flat top-3 payout keeps every round swingy at any player count, the exact-hit bonus creates scream moments, and the ×2 finale keeps trailing players mathematically alive. Bust-if-over is iconic but brutal for casuals — perfect as a config-only variant, which costs nothing once the param exists."
+    },
+    {
+      "question": "How do we keep 'culture gé' original at scale without runtime AI?",
+      "recommendation": "needsOfflineAiPipeline=true: AI generates estimation questions + funFact punchlines OFFLINE; every item carries answer, source, verifiedAt; the pack passes the template-architecture §6 gate (schema, sizing lint, profanity scan, replay smoke, human fact-check) before enabled:true at rolloutPct 5. Hard rule: time-stable facts only; corrections ship as immutable pack version bumps via the KV kill switch.",
+      "why": "The 'original' feel is 100% a content problem, which is exactly what the platform's offline-pack + staged-rollout machinery is for. Runtime stays a pure deterministic reducer; a wrong viral answer is fixed by a KV edit, no deploy."
+    }
+  ],
+  "risks": [
+    "INPUT_GUESS is the one unbuilt template (build #5 in the synthesis §4 order): this game cannot ship config-only today. Mitigation: closest-number is the simplest mode — schedule it as the FIRST mode when INPUT_GUESS is built, and the Fibbage 'fool' mode after the text-moderation path is hardened.",
+    "Fact drift: numeric answers can silently become wrong (records broken, counts updated). Mitigation: time-stable-facts authoring rule, verifiedAt stamp + source on every item, immutable pack versioning with the KV kill switch for corrections — but a viral wrong answer is a reputational hit, so the human fact-check gate is non-negotiable.",
+    "Disputed answers spark room arguments. Mitigation: every funFact doubles as the answer's justification; the offline gate rejects any question whose answer has credible competing values.",
+    "Huge-range answers (millions vs single digits) can make the number-line reveal unreadable and invite troll inputs. Mitigation: per-item scale:'log' rendering hint and a hard maxInputDigits=9 integer-only input clamp validated in the action zod schema.",
+    "Tie/precision edge cases (equal distances, exact hits, single answerer, zero answerers) must be locked in reducer tests before content scales: integers only, competition ranking, single answerer gets 100, zero answerers awards nothing and the round still advances on deadline.",
+    "Skill spread: a strong estimator can run away with the match. Mitigation: flat 100/50/25 payout + ×2 finale; watch round_completed/abandon analytics at 5% rollout before promoting.",
+    "Bilingual authoring must be split into single-locale packs (quizz-culture-ge-fr / -en) per synthesis §3.1 with FR/EN parity enforced as a pipeline lint — funFact punchlines must be natively funny in both languages, not machine-translated."
+  ]
+}

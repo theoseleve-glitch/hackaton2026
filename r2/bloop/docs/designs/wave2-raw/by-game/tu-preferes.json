@@ -1,0 +1,152 @@
+{
+  "id": "tu-preferes",
+  "nameFr": "Tu Préfères ?",
+  "nameEn": "Would You Rather",
+  "taglineFr": "Deux choix, zéro échappatoire. Devine le camp de tes potes !",
+  "taglineEn": "Two options, no escape. Call which side the room picks!",
+  "template": "VOTE",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "choose",
+      "durationSec": 15,
+      "description": "phaseKey `choose:r{n}`. The dilemma card shows Option A vs Option B ('Tu préfères… / Would you rather…'). Each player makes TWO taps on one screen: (1) their own pick (A or B), (2) their prediction of the room's majority (A or B). The client submits both as ONE atomic action `{ pick: 'A'|'B', predict: 'A'|'B' }` into the HIDDEN buffer (HiddenBuffer convention: never in any non-owner view; owner echo is `buffer[viewer] ?? null`). Early-advance when allActed(connected, buffer) — disconnected players are excluded from `expected` and can never block. TIMEOUT at deadline: players who didn't submit are simply excluded from the tally, score 0 this round, and are shown as 'asleep' on the reveal; the round resolves with whatever was buffered."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 15,
+      "description": "phaseKey `reveal:r{n}`. Atomic promotion of the hidden buffer to public view: animated split bar (e.g. 70% / 30%) with player avatars stacked under the option they picked — names attached, because the debate IS the game. SCORING (exact): the majority option = the option with STRICTLY more submitted picks. Every player whose `predict` equals the majority option gains +1 (`predictCorrectPoints`), shown as a badge on their avatar. Your own pick NEVER scores. If the split is a perfect tie, NO prediction points are awarded and a celebratory 'PERFECT SPLIT — ÉGALITÉ PARFAITE' banner plays instead. Emits `round_completed` analytics at this boundary (shell keys its interstitial off the phaseKey transition, not the effect). DEADLINE auto-advances to `choose:r{n+1}` or to `over` after totalRounds — a passive room never stalls; debate spills into the next round's 15s if they're still arguing."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "phaseKey `over`, untimed (phaseDurationMs returns null). Terminal podium: final prediction scores, 'Oracle of the group' crown for 1st. Emits the `gameOver` effect with a defensively CLONED scores map (never aliasing live state). The shell converts placement into session XP per the cross-game convention."
+    }
+  ],
+  "params": {
+    "ballotKind": "options",
+    "scoring": "predict-majority",
+    "totalRounds": 8,
+    "chooseMs": 15000,
+    "revealMs": 15000,
+    "predictCorrectPoints": 1,
+    "tiePolicy": "no-points-split-banner",
+    "revealStyle": "bar-race",
+    "publicPicks": true
+  },
+  "contentItemShape": "One content-pack item = one dilemma. Authoring shape (bilingual; the publish pipeline splits it into single-locale packs `tu-preferes-fr` / `tu-preferes-en` per the platform `data.locale` convention, shell resolves locale at startGame): { \"id\": string (kebab-case, unique in pack), \"optionA\": { \"fr\": string, \"en\": string } (≤90 chars, phrased to complete 'Tu préfères… / Would you rather…'), \"optionB\": { \"fr\": string, \"en\": string } (same constraints; A and B must be comparably attractive/awful so the room genuinely splits), \"category\": \"absurd\" | \"food\" | \"social\" | \"deep\" | \"spicy\", \"spicyLevel\": 0 | 1 | 2 (pack-level tone must be >= max item level; spicy items only ship in the 18+ sibling pack), \"tags\"?: string[] (curation metadata, ignored by the reducer). No pre-computed AI values are needed: the majority is computed deterministically at runtime from the room's own votes. Pool sizing lint: >= 3 × totalRounds drawable items per category mix (~200+ items for a healthy pack); init shuffles with the seeded RNG and caps totalRounds at pool length like tracer.",
+  "sampleItems": [
+    {
+      "id": "wyr-sausage-fingers",
+      "optionA": {
+        "fr": "Avoir des saucisses cocktail à la place des doigts",
+        "en": "Have cocktail sausages for fingers"
+      },
+      "optionB": {
+        "fr": "Transpirer de la mayonnaise",
+        "en": "Sweat mayonnaise"
+      },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": [
+        "classic",
+        "gross-funny"
+      ]
+    },
+    {
+      "id": "wyr-history-vs-gallery",
+      "optionA": {
+        "fr": "Que tes potes lisent tout ton historique de recherche",
+        "en": "Your friends read your entire search history"
+      },
+      "optionB": {
+        "fr": "Que tes parents fassent défiler toute ta galerie photos",
+        "en": "Your parents scroll through your whole camera roll"
+      },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": [
+        "phone",
+        "embarrassing",
+        "debate-starter"
+      ]
+    },
+    {
+      "id": "wyr-animals-vs-languages",
+      "optionA": {
+        "fr": "Pouvoir parler avec les animaux",
+        "en": "Be able to talk to animals"
+      },
+      "optionB": {
+        "fr": "Parler couramment toutes les langues du monde",
+        "en": "Speak every human language fluently"
+      },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": [
+        "superpower",
+        "classic",
+        "debate-starter"
+      ]
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "recommendations": [
+    {
+      "question": "Which scoring model is best (the brief's open ask: include 'predict the majority' and pick the winner)?",
+      "recommendation": "Predict-the-majority, exactly: +1 per correct strict-majority prediction; your own pick NEVER scores; tie = no points. Rejected alternatives: (a) majority-conformity (+1 for being in the majority) — punishes hot takes and incentivizes lying about your pick, killing the debate; (b) minority-reward — incentivizes fake contrarian picks; (c) contrarian-oracle bonus (+2 if you predict correctly while personally in the minority) — perverse incentive to deliberately pick the side you predict will lose.",
+      "why": "Predict-majority is the only model where the dominant strategy is total honesty about your own pick (it's score-neutral) while adding a real skill axis — knowing your friends. It also matches the brief faithfully: choice stays pure expression, the reveal stays the debate fuel, and the points ride on top without distorting either."
+    },
+    {
+      "question": "What happens on a tie (no strict majority)?",
+      "recommendation": "Nobody scores; the reveal plays a celebratory 'PERFECT SPLIT' banner instead of prediction badges.",
+      "why": "Deterministic and trivial to reduce; it converts the scoring dead-end into the round's best moment (a perfectly divisive dilemma is content-pack success, not failure). Frequent at even player counts, hence the rule must be loud and fun, not silent."
+    },
+    {
+      "question": "Are picks revealed publicly (with names) or only as anonymous percentages?",
+      "recommendation": "Public: avatars stack under the option they chose, and correct predictors get a visible +1 badge. Keep a `publicPicks` param so future 18+ spicy configs can flip to anonymous percentages-only.",
+      "why": "The brief's core loop is 'on révèle la répartition, débat' — debate needs names ('TOI t'as choisi ça ?!'). At spicyLevel 0–1 nothing is sensitive; the param future-proofs spicy packs where anonymity protects the 'funny never cruel' line."
+    },
+    {
+      "question": "Is this genuinely a zero-code config on VOTE?",
+      "recommendation": "Almost. Ship a small VOTE@2 generalization first: `ballotKind: 'players' | 'options'` (ballot over content-supplied A/B instead of the roster, so `selfVoteAllowed` is moot) plus a `scoring: 'vote-leader' | 'predict-majority'` branch with a second field in the hidden buffer. Land it alongside the already-planned `revealStyle`/`selfVoteAllowed` VOTE param work (template-architecture §3.2/§5.3).",
+      "why": "tracer's reducer validates `action.target` against the player roster, so option-ballots are a new (small) reducer/view branch — the 'new-params' effort class, ~1–2 days, same pattern as Pass the Bloop's flip-one-by-one. After VOTE@2, every future Tu Préfères variant (themed packs, spicy pack) is pure Cadence B: KV config + R2 pack, no deploy."
+    },
+    {
+      "question": "Single choose phase or split pick-then-predict phases?",
+      "recommendation": "One `choose` phase; one atomic action `{ pick, predict }`; two-tap UI where the second tap auto-submits.",
+      "why": "Halves timer overhead (keeps a round at ~30s, TikTok-native), keeps a single hidden buffer + single allActed check, and avoids extra phaseKey churn/alarm re-arms. A 15s window is comfortably enough for two taps."
+    },
+    {
+      "question": "Minimum players?",
+      "recommendation": "Config minPlayers 3 (module floor stays 2 per VOTE template bounds; the config tightens per template-architecture §2.6).",
+      "why": "At 2 players, any disagreement is a tie and prediction collapses into 'do we agree?' — degenerate. At 3+ (especially odd counts) a strict majority exists whenever everyone submits, so prediction scoring always has teeth."
+    },
+    {
+      "question": "Streaks or bonus multipliers?",
+      "recommendation": "Defer to v2: a param-gated fire-streak (+1 bonus on every 3rd consecutive correct prediction). Not in the launch config.",
+      "why": "Great TikTok-native juice and deterministic (one per-player streak counter in state), but it adds reducer state beyond the quick-win scope; the whole point of this game is shipping fast on VOTE@2."
+    },
+    {
+      "question": "Spicy content?",
+      "recommendation": "Launch with the classic pack only (spicyLevel 0). Ship 'tu-preferes-spicy' later as a SIBLING catalog config: same template, `tone:'spicy'`, `minAge:18`, separate pack ids, `publicPicks:false`.",
+      "why": "The game_config schema already enforces spicy ⇒ minAge ≥ 18 (refinement (c)); a sibling config is zero extra code and keeps the all-ages tile clean on Home."
+    }
+  ],
+  "risks": [
+    "Not literally zero-code today: requires the small VOTE@2 `ballotKind:'options'` + `scoring:'predict-majority'` generalization (tracer's reducer currently ballots over the player roster). Bounded (~1-2 days, 'new-params' class) but it must ship before the config can go live.",
+    "Even player counts tie often, which zeroes prediction points; mitigated by the PERFECT SPLIT celebration and by recommending odd-count rooms, but a night of 4-player ties could feel score-starved — monitor round_completed analytics and consider the v2 streak bonus as compensation.",
+    "Two decisions in one 15s phase adds tap friction; the UI must make pick-then-predict a single fluid gesture (second tap auto-submits) or slow players will hit the timeout path often.",
+    "Fixed 15s reveal can cut a great debate short (or drag on a dud item); social pacing risk — a future hostTunable 'extend debate' toggle (template-architecture §7 Q4) is the relief valve, not in v1.",
+    "Content is everything: options must be genuinely balanced to split the room; lopsided dilemmas make prediction trivial and debate dead. Author/curate to ≥3× totalRounds per category mix (~200+ items) and require natural, non-machine-translated FR and EN (AI gate step 5 human pass if AI-assisted).",
+    "Redaction surface: picks AND predictions are HIDDEN buffer fields until the atomic reveal; the owner-echo must be `buffer[viewer] ?? null` only, and the leakedSecrets audit + per-viewer view tests are mandatory (a leaked early tally would let players game their prediction).",
+    "Anti-pattern guard: a player could stall submitting to see others' choices — impossible by design (buffer hidden, hasVoted booleans only, deadline resolves regardless), but the view must expose only hasSubmitted flags, never partial counts, or the guard breaks."
+  ],
+  "roundSeconds": 30,
+  "roundsDefault": 8
+}

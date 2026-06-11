@@ -1,0 +1,157 @@
+{
+  "id": "jeu-de-la-note",
+  "nameFr": "La Note",
+  "nameEn": "On a Scale",
+  "taglineFr": "Un chiffre secret en tête. À vous de lire dans ses pensées.",
+  "taglineEn": "They've got a secret number in mind. Read them like a book.",
+  "template": "NEW:SCALE_GUESS",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "target",
+      "durationSec": 8,
+      "description": "The round's speaker (rotates each round via nextActiveSeat) privately sees the secret target — an integer 1-10 (scale10 mode) or 0-100 (wheel100 mode) — plus the round's prompt and scale anchors. Everyone else sees only the prompt and anchors. Speaker taps Ready to advance early; deadline auto-advances. Timeout/disconnect: if the speaker is gone, deadline still fires; speaker playerLeft voids the round immediately (skip to a voided reveal, no points)."
+    },
+    {
+      "key": "talk",
+      "durationSec": 45,
+      "description": "The in-room beat, fully verbal: the speaker answers the prompt (or fields the group's questions) calibrated to their secret number — e.g. describes a dish worth exactly a 7/10. Phones show the scale; only the speaker's phone keeps the secret. Speaker may tap 'Open the votes' to end early (speakerCanEndTalk). Deadline always advances; a silent or disconnected speaker can never block (speaker playerLeft here also voids the round)."
+    },
+    {
+      "key": "guess",
+      "durationSec": 20,
+      "description": "All connected non-speakers privately set a dial/slider to their guess (integer, clamped to the mode's domain). Hidden buffer with owner-echo only (myGuess = guesses[viewer] ?? null); others see hasGuessed booleans. Advances early when allActed(connected non-speakers, guesses); at deadline, missing guesses simply score 0 — a passive or disconnected player never blocks. A guesser leaving re-checks allActed (if they were the last awaited, resolve immediately). Overwrites allowed until resolve."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 8,
+      "description": "Atomic promotion: the target plus every guess is plotted on the dial. Band points awarded to each guesser by distance; the speaker scores the band of the lower-median guess distance (rewards calibrating the whole room). Emits analytics round_revealed on entry and round_completed at the reveal→next boundary (the shell's ad cue fires off the phaseKey transition, not the analytics). Deadline rotates the speaker and starts the next round's target phase, or ends the game with gameOver(cloned scores) after totalRounds."
+    }
+  ],
+  "params": {
+    "mode": "scale10",
+    "totalRounds": 8,
+    "targetReadMs": 8000,
+    "talkMs": 45000,
+    "guessMs": 20000,
+    "revealMs": 8000,
+    "speakerCanEndTalk": true
+  },
+  "contentItemShape": "Authoring-source item (bilingual; the pack build pipeline splits it into single-locale runtime packs `la-note-fr` / `la-note-en` per synthesis §3.1): { id: string; kind: 'scale10' | 'wheel100'; prompt: { fr: string, en: string } — the instruction the speaker performs out loud, calibrated to the secret number; low: { fr, en } — anchor label for 1 / the left end of the wheel; high: { fr, en } — anchor label for 10 / the right end; tags?: string[]; intensity?: 'classic' | 'spicy' (spicy items only ship in spicy packs, tone:'spicy' + minAge>=18). RULE: one pack contains ONE kind only and the game_config's params.mode must match it (validated by the authoring lint / AI gate — init never filters, per synthesis §3.3). Runtime ContentPack.data = { locale: 'fr'|'en', tone?: 'classic'|'spicy', items: ScaleItem[] } with single-locale strings. Targets are NOT in the pack — they are drawn at init from the seeded RNG (pure math scoring, no pre-computed answer needed).",
+  "sampleItems": [
+    {
+      "id": "note-food-001",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris un plat qui mérite exactement cette note.",
+        "en": "Describe a dish that deserves exactly this score."
+      },
+      "low": {
+        "fr": "Immangeable",
+        "en": "Inedible"
+      },
+      "high": {
+        "fr": "Étoilé Michelin",
+        "en": "Michelin-star"
+      },
+      "tags": [
+        "food",
+        "improv"
+      ],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-social-014",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Invente une excuse pour annuler une soirée qui vaut exactement cette note de crédibilité.",
+        "en": "Make up an excuse for cancelling plans that deserves exactly this believability score."
+      },
+      "low": {
+        "fr": "Personne n'y croit",
+        "en": "No one buys it"
+      },
+      "high": {
+        "fr": "Béton armé",
+        "en": "Airtight"
+      },
+      "tags": [
+        "social",
+        "improv"
+      ],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-culture-007",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite quelque chose qui se trouve exactement ici sur la roue.",
+        "en": "Name something that sits exactly here on the wheel."
+      },
+      "low": {
+        "fr": "Totalement surcoté",
+        "en": "Totally overrated"
+      },
+      "high": {
+        "fr": "Scandaleusement sous-coté",
+        "en": "Criminally underrated"
+      },
+      "tags": [
+        "culture",
+        "debate"
+      ],
+      "intensity": "classic"
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "roundSeconds": 81,
+  "roundsDefault": 8,
+  "newTemplateSpec": "TEMPLATE: SCALE_GUESS — new GameModule package `packages/games/scale-guess/` (id 'scale-guess', version 1, minPlayers 3, maxPlayers 16). Fits GameModule<S,A,V,C> with ZERO contract amendments: uses the approved phaseKey (synthesis A1) and the shared kit (emptyPlayerMap, Presence/connectedPlayers, allActed, nextActiveSeat, gameOver helper). No new event or effect types. No gameplay text — the talk beat is verbal in the room — so NO moderation surface (lower-risk than INPUT_GUESS).\n\nCONFIG (DEFAULT_CONFIG; catalog params are a strict partial): { mode: 'scale10'|'wheel100' (REQUIRED, mode-selecting like INPUT_GUESS.mode), totalRounds: 8, targetReadMs: 8000, talkMs: 45000, guessMs: 20000, revealMs: 8000, speakerCanEndTalk: true }. Domain: scale10 → integers 1..10; wheel100 → integers 0..100 (slider with snap ticks every 5; no float angles — deterministic state/replay).\ntemplateParamsSchema addition (packages/protocol): z.object({ mode: z.enum(['scale10','wheel100']), totalRounds: z.number().int().min(1).max(16).optional(), targetReadMs: z.number().int().min(3000).max(15000).optional(), talkMs: z.number().int().min(20000).max(120000).optional(), guessMs: z.number().int().min(10000).max(45000).optional(), revealMs: z.number().int().min(4000).max(15000).optional(), speakerCanEndTalk: z.boolean().optional() }).strict().\n\nCONTENT: ContentPack<{ locale: 'fr'|'en'; tone?: 'classic'|'spicy'; items: ScaleItem[] }>; ScaleItem = { id, kind, prompt, low, high, tags? } (single-locale at runtime; bilingual authoring source split by the pack build). One pack = one kind; config.mode must equal the pack kind (authoring lint / AI gate; init never filters per synthesis §3.3). Sizing lint: items.length >= totalRounds, recommend >= 24.\n\nSTATE S: { config; players: PlayerId[]; turnOrder: PlayerId[] /* seeded shuffle */; connected: Presence; round: number; phase: 'target'|'talk'|'guess'|'reveal'|'over'; speakerIndex: number; items: ScaleItem[] /* seeded shuffle; items[round] current */; targets: number[] /* HIDDEN — pre-drawn for ALL rounds at init from createRng(seed), so determinism never depends on event order */; guesses: Record<PlayerId, number> /* HIDDEN buffer */; voided: boolean; scores: Record<PlayerId, number> }. init: totalRounds = min(config.totalRounds, items.length); scores all 0; phase 'target', round 0, speakerIndex 0.\n\nACTIONS A: { kind:'ready' } (speaker only, target phase → talk early) | { kind:'openVotes' } (speaker only, talk phase, iff speakerCanEndTalk → guess early) | { kind:'guess', value:number } (non-speaker only, guess phase; non-integer or out-of-domain → REJECT by returning the SAME state reference; overwrites allowed until resolve, hot-seat §4.1 convention; after each accepted write, if allActed(connectedPlayers minus speaker, guesses) → resolveReveal early). Any other (sender, phase) combo → same-reference reject (shell no-op contract).\n\nREDUCE (phase × event): target: ready|deadline → talk. talk: openVotes|deadline → guess. guess: deadline → resolveReveal with submitted guesses only. reveal: deadline → round+1; if round >= totalRounds → phase 'over' + gameOver(Object.assign(emptyPlayerMap(), scores)); else nextActiveSeat(turnOrder, speakerIndex, connected), guesses = emptyPlayerMap(), voided=false, phase 'target'. playerLeft: flip connected only (roster/scores untouched, seat greyed); if leaver is the CURRENT SPEAKER during target or talk → void round: jump to reveal with voided=true, zero points, analytics 'round_skipped'; during guess → round resolves normally (target fixed, talk happened); if leaver is a guesser during guess → re-check allActed and resolve immediately if they were last awaited. playerRejoined: flip connected; a rejoined guesser in guess phase is expected again. over: absolute no-op.\n\nSCORING (exact): d = |guess − targets[round]|. Guesser bands — scale10: d=0→4 pts, d=1→2, d=2→1, d>=3→0. wheel100: d<=5→4, d<=10→3, d<=20→2, d<=33→1, d>33→0. Speaker: D = ascending sorted distances of SUBMITTED guesses; if D empty or voided → 0; else speaker pts = band(D[floor((D.length−1)/2)]) (lower median) through the same table. Ties: every guesser in the best band scores it — 'closest wins' means all closest win (funny never cruel). Max 4 pts/round for everyone; session leaderboard stays placement-based (synthesis §1.7).\n\nVIEW V (per-viewer redaction): target/talk → PUBLIC { phase, round, totalRounds, item{prompt,low,high}, speakerId, scores, connected }; speaker view ADDS { target }. guess → public + { hasGuessed: Record<PlayerId, boolean> }, per-viewer myGuess = guesses[viewer] ?? null (owner echo only), speaker keeps target. reveal → PUBLIC { target, plottedGuesses, gained, voided, scores } (atomic promotion). over → { phase:'over', scores }. Unknown/spectator viewer → public projection, never target, never buffer.\nphaseKey: `${phase}:r${round}` ('target:r0' … 'reveal:r7'), terminal 'over'. One speaker per round so the round index alone is unique per phase instance (synthesis §1.6). The key NEVER embeds the target. phaseDurationMs: target→targetReadMs, talk→talkMs, guess→guessMs, reveal→revealMs, over→null.\n\nEFFECTS: analytics 'round_revealed' on reveal entry; 'round_completed' at the reveal→next boundary (ad interstitial fires off the phaseKey transition per synthesis §5.4 — analytics is PostHog-only); 'round_skipped' on a voided round; gameOver with cloned scores (never aliasing live state).\n\nTESTS (load-bearing): redaction audit — String(targets[round]) absent from every non-speaker/spectator view JSON during target/talk/guess (leakedSecrets-style; targets are numbers, audit the stringified speaker-only field); guesses never leak cross-player pre-reveal; replay determinism with pinned { packId, version } + seed; speaker-leave-voids-round in target/talk; deadline-resolves-partial-guesses; out-of-domain guess returns same reference; gameOver scores don't alias state.\n\nCATALOG (two game_configs, both variants of the brief, zero extra code beyond the template): (1) { id:'jeu-de-la-note', template:'SCALE_GUESS', templateVersion:{min:1,max:1}, params:{ mode:'scale10', totalRounds:8, targetReadMs:8000, talkMs:45000, guessMs:20000, revealMs:8000, speakerCanEndTalk:true }, contentPackRef:{ packId:'la-note', version:1 }, theme:{ color:'sunbeam', icon:'gauge', badge:'NEW' }, tone:'classic', minAge:0, locales:['fr','en'], minPlayers:3 }. (2) { id:'la-roue', params:{ mode:'wheel100', talkMs:60000 }, contentPackRef:{ packId:'la-roue', version:1 }, theme:{ color:'aqua', icon:'shuffle' } } — the brief's wheel variant as a pure config rider. Build slot: after rank-friends and hot-seat land (it reuses rank-friends' simultaneous hidden buffer + hot-seat's seat rotation); it can ship before INPUT_GUESS since it has no text-moderation surface.",
+  "recommendations": [
+    {
+      "question": "The brief gives two variants (secret number/wheel angle with Q&A, and labeled 1-10 scale where the speaker answers to match the number) — which mechanic ships?",
+      "recommendation": "One SCALE_GUESS template with a params.mode discriminant ('scale10' | 'wheel100'); ship the 'jeu-de-la-note' scale10 config first, the 'la-roue' wheel100 config second.",
+      "why": "Both variants share the identical skeleton (single-holder secret target → verbal calibration → simultaneous hidden numeric guess → closeness reveal); only the domain and reveal rendering differ — exactly the 'modes within one template' pattern the architecture doc uses for INPUT_GUESS. scale10 with labeled anchors is the most legible on first play; the wheel then rides for free as a config."
+    },
+    {
+      "question": "How do 'les autres joueurs lui posent des questions' work without phones collecting text or a passive player blocking the room?",
+      "recommendation": "A single timer-boxed talk phase (45s default), fully verbal in the room; the speaker may tap 'Open the votes' to end early; the deadline always advances.",
+      "why": "Phones stay controllers/secret-keepers (platform rule) — no typed gameplay text means no moderation surface and no stall vector; the timer + early-end keeps rounds TikTok-short (~81s) and a disconnected speaker voids the round instead of freezing it."
+    },
+    {
+      "question": "'Le plus proche gagne' — what is the exact scoring?",
+      "recommendation": "Band scoring for guessers (scale10: exact=4, ±1=2, ±2=1, else 0; wheel100: d≤5=4, ≤10=3, ≤20=2, ≤33=1, else 0) and the speaker scores the band of the lower-median guess distance (0 if no guesses or round voided).",
+      "why": "All closest guessers score the top band — ties produce shared wins, never a cruel single loser; the median rewards the speaker for calibrating the WHOLE room rather than one lucky friend; it is pure deterministic integer math (no judge, no AI at runtime) and capped at 4/round for everyone, keeping scores comparable."
+    },
+    {
+      "question": "Can this reuse HOT_SEAT (or INPUT_GUESS) instead of new code?",
+      "recommendation": "No — propose NEW:SCALE_GUESS, then both brief variants plus all future packs are config-only.",
+      "why": "HOT_SEAT's hidden answer is strictly binary 0|1 with match-points (hot-seat doc §3-§4); INPUT_GUESS is free-text/peer-tap. A numeric dial domain, a per-round secret held by ONE player, and closeness-band scoring require a different reducer — per the template-architecture honesty rule that's a Cadence A template build (~1-2 weeks), after which the wheel config and every new pack ship with no deploy (Cadence B)."
+    },
+    {
+      "question": "Does the speaker also guess or score on their own round, and do they type their answer?",
+      "recommendation": "The speaker never guesses (excluded from the buffer and from allActed) and never types — their phone only holds the secret; they score via the median band.",
+      "why": "Self-guessing is degenerate (they know the target); typing would create a text-moderation surface and kill the in-room performance, which is the actual fun."
+    },
+    {
+      "question": "Is the wheel a continuous angle or discrete?",
+      "recommendation": "Integer 0..100 slider rendered as a dial, with snap ticks every 5.",
+      "why": "Integers keep state JSON-safe and replay-deterministic, distances exactly comparable, and the reveal plot readable on a phone screen; the dial rendering still delivers the 'roue' fantasy from the brief."
+    }
+  ],
+  "risks": [
+    "This is a NEW template (Cadence A): reducer + dial/slider client component + registry entries + a wrangler/eas deploy — not a config-only ship; budget ~1-2 weeks like the other designed templates.",
+    "The secret target is the load-bearing redaction surface: it must appear ONLY in the speaker's view before reveal, never in phaseKey, analytics props, or spectator views — needs a leakedSecrets-style audit test on the stringified target from day one.",
+    "Speaker disconnect mid-round must void/skip the round immediately (voided reveal + round_skipped) or the room stalls waiting on a ghost; the playerLeft branches need dedicated tests.",
+    "Shy or silent rooms can make the verbal talk phase drag — mitigated by the 45s cap and speaker early-end, but watch round-abandon analytics at rolloutPct 5 before promoting to 100.",
+    "At minPlayers=3 there are only 2 guessers, so the lower-median speaker score is coarse (it equals the better guess); acceptable but verify the feel in playtest before lowering timers further.",
+    "Pack quality is the real difficulty knob: anchors must be genuinely graduated or all guesses cluster mid-scale and bands flatten; enforce the sizing lint (items >= totalRounds, recommend >= 24) and the AI-gate playtest rubric.",
+    "Bilingual authoring items must be split into single-locale runtime packs (la-note-fr / la-note-en) by the build pipeline per synthesis §3.1 — shipping a mixed-language pack violates the loader convention.",
+    "Dial precision on small screens (wheel100): without snap ticks and haptics, fat-finger error masquerades as bad reads; UX must make the ±5 bullseye band physically reachable."
+  ]
+}

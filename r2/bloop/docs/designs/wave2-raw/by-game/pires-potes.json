@@ -1,0 +1,97 @@
+{
+  "id": "pires-potes",
+  "nameFr": "Pires Potes",
+  "nameEn": "Worst Mates",
+  "taglineFr": "Chaque question désigne un coupable. Le pire pote gagne.",
+  "taglineEn": "Every question points a finger. The worst friend wins.",
+  "template": "VOTE",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "vote:<round>",
+      "durationSec": 20,
+      "description": "The round's designation card ('Qui serait capable de... / Who would...') appears on every phone simultaneously (no rotating card-drawer — see recommendations). Each player taps exactly ONE other player; the reducer rejects self-votes and re-votes are allowed until lock (last tap wins, tracer semantics). Early-resolve: the phase ends immediately when every rostered player has voted. Timeout behavior: at the deadline, missing votes (passive/disconnected players) are simply dropped — never blocks the room; if zero votes were cast the round awards nothing and advances."
+    },
+    {
+      "key": "reveal:<round>",
+      "durationSec": 7,
+      "description": "Instant tally on every phone: who got how many fingers pointed at them. Every player holding the maximum tally (max >= 1) 'wins the shame card': +1 point, with a sticker animation framing it as a comedic WIN (brand: funny never cruel). Ties at max all score +1 (no revote — speed over precision). Auto-advances at the deadline to the next vote phase or to 'over'. No player input needed, so disconnects are irrelevant here."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Untimed terminal phase (phaseDurationMs = null). Final podium crowns 'Le Pire Pote / The Worst Mate' (highest cumulative shame-card count; final ties share the crown). Emits the gameOver effect with scores; lobby offers instant rematch with a fresh seed (the pack is shuffled at init so a rematch draws different cards)."
+    }
+  ],
+  "params": {
+    "totalRounds": 7,
+    "revealStyle": "instant",
+    "selfVoteAllowed": false,
+    "voteMs": 20000,
+    "revealMs": 7000
+  },
+  "roundsDefault": 7,
+  "roundSeconds": 27,
+  "contentItemShape": "One pack item = one designation card: { id: string (stable, e.g. 'pp-014'), text: { fr: string, en: string } — the question, <= 140 chars, ALWAYS phrased to designate a person present in the room ('Qui...' / 'Who...'), 100% original writing (zero text reuse from 'Amis de merde'), transcreated not literally translated; spicy: 0 | 1 | 2 — item-level rating, an item may only ship in a pack whose tier >= its rating; tags?: string[] (e.g. 'soiree', 'argent', 'amour', 'absurde') for pack curation and anti-pile-on variety balancing. The bilingual file is the AUTHORING MASTER; the publish step splits it into single-locale packs (pires-potes-fr@N / pires-potes-en@N) per the platform pack-family convention (template-architecture §2.7), and the runtime pack data collapses to the VOTE module's existing { prompts: string[] } shape — the tracer module consumes it unchanged.",
+  "sampleItems": [
+    "{\"id\": \"pp-014\", \"text\": {\"fr\": \"Qui oublierait l'anniversaire de sa propre mère mais jamais un happy hour ?\", \"en\": \"Who would forget their own mom's birthday but never a happy hour?\"}, \"spicy\": 0, \"tags\": [\"famille\", \"soiree\"]}",
+    "{\"id\": \"pp-058\", \"text\": {\"fr\": \"Qui vendrait LA photo dossier du groupe pour 50 balles, sans négocier ?\", \"en\": \"Who would sell the group's most embarrassing photo for 50 bucks, no haggling?\"}, \"spicy\": 0, \"tags\": [\"argent\", \"trahison\"]}",
+    "{\"id\": \"pp-112\", \"text\": {\"fr\": \"Qui draguerait l'ex d'un pote en mode « techniquement, c'est plus son ex » ?\", \"en\": \"Who would flirt with a friend's ex like 'technically they're single now'?\"}, \"spicy\": 1, \"tags\": [\"amour\", \"trahison\"]}"
+  ],
+  "physical": "seated",
+  "spicyLevel": 1,
+  "needsOfflineAiPipeline": false,
+  "recommendations": [
+    {
+      "question": "Name (brief asks for 2-3 FR candidates, distinct from 'Amis de merde')",
+      "recommendation": "Candidates: 'Pires Potes', 'Potes Pourris', 'Sales Potes'. Pick 'Pires Potes' (EN display name 'Worst Mates').",
+      "why": "Matches the given game id pires-potes, alliterative and punchy on a Home tile, captures the 'worst friend wins' spirit, and is lexically distant from the 'Amis de merde' trademark (no shared word)."
+    },
+    {
+      "question": "Win condition: the original is 'first to 5 cards'; the platform wants short fixed TikTok-native sessions",
+      "recommendation": "v1 = fixed 7 rounds, highest score wins (pure VOTE@1 config, zero code). Later, add an optional targetScore param to VOTE@2 for a faithful 'first to 5' classic mode.",
+      "why": "First-to-N is unbounded (a 16-player room could run 20+ rounds); fixed 7 rounds = ~3 min session, fits the ad cadence and rematch loop, and the 'most shame cards wins' spirit is fully preserved. The param is a small additive reducer branch, not a launch blocker."
+    },
+    {
+      "question": "Keep the physical game's rotating card-drawer turn?",
+      "recommendation": "Drop it. The card appears on all phones simultaneously every round; everyone votes at once.",
+      "why": "The drawer adds no decision in the original (they just read the card aloud), and a rotating 'active player' would let one disconnected player stall the room — violating the never-block rule. Simultaneous display is strictly faster and faithful to the spirit (the vote IS the game)."
+    },
+    {
+      "question": "Tie at max votes: revote or split?",
+      "recommendation": "All players tied at max get +1 (exact tracer behavior). No revote.",
+      "why": "Deterministic, zero extra phase, keeps rounds at ~27s. The drama is in WHO got designated, not in tiebreak bookkeeping; a revote phase would double round length for a rare case."
+    },
+    {
+      "question": "Reveal style: instant or flip-one-by-one?",
+      "recommendation": "'instant' for v1; A/B 'flip-one-by-one' later (the param is already specced in templateParamsSchema(VOTE) for Pass the Bloop).",
+      "why": "The original's fun is the immediate collective finger-point; instant keeps the round under 30s. Flip-one-by-one adds drama but costs ~5-8s/round — test it as a config flip once the VOTE revealStyle param lands."
+    },
+    {
+      "question": "How to handle the original's edgy/dark tone vs Bloop's 'funny never cruel' + age gating?",
+      "recommendation": "Ship TWO sibling configs on the same template: 'pires-potes' (flagship, tone spicy, minAge 18, pack tiers 0+1) and 'pires-potes-soft' (tone classic, all ages, tier-0 cards only). Rewrite the humor angle: embarrassing and absurd, never humiliating identity/appearance/trauma.",
+      "why": "The schema already forces tone:'spicy' => minAge>=18 (template-architecture §2.1 refinement c), and sibling configs are the platform's standard tiering pattern — one KV edit each, no code. This keeps the original's bite for adult groups without shipping cruelty to minors."
+    },
+    {
+      "question": "Param surface gap: voteMs/revealMs are in the module Config but not in templateParamsSchema(VOTE)",
+      "recommendation": "Grow templateParamsSchema(VOTE) with optional voteMs (5000-60000) and revealMs (3000-15000) overrides; pires-potes wants voteMs 20000 (vs tracer's 30000) and revealMs 7000 (vs 5000).",
+      "why": "Pure protocol-schema addition — the module already reads config.voteMs/revealMs, so no reducer change; until it lands, pires-potes runs fine on tracer defaults (rounds just 12s slower)."
+    },
+    {
+      "question": "Pack sizing and authoring path",
+      "recommendation": "Launch with >= 150 original cards per locale per tier (authored or AI-drafted OFFLINE through the §6 gate: schema + profanity scan + replay smoke + human curation), shuffled at init, totalRounds capped at pack size.",
+      "why": "7 rounds/game with rematch loops burns cards fast; 150+ gives ~20 rematches before visible repeats. The AI pipeline is optional (hence needsOfflineAiPipeline=false — items carry no pre-computed values), but it is the cheap way to reach bilingual parity at volume; nothing AI ever runs at gameplay time."
+    }
+  ],
+  "risks": [
+    "Copyright/trade-dress: the mechanic (vote-to-designate) is not protectable but card TEXTS and the name are. Hard rule: zero text reuse from 'Amis de merde'; run a similarity audit of the authored pack against the published deck before launch; keep name, logo and card visual design clearly distinct.",
+    "Pile-on/bullying: a designation game can dogpile one player all session. Mitigations: frame every designation as a comedic WIN (+1 'shame card' with celebratory sticker, scoreboard crowns the 'winner'), enforce pack variety via tags (absurd/flattering-negative mix, never identity/appearance/trauma angles), brand lint 'funny never cruel' in the §6 content gate, and the KV kill switch per pack.",
+    "Spicy compliance: the flagship config is tone:'spicy' so it MUST carry minAge>=18 and sit behind the self-attested age gate; store review may still flag dark-humor content — keep the soft sibling config as the default-surfaced tile for unverified-age devices.",
+    "Small-room dynamics: with 3 players (config floor; module floor is 2 but 2-player voting is trivial since you can only pick the other person) frequent max-ties mean multiple players score per round — score inflation is acceptable but the final crown ties more often; copy should celebrate co-winners.",
+    "Disconnect edge: if every player times out in a vote phase, zero votes => nobody scores and the round still advances (tracer's max>0 guard) — correct never-block behavior, but the UI must show a 'personne n'a voté / nobody voted' beat so it doesn't read as a bug.",
+    "Localization: humor must be transcreated, not translated — a literal EN rendering of a French 'photo dossier' joke falls flat; the bilingual authoring master needs native-quality passes per locale before the publish-time split into single-locale packs (synthesis §3.1 one-pack-one-locale convention)."
+  ]
+}

@@ -1,0 +1,1751 @@
+{
+  "gameId": "double-le-mouvement",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "dlm-001-robot-hiphop",
+      "text": {
+        "fr": "Un robot qui apprend le hip-hop avec un tuto YouTube",
+        "en": "A robot learning hip-hop from a YouTube tutorial"
+      },
+      "hint": {
+        "fr": "Saccadé au début, fluide à la fin — termine par un dab.",
+        "en": "Stiff at first, smooth by the end — finish with a dab."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "physical", "tiktok"]
+    },
+    {
+      "id": "dlm-002-cat-cucumber",
+      "text": {
+        "fr": "Un chat qui découvre un concombre posé derrière lui",
+        "en": "A cat discovering a cucumber placed behind it"
+      },
+      "hint": {
+        "fr": "Toilette tranquille de la patte… puis panique verticale.",
+        "en": "Calmly groom your paw… then vertical panic."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "meme"]
+    },
+    {
+      "id": "dlm-003-lego-barefoot",
+      "text": {
+        "fr": "Traverser pieds nus un salon couvert de Lego en restant digne",
+        "en": "Crossing a Lego-covered living room barefoot while staying dignified"
+      },
+      "hint": {
+        "fr": "Sourire de façade, agonie intérieure, démarche de flamant rose.",
+        "en": "Polite smile, inner agony, flamingo walk."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "pain", "relatable"]
+    },
+    {
+      "id": "dlm-004-pigeon-frite",
+      "text": {
+        "fr": "Un pigeon de ville qui se bat pour la dernière frite",
+        "en": "A city pigeon fighting for the last french fry"
+      },
+      "hint": {
+        "fr": "Tête saccadée, roucoulement agressif, tour d'honneur pathétique.",
+        "en": "Jerky head bobs, aggressive cooing, pathetic victory lap."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "urban"]
+    },
+    {
+      "id": "dlm-005-rooster-early",
+      "text": {
+        "fr": "Un coq qui réveille tout le village une heure trop tôt",
+        "en": "A rooster waking the whole village an hour early"
+      },
+      "hint": {
+        "fr": "Gonfle le torse, grande inspiration, zéro remords.",
+        "en": "Puff your chest, big inhale, zero regrets."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "loud"]
+    },
+    {
+      "id": "dlm-006-dog-reunion",
+      "text": {
+        "fr": "Un chien qui retrouve son humain parti depuis cinq minutes",
+        "en": "A dog reuniting with its human after a five-minute absence"
+      },
+      "hint": {
+        "fr": "Drame total : sauts, tours sur toi-même, fin du monde inversée.",
+        "en": "Total drama: jumps, spins, the apocalypse in reverse."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "wholesome"]
+    },
+    {
+      "id": "dlm-007-seagull-sandwich",
+      "text": {
+        "fr": "Une mouette qui pique le sandwich d'un touriste en plein vol",
+        "en": "A seagull dive-bombing a tourist's sandwich"
+      },
+      "hint": {
+        "fr": "Plane, verrouille la cible, attaque éclair, savoure en narguant.",
+        "en": "Glide, lock on, lightning strike, gloat while chewing."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "beach"]
+    },
+    {
+      "id": "dlm-008-mosquito-3am",
+      "text": {
+        "fr": "Un moustique en chasse dans une chambre à 3h du matin",
+        "en": "A mosquito hunting in a bedroom at 3am"
+      },
+      "hint": {
+        "fr": "Vol en zigzag, approches furtives de l'oreille, esquives de pro.",
+        "en": "Zigzag flight, stealth ear approaches, dramatic dodges."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "night", "relatable"]
+    },
+    {
+      "id": "dlm-009-sealion-fish",
+      "text": {
+        "fr": "Une otarie qui réclame son poisson en plein spectacle du zoo",
+        "en": "A sea lion demanding its fish mid-show"
+      },
+      "hint": {
+        "fr": "Applaudis des nageoires, tends le cou, boude si rien ne vient.",
+        "en": "Clap your flippers, stretch that neck, sulk if unpaid."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "zoo"]
+    },
+    {
+      "id": "dlm-010-monkey-mirror",
+      "text": {
+        "fr": "Un singe qui découvre un miroir pour la première fois",
+        "en": "A monkey discovering a mirror for the first time"
+      },
+      "hint": {
+        "fr": "Curieux, menace ton reflet, vérifie derrière, recommence.",
+        "en": "Curious, threaten your reflection, check behind it, repeat."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "physical"]
+    },
+    {
+      "id": "dlm-011-trex-bed",
+      "text": {
+        "fr": "Un T-Rex qui essaie de faire son lit avec ses petits bras",
+        "en": "A T-Rex trying to make its bed with those tiny arms"
+      },
+      "hint": {
+        "fr": "Coudes collés au corps, rugissements de frustration, l'oreiller gagne.",
+        "en": "Elbows pinned, frustrated roars, the pillow always wins."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "meme", "physical"]
+    },
+    {
+      "id": "dlm-012-hen-egg",
+      "text": {
+        "fr": "Une poule qui vient de pondre et veut que TOUT le monde le sache",
+        "en": "A hen that just laid an egg and needs EVERYONE to know"
+      },
+      "hint": {
+        "fr": "Tour d'honneur, fierté maximale, vérifie l'œuf entre deux annonces.",
+        "en": "Victory lap, max pride, double-check the egg between announcements."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "loud"]
+    },
+    {
+      "id": "dlm-013-bee-car",
+      "text": {
+        "fr": "Une abeille coincée dans une voiture pleine de passagers paniqués",
+        "en": "A bee trapped in a car full of panicking passengers"
+      },
+      "hint": {
+        "fr": "Joue l'abeille ET les passagers — change de rôle d'un coup sec.",
+        "en": "Play the bee AND the passengers — snap between roles."
+      },
+      "category": "animals",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "chaos", "multi-role"]
+    },
+    {
+      "id": "dlm-014-cat-zoomies",
+      "text": {
+        "fr": "Un chat qui pète un câble à 3h du matin (mode zoomies)",
+        "en": "A cat hitting full 3am zoomies mode"
+      },
+      "hint": {
+        "fr": "Regard fou, sprint imaginaire, dérapage dans le virage, stop net.",
+        "en": "Crazy eyes, imaginary sprint, drift the corner, freeze mid-air."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "meme", "physical"]
+    },
+    {
+      "id": "dlm-015-turkey-calendar",
+      "text": {
+        "fr": "Une dinde qui découvre la date du réveillon de Noël",
+        "en": "A turkey finding out the date of Thanksgiving"
+      },
+      "hint": {
+        "fr": "Glouglou tranquille, lecture du calendrier, effondrement total.",
+        "en": "Casual gobble, reads the calendar, full meltdown."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "dark-comedy", "holiday"]
+    },
+    {
+      "id": "dlm-016-dog-walkies",
+      "text": {
+        "fr": "Un chien qui entend le mot « promenade » depuis l'autre bout de la maison",
+        "en": "A dog hearing the word \"walkies\" from across the house"
+      },
+      "hint": {
+        "fr": "Oreille qui pivote, dérapage sur le carrelage, danse de la laisse.",
+        "en": "Ear swivel, skid across the tiles, leash dance at the door."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "wholesome", "relatable"]
+    },
+    {
+      "id": "dlm-017-hippo-pool",
+      "text": {
+        "fr": "Un hippopotame qui fait des longueurs à la piscine municipale",
+        "en": "A hippo doing laps at the public pool"
+      },
+      "hint": {
+        "fr": "Entrée majestueuse, éclaboussures maximales, brasse de champion.",
+        "en": "Majestic entrance, maximum splash, championship breaststroke."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "absurd"]
+    },
+    {
+      "id": "dlm-018-parrot-argument",
+      "text": {
+        "fr": "Un perroquet qui répète les pires phrases d'une dispute de couple",
+        "en": "A parrot repeating the worst lines of a couple's argument"
+      },
+      "hint": {
+        "fr": "Penche la tête, imite les deux camps, sois fier de ton chaos.",
+        "en": "Head tilts, mimic both sides, stay proud of the chaos."
+      },
+      "category": "animals",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "chaos"]
+    },
+    {
+      "id": "dlm-019-goat-scream",
+      "text": {
+        "fr": "La chèvre qui crie comme un humain (le meme)",
+        "en": "The screaming goat meme, performed live"
+      },
+      "hint": {
+        "fr": "Broute innocemment… puis hurle toute l'angoisse du monde.",
+        "en": "Graze innocently… then scream the world's despair."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "meme", "loud"]
+    },
+    {
+      "id": "dlm-020-wolf-throat",
+      "text": {
+        "fr": "Un loup qui hurle à la lune avec un chat dans la gorge",
+        "en": "A wolf howling at the moon with a frog in its throat"
+      },
+      "hint": {
+        "fr": "Prise d'élan majestueuse, couac, raclement, on réessaie.",
+        "en": "Majestic wind-up, voice crack, throat clear, try again."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "fail"]
+    },
+    {
+      "id": "dlm-021-squirrel-paranoid",
+      "text": {
+        "fr": "Un écureuil parano qui cache sa noisette préférée",
+        "en": "A paranoid squirrel hiding its favorite acorn"
+      },
+      "hint": {
+        "fr": "Creuse, scrute les espions, change d'avis, recommence ailleurs.",
+        "en": "Dig, scan for spies, change your mind, restart elsewhere."
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "physical"]
+    },
+    {
+      "id": "dlm-022-flamingo-quake",
+      "text": {
+        "fr": "Un flamant rose sur une patte pendant un tremblement de terre",
+        "en": "A flamingo on one leg during an earthquake"
+      },
+      "hint": {
+        "fr": "Équilibre zen, secousse, panique élégante — jamais deux pattes.",
+        "en": "Zen balance, tremor hits, elegant panic — never two legs."
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "balance", "absurd"]
+    },
+    {
+      "id": "dlm-023-ballet-ribbon",
+      "text": {
+        "fr": "Une danseuse étoile dont le ruban du chausson lâche en plein solo",
+        "en": "A prima ballerina whose shoe ribbon snaps mid-solo"
+      },
+      "hint": {
+        "fr": "Grâce absolue en haut, gestion de crise en bas.",
+        "en": "Pure grace up top, crisis management down below."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "fail", "elegant"]
+    },
+    {
+      "id": "dlm-024-macarena-space",
+      "text": {
+        "fr": "La Macarena en apesanteur dans une station spatiale",
+        "en": "The Macarena in zero gravity on a space station"
+      },
+      "hint": {
+        "fr": "Chaque geste te fait dériver — rattrape-toi aux murs.",
+        "en": "Every move sends you drifting — grab the walls."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "absurd", "space"]
+    },
+    {
+      "id": "dlm-025-breakdance-door",
+      "text": {
+        "fr": "Un battle de breakdance interrompu par une porte vitrée",
+        "en": "A breakdance battle interrupted by a glass door"
+      },
+      "hint": {
+        "fr": "Headspin de la victoire, démarche fière, BAM.",
+        "en": "Victory headspin, confident strut, BAM."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "fail", "physical"]
+    },
+    {
+      "id": "dlm-026-flamenco-pins",
+      "text": {
+        "fr": "Du flamenco avec des fourmis dans les deux jambes",
+        "en": "Flamenco with both legs asleep, pins and needles everywhere"
+      },
+      "hint": {
+        "fr": "Talons fiers, grimaces, secoue discrètement entre deux poses.",
+        "en": "Proud heels, winces, discreet leg shakes between poses."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "pain", "physical"]
+    },
+    {
+      "id": "dlm-027-school-slow",
+      "text": {
+        "fr": "Le premier slow du collège, bras tendus à distance réglementaire",
+        "en": "Your first school dance slow dance, arms locked at safety distance"
+      },
+      "hint": {
+        "fr": "Regard fuyant, balancement de pendule, compte les pas tout bas.",
+        "en": "Avoid eye contact, pendulum sway, count steps under your breath."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "nostalgia", "awkward"]
+    },
+    {
+      "id": "dlm-028-rain-dance",
+      "text": {
+        "fr": "Une danse de la pluie qui marche beaucoup trop bien",
+        "en": "A rain dance that works way too well"
+      },
+      "hint": {
+        "fr": "Rituel confiant, première goutte, déluge, danse de l'arrêt d'urgence.",
+        "en": "Confident ritual, first drop, downpour, frantic off-switch dance."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "absurd", "weather"]
+    },
+    {
+      "id": "dlm-029-tap-creaky",
+      "text": {
+        "fr": "Des claquettes sur un parquet qui grince de partout",
+        "en": "Tap dancing on a floor that creaks everywhere"
+      },
+      "hint": {
+        "fr": "Chaque lame du parquet a son propre bruit — explore-les toutes.",
+        "en": "Every floorboard has its own sound — find them all."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "sound-rich"]
+    },
+    {
+      "id": "dlm-030-tiktok-queue",
+      "text": {
+        "fr": "Répéter une danse TikTok en douce dans la file de la boulangerie",
+        "en": "Secretly rehearsing a TikTok dance in the coffee shop line"
+      },
+      "hint": {
+        "fr": "Micro-gestes discrets, chorégraphie complète dès qu'on ne regarde plus.",
+        "en": "Tiny moves while watched, full choreo the second no one looks."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "tiktok", "relatable"]
+    },
+    {
+      "id": "dlm-031-belly-buffet",
+      "text": {
+        "fr": "De la danse orientale juste après un buffet à volonté",
+        "en": "Belly dancing right after an all-you-can-eat buffet"
+      },
+      "hint": {
+        "fr": "Ondulations prudentes, pauses digestives, regrets visibles.",
+        "en": "Careful shimmies, digestive pauses, visible regret."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "food", "pain"]
+    },
+    {
+      "id": "dlm-032-wedding-cramp",
+      "text": {
+        "fr": "Ouvrir le bal de son mariage avec une crampe au mollet",
+        "en": "Your wedding first dance with a calf cramp"
+      },
+      "hint": {
+        "fr": "Sourire de photo, jambe en bois, valse à cloche-pied.",
+        "en": "Photo smile, wooden leg, one-legged waltz."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "wedding", "pain"]
+    },
+    {
+      "id": "dlm-033-dj-unplugged",
+      "text": {
+        "fr": "Un DJ à fond derrière des platines débranchées",
+        "en": "A DJ going all out behind unplugged decks"
+      },
+      "hint": {
+        "fr": "Casque sur une oreille, mains de chef d'orchestre, drop imaginaire.",
+        "en": "One ear on the headphones, conductor hands, imaginary drop."
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "music", "absurd"]
+    },
+    {
+      "id": "dlm-034-limbo-bar",
+      "text": {
+        "fr": "Du limbo sous une barre qui descend à chaque passage",
+        "en": "Limbo under a bar that drops lower every pass"
+      },
+      "hint": {
+        "fr": "Confiance, genoux qui tremblent, finale au ras du sol.",
+        "en": "Confidence, trembling knees, floor-level finale."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "physical", "party"]
+    },
+    {
+      "id": "dlm-035-salsa-invisible",
+      "text": {
+        "fr": "De la salsa endiablée avec un partenaire invisible",
+        "en": "Fiery salsa with an invisible partner"
+      },
+      "hint": {
+        "fr": "Porte-le, fais-le tourner, dispute-toi avec lui.",
+        "en": "Lift them, spin them, argue with them."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "mime", "absurd"]
+    },
+    {
+      "id": "dlm-036-zumba-6am",
+      "text": {
+        "fr": "Un cours de zumba à 6h : prof à 200 %, élèves à 2 %",
+        "en": "A 6am zumba class: instructor at 200%, students at 2%"
+      },
+      "hint": {
+        "fr": "Alterne entre le prof survolté et l'élève zombie.",
+        "en": "Switch between hyped instructor and zombie student."
+      },
+      "category": "dance",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "multi-role", "gym"]
+    },
+    {
+      "id": "dlm-037-moonwalk-mopped",
+      "text": {
+        "fr": "Un moonwalk sur un sol fraîchement passé à la serpillière",
+        "en": "A moonwalk across a freshly mopped floor"
+      },
+      "hint": {
+        "fr": "Glisse parfaite, couinements, dérapage final maîtrisé (ou pas).",
+        "en": "Perfect glide, squeaks, controlled final wipeout (or not)."
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "fail", "sound-rich"]
+    },
+    {
+      "id": "dlm-038-weightlift-record",
+      "text": {
+        "fr": "Un haltérophile qui tente le record du monde en mondovision",
+        "en": "A weightlifter attempting the world record on live TV"
+      },
+      "hint": {
+        "fr": "Craie, rituel, soulevé tremblant, choix dramatique : tenir ou lâcher.",
+        "en": "Chalk up, ritual, trembling lift, dramatic choice: hold or drop."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "drama", "loud"]
+    },
+    {
+      "id": "dlm-039-goalkeeper-penalty",
+      "text": {
+        "fr": "Un gardien de but pendant la séance de tirs au but",
+        "en": "A goalkeeper during a penalty shootout"
+      },
+      "hint": {
+        "fr": "Intimidation, danse sur la ligne, plongeon du mauvais côté.",
+        "en": "Mind games, goal-line dance, dive the wrong way."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "football", "drama"]
+    },
+    {
+      "id": "dlm-040-tennis-grunt",
+      "text": {
+        "fr": "Un tennisman dont les cris montent en intensité à chaque frappe",
+        "en": "A tennis player whose grunts escalate with every shot"
+      },
+      "hint": {
+        "fr": "Commence sobre, finis à l'opéra.",
+        "en": "Start subtle, end at full opera."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "loud", "sound-rich"]
+    },
+    {
+      "id": "dlm-041-football-dive",
+      "text": {
+        "fr": "Un footballeur qui transforme un frôlement en blessure de guerre",
+        "en": "A footballer turning a light touch into a war wound"
+      },
+      "hint": {
+        "fr": "Triple roulade, brancard imaginaire, guérison miracle.",
+        "en": "Triple roll, imaginary stretcher, miracle recovery."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "football", "drama"]
+    },
+    {
+      "id": "dlm-042-karate-board",
+      "text": {
+        "fr": "Un karatéka ceinture noire qui n'arrive PAS à casser sa planche",
+        "en": "A karate black belt who canNOT break the board"
+      },
+      "hint": {
+        "fr": "Cri de guerre, frappe, douleur niée, cri plus fort, re-frappe.",
+        "en": "Battle cry, strike, denied pain, louder cry, strike again."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fail", "loud"]
+    },
+    {
+      "id": "dlm-043-curling-sweep",
+      "text": {
+        "fr": "Un balayeur de curling en panique totale",
+        "en": "A curling sweeper in full panic mode"
+      },
+      "hint": {
+        "fr": "Frotte comme si ta vie en dépendait, obéis au skip qui hurle.",
+        "en": "Sweep like your life depends on it, obey the screaming skip."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "obscure", "physical"]
+    },
+    {
+      "id": "dlm-044-marathon-wall",
+      "text": {
+        "fr": "Un marathonien au 41e kilomètre",
+        "en": "A marathon runner at mile 25"
+      },
+      "hint": {
+        "fr": "Jambes en coton, négociation intérieure, faux sprint devant les caméras.",
+        "en": "Jelly legs, inner bargaining, fake sprint for the cameras."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "pain", "relatable"]
+    },
+    {
+      "id": "dlm-045-aquagym-coach",
+      "text": {
+        "fr": "Un prof d'aquagym qui se donne plus que tout le bassin réuni",
+        "en": "An aqua aerobics coach giving more than the whole pool combined"
+      },
+      "hint": {
+        "fr": "Compte à voix haute, sourire bloqué, éclaboussures d'enthousiasme.",
+        "en": "Count out loud, locked-in smile, splashes of pure enthusiasm."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "gym", "loud"]
+    },
+    {
+      "id": "dlm-046-boxer-mirror",
+      "text": {
+        "fr": "Un boxeur qui perd son combat contre son propre reflet",
+        "en": "A boxer losing the fight against his own reflection"
+      },
+      "hint": {
+        "fr": "Esquive, jab — le reflet répond toujours exactement en même temps.",
+        "en": "Dodge, jab — the reflection always counters at the same time."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "absurd", "physical"]
+    },
+    {
+      "id": "dlm-047-gymnast-salute",
+      "text": {
+        "fr": "Une gymnaste qui rate l'atterrissage mais réussit le salut",
+        "en": "A gymnast who misses the landing but nails the salute"
+      },
+      "hint": {
+        "fr": "Enchaînement parfait, réception catastrophe, salut olympique.",
+        "en": "Flawless routine, disaster landing, Olympic-grade salute."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fail", "physical"]
+    },
+    {
+      "id": "dlm-048-fisherman-giant",
+      "text": {
+        "fr": "Un pêcheur du dimanche qui lutte contre un poisson trop gros",
+        "en": "A weekend fisherman battling a fish way too big"
+      },
+      "hint": {
+        "fr": "Moulinet frénétique, glissades, le poisson gagne presque.",
+        "en": "Frantic reeling, getting dragged, the fish nearly wins."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "struggle", "mime"]
+    },
+    {
+      "id": "dlm-049-referee-cards",
+      "text": {
+        "fr": "Un arbitre qui distribue des cartons rouges à tout le stade",
+        "en": "A referee handing out red cards to the entire stadium"
+      },
+      "hint": {
+        "fr": "Sifflet imaginaire, doigt accusateur, cartons en rafale.",
+        "en": "Imaginary whistle, accusing finger, rapid-fire cards."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "power-trip", "loud"]
+    },
+    {
+      "id": "dlm-050-bowling-celebrate",
+      "text": {
+        "fr": "Un strike au bowling suivi d'une célébration beaucoup trop intense",
+        "en": "A bowling strike followed by a way-too-intense celebration"
+      },
+      "hint": {
+        "fr": "Élan parfait, suspense, explosion de joie disproportionnée.",
+        "en": "Perfect approach, suspense, wildly disproportionate joy."
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "party", "loud"]
+    },
+    {
+      "id": "dlm-051-cyclist-climb",
+      "text": {
+        "fr": "Un coureur du Tour de France dans le dernier col",
+        "en": "A Tour de France rider on the final mountain climb"
+      },
+      "hint": {
+        "fr": "Danse sur les pédales, grimace, bidon, attaque héroïque.",
+        "en": "Dance on the pedals, grimace, water bottle, heroic attack."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "pain", "mime"]
+    },
+    {
+      "id": "dlm-052-diver-10m",
+      "text": {
+        "fr": "Un plongeur qui hésite tout en haut du plongeoir de 10 mètres",
+        "en": "A diver hesitating at the top of the 10-meter platform"
+      },
+      "hint": {
+        "fr": "Regarde en bas, recule, faux départs, bombe de la honte.",
+        "en": "Look down, back away, false starts, shame cannonball."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fear", "relatable"]
+    },
+    {
+      "id": "dlm-053-fencer-mosquito",
+      "text": {
+        "fr": "Un escrimeur qui duelle contre un moustique",
+        "en": "A fencer dueling a mosquito"
+      },
+      "hint": {
+        "fr": "En garde, fentes élégantes — l'ennemi est partout et nulle part.",
+        "en": "En garde, elegant lunges — the enemy is everywhere and nowhere."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "absurd", "physical"]
+    },
+    {
+      "id": "dlm-054-yoga-crow",
+      "text": {
+        "fr": "Un cours de yoga où la position du corbeau tourne très mal",
+        "en": "A yoga class where crow pose goes very wrong"
+      },
+      "hint": {
+        "fr": "Sérénité, tremblements, chute au ralenti, namasté depuis le sol.",
+        "en": "Serenity, wobble, slow-motion collapse, namaste from the floor."
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fail", "zen"]
+    },
+    {
+      "id": "dlm-055-pingpong-slowmo",
+      "text": {
+        "fr": "Une finale de ping-pong rejouée entièrement au ralenti",
+        "en": "A ping-pong final replayed entirely in slow motion"
+      },
+      "hint": {
+        "fr": "Échanges épiques, plongeons, sueur dramatique image par image.",
+        "en": "Epic rallies, diving saves, dramatic frame-by-frame sweat."
+      },
+      "category": "sports",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "slowmo", "drama"]
+    },
+    {
+      "id": "dlm-056-chips-cinema",
+      "text": {
+        "fr": "Ouvrir un paquet de chips en plein film d'auteur silencieux",
+        "en": "Opening a bag of chips during a silent arthouse film"
+      },
+      "hint": {
+        "fr": "Millimètre par millimètre, regards paniqués, croque au pire moment.",
+        "en": "Millimeter by millimeter, panicked glances, crunch at the worst time."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "suspense", "sound-rich"]
+    },
+    {
+      "id": "dlm-057-flatpack-fury",
+      "text": {
+        "fr": "Monter un meuble suédois sans la notice, vis en trop incluses",
+        "en": "Assembling flat-pack furniture with no manual and bonus screws"
+      },
+      "hint": {
+        "fr": "Confiance, marteau, étagère à l'envers, vis mystère à la fin.",
+        "en": "Confidence, hammer, upside-down shelf, mystery screws at the end."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "diy", "fail"]
+    },
+    {
+      "id": "dlm-058-vacuum-curtain",
+      "text": {
+        "fr": "Passer l'aspirateur quand il avale le rideau",
+        "en": "Vacuuming when the machine swallows the curtain"
+      },
+      "hint": {
+        "fr": "Routine tranquille, aspiration soudaine, catch contre le tuyau.",
+        "en": "Calm routine, sudden suction, wrestling match with the hose."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "chaos", "sound-rich"]
+    },
+    {
+      "id": "dlm-059-snooze-battle",
+      "text": {
+        "fr": "Le combat du réveil : cinq snoozes et une négociation perdue",
+        "en": "The alarm clock battle: five snoozes and a losing negotiation"
+      },
+      "hint": {
+        "fr": "Bras zombie, frappe à l'aveugle, victoire finale du réveil.",
+        "en": "Zombie arm, blind slapping, the alarm wins in the end."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "morning", "sound-rich"]
+    },
+    {
+      "id": "dlm-060-popcorn-microwave",
+      "text": {
+        "fr": "Surveiller un sachet de pop-corn au micro-ondes qui s'emballe",
+        "en": "Watching a bag of microwave popcorn spiral out of control"
+      },
+      "hint": {
+        "fr": "Compte les pops, suspicion, fumée, extraction d'urgence.",
+        "en": "Count the pops, suspicion, smoke, emergency extraction."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "food", "sound-rich"]
+    },
+    {
+      "id": "dlm-061-umbrella-storm",
+      "text": {
+        "fr": "Se battre avec un parapluie retourné en pleine tempête",
+        "en": "Fighting an inside-out umbrella in a storm"
+      },
+      "hint": {
+        "fr": "Lutte épique, retournements, dignité envolée avec le vent.",
+        "en": "Epic struggle, flips, dignity gone with the wind."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "weather", "physical"]
+    },
+    {
+      "id": "dlm-062-lawnmower-start",
+      "text": {
+        "fr": "Démarrer une tondeuse qui refuse de coopérer",
+        "en": "Starting a lawnmower that refuses to cooperate"
+      },
+      "hint": {
+        "fr": "Tire le cordon, échec, technique secrète, échec, coup de pied.",
+        "en": "Yank the cord, fail, secret technique, fail, kick it."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "diy", "sound-rich"]
+    },
+    {
+      "id": "dlm-063-creaky-hallway",
+      "text": {
+        "fr": "Traverser un couloir qui craque à 2h du matin sans réveiller personne",
+        "en": "Crossing a creaky hallway at 2am without waking anyone"
+      },
+      "hint": {
+        "fr": "Pas de ninja, lame de parquet traîtresse, mode statue, reprise.",
+        "en": "Ninja steps, traitor floorboard, freeze like a statue, resume."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "night", "suspense"]
+    },
+    {
+      "id": "dlm-064-shower-lava",
+      "text": {
+        "fr": "Une douche qui alterne entre glacée et lave en fusion",
+        "en": "A shower alternating between ice-cold and molten lava"
+      },
+      "hint": {
+        "fr": "Réglage millimétré, trahison, danse d'évitement contre le mur.",
+        "en": "Precision dial work, betrayal, wall-hugging dodge dance."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "pain", "physical"]
+    },
+    {
+      "id": "dlm-065-traffic-opera",
+      "text": {
+        "fr": "Un automobiliste coincé qui transforme son klaxon en opéra",
+        "en": "A driver stuck in traffic turning their horn into an opera"
+      },
+      "hint": {
+        "fr": "Volant imaginaire, solos de klaxon, duo avec la file d'à côté.",
+        "en": "Imaginary wheel, horn solos, duet with the next lane."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "absurd", "music", "sound-rich"]
+    },
+    {
+      "id": "dlm-066-fitted-sheet",
+      "text": {
+        "fr": "Plier un drap-housse en gardant son calme (mission impossible)",
+        "en": "Folding a fitted sheet while staying calm (mission impossible)"
+      },
+      "hint": {
+        "fr": "Méthode YouTube, boule informe, le drap gagne toujours.",
+        "en": "YouTube method, shapeless blob, the sheet always wins."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "struggle"]
+    },
+    {
+      "id": "dlm-067-bandaid-rip",
+      "text": {
+        "fr": "Retirer un pansement : très lentement, puis d'un coup sec",
+        "en": "Removing a band-aid: very slowly, then all at once"
+      },
+      "hint": {
+        "fr": "Négociation, micro-tractions, grande inspiration, ARRACHE.",
+        "en": "Negotiation, micro-tugs, deep breath, RIP."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "pain", "suspense"]
+    },
+    {
+      "id": "dlm-068-phone-bag",
+      "text": {
+        "fr": "Chercher son téléphone qui sonne au fond d'un sac sans fond",
+        "en": "Digging for a ringing phone in a bottomless bag"
+      },
+      "hint": {
+        "fr": "Fouille frénétique, objets mystères sortis un à un, raté de peu.",
+        "en": "Frantic digging, mystery objects pulled out one by one, just missed it."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "panic", "sound-rich"]
+    },
+    {
+      "id": "dlm-069-air-mattress",
+      "text": {
+        "fr": "Gonfler un matelas pneumatique à la bouche, les invités déjà là",
+        "en": "Inflating an air mattress by mouth while the guests wait"
+      },
+      "hint": {
+        "fr": "Souffle héroïque, vertiges, test mou décevant, re-souffle.",
+        "en": "Heroic blowing, dizziness, sad squish test, blow again."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "struggle", "sound-rich"]
+    },
+    {
+      "id": "dlm-070-pickle-jar",
+      "text": {
+        "fr": "Ouvrir un bocal de cornichons devant toute la famille",
+        "en": "Opening a pickle jar in front of the whole family"
+      },
+      "hint": {
+        "fr": "Décontraction, effort caché, torchon magique, gloire volée par mamie.",
+        "en": "Act casual, hidden strain, magic towel trick, grandma steals the glory."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "family", "struggle"]
+    },
+    {
+      "id": "dlm-071-trolley-wheel",
+      "text": {
+        "fr": "Piloter un caddie à roue folle dans les rayons du supermarché",
+        "en": "Steering a wonky-wheeled shopping cart through the aisles"
+      },
+      "hint": {
+        "fr": "Trajectoire impossible, frôle la pyramide de boîtes, excuses gênées.",
+        "en": "Impossible steering, graze the can pyramid, awkward apologies."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "chaos", "sound-rich"]
+    },
+    {
+      "id": "dlm-072-bubble-wrap",
+      "text": {
+        "fr": "Résister à un rouleau de papier bulle… puis craquer complètement",
+        "en": "Resisting a roll of bubble wrap… then fully giving in"
+      },
+      "hint": {
+        "fr": "Un pop discret, plaisir coupable, festival final.",
+        "en": "One sneaky pop, guilty pleasure, full popping festival."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "asmr", "sound-rich"]
+    },
+    {
+      "id": "dlm-073-bbq-coals",
+      "text": {
+        "fr": "Rallumer un barbecue mourant en soufflant sur les braises",
+        "en": "Reviving a dying barbecue by blowing on the coals"
+      },
+      "hint": {
+        "fr": "Souffle expert, fumée dans les yeux, victoire enfumée.",
+        "en": "Expert blowing, smoke in the eyes, smoky victory."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "summer", "sound-rich"]
+    },
+    {
+      "id": "dlm-074-zoom-sneeze",
+      "text": {
+        "fr": "Retenir un éternuement pendant une réunion Zoom, caméra allumée",
+        "en": "Holding in a sneeze during a Zoom meeting, camera on"
+      },
+      "hint": {
+        "fr": "Visage neutre, narines en lutte, explosion hors champ ratée.",
+        "en": "Neutral face, battling nostrils, failed off-camera explosion."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "work", "suspense"]
+    },
+    {
+      "id": "dlm-075-heels-cobbles",
+      "text": {
+        "fr": "Marcher en talons hauts sur des pavés après minuit",
+        "en": "Walking in high heels on cobblestones after midnight"
+      },
+      "hint": {
+        "fr": "Cheville en péril à chaque pas, élégance non négociable.",
+        "en": "Ankle peril at every step, elegance non-negotiable."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "night", "balance"]
+    },
+    {
+      "id": "dlm-076-sunday-drill",
+      "text": {
+        "fr": "Le voisin qui sort la perceuse à 8h un dimanche matin",
+        "en": "The neighbor firing up the drill at 8am on a Sunday"
+      },
+      "hint": {
+        "fr": "Joie de bricoler, pauses café, reprise au pire moment.",
+        "en": "DIY joy, coffee breaks, restart at the worst possible moment."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "diy", "sound-rich"]
+    },
+    {
+      "id": "dlm-077-suitcase-sit",
+      "text": {
+        "fr": "Fermer une valise trop pleine en s'asseyant dessus",
+        "en": "Closing an overstuffed suitcase by sitting on it"
+      },
+      "hint": {
+        "fr": "Compression, rebonds, fermeture éclair traîtresse, victoire instable.",
+        "en": "Compress, bounce, traitorous zipper, unstable victory."
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "travel", "struggle"]
+    },
+    {
+      "id": "dlm-078-smoke-detector",
+      "text": {
+        "fr": "Traquer le détecteur de fumée qui bipe une fois par minute",
+        "en": "Hunting the smoke detector that chirps once a minute"
+      },
+      "hint": {
+        "fr": "Oreille en alerte, mauvaise pièce, escabeau, bip dans ton dos.",
+        "en": "Ear on alert, wrong room, stepladder, chirp right behind you."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "night", "sound-rich"]
+    },
+    {
+      "id": "dlm-079-gps-recalculate",
+      "text": {
+        "fr": "Suivre un GPS qui recalcule l'itinéraire toutes les dix secondes",
+        "en": "Following a GPS that recalculates the route every ten seconds"
+      },
+      "hint": {
+        "fr": "Demi-tours brusques, confiance aveugle, rond-point infini.",
+        "en": "Sharp U-turns, blind faith, infinite roundabout."
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "driving", "sound-rich"]
+    },
+    {
+      "id": "dlm-080-lightsaber-solo",
+      "text": {
+        "fr": "Un duel au sabre laser où tu joues les deux adversaires",
+        "en": "A lightsaber duel where you play both fighters"
+      },
+      "hint": {
+        "fr": "Change de côté à chaque coup, finis par te vaincre toi-même.",
+        "en": "Switch sides on every swing, end by defeating yourself."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "multi-role", "sound-rich"]
+    },
+    {
+      "id": "dlm-081-horror-shower",
+      "text": {
+        "fr": "La scène de la douche d'un film d'horreur, mais le rideau résiste",
+        "en": "A horror movie shower scene, but the curtain won't cooperate"
+      },
+      "hint": {
+        "fr": "Suspense, main menaçante, bataille ridicule avec le rideau.",
+        "en": "Suspense, menacing hand, ridiculous battle with the curtain."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "horror", "fail"]
+    },
+    {
+      "id": "dlm-082-western-draw",
+      "text": {
+        "fr": "Un duel de western au ralenti, midi pile, main sur le colt",
+        "en": "A slow-motion western standoff at high noon"
+      },
+      "hint": {
+        "fr": "Regard plissé, vent imaginaire, dégainage interminable.",
+        "en": "Squinted stare, imaginary tumbleweed, never-ending draw."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "slowmo", "drama"]
+    },
+    {
+      "id": "dlm-083-spy-lasers",
+      "text": {
+        "fr": "Un agent secret qui traverse une salle remplie de lasers",
+        "en": "A secret agent crossing a room full of lasers"
+      },
+      "hint": {
+        "fr": "Limbo, roulade, jambe par-dessus, alarme frôlée à chaque geste.",
+        "en": "Limbo, combat roll, leg-over, nearly tripping the alarm each move."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "suspense", "physical"]
+    },
+    {
+      "id": "dlm-084-slow-zombie",
+      "text": {
+        "fr": "Un zombie très lent qui poursuit quelqu'un de très rapide",
+        "en": "A very slow zombie chasing a very fast person"
+      },
+      "hint": {
+        "fr": "Grognements motivés, jambe qui traîne, n'abandonne jamais.",
+        "en": "Motivated groans, leg drag, never give up."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "horror", "sound-rich"]
+    },
+    {
+      "id": "dlm-085-kong-stepladder",
+      "text": {
+        "fr": "King Kong au sommet… d'un escabeau de cuisine",
+        "en": "King Kong at the top of… a kitchen stepladder"
+      },
+      "hint": {
+        "fr": "Frappe-toi le torse, repousse les avions, gère ton vertige.",
+        "en": "Beat your chest, swat the planes, manage your fear of heights."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "absurd", "loud"]
+    },
+    {
+      "id": "dlm-086-kungfu-dub",
+      "text": {
+        "fr": "Un combat de kung-fu de vieux film mal doublé",
+        "en": "A fight scene from a badly dubbed old kung-fu movie"
+      },
+      "hint": {
+        "fr": "Bouche et coups jamais synchronisés — c'est justement le but.",
+        "en": "Mouth and punches never in sync — that's the whole point."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "meta", "sound-rich"]
+    },
+    {
+      "id": "dlm-087-car-chase",
+      "text": {
+        "fr": "Une course-poursuite de film d'action, volant imaginaire",
+        "en": "An action movie car chase with an imaginary steering wheel"
+      },
+      "hint": {
+        "fr": "Dérapages, passages de vitesse, regard rétro, saut de pont final.",
+        "en": "Drifts, gear shifts, mirror checks, final bridge jump."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "action", "sound-rich"]
+    },
+    {
+      "id": "dlm-088-cool-explosion",
+      "text": {
+        "fr": "Le héros qui s'éloigne d'une explosion sans se retourner",
+        "en": "The hero walking away from an explosion without looking back"
+      },
+      "hint": {
+        "fr": "Démarche ultra lente, lunettes imaginaires, sourcil stoïque.",
+        "en": "Ultra-slow walk, imaginary sunglasses, stoic eyebrow."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "action", "slowmo"]
+    },
+    {
+      "id": "dlm-089-mermaid-legs",
+      "text": {
+        "fr": "Une sirène qui découvre ses jambes et apprend à marcher",
+        "en": "A mermaid discovering her legs and learning to walk"
+      },
+      "hint": {
+        "fr": "Énergie de faon nouveau-né, fascination pour les genoux, première chute.",
+        "en": "Newborn fawn energy, knee fascination, first dramatic fall."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "physical", "wholesome"]
+    },
+    {
+      "id": "dlm-090-vampire-garlic",
+      "text": {
+        "fr": "Un vampire qui découvre de l'ail caché dans son dîner",
+        "en": "A vampire discovering garlic hidden in his dinner"
+      },
+      "hint": {
+        "fr": "Dégustation aristocrate, soupçon, apocalypse intérieure.",
+        "en": "Aristocratic tasting, suspicion, internal apocalypse."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "horror", "food"]
+    },
+    {
+      "id": "dlm-091-godzilla-cardboard",
+      "text": {
+        "fr": "Godzilla qui détruit une ville en carton avec application",
+        "en": "Godzilla carefully destroying a cardboard city"
+      },
+      "hint": {
+        "fr": "Pas lourds, immeubles écrasés un à un, rugissement final.",
+        "en": "Heavy steps, crush the buildings one by one, final roar."
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "loud", "physical"]
+    },
+    {
+      "id": "dlm-092-magic-fail",
+      "text": {
+        "fr": "Un magicien dont le grand tour part complètement en vrille",
+        "en": "A magician whose big trick goes completely sideways"
+      },
+      "hint": {
+        "fr": "Gestes grandioses, accessoire récalcitrant, improvisation paniquée.",
+        "en": "Grand gestures, uncooperative prop, panicked improvising."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "fail", "drama"]
+    },
+    {
+      "id": "dlm-093-pirate-deck",
+      "text": {
+        "fr": "Un pirate à jambe de bois sur un pont qui tangue fort",
+        "en": "A peg-leg pirate on a violently rocking deck"
+      },
+      "hint": {
+        "fr": "Roulis, longue-vue, équilibre précaire, ordres criés au vent.",
+        "en": "Sway with the waves, spyglass, wobbly balance, bark orders at the wind."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "balance", "loud"]
+    },
+    {
+      "id": "dlm-094-matrix-back",
+      "text": {
+        "fr": "L'esquive de balles de Matrix, version dos bloqué",
+        "en": "The Matrix bullet dodge, but your back gives out"
+      },
+      "hint": {
+        "fr": "Penche-toi au ralenti, craquement, coincé à l'horizontale.",
+        "en": "Lean back in slow motion, crack, stuck horizontal."
+      },
+      "category": "cinema",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "slowmo", "pain"]
+    },
+    {
+      "id": "dlm-095-rain-musical",
+      "text": {
+        "fr": "Un numéro de comédie musicale sous la pluie avec un lampadaire",
+        "en": "A singin'-in-the-rain musical number with a lamppost"
+      },
+      "hint": {
+        "fr": "Tournoie autour du lampadaire, saute dans les flaques, parapluie virtuose.",
+        "en": "Spin around the lamppost, stomp the puddles, virtuoso umbrella."
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "music", "classic"]
+    },
+    {
+      "id": "dlm-096-trip-jog",
+      "text": {
+        "fr": "Trébucher en pleine rue et faire semblant que c'était un jogging",
+        "en": "Tripping in the street and pretending it was a jog"
+      },
+      "hint": {
+        "fr": "Chute amorcée, pivot sportif, petites foulées dignes.",
+        "en": "Stumble begins, athletic pivot, dignified little jog."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "physical"]
+    },
+    {
+      "id": "dlm-097-you-too",
+      "text": {
+        "fr": "Dire « toi aussi » au serveur qui te souhaite bon appétit",
+        "en": "Saying \"you too\" to the waiter who says enjoy your meal"
+      },
+      "hint": {
+        "fr": "Réalisation au ralenti, replay mental, envie de déménager.",
+        "en": "Slow-motion realization, mental replay, urge to move abroad."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable"]
+    },
+    {
+      "id": "dlm-098-wave-back",
+      "text": {
+        "fr": "Rendre un salut qui était destiné à la personne derrière toi",
+        "en": "Waving back at someone who was waving at the person behind you"
+      },
+      "hint": {
+        "fr": "Grand geste enthousiaste, doute, reconversion en coiffage.",
+        "en": "Big enthusiastic wave, doubt, smooth hair-fix conversion."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable"]
+    },
+    {
+      "id": "dlm-099-karaoke-cut",
+      "text": {
+        "fr": "Chanter à fond en karaoké quand la musique coupe d'un coup",
+        "en": "Belting karaoke when the backing track suddenly cuts out"
+      },
+      "hint": {
+        "fr": "Performance totale, silence, note tenue trop longtemps, seul au monde.",
+        "en": "Full performance, silence, note held too long, alone in the universe."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "music", "loud"]
+    },
+    {
+      "id": "dlm-100-slides-crash",
+      "text": {
+        "fr": "Présenter un exposé pendant que le diaporama plante",
+        "en": "Giving a big presentation while the slides crash"
+      },
+      "hint": {
+        "fr": "Clics de plus en plus violents, sourire pro, mime du graphique.",
+        "en": "Increasingly violent clicking, professional smile, mime the chart."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "work", "fail"]
+    },
+    {
+      "id": "dlm-101-solo-clap",
+      "text": {
+        "fr": "Applaudir seul au théâtre… au mauvais moment",
+        "en": "Clapping alone at the theater… at the wrong moment"
+      },
+      "hint": {
+        "fr": "Standing ovation lancée, regards, redescente très lente.",
+        "en": "Launch a standing ovation, feel the stares, very slow sit-down."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "loud", "awkward"]
+    },
+    {
+      "id": "dlm-102-greeting-fail",
+      "text": {
+        "fr": "La bise ratée : mauvais côté, deux fois de suite",
+        "en": "The failed greeting: handshake, hug and fist bump all at once"
+      },
+      "hint": {
+        "fr": "Hésitation, collision de nez frôlée, troisième tentative fatale.",
+        "en": "Hesitation, near nose collision, fatal third attempt."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "awkward"]
+    },
+    {
+      "id": "dlm-103-phone-silence",
+      "text": {
+        "fr": "Ton téléphone qui sonne à fond pendant la minute de silence au bureau",
+        "en": "Your phone blasting at full volume during the office minute of silence"
+      },
+      "hint": {
+        "fr": "Fouille paniquée des poches, sonnerie ridicule, excuses muettes.",
+        "en": "Panicked pocket search, ridiculous ringtone, silent apologies."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "work", "sound-rich"]
+    },
+    {
+      "id": "dlm-104-stomach-interview",
+      "text": {
+        "fr": "Ton ventre qui gargouille en plein entretien d'embauche",
+        "en": "Your stomach growling mid job interview"
+      },
+      "hint": {
+        "fr": "Posture pro, séisme intérieur, parle plus fort pour couvrir.",
+        "en": "Professional posture, internal earthquake, talk louder to cover it."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "work", "sound-rich"]
+    },
+    {
+      "id": "dlm-105-wet-tile-crush",
+      "text": {
+        "fr": "Glisser sur du carrelage mouillé juste devant ton crush",
+        "en": "Slipping on wet tile right in front of your crush"
+      },
+      "hint": {
+        "fr": "Démarche assurée, glissade, rattrapage chorégraphié, re-glissade.",
+        "en": "Confident strut, slip, choreographed recovery, second slip."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "physical"]
+    },
+    {
+      "id": "dlm-106-giggle-serious",
+      "text": {
+        "fr": "Le fou rire impossible à retenir pendant un moment très sérieux",
+        "en": "An unstoppable giggle fit during a very serious moment"
+      },
+      "hint": {
+        "fr": "Lèvres pincées, épaules qui tremblent, fuite en fausse toux ratée.",
+        "en": "Pressed lips, shaking shoulders, failed cough disguise."
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "suspense"]
+    },
+    {
+      "id": "dlm-107-pull-door",
+      "text": {
+        "fr": "Pousser de toutes tes forces une porte marquée « TIREZ »",
+        "en": "Pushing with all your might on a door marked PULL"
+      },
+      "hint": {
+        "fr": "Effort croissant, lecture du panneau, sortie incognito.",
+        "en": "Escalating effort, read the sign, incognito exit."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "fail"]
+    },
+    {
+      "id": "dlm-108-headphones-sing",
+      "text": {
+        "fr": "Chanter à tue-tête avec un casque sans savoir que tout le bus écoute",
+        "en": "Singing your heart out in headphones, unaware the whole bus is listening"
+      },
+      "hint": {
+        "fr": "Yeux fermés, refrain habité, retrait d'écouteur fatal.",
+        "en": "Eyes closed, soulful chorus, the fatal earbud removal."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "music", "loud"]
+    },
+    {
+      "id": "dlm-109-uncle-dance",
+      "text": {
+        "fr": "Le tonton qui envahit la piste au mariage pour montrer « ses » pas",
+        "en": "The uncle storming the wedding dance floor to show off \"his\" moves"
+      },
+      "hint": {
+        "fr": "Doigt en l'air, twist d'époque, genou qui lâche, on continue quand même.",
+        "en": "Finger pointing, vintage twist steps, knee gives out, keep going anyway."
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "wedding", "dance"]
+    }
+  ]
+}

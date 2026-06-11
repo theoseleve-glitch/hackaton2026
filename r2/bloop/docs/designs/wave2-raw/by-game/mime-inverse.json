@@ -1,0 +1,199 @@
+{
+  "id": "mime-inverse",
+  "nameFr": "Mime Inversé",
+  "nameEn": "Reverse Mime",
+  "taglineFr": "Tes potes te télécommandent — devine ce qu'ils te font mimer !",
+  "taglineEn": "Your friends remote-control you — guess what they're making you mime!",
+  "template": "NEW:TIMED_VERDICT",
+  "newTemplateSpec": "TIMED_VERDICT — rotating-spotlight, timed IRL performance, peer-tap adjudication. One module `GameModule<TvState, TvAction, TvView, TvContent>` (`packages/games/timed-verdict/`), id 'timed-verdict', version 1, minPlayers 3, maxPlayers 16. Hosts TWO modes behind `config.mode`: 'puppet' (mime-inverse: secret hidden FROM the spotlight, commanders puppeteer + confirm the guess) and 'blitz' (\"Name 3 in 5s\": prompt public, peers validate the performance). This resolves template-architecture §7 Q1: blitz moves here; INPUT_GUESS slims to the collab text game. Zero engine amendments — fits the existing contract (phaseKey included) and the shared kit (emptyPlayerMap, Presence/connectedPlayers, allActed, nextActiveSeat, gameOver).\n\nCONFIG (TvConfig, all catalog-overridable via params): { mode: 'puppet'|'blitz'; performMs (30_000 puppet / 5_000 blitz); verdictMs 10_000; revealMs 7_000; scoreboardMs 6_000; scoreboardEvery 4; roundsPerPlayer 1; promptVisibility: 'all'|'others-only' (puppet: 'others-only'); earlyMajorityResolve: boolean (puppet: true); successPoints 100; crewPoints 50 (blitz: 0); speedBonus 50; showCategoryToSpotlight: boolean (puppet: true); verdictThreshold 0.5 }.\n\nSTATE (TvState, JSON-safe, null-proto maps): { config; players (roster fixed at init); seatOrder (seeded permutation = shuffle(createRng(seed+'|seats'), players)); seatIndex; turnSeq (monotonic, ++ on each turn entry — ToD pattern); round (lap counter, ++ on rotation wrap); totalTurns = min(players.length × roundsPerPlayer, items.length); items: TvItem[] (shuffle(createRng(seed+'|items'), pack.items), one per turn, current = items[turnCount]); phase: 'perform'|'verdict'|'reveal'|'scoreboard'|'over'; taps: Record<PlayerId,true> /* HIDDEN values; exposed as count only */; verdicts: Record<PlayerId,'yes'|'no'> /* HIDDEN; exposed as counts; NEVER per-voter public, even at reveal */; outcome: 'success-early'|'success-verdict'|'fail'|'void'|null; scores; connected: Presence; sinceScoreboard }.\n\nACTIONS (zod-validated at DO boundary; enum-only, NO free text → zero moderation surface): { kind:'tap' } (perform phase; sender must be in players, connected, !== spotlight, not already tapped — \"Trouvé !\"/\"Valid\") | { kind:'verdict'; vote:'yes'|'no' } (verdict phase; same eligibility; first vote locked, ToD-style). All rejections return the SAME state reference (shell no-op contract).\n\nREDUCER (per phase × event; 'over' short-circuits first):\n• perform + tap (eligible): record tap. If earlyMajorityResolve && tapCount >= floor(E/2)+1 where E = connected players minus spotlight (re-evaluated at every event) → resolve 'success-early' → reveal. Else keep state.\n• perform + deadline: → verdict; taps carry over as pre-cast 'yes' votes in `verdicts`.\n• verdict + verdict-vote (eligible, not yet voted): record. allActed(E, verdicts) → resolve.\n• verdict + deadline: resolve with votes in. cast = yes+no; cast===0 → 'fail'; else 'success-verdict' iff yes/cast >= verdictThreshold (ties → success: funny never cruel). E empty at verdict entry → outcome 'void' → reveal immediately (never sit in a phase with zero possible actors).\n• resolve scoring (exact): success → spotlight +successPoints (100), +speedBonus (50) iff 'success-early'; EVERY connected non-spotlight player +crewPoints (50) regardless of individual vote (collective scoring kills tap-griefing incentives). fail/void → 0 for all. scores cloned copy-on-write.\n• reveal + deadline: enterTurn — seatIndex = nextActiveSeat(seatOrder, seatIndex, connected); turnSeq++; wrapped → round++ and emit analytics 'round_completed' (metrics parity, synthesis §5.4 — the AD TRIGGER is the shell's phaseKey transition to scoreboard:*, not the analytics effect); clear taps/verdicts/outcome. Insert scoreboard when sinceScoreboard<=0 or after the final turn (always one final scoreboard before over). After final scoreboard → over + { type:'gameOver', scores: cloned }.\n• scoreboard + deadline: next turn or over.\n• playerLeft: connected=false; never deletes roster keys or scores. Leaver === spotlight during perform/verdict → outcome 'void' → reveal (answer shown, 0 pts, analytics 'spotlight_left' — room never stalls on an absent star). Leaver was eligible during perform → re-evaluate early-majority against shrunk E. During verdict → shrink expected, re-check allActed; E now empty → resolve with cast votes or 'void' if none.\n• playerRejoined: connected=true, no phase change; eligible again at next evaluation. A disconnected or passive player can NEVER block: every phase is timed, all-acted sets are connected-filtered, spotlight-left voids the turn.\n\nPHASE KEYS / DURATIONS: phaseKey = `${phase}:${turnSeq}` (perform:0, verdict:0, reveal:0, perform:1, …), scoreboard:<turnSeq>, terminal bare 'over'. turnSeq is unique per (phase, turn) — satisfies synthesis §1.6; no secret ever embedded. phaseDurationMs: perform→performMs, verdict→verdictMs, reveal→revealMs, scoreboard→scoreboardMs, over→null.\n\nVIEW REDACTION (the load-bearing surface, puppet mode):\n• perform/verdict, viewer === spotlight: { phase, turnSeq, round, totalTurns, spotlight, role:'spotlight', categoryHint (iff showCategoryToSpotlight), tapCount / votesIn+votersExpected (COUNTS only — tension feedback), scores, connected }. NEVER the item's action text or forbidden words.\n• perform/verdict, viewer in players && !== spotlight: all of the above PLUS the secret { actionText, forbiddenWords, category, difficulty }, myTapped / myVote (owner-only echo, buffer[viewer] ?? null — never an indexed foreign lookup).\n• UNKNOWN/spectator viewer: treated as a potential second device of the spotlight → gets the SPOTLIGHT-redacted view (no secret, no echoes). This is the anti-cheat rule: the secret is shown only to viewers provably in players and provably not the spotlight.\n• reveal: actionText, category, outcome, tally {yes,no} (aggregate ONLY — per-voter verdicts are never public, so nobody sees \"Marie voted no on you\"), gained per player, scores — public to all. This is the payoff beat: the puppet finally learns what they were miming.\n• scoreboard/over: standings + scores, public.\n• Tests: leakedSecrets audit with secrets = [current item actionText, …forbiddenWords] (namespaced per turn) asserted absent from every spotlight/unknown view during perform/verdict; field-level test that serialized perform views for the spotlight contain no `items`/`taps`/`verdicts` maps; determinism replay test (same seed + same pack version → identical game); edge tests at 3 and 16 players; spotlight-left-mid-perform; rejoin-mid-verdict; item-exhaustion cap.\n\nCONTENT (TvContent): { locale: 'fr'|'en'; items: TvItem[] } — single-locale runtime packs per synthesis §3.1 (bilingual authoring source is split into mime-inverse-fr / mime-inverse-en at publish). puppet TvItem = { id, text (the action), category, forbidden: string[] (3–5 display-only taboo words), difficulty: 1|2|3, tags }. blitz TvItem = { id, text (\"Name 3 …\"), category, difficulty, tags } (no forbidden). zod: min items >= maxPlayers × roundsPerPlayer (16); recommend 60+. Authoring lint: every action must be safely performable standing in ~2 m² with no props and no physical contact with other players.",
+  "players": {
+    "min": 3,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "perform",
+      "durationSec": 30,
+      "description": "The puppet stands up, phone in pocket or face-down (their screen shows only the category hint + timer). All commanders see the secret action + forbidden words on their phones and shout imperative instructions IRL ('lift your arms!', 'push it forward!', 'walk in a line!') — never the forbidden words. The puppet obeys and shouts guesses out loud. Any commander taps 'Trouvé !' the moment the puppet names it; when a strict majority of connected commanders has tapped, the phase resolves EARLY as success-early (+50 speed bonus) and jumps straight to reveal. Timeout (deadline) → verdict phase. Disconnected commanders are excluded from the majority denominator; if the puppet disconnects, the turn voids straight to reveal. phaseKey perform:<turnSeq>."
+    },
+    {
+      "key": "verdict",
+      "durationSec": 10,
+      "description": "Last call — 'Did [puppet] get it (or close enough)?'. Each connected commander votes Oui/Non (first vote locked; 'Trouvé !' taps from perform carry over as pre-cast Oui). Resolves when all eligible voters have voted OR at deadline with votes in: yes/cast >= 0.5 (ties generous → success). Zero votes cast → fail; zero eligible voters → turn void. Skipped entirely when perform early-resolved. The puppet sees only vote counts, never the secret. phaseKey verdict:<turnSeq>."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 7,
+      "description": "The payoff: the answer is revealed to EVERYONE — the puppet finally discovers what they were being puppeteered into. Outcome stamp (TROUVÉ ! / RATÉ / ANNULÉ), aggregate tally only (never per-voter votes), +points animation (puppet +100 [+50 speed], each connected commander +50 on success), next puppet announced. Deadline → next turn's perform, or scoreboard if due (every 4 turns / last turn). phaseKey reveal:<turnSeq>."
+    },
+    {
+      "key": "scoreboard",
+      "durationSec": 6,
+      "description": "Standings beat + the interstitial ad slot (shell fires the ad off the phaseKey transition to scoreboard:*, frequency-capped by remote config). Inserted every scoreboardEvery=4 turns and always once before over. Deadline → next turn or over. phaseKey scoreboard:<turnSeq>."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Terminal, untimed (phaseDurationMs null). Final leaderboard; gameOver effect emitted with a defensively cloned scores map. Reducer is a no-op for all further events."
+    }
+  ],
+  "params": {
+    "mode": "puppet",
+    "performMs": 30000,
+    "verdictMs": 10000,
+    "revealMs": 7000,
+    "scoreboardMs": 6000,
+    "scoreboardEvery": 4,
+    "roundsPerPlayer": 1,
+    "promptVisibility": "others-only",
+    "earlyMajorityResolve": true,
+    "successPoints": 100,
+    "crewPoints": 50,
+    "speedBonus": 50,
+    "showCategoryToSpotlight": true,
+    "verdictThreshold": 0.5
+  },
+  "contentItemShape": "One pack item = one mimable everyday action. Shape: { id: string (stable, e.g. 'mi-act-001'); action: {fr,en} — the secret, shown ONLY to commanders (never to the puppet or unknown viewers); category: {fr,en} — soft hint shown to the puppet during perform and to all at reveal; forbidden: {fr: string[], en: string[]} — 3–5 taboo words commanders must not say out loud (display-only honor rule, taboo-style; no speech recognition — deterministic runtime); difficulty: 1|2|3 (1 = guessable in ~15s); spicyLevel: 0|1|2; tags: string[] (e.g. 'physical','household','funny'). Authoring source is bilingual; the publish pipeline splits it into single-locale runtime packs (mime-inverse-fr / mime-inverse-en with data.locale) per the platform's pack convention (cross-game synthesis §3.1). Sizing lint: >= 16 items (maxPlayers × roundsPerPlayer) per difficulty tier; ship 60+. Authoring safety rule: every action performable standing in ~2 m², no props required, no physical contact with other players.",
+  "sampleItems": [
+    {
+      "id": "mi-act-001",
+      "action": {
+        "fr": "Tondre la pelouse",
+        "en": "Mowing the lawn"
+      },
+      "category": {
+        "fr": "Corvées",
+        "en": "Chores"
+      },
+      "forbidden": {
+        "fr": [
+          "tondeuse",
+          "pelouse",
+          "herbe",
+          "jardin"
+        ],
+        "en": [
+          "mower",
+          "lawn",
+          "grass",
+          "garden"
+        ]
+      },
+      "difficulty": 1,
+      "spicyLevel": 0,
+      "tags": [
+        "physical",
+        "household"
+      ]
+    },
+    {
+      "id": "mi-act-014",
+      "action": {
+        "fr": "Passer le contrôle de sécurité à l'aéroport",
+        "en": "Going through airport security"
+      },
+      "category": {
+        "fr": "Voyage",
+        "en": "Travel"
+      },
+      "forbidden": {
+        "fr": [
+          "aéroport",
+          "portique",
+          "valise",
+          "sécurité"
+        ],
+        "en": [
+          "airport",
+          "scanner",
+          "suitcase",
+          "security"
+        ]
+      },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": [
+        "physical",
+        "situational",
+        "funny"
+      ]
+    },
+    {
+      "id": "mi-act-027",
+      "action": {
+        "fr": "Promener un chien qui tire sur la laisse",
+        "en": "Walking a dog that pulls on the leash"
+      },
+      "category": {
+        "fr": "Animaux",
+        "en": "Animals"
+      },
+      "forbidden": {
+        "fr": [
+          "chien",
+          "laisse",
+          "promener"
+        ],
+        "en": [
+          "dog",
+          "leash",
+          "walk"
+        ]
+      },
+      "difficulty": 2,
+      "spicyLevel": 0,
+      "tags": [
+        "physical",
+        "animals",
+        "funny"
+      ]
+    }
+  ],
+  "physical": "mixed",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "roundSeconds": 45,
+  "roundsDefault": 8,
+  "recommendations": [
+    {
+      "question": "How does the system know the puppet guessed right? (the brief leaves adjudication open)",
+      "recommendation": "Peer-tap majority, two beats: during the 30s command window any commander taps 'Trouvé !' the moment the puppet shouts the answer (strict majority of connected commanders → instant success + speed bonus); if the timer expires, a 10s last-call verdict vote ('did they get it, or close enough?') with majority-yes and ties → success.",
+      "why": "The guess happens out loud in the room — typing mid-performance breaks the physical comedy and would add the platform's first free-text moderation surface plus a synonym-matching problem ('mowing' vs 'cutting grass'). Peer-tap is enum-only (zero moderation), IRL-native, handles 'close enough' generously (funny never cruel), and reuses the proven ToD verdict pattern. Multiple-choice was rejected: it reduces wild shouted guesses to a menu."
+    },
+    {
+      "question": "Is 30 seconds the right command window?",
+      "recommendation": "Yes — keep performMs = 30000 as the catalog default, tunable 20000–45000 via game_config params only (not host-tunable at lobby). Early-majority resolve means good rounds pop at ~15-20s anyway.",
+      "why": "The brief specifies 30s and playtest-tuning belongs in the catalog (a KV edit, no deploy) per the template architecture's catalog-fixed-params default (§7 Q4). Early resolve keeps the median round TikTok-short while 30s gives hard items room to breathe."
+    },
+    {
+      "question": "Who scores, and how much?",
+      "recommendation": "Collective on success: puppet +100 (+50 speed bonus if the room confirmed during the command window), EVERY connected commander +50 regardless of their individual vote; fail or void = 0 for all. Scores are match-local; session XP is placement-based per the platform convention.",
+      "why": "Commanders must be rewarded for puppeteering WELL (it is a cooperative comedy machine), but rewarding individual 'Trouvé !' taps would incentivize false-positive tapping. Collective crew points make the only winning move giving genuinely good instructions. 100/50 mirrors hot-seat's spotlight/crowd asymmetry for cross-game familiarity."
+    },
+    {
+      "question": "Which template — can an existing one carry it?",
+      "recommendation": "No existing template fits: HOT_SEAT and TRUTH_DARE show the prompt to the active player (mime-inverse needs the exact opposite redaction), SECRET_ROLE has the right redaction but the wrong phase loop. Ship it as NEW:TIMED_VERDICT with mode:'puppet', designed from day one to also host mode:'blitz' ('Name 3 in 5s').",
+      "why": "This resolves template-architecture §7 Q1 (blitz is a timed peer-tap verdict with no typed text — it never belonged in INPUT_GUESS) instead of adding a single-game template: one new module yields two catalog flagships, and INPUT_GUESS slims to the pure collab text game. Build after the designed four so it lands on the battle-tested kit (rotation, allActed, presence, redaction harness)."
+    },
+    {
+      "question": "How do we stop commanders from just saying the answer out loud?",
+      "recommendation": "A display-only taboo rule: each item ships 3–5 forbidden words rendered prominently on commander screens ('Interdits : tondeuse, pelouse…'); enforcement is social (the room polices itself), plus hold-to-peek on the commander secret card to defeat shoulder-surfing by the standing puppet.",
+      "why": "Speech recognition at runtime would violate the deterministic no-AI-no-API rule and is unnecessary — same-room social enforcement is the genre standard (Taboo). Hold-to-peek addresses the real leak channel, which is physical (the puppet glancing at screens), not the view layer."
+    },
+    {
+      "question": "Should the puppet get any hint, and what happens to players who can't or won't perform?",
+      "recommendation": "Show the category hint to the puppet by default (showCategoryToSpotlight: true), and document that seated performance is always acceptable — every pack action must be authorable as doable in place, and a puppet who disconnects or freezes simply voids the turn (0 points, answer revealed, rotation moves on).",
+      "why": "A hopeless flailing puppet stops being funny fast — the category keeps rounds solvable and protects the 'funny never cruel' brand line. Void-and-move-on matches ToD's active-left rule: a passive or absent player must never block the room, and no phase exists without a deadline."
+    }
+  ],
+  "risks": [
+    "Redaction inversion is the core engineering risk: the secret action + forbidden words must never reach the spotlight viewer OR any unknown viewer (treat unknown ids as a possible second device of the puppet — they get the spotlight-redacted view). Mitigate with per-turn leakedSecrets audits and a field-level test that no items/taps/verdicts maps serialize into spotlight views.",
+    "This is NEW template code (Cadence A: deploy required), not a config-only game — the honest effort is a full module build (~1–2 weeks) scheduled after the four designed games, though it amortizes by also delivering 'Name 3 in 5s' as a config.",
+    "Verdict griefing: a troll majority can vote down a correct guess (or wave through a wrong one). Mitigations: ties resolve generous, collective scoring removes any points incentive to grief, votes are never publicly attributed (aggregate tally only), and the room's social pressure is the real referee — same accepted posture as truth-or-dare §9 Q3.",
+    "Physical/venue constraints: the game needs ~2 m² of safe standing space and a room where shouting is OK; unusable in quiet venues. Pack authoring lint must reject actions requiring props, running, or physical contact with other players (safety + inclusivity), and seated performance must remain legitimate for mobility-impaired players.",
+    "Shoulder-surfing is the dominant real-world leak (the standing puppet can glance at commander phones) — UI must default the secret card to hold-to-peek; this is a client design requirement, not enforceable by the engine.",
+    "Session length at 16 players: 16 turns × ~45s ≈ 12+ min plus 4 scoreboards; consider capping totalTurns or auto-bumping scoreboardEvery for large rooms (same open call as hot-seat §9 Q2).",
+    "Bilingual sample items here are an authoring-source shape; the runtime pack convention is single-locale (data.locale, synthesis §3.1) — the publish pipeline must split FR/EN and keep parallel coverage, or the catalog locale gate will strand one language.",
+    "A future spicy pack (age-gated, spicyLevel 1–2) must be a separate pack id behind the tone:'spicy' + minAge>=18 gate and needs explicit consent framing for any physically suggestive actions — recommend launching without it."
+  ]
+}

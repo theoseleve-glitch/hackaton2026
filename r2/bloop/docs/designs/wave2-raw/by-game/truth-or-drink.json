@@ -1,0 +1,180 @@
+{
+  "id": "truth-or-drink",
+  "nameFr": "VÉRITÉ OU TU BOIS",
+  "nameEn": "TRUTH OR DRINK",
+  "taglineFr": "Une question vérité : tu réponds... ou tu bois. Santé !",
+  "taglineEn": "One truth question: answer it... or drink. Cheers!",
+  "template": "TRUTH_DARE",
+  "players": {
+    "min": 2,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "choose",
+      "durationSec": 0,
+      "description": "AUTO-SKIPPED in this config. TRUTH_DARE@2 param allowedChoices=['truth'] resolves the choice instantly on turn entry (no UI beat, no timer, no auto-pick coin needed) and draws the truth question from the seeded no-repeat truth deck. phaseKey goes straight to prompt:<turnSeq>. The classic truth-or-dare configs keep allowedChoices=['truth','dare'] and are untouched."
+    },
+    {
+      "key": "prompt",
+      "durationSec": 35,
+      "description": "The truth question appears on every phone (everyone reads it; the fun is in the room). The active player answers OUT LOUD, then taps 'I answered' (-> verdict) — or taps the escape button 'Je bois / I drink' (escapeMode='forfeit-draw': unlimited, ignores the pass economy, draws one forfeit card from the dare deck and jumps straight to score with +3 pts). TIMEOUT (deadline): scored as dodged — 0 points, NO forfeit drawn or assigned (never auto-assign alcohol to a passive or disconnected player); the room never blocks. If the active player disconnects mid-prompt, same: dodged, 0 pts, next turn (template playerLeft rule)."
+    },
+    {
+      "key": "verdict",
+      "durationSec": 15,
+      "description": "Reached ONLY after an 'I answered' claim. Every present non-active player votes 'Vraie réponse / Real answer' vs 'Esquive / Dodged' (allActed over connected-minus-active). Resolves early when all eligible voters voted. TIMEOUT: tally whatever votes are in; abstainers excluded; ZERO votes cast -> 'answered' (benefit of the doubt — funny never cruel). Ties resolve to 'answered' (>= verdictThreshold 0.5). Individual votes stay HIDDEN (counts only, votesIn/votersExpected) until score — tracer redaction rule. Eligible set empty (e.g. 2-player room, other player disconnected) -> instant 'answered'."
+    },
+    {
+      "key": "score",
+      "durationSec": 7,
+      "description": "Reveal card. EXACT SCORING: verdicted real answer -> +10 (donePoints) to the active player; drink/forfeit taken -> +3 (passPoints) to the active player + the forfeit card is displayed ('Une gorgée ! / One sip!' in the drink pack, a 10-second gage in the safe sibling); dodged (verdicted down) or timeout -> 0 (chickenedPoints). dareBonus=0 (no dare choice exists). Voters NEVER score (keeps the verdict honest, per ToD design §5). Deadline auto-advances to the next present player's turn (nextActiveSeat, skips disconnected seats); a rotation-lap wrap emits analytics 'round_completed' (the shell's interstitial-ad boundary, keyed off the phaseKey transition); after lap totalRounds=2 -> 'over' + gameOver(cloned scores)."
+    }
+  ],
+  "params": {
+    "totalRounds": 2,
+    "allowedChoices": [
+      "truth"
+    ],
+    "escapeMode": "forfeit-draw",
+    "allowedIntensities": [
+      "party",
+      "spicy"
+    ],
+    "promptMs": 35000,
+    "verdictMs": 15000,
+    "scoreMs": 7000,
+    "donePoints": 10,
+    "passPoints": 3,
+    "chickenedPoints": 0,
+    "dareBonus": 0,
+    "verdictThreshold": 0.5,
+    "labels": {
+      "escape": {
+        "fr": "Je bois 🍺",
+        "en": "I drink 🍺"
+      },
+      "claimDone": {
+        "fr": "J'ai répondu",
+        "en": "I answered"
+      },
+      "verdictDone": {
+        "fr": "Vraie réponse ✅",
+        "en": "Real answer ✅"
+      },
+      "verdictChickened": {
+        "fr": "Esquive 🐔",
+        "en": "Dodged 🐔"
+      },
+      "forfeitStamp": {
+        "fr": "SANTÉ !",
+        "en": "CHEERS!"
+      }
+    }
+  },
+  "contentItemShape": "One authoring item in the bilingual master pack (the offline splitter emits two single-locale runtime packs, truth-or-drink-fr and truth-or-drink-en, with data.locale per cross-game-synthesis §3.1; runtime text is the plain single-locale string): { id: string — stable unique id, the no-repeat key, e.g. 'totd-t-party-014'; choice: 'truth' | 'dare' — 'truth' rows are the questions, 'dare' rows are the FORFEIT POOL drawn when the active player escapes (sip instructions in the 18+ drink pack; 10-second gages in the safe truth-or-forfeit sibling pack) — this reuses the TRUTH_DARE deck machinery with zero new content schema; intensity: 'soft' | 'party' | 'spicy' — the drink config draws party+spicy, the safe sibling soft+party; text: { fr: string, en: string } — shown verbatim, pre-moderated (passes the obscenity scan + alcohol-excess lint at authoring time); minAge?: number — 18 on EVERY row of the drink pack; tags?: string[] — freeform curation hints like 'drink','forfeit','dating','phone','funny'. Sizing lint: >= maxPlayers x totalRounds (16x2=32) truth rows per allowed intensity tier and >= 16 forfeit rows per tier (synthesis §3.5).",
+  "sampleItems": [
+    {
+      "id": "totd-t-party-001",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Quel est le message le plus gênant que tu aies envoyé à la mauvaise personne ?",
+        "en": "What's the most embarrassing text you've ever sent to the wrong person?"
+      },
+      "minAge": 18,
+      "tags": [
+        "phone",
+        "embarrassing"
+      ]
+    },
+    {
+      "id": "totd-t-spicy-001",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Quelle est la pire excuse que tu aies inventée pour t'éclipser d'un date en plein milieu ?",
+        "en": "What's the worst excuse you've ever invented to bail on a date halfway through?"
+      },
+      "minAge": 18,
+      "tags": [
+        "dating",
+        "funny"
+      ]
+    },
+    {
+      "id": "totd-f-party-001",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Pas de réponse ? Une gorgée ! Une seule — on est là pour rire, pas pour finir sous la table.",
+        "en": "No answer? One sip! Just one — we're here to laugh, not to end up under the table."
+      },
+      "minAge": 18,
+      "tags": [
+        "drink",
+        "forfeit"
+      ]
+    },
+    {
+      "id": "totf-f-soft-001",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : parle avec l'accent de ton choix jusqu'à ton prochain tour.",
+        "en": "No answer? Forfeit: speak in an accent of your choice until your next turn."
+      },
+      "minAge": 0,
+      "tags": [
+        "forfeit",
+        "funny"
+      ]
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 2,
+  "needsOfflineAiPipeline": false,
+  "roundSeconds": 45,
+  "roundsDefault": 2,
+  "recommendations": [
+    {
+      "question": "The brief's open ask: design the drink vs forfeit (gage) toggle for the non-drinking variant.",
+      "recommendation": "Ship TWO sibling game_configs on the same TRUTH_DARE@2 module sharing the truth-question pack family: 'truth-or-drink' (tone='spicy', minAge=18, forfeit pool = one-sip drink cards, party+spicy tiers) and 'truth-or-forfeit' (tone='classic', minAge=0, forfeit pool = 10-second gage cards, soft+party tiers). The 'toggle' is which Home tile the group taps — NOT a lobby host switch.",
+      "why": "Age-gating is per-config in the catalog and schema-enforced (spicy => minAge>=18, template-architecture §2.1 refinement c); one tile cannot be both 18+ and store-safe. A sibling config costs one KV entry + one forfeit pool — zero code (Cadence B). It also makes the safe variant the discoverable default for under-18 devices instead of a buried setting."
+    },
+    {
+      "question": "How does this reconcile with the existing truth-or-dare design (same template?).",
+      "recommendation": "Same TRUTH_DARE module, bumped to @2 with three ADDITIVE params: allowedChoices (['truth'] auto-resolves the choose phase — 0ms, straight to prompt:<turnSeq>), escapeMode ('pass' default = ToD's limited skip economy unchanged | 'forfeit-draw' = escape unlimited, passesLeft ignored, draws one card from the dare deck shown at score), and labels (localized client copy overrides for the escape/claim/verdict buttons). Existing truth-or-dare configs keep all defaults and are untouched; templateParamsSchema for TRUTH_DARE grows accordingly in packages/protocol.",
+      "why": "This is exactly the template-architecture's sanctioned 'new-params' pattern (like VOTE revealStyle for Pass the Bloop, §3.2 #7): a small reducer/view branch on a module being built anyway (synthesis build slot #3), versus a duplicate module re-implementing rotation, verdict, presence and deck draws. The forfeit pool reusing choice:'dare' rows means zero new content schema and zero new redaction surface."
+    },
+    {
+      "question": "Should the room also verdict-vote whether the player actually drank?",
+      "recommendation": "No. Drinking/doing the forfeit resolves instantly via the template's pass path (skip verdict, +3, show the forfeit card). The verdict only adjudicates a contested 'I answered' claim (Real answer vs Dodged).",
+      "why": "The drink is physically visible to the whole room — a vote on it is dead air. This mirrors the ToD design's own rationale ('a self-admitted chicken skips the vote', §4 prompt table) and keeps the turn at ~40s typical."
+    },
+    {
+      "question": "Timeout and disconnect semantics on the question.",
+      "recommendation": "Prompt deadline or active-player disconnect = 'dodged': 0 points, NO forfeit drawn, advance to next present player. Verdict deadline = tally votes in (zero votes -> answered).",
+      "why": "Hard platform rule: a passive or disconnected player must never block the room, and the game must never assign alcohol to someone who isn't actually there. 0 points also removes any incentive to idle through your turn."
+    },
+    {
+      "question": "Responsible-drinking guardrails (18+ alcohol pack).",
+      "recommendation": "Every drink forfeit is capped at 'one sip' phrasing; the offline authoring lint rejects chug / 'cul sec' / quantity-escalation wording; the lobby for this config shows a persistent footer ('Bois de l'eau, ne conduis pas — les softs comptent' / 'Drink water, don't drive — soft drinks count'); answering is ALWAYS available so drinking is never forced; the truth-or-forfeit sibling is the promoted non-alcohol path.",
+      "why": "Brand rule 'funny never cruel' + Apple 1.4.3 / Google alcohol-content compliance. The lint slots into the existing offline content gate (template-architecture §6 step 3) as one extra rule — no runtime cost."
+    },
+    {
+      "question": "Session length: 2 laps at 16 players is 32 turns (~25 min).",
+      "recommendation": "Keep totalRounds=2 laps as the default (typical 4-8 player room = 8-16 turns, ~8-12 min), and tighten to 1 lap when the lobby roster is >= 10 (a config-level scaling rule, same open question as ToD §9 Q8). Lean on the 'play again' CTA for many-quick-rounds sessions.",
+      "why": "Rounds must stay TikTok-native; one spotlight turn is the atomic ~45s beat, and a session should be several short games, not one marathon. Lap wrap is also the interstitial boundary, so 2 laps = exactly 1 mid-session ad."
+    }
+  ],
+  "risks": [
+    "Store compliance (alcohol): the config MUST ship tone='spicy' + minAge=18 (schema-enforced) behind the device age gate, with possible region flags; under-18 devices only ever see the truth-or-forfeit sibling. Apple 1.4.3 / Google content-rating review is a launch dependency.",
+    "Not pure config: requires TRUTH_DARE@2 additive params (allowedChoices, escapeMode, labels) — a small reducer/view branch plus templateParamsSchema growth in packages/protocol. Schedule with the truth-or-dare module build (synthesis build order slot #3); until then this tile cannot ship.",
+    "Excessive-drinking liability: mitigated by one-sip-only forfeit copy, the authoring lint against chug/escalation wording, the water/no-driving lobby footer, and the fact that answering is always available — but a final product+legal sign-off is required before the spicy pack goes live (same gate as ToD §9 Q2).",
+    "Verdict griefing: the room can vote a genuine answer as 'Dodged' (0 pts). Mitigations inherited from the template: ties resolve to 'answered', votes are unscored, individual votes are never revealed (counts only). Monitor 'verdict_resolved' analytics for dogpiling patterns.",
+    "Pack exhaustion: 16 players x 2 laps = 32 truth draws per game — packs need >= 32 truth rows per allowed intensity tier and >= 16 forfeit rows per tier (synthesis §3.5 lint); tier exhaustion falls back down (spicy->party) then ends the game gracefully ('pool_exhausted').",
+    "Spoken answers happen off-platform and are unmoderated: questions must never target identifiable third parties or solicit medical/illegal/doxxing confessions — enforced as an authoring rule in the offline safety scan ('funny never cruel').",
+    "2-player rooms make the verdict a single judge (inherited ToD §9 Q6). Acceptable for the classic pair format (the original 'Truth or Drink' is literally played in pairs), but consider advisory-only verdicts below 3 players if playtests feel punitive."
+  ]
+}

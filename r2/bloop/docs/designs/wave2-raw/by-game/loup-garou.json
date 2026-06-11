@@ -1,0 +1,179 @@
+{
+  "id": "loup-garou",
+  "nameFr": "Loup-Garou",
+  "nameEn": "Werewolf",
+  "taglineFr": "Le village dort. Pas les loups.",
+  "taglineEn": "The village sleeps. The wolves don't.",
+  "template": "NEW:NIGHT_DAY",
+  "newTemplateSpec": "NIGHT_DAY — new GameModule package `packages/games/night-day`. A generic moderator-less night/day social-deduction template; `loup-garou` is its first game_config (future mafia/vampire/space reskins are Cadence-B content-only). Pure GameModule<NightDayState, NightDayAction, NightDayView, NightDayContent>; minPlayers 5, maxPlayers 16. Reuses the shared kit (emptyPlayerMap, Presence/connected, allActed, tally, gameOver, normalizeText not needed — no free text) and the approved phaseKey contract. ZERO engine amendments: fits packages/engine/src/types.ts as-is.\n\nWHY NOT SECRET_ROLE: impostor's skeleton (clue turns, one secret-word axis, \"impostors must NOT identify each other\" invariant §3.5-5) is structurally opposite to werewolf (no clues; wolves MUST see each other; sequential role-gated night sub-phases; cross-role secret disclosure: the witch sees the wolves' victim). Bolting it on SECRET_ROLE would be a mode sharing ~0% reducer/view code — the anti-pattern template-architecture §7 Q1 warns against. New template, honestly priced as Cadence-A work.\n\nCONFIG (DEFAULT_CONFIG, all overridable via game_config.params): seerEnabled:true, witchEnabled:true, hunterEnabled:false (v2), maxWolves:4, revealRoleOnDeath:true, lynchTieBreak:'noLynch', witchSelfHeal:true, maxRounds:10, roleRevealMs:15000, nightSeerMs:25000, nightWolvesMs:30000, nightWitchMs:25000, dawnMs:10000, debateMs:90000, voteMs:30000, lynchRevealMs:10000.\n\nROLE ASSIGNMENT (init, deterministic from createRng(seed)): wolves = min(maxWolves, max(1, floor(n/4))) → 5–7p:1, 8–11p:2, 12–15p:3, 16p:4 (wolves strict minority at every count; parity win depends on it). Then 1 seer (if enabled), 1 witch (if enabled), rest villager. Shuffle players with the seeded rng, assign in order. `composition` (role→count) is PUBLIC (classic rule: the role list is announced); individual assignments are the secret. State is JSON-safe, null-proto maps, no Date.now/Math.random.\n\nSTATE: phase: 'roleReveal'|'nightSeer'|'nightWolves'|'nightWitch'|'dawn'|'debate'|'vote'|'lynchReveal'|'over'; round (0-based night/day cycle); roles: Record<PlayerId, 'wolf'|'seer'|'witch'|'villager'> HIDDEN; alive: public (flips ONLY via wolf kill / poison / lynch — never via disconnect); connected: Presence public; composition public; ackRole booleans public; nightActed: Record<PlayerId,boolean> public booleans (decoy-uniform, see NIGHT PROTOCOL); wolfVotes: Record<PlayerId,PlayerId> HIDDEN except wolves + wolfVoteSeq: PlayerId[] (first-vote order, deterministic tiebreak) HIDDEN; seerLog: Array<{round,target,isWolf}> HIDDEN except seer; witchState: {healLeft:boolean, poisonLeft:boolean} HIDDEN except witch; pendingKill: PlayerId|null HIDDEN (wolves' resolved victim — disclosed ONLY to the witch, ONLY during nightWitch); pendingPoison: PlayerId|null HIDDEN; lastDawn: {died:PlayerId[], revealedRoles:Record<PlayerId,Role>|null} public from dawn; readyToVote booleans public; votes: Record<PlayerId,PlayerId> HIDDEN; lastLynch: {evicted:PlayerId|null, revealedRole:Role|null, tally, abstained:PlayerId[]} public from lynchReveal; scores; endReason: 'villageWins'|'wolvesWin'|'roomCollapsed'|'maxRounds'|null; winners: 'village'|'wolves'|null.\n\nACTIONS (zod-validated at DO boundary; wrong-phase/wrong-role/dead/duplicate/non-roster all inert via same-reference return): {kind:'ackRole'} | {kind:'nightAck'} (decoy no-op) | {kind:'wolfVote', target} | {kind:'seerPeek', target} | {kind:'witchAct', heal:boolean, poisonTarget:PlayerId|null} | {kind:'readyToVote'} | {kind:'vote', target}. NO free text anywhere → no profanity-filter surface (lower moderation risk than impostor). First action locks; re-acting inert (impostor §4.4 convention).\n\nNIGHT PROTOCOL (the template's signature, anti-shoulder-surf): during EVERY night sub-phase, every alive∧connected player sees an IDENTICAL-looking action screen. The phase's real actor(s) submit their real action; everyone else submits {kind:'nightAck'} (recorded only as nightActed[p]=true; real actions also set it). Phase ends on allActed(alive∧connected, nightActed) OR deadline. Identical screens + identical tap counts ⇒ neither neighbor-glancing nor early phase-end leaks who holds a role. nightActed resets at each sub-phase entry.\n\nPHASES & TRANSITIONS (every gated phase: all-acted OR deadline; resolution set = alive∧connected, so a disconnected/passive player can never stall past the deadline):\n- roleReveal (roleRevealMs): private role card; each wolf's card also lists the wolf pack. All alive ack OR deadline → nightSeer round 0.\n- nightSeer (nightSeerMs): seer picks a living target; {round,target,isWolf} appended to seerLog, echoed only in her view. Timeout/disconnect ⇒ no peek. → nightWolves. SKIP RULE: a sub-phase whose role is dead/disabled is skipped when revealRoleOnDeath=true (the death is already public); when revealRoleOnDeath=false it still runs full-length decoy-only so its absence cannot reveal which role died.\n- nightWolves (nightWolvesMs): each alive wolf casts wolfVote (target alive, non-wolf); wolves see each other's live picks (wolves-only view). Resolution: plurality; tie → earliest first-vote among tied (wolfVoteSeq — deterministic from event order, no rng); zero votes → no victim. Sets pendingKill. → nightWitch.\n- nightWitch (nightWitchMs): the witch's view (only hers) shows pendingKill. witchAct{heal:true} cancels it (consumes healLeft; on self iff witchSelfHeal); poisonTarget kills any living player (consumes poisonLeft); both usable the same night (classic). Timeout ⇒ no potions. → dawn.\n- dawn (dawnMs): deaths resolve atomically: pendingKill (if unhealed) + pendingPoison → alive=false; lastDawn published (roles iff revealRoleOnDeath); narration drawn from pack slot dawn.death / dawn.noDeath. Win-check; deadline → debate (or over).\n- debate (debateMs): talk is IRL; readyToVote taps; all alive∧connected ready OR deadline → vote (votes reset).\n- vote (voteMs): simultaneous secret lynch vote (target alive; self-vote inert); hasVoted booleans public, targets hidden; first vote locks. All voted OR deadline (abstainers omitted) → plurality lynch; tie at top → lynchTieBreak='noLynch' ⇒ nobody dies (deterministic, no revote — impostor §4.5). → lynchReveal.\n- lynchReveal (lynchRevealMs): lastLynch public (evicted, tally, abstained, role iff revealRoleOnDeath). Win-check on deadline → nightSeer round+1, or over. Emits analytics 'round_completed' at this boundary (the shell's ad-cadence signal; interstitials fire off phaseKey 'over' between matches ONLY — never mid-match).\n- over (untimed, phaseDurationMs null): full reveal — finalRoles, winners, endReason, scores public; gameOver effect with CLONED scores (tracer aliasing rule).\n\nWIN-CHECK (pure, ordered, runs at dawn and lynchReveal): (1) zero living wolves → villageWins; (2) living wolves >= living non-wolves → wolvesWin; (3) alive∧connected < 3 → roomCollapsed (winners = side with more alive, tie → village); (4) round >= maxRounds → side with more alive wins (tie → wolves). Else round+1, continue.\n\nDISCONNECTS: playerLeft flips connected only — never alive, never roles (presence ≠ elimination, synthesis §1.2). A disconnected actor's sub-phase resolves at deadline (no peek / no kill / no potion); rejoin restores acting if the phase is still open. Sole-wolf permanent disconnect ⇒ no-kill nights; village still wins by lynching the silent seat, with roomCollapse + maxRounds as floors.\n\nPHASEKEY (no secrets, changes per shell-observable transition; each night sub-phase = its own key → fresh alarm): 'roleReveal' | 'night:r{round}:seer' | 'night:r{round}:wolves' | 'night:r{round}:witch' | 'dawn:r{round}' | 'debate:r{round}' | 'vote:r{round}' | 'lynch:r{round}' | 'over'.\n\nVIEW UNION + REDACTION MATRIX (load-bearing; viewer kinds: role-actor / other alive / dead / unknown): Base envelope: round, phase, composition, seats[{id,alive,connected}], scores, myRole (own only; null for unknown viewers), iAmAlive, narration slot. (a) roles map NEVER in any pre-over view — EXCEPT each wolf's view carries wolfPack: PlayerId[] (the deliberate asymmetric disclosure; explicit test: non-wolves/dead-non-wolves/unknown never receive it). (b) wolfVotes + live wolf tally: living wolves only, only during nightWolves (dead wolves keep wolfPack but lose the live huddle). (c) seerLog: seer only; survives her death for context (mirrors impostor's evicted-keeps-own-word). (d) witchState + pendingKill: witch only; pendingKill only during nightWitch, never anywhere else pre-dawn. (e) lynch votes: hidden buffer, hasVoted booleans public, myVote = votes[viewer] ?? null owner-echo, promoted to public tally at lynchReveal (tracer convention verbatim). (f) nightActed: public booleans, uniform by decoy protocol. (g) DEAD PLAYERS ARE NOT OMNISCIENT: a dead player's view = living non-actor's view + own role/logs; ghost-omniscience rejected because same-room table talk leaks. (h) unknown viewer: all my* null, no wolfPack/seerLog/witchState — spectator-safe per contract. leakedSecrets audit per phase × 4 viewer kinds, secrets = each player's role string (owner-exempt; wolfPack wolves-exempt), pendingKill (witch-exempt during nightWitch), seer peek targets, vote targets. Note synthesis §5.9 analog: never feed '' to leakedSecrets.\n\nEFFECTS: existing types only — analytics ('match_started', 'night_resolved', 'round_completed') + gameOver. No new events, no new effects, no contract change.\n\nSCORING (exact, match-end only, match-local; shell owns session XP by placement per synthesis §1.7): villageWins → +2 each LIVING village-team player (villager/seer/witch), +1 each DEAD village-team player, 0 wolves. wolvesWin (parity or maxRounds tiebreak) → +3 each living wolf, +1 each dead wolf, +1 each village-team player (consolation). roomCollapsed → gameOver with current (zero) scores.\n\nCONTENT: ContentPack<NightDayContent> { locale, tone, items: (roleCard|narration)[] } — flavor-only (role card text + narration variants per slot, drawn with the seeded rng); mechanics never depend on content, so themed reskins are config+pack only. {victim}/{target} tokens substituted client-side with nicknames (engine never sees names — synthesis §3.4).\n\nV2 ROLES (the pipeline is an ordered array of night steps precisely so these append without rearchitecting): chasseur/hunter (death-triggered 'hunterShot:r{round}' sub-phase, chains at most once), cupidon (lovers pair at round 0, linked deaths, third win condition), salvateur (per-night protect, no-repeat target), petite fille (risky wolf-huddle peek — new disclosure surface, design carefully), capitaine (vote weight 2 + lynch tie-break, replaces noLynch).\n\nTESTS (impostor Appendix-B grade): init role tables n=5..16 + seed determinism; night decoy protocol (actor vs non-actor views are structurally identical in KEYS); wolf tie→earliest-cast; witch heal/poison/self-heal/single-use/same-night-both; skip-vs-decoy under both revealRoleOnDeath values; redaction matrix incl. wolfPack asymmetry; liveness (disconnected actor can't stall; sole-wolf disconnect); win conditions incl. parity, maxRounds, roomCollapse; replay determinism with identical pack version; gameOver scores cloned.",
+  "players": {
+    "min": 5,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "roleReveal",
+      "durationSec": 15,
+      "description": "One-time. Private role card on each phone (wolves also see the wolf pack roster). Ends when all alive players ack OR deadline — unacked players proceed anyway."
+    },
+    {
+      "key": "night:seer",
+      "durationSec": 25,
+      "description": "Seer secretly picks a player; app reveals their side to her only. Everyone else sees an identical decoy screen and taps to 'sleep'. Ends on all-acted (alive AND connected) or deadline; seer timeout/disconnect = no peek. Skipped if seer is dead and revealRoleOnDeath=true; runs decoy-only if false."
+    },
+    {
+      "key": "night:wolves",
+      "durationSec": 30,
+      "description": "Wolves each vote a victim, seeing each other's picks live (wolves-only view); others tap decoys. Plurality wins; tie broken deterministically by earliest first-vote; zero wolf votes (timeout/disconnect) = no victim tonight. Ends all-acted or deadline."
+    },
+    {
+      "key": "night:witch",
+      "durationSec": 25,
+      "description": "Witch (only her) sees the wolves' victim; may spend her one heal to save them and/or her one poison on anyone. Others tap decoys. Timeout = no potion. Ends all-acted or deadline."
+    },
+    {
+      "key": "dawn",
+      "durationSec": 10,
+      "description": "Atomic public resolution: deaths announced with narration card (roles shown iff revealRoleOnDeath). Win-check runs. Fixed display window, advances on deadline."
+    },
+    {
+      "key": "debate",
+      "durationSec": 90,
+      "description": "The IRL shouting match — phones show the death recap and a 'ready to vote' toggle. Ends when all alive-and-connected are ready OR deadline. Disconnected players never block."
+    },
+    {
+      "key": "vote",
+      "durationSec": 30,
+      "description": "Simultaneous secret lynch vote; first vote locks; self-vote inert; 'has voted' booleans public, targets hidden. Ends all-voted or deadline (abstainers omitted). Tie at top = no lynch (deterministic, no revote)."
+    },
+    {
+      "key": "lynch",
+      "durationSec": 10,
+      "description": "Public reveal: who is lynched, tally, abstainers, role iff revealRoleOnDeath. Win-check on deadline, then next night (round+1) or over. Emits round_completed (shell ad-cadence signal; no mid-match interstitials)."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Untimed (phaseDurationMs null). Full reveal: all roles, winners, end reason, final scores; gameOver effect with cloned scores. Shell shows standings, then the between-match interstitial + rematch CTA."
+    }
+  ],
+  "params": {
+    "seerEnabled": true,
+    "witchEnabled": true,
+    "hunterEnabled": false,
+    "maxWolves": 4,
+    "revealRoleOnDeath": true,
+    "lynchTieBreak": "noLynch",
+    "witchSelfHeal": true,
+    "maxRounds": 10,
+    "roleRevealMs": 15000,
+    "nightSeerMs": 25000,
+    "nightWolvesMs": 30000,
+    "nightWitchMs": 25000,
+    "dawnMs": 10000,
+    "debateMs": 90000,
+    "voteMs": 30000,
+    "lynchRevealMs": 10000
+  },
+  "contentItemShape": "One pack item = { id: string; type: 'roleCard' | 'narration'; role?: 'wolf'|'villager'|'seer'|'witch' (roleCard only); slot?: 'night.intro'|'dawn.death'|'dawn.noDeath'|'lynch.wolf'|'lynch.villager'|'lynch.none'|'over.village'|'over.wolves' (narration only); name?: { fr, en } (roleCard only); text: { fr, en }; tags?: string[] }. All player-visible strings are bilingual { fr, en } at authoring time; the build step splits them into single-locale packs (data.locale) per synthesis §3.1 before R2 upload. {victim}/{target} placeholder tokens are substituted client-side with lobby nicknames — the engine never sees names. The pack is flavor-only: exactly one roleCard per enabled role, plus >=3 narration variants per slot so repeated nights do not repeat lines (sized per synthesis §3.5); the reducer draws variants with the seeded rng, so mechanics never depend on content and themed reskins (Space Crew, Pirates) are pure Cadence-B config+pack drops.",
+  "sampleItems": [
+    {
+      "id": "rolecard-witch",
+      "type": "roleCard",
+      "role": "witch",
+      "name": {
+        "fr": "La Sorcière",
+        "en": "The Witch"
+      },
+      "text": {
+        "fr": "Tu possèdes deux potions pour toute la partie : une potion de vie pour sauver la victime des loups, et un poison pour éliminer un joueur. Chaque nuit, l'app te montre qui les loups ont croqué — à toi de décider.",
+        "en": "You hold two potions for the whole game: one healing potion to save the wolves' victim, and one poison to take a player out. Each night the app shows you who the wolves bit — your call."
+      },
+      "tags": [
+        "village",
+        "night-actor"
+      ]
+    },
+    {
+      "id": "narration-night-intro-01",
+      "type": "narration",
+      "slot": "night.intro",
+      "text": {
+        "fr": "La nuit tombe sur le village. Tout le monde baisse les yeux sur son téléphone... et personne ne fait confiance à son voisin.",
+        "en": "Night falls on the village. Everyone, eyes down on your phone... and nobody trust their neighbor."
+      },
+      "tags": [
+        "night"
+      ]
+    },
+    {
+      "id": "narration-dawn-death-01",
+      "type": "narration",
+      "slot": "dawn.death",
+      "text": {
+        "fr": "Le soleil se lève sur le village... {victim} ne se réveillera plus jamais. Quelqu'un autour de cette table sait exactement pourquoi.",
+        "en": "The sun rises over the village... {victim} will never wake again. Someone around this table knows exactly why."
+      },
+      "tags": [
+        "dawn",
+        "death"
+      ]
+    }
+  ],
+  "physical": "seated",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": false,
+  "roundSeconds": 220,
+  "roundsDefault": 3,
+  "recommendations": [
+    {
+      "question": "SECRET_ROLE template extension or NEW template?",
+      "recommendation": "NEW:NIGHT_DAY template. Do not extend SECRET_ROLE.",
+      "why": "Impostor's skeleton (clue turns, one secret-word axis, 'impostors must NOT identify each other') is structurally opposite to werewolf (no clues; wolves MUST see each other; sequential role-gated night sub-phases; the witch is shown the wolves' victim — a cross-role secret disclosure SECRET_ROLE has no concept of). A 'mode' sharing ~0% reducer/view code is exactly the anti-pattern template-architecture §7 Q1 rejects. Price it honestly as Cadence-A work; the upside is every future night/day variant (mafia, vampires, themed reskins) becomes config+pack only."
+    },
+    {
+      "question": "Minimal viable role set for v1?",
+      "recommendation": "Wolves + villagers + seer + witch (seer + 1, per the brief's 'seer + 1-2 more max'). Hunter is v2 #1.",
+      "why": "Seer gives the village information drama; witch gives one save and one kill — the two most iconic, and both are plain night sub-phases. Hunter is the only classic role whose power triggers reactively ON DEATH (a death-chained sub-phase that can fire at dawn or at lynch), which is the single mechanic that complicates the pipeline; deferring it keeps the v1 reducer a clean linear night array. v2 list, in order: chasseur (hunter), cupidon (lovers), salvateur (guard), capitaine (vote-weight + tie-break), petite fille (needs a new disclosure surface — design carefully)."
+    },
+    {
+      "question": "How do phones avoid leaking roles in a same-room night phase?",
+      "recommendation": "Decoy protocol: every alive player gets an identical-looking action screen in every night sub-phase; non-actors submit a no-op nightAck; the phase ends on all-acted (alive AND connected) or deadline.",
+      "why": "Identical screens and identical tap counts mean neither shoulder-surfing nor the phase ending early reveals who holds a role. This replaces the physical game's 'close your eyes' and is the template's signature trick — test it structurally (actor and non-actor view shapes must have identical keys)."
+    },
+    {
+      "question": "Reveal a dead player's role or hide it?",
+      "recommendation": "revealRoleOnDeath: true by default (classic Thiercelieux); keep the false variant as a config param with the decoy-skip rule.",
+      "why": "Role-on-death is far more readable for casual party players and keeps deduction grounded. When false (expert variant), dead-role night sub-phases must still run full-length decoy-only, otherwise the skipped phase itself leaks which role died — the rule is specced so the variant is a pure config flip."
+    },
+    {
+      "question": "Tie handling (lynch vote and wolf vote)?",
+      "recommendation": "Lynch tie at top = no lynch (deterministic, no revote sub-phase). Wolf vote tie = earliest first-vote among tied targets, from event order.",
+      "why": "No-lynch mirrors the approved impostor §4.5 ruling and keeps pacing (a hung jury is dramatic). But a no-KILL night is anticlimactic for wolves, so their tie resolves to a victim deterministically via the stored first-vote sequence — pure from the event log, no rng, no wall clock. v2 capitaine replaces no-lynch with a captain tie-break."
+    },
+    {
+      "question": "Do dead players spectate with full information?",
+      "recommendation": "No. A dead player sees exactly what a living non-actor sees, plus their own role and own logs.",
+      "why": "This is same-room play: an omniscient ghost leaks through table talk and facial reactions within seconds. Classic online werewolf gives ghosts full vision; here it would destroy the game. Eliminated players keep their own card for context (impostor §3.5 invariant 4 analog)."
+    },
+    {
+      "question": "Player count floor and wolf scaling?",
+      "recommendation": "minPlayers 5 (lobby copy: 'best at 7+'); wolves = min(4, max(1, floor(n/4))): 5-7p one wolf, 8-11p two, 12-15p three, 16p four.",
+      "why": "At 4 players (1 wolf vs seer+witch+1) the seer near-solves the game in two nights and the night-1 kill is a coin flip — degenerate. The floor(n/4) table keeps wolves a strict minority at every count, which the parity win condition requires; cap 4 keeps the night huddle manageable on phones."
+    },
+    {
+      "question": "How does the heavyweight fit TikTok-native pacing and the ads model?",
+      "recommendation": "One match = one GameModule instance ending in gameOver (typically 3 night/day cycles, 10-15 min); interstitial fires ONLY at the over boundary; aggressive default timers + early-end on all-acted in every phase.",
+      "why": "Werewolf is the catalog's long-form anchor, not a 90-second round game — position it as such. A mid-night ad would destroy tension, so the ad cadence is per-match (impostor §5.2 model); the maxRounds:10 cap plus everywhere-early-end keeps worst-case session length bounded and disconnects can never stall a phase past its deadline."
+    }
+  ],
+  "risks": [
+    "Largest redaction surface on the platform: four secret classes (roles, wolf votes, seer log, witch state) PLUS two deliberate asymmetric disclosures (wolves see the pack; the witch sees the night's victim). A single leak kills the genre — requires leakedSecrets audits across every phase x 4 viewer kinds and an explicit wolfPack non-leak test, on top of the impostor-hardened harness (build this template after impostor, as the synthesis build-order logic dictates).",
+    "It is a NEW template (Cadence-A code + client GameScreen + registry entries on both server and mobile), not a config drop — roughly impostor-scale effort or more; budget it as the post-impostor flagship, not a quick catalog add.",
+    "Pacing risk: ~220s per night/day cycle and 10-15 min matches strain the 'many quick rounds' session model; mitigation is aggressive timers, early-end everywhere, maxRounds cap, and honest catalog positioning as the heavyweight anchor.",
+    "Shoulder-surfing is mitigated by the decoy night protocol but not eliminated — a determined neighbor reading a held-up phone still wins; UI must push privacy affordances (hold-to-peek role card, dimmed night screens, small fonts on secret surfaces).",
+    "Sole-actor disconnects degrade the game: a permanently disconnected lone wolf produces kill-less nights (village eventually lynches the silent seat; roomCollapse <3 and maxRounds are the floors) and a disconnected seer/witch simply loses her power — acceptable, but playtest whether a 'replace disconnected wolf' rule is needed before launch.",
+    "Small-room balance (5-6 players) is inherently swingy: night-1 kills are information-free and the seer is overpowered relative to one wolf; the wolf table and witch potions partially compensate, but expect tuning from the rolloutPct 5% analytics (match length, village win rate ~55-65% target).",
+    "First-night experience: a player killed on night 1 spectates for 10+ minutes; consider a v2 'ghost minigame' or fast rematch flow to keep eliminated players engaged — flagged, not solved, in this design."
+  ]
+}

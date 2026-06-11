@@ -1,0 +1,2359 @@
+{
+  "gameId": "devine-l-action",
+  "version": 1,
+  "generatedAt": "2026-06-11",
+  "items": [
+    {
+      "id": "gda-soft-001",
+      "action": {
+        "fr": "Fais semblant de promener un chien invisible qui tire sur sa laisse",
+        "en": "Pretend to walk an invisible dog that keeps pulling on its leash"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["animals", "physical"]
+    },
+    {
+      "id": "gda-soft-002",
+      "action": {
+        "fr": "Brosse-toi les dents avec une brosse à dents géante imaginaire, du sol au plafond",
+        "en": "Brush your teeth with a giant imaginary toothbrush, floor-to-ceiling strokes"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["everyday", "silly"]
+    },
+    {
+      "id": "gda-soft-003",
+      "action": {
+        "fr": "Traverse le salon en nage de brasse, sans oublier de remonter respirer",
+        "en": "Breaststroke your way across the living room, coming up for air like a pro"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "gda-soft-004",
+      "action": {
+        "fr": "Cours un 100 mètres au ralenti et franchis la ligne d'arrivée en vainqueur",
+        "en": "Run a slow-motion 100-meter dash and break the finish tape like a champion"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "slowmo"]
+    },
+    {
+      "id": "gda-soft-005",
+      "action": {
+        "fr": "Prépare une pizza imaginaire et fais tournoyer la pâte au-dessus de ta tête",
+        "en": "Make an imaginary pizza and twirl the dough high above your head"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["food", "jobs"]
+    },
+    {
+      "id": "gda-soft-006",
+      "action": {
+        "fr": "Trais une vache invisible, petit tabouret compris",
+        "en": "Milk an invisible cow, tiny stool included"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "farm"]
+    },
+    {
+      "id": "gda-soft-007",
+      "action": {
+        "fr": "Fais la poule qui pond un œuf et qui en est TRÈS fière",
+        "en": "Be a hen laying an egg and looking VERY proud of it"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "silly"]
+    },
+    {
+      "id": "gda-soft-008",
+      "action": {
+        "fr": "Dirige un orchestre invisible jusqu'au grand final, baguette imaginaire en main",
+        "en": "Conduct an invisible orchestra into a massive finale, imaginary baton and all"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["music", "drama"]
+    },
+    {
+      "id": "gda-soft-009",
+      "action": {
+        "fr": "Joue un solo de batterie invisible déchaîné, gros coup de cymbale final inclus",
+        "en": "Play a furious invisible drum solo, big cymbal crash to finish"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["music", "rock"]
+    },
+    {
+      "id": "gda-soft-010",
+      "action": {
+        "fr": "Marche sur un fil de funambule imaginaire tracé sur le tapis, bras en balancier",
+        "en": "Walk an imaginary tightrope across the carpet, arms out for balance"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["circus", "balance"]
+    },
+    {
+      "id": "gda-soft-011",
+      "action": {
+        "fr": "Sois un T-Rex qui essaie de faire son lit avec ses tout petits bras",
+        "en": "Be a T-Rex trying to make its bed with those tiny little arms"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "silly"]
+    },
+    {
+      "id": "gda-soft-012",
+      "action": {
+        "fr": "Attrape une mouche avec des baguettes imaginaires, concentration maximale",
+        "en": "Catch a fly with imaginary chopsticks, maximum concentration"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["silly", "focus"]
+    },
+    {
+      "id": "gda-soft-013",
+      "action": {
+        "fr": "Pagaie en canoë assis par terre et traverse des rapides bien agités",
+        "en": "Paddle a canoe sitting on the floor and hit some seriously choppy rapids"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "adventure"]
+    },
+    {
+      "id": "gda-soft-014",
+      "action": {
+        "fr": "Arrête un penalty au ralenti, puis célèbre comme en finale de Coupe du monde",
+        "en": "Save a penalty in slow motion, then celebrate like it's the World Cup final"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "slowmo"]
+    },
+    {
+      "id": "gda-soft-015",
+      "action": {
+        "fr": "Jongle avec trois balles invisibles et rate-les toutes, une par une",
+        "en": "Juggle three invisible balls and drop every single one of them"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["circus", "fail"]
+    },
+    {
+      "id": "gda-soft-016",
+      "action": {
+        "fr": "Traverse la pièce à la vitesse d'un escargot, doigts en antennes sur la tête",
+        "en": "Cross the room at snail speed, finger antennae on your head"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "slow"]
+    },
+    {
+      "id": "gda-soft-017",
+      "action": {
+        "fr": "Lave-toi les cheveux sous une douche imaginaire et prends du shampoing dans les yeux",
+        "en": "Wash your hair in an imaginary shower and get shampoo right in your eyes"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["everyday", "fail"]
+    },
+    {
+      "id": "gda-soft-018",
+      "action": {
+        "fr": "Sois un robot aspirateur qui se cogne (doucement) dans tous les meubles",
+        "en": "Be a robot vacuum (gently) bumping into every piece of furniture"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["tech", "silly"]
+    },
+    {
+      "id": "gda-soft-019",
+      "action": {
+        "fr": "Construis un bonhomme de neige invisible puis serre-le dans tes bras pour lui dire adieu",
+        "en": "Build an invisible snowman, then hug it goodbye forever"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["seasons", "wholesome"]
+    },
+    {
+      "id": "gda-soft-020",
+      "action": {
+        "fr": "Prends un selfie avec une célébrité invisible en tremblant d'émotion",
+        "en": "Take a selfie with an invisible celebrity while completely starstruck"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["internet", "silly"]
+    },
+    {
+      "id": "gda-soft-021",
+      "action": {
+        "fr": "Marche contre une tempête de vent imaginaire qui te repousse en arrière",
+        "en": "Walk into an imaginary windstorm that keeps pushing you back"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["weather", "classic"]
+    },
+    {
+      "id": "gda-soft-022",
+      "action": {
+        "fr": "Monte sur un cheval invisible et galope sur place comme un cow-boy",
+        "en": "Mount an invisible horse and gallop on the spot like a cowboy"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["animals", "western"]
+    },
+    {
+      "id": "gda-soft-023",
+      "action": {
+        "fr": "Sois un train à vapeur qui entre en gare et freine juste à temps",
+        "en": "Be a steam train pulling into the station and braking just in time"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["vehicles", "silly"]
+    },
+    {
+      "id": "gda-soft-024",
+      "action": {
+        "fr": "Fais le coq qui réveille toute la maison au lever du soleil",
+        "en": "Be the rooster waking up the entire house at sunrise"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["animals", "morning"]
+    },
+    {
+      "id": "gda-soft-025",
+      "action": {
+        "fr": "Sois un camion de pompiers qui fonce vers une urgence, sirène à fond",
+        "en": "Be a fire truck racing to an emergency, siren blazing"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["vehicles", "jobs"]
+    },
+    {
+      "id": "gda-soft-026",
+      "action": {
+        "fr": "Sois du pop-corn au micro-ondes : un pop, puis deux, puis l'explosion totale",
+        "en": "Be microwave popcorn: one pop, then two, then total popcorn chaos"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["food", "silly"]
+    },
+    {
+      "id": "gda-soft-027",
+      "action": {
+        "fr": "Sois un réveil qu'on remet en mode rappel trois fois de suite",
+        "en": "Be an alarm clock getting snoozed three times in a row"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["morning", "everyday"]
+    },
+    {
+      "id": "gda-soft-028",
+      "action": {
+        "fr": "Sois un moustique qui zigzague dans la pièce jusqu'à la grande claque finale (dans tes propres mains)",
+        "en": "Be a mosquito zigzagging around the room until the big final slap (into your own hands)"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "silly"]
+    },
+    {
+      "id": "gda-soft-029",
+      "action": {
+        "fr": "Sois une machine à laver qui passe en mode essorage",
+        "en": "Be a washing machine hitting the spin cycle"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["everyday", "tech"]
+    },
+    {
+      "id": "gda-soft-030",
+      "action": {
+        "fr": "Sois un coucou suisse qui sonne midi : douze coucous, pas un de moins",
+        "en": "Be a cuckoo clock striking noon: twelve cuckoos, not one less"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["retro", "silly"]
+    },
+    {
+      "id": "gda-soft-031",
+      "action": {
+        "fr": "Démarre une moto imaginaire et fais le tour de la pièce en la faisant vrombir",
+        "en": "Kick-start an imaginary motorbike and rev your way around the room"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["vehicles", "physical"]
+    },
+    {
+      "id": "gda-soft-032",
+      "action": {
+        "fr": "Sois une porte qui grince qu'on n'arrête pas d'ouvrir et de refermer",
+        "en": "Be a creaky door that someone just keeps opening and closing"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["everyday", "silly"]
+    },
+    {
+      "id": "gda-soft-033",
+      "action": {
+        "fr": "Sois une bouilloire qui chauffe tout doucement puis siffle comme une folle",
+        "en": "Be a kettle slowly heating up, then whistling like crazy"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["food", "everyday"]
+    },
+    {
+      "id": "gda-soft-034",
+      "action": {
+        "fr": "Sois un orage complet : petite pluie, gros tonnerre, puis arc-en-ciel",
+        "en": "Be a full thunderstorm: light drizzle, huge thunder, then a rainbow"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["weather", "drama"]
+    },
+    {
+      "id": "gda-soft-035",
+      "action": {
+        "fr": "Empile trois coussins et assieds-toi dessus comme sur un trône",
+        "en": "Stack three cushions and sit on top like it's your royal throne"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["household", "royal"]
+    },
+    {
+      "id": "gda-soft-036",
+      "action": {
+        "fr": "Enfile une chaussette sur ta main et fais-lui saluer chaque joueur",
+        "en": "Put a sock on your hand and have it greet every single player"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["household", "silly"]
+    },
+    {
+      "id": "gda-soft-037",
+      "action": {
+        "fr": "Fais dix jumping jacks en comptant à voix haute",
+        "en": "Do ten jumping jacks while counting out loud"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "gda-soft-038",
+      "action": {
+        "fr": "Cache-toi derrière un meuble puis surgis en criant « Surprise ! »",
+        "en": "Hide behind furniture, then leap out yelling 'Surprise!'"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["party", "silly"]
+    },
+    {
+      "id": "gda-soft-039",
+      "action": {
+        "fr": "Fabrique un avion en papier et fais-lui passer son vol d'essai officiel",
+        "en": "Build a paper airplane and give it its official test flight"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["crafts", "silly"]
+    },
+    {
+      "id": "gda-soft-040",
+      "action": {
+        "fr": "Pose un coussin sur ta tête et fais un tour complet de la pièce sans le faire tomber",
+        "en": "Balance a cushion on your head and walk a full lap of the room without dropping it"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": true,
+      "tags": ["household", "balance"]
+    },
+    {
+      "id": "gda-soft-041",
+      "action": {
+        "fr": "Présente la météo de demain en pointant le mur comme une carte de télé",
+        "en": "Deliver tomorrow's weather forecast, pointing at the wall like a TV map"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["tv", "jobs"]
+    },
+    {
+      "id": "gda-soft-042",
+      "action": {
+        "fr": "Serre la main de chaque joueur comme un politicien en pleine campagne",
+        "en": "Shake every player's hand like a politician running for office"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["social", "silly"]
+    },
+    {
+      "id": "gda-soft-043",
+      "action": {
+        "fr": "Fais cinq pompes en envoyant un bisou à la salle entre chacune",
+        "en": "Do five push-ups, blowing the room a kiss between each one"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["pompes", "cinq", "bisou"],
+        "en": ["push-ups", "five", "kiss"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "silly"]
+    },
+    {
+      "id": "gda-soft-044",
+      "action": {
+        "fr": "Allonge-toi sur le dos et pédale comme sur un vélo invisible",
+        "en": "Lie on your back and pedal an invisible bicycle"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["vélo", "pédaler", "dos"],
+        "en": ["bike", "pedal", "back"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "physical"]
+    },
+    {
+      "id": "gda-soft-045",
+      "action": {
+        "fr": "Applaudis-toi toi-même puis salue trois fois bien bas comme au théâtre",
+        "en": "Give yourself a round of applause, then take three big theater bows"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["applaudir", "saluer", "bravo"],
+        "en": ["clap", "bow", "applause"]
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["theater", "silly"]
+    },
+    {
+      "id": "gda-soft-046",
+      "action": {
+        "fr": "Tourne trois fois sur toi-même puis fige-toi en nain de jardin",
+        "en": "Spin around three times, then freeze like a garden gnome"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["tourner", "trois", "nain"],
+        "en": ["spin", "three", "gnome"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["silly", "physical"]
+    },
+    {
+      "id": "gda-soft-047",
+      "action": {
+        "fr": "Fais trois éternuements géants et très théâtraux d'affilée",
+        "en": "Fake three giant, extremely theatrical sneezes in a row"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["éternuer", "trois", "atchoum"],
+        "en": ["sneeze", "three", "achoo"]
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["silly", "drama"]
+    },
+    {
+      "id": "gda-soft-048",
+      "action": {
+        "fr": "Bâille si fort que toute la pièce se met à bâiller avec toi",
+        "en": "Yawn so hard the whole room starts yawning with you"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["bâiller", "bouche", "dormir"],
+        "en": ["yawn", "mouth", "sleepy"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["silly", "social"]
+    },
+    {
+      "id": "gda-soft-049",
+      "action": {
+        "fr": "Saute sur un pied en te tapotant la tête en même temps",
+        "en": "Hop on one foot while patting your head at the same time"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["sauter", "pied", "tête"],
+        "en": ["hop", "foot", "head"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["physical", "coordination"]
+    },
+    {
+      "id": "gda-soft-050",
+      "action": {
+        "fr": "Rassemble tout le monde et prends une photo de groupe imaginaire",
+        "en": "Gather everyone together and take an imaginary group photo"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["photo", "sourire", "groupe"],
+        "en": ["photo", "smile", "group"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["social", "party"]
+    },
+    {
+      "id": "gda-soft-051",
+      "action": {
+        "fr": "Noue une cape invisible et fais un tour de la pièce en « volant »",
+        "en": "Tie on an invisible cape and 'fly' one lap around the room"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["cape", "voler", "héros"],
+        "en": ["cape", "fly", "hero"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["heroes", "physical"]
+    },
+    {
+      "id": "gda-soft-052",
+      "action": {
+        "fr": "Traverse la pièce sur la pointe des pieds comme si le sol était du sable brûlant",
+        "en": "Tiptoe across the room like the floor is scorching hot sand"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["pointe", "pieds", "brûlant"],
+        "en": ["tiptoe", "floor", "hot"]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["physical", "beach"]
+    },
+    {
+      "id": "gda-soft-053",
+      "action": {
+        "fr": "Prends la pose du bodybuilder, double biceps, et tiens cinq secondes",
+        "en": "Hit a double-biceps bodybuilder pose and hold it for five seconds"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["sports", "pose"]
+    },
+    {
+      "id": "gda-soft-054",
+      "action": {
+        "fr": "Fais la pose de la proue du Titanic, bras écartés, cheveux au vent",
+        "en": "Strike the Titanic bow pose, arms wide, wind in your hair"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "romance"]
+    },
+    {
+      "id": "gda-soft-055",
+      "action": {
+        "fr": "Tiens une arabesque de danse classique : une jambe derrière, bras tendus",
+        "en": "Hold a ballet arabesque: one leg back, arms stretched out"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "balance"]
+    },
+    {
+      "id": "gda-soft-056",
+      "action": {
+        "fr": "Assieds-toi sur une chaise invisible et tiens la position cinq secondes",
+        "en": "Sit down on an invisible chair and hold it for five seconds"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["physical", "endurance"]
+    },
+    {
+      "id": "gda-soft-057",
+      "action": {
+        "fr": "Forme un cœur géant au-dessus de ta tête comme une idole en concert",
+        "en": "Make a giant heart over your head like a pop idol on stage"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["music", "wholesome"]
+    },
+    {
+      "id": "gda-soft-058",
+      "action": {
+        "fr": "Prends la pose de l'éclair d'Usain Bolt, regard vers l'horizon",
+        "en": "Strike the Usain Bolt lightning pose, eyes on the horizon"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "pose"]
+    },
+    {
+      "id": "gda-soft-059",
+      "action": {
+        "fr": "Prends la pose du Penseur de Rodin au bord du canapé",
+        "en": "Pose as Rodin's Thinker on the edge of the couch"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["art", "pose"]
+    },
+    {
+      "id": "gda-soft-060",
+      "action": {
+        "fr": "Tiens-toi comme un flamant rose : sur une jambe, bras en ailes, une main en bec",
+        "en": "Stand like a flamingo: one leg, wing arms, one hand as the beak"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "balance"]
+    },
+    {
+      "id": "gda-party-001",
+      "action": {
+        "fr": "Meurs de façon ultra dramatique sur le canapé, comme dans un téléfilm de l'après-midi",
+        "en": "Die ultra-dramatically onto the couch, daytime-soap-opera style"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["drama", "silly"]
+    },
+    {
+      "id": "gda-party-002",
+      "action": {
+        "fr": "Défile comme à la Fashion Week et termine par un coup de cheveux légendaire",
+        "en": "Strut a full fashion-week runway walk and finish with a legendary hair flip"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["fashion", "sassy"]
+    },
+    {
+      "id": "gda-party-003",
+      "action": {
+        "fr": "Sois une pieuvre qui essaie d'enfiler un jean slim",
+        "en": "Be an octopus trying to squeeze into skinny jeans"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["animals", "fail"]
+    },
+    {
+      "id": "gda-party-004",
+      "action": {
+        "fr": "Sois un modem 56k qui se connecte à Internet en 1999",
+        "en": "Be a dial-up modem connecting to the internet in 1999"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["retro", "tech"]
+    },
+    {
+      "id": "gda-party-005",
+      "action": {
+        "fr": "Fais un discours de motivation au canapé pour qu'il croie enfin en lui",
+        "en": "Give the couch a motivational pep talk so it finally believes in itself"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["absurd", "talking"]
+    },
+    {
+      "id": "gda-party-006",
+      "action": {
+        "fr": "Esquive des balles au ralenti comme dans Matrix et tiens la pose penchée",
+        "en": "Dodge bullets in slow motion like The Matrix and hold the lean"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "pose"]
+    },
+    {
+      "id": "gda-party-007",
+      "action": {
+        "fr": "Chante « Joyeux anniversaire » à genoux devant la personne la plus proche",
+        "en": "Sing 'Happy Birthday' on your knees to the nearest player"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["chanter", "anniversaire", "genoux"],
+        "en": ["sing", "birthday", "knees"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["music", "silly"]
+    },
+    {
+      "id": "gda-party-008",
+      "action": {
+        "fr": "Tape un high five épique au ralenti avec chaque joueur de la pièce",
+        "en": "Give every player in the room an epic slow-motion high five"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["social", "slowmo"]
+    },
+    {
+      "id": "gda-party-009",
+      "action": {
+        "fr": "Sois une star de l'opéra : échauffe ta voix puis monte jusqu'à LA note",
+        "en": "Be an opera star: warm up your voice, then go for THE high note"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["music", "drama"]
+    },
+    {
+      "id": "gda-party-010",
+      "action": {
+        "fr": "Fais le moonwalk d'un mur à l'autre du salon",
+        "en": "Moonwalk from one wall of the room to the other"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["moonwalk", "marcher", "reculer"],
+        "en": ["moonwalk", "walk", "backwards"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "retro"]
+    },
+    {
+      "id": "gda-party-011",
+      "action": {
+        "fr": "Atterris comme un super-héros : un genou au sol, poing par terre, regard intense",
+        "en": "Stick a superhero landing: one knee down, fist on the floor, intense stare"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["heroes", "pose"]
+    },
+    {
+      "id": "gda-party-012",
+      "action": {
+        "fr": "Danse le robot, puis tombe en panne au milieu de la pièce comme une machine qui s'éteint",
+        "en": "Do the robot dance, then break down mid-room like a dying machine"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "silly"]
+    },
+    {
+      "id": "gda-party-013",
+      "action": {
+        "fr": "Fais la crise du bambin qui refuse de quitter le magasin de jouets",
+        "en": "Throw a toddler tantrum about refusing to leave the toy store"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["drama", "silly"]
+    },
+    {
+      "id": "gda-party-014",
+      "action": {
+        "fr": "Commente les joueurs comme un documentaire animalier : « ici, dans leur habitat naturel… »",
+        "en": "Narrate the players like a nature documentary: 'here, in their natural habitat…'"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["tv", "talking"]
+    },
+    {
+      "id": "gda-party-015",
+      "action": {
+        "fr": "Danse la Macarena, refrain complet, avec une confiance absolue",
+        "en": "Dance the full Macarena chorus with absolute confidence"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["macarena", "danser", "mains"],
+        "en": ["macarena", "dance", "hands"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "retro"]
+    },
+    {
+      "id": "gda-party-016",
+      "action": {
+        "fr": "Sois une Formule 1 qui rentre au stand : freinage, changement de pneus, redémarrage",
+        "en": "Be a Formula 1 car pulling into the pit: screech in, tire change, zoom out"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["vehicles", "sports"]
+    },
+    {
+      "id": "gda-party-017",
+      "action": {
+        "fr": "Sois un super-héros dont les pouvoirs partent en vrille à chaque tentative",
+        "en": "Be a superhero whose powers misfire every single time"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["heroes", "fail"]
+    },
+    {
+      "id": "gda-party-018",
+      "action": {
+        "fr": "Vogue comme dans un clip des années 90 : trois poses, zéro hésitation",
+        "en": "Vogue like a 90s music video: three poses, zero hesitation"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "retro"]
+    },
+    {
+      "id": "gda-party-019",
+      "action": {
+        "fr": "Sois le serveur du restaurant et prends la commande de chaque joueur",
+        "en": "Be the restaurant waiter and take every player's order"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["serveur", "commande", "menu"],
+        "en": ["waiter", "order", "menu"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["jobs", "talking"]
+    },
+    {
+      "id": "gda-party-020",
+      "action": {
+        "fr": "Sois un barista qui prépare la commande de café la plus compliquée du monde",
+        "en": "Be a barista crafting the world's most complicated coffee order"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["jobs", "food"]
+    },
+    {
+      "id": "gda-party-021",
+      "action": {
+        "fr": "Sois un canard qui se dispute un bout de pain avec des pigeons",
+        "en": "Be a duck fighting pigeons over a piece of bread"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["animals", "drama"]
+    },
+    {
+      "id": "gda-party-022",
+      "action": {
+        "fr": "Tiens une conférence de presse pour annoncer ta retraite officielle de la vaisselle",
+        "en": "Hold a press conference announcing your official retirement from doing the dishes"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["talking", "everyday"]
+    },
+    {
+      "id": "gda-party-023",
+      "action": {
+        "fr": "Prends la pose du discobole grec, prêt à lancer ton frisbee antique",
+        "en": "Strike the Greek discus-thrower pose, ready to launch your ancient frisbee"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["art", "sports"]
+    },
+    {
+      "id": "gda-party-024",
+      "action": {
+        "fr": "Fais un tour de magie pour faire disparaître une cuillère",
+        "en": "Perform a magic trick that makes a spoon disappear"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["magie", "cuillère", "disparaître"],
+        "en": ["magic", "spoon", "disappear"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["magic", "silly"]
+    },
+    {
+      "id": "gda-party-025",
+      "action": {
+        "fr": "Reçois ton Oscar : choc, larmes, remerciements muets et baisers à la foule",
+        "en": "Accept your Oscar: gasp, cry, silent thank-yous and kisses to the crowd"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["drama", "awards"]
+    },
+    {
+      "id": "gda-party-026",
+      "action": {
+        "fr": "Sois une fusée au décollage : compte à rebours depuis dix, allumage, décollage",
+        "en": "Be a rocket launch: countdown from ten, ignition, liftoff"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["space", "drama"]
+    },
+    {
+      "id": "gda-party-027",
+      "action": {
+        "fr": "Monte sur un podium en coussins et remets-toi la médaille d'or à toi-même",
+        "en": "Step onto a cushion podium and award yourself the gold medal"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["sports", "silly"]
+    },
+    {
+      "id": "gda-party-028",
+      "action": {
+        "fr": "Danse un slow très romantique avec un balai",
+        "en": "Slow dance very romantically with a broom"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["danser", "balai", "slow"],
+        "en": ["dance", "broom", "slow"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["dance", "romance"]
+    },
+    {
+      "id": "gda-party-029",
+      "action": {
+        "fr": "Sois un prof d'aérobic zombie qui mène le cours du matin",
+        "en": "Be a zombie aerobics instructor leading the morning class"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["spooky", "sports"]
+    },
+    {
+      "id": "gda-party-030",
+      "action": {
+        "fr": "Tiens la pose de la grue de Karaté Kid sur une jambe",
+        "en": "Hold the Karate Kid crane pose on one leg"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "balance"]
+    },
+    {
+      "id": "gda-party-031",
+      "action": {
+        "fr": "Sois un GPS qui pète un câble en recalculant l'itinéraire d'un conducteur perdu",
+        "en": "Be a GPS having a meltdown while rerouting a hopelessly lost driver"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["tech", "silly"]
+    },
+    {
+      "id": "gda-party-032",
+      "action": {
+        "fr": "Récite l'alphabet à l'envers en partant de G",
+        "en": "Recite the alphabet backwards starting from G"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["alphabet", "lettres", "envers"],
+        "en": ["alphabet", "letters", "backwards"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["brainy", "talking"]
+    },
+    {
+      "id": "gda-party-033",
+      "action": {
+        "fr": "Sois un pingouin en retard pour le bus",
+        "en": "Be a penguin running late for the bus"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "silly"]
+    },
+    {
+      "id": "gda-party-034",
+      "action": {
+        "fr": "Fabrique-toi un chapeau avec un vêtement et défile avec une immense fierté",
+        "en": "Make yourself a hat out of a piece of clothing and model it with enormous pride"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["fashion", "crafts"]
+    },
+    {
+      "id": "gda-party-035",
+      "action": {
+        "fr": "Fais le mur de défense d'un footballeur sur coup franc, grimace comprise",
+        "en": "Form a one-person soccer wall defending a free kick, grimace included"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "pose"]
+    },
+    {
+      "id": "gda-party-036",
+      "action": {
+        "fr": "Brosse les dents d'un lion imaginaire avec beaucoup trop de confiance",
+        "en": "Brush an imaginary lion's teeth with way too much confidence"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["lion", "dents", "brosser"],
+        "en": ["lion", "teeth", "brush"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["animals", "absurd"]
+    },
+    {
+      "id": "gda-party-037",
+      "action": {
+        "fr": "Demande en mariage un objet de la pièce, genou à terre, déclaration comprise",
+        "en": "Propose marriage to an object in the room, down on one knee, full speech included"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": ["romance", "absurd"]
+    },
+    {
+      "id": "gda-party-038",
+      "action": {
+        "fr": "Sois un bébé dinosaure qui sort de son œuf et découvre le monde",
+        "en": "Be a baby dinosaur hatching from its egg and discovering the world"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "cute"]
+    },
+    {
+      "id": "gda-party-039",
+      "action": {
+        "fr": "Défie un joueur à la guerre des pouces et perds avec un maximum de drame",
+        "en": "Challenge a player to a thumb war and lose with maximum drama"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["games", "drama"]
+    },
+    {
+      "id": "gda-party-040",
+      "action": {
+        "fr": "Passe sous une barre de limbo invisible, de plus en plus basse à chaque passage",
+        "en": "Limbo under an invisible bar that gets lower with every pass"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["limbo", "dessous", "pencher"],
+        "en": ["limbo", "under", "lean"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["dance", "physical"]
+    },
+    {
+      "id": "gda-party-041",
+      "action": {
+        "fr": "Joue un solo d'air guitar et termine en fracassant la guitare invisible",
+        "en": "Shred an air-guitar solo and finish by smashing the invisible guitar"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["music", "rock"]
+    },
+    {
+      "id": "gda-party-042",
+      "action": {
+        "fr": "Prends la pose d'agents secrets dos à dos avec le joueur le plus proche",
+        "en": "Strike a back-to-back secret-agent pose with the nearest player"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "social"]
+    },
+    {
+      "id": "gda-party-043",
+      "action": {
+        "fr": "Sois un détecteur de fumée à pile faible qui bipe au pire moment de la soirée",
+        "en": "Be a smoke detector with a dying battery beeping at the worst possible moments"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["tech", "annoying"]
+    },
+    {
+      "id": "gda-party-044",
+      "action": {
+        "fr": "Panique parce que ton téléphone est collé à ta main pour toujours",
+        "en": "Panic because your phone is glued to your hand forever"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["téléphone", "main", "collé"],
+        "en": ["phone", "hand", "stuck"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["tech", "drama"]
+    },
+    {
+      "id": "gda-party-045",
+      "action": {
+        "fr": "Traverse le salon en rampant comme un agent secret en pleine mission",
+        "en": "Commando-crawl across the living room like a secret agent on a mission"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "physical"]
+    },
+    {
+      "id": "gda-party-046",
+      "action": {
+        "fr": "Rejoue la façon dont chaque personne est arrivée à la soirée ce soir",
+        "en": "Reenact exactly how each person arrived at the party tonight"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["social", "observational"]
+    },
+    {
+      "id": "gda-party-047",
+      "action": {
+        "fr": "Fige-toi comme si tu venais de voir un fantôme et tiens la pose cinq secondes",
+        "en": "Freeze like you've just seen a ghost and hold the pose for five seconds"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["spooky", "drama"]
+    },
+    {
+      "id": "gda-party-048",
+      "action": {
+        "fr": "Sois un chef de télé qui goûte son propre plat raté et fait semblant d'adorer",
+        "en": "Be a TV chef tasting their own failed dish and pretending to love it"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["chef", "goûter", "plat"],
+        "en": ["chef", "taste", "dish"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["food", "acting"]
+    },
+    {
+      "id": "gda-party-049",
+      "action": {
+        "fr": "Sois une machine à expresso qui fait mousser le lait d'un cappuccino",
+        "en": "Be an espresso machine steaming the milk for a cappuccino"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["food", "tech"]
+    },
+    {
+      "id": "gda-party-050",
+      "action": {
+        "fr": "Marche sur la Lune en apesanteur, par petits bonds, et plante un drapeau historique",
+        "en": "Walk on the Moon in slow zero-gravity bounces and plant a historic flag"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["space", "slowmo"]
+    },
+    {
+      "id": "gda-party-051",
+      "action": {
+        "fr": "Joue un échange de ping-pong invisible contre toi-même en changeant de côté à chaque coup",
+        "en": "Play an invisible ping-pong rally against yourself, switching sides every shot"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["ping-pong", "raquette", "balle"],
+        "en": ["ping-pong", "paddle", "ball"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "absurd"]
+    },
+    {
+      "id": "gda-party-052",
+      "action": {
+        "fr": "Fais le tour de la pièce en marchant à reculons et en saluant comme la royauté",
+        "en": "Walk a lap of the room backwards while waving like royalty"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["royal", "silly"]
+    },
+    {
+      "id": "gda-party-053",
+      "action": {
+        "fr": "Fais un dab comme si on était encore en 2016",
+        "en": "Hit a dab like it's still 2016"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["retro", "internet"]
+    },
+    {
+      "id": "gda-party-054",
+      "action": {
+        "fr": "Hurle au plafonnier comme un loup hurle à la pleine lune",
+        "en": "Howl at the ceiling lamp like a wolf under a full moon"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "night"]
+    },
+    {
+      "id": "gda-party-055",
+      "action": {
+        "fr": "Gagne au loto puis appelle ton patron pour démissionner avec panache",
+        "en": "Win the lottery, then call your boss to quit in style"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["loto", "gagner", "patron"],
+        "en": ["lottery", "win", "boss"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["drama", "talking"]
+    },
+    {
+      "id": "gda-party-056",
+      "action": {
+        "fr": "Sois un chat qui pousse des objets imaginaires du bord de la table, un par un, en regardant les joueurs droit dans les yeux",
+        "en": "Be a cat pushing imaginary things off the table one by one while making direct eye contact"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "chaos"]
+    },
+    {
+      "id": "gda-party-057",
+      "action": {
+        "fr": "Fais cinq squats en annonçant un fruit différent à chaque remontée",
+        "en": "Do five squats, announcing a different fruit on every rep"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["sports", "absurd"]
+    },
+    {
+      "id": "gda-party-058",
+      "action": {
+        "fr": "Prends la pose de la statue de la Liberté avec une torche invisible",
+        "en": "Pose as the Statue of Liberty holding an invisible torch"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 1,
+      "props": false,
+      "tags": ["travel", "pose"]
+    },
+    {
+      "id": "gda-party-059",
+      "action": {
+        "fr": "Sois un ballon de baudruche qui se dégonfle en zigzaguant à travers la pièce",
+        "en": "Be a balloon slowly deflating and zigzagging across the room"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["party", "silly"]
+    },
+    {
+      "id": "gda-party-060",
+      "action": {
+        "fr": "Fais un compliment à chaque joueur en moins de trente secondes",
+        "en": "Give every single player a compliment in under thirty seconds"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["compliment", "gentil", "beau"],
+        "en": ["compliment", "nice", "sweet"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["social", "wholesome"]
+    },
+    {
+      "id": "gda-party-061",
+      "action": {
+        "fr": "Chevauche un taureau de rodéo invisible et furieux pendant huit longues secondes",
+        "en": "Ride a furious invisible rodeo bull for the full eight seconds"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["western", "physical"]
+    },
+    {
+      "id": "gda-party-062",
+      "action": {
+        "fr": "Prends la pose disco doigt vers le ciel, façon Saturday Night Fever",
+        "en": "Hit the disco finger-to-the-sky pose, full Saturday Night Fever"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["retro", "dance"]
+    },
+    {
+      "id": "gda-party-063",
+      "action": {
+        "fr": "Sois un chat qui recrache une boule de poils au pire moment du dîner",
+        "en": "Be a cat coughing up a hairball at the worst possible moment of dinner"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "gross"]
+    },
+    {
+      "id": "gda-party-064",
+      "action": {
+        "fr": "Envoie dix bisous de diva à la foule en quittant la scène",
+        "en": "Blow ten diva air-kisses to the crowd while leaving the stage"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["bisou", "diva", "scène"],
+        "en": ["kiss", "diva", "stage"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["drama", "sassy"]
+    },
+    {
+      "id": "gda-party-065",
+      "action": {
+        "fr": "Défends ton pique-nique contre une guêpe imaginaire et perds toute ta dignité",
+        "en": "Defend your picnic from an imaginary wasp and lose every shred of dignity"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["outdoor", "fail"]
+    },
+    {
+      "id": "gda-party-066",
+      "action": {
+        "fr": "Rejoue ton but victorieux au ralenti en faisant toi-même les commentaires",
+        "en": "Replay your match-winning goal in slow motion, doing your own commentary"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["sports", "slowmo"]
+    },
+    {
+      "id": "gda-party-067",
+      "action": {
+        "fr": "Tiens la posture de l'arbre en yoga avec un sourire géant d'influenceur",
+        "en": "Hold a yoga tree pose with a giant influencer smile"
+      },
+      "channel": "statues",
+      "channelLabel": { "fr": "STATUES", "en": "FREEZE FRAMES" },
+      "channelRule": {
+        "fr": "Prenez des poses figées. Changement de pose uniquement quand l'acteur frappe dans ses mains !",
+        "en": "Strike frozen poses. You may only change pose when the performer claps!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["internet", "balance"]
+    },
+    {
+      "id": "gda-party-068",
+      "action": {
+        "fr": "Fais une entrée de battle de beatbox et termine en lâchant le micro invisible",
+        "en": "Make a beatbox-battle entrance and finish by dropping the invisible mic"
+      },
+      "channel": "sounds",
+      "channelLabel": { "fr": "BRUITAGES SEULEMENT", "en": "SOUND EFFECTS ONLY" },
+      "channelRule": {
+        "fr": "Aucun mot ! Uniquement des bruitages, des onomatopées et des bzzz.",
+        "en": "No words! Only noises, onomatopoeia and bzzz sounds."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["music", "internet"]
+    },
+    {
+      "id": "gda-party-069",
+      "action": {
+        "fr": "Reste bloqué au ralenti pendant que le reste du monde vit à vitesse normale",
+        "en": "Get stuck in slow motion while the rest of the world runs at normal speed"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["ralenti", "lent", "vitesse"],
+        "en": ["slow", "motion", "speed"]
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": ["absurd", "slowmo"]
+    },
+    {
+      "id": "gda-party-070",
+      "action": {
+        "fr": "Fais toute la routine matinale d'un paresseux, à vitesse de paresseux",
+        "en": "Do a sloth's entire morning routine, at sloth speed"
+      },
+      "channel": "mime",
+      "channelLabel": { "fr": "MIME UNIQUEMENT", "en": "MIME ONLY" },
+      "channelRule": {
+        "fr": "Aucun son, aucun mot, pas de lip-sync. Que des gestes !",
+        "en": "No sounds, no words, no lip-syncing. Gestures only!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "slow"]
+    },
+    {
+      "id": "gda-party-071",
+      "action": {
+        "fr": "Fais ton rire de grand méchant en caressant un chat invisible sur tes genoux",
+        "en": "Do your best evil-villain laugh while stroking an invisible cat on your lap"
+      },
+      "channel": "three-words",
+      "channelLabel": { "fr": "3 MOTS MAX", "en": "3 WORDS MAX" },
+      "channelRule": {
+        "fr": "Chaque aideur a un budget de 3 mots pour TOUTE la manche. Dépensez-les bien !",
+        "en": "Each helper gets a budget of 3 spoken words for the WHOLE round. Spend them wisely!"
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["movies", "drama"]
+    },
+    {
+      "id": "gda-party-072",
+      "action": {
+        "fr": "Traverse le salon en marchant comme un crabe, d'un mur à l'autre",
+        "en": "Crab-walk across the living room, wall to wall"
+      },
+      "channel": "taboo",
+      "channelLabel": { "fr": "MOTS INTERDITS", "en": "FORBIDDEN WORDS" },
+      "channelRule": {
+        "fr": "Parlez librement, mais JAMAIS les 3 mots interdits affichés sur vos écrans !",
+        "en": "Talk freely, but NEVER say the 3 forbidden words on your screens!"
+      },
+      "forbiddenWords": {
+        "fr": ["crabe", "marcher", "pinces"],
+        "en": ["crab", "walk", "sideways"]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": ["animals", "physical"]
+    }
+  ]
+}

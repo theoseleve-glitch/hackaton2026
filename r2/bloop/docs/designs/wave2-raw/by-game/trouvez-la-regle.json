@@ -1,0 +1,237 @@
+{
+  "id": "trouvez-la-regle",
+  "nameFr": "Trouvez la Règle",
+  "nameEn": "Find the Rule",
+  "taglineFr": "Toute la pièce suit une règle secrète. Sauf toi. Démasque-la avant la fin du chrono.",
+  "taglineEn": "The whole room is following a secret rule. Except you. Crack it before the clock runs out.",
+  "template": "NEW:RULE_HUNT",
+  "newTemplateSpec": "RULE_HUNT — inverted social deduction: 1–2 PUBLIC detectives hunt a secret behavioral rule the rest of the room must obey until the clock expires.\n\nWHY A NEW TEMPLATE (per template-architecture §3 honesty test): SECRET_ROLE (impostor) is the nearest neighbor but shares almost nothing at the reducer level. Here roles are PUBLIC (announced at briefing — faithful to the classic parlor game), the secret belongs to the MAJORITY, the main loop is a pausable free-play clock with interrupt-driven sub-phases (accusation tribunal, multiple-choice guess), guessing is a deterministic index compare against pre-computed decoys, and the win condition is clock survival. No clue rotation, no parity math, no simultaneous elimination vote over the whole roster. Forcing this onto SECRET_ROLE params would rewrite its entire reducer; this clears the new-template bar.\n\n1. MODULE IDENTITY\nGameModule id 'rule-hunt', version 1, minPlayers 4, maxPlayers 16. Pure TS per packages/engine/src/types.ts: no Date.now / Math.random; all randomness via createRng(seed); all timing via event `at` timestamps + phaseDurationMs. Reuses the shared kit (emptyPlayerMap, Presence/connectedPlayers, allActed, tally, gameOver). No free text at runtime (nothing for the profanity filter; the guess is a tap).\n\n2. CONFIG (DEFAULT_CONFIG = the catalog params, see params field)\ndetectiveCount 'auto' = 1 detective for 4–7 players, 2 for 8–16 (pure function of roster size, impostor-table style).\n\n3. CONTENT SCHEMA\nContentPack<RuleHuntContent> { locale:'fr'|'en', tone?:'classic'|'spicy', items: RuleItem[] } (runtime packs are single-locale per synthesis §3.1; authoring source is bilingual — the offline pipeline emits sibling -fr/-en packs). RuleItem per contentItemShape. Authoring lints: items.length >= totalRounds (runtime caps totalRounds = min(config.totalRounds, items.length), tracer-style); EXACTLY candidateCount-1 (=7) decoys per item; decoys same category as the rule, mutually distinct under normalizeText, all profanity-scanned offline.\n\n4. init(seed, players, content)\nrng = createRng(seed). items = shuffle(rng, content.data.items). detectiveOrder = shuffle(rng, players). Round-r detectives = next detectiveCount ids from detectiveOrder, consecutive with wraparound (fair rotation; a disconnected scheduled detective is skipped forward at round start). Per round: candidates = shuffle(roundRng forked from seed+round, [item.rule, ...item.decoys]) -> candidateTexts (publishable) + trueCandidateIndex (HIDDEN until reveal). State: phase 'briefing', round 0, scores 0, connected all true, eliminated all false, accusationsLeft = accusationsPerPlayer for followers, teamGuessesLeft = teamGuesses, usedCandidates [], liveRemainingMs = liveMs, liveSeg 0, interruptSeq 0. Effects: analytics 'rule_match_started' { players, detectives }.\n\n5. STATE SHAPE (JSON-safe, null-proto maps; HIDDEN = never in any non-owner view)\nphase: 'briefing'|'live'|'tribunal'|'guess'|'reveal'|'over'; round; config; players: PlayerId[]; connected: Presence; detectiveOrder: PlayerId[] (never in views — future rotation is a spoiler); detectives: PlayerId[] (PUBLIC by design); eliminated: Record<PlayerId,boolean> (PUBLIC; round-local; conviction-only, never via disconnect); itemIndex; candidateTexts: string[]; trueCandidateIndex: number (HIDDEN until reveal — the round's secret, together with the rule text vs detectives); ackRule: Record<PlayerId,boolean>; liveRemainingMs: number (the pause/resume bank); segmentStartedAt: number (`at` of the event that (re)entered live); liveSeg: number; interruptSeq: number; accusationsLeft: Record<PlayerId,number>; teamGuessesLeft: number; usedCandidates: number[] (PUBLIC, greyed in grid); tribunal: null | { accused, accuser, votes: Record<PlayerId,boolean> /* HIDDEN buffer */ }; guess: null | { guesser: PlayerId }; lastTribunal: null | { accused, accuser, guilty, tally:{guilty,notGuilty}, abstained: PlayerId[] } (PUBLIC); lastOutcome: null | { kind:'guessed'|'timeUp', guesser?, pickedIndex?, perfect: boolean, trueIndex, ruleText } (PUBLIC on reveal); infractions: number; scores; endReason: null|'finished'|'roomCollapsed'.\n\n6. ACTIONS (zod at DO boundary; wrong-phase/non-eligible/duplicate actions are inert = same state reference, per the contract's no-op rule)\n{ kind:'ackRule' } (briefing; connected followers) | { kind:'accuse'; target } (live; follower with accusationsLeft>0; target = non-eliminated follower != self) | { kind:'tribunalVote'; guilty: boolean } (tribunal; eligible voters; first vote locks) | { kind:'openGuess' } (live; any detective; teamGuessesLeft>0) | { kind:'pickCandidate'; index } (guess; the opening detective only; 0<=index<candidateCount, index not in usedCandidates).\n\n7. PHASE MACHINE (phase x event; every phase has a deadline behavior — no player can block the room)\n- briefing (briefingMs=20s): ackRule buffered; allActed(connected followers, ackRule) -> live (segmentStartedAt = event.at). deadline -> live regardless.\n- live (phaseDurationMs = state.liveRemainingMs): accuse(valid) -> bank the clock: liveRemainingMs = max(0, liveRemainingMs - (at - segmentStartedAt)); interruptSeq++; accusationsLeft[accuser]--; -> tribunal. openGuess(valid) -> bank clock; interruptSeq++; -> guess. deadline -> reveal kind 'timeUp' (perfect = infractions===0).\n- tribunal (tribunalMs=25s): voters = connected followers, not eliminated, != accused (accuser may vote; detectives NEVER vote — they don't know the rule). First vote locks; allActed(eligible, votes) or deadline -> resolve: guilty iff guiltyCount > notGuiltyCount (tie/zero = not guilty — funny never cruel). Guilty -> eliminated[accused]=true; infractions++. Publish lastTribunal (aggregate tally + abstainers ONLY; per-voter ballots never serialized). Then: if connected non-eliminated followers < 2 OR liveRemainingMs <= 0 -> reveal('timeUp'); else resume live (segmentStartedAt = resolving event.at; liveSeg++).\n- guess (guessMs=20s): pickCandidate from guess.guesser -> teamGuessesLeft--. index === trueCandidateIndex -> reveal kind 'guessed' (detectives win the round early). Else usedCandidates.push(index); resume live (liveSeg++) or reveal('timeUp') if clock empty. deadline -> attempt SPENT with no pick (kills pause-stalling abuse), resume live / reveal if clock empty.\n- reveal (revealMs=12s): inert to actions; scoring applied on entry + analytics 'round_completed' (the spec-§8.6 ad-cue name; the interstitial itself fires off the shell's phaseKey diff, never off analytics). deadline -> next round (round++, rotate detectives, next item, reset round-locals: eliminated, ackRule, accusationsLeft, teamGuessesLeft, usedCandidates, liveRemainingMs=liveMs, liveSeg=0, interruptSeq=0) -> briefing; or if round+1===totalRounds -> over + gameOver(cloned scores).\n- over: untimed (phaseDurationMs null), globally inert.\n- playerLeft (any phase): connected[p]=false ONLY (seat greyed; never eliminates, never rescores). All resolution gates use connected-filtered expected sets, so a disconnect can never stall past a deadline. Accused leaves mid-tribunal -> vote proceeds normally (no auto-conviction). Guesser leaves mid-guess -> resolve as deadline (attempt spent, resume). All detectives disconnected -> round simply runs out its clock (followers cruise). Room-collapse: at any resolution point, connectedPlayers < 3 -> over, endReason 'roomCollapsed', gameOver(current scores). playerRejoined: connected[p]=true; resumes acting if the phase is still open.\n\n8. phaseKey / phaseDurationMs\nKeys: 'briefing:r{r}' | 'live:r{r}:s{seg}' | 'tribunal:r{r}:i{n}' | 'guess:r{r}:i{n}' | 'reveal:r{r}' | 'over'. liveSeg increments on every resume so the shell re-arms the SHORTER remaining duration; interruptSeq makes every tribunal/guess instance unique (synthesis §1.6 uniqueness rule). No secrets in keys. Durations: briefing/tribunal/guess/reveal from config; live = state.liveRemainingMs; over = null. CLOCK DETERMINISM: the pause/resume bank uses only event `at` arithmetic (interrupt.at - segmentStartedAt, clamped >= 0) — fully replay-deterministic; no wall clock ever enters the module.\n\n9. SCORING (exact; applied on reveal entry; accumulates across rounds within the match; shell owns cross-game session XP via placement, synthesis §1.7)\n- kind 'guessed': each detective +4; each surviving (non-eliminated) follower +1; eliminated followers +0.\n- kind 'timeUp' AND perfect (zero convictions — the brief's \"ni enfreinte ni devinée\" full win): each follower +3; each detective +1 (consolation).\n- kind 'timeUp' AND not perfect: each surviving follower +2; each eliminated follower +1 (they took the fall — funny never cruel); each detective +1.\n- Tribunals and wrong guesses move no points directly: their cost is the spent token/attempt and the information they leak.\n- gameOver scores are cloned, never aliasing live state (tracer invariant).\n\n10. VIEW + REDACTION (discriminated union on phase; spectator-safe for unknown viewers)\nBase envelope: round/totalRounds, seats[{id, connected, eliminated, isDetective}] (roles PUBLIC), scores, myRole ('detective'|'follower'|null for unknown viewers), iAmEliminated, myAccusationsLeft, teamGuessesLeft, usedCandidates.\n- myRule (the secret rule text): followers only — INCLUDING eliminated followers (they knew it); null for detectives and unknown viewers until reveal.\n- briefing: acked booleans only.\n- tribunal: accused/accuser public; hasVoted booleans public; myVote = votes[viewer] ?? null (owner echo only); raw votes map never serialized; aggregate tally only after resolution via lastTribunal.\n- guess: candidates (all candidateCount texts, seed-shuffled, byte-identical order for EVERY viewer — no per-viewer reorder side channel) visible to all ROSTER players (followers know the rule anyway; the room sweats with the detective) but OMITTED for unknown viewers (a spectator must not get a 1-in-8 shortlist of the secret); guesser/iAmGuessing public; trueCandidateIndex NEVER serialized pre-reveal.\n- reveal: lastOutcome public (rule text now public to everyone), lastTribunal public.\n- over: standings + endReason.\nRedaction invariants (each -> a test + leakedSecrets audit, impostor-style): (1) pre-reveal, no detective/unknown view contains the rule text EXCEPT undistinguished inside the guess-phase candidates array for roster players (audit trueCandidateIndex instead for grid states); (2) trueCandidateIndex never appears pre-reveal; (3) candidates order identical across viewers; (4) per-voter tribunal ballots never serialized; (5) detectiveOrder never in any view; (6) unknown viewer: myRule=null, candidates omitted, myVote=null. leakedSecrets config: secret = rule text with owners = followers (skip '' / never feed empty values, synthesis §5.9).\n\n11. EFFECTS: analytics 'rule_match_started', 'tribunal_resolved' {guilty}, 'guess_attempted' {correct}, 'round_completed' (reveal entry); gameOver at over. No new Effect or GameEvent types — fits the contract with zero amendments.\n\n12. templateParamsSchema addition (.strict()): RULE_HUNT: { totalRounds 1..8?, briefingMs 10k..30k?, liveMs 120k..300k?, tribunalMs 15k..40k?, guessMs 10k..30k?, revealMs 8k..20k?, detectiveCount 'auto'|1|2?, teamGuesses 1..5?, candidateCount 6|8|10?, accusationsPerPlayer 0..3? }.\n\n13. TEST PLAN (mirrors impostor Appendix B): init determinism (same seed -> same item/detective/candidate order); clock-bank arithmetic incl. interrupt-at-deadline edge + replay equality (engine replay(), identical pack version); tribunal lock/eligibility/tie->not-guilty/deadline-partial-votes; guess correct/wrong/timeout-spends/used-index-inert; scoring matrix (guessed / perfect / not-perfect); presence (disconnect can't stall, accused-leaves, guesser-leaves, all-detectives-leave, room collapse < 3); redaction invariants 1–6.",
+  "players": {
+    "min": 4,
+    "max": 16
+  },
+  "phases": [
+    {
+      "key": "briefing",
+      "durationSec": 20,
+      "description": "Detectives are publicly announced; every follower privately reads the secret rule on their phone and taps OK. Ends early when all connected followers have acked; deadline starts the round regardless (an absent player never blocks)."
+    },
+    {
+      "key": "live",
+      "durationSec": 180,
+      "description": "The main clock — free play in the room: followers obey the rule out loud / physically, detectives observe and interrogate. The clock PAUSES on interrupts (accusation -> tribunal, detective guess -> guess) and resumes with the banked remainder. Deadline -> reveal (followers survive the round)."
+    },
+    {
+      "key": "tribunal",
+      "durationSec": 25,
+      "description": "Interrupt sub-phase: a follower spent their accusation token on a suspected rule-breaker. Eligible followers (connected, not eliminated, not the accused; detectives excluded) secretly vote guilty/not-guilty; first vote locks. Majority of cast votes convicts -> accused eliminated (+1 infraction, a juicy clue for the detectives). Tie, zero votes, or deadline-with-partial-votes -> not guilty. Then resume live."
+    },
+    {
+      "key": "guess",
+      "durationSec": 20,
+      "description": "Interrupt sub-phase: a detective opens the guess grid (8 candidate rules: the true one + 7 pre-computed decoys, seed-shuffled, wrong picks greyed) and locks ONE. Correct -> round ends, detectives win. Wrong -> candidate greyed, team attempt spent, resume live. Deadline -> attempt spent with no pick (anti-stalling), resume live."
+    },
+    {
+      "key": "reveal",
+      "durationSec": 12,
+      "description": "The rule is shown to everyone, with the outcome (guessed / time-up perfect / time-up with infractions) and the exact point awards. Deadline -> next round with rotated detectives and a fresh rule, or over after the last round."
+    },
+    {
+      "key": "over",
+      "durationSec": 0,
+      "description": "Untimed terminal standings (phaseDurationMs returns null); gameOver effect emitted with cloned final scores; shell shows leaderboard, fires the interstitial off the phaseKey transition, offers rematch."
+    }
+  ],
+  "params": {
+    "totalRounds": 3,
+    "briefingMs": 20000,
+    "liveMs": 180000,
+    "tribunalMs": 25000,
+    "guessMs": 20000,
+    "revealMs": 12000,
+    "detectiveCount": "auto",
+    "teamGuesses": 3,
+    "candidateCount": 8,
+    "accusationsPerPlayer": 1
+  },
+  "contentItemShape": "One RuleItem = { id: string (kebab, e.g. \"rh-no-yes\"); category: 'gesture'|'verbal'|'social'; difficulty: 'easy'|'medium'|'hard'; spicy: 0|1|2 (item rating; pack tone gates it — spicy items only in age-gated packs); rule: { fr: string, en: string } (the secret rule, imperative voice, <= 120 chars per locale; shown privately to followers and publicly at reveal); decoys: Array<{ fr: string, en: string }> of EXACTLY candidateCount-1 = 7 entries — offline-AI-generated plausible alternates: same category as the rule, observably-distinct behaviors, mutually distinct under normalizeText, profanity-scanned at authoring. The runtime guess grid is the seeded shuffle of [rule, ...decoys]. All player-visible strings are bilingual {fr,en} at authoring; the offline pipeline splits the source into sibling single-locale FR/EN packs (synthesis §3.1) so the runtime loader stays single-locale.",
+  "sampleItems": [
+    {
+      "id": "rh-ear-touch",
+      "category": "gesture",
+      "difficulty": "easy",
+      "spicy": 0,
+      "rule": {
+        "fr": "Touche ton oreille avant chaque phrase que tu prononces.",
+        "en": "Touch your ear before every sentence you say."
+      },
+      "decoys": [
+        {
+          "fr": "Touche ta tête avant de poser une question.",
+          "en": "Touch your head before asking a question."
+        },
+        {
+          "fr": "Croise les bras dès que quelqu'un te regarde.",
+          "en": "Cross your arms whenever someone looks at you."
+        },
+        {
+          "fr": "Hoche la tête chaque fois qu'on dit ton prénom.",
+          "en": "Nod every time someone says your name."
+        },
+        {
+          "fr": "Cligne des yeux deux fois avant de répondre.",
+          "en": "Blink twice before answering."
+        },
+        {
+          "fr": "Garde toujours une main dans le dos.",
+          "en": "Always keep one hand behind your back."
+        },
+        {
+          "fr": "Pointe du doigt la personne à qui tu parles.",
+          "en": "Point at the person you're talking to."
+        },
+        {
+          "fr": "Souris dès que quelqu'un parle au détective.",
+          "en": "Smile whenever someone talks to the detective."
+        }
+      ]
+    },
+    {
+      "id": "rh-no-yes",
+      "category": "verbal",
+      "difficulty": "medium",
+      "spicy": 0,
+      "rule": {
+        "fr": "Interdiction de dire « oui » — trouve toujours une autre façon d'acquiescer.",
+        "en": "Never say the word \"yes\" — always find another way to agree."
+      },
+      "decoys": [
+        {
+          "fr": "Interdiction de dire « non ».",
+          "en": "Never say the word \"no\"."
+        },
+        {
+          "fr": "Réponds à chaque question par une question.",
+          "en": "Answer every question with a question."
+        },
+        {
+          "fr": "Interdiction de prononcer le prénom des joueurs.",
+          "en": "Never say another player's first name."
+        },
+        {
+          "fr": "Termine chaque phrase par « voilà ».",
+          "en": "End every sentence with \"you know\"."
+        },
+        {
+          "fr": "Interdiction de dire « je ».",
+          "en": "Never say the word \"I\"."
+        },
+        {
+          "fr": "Parle uniquement au passé.",
+          "en": "Only speak in the past tense."
+        },
+        {
+          "fr": "Répète le dernier mot de la personne qui vient de parler.",
+          "en": "Repeat the last word of whoever just spoke."
+        }
+      ]
+    },
+    {
+      "id": "rh-relay-answer",
+      "category": "social",
+      "difficulty": "hard",
+      "spicy": 0,
+      "rule": {
+        "fr": "Ne réponds jamais directement au détective : fais passer ta réponse par un autre joueur.",
+        "en": "Never answer the detective directly: relay your answer through another player."
+      },
+      "decoys": [
+        {
+          "fr": "Ne regarde jamais le détective dans les yeux.",
+          "en": "Never make eye contact with the detective."
+        },
+        {
+          "fr": "Réponds au détective en trois mots maximum.",
+          "en": "Answer the detective in three words or fewer."
+        },
+        {
+          "fr": "Change de place chaque fois que le détective te parle.",
+          "en": "Change seats whenever the detective talks to you."
+        },
+        {
+          "fr": "Glisse la météo dans chaque réponse au détective.",
+          "en": "Work the weather into every answer you give the detective."
+        },
+        {
+          "fr": "Ignore la première question qu'on te pose, ne réponds qu'à la deuxième.",
+          "en": "Ignore the first question you're asked; only answer the second."
+        },
+        {
+          "fr": "Répète la question à voix haute avant d'y répondre.",
+          "en": "Repeat the question out loud before answering it."
+        },
+        {
+          "fr": "Adresse-toi toujours au groupe entier, jamais à une seule personne.",
+          "en": "Always address the whole group, never one single person."
+        }
+      ]
+    }
+  ],
+  "physical": "mixed",
+  "spicyLevel": 0,
+  "needsOfflineAiPipeline": true,
+  "roundSeconds": 270,
+  "roundsDefault": 3,
+  "recommendations": [
+    {
+      "question": "The brief says \"un ou deux joueurs\" — how many detectives?",
+      "recommendation": "Auto-scale: 1 detective for 4–7 players, 2 for 8–16 (param detectiveCount:'auto', overridable to 1|2). Two detectives share one pool of 3 guesses and confer out loud.",
+      "why": "In small rooms a second detective leaves too few followers to behave 'normally'; in big rooms one detective cannot watch 12+ people, and two detectives whispering theories is great party content. Mirrors the impostor role-count table pattern."
+    },
+    {
+      "question": "The brief leaves \"X minutes\" open — how long is the live clock?",
+      "recommendation": "180 seconds default (liveMs param, 120k–300k range). A full round lands ~4.5 min with briefing + ~1 tribunal + ~1 guess + reveal; a 3-round session is ~13 min.",
+      "why": "TikTok-native pacing: 3 minutes is long enough for the rule to surface several times but short enough that followers can hold the act and an eliminated player is never benched for long."
+    },
+    {
+      "question": "The brief implies the app judges whether the rule \"a été devinée\" — how, with no AI at runtime?",
+      "recommendation": "Multiple-choice guess grid: 8 candidates (true rule + 7 pre-generated decoys), deterministic index compare. UI copy encourages the detective to shout the guess out loud before locking it.",
+      "why": "Free-text rule matching is non-deterministic and impossible to score fairly; a decoy grid is deterministic, instant, and dramatic. Decoy generation/scoring is exactly what the offline AI pipeline is for (needsOfflineAiPipeline=true, gated per template-architecture §6)."
+    },
+    {
+      "question": "How are rule infractions detected when the app cannot see the room?",
+      "recommendation": "Follower self-policing: each follower gets 1 accusation token; an accusation opens a 25s tribunal where followers vote guilty/not-guilty; conviction eliminates the breaker.",
+      "why": "The honor system needs a social check, and the tribunal is the game's genius loop: every conviction is a giant clue for the detectives ('what did Léa just do?'), creating the core tension between enforcing the rule and feeding the enemy information."
+    },
+    {
+      "question": "Strict brief reading: does ONE broken rule make the followers lose outright?",
+      "recommendation": "No — soften: a confirmed infraction eliminates the breaker and downgrades the team award (perfect +3 -> survivors +2 / eliminated +1). Only a correct guess ends the round early. The brief's full condition ('ni enfreinte ni devinée') is preserved as the top-prize perfect round.",
+      "why": "Instant team loss on one slip is rage-inducing and anti 'funny never cruel'; the perfect-round bonus keeps the brief's double condition meaningful while keeping every round playable to the end."
+    },
+    {
+      "question": "Do detectives vote in tribunals?",
+      "recommendation": "No. They spectate the tribunal with hasVoted booleans only.",
+      "why": "They don't know the rule, so their vote is pure noise and a griefing vector; watching WHO gets accused and convicted is itself the clue they're owed. Their exclusion is public, which is fine — roles are public by design."
+    },
+    {
+      "question": "Hidden or public detective identity?",
+      "recommendation": "Public, announced at briefing.",
+      "why": "Faithful to the classic parlor game the brief describes ('ils devront la trouver' — the seekers are known); hidden seekers would collapse this into impostor/SECRET_ROLE territory and kill the interrogation dynamic where the room performs AT the detective."
+    },
+    {
+      "question": "Bilingual {fr,en} items vs the platform's single-locale pack rule (synthesis §3.1)?",
+      "recommendation": "Author bilingual source items (as sampled); the offline pipeline emits sibling single-locale packs (trouvez-la-regle-fr / -en); the shell resolves locale at startGame per the pack-family convention (template-architecture §2.7).",
+      "why": "Keeps the runtime loader and init() locale-free as ruled by the synthesis, while authoring/QA stays one bilingual source of truth."
+    }
+  ],
+  "risks": [
+    "New template = real code (Cadence A): reducer + mobile GameScreen + server/mobile registry entries + deploy. It cannot ship as a config of an existing template; schedule it after the four designed games (alongside or after INPUT_GUESS) so it lands on the battle-tested kit.",
+    "Decoy quality is load-bearing: too-obvious decoys make the 8-grid trivial (detectives win on guess #1), near-duplicates make a correct observation unguessable. The offline pipeline must score plausibility AND mutual distinctness, with the human playtest gate before enabled=true (template-architecture §6 stages 1–5).",
+    "Honor-system core: nothing technically stops a follower from silently ignoring the rule; enforcement is purely social (tribunal). Accepted as party-game trust, but the round intro copy must sell 'coûte que coûte' hard.",
+    "Griefing via accusations: capped at 1 token per follower per round and a majority tribunal, but a colluding clique can still eliminate someone unfairly — mitigated by the elimination consolation point (+1) and short rounds; monitor tribunal_resolved analytics for abuse patterns.",
+    "The pause/resume clock (banked liveRemainingMs from event `at` arithmetic) is the trickiest determinism surface in the platform so far: needs explicit replay tests, clamping at the interrupt-vs-deadline race, and the resume-with-tiny-remainder edge.",
+    "Spectator/redaction leak surface: the guess grid CONTAINS the true rule, so it must be omitted for unknown viewers, trueCandidateIndex must never serialize pre-reveal, candidate order must be byte-identical across viewers, and per-voter tribunal ballots must never leave hidden state — each is a leakedSecrets-audited test.",
+    "Eliminated-player boredom: they keep the rule on screen and spectate tribunals but cannot act for the rest of the round (max ~3 min); rounds are short and elimination resets every round, but watch abandon analytics on eliminated players.",
+    "All-detectives-disconnect edge gives followers a free cruise to the round win; acceptable (rare, self-inflicted) but the room-collapse guard (connected < 3 -> over) must cover the worst case."
+  ]
+}
