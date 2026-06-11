@@ -7,34 +7,36 @@ import { layout, spacing } from '../src/theme/spacing';
 import { fontFamily, type } from '../src/theme/typography';
 
 describe('design-system tokens (docs/designs/2026-06-10-mobile-design-system.md §2)', () => {
-  it('palette is hex-for-hex per §2.1', () => {
+  it('palette is hex-for-hex per Brand Book v1.0 §3/§15 (supersedes §2.1)', () => {
     expect(palette).toEqual({
-      blurpleberry: '#5B6CFF', bubblegum: '#FF5DA2', tangerine: '#FF7A3C', sunbeam: '#FFC23C',
-      limeade: '#6FD66B', aqua: '#36C5D0',
-      skyMist: '#8FD3F4', lilac: '#C3A7FF', blush: '#FFB3C9', mint: '#BFE9C8', butter: '#FFE39A',
-      paper: '#FFF9F0', cloud: '#FFFFFF', fog: '#F1ECE3', pebble: '#D9D2C7',
-      slate: '#8A8478', graphite: '#4A4742', ink: '#23201C',
-      midnight: '#10142A', abyss: '#0A0D1F', navySurface: '#1B2147', navyBorder: '#2C3566',
-      success: '#3FB75E', warning: '#FF9F1C', danger: '#F4453E',
-      white: '#FFFFFF', black: '#000000', stickerLine: '#1A1714',
+      ink: '#0F1633', inkCard: '#1E2654', inkInset: '#1A2350',
+      cream: '#FBF6EC', creamAlt: '#F4EAD5', card: '#FFFFFF',
+      coral: '#FF6F61', coralPressed: '#E85D50',
+      yellow: '#FFCC4D', yellowSoft: '#FFE08A',
+      teal: '#4ECDC4', cobalt: '#5B7BFF',
+      lavender: '#B6A8FF', lavenderSoft: '#D6CCFF',
+      pink: '#FF6B9D', pinkSoft: '#FFC2D6',
+      success: '#3DC97A', warning: '#FDC700', danger: '#E5503F',
+      white: '#FFFFFF', black: '#000000',
     });
   });
 
-  it('lightTheme maps semantics exactly per §2.1', () => {
+  it('lightTheme maps semantics exactly per Brand Book v1.0 §3/§15 (supersedes §2.1)', () => {
     expect(lightTheme).toEqual({
-      bg: '#FFF9F0', surface: '#FFFFFF', surfaceAlt: '#F1ECE3', border: '#D9D2C7',
-      textPrimary: '#23201C', textSecondary: '#4A4742', textMuted: '#8A8478', textOnBrand: '#FFFFFF',
-      brand: '#5B6CFF', brandPressed: '#4655E6', accent: '#36C5D0', truth: '#6FD66B',
-      dare: '#FF7A3C', xp: '#FFC23C', success: '#3FB75E', danger: '#F4453E', warning: '#FF9F1C',
-      stickerOutline: '#1A1714', burst: '#FF5DA2',
+      bg: '#FBF6EC', surface: '#FFFFFF', surfaceAlt: '#F4EAD5', border: 'rgba(15, 22, 51, 0.12)',
+      textPrimary: '#0F1633', textSecondary: 'rgba(15, 22, 51, 0.72)',
+      textMuted: 'rgba(15, 22, 51, 0.48)', textOnBrand: '#FFFFFF',
+      brand: '#FF6F61', brandPressed: '#E85D50', accent: '#5B7BFF', truth: '#4ECDC4',
+      dare: '#FF6B9D', xp: '#FFCC4D', success: '#3DC97A', danger: '#E5503F', warning: '#FDC700',
+      stickerOutline: '#0F1633', burst: '#FF6B9D',
     });
   });
 
-  it('darkTheme (Night Pop Lite, reserved) keeps the §2.1 anchors', () => {
-    expect(darkTheme.bg).toBe('#10142A');
-    expect(darkTheme.surface).toBe('#1B2147');
-    expect(darkTheme.brand).toBe('#7B8AFF');
-    expect(darkTheme.textPrimary).toBe('#F4F2FF');
+  it('darkTheme (Night Pop Lite, reserved) keeps the Brand Book v1.0 §3/§15 anchors', () => {
+    expect(darkTheme.bg).toBe('#0F1633');
+    expect(darkTheme.surface).toBe('#1E2654');
+    expect(darkTheme.brand).toBe('#FF6F61');
+    expect(darkTheme.textPrimary).toBe('#FBF6EC');
   });
 
   it('spacing + layout per §2.2', () => {

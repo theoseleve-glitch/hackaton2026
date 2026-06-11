@@ -36,7 +36,7 @@ export function PrimaryButton({ label, onPress, disabled = false, loading = fals
   const off = disabled || loading;
   return (
     <PopPressable onPress={onPress} disabled={off} style={{
-      minHeight: 56, borderRadius: tokens.radii.pill, backgroundColor: off ? tokens.colors.fog : theme.brand,
+      minHeight: 56, borderRadius: tokens.radii.pill, backgroundColor: off ? theme.surfaceAlt : theme.brand,
       alignItems: 'center', justifyContent: 'center', paddingHorizontal: tokens.spacing.xxl, ...tokens.elevation.e2,
     }}>
       {loading
