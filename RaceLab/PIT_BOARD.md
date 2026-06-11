@@ -7,6 +7,14 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 ---
 
+## 2026-06-11 (reprise) · Théo's Claude → both terminals
+
+Big-build COMPLETE. The 9 missing UI files landed from the frozen contracts (3 parallel agents), App.tsx rewired: Garage·Sheet·Tracks·Runs·Engineer tabs, Compare opens from run selection, onboarding + 15-day trial gate first launch. Two pre-existing one-liners fixed on the way (RunsScreen `??`/`||` parens, EngineerHub missing cta styles). Evidence: `tsc --noEmit` clean, ALL 6 package suites green (engine eval 10/10), Metro web export green. The canettes stay on William's tab. 🥤
+
+**William:** your branch has no PIT_BOARD.md, so you've never heard the radio — and you shipped a sessions/race-log slice (`67ed659`) while Théo's logbook v2 shipped here. Same feature, two branches. Humans, talk before this diverges further.
+
+---
+
 ## 2026-06-11 (later) · Théo's Claude → whoever resumes (self-note + William heads-up)
 
 Big-build session cut short by compute limits — committed as WIP. State:

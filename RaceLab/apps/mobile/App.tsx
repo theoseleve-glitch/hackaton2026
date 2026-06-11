@@ -1,37 +1,58 @@
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { GarageScreen } from "./src/screens/GarageScreen";
-import { SheetEditorScreen } from "./src/screens/SheetEditorScreen";
-import { EngineerScreen } from "./src/screens/EngineerScreen";
+import { SheetScreen } from "./src/screens/SheetScreen";
+import { TracksScreen } from "./src/screens/TracksScreen";
 import { RunsScreen } from "./src/screens/RunsScreen";
+import { EngineerHubScreen } from "./src/screens/EngineerHubScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
-import { useSheets } from "./src/store";
+import { OnboardingScreen } from "./src/screens/OnboardingScreen";
+import { TrialBanner } from "./src/components/TrialBanner";
+import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
-import { useCarProfile } from "./src/carstore";
+import { useTracks } from "./src/trackstore";
+import { useReports } from "./src/reportstore";
+import { trialDaysLeft, useAccount } from "./src/accountstore";
 import { colors } from "./src/theme";
 
-type Tab = "garage" | "sheet" | "runs" | "compare" | "engineer";
+type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer";
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: "garage", label: "Garage", icon: "🏠" },
   { id: "sheet", label: "Sheet", icon: "📋" },
+  { id: "tracks", label: "Tracks", icon: "🗺️" },
   { id: "runs", label: "Runs", icon: "🏁" },
-  { id: "compare", label: "Compare", icon: "⚖️" },
   { id: "engineer", label: "Engineer", icon: "🔧" },
 ];
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("garage");
-  const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
+  // cross-tab intents: garage → sheet (focus a car), runs → engineer (report
+  // for a run), runs → compare (overlay, not a tab — D28 made Compare a verb)
+  const [sheetFocusCarId, setSheetFocusCarId] = useState<string | undefined>();
   const [runsStartInForm, setRunsStartInForm] = useState(false);
-  const { state, update } = useSheets();
-  const { logbook, updateLogbook } = useLogbook();
-  const { profile, setProfile } = useCarProfile();
+  const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
+  const [engineerRunId, setEngineerRunId] = useState<string | undefined>();
 
-  if (!state || !logbook) {
+  const { garage, updateGarage } = useGarage();
+  const { logbook, updateLogbook } = useLogbook();
+  const { tracks, updateTracks } = useTracks();
+  const { reports, addReport } = useReports();
+  const { account, completeOnboarding } = useAccount();
+
+  if (!garage || !logbook || !tracks || !reports || !account) {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
         <ActivityIndicator color={colors.accent} />
+      </SafeAreaView>
+    );
+  }
+
+  if (!account.onboarded) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
+        <OnboardingScreen onDone={(profile) => completeOnboarding(profile, new Date().toISOString())} />
       </SafeAreaView>
     );
   }
@@ -43,48 +64,74 @@ export default function App() {
         <Text style={styles.logo}>
           Race<Text style={{ color: colors.accent }}>Lab</Text>
         </Text>
-        <Text style={styles.headerSub}>MP11 MVP · offline · no API</Text>
+        <Text style={styles.headerSub}>pit-side · offline · no API</Text>
       </View>
+      <TrialBanner daysLeft={trialDaysLeft(account, new Date().toISOString())} />
 
       <View style={styles.body}>
-        {tab === "garage" && (
-          <GarageScreen
-            sheets={state}
-            logbook={logbook}
-            profile={profile}
-            setProfile={setProfile}
-            onOpenSheet={() => setTab("sheet")}
-            onAskEngineer={() => setTab("engineer")}
-            onLogRun={() => {
-              setRunsStartInForm(true);
-              setTab("runs");
-            }}
-          />
-        )}
-        {tab === "sheet" && <SheetEditorScreen state={state} update={update} />}
-        {tab === "runs" && (
-          <RunsScreen
-            key={`runs-${runsStartInForm}`}
-            sheets={state}
-            logbook={logbook}
-            updateLogbook={updateLogbook}
-            startInForm={runsStartInForm}
-            onCompare={(a, b) => {
-              setComparePair({ a, b });
-              setTab("compare");
-            }}
-          />
-        )}
-        {tab === "compare" && (
+        {comparePair ? (
           <CompareScreen
-            key={comparePair ? `${comparePair.a}:${comparePair.b}` : "default"}
-            sheets={state}
+            key={`${comparePair.a}:${comparePair.b}`}
             logbook={logbook}
-            initialA={comparePair?.a}
-            initialB={comparePair?.b}
+            aId={comparePair.a}
+            bId={comparePair.b}
+            onClose={() => setComparePair(null)}
           />
+        ) : (
+          <>
+            {tab === "garage" && (
+              <GarageScreen
+                garage={garage}
+                updateGarage={updateGarage}
+                logbook={logbook}
+                onOpenSheet={(carId) => {
+                  setSheetFocusCarId(carId);
+                  setTab("sheet");
+                }}
+                onLogRun={() => {
+                  setRunsStartInForm(true);
+                  setTab("runs");
+                }}
+                onAskEngineer={() => setTab("engineer")}
+              />
+            )}
+            {tab === "sheet" && (
+              <SheetScreen
+                garage={garage}
+                focusCarId={sheetFocusCarId}
+                onClearFocus={() => setSheetFocusCarId(undefined)}
+              />
+            )}
+            {tab === "tracks" && <TracksScreen tracks={tracks} updateTracks={updateTracks} />}
+            {tab === "runs" && (
+              <RunsScreen
+                key={`runs-${runsStartInForm}`}
+                logbook={logbook}
+                updateLogbook={updateLogbook}
+                garage={garage}
+                updateGarage={updateGarage}
+                tracks={tracks}
+                updateTracks={updateTracks}
+                startInForm={runsStartInForm}
+                onEngineer={(runId) => {
+                  setEngineerRunId(runId);
+                  setTab("engineer");
+                }}
+                onCompare={(a, b) => setComparePair({ a, b })}
+              />
+            )}
+            {tab === "engineer" && (
+              <EngineerHubScreen
+                logbook={logbook}
+                garage={garage}
+                tracks={tracks}
+                reports={reports.reports}
+                addReport={addReport}
+                requestRunId={engineerRunId}
+              />
+            )}
+          </>
         )}
-        {tab === "engineer" && <EngineerScreen setup={state.draft} logbook={logbook} />}
       </View>
 
       <View style={styles.tabbar}>
@@ -93,7 +140,11 @@ export default function App() {
             key={t.id}
             style={styles.tab}
             onPress={() => {
-              setRunsStartInForm(false); // direct tab entry always lands on the list
+              // direct tab entry resets cross-tab intents: runs lands on the
+              // list, engineer doesn't re-trigger a report, compare closes
+              setRunsStartInForm(false);
+              setEngineerRunId(undefined);
+              setComparePair(null);
               setTab(t.id);
             }}
           >

@@ -347,7 +347,7 @@ function NewSetupPopup({
     const { state, saved } = sheetsMod.saveVersion(renamed, new Date().toISOString());
     const versionId = saved?.id ?? state.draft_base_id;
     await AsyncStorage.setItem(key, serialize(state)).catch(() => {});
-    onCreated(versionId, saved?.name ?? name.trim() || "New setup");
+    onCreated(versionId, saved?.name ?? (name.trim() || "New setup"));
   };
 
   return (

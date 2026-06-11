@@ -446,6 +446,14 @@ const styles = StyleSheet.create({
   },
   back: { color: colors.accent, fontSize: 14, fontWeight: "700" },
   headerTitle: { color: colors.text, fontSize: 15, fontWeight: "800", flex: 1 },
+  cta: {
+    backgroundColor: colors.accent,
+    borderRadius: radius.md,
+    paddingVertical: 12,
+    alignItems: "center",
+    marginTop: 16,
+  },
+  ctaText: { color: "#fff", fontWeight: "800", fontSize: 14 },
   fieldLabel: { color: colors.sub, fontSize: 12, marginTop: 12, marginBottom: 4 },
   input: {
     backgroundColor: colors.card,
