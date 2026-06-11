@@ -53,9 +53,22 @@ export function GarageScreen({
     if (!result.canceled && result.assets[0]) setProfile({ photo_uri: result.assets[0].uri });
   };
 
+  const [showQueue, setShowQueue] = useState(false);
+
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
-      <Text style={styles.h1}>Garage</Text>
+      <View style={styles.headerRow}>
+        <Text style={styles.h1}>Garage</Text>
+        <Pressable style={styles.addBtn} onPress={() => setShowQueue((v) => !v)}>
+          <Text style={styles.addBtnText}>＋ Add car</Text>
+        </Pressable>
+      </View>
+      {showQueue && (
+        <Text style={styles.queueHint}>
+          Next chassis in the extraction queue: {UPCOMING_CHASSIS.join(" · ")} — each lands with a
+          KB release (sheet, kit setup, tuning rules).
+        </Text>
+      )}
 
       {/* ——— the car ——— */}
       <View style={styles.card}>
@@ -128,28 +141,12 @@ export function GarageScreen({
             <Stat value={String(stats.runs)} label={`run${stats.runs > 1 ? "s" : ""}`} />
             <Stat value={String(stats.tracks)} label={`track${stats.tracks > 1 ? "s" : ""}`} />
             <Stat
-              value={stats.best_lap_s !== undefined ? `${stats.best_lap_s.toFixed(2)}s` : "—"}
-              label="best lap"
-            />
-            <Stat
               value={stats.better_streak > 0 ? `${stats.better_streak}🔥` : "0"}
               label="better streak"
             />
           </View>
-          {stats.best_lap_setup && (
-            <Text style={styles.odometerNote}>
-              Best lap set on “{stats.best_lap_setup}” @ {stats.best_lap_track}
-            </Text>
-          )}
         </View>
       )}
-
-      {/* ——— next cars ——— */}
-      <View style={[styles.card, styles.cardDim]}>
-        <Text style={styles.addTitle}>＋ Add a car</Text>
-        <Text style={styles.meta}>In the extraction queue: {UPCOMING_CHASSIS.join(" · ")}</Text>
-        <Text style={[styles.meta, { marginTop: 2 }]}>Each lands with a KB release — sheet, kit setup and tuning rules included.</Text>
-      </View>
 
       <Text style={styles.footer}>
         Knowledge base: {KB.rules.length} sourced tuning rules · fully offline · no API (D18)
@@ -229,7 +226,23 @@ function Stat({ value, label }: { value: string; label: string }) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
-  h1: { color: colors.text, fontSize: 28, fontWeight: "800", marginBottom: 16 },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  h1: { color: colors.text, fontSize: 28, fontWeight: "800" },
+  addBtn: {
+    backgroundColor: colors.cardAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 999,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+  },
+  addBtnText: { color: colors.sub, fontSize: 13, fontWeight: "700" },
+  queueHint: { color: colors.sub, fontSize: 12, lineHeight: 17, marginTop: -8, marginBottom: 14 },
   card: {
     backgroundColor: colors.card,
     borderRadius: radius.lg,
@@ -238,7 +251,6 @@ const styles = StyleSheet.create({
     padding: 18,
     marginBottom: 14,
   },
-  cardDim: { opacity: 0.6 },
   cardTitle: {
     color: colors.sub,
     fontSize: 11,
@@ -291,7 +303,5 @@ const styles = StyleSheet.create({
   stat: { alignItems: "center", flex: 1 },
   statValue: { color: colors.text, fontSize: 20, fontWeight: "900" },
   statLabel: { color: colors.sub, fontSize: 11, marginTop: 2 },
-  odometerNote: { color: colors.sub, fontSize: 12, marginTop: 10, fontStyle: "italic" },
-  addTitle: { color: colors.text, fontSize: 15, fontWeight: "700" },
   footer: { color: colors.sub, fontSize: 12, textAlign: "center", marginTop: 6 },
 });
