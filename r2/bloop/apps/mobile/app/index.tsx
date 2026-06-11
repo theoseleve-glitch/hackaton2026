@@ -42,7 +42,7 @@ export default function Home() {
     update({ ...profile, nickname: n });
   };
 
-  const createRoom = async () => {
+  const createRoom = async (gameId?: string) => {
     Keyboard.dismiss();
     commitNickname();
     setCreating(true);
@@ -50,7 +50,7 @@ export default function Home() {
       const res = await fetch(roomsUrl(SERVER_URL), { method: 'POST' });
       if (!res.ok) throw new Error(String(res.status));
       const body = (await res.json()) as { code: string };
-      router.push(`/room/${body.code}/lobby`);
+      router.push(`/room/${body.code}/lobby${gameId !== undefined ? `?game=${gameId}` : ''}`);
     } catch {
       oops("Couldn't reach the bloop server — is wrangler dev running?");
     } finally {
@@ -73,7 +73,7 @@ export default function Home() {
 
           {/* Game carousel hero */}
           <GameCarousel
-            onPlay={() => { void createRoom(); }}
+            onPlay={(id) => { void createRoom(id); }}
             onSoon={(_id) => {
               setSoonMsg('Coming soon 👀');
               setTimeout(() => setSoonMsg(null), 2_000);

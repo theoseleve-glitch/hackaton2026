@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
+import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
+import { isOptionVoteGame } from '../../../src/games/option-vote-view';
 import { asTracerView, secondsLeft } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { useTheme } from '../../../src/theme/useTheme';
@@ -23,6 +25,13 @@ function useNow(active: boolean): number {
 
 export default function Play() {
   const { code } = useLocalSearchParams<{ code: string }>();
+  const { state } = useRoom();
+  // Each branch owns its hooks — never swap render paths mid-component.
+  if (isOptionVoteGame(state.viewGameId)) return <OptionVotePlay code={code ?? ''} />;
+  return <TracerPlay code={code ?? ''} />;
+}
+
+function TracerPlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendVote, leave } = useRoom();
   const tv = asTracerView(state.view);

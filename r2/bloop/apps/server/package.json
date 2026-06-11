@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@bloop/engine": "workspace:*",
+    "@bloop/game-option-vote": "workspace:*",
     "@bloop/game-tracer": "workspace:*",
     "@bloop/kit": "workspace:*",
     "@bloop/protocol": "workspace:*",

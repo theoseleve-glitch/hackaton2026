@@ -31,6 +31,9 @@ interface RedactionAudit {
 const vote = (playerId: string, target: string, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'vote', target }, at });
 
+const ballot = (playerId: string, pick: 'A' | 'B', predict: 'A' | 'B' | null, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'ballot', pick, ...(predict !== null ? { predict } : {}) }, at });
+
 const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['tracer', {
     players: ['p1', 'p2', 'p3'],
@@ -38,6 +41,25 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     // mid-vote-phase: two secret ballots in flight, phase NOT yet advanced
     events: [vote('p1', 'p2', 1_000), vote('p2', 'p3', 2_000)],
     eventsAlt: [vote('p1', 'p3', 1_000), vote('p2', 'p1', 2_000)],
+    actors: ['p1', 'p2'],
+    secrets: () => [],
+  }],
+  ['tu-preferes', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-choose: two atomic {pick, predict} ballots buffered, p3 still expected
+    events: [ballot('p1', 'A', 'A', 1_000), ballot('p2', 'B', 'A', 2_000)],
+    eventsAlt: [ballot('p1', 'B', 'B', 1_000), ballot('p2', 'A', 'B', 2_000)],
+    actors: ['p1', 'p2'],
+    // ballots are structural ('A'/'B' legitimately appear in option labels) — invariance covers them
+    secrets: () => [],
+  }],
+  ['gauche-ou-droite', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-vote: two pick-only ballots buffered, p3 still expected
+    events: [ballot('p1', 'A', null, 1_000), ballot('p2', 'B', null, 2_000)],
+    eventsAlt: [ballot('p1', 'B', null, 1_000), ballot('p2', 'A', null, 2_000)],
     actors: ['p1', 'p2'],
     secrets: () => [],
   }],

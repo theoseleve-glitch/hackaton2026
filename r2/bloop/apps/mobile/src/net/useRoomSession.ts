@@ -13,6 +13,8 @@ export interface RoomSession {
   profile: PlayerProfile | 'missing' | null;
   sendStartGame(gameId: string): void;
   sendVote(target: string): void;
+  /** Generic game action — payload validated server-side by the game's zod schema. */
+  sendAction(payload: unknown): void;
   leave(): void;
 }
 
@@ -73,6 +75,7 @@ export function useRoomSession(code: string): RoomSession {
     state, profile,
     sendStartGame: useCallback((gameId: string) => send({ type: 'startGame', gameId }), [send]),
     sendVote: useCallback((target: string) => send({ type: 'action', payload: { kind: 'vote', target } }), [send]),
+    sendAction: useCallback((payload: unknown) => send({ type: 'action', payload }), [send]),
     leave: useCallback(() => { send({ type: 'leave' }); sockRef.current?.close(); }, [send]),
   };
 }

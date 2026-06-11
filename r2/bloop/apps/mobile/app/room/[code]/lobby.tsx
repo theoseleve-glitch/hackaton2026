@@ -6,6 +6,7 @@ import { PlayerCard } from '../../../src/components/players';
 import { RoomCodeDisplay } from '../../../src/components/room';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { spawnBot } from '../../../src/dev/inAppBot';
+import { asOptionVoteView } from '../../../src/games/option-vote-view';
 import { asTracerView } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { SERVER_URL } from '../../../src/config';
@@ -13,13 +14,22 @@ import { useTheme } from '../../../src/theme/useTheme';
 
 const BOT_CAP = 6;
 
+/** Client mirror of the server registry's playable set + module minPlayers. */
+const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new Map([
+  ['tracer', { label: 'Quick Vote', minPlayers: 2 }],
+  ['tu-preferes', { label: 'Tu Préfères ?', minPlayers: 3 }],
+  ['gauche-ou-droite', { label: 'De gauche ou de droite ?', minPlayers: 3 }],
+]);
+
 export default function Lobby() {
-  const { code } = useLocalSearchParams<{ code: string }>();
+  const { code, game } = useLocalSearchParams<{ code: string; game?: string }>();
   const { tokens } = useTheme();
   const { state, sendStartGame, leave } = useRoom();
   const me = state.players.find((p) => p.id === state.playerId);
   const isHost = me?.isHost === true;
   const connectedCount = state.players.filter((p) => p.connected).length;
+  const startId = game !== undefined && PLAYABLE.has(game) ? game : 'tracer';
+  const startGame = PLAYABLE.get(startId)!;
 
   // Dev bots state
   const [botCount, setBotCount] = useState(0);
@@ -42,11 +52,11 @@ export default function Lobby() {
   // Clean up bots on unmount
   useEffect(() => () => { botCleanupsRef.current.forEach((fn) => fn()); }, []);
 
-  // A live (non-over) tracer view means the game is on → move to the container.
-  const tv = asTracerView(state.view);
+  // A live (non-over) game view means the game is on → move to the container.
+  const livePhase = asTracerView(state.view)?.phase ?? asOptionVoteView(state.view)?.phase ?? null;
   useEffect(() => {
-    if (tv !== null && tv.phase !== 'over') router.replace(`/room/${code}/play`);
-  }, [tv !== null && tv.phase !== 'over']);
+    if (livePhase !== null && livePhase !== 'over') router.replace(`/room/${code}/play`);
+  }, [livePhase !== null && livePhase !== 'over']);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -60,10 +70,12 @@ export default function Lobby() {
         </View>
 
         {isHost
-          ? <PrimaryButton label="Start Game" onPress={() => sendStartGame('tracer')} disabled={connectedCount < 2} />
+          ? <PrimaryButton label={`Start — ${startGame.label}`} onPress={() => sendStartGame(startId)} disabled={connectedCount < startGame.minPlayers} />
           : <AppText role="body" color="textMuted" style={{ textAlign: 'center' }}>Waiting for the host to start… 🫧</AppText>}
-        {isHost && connectedCount < 2 && (
-          <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>Tracer needs at least 2 players — share the code!</AppText>
+        {isHost && connectedCount < startGame.minPlayers && (
+          <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+            {startGame.label} needs at least {startGame.minPlayers} players — share the code!
+          </AppText>
         )}
         {__DEV__ && (
           <SecondaryButton

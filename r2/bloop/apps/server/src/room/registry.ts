@@ -1,6 +1,13 @@
 import type { ContentPack, GameModule } from '@bloop/engine';
+import {
+  createOptionVote,
+  GAUCHE_DROITE_CONFIG,
+  optionVoteActionSchema,
+  TU_PREFERES_CONFIG,
+} from '@bloop/game-option-vote';
 import { tracer, tracerActionSchema } from '@bloop/game-tracer';
 import type { z } from 'zod';
+import { GAUCHE_DROITE_PACK, TU_PREFERES_PACK } from '../content/option-vote-packs.js';
 import { TRACER_PACK } from '../content/tracer-pack.js';
 
 // The registry erases per-game generics; type safety is restored per game by
@@ -18,6 +25,16 @@ export interface GameEntry {
 /** A Map, NOT an object literal: gameId is CLIENT-SUPPLIED — `obj['__proto__']` on a literal would return Object.prototype. */
 const REGISTRY = new Map<string, GameEntry>([
   ['tracer', { module: tracer, actionSchema: tracerActionSchema, content: TRACER_PACK }],
+  ['tu-preferes', {
+    module: createOptionVote('tu-preferes', TU_PREFERES_CONFIG),
+    actionSchema: optionVoteActionSchema,
+    content: TU_PREFERES_PACK,
+  }],
+  ['gauche-ou-droite', {
+    module: createOptionVote('gauche-ou-droite', GAUCHE_DROITE_CONFIG),
+    actionSchema: optionVoteActionSchema,
+    content: GAUCHE_DROITE_PACK,
+  }],
 ]);
 
 export function lookupGame(gameId: string): GameEntry | null {

@@ -1,0 +1,12 @@
+{
+  "name": "@bloop/game-option-vote",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@bloop/engine": "workspace:*",
+    "@bloop/kit": "workspace:*",
+    "zod": "^4.0.0"
+  }
+}

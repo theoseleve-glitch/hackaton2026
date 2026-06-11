@@ -69,6 +69,9 @@ importers:
         specifier: 0.7.4
         version: 0.7.4(@babel/core@7.29.7)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.0))(react@19.2.0)
     devDependencies:
+      '@bloop/game-option-vote':
+        specifier: workspace:*
+        version: link:../../packages/games/option-vote
       '@bloop/game-tracer':
         specifier: workspace:*
         version: link:../../packages/games/tracer
@@ -87,6 +90,9 @@ importers:
       '@bloop/engine':
         specifier: workspace:*
         version: link:../../packages/engine
+      '@bloop/game-option-vote':
+        specifier: workspace:*
+        version: link:../../packages/games/option-vote
       '@bloop/game-tracer':
         specifier: workspace:*
         version: link:../../packages/games/tracer
@@ -123,6 +129,18 @@ importers:
         version: 4.98.0(@cloudflare/workers-types@4.20260610.1)
 
   packages/engine: {}
+
+  packages/games/option-vote:
+    dependencies:
+      '@bloop/engine':
+        specifier: workspace:*
+        version: link:../../engine
+      '@bloop/kit':
+        specifier: workspace:*
+        version: link:../../kit
+      zod:
+        specifier: ^4.0.0
+        version: 4.4.3
 
   packages/games/tracer:
     dependencies:

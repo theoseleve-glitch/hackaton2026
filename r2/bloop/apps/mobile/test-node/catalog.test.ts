@@ -1,9 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { GAME_CATALOG, type GameCard } from '../src/games/catalog';
+import { GAME_CATALOG } from '../src/games/catalog';
 
-describe('GAME_CATALOG', () => {
-  it('has at least 6 entries', () => {
-    expect(GAME_CATALOG.length).toBeGreaterThanOrEqual(6);
+const WAVE2_IDS = [
+  'tu-preferes', 'gauche-ou-droite', 'pires-potes', 'truth-or-dare-2', 'truth-or-drink',
+  'double-jeu', 'quizz-culture-ge', 'cinquante-cinquante', 'jeu-de-la-note',
+  'devine-la-question', 'devine-l-action', 'devine-l-objet', 'mime-inverse',
+  'double-le-mouvement', 'jeu-du-theme', 'trouvez-la-regle', 'loup-garou',
+];
+
+describe('GAME_CATALOG (wave 2)', () => {
+  it('carries all 17 wave-2 games plus tracer', () => {
+    const ids = new Set(GAME_CATALOG.map((g) => g.id));
+    for (const id of WAVE2_IDS) expect(ids.has(id), id).toBe(true);
+    expect(ids.has('tracer')).toBe(true);
+    expect(GAME_CATALOG.length).toBeGreaterThanOrEqual(18);
   });
 
   it('all ids are unique', () => {
@@ -11,10 +21,9 @@ describe('GAME_CATALOG', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('exactly one PLAY badge and it belongs to tracer', () => {
-    const plays = GAME_CATALOG.filter((g) => g.badge === 'PLAY');
-    expect(plays).toHaveLength(1);
-    expect(plays[0]?.id).toBe('tracer');
+  it('PLAY badges match the server registry exactly (tracer + the VOTE@2 pair)', () => {
+    const plays = GAME_CATALOG.filter((g) => g.badge === 'PLAY').map((g) => g.id).sort();
+    expect(plays).toEqual(['gauche-ou-droite', 'tracer', 'tu-preferes']);
   });
 
   it('all colors are 7-char hex strings', () => {
@@ -23,10 +32,28 @@ describe('GAME_CATALOG', () => {
     }
   });
 
-  it('all names and taglines are non-empty strings', () => {
+  it('all names and taglines are non-empty in BOTH languages', () => {
     for (const g of GAME_CATALOG) {
-      expect(g.name.trim().length).toBeGreaterThan(0);
-      expect(g.tagline.trim().length).toBeGreaterThan(0);
+      for (const lang of ['fr', 'en'] as const) {
+        expect(g.name[lang].trim().length, `${g.id} name.${lang}`).toBeGreaterThan(0);
+        expect(g.tagline[lang].trim().length, `${g.id} tagline.${lang}`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('every wave-2 card credits an inspiration source with an https link-out', () => {
+    for (const g of GAME_CATALOG) {
+      if (!WAVE2_IDS.includes(g.id)) continue;
+      expect(g.video, `${g.id} video`).toBeDefined();
+      expect(g.video!.creator.trim().length).toBeGreaterThan(0);
+      expect(g.video!.url).toMatch(/^https:\/\//);
+    }
+  });
+
+  it('thumbnails, when present, are platform-served YouTube thumbnails (never re-hosted)', () => {
+    for (const g of GAME_CATALOG) {
+      if (g.video?.thumbnailUrl === undefined) continue;
+      expect(g.video.thumbnailUrl).toMatch(/^https:\/\/i\.ytimg\.com\/vi\/[A-Za-z0-9_-]{11}\/hqdefault\.jpg$/);
     }
   });
 });
