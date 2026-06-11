@@ -1,24 +1,25 @@
 import { Pressable, View } from 'react-native';
 import type { RoomPlayer } from '@bloop/protocol';
-import { avatarEmoji } from '../avatars';
+import { discColor, initialOf } from '../avatars';
 import { useTheme } from '../theme/useTheme';
 import { AppText } from './ui';
 
 const SIZES = { sm: 32, md: 48, lg: 72, hero: 112 } as const;
 
-/** §3 Avatar: ring semantics — host = sunbeam, "you" = brand; dot = connection. */
-export function Avatar({ avatarId, size = 'md', ring = null, connected }:
-  { avatarId: string; size?: keyof typeof SIZES; ring?: 'host' | 'you' | null; connected?: boolean }) {
+/** Brand Book §5 Avatar: initial on a name-hashed brand-color disc.
+ *  Ring semantics — host = xp (yellow), "you" = brand; dot = connection. */
+export function Avatar({ name, size = 'md', ring = null, connected }:
+  { name: string; size?: keyof typeof SIZES; ring?: 'host' | 'you' | null; connected?: boolean }) {
   const { theme, tokens } = useTheme();
   const d = SIZES[size];
   const ringColor = ring === 'host' ? theme.xp : ring === 'you' ? theme.brand : 'transparent';
   return (
     <View style={{
-      width: d, height: d, borderRadius: tokens.radii.pill, backgroundColor: theme.surfaceAlt,
+      width: d, height: d, borderRadius: tokens.radii.pill, backgroundColor: discColor(name),
       borderWidth: ring === null ? 0 : 3, borderColor: ringColor, alignItems: 'center', justifyContent: 'center',
       opacity: connected === false ? 0.45 : 1,
     }}>
-      <AppText style={{ fontSize: d * 0.52, lineHeight: d * 0.66 }}>{avatarEmoji(avatarId)}</AppText>
+      <AppText style={{ fontSize: d * 0.46, lineHeight: d * 0.6, fontFamily: tokens.fontFamily.display, color: tokens.colors.ink }}>{initialOf(name)}</AppText>
       {connected !== undefined && (
         <View style={{
           position: 'absolute', right: 0, bottom: 0, width: 12, height: 12, borderRadius: 6,
@@ -39,7 +40,7 @@ export function PlayerCard({ player, isYou }: { player: RoomPlayer; isYou: boole
         flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
         borderRadius: tokens.radii.lg, padding: tokens.spacing.md, ...tokens.elevation.e1,
       }}>
-      <Avatar avatarId={player.profile.avatar} ring={player.isHost ? 'host' : isYou ? 'you' : null} connected={player.connected} />
+      <Avatar name={player.profile.nickname} ring={player.isHost ? 'host' : isYou ? 'you' : null} connected={player.connected} />
       <View style={{ flex: 1 }}>
         <AppText role="bodyStrong">{player.profile.nickname}{player.isHost ? ' 👑' : ''}{isYou ? ' (you)' : ''}</AppText>
         <AppText role="caption" color={player.connected ? 'textMuted' : 'danger'}>{player.connected ? 'Online' : 'Reconnecting…'}</AppText>
@@ -62,7 +63,7 @@ export function VoteCard({ player, selected, voted, disabled, onPress }:
         borderWidth: 3, borderColor: selected ? theme.brand : theme.border,
         opacity: disabled && !selected ? 0.6 : 1, ...tokens.elevation.e1,
       }}>
-      <Avatar avatarId={player.profile.avatar} size="md" />
+      <Avatar name={player.profile.nickname} size="md" />
       <AppText role="headline" style={{ flex: 1 }}>{player.profile.nickname}</AppText>
       {voted && <AppText role="headline" color="success">✓</AppText>}
       {selected && <AppText role="headline" color="brand">●</AppText>}

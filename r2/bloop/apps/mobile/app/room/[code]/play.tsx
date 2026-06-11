@@ -78,7 +78,7 @@ export default function Play() {
                 borderWidth: i === 0 && votes > 0 ? 3 : 0, borderColor: theme.xp, ...tokens.elevation.e1,
               }}>
                 <AppText role="titleM" color="textMuted">{i + 1}</AppText>
-                <Avatar avatarId={player(id).profile.avatar} size="md" />
+                <Avatar name={player(id).profile.nickname} size="md" />
                 <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
                 <AppText role="headline" color="brand">{votes} vote{votes === 1 ? '' : 's'}</AppText>
                 <AppText role="caption" color="textMuted">{tv.scores[id] ?? 0} pts</AppText>
@@ -96,7 +96,7 @@ export default function Play() {
                 borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
               }}>
                 <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar avatarId={player(id).profile.avatar} size="md" />
+                <Avatar name={player(id).profile.nickname} size="md" />
                 <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
                 <AppText role="headline" color="xp">{pts} pts</AppText>
               </View>

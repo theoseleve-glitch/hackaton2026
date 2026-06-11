@@ -1,10 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, ScrollView, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { PlayerProfile } from '@bloop/protocol';
-import { AVATARS } from '../src/avatars';
 import { Avatar } from '../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton, ToastHost } from '../src/components/ui';
 import { GameCarousel } from '../src/components/GameCarousel';
@@ -18,7 +17,6 @@ export default function Home() {
   const { theme, tokens } = useTheme();
   const [profile, setProfile] = useState<PlayerProfile | null>(null);
   const [nickDraft, setNickDraft] = useState('');
-  const [pickerOpen, setPickerOpen] = useState(false);
   const [code, setCode] = useState('');
   const [creating, setCreating] = useState(false);
   const [toast, setToast] = useState<SessionToast | null>(null);
@@ -85,27 +83,17 @@ export default function Home() {
             <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>{soonMsg}</AppText>
           )}
 
-          {/* Identity card — the only "onboarding" (§4.2) */}
+          {/* Identity card — the only "onboarding" (§4.2). Brand Book §5: the avatar IS
+              your initial on a name-hashed disc, so it live-updates as you type. */}
           <View style={{ backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding, gap: tokens.spacing.lg, ...tokens.elevation.e1 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.lg }}>
-              <Pressable onPress={() => setPickerOpen((o) => !o)} accessibilityLabel="Change avatar">
-                <Avatar avatarId={profile.avatar} size="lg" ring="you" />
-              </Pressable>
+              <Avatar name={nickDraft.trim().length > 0 ? nickDraft : profile.nickname} size="lg" ring="you" />
               <TextInput
                 value={nickDraft} onChangeText={setNickDraft} onBlur={commitNickname} maxLength={20}
                 placeholder="Your nickname" placeholderTextColor={theme.textMuted}
                 style={{ flex: 1, ...tokens.type.headline, color: theme.textPrimary, borderBottomWidth: 2, borderColor: theme.border, paddingVertical: tokens.spacing.sm }}
               />
             </View>
-            {pickerOpen && (
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm, justifyContent: 'center' }}>
-                {AVATARS.map((a) => (
-                  <Pressable key={a.id} accessibilityLabel={a.label} onPress={() => { update({ ...profile, avatar: a.id }); setPickerOpen(false); }}>
-                    <Avatar avatarId={a.id} size="md" ring={a.id === profile.avatar ? 'you' : null} />
-                  </Pressable>
-                ))}
-              </View>
-            )}
           </View>
 
           {/* Join (primary per 3a brief) */}

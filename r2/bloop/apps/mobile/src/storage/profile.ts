@@ -1,5 +1,5 @@
 import { playerProfileSchema, type PlayerProfile } from '@bloop/protocol';
-import { AVATARS } from '../avatars';
+import { AVATAR_WIRE_VALUE } from '../avatars';
 
 /** Storage seam: AsyncStorage satisfies this; tests pass a Map-backed fake. */
 export interface KV {
@@ -20,11 +20,11 @@ export function normalizeNickname(raw: string): string | null {
   return t.length === 0 ? null : t;
 }
 
-/** §5: first launch = random avatar + fun nickname suggestion (editable). rng injectable for tests. */
+/** §5: first launch = fun nickname suggestion (editable); the avatar derives from the
+ *  name (Brand Book §5) so the wire field is a constant. rng injectable for tests. */
 export function randomProfile(rng: () => number = Math.random): PlayerProfile {
-  const avatar = AVATARS[Math.floor(rng() * AVATARS.length)]!;
   const nickname = NICKNAMES[Math.floor(rng() * NICKNAMES.length)]!;
-  return { nickname, avatar: avatar.id };
+  return { nickname, avatar: AVATAR_WIRE_VALUE };
 }
 
 export async function loadProfile(kv: KV): Promise<PlayerProfile | null> {
