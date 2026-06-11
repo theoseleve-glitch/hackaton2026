@@ -7,6 +7,7 @@ import { RunsScreen } from "./src/screens/RunsScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
 import { useSheets } from "./src/store";
 import { useLogbook } from "./src/logstore";
+import { useCarProfile } from "./src/carstore";
 import { colors } from "./src/theme";
 
 type Tab = "garage" | "sheet" | "runs" | "compare" | "engineer";
@@ -22,8 +23,10 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 export default function App() {
   const [tab, setTab] = useState<Tab>("garage");
   const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
+  const [runsStartInForm, setRunsStartInForm] = useState(false);
   const { state, update } = useSheets();
   const { logbook, updateLogbook } = useLogbook();
+  const { profile, setProfile } = useCarProfile();
 
   if (!state || !logbook) {
     return (
@@ -46,18 +49,26 @@ export default function App() {
       <View style={styles.body}>
         {tab === "garage" && (
           <GarageScreen
-            versionCount={state.versions.length}
-            activeName={state.draft_name}
+            sheets={state}
+            logbook={logbook}
+            profile={profile}
+            setProfile={setProfile}
             onOpenSheet={() => setTab("sheet")}
             onAskEngineer={() => setTab("engineer")}
+            onLogRun={() => {
+              setRunsStartInForm(true);
+              setTab("runs");
+            }}
           />
         )}
         {tab === "sheet" && <SheetEditorScreen state={state} update={update} />}
         {tab === "runs" && (
           <RunsScreen
+            key={`runs-${runsStartInForm}`}
             sheets={state}
             logbook={logbook}
             updateLogbook={updateLogbook}
+            startInForm={runsStartInForm}
             onCompare={(a, b) => {
               setComparePair({ a, b });
               setTab("compare");
@@ -78,7 +89,14 @@ export default function App() {
 
       <View style={styles.tabbar}>
         {TABS.map((t) => (
-          <Pressable key={t.id} style={styles.tab} onPress={() => setTab(t.id)}>
+          <Pressable
+            key={t.id}
+            style={styles.tab}
+            onPress={() => {
+              setRunsStartInForm(false); // direct tab entry always lands on the list
+              setTab(t.id);
+            }}
+          >
             <Text style={[styles.tabIcon, tab === t.id && styles.tabActive]}>{t.icon}</Text>
             <Text style={[styles.tabLabel, tab === t.id && styles.tabActive]}>{t.label}</Text>
           </Pressable>

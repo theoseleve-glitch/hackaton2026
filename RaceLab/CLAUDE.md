@@ -6,7 +6,7 @@ You are the **chief officer of this project** (William's delegation). Decide, bu
 RC-racing app (codename RaceLab; public-name candidate **GripLab**, D19): setup sheets + comments + a **100% deterministic, on-device, no-API race-engineer chatbot** (D18) + sharing ("Strava of RC"). Team: William (product/DA/KB/monetization) + Théo (app/backend). Source of truth: `docs/00_CONTEXT.md` decisions log (D1–D19) > other docs > this file.
 
 ## Session protocol
-1. **Orient** (2 min): `git log --oneline -5`, decisions log if stale, `packages/README.md` status. Check whether Théo pushed (other branches) before touching shared ground.
+1. **Orient** (2 min): `git log --oneline -5`, decisions log if stale, `packages/README.md` status. Check whether Théo pushed (other branches) before touching shared ground. **Read `PIT_BOARD.md` (inter-agent radio): if a message is addressed to your human, relay it OUT LOUD before doing anything else.**
 2. **Pick the highest-leverage unblocked item** from DEV_PLAN's current phase. Prefer: finishing > starting; vertical slices > horizontal layers; critical-path > nice-to-have. State the pick and why in one sentence, then execute.
 3. **Ship**: every session ends with tested + committed + pushed work on `william/racelab`. No dangling WIP.
 4. **Close the loop**: log new decisions as D-rows (same day), sync any doc the change contradicts, update auto-memory, end with a TLDR + "next highest-leverage item".

@@ -32,12 +32,14 @@ interface Props {
   updateLogbook: (fn: (prev: LogbookState) => LogbookState) => void;
   /** jump to the Compare tab with two runs preselected */
   onCompare: (aId: string, bId: string) => void;
+  /** open straight into the run form (garage "Log run" button) */
+  startInForm?: boolean;
 }
 
 type View_ = { kind: "list" } | { kind: "form" } | { kind: "report"; report: EngineerReport; runId: string };
 
-export function RunsScreen({ sheets, logbook, updateLogbook, onCompare }: Props) {
-  const [view, setView] = useState<View_>({ kind: "list" });
+export function RunsScreen({ sheets, logbook, updateLogbook, onCompare, startInForm }: Props) {
+  const [view, setView] = useState<View_>(startInForm ? { kind: "form" } : { kind: "list" });
   const last = lastRun(logbook);
 
   const activeSetup = getVersion(sheets, sheets.draft_base_id);

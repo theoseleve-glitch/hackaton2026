@@ -1,6 +1,7 @@
 import type { SetupValues } from "../../sheets/src/sheets";
 import { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 import { compareRuns } from "./compare";
+import { carStatus, seasonStats } from "./insights";
 import {
   addRun,
   deleteRun,
@@ -109,6 +110,24 @@ const round = deserializeLogbook(raw);
 check("serialize/deserialize round-trips", round.ok && JSON.stringify(round.state) === JSON.stringify(s));
 check("corrupt blob refused, not wiped", deserializeLogbook("{nope").ok === false);
 check("newer format preserved as unknown_format", (() => { const r = deserializeLogbook(JSON.stringify({ format: 99, state: { runs: [] } })); return !r.ok && r.reason === "unknown_format"; })());
+
+// — garage insights (carStatus + seasonStats)
+check("carStatus: empty log → fresh", carStatus(initLogbook()).kind === "fresh");
+check("carStatus: last run rated better → dialed", carStatus(s).kind === "dialed");
+{
+  const fighting = updateRun(s, a2.run.id, { outcome: undefined });
+  const st = carStatus(fighting);
+  check("carStatus: unrated run with symptom → fighting it", st.kind === "fighting" && (st as { symptom: string }).symptom === "understeer");
+  const calm = updateRun(fighting, a2.run.id, { feedback: { tags: [] } });
+  check("carStatus: no symptom, no rating → just ran", carStatus(calm).kind === "ran");
+}
+{
+  const stats = seasonStats(s);
+  check("seasonStats: counts runs and distinct tracks", stats.runs === 2 && stats.tracks === 1);
+  check("seasonStats: best lap + which setup did it", stats.best_lap_s === 33.8 && stats.best_lap_setup === "Softer front");
+  check("seasonStats: better streak counts rated runs from the end", stats.better_streak === 1);
+  check("seasonStats: empty log is all zeros", seasonStats(initLogbook()).runs === 0 && seasonStats(initLogbook()).better_streak === 0);
+}
 
 // — delete
 s = deleteRun(s, a1.run.id);
