@@ -50,7 +50,10 @@ export default function Home() {
       const res = await fetch(roomsUrl(SERVER_URL), { method: 'POST' });
       if (!res.ok) throw new Error(String(res.status));
       const body = (await res.json()) as { code: string };
-      router.push(`/room/${body.code}/lobby${gameId !== undefined ? `?game=${gameId}` : ''}`);
+      router.push({
+        pathname: '/room/[code]/lobby',
+        params: { code: body.code, ...(gameId !== undefined ? { game: gameId } : {}) },
+      });
     } catch {
       oops("Couldn't reach the bloop server — is wrangler dev running?");
     } finally {

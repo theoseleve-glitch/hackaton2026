@@ -53,6 +53,29 @@ export function spawnBot(serverUrl: string, code: string, index: number): () => 
       m['view'] !== null
     ) {
       const view = m['view'] as Record<string, unknown>;
+      // option-vote (tu-preferes / gauche-ou-droite): random pick (+ predict when required)
+      if (
+        view['phase'] === 'choose' &&
+        view['myBallot'] === null &&
+        view['round'] !== votedRound &&
+        playerId !== null
+      ) {
+        votedRound = view['round'] as number;
+        const pick = Math.random() < 0.5 ? 'A' : 'B';
+        const needsPredict = view['scoring'] === 'predict-majority';
+        const predict = Math.random() < 0.5 ? 'A' : 'B';
+        const delay = 800 + Math.random() * 800;
+        setTimeout(() => {
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({
+              type: 'action',
+              payload: { kind: 'ballot', pick, ...(needsPredict ? { predict } : {}) },
+            }));
+          }
+        }, delay);
+        return;
+      }
+
       if (
         view['phase'] === 'vote' &&
         view['myVote'] === null &&
