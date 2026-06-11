@@ -1,7 +1,7 @@
 # Bloop — Mobile Design System & App-Shell Design
 
 **Date:** 2026-06-10
-**Status:** Proposed (feeds Plan 3 implementation directly)
+**Status:** Partially superseded — Brand Book v1.0 (`docs/da/brand/bloop-brand-book-v1.pdf`, 2026-06-11) replaces §2's concrete tokens: fonts are Fredoka + DM Sans (not Baloo 2 + Inter), palette is ink/cream/coral (not blurpleberry), avatars are initial-on-hashed-color-disc (not emoji presets). See `docs/plans/2026-06-11-plan3b-brandbook-retheme.md` for the mapping. The structural content (§3 components, §4 screens, navigation) still applies.
 **Owners:** Théo (+ William)
 **Inputs:** Architecture spec (`2026-06-09-party-game-platform-architecture-design.md`), engine contract (`packages/engine/src/types.ts`), tracer reference game (`packages/games/tracer`), wire protocol (`packages/protocol/src/messages.ts`), moodboards (`docs/da/moodboard-1-aesthetic-reference.png`, `docs/da/moodboard-2-visual-ingredients.png`).
 

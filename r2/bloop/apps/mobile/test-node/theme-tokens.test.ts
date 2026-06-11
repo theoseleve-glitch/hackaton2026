@@ -46,7 +46,7 @@ describe('design-system tokens (docs/designs/2026-06-10-mobile-design-system.md 
     expect(radii).toEqual({ none: 0, sm: 8, md: 14, lg: 20, xl: 28, xxl: 36, pill: 999 });
   });
 
-  it('type scale + font families per §2.4', () => {
+  it('type scale per §2.4; font families per Brand Book v1.0 §4 (supersedes §2.4 Baloo/Inter)', () => {
     expect(fontFamily).toEqual({
       display: 'Fredoka_700Bold', displaySemi: 'Fredoka_600SemiBold',
       ui: 'DMSans_700Bold', body: 'DMSans_400Regular', bodyMedium: 'DMSans_500Medium',
