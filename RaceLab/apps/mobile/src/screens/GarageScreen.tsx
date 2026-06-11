@@ -1,198 +1,157 @@
-import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { carStatus, lastRun, seasonStats } from "../../../../packages/logbook/src";
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { carSubtitle, sheetProfile, updateCar } from "../../../../packages/garage/src";
+import type { CarEntity, GarageState } from "../../../../packages/garage/src";
+import { addCar } from "../../../../packages/garage/src";
+import { carStatus, seasonStats } from "../../../../packages/logbook/src";
 import type { CarStatus, LogbookState } from "../../../../packages/logbook/src";
-import { diffVsKit, getVersion } from "../../../../packages/sheets/src";
-import type { SheetsState } from "../../../../packages/sheets/src";
-import type { CarProfile } from "../carstore";
-import { KB, MP11 } from "../kb";
+import { NewCarForm } from "../components/NewCarForm";
 import { colors, radius } from "../theme";
 
 /**
- * The garage is a pit wall, not a list (D22: the log animates everything).
- * Car mood, what's on the car right now, the season odometer — all derived
- * from sheets + logbook state already on the device.
+ * The garage is a pit wall (D22) — now multi-car (D26). Every car card
+ * carries its identity (typology badges drive the sheet labels) and its mood
+ * derived from ITS runs. The season odometer stays global.
  */
 
 interface Props {
-  sheets: SheetsState;
+  garage: GarageState;
+  updateGarage: (fn: (prev: GarageState) => GarageState) => void;
   logbook: LogbookState;
-  profile: CarProfile;
-  setProfile: (patch: Partial<CarProfile>) => void;
-  onOpenSheet: () => void;
+  onOpenSheet: (carId: string) => void;
+  onLogRun: (carId: string) => void;
   onAskEngineer: () => void;
-  onLogRun: () => void;
 }
 
-const UPCOMING_CHASSIS = ["Associated RC8B4", "TLR 8IGHT-X", "Tekno NB48 2.1"];
-
-export function GarageScreen({
-  sheets,
-  logbook,
-  profile,
-  setProfile,
-  onOpenSheet,
-  onAskEngineer,
-  onLogRun,
-}: Props) {
-  const status = carStatus(logbook);
+export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLogRun, onAskEngineer }: Props) {
+  const [modal, setModal] = useState<null | "new" | { edit: CarEntity }>(null);
   const stats = seasonStats(logbook);
-  const last = lastRun(logbook);
-  const kitDrift = diffVsKit(sheets).length;
-  const active = getVersion(sheets, sheets.draft_base_id);
-  const activeName = active?.locked ? sheets.draft_name : (active?.name ?? sheets.draft_name);
-
-  const pickPhoto = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      allowsEditing: true,
-      aspect: [16, 9],
-      quality: 0.7,
-    });
-    if (!result.canceled && result.assets[0]) setProfile({ photo_uri: result.assets[0].uri });
-  };
-
-  const [showQueue, setShowQueue] = useState(false);
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
         <Text style={styles.h1}>Garage</Text>
-        <Pressable style={styles.addBtn} onPress={() => setShowQueue((v) => !v)}>
+        <Pressable style={styles.addBtn} onPress={() => setModal("new")}>
           <Text style={styles.addBtnText}>＋ Add car</Text>
         </Pressable>
       </View>
-      {showQueue && (
-        <Text style={styles.queueHint}>
-          Next chassis in the extraction queue: {UPCOMING_CHASSIS.join(" · ")} — each lands with a
-          KB release (sheet, kit setup, tuning rules).
-        </Text>
-      )}
 
-      {/* ——— the car ——— */}
-      <View style={styles.card}>
-        <Pressable onPress={pickPhoto}>
-          {profile.photo_uri ? (
-            <Image source={{ uri: profile.photo_uri }} style={styles.photo} />
-          ) : (
-            <View style={[styles.photo, styles.photoEmpty]}>
-              <Text style={styles.photoEmptyText}>📷 add a photo of your car</Text>
-            </View>
-          )}
-        </Pressable>
-
-        <Text style={styles.brand}>{MP11.brand.toUpperCase()}</Text>
-        <CarName
-          name={profile.name ?? MP11.model}
-          onRename={(name) => setProfile({ name })}
-        />
-        <Text style={styles.meta}>1/8 nitro buggy · {MP11.model}</Text>
-
-        <MoodLine status={status} />
-
-        <View style={styles.row}>
-          <Pressable style={[styles.btn, styles.btnPrimary]} onPress={onLogRun}>
-            <Text style={styles.btnPrimaryText}>🏁 Log run</Text>
-          </Pressable>
-          <Pressable style={[styles.btn, styles.btnGhost]} onPress={onOpenSheet}>
-            <Text style={styles.btnGhostText}>Setup sheet</Text>
-          </Pressable>
-          <Pressable style={[styles.btn, styles.btnGhost]} onPress={onAskEngineer}>
-            <Text style={styles.btnGhostText}>Engineer</Text>
-          </Pressable>
-        </View>
-      </View>
-
-      {/* ——— on the car right now ——— */}
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>On the car right now</Text>
-        <View style={styles.fact}>
-          <Text style={styles.factLabel}>Setup</Text>
-          <Text style={styles.factValue}>“{activeName}”</Text>
-        </View>
-        <View style={styles.fact}>
-          <Text style={styles.factLabel}>vs kit</Text>
-          <Text style={styles.factValue}>
-            {kitDrift === 0 ? "factory kit settings" : `${kitDrift} setting${kitDrift > 1 ? "s" : ""} off kit`}
+      {garage.cars.length === 0 && (
+        <View style={styles.card}>
+          <Text style={styles.emptyTitle}>No car yet</Text>
+          <Text style={styles.meta}>
+            Add your first car — its typology (nitro/EP, scale, brand) customizes the setup sheet
+            labels, and its kit baseline comes preloaded when we have the chassis template.
           </Text>
         </View>
-        {last?.tyres && (
-          <View style={styles.fact}>
-            <Text style={styles.factLabel}>Tyres</Text>
-            <Text style={styles.factValue}>
-              {[last.tyres.compound, last.tyres.wear, last.tyres.run_count !== undefined ? `${last.tyres.run_count} runs` : undefined]
-                .filter(Boolean)
-                .join(" · ") || "—"}
-            </Text>
-          </View>
-        )}
-        <View style={styles.fact}>
-          <Text style={styles.factLabel}>Versions</Text>
-          <Text style={styles.factValue}>{sheets.versions.length} saved</Text>
-        </View>
-      </View>
+      )}
 
-      {/* ——— the odometer ——— */}
+      {garage.cars.map((car) => (
+        <CarCard
+          key={car.id}
+          car={car}
+          logbook={logbook}
+          onEdit={() => setModal({ edit: car })}
+          onOpenSheet={() => onOpenSheet(car.id)}
+          onLogRun={() => onLogRun(car.id)}
+          onAskEngineer={onAskEngineer}
+        />
+      ))}
+
       {stats.runs > 0 && (
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Season</Text>
           <View style={styles.odometer}>
             <Stat value={String(stats.runs)} label={`run${stats.runs > 1 ? "s" : ""}`} />
             <Stat value={String(stats.tracks)} label={`track${stats.tracks > 1 ? "s" : ""}`} />
-            <Stat
-              value={stats.better_streak > 0 ? `${stats.better_streak}🔥` : "0"}
-              label="better streak"
-            />
+            <Stat value={stats.better_streak > 0 ? `${stats.better_streak}🔥` : "0"} label="better streak" />
           </View>
         </View>
       )}
 
-      <Text style={styles.footer}>
-        Knowledge base: {KB.rules.length} sourced tuning rules · fully offline · no API (D18)
-      </Text>
+      <Modal visible={modal !== null} animationType="slide" onRequestClose={() => setModal(null)}>
+        <NewCarForm
+          initial={modal !== null && modal !== "new" ? modal.edit : undefined}
+          onCancel={() => setModal(null)}
+          onSave={(car) => {
+            if (modal !== null && modal !== "new") {
+              updateGarage((prev) => updateCar(prev, modal.edit.id, car));
+            } else {
+              updateGarage((prev) => addCar(prev, { ...car, created_at: new Date().toISOString() } as Omit<CarEntity, "id">, new Date().toISOString()).state);
+            }
+            setModal(null);
+          }}
+        />
+      </Modal>
     </ScrollView>
   );
 }
 
-/** Tap the name to rename the car — ownership is the hook. */
-function CarName({ name, onRename }: { name: string; onRename: (n: string) => void }) {
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState(name);
-
-  if (!editing) {
-    return (
-      <Pressable onPress={() => { setDraft(name); setEditing(true); }}>
-        <Text style={styles.model}>
-          {name} <Text style={styles.editHint}>✎</Text>
-        </Text>
-      </Pressable>
-    );
-  }
-  const done = () => {
-    const trimmed = draft.trim();
-    if (trimmed) onRename(trimmed);
-    setEditing(false);
+function CarCard({
+  car,
+  logbook,
+  onEdit,
+  onOpenSheet,
+  onLogRun,
+  onAskEngineer,
+}: {
+  car: CarEntity;
+  logbook: LogbookState;
+  onEdit: () => void;
+  onOpenSheet: () => void;
+  onLogRun: () => void;
+  onAskEngineer: () => void;
+}) {
+  // this car's runs only (legacy runs without car_id belong to the legacy car)
+  const carRuns = {
+    runs: logbook.runs.filter((r) => r.car_id === car.id || (!r.car_id && car.id === "car-legacy-mp11")),
   };
+  const status = carStatus(carRuns);
+  const profile = sheetProfile(car);
+
   return (
-    <TextInput
-      style={[styles.model, styles.nameInput]}
-      value={draft}
-      onChangeText={setDraft}
-      onSubmitEditing={done}
-      onBlur={done}
-      autoFocus
-      returnKeyType="done"
-    />
+    <View style={styles.card}>
+      {car.photo_uri && <Image source={{ uri: car.photo_uri }} style={styles.photo} />}
+      <View style={styles.carHead}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.brand}>{car.brand.toUpperCase()}</Text>
+          <Text style={styles.model}>{car.name}</Text>
+          <Text style={styles.meta}>{carSubtitle(car)}</Text>
+        </View>
+        <Pressable onPress={onEdit} hitSlop={10}>
+          <Text style={styles.edit}>✎</Text>
+        </Pressable>
+      </View>
+      <View style={styles.badges}>
+        {profile.badges.map((b) => (
+          <Text key={b} style={styles.badge}>
+            {b}
+          </Text>
+        ))}
+      </View>
+
+      <MoodLine status={status} />
+
+      <View style={styles.row}>
+        <Pressable style={[styles.btn, styles.btnPrimary]} onPress={onLogRun}>
+          <Text style={styles.btnPrimaryText}>🏁 Log run</Text>
+        </Pressable>
+        <Pressable style={[styles.btn, styles.btnGhost]} onPress={onOpenSheet}>
+          <Text style={styles.btnGhostText}>Setup sheet</Text>
+        </Pressable>
+        <Pressable style={[styles.btn, styles.btnGhost]} onPress={onAskEngineer}>
+          <Text style={styles.btnGhostText}>Engineer</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 }
 
-/** The car's mood — deterministic words from carStatus facts. */
 function MoodLine({ status }: { status: CarStatus }) {
   const txt = (() => {
     switch (status.kind) {
       case "fresh":
-        return { icon: "🔧", text: "Fresh build — log your first run and I'll start learning this car.", tone: colors.sub };
+        return { icon: "🔧", text: "Fresh build — log a run and I'll start learning this car.", tone: colors.sub };
       case "dialed":
         return { icon: "✅", text: `Dialed — last change rated better @ ${status.track}.`, tone: colors.good };
       case "regressed":
@@ -200,7 +159,7 @@ function MoodLine({ status }: { status: CarStatus }) {
       case "fighting":
         return {
           icon: "⚠️",
-          text: `Fighting ${status.symptom.replace(/_/g, " ")} since ${status.date.slice(5, 10)} @ ${status.track} — ask the engineer.`,
+          text: `Fighting ${status.symptom.replace(/_/g, " ")} since ${status.date.slice(5, 10)} @ ${status.track}.`,
           tone: colors.warn,
         };
       case "ran":
@@ -226,12 +185,7 @@ function Stat({ value, label }: { value: string; label: string }) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
-  headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
+  headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 16 },
   h1: { color: colors.text, fontSize: 28, fontWeight: "800" },
   addBtn: {
     backgroundColor: colors.cardAlt,
@@ -242,7 +196,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   addBtnText: { color: colors.sub, fontSize: 13, fontWeight: "700" },
-  queueHint: { color: colors.sub, fontSize: 12, lineHeight: 17, marginTop: -8, marginBottom: 14 },
   card: {
     backgroundColor: colors.card,
     borderRadius: radius.lg,
@@ -259,21 +212,25 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     marginBottom: 10,
   },
-  photo: { width: "100%", height: 150, borderRadius: radius.md, marginBottom: 12 },
-  photoEmpty: {
-    backgroundColor: colors.cardAlt,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderStyle: "dashed",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  photoEmptyText: { color: colors.sub, fontSize: 13 },
+  photo: { width: "100%", height: 140, borderRadius: radius.md, marginBottom: 12 },
+  carHead: { flexDirection: "row", alignItems: "flex-start" },
   brand: { color: colors.accent, fontSize: 13, fontWeight: "700", letterSpacing: 2 },
-  model: { color: colors.text, fontSize: 24, fontWeight: "800", marginTop: 2 },
-  editHint: { color: colors.sub, fontSize: 14, fontWeight: "400" },
-  nameInput: { borderBottomWidth: 1, borderBottomColor: colors.accent, paddingVertical: 0 },
-  meta: { color: colors.sub, fontSize: 13, marginTop: 4 },
+  model: { color: colors.text, fontSize: 22, fontWeight: "800", marginTop: 2 },
+  meta: { color: colors.sub, fontSize: 13, marginTop: 4, lineHeight: 18 },
+  edit: { color: colors.sub, fontSize: 16, padding: 4 },
+  badges: { flexDirection: "row", gap: 4, flexWrap: "wrap", marginTop: 8 },
+  badge: {
+    color: colors.accent,
+    fontSize: 9,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderRadius: 4,
+    paddingHorizontal: 4,
+    paddingVertical: 1,
+    overflow: "hidden",
+  },
   mood: {
     flexDirection: "row",
     gap: 8,
@@ -290,18 +247,9 @@ const styles = StyleSheet.create({
   btnPrimaryText: { color: "#fff", fontWeight: "700" },
   btnGhost: { borderWidth: 1, borderColor: colors.accent },
   btnGhostText: { color: colors.accent, fontWeight: "700" },
-  fact: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical: 6,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.border,
-  },
-  factLabel: { color: colors.sub, fontSize: 13 },
-  factValue: { color: colors.text, fontSize: 13, fontWeight: "600" },
+  emptyTitle: { color: colors.text, fontSize: 16, fontWeight: "800", marginBottom: 6 },
   odometer: { flexDirection: "row", justifyContent: "space-between" },
   stat: { alignItems: "center", flex: 1 },
   statValue: { color: colors.text, fontSize: 20, fontWeight: "900" },
   statLabel: { color: colors.sub, fontSize: 11, marginTop: 2 },
-  footer: { color: colors.sub, fontSize: 12, textAlign: "center", marginTop: 6 },
 });

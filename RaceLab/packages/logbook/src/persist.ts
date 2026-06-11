@@ -4,7 +4,7 @@ import type { LogbookState, RunEntry } from "./types";
  *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
  *  so callers can stash unreadable blobs instead of wiping a season's log. */
 
-export const LOGBOOK_FORMAT_VERSION = 1;
+export const LOGBOOK_FORMAT_VERSION = 2;
 
 interface Envelope {
   format: number;
@@ -34,6 +34,10 @@ export function deserializeLogbook(raw: string): DeserializeLogbookResult {
   let state: LogbookState;
   switch (env.format) {
     case 1:
+      // v1 → v2 (D27) only ADDED optional fields: a v1 state IS a v2 state.
+      state = env.state;
+      break;
+    case 2:
       state = env.state;
       break;
     default:

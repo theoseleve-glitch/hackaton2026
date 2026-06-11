@@ -74,6 +74,7 @@ export function bundleFromRun(
     weather: {
       air_temp_c: c.air_temp_c,
       humidity_pct: c.humidity_pct,
+      wind_kmh: c.wind_kmh,
       rain_risk_pct: c.sky === "rain_risk" ? 50 : c.sky === "raining" ? 100 : undefined,
     },
     tyres: run.tyres ? { wear: run.tyres.wear, run_count: run.tyres.run_count } : undefined,

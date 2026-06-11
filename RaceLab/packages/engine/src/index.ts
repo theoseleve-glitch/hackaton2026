@@ -5,6 +5,8 @@ export { RaceEngineerChat } from "./chat";
 export { recommend } from "./engineer";
 export { buildReport } from "./report";
 export type { EngineerReport } from "./report";
+export { buildRacePlan } from "./planner";
+export type { Forecast, RacePlan, RaceWindow, SelectedRunSummary } from "./planner";
 export { drivingTips } from "./driving-tips";
 export { parseFeedback } from "./nlu";
 export { assertValidKBData, getTemplate, validateRulesAgainstTaxonomy } from "./data";

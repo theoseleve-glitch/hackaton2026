@@ -34,6 +34,10 @@ export interface RunConditions {
   air_temp_c?: number;
   track_temp_c?: number;
   humidity_pct?: number;
+  wind_kmh?: number;
+  pressure_hpa?: number;
+  /** 0–100 sunshine */
+  sun_pct?: number;
 }
 
 export interface TyreSet {
@@ -57,11 +61,17 @@ export interface RunResult {
   driver_confidence?: number;
   traffic?: Traffic;
   tyre_state_after?: string;
+  /** individual lap times (seconds), driving order. Stats come from lapStats
+   *  ON DEMAND — never auto-written into best_lap_s/avg_lap_s (user wins). */
+  laps_list?: number[];
+  fuel_used_cc?: number;
 }
 
 export interface RunFeedback {
   tags: FeedbackTag[]; // taxonomy-validated (symptom, phase?, evolution?)
   text?: string;
+  /** per-corner observations; corner numbered from the track map */
+  corner_notes?: { corner: number; note: string }[];
 }
 
 export interface RunEntry {
@@ -82,6 +92,14 @@ export interface RunEntry {
   note?: string;
   /** learning loop: how did this run feel vs the previous one (after a change)? */
   outcome?: Outcome;
+  /** garage car instance (multi-car future); car_template_id stays authoritative for the engine */
+  car_id?: string;
+  /** stable track reference (track DB future); track.name stays the display source */
+  track_id?: string;
+  /** 0–100 driver-feel slider */
+  feeling?: number;
+  /** 1 (fresh) … 5 (exhausted) */
+  fatigue?: number;
 }
 
 export interface LogbookState {

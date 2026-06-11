@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors, radius } from "../theme";
 import { MP11, label } from "../kb";
+import type { ChassisTemplate } from "../../../../packages/engine/src";
+import type { SheetProfile } from "../../../../packages/garage/src";
 import {
   diffVersions,
   diffVsKit,
@@ -18,7 +20,8 @@ import type { ChangedField, SheetsState } from "../../../../packages/sheets/src"
  * Schema-driven sheet editor over the D21 model: the form is rendered from
  * the chassis template JSON; the draft diffs live against its base version
  * (changed fields highlighted), starred settings pin to the top, the locked
- * kit baseline is one tap away.
+ * kit baseline is one tap away. Typology customization (D26): the optional
+ * SheetProfile hides whole sections and overrides labels per car type.
  */
 
 type Setup = Record<string, string | number>;
@@ -27,6 +30,10 @@ type Mode = "editor" | "versions" | "kit" | { compare: { a: string; b: string } 
 interface Props {
   state: SheetsState;
   update: (fn: (prev: SheetsState) => SheetsState) => void;
+  /** chassis template to render (defaults to MP11 for back-compat) */
+  template?: ChassisTemplate;
+  /** car-typology customization (hidden sections, label overrides, badges) */
+  profile?: SheetProfile;
 }
 
 const SECTIONS: { title: string; match: (id: string) => boolean }[] = [
@@ -49,7 +56,9 @@ interface FieldDef {
   step?: number;
 }
 
-export function SheetEditorScreen({ state, update }: Props) {
+export function SheetEditorScreen({ state, update, template, profile }: Props) {
+  const tpl = template ?? MP11;
+  const labelFor = (id: string): string => profile?.label_overrides[id] ?? label(id);
   const [mode, setMode] = useState<Mode>("editor");
   const changes = useMemo(() => draftDiff(state), [state]);
   const changedMap = useMemo(
@@ -95,9 +104,13 @@ export function SheetEditorScreen({ state, update }: Props) {
     );
   }
 
-  const fields = Object.entries(MP11.fields).filter(
-    ([, f]) => (f as FieldDef).type !== "alias" && (f as FieldDef).type !== "derived",
-  ) as [string, FieldDef][];
+  const hidden = profile?.hidden_sections ?? [];
+  const fields = (Object.entries(tpl.fields) as [string, FieldDef][]).filter(
+    ([id, f]) =>
+      f.type !== "alias" &&
+      f.type !== "derived" &&
+      !hidden.some((h) => id.includes(h)),
+  );
 
   const starredFields = fields.filter(([id]) => state.starred.includes(id));
   const used = new Set<string>(state.starred);

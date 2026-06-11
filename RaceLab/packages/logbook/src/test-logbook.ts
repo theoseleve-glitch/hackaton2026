@@ -2,6 +2,8 @@ import type { SetupValues } from "../../sheets/src/sheets";
 import { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 import { compareRuns } from "./compare";
 import { carStatus, seasonStats } from "./insights";
+import { lapStats } from "./laps";
+import { groupBySetup, sortRuns } from "./sort";
 import {
   addRun,
   deleteRun,
@@ -133,6 +135,121 @@ check("carStatus: last run rated better → dialed", carStatus(s).kind === "dial
 s = deleteRun(s, a1.run.id);
 check("deleteRun removes the run", s.runs.length === 1 && s.runs[0].id === a2.run.id);
 check("deleteRun unknown id is a no-op (same reference)", deleteRun(s, "nope") === s);
+
+// — v2 fields (D27): round-trip + user best/avg never overwritten from laps_list
+{
+  let v2 = initLogbook();
+  v2 = addRun(
+    v2,
+    runFixture({
+      car_id: "car-001",
+      track_id: "track-mrt",
+      feeling: 72,
+      fatigue: 3,
+      conditions: { grip: "medium", wind_kmh: 18, pressure_hpa: 1013, sun_pct: 80 },
+      result: { best_lap_s: 34.0, avg_lap_s: 35.1, laps_list: [35.2, 33.9, 35.4], fuel_used_cc: 120 },
+      feedback: { tags: [], corner_notes: [{ corner: 3, note: "washes wide" }] },
+    }),
+    T2,
+  ).state;
+  const r2 = deserializeLogbook(serializeLogbook(v2));
+  check("v2 fields survive the round-trip byte-for-byte", r2.ok && JSON.stringify(r2.state) === JSON.stringify(v2));
+  const back = r2.ok ? r2.state.runs[0] : undefined;
+  check(
+    "v2 fields land where they were put",
+    back?.car_id === "car-001" &&
+      back.track_id === "track-mrt" &&
+      back.feeling === 72 &&
+      back.fatigue === 3 &&
+      back.conditions.wind_kmh === 18 &&
+      back.conditions.pressure_hpa === 1013 &&
+      back.conditions.sun_pct === 80 &&
+      back.result?.fuel_used_cc === 120 &&
+      back.result.laps_list?.length === 3 &&
+      back.feedback.corner_notes?.[0]?.note === "washes wide",
+  );
+  check(
+    "stored best/avg NOT overwritten from laps_list (user override wins; lapStats is for callers)",
+    back?.result?.best_lap_s === 34.0 && lapStats(back.result.laps_list!).best === 33.9,
+  );
+}
+
+// — format-1 migration: a stored v1 blob must read clean, never as corruption
+{
+  const v1raw =
+    '{"format":1,"state":{"runs":[{"id":"run-old","created_at":"2026-05-01T10:00:00.000Z","type":"practice","car_template_id":"kyosho-inferno-mp11","setup_version_id":"kyosho-inferno-mp11/kit","setup_name":"Kit setup","track":{"name":"MRT","surface":"clay","indoor":false},"conditions":{"grip":"green"},"feedback":{"tags":[]}}]}}';
+  const m = deserializeLogbook(v1raw);
+  check(
+    "format-1 envelope migrates: ok, run intact, new fields simply absent",
+    m.ok && m.state.runs[0].id === "run-old" && m.state.runs[0].feeling === undefined,
+  );
+}
+
+// — lapStats (pure helper)
+check("lapStats: best is the minimum", lapStats([35.2, 33.9, 35.4]).best === 33.9);
+check("lapStats: avg rounded to 2 decimals", lapStats([34.2, 33.8, 35.0]).avg === 34.33);
+check("lapStats: single lap is its own best and avg", lapStats([34.5]).best === 34.5 && lapStats([34.5]).avg === 34.5);
+check(
+  "lapStats: empty list throws",
+  (() => {
+    try {
+      lapStats([]);
+      return false;
+    } catch {
+      return true;
+    }
+  })(),
+);
+
+// — sortRuns: defaults, missing-last, stability
+{
+  const mk = (id: string, created_at: string, best_lap_s?: number, feeling?: number): RunEntry => ({
+    ...runFixture({
+      created_at,
+      result: best_lap_s === undefined ? undefined : { best_lap_s, avg_lap_s: best_lap_s + 1 },
+      feeling,
+    }),
+    id,
+  });
+  const list = [
+    mk("A", T0, 34.5, 60),
+    mk("B", T1, 33.9), // no feeling
+    mk("C", T2, undefined, 80), // no laps
+    mk("D", "2026-06-11T12:00:00.000Z", 34.5, 40), // ties A on best_lap
+  ];
+  const ids = (rs: RunEntry[]): string => rs.map((r) => r.id).join("");
+
+  check("sortRuns: date defaults desc (newest first)", ids(sortRuns(list, "date")) === "DCBA");
+  check("sortRuns: date asc on demand", ids(sortRuns(list, "date", "asc")) === "ABCD");
+  check("sortRuns: best_lap defaults asc (fastest first), missing last, ties stable", ids(sortRuns(list, "best_lap")) === "BADC");
+  check("sortRuns: avg_lap defaults asc too", ids(sortRuns(list, "avg_lap")) === "BADC");
+  check("sortRuns: missing values stay LAST even when desc", ids(sortRuns(list, "best_lap", "desc")) === "ADBC");
+  check("sortRuns: feeling sorts, runs without it last", ids(sortRuns(list, "feeling")) === "CADB");
+  check("sortRuns: input array untouched", ids(list) === "ABCD");
+
+  // — groupBySetup
+  const ga = { ...runFixture({ created_at: T0 }), id: "g1" };
+  const gb = { ...runFixture({ created_at: T1, setup_version_id: "sv-aaa", setup_name: "Softer front" }), id: "g2" };
+  const gc = { ...runFixture({ created_at: T2 }), id: "g3" };
+  const groups = groupBySetup([ga, gb, gc]);
+  check("groupBySetup: one group per setup version", groups.length === 2);
+  check(
+    "groupBySetup: most recent activity first",
+    groups[0].setup_version_id === "kyosho-inferno-mp11/kit" && groups[1].setup_version_id === "sv-aaa",
+  );
+  check(
+    "groupBySetup: runs keep input order, label carried",
+    ids(groups[0].runs) === "g1g3" && groups[0].setup_name === "Kit setup" && groups[1].setup_name === "Softer front",
+  );
+  check("groupBySetup: empty input → no groups", groupBySetup([]).length === 0);
+}
+
+// — bundle: wind forwarding (v2)
+{
+  const windy = { ...s.runs[0], conditions: { ...s.runs[0].conditions, wind_kmh: 22 } };
+  check("bundle: wind_kmh forwarded into weather", bundleFromRun(windy, {}, s).weather?.wind_kmh === 22);
+  check("bundle: no wind logged → none in weather", bundleFromRun(s.runs[0], {}, s).weather?.wind_kmh === undefined);
+}
 
 if (failures > 0) {
   console.error(`\n${failures} logbook test(s) failed`);

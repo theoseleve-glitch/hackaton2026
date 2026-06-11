@@ -1,0 +1,33 @@
+{
+  "template_id": "generic-offroad",
+  "template_version": 1,
+  "brand": "Generic",
+  "model": "Off-road",
+  "category": "buggy",
+  "scope": ["1-8-offroad", "1-10-offroad"],
+  "fields": {
+    "front_springs": { "type": "enum" },
+    "rear_springs": { "type": "enum" },
+    "front_shock_oil": { "type": "number", "unit": "cSt" },
+    "rear_shock_oil": { "type": "number", "unit": "cSt" },
+    "front_pistons": { "type": "enum" },
+    "rear_pistons": { "type": "enum" },
+    "ride_height_front": { "type": "number", "unit": "mm", "range": [22, 32], "step": 0.5 },
+    "ride_height_rear": { "type": "number", "unit": "mm", "range": [22, 34], "step": 0.5 },
+    "camber_front": { "type": "number", "unit": "deg", "range": [-4, 0], "step": 0.5 },
+    "camber_rear": { "type": "number", "unit": "deg", "range": [-4, 0], "step": 0.5 },
+    "toe_front": { "type": "number", "unit": "deg", "range": [-2, 2], "step": 0.5 },
+    "toe_rear": { "type": "number", "unit": "deg", "range": [0, 4], "step": 0.5 },
+    "droop_front": { "type": "number", "unit": "mm", "range": [-8, 0], "step": 0.5 },
+    "droop_rear": { "type": "number", "unit": "mm", "range": [-8, 0], "step": 0.5 },
+    "front_sway_bar": { "type": "number", "unit": "mm" },
+    "rear_sway_bar": { "type": "number", "unit": "mm" },
+    "front_diff_oil": { "type": "number", "unit": "cSt" },
+    "center_diff_oil": { "type": "number", "unit": "cSt" },
+    "rear_diff_oil": { "type": "number", "unit": "cSt" },
+    "wing_angle": { "type": "enum" },
+    "gearing": { "type": "enum" },
+    "tires_front": { "type": "string" },
+    "tires_rear": { "type": "string" }
+  }
+}

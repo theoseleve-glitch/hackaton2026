@@ -18,6 +18,9 @@ export type { RunComparison, ResolveSetup } from "./compare";
 export { carStatus, seasonStats } from "./insights";
 export type { CarStatus, SeasonStats } from "./insights";
 export { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
+export { lapStats } from "./laps";
+export { sortRuns, groupBySetup } from "./sort";
+export type { RunSortKey, SetupGroup } from "./sort";
 export {
   serializeLogbook,
   deserializeLogbook,

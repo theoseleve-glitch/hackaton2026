@@ -1,0 +1,17 @@
+{
+  "name": "racelab-strategy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab race strategy (D30): deterministic fuel/pit math — laps per tank, RC timed-race lap counts, stint distribution, tyre-cliff detection, stretch options. Pure functions, no I/O — bundles into the app unchanged.",
+  "scripts": {
+    "test": "tsx src/test-strategy.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}
