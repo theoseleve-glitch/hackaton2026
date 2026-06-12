@@ -44,6 +44,16 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     actors: ['p1', 'p2'],
     secrets: () => [],
   }],
+  ['pires-potes', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-vote round 0: two secret ballots buffered, p3 still expected — phase NOT advanced
+    events: [vote('p1', 'p2', 1_000), vote('p2', 'p3', 2_000)],
+    eventsAlt: [vote('p1', 'p3', 1_000), vote('p2', 'p1', 2_000)],
+    actors: ['p1', 'p2'],
+    // ballots are structural (playerId -> playerId) — invariance covers them, like tracer's
+    secrets: () => [],
+  }],
   ['tu-preferes', {
     players: ['p1', 'p2', 'p3'],
     seed: 'audit-seed',

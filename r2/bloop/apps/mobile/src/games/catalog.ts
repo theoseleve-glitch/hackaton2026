@@ -58,7 +58,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Chaque question désigne un coupable. Le pire pote gagne.', en: 'Every question points a finger. The worst friend wins.' },
     emoji: '😬',
     color: '#FF6B9D',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Sidemen', url: 'https://www.youtube.com/watch?v=8ASuvsqne1o', thumbnailUrl: 'https://i.ytimg.com/vi/8ASuvsqne1o/hqdefault.jpg' },
   },
   {

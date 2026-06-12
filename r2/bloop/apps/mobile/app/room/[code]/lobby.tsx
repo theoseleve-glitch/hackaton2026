@@ -19,6 +19,7 @@ const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new
   ['tracer', { label: 'Quick Vote', minPlayers: 2 }],
   ['tu-preferes', { label: 'Tu Préfères ?', minPlayers: 3 }],
   ['gauche-ou-droite', { label: 'De gauche ou de droite ?', minPlayers: 3 }],
+  ['pires-potes', { label: 'Pires Potes', minPlayers: 3 }],
 ]);
 
 export default function Lobby() {

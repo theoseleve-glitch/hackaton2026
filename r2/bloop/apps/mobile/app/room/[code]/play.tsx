@@ -7,7 +7,7 @@ import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { isOptionVoteGame } from '../../../src/games/option-vote-view';
-import { asTracerView, secondsLeft } from '../../../src/games/tracer-view';
+import { asTracerView, deviceLang, promptText, secondsLeft } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { useTheme } from '../../../src/theme/useTheme';
 
@@ -62,7 +62,7 @@ function TracerPlay({ code }: { code: string }) {
         {tv.phase === 'vote' && (
           <View style={{ gap: tokens.spacing.lg }}>
             <View style={{ backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding, ...tokens.elevation.e2 }}>
-              <AppText role="titleM" style={{ textAlign: 'center' }}>{tv.prompt}</AppText>
+              <AppText role="titleM" style={{ textAlign: 'center' }}>{promptText(tv.prompt, deviceLang())}</AppText>
             </View>
             <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
               {tv.myVote === null ? 'TAP SOMEONE TO VOTE' : 'VOTE LOCKED — WAITING FOR THE OTHERS'}
@@ -79,7 +79,7 @@ function TracerPlay({ code }: { code: string }) {
         {tv.phase === 'reveal' && (
           <View style={{ gap: tokens.spacing.md }}>
             <AppText role="titleL" style={{ textAlign: 'center' }}>The votes are in!</AppText>
-            <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>{tv.prompt}</AppText>
+            <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>{promptText(tv.prompt, deviceLang())}</AppText>
             {ranked(tv.tally).map(([id, votes], i) => (
               <View key={id} style={{
                 flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
