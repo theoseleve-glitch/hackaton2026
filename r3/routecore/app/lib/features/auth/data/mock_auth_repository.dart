@@ -4,13 +4,15 @@ import '../../../shared/models/models.dart';
 import '../domain/auth_repository.dart';
 
 /// Used when SUPABASE_URL is not configured: lets the app run end-to-end
-/// in pure local/demo mode.
+/// in pure local/demo mode. L'Échappée est sans compte : un profil local
+/// anonyme existe toujours, rien n'est demandé à l'utilisateur.
 class MockAuthRepository implements AuthRepository {
   UserProfile? _user;
   final _controller = StreamController<UserProfile?>.broadcast();
 
   @override
-  Future<UserProfile?> currentUser() async => _user;
+  Future<UserProfile?> currentUser() async =>
+      _user ??= const UserProfile(id: 'local-user', displayName: 'Voyageur');
 
   @override
   Future<UserProfile> signInWithPassword(String email, String password) async {

@@ -155,9 +155,9 @@ class EchappeeMapScreen extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: EchappeeSpacing.screen),
                     child: EchappeeButton(
-                      label: 'Démarrer',
+                      label: 'Démarrer la navigation',
                       icon: Icons.navigation_rounded,
-                      onPressed: () => _startTrip(context, ref),
+                      onPressed: () => _startNavigation(context, ref),
                     ),
                   ),
                   const SizedBox(height: EchappeeSpacing.s16),
@@ -185,19 +185,25 @@ class EchappeeMapScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _startTrip(BuildContext context, WidgetRef ref) async {
+  /// Crée le trajet (journal local) puis lance la navigation guidée
+  /// tour-par-tour. Le profil est local et anonyme — pas de compte.
+  Future<void> _startNavigation(BuildContext context, WidgetRef ref) async {
     final planner = ref.read(routePlannerProvider);
     final user = ref.read(authControllerProvider).valueOrNull;
-    if (user == null) return;
-    final trip = await ref.read(tripRepositoryProvider).createTrip(
-          userId: user.id,
-          origin: planner.origin!,
-          destination: planner.destination!,
-          originLabel: planner.originLabel,
-          destinationLabel: planner.destinationLabel,
-          productContext: ProductContext.terroir,
-        );
-    if (context.mounted) context.push('/tracking/${trip.id}');
+    if (user != null) {
+      // Journalisation best-effort : la navigation part même si elle échoue.
+      try {
+        await ref.read(tripRepositoryProvider).createTrip(
+              userId: user.id,
+              origin: planner.origin!,
+              destination: planner.destination!,
+              originLabel: planner.originLabel,
+              destinationLabel: planner.destinationLabel,
+              productContext: ProductContext.terroir,
+            );
+      } catch (_) {}
+    }
+    if (context.mounted) context.push('/echappee/navigation');
   }
 }
 

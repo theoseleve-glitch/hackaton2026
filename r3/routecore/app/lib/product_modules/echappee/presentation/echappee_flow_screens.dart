@@ -217,55 +217,88 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
       );
     }
     final fastest = _byMode(options, RouteMode.fastest) ?? options.first;
+    final noHighway = _byMode(options, RouteMode.shortest);
+    final eco = _byMode(options, RouteMode.eco);
     // L'échappée réelle : la route OSRM qui passe par les haltes choisies
-    // sous budget détour (et plus la simple alternative la plus longue).
-    final itinerary = ref.watch(echappeeItineraryProvider).valueOrNull;
-    final echappee = itinerary?.route ??
-        _byMode(options, RouteMode.discovery) ??
-        _byMode(options, RouteMode.eco) ??
-        options.first;
+    // sous budget détour. Honnêteté : sans halte qui vaille le détour, on ne
+    // propose QUE les routes de base.
+    final itineraryAsync = ref.watch(echappeeItineraryProvider);
+    final itinerary = itineraryAsync.valueOrNull;
     final stops = itinerary?.stops ?? const <PoiAlongRoute>[];
-    final detourMinutes = itinerary?.detourMinutes ?? 0;
+    final hasEchappee = stops.isNotEmpty;
     final selectedId = planner.selectedOption?.id;
+
+    // Péage estimé sur la route autoroute (metadata posée par le service).
+    final toll = (fastest.metadata['tollEstimateEur'] as num?)?.toDouble();
+    final fastestSubtitle = toll != null && toll > 0
+        ? 'Autoroute · péage ~${toll.round()} €'
+        : 'Le plus rapide';
+
     return ListView(
       padding: const EdgeInsets.all(EchappeeSpacing.screen),
       children: [
         EchappeeRouteOptionCard(
-          title: 'Trajet direct',
+          title: 'Le plus rapide',
           duration: _formatDuration(fastest.durationSeconds),
           distance: _formatDistance(fastest.distanceMeters),
-          subtitle: 'Le plus rapide',
+          subtitle: fastestSubtitle,
           selected: selectedId == fastest.id,
           onTap: () => notifier.selectOption(fastest),
         ),
-        const SizedBox(height: EchappeeSpacing.s12),
-        EchappeeRouteOptionCard(
-          title: 'Échappée recommandée',
-          duration: _formatDuration(echappee.durationSeconds),
-          distance: _formatDistance(echappee.distanceMeters),
-          subtitle: stops.isEmpty
-              ? 'On cherche tes haltes…'
-              : '${stops.length} haltes · +$detourMinutes min',
-          isEchappee: true,
-          selected: selectedId == echappee.id,
-          onTap: () => notifier.selectOption(echappee),
-        ),
-        const SizedBox(height: EchappeeSpacing.s16),
-        Center(
-          child: Text(
-            detourMinutes == 0
-                ? 'Trajet total estimé · '
-                    '${_formatDuration(echappee.durationSeconds)}'
-                : 'Trajet total estimé · '
-                    '${_formatDuration(echappee.durationSeconds)}'
-                    ' dont +$detourMinutes min de détour',
-            style: EchappeeTypography.bodySmall,
+        if (noHighway != null &&
+            noHighway.metadata['noHighway'] == true) ...[
+          const SizedBox(height: EchappeeSpacing.s12),
+          EchappeeRouteOptionCard(
+            title: 'Sans autoroute',
+            duration: _formatDuration(noHighway.durationSeconds),
+            distance: _formatDistance(noHighway.distanceMeters),
+            subtitle: 'Zéro péage',
+            selected: selectedId == noHighway.id,
+            onTap: () => notifier.selectOption(noHighway),
+          ),
+        ],
+        if (eco != null) ...[
+          const SizedBox(height: EchappeeSpacing.s12),
+          EchappeeRouteOptionCard(
+            title: 'Éco',
+            duration: _formatDuration(eco.durationSeconds),
+            distance: _formatDistance(eco.distanceMeters),
+            subtitle: eco.estimatedFuelLiters == null
+                ? 'Conduite souple'
+                : '${eco.estimatedFuelLiters} L · '
+                    '${eco.estimatedCo2Kg} kg CO₂',
+            selected: selectedId == eco.id,
+            onTap: () => notifier.selectOption(eco),
+          ),
+        ],
+        if (hasEchappee) ...[
+          const SizedBox(height: EchappeeSpacing.s12),
+          EchappeeRouteOptionCard(
+            title: 'L\'Échappée',
+            duration: _formatDuration(itinerary!.route.durationSeconds),
+            distance: _formatDistance(itinerary.route.distanceMeters),
+            subtitle:
+                '${stops.length} haltes · +${itinerary.detourMinutes} min',
+            isEchappee: true,
+            selected: selectedId == itinerary.route.id,
+            onTap: () => notifier.selectOption(itinerary.route),
+          ),
+        ] else if (itineraryAsync.isLoading) ...[
+          const SizedBox(height: EchappeeSpacing.s16),
+          const Center(child: EchappeeLoadingState(message: '')),
+        ] else ...[
+          const SizedBox(height: EchappeeSpacing.s16),
+          Text(
+            'Pas de halte qui vaille le détour ici — on te laisse '
+            'la route directe.',
+            style: EchappeeTypography.bodySmall
+                .copyWith(color: EchappeeColors.textSecondary),
             textAlign: TextAlign.center,
           ),
-        ),
+        ],
         const SizedBox(height: EchappeeSpacing.section),
         EchappeeButton(
-          label: 'Choisir cette échappée',
+          label: 'Voir sur la carte',
           onPressed: planner.selectedOption == null
               ? null
               : () => context.push('/echappee/map'),
@@ -291,7 +324,7 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
                 children: [
                   EchappeeEyebrow('04 — Ta route'),
                   SizedBox(height: EchappeeSpacing.s12),
-                  Text('Deux façons d\'y aller', style: EchappeeTypography.h2),
+                  Text('Choisis ta route.', style: EchappeeTypography.h2),
                 ],
               ),
             ),

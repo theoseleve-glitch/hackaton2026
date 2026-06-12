@@ -3,14 +3,17 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/presentation/auth_screens.dart';
 import '../features/map/presentation/map_screen.dart';
+import '../features/navigation/presentation/navigation_screen.dart';
 import '../features/poi/presentation/poi_screens.dart';
 import '../features/routing/presentation/home_screen.dart';
 import '../features/routing/presentation/route_options_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/tracking/presentation/tracking_screens.dart';
+import '../features/vehicle/presentation/vehicle_picker_screen.dart';
 import '../core/env/env.dart';
 import '../product_modules/echappee/presentation/design_system_preview_screen.dart';
 import '../product_modules/echappee/presentation/echappee_flow_screens.dart';
+import '../product_modules/echappee/presentation/echappee_manifeste_screen.dart';
 import '../product_modules/echappee/presentation/echappee_map_screens.dart';
 import '../product_modules/echappee/presentation/echappee_splash_screen.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
@@ -62,9 +65,18 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/echappee/onboarding',
           builder: (_, __) => const EchappeeOnboardingScreen()),
+      // Sans compte : choix du véhicule (calculs carburant/CO2) à la place
+      // de l'ancienne connexion. ?edit=1 = ouverture depuis Réglages.
       GoRoute(
-          path: '/echappee/login',
-          builder: (_, __) => const EchappeeLoginScreen()),
+          path: '/echappee/vehicle',
+          builder: (_, state) => VehiclePickerScreen(
+              isOnboarding: state.uri.queryParameters['edit'] != '1')),
+      GoRoute(
+          path: '/echappee/manifeste',
+          builder: (_, __) => const EchappeeManifesteScreen()),
+      GoRoute(
+          path: '/echappee/navigation',
+          builder: (_, __) => const EchappeeNavigationScreen()),
       GoRoute(
           path: '/echappee/home',
           builder: (_, __) => const EchappeeHomeScreen()),

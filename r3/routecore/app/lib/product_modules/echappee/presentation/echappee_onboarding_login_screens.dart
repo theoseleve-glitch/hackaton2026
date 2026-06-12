@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../app/config.dart';
 import '../../../app/providers.dart';
 import '../../../features/analytics/domain/analytics_repository.dart'
     show AnalyticsEvents;
 import '../../../shared/models/models.dart';
 import '../design_system/design_system.dart';
 import 'echappee_page.dart';
+import 'echappee_splash_screen.dart' show EchappeeSplashScreen;
 
-/// Onboarding L'Échappée : trois pages plein écran crème qui posent la
-/// promesse — la route, le temps, les haltes — avant de demander quoi que
-/// ce soit. Le consentement localisation se donne en page 3, sans friction.
+/// Onboarding L'Échappée : trois pages plein écran qui posent la promesse —
+/// la route, le temps, les haltes. Pas de compte : on enchaîne sur le choix
+/// du véhicule (pour les calculs carburant/CO2) puis l'app.
 class EchappeeOnboardingScreen extends ConsumerStatefulWidget {
   const EchappeeOnboardingScreen({super.key});
 
@@ -64,15 +65,18 @@ class _EchappeeOnboardingScreenState
     _controller.nextPage(duration: _pageTransition, curve: Curves.easeOutCubic);
   }
 
-  /// Accepte le consentement localisation, trace la fin d'onboarding et
-  /// passe à la connexion.
-  void _finish() {
+  /// Accepte le consentement localisation, persiste la fin d'onboarding et
+  /// enchaîne sur le choix du véhicule.
+  Future<void> _finish() async {
     ref.read(consentAcceptedProvider.notifier).state = true;
     ref.read(analyticsRepositoryProvider).logEvent(
           AnalyticsEvents.onboardingCompleted,
           productContext: ProductContext.terroir,
         );
-    context.go('/echappee/login');
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(EchappeeSplashScreen.onboardedPrefKey, true);
+    await prefs.setBool(EchappeeSplashScreen.consentPrefKey, true);
+    if (mounted) context.go('/echappee/vehicle');
   }
 
   @override
@@ -231,139 +235,5 @@ class _PageDots extends StatelessWidget {
   }
 }
 
-/// Connexion L'Échappée : sobre et chaleureuse — symbole, « Bonne route. »,
-/// deux champs, un CTA. En mode démo, une card douce explique que n'importe
-/// quels identifiants fonctionnent.
-class EchappeeLoginScreen extends ConsumerStatefulWidget {
-  const EchappeeLoginScreen({super.key});
-
-  @override
-  ConsumerState<EchappeeLoginScreen> createState() =>
-      _EchappeeLoginScreenState();
-}
-
-class _EchappeeLoginScreenState extends ConsumerState<EchappeeLoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _signIn() {
-    ref.read(authControllerProvider.notifier).signIn(
-          _emailController.text.trim(),
-          _passwordController.text,
-        );
-  }
-
-  void _signUp() {
-    ref.read(authControllerProvider.notifier).signUp(
-          _emailController.text.trim(),
-          _passwordController.text,
-        );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ref.listen<AsyncValue<UserProfile?>>(authControllerProvider, (_, next) {
-      if (next.valueOrNull != null) context.go('/echappee/home');
-    });
-    final auth = ref.watch(authControllerProvider);
-    return EchappeePage(
-      child: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: EchappeeSpacing.screen,
-                vertical: EchappeeSpacing.s32,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Center(child: EchappeeLogo(size: 48)),
-                  const SizedBox(height: EchappeeSpacing.s24),
-                  const Text(
-                    'Bonne route.',
-                    style: EchappeeTypography.h2,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: EchappeeSpacing.s32),
-                  if (AppConfig.demoMode) ...[
-                    const _DemoModeCard(),
-                    const SizedBox(height: EchappeeSpacing.s24),
-                  ],
-                  EchappeeTextField(
-                    label: 'Email',
-                    hint: 'toi@exemple.fr',
-                    icon: Icons.mail_outline,
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: EchappeeSpacing.s16),
-                  EchappeeTextField(
-                    label: 'Mot de passe',
-                    hint: 'Ton mot de passe',
-                    icon: Icons.lock_outline,
-                    controller: _passwordController,
-                    obscureText: true,
-                  ),
-                  if (auth.hasError) ...[
-                    const SizedBox(height: EchappeeSpacing.s16),
-                    Text(
-                      'Connexion impossible. Vérifie ton email et ton '
-                      'mot de passe.',
-                      style: EchappeeTypography.bodySmall
-                          .copyWith(color: EchappeeColors.error),
-                    ),
-                  ],
-                  const SizedBox(height: EchappeeSpacing.s32),
-                  EchappeeButton(
-                    label: 'Se connecter',
-                    loading: auth.isLoading,
-                    onPressed: _signIn,
-                  ),
-                  const SizedBox(height: EchappeeSpacing.s8),
-                  EchappeeButton(
-                    label: 'Créer un compte',
-                    variant: EchappeeButtonVariant.tertiary,
-                    onPressed: _signUp,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Card douce affichée uniquement en mode démo.
-class _DemoModeCard extends StatelessWidget {
-  const _DemoModeCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return const DecoratedBox(
-      decoration: BoxDecoration(
-        color: EchappeeColors.surface,
-        borderRadius: EchappeeRadius.mdAll,
-        border: Border.fromBorderSide(
-          BorderSide(color: EchappeeColors.border),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(EchappeeSpacing.card),
-        child: Text(
-          "Mode démo : utilise n'importe quel email et mot de passe.",
-          style: EchappeeTypography.bodySmall,
-        ),
-      ),
-    );
-  }
-}
+// L'Échappée est sans compte : l'écran de connexion a été retiré (les trajets
+// vivent sur un profil local anonyme — voir MockAuthRepository).

@@ -17,6 +17,7 @@ dependencies:
   http: ^1.2.0
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,8 @@ flutter:
     # Volontairement déclaré en asset : flutter_dotenv ne lit que le bundle
     # sur Android/iOS — sans cette ligne, la config serait ignorée sur mobile.
     - .env
+    # Données embarquées (base véhicules ADEME compactée, etc.)
+    - assets/data/
 
   # Identité L'Échappée : Fraunces porte l'émotion, Inter porte la clarté
   # (voir docs/DESIGN_SYSTEM_ECHAPPEE.md). Statiques Google Fonts (OFL).

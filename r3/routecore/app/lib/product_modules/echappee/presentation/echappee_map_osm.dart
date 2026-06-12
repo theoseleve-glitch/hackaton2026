@@ -27,14 +27,14 @@ class _EchappeeOsmMap extends StatelessWidget {
   static const double _routeCasingWidth = 8;
   static const double _routeStrokeWidth = 5;
 
-  /// Désature les tuiles OSM à ~0.82 puis les réchauffe légèrement (rouge
-  /// poussé ×1.02 +10, vert +4, bleu retenu ×0.96 −8) pour coller au crème
-  /// L'Échappée. Matrice 4×5, base luminance :
+  /// Désature les tuiles OSM à ~0.82 puis les verdit légèrement (rouge
+  /// retenu −4, vert poussé +6, bleu neutre −2) pour coller au papier sauge
+  /// de la palette Forêt. Matrice 4×5, base luminance :
   /// C' = (lum·(1−s) + [s si canal courant]) avec lum = (.213, .715, .072).
   static const List<double> _warmTileMatrix = [
-    0.8755, 0.1313, 0.0132, 0, 10, // R
-    0.0383, 0.9487, 0.0130, 0, 4, // G
-    0.0368, 0.1236, 0.7996, 0, -8, // B
+    0.8583, 0.1287, 0.0130, 0, -4, // R
+    0.0391, 0.9680, 0.0133, 0, 6, // G
+    0.0376, 0.1261, 0.8157, 0, -2, // B
     0, 0, 0, 1, 0, // A
   ];
 

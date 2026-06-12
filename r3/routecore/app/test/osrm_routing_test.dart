@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:routecore/shared/models/models.dart';
 import 'package:routecore/shared/services/osrm_routing_service.dart';
 import 'package:routecore/shared/services/routing_service.dart';
+import 'package:routecore/shared/services/traffic_service.dart';
 
 void main() {
   const lyon = GeoPoint(latitude: 45.7640, longitude: 4.8357);
@@ -150,6 +151,219 @@ void main() {
       expect(points[1], via);
       expect(option.durationSeconds, greaterThan(0));
       expect(option.estimatedCo2Kg, isNotNull);
+    });
+  });
+
+  group('OsrmRoutingService.assembleOptions', () {
+    final service = OsrmRoutingService();
+
+    // (a) standard request: alternatives=true & steps=true. The main route
+    // rides the A7 for 71.2 km.
+    final aFixture = {
+      'code': 'Ok',
+      'routes': [
+        {
+          'distance': 101200.0,
+          'duration': 4980.0,
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [4.8357, 45.7640],
+              [4.86, 45.40],
+              [4.8924, 44.9334],
+            ],
+          },
+          'legs': [
+            {
+              'steps': [
+                {
+                  'distance': 71200.0,
+                  'name': 'Autoroute du Soleil',
+                  'ref': 'A 7',
+                  'intersections': [
+                    {
+                      'classes': ['motorway'],
+                    },
+                  ],
+                },
+                {
+                  'distance': 30000.0,
+                  'name': 'Avenue Berthelot',
+                  'intersections': [
+                    {'classes': <String>[]},
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          'distance': 96500.0,
+          'duration': 5400.0,
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [4.8357, 45.7640],
+              [4.80, 45.35],
+              [4.8924, 44.9334],
+            ],
+          },
+        },
+      ],
+    };
+
+    // (b) exclude=motorway: single route, longer and slower.
+    final bFixture = {
+      'code': 'Ok',
+      'routes': [
+        {
+          'distance': 132000.0,
+          'duration': 7800.0,
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [4.8357, 45.7640],
+              [4.95, 45.30],
+              [4.8924, 44.9334],
+            ],
+          },
+        },
+      ],
+    };
+
+    test('fastest keeps highways + toll estimate; shortest/eco avoid them',
+        () {
+      const request = RouteRequest(origin: lyon, destination: valence);
+      final options = service.assembleOptions(aFixture, bFixture, request);
+
+      final fastest =
+          options.firstWhere((o) => o.routeMode == RouteMode.fastest);
+      expect(fastest.distanceMeters, 101200);
+      expect(fastest.metadata['highway'], isTrue);
+      expect(fastest.metadata['motorwayKm'], closeTo(71.2, 0.01));
+      expect(fastest.metadata['tollEstimateEur'], greaterThan(0));
+      expect(fastest.metadata['tollEstimateEur'], closeTo(8.4, 0.01),
+          reason: '71.2 km x 0.118 EUR/km');
+
+      for (final mode in [RouteMode.shortest, RouteMode.eco]) {
+        final option = options.firstWhere((o) => o.routeMode == mode);
+        expect(option.distanceMeters, 132000,
+            reason: '$mode uses the no-motorway (b) route');
+        expect(option.metadata['noHighway'], isTrue);
+        expect(option.metadata['highway'], isFalse);
+        final points = service.getRoutePolyline(option);
+        expect(points[1].latitude, closeTo(45.30, 1e-6),
+            reason: '$mode carries the (b) geometry');
+        expect(points[1].longitude, closeTo(4.95, 1e-6));
+      }
+    });
+
+    test('eco keeps gentler consumption than shortest on the same route', () {
+      const request = RouteRequest(origin: lyon, destination: valence);
+      final options = service.assembleOptions(aFixture, bFixture, request);
+      final shortest =
+          options.firstWhere((o) => o.routeMode == RouteMode.shortest);
+      final eco = options.firstWhere((o) => o.routeMode == RouteMode.eco);
+      expect(eco.estimatedFuelLiters!, lessThan(shortest.estimatedFuelLiters!));
+    });
+
+    test('bJson == null falls back to min-distance alternative of (a)', () {
+      const request = RouteRequest(origin: lyon, destination: valence);
+      final options = service.assembleOptions(aFixture, null, request);
+
+      final shortest =
+          options.firstWhere((o) => o.routeMode == RouteMode.shortest);
+      final eco = options.firstWhere((o) => o.routeMode == RouteMode.eco);
+      expect(shortest.distanceMeters, 96500,
+          reason: 'previous behavior: min-distance alternative of (a)');
+      expect(eco.distanceMeters, 96500);
+      expect(shortest.metadata.containsKey('noHighway'), isFalse);
+      expect(eco.metadata.containsKey('noHighway'), isFalse);
+
+      // (a) succeeded, so fastest still documents its highway nature.
+      final fastest =
+          options.firstWhere((o) => o.routeMode == RouteMode.fastest);
+      expect(fastest.metadata['highway'], isTrue);
+    });
+
+    test('(b) with empty routes is treated like a failed (b)', () {
+      const request = RouteRequest(origin: lyon, destination: valence);
+      final options = service.assembleOptions(
+          aFixture, {'code': 'NoRoute', 'routes': <Object>[]}, request);
+      final shortest =
+          options.firstWhere((o) => o.routeMode == RouteMode.shortest);
+      expect(shortest.distanceMeters, 96500);
+      expect(shortest.metadata.containsKey('noHighway'), isFalse);
+    });
+
+    test('discovery stays the most scenic alternative of (a)', () {
+      const request = RouteRequest(
+          origin: lyon, destination: valence, routeMode: RouteMode.discovery);
+      final options = service.assembleOptions(aFixture, bFixture, request);
+      final discovery =
+          options.firstWhere((o) => o.routeMode == RouteMode.discovery);
+      expect(discovery.distanceMeters, 101200);
+    });
+
+    test('empty (a) routes -> empty list (caller falls back to mock)', () {
+      const request = RouteRequest(origin: lyon, destination: valence);
+      expect(
+        service.assembleOptions({'routes': <Object>[]}, bFixture, request),
+        isEmpty,
+      );
+    });
+  });
+
+  group('toll estimation', () {
+    test('motorwayKmFromRoute sums only motorway/toll steps', () {
+      final route = {
+        'legs': [
+          {
+            'steps': [
+              {'distance': 12000.0, 'ref': 'A 7'},
+              {
+                'distance': 3000.0,
+                'intersections': [
+                  {
+                    'classes': ['motorway'],
+                  },
+                ],
+              },
+              {'distance': 5000.0, 'name': 'Route de Valence', 'ref': 'D 86'},
+            ],
+          },
+        ],
+      };
+      expect(OsrmRoutingService.motorwayKmFromRoute(route),
+          closeTo(15.0, 1e-9));
+    });
+
+    test('route without steps -> 0 km', () {
+      expect(OsrmRoutingService.motorwayKmFromRoute({'legs': <Object>[]}), 0);
+      expect(OsrmRoutingService.motorwayKmFromRoute(<String, dynamic>{}), 0);
+    });
+
+    test('estimateTollEur clamps short distances, ~0.118 EUR/km otherwise',
+        () {
+      expect(OsrmRoutingService.estimateTollEur(0), 0);
+      expect(OsrmRoutingService.estimateTollEur(4.9), 0,
+          reason: '< 5 km motorway = assumed free section');
+      expect(OsrmRoutingService.estimateTollEur(100), closeTo(11.8, 0.001));
+    });
+  });
+
+  group('TrafficService', () {
+    test('MockTrafficService returns an honest empty list', () async {
+      final incidents =
+          await const MockTrafficService().incidentsAlong([lyon, valence]);
+      expect(incidents, isEmpty);
+    });
+
+    test('BisonFuteTrafficService is an explicit stub', () {
+      expect(
+        () => const BisonFuteTrafficService().incidentsAlong([lyon, valence]),
+        throwsUnimplementedError,
+      );
     });
   });
 }

@@ -12,7 +12,6 @@ import '../domain/echappee_carnets.dart';
 import '../domain/echappee_itinerary.dart';
 import '../domain/echappee_moods.dart';
 import 'echappee_carnets_section.dart';
-import 'echappee_home_sections.dart';
 import 'echappee_page.dart';
 
 /// Titre Fraunces h1 avec UN mot accentué en Clay Red italique.
@@ -167,15 +166,6 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   }
 
   // -- Actions -------------------------------------------------------------------
-
-  /// CTA du footer sombre : remonte à l'atelier, prêt à composer.
-  void _scrollToAtelier() {
-    _scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 450),
-      curve: Curves.easeOutCubic,
-    );
-  }
 
   void _createEchappee() {
     // Flush l'estimation en attente pour arriver sur des routes fraîches.
@@ -459,56 +449,14 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           controller: _scrollController,
           padding: const EdgeInsets.all(EchappeeSpacing.screen),
           children: [
-            const EchappeeEyebrow('Le GPS des routes qui respirent'),
-            const SizedBox(height: EchappeeSpacing.s12),
+            // Home volontairement sobre : un titre, l'atelier, les carnets.
+            // Le manifeste et le « comment ça marche » vivent dans Réglages.
             _accentTitle('Combien de temps veux-tu ', 't\'offrir', ' ?'),
-            const SizedBox(height: EchappeeSpacing.s12),
-            Text(
-              'Quelques minutes de détour, une boulangerie qui sent bon, '
-              'un point de vue oublié — l\'itinéraire dessine ton humeur, '
-              'pas l\'inverse.',
-              style: EchappeeTypography.body
-                  .copyWith(color: EchappeeColors.textSecondary),
-            ),
-            const SizedBox(height: EchappeeSpacing.s8),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  foregroundColor: EchappeeColors.primary,
-                ),
-                onPressed: () => _applyCarnet(EchappeeCarnet.all.first),
-                icon: const Icon(Icons.east, size: 16),
-                label: Text(
-                  'Voir une échappée d\'exemple',
-                  style: EchappeeTypography.body.copyWith(
-                    color: EchappeeColors.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: EchappeeSpacing.s8),
-            const Center(
-              child: Text(
-                '2 400 lieux choisis à la main · +12 min en moyenne',
-                style: EchappeeTypography.bodySmall,
-              ),
-            ),
             const SizedBox(height: EchappeeSpacing.section),
             _atelierCard(planner),
             const SizedBox(height: EchappeeSpacing.section),
             EchappeeCarnetsSection(onCarnetTap: _applyCarnet),
             const SizedBox(height: EchappeeSpacing.section),
-            const EchappeeHowItWorksSection(),
-            const SizedBox(height: EchappeeSpacing.section),
-            const EchappeeManifesteSection(),
-            const SizedBox(height: EchappeeSpacing.section),
-            EchappeeFooterCta(
-              onCreate: _scrollToAtelier,
-              onExample: () => _applyCarnet(EchappeeCarnet.all.first),
-            ),
           ],
         ),
       ),

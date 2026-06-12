@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/providers.dart';
 import '../../../features/analytics/domain/analytics_repository.dart'
@@ -9,10 +10,14 @@ import '../../../shared/models/models.dart';
 import '../design_system/design_system.dart';
 import 'echappee_page.dart';
 
-/// Splash L'Échappée : crème, symbole, tagline — puis routage selon la
-/// session restaurée (même logique que le splash core).
+/// Splash L'Échappée : symbole, tagline — puis routage local. Pas de compte :
+/// premier lancement → onboarding + choix du véhicule, sinon direct l'app.
 class EchappeeSplashScreen extends ConsumerStatefulWidget {
   const EchappeeSplashScreen({super.key});
+
+  /// Clé prefs posée à la fin de l'onboarding (voir EchappeeOnboardingScreen).
+  static const onboardedPrefKey = 'onboarding.done';
+  static const consentPrefKey = 'consent.location';
 
   @override
   ConsumerState<EchappeeSplashScreen> createState() =>
@@ -31,23 +36,15 @@ class _EchappeeSplashScreenState extends ConsumerState<EchappeeSplashScreen> {
   }
 
   Future<void> _redirect() async {
-    UserProfile? user;
-    try {
-      user = await ref.read(authControllerProvider.future);
-      if (user != null) {
-        await ref.read(authControllerProvider.notifier).syncConsent();
-      }
-    } catch (_) {
-      user = null;
-    }
+    final prefs = await SharedPreferences.getInstance();
+    // Réhydrate le consentement localisation (révocable dans Réglages).
+    ref.read(consentAcceptedProvider.notifier).state =
+        prefs.getBool(EchappeeSplashScreen.consentPrefKey) ?? false;
+    final onboarded =
+        prefs.getBool(EchappeeSplashScreen.onboardedPrefKey) ?? false;
     await Future<void>.delayed(const Duration(milliseconds: 700));
     if (!mounted) return;
-    if (user == null) {
-      final consent = ref.read(consentAcceptedProvider);
-      context.go(consent ? '/echappee/login' : '/echappee/onboarding');
-    } else {
-      context.go('/echappee/home');
-    }
+    context.go(onboarded ? '/echappee/home' : '/echappee/onboarding');
   }
 
   @override

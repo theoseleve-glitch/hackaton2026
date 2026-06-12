@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../app/config.dart';
 import '../../../app/providers.dart';
+import '../../../product_modules/echappee/presentation/echappee_splash_screen.dart'
+    show EchappeeSplashScreen;
 import '../../../shared/models/models.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
+  /// Le mode produit change réellement d'expérience : on repart sur
+  /// l'accueil correspondant.
+  void _applyMode(BuildContext context, WidgetRef ref, ProductContext mode) {
+    ref.read(productModeProvider.notifier).state = mode;
+    switch (mode) {
+      case ProductContext.terroir:
+        context.go('/echappee/home');
+      case ProductContext.ecodrive:
+        context.go('/ecodrive/dashboard');
+      case ProductContext.common:
+        context.go('/home');
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authControllerProvider).valueOrNull;
     final mode = ref.watch(productModeProvider);
     final consent = ref.watch(consentAcceptedProvider);
     return Scaffold(
@@ -19,9 +34,10 @@ class SettingsScreen extends ConsumerWidget {
       body: ListView(
         children: [
           ListTile(
-            leading: const Icon(Icons.person),
-            title: Text(user?.displayName ?? user?.email ?? 'Profil'),
-            subtitle: Text(AppConfig.demoMode ? 'Mode démo' : 'Compte Supabase'),
+            leading: const Icon(Icons.directions_car_outlined),
+            title: const Text('Mon véhicule'),
+            subtitle: const Text('Pour les calculs carburant et CO₂'),
+            onTap: () => context.push('/echappee/vehicle?edit=1'),
           ),
           const Divider(),
           ListTile(
@@ -36,8 +52,7 @@ class SettingsScreen extends ConsumerWidget {
                     value: ProductContext.ecodrive, label: Text('Éco')),
               ],
               selected: {mode},
-              onSelectionChanged: (s) =>
-                  ref.read(productModeProvider.notifier).state = s.first,
+              onSelectionChanged: (s) => _applyMode(context, ref, s.first),
             ),
           ),
           SwitchListTile(
@@ -47,42 +62,35 @@ class SettingsScreen extends ConsumerWidget {
             value: consent,
             onChanged: (v) async {
               ref.read(consentAcceptedProvider.notifier).state = v;
-              // Persist so the choice survives restarts (RGPD: revocable).
-              final u = ref.read(authControllerProvider).valueOrNull;
-              if (u == null) return;
-              final repo = ref.read(userRepositoryProvider);
-              final profile = await repo.getProfile(u.id);
-              if (profile != null) {
-                await repo.updateProfile(
-                    profile.copyWith(locationConsentAccepted: v));
-              }
+              // Persiste localement (RGPD : révocable, pas de compte).
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setBool(EchappeeSplashScreen.consentPrefKey, v);
             },
           ),
           ListTile(
             leading: const Icon(Icons.delete_outline),
-            title: const Text('Supprimer mes données'),
-            subtitle: const Text(
-                'À venir — voir PRIVACY_NOTES.md (droit à l\'effacement).'),
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Fonction prévue avant production.'))),
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.palette_outlined),
-            title: const Text('Design system L\'Échappée'),
-            subtitle: const Text('Vitrine des composants (dev)'),
-            onTap: () => context.push('/echappee/design'),
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Se déconnecter'),
+            title: const Text('Effacer mes données locales'),
+            subtitle:
+                const Text('Véhicule, statistiques et préférences.'),
             onTap: () async {
-              await ref.read(authControllerProvider.notifier).signOut();
-              if (context.mounted) context.go('/login');
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.clear();
+              ref.read(consentAcceptedProvider.notifier).state = false;
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Données locales effacées.')));
+              }
             },
           ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.menu_book_outlined),
+            title: const Text('Le manifeste'),
+            subtitle: const Text('Pourquoi L\'Échappée existe'),
+            onTap: () => context.push('/echappee/manifeste'),
+          ),
+          // La vitrine du design system n'apparaît plus dans l'UI : outil
+          // d'équipe, accessible par la route /echappee/design (deep link).
         ],
       ),
     );

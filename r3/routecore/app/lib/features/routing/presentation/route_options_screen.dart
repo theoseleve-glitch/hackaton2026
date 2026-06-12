@@ -108,6 +108,6 @@ class _RouteOptionsScreenState extends ConsumerState<RouteOptionsScreen> {
         RouteMode.fastest => 'Trajet rapide',
         RouteMode.shortest => 'Trajet court',
         RouteMode.eco => 'Trajet éco',
-        RouteMode.discovery => 'Trajet découverte',
+        RouteMode.discovery => 'L\'Échappée',
       };
 }
