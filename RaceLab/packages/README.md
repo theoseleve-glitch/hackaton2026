@@ -1,5 +1,31 @@
 # RaceLab packages
 
+> **Contract reference: `../CONTRACTS.md`** — the frozen surface of every package below (what the frontend may import, result shapes, stability promises). This file is the narrative status; CONTRACTS.md is the API.
+
+## `schema/` — Unified domain contract (keystone, D26–D31)
+
+THE source of truth for every domain shape: branded ids, Théo's logbook vocabulary verbatim, cars + chassis registry + dynamic class labels + conditional sheet sections (D26), tracks with turn-by-turn snapshots, weather observations (Patm included) with manual-override provenance, the ultimate run log (discriminated laps-vs-summary timing, tyres, fuel, driver state, per-turn feedback), outcome records with trial-time attribution, account/trial/entitlements (D28), race strategy math (`planRace`, `detectTyreCliff` — D29), the append-only outbox (D31), load-path `parse.ts` validators, and `bridge.ts` lifts for both legacy models (makes B0 mechanical). Pure data + pure functions, zero deps. `npm test` = 203+ checks.
+
+## `storage/` — D11 storage core (D31)
+
+Injected drivers (AsyncStorage-shaped KV / SQL executor / device-only expo-sqlite glue), typed repos for every schema entity, **every mutation journals one OutboxEntry in the same logical transaction**, all reads parse-validated with quarantine-never-wipe, deterministic idempotent legacy-blob migration (never deletes the originals). The outbox is the future backup protocol. `npm test` = 137 checks incl. fault-injection sweeps at every write offset.
+
+## `weather/` — Open-Meteo adapter (B3, Tier B)
+
+Forecast auto-fill + historical backfill for offline-logged sessions, no API key, all I/O injected. Station-level `surface_pressure` = the nitro Patm. Cache with stale-if-offline; archive publication delay handled; manual override wins per-field with provenance. The advisor never imports it (D18). `npm test` = 129 checks against real recorded fixtures. ⚠ free tier non-commercial — licensing call before launch.
+
+## `speedhive/` — Unofficial MYLAPS adapter (B9, D30)
+
+Event results (verified live) + practice API (from William's intercept) behind one isolation layer: URL drift → `ENDPOINTS` only, payload drift → `types.ts`/`import.ts` only. Bearer scoped to the practice host; 401/403 → `auth_required`, never retried; `politePoll` hard 30 s floor; path-unverified endpoints quarantined behind `api.unverified.*`. Lap import is the only producer of `{kind:'laps'}` timing. `npm test` = 130 checks, fully offline.
+
+## `account/` + `../server/` — Trial, subscription, deletion (B5/B6, D28)
+
+Client: 15-day once-ever offline-capable trial, tamper-guarded clock, advisor structurally free, external-web subscribe URL (NO IAP), account deletion with offline tombstone retry. Server (Vercel functions, code-ready/NOT deployed): subscription status, first-seen trial registry, idempotent backup push/restore over the outbox, GDPR-atomic account wipe. `npm test` = 135 checks across both.
+
+## `kb/src/` — KB data validators (B10)
+
+`parseChassisRegistry`/`parseClassDecl` gates over `kb/chassis/registry.json` (11-entry 1/8 TT competition buggy class, identity-facts-only `pending_pdf` entries with provenance) and `kb/classes/1-8-tt-buggy.json`. Malformed KB data is a build error. Canonical facet vocabulary (`offroad`/`1/8`/`buggy`) lives here. `npm test` = 93 checks.
+
 ## `sessions/` — Race log + learning loop (D22)
 
 Pure data + pure functions, no I/O. A session = one track day: TrackInfo (name/surface/grip/conditions) + append-only **runs** (setup version raced, laps, feedback) + **outcome records** (the engineer's better/same/worse verdicts). Hardened invariants: frozen per-record **track snapshots at log time** (changing grip never falsifies history), denormalized `setup_name`, discriminated `addRun`/`recordOutcome` results (dropped data is impossible to miss), write-time NaN guards, deep-freeze surviving deserialize, never-wipe discriminated persistence. `npm test` = 57 checks.

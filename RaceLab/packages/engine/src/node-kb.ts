@@ -1,9 +1,9 @@
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 import { z } from "zod";
-import { assertValidKBData, type KBData } from "./data";
+import { assertValidKBData, type ChassisRegistryEntry, type KBClassDef, type KBData } from "./data";
 import type { ChassisTemplate, KBRule, Taxonomy } from "./types";
 
 /**
@@ -31,6 +31,32 @@ const RuleSchema = z.object({
   scope: z.array(z.string()).min(1),
 });
 
+// kb/chassis/registry.json — schema/cars.ts ChassisRegistryEntry is the contract
+// for the REQUIRED fields; the KB builder's extra fields (power_types,
+// template_status, provenance, …) pass through untouched. Accepts a bare
+// array or { entries: [...] }.
+const RegistryEntrySchema = z
+  .object({
+    chassis_id: z.string().min(1),
+    template_id: z.string().min(1),
+    brand: z.string(),
+    model: z.string(),
+    category: z.string(),
+    scale: z.string(),
+    type: z.string(),
+    default_power_type: z.enum(["nitro", "brushless"]),
+  })
+  .passthrough();
+const RegistryFileSchema = z.union([
+  z.array(RegistryEntrySchema),
+  z.object({ entries: z.array(RegistryEntrySchema) }),
+]);
+
+// kb/classes/*.json — tolerant: the engine only requires class_id; the rest of
+// the shape is owned by the KB builder and passes through untouched.
+const ClassDefSchema = z.object({ class_id: z.string().min(1) }).passthrough();
+const ClassFileSchema = z.union([ClassDefSchema, z.array(ClassDefSchema)]);
+
 export function loadKBData(): KBData {
   const rulesDir = join(KB_DIR, "rules");
   const rules: KBRule[] = [];
@@ -44,13 +70,48 @@ export function loadKBData(): KBData {
   const templates: Record<string, ChassisTemplate> = {};
   const chassisDir = join(KB_DIR, "chassis");
   for (const file of readdirSync(chassisDir).filter(
-    (f) => f.endsWith(".json") && !f.includes("pdf-map") && f !== "bundle.json",
+    (f) =>
+      f.endsWith(".json") &&
+      !f.includes("pdf-map") &&
+      f !== "bundle.json" &&
+      f !== "registry.json",
   )) {
     const template = JSON.parse(readFileSync(join(chassisDir, file), "utf8")) as ChassisTemplate;
     templates[template.template_id] = template;
   }
 
-  const data: KBData = { rules, taxonomy, templates };
+  // kb/chassis/registry.json — OPTIONAL (lands in parallel); validated when present
+  let registry: ChassisRegistryEntry[] | undefined;
+  const registryPath = join(chassisDir, "registry.json");
+  if (existsSync(registryPath)) {
+    const raw = RegistryFileSchema.parse(JSON.parse(readFileSync(registryPath, "utf8")));
+    registry = (Array.isArray(raw) ? raw : raw.entries) as ChassisRegistryEntry[];
+  }
+
+  // kb/classes/*.json — OPTIONAL (lands in parallel); validated when present
+  let classes: Record<string, KBClassDef> | undefined;
+  const classesDir = join(KB_DIR, "classes");
+  if (existsSync(classesDir)) {
+    const defs: Record<string, KBClassDef> = {};
+    for (const file of readdirSync(classesDir).filter((f) => f.endsWith(".json")).sort()) {
+      const raw = ClassFileSchema.parse(JSON.parse(readFileSync(join(classesDir, file), "utf8")));
+      for (const def of Array.isArray(raw) ? raw : [raw]) {
+        if (defs[def.class_id]) {
+          throw new Error(`KB classes: duplicate class_id '${def.class_id}' (${file})`);
+        }
+        defs[def.class_id] = def as KBClassDef;
+      }
+    }
+    if (Object.keys(defs).length > 0) classes = defs;
+  }
+
+  const data: KBData = {
+    rules,
+    taxonomy,
+    templates,
+    ...(registry !== undefined ? { registry } : {}),
+    ...(classes !== undefined ? { classes } : {}),
+  };
   assertValidKBData(data);
   return data;
 }

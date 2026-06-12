@@ -1,8 +1,11 @@
 import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
+import { historyForRule, historyTier, type RuleHistory } from "./history";
 
 export interface ScoredRule {
   rule: KBRule;
   score: number;
+  /** This-track rated history for the rule (learning-loop read half), when any. */
+  history?: RuleHistory;
 }
 
 const MAX_RULES = 8;
@@ -11,6 +14,13 @@ const MAX_RULES = 8;
  * Deterministic retrieval — a pure function over the KB (D13: no vector store).
  * Scoring: exact (symptom, phase) match > symptom-only match; track conditions
  * amplify/reduce; counter-indicated rules are excluded outright.
+ *
+ * History re-ranking (docs/04 §6 read half): a rule whose past outcome AT THIS
+ * TRACK rated 'worse' (net) sorts below clean rules; 'better' (net) sorts
+ * above. GROUNDED-FIRST: history runs strictly AFTER the symptom/condition/
+ * scope filters, so it can only re-order rules the KB already grounds — it can
+ * never promote a rule whose conditions don't match, and its influence is
+ * capped at one tier either way.
  */
 export function retrieve(
   rules: KBRule[],
@@ -44,15 +54,18 @@ export function retrieve(
     for (const c of rule.conditions.reduced_on) if (trackConditions.has(c)) score -= 2;
     if (score <= 0) continue;
 
-    scored.push({ rule, score });
+    const history = historyForRule(rule.id, bundle);
+    scored.push(history ? { rule, score, history } : { rule, score });
   }
 
   const confidenceRank = { high: 2, medium: 1, low: 0 } as const;
   scored.sort(
     (a, b) =>
+      historyTier(b.history) - historyTier(a.history) ||
       b.score - a.score ||
       confidenceRank[b.rule.confidence] - confidenceRank[a.rule.confidence] ||
-      a.rule.reversal_cost_minutes - b.rule.reversal_cost_minutes,
+      a.rule.reversal_cost_minutes - b.rule.reversal_cost_minutes ||
+      (a.rule.id < b.rule.id ? -1 : a.rule.id > b.rule.id ? 1 : 0),
   );
   return scored.slice(0, MAX_RULES);
 }

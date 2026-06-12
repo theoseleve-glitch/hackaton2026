@@ -1,0 +1,17 @@
+{
+  "name": "racelab-weather",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab weather module (Tier B enrichment, B3): Open-Meteo forecast + archive adapters (no API key), hourly arrays mapped to schema WeatherObservation, gps+hour-bucket cache with TTL and stale-if-offline. All I/O injected (fetch, key-value driver, clock) — zero node built-ins, zero runtime deps, bundles into the app. Offline is a normal case, never an exception (D18 culture: the advice path never depends on this package succeeding).",
+  "scripts": {
+    "test": "tsx src/test-weather.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

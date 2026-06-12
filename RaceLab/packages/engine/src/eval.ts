@@ -11,6 +11,10 @@ interface Scenario {
     kind: "recommendation" | "refusal" | "do_nothing";
     settings_any_of?: string[];
     max_reversal_minutes?: number;
+    /** The primary MUST cite this rule (history promotion scenarios). */
+    primary_cites?: string;
+    /** The primary must NOT cite this rule (history demotion scenarios). */
+    primary_cites_not?: string;
   };
   bundle: ContextBundle;
 }
@@ -54,6 +58,20 @@ for (const file of files) {
       !settings.some((s) => scenario.expect.settings_any_of!.includes(s))
     ) {
       problems.push(`no option in expert set [${scenario.expect.settings_any_of.join(", ")}]; got [${settings.join(", ")}]`);
+    }
+    if (
+      scenario.expect.primary_cites &&
+      !rec.primary!.citations.includes(scenario.expect.primary_cites)
+    ) {
+      problems.push(
+        `primary should cite ${scenario.expect.primary_cites}; cites [${rec.primary!.citations.join(", ")}]`,
+      );
+    }
+    if (
+      scenario.expect.primary_cites_not &&
+      rec.primary!.citations.includes(scenario.expect.primary_cites_not)
+    ) {
+      problems.push(`primary must not cite ${scenario.expect.primary_cites_not} (history-demoted)`);
     }
     if (!rec.conditions_echo || rec.conditions_echo.length < 10) problems.push("missing conditions echo");
   }

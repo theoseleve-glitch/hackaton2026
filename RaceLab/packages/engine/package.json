@@ -10,7 +10,7 @@
     "cli": "tsx src/cli.ts",
     "eval": "tsx src/eval.ts",
     "bundle": "tsx src/bundle-kb.ts",
-    "test": "tsx src/test-nlu.ts && tsx src/test-chat.ts && tsx src/eval.ts",
+    "test": "tsx src/test-nlu.ts && tsx src/test-chat.ts && tsx src/test-plan.ts && tsx src/test-reports.ts && tsx src/test-planner.ts && tsx src/eval.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

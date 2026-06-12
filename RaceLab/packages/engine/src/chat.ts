@@ -1,15 +1,16 @@
 import { getTemplate, type KBData } from "./data";
 import { parseFeedback } from "./nlu";
-import { retrieve } from "./retrieval";
-import { engineScopeViolation, raceDayFilter, DO_NOTHING_MESSAGE } from "./guard";
-import { conditionsEcho, ruleToOption } from "./offline";
+import { proposePlan } from "./plan";
+import { engineScopeViolation } from "./guard";
+import { conditionsEcho } from "./offline";
 import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types";
 
 /**
  * RaceLab's deterministic race-engineer chatbot (D18) — no API, no model.
  * A dialogue state machine over the KB: parse the complaint, ask the one
- * clarifying question a real engineer would ask, propose ONE change, then
- * walk the better/same/worse loop through ranked alternatives.
+ * clarifying question a real engineer would ask, propose a RANKED PLAN of up
+ * to 3 cited changes — applied and rated ONE AT A TIME (D6: never two
+ * untested changes on the car) — then walk the better/same/worse loop.
  */
 
 type State = "awaiting_problem" | "awaiting_phase" | "awaiting_outcome";
@@ -27,6 +28,11 @@ export interface OutcomeEvent {
    *  recommendation was presented — not when the driver rated it (a save or
    *  load in between must not mis-attribute the outcome). */
   setup_version_id: string | null;
+  /** 1-based rank of the rated change inside its plan (additive — absent on
+   *  events emitted before the plan protocol existed). */
+  plan_position?: number;
+  /** Total changes in the plan the rated change belonged to. */
+  plan_size?: number;
 }
 
 export interface ChatHooks {
@@ -40,6 +46,8 @@ export class RaceEngineerChat {
   private queue: RecommendationOption[] = [];
   private current?: RecommendationOption;
   private currentVersionId: string | null = null; // stamped at trial time
+  private planSize = 0; // changes in the active plan (0 = no plan presented)
+  private planPos = 0; //  1-based position of `current` within the plan
   private data: KBData;
   private template;
   private hooks: ChatHooks;
@@ -108,6 +116,13 @@ export class RaceEngineerChat {
     if (/^practice/.test(lower)) {
       this.bundle.mode = "practice";
       return ["🔧 Practice mode: we can experiment."];
+    }
+    if (/^(next|continue|keep going)\b/.test(lower)) {
+      if (this.state === "awaiting_outcome") {
+        return ['Rate the current change first — better / same / worse? (one change at a time)'];
+      }
+      if (this.queue.length > 0) return this.presentNext(false);
+      return ["No plan pending — describe what the car is doing."];
     }
     if (/^(help|\?)$/.test(lower)) {
       return [
@@ -182,27 +197,29 @@ export class RaceEngineerChat {
 
   private recommendFor(tags: FeedbackTag[]): string[] {
     this.bundle.feedback = { tags, text: "" };
-    let scored = retrieve(this.data.rules, this.bundle, this.template);
-    if (this.bundle.mode === "race_day") {
-      scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
-    }
-    if (scored.length === 0) {
+    const plan = proposePlan(this.bundle, this.data);
+    if (plan.kind !== "plan") {
       this.state = "awaiting_problem";
+      this.queue = [];
+      this.planSize = 0;
+      this.planPos = 0;
       return [
-        this.bundle.mode === "race_day"
-          ? `🤝 ${DO_NOTHING_MESSAGE}`
+        plan.kind === "do_nothing"
+          ? `🤝 ${plan.message}`
           : "I don't have a verified chassis rule for that one. Before touching the chassis: check tires/inserts for this surface — that's the usual cause.",
       ];
     }
-    // one option per setting, ranked
-    const seen = new Set<string>();
-    this.queue = [];
-    for (const { rule } of scored) {
-      if (seen.has(rule.setting)) continue;
-      seen.add(rule.setting);
-      this.queue.push(ruleToOption(rule, this.bundle));
+    this.queue = plan.changes.map((c) => c.option);
+    this.planSize = plan.changes.length;
+    this.planPos = 0;
+    const header: string[] = [];
+    if (this.planSize > 1) {
+      header.push(
+        `Plan: ${this.planSize} grounded changes, ranked. ONE at a time — apply, run, rate, then we decide.`,
+      );
+      for (const c of plan.changes) header.push(`  ${c.position}. ${c.option.change}`);
     }
-    return this.presentNext(true);
+    return [...header, ...this.presentNext(true)];
   }
 
   private presentNext(first: boolean): string[] {
@@ -212,38 +229,56 @@ export class RaceEngineerChat {
     this.currentVersionId = this.bundle.setup_version_id ?? null;
     if (!this.current) {
       this.state = "awaiting_problem";
+      this.planSize = 0;
+      this.planPos = 0;
       return [
         "We've been through my whole list for that symptom. Revert to your last good setup and let's look at tires — or describe what changed.",
       ];
     }
+    this.planPos += 1;
     this.state = "awaiting_outcome";
     const o = this.current;
     const lead = first ? "Try ONE change:" : "Next on my list:";
+    const planTag = this.planSize > 1 ? ` (change ${this.planPos} of ${this.planSize})` : "";
     return [
-      `${lead}`,
+      `${lead}${planTag}`,
       `🔧 ${o.change}`,
       `   why: ${o.mechanism}`,
+      ...(o.history_note ? [`   📒 history: ${o.history_note}`] : []),
       `   revert: ${o.revert}  ·  confidence: ${o.confidence}  ·  source: ${o.citations.join(", ")}`,
       `Run it, then tell me: better / same / worse?`,
     ];
   }
 
+  private emitOutcome(outcome: OutcomeEvent["outcome"]): void {
+    this.hooks.onOutcome?.({
+      outcome,
+      option: this.current ?? null,
+      setup_version_id: this.currentVersionId,
+      ...(this.planSize > 0 ? { plan_position: this.planPos, plan_size: this.planSize } : {}),
+    });
+  }
+
   private onOutcome(input: string): string[] {
     const lower = input.toLowerCase();
     if (/better|good|fixed|solved|works/.test(lower)) {
-      this.hooks.onOutcome?.({ outcome: "better", option: this.current ?? null, setup_version_id: this.currentVersionId });
+      this.emitOutcome("better");
       this.state = "awaiting_problem";
-      return [
-        "✅ Keep it — note it on the setup sheet so the change is traceable.",
-        "Anything else the car is doing?",
-      ];
+      const lines = ["✅ Keep it — note it on the setup sheet so the change is traceable."];
+      if (this.queue.length > 0) {
+        lines.push(
+          `That was change ${this.planPos} of ${this.planSize}. The car's better — you can stop here, or say "next" to try #${this.planPos + 1} from the plan.`,
+        );
+      }
+      lines.push("Anything else the car is doing?");
+      return lines;
     }
     if (/worse|bad|horrible/.test(lower)) {
-      this.hooks.onOutcome?.({ outcome: "worse", option: this.current ?? null, setup_version_id: this.currentVersionId });
+      this.emitOutcome("worse");
       return [`↩ Revert that first (${this.current?.revert ?? "put it back"}). One variable at a time.`, ...this.presentNext(false)];
     }
     if (/same|no change|nothing|identical/.test(lower)) {
-      this.hooks.onOutcome?.({ outcome: "same", option: this.current ?? null, setup_version_id: this.currentVersionId });
+      this.emitOutcome("same");
       return ["↩ Revert it — a change that does nothing is just wear. Next:", ...this.presentNext(false)];
     }
     // driver described a NEW problem instead of an outcome

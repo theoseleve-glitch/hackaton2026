@@ -9,5 +9,8 @@ const data = loadKBData();
 const out = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "kb", "bundle.json");
 writeFileSync(out, JSON.stringify(data));
 console.log(
-  `bundled ${data.rules.length} rules, ${Object.keys(data.templates).length} template(s) → ${out}`,
+  `bundled ${data.rules.length} rules, ${Object.keys(data.templates).length} template(s)` +
+    `${data.registry ? `, ${data.registry.length} registry entr(ies)` : ""}` +
+    `${data.classes ? `, ${Object.keys(data.classes).length} class(es)` : ""}` +
+    ` → ${out}`,
 );

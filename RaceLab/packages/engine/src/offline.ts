@@ -1,11 +1,16 @@
 import type { ContextBundle, KBRule, RecommendationOption } from "./types";
 import type { ScoredRule } from "./retrieval";
+import { historyNote, type RuleHistory } from "./history";
 
 /**
  * Offline deterministic path (D13): each KB rule already carries everything the
  * output contract needs — render a templated card on-device, $0, no signal.
  */
-export function ruleToOption(rule: KBRule, bundle: ContextBundle): RecommendationOption {
+export function ruleToOption(
+  rule: KBRule,
+  bundle: ContextBundle,
+  history?: RuleHistory,
+): RecommendationOption {
   const current = bundle.setup[rule.setting];
   const currentTxt = current !== undefined ? ` (currently ${current})` : "";
   const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
@@ -18,6 +23,7 @@ export function ruleToOption(rule: KBRule, bundle: ContextBundle): Recommendatio
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,
     if_it_does_not_help: "Revert, then re-test — the cause is likely the next-ranked option below, or tires for this surface.",
+    ...(history ? { history_note: historyNote(history) } : {}),
   };
 }
 
@@ -29,10 +35,10 @@ export function buildOfflineCard(
   if (scored.length === 0) return null;
   const seenSettings = new Set<string>();
   const options: RecommendationOption[] = [];
-  for (const { rule } of scored) {
+  for (const { rule, history } of scored) {
     if (seenSettings.has(rule.setting)) continue;
     seenSettings.add(rule.setting);
-    options.push(ruleToOption(rule, bundle));
+    options.push(ruleToOption(rule, bundle, history));
     if (options.length === 3) break;
   }
   const [primary, ...alternatives] = options;
@@ -46,6 +52,6 @@ export function conditionsEcho(bundle: ContextBundle): string {
   return `${bundle.track.grip.replace("_", " ")} grip ${bundle.track.surface} at ${bundle.track.name}${weatherTxt} (${bundle.track.conditions.join(", ") || "no condition tags"}) — ${bundle.mode === "race_day" ? "RACE DAY" : "practice"}`;
 }
 
-function humanize(id: string): string {
+export function humanize(id: string): string {
   return id.replace(/_/g, " ");
 }
