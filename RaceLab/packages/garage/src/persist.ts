@@ -4,7 +4,7 @@ import type { CarEntity, GarageState } from "./types";
  *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
  *  so callers can stash unreadable blobs instead of wiping a user's garage. */
 
-export const GARAGE_FORMAT_VERSION = 1;
+export const GARAGE_FORMAT_VERSION = 2;
 
 interface Envelope {
   format: number;
@@ -33,7 +33,17 @@ export function deserializeGarage(raw: string): DeserializeGarageResult {
   // Migration switch — every future format bump adds an upgrade case here.
   let state: GarageState;
   switch (env.format) {
-    case 1:
+    case 1: {
+      // v1 → v2 moved the tank to the pilot's unit: fuel_tank_cc (cc)
+      // becomes fuel_tank_cl (cL = cc / 10, 1 decimal); cc is dropped.
+      const v1 = env.state;
+      if (typeof v1 !== "object" || v1 === null || !Array.isArray(v1.cars)) {
+        return { ok: false, reason: "corrupt" };
+      }
+      state = { cars: v1.cars.map(migrateCarV1) };
+      break;
+    }
+    case 2:
       state = env.state;
       break;
     default:
@@ -42,6 +52,18 @@ export function deserializeGarage(raw: string): DeserializeGarageResult {
 
   if (!isValidState(state)) return { ok: false, reason: "corrupt" };
   return { ok: true, state };
+}
+
+/** v1 → v2: a car with fuel_tank_cc and no fuel_tank_cl gets
+ *  fuel_tank_cl = cc / 10 (rounded to 1 decimal); fuel_tank_cc is removed
+ *  from the migrated object. Malformed entries pass through untouched so
+ *  the shape validation below reports them as corrupt. */
+function migrateCarV1(c: CarEntity): CarEntity {
+  if (typeof c !== "object" || c === null || typeof c.fuel_tank_cc !== "number") return c;
+  const { fuel_tank_cc, ...rest } = c;
+  const fuel_tank_cl =
+    typeof c.fuel_tank_cl === "number" ? c.fuel_tank_cl : Math.round(fuel_tank_cc) / 10;
+  return { ...rest, fuel_tank_cl };
 }
 
 function isValidState(s: GarageState): boolean {

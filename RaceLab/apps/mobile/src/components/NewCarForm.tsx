@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import type { CarEntity, PowerType } from "../../../../packages/garage/src";
 import { KB } from "../kb";
+import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
 import { colors, radius } from "../theme";
+import { AutofillInput } from "./AutofillInput";
 import { ChipRow, LabeledInput, Section, num } from "./forms";
 
 /**
@@ -34,10 +36,8 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
   const [motor, setMotor] = useState(initial?.motor ?? "");
   const [esc, setEsc] = useState(initial?.esc ?? "");
   const [battery, setBattery] = useState(initial?.battery ?? "");
-  const [weight, setWeight] = useState(initial?.weight_g !== undefined ? String(initial.weight_g) : "");
-  const [tank, setTank] = useState(initial?.fuel_tank_cc !== undefined ? String(initial.fuel_tank_cc) : "");
+  const [tank, setTank] = useState(initial?.fuel_tank_cl !== undefined ? String(initial.fuel_tank_cl) : "");
   const [transponder, setTransponder] = useState(initial?.transponder ?? "");
-  const [options, setOptions] = useState(initial?.options ?? "");
 
   // template: exact chassis template when we have one for this brand+model,
   // generic-offroad otherwise (real templates land with KB releases)
@@ -62,10 +62,9 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
       motor: power === "electric" ? motor.trim() || undefined : undefined,
       esc: power === "electric" ? esc.trim() || undefined : undefined,
       battery: power === "electric" ? battery.trim() || undefined : undefined,
-      weight_g: num(weight),
-      fuel_tank_cc: power === "nitro" ? num(tank) : undefined,
+      fuel_tank_cl: power === "nitro" ? num(tank) : undefined,
       transponder: transponder.trim() || undefined,
-      options: options.trim() || undefined,
+      options: initial?.options, // edited from the setup sheet now
       photo_uri: initial?.photo_uri,
       notes: initial?.notes,
     });
@@ -77,8 +76,8 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
 
       <Section title="Identity">
         <LabeledInput label="Car name" value={name} onChangeText={setName} placeholder='e.g. "race MP11"' />
-        <LabeledInput label="Brand" value={brand} onChangeText={setBrand} placeholder="Kyosho, Tekno, Associated…" />
-        <LabeledInput label="Model" value={model} onChangeText={setModel} placeholder="Inferno MP11, NB48 2.1…" />
+        <AutofillInput label="Brand" value={brand} onChangeText={setBrand} pool={CAR_BRANDS} placeholder="Kyosho, Tekno, Associated…" />
+        <AutofillInput label="Model" value={model} onChangeText={setModel} pool={() => modelsForBrand(brand)} placeholder="Inferno MP11, NB48 2.2…" />
       </Section>
 
       <Section title="Typology — drives the sheet labels">
@@ -94,21 +93,19 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
 
       {power === "nitro" ? (
         <Section title="Engine">
-          <LabeledInput label="Engine" value={engine} onChangeText={setEngine} placeholder="e.g. OS Speed B21" />
-          <LabeledInput label="Fuel tank (cc) — feeds race strategy" value={tank} onChangeText={setTank} keyboardType="numeric" placeholder="e.g. 125" />
+          <AutofillInput label="Engine" value={engine} onChangeText={setEngine} pool={ENGINES} placeholder="e.g. OS Speed B21" />
+          <LabeledInput label="Fuel tank (cL) — feeds race strategy" value={tank} onChangeText={setTank} keyboardType="decimal-pad" placeholder="e.g. 12.5" />
         </Section>
       ) : (
         <Section title="Electronics">
-          <LabeledInput label="Motor" value={motor} onChangeText={setMotor} placeholder="e.g. 2050kV" />
-          <LabeledInput label="ESC" value={esc} onChangeText={setEsc} placeholder="" />
+          <AutofillInput label="Motor" value={motor} onChangeText={setMotor} pool={ELECTRIC} placeholder="e.g. Hobbywing 2050kV" />
+          <AutofillInput label="ESC" value={esc} onChangeText={setEsc} pool={ELECTRIC} placeholder="" />
           <LabeledInput label="Battery" value={battery} onChangeText={setBattery} placeholder="e.g. 4S 6500" />
         </Section>
       )}
 
-      <Section title="More">
-        <LabeledInput label="Weight (g)" value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="optional" />
-        <LabeledInput label="Transponder # (Speedhive)" value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder="optional — lap import later" />
-        <LabeledInput label="Options installed" value={options} onChangeText={setOptions} placeholder="e.g. alu servo horn, HD diff cups" />
+      <Section title="Timing">
+        <LabeledInput label="Transponder # (Speedhive)" value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder="link once — laps import on app open" />
       </Section>
 
       <View style={styles.actions}>

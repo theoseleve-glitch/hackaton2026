@@ -40,7 +40,9 @@ const BUMPY_CORNER_RATIO = 0.3;
  * Deterministic condition tags for a track: trait mappings, plus ≥30% of
  * corners featuring bump/rut → bumpy + rough, plus any corner featuring
  * jump → big_jumps. Output is deduplicated and ordered by the taxonomy
- * vocabulary, independent of trait/corner input order.
+ * vocabulary, independent of trait/corner input order. Multi-surface tracks
+ * (surfaces v2) emit NO tag — "mixed_surface" is not in the taxonomy, so
+ * they read through trackCharacterNotes instead.
  */
 export function trackConditionTags(track: TrackEntity): string[] {
   const tags = new Set<string>();
@@ -72,12 +74,18 @@ const TRAIT_TO_NOTE: Partial<Record<TrackTrait, string>> = {
 /**
  * Human-readable notes for traits with NO taxonomy equivalent — shown by the
  * app and echoed by the engineer in diagnosis context. Deterministic order
- * (TRACK_TRAITS declaration order via TRAIT_TO_NOTE), deduplicated.
+ * (TRACK_TRAITS declaration order via TRAIT_TO_NOTE), deduplicated. A track
+ * whose `surfaces` lists more than one entry additionally notes "mixed
+ * surface track" — "mixed_surface" is NOT in CONDITION_VOCABULARY, so the
+ * fact lands here, never as an invented tag (grounded-or-silent).
  */
 export function trackCharacterNotes(track: TrackEntity): string[] {
   const notes: string[] = [];
   for (const trait of Object.keys(TRAIT_TO_NOTE) as TrackTrait[]) {
     if (track.traits.includes(trait)) notes.push(TRAIT_TO_NOTE[trait] as string);
+  }
+  if (track.surfaces !== undefined && track.surfaces.length > 1) {
+    notes.push("mixed surface track");
   }
   return notes;
 }

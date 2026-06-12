@@ -34,16 +34,28 @@ interface Props {
   template?: ChassisTemplate;
   /** car-typology customization (hidden sections, label overrides, badges) */
   profile?: SheetProfile;
+  /** garage CarEntity options text — display-only "Options installed" line (wired by the app integrator) */
+  options?: string;
 }
 
 const SECTIONS: { title: string; match: (id: string) => boolean }[] = [
   { title: "Differentials", match: (id) => id.includes("diff") },
-  { title: "Shocks & springs", match: (id) => id.includes("shock") || id.includes("spring") },
+  {
+    // pilot vocabulary: pistons and drop ("droop"/downstop) are shock settings
+    title: "Shocks & springs",
+    match: (id) =>
+      id.includes("shock") ||
+      id.includes("spring") ||
+      id.includes("piston") ||
+      id.includes("droop") ||
+      id.includes("downstop"),
+  },
   {
     title: "Geometry",
     match: (id) =>
-      /camber|toe|caster|ride_height|downstop|kickup|anti_squat|wheelbase|track_width|ackermann|roll_center/.test(id),
+      /camber|toe|caster|ride_height|kickup|anti_squat|wheelbase|track_width|ackermann|roll_center/.test(id),
   },
+  { title: "Tires", match: (id) => id.includes("tire") },
   { title: "Bars & wing", match: (id) => id.includes("sway") || id.includes("wing") },
   { title: "Drivetrain", match: (id) => /gearing|clutch|spur/.test(id) },
 ];
@@ -51,14 +63,20 @@ const SECTIONS: { title: string; match: (id: string) => boolean }[] = [
 interface FieldDef {
   type: string;
   unit?: string;
+  /** KB-provided display label (e.g. droop_* fields read "Drop … (mm)") */
+  label?: string;
   options?: (string | number)[];
   range?: [number, number];
   step?: number;
 }
 
-export function SheetEditorScreen({ state, update, template, profile }: Props) {
+export function SheetEditorScreen({ state, update, template, profile, options }: Props) {
   const tpl = template ?? MP11;
-  const labelFor = (id: string): string => profile?.label_overrides[id] ?? label(id);
+  // precedence: typology override > KB field label (e.g. "Drop front (mm)") > title-cased id
+  const labelFor = (id: string): string =>
+    profile?.label_overrides[id] ??
+    (tpl.fields[id] as FieldDef | undefined)?.label ??
+    label(id);
   const [mode, setMode] = useState<Mode>("editor");
   const changes = useMemo(() => draftDiff(state), [state]);
   const changedMap = useMemo(
@@ -86,6 +104,7 @@ export function SheetEditorScreen({ state, update, template, profile }: Props) {
         changes={diffVsKit(state)}
         fromLabel="kit"
         toLabel={state.draft_name}
+        labelFor={labelFor}
         onBack={() => setMode("editor")}
       />
     );
@@ -99,6 +118,7 @@ export function SheetEditorScreen({ state, update, template, profile }: Props) {
         changes={diffVersions(state, mode.compare.a, mode.compare.b)}
         fromLabel={a?.name ?? "?"}
         toLabel={b?.name ?? "?"}
+        labelFor={labelFor}
         onBack={() => setMode("versions")}
       />
     );
@@ -146,6 +166,13 @@ export function SheetEditorScreen({ state, update, template, profile }: Props) {
         )}
       </Text>
 
+      {options !== undefined && options.trim().length > 0 && (
+        <View style={styles.optionsBlock}>
+          <Text style={styles.optionsTitle}>Options installed</Text>
+          <Text style={styles.optionsText}>{options}</Text>
+        </View>
+      )}
+
       <View style={styles.actions}>
         <Pressable
           style={[styles.action, changes.length === 0 && styles.actionDisabled]}
@@ -170,6 +197,7 @@ export function SheetEditorScreen({ state, update, template, profile }: Props) {
               key={id}
               id={id}
               field={field}
+              displayLabel={labelFor(id)}
               value={state.draft[id]}
               was={changedMap.has(id) ? changedMap.get(id) : undefined}
               changed={changedMap.has(id)}
@@ -191,6 +219,7 @@ export function SheetEditorScreen({ state, update, template, profile }: Props) {
                   key={id}
                   id={id}
                   field={field}
+                  displayLabel={labelFor(id)}
                   value={state.draft[id]}
                   was={changedMap.has(id) ? changedMap.get(id) : undefined}
                   changed={changedMap.has(id)}
@@ -272,12 +301,14 @@ function DiffView({
   changes,
   fromLabel,
   toLabel,
+  labelFor = label,
   onBack,
 }: {
   title: string;
   changes: ChangedField[];
   fromLabel: string;
   toLabel: string;
+  labelFor?: (id: string) => string;
   onBack: () => void;
 }) {
   return (
@@ -289,7 +320,7 @@ function DiffView({
       {changes.length === 0 && <Text style={styles.versionMeta}>Identical setups.</Text>}
       {changes.map((c) => (
         <View key={c.field} style={styles.diffRow}>
-          <Text style={styles.diffField}>{label(c.field)}</Text>
+          <Text style={styles.diffField}>{labelFor(c.field)}</Text>
           <Text style={styles.diffValues}>
             <Text style={{ color: colors.sub }}>{fmt(c.from)}</Text>
             <Text style={{ color: colors.accent }}>  →  {fmt(c.to)}</Text>
@@ -318,6 +349,7 @@ function fmt(v: string | number | undefined): string {
 function Field({
   id,
   field,
+  displayLabel,
   value,
   was,
   changed,
@@ -327,6 +359,7 @@ function Field({
 }: {
   id: string;
   field: FieldDef;
+  displayLabel: string;
   value: string | number | undefined;
   was: string | number | undefined;
   changed: boolean;
@@ -334,12 +367,16 @@ function Field({
   onChange: (id: string, value: string | number) => void;
   onStar: (id: string) => void;
 }) {
+  // don't repeat the unit when the label already carries it, e.g. "Drop front (mm)"
+  const showUnit =
+    field.unit !== undefined &&
+    !displayLabel.toLowerCase().includes(`(${field.unit.toLowerCase()})`);
   return (
     <View style={[styles.field, changed && styles.fieldChanged]}>
       <View style={styles.labelRow}>
         <Text style={styles.label}>
-          {label(id)}
-          {field.unit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
+          {displayLabel}
+          {showUnit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
           {changed ? <Text style={styles.was}>   was {fmt(was)}</Text> : null}
         </Text>
         <Pressable onPress={() => onStar(id)} hitSlop={8}>
@@ -420,6 +457,15 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   baseInfo: { color: colors.sub, fontSize: 12, marginTop: 2, marginBottom: 10 },
+  optionsBlock: { marginTop: -4, marginBottom: 10 },
+  optionsTitle: {
+    color: colors.sub,
+    fontSize: 11,
+    fontWeight: "800",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  optionsText: { color: colors.sub, fontSize: 12, fontStyle: "italic", marginTop: 2 },
   actions: { flexDirection: "row", gap: 8, marginBottom: 6 },
   action: {
     backgroundColor: colors.cardAlt,

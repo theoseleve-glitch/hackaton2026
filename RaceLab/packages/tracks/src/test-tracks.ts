@@ -109,8 +109,50 @@ check("tags: smooth + technical_tight traits map through", (() => { const t = tr
   check("characterNotes: empty when no such trait", trackCharacterNotes(s.tracks[0]).length === 0);
 }
 
+// — v2 fields: corner names + multi-surface tracks
+{
+  const named: CornerSpec[] = [
+    { n: 1, direction: "left", shape: "hairpin", name: "hairpin du fond", features: [] },
+    { n: 2, direction: "right", shape: "esses", name: "le triple", features: ["jump"] },
+  ];
+  const mixed = { ...trackFixture({ surfaces: ["clay", "astro"], corners: named }), id: "t-m" };
+  check("v2: corner names carried", mixed.corners[0].name === "hairpin du fond" && mixed.corners[1].name === "le triple");
+  check("v2: surface stays the primary = surfaces[0]", mixed.surface === "clay" && mixed.surfaces?.[0] === "clay");
+  const tags = trackConditionTags(mixed);
+  check("v2: multi-surface emits NO mixed_surface tag (not in the taxonomy)", !tags.includes("mixed_surface"), tags.join(","));
+  const notes = trackCharacterNotes(mixed);
+  check("v2: multi-surface lands in characterNotes instead", notes.includes("mixed surface track"), notes.join(" | "));
+  const single = { ...trackFixture({ surfaces: ["clay"] }), id: "t-s" };
+  check("v2: single-entry surfaces → no mixed-surface note", !trackCharacterNotes(single).includes("mixed surface track"));
+  const both = { ...trackFixture({ traits: ["mixed_surface"], surfaces: ["clay", "grass"], corners: [] }), id: "t-2" };
+  check(
+    "v2: mixed_surface trait note and surfaces note coexist, trait notes first",
+    JSON.stringify(trackCharacterNotes(both)) === JSON.stringify(["mixed surface", "mixed surface track"]),
+    trackCharacterNotes(both).join(" | "),
+  );
+  const rt = deserializeTracks(serializeTracks({ tracks: [mixed] }));
+  check(
+    "v2: corner names + surfaces survive the round-trip",
+    rt.ok && rt.state.tracks[0].corners[1].name === "le triple" && JSON.stringify(rt.state.tracks[0].surfaces) === '["clay","astro"]',
+  );
+}
+
+// — format-1 migration: a stored v1 blob must read clean, never as corruption
+{
+  const v1raw =
+    '{"format":1,"state":{"tracks":[{"id":"track-old","name":"MRT","surface":"clay","indoor":false,"visibility":"private","traits":["bumpy"],"corners":[{"n":1,"direction":"left","features":["bump"]}],"records":[],"created_at":"2026-05-01T10:00:00.000Z"}]}}';
+  const m = deserializeTracks(v1raw);
+  check(
+    "format-1 envelope migrates: ok, track intact, surfaces defaulted to [surface]",
+    m.ok && m.state.tracks[0].id === "track-old" && JSON.stringify(m.state.tracks[0].surfaces) === '["clay"]',
+  );
+  check("format-1 migration keeps surface the primary", m.ok && m.state.tracks[0].surface === "clay");
+  check("format-1 migration adds no corner names out of thin air", m.ok && m.state.tracks[0].corners[0].name === undefined);
+}
+
 // — persistence
 const raw = serializeTracks(s);
+check("serialize writes format 2", raw.startsWith('{"format":2'));
 const round = deserializeTracks(raw);
 check("serialize/deserialize round-trips", round.ok && JSON.stringify(round.state) === JSON.stringify(s));
 check("corrupt blob refused, not wiped", deserializeTracks("{nope").ok === false);

@@ -102,8 +102,40 @@ check("subtitle: no drivetrain → no separator", carSubtitle(s.cars[1]) === "1/
   check("profile: freeform category just gets no badge", !sheetProfile({ ...s.cars[0], category: "monster" }).badges.includes("MONSTER"));
 }
 
+// — v2 fuel unit: fuel_tank_cl round-trips; carSubtitle untouched by fuel fields
+{
+  let g = initGarage();
+  g = addCar(g, carFixture({ fuel_tank_cc: undefined, fuel_tank_cl: 12.5 }), T0).state;
+  const rt = deserializeGarage(serializeGarage(g));
+  check("v2: fuel_tank_cl survives the round-trip", rt.ok && rt.state.cars[0].fuel_tank_cl === 12.5);
+  check("v2: subtitle unchanged by the fuel unit", carSubtitle(g.cars[0]) === "1/8 nitro buggy · 4WD");
+}
+
+// — format-1 migration: cc → cL (the pilot's unit), cc dropped, never corruption
+{
+  const v1raw =
+    '{"format":1,"state":{"cars":[{"id":"car-old","name":"Race MP11","template_id":"kyosho-inferno-mp11","brand":"Kyosho","model":"Inferno MP11","category":"buggy","scale":"1/8","power":"nitro","fuel_tank_cc":125,"created_at":"2026-05-01T10:00:00.000Z"},{"id":"car-ep","name":"Club T4","template_id":"generic-onroad","brand":"Xray","model":"T4 2025","category":"onroad","scale":"1/10","power":"electric","created_at":"2026-05-02T10:00:00.000Z"}]}}';
+  const m = deserializeGarage(v1raw);
+  check("format-1 envelope migrates clean (never corruption)", m.ok);
+  check(
+    "format-1: fuel_tank_cc 125 becomes fuel_tank_cl 12.5",
+    m.ok && m.state.cars[0].fuel_tank_cl === 12.5,
+  );
+  check(
+    "format-1: fuel_tank_cc removed from the migrated object",
+    m.ok && !("fuel_tank_cc" in m.state.cars[0]),
+  );
+  check(
+    "format-1: car without a tank passes through untouched",
+    m.ok && m.state.cars[1].fuel_tank_cl === undefined && !("fuel_tank_cc" in m.state.cars[1]),
+  );
+  const odd = deserializeGarage(v1raw.replace('"fuel_tank_cc":125', '"fuel_tank_cc":123'));
+  check("format-1: cc → cL rounds to 1 decimal", odd.ok && odd.state.cars[0].fuel_tank_cl === 12.3);
+}
+
 // — persistence
 const raw = serializeGarage(s);
+check("serialize writes format 2", raw.startsWith('{"format":2'));
 const round = deserializeGarage(raw);
 check("serialize/deserialize round-trips", round.ok && JSON.stringify(round.state) === JSON.stringify(s));
 check("corrupt blob refused, not wiped", deserializeGarage("{nope").ok === false);

@@ -24,7 +24,12 @@ export interface CarEntity {
   battery?: string;
   weight_g?: number;
   options?: string;
-  fuel_tank_cc?: number; // nitro, feeds race strategy
+  /** fuel tank capacity in centiliters — the pilot's unit (1 cL = 10 cc);
+   *  nitro, feeds race strategy */
+  fuel_tank_cl?: number;
+  /** @deprecated v1 field in cubic centimeters — kept for migration only;
+   *  format-2 blobs carry fuel_tank_cl (cc / 10) instead */
+  fuel_tank_cc?: number;
   transponder?: string; // Speedhive chip number (integration deferred, D31)
   photo_uri?: string;
   notes?: string;

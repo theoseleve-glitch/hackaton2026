@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { addCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import {
@@ -15,6 +15,7 @@ import { addTrack, getTrack, upsertRecord } from "../../../../packages/tracks/sr
 import type { TrackEntity, TracksState } from "../../../../packages/tracks/src";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NewCarForm } from "../components/NewCarForm";
+import { Overlay } from "../components/Overlay";
 import { PodiumSplash } from "../components/PodiumSplash";
 import { RunFormV2 } from "../components/RunFormV2";
 import { TrackForm } from "../components/TrackForm";
@@ -46,6 +47,8 @@ interface Props {
   tracks: TracksState;
   updateTracks: (fn: (prev: TracksState) => TracksState) => void;
   startInForm?: boolean;
+  /** Speedhive import: open the form with the detected session's numbers */
+  speedhivePrefill?: { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] };
   /** jump to the Engineer tab and generate a report for this run */
   onEngineer: (runId: string) => void;
   /** open the comparison for two selected runs */
@@ -133,11 +136,12 @@ export function RunsScreen(props: Props) {
           fetchWeather={(track: TrackEntity, whenIso: string) =>
             track.gps ? fetchWeather(track.gps.lat, track.gps.lon, whenIso) : Promise.resolve(null)
           }
+          initial={props.speedhivePrefill}
           onSave={saveRun}
           onCancel={() => setInForm(false)}
         />
 
-        <Modal visible={popup === "car"} animationType="slide" onRequestClose={() => setPopup(null)}>
+        <Overlay visible={popup === "car"}>
           <NewCarForm
             onCancel={() => setPopup(null)}
             onSave={(car) => {
@@ -149,8 +153,8 @@ export function RunsScreen(props: Props) {
               setPopup(null);
             }}
           />
-        </Modal>
-        <Modal visible={popup === "track"} animationType="slide" onRequestClose={() => setPopup(null)}>
+        </Overlay>
+        <Overlay visible={popup === "track"}>
           <TrackForm
             onCancel={() => setPopup(null)}
             onSave={(track) => {
@@ -162,8 +166,8 @@ export function RunsScreen(props: Props) {
               setPopup(null);
             }}
           />
-        </Modal>
-        <Modal visible={popup === "setup"} animationType="slide" transparent onRequestClose={() => setPopup(null)}>
+        </Overlay>
+        <Overlay visible={popup === "setup"} dim>
           <NewSetupPopup
             carId={sel.car_id}
             templateId={garage.cars.find((c) => c.id === sel.car_id)?.template_id}
@@ -174,7 +178,7 @@ export function RunsScreen(props: Props) {
               setPopup(null);
             }}
           />
-        </Modal>
+        </Overlay>
       </View>
     );
   }

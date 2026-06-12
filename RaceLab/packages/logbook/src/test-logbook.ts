@@ -2,6 +2,7 @@ import type { SetupValues } from "../../sheets/src/sheets";
 import { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 import { compareRuns } from "./compare";
 import { carStatus, driverStats, seasonStats } from "./insights";
+import { bestAutonomy } from "./autonomy";
 import { lapStats } from "./laps";
 import { groupBySetup, sortRuns } from "./sort";
 import {
@@ -269,6 +270,60 @@ check(
   const windy = { ...s.runs[0], conditions: { ...s.runs[0].conditions, wind_kmh: 22 } };
   check("bundle: wind_kmh forwarded into weather", bundleFromRun(windy, {}, s).weather?.wind_kmh === 22);
   check("bundle: no wind logged → none in weather", bundleFromRun(s.runs[0], {}, s).weather?.wind_kmh === undefined);
+}
+
+// — v3 fields: duration_min + autonomy_test (format STAYS 2: all-new fields
+//   are optional, so a round-trip — not a migration — proves compatibility)
+{
+  let v3 = initLogbook();
+  v3 = addRun(
+    v3,
+    runFixture({
+      duration_min: 25,
+      result: { autonomy_test: { time_s: 420, laps: 12 } },
+    }),
+    T0,
+  ).state;
+  const raw3 = serializeLogbook(v3);
+  check("v3: format stays 2 (no migration needed)", raw3.startsWith('{"format":2'));
+  const r3 = deserializeLogbook(raw3);
+  check("v3: round-trips byte-for-byte", r3.ok && JSON.stringify(r3.state) === JSON.stringify(v3));
+  const back3 = r3.ok ? r3.state.runs[0] : undefined;
+  check(
+    "v3: duration_min + autonomy_test land where they were put",
+    back3?.duration_min === 25 && back3.result?.autonomy_test?.time_s === 420 && back3.result.autonomy_test.laps === 12,
+  );
+}
+
+// — bestAutonomy: practice-only, same-track-only, grip preferred, newest wins
+{
+  const mk = (
+    id: string,
+    over: Partial<Omit<RunEntry, "id">>,
+  ): RunEntry => ({ ...runFixture(over), id });
+  const runs: RunEntry[] = [
+    // oldest first, logbook order
+    mk("au-1", { track_id: "track-mrt", conditions: { grip: "green" }, result: { autonomy_test: { time_s: 410, laps: 12 } } }),
+    mk("au-2", { created_at: T1, track_id: "track-mrt", conditions: { grip: "green" }, result: { autonomy_test: { time_s: 420, laps: 12 } } }),
+    mk("au-3", { created_at: T2, track_id: "track-mrt", conditions: { grip: "medium" }, result: { autonomy_test: { time_s: 440 } } }),
+    mk("au-race", { created_at: T2, type: "main", track_id: "track-mrt", conditions: { grip: "green" }, result: { autonomy_test: { time_s: 999 } } }),
+    mk("au-other", { created_at: T2, track: { name: "Indoor Carpet", surface: "carpet", indoor: true }, track_id: "track-ic", conditions: { grip: "green" }, result: { autonomy_test: { time_s: 300 } } }),
+    mk("au-lapsonly", { created_at: T2, track_id: "track-mrt", conditions: { grip: "green" }, result: { autonomy_test: { laps: 11 } } }),
+  ];
+  const best = bestAutonomy(runs, { track_id: "track-mrt", grip: "green" });
+  check(
+    "bestAutonomy: same track + same grip, most recent of those wins (older grip match beats newer mismatch)",
+    best?.time_s === 420 && best.from_run_id === "au-2",
+  );
+  const fallback = bestAutonomy(runs, { track_id: "track-mrt", grip: "blue_groove" });
+  check("bestAutonomy: no grip match → same track any grip, most recent", fallback?.time_s === 440 && fallback.from_run_id === "au-3");
+  const byName = bestAutonomy(runs, { track_name: "MRT" });
+  check("bestAutonomy: track name works when no id given; no grip → newest at the track", byName?.time_s === 440 && byName.from_run_id === "au-3");
+  check("bestAutonomy: race runs never count (practice-only)", bestAutonomy(runs, { track_id: "track-mrt", grip: "green" })?.time_s !== 999);
+  check("bestAutonomy: autonomy_test without time_s is not a measurement", bestAutonomy([runs[5]], { track_id: "track-mrt", grip: "green" }) === undefined);
+  check("bestAutonomy: unknown track → undefined (never cross-track)", bestAutonomy(runs, { track_name: "Nowhere" }) === undefined);
+  check("bestAutonomy: no track in opts → undefined (never cross-track)", bestAutonomy(runs, { grip: "green" }) === undefined);
+  check("bestAutonomy: no data at all → undefined", bestAutonomy([], { track_id: "track-mrt" }) === undefined);
 }
 
 if (failures > 0) {

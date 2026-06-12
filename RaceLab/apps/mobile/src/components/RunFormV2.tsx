@@ -11,7 +11,8 @@ import type { CornerSpec, TrackEntity } from "../../../../packages/tracks/src";
 import { KB } from "../kb";
 import { colors, radius } from "../theme";
 import type { WeatherFill } from "../weather";
-import { FatigueRow, FeelingSlider } from "./FeelingSlider";
+import { AutofillInput } from "./AutofillInput";
+import { FeelingSlider } from "./FeelingSlider";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 import { LapListInput } from "./LapListInput";
 
@@ -42,6 +43,8 @@ export interface RunFormV2Props {
   onRequestNewTrack: () => void;
   onRequestNewSetup: () => void;
   fetchWeather: (track: TrackEntity, whenIso: string) => Promise<WeatherFill | null>;
+  /** prefill (Speedhive import: a detected session opens the form ready) */
+  initial?: { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] };
   onSave: (run: Omit<RunEntry, "id">) => void;
   onCancel: () => void;
 }
@@ -110,7 +113,35 @@ function WxFieldView({ label, field, onTouch, onChangeText }: {
 }
 
 function cornerLabel(c: CornerSpec): string {
-  return `#${c.n} ${c.direction === "left" ? "L" : "R"}${c.shape ? ` ${c.shape}` : ""}`;
+  const base = `#${c.n} ${c.direction === "left" ? "L" : "R"}${c.shape ? ` ${c.shape}` : ""}`;
+  return c.name ? `${base} « ${c.name} »` : base;
+}
+
+/** Short pilot phrases the engine NLU understands — corner-note autofill pool. */
+const CORNER_NOTE_LEXICON = [
+  "understeer on entry",
+  "pushes mid-corner",
+  "oversteer on exit",
+  "loose on power",
+  "rear gives up",
+  "washes wide",
+  "bottoming out",
+  "jumps long",
+  "lands nose heavy",
+  "kerb unsettles it",
+  "traction rolls",
+  "twitchy on entry",
+  "hooks up here",
+];
+
+/** "7:00" or "420" → seconds. */
+function parseTimeS(text: string): number | undefined {
+  const t = text.trim();
+  if (t === "") return undefined;
+  const m = t.match(/^(\d+):([0-5]?\d)$/);
+  if (m) return Number(m[1]) * 60 + Number(m[2]);
+  const n = Number(t);
+  return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
 export function RunFormV2(props: RunFormV2Props) {
@@ -120,9 +151,15 @@ export function RunFormV2(props: RunFormV2Props) {
   const setups = selection.car_id ? setupsForCar(selection.car_id) : [];
   const setup = setups.find((s) => s.id === selection.setup_version_id);
 
+  const init = props.initial;
+  const initDate = init?.created_at !== undefined ? new Date(init.created_at) : new Date();
   const [type, setType] = useState<RunType>("practice");
   const [position, setPosition] = useState("");
   const [entrants, setEntrants] = useState("");
+  // when: editable date + time (default now; Speedhive import sets the session's)
+  const [dateStr, setDateStr] = useState(initDate.toISOString().slice(0, 10));
+  const [timeStr, setTimeStr] = useState(initDate.toISOString().slice(11, 16));
+  const [duration, setDuration] = useState("");
   const [grip, setGrip] = useState<Grip>("medium");
   const [bumpiness, setBumpiness] = useState<Bumpiness | undefined>();
   const [dusty, setDusty] = useState(false);
@@ -131,9 +168,9 @@ export function RunFormV2(props: RunFormV2Props) {
   const [wx, setWx] = useState<Record<WxKey, WxField>>(emptyWx);
   const [fetching, setFetching] = useState(false);
   const [wxMiss, setWxMiss] = useState(false);
-  const [bestLap, setBestLap] = useState("");
-  const [avgLap, setAvgLap] = useState("");
-  const [lapsList, setLapsList] = useState<number[]>([]);
+  const [bestLap, setBestLap] = useState(init?.best_lap_s !== undefined ? String(init.best_lap_s) : "");
+  const [avgLap, setAvgLap] = useState(init?.avg_lap_s !== undefined ? String(init.avg_lap_s) : "");
+  const [lapsList, setLapsList] = useState<number[]>(init?.laps_list ?? []);
   const [note, setNote] = useState("");
   const [autoTagged, setAutoTagged] = useState(false);
   const [symptoms, setSymptoms] = useState<string[]>([]);
@@ -141,9 +178,9 @@ export function RunFormV2(props: RunFormV2Props) {
   const [cornerNotes, setCornerNotes] = useState<Record<number, string>>({});
   const [feeling, setFeeling] = useState(50);
   const [feelingSet, setFeelingSet] = useState(false);
-  const [fatigue, setFatigue] = useState<number | undefined>();
-  const [fuelUsed, setFuelUsed] = useState("");
-  const [lapsCount, setLapsCount] = useState("");
+  const [showAutonomy, setShowAutonomy] = useState(false);
+  const [autoTime, setAutoTime] = useState("");
+  const [autoLaps, setAutoLaps] = useState("");
 
   const toggleSymptom = (s: string) =>
     setSymptoms((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
@@ -201,18 +238,25 @@ export function RunFormV2(props: RunFormV2Props) {
     const corner_notes = track.corners
       .map((c) => ({ corner: c.n, note: (cornerNotes[c.n] ?? "").trim() }))
       .filter((c) => c.note.length > 0);
+    const autonomyTime = parseTimeS(autoTime);
+    const autonomyLaps = num(autoLaps);
     const result: RunResult = {
       best_lap_s: num(bestLap),
       avg_lap_s: num(avgLap),
-      laps: num(lapsCount) ?? (lapsList.length > 0 ? lapsList.length : undefined),
+      laps: lapsList.length > 0 ? lapsList.length : undefined,
       laps_list: lapsList.length > 0 ? lapsList : undefined,
-      fuel_used_cc: car.power === "nitro" ? num(fuelUsed) : undefined,
+      autonomy_test:
+        autonomyTime !== undefined || autonomyLaps !== undefined
+          ? { time_s: autonomyTime, laps: autonomyLaps }
+          : undefined,
       position: type !== "practice" ? num(position) : undefined,
       entrants: type !== "practice" ? num(entrants) : undefined,
     };
     const hasResult = Object.values(result).some((v) => v !== undefined);
+    // the pilot's date+time wins; falls back to "now" if unparseable
+    const when = new Date(`${dateStr}T${timeStr.length === 5 ? timeStr : "12:00"}:00`);
     props.onSave({
-      created_at: new Date().toISOString(),
+      created_at: Number.isFinite(when.getTime()) ? when.toISOString() : new Date().toISOString(),
       type,
       car_template_id: car.template_id,
       car_id: car.id,
@@ -240,7 +284,7 @@ export function RunFormV2(props: RunFormV2Props) {
       },
       note: note.trim() || undefined,
       feeling: feelingSet ? feeling : undefined,
-      fatigue,
+      duration_min: num(duration),
     });
   };
 
@@ -280,8 +324,26 @@ export function RunFormV2(props: RunFormV2Props) {
         )}
       </Section>
 
+      <Section title="When">
+        <View style={{ flexDirection: "row", gap: 8 }}>
+          <View style={{ flex: 3 }}>
+            <LabeledInput label="Date" value={dateStr} onChangeText={setDateStr} placeholder="2026-06-12" />
+          </View>
+          <View style={{ flex: 2 }}>
+            <LabeledInput label="Time" value={timeStr} onChangeText={setTimeStr} placeholder="14:30" />
+          </View>
+        </View>
+      </Section>
+
       <Section title="Session">
         <ChipRow options={RUN_TYPES} value={type} onSelect={setType} />
+        <LabeledInput
+          label="Session length (min)"
+          value={duration}
+          onChangeText={setDuration}
+          keyboardType="numeric"
+          placeholder="e.g. 10"
+        />
         {type !== "practice" && (
           <View style={{ marginTop: 10 }}>
             <View style={{ flexDirection: "row", gap: 8 }}>
@@ -305,7 +367,7 @@ export function RunFormV2(props: RunFormV2Props) {
             {fetching ? (
               <ActivityIndicator size="small" color={colors.accent} />
             ) : (
-              <Text style={styles.wxBtnText}>☁ Fetch weather</Text>
+              <Text style={styles.wxBtnText}>＋ Add weather</Text>
             )}
           </Pressable>
         ) : (
@@ -372,16 +434,14 @@ export function RunFormV2(props: RunFormV2Props) {
           <>
             <Text style={styles.hint}>Notes by corner</Text>
             {track.corners.map((c) => (
-              <View key={c.n} style={styles.cornerRow}>
-                <Text style={styles.cornerLabel}>{cornerLabel(c)}</Text>
-                <TextInput
-                  style={styles.cornerInput}
-                  value={cornerNotes[c.n] ?? ""}
-                  onChangeText={(t) => setCornerNotes((prev) => ({ ...prev, [c.n]: t }))}
-                  placeholder="anything happen here?"
-                  placeholderTextColor={colors.sub}
-                />
-              </View>
+              <AutofillInput
+                key={c.n}
+                label={cornerLabel(c)}
+                value={cornerNotes[c.n] ?? ""}
+                onChangeText={(t) => setCornerNotes((prev) => ({ ...prev, [c.n]: t }))}
+                pool={CORNER_NOTE_LEXICON}
+                placeholder="anything happen here?"
+              />
             ))}
           </>
         )}
@@ -389,14 +449,28 @@ export function RunFormV2(props: RunFormV2Props) {
 
       <Section title="Feeling">
         <FeelingSlider value={feeling} onChange={(v) => { setFeeling(v); setFeelingSet(true); }} />
-        <Text style={styles.hint}>Fatigue</Text>
-        <FatigueRow value={fatigue} onChange={(v) => setFatigue(fatigue === v ? undefined : v)} />
       </Section>
 
       {car?.power === "nitro" && (
-        <Section title="Fuel">
-          <LabeledInput label="Fuel used (cc)" value={fuelUsed} onChangeText={setFuelUsed} keyboardType="numeric" placeholder="optional" />
-          <LabeledInput label="Laps in the run" value={lapsCount} onChangeText={setLapsCount} keyboardType="numeric" placeholder="optional" />
+        <Section title="Autonomy">
+          <Pressable style={styles.autonomyBtn} onPress={() => setShowAutonomy((v) => !v)}>
+            <Text style={styles.autonomyBtnText}>
+              {showAutonomy ? "▾" : "▸"} Autonomy test — ran the tank dry?
+            </Text>
+          </Pressable>
+          {showAutonomy && (
+            <View style={{ marginTop: 8 }}>
+              <View style={{ flexDirection: "row", gap: 8 }}>
+                <View style={{ flex: 1 }}>
+                  <LabeledInput label="Time of the run" value={autoTime} onChangeText={setAutoTime} placeholder="7:10 or 430" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <LabeledInput label="Laps in the run" value={autoLaps} onChangeText={setAutoLaps} keyboardType="numeric" placeholder="e.g. 12" />
+                </View>
+              </View>
+              <Text style={styles.derivedNote}>feeds the pit strategy — a measured fact beats any tank estimate</Text>
+            </View>
+          )}
         </Section>
       )}
 
@@ -442,6 +516,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   wxBtnText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
+  autonomyBtn: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderStyle: "dashed",
+    borderRadius: radius.md,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  autonomyBtnText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
   wxMiss: { color: colors.warn, fontSize: 12, marginBottom: 6 },
   wxGrid: { flexDirection: "row", flexWrap: "wrap", columnGap: 8 },
   wxCell: { flexBasis: "47%", flexGrow: 1 },

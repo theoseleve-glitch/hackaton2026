@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { buildReport } from "../../../../packages/engine/src";
 import { buildRacePlan } from "../../../../packages/engine/src/planner";
 import type { SelectedRunSummary } from "../../../../packages/engine/src/planner";
 import type { GarageState } from "../../../../packages/garage/src";
-import { bundleFromRun } from "../../../../packages/logbook/src";
+import { bestAutonomy, bundleFromRun } from "../../../../packages/logbook/src";
 import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
 import { getTrack } from "../../../../packages/tracks/src";
 import type { TracksState } from "../../../../packages/tracks/src";
-import type { PitPlan } from "../../../../packages/strategy/src";
-import { PitPlanView, RacePlanView, StrategyForm } from "../components/PlanViews";
+import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
+import { fmtTime, PitPlanView, RacePlanView, RunPicker, StrategyForm } from "../components/PlanViews";
+import type { StrategyPrefill, TrackChoice } from "../components/PlanViews";
 import { RunReportCard } from "../components/RunReportCard";
 import { KB } from "../kb";
 import type { SavedReport } from "../reportstore";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
-import { num } from "../components/forms";
 
 /**
  * Engineer hub (D28): report-first. You see past reports, you generate a new
  * one FROM a run, you test, you come back — the iterative loop. Race planner
- * and pit strategy live here too (D30).
+ * and pit strategy live here too (D30): both are track-first now, and the
+ * strategy form prefills itself from your logged autonomy tests and laps.
  */
 
 interface Props {
@@ -39,8 +40,15 @@ type ViewState =
   | { k: "new_report" }
   | { k: "view"; saved: SavedReport }
   | { k: "plan_form" }
-  | { k: "strategy_form"; from?: SavedReport }
-  | { k: "strategy_view"; plan: PitPlan; options: PitPlan[] };
+  | { k: "strategy_pick" }
+  | { k: "strategy_form"; prefill: StrategyPrefill; runIds: string[]; from?: SavedReport }
+  | { k: "strategy_view"; plan: PitPlan; options: PitPlan[]; inputs?: StrategyInputs };
+
+/** The race window is denormalized into the plan's label ("… · 30min endurance"). */
+function parseRaceWindow(label: string): { race_length_s?: number; race_type?: "sprint" | "endurance" } {
+  const m = label.match(/(\d+)\s*min\s+(sprint|endurance)/);
+  return m ? { race_length_s: Number(m[1]) * 60, race_type: m[2] as "sprint" | "endurance" } : {};
+}
 
 export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport, requestRunId }: Props) {
   const [view, setView] = useState<ViewState>({ k: "list" });
@@ -132,6 +140,53 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     }
   };
 
+  /** Strategy prefill from the context runs + track: pace from their best
+   *  average, lap series for cliff detection, autonomy from the best logged
+   *  autonomy test on that track (greyed autofill, tap to override). */
+  const buildStrategyPrefill = (
+    runs: RunEntry[],
+    track?: TrackChoice,
+    extra?: { race_length_s?: number; race_type?: "sprint" | "endurance"; avg_lap_s?: number },
+  ): StrategyPrefill => {
+    const sorted = [...runs].sort((a, b) => a.created_at.localeCompare(b.created_at));
+    const latest: RunEntry | undefined = sorted[sorted.length - 1];
+    let lapTimes: number[] | undefined;
+    for (const r of sorted) {
+      const l = r.result?.laps_list;
+      if (l !== undefined && l.length > (lapTimes?.length ?? 0)) lapTimes = l;
+    }
+    const avgs = sorted.map((r) => r.result?.avg_lap_s).filter((v): v is number => v !== undefined);
+    const trackId = track?.track_id ?? latest?.track_id;
+    const trackName = track?.label ?? latest?.track.name;
+    let autonomy: StrategyPrefill["autonomy"];
+    if (trackId !== undefined || trackName !== undefined) {
+      const best = bestAutonomy(logbook.runs, { track_id: trackId, track_name: trackName, grip: latest?.conditions.grip });
+      if (best) {
+        const src = logbook.runs.find((r) => r.id === best.from_run_id);
+        autonomy = { time_s: best.time_s, date: src?.created_at.slice(0, 10) ?? "" };
+      }
+    }
+    return {
+      race_length_s: extra?.race_length_s,
+      race_type: extra?.race_type,
+      avg_lap_s: extra?.avg_lap_s ?? (avgs.length > 0 ? Math.min(...avgs) : undefined),
+      lap_times: lapTimes,
+      autonomy,
+    };
+  };
+
+  /** "Race strategy" from a race-plan report arrives prefilled: race window,
+   *  type, race pace — plus the autonomy/lap context of the plan's runs. */
+  const openStrategyFromPlan = (s: SavedReport) => {
+    const runs = logbook.runs.filter((r) => s.run_ids.includes(r.id));
+    setView({
+      k: "strategy_form",
+      prefill: buildStrategyPrefill(runs, undefined, { ...parseRaceWindow(s.run_label), avg_lap_s: s.plan?.race_avg_lap_s }),
+      runIds: s.run_ids,
+      from: s,
+    });
+  };
+
   if (busy) {
     return (
       <View style={[styles.root, styles.center]}>
@@ -143,57 +198,70 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
 
   if (view.k === "new_report") {
     return (
-      <RunPicker
-        logbook={logbook}
-        multi={false}
-        title="New report — pick the run to analyse"
-        cta="Generate report"
-        onCancel={() => setView({ k: "list" })}
-        onDone={(runs, notes) => void generateReport(runs[0], notes)}
-      />
+      <View style={styles.root}>
+        <Header title="New report — pick the run to analyse" onBack={() => setView({ k: "list" })} />
+        <RunPicker
+          logbook={logbook}
+          multi={false}
+          askNotes
+          cta="Generate report"
+          onDone={(runs, { notes }) => void generateReport(runs[0], notes)}
+        />
+      </View>
     );
   }
 
   if (view.k === "plan_form") {
     return (
-      <RunPicker
-        logbook={logbook}
-        multi
-        title="Race planner — pick the training runs to compound"
-        cta="Build race plan"
-        askRace
-        onCancel={() => setView({ k: "list" })}
-        onDone={(runs, _notes, race) =>
-          void generatePlan(runs, race!.startIso, race!.lengthMin, race!.type)
-        }
-      />
+      <View style={styles.root}>
+        <Header title="Race planner — track, then training runs" onBack={() => setView({ k: "list" })} />
+        <RunPicker
+          logbook={logbook}
+          multi
+          trackFirst
+          askRace
+          cta="Build race plan"
+          onDone={(runs, { race }) => void generatePlan(runs, race!.startIso, race!.lengthMin, race!.type)}
+        />
+      </View>
+    );
+  }
+
+  if (view.k === "strategy_pick") {
+    return (
+      <View style={styles.root}>
+        <Header title="Pit strategy — track, then practice runs" onBack={() => setView({ k: "list" })} />
+        <RunPicker
+          logbook={logbook}
+          multi
+          trackFirst
+          allowEmpty
+          cta="Set up the strategy"
+          onSkip={() => setView({ k: "strategy_form", prefill: {}, runIds: [] })}
+          onDone={(runs, { track }) =>
+            setView({ k: "strategy_form", prefill: buildStrategyPrefill(runs, track), runIds: runs.map((r) => r.id) })
+          }
+        />
+      </View>
     );
   }
 
   if (view.k === "strategy_form") {
-    const from = view.from?.plan;
-    const latestRunId = view.from?.run_ids[view.from.run_ids.length - 1];
-    const latestRun = logbook.runs.find((r) => r.id === latestRunId);
-    const car = garage.cars.find((c) => c.id === latestRun?.car_id) ?? garage.cars[0];
+    const backTo = () => setView(view.from ? { k: "view", saved: view.from } : { k: "list" });
     return (
       <View style={styles.root}>
-        <Header title="Race strategy" onBack={() => setView({ k: "list" })} />
+        <Header title="Race strategy" onBack={backTo} />
         <StrategyForm
-          defaults={{
-            avg_lap_s: from?.race_avg_lap_s,
-            tank_cc: car?.fuel_tank_cc,
-            lap_times: latestRun?.result?.laps_list,
-            race_type: "endurance",
-          }}
-          onCancel={() => setView(view.from ? { k: "view", saved: view.from } : { k: "list" })}
-          onResult={(plan, options) => {
+          prefill={view.prefill}
+          onCancel={backTo}
+          onResult={(plan, options, inputs) => {
             addReport({
               kind: "strategy",
-              run_ids: view.from?.run_ids ?? [],
-              run_label: `strategy · ${plan.total_laps} laps · ${plan.stops} stops`,
+              run_ids: view.runIds,
+              run_label: `strategy · ${plan.stops === 0 ? "no stops" : `box ${plan.stops}× · every ${fmtTime(plan.stint_max_s)}`}`,
               strategy: plan,
             });
-            setView({ k: "strategy_view", plan, options });
+            setView({ k: "strategy_view", plan, options, inputs });
           }}
         />
       </View>
@@ -204,7 +272,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     return (
       <View style={styles.root}>
         <Header title="Pit strategy" onBack={() => setView({ k: "list" })} />
-        <PitPlanView plan={view.plan} options={view.options} />
+        <PitPlanView plan={view.plan} options={view.options} inputs={view.inputs} />
       </View>
     );
   }
@@ -215,7 +283,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
       <View style={styles.root}>
         <Header title={s.kind === "race_plan" ? "Race plan" : "Engineer report"} onBack={() => setView({ k: "list" })} />
         {s.kind === "race_plan" && s.plan ? (
-          <RacePlanView plan={s.plan} onStrategy={() => setView({ k: "strategy_form", from: s })} />
+          <RacePlanView plan={s.plan} onStrategy={() => openStrategyFromPlan(s)} />
         ) : s.report ? (
           <View style={{ flex: 1 }}>
             {s.report.kind !== "report" && (
@@ -253,14 +321,16 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
         <FeatureCard
           icon="🏆"
           title="Race planner"
-          desc="Compound your training runs with the race-day forecast into a final-hours plan."
+          desc="Pick your race track, compound your training runs there with the race-day forecast into a final-hours plan."
           onPress={() => setView({ k: "plan_form" })}
         />
         <FeatureCard
           icon="⛽"
           title="Pit strategy"
-          desc="Fuel windows, stint stretching, tyre cliff — when to box and why."
-          onPress={() => setView({ k: "strategy_form" })}
+          desc="When to box and why — your logged autonomy tests and lap times prefill the numbers."
+          onPress={() =>
+            setView(logbook.runs.length > 0 ? { k: "strategy_pick" } : { k: "strategy_form", prefill: {}, runIds: [] })
+          }
         />
 
         <Text style={styles.sectionTitle}>Past reports</Text>
@@ -311,111 +381,6 @@ function FeatureCard({
   );
 }
 
-/** Run selection (single or multi) + optional notes + optional race window. */
-function RunPicker({
-  logbook,
-  multi,
-  title,
-  cta,
-  askRace,
-  onDone,
-  onCancel,
-}: {
-  logbook: LogbookState;
-  multi: boolean;
-  title: string;
-  cta: string;
-  askRace?: boolean;
-  onDone: (runs: RunEntry[], notes: string, race?: { startIso: string; lengthMin: number; type: "sprint" | "endurance" }) => void;
-  onCancel: () => void;
-}) {
-  const [selected, setSelected] = useState<string[]>([]);
-  const [notes, setNotes] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("14:00");
-  const [lengthMin, setLengthMin] = useState("30");
-  const [type, setType] = useState<"sprint" | "endurance">("endurance");
-  const runs = [...logbook.runs].reverse();
-
-  const toggle = (id: string) =>
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : multi ? [...prev, id] : [id],
-    );
-
-  const done = () => {
-    const chosen = logbook.runs.filter((r) => selected.includes(r.id));
-    if (chosen.length === 0) return;
-    if (askRace) {
-      const startIso = `${date.trim() || new Date().toISOString().slice(0, 10)}T${time.trim() || "14:00"}:00`;
-      onDone(chosen, notes, { startIso, lengthMin: num(lengthMin) ?? 30, type });
-    } else {
-      onDone(chosen, notes);
-    }
-  };
-
-  return (
-    <View style={styles.root}>
-      <Header title={title} onBack={onCancel} />
-      <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-        {runs.length === 0 && <Text style={styles.emptyText}>Log a run first — the engineer works from your log.</Text>}
-        {runs.map((r) => {
-          const on = selected.includes(r.id);
-          return (
-            <Pressable key={r.id} style={[styles.card, on && { borderColor: colors.accent }]} onPress={() => toggle(r.id)}>
-              <Text style={styles.cardLabel}>
-                {on ? "☑ " : "☐ "}
-                {r.track.name} · {r.type} · {r.created_at.slice(5, 16).replace("T", " ")}
-              </Text>
-              <Text style={styles.cardMeta}>
-                {r.conditions.grip.replace("_", " ")} grip
-                {r.result?.best_lap_s !== undefined ? ` · best ${r.result.best_lap_s.toFixed(2)}s` : ""}
-                {r.feedback.tags.length > 0 ? ` · ${r.feedback.tags.map((t) => t.symptom.replace(/_/g, " ")).join(", ")}` : ""}
-              </Text>
-            </Pressable>
-          );
-        })}
-
-        {askRace && (
-          <View style={{ marginTop: 8 }}>
-            <Text style={styles.fieldLabel}>Race day (YYYY-MM-DD) + start time</Text>
-            <View style={{ flexDirection: "row", gap: 8 }}>
-              <TextInput style={[styles.input, { flex: 1 }]} value={date} onChangeText={setDate} placeholder="2026-06-14" placeholderTextColor={colors.sub} />
-              <TextInput style={[styles.input, { width: 90 }]} value={time} onChangeText={setTime} placeholder="14:00" placeholderTextColor={colors.sub} />
-            </View>
-            <Text style={styles.fieldLabel}>Race length (minutes) + type</Text>
-            <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-              <TextInput style={[styles.input, { width: 90 }]} value={lengthMin} onChangeText={setLengthMin} keyboardType="numeric" placeholderTextColor={colors.sub} />
-              {(["sprint", "endurance"] as const).map((t) => (
-                <Pressable key={t} style={[styles.typeChip, type === t && styles.typeChipOn]} onPress={() => setType(t)}>
-                  <Text style={[styles.typeChipText, type === t && { color: colors.accent, fontWeight: "700" }]}>{t}</Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-        )}
-
-        {!askRace && (
-          <>
-            <Text style={styles.fieldLabel}>Additional notes for the engineer (optional)</Text>
-            <TextInput
-              style={[styles.input, { minHeight: 70 }]}
-              value={notes}
-              onChangeText={setNotes}
-              multiline
-              placeholder='e.g. "mostly in the long sweeper, worse with the second tank"'
-              placeholderTextColor={colors.sub}
-            />
-          </>
-        )}
-
-        <Pressable style={[styles.cta, selected.length === 0 && { opacity: 0.4 }]} disabled={selected.length === 0} onPress={done}>
-          <Text style={styles.ctaText}>{cta}</Text>
-        </Pressable>
-      </ScrollView>
-    </View>
-  );
-}
-
 function Header({ title, onBack }: { title: string; onBack: () => void }) {
   return (
     <View style={styles.headerBar}>
@@ -443,18 +408,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   h1: { color: colors.text, fontSize: 16, fontWeight: "800" },
-  pill: { backgroundColor: colors.accent, borderRadius: 999, paddingVertical: 7, paddingHorizontal: 12 },
-  pillText: { color: "#fff", fontWeight: "800", fontSize: 12 },
-  pillGhost: {
-    backgroundColor: colors.cardAlt,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-  },
-  pillGhostText: { color: colors.text, fontWeight: "700", fontSize: 12 },
-  emptyTitle: { color: colors.text, fontSize: 17, fontWeight: "800", marginBottom: 8 },
   emptyText: { color: colors.sub, fontSize: 13, textAlign: "center", lineHeight: 19 },
   card: {
     backgroundColor: colors.card,
@@ -502,35 +455,6 @@ const styles = StyleSheet.create({
     marginTop: 14,
     marginBottom: 8,
   },
-  cta: {
-    backgroundColor: colors.accent,
-    borderRadius: radius.md,
-    paddingVertical: 12,
-    alignItems: "center",
-    marginTop: 16,
-  },
-  ctaText: { color: "#fff", fontWeight: "800", fontSize: 14 },
-  fieldLabel: { color: colors.sub, fontSize: 12, marginTop: 12, marginBottom: 4 },
-  input: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    color: colors.text,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    fontSize: 14,
-  },
-  typeChip: {
-    backgroundColor: colors.cardAlt,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-  },
-  typeChipOn: { backgroundColor: colors.accentSoft, borderColor: colors.accent },
-  typeChipText: { color: colors.sub, fontSize: 12 },
   askMore: {
     backgroundColor: colors.accentSoft,
     borderWidth: 1,

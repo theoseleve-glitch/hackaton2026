@@ -1,0 +1,475 @@
+{
+  "categories": [
+    { "id": "1-8-buggy-nitro", "name": "1/8 Nitro Offroad Buggy", "scale": "1/8", "power": ["nitro"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-8-buggy-electric", "name": "1/8 Electric Offroad Buggy (E-Buggy)", "scale": "1/8", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-8-truggy-nitro", "name": "1/8 Nitro Truggy", "scale": "1/8", "power": ["nitro"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-8-truggy-electric", "name": "1/8 Electric Truggy (E-Truggy)", "scale": "1/8", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-8-gt", "name": "1/8 GT (Rally Game / GT8)", "scale": "1/8", "power": ["nitro", "electric"], "drivetrain": ["4WD"], "terrain": "onroad" },
+    { "id": "1-8-onroad", "name": "1/8 Onroad Circuit (IC Track / Electric Track)", "scale": "1/8", "power": ["nitro", "electric"], "drivetrain": ["4WD"], "terrain": "onroad" },
+    { "id": "1-10-buggy-2wd", "name": "1/10 2WD Offroad Buggy", "scale": "1/10", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "offroad" },
+    { "id": "1-10-buggy-4wd", "name": "1/10 4WD Offroad Buggy", "scale": "1/10", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-10-stadium-truck", "name": "1/10 Stadium Truck", "scale": "1/10", "power": ["electric"], "drivetrain": ["2WD", "4WD"], "terrain": "offroad" },
+    { "id": "1-10-short-course-2wd", "name": "1/10 Short Course Truck 2WD", "scale": "1/10", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "offroad" },
+    { "id": "1-10-short-course-4wd", "name": "1/10 Short Course Truck 4WD", "scale": "1/10", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "1-10-touring", "name": "1/10 Touring Car (Modified & Stock)", "scale": "1/10", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "onroad" },
+    { "id": "1-10-touring-fwd", "name": "1/10 FWD Touring Car", "scale": "1/10", "power": ["electric"], "drivetrain": ["FWD"], "terrain": "onroad" },
+    { "id": "1-10-nitro-touring-200mm", "name": "1/10 Nitro Touring Car (200mm)", "scale": "1/10", "power": ["nitro"], "drivetrain": ["4WD"], "terrain": "onroad" },
+    { "id": "1-12-pan", "name": "1/12 Pan Car", "scale": "1/12", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "onroad" },
+    { "id": "gt12", "name": "GT12 (1/12 GT Circuit)", "scale": "1/12", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "onroad" },
+    { "id": "f1", "name": "1/10 Formula 1", "scale": "1/10", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "onroad" },
+    { "id": "1-10-rally", "name": "1/10 Rally", "scale": "1/10", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "both" },
+    { "id": "monster-truck", "name": "Monster Truck (1/10 - 1/5)", "scale": "1/10-1/5", "power": ["nitro", "electric"], "drivetrain": ["2WD", "4WD"], "terrain": "offroad" },
+    { "id": "crawler", "name": "Crawler / Scaler", "scale": "1/10", "power": ["electric"], "drivetrain": ["4WD"], "terrain": "offroad" },
+    { "id": "drag", "name": "No-Prep Drag Racing", "scale": "1/10", "power": ["electric"], "drivetrain": ["2WD"], "terrain": "onroad" },
+    { "id": "mini-z", "name": "Mini-Z / 1/28 Micro", "scale": "1/28", "power": ["electric"], "drivetrain": ["RWD", "AWD"], "terrain": "onroad" },
+    { "id": "1-5-offroad", "name": "1/5 Large Scale Offroad", "scale": "1/5", "power": ["gas", "electric"], "drivetrain": ["2WD", "4WD"], "terrain": "offroad" },
+    { "id": "1-5-onroad", "name": "1/5 Large Scale Onroad", "scale": "1/5", "power": ["gas"], "drivetrain": ["2WD", "4WD"], "terrain": "onroad" },
+    { "id": "m-chassis", "name": "M-Chassis / Mini Touring", "scale": "1/10", "power": ["electric"], "drivetrain": ["FWD", "RWD"], "terrain": "onroad" }
+  ],
+  "brands": [
+    {
+      "name": "Kyosho",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-8-gt", "1-10-buggy-2wd", "mini-z"],
+      "models": [
+        { "name": "Inferno MP11", "category_id": "1-8-buggy-nitro", "year": 2025, "power": "nitro" },
+        { "name": "Inferno MP10 TKI3", "category_id": "1-8-buggy-nitro", "year": 2022, "power": "nitro" },
+        { "name": "Inferno MP10", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "Inferno MP11e", "category_id": "1-8-buggy-electric", "year": 2026, "power": "electric" },
+        { "name": "Inferno MP10e TKI2", "category_id": "1-8-buggy-electric", "year": 2023, "power": "electric" },
+        { "name": "Inferno MP10e", "category_id": "1-8-buggy-electric", "year": 2020, "power": "electric" },
+        { "name": "Inferno MP10T", "category_id": "1-8-truggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "Inferno MP10Te", "category_id": "1-8-truggy-electric", "year": 2022, "power": "electric" },
+        { "name": "Inferno GT2 Race Specs", "category_id": "1-8-gt", "year": null, "power": "nitro" },
+        { "name": "Ultima SB Dirt Master", "category_id": "1-10-buggy-2wd", "year": 2019, "power": "electric" },
+        { "name": "Ultima RB7SS", "category_id": "1-10-buggy-2wd", "year": 2018, "power": "electric" },
+        { "name": "Ultima RB7", "category_id": "1-10-buggy-2wd", "year": 2016, "power": "electric" },
+        { "name": "Mini-Z MR-04", "category_id": "mini-z", "year": 2023, "power": "electric" },
+        { "name": "Mini-Z MR-03 EVO", "category_id": "mini-z", "year": 2016, "power": "electric" },
+        { "name": "Mini-Z MA-030EVO AWD", "category_id": "mini-z", "year": null, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Mugen Seiki",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-10-touring", "1-8-onroad"],
+      "models": [
+        { "name": "MBX8R", "category_id": "1-8-buggy-nitro", "year": 2022, "power": "nitro" },
+        { "name": "MBX8 Worlds Edition", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "MBX8", "category_id": "1-8-buggy-nitro", "year": 2017, "power": "nitro" },
+        { "name": "MBX8R ECO", "category_id": "1-8-buggy-electric", "year": 2022, "power": "electric" },
+        { "name": "MBX8 ECO Worlds Edition", "category_id": "1-8-buggy-electric", "year": 2020, "power": "electric" },
+        { "name": "MBX8 ECO", "category_id": "1-8-buggy-electric", "year": 2018, "power": "electric" },
+        { "name": "MBX8TR", "category_id": "1-8-truggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "MBX8T", "category_id": "1-8-truggy-nitro", "year": 2018, "power": "nitro" },
+        { "name": "MBX7TR", "category_id": "1-8-truggy-nitro", "year": 2015, "power": "nitro" },
+        { "name": "MBX8TR ECO", "category_id": "1-8-truggy-electric", "year": 2021, "power": "electric" },
+        { "name": "MBX8T ECO", "category_id": "1-8-truggy-electric", "year": 2019, "power": "electric" },
+        { "name": "MTC2R", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "MTC2", "category_id": "1-10-touring", "year": 2021, "power": "electric" },
+        { "name": "MTC1", "category_id": "1-10-touring", "year": 2017, "power": "electric" },
+        { "name": "MRX6X", "category_id": "1-8-onroad", "year": 2019, "power": "nitro" },
+        { "name": "MRX6R", "category_id": "1-8-onroad", "year": 2017, "power": "nitro" }
+      ]
+    },
+    {
+      "name": "XRAY",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-8-gt", "1-8-onroad", "1-10-buggy-2wd", "1-10-buggy-4wd", "1-10-stadium-truck", "1-10-short-course-2wd", "1-10-touring", "1-10-nitro-touring-200mm", "1-12-pan", "f1"],
+      "models": [
+        { "name": "XB8'26", "category_id": "1-8-buggy-nitro", "year": 2026, "power": "nitro" },
+        { "name": "XB8'25", "category_id": "1-8-buggy-nitro", "year": 2025, "power": "nitro" },
+        { "name": "XB8'24", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "XB8E'26", "category_id": "1-8-buggy-electric", "year": 2026, "power": "electric" },
+        { "name": "XB8E'25", "category_id": "1-8-buggy-electric", "year": 2025, "power": "electric" },
+        { "name": "XB8E'24", "category_id": "1-8-buggy-electric", "year": 2024, "power": "electric" },
+        { "name": "XT8'24", "category_id": "1-8-truggy-nitro", "year": 2023, "power": "nitro" },
+        { "name": "XT8'22", "category_id": "1-8-truggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "XT8E'24", "category_id": "1-8-truggy-electric", "year": 2023, "power": "electric" },
+        { "name": "GTX8", "category_id": "1-8-gt", "year": null, "power": "nitro" },
+        { "name": "GTXE8", "category_id": "1-8-gt", "year": null, "power": "electric" },
+        { "name": "RX8E'26", "category_id": "1-8-onroad", "year": 2026, "power": "electric" },
+        { "name": "RX8'24", "category_id": "1-8-onroad", "year": 2024, "power": "nitro" },
+        { "name": "RX8'22", "category_id": "1-8-onroad", "year": 2022, "power": "nitro" },
+        { "name": "XB2'26 (Carpet/Dirt)", "category_id": "1-10-buggy-2wd", "year": 2025, "power": "electric" },
+        { "name": "XB2'25 (Carpet/Dirt)", "category_id": "1-10-buggy-2wd", "year": 2024, "power": "electric" },
+        { "name": "XB2'24 (Carpet/Dirt)", "category_id": "1-10-buggy-2wd", "year": 2023, "power": "electric" },
+        { "name": "XB4'26 (Carpet/Dirt)", "category_id": "1-10-buggy-4wd", "year": 2026, "power": "electric" },
+        { "name": "XB4'25 (Carpet/Dirt)", "category_id": "1-10-buggy-4wd", "year": 2025, "power": "electric" },
+        { "name": "XB4'24 (Carpet/Dirt)", "category_id": "1-10-buggy-4wd", "year": 2024, "power": "electric" },
+        { "name": "XT2'24 (Carpet/Dirt)", "category_id": "1-10-stadium-truck", "year": 2023, "power": "electric" },
+        { "name": "XT2'23 (Carpet/Dirt)", "category_id": "1-10-stadium-truck", "year": 2022, "power": "electric" },
+        { "name": "XT2'22 (Carpet/Dirt)", "category_id": "1-10-stadium-truck", "year": 2021, "power": "electric" },
+        { "name": "SCX'24", "category_id": "1-10-short-course-2wd", "year": 2023, "power": "electric" },
+        { "name": "SCX'23", "category_id": "1-10-short-course-2wd", "year": 2022, "power": "electric" },
+        { "name": "SCX", "category_id": "1-10-short-course-2wd", "year": 2021, "power": "electric" },
+        { "name": "X4'26", "category_id": "1-10-touring", "year": 2025, "power": "electric" },
+        { "name": "X4'25", "category_id": "1-10-touring", "year": 2024, "power": "electric" },
+        { "name": "X4'24", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "NT1'27", "category_id": "1-10-nitro-touring-200mm", "year": 2026, "power": "nitro" },
+        { "name": "NT1'24", "category_id": "1-10-nitro-touring-200mm", "year": 2023, "power": "nitro" },
+        { "name": "NT1'23", "category_id": "1-10-nitro-touring-200mm", "year": 2022, "power": "nitro" },
+        { "name": "X12'26", "category_id": "1-12-pan", "year": 2026, "power": "electric" },
+        { "name": "X12'25", "category_id": "1-12-pan", "year": 2024, "power": "electric" },
+        { "name": "X12'24", "category_id": "1-12-pan", "year": 2023, "power": "electric" },
+        { "name": "X1'25", "category_id": "f1", "year": 2024, "power": "electric" },
+        { "name": "X1'24", "category_id": "f1", "year": 2023, "power": "electric" },
+        { "name": "X1'23", "category_id": "f1", "year": 2022, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Tekno RC",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-10-buggy-4wd", "1-10-short-course-4wd", "monster-truck"],
+      "models": [
+        { "name": "NB48 2.2", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "NB48 2.1", "category_id": "1-8-buggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "NB48 2.0", "category_id": "1-8-buggy-nitro", "year": 2018, "power": "nitro" },
+        { "name": "EB48 2.2", "category_id": "1-8-buggy-electric", "year": 2024, "power": "electric" },
+        { "name": "EB48 2.1", "category_id": "1-8-buggy-electric", "year": 2022, "power": "electric" },
+        { "name": "EB48 2.0", "category_id": "1-8-buggy-electric", "year": 2019, "power": "electric" },
+        { "name": "NT48 2.2", "category_id": "1-8-truggy-nitro", "year": 2025, "power": "nitro" },
+        { "name": "NT48 2.1", "category_id": "1-8-truggy-nitro", "year": 2022, "power": "nitro" },
+        { "name": "NT48 2.0", "category_id": "1-8-truggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "ET48 2.2", "category_id": "1-8-truggy-electric", "year": 2024, "power": "electric" },
+        { "name": "ET48 2.1", "category_id": "1-8-truggy-electric", "year": 2022, "power": "electric" },
+        { "name": "ET48 2.0", "category_id": "1-8-truggy-electric", "year": 2019, "power": "electric" },
+        { "name": "EB410.2", "category_id": "1-10-buggy-4wd", "year": 2019, "power": "electric" },
+        { "name": "EB410", "category_id": "1-10-buggy-4wd", "year": 2017, "power": "electric" },
+        { "name": "SCT410 2.0", "category_id": "1-10-short-course-4wd", "year": 2023, "power": "electric" },
+        { "name": "SCT410.3", "category_id": "1-10-short-course-4wd", "year": 2015, "power": "electric" },
+        { "name": "MT410 2.0", "category_id": "monster-truck", "year": 2022, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Team Associated",
+      "categories": ["1-10-buggy-2wd", "1-10-buggy-4wd", "1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-10-stadium-truck", "1-10-short-course-2wd", "1-12-pan", "f1", "drag"],
+      "models": [
+        { "name": "RC10B7D", "category_id": "1-10-buggy-2wd", "year": 2023, "power": "electric" },
+        { "name": "RC10B7", "category_id": "1-10-buggy-2wd", "year": 2023, "power": "electric" },
+        { "name": "RC10B6.4", "category_id": "1-10-buggy-2wd", "year": 2021, "power": "electric" },
+        { "name": "RC10B84", "category_id": "1-10-buggy-4wd", "year": 2025, "power": "electric" },
+        { "name": "RC10B74.2D", "category_id": "1-10-buggy-4wd", "year": 2021, "power": "electric" },
+        { "name": "RC10B74.2", "category_id": "1-10-buggy-4wd", "year": 2021, "power": "electric" },
+        { "name": "RC8B4.2", "category_id": "1-8-buggy-nitro", "year": 2026, "power": "nitro" },
+        { "name": "RC8B4.1", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "RC8B4", "category_id": "1-8-buggy-nitro", "year": 2022, "power": "nitro" },
+        { "name": "RC8B4.2e", "category_id": "1-8-buggy-electric", "year": 2026, "power": "electric" },
+        { "name": "RC8B4.1e", "category_id": "1-8-buggy-electric", "year": 2025, "power": "electric" },
+        { "name": "RC8B4e", "category_id": "1-8-buggy-electric", "year": 2022, "power": "electric" },
+        { "name": "RC8T3.2", "category_id": "1-8-truggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "RC8T3.1", "category_id": "1-8-truggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "RC8T3.2e", "category_id": "1-8-truggy-electric", "year": 2021, "power": "electric" },
+        { "name": "RC10T6.4", "category_id": "1-10-stadium-truck", "year": 2022, "power": "electric" },
+        { "name": "RC10T6.2", "category_id": "1-10-stadium-truck", "year": 2019, "power": "electric" },
+        { "name": "RC10SC6.4", "category_id": "1-10-short-course-2wd", "year": 2022, "power": "electric" },
+        { "name": "RC10SC6.2", "category_id": "1-10-short-course-2wd", "year": 2019, "power": "electric" },
+        { "name": "RC12R6", "category_id": "1-12-pan", "year": 2017, "power": "electric" },
+        { "name": "RC10F6", "category_id": "f1", "year": 2017, "power": "electric" },
+        { "name": "DR10M", "category_id": "drag", "year": 2023, "power": "electric" },
+        { "name": "DR10", "category_id": "drag", "year": 2020, "power": "electric" }
+      ]
+    },
+    {
+      "name": "TLR / Losi",
+      "categories": ["1-10-buggy-2wd", "1-10-buggy-4wd", "1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-10-stadium-truck", "1-10-short-course-2wd", "1-5-offroad", "drag", "monster-truck"],
+      "models": [
+        { "name": "TLR 22 5.0 DC Elite", "category_id": "1-10-buggy-2wd", "year": 2021, "power": "electric" },
+        { "name": "TLR 22 5.0 DC", "category_id": "1-10-buggy-2wd", "year": 2019, "power": "electric" },
+        { "name": "TLR 22 5.0 AC", "category_id": "1-10-buggy-2wd", "year": 2019, "power": "electric" },
+        { "name": "TLR 22X-4 2.0 DC", "category_id": "1-10-buggy-4wd", "year": 2025, "power": "electric" },
+        { "name": "TLR 22X-4 Elite", "category_id": "1-10-buggy-4wd", "year": 2023, "power": "electric" },
+        { "name": "TLR 22X-4", "category_id": "1-10-buggy-4wd", "year": 2021, "power": "electric" },
+        { "name": "TLR 8IGHT-X 2.0", "category_id": "1-8-buggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "TLR 8IGHT-X Elite", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "TLR 8IGHT-X", "category_id": "1-8-buggy-nitro", "year": 2017, "power": "nitro" },
+        { "name": "TLR 8IGHT-XE 2.0", "category_id": "1-8-buggy-electric", "year": 2021, "power": "electric" },
+        { "name": "TLR 8IGHT-XE Elite", "category_id": "1-8-buggy-electric", "year": 2020, "power": "electric" },
+        { "name": "TLR 8IGHT-XE", "category_id": "1-8-buggy-electric", "year": 2017, "power": "electric" },
+        { "name": "TLR 8IGHT-XT", "category_id": "1-8-truggy-nitro", "year": 2020, "power": "nitro" },
+        { "name": "TLR 8IGHT-XTE", "category_id": "1-8-truggy-electric", "year": 2020, "power": "electric" },
+        { "name": "TLR 22T 4.0", "category_id": "1-10-stadium-truck", "year": 2017, "power": "electric" },
+        { "name": "TLR 22SCT 3.0", "category_id": "1-10-short-course-2wd", "year": 2016, "power": "electric" },
+        { "name": "Losi 5IVE-T 2.0", "category_id": "1-5-offroad", "year": 2019, "power": "gas" },
+        { "name": "Losi DBXL-E 2.0", "category_id": "1-5-offroad", "year": 2020, "power": "electric" },
+        { "name": "Losi 5IVE-B", "category_id": "1-5-offroad", "year": 2017, "power": "gas" },
+        { "name": "Losi 22S Drag", "category_id": "drag", "year": 2021, "power": "electric" },
+        { "name": "Losi LMT", "category_id": "monster-truck", "year": 2021, "power": "electric" }
+      ]
+    },
+    {
+      "name": "HB Racing",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-10-buggy-2wd", "1-10-buggy-4wd"],
+      "models": [
+        { "name": "D8RS", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "D8 World Spec", "category_id": "1-8-buggy-nitro", "year": 2023, "power": "nitro" },
+        { "name": "D819RS", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "E8 World Spec", "category_id": "1-8-buggy-electric", "year": 2024, "power": "electric" },
+        { "name": "E819RS", "category_id": "1-8-buggy-electric", "year": 2019, "power": "electric" },
+        { "name": "E819", "category_id": "1-8-buggy-electric", "year": 2018, "power": "electric" },
+        { "name": "D8T Evo3", "category_id": "1-8-truggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "D817T", "category_id": "1-8-truggy-nitro", "year": 2017, "power": "nitro" },
+        { "name": "E8T Evo3", "category_id": "1-8-truggy-electric", "year": 2021, "power": "electric" },
+        { "name": "D4 Evo3", "category_id": "1-10-buggy-2wd", "year": 2021, "power": "electric" },
+        { "name": "D418", "category_id": "1-10-buggy-4wd", "year": 2018, "power": "electric" }
+      ]
+    },
+    {
+      "name": "SWORKz",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "1-8-gt", "1-10-buggy-4wd"],
+      "models": [
+        { "name": "S35-4 EVO", "category_id": "1-8-buggy-nitro", "year": 2023, "power": "nitro" },
+        { "name": "S35-4", "category_id": "1-8-buggy-nitro", "year": 2020, "power": "nitro" },
+        { "name": "S35-3", "category_id": "1-8-buggy-nitro", "year": 2018, "power": "nitro" },
+        { "name": "S35-4e EVO", "category_id": "1-8-buggy-electric", "year": 2025, "power": "electric" },
+        { "name": "S35-4E", "category_id": "1-8-buggy-electric", "year": 2021, "power": "electric" },
+        { "name": "S35-T2", "category_id": "1-8-truggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "S35-T2e", "category_id": "1-8-truggy-electric", "year": null, "power": "electric" },
+        { "name": "S35-GT2", "category_id": "1-8-gt", "year": 2020, "power": "nitro" },
+        { "name": "S35-GT2e", "category_id": "1-8-gt", "year": 2021, "power": "electric" },
+        { "name": "S14-4C", "category_id": "1-10-buggy-4wd", "year": null, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Agama",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric"],
+      "models": [
+        { "name": "N2", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "N1", "category_id": "1-8-buggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "A319", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "N2e", "category_id": "1-8-buggy-electric", "year": 2024, "power": "electric" },
+        { "name": "N1e", "category_id": "1-8-buggy-electric", "year": 2022, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Serpent",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-gt", "1-8-onroad", "1-10-buggy-2wd", "1-10-buggy-4wd", "1-10-touring", "1-10-nitro-touring-200mm", "f1"],
+      "models": [
+        { "name": "Cobra SRX8 PRO", "category_id": "1-8-buggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "Cobra SRX8 EVO", "category_id": "1-8-buggy-nitro", "year": 2019, "power": "nitro" },
+        { "name": "Cobra SRX8", "category_id": "1-8-buggy-nitro", "year": 2015, "power": "nitro" },
+        { "name": "Cobra SRX8-E EVO", "category_id": "1-8-buggy-electric", "year": 2019, "power": "electric" },
+        { "name": "Cobra SRX8 GTe", "category_id": "1-8-gt", "year": 2019, "power": "electric" },
+        { "name": "Cobra SRX8 GT", "category_id": "1-8-gt", "year": 2018, "power": "nitro" },
+        { "name": "Viper 989", "category_id": "1-8-onroad", "year": 2019, "power": "nitro" },
+        { "name": "Viper 988", "category_id": "1-8-onroad", "year": 2016, "power": "nitro" },
+        { "name": "Spyder SRX2 Gen3", "category_id": "1-10-buggy-2wd", "year": 2019, "power": "electric" },
+        { "name": "Spyder SRX4 Gen3", "category_id": "1-10-buggy-4wd", "year": 2019, "power": "electric" },
+        { "name": "X20 '21", "category_id": "1-10-touring", "year": 2021, "power": "electric" },
+        { "name": "Medius X20", "category_id": "1-10-touring", "year": 2019, "power": "electric" },
+        { "name": "748-X", "category_id": "1-10-nitro-touring-200mm", "year": 2019, "power": "nitro" },
+        { "name": "F110 SF4", "category_id": "f1", "year": 2019, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Capricorn",
+      "categories": ["1-8-onroad", "1-8-gt", "1-10-touring", "1-12-pan"],
+      "models": [
+        { "name": "Quantum", "category_id": "1-8-onroad", "year": 2025, "power": "nitro" },
+        { "name": "LAB C803 EVO", "category_id": "1-8-onroad", "year": null, "power": "nitro" },
+        { "name": "LAB C803", "category_id": "1-8-onroad", "year": 2018, "power": "nitro" },
+        { "name": "LAB GT2 EP 2025", "category_id": "1-8-gt", "year": 2025, "power": "electric" },
+        { "name": "LAB GT2 GP 2024", "category_id": "1-8-gt", "year": 2024, "power": "nitro" },
+        { "name": "LAB GT2", "category_id": "1-8-gt", "year": null, "power": "nitro" },
+        { "name": "TE-06", "category_id": "1-10-touring", "year": 2024, "power": "electric" },
+        { "name": "C12-P", "category_id": "1-12-pan", "year": 2025, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Infinity (Creation Model)",
+      "categories": ["1-8-onroad", "1-8-buggy-nitro", "1-10-touring", "1-10-nitro-touring-200mm", "1-12-pan"],
+      "models": [
+        { "name": "IF18-3", "category_id": "1-8-onroad", "year": 2023, "power": "nitro" },
+        { "name": "IF18-2", "category_id": "1-8-onroad", "year": 2020, "power": "nitro" },
+        { "name": "IF18", "category_id": "1-8-onroad", "year": 2017, "power": "nitro" },
+        { "name": "IFB8", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "IF14 Speciale", "category_id": "1-10-touring", "year": 2025, "power": "electric" },
+        { "name": "IF14-2 Team Edition", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "IF14-2", "category_id": "1-10-touring", "year": 2021, "power": "electric" },
+        { "name": "IF15-2", "category_id": "1-10-nitro-touring-200mm", "year": 2022, "power": "nitro" },
+        { "name": "IF15", "category_id": "1-10-nitro-touring-200mm", "year": 2019, "power": "nitro" },
+        { "name": "IF11", "category_id": "1-12-pan", "year": null, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Awesomatix",
+      "categories": ["1-10-touring", "1-10-touring-fwd", "1-12-pan"],
+      "models": [
+        { "name": "A800RR", "category_id": "1-10-touring", "year": 2025, "power": "electric" },
+        { "name": "A800R", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "A800MMX", "category_id": "1-10-touring", "year": 2020, "power": "electric" },
+        { "name": "A800FXR", "category_id": "1-10-touring-fwd", "year": 2025, "power": "electric" },
+        { "name": "A800FX", "category_id": "1-10-touring-fwd", "year": 2021, "power": "electric" },
+        { "name": "A12", "category_id": "1-12-pan", "year": 2021, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Schumacher",
+      "categories": ["1-10-buggy-2wd", "1-10-buggy-4wd", "1-10-touring", "f1", "gt12"],
+      "models": [
+        { "name": "Cougar LD3D (Dirt Spec)", "category_id": "1-10-buggy-2wd", "year": 2024, "power": "electric" },
+        { "name": "Cougar LD3M (Mod Spec)", "category_id": "1-10-buggy-2wd", "year": 2024, "power": "electric" },
+        { "name": "Cougar LD3", "category_id": "1-10-buggy-2wd", "year": 2023, "power": "electric" },
+        { "name": "Cat L1R", "category_id": "1-10-buggy-4wd", "year": 2022, "power": "electric" },
+        { "name": "Cat L1", "category_id": "1-10-buggy-4wd", "year": 2021, "power": "electric" },
+        { "name": "Cat K2", "category_id": "1-10-buggy-4wd", "year": 2018, "power": "electric" },
+        { "name": "Mi9", "category_id": "1-10-touring", "year": 2024, "power": "electric" },
+        { "name": "Mi8", "category_id": "1-10-touring", "year": 2019, "power": "electric" },
+        { "name": "Mi7 Pro", "category_id": "1-10-touring", "year": 2018, "power": "electric" },
+        { "name": "Icon 2", "category_id": "f1", "year": 2023, "power": "electric" },
+        { "name": "Icon", "category_id": "f1", "year": 2019, "power": "electric" },
+        { "name": "Atom 3", "category_id": "gt12", "year": null, "power": "electric" },
+        { "name": "Atom 2", "category_id": "gt12", "year": 2017, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Yokomo",
+      "categories": ["1-10-touring", "1-10-touring-fwd", "1-10-buggy-2wd", "1-10-buggy-4wd"],
+      "models": [
+        { "name": "BD12", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "BD11", "category_id": "1-10-touring", "year": 2021, "power": "electric" },
+        { "name": "BD10", "category_id": "1-10-touring", "year": 2019, "power": "electric" },
+        { "name": "Master Speed FWD", "category_id": "1-10-touring-fwd", "year": 2024, "power": "electric" },
+        { "name": "SO2.0 Dirt Edition", "category_id": "1-10-buggy-2wd", "year": 2024, "power": "electric" },
+        { "name": "SO2.0", "category_id": "1-10-buggy-2wd", "year": 2023, "power": "electric" },
+        { "name": "SO1.0", "category_id": "1-10-buggy-2wd", "year": 2022, "power": "electric" },
+        { "name": "YZ-4SF2", "category_id": "1-10-buggy-4wd", "year": 2021, "power": "electric" },
+        { "name": "YZ-4SF", "category_id": "1-10-buggy-4wd", "year": 2018, "power": "electric" }
+      ]
+    },
+    {
+      "name": "ARC",
+      "categories": ["1-10-touring", "1-10-touring-fwd", "1-8-onroad"],
+      "models": [
+        { "name": "A10-25", "category_id": "1-10-touring", "year": 2025, "power": "electric" },
+        { "name": "A10", "category_id": "1-10-touring", "year": 2023, "power": "electric" },
+        { "name": "R12.1", "category_id": "1-10-touring", "year": 2021, "power": "electric" },
+        { "name": "A10MF-26", "category_id": "1-10-touring-fwd", "year": 2026, "power": "electric" },
+        { "name": "R12FF", "category_id": "1-10-touring-fwd", "year": 2021, "power": "electric" },
+        { "name": "R8.4LCG-25", "category_id": "1-8-onroad", "year": 2025, "power": "nitro" },
+        { "name": "R8.4", "category_id": "1-8-onroad", "year": null, "power": "nitro" },
+        { "name": "R8.3", "category_id": "1-8-onroad", "year": 2019, "power": "nitro" }
+      ]
+    },
+    {
+      "name": "Mayako",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric"],
+      "models": [
+        { "name": "MX8-25", "category_id": "1-8-buggy-nitro", "year": 2025, "power": "nitro" },
+        { "name": "MX8-24", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "MX8-22", "category_id": "1-8-buggy-nitro", "year": 2022, "power": "nitro" },
+        { "name": "MX8E-25", "category_id": "1-8-buggy-electric", "year": 2025, "power": "electric" },
+        { "name": "MX8E-24", "category_id": "1-8-buggy-electric", "year": 2024, "power": "electric" },
+        { "name": "MX8E", "category_id": "1-8-buggy-electric", "year": 2022, "power": "electric" }
+      ]
+    },
+    {
+      "name": "JQRacing",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric"],
+      "models": [
+        { "name": "THECar White Edition", "category_id": "1-8-buggy-nitro", "year": 2024, "power": "nitro" },
+        { "name": "THECar BLACK Edition", "category_id": "1-8-buggy-nitro", "year": 2016, "power": "nitro" },
+        { "name": "THECar Yellow Edition", "category_id": "1-8-buggy-nitro", "year": 2014, "power": "nitro" },
+        { "name": "THEeCar BLACK Edition", "category_id": "1-8-buggy-electric", "year": 2019, "power": "electric" },
+        { "name": "THEeCar GREY Edition", "category_id": "1-8-buggy-electric", "year": 2017, "power": "electric" }
+      ]
+    },
+    {
+      "name": "HoBao",
+      "categories": ["1-8-buggy-nitro", "1-8-buggy-electric", "1-8-truggy-nitro", "1-8-truggy-electric", "monster-truck"],
+      "models": [
+        { "name": "Hyper VS2", "category_id": "1-8-buggy-nitro", "year": 2021, "power": "nitro" },
+        { "name": "Hyper VS", "category_id": "1-8-buggy-nitro", "year": 2014, "power": "nitro" },
+        { "name": "Hyper VS2e", "category_id": "1-8-buggy-electric", "year": 2021, "power": "electric" },
+        { "name": "Hyper VSe", "category_id": "1-8-buggy-electric", "year": 2016, "power": "electric" },
+        { "name": "Hyper SST", "category_id": "1-8-truggy-nitro", "year": 2012, "power": "nitro" },
+        { "name": "Hyper SSTe", "category_id": "1-8-truggy-electric", "year": 2012, "power": "electric" },
+        { "name": "Hyper MT Plus II", "category_id": "monster-truck", "year": 2021, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Traxxas",
+      "categories": ["1-10-short-course-2wd", "1-10-short-course-4wd", "1-10-stadium-truck", "1-10-buggy-2wd", "drag", "monster-truck", "crawler"],
+      "models": [
+        { "name": "Slash 2WD", "category_id": "1-10-short-course-2wd", "year": 2008, "power": "electric" },
+        { "name": "Slash 4X4 Ultimate", "category_id": "1-10-short-course-4wd", "year": 2012, "power": "electric" },
+        { "name": "Rustler 4X4 VXL", "category_id": "1-10-stadium-truck", "year": 2018, "power": "electric" },
+        { "name": "Rustler VXL", "category_id": "1-10-stadium-truck", "year": 2016, "power": "electric" },
+        { "name": "Bandit VXL", "category_id": "1-10-buggy-2wd", "year": 2015, "power": "electric" },
+        { "name": "Drag Slash", "category_id": "drag", "year": 2021, "power": "electric" },
+        { "name": "Sledge", "category_id": "monster-truck", "year": 2022, "power": "electric" },
+        { "name": "XRT", "category_id": "monster-truck", "year": 2022, "power": "electric" },
+        { "name": "X-Maxx", "category_id": "monster-truck", "year": 2016, "power": "electric" },
+        { "name": "TRX-4M", "category_id": "crawler", "year": 2023, "power": "electric" },
+        { "name": "TRX-4", "category_id": "crawler", "year": 2017, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Arrma",
+      "categories": ["1-8-buggy-electric", "1-10-stadium-truck", "1-10-short-course-4wd", "monster-truck"],
+      "models": [
+        { "name": "Typhon TLR Tuned 6S BLX", "category_id": "1-8-buggy-electric", "year": 2021, "power": "electric" },
+        { "name": "Typhon 6S BLX", "category_id": "1-8-buggy-electric", "year": 2019, "power": "electric" },
+        { "name": "Vorteks 4X4 3S BLX", "category_id": "1-10-stadium-truck", "year": 2020, "power": "electric" },
+        { "name": "Senton 4X4 3S BLX", "category_id": "1-10-short-course-4wd", "year": 2019, "power": "electric" },
+        { "name": "Gorgon", "category_id": "monster-truck", "year": 2023, "power": "electric" },
+        { "name": "Kraton 6S BLX V5", "category_id": "monster-truck", "year": 2021, "power": "electric" },
+        { "name": "Outcast 6S BLX V5", "category_id": "monster-truck", "year": 2021, "power": "electric" }
+      ]
+    },
+    {
+      "name": "Team Corally",
+      "categories": ["1-10-buggy-4wd", "1-10-buggy-2wd", "1-12-pan", "f1"],
+      "models": [
+        { "name": "SBX-425", "category_id": "1-10-buggy-4wd", "year": 2025, "power": "electric" },
+        { "name": "SBX-410", "category_id": "1-10-buggy-4wd", "year": 2020, "power": "electric" },
+        { "name": "Python XP 2WD", "category_id": "1-10-buggy-2wd", "year": 2019, "power": "electric" },
+        { "name": "SSX-12", "category_id": "1-12-pan", "year": 2019, "power": "electric" },
+        { "name": "FSX-10", "category_id": "f1", "year": 2019, "power": "electric" }
+      ]
+    },
+    {
+      "name": "PR Racing",
+      "categories": ["1-10-buggy-2wd", "1-10-buggy-4wd"],
+      "models": [
+        { "name": "S1 RM 2024", "category_id": "1-10-buggy-2wd", "year": 2024, "power": "electric" },
+        { "name": "S1 V4R", "category_id": "1-10-buggy-2wd", "year": 2021, "power": "electric" },
+        { "name": "S1 V4", "category_id": "1-10-buggy-2wd", "year": 2020, "power": "electric" },
+        { "name": "SB401-R 2026", "category_id": "1-10-buggy-4wd", "year": 2026, "power": "electric" },
+        { "name": "SB401-R", "category_id": "1-10-buggy-4wd", "year": 2022, "power": "electric" },
+        { "name": "SB401-LW", "category_id": "1-10-buggy-4wd", "year": 2020, "power": "electric" }
+      ]
+    },
+    {
+      "name": "VBC Racing",
+      "categories": ["1-10-touring"],
+      "models": [
+        { "name": "WildFire D09", "category_id": "1-10-touring", "year": 2020, "power": "electric" },
+        { "name": "WildFire D08", "category_id": "1-10-touring", "year": 2018, "power": "electric" },
+        { "name": "WildFire D07", "category_id": "1-10-touring", "year": 2016, "power": "electric" }
+      ]
+    }
+  ],
+  "engine_brands": [
+    { "name": "OS Speed", "models": ["B21 Adam Drake Edition 3 (AD3)", "B21 Adam Drake Edition 2", "B2103 Type R"] },
+    { "name": "Picco", "models": ["P3TX DLC .21", "P3TT .21", "P3X .21"] },
+    { "name": "REDS", "models": ["721 Scuderia Gen4 Pro", "721S Scuderia Gen3", "721 Scuderia S Series"] },
+    { "name": "Novarossi", "models": ["Virtus .21 Off-Road", "Keep-Off .21-7XL", "Mephisto .21"] },
+    { "name": "FX", "models": ["K502 DLC", "K501"] },
+    { "name": "Bullitt", "models": ["B-226", "B-223", "B-221"] },
+    { "name": "Ultimate", "models": ["MTS .21", "M-7R", "M-7S"] },
+    { "name": "Alpha", "models": ["A852", "B852"] },
+    { "name": "ProTek", "models": ["Samurai 321B V2", "Samurai RM.1", "Samurai RM"] },
+    { "name": "Werks", "models": ["B7 Pro II", "B7"] },
+    { "name": "Sirio", "models": ["S21 BD"] }
+  ],
+  "electric_brands": [
+    { "name": "Hobbywing", "type": "esc", "models": ["Xerun XR8 Pro G3", "Xerun XR10 Pro G2", "Xerun XR8 SCT Pro"] },
+    { "name": "Hobbywing", "type": "motor", "models": ["Xerun 4268SD G3", "Xerun 4274SD G3", "Xerun V10 G4"] },
+    { "name": "Tekin", "type": "esc", "models": ["RX8 Gen3", "RSX Pro", "RS Gen3"] },
+    { "name": "Tekin", "type": "motor", "models": ["Redline Gen4", "Redline T8 Gen3", "Redline SC4X"] },
+    { "name": "LRP", "type": "esc", "models": ["Flow X", "Flow Works"] },
+    { "name": "LRP", "type": "motor", "models": ["X22 Modified", "X22 Stock Spec"] },
+    { "name": "Muchmore", "type": "esc", "models": ["Fleta M8.1", "Fleta Euro V2"] },
+    { "name": "Muchmore", "type": "motor", "models": ["Fleta ZX V2.1", "Fleta ZX8 Evolution"] },
+    { "name": "Reedy", "type": "esc", "models": ["Blackbox 1000Z+", "Blackbox 800Z", "Blackbox 850R"] },
+    { "name": "Reedy", "type": "motor", "models": ["Sonic 540-FT M4", "Sonic 540-M4", "Sonic 866"] },
+    { "name": "Konect", "type": "esc", "models": ["1/8 150A WP", "1/10 80A WP", "1/10 50A WP"] }
+  ]
+}

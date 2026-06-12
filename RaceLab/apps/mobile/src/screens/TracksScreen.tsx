@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { addTrack, deleteTrack, updateTrack } from "../../../../packages/tracks/src";
 import type { LapRecord, TrackEntity, TracksState } from "../../../../packages/tracks/src";
+import { Overlay } from "../components/Overlay";
 import { TrackForm } from "../components/TrackForm";
 import { colors, radius } from "../theme";
 
@@ -21,6 +22,7 @@ export function TracksScreen({ tracks, updateTracks }: Props) {
   const editing = modal !== null && modal !== "new" ? modal.edit : undefined;
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
         <Text style={styles.h1}>
@@ -46,7 +48,8 @@ export function TracksScreen({ tracks, updateTracks }: Props) {
         <TrackCard key={track.id} track={track} onPress={() => setModal({ edit: track })} />
       ))}
 
-      <Modal visible={modal !== null} animationType="slide" onRequestClose={() => setModal(null)}>
+    </ScrollView>
+      <Overlay visible={modal !== null}>
         {modal !== null && (
           <TrackForm
             initial={editing}
@@ -69,8 +72,8 @@ export function TracksScreen({ tracks, updateTracks }: Props) {
             }
           />
         )}
-      </Modal>
-    </ScrollView>
+      </Overlay>
+    </View>
   );
 }
 

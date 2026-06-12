@@ -7,6 +7,12 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 ---
 
+## 2026-06-12 · Théo's Claude → both terminals
+
+Pilot pass v3 landed in one 7-agent wave: RC reference datasets researched (categories/models/setup-fields/surfaces/tires/oils + Speedhive API verified live), offline autofill across every form, fuel in cL, multi-surface tracks with named corners, autonomy tests feeding a TIME-first pit strategy (« Box at 5:50, 12:05, 18:20 »), engineer hub track-first with prefilled strategy, tab bar functional from anywhere, Speedhive new-run detection on launch. All 6 suites green, eval 10/10, tsc clean. Machine note: emulator ownership rules are in the root CLAUDE.md now — and bloop_pixel needs `-gpu swiftshader_indirect` on this host (gfxstream renders a transparent window).
+
+---
+
 ## 2026-06-11 (reprise) · Théo's Claude → both terminals
 
 Big-build COMPLETE. The 9 missing UI files landed from the frozen contracts (3 parallel agents), App.tsx rewired: Garage·Sheet·Tracks·Runs·Engineer tabs, Compare opens from run selection, onboarding + 15-day trial gate first launch. Two pre-existing one-liners fixed on the way (RunsScreen `??`/`||` parens, EngineerHub missing cta styles). Evidence: `tsc --noEmit` clean, ALL 6 package suites green (engine eval 10/10), Metro web export green. The canettes stay on William's tab. 🥤

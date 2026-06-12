@@ -21,48 +21,51 @@ function throws(fn: () => unknown): boolean {
   }
 }
 
-function lapsOf(plan: PitPlan): string {
-  return plan.stints.map((s) => s.laps).join(",");
+function durationsOf(plan: PitPlan): string {
+  return plan.stints.map((s) => s.duration_s).join(",");
 }
 
-function stripNotes(plan: PitPlan): Omit<PitPlan, "notes"> {
-  const { notes: _notes, ...rest } = plan;
-  return rest;
-}
-
-// — 30-min endurance nitro (hand-computed): avg 35s, tank burns 420s -> 12
-//   laps/tank, margin 1 -> cap 11; pit 25s, start buffer 2s (default).
-//   time(48) = 2 + 48*35 + 4*25 = 1782 < 1800; time(49) = 1817 >= 1800.
+// — 30-min endurance (hand-computed): avg 35s, autonomy 420s, pit 25s,
+//   default margin = one avg lap (35s) -> stint cap 385s (11 laps inside).
+//   Internal laps: clock(L) = 35L + (ceil(L/11)-1)*25.
+//   L=48: 1680 + 4*25 = 1780 < 1800; L=49: 1715 + 4*25 = 1815 >= 1800
+//   -> 49 laps, 5 stints (10+10+10+10+9 laps = 350,350,350,350,315 s),
+//   4 stops; pit_at_s: 350, 350+25+350=725, 725+25+350=1100,
+//   1100+25+350=1475; total 1715 + 100 = 1815s.
 const enduro: StrategyInputs = {
   race_length_s: 1800,
   race_type: "endurance",
   avg_lap_s: 35,
-  fuel: { tank_burn_s: 420 },
+  autonomy_s: 420,
   pit_loss_s: 25,
-  margin_laps: 1,
 };
 const ep = computePitPlan(enduro);
-check("endurance: stint cap = 12 laps/tank - 1 margin = 11", ep.stint_max_laps === 11);
-check("endurance: 49 laps (48 falls 18s short of the 30-min clock)", ep.total_laps === 49, `${ep.total_laps}`);
-check("endurance: 4 stops = ceil(49/11) - 1", ep.stops === 4);
-check("endurance: stints 10+10+10+10+9, even, none over cap", lapsOf(ep) === "10,10,10,10,9", lapsOf(ep));
-check("endurance: pit_after on every stint but the last", ep.stints.slice(0, 4).every((s) => s.pit_after === true) && ep.stints[4].pit_after === undefined);
-check("endurance: total time 2 + 49*35 + 4*25 = 1817s", ep.total_time_s === 1817, `${ep.total_time_s}`);
+check("endurance: stint_max_s = 420 autonomy - 35 default margin = 385", ep.stint_max_s === 385, `${ep.stint_max_s}`);
+check("endurance: 4 stops", ep.stops === 4, `${ep.stops}`);
+check("endurance: stints 350,350,350,350,315 — even, none over the cap", durationsOf(ep) === "350,350,350,350,315", durationsOf(ep));
+check("endurance: every stint under stint_max_s", ep.stints.every((s) => s.duration_s <= ep.stint_max_s));
+check("endurance: pit_after true on all stints but the last", ep.stints.slice(0, 4).every((s) => s.pit_after === true) && ep.stints[4].pit_after === false);
+check("endurance: pit_at_s cumulative incl. prior pit loss = 350,725,1100,1475", JSON.stringify(ep.pit_at_s) === "[350,725,1100,1475]", ep.pit_at_s.join(","));
+check("endurance: total 49 laps x 35 + 4 stops x 25 = 1815s", ep.total_time_s === 1815, `${ep.total_time_s}`);
 check("endurance: fuel decides, no cliff reported", ep.pit_driver === "fuel" && ep.cliff_lap === undefined);
-check("endurance: notes explain fuel window, cap, laps, stops, stints", ep.notes.length >= 5 && ep.notes.some((n) => n.includes("12 laps per tank")) && ep.notes.some((n) => n.includes("ceil(49 laps / 11-lap stint cap)")), ep.notes.join(" | "));
+check("endurance: notes speak pilot time — tank ~7:00, boxing every 6:25, 35s margin", ep.notes.some((n) => n.includes("7:00")) && ep.notes.some((n) => n.includes("6:25")) && ep.notes.some((n) => n.includes("35s fuel margin")), ep.notes.join(" | "));
+check("endurance: notes total the pit loss (4 x 25s = 1:40)", ep.notes.some((n) => n.includes("1:40")), ep.notes.join(" | "));
+check("endurance: notes give the race-clock box moments", ep.notes.some((n) => n.includes("5:50") && n.includes("24:35")), ep.notes.join(" | "));
 
-// — sprint: 5-min, no stop needed; time(8) = 282 < 300, time(9) = 317 >= 300.
+// — sprint zero-stop (hand-computed): 5-min race, autonomy > race.
+//   clock(8) = 280 < 300; clock(9) = 315 >= 300 -> 9 laps, one 315s stint.
 const sprint: StrategyInputs = {
   race_length_s: 300,
   race_type: "sprint",
   avg_lap_s: 35,
-  fuel: { tank_burn_s: 420 },
+  autonomy_s: 420,
   pit_loss_s: 25,
 };
 const sp = computePitPlan(sprint);
-check("sprint: 9 laps, zero stops, one stint", sp.total_laps === 9 && sp.stops === 0 && lapsOf(sp) === "9");
-check("sprint: single stint has no pit_after", sp.stints[0].pit_after === undefined);
-check("sprint: total time 2 + 9*35 = 317s", sp.total_time_s === 317);
+check("sprint: zero stops, one stint of 315s", sp.stops === 0 && durationsOf(sp) === "315", durationsOf(sp));
+check("sprint: single stint has pit_after false", sp.stints[0].pit_after === false);
+check("sprint: pit_at_s empty, total 315s", sp.pit_at_s.length === 0 && sp.total_time_s === 315);
+check("sprint: notes say no stop needed", sp.notes.some((n) => n.includes("no stop needed")), sp.notes.join(" | "));
 check("sprint: lap_times are ignored (no cliff path)", (() => {
   const cliffy = [36.8, 35, 35, 35, 35, 35, 35, 36.2, 37.2, 38.2, 39.2];
   const p = computePitPlan({ ...sprint, lap_times: cliffy });
@@ -70,35 +73,7 @@ check("sprint: lap_times are ignored (no cliff path)", (() => {
 })());
 check("sprint: stretchOptions is always []", stretchOptions(sp, sprint).length === 0);
 
-// — fuel-spec equivalence: 125cc / 10.4cc-per-lap = floor(12.02) = 12 laps,
-//   same tank as 420s / 35s — identical plan apart from the fuel note.
-const ccPlan = computePitPlan({ ...enduro, fuel: { tank_cc: 125, burn_cc_per_lap: 10.4 } });
-check("fuel: tank_cc path equals tank_burn_s path (notes aside)", JSON.stringify(stripNotes(ccPlan)) === JSON.stringify(stripNotes(ep)));
-check("fuel: cc note explains the division", ccPlan.notes.some((n) => n.includes("125cc tank / 10.4cc per lap")));
-check("fuel: tank_burn_s takes precedence over the cc pair", computePitPlan({ ...enduro, fuel: { tank_burn_s: 420, tank_cc: 1, burn_cc_per_lap: 1 } }).stint_max_laps === 11);
-
-// — stretch options (21-min race, margin 2 -> cap 10): base plan 34 laps /
-//   3 stops. +1 (cap 11) still needs 3 stops at 34 laps -> dropped. +2 (cap
-//   12 = full tank) -> 35 laps / 2 stops -> kept.
-const stretchy: StrategyInputs = { ...enduro, race_length_s: 1260, margin_laps: 2 };
-const bp = computePitPlan(stretchy);
-check("stretch base: cap 10, 34 laps, 3 stops, stints 9+9+8+8", bp.stint_max_laps === 10 && bp.total_laps === 34 && bp.stops === 3 && lapsOf(bp) === "9,9,8,8");
-const opts = stretchOptions(bp, stretchy);
-check("stretch: only the stop-reducing option survives (+1 dropped)", opts.length === 1, `${opts.length}`);
-check("stretch: +2 option runs full 12-lap tanks, 35 laps, 2 stops", opts[0].stint_max_laps === 12 && opts[0].total_laps === 35 && opts[0].stops === 2 && lapsOf(opts[0]) === "12,12,11");
-check("stretch: notes state time saved = 1 stop * 25s", opts[0].notes.some((n) => n.includes("Saves 1 stop(s) = 25s of pit loss")), opts[0].notes.join(" | "));
-check("stretch: notes state remaining fuel margin in laps", opts[0].notes.some((n) => n.includes("fuel margin left: 0 lap(s)")), opts[0].notes.join(" | "));
-
-// — stretch clamping (same race, margin 1 -> cap 11): +1 -> 12 = full tank
-//   (35 laps / 2 stops, kept); +2 -> 13 clamps to 12, a duplicate -> dropped.
-const clampy: StrategyInputs = { ...enduro, race_length_s: 1260, margin_laps: 1 };
-const cbp = computePitPlan(clampy);
-const copts = stretchOptions(cbp, clampy);
-check("stretch: never beyond laps_per_tank, clamps dedupe to one option", copts.length === 1 && copts[0].stint_max_laps === 12);
-check("stretch: clamped option still reduces stops (3 -> 2)", cbp.stops === 3 && copts[0].stops === 2);
-check("stretch: base plan untouched by stretchOptions", JSON.stringify(cbp) === JSON.stringify(computePitPlan(clampy)));
-
-// — tyre cliff detection (lap 1 always excluded: it contains the start)
+// — tyre cliff detection (algorithm unchanged from v1; lap 1 always excluded)
 const cliffSeries = [36.5, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 36, 37, 38, 39, 40];
 const cliff = detectTyreCliff(cliffSeries);
 check("cliff: flat 35s then +1s/lap from lap 14 -> cliff_lap 14", cliff.cliff_lap === 14, `${cliff.cliff_lap}`);
@@ -115,27 +90,67 @@ check("cliff: under 2 usable points -> slope 0, no cliff", (() => {
   return r.cliff_lap === undefined && r.degradation_s_per_lap === 0 && detectTyreCliff([]).degradation_s_per_lap === 0;
 })());
 
-// — cliff inside the fuel window flips the pit decider (endurance only):
-//   cliff at lap 8 < cap 11 -> stints capped at 8; time(47) = 1772 < 1800,
-//   time(48) = 2 + 48*35 + 5*25 = 1807 >= 1800 -> 48 laps, 5 stops, 6x8.
+// — cliff-driven endurance (hand-computed): cliff at lap 8 -> cliff time
+//   8 x 35 = 280s < 385s fuel window -> cap 280s (8 laps inside).
+//   clock(L) = 35L + (ceil(L/8)-1)*25: L=47: 1645 + 5*25 = 1770 < 1800;
+//   L=48: 1680 + 5*25 = 1805 >= 1800 -> 48 laps, six 8-lap stints (280s
+//   each), 5 stops; pit_at_s: 280, 585, 890, 1195, 1500; total 1805s.
 const cliffLaps = [36.8, 35, 35, 35, 35, 35, 35, 36.2, 37.2, 38.2, 39.2];
 const cp = computePitPlan({ ...enduro, lap_times: cliffLaps });
-check("cliff plan: tyre_cliff drives the pits, stints capped at 8", cp.pit_driver === "tyre_cliff" && cp.cliff_lap === 8 && cp.stint_max_laps === 8);
-check("cliff plan: 48 laps, 5 stops, six 8-lap stints, 1807s", cp.total_laps === 48 && cp.stops === 5 && lapsOf(cp) === "8,8,8,8,8,8" && cp.total_time_s === 1807, `${cp.total_laps}/${cp.stops}/${lapsOf(cp)}/${cp.total_time_s}`);
-check("cliff plan: notes say the cliff, not fuel, decides", cp.notes.some((n) => n.includes("tyres, not fuel, decide the pits")), cp.notes.join(" | "));
+check("cliff plan: tyre_cliff drives, cliff_lap 8, stint_max_s 280", cp.pit_driver === "tyre_cliff" && cp.cliff_lap === 8 && cp.stint_max_s === 280, `${cp.pit_driver}/${cp.cliff_lap}/${cp.stint_max_s}`);
+check("cliff plan: 5 stops, six 280s stints, total 1805s", cp.stops === 5 && durationsOf(cp) === "280,280,280,280,280,280" && cp.total_time_s === 1805, `${cp.stops}/${durationsOf(cp)}/${cp.total_time_s}`);
+check("cliff plan: pit_at_s = 280,585,890,1195,1500", JSON.stringify(cp.pit_at_s) === "[280,585,890,1195,1500]", cp.pit_at_s.join(","));
+check("cliff plan: notes say the tyres, not fuel, decide", cp.notes.some((n) => n.includes("tyres, not fuel, decide the pits")), cp.notes.join(" | "));
 check("cliff plan: cliff outside the fuel window leaves fuel in charge", (() => {
   const lateCliff = [36.8, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 36.2, 37.2, 38.2];
   const p = computePitPlan({ ...enduro, lap_times: lateCliff });
-  return p.pit_driver === "fuel" && p.cliff_lap === 14 && p.stint_max_laps === 11;
+  return p.pit_driver === "fuel" && p.cliff_lap === 14 && p.stint_max_s === 385;
 })());
 
-// — error cases: unusable fuel spec, non-positive lap/race lengths
-check("error: empty fuel spec throws", throws(() => computePitPlan({ ...enduro, fuel: {} })));
-check("error: tank_cc without burn_cc_per_lap throws", throws(() => computePitPlan({ ...enduro, fuel: { tank_cc: 125 } })));
-check("error: burn_cc_per_lap without tank_cc throws", throws(() => computePitPlan({ ...enduro, fuel: { burn_cc_per_lap: 10.4 } })));
+// — stretch options (hand-computed): 21-min race, margin 70s -> cap 350s
+//   (10 laps inside). clock(L) = 35L + (ceil(L/10)-1)*25: L=33: 1155 + 75
+//   = 1230 < 1260; L=34: 1190 + 75 = 1265 >= 1260 -> 34 laps, 4 stints
+//   (9+9+8+8 laps = 315,315,280,280 s), 3 stops.
+//   +1 avg lap (cap 385, 11 laps): still 34 laps / 3 stops -> dropped.
+//   +2 avg laps (cap 420 = full autonomy, 12 laps): L=34: 1190 + 50 = 1240
+//   < 1260; L=35: 1225 + 50 = 1275 >= 1260 -> 35 laps, 3 stints (12+12+11
+//   laps = 420,420,385 s), 2 stops -> kept; saves 1 stop, 0s margin left.
+const stretchy: StrategyInputs = { ...enduro, race_length_s: 1260, margin_s: 70 };
+const bp = computePitPlan(stretchy);
+check("stretch base: cap 350s, 3 stops, stints 315,315,280,280", bp.stint_max_s === 350 && bp.stops === 3 && durationsOf(bp) === "315,315,280,280", `${bp.stint_max_s}/${bp.stops}/${durationsOf(bp)}`);
+check("stretch base: pit_at_s = 315,655,960, total 1265s", JSON.stringify(bp.pit_at_s) === "[315,655,960]" && bp.total_time_s === 1265, `${bp.pit_at_s.join(",")}/${bp.total_time_s}`);
+const opts = stretchOptions(bp, stretchy);
+check("stretch: only the stop-reducing option survives (+1 dropped)", opts.length === 1, `${opts.length}`);
+check("stretch: +2 option runs full 420s tanks, 2 stops, stints 420,420,385", opts[0].stint_max_s === 420 && opts[0].stops === 2 && durationsOf(opts[0]) === "420,420,385", `${opts[0].stint_max_s}/${opts[0].stops}/${durationsOf(opts[0])}`);
+check("stretch: option pit_at_s = 420,865, total 1275s", JSON.stringify(opts[0].pit_at_s) === "[420,865]" && opts[0].total_time_s === 1275);
+check("stretch: notes state time saved in seconds", opts[0].notes.some((n) => n.includes("Saves 1 stop(s) = 25s of pit loss")), opts[0].notes.join(" | "));
+check("stretch: notes state remaining margin in seconds", opts[0].notes.some((n) => n.includes("remaining margin: 0s")), opts[0].notes.join(" | "));
+check("stretch: never beyond autonomy_s", opts.every((o) => o.stint_max_s <= stretchy.autonomy_s && o.stints.every((s) => s.duration_s <= stretchy.autonomy_s)));
+
+// — stretch clamping (margin 35s -> cap 385): +1 -> 420 = full autonomy
+//   (35 laps / 2 stops, kept); +2 -> 455 clamps to 420, a duplicate -> dropped.
+const clampy: StrategyInputs = { ...enduro, race_length_s: 1260, margin_s: 35 };
+const cbp = computePitPlan(clampy);
+const copts = stretchOptions(cbp, clampy);
+check("stretch: clamps to autonomy_s and dedupes to one option", copts.length === 1 && copts[0].stint_max_s === 420, `${copts.length}`);
+check("stretch: clamped option still reduces stops (3 -> 2)", cbp.stops === 3 && copts[0].stops === 2);
+check("stretch: base plan untouched by stretchOptions", JSON.stringify(cbp) === JSON.stringify(computePitPlan(clampy)));
+
+// — error cases (clear messages, all four inputs guarded + margin sanity)
+check("error: autonomy_s <= 0 throws", throws(() => computePitPlan({ ...enduro, autonomy_s: 0 })));
 check("error: avg_lap_s <= 0 throws", throws(() => computePitPlan({ ...enduro, avg_lap_s: 0 })));
 check("error: race_length_s <= 0 throws", throws(() => computePitPlan({ ...enduro, race_length_s: 0 })));
-check("error: stretchOptions validates inputs too", throws(() => stretchOptions(ep, { ...enduro, fuel: {} })));
+check("error: pit_loss_s < 0 throws", throws(() => computePitPlan({ ...enduro, pit_loss_s: -1 })));
+check("error: margin eating the whole tank throws (stint_max_s <= 0)", throws(() => computePitPlan({ ...enduro, margin_s: 420 })));
+check("error: the throw names stint_max_s", (() => {
+  try {
+    computePitPlan({ ...enduro, margin_s: 500 });
+    return false;
+  } catch (e) {
+    return e instanceof Error && e.message.includes("stint_max_s");
+  }
+})());
+check("error: stretchOptions validates inputs too", throws(() => stretchOptions(ep, { ...enduro, autonomy_s: 0 })));
 
 if (failures > 0) {
   console.error(`\n${failures} strategy test(s) failed`);

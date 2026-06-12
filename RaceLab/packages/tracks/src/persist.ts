@@ -4,7 +4,7 @@ import type { TrackEntity, TracksState } from "./types";
  *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
  *  so callers can stash unreadable blobs instead of wiping a track library. */
 
-export const TRACKS_FORMAT_VERSION = 1;
+export const TRACKS_FORMAT_VERSION = 2;
 
 interface Envelope {
   format: number;
@@ -33,7 +33,17 @@ export function deserializeTracks(raw: string): DeserializeTracksResult {
   // Migration switch — every future format bump adds an upgrade case here.
   let state: TracksState;
   switch (env.format) {
-    case 1:
+    case 1: {
+      // v1 → v2 added `surfaces` (multi-surface tracks): a v1 track gets
+      // surfaces defaulted to [surface], keeping `surface` the primary.
+      const v1 = env.state;
+      if (typeof v1 !== "object" || v1 === null || !Array.isArray(v1.tracks)) {
+        return { ok: false, reason: "corrupt" };
+      }
+      state = { tracks: v1.tracks.map(migrateTrackV1) };
+      break;
+    }
+    case 2:
       state = env.state;
       break;
     default:
@@ -42,6 +52,13 @@ export function deserializeTracks(raw: string): DeserializeTracksResult {
 
   if (!isValidState(state)) return { ok: false, reason: "corrupt" };
   return { ok: true, state };
+}
+
+/** v1 → v2: default surfaces to [surface]. Malformed entries pass through
+ *  untouched so the shape validation below reports them as corrupt. */
+function migrateTrackV1(t: TrackEntity): TrackEntity {
+  if (typeof t !== "object" || t === null || t.surfaces !== undefined) return t;
+  return { ...t, surfaces: [t.surface] };
 }
 
 function isValidState(s: TracksState): boolean {
@@ -55,6 +72,8 @@ function isValidTrack(t: TrackEntity): boolean {
     typeof t.id === "string" &&
     typeof t.name === "string" &&
     typeof t.surface === "string" &&
+    (t.surfaces === undefined ||
+      (Array.isArray(t.surfaces) && t.surfaces.every((x) => typeof x === "string"))) &&
     typeof t.indoor === "boolean" &&
     typeof t.visibility === "string" &&
     Array.isArray(t.traits) &&

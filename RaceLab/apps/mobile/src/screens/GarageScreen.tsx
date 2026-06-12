@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Overlay } from "../components/Overlay";
 import { carSubtitle, sheetProfile, updateCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import { addCar } from "../../../../packages/garage/src";
@@ -27,6 +28,7 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
   const stats = seasonStats(logbook);
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
         <Text style={styles.h1}>Garage</Text>
@@ -67,7 +69,8 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
         </View>
       )}
 
-      <Modal visible={modal !== null} animationType="slide" onRequestClose={() => setModal(null)}>
+    </ScrollView>
+      <Overlay visible={modal !== null}>
         <NewCarForm
           initial={modal !== null && modal !== "new" ? modal.edit : undefined}
           onCancel={() => setModal(null)}
@@ -80,8 +83,8 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
             setModal(null);
           }}
         />
-      </Modal>
-    </ScrollView>
+      </Overlay>
+    </View>
   );
 }
 

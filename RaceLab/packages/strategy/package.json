@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "main": "src/index.ts",
-  "description": "RaceLab race strategy (D30): deterministic fuel/pit math — laps per tank, RC timed-race lap counts, stint distribution, tyre-cliff detection, stretch options. Pure functions, no I/O — bundles into the app unchanged.",
+  "description": "RaceLab race strategy (D30 v2, time-first): deterministic pit math in seconds — measured tank autonomy minus safety margin caps stints, cumulative race-clock pit moments, tyre-cliff detection, stop-saving stretch options. Pure functions, no I/O — bundles into the app unchanged.",
   "scripts": {
     "test": "tsx src/test-strategy.ts",
     "typecheck": "tsc --noEmit"

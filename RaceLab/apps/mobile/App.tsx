@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Modal, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetScreen } from "./src/screens/SheetScreen";
 import { TracksScreen } from "./src/screens/TracksScreen";
@@ -8,7 +9,10 @@ import { EngineerHubScreen } from "./src/screens/EngineerHubScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
+import { Overlay } from "./src/components/Overlay";
 import { TrialBanner } from "./src/components/TrialBanner";
+import { fetchRecentSessions } from "./src/speedhive";
+import type { SpeedhiveSession } from "./src/speedhive";
 import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
 import { useTracks } from "./src/trackstore";
@@ -35,12 +39,39 @@ export default function App() {
   const [comparePair, setComparePair] = useState<{ a: string; b: string } | null>(null);
   const [engineerRunId, setEngineerRunId] = useState<string | undefined>();
   const [showSettings, setShowSettings] = useState(false);
+  // Speedhive: checked once per launch; a fresh unlogged session raises the banner
+  const [pendingRun, setPendingRun] = useState<SpeedhiveSession | null>(null);
+  const [shPrefill, setShPrefill] = useState<
+    { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] } | undefined
+  >();
+  const [shChecked, setShChecked] = useState(false);
 
   const { garage, updateGarage } = useGarage();
   const { logbook, updateLogbook } = useLogbook();
   const { tracks, updateTracks } = useTracks();
   const { reports, addReport } = useReports();
   const { account, setAccount, completeOnboarding } = useAccount();
+
+  useEffect(() => {
+    if (!garage || !logbook || shChecked) return;
+    setShChecked(true);
+    const transponder = garage.cars.map((c) => c.transponder).find(Boolean);
+    if (!transponder) return;
+    void (async () => {
+      try {
+        const lastCheck =
+          (await AsyncStorage.getItem("racelab:speedhive:last_check")) ?? "1970-01-01T00:00:00.000Z";
+        const sessions = await fetchRecentSessions(transponder, lastCheck);
+        // a session is "new" when no logged run sits within the same minute
+        const known = new Set(logbook.runs.map((r) => r.created_at.slice(0, 16)));
+        const fresh = sessions.filter((s) => !known.has(s.date_iso.slice(0, 16)));
+        if (fresh.length > 0) setPendingRun(fresh[0]);
+        await AsyncStorage.setItem("racelab:speedhive:last_check", new Date().toISOString()).catch(() => {});
+      } catch {
+        // offline at the track is the normal case — never block launch on this
+      }
+    })();
+  }, [garage, logbook, shChecked]);
 
   if (!garage || !logbook || !tracks || !reports || !account) {
     return (
@@ -74,15 +105,29 @@ export default function App() {
         </View>
       </View>
       <TrialBanner daysLeft={trialDaysLeft(account, new Date().toISOString())} />
-
-      <Modal visible={showSettings} animationType="slide" onRequestClose={() => setShowSettings(false)}>
-        <SettingsScreen
-          account={account}
-          setAccount={setAccount}
-          logbook={logbook}
-          onClose={() => setShowSettings(false)}
-        />
-      </Modal>
+      {pendingRun !== null && (
+        <Pressable
+          style={styles.shBanner}
+          onPress={() => {
+            setShPrefill({
+              created_at: pendingRun.date_iso,
+              best_lap_s: pendingRun.best_lap_s,
+              avg_lap_s: pendingRun.avg_lap_s,
+              laps_list: pendingRun.laps,
+            });
+            setPendingRun(null);
+            setRunsStartInForm(true);
+            setTab("runs");
+          }}
+        >
+          <Text style={styles.shBannerTitle}>🏁 NEW RUN DETECTED</Text>
+          <Text style={styles.shBannerSub}>
+            Speedhive · {pendingRun.date_iso.slice(0, 16).replace("T", " ")}
+            {pendingRun.best_lap_s !== undefined ? ` · best ${pendingRun.best_lap_s.toFixed(2)}s` : ""} — tap to
+            log it
+          </Text>
+        </Pressable>
+      )}
 
       <View style={styles.body}>
         {comparePair ? (
@@ -113,6 +158,7 @@ export default function App() {
             {tab === "sheet" && (
               <SheetScreen
                 garage={garage}
+                updateGarage={updateGarage}
                 focusCarId={sheetFocusCarId}
                 onClearFocus={() => setSheetFocusCarId(undefined)}
               />
@@ -120,7 +166,7 @@ export default function App() {
             {tab === "tracks" && <TracksScreen tracks={tracks} updateTracks={updateTracks} />}
             {tab === "runs" && (
               <RunsScreen
-                key={`runs-${runsStartInForm}`}
+                key={`runs-${runsStartInForm}-${shPrefill?.created_at ?? ""}`}
                 logbook={logbook}
                 updateLogbook={updateLogbook}
                 garage={garage}
@@ -128,6 +174,7 @@ export default function App() {
                 tracks={tracks}
                 updateTracks={updateTracks}
                 startInForm={runsStartInForm}
+                speedhivePrefill={shPrefill}
                 onEngineer={(runId) => {
                   setEngineerRunId(runId);
                   setTab("engineer");
@@ -147,6 +194,14 @@ export default function App() {
             )}
           </>
         )}
+        <Overlay visible={showSettings}>
+          <SettingsScreen
+            account={account}
+            setAccount={setAccount}
+            logbook={logbook}
+            onClose={() => setShowSettings(false)}
+          />
+        </Overlay>
       </View>
 
       <View style={styles.tabbar}>
@@ -156,10 +211,13 @@ export default function App() {
             style={styles.tab}
             onPress={() => {
               // direct tab entry resets cross-tab intents: runs lands on the
-              // list, engineer doesn't re-trigger a report, compare closes
+              // list, engineer doesn't re-trigger a report, compare and
+              // settings close, a pending Speedhive prefill is dropped
               setRunsStartInForm(false);
               setEngineerRunId(undefined);
               setComparePair(null);
+              setShowSettings(false);
+              setShPrefill(undefined);
               setTab(t.id);
             }}
           >
@@ -188,6 +246,18 @@ const styles = StyleSheet.create({
   headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
   headerSub: { color: colors.sub, fontSize: 11 },
   gear: { fontSize: 16 },
+  shBanner: {
+    backgroundColor: colors.accentSoft,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    marginHorizontal: 10,
+    marginTop: 8,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+  },
+  shBannerTitle: { color: colors.accent, fontSize: 14, fontWeight: "900", letterSpacing: 1 },
+  shBannerSub: { color: colors.text, fontSize: 12, marginTop: 3 },
   body: { flex: 1 },
   tabbar: {
     flexDirection: "row",

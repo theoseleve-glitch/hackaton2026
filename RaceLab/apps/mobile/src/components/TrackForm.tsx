@@ -12,6 +12,7 @@ import type {
   TrackTrait,
   TrackVisibility,
 } from "../../../../packages/tracks/src";
+import { surfacesByDiscipline } from "../rcdata";
 import { colors, radius } from "../theme";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 
@@ -22,7 +23,10 @@ import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
  * Used both as the full editor (Tracks tab) and as a popup from the run flow.
  */
 
-const SURFACES = ["clay", "hard-packed", "loam", "astro", "carpet", "grass"] as const;
+// the complete researched surface list (offroad first), ids as values
+const SURFACE_OPTIONS = surfacesByDiscipline();
+const SURFACE_IDS = SURFACE_OPTIONS.map((s) => s.id);
+const SURFACE_LABEL = new Map(SURFACE_OPTIONS.map((s) => [s.id, s.label]));
 const SHAPES: CornerShape[] = ["hairpin", "ninety", "sweeper", "chicane", "kink", "esses"];
 const DIRECTIONS: CornerDirection[] = ["left", "right"];
 const VISIBILITIES: TrackVisibility[] = ["private", "public"];
@@ -37,6 +41,7 @@ interface Props {
 interface CornerDraft {
   /** index into corners, or null when adding a new corner */
   index: number | null;
+  name: string;
   direction: CornerDirection;
   shape?: CornerShape;
   features: CornerFeature[];
@@ -54,7 +59,9 @@ interface RecordRow {
 
 export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [name, setName] = useState(initial?.name ?? "");
-  const [surface, setSurface] = useState<string>(initial?.surface ?? "clay");
+  const [surfaces, setSurfaces] = useState<string[]>(
+    initial?.surfaces ?? (initial?.surface !== undefined ? [initial.surface] : []),
+  );
   const [indoor, setIndoor] = useState(initial?.indoor ?? false);
   const [visibility, setVisibility] = useState<TrackVisibility>(initial?.visibility ?? "private");
   const [traits, setTraits] = useState<TrackTrait[]>(initial?.traits ?? []);
@@ -64,8 +71,6 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [lon, setLon] = useState(initial?.gps !== undefined ? String(initial.gps.lon) : "");
   const [locating, setLocating] = useState(false);
   const [locError, setLocError] = useState<string | null>(null);
-  const [lengthM, setLengthM] = useState(initial?.length_m !== undefined ? String(initial.length_m) : "");
-  const [widthM, setWidthM] = useState(initial?.width_m !== undefined ? String(initial.width_m) : "");
   const [photoUris, setPhotoUris] = useState<string[]>(initial?.photo_uris ?? []);
   const [records, setRecords] = useState<RecordRow[]>(
     (initial?.records ?? []).map((r) => ({
@@ -99,6 +104,7 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
     const at = cornerDraft.index;
     const spec: CornerSpec = {
       n: at === null ? corners.length + 1 : corners[at].n,
+      name: cornerDraft.name.trim() || undefined,
       direction: cornerDraft.direction,
       shape: cornerDraft.shape,
       features: cornerDraft.features,
@@ -122,12 +128,13 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
     const lonN = num(lon);
     onSave({
       name: name.trim() || "My track",
-      surface,
+      surface: surfaces[0] ?? "clay", // primary — the engine reads this one
+      surfaces: surfaces.length > 0 ? surfaces : undefined,
       indoor,
       visibility,
       gps: latN !== undefined && lonN !== undefined ? { lat: latN, lon: lonN } : undefined,
-      length_m: num(lengthM),
-      width_m: num(widthM),
+      length_m: initial?.length_m,
+      width_m: initial?.width_m,
       traits,
       corners,
       notes: notes.trim() || undefined,
@@ -148,6 +155,7 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
   const editCorner = (c: CornerSpec, i: number) =>
     setCornerDraft({
       index: i,
+      name: c.name ?? "",
       direction: c.direction,
       shape: c.shape,
       features: c.features,
@@ -161,8 +169,13 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
 
       <Section title="Track">
         <LabeledInput label="Track name" value={name} onChangeText={setName} placeholder="e.g. MRT outdoor" />
-        <Text style={styles.hint}>Surface</Text>
-        <ChipRow options={SURFACES} value={surface as (typeof SURFACES)[number]} onSelect={setSurface} />
+        <Text style={styles.hint}>Surfaces — tap all that apply (first = main)</Text>
+        <MultiChipRow
+          options={SURFACE_IDS}
+          values={surfaces}
+          onToggle={(s) => setSurfaces((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))}
+          labelFor={(s) => SURFACE_LABEL.get(s) ?? s}
+        />
         <Text style={styles.hint}>Indoor / outdoor</Text>
         <ChipRow
           options={["outdoor", "indoor"] as const}
@@ -199,6 +212,7 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
                 <Text style={styles.cornerDir}>{c.direction === "left" ? "L" : "R"}</Text>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.cornerMain}>
+                    {c.name ? `${c.name} · ` : ""}
                     {(c.shape ?? "corner").replace(/_/g, " ")}
                     {c.features.length > 0 ? ` · ${c.features.length} feature${c.features.length > 1 ? "s" : ""}` : ""}
                   </Text>
@@ -220,7 +234,7 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
           {(cornerDraft === null || cornerDraft.index !== null) && (
             <Pressable
               style={styles.addRowBtn}
-              onPress={() => setCornerDraft({ index: null, direction: "left", features: [], surface: "", note: "" })}
+              onPress={() => setCornerDraft({ index: null, name: "", direction: "left", features: [], surface: "", note: "" })}
             >
               <Text style={styles.addRowText}>+ add corner</Text>
             </Pressable>
@@ -228,7 +242,7 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
         </View>
       )}
 
-      <FoldHeader title="More details" sub="GPS · size · photos · lap records" open={showMore} onPress={() => setShowMore((v) => !v)} />
+      <FoldHeader title="More details" sub="location · photos · lap records" open={showMore} onPress={() => setShowMore((v) => !v)} />
       {showMore && (
         <View style={styles.foldBody}>
           <Text style={styles.hint}>GPS — lets the run log pull weather automatically</Text>
@@ -266,22 +280,6 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
           </Pressable>
           {locError && <Text style={styles.locError}>{locError}</Text>}
           {lat !== "" && lon !== "" && <Text style={styles.locSet}>Pinned at {lat}, {lon}</Text>}
-          <View style={styles.twoCol}>
-            <View style={{ flex: 1 }}>
-              <LabeledInput label="Latitude" value={lat} onChangeText={setLat} keyboardType="decimal-pad" placeholder="e.g. 48.85" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <LabeledInput label="Longitude" value={lon} onChangeText={setLon} keyboardType="decimal-pad" placeholder="e.g. 2.35" />
-            </View>
-          </View>
-          <View style={styles.twoCol}>
-            <View style={{ flex: 1 }}>
-              <LabeledInput label="Length (m)" value={lengthM} onChangeText={setLengthM} keyboardType="numeric" placeholder="optional" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <LabeledInput label="Width (m)" value={widthM} onChangeText={setWidthM} keyboardType="numeric" placeholder="optional" />
-            </View>
-          </View>
 
           <Text style={styles.hint}>Photos</Text>
           <View style={styles.photoRow}>
@@ -396,13 +394,25 @@ function CornerEditor({
     });
   return (
     <View style={styles.cornerEditor}>
-      <Text style={styles.hint}>Direction</Text>
-      <ChipRow
-        options={DIRECTIONS}
-        value={draft.direction}
-        onSelect={(d) => onChange({ ...draft, direction: d })}
-        labelFor={(d) => (d === "left" ? "L" : "R")}
-      />
+      <View style={{ flexDirection: "row", gap: 10, alignItems: "flex-end" }}>
+        <View>
+          <Text style={styles.hint}>Direction</Text>
+          <ChipRow
+            options={DIRECTIONS}
+            value={draft.direction}
+            onSelect={(d) => onChange({ ...draft, direction: d })}
+            labelFor={(d) => (d === "left" ? "L" : "R")}
+          />
+        </View>
+        <View style={{ flex: 1 }}>
+          <LabeledInput
+            label="Corner name"
+            value={draft.name}
+            onChangeText={(t) => onChange({ ...draft, name: t })}
+            placeholder='e.g. "le triple"'
+          />
+        </View>
+      </View>
       <Text style={styles.hint}>Shape</Text>
       <ChipRow options={SHAPES} value={draft.shape} onSelect={(s) => onChange({ ...draft, shape: draft.shape === s ? undefined : s })} />
       <Text style={styles.hint}>Features</Text>

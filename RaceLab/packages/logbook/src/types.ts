@@ -68,6 +68,10 @@ export interface RunResult {
    *  ON DEMAND — never auto-written into best_lap_s/avg_lap_s (user wins). */
   laps_list?: number[];
   fuel_used_cc?: number;
+  /** run-until-dry test: seconds to burn a full tank at this pace, and laps
+   *  achieved. This is THE source for race-strategy autonomy (a measured
+   *  fact beats any tank-size estimate). */
+  autonomy_test?: { time_s?: number; laps?: number };
 }
 
 export interface RunFeedback {
@@ -103,6 +107,8 @@ export interface RunEntry {
   feeling?: number;
   /** 1 (fresh) … 5 (exhausted) */
   fatigue?: number;
+  /** session length the pilot ran, minutes */
+  duration_min?: number;
 }
 
 export interface LogbookState {

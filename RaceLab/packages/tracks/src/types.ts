@@ -43,6 +43,8 @@ export type TrackTrait = (typeof TRACK_TRAITS)[number];
 export interface CornerSpec {
   /** corner number on the track map, 1-based */
   n: number;
+  /** pilot's name for the corner ("le triple", "hairpin du fond") */
+  name?: string;
   direction: CornerDirection;
   shape?: CornerShape;
   features: CornerFeature[];
@@ -65,6 +67,12 @@ export interface TrackEntity {
   id: string;
   name: string;
   surface: string; // clay / hard-packed / loam / astro / carpet / grass
+  /**
+   * All surfaces present on a multi-surface track. CONTRACT: `surface` STAYS
+   * the primary surface (and should equal surfaces[0]) — the engine reads
+   * `surface` only; `surfaces` is descriptive context on top of it.
+   */
+  surfaces?: string[];
   indoor: boolean;
   visibility: TrackVisibility;
   gps?: { lat: number; lon: number };
