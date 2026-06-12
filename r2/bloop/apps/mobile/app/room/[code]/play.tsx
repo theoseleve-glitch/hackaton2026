@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
+import { InputGuessPlay } from '../../../src/components/InputGuessPlay';
 import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
+import { isInputGuessGame } from '../../../src/games/input-guess-view';
 import { isOptionVoteGame } from '../../../src/games/option-vote-view';
 import { asTracerView, deviceLang, promptText, secondsLeft } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
@@ -28,6 +30,7 @@ export default function Play() {
   const { state } = useRoom();
   // Each branch owns its hooks — never swap render paths mid-component.
   if (isOptionVoteGame(state.viewGameId)) return <OptionVotePlay code={code ?? ''} />;
+  if (isInputGuessGame(state.viewGameId)) return <InputGuessPlay code={code ?? ''} />;
   return <TracerPlay code={code ?? ''} />;
 }
 

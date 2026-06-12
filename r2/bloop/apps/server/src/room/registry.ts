@@ -1,5 +1,11 @@
 import type { ContentPack, GameModule } from '@bloop/engine';
 import {
+  CINQUANTE_CINQUANTE_CONFIG,
+  createInputGuess,
+  inputGuessActionSchema,
+  QUIZZ_CULTURE_GE_CONFIG,
+} from '@bloop/game-input-guess';
+import {
   createOptionVote,
   GAUCHE_DROITE_CONFIG,
   optionVoteActionSchema,
@@ -7,6 +13,7 @@ import {
 } from '@bloop/game-option-vote';
 import { createTracer, PIRES_POTES_CONFIG, tracer, tracerActionSchema } from '@bloop/game-tracer';
 import type { z } from 'zod';
+import { CINQUANTE_CINQUANTE_PACK, QUIZZ_CULTURE_GE_PACK } from '../content/input-guess-packs.js';
 import { GAUCHE_DROITE_PACK, TU_PREFERES_PACK } from '../content/option-vote-packs.js';
 import { PIRES_POTES_PACK } from '../content/pires-potes-pack.js';
 import { TRACER_PACK } from '../content/tracer-pack.js';
@@ -40,6 +47,16 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createOptionVote('gauche-ou-droite', GAUCHE_DROITE_CONFIG),
     actionSchema: optionVoteActionSchema,
     content: GAUCHE_DROITE_PACK,
+  }],
+  ['quizz-culture-ge', {
+    module: createInputGuess('quizz-culture-ge', QUIZZ_CULTURE_GE_CONFIG),
+    actionSchema: inputGuessActionSchema,
+    content: QUIZZ_CULTURE_GE_PACK,
+  }],
+  ['cinquante-cinquante', {
+    module: createInputGuess('cinquante-cinquante', CINQUANTE_CINQUANTE_CONFIG),
+    actionSchema: inputGuessActionSchema,
+    content: CINQUANTE_CINQUANTE_PACK,
   }],
 ]);
 

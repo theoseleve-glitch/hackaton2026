@@ -94,7 +94,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'La culture gé au doigt mouillé : personne ne sait, le plus proche rafle tout.', en: 'Trivia where nobody knows the answer — closest guess takes it all.' },
     emoji: '🎯',
     color: '#5B7BFF',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'McFly & Carlito', url: 'https://www.youtube.com/watch?v=y5YRzetgNjI', thumbnailUrl: 'https://i.ytimg.com/vi/y5YRzetgNjI/hqdefault.jpg' },
   },
   {
@@ -103,7 +103,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Complète la phrase, vise le pourcentage de la foule.', en: "Finish the line, hit the crowd's number." },
     emoji: '📊',
     color: '#4ECDC4',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Beta Squad', url: 'https://www.youtube.com/watch?v=gIhxUb45Dic', thumbnailUrl: 'https://i.ytimg.com/vi/gIhxUb45Dic/hqdefault.jpg' },
   },
   {

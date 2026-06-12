@@ -6,6 +6,7 @@ import { PlayerCard } from '../../../src/components/players';
 import { RoomCodeDisplay } from '../../../src/components/room';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { spawnBot } from '../../../src/dev/inAppBot';
+import { asInputGuessView } from '../../../src/games/input-guess-view';
 import { asOptionVoteView } from '../../../src/games/option-vote-view';
 import { asTracerView } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
@@ -20,6 +21,8 @@ const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new
   ['tu-preferes', { label: 'Tu Préfères ?', minPlayers: 3 }],
   ['gauche-ou-droite', { label: 'De gauche ou de droite ?', minPlayers: 3 }],
   ['pires-potes', { label: 'Pires Potes', minPlayers: 3 }],
+  ['quizz-culture-ge', { label: 'Au Pif !', minPlayers: 2 }],
+  ['cinquante-cinquante', { label: 'Cinquante-Cinquante', minPlayers: 2 }],
 ]);
 
 export default function Lobby() {
@@ -54,7 +57,10 @@ export default function Lobby() {
   useEffect(() => () => { botCleanupsRef.current.forEach((fn) => fn()); }, []);
 
   // A live (non-over) game view means the game is on → move to the container.
-  const livePhase = asTracerView(state.view)?.phase ?? asOptionVoteView(state.view)?.phase ?? null;
+  const livePhase = asTracerView(state.view)?.phase
+    ?? asOptionVoteView(state.view)?.phase
+    ?? asInputGuessView(state.view)?.phase
+    ?? null;
   useEffect(() => {
     if (livePhase !== null && livePhase !== 'over') router.replace(`/room/${code}/play`);
   }, [livePhase !== null && livePhase !== 'over']);

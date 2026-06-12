@@ -34,6 +34,12 @@ const vote = (playerId: string, target: string, at: number): GameEvent<unknown> 
 const ballot = (playerId: string, pick: 'A' | 'B', predict: 'A' | 'B' | null, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'ballot', pick, ...(predict !== null ? { predict } : {}) }, at });
 
+const igGuess = (playerId: string, value: number, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'guess', value }, at });
+
+const igPick = (playerId: string, cardIndex: number, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'pick', cardIndex }, at });
+
 const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['tracer', {
     players: ['p1', 'p2', 'p3'],
@@ -72,6 +78,47 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     eventsAlt: [ballot('p1', 'B', null, 1_000), ballot('p2', 'A', null, 2_000)],
     actors: ['p1', 'p2'],
     secrets: () => [],
+  }],
+  ['quizz-culture-ge', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-guess round 0: two secret guesses buffered, p3 still expected — phase NOT advanced.
+    // Guess values are chosen so no digit string collides with the round-0 answer
+    // (the owner echo would otherwise false-positive the substring audit).
+    events: [igGuess('p1', 23, 1_000), igGuess('p2', 47, 2_000)],
+    eventsAlt: [igGuess('p1', 56, 1_000), igGuess('p2', 89, 2_000)],
+    actors: ['p1', 'p2'],
+    // the current item's verified answer + funFact are VALUE secrets until reveal
+    secrets: (state) => {
+      const s = state as {
+        round: number;
+        items: Array<{ answer?: number; funFact?: { fr: string; en: string } }>;
+      };
+      const item = s.items[s.round];
+      if (item?.answer === undefined || item.funFact === undefined) return [];
+      return [
+        { value: String(item.answer) },
+        { value: item.funFact.fr },
+        { value: item.funFact.en },
+      ];
+    },
+  }],
+  ['cinquante-cinquante', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-pick round 0: two secret card picks buffered, p3 still expected — phase NOT advanced
+    events: [igPick('p1', 0, 1_000), igPick('p2', 1, 2_000)],
+    eventsAlt: [igPick('p1', 4, 1_000), igPick('p2', 5, 2_000)],
+    actors: ['p1', 'p2'],
+    // the current item's pre-computed crowd percentages are VALUE secrets until reveal
+    secrets: (state) => {
+      const s = state as {
+        round: number;
+        items: Array<{ completions?: Array<{ crowdYesPct: number }> }>;
+      };
+      const item = s.items[s.round];
+      return (item?.completions ?? []).map((c) => ({ value: String(c.crowdYesPct) }));
+    },
   }],
 ]);
 
