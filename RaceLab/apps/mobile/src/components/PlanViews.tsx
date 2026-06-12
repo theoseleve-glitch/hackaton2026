@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import type { RacePlan } from "../../../../packages/engine/src/planner";
 import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
 import { computePitPlan, stretchOptions } from "../../../../packages/strategy/src";
 import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
 import { colors, radius } from "../theme";
 import { ChipRow, LabeledInput, Section, num } from "./forms";
-import { RunReportCard } from "./RunReportCard";
 
 /**
  * Race-plan rendering, the track-first run picker and the pit-strategy
@@ -28,45 +26,9 @@ function parseTimeS(text: string): number | undefined {
   return m ? Number(m[1]) * 60 + Number(m[2]) : num(text);
 }
 
-// ——— race plan ———
+// ——— race plan (Pit Board layout lives in its own file) ———
 
-export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy: () => void }) {
-  return (
-    <ScrollView style={styles.root} contentContainerStyle={{ paddingBottom: 30 }}>
-      <View style={styles.block}>
-        <Text style={styles.blockTitle}>Conditions shift</Text>
-        {plan.conditions_shift.map((l, i) => (
-          <Text key={i} style={styles.line}>
-            · {l}
-          </Text>
-        ))}
-      </View>
-      <View style={styles.block}>
-        <Text style={styles.blockTitle}>Readiness</Text>
-        {plan.readiness.map((l, i) => (
-          <Text key={i} style={styles.line}>
-            · {l}
-          </Text>
-        ))}
-      </View>
-      {plan.technique_tips.length > 0 && (
-        <View style={styles.block}>
-          <Text style={styles.blockTitle}>Driving adaptation for race day</Text>
-          {plan.technique_tips.map((l, i) => (
-            <Text key={i} style={styles.line}>
-              🎮 {l}
-            </Text>
-          ))}
-        </View>
-      )}
-      <Pressable style={styles.strategyBtn} onPress={onStrategy}>
-        <Text style={styles.strategyBtnText}>⛽ Race strategy →</Text>
-      </Pressable>
-      <Text style={styles.reportHeader}>Setup adjustments (engineer report under forecast)</Text>
-      <RunReportCard report={plan.report} />
-    </ScrollView>
-  );
-}
+export { RacePlanView } from "./RacePlanView";
 
 // ——— track-first run picker ———
 
@@ -448,9 +410,6 @@ const styles = StyleSheet.create({
   block: { backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, padding: 12, marginHorizontal: 14, marginTop: 10 },
   blockTitle: { color: colors.text, fontSize: 13, fontWeight: "800", marginBottom: 6 },
   line: { color: colors.text, fontSize: 13, lineHeight: 19 },
-  reportHeader: { color: colors.sub, fontSize: 11, fontWeight: "800", textTransform: "uppercase", letterSpacing: 0.8, marginHorizontal: 14, marginTop: 16 },
-  strategyBtn: { backgroundColor: colors.accent, borderRadius: radius.md, paddingVertical: 12, alignItems: "center", marginHorizontal: 14, marginTop: 12 },
-  strategyBtnText: { color: "#fff", fontWeight: "800", fontSize: 15 },
   // — picker —
   empty: { color: colors.sub, fontSize: 13, textAlign: "center", lineHeight: 19, marginVertical: 10 },
   runCard: { backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, padding: 12, marginBottom: 8 },
