@@ -1,0 +1,16 @@
+.nav{position:fixed;top:0;left:0;right:0;z-index:9000;display:flex;justify-content:space-between;
+  align-items:center;padding:var(--s4) clamp(16px,4vw,48px);transition:transform .4s ease}
+.nav--hidden{transform:translateY(-110%)}
+.nav__logo{font-family:var(--font-display);font-weight:700;font-size:28px}
+.nav__dot{color:var(--coral)}
+.lang{display:flex;gap:var(--s1);font:500 13px/1 var(--font-body)}
+.lang button{background:none;border:0;cursor:pointer;opacity:.5;padding:6px}
+.lang button[aria-current="true"]{opacity:1;color:var(--coral)}
+.section{position:relative;max-width:var(--maxw);margin-inline:auto;
+  padding:clamp(96px,16vh,180px) clamp(16px,4vw,48px)}
+.section--full{min-height:100vh;display:grid;align-content:center}
+.btn{display:inline-block;font:700 18px/1 var(--font-body);color:var(--white);
+  background:var(--coral);padding:18px 32px;border-radius:var(--r-pill);
+  box-shadow:var(--pop);border:0;cursor:pointer;text-decoration:none;will-change:transform}
+.btn:active{background:var(--coral-pressed)}
+.card{background:var(--white);border-radius:var(--r-xl);box-shadow:var(--clay);padding:var(--s5)}

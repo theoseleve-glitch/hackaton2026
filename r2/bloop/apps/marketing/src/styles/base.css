@@ -28,3 +28,10 @@ body::after{
 .skip{position:fixed;left:-9999px;z-index:10000;background:var(--ink);color:var(--cream);
   padding:10px 16px;border-radius:var(--r-md)}
 .skip:focus{left:16px;top:16px}
+.cursor{position:fixed;top:0;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;
+  border-radius:var(--r-pill);background:var(--coral);pointer-events:none;z-index:9999;
+  mix-blend-mode:normal;transition:width .2s,height .2s,background .2s}
+.cursor--active{width:64px;height:64px;margin:-32px 0 0 -32px;background:var(--ink)}
+.cursor--active::after{content:attr(data-label);position:absolute;inset:0;display:grid;
+  place-items:center;color:var(--cream);font:500 11px/1 var(--font-body);text-transform:uppercase;letter-spacing:1px}
+@media (pointer: coarse){.cursor{display:none}}
