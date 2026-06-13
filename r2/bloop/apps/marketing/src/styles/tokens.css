@@ -1,0 +1,15 @@
+:root{
+  --ink:#0F1633; --cream:#FBF6EC; --cream-100:#F4EAD5; --white:#FFFFFF;
+  --coral:#FF6F61; --coral-pressed:#E85D50;
+  --yellow:#FFCC4D; --teal:#4ECDC4; --cobalt:#5B7BFF; --lavender:#B6A8FF; --pink:#FF6B9D;
+  --yellow-soft:#FFE08A; --lavender-soft:#D6CCFF; --pink-soft:#FFC2D6;
+  --success:#3DC97A; --danger:#E5503F; --warning:#FDC700;
+  --r-sm:10px; --r-md:14px; --r-lg:22px; --r-xl:28px; --r-pill:999px;
+  --pop:0 4px 0 0 var(--ink);
+  --clay:0 6px 0 rgba(15,22,51,.18), 0 10px 18px rgba(15,22,51,.12);
+  --s1:8px; --s2:12px; --s3:16px; --s4:24px; --s5:32px;
+  --font-display:'Fredoka',system-ui,sans-serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-sticker:'Caveat',cursive;
+  --maxw:1240px;
+}

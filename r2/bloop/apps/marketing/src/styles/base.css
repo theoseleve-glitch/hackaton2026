@@ -1,0 +1,30 @@
+@import '@fontsource/fredoka/600.css';
+@import '@fontsource/fredoka/700.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/caveat/600.css';
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:var(--font-body); font-size:18px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.05;letter-spacing:-.01em}
+.h-hero{font-size:clamp(48px,9vw,132px)}
+.h-display{font-size:clamp(40px,6vw,60px)}
+.h1{font-size:clamp(32px,4.5vw,44px)}
+.overline{font-family:var(--font-body);font-weight:500;font-size:11px;
+  letter-spacing:1.2px;text-transform:uppercase;opacity:.7}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+.skip{position:fixed;left:-9999px;z-index:10000;background:var(--ink);color:var(--cream);
+  padding:10px 16px;border-radius:var(--r-md)}
+.skip:focus{left:16px;top:16px}
