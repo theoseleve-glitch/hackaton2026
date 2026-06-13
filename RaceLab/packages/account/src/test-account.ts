@@ -401,6 +401,101 @@ console.log("\n— deletion —");
   check("delete: localWipe throw -> local_wipe_failed", !d6.ok && d6.reason === "local_wipe_failed");
 }
 
+// ═══ MUST-FIX #4: transient 'none' must NOT wipe a LIVE PAID cache ═══════════
+
+console.log("\n— validate: 'none' is non-evidence (live-cache preservation) —");
+{
+  const kv = new MemKV();
+  let device = T0;
+  const E = day(30); // active sub expires T0+30d
+  const apiBase = "https://api.test";
+  const tok = "tok-user_A";
+
+  // 1) cache an ACTIVE subscription
+  const fetchActive = makeFetch((c) =>
+    c.url.endsWith("/api/subscription/status") && c.headers?.authorization === `Bearer ${tok}`
+      ? { status: 200, json: { status: "active", expires_at: E, server_time: T0 } }
+      : { status: 401, json: {} },
+  );
+  const vA = await validateSubscription({ fetchFn: fetchActive, store: kv, now: () => device, apiBase }, tok);
+  check("must-fix4: precondition — active cached with validated_at+expires_at",
+    vA.ok && vA.account.subscription.status === "active" && vA.account.subscription.validated_at === T0 && vA.account.subscription.expires_at === E);
+
+  // 2) a transient 'none' arrives (webhook lag / mid-renewal) BEFORE expiry
+  device = day(10);
+  const fetchNone = makeFetch(() => ({ status: 200, json: { status: "none", server_time: day(10) } }));
+  const vN = await validateSubscription({ fetchFn: fetchNone, store: kv, now: () => device, apiBase }, tok);
+  check("must-fix4: 'none' returns ok with status none (non-evidence)", vN.ok && vN.status === "none");
+  check("must-fix4: LIVE PAID cache PRESERVED — expires_at+validated_at intact",
+    vN.ok && vN.account.subscription.status === "active" && vN.account.subscription.validated_at === T0 && vN.account.subscription.expires_at === E);
+
+  // 3) persisted blob was NOT overwritten with {status:none}
+  const persisted = parseAccountState(JSON.parse(kv.map.get(STORAGE_KEYS.account) ?? "null"));
+  check("must-fix4: persisted blob still the active sub (no overwrite)",
+    persisted.ok && persisted.value.subscription.status === "active" && persisted.value.subscription.expires_at === E);
+
+  // 4) effective entitlement still ACTIVE offline after the transient 'none'
+  const stillActive = await canUse("analytics", { store: kv, now: () => device });
+  check("must-fix4: effective still active after transient 'none'", stillActive.allowed && stillActive.via === "subscription");
+
+  // 5) a cached sub already PAST grace + 'none' -> cleared to bare none (no stale claim)
+  const kvOld = new MemKV();
+  const Eold = day(1);
+  const fetchActiveOld = makeFetch(() => ({ status: 200, json: { status: "active", expires_at: Eold, server_time: T0 } }));
+  await validateSubscription({ fetchFn: fetchActiveOld, store: kvOld, now: () => T0, apiBase }, tok);
+  const farFuture = new Date(Date.parse(Eold) + 8 * DAY).toISOString(); // past expiry + GRACE_DAYS(7)
+  const vClear = await validateSubscription({ fetchFn: makeFetch(() => ({ status: 200, json: { status: "none", server_time: farFuture } })), store: kvOld, now: () => farFuture, apiBase }, tok);
+  check("must-fix4: already-lapsed cache + 'none' -> cleared to bare none",
+    vClear.ok && vClear.account.subscription.status === "none" && vClear.account.subscription.validated_at === undefined);
+
+  // 6) explicit 'expired' DOES overwrite a live active cache (clear signal)
+  const kvExp = new MemKV();
+  await validateSubscription({ fetchFn: makeFetch(() => ({ status: 200, json: { status: "active", expires_at: E, server_time: T0 } })), store: kvExp, now: () => T0, apiBase }, tok);
+  const vExp = await validateSubscription({ fetchFn: makeFetch(() => ({ status: 200, json: { status: "expired", expires_at: E, server_time: day(5) } })), store: kvExp, now: () => day(5), apiBase }, tok);
+  check("must-fix4: explicit 'expired' overwrites cache (with validated_at)",
+    vExp.ok && vExp.status === "expired" && vExp.account.subscription.status === "expired" && vExp.account.subscription.validated_at === day(5));
+}
+
+// ═══ BUILD-NOW #9: transient store_error degrades to last-known-good ══════════
+
+console.log("\n— entitlements: transient store_error -> last-known-good (no paywall flicker) —");
+{
+  // warm an ACTIVE subscriber into storage (and the in-process snapshot)
+  const kv = new MemKV();
+  const E = day(30);
+  const apiBase = "https://api.test";
+  const tok = "tok-user_A";
+  await validateSubscription({ fetchFn: makeFetch(() => ({ status: 200, json: { status: "active", expires_at: E, server_time: T0 } })), store: kv, now: () => T0, apiBase }, tok);
+
+  // a clean entitlement read first (allowed) so canUse's loader has warmed the snapshot too
+  const warm = await canUse("analytics", { store: kv, now: () => day(5) });
+  check("build9: precondition — active subscriber allowed on a clean read", warm.allowed && warm.via === "subscription");
+
+  // now AsyncStorage goes flaky on the very next read
+  kv.fail = true;
+  const flaky = await canUse("analytics", { store: kv, now: () => day(5) });
+  check("build9: transient store_error -> degrades to last-good, subscriber NOT paywalled", flaky.allowed && flaky.via === "subscription");
+
+  // FREE features remain structurally ungated even with storage dead (airplane-mode invariant)
+  const freeFlaky = await canUse("advisor", { store: kv, now: () => day(5) });
+  check("build9: advisor still free with storage dead (no regression)", freeFlaky.allowed && freeFlaky.via === "free");
+
+  // COLD start (no in-process snapshot) with dead storage still FAILS CLOSED — never open
+  const coldKv = new MemKV();
+  coldKv.fail = true;
+  const cold = await canUse("analytics", { store: coldKv, now: () => T0 });
+  check("build9: cold start + dead storage -> fails CLOSED (requires_subscription)", !cold.allowed && cold.reason === "requires_subscription");
+  const coldFree = await canUse("advisor", { store: coldKv, now: () => T0 });
+  check("build9: cold start + dead storage -> advisor still free", coldFree.allowed && coldFree.via === "free");
+
+  // corrupt-and-reset path is UNCHANGED: a reset-to-init load must NOT be remembered
+  // as last-good, and a never-paid reset account stays gated.
+  const corruptKv = new MemKV();
+  await corruptKv.setItem(STORAGE_KEYS.account, "{not json at all");
+  const afterReset = await canUse("analytics", { store: corruptKv, now: () => T0 });
+  check("build9: corrupt-and-reset never-paid stays gated (path unchanged)", !afterReset.allowed && afterReset.reason === "requires_subscription");
+}
+
 // ═══ never-wipe (corrupt account blob) ═══════════════════════════════════════
 
 console.log("\n— never-wipe —");

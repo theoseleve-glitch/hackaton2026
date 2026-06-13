@@ -16,15 +16,19 @@
  *    GRACE_DAYS (7, schema) more as "grace", then fails closed with
  *    "subscription_expired". Re-validation (validate.ts) is opportunistic,
  *    never required for continued use inside that window.
- *  - Storage failure: premium checks fail CLOSED (evaluated against a fresh
- *    initAccount() → "requires_subscription"); free features are unaffected
- *    (see first bullet). We never throw across the package boundary.
+ *  - Storage failure: a TRANSIENT store_error (one flaky AsyncStorage read)
+ *    degrades to the in-process last-known-good account (loadAccountResilient,
+ *    BUILD-NOW #9) so an active subscriber is NOT paywalled by a single bad
+ *    read. Only when there is no snapshot at all (cold start with dead storage)
+ *    do premium checks fail CLOSED against a fresh initAccount() →
+ *    "requires_subscription" — never fail open. Free features are unaffected
+ *    either way (see first bullet). We never throw across the package boundary.
  */
 
 import type { EntitlementResult, Feature } from "../../schema/src/index";
 import { FREE_FEATURES, checkEntitlement, initAccount } from "../../schema/src/index";
 import type { Clock, KV } from "./deps";
-import { loadAccount } from "./deps";
+import { loadAccountResilient } from "./deps";
 import type { TrialDeps } from "./trial";
 import { TrialService, guardedNow } from "./trial";
 
@@ -40,7 +44,10 @@ export async function canUse(feature: Feature, deps: EntitlementDeps): Promise<E
   // free features: no I/O of any kind — cannot be gated by anything
   if (FREE_FEATURES.includes(feature)) return { allowed: true, via: "free" };
   const nowIso = await guardedNow(deps);
-  const loaded = await loadAccount(deps.store, nowIso);
+  // transient store_error degrades to last-known-good (never paywalls an active
+  // subscriber on one flaky read); a cold-start store_error with no snapshot
+  // still fails closed against initAccount() (BUILD-NOW #9).
+  const loaded = await loadAccountResilient(deps.store, nowIso);
   const account = loaded.ok ? loaded.account : initAccount(); // fail closed on store error
   return checkEntitlement(account, feature, nowIso);
 }

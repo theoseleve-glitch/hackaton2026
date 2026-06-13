@@ -242,6 +242,103 @@ console.log("\n— PII guard (publishability) —");
     Object.keys(cleanStored.payload).sort().join(",") === "car,fields,name,notes,template_id,title,values");
 }
 
+// ═══ DoS bound (BUILD-NOW #6): size + depth, checked BEFORE the scrub walk ════
+// The publish path feeds the auth-free GET, so attacker JSON must be bounded in
+// BYTES (413) and DEPTH (400) before the recursive denylist/scrub can run.
+
+console.log("\n— DoS bound (size + depth) —");
+{
+  // (a) > 64 KiB serialized payload -> 413 payload_too_large (with server_time).
+  const bigValues: Record<string, unknown> = {};
+  for (let i = 0; i < 5000; i++) bigValues[`k${i}`] = "x".repeat(20); // well past 64 KiB
+  const big = { kind: "setup", payload: { title: "t", values: bigValues } };
+  check("publish: payload serializing > 64 KiB is rejected pre-flight (>64KiB sanity)",
+    JSON.stringify(big.payload).length > 64 * 1024);
+  const rBig = await sharePublish(ctx, req("POST", "/api/share/publish", { token: "tok-A", body: big }));
+  check("publish: 65KB+ payload -> 413 payload_too_large + server_time",
+    rBig.status === 413 && rBig.json.error === "payload_too_large" && rBig.json.server_time === NOW);
+  check("publish: oversized payload was NOT stored (rejected before store.create)",
+    [...store.snapshots.values()].every((s) => !("values" in s.payload && Object.keys(s.payload.values as object).length > 4000)));
+
+  // (b) pathologically deep payload -> 400 bad_request (depth > 32), so the
+  //     recursive scrub walk has a hard floor and cannot stack-exhaust.
+  let deep: Record<string, unknown> = { leaf: 1 };
+  for (let i = 0; i < 64; i++) deep = { nest: deep }; // 64 levels >> MAX_DEPTH (32)
+  const rDeep = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "t", fields: deep } },
+  }));
+  check("publish: deeply-nested (>32) payload -> 400 bad_request (depth-bounded)",
+    rDeep.status === 400 && rDeep.json.error === "bad_request");
+
+  // depth check also walks arrays (an attacker can nest via arrays).
+  let deepArr: unknown = 1;
+  for (let i = 0; i < 64; i++) deepArr = [deepArr];
+  const rDeepArr = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "t", values: { a: deepArr } } },
+  }));
+  check("publish: deeply-array-nested (>32) payload -> 400 bad_request",
+    rDeepArr.status === 400 && rDeepArr.json.error === "bad_request");
+
+  // a normal shallow payload is unaffected by the depth bound.
+  const rShallow = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "t", fields: { a: { b: { c: 1 } } } } },
+  }));
+  check("publish: ordinary shallow payload passes the depth bound (201)", rShallow.status === 201);
+}
+
+// ═══ denylist precision (POLISH #9): whole-key anchor + value-email scan ══════
+
+console.log("\n— denylist precision —");
+{
+  // benign key that merely CONTAINS an identity word as a non-identity segment
+  // (e.g. setup_token_count) is NO LONGER a false-positive — it is published.
+  const rTokenCount = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "t", values: { setup_token_count: 7, corner_count: 12 } } },
+  }));
+  check("publish: benign key 'setup_token_count' is allowed (whole-key anchor, no false-positive)",
+    rTokenCount.status === 201);
+  const tcStored = store.snapshots.get(rTokenCount.json.token as string)!;
+  check("publish: 'setup_token_count' survived into the stored payload",
+    (tcStored.payload.values as Record<string, unknown>).setup_token_count === 7);
+
+  // whole-key identity composites are STILL denied (no regression).
+  for (const badKey of ["owner_email", "user_id", "access_token", "ownerEmail", "userId"]) {
+    const r = await sharePublish(ctx, req("POST", "/api/share/publish", {
+      token: "tok-A",
+      body: { kind: "setup", payload: { title: "t", [badKey]: "leak" } },
+    }));
+    check(`publish: identity composite key '${badKey}' still -> 400`,
+      r.status === 400 && r.json.error === "bad_request");
+  }
+
+  // an email embedded in an ALLOW-LISTED free-text VALUE (notes) is caught ->
+  // it must never reach the auth-free GET.
+  const rNotesEmail = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "t", notes: "ping me at alice@track.com for the diff" } },
+  }));
+  check("publish: email in notes VALUE -> 400 bad_request (value-email scan)",
+    rNotesEmail.status === 400 && rNotesEmail.json.error === "bad_request");
+
+  // email embedded in the title VALUE is also caught.
+  const rTitleEmail = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "from bob@rc.io", car: "c" } },
+  }));
+  check("publish: email in title VALUE -> 400 bad_request", rTitleEmail.status === 400);
+
+  // clean notes/title (no email) still publish fine.
+  const rCleanText = await sharePublish(ctx, req("POST", "/api/share/publish", {
+    token: "tok-A",
+    body: { kind: "setup", payload: { title: "hot asphalt baseline", notes: "bump up front toe a touch" } },
+  }));
+  check("publish: clean free-text notes/title still publish (201)", rCleanText.status === 201);
+}
+
 // ═══ get (auth-free) ═════════════════════════════════════════════════════════
 
 console.log("\n— get (auth-free) —");

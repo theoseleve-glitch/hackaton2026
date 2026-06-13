@@ -10,16 +10,10 @@ CREATE TABLE IF NOT EXISTS users (
   trial_started_at TIMESTAMPTZ                            -- null until the first trial claim
 );
 
--- subscriptions: written by the EXTERNAL WEB checkout platform (never by the
--- app — no IAP). status is the raw platform fact; the API computes
--- active/expired against expires_at at read time.
-CREATE TABLE IF NOT EXISTS subscriptions (
-  user_id    TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-  status     TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
-  expires_at TIMESTAMPTZ,                                 -- null = lifetime/manual
-  source     TEXT NOT NULL DEFAULT 'web',
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
+-- (REMOVED at B0+ improvement pass) the legacy `subscriptions` table is gone:
+-- subscription truth now lives in `stripe_subscriptions` (written by the Stripe
+-- webhook, read by /subscription/status + /entitlement, wiped by deleteUserData).
+-- Nothing reads or writes `subscriptions` anymore.
 
 -- backup_entries: the synced outbox journal (packages/schema OutboxEntry).
 -- entry_id is the client-generated idempotency key (OutboxEntry.id, "ob-...");

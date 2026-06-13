@@ -10,7 +10,7 @@
 
 import type { HttpRequest } from "./types";
 import type { ContentName, ContentStore, ContentVersionRow, ManifestSigner } from "./stores/contentStore";
-import { content, type ContentCtx } from "./handlers/content";
+import { content, _clearContentSigCache, type ContentCtx } from "./handlers/content";
 
 let failures = 0;
 function check(label: string, ok: boolean, detail?: string): void {
@@ -75,6 +75,10 @@ function req(path: string, opts?: { token?: string }): HttpRequest {
 }
 
 function freshCtx(): { ctx: ContentCtx; store: FakeContentStore; signer: FakeSigner } {
+  // The signature memo is a module-level Map that survives across requests
+  // (that's the oracle guard). Reset it per block so each fresh store/signer
+  // pairing starts from a cold cache and signer-call counts are isolated.
+  _clearContentSigCache();
   const store = new FakeContentStore();
   const signer = new FakeSigner();
   const ctx: ContentCtx = { now: () => NOW, sign: signer, store };
@@ -117,6 +121,14 @@ console.log("— content rcdata happy path —");
       (signed as Record<string, unknown>).signature === undefined,
   );
   check("rcdata: signature equals sign(manifest)", r.json.signature === `sig:${canon(signed)}`);
+
+  // Cache-Control hint surfaced in meta for the transport adapter (vercel.ts
+  // emits the real header). The CDN/client collapse the anonymous fan-out.
+  const meta = r.json.meta as Record<string, unknown> | undefined;
+  check("rcdata: meta.cache_control hint present", meta !== undefined && typeof meta.cache_control === "string");
+  check("rcdata: meta.cache_control is public + max-age", typeof meta?.cache_control === "string" && /public/.test(meta.cache_control as string) && /max-age=\d+/.test(meta.cache_control as string));
+  // meta must NOT be part of the signed payload (signature covers the manifest only)
+  check("rcdata: meta is NOT in the signed payload", (signed as Record<string, unknown>).meta === undefined);
 }
 
 // ═══ happy path: kb (name routing) ═════════════════════════════════════════════
@@ -235,6 +247,42 @@ console.log("\n— store value passthrough —");
   store.put("kb", { version: 0, content_hash: "h0", url: "u0", published_at: null });
   const r = await content(ctx, req("/api/content/kb"));
   check("edge: version 0 is a valid published version (served, not treated as falsey-missing)", r.status === 200 && r.json.version === 0);
+}
+
+// ═══ signing-oracle guard: signer invoked AT MOST ONCE per (name,version,hash) ══
+// ═══ across repeated requests — an anonymous loop is no longer a signing oracle. ═
+
+console.log("\n— signing-oracle guard (signature memoized per immutable row) —");
+{
+  const { ctx, store, signer } = freshCtx();
+  store.put("rcdata", { version: 7, content_hash: "sha256-rcdata-7", url: "u7", published_at: "2026-06-10T00:00:00.000Z" });
+
+  // hammer the SAME (name,version) the way an anonymous loop would
+  const N = 50;
+  const responses = [];
+  for (let i = 0; i < N; i++) responses.push(await content(ctx, req("/api/content/rcdata")));
+
+  check("oracle: signer invoked AT MOST ONCE across 50 repeated requests", signer.calls === 1);
+  check("oracle: every repeated response is still 200", responses.every((r) => r.status === 200));
+  // correctness preserved: every cached response carries the identical, valid signature
+  const sig0 = responses[0].json.signature;
+  check("oracle: signature is non-empty and identical on every hit", typeof sig0 === "string" && responses.every((r) => r.json.signature === sig0));
+  // and it is the correct signature over the manifest (not a stale/garbage value)
+  check("oracle: cached signature equals sign(manifest)", responses[N - 1].json.signature === `sig:${canon(signer.lastPayload!)}`);
+
+  // a DIFFERENT name signs once more (distinct cache key), proving the memo is keyed, not global
+  store.put("kb", { version: 1, content_hash: "sha256-kb-1", url: "uk", published_at: null });
+  await content(ctx, req("/api/content/kb"));
+  await content(ctx, req("/api/content/kb"));
+  check("oracle: a distinct (name,version,hash) signs exactly once more (keyed memo, not a global flag)", signer.calls === 2);
+
+  // and a NEW version of the same name is a NEW manifest -> exactly one more sign,
+  // while the old version keeps serving its cached signature (monotonic + memo coexist)
+  store.put("rcdata", { version: 8, content_hash: "sha256-rcdata-8", url: "u8", published_at: null });
+  const v8a = await content(ctx, req("/api/content/rcdata")); // latest is now 8 -> first sign of v8
+  const v8b = await content(ctx, req("/api/content/rcdata")); // cached
+  check("oracle: a new MAX(version) signs once (then memoized)", signer.calls === 3);
+  check("oracle: the new version is served (monotonic intact)", v8a.json.version === 8 && v8b.json.version === 8 && v8a.json.signature === v8b.json.signature);
 }
 
 // ═══ verdict ═══════════════════════════════════════════════════════════════════

@@ -426,6 +426,164 @@ console.log("\n— never throws (500 internal, not processed) —");
   check("throws: rejecting isProcessed -> 500 internal, nothing marked", rResolved === true && rRes?.status === 500 && !throwingRead.processed.has("evt_throw"));
 }
 
+// ═══ BUILD-NOW 5a: event field validation (reject BEFORE id is the ledger PK) ══
+// A verifier that returns ok with a malformed event (empty id, non-string type,
+// non-finite created) must be rejected with 400 invalid_event — and crucially
+// the event.id must NOT be written to the idempotency ledger (an id:"" event
+// would poison every other empty-id delivery; a non-finite created would
+// corrupt the watermark). The handler validates these itself, independent of
+// the fake verifier's own typeof pre-check.
+
+console.log("\n— event validation (invalid_event) —");
+{
+  // (a) empty event.id — survives JSON round-trip + the fake verifier's
+  // typeof-string check, so it reaches the handler's own non-empty guard.
+  const c = freshCtx();
+  const emptyId = evt({ id: "", type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const rEmptyId = await stripeWebhook(c, sreq(emptyId));
+  check("validate: empty event.id -> 400 invalid_event", rEmptyId.status === 400 && rEmptyId.json.error === "invalid_event");
+  check("validate: empty event.id carries server_time", rEmptyId.json.server_time === NOW);
+  check("validate: empty event.id NOT written to ledger (no id:'' PK poison)", !store.processed.has("") && store.processed.size === 0);
+  check("validate: empty event.id wrote no subscription", store.subs.size === 0);
+
+  // (b) non-finite event.created — JSON.stringify turns Infinity/NaN into null,
+  // so the verifier re-parses created === null -> Number.isFinite(null) false.
+  const cInf = freshCtx();
+  const infCreated = evt({ id: "evt_inf", created: Infinity, type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const rInf = await stripeWebhook(cInf, sreq(infCreated));
+  check("validate: non-finite created (Infinity->null) -> 400 invalid_event", rInf.status === 400 && rInf.json.error === "invalid_event");
+  check("validate: non-finite created NOT marked processed, no row", !store.processed.has("evt_inf") && store.subs.size === 0);
+
+  const cNaN = freshCtx();
+  const nanCreated = evt({ id: "evt_nan", created: NaN, type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const rNaN = await stripeWebhook(cNaN, sreq(nanCreated));
+  check("validate: NaN created (->null) -> 400 invalid_event, nothing written", rNaN.status === 400 && rNaN.json.error === "invalid_event" && store.processed.size === 0 && store.subs.size === 0);
+
+  // (c) non-string type / non-finite created delivered DIRECTLY by a verifier
+  // that bypasses the fake verifier's own typeof pre-check — proves the handler
+  // guards these on its own, not just the test fake.
+  const malformedVerify: StripeVerifier = {
+    verify() {
+      // a forged "ok" event whose type is not a string and created is not finite
+      return { ok: true, event: { id: "evt_forged", type: 123 as unknown as string, created: Number.NaN, data: { object: { client_reference_id: "user_A" } } } };
+    },
+  };
+  const badTypeStore = new FakeStore();
+  const cBadType: StripeWebhookCtx = { now: () => nowIso, verify: malformedVerify, store: badTypeStore };
+  const eForged = evt({ id: "evt_forged", type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const rBadType = await stripeWebhook(cBadType, sreq(eForged));
+  check("validate: handler rejects non-string type / non-finite created from verifier -> 400 invalid_event", rBadType.status === 400 && rBadType.json.error === "invalid_event");
+  check("validate: forged-malformed event NOT marked processed, no row", !badTypeStore.processed.has("evt_forged") && badTypeStore.subs.size === 0);
+
+  // sanity: a well-formed event with created 0 (epoch) is finite -> NOT rejected
+  // by validation (it flows on through the normal path).
+  const cZero = freshCtx();
+  const zero = evt({ id: "evt_zero", created: 0, type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const rZero = await stripeWebhook(cZero, sreq(zero));
+  check("validate: created 0 is finite -> NOT invalid_event (flows on, 200)", rZero.status === 200 && rZero.json.received === true);
+}
+
+// ═══ BUILD-NOW 5b: client-controlled user id must match /^user_[A-Za-z0-9]+$/ ══
+// resolveUserId reads client_reference_id / metadata, which the buyer's browser
+// controls. A resolved id that is NOT a Clerk user id is an attacker trying to
+// attach a paid subscription to an id they don't own — mark processed (Stripe
+// stops retrying) and 200 {received, ignored:"bad_user"}, but write NOTHING.
+
+console.log("\n— bad_user (client-controlled id rejected) —");
+{
+  const c = freshCtx();
+
+  const sneaky = evt({ id: "evt_baduser", type: "customer.subscription.created", object: { client_reference_id: "admin", status: "active", current_period_end: periodEnd } });
+  const rBad = await stripeWebhook(c, sreq(sneaky));
+  check("baduser: non-user_ client_reference_id -> 200 ignored:bad_user", rBad.status === 200 && rBad.json.received === true && rBad.json.ignored === "bad_user");
+  check("baduser: bad id wrote NO subscription truth", store.subs.has("admin") === false && store.subs.size === 0);
+  check("baduser: bad-user event IS marked processed (Stripe stops retrying)", store.processed.has("evt_baduser"));
+  check("baduser: redelivery of bad-user event short-circuits as duplicate", (await stripeWebhook(c, sreq(sneaky))).json.duplicate === true);
+
+  // SQL-ish / structurally-wrong ids are all rejected (regex anchors both ends).
+  const cInj = freshCtx();
+  const inj = evt({ id: "evt_inj", type: "customer.subscription.created", object: { client_reference_id: "user_A; DROP TABLE stripe_subscriptions;--", status: "active" } });
+  const rInj = await stripeWebhook(cInj, sreq(inj));
+  check("baduser: id with non-alnum chars (anchored regex) -> bad_user, no write", rInj.json.ignored === "bad_user" && store.subs.size === 0);
+
+  const cPrefix = freshCtx();
+  const prefixOnly = evt({ id: "evt_prefixonly", type: "customer.subscription.created", object: { client_reference_id: "user_", status: "active" } });
+  const rPrefix = await stripeWebhook(cPrefix, sreq(prefixOnly));
+  check("baduser: bare 'user_' (no alnum after) -> bad_user", rPrefix.json.ignored === "bad_user" && store.subs.size === 0);
+
+  // and a bad id arriving via metadata (not just client_reference_id) is caught
+  const cMeta = freshCtx();
+  const badMeta = evt({ id: "evt_badmeta", type: "customer.subscription.created", object: { metadata: { user_id: "root" }, status: "active" } });
+  const rBadMeta = await stripeWebhook(cMeta, sreq(badMeta));
+  check("baduser: bad metadata.user_id -> bad_user, no write", rBadMeta.json.ignored === "bad_user" && store.subs.size === 0);
+
+  // sanity: a legit user_ id still writes (the guard does not over-reject).
+  const cOk = freshCtx();
+  const okUser = evt({ id: "evt_okuser", type: "customer.subscription.created", object: { client_reference_id: "user_Legit123", status: "active" } });
+  await stripeWebhook(cOk, sreq(okUser));
+  check("baduser: legit user_ id still writes (no over-rejection)", store.subs.get("user_Legit123")?.status === "active");
+}
+
+// ═══ POLISH 6: object body on a raw route -> 500 raw_body_required ════════════
+// Stripe signs the EXACT bytes; this route MUST receive the raw string. If a
+// bodyParser misconfig hands the handler an already-parsed OBJECT, that is a
+// deploy bug — surface it as a distinct 500 {error:"raw_body_required"} instead
+// of re-stringifying and masking it as an unfixable invalid_signature loop.
+
+console.log("\n— raw_body_required (object body on raw route) —");
+{
+  const c = freshCtx();
+  const event = evt({ id: "evt_objbody", type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+
+  // body delivered as a parsed OBJECT (the misconfig) instead of the raw string.
+  const objBody: HttpRequest = {
+    method: "POST",
+    path: "/api/webhooks/stripe",
+    headers: { "stripe-signature": `sig:${JSON.stringify(event)}` },
+    query: {},
+    body: event as unknown,
+  };
+  const rObj = await stripeWebhook(c, objBody);
+  check("rawbody: object body -> 500 raw_body_required (NOT invalid_signature)", rObj.status === 500 && rObj.json.error === "raw_body_required");
+  check("rawbody: object body carries server_time", rObj.json.server_time === NOW);
+  check("rawbody: object body wrote NOTHING (not in ledger, no row)", store.processed.size === 0 && store.subs.size === 0);
+
+  // an ARRAY body is also a non-string object -> same distinct 500.
+  const arrBody: HttpRequest = {
+    method: "POST",
+    path: "/api/webhooks/stripe",
+    headers: { "stripe-signature": "sig:[]" },
+    query: {},
+    body: [] as unknown,
+  };
+  const rArr = await stripeWebhook(c, arrBody);
+  check("rawbody: array body -> 500 raw_body_required", rArr.status === 500 && rArr.json.error === "raw_body_required");
+
+  // a number body (another non-string) -> same.
+  const numBody: HttpRequest = {
+    method: "POST",
+    path: "/api/webhooks/stripe",
+    headers: { "stripe-signature": "sig:0" },
+    query: {},
+    body: 0 as unknown,
+  };
+  const rNum = await stripeWebhook(c, numBody);
+  check("rawbody: number body -> 500 raw_body_required", rNum.status === 500 && rNum.json.error === "raw_body_required");
+
+  // regression: a STRING body still flows through signature verification as
+  // before (raw_body_required only fires for non-string objects).
+  const cStr = freshCtx();
+  const okStr = await stripeWebhook(cStr, sreq(event));
+  check("rawbody: string body unaffected -> 200 (raw path intact)", okStr.status === 200 && okStr.json.received === true);
+
+  // regression: undefined/null body still collapses to "" -> invalid_signature,
+  // NOT raw_body_required (those are the empty-wire case, not a misconfig).
+  const cNull = freshCtx();
+  const nullBody: HttpRequest = { method: "POST", path: "/api/webhooks/stripe", headers: {}, query: {}, body: undefined };
+  const rNull = await stripeWebhook(cNull, nullBody);
+  check("rawbody: undefined body -> 400 invalid_signature (empty wire, not misconfig)", rNull.status === 400 && rNull.json.error === "invalid_signature");
+}
+
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 
 console.log(failures === 0 ? "\nSTRIPE-WEBHOOK: all checks passed" : `\nSTRIPE-WEBHOOK: ${failures} failures`);

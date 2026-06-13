@@ -12,6 +12,8 @@ export {
   STORAGE_KEYS,
   DEFAULT_API_BASE,
   loadAccount,
+  loadAccountResilient,
+  peekLastKnownGood,
   saveAccount,
   msToIso,
   parseMsOr,

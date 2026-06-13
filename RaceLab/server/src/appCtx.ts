@@ -21,6 +21,7 @@ import type { ShareStore, RenderSeam } from "./stores/shareStore";
 import type { ManifestSigner, ContentStore } from "./stores/contentStore";
 import type { ExportStore } from "./stores/exportStore";
 import type { PushStore } from "./stores/pushStore";
+import type { HealthSeams } from "./handlers/health";
 
 export interface AppCtx extends ServerCtx {
   // P0 — Stripe webhook (D29 web Stripe, no IAP) + offline entitlement token
@@ -41,4 +42,7 @@ export interface AppCtx extends ServerCtx {
   contentStore: ContentStore;
   exportStore: ExportStore;
   pushStore: PushStore;
+  // ops — /healthz: a db liveness ping + per-seam configured booleans (no secrets)
+  healthPing: () => Promise<boolean>;
+  healthSeams: HealthSeams;
 }

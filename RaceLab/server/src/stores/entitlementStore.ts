@@ -96,10 +96,13 @@ export function makeSqlEntitlementReader(query: QueryFn): EntitlementReader {
   };
 }
 
-/** Drivers return timestamptz as Date or string depending on config. */
+/** Drivers return timestamptz as Date or string depending on config. neon
+ *  returns timestamptz as pg TEXT ("2026-06-13 12:00:00+00"); normalize that to
+ *  strict ISO so the wire output is always ISO-8601, never a raw pg string. */
 function isoOf(v: unknown): string {
   if (v instanceof Date) return v.toISOString();
-  return String(v);
+  const d = new Date(String(v));
+  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
 }
 
 /**

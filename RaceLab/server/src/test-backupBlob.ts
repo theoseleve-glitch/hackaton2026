@@ -264,6 +264,46 @@ console.log("\n— bad input —");
   check("edge: format 0 + null base -> 200 (treated as no base)", okZero.status === 200);
 }
 
+// ═══ blob size cap (413) ═════════════════════════════════════════════════════
+
+console.log("\n— blob size cap —");
+{
+  const c = ctxWith(new FakeBlobStore(), () => NOW);
+  const base = { token: "tok-A", query: { domain: "garage" } };
+
+  // build a state whose JSON.stringify length is just over 1 MiB
+  const CAP = 1 * 1024 * 1024;
+  // {"s":"<filler>"} — quoting/braces add ~10 chars; pad filler past the cap.
+  const overFiller = "x".repeat(CAP + 64);
+  const overState = { s: overFiller };
+  check("cap: over-cap state -> JSON length exceeds 1 MiB (sanity)", JSON.stringify(overState).length > CAP);
+  const pOver = await backupBlobPut(c, req("PUT", { ...base, body: { format: 1, state: overState } }));
+  check("cap: over-cap blob -> 413 payload_too_large", pOver.status === 413 && pOver.json.error === "payload_too_large");
+  check("cap: 413 carries server_time", pOver.json.server_time === NOW);
+  // rejected before the store: the row must NOT exist afterwards
+  const gAfterOver = await backupBlobGet(c, req("GET", { ...base }));
+  check("cap: over-cap blob was NOT stored", gAfterOver.status === 404);
+
+  // a state right AT the cap (length === CAP) is accepted (cap is strict >).
+  // {"s":"..."} envelope is 8 chars around the filler -> filler = CAP-8.
+  const atState = { s: "y".repeat(CAP - 8) };
+  check("cap: at-cap state JSON length === CAP (sanity)", JSON.stringify(atState).length === CAP);
+  const pAt = await backupBlobPut(c, req("PUT", { ...base, body: { format: 1, state: atState } }));
+  check("cap: at-cap blob -> 200 (boundary is strict >)", pAt.status === 200);
+
+  // one byte over the cap is rejected
+  const overByOne = { s: "z".repeat(CAP - 8 + 1) };
+  check("cap: over-by-one JSON length === CAP+1 (sanity)", JSON.stringify(overByOne).length === CAP + 1);
+  const cFresh = ctxWith(new FakeBlobStore(), () => NOW);
+  const pOverOne = await backupBlobPut(cFresh, req("PUT", { ...base, body: { format: 1, state: overByOne } }));
+  check("cap: over-by-one blob -> 413", pOverOne.status === 413 && pOverOne.json.error === "payload_too_large");
+
+  // a small state still passes (regression guard)
+  const cOk = ctxWith(new FakeBlobStore(), () => NOW);
+  const pSmall = await backupBlobPut(cOk, req("PUT", { ...base, body: { format: 1, state: { ok: true } } }));
+  check("cap: small blob still -> 200", pSmall.status === 200);
+}
+
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 
 console.log(failures === 0 ? "\nBACKUP-BLOB: all checks passed" : `\nBACKUP-BLOB: ${failures} failures`);

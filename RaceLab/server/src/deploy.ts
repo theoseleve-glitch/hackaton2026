@@ -93,14 +93,17 @@ export async function getDeployCtx(
 
   // ── EdDSA signer (entitlement token + content manifest). Public key pinned in app. ──
   const signingPem = env.ENTITLEMENT_SIGNING_KEY;
-  const signer: JwtSigner & ManifestSigner = signingPem !== undefined && signingPem !== ""
-    ? {
-        sign: async (claims) => {
-          const key = await jose.importPKCS8(signingPem, "EdDSA");
-          return new jose.SignJWT(claims).setProtectedHeader({ alg: "EdDSA", typ: "JWT" }).sign(key);
-        },
-      }
-    : { sign: async () => { throw new Error("signing_unconfigured: set ENTITLEMENT_SIGNING_KEY (EdDSA)"); } };
+  let signer: JwtSigner & ManifestSigner;
+  if (signingPem !== undefined && signingPem !== "") {
+    // import ONCE at ctx build (fail-fast on a malformed key -> server_misconfigured)
+    // instead of re-parsing the PEM on every entitlement/content request.
+    const signingKey = await jose.importPKCS8(signingPem, "EdDSA");
+    signer = {
+      sign: async (claims) => new jose.SignJWT(claims).setProtectedHeader({ alg: "EdDSA", typ: "JWT" }).sign(signingKey),
+    };
+  } else {
+    signer = { sign: async () => { throw new Error("signing_unconfigured: set ENTITLEMENT_SIGNING_KEY (EdDSA)"); } };
+  }
 
   // ── Stripe signature verification (raw body) ───────────────────────────────
   const stripeSecret = env.STRIPE_WEBHOOK_SECRET;
@@ -180,5 +183,20 @@ export async function getDeployCtx(
     contentStore: makeSqlContentStore(query),
     exportStore: makeSqlExportStore(query),
     pushStore: makeSqlPushStore(query),
+    // ops — /healthz: a liveness ping + per-seam configured booleans (no secret values)
+    healthPing: async () => {
+      try {
+        await query("SELECT 1");
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    healthSeams: {
+      stripe: stripeSecret !== undefined && stripeSecret !== "" && stripeApiKey !== undefined && stripeApiKey !== "",
+      signing: signingPem !== undefined && signingPem !== "",
+      blob: blobBase !== undefined && blobBase !== "",
+      render: renderUrl !== undefined && renderUrl !== "",
+    },
   };
 }

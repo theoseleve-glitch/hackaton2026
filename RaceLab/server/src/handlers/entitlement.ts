@@ -69,11 +69,23 @@ export async function entitlement(ctx: EntitlementCtx, req: HttpRequest): Promis
 
   const current_period_end: string | null = sub?.current_period_end ?? null;
 
+  // POLISH #2 (NaN guard): a non-null current_period_end that won't parse is a
+  // corrupt DB instant, not an expiry. Treating NaN as "lapsed" would silently
+  // demote a paying user to expired/none and the app would discard its
+  // last-known-good token — the worst failure mode. Fail LOUD with a 500 so the
+  // client keeps its cached token (offline grant survives) and the bug is seen.
+  // (Still owner-scoped, still echoes server_time, still never throws across the
+  // boundary.)
+  const cpeMs = current_period_end === null ? null : Date.parse(current_period_end);
+  if (cpeMs !== null && Number.isNaN(cpeMs)) {
+    return { status: 500, json: { error: "internal_error", server_time } };
+  }
+
   let status: EntStatus;
   if (
     sub !== null &&
     sub.status === "active" &&
-    (current_period_end === null || Date.parse(current_period_end) > nowMs)
+    (cpeMs === null || cpeMs > nowMs)
   ) {
     status = "active";
   } else if (trial_ends_at !== null && nowMs < Date.parse(trial_ends_at)) {
@@ -87,6 +99,14 @@ export async function entitlement(ctx: EntitlementCtx, req: HttpRequest): Promis
   const plan: "pro" | null = status === "active" ? "pro" : null;
 
   const nowUnix = Math.floor(nowMs / 1000);
+  // BUILD-NOW #7 (cap over-grant): the offline grant must NEVER outlive the paid
+  // period. When current_period_end is sooner than the full TTL window, clamp
+  // exp to the period end (floored to the second so the token can't round PAST
+  // it) — so even a misbehaving client can't extend PRO beyond what's paid for.
+  // When cpe is absent (lifetime / no expiry asserted) or far out, exp is the
+  // full TOKEN_TTL_S window. (cpeMs is already guaranteed non-NaN above.)
+  const ttlExp = nowUnix + TOKEN_TTL_S;
+  const exp = cpeMs !== null ? Math.min(ttlExp, Math.floor(cpeMs / 1000)) : ttlExp;
   const claims: Record<string, unknown> = {
     sub: user_id,
     status,
@@ -94,7 +114,7 @@ export async function entitlement(ctx: EntitlementCtx, req: HttpRequest): Promis
     current_period_end,
     trial_ends_at,
     iat: nowUnix,
-    exp: nowUnix + TOKEN_TTL_S,
+    exp,
   };
 
   const token = await ctx.sign.sign(claims);

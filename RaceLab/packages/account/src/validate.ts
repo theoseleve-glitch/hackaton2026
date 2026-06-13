@@ -7,13 +7,25 @@
  *
  * validated_at semantics (must match schema checkEntitlement's everPaid
  * heuristic): validated_at is PAYMENT EVIDENCE. We stamp it only when the
- * server asserts a paid status ("active" / "expired"-after-payment). A "none"
- * response writes a bare {status:"none"} subscription so a never-paid user
- * whose trial lapses still sees "trial_expired" upsell copy, not a renew
- * prompt for a subscription they never had.
+ * server asserts a paid status ("active" / "expired"-after-payment).
+ *
+ * "none" is NON-EVIDENCE, not a clear signal (MUST-FIX #4). A bare "none" can
+ * be a transient server view — webhook lag, a mid-renewal gap, an eventually-
+ * consistent read — so it must NEVER wipe a LIVE PAID cache (that would drop a
+ * paying user with zero grace, violating the offline policy). On "none":
+ *   - if the currently-cached subscription still resolves to active/grace
+ *     (effectiveSubscriptionStatus), PRESERVE {status, expires_at, validated_at}
+ *     untouched and let it ride the normal expiry + GRACE_DAYS window;
+ *   - otherwise (never-paid, or a cache that is itself already past grace),
+ *     write the bare {status:"none"} so a never-paid user whose trial lapses
+ *     still sees "trial_expired" upsell copy, not a renew prompt for a
+ *     subscription they never had.
+ * Only an explicit "expired" response (the server's clear signal) overwrites a
+ * live cache.
  */
 
 import type { AccountState, IsoDateTime, Subscription } from "../../schema/src/index";
+import { effectiveSubscriptionStatus } from "../../schema/src/index";
 import { deepFreeze } from "../../schema/src/vocab";
 import type { Clock, FetchLike, FetchResponseLike, KV } from "./deps";
 import { DEFAULT_API_BASE, isRecord, loadAccount, saveAccount } from "./deps";
@@ -75,16 +87,32 @@ export async function validateSubscription(deps: ValidateDeps, token: string): P
   const loaded = await loadAccount(deps.store, nowIso);
   if (!loaded.ok) return { ok: false, reason: "store_error" };
 
+  // MUST-FIX #4 — "none" is NON-EVIDENCE: a transient server view (webhook lag,
+  // mid-renewal) must not wipe a LIVE PAID cache. If the cache still resolves to
+  // active/grace, preserve it untouched and let it ride the normal expiry+GRACE
+  // window; only a never-paid/already-lapsed cache gets the bare {status:"none"}.
+  if (status === "none") {
+    const effective = effectiveSubscriptionStatus(loaded.account, nowIso);
+    if (effective === "active" || effective === "grace") {
+      // preserve the cached {status, expires_at, validated_at}; no overwrite
+      return { ok: true, status, account: loaded.account };
+    }
+    const cleared = deepFreeze({
+      ...loaded.account,
+      subscription: { status: "none", source: "web" } as Subscription, // no validated_at: not payment evidence
+    });
+    const savedNone = await saveAccount(deps.store, cleared);
+    if (!savedNone.ok) return { ok: false, reason: "store_error" };
+    return { ok: true, status, account: cleared };
+  }
+
   const validated_at = serverTime ?? nowIso;
-  const subscription: Subscription =
-    status === "none"
-      ? { status: "none", source: "web" } // no validated_at: not payment evidence
-      : {
-          status,
-          source: "web",
-          validated_at,
-          ...(expires_at !== undefined ? { expires_at } : {}),
-        };
+  const subscription: Subscription = {
+    status,
+    source: "web",
+    validated_at,
+    ...(expires_at !== undefined ? { expires_at } : {}),
+  };
   const next = deepFreeze({ ...loaded.account, subscription });
 
   const saved = await saveAccount(deps.store, next);

@@ -377,6 +377,91 @@ console.log("\n— SQL reader: table/column —");
   );
 }
 
+// ═══ BUILD-NOW #7: exp capped to current_period_end (no over-grant) ══════════
+//
+// The offline token must never outlive the paid period. When cpe is sooner than
+// nowUnix + TOKEN_TTL_S (24h), exp is clamped to floor(cpe/1000). When cpe is
+// far out or absent (lifetime/trial/none), exp is the full TTL window. This must
+// hold for EVERY status — a near-future cpe caps the grant regardless of client
+// behavior.
+
+console.log("\n— exp cap (over-grant) —");
+{
+  const TTL = 86_400; // mirrors TOKEN_TTL_S
+  const nowUnix = Math.floor(NOW_MS / 1000);
+
+  // cpe sooner than the TTL window (active, period_end in 1h) -> exp == cpe_unix
+  store.subs.clear();
+  store.trials.clear();
+  const soon = new Date(NOW_MS + 3600_000).toISOString(); // +1h, < 24h TTL
+  store.subs.set("user_A", { status: "active", current_period_end: soon });
+  const rSoon = await entitlement(ctx, req({ token: "tok-A" }));
+  const cSoon = decode(rSoon.json.token as string);
+  const cpeUnixSoon = Math.floor(Date.parse(soon) / 1000);
+  check("cap: active+cpe in 1h -> exp == floor(cpe/1000) (< now+TTL)", cSoon.exp === cpeUnixSoon, `exp=${cSoon.exp} cpe=${cpeUnixSoon}`);
+  check("cap: exp <= cpe_unix when cpe < now+TTL", (cSoon.exp as number) <= cpeUnixSoon);
+  check("cap: capped exp is strictly less than the full TTL exp", (cSoon.exp as number) < nowUnix + TTL);
+
+  // cpe far in the future (active, +30d) -> exp == now + TTL (TTL wins)
+  store.subs.set("user_A", { status: "active", current_period_end: day(30) });
+  const rFar = await entitlement(ctx, req({ token: "tok-A" }));
+  const cFar = decode(rFar.json.token as string);
+  check("cap: active+cpe far (+30d) -> exp == now + TTL", cFar.exp === nowUnix + TTL && cFar.exp === (cFar.iat as number) + TTL);
+  check("cap: far-cpe exp <= cpe_unix still holds", (cFar.exp as number) <= Math.floor(Date.parse(day(30)) / 1000));
+
+  // cpe absent (lifetime, status=active, cpe=null) -> exp == now + TTL
+  store.subs.set("user_A", { status: "active", current_period_end: null });
+  const rLife = await entitlement(ctx, req({ token: "tok-A" }));
+  const cLife = decode(rLife.json.token as string);
+  check("cap: lifetime (cpe absent) -> exp == now + TTL", cLife.exp === nowUnix + TTL);
+
+  // cpe absent (none, no sub) -> exp == now + TTL (regression: unchanged)
+  store.subs.clear();
+  const rNone = await entitlement(ctx, req({ token: "tok-A" }));
+  const cNone = decode(rNone.json.token as string);
+  check("cap: none (no cpe) -> exp == now + TTL (unchanged)", cNone.exp === (cNone.iat as number) + TTL);
+
+  // cap also bites on a non-active row whose cpe is sooner than the TTL
+  // (e.g. canceled but a near-future period_end is still on the row) — the cap is
+  // status-independent so a near cpe can never be over-granted via any path.
+  store.subs.set("user_A", { status: "canceled", current_period_end: soon });
+  const rCancelSoon = await entitlement(ctx, req({ token: "tok-A" }));
+  const cCancelSoon = decode(rCancelSoon.json.token as string);
+  check("cap: canceled+near cpe still caps exp to cpe_unix", cCancelSoon.exp === cpeUnixSoon);
+}
+
+// ═══ POLISH #2: malformed current_period_end -> loud 500 (not silent expire) ══
+//
+// A non-null current_period_end that Date.parse() can't read is a corrupt DB
+// instant. Silently treating it as expired would demote a paying user and make
+// the app drop its last-known-good token. Prefer a loud 500 {error, server_time}
+// so the client keeps its cached token and the corruption surfaces.
+
+console.log("\n— NaN guard (malformed cpe) —");
+{
+  store.subs.clear();
+  store.trials.clear();
+  store.subs.set("user_A", { status: "active", current_period_end: "not-a-real-instant" });
+  const r = await entitlement(ctx, req({ token: "tok-A" }));
+  check("nan: malformed cpe -> 500 internal_error (not silent expire/none)", r.status === 500 && r.json.error === "internal_error", `status=${r.status} body=${JSON.stringify(r.json)}`);
+  check("nan: 500 still carries server_time", r.json.server_time === NOW);
+  check("nan: 500 does NOT leak a token", r.json.token === undefined);
+  check("nan: 500 does NOT leak a status", r.json.status === undefined);
+
+  // even with an in-window trial present, a corrupt cpe still hard-fails
+  // (the malformed instant is detected before status is computed) — we refuse
+  // rather than guess which state the corrupt row implies.
+  store.trials.set("user_A", day(-1));
+  const rTrial = await entitlement(ctx, req({ token: "tok-A" }));
+  check("nan: corrupt cpe hard-fails even with a live trial present", rTrial.status === 500 && rTrial.json.error === "internal_error");
+
+  // a null cpe is NOT malformed — lifetime active still mints normally
+  store.subs.set("user_A", { status: "active", current_period_end: null });
+  store.trials.clear();
+  const rNull = await entitlement(ctx, req({ token: "tok-A" }));
+  check("nan: null cpe is fine (lifetime active, 200)", rNull.status === 200 && rNull.json.status === "active");
+}
+
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 
 console.log(failures === 0 ? "\nENTITLEMENT: all checks passed" : `\nENTITLEMENT: ${failures} failures`);

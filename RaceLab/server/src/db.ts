@@ -137,12 +137,22 @@ export function makeSqlDb(query: QueryFn): Db {
     },
 
     async deleteUserData(user_id, requested_at_iso) {
-      // single atomic statement: wipe everything, tombstone the request
-      // (ON CONFLICT DO NOTHING keeps the FIRST requested_at — idempotent)
+      // single atomic statement: wipe EVERY user-owned table (GDPR Art.17),
+      // tombstone the request (ON CONFLICT DO NOTHING keeps the FIRST
+      // requested_at — idempotent). stripe_subscriptions is the live billing
+      // truth (NOT the dropped legacy `subscriptions`); share_* hold the
+      // publisher's Clerk id. Deletes are explicit even where a users FK would
+      // cascade — belt-and-suspenders, and correct before the FK migration runs.
       await query(
-        `WITH del_backup AS (DELETE FROM backup_entries WHERE user_id = $1),
-              del_sub    AS (DELETE FROM subscriptions  WHERE user_id = $1),
-              del_user   AS (DELETE FROM users          WHERE id      = $1)
+        `WITH del_backup AS (DELETE FROM backup_entries      WHERE user_id = $1),
+              del_blobs  AS (DELETE FROM backup_blobs        WHERE user_id = $1),
+              del_media  AS (DELETE FROM media               WHERE user_id = $1),
+              del_export AS (DELETE FROM export_jobs         WHERE user_id = $1),
+              del_push   AS (DELETE FROM push_tokens         WHERE user_id = $1),
+              del_sub    AS (DELETE FROM stripe_subscriptions WHERE user_id = $1),
+              del_snap   AS (DELETE FROM share_snapshots     WHERE owner_user_id = $1),
+              del_imp    AS (DELETE FROM share_imports       WHERE user_id = $1),
+              del_user   AS (DELETE FROM users               WHERE id      = $1)
          INSERT INTO deletions (user_id, requested_at)
          VALUES ($1, $2::timestamptz)
          ON CONFLICT (user_id) DO NOTHING`,
@@ -152,8 +162,12 @@ export function makeSqlDb(query: QueryFn): Db {
   };
 }
 
-/** Drivers return timestamptz as Date or string depending on config. */
+/** Normalize a driver timestamptz to strict ISO. Drivers return it as a Date OR
+ *  as pg TEXT ("2026-06-13 12:00:00+00", neon's HTTP driver) depending on config;
+ *  a bare String(v) would leak the non-ISO text onto the wire (breaking the
+ *  contract + downstream Date.parse compares), so coerce strings through Date too. */
 function isoOf(v: unknown): string {
   if (v instanceof Date) return v.toISOString();
-  return String(v);
+  const d = new Date(String(v));
+  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
 }

@@ -58,15 +58,29 @@ export async function sharePublish(ctx: ShareCtx, req: HttpRequest): Promise<Htt
   }
   const rawPayload = b.payload as Record<string, unknown>;
 
+  // DoS BOUND (BUILD-NOW #6): this path is reachable WITHOUT auth on the read
+  // side (the GET echoes payload verbatim), so bound attacker JSON BEFORE the
+  // recursive scrub walk can stack-exhaust us.
+  //  (a) size: a giant payload is rejected outright — 413 payload_too_large.
+  //  (b) depth: a pathologically nested payload is rejected — 400 bad_request —
+  //      so the recursive denylist/scrub walk has a hard floor and can never
+  //      blow the stack.
+  if (JSON.stringify(rawPayload).length > MAX_PAYLOAD_BYTES) {
+    return { status: 413, json: { error: "payload_too_large", server_time } };
+  }
+  if (exceedsMaxDepth(rawPayload, 0)) {
+    return { status: 400, json: { error: "bad_request" } };
+  }
+
   // PII GUARD (server-enforced publishability): the auth-free GET echoes payload
   // verbatim, so the SERVER — not the client — decides what is publishable.
   //  1) denylist: reject outright if the payload (at any depth) carries an
-  //     identity-shaped key or an embedded email — the client must never even
-  //     attempt to publish owner identity.
+  //     identity-shaped key OR a string value with an embedded email — the
+  //     client must never even attempt to publish owner identity.
   //  2) allow-list projection: keep ONLY the per-kind publishable top-level
   //     fields, dropping every other key (defence in depth — a key not on the
   //     denylist but also not on the allow-list still never reaches the GET).
-  if (hasDenylistedKey(rawPayload)) {
+  if (hasDenylistedKeyOrEmail(rawPayload)) {
     return { status: 400, json: { error: "bad_request" } };
   }
   const payload = projectPayload(kind, rawPayload);
@@ -161,10 +175,32 @@ const ALLOWED_FIELDS: Record<ShareKind, readonly string[]> = {
   track: ["name", "layout", "surface", "corners", "traits", "notes"],
 };
 
-/** Identity-shaped keys + an embedded-email guard. Matches owner PII the client
- *  must never publish, at ANY nesting depth (a denylisted key short-circuits to
- *  400 rather than being silently dropped, so a misbehaving client is told). */
-const DENY_KEY_RE = /email|user_id|owner|phone|token|@/i;
+/** DoS bound (BUILD-NOW #6): the serialized payload may not exceed 64 KiB, and
+ *  the scrub walk may not descend past MAX_DEPTH levels — both are checked
+ *  BEFORE the recursion runs, so attacker JSON cannot stack-exhaust the
+ *  auth-free-reachable publish path. */
+const MAX_PAYLOAD_BYTES = 64 * 1024;
+const MAX_DEPTH = 32;
+
+/** Identity-shaped key denylist, anchored to WHOLE keys (POLISH #9). A key is
+ *  denied only when its ENTIRE name is an identity term — optionally carrying an
+ *  identity-qualifier prefix/suffix (`owner_`, `auth_`, `_id`, …). This keeps
+ *  composite identity keys caught (`owner_email`, `owner_user_id`, `auth_token`)
+ *  while letting benign keys that merely happen to embed an identity word as a
+ *  non-identity segment through (`setup_token_count`, `corner_count`, the
+ *  `phone`-substring `microphone` etc. are NOT whole-key matches).
+ *  Segments split on `_`/`-`/camelCase. */
+const ID_CORE = "(?:email|user_?id|userid|owner|phone|token)";
+const ID_QUAL = "(?:owner|auth|api|access|refresh|account|acct|session|login|contact|id)";
+const DENY_KEY_RE = new RegExp(
+  `^(?:${ID_QUAL}[_-]?)*${ID_CORE}(?:[_-]?(?:${ID_QUAL}|id))*$`,
+  "i",
+);
+
+/** An embedded email — used to (a) reject any object KEY that is a literal email
+ *  and (b) scan allow-listed free-text VALUES (notes/title) so an email tucked
+ *  into a value can never reach the auth-free GET. */
+const EMAIL_RE = /[^\s@]+@[^\s@]+/;
 
 /** Keep only the per-kind allow-listed top-level fields; drop every other key
  *  (including any client-injected owner/identity field that slipped the deny
@@ -178,17 +214,39 @@ function projectPayload(kind: ShareKind, payload: Record<string, unknown>): Reco
   return out;
 }
 
-/** True if any (nested) object key matches the identity/PII denylist regex. The
- *  regex also catches an '@' anywhere in a key (a literal email used as a key).
- *  Arrays are walked element-wise; plain values are ignored (only keys gate). */
-function hasDenylistedKey(value: unknown): boolean {
+/** True if the value nests deeper than MAX_DEPTH (BUILD-NOW #6 (b)). Runs as an
+ *  iterative-by-recursion guard with an explicit depth counter BEFORE the scrub
+ *  walk, so the scrub walk itself can never descend past a bounded floor.
+ *  Arrays count as a level (an attacker can nest with arrays too). */
+function exceedsMaxDepth(value: unknown, depth: number): boolean {
+  if (depth > MAX_DEPTH) return true;
   if (Array.isArray(value)) {
-    return value.some(hasDenylistedKey);
+    return value.some((v) => exceedsMaxDepth(v, depth + 1));
+  }
+  if (value !== null && typeof value === "object") {
+    for (const v of Object.values(value as Record<string, unknown>)) {
+      if (exceedsMaxDepth(v, depth + 1)) return true;
+    }
+  }
+  return false;
+}
+
+/** True if any (nested) object key is identity-shaped (DENY_KEY_RE, whole-key)
+ *  OR is itself a literal email, OR any string VALUE carries an embedded email
+ *  (POLISH #9) — so owner identity cannot reach the auth-free GET via either a
+ *  key or an allow-listed free-text value. Arrays are walked element-wise.
+ *  Depth is pre-bounded by exceedsMaxDepth, so this walk is stack-safe. */
+function hasDenylistedKeyOrEmail(value: unknown): boolean {
+  if (typeof value === "string") {
+    return EMAIL_RE.test(value);
+  }
+  if (Array.isArray(value)) {
+    return value.some(hasDenylistedKeyOrEmail);
   }
   if (value !== null && typeof value === "object") {
     for (const [key, v] of Object.entries(value as Record<string, unknown>)) {
-      if (DENY_KEY_RE.test(key)) return true;
-      if (hasDenylistedKey(v)) return true;
+      if (DENY_KEY_RE.test(key) || EMAIL_RE.test(key)) return true;
+      if (hasDenylistedKeyOrEmail(v)) return true;
     }
   }
   return false;

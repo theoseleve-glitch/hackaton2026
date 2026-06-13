@@ -9,6 +9,8 @@ import type { TokenVerifier } from "./auth";
 import type { HttpRequest, HttpResponse, ServerCtx } from "./types";
 import { makeHandler } from "./handler";
 import type { AppCtx } from "./appCtx";
+import { makeSqlDb } from "./db";
+import { existsSync } from "node:fs";
 import { MAX_PUSH_BATCH } from "./handlers/backupPush";
 import { toHttpRequest } from "./vercel";
 
@@ -105,8 +107,10 @@ const ctx: ServerCtx = { db, verifier, now: () => nowIso };
 // Lift a base ServerCtx to AppCtx: the Tier-B module seams are stubbed because
 // the core-route tests below never touch them, and the new-route WIRING smoke
 // test only asserts registration (status !== 404/405). Each module has its OWN
-// exhaustive suite (test-<module>.ts) with real fakes.
-const app = (base: ServerCtx): AppCtx => ({ ...base } as unknown as AppCtx);
+// exhaustive suite (test-<module>.ts) with real fakes. healthz gets a working
+// ping+seams so the ops route can be asserted for real.
+const app = (base: ServerCtx): AppCtx =>
+  ({ ...base, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false } } as unknown as AppCtx);
 const handle = makeHandler(app(ctx));
 
 function req(
@@ -164,7 +168,8 @@ console.log("— routing + auth —");
   };
   const h2 = makeHandler(app({ db: throwingDb, verifier, now: () => NOW }));
   const r500 = await h2(req("GET", "/api/subscription/status", { token: "tok-A" }));
-  check("router: handler throw -> 500 internal_error (no leak)", r500.status === 500 && r500.json.error === "internal_error" && Object.keys(r500.json).length === 1);
+  // 500 carries error + server_time (P4), and NOTHING else (no stack/detail leak).
+  check("router: handler throw -> 500 internal_error (no leak)", r500.status === 500 && r500.json.error === "internal_error" && Object.keys(r500.json).sort().join(",") === "error,server_time");
 }
 
 // ═══ trial first-seen ════════════════════════════════════════════════════════
@@ -373,15 +378,47 @@ console.log("\n— module route wiring —");
     ["GET", "/api/me/export"],
     ["POST", "/api/push/token"],
     ["DELETE", "/api/push/token"],
+    ["GET", "/api/healthz"],
   ];
   for (const [method, path] of WIRED) {
     const r = await handle(req(method, path, { token: "tok-A" }));
     check(`wired: ${method} ${path} registered (not 404/405)`, r.status !== 404 && r.status !== 405);
   }
   const wrongMethod = await handle(req("DELETE", "/api/entitlement", { token: "tok-A" }));
-  check("wired: wrong method on a known path -> 405", wrongMethod.status === 405);
+  check("wired: wrong method on a known path -> 405", wrongMethod.status === 405 && Array.isArray(wrongMethod.json.allow));
   const unknown = await handle(req("GET", "/api/does-not-exist"));
   check("wired: unknown path -> 404", unknown.status === 404);
+  check("wired: error responses carry server_time (P4)", typeof unknown.json.server_time === "string" && typeof wrongMethod.json.server_time === "string");
+
+  // healthz works for real (auth-free, ping up, seams reported as booleans only)
+  const hz = await handle(req("GET", "/api/healthz"));
+  check("healthz: 200 ok, db up, seams are booleans, no secrets", hz.status === 200 && hz.json.ok === true && hz.json.db === "up" && typeof hz.json.seams === "object" && typeof (hz.json.seams as Record<string, unknown>).stripe === "boolean");
+}
+
+// ═══ deploy reachability — every route has a Vercel function file (must-fix #2) ═
+console.log("\n— api function coverage —");
+{
+  const API_FILES = [
+    "api/account.ts", "api/subscription/status.ts", "api/trial/start.ts", "api/backup/push.ts", "api/backup/restore.ts",
+    "api/webhooks/stripe.ts", "api/entitlement.ts", "api/media/upload-url.ts", "api/backup/blob.ts",
+    "api/share/publish.ts", "api/share/get.ts", "api/share/import.ts", "api/content/rcdata.ts", "api/content/kb.ts",
+    "api/me/export.ts", "api/push/token.ts", "api/healthz.ts",
+  ];
+  for (const f of API_FILES) check(`api: ${f} exists (route reachable on Vercel)`, existsSync(f));
+}
+
+// ═══ GDPR deletion targets the LIVE tables (must-fix #3) ═════════════════════
+console.log("\n— deletion SQL contract —");
+{
+  const seen: string[] = [];
+  const recDb = makeSqlDb(async (sql) => { seen.push(sql); return { rows: [] }; });
+  await recDb.deleteUserData("user_X", NOW);
+  const sql = seen.join(" ");
+  for (const tbl of ["backup_entries", "backup_blobs", "media", "export_jobs", "push_tokens", "stripe_subscriptions", "share_snapshots", "share_imports", "users"]) {
+    check(`delete: wipes ${tbl}`, new RegExp(`DELETE FROM ${tbl}\\b`).test(sql));
+  }
+  check("delete: does NOT touch the dropped legacy `subscriptions` table", !/DELETE FROM subscriptions\b/.test(sql));
+  check("delete: tombstones the request", /INSERT INTO deletions/.test(sql));
 }
 
 // ═══ verdict ═════════════════════════════════════════════════════════════════

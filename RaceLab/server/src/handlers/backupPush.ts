@@ -21,6 +21,15 @@ import { requireAuth } from "../auth";
 
 export const MAX_PUSH_BATCH = 500;
 
+/**
+ * Per-entry payload byte cap. A single OutboxEntry.payload that serializes to
+ * more than this is rejected (413) and FAILS THE WHOLE BATCH — we never half-
+ * accept a journal. Measured on JSON.stringify(payload).length (UTF-16 code
+ * units, a cheap upper-ish proxy for wire bytes); guards a pathological/abusive
+ * entry from reaching the db. Sized well above any real outbox row.
+ */
+export const MAX_ENTRY_PAYLOAD_BYTES = 256 * 1024;
+
 export async function backupPush(ctx: ServerCtx, req: HttpRequest): Promise<HttpResponse> {
   const auth = await requireAuth(ctx, req);
   if (!auth.ok) return auth.response;
@@ -52,6 +61,10 @@ export async function backupPush(ctx: ServerCtx, req: HttpRequest): Promise<Http
     if (typeof r.op !== "string" || r.op.trim() === "") return bad("op");
     if (r.payload === null || typeof r.payload !== "object" || Array.isArray(r.payload)) {
       return bad("payload");
+    }
+    // Size cap BEFORE the db: an oversized payload rejects the whole batch (413).
+    if (JSON.stringify(r.payload).length > MAX_ENTRY_PAYLOAD_BYTES) {
+      return { status: 413, json: { error: "payload_too_large", index: i } };
     }
     parsed.push({
       entry_id,

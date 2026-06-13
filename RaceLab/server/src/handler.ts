@@ -25,6 +25,8 @@ import { sharePublish, shareGet, shareImport } from "./handlers/share";
 import { content } from "./handlers/content";
 import { dataExportCreate, dataExportStatus } from "./handlers/dataExport";
 import { registerPushToken, unregisterPushToken } from "./handlers/pushToken";
+import { health } from "./handlers/health";
+import { logLine, errFields } from "./log";
 
 type HandlerFn = (ctx: AppCtx, req: HttpRequest) => Promise<HttpResponse>;
 
@@ -85,23 +87,40 @@ const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {
     POST: (c, r) => registerPushToken({ verifier: c.verifier, now: c.now, store: c.pushStore }, r),
     DELETE: (c, r) => unregisterPushToken({ verifier: c.verifier, now: c.now, store: c.pushStore }, r),
   },
+
+  // ── ops — liveness/readiness (auth-free, no secret values leaked) ──────────
+  "/api/healthz": {
+    GET: (c) => health({ now: c.now, ping: c.healthPing, seams: c.healthSeams }),
+  },
 };
 
 export function makeHandler(ctx: AppCtx): (req: HttpRequest) => Promise<HttpResponse> {
   return async (req) => {
+    const reqId = headerStr(req.headers["x-request-id"]);
     const path = normalizePath(req.path);
+    // server_time on EVERY response (CONTRACTS): inject it, but a handler's own
+    // server_time wins (spread last). Errors carry it too — clients raise their
+    // tamper-guard floor even on a 4xx/5xx.
+    const stamp = (r: HttpResponse): HttpResponse => ({ status: r.status, json: { server_time: ctx.now(), ...r.json } });
     const methods = ROUTES[path];
-    if (methods === undefined) return { status: 404, json: { error: "not_found" } };
+    if (methods === undefined) return stamp({ status: 404, json: { error: "not_found" } });
     const fn = methods[req.method.toUpperCase()];
     if (fn === undefined) {
-      return { status: 405, json: { error: "method_not_allowed", allow: Object.keys(methods) } };
+      return stamp({ status: 405, json: { error: "method_not_allowed", allow: Object.keys(methods) } });
     }
     try {
-      return await fn(ctx, req);
-    } catch {
-      return { status: 500, json: { error: "internal_error" } };
+      return stamp(await fn(ctx, req));
+    } catch (e) {
+      // The client gets an opaque reason (no stack leak); the server gets the
+      // only diagnostic trail. Never log bodies/tokens/PII (see log.ts).
+      logLine({ level: "error", msg: "handler_threw", route: path, request_id: reqId, status: 500, ...errFields(e) });
+      return stamp({ status: 500, json: { error: "internal_error" } });
     }
   };
+}
+
+function headerStr(v: string | string[] | undefined): string | undefined {
+  return Array.isArray(v) ? v[0] : v;
 }
 
 function normalizePath(p: string): string {

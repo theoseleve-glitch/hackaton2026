@@ -50,14 +50,40 @@ export async function stripeWebhook(
   // mark the event processed — so Stripe retries the delivery later and the
   // idempotency ledger replays cleanly (the event was never committed).
   try {
+    // ── 0) raw body: this route is signed over the EXACT bytes. A NON-string
+    // object body means a real deploy/bodyParser misconfig (the adapter parsed
+    // the body on a route that must stay raw) — surface it as a distinct 500
+    // {error:"raw_body_required"} rather than re-stringifying and masking it as
+    // an invalid_signature (which would send Stripe into a pointless retry loop
+    // against a payload it can never sign-match).
+    const rawResult = rawBodyOf(req.body);
+    if (rawResult.error !== undefined) {
+      return { status: 500, json: { error: rawResult.error, server_time } };
+    }
+    const rawBody = rawResult.raw;
+
     // ── 1) signature: the raw body is the signed payload, verbatim ────────────
-    const rawBody = rawBodyOf(req.body);
     const sig = headerOf(req.headers, "stripe-signature");
     const verified = ctx.verify.verify(rawBody, sig);
     if (!verified.ok) {
       return { status: 400, json: { error: "invalid_signature", server_time } };
     }
     const event = verified.event;
+
+    // ── 1b) input validation: reject a malformed event BEFORE its id is used as
+    // the idempotency ledger PK. A verifier could (a real SDK after a partial
+    // parse, or a fake) hand back an event with an empty id, a non-string type,
+    // or a non-finite `created`. An id:"" event must not be written to the
+    // ledger (it would poison idempotency for every other empty-id delivery)
+    // and a non-finite `created` would corrupt the out-of-order watermark.
+    if (
+      typeof event.id !== "string" ||
+      event.id === "" ||
+      typeof event.type !== "string" ||
+      !Number.isFinite(event.created)
+    ) {
+      return { status: 400, json: { error: "invalid_event", server_time } };
+    }
 
     // ── 2) idempotency: Stripe redelivers; an already-handled id is a no-op ───
     if (await ctx.store.isProcessed(event.id)) {
@@ -71,6 +97,16 @@ export async function stripeWebhook(
     if (user_id === null) {
       await ctx.store.markProcessed(event.id, server_time);
       return { status: 200, json: { received: true, ignored: "no_user", server_time } };
+    }
+    // The id comes from client-controlled fields (client_reference_id / metadata
+    // on the Checkout Session the buyer's browser created). Before we write
+    // subscription truth keyed by it, require the Clerk id shape (user_<alnum>).
+    // A mismatch is an attacker trying to attach a paid subscription to an id
+    // they don't own (or write to a bogus key) — mark processed (so Stripe
+    // stops retrying) and acknowledge, but write NOTHING.
+    if (!USER_ID_RE.test(user_id)) {
+      await ctx.store.markProcessed(event.id, server_time);
+      return { status: 200, json: { received: true, ignored: "bad_user", server_time } };
     }
 
     // ── map type -> intended subscription mutation (or note-only / ignore) ────
@@ -126,18 +162,21 @@ export async function stripeWebhook(
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
-/** req.body is the RAW signed payload on this route. Tolerate it arriving as a
- *  string (the wire), or — defensively — as an already-parsed object the
- *  adapter mis-handled (re-stringify so we still have *some* payload, though
- *  the signature would then legitimately fail). */
-function rawBodyOf(body: unknown): string {
-  if (typeof body === "string") return body;
-  if (body === undefined || body === null) return "";
-  try {
-    return JSON.stringify(body);
-  } catch {
-    return "";
-  }
+/** Clerk user id shape ("user_<alnum>"). The id we key subscription truth by is
+ *  client-controlled (checkout client_reference_id / metadata), so it is
+ *  validated against this before any write. */
+const USER_ID_RE = /^user_[A-Za-z0-9]+$/;
+
+/** req.body is the RAW signed payload on this route. The wire delivers it as a
+ *  string; undefined/null collapse to "" (the verifier then rejects the empty
+ *  signature). A NON-string OBJECT body, however, is a deploy/bodyParser
+ *  misconfig — the adapter parsed a route that MUST stay raw — and is reported
+ *  as a distinct `raw_body_required` error rather than re-stringified (which
+ *  would mask the misconfig as an unfixable invalid_signature retry loop). */
+function rawBodyOf(body: unknown): { raw: string; error?: undefined } | { error: "raw_body_required" } {
+  if (typeof body === "string") return { raw: body };
+  if (body === undefined || body === null) return { raw: "" };
+  return { error: "raw_body_required" };
 }
 
 function headerOf(

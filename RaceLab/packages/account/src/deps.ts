@@ -128,8 +128,55 @@ export async function saveAccount(
 ): Promise<{ ok: true } | { ok: false; reason: "store_error" }> {
   try {
     await store.setItem(STORAGE_KEYS.account, JSON.stringify(account));
+    rememberGood(store, account); // a confirmed write is the freshest known-good
     return { ok: true };
   } catch {
     return { ok: false, reason: "store_error" };
   }
+}
+
+// ── last-known-good account snapshot (BUILD-NOW #9) ─────────────────────────
+//
+// One flaky AsyncStorage getItem (transient store_error) must NOT paywall an
+// active subscriber by re-evaluating against a fresh initAccount(). We keep an
+// in-process, per-store last-known-good AccountState: populated by every CLEAN
+// load (and every confirmed save), read only to degrade a transient store_error.
+//
+// Scope is deliberately narrow:
+//  - keyed per-KV (a WeakMap, so it never outlives the store / leaks across
+//    app installs and is GC-safe),
+//  - in-process only (a cold start with dead storage has no snapshot and falls
+//    back to fail-closed, exactly as before — premium fails closed, never open),
+//  - NOT populated by the corrupt-and-reset recovery (that path has genuinely
+//    rewritten the live slot to initAccount(); its semantics stay unchanged).
+const lastKnownGood = new WeakMap<KV, AccountState>();
+
+function rememberGood(store: KV, account: AccountState): void {
+  lastKnownGood.set(store, account);
+}
+
+/** The in-process last-known-good account for this store, if any. */
+export function peekLastKnownGood(store: KV): AccountState | undefined {
+  return lastKnownGood.get(store);
+}
+
+/**
+ * loadAccount, hardened for the ENTITLEMENT read path. Identical to loadAccount
+ * except that a TRANSIENT store_error (a getItem throw, storage momentarily
+ * unavailable — NOT a corrupt blob) degrades to the in-process last-known-good
+ * account instead of failing closed against a fresh initAccount(). One flaky
+ * read can no longer paywall an active subscriber. A clean load refreshes the
+ * snapshot; the corrupt-and-reset path is forwarded untouched. With no snapshot
+ * (cold start) it returns the store_error unchanged, so premium still fails
+ * CLOSED — never open — and FREE features never reach here at all.
+ */
+export async function loadAccountResilient(store: KV, nowIso: IsoDateTime): Promise<LoadAccountResult> {
+  const loaded = await loadAccount(store, nowIso);
+  if (loaded.ok) {
+    if (loaded.recovered === undefined) rememberGood(store, loaded.account); // only CLEAN loads
+    return loaded;
+  }
+  const good = lastKnownGood.get(store);
+  if (good !== undefined) return { ok: true, account: good };
+  return loaded; // no snapshot yet -> unchanged fail-closed store_error
 }

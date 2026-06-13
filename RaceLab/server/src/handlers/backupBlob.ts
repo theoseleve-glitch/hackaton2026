@@ -39,6 +39,15 @@ export interface BackupCtx {
   store: BlobBackupStore;
 }
 
+/**
+ * Whole-domain blob size cap. A {format, state} snapshot whose `state`
+ * serializes to more than this is rejected (413) before the store call —
+ * guards an abusive/runaway domain blob from reaching storage. Measured on
+ * JSON.stringify(state).length (UTF-16 code units, a cheap proxy for wire
+ * bytes); sized well above any real per-domain client snapshot.
+ */
+const MAX_BLOB_STATE_BYTES = 1 * 1024 * 1024;
+
 /** Fixed whole-domain backup targets. */
 const FIXED_DOMAINS = new Set(["garage", "tracks", "logbook", "reports", "account"]);
 /** Versioned per-car sheet bundles: "sheets:<carId>". */
@@ -105,6 +114,12 @@ export async function backupBlobPut(ctx: BackupCtx, req: HttpRequest): Promise<H
   // is a malformed body, not an intentional null snapshot.
   if (!("state" in r)) return { status: 400, json: { error: "bad_request" } };
   const state = r.state;
+
+  // Size cap BEFORE the store call: an oversized blob is rejected (413).
+  // (JSON.stringify(undefined) is undefined, not a string — coalesce to "".)
+  if ((JSON.stringify(state) ?? "").length > MAX_BLOB_STATE_BYTES) {
+    return { status: 413, json: { error: "payload_too_large", server_time } };
+  }
 
   // base_updated_at: optional optimistic-concurrency token. When present it
   // must be a parseable ISO instant; absence means "first write".
