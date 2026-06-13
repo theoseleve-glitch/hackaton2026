@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import Grain from "@/components/Grain";
+import Cursor from "@/components/Cursor";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["600"], variable: "--font-fraunces" });
 const inter = Inter({ subsets: ["latin"], weight: ["400","500","600","700"], variable: "--font-inter" });
@@ -17,7 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${fraunces.variable} ${inter.variable}`}>
       <body>
         <a href="#contenu" className="skip">Aller au contenu</a>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Grain />
+          <Cursor />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
