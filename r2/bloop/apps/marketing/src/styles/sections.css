@@ -67,3 +67,7 @@
 .res{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--s2);position:relative}
 .res__bar{grid-column:1/-1;height:10px;background:var(--coral);width:var(--p);border-radius:var(--r-pill)}
 .res__pct{font-family:var(--font-display);font-weight:700}
+.safety__body{max-width:46ch;opacity:.85;margin:var(--s3) 0 var(--s4)}
+.safety__chips{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.safety__chip{background:var(--white);border-radius:var(--r-pill);box-shadow:var(--pop);
+  padding:10px 18px;font-weight:500}
