@@ -12,6 +12,8 @@ class NavState {
     required this.etaSeconds,
     required this.offRoute,
     required this.progress,
+    this.headingDegrees = 0,
+    this.matchedIndex = 0,
     this.current,
     this.next,
   });
@@ -36,6 +38,57 @@ class NavState {
 
   /// Route completion, 0 (departure) → 1 (arrival).
   final double progress;
+
+  /// Bearing of the ROUTE at the matched point, degrees clockwise from north
+  /// (0 = N, 90 = E), exponentially smoothed across updates — drives the
+  /// course-up camera. Using the projected polyline segment instead of the
+  /// raw GPS course is far more stable against jitter.
+  final double headingDegrees;
+
+  /// Index of the polyline segment the position projects onto (between
+  /// vertices [matchedIndex] and [matchedIndex] + 1) — lets the UI split the
+  /// traveled portion of the route from the portion still ahead.
+  final int matchedIndex;
+}
+
+/// Exponential smoothing for angles in degrees, wrap-aware: 359 → 1 eases
+/// through 0 instead of spinning 358° the long way. Jumps larger than
+/// [snapThresholdDegrees] are accepted immediately so U-turns don't lag.
+class HeadingSmoother {
+  HeadingSmoother({this.factor = 0.25});
+
+  /// Weight of the newest sample in (0, 1] — 1 disables smoothing.
+  final double factor;
+
+  /// Angular jump beyond which the new sample is taken as-is.
+  static const double snapThresholdDegrees = 90;
+
+  double? _value;
+
+  /// Last smoothed heading, degrees in [0, 360) — 0 before the first sample.
+  double get value => _value ?? 0;
+
+  /// Feeds [degrees] and returns the new smoothed heading in [0, 360).
+  double smooth(double degrees) {
+    final target = degrees % 360; // Dart % is non-negative for divisor > 0.
+    final current = _value;
+    if (current == null) {
+      _value = target;
+      return target;
+    }
+    // Shortest signed angular difference, in [-180, 180).
+    final delta = (target - current + 540) % 360 - 180;
+    if (delta.abs() > snapThresholdDegrees) {
+      _value = target;
+      return target;
+    }
+    final smoothed = (current + factor * delta) % 360;
+    _value = smoothed;
+    return smoothed;
+  }
+
+  /// Forgets the state — the next sample passes through unchanged.
+  void reset() => _value = null;
 }
 
 /// Pure progression engine: feed it the route (instructions + polyline) once,
@@ -87,6 +140,54 @@ class NavigationEngine {
   static double _metersPerDegLng(double latitude) =>
       111320.0 * math.cos(latitude * math.pi / 180);
 
+  /// Smooths the route bearing across [update] calls (see [HeadingSmoother]).
+  final HeadingSmoother _headingSmoother = HeadingSmoother();
+
+  /// Great-circle initial bearing [from] → [to], degrees in [0, 360):
+  /// 0 = north, 90 = east. Pure.
+  static double bearingDegrees(GeoPoint from, GeoPoint to) {
+    final phi1 = from.latitude * math.pi / 180;
+    final phi2 = to.latitude * math.pi / 180;
+    final dLambda = (to.longitude - from.longitude) * math.pi / 180;
+    final y = math.sin(dLambda) * math.cos(phi2);
+    final x = math.cos(phi1) * math.sin(phi2) -
+        math.sin(phi1) * math.cos(phi2) * math.cos(dLambda);
+    return (math.atan2(y, x) * 180 / math.pi + 360) % 360;
+  }
+
+  /// Point [meters] away from [origin] toward [bearingDeg] (equirectangular
+  /// approximation — plenty accurate at camera look-ahead scale, < 1 km).
+  static GeoPoint offsetBy(GeoPoint origin, double bearingDeg, double meters) {
+    final rad = bearingDeg * math.pi / 180;
+    return GeoPoint(
+      latitude: origin.latitude + meters * math.cos(rad) / _metersPerDegLat,
+      longitude: origin.longitude +
+          meters * math.sin(rad) / _metersPerDegLng(origin.latitude),
+    );
+  }
+
+  /// Fused course-up heading for the camera (degrees, 0 = N, 90 = E), Waze /
+  /// Maps style:
+  ///   • MOVING ([speedMps] > [movingThresholdMps] ≈ 11 km/h): keep the
+  ///     [routeHeading] (the smoothed bearing of the matched polyline segment).
+  ///     It is far more stable than a raw GPS course and keeps the car aligned
+  ///     with the screen axis while driving.
+  ///   • STOPPED or crawling ([speedMps] ≤ threshold): the route bearing is
+  ///     meaningless (the car isn't moving along it), so fall back to the
+  ///     device [compass] when present — the map then still reflects where the
+  ///     phone/car physically points. The compass is an untilt-compensated
+  ///     magnetic heading (see [DrivingSensors.compassHeading]); using it only
+  ///     at standstill keeps that roughness invisible.
+  /// Falls back to [routeHeading] whenever [compass] is null (no magnetometer,
+  /// e.g. emulator). Pure — unit-tested and called by the navigation screen.
+  static double cameraHeading({
+    required double routeHeading,
+    double? compass,
+    required double speedMps,
+    double movingThresholdMps = 3,
+  }) =>
+      speedMps > movingThresholdMps ? routeHeading : (compass ?? routeHeading);
+
   /// Average driving speed implied by the route itself (m/s).
   double get averageSpeedMps => _avgSpeedMps;
 
@@ -122,6 +223,16 @@ class NavigationEngine {
         : math.max(speedMps, _avgSpeedMps);
     final eta = speed <= 0 ? 0.0 : remaining / speed;
 
+    // Heading = bearing of the polyline segment the position projects onto
+    // (direction of the ROUTE at the matched point), smoothed — much more
+    // stable than deriving a course from raw, jittery GPS fixes.
+    var heading = _headingSmoother.value;
+    if (_polyline.length >= 2) {
+      final a = _polyline[projection.segment];
+      final b = _polyline[projection.segment + 1];
+      if (a != b) heading = _headingSmoother.smooth(bearingDegrees(a, b));
+    }
+
     return NavState(
       current: current,
       next: next,
@@ -130,18 +241,24 @@ class NavigationEngine {
       etaSeconds: eta,
       offRoute: projection.offset > offRouteThresholdMeters,
       progress: progress,
+      headingDegrees: heading,
+      matchedIndex: projection.segment,
     );
   }
 
   /// Closest point of the polyline: cumulative distance along the route
-  /// (`along`) and perpendicular drift (`offset`), both in meters.
-  ({double along, double offset}) _project(GeoPoint p) {
-    if (_polyline.isEmpty) return (along: 0.0, offset: double.infinity);
+  /// (`along`), perpendicular drift (`offset`, meters) and the index of the
+  /// matched segment (`segment`, between vertices i and i + 1).
+  ({double along, double offset, int segment}) _project(GeoPoint p) {
+    if (_polyline.isEmpty) {
+      return (along: 0.0, offset: double.infinity, segment: 0);
+    }
     if (_polyline.length == 1) {
-      return (along: 0.0, offset: p.distanceTo(_polyline.first));
+      return (along: 0.0, offset: p.distanceTo(_polyline.first), segment: 0);
     }
     var bestOffset = double.infinity;
     var bestAlong = 0.0;
+    var bestSegment = 0;
     for (var i = 0; i < _polyline.length - 1; i++) {
       final a = _polyline[i], b = _polyline[i + 1];
       final mLng = _metersPerDegLng((a.latitude + b.latitude) / 2);
@@ -158,9 +275,10 @@ class NavigationEngine {
       if (offset < bestOffset) {
         bestOffset = offset;
         bestAlong = _cumulative[i] + (_cumulative[i + 1] - _cumulative[i]) * t;
+        bestSegment = i;
       }
     }
-    return (along: bestAlong, offset: bestOffset);
+    return (along: bestAlong, offset: bestOffset, segment: bestSegment);
   }
 
   /// Cumulative meters at each vertex of [polyline] (`[0, d01, d01+d12…]`).

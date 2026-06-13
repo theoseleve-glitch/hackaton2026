@@ -55,10 +55,14 @@ final echappeeItineraryProvider =
     toleranceMeters: 50,
   );
 
-  final budget = planner.maxDetourMinutes ?? 45;
+  // « Surprends-moi » : pas de plafond — on cherche large et on retient LA
+  // meilleure halte, peu importe le temps qu'elle coûte.
+  final surprise = planner.surpriseMode;
+  final budget = surprise ? 600 : (planner.maxDetourMinutes ?? 45);
   // Portée latérale : aller-retour à ~30 km/h dans le budget (500 m/min),
-  // bornée pour rester pertinente (2 à 15 km du trait).
-  final corridor = (budget / 2 * 500).clamp(2000.0, 15000.0);
+  // bornée pour rester pertinente (2 à 15 km du trait — 30 km en surprise).
+  final corridor =
+      surprise ? 30000.0 : (budget / 2 * 500).clamp(2000.0, 15000.0);
 
   final poiRepo = ref.read(poiRepositoryProvider);
   final raw = await poiRepo.poisAlongRoute(
@@ -72,11 +76,15 @@ final echappeeItineraryProvider =
   );
   final categories = await poiRepo.getCategories();
   final slugByCategoryId = {for (final c in categories) c.id: c.slug};
+  // Heure de passage : départ différé si choisi, sinon maintenant — les
+  // haltes fermées à ce moment (horaires publics OSM) sont rétrogradées
+  // (× 0,45), jamais exclues (un lieu fermé reste bon à connaître).
   final ranked = const TerroirRelevanceScorer().rank(
     raw,
     maxDetourMinutes: budget,
     preferredCategorySlugs: planner.preferredPoiCategories,
     preferredTags: planner.preferredPoiTags,
+    openNowAt: planner.departureAt ?? DateTime.now(),
     categorySlugByPoiId: {
       for (final item in raw)
         item.poi.id: item.poi.categorySlug ??
@@ -85,11 +93,18 @@ final echappeeItineraryProvider =
     },
   );
 
-  final plan = DetourPlanner.selectStops(
-    polyline: line,
-    rankedCandidates: ranked,
-    budgetMinutes: budget,
-  );
+  final plan = surprise
+      // La surprise : un seul arrêt, le mieux noté, sans contrainte d'écart.
+      ? DetourPlan(
+          stops: ranked.take(1).toList(),
+          detourMinutesEstimate:
+              ranked.isEmpty ? 0 : ranked.first.detourMinutesEstimate,
+        )
+      : DetourPlanner.selectStops(
+          polyline: line,
+          rankedCandidates: ranked,
+          budgetMinutes: budget,
+        );
   if (plan.stops.isEmpty) {
     return EchappeeItinerary(
       route: direct,

@@ -1,3 +1,4 @@
+import '../../../features/poi/domain/opening_hours.dart';
 import '../../../shared/models/models.dart';
 
 /// Terroir-specific relevance scoring for POIs along a route.
@@ -26,12 +27,17 @@ class TerroirRelevanceScorer {
   /// Higher when: close to the route, matches preferred categories, shares
   /// affinity tags with the selected moods, sponsored (bounded boost so ads
   /// never crowd out relevance).
+  /// When [openNowAt] is set and the POI carries parseable public opening
+  /// hours (`openingHours['raw']`, OSM syntax): open → small boost (+0.08),
+  /// closed → demotion (final relevance × 0.45 — demoted, never excluded),
+  /// unparseable/absent hours → score unchanged (unknown ≠ closed).
   TerroirPoiScore score(
     PoiAlongRoute item, {
     required int maxDetourMinutes,
     List<String> preferredCategorySlugs = const [],
     List<String> preferredTags = const [],
     String? categorySlug,
+    DateTime? openNowAt,
   }) {
     final detour = item.detourMinutesEstimate;
     // 1.0 at zero detour, 0 at maxDetour.
@@ -52,17 +58,36 @@ class TerroirRelevanceScorer {
       tagMatch = overlap == 0 ? 0.0 : (overlap == 1 ? 0.7 : 1.0);
     }
     final sponsoredBoost = item.poi.isSponsored ? 0.1 : 0.0;
-    final relevance = (proximity * 0.5 +
+    var relevance = (proximity * 0.5 +
             preferenceMatch * 0.3 +
             tagMatch * 0.2 +
             sponsoredBoost)
         .clamp(0.0, 1.0)
         .toDouble();
+    bool? openNow;
+    if (openNowAt != null) {
+      openNow = _openAt(item.poi, openNowAt);
+      if (openNow == true) {
+        relevance = (relevance + 0.08).clamp(0.0, 1.0).toDouble();
+      } else if (openNow == false) {
+        relevance *= 0.45; // closed: demoted, not excluded
+      }
+    }
     return TerroirPoiScore(
       poiRelevanceScore: relevance,
       detourMinutes: detour,
       sponsoredRankBoost: sponsoredBoost,
+      openingNow: openNow,
     );
+  }
+
+  /// True/false when the POI's raw OSM hours parse, null when unknown.
+  bool? _openAt(Poi poi, DateTime when) {
+    final raw = poi.openingHours?['raw'];
+    if (raw is! String) return null;
+    final hours = OpeningHours.tryParse(raw);
+    if (hours == null) return null;
+    return hours.isOpenAt(when);
   }
 
   /// Applies scoring and filters out POIs beyond the accepted detour.
@@ -72,6 +97,7 @@ class TerroirRelevanceScorer {
     List<String> preferredCategorySlugs = const [],
     List<String> preferredTags = const [],
     Map<String, String> categorySlugByPoiId = const {},
+    DateTime? openNowAt,
   }) {
     final scored = <(PoiAlongRoute, double)>[];
     for (final item in items) {
@@ -82,6 +108,7 @@ class TerroirRelevanceScorer {
         preferredCategorySlugs: preferredCategorySlugs,
         preferredTags: preferredTags,
         categorySlug: categorySlugByPoiId[item.poi.id],
+        openNowAt: openNowAt,
       );
       scored.add((
         PoiAlongRoute(

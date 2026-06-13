@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/presentation/auth_screens.dart';
 import '../features/map/presentation/map_screen.dart';
-import '../features/navigation/presentation/navigation_screen.dart';
 import '../features/poi/presentation/poi_screens.dart';
 import '../features/routing/presentation/home_screen.dart';
 import '../features/routing/presentation/route_options_screen.dart';
@@ -13,6 +12,7 @@ import '../features/vehicle/presentation/vehicle_picker_screen.dart';
 import '../core/env/env.dart';
 import '../product_modules/echappee/presentation/design_system_preview_screen.dart';
 import '../product_modules/echappee/presentation/echappee_flow_screens.dart';
+import '../product_modules/echappee/presentation/echappee_guided_navigation.dart';
 import '../product_modules/echappee/presentation/echappee_manifeste_screen.dart';
 import '../product_modules/echappee/presentation/echappee_map_screens.dart';
 import '../product_modules/echappee/presentation/echappee_splash_screen.dart';
@@ -76,7 +76,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           builder: (_, __) => const EchappeeManifesteScreen()),
       GoRoute(
           path: '/echappee/navigation',
-          builder: (_, __) => const EchappeeNavigationScreen()),
+          builder: (_, __) => const EchappeeGuidedNavigationScreen()),
       GoRoute(
           path: '/echappee/home',
           builder: (_, __) => const EchappeeHomeScreen()),

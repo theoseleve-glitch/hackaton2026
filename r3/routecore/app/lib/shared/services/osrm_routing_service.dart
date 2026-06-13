@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../core/logging/app_logger.dart';
+import '../../features/routing/domain/toll_estimator.dart';
 import '../models/models.dart';
 import 'routing_service.dart';
 
@@ -13,17 +14,28 @@ import 'routing_service.dart';
 /// Falls back to the mock synthesis on any network/parse failure so the app
 /// keeps working offline.
 class OsrmRoutingService extends MockRoutingService {
-  OsrmRoutingService({http.Client? client, this.baseUrl})
-      : _client = client ?? http.Client();
+  OsrmRoutingService({http.Client? client, this.baseUrl, TollEstimator? tollEstimator})
+      : _client = client ?? http.Client(),
+        _tollEstimator = tollEstimator ?? TollEstimator.fallback();
 
   final http.Client _client;
   final String? baseUrl;
   static const _log = AppLogger('osrm');
 
+  /// Per-autoroute toll model. Defaults to the const fallback table so the
+  /// estimate is accurate even before the asset loads (and in unit tests).
+  /// [getRouteOptions] best-effort upgrades it to the asset-backed table.
+  TollEstimator _tollEstimator;
+
   String get _base => baseUrl ?? 'https://router.project-osrm.org';
 
   @override
   Future<List<RouteOption>> getRouteOptions(RouteRequest request) async {
+    // Best-effort upgrade to the asset-backed per-autoroute toll table.
+    // Falls back silently to the const table on any failure.
+    try {
+      _tollEstimator = await TollEstimator.load();
+    } catch (_) {/* keep the fallback table */}
     try {
       final coords = '${request.origin.longitude},${request.origin.latitude};'
           '${request.destination.longitude},${request.destination.latitude}';
@@ -214,7 +226,18 @@ class OsrmRoutingService extends MockRoutingService {
     if (_hasSteps(main)) {
       final motorwayKm = motorwayKmFromRoute(main);
       fastestMeta['motorwayKm'] = double.parse(motorwayKm.toStringAsFixed(1));
-      fastestMeta['tollEstimateEur'] = estimateTollEur(motorwayKm);
+      // Péage par autoroute + rattrapage des tronçons autoroutiers que le
+      // serveur démo OSRM laisse sans `ref` (détectés à la vitesse) — voir
+      // TollEstimator.estimateFromRoute. Repli forfaitaire seulement si rien
+      // n'est détecté du tout.
+      final toll = _tollEstimator.estimateFromRoute(main);
+      final breakdown = _tollEstimator.breakdownFromRoute(main);
+      if (toll <= 0 && motorwayKm > minTollableKm) {
+        fastestMeta['tollEstimateEur'] = estimateTollEur(motorwayKm);
+      } else {
+        fastestMeta['tollEstimateEur'] = toll;
+        if (breakdown.isNotEmpty) fastestMeta['tollByAutoroute'] = breakdown;
+      }
     }
 
     final byDistance = [...aRoutes]..sort((a, b) =>
@@ -344,11 +367,12 @@ class OsrmRoutingService extends MockRoutingService {
   /// motorway sections are typically free.
   static const double minTollableKm = 5.0;
 
-  /// Pure ESTIMATE of the toll (EUR) for [motorwayKm] km of French
-  /// autoroute, class-1 vehicle, at [tollEurPerKm] (≈0.118 €/km, 2025–2026
-  /// APRR/ASF/Sanef average — real per-km rates vary by concession,
-  /// ~0.09–0.16 €/km, and some sections such as A75/A84 and urban motorways
-  /// are free). Distances under [minTollableKm] km return 0.
+  /// DEPRECATED flat fallback. Pure ESTIMATE of the toll (EUR) for
+  /// [motorwayKm] km of French autoroute, class-1 vehicle, at [tollEurPerKm]
+  /// (≈0.118 €/km network average). Superseded by [TollEstimator]'s
+  /// per-autoroute model (assets/data/french_tolls.json); kept only as the
+  /// fallback used when no A-ref steps can be identified on a route.
+  /// Distances under [minTollableKm] km return 0.
   static double estimateTollEur(double motorwayKm) {
     if (motorwayKm < minTollableKm) return 0;
     return double.parse((motorwayKm * tollEurPerKm).toStringAsFixed(2));

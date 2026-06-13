@@ -274,11 +274,12 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
         if (hasEchappee) ...[
           const SizedBox(height: EchappeeSpacing.s12),
           EchappeeRouteOptionCard(
-            title: 'L\'Échappée',
+            title: planner.surpriseMode ? 'La surprise' : 'L\'Échappée',
             duration: _formatDuration(itinerary!.route.durationSeconds),
             distance: _formatDistance(itinerary.route.distanceMeters),
-            subtitle:
-                '${stops.length} haltes · +${itinerary.detourMinutes} min',
+            subtitle: planner.surpriseMode
+                ? '${stops.first.poi.name} · +${itinerary.detourMinutes} min'
+                : '${stops.length} haltes · +${itinerary.detourMinutes} min',
             isEchappee: true,
             selected: selectedId == itinerary.route.id,
             onTap: () => notifier.selectOption(itinerary.route),
@@ -296,6 +297,26 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
             textAlign: TextAlign.center,
           ),
         ],
+        const SizedBox(height: EchappeeSpacing.s16),
+        // Heure d'arrivée selon le départ choisi (maintenant ou différé).
+        Builder(builder: (context) {
+          final reference = planner.selectedOption ??
+              (hasEchappee ? itinerary!.route : fastest);
+          final departure = planner.departureAt ?? DateTime.now();
+          final arrival = departure
+              .add(Duration(seconds: reference.durationSeconds));
+          final hh = arrival.hour.toString().padLeft(2, '0');
+          final mm = arrival.minute.toString().padLeft(2, '0');
+          final prefix = planner.departureAt == null
+              ? 'Arrivée estimée'
+              : 'Départ différé — arrivée estimée';
+          return Center(
+            child: Text(
+              '$prefix · $hh:$mm',
+              style: EchappeeTypography.bodySmall,
+            ),
+          );
+        }),
         const SizedBox(height: EchappeeSpacing.section),
         EchappeeButton(
           label: 'Voir sur la carte',

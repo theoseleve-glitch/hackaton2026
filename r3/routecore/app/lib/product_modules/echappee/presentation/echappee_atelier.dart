@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/providers.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
+import '../../ecodrive/data/eco_stats_store.dart';
 import '../design_system/design_system.dart';
 import '../domain/echappee_carnets.dart';
 import '../domain/echappee_itinerary.dart';
@@ -168,12 +169,57 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
   // -- Actions -------------------------------------------------------------------
 
   void _createEchappee() {
+    ref.read(routePlannerProvider.notifier).setSurpriseMode(false);
     // Flush l'estimation en attente pour arriver sur des routes fraîches.
     if (_computeDebounce?.isActive ?? false) {
       _computeDebounce!.cancel();
       ref.read(routePlannerProvider.notifier).computeOptions();
     }
     context.push('/echappee/routes');
+  }
+
+  /// « Surprends-moi » : LA meilleure halte du trajet, sans plafond de
+  /// détour — on arrive quand même à destination.
+  void _surpriseMe() {
+    final notifier = ref.read(routePlannerProvider.notifier);
+    notifier.setSurpriseMode(true);
+    notifier.setMode(RouteMode.discovery);
+    _computeDebounce?.cancel();
+    notifier.computeOptions();
+    context.push('/echappee/routes');
+  }
+
+  /// « Partir plus tard » : date + heure de départ (14 jours max).
+  Future<void> _pickDeparture() async {
+    final now = DateTime.now();
+    final planner = ref.read(routePlannerProvider);
+    final initial = planner.departureAt ?? now;
+    final date = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: now,
+      lastDate: now.add(const Duration(days: 14)),
+    );
+    if (date == null || !mounted) return;
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(initial),
+    );
+    if (time == null || !mounted) return;
+    final when =
+        DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    ref
+        .read(routePlannerProvider.notifier)
+        .setDeparture(when.isBefore(now) ? null : when);
+  }
+
+  static const _weekdaysFr = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
+
+  String _formatDeparture(DateTime when) {
+    final day = _weekdaysFr[when.weekday - 1];
+    final hh = when.hour.toString().padLeft(2, '0');
+    final mm = when.minute.toString().padLeft(2, '0');
+    return '$day ${when.day}/${when.month.toString().padLeft(2, '0')} · $hh:$mm';
   }
 
   void _applyCarnet(EchappeeCarnet carnet) {
@@ -284,6 +330,8 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           onChanged: (value) => _onQueryChanged(value, isOrigin: false),
         ),
         _suggestions(_destinationSuggestions, isOrigin: false),
+        const SizedBox(height: EchappeeSpacing.s8),
+        _departureChip(ref.watch(routePlannerProvider)),
       ],
     );
   }
@@ -297,6 +345,44 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
             active ? EchappeeColors.primary : EchappeeColors.textSecondary,
         fontWeight: active ? FontWeight.w600 : FontWeight.w500,
       ),
+    );
+  }
+
+  /// Départ différé : un chip discret « Partir : maintenant / ven. 13/06 ».
+  Widget _departureChip(RoutePlannerState planner) {
+    final when = planner.departureAt;
+    return Row(
+      children: [
+        const Icon(Icons.schedule,
+            size: 16, color: EchappeeColors.textSecondary),
+        const SizedBox(width: EchappeeSpacing.s8),
+        TextButton(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+            minimumSize: const Size(0, 32),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          onPressed: _pickDeparture,
+          child: Text(
+            when == null
+                ? 'Partir : maintenant'
+                : 'Départ ${_formatDeparture(when)}',
+            style: EchappeeTypography.bodySmall.copyWith(
+              color: EchappeeColors.primary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        if (when != null)
+          IconButton(
+            icon: const Icon(Icons.close, size: 14),
+            color: EchappeeColors.textSecondary,
+            visualDensity: VisualDensity.compact,
+            tooltip: 'Partir maintenant',
+            onPressed: () =>
+                ref.read(routePlannerProvider.notifier).setDeparture(null),
+          ),
+      ],
     );
   }
 
@@ -402,7 +488,29 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           icon: Icons.east,
           onPressed: planner.isReady ? _createEchappee : null,
         ),
+        const SizedBox(height: EchappeeSpacing.s8),
+        EchappeeButton(
+          label: 'Surprends-moi',
+          icon: Icons.casino_outlined,
+          variant: EchappeeButtonVariant.tertiary,
+          onPressed: planner.isReady ? _surpriseMe : null,
+        ),
       ],
+    );
+  }
+
+  /// Bilan de l'année en cours — km, € et CO₂ économisés (coach éco).
+  Widget _yearStatsStrip() {
+    final ledger = ref.watch(ecoLedgerProvider).valueOrNull;
+    final stats = ledger?.yearStats(DateTime.now().year);
+    final km = stats?.km ?? 0;
+    final eur = stats?.moneySavedEur ?? 0;
+    final co2 = stats?.co2SavedKg ?? 0;
+    return Text(
+      'Cette année · ${km.round()} km · '
+      '${eur.toStringAsFixed(eur.abs() < 10 ? 1 : 0)} € · '
+      '${co2.toStringAsFixed(co2.abs() < 10 ? 1 : 0)} kg CO₂ économisés',
+      style: EchappeeTypography.bodySmall,
     );
   }
 
@@ -449,9 +557,11 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           controller: _scrollController,
           padding: const EdgeInsets.all(EchappeeSpacing.screen),
           children: [
-            // Home volontairement sobre : un titre, l'atelier, les carnets.
-            // Le manifeste et le « comment ça marche » vivent dans Réglages.
+            // Home volontairement sobre : un titre, le bilan de l'année,
+            // l'atelier, les carnets. Le reste vit dans Réglages.
             _accentTitle('Combien de temps veux-tu ', 't\'offrir', ' ?'),
+            const SizedBox(height: EchappeeSpacing.s8),
+            _yearStatsStrip(),
             const SizedBox(height: EchappeeSpacing.section),
             _atelierCard(planner),
             const SizedBox(height: EchappeeSpacing.section),

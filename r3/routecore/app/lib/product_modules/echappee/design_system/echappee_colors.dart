@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-/// L'Échappée color tokens — palette « Forêt » (v2) : verts profonds et tons
-/// sombres, plus aucun orangé. Screens must never hardcode colors —
-/// everything comes from here. See docs/DESIGN_SYSTEM_ECHAPPEE.md.
+/// L'Échappée color tokens — palette « Forêt & Ocre » (v3) : verts profonds
+/// en dominante, ocres profonds en chaleur (pas d'orangé vif). Screens must
+/// never hardcode colors — everything comes from here.
+/// See docs/DESIGN_SYSTEM_ECHAPPEE.md.
 abstract final class EchappeeColors {
   // -- Palette principale ----------------------------------------------------
   /// Pin profond — CTA, route active, sélection.
   static const primary = Color(0xFF265C43);
 
-  /// Papier sauge — fond principal de l'app.
-  static const background = Color(0xFFF3F1E9);
+  /// Papier crème-sauge — fond principal de l'app.
+  static const background = Color(0xFFF5F1E6);
 
   /// Blanc cassé végétal — cards, panels, inputs.
   static const surface = Color(0xFFFBFAF4);
@@ -23,8 +24,11 @@ abstract final class EchappeeColors {
   /// Olive — nature, producteurs, lieux vérifiés.
   static const nature = Color(0xFF6F7F45);
 
-  /// Bronze — badges, coups de cœur, partenaires.
-  static const accent = Color(0xFFA8842F);
+  /// Ocre profond — badges, coups de cœur, partenaires, marchés.
+  static const accent = Color(0xFFB07A33);
+
+  /// Terracotta sombre — bonnes tables, touches chaleureuses.
+  static const terracotta = Color(0xFFA05B3F);
 
   /// Bleu-vert ardoise — carte, eau, routes secondaires.
   static const mapAccent = Color(0xFF5E8B87);
@@ -35,8 +39,8 @@ abstract final class EchappeeColors {
   /// Brique sombre — erreurs, danger.
   static const error = Color(0xFFA23B30);
 
-  /// Pierre sauge — contours doux.
-  static const border = Color(0xFFDCD9C8);
+  /// Pierre chaude — contours doux.
+  static const border = Color(0xFFDFD8C4);
 
   /// Lichen pâle — états désactivés.
   static const disabled = Color(0xFFB9BBA8);
@@ -48,8 +52,8 @@ abstract final class EchappeeColors {
   /// Teinte pin claire — fond d'une card sélectionnée.
   static const primaryTint = Color(0xFFDFE9E1);
 
-  /// Bronze à 20 % — fond du badge "Partenaire local".
-  static const accentTint = Color(0x33A8842F);
+  /// Ocre à 20 % — fond du badge "Partenaire local".
+  static const accentTint = Color(0x33B07A33);
 
   /// Card élevée — blanc légèrement cassé.
   static const surfaceElevated = Color(0xFFFDFCF7);
@@ -69,9 +73,9 @@ abstract final class EchappeeColors {
   static const categoryProducteurs = nature;
   static const categoryMarches = accent;
   static const categoryVillages = primary;
-  static const categoryArtisans = textPrimary;
+  static const categoryArtisans = terracotta;
   static const categoryPointsDeVue = mapAccent;
-  static const categoryBonnesTables = primary;
+  static const categoryBonnesTables = terracotta;
   static const categoryNature = success;
   static const categoryEvenements = accent;
 

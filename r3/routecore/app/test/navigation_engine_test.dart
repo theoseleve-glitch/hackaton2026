@@ -277,4 +277,171 @@ void main() {
       expect(events.last, tinyEnd);
     });
   });
+
+  group('NavigationEngine.bearingDegrees', () {
+    const origin = GeoPoint(latitude: 45.0, longitude: 4.0);
+
+    test('cardinal directions (0=N, 90=E, 180=S, 270=W)', () {
+      expect(
+          NavigationEngine.bearingDegrees(
+              origin, const GeoPoint(latitude: 45.001, longitude: 4.0)),
+          closeTo(0, 0.01));
+      expect(
+          NavigationEngine.bearingDegrees(
+              origin, const GeoPoint(latitude: 45.0, longitude: 4.001)),
+          closeTo(90, 0.01));
+      expect(
+          NavigationEngine.bearingDegrees(
+              origin, const GeoPoint(latitude: 44.999, longitude: 4.0)),
+          closeTo(180, 0.01));
+      expect(
+          NavigationEngine.bearingDegrees(
+              origin, const GeoPoint(latitude: 45.0, longitude: 3.999)),
+          closeTo(270, 0.01));
+    });
+
+    test('slightly west of north wraps into [0, 360) instead of negative', () {
+      final bearing = NavigationEngine.bearingDegrees(
+          origin, const GeoPoint(latitude: 45.001, longitude: 3.9999));
+      expect(bearing, closeTo(356, 1));
+      expect(bearing, inExclusiveRange(0, 360));
+    });
+  });
+
+  group('HeadingSmoother', () {
+    test('first sample passes through unchanged', () {
+      expect(HeadingSmoother().smooth(123), 123);
+    });
+
+    test('eases toward the target with the configured factor', () {
+      final smoother = HeadingSmoother(factor: 0.25);
+      smoother.smooth(0);
+      expect(smoother.smooth(40), closeTo(10, 1e-9));
+    });
+
+    test('359 -> 1 eases through 0 instead of spinning the long way', () {
+      final smoother = HeadingSmoother(factor: 0.25);
+      smoother.smooth(359);
+      expect(smoother.smooth(1), closeTo(359.5, 1e-9),
+          reason: 'shortest path is +2 degrees, not -358');
+      for (var i = 0; i < 60; i++) {
+        smoother.smooth(1);
+      }
+      expect(smoother.value, closeTo(1, 0.05),
+          reason: 'converges across the 0 wrap');
+    });
+
+    test('1 -> 359 eases through 0 the other way', () {
+      final smoother = HeadingSmoother(factor: 0.25);
+      smoother.smooth(1);
+      expect(smoother.smooth(359), closeTo(0.5, 1e-9));
+    });
+
+    test('jumps over 90 degrees snap immediately (U-turn)', () {
+      final smoother = HeadingSmoother(factor: 0.25);
+      smoother.smooth(10);
+      expect(smoother.smooth(150), 150, reason: '140-degree jump snaps');
+      expect(smoother.smooth(330), 330, reason: '180-degree jump snaps');
+    });
+
+    test('reset forgets the state', () {
+      final smoother = HeadingSmoother(factor: 0.25);
+      smoother.smooth(10);
+      smoother.reset();
+      expect(smoother.smooth(50), 50);
+    });
+  });
+
+  group('NavState heading and matched segment', () {
+    // Same L-shaped route as the update group: east leg then north leg.
+    const start = GeoPoint(latitude: 45.0, longitude: 4.0);
+    const corner = GeoPoint(latitude: 45.0, longitude: 4.01);
+    const end = GeoPoint(latitude: 45.01, longitude: 4.01);
+
+    NavigationEngine engine() => NavigationEngine(
+          instructions: const [],
+          polyline: const [start, corner, end],
+        );
+
+    test('heading follows the bearing of the matched route segment', () {
+      final east =
+          engine().update(const GeoPoint(latitude: 45.0, longitude: 4.005));
+      expect(east.headingDegrees, closeTo(90, 0.5));
+      expect(east.matchedIndex, 0);
+
+      final north =
+          engine().update(const GeoPoint(latitude: 45.005, longitude: 4.01));
+      expect(north.headingDegrees, closeTo(0, 0.5));
+      expect(north.matchedIndex, 1);
+    });
+
+    test('heading is smoothed across a corner on the same engine', () {
+      final e = engine();
+      final before =
+          e.update(const GeoPoint(latitude: 45.0, longitude: 4.005));
+      expect(before.headingDegrees, closeTo(90, 0.5));
+      final after =
+          e.update(const GeoPoint(latitude: 45.005, longitude: 4.01));
+      // 90 -> 0 is exactly the snap threshold, so it eases: 90 + 0.25*(-90).
+      expect(after.headingDegrees, closeTo(67.5, 0.5));
+    });
+  });
+
+  group('NavigationEngine.offsetBy', () {
+    const origin = GeoPoint(latitude: 45.0, longitude: 4.0);
+
+    test('moves ~meters toward the bearing', () {
+      final east = NavigationEngine.offsetBy(origin, 90, 250);
+      expect(origin.distanceTo(east), closeTo(250, 2));
+      expect(NavigationEngine.bearingDegrees(origin, east), closeTo(90, 0.5));
+
+      final north = NavigationEngine.offsetBy(origin, 0, 250);
+      expect(origin.distanceTo(north), closeTo(250, 2));
+      expect(NavigationEngine.bearingDegrees(origin, north), closeTo(0, 0.5));
+    });
+  });
+
+  group('NavigationEngine.cameraHeading (course-up fusion)', () {
+    test('moving (> 3 m/s) keeps the route/course bearing', () {
+      expect(
+        NavigationEngine.cameraHeading(
+            routeHeading: 90, compass: 200, speedMps: 10),
+        90,
+      );
+    });
+
+    test('stopped / crawling (<= 3 m/s) uses the device compass', () {
+      expect(
+        NavigationEngine.cameraHeading(
+            routeHeading: 90, compass: 200, speedMps: 0),
+        200,
+      );
+      expect(
+        NavigationEngine.cameraHeading(
+            routeHeading: 90, compass: 200, speedMps: 3),
+        200,
+        reason: 'exactly at the threshold counts as stopped',
+      );
+    });
+
+    test('falls back to the route bearing when no compass (emulator)', () {
+      expect(
+        NavigationEngine.cameraHeading(
+            routeHeading: 90, compass: null, speedMps: 0),
+        90,
+      );
+    });
+
+    test('custom moving threshold is honored', () {
+      expect(
+        NavigationEngine.cameraHeading(
+            routeHeading: 90,
+            compass: 200,
+            speedMps: 4,
+            movingThresholdMps: 5),
+        200,
+        reason: '4 m/s is below a 5 m/s threshold → still uses compass',
+      );
+    });
+  });
 }

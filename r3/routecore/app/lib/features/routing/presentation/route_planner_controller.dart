@@ -18,6 +18,8 @@ class RoutePlannerState {
     this.maxDetourMinutes,
     this.preferredPoiCategories = const [],
     this.preferredPoiTags = const [],
+    this.departureAt,
+    this.surpriseMode = false,
     this.options = const AsyncValue.data([]),
     this.selectedOption,
   });
@@ -33,6 +35,15 @@ class RoutePlannerState {
   /// Affinity tags (mood vocabulary) refining the relevance scoring beyond
   /// the category filter — e.g. « vignoble » vs any producer.
   final List<String> preferredPoiTags;
+
+  /// « Partir plus tard » : départ différé choisi par l'utilisateur
+  /// (null = maintenant). Sert au calcul de l'heure d'arrivée et au filtre
+  /// d'ouverture des haltes.
+  final DateTime? departureAt;
+
+  /// « Surprends-moi » : ignore le budget détour et choisit LA meilleure
+  /// halte, quel que soit le temps, tant qu'on finit à destination.
+  final bool surpriseMode;
   final AsyncValue<List<RouteOption>> options;
   final RouteOption? selectedOption;
 
@@ -48,6 +59,9 @@ class RoutePlannerState {
     bool clearMaxDetour = false,
     List<String>? preferredPoiCategories,
     List<String>? preferredPoiTags,
+    DateTime? departureAt,
+    bool clearDeparture = false,
+    bool? surpriseMode,
     AsyncValue<List<RouteOption>>? options,
     RouteOption? selectedOption,
     bool clearSelection = false,
@@ -64,6 +78,9 @@ class RoutePlannerState {
         preferredPoiCategories:
             preferredPoiCategories ?? this.preferredPoiCategories,
         preferredPoiTags: preferredPoiTags ?? this.preferredPoiTags,
+        departureAt:
+            clearDeparture ? null : (departureAt ?? this.departureAt),
+        surpriseMode: surpriseMode ?? this.surpriseMode,
         options: options ?? this.options,
         selectedOption:
             clearSelection ? null : (selectedOption ?? this.selectedOption),
@@ -95,6 +112,13 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
 
   void setPreferredTags(List<String> tags) =>
       state = state.copyWith(preferredPoiTags: tags);
+
+  void setDeparture(DateTime? when) => state = when == null
+      ? state.copyWith(clearDeparture: true)
+      : state.copyWith(departureAt: when);
+
+  void setSurpriseMode(bool enabled) =>
+      state = state.copyWith(surpriseMode: enabled);
 
   void selectOption(RouteOption option) {
     state = state.copyWith(selectedOption: option);

@@ -242,8 +242,12 @@ void main() {
       expect(fastest.metadata['highway'], isTrue);
       expect(fastest.metadata['motorwayKm'], closeTo(71.2, 0.01));
       expect(fastest.metadata['tollEstimateEur'], greaterThan(0));
-      expect(fastest.metadata['tollEstimateEur'], closeTo(8.4, 0.01),
-          reason: '71.2 km x 0.118 EUR/km');
+      expect(fastest.metadata['tollEstimateEur'], closeTo(8.26, 0.01),
+          reason: '71.2 km on A7 x 0.116 EUR/km (per-autoroute model)');
+      // Per-autoroute breakdown is exposed for the UI/metadata.
+      final byAutoroute =
+          fastest.metadata['tollByAutoroute'] as Map<String, double>;
+      expect(byAutoroute['A7'], closeTo(8.26, 0.01));
 
       for (final mode in [RouteMode.shortest, RouteMode.eco]) {
         final option = options.firstWhere((o) => o.routeMode == mode);
