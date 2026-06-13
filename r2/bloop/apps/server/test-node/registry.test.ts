@@ -26,6 +26,9 @@ describe('game registry + static content (design §4.1)', () => {
 
   it('ships enough non-empty prompts for a full game', () => {
     expect(TRACER_PACK.data.prompts.length).toBeGreaterThanOrEqual(DEFAULT_CONFIG.totalRounds);
-    for (const p of TRACER_PACK.data.prompts) expect(p.trim().length).toBeGreaterThan(0);
+    for (const p of TRACER_PACK.data.prompts) {
+      const text = typeof p === 'string' ? p : p.fr;
+      expect(text.trim().length).toBeGreaterThan(0);
+    }
   });
 });

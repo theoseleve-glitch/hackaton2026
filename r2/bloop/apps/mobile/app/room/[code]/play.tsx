@@ -4,13 +4,23 @@ import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
 import { InputGuessPlay } from '../../../src/components/InputGuessPlay';
+import { LastStandingPlay } from '../../../src/components/LastStandingPlay';
+import { NightDayPlay } from '../../../src/components/NightDayPlay';
 import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
+import { RuleHuntPlay } from '../../../src/components/RuleHuntPlay';
 import { SecretRolePlay } from '../../../src/components/SecretRolePlay';
+import { SpotlightGuessPlay } from '../../../src/components/SpotlightGuessPlay';
+import { TruthDarePlay } from '../../../src/components/TruthDarePlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { isInputGuessGame } from '../../../src/games/input-guess-view';
+import { isLastStandingGame } from '../../../src/games/last-standing-view';
+import { isNightDayGame } from '../../../src/games/night-day-view';
 import { isOptionVoteGame } from '../../../src/games/option-vote-view';
+import { isRuleHuntGame } from '../../../src/games/rule-hunt-view';
 import { isSecretRoleGame } from '../../../src/games/secret-role-view';
+import { isSpotlightGuessGame } from '../../../src/games/spotlight-guess-view';
+import { isTruthDareGame } from '../../../src/games/truth-dare-view';
 import { asTracerView, deviceLang, promptText, secondsLeft } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { useTheme } from '../../../src/theme/useTheme';
@@ -34,6 +44,11 @@ export default function Play() {
   if (isOptionVoteGame(state.viewGameId)) return <OptionVotePlay code={code ?? ''} />;
   if (isInputGuessGame(state.viewGameId)) return <InputGuessPlay code={code ?? ''} />;
   if (isSecretRoleGame(state.viewGameId)) return <SecretRolePlay code={code ?? ''} />;
+  if (isTruthDareGame(state.viewGameId)) return <TruthDarePlay code={code ?? ''} />;
+  if (isSpotlightGuessGame(state.viewGameId)) return <SpotlightGuessPlay code={code ?? ''} />;
+  if (isLastStandingGame(state.viewGameId)) return <LastStandingPlay code={code ?? ''} />;
+  if (isRuleHuntGame(state.viewGameId)) return <RuleHuntPlay code={code ?? ''} />;
+  if (isNightDayGame(state.viewGameId)) return <NightDayPlay code={code ?? ''} />;
   return <TracerPlay code={code ?? ''} />;
 }
 

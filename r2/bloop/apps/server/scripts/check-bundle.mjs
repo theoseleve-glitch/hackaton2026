@@ -11,7 +11,11 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const BUDGET = Number(process.env.BUNDLE_BUDGET_BYTES ?? 2 * 1024 * 1024);
+// Raised to 2.5 MiB once the wave-2 catalog landed all 14 games' content packs
+// inline (raw ~2.1 MiB / gzip ~0.45 MiB — gzip, the dimension Cloudflare
+// actually limits, stays ~15% of the 3 MiB cap). Drops back toward 2 MiB when
+// packs move to the documented R2 seam.
+const BUDGET = Number(process.env.BUNDLE_BUDGET_BYTES ?? 2.5 * 1024 * 1024);
 const outdir = process.argv[2];
 if (!outdir) {
   console.error('usage: node scripts/check-bundle.mjs <outdir emitted by wrangler deploy --dry-run --outdir>');

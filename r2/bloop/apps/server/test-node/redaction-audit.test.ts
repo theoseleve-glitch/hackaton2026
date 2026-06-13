@@ -40,6 +40,46 @@ const igGuess = (playerId: string, value: number, at: number): GameEvent<unknown
 const igPick = (playerId: string, cardIndex: number, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'pick', cardIndex }, at });
 
+const tdChoose = (playerId: string, choice: 'truth' | 'dare', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'chooseType', choice }, at });
+const tdDeclare = (playerId: string, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'declare', result: 'done' }, at });
+const tdVote = (playerId: string, vote: 'done' | 'chickened', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'verdict', vote }, at });
+const tdUndrawnTexts = (state: unknown): ReadonlyArray<{ value: string }> => {
+  const s = state as {
+    decks: Record<string, string[]>;
+    cursors: Record<string, number>;
+    itemsById: Record<string, { text?: { fr: string; en: string } }>;
+  };
+  const out: Array<{ value: string }> = [];
+  for (const key of Object.keys(s.decks)) {
+    const id = s.decks[key]?.[s.cursors[key] ?? 0];
+    const t = id === undefined ? undefined : s.itemsById[id]?.text;
+    if (t !== undefined) out.push({ value: t.fr }, { value: t.en });
+  }
+  return out;
+};
+
+const sgGuess = (playerId: string, value: number, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'guess', value }, at });
+const sgAnswer = (playerId: string, answerIndex: number, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'answer', answerIndex }, at });
+const sgDeadlines = (n: number): GameEvent<unknown>[] =>
+  Array.from({ length: n }, (_, i) => ({ type: 'deadline' as const, at: 1_000 + i }));
+
+const lsWord = (playerId: string, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'wordSaid' }, at });
+const lsJudge = (playerId: string, vote: 'valid' | 'reject', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'judge', vote }, at });
+
+const rhAck = (playerId: string, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'ackRule' }, at });
+const rhAccuse = (playerId: string, target: string, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'accuse', target }, at });
+const rhVote = (playerId: string, guilty: boolean, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'tribunalVote', guilty }, at });
+
 const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['tracer', {
     players: ['p1', 'p2', 'p3'],
@@ -106,7 +146,7 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     // every id legitimately appears in views), so substring auditing cannot
     // apply: it is covered by the non-actor invariance check here plus the
     // package's own field-level tests (test/redaction.test.ts).
-    secrets: (state) => {
+    secrets: (state: unknown) => {
       const s = state as {
         match: number;
         items: Array<{ majority: { fr: string; en: string }; impostor: { fr: string; en: string } }>;
@@ -131,7 +171,7 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     eventsAlt: [igGuess('p1', 56, 1_000), igGuess('p2', 89, 2_000)],
     actors: ['p1', 'p2'],
     // the current item's verified answer + funFact are VALUE secrets until reveal
-    secrets: (state) => {
+    secrets: (state: unknown) => {
       const s = state as {
         round: number;
         items: Array<{ answer?: number; funFact?: { fr: string; en: string } }>;
@@ -153,13 +193,146 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     eventsAlt: [igPick('p1', 4, 1_000), igPick('p2', 5, 2_000)],
     actors: ['p1', 'p2'],
     // the current item's pre-computed crowd percentages are VALUE secrets until reveal
-    secrets: (state) => {
+    secrets: (state: unknown) => {
       const s = state as {
         round: number;
         items: Array<{ completions?: Array<{ crowdYesPct: number }> }>;
       };
       const item = s.items[s.round];
       return (item?.completions ?? []).map((c) => ({ value: String(c.crowdYesPct) }));
+    },
+  }],
+  ['truth-or-dare-2', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    events: [
+      tdChoose('p3', 'truth', 1_000), tdDeclare('p3', 2_000),
+      tdVote('p1', 'done', 3_000), tdVote('p2', 'done', 4_000),
+      { type: 'deadline', at: 5_000 },
+      tdChoose('p1', 'truth', 6_000), tdDeclare('p1', 7_000),
+      tdVote('p2', 'done', 8_000),
+    ],
+    eventsAlt: [
+      tdChoose('p3', 'truth', 1_000), tdDeclare('p3', 2_000),
+      tdVote('p1', 'done', 3_000), tdVote('p2', 'done', 4_000),
+      { type: 'deadline', at: 5_000 },
+      tdChoose('p1', 'truth', 6_000), tdDeclare('p1', 7_000),
+      tdVote('p2', 'chickened', 8_000),
+    ],
+    actors: ['p2'],
+    secrets: tdUndrawnTexts,
+  }],
+  ['truth-or-drink', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    events: [tdDeclare('p3', 1_000), tdVote('p1', 'done', 2_000)],
+    eventsAlt: [tdDeclare('p3', 1_000), tdVote('p1', 'chickened', 2_000)],
+    actors: ['p1'],
+    secrets: tdUndrawnTexts,
+  }],
+  ['jeu-de-la-note', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed-note',
+    events: [...sgDeadlines(10), sgGuess('p1', 3, 11_000), sgGuess('p3', 5, 12_000)],
+    eventsAlt: [...sgDeadlines(10), sgGuess('p1', 4, 11_000), sgGuess('p3', 6, 12_000)],
+    actors: ['p1', 'p3'],
+    secrets: (state: unknown) => {
+      const s = state as { round: number; spotIndex: number; turnOrder: string[]; targets: number[] };
+      const t = s.targets[s.round];
+      if (t === undefined) return [];
+      return [{ value: String(t), owner: s.turnOrder[s.spotIndex] }];
+    },
+  }],
+  ['devine-la-question', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed',
+    events: [sgAnswer('p1', 0, 1_000), sgGuess('p2', 1, 2_000), sgGuess('p3', 2, 3_000)],
+    eventsAlt: [sgAnswer('p1', 0, 1_000), sgGuess('p2', 4, 2_000), sgGuess('p3', 0, 3_000)],
+    actors: ['p2', 'p3'],
+    secrets: (state: unknown) => {
+      const s = state as {
+        round: number;
+        hintTier: number;
+        reverseRounds: Array<{
+          realIndex: number;
+          candidates: Array<{ fr: string; en: string }>;
+          hints: Array<{ fr: string; en: string }>;
+        }>;
+      };
+      const out: Array<{ value: string }> = [];
+      const cur = s.reverseRounds[s.round];
+      for (const h of (cur?.hints ?? []).slice(s.hintTier)) out.push({ value: h.fr }, { value: h.en });
+      for (let r = s.round + 1; r < s.reverseRounds.length; r++) {
+        const rr = s.reverseRounds[r]!;
+        const q = rr.candidates[rr.realIndex];
+        if (q !== undefined) out.push({ value: q.fr }, { value: q.en });
+      }
+      return out;
+    },
+  }],
+  ['jeu-du-theme', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    events: [{ type: 'deadline', at: 500 }, lsWord('p3', 1_000), lsJudge('p1', 'valid', 2_000)],
+    eventsAlt: [{ type: 'deadline', at: 500 }, lsWord('p3', 1_000), lsJudge('p1', 'reject', 2_000)],
+    actors: ['p1'],
+    secrets: (state: unknown) => {
+      const s = state as { deck: Array<{ theme: { fr: string; en: string } }>; themeCursor: number };
+      return s.deck.slice(s.themeCursor).flatMap((i) => [{ value: i.theme.fr }, { value: i.theme.en }]);
+    },
+  }],
+  ['trouvez-la-regle', {
+    players: ['p1', 'p2', 'p3', 'p4', 'p5'],
+    seed: 'audit-seed',
+    events: [
+      rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
+      rhAccuse('p2', 'p3', 5_000),
+      rhVote('p4', true, 6_000), rhVote('p5', false, 7_000),
+    ],
+    eventsAlt: [
+      rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
+      rhAccuse('p2', 'p3', 5_000),
+      rhVote('p4', false, 6_000), rhVote('p5', true, 7_000),
+    ],
+    actors: ['p4', 'p5'],
+    secrets: (state: unknown) => {
+      const s = state as {
+        round: number;
+        items: Array<{ rule: { fr: string; en: string }; decoys: Array<{ fr: string; en: string }> }>;
+      };
+      const current = s.items[s.round];
+      const future = s.items.slice(s.round + 1, s.round + 3);
+      return [
+        ...(current?.decoys ?? []).flatMap((d) => [{ value: d.fr }, { value: d.en }]),
+        ...future.flatMap((i) => [{ value: i.rule.fr }, { value: i.rule.en }]),
+      ];
+    },
+  }],
+  ['loup-garou', {
+    players: ['p1', 'p2', 'p3', 'p4', 'p5'],
+    seed: 'audit-seed',
+    events: [
+      { type: 'playerLeft', playerId: 'p3', at: 500 },
+      { type: 'playerLeft', playerId: 'p4', at: 600 },
+      { type: 'playerLeft', playerId: 'p5', at: 700 },
+      { type: 'deadline', at: 1_000 },
+      { type: 'action', playerId: 'p2', action: { kind: 'seerPeek', target: 'p4' }, at: 2_000 },
+      { type: 'deadline', at: 3_000 },
+      { type: 'action', playerId: 'p1', action: { kind: 'wolfVote', target: 'p3' }, at: 4_000 },
+    ],
+    eventsAlt: [
+      { type: 'playerLeft', playerId: 'p3', at: 500 },
+      { type: 'playerLeft', playerId: 'p4', at: 600 },
+      { type: 'playerLeft', playerId: 'p5', at: 700 },
+      { type: 'deadline', at: 1_000 },
+      { type: 'action', playerId: 'p2', action: { kind: 'seerPeek', target: 'p5' }, at: 2_000 },
+      { type: 'deadline', at: 3_000 },
+      { type: 'action', playerId: 'p1', action: { kind: 'wolfVote', target: 'p4' }, at: 4_000 },
+    ],
+    actors: ['p1', 'p2'],
+    secrets: (state: unknown) => {
+      const s = state as { players: string[]; roles: Record<string, string> };
+      return s.players.map((p) => ({ value: `"${p}":"${s.roles[p]}"`, owner: p }));
     },
   }],
 ]);

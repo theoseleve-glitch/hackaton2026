@@ -7,9 +7,14 @@ import { RoomCodeDisplay } from '../../../src/components/room';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { spawnBot } from '../../../src/dev/inAppBot';
 import { asInputGuessView } from '../../../src/games/input-guess-view';
+import { asLastStandingView } from '../../../src/games/last-standing-view';
+import { asNightDayView } from '../../../src/games/night-day-view';
 import { asOptionVoteView } from '../../../src/games/option-vote-view';
+import { asRuleHuntView } from '../../../src/games/rule-hunt-view';
 import { asSecretRoleView } from '../../../src/games/secret-role-view';
+import { asSpotlightGuessView } from '../../../src/games/spotlight-guess-view';
 import { asTracerView } from '../../../src/games/tracer-view';
+import { asTruthDareView } from '../../../src/games/truth-dare-view';
 import { useRoom } from '../../../src/net/context';
 import { SERVER_URL } from '../../../src/config';
 import { useTheme } from '../../../src/theme/useTheme';
@@ -25,6 +30,13 @@ const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new
   ['quizz-culture-ge', { label: 'Au Pif !', minPlayers: 2 }],
   ['cinquante-cinquante', { label: 'Cinquante-Cinquante', minPlayers: 2 }],
   ['double-jeu', { label: 'Double Jeu', minPlayers: 4 }],
+  ['truth-or-dare-2', { label: 'Action ou Vérité — Fun', minPlayers: 2 }],
+  ['truth-or-drink', { label: 'Vérité ou tu Bois', minPlayers: 2 }],
+  ['jeu-de-la-note', { label: 'La Note', minPlayers: 3 }],
+  ['devine-la-question', { label: 'Devine la Question', minPlayers: 3 }],
+  ['jeu-du-theme', { label: 'Le Jeu du Thème', minPlayers: 3 }],
+  ['trouvez-la-regle', { label: 'Trouvez la Règle', minPlayers: 4 }],
+  ['loup-garou', { label: 'Loup-Garou', minPlayers: 5 }],
 ]);
 
 export default function Lobby() {
@@ -63,6 +75,11 @@ export default function Lobby() {
     ?? asOptionVoteView(state.view)?.phase
     ?? asInputGuessView(state.view)?.phase
     ?? asSecretRoleView(state.view)?.phase
+    ?? asTruthDareView(state.view)?.phase
+    ?? asSpotlightGuessView(state.view)?.phase
+    ?? asLastStandingView(state.view)?.phase
+    ?? asRuleHuntView(state.view)?.phase
+    ?? asNightDayView(state.view)?.phase
     ?? null;
   useEffect(() => {
     if (livePhase !== null && livePhase !== 'over') router.replace(`/room/${code}/play`);

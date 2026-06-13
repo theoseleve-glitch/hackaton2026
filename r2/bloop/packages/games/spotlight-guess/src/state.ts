@@ -1,0 +1,293 @@
+import type { PlayerId } from '@bloop/engine';
+import type { Presence } from '@bloop/kit';
+
+/** Bilingual UI string — the client picks a locale at render time. */
+export interface LText {
+  fr: string;
+  en: string;
+}
+
+/**
+ * SPOTLIGHT_GUESS — one rotating spotlight holds a per-round secret (a seeded
+ * number, or a pack realIndex); the room converges on it with hidden guesses.
+ * Two modes, one reducer, config-driven (design §3.3):
+ * - 'scale'            jeu-de-la-note  — secret number on a labeled scale/wheel
+ * - 'reverse-question' devine-la-question — secret question behind a public answer
+ */
+export type SpotlightMode = 'scale' | 'reverse-question';
+
+/** scale10 → integers 1..10; wheel100 → integers 0..100 (snap ticks client-side). */
+export type ScaleDomain = 'scale10' | 'wheel100';
+
+/** Runtime scale item — cleaned mapping of content/packs/jeu-de-la-note.json items. */
+export interface ScaleItem {
+  id: string;
+  kind: ScaleDomain;
+  /** The instruction the speaker performs out loud, calibrated to the secret number. */
+  prompt: LText;
+  /** Anchor label for 1 / the left end of the wheel. */
+  low: LText;
+  /** Anchor label for 10 / the right end of the wheel. */
+  high: LText;
+}
+
+/** Runtime reverse item — cleaned mapping of content/packs/devine-la-question.json items. */
+export interface ReverseItem {
+  id: string;
+  /** The secret real question. */
+  question: LText;
+  /** 3-4 honest-answer options the mystery player picks from. */
+  answers: LText[];
+  /** Fake questions, same register as the real one (>= decoyCount). */
+  decoys: LText[];
+  /** hintTiers-1 progressive hints, least -> most revealing. */
+  hints: LText[];
+}
+
+/** Pack data is mode-discriminated: one pack serves exactly one mode. */
+export type SpotlightGuessContent =
+  | { mode: 'scale'; items: ScaleItem[] }
+  | { mode: 'reverse-question'; items: ReverseItem[] };
+
+export interface SpotlightGuessConfig {
+  mode: SpotlightMode;
+  totalRounds: number;
+  /** Shared reveal beat. */
+  revealMs: number;
+  /** false = overwrites until resolve (scale); true = first-write-wins lock (reverse). */
+  lockOnSubmit: boolean;
+  // --- scale mode ---
+  /** Fallback domain when an item carries no kind (items always do in practice). */
+  domain: ScaleDomain;
+  targetReadMs: number;
+  talkMs: number;
+  guessMs: number;
+  speakerCanEndTalk: boolean;
+  // --- reverse-question mode ---
+  answerMs: number;
+  /** Number of guess windows; 1 for scale (no hints), 3 for reverse. */
+  hintTiers: number;
+  hintIntervalMs: number;
+  decoyCount: number;
+  /** Points by lock tier — length === hintTiers in reverse mode. */
+  tierPoints: number[];
+  readerPointsPerCorrectGuess: number;
+  scoreboardMs: number;
+  /** Insert a scoreboard beat every N revealed rounds (and always before over). 0 = final only. */
+  scoreboardEvery: number;
+}
+
+/** jeu-de-la-note — design docs/designs/wave2-raw/by-game/jeu-de-la-note.json (binding). */
+export const JEU_DE_LA_NOTE_CONFIG: SpotlightGuessConfig = {
+  mode: 'scale',
+  totalRounds: 8,
+  revealMs: 8_000,
+  lockOnSubmit: false,
+  domain: 'scale10',
+  targetReadMs: 8_000,
+  talkMs: 45_000,
+  guessMs: 20_000,
+  speakerCanEndTalk: true,
+  // reverse-only knobs, inert in scale mode (no scoreboard beat in this game):
+  answerMs: 0,
+  hintTiers: 1,
+  hintIntervalMs: 0,
+  decoyCount: 0,
+  tierPoints: [],
+  readerPointsPerCorrectGuess: 0,
+  scoreboardMs: 0,
+  scoreboardEvery: 0,
+};
+
+/** devine-la-question — design docs/designs/wave2-raw/by-game/devine-la-question.json (binding). */
+export const DEVINE_LA_QUESTION_CONFIG: SpotlightGuessConfig = {
+  mode: 'reverse-question',
+  totalRounds: 6,
+  revealMs: 8_000,
+  lockOnSubmit: true,
+  // scale-only knobs, inert in reverse mode:
+  domain: 'scale10',
+  targetReadMs: 0,
+  talkMs: 0,
+  guessMs: 0,
+  speakerCanEndTalk: false,
+  answerMs: 20_000,
+  hintTiers: 3,
+  hintIntervalMs: 20_000,
+  decoyCount: 4,
+  tierPoints: [300, 200, 100],
+  readerPointsPerCorrectGuess: 75,
+  scoreboardMs: 6_000,
+  scoreboardEvery: 2,
+};
+
+/**
+ * Union over both modes. scale uses target/talk/guess/reveal; reverse uses
+ * answer/guess(+hint tiers)/reveal/scoreboard. 'over' is terminal + untimed.
+ */
+export type SpotlightPhase =
+  | 'target'
+  | 'talk'
+  | 'answer'
+  | 'guess'
+  | 'reveal'
+  | 'scoreboard'
+  | 'over';
+
+export interface ScaleRound {
+  itemId: string;
+  /** Per-item domain: the authored pack mixes scale10 and wheel100 items. */
+  kind: ScaleDomain;
+  prompt: LText;
+  low: LText;
+  high: LText;
+}
+
+export interface ReverseRound {
+  itemId: string;
+  /** Honest-answer options the spotlight picks from — spotlight-only pre-guess. */
+  answers: LText[];
+  /** Seeded shuffle of [real question, ...decoys] — public from the guess phase. */
+  candidates: LText[];
+  /** HIDDEN until reveal (spotlight-own echo only). */
+  realIndex: number;
+  /** Public one tier at a time. */
+  hints: LText[];
+}
+
+/** scale: value = dial integer; reverse: value = candidateIndex. tier = lock tier (0 in scale). */
+export interface GuessEntry {
+  value: number;
+  tier: number;
+}
+
+export interface SpotlightGuessState {
+  config: SpotlightGuessConfig;
+  players: PlayerId[];
+  /** Seeded shuffle — the spotlight rotation order (pack-independent: first rng draw). */
+  turnOrder: PlayerId[];
+  connected: Presence;
+  round: number;
+  phase: SpotlightPhase;
+  /** Index into turnOrder of the current spotlight (speaker / mystery player). */
+  spotIndex: number;
+  /** Reverse guess sub-tier (0-based). Always 0 in scale mode. */
+  hintTier: number;
+  /** Scale mode round material ([] in reverse mode). */
+  scaleRounds: ScaleRound[];
+  /** HIDDEN: pre-drawn secret targets for ALL rounds (seeded at init; [] in reverse mode). */
+  targets: number[];
+  /** Reverse mode round material — realIndex inside is HIDDEN until reveal. */
+  reverseRounds: ReverseRound[];
+  /** HIDDEN during 'answer' (spotlight echo only); public from 'guess' on. */
+  chosenAnswer: number | null;
+  /** HIDDEN buffer: never exposed pre-reveal beyond acted-booleans + owner echo. */
+  guesses: Record<PlayerId, GuessEntry>;
+  /** True when the round was voided (spotlight left / never answered). */
+  voided: boolean;
+  /** Points gained in the last resolved round — public from reveal on. */
+  lastGained: Record<PlayerId, number>;
+  scores: Record<PlayerId, number>;
+}
+
+export type SpotlightGuessAction =
+  | { kind: 'ready' }
+  | { kind: 'openVotes' }
+  | { kind: 'answer'; answerIndex: number }
+  | { kind: 'guess'; value: number };
+
+// ---------------------------------------------------------------------------
+// Views — every player-visible content string is bilingual {fr,en}.
+// ---------------------------------------------------------------------------
+
+export interface ScaleItemView {
+  id: string;
+  prompt: LText;
+  low: LText;
+  high: LText;
+}
+
+interface ViewBase {
+  round: number;
+  totalRounds: number;
+  spotlightId: PlayerId;
+  scores: Record<PlayerId, number>;
+  connected: Record<PlayerId, boolean>;
+}
+
+export type SpotlightGuessView =
+  | (ViewBase & {
+      mode: 'scale';
+      phase: 'target' | 'talk';
+      domain: ScaleDomain;
+      item: ScaleItemView | null;
+      canEndTalk: boolean;
+      /** The secret — spotlight only; null for everyone else. */
+      myTarget: number | null;
+    })
+  | (ViewBase & {
+      mode: 'scale';
+      phase: 'guess';
+      domain: ScaleDomain;
+      item: ScaleItemView | null;
+      hasGuessed: Record<PlayerId, boolean>;
+      /** Owner echo only. */
+      myGuess: number | null;
+      myTarget: number | null;
+    })
+  | (ViewBase & {
+      mode: 'scale';
+      phase: 'reveal';
+      domain: ScaleDomain;
+      item: ScaleItemView | null;
+      /** null on a voided round (the performance never happened). */
+      target: number | null;
+      /** Public from reveal on. */
+      guesses: Record<PlayerId, number>;
+      gained: Record<PlayerId, number>;
+      voided: boolean;
+    })
+  | (ViewBase & {
+      mode: 'reverse-question';
+      phase: 'answer';
+      /** Spotlight only; null for guessers/spectators (zero leak — no candidates either). */
+      question: LText | null;
+      answers: LText[] | null;
+    })
+  | (ViewBase & {
+      mode: 'reverse-question';
+      phase: 'guess';
+      hintTier: number;
+      hintTiers: number;
+      tierPoints: number[];
+      chosenAnswer: LText | null;
+      candidates: LText[];
+      hintsRevealed: LText[];
+      /** Booleans ONLY — never anyone's pick. */
+      locked: Record<PlayerId, boolean>;
+      /** Owner echo only. */
+      myGuess: GuessEntry | null;
+      /** The spotlight's own secret echo; null for everyone else. */
+      myRealIndex: number | null;
+    })
+  | (ViewBase & {
+      mode: 'reverse-question';
+      phase: 'reveal';
+      chosenAnswer: LText | null;
+      candidates: LText[];
+      /** null on a voided round. */
+      realIndex: number | null;
+      picks: Record<PlayerId, GuessEntry>;
+      gained: Record<PlayerId, number>;
+      voided: boolean;
+    })
+  | (ViewBase & {
+      mode: 'reverse-question';
+      phase: 'scoreboard';
+      gained: Record<PlayerId, number>;
+    })
+  | {
+      mode: SpotlightMode;
+      phase: 'over';
+      scores: Record<PlayerId, number>;
+    };
