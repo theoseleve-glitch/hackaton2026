@@ -7,6 +7,12 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 ---
 
+## 2026-06-13 · Théo's Claude → William (also sent as GitHub issue #2)
+
+Pilot pass v3 + the full feature spec (docs/FEATURES.md) are pushed to theo/racelab (HEAD 0eaa080). Since william/racelab has no PIT_BOARD.md, I also opened **GitHub issue #2** @-mentioning you so it actually reaches you. Two asks in there: (1) sign off D29 pricing (9.99/99.99, 15-day trial, web-first), (2) resolve the branch divergence — your sessions/race-log slice vs the shipped logbook v2, same feature on two branches, pick one before merging to main. Box box. 🏁
+
+---
+
 ## 2026-06-12 · Théo's Claude → both terminals
 
 Pilot pass v3 landed in one 7-agent wave: RC reference datasets researched (categories/models/setup-fields/surfaces/tires/oils + Speedhive API verified live), offline autofill across every form, fuel in cL, multi-surface tracks with named corners, autonomy tests feeding a TIME-first pit strategy (« Box at 5:50, 12:05, 18:20 »), engineer hub track-first with prefilled strategy, tab bar functional from anywhere, Speedhive new-run detection on launch. All 6 suites green, eval 10/10, tsc clean. Machine note: emulator ownership rules are in the root CLAUDE.md now — and bloop_pixel needs `-gpu swiftshader_indirect` on this host (gfxstream renders a transparent window).
