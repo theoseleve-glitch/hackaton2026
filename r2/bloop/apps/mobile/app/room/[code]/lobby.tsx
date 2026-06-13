@@ -8,6 +8,7 @@ import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components
 import { spawnBot } from '../../../src/dev/inAppBot';
 import { asInputGuessView } from '../../../src/games/input-guess-view';
 import { asOptionVoteView } from '../../../src/games/option-vote-view';
+import { asSecretRoleView } from '../../../src/games/secret-role-view';
 import { asTracerView } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { SERVER_URL } from '../../../src/config';
@@ -23,6 +24,7 @@ const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new
   ['pires-potes', { label: 'Pires Potes', minPlayers: 3 }],
   ['quizz-culture-ge', { label: 'Au Pif !', minPlayers: 2 }],
   ['cinquante-cinquante', { label: 'Cinquante-Cinquante', minPlayers: 2 }],
+  ['double-jeu', { label: 'Double Jeu', minPlayers: 4 }],
 ]);
 
 export default function Lobby() {
@@ -60,6 +62,7 @@ export default function Lobby() {
   const livePhase = asTracerView(state.view)?.phase
     ?? asOptionVoteView(state.view)?.phase
     ?? asInputGuessView(state.view)?.phase
+    ?? asSecretRoleView(state.view)?.phase
     ?? null;
   useEffect(() => {
     if (livePhase !== null && livePhase !== 'over') router.replace(`/room/${code}/play`);

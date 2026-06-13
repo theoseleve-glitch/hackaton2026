@@ -5,10 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
 import { InputGuessPlay } from '../../../src/components/InputGuessPlay';
 import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
+import { SecretRolePlay } from '../../../src/components/SecretRolePlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { isInputGuessGame } from '../../../src/games/input-guess-view';
 import { isOptionVoteGame } from '../../../src/games/option-vote-view';
+import { isSecretRoleGame } from '../../../src/games/secret-role-view';
 import { asTracerView, deviceLang, promptText, secondsLeft } from '../../../src/games/tracer-view';
 import { useRoom } from '../../../src/net/context';
 import { useTheme } from '../../../src/theme/useTheme';
@@ -31,6 +33,7 @@ export default function Play() {
   // Each branch owns its hooks — never swap render paths mid-component.
   if (isOptionVoteGame(state.viewGameId)) return <OptionVotePlay code={code ?? ''} />;
   if (isInputGuessGame(state.viewGameId)) return <InputGuessPlay code={code ?? ''} />;
+  if (isSecretRoleGame(state.viewGameId)) return <SecretRolePlay code={code ?? ''} />;
   return <TracerPlay code={code ?? ''} />;
 }
 

@@ -11,9 +11,11 @@ import {
   optionVoteActionSchema,
   TU_PREFERES_CONFIG,
 } from '@bloop/game-option-vote';
+import { createSecretRole, DOUBLE_JEU_CONFIG, secretRoleActionSchema } from '@bloop/game-secret-role';
 import { createTracer, PIRES_POTES_CONFIG, tracer, tracerActionSchema } from '@bloop/game-tracer';
 import type { z } from 'zod';
 import { CINQUANTE_CINQUANTE_PACK, QUIZZ_CULTURE_GE_PACK } from '../content/input-guess-packs.js';
+import { DOUBLE_JEU_PACK } from '../content/secret-role-pack.js';
 import { GAUCHE_DROITE_PACK, TU_PREFERES_PACK } from '../content/option-vote-packs.js';
 import { PIRES_POTES_PACK } from '../content/pires-potes-pack.js';
 import { TRACER_PACK } from '../content/tracer-pack.js';
@@ -57,6 +59,11 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createInputGuess('cinquante-cinquante', CINQUANTE_CINQUANTE_CONFIG),
     actionSchema: inputGuessActionSchema,
     content: CINQUANTE_CINQUANTE_PACK,
+  }],
+  ['double-jeu', {
+    module: createSecretRole('double-jeu', DOUBLE_JEU_CONFIG),
+    actionSchema: secretRoleActionSchema,
+    content: DOUBLE_JEU_PACK,
   }],
 ]);
 

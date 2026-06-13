@@ -85,7 +85,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Tout le monde a reçu le même mot… sauf un. Deux votes pour le démasquer.', en: 'Everyone got the same word… except one. Two votes to unmask them.' },
     emoji: '🕵️',
     color: '#FF6F61',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Jubilee', url: 'https://www.youtube.com/watch?v=z5TGgJF7LIo', thumbnailUrl: 'https://i.ytimg.com/vi/z5TGgJF7LIo/hqdefault.jpg' },
   },
   {

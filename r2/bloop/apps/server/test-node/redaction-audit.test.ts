@@ -79,6 +79,48 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     actors: ['p1', 'p2'],
     secrets: () => [],
   }],
+  ['double-jeu', {
+    players: ['p1', 'p2', 'p3', 'p4'],  // module minPlayers is 4
+    seed: 'audit-seed',
+    // Two deadlines skip secretReveal + discuss p0, then two secret accusation
+    // ballots are buffered mid-vote m0 p0 — p3/p4 still expected, phase NOT
+    // advanced. Both scripts produce identical hasVoted booleans and (at any
+    // later deadline) a top TIE, so the resolution path is identical too.
+    events: [
+      { type: 'deadline', at: 1_000 },
+      { type: 'deadline', at: 2_000 },
+      vote('p1', 'p2', 3_000),
+      vote('p2', 'p3', 4_000),
+    ],
+    eventsAlt: [
+      { type: 'deadline', at: 1_000 },
+      { type: 'deadline', at: 2_000 },
+      vote('p1', 'p3', 3_000),
+      vote('p2', 'p1', 4_000),
+    ],
+    actors: ['p1', 'p2'],
+    // The current match's majority AND impostor words are VALUE secrets: at the
+    // mid-vote fixture state NO view carries any word (myItem exists only in
+    // secretReveal views), so no owner exemption is declared. The impostor
+    // IDENTITY is also secret pre-finalReveal but is structural (a player id —
+    // every id legitimately appears in views), so substring auditing cannot
+    // apply: it is covered by the non-actor invariance check here plus the
+    // package's own field-level tests (test/redaction.test.ts).
+    secrets: (state) => {
+      const s = state as {
+        match: number;
+        items: Array<{ majority: { fr: string; en: string }; impostor: { fr: string; en: string } }>;
+      };
+      const item = s.items[s.match];
+      if (item === undefined) return [];
+      return [
+        { value: item.majority.fr },
+        { value: item.majority.en },
+        { value: item.impostor.fr },
+        { value: item.impostor.en },
+      ];
+    },
+  }],
   ['quizz-culture-ge', {
     players: ['p1', 'p2', 'p3'],
     seed: 'audit-seed',
