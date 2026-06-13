@@ -5,6 +5,8 @@
   --gold: #D9A441; --mist: #7EA8A4; --border: #E7D8C8;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+.skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip:focus { position: fixed; left: 0; top: 0; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; padding: 0.75rem 1.25rem; background: var(--clay); color: var(--surface); font-weight: 600; z-index: 9999; text-decoration: none; }
 html { scroll-behavior: auto; } /* Lenis handles smoothing */
 body { background: var(--cream); color: var(--brown); font-family: var(--font-inter), system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 h1,h2,h3 { font-family: var(--font-fraunces), Georgia, serif; line-height: 1.1; font-weight: 600; }
