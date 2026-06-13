@@ -43,3 +43,13 @@
 .mk-squad{display:grid;gap:var(--s2)}
 .mk-player{display:flex;align-items:center;gap:var(--s2)}
 .mk-crown{margin-left:auto}
+.lib__scroller{overflow-x:auto;margin-top:var(--s4);scrollbar-width:none}
+.lib__scroller::-webkit-scrollbar{display:none}
+.lib__track{display:flex;gap:var(--s4);padding-bottom:var(--s4);width:max-content}
+.lib__card{position:relative;width:280px;display:grid;gap:var(--s2);padding-top:var(--s5)}
+.lib__bar{position:absolute;top:0;left:0;right:0;height:10px;background:var(--accent);
+  border-radius:var(--r-xl) var(--r-xl) 0 0}
+.lib__18{font:700 11px/1 var(--font-body);background:var(--ink);color:var(--cream);padding:4px 8px;
+  border-radius:var(--r-pill);margin-left:8px;vertical-align:middle}
+.lib__hook{opacity:.8;font-size:16px}
+.lib__chip{font:500 12px/1 var(--font-body);opacity:.6}

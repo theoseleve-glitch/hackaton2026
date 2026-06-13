@@ -10,6 +10,7 @@ import { buildHero } from './sections/hero';
 import { buildThesis } from './sections/thesis';
 import { buildHow } from './sections/how-it-works';
 import { buildEveryPhone } from './sections/every-phone';
+import { buildLibrary } from './sections/library';
 
 const SECTION_IDS = ['hero','thesis','how','phone','library','night','proof','safety','download','footer'] as const;
 
@@ -41,6 +42,7 @@ function main() {
   buildThesis(document.getElementById('thesis')!, locale);
   buildHow(document.getElementById('how')!, locale);
   buildEveryPhone(document.getElementById('phone')!, locale);
+  buildLibrary(document.getElementById('library')!, locale);
 
   initCursor();
   initSmoothScroll();
