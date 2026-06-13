@@ -28,9 +28,11 @@ export function revealOnScroll(scope: HTMLElement): void {
 }
 
 export function pinScrub(section: HTMLElement, length = '+=120%'): gsap.core.Timeline {
+  // Idempotent across re-renders: kill any prior trigger for this section before recreating.
+  ScrollTrigger.getById(section.id)?.kill();
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: section, start: 'top top', end: length,
+      id: section.id, trigger: section, start: 'top top', end: length,
       pin: !prefersReducedMotion(), scrub: prefersReducedMotion() ? false : 1,
     },
   });

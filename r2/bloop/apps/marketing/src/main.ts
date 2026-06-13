@@ -38,7 +38,6 @@ function main() {
   buildHero(document.getElementById('hero')!, locale);
   buildThesis(document.getElementById('thesis')!, locale);
 
-  applyI18n(locale);
   initCursor();
   initSmoothScroll();
   document.querySelectorAll<HTMLElement>('.section').forEach(revealOnScroll);

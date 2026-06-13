@@ -16,9 +16,9 @@ export function buildThesis(root: HTMLElement, locale: Locale): void {
 
   const tl = pinScrub(root);
   if (!prefersReducedMotion()) {
-    tl.from('.vote__bar', { scaleX: 0, transformOrigin: 'left', stagger: 0.15, duration: 0.4 })
+    tl.from(stage.querySelectorAll('.vote__bar'), { scaleX: 0, transformOrigin: 'left', stagger: 0.15, duration: 0.4 })
       .from(line, { scale: 0.6, opacity: 0, ease: 'back.out(2)', duration: 0.3 }, '>-0.1');
   } else {
-    gsap.set('.vote__bar', { scaleX: 1 });
+    gsap.set(stage.querySelectorAll('.vote__bar'), { scaleX: 1 });
   }
 }

@@ -2,7 +2,9 @@ import { prefersReducedMotion } from './scroll';
 import gsap from 'gsap';
 
 export function magnetize(node: HTMLElement, radius = 80): void {
+  if (node.dataset.mag) return;                         // idempotent: don't double-bind on re-render
   if (prefersReducedMotion() || matchMedia('(pointer: coarse)').matches) return;
+  node.dataset.mag = '1';
   node.addEventListener('mousemove', (e) => {
     const r = node.getBoundingClientRect();
     const mx = e.clientX - (r.left + r.width / 2);
