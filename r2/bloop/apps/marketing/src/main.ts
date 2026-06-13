@@ -8,6 +8,7 @@ import { magnetize } from './lib/magnetic';
 import { el } from './lib/dom';
 import { buildHero } from './sections/hero';
 import { buildThesis } from './sections/thesis';
+import { buildHow } from './sections/how-it-works';
 
 const SECTION_IDS = ['hero','thesis','how','phone','library','night','proof','safety','download','footer'] as const;
 
@@ -37,6 +38,7 @@ function main() {
 
   buildHero(document.getElementById('hero')!, locale);
   buildThesis(document.getElementById('thesis')!, locale);
+  buildHow(document.getElementById('how')!, locale);
 
   initCursor();
   initSmoothScroll();

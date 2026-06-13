@@ -25,3 +25,7 @@
 .vote__pct{position:relative;margin-left:auto;font-family:var(--font-display);font-weight:700;color:var(--ink)}
 .thesis__line{color:var(--ink)}
 .thesis__echo{opacity:.6;margin-top:var(--s2)}
+.how__grid{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:var(--s4)}
+.how__step{display:grid;gap:var(--s3);font-size:22px;font-family:var(--font-display);font-weight:600}
+.how__num{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--r-pill);
+  background:var(--coral);color:var(--white);box-shadow:var(--pop)}
