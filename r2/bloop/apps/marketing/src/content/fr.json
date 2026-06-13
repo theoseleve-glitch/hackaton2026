@@ -1,0 +1,23 @@
+{
+  "nav": { "play": "jouer" },
+  "hero": {
+    "eyebrow": "2–16 joueurs · zéro compte · rien de stocké sur toi",
+    "headline": "le jeu qui expose ton groupe",
+    "sub": "chaque manche est conçue pour démarrer une dispute en 30 secondes.",
+    "cta": "choper bloop"
+  },
+  "thesis": { "line": "TOI t’as voté ça ?!", "echo": "" },
+  "how": {
+    "title": "comment ça marche",
+    "s1": "crée un salon",
+    "s2": "tes potes scannent le code",
+    "s3": "démarre le chaos"
+  },
+  "phone": { "title": "pas de télé. pas de comptes.", "body": "chaque téléphone est la manette ET l’écran." },
+  "library": { "title": "les jeux", "soon": "bientôt 👀" },
+  "night": { "title": "une soirée, pas une partie", "oracle": "l’oracle de la soirée" },
+  "proof": { "title": "le moment où les votes tombent" },
+  "safety": { "title": "drôle, jamais cruel", "body": "anonyme. signalement intégré. accessible. contenu 18+ derrière une porte d’âge." },
+  "download": { "title": "choper bloop", "soon": "bientôt" },
+  "footer": { "tag": "fait avec du chaos · 2026", "privacy": "confidentialité" }
+}

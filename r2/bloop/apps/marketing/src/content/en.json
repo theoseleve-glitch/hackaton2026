@@ -1,0 +1,23 @@
+{
+  "nav": { "play": "play" },
+  "hero": {
+    "eyebrow": "2–16 players · no accounts · nothing stored about you",
+    "headline": "the party game that exposes your group",
+    "sub": "every round is built to start a 30-second argument.",
+    "cta": "get bloop"
+  },
+  "thesis": { "line": "TOI t’as voté ça ?!", "echo": "wait — YOU voted that?!" },
+  "how": {
+    "title": "how it works",
+    "s1": "create a room",
+    "s2": "friends scan the code",
+    "s3": "start the chaos"
+  },
+  "phone": { "title": "no tv. no accounts.", "body": "every phone is the controller AND the screen." },
+  "library": { "title": "the games", "soon": "soon 👀" },
+  "night": { "title": "one night, not one match", "oracle": "the oracle of the night" },
+  "proof": { "title": "the moment the votes land" },
+  "safety": { "title": "funny, never cruel", "body": "anonymous. report built in. accessible. 18+ content behind an age gate." },
+  "download": { "title": "get bloop", "soon": "soon" },
+  "footer": { "tag": "built with chaos · 2026", "privacy": "privacy" }
+}
