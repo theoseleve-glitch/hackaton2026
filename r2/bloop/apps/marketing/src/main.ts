@@ -7,6 +7,7 @@ import { initCursor } from './lib/cursor';
 import { magnetize } from './lib/magnetic';
 import { el } from './lib/dom';
 import { buildHero } from './sections/hero';
+import { buildThesis } from './sections/thesis';
 
 const SECTION_IDS = ['hero','thesis','how','phone','library','night','proof','safety','download','footer'] as const;
 
@@ -35,6 +36,7 @@ function main() {
   mountNav(locale);
 
   buildHero(document.getElementById('hero')!, locale);
+  buildThesis(document.getElementById('thesis')!, locale);
 
   applyI18n(locale);
   initCursor();
