@@ -1,0 +1,83 @@
+/* preloader.css — full-screen loading ceremony: drawn chassis + 000..100 counter,
+   then a wipe-up reveal. Sits above everything; removed from the DOM once boot runs. */
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  /* origin top so yPercent:-100 reads as a clean blind pulled upward */
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.preloader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4vh, 2.75rem);
+  padding: 2rem;
+  width: min(420px, 78vw);
+}
+
+/* the chassis silhouette — drawn by stroke-dashoffset in preloader.js */
+.preloader__car {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  /* a soft accent bloom so the wireframe glows against the off-black */
+  filter: drop-shadow(0 0 14px rgba(255, 90, 38, 0.28))
+    drop-shadow(0 6px 22px rgba(0, 0, 0, 0.5));
+}
+
+.preloader__car path {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* brand wordmark + live counter as one tracked mono data-row */
+.preloader__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: clamp(0.85rem, 2vh, 1.25rem);
+  border-top: 1px solid var(--border);
+  font-family: "Space Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+}
+
+.preloader__brand {
+  font-size: clamp(0.8rem, 0.7rem + 0.6vw, 1.05rem);
+  letter-spacing: 0.32em;
+  color: var(--text);
+}
+
+.preloader__count {
+  font-size: clamp(0.8rem, 0.7rem + 0.6vw, 1.05rem);
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+/* no ceremony for reduced-motion / no-JS — preloader.js (or noscript) pulls it,
+   but belt-and-braces hide it so nothing flashes before the script runs */
+@media (prefers-reduced-motion: reduce) {
+  #preloader {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .preloader__inner {
+    width: min(340px, 84vw);
+    gap: 1.75rem;
+  }
+  .preloader__brand {
+    letter-spacing: 0.24em;
+  }
+}

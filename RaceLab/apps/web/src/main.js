@@ -6,9 +6,9 @@ import { reveal } from "./reveal.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Lenis smooth scroll (skipped under reduced-motion) synced to ScrollTrigger.
+// Lenis smooth scroll (skipped under reduced-motion / reduced-data) synced to ScrollTrigger.
 let lenis = null;
-if (!env.reduced) {
+if (!env.reduced && !env.reducedData) {
   lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -34,11 +34,24 @@ async function boot() {
     import("./sections/pricing.js"),
     import("./sections/finalCta.js"),
   ]);
-  for (const m of mods) m.init?.(ctx);
+  // Isolate each section: one failing init must not abort the rest of the page.
+  for (const m of mods) {
+    try {
+      m.init?.(ctx);
+    } catch (err) {
+      console.error("[init] section failed:", err);
+    }
+  }
   // The tune signature scene boots last (heaviest); it owns its own fallback.
   import("./scene/tuneSequence.js").then((m) => m.init(ctx)).catch(() => {});
   ScrollTrigger.refresh();
 }
 
-// Preloader runs first, then reveals + boots.
-import("./preloader.js").then((m) => m.run(ctx, boot)).catch(boot);
+// Preloader runs first, then reveals + boots. If it fails to load, still clear
+// the loading lock (base.css hides overflow under [data-loading]) and boot.
+import("./preloader.js")
+  .then((m) => m.run(ctx, boot))
+  .catch(() => {
+    document.body.removeAttribute("data-loading");
+    boot();
+  });

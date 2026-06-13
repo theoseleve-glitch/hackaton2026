@@ -59,6 +59,12 @@ body[data-loading] {
   overflow: hidden;
 }
 
+/* scroll-driven section background deepening (toggled by problem.js); the swap
+   rides the body background-color transition above, so it's a one-shot paint. */
+body.bg-deep {
+  background: var(--bg-deep);
+}
+
 h1,
 h2,
 h3 {

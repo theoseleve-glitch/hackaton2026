@@ -1,0 +1,193 @@
+/* pricing.css — the conversion section. Asymmetric two-plan layout (annual featured
+   with accent border + badge), web-first note, magnetic trial CTA. Dark pit-lane
+   surfaces, multi-layer depth shadows, orange accent. Animates transform/opacity only. */
+
+#pricing {
+  background: var(--bg-soft);
+}
+
+.pricing__head {
+  max-width: 22ch;
+  margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.pricing__h {
+  font-size: var(--fs-h2);
+}
+
+/* Two plans, deliberately uneven: the featured (annual) card is wider and taller so the
+   grid reads as a hierarchy, not a symmetric price-comparison table. */
+.pricing__plans {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  align-items: stretch;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.75rem, 3.4vw, 2.75rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.32),
+    0 6px 18px rgba(0, 0, 0, 0.26),
+    0 22px 54px rgba(0, 0, 0, 0.22);
+  will-change: transform;
+  transition:
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out);
+}
+
+.plan:hover {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.34),
+    0 34px 70px rgba(0, 0, 0, 0.3);
+}
+
+/* the annual / highlighted plan: accent border, lifted surface, a warm accent wash */
+.plan--featured {
+  background: linear-gradient(168deg, var(--surface-alt) 0%, var(--surface) 64%);
+  border-color: var(--accent);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.34),
+    0 10px 26px rgba(0, 0, 0, 0.3),
+    0 26px 60px rgba(255, 90, 38, 0.12),
+    inset 0 1px 0 rgba(255, 90, 38, 0.16);
+}
+
+.plan--featured:hover {
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.42),
+    0 16px 38px rgba(0, 0, 0, 0.36),
+    0 40px 84px rgba(255, 90, 38, 0.2),
+    inset 0 1px 0 rgba(255, 90, 38, 0.22);
+}
+
+/* "2 months free" badge pinned to the featured card's top-right corner */
+.plan__badge {
+  position: absolute;
+  top: clamp(1.1rem, 2.4vw, 1.6rem);
+  right: clamp(1.1rem, 2.4vw, 1.6rem);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  box-shadow: 0 4px 14px rgba(255, 90, 38, 0.34);
+}
+
+.plan__top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: auto;
+}
+
+.plan__name {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--sub);
+}
+
+.plan--featured .plan__name {
+  color: var(--text);
+}
+
+.plan__tag {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+}
+
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: clamp(2.25rem, 6vh, 3.75rem);
+}
+
+.plan__amount {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-size: clamp(2.6rem, 1.4rem + 4vw, 4.4rem);
+  color: var(--text);
+}
+
+.plan--featured .plan__amount {
+  color: var(--accent);
+}
+
+.plan__per {
+  font-size: clamp(0.85rem, 0.78rem + 0.4vw, 1.05rem);
+  color: var(--sub);
+  letter-spacing: 0.04em;
+}
+
+/* a thin baseline rule that grows under the featured price for a touch of structure */
+.plan__rule {
+  display: block;
+  height: 1px;
+  margin-top: clamp(1.4rem, 3vh, 2rem);
+  background: var(--border);
+}
+
+.plan--featured .plan__rule {
+  background: linear-gradient(90deg, var(--accent), transparent 78%);
+}
+
+/* web-first note — set apart from the cards, mono-flavoured caption */
+.pricing__note {
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+  max-width: 46ch;
+  color: var(--sub);
+  font-size: clamp(0.92rem, 0.88rem + 0.25vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.pricing__cta {
+  margin-top: clamp(2rem, 5vh, 3.25rem);
+}
+
+.pricing__btn {
+  padding: 1.05rem 2rem;
+  font-size: 1.02rem;
+}
+
+@media (max-width: 768px) {
+  .pricing__plans {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .plan {
+    padding: 1.6rem 1.5rem;
+  }
+
+  .plan__price {
+    margin-top: 2rem;
+  }
+
+  .pricing__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

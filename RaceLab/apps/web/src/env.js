@@ -12,4 +12,9 @@ export const env = {
   })(),
 };
 
-export const wantsHeavyGfx = !env.reduced && !env.reducedData && env.supportsWebGL;
+// Heavy WebGL is desktop-only: phones / coarse pointers get the static fallback.
+export const wantsHeavyGfx =
+  !env.reduced && !env.reducedData && !env.isMobile && env.supportsWebGL;
+
+// Anything that should drop to a lighter experience (no Lenis, no heavy scrub).
+export const lightMode = env.reduced || env.reducedData;
