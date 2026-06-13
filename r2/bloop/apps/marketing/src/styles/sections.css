@@ -29,3 +29,17 @@
 .how__step{display:grid;gap:var(--s3);font-size:22px;font-family:var(--font-display);font-weight:600}
 .how__num{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--r-pill);
   background:var(--coral);color:var(--white);box-shadow:var(--pop)}
+.phone{width:240px;border-radius:36px;background:var(--ink);padding:10px;box-shadow:var(--clay);flex:0 0 auto}
+.phone__screen{background:var(--cream);border-radius:28px;padding:var(--s4);display:grid;gap:var(--s3);min-height:460px}
+.phone__row{display:flex;gap:var(--s5);flex-wrap:wrap;justify-content:center;margin-top:var(--s5)}
+.phone__body{font-size:clamp(20px,2.4vw,28px);max-width:30ch}
+.mk-logo{font-family:var(--font-display);font-weight:700;font-size:26px;text-align:center}
+.mk-profile{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s3)}
+.mk-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:var(--r-pill);color:#fff;font-weight:700}
+.mk-code{display:flex;gap:var(--s2);justify-content:center}
+.mk-cell{display:grid;place-items:center;width:44px;height:52px;background:var(--white);border-radius:var(--r-md);
+  box-shadow:var(--pop);font-family:var(--font-display);font-weight:700;font-size:24px}
+.mk-code--yellow .mk-cell{background:var(--yellow)}
+.mk-squad{display:grid;gap:var(--s2)}
+.mk-player{display:flex;align-items:center;gap:var(--s2)}
+.mk-crown{margin-left:auto}
