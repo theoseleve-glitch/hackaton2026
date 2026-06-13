@@ -61,3 +61,9 @@
 .oracle__row strong{font-family:var(--font-display)}
 .oracle__row span{opacity:.7;font-size:15px}
 .oracle__nudge{text-align:center;margin-top:var(--s3);color:var(--coral);font-weight:700}
+.proof__wrap{display:flex;justify-content:center;margin-top:var(--s5)}
+.split-banner{background:var(--yellow);border-radius:var(--r-pill);box-shadow:var(--pop);
+  text-align:center;padding:var(--s2);font-family:var(--font-display);font-weight:700}
+.res{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--s2);position:relative}
+.res__bar{grid-column:1/-1;height:10px;background:var(--coral);width:var(--p);border-radius:var(--r-pill)}
+.res__pct{font-family:var(--font-display);font-weight:700}
