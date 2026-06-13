@@ -1,0 +1,28 @@
+{
+  "name": "@bloop/marketing",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "three": "^0.171.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.18",
+    "@fontsource/fredoka": "^5.1.0",
+    "@fontsource/dm-sans": "^5.1.0",
+    "@fontsource/caveat": "^5.1.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.0",
+    "jsdom": "^25.0.0",
+    "@types/three": "^0.171.0"
+  }
+}
