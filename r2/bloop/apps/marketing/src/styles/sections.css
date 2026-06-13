@@ -71,3 +71,12 @@
 .safety__chips{display:flex;flex-wrap:wrap;gap:var(--s2)}
 .safety__chip{background:var(--white);border-radius:var(--r-pill);box-shadow:var(--pop);
   padding:10px 18px;font-weight:500}
+.download{text-align:center}
+.download__badges{display:flex;gap:var(--s3);justify-content:center;margin:var(--s5) 0}
+.badge{background:var(--ink);color:var(--cream);padding:16px 28px;border-radius:var(--r-pill);
+  box-shadow:var(--pop);font-weight:700}
+.badge--soon{opacity:.5;position:relative}
+.badge--soon::after{content:'soon';position:absolute;top:-10px;right:-6px;background:var(--coral);
+  color:#fff;font:700 10px/1 var(--font-body);padding:4px 6px;border-radius:var(--r-pill)}
+.qr{width:120px;height:120px;margin:0 auto;border-radius:var(--r-lg);
+  background:repeating-conic-gradient(var(--ink) 0 25%, var(--cream) 0 50%) 0/24px 24px}
