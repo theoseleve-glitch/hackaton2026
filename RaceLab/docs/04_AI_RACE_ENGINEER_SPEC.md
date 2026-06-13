@@ -135,3 +135,18 @@ Used three ways: (1) injected into future prompts for this driver/track — *"la
 1. KB depth substitutes for learning early — day-one answers are already condition-specific.
 2. Condition context **echoed back in every answer** ("on green low-grip clay at 14°C like right now…") so it never *feels* generic.
 3. Track profiles pre-seeded for the clubs we race at; learning surfaced visibly as it accrues ("based on your 12 logged runs here").
+
+
+---
+
+## 11. Amendments — 2026-06-12 backend overhaul (D27/D29; full surface in /CONTRACTS.md, engine section)
+
+**§4/§5 — multi-change plans (D27).** The engineer now proposes a RANKED PLAN of up to 3 cited canonical changes (`proposePlan`, MAX_PLAN_CHANGES=3, distinct settings) — applied and rated ONE AT A TIME (D6 spirit preserved; trial-time attribution survives each step). Chat protocol: plan presented as a numbered list, each card tagged (change N of M); worse → revert + offer next; same → revert + next; better mid-plan → keep + offer "next" or stop; "next" refused while an outcome is pending; single-candidate symptoms degrade to a 1-change plan with the exact pre-existing presentation. `OutcomeEvent` gained optional `plan_position`/`plan_size`.
+
+**§6 — learning loop READ half is implemented.** `ContextBundle.history` rows (engine `HistoryEntry` = schema `ContextHistoryEntry` + optional `citations`/`track_id`) re-rank retrieval: match by KB rule id in citations; same-track only (unattributable rows ignored); net worse → demoted one tier below clean rules; net better → promoted one tier; mixed → neutral with tally note. GROUNDED-FIRST CAP: history runs after symptom/condition/scope filters, can never promote a rule the KB does not ground, influence bounded to +/-1 tier. Cards surface it via a deterministic `history_note`. Populate via engine `historyFromTuples(learningTuples(runs, outcomes), { track_id, limit })` — NOT schema `toEngineHistory` (drops citations/track_id; works but inert).
+
+**NEW — run analysis.** `analyzeRuns(runs, data, {outcomes})` → deterministic `EngineerReport` (summary / conditions / pace via lapStats / tyre cliff via detectTyreCliff / setup-change timeline / recommended next plan). Every line cited or explicitly an observation/refusal; JSON-clean; persistence is storage's job.
+
+**NEW — race-day planner (D29).** `planRaceDay({practice, forecast, track, chassis_template_id, current_setup?}, data)` maps forecast to taxonomy tags (rain/rain_risk>=30% → wet; air>=30C → hot; air<=10C → cold), proposes only race-day-safe amplified-on rules (max 2 per tag, cheapest-revert first), excludes rules rated worse at this track in practice, and emits EXPLICIT refusals for ungrounded aspects (no hot/cold KB rules yet; wind has no taxonomy tag). Deterministic, offline, zero I/O.
+
+**§8 — eval set is now 13 scenarios** (was 10): + history-demotion, history-promotion, history-track-isolation; harness gained `primary_cites` / `primary_cites_not` expectations.

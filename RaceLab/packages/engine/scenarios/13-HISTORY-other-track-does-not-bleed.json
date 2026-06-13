@@ -1,0 +1,20 @@
+{
+  "name": "HISTORY: a 'worse' rating from a DIFFERENT track does not bleed in — ranking unchanged",
+  "expect": { "kind": "recommendation", "primary_cites": "kb-swaybar-front-softer-301" },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_diff_oil": 8000, "center_diff_oil": 5000, "rear_diff_oil": 3000, "front_sway_bar": 2.3, "rear_sway_bar": 2.8, "rear_toe": 3 },
+    "track": { "track_id": "trk-eval-here", "name": "MRT Club Track", "surface": "clay", "grip": "green", "conditions": ["low_grip", "dusty"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }] },
+    "mode": "practice",
+    "history": [
+      {
+        "change": "front_sway_bar: softer 2.3 -> 2.1",
+        "conditions": "grip high, blue groove",
+        "outcome": "worse",
+        "citations": ["kb-swaybar-front-softer-301"],
+        "track_id": "trk-somewhere-else"
+      }
+    ]
+  }
+}

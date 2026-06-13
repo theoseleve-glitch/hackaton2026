@@ -1,0 +1,17 @@
+{
+  "name": "racelab-kb",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab KB data layer: rules + taxonomy + chassis templates + chassis registry + class declarations, with pure validators (src/index.ts) and a test gate that makes malformed KB data a build error. Shapes owned by packages/schema; the engine compiles everything into bundle.json.",
+  "scripts": {
+    "test": "tsx src/test-kb.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}
