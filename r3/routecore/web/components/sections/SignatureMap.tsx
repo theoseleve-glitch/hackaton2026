@@ -16,13 +16,14 @@ export default function SignatureMap() {
   const sectionRef = useRef<HTMLElement>(null);
   const echappeeRef = useRef<SVGPathElement>(null);
   const [activeChip, setActiveChip] = useState(1);
+  const activeChipRef = useRef(1);
   const reduced = useReducedMotion();
 
   useEffect(() => {
     // Guard: we need the refs
     if (!sectionRef.current || !echappeeRef.current) return;
 
-    // Always check mobile
+    // Captured once at mount; does not react to resize/orientation (acceptable for a landing page).
     const isMobile = window.innerWidth < 768;
     const noAnim = reduced || isMobile;
 
@@ -64,9 +65,13 @@ export default function SignatureMap() {
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
-            if (p < 0.4) setActiveChip(0);
-            else if (p < 0.7) setActiveChip(1);
-            else setActiveChip(2);
+            // Thresholds must stay in sync with timeline keyframe split:
+            // route draw 0–0.6, halte bloom 0.6–1.
+            const next = p < 0.4 ? 0 : p < 0.7 ? 1 : 2;
+            if (next !== activeChipRef.current) {
+              activeChipRef.current = next;
+              setActiveChip(next);
+            }
           },
         },
       });
