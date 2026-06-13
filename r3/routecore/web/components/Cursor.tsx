@@ -3,6 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { lerp } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
+// Named constants — no magic numbers scattered through the loop.
+const LERP_FACTOR = 0.12;
+const CURSOR_SIZE = 14;
+const HOVER_SCALE = 2.5;
+const CURSOR_Z = 9998;
+
 export default function Cursor() {
   const reduced = useReducedMotion();
   // Track whether we're on a coarse-pointer device (touch) — default false until mount.
@@ -13,7 +19,8 @@ export default function Cursor() {
   // Mutable refs for the rAF loop — no re-renders needed.
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
-  const scale = useRef(1);
+  const targetScale = useRef(1);
+  const currentScale = useRef(1);
   const rafId = useRef<number | null>(null);
 
   useEffect(() => {
@@ -34,14 +41,14 @@ export default function Cursor() {
     const onOver = (e: MouseEvent) => {
       const el = e.target as Element | null;
       if (el?.closest?.("[data-cursor-hover]")) {
-        scale.current = 2.5;
+        targetScale.current = HOVER_SCALE;
       }
     };
 
     const onOut = (e: MouseEvent) => {
       const el = e.target as Element | null;
       if (el?.closest?.("[data-cursor-hover]")) {
-        scale.current = 1;
+        targetScale.current = 1;
       }
     };
 
@@ -50,13 +57,14 @@ export default function Cursor() {
     document.addEventListener("mouseout", onOut);
 
     const tick = () => {
-      const t = 0.12; // lerp factor — lower = more lag, higher = snappier
-      current.current.x = lerp(current.current.x, target.current.x, t);
-      current.current.y = lerp(current.current.y, target.current.y, t);
+      current.current.x = lerp(current.current.x, target.current.x, LERP_FACTOR);
+      current.current.y = lerp(current.current.y, target.current.y, LERP_FACTOR);
+      currentScale.current = lerp(currentScale.current, targetScale.current, LERP_FACTOR);
 
       const el = elRef.current;
       if (el) {
-        el.style.transform = `translate(${current.current.x}px, ${current.current.y}px) translate(-50%, -50%) scale(${scale.current})`;
+        // One composed transform per frame — no CSS transition fighting the rAF loop.
+        el.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0) translate(-50%, -50%) scale(${currentScale.current})`;
       }
 
       rafId.current = requestAnimationFrame(tick);
@@ -84,17 +92,16 @@ export default function Cursor() {
         position: "fixed",
         top: 0,
         left: 0,
-        width: 14,
-        height: 14,
+        width: CURSOR_SIZE,
+        height: CURSOR_SIZE,
         borderRadius: "50%",
         background: "var(--clay)",
         mixBlendMode: "difference",
         pointerEvents: "none",
-        zIndex: 9998,
+        zIndex: CURSOR_Z,
         // Start offscreen so it doesn't flash at 0,0 before first mousemove.
-        transform: "translate(-200px, -200px) translate(-50%, -50%) scale(1)",
-        // Smooth the scale transition on hover without touching the lerp position.
-        transition: "transform 0.25s cubic-bezier(0.34,1.56,0.64,1)",
+        transform: "translate3d(-200px, -200px, 0) translate(-50%, -50%) scale(1)",
+        // No CSS transition on transform — scale is lerped inside the rAF loop.
         willChange: "transform",
       }}
     />
