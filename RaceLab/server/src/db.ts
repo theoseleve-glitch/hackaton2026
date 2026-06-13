@@ -18,6 +18,8 @@
  * SQL here mirrors db/schema.sql — change them together.
  */
 
+import { isoOf } from "./sqlUtil";
+
 export type QueryFn = (
   sql: string,
   params?: readonly unknown[],
@@ -162,12 +164,3 @@ export function makeSqlDb(query: QueryFn): Db {
   };
 }
 
-/** Normalize a driver timestamptz to strict ISO. Drivers return it as a Date OR
- *  as pg TEXT ("2026-06-13 12:00:00+00", neon's HTTP driver) depending on config;
- *  a bare String(v) would leak the non-ISO text onto the wire (breaking the
- *  contract + downstream Date.parse compares), so coerce strings through Date too. */
-function isoOf(v: unknown): string {
-  if (v instanceof Date) return v.toISOString();
-  const d = new Date(String(v));
-  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
-}

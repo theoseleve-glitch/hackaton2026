@@ -114,7 +114,7 @@ export function toHttpRequest(req: NodeLikeRequest, requestId?: string): HttpReq
     try {
       body = JSON.parse(body);
     } catch {
-      /* leave as string — handlers reject it as invalid_body */
+      /* leave as string — handlers reject it as bad_request */
     }
   }
   // thread the correlation id into the headers so the router can log it

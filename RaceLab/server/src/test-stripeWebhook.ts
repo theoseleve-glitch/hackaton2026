@@ -361,7 +361,7 @@ console.log("\n— equal-second downgrade (terminal tiebreaker) —");
 // ═══ SHOULD_FIX 2: never throws across the boundary ══════════════════════════
 // A rejecting store/verifier must NOT propagate (router would turn it into an
 // unhandled 500 + Stripe-retry storm). The handler resolves to 500
-// {error:"internal"} and must NOT mark the event processed (so the retry
+// {error:"internal_error"} and must NOT mark the event processed (so the retry
 // replays cleanly through the idempotency ledger).
 
 console.log("\n— never throws (500 internal, not processed) —");
@@ -385,7 +385,7 @@ console.log("\n— never throws (500 internal, not processed) —");
     resolved = false;
   }
   check("throws: handler RESOLVES (did not reject) despite throwing store", resolved === true);
-  check("throws: -> 500 {error:internal} with server_time", res?.status === 500 && res?.json.error === "internal" && res?.json.server_time === NOW);
+  check("throws: -> 500 {error:internal} with server_time", res?.status === 500 && res?.json.error === "internal_error" && res?.json.server_time === NOW);
   check("throws: event NOT marked processed (Stripe will retry, idempotency replays)", !throwing.processed.has("evt_throw"));
   check("throws: no subscription row committed", throwing.subs.size === 0);
 
@@ -405,7 +405,7 @@ console.log("\n— never throws (500 internal, not processed) —");
   } catch {
     vResolved = false;
   }
-  check("throws: rejecting verifier -> handler resolves to 500 internal", vResolved === true && vRes?.status === 500 && vRes?.json.error === "internal");
+  check("throws: rejecting verifier -> handler resolves to 500 internal", vResolved === true && vRes?.status === 500 && vRes?.json.error === "internal_error");
 
   // a REJECTING isProcessed (idempotency read fails) -> 500, nothing written.
   class ThrowingIsProcessedStore extends FakeStore {

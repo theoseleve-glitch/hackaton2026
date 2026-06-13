@@ -184,6 +184,24 @@ Enrichment only: every client flow works with this whole tier down. No committed
 
 **Internal contract:** handlers are pure `(ctx, HttpRequest) → HttpResponse` where `ctx` is `AppCtx` (src/appCtx.ts = ServerCtx + per-module seams); the router (src/handler.ts) adapts AppCtx down to each handler's minimal ctx. Every external capability (DB query, Stripe verify, EdDSA sign, blob presign, render) is an injected seam, built in `src/deploy.ts` with **graceful per-seam degradation**; `makeSql*` impls mirror `db/schema.sql`. **Stability promise:** routes, response field names, idempotency/owner-scoping semantics, and `db/schema.sql` columns are frozen; deploy wiring may evolve.
 
+**Error envelope (frozen):** every non-2xx is `{ error: "<snake_case>", server_time, ...context? }` — never a stack/detail leak. Canonical reason → status:
+
+| reason | status | when |
+|---|---|---|
+| `unauthorized` | 401 | missing/invalid bearer (auth'd routes) |
+| `not_found` | 404 | unknown path, or resource missing for the caller |
+| `method_not_allowed` | 405 | known path, wrong method (carries `allow[]` + `Allow` header) |
+| `bad_request` | 400 | malformed/invalid body or query (canonical; finer field reasons below) |
+| `payload_too_large` | 413 | body/blob/entry over the documented byte cap (+ `index` for batches) |
+| `unsupported_media_type` | 415 | media mime not in the allowlist |
+| `quota_exceeded` | 409 | per-user media quota would be exceeded |
+| `server_newer` | 409 | backup-blob optimistic-concurrency conflict (+ `current_updated_at`) |
+| `invalid_event` / `invalid_signature` / `raw_body_required` | 400 / 400 / 500 | Stripe webhook: bad event shape / bad signature / body-parser misconfig |
+| `internal_error` | 500 | a handler threw (logged server-side with a correlation id) |
+| `server_misconfigured` | 500 | deploy context failed to build (Tier-B down → app treats as offline) |
+
+Field-specific 400 reasons (narrower than `bad_request`, kept stable): `invalid_trial_started_at`, `invalid_after_seq`, `invalid_limit`, `invalid_entry` (+ `index`,`field`), `batch_too_large`.
+
 ---
 
 ## packages/kb — class/registry data layer + validation gate (B10)

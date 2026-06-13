@@ -196,7 +196,7 @@ console.log("\n— trial first-seen —");
   const rBad = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: { trial_started_at: "not-a-date" } }));
   check("trial: garbage timestamp -> 400", rBad.status === 400 && rBad.json.error === "invalid_trial_started_at");
   const rBadBody = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: [1, 2] }));
-  check("trial: array body -> 400", rBadBody.status === 400 && rBadBody.json.error === "invalid_body");
+  check("trial: array body -> 400", rBadBody.status === 400 && rBadBody.json.error === "bad_request");
 }
 
 // ═══ subscription status ═════════════════════════════════════════════════════
@@ -259,7 +259,7 @@ console.log("\n— backup push —");
   check("push: oversized batch -> 400 batch_too_large", rBig.status === 400 && rBig.json.error === "batch_too_large");
 
   const rBadBody = await handle(req("POST", "/api/backup/push", { token: "tok-A", body: "entries" }));
-  check("push: non-object body -> 400", rBadBody.status === 400 && rBadBody.json.error === "invalid_body");
+  check("push: non-object body -> 400", rBadBody.status === 400 && rBadBody.json.error === "bad_request");
 
   const rNewDomain = await handle(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [entry("ob-10", "future_domain")] } }));
   check("push: unknown domain accepted (forward compat, server stores not vouches)", rNewDomain.status === 200 && rNewDomain.json.inserted === 1);
@@ -424,4 +424,4 @@ console.log("\n— deletion SQL contract —");
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 
 console.log(failures === 0 ? "\nSERVER: all checks passed" : `\nSERVER: ${failures} failures`);
-if (failures > 0) process.exit(1);
+if (failures > 0) process.exitCode = 1;

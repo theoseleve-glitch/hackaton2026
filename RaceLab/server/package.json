@@ -5,7 +5,7 @@
   "type": "module",
   "description": "RaceLab Tier B enrichment API (Vercel functions + Neon Postgres): trial first-seen registry, subscription status, outbox backup push/restore, account deletion. The app works fully with every endpoint down (D4/D18) — this tier only enriches. Zero committed runtime deps: db driver and JWT verification are injected interfaces, wired at deploy time (see src/deploy.ts).",
   "scripts": {
-    "test": "tsx src/test-server.ts && tsx src/test-stripeWebhook.ts && tsx src/test-entitlement.ts && tsx src/test-media.ts && tsx src/test-backupBlob.ts && tsx src/test-share.ts && tsx src/test-content.ts && tsx src/test-export.ts && tsx src/test-pushToken.ts && tsx src/test-health.ts && tsx src/test-backupCaps.ts && tsx src/test-backupBlobSql.ts && tsx src/test-shareSql.ts && tsx src/test-contentSql.ts && tsx src/test-exportStoreSql.ts && tsx src/test-mediaStoreSql.ts && tsx src/test-stripeWebhookStoreSql.ts && tsx src/test-pushStoreSql.ts",
+    "test": "tsx src/test-server.ts && tsx src/test-stripeWebhook.ts && tsx src/test-entitlement.ts && tsx src/test-media.ts && tsx src/test-backupBlob.ts && tsx src/test-share.ts && tsx src/test-content.ts && tsx src/test-export.ts && tsx src/test-pushToken.ts && tsx src/test-health.ts && tsx src/test-backupCaps.ts && tsx src/test-backupBlobSql.ts && tsx src/test-shareSql.ts && tsx src/test-contentSql.ts && tsx src/test-exportStoreSql.ts && tsx src/test-mediaStoreSql.ts && tsx src/test-stripeWebhookStoreSql.ts && tsx src/test-pushStoreSql.ts && tsx src/test-dbSql.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

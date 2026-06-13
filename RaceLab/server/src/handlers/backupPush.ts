@@ -37,10 +37,10 @@ export async function backupPush(ctx: ServerCtx, req: HttpRequest): Promise<Http
 
   const body = req.body;
   if (body === null || typeof body !== "object" || Array.isArray(body)) {
-    return { status: 400, json: { error: "invalid_body" } };
+    return { status: 400, json: { error: "bad_request" } };
   }
   const entries = (body as Record<string, unknown>).entries;
-  if (!Array.isArray(entries)) return { status: 400, json: { error: "invalid_body" } };
+  if (!Array.isArray(entries)) return { status: 400, json: { error: "bad_request" } };
   if (entries.length > MAX_PUSH_BATCH) {
     return { status: 400, json: { error: "batch_too_large", max: MAX_PUSH_BATCH } };
   }

@@ -24,7 +24,7 @@ export async function trialStart(ctx: ServerCtx, req: HttpRequest): Promise<Http
   const body = req.body;
   if (body !== undefined && body !== null) {
     if (typeof body !== "object" || Array.isArray(body)) {
-      return { status: 400, json: { error: "invalid_body" } };
+      return { status: 400, json: { error: "bad_request" } };
     }
     const claim = (body as Record<string, unknown>).trial_started_at;
     if (claim !== undefined) {

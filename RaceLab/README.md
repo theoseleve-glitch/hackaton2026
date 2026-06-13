@@ -16,6 +16,7 @@
 
 ## Status
 
-- **Phase:** Concept (docs complete, no code yet)
-- **Team:** William (product, design/DA ✅ done, content, tuning KB, monetization) · Théo (architecture, backend, mobile)
+- **Phase:** MVP built — full Expo app live in `apps/mobile` (garage · setup sheets · tracks · run log · 8-part engineer report · race planner · pit strategy) + 14 pure-TS packages (all suites green) + a code-ready Tier-B `server/` (Stripe/entitlement/backup/share/content/GDPR/push — **NOT deployed**, gated on accounts/keys). Branch: `racelab` (B0 unified both teams' work).
+- **Where things are:** [`CONTRACTS.md`](CONTRACTS.md) = the frozen package/API surfaces (the frontend border) · [`packages/README.md`](packages/README.md) = narrative package status · [`docs/BACKEND_STATUS.md`](docs/BACKEND_STATUS.md) = the server tier (done / code-ready / blocked).
+- **Team:** William (product, design/DA ✅ done, content, 63-rule tuning KB, monetization) · Théo (app / frontend)
 - **Competitor to beat:** [So Dialed](https://www.sodialed.com/) — see teardown in `00_CONTEXT.md`

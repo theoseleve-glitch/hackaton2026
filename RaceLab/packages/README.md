@@ -2,11 +2,13 @@
 
 > **Contract reference: `../CONTRACTS.md`** — the frozen surface of every package below (what the frontend may import, result shapes, stability promises). This file is the narrative status; CONTRACTS.md is the API.
 
-## `schema/` — Unified domain contract (keystone, D26–D31)
+> **D-number note:** William's backend packages were renumbered D32–D39 at the B0 merge (mapping in `../docs/00_CONTEXT.md`); the refs below use the canonical post-merge numbers.
 
-THE source of truth for every domain shape: branded ids, Théo's logbook vocabulary verbatim, cars + chassis registry + dynamic class labels + conditional sheet sections (D26), tracks with turn-by-turn snapshots, weather observations (Patm included) with manual-override provenance, the ultimate run log (discriminated laps-vs-summary timing, tyres, fuel, driver state, per-turn feedback), outcome records with trial-time attribution, account/trial/entitlements (D28), race strategy math (`planRace`, `detectTyreCliff` — D29), the append-only outbox (D31), load-path `parse.ts` validators, and `bridge.ts` lifts for both legacy models (makes B0 mechanical). Pure data + pure functions, zero deps. `npm test` = 203+ checks.
+## `schema/` — Unified domain contract (keystone)
 
-## `storage/` — D11 storage core (D31)
+THE source of truth for every domain shape: branded ids, Théo's logbook vocabulary verbatim, cars + chassis registry + dynamic class labels + conditional sheet sections (D34), tracks with turn-by-turn snapshots, weather observations (Patm included) with manual-override provenance, the ultimate run log (discriminated laps-vs-summary timing, tyres, fuel, driver state, per-turn feedback), outcome records with trial-time attribution, account/trial/entitlements (D36), race strategy math (`planRace`, `detectTyreCliff` — D37), the append-only outbox (D39), load-path `parse.ts` validators, and `bridge.ts` lifts for both legacy models (makes B0 mechanical). Pure data + pure functions, zero deps. `npm test` = 203+ checks.
+
+## `storage/` — D11 storage core (D39)
 
 Injected drivers (AsyncStorage-shaped KV / SQL executor / device-only expo-sqlite glue), typed repos for every schema entity, **every mutation journals one OutboxEntry in the same logical transaction**, all reads parse-validated with quarantine-never-wipe, deterministic idempotent legacy-blob migration (never deletes the originals). The outbox is the future backup protocol. `npm test` = 137 checks incl. fault-injection sweeps at every write offset.
 
@@ -14,11 +16,11 @@ Injected drivers (AsyncStorage-shaped KV / SQL executor / device-only expo-sqlit
 
 Forecast auto-fill + historical backfill for offline-logged sessions, no API key, all I/O injected. Station-level `surface_pressure` = the nitro Patm. Cache with stale-if-offline; archive publication delay handled; manual override wins per-field with provenance. The advisor never imports it (D18). `npm test` = 129 checks against real recorded fixtures. ⚠ free tier non-commercial — licensing call before launch.
 
-## `speedhive/` — Unofficial MYLAPS adapter (B9, D30)
+## `speedhive/` — Unofficial MYLAPS adapter (B9, D38)
 
 Event results (verified live) + practice API (from William's intercept) behind one isolation layer: URL drift → `ENDPOINTS` only, payload drift → `types.ts`/`import.ts` only. Bearer scoped to the practice host; 401/403 → `auth_required`, never retried; `politePoll` hard 30 s floor; path-unverified endpoints quarantined behind `api.unverified.*`. Lap import is the only producer of `{kind:'laps'}` timing. `npm test` = 130 checks, fully offline.
 
-## `account/` + `../server/` — Trial, subscription, deletion (B5/B6, D28)
+## `account/` + `../server/` — Trial, subscription, deletion (B5/B6, D36)
 
 Client: 15-day once-ever offline-capable trial, tamper-guarded clock, advisor structurally free, external-web subscribe URL (NO IAP), account deletion with offline tombstone retry. Server (Vercel functions, code-ready/NOT deployed): subscription status, first-seen trial registry, idempotent backup push/restore over the outbox, GDPR-atomic account wipe. `npm test` = 135 checks across both.
 
@@ -26,9 +28,25 @@ Client: 15-day once-ever offline-capable trial, tamper-guarded clock, advisor st
 
 `parseChassisRegistry`/`parseClassDecl` gates over `kb/chassis/registry.json` (11-entry 1/8 TT competition buggy class, identity-facts-only `pending_pdf` entries with provenance) and `kb/classes/1-8-tt-buggy.json`. Malformed KB data is a build error. Canonical facet vocabulary (`offroad`/`1/8`/`buggy`) lives here. `npm test` = 93 checks.
 
-## `sessions/` — Race log + learning loop (D22)
+## `sessions/` — Race log + learning loop (D32, William's run-log model; see `logbook/` for Théo's live app model)
 
 Pure data + pure functions, no I/O. A session = one track day: TrackInfo (name/surface/grip/conditions) + append-only **runs** (setup version raced, laps, feedback) + **outcome records** (the engineer's better/same/worse verdicts). Hardened invariants: frozen per-record **track snapshots at log time** (changing grip never falsifies history), denormalized `setup_name`, discriminated `addRun`/`recordOutcome` results (dropped data is impossible to miss), write-time NaN guards, deep-freeze surviving deserialize, never-wipe discriminated persistence. `npm test` = 57 checks.
+
+## App-tier packages (Théo-owned — the live app data layer; surface = each one's `index.ts`)
+
+> These four ship inside the Expo app today. They are Théo's zone (handoff-only for the backend team). The B0 plan is to converge their domains onto `schema` over time (`bridge.ts` already lifts `logbook` → the canonical run model); until then they are the source of truth the app reads/writes.
+
+### `garage/` — Multi-car garage (D26)
+`CarEntity` with full typology (brand/model/category/scale/drivetrain/power/engine|motor/esc/battery/tank/transponder); `sheetProfile(car)` derives sheet section visibility + label overrides + badges deterministically; `generic-offroad` fallback template; per-car sheet storage with legacy-MP11 migration.
+
+### `logbook/` — Run log v2 + compare + report bridge (D27)
+The app's live run model (format-2 migration: car/track refs, lap list, fuel in cL, feeling slider + fatigue, per-corner notes, extended weather); `compareRuns` (setup-vs-condition-vs-tyre drift + verdict); `bundleFromRun` bridges a run into the engine's `ContextBundle`. `driverStats` (career/yearly/podiums). **Converges onto `schema` runs via `schema/bridge.ts` (`liftTheoRunEntry`).**
+
+### `tracks/` — First-class tracks (D25)
+Quick traits checklist + optional corner-by-corner editor (`CornerSpec`: direction/shape/features/surface/note), multi-surface, GPS, lap records auto-maintained from runs; traits map deterministically to engine condition tags.
+
+### `strategy/` — TIME-first pit strategy (D30)
+Pit/stint plans that talk TIME not laps (`pit_at_s`, autonomy-from-a-practice-test, pit-loss + margin, endurance stint-stretch, tyre-cliff as pit decider). **Théo's app-tier predecessor of `schema/strategy.ts`** (`planRace`/`detectTyreCliff` = the canonical unified math the schema-rewire retires this duplicate for.)
 
 ## `sheets/` — Setup versioning + diff (D21)
 

@@ -23,6 +23,7 @@
  */
 
 import type { QueryFn } from "../db";
+import { isoOf } from "../sqlUtil";
 
 /** TRIAL_DAYS mirrors packages/account TRIAL_DAYS (D29). The server owns the
  *  trial clock; the client adopts trial_ends_at from the signed token. */
@@ -96,14 +97,6 @@ export function makeSqlEntitlementReader(query: QueryFn): EntitlementReader {
   };
 }
 
-/** Drivers return timestamptz as Date or string depending on config. neon
- *  returns timestamptz as pg TEXT ("2026-06-13 12:00:00+00"); normalize that to
- *  strict ISO so the wire output is always ISO-8601, never a raw pg string. */
-function isoOf(v: unknown): string {
-  if (v instanceof Date) return v.toISOString();
-  const d = new Date(String(v));
-  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
-}
 
 /**
  * No new table for this module — entitlement is computed at read time from the

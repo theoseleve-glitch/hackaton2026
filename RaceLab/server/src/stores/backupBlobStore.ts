@@ -15,6 +15,7 @@
  */
 
 import type { QueryFn } from "../db";
+import { isoOf } from "../sqlUtil";
 
 /** What lives in a row (the opaque client envelope + the server cursor). */
 export interface BackupBlob {
@@ -110,14 +111,6 @@ export function makeSqlBackupBlobStore(query: QueryFn): BlobBackupStore {
   };
 }
 
-/** Drivers return timestamptz as Date or string depending on config. neon
- *  returns timestamptz as pg TEXT ("2026-06-13 12:00:00+00"); normalize that to
- *  strict ISO so the wire output is always ISO-8601, never a raw pg string. */
-function isoOf(v: unknown): string {
-  if (v instanceof Date) return v.toISOString();
-  const d = new Date(String(v));
-  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
-}
 
 // backup_blobs: one whole-domain snapshot per (user_id, domain). D11 — this is
 // a backup blob, NOT an entity-sync table: {format, state} is the OPAQUE client

@@ -46,7 +46,7 @@ export async function stripeWebhook(
 
   // Never throw across the boundary: a rejecting verifier/store (transient pg
   // outage, a thrown SDK call) must NOT bubble to the router as an unhandled
-  // rejection. On a caught error we return 500 {error:"internal"} and DO NOT
+  // rejection. On a caught error we return 500 {error:"internal_error"} and DO NOT
   // mark the event processed — so Stripe retries the delivery later and the
   // idempotency ledger replays cleanly (the event was never committed).
   try {
@@ -156,7 +156,7 @@ export async function stripeWebhook(
   } catch {
     // Do NOT markProcessed here — leaving the event uncommitted lets Stripe
     // retry and the idempotency ledger replay the full flow next time.
-    return { status: 500, json: { error: "internal", server_time } };
+    return { status: 500, json: { error: "internal_error", server_time } };
   }
 }
 

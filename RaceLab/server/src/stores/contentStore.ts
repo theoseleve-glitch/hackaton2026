@@ -17,6 +17,7 @@
  */
 
 import type { QueryFn } from "../db";
+import { isoOf } from "../sqlUtil";
 
 /** The two named content bundles the client knows how to consume. */
 export type ContentName = "rcdata" | "kb";
@@ -73,14 +74,6 @@ export function makeSqlContentStore(query: QueryFn): ContentStore {
   };
 }
 
-/** Drivers return timestamptz as Date or string depending on config. neon
- *  returns timestamptz as pg TEXT ("2026-06-13 12:00:00+00"); normalize that to
- *  strict ISO so the wire output is always ISO-8601, never a raw pg string. */
-function isoOf(v: unknown): string {
-  if (v instanceof Date) return v.toISOString();
-  const d = new Date(String(v));
-  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
-}
 
 /**
  * content_versions: append-only registry of published bundle pointers. One
