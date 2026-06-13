@@ -6,6 +6,7 @@ import { initSmoothScroll, revealOnScroll } from './lib/scroll';
 import { initCursor } from './lib/cursor';
 import { magnetize } from './lib/magnetic';
 import { el } from './lib/dom';
+import { buildHero } from './sections/hero';
 
 const SECTION_IDS = ['hero','thesis','how','phone','library','night','proof','safety','download','footer'] as const;
 
@@ -33,9 +34,7 @@ function main() {
   document.body.prepend(skip);
   mountNav(locale);
 
-  // sections are filled by later tasks; placeholder so the page is non-empty:
-  document.getElementById('hero')!.append(
-    el('h1', { class: 'h-hero', 'data-reveal': '' }, 'bloop', el('span', { class:'nav__dot' }, '.')));
+  buildHero(document.getElementById('hero')!, locale);
 
   applyI18n(locale);
   initCursor();

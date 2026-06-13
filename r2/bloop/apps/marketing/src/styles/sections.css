@@ -14,3 +14,5 @@
   box-shadow:var(--pop);border:0;cursor:pointer;text-decoration:none;will-change:transform}
 .btn:active{background:var(--coral-pressed)}
 .card{background:var(--white);border-radius:var(--r-xl);box-shadow:var(--clay);padding:var(--s5)}
+.hero__head{max-width:14ch;margin:var(--s3) 0}
+.hero__sub{font-size:clamp(18px,2vw,24px);max-width:48ch;margin-bottom:var(--s5);opacity:.85}
