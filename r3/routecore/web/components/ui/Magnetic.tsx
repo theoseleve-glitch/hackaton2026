@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
-import { magneticOffset } from "./magnetic";
+import { magneticOffset } from "./magneticOffset";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export default function Magnetic({

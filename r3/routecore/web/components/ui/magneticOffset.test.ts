@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { magneticOffset } from "./magnetic";
+import { magneticOffset } from "./magneticOffset";
 
 const rect = { left: 100, top: 100, width: 100, height: 100 } as DOMRect;
 
