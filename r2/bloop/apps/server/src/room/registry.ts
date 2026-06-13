@@ -8,6 +8,14 @@ import {
 import { createLastStanding, JEU_DU_THEME_CONFIG, lastStandingActionSchema } from '@bloop/game-last-standing';
 import { createNightDay, LOUP_GAROU_CONFIG, nightDayActionSchema } from '@bloop/game-night-day';
 import {
+  createPerformJudge,
+  DEVINE_L_ACTION_CONFIG,
+  DEVINE_L_OBJET_CONFIG,
+  DOUBLE_LE_MOUVEMENT_CONFIG,
+  MIME_INVERSE_CONFIG,
+  performJudgeActionSchema,
+} from '@bloop/game-perform-judge';
+import {
   createOptionVote,
   GAUCHE_DROITE_CONFIG,
   optionVoteActionSchema,
@@ -32,6 +40,12 @@ import type { z } from 'zod';
 import { CINQUANTE_CINQUANTE_PACK, QUIZZ_CULTURE_GE_PACK } from '../content/input-guess-packs.js';
 import { JEU_DU_THEME_PACK } from '../content/last-standing-pack.js';
 import { LOUP_GAROU_PACK } from '../content/night-day-pack.js';
+import {
+  DEVINE_L_ACTION_PACK,
+  DEVINE_L_OBJET_PACK,
+  DOUBLE_LE_MOUVEMENT_PACK,
+  MIME_INVERSE_PACK,
+} from '../content/perform-judge-packs.js';
 import { DOUBLE_JEU_PACK } from '../content/secret-role-pack.js';
 import { GAUCHE_DROITE_PACK, TU_PREFERES_PACK } from '../content/option-vote-packs.js';
 import { PIRES_POTES_PACK } from '../content/pires-potes-pack.js';
@@ -119,6 +133,26 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createNightDay('loup-garou', LOUP_GAROU_CONFIG),
     actionSchema: nightDayActionSchema,
     content: LOUP_GAROU_PACK,
+  }],
+  ['devine-l-action', {
+    module: createPerformJudge('devine-l-action', DEVINE_L_ACTION_CONFIG),
+    actionSchema: performJudgeActionSchema,
+    content: DEVINE_L_ACTION_PACK,
+  }],
+  ['devine-l-objet', {
+    module: createPerformJudge('devine-l-objet', DEVINE_L_OBJET_CONFIG),
+    actionSchema: performJudgeActionSchema,
+    content: DEVINE_L_OBJET_PACK,
+  }],
+  ['mime-inverse', {
+    module: createPerformJudge('mime-inverse', MIME_INVERSE_CONFIG),
+    actionSchema: performJudgeActionSchema,
+    content: MIME_INVERSE_PACK,
+  }],
+  ['double-le-mouvement', {
+    module: createPerformJudge('double-le-mouvement', DOUBLE_LE_MOUVEMENT_CONFIG),
+    actionSchema: performJudgeActionSchema,
+    content: DOUBLE_LE_MOUVEMENT_PACK,
   }],
 ]);
 

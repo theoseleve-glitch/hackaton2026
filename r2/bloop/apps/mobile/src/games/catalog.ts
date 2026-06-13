@@ -130,7 +130,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Toute la piÃ¨ce connaÃ®t ton action â€” interdit de te la dire !', en: "The whole room knows your action â€” they just can't say it." },
     emoji: 'ðŸŽ¬',
     color: '#B6A8FF',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Sidemen', url: 'https://www.youtube.com/watch?v=fmvJzLgb0l0', thumbnailUrl: 'https://i.ytimg.com/vi/fmvJzLgb0l0/hqdefault.jpg' },
   },
   {
@@ -139,7 +139,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Un objet secret, zÃ©ro mot, 45 secondes pour le faire deviner Ã  la piÃ¨ce !', en: 'One secret object, zero words, 45 seconds to make the room guess it!' },
     emoji: 'ðŸ”',
     color: '#FF6F61',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Collins Key', url: 'https://www.youtube.com/watch?v=WKfIP4-fu6w', thumbnailUrl: 'https://i.ytimg.com/vi/WKfIP4-fu6w/hqdefault.jpg' },
   },
   {
@@ -148,7 +148,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: 'Tes potes te tÃ©lÃ©commandent â€” devine ce quâ€™ils te font mimer !', en: "Your friends remote-control you â€” guess what they're making you mime!" },
     emoji: 'ðŸŽ­',
     color: '#5B7BFF',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'The Tonight Show', url: 'https://www.youtube.com/watch?v=VTJZ1Sb6mBw', thumbnailUrl: 'https://i.ytimg.com/vi/VTJZ1Sb6mBw/hqdefault.jpg' },
   },
   {
@@ -157,7 +157,7 @@ export const GAME_CATALOG: readonly GameCard[] = [
     tagline: { fr: "L'un mime le dÃ©lire, l'autre le double en direct â€” le salon note le duo.", en: 'One friend does the move, the other dubs it live â€” the room rates the duo.' },
     emoji: 'ðŸŽ¤',
     color: '#4ECDC4',
-    badge: 'SOON',
+    badge: 'PLAY',
     video: { creator: 'Sofyan', url: 'https://www.youtube.com/watch?v=66IcZxKmZFM', thumbnailUrl: 'https://i.ytimg.com/vi/66IcZxKmZFM/hqdefault.jpg' },
   },
   {

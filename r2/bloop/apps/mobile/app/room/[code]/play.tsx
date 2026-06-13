@@ -7,6 +7,7 @@ import { InputGuessPlay } from '../../../src/components/InputGuessPlay';
 import { LastStandingPlay } from '../../../src/components/LastStandingPlay';
 import { NightDayPlay } from '../../../src/components/NightDayPlay';
 import { OptionVotePlay } from '../../../src/components/OptionVotePlay';
+import { PerformJudgePlay } from '../../../src/components/PerformJudgePlay';
 import { RuleHuntPlay } from '../../../src/components/RuleHuntPlay';
 import { SecretRolePlay } from '../../../src/components/SecretRolePlay';
 import { SpotlightGuessPlay } from '../../../src/components/SpotlightGuessPlay';
@@ -17,6 +18,7 @@ import { isInputGuessGame } from '../../../src/games/input-guess-view';
 import { isLastStandingGame } from '../../../src/games/last-standing-view';
 import { isNightDayGame } from '../../../src/games/night-day-view';
 import { isOptionVoteGame } from '../../../src/games/option-vote-view';
+import { isPerformJudgeGame } from '../../../src/games/perform-judge-view';
 import { isRuleHuntGame } from '../../../src/games/rule-hunt-view';
 import { isSecretRoleGame } from '../../../src/games/secret-role-view';
 import { isSpotlightGuessGame } from '../../../src/games/spotlight-guess-view';
@@ -49,6 +51,7 @@ export default function Play() {
   if (isLastStandingGame(state.viewGameId)) return <LastStandingPlay code={code ?? ''} />;
   if (isRuleHuntGame(state.viewGameId)) return <RuleHuntPlay code={code ?? ''} />;
   if (isNightDayGame(state.viewGameId)) return <NightDayPlay code={code ?? ''} />;
+  if (isPerformJudgeGame(state.viewGameId)) return <PerformJudgePlay code={code ?? ''} />;
   return <TracerPlay code={code ?? ''} />;
 }
 

@@ -21,13 +21,15 @@ describe('GAME_CATALOG (wave 2)', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('PLAY badges match the server registry exactly (tracer + the VOTE@2 pair)', () => {
+  it('every catalog game is PLAY — all 18 wired to the server registry', () => {
     const plays = GAME_CATALOG.filter((g) => g.badge === 'PLAY').map((g) => g.id).sort();
     expect(plays).toEqual([
-      'cinquante-cinquante', 'devine-la-question', 'double-jeu', 'gauche-ou-droite',
-      'jeu-de-la-note', 'jeu-du-theme', 'loup-garou', 'pires-potes', 'quizz-culture-ge',
+      'cinquante-cinquante', 'devine-l-action', 'devine-l-objet', 'devine-la-question',
+      'double-jeu', 'double-le-mouvement', 'gauche-ou-droite', 'jeu-de-la-note',
+      'jeu-du-theme', 'loup-garou', 'mime-inverse', 'pires-potes', 'quizz-culture-ge',
       'tracer', 'trouvez-la-regle', 'truth-or-dare-2', 'truth-or-drink', 'tu-preferes',
     ].sort());
+    expect(GAME_CATALOG.every((g) => g.badge === 'PLAY')).toBe(true);
   });
 
   it('all colors are 7-char hex strings', () => {

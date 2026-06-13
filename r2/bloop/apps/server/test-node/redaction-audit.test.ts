@@ -80,6 +80,16 @@ const rhAccuse = (playerId: string, target: string, at: number): GameEvent<unkno
 const rhVote = (playerId: string, guilty: boolean, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'tribunalVote', guilty }, at });
 
+const pjAct = (playerId: string, action: unknown, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action, at });
+const pjVote = (playerId: string, vote: 'yes' | 'no', at: number): GameEvent<unknown> =>
+  pjAct(playerId, { kind: 'vote', vote }, at);
+const pjDeckSecrets = (state: unknown): Array<{ value: string; owner?: PlayerId }> => {
+  const s = state as { deck: Array<{ prompt: { fr: string; en: string } }>; cursor: number };
+  const next = s.deck[s.cursor];
+  return next === undefined ? [] : [{ value: next.prompt.fr }, { value: next.prompt.en }];
+};
+
 const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['tracer', {
     players: ['p1', 'p2', 'p3'],
@@ -333,6 +343,46 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     secrets: (state: unknown) => {
       const s = state as { players: string[]; roles: Record<string, string> };
       return s.players.map((p) => ({ value: `"${p}":"${s.roles[p]}"`, owner: p }));
+    },
+  }],
+  ['devine-l-action', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    events: [{ type: 'deadline', at: 1_000 }, pjAct('p3', { kind: 'claimDone' }, 2_000), pjVote('p1', 'yes', 3_000)],
+    eventsAlt: [{ type: 'deadline', at: 1_000 }, pjAct('p3', { kind: 'claimDone' }, 2_000), pjVote('p1', 'no', 3_000)],
+    actors: ['p1'],
+    secrets: pjDeckSecrets,
+  }],
+  ['devine-l-objet', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed',
+    events: [{ type: 'deadline', at: 1_000 }, pjAct('p2', { kind: 'claimFound', guesser: 'p4' }, 2_000), pjVote('p1', 'yes', 3_000)],
+    eventsAlt: [{ type: 'deadline', at: 1_000 }, pjAct('p2', { kind: 'claimFound', guesser: 'p4' }, 2_000), pjVote('p1', 'no', 3_000)],
+    actors: ['p1'],
+    secrets: pjDeckSecrets,
+  }],
+  ['mime-inverse', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    events: [{ type: 'deadline', at: 1_000 }, pjVote('p1', 'yes', 2_000)],
+    eventsAlt: [{ type: 'deadline', at: 1_000 }, pjVote('p1', 'no', 2_000)],
+    actors: ['p1'],
+    secrets: pjDeckSecrets,
+  }],
+  ['double-le-mouvement', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed',
+    events: [pjAct('p2', { kind: 'pick', index: 0 }, 1_000), { type: 'deadline', at: 2_000 }, pjAct('p1', { kind: 'rate', stars: 2 }, 3_000)],
+    eventsAlt: [pjAct('p2', { kind: 'pick', index: 1 }, 1_000), { type: 'deadline', at: 2_000 }, pjAct('p1', { kind: 'rate', stars: 5 }, 3_000)],
+    actors: ['p2', 'p1'],
+    secrets: (state: unknown) => {
+      const s = state as { offer: Array<{ prompt: { fr: string; en: string }; hint?: { fr: string; en: string } }> };
+      const out: Array<{ value: string; owner?: PlayerId }> = [];
+      for (const o of s.offer) {
+        out.push({ value: o.prompt.fr }, { value: o.prompt.en });
+        if (o.hint !== undefined) out.push({ value: o.hint.fr }, { value: o.hint.en });
+      }
+      return [...out, ...pjDeckSecrets(state)];
     },
   }],
 ]);

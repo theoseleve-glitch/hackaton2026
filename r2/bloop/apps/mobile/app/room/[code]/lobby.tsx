@@ -10,6 +10,7 @@ import { asInputGuessView } from '../../../src/games/input-guess-view';
 import { asLastStandingView } from '../../../src/games/last-standing-view';
 import { asNightDayView } from '../../../src/games/night-day-view';
 import { asOptionVoteView } from '../../../src/games/option-vote-view';
+import { asPerformJudgeView } from '../../../src/games/perform-judge-view';
 import { asRuleHuntView } from '../../../src/games/rule-hunt-view';
 import { asSecretRoleView } from '../../../src/games/secret-role-view';
 import { asSpotlightGuessView } from '../../../src/games/spotlight-guess-view';
@@ -37,6 +38,10 @@ const PLAYABLE: ReadonlyMap<string, { label: string; minPlayers: number }> = new
   ['jeu-du-theme', { label: 'Le Jeu du Thème', minPlayers: 3 }],
   ['trouvez-la-regle', { label: 'Trouvez la Règle', minPlayers: 4 }],
   ['loup-garou', { label: 'Loup-Garou', minPlayers: 5 }],
+  ['devine-l-action', { label: "Devine l'Action", minPlayers: 3 }],
+  ['devine-l-objet', { label: "Devine l'Objet", minPlayers: 3 }],
+  ['mime-inverse', { label: 'Mime Inversé', minPlayers: 3 }],
+  ['double-le-mouvement', { label: 'Double le Mouvement', minPlayers: 4 }],
 ]);
 
 export default function Lobby() {
@@ -80,6 +85,7 @@ export default function Lobby() {
     ?? asLastStandingView(state.view)?.phase
     ?? asRuleHuntView(state.view)?.phase
     ?? asNightDayView(state.view)?.phase
+    ?? asPerformJudgeView(state.view)?.phase
     ?? null;
   useEffect(() => {
     if (livePhase !== null && livePhase !== 'over') router.replace(`/room/${code}/play`);
