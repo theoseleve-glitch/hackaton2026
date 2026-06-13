@@ -8,8 +8,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle chanson honteuse écoutes-tu en boucle quand personne ne regarde ?",
-        "en": "What's the guilty-pleasure song you blast on repeat when nobody's watching?"
+        "fr": "Ouvre ton appli musique et lis le titre de la dernière chanson écoutée. À voix haute. Pas l'avant-dernière — la dernière.",
+        "en": "Open your music app and read out the last song you played. Out loud. Not the second-to-last one — the last one."
       },
       "minAge": 0,
       "tags": ["music", "guilty-pleasure"]
@@ -19,8 +19,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est ton talent le plus parfaitement inutile ? Démonstration bienvenue.",
-        "en": "What's your most gloriously useless talent? Demo welcome."
+        "fr": "T'as déjà ignoré exprès un message de quelqu'un ici. C'était qui, et c'était quel message ?",
+        "en": "You've left someone in this room on read on purpose. Who was it, and what was the message?"
       },
       "minAge": 0,
       "tags": ["talent", "funny"]
@@ -30,8 +30,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel mélange de nourriture bizarre adores-tu en secret ? Sois honnête, on ne juge pas. Enfin si, un peu.",
-        "en": "What weird food combo do you secretly love? Be honest, we won't judge. Okay, maybe a little."
+        "fr": "Le truc le plus honteux que t'as mangé debout, seul, au-dessus de l'évier. Le plat exact et l'heure exacte.",
+        "en": "The most shameful thing you've eaten standing alone over the sink. Exact dish, exact hour."
       },
       "minAge": 0,
       "tags": ["food", "weird"]
@@ -41,8 +41,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est la dernière chose que tu as cherchée sur internet ? Version montrable, évidemment.",
-        "en": "What's the last thing you searched online? The showable version, obviously."
+        "fr": "Lis ta dernière recherche Google à voix haute. La vraie. Pas celle que ton cerveau vient d'inventer en panique.",
+        "en": "Read your last Google search out loud. The real one. Not the one your brain just invented in a panic."
       },
       "minAge": 0,
       "tags": ["phone", "embarrassing"]
@@ -52,8 +52,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle croyance complètement absurde as-tu gardée bien trop longtemps quand tu étais enfant ?",
-        "en": "What totally absurd thing did you believe for way too long as a kid?"
+        "fr": "T'as cru à quoi jusqu'à un âge indéfendable ? Donne l'âge. C'est l'âge qui nous intéresse.",
+        "en": "What did you believe in until an indefensible age? Say the age. The age is the whole point."
       },
       "minAge": 0,
       "tags": ["childhood", "funny"]
@@ -63,8 +63,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Ouvre ton clavier : quel est ton emoji le plus utilisé, et qu'est-ce que ça dit de toi ?",
-        "en": "Open your keyboard: what's your most-used emoji, and what does it say about you?"
+        "fr": "Ton dernier ❤️ envoyé, c'était pour qui ? Et la personne qui croit être ta priorité — on lui annonce maintenant ou tu gères ?",
+        "en": "Who got the last ❤️ you sent? And the person who thinks they're your favourite — do we break it to them now, or will you handle it?"
       },
       "minAge": 0,
       "tags": ["phone", "funny"]
@@ -74,8 +74,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle série ou quel film cultissime as-tu prétendu avoir vu pour ne pas passer pour un alien ?",
-        "en": "What iconic movie or show have you pretended to have seen so you wouldn't look like an alien?"
+        "fr": "Le film culte sur lequel tu mens depuis des années. Quelqu'un ici t'a dit 'la scène de fin, énorme' et t'as répondu 'ouais, énorme'. T'avais rien vu.",
+        "en": "The classic film you've been lying about for years. Someone here said 'that ending though' and you went 'unreal'. You had seen nothing."
       },
       "minAge": 0,
       "tags": ["lies", "pop-culture"]
@@ -85,8 +85,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Décris ta pire décision capillaire. L'année et le contexte n'excusent rien.",
-        "en": "Describe your worst haircut decision. The year and the context are no excuse."
+        "fr": "Combien il faut te payer pour balancer le plus gros secret qu'on t'a confié dans ce groupe ? Un montant précis. Ceux qui se sont confiés à toi écoutent très attentivement.",
+        "en": "Name your price for leaking the biggest secret anyone here has trusted you with. An actual number. The people who trusted you are listening very closely."
       },
       "minAge": 0,
       "tags": ["embarrassing", "style"]
@@ -96,8 +96,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle appli truste ton temps d'écran cette semaine — et tu assumes ou pas ?",
-        "en": "Which app is eating your screen time this week — and do you stand by it?"
+        "fr": "Ouvre ton temps d'écran et annonce le chiffre de la semaine. Le vrai. La pièce jugera en silence.",
+        "en": "Open your screen time and announce this week's number. The real one. The room will judge in silence."
       },
       "minAge": 0,
       "tags": ["phone", "habits"]
@@ -107,8 +107,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "De quoi parles-tu quand tu te parles à toi-même à voix haute ?",
-        "en": "What do you talk about when you talk to yourself out loud?"
+        "fr": "Quand t'as un potin sur quelqu'un de cette pièce, t'écris à qui en premier ? Cette personne est peut-être aussi dans la pièce.",
+        "en": "When you get gossip about someone in this room, who do you text first? That person might also be in this room."
       },
       "minAge": 0,
       "tags": ["habits", "weird"]
@@ -118,8 +118,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelles paroles de chanson as-tu massacrées pendant des années en étant persuadé·e d'avoir raison ?",
-        "en": "What song lyric did you butcher for years while being absolutely sure you had it right?"
+        "fr": "Combien y'a sur ton compte, là, tout de suite ? Pas le chiffre exact — la fourchette. La fourchette dit déjà tout.",
+        "en": "What's in your bank account right now? Not the exact number — the bracket. The bracket says everything."
       },
       "minAge": 0,
       "tags": ["music", "funny"]
@@ -129,8 +129,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est la chose la plus gênante que tu aies applaudie ? L'atterrissage d'un avion compte.",
-        "en": "What's the most embarrassing thing you've ever clapped for? Plane landings count."
+        "fr": "La dernière fois que t'as ri pour faire plaisir : c'était à la blague de qui ? Et cette personne est là ce soir ?",
+        "en": "Last time you fake-laughed: whose joke was it, and are they sitting here tonight?"
       },
       "minAge": 0,
       "tags": ["embarrassing", "funny"]
@@ -140,8 +140,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Règle des cinq secondes : quelle est la chose la plus douteuse que tu aies mangée par terre ?",
-        "en": "Five-second rule: what's the sketchiest thing you've ever eaten off the floor?"
+        "fr": "Règle des cinq secondes : le truc le plus douteux que t'as ramassé et mangé quand même. Et c'était quel sol ?",
+        "en": "Five-second rule: the most cursed thing you've picked up and eaten anyway. And what floor are we talking about?"
       },
       "minAge": 0,
       "tags": ["food", "gross"]
@@ -151,8 +151,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est ton record de temps passé sous la douche à gagner des débats imaginaires ?",
-        "en": "What's your record shower time spent winning imaginary arguments?"
+        "fr": "La dispute imaginaire que tu gagnes sous la douche : c'est contre qui ? Si la personne est là, regarde-la en répondant.",
+        "en": "That imaginary argument you keep winning in the shower: who's it against? If they're here, maintain eye contact while answering."
       },
       "minAge": 0,
       "tags": ["habits", "funny"]
@@ -162,8 +162,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Avec quelle célébrité échangerais-tu ta vie pendant 24 heures, et pour faire quoi exactement ?",
-        "en": "Which celebrity would you swap lives with for 24 hours, and what exactly would you do?"
+        "fr": "Quelqu'un ici détient des photos dossier de toi. Qui, et c'est quoi la pire qu'il a en stock ?",
+        "en": "Someone in this room is holding blackmail-grade photos of you. Who is it, and what's the worst one in their vault?"
       },
       "minAge": 0,
       "tags": ["hypothetical", "funny"]
@@ -173,8 +173,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est le pire cadeau que tu aies offert en faisant croire que c'était réfléchi ?",
-        "en": "What's the worst gift you've ever given while pretending it was thoughtful?"
+        "fr": "Le pire cadeau que t'as offert en mode 'j'y ai beaucoup réfléchi'. Prix réel, minutes de réflexion réelles.",
+        "en": "The worst gift you've given while saying 'I put real thought into this'. Actual price, actual minutes of thought."
       },
       "minAge": 0,
       "tags": ["lies", "funny"]
@@ -184,8 +184,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle sonnerie de téléphone gênante as-tu eue avec fierté à une époque ?",
-        "en": "What embarrassing ringtone did you once rock with full pride?"
+        "fr": "T'as déjà dit 'allô ? ça coupe' alors que ça coupait pas du tout. Tu fuyais qui ?",
+        "en": "You've said 'you're breaking up' on a perfectly clear call. Who were you escaping, and did they ever call back?"
       },
       "minAge": 0,
       "tags": ["phone", "nostalgia"]
@@ -195,8 +195,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel film t'a fait pleurer alors que tu jures encore aujourd'hui que non ?",
-        "en": "What movie made you cry that you still swear didn't?"
+        "fr": "T'as le code du téléphone de qui, ici ? Et eux, ils ont le tien ? Si c'est pas réciproque, on veut entendre la plaidoirie.",
+        "en": "Whose phone passcode do you know in this room? And do they know yours? If that's one-way traffic, we're going to need a hearing."
       },
       "minAge": 0,
       "tags": ["emotions", "funny"]
@@ -206,8 +206,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle a été ta phase de fan la plus intense ? Posters, pseudos, fanfictions : tout compte.",
-        "en": "What was your most intense fandom phase? Posters, usernames, fanfiction — it all counts."
+        "fr": "Ta phase de fan la plus grave : donne le pseudo exact que t'avais à l'époque. Épelle-le.",
+        "en": "Your most severe fandom phase: give us the exact username you had back then. Spell it out."
       },
       "minAge": 0,
       "tags": ["nostalgia", "embarrassing"]
@@ -217,8 +217,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est le pseudo le plus gênant que tu aies utilisé sur internet ?",
-        "en": "What's the most embarrassing username you've ever used online?"
+        "fr": "Le compte que tu suis uniquement pour le drama. Donne le pseudo. T'as 10 secondes avant qu'on aille vérifier tes abonnements.",
+        "en": "The account you follow purely for the drama. Hand over the username. You've got 10 seconds before we check your following list."
       },
       "minAge": 0,
       "tags": ["internet", "embarrassing"]
@@ -228,8 +228,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel serait le titre de ton autobiographie ? Sous-titre accepté.",
-        "en": "What would your autobiography be titled? Subtitle welcome."
+        "fr": "C'est quoi le nom du groupe WhatsApp familial, et le dernier message que t'y as laissé sans réponse ?",
+        "en": "What's your family group chat called, and what's the last message in there you left on read?"
       },
       "minAge": 0,
       "tags": ["hypothetical", "funny"]
@@ -239,8 +239,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle habitude bizarre as-tu uniquement quand tu es seul·e chez toi ?",
-        "en": "What weird habit do you only have when you're home alone?"
+        "fr": "Le truc que tu fais seul chez toi et que t'arrêterais net si la sonnette sonnait. Sois précis.",
+        "en": "The thing you do home alone that you'd stop mid-motion if the doorbell rang. Be precise."
       },
       "minAge": 0,
       "tags": ["habits", "weird"]
@@ -250,8 +250,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Raconte ton pire désastre en cuisine. Le détecteur de fumée a le droit de témoigner.",
-        "en": "Tell us your worst kitchen disaster. The smoke alarm may testify."
+        "fr": "Le plat d'un pote que t'as discrètement fait disparaître — serviette, chien, 'désolé j'ai trop mangé à midi'. Décris le plat. La pièce identifiera le chef toute seule.",
+        "en": "A friend's cooking you've secretly disposed of — napkin, dog, 'sorry, huge lunch'. Describe the dish. The room will identify the chef on its own."
       },
       "minAge": 0,
       "tags": ["food", "fail"]
@@ -261,8 +261,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle fausse info as-tu crue — et répétée à tout le monde — pendant des années ?",
-        "en": "What fake fact did you believe — and confidently repeat to people — for years?"
+        "fr": "Quelle fausse info t'as répétée avec un aplomb total pendant des années ? Estime ton nombre de victimes.",
+        "en": "What fake fact did you spread with full confidence for years? Estimate your victim count."
       },
       "minAge": 0,
       "tags": ["funny", "embarrassing"]
@@ -272,8 +272,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "As-tu une cachette à snacks ? Si oui : où, et qu'est-ce qu'elle protège exactement ?",
-        "en": "Do you have a secret snack stash? If yes: where, and what exactly is it protecting?"
+        "fr": "Qu'est-ce que tu planques chez toi avant que les gens de CETTE pièce débarquent ? Objet exact, cachette exacte. On vérifiera à la prochaine soirée.",
+        "en": "What do you hide at yours before the people in THIS room come over? Exact object, exact spot. We will be checking next time."
       },
       "minAge": 0,
       "tags": ["food", "secrets"]
@@ -283,8 +283,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est la conversation la plus sérieuse que tu aies eue avec un animal ?",
-        "en": "What's the most serious conversation you've ever had with an animal?"
+        "fr": "Quelle invitation t'as tuée avec une fausse excuse pour rester chez toi à rien faire ? L'hôte est peut-être ici.",
+        "en": "What invite did you kill with a fake excuse just to stay home doing nothing? The host might be in this room."
       },
       "minAge": 0,
       "tags": ["pets", "funny"]
@@ -294,8 +294,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est ton pire fail de correcteur automatique, et qui l'a reçu ?",
-        "en": "What's your worst autocorrect fail, and who received it?"
+        "fr": "Quelqu'un de cette pièce est enregistré dans ton tel sous un surnom qui est PAS son prénom. Lis-le à voix haute. Maintenant.",
+        "en": "Someone in this room is saved in your phone under a name that is NOT their name. Read it out loud. Right now."
       },
       "minAge": 0,
       "tags": ["phone", "embarrassing"]
@@ -305,8 +305,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel objet as-tu cherché partout alors qu'il était dans un endroit ridicule ? Les clés dans le frigo, ça compte.",
-        "en": "What did you tear the house apart looking for, only to find it somewhere ridiculous? Keys in the fridge count."
+        "fr": "Impunité totale pendant 60 secondes : tu fouilles quoi en premier dans cette pièce — quel sac, quelle veste, quel téléphone ?",
+        "en": "Total immunity for 60 seconds: whose bag, jacket or phone in this room are you searching first?"
       },
       "minAge": 0,
       "tags": ["fail", "funny"]
@@ -316,8 +316,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "As-tu déjà répété un discours, une dispute ou un remerciement aux Oscars devant le miroir ? Lequel ?",
-        "en": "Ever rehearsed a speech, an argument, or an Oscars acceptance in the mirror? Which one?"
+        "fr": "Le discours que t'as répété devant le miroir et jamais sorti en vrai. On t'écoute. C'est le moment.",
+        "en": "The speech you've rehearsed in the mirror and never delivered. Floor's yours. Right now."
       },
       "minAge": 0,
       "tags": ["habits", "funny"]
@@ -327,8 +327,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quand as-tu cherché ton propre nom sur internet pour la dernière fois, et qu'as-tu trouvé ?",
-        "en": "When did you last look up your own name online, and what did you find?"
+        "fr": "Les vocaux de qui t'écoutes en accéléré — ou carrément jamais ? La personne est dans la pièce, et elle croit que t'écoutes chaque seconde.",
+        "en": "Whose voice notes do you play at 2x speed — or just never? They're in this room, and they think you hang on every second."
       },
       "minAge": 0,
       "tags": ["internet", "vanity"]
@@ -338,8 +338,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle anecdote gênante tes parents ressortent-ils encore à chaque repas de famille ?",
-        "en": "What embarrassing story do your parents still trot out at every family dinner?"
+        "fr": "L'anecdote que ta daronne ressort à CHAQUE repas de famille. Vas-y, raconte-la — avec sa voix.",
+        "en": "The story your mum retells at every single family dinner. Go on, tell it — in her voice."
       },
       "minAge": 0,
       "tags": ["family", "embarrassing"]
@@ -349,8 +349,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "As-tu déjà fait semblant d'être au téléphone pour éviter quelqu'un ? Raconte la mise en scène complète.",
-        "en": "Ever faked being on a call to avoid someone? Walk us through the full performance."
+        "fr": "La dernière fois que t'as fait semblant d'être au téléphone pour éviter quelqu'un : qui, et tu parlais à qui — à personne ?",
+        "en": "Last time you faked a phone call to dodge someone: who were you dodging, and who were you 'talking' to — nobody?"
       },
       "minAge": 0,
       "tags": ["lies", "funny"]
@@ -360,8 +360,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est l'endroit le plus gênant où tu te sois endormi·e ?",
-        "en": "What's the most embarrassing place you've ever fallen asleep?"
+        "fr": "T'as dormi pendant quoi d'important ? Un mariage compte. Un enterrement compte double. Le film préféré de quelqu'un ici — désigne ta victime.",
+        "en": "What major event did you sleep through? A wedding counts. A funeral counts double. Someone in this room's favourite film — point at your victim."
       },
       "minAge": 0,
       "tags": ["embarrassing", "funny"]
@@ -371,8 +371,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est la chose la plus enfantine que tu fais encore avec zéro honte ?",
-        "en": "What's the most childish thing you still do with zero shame?"
+        "fr": "Ton vrai record d'heures sur une seule appli en une journée. Juste le chiffre. Pas de contexte — le contexte t'enfonce.",
+        "en": "Your real record for hours spent on one app in a single day. Just the number. No context — context makes it worse."
       },
       "minAge": 0,
       "tags": ["habits", "funny"]
@@ -382,8 +382,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est TA chanson de karaoké, celle que tu prépares en secret depuis des années ?",
-        "en": "What's YOUR karaoke song — the one you've secretly been training for, for years?"
+        "fr": "Qui chante le plus faux dans cette pièce — et pourquoi personne lui a jamais dit ? Voilà, c'est fait.",
+        "en": "Who in this room is the worst singer — and why has nobody ever told them? Congrats, you just did."
       },
       "minAge": 0,
       "tags": ["music", "party"]
@@ -393,8 +393,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle peur complètement irrationnelle assumes-tu officiellement devant tout le monde ce soir ?",
-        "en": "What completely irrational fear are you officially owning in front of everyone tonight?"
+        "fr": "Classe tout le monde ici de 'je lui laisse mon tel déverrouillé' à 'je lui confie même pas une plante verte'. Le dernier mérite une explication. Donne-la.",
+        "en": "Rank everyone here from 'could hold my unlocked phone' to 'could not be trusted with a houseplant'. Whoever comes last is owed an explanation. Give it."
       },
       "minAge": 0,
       "tags": ["fears", "funny"]
@@ -404,8 +404,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Que fais-tu exactement devant le frigo ouvert à 2h du matin ? Sois précis·e.",
-        "en": "What exactly do you do in front of the open fridge at 2 a.m.? Be specific."
+        "fr": "Le groupe WhatsApp de cette équipe, il est en sourdine sur ton tel depuis combien de temps ? Montre l'écran. Wallah, montre.",
+        "en": "How long has this group's chat been muted on your phone? Show the screen. Deadass, show the screen."
       },
       "minAge": 0,
       "tags": ["food", "habits"]
@@ -415,8 +415,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quel est le truc le plus bizarre que tu aies acheté en ligne à 3h du matin ?",
-        "en": "What's the weirdest thing you've ever bought online at 3 a.m.?"
+        "fr": "Le truc le plus inutile que t'as acheté à 3h du matin. Prix exact, et il est où maintenant ?",
+        "en": "The most useless thing you've bought at 3 a.m. Exact price, and where is it now?"
       },
       "minAge": 0,
       "tags": ["shopping", "weird"]
@@ -426,8 +426,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle est la dispute la plus absurde que tu aies eue avec un GPS, une enceinte connectée ou un objet ?",
-        "en": "What's the most absurd argument you've ever had with a GPS, a smart speaker, or an inanimate object?"
+        "fr": "Le truc le plus mesquin que t'as fait à un coloc ou à ta famille sans jamais te faire griller. Prescription acquise : accouche.",
+        "en": "The pettiest thing you've done to a flatmate or family member and never got caught for. Statute of limitations is up — talk."
       },
       "minAge": 0,
       "tags": ["funny", "weird"]
@@ -437,8 +437,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Si tes amis te décernaient un trophée 100% honnête, ce serait quoi ?",
-        "en": "If your friends gave you a brutally honest trophy, what would it be for?"
+        "fr": "La pièce te décerne un trophée 100 % honnête, là, maintenant. Y'a quoi de gravé dessus ? Les autres ont le droit de corriger.",
+        "en": "This room hands you a brutally honest trophy right now. What's engraved on it? The room is allowed to issue corrections."
       },
       "minAge": 0,
       "tags": ["friendship", "funny"]
@@ -448,8 +448,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel est le message le plus gênant que tu aies envoyé à la mauvaise personne ?",
-        "en": "What's the most embarrassing text you've ever sent to the wrong person?"
+        "fr": "Ton pire mauvais destinataire : cite le message ET la personne qui l'a reçu. Si elle est dans la pièce, tant pis pour toi.",
+        "en": "Your worst wrong-recipient text: quote it, and name who got it. If they're in this room, that's your problem."
       },
       "minAge": 18,
       "tags": ["phone", "embarrassing"]
@@ -459,8 +459,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Jusqu'où es-tu allé·e en stalkant le ou la nouvelle de ton ex ? Profondeur d'archive exigée.",
-        "en": "How deep did you go stalking your ex's new partner? Archive depth required."
+        "fr": "Jusqu'à quelle année t'es descendu en stalkant le nouveau ou la nouvelle de ton ex ? Donne l'année. On saura si tu mens.",
+        "en": "How far back did you scroll on your ex's new partner? Give the year. We'll know if you're lying."
       },
       "minAge": 18,
       "tags": ["ex", "social-media"]
@@ -470,8 +470,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la raison la plus nulle pour laquelle tu aies ghosté quelqu'un ?",
-        "en": "What's the lamest reason you've ever ghosted someone?"
+        "fr": "La raison la plus minable pour laquelle t'as ghosté quelqu'un. Ses chaussures ? Son rire ? Une faute d'orthographe ? Dis-le.",
+        "en": "The most pathetic reason you've ever ghosted someone. Their shoes? Their laugh? One typo? Say it."
       },
       "minAge": 18,
       "tags": ["dating", "ghosting"]
@@ -481,8 +481,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Raconte la fois où tu t'es fait ghoster et où tu as quand même renvoyé un message. Ou trois.",
-        "en": "Tell us about the time you got ghosted and still sent one more message. Or three."
+        "fr": "On t'a ghosté et t'as quand même renvoyé un message. Combien au total, et cite le dernier de la série.",
+        "en": "You got ghosted and texted again anyway. Total message count, and quote the final one in the series."
       },
       "minAge": 18,
       "tags": ["dating", "ghosting"]
@@ -492,8 +492,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la phrase de drague la plus gênante que tu aies vraiment sortie ? Et surtout : ça a marché ?",
-        "en": "What's the cringiest pickup line you've actually used? And the real question: did it work?"
+        "fr": "Ta phrase de drague signature — celle que t'as sortie plus d'une fois. Dis-la. Puis désigne la personne ici sur qui elle aurait le plus de chances de marcher.",
+        "en": "Your signature line — the one you've used on more than one human. Say it. Now point at the person in this room it would most likely work on."
       },
       "minAge": 18,
       "tags": ["dating", "funny"]
@@ -503,8 +503,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la pire excuse que tu aies inventée pour quitter une soirée en douce ?",
-        "en": "What's the worst excuse you've ever invented to sneak out of a party?"
+        "fr": "La pire excuse que t'as inventée pour quitter une soirée. Et fais pas le fier : t'en as déjà servi une à quelqu'un ici.",
+        "en": "Your worst fake excuse for leaving a party early. Don't look smug — you've used one on somebody in this room."
       },
       "minAge": 18,
       "tags": ["party", "lies"]
@@ -514,8 +514,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel vieux message à toi t'a fait grimacer en le relisant ? Cite-le si tu l'oses.",
-        "en": "Which of your own old texts made you physically cringe on reread? Quote it if you dare."
+        "fr": "Ouvre une conversation d'il y a trois ans. Lis ton pire message à voix haute. Le tien, pas le sien.",
+        "en": "Open a chat from three years ago. Read your worst message out loud. Yours, not theirs."
       },
       "minAge": 18,
       "tags": ["phone", "embarrassing"]
@@ -525,8 +525,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel petit arrangement avec la vérité as-tu mis sur un profil de rencontre ?",
-        "en": "What little 'creative edit' have you put on a dating profile?"
+        "fr": "Quel mensonge y'a sur ton profil de rencontre en ce moment ? Taille, âge, 'adore la rando' — donne la ligne exacte.",
+        "en": "What lie is on your dating profile right now, this minute? Height, age, 'loves hiking' — name the exact line."
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -536,8 +536,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Décris la photo de ta galerie que tu ne montrerais à personne ici. Décrire seulement — on n'est pas des monstres.",
-        "en": "Describe the one photo in your camera roll you'd never show this room. Describe only — we're not monsters."
+        "fr": "Ta galerie s'affiche sur la TV du salon. C'est quoi LA photo que tu pries pour qu'on voie pas ? Décris-la.",
+        "en": "Your camera roll just auto-played on the living-room TV. Which photo are you praying doesn't come up? Describe it."
       },
       "minAge": 18,
       "tags": ["phone", "secrets"]
@@ -547,8 +547,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel est le pire message que tu aies envoyé après quelques verres ? La réponse reçue vaut aussi de l'or.",
-        "en": "What's the worst text you've ever sent after a few drinks? The reply you got is worth gold too."
+        "fr": "Ton pire message envoyé bourré : cite-le, donne l'heure, et cite la réponse reçue. Les trois pièces du dossier.",
+        "en": "Worst drunk text ever sent: quote it, time-stamp it, quote the reply. All three exhibits, please."
       },
       "minAge": 18,
       "tags": ["phone", "party"]
@@ -558,8 +558,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Raconte ton pire date. Celui que tu racontes déjà à tout le monde — mais avec les vrais détails cette fois.",
-        "en": "Tell us your worst date ever. The one you already tell everyone — but with the real details this time."
+        "fr": "Ton pire date — mais la version où c'est TOI le problème. Celle-là, on l'a jamais entendue.",
+        "en": "Your worst date ever — except the version where YOU were the problem. That one. We've never heard that one."
       },
       "minAge": 18,
       "tags": ["dating", "story"]
@@ -569,8 +569,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle passion as-tu fait semblant d'avoir pour impressionner un crush ? Combien de temps a tenu le mensonge ?",
-        "en": "What hobby did you fake loving to impress a crush? How long did the lie survive?"
+        "fr": "Quelle passion t'as simulée pour un crush ? Combien de séances d'escalade, d'expos ou de footing avant de craquer ?",
+        "en": "What hobby did you fake for a crush? How many gym sessions, gallery visits or 6 a.m. runs before you cracked?"
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -580,8 +580,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel souvenir d'un ex ou d'un crush gardes-tu encore alors que tu jures que ça ne veut rien dire ?",
-        "en": "What memento from an ex or a crush do you still keep while swearing it means nothing?"
+        "fr": "Quel objet de ton ex tu gardes encore 'par flemme de jeter' ? Décris-le. Tu sais très bien dans quel tiroir il est.",
+        "en": "What item of your ex's do you still keep 'because throwing it out is effort'? Describe it. You know exactly which drawer it's in."
       },
       "minAge": 18,
       "tags": ["ex", "secrets"]
@@ -591,8 +591,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà liké par accident une photo de 2017 en plein stalking ? Raconte la gestion de crise.",
-        "en": "Ever accidentally liked a 2017 photo mid-stalk? Walk us through the crisis management."
+        "fr": "T'as liké une photo de 2017 en plein stalking à 1h du matin. Raconte les dix secondes de panique. Unlike ou assumé ?",
+        "en": "You liked a 2017 photo mid-stalk at 1 a.m. Walk us through the ten seconds of panic. Unlike, or own it?"
       },
       "minAge": 18,
       "tags": ["social-media", "embarrassing"]
@@ -602,8 +602,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la pire chose que tu aies dite en entretien d'embauche ?",
-        "en": "What's the worst thing you've ever said in a job interview?"
+        "fr": "Combien tu dois, là, à quelqu'un de cette pièce ? Compte les verres, les billets de train, et tous les 'je te fais un virement'.",
+        "en": "How much do you currently owe someone in this room? Count the drinks, the train tickets, and every single 'I'll transfer you'."
       },
       "minAge": 18,
       "tags": ["work", "embarrassing"]
@@ -613,8 +613,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle anecdote as-tu tellement enjolivée que tu ne sais plus toi-même ce qui est vrai ?",
-        "en": "Which story have you embellished so many times you no longer know what's true?"
+        "fr": "Quelle anecdote t'as tellement améliorée que la version actuelle est de la fiction ? Quelqu'un ici a entendu les deux versions.",
+        "en": "Which of your stories has been upgraded so many times it's now fiction? Someone in this room has heard both versions."
       },
       "minAge": 18,
       "tags": ["lies", "funny"]
@@ -624,8 +624,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la chose la plus mesquine que tu aies faite après une dispute ?",
-        "en": "What's the pettiest thing you've ever done after an argument?"
+        "fr": "Le truc le plus mesquin que t'as fait après une embrouille. Le silence radio de trois semaines compte. Le faux 'ah désolé, pas vu ton message' aussi.",
+        "en": "The pettiest move you've pulled after a fight. The three-week silent treatment counts. So does the fake 'omg just saw this'."
       },
       "minAge": 18,
       "tags": ["petty", "confession"]
@@ -635,8 +635,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà envoyé un screenshot d'une conversation… à la personne concernée ? Raconte le moment exact où ton âme a quitté ton corps.",
-        "en": "Ever sent a screenshot of a convo… to the person it was about? Describe the exact moment your soul left your body."
+        "fr": "T'as envoyé le screen À la personne concernée. Raconte la seconde exacte où t'as compris, et ce que t'as tapé juste après.",
+        "en": "You sent the screenshot TO the person it was about. Describe the exact second you realised, and what you typed next."
       },
       "minAge": 18,
       "tags": ["phone", "disaster"]
@@ -646,8 +646,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la dernière chose que tu as obtenue gratuitement grâce à un sourire un peu trop appuyé ?",
-        "en": "What's the last thing you got for free thanks to a slightly too-committed smile?"
+        "fr": "Ton dernier flirt purement intéressé : c'était pour obtenir quoi — un verre, une réduc, un service ? Et t'as eu ?",
+        "en": "Your last purely transactional flirt: what were you after — a drink, a discount, a favour? Did you get it?"
       },
       "minAge": 18,
       "tags": ["flirting", "funny"]
@@ -657,8 +657,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà jeté un œil au téléphone de quelqu'un sans permission ? Qu'est-ce que tu cherchais ?",
-        "en": "Ever peeked at someone's phone without permission? What were you looking for?"
+        "fr": "T'as fouillé le téléphone de qui, et tu cherchais quoi exactement ? Question bonus : t'as trouvé ?",
+        "en": "Whose phone did you go through, and what exactly were you hunting for? Follow-up: did you find it?"
       },
       "minAge": 18,
       "tags": ["phone", "confession"]
@@ -668,8 +668,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle photo de toi est tellement filtrée que ta propre mère hésiterait à te reconnaître ?",
-        "en": "Which photo of you is so filtered your own mother would need a second look?"
+        "fr": "Ouvre ta photo de profil la plus avantageuse et fais tourner le tel. Le groupe vote : marchandise conforme, ou arnaque à la livraison ?",
+        "en": "Pull up your most flattering profile pic and pass the phone round. The room votes: as advertised, or refund at delivery?"
       },
       "minAge": 18,
       "tags": ["social-media", "vanity"]
@@ -679,8 +679,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà dit 'je t'aime' en premier et reçu une réponse catastrophique ? Cite-la mot pour mot.",
-        "en": "Ever said 'I love you' first and gotten a disastrous reply? Quote it word for word."
+        "fr": "T'as dit 'je t'aime' en premier et la réponse t'a détruit. Cite-la mot pour mot. Le 'merci' compte.",
+        "en": "You said 'I love you' first and got demolished. Quote the reply word for word. 'Thanks' counts."
       },
       "minAge": 18,
       "tags": ["dating", "embarrassing"]
@@ -690,8 +690,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la pire blague à laquelle tu aies ri par pure stratégie ? Boss, date, belle-famille : tout compte.",
-        "en": "What's the worst joke you've ever laughed at out of pure strategy? Boss, date, in-laws — they all count."
+        "fr": "Tu likes encore les posts de quelqu'un que tu détestes, juste pour pas te griller. Ça dure depuis combien d'années, ce théâtre ? Et la personne est dans cette pièce ?",
+        "en": "You still like the posts of someone you can't stand, purely for cover. How many years has this theatre been running? And are they in this room?"
       },
       "minAge": 18,
       "tags": ["lies", "social"]
@@ -701,8 +701,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel mensonge à tes parents a si bien marché que tu pourrais encore l'utiliser aujourd'hui ?",
-        "en": "What lie to your parents worked so well you could still use it today?"
+        "fr": "Le mensonge à tes darons qui a si bien marché qu'il est devenu un fait établi de la famille. C'était quoi, et ça couvrait quoi ?",
+        "en": "The lie to your parents that worked so well it's now family canon. What was it, and what was it covering for?"
       },
       "minAge": 18,
       "tags": ["family", "lies"]
@@ -712,8 +712,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà eu un crush sur le frère ou la sœur d'un·e ami·e ? L'ami·e est-il au courant… genre, maintenant ?",
-        "en": "Ever crushed on a friend's sibling? Does the friend know… like, as of right now?"
+        "fr": "T'as déjà eu un crush sur le frère ou la sœur de qui ? L'ami concerné est peut-être ici, donc pèse bien chaque mot.",
+        "en": "Whose sibling have you had a crush on? The friend in question might be in this room, so weigh every word."
       },
       "minAge": 18,
       "tags": ["crush", "friendship"]
@@ -723,8 +723,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Raconte ta chute la plus spectaculaire en public. Note artistique bienvenue.",
-        "en": "Tell us about your most spectacular public wipeout. Style points welcome."
+        "fr": "Qui de cette pièce tu retires de ta story 'amis proches' en premier — et il raterait quoi, exactement ?",
+        "en": "Who in this room gets cut from your close friends story first — and what exactly would they stop seeing?"
       },
       "minAge": 18,
       "tags": ["embarrassing", "funny"]
@@ -734,8 +734,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà inventé un copain ou une copine imaginaire pour éviter une drague lourde ? Donne le prénom de cette personne fictive.",
-        "en": "Ever invented an imaginary partner to dodge a pushy flirt? Tell us the fictional name you gave them."
+        "fr": "T'as inventé un couple pour esquiver un lourd. Le prénom fictif, le métier fictif, et combien de temps t'as fait vivre le personnage ?",
+        "en": "You invented a partner to dodge someone pushy. The fake name, the fake job, and how long did you keep the character alive?"
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -745,8 +745,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Raconte ta pire mission de wingman ou wingwoman. Quelles chances as-tu fait couler ?",
-        "en": "Tell us your worst wingman mission. Whose chances did you sink?"
+        "fr": "Ta pire mission de wingman : t'as coulé les chances de qui, et c'était volontaire à combien de pour cent ?",
+        "en": "Your worst wingman mission: whose chances did you sink, and what percentage of it was on purpose?"
       },
       "minAge": 18,
       "tags": ["dating", "friendship"]
@@ -756,8 +756,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà oublié le prénom de ton date… pendant le date ? Quelle a été ta technique de survie ?",
-        "en": "Ever forgotten your date's name… mid-date? What was your survival technique?"
+        "fr": "T'as oublié le prénom de ton date PENDANT le date. T'as survécu combien de temps à coups de 'hé', 'toi' et de pronoms créatifs ?",
+        "en": "You forgot your date's name MID-date. How long did you survive on 'hey', 'you' and creative pronouns?"
       },
       "minAge": 18,
       "tags": ["dating", "embarrassing"]
@@ -767,8 +767,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel compte de streaming d'un ex utilises-tu encore ? Le mot de passe a survécu à la rupture ?",
-        "en": "Which ex's streaming account are you still using? Did the password outlive the relationship?"
+        "fr": "Tu squattes encore le compte de streaming de quel ex ? Et il voit quoi dans 'reprendre la lecture' grâce à toi ?",
+        "en": "Which ex's streaming login are you still squatting? And what's showing up in their 'continue watching' because of you?"
       },
       "minAge": 18,
       "tags": ["ex", "confession"]
@@ -778,8 +778,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la chose la plus gênante que tu aies faite à un mariage ou une fête de famille ?",
-        "en": "What's the most embarrassing thing you've ever done at a wedding or family party?"
+        "fr": "Le pire truc que t'as fait à un mariage. Le discours non sollicité compte. Le slow avec la mauvaise personne compte double.",
+        "en": "Worst thing you've ever done at a wedding. Unsolicited speeches count. Slow-dancing with the wrong person counts double."
       },
       "minAge": 18,
       "tags": ["family", "party"]
@@ -789,8 +789,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Sur quoi as-tu appris à embrasser ? Main, miroir, coussin : on veut le matériel exact.",
-        "en": "What did you practice kissing on? Hand, mirror, pillow — we want the exact equipment."
+        "fr": "Sur quoi t'as appris à embrasser ? Main, miroir, coussin — et surtout : jusqu'à quel âge ?",
+        "en": "What did you practice kissing on? Hand, mirror, pillow — and more importantly, until what age?"
       },
       "minAge": 18,
       "tags": ["embarrassing", "nostalgia"]
@@ -800,8 +800,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quand as-tu menti sur ton âge pour la dernière fois — et dans quel sens ?",
-        "en": "When did you last lie about your age — and in which direction?"
+        "fr": "Quel red flag t'as ignoré en toute connaissance de cause parce que la personne était trop belle ? Décris le flag, pas la personne.",
+        "en": "What red flag did you knowingly ignore because the person was just that attractive? Describe the flag, not the face."
       },
       "minAge": 18,
       "tags": ["lies", "funny"]
@@ -811,8 +811,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel est le pire vocal que tu aies envoyé ? Durée, contenu, heure d'envoi : tout nous intéresse.",
-        "en": "What's the worst voice message you've ever sent? Length, content, time of day — we want it all."
+        "fr": "Ton pire vocal : durée, heure d'envoi, taux d'alcool estimé. Et la réponse, c'était quoi — un 'appelle-moi' sec ?",
+        "en": "Your worst voice note: length, send time, estimated blood-alcohol. And the reply — one dry 'call me'?"
       },
       "minAge": 18,
       "tags": ["phone", "embarrassing"]
@@ -822,8 +822,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "T'es-tu déjà attribué la blague ou l'idée brillante de quelqu'un d'autre ? La personne est-elle au courant ?",
-        "en": "Ever taken credit for someone else's joke or brilliant idea? Does that someone know?"
+        "fr": "Quelle blague ou idée brillante t'as volée et resservie en ton nom ? Le propriétaire légitime est peut-être assis là.",
+        "en": "Whose joke or brilliant idea did you steal and re-serve as your own? The rightful owner might be sitting right here."
       },
       "minAge": 18,
       "tags": ["confession", "lies"]
@@ -833,8 +833,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà été surpris·e en train de parler de quelqu'un… par ce quelqu'un ? Raconte ta sortie de secours.",
-        "en": "Ever been caught talking about someone… by that exact someone? Tell us your emergency exit."
+        "fr": "T'étais en plein débrief sur quelqu'un… qui était juste derrière toi. Qui, et t'as tenté quoi comme rattrapage ?",
+        "en": "You were mid-trash-talk when the person walked in behind you. Who was it, and what was your recovery attempt?"
       },
       "minAge": 18,
       "tags": ["gossip", "embarrassing"]
@@ -844,8 +844,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel est le 'vu' le plus long que tu aies laissé avant de répondre ? Des jours ? Des semaines ? Assume.",
-        "en": "What's the longest you've ever left someone on read before replying? Days? Weeks? Own it."
+        "fr": "Ton record de 'vu' sans réponse : combien de jours, et c'était qui ? Si la personne est là, ton excuse a intérêt à être belle.",
+        "en": "Your personal record for leaving someone on read: how many days, and who was it? If they're here, your excuse better be art."
       },
       "minAge": 18,
       "tags": ["phone", "petty"]
@@ -855,8 +855,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la chose la plus désespérée que tu aies faite pour attirer l'attention d'un crush ?",
-        "en": "What's the most desperate thing you've ever done to get a crush's attention?"
+        "fr": "Le truc le plus désespéré que t'as fait pour un crush : passer 'par hasard' devant chez lui, liker 14 stories d'affilée ? Avoue tout.",
+        "en": "The most desperate thing you've done for a crush: the 'accidental' walk past their flat, liking 14 stories in a row? Full confession."
       },
       "minAge": 18,
       "tags": ["crush", "embarrassing"]
@@ -866,8 +866,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Combien de temps as-tu prétendu être passé·e à autre chose alors que tu écoutais des chansons tristes en boucle ?",
-        "en": "How long did you pretend you were 'so over it' while looping sad songs on repeat?"
+        "fr": "Combien de semaines t'as joué 'ça va, je suis passé à autre chose' en écoutant la même chanson triste en boucle ? Cite la chanson.",
+        "en": "How many weeks did you run the 'I'm so over it' act while looping one sad song on repeat? Name the song."
       },
       "minAge": 18,
       "tags": ["ex", "emotions"]
@@ -877,8 +877,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Qu'as-tu emprunté et très commodément 'oublié' de rendre ? Attention : la personne est peut-être dans la pièce.",
-        "en": "What have you borrowed and very conveniently 'forgotten' to return? Careful: the owner might be in this room."
+        "fr": "T'as 'oublié' de rendre quoi, et à qui ? Petit détail : la personne est peut-être assise en face de toi, et elle a rien oublié, elle.",
+        "en": "What have you 'forgotten' to give back, and to whom? Fun detail: they might be sitting opposite you, and they forgot nothing."
       },
       "minAge": 18,
       "tags": ["confession", "funny"]
@@ -888,8 +888,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle est la 'relation' la plus courte qui t'ait quand même brisé le cœur ? On compte en jours.",
-        "en": "What's the shortest 'relationship' that still managed to break your heart? We're counting in days."
+        "fr": "La 'relation' la plus courte qui t'a quand même détruit. Compte en jours. Et le temps de t'en remettre — compte en mois.",
+        "en": "The shortest 'relationship' that still wrecked you. Count it in days. Now the recovery — count that one in months."
       },
       "minAge": 18,
       "tags": ["dating", "emotions"]
@@ -899,8 +899,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quel cadeau d'un date ou d'un partenaire as-tu détesté tout en t'extasiant devant ?",
-        "en": "What gift from a date or partner did you secretly hate while gushing over it?"
+        "fr": "Le cadeau d'un date que t'as détesté en t'extasiant devant. C'était quoi, et il est où là — poubelle, placard, revendu ?",
+        "en": "The gift from a date you hated while performing pure joy. What was it, and where is it now — bin, cupboard, resold?"
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -910,8 +910,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà organisé un 'hasard' pour croiser quelqu'un ? Détaille la logistique.",
-        "en": "Ever engineered a 'coincidence' to run into someone? Walk us through the logistics."
+        "fr": "Le 'hasard' que t'as organisé pour croiser quelqu'un : combien de repérage, combien d'attente sur place, et t'as récolté quoi ?",
+        "en": "That 'coincidence' you engineered to run into someone: how much scouting, how much loitering, and what did it actually get you?"
       },
       "minAge": 18,
       "tags": ["crush", "scheming"]
@@ -921,8 +921,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "T'es-tu déjà incrusté·e à une fête où tu n'étais pas invité·e ? Comment ça s'est fini ?",
-        "en": "Ever crashed a party you weren't invited to? How did it end?"
+        "fr": "La soirée où t'étais pas invité mais t'es venu quand même. Qui t'a fait rentrer, et qui a tiré la tronche en te voyant ?",
+        "en": "The party you weren't invited to but attended anyway. Who let you in, and whose face dropped the second they saw you?"
       },
       "minAge": 18,
       "tags": ["party", "story"]
@@ -932,8 +932,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà dit 'désolé·e, je suis crevé·e' avant de poster une story en soirée ? Qui t'a grillé·e ?",
-        "en": "Ever said 'sorry, I'm exhausted' and then posted a party story an hour later? Who busted you?"
+        "fr": "'Désolé, je suis crevé' — et une story de soirée deux heures après. Qui t'a grillé, et t'as envoyé quoi pour limiter les dégâts ?",
+        "en": "'Sorry, staying in tonight' — then a party story two hours later. Who caught it, and what was your damage-control text?"
       },
       "minAge": 18,
       "tags": ["lies", "social-media"]
@@ -943,8 +943,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Combien de temps as-tu déjà passé à rédiger un message censé avoir l'air totalement 'spontané' ?",
-        "en": "What's the longest you've ever spent drafting a text that was supposed to look totally 'casual'?"
+        "fr": "Ton record de temps passé sur un message censé avoir l'air 'spontané'. Et combien de potes l'ont relu avant l'envoi ?",
+        "en": "Your record time spent crafting a text designed to look effortless. And how many friends proofread it before you hit send?"
       },
       "minAge": 18,
       "tags": ["phone", "crush"]
@@ -954,8 +954,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Quelle notification gênante s'est affichée au pire moment possible — réunion, cours, écran partagé ?",
-        "en": "What embarrassing notification popped up at the worst possible moment — meeting, class, screen share?"
+        "fr": "La notif qui s'est affichée au pire moment — écran partagé en réunion, téléphone posé sur la table du repas de famille. Elle disait quoi, mot pour mot ?",
+        "en": "The notification that landed at the worst possible second — mid-screen-share, phone face-up at family dinner. What did it say, word for word?"
       },
       "minAge": 18,
       "tags": ["phone", "work"]
@@ -965,8 +965,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà délégué une rupture ou un râteau à quelqu'un d'autre ? Qui a fait le sale boulot ?",
-        "en": "Ever outsourced a breakup or a rejection to someone else? Who did the dirty work?"
+        "fr": "T'as délégué une rupture ou un râteau à quelqu'un d'autre. Qui a fait le sale boulot, et tu l'as payé en quoi ?",
+        "en": "You've outsourced a breakup or a rejection. Who did the dirty work, and what did it cost you?"
       },
       "minAge": 18,
       "tags": ["dating", "confession"]
@@ -976,8 +976,8 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "As-tu déjà embrassé quelqu'un pour rendre une autre personne jalouse ? Est-ce que le plan a fonctionné ?",
-        "en": "Ever kissed someone to make somebody else jealous? Did the plan actually work?"
+        "fr": "T'as embrassé quelqu'un juste pour rendre une troisième personne jalouse. La victime collatérale l'a su ? Et le plan a marché, au moins ?",
+        "en": "You've kissed someone purely to make a third party jealous. Did the human prop ever find out? Did the plan even work?"
       },
       "minAge": 18,
       "tags": ["dating", "scheming"]
@@ -998,8 +998,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la pire excuse que tu aies inventée pour t'éclipser d'un date en plein milieu ?",
-        "en": "What's the worst excuse you've ever invented to bail on a date halfway through?"
+        "fr": "L'infidélité, t'étais de quel côté — celui qui trompe, celui qui découvre, ou celui qui 'savait pas' qu'il était le plan B ? Raconte celle qui te définit.",
+        "en": "Cheating: which side have you been on — doing it, finding out, or 'not knowing' you were the side piece? Tell the one that defines you."
       },
       "minAge": 18,
       "tags": ["dating", "funny"]
@@ -1009,8 +1009,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la phrase la plus gênante que tu aies dite juste avant ou juste après un baiser ?",
-        "en": "What's the most awkward thing you've ever said right before or right after a kiss?"
+        "fr": "La pire phrase que t'as sortie juste après avoir couché avec quelqu'un. Et question bonus : y'a eu une deuxième fois après ça ? Non, hein.",
+        "en": "The worst thing you've ever said right after sex. Follow-up: was there a second time after that? No. Thought not."
       },
       "minAge": 18,
       "tags": ["kissing", "embarrassing"]
@@ -1020,8 +1020,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est l'endroit le plus absurde où tu te sois retrouvé·e à embrasser quelqu'un ? Les détails logistiques nous intéressent.",
-        "en": "What's the most absurd place you've ever ended up making out with someone? We're very interested in the logistics."
+        "fr": "L'endroit le plus risqué où t'as couché — risqué genre 'quelqu'un aurait pu ouvrir cette porte'. Lieu exact, et c'était l'idée de qui ?",
+        "en": "The riskiest place you've hooked up — risky as in 'someone could have opened that door'. Exact location, and whose idea was it?"
       },
       "minAge": 18,
       "tags": ["hookup", "story"]
@@ -1031,8 +1031,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà simulé l'enthousiasme au lit ? Note ta performance d'acteur de 1 à 10.",
-        "en": "Ever faked enthusiasm in bed? Rate your acting performance, 1 to 10."
+        "fr": "Estimation honnête : combien d'orgasmes simulés dans ta carrière ? Et le plus convaincant, c'était pour qui ?",
+        "en": "Honest ballpark: how many orgasms have you faked, career total? And the most convincing one — who was it for?"
       },
       "minAge": 18,
       "tags": ["sex", "confession"]
@@ -1042,8 +1042,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est ton plus gros fail en plein moment intime ? Crampes, chutes du lit et coups de coude comptent double.",
-        "en": "What's your biggest fail mid-intimate-moment? Cramps, falling off the bed, and stray elbows count double."
+        "fr": "Ton plus gros fail en plein sexe. Le bruit, la crampe, la chute du lit — la version complète, pas la version mignonne.",
+        "en": "Your single biggest mid-sex fail. The noise, the cramp, the fall off the bed — full version, not the cute version."
       },
       "minAge": 18,
       "tags": ["sex", "funny"]
@@ -1064,8 +1064,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Raconte ton retour au petit matin le plus mémorable — tenue de la veille et regard des voisins inclus.",
-        "en": "Tell us about your most memorable morning-after walk home — last night's outfit and the neighbors' judgment included."
+        "fr": "Ton pire retour de 7h du mat' : la tenue de la veille, le trajet, et la personne qu'il fallait surtout pas croiser — et que t'as croisée.",
+        "en": "Your worst 7 a.m. walk home: last night's outfit, the route, and the one person you could not afford to run into — who you ran into."
       },
       "minAge": 18,
       "tags": ["hookup", "story"]
@@ -1075,8 +1075,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà menti sur l'endroit où tu avais passé la nuit ? À qui — et le mensonge a-t-il tenu ?",
-        "en": "Ever lied about where you spent the night? To whom — and did the lie hold up?"
+        "fr": "T'as menti à qui sur l'endroit où t'as dormi — et t'as dormi chez qui en vrai ? Les deux noms sont peut-être dans cette pièce.",
+        "en": "Who did you lie to about where you slept — and whose bed were you actually in? Both names might be in this room."
       },
       "minAge": 18,
       "tags": ["hookup", "lies"]
@@ -1086,8 +1086,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la conversation de petit-déjeuner la plus gênante que tu aies eue après une nuit chez quelqu'un ?",
-        "en": "What's the most awkward breakfast conversation you've ever had after staying over at someone's place?"
+        "fr": "T'es déjà parti avant que l'autre se réveille ? Décris la sortie : chaussures à la main, petit mot menteur sur l'oreiller, ou disparition pure et simple ?",
+        "en": "Ever snuck out before they woke up? Walk us through the exit: shoes in hand, a lying little note on the pillow, or gone without a trace?"
       },
       "minAge": 18,
       "tags": ["hookup", "awkward"]
@@ -1097,8 +1097,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Qui a bien failli te surprendre au pire moment possible — et comment vous vous en êtes sortis ?",
-        "en": "Who almost walked in on you at the worst possible moment — and how did you talk your way out of it?"
+        "fr": "Qui a failli vous surprendre en plein milieu — un parent, un coloc, le ménage de l'hôtel ? Et il restait combien de secondes de marge ?",
+        "en": "Who nearly walked in on you mid-act — a parent, a flatmate, hotel housekeeping? And how many seconds of margin did you have?"
       },
       "minAge": 18,
       "tags": ["sex", "story"]
@@ -1108,8 +1108,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la pire phrase de dirty talk que tu aies entendue — ou prononcée ? Courage.",
-        "en": "What's the worst line of dirty talk you've ever heard — or said? Be brave."
+        "fr": "La pire phrase de dirty talk que t'as vraiment prononcée. Mot pour mot, avec l'intonation d'origine. La pièce a le droit de juger.",
+        "en": "The worst line of dirty talk that has actually left your mouth. Word for word, original delivery. Eye contact optional."
       },
       "minAge": 18,
       "tags": ["sex", "funny"]
@@ -1119,8 +1119,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà gonflé ou minimisé ton expérience pour impressionner quelqu'un ? Dans quel sens ?",
-        "en": "Ever inflated or downplayed your experience to impress someone? Which direction?"
+        "fr": "T'as menti sur ton body count à qui — et dans quel sens ? Gonflé pour les potes, raboté pour le couple ?",
+        "en": "Who's heard a fake body count from you — and in which direction? Padded for your mates, shaved for your partner?"
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -1130,8 +1130,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle célébrité aurait un passe-droit total, même si tu étais en couple ? Ton ou ta partenaire vient de hausser un sourcil.",
-        "en": "Which celebrity gets a full hall pass even if you're taken? Your partner just raised an eyebrow."
+        "fr": "Zéro conséquence, personne le saura jamais : tu couches avec qui dans cette pièce ? Tu peux boire — mais tout le monde te regardera boire.",
+        "en": "Zero consequences, nobody ever finds out: who in this room are you sleeping with? You can drink — but everyone will watch you drink."
       },
       "minAge": 18,
       "tags": ["crush", "hypothetical"]
@@ -1141,8 +1141,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Une histoire 'sans prise de tête' qui est devenue très, très compliquée : raconte.",
-        "en": "A 'no strings attached' situation that grew a LOT of strings: tell us everything."
+        "fr": "Ton plan cul qui a dérapé en sentiments : qui a craqué en premier, et qui s'en est jamais vraiment remis ?",
+        "en": "The no-strings thing that caught feelings: who cracked first, and who never actually recovered?"
       },
       "minAge": 18,
       "tags": ["dating", "story"]
@@ -1152,8 +1152,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Ton pire moment sur une appli de rencontre : profil mensonger, date catastrophe ou premier message lunaire ?",
-        "en": "Your worst dating-app moment: fake profile, disaster date, or completely unhinged opening message?"
+        "fr": "Un plan à trois : déjà fait, déjà proposé, ou déjà refusé en y repensant encore ? Choisis ta case. Développe.",
+        "en": "A threesome: done it, offered it, or turned one down and still think about it? Pick your box. Elaborate."
       },
       "minAge": 18,
       "tags": ["dating", "apps"]
@@ -1163,8 +1163,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la chose la plus déroutante que tu aies trouvée chez un date ? Et tu es resté·e quand même ?",
-        "en": "What's the most unsettling thing you've ever found at a date's place? And you still stayed?"
+        "fr": "Le truc le plus flippant que t'as vu chez un date — et t'es resté dormir quand même. Décris l'objet. Défends ta décision.",
+        "en": "The creepiest thing you've found at a date's place — and you still stayed the night. Describe the object. Defend the decision."
       },
       "minAge": 18,
       "tags": ["dating", "story"]
@@ -1174,8 +1174,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà embrassé quelqu'un dont tu ne connaissais pas le prénom ? L'as-tu appris un jour ?",
-        "en": "Ever made out with someone whose name you didn't know? Did you ever learn it?"
+        "fr": "T'as déjà couché avec quelqu'un dont tu connaissais pas le prénom. Tu l'as appris quand — pendant, après, jamais ?",
+        "en": "You've slept with someone whose name you didn't know. When did you learn it — during, after, or never?"
       },
       "minAge": 18,
       "tags": ["hookup", "confession"]
@@ -1185,8 +1185,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà envoyé une photo un peu osée ? Regret immédiat ou fierté durable ?",
-        "en": "Ever sent a slightly risky photo? Instant regret or lasting pride?"
+        "fr": "Tes nudes existent dans combien de téléphones, là, maintenant ? Compte bien. Inclus les ex en mauvais termes.",
+        "en": "Your nudes currently live on how many phones? Count properly. Include the exes you're no longer on speaking terms with."
       },
       "minAge": 18,
       "tags": ["phone", "sex"]
@@ -1196,8 +1196,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "T'es-tu déjà blessé·e dans un moment intime ? On veut le rapport d'incident complet.",
-        "en": "Ever injured yourself in an intimate moment? We need the full incident report."
+        "fr": "Ta blessure de guerre au lit : c'était quoi, et t'as raconté quoi au médecin ou à tes potes le lendemain ?",
+        "en": "Wounded in action: what was the injury, and what cover story did the doctor — or your mates — get the next day?"
       },
       "minAge": 18,
       "tags": ["sex", "funny"]
@@ -1207,8 +1207,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà embrassé deux personnes différentes dans la même soirée ? Étaient-elles au courant l'une de l'autre ?",
-        "en": "Ever kissed two different people in the same night? Did they know about each other?"
+        "fr": "Deux personnes dans la même soirée : elles l'ont su ? Et la deuxième, elle savait qu'elle était la deuxième ?",
+        "en": "Two people, one night: did they ever find out about each other? And did number two know they were number two?"
       },
       "minAge": 18,
       "tags": ["hookup", "confession"]
@@ -1218,8 +1218,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la chose la plus compromettante dans ta table de chevet en ce moment précis ?",
-        "en": "What's the most incriminating thing in your nightstand at this exact moment?"
+        "fr": "Inventaire complet de ta table de chevet, maintenant. L'objet que tu cites pas, la pièce le devinera — en pire.",
+        "en": "Full inventory of your nightstand, right now. Whatever you leave out, the room will fill in — worse."
       },
       "minAge": 18,
       "tags": ["secrets", "sex"]
@@ -1229,8 +1229,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est le crush le plus interdit que tu aies eu ? Boss, prof, ex d'un·e ami·e : donne au moins la catégorie.",
-        "en": "What's the most off-limits crush you've ever had? Boss, teacher, friend's ex — at least name the category."
+        "fr": "Ton crush le plus interdit de ta vie : le boss, le daron d'un pote, l'ex de ton meilleur ami ? La catégorie et l'année.",
+        "en": "The most off-limits crush of your life: the boss, a mate's parent, your best friend's ex? Category and year, please."
       },
       "minAge": 18,
       "tags": ["crush", "confession"]
@@ -1240,8 +1240,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel ex pourrait encore recevoir un message de toi à 2h du matin dans un moment de faiblesse ? Pas de prénom — juste l'histoire.",
-        "en": "Which ex could still get a 2 a.m. text from you in a weak moment? No names — just the story."
+        "fr": "Quel ex pourrait encore obtenir une réponse de toi à 2h du mat' ? Pas de prénom. Juste combien de fois c'est déjà arrivé.",
+        "en": "Which ex could still get a reply out of you at 2 a.m.? No names. Just tell us how many times it's already happened."
       },
       "minAge": 18,
       "tags": ["ex", "confession"]
@@ -1251,8 +1251,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la chose la plus gênante que tu aies faite après une rupture ? Les playlists dramatiques comptent.",
-        "en": "What's the cringiest thing you did after a breakup? Dramatic playlists count."
+        "fr": "Le truc le plus indigne que t'as fait après une rupture. La playlist triste compte pas — on veut le vrai dossier.",
+        "en": "The single most undignified thing you did after a breakup. The sad playlist doesn't count — we want the real file."
       },
       "minAge": 18,
       "tags": ["ex", "embarrassing"]
@@ -1262,8 +1262,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Si tes ex notaient ta façon d'embrasser, quelle moyenne aurais-tu ? Justifie ta note.",
-        "en": "If your exes rated your kissing, what would your average score be? Defend your rating."
+        "fr": "Tous tes ex se retrouvent et comparent leurs notes sur toi au lit. Ils seraient d'accord sur quoi ? Sois honnête — eux le seraient.",
+        "en": "All your exes meet up and compare notes on you in bed. What's the one thing they'd all agree on? Be honest — they would be."
       },
       "minAge": 18,
       "tags": ["kissing", "funny"]
@@ -1273,8 +1273,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà embrassé quelqu'un en soirée pendant que tout le monde était dans la pièce d'à côté ? Qui a failli vous griller ?",
-        "en": "Ever made out with someone at a party while everyone was in the next room? Who almost caught you?"
+        "fr": "T'as déjà disparu d'une soirée avec quelqu'un pendant que tout le monde était à côté. Quelle pièce, combien de temps, et qui a toqué ?",
+        "en": "You've vanished from a party with someone while everyone was next door. Which room, how long, and who knocked?"
       },
       "minAge": 18,
       "tags": ["party", "hookup"]
@@ -1284,8 +1284,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est le pire timing avec lequel on t'ait déclaré sa flamme — ou avec lequel tu l'aies fait ?",
-        "en": "What's the worst timing for a love confession you've ever given — or received?"
+        "fr": "Le 'je t'aime' au pire timing de l'histoire : en plein acte, à un enterrement, au premier date ? Raconte — et dis de quel côté t'étais.",
+        "en": "The worst-timed 'I love you' in history: mid-act, at a funeral, on a first date? Tell it — and say which side of it you were on."
       },
       "minAge": 18,
       "tags": ["dating", "awkward"]
@@ -1295,8 +1295,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Sois honnête : à quoi sert vraiment ton mode navigation privée ?",
-        "en": "Be honest: what is your incognito mode actually for?"
+        "fr": "On ouvre ta navigation privée maintenant : on tombe sur quoi ? Décris le dernier onglet. La pièce votera si elle te croit.",
+        "en": "We open your incognito tabs right now: what's in there? Describe the most recent one. The room votes on whether it believes you."
       },
       "minAge": 18,
       "tags": ["phone", "sex"]
@@ -1306,8 +1306,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle histoire de date as-tu améliorée de 40% en la racontant à tes amis ? C'est le moment d'avouer la version réelle.",
-        "en": "Which date story did you upgrade by 40% when telling your friends? Time to confess the real version."
+        "fr": "L'histoire de sexe que tu ressors en soirée : c'est quoi le détail complètement inventé dedans ? Ce soir, tu l'avoues.",
+        "en": "That hookup story you always tell at parties: which detail in it is completely made up? Tonight you confess it."
       },
       "minAge": 18,
       "tags": ["dating", "lies"]
@@ -1317,8 +1317,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà eu, même cinq minutes, un mini-crush sur quelqu'un dans cette pièce ? Un simple oui ou non suffit, promis.",
-        "en": "Have you ever — even for five minutes — had a mini-crush on someone in this room? A simple yes or no is enough, promise."
+        "fr": "Quelqu'un dans cette pièce t'a déjà fait de l'effet. Oui ou non. Pas de prénom — ton regard fera le travail tout seul.",
+        "en": "Someone in this room has, at some point, done it for you. Yes or no. No names — your eye contact will do the rest."
       },
       "minAge": 18,
       "tags": ["room", "crush"]
@@ -1328,8 +1328,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est le surnom le plus ridicule qu'on t'ait donné — ou que tu aies donné — dans l'intimité ?",
-        "en": "What's the most ridiculous nickname you've ever been given — or given — in private?"
+        "fr": "Le mauvais prénom au lit : tu l'as sorti, ou on te l'a fait ? Lequel des deux — et la nuit s'est finie comment ?",
+        "en": "The wrong name in bed: did you say it, or did you hear it? Which side were you on — and how did the night end?"
       },
       "minAge": 18,
       "tags": ["sex", "funny"]
@@ -1339,8 +1339,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Combien d'applis de rencontre sont installées sur ton téléphone là, tout de suite ? Vérification possible.",
-        "en": "How many dating apps are on your phone right now, this second? Spot checks are possible."
+        "fr": "Combien d'applis de rencontre sur ton tel, là ? Compte celle que t'as 'supprimée' en gardant le compte. On veut un chiffre, pas une plaidoirie.",
+        "en": "How many dating apps on your phone right now? Include the one you 'deleted' but kept the account for. We want a number, not a defence."
       },
       "minAge": 18,
       "tags": ["apps", "dating"]
@@ -1350,8 +1350,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle phrase de drague complètement clichée a déjà fonctionné sur toi ? Sois honnête.",
-        "en": "What completely clichéd pickup line has actually worked on you? Be honest."
+        "fr": "La technique de drague la plus nulle qui a quand même marché sur toi. Cite la phrase exacte. Et oui — t'es reparti avec.",
+        "en": "The laziest line that still worked on you. Quote it exactly. And yes — you did go home with them."
       },
       "minAge": 18,
       "tags": ["flirting", "confession"]
@@ -1361,8 +1361,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu une playlist 'occasions spéciales' ? Quel est le titre le plus embarrassant dessus ?",
-        "en": "Do you have a 'special occasions' playlist? What's the most embarrassing track on it?"
+        "fr": "T'as une playlist pour le sexe. Donne son nom exact dans l'appli, et le titre le plus honteux dedans.",
+        "en": "You have a sex playlist. Tell us its exact name in the app, and the most shameful track on it."
       },
       "minAge": 18,
       "tags": ["music", "sex"]
@@ -1372,8 +1372,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quand le correcteur automatique a-t-il transformé un de tes messages coquins en catastrophe industrielle ?",
-        "en": "When did autocorrect turn one of your flirty texts into an industrial accident?"
+        "fr": "Ton sexto le plus catastrophique : mauvais mot, mauvais destinataire ou mauvaise photo ? Raconte celui qui te réveille encore la nuit.",
+        "en": "Your most catastrophic sext: wrong word, wrong recipient or wrong photo? Tell the one that still wakes you up at night."
       },
       "minAge": 18,
       "tags": ["phone", "funny"]
@@ -1383,8 +1383,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà croisé les parents de quelqu'un au petit matin sans y être préparé·e ? Décris la poignée de main.",
-        "en": "Ever bumped into someone's parents the morning after, completely unprepared? Describe the handshake."
+        "fr": "Le matin où t'as croisé ses darons en sortant de la chambre : t'avais quoi sur le dos, et ils t'ont dit quoi ? Mot pour mot.",
+        "en": "The morning you met their parents on your way out of the bedroom: what were you wearing, and what did they say? Word for word."
       },
       "minAge": 18,
       "tags": ["hookup", "awkward"]
@@ -1394,8 +1394,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Après ta dernière rupture, combien de temps avant de réinstaller une appli de rencontre ? Réponds en heures si nécessaire.",
-        "en": "After your last breakup, how long before you reinstalled a dating app? Answer in hours if necessary."
+        "fr": "Ta dernière rupture : combien d'heures avant de réinstaller l'appli ? Et combien avant le premier match ? Les deux chiffres.",
+        "en": "Your last breakup: how many hours before the app was back on your phone? And how many before the first match? Both numbers."
       },
       "minAge": 18,
       "tags": ["ex", "apps"]
@@ -1405,8 +1405,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà dit 'd'habitude je ne fais jamais ça'… en sachant très bien que si ?",
-        "en": "Ever said 'I never usually do this'… knowing full well that you very much do?"
+        "fr": "'D'habitude je fais jamais ça' — tu l'as dit combien de fois cette année ? Et c'était vrai combien de fois ? On a déjà la réponse.",
+        "en": "'I never usually do this' — how many times have you said it this year? And how many times was it true? We already know."
       },
       "minAge": 18,
       "tags": ["hookup", "lies"]
@@ -1416,8 +1416,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà embrassé l'ex d'un·e ami·e ? L'ami·e l'a-t-il appris — et comment ?",
-        "en": "Ever kissed a friend's ex? Did the friend find out — and how?"
+        "fr": "T'as déjà pécho l'ex d'un pote. Le pote l'a appris comment — ou est-ce qu'il est en train de l'apprendre, là ?",
+        "en": "You've hooked up with a friend's ex. How did the friend find out — or are they finding out right now?"
       },
       "minAge": 18,
       "tags": ["confession", "friendship"]
@@ -1427,8 +1427,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel est le scénario le plus ridicule qui te fasse secrètement de l'effet ? On promet de ne rire que dix minutes.",
-        "en": "What's the most ridiculous scenario that secretly works for you? We promise to only laugh for ten minutes."
+        "fr": "Le truc le plus ridicule qui te fait vraiment de l'effet. Le vrai. Pas la version présentable — celle que t'as jamais dite à voix haute.",
+        "en": "The most ridiculous thing that genuinely does it for you. The real one. Not the presentable version — the one you've never said out loud."
       },
       "minAge": 18,
       "tags": ["sex", "funny"]
@@ -1438,8 +1438,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà eu une histoire avec un voisin ou un collègue ? À quel point les trajets d'ascenseur sont devenus gênants ?",
-        "en": "Ever had a thing with a neighbor or a coworker? Exactly how awkward did the elevator rides get?"
+        "fr": "Collègue, voisin ou pote de promo : c'était qui, ça a duré combien de temps, et qui a dû déménager — littéralement ou socialement ?",
+        "en": "Coworker, neighbour or coursemate: which was it, how long did it last, and who ended up having to move — literally or socially?"
       },
       "minAge": 18,
       "tags": ["hookup", "awkward"]
@@ -1449,8 +1449,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelle est la chose la plus 'comédie romantique' que tu aies faite en vrai ? Course à l'aéroport acceptée.",
-        "en": "What's the most rom-com thing you've ever done in real life? Airport chases accepted."
+        "fr": "Désigne les deux personnes ici qui ont le plus de chances d'avoir déjà fini dans le même lit sans jamais le dire au groupe. Elles peuvent nier. Personne les croira.",
+        "en": "Point at the two people in this room most likely to have ended up in the same bed and never told the group. They're allowed to deny it. Nobody will believe them."
       },
       "minAge": 18,
       "tags": ["dating", "story"]
@@ -1460,8 +1460,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "As-tu déjà posté une story uniquement pour qu'UNE personne précise la voie ? A-t-elle réagi ?",
-        "en": "Ever posted a story purely so ONE specific person would see it? Did they react?"
+        "fr": "Une vidéo de toi existe quelque part. Tournée avec qui — et t'es sûr à combien de pour cent qu'elle a jamais bougé de ce téléphone ?",
+        "en": "There is a video of you somewhere. Filmed with who — and what percentage sure are you that it never left that phone?"
       },
       "minAge": 18,
       "tags": ["social-media", "crush"]
@@ -1471,8 +1471,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quel rencard ou quelle nuit vit officiellement dans ton dossier 'on n'en parle plus jamais' ? Tu viens d'en parler.",
-        "en": "Which date or night lives officially in your 'we never speak of this' folder? You're speaking of it now."
+        "fr": "Ta nuit classée 'on n'en reparle JAMAIS' : donne juste la ville et l'année. La pièce reconstituera le reste — et quelqu'un ici connaît déjà la vraie version.",
+        "en": "Your 'we never speak of this again' night: just give the city and the year. The room will reconstruct the rest — and someone here already knows the real version."
       },
       "minAge": 18,
       "tags": ["hookup", "confession"]
@@ -1482,8 +1482,8 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Raconte la partie la plus drôle — et seulement la plus drôle — de ta première fois.",
-        "en": "Tell us the funniest part — and only the funniest part — of your first time."
+        "fr": "Ta première fois : juste le moment le plus gênant. Pas l'histoire entière — la seconde précise où t'aurais voulu disparaître.",
+        "en": "Your first time: just the single most embarrassing beat. Not the whole story — the exact second you wanted the floor to swallow you."
       },
       "minAge": 18,
       "tags": ["sex", "story"]
@@ -1493,8 +1493,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : parle avec l'accent de ton choix jusqu'à ton prochain tour.",
-        "en": "No answer? Forfeit: speak in an accent of your choice until your next turn."
+        "fr": "Pas de réponse ? Gage : imite quelqu'un de cette pièce jusqu'à ce que le groupe devine qui. Plus c'est long, plus c'est gênant pour vous deux.",
+        "en": "No answer? Forfeit: impersonate someone in this room until the group guesses who. The longer it takes, the worse it gets for both of you."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1504,8 +1504,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : parle de toi à la troisième personne jusqu'à ton prochain tour.",
-        "en": "No answer? Forfeit: talk about yourself in the third person until your next turn."
+        "fr": "Pas de réponse ? Gage : parle de toi à la troisième personne jusqu'à ton prochain tour. Oui, comme un footballeur en conf de presse. Non, ça te rendra pas stylé.",
+        "en": "No answer? Forfeit: speak about yourself in the third person until your next turn. Yes, like a footballer at a press conference. No, it will not make you cool."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1515,8 +1515,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : chante ta prochaine phrase comme à l'opéra. Vibrato obligatoire.",
-        "en": "No answer? Forfeit: sing your next sentence opera-style. Vibrato mandatory."
+        "fr": "Pas de réponse ? Gage : lis le dernier message de ton groupe WhatsApp familial à voix haute — avec la voix de la personne qui l'a envoyé.",
+        "en": "No answer? Forfeit: read the latest message from your family group chat out loud — in the sender's voice."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1526,8 +1526,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : fais ta meilleure imitation de méchant de film pendant 10 secondes.",
-        "en": "No answer? Forfeit: do your best movie-villain impression for 10 seconds."
+        "fr": "Pas de réponse ? Gage : présente des excuses solennelles à quelqu'un ici pour un truc que t'as jamais avoué. Interdiction de dire quoi.",
+        "en": "No answer? Forfeit: deliver a formal public apology to someone in this room for something you never confessed. You are not allowed to say what."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1537,8 +1537,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : solo d'air guitar de 10 secondes, avec le visage qui va avec.",
-        "en": "No answer? Forfeit: 10-second air-guitar solo, complete with the face."
+        "fr": "Pas de réponse ? Gage : rédige à voix haute l'annonce Leboncoin de la personne à ta gauche. État général, défauts visibles, prix. Elle écoute.",
+        "en": "No answer? Forfeit: write the eBay listing for the person on your left, out loud. Condition: used. Visible defects, starting price, reason for sale. They're listening."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1548,8 +1548,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : rejoue ta dernière réaction au ralenti, bruitages inclus.",
-        "en": "No answer? Forfeit: replay your last reaction in slow motion, sound effects included."
+        "fr": "Pas de réponse ? Gage : refais ta démarche d'arrivée en soirée — celle quand tu sais qu'on te regarde. Aller-retour. Le groupe note sur 10.",
+        "en": "No answer? Forfeit: do your walking-into-the-party walk — the one you use when you know people are watching. There and back. The group scores it out of 10."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1559,8 +1559,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : fais un compliment sincère à chaque joueur en moins de 20 secondes. Top chrono.",
-        "en": "No answer? Forfeit: give every player a genuine compliment in under 20 seconds. Clock's running."
+        "fr": "Pas de réponse ? Gage : décris chaque personne ici en UN mot. Pas deux. Les concernés encaissent en silence.",
+        "en": "No answer? Forfeit: describe everyone in this room in ONE word each. Not two. Recipients must take it in silence."
       },
       "minAge": 0,
       "tags": ["forfeit", "wholesome"]
@@ -1570,8 +1570,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : récite l'alphabet à l'envers aussi loin que possible en 10 secondes.",
-        "en": "No answer? Forfeit: recite the alphabet backwards as far as you can in 10 seconds."
+        "fr": "Pas de réponse ? Gage : défends ta pire opinion bouffe — la vraie — pendant 15 secondes comme si ta vie en dépendait. Le groupe a le droit de huer.",
+        "en": "No answer? Forfeit: defend your worst food opinion — the real one — for 15 seconds like your life depends on it. Booing is permitted."
       },
       "minAge": 0,
       "tags": ["forfeit", "challenge"]
@@ -1581,8 +1581,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : présente la météo de la pièce comme un vrai bulletin télé pendant 15 secondes.",
-        "en": "No answer? Forfeit: deliver a 15-second TV weather report about this room."
+        "fr": "Pas de réponse ? Gage : le groupe choisit deux personnes ici. Tu déclares laquelle a le meilleur goût musical. En les regardant dans les yeux.",
+        "en": "No answer? Forfeit: the group picks two people in this room. You declare which one has better music taste. While holding eye contact."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1592,8 +1592,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : prends la pose la plus dramatique possible et tiens-la 10 secondes sans rire.",
-        "en": "No answer? Forfeit: strike your most dramatic pose and hold it for 10 seconds without laughing."
+        "fr": "Pas de réponse ? Gage : fais ta tête exacte quand tu reçois un 'faut qu'on parle'. Tiens-la 10 secondes. On veut la vraie.",
+        "en": "No answer? Forfeit: make your exact face when a text says 'we need to talk'. Hold it for 10 seconds. We want the real one."
       },
       "minAge": 0,
       "tags": ["forfeit", "challenge"]
@@ -1603,8 +1603,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : raconte une blague. Si personne ne rit, salue quand même.",
-        "en": "No answer? Forfeit: tell a joke. If nobody laughs, take a bow anyway."
+        "fr": "Pas de réponse ? Gage : sors ta meilleure blague. Si personne rit, tu perds le droit de te dire drôle jusqu'à la fin de la soirée. Le groupe fera respecter la sentence.",
+        "en": "No answer? Forfeit: tell your best joke. If nobody laughs, you lose the right to call yourself funny for the rest of the night. The group will enforce this."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1614,8 +1614,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : commente le tour du prochain joueur comme un commentateur sportif en pleine finale.",
-        "en": "No answer? Forfeit: narrate the next player's turn like a sports commentator calling a championship final."
+        "fr": "Pas de réponse ? Gage : commente le tour du prochain joueur comme un consultant foot en fin de carrière qui en a plus rien à faire. Jusqu'au bout.",
+        "en": "No answer? Forfeit: commentate the next player's turn like a washed-up pundit who stopped caring in 2019. All the way to the end."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1625,8 +1625,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : imite l'animal choisi par le groupe pendant 10 secondes. Le groupe sera sans pitié.",
-        "en": "No answer? Forfeit: impersonate the animal the group picks, for 10 seconds. The group will show no mercy."
+        "fr": "Pas de réponse ? Gage : ton autoportrait en 3 défauts, à voix haute, sans sourire. Le groupe a le droit d'en corriger UN.",
+        "en": "No answer? Forfeit: describe yourself in 3 flaws, out loud, straight-faced. The group may correct exactly ONE of them."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1636,8 +1636,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : termine chacune de tes phrases par 'bloop' jusqu'à ton prochain tour.",
-        "en": "No answer? Forfeit: end every sentence with 'bloop' until your next turn."
+        "fr": "Pas de réponse ? Gage : termine chaque phrase par 'bloop' jusqu'à ton prochain tour. Si t'oublies, ça repart de zéro. Le groupe adore quand t'oublies.",
+        "en": "No answer? Forfeit: end every sentence with 'bloop' until your next turn. Forget once and it resets. The group loves it when you forget."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1647,8 +1647,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : d'ici la fin de la partie, fais trois sursauts de telenovela sur commande du groupe.",
-        "en": "No answer? Forfeit: before the game ends, deliver three telenovela gasps on the group's command."
+        "fr": "Pas de réponse ? Gage : rejoue ta dernière embrouille de coloc ou de couple — les deux rôles, les deux voix, 20 secondes. On verra très bien si t'adoucis ton perso.",
+        "en": "No answer? Forfeit: re-enact your last flatmate or relationship argument — both roles, both voices, 20 seconds. We will absolutely notice if you soften your own part."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1658,8 +1658,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : vends la prochaine soirée du groupe comme un téléachat pendant 15 secondes.",
-        "en": "No answer? Forfeit: pitch the group's next hangout like a 15-second infomercial."
+        "fr": "Pas de réponse ? Gage : fais un discours d'adieu de 15 secondes à la personne en face, comme si elle partait vivre très loin et que t'étais surtout soulagé.",
+        "en": "No answer? Forfeit: give the person opposite you a 15-second farewell speech, as if they're moving very far away and you're mostly relieved."
       },
       "minAge": 0,
       "tags": ["forfeit", "performance"]
@@ -1669,8 +1669,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : parle uniquement en chuchotant dramatiquement jusqu'à ton prochain tour.",
-        "en": "No answer? Forfeit: speak only in a dramatic whisper until your next turn."
+        "fr": "Pas de réponse ? Gage : jusqu'à ton prochain tour, applaudis poliment — genre vernissage — tout ce que les autres disent. Absolument tout.",
+        "en": "No answer? Forfeit: until your next turn, golf-clap everything anyone says. Everything."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1680,8 +1680,8 @@
       "choice": "dare",
       "intensity": "soft",
       "text": {
-        "fr": "Pas de réponse ? Gage : voix de robot jusqu'à ton prochain tour. Mode économie d'énergie interdit.",
-        "en": "No answer? Forfeit: robot voice until your next turn. Power-saving mode not allowed."
+        "fr": "Pas de réponse ? Gage : le groupe invente le rêve que t'as fait cette nuit. Tu le racontes à la première personne et tu le défends comme un vrai souvenir.",
+        "en": "No answer? Forfeit: the group invents the dream you had last night. You retell it in first person and defend it as a genuine memory."
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
@@ -1691,8 +1691,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée ! Une seule — on est là pour rire, pas pour finir sous la table.",
-        "en": "No answer? One sip! Just one — we're here to laugh, not to end up under the table."
+        "fr": "Pas de réponse ? Une gorgée. La question reste sans réponse — ta tête, elle, a déjà tout dit.",
+        "en": "No answer? One sip. The question goes unanswered. Your face, however, answered in full."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1702,8 +1702,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée pour le mystère ! Ton secret survit un tour de plus.",
-        "en": "One sip for the mystery! Your secret lives to see another round."
+        "fr": "Une gorgée pour le mystère. La pièce est déjà en train d'écrire une version bien pire — et c'est celle-là qu'on retiendra.",
+        "en": "One sip for the mystery. The room is already drafting a much worse version — and that's the one going in the records."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1713,8 +1713,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée. Quelque part, un présentateur de télé-réalité est fier de toi.",
-        "en": "No answer? One sip. Somewhere out there, a reality-TV host is proud of you."
+        "fr": "Pas de réponse ? Une gorgée. Le groupe est prié de reposer cette question plus tard dans la soirée, sans prévenir.",
+        "en": "No answer? One sip. The group is instructed to re-ask this question later tonight, without warning."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1724,8 +1724,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée, une seule. Santé à ta vie privée, championne invaincue de la soirée.",
-        "en": "One sip, just one. Here's to your privacy, tonight's undefeated champion."
+        "fr": "Une gorgée, une seule. Santé à ta vie privée — la seule ici qui sortira indemne de la soirée.",
+        "en": "One sip, just one. To your privacy — the only thing in this room getting out unharmed."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1735,8 +1735,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée diplomatique : tu ne confirmes rien, tu ne nies rien.",
-        "en": "One diplomatic sip: you confirm nothing, you deny nothing."
+        "fr": "Une gorgée diplomatique : tu confirmes rien, tu nies rien. Le groupe note quand même que les innocents, d'habitude, répondent.",
+        "en": "One diplomatic sip: confirm nothing, deny nothing. The group simply notes that innocent people usually just answer."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1746,8 +1746,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Le silence a un prix : une gorgée. Le groupe imagine déjà bien pire que la vérité.",
-        "en": "Silence has a price: one sip. The group is already imagining something way worse than the truth."
+        "fr": "Le silence coûte une gorgée. La vérité aurait coûté moins cher — donc elle valait plus. Tout le monde a fait le calcul.",
+        "en": "Silence costs one sip. The truth was cheaper — so it must be worth more. Everyone here just did that maths."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1757,8 +1757,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée ! Et prends un verre d'eau au prochain tour — l'hydratation, c'est un trait de personnalité qu'on respecte.",
-        "en": "One sip! And grab some water next round — hydration is a personality trait we respect."
+        "fr": "Une gorgée. T'as choisi l'alcool plutôt que tes potes. C'est noté. Par tout le monde.",
+        "en": "One sip. You chose alcohol over your friends. Noted. By everyone."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1768,8 +1768,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une petite gorgée et on passe. Mais sache que tes sourcils ont déjà répondu.",
-        "en": "One small sip and we move on. Just know your eyebrows already answered."
+        "fr": "Une petite gorgée et on passe. Tes sourcils, eux, ont déjà signé des aveux complets.",
+        "en": "One small sip and we move on. Your eyebrows have already signed a full confession."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1779,8 +1779,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée pour l'esquive ! Élégant. Suspect, mais élégant.",
-        "en": "One sip for the dodge! Classy. Suspicious, but classy."
+        "fr": "Une gorgée pour l'esquive. Élégant. Coupable, mais élégant.",
+        "en": "One sip for the dodge. Classy. Guilty, but classy."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1790,8 +1790,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Verdict : une gorgée. La cour note que l'accusé·e préfère boire que parler.",
-        "en": "Verdict: one sip. The court notes the defendant would rather drink than talk."
+        "fr": "Verdict : une gorgée. La cour rappelle que seuls les coupables paient pour se taire.",
+        "en": "Verdict: one sip. The court reminds the jury that only guilty people pay for silence."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1801,8 +1801,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée — et le soft compte autant que le reste. L'esquive n'a pas de degré d'alcool minimum.",
-        "en": "One sip — and soft drinks count just the same. Dodging has no minimum alcohol content."
+        "fr": "Une gorgée — le soft compte pareil. C'est l'esquive qu'on juge ici, pas le degré.",
+        "en": "One sip — soft drinks count the same. It's the dodge on trial here, not the percentage."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1812,8 +1812,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée, et lève ton verre à celles et ceux qui ont osé répondre avant toi.",
-        "en": "One sip — and raise your glass to everyone brave enough to actually answer before you."
+        "fr": "Une gorgée. Lève ton verre à ceux qui ont répondu avant toi — eux, ils avaient rien à cacher. Enfin, askip.",
+        "en": "One sip. Raise your glass to everyone who answered before you — they had nothing to hide. Allegedly."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1823,8 +1823,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée. On t'a connu·e plus bavard·e.",
-        "en": "No answer? One sip. You've definitely been chattier."
+        "fr": "Pas de réponse ? Une gorgée. Marrant — t'étais beaucoup plus bavard sur les questions des autres.",
+        "en": "No answer? One sip. Funny — you had plenty to say during everyone else's questions."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1834,8 +1834,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée de réflexion. La question, elle, reviendra peut-être un jour…",
-        "en": "One thoughtful sip. The question, meanwhile, may return one day…"
+        "fr": "Une gorgée de réflexion. La question, elle, reste dans la pièce. Elle a toute la nuit.",
+        "en": "One thoughtful sip. The question stays in the room. It has all night."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1845,8 +1845,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée ! Le groupe accepte ce paiement, mais exige des intérêts en potins plus tard dans la soirée.",
-        "en": "One sip! The group accepts this payment but expects interest paid in gossip later tonight."
+        "fr": "Une gorgée. Paiement accepté — avec intérêts : tu dois un potin au groupe avant la fin de la soirée. T'as une dette, maintenant.",
+        "en": "One sip. Payment accepted — with interest: you owe the group one piece of gossip before the night ends. You're in debt now."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1856,8 +1856,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une seule gorgée — c'est un jeu, pas un concours. Les vrais points sont dans les réponses.",
-        "en": "Just one sip — it's a game, not a contest. The real points are in the answers."
+        "fr": "Une gorgée. Répondre rapportait plus de points. Donc ce que tu caches vaut plus que des points. Très intéressant.",
+        "en": "One sip. Answering paid better. So whatever you're hiding is worth more than points. Very interesting."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1867,8 +1867,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée mystérieuse. Quelque part, la vérité pleure doucement.",
-        "en": "One mysterious sip. Somewhere out there, the truth is quietly sobbing."
+        "fr": "Une gorgée mystérieuse. T'inquiète : ça reste entre nous quinze.",
+        "en": "One mysterious sip. Don't worry — this stays between the twelve of us."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1878,8 +1878,8 @@
       "choice": "dare",
       "intensity": "party",
       "text": {
-        "fr": "Une gorgée et c'est réglé. Ton avocat t'aurait conseillé exactement pareil.",
-        "en": "One sip and it's settled. Your lawyer would have advised the exact same thing."
+        "fr": "Une gorgée et c'est réglé. Ton avocat aurait conseillé pareil — et c'est exactement ça qui t'enfonce.",
+        "en": "One sip and it's settled. Your lawyer would've advised the same — which is precisely what makes you look worse."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1889,8 +1889,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée ! Certaines histoires sont réservées au groupe privé, pas au groupe entier.",
-        "en": "One sip! Some stories are for the group chat, not the whole group."
+        "fr": "Une gorgée. Y'a des dossiers pour le groupe privé, pas pour le groupe entier. On sait désormais qu'un dossier existe.",
+        "en": "One sip. Some stories are for the group chat, not the whole group. We now know the story exists."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1900,8 +1900,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée — cette question reviendra hanter quelqu'un d'autre.",
-        "en": "No answer? One sip — that question will be back to haunt somebody else."
+        "fr": "Pas de réponse ? Une gorgée. Cette question est pas morte — elle attend juste quelqu'un de moins lâche.",
+        "en": "No answer? One sip. That question isn't dead — it's just waiting for somebody braver."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1911,8 +1911,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée pudique. Ce que la pièce ne saura pas, la pièce l'inventera.",
-        "en": "One modest sip. Whatever the room doesn't learn, the room will invent."
+        "fr": "Une gorgée pudique. Ce que la pièce apprend pas, la pièce l'invente — et la pièce censure jamais rien.",
+        "en": "One modest sip. Whatever the room doesn't learn, the room invents — director's cut, obviously."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1922,8 +1922,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée ! Ton historique de navigation te remercie pour ta loyauté.",
-        "en": "One sip! Your search history thanks you for your loyalty."
+        "fr": "Une gorgée. Ton onglet privé te remercie pour ta loyauté. Lui au moins sait exactement ce que tu protèges.",
+        "en": "One sip. Your incognito tab thanks you for your loyalty. It knows exactly what you're protecting."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1933,8 +1933,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée — et ce petit sourire en coin que tu fais là ? Il en dit déjà beaucoup trop.",
-        "en": "One sip — and that little smirk you're doing right now? It's already saying way too much."
+        "fr": "Une gorgée — et ce petit sourire en coin, là ? C'est lui qu'on interrogera au prochain tour.",
+        "en": "One sip — and that little smirk? The smirk gets questioned next round."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1944,8 +1944,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée stratégique. Quelqu'un dans cette pièce vient de pousser un grand soupir de soulagement.",
-        "en": "One strategic sip. Somebody in this room just exhaled in deep, deep relief."
+        "fr": "Une gorgée stratégique. Quelqu'un dans cette pièce vient de se remettre à respirer. Trouvez qui.",
+        "en": "One strategic sip. Somebody in this room just remembered how to breathe. Find them."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1955,8 +1955,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée. Le rougissement, lui, était offert par la maison.",
-        "en": "No answer? One sip. The blushing, however, was on the house."
+        "fr": "Pas de réponse ? Une gorgée. Le rougissement, lui, était gratuit — et beaucoup plus bavard que toi.",
+        "en": "No answer? One sip. The blushing was free — and considerably more talkative than you."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1966,8 +1966,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée pour acheter le silence. Le groupe accepte — mais n'oubliera jamais la tête que tu viens de faire.",
-        "en": "One sip to buy your silence. The group accepts — but will never forget the face you just made."
+        "fr": "Une gorgée pour acheter le silence. Vendu. La tête que tu viens de faire part direct aux archives du groupe.",
+        "en": "One sip to buy your silence. Sold. The face you just made goes straight into the group's permanent archive."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1977,8 +1977,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée ! On respecte. Ce dossier-là restera classé confidentiel.",
-        "en": "One sip! Respect. That particular file stays classified."
+        "fr": "Une gorgée. Dossier classé confidentiel. Marrant — c'est toujours les dossiers classés qui finissent par fuiter.",
+        "en": "One sip. File classified. Funny how it's always the classified ones that end up leaking."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1988,8 +1988,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée — et tes ex, où qu'ils soient, viennent de sentir qu'on a failli parler d'eux.",
-        "en": "One sip — and your exes, wherever they are, just felt that we almost talked about them."
+        "fr": "Une gorgée — et quelque part, un ex vient de frissonner sans comprendre pourquoi. Cette question-là, il aurait su y répondre.",
+        "en": "One sip — and somewhere, an ex just shivered without knowing why. They could've answered this one for you."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -1999,8 +1999,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée de droit au silence, version apéro.",
-        "en": "One sip of the fifth amendment, happy-hour edition."
+        "fr": "Une gorgée de droit au silence, version apéro. Petit rappel : personne l'invoque sans une bonne raison.",
+        "en": "One sip of 'no comment', happy-hour edition. Small reminder: nobody goes no-comment without a reason."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2010,8 +2010,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée. La vérité était visiblement trop chaude pour ce salon.",
-        "en": "One sip. The truth was clearly too hot for this living room."
+        "fr": "Une gorgée. Trop chaud pour ce salon, donc. On retient surtout que t'as vécu des choses.",
+        "en": "One sip. Too hot for this living room, then. Noted for the record: you have lived."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2021,8 +2021,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée et un secret bien gardé. Ton futur biographe est furieux.",
-        "en": "One sip and a secret kept. Your future biographer is furious."
+        "fr": "Une gorgée et un secret gardé. Ton futur biographe est furieux. Tes ex, très soulagés.",
+        "en": "One sip and a secret kept. Your future biographer is furious. Your exes are deeply relieved."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2032,8 +2032,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Pas de réponse ? Une gorgée — et bois un peu d'eau après. Les légendes restent hydratées.",
-        "en": "No answer? One sip — then have some water. Legends stay hydrated."
+        "fr": "Pas de réponse ? Une gorgée. T'as regardé la question, t'as regardé ta vie, et t'as choisi le verre. C'est une réponse, ça aussi.",
+        "en": "No answer? One sip. You looked at the question, you looked at your life, and you picked the glass. That's also an answer."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2043,8 +2043,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée. Ce silence vaut mille captures d'écran.",
-        "en": "One sip. That silence is worth a thousand screenshots."
+        "fr": "Une gorgée. Ce silence vaut mille captures d'écran — et ce groupe supprime jamais rien.",
+        "en": "One sip. That silence is worth a thousand screenshots — and this group never deletes anything."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2054,8 +2054,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée théâtrale, s'il te plaît. Si tu dois esquiver, esquive avec panache.",
-        "en": "One theatrical sip, please. If you must dodge, dodge with flair."
+        "fr": "Une gorgée théâtrale, s'il te plaît. Si tu dois esquiver, esquive avec panache — c'est tout ce qu'il te reste.",
+        "en": "One theatrical sip, please. If you must dodge, dodge with style — it's all you have left."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2065,8 +2065,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée — et pour info, la question n'était même pas si terrible. Ton imagination a fait tout le reste.",
-        "en": "One sip — and for the record, the question wasn't even that bad. Your imagination did all the rest."
+        "fr": "Une gorgée — et franchement, la question était gentille. C'est ton imagination qui vient de te balancer.",
+        "en": "One sip — and honestly, the question was tame. Your own imagination just snitched on you."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]
@@ -2076,8 +2076,8 @@
       "choice": "dare",
       "intensity": "spicy",
       "text": {
-        "fr": "Une gorgée, une seule, et le dossier est scellé. Jusqu'à la prochaine partie.",
-        "en": "One sip — just one — and the file is sealed. Until the next game."
+        "fr": "Une gorgée, une seule, et le dossier est scellé. Jusqu'à 1h du mat', quand quelqu'un le rouvrira. Quelqu'un le rouvrira.",
+        "en": "One sip — just one — and the file is sealed. Until around 1 a.m., when somebody reopens it. Somebody will."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]

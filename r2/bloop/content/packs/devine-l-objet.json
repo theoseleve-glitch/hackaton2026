@@ -5,1080 +5,1080 @@
   "items": [
     {
       "id": "obj-easy-001",
-      "object": { "fr": "une brosse à dents", "en": "a toothbrush" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "la brosse à dents partagée une fois en festival. Les deux personnes concernées sont peut-être dans cette pièce.", "en": "the toothbrush that got shared at a festival. both parties involved may be in this room." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-002",
-      "object": { "fr": "une télécommande", "en": "a TV remote" },
-      "category": { "fr": "Salon", "en": "Living room" },
+      "object": { "fr": "la télécommande disparue dans le canapé. Quelqu'un ici est assis dessus et participe aux recherches.", "en": "the TV remote lost in the sofa. someone in this room is sitting on it and loudly helping with the search." },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-003",
-      "object": { "fr": "une fourchette", "en": "a fork" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la fourchette qui racle le pot de Nutella d'un coloc. Étiqueté à son prénom. Raclé quand même.", "en": "the fork going through the flatmate's clearly labelled peanut butter at 2 a.m." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-004",
-      "object": { "fr": "un parapluie", "en": "an umbrella" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "le parapluie retourné une fois, exécuté sur place dans une poubelle publique", "en": "the umbrella that flipped once and got rammed into a public bin with real anger" },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
       "difficulty": "easy",
       "tags": ["household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-005",
-      "object": { "fr": "un oreiller", "en": "a pillow" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "l'oreiller côté frais, arraché sous la tête de quelqu'un qui dormait. Le voleur est ici et dort très bien depuis.", "en": "the pillow yanked from under a sleeping person's head for the cold side. the thief is in this room and sleeps great." },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-006",
-      "object": { "fr": "des lunettes de soleil", "en": "a pair of sunglasses" },
-      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "object": { "fr": "les lunettes de soleil portées en intérieur pour esquiver quelqu'un à qui tu dois 20 balles", "en": "the sunglasses worn indoors to dodge someone you owe £20" },
+      "category": { "fr": "Fond de sac", "en": "Bottom of the bag" },
       "difficulty": "easy",
       "tags": ["funny", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-007",
-      "object": { "fr": "une guitare", "en": "a guitar" },
-      "category": { "fr": "Musique", "en": "Music" },
+      "object": { "fr": "la guitare sortie à 1 h du mat par le mec que personne a invité. Quatre accords. Il en maîtrise deux.", "en": "the acoustic guitar that comes out at 1 a.m. it's always Wonderwall. nobody asked." },
+      "category": { "fr": "Concert non sollicité", "en": "Unsolicited concert" },
       "difficulty": "easy",
       "tags": ["music", "party"],
       "spicy": 0
     },
     {
       "id": "obj-easy-008",
-      "object": { "fr": "un balai", "en": "a broom" },
-      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "object": { "fr": "le balai qui sort cinq minutes avant ta daronne et plus jamais entre ses visites", "en": "the broom that only moves when your mum's car pulls into the street" },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "easy",
       "tags": ["household", "cleaning"],
       "spicy": 0
     },
     {
       "id": "obj-easy-009",
-      "object": { "fr": "un miroir", "en": "a mirror" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "le miroir qui t'a vu gagner 40 disputes que t'oseras jamais lancer en vrai", "en": "the mirror that's watched you win 40 arguments you'll never have the guts to start" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-010",
-      "object": { "fr": "un trousseau de clés", "en": "a bunch of keys" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "les clés que t'as accusé tout le monde d'avoir déplacées. Elles étaient dans ta poche.", "en": "the keys you accused the entire flat of moving. they were in your pocket." },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-011",
-      "object": { "fr": "un verre de vin", "en": "a wine glass" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le verre posé en équilibre sur l'enceinte. Le proprio a dit « attention » deux fois. Il n'y aura pas de troisième.", "en": "the glass balanced on the speaker. the owner said 'careful' twice. there will not be a third." },
+      "category": { "fr": "Vestiges de soirée", "en": "Party damage" },
       "difficulty": "easy",
       "tags": ["party", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-012",
-      "object": { "fr": "une chaussette", "en": "a sock" },
-      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "object": { "fr": "la chaussette seule gardée depuis 2021 au cas où l'autre revienne. L'autre a refait sa vie chez quelqu'un d'autre.", "en": "the single sock kept since 2021 in case its twin comes back. the twin has a new family now. move on." },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
       "difficulty": "easy",
       "tags": ["clothing", "funny", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-013",
-      "object": { "fr": "un sèche-cheveux", "en": "a hair dryer" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le sèche-cheveux de 6 h 30 utilisé par quelqu'un qui sait très bien que vous dormez tous", "en": "the hair dryer at 6:30 a.m., used by someone who knows exactly what they're doing" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["bathroom", "household"],
       "spicy": 0
     },
     {
       "id": "obj-easy-014",
-      "object": { "fr": "un livre", "en": "a book" },
-      "category": { "fr": "Salon", "en": "Living room" },
+      "object": { "fr": "le livre que tu cites en soirée. T'en es à la page 12.", "en": "the book you quote at parties. you're on page 12." },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-015",
-      "object": { "fr": "une bougie", "en": "a candle" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la bougie allumée en urgence pour étouffer une odeur. Personne pose la question. Tout le monde connaît la réponse.", "en": "the candle lit at speed to smother a smell. nobody asks. everybody knows." },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "easy",
       "tags": ["decor", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-016",
-      "object": { "fr": "des écouteurs", "en": "a pair of earphones" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "l'écouteur prêté encore tiède, remis direct dans l'oreille. Quelqu'un ici l'a fait ce soir même et n'a rien ressenti.", "en": "the borrowed earbud, still warm, straight in the ear. someone in this room did it tonight and felt nothing." },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "easy",
       "tags": ["tech", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-017",
-      "object": { "fr": "une casserole", "en": "a saucepan" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la casserole de pâtes au beurre du 28 du mois, mangée debout au-dessus de l'évier", "en": "the saucepan of plain pasta eaten standing over the sink on the 28th of the month" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "household"],
       "spicy": 0
     },
     {
       "id": "obj-easy-018",
-      "object": { "fr": "une paire de ciseaux", "en": "a pair of scissors" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "les ciseaux de la frange de 2 h du mat. Quelqu'un ici a gardé les photos.", "en": "the scissors behind the 2 a.m. fringe. someone here still has the photos." },
+      "category": { "fr": "Crise capillaire", "en": "Haircut crisis" },
       "difficulty": "easy",
       "tags": ["office", "household"],
       "spicy": 0
     },
     {
       "id": "obj-easy-019",
-      "object": { "fr": "une brosse à cheveux", "en": "a hairbrush" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "la brosse à cheveux micro, surprise en plein refrain. Le coloc a filmé. Il attend le bon moment.", "en": "the hairbrush microphone, caught mid key change. the flatmate filmed it and is waiting for the right moment." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["bathroom", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-020",
-      "object": { "fr": "un canapé", "en": "a sofa" },
-      "category": { "fr": "Salon", "en": "Living room" },
+      "object": { "fr": "le canapé qui détient plus d'argent que ton Livret A", "en": "the sofa currently holding more money than your savings account" },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-021",
-      "object": { "fr": "un ventilateur", "en": "a fan" },
-      "category": { "fr": "Électroménager", "en": "Appliances" },
+      "object": { "fr": "le ventilateur acheté 90 balles à un inconnu de Leboncoin au pic de la canicule. Sans facture. Sans regrets.", "en": "the fan bought for £80 in a stranger's driveway at the peak of the heatwave. no receipt. no regrets." },
+      "category": { "fr": "Machines fatiguées", "en": "Tired appliances" },
       "difficulty": "easy",
       "tags": ["household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-022",
-      "object": { "fr": "un grille-pain", "en": "a toaster" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le grille-pain retrouvé réglé à fond. Deux toasts sacrifiés. Le saboteur est dans cette pièce et n'a jamais avoué.", "en": "the toaster found cranked to max. two slices lost. the saboteur is in this room and has never confessed." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-023",
-      "object": { "fr": "un tube de dentifrice", "en": "a tube of toothpaste" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le tube de dentifrice découpé aux ciseaux le 25 du mois. Dix jours de réserves planquées, le traître.", "en": "the toothpaste tube cut open with scissors on the 25th of the month. ten secret days of paste in there. it was holding out on you." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["bathroom", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-024",
-      "object": { "fr": "un ballon de baudruche", "en": "a balloon" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le ballon d'anniv que plus personne ose crever. Trois semaines. Il en sait trop maintenant.", "en": "the birthday balloon nobody has the heart to pop. three weeks now. it knows too much." },
+      "category": { "fr": "Vestiges de soirée", "en": "Party damage" },
       "difficulty": "easy",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-025",
-      "object": { "fr": "un chargeur de téléphone", "en": "a phone charger" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "le chargeur « je te le rends tout à l'heure ». C'était en mars. Il est dans cette pièce.", "en": "the charger 'borrowed for five minutes' in March. it is currently in this room." },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "easy",
       "tags": ["tech", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-026",
-      "object": { "fr": "une tasse de café", "en": "a coffee mug" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la tasse de mardi devenue un projet de biologie. La coloc organise un vote pour désigner qui la touche.", "en": "the mug from Tuesday that's now a biology project. the flat is holding a vote on who has to touch it." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-027",
-      "object": { "fr": "une plante verte", "en": "a houseplant" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la plante verte arrosée trois fois par an, seule survivante de quatre colocs qui avaient juré de s'en occuper", "en": "the houseplant watered three times a year, sole survivor of four flatmates who all swore they'd take care of it" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "easy",
       "tags": ["decor", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-028",
-      "object": { "fr": "un aspirateur", "en": "a vacuum cleaner" },
-      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "object": { "fr": "l'aspirateur passé en sprint pendant que les invités cherchent une place pour se garer", "en": "the vacuum doing one frantic lap while the guests are still parking the car" },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "easy",
       "tags": ["household", "cleaning", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-029",
-      "object": { "fr": "un coussin", "en": "a cushion" },
-      "category": { "fr": "Salon", "en": "Living room" },
+      "object": { "fr": "le coussin lancé en pleine tête par celui qui était en train de perdre le débat. Fin du débat.", "en": "the cushion thrown at full force by whoever was losing the argument. argument over, apparently." },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-030",
-      "object": { "fr": "un frigo", "en": "a fridge" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le frigo ouvert pour la sixième fois, comme si la situation avait évolué", "en": "the fridge opened for the sixth time like something new spawned in there" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-031",
-      "object": { "fr": "une couverture", "en": "a blanket" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "la couverture sous laquelle t'as envoyé « je suis chaud demain » sans aucune intention de venir", "en": "the blanket you texted 'yeah i'm still coming' from. you were never coming." },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-032",
-      "object": { "fr": "un stylo", "en": "a pen" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "le stylo mort remis dans le pot pour devenir le problème de quelqu'un d'autre. Quatre fois aujourd'hui. Le même stylo.", "en": "the dead pen put back in the pot to become someone else's problem. four times today. same pen." },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
       "difficulty": "easy",
       "tags": ["office", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-033",
-      "object": { "fr": "une horloge murale", "en": "a wall clock" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "l'horloge arrêtée depuis 2019, citée comme excuse officielle dans au moins quatre retards", "en": "the wall clock dead since 2019, entered as evidence in at least four lateness trials" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "easy",
       "tags": ["decor"],
       "spicy": 0
     },
     {
       "id": "obj-easy-034",
-      "object": { "fr": "une paille", "en": "a drinking straw" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "la paille qui racle le fond du gobelet pile pendant l'annonce de la rupture", "en": "the straw doing the empty-cup noise right as someone announces the breakup" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["party", "kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-easy-035",
-      "object": { "fr": "un savon", "en": "a bar of soap" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le savon en cavale sous le meuble depuis mardi. Tout le monde sait où il est. Personne ira.", "en": "the bar of soap that shot off like it owed you money. it lives under the cabinet now." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["bathroom", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-036",
-      "object": { "fr": "une lampe de chevet", "en": "a bedside lamp" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "la lampe de chevet qui a vu ton pouce déraper sur un like de 2019. Elle a tout vu. Elle dira rien. Pour l'instant.", "en": "the bedside lamp that watched your thumb slip on a photo from 2019. it saw everything. it's saying nothing. for now." },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-037",
-      "object": { "fr": "un rouleau de papier toilette", "en": "a toilet paper roll" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le rouleau de PQ vide remis sur le support. Le crime parfait. Le coupable est ici.", "en": "the empty toilet roll placed back on the holder. a perfect crime. the culprit is here." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "easy",
       "tags": ["bathroom", "funny", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-038",
-      "object": { "fr": "un carton de pizza", "en": "a pizza box" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le carton de pizza plié avec une violence inutile pour rentrer dans la poubelle", "en": "the pizza box you fold with violence to fit the bin" },
+      "category": { "fr": "Vestiges de soirée", "en": "Party damage" },
       "difficulty": "easy",
       "tags": ["party", "funny", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-039",
-      "object": { "fr": "un bonnet", "en": "a beanie" },
-      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "object": { "fr": "le bonnet du jour trois sans shampoing. Le propriétaire est dans cette pièce. Le bonnet aussi.", "en": "the beanie on day three of the shower strike. the owner is in this room. so is the beanie." },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
       "difficulty": "easy",
       "tags": ["clothing"],
       "spicy": 0
     },
     {
       "id": "obj-easy-040",
-      "object": { "fr": "une bouteille de ketchup", "en": "a ketchup bottle" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la bouteille de ketchup frappée à pleine paume devant les invités. Rien ne sort. Tu frappes plus fort.", "en": "the ketchup bottle taking full palm strikes in front of guests. nothing comes out. you hit it harder." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "easy",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-001",
-      "object": { "fr": "un tire-bouchon", "en": "a corkscrew" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le tire-bouchon introuvable pendant que cinq personnes proposent la technique de la chaussure", "en": "the corkscrew that vanishes while five people suggest the shoe trick they saw once" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "kitchen", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-002",
-      "object": { "fr": "un décapsuleur", "en": "a bottle opener" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le décapsuleur humilié par le mec au briquet qui attend ses applaudissements", "en": "the bottle opener benched by the lighter-trick guy waiting for his applause" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-003",
-      "object": { "fr": "une manette de jeu", "en": "a game controller" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "la manette 2 qui drift, refilée exprès à l'invité qu'on veut voir perdre", "en": "the player-two controller with drift, handed to whoever needs to lose tonight" },
+      "category": { "fr": "Rage quit", "en": "Rage quit zone" },
       "difficulty": "medium",
       "tags": ["tech", "games", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-004",
-      "object": { "fr": "un fouet de cuisine", "en": "a whisk" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le fouet léché en entier puis reposé dans la pâte. Quelqu'un ici l'a déjà fait.", "en": "the whisk licked clean and put back in the batter. someone in this room has done it." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-005",
-      "object": { "fr": "une essoreuse à salade", "en": "a salad spinner" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "l'essoreuse à salade, ton achat le plus adulte. Deux utilisations, dont une pour la démo aux invités.", "en": "the salad spinner: the most adult purchase of your life. used twice, once as a live demo for guests." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-006",
-      "object": { "fr": "une pince à épiler", "en": "a pair of tweezers" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "la pince à épiler dégainée au feu rouge, parce que le rétroviseur dit la vérité. Quelqu'un ici le fait à chaque trajet.", "en": "the tweezers out at a red light because car lighting shows no mercy. someone in this room does it every drive." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "medium",
       "tags": ["bathroom", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-007",
-      "object": { "fr": "une perche à selfie", "en": "a selfie stick" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "la perche à selfie dépliée devant la Joconde, en bloquant quarante personnes. La photo est floue.", "en": "the selfie stick fully extended at the Trevi Fountain, blocking forty people. the photo came out blurry." },
+      "category": { "fr": "Honte touristique", "en": "Tourist behaviour" },
       "difficulty": "medium",
       "tags": ["tech", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-008",
-      "object": { "fr": "un coton-tige", "en": "a cotton swab" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le coton-tige interdit par ton médecin, utilisé ce soir encore, avec plaisir", "en": "the cotton bud every doctor bans, used nightly like a dare" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "medium",
       "tags": ["bathroom", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-009",
-      "object": { "fr": "un fer à repasser", "en": "an iron" },
-      "category": { "fr": "Électroménager", "en": "Appliances" },
+      "object": { "fr": "le fer à repasser qui sort deux fois par an : entretien d'embauche et enterrement", "en": "the iron that appears twice a year: an interview or a funeral" },
+      "category": { "fr": "Machines fatiguées", "en": "Tired appliances" },
       "difficulty": "medium",
       "tags": ["household"],
       "spicy": 0
     },
     {
       "id": "obj-med-010",
-      "object": { "fr": "un cintre", "en": "a clothes hanger" },
-      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "object": { "fr": "le cintre au chômage technique depuis que la chaise à vêtements a pris le poste", "en": "the clothes hanger made redundant by The Chair" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
       "difficulty": "medium",
       "tags": ["clothing", "household"],
       "spicy": 0
     },
     {
       "id": "obj-med-011",
-      "object": { "fr": "une multiprise", "en": "a power strip" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "la multiprise qui chauffe au toucher et que toute la coloc a choisi d'ignorer", "en": "the power strip running seven devices, one extension lead and a countdown" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "medium",
       "tags": ["tech", "household", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-012",
-      "object": { "fr": "une enceinte Bluetooth", "en": "a Bluetooth speaker" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "l'enceinte Bluetooth piratée en pleine chanson par le DJ autoproclamé. Troisième fois ce soir. Il est dans cette pièce.", "en": "the Bluetooth speaker hijacked mid-song by the self-appointed DJ. third time tonight. he is in this room." },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["tech", "party", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-013",
-      "object": { "fr": "une bouillotte", "en": "a hot-water bottle" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "la bouillotte d'octobre à avril, parce que le proprio considère le chauffage comme un loisir", "en": "the hot-water bottle, because the landlord treats heating like a lifestyle choice" },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "medium",
       "tags": ["household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-014",
-      "object": { "fr": "un masque de nuit", "en": "a sleep mask" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "le masque de nuit de celui qui annonce son score de sommeil comme une grande nouvelle", "en": "the sleep mask of someone who announces their sleep score like it's breaking news" },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "medium",
       "tags": ["funny", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-015",
-      "object": { "fr": "un ouvre-boîte", "en": "a can opener" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "l'ouvre-boîte disparu, donc quelqu'un attaque la boîte au couteau devant témoins", "en": "the can opener that's missing, so the chef's knife is about to commit a war crime" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-med-016",
-      "object": { "fr": "une râpe à fromage", "en": "a cheese grater" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la râpe à fromage qui prélève une phalange par raclette, comme un péage", "en": "the cheese grater that takes a knuckle per block, like a toll" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-017",
-      "object": { "fr": "une passoire", "en": "a colander" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la passoire portée en casque sur une photo qui ressortira au mariage. Quelqu'un ici en garde une copie.", "en": "the colander worn as a helmet in a photo that will resurface at a wedding. someone here keeps a backup copy." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-018",
-      "object": { "fr": "un rouleau à pâtisserie", "en": "a rolling pin" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le rouleau à pâtisserie brandi par ta daronne le soir où t'es rentré à 4 h", "en": "the rolling pin raised like a verdict the night you came home at 4 a.m." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-med-019",
-      "object": { "fr": "une éponge", "en": "a sponge" },
-      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "object": { "fr": "l'éponge qui sent plus fort que l'évier, gardée parce qu'elle « marche encore »", "en": "the sponge that smells like a crime scene but apparently 'still works'" },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "medium",
       "tags": ["household", "cleaning", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-020",
-      "object": { "fr": "un pèse-personne", "en": "a bathroom scale" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le pèse-personne traité de menteur chaque 2 janvier, puis déplacé sur le carrelage « plus honnête »", "en": "the bathroom scale called a liar every January 2nd, then moved to the more honest tile" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "medium",
       "tags": ["bathroom"],
       "spicy": 0
     },
     {
       "id": "obj-med-021",
-      "object": { "fr": "un déboucheur à ventouse", "en": "a plunger" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le déboucheur à ventouse. Quelqu'un ici a une histoire.", "en": "the plunger. someone in this room has a story." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "medium",
       "tags": ["bathroom", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-022",
-      "object": { "fr": "un trépied", "en": "a tripod" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "le trépied du podcast annoncé dans le groupe. Zéro épisode. Le groupe n'oublie pas.", "en": "the tripod for the podcast he announced in the group chat. zero episodes. we remember." },
+      "category": { "fr": "Rêve d'influenceur", "en": "Failed influencer arc" },
       "difficulty": "medium",
       "tags": ["tech"],
       "spicy": 0
     },
     {
       "id": "obj-med-023",
-      "object": { "fr": "une agrafeuse", "en": "a stapler" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "l'agrafeuse marquée à ton nom au Tipp-Ex. Volée quand même. Par quelqu'un qui te sourit en réunion.", "en": "the stapler with your name on it in Tippex. stolen anyway. by someone who smiles at you in meetings." },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
       "difficulty": "medium",
       "tags": ["office"],
       "spicy": 0
     },
     {
       "id": "obj-med-024",
-      "object": { "fr": "un surligneur", "en": "a highlighter" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "le surligneur qui a fluoté 100 % du chapitre la veille du partiel. Informations retenues : zéro.", "en": "the highlighter that did 100% of the chapter the night before the exam. information retained: none." },
+      "category": { "fr": "Révisions panique", "en": "Exam panic" },
       "difficulty": "medium",
       "tags": ["office"],
       "spicy": 0
     },
     {
       "id": "obj-med-025",
-      "object": { "fr": "un bloc de post-it", "en": "a pad of sticky notes" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "le post-it « URGENT » qui jaunit sur l'écran depuis trois semaines. L'urgence est morte. Personne a prévenu la famille.", "en": "the URGENT sticky note curling off the monitor for three weeks. the urgency died. nobody told the family." },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
       "difficulty": "medium",
       "tags": ["office", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-026",
-      "object": { "fr": "une calculatrice", "en": "a calculator" },
-      "category": { "fr": "Bureau", "en": "Office" },
+      "object": { "fr": "la calculatrice sortie au resto pour te réclamer 3,47 € devant tout le monde", "en": "the calculator out at the table to charge you £3.47 for your share of the chips" },
+      "category": { "fr": "Comptes entre amis", "en": "Friendship maths" },
       "difficulty": "medium",
       "tags": ["office"],
       "spicy": 0
     },
     {
       "id": "obj-med-027",
-      "object": { "fr": "un jeu de cartes", "en": "a deck of cards" },
-      "category": { "fr": "Jeux", "en": "Games" },
+      "object": { "fr": "le jeu de cartes du tarot de Noël après lequel deux personnes de cette pièce sont restées un mois sans se parler", "en": "the deck of cards from the game night two people here still haven't recovered from" },
+      "category": { "fr": "Jeux & embrouilles", "en": "Games & grudges" },
       "difficulty": "medium",
       "tags": ["games", "party", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-028",
-      "object": { "fr": "des dés", "en": "a pair of dice" },
-      "category": { "fr": "Jeux", "en": "Games" },
+      "object": { "fr": "les dés inspectés, accusés, puis jetés à travers la pièce par le perdant", "en": "the dice the loser inspected, accused of fraud, then threw across the room" },
+      "category": { "fr": "Jeux & embrouilles", "en": "Games & grudges" },
       "difficulty": "medium",
       "tags": ["games", "party"],
       "spicy": 0
     },
     {
       "id": "obj-med-029",
-      "object": { "fr": "un baume à lèvres", "en": "a lip balm" },
-      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "object": { "fr": "le baume à lèvres acheté six fois, et t'accuses encore les autres de te le voler", "en": "the lip balm you bought six times and still accuse everyone of stealing" },
+      "category": { "fr": "Fond de sac", "en": "Bottom of the bag" },
       "difficulty": "medium",
       "tags": ["sneaky", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-030",
-      "object": { "fr": "un flacon de vernis à ongles", "en": "a bottle of nail polish" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le vernis encore frais pendant que le groupe envoie « on est en bas » pour la troisième fois", "en": "the nail polish still wet while the group chat sends 'we're outside' a third time" },
+      "category": { "fr": "J'arrive, j'arrive", "en": "Getting ready crisis" },
       "difficulty": "medium",
       "tags": ["bathroom", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-031",
-      "object": { "fr": "un élastique à cheveux", "en": "a hair tie" },
-      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "object": { "fr": "l'élastique sur ce poignet qui a survécu à trois ruptures", "en": "the hair tie on that wrist that has outlasted three relationships" },
+      "category": { "fr": "Fond de sac", "en": "Bottom of the bag" },
       "difficulty": "medium",
       "tags": ["sneaky", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-med-032",
-      "object": { "fr": "un mètre ruban", "en": "a tape measure" },
-      "category": { "fr": "Bricolage", "en": "DIY" },
+      "object": { "fr": "le mètre ruban relâché « pour rire » sur les doigts d'un pote. Le rire était à sens unique.", "en": "the tape measure snapped back on a friend's fingers 'as a joke'. the laughter was strictly one-way." },
+      "category": { "fr": "Bricolage du dimanche", "en": "DIY disasters" },
       "difficulty": "medium",
       "tags": ["diy"],
       "spicy": 0
     },
     {
       "id": "obj-med-033",
-      "object": { "fr": "un tournevis", "en": "a screwdriver" },
-      "category": { "fr": "Bricolage", "en": "DIY" },
+      "object": { "fr": "le tournevis remplacé par un couteau de cuisine qui ne s'en remettra jamais", "en": "the screwdriver you replace with a butter knife like a criminal" },
+      "category": { "fr": "Bricolage du dimanche", "en": "DIY disasters" },
       "difficulty": "medium",
       "tags": ["diy"],
       "spicy": 0
     },
     {
       "id": "obj-med-034",
-      "object": { "fr": "une ampoule", "en": "a light bulb" },
-      "category": { "fr": "Bricolage", "en": "DIY" },
+      "object": { "fr": "l'ampoule grillée depuis mars. Quatre colocs. Zéro héros.", "en": "the dead light bulb. four flatmates. three months. zero heroes." },
+      "category": { "fr": "Bricolage du dimanche", "en": "DIY disasters" },
       "difficulty": "medium",
       "tags": ["household", "diy"],
       "spicy": 0
     },
     {
       "id": "obj-med-035",
-      "object": { "fr": "une pile", "en": "a battery" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "la pile que quelqu'un ici a déjà testée sur la langue", "en": "the battery someone in this room has licked" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "medium",
       "tags": ["tech", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-036",
-      "object": { "fr": "un câble HDMI", "en": "an HDMI cable" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "le câble HDMI branché à l'aveugle pendant que trois personnes crient « plus à gauche »", "en": "the HDMI cable going in blind while three people shout directions and help zero percent" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "medium",
       "tags": ["tech"],
       "spicy": 0
     },
     {
       "id": "obj-med-037",
-      "object": { "fr": "un glaçon", "en": "an ice cube" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le glaçon glissé dans le dos de la personne qui le mérite le plus dans cette pièce", "en": "the ice cube headed for the back of whoever in this room deserves it most" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "funny", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-038",
-      "object": { "fr": "une planche à découper", "en": "a cutting board" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la planche à découper qui a servi d'assiette, de plateau, et une fois de bouclier", "en": "the chopping board that's been a plate, a tray, and once, briefly, a shield" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-med-039",
-      "object": { "fr": "un gant de four", "en": "an oven mitt" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le gant de four boudé par celui qui attrape le plat à mains nues en disant « c'est bon » avec la voix de quelqu'un pour qui c'est pas bon", "en": "the oven mitt ignored by whoever grabs the tray bare-handed and says 'it's fine' in the voice of someone it is not fine for" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "medium",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-040",
-      "object": { "fr": "un arrosoir", "en": "a watering can" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "l'arrosoir sorti pour une plante morte depuis trois semaines. C'est plus de l'arrosage, c'est des obsèques.", "en": "the watering can showing up three weeks after the plant died. that's not watering, that's a funeral." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "medium",
       "tags": ["decor", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-041",
-      "object": { "fr": "un tapis de yoga", "en": "a yoga mat" },
-      "category": { "fr": "Sport", "en": "Fitness" },
+      "object": { "fr": "le tapis de yoga toujours sous plastique. La routine de 6 h avait été annoncée à toute la coloc. On est en juin.", "en": "the yoga mat still in its wrapper. you announced the 5 a.m. routine to everyone. it's June." },
+      "category": { "fr": "Sport, zerma", "en": "New year, new me" },
       "difficulty": "medium",
       "tags": ["fitness"],
       "spicy": 0
     },
     {
       "id": "obj-med-042",
-      "object": { "fr": "un haltère", "en": "a dumbbell" },
-      "category": { "fr": "Sport", "en": "Fitness" },
+      "object": { "fr": "l'haltère reconverti en cale-porte après une seule séance, documentée en story", "en": "the dumbbell demoted to doorstop after one workout, posted in full" },
+      "category": { "fr": "Sport, zerma", "en": "New year, new me" },
       "difficulty": "medium",
       "tags": ["fitness", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-043",
-      "object": { "fr": "un chapeau de fête", "en": "a party hat" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le chapeau de fête imposé pour LA photo que ta daronne enverra à toute la famille", "en": "the party hat forced on you for the one photo that's going to the family group chat forever" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-044",
-      "object": { "fr": "une guirlande lumineuse", "en": "a string of fairy lights" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la guirlande lumineuse de Noël toujours accrochée en juin. C'est plus de la flemme, c'est une prise de position.", "en": "the string of fairy lights from Christmas, still up in June. at this point it's not laziness, it's a stance." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "medium",
       "tags": ["decor", "party"],
       "spicy": 0
     },
     {
       "id": "obj-hard-001",
-      "object": { "fr": "une lampe à lave", "en": "a lava lamp" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la lampe à lave du mec qui précise qu'il « réfléchit pas comme les autres »", "en": "the lava lamp of a man who says 'i think differently' unprompted" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-002",
-      "object": { "fr": "un attrape-rêves", "en": "a dream catcher" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "l'attrape-rêves au-dessus d'un lit pas fait depuis le début du bail. Il attrape plus rien. Il a abandonné.", "en": "the dream catcher guarding a bed that hasn't been made since the lease was signed. it stopped catching anything. it gave up." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-003",
-      "object": { "fr": "une boule à neige", "en": "a snow globe" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la boule à neige de Prague qui déclenche l'anecdote de Prague. Tout le monde la connaît par cœur. Il la raconte quand même.", "en": "the snow globe that triggers the Barcelona story. again. everyone has heard it." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor"],
       "spicy": 0
     },
     {
       "id": "obj-hard-004",
-      "object": { "fr": "un canard en plastique", "en": "a rubber duck" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le canard de bain d'un homme de 27 ans qui le présente comme « second degré ». Il a un prénom.", "en": "the rubber duck of a 27-year-old who calls it 'ironic'. it has a name." },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "hard",
       "tags": ["bathroom", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-005",
-      "object": { "fr": "un extincteur", "en": "a fire extinguisher" },
-      "category": { "fr": "Sécurité", "en": "Safety" },
+      "object": { "fr": "l'extincteur jamais vérifié, qui servira de décoration le jour du drame", "en": "the fire extinguisher nobody has ever checked. it will be decorative when it matters." },
+      "category": { "fr": "En cas de drame", "en": "In case of disaster" },
       "difficulty": "hard",
       "tags": ["safety", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-006",
-      "object": { "fr": "un détecteur de fumée", "en": "a smoke detector" },
-      "category": { "fr": "Sécurité", "en": "Safety" },
+      "object": { "fr": "le détecteur de fumée qui bipe depuis trois nuits parce que personne va chercher l'escabeau", "en": "the smoke detector chirping for three nights because nobody will fetch the ladder" },
+      "category": { "fr": "En cas de drame", "en": "In case of disaster" },
       "difficulty": "hard",
       "tags": ["safety", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-007",
-      "object": { "fr": "une tapette à mouches", "en": "a fly swatter" },
-      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "object": { "fr": "la tapette à mouches avec une victime confirmée au plafond, laissée en exemple pour les autres", "en": "the fly swatter with one confirmed kill on the ceiling, left up there as a message to the others" },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "hard",
       "tags": ["household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-008",
-      "object": { "fr": "un gratte-dos", "en": "a back scratcher" },
-      "category": { "fr": "Accessoires", "en": "Accessories" },
+      "object": { "fr": "le gratte-dos de daron que tu jugeais fort. T'en as racheté un. En cachette. Le même modèle.", "en": "the back scratcher you mocked your dad for. you bought your own. in secret. same model." },
+      "category": { "fr": "Confort de daron", "en": "Dad gear" },
       "difficulty": "hard",
       "tags": ["funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-009",
-      "object": { "fr": "un rouleau anti-peluches", "en": "a lint roller" },
-      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "object": { "fr": "le rouleau anti-peluches passé en panique dans l'ascenseur juste avant le date", "en": "the lint roller doing its best work in the lift on the way up to the date" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
       "difficulty": "hard",
       "tags": ["clothing", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-010",
-      "object": { "fr": "un désodorisant d'intérieur", "en": "an air freshener" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "le désodorisant à moitié vidé après le passage d'une seule personne. Elle se reconnaîtra.", "en": "the air freshener half-emptied after one specific person's visit. they know who they are." },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "hard",
       "tags": ["household", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-011",
-      "object": { "fr": "un bâton d'encens", "en": "an incense stick" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "le bâton d'encens allumé six minutes avant l'arrivée du date pour improviser une personnalité", "en": "the incense stick lit six minutes before the date arrives to fake an entire personality" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-012",
-      "object": { "fr": "un cactus", "en": "a cactus" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "le cactus offert avec « lui au moins tu peux pas le tuer ». Il est mort.", "en": "the cactus gifted with 'even you can't kill this'. it's dead." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-013",
-      "object": { "fr": "une boule à facettes", "en": "a disco ball" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "la boule à facettes qui croit que ce 12 m² est une boîte berlinoise", "en": "the disco ball that thinks this flat is Berghain" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "hard",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-014",
-      "object": { "fr": "un aquarium", "en": "a fish tank" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "l'aquarium dont le poisson a été remplacé en douce trois fois. La petite sait rien.", "en": "the fish tank where the goldfish has been quietly replaced three times. the kid has no idea." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor"],
       "spicy": 0
     },
     {
       "id": "obj-hard-015",
-      "object": { "fr": "un cadre photo", "en": "a picture frame" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "le cadre photo où t'as les yeux fermés. Ils l'ont imprimé quand même.", "en": "the picture frame with the photo where your eyes are closed. they printed it anyway." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-hard-016",
-      "object": { "fr": "un appareil à raclette", "en": "a raclette grill" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "l'appareil à raclette qui fait disjoncter l'appart à la deuxième tournée. Chaque hiver. Personne apprend.", "en": "the raclette grill that trips the fuses mid-melt every single year. nobody ever learns." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen", "party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-017",
-      "object": { "fr": "un moulin à poivre", "en": "a pepper grinder" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le moulin à poivre géant suspendu au-dessus de ton assiette jusqu'à ce que quelqu'un craque", "en": "the giant pepper grinder hovering until you say stop. he will not break first." },
+      "category": { "fr": "Snobisme assumé", "en": "Snob behaviour" },
       "difficulty": "hard",
       "tags": ["kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-hard-018",
-      "object": { "fr": "un presse-agrumes", "en": "a lemon squeezer" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le presse-agrumes de la détox du 1er janvier, rangé le 4", "en": "the lemon squeezer from the January 1st cleanse, retired by January 4th" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-hard-019",
-      "object": { "fr": "un minuteur de cuisine", "en": "a kitchen timer" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le minuteur ignoré par le chef « au feeling » qui a déjà cramé deux repas ce mois-ci", "en": "the kitchen timer overruled by a vibes-based chef with two fire alarms this month" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-020",
-      "object": { "fr": "un économe", "en": "a vegetable peeler" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "l'économe qui épluche trois carottes et un pouce, à chaque fois", "en": "the vegetable peeler: three carrots, one thumb, every single time" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
-      "id": "obj-hard-021",
-      "object": { "fr": "un entonnoir", "en": "a funnel" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "id": "obj-hard-039",
+      "object": { "fr": "la cuillère qui goûte la sauce et repart direct dans la casserole, devant témoins", "en": "the tasting spoon that went straight back in the pot, in front of witnesses" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-022",
-      "object": { "fr": "un cure-dent", "en": "a toothpick" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le cure-dent dégainé en plein date, bouche ouverte, avec un aplomb criminel", "en": "the toothpick out at the table mid-date, mouth open, fully confident" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "hard",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-023",
-      "object": { "fr": "un sous-verre", "en": "a coaster" },
-      "category": { "fr": "Salon", "en": "Living room" },
+      "object": { "fr": "le sous-verre ignoré à dix centimètres du verre, sous les yeux du proprio de la table", "en": "the coaster ignored from ten centimetres away while the table's owner watches live" },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "hard",
       "tags": ["household", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-024",
-      "object": { "fr": "un abat-jour", "en": "a lampshade" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "l'abat-jour qui finit sur la tête du même mec à chaque fin de soirée. Statistiquement, il est dans cette pièce.", "en": "the lampshade that ends up on the same guy's head at every single party. statistically, he is in this room." },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-025",
-      "object": { "fr": "un paillasson", "en": "a doormat" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "le paillasson que tes invités enjambent avant de traverser le salon en chaussures sales", "en": "the doormat everyone hops over before walking street shoes across the whole flat" },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
       "difficulty": "hard",
       "tags": ["household", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-026",
-      "object": { "fr": "un portemanteau", "en": "a coat rack" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "le portemanteau effondré sous les sept vestes d'une seule personne. Elle est ici.", "en": "the coat rack that collapsed under one person's seven jackets. that person is here." },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
       "difficulty": "hard",
       "tags": ["household"],
       "spicy": 0
     },
     {
       "id": "obj-hard-027",
-      "object": { "fr": "une trousse de secours", "en": "a first-aid kit" },
-      "category": { "fr": "Sécurité", "en": "Safety" },
+      "object": { "fr": "la trousse de secours : trois pansements Reine des Neiges et une crème périmée en 2019", "en": "the first-aid kit: two Peppa Pig plasters and a cream that expired in 2019" },
+      "category": { "fr": "En cas de drame", "en": "In case of disaster" },
       "difficulty": "hard",
       "tags": ["safety", "household"],
       "spicy": 0
     },
     {
       "id": "obj-hard-028",
-      "object": { "fr": "un ukulélé", "en": "a ukulele" },
-      "category": { "fr": "Musique", "en": "Music" },
+      "object": { "fr": "le ukulélé acheté pour devenir le mec relou des soirées", "en": "the ukulele bought to become That Guy at parties" },
+      "category": { "fr": "Concert non sollicité", "en": "Unsolicited concert" },
       "difficulty": "hard",
       "tags": ["music", "party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-029",
-      "object": { "fr": "des maracas", "en": "a pair of maracas" },
-      "category": { "fr": "Musique", "en": "Music" },
+      "object": { "fr": "les maracas secouées quarante secondes après la mort de la blague, en fixant le public", "en": "the maracas still going long after the joke flatlined, with full eye contact" },
+      "category": { "fr": "Concert non sollicité", "en": "Unsolicited concert" },
       "difficulty": "hard",
       "tags": ["music", "party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-030",
-      "object": { "fr": "une piñata", "en": "a piñata" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "la piñata qui encaisse une rage clairement destinée à un collègue précis", "en": "the piñata taking swings that were very clearly meant for a specific coworker" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "hard",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-031",
-      "object": { "fr": "des confettis", "en": "confetti" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "les confettis que le canapé recrache sur chaque nouvel invité depuis six mois", "en": "the confetti the sofa coughs up onto every new guest, six months on" },
+      "category": { "fr": "Vestiges de soirée", "en": "Party damage" },
       "difficulty": "hard",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-041",
-      "object": { "fr": "une valise", "en": "a suitcase" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "la valise bouclée à 1 h du matin pour un vol à 6 h, fermée à deux, assis dessus", "en": "the suitcase packed at 1 a.m. for a 6 a.m. flight, zipped shut by two people sitting on it" },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
       "difficulty": "easy",
       "tags": ["household", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-easy-042",
-      "object": { "fr": "un ours en peluche", "en": "a teddy bear" },
-      "category": { "fr": "Chambre", "en": "Bedroom" },
+      "object": { "fr": "l'ours en peluche planqué dans l'armoire quand y'a du monde, ressorti après avec des excuses", "en": "the teddy bear shoved in the wardrobe when guests come over, retrieved later with a formal apology" },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
       "difficulty": "easy",
       "tags": ["funny", "inRoomLikely"],
       "spicy": 0
     },
     {
       "id": "obj-easy-043",
-      "object": { "fr": "un micro", "en": "a microphone" },
-      "category": { "fr": "Musique", "en": "Music" },
+      "object": { "fr": "le micro de karaoké qu'on t'arrache en pleine montée de Céline Dion. Pour le bien de tous.", "en": "the karaoke mic prised from your hands mid-Whitney. for everyone's safety." },
+      "category": { "fr": "Concert non sollicité", "en": "Unsolicited concert" },
       "difficulty": "easy",
       "tags": ["music", "party"],
       "spicy": 0
     },
     {
       "id": "obj-easy-044",
-      "object": { "fr": "une poubelle", "en": "a trash can" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la poubelle pleine que toute la coloc tasse d'une main experte. La sortir, c'est admettre la défaite.", "en": "the bin everyone expertly presses down with one hand. taking it out means you lost." },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "easy",
       "tags": ["household", "kitchen"],
       "spicy": 0
     },
     {
       "id": "obj-easy-045",
-      "object": { "fr": "un peignoir", "en": "a bathrobe" },
-      "category": { "fr": "Salle de bain", "en": "Bathroom" },
+      "object": { "fr": "le peignoir encore porté à 16 h un samedi, y compris pour signer au livreur, sans une once de honte", "en": "the bathrobe still on at 4 p.m. on a Saturday, worn to the door to sign for a parcel with zero shame" },
+      "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["bathroom", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-045",
-      "object": { "fr": "un sac banane", "en": "a fanny pack" },
-      "category": { "fr": "Vêtements", "en": "Clothes" },
+      "object": { "fr": "le sac banane du festival : un briquet, 3 euros et les clés de quelqu'un d'autre", "en": "the bum bag from the festival: one lighter, £2.50 and somebody else's keys" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
       "difficulty": "medium",
       "tags": ["clothing", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-046",
-      "object": { "fr": "une perruque", "en": "a wig" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "la perruque de soirée jamais lavée, portée par quatre têtes différentes depuis 2022", "en": "the costume wig, never washed, worn by four different heads since 2022" },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-047",
-      "object": { "fr": "un casque de réalité virtuelle", "en": "a VR headset" },
-      "category": { "fr": "High-tech", "en": "Tech" },
+      "object": { "fr": "le casque VR qui a déjà coûté une télé à quelqu'un", "en": "the VR headset that has already cost this household one TV" },
+      "category": { "fr": "Rage quit", "en": "Rage quit zone" },
       "difficulty": "medium",
       "tags": ["tech", "games", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-048",
-      "object": { "fr": "une lampe de poche", "en": "a flashlight" },
-      "category": { "fr": "Bricolage", "en": "DIY" },
+      "object": { "fr": "la lampe de poche vidée de ses piles pour la manette. Découvert en pleine coupure. Des noms vont tomber.", "en": "the torch somebody robbed for controller batteries. discovered mid-blackout. names will be named." },
+      "category": { "fr": "En cas de drame", "en": "In case of disaster" },
       "difficulty": "medium",
       "tags": ["diy", "household"],
       "spicy": 0
     },
     {
       "id": "obj-med-049",
-      "object": { "fr": "un shaker à cocktail", "en": "a cocktail shaker" },
-      "category": { "fr": "Fête", "en": "Party" },
+      "object": { "fr": "le shaker à cocktail du mec qui a vu Cocktail une fois. Deux verres cassés, zéro cocktail servi.", "en": "the cocktail shaker of a man who watched one Tom Cruise film. two broken glasses, zero drinks served." },
+      "category": { "fr": "Matos de soirée", "en": "Party kit" },
       "difficulty": "medium",
       "tags": ["party", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-050",
-      "object": { "fr": "une cafetière à piston", "en": "a French press" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "la cafetière à piston de celui qui juge ton café soluble", "en": "the French press of someone who judges your instant coffee" },
+      "category": { "fr": "Snobisme assumé", "en": "Snob behaviour" },
       "difficulty": "medium",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-med-051",
-      "object": { "fr": "un plumeau", "en": "a feather duster" },
-      "category": { "fr": "Ménage", "en": "Cleaning" },
+      "object": { "fr": "le plumeau qui combat pas la poussière. Il la déménage vers la chambre du coloc le moins attentif.", "en": "the feather duster that doesn't fight dust. it relocates it into the least observant flatmate's room." },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
       "difficulty": "medium",
       "tags": ["cleaning", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-med-052",
-      "object": { "fr": "un puzzle", "en": "a jigsaw puzzle" },
-      "category": { "fr": "Jeux", "en": "Games" },
+      "object": { "fr": "le puzzle 1000 pièces arrêté à la pièce 870, le jour où on a compris qu'il en manquait trois. Y'a un suspect.", "en": "the 1000-piece jigsaw stopped at piece 870, the day three pieces came up missing. there is a suspect." },
+      "category": { "fr": "Jeux & embrouilles", "en": "Games & grudges" },
       "difficulty": "medium",
       "tags": ["games"],
       "spicy": 0
     },
     {
       "id": "obj-hard-032",
-      "object": { "fr": "un chausse-pied", "en": "a shoehorn" },
-      "category": { "fr": "Entrée", "en": "Hallway" },
+      "object": { "fr": "le chausse-pied que tu jugeais avant que ton dos lâche", "en": "the shoehorn you mocked until your back gave out" },
+      "category": { "fr": "Confort de daron", "en": "Dad gear" },
       "difficulty": "hard",
       "tags": ["household", "funny", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-033",
-      "object": { "fr": "un kazoo", "en": "a kazoo" },
-      "category": { "fr": "Musique", "en": "Music" },
+      "object": { "fr": "le kazoo confisqué au bout de 40 secondes, à juste titre", "en": "the kazoo confiscated after 40 seconds. justified." },
+      "category": { "fr": "Concert non sollicité", "en": "Unsolicited concert" },
       "difficulty": "hard",
       "tags": ["music", "funny"],
       "spicy": 0
     },
     {
       "id": "obj-hard-034",
-      "object": { "fr": "un sablier", "en": "an hourglass" },
-      "category": { "fr": "Jeux", "en": "Games" },
+      "object": { "fr": "le sablier du Pictionary retourné en douce par le tricheur officiel de la famille", "en": "the Pictionary hourglass flipped early by the family's officially recognised cheat" },
+      "category": { "fr": "Jeux & embrouilles", "en": "Games & grudges" },
       "difficulty": "hard",
       "tags": ["games", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-035",
-      "object": { "fr": "un aimant de frigo", "en": "a fridge magnet" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "l'aimant de frigo de Lisbonne qui porte ta personnalité de grand voyageur à lui tout seul", "en": "the fridge magnet from Ibiza carrying the entire 'I love to travel' personality on its back" },
+      "category": { "fr": "Snobisme assumé", "en": "Snob behaviour" },
       "difficulty": "hard",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-036",
-      "object": { "fr": "un presse-ail", "en": "a garlic press" },
-      "category": { "fr": "Cuisine", "en": "Kitchen" },
+      "object": { "fr": "le presse-ail que quelqu'un ici défendrait plus fort que n'importe lequel de ses potes", "en": "the garlic press someone in this room would defend harder than any of their friends" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
       "difficulty": "hard",
       "tags": ["kitchen", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-037",
-      "object": { "fr": "un humidificateur", "en": "a humidifier" },
-      "category": { "fr": "Électroménager", "en": "Appliances" },
+      "object": { "fr": "l'humidificateur commandé à 2 h du matin sur TikTok Shop. Toujours dans son carton. La pub promettait une nouvelle vie.", "en": "the humidifier ordered at 2 a.m. off TikTok Shop. still boxed. the ad promised a whole new life." },
+      "category": { "fr": "Achat impulsif", "en": "Impulse buy" },
       "difficulty": "hard",
       "tags": ["household", "sneaky"],
       "spicy": 0
     },
     {
       "id": "obj-hard-038",
-      "object": { "fr": "une plante carnivore", "en": "a Venus flytrap" },
-      "category": { "fr": "Déco", "en": "Decor" },
+      "object": { "fr": "la plante carnivore nourrie plus régulièrement que tes amitiés", "en": "the Venus flytrap fed more consistently than the group chat" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "funny"],
       "spicy": 0

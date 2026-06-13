@@ -5,7 +5,7 @@
   "items": [
     {
       "id": "jdt-kids-001",
-      "theme": { "fr": "Les enfants adorent…", "en": "Kids absolutely love…" },
+      "theme": { "fr": "Les gosses adorent ça. Toi aussi. T'as juste appris à mentir.", "en": "Kids love it. So do you. You're 24 and it's still in your basket." },
       "letters": { "fr": ["S", "P", "C", "B", "G", "M", "T", "J"], "en": ["S", "P", "C", "B", "T", "D", "M", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -14,7 +14,7 @@
     },
     {
       "id": "jdt-cuisine-007",
-      "theme": { "fr": "On en trouve dans une cuisine", "en": "Things you find in a kitchen" },
+      "theme": { "fr": "Un truc de cuisine. Le tien « trempe » dans l'évier du coloc depuis mardi.", "en": "Kitchen stuff. Yours has been 'soaking' in the flatshare sink since Tuesday." },
       "letters": { "fr": ["C", "P", "F", "T", "B", "M", "A", "E"], "en": ["S", "P", "F", "T", "B", "M", "C", "K"] },
       "difficulty": 1,
       "spicy": 0,
@@ -23,7 +23,7 @@
     },
     {
       "id": "jdt-date-023",
-      "theme": { "fr": "Ça peut tout gâcher lors d'un premier rendez-vous…", "en": "Things that can ruin a first date…" },
+      "theme": { "fr": "Ça tue un premier date en moins de 10 minutes. Quelqu'un ici l'a déjà fait.", "en": "It kills a first date inside ten minutes. Someone here has done it. Twice." },
       "letters": { "fr": ["S", "R", "P", "T", "B", "M"], "en": ["S", "B", "P", "T", "L", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -32,7 +32,7 @@
     },
     {
       "id": "jdt-animaux-004",
-      "theme": { "fr": "Un animal, n'importe lequel !", "en": "An animal, any animal!" },
+      "theme": { "fr": "Un animal. Choisis comme si t'allais le lâcher dans le lit de quelqu'un ici.", "en": "An animal. Pick it like it's going in the bed of someone in this room." },
       "letters": { "fr": ["C", "P", "L", "R", "T", "M", "S", "B"], "en": ["C", "P", "L", "R", "T", "M", "S", "B"] },
       "difficulty": 1,
       "spicy": 0,
@@ -41,7 +41,7 @@
     },
     {
       "id": "jdt-fruits-005",
-      "theme": { "fr": "Un fruit ou un légume", "en": "A fruit or a vegetable" },
+      "theme": { "fr": "Un fruit ou un légume. Le tien se liquéfie pendant que t'attends Uber Eats.", "en": "A fruit or veg. Yours is liquefying in the drawer while you track the Deliveroo." },
       "letters": { "fr": ["P", "C", "M", "A", "B", "F", "T", "R"], "en": ["P", "C", "M", "A", "B", "G", "T", "L"] },
       "difficulty": 1,
       "spicy": 0,
@@ -50,7 +50,7 @@
     },
     {
       "id": "jdt-metiers-006",
-      "theme": { "fr": "Un métier", "en": "A job people actually have" },
+      "theme": { "fr": "Un métier. Ta daronne en voulait un pour toi. Regarde-toi.", "en": "A job. Your mum had one picked out for you. Look how that went." },
       "letters": { "fr": ["P", "M", "C", "B", "A", "D", "I", "V"], "en": ["P", "D", "T", "B", "A", "N", "F", "S"] },
       "difficulty": 1,
       "spicy": 0,
@@ -59,7 +59,7 @@
     },
     {
       "id": "jdt-sports-008",
-      "theme": { "fr": "Un sport", "en": "A sport" },
+      "theme": { "fr": "Un sport. Toi tu t'es claqué un muscle en mettant une chaussette. Vas-y.", "en": "A sport. You pulled a hamstring putting on a sock. Name one anyway." },
       "letters": { "fr": ["B", "T", "J", "N", "E", "H", "G", "V"], "en": ["B", "T", "S", "H", "G", "R", "C", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -68,7 +68,7 @@
     },
     {
       "id": "jdt-plage-009",
-      "theme": { "fr": "On en voit à la plage", "en": "Things you see at the beach" },
+      "theme": { "fr": "Un truc de plage. Ça t'a déjà fait rentrer à 15h, vexé, en claquettes.", "en": "Beach stuff. It once sent you home at 3pm, sulking, one flip-flop down." },
       "letters": { "fr": ["S", "P", "C", "M", "B", "V", "T"], "en": ["S", "B", "T", "W", "C", "P", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -77,7 +77,7 @@
     },
     {
       "id": "jdt-vetements-010",
-      "theme": { "fr": "Un vêtement ou un accessoire", "en": "Something you wear" },
+      "theme": { "fr": "Un vêtement. Celui des jours où t'as plus rien de propre. On t'a déjà vu dedans.", "en": "An item of clothing. The laundry-day fit we've all seen and said nothing about." },
       "letters": { "fr": ["C", "P", "J", "B", "M", "T", "G", "V"], "en": ["S", "J", "T", "B", "C", "H", "G", "P"] },
       "difficulty": 1,
       "spicy": 0,
@@ -86,7 +86,7 @@
     },
     {
       "id": "jdt-boissons-011",
-      "theme": { "fr": "Une boisson", "en": "A drink" },
+      "theme": { "fr": "Une boisson. Celle que tu sers quand tu veux que les invités partent avant 22h.", "en": "A drink. The one you pour when you need everyone out by ten." },
       "letters": { "fr": ["C", "T", "L", "J", "S", "M", "E"], "en": ["C", "T", "L", "J", "S", "M", "W"] },
       "difficulty": 1,
       "spicy": 0,
@@ -95,7 +95,7 @@
     },
     {
       "id": "jdt-sdb-012",
-      "theme": { "fr": "On en trouve dans une salle de bain", "en": "Things you find in a bathroom" },
+      "theme": { "fr": "Y'a ça dans la salle de bain de quelqu'un ici. On dira pas qui. Le vote, si.", "en": "It's in the bathroom of someone in this room. We won't say whose. The jury will." },
       "letters": { "fr": ["S", "B", "P", "R", "M", "G", "D"], "en": ["S", "T", "B", "M", "R", "C", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -104,7 +104,7 @@
     },
     {
       "id": "jdt-transport-013",
-      "theme": { "fr": "Un moyen de transport", "en": "A way to get around" },
+      "theme": { "fr": "Tu fuis le date par la fenêtre des toilettes. Ton véhicule ?", "en": "You're fleeing the date through the toilet window. Your getaway ride?" },
       "letters": { "fr": ["V", "T", "B", "C", "M", "A", "S", "P"], "en": ["B", "T", "C", "S", "P", "M", "H", "V"] },
       "difficulty": 1,
       "spicy": 0,
@@ -113,7 +113,7 @@
     },
     {
       "id": "jdt-supermarche-014",
-      "theme": { "fr": "Ça s'achète au supermarché", "en": "Things you buy at the supermarket" },
+      "theme": { "fr": "Tu l'achètes au supermarché à 19h59, pendant que le vigile baisse le rideau.", "en": "You grab it at the supermarket at 9:59pm as security lowers the shutters on you." },
       "letters": { "fr": ["P", "C", "L", "B", "S", "F", "R", "T"], "en": ["B", "C", "M", "S", "T", "F", "P", "E"] },
       "difficulty": 1,
       "spicy": 0,
@@ -122,7 +122,7 @@
     },
     {
       "id": "jdt-trousse-015",
-      "theme": { "fr": "On en trouve dans une trousse ou un cartable", "en": "Things in a school bag or pencil case" },
+      "theme": { "fr": "C'était dans la trousse d'un pote en 4e. C'est encore chez toi. Voleur.", "en": "It lived in someone's pencil case in year 8. It's still at your mum's. Thief." },
       "letters": { "fr": ["C", "S", "T", "R", "G", "F", "A"], "en": ["P", "R", "N", "C", "S", "G", "B", "E"] },
       "difficulty": 1,
       "spicy": 0,
@@ -131,7 +131,7 @@
     },
     {
       "id": "jdt-desserts-016",
-      "theme": { "fr": "Un dessert", "en": "A dessert" },
+      "theme": { "fr": "Un dessert. Mangé direct au plat, à 2h, dans le noir, comme un raton laveur.", "en": "A dessert. Eaten from the tin at 2 a.m., in the dark, like a raccoon." },
       "letters": { "fr": ["C", "T", "M", "G", "B", "F", "P"], "en": ["C", "P", "B", "M", "T", "S", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -140,7 +140,7 @@
     },
     {
       "id": "jdt-vole-017",
-      "theme": { "fr": "Ça vole !", "en": "It flies!" },
+      "theme": { "fr": "Ça vole. Si ça vole pas, le jury te plie.", "en": "It flies. If it doesn't, the jury ends you." },
       "letters": { "fr": ["A", "M", "P", "H", "F", "C", "B"], "en": ["B", "P", "H", "D", "F", "M", "S"] },
       "difficulty": 1,
       "spicy": 0,
@@ -149,7 +149,7 @@
     },
     {
       "id": "jdt-pizza-018",
-      "theme": { "fr": "Ça se met sur une pizza", "en": "Things you put on a pizza" },
+      "theme": { "fr": "Ça se met sur une pizza. Dis « ananas » et regarde la pièce se diviser.", "en": "It goes on pizza. Say pineapple and watch this room pick sides." },
       "letters": { "fr": ["C", "O", "P", "J", "M", "T", "A"], "en": ["P", "M", "O", "C", "S", "B", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -158,7 +158,7 @@
     },
     {
       "id": "jdt-petitdej-019",
-      "theme": { "fr": "On en mange au petit-déjeuner", "en": "Things you eat for breakfast" },
+      "theme": { "fr": "Tu l'as mangé au petit-déj à 13h, seul, après une défaite personnelle.", "en": "You've had it for breakfast at 1pm, alone, after a personal L." },
       "letters": { "fr": ["C", "T", "P", "J", "B", "M", "L"], "en": ["T", "C", "B", "P", "J", "M", "S"] },
       "difficulty": 1,
       "spicy": 0,
@@ -167,7 +167,7 @@
     },
     {
       "id": "jdt-mer-020",
-      "theme": { "fr": "Un animal qui vit dans la mer", "en": "A sea creature" },
+      "theme": { "fr": "Un animal qui vit dans la mer et qui te méprise", "en": "A sea creature that has zero respect for you" },
       "letters": { "fr": ["C", "R", "M", "B", "P", "T", "D", "H"], "en": ["S", "C", "O", "W", "T", "D", "M", "L"] },
       "difficulty": 1,
       "spicy": 0,
@@ -176,7 +176,7 @@
     },
     {
       "id": "jdt-hiver-021",
-      "theme": { "fr": "On le porte quand il fait froid", "en": "Things you wear when it's freezing" },
+      "theme": { "fr": "Tu le portes quand il fait froid ou quand t'es en dép", "en": "You wear it when it's freezing. Or emotionally cooked." },
       "letters": { "fr": ["B", "G", "M", "E", "P", "C", "D"], "en": ["S", "G", "B", "M", "H", "C", "P"] },
       "difficulty": 1,
       "spicy": 0,
@@ -185,7 +185,7 @@
     },
     {
       "id": "jdt-pays-022",
-      "theme": { "fr": "Un pays", "en": "A country" },
+      "theme": { "fr": "Un pays que tu saurais pas placer sur une carte, même le doigt guidé.", "en": "A country you couldn't point to if your visa depended on it." },
       "letters": { "fr": ["A", "B", "C", "E", "F", "I", "M", "P", "S"], "en": ["A", "B", "C", "E", "F", "I", "M", "P", "S"] },
       "difficulty": 1,
       "spicy": 0,
@@ -194,7 +194,7 @@
     },
     {
       "id": "jdt-prenoms-024",
-      "theme": { "fr": "Un prénom", "en": "A first name" },
+      "theme": { "fr": "Un prénom que tu donneras jamais à ton gosse à cause d'UNE personne", "en": "A name you'd never give your kid because of one specific person" },
       "letters": { "fr": ["A", "L", "M", "J", "C", "S", "E", "T"], "en": ["A", "L", "M", "J", "C", "S", "E", "T"] },
       "difficulty": 1,
       "spicy": 0,
@@ -203,7 +203,7 @@
     },
     {
       "id": "jdt-salon-025",
-      "theme": { "fr": "On en trouve dans un salon", "en": "Things you find in a living room" },
+      "theme": { "fr": "Ça meuble le salon de tes darons. Interdit d'y toucher depuis 2009.", "en": "It's in your parents' living room. Touch it and you're out of the will." },
       "letters": { "fr": ["C", "T", "L", "F", "R", "B", "P"], "en": ["C", "T", "L", "S", "R", "B", "P"] },
       "difficulty": 1,
       "spicy": 0,
@@ -212,7 +212,7 @@
     },
     {
       "id": "jdt-ferme-026",
-      "theme": { "fr": "On en voit dans une ferme", "en": "Things you see on a farm" },
+      "theme": { "fr": "Y'a ça à la ferme. T'as caressé une chèvre une fois, on a eu droit à la story.", "en": "Farms have it. You petted one goat at a city farm and posted it like a gap year." },
       "letters": { "fr": ["C", "P", "T", "V", "M", "F", "L"], "en": ["C", "P", "T", "S", "H", "G", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -221,7 +221,7 @@
     },
     {
       "id": "jdt-frigo-027",
-      "theme": { "fr": "On en trouve dans un frigo", "en": "Things you find in a fridge" },
+      "theme": { "fr": "Dans le frigo d'un mec qui vit seul depuis 3 ans", "en": "In the fridge of a guy who's lived alone for 3 years" },
       "letters": { "fr": ["L", "B", "F", "C", "J", "O", "M", "T"], "en": ["M", "C", "J", "B", "E", "L", "S"] },
       "difficulty": 1,
       "spicy": 0,
@@ -230,7 +230,7 @@
     },
     {
       "id": "jdt-camping-028",
-      "theme": { "fr": "On l'emporte en camping", "en": "Things you bring camping" },
+      "theme": { "fr": "Tu l'emportes en camping pour jouer le survivaliste. T'as fini dans la voiture.", "en": "You pack it to cosplay Bear Grylls. You were asleep in the car by midnight." },
       "letters": { "fr": ["T", "F", "S", "M", "L", "R", "B", "G"], "en": ["T", "S", "F", "M", "C", "B", "L", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -239,7 +239,7 @@
     },
     {
       "id": "jdt-aeroport-029",
-      "theme": { "fr": "On en voit dans un aéroport", "en": "Things you see at an airport" },
+      "theme": { "fr": "Ça existe à l'aéroport et ça t'a déjà mis en PLS porte B42.", "en": "Airports have it. It's the reason you cried at gate B42." },
       "letters": { "fr": ["P", "V", "B", "C", "D", "E", "T", "A"], "en": ["P", "B", "S", "T", "C", "D", "G", "L"] },
       "difficulty": 1,
       "spicy": 0,
@@ -248,7 +248,7 @@
     },
     {
       "id": "jdt-jardin-030",
-      "theme": { "fr": "On en trouve dans un jardin", "en": "Things you find in a garden" },
+      "theme": { "fr": "C'est dans le jardin du voisin qui appelle la mairie pour une haie.", "en": "It's in the garden of the neighbour who measures your hedge with a ruler." },
       "letters": { "fr": ["T", "F", "A", "R", "P", "H", "B"], "en": ["G", "F", "S", "W", "B", "R", "H", "L"] },
       "difficulty": 1,
       "spicy": 0,
@@ -257,7 +257,7 @@
     },
     {
       "id": "jdt-corps-031",
-      "theme": { "fr": "Une partie du corps", "en": "A body part" },
+      "theme": { "fr": "Une partie du corps que t'as explosée contre un meuble à 3h du mat", "en": "A body part you've smashed into furniture at 3 a.m." },
       "letters": { "fr": ["C", "P", "O", "M", "T", "G"], "en": ["A", "E", "F", "H", "S", "T"] },
       "difficulty": 1,
       "spicy": 0,
@@ -266,7 +266,7 @@
     },
     {
       "id": "jdt-enville-032",
-      "theme": { "fr": "On en voit en ville", "en": "Things you see in a city" },
+      "theme": { "fr": "On en voit en ville. Même la tienne, où la star locale, c'est le rond-point.", "en": "Cities have it. Even yours, where the McDonald's closing made the front page." },
       "letters": { "fr": ["B", "T", "P", "F", "M", "V", "L"], "en": ["B", "T", "S", "P", "C", "L", "M"] },
       "difficulty": 1,
       "spicy": 0,
@@ -275,7 +275,7 @@
     },
     {
       "id": "jdt-instruments-033",
-      "theme": { "fr": "Un instrument de musique", "en": "A musical instrument" },
+      "theme": { "fr": "Un instrument que t'as lâché après 3 cours. Tes darons en parlent encore.", "en": "An instrument you quit after three lessons. The rental outlived your talent." },
       "letters": { "fr": ["T", "C", "G", "V", "H", "B", "P"], "en": ["T", "C", "G", "V", "H", "B", "P", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -284,7 +284,7 @@
     },
     {
       "id": "jdt-rond-034",
-      "theme": { "fr": "C'est rond", "en": "It's round" },
+      "theme": { "fr": "C'est rond. C'est tout. Cherche pas.", "en": "It's round. That's it. That's the theme." },
       "letters": { "fr": ["B", "P", "O", "R", "L", "T", "M"], "en": ["B", "P", "W", "M", "C", "D", "O"] },
       "difficulty": 1,
       "spicy": 0,
@@ -293,7 +293,7 @@
     },
     {
       "id": "jdt-zoo-035",
-      "theme": { "fr": "On en voit au zoo", "en": "Things you see at the zoo" },
+      "theme": { "fr": "Au zoo, ça te regarde de haut. Franchement, ça a ses raisons.", "en": "At the zoo, it looks down on you. Honestly? Fair." },
       "letters": { "fr": ["G", "L", "P", "S", "T", "O", "C"], "en": ["G", "L", "P", "T", "E", "C", "M"] },
       "difficulty": 1,
       "spicy": 0,
@@ -302,7 +302,7 @@
     },
     {
       "id": "jdt-bebetes-036",
-      "theme": { "fr": "Un insecte ou une petite bête", "en": "A bug or a creepy-crawly" },
+      "theme": { "fr": "Une petite bête qui t'a déjà fait hurler devant témoins. La vidéo existe.", "en": "A bug that made you scream in front of witnesses. There is footage." },
       "letters": { "fr": ["F", "C", "M", "A", "P", "S", "G"], "en": ["B", "C", "M", "A", "S", "W", "F", "G"] },
       "difficulty": 1,
       "spicy": 0,
@@ -311,7 +311,7 @@
     },
     {
       "id": "jdt-ecole-037",
-      "theme": { "fr": "Ça fait partie de l'école", "en": "It's part of school life" },
+      "theme": { "fr": "Un truc de l'école. Le sommet de la vie de quelqu'un ici. On sait qui.", "en": "School stuff. Someone in this room peaked there. We all know who." },
       "letters": { "fr": ["C", "T", "R", "P", "B", "D", "E"], "en": ["C", "T", "L", "P", "H", "B", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -320,7 +320,7 @@
     },
     {
       "id": "jdt-chambre-038",
-      "theme": { "fr": "On en trouve dans une chambre", "en": "Things in a bedroom" },
+      "theme": { "fr": "Y'a ça dans la chambre que t'as pas rangée depuis le bac", "en": "It's in the bedroom you haven't deep-cleaned since 2022" },
       "letters": { "fr": ["L", "C", "O", "R", "M", "A", "P", "T"], "en": ["B", "P", "L", "C", "M", "W", "D", "A"] },
       "difficulty": 1,
       "spicy": 0,
@@ -329,7 +329,7 @@
     },
     {
       "id": "jdt-outils-039",
-      "theme": { "fr": "Un outil de bricolage", "en": "A tool from the toolbox" },
+      "theme": { "fr": "Un outil que ton daron t'interdit de toucher depuis l'incident", "en": "A tool your dad won't let you borrow since the incident" },
       "letters": { "fr": ["M", "P", "S", "T", "C", "E"], "en": ["H", "S", "W", "P", "D", "C", "T"] },
       "difficulty": 1,
       "spicy": 0,
@@ -338,7 +338,7 @@
     },
     {
       "id": "jdt-anniv-040",
-      "theme": { "fr": "On en voit à une fête d'anniversaire", "en": "Things at a birthday party" },
+      "theme": { "fr": "Y'a ça à l'anniv. T'as signé la carte commune sans mettre un centime.", "en": "It's at the birthday party. You signed the group card, paid nothing." },
       "letters": { "fr": ["B", "G", "C", "P", "S", "D"], "en": ["B", "C", "P", "G", "S", "D", "M"] },
       "difficulty": 1,
       "spicy": 0,
@@ -347,7 +347,7 @@
     },
     {
       "id": "jdt-ciel-041",
-      "theme": { "fr": "On peut le voir dans le ciel", "en": "Things you can see in the sky" },
+      "theme": { "fr": "C'est dans le ciel. Dis « nuage » et regarde le jury se retourner contre toi.", "en": "It's in the sky. Say 'clouds' and watch the jury turn on you." },
       "letters": { "fr": ["N", "E", "A", "S", "C", "M", "F"], "en": ["S", "C", "M", "R", "P", "B", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -356,7 +356,7 @@
     },
     {
       "id": "jdt-hopital-042",
-      "theme": { "fr": "On en trouve dans un hôpital", "en": "Things in a hospital" },
+      "theme": { "fr": "Y'a ça aux urgences où t'as attendu 6h pour une cheville", "en": "It's in the A&E where you waited six hours for a sprained ankle" },
       "letters": { "fr": ["I", "M", "B", "S", "P", "C", "A"], "en": ["S", "N", "B", "W", "M", "P", "D", "A"] },
       "difficulty": 1,
       "spicy": 0,
@@ -365,7 +365,7 @@
     },
     {
       "id": "jdt-muscu-043",
-      "theme": { "fr": "On en voit à la salle de sport", "en": "Things you see at the gym" },
+      "theme": { "fr": "Y'a ça à la salle que tu payes 30 balles par mois pour pas y aller", "en": "It's at the gym you've paid since January. You went twice." },
       "letters": { "fr": ["H", "T", "M", "B", "V", "S", "C", "P"], "en": ["D", "T", "M", "B", "S", "W", "L", "P"] },
       "difficulty": 1,
       "spicy": 0,
@@ -374,7 +374,7 @@
     },
     {
       "id": "jdt-garage-044",
-      "theme": { "fr": "Ça traîne dans un garage", "en": "Stuff lying around in a garage" },
+      "theme": { "fr": "C'est au garage depuis que ton daron a juré qu'il allait le réparer", "en": "It's been in the garage since your dad said he'd fix it. In 2019." },
       "letters": { "fr": ["V", "P", "C", "E", "B", "T", "M"], "en": ["B", "T", "L", "P", "C", "S", "W"] },
       "difficulty": 1,
       "spicy": 0,
@@ -383,7 +383,7 @@
     },
     {
       "id": "jdt-noel-045",
-      "theme": { "fr": "Ça fait penser à Noël", "en": "It screams Christmas" },
+      "theme": { "fr": "Ça fait Noël. Le seul jour où ta famille fait semblant de s'aimer.", "en": "Christmas stuff. Three generations, one kitchen, an hour till someone cries." },
       "letters": { "fr": ["S", "C", "G", "B", "L", "M", "P"], "en": ["S", "C", "R", "T", "E", "M", "G"] },
       "difficulty": 1,
       "spicy": 0,
@@ -392,7 +392,7 @@
     },
     {
       "id": "jdt-halloween-046",
-      "theme": { "fr": "Ça fait penser à Halloween", "en": "It screams Halloween" },
+      "theme": { "fr": "Y'a ça à Halloween. T'as 24 ans et t'as détroussé des CE2 pour leurs Dragibus.", "en": "Halloween has it. At 24 you out-sprinted a nine-year-old for a fun-size Twix." },
       "letters": { "fr": ["C", "B", "S", "F", "M", "V", "T"], "en": ["P", "C", "W", "S", "G", "B", "M", "V"] },
       "difficulty": 1,
       "spicy": 0,
@@ -401,7 +401,7 @@
     },
     {
       "id": "jdt-mariage-047",
-      "theme": { "fr": "On en voit à un mariage", "en": "Things you see at a wedding" },
+      "theme": { "fr": "On voit ça au mariage où t'étais placé à la table des inconnus", "en": "You see it at the wedding where they sat you with the randoms" },
       "letters": { "fr": ["B", "R", "M", "D", "C", "P", "T", "F"], "en": ["B", "C", "D", "R", "S", "V", "F", "G"] },
       "difficulty": 1,
       "spicy": 0,
@@ -410,7 +410,7 @@
     },
     {
       "id": "jdt-foret-048",
-      "theme": { "fr": "On en trouve en forêt", "en": "Things you find in a forest" },
+      "theme": { "fr": "Y'a ça en forêt. La dernière que t'as vue, c'était un fond d'écran.", "en": "Forests have it. The last one you saw was a phone wallpaper." },
       "letters": { "fr": ["C", "A", "M", "S", "B", "F", "E", "R"], "en": ["T", "M", "S", "B", "F", "L", "O", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -419,7 +419,7 @@
     },
     {
       "id": "jdt-brulant-049",
-      "theme": { "fr": "C'est brûlant, attention !", "en": "It's burning hot, careful!" },
+      "theme": { "fr": "C'est brûlant. Tu l'as touché quand même. On t'avait prévenu.", "en": "It's scalding. You touched it anyway. Everyone warned you." },
       "letters": { "fr": ["S", "F", "C", "B", "P", "T", "R"], "en": ["S", "F", "C", "L", "O", "B", "T"] },
       "difficulty": 1,
       "spicy": 0,
@@ -428,7 +428,7 @@
     },
     {
       "id": "jdt-roues-050",
-      "theme": { "fr": "Ça a des roues", "en": "It has wheels" },
+      "theme": { "fr": "Ça a des roues. C'est le seul critère. Le jury est sans pitié.", "en": "It has wheels. That's the whole bar. The jury shows no mercy." },
       "letters": { "fr": ["V", "T", "C", "B", "S", "M", "P", "R"], "en": ["T", "S", "B", "C", "W", "M", "R", "L"] },
       "difficulty": 1,
       "spicy": 0,
@@ -437,7 +437,7 @@
     },
     {
       "id": "jdt-doux-051",
-      "theme": { "fr": "C'est tout doux", "en": "It's soft and fluffy" },
+      "theme": { "fr": "C'est tout doux. T'en as encore un dans ton lit. Assume.", "en": "It's soft. You still sleep with one. Own it." },
       "letters": { "fr": ["C", "P", "L", "V", "M", "O", "D"], "en": ["P", "B", "C", "F", "K", "S", "M"] },
       "difficulty": 1,
       "spicy": 0,
@@ -446,7 +446,7 @@
     },
     {
       "id": "jdt-sentbon-108",
-      "theme": { "fr": "Ça sent incroyablement bon", "en": "Things that smell amazing" },
+      "theme": { "fr": "Ça sent si bon que tu l'as reniflé en plein rayon. Les yeux fermés. En public.", "en": "It smells so good you've huffed it mid-aisle. Eyes closed. People saw." },
       "letters": { "fr": ["C", "P", "L", "V", "S", "F", "M"], "en": ["C", "B", "L", "S", "F", "P", "R"] },
       "difficulty": 1,
       "spicy": 0,
@@ -455,7 +455,7 @@
     },
     {
       "id": "jdt-cinema-053",
-      "theme": { "fr": "On en trouve au cinéma", "en": "Things at the movie theater" },
+      "theme": { "fr": "Y'a ça au ciné où t'as payé 14 balles pour t'endormir", "en": "It's at the cinema where you paid £15 to fall asleep" },
       "letters": { "fr": ["P", "E", "B", "S", "F", "C", "G"], "en": ["P", "S", "T", "C", "A", "N", "M"] },
       "difficulty": 1,
       "spicy": 0,
@@ -464,7 +464,7 @@
     },
     {
       "id": "jdt-piscine-054",
-      "theme": { "fr": "On en voit à la piscine", "en": "Things you see at the pool" },
+      "theme": { "fr": "Y'a ça à la piscine municipale, entre deux pansements qui flottent", "en": "It's at the public pool, floating near a stray plaster" },
       "letters": { "fr": ["B", "M", "P", "T", "S", "L", "C", "E"], "en": ["S", "T", "L", "G", "D", "F", "W", "C"] },
       "difficulty": 1,
       "spicy": 0,
@@ -473,7 +473,7 @@
     },
     {
       "id": "jdt-openspace-055",
-      "theme": { "fr": "On en trouve dans un bureau", "en": "Things in an office" },
+      "theme": { "fr": "Y'a ça au bureau où tu fais semblant de bosser depuis 14h", "en": "It's in the office where you've pretended to work since 2pm" },
       "letters": { "fr": ["O", "C", "I", "P", "S", "B", "T", "R"], "en": ["P", "C", "M", "S", "D", "K", "F", "W"] },
       "difficulty": 1,
       "spicy": 0,
@@ -482,7 +482,7 @@
     },
     {
       "id": "jdt-capitales-056",
-      "theme": { "fr": "Une capitale", "en": "A capital city" },
+      "theme": { "fr": "Une capitale. T'as eu le brevet, prouve-le.", "en": "A capital city. You did GCSE geography. Prove it." },
       "letters": { "fr": ["B", "L", "M", "P", "R", "A", "T"], "en": ["B", "L", "M", "P", "R", "A", "T", "C"] },
       "difficulty": 2,
       "spicy": 0,
@@ -491,7 +491,7 @@
     },
     {
       "id": "jdt-fleurarbre-057",
-      "theme": { "fr": "Une fleur ou un arbre", "en": "A flower or a tree" },
+      "theme": { "fr": "Une fleur ou un arbre. Zerma t'aimes la nature. Prouve.", "en": "A flower or a tree. You post sunsets. Name one plant." },
       "letters": { "fr": ["C", "R", "T", "L", "M", "P", "O", "S"], "en": ["O", "R", "T", "L", "M", "P", "D", "S"] },
       "difficulty": 2,
       "spicy": 0,
@@ -500,7 +500,7 @@
     },
     {
       "id": "jdt-oiseaux-058",
-      "theme": { "fr": "Un oiseau", "en": "A bird" },
+      "theme": { "fr": "Un oiseau. Tout le monde va dire pigeon. Sois meilleur.", "en": "A bird. Everyone's about to say pigeon. Be better." },
       "letters": { "fr": ["M", "P", "C", "A", "H", "F"], "en": ["P", "S", "C", "O", "F", "E", "H", "D"] },
       "difficulty": 2,
       "spicy": 0,
@@ -509,7 +509,7 @@
     },
     {
       "id": "jdt-monuments-059",
-      "theme": { "fr": "Un monument ou un lieu célèbre", "en": "A famous landmark" },
+      "theme": { "fr": "Un monument que t'as pris en photo sans rien lire dessus", "en": "A landmark you photographed without reading a single plaque" },
       "letters": { "fr": ["T", "P", "C", "M", "S", "A", "B"], "en": ["S", "T", "P", "C", "B", "E", "M", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -518,7 +518,7 @@
     },
     {
       "id": "jdt-glaces-060",
-      "theme": { "fr": "Un parfum de glace", "en": "An ice cream flavor" },
+      "theme": { "fr": "Un parfum de glace. Y'a une réponse de psychopathe. Évite.", "en": "An ice cream flavor. One answer here is a red flag. Careful." },
       "letters": { "fr": ["C", "P", "F", "M", "V", "N", "A"], "en": ["C", "P", "S", "M", "V", "L", "B", "R"] },
       "difficulty": 2,
       "spicy": 0,
@@ -527,7 +527,7 @@
     },
     {
       "id": "jdt-sandwich-061",
-      "theme": { "fr": "Ça se met dans un sandwich", "en": "Things you put in a sandwich" },
+      "theme": { "fr": "Tu l'as mis dans un sandwich à 23h, debout, au-dessus de l'évier", "en": "You've put it in a sandwich at 11pm, standing over the sink" },
       "letters": { "fr": ["T", "J", "F", "S", "C", "P", "M", "O"], "en": ["T", "H", "C", "L", "M", "P", "B", "O"] },
       "difficulty": 1,
       "spicy": 0,
@@ -536,7 +536,7 @@
     },
     {
       "id": "jdt-epices-062",
-      "theme": { "fr": "Une herbe ou une épice", "en": "A herb or a spice" },
+      "theme": { "fr": "Une herbe ou une épice. T'en as huit, t'en utilises une.", "en": "A herb or a spice. You own twelve. You use salt." },
       "letters": { "fr": ["C", "P", "B", "T", "M", "S", "G", "R"], "en": ["C", "P", "B", "T", "M", "S", "G", "R"] },
       "difficulty": 2,
       "spicy": 0,
@@ -545,7 +545,7 @@
     },
     {
       "id": "jdt-montagne-063",
-      "theme": { "fr": "On en voit à la montagne", "en": "Things you see in the mountains" },
+      "theme": { "fr": "Y'a ça à la montagne, où des gosses de 6 ans t'ont doublé sur la piste verte.", "en": "Mountains have it. You took the lift up, bottled it, took the lift back down." },
       "letters": { "fr": ["S", "N", "C", "R", "T", "M", "V", "A"], "en": ["S", "C", "T", "R", "G", "P", "H", "W"] },
       "difficulty": 1,
       "spicy": 0,
@@ -554,7 +554,7 @@
     },
     {
       "id": "jdt-festival-064",
-      "theme": { "fr": "On en voit dans un festival de musique", "en": "Things at a music festival" },
+      "theme": { "fr": "Y'a ça au festival où t'as perdu tes potes en 20 minutes", "en": "It's at the festival where you lost your mates in 20 minutes" },
       "letters": { "fr": ["S", "T", "C", "F", "G", "M", "L", "B"], "en": ["S", "T", "C", "F", "W", "M", "L", "B"] },
       "difficulty": 1,
       "spicy": 0,
@@ -563,7 +563,7 @@
     },
     {
       "id": "jdt-hotel-065",
-      "theme": { "fr": "On en trouve dans une chambre d'hôtel", "en": "Things in a hotel room" },
+      "theme": { "fr": "C'est dans la chambre d'hôtel. Le tien est « tombé » dans ta valise.", "en": "Hotel rooms have it. Yours 'fell' into your suitcase at checkout." },
       "letters": { "fr": ["M", "S", "T", "C", "P", "L", "R", "O"], "en": ["M", "T", "S", "R", "P", "K", "B", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -572,7 +572,7 @@
     },
     {
       "id": "jdt-barbecue-066",
-      "theme": { "fr": "On en voit à un barbecue", "en": "Things at a barbecue" },
+      "theme": { "fr": "Y'a ça au barbecue où un mec s'est autoproclamé chef", "en": "It's at the BBQ where one guy appointed himself grill sergeant" },
       "letters": { "fr": ["S", "B", "C", "M", "G", "P", "F", "T"], "en": ["B", "S", "G", "C", "R", "T", "M", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -581,7 +581,7 @@
     },
     {
       "id": "jdt-prise-067",
-      "theme": { "fr": "Ça se branche sur une prise", "en": "Things you plug into the wall" },
+      "theme": { "fr": "Ça se branche. T'as déjà débranché la box du salon pour charger ton tel.", "en": "It plugs in. You once unplugged the fridge for your charger. The FRIDGE." },
       "letters": { "fr": ["T", "A", "L", "C", "F", "M", "S", "R"], "en": ["T", "L", "C", "F", "M", "H", "S", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -590,7 +590,7 @@
     },
     {
       "id": "jdt-mains-068",
-      "theme": { "fr": "Ça se fait avec les mains", "en": "Things you do with your hands" },
+      "theme": { "fr": "Ça se fait avec les mains. Les tiennes. Le jury veut les voir sur la table.", "en": "You do it with your hands. Keep them where the jury can see them." },
       "letters": { "fr": ["C", "T", "D", "P", "A", "S", "E", "L"], "en": ["C", "T", "W", "P", "S", "K", "D", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -599,7 +599,7 @@
     },
     {
       "id": "jdt-matin-069",
-      "theme": { "fr": "Ça fait partie du rituel du matin", "en": "It's part of the morning routine" },
+      "theme": { "fr": "Tu fais ça chaque matin entre le 3e et le 7e snooze", "en": "You do it every morning between snooze three and snooze seven" },
       "letters": { "fr": ["S", "D", "C", "B", "R", "P", "M"], "en": ["S", "B", "C", "T", "W", "D", "M", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -608,7 +608,7 @@
     },
     {
       "id": "jdt-soiree-070",
-      "theme": { "fr": "Ça arrive à toutes les soirées", "en": "It happens at every party" },
+      "theme": { "fr": "Ça arrive à chaque soirée et quelqu'un ici en est responsable", "en": "It happens at every party. Someone in this room is the reason." },
       "letters": { "fr": ["D", "M", "P", "S", "R", "C", "V", "G"], "en": ["D", "S", "P", "M", "L", "C", "N", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -617,7 +617,7 @@
     },
     {
       "id": "jdt-fonddusac-071",
-      "theme": { "fr": "On le retrouve au fond d'un sac", "en": "Things found at the bottom of a bag" },
+      "theme": { "fr": "C'est au fond de ton sac depuis si longtemps que ça a fusionné", "en": "It's been in your bag so long it's legally part of the bag" },
       "letters": { "fr": ["M", "C", "T", "B", "S", "E", "P", "L"], "en": ["C", "R", "K", "T", "G", "P", "L", "H"] },
       "difficulty": 2,
       "spicy": 0,
@@ -626,7 +626,7 @@
     },
     {
       "id": "jdt-disparait-072",
-      "theme": { "fr": "Ça disparaît toujours mystérieusement", "en": "Things that mysteriously vanish" },
+      "theme": { "fr": "Ça disparaît toujours. Le voleur est sûrement dans cette pièce.", "en": "It always vanishes. The thief is statistically in this room." },
       "letters": { "fr": ["C", "S", "B", "T", "L", "E", "M", "P"], "en": ["S", "P", "L", "R", "H", "K", "T", "M"] },
       "difficulty": 2,
       "spicy": 0,
@@ -635,7 +635,7 @@
     },
     {
       "id": "jdt-retard-073",
-      "theme": { "fr": "Une excuse de retard, crédible ou pas", "en": "An excuse for being late, believable or not" },
+      "theme": { "fr": "Une excuse de retard que quelqu'un ici a déjà osé sortir", "en": "A lateness excuse someone in this room has actually used" },
       "letters": { "fr": ["B", "P", "R", "T", "M", "G", "C", "A"], "en": ["T", "A", "B", "C", "W", "D", "K", "P"] },
       "difficulty": 2,
       "spicy": 0,
@@ -644,7 +644,7 @@
     },
     {
       "id": "jdt-coloc-074",
-      "theme": { "fr": "Ça déclenche une guerre en coloc", "en": "Things that start a flatmate war" },
+      "theme": { "fr": "Ça a déjà déclenché une guerre froide en coloc. Post-it agressifs inclus.", "en": "It has started a flatshare cold war. Passive-aggressive notes included." },
       "letters": { "fr": ["V", "B", "F", "M", "P", "C", "L", "D"], "en": ["D", "N", "B", "F", "T", "L", "M", "C"] },
       "difficulty": 2,
       "spicy": 0,
@@ -653,7 +653,7 @@
     },
     {
       "id": "jdt-semblant-075",
-      "theme": { "fr": "On fait tous semblant d'aimer ça", "en": "Things we all pretend to like" },
+      "theme": { "fr": "Tout le monde fait semblant d'aimer ça. Toi le premier.", "en": "Everyone pretends to like it. You're pretending right now." },
       "letters": { "fr": ["R", "S", "J", "C", "L", "B", "T", "M"], "en": ["K", "S", "J", "M", "N", "G", "O", "H"] },
       "difficulty": 3,
       "spicy": 0,
@@ -662,7 +662,7 @@
     },
     {
       "id": "jdt-invites-076",
-      "theme": { "fr": "On le cache quand des invités arrivent", "en": "Things you hide when guests come over" },
+      "theme": { "fr": "Tu l'as planqué en 30 secondes la dernière fois qu'on a sonné", "en": "You shoved it in a cupboard 30 seconds before the guests rang" },
       "letters": { "fr": ["L", "V", "C", "B", "P", "F", "M", "D"], "en": ["L", "D", "P", "M", "C", "T", "S", "B"] },
       "difficulty": 2,
       "spicy": 0,
@@ -671,7 +671,7 @@
     },
     {
       "id": "jdt-collection-077",
-      "theme": { "fr": "Ça se collectionne", "en": "Things people collect" },
+      "theme": { "fr": "Ça se collectionne, et quelqu'un ici trouve ça normal", "en": "People collect it. Someone in this room thinks that's normal." },
       "letters": { "fr": ["T", "P", "C", "M", "F", "A", "V", "B"], "en": ["S", "C", "F", "V", "B", "T", "M", "P"] },
       "difficulty": 1,
       "spicy": 0,
@@ -680,7 +680,7 @@
     },
     {
       "id": "jdt-repasfamille-078",
-      "theme": { "fr": "Il y en a à chaque repas de famille", "en": "At every family dinner, there's…" },
+      "theme": { "fr": "Y'en a à chaque repas de famille, juste avant le sujet qui fâche", "en": "Every family dinner has it, right before the argument starts" },
       "letters": { "fr": ["T", "D", "G", "P", "Q", "R", "S", "C"], "en": ["L", "A", "G", "P", "S", "T", "D", "N"] },
       "difficulty": 2,
       "spicy": 0,
@@ -689,7 +689,7 @@
     },
     {
       "id": "jdt-casse-079",
-      "theme": { "fr": "Ça lâche toujours au pire moment", "en": "It breaks at the worst possible moment" },
+      "theme": { "fr": "Ça t'a déjà lâché à 7h58 un matin d'entretien", "en": "It has died on you at 7:58am on the day of an interview" },
       "letters": { "fr": ["T", "V", "L", "C", "I", "A", "P", "O"], "en": ["P", "W", "H", "S", "C", "L", "E", "I"] },
       "difficulty": 2,
       "spicy": 0,
@@ -698,7 +698,7 @@
     },
     {
       "id": "jdt-valise-080",
-      "theme": { "fr": "On l'oublie toujours en partant en voyage", "en": "Things you always forget when packing" },
+      "theme": { "fr": "Tu t'en souviens à l'aéroport. Trop tard. C'est resté chez toi.", "en": "You remember it at the gate. Too late. It's at home." },
       "letters": { "fr": ["B", "C", "P", "L", "M", "A", "S", "T"], "en": ["C", "T", "S", "P", "U", "A", "M", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -707,7 +707,7 @@
     },
     {
       "id": "jdt-resolutions-081",
-      "theme": { "fr": "Une bonne résolution jamais tenue", "en": "A New Year's resolution nobody keeps" },
+      "theme": { "fr": "Une résolution que t'as abandonnée avant le 9 janvier", "en": "A New Year's resolution you abandoned by January 9th" },
       "letters": { "fr": ["S", "L", "E", "M", "C", "R", "A", "D"], "en": ["G", "R", "S", "D", "E", "L", "M", "W"] },
       "difficulty": 2,
       "spicy": 0,
@@ -716,7 +716,7 @@
     },
     {
       "id": "jdt-attente-082",
-      "theme": { "fr": "On en voit dans une salle d'attente", "en": "Things in a waiting room" },
+      "theme": { "fr": "Y'a ça en salle d'attente, entre un magazine de 2017 et un gosse qui te fixe.", "en": "Waiting rooms have it, next to a toddler coughing straight into your mouth." },
       "letters": { "fr": ["M", "C", "P", "R", "T", "A", "S"], "en": ["M", "C", "P", "R", "T", "W", "S", "F"] },
       "difficulty": 2,
       "spicy": 0,
@@ -725,7 +725,7 @@
     },
     {
       "id": "jdt-bouchons-083",
-      "theme": { "fr": "On le fait tous dans les bouchons", "en": "Things we all do in traffic jams" },
+      "theme": { "fr": "Tu fais ça dans les bouchons en croyant que personne te voit", "en": "You do it in traffic, convinced the other drivers can't see you" },
       "letters": { "fr": ["C", "R", "S", "P", "T", "G", "M", "D"], "en": ["S", "H", "M", "D", "R", "C", "T", "P"] },
       "difficulty": 2,
       "spicy": 0,
@@ -734,7 +734,7 @@
     },
     {
       "id": "jdt-nuitblanche-084",
-      "theme": { "fr": "Ça réveille en pleine nuit", "en": "Things that wake you up at night" },
+      "theme": { "fr": "Ça t'a réveillé à 4h12 et t'as brièvement songé au meurtre", "en": "It woke you at 4:12am and you briefly understood crime" },
       "letters": { "fr": ["M", "O", "B", "V", "C", "S", "P", "R"], "en": ["M", "T", "N", "S", "C", "D", "B", "P"] },
       "difficulty": 2,
       "spicy": 0,
@@ -743,7 +743,7 @@
     },
     {
       "id": "jdt-incendie-085",
-      "theme": { "fr": "La maison brûle : tu sauves quoi ?", "en": "House on fire: what do you grab?" },
+      "theme": { "fr": "La maison brûle. Une main libre, zéro morale. Tu sauves quoi ?", "en": "House fire. One free hand, zero morals. What are you grabbing?" },
       "letters": { "fr": ["T", "P", "C", "D", "A", "L", "B", "O"], "en": ["P", "L", "W", "D", "C", "J", "B", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -752,7 +752,7 @@
     },
     {
       "id": "jdt-pirates-086",
-      "theme": { "fr": "On en voit dans un film de pirates", "en": "Things in a pirate movie" },
+      "theme": { "fr": "Y'a ça dans les films de pirates. On t'aurait troqué contre un demi-citron.", "en": "Pirate movies have it. You'd have snitched on the mutiny within the hour." },
       "letters": { "fr": ["T", "P", "C", "B", "S", "I", "N", "M"], "en": ["T", "P", "C", "S", "M", "G", "B", "H"] },
       "difficulty": 1,
       "spicy": 0,
@@ -761,7 +761,7 @@
     },
     {
       "id": "jdt-espace-087",
-      "theme": { "fr": "On en trouve dans l'espace", "en": "Things in space" },
+      "theme": { "fr": "C'est dans l'espace. Plus atteignable pour toi que d'être propriétaire.", "en": "It's in space. So is your landlord's conscience, presumably." },
       "letters": { "fr": ["S", "P", "E", "C", "A", "M", "F", "L"], "en": ["S", "P", "A", "M", "C", "R", "N", "G"] },
       "difficulty": 1,
       "spicy": 0,
@@ -770,7 +770,7 @@
     },
     {
       "id": "jdt-magie-088",
-      "theme": { "fr": "On en trouve dans un monde magique", "en": "Things in a magical world" },
+      "theme": { "fr": "Ça existe dans un monde magique. Pas dans ton 12 m².", "en": "It exists in a magical world. Not in your damp flatshare." },
       "letters": { "fr": ["D", "S", "B", "F", "P", "C", "L", "G"], "en": ["D", "W", "S", "F", "P", "C", "M", "G"] },
       "difficulty": 1,
       "spicy": 0,
@@ -779,7 +779,7 @@
     },
     {
       "id": "jdt-superheros-089",
-      "theme": { "fr": "Un super-héros ou un super-vilain", "en": "A superhero or a supervillain" },
+      "theme": { "fr": "Un super-héros ou un vilain. Ton choix sera retenu contre toi.", "en": "A superhero or a villain. Your pick will be used against you in this room." },
       "letters": { "fr": ["S", "B", "T", "C", "H", "M", "I", "W"], "en": ["S", "B", "T", "C", "H", "M", "I", "W"] },
       "difficulty": 2,
       "spicy": 0,
@@ -788,7 +788,7 @@
     },
     {
       "id": "jdt-cartoon-090",
-      "theme": { "fr": "Un personnage de dessin animé", "en": "A cartoon character" },
+      "theme": { "fr": "Un personnage de dessin animé que t'as regardé bien trop vieux", "en": "A cartoon character you were objectively too old to be watching" },
       "letters": { "fr": ["B", "S", "M", "P", "T", "D", "A", "N"], "en": ["B", "S", "M", "P", "D", "A", "E", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -797,7 +797,7 @@
     },
     {
       "id": "jdt-jeuxvideo-091",
-      "theme": { "fr": "Un jeu vidéo", "en": "A video game" },
+      "theme": { "fr": "Un jeu vidéo. Celui qui t'a fait insulter tes potes compte.", "en": "A video game. The one you rage-quit and uninstalled counts." },
       "letters": { "fr": ["M", "F", "R", "P", "S", "T", "C", "A"], "en": ["M", "F", "R", "P", "S", "T", "C", "A"] },
       "difficulty": 2,
       "spicy": 0,
@@ -806,7 +806,7 @@
     },
     {
       "id": "jdt-applis-092",
-      "theme": { "fr": "Une appli sur ton téléphone", "en": "An app on your phone" },
+      "theme": { "fr": "Une appli qui est sur ton tel, là. On peut vérifier.", "en": "An app that's on your phone right now. We can check." },
       "letters": { "fr": ["I", "S", "T", "W", "C", "G", "N", "D"], "en": ["I", "S", "T", "W", "C", "G", "N", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -815,7 +815,7 @@
     },
     {
       "id": "jdt-series-093",
-      "theme": { "fr": "Une série télé", "en": "A TV series" },
+      "theme": { "fr": "Une série. Y compris celle où t'as 6 épisodes d'avance en cachette.", "en": "A TV series. Including the one you're secretly six episodes ahead on." },
       "letters": { "fr": ["F", "S", "L", "B", "G", "D", "P", "M"], "en": ["F", "S", "B", "G", "D", "P", "L", "W"] },
       "difficulty": 2,
       "spicy": 0,
@@ -824,7 +824,7 @@
     },
     {
       "id": "jdt-films-094",
-      "theme": { "fr": "Un film que tout le monde connaît", "en": "A movie everyone knows" },
+      "theme": { "fr": "Un film que tout le monde connaît. Un menteur ici dit l'avoir vu.", "en": "A movie everyone knows. Someone here lied about watching it." },
       "letters": { "fr": ["T", "A", "S", "H", "I", "J", "M", "R"], "en": ["T", "A", "S", "H", "I", "J", "M", "F"] },
       "difficulty": 1,
       "spicy": 0,
@@ -833,7 +833,7 @@
     },
     {
       "id": "jdt-musique-095",
-      "theme": { "fr": "Un artiste ou un groupe de musique", "en": "A singer or a band" },
+      "theme": { "fr": "Un artiste. Ton historique Spotify est une pièce à conviction.", "en": "A singer or band. Your Spotify Wrapped is admissible evidence." },
       "letters": { "fr": ["B", "S", "A", "M", "J", "D", "C", "R"], "en": ["B", "S", "A", "M", "J", "D", "C", "T"] },
       "difficulty": 2,
       "spicy": 0,
@@ -842,7 +842,7 @@
     },
     {
       "id": "jdt-villes-096",
-      "theme": { "fr": "Une ville, n'importe où dans le monde", "en": "A city, anywhere in the world" },
+      "theme": { "fr": "Une ville. N'importe laquelle. Rater ça, c'est dossier.", "en": "A city. Any city. Failing this will follow you forever." },
       "letters": { "fr": ["M", "L", "B", "T", "N", "S", "P", "R"], "en": ["M", "L", "B", "T", "N", "S", "C", "D"] },
       "difficulty": 1,
       "spicy": 0,
@@ -851,7 +851,7 @@
     },
     {
       "id": "jdt-flotte-097",
-      "theme": { "fr": "Ça flotte sur l'eau", "en": "It floats on water" },
+      "theme": { "fr": "Ça flotte. Contrairement à toi en sortie piscine au collège.", "en": "It floats. Unlike you at year 7 swimming lessons." },
       "letters": { "fr": ["B", "C", "P", "L", "R", "F", "N", "G"], "en": ["B", "D", "C", "R", "L", "I", "S", "P"] },
       "difficulty": 2,
       "spicy": 0,
@@ -860,7 +860,7 @@
     },
     {
       "id": "jdt-bruits-098",
-      "theme": { "fr": "Un bruit insupportable", "en": "An unbearable sound" },
+      "theme": { "fr": "Un bruit insupportable que quelqu'un ici produit régulièrement", "en": "An unbearable sound someone in this room makes regularly" },
       "letters": { "fr": ["A", "K", "R", "C", "P", "M", "S", "T"], "en": ["A", "S", "C", "D", "N", "L", "V", "P"] },
       "difficulty": 2,
       "spicy": 0,
@@ -869,7 +869,7 @@
     },
     {
       "id": "jdt-invisible-099",
-      "theme": { "fr": "C'est invisible mais ça existe", "en": "It's invisible but it's real" },
+      "theme": { "fr": "C'est invisible mais ça existe. Comme tes efforts.", "en": "It's invisible but real. Like your input on the group project." },
       "letters": { "fr": ["V", "G", "O", "A", "S", "M", "E", "C"], "en": ["W", "G", "A", "S", "E", "O", "M", "T"] },
       "difficulty": 3,
       "spicy": 0,
@@ -878,7 +878,7 @@
     },
     {
       "id": "jdt-trente-ans-100",
-      "theme": { "fr": "Ça n'existait pas il y a 30 ans", "en": "It didn't exist 30 years ago" },
+      "theme": { "fr": "Ça existait pas il y a 30 ans et tes darons s'en méfient encore", "en": "It didn't exist 30 years ago and your dad still doesn't trust it" },
       "letters": { "fr": ["S", "T", "I", "E", "W", "L", "P", "V"], "en": ["S", "T", "I", "E", "W", "P", "V", "D"] },
       "difficulty": 3,
       "spicy": 0,
@@ -887,7 +887,7 @@
     },
     {
       "id": "jdt-mamie-101",
-      "theme": { "fr": "On n'en voit que chez les grands-parents", "en": "You only see it at grandma's house" },
+      "theme": { "fr": "Y'a ça que chez mamie, et personne sait à quoi ça sert", "en": "Only grandma owns it and nobody knows what it's for" },
       "letters": { "fr": ["N", "C", "B", "P", "T", "V", "A", "M"], "en": ["D", "C", "P", "K", "W", "B", "R", "A"] },
       "difficulty": 2,
       "spicy": 0,
@@ -896,7 +896,7 @@
     },
     {
       "id": "jdt-comprendre-102",
-      "theme": { "fr": "On fait semblant de comprendre", "en": "Things we pretend to understand" },
+      "theme": { "fr": "Tu fais semblant de comprendre ça depuis des années. Là aussi.", "en": "You've nodded along about it for years. You're doing it now." },
       "letters": { "fr": ["C", "I", "V", "B", "P", "A", "M", "E"], "en": ["C", "T", "W", "S", "M", "B", "I", "O"] },
       "difficulty": 3,
       "spicy": 0,
@@ -905,7 +905,7 @@
     },
     {
       "id": "jdt-troisheures-103",
-      "theme": { "fr": "Une raison d'être debout à 3h du matin", "en": "A reason to be awake at 3 a.m." },
+      "theme": { "fr": "Pourquoi t'étais debout à 3h du mat mardi ? On t'a vu en ligne.", "en": "Why were you up at 3 a.m. on Tuesday? You were seen online." },
       "letters": { "fr": ["S", "I", "B", "R", "F", "T", "C", "M"], "en": ["S", "I", "B", "O", "N", "P", "C", "W"] },
       "difficulty": 3,
       "spicy": 0,
@@ -914,7 +914,7 @@
     },
     {
       "id": "jdt-plusjamais-104",
-      "theme": { "fr": "On a dit « plus jamais »… et on l'a refait", "en": "We said 'never again'… then did it again" },
+      "theme": { "fr": "On a dit « plus jamais ». On l'a refait le week-end d'après.", "en": "We said 'never again'. It happened again that same weekend." },
       "letters": { "fr": ["S", "M", "R", "C", "P", "F", "A", "B"], "en": ["S", "M", "B", "C", "I", "H", "P", "O"] },
       "difficulty": 3,
       "spicy": 0,
@@ -923,7 +923,7 @@
     },
     {
       "id": "jdt-lourd-105",
-      "theme": { "fr": "C'est plus lourd qu'un frigo", "en": "It's heavier than a fridge" },
+      "theme": { "fr": "Plus lourd qu'un frigo. Le jury tranche au doigt mouillé.", "en": "Heavier than a fridge. The jury will eyeball it. Good luck." },
       "letters": { "fr": ["V", "P", "E", "B", "T", "C", "M", "A"], "en": ["E", "P", "C", "T", "B", "W", "H", "S"] },
       "difficulty": 2,
       "spicy": 0,
@@ -932,7 +932,7 @@
     },
     {
       "id": "jdt-minuscule-106",
-      "theme": { "fr": "C'est plus petit qu'une pièce de monnaie", "en": "It's smaller than a coin" },
+      "theme": { "fr": "Plus petit qu'une pièce. En cas de litige, le jury t'écrase.", "en": "Smaller than a coin. Disputes get settled violently. By vote." },
       "letters": { "fr": ["F", "G", "P", "M", "B", "E", "C", "V"], "en": ["A", "P", "S", "B", "C", "L", "M", "G"] },
       "difficulty": 2,
       "spicy": 0,
@@ -941,7 +941,7 @@
     },
     {
       "id": "jdt-doigts-107",
-      "theme": { "fr": "Ça se mange avec les doigts", "en": "Food you eat with your hands" },
+      "theme": { "fr": "Tu le manges avec les doigts en soutenant le regard des gens", "en": "You eat it with your hands while maintaining eye contact" },
       "letters": { "fr": ["P", "F", "S", "C", "B", "T", "M", "N"], "en": ["P", "F", "S", "C", "B", "T", "N", "W"] },
       "difficulty": 1,
       "spicy": 0,

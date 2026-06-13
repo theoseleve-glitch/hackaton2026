@@ -5,7 +5,7 @@
   "items": [
     {
       "id": "shortest-flight-seconds",
-      "question": { "fr": "Le vol commercial régulier le plus court du monde relie deux îles écossaises. Sa durée officielle planifiée, en secondes ?", "en": "The world's shortest scheduled commercial flight links two Scottish islands. Its official scheduled duration, in seconds?" },
+      "question": { "fr": "Le vol commercial le plus court du monde relie deux îles écossaises. Durée officielle EN SECONDES — oui, secondes. Toi tu mets plus longtemps à choisir ton siège.", "en": "The world's shortest scheduled flight links two Scottish islands. Official duration in SECONDS — yes, seconds. You take longer to pick a seat." },
       "answer": 90,
       "unit": { "fr": "secondes", "en": "seconds" },
       "format": "plain",
@@ -19,7 +19,7 @@
     },
     {
       "id": "stego-trex-gap",
-      "question": { "fr": "Combien de MILLIONS d'années séparent le Stégosaure du T-Rex ?", "en": "How many MILLION years separate the Stegosaurus from the T-Rex?" },
+      "question": { "fr": "Combien de MILLIONS d'années entre le Stégosaure et le T-Rex ? Indice : tout ce que tu croyais à 8 ans est faux.", "en": "How many MILLION years between the Stegosaurus and the T-Rex? Hint: everything 8-year-old you believed is a lie." },
       "answer": 83,
       "unit": { "fr": "millions d'années", "en": "million years" },
       "format": "plain",
@@ -33,7 +33,7 @@
     },
     {
       "id": "first-sms-year",
-      "question": { "fr": "En quelle année le tout premier SMS de l'histoire a-t-il été envoyé ?", "en": "In what year was the very first SMS in history sent?" },
+      "question": { "fr": "T'en envoies 200 par jour, dont la moitié de « jsuis là dans 5 min » mensongers. Le tout premier SMS de l'Histoire : quelle année ? Le premier qui sort son tel a perdu.", "en": "You send 200 a day and still leave half this room on read. The very first text in history: what year? First one to reach for a phone loses." },
       "answer": 1992,
       "unit": null,
       "format": "year",
@@ -47,7 +47,7 @@
     },
     {
       "id": "eiffel-steps-summit",
-      "question": { "fr": "Combien de marches faut-il grimper pour atteindre le sommet de la tour Eiffel ?", "en": "How many steps would you have to climb to reach the very top of the Eiffel Tower?" },
+      "question": { "fr": "Nombre de marches jusqu'au sommet de la tour Eiffel. Le plus proche gagne le droit de juger le cardio des autres.", "en": "Steps to the very top of the Eiffel Tower. Closest guess earns the right to judge everyone else's cardio." },
       "answer": 1665,
       "unit": { "fr": "marches", "en": "steps" },
       "format": "plain",
@@ -61,7 +61,7 @@
     },
     {
       "id": "eiffel-summer-growth-cm",
-      "question": { "fr": "En été, la chaleur dilate le fer : de combien de centimètres la tour Eiffel peut-elle grandir ?", "en": "Summer heat expands iron: by how many centimeters can the Eiffel Tower grow taller?" },
+      "question": { "fr": "En été, la tour Eiffel grandit. Littéralement. De combien de centimètres ? C'est pas un piège, c'est la physique que t'as séchée.", "en": "In summer, the Eiffel Tower literally gets taller. By how many centimeters? Not a trick — just the physics class you slept through." },
       "answer": 15,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -75,7 +75,7 @@
     },
     {
       "id": "eiffel-tower-height-m",
-      "question": { "fr": "Quelle est la hauteur actuelle de la tour Eiffel, antennes comprises, en mètres ?", "en": "How tall is the Eiffel Tower today, antennas included, in meters?" },
+      "question": { "fr": "Hauteur de la tour Eiffel, antennes comprises, en mètres. T'as vu 4 000 photos d'elle. Prouve que t'en as regardé une.", "en": "Height of the Eiffel Tower, antennas included, in meters. You've seen 4,000 pictures of it. Prove you actually looked at one." },
       "answer": 330,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -89,7 +89,7 @@
     },
     {
       "id": "nintendo-founded-year",
-      "question": { "fr": "En quelle année l'entreprise Nintendo a-t-elle été fondée ?", "en": "In what year was the company Nintendo founded?" },
+      "question": { "fr": "Année de fondation de Nintendo. Spoiler : ta réponse va être fausse d'un siècle.", "en": "The year Nintendo was founded. Spoiler: your guess is about to be off by a century." },
       "answer": 1889,
       "unit": null,
       "format": "year",
@@ -103,7 +103,7 @@
     },
     {
       "id": "piano-keys",
-      "question": { "fr": "Combien de touches compte un piano de concert standard ?", "en": "How many keys are on a standard concert piano?" },
+      "question": { "fr": "Nombre de touches sur un piano de concert. Quelqu'un ici a fait six ans de solfège — c'est le moment de rentabiliser.", "en": "Keys on a concert piano. Someone here suffered through six years of piano lessons — make it count." },
       "answer": 88,
       "unit": { "fr": "touches", "en": "keys" },
       "format": "plain",
@@ -117,7 +117,7 @@
     },
     {
       "id": "adult-human-bones",
-      "question": { "fr": "Combien d'os compte le squelette d'un humain adulte ?", "en": "How many bones are in an adult human skeleton?" },
+      "question": { "fr": "Nombre d'os dans un squelette d'adulte. T'en portes un en ce moment même — te tromper, c'est techniquement de l'auto-diffamation.", "en": "Bones in an adult human skeleton. You're wearing one right now — getting this wrong is technically self-slander." },
       "answer": 206,
       "unit": { "fr": "os", "en": "bones" },
       "format": "plain",
@@ -131,12 +131,12 @@
     },
     {
       "id": "newborn-bones",
-      "question": { "fr": "Et un bébé qui vient de naître, il a combien d'os, environ ?", "en": "And a newborn baby — roughly how many bones?" },
+      "question": { "fr": "Et un bébé qui vient de naître, il en a combien, d'os ? Indice : plus que toi, et il tient même pas sa tête.", "en": "And a newborn baby — roughly how many bones? Hint: more than you, and it can't even hold its own head up." },
       "answer": 300,
       "unit": { "fr": "os", "en": "bones" },
       "format": "plain",
       "scale": "linear",
-      "funFact": { "fr": "Environ 300 ! Les os fusionnent en grandissant. Un bébé a littéralement plus d'os que toi. Humiliant.", "en": "About 300! Bones fuse as you grow. A baby literally has more bones than you. Humbling." },
+      "funFact": { "fr": "Environ 300. Les os fusionnent en grandissant. Un bébé a littéralement plus d'os que toi. Humiliant.", "en": "About 300. Bones fuse as you grow. A baby literally has more bones than you. Humbling." },
       "tags": ["science", "body", "mindblow"],
       "difficulty": 2,
       "spicy": 0,
@@ -145,7 +145,7 @@
     },
     {
       "id": "marathon-length-m",
-      "question": { "fr": "Quelle est la distance officielle d'un marathon, en mètres ?", "en": "What is the official distance of a marathon, in meters?" },
+      "question": { "fr": "Distance officielle d'un marathon EN MÈTRES. Pas en kilomètres — en mètres. Le chiffre exact que tu courras jamais.", "en": "Official marathon distance IN METERS. Not kilometers — meters. The exact number you will never run." },
       "answer": 42195,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -159,7 +159,7 @@
     },
     {
       "id": "everest-height-m",
-      "question": { "fr": "Quelle est l'altitude officielle de l'Everest, en mètres ?", "en": "What is the official height of Mount Everest, in meters?" },
+      "question": { "fr": "Altitude officielle de l'Everest, en mètres. La moitié de la table va dire 8 848. La moitié de la table vit en 2019.", "en": "Official height of Everest, in meters. Half the table is about to say 8,848. Half the table is living in 2019." },
       "answer": 8849,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -173,7 +173,7 @@
     },
     {
       "id": "earth-moon-km",
-      "question": { "fr": "Quelle est la distance moyenne entre la Terre et la Lune, en kilomètres ?", "en": "What is the average distance from the Earth to the Moon, in kilometers?" },
+      "question": { "fr": "Terre-Lune, distance moyenne en kilomètres. Celui qui sort « genre un million ? » devra l'assumer à voix haute.", "en": "Earth to Moon, average distance in kilometers. Whoever says 'like, a million?' has to own it out loud." },
       "answer": 384400,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -187,7 +187,7 @@
     },
     {
       "id": "sunlight-travel-seconds",
-      "question": { "fr": "Combien de temps met la lumière du Soleil pour atteindre la Terre, en secondes ?", "en": "How long does sunlight take to reach Earth, in seconds?" },
+      "question": { "fr": "Le temps que met la lumière du Soleil pour toucher ta peau, en secondes. Oui, ça se calcule. Non, t'as pas le droit de calculer.", "en": "Time for sunlight to reach your skin, in seconds. Yes, it's computable. No, you're not allowed to compute it." },
       "answer": 500,
       "unit": { "fr": "secondes", "en": "seconds" },
       "format": "plain",
@@ -201,7 +201,7 @@
     },
     {
       "id": "venus-day-earth-days",
-      "question": { "fr": "Combien de jours terrestres faut-il à Vénus pour faire UN tour sur elle-même ?", "en": "How many Earth days does Venus need to spin around ONCE on its axis?" },
+      "question": { "fr": "Vénus met combien de jours terrestres à faire UN tour sur elle-même ? Indice cruel : c'est pire que ce que tu vas dire.", "en": "Venus takes how many Earth days to spin ONCE on its axis? Cruel hint: it's worse than whatever you're about to say." },
       "answer": 243,
       "unit": { "fr": "jours terrestres", "en": "Earth days" },
       "format": "plain",
@@ -215,7 +215,7 @@
     },
     {
       "id": "apollo-moon-walkers",
-      "question": { "fr": "Combien d'humains ont marché sur la Lune pendant le programme Apollo ?", "en": "How many humans walked on the Moon during the Apollo program?" },
+      "question": { "fr": "Combien d'humains ont marché sur la Lune, en tout, dans toute l'Histoire ? Petit chiffre. Le plus loin du compte cite un marcheur qui s'appelle pas Armstrong. On t'écoute.", "en": "How many humans have walked on the Moon, total, in all of history? Tiny number. Furthest guess has to name one who isn't Armstrong. We'll wait." },
       "answer": 12,
       "unit": { "fr": "personnes", "en": "people" },
       "format": "plain",
@@ -229,7 +229,7 @@
     },
     {
       "id": "apollo11-moonwalk-minutes",
-      "question": { "fr": "Combien de minutes Neil Armstrong et Buzz Aldrin ont-ils passées à marcher SUR la Lune lors d'Apollo 11 ?", "en": "How many minutes did Neil Armstrong and Buzz Aldrin actually spend walking ON the Moon during Apollo 11?" },
+      "question": { "fr": "Apollo 11 : Armstrong et Aldrin ont marché SUR la Lune pendant combien de minutes ? Quatre jours de trajet pour ça.", "en": "Apollo 11: Armstrong and Aldrin actually walked ON the Moon for how many minutes? Four days of travel. For that." },
       "answer": 151,
       "unit": { "fr": "minutes", "en": "minutes" },
       "format": "plain",
@@ -243,12 +243,12 @@
     },
     {
       "id": "last-guillotine-year",
-      "question": { "fr": "En quelle année la guillotine a-t-elle été utilisée pour la dernière fois en France ?", "en": "In what year was the guillotine last used in France?" },
+      "question": { "fr": "Dernière utilisation de la guillotine en France : quelle année ? Balance ta date, et prépare-toi à être très mal à l'aise.", "en": "France last used the guillotine in what year? Name a year — then get ready to feel deeply uncomfortable." },
       "answer": 1977,
       "unit": null,
       "format": "year",
       "scale": "linear",
-      "funFact": { "fr": "1977. La même année que la sortie de Star Wars. La France exécutait encore au sabre laser médiéval pendant que Luke sortait le sien.", "en": "1977 — the same year Star Wars hit theaters. France was still using an 18th-century blade while Luke was swinging a lightsaber." },
+      "funFact": { "fr": "1977. La même année que la sortie de Star Wars. Pendant que Luke allumait son sabre laser, la France affûtait encore une lame du XVIIIe siècle.", "en": "1977 — the same year Star Wars hit theaters. France was still using an 18th-century blade while Luke was swinging a lightsaber." },
       "tags": ["history", "france", "mindblow"],
       "difficulty": 2,
       "spicy": 0,
@@ -257,7 +257,7 @@
     },
     {
       "id": "women-vote-france-year",
-      "question": { "fr": "En quelle année les femmes ont-elles obtenu le droit de vote en France ?", "en": "In what year did women get the right to vote in France?" },
+      "question": { "fr": "En quelle année les femmes ont obtenu le droit de vote en France ? Spoiler : la réponse fait beaucoup moins rire que prévu.", "en": "What year did women get the vote in France? Spoiler: the answer is a lot less funny than you'd hope." },
       "answer": 1944,
       "unit": null,
       "format": "year",
@@ -271,7 +271,7 @@
     },
     {
       "id": "women-vote-switzerland-year",
-      "question": { "fr": "Et en Suisse, en quelle année les femmes ont-elles obtenu le droit de vote au niveau fédéral ?", "en": "And in Switzerland — in what year did women get the right to vote at the federal level?" },
+      "question": { "fr": "Et en Suisse, le droit de vote des femmes au niveau fédéral : quelle année ? Vise tard. Plus tard. Encore.", "en": "And Switzerland — women voting at the federal level: what year? Guess late. Later. Keep going." },
       "answer": 1971,
       "unit": null,
       "format": "year",
@@ -285,7 +285,7 @@
     },
     {
       "id": "oxford-teaching-year",
-      "question": { "fr": "Des cours sont donnés à l'université d'Oxford depuis quelle année, environ ?", "en": "Teaching has existed at Oxford University since roughly what year?" },
+      "question": { "fr": "Oxford donne des cours depuis environ quelle année ? Vas-y, dis un truc en « 14-quelque-chose », qu'on rigole.", "en": "Oxford has been teaching since roughly what year? Go on, say something with a 14 in it. We'll wait." },
       "answer": 1096,
       "unit": null,
       "format": "year",
@@ -299,7 +299,7 @@
     },
     {
       "id": "pompeii-year",
-      "question": { "fr": "En quelle année le Vésuve a-t-il enseveli Pompéi ?", "en": "In what year did Mount Vesuvius bury Pompeii?" },
+      "question": { "fr": "Le Vésuve raye Pompéi de la carte : quelle année ? Attention, la réponse est plus courte que ton code de carte bleue.", "en": "Vesuvius wipes Pompeii off the map: what year? Careful — the answer is shorter than your PIN." },
       "answer": 79,
       "unit": null,
       "format": "year",
@@ -313,7 +313,7 @@
     },
     {
       "id": "mona-lisa-height-cm",
-      "question": { "fr": "Quelle est la hauteur du tableau de la Joconde, en centimètres ?", "en": "How tall is the Mona Lisa painting, in centimeters?" },
+      "question": { "fr": "Hauteur de la Joconde, en centimètres. T'as fait deux heures de queue pour la voir — alors, elle mesure combien ?", "en": "Height of the Mona Lisa, in centimeters. You queued two hours to see it — so, how tall is it?" },
       "answer": 77,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -327,7 +327,7 @@
     },
     {
       "id": "mona-lisa-theft-year",
-      "question": { "fr": "En quelle année la Joconde a-t-elle été volée au Louvre ?", "en": "In what year was the Mona Lisa stolen from the Louvre?" },
+      "question": { "fr": "Un homme est sorti du Louvre avec la Joconde sous le bras, aussi serein que toi quand tu repars de soirée avec un chargeur qui t'appartient pas. Quelle année ?", "en": "A man strolled out of the Louvre with the Mona Lisa under his arm, calm as you leaving a party with someone else's charger. What year?" },
       "answer": 1911,
       "unit": null,
       "format": "year",
@@ -341,7 +341,7 @@
     },
     {
       "id": "titanic-sank-year",
-      "question": { "fr": "En quelle année le Titanic a-t-il coulé ?", "en": "In what year did the Titanic sink?" },
+      "question": { "fr": "Année du naufrage du Titanic. Si tu te plantes là-dessus, on te confisque ta carte de cinéphile.", "en": "The year the Titanic sank. Get this wrong and the table confiscates your film-buff card." },
       "answer": 1912,
       "unit": null,
       "format": "year",
@@ -355,7 +355,7 @@
     },
     {
       "id": "titanic-lifeboats",
-      "question": { "fr": "Combien de canots de sauvetage le Titanic transportait-il ?", "en": "How many lifeboats did the Titanic carry?" },
+      "question": { "fr": "Combien de canots de sauvetage à bord du Titanic ? Pense au nombre de passagers. Maintenant pense plus petit. Beaucoup plus petit.", "en": "How many lifeboats on the Titanic? Think of the passenger count. Now think smaller. Much smaller." },
       "answer": 20,
       "unit": { "fr": "canots", "en": "lifeboats" },
       "format": "plain",
@@ -369,7 +369,7 @@
     },
     {
       "id": "bastille-prisoners",
-      "question": { "fr": "Combien de prisonniers ont été libérés lors de la prise de la Bastille, le 14 juillet 1789 ?", "en": "How many prisoners were freed when the Bastille was stormed on July 14, 1789?" },
+      "question": { "fr": "14 juillet 1789, prise de la Bastille : combien de prisonniers libérés ? Vise grandiose. Tu vas être déçu.", "en": "July 14, 1789, the Bastille is stormed: how many prisoners walked free? Aim epic. Prepare for disappointment." },
       "answer": 7,
       "unit": { "fr": "prisonniers", "en": "prisoners" },
       "format": "plain",
@@ -383,7 +383,7 @@
     },
     {
       "id": "berlin-wall-fall-year",
-      "question": { "fr": "En quelle année le mur de Berlin est-il tombé ?", "en": "In what year did the Berlin Wall fall?" },
+      "question": { "fr": "Chute du mur de Berlin : l'année. Si t'hésites entre trois décennies, dis-le tout de suite, qu'on sache qui t'es.", "en": "The Berlin Wall falls: the year. If you're torn between three different decades, announce it now so we know who you are." },
       "answer": 1989,
       "unit": null,
       "format": "year",
@@ -397,7 +397,7 @@
     },
     {
       "id": "berlin-wall-stood-years",
-      "question": { "fr": "Pendant combien d'années le mur de Berlin est-il resté debout ?", "en": "For how many years did the Berlin Wall stand?" },
+      "question": { "fr": "Le mur de Berlin est resté debout combien d'années ? Engage-toi sur un chiffre. À voix haute. Devant témoins.", "en": "The Berlin Wall stood for how many years? Commit to a number. Out loud. In front of witnesses." },
       "answer": 28,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -411,7 +411,7 @@
     },
     {
       "id": "hundred-years-war-years",
-      "question": { "fr": "La guerre de Cent Ans a duré combien d'années, en vrai ?", "en": "How many years did the Hundred Years' War actually last?" },
+      "question": { "fr": "La guerre de Cent Ans a duré combien d'années, en vrai ? Si tu réponds « cent », rends ton brevet.", "en": "How many years did the Hundred Years' War actually last? If you say 'a hundred', hand your diploma back." },
       "answer": 116,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -425,7 +425,7 @@
     },
     {
       "id": "shortest-war-minutes",
-      "question": { "fr": "La guerre la plus courte de l'histoire (Royaume-Uni contre Zanzibar, 1896) a duré combien de minutes ?", "en": "The shortest war in history (Britain vs Zanzibar, 1896) lasted how many minutes?" },
+      "question": { "fr": "La guerre la plus courte de l'Histoire : Royaume-Uni contre Zanzibar, 1896. Durée en minutes. T'as pris des douches plus longues.", "en": "The shortest war in history: Britain vs Zanzibar, 1896. Length in minutes. You've taken longer showers." },
       "answer": 38,
       "unit": { "fr": "minutes", "en": "minutes" },
       "format": "plain",
@@ -439,7 +439,7 @@
     },
     {
       "id": "napoleon-height-cm",
-      "question": { "fr": "Quelle était la taille réelle de Napoléon, en centimètres ?", "en": "How tall was Napoleon really, in centimeters?" },
+      "question": { "fr": "La VRAIE taille de Napoléon, en centimètres. Tout ce qu'on t'a raconté est de la propagande anglaise. Corrige l'Histoire.", "en": "Napoleon's REAL height, in centimeters. Everything you've heard is British propaganda. Go on, fix history." },
       "answer": 169,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -453,7 +453,7 @@
     },
     {
       "id": "louis-xiv-reign-years",
-      "question": { "fr": "Combien d'années a duré le règne de Louis XIV, le plus long d'Europe ?", "en": "How many years did Louis XIV reign — the longest of any European monarch?" },
+      "question": { "fr": "Le règne de Louis XIV, record d'Europe : combien d'années ? L'homme a enterré son fils, son petit-fils et la moitié de Versailles. Compte large.", "en": "Louis XIV's reign, the European record: how many years? The man outlived his son, his grandson, and everyone who ever gossiped about him. Count accordingly." },
       "answer": 72,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -467,7 +467,7 @@
     },
     {
       "id": "rome-founded-bc",
-      "question": { "fr": "Selon la légende, en quelle année avant J.-C. Rome a-t-elle été fondée ?", "en": "According to legend, in what year BC was Rome founded?" },
+      "question": { "fr": "Fondation de Rome selon la légende : quelle année avant J.-C. ? Romulus connaît la réponse. Romulus est mort. À toi.", "en": "Rome's founding, per the legend: what year BC? Romulus knows the answer. Romulus is dead. Your turn." },
       "answer": 753,
       "unit": { "fr": "av. J.-C.", "en": "BC" },
       "format": "plain",
@@ -481,7 +481,7 @@
     },
     {
       "id": "notre-dame-build-years",
-      "question": { "fr": "Combien d'années a duré la construction de Notre-Dame de Paris ?", "en": "How many years did it take to build Notre-Dame de Paris?" },
+      "question": { "fr": "La construction de Notre-Dame de Paris a pris combien d'années ? Pour l'échelle : trois semaines de travaux et tu saoules tout le monde.", "en": "Building Notre-Dame de Paris took how many years? For scale: your kitchen took three months and you still bring it up." },
       "answer": 182,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -495,7 +495,7 @@
     },
     {
       "id": "great-pyramid-blocks",
-      "question": { "fr": "Combien de blocs de pierre composent la grande pyramide de Gizeh, selon les estimations des égyptologues ?", "en": "How many stone blocks make up the Great Pyramid of Giza, according to Egyptologists' estimates?" },
+      "question": { "fr": "Nombre de blocs de pierre dans la grande pyramide de Gizeh, selon les égyptologues. Le plus loin du compte porte les courses de tout le groupe au prochain ravitaillement. Hommage.", "en": "Stone blocks in the Great Pyramid of Giza, per Egyptologists. Furthest guess carries everyone's bags on the next supply run. Tribute." },
       "answer": 2300000,
       "unit": { "fr": "blocs", "en": "blocks" },
       "format": "plain",
@@ -509,7 +509,7 @@
     },
     {
       "id": "last-mammoths-years-ago",
-      "question": { "fr": "Les derniers mammouths laineux se sont éteints il y a environ combien d'années ?", "en": "The last woolly mammoths died out roughly how many years ago?" },
+      "question": { "fr": "Les derniers mammouths laineux se sont éteints il y a combien d'années ? Bien plus récemment que ce que ton cerveau hurle, là.", "en": "The last woolly mammoths died out how many years ago? Way more recently than whatever your brain is screaming right now." },
       "answer": 4000,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -523,7 +523,7 @@
     },
     {
       "id": "pharaoh-honey-age",
-      "question": { "fr": "Du miel encore comestible a été retrouvé dans des tombes égyptiennes. Son âge approximatif, en années ?", "en": "Still-edible honey has been found in Egyptian tombs. Roughly how many years old?" },
+      "question": { "fr": "On a trouvé du miel ENCORE COMESTIBLE dans des tombes égyptiennes. Son âge, en années ? Et oui, des gens y ont goûté.", "en": "STILL-EDIBLE honey was found in Egyptian tombs. How many years old? And yes, people tasted it." },
       "answer": 3000,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -537,7 +537,7 @@
     },
     {
       "id": "statue-liberty-height",
-      "question": { "fr": "Hauteur totale de la statue de la Liberté, socle et torche compris, en mètres ?", "en": "Total height of the Statue of Liberty, pedestal and torch included, in meters?" },
+      "question": { "fr": "Statue de la Liberté : hauteur totale en mètres, socle et torche compris. C'est NOUS qui l'avons offerte, et personne à cette table connaît le chiffre. Rendez-la.", "en": "Statue of Liberty: total height in meters, pedestal to torch. France built it, shipped it, and reserves the right to take it back the second you lowball this." },
       "answer": 93,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -551,7 +551,7 @@
     },
     {
       "id": "coca-cola-year",
-      "question": { "fr": "En quelle année le Coca-Cola a-t-il été inventé ?", "en": "In what year was Coca-Cola invented?" },
+      "question": { "fr": "Année d'invention du Coca-Cola. Le plus loin du compte paie sa tournée de Coca tiède et éventé. On ne négocie pas.", "en": "The year Coca-Cola was invented. Furthest guess owes the table a round of warm, flat cola. House rules." },
       "answer": 1886,
       "unit": null,
       "format": "year",
@@ -565,7 +565,7 @@
     },
     {
       "id": "paris-metro-year",
-      "question": { "fr": "En quelle année la première ligne du métro de Paris a-t-elle ouvert ?", "en": "In what year did the first Paris métro line open?" },
+      "question": { "fr": "Ouverture de la première ligne du métro de Paris : quelle année ? Tu insultes la ligne 13 tous les matins — connais au moins l'anniversaire de ta pire ennemie.", "en": "Paris opened its first métro line in what year? You've sworn at public transport in three countries. Prove the hate is informed." },
       "answer": 1900,
       "unit": null,
       "format": "year",
@@ -579,7 +579,7 @@
     },
     {
       "id": "tgv-speed-record",
-      "question": { "fr": "Record du monde de vitesse sur rail établi par le TGV en 2007 : combien de km/h, arrondi ?", "en": "World rail speed record set by France's TGV in 2007: how many km/h, rounded?" },
+      "question": { "fr": "Record du monde de vitesse sur rail du TGV en 2007 : combien de km/h, arrondi ? Vise bas et on t'inscrit d'office au club des gens qui prennent le car.", "en": "France's TGV set the world rail speed record in 2007: how many km/h, rounded? Lowball it and you ride the coach for the rest of your life." },
       "answer": 575,
       "unit": { "fr": "km/h", "en": "km/h" },
       "format": "plain",
@@ -593,7 +593,7 @@
     },
     {
       "id": "concorde-record-minutes",
-      "question": { "fr": "Record du Concorde entre New York et Londres (1996) : combien de minutes de vol ?", "en": "Concorde's record New York to London crossing (1996): how many minutes?" },
+      "question": { "fr": "Record du Concorde New York-Londres (1996) : combien de MINUTES de vol ? Ton RER fait même pas Paris-banlieue dans ce temps-là.", "en": "Concorde's record New York-London crossing (1996): how many MINUTES? Your last Ryanair delay was longer. Sit with that." },
       "answer": 173,
       "unit": { "fr": "minutes", "en": "minutes" },
       "format": "plain",
@@ -607,12 +607,12 @@
     },
     {
       "id": "channel-tunnel-undersea-km",
-      "question": { "fr": "Sur combien de kilomètres le tunnel sous la Manche passe-t-il réellement SOUS la mer ?", "en": "For how many kilometers does the Channel Tunnel actually run UNDER the sea?" },
+      "question": { "fr": "Le tunnel sous la Manche passe combien de kilomètres réellement SOUS la mer ? Celui qui répond « toute la longueur » est prié de descendre du jeu.", "en": "The Channel Tunnel: how many kilometers actually run UNDER the sea? Whoever says 'all of it' gets escorted out of the quiz." },
       "answer": 38,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
       "scale": "linear",
-      "funFact": { "fr": "38 km sous l'eau — la plus longue section sous-marine au monde. Les tunneliers français et anglais se sont rejoints à quelques centimètres près.", "en": "38 km underwater — the longest undersea stretch of any tunnel on Earth. The French and British boring machines met just centimeters apart." },
+      "funFact": { "fr": "38 km sous l'eau — la plus longue section sous-marine au monde. Les tunneliers français et anglais se sont rejoints à quelques centimètres près. Toi, tu rates un créneau avec une caméra de recul.", "en": "38 km underwater — the longest undersea stretch of any tunnel on Earth. The French and British boring machines met just centimeters apart. You can't parallel park with a reversing camera." },
       "tags": ["transport", "engineering"],
       "difficulty": 2,
       "spicy": 0,
@@ -621,7 +621,7 @@
     },
     {
       "id": "trans-siberian-km",
-      "question": { "fr": "Longueur du Transsibérien entre Moscou et Vladivostok, en kilomètres ?", "en": "Length of the Trans-Siberian Railway from Moscow to Vladivostok, in kilometers?" },
+      "question": { "fr": "Moscou-Vladivostok en Transsibérien : combien de kilomètres ? Toi, t'as exigé une pause au bout de 45 minutes de covoiturage. Tout le monde s'en souvient.", "en": "Moscow to Vladivostok on the Trans-Siberian: how many kilometers? You demanded a service-station stop 45 minutes into a road trip. Everyone remembers." },
       "answer": 9289,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -635,7 +635,7 @@
     },
     {
       "id": "burj-khalifa-height",
-      "question": { "fr": "Hauteur du gratte-ciel Burj Khalifa à Dubaï, en mètres ?", "en": "Height of the Burj Khalifa skyscraper in Dubai, in meters?" },
+      "question": { "fr": "Hauteur du Burj Khalifa, en mètres. Quelqu'un ici l'a déjà mis en story depuis Dubaï sans connaître le chiffre. C'est le moment d'assumer.", "en": "Burj Khalifa height, in meters. Someone here has posted it from a layover and still can't get within 200. Watch them." },
       "answer": 828,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -649,12 +649,12 @@
     },
     {
       "id": "golden-gate-length-m",
-      "question": { "fr": "Longueur totale du Golden Gate Bridge à San Francisco, en mètres ?", "en": "Total length of San Francisco's Golden Gate Bridge, in meters?" },
+      "question": { "fr": "Longueur totale du Golden Gate, en mètres. Il a plus de temps d'écran que toi, plus de fans que toi, et il fait que rester planté là. Venge-toi sur le chiffre.", "en": "Total length of the Golden Gate Bridge, in meters. More screen time than you, more fans than you, and it just stands there. Nail the number out of spite." },
       "answer": 2737,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
       "scale": "linear",
-      "funFact": { "fr": "2 737 m, peints en « International Orange ». La couleur devait être provisoire — les habitants ont refusé qu'on y touche.", "en": "2,737 m, painted 'International Orange'. The color was meant to be temporary — locals refused to let anyone change it." },
+      "funFact": { "fr": "2 737 m, peints en « International Orange ». La couleur devait être provisoire — les habitants ont refusé qu'on y touche. Le « provisoire » le plus assumé de l'Histoire, avec ta déco.", "en": "2,737 m, painted 'International Orange'. The color was meant to be temporary — locals refused to let anyone change it. The most committed 'temporary' in history, after your flat's furniture." },
       "tags": ["monuments", "engineering"],
       "difficulty": 3,
       "spicy": 0,
@@ -663,7 +663,7 @@
     },
     {
       "id": "great-wall-length-km",
-      "question": { "fr": "Longueur officielle de la Grande Muraille de Chine selon le relevé de 2012, en kilomètres ?", "en": "Official length of the Great Wall of China per the 2012 survey, in kilometers?" },
+      "question": { "fr": "La Grande Muraille de Chine, relevé officiel de 2012, en kilomètres. Prends ton premier instinct, multiplie par dix : ce sera encore trop court.", "en": "Great Wall of China, official 2012 survey, in kilometers. Take your gut number and multiply by ten. Still short." },
       "answer": 21196,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -677,7 +677,7 @@
     },
     {
       "id": "versailles-rooms",
-      "question": { "fr": "Combien de pièces compte le château de Versailles ?", "en": "How many rooms does the Palace of Versailles have?" },
+      "question": { "fr": "Nombre de pièces au château de Versailles. Pour l'échelle : toi tu te bats pour une salle de bain avec trois colocs.", "en": "Number of rooms in the Palace of Versailles. For scale: you share one bathroom with three flatmates." },
       "answer": 2300,
       "unit": { "fr": "pièces", "en": "rooms" },
       "format": "plain",
@@ -691,7 +691,7 @@
     },
     {
       "id": "louvre-on-display",
-      "question": { "fr": "Combien d'œuvres sont exposées au Louvre, sans compter les réserves ?", "en": "How many artworks are on display at the Louvre, not counting storage?" },
+      "question": { "fr": "Combien d'œuvres exposées au Louvre, sans compter les réserves ? Toi t'y as passé 45 minutes, dont 40 dans la file de la Joconde.", "en": "How many artworks are on display at the Louvre, storage not included? You spent 45 minutes there — 40 of them queuing for one painting." },
       "answer": 35000,
       "unit": { "fr": "œuvres", "en": "artworks" },
       "format": "plain",
@@ -705,7 +705,7 @@
     },
     {
       "id": "rushmore-head-height",
-      "question": { "fr": "Quelle est la hauteur de chaque visage sculpté du mont Rushmore, en mètres ?", "en": "How tall is each carved face on Mount Rushmore, in meters?" },
+      "question": { "fr": "Mont Rushmore : hauteur de chaque tête de président, en mètres. Oui, une tête fait la taille de ton studio. Non, c'est pas un exploit.", "en": "Mount Rushmore: how tall is each president's head, in meters? Yes, each head is bigger than your flat. No, that bar isn't high." },
       "answer": 18,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -719,7 +719,7 @@
     },
     {
       "id": "emu-war-year",
-      "question": { "fr": "En quelle année l'Australie a-t-elle déclaré la « Grande Guerre des Émeus »… et perdu ?", "en": "In what year did Australia wage the 'Great Emu War'… and lose?" },
+      "question": { "fr": "L'Australie a déclaré la guerre à des émeus et a PERDU. Quelle année ? Réponds vite, l'humiliation nationale n'attend pas.", "en": "Australia declared war on emus. The emus WON. What year? Answer fast — national embarrassment is time-sensitive." },
       "answer": 1932,
       "unit": null,
       "format": "year",
@@ -733,7 +733,7 @@
     },
     {
       "id": "pont-neuf-year",
-      "question": { "fr": "Le Pont Neuf, le plus VIEUX pont de Paris, a été achevé en quelle année ?", "en": "The Pont Neuf — 'New Bridge' — is actually the OLDEST bridge in Paris. Completed in what year?" },
+      "question": { "fr": "Le « Pont Neuf », plus VIEUX pont de Paris, achevé en quelle année ? Le naming mensonger n'a pas attendu les startups.", "en": "The 'Pont Neuf' — literally 'New Bridge' — is the OLDEST bridge in Paris. Finished what year? False advertising predates startups." },
       "answer": 1607,
       "unit": null,
       "format": "year",
@@ -747,7 +747,7 @@
     },
     {
       "id": "moon-flags-count",
-      "question": { "fr": "Combien de drapeaux américains ont été plantés sur la Lune ?", "en": "How many American flags have been planted on the Moon?" },
+      "question": { "fr": "Combien de drapeaux américains plantés sur la Lune ? Un tout petit chiffre. Tu vas quand même te planter, et on sera là.", "en": "How many American flags are planted on the Moon? Tiny number. You'll still miss it. We'll be watching." },
       "answer": 6,
       "unit": { "fr": "drapeaux", "en": "flags" },
       "format": "plain",
@@ -761,7 +761,7 @@
     },
     {
       "id": "modern-olympics-first-year",
-      "question": { "fr": "En quelle année ont eu lieu les premiers Jeux olympiques modernes ?", "en": "In what year were the first modern Olympic Games held?" },
+      "question": { "fr": "Premiers Jeux olympiques modernes : quelle année ? Réponds une année que t'as vécue et on te retire le droit de commenter le sport.", "en": "First modern Olympics: what year? Answer a year you've personally lived through and you lose sports-opinion privileges forever." },
       "answer": 1896,
       "unit": null,
       "format": "year",
@@ -775,7 +775,7 @@
     },
     {
       "id": "tour-de-france-first-year",
-      "question": { "fr": "En quelle année a eu lieu le premier Tour de France ?", "en": "In what year was the first Tour de France held?" },
+      "question": { "fr": "Premier Tour de France : quelle année ? Ton daron a la réponse instantanément. Fais pas moins bien que lui.", "en": "The first Tour de France: what year? Someone's dad would get this instantly. Be better than someone's dad." },
       "answer": 1903,
       "unit": null,
       "format": "year",
@@ -789,7 +789,7 @@
     },
     {
       "id": "tug-of-war-olympic-last",
-      "question": { "fr": "Le tir à la corde était une vraie épreuve olympique. Dernière apparition aux JO : quelle année ?", "en": "Tug-of-war was a real Olympic event. Its last appearance at the Games: what year?" },
+      "question": { "fr": "Le tir à la corde était une vraie épreuve olympique. Dernière apparition aux JO : quelle année ? Oui, ton jeu de kermesse distribuait des médailles.", "en": "Tug-of-war was an official Olympic event. Its last Games appearance: what year? Yes, your school sports day used to hand out actual medals." },
       "answer": 1920,
       "unit": null,
       "format": "year",
@@ -803,7 +803,7 @@
     },
     {
       "id": "world-cup-1930-teams",
-      "question": { "fr": "Combien d'équipes ont participé à la toute première Coupe du monde de football, en 1930 ?", "en": "How many teams played in the very first football World Cup, in 1930?" },
+      "question": { "fr": "Première Coupe du monde de foot, 1930 : combien d'équipes ? Moins que dans ton tournoi FIFA de quartier.", "en": "First football World Cup, 1930: how many teams entered? Fewer than your five-a-side league. Aim small." },
       "answer": 13,
       "unit": { "fr": "équipes", "en": "teams" },
       "format": "plain",
@@ -817,7 +817,7 @@
     },
     {
       "id": "olympic-gold-grams",
-      "question": { "fr": "Combien de grammes d'or pur contient (au minimum) une médaille d'or olympique ?", "en": "How many grams of pure gold must an Olympic gold medal contain, at minimum?" },
+      "question": { "fr": "Une médaille d'or olympique contient combien de grammes d'or pur, minimum ? Prépare-toi à être déçu pour les athlètes.", "en": "How many grams of actual gold are in an Olympic gold medal, minimum? Prepare to feel scammed on the athletes' behalf." },
       "answer": 6,
       "unit": { "fr": "grammes", "en": "grams" },
       "format": "plain",
@@ -831,7 +831,7 @@
     },
     {
       "id": "basketball-hoop-cm",
-      "question": { "fr": "À quelle hauteur est fixé un panier de basket réglementaire, en centimètres ?", "en": "How high is a regulation basketball hoop, in centimeters?" },
+      "question": { "fr": "Hauteur réglementaire d'un panier de basket, en centimètres. Le plus proche garde le droit de raconter qu'il « touche presque l'arceau ».", "en": "Regulation basketball rim height, in centimeters. Closest guess keeps the right to claim they 'can almost touch the rim'." },
       "answer": 305,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -845,7 +845,7 @@
     },
     {
       "id": "bolt-100m-hundredths",
-      "question": { "fr": "Le record du 100 m établi par Usain Bolt en 2009 : combien de CENTIÈMES de seconde au total ?", "en": "Usain Bolt's 100 m record from 2009: how many HUNDREDTHS of a second in total?" },
+      "question": { "fr": "Record du 100 m de Bolt (2009), en CENTIÈMES de seconde. Toi, t'en mets plus pour retrouver ton code de carte.", "en": "Bolt's 2009 100 m record, in HUNDREDTHS of a second. You take longer than that to unlock your phone." },
       "answer": 958,
       "unit": { "fr": "centièmes", "en": "hundredths" },
       "format": "plain",
@@ -859,7 +859,7 @@
     },
     {
       "id": "phelps-gold-medals",
-      "question": { "fr": "Combien de médailles d'or olympiques Michael Phelps a-t-il gagnées dans sa carrière ?", "en": "How many Olympic gold medals did Michael Phelps win in his career?" },
+      "question": { "fr": "Combien de médailles d'OR olympiques pour Michael Phelps ? Toi, ton sommet aquatique, c'est le brevet de 25 mètres.", "en": "How many Olympic GOLDS did Michael Phelps win? Your proudest aquatic achievement is a 25-meter swim badge." },
       "answer": 23,
       "unit": { "fr": "médailles d'or", "en": "gold medals" },
       "format": "plain",
@@ -873,7 +873,7 @@
     },
     {
       "id": "longest-tennis-match-min",
-      "question": { "fr": "Le plus long match de tennis de l'histoire (Isner-Mahut, Wimbledon 2010) a duré combien de minutes ?", "en": "The longest tennis match in history (Isner-Mahut, Wimbledon 2010) lasted how many minutes?" },
+      "question": { "fr": "Le plus long match de tennis de l'Histoire (Wimbledon 2010) : combien de minutes ? Il a tenu plus longtemps que ton dernier abonnement à la salle.", "en": "Longest tennis match in history (Wimbledon 2010): how many minutes? It outlasted your last gym membership." },
       "answer": 665,
       "unit": { "fr": "minutes", "en": "minutes" },
       "format": "plain",
@@ -887,7 +887,7 @@
     },
     {
       "id": "zidane-headbutt-minute",
-      "question": { "fr": "Finale de la Coupe du monde 2006 : à quelle minute de jeu Zidane a-t-il mis son célèbre coup de boule ?", "en": "2006 World Cup final: in which minute of play did Zidane deliver his famous headbutt?" },
+      "question": { "fr": "Finale 2006 : à quelle minute, le coup de boule de Zidane ? La France entière l'a revu 4 000 fois au ralenti. Plante-toi, pour voir.", "en": "2006 World Cup final: which minute was Zidane's famous headbutt? The whole planet has watched the replay 4,000 times. Go on, miss it." },
       "answer": 110,
       "unit": { "fr": "e minute", "en": "th minute" },
       "format": "plain",
@@ -901,7 +901,7 @@
     },
     {
       "id": "sistine-ceiling-years",
-      "question": { "fr": "Combien d'années Michel-Ange a-t-il passées à peindre le plafond de la chapelle Sixtine ?", "en": "How many years did Michelangelo spend painting the Sistine Chapel ceiling?" },
+      "question": { "fr": "Michel-Ange a passé combien d'années sur le plafond de la Sixtine ? Toi, t'as abandonné un puzzle 500 pièces en février.", "en": "How many years did Michelangelo spend on the Sistine ceiling? You abandoned a 500-piece puzzle in February." },
       "answer": 4,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -915,7 +915,7 @@
     },
     {
       "id": "van-gogh-sold-lifetime",
-      "question": { "fr": "Combien de tableaux Van Gogh a-t-il vendus de son vivant, selon la tradition ?", "en": "How many paintings did Van Gogh sell during his lifetime, according to tradition?" },
+      "question": { "fr": "Tableaux vendus par Van Gogh de son vivant, selon la tradition. Pense petit. Plus petit. Encore. Voilà.", "en": "Paintings Van Gogh sold while alive, per tradition. Think small. Smaller. Keep going. There." },
       "answer": 1,
       "unit": { "fr": "tableau", "en": "painting" },
       "format": "plain",
@@ -929,7 +929,7 @@
     },
     {
       "id": "mozart-symphonies",
-      "question": { "fr": "Combien de symphonies numérotées Mozart a-t-il composées ?", "en": "How many numbered symphonies did Mozart compose?" },
+      "question": { "fr": "Mozart : combien de symphonies numérotées ? Lui, il livrait des chefs-d'œuvre en avance. Toi, t'as demandé un délai pour un mail de trois lignes.", "en": "Mozart: how many numbered symphonies? He delivered masterpieces ahead of schedule. You asked for an extension on a three-line email." },
       "answer": 41,
       "unit": { "fr": "symphonies", "en": "symphonies" },
       "format": "plain",
@@ -943,7 +943,7 @@
     },
     {
       "id": "beatles-split-year",
-      "question": { "fr": "En quelle année les Beatles se sont-ils séparés ?", "en": "In what year did the Beatles break up?" },
+      "question": { "fr": "Séparation des Beatles : quelle année ? Quelqu'un ici porte le t-shirt et connaît trois chansons. L'addition arrive.", "en": "The Beatles split in what year? Someone here owns the t-shirt and exactly three songs. Time to pay for that." },
       "answer": 1970,
       "unit": null,
       "format": "year",
@@ -957,7 +957,7 @@
     },
     {
       "id": "titanic-film-oscars",
-      "question": { "fr": "Combien d'Oscars le film Titanic a-t-il remportés ?", "en": "How many Oscars did the movie Titanic win?" },
+      "question": { "fr": "Combien d'Oscars pour le film Titanic ? T'as pleuré trois fois sur la scène de la porte — assume jusqu'au bout.", "en": "How many Oscars did Titanic win? You've cried at that door scene three times. Earn it." },
       "answer": 11,
       "unit": { "fr": "Oscars", "en": "Oscars" },
       "format": "plain",
@@ -971,7 +971,7 @@
     },
     {
       "id": "harry-potter-first-year",
-      "question": { "fr": "En quelle année le premier Harry Potter a-t-il été publié ?", "en": "In what year was the first Harry Potter book published?" },
+      "question": { "fr": "Année de publication du premier Harry Potter. Quelqu'un ici a refait le test des maisons jusqu'à avoir Serpentard — qu'il réponde en premier.", "en": "The first Harry Potter book dropped in what year? Someone here retook the house quiz until it said Slytherin. They answer first." },
       "answer": 1997,
       "unit": null,
       "format": "year",
@@ -985,7 +985,7 @@
     },
     {
       "id": "anticonstitutionnellement-letters",
-      "question": { "fr": "Combien de lettres compte « anticonstitutionnellement », le plus long mot usuel du français ?", "en": "How many letters are in 'anticonstitutionnellement', famously the longest everyday French word?" },
+      "question": { "fr": "Nombre de lettres dans « anticonstitutionnellement ». Tout le monde le cite depuis le CE2, personne ne l'a jamais compté. Démasquez-vous.", "en": "Letters in 'anticonstitutionnellement', France's favorite party-trick word. You've all quoted it. Not one of you has counted. Prove something." },
       "answer": 25,
       "unit": { "fr": "lettres", "en": "letters" },
       "format": "plain",
@@ -999,7 +999,7 @@
     },
     {
       "id": "khmer-alphabet-letters",
-      "question": { "fr": "L'alphabet khmer (Cambodge), le plus long du monde, compte combien de lettres ?", "en": "The Khmer alphabet (Cambodia), the world's longest, has how many letters?" },
+      "question": { "fr": "L'alphabet khmer, le plus long du monde : combien de lettres ? T'as lâché Duolingo au jour 8. La chouette s'en souvient. Nous aussi.", "en": "The Khmer alphabet is the longest on Earth. How many letters? You quit Duolingo on day 8 of the streak. The owl remembers. So do we." },
       "answer": 74,
       "unit": { "fr": "lettres", "en": "letters" },
       "format": "plain",
@@ -1013,7 +1013,7 @@
     },
     {
       "id": "llanfair-letters",
-      "question": { "fr": "Le village gallois au nom le plus long d'Europe, Llanfairpwllgwyngyll… : combien de lettres dans son nom complet ?", "en": "The Welsh village with Europe's longest place name, Llanfairpwllgwyngyll…: how many letters in the full name?" },
+      "question": { "fr": "Llanfairpwllgwyngyll…, le village gallois au nom le plus long d'Europe : combien de lettres en tout ? Celui qui tente de le prononcer perd sa dignité, pas des points.", "en": "Llanfairpwllgwyngyll…, Europe's longest place name: total letters? Attempt the pronunciation and you forfeit your dignity on the spot." },
       "answer": 58,
       "unit": { "fr": "lettres", "en": "letters" },
       "format": "plain",
@@ -1027,7 +1027,7 @@
     },
     {
       "id": "asterix-first-year",
-      "question": { "fr": "En quelle année Astérix est-il apparu pour la première fois ?", "en": "In what year did Asterix first appear?" },
+      "question": { "fr": "Première apparition d'Astérix : quelle année ? Y'a quarante albums chez tes grands-parents et t'es pas fichu de dater le premier.", "en": "Asterix first appeared in what year? You've read the comics at your nan's and retained exactly nothing. Show us." },
       "answer": 1959,
       "unit": null,
       "format": "year",
@@ -1041,7 +1041,7 @@
     },
     {
       "id": "tintin-first-year",
-      "question": { "fr": "En quelle année Tintin est-il apparu pour la première fois ?", "en": "In what year did Tintin first appear?" },
+      "question": { "fr": "Première apparition de Tintin : quelle année ? Indice : ta grand-mère le lisait déjà. Vise vieux. Plus vieux que ça.", "en": "Tintin first appeared in what year? Hint: your grandparents' bookshelf is the crime scene. Guess old. Older." },
       "answer": 1929,
       "unit": null,
       "format": "year",
@@ -1055,7 +1055,7 @@
     },
     {
       "id": "lumiere-screening-year",
-      "question": { "fr": "En quelle année les frères Lumière ont-ils organisé la première séance publique payante de cinéma ?", "en": "In what year did the Lumière brothers hold the first paid public film screening?" },
+      "question": { "fr": "Première séance de cinéma payante de l'histoire, signée les frères Lumière : quelle année ? T'as un abo UGC illimité et aucune culture. Rattrape-toi.", "en": "The Lumière brothers ran history's first paid film screening in what year? You pay for three streaming services and know zero film history. Fix it." },
       "answer": 1895,
       "unit": null,
       "format": "year",
@@ -1069,7 +1069,7 @@
     },
     {
       "id": "first-photo-person-year",
-      "question": { "fr": "En quelle année a été prise la première photographie montrant un être humain ?", "en": "In what year was the first photograph showing a human being taken?" },
+      "question": { "fr": "Première photo de l'histoire avec un humain dessus : quelle année ? Toi il te faut 47 essais pour un selfie. Lui, il a eu une seule prise.", "en": "First photograph ever to capture a human being: what year? You need 40 attempts for one selfie. This man got a single take." },
       "answer": 1838,
       "unit": null,
       "format": "year",
@@ -1083,7 +1083,7 @@
     },
     {
       "id": "uno-cards-count",
-      "question": { "fr": "Combien de cartes compte un jeu de UNO classique ?", "en": "How many cards are in a classic UNO deck?" },
+      "question": { "fr": "Nombre de cartes dans un jeu de UNO classique. T'as détruit des amitiés avec ce jeu — t'as pas le droit de pas savoir.", "en": "Cards in a classic UNO deck. You've ended friendships with this game. You don't get to not know." },
       "answer": 108,
       "unit": { "fr": "cartes", "en": "cards" },
       "format": "plain",
@@ -1097,7 +1097,7 @@
     },
     {
       "id": "jenga-blocks-count",
-      "question": { "fr": "Combien de blocs de bois compte une tour de Jenga complète ?", "en": "How many wooden blocks make up a complete Jenga tower?" },
+      "question": { "fr": "Nombre de blocs dans une tour de Jenga complète. Celui qui la fait toujours tomber répond en premier — qu'il serve enfin à quelque chose.", "en": "Blocks in a full Jenga tower. The one who always knocks it over answers first — make yourself useful for once." },
       "answer": 54,
       "unit": { "fr": "blocs", "en": "blocks" },
       "format": "plain",
@@ -1111,7 +1111,7 @@
     },
     {
       "id": "twister-circles-count",
-      "question": { "fr": "Combien de ronds de couleur y a-t-il sur un tapis de Twister ?", "en": "How many colored circles are on a Twister mat?" },
+      "question": { "fr": "Nombre de ronds de couleur sur un tapis de Twister. T'y as laissé ta dignité au moins une fois — la moindre des choses, c'est de connaître le terrain.", "en": "Colored circles on a Twister mat. You've lost your dignity on one of these — the least you owe it is knowing the battlefield." },
       "answer": 24,
       "unit": { "fr": "ronds", "en": "circles" },
       "format": "plain",
@@ -1125,7 +1125,7 @@
     },
     {
       "id": "pacman-perfect-score",
-      "question": { "fr": "Quel est le score PARFAIT à Pac-Man, le maximum atteignable sur la machine d'origine ?", "en": "What is the PERFECT score in Pac-Man — the maximum possible on the original machine?" },
+      "question": { "fr": "Le score PARFAIT à Pac-Man, le maximum sur la machine d'origine. C'est précis au point près. Vise, pleure, recommence.", "en": "The PERFECT Pac-Man score — the absolute max on the original machine. It's exact to the point. Guess, weep, repeat." },
       "answer": 3333360,
       "unit": { "fr": "points", "en": "points" },
       "format": "plain",
@@ -1139,7 +1139,7 @@
     },
     {
       "id": "rubiks-gods-number",
-      "question": { "fr": "N'importe quel Rubik's Cube mélangé peut être résolu en combien de mouvements maximum ?", "en": "Any scrambled Rubik's Cube can be solved in at most how many moves?" },
+      "question": { "fr": "N'importe quel Rubik's Cube mélangé se résout en combien de coups maximum ? Toi t'as fini une face en 2017 et t'en parles encore.", "en": "Any scrambled Rubik's Cube can be solved in at most how many moves? You did one face in 2019 and still bring it up." },
       "answer": 20,
       "unit": { "fr": "mouvements", "en": "moves" },
       "format": "plain",
@@ -1153,7 +1153,7 @@
     },
     {
       "id": "lego-brick-patent-year",
-      "question": { "fr": "En quelle année LEGO a-t-il breveté sa brique moderne à tenons ?", "en": "In what year did LEGO patent its modern stud-and-tube brick?" },
+      "question": { "fr": "Année du brevet de la brique LEGO moderne. Elle attaque des pieds nus à 3 h du matin depuis avant ta naissance. Connais la date de naissance de ton bourreau.", "en": "The year LEGO patented the modern brick. It's been assaulting bare feet at 3 a.m. since before your parents met. Know your attacker." },
       "answer": 1958,
       "unit": null,
       "format": "year",
@@ -1167,7 +1167,7 @@
     },
     {
       "id": "lego-six-bricks-combos",
-      "question": { "fr": "De combien de façons différentes peut-on assembler six briques LEGO 2x4 de la même couleur ?", "en": "In how many different ways can six 2x4 LEGO bricks of the same color be combined?" },
+      "question": { "fr": "Six briques LEGO 2x4 : combien de façons de les assembler ? Le chiffre est une insulte au bon sens. Tente quand même.", "en": "Six 2x4 LEGO bricks: how many ways to combine them? The answer is an insult to common sense. Guess anyway." },
       "answer": 915103765,
       "unit": { "fr": "combinaisons", "en": "combinations" },
       "format": "plain",
@@ -1181,7 +1181,7 @@
     },
     {
       "id": "tetris-created-year",
-      "question": { "fr": "En quelle année Tetris a-t-il été créé ?", "en": "In what year was Tetris created?" },
+      "question": { "fr": "Année de création de Tetris. Plus vieux que tout le monde autour de cette table ? Plus jeune ? Tranchez, et fâchez-vous.", "en": "The year Tetris was created. Older than everyone in this room? Younger? Pick a side, then start the fight." },
       "answer": 1984,
       "unit": null,
       "format": "year",
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "pokemon-gen1-count",
-      "question": { "fr": "Combien de Pokémon comptait la toute première génération ?", "en": "How many Pokémon were in the very first generation?" },
+      "question": { "fr": "Nombre de Pokémon dans la toute première génération. Tu te plantes, tu rends tes cartes brillantes. Toutes.", "en": "How many Pokémon in the very first generation? Someone here knew the entire PokéRap by heart. Time to pay for that." },
       "answer": 151,
       "unit": { "fr": "Pokémon", "en": "Pokémon" },
       "format": "plain",
@@ -1209,7 +1209,7 @@
     },
     {
       "id": "chess-fastest-mate-moves",
-      "question": { "fr": "Aux échecs, en combien de coups minimum peut-on se faire mater ?", "en": "In chess, what is the minimum number of moves in which you can be checkmated?" },
+      "question": { "fr": "Aux échecs, on peut se faire mater en combien de coups minimum ? Quelqu'un ici se dit « plutôt bon » depuis Le Jeu de la dame. Vérifions.", "en": "Minimum number of moves to get checkmated in chess. Someone here claims they're 'decent' off the back of one Netflix show. Let's verify." },
       "answer": 2,
       "unit": { "fr": "coups", "en": "moves" },
       "format": "plain",
@@ -1223,7 +1223,7 @@
     },
     {
       "id": "a380-max-passengers",
-      "question": { "fr": "Combien de passagers maximum un Airbus A380 est-il certifié pour transporter ?", "en": "What is the maximum number of passengers an Airbus A380 is certified to carry?" },
+      "question": { "fr": "Un Airbus A380 est certifié pour combien de passagers maximum ? Pense à ton pire vol low-cost. Maintenant, multiplie la misère.", "en": "An Airbus A380 is certified for how many passengers, max? Picture your worst budget flight. Now scale the misery up." },
       "answer": 853,
       "unit": { "fr": "passagers", "en": "passengers" },
       "format": "plain",
@@ -1237,7 +1237,7 @@
     },
     {
       "id": "first-email-year",
-      "question": { "fr": "En quelle année le tout premier e-mail a-t-il été envoyé ?", "en": "In what year was the very first email sent?" },
+      "question": { "fr": "Le tout premier e-mail de l'histoire : quelle année ? T'en as 4 712 non lus — t'as une dette envers lui.", "en": "The very first email in history: what year? You're sitting on 4,000 unread ones. You owe the original some respect." },
       "answer": 1971,
       "unit": null,
       "format": "year",
@@ -1251,7 +1251,7 @@
     },
     {
       "id": "first-website-year",
-      "question": { "fr": "En quelle année le premier site web de l'histoire a-t-il été mis en ligne ?", "en": "In what year did the first website in history go online?" },
+      "question": { "fr": "Mise en ligne du premier site web de l'histoire : quelle année ? Plante-toi de dix ans et tu finis la soirée en mode avion.", "en": "The first website in history went online in what year? Miss by a decade and you spend the rest of the night on airplane mode." },
       "answer": 1991,
       "unit": null,
       "format": "year",
@@ -1265,7 +1265,7 @@
     },
     {
       "id": "google-founded-year",
-      "question": { "fr": "En quelle année Google a-t-il été fondé ?", "en": "In what year was Google founded?" },
+      "question": { "fr": "Année de fondation de Google. Interdit de la googler. Oui, on voit l'ironie. Non, repose ce téléphone.", "en": "The year Google was founded. No, you can't google it. Yes, we see the irony. Put the phone down." },
       "answer": 1998,
       "unit": null,
       "format": "year",
@@ -1279,7 +1279,7 @@
     },
     {
       "id": "iphone-first-year",
-      "question": { "fr": "En quelle année le premier iPhone est-il sorti ?", "en": "In what year was the first iPhone released?" },
+      "question": { "fr": "Sortie du premier iPhone : quelle année ? T'as vendu un rein pour le dernier — montre un minimum de respect à l'ancêtre.", "en": "The first iPhone launched in what year? You financed the latest one over 24 months. Show the ancestor some respect." },
       "answer": 2007,
       "unit": null,
       "format": "year",
@@ -1293,7 +1293,7 @@
     },
     {
       "id": "wikipedia-launch-year",
-      "question": { "fr": "En quelle année Wikipédia a-t-il été lancé ?", "en": "In what year was Wikipedia launched?" },
+      "question": { "fr": "Lancement de Wikipédia : quelle année ? Elle a porté tous tes exposés de collège. L'heure de rembourser a sonné.", "en": "Wikipedia launched in what year? It carried every essay you ever 'wrote'. Time to settle the debt." },
       "answer": 2001,
       "unit": null,
       "format": "year",
@@ -1307,7 +1307,7 @@
     },
     {
       "id": "youtube-first-video-seconds",
-      "question": { "fr": "La toute première vidéo YouTube, « Me at the zoo » (2005), dure combien de secondes ?", "en": "The very first YouTube video, 'Me at the zoo' (2005), is how many seconds long?" },
+      "question": { "fr": "La toute première vidéo YouTube, « Me at the zoo » (2005) : combien de secondes ? Plus courte que les pubs que tu skip avec haine.", "en": "The first YouTube video ever, 'Me at the zoo' (2005): how many seconds? Shorter than the ads you rage-skip." },
       "answer": 19,
       "unit": { "fr": "secondes", "en": "seconds" },
       "format": "plain",
@@ -1321,7 +1321,7 @@
     },
     {
       "id": "first-emoji-count",
-      "question": { "fr": "Combien d'emojis comptait le tout premier jeu d'emojis, créé au Japon en 1999 ?", "en": "How many emojis were in the very first emoji set, created in Japan in 1999?" },
+      "question": { "fr": "Le tout premier set d'emojis (Japon, 1999) : combien d'emojis ? Toi qui réponds « 💀 » à tout, t'as un héritage à honorer.", "en": "The very first emoji set (Japan, 1999): how many emojis? You answer everything with one skull. Honor your heritage." },
       "answer": 176,
       "unit": { "fr": "emojis", "en": "emojis" },
       "format": "plain",
@@ -1335,12 +1335,12 @@
     },
     {
       "id": "qwerty-typewriter-year",
-      "question": { "fr": "Le clavier QWERTY date de la machine à écrire de quelle année ?", "en": "The QWERTY keyboard layout dates back to the typewriter of what year?" },
+      "question": { "fr": "Le clavier QWERTY — l'ancêtre de ton AZERTY — date de la machine à écrire de quelle année ? Rate l'année, et chaque faute de frappe de ta semaine devient officiellement un défaut de personnalité.", "en": "The QWERTY layout dates back to a typewriter from what year? Miss the date and every typo you make this week is officially a character flaw." },
       "answer": 1873,
       "unit": null,
       "format": "year",
       "scale": "linear",
-      "funFact": { "fr": "1873. Disposition pensée pour éviter que les tiges métalliques se coincent. Ton clavier de 2026 est dimensionné pour un problème de mécanique du XIXe.", "en": "1873. The layout was designed to stop metal typebars from jamming. Your 2026 keyboard is optimized for a 19th-century mechanical problem." },
+      "funFact": { "fr": "1873. Disposition pensée pour éviter que les tiges métalliques se coincent. Ton clavier est encore dimensionné pour un problème de mécanique du XIXe.", "en": "1873. The layout was designed to stop metal typebars from jamming. Your keyboard is still optimized for a 19th-century mechanical problem." },
       "tags": ["tech", "history", "wtf"],
       "difficulty": 3,
       "spicy": 0,
@@ -1349,7 +1349,7 @@
     },
     {
       "id": "first-computer-bug-year",
-      "question": { "fr": "Le premier « bug » informatique documenté était un vrai insecte. En quelle année a-t-il été trouvé ?", "en": "The first documented computer 'bug' was an actual insect. In what year was it found?" },
+      "question": { "fr": "Le premier « bug » informatique documenté était un vrai insecte écrasé dans une machine. Quelle année ? Ceux qui bossent « dans la tech » n'ont pas le droit à l'erreur.", "en": "The first documented computer 'bug' was an actual insect squashed in a machine. What year? Anyone here who 'works in tech' and misses this: career over." },
       "answer": 1947,
       "unit": null,
       "format": "year",
@@ -1363,7 +1363,7 @@
     },
     {
       "id": "eniac-weight-tonnes",
-      "question": { "fr": "Combien de tonnes pesait l'ENIAC, l'un des premiers ordinateurs (1946) ?", "en": "How many tonnes did ENIAC, one of the first computers (1946), weigh?" },
+      "question": { "fr": "L'ENIAC, l'un des premiers ordinateurs (1946) : combien de tonnes ? Toi tu râles parce que ton tel fait 200 grammes.", "en": "ENIAC, one of the first computers (1946): how many tonnes? You complain that your phone is 200 grams." },
       "answer": 27,
       "unit": { "fr": "tonnes", "en": "tonnes" },
       "format": "plain",
@@ -1377,7 +1377,7 @@
     },
     {
       "id": "mouse-demo-year",
-      "question": { "fr": "En quelle année la souris d'ordinateur a-t-elle été présentée au public pour la première fois ?", "en": "In what year was the computer mouse first demonstrated to the public?" },
+      "question": { "fr": "Première démo publique de la souris d'ordinateur : quelle année ? Indice : c'est pas l'année que tu vas dire. C'est pire.", "en": "The computer mouse was first shown to the public in what year? Hint: it's not the year you're about to say. It's worse." },
       "answer": 1968,
       "unit": null,
       "format": "year",
@@ -1391,7 +1391,7 @@
     },
     {
       "id": "microwave-invented-year",
-      "question": { "fr": "En quelle année le four à micro-ondes a-t-il été inventé ?", "en": "In what year was the microwave oven invented?" },
+      "question": { "fr": "Invention du four à micro-ondes : quelle année ? Cette machine t'a nourri plus souvent que ta famille. Rate sa date et tu manges froid ce soir, par principe.", "en": "The microwave oven was invented in what year? That machine has fed you more often than your own family. Miss the date and you eat cold pasta tonight, on principle." },
       "answer": 1945,
       "unit": null,
       "format": "year",
@@ -1405,7 +1405,7 @@
     },
     {
       "id": "velcro-patent-year",
-      "question": { "fr": "En quelle année le Velcro a-t-il été breveté ?", "en": "In what year was Velcro patented?" },
+      "question": { "fr": "Brevet du Velcro : quelle année ? T'as porté des baskets à scratch jusqu'à un âge que tes potes ici connaissent très bien. Qu'ils confirment pendant que tu réponds.", "en": "Velcro was patented in what year? You wore velcro trainers until an age your friends here remember perfectly. They can confirm while you answer." },
       "answer": 1955,
       "unit": null,
       "format": "year",
@@ -1419,7 +1419,7 @@
     },
     {
       "id": "bubble-wrap-year",
-      "question": { "fr": "En quelle année le papier bulle a-t-il été inventé ?", "en": "In what year was bubble wrap invented?" },
+      "question": { "fr": "Invention du papier bulle : quelle année ? T'en as éclaté des heures sans jamais te demander d'où il venait. Ingrat.", "en": "Bubble wrap was invented in what year? You've popped hours of it without once asking where it came from. Ungrateful." },
       "answer": 1957,
       "unit": null,
       "format": "year",
@@ -1433,7 +1433,7 @@
     },
     {
       "id": "wd40-attempt-number",
-      "question": { "fr": "Le WD-40 doit son nom au numéro de la tentative qui a enfin fonctionné. C'était la combientième ?", "en": "WD-40 is named after the attempt that finally worked. Which attempt number was it?" },
+      "question": { "fr": "Le WD-40 porte le numéro de la tentative qui a enfin marché. La combientième ? Si tu rates celle-là, c'est très, très grave.", "en": "WD-40 is named after the attempt that finally worked. Which number? Miss this one and the table is allowed to never let it go." },
       "answer": 40,
       "unit": { "fr": "e tentative", "en": "th attempt" },
       "format": "plain",
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "traffic-light-first-year",
-      "question": { "fr": "En quelle année le premier feu de circulation du monde a-t-il été installé, à Londres ?", "en": "In what year was the world's first traffic light installed, in London?" },
+      "question": { "fr": "Premier feu de circulation du monde, installé à Londres : quelle année ? Vise avant l'automobile. Oui, AVANT. Débrouille-toi avec ça.", "en": "The world's first traffic light, installed in London: what year? Aim before the car existed. Yes, BEFORE. Deal with that." },
       "answer": 1868,
       "unit": null,
       "format": "year",
@@ -1461,7 +1461,7 @@
     },
     {
       "id": "bicycle-invented-year",
-      "question": { "fr": "En quelle année le premier ancêtre du vélo, la draisienne, a-t-il été inventé ?", "en": "In what year was the first ancestor of the bicycle, the draisine, invented?" },
+      "question": { "fr": "La draisienne, ancêtre du vélo : inventée quelle année ? Le plus loin du compte rentre à pied. Métaphoriquement. Pour l'instant.", "en": "The draisine, the bicycle's ancestor: invented in what year? Furthest guess walks home. Metaphorically. For now." },
       "answer": 1817,
       "unit": null,
       "format": "year",
@@ -1475,7 +1475,7 @@
     },
     {
       "id": "balloon-first-flight-year",
-      "question": { "fr": "En quelle année a eu lieu le premier vol humain en montgolfière ?", "en": "In what year did the first human hot-air balloon flight take place?" },
+      "question": { "fr": "Premier vol humain en montgolfière : quelle année ? Avant ou après la Révolution ? Engage-toi à voix haute, la table jugera.", "en": "The first human hot-air balloon flight: what year? Before or after the French Revolution? Commit out loud, then suffer." },
       "answer": 1783,
       "unit": null,
       "format": "year",
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "wright-first-flight-seconds",
-      "question": { "fr": "Le premier vol motorisé des frères Wright (1903) a duré combien de secondes ?", "en": "How many seconds did the Wright brothers' first powered flight (1903) last?" },
+      "question": { "fr": "Le premier vol motorisé des frères Wright (1903) : combien de SECONDES ? Spoiler : t'as posté des stories plus longues sur ton kebab.", "en": "The Wright brothers' first powered flight (1903): how many SECONDS? You've posted longer stories about your lunch." },
       "answer": 12,
       "unit": { "fr": "secondes", "en": "seconds" },
       "format": "plain",
@@ -1503,12 +1503,12 @@
     },
     {
       "id": "laika-orbit-year",
-      "question": { "fr": "En quelle année la chienne Laïka est-elle devenue le premier être vivant en orbite ?", "en": "In what year did the dog Laika become the first living creature in orbit?" },
+      "question": { "fr": "La chienne Laïka devient le premier être vivant en orbite : quelle année ? Avant Gagarine. Bien avant ce que tu t'apprêtes à dire.", "en": "Laika the dog became the first living creature in orbit: what year? Before Gagarin. Probably before whatever you're about to say." },
       "answer": 1957,
       "unit": null,
       "format": "year",
       "scale": "linear",
-      "funFact": { "fr": "1957, à bord de Spoutnik 2. Une chienne errante de Moscou est entrée dans l'Histoire avant tous les astronautes.", "en": "1957, aboard Sputnik 2. A Moscow street dog made history before any astronaut did." },
+      "funFact": { "fr": "1957, à bord de Spoutnik 2. Une chienne errante de Moscou est entrée dans l'Histoire avant tous les astronautes. Ton chien, lui, mange des chaussettes.", "en": "1957, aboard Sputnik 2. A Moscow street dog made history before any astronaut did. Your dog eats socks." },
       "tags": ["space", "history", "animals"],
       "difficulty": 2,
       "spicy": 0,
@@ -1517,7 +1517,7 @@
     },
     {
       "id": "tereshkova-year",
-      "question": { "fr": "En quelle année Valentina Terechkova est-elle devenue la première femme dans l'espace ?", "en": "In what year did Valentina Tereshkova become the first woman in space?" },
+      "question": { "fr": "Valentina Terechkova, première femme dans l'espace : quelle année ? Indice : plus tôt que ce que la table va dire. Nettement plus tôt.", "en": "Valentina Tereshkova, first woman in space: what year? Hint: earlier than this table is about to guess. Embarrassingly earlier." },
       "answer": 1963,
       "unit": null,
       "format": "year",
@@ -1531,7 +1531,7 @@
     },
     {
       "id": "gagarin-flight-minutes",
-      "question": { "fr": "Le premier vol spatial de Youri Gagarine (1961) a duré combien de minutes ?", "en": "How many minutes did Yuri Gagarin's first spaceflight (1961) last?" },
+      "question": { "fr": "Le premier vol spatial de Gagarine (1961) a duré combien de MINUTES ? Moins que ta dernière « petite sieste ».", "en": "Gagarin's first spaceflight (1961) lasted how many MINUTES? Less than your last 'quick nap'." },
       "answer": 108,
       "unit": { "fr": "minutes", "en": "minutes" },
       "format": "plain",
@@ -1545,7 +1545,7 @@
     },
     {
       "id": "iss-altitude-km",
-      "question": { "fr": "À quelle altitude moyenne vole la Station spatiale internationale, en kilomètres ?", "en": "At what average altitude does the International Space Station fly, in kilometers?" },
+      "question": { "fr": "L'ISS vole à quelle altitude moyenne, en kilomètres ? C'est plus proche que ce que tu crois. Vexant, hein ?", "en": "Average altitude of the ISS, in kilometers. It's closer than you think. Annoying, isn't it." },
       "answer": 400,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -1559,7 +1559,7 @@
     },
     {
       "id": "iss-sunrises-per-day",
-      "question": { "fr": "Combien de levers de soleil les astronautes de l'ISS voient-ils par 24 heures ?", "en": "How many sunrises do ISS astronauts see every 24 hours?" },
+      "question": { "fr": "Les astronautes de l'ISS voient combien de levers de soleil par 24 heures ? Toi t'en as vu trois cette année, dont deux en rentrant de soirée.", "en": "ISS astronauts watch how many sunrises every 24 hours? You've seen three this year, and two were on the walk home from a night out." },
       "answer": 16,
       "unit": { "fr": "levers de soleil", "en": "sunrises" },
       "format": "plain",
@@ -1573,7 +1573,7 @@
     },
     {
       "id": "karman-line-km",
-      "question": { "fr": "À combien de kilomètres d'altitude commence officiellement l'espace (ligne de Kármán) ?", "en": "At how many kilometers of altitude does space officially begin (the Kármán line)?" },
+      "question": { "fr": "L'espace commence officiellement à combien de kilomètres d'altitude (ligne de Kármán) ? Si ta réponse commence par « genre mille », dis-le fort, qu'on en profite tous.", "en": "Space officially begins at how many kilometers up (the Kármán line)? If your answer starts with 'like, a thousand?', say it loud so everyone benefits." },
       "answer": 100,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -1587,7 +1587,7 @@
     },
     {
       "id": "astronaut-height-gain-cm",
-      "question": { "fr": "De combien de centimètres un astronaute peut-il grandir lors d'un long séjour dans l'espace ?", "en": "By how many centimeters can an astronaut grow during a long stay in space?" },
+      "question": { "fr": "Un astronaute peut grandir de combien de centimètres pendant un long séjour en orbite ? Oui, l'espace distribue ce que ta génétique t'a refusé.", "en": "How many centimeters can an astronaut grow on a long mission? Yes, space hands out what genetics denied you." },
       "answer": 5,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -1601,7 +1601,7 @@
     },
     {
       "id": "jupiter-day-hours",
-      "question": { "fr": "Combien d'heures dure une journée sur Jupiter, arrondi ?", "en": "How many hours long is a day on Jupiter, rounded?" },
+      "question": { "fr": "Une journée sur Jupiter dure combien d'heures, arrondi ? La plus grosse planète du système est aussi la plus rapide. Toi, il te faut 48 h ouvrées pour répondre à un vocal.", "en": "A day on Jupiter lasts how many hours, rounded? Biggest planet in the system, fastest spin. You need two business days to answer a text." },
       "answer": 10,
       "unit": { "fr": "heures", "en": "hours" },
       "format": "plain",
@@ -1615,7 +1615,7 @@
     },
     {
       "id": "olympus-mons-km",
-      "question": { "fr": "Quelle est la hauteur du volcan Olympus Mons sur Mars, le plus haut du système solaire, en kilomètres ?", "en": "How tall is Olympus Mons on Mars, the tallest volcano in the solar system, in kilometers?" },
+      "question": { "fr": "Olympus Mons, sur Mars, le plus haut volcan du système solaire : combien de kilomètres de haut ? Ton Everest chéri est un dos d'âne à côté.", "en": "Olympus Mons on Mars, the tallest volcano in the solar system: how many kilometers high? Everest is a speed bump next to this thing." },
       "answer": 22,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "neptune-orbit-years",
-      "question": { "fr": "Combien d'années terrestres faut-il à Neptune pour faire le tour du Soleil ?", "en": "How many Earth years does Neptune take to orbit the Sun?" },
+      "question": { "fr": "Neptune met combien d'années terrestres à faire le tour du Soleil ? Plus que toutes vos vies réunies autour de cette table ? Tranchez. À voix haute.", "en": "Neptune takes how many Earth years to orbit the Sun? More than every lifespan at this table combined? Decide. Out loud." },
       "answer": 165,
       "unit": { "fr": "années", "en": "years" },
       "format": "plain",
@@ -1643,7 +1643,7 @@
     },
     {
       "id": "pluto-planet-years",
-      "question": { "fr": "Pendant combien d'années Pluton a-t-elle eu le statut de planète ?", "en": "For how many years did Pluto hold planet status?" },
+      "question": { "fr": "Pluton a été une planète pendant combien d'années ? Quelqu'un ici n'a toujours pas digéré la rétrogradation. Qu'il réponde, ce sera thérapeutique.", "en": "Pluto held planet status for how many years? Someone here is still not over the demotion. Let them answer. It's therapy." },
       "answer": 76,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -1657,7 +1657,7 @@
     },
     {
       "id": "earths-fit-in-sun",
-      "question": { "fr": "Combien de planètes Terre pourrait-on faire tenir dans le volume du Soleil ?", "en": "How many planet Earths could fit inside the volume of the Sun?" },
+      "question": { "fr": "Combien de planètes Terre tiennent dans le volume du Soleil ? Annonce ton chiffre avec assurance. L'humiliation sera proportionnelle.", "en": "How many Earths fit inside the volume of the Sun? Say your number with confidence. The humiliation scales accordingly." },
       "answer": 1300000,
       "unit": { "fr": "Terres", "en": "Earths" },
       "format": "plain",
@@ -1671,7 +1671,7 @@
     },
     {
       "id": "speed-light-kms",
-      "question": { "fr": "Quelle est la vitesse de la lumière, en kilomètres par seconde ?", "en": "What is the speed of light, in kilometers per second?" },
+      "question": { "fr": "Vitesse de la lumière, en kilomètres par seconde. Le seul chiffre que les profs ont vraiment essayé de te graver dans le crâne. Voyons ce qu'il en reste.", "en": "Speed of light, in kilometers per second. The one number school genuinely tried to install in your head. Let's audit the damage." },
       "answer": 299792,
       "unit": { "fr": "km/s", "en": "km/s" },
       "format": "plain",
@@ -1685,7 +1685,7 @@
     },
     {
       "id": "speed-sound-ms",
-      "question": { "fr": "Quelle est la vitesse du son dans l'air à 20 °C, en mètres par seconde ?", "en": "What is the speed of sound in air at 20°C, in meters per second?" },
+      "question": { "fr": "Vitesse du son dans l'air à 20 °C, en mètres par seconde. Le plus loin du compte se fait couper la parole toute la manche. Logique.", "en": "Speed of sound in air at 20°C, in meters per second. Furthest guess gets talked over for the rest of the round. Fitting." },
       "answer": 343,
       "unit": { "fr": "m/s", "en": "m/s" },
       "format": "plain",
@@ -1699,7 +1699,7 @@
     },
     {
       "id": "everest-boiling-celsius",
-      "question": { "fr": "À quelle température l'eau bout-elle au sommet de l'Everest, en degrés Celsius ?", "en": "At what temperature does water boil at the summit of Everest, in degrees Celsius?" },
+      "question": { "fr": "L'eau bout à combien de degrés Celsius au sommet de l'Everest ? Si tu dis 100, tu redescends du quiz par la face nord.", "en": "Water boils at how many degrees Celsius on the summit of Everest? Say 100 and you descend this quiz via the north face." },
       "answer": 71,
       "unit": { "fr": "°C", "en": "°C" },
       "format": "plain",
@@ -1713,7 +1713,7 @@
     },
     {
       "id": "air-nitrogen-percent",
-      "question": { "fr": "Quel pourcentage de l'air que tu respires est de l'azote ?", "en": "What percentage of the air you breathe is nitrogen?" },
+      "question": { "fr": "Quel pourcentage de l'air que tu respires, là, maintenant, est de l'azote ? Tu respires depuis ta naissance et t'as jamais lu la composition.", "en": "What percentage of the air you're breathing right now is nitrogen? You've been breathing your whole life and never once read the label." },
       "answer": 78,
       "unit": { "fr": "%", "en": "%" },
       "format": "plain",
@@ -1727,7 +1727,7 @@
     },
     {
       "id": "earth-surface-water-percent",
-      "question": { "fr": "Quel pourcentage de la surface de la Terre est couvert d'eau ?", "en": "What percentage of Earth's surface is covered by water?" },
+      "question": { "fr": "Quel pourcentage de la surface de la Terre est couvert d'eau ? Question la plus facile du paquet — donc la plus dangereuse à rater devant témoins.", "en": "What percentage of Earth's surface is covered by water? Easiest question in the deck — which makes missing it in front of witnesses so much worse." },
       "answer": 71,
       "unit": { "fr": "%", "en": "%" },
       "format": "plain",
@@ -1741,7 +1741,7 @@
     },
     {
       "id": "body-water-percent",
-      "question": { "fr": "Le corps d'un adulte est composé d'environ quel pourcentage d'eau ?", "en": "Roughly what percentage of an adult human body is water?" },
+      "question": { "fr": "Un corps adulte, c'est environ quel pourcentage d'eau ? Réponds, puis accepte enfin ce que t'es : une flaque organisée.", "en": "An adult body is roughly what percentage water? Answer, then accept what you are: a puddle with opinions." },
       "answer": 60,
       "unit": { "fr": "%", "en": "%" },
       "format": "plain",
@@ -1755,7 +1755,7 @@
     },
     {
       "id": "seconds-in-a-day",
-      "question": { "fr": "Combien y a-t-il de secondes dans 24 heures ?", "en": "How many seconds are there in 24 hours?" },
+      "question": { "fr": "Combien de secondes dans 24 heures ? C'est de la multiplication de CM2. Toute hésitation sera notée et ressortie en soirée.", "en": "How many seconds in 24 hours? It's primary-school multiplication. Every second of hesitation will be remembered." },
       "answer": 86400,
       "unit": { "fr": "secondes", "en": "seconds" },
       "format": "plain",
@@ -1769,7 +1769,7 @@
     },
     {
       "id": "heartbeats-per-day",
-      "question": { "fr": "Un cœur qui bat à 70 pulsations par minute : combien de battements en 24 heures ?", "en": "A heart beating at 70 bpm: how many beats in 24 hours?" },
+      "question": { "fr": "Un cœur à 70 pulsations par minute : combien de battements en 24 heures ? Calcul mental, en public, sans filet. Régale-nous.", "en": "A heart at 70 bpm: how many beats in 24 hours? Mental math, live, no safety net. Entertain us." },
       "answer": 100800,
       "unit": { "fr": "battements", "en": "beats" },
       "format": "plain",
@@ -1783,7 +1783,7 @@
     },
     {
       "id": "brain-neurons-billions",
-      "question": { "fr": "Combien de MILLIARDS de neurones contient un cerveau humain ?", "en": "How many BILLION neurons does a human brain contain?" },
+      "question": { "fr": "Combien de MILLIARDS de neurones dans un cerveau humain ? Les tiens sont tous mobilisés là, et ça se voit.", "en": "How many BILLION neurons in a human brain? Yours are all working on this right now, and it shows." },
       "answer": 86,
       "unit": { "fr": "milliards", "en": "billion" },
       "format": "plain",
@@ -1797,7 +1797,7 @@
     },
     {
       "id": "blood-vessels-km",
-      "question": { "fr": "Mis bout à bout, les vaisseaux sanguins d'un corps humain mesurent environ combien de kilomètres, selon l'estimation classique ?", "en": "Laid end to end, the blood vessels in one human body measure roughly how many kilometers, per the classic estimate?" },
+      "question": { "fr": "Mis bout à bout, tes vaisseaux sanguins font combien de kilomètres, selon l'estimation classique ? T'as ça DANS le corps, et tu rates quand même ta correspondance à Châtelet.", "en": "Laid end to end, your blood vessels run how many kilometers, per the classic estimate? You contain that much infrastructure and still miss your stop." },
       "answer": 100000,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -1811,7 +1811,7 @@
     },
     {
       "id": "earth-circumference-km",
-      "question": { "fr": "Quelle est la circonférence de la Terre à l'équateur, en kilomètres ?", "en": "What is Earth's circumference at the equator, in kilometers?" },
+      "question": { "fr": "Circonférence de la Terre à l'équateur, en kilomètres. L'humanité connaît ce chiffre depuis les Grecs anciens. Toi, on va voir.", "en": "Earth's circumference at the equator, in kilometers. Humanity has known this since the ancient Greeks. You, we're about to find out." },
       "answer": 40075,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -1825,7 +1825,7 @@
     },
     {
       "id": "equator-spin-kmh",
-      "question": { "fr": "À l'équateur, à quelle vitesse la rotation de la Terre te fait-elle tourner, en km/h ?", "en": "At the equator, how fast does Earth's rotation spin you around, in km/h?" },
+      "question": { "fr": "À l'équateur, la rotation de la Terre te fait tourner à combien de km/h ? T'es en excès de vitesse depuis ta naissance et t'as jamais payé l'amende.", "en": "At the equator, Earth's spin moves you at how many km/h? You've been speeding since birth and never once got the ticket." },
       "answer": 1670,
       "unit": { "fr": "km/h", "en": "km/h" },
       "format": "plain",
@@ -1839,7 +1839,7 @@
     },
     {
       "id": "coldest-temp-recorded",
-      "question": { "fr": "Température la plus froide jamais mesurée sur Terre (Antarctique, 1983) : combien de degrés SOUS zéro, arrondi ?", "en": "Coldest temperature ever measured on Earth (Antarctica, 1983): how many degrees BELOW zero Celsius, rounded?" },
+      "question": { "fr": "Record de froid sur Terre (Antarctique, 1983) : combien de degrés SOUS zéro, arrondi ? Toi qui sors la doudoune à 12 °C, devine en silence.", "en": "Coldest temperature ever measured on Earth (Antarctica, 1983): how many degrees BELOW zero, rounded? You wear a puffer at 12°C. Hush and guess." },
       "answer": 89,
       "unit": { "fr": "°C sous zéro", "en": "°C below zero" },
       "format": "plain",
@@ -1853,7 +1853,7 @@
     },
     {
       "id": "dead-sea-salinity",
-      "question": { "fr": "Quel est le taux de sel de la mer Morte, en pourcentage ?", "en": "What is the salinity of the Dead Sea, as a percentage?" },
+      "question": { "fr": "Taux de sel de la mer Morte, en pourcentage. Plus salée que toi quand tu perds à ce jeu. C'est dire.", "en": "Salinity of the Dead Sea, as a percentage. Saltier than you when you lose this round. Which is saying something." },
       "answer": 34,
       "unit": { "fr": "%", "en": "%" },
       "format": "plain",
@@ -1867,7 +1867,7 @@
     },
     {
       "id": "baikal-depth-m",
-      "question": { "fr": "Profondeur maximale du lac Baïkal, le lac le plus profond du monde, en mètres ?", "en": "Maximum depth of Lake Baikal, the deepest lake on Earth, in meters?" },
+      "question": { "fr": "Profondeur max du lac Baïkal, le plus profond du monde, en mètres. Plus profond que toutes tes conversations de 3 h du matin réunies.", "en": "Max depth of Lake Baikal, the deepest lake on Earth, in meters. Deeper than every 3 a.m. conversation you've ever had. Combined." },
       "answer": 1642,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -1881,7 +1881,7 @@
     },
     {
       "id": "angel-falls-m",
-      "question": { "fr": "Hauteur du Salto Ángel (Venezuela), la plus haute chute d'eau du monde, en mètres ?", "en": "Height of Angel Falls (Venezuela), the world's tallest waterfall, in meters?" },
+      "question": { "fr": "Hauteur du Salto Ángel (Venezuela), la plus haute chute d'eau du monde, en mètres. Vise haut. Non, plus haut. Tu vises encore comme un timide.", "en": "Height of Angel Falls (Venezuela), the world's tallest waterfall, in meters. Aim high. No, higher. You're still guessing like a coward." },
       "answer": 979,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -1895,12 +1895,12 @@
     },
     {
       "id": "great-barrier-reef-km",
-      "question": { "fr": "Sur combien de kilomètres s'étend la Grande Barrière de corail ?", "en": "How many kilometers long is the Great Barrier Reef?" },
+      "question": { "fr": "La Grande Barrière de corail s'étend sur combien de kilomètres ? Un être vivant plus long que la France. Digère, puis réponds.", "en": "The Great Barrier Reef runs how many kilometers? A living thing longer than Great Britain. Process that, then answer." },
       "answer": 2300,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
       "scale": "linear",
-      "funFact": { "fr": "2 300 km — le plus grand être vivant structuré de la planète, visible depuis l'espace. Contrairement à la Grande Muraille. Pan.", "en": "2,300 km — the largest living structure on the planet, visible from space. Unlike the Great Wall. Mic drop." },
+      "funFact": { "fr": "2 300 km — le plus grand être vivant structuré de la planète, visible depuis l'espace. Elle, on la voit vraiment de là-haut. La Grande Muraille peut s'asseoir.", "en": "2,300 km — the largest living structure on the planet, visible from space. Which is more than the Great Wall can say." },
       "tags": ["nature", "geography", "mindblow"],
       "difficulty": 2,
       "spicy": 0,
@@ -1909,7 +1909,7 @@
     },
     {
       "id": "bamboo-growth-cm-day",
-      "question": { "fr": "Record de croissance du bambou en une seule journée : combien de centimètres ?", "en": "Record bamboo growth in a single day: how many centimeters?" },
+      "question": { "fr": "Record de pousse du bambou en UNE seule journée : combien de centimètres ? Pendant ce temps, ta plante verte meurt de soif depuis mardi.", "en": "Record bamboo growth in ONE single day: how many centimeters? Meanwhile your houseplant has been dying of thirst since Tuesday." },
       "answer": 91,
       "unit": { "fr": "centimètres", "en": "centimeters" },
       "format": "plain",
@@ -1923,7 +1923,7 @@
     },
     {
       "id": "hyperion-height-m",
-      "question": { "fr": "Hauteur d'Hyperion, le plus grand arbre vivant connu (un séquoia de Californie), en mètres ?", "en": "Height of Hyperion, the tallest known living tree (a California redwood), in meters?" },
+      "question": { "fr": "Hauteur d'Hyperion, le plus grand arbre vivant connu (un séquoia de Californie), en mètres. Son adresse est classée secrète. Sa taille, non. À toi.", "en": "Height of Hyperion, the tallest known living tree (a California redwood), in meters. Its address is classified. Its height isn't. Go." },
       "answer": 116,
       "unit": { "fr": "mètres", "en": "meters" },
       "format": "plain",
@@ -1937,7 +1937,7 @@
     },
     {
       "id": "oldest-tree-years",
-      "question": { "fr": "Quel âge a Mathusalem, l'un des plus vieux arbres du monde, en années (environ) ?", "en": "How old is Methuselah, one of the oldest trees on Earth, in years (roughly)?" },
+      "question": { "fr": "Âge de Mathusalem, l'un des plus vieux arbres du monde, en années, environ. Lui n'a pas bougé depuis les pyramides. Toi tu changes d'avis en pleine réponse.", "en": "Age of Methuselah, one of the oldest trees on Earth, in years, roughly. It hasn't moved since the pyramids. You'll change your answer twice before locking in." },
       "answer": 4850,
       "unit": { "fr": "ans", "en": "years" },
       "format": "plain",
@@ -1951,7 +1951,7 @@
     },
     {
       "id": "strawberry-seeds",
-      "question": { "fr": "Combien de graines compte une fraise moyenne ?", "en": "How many seeds are on an average strawberry?" },
+      "question": { "fr": "Combien de graines sur une fraise moyenne ? Quelqu'un va répondre au pif avec une confiance insupportable. Regardez-le bien.", "en": "How many seeds on an average strawberry? Someone's about to answer with completely unearned confidence. Watch them closely." },
       "answer": 200,
       "unit": { "fr": "graines", "en": "seeds" },
       "format": "plain",
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "champagne-bubbles-glass",
-      "question": { "fr": "Combien de bulles s'échappent d'une coupe de champagne, selon le calcul d'un physicien français ?", "en": "How many bubbles escape from one glass of champagne, per a French physicist's calculation?" },
+      "question": { "fr": "Combien de bulles s'échappent d'une coupe de champagne, selon un physicien français ? Oui, quelqu'un a compté. Non, c'était pas toi au Nouvel An.", "en": "How many bubbles escape one glass of champagne, per a French physicist's count? Yes, someone counted. No, it wasn't you on New Year's Eve." },
       "answer": 1000000,
       "unit": { "fr": "bulles", "en": "bubbles" },
       "format": "plain",
@@ -1979,7 +1979,7 @@
     },
     {
       "id": "nutella-invented-year",
-      "question": { "fr": "En quelle année la pâte à tartiner Nutella a-t-elle été lancée ?", "en": "In what year was Nutella launched?" },
+      "question": { "fr": "Année de lancement du Nutella. Tu finis le pot à la cuillère dans le noir — assume au moins de connaître sa date de naissance.", "en": "The year Nutella launched. You eat it from the jar with a spoon in the dark. The least you owe it is a birthday." },
       "answer": 1964,
       "unit": null,
       "format": "year",
@@ -1993,7 +1993,7 @@
     },
     {
       "id": "ostrich-egg-grams",
-      "question": { "fr": "Combien pèse un œuf d'autruche, en grammes ?", "en": "How much does an ostrich egg weigh, in grams?" },
+      "question": { "fr": "Poids d'un œuf d'autruche, en grammes. Un seul nourrit toute la coloc — le plus loin du compte fait la vaisselle de l'omelette imaginaire.", "en": "Weight of one ostrich egg, in grams. One feeds the entire flat — furthest guess does the washing-up for the imaginary omelette." },
       "answer": 1400,
       "unit": { "fr": "grammes", "en": "grams" },
       "format": "plain",
@@ -2007,7 +2007,7 @@
     },
     {
       "id": "hummingbird-heart-bpm",
-      "question": { "fr": "Le cœur d'un colibri en vol peut atteindre combien de battements par minute ?", "en": "A hummingbird's heart in flight can reach how many beats per minute?" },
+      "question": { "fr": "Le cœur d'un colibri en vol monte à combien de battements par minute ? Toi t'appelles « cardio » le fait de courir après le bus.", "en": "A hummingbird's heart in flight hits how many beats per minute? You call chasing the bus 'cardio'." },
       "answer": 1260,
       "unit": { "fr": "battements/min", "en": "beats/min" },
       "format": "plain",
@@ -2021,7 +2021,7 @@
     },
     {
       "id": "blue-whale-heart-kg",
-      "question": { "fr": "Combien pèse le cœur d'une baleine bleue, en kilogrammes ?", "en": "How much does a blue whale's heart weigh, in kilograms?" },
+      "question": { "fr": "Poids du cœur d'une baleine bleue, en kilogrammes. Plus lourd que toi ? Moins ? Engage-toi publiquement.", "en": "Weight of a blue whale's heart, in kilograms. Heavier than you? Lighter? Commit publicly." },
       "answer": 180,
       "unit": { "fr": "kilogrammes", "en": "kilograms" },
       "format": "plain",
@@ -2035,7 +2035,7 @@
     },
     {
       "id": "bee-eyes-count",
-      "question": { "fr": "Combien d'yeux possède une abeille ?", "en": "How many eyes does a honeybee have?" },
+      "question": { "fr": "Combien d'yeux possède une abeille ? Si tu réponds « deux » avec assurance, la table a le droit de te le rappeler à vie.", "en": "How many eyes does a honeybee have? Answer 'two' with your chest and the table gets to bring it up forever." },
       "answer": 5,
       "unit": { "fr": "yeux", "en": "eyes" },
       "format": "plain",
@@ -2049,7 +2049,7 @@
     },
     {
       "id": "snail-teeth-count",
-      "question": { "fr": "Combien de dents possède un escargot de jardin, environ ?", "en": "Roughly how many teeth does a garden snail have?" },
+      "question": { "fr": "Combien de dents possède un escargot de jardin, environ ? Le chiffre va te fâcher. Réponds quand même.", "en": "Roughly how many teeth does a garden snail have? The answer will upset you. Answer anyway." },
       "answer": 14000,
       "unit": { "fr": "dents", "en": "teeth" },
       "format": "plain",
@@ -2063,12 +2063,12 @@
     },
     {
       "id": "elephant-pregnancy-days",
-      "question": { "fr": "Combien de jours dure la grossesse d'une éléphante, environ ?", "en": "Roughly how many days does an elephant pregnancy last?" },
+      "question": { "fr": "Une grossesse d'éléphante dure combien de jours, environ ? Toi qui trouves que neuf mois c'est « énorme », accroche-toi.", "en": "An elephant pregnancy lasts roughly how many days? You think nine months sounds rough. Brace yourself." },
       "answer": 660,
       "unit": { "fr": "jours", "en": "days" },
       "format": "plain",
       "scale": "linear",
-      "funFact": { "fr": "Environ 660 jours, soit 22 mois — la plus longue grossesse des mammifères terrestres. Respect éternel aux éléphantes.", "en": "About 660 days — 22 months, the longest pregnancy of any land mammal. Eternal respect to elephant moms." },
+      "funFact": { "fr": "Environ 660 jours, soit 22 mois — la plus longue grossesse des mammifères terrestres. Deux ans. Reparle-nous de ta semaine « interminable », vas-y.", "en": "About 660 days — 22 months, the longest pregnancy of any land mammal. Two years. Tell us again about your 'endless' week." },
       "tags": ["animals"],
       "difficulty": 2,
       "spicy": 0,
@@ -2077,7 +2077,7 @@
     },
     {
       "id": "peregrine-dive-kmh",
-      "question": { "fr": "Vitesse record du faucon pèlerin en piqué, l'animal le plus rapide du monde, en km/h ?", "en": "Record dive speed of the peregrine falcon, the fastest animal on Earth, in km/h?" },
+      "question": { "fr": "Vitesse record du faucon pèlerin en piqué, l'animal le plus rapide du monde, en km/h. Plus vite que tout ce que t'as jamais conduit. Légalement, en tout cas.", "en": "Record dive speed of the peregrine falcon, the fastest animal alive, in km/h. Faster than anything you've ever driven. Legally, anyway." },
       "answer": 389,
       "unit": { "fr": "km/h", "en": "km/h" },
       "format": "plain",
@@ -2091,7 +2091,7 @@
     },
     {
       "id": "arctic-tern-km-year",
-      "question": { "fr": "La sterne arctique migre chaque année sur environ combien de kilomètres ?", "en": "The Arctic tern migrates roughly how many kilometers each year?" },
+      "question": { "fr": "La sterne arctique migre chaque année sur environ combien de kilomètres ? D'un pôle à l'autre, sans escale, sans se plaindre. Toi, t'as annulé un resto parce que c'était « à 20 minutes ».", "en": "The Arctic tern migrates roughly how many kilometers each year? Pole to pole, no complaints filed. You've cancelled plans that were a 15-minute walk away." },
       "answer": 70000,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",
@@ -2105,7 +2105,7 @@
     },
     {
       "id": "cow-stomach-compartments",
-      "question": { "fr": "L'estomac d'une vache compte combien de compartiments ?", "en": "How many compartments does a cow's stomach have?" },
+      "question": { "fr": "L'estomac d'une vache compte combien de compartiments ? Chiffre minuscule. Le rater serait donc historique. On y croit.", "en": "How many compartments in a cow's stomach? Tiny number. Missing it would be historic. We believe in you." },
       "answer": 4,
       "unit": { "fr": "compartiments", "en": "compartments" },
       "format": "plain",
@@ -2119,7 +2119,7 @@
     },
     {
       "id": "sharks-age-millions",
-      "question": { "fr": "Les requins existent depuis environ combien de MILLIONS d'années ?", "en": "Sharks have existed for roughly how many MILLION years?" },
+      "question": { "fr": "Les requins existent depuis combien de MILLIONS d'années, environ ? Indice : avant les arbres. Relis. Avant. Les. Arbres.", "en": "Sharks have existed for roughly how many MILLION years? Hint: before trees. Read that again. Before. Trees." },
       "answer": 450,
       "unit": { "fr": "millions d'années", "en": "million years" },
       "format": "plain",
@@ -2133,7 +2133,7 @@
     },
     {
       "id": "cheetah-top-speed-kmh",
-      "question": { "fr": "Vitesse de pointe communément mesurée du guépard, en km/h ?", "en": "Commonly measured top speed of a cheetah, in km/h?" },
+      "question": { "fr": "Vitesse de pointe du guépard, en km/h. Le plus loin du compte court chercher les snacks. C'est thématique.", "en": "Top speed of a cheetah, in km/h. Furthest guess does the snack run. It's thematic." },
       "answer": 112,
       "unit": { "fr": "km/h", "en": "km/h" },
       "format": "plain",
@@ -2147,7 +2147,7 @@
     },
     {
       "id": "octopus-hearts-count",
-      "question": { "fr": "Combien de cœurs possède une pieuvre ?", "en": "How many hearts does an octopus have?" },
+      "question": { "fr": "Combien de cœurs possède une pieuvre ? Petit chiffre, grosse embrouille : la moitié de la table est sûre d'elle. À tort, forcément.", "en": "How many hearts does an octopus have? Small number, big argument: half the table is certain. Half the table is wrong." },
       "answer": 3,
       "unit": { "fr": "cœurs", "en": "hearts" },
       "format": "plain",
@@ -2161,7 +2161,7 @@
     },
     {
       "id": "giraffe-neck-vertebrae",
-      "question": { "fr": "Combien de vertèbres compte le cou d'une girafe ?", "en": "How many vertebrae are in a giraffe's neck?" },
+      "question": { "fr": "Combien de vertèbres dans le cou d'une girafe ? C'est un piège. Tout le monde tombe dedans. Vas-y, tombe.", "en": "How many vertebrae in a giraffe's neck? It's a trap. Everyone falls in. Go on, fall." },
       "answer": 7,
       "unit": { "fr": "vertèbres", "en": "vertebrae" },
       "format": "plain",
@@ -2175,7 +2175,7 @@
     },
     {
       "id": "loire-length-km",
-      "question": { "fr": "Longueur de la Loire, le plus long fleuve de France, en kilomètres ?", "en": "Length of the Loire, France's longest river, in kilometers?" },
+      "question": { "fr": "Longueur de la Loire, le plus long fleuve de France, en kilomètres. T'as fait les châteaux en sortie scolaire — rentabilise enfin ce car.", "en": "Length of the Loire, France's longest river, in kilometers. You did the châteaux on a school trip. Make that coach ride finally pay off." },
       "answer": 1006,
       "unit": { "fr": "kilomètres", "en": "kilometers" },
       "format": "plain",

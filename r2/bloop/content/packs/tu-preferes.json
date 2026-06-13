@@ -13,88 +13,88 @@
     },
     {
       "id": "wyr-history-vs-gallery",
-      "optionA": { "fr": "Que tes potes lisent tout ton historique de recherche", "en": "Your friends read your entire search history" },
-      "optionB": { "fr": "Que tes parents fassent défiler toute ta galerie photos", "en": "Your parents scroll through your whole camera roll" },
+      "optionA": { "fr": "Tes potes lisent ton historique de recherche à voix haute, ce soir", "en": "Your friends read your search history out loud, tonight" },
+      "optionB": { "fr": "Tes darons font défiler ta galerie, dossier captures d'écran inclus", "en": "Your parents scroll your camera roll, screenshots folder included" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["phone", "embarrassing", "debate-starter"]
     },
     {
-      "id": "wyr-animals-vs-languages",
-      "optionA": { "fr": "Pouvoir parler avec les animaux", "en": "Be able to talk to animals" },
-      "optionB": { "fr": "Parler couramment toutes les langues du monde", "en": "Speak every human language fluently" },
+      "id": "wyr-other-group-chat",
+      "optionA": { "fr": "Lire tout ce que tes potes disent de toi dans l'autre groupe", "en": "Read everything your friends say in the group chat without you" },
+      "optionB": { "fr": "Qu'ils lisent tout ce que TOI t'as dit sur eux", "en": "They read everything YOU'VE said about them" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "classic", "debate-starter"]
+      "tags": ["group-chat", "betrayal", "debate-starter"]
     },
     {
-      "id": "wyr-fly-low-vs-invisible-awkward",
-      "optionA": { "fr": "Voler, mais seulement à 30 cm du sol", "en": "Fly, but only one foot off the ground" },
-      "optionB": { "fr": "Être invisible, mais seulement quand personne ne te regarde", "en": "Be invisible, but only when nobody is looking" },
+      "id": "wyr-seagull-slap-vs-pigeon-mugging",
+      "optionA": { "fr": "Une mouette te gifle une fois par semaine, jour aléatoire, témoins garantis", "en": "A seagull slaps you once a week, random day, witnesses guaranteed" },
+      "optionB": { "fr": "Un pigeon te rackette ton déjeuner tous les midis, mains comprises", "en": "A pigeon mugs you for your lunch every noon, straight from your hands" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["superpower", "useless-powers"]
+      "tags": ["animals", "violence-cartoon", "curse"]
     },
     {
       "id": "wyr-no-cheese-vs-no-bread",
-      "optionA": { "fr": "Ne plus jamais manger de fromage", "en": "Never eat cheese again" },
-      "optionB": { "fr": "Ne plus jamais manger de pain", "en": "Never eat bread again" },
+      "optionA": { "fr": "Plus jamais de fromage, et c'est toi qui portes l'appareil à chaque raclette", "en": "Never eat cheese again, but you still host every single pizza night" },
+      "optionB": { "fr": "Plus jamais de pain, et tu regardes les autres saucer en silence", "en": "Never eat bread again, and you watch the table mop the sauce without you" },
       "category": "food",
       "spicyLevel": 0,
       "tags": ["forever", "debate-starter"]
     },
     {
-      "id": "wyr-past-vs-future",
-      "optionA": { "fr": "Voyager 100 ans dans le passé", "en": "Travel 100 years into the past" },
-      "optionB": { "fr": "Voyager 100 ans dans le futur", "en": "Travel 100 years into the future" },
+      "id": "wyr-boss-reads-vs-parents-hear",
+      "optionA": { "fr": "Ton boss lit tout ce que t'as écrit sur lui", "en": "Your boss reads everything you've ever typed about them" },
+      "optionB": { "fr": "Tes darons entendent tous les mensonges que tu leur as sortis", "en": "Your parents hear every lie you've ever told them" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["time-travel", "classic"]
+      "tags": ["exposure", "family", "work"]
     },
     {
       "id": "wyr-laugh-track-vs-narrator",
-      "optionA": { "fr": "Avoir des rires enregistrés à chacune de tes blagues", "en": "Have a laugh track play after every joke you make" },
-      "optionB": { "fr": "Avoir une voix off qui commente tous tes échecs", "en": "Have a narrator announce every one of your fails" },
+      "optionA": { "fr": "Des rires enregistrés après chaque blague, même celles qui floppent", "en": "A laugh track plays after every joke, the ones that flop included" },
+      "optionB": { "fr": "Une voix off qui annonce tes échecs : « il va encore rater »", "en": "A narrator announcing your fails: 'he's about to do it again'" },
       "category": "absurd",
       "spicyLevel": 0,
       "tags": ["sound", "daily-life"]
     },
     {
-      "id": "wyr-cold-fries-vs-warm-soda",
-      "optionA": { "fr": "Ne manger que des frites froides à vie", "en": "Only eat cold fries for life" },
-      "optionB": { "fr": "Ne boire que du soda tiède à vie", "en": "Only drink lukewarm soda for life" },
+      "id": "wyr-floor-fry-vs-strangers-leftovers",
+      "optionA": { "fr": "Manger la frite tombée par terre au McDo, devant toute la file", "en": "Eat the fry that hit the McDonald's floor, full queue watching" },
+      "optionB": { "fr": "Finir les restes d'une table d'inconnus, une fois par mois", "en": "Finish a table of strangers' leftovers once a month" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["forever", "gross-funny"]
+      "tags": ["gross-funny", "public-shame"]
     },
     {
       "id": "wyr-text-aloud-vs-thoughts-status",
-      "optionA": { "fr": "Que ton téléphone lise tes messages à voix haute en public", "en": "Your phone reads your texts out loud in public" },
-      "optionB": { "fr": "Que tes pensées s'affichent en story pendant 10 min par jour", "en": "Your thoughts post as a story for 10 minutes a day" },
+      "optionA": { "fr": "Ton tel lit tes messages à voix haute dans le bus, prénoms inclus", "en": "Your phone reads your texts out loud on the bus, names included" },
+      "optionB": { "fr": "Tes pensées partent en story 10 min par jour, sans préavis", "en": "Your thoughts auto-post as a story 10 minutes a day, no warning" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["phone", "embarrassing"]
     },
     {
-      "id": "wyr-rewind-vs-pause",
-      "optionA": { "fr": "Pouvoir rembobiner ta journée une fois par semaine", "en": "Be able to rewind your day once a week" },
-      "optionB": { "fr": "Pouvoir mettre le monde sur pause 10 minutes par jour", "en": "Be able to pause the world 10 minutes a day" },
+      "id": "wyr-worst-viral-vs-best-unproven",
+      "optionA": { "fr": "Ton pire moment en soirée est filmé et devient viral", "en": "Your worst party moment gets filmed and goes viral" },
+      "optionB": { "fr": "Ton meilleur moment de vie : zéro preuve, personne te croit", "en": "The best thing you ever did: zero proof, nobody believes you" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "time-travel"]
+      "tags": ["exposure", "reputation"]
     },
     {
       "id": "wyr-crocs-wedding-vs-suit-beach",
-      "optionA": { "fr": "Porter des Crocs à tous les mariages", "en": "Wear Crocs to every wedding" },
-      "optionB": { "fr": "Porter un costume trois-pièces à la plage", "en": "Wear a three-piece suit to the beach" },
+      "optionA": { "fr": "Des Crocs à tous les mariages, photos officielles comprises", "en": "Crocs at every wedding, official photos included" },
+      "optionB": { "fr": "Costard trois-pièces à la plage, 15 août compris", "en": "A three-piece suit at the beach, heatwave included" },
       "category": "absurd",
       "spicyLevel": 0,
       "tags": ["fashion", "daily-life"]
     },
     {
       "id": "wyr-pineapple-pizza-forever",
-      "optionA": { "fr": "Manger de l'ananas sur toutes tes pizzas", "en": "Have pineapple on every pizza you eat" },
-      "optionB": { "fr": "Manger de la pizza froide uniquement", "en": "Only ever eat pizza cold" },
+      "optionA": { "fr": "De l'ananas sur toutes tes pizzas, et tu dois le défendre tout haut", "en": "Pineapple on every pizza, and you defend it out loud each time" },
+      "optionB": { "fr": "Pizza uniquement froide, réchauffer est interdit", "en": "Pizza served cold only, reheating is banned" },
       "category": "food",
       "spicyLevel": 0,
       "tags": ["pizza", "debate-starter"]
@@ -109,48 +109,48 @@
     },
     {
       "id": "wyr-sing-vs-rhyme",
-      "optionA": { "fr": "Chanter tout ce que tu dis", "en": "Sing everything you say" },
-      "optionB": { "fr": "Parler uniquement en rimes", "en": "Only speak in rhymes" },
+      "optionA": { "fr": "Chanter tout ce que tu dis, enterrements compris", "en": "Sing everything you say, funerals included" },
+      "optionB": { "fr": "Parler uniquement en rimes, entretiens d'embauche compris", "en": "Speak only in rhyme, job interviews included" },
       "category": "absurd",
       "spicyLevel": 0,
       "tags": ["speech", "forever"]
     },
     {
       "id": "wyr-ex-toast-vs-boss-karaoke",
-      "optionA": { "fr": "Faire un discours au mariage de ton ex", "en": "Give a toast at your ex's wedding" },
-      "optionB": { "fr": "Faire un karaoké en duo avec ton boss", "en": "Sing a karaoke duet with your boss" },
+      "optionA": { "fr": "Le discours au mariage de ton ex, placé à la table d'honneur", "en": "Give the toast at your ex's wedding, seated at the head table" },
+      "optionB": { "fr": "Un slow en karaoké avec ton boss, lundi 9h, équipe au complet", "en": "A slow-song karaoke duet with your boss, full team watching" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["awkward", "public"]
     },
     {
-      "id": "wyr-mind-read-vs-future-10s",
-      "optionA": { "fr": "Lire dans les pensées, sans pouvoir éteindre", "en": "Read minds, with no off switch" },
-      "optionB": { "fr": "Voir 10 secondes dans le futur, en permanence", "en": "See 10 seconds into the future, permanently" },
+      "id": "wyr-hear-thoughts-vs-yours-leak",
+      "optionA": { "fr": "Entendre les pensées des gens, mais uniquement celles sur toi", "en": "Hear people's thoughts, but only the ones about you" },
+      "optionB": { "fr": "Tout le monde entend les tiennes, une heure par jour, au hasard", "en": "Everyone hears yours, one random hour a day" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "curse"]
+      "tags": ["exposure", "curse"]
     },
     {
       "id": "wyr-ketchup-everything-vs-no-sauce",
-      "optionA": { "fr": "Mettre du ketchup sur absolument tout ce que tu manges", "en": "Put ketchup on absolutely everything you eat" },
-      "optionB": { "fr": "Ne plus jamais utiliser une seule sauce", "en": "Never use any sauce ever again" },
+      "optionA": { "fr": "Du ketchup sur tout, y compris le plat de ta belle-mère, devant elle", "en": "Ketchup on everything, your nan's Sunday roast included, at the table" },
+      "optionB": { "fr": "Plus aucune sauce, et tu dois l'annoncer tout haut à chaque kebab", "en": "No sauce ever again, and you announce 'dry for me, thanks' every time" },
       "category": "food",
       "spicyLevel": 0,
       "tags": ["sauce", "forever"]
     },
     {
       "id": "wyr-baby-hands-vs-giant-feet",
-      "optionA": { "fr": "Avoir des mains de bébé", "en": "Have tiny baby hands" },
-      "optionB": { "fr": "Avoir des pieds taille 60", "en": "Have size 20 feet" },
+      "optionA": { "fr": "Des mains de bébé, et tu dois quand même faire tous les checks", "en": "Tiny baby hands, and you still owe everyone a firm handshake" },
+      "optionB": { "fr": "Des pieds taille 60, chaussures sur mesure à tes frais", "en": "Size 20 feet, custom shoes at your own expense" },
       "category": "absurd",
       "spicyLevel": 0,
       "tags": ["body-swap", "classic"]
     },
     {
       "id": "wyr-reply-all-vs-wrong-chat",
-      "optionA": { "fr": "Répondre à tous avec un ragot destiné à un seul collègue", "en": "Hit reply-all on gossip meant for one coworker" },
-      "optionB": { "fr": "Envoyer ta critique du groupe... dans le groupe", "en": "Send your rant about the group chat... to the group chat" },
+      "optionA": { "fr": "Le ragot part en « répondre à tous », la cible en copie", "en": "Your gossip goes reply-all, with the target cc'd" },
+      "optionB": { "fr": "Ton pavé sur le groupe... envoyé dans le groupe", "en": "Your rant about the group chat lands in the group chat" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["phone", "awkward", "work"]
@@ -172,17 +172,17 @@
       "tags": ["discomfort", "forever"]
     },
     {
-      "id": "wyr-only-breakfast-vs-only-dinner",
-      "optionA": { "fr": "Ne manger que des petits-déjeuners", "en": "Only eat breakfast foods" },
-      "optionB": { "fr": "Ne manger que des plats du soir", "en": "Only eat dinner foods" },
+      "id": "wyr-neighbor-menu-vs-group-votes",
+      "optionA": { "fr": "Manger pareil que ton voisin de gauche, à vie (regarde-le)", "en": "Eat whatever the person on your left eats, for life (look at them)" },
+      "optionB": { "fr": "Ce groupe vote chacun de tes repas, à main levée", "en": "This group votes on every meal you order, show of hands" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["forever", "debate-starter"]
+      "tags": ["in-room", "forever", "debate-starter"]
     },
     {
       "id": "wyr-famous-broke-vs-rich-unknown",
-      "optionA": { "fr": "Être célèbre mais fauché", "en": "Be famous but broke" },
-      "optionB": { "fr": "Être riche mais inconnu", "en": "Be rich but unknown" },
+      "optionA": { "fr": "Célèbre, mais à découvert le 10 du mois", "en": "Famous, but your card declines at the till" },
+      "optionB": { "fr": "Riche, mais personne te calcule, même pas en story", "en": "Rich, but nobody ever remembers your name" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["fame", "money", "classic"]
@@ -197,32 +197,32 @@
     },
     {
       "id": "wyr-call-vs-voicemail",
-      "optionA": { "fr": "Devoir appeler pour la moindre question", "en": "Have to make a real phone call for every tiny question" },
-      "optionB": { "fr": "Recevoir uniquement des vocaux de 5 minutes", "en": "Only receive 5-minute voice messages" },
+      "optionA": { "fr": "Appeler pour la moindre question, même « tu dors ? »", "en": "A real phone call for every tiny question, even 'wyd'" },
+      "optionB": { "fr": "Que des vocaux de 5 minutes, vitesse x2 interdite", "en": "Only 5-minute voice notes, 2x speed banned" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["phone", "pet-peeve"]
     },
     {
-      "id": "wyr-spicy-everything-vs-bland-everything",
-      "optionA": { "fr": "Que tous tes plats soient ultra pimentés", "en": "Have every meal be blisteringly spicy" },
-      "optionB": { "fr": "Que tous tes plats soient totalement fades", "en": "Have every meal be completely bland" },
+      "id": "wyr-spice-tears-pro-vs-kids-menu",
+      "optionA": { "fr": "Pleurer de piment à chaque repas pro, en jurant que ça va", "en": "Cry from spice at every work lunch and insist you're fine" },
+      "optionB": { "fr": "Commander au menu enfant à vie, chaise haute selon l'humeur du serveur", "en": "Order off the kids' menu for life, high chair at the waiter's discretion" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["taste", "forever"]
+      "tags": ["public-shame", "forever"]
     },
     {
       "id": "wyr-redo-exams-vs-redo-teeth",
-      "optionA": { "fr": "Repasser le bac tous les ans", "en": "Retake your final school exams every year" },
-      "optionB": { "fr": "Aller chez le dentiste tous les mois", "en": "Go to the dentist every month" },
+      "optionA": { "fr": "Repasser le bac chaque année, résultats publiés dans le groupe", "en": "Resit your school finals yearly, results posted in the group chat" },
+      "optionB": { "fr": "Refaire ta 5e maintenant, un an complet, avec de vrais élèves de 5e", "en": "Redo Year 8 right now, a full year, with actual Year 8s" },
       "category": "absurd",
       "spicyLevel": 0,
       "tags": ["recurring-pain", "school"]
     },
     {
       "id": "wyr-delete-photos-vs-delete-messages",
-      "optionA": { "fr": "Perdre toutes tes photos", "en": "Lose all your photos" },
-      "optionB": { "fr": "Perdre toutes tes conversations", "en": "Lose all your chat histories" },
+      "optionA": { "fr": "Perdre dix ans de photos, d'un coup", "en": "Lose ten years of photos, all at once" },
+      "optionB": { "fr": "Perdre dix ans de conversations, preuves comprises", "en": "Lose ten years of chats, receipts included" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["phone", "memories"]
@@ -245,56 +245,56 @@
     },
     {
       "id": "wyr-no-coffee-vs-no-snacks",
-      "optionA": { "fr": "Ne plus jamais boire de café ni de thé", "en": "Never drink coffee or tea again" },
-      "optionB": { "fr": "Ne plus jamais grignoter entre les repas", "en": "Never snack between meals again" },
+      "optionA": { "fr": "Plus jamais de café ni de thé, les lundis existent toujours", "en": "No coffee or tea ever again, Mondays still exist" },
+      "optionB": { "fr": "Plus jamais rien entre les repas, même pas en cuisinant", "en": "No snacking ever again, not even while cooking" },
       "category": "food",
       "spicyLevel": 0,
       "tags": ["forever", "habits"]
     },
     {
       "id": "wyr-always-late-vs-always-2h-early",
-      "optionA": { "fr": "Arriver toujours 20 minutes en retard", "en": "Always arrive 20 minutes late" },
-      "optionB": { "fr": "Arriver toujours 2 heures en avance", "en": "Always arrive 2 hours early" },
+      "optionA": { "fr": "Arriver 40 minutes en retard partout, même à ton propre mariage", "en": "Show up 40 minutes late everywhere, your own wedding included" },
+      "optionB": { "fr": "Arriver 2 heures en avance partout, même chez des inconnus", "en": "Show up 2 hours early everywhere, even at strangers' houses" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["time", "daily-life"]
     },
     {
       "id": "wyr-one-friend-forever-vs-new-monthly",
-      "optionA": { "fr": "Garder un seul meilleur ami à vie", "en": "Keep one single best friend for life" },
-      "optionB": { "fr": "Changer de groupe d'amis tous les ans", "en": "Get a brand-new friend group every year" },
+      "optionA": { "fr": "Un seul pote à vie, choisi par un vote de ce groupe", "en": "One friend for life, picked by a vote in this room" },
+      "optionB": { "fr": "Nouveau groupe d'amis chaque année, zéro souvenir commun", "en": "A new friend group every year, zero shared history" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["friendship", "life-choices"]
     },
     {
-      "id": "wyr-glitter-sneeze-vs-confetti-burp",
-      "optionA": { "fr": "Éternuer des paillettes", "en": "Sneeze glitter" },
-      "optionB": { "fr": "Roter des confettis", "en": "Burp confetti" },
+      "id": "wyr-visible-spit-vs-eternal-crumb",
+      "optionA": { "fr": "Postillonner visiblement à chaque phrase, et le voir atterrir", "en": "Visibly spit when you talk, and watch where it lands, every time" },
+      "optionB": { "fr": "Une miette au coin de la bouche en permanence, personne te le dit", "en": "A permanent crumb on your face that nobody ever points out" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["body", "party"]
+      "tags": ["body", "gross-funny"]
     },
     {
-      "id": "wyr-soup-fork-vs-steak-spoon",
-      "optionA": { "fr": "Manger toutes tes soupes à la fourchette", "en": "Eat all soup with a fork" },
-      "optionB": { "fr": "Couper toute ta viande à la cuillère", "en": "Cut all steak with a spoon" },
+      "id": "wyr-lick-plate-vs-bite-strangers",
+      "optionA": { "fr": "Lécher ton assiette à chaque resto, premier rencard compris", "en": "Lick your plate clean at every restaurant, first dates included" },
+      "optionB": { "fr": "Piquer une bouchée dans l'assiette d'un inconnu, chaque semaine", "en": "Take one bite off a stranger's plate, once a week" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["utensils", "forever"]
+      "tags": ["gross-funny", "public-shame"]
     },
     {
       "id": "wyr-wifi-vs-hot-water",
-      "optionA": { "fr": "Vivre sans wifi", "en": "Live without wifi" },
-      "optionB": { "fr": "Vivre sans eau chaude", "en": "Live without hot water" },
+      "optionA": { "fr": "Vivre sans wifi, et mendier le partage de connexion à tes potes", "en": "Live without wifi, begging hotspot off your mates forever" },
+      "optionB": { "fr": "Vivre sans eau chaude, douches de janvier comprises", "en": "Live without hot water, January showers included" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["modern-life", "forever"]
     },
     {
       "id": "wyr-stranger-bless-vs-friend-roast",
-      "optionA": { "fr": "Que des inconnus applaudissent chacune de tes entrées", "en": "Strangers applaud every room you enter" },
-      "optionB": { "fr": "Que tes potes notent tes tenues sur 10 chaque matin", "en": "Your friends rate your outfit out of 10 every morning" },
+      "optionA": { "fr": "Des inconnus t'applaudissent partout, pharmacie et enterrements compris", "en": "Strangers applaud you everywhere, pharmacy queues and funerals included" },
+      "optionB": { "fr": "Tes potes notent ta tenue sur 10 chaque matin, note envoyée à ta daronne", "en": "Your friends rate your outfit daily, score texted to your mum" },
       "category": "social",
       "spicyLevel": 0,
       "tags": ["attention", "daily-life"]
@@ -308,12 +308,12 @@
       "tags": ["tech", "judgy-objects"]
     },
     {
-      "id": "wyr-dessert-first-vs-no-dessert",
-      "optionA": { "fr": "Toujours manger le dessert en premier", "en": "Always eat dessert first" },
-      "optionB": { "fr": "Ne plus jamais manger de dessert", "en": "Never eat dessert again" },
+      "id": "wyr-doggy-bag-date-vs-bill-recount",
+      "optionA": { "fr": "Demander un doggy bag au premier rencard, et insister", "en": "Ask to box up the leftovers on a first date, and insist" },
+      "optionB": { "fr": "Recompter l'addition à voix haute devant tout le monde, à chaque sortie", "en": "Recount the bill out loud in front of everyone, every single time" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["dessert", "forever"]
+      "tags": ["money", "public-shame"]
     },
     {
       "id": "wyr-true-love-vs-true-calling",
@@ -332,20 +332,20 @@
       "tags": ["pet-peeve", "forever"]
     },
     {
-      "id": "wyr-teleport-naps-vs-no-sleep",
-      "optionA": { "fr": "Te téléporter, mais ça t'endort 2 heures à l'arrivée", "en": "Teleport anywhere, but arrive needing a 2-hour nap" },
-      "optionB": { "fr": "Ne plus jamais avoir besoin de dormir", "en": "Never need to sleep again" },
+      "id": "wyr-snore-leaked-vs-sleep-talk-truths",
+      "optionA": { "fr": "Tes ronflements sont enregistrés et envoyés au groupe chaque matin", "en": "Your snoring gets recorded and sent to the group chat every morning" },
+      "optionB": { "fr": "Tu parles en dormant, et tu ne balances que des vrais secrets", "en": "You talk in your sleep, and you only ever leak real secrets" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "trade-off"]
+      "tags": ["exposure", "sleep"]
     },
     {
-      "id": "wyr-tiny-elephant-vs-giant-hamster",
-      "optionA": { "fr": "Adopter un éléphant de la taille d'un chat", "en": "Adopt a cat-sized elephant" },
-      "optionB": { "fr": "Adopter un hamster de la taille d'un chien", "en": "Adopt a dog-sized hamster" },
+      "id": "wyr-dog-snitch-vs-cat-paparazzi",
+      "optionA": { "fr": "Ton chien raconte à chaque invité tout ce qu'il a vu chez toi", "en": "Your dog tells every guest everything it has seen you do" },
+      "optionB": { "fr": "Ton chat poste des stories de toi à ton insu, compte public", "en": "Your cat runs a public account of candid stories of you" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["animals", "pets"]
+      "tags": ["animals", "exposure"]
     },
     {
       "id": "wyr-cereal-water-vs-juice-cereal",
@@ -365,8 +365,8 @@
     },
     {
       "id": "wyr-erase-bad-memory-vs-keep-all",
-      "optionA": { "fr": "Effacer ton pire souvenir", "en": "Erase your worst memory" },
-      "optionB": { "fr": "Revivre ton meilleur souvenir une fois par an", "en": "Relive your best memory once a year" },
+      "optionA": { "fr": "Effacer ta pire honte, mais tous les témoins s'en souviennent encore", "en": "Erase your most shameful memory, but every witness keeps theirs" },
+      "optionB": { "fr": "La revivre une fois par an, à une date surprise", "en": "Relive it once a year, date a surprise" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["memories", "heavy"]
@@ -412,12 +412,12 @@
       "tags": ["speech", "embarrassing"]
     },
     {
-      "id": "wyr-everything-mild-vs-mystery-spice",
-      "optionA": { "fr": "Connaître à l'avance le goût de tout ce que tu manges", "en": "Know exactly how everything tastes before eating it" },
-      "optionB": { "fr": "Que chaque bouchée soit une surprise totale", "en": "Have every bite be a total surprise" },
+      "id": "wyr-mum-orders-vs-served-last",
+      "optionA": { "fr": "Ta daronne commande pour toi au resto, à vie, sans te consulter", "en": "Your mum orders for you at every restaurant, for life, no input" },
+      "optionB": { "fr": "Tu manges uniquement ce que la table te laisse, toujours servi dernier", "en": "You only eat what the table leaves you, always served last" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["taste", "gamble"]
+      "tags": ["family", "control"]
     },
     {
       "id": "wyr-bad-wifi-friends-vs-fast-wifi-alone",
@@ -428,12 +428,12 @@
       "tags": ["modern-life", "friendship"]
     },
     {
-      "id": "wyr-undo-button-vs-save-point",
-      "optionA": { "fr": "Avoir un bouton 'annuler' pour ta dernière phrase", "en": "Have an undo button for your last sentence" },
-      "optionB": { "fr": "Avoir un point de sauvegarde chaque matin", "en": "Have a save point every morning" },
+      "id": "wyr-cringe-supercut-vs-ex-debrief",
+      "optionA": { "fr": "Revoir chaque année le best-of de tes « j'aurais dû me taire »", "en": "Watch a yearly supercut of every time you should've stayed quiet" },
+      "optionB": { "fr": "Entendre une fois ce que ton ex a vraiment dit de toi après la rupture", "en": "Hear, once, what your ex actually said about you after the breakup" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "video-game"]
+      "tags": ["exposure", "heavy"]
     },
     {
       "id": "wyr-hiccup-mariachi-vs-yawn-foghorn",
@@ -460,12 +460,12 @@
       "tags": ["awkward", "party"]
     },
     {
-      "id": "wyr-read-minds-pets-vs-plants-talk",
-      "optionA": { "fr": "Entendre ce que pensent les chiens et les chats", "en": "Hear what cats and dogs are thinking" },
-      "optionB": { "fr": "Entendre tes plantes te juger", "en": "Hear your houseplants judging you" },
+      "id": "wyr-mirror-reviews-vs-plants-scream",
+      "optionA": { "fr": "Ton miroir commente ta tenue chaque matin, brutalement honnête", "en": "Your mirror reviews your outfit every morning, brutally honest" },
+      "optionB": { "fr": "Tes plantes hurlent quand t'oublies de les arroser, même à 3h du mat", "en": "Your plants scream when you forget to water them, 3 a.m. included" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["animals", "judgy-objects"]
+      "tags": ["judgy-objects", "home"]
     },
     {
       "id": "wyr-perfect-memory-vs-perfect-forget",
@@ -492,12 +492,12 @@
       "tags": ["public", "stage-fright"]
     },
     {
-      "id": "wyr-money-past-vs-knowledge-future",
-      "optionA": { "fr": "Retourner en 2010 avec 1000 €", "en": "Go back to 2010 with $1,000" },
-      "optionB": { "fr": "Recevoir aujourd'hui un journal daté de demain", "en": "Get tomorrow's newspaper delivered today" },
+      "id": "wyr-collect-debts-vs-pay-debts",
+      "optionA": { "fr": "Récupérer chaque euro qu'on te doit, en le réclamant en face, un par un", "en": "Collect every pound you're owed by asking each person, face to face" },
+      "optionB": { "fr": "Rembourser d'un coup tous les « tkt je te rends ça » de ta vie", "en": "Pay back every 'I'll get you next time' you've ever said, at once" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["time-travel", "money"]
+      "tags": ["money", "awkward", "debate-starter"]
     },
     {
       "id": "wyr-everything-sticky-vs-everything-slippery",
@@ -556,12 +556,12 @@
       "tags": ["friendship", "pet-peeve"]
     },
     {
-      "id": "wyr-perfect-pitch-vs-perfect-aim",
-      "optionA": { "fr": "Avoir l'oreille absolue", "en": "Have perfect pitch" },
-      "optionB": { "fr": "Ne jamais rater un lancer (papier, fléchette, panier)", "en": "Never miss a throw (paper, darts, hoops)" },
+      "id": "wyr-mention-count-vs-never-defended",
+      "optionA": { "fr": "Savoir exactement combien de fois on a parlé de toi cette semaine", "en": "Know exactly how many times you got mentioned this week" },
+      "optionB": { "fr": "Savoir qui, dans ta vie, ne t'a jamais défendu en ton absence", "en": "Know which of your people has never once defended you behind your back" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "skills"]
+      "tags": ["exposure", "heavy", "debate-starter"]
     },
     {
       "id": "wyr-helium-laugh-vs-villain-laugh",
@@ -604,12 +604,12 @@
       "tags": ["fashion", "discomfort"]
     },
     {
-      "id": "wyr-onion-no-cry-vs-garlic-no-smell",
-      "optionA": { "fr": "Couper des oignons sans jamais pleurer", "en": "Chop onions without ever crying" },
-      "optionB": { "fr": "Manger de l'ail sans jamais avoir mauvaise haleine", "en": "Eat garlic without ever getting bad breath" },
+      "id": "wyr-garlic-dates-vs-onion-tears",
+      "optionA": { "fr": "Empester l'ail à chaque rencard, sans jamais le sentir toi-même", "en": "Reek of garlic on every date, never able to smell it yourself" },
+      "optionB": { "fr": "Pleurer comme à un enterrement dès qu'un oignon entre dans la pièce", "en": "Sob like it's a funeral whenever an onion enters the room" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["superpower", "kitchen"]
+      "tags": ["gross-funny", "awkward"]
     },
     {
       "id": "wyr-double-text-vs-left-on-read",
@@ -620,28 +620,28 @@
       "tags": ["phone", "awkward"]
     },
     {
-      "id": "wyr-skip-traffic-vs-skip-queues",
-      "optionA": { "fr": "Ne plus jamais être dans les bouchons", "en": "Never sit in traffic again" },
-      "optionB": { "fr": "Ne plus jamais faire la queue", "en": "Never wait in line again" },
+      "id": "wyr-boss-cc-vs-mum-location",
+      "optionA": { "fr": "Ton boss en copie de tous tes messages perso pendant un mois", "en": "Your boss cc'd on every personal text for a month" },
+      "optionB": { "fr": "Ta daronne reçoit ta localisation en direct, à vie", "en": "Your mum gets your live location, for life" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "daily-life"]
+      "tags": ["phone", "surveillance", "debate-starter"]
     },
     {
-      "id": "wyr-pigeon-army-vs-seagull-respect",
-      "optionA": { "fr": "Commander une armée de pigeons fidèles", "en": "Command a loyal army of pigeons" },
-      "optionB": { "fr": "Être respecté par toutes les mouettes du monde", "en": "Earn the respect of every seagull on Earth" },
+      "id": "wyr-monthly-goose-fight-vs-rat-roommate",
+      "optionA": { "fr": "Te battre contre une oie une fois par mois, lieu choisi par l'oie", "en": "Fight one goose monthly, venue picked by the goose" },
+      "optionB": { "fr": "Héberger un rat qui paie pas de loyer mais juge tes invités", "en": "House a rat that pays no rent but judges your guests" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["animals", "useless-powers"]
+      "tags": ["animals", "violence-cartoon"]
     },
     {
-      "id": "wyr-free-restaurants-vs-free-flights",
-      "optionA": { "fr": "Manger gratuitement dans tous les restaurants", "en": "Eat free at every restaurant" },
-      "optionB": { "fr": "Voyager gratuitement dans tous les avions", "en": "Fly free on every plane" },
+      "id": "wyr-silent-payer-vs-penny-splitter",
+      "optionA": { "fr": "Payer l'addition du groupe une fois par mois, interdit d'en parler", "en": "Cover the whole table's bill monthly, never allowed to mention it" },
+      "optionB": { "fr": "Faire payer chacun sa part exacte, au centime, à voix haute", "en": "Split every bill to the exact penny, out loud, every time" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["money", "travel", "debate-starter"]
+      "tags": ["money", "friendship", "debate-starter"]
     },
     {
       "id": "wyr-applause-wake-vs-drumroll-sit",
@@ -661,8 +661,8 @@
     },
     {
       "id": "wyr-last-slice-fight-vs-share-dessert",
-      "optionA": { "fr": "Toujours laisser la dernière part aux autres", "en": "Always give up the last slice" },
-      "optionB": { "fr": "Toujours devoir partager ton dessert", "en": "Always have to share your dessert" },
+      "optionA": { "fr": "Laisser la dernière part, même quand c'est toi qui as payé la pizza", "en": "Give up the last slice, even when you paid for the pizza" },
+      "optionB": { "fr": "La prendre, et assumer le regard de toute la table", "en": "Take it, and live with the whole table's stare" },
       "category": "food",
       "spicyLevel": 0,
       "tags": ["sharing", "forever"]
@@ -684,12 +684,12 @@
       "tags": ["body-swap", "animals"]
     },
     {
-      "id": "wyr-control-dreams-vs-no-nightmares",
-      "optionA": { "fr": "Contrôler tes rêves, cauchemars inclus parfois", "en": "Control your dreams, with the odd nightmare slipping in" },
-      "optionB": { "fr": "Ne plus jamais faire de cauchemars, ni te souvenir des rêves", "en": "Never have nightmares, but never remember dreams" },
+      "id": "wyr-dreams-narrated-vs-3am-thoughts-archived",
+      "optionA": { "fr": "Tes rêves sont racontés chaque matin à ta coloc, version intégrale", "en": "Your dreams get narrated to your flatmate every morning, uncut" },
+      "optionB": { "fr": "Tes pensées de 3h du mat sont archivées, lisibles par tes potes", "en": "Your 3 a.m. thoughts get archived, readable by your friends" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["dreams", "trade-off"]
+      "tags": ["exposure", "sleep"]
     },
     {
       "id": "wyr-burnt-toast-vs-soggy-cereal",
@@ -708,12 +708,12 @@
       "tags": ["music", "forever"]
     },
     {
-      "id": "wyr-untangle-cables-vs-peel-stickers",
-      "optionA": { "fr": "Démêler les écouteurs de toute la planète", "en": "Untangle every pair of earbuds on Earth" },
-      "optionB": { "fr": "Décoller proprement toutes les étiquettes du monde", "en": "Peel every sticker in the world off cleanly" },
+      "id": "wyr-bus-alarm-vs-mum-calls-meetings",
+      "optionA": { "fr": "Ton réveil sonne dans le bus à plein volume, sonnerie de 2009", "en": "Your 2009 ringtone alarm goes off on the bus, full volume, daily" },
+      "optionB": { "fr": "Ton tel sonne en réunion, c'est toujours ta daronne, tu dois répondre", "en": "Your phone rings in every meeting, it's always your mum, you must answer" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["useless-powers", "satisfying"]
+      "tags": ["phone", "public-shame"]
     },
     {
       "id": "wyr-birthday-forgotten-vs-wrong-gift",
@@ -724,12 +724,12 @@
       "tags": ["birthday", "awkward"]
     },
     {
-      "id": "wyr-taco-tuesday-vs-sunday-roast",
-      "optionA": { "fr": "Un open bar de tacos chaque mardi à vie", "en": "Free unlimited tacos every Tuesday for life" },
-      "optionB": { "fr": "Un grand repas de famille parfait chaque dimanche à vie", "en": "A perfect family feast every Sunday for life" },
+      "id": "wyr-inlaws-sunday-vs-rate-mums-cooking",
+      "optionA": { "fr": "Cuisiner pour ta belle-famille chaque dimanche, critiques en direct", "en": "Cook for your in-laws every Sunday, live reviews included" },
+      "optionB": { "fr": "Noter la cuisine de ta daronne sur 10, devant elle, à chaque repas", "en": "Rate your mum's cooking out of 10, to her face, every meal" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["forever", "family"]
+      "tags": ["family", "awkward"]
     },
     {
       "id": "wyr-strength-noone-sees-vs-flight-everyone-films",
@@ -740,12 +740,12 @@
       "tags": ["superpower", "useless-powers"]
     },
     {
-      "id": "wyr-five-min-anyone-vs-hour-hero",
-      "optionA": { "fr": "5 minutes au téléphone avec ton toi de 2040", "en": "A 5-minute phone call with your 2040 self" },
-      "optionB": { "fr": "Une heure de dîner avec ton idole", "en": "A one-hour dinner with your hero" },
+      "id": "wyr-eulogy-by-enemy-vs-by-mum",
+      "optionA": { "fr": "Ton éloge funèbre écrit par ton pire ennemi", "en": "Your eulogy written by your worst enemy" },
+      "optionB": { "fr": "Ton éloge funèbre écrit par ta daronne, version 100 % honnête", "en": "Your eulogy written by your mum, the fully honest version" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["time-travel", "icons"]
+      "tags": ["heavy", "family", "debate-starter"]
     },
     {
       "id": "wyr-fork-scratch-vs-balloon-squeak",
@@ -764,20 +764,20 @@
       "tags": ["friendship", "pet-peeve"]
     },
     {
-      "id": "wyr-bottomless-fridge-vs-selfclean-kitchen",
-      "optionA": { "fr": "Un frigo toujours plein mais jamais rangé", "en": "A fridge that's always full but always a mess" },
-      "optionB": { "fr": "Une cuisine qui se nettoie seule mais un frigo vide le dimanche", "en": "A self-cleaning kitchen with an empty fridge on Sundays" },
+      "id": "wyr-fridge-cam-vs-delivery-receipts",
+      "optionA": { "fr": "Une caméra dans ton frigo, flux en direct dans le groupe", "en": "A camera in your fridge, live feed in the group chat" },
+      "optionB": { "fr": "Ton historique livraison de l'année publié, montants compris", "en": "Your year of delivery orders published, totals included" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["kitchen", "trade-off"]
+      "tags": ["exposure", "phone", "money"]
     },
     {
-      "id": "wyr-real-dino-vs-real-dragon-small",
-      "optionA": { "fr": "Prouver que tu as vu un dinosaure, sans photo", "en": "Prove you saw a dinosaur, with no photo" },
-      "optionB": { "fr": "Avoir un dragon de compagnie de 10 cm qui boude", "en": "Own a 4-inch pet dragon that sulks" },
+      "id": "wyr-turkey-chase-vs-goat-headbutt",
+      "optionA": { "fr": "Te faire poursuivre par un dindon 10 minutes par semaine, en public", "en": "Get chased by a turkey ten minutes a week, always in public" },
+      "optionB": { "fr": "Recevoir un coup de boule de chèvre à chacun de tes retards", "en": "Take a goat headbutt every time you show up late" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["animals", "fantasy"]
+      "tags": ["animals", "violence-cartoon"]
     },
     {
       "id": "wyr-genius-no-proof-vs-average-credit",
@@ -804,12 +804,12 @@
       "tags": ["phone", "family", "work"]
     },
     {
-      "id": "wyr-soup-forever-vs-sandwich-forever",
-      "optionA": { "fr": "Ne manger que des plats à la cuillère", "en": "Only eat foods that need a spoon" },
-      "optionB": { "fr": "Ne manger que des plats qui se tiennent à la main", "en": "Only eat foods you can hold in your hand" },
+      "id": "wyr-drain-slurp-vs-open-mouth-chew",
+      "optionA": { "fr": "Aspirer ta soupe comme un siphon, déjeuners pro compris", "en": "Slurp every soup like a drain, client lunches included" },
+      "optionB": { "fr": "Mâcher la bouche ouverte à chaque repas de belle-famille", "en": "Chew open-mouthed at every single in-law dinner" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["forever", "utensils"]
+      "tags": ["gross-funny", "manners"]
     },
     {
       "id": "wyr-marathon-vs-silence-week",
@@ -844,12 +844,12 @@
       "tags": ["honesty", "friendship"]
     },
     {
-      "id": "wyr-button-skip-small-talk-vs-skip-ads",
-      "optionA": { "fr": "Un bouton pour zapper le small talk", "en": "A button that skips small talk" },
-      "optionB": { "fr": "Un bouton pour zapper toutes les pubs", "en": "A button that skips every ad" },
+      "id": "wyr-hear-after-you-leave-vs-frozen-smiles",
+      "optionA": { "fr": "Entendre les 30 secondes qui suivent chacun de tes départs", "en": "Hear the first 30 seconds after you leave every room" },
+      "optionB": { "fr": "Ne jamais savoir, mais voir les sourires se figer quand tu reviens", "en": "Never know, but watch the smiles freeze when you walk back in" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "modern-life"]
+      "tags": ["exposure", "paranoia", "debate-starter"]
     },
     {
       "id": "wyr-knight-armor-rain-vs-flippers-shopping",
@@ -892,12 +892,12 @@
       "tags": ["senses", "forever"]
     },
     {
-      "id": "wyr-bottomless-brunch-vs-midnight-snacks",
-      "optionA": { "fr": "Des brunchs illimités mais plus de dîners", "en": "Unlimited brunch but no more dinners" },
-      "optionB": { "fr": "Des snacks de minuit sans conséquences mais plus de brunchs", "en": "Consequence-free midnight snacks but no more brunch" },
+      "id": "wyr-forty-food-pics-vs-bon-appetit-strangers",
+      "optionA": { "fr": "Prendre 40 photos de chaque plat pendant que tes potes attendent", "en": "Take 40 photos of every dish while your mates' food goes cold" },
+      "optionB": { "fr": "Souhaiter bon appétit aux inconnus du resto, table par table", "en": "Wish strangers 'enjoy your meal', table by table, every restaurant" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["meals", "trade-off"]
+      "tags": ["public-shame", "phone"]
     },
     {
       "id": "wyr-dance-when-name-vs-freeze-when-photo",
@@ -964,20 +964,20 @@
       "tags": ["embarrassing", "caught"]
     },
     {
-      "id": "wyr-gravity-off-hour-vs-time-freeze-hour",
-      "optionA": { "fr": "Désactiver la gravité chez toi 1h par jour", "en": "Turn off gravity at home for 1 hour a day" },
-      "optionB": { "fr": "Faire venir n'importe quel animal sauvage 1h par jour, calme", "en": "Summon any wild animal, calm, for 1 hour a day" },
+      "id": "wyr-creaky-chair-vs-wrong-door",
+      "optionA": { "fr": "Ta chaise craque très fort à chaque fois que tu t'assois, partout", "en": "Every chair creaks violently when you sit down, everywhere, always" },
+      "optionB": { "fr": "Te tromper de sens sur chaque porte, toujours avec un témoin", "en": "Push every pull door, always with a witness, for life" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["superpower", "fantasy"]
+      "tags": ["public-shame", "curse"]
     },
     {
-      "id": "wyr-beach-holiday-vs-mountain-holiday",
-      "optionA": { "fr": "Des vacances uniquement à la plage, pour toujours", "en": "Beach holidays only, forever" },
-      "optionB": { "fr": "Des vacances uniquement à la montagne, pour toujours", "en": "Mountain holidays only, forever" },
+      "id": "wyr-holidays-with-boss-vs-inlaws",
+      "optionA": { "fr": "Toutes tes vacances avec ton boss, qui « débranche jamais vraiment »", "en": "Every holiday with your boss, who 'never fully switches off'" },
+      "optionB": { "fr": "Toutes tes vacances avec ta belle-famille, chambre mitoyenne", "en": "Every holiday with the in-laws, room right next to theirs" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["travel", "classic"]
+      "tags": ["travel", "family", "work"]
     },
     {
       "id": "wyr-everything-too-big-vs-too-small",
@@ -1004,12 +1004,12 @@
       "tags": ["humor", "awkward"]
     },
     {
-      "id": "wyr-speak-baby-vs-speak-yoda",
-      "optionA": { "fr": "Parler aux bébés et qu'ils te répondent", "en": "Talk to babies and have them answer back" },
-      "optionB": { "fr": "Parler comme Yoda dès que tu es fatigué", "en": "Talk like Yoda whenever you're tired" },
+      "id": "wyr-baby-voice-boss-vs-stadium-library",
+      "optionA": { "fr": "Parler à ton boss comme à un bébé, sans pouvoir t'arrêter", "en": "Talk to your boss in full baby voice, physically unable to stop" },
+      "optionB": { "fr": "Ta voix passe en mode stade de foot dans chaque bibliothèque", "en": "Your voice switches to stadium volume in every library" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["speech", "superpower"]
+      "tags": ["speech", "public-shame"]
     },
     {
       "id": "wyr-job-love-poor-vs-job-meh-rich",
@@ -1020,12 +1020,12 @@
       "tags": ["work", "money", "classic"]
     },
     {
-      "id": "wyr-fries-or-friends-keep-warm",
-      "optionA": { "fr": "Que tes frites restent toujours chaudes", "en": "Your fries always stay hot" },
-      "optionB": { "fr": "Que ta glace ne fonde jamais", "en": "Your ice cream never melts" },
+      "id": "wyr-fry-tax-victim-vs-caught-stealing",
+      "optionA": { "fr": "Tout le monde a le droit de taxer tes frites, toi jamais", "en": "Everyone gets to tax your fries, you can never tax back" },
+      "optionB": { "fr": "Te faire choper la main dans l'assiette d'un pote, à chaque fois", "en": "Get caught red-handed every single time you steal a chip" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["superpower", "snacks"]
+      "tags": ["friendship", "petty"]
     },
     {
       "id": "wyr-loud-typist-vs-pen-clicker",
@@ -1068,20 +1068,20 @@
       "tags": ["friendship", "roles"]
     },
     {
-      "id": "wyr-magnetic-hands-vs-velcro-body",
-      "optionA": { "fr": "Avoir les mains légèrement aimantées", "en": "Have slightly magnetic hands" },
-      "optionB": { "fr": "Avoir le dos en velcro", "en": "Have a velcro back" },
+      "id": "wyr-handshake-too-long-vs-wrong-hug",
+      "optionA": { "fr": "Tenir chaque poignée de main 4 secondes de trop", "en": "Hold every handshake four seconds too long" },
+      "optionB": { "fr": "Partir en câlin quand l'autre tendait juste la main", "en": "Go in for the hug when they offered a handshake, every time" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["body-swap", "useless-powers"]
+      "tags": ["awkward", "body"]
     },
     {
-      "id": "wyr-pause-week-vs-double-weekend",
-      "optionA": { "fr": "Une semaine de vacances surprise par an, sans choisir la date", "en": "A surprise week off yearly, date not your choice" },
-      "optionB": { "fr": "Tous tes week-ends durent 2h de plus", "en": "Every weekend lasts 2 extra hours" },
+      "id": "wyr-monday-mornings-vs-sunday-dread",
+      "optionA": { "fr": "Vivre uniquement des lundis matin", "en": "Live only Monday mornings" },
+      "optionB": { "fr": "Vivre en permanence dans l'angoisse du dimanche 18h", "en": "Live permanently in the Sunday-evening dread" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["time", "trade-off"]
+      "tags": ["time", "heavy"]
     },
     {
       "id": "wyr-bread-ends-only-vs-crustless-life",
@@ -1172,20 +1172,20 @@
       "tags": ["sound", "curse"]
     },
     {
-      "id": "wyr-learn-instant-skill-yearly-vs-master-one",
-      "optionA": { "fr": "Apprendre une nouvelle compétence instantanément chaque année", "en": "Instantly learn one new skill every year" },
-      "optionB": { "fr": "Devenir le meilleur du monde dans UNE compétence au choix", "en": "Become world's best at ONE skill of your choice" },
+      "id": "wyr-succeed-unseen-vs-fail-spotlit",
+      "optionA": { "fr": "Réussir uniquement les trucs dont tout le monde se fiche", "en": "Only ever succeed at things nobody cares about" },
+      "optionB": { "fr": "Rater uniquement devant les gens que tu veux impressionner", "en": "Only ever fail in front of the people you want to impress" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["skills", "debate-starter"]
+      "tags": ["psychology", "curse", "debate-starter"]
     },
     {
-      "id": "wyr-free-michelin-once-vs-kebab-weekly",
-      "optionA": { "fr": "Un restaurant 3 étoiles offert une fois par an", "en": "One free 3-star Michelin dinner a year" },
-      "optionB": { "fr": "Ton plat réconfort préféré offert chaque semaine", "en": "Your favorite comfort meal free every week" },
+      "id": "wyr-spilled-glass-fancy-vs-card-declined",
+      "optionA": { "fr": "Renverser ton verre à chaque resto un peu classe, nappe blanche garantie", "en": "Knock your glass over at every nice restaurant, white tablecloth guaranteed" },
+      "optionB": { "fr": "Ta carte est refusée une fois par mois, toujours quand tu invites", "en": "Your card declines once a month, always after you said 'my treat'" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["money", "debate-starter"]
+      "tags": ["money", "public-shame"]
     },
     {
       "id": "wyr-typo-every-text-vs-autocorrect-chaos",
@@ -1196,12 +1196,12 @@
       "tags": ["phone", "curse"]
     },
     {
-      "id": "wyr-grow-shrink-10cm-daily",
-      "optionA": { "fr": "Mesurer 10 cm de plus chaque lundi, reset le dimanche", "en": "Be 4 inches taller every Monday, reset by Sunday" },
-      "optionB": { "fr": "Changer de couleur de cheveux chaque matin, au hasard", "en": "Wake up with a random hair color every morning" },
+      "id": "wyr-jeans-split-vs-sweat-patches",
+      "optionA": { "fr": "Ton jean craque à chaque fois que tu t'accroupis en public", "en": "Your jeans split every time you squat in public" },
+      "optionB": { "fr": "Des auréoles instantanées dès qu'une personne importante te parle", "en": "Instant sweat patches whenever someone important talks to you" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["body-swap", "random"]
+      "tags": ["body", "public-shame"]
     },
     {
       "id": "wyr-rewatch-comfort-vs-always-new",
@@ -1237,8 +1237,8 @@
     },
     {
       "id": "wyr-see-red-flags-vs-see-green-flags",
-      "optionA": { "fr": "Voir les red flags de tout le monde instantanément", "en": "Instantly see everyone's red flags" },
-      "optionB": { "fr": "Voir qui est digne de confiance instantanément", "en": "Instantly see who is trustworthy" },
+      "optionA": { "fr": "Voir les red flags de tous tes potes, interdit d'en parler", "en": "See every friend's red flags, forbidden from ever saying a word" },
+      "optionB": { "fr": "Que tout le monde voie les tiens, affichés au-dessus de ta tête", "en": "Everyone sees yours, floating right above your head" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["superpower", "relationships"]
@@ -1332,12 +1332,12 @@
       "tags": ["sound", "cinema"]
     },
     {
-      "id": "wyr-see-everyones-age-vs-everyones-mood",
-      "optionA": { "fr": "Voir le niveau de batterie sociale des gens", "en": "See everyone's social battery level" },
-      "optionB": { "fr": "Voir le niveau de faim des gens", "en": "See everyone's hunger level" },
+      "id": "wyr-who-muted-you-vs-who-judges-stories",
+      "optionA": { "fr": "Voir exactement qui t'a mis en sourdine sur WhatsApp", "en": "See exactly who has you muted" },
+      "optionB": { "fr": "Voir qui regarde tes stories uniquement pour juger", "en": "See who watches your stories purely to judge" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["superpower", "psychology"]
+      "tags": ["phone", "exposure"]
     },
     {
       "id": "wyr-no-microwave-vs-no-freezer",
@@ -1348,12 +1348,12 @@
       "tags": ["kitchen", "forever", "debate-starter"]
     },
     {
-      "id": "wyr-always-shotgun-vs-always-aux",
-      "optionA": { "fr": "Toujours avoir la place passager", "en": "Always get shotgun" },
-      "optionB": { "fr": "Toujours contrôler la musique du trajet", "en": "Always control the road trip playlist" },
+      "id": "wyr-aux-criticised-vs-gps-blamed",
+      "optionA": { "fr": "Gérer la musique de chaque trajet, et tout le monde critique tout", "en": "Run the aux on every trip, every song openly criticised" },
+      "optionB": { "fr": "Faire le GPS, et chaque bouchon devient officiellement ta faute", "en": "Be the navigator, every traffic jam officially your fault" },
       "category": "social",
       "spicyLevel": 0,
-      "tags": ["roadtrip", "debate-starter"]
+      "tags": ["roadtrip", "blame", "debate-starter"]
     },
     {
       "id": "wyr-t-rex-arms-vs-giraffe-neck",
@@ -1365,8 +1365,8 @@
     },
     {
       "id": "wyr-no-regret-vs-no-fear",
-      "optionA": { "fr": "Ne plus jamais ressentir de regret", "en": "Never feel regret again" },
-      "optionB": { "fr": "Ne plus jamais ressentir de trac", "en": "Never feel stage fright again" },
+      "optionA": { "fr": "Ne plus jamais ressentir de regret, et refaire les mêmes erreurs en boucle", "en": "Never feel regret again, and repeat the same mistakes forever" },
+      "optionB": { "fr": "Te souvenir de chaque honte de ta vie, en HD, pour toujours", "en": "Remember every shame of your life in HD detail, forever" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["emotions", "heavy"]
@@ -1428,12 +1428,12 @@
       "tags": ["senses", "forever"]
     },
     {
-      "id": "wyr-find-money-vs-find-time",
-      "optionA": { "fr": "Trouver 20 € par terre chaque semaine", "en": "Find a $20 bill on the ground every week" },
-      "optionB": { "fr": "Gagner une heure de sommeil magique chaque nuit", "en": "Gain one magical extra hour of sleep nightly" },
+      "id": "wyr-salary-in-bio-vs-know-friends-salaries",
+      "optionA": { "fr": "Ton salaire affiché dans ta bio, partout, à vie", "en": "Your salary pinned in your bio, everywhere, for life" },
+      "optionB": { "fr": "Connaître le salaire de tous tes potes, interdit d'en parler", "en": "Know all your friends' salaries, never allowed to bring it up" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["money", "time"]
+      "tags": ["money", "exposure", "debate-starter"]
     },
     {
       "id": "wyr-only-buffets-vs-only-tasting-menus",
@@ -1460,12 +1460,12 @@
       "tags": ["sound", "body"]
     },
     {
-      "id": "wyr-no-deadlines-vs-no-meetings",
-      "optionA": { "fr": "Plus jamais de deadlines", "en": "No more deadlines ever" },
-      "optionB": { "fr": "Plus jamais de réunions", "en": "No more meetings ever" },
+      "id": "wyr-cry-in-meetings-vs-boss-sees-searches",
+      "optionA": { "fr": "Pleurer une fois par mois en réunion, sans explication possible", "en": "Cry once a month in a meeting, no explanation allowed" },
+      "optionB": { "fr": "Ton boss voit tes recherches « comment démissionner » en direct", "en": "Your boss watches your 'how to quit' searches live" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["work", "debate-starter"]
+      "tags": ["work", "exposure"]
     },
     {
       "id": "wyr-share-fries-tax-vs-guard-plate",
@@ -1484,20 +1484,20 @@
       "tags": ["recurring-pain", "daily-life"]
     },
     {
-      "id": "wyr-trampoline-floor-vs-ballpit-car",
-      "optionA": { "fr": "Que le sol de ton salon soit un trampoline", "en": "Your living room floor is a trampoline" },
-      "optionB": { "fr": "Que ta voiture soit une piscine à balles", "en": "Your car is a ball pit" },
+      "id": "wyr-wave-at-honks-vs-miss-every-bus",
+      "optionA": { "fr": "Croire que chaque klaxon t'est destiné, et faire coucou", "en": "Assume every honk is for you, and wave back" },
+      "optionB": { "fr": "Courir après chaque bus, le rater, arrêt complet témoin", "en": "Sprint for every bus, miss it, full bus stop watching" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["home", "fun"]
+      "tags": ["public-shame", "city"]
     },
     {
-      "id": "wyr-read-1000-books-vs-visit-100-countries",
-      "optionA": { "fr": "Avoir lu les 1000 plus grands livres", "en": "Have read the 1,000 greatest books" },
-      "optionB": { "fr": "Avoir visité 100 pays", "en": "Have visited 100 countries" },
+      "id": "wyr-lines-stolen-vs-stories-told-better",
+      "optionA": { "fr": "Tes meilleures punchlines toujours attribuées à quelqu'un d'autre", "en": "Your best lines always credited to someone else" },
+      "optionB": { "fr": "Tes pires anecdotes racontées par tes potes, mieux que par toi", "en": "Your worst stories told by your mates, better than you tell them" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["travel", "knowledge"]
+      "tags": ["friendship", "recognition"]
     },
     {
       "id": "wyr-breakfast-pizza-vs-dinner-cereal",
@@ -1516,12 +1516,12 @@
       "tags": ["embarrassing", "entertainment"]
     },
     {
-      "id": "wyr-pockets-infinite-vs-never-lose",
-      "optionA": { "fr": "Des poches sans fond comme Mary Poppins", "en": "Bottomless Mary Poppins pockets" },
-      "optionB": { "fr": "Ne plus jamais rien perdre", "en": "Never lose anything again" },
+      "id": "wyr-phone-screendown-vs-keys-weekend",
+      "optionA": { "fr": "Ton tel tombe écran contre le sol à chaque fois qu'on te le passe", "en": "Your phone lands screen-down every single time it's handed to you" },
+      "optionB": { "fr": "Tes clés disparaissent chaque vendredi 23h, retour lundi 8h", "en": "Your keys vanish every Friday 11 p.m., reappear Monday 8 a.m." },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["superpower", "daily-life"]
+      "tags": ["curse", "phone"]
     },
     {
       "id": "wyr-perfect-sleep-4h-vs-normal-9h",
@@ -1532,12 +1532,12 @@
       "tags": ["sleep", "trade-off"]
     },
     {
-      "id": "wyr-mystery-jam-vs-mystery-cheese",
-      "optionA": { "fr": "Goûter une confiture mystère chaque matin", "en": "Taste a mystery jam every morning" },
-      "optionB": { "fr": "Goûter un fromage mystère chaque soir", "en": "Taste a mystery cheese every night" },
+      "id": "wyr-flatmate-eats-leftovers-vs-label-food",
+      "optionA": { "fr": "Ta coloc finit tes restes et laisse l'emballage vide en évidence", "en": "Your flatmate eats your leftovers and displays the empty box" },
+      "optionB": { "fr": "Étiqueter ta bouffe à ton prénom, et être connu pour ça", "en": "Label all your food with your name, and be known for it" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["gamble", "daily-life"]
+      "tags": ["roommates", "petty"]
     },
     {
       "id": "wyr-plan-cancelled-joy-vs-surprise-party-dread",
@@ -1548,28 +1548,28 @@
       "tags": ["party", "introvert-extrovert"]
     },
     {
-      "id": "wyr-cloud-bed-vs-water-walk",
-      "optionA": { "fr": "Dormir sur un nuage, mais il pleut parfois dedans", "en": "Sleep on a cloud, but it sometimes rains inside" },
-      "optionB": { "fr": "Marcher sur l'eau, mais seulement quand elle est glacée", "en": "Walk on water, but only when it's freezing" },
+      "id": "wyr-bed-crumbs-vs-warm-pillow",
+      "optionA": { "fr": "Des miettes dans ton lit chaque soir, origine inconnue", "en": "Crumbs in your bed nightly, source unknown" },
+      "optionB": { "fr": "Ton oreiller est toujours chaud des deux côtés", "en": "Your pillow is always warm on both sides" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["fantasy", "trade-off"]
+      "tags": ["curse", "home"]
     },
     {
-      "id": "wyr-speak-all-instruments-vs-all-sports",
-      "optionA": { "fr": "Savoir jouer de tous les instruments", "en": "Play every musical instrument" },
-      "optionB": { "fr": "Être bon dans tous les sports", "en": "Be good at every sport" },
+      "id": "wyr-lose-to-kids-vs-win-tryhard",
+      "optionA": { "fr": "Perdre contre des enfants de 8 ans à tous les jeux, devant témoins", "en": "Lose to 8-year-olds at every game, witnesses guaranteed" },
+      "optionB": { "fr": "Gagner seulement quand on t'a vu t'entraîner en cachette", "en": "Only win when everyone knows you secretly practised" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["skills", "classic"]
+      "tags": ["games", "ego"]
     },
     {
-      "id": "wyr-guac-extra-free-vs-bread-unlimited",
-      "optionA": { "fr": "Le supplément avocat toujours offert", "en": "Extra guac is always free" },
-      "optionB": { "fr": "La corbeille de pain toujours rechargée", "en": "The bread basket is always refilled" },
+      "id": "wyr-wrong-order-silence-vs-send-back-always",
+      "optionA": { "fr": "Recevoir toujours le plat d'à côté, et le manger sans rien dire", "en": "Always get the wrong order, and eat it in silence" },
+      "optionB": { "fr": "Renvoyer chaque plat en cuisine, et l'expliquer au serveur en face", "en": "Send every dish back, and tell the waiter why, to their face" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["restaurants", "small-joys"]
+      "tags": ["dining-out", "awkward", "debate-starter"]
     },
     {
       "id": "wyr-always-picked-first-vs-never-picked-last",
@@ -1596,12 +1596,12 @@
       "tags": ["time-travel", "heavy"]
     },
     {
-      "id": "wyr-eternal-leftovers-vs-no-leftovers",
-      "optionA": { "fr": "Que tes restes soient meilleurs que le plat original", "en": "Your leftovers always taste better than the original" },
-      "optionB": { "fr": "Que tes plats soient parfaits mais sans jamais de restes", "en": "Your meals are perfect but there are never leftovers" },
+      "id": "wyr-dish-nobody-finishes-vs-chase-tupperware",
+      "optionA": { "fr": "Ton plat est toujours celui que personne ne finit aux soirées", "en": "Your dish is always the one nobody finishes at potlucks" },
+      "optionB": { "fr": "On te rend jamais tes tupperwares, et tu dois les réclamer un par un", "en": "Your Tupperware never comes back, and you have to chase every lid" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["kitchen", "small-joys"]
+      "tags": ["petty", "friendship"]
     },
     {
       "id": "wyr-host-podcast-noone-vs-guest-top-podcast",
@@ -1620,20 +1620,20 @@
       "tags": ["body", "music"]
     },
     {
-      "id": "wyr-cool-pillow-vs-instant-hot-shower",
-      "optionA": { "fr": "Que ton oreiller soit toujours du côté frais", "en": "Your pillow is always the cool side" },
-      "optionB": { "fr": "Que ta douche soit chaude dès la première seconde", "en": "Your shower runs hot the second you turn it on" },
+      "id": "wyr-shampoo-cold-water-vs-doorbell-shower",
+      "optionA": { "fr": "L'eau passe froide pile quand t'as du shampoing dans les yeux", "en": "The water turns cold the second shampoo hits your eyes" },
+      "optionB": { "fr": "On sonne à ta porte à chaque fois que t'es sous la douche", "en": "The doorbell rings every single time you shower" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["small-joys", "home"]
+      "tags": ["curse", "home"]
     },
     {
-      "id": "wyr-endless-gum-vs-loyal-pen",
-      "optionA": { "fr": "Un chewing-gum qui ne perd jamais son goût", "en": "Gum that never loses its flavor" },
-      "optionB": { "fr": "Un stylo qui ne meurt jamais et ne se fait jamais voler", "en": "A pen that never dies and never gets stolen" },
+      "id": "wyr-mystery-gum-vs-exploding-pen",
+      "optionA": { "fr": "Un chewing-gum mystère sous chaque table que tu touches", "en": "Mystery gum under every table you touch" },
+      "optionB": { "fr": "Ton stylo explose dans ta poche les jours d'entretien", "en": "Your pen explodes in your pocket on interview days" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["small-joys", "useless-power"]
+      "tags": ["gross-funny", "curse"]
     },
     {
       "id": "wyr-lagging-shadow-vs-room-echo",
@@ -1644,52 +1644,52 @@
       "tags": ["spooky-funny", "body"]
     },
     {
-      "id": "wyr-lost-socks-return-vs-tupperware-lids-match",
-      "optionA": { "fr": "Retrouver toutes les chaussettes disparues de ta vie", "en": "Every sock you ever lost comes back" },
-      "optionB": { "fr": "Que chaque tupperware retrouve son couvercle, à vie", "en": "Every Tupperware matches its lid, forever" },
+      "id": "wyr-wet-sock-step-vs-borrowed-charger",
+      "optionA": { "fr": "Marcher en chaussettes sur un point mouillé chaque matin", "en": "Step on one wet patch in socks every morning" },
+      "optionB": { "fr": "Ton chargeur est toujours « emprunté » par quelqu'un dans la pièce", "en": "Your charger is permanently 'borrowed' by someone in this room" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["home", "satisfying"]
+      "tags": ["curse", "in-room"]
     },
     {
-      "id": "wyr-mosquito-truce-vs-no-stubbed-toes",
-      "optionA": { "fr": "Que les moustiques signent une trêve avec toi", "en": "Mosquitoes declare a permanent truce with you" },
-      "optionB": { "fr": "Ne plus jamais te cogner le petit orteil", "en": "Never stub your little toe again" },
+      "id": "wyr-immortal-mosquito-vs-monday-toe",
+      "optionA": { "fr": "Un moustique intouchable dort dans ta chambre chaque nuit", "en": "One untouchable mosquito sleeps in your room nightly" },
+      "optionB": { "fr": "Te cogner le petit orteil chaque lundi, meuble surprise", "en": "Stub your little toe every Monday, furniture's choice" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["small-joys", "body"]
+      "tags": ["curse", "body"]
     },
     {
-      "id": "wyr-negotiate-wifi-vs-negotiate-traffic-lights",
-      "optionA": { "fr": "Pouvoir négocier avec ta box internet", "en": "Be able to negotiate with your wifi router" },
-      "optionB": { "fr": "Pouvoir négocier avec les feux rouges", "en": "Be able to negotiate with traffic lights" },
+      "id": "wyr-wifi-clutch-death-vs-lying-battery",
+      "optionA": { "fr": "Le wifi coupe pile au moment le plus important, à chaque fois", "en": "The wifi dies at the exact crucial moment, every time" },
+      "optionB": { "fr": "Ta batterie ment : 40 % = mort subite possible, maintenant peut-être", "en": "Your battery lies: 40% means sudden death, possibly right now" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["useless-power", "daily-life"]
+      "tags": ["tech", "curse"]
     },
     {
-      "id": "wyr-daily-levitation-vs-rps-immortal",
-      "optionA": { "fr": "Léviter à 5 cm du sol, 5 secondes par jour", "en": "Levitate two inches off the ground, 5 seconds a day" },
-      "optionB": { "fr": "Ne plus jamais perdre à pierre-feuille-ciseaux", "en": "Never lose rock-paper-scissors again" },
+      "id": "wyr-trip-cool-entrance-vs-voice-cracks",
+      "optionA": { "fr": "Trébucher à chaque entrée un peu stylée que tu tentes", "en": "Trip on every cool entrance you attempt" },
+      "optionB": { "fr": "Ta voix déraille à chaque prise de parole importante", "en": "Your voice cracks at every important moment you speak" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["useless-power", "superpower"]
+      "tags": ["public-shame", "body"]
     },
     {
-      "id": "wyr-cloud-sculptor-vs-stone-skipper",
-      "optionA": { "fr": "Sculpter les nuages par la pensée", "en": "Sculpt clouds with your mind" },
-      "optionB": { "fr": "Que tes ricochets fassent toujours 20 rebonds", "en": "Every stone you skip bounces 20 times" },
+      "id": "wyr-gym-slow-clap-vs-dance-filmed",
+      "optionA": { "fr": "Être applaudi ironiquement à chaque effort à la salle", "en": "Get slow-clapped at the gym every single session" },
+      "optionB": { "fr": "Être filmé à ton insu dès que tu danses, vidéo envoyée au groupe", "en": "Get secretly filmed whenever you dance, clip sent to the group chat" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["useless-power", "nature"]
+      "tags": ["public-shame", "phone"]
     },
     {
-      "id": "wyr-inflatable-furniture-vs-edible-cutlery",
-      "optionA": { "fr": "Que tous tes meubles soient gonflables", "en": "All your furniture is inflatable" },
-      "optionB": { "fr": "Que tous tes couverts soient comestibles, et à finir", "en": "All your cutlery is edible, and you must finish it" },
+      "id": "wyr-ikea-in-public-vs-furniture-collapses",
+      "optionA": { "fr": "Monter tous tes meubles IKEA en public, notice en suédois uniquement", "en": "Assemble all your IKEA furniture in public, Swedish-only manual" },
+      "optionB": { "fr": "Un meuble s'effondre à chaque fois que tu reçois du monde", "en": "One piece of furniture collapses every time you host" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["home", "chaos"]
+      "tags": ["home", "public-shame"]
     },
     {
       "id": "wyr-sneeze-new-accent-vs-yawn-slow-motion",
@@ -1700,12 +1700,12 @@
       "tags": ["body", "voice"]
     },
     {
-      "id": "wyr-parking-fairy-vs-full-bars",
-      "optionA": { "fr": "Toujours trouver une place de parking juste devant", "en": "Always find a parking spot right out front" },
-      "optionB": { "fr": "Toujours capter du réseau, même au fond d'une cave", "en": "Always have full signal bars, even in a basement" },
+      "id": "wyr-parallel-park-terrace-vs-stall-green-light",
+      "optionA": { "fr": "Faire tous tes créneaux devant une terrasse pleine qui te note", "en": "Parallel park in front of a packed café terrace that scores you" },
+      "optionB": { "fr": "Caler à chaque feu vert, même klaxonneur derrière, à vie", "en": "Stall at every green light, same guy honking behind you, for life" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["daily-life", "small-joys"]
+      "tags": ["public-shame", "driving"]
     },
     {
       "id": "wyr-night-shuffling-furniture-vs-clingy-plants",
@@ -1716,20 +1716,20 @@
       "tags": ["spooky-funny", "home"]
     },
     {
-      "id": "wyr-float-when-laughing-vs-sparks-when-annoyed",
-      "optionA": { "fr": "Décoller de 3 cm quand tu ris trop fort", "en": "Float an inch off the ground when you really laugh" },
-      "optionB": { "fr": "Faire de petites étincelles quand tu t'agaces", "en": "Shoot tiny harmless sparks when you're annoyed" },
+      "id": "wyr-neon-blush-crush-vs-stomach-lull",
+      "optionA": { "fr": "Rougir fluo dès qu'on prononce le prénom de ton crush", "en": "Glow neon red whenever your crush's name comes up" },
+      "optionB": { "fr": "Ton ventre gargouille pile dans chaque blanc de conversation", "en": "Your stomach growls exactly in every conversation lull" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["body", "superpower"]
+      "tags": ["body", "exposure"]
     },
     {
-      "id": "wyr-stairs-are-slides-vs-sidewalks-are-walkways",
-      "optionA": { "fr": "Que tous les escaliers aient aussi un toboggan", "en": "Every staircase comes with a slide" },
-      "optionB": { "fr": "Que tous les trottoirs soient des tapis roulants", "en": "Every sidewalk is a moving walkway" },
+      "id": "wyr-banana-peel-weekly-vs-cartoon-piano",
+      "optionA": { "fr": "Glisser sur une vraie peau de banane une fois par semaine", "en": "Slip on an actual banana peel once a week" },
+      "optionB": { "fr": "Un piano de cartoon frôle ta tête une fois par mois", "en": "A cartoon piano near-misses your head once a month" },
       "category": "absurd",
       "spicyLevel": 0,
-      "tags": ["city", "fun-world"]
+      "tags": ["violence-cartoon", "curse"]
     },
     {
       "id": "wyr-no-pasta-vs-no-rice",
@@ -1756,20 +1756,20 @@
       "tags": ["dining-out"]
     },
     {
-      "id": "wyr-always-ripe-avocado-vs-perfect-banana",
-      "optionA": { "fr": "Que tous tes avocats soient mûrs à point", "en": "Every avocado you open is perfectly ripe" },
-      "optionB": { "fr": "Que tes bananes soient toujours exactement comme tu aimes", "en": "Every banana is exactly how you like it" },
+      "id": "wyr-mild-allergy-fave-vs-ex-runs-restaurant",
+      "optionA": { "fr": "Devenir allergique à ton plat préféré, juste un peu, juste assez", "en": "Go mildly allergic to your favourite food, just enough to suffer" },
+      "optionB": { "fr": "Le seul resto ouvert près de chez toi est tenu par ton ex", "en": "The only restaurant near your place is run by your ex" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["small-joys", "fruit"]
+      "tags": ["food-ban", "awkward"]
     },
     {
-      "id": "wyr-no-tongue-burns-vs-no-cheek-bites",
-      "optionA": { "fr": "Ne plus jamais te brûler la langue", "en": "Never burn your tongue on hot food again" },
-      "optionB": { "fr": "Ne plus jamais te mordre l'intérieur de la joue", "en": "Never bite the inside of your cheek again" },
+      "id": "wyr-tongue-burn-always-vs-date-hiccups",
+      "optionA": { "fr": "Te brûler la langue à chaque première bouchée, à vie", "en": "Burn your tongue on every first bite, for life" },
+      "optionB": { "fr": "Avoir le hoquet à chaque rencard, du début à la fin", "en": "Hiccup through every date, start to finish" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["small-joys", "body"]
+      "tags": ["body", "curse"]
     },
     {
       "id": "wyr-cook-for-50-vs-dishes-for-50",
@@ -1796,12 +1796,12 @@
       "tags": ["food-ban", "texture"]
     },
     {
-      "id": "wyr-bbq-legend-vs-pastry-wizard",
-      "optionA": { "fr": "Devenir une légende du barbecue", "en": "Become a backyard barbecue legend" },
-      "optionB": { "fr": "Devenir un magicien de la pâtisserie", "en": "Become a pastry wizard" },
+      "id": "wyr-bbq-judged-inlaw-vs-cake-collapses",
+      "optionA": { "fr": "Rater la cuisson devant ton beau-père qui « voulait rien dire mais »", "en": "Burn the barbecue while your father-in-law 'doesn't want to say anything'" },
+      "optionB": { "fr": "Ton gâteau s'effondre à chaque anniversaire, bougies déjà allumées", "en": "Your cake collapses at every birthday, candles already lit" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["skill", "identity"]
+      "tags": ["family", "public-shame"]
     },
     {
       "id": "wyr-picnic-ants-vs-bbq-wasp",
@@ -1820,28 +1820,28 @@
       "tags": ["lifestyle", "kitchen"]
     },
     {
-      "id": "wyr-calorie-free-day-vs-dessert-veggies",
-      "optionA": { "fr": "Un jour par semaine où les calories n'existent pas", "en": "One day a week where calories don't exist" },
-      "optionB": { "fr": "Que les légumes aient le goût de ton dessert préféré", "en": "Vegetables taste like your favorite dessert" },
+      "id": "wyr-plate-commented-vs-seconds-stared",
+      "optionA": { "fr": "Toute la table commente ce que tu manges, à chaque repas", "en": "Everyone at the table comments on your plate, every meal" },
+      "optionB": { "fr": "Te resservir = la table entière se tait et te regarde", "en": "Going for seconds makes the whole table go silent and stare" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["fantasy", "sweet"]
+      "tags": ["family", "judgment"]
     },
     {
-      "id": "wyr-never-hangry-vs-never-food-coma",
-      "optionA": { "fr": "Ne plus jamais être affamé et grognon", "en": "Never get hangry again" },
-      "optionB": { "fr": "Ne plus jamais avoir de coup de barre après manger", "en": "Never get a food coma again" },
+      "id": "wyr-vile-when-hungry-vs-sleep-after-lunch",
+      "optionA": { "fr": "Devenir odieux dès que t'as faim, et t'as toujours un peu faim", "en": "Turn vile the second you're hungry, and you're always a bit hungry" },
+      "optionB": { "fr": "T'endormir 10 minutes après chaque déjeuner, où que tu sois", "en": "Fall asleep 10 minutes after every lunch, wherever you are" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["body", "small-joys"]
+      "tags": ["body", "work"]
     },
     {
-      "id": "wyr-home-fries-master-vs-home-barista",
-      "optionA": { "fr": "Réussir des frites de brasserie à la maison", "en": "Make restaurant-grade fries at home" },
-      "optionB": { "fr": "Réussir un café de barista à la maison", "en": "Pull barista-grade coffee at home" },
+      "id": "wyr-smoke-alarm-chef-vs-building-knows-menu",
+      "optionA": { "fr": "Déclencher l'alarme incendie à chaque cuisson, voisins témoins", "en": "Set off the smoke alarm every time you cook, neighbours watching" },
+      "optionB": { "fr": "Tout l'immeuble sait toujours ce que tu cuisines, et commente", "en": "The whole building always knows what you're cooking, and comments" },
       "category": "food",
       "spicyLevel": 0,
-      "tags": ["skill", "kitchen"]
+      "tags": ["home", "public-shame"]
     },
     {
       "id": "wyr-no-delivery-vs-no-eating-out",
@@ -1972,12 +1972,12 @@
       "tags": ["game-night", "friends"]
     },
     {
-      "id": "wyr-year-at-sea-vs-year-in-space",
-      "optionA": { "fr": "Passer un an sur un voilier", "en": "Spend a year on a sailboat" },
-      "optionB": { "fr": "Passer un an dans une station spatiale", "en": "Spend a year on a space station" },
+      "id": "wyr-year-locked-with-group-vs-year-without",
+      "optionA": { "fr": "Un an enfermé en coloc avec tout ce groupe, sans sortir", "en": "A year locked in a flatshare with everyone in this room" },
+      "optionB": { "fr": "Un an sans aucun contact avec personne de ce groupe", "en": "A year with zero contact with anyone in this room" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["adventure", "dream"]
+      "tags": ["in-room", "friendship", "debate-starter"]
     },
     {
       "id": "wyr-gifted-but-bored-vs-passionate-but-bad",
@@ -1989,8 +1989,8 @@
     },
     {
       "id": "wyr-honesty-day-vs-invisibility-day",
-      "optionA": { "fr": "Un jour où tout le monde te répond en toute honnêteté", "en": "One day where everyone answers you with total honesty" },
-      "optionB": { "fr": "Un jour où tu es complètement invisible", "en": "One day where you're completely invisible" },
+      "optionA": { "fr": "24h où tout le monde te répond avec une honnêteté totale, potes inclus", "en": "24 hours where everyone answers you with total honesty, friends included" },
+      "optionB": { "fr": "24h invisible, à entendre comment ils parlent quand t'es pas là", "en": "24 hours invisible, hearing exactly how they talk when you're gone" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["power-for-a-day", "what-if"]
@@ -2013,8 +2013,8 @@
     },
     {
       "id": "wyr-master-your-emotions-vs-read-everyone-elses",
-      "optionA": { "fr": "Contrôler parfaitement tes émotions", "en": "Fully control your own emotions" },
-      "optionB": { "fr": "Lire parfaitement celles des autres", "en": "Perfectly read everyone else's" },
+      "optionA": { "fr": "Contrôler parfaitement tes émotions, mais passer pour un robot", "en": "Master your emotions, but everyone reads you as cold" },
+      "optionB": { "fr": "Lire celles des autres, y compris ce qu'ils ressentent vraiment pour toi", "en": "Read everyone else's, including what they truly feel about you" },
       "category": "deep",
       "spicyLevel": 0,
       "tags": ["superpower", "psychology"]
@@ -2028,20 +2028,20 @@
       "tags": ["challenge", "self"]
     },
     {
-      "id": "wyr-secrets-of-history-vs-secrets-of-the-ocean",
-      "optionA": { "fr": "Connaître tous les secrets de l'Histoire", "en": "Learn every secret of human history" },
-      "optionB": { "fr": "Connaître tous les secrets de l'océan", "en": "Learn every secret of the ocean" },
+      "id": "wyr-doomed-friendship-vs-secret-leaker",
+      "optionA": { "fr": "Savoir quelle amitié de ce groupe ne survivra pas aux 5 prochaines années", "en": "Know which friendship in this room won't survive the next five years" },
+      "optionB": { "fr": "Savoir qui ici répète tes secrets, mais sans aucune preuve", "en": "Know who here leaks your secrets, with zero proof" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["knowledge", "mystery"]
+      "tags": ["in-room", "paranoia", "debate-starter"]
     },
     {
-      "id": "wyr-infinite-patience-vs-infinite-courage",
-      "optionA": { "fr": "Une patience infinie", "en": "Infinite patience" },
-      "optionB": { "fr": "Un courage infini", "en": "Infinite courage" },
+      "id": "wyr-apologize-when-right-vs-never-apologize",
+      "optionA": { "fr": "T'excuser même quand t'as raison, toute ta vie", "en": "Apologise even when you're right, for life" },
+      "optionB": { "fr": "Ne plus jamais pouvoir t'excuser, même quand t'as tort", "en": "Never able to apologise again, even when you're wrong" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["virtue", "debate-starter"]
+      "tags": ["psychology", "debate-starter"]
     },
     {
       "id": "wyr-perfect-routine-vs-never-same-day",
@@ -2060,28 +2060,28 @@
       "tags": ["philosophy", "heavy"]
     },
     {
-      "id": "wyr-fails-forgotten-vs-wins-remembered",
-      "optionA": { "fr": "Que tout le monde oublie aussitôt tes échecs", "en": "Everyone instantly forgets your fails" },
-      "optionB": { "fr": "Que tout le monde retienne toujours tes réussites", "en": "Everyone always remembers your wins" },
+      "id": "wyr-fail-compilation-vs-wins-doubted",
+      "optionA": { "fr": "Une compil de tes pires moments existe, et tes potes l'ont vue", "en": "A compilation of your worst moments exists, and your friends have seen it" },
+      "optionB": { "fr": "Personne ne croit jamais tes réussites, même preuves à l'appui", "en": "Nobody ever believes your wins, even with receipts" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["reputation", "psychology"]
+      "tags": ["reputation", "exposure"]
     },
     {
-      "id": "wyr-genius-one-day-a-month-vs-ten-percent-smarter",
-      "optionA": { "fr": "Être un génie un jour par mois", "en": "Be a genius one day a month" },
-      "optionB": { "fr": "Être 10 % plus malin tous les jours", "en": "Be 10% smarter every single day" },
+      "id": "wyr-comeback-too-late-vs-never-heard",
+      "optionA": { "fr": "Trouver la réponse parfaite... 4 heures après chaque débat", "en": "Find the perfect comeback four hours after every argument" },
+      "optionB": { "fr": "L'avoir tout de suite, mais personne ne te laisse jamais finir", "en": "Have it instantly, but nobody ever lets you finish" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["brain", "strategy"]
+      "tags": ["psychology", "relatable"]
     },
     {
-      "id": "wyr-four-day-week-vs-six-hour-days",
-      "optionA": { "fr": "La semaine de quatre jours", "en": "A four-day workweek" },
-      "optionB": { "fr": "Des journées de six heures", "en": "Six-hour workdays" },
+      "id": "wyr-ex-desk-neighbour-vs-boss-best-friend",
+      "optionA": { "fr": "Ton ex devient ton collègue de bureau, poste en face du tien", "en": "Your ex becomes your desk neighbour, facing you" },
+      "optionB": { "fr": "Ton boss décide que vous êtes meilleurs potes, week-ends compris", "en": "Your boss decides you're best friends now, weekends included" },
       "category": "deep",
       "spicyLevel": 0,
-      "tags": ["work", "lifestyle"]
+      "tags": ["work", "awkward", "debate-starter"]
     },
     {
       "id": "wyr-one-dream-home-vs-five-city-flats",

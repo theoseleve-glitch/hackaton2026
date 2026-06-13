@@ -10,8 +10,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel est le truc le plus absurde que tu aies cherché sur Google cette semaine ?",
-        "en": "What's the most ridiculous thing you googled this week?"
+        "fr": "Cite ta recherche Google la plus inavouable de la semaine. Pas la deuxième pire. LA pire. Le groupe sent direct quand on lui refile la version soft.",
+        "en": "Quote your most unhinged Google search of the week. Not the second worst. THE worst. The room can smell a substitution."
       },
       "props": false,
       "tags": ["funny"]
@@ -23,8 +23,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle chanson honteuse écoutes-tu en boucle en secret ? Assume-la maintenant, à voix haute.",
-        "en": "What's the most embarrassing song you secretly play on repeat? Own it right now, out loud."
+        "fr": "C'est quoi le son que t'écoutes en boucle mais que tu skippes en panique dès qu'on te passe l'aux ? Chante le refrain. Maintenant.",
+        "en": "What's the song you've streamed 200 times but skip in a panic the second someone hands you the aux? Sing the chorus. Now."
       },
       "props": false,
       "tags": ["funny"]
@@ -36,8 +36,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "C'est quoi ton record de jours sans douche, et c'était quoi l'excuse officielle ?",
-        "en": "What's your personal record for days without a shower, and what was the official excuse?"
+        "fr": "Ton record officiel de jours sans douche. Le chiffre d'abord, l'excuse ensuite. Le groupe décide si l'excuse tient debout.",
+        "en": "Your all-time record for days without a shower. Number first, excuse second. The room rules on whether the excuse holds up."
       },
       "props": false,
       "tags": ["funny"]
@@ -49,8 +49,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "As-tu déjà fait croire que ton téléphone était mort pour ignorer quelqu'un ? Raconte la fois la plus flagrante.",
-        "en": "Have you ever pretended your phone died to dodge someone? Tell us the most blatant time."
+        "fr": "T'as déjà fait le coup du « désolé, plus de batterie » à quelqu'un de cette pièce. Désigne ta victime et présente tes excuses publiquement.",
+        "en": "You've pulled the 'sorry, my phone died' move on someone in this room. Point at your victim and apologize publicly."
       },
       "props": false,
       "tags": ["funny"]
@@ -62,8 +62,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle association de nourriture adores-tu alors qu'elle dégoûte absolument tout le monde ?",
-        "en": "What food combo do you love that makes literally everyone else gag?"
+        "fr": "Donne l'association de bouffe que tu défends seul contre la Terre entière. Le groupe vote : crime alimentaire ou génie incompris.",
+        "en": "Name the food combo you'd defend in court. The room votes: food crime or misunderstood genius."
       },
       "props": false,
       "tags": ["funny"]
@@ -75,8 +75,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Décris ta pire époque capillaire avec tous les détails. Le groupe vote si la description suffit ou s'il faut la photo.",
-        "en": "Describe your worst hair era in full detail. The room votes whether the description is enough or the photo is required."
+        "fr": "Décris ta pire période capillaire, année incluse. Le groupe vote : la description suffit, ou la photo est convoquée.",
+        "en": "Describe your worst hair era, year included. The room votes: description accepted, or the photo gets subpoenaed."
       },
       "props": false,
       "tags": ["funny"]
@@ -88,8 +88,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "As-tu déjà fait une interview de toi-même devant le miroir ? C'était quelle émission ?",
-        "en": "Have you ever interviewed yourself in the mirror? What show were you on?"
+        "fr": "On sait tous que tu t'interviewes dans le miroir. Rejoue l'émission maintenant : le titre, la question piège, ta fausse modestie. Le groupe note à quel point c'est rodé.",
+        "en": "We all know you interview yourself in the mirror. Run the segment right now: show name, the tough question, your fake humility. The room scores how rehearsed it clearly is."
       },
       "props": false,
       "tags": ["funny"]
@@ -101,8 +101,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel est ton talent le plus inutile ? Décris-le, le groupe décide si une démonstration s'impose.",
-        "en": "What's your most useless talent? Describe it — the room decides if a live demo is required."
+        "fr": "T'as 10 secondes pour citer UN truc où t'es objectivement le meilleur de cette pièce. Le groupe vote. Si personne valide, interdiction de parler de toi jusqu'à ton prochain tour.",
+        "en": "You've got 10 seconds to name ONE thing you're objectively the best at in this room. The room votes. If nobody backs you, you lose all self-promotion privileges until your next turn."
       },
       "props": false,
       "tags": ["funny"]
@@ -114,8 +114,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel est le mensonge que tu sors le plus souvent dans la vie de tous les jours ?",
-        "en": "What's the lie you tell most often in everyday life?"
+        "fr": "Quel mensonge tu sors en pilote automatique ? « J'arrive », « j'avais pas vu ton message », « j'allais justement te répondre »… Cite le tien et ta dernière victime.",
+        "en": "Which lie do you run on autopilot? 'omw', 'just saw this', 'I was literally about to reply'… Name yours and your most recent victim."
       },
       "props": false,
       "tags": ["funny"]
@@ -127,8 +127,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "C'est quoi la dernière chose totalement absurde qui t'a fait pleurer ? Les pubs et les dessins animés comptent.",
-        "en": "What's the last completely ridiculous thing that made you cry? Ads and cartoons count."
+        "fr": "La dernière fois que t'as chialé devant un truc objectivement débile — la pub d'assurance, le chien qui retrouve son maître. Titre exact et date. Le groupe tranche : mignon ou inquiétant.",
+        "en": "The last time you cried at something objectively stupid — the insurance advert, the soldier-comes-home video. Exact title and date. The room rules: endearing or concerning."
       },
       "props": false,
       "tags": ["funny"]
@@ -140,8 +140,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Si ton historique de recherche s'affichait sur le mur, là, maintenant, quelle recherche supplierais-tu d'effacer ?",
-        "en": "If your search history appeared on the wall right now, which search would you beg to delete?"
+        "fr": "Ton historique de recherche s'affiche sur la TV du salon, là, tout de suite. Quelle recherche tu supplies d'effacer en premier ? Sois précis.",
+        "en": "Your search history hits the living-room TV right now. Which exact search are you begging to delete first? Be specific."
       },
       "props": false,
       "tags": ["funny"]
@@ -153,8 +153,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle bêtise d'enfance ta famille ressort-elle à CHAQUE repas de famille, sans exception ?",
-        "en": "What childhood blunder does your family bring up at every single gathering, without fail?"
+        "fr": "Quelle bêtise ta famille ressort à CHAQUE repas depuis quinze ans ? Raconte-la une dernière fois, qu'on puisse l'enterrer dignement.",
+        "en": "Which childhood disaster does your family retell at every single dinner, fifteen years running? Tell it one last time so we can give it a proper burial."
       },
       "props": false,
       "tags": ["funny"]
@@ -166,8 +166,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Avais-tu un ami imaginaire ? Donne son nom, son caractère, et pourquoi vous vous êtes perdus de vue.",
-        "en": "Did you have an imaginary friend? Name, personality, and why you two eventually drifted apart."
+        "fr": "Cite un truc que tout le monde ici adore et que tu trouves nul. Dis-le en les regardant dans les yeux.",
+        "en": "Name one thing everyone in this room loves that you secretly think is mid. Say it while making eye contact."
       },
       "props": false,
       "tags": ["funny"]
@@ -179,8 +179,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Sur quelle appli crames-tu le plus d'heures ? Donne le vrai chiffre, pas le chiffre officiel.",
-        "en": "Which app eats most of your hours? Give the real number, not the official one."
+        "fr": "L'appli qui te bouffe le plus d'heures par semaine, et le vrai chiffre. Pas celui que tu sortirais à un médecin. Le groupe estime d'abord, tu corriges après. Chaque heure d'écart se paie en respect.",
+        "en": "The app that eats most of your week, and the real number. Not the one you'd tell your GP. The room estimates first, then you correct them. Every hour of gap costs you respect."
       },
       "props": false,
       "tags": ["funny"]
@@ -192,8 +192,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "As-tu déjà applaudi à l'atterrissage d'un avion ? Défends-toi devant le tribunal.",
-        "en": "Have you ever clapped when the plane landed? Defend yourself before the court."
+        "fr": "T'as déjà applaudi à l'atterrissage d'un avion. Défends-toi. Le groupe rend son verdict : pardonnable ou définitif.",
+        "en": "You have clapped when the plane landed. Defend yourself. The room delivers its verdict: forgivable or permanent."
       },
       "props": false,
       "tags": ["funny"]
@@ -205,8 +205,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Pain au chocolat ou chocolatine ? Tranche le débat devant tout le monde et assume les conséquences.",
-        "en": "Pineapple on pizza: genius or crime? Settle it in front of everyone and live with the fallout."
+        "fr": "Pain au chocolat ou chocolatine. Tranche maintenant, à voix haute, et assume de perdre la moitié de la pièce.",
+        "en": "Pineapple on pizza: yes or no. Rule on it now, out loud, and accept losing half the room."
       },
       "props": false,
       "tags": ["funny"]
@@ -218,8 +218,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "As-tu déjà rendu un signe de la main à quelqu'un… qui ne te saluait pas du tout ? Comment as-tu survécu à la honte ?",
-        "en": "Ever waved back at someone who wasn't waving at you at all? How did you survive the shame?"
+        "fr": "Raconte la fois où t'as rendu un signe de main à quelqu'un qui saluait la personne derrière toi. Mime ta gestion de crise.",
+        "en": "Tell us about the time you waved back at someone waving at the person behind you. Reenact your crisis management."
       },
       "props": false,
       "tags": ["funny"]
@@ -231,8 +231,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle est la chose la plus gamine que tu fais encore en secret ?",
-        "en": "What's the most childish thing you still secretly do?"
+        "fr": "Cite le truc de gamin que tu fais encore porte fermée, rideaux tirés. Sois précis : on sentira si tu minimises.",
+        "en": "Name the childhood habit you still do behind a locked door, curtains drawn. Be specific — we'll know if you're downplaying."
       },
       "props": false,
       "tags": ["funny"]
@@ -244,8 +244,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "C'est quoi ta blessure la plus bête, et comment c'est arrivé ? Reconstitution verbale obligatoire.",
-        "en": "What's the dumbest way you've ever injured yourself? Verbal reenactment required."
+        "fr": "Ta blessure la plus stupide : le lieu, l'objet coupable, le mensonge raconté aux urgences. Reconstitution obligatoire.",
+        "en": "Your dumbest injury: the location, the guilty object, the lie you told at A&E. Reenactment mandatory."
       },
       "props": false,
       "tags": ["funny"]
@@ -257,8 +257,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel mot as-tu prononcé de travers pendant des années avant que quelqu'un ose te corriger ?",
-        "en": "What word did you mispronounce for years before someone finally dared to correct you?"
+        "fr": "Quel mot t'as massacré pendant des années avant qu'on ose te corriger ? Redis l'ancienne version à voix haute. Savoure.",
+        "en": "What word did you butcher for years before someone finally staged an intervention? Say the old version out loud. Sit in it."
       },
       "props": false,
       "tags": ["funny"]
@@ -270,8 +270,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel film adoré de tout le monde trouves-tu secrètement ennuyeux à mourir ?",
-        "en": "Which movie everyone loves do you secretly find boring beyond belief?"
+        "fr": "Quel film culte t'as trouvé long et nul ? Dis-le franchement. Quelqu'un ici va vouloir se battre — c'est le but.",
+        "en": "Which beloved classic film bored you senseless? Say it plainly. Someone here will want to fight you — that's the point."
       },
       "props": false,
       "tags": ["funny"]
@@ -283,8 +283,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel petit mensonge as-tu déjà sorti ce soir ? Il y en a forcément un.",
-        "en": "What little white lie have you already told tonight? There's definitely one."
+        "fr": "Quel petit mensonge t'as déjà sorti ce soir, dans cette pièce ? Y'en a forcément un. Le groupe ouvre l'enquête.",
+        "en": "What small lie have you already told tonight, in this room? There's at least one. The room may now open its investigation."
       },
       "props": false,
       "tags": ["funny"]
@@ -296,8 +296,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle théorie complètement absurde te semble secrètement un tout petit peu crédible ?",
-        "en": "What completely absurd theory do you secretly find just a tiny bit plausible?"
+        "fr": "Quelle théorie complètement débile te paraît secrètement un peu crédible ? Défends-la 20 secondes avec un sérieux total.",
+        "en": "Which completely unhinged theory do you secretly find a little plausible? Defend it for 20 seconds, dead serious."
       },
       "props": false,
       "tags": ["funny"]
@@ -309,8 +309,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle chanson fais-tu semblant de connaître en marmonnant les paroles ? Chante-nous ta version, là.",
-        "en": "Which song do you pretend to know by mumbling the lyrics? Sing us your version, right now."
+        "fr": "Quelle chanson tu fais semblant de connaître depuis des années ? Chante-nous ta version en yaourt, maintenant.",
+        "en": "Which song have you been faking knowing for years? Perform your mumbled version for us, right now."
       },
       "props": false,
       "tags": ["funny"]
@@ -322,8 +322,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Affiche ton temps d'écran du jour et lis le chiffre à voix haute, sans aucun commentaire.",
-        "en": "Pull up today's screen time and read the number out loud, no commentary allowed."
+        "fr": "Affiche ton temps d'écran de la semaine et lis le total à voix haute. Pas de contexte, pas d'excuse, juste le chiffre.",
+        "en": "Open your weekly screen time and read the total out loud. No context, no excuses, just the number."
       },
       "props": true,
       "tags": ["funny"]
@@ -335,8 +335,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Raconte le rêve le plus bizarre dont tu te souviennes — sans l'arranger pour paraître normal.",
-        "en": "Tell us the weirdest dream you remember — without editing it to sound normal."
+        "fr": "Raconte le rêve où quelqu'un de cette pièce est apparu. T'en as forcément fait un. La personne concernée a le droit d'exiger UN détail supplémentaire.",
+        "en": "Tell us about the dream someone in this room appeared in. You've definitely had one. The person involved gets to demand exactly ONE extra detail."
       },
       "props": false,
       "tags": ["funny"]
@@ -348,8 +348,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "C'est quoi le pire fond d'écran ou la pire sonnerie que tu aies jamais eu ? Tu assumes cette époque ?",
-        "en": "What's the worst wallpaper or ringtone you've ever had? Do you stand by that era?"
+        "fr": "Décris ton pire fond d'écran de l'histoire de tes téléphones : l'année, le perso, la honte. T'assumais quoi, à l'époque ?",
+        "en": "Describe the worst phone wallpaper you've ever had: the year, the character, the shame. What were you even going through?"
       },
       "props": false,
       "tags": ["funny"]
@@ -361,8 +361,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Si tes plantes ou ton animal pouvaient parler, quelle habitude de toi balanceraient-ils en premier ?",
-        "en": "If your pets or plants could talk, which of your habits would they snitch on first?"
+        "fr": "Ton animal ou ta plante témoigne contre toi au tribunal. Quelle habitude il balance en premier, et à quelle heure elle a lieu d'habitude ? Sois précis : lui, il a tout vu.",
+        "en": "Your pet or your plant takes the witness stand against you. Which habit do they expose first, and what time of day does it usually happen? Be precise — they've seen everything."
       },
       "props": false,
       "tags": ["funny"]
@@ -374,8 +374,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel est ton pire message envoyé dans le mauvais groupe ? Raconte la seconde exacte où tu as compris.",
-        "en": "What's your worst message sent to the wrong chat? Walk us through the exact second you realized."
+        "fr": "Ton pire message envoyé dans le mauvais groupe. Le contenu, le groupe, la seconde exacte où t'as compris. On veut tout.",
+        "en": "Your worst wrong-chat message. The content, the chat, the exact second you realized. We want everything."
       },
       "props": false,
       "tags": ["funny"]
@@ -387,8 +387,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "As-tu déjà refait un débat sous la douche… et perdu quand même ? Contre qui ?",
-        "en": "Have you ever replayed an argument in the shower… and still lost? Against whom?"
+        "fr": "T'as déjà refait une dispute sous la douche… et perdu quand même ? Contre qui ? Cette personne est peut-être dans la pièce.",
+        "en": "Ever replayed an argument in the shower… and still lost? Against who? That person might be in this room."
       },
       "props": false,
       "tags": ["funny"]
@@ -400,8 +400,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Tu voulais faire quoi comme métier à 7 ans, et à quel moment précis ça a déraillé ?",
-        "en": "What did you want to be at age 7, and at what exact moment did it all go off the rails?"
+        "fr": "Tu voulais faire quoi à 7 ans ? Donne le moment EXACT où le rêve est mort. On veut la scène complète.",
+        "en": "What were you going to be at age 7? Name the EXACT moment the dream died. We want the full scene."
       },
       "props": false,
       "tags": ["funny", "deep"]
@@ -413,8 +413,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle est la raison la plus mesquine pour laquelle tu aies boudé quelqu'un ?",
-        "en": "What's the pettiest reason you've ever sulked at someone?"
+        "fr": "La raison la plus mesquine pour laquelle t'as boudé quelqu'un. Vraiment mesquine. Le groupe vote : mérité ou pas.",
+        "en": "The pettiest reason you've ever frozen someone out. Properly petty. The room votes: deserved or not."
       },
       "props": false,
       "tags": ["funny"]
@@ -426,8 +426,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quelle émission regardes-tu en cachette en sachant très bien que c'est nul ?",
-        "en": "What show do you watch in secret while knowing full well it's trash?"
+        "fr": "L'émission que tu descends en public et que tu binges en privé. Saison et épisode en cours. Le groupe surveille tes yeux pendant que tu réponds.",
+        "en": "The show you trash publicly and binge privately. Current season and episode. The room watches your eyes while you answer."
       },
       "props": false,
       "tags": ["funny"]
@@ -439,8 +439,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel fou rire t'a pris au pire moment possible (cours, réunion, cérémonie) ? Qu'est-ce qui l'a déclenché ?",
-        "en": "What's the worst possible moment you got the giggles (class, meeting, ceremony)? What set you off?"
+        "fr": "Ton pire fou rire au pire moment : enterrement, oral, réunion. Qu'est-ce qui l'a déclenché, et qui t'a fusillé du regard ?",
+        "en": "Your worst giggle fit at the worst possible moment: funeral, exam, meeting. What set you off, and who gave you the death stare?"
       },
       "props": false,
       "tags": ["funny"]
@@ -452,8 +452,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Quel snack planques-tu pour ne pas avoir à le partager, et où se trouve la cachette actuelle ?",
-        "en": "What snack do you hide so you don't have to share it, and where's the current stash?"
+        "fr": "Quel snack tu planques pour pas avoir à le partager, et où est la cachette en ce moment ? Sois précis. Quelqu'un ira vérifier.",
+        "en": "What snack do you hide so you never have to share, and where is the stash right now? Be exact. Someone will check."
       },
       "props": false,
       "tags": ["funny"]
@@ -466,8 +466,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Parle avec une voix de robot jusqu'à ton prochain tour. Aucun bug toléré.",
-        "en": "Speak in a robot voice until your next turn. Zero glitches tolerated."
+        "fr": "Voix de robot jusqu'à ton prochain tour. Au premier bug détecté, le groupe te redémarre : tu reprends ta phrase à zéro.",
+        "en": "Robot voice until your next turn. First detected glitch, the room reboots you: restart your sentence from zero."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -479,8 +479,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Fais ton imitation la plus affectueuse de quelqu'un dans la pièce. Le groupe doit deviner qui en moins de 10 secondes.",
-        "en": "Do your most loving impression of someone in this room. The group has to guess who within 10 seconds."
+        "fr": "Imite quelqu'un de la pièce — la posture, la phrase fétiche, le tic — jusqu'à ce qu'on devine. Interdit de prendre le plus facile. La victime note la ressemblance, et elle sera vexée dans tous les cas.",
+        "en": "Impersonate someone in this room — posture, catchphrase, the tic — until they guess who. The easiest target is banned. The victim rates the accuracy, and they will be offended either way."
       },
       "props": false,
       "tags": ["funny"]
@@ -492,8 +492,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Invente et joue une pub de 15 secondes pour l'objet le plus proche de toi, slogan inclus.",
-        "en": "Invent and perform a 15-second commercial for the nearest object, slogan included."
+        "fr": "Vends l'objet le plus proche de toi en pub de 15 secondes : slogan, prix abusé, fausse promo. Le groupe achète ou zappe.",
+        "en": "Sell the nearest object in a 15-second ad: slogan, outrageous price, fake discount. The room either buys or changes the channel."
       },
       "props": true,
       "tags": ["funny"]
@@ -505,8 +505,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Fais 10 squats en récitant l'alphabet à l'envers. Le groupe compte les deux en même temps.",
-        "en": "Do 10 squats while reciting the alphabet backwards. The room counts both at once."
+        "fr": "Bras de T-rex jusqu'à ton prochain tour : coudes soudés aux côtes pour tout — boire, scroller, t'exprimer. Le groupe a ordre de te tendre des objets en continu.",
+        "en": "T-rex arms until your next turn: elbows welded to your ribs for everything — drinking, scrolling, gesturing. The room is under strict orders to keep handing you things."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -518,8 +518,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Le groupe choisit un animal : tu ne communiques qu'avec ses cris pendant une minute entière.",
-        "en": "The group picks an animal: communicate only in that animal's sounds for one full minute."
+        "fr": "Le groupe te choisit un animal. Pendant une minute, c'est ta seule langue. Et t'as des choses urgentes à nous dire.",
+        "en": "The group picks your animal. For one full minute it's your only language. And you have urgent things to tell us."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -531,8 +531,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Traverse la pièce en démarche de défilé haute couture, aller-retour, regard d'acier obligatoire.",
-        "en": "Walk the length of the room like a runway model, there and back, steely gaze mandatory."
+        "fr": "Défilé haute couture : traverse la pièce aller-retour, regard de tueur. Si quelqu'un rit, tu refais un passage. Règles de la fashion week.",
+        "en": "Runway walk: cross the room and back, killer stare. If anyone laughs, you do another lap. Fashion week rules."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -544,8 +544,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Improvise un rap qui case les prénoms de trois joueurs. Quatre mesures minimum.",
-        "en": "Freestyle a rap that includes three players' first names. Four bars minimum."
+        "fr": "Freestyle de quatre mesures avec les prénoms de trois joueurs. Si ça rime pas, le groupe te hue comme une première partie de concert qui a trop duré.",
+        "en": "Four-bar freestyle featuring three players' names. If it doesn't rhyme, the room is allowed to boo you off stage."
       },
       "props": false,
       "tags": ["funny"]
@@ -557,8 +557,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Mets un coussin (ou un livre) en équilibre sur ta tête et traverse la pièce sans le faire tomber.",
-        "en": "Balance a cushion (or a book) on your head and cross the room without dropping it."
+        "fr": "Coussin en équilibre sur la tête, traversée du salon. S'il tombe, tu repars du début — après avoir présenté tes excuses au coussin.",
+        "en": "Balance a cushion on your head and cross the room. Drop it and you start over — after formally apologizing to the cushion."
       },
       "props": true,
       "tags": ["funny", "physical"]
@@ -570,8 +570,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Dis « les chaussettes de l'archiduchesse sont-elles sèches » cinq fois, vite. Chaque erreur : on recommence (3 essais max).",
-        "en": "Say 'she sells seashells by the seashore' five times fast. Every slip means you start over (3 tries max)."
+        "fr": "« Les chaussettes de l'archiduchesse sont-elles sèches » cinq fois, vite. Trois essais. À chaque échec, le groupe répète ta pire syllabe en chœur.",
+        "en": "'She sells seashells by the seashore' five times, fast. Three tries. Each fail, the room chants your worst syllable back at you."
       },
       "props": false,
       "tags": ["funny"]
@@ -583,8 +583,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Rejoue ton entrée dans la pièce de ce soir en slow motion ultra dramatique, bruitages inclus.",
-        "en": "Reenact tonight's entrance into this room in ultra-dramatic slow motion, sound effects included."
+        "fr": "Rejoue ton entrée de ce soir en slow motion ultra dramatique, bruitages compris. Le groupe fredonne la musique d'épopée.",
+        "en": "Reenact tonight's entrance in ultra-dramatic slow motion, sound effects included. The room hums the epic score."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -596,8 +596,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Lance ton faux rire le plus exagéré et tiens-le jusqu'à ce qu'au moins une personne rie pour de vrai.",
-        "en": "Start your most exaggerated fake laugh and keep it going until at least one person genuinely laughs."
+        "fr": "Lance ton faux rire le plus exagéré et tiens-le jusqu'à ce que quelqu'un craque pour de vrai. Personne ne craque ? Tu recommences plus fort.",
+        "en": "Launch your most exaggerated fake laugh and hold it until someone genuinely cracks. Nobody cracks? Go again, louder."
       },
       "props": false,
       "tags": ["funny"]
@@ -609,8 +609,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Célèbre comme si tu venais de gagner la Coupe du monde : glissade, cris, interview d'après-match.",
-        "en": "Celebrate like you just won the World Cup: knee slide, screaming, post-match interview."
+        "fr": "Tu viens de gagner la Coupe du monde : glissade, hurlement, interview d'après-match en larmes. Et remercie ta daronne.",
+        "en": "You just won the World Cup: knee slide, screaming, tearful post-match interview. And thank your mum."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -622,8 +622,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "La personne à ta gauche a 30 secondes pour te recoiffer comme elle veut. Tu gardes la coiffure jusqu'à ton prochain tour.",
-        "en": "The player on your left gets 30 seconds to restyle your hair however they want. You keep it until your next turn."
+        "fr": "La personne à ta gauche a 30 secondes pour te recoiffer comme elle veut. Tu gardes le résultat — et t'as interdiction de te voir dans un miroir.",
+        "en": "The player on your left gets 30 seconds to restyle your hair however they like. You keep the result — and you're banned from mirrors."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -635,8 +635,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Le groupe te choisit un accent (québécois, belge, marseillais…) : tu le gardes jusqu'à ton prochain tour.",
-        "en": "The group picks you an accent (pirate, posh British, cowboy…): keep it until your next turn."
+        "fr": "Le groupe te choisit un accent (québécois, belge, marseillais…). Tu le gardes jusqu'à ton prochain tour, même pour les phrases sérieuses. Surtout pour les phrases sérieuses.",
+        "en": "The group assigns you an accent (pirate, posh, cowboy…). Keep it until your next turn, even for serious sentences. Especially for serious sentences."
       },
       "props": false,
       "tags": ["funny"]
@@ -648,8 +648,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Mime ta routine du matin en accéléré. Le groupe doit deviner chaque étape, même la moins glorieuse.",
-        "en": "Mime your morning routine in fast-forward. The room must guess every step, even the least glorious one."
+        "fr": "Mime ta routine du matin en accéléré, étape par étape. Le groupe devine tout — y compris l'étape que t'espérais sauter.",
+        "en": "Mime your morning routine on fast-forward, step by step. The room guesses everything — including the step you hoped to skip."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -661,8 +661,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Chante tout ce que tu dis jusqu'à ton prochain tour — opéra ou comédie musicale, au choix.",
-        "en": "Sing everything you say until your next turn — opera or musical theatre, your pick."
+        "fr": "Tu chantes tout ce que tu dis jusqu'à ton prochain tour. Le groupe impose le style : opéra, rap ou comédie musicale.",
+        "en": "Sing everything you say until your next turn. The room dictates the genre: opera, rap, or musical theatre."
       },
       "props": false,
       "tags": ["funny"]
@@ -674,8 +674,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Exécute le pire pas de danse que tu connaisses avec une confiance absolue, pendant 20 secondes.",
-        "en": "Perform the worst dance move you know with absolute confidence for 20 seconds."
+        "fr": "Tout le monde regarde. Tu vas exécuter ton pire pas de danse avec une confiance absolue pendant 20 secondes. Moins 100 d'aura par hésitation.",
+        "en": "Eyes up, everyone. You're about to perform your worst dance move with absolute confidence for 20 seconds. Minus 100 aura per hesitation."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -687,8 +687,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Tiens la planche en citant 10 garnitures de pizza. Si tu t'effondres avant la dixième, tu recommences (une seule fois).",
-        "en": "Hold a plank while naming 10 pizza toppings. Collapse before ten and you restart from zero (once)."
+        "fr": "Le groupe désigne son champion de la mauvaise foi. Pendant 30 secondes, il t'accuse d'un truc que t'as JAMAIS fait. Excuse-toi à genoux, avec détails inventés et sincérité totale.",
+        "en": "The room appoints its most argumentative member. For 30 seconds they accuse you of something you NEVER did. Apologize on your knees, with invented details and total sincerity."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -700,8 +700,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Présente l'objet à ta droite comme un influenceur en plein placement de produit. Code promo obligatoire.",
-        "en": "Present the object on your right like an influencer doing a sponsored post. Promo code mandatory."
+        "fr": "Présente l'objet à ta droite comme un influenceur en plein placement de produit : code promo, fausse émotion, « ça a changé ma vie ».",
+        "en": "Pitch the object on your right like an influencer mid-sponsorship: promo code, fake emotion, 'this honestly changed my life'."
       },
       "props": true,
       "tags": ["funny"]
@@ -713,8 +713,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Raconte un souvenir très heureux avec le visage le plus tragique possible pendant 30 secondes.",
-        "en": "Tell a very happy memory while wearing the most tragic face possible for 30 seconds."
+        "fr": "Raconte ton souvenir le plus heureux avec la tête de quelqu'un qui annonce une faillite. 30 secondes. Tu souris, tu recommences.",
+        "en": "Tell your happiest memory with the face of a man announcing bankruptcy. 30 seconds. Smile and you start over."
       },
       "props": false,
       "tags": ["funny"]
@@ -726,8 +726,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Fais 5 pompes ; à chaque pompe, lance un compliment à un joueur différent.",
-        "en": "Do 5 push-ups; on each one, give a compliment to a different player."
+        "fr": "5 pompes. À chaque pompe, un reproche que t'as jamais osé faire à un joueur différent. Reproche timide = pompe annulée. Le groupe arbitre, les visés encaissent en silence.",
+        "en": "5 push-ups. Each rep, one grievance you've never dared raise with a different player. Weak grievance = rep doesn't count. The room referees; the accused take it in silence."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -739,8 +739,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Fais visiter ce salon comme si c'était un monument historique classé. Anecdotes inventées bienvenues.",
-        "en": "Give a guided tour of this living room as if it were a national landmark. Invented anecdotes welcome."
+        "fr": "Fais visiter ce salon comme un monument classé : dates inventées, drame historique, tragédie dans la cuisine. L'hôte n'a pas le droit de corriger.",
+        "en": "Tour this living room like a national landmark: invented dates, historical drama, a tragedy in the kitchen. The host may not correct you."
       },
       "props": false,
       "tags": ["funny"]
@@ -752,8 +752,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Essaie de te lécher le coude avec un engagement total pendant 15 secondes. Le groupe note l'effort.",
-        "en": "Try to lick your own elbow with total commitment for 15 seconds. The room grades the effort."
+        "fr": "Essaie de te lécher le coude pendant 15 secondes, engagement TOTAL. Le groupe note l'effort, pas le résultat. Y'aura pas de résultat.",
+        "en": "Try to lick your own elbow for 15 seconds with TOTAL commitment. The room grades the effort, not the result. There will be no result."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -765,8 +765,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Le groupe te sculpte en statue (pose de leur choix). Tiens la pose 30 secondes sans bouger ni rire.",
-        "en": "The group sculpts you into a statue (pose of their choice). Hold it 30 seconds without moving or laughing."
+        "fr": "Le groupe te sculpte en statue, pose de son choix. Tiens 30 secondes pendant qu'il invente le titre de l'œuvre et son prix aux enchères.",
+        "en": "The group sculpts you into a statue, pose of their choice. Hold it 30 seconds while they invent the artwork's title and its auction price."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -778,8 +778,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Lis ta dernière phrase envoyée par message comme une tirade de théâtre classique. Diction parfaite exigée.",
-        "en": "Read the last sentence you texted as a classical theatre monologue. Perfect diction required."
+        "fr": "Lis ta dernière phrase envoyée par message comme une tirade de Molière. Diction parfaite. Oui, même si c'est « ok ».",
+        "en": "Perform the last text you sent as a Shakespearean monologue. Perfect diction. Yes, even if it just says 'ok'."
       },
       "props": true,
       "tags": ["funny"]
@@ -791,8 +791,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Présente la météo de demain… des humeurs de chaque joueur. Carte imaginaire et gestes de présentateur inclus.",
-        "en": "Present tomorrow's weather forecast… for each player's mood. Imaginary map and anchor gestures included."
+        "fr": "Flash info de 20 secondes sur les échecs de la soirée : qui a renversé quoi, quelle vanne est morte, qui checke son tel en douce. C'est ton direct, c'est ta carrière.",
+        "en": "A 20-second breaking-news report on tonight's failures: who spilled what, whose joke died on impact, who keeps sneaking looks at their phone. Live broadcast. Your career."
       },
       "props": false,
       "tags": ["funny"]
@@ -830,8 +830,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Improvise 20 secondes d'opéra sur ce que tu as mangé aujourd'hui. Vibrato obligatoire sur le dessert.",
-        "en": "Improvise 20 seconds of opera about what you ate today. Mandatory vibrato on the dessert."
+        "fr": "20 secondes d'opéra sur ton historique YouTube d'hier soir. Vibrato obligatoire sur la vidéo la moins défendable.",
+        "en": "20 seconds of opera about your YouTube history from last night. Mandatory vibrato on the least defensible video."
       },
       "props": false,
       "tags": ["funny"]
@@ -856,8 +856,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Tu as 30 secondes pour faire rire un joueur désigné par le groupe — sans parler et sans le toucher.",
-        "en": "You have 30 seconds to make a player chosen by the group laugh — no words, no touching."
+        "fr": "30 secondes pour faire rire le joueur désigné par le groupe — sans parler, sans le toucher. S'il craque, il hérite de ton prochain gage. S'il tient, c'est lui qui choisira le tien.",
+        "en": "30 seconds to make the player the group picks laugh — no words, no touching. If they crack, they inherit your next dare. If they hold out, they choose yours."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -882,8 +882,8 @@
       "spicy": 0,
       "minAge": 13,
       "text": {
-        "fr": "Fais ton rire de grand méchant en trois niveaux : discret, inquiétant, fin du monde.",
-        "en": "Deliver your supervillain laugh in three escalating levels: subtle, unsettling, end of the world."
+        "fr": "Le groupe désigne un joueur. Prononce son éloge funèbre de 20 secondes, très ému, en listant ses pires défauts comme des qualités. Le défunt n'a pas le droit de se défendre.",
+        "en": "The group picks a player. Deliver their 20-second eulogy, visibly moved, listing their worst flaws as if they were virtues. The deceased may not defend themselves."
       },
       "props": false,
       "tags": ["funny"]
@@ -948,8 +948,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "As-tu déjà ghosté quelqu'un ? Décris ta technique de disparition la plus lâche.",
-        "en": "Have you ever ghosted someone? Describe your most cowardly vanishing act."
+        "fr": "Décris ta méthode de ghosting, étape par étape : le dernier message envoyé, les réponses qui s'espacent, la seconde où t'as su que tu répondrais plus jamais. Quelqu'un ici a peut-être subi le protocole.",
+        "en": "Walk us through your ghosting method, step by step: the final message, the reply times stretching, the exact second you knew you'd never answer again. Someone in this room may have survived the protocol."
       },
       "props": false,
       "tags": ["funny"]
@@ -987,8 +987,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Décris (sans la montrer) la photo la plus gênante de ta galerie. Le groupe décide si la description est crédible.",
-        "en": "Describe (without showing it) the most embarrassing photo in your camera roll. The room decides if the description is believable."
+        "fr": "Décris — sans la montrer — la photo de ta galerie que tu supprimerais en premier si on te volait ton tel ce soir. Le groupe décide si on vient de recevoir la version soft.",
+        "en": "Describe — without showing it — the photo you'd delete first if your phone got stolen tonight. The room rules on whether we just got the watered-down version."
       },
       "props": false,
       "tags": ["funny"]
@@ -1013,8 +1013,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel énorme red flag as-tu ignoré juste parce que la personne te plaisait beaucoup trop ?",
-        "en": "What giant red flag did you ignore just because you were way too into the person?"
+        "fr": "Le red flag énorme que t'as ignoré parce que la personne était trop belle. Sois précis : c'était quoi le flag, et combien de temps avant qu'il t'explose à la figure ?",
+        "en": "The giant red flag you ignored because they were hot. Specifics: what was the flag, and how long before it detonated in your face?"
       },
       "props": false,
       "tags": ["funny", "deep"]
@@ -1026,8 +1026,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Raconte ta soirée la plus chaotique : le lieu, le moment exact où ça a basculé, et qui t'a ramené.",
-        "en": "Tell us about your most chaotic night out: the place, the exact moment it tipped over, and who got you home."
+        "fr": "Ta soirée la plus chaotique : la seconde exacte où ça a basculé, ce qui a été perdu (objet, dignité, caution), et le message d'excuse du lendemain. Lis-le s'il existe encore.",
+        "en": "Your most chaotic night out: the exact second it tipped, what was lost (an item, your dignity, a deposit), and the morning-after apology text. Read it out if it still exists."
       },
       "props": false,
       "tags": ["funny"]
@@ -1052,8 +1052,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la raison la plus futile pour laquelle tu as arrêté de voir quelqu'un qui te plaisait vraiment ?",
-        "en": "What's the most trivial reason you stopped seeing someone you actually liked?"
+        "fr": "La raison la plus mesquine pour laquelle t'as arrêté de voir quelqu'un qui te plaisait vraiment. Les chaussures ? Le rire ? Un « mdr » de trop ? Le groupe vote : ick légitime ou c'était toi le problème.",
+        "en": "The pettiest reason you stopped seeing someone you genuinely liked. The shoes? The laugh? One 'lol' too many? The room votes: valid ick, or you were the problem."
       },
       "props": false,
       "tags": ["funny"]
@@ -1078,8 +1078,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Qui était ton tout premier crush de célébrité ? Défends ce choix aujourd'hui, sans rire.",
-        "en": "Who was your very first celebrity crush? Defend that choice today with a straight face."
+        "fr": "Ton tout premier crush de célébrité. Défends ce choix aujourd'hui, sans rire, pendant que quelqu'un affiche une photo de l'époque.",
+        "en": "Your very first celebrity crush. Defend the choice today with a straight face while someone pulls up a photo from that exact era."
       },
       "props": false,
       "tags": ["funny"]
@@ -1091,8 +1091,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Raconte le plan le plus désespéré que tu aies monté pour attirer l'attention d'un crush. Est-ce que ça a marché ?",
-        "en": "Tell us the most desperate scheme you've ever pulled to get a crush's attention. Did it actually work?"
+        "fr": "Le plan le plus désespéré que t'aies monté pour croiser ton crush « par hasard ». L'horaire calculé, le trajet rallongé, la story postée juste pour lui ou elle. Balance tout.",
+        "en": "The most desperate scheme you've ever run to 'accidentally' bump into a crush. The timed route, the extended detour, the story posted for an audience of one. All of it."
       },
       "props": false,
       "tags": ["funny"]
@@ -1104,8 +1104,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "As-tu déjà fait semblant d'adorer un truc (sport, groupe, jeu) pour plaire à quelqu'un ? Jusqu'où est allé le mensonge ?",
-        "en": "Have you ever pretended to love something (a sport, a band, a game) to impress someone? How deep did the lie go?"
+        "fr": "Le truc que t'as fait semblant d'adorer pour plaire à quelqu'un — l'équipe de foot, le groupe de musique, la rando. T'es allé jusqu'où ? Maillot acheté ? Concert subi ?",
+        "en": "The thing you faked loving to impress someone — the team, the band, hiking. How deep did it go? Merch bought? Gig endured?"
       },
       "props": false,
       "tags": ["funny"]
@@ -1117,8 +1117,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la pire chose que tu aies dite en entretien ou à l'oral ? Redis-la maintenant avec le même aplomb.",
-        "en": "What's the worst thing you've ever said in an interview or an oral exam? Say it again now with the same confidence."
+        "fr": "La pire phrase que t'as sortie en entretien ou à l'oral. Redis-la avec le même aplomb. Le groupe vote : recalé sur place, ou recalé plus tard par politesse.",
+        "en": "The worst sentence you've ever produced in an interview or an oral exam. Say it again with the same confidence. The room votes: rejected on the spot, or rejected later out of politeness."
       },
       "props": false,
       "tags": ["funny"]
@@ -1169,8 +1169,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "La dernière fois qu'on t'a surpris en train de mater quelqu'un, comment as-tu tenté de sauver les apparences ?",
-        "en": "Last time you got caught checking someone out, how did you try to play it off?"
+        "fr": "La dernière fois qu'on t'a grillé en train de mater. Rejoue ta manœuvre de récupération exacte : le faux regard au loin, le check d'une montre imaginaire. Le groupe note la technique.",
+        "en": "The last time you got caught staring. Reenact your exact recovery move: the fake gaze into the distance, the phantom watch check. The room rates the technique."
       },
       "props": false,
       "tags": ["funny"]
@@ -1234,8 +1234,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la fois où tu es passé le plus près de te faire virer d'un endroit ? Raconte tout.",
-        "en": "What's the closest you've ever come to getting kicked out of somewhere? Spill everything."
+        "fr": "La fois où t'es passé le plus près de te faire virer d'un endroit. Le lieu, la faute exacte, qui t'a sauvé. Le groupe tranche : leçon retenue, ou t'attends juste la revanche.",
+        "en": "The closest you've ever come to getting thrown out of somewhere. The venue, the exact offence, who saved you. The room rules: lesson learned, or just waiting for the rematch."
       },
       "props": false,
       "tags": ["funny"]
@@ -1247,8 +1247,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Raconte ton pire baiser : la technique, l'ambiance, le moment où tu as compris. Aucun prénom requis.",
-        "en": "Describe your worst kiss ever: the technique, the vibe, the moment you knew. No names required."
+        "fr": "Ton pire baiser : la technique, le décor, la seconde où t'as su. Le prénom on s'en fout — la reconstitution sur le dos de ta main, par contre, est obligatoire.",
+        "en": "Your worst kiss: the technique, the setting, the second you knew. Skip the name — the reenactment on the back of your hand, however, is mandatory."
       },
       "props": false,
       "tags": ["funny"]
@@ -1286,8 +1286,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "As-tu déjà eu un crush sur quelqu'un de totalement inapproprié (prof, médecin, ami de tes parents) ? Raconte, sans nom.",
-        "en": "Have you ever had a crush on someone wildly inappropriate (teacher, doctor, your parents' friend)? Tell the story, no names."
+        "fr": "Ton crush le plus inapproprié — prof, médecin, pote de tes darons. Le métier suffit, on balance pas. Par contre on veut savoir jusqu'où t'es allé pour te faire remarquer.",
+        "en": "Your most inappropriate crush — teacher, doctor, your parents' mate. Job title only, we're not snitches. We do, however, want to know how far you went to get noticed."
       },
       "props": false,
       "tags": ["funny"]
@@ -1378,8 +1378,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Appelle un contact choisi par le groupe et chante-lui « Joyeux anniversaire » en entier. Ce n'est pas son anniversaire.",
-        "en": "Call a contact picked by the group and sing them 'Happy Birthday' all the way through. It is not their birthday."
+        "fr": "Appelle ta daronne ou ton daron en haut-parleur et demande c'était quoi ta pire période. Interdiction de raccrocher avant la fin de la réponse.",
+        "en": "Call your mum or dad on speaker and ask what your most embarrassing phase was. You may not hang up until they have completely finished."
       },
       "props": true,
       "tags": ["funny"]
@@ -1391,8 +1391,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Le groupe choisit une photo DE TOI dans ta galerie : poste-la en story. Suppression autorisée dans 10 minutes.",
-        "en": "The group picks a photo OF YOU from your gallery: post it to your story. You may delete it in 10 minutes."
+        "fr": "Le groupe choisit une photo DE TOI dans ta galerie et rédige la légende. Tu tranches en direct : story pendant 10 minutes, ou tu portes le titre officiel de dégonflé jusqu'à la fin de la partie.",
+        "en": "The group picks a photo OF YOU from your gallery and writes the caption. Your call, live: story it for 10 minutes, or wear the official coward title until the game ends."
       },
       "props": true,
       "tags": ["funny"]
@@ -1404,8 +1404,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Montre ton pas de danse le plus sensuel avec un engagement total pendant 15 secondes. Le groupe note l'aisance.",
-        "en": "Show your most seductive dance move with full commitment for 15 seconds. The room scores the confidence."
+        "fr": "15 secondes de ton pas de danse le plus sensuel, engagement total, regard vissé sur le joueur le plus gêné de la pièce. Le groupe note l'aisance. La victime note les dégâts.",
+        "en": "15 seconds of your most seductive dance move, full commitment, eyes locked on the most easily embarrassed player here. The room scores the confidence. The victim scores the damage."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1417,8 +1417,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Mets un genou à terre et fais une sérénade de 20 secondes au joueur d'en face. Regard intense obligatoire.",
-        "en": "Drop to one knee and serenade the player across from you for 20 seconds. Intense eye contact required."
+        "fr": "Genou à terre, sérénade de 20 secondes au joueur d'en face — paroles improvisées sur ce qu'il porte ce soir. Si tu ris, tu recommences sur son voisin.",
+        "en": "On one knee, 20-second serenade to the player across from you — lyrics improvised about what they're wearing tonight. Laugh and you start over on their neighbour."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1443,8 +1443,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Échange un vêtement visible (haut, pull, accessoire) avec la personne à ta droite jusqu'à ton prochain tour.",
-        "en": "Swap one visible piece of clothing (top, hoodie, accessory) with the player on your right until your next turn."
+        "fr": "Échange un vêtement visible avec la personne à ta droite jusqu'à ton prochain tour. Interdiction formelle d'expliquer pourquoi — à qui que ce soit, y compris entre vous.",
+        "en": "Swap one visible piece of clothing with the player on your right until your next turn. Explaining why — to anyone, including each other — is strictly forbidden."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1469,8 +1469,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Fixe la personne à ta gauche dans les yeux pendant 30 secondes sans rire. Le premier qui craque fait 5 squats.",
-        "en": "Lock eyes with the player on your left for 30 seconds without laughing. First to crack does 5 squats."
+        "fr": "Fixe la personne à ta gauche dans les yeux, 30 secondes, sans rire. Le premier qui craque raconte son dernier rêve gênant. Y'a toujours un rêve gênant.",
+        "en": "Lock eyes with the player on your left for 30 seconds, no laughing. Whoever cracks first tells their most recent embarrassing dream. There is always an embarrassing dream."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1482,8 +1482,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Le groupe choisit un contact : envoie-lui un seul emoji canard 🦆, puis refuse toute explication pendant 10 minutes.",
-        "en": "The group picks a contact: send them a single duck emoji 🦆, then refuse to explain anything for 10 minutes."
+        "fr": "Envoie un seul emoji canard 🦆 à ta daronne ou ton daron, puis ignore toute réaction pendant 10 minutes. Le groupe surveille l'arrivée des appels manqués.",
+        "en": "Send a single duck emoji 🦆 to your mum or dad, then ignore every reaction for 10 minutes. The room keeps count of the incoming missed calls."
       },
       "props": true,
       "tags": ["funny"]
@@ -1534,8 +1534,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Fais ta tête de selfie officielle et tiens-la 20 secondes pendant que le groupe la note à voix haute.",
-        "en": "Strike your official selfie face and hold it for 20 seconds while the room rates it out loud."
+        "fr": "Fais ta vraie tête de selfie — celle que ta galerie prouve, pas celle que t'assumes — et tiens-la 20 secondes pendant que le groupe la commente comme des critiques d'art.",
+        "en": "Strike your real selfie face — the one your camera roll proves, not the one you admit to — and hold it for 20 seconds while the room reviews it like art critics."
       },
       "props": false,
       "tags": ["funny"]
@@ -1547,8 +1547,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Laisse la personne à ta droite écrire un message à qui elle veut depuis ton téléphone — tu as 3 secondes pour le relire avant l'envoi.",
-        "en": "Let the person on your right text anyone they want from your phone — you get 3 seconds to read it before it sends."
+        "fr": "La personne à ta droite rédige un message depuis ton tel, au contact de son choix. Tu le lis à voix haute, puis tu tranches en direct : envoyer ou supprimer. Le groupe a le droit de te traiter de lâche.",
+        "en": "The player on your right drafts a text on your phone to any contact they pick. You read it out loud, then rule live: send or delete. The room reserves the right to call you a coward."
       },
       "props": true,
       "tags": ["funny", "physical"]
@@ -1586,8 +1586,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Tu ne parles qu'en questions jusqu'à ton prochain tour. Chaque phrase affirmative = 5 jumping jacks immédiats.",
-        "en": "Speak only in questions until your next turn. Every statement = 5 immediate jumping jacks."
+        "fr": "Tu parles uniquement en questions jusqu'à ton prochain tour. Chaque affirmation échappée = le groupe choisit une question, et tu DOIS y répondre. Pèse chaque phrase.",
+        "en": "You speak only in questions until your next turn. Every statement that slips out = the room picks one question you MUST answer. Weigh every sentence."
       },
       "props": false,
       "tags": ["funny"]
@@ -1612,8 +1612,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Recrée une affiche de film romantique avec le joueur volontaire le plus proche. Tenez la pose 10 secondes, intensité maximale.",
-        "en": "Recreate a romance movie poster with the nearest willing player. Hold the pose for 10 seconds at maximum intensity."
+        "fr": "Recrée une affiche de film romantique avec le joueur volontaire le plus proche. Tenez la pose 10 secondes pendant que le groupe invente le titre et la note AlloCiné.",
+        "en": "Recreate a romance movie poster with the nearest willing player. Hold the pose 10 seconds while the room invents the title and the Rotten Tomatoes score."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1703,8 +1703,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Drague un objet de la pièce pendant 20 secondes comme si c'était l'amour de ta vie. Rupture dramatique en option.",
-        "en": "Flirt with an object in the room for 20 seconds like it's the love of your life. Dramatic breakup optional."
+        "fr": "Drague la lampe pendant 20 secondes avec tes vraies techniques — celles que t'utilises sur des humains. Le groupe te dira si le problème vient de là.",
+        "en": "Hit on the lamp for 20 seconds using your actual techniques — the ones you deploy on humans. The room will let you know if this explains a lot."
       },
       "props": true,
       "tags": ["funny"]
@@ -1768,8 +1768,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Démontre ta meilleure technique de bisou sur le dos de ta main, bruitages inclus. Le groupe note le réalisme.",
-        "en": "Demonstrate your best kissing technique on the back of your hand, sound effects included. The room grades the realism."
+        "fr": "Imite la démarche de trois joueurs traversant la pièce, sans dire qui est qui. Le groupe doit reconnaître chacun. Toute personne reconnue gagne le droit d'imiter la tienne en retour. En pire.",
+        "en": "Impersonate the walk of three players crossing the room, without saying who's who. The room must identify each one. Anyone identified earns the right to do your walk back at you. Worse."
       },
       "props": false,
       "tags": ["funny", "physical"]
@@ -1834,8 +1834,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Qu'as-tu vraiment pensé la toute première fois que tu as vu ton/ta partenaire ? Version non censurée.",
-        "en": "What did you honestly think the very first time you saw your partner? Uncensored version."
+        "fr": "Ta toute première impression de ton/ta partenaire, version brute — pas celle que vous servez en dîner. Il/elle compare avec la version officielle. Chaque écart se paie.",
+        "en": "Your actual first impression of your partner — not the one you two perform at dinner parties. They compare it to the official record. Every discrepancy has a price."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -1847,8 +1847,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la chose la plus gênante que tu aies faite pour impressionner ton/ta partenaire au tout début ?",
-        "en": "What's the most embarrassing thing you did to impress your partner in the early days?"
+        "fr": "Le truc le plus gênant que t'as fait pour l'impressionner au début : le sport inventé, la passion simulée, le resto au-dessus de tes moyens. Il/elle l'apprend peut-être en direct.",
+        "en": "The most embarrassing thing you did to impress them early on: the invented hobby, the faked music taste, the restaurant you couldn't afford. They may be learning this live."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -1860,8 +1860,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle habitude de ton/ta partenaire t'agaçait au début… et te fait secrètement craquer maintenant ?",
-        "en": "Which of your partner's habits annoyed you at first… and secretly melts you now?"
+        "fr": "Le truc que ton/ta partenaire fait, que t'as officiellement « accepté », mais qui te tue encore à petit feu. Dis-le maintenant, devant témoins. C'est ta seule fenêtre.",
+        "en": "The thing your partner does that you've officially 'made peace with' but that is still killing you slowly. Say it now, in front of witnesses. This is your one window."
       },
       "props": false,
       "tags": ["couple"]
@@ -1873,8 +1873,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel est le trait le plus séduisant de ton/ta partenaire qui n'a strictement rien à voir avec le physique ?",
-        "en": "What's your partner's most attractive trait that has absolutely nothing to do with looks?"
+        "fr": "T'as stalké quoi sur ton/ta partenaire avant le premier date ? Profondeur exacte de la fouille : année atteinte, comptes inspectés, ex identifiés. Ensuite il/elle avoue la sienne.",
+        "en": "What did you stalk about your partner before the first date? Exact depth of the dig: year reached, accounts inspected, exes identified. Then they confess theirs."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -1886,8 +1886,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle chanson te fait instantanément penser à ton/ta partenaire ? Explique pourquoi, puis fredonne le refrain.",
-        "en": "What song instantly reminds you of your partner? Tell us why, then hum the chorus."
+        "fr": "Quel nom de code tes potes utilisaient pour ton/ta partenaire dans le groupe avant que ce soit officiel ? Le vrai. Quelqu'un dans cette pièce peut vérifier.",
+        "en": "What codename did your friends use for your partner in the group chat before it was official? The real one. Someone in this room can fact-check."
       },
       "props": false,
       "tags": ["couple"]
@@ -1899,8 +1899,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Raconte le moment exact où tu as su que tu craquais pour ton/ta partenaire — avec tous les détails gênants.",
-        "en": "Describe the exact moment you knew you were falling for your partner — embarrassing details included."
+        "fr": "Le moment exact où t'as su que t'étais cuit. Pas la version romantique — le vrai, celui que t'as jamais raconté parce qu'il est gênant ou franchement ridicule.",
+        "en": "The exact moment you knew you were done for. Not the romantic version — the real one, the one you've never told because it's embarrassing or frankly stupid."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -1912,8 +1912,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "C'est quoi la dispute la plus ridicule que vous ayez jamais eue ? Assume ta part du ridicule.",
-        "en": "What's the most ridiculous argument you two have ever had? Own your share of the ridiculous."
+        "fr": "Votre dispute la plus ridicule : l'objet exact du litige, qui a dégainé le silence radio, qui a craqué en premier. Le groupe désigne le coupable. Verdict sans appel.",
+        "en": "Your most ridiculous argument: the exact object of the dispute, who deployed the silent treatment, who folded first. The room names the guilty party. No appeals."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -1925,8 +1925,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Montre la plus vieille photo de vous deux dans ton téléphone et raconte ce jour-là.",
-        "en": "Show the oldest photo of you two on your phone and tell the story of that day."
+        "fr": "Montre la plus vieille photo de vous deux dans ton tel. Puis explique ce qu'il y avait AVANT elle — et qui a supprimé quoi, à l'époque. Y'a toujours un avant.",
+        "en": "Show the oldest photo of you two on your phone. Then account for what existed BEFORE it — and who deleted what, back then. There's always a before."
       },
       "props": true,
       "tags": ["couple", "deep"]
@@ -1938,8 +1938,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Qu'as-tu raconté à tes amis juste après votre premier rendez-vous ? Mot pour mot si possible.",
-        "en": "What did you tell your friends right after your first date? Word for word if you can."
+        "fr": "Qu'est-ce que t'as écrit dans ton groupe juste après le premier date ? Cite le message, mot pour mot. Quelqu'un dans cette pièce l'a peut-être encore.",
+        "en": "What did you text the group chat right after the first date? Quote the message, word for word. Someone in this room may still have it."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -1951,8 +1951,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel petit truc fait ton/ta partenaire qui te fait fondre à chaque fois, sans exception ?",
-        "en": "What tiny thing does your partner do that melts you every single time, no exceptions?"
+        "fr": "Qu'est-ce que tu fais encore en cachette de ton/ta partenaire ? Rien de grave — mais tu le caches quand même. Explique pourquoi tu le caches. C'est ça, la vraie question.",
+        "en": "What do you still do behind your partner's back? Nothing serious — but you hide it anyway. Explain why you hide it. That's the actual question."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -1964,8 +1964,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quelle est la chose la plus romantique que ton/ta partenaire ait faite… et a probablement oubliée depuis ?",
-        "en": "What's the most romantic thing your partner ever did… and has probably forgotten since?"
+        "fr": "Le cadeau de ton/ta partenaire que t'as détesté et remercié avec une performance digne d'un César. Décris le cadeau, puis rejoue la performance. Il/elle l'apprend maintenant.",
+        "en": "The gift from your partner you hated and thanked them for with an Oscar-worthy performance. Describe the gift, then redo the performance. They're finding out right now."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -1977,8 +1977,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Sois honnête : qui a écrit en premier, qui est tombé amoureux en premier, qui a dit « je t'aime » en premier ?",
-        "en": "Be honest: who texted first, who fell first, and who said 'I love you' first?"
+        "fr": "Qui a écrit en premier, qui est tombé amoureux en premier, qui a dit « je t'aime » en premier ? Pointez du doigt en même temps, question par question. Trois désaccords sur trois : le groupe ouvre un dossier.",
+        "en": "Who texted first, who fell first, who said 'I love you' first? Point at the answer simultaneously, one question at a time. Disagree on all three and the room opens a case file."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2003,8 +2003,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Décris ton/ta partenaire en exactement trois mots, comme à un parfait inconnu. Ton/ta partenaire valide ou conteste.",
-        "en": "Describe your partner in exactly three words, as if to a total stranger. Your partner confirms or contests."
+        "fr": "Décris ton/ta partenaire en trois mots, en le/la regardant. Ensuite il/elle te décrit en trois mots. Le groupe tranche : qui a été honnête, qui a été lâche.",
+        "en": "Describe your partner in three words, looking right at them. Then they describe you in three. The room rules: who was honest, who was a coward."
       },
       "props": false,
       "tags": ["couple"]
@@ -2016,8 +2016,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel est votre meilleur souvenir à deux qui n'a pas coûté un seul centime ?",
-        "en": "What's your best memory together that cost absolutely nothing?"
+        "fr": "Le moment où t'es passé le plus près de tout arrêter — le doute, la dispute, le date catastrophe. Qu'est-ce qui t'a retenu ? Il/elle découvre peut-être que ce moment a existé.",
+        "en": "The closest you ever came to calling the whole thing off — the doubt, the fight, the disaster date. What kept you in? They may be learning this moment existed."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2029,8 +2029,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "De quoi avais-tu le plus peur en commençant cette relation ? Et cette peur, elle en est où aujourd'hui ?",
-        "en": "What scared you most when this relationship started? And where is that fear now?"
+        "fr": "Ta plus grosse peur en commençant cette relation : finir comme tes darons, t'ennuyer, être celui qui aime le plus ? Et aujourd'hui : réglée, ou juste enterrée ?",
+        "en": "Your biggest fear when this relationship started: turning into your parents, getting bored, being the one who loves more? And today — resolved, or just buried?"
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2042,8 +2042,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel crime vestimentaire de ton/ta partenaire laisses-tu passer uniquement par amour ? Décris la pièce coupable.",
-        "en": "What fashion crime of your partner's do you tolerate purely out of love? Describe the guilty item."
+        "fr": "Le crime vestimentaire de ton/ta partenaire que tu tolères uniquement par amour. Décris la pièce coupable. En échange, il/elle gagne le droit de la porter à votre prochain date.",
+        "en": "Your partner's fashion crime you tolerate purely out of love. Describe the guilty garment. In exchange, they earn the right to wear it on your next date."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2055,8 +2055,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "À quel moment es-tu le plus fier ou la plus fière de ton/ta partenaire ? Donne un exemple précis.",
-        "en": "When do you feel proudest of your partner? Give one specific example."
+        "fr": "Qu'est-ce que ton/ta partenaire est convaincu de faire très bien… et que tout son entourage a décidé, d'un accord silencieux, de ne jamais corriger ? La cuisine ? Le créneau ? Les vannes ?",
+        "en": "What is your partner convinced they're great at… that everyone around them has silently agreed to never correct? The cooking? The parking? The jokes?"
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2068,8 +2068,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Qu'est-ce que tu racontes de ton/ta partenaire pour frimer quand il ou elle n'est pas là ?",
-        "en": "What do you brag about your partner when they're not in the room?"
+        "fr": "Qu'est-ce que tu racontes sur ton/ta partenaire quand il/elle est pas là ? Les compliments ET les plaintes. Donne le ratio exact. Il/elle écoute.",
+        "en": "What do you say about your partner when they're not around? The brags AND the complaints. Give the exact ratio. They're listening."
       },
       "props": false,
       "tags": ["couple"]
@@ -2081,8 +2081,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "À quel point êtes-vous passés près de ne jamais vous rencontrer ? Raconte le coup du destin.",
-        "en": "How close did you two come to never meeting at all? Tell us the twist of fate."
+        "fr": "À quel point vous êtes passés près de ne jamais vous rencontrer ? Racontez chacun votre version, l'un après l'autre. Le groupe compte les incohérences.",
+        "en": "How close did you two come to never meeting at all? Each of you tells your version, back to back. The room counts the inconsistencies."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2120,8 +2120,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Pour quelle chose n'as-tu jamais vraiment remercié ton/ta partenaire ? Fais-le là, maintenant, pour de vrai.",
-        "en": "What's one thing you've never properly thanked your partner for? Do it here, now, for real."
+        "fr": "Cite un truc que ton/ta partenaire a fait pour toi et que t'as jamais remercié — parce que dire merci, c'était admettre que t'avais tort. Règle l'ardoise maintenant, devant témoins.",
+        "en": "Name something your partner did for you that you never thanked them for — because saying thanks meant admitting you were wrong. Settle the bill now, in front of witnesses."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2133,8 +2133,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Vous deux dans dix ans, honnêtement : décris la scène, le lieu, le niveau de chaos.",
-        "en": "You two in ten years, honestly: describe the scene, the place, the level of chaos."
+        "fr": "Vous deux dans dix ans, version réaliste : qui ronfle, qui gère les papiers, qui a abandonné quel rêve en route. Le groupe note l'honnêteté de la projection.",
+        "en": "You two in ten years, the realistic cut: who snores, who handles the admin, who quietly gave up which dream along the way. The room grades the honesty of the forecast."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2146,8 +2146,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Quel moment de la routine quotidienne de ton/ta partenaire trouves-tu absurdement mignon ?",
-        "en": "What part of your partner's daily routine do you find unreasonably cute?"
+        "fr": "L'habitude de ton/ta partenaire que tu qualifies de « mignonne » en public mais qui t'a déjà fait fixer le plafond à 3 h du matin. Imitation obligatoire. Il/elle se reconnaîtra.",
+        "en": "The habit of your partner's you call 'cute' in public but that has had you staring at the ceiling at 3 a.m. Impression mandatory. They'll know which one it is."
       },
       "props": false,
       "tags": ["couple"]
@@ -2160,8 +2160,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Plonge ton regard dans celui de ton/ta partenaire pendant 30 secondes. Interdiction de parler ou de rire.",
-        "en": "Hold your partner's gaze for 30 full seconds. No talking, no laughing."
+        "fr": "30 secondes de regard dans les yeux avec ton/ta partenaire, sans parler, sans rire. Pendant ce temps, le groupe commente votre couple à voix haute, en direct. Vous entendez tout.",
+        "en": "30 seconds of unbroken eye contact with your partner, no talking, no laughing. Meanwhile the room narrates your relationship out loud, live. You hear everything."
       },
       "props": false,
       "tags": ["couple", "physical"]
@@ -2173,10 +2173,10 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Danse un slow de 30 secondes avec ton/ta partenaire — sans musique, c'est toi qui fredonnes la chanson.",
-        "en": "Slow dance with your partner for 30 seconds — no music, you're the one humming the song."
+        "fr": "Slow de 30 secondes avec ton/ta partenaire sur le morceau choisi par le groupe. Et le groupe choisira le pire. Engagement total exigé, même sur du hardstyle.",
+        "en": "A 30-second slow dance with your partner to whatever track the room picks. And the room will pick the worst it can find. Full commitment required, even if it's death metal."
       },
-      "props": false,
+      "props": true,
       "tags": ["couple", "physical"]
     },
     {
@@ -2186,8 +2186,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Fais à ton/ta partenaire un compliment que tu ne lui as jamais dit à voix haute. Le groupe juge la sincérité.",
-        "en": "Give your partner a compliment you've never said out loud before. The room judges the sincerity."
+        "fr": "Dis à ton/ta partenaire le compliment que tu penses très fort mais que t'as toujours trouvé trop gênant à sortir. Le malaise est la preuve de sincérité. Le groupe mesure les deux.",
+        "en": "Tell your partner the compliment you think constantly but have always found too embarrassing to say. The awkwardness is the proof of sincerity. The room measures both."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2212,8 +2212,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Prends les mains de ton/ta partenaire et dis-lui les trois choses qui te manqueraient le plus. Sans lâcher les mains.",
-        "en": "Hold your partner's hands and tell them the three things you'd miss most about them. Don't let go."
+        "fr": "Joue la rupture : quitte ton/ta partenaire devant tout le monde pour le motif le plus absurde possible. Il/elle plaide sa cause. Le groupe vote : rupture validée ou couple sauvé.",
+        "en": "Stage the breakup: dump your partner in front of everyone for the most absurd reason imaginable. They plead their case. The room votes: breakup upheld, or couple saved."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2238,8 +2238,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Fais une sérénade d'au moins 20 secondes à ton/ta partenaire, chanson au choix, regard soutenu obligatoire.",
-        "en": "Serenade your partner for at least 20 seconds, any song, sustained eye contact mandatory."
+        "fr": "Sérénade de 20 secondes à ton/ta partenaire — mais chaque parole est une phrase qu'il/elle dit vraiment dans la vie. Regard soutenu. Interdiction de t'interrompre.",
+        "en": "20-second serenade to your partner — but every lyric is a sentence they actually say in real life. Sustained eye contact. They are not allowed to interrupt."
       },
       "props": false,
       "tags": ["couple"]
@@ -2251,8 +2251,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Masse les mains de ton/ta partenaire pendant 60 secondes. Vous gardez tous les deux un visage de poker. Le groupe surveille.",
-        "en": "Give your partner a 60-second hand massage. You both keep a poker face. The room is watching."
+        "fr": "Masse les mains de ton/ta partenaire pendant 60 secondes en commentant chaque geste comme un tuto YouTube — « là, on insiste bien sur la zone de tension ». Visage de kiné diplômé obligatoire.",
+        "en": "Give your partner a 60-second hand massage while narrating every move like a YouTube tutorial — 'and here we really work into the tension zone'. Licensed-physio face mandatory."
       },
       "props": false,
       "tags": ["couple", "physical"]
@@ -2277,8 +2277,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Chuchote ton souvenir préféré de vous deux à l'oreille de ton/ta partenaire. Le groupe juge sur son sourire.",
-        "en": "Whisper your favorite memory of you two into your partner's ear. The room judges by their smile."
+        "fr": "Chuchote à ton/ta partenaire le truc le plus croustillant que tu sais sur quelqu'un de cette pièce. Il/elle garde un visage parfaitement neutre pendant que le groupe l'interroge.",
+        "en": "Whisper to your partner the juiciest thing you know about someone in this room. They keep a perfectly neutral face while the room cross-examines them."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2303,8 +2303,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Écris un poème d'amour de deux vers en 60 secondes et déclame-le à ton/ta partenaire comme en finale de slam.",
-        "en": "Write a two-line love poem in 60 seconds and perform it for your partner like it's a slam final."
+        "fr": "Écris en 60 secondes un poème d'amour de deux vers contenant obligatoirement « caution », « lundi » et « micro-ondes ». Déclame-le à ton/ta partenaire comme en finale de slam.",
+        "en": "Write a two-line love poem in 60 seconds that must contain 'council tax', 'Tuesday' and 'air fryer'. Perform it for your partner like it's the slam final."
       },
       "props": false,
       "tags": ["couple"]
@@ -2316,8 +2316,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Fais un baisemain à ton/ta partenaire comme un aristocrate du XVIIIe siècle et reste dans le personnage 20 secondes.",
-        "en": "Kiss your partner's hand like an 18th-century aristocrat and stay in character for 20 seconds."
+        "fr": "Rejoue, geste pour geste, ton/ta partenaire qui s'endort sur toi devant un film : la tête qui tombe, le poids mort, le déni au réveil. Il/elle peut contester. Le groupe arbitre.",
+        "en": "Reenact, beat for beat, your partner falling asleep on you during a film: the head drop, the dead weight, the denial on waking. They may dispute it. The room arbitrates."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2329,8 +2329,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Serre ton/ta partenaire dans tes bras pendant 20 secondes. Un vrai câlin. Les petites tapes dans le dos sont interdites.",
-        "en": "Hug your partner for 20 seconds. A real hug. Back-pats are strictly forbidden."
+        "fr": "Mime trois tics de ton/ta partenaire dont il/elle n'a même pas conscience. Interdiction de protester avant la fin. Le groupe valide chaque tic d'un hochement de tête solennel.",
+        "en": "Act out three of your partner's tics they don't even know they have. No protesting until you're done. The room confirms each tic with a solemn nod."
       },
       "props": false,
       "tags": ["couple", "physical"]
@@ -2368,8 +2368,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Concours de regard avec ton/ta partenaire : le premier qui cligne doit un petit-déjeuner au lit. Le groupe est témoin officiel.",
-        "en": "Staring contest with your partner: first to blink owes breakfast in bed. The room is the official witness."
+        "fr": "Concours de regard avec ton/ta partenaire. Le premier qui cligne avoue la dernière fois qu'il a menti à l'autre. Même un petit mensonge. Surtout un petit mensonge.",
+        "en": "Staring contest with your partner. First to blink confesses the last time they lied to the other. Even a small lie. Especially a small lie."
       },
       "props": false,
       "tags": ["couple", "funny", "physical"]
@@ -2394,8 +2394,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Trace un mot doux sur le dos de ton/ta partenaire avec un doigt. Il ou elle doit le deviner devant tout le monde.",
-        "en": "Trace a sweet word on your partner's back with one finger. They have to guess it in front of everyone."
+        "fr": "Trace avec un doigt, sur le dos de ton/ta partenaire, le mot que tu lui dis jamais en face. Il/elle le devine à voix haute, devant tout le monde.",
+        "en": "With one finger, trace on your partner's back the word you never say to their face. They guess it out loud, in front of everyone."
       },
       "props": false,
       "tags": ["couple", "physical"]
@@ -2433,8 +2433,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Dépose un baiser sur le front de ton/ta partenaire et fais-lui une promesse d'une seule phrase pour la semaine prochaine.",
-        "en": "Kiss your partner's forehead and make them a one-sentence promise for next week."
+        "fr": "Embrasse le front de ton/ta partenaire et fais une promesse VÉRIFIABLE pour la semaine — pas « être plus présent », un truc que le groupe peut contrôler. Et il contrôlera.",
+        "en": "Kiss your partner's forehead and make one VERIFIABLE promise for this week — not 'be more present', something the room can audit. And audit they will."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2446,8 +2446,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Recréez une pose de film romantique culte choisie par le groupe et tenez-la 10 secondes sans rire.",
-        "en": "Recreate an iconic romance movie pose chosen by the room and hold it for 10 seconds without laughing."
+        "fr": "Rejouez votre dernière vraie dispute en échangeant les rôles : chacun joue l'autre, en pire. Le groupe désigne l'imitation la plus ressemblante — et donc le vrai coupable.",
+        "en": "Reenact your last real argument with the roles swapped: each of you plays the other, exaggerated. The room names the more accurate impression — and therefore the guilty party."
       },
       "props": false,
       "tags": ["couple", "funny", "physical"]
@@ -2459,8 +2459,8 @@
       "spicy": 1,
       "minAge": 16,
       "text": {
-        "fr": "Battle de compliments avec ton/ta partenaire pendant 30 secondes, chacun son tour. Le premier qui hésite fait 5 squats.",
-        "en": "Compliment battle with your partner for 30 seconds, alternating turns. First to hesitate does 5 squats."
+        "fr": "Battle de compliments pourris avec ton/ta partenaire : des vrais compliments, calibrés pour vexer — « t'es belle quand tu fais des efforts ». Le premier qui rit ou hésite a perdu. Le groupe couronne le plus vicieux.",
+        "en": "Backhanded-compliment battle with your partner: genuine compliments engineered to wound — 'you're so pretty when you make an effort'. First to laugh or stall loses. The room crowns the most vicious."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2486,8 +2486,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quelle tenue de ton/ta partenaire te rend complètement dingue ? Décris-la en détail pendant qu'il ou elle garde un visage neutre.",
-        "en": "Which of your partner's outfits drives you completely crazy? Describe it in detail while they hold a straight face."
+        "fr": "La tenue de ton/ta partenaire qui te fait perdre tous tes moyens. Décris-la en détail, puis décris ce qu'elle déclenche. Il/elle garde un visage neutre. Le groupe surveille le visage.",
+        "en": "The outfit of your partner's that completely undoes you. Describe it in detail, then describe what it sets in motion. They hold a straight face. The room watches the face."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2499,8 +2499,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Décris votre soirée idéale en amoureux, du pas de la porte au lendemain matin — uniquement en mots tous publics. Le groupe note ta retenue.",
-        "en": "Describe your ideal night together, from the front door to the next morning — family-friendly words only. The room grades your restraint."
+        "fr": "Racontez votre première fois ensemble, à deux voix : qui a pris l'initiative, ce qui s'est pas passé comme prévu, et la note sur 10 — celle de l'époque, puis celle d'aujourd'hui.",
+        "en": "Tell the story of your first time together, as a duet: who made the move, what did not go to plan, and the score out of 10 — then versus now."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -2512,8 +2512,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quelle est la chose la plus sexy que fait ton/ta partenaire sans même s'en rendre compte ?",
-        "en": "What's the sexiest thing your partner does without even realizing it?"
+        "fr": "La chose la plus sexy que ton/ta partenaire fait sans s'en rendre compte. Le geste exact, le moment exact. Préviens-le/la : à partir de ce soir il/elle le fera exprès, et ce sera plus jamais pareil.",
+        "en": "The sexiest thing your partner does without knowing they do it. The exact move, the exact moment. Fair warning: from tonight they'll be doing it on purpose, and it will never hit the same."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2525,8 +2525,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quel est l'endroit le plus osé où vous vous êtes embrassés ? Plante le décor, sans incriminer personne.",
-        "en": "What's the most daring place you two have ever kissed? Set the scene without incriminating anyone."
+        "fr": "L'endroit le plus risqué où vous êtes passés à l'acte. Le lieu exact, qui a eu l'idée, et à combien de mètres se trouvait le danger. Le groupe tranche : génie ou délit.",
+        "en": "The riskiest place you two have actually done it. Exact location, whose idea, and how many metres away the danger stood. The room rules: genius or misdemeanour."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2551,8 +2551,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "C'était quand, la dernière fois que ton/ta partenaire a fait battre ton cœur beaucoup trop vite ? Détails exigés.",
-        "en": "When was the last time your partner made your heart race way too fast? Details required."
+        "fr": "Le truc que ton/ta partenaire fait au lit et que t'as jamais avoué adorer. C'est le moment. Le groupe n'a pas besoin du dossier technique — lui/elle saura exactement de quoi tu parles.",
+        "en": "The thing your partner does in bed that you've never admitted you love. Now's the moment. The room doesn't need the technical file — they'll know exactly what you mean."
       },
       "props": false,
       "tags": ["couple", "spicy", "deep"]
@@ -2564,8 +2564,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quelle habitude privée de ton/ta partenaire surprendrait le plus cette pièce ? Ton/ta partenaire dispose d'un veto à usage unique.",
-        "en": "Which of your partner's private habits would surprise this room the most? Your partner holds a single-use veto."
+        "fr": "Le détail de votre vie de couple que personne ici ne soupçonne — les horaires, le vocabulaire, le rituel. Ton/ta partenaire garde un veto à usage unique. L'utiliser, c'est avouer.",
+        "en": "The one detail of your life as a couple nobody in this room suspects — the schedule, the vocabulary, the ritual. Your partner holds a single-use veto. Using it is its own confession."
       },
       "props": false,
       "tags": ["couple", "funny", "spicy"]
@@ -2577,8 +2577,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Combien de rendez-vous avant d'arrêter de jouer la personne parfaite ? Et c'était quoi, le masque : ordonné, zen, sportif ?",
-        "en": "How many dates before you stopped playing the perfect person? And what was the mask: tidy, zen, gym person?"
+        "fr": "Combien de dates avant de coucher ensemble — et lequel de vous deux avait prévu un autre chiffre ? Donnez chacun votre version. Le groupe mesure l'écart.",
+        "en": "How many dates before you two slept together — and which of you had a different number planned? Each give your version. The room measures the gap."
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2590,8 +2590,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Raconte votre meilleur moment « on a failli se faire griller ». Le décor, la frayeur, l'issue — sans détails interdits.",
-        "en": "Tell us your best 'we almost got caught' moment. The setting, the panic, the escape — no forbidden details."
+        "fr": "Votre meilleur « on a failli se faire griller » : le lieu, qui a entendu quoi, et l'excuse exacte sortie sous pression. Tous les détails. C'est littéralement le mode prévu pour ça.",
+        "en": "Your best 'we almost got caught': the location, who heard what, and the exact excuse produced under pressure. Full details. This is literally the tier built for it."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -2603,8 +2603,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Si ton/ta partenaire choisissait ta tenue de ce soir sans aucune contrainte, tu porterais quoi, honnêtement ?",
-        "en": "If your partner picked tonight's outfit for you with zero constraints, what would you honestly be wearing?"
+        "fr": "Si ton/ta partenaire choisissait ta tenue de ce soir sans aucune contrainte, tu porterais quoi ? Réponds. Puis laisse-le/la corriger ta réponse. Les deux versions parlent.",
+        "en": "If your partner dressed you tonight with zero constraints, what would you be wearing? Answer. Then let them correct your answer. Both versions say plenty."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2616,10 +2616,10 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quel message de ton/ta partenaire n'as-tu jamais supprimé ? Donne l'idée générale, pas la citation exacte.",
-        "en": "Which text from your partner have you never deleted? Give the gist, not the exact quote."
+        "fr": "Le message de ton/ta partenaire que t'as jamais supprimé. Lis-le à voix haute — ou explique pourquoi tu peux pas. Les deux réponses en disent long.",
+        "en": "The text from your partner you've never deleted. Read it out loud — or explain why you can't. Either answer tells the whole story."
       },
-      "props": false,
+      "props": true,
       "tags": ["couple", "deep", "spicy"]
     },
     {
@@ -2642,8 +2642,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Raconte votre soirée « romantique » qui a viré au fiasco total. Qui a eu l'idée, et qui a craqué en premier ?",
-        "en": "Tell us about the 'romantic' night that turned into a total fiasco. Whose idea was it, and who cracked first?"
+        "fr": "Votre tentative de soirée torride qui s'est le plus écrasée : les bougies, la playlist, le peignoir. Qui avait tout préparé, et à quelle seconde exacte c'est devenu une comédie ?",
+        "en": "Your most catastrophic attempt at a steamy night: the candles, the playlist, the robe. Who staged it all, and at which exact second did it become a comedy?"
       },
       "props": false,
       "tags": ["couple", "funny"]
@@ -2668,8 +2668,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Dis à voix haute une chose que tu rêves d'essayer avec ton/ta partenaire — suggestif autorisé, explicite interdit. Le groupe juge le rougissement.",
-        "en": "Say out loud one thing you'd love to try with your partner — suggestive allowed, explicit forbidden. The room judges the blush."
+        "fr": "Le truc que tu rêves d'essayer mais que t'as jamais osé proposer. Dis-le, là, maintenant. Ton/ta partenaire répond uniquement « à voir » ou « jamais ». Le groupe vivra avec le mystère.",
+        "en": "The thing you've always wanted to try but never dared bring up. Say it, right now. Your partner answers only 'maybe' or 'never'. The room learns to live with the mystery."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2694,8 +2694,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "À quoi pensais-tu exactement pendant votre tout premier baiser ? Version intégrale, panique incluse.",
-        "en": "What exactly was going through your head during your very first kiss? Full version, panic included."
+        "fr": "À quoi tu pensais vraiment pendant votre première nuit ensemble ? La bande-son intérieure complète : la panique logistique, le pep talk, le commentaire en direct. Version non censurée.",
+        "en": "What was actually playing in your head during your first night together? The full internal soundtrack: the logistics panic, the pep talk, the live commentary. Uncensored cut."
       },
       "props": false,
       "tags": ["couple", "deep"]
@@ -2707,8 +2707,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quel est l'atout physique le plus sous-coté de ton/ta partenaire ? Défends ton choix pendant 15 secondes, sans rire.",
-        "en": "What's your partner's most underrated physical feature? Defend your pick for 15 seconds without laughing."
+        "fr": "L'endroit du corps de ton/ta partenaire que tu fixes quand il/elle regarde ailleurs. Réponds en le/la regardant en face. Le groupe surveille tes yeux — eux, ils ont déjà répondu.",
+        "en": "The part of your partner's body you stare at when they're looking away. Answer while looking them in the face. The room is watching your eyes — they've already answered."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2720,10 +2720,10 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Avoue une fois où tu as fait le beau ou la belle exprès pour attirer l'œil de ton/ta partenaire. Ça a marché ?",
-        "en": "Confess one time you showed off on purpose to catch your partner's eye. Did it work?"
+        "fr": "Vos body counts. Chacun tape son chiffre sur son tel et vous révélez en même temps — l'un à l'autre, pas au groupe. Le groupe, lui, lit les visages.",
+        "en": "Your body counts. Each of you types the number on your phone and you reveal at the same time — to each other, not the room. The room just reads the faces."
       },
-      "props": false,
+      "props": true,
       "tags": ["couple", "funny", "spicy"]
     },
     {
@@ -2733,8 +2733,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quel est votre record de grasse matinée à deux, et qu'est-ce qui vous a finalement sortis du lit ?",
-        "en": "What's your record for a lazy morning in bed together, and what finally got you out of it?"
+        "fr": "Votre record de temps passé au lit à deux sans dormir. Le chiffre, la date, et qui a fini par dire « bon, faut qu'on mange ». Le groupe fera les calculs tout seul.",
+        "en": "Your record for time spent in bed together, awake. The number, the date, and who finally said 'okay, we need food'. The room can do its own maths."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2772,8 +2772,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quel est le message le plus audacieux que tu aies jamais envoyé à ton/ta partenaire ? Décris l'ambiance, pas le texte.",
-        "en": "What's the boldest message you've ever sent your partner? Describe the vibe, not the words."
+        "fr": "Le message le plus chaud que t'aies jamais envoyé à ton/ta partenaire. Lis-le, ou paraphrase fidèlement. Le bouton Passe existe — mais tout le monde saura ce qu'il veut dire.",
+        "en": "The filthiest text you've ever sent your partner. Read it, or paraphrase faithfully. The pass button exists — but everyone will know exactly what pressing it means."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2798,10 +2798,10 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Quelle habitude de ton/ta partenaire trouves-tu bizarrement irrésistible ? Plus c'est inattendu, mieux c'est.",
-        "en": "Which of your partner's habits do you find weirdly irresistible? The more unexpected, the better."
+        "fr": "Notez votre vie intime cette saison, chacun sur 10, chiffre tapé en secret sur vos tels. Révélation simultanée. C'est pas la moyenne qui compte, c'est l'écart.",
+        "en": "Rate your sex life this season, each of you out of 10, typed in secret on your phones. Simultaneous reveal. It's not the average that matters — it's the gap."
       },
-      "props": false,
+      "props": true,
       "tags": ["couple", "spicy"]
     }
 ,
@@ -2877,8 +2877,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Ferme les yeux. Ton/ta partenaire dépose un baiser quelque part (zone tous publics). Devine où sans regarder. Le groupe valide.",
-        "en": "Close your eyes. Your partner places one kiss somewhere (family-friendly zone). Guess where without looking. The room confirms."
+        "fr": "Ferme les yeux. Ton/ta partenaire dépose un baiser où il/elle veut. Tu annonces l'endroit exact, à voix haute, sans regarder. Le groupe valide ou exige un deuxième essai.",
+        "en": "Close your eyes. Your partner places one kiss wherever they choose. Name the exact spot out loud without looking. The room confirms or demands a second attempt."
       },
       "props": false,
       "tags": ["couple", "spicy", "physical"]
@@ -2903,8 +2903,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Fais ton regard le plus incendiaire à ton/ta partenaire pendant 15 secondes. Le groupe note l'intensité sur 10.",
-        "en": "Give your partner your most smoldering look for 15 seconds. The room rates the intensity out of 10."
+        "fr": "Traverse la pièce au ralenti vers ton/ta partenaire, regard incendiaire, et murmure-lui UN seul mot de ton choix. Le groupe ne saura jamais lequel. Son visage parlera pour vous deux.",
+        "en": "Cross the room in slow motion toward your partner, full smolder, and whisper exactly ONE word of your choosing. The room never learns the word. Their face will say everything."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -2942,8 +2942,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Décris à ton/ta partenaire, en mots tous publics, ce que tu ferais s'il n'y avait personne d'autre dans la pièce — raconté comme un roman de gare. Le groupe note le style littéraire sur 10.",
-        "en": "Describe to your partner — family-friendly words only — what you'd do if no one else were in this room, narrated like a trashy romance novel. The room grades the prose out of 10."
+        "fr": "Raconte à ton/ta partenaire ce que tu ferais s'il y avait personne d'autre ici — uniquement en métaphores de roman de gare. La houle, l'incendie, la chevauchée. Le groupe note la prose sur 10.",
+        "en": "Tell your partner what you'd do if no one else were here — strictly in trashy-romance-novel metaphors. The storm, the blaze, the galloping. The room scores the prose out of 10."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -2955,8 +2955,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Dis « ce soir, toi et moi » à ton/ta partenaire avec ta voix la plus dangereuse, puis fais un clin d'œil. Le groupe note le clin d'œil.",
-        "en": "Tell your partner 'tonight — you and me' in your most dangerous voice, then wink. The room scores the wink."
+        "fr": "Refais le geste exact qui a lancé votre toute première nuit. Sur place, de mémoire, sans un mot. Ton/ta partenaire note l'exactitude historique. Le groupe devra se contenter de la gestuelle.",
+        "en": "Recreate the exact move that started your very first night together. Right here, from memory, not a word. Your partner grades the historical accuracy. The room makes do with the gesture."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -2981,8 +2981,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Envoie à ton/ta partenaire (assis juste là) le compliment le plus osé que tu oses écrire. Il ou elle le lit en silence ; le groupe juge son visage.",
-        "en": "Text your partner (sitting right there) the boldest compliment you dare to write. They read it silently; the room judges their face."
+        "fr": "Envoie à ton/ta partenaire, assis juste là, le message que tu lui enverrais s'il/elle était à l'autre bout de la ville. Il/elle le lit en silence. Le groupe ne juge que le visage.",
+        "en": "Text your partner, sitting right there, the message you'd send if they were across town. They read it in silence. The room judges nothing but the face."
       },
       "props": true,
       "tags": ["couple", "spicy"]
@@ -3007,8 +3007,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Ton/ta partenaire te chuchote un mini-gage à l'oreille. Exécute-le s'il est montrable en public… sinon 10 squats, sans aucune explication au groupe.",
-        "en": "Your partner whispers a mini-dare in your ear. Do it if it's fit for public viewing… otherwise 10 squats, and you owe the room zero explanation."
+        "fr": "Ton/ta partenaire te chuchote un gage à l'oreille. Tu annonces ta décision à voix haute : « ici » ou « plus tard ». C'est tout ce que le groupe saura. C'est largement suffisant.",
+        "en": "Your partner whispers a dare in your ear. You announce your ruling out loud: 'here' or 'later'. That's all the room gets. It's more than enough."
       },
       "props": false,
       "tags": ["couple", "spicy"]
@@ -3020,8 +3020,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Fais monter la température avec UNE seule phrase tous publics adressée à ton/ta partenaire. Le groupe lit le thermomètre imaginaire : tiède, chaud, ou canicule.",
-        "en": "Raise the temperature with ONE family-friendly sentence aimed at your partner. The room reads the imaginary thermometer: lukewarm, hot, or heatwave."
+        "fr": "Fais monter la température avec UNE seule phrase à ton/ta partenaire. Pas de gestes, pas d'aide, pas de deuxième essai. Le groupe lit le thermomètre : tiède, chaud, canicule.",
+        "en": "Raise the temperature with ONE sentence aimed at your partner. No gestures, no assists, no second attempt. The room reads the thermometer: lukewarm, hot, heatwave."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
@@ -3059,8 +3059,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Échange un vêtement visible avec ton/ta partenaire et porte-le comme à la fashion week jusqu'à ton prochain tour. Défilé d'introduction obligatoire.",
-        "en": "Swap one visible piece of clothing with your partner and wear it like it's fashion week until your next turn. Opening catwalk mandatory."
+        "fr": "Yeux fermés. Trois joueurs te tendent une main, dont ton/ta partenaire. Reconnais la sienne au toucher. Chaque seconde d'hésitation au-delà de dix sera facturée au débrief du couple.",
+        "en": "Eyes closed. Three players offer you a hand, your partner's among them. Identify theirs by touch alone. Every second of hesitation past ten gets billed to the couple's debrief."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny", "physical"]
@@ -3098,8 +3098,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Ton/ta partenaire te dessine un petit cœur au feutre lavable, visible du groupe. Porte-le comme un vieux tatouage de marin.",
-        "en": "Your partner draws a tiny heart on you in washable marker, visible to the room. Wear it like an old sailor tattoo."
+        "fr": "Écris au feutre lavable, sur l'avant-bras de ton/ta partenaire, une note sur 10 — sans jamais dire ce qu'elle évalue. Il/elle la porte jusqu'à la fin de la partie pendant que le groupe théorise.",
+        "en": "In washable marker, write a score out of 10 on your partner's forearm — without ever saying what it rates. They wear it until the game ends while the room builds theories."
       },
       "props": true,
       "tags": ["couple", "spicy", "funny"]
@@ -3124,8 +3124,8 @@
       "spicy": 2,
       "minAge": 18,
       "text": {
-        "fr": "Annonce au groupe — en mots tous publics — ton programme pour après cette partie. Ton/ta partenaire confirme ou dément d'un pouce.",
-        "en": "Announce to the room — family-friendly words only — your plan for after this game. Your partner confirms or denies with a thumbs up or down."
+        "fr": "Annonce au groupe ton programme pour après cette partie, avec l'assurance d'un bulletin météo. Ton/ta partenaire confirme ou dément d'un pouce. Le pouce fait foi.",
+        "en": "Announce your post-game plans to the room with the confidence of a weather forecast. Your partner confirms or denies with one thumb. The thumb is legally binding."
       },
       "props": false,
       "tags": ["couple", "spicy", "funny"]
