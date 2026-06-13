@@ -84,8 +84,13 @@ export function makeSqlDb(query: QueryFn): Db {
     },
 
     async getSubscription(user_id) {
+      // Post-B0 the Stripe webhook owns subscription truth in stripe_subscriptions
+      // (current_period_end is the paid-through instant); the legacy `subscriptions`
+      // table is superseded. Aliased to expires_at so SubscriptionRow + the
+      // active/expired computation in subscriptionStatus stay unchanged. Both this
+      // endpoint and /api/entitlement now read the same source.
       const { rows } = await query(
-        `SELECT status, expires_at FROM subscriptions WHERE user_id = $1`,
+        `SELECT status, current_period_end AS expires_at FROM stripe_subscriptions WHERE user_id = $1`,
         [user_id],
       );
       if (rows.length === 0) return null;

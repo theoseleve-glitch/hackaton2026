@@ -26,7 +26,7 @@
  * at typecheck/test time.)
  */
 
-import type { HttpRequest, HttpResponse, ServerCtx } from "./types";
+import type { HttpRequest, HttpResponse } from "./types";
 
 export interface TokenVerifier {
   /** Resolve a bearer token to a user id, or null when invalid/expired. */
@@ -42,7 +42,7 @@ const UNAUTHORIZED: { ok: false; response: HttpResponse } = {
 
 /** Shared bearer extraction + verification. Never throws (a throwing verifier
  *  is a 401, not a 500 — auth failures must not look like outages). */
-export async function requireAuth(ctx: ServerCtx, req: HttpRequest): Promise<AuthResult> {
+export async function requireAuth(ctx: { verifier: TokenVerifier }, req: HttpRequest): Promise<AuthResult> {
   const rawHeader = req.headers["authorization"] ?? req.headers["Authorization"];
   const raw = Array.isArray(rawHeader) ? rawHeader[0] : rawHeader;
   if (raw === undefined || !raw.startsWith("Bearer ") || raw.length <= 7) return UNAUTHORIZED;

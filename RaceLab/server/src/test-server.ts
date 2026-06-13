@@ -8,6 +8,7 @@ import type { BackupEntryInput, BackupRow, Db, SubscriptionRow } from "./db";
 import type { TokenVerifier } from "./auth";
 import type { HttpRequest, HttpResponse, ServerCtx } from "./types";
 import { makeHandler } from "./handler";
+import type { AppCtx } from "./appCtx";
 import { MAX_PUSH_BATCH } from "./handlers/backupPush";
 import { toHttpRequest } from "./vercel";
 
@@ -101,7 +102,12 @@ const verifier: TokenVerifier = {
 const db = new FakeDb();
 let nowIso = NOW;
 const ctx: ServerCtx = { db, verifier, now: () => nowIso };
-const handle = makeHandler(ctx);
+// Lift a base ServerCtx to AppCtx: the Tier-B module seams are stubbed because
+// the core-route tests below never touch them, and the new-route WIRING smoke
+// test only asserts registration (status !== 404/405). Each module has its OWN
+// exhaustive suite (test-<module>.ts) with real fakes.
+const app = (base: ServerCtx): AppCtx => ({ ...base } as unknown as AppCtx);
+const handle = makeHandler(app(ctx));
 
 function req(
   method: string,
@@ -156,7 +162,7 @@ console.log("— routing + auth —");
   throwingDb.getSubscription = async () => {
     throw new Error("db down");
   };
-  const h2 = makeHandler({ db: throwingDb, verifier, now: () => NOW });
+  const h2 = makeHandler(app({ db: throwingDb, verifier, now: () => NOW }));
   const r500 = await h2(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("router: handler throw -> 500 internal_error (no leak)", r500.status === 500 && r500.json.error === "internal_error" && Object.keys(r500.json).length === 1);
 }
@@ -179,7 +185,7 @@ console.log("\n— trial first-seen —");
   check("trial: future claim clamped to server now", rFuture.status === 200 && rFuture.json.trial_started_at === NOW);
 
   const dbC = new FakeDb();
-  const hC = makeHandler({ db: dbC, verifier, now: () => NOW });
+  const hC = makeHandler(app({ db: dbC, verifier, now: () => NOW }));
   const rNoBody = await hC(req("POST", "/api/trial/start", { token: "tok-A" }));
   check("trial: no body -> server now", rNoBody.status === 200 && rNoBody.json.trial_started_at === NOW);
   const rBad = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: { trial_started_at: "not-a-date" } }));
@@ -341,6 +347,41 @@ console.log("\n— vercel glue —");
   check("glue: string JSON body parsed", typeof strBody.body === "object" && strBody.body !== null && (strBody.body as Record<string, unknown>).trial_started_at === "2026-06-01T00:00:00.000Z");
   const rawBody = toHttpRequest({ method: "POST", url: "/api/trial/start", headers: {}, body: "not json" });
   check("glue: unparseable body left as string (handler 400s it)", rawBody.body === "not json");
+}
+
+// ═══ BACKEND.md module route wiring (registration smoke test) ════════════════
+// Each module has its own exhaustive suite (test-<module>.ts); here we only
+// prove handler.ts maps every new path+method to a real handler (no typo,
+// missing route, or wrong method). Auth'd routes reach requireAuth -> 401;
+// auth-free routes reach the (stubbed) handler -> 500. Either way: NOT 404
+// (unknown path) and NOT 405 (wrong method) == correctly registered + adapted.
+
+console.log("\n— module route wiring —");
+{
+  const WIRED: Array<[string, string]> = [
+    ["POST", "/api/webhooks/stripe"],
+    ["GET", "/api/entitlement"],
+    ["POST", "/api/media/upload-url"],
+    ["GET", "/api/backup/blob"],
+    ["PUT", "/api/backup/blob"],
+    ["POST", "/api/share/publish"],
+    ["GET", "/api/share/get"],
+    ["POST", "/api/share/import"],
+    ["GET", "/api/content/rcdata"],
+    ["GET", "/api/content/kb"],
+    ["POST", "/api/me/export"],
+    ["GET", "/api/me/export"],
+    ["POST", "/api/push/token"],
+    ["DELETE", "/api/push/token"],
+  ];
+  for (const [method, path] of WIRED) {
+    const r = await handle(req(method, path, { token: "tok-A" }));
+    check(`wired: ${method} ${path} registered (not 404/405)`, r.status !== 404 && r.status !== 405);
+  }
+  const wrongMethod = await handle(req("DELETE", "/api/entitlement", { token: "tok-A" }));
+  check("wired: wrong method on a known path -> 405", wrongMethod.status === 405);
+  const unknown = await handle(req("GET", "/api/does-not-exist"));
+  check("wired: unknown path -> 404", unknown.status === 404);
 }
 
 // ═══ verdict ═════════════════════════════════════════════════════════════════
