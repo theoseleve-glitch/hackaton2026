@@ -127,11 +127,15 @@ console.log("\n— upsertSubscription: watermark guard —");
   check("upsert: updated_at is ::timestamptz-cast", /\$5::timestamptz/i.test(sql), sql);
   check("upsert: keyed per user — ON CONFLICT (user_id) DO UPDATE", /on\s+conflict\s*\(\s*user_id\s*\)\s+do\s+update/i.test(sql), sql);
   check(
-    "upsert: SET replaces status,current_period_end,event_created,updated_at from EXCLUDED",
+    "upsert: SET replaces status,event_created,updated_at from EXCLUDED",
     /set\s+status\s*=\s*excluded\.status/i.test(sql) &&
-      /current_period_end\s*=\s*excluded\.current_period_end/i.test(sql) &&
       /event_created\s*=\s*excluded\.event_created/i.test(sql) &&
       /updated_at\s*=\s*excluded\.updated_at/i.test(sql),
+    sql,
+  );
+  check(
+    "upsert: current_period_end COALESCEs EXCLUDED over the stored value (a null checkout period end never clobbers a known one)",
+    /current_period_end\s*=\s*coalesce\(\s*excluded\.current_period_end\s*,\s*stripe_subscriptions\.current_period_end\s*\)/i.test(sql),
     sql,
   );
   // THE guard: STRICT > , with the same-second terminal 'canceled' tiebreaker.

@@ -42,6 +42,7 @@ export const SQL = {
   getAllDocs: "SELECT id, json FROM docs WHERE collection = ? ORDER BY id",
   removeDoc: "DELETE FROM docs WHERE collection = ? AND id = ?",
   appendLog: "INSERT INTO log (seq, json) VALUES (?, ?)",
+  seqExists: "SELECT 1 AS x FROM log WHERE seq = ? LIMIT 1",
   readLogFrom: "SELECT seq, json FROM log WHERE seq > ? ORDER BY seq",
   pruneLog: "DELETE FROM log WHERE seq <= ?",
   maxLogSeq: "SELECT MAX(seq) AS max_seq FROM log",
@@ -167,10 +168,23 @@ export async function openSqliteStorage(
       async append(entry): Promise<PutResult> {
         const j = jsonOf(entry);
         if (!j.ok) return { ok: false, reason: "unserializable_doc" };
-        return transact([
+        const r = await transact([
           { sql: SQL.appendLog, params: [entry.seq, j.json] },
           { sql: SQL.setMeta, params: [LAST_SEQ_KEY, String(entry.seq)] },
         ]);
+        // Match memory/kv: a PRIMARY KEY collision on seq is a DUPLICATE append,
+        // not a generic fault. Disambiguate ONLY on the failure path (the seq
+        // already exists) — no read on the hot success path. A real driver fault
+        // leaves the seq absent and stays driver_error.
+        if (!r.ok && r.reason === "driver_error") {
+          try {
+            const { rows } = await executor.execute(SQL.seqExists, [entry.seq]);
+            if (rows.length > 0) return { ok: false, reason: "duplicate_seq" };
+          } catch {
+            // fall through to the original driver_error
+          }
+        }
+        return r;
       },
       async readFrom(after_seq): Promise<LogReadResult> {
         try {

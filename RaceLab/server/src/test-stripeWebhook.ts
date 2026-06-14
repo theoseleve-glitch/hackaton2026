@@ -51,7 +51,12 @@ class FakeStore implements StripeWebhookStore {
       s.event_created > prev.event_created ||
       (s.event_created === prev.event_created && s.status === "canceled");
     if (wins) {
-      this.subs.set(userId, { ...s });
+      // mirror the SQL COALESCE: a null current_period_end (checkout.session.completed)
+      // preserves a known period end rather than clobbering it.
+      this.subs.set(userId, {
+        ...s,
+        current_period_end: s.current_period_end ?? prev?.current_period_end ?? null,
+      });
     }
   }
 }
@@ -144,14 +149,20 @@ console.log("\n— upsert mapping —");
 {
   const c = freshCtx();
 
-  const checkout = evt({ id: "evt_checkout", created: T0 + 1, type: "checkout.session.completed", object: { client_reference_id: "user_A", current_period_end: periodEnd } });
+  // REALISTIC checkout.session.completed: a real session carries status "complete"
+  // (the SESSION lifecycle, not a sub status) and NO current_period_end. It must
+  // still grant active — completion is the payment signal — with a null period end
+  // that a later subscription event fills in.
+  const checkout = evt({ id: "evt_checkout", created: T0 + 1, type: "checkout.session.completed", object: { client_reference_id: "user_A", status: "complete" } });
   const r1 = await stripeWebhook(c, sreq(checkout));
   const a1 = store.subs.get("user_A");
-  check("map: checkout.session.completed -> active + current_period_end (no object.status -> active)", r1.status === 200 && a1?.status === "active" && a1?.current_period_end === periodEndIso && a1?.event_created === T0 + 1);
+  check("map: checkout.session.completed (status=complete) -> active (NOT expired)", r1.status === 200 && a1?.status === "active" && a1?.event_created === T0 + 1);
+  check("map: checkout.session.completed -> null period end (session carries none)", a1?.current_period_end === null);
 
   const updated = evt({ id: "evt_updated", created: T0 + 2, type: "customer.subscription.updated", object: { metadata: { user_id: "user_A" }, status: "active", current_period_end: periodEnd } });
   const r2 = await stripeWebhook(c, sreq(updated));
-  check("map: customer.subscription.updated (active) -> active, watermark advances", r2.status === 200 && store.subs.get("user_A")?.status === "active" && store.subs.get("user_A")?.event_created === T0 + 2);
+  const a2 = store.subs.get("user_A");
+  check("map: customer.subscription.updated (active) -> active + authoritative period end, watermark advances", r2.status === 200 && a2?.status === "active" && a2?.current_period_end === periodEndIso && a2?.event_created === T0 + 2);
 
   const pastDue = evt({ id: "evt_pastdue", created: T0 + 3, type: "customer.subscription.updated", object: { metadata: { user_id: "user_A" }, status: "past_due", current_period_end: periodEnd } });
   const r3 = await stripeWebhook(c, sreq(pastDue));
@@ -164,6 +175,23 @@ console.log("\n— upsert mapping —");
   const created = evt({ id: "evt_created", created: T0 + 5, type: "customer.subscription.created", object: { metadata: { userId: "user_C" }, status: "trialing", current_period_end: periodEnd } });
   const r5 = await stripeWebhook(c, sreq(created));
   check("map: subscription.created (trialing) -> active, metadata.userId alias resolves user", r5.status === 200 && store.subs.get("user_C")?.status === "active");
+}
+
+// ═══ checkout.session.completed must NOT clobber a known period end (#7) ══════
+console.log("\n— checkout does not clobber a known period end —");
+{
+  const c = freshCtx();
+  // subscription.created sets the authoritative period end first…
+  const sub = evt({ id: "evt_sub_first", created: T0 + 10, type: "customer.subscription.created", object: { client_reference_id: "user_P", status: "active", current_period_end: periodEnd } });
+  await stripeWebhook(c, sreq(sub));
+  check("setup: subscription set period end", store.subs.get("user_P")?.current_period_end === periodEndIso);
+  // …then a LATER checkout.session.completed (newer watermark, null period end)
+  // grants active again but must PRESERVE the known period end (COALESCE).
+  const checkout = evt({ id: "evt_checkout_after", created: T0 + 11, type: "checkout.session.completed", object: { client_reference_id: "user_P", status: "complete" } });
+  await stripeWebhook(c, sreq(checkout));
+  const p = store.subs.get("user_P");
+  check("checkout after subscription keeps active", p?.status === "active" && p?.event_created === T0 + 11);
+  check("checkout's null period end did NOT clobber the known one", p?.current_period_end === periodEndIso);
 }
 
 // ═══ user resolution precedence + missing user ═══════════════════════════════

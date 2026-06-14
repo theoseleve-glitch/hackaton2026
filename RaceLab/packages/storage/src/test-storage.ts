@@ -209,6 +209,10 @@ class FakeSqlEngine {
         this.log.set(seq, String(params[1]));
         return { rows: [] };
       }
+      case SQL.seqExists: {
+        const seq = Number(params[0]);
+        return { rows: this.log.has(seq) ? [{ x: 1 }] : [] };
+      }
       case SQL.readLogFrom: {
         const after = Number(params[0]);
         const rows = [...this.log.entries()]
@@ -337,7 +341,10 @@ async function adapterRoundTrip(name: string, storage: StorageAdapter): Promise<
   const a2 = await storage.log.append(obEntry(2, T1));
   check(`${name}: log.append x2`, a1.ok && a2.ok);
   const dup = await storage.log.append(obEntry(2, T2));
+  // Every adapter must reject a re-appended seq with the SAME specific reason —
+  // not a generic driver_error from one backend and duplicate_seq from another.
   check(`${name}: log.append duplicate seq rejected`, !dup.ok);
+  check(`${name}: duplicate seq reason is duplicate_seq (uniform across adapters)`, !dup.ok && dup.reason === "duplicate_seq", !dup.ok ? dup.reason : "ok");
   const read = await storage.log.readFrom(1);
   check(
     `${name}: log.readFrom cursor`,

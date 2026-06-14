@@ -142,7 +142,10 @@ export function makeSqlStripeWebhookStore(query: QueryFn): StripeWebhookStore {
          VALUES ($1, $2, $3::timestamptz, $4, $5::timestamptz)
          ON CONFLICT (user_id) DO UPDATE
            SET status             = EXCLUDED.status,
-               current_period_end = EXCLUDED.current_period_end,
+               -- COALESCE: checkout.session.completed grants status with a NULL
+               -- period end (the session has none); never let that null clobber a
+               -- known current_period_end set by a subscription.created/updated.
+               current_period_end = COALESCE(EXCLUDED.current_period_end, stripe_subscriptions.current_period_end),
                event_created      = EXCLUDED.event_created,
                updated_at         = EXCLUDED.updated_at
            WHERE EXCLUDED.event_created > stripe_subscriptions.event_created

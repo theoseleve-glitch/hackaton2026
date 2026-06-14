@@ -218,6 +218,15 @@ type Mapped =
 function mapEvent(type: string, object: Record<string, unknown>): Mapped {
   switch (type) {
     case "checkout.session.completed":
+      // A Checkout Session's own `status` is open|complete|expired — that is the
+      // SESSION lifecycle, NOT a subscription status, so it must NOT go through
+      // mapObjectStatus (which would send "complete" to the default → "expired"
+      // and never grant). The event firing at all IS the payment signal → active.
+      // The session carries no current_period_end (that lives on the Subscription
+      // object); pass null and let customer.subscription.created/updated set the
+      // authoritative value — the store COALESCEs so this null never clobbers a
+      // known period end.
+      return { kind: "upsert", status: "active", current_period_end: null };
     case "customer.subscription.created":
     case "customer.subscription.updated":
       return {
@@ -240,10 +249,12 @@ function mapEvent(type: string, object: Record<string, unknown>): Mapped {
   }
 }
 
-/** Map the Stripe object's own `status` to our 3-value status. Stripe statuses:
- *  active|trialing -> active; canceled -> canceled; everything else (past_due,
- *  unpaid, incomplete, incomplete_expired, paused) -> expired. A missing status
- *  (e.g. checkout.session has none) -> active (the session completed = paid). */
+/** Map a SUBSCRIPTION object's `status` to our 3-value status (used for
+ *  customer.subscription.created/updated — NOT checkout.session, which is handled
+ *  separately above). Stripe statuses: active|trialing -> active; canceled ->
+ *  canceled; everything else (past_due, unpaid, incomplete, incomplete_expired,
+ *  paused) -> expired. A missing/non-string status defaults to active (a
+ *  subscription object always carries one; this is only a defensive fallback). */
 function mapObjectStatus(raw: unknown): StripeSubStatus {
   if (typeof raw !== "string") return "active";
   switch (raw) {
