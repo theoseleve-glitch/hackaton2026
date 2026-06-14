@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Grain from "@/components/Grain";
 import Cursor from "@/components/Cursor";
+import Preloader from "@/components/Preloader";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["600"], variable: "--font-fraunces" });
 const inter = Inter({ subsets: ["latin"], weight: ["400","500","600","700"], variable: "--font-inter" });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${fraunces.variable} ${inter.variable}`}>
       <body>
         <a href="#contenu" className="skip">Aller au contenu</a>
+        <Preloader />
         <SmoothScroll>
           <Grain />
           <Cursor />
