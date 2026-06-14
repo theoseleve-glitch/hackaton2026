@@ -7,21 +7,25 @@ const STATS = [
     id: "haltes",
     counter: <Counter to={560} suffix="+" />,
     label: "haltes référencées en France",
+    ariaLabel: "560+ haltes référencées en France",
   },
   {
     id: "horaires",
     counter: null, // non-numeric — rendered as Fraunces text below
     label: "marchés & producteurs, pas des suppositions",
+    ariaLabel: "Horaires réels — marchés & producteurs, pas des suppositions",
   },
   {
     id: "peages",
     counter: <Counter to={100} suffix=" %" />,
     label: "des péages calculés, France entière",
+    ariaLabel: "100 % des péages calculés, France entière",
   },
   {
     id: "pub",
     counter: <Counter to={0} suffix="" />,
     label: "pub déguisée en reco. Le sponsorisé est toujours dit.",
+    ariaLabel: "0 pub déguisée en reco. Le sponsorisé est toujours dit.",
   },
 ] as const;
 
@@ -53,12 +57,9 @@ export default function Stats() {
       {/* Stats grid */}
       <div className="stats-grid">
         {STATS.map((stat) => (
-          <div key={stat.id} className="stat-item">
-            {/* Number / text */}
-            <div
-              className="stat-number"
-              aria-hidden={stat.counter === null ? undefined : "true"}
-            >
+          <div key={stat.id} className="stat-item" aria-label={stat.ariaLabel}>
+            {/* Number / text — hidden from screen readers; aria-label on container conveys the full fact */}
+            <div className="stat-number" aria-hidden="true">
               {stat.id === "horaires" ? (
                 <span
                   style={{
@@ -76,7 +77,7 @@ export default function Stats() {
               )}
             </div>
             {/* Label */}
-            <p className="stat-label">{stat.label}</p>
+            <p className="stat-label" aria-hidden="true">{stat.label}</p>
           </div>
         ))}
       </div>
