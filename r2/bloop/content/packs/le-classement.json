@@ -1,0 +1,367 @@
+{
+  "gameId": "le-classement",
+  "version": 1,
+  "generatedAt": "2026-06-15",
+  "prompts": [
+    {
+      "id": "cl-001",
+      "text": { "fr": "Du plus susceptible de survivre à l'apocalypse zombie au premier balancé aux zombies pour gagner 12 secondes.", "en": "Most likely to survive the zombie apocalypse to the first one thrown to the zombies for a 12-second head start." },
+      "most": { "fr": "susceptible de survivre à l'apocalypse zombie", "en": "likely to survive the zombie apocalypse" },
+      "least": { "fr": "premier balancé aux zombies pour 12 secondes d'avance", "en": "first thrown to the zombies for a 12-second head start" },
+      "spicy": 0,
+      "tags": ["absurde", "chaos"]
+    },
+    {
+      "id": "cl-002",
+      "text": { "fr": "Du plus capable de garder un secret à celui qui le balance dans la story avant que t'aies fini ta phrase.", "en": "Most trusted with a secret to the one who posts it to their story before you finish the sentence." },
+      "most": { "fr": "capable de garder un secret", "en": "trusted with a secret" },
+      "least": { "fr": "balance ça dans la story avant la fin de ta phrase", "en": "leaks it to their story before you finish talking" },
+      "spicy": 0,
+      "tags": ["trahison", "reseaux"]
+    },
+    {
+      "id": "cl-003",
+      "text": { "fr": "Du plus susceptible de devenir riche avant 30 ans à celui qui te doit encore 20 balles depuis 2023.", "en": "Most likely to be rich before 30 to the one who still owes you twenty quid since 2023." },
+      "most": { "fr": "susceptible de devenir riche avant 30 ans", "en": "likely to be rich before 30" },
+      "least": { "fr": "te doit encore 20 balles depuis 2023", "en": "still owes you twenty quid since 2023" },
+      "spicy": 0,
+      "tags": ["argent", "futur"]
+    },
+    {
+      "id": "cl-004",
+      "text": { "fr": "Du premier qui répondrait à ton message à 3h du matin au dernier qui te laisse en vu pendant trois jours.", "en": "First to reply to your 3 a.m. text to the last one who leaves you on read for three days." },
+      "most": { "fr": "premier à répondre à ton message à 3h du matin", "en": "first to reply to your 3 a.m. text" },
+      "least": { "fr": "te laisse en vu trois jours", "en": "leaves you on read for three days" },
+      "spicy": 0,
+      "tags": ["reseaux", "loyaute"]
+    },
+    {
+      "id": "cl-005",
+      "text": { "fr": "Du meilleur en cas d'urgence au pire — celui qui filmerait en mode portrait pendant que tu paniques.", "en": "Best in an emergency to the worst — the one filming you in portrait mode while you panic." },
+      "most": { "fr": "meilleur en cas d'urgence", "en": "best in an emergency" },
+      "least": { "fr": "filme en mode portrait pendant que tu paniques", "en": "films you in portrait mode while you panic" },
+      "spicy": 0,
+      "tags": ["urgence", "chaos"]
+    },
+    {
+      "id": "cl-006",
+      "text": { "fr": "Du plus ponctuel à celui qui envoie « j'arrive dans 5 min » en sortant à peine de la douche.", "en": "Most punctual to the one who texts 'omw, 5 min' from inside the shower." },
+      "most": { "fr": "ponctuel, vraiment", "en": "actually punctual" },
+      "least": { "fr": "envoie « 5 min » en sortant de la douche", "en": "texts '5 min' fresh out the shower" },
+      "spicy": 0,
+      "tags": ["retard", "mensonge"]
+    },
+    {
+      "id": "cl-007",
+      "text": { "fr": "Du plus susceptible de devenir célèbre au plus susceptible de ruiner sa propre célébrité en une story.", "en": "Most likely to get famous to the most likely to torch that fame in a single story." },
+      "most": { "fr": "susceptible de devenir célèbre", "en": "likely to get famous" },
+      "least": { "fr": "ruine sa propre célébrité en une story", "en": "torches their own fame in one story" },
+      "spicy": 0,
+      "tags": ["futur", "reseaux"]
+    },
+    {
+      "id": "cl-008",
+      "text": { "fr": "Du plus fiable pour garder ton chat à celui qui te le rendrait avec un nouveau nom et un compte Insta.", "en": "Most reliable to cat-sit to the one who hands it back with a new name and its own Instagram." },
+      "most": { "fr": "fiable pour garder ton chat", "en": "reliable to cat-sit" },
+      "least": { "fr": "te le rend avec un nouveau nom et un compte Insta", "en": "returns it with a new name and an Instagram" },
+      "spicy": 0,
+      "tags": ["chaos", "absurde"]
+    },
+    {
+      "id": "cl-009",
+      "text": { "fr": "Du plus susceptible d'aider à déménager au premier qui se découvre « mal de dos » la veille.", "en": "Most likely to help you move flats to the first one who discovers a 'bad back' the night before." },
+      "most": { "fr": "susceptible d'aider à déménager", "en": "likely to help you move flats" },
+      "least": { "fr": "se découvre « mal de dos » la veille", "en": "discovers a 'bad back' the night before" },
+      "spicy": 0,
+      "tags": ["paresse", "mensonge"]
+    },
+    {
+      "id": "cl-010",
+      "text": { "fr": "Du plus susceptible de te défendre dans une bagarre au premier qui filme et commente.", "en": "Most likely to have your back in a fight to the first one who films it and adds commentary." },
+      "most": { "fr": "susceptible de te défendre dans une bagarre", "en": "likely to have your back in a fight" },
+      "least": { "fr": "filme et commente au lieu d'aider", "en": "films it and narrates instead of helping" },
+      "spicy": 0,
+      "tags": ["loyaute", "chaos"]
+    },
+    {
+      "id": "cl-011",
+      "text": { "fr": "Du plus susceptible de devenir président au plus susceptible d'être arrêté à la frontière pour une raison qu'il refuse d'expliquer.", "en": "Most likely to become president to the most likely to be stopped at the border for a reason they won't explain." },
+      "most": { "fr": "susceptible de devenir président", "en": "likely to become president" },
+      "least": { "fr": "arrêté à la frontière, raison non communiquée", "en": "stopped at the border, reason undisclosed" },
+      "spicy": 0,
+      "tags": ["futur", "absurde"]
+    },
+    {
+      "id": "cl-012",
+      "text": { "fr": "Du plus susceptible de te ramener à 4h du mat' au premier qui te dépose « pas loin », à 45 min à pied.", "en": "Most likely to drive you home at 4 a.m. to the first who drops you 'basically there', a 45-minute walk away." },
+      "most": { "fr": "susceptible de te ramener à 4h du mat'", "en": "likely to drive you home at 4 a.m." },
+      "least": { "fr": "te dépose « pas loin », à 45 min à pied", "en": "drops you 'basically there', a 45-min walk" },
+      "spicy": 0,
+      "tags": ["voyage", "loyaute"]
+    },
+    {
+      "id": "cl-013",
+      "text": { "fr": "Du plus susceptible de te prêter sans rien dire au premier qui te facture des intérêts sur un café.", "en": "Most likely to spot you without a word to the first who charges interest on a coffee." },
+      "most": { "fr": "susceptible de te prêter sans rien dire", "en": "likely to spot you without a word" },
+      "least": { "fr": "te facture des intérêts sur un café", "en": "charges interest on a coffee" },
+      "spicy": 0,
+      "tags": ["argent", "absurde"]
+    },
+    {
+      "id": "cl-014",
+      "text": { "fr": "Du meilleur cuisinier à celui qui appelle « fait maison » des pâtes au beurre commandées sur l'appli.", "en": "Best cook to the one who calls 'homemade' a plate of plain pasta ordered on the app." },
+      "most": { "fr": "meilleur cuisinier", "en": "best cook" },
+      "least": { "fr": "appelle « fait maison » un plat livré", "en": "calls a delivery 'homemade'" },
+      "spicy": 0,
+      "tags": ["bouffe", "mensonge"]
+    },
+    {
+      "id": "cl-015",
+      "text": { "fr": "Du plus susceptible de réussir un régime au premier qui craque devant la machine à 23h.", "en": "Most likely to stick to a diet to the first one caving at the vending machine at 11 p.m." },
+      "most": { "fr": "susceptible de tenir un régime", "en": "likely to stick to a diet" },
+      "least": { "fr": "craque devant la machine à 23h", "en": "caves at the vending machine at 11 p.m." },
+      "spicy": 0,
+      "tags": ["bouffe", "paresse"]
+    },
+    {
+      "id": "cl-016",
+      "text": { "fr": "Du plus susceptible de tenir un secret de surprise au premier qui spoile la date « par accident » deux fois.", "en": "Most likely to keep a surprise party secret to the first who spoils the date 'by accident' twice." },
+      "most": { "fr": "susceptible de tenir le secret d'une surprise", "en": "likely to keep a surprise secret" },
+      "least": { "fr": "spoile la date « par accident » deux fois", "en": "spoils the date 'by accident' twice" },
+      "spicy": 0,
+      "tags": ["trahison", "soiree"]
+    },
+    {
+      "id": "cl-017",
+      "text": { "fr": "Du plus susceptible de te couvrir devant tes darons au premier qui te balance pour briller au repas.", "en": "Most likely to cover for you in front of your parents to the first who snitches just to be interesting at dinner." },
+      "most": { "fr": "susceptible de te couvrir devant tes darons", "en": "likely to cover for you with your parents" },
+      "least": { "fr": "te balance pour briller au repas", "en": "snitches just to be interesting at dinner" },
+      "spicy": 0,
+      "tags": ["famille", "trahison"]
+    },
+    {
+      "id": "cl-018",
+      "text": { "fr": "Du plus susceptible de gagner à un quiz de culture G au premier qui défend une réponse fausse pendant dix minutes.", "en": "Most likely to win a pub quiz to the first who defends a wrong answer for ten straight minutes." },
+      "most": { "fr": "susceptible de gagner un quiz de culture G", "en": "likely to win a pub quiz" },
+      "least": { "fr": "défend une réponse fausse dix minutes", "en": "defends a wrong answer for ten minutes" },
+      "spicy": 0,
+      "tags": ["ego", "absurde"]
+    },
+    {
+      "id": "cl-019",
+      "text": { "fr": "Du plus susceptible de finir milliardaire au premier qui perd son téléphone deux fois dans la même soirée.", "en": "Most likely to end up a billionaire to the first who loses their phone twice in one night." },
+      "most": { "fr": "susceptible de finir milliardaire", "en": "likely to end up a billionaire" },
+      "least": { "fr": "perd son tel deux fois dans la même soirée", "en": "loses their phone twice in one night" },
+      "spicy": 0,
+      "tags": ["argent", "chaos"]
+    },
+    {
+      "id": "cl-020",
+      "text": { "fr": "Du plus drôle en soirée à celui qui raconte TON anecdote comme la sienne, devant toi, et rate la chute.", "en": "Funniest at the party to the one who tells YOUR story as their own, in front of you, and botches the punchline." },
+      "most": { "fr": "le plus drôle en soirée", "en": "funniest at the party" },
+      "least": { "fr": "raconte ton anecdote comme la sienne et rate la chute", "en": "tells your story as theirs and botches it" },
+      "spicy": 0,
+      "tags": ["soiree", "ego"]
+    },
+    {
+      "id": "cl-021",
+      "text": { "fr": "Du plus susceptible d'organiser le voyage du groupe au premier qui annule par vocal après avoir encaissé les acomptes.", "en": "Most likely to organise the group trip to the first who cancels in a voice note after pocketing the deposits." },
+      "most": { "fr": "susceptible d'organiser le voyage du groupe", "en": "likely to organise the group trip" },
+      "least": { "fr": "annule par vocal après avoir encaissé les acomptes", "en": "cancels in a voice note after taking the deposits" },
+      "spicy": 0,
+      "tags": ["voyage", "argent"]
+    },
+    {
+      "id": "cl-022",
+      "text": { "fr": "Du plus calme sous pression au premier qui crash out parce que le wifi a lag deux secondes.", "en": "Most calm under pressure to the first who crashes out because the wifi lagged for two seconds." },
+      "most": { "fr": "le plus calme sous pression", "en": "calmest under pressure" },
+      "least": { "fr": "crash out pour deux secondes de lag", "en": "crashes out over two seconds of lag" },
+      "spicy": 0,
+      "tags": ["tech", "chaos"]
+    },
+    {
+      "id": "cl-023",
+      "text": { "fr": "Du plus susceptible de tout réussir au premier qui transforme une réussite en histoire gênante en la racontant.", "en": "Most likely to succeed at everything to the first who turns a win into a cringe story just by telling it." },
+      "most": { "fr": "susceptible de tout réussir", "en": "likely to succeed at everything" },
+      "least": { "fr": "transforme une réussite en histoire gênante", "en": "turns a win into a cringe story" },
+      "spicy": 0,
+      "tags": ["ego", "futur"]
+    },
+    {
+      "id": "cl-024",
+      "text": { "fr": "Du plus susceptible de t'aider à réviser au premier qui te distrait puis t'envoie ses notes la veille à minuit.", "en": "Most likely to help you revise to the first who distracts you then sends their notes at midnight the day before." },
+      "most": { "fr": "susceptible de t'aider à réviser", "en": "likely to help you revise" },
+      "least": { "fr": "te distrait puis envoie ses notes à minuit", "en": "distracts you then sends notes at midnight" },
+      "spicy": 0,
+      "tags": ["paresse", "loyaute"]
+    },
+    {
+      "id": "cl-025",
+      "text": { "fr": "Du plus susceptible de devenir prof de yoga zen au premier qui klaxonne un piéton qui marche trop lentement.", "en": "Most likely to become a zen yoga teacher to the first who honks at a pedestrian for walking too slowly." },
+      "most": { "fr": "susceptible de devenir prof de yoga zen", "en": "likely to become a zen yoga teacher" },
+      "least": { "fr": "klaxonne un piéton trop lent", "en": "honks at a slow pedestrian" },
+      "spicy": 0,
+      "tags": ["absurde", "ego"]
+    },
+    {
+      "id": "cl-026",
+      "text": { "fr": "Du plus généreux pour offrir une tournée au premier qui a une « urgence aux toilettes » pile à l'addition.", "en": "Most generous to buy a round to the first who develops a 'toilet emergency' the second the bill lands." },
+      "most": { "fr": "généreux pour offrir une tournée", "en": "generous enough to buy a round" },
+      "least": { "fr": "urgence aux toilettes pile à l'addition", "en": "toilet emergency right at the bill" },
+      "spicy": 0,
+      "tags": ["argent", "mensonge"]
+    },
+    {
+      "id": "cl-027",
+      "text": { "fr": "Du plus susceptible de te prévenir d'un danger au premier qui te pousse devant pour tester si c'est dangereux.", "en": "Most likely to warn you about danger to the first who pushes you ahead to check if it's dangerous." },
+      "most": { "fr": "susceptible de te prévenir d'un danger", "en": "likely to warn you about danger" },
+      "least": { "fr": "te pousse devant pour tester le danger", "en": "pushes you ahead to test the danger" },
+      "spicy": 0,
+      "tags": ["trahison", "chaos"]
+    },
+    {
+      "id": "cl-028",
+      "text": { "fr": "Du plus susceptible de retenir ton anniversaire au premier qui souhaite « bon anniv » avec deux jours de retard et un copier-coller.", "en": "Most likely to remember your birthday to the first who wishes you 'happy bday' two days late with a copy-paste." },
+      "most": { "fr": "susceptible de retenir ton anniversaire", "en": "likely to remember your birthday" },
+      "least": { "fr": "souhaite « bon anniv » en retard, copier-coller", "en": "wishes you late with a copy-paste" },
+      "spicy": 0,
+      "tags": ["loyaute", "reseaux"]
+    },
+    {
+      "id": "cl-029",
+      "text": { "fr": "Du plus susceptible de gagner The Voice au premier qui chante faux mais croit dur que c'est sa version.", "en": "Most likely to win a singing show to the first who sings flat but swears it's 'their interpretation'." },
+      "most": { "fr": "susceptible de gagner The Voice", "en": "likely to win a singing show" },
+      "least": { "fr": "chante faux mais croit que c'est sa version", "en": "sings flat but calls it their interpretation" },
+      "spicy": 0,
+      "tags": ["soiree", "ego"]
+    },
+    {
+      "id": "cl-030",
+      "text": { "fr": "Du plus susceptible de finir aux infos pour un acte héroïque au premier qui y finit pour une raison qu'il refuse de commenter.", "en": "Most likely to make the news for a heroic act to the first who makes it for a reason they won't comment on." },
+      "most": { "fr": "susceptible de finir aux infos en héros", "en": "likely to make the news as a hero" },
+      "least": { "fr": "aux infos pour une raison non commentée", "en": "on the news for an undisclosed reason" },
+      "spicy": 0,
+      "tags": ["futur", "chaos"]
+    },
+    {
+      "id": "cl-031",
+      "text": { "fr": "Du plus susceptible de te sauver d'un malaise au premier qui te prend en photo « pour le souvenir » d'abord.", "en": "Most likely to save you when you faint to the first who takes a photo 'for the memories' first." },
+      "most": { "fr": "susceptible de te sauver d'un malaise", "en": "likely to save you when you faint" },
+      "least": { "fr": "te prend en photo « pour le souvenir » d'abord", "en": "snaps a photo 'for the memories' first" },
+      "spicy": 0,
+      "tags": ["urgence", "absurde"]
+    },
+    {
+      "id": "cl-032",
+      "text": { "fr": "Du plus susceptible de devenir millionnaire en crypto au premier qui revend tout en panique à -3 %.", "en": "Most likely to get crypto-rich to the first who panic-sells everything at minus three percent." },
+      "most": { "fr": "susceptible de devenir millionnaire en crypto", "en": "likely to get crypto-rich" },
+      "least": { "fr": "revend tout en panique à -3 %", "en": "panic-sells everything at minus three percent" },
+      "spicy": 0,
+      "tags": ["argent", "tech"]
+    },
+    {
+      "id": "cl-033",
+      "text": { "fr": "Du plus susceptible de tenir une plante en vie au premier qui a déjà tué un cactus, deux fois, le même.", "en": "Most likely to keep a plant alive to the first who already killed a cactus — twice — the same one." },
+      "most": { "fr": "susceptible de tenir une plante en vie", "en": "likely to keep a plant alive" },
+      "least": { "fr": "a tué un cactus, deux fois, le même", "en": "killed a cactus twice, the same one" },
+      "spicy": 0,
+      "tags": ["absurde", "chaos"]
+    },
+    {
+      "id": "cl-034",
+      "text": { "fr": "Du plus susceptible de devenir ta personne de confiance au premier qui « oublie » exactement les trucs qui t'arrangent.", "en": "Most likely to become your go-to person to the first who 'forgets' exactly the things that would help you." },
+      "most": { "fr": "susceptible de devenir ta personne de confiance", "en": "likely to become your go-to person" },
+      "least": { "fr": "« oublie » pile ce qui t'arrange", "en": "'forgets' exactly what would help you" },
+      "spicy": 0,
+      "tags": ["loyaute", "mensonge"]
+    },
+    {
+      "id": "cl-035",
+      "text": { "fr": "Du plus susceptible de te border si t'es malade au premier qui te dit « bois de l'eau » et raccroche.", "en": "Most likely to nurse you when you're ill to the first who says 'drink water' and hangs up." },
+      "most": { "fr": "susceptible de te border si t'es malade", "en": "likely to nurse you when you're ill" },
+      "least": { "fr": "dit « bois de l'eau » et raccroche", "en": "says 'drink water' and hangs up" },
+      "spicy": 0,
+      "tags": ["loyaute", "absurde"]
+    },
+    {
+      "id": "cl-036",
+      "text": { "fr": "Du plus susceptible de devenir patron au premier qui répond à un mail « urgent » par un meme.", "en": "Most likely to become the boss to the first who replies to an 'urgent' email with a meme." },
+      "most": { "fr": "susceptible de devenir patron", "en": "likely to become the boss" },
+      "least": { "fr": "répond à un mail urgent par un meme", "en": "replies to an urgent email with a meme" },
+      "spicy": 0,
+      "tags": ["futur", "reseaux"]
+    },
+    {
+      "id": "cl-037",
+      "text": { "fr": "Du plus susceptible de finir en couple au prochain mariage au premier qui drague le serveur devant tout le monde.", "en": "Most likely to leave the next wedding in a couple to the first who flirts with the waiter in front of everyone." },
+      "most": { "fr": "susceptible de finir en couple au prochain mariage", "en": "likely to leave the wedding paired up" },
+      "least": { "fr": "drague le serveur devant tout le monde", "en": "flirts with the waiter in front of everyone" },
+      "spicy": 0,
+      "tags": ["soiree", "charo"]
+    },
+    {
+      "id": "cl-038",
+      "text": { "fr": "Du plus susceptible de gagner un débat au premier qui change d'avis dès qu'on lui demande pourquoi.", "en": "Most likely to win an argument to the first who switches sides the moment you ask them why." },
+      "most": { "fr": "susceptible de gagner un débat", "en": "likely to win an argument" },
+      "least": { "fr": "change d'avis dès qu'on demande pourquoi", "en": "switches sides the moment you ask why" },
+      "spicy": 0,
+      "tags": ["ego", "absurde"]
+    },
+    {
+      "id": "cl-039",
+      "text": { "fr": "Du plus susceptible de venir te chercher à l'aéroport au premier qui te dit « prends le bus, c'est direct ».", "en": "Most likely to pick you up from the airport to the first who tells you 'just take the bus, it's direct'." },
+      "most": { "fr": "susceptible de venir te chercher à l'aéroport", "en": "likely to pick you up from the airport" },
+      "least": { "fr": "te dit « prends le bus, c'est direct »", "en": "says 'just take the bus, it's direct'" },
+      "spicy": 0,
+      "tags": ["voyage", "loyaute"]
+    },
+    {
+      "id": "cl-040",
+      "text": { "fr": "Du plus susceptible de retenir ta commande par cœur au premier qui se trompe et conclut que le problème c'est toi.", "en": "Most likely to memorise your order to the first who gets it wrong and decides the problem is you." },
+      "most": { "fr": "susceptible de retenir ta commande par cœur", "en": "likely to memorise your order" },
+      "least": { "fr": "se trompe et conclut que le problème c'est toi", "en": "gets it wrong and decides you're the problem" },
+      "spicy": 0,
+      "tags": ["bouffe", "ego"]
+    },
+    {
+      "id": "cl-041",
+      "text": { "fr": "Du plus susceptible de te prêter sa dernière clope au premier qui te compte la moitié d'un chewing-gum partagé.", "en": "Most likely to share their last smoke to the first who itemises half a shared stick of gum." },
+      "most": { "fr": "susceptible de te prêter sa dernière clope", "en": "likely to share their last smoke" },
+      "least": { "fr": "te compte la moitié d'un chewing-gum", "en": "itemises half a shared piece of gum" },
+      "spicy": 0,
+      "tags": ["argent", "absurde"]
+    },
+    {
+      "id": "cl-042",
+      "text": { "fr": "Du plus susceptible de fermer le bar avec toi au premier qui dit « juste un » et disparaît à 22h01.", "en": "Most likely to shut the bar down with you to the first who says 'just one' and vanishes at 10:01 p.m." },
+      "most": { "fr": "susceptible de fermer le bar avec toi", "en": "likely to shut the bar down with you" },
+      "least": { "fr": "dit « juste un » et disparaît à 22h01", "en": "says 'just one' and vanishes at 10:01" },
+      "spicy": 0,
+      "tags": ["soiree", "mensonge"]
+    },
+    {
+      "id": "cl-043",
+      "text": { "fr": "Du plus susceptible de devenir une légende du groupe au premier qu'on oubliera d'inviter au prochain anniv.", "en": "Most likely to become a group legend to the first we'll forget to invite to the next birthday." },
+      "most": { "fr": "susceptible de devenir une légende du groupe", "en": "likely to become a group legend" },
+      "least": { "fr": "qu'on oubliera d'inviter au prochain anniv", "en": "we'll forget to invite next time" },
+      "spicy": 0,
+      "tags": ["soiree", "chaos"]
+    },
+    {
+      "id": "cl-044",
+      "text": { "fr": "Du plus susceptible de réussir un escape game au premier qui appuie sur tous les boutons « pour voir ».", "en": "Most likely to ace an escape room to the first who presses every button 'just to see'." },
+      "most": { "fr": "susceptible de réussir un escape game", "en": "likely to ace an escape room" },
+      "least": { "fr": "appuie sur tous les boutons « pour voir »", "en": "presses every button 'just to see'" },
+      "spicy": 0,
+      "tags": ["chaos", "absurde"]
+    },
+    {
+      "id": "cl-045",
+      "text": { "fr": "Du plus susceptible de dire la vérité qui fâche au premier qui acquiesce à tout puis raconte l'inverse dans l'autre groupe.", "en": "Most likely to tell the hard truth to the first who nods along then says the opposite in the other group chat." },
+      "most": { "fr": "susceptible de dire la vérité qui fâche", "en": "likely to tell the hard truth" },
+      "least": { "fr": "acquiesce puis raconte l'inverse ailleurs", "en": "nods along then flips in the other chat" },
+      "spicy": 0,
+      "tags": ["trahison", "reseaux"]
+    }
+  ]
+}

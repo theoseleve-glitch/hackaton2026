@@ -6,6 +6,7 @@ const WAVE2_IDS = [
   'double-jeu', 'quizz-culture-ge', 'cinquante-cinquante', 'jeu-de-la-note',
   'devine-la-question', 'devine-l-action', 'devine-l-objet', 'mime-inverse',
   'double-le-mouvement', 'jeu-du-theme', 'trouvez-la-regle', 'loup-garou',
+  'le-classement',
 ];
 
 describe('GAME_CATALOG (wave 2)', () => {
@@ -13,7 +14,7 @@ describe('GAME_CATALOG (wave 2)', () => {
     const ids = new Set(GAME_CATALOG.map((g) => g.id));
     for (const id of WAVE2_IDS) expect(ids.has(id), id).toBe(true);
     expect(ids.has('tracer')).toBe(true);
-    expect(GAME_CATALOG.length).toBeGreaterThanOrEqual(18);
+    expect(GAME_CATALOG.length).toBeGreaterThanOrEqual(19);
   });
 
   it('all ids are unique', () => {
@@ -21,13 +22,14 @@ describe('GAME_CATALOG (wave 2)', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('every catalog game is PLAY — all 18 wired to the server registry', () => {
+  it('every catalog game is PLAY — all 19 wired to the server registry', () => {
     const plays = GAME_CATALOG.filter((g) => g.badge === 'PLAY').map((g) => g.id).sort();
     expect(plays).toEqual([
       'cinquante-cinquante', 'devine-l-action', 'devine-l-objet', 'devine-la-question',
       'double-jeu', 'double-le-mouvement', 'gauche-ou-droite', 'jeu-de-la-note',
-      'jeu-du-theme', 'loup-garou', 'mime-inverse', 'pires-potes', 'quizz-culture-ge',
-      'tracer', 'trouvez-la-regle', 'truth-or-dare-2', 'truth-or-drink', 'tu-preferes',
+      'jeu-du-theme', 'le-classement', 'loup-garou', 'mime-inverse', 'pires-potes',
+      'quizz-culture-ge', 'tracer', 'trouvez-la-regle', 'truth-or-dare-2', 'truth-or-drink',
+      'tu-preferes',
     ].sort());
     expect(GAME_CATALOG.every((g) => g.badge === 'PLAY')).toBe(true);
   });

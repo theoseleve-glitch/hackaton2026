@@ -85,6 +85,9 @@ const rhAccuse = (playerId: string, target: string, at: number): GameEvent<unkno
 const rhVote = (playerId: string, guilty: boolean, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'tribunalVote', guilty }, at });
 
+const rankBallot = (playerId: string, order: string[], at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'rank', order }, at });
+
 const pjAct = (playerId: string, action: unknown, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action, at });
 const pjVote = (playerId: string, vote: 'yes' | 'no', at: number): GameEvent<unknown> =>
@@ -401,6 +404,36 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
         if (o.hint !== undefined) out.push({ value: o.hint.fr }, { value: o.hint.en });
       }
       return [...out, ...pjDeckSecrets(state)];
+    },
+  }],
+  ['le-classement', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // mid-rank round 0: two players submit a FULL ORDERING (permutation of the
+    // roster), p3 still expected — phase stays `rank`. Each ballot is a hidden
+    // VALUE secret: a non-owner must never see another player's ordering before
+    // the atomic reveal (only the OWNER's own echo + public hasSubmitted bools).
+    // The chosen orderings are non-identity permutations so their serialization
+    // can't be a substring of the always-ascending public `roster` array.
+    events: [
+      rankBallot('p1', ['p3', 'p1', 'p2'], 1_000),
+      rankBallot('p2', ['p2', 'p3', 'p1'], 2_000),
+    ],
+    eventsAlt: [
+      rankBallot('p1', ['p2', 'p1', 'p3'], 1_000),
+      rankBallot('p2', ['p1', 'p3', 'p2'], 2_000),
+    ],
+    actors: ['p1', 'p2'],
+    // Each submitted ballot's full JSON ordering is the owner's value-secret —
+    // owner-exempt (they get their own myOrder echo), forbidden everywhere else.
+    secrets: (state: unknown) => {
+      const s = state as { players: string[]; ballots: Record<string, string[]> };
+      const out: Array<{ value: string; owner?: PlayerId }> = [];
+      for (const p of s.players) {
+        const ballot = s.ballots[p];
+        if (ballot !== undefined) out.push({ value: JSON.stringify(ballot), owner: p });
+      }
+      return out;
     },
   }],
 ]);

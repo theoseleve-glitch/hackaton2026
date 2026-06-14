@@ -15,6 +15,7 @@ import {
   MIME_INVERSE_CONFIG,
   performJudgeActionSchema,
 } from '@bloop/game-perform-judge';
+import { createRanking, LE_CLASSEMENT_CONFIG, rankingActionSchema } from '@bloop/game-ranking';
 import {
   createOptionVote,
   GAUCHE_DROITE_CONFIG,
@@ -137,6 +138,11 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createPerformJudge('double-le-mouvement', DOUBLE_LE_MOUVEMENT_CONFIG),
     actionSchema: performJudgeActionSchema,
     contentRef: 'double-le-mouvement-core',
+  }],
+  ['le-classement', {
+    module: createRanking('le-classement', LE_CLASSEMENT_CONFIG),
+    actionSchema: rankingActionSchema,
+    contentRef: 'le-classement-core',
   }],
 ]);
 

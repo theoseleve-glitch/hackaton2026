@@ -10,6 +10,7 @@ import {
   MIME_INVERSE_PACK,
 } from './perform-judge-packs.js';
 import { PIRES_POTES_PACK } from './pires-potes-pack.js';
+import { LE_CLASSEMENT_PACK } from './ranking-pack.js';
 import { TROUVEZ_LA_REGLE_PACK } from './rule-hunt-packs.js';
 import { DOUBLE_JEU_PACK } from './secret-role-pack.js';
 import { DEVINE_LA_QUESTION_PACK, JEU_DE_LA_NOTE_PACK } from './spotlight-guess-packs.js';
@@ -42,6 +43,7 @@ export const ALL_PACKS: ContentPack<any>[] = [
   DEVINE_L_OBJET_PACK,
   MIME_INVERSE_PACK,
   DOUBLE_LE_MOUVEMENT_PACK,
+  LE_CLASSEMENT_PACK,
 ];
 
 /** Resolve a pack by its R2 key (= contentRef = pack.id). Used by node tests that need the live pack object. */

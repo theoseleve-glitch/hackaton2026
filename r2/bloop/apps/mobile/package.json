@@ -34,6 +34,7 @@
     "@bloop/game-night-day": "workspace:*",
     "@bloop/game-option-vote": "workspace:*",
     "@bloop/game-perform-judge": "workspace:*",
+    "@bloop/game-ranking": "workspace:*",
     "@bloop/game-rule-hunt": "workspace:*",
     "@bloop/game-secret-role": "workspace:*",
     "@bloop/game-spotlight-guess": "workspace:*",

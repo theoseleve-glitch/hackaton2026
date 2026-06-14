@@ -187,4 +187,13 @@ export const GAME_CATALOG: readonly GameCard[] = [
     badge: 'PLAY',
     video: { creator: 'Sidemen', url: 'https://www.youtube.com/watch?v=KJnMF96K5pI', thumbnailUrl: 'https://i.ytimg.com/vi/KJnMF96K5pI/hqdefault.jpg' },
   },
+  {
+    id: 'le-classement',
+    name: { fr: 'Le Classement', en: 'The Ranking' },
+    tagline: { fr: 'Du plus… au moins… : classe toute la salle, puis vise le verdict du groupe.', en: 'Most… to least… : rank the whole room, then call the group verdict.' },
+    emoji: '🪜',
+    color: '#FF6F61',
+    badge: 'PLAY',
+    video: { creator: 'Sidemen', url: 'https://www.youtube.com/watch?v=UVimmI3SooI', thumbnailUrl: 'https://i.ytimg.com/vi/UVimmI3SooI/hqdefault.jpg' },
+  },
 ] as const;
