@@ -22,7 +22,7 @@
   bottom: -30%;
   width: 70vw;
   height: 70vw;
-  background: radial-gradient(circle, rgba(255, 90, 38, 0.16), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 42, 42, 0.16), transparent 60%);
   pointer-events: none;
   z-index: -1;
 }
@@ -99,8 +99,8 @@
   font-size: 1.1rem;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.35),
-    0 8px 22px rgba(255, 90, 38, 0.22),
-    0 22px 60px rgba(255, 90, 38, 0.18);
+    0 8px 22px rgba(255, 42, 42, 0.22),
+    0 22px 60px rgba(255, 42, 42, 0.18);
 }
 .final__cta-arrow {
   transition: transform 0.4s var(--ease-out);
@@ -148,7 +148,7 @@ footer {
   height: 12px;
   border-radius: 3px;
   background: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 18px rgba(255, 90, 38, 0.5);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 18px rgba(255, 42, 42, 0.5);
   transform: rotate(45deg);
   transition: transform 0.5s var(--ease-out);
 }

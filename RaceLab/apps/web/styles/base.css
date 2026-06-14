@@ -1,19 +1,19 @@
 /* base.css — global design system: tokens, reset, type, grain, cursor, buttons. */
 
 :root {
-  /* pit-lane palette (extends the app DA) */
-  --bg: #0e0f12;
-  --bg-deep: #0b0c0e;
-  --bg-soft: #111114;
-  --surface: #1a1c21;
-  --surface-alt: #22252c;
-  --border: #2e323b;
-  --text: #ecedee;
-  --sub: #9ba1a6;
-  --accent: #ff5a26;
-  --accent-soft: #3a2218;
-  --good: #3ddc84;
-  --warn: #ffb02e;
+  /* red / white / black palette */
+  --bg: #0a0a0a;
+  --bg-deep: #000000;
+  --bg-soft: #141414;
+  --surface: #161616;
+  --surface-alt: #1f1f1f;
+  --border: #2a2a2a;
+  --text: #ffffff;
+  --sub: #a8a8a8;
+  --accent: #ff2a2a;
+  --accent-soft: #3a1010;
+  --good: #ff2a2a;
+  --warn: #ff2a2a;
 
   --maxw: 1280px;
   --gutter: clamp(1.25rem, 4vw, 4rem);
@@ -138,7 +138,7 @@ section {
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(255, 90, 38, 0.35), 0 10px 30px rgba(255, 90, 38, 0.28);
+  box-shadow: 0 2px 6px rgba(255, 42, 42, 0.35), 0 10px 30px rgba(255, 42, 42, 0.28);
 }
 .btn--ghost {
   background: transparent;

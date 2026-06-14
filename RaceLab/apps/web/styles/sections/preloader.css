@@ -28,7 +28,7 @@
   height: auto;
   overflow: visible;
   /* a soft accent bloom so the wireframe glows against the off-black */
-  filter: drop-shadow(0 0 14px rgba(255, 90, 38, 0.28))
+  filter: drop-shadow(0 0 14px rgba(255, 42, 42, 0.28))
     drop-shadow(0 6px 22px rgba(0, 0, 0, 0.5));
 }
 

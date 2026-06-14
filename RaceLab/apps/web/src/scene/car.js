@@ -39,7 +39,7 @@ export function createCar(container) {
   const key = new THREE.DirectionalLight(0xffffff, 2.2);
   key.position.set(5, 8, 6);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xff5a26, 1.6);
+  const rim = new THREE.DirectionalLight(0xff2a2a, 1.6);
   rim.position.set(-6, 2, -4);
   scene.add(rim);
   // A soft fill from camera-side keeps the shadowed flank readable.
@@ -57,10 +57,10 @@ export function createCar(container) {
     roughness: 0.35,
   });
   const accent = new THREE.MeshStandardMaterial({
-    color: 0xff5a26,
+    color: 0xff2a2a,
     metalness: 0.4,
     roughness: 0.3,
-    emissive: 0xff5a26,
+    emissive: 0xff2a2a,
     emissiveIntensity: 0.18,
   });
   const dark = new THREE.MeshStandardMaterial({

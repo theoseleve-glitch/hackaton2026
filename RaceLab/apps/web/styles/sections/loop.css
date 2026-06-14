@@ -34,7 +34,7 @@
   stroke-linecap: round;
   fill: none;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 6px rgba(255, 90, 38, 0.45));
+  filter: drop-shadow(0 0 6px rgba(255, 42, 42, 0.45));
 }
 
 /* Stations: an asymmetric stepped row — odd nodes ride higher than even, so the
@@ -108,7 +108,7 @@
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.35),
     0 10px 24px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 90, 38, 0.25);
+    0 0 0 1px rgba(255, 42, 42, 0.25);
 }
 .station.is-lit:nth-child(odd) {
   transform: translateY(-26px);

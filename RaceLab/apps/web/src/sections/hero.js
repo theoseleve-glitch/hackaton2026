@@ -27,7 +27,6 @@ export function init(ctx) {
         <span class="hero__machine-wheel hero__machine-wheel--r"></span>
         <span class="hero__machine-shadow"></span>
       </div>
-      <span class="hero__knockout" data-knockout>TUNE</span>
     </div>
 
     <div class="container hero__inner">
@@ -51,7 +50,6 @@ export function init(ctx) {
   const cta = root.querySelector(".hero__cta");
   const eyebrow = root.querySelector(".hero__eyebrow");
   const cue = root.querySelector(".hero__scrollcue");
-  const knockout = root.querySelector("[data-knockout]");
 
   // Reduced motion: paint final states, register nothing scroll-driven.
   if (env.reduced) {
@@ -81,14 +79,7 @@ export function init(ctx) {
     repeatDelay: 0.2,
   });
 
-  // Knockout word + machine parallax: drift on scroll-out (transform/opacity only).
-  if (knockout) {
-    gsap.to(knockout, {
-      yPercent: -28,
-      ease: "none",
-      scrollTrigger: { trigger: root, start: "top top", end: "bottom top", scrub: true },
-    });
-  }
+  // Machine parallax: drift on scroll-out (transform/opacity only).
   gsap.to(".hero__machine", {
     yPercent: 14,
     ease: "none",
