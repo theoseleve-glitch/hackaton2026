@@ -75,6 +75,12 @@ export interface HistoryEntry {
   outcome: "better" | "same" | "worse";
   citations?: readonly string[];
   track_id?: string;
+  /** Taxonomy condition tags the row was rated UNDER (schema `conditionsToTags`,
+   *  e.g. ["high_grip","hot"]). ADDITIVE: rows without it fall back to the
+   *  all-conditions net (legacy behavior). With it, the learner segments by
+   *  condition — a change rated better-when-hot / worse-when-cold contributes
+   *  the RIGHT signal for the current forecast instead of cancelling to zero. */
+  condition_tags?: readonly string[];
 }
 
 export interface ContextBundle {
@@ -94,6 +100,10 @@ export interface ContextBundle {
   };
   weather?: {
     air_temp_c?: number;
+    /** Track-surface temperature (IR gun). hot is air≥30 OR track≥40, matching
+     *  schema conditionsToTags — so history condition-segmentation isn't fooled
+     *  on a mild-air / hot-track day. */
+    track_temp_c?: number;
     humidity_pct?: number;
     wind_kmh?: number;
     rain_risk_pct?: number;
