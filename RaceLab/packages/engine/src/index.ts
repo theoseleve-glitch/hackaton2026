@@ -32,6 +32,11 @@ export type {
 export { historyFromTuples, historyForRule, historyNote, historyTier } from "./history";
 export type { RuleHistory } from "./history";
 
+// ── per-card confidence qualifier (M3): additive, deterministic, honest read of
+//    how sure THIS recommendation is — does NOT touch ranking/cap/race-day bar ─
+export { confidenceDetail } from "./offline";
+export type { ConfidenceDetail } from "./offline";
+
 // ── multi-change plans (one-at-a-time application protocol) ──────────────────
 export { proposePlan, MAX_PLAN_CHANGES } from "./plan";
 export type { PlannedChange, RecommendationPlan, ProposePlanOptions } from "./plan";

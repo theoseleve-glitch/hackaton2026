@@ -124,6 +124,13 @@ export interface RecommendationOption {
   mechanism: string;
   expected_effect: string;
   confidence: Confidence;
+  /** ADDITIVE (M3): a deterministic, per-card honest read of how sure THIS
+   *  recommendation is — composes match strength (exact vs symptom-only), source
+   *  breadth (single/multi), this-condition history depth (better/worse/untested)
+   *  and revert cost. Base read still keys off `confidence`; this NEVER changes
+   *  which rules fire, their order, the ±1 history cap or the race-day bar.
+   *  Optional so callers/persisted shapes predating it stay valid. */
+  confidence_qualifier?: string;
   citations: string[];
   revert: string;
   if_it_does_not_help: string;

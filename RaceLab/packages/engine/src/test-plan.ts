@@ -1,7 +1,8 @@
 import { loadKBData } from "./node-kb";
 import { proposePlan, MAX_PLAN_CHANGES } from "./plan";
+import { confidenceDetail, ruleToOption } from "./offline";
 import { historyForRule, historyTier, historyNote } from "./history";
-import type { ContextBundle, HistoryEntry } from "./types";
+import type { ContextBundle, HistoryEntry, KBRule } from "./types";
 
 /** proposePlan + history re-ranking unit tests (D18: pure functions, no API). */
 
@@ -378,6 +379,166 @@ const WORSE_301 = {
     JSON.stringify(oneUnrelated.changes.map((c) => c.option.citations)) === JSON.stringify(baseline.changes.map((c) => c.option.citations)),
   );
   check("cold-start: one-unrelated-run plan stays fully cited", oneUnrelated.kind === "plan" && oneUnrelated.changes.every((c) => c.option.citations.length > 0));
+}
+
+// ── M3 PER-CARD CONFIDENCE QUALIFIER: additive, deterministic, honest read of
+//    how sure THIS recommendation is — composes match strength, source breadth,
+//    this-condition history depth and revert cost. Must NOT change which rules
+//    fire, their order, the ±1 cap or the race-day bar (all key off confidence). ─
+{
+  // A controlled fixture rule so single/multi-source and medium/low wording can
+  // be exercised independently of the all-HUDY-single-source live KB.
+  const fixture = (over: Partial<KBRule> = {}): KBRule => ({
+    id: "kb-fixture-001",
+    setting: "front_sway_bar",
+    direction: "decrease",
+    effects: [{ axis: "front_traction", change: "more" }],
+    addresses: [{ symptom: "understeer", phase: "mid_corner" }],
+    conditions: { amplified_on: [], reduced_on: [] },
+    counter_indications: [],
+    magnitude_guidance: "One wire step.",
+    reversal_cost_minutes: 12,
+    confidence: "high",
+    sources: ["HUDY Off-Road Set-Up Book p.32 §1.13"],
+    scope: ["1-8-offroad"],
+    ...over,
+  });
+  const bundleWith = (tags: ContextBundle["feedback"]["tags"], history?: ContextBundle["history"]): ContextBundle => ({
+    chassis_template_id: "kyosho-inferno-mp11",
+    setup: {},
+    track: { track_id: "trk-here", name: "Club", surface: "clay", grip: "green", conditions: ["low_grip"] },
+    feedback: { tags },
+    mode: "practice",
+    ...(history !== undefined ? { history } : {}),
+  });
+
+  // (q1) EXACT (symptom AND phase) vs symptom-only wording.
+  const exact = confidenceDetail(fixture(), bundleWith([{ symptom: "understeer", phase: "mid_corner" }]));
+  check("qualifier: exact (symptom+phase) match → 'exact match'", exact.qualifier.includes("exact match") && !exact.qualifier.includes("symptom-only"), exact.qualifier);
+  const symptomOnly = confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: symptom-only match (no phase) → 'symptom-only match'", symptomOnly.qualifier.includes("symptom-only match"), symptomOnly.qualifier);
+  const phaseMismatch = confidenceDetail(fixture(), bundleWith([{ symptom: "understeer", phase: "off_power" }]));
+  check("qualifier: symptom matches but phase differs → symptom-only (mirrors retrieval +2)", phaseMismatch.qualifier.includes("symptom-only match"), phaseMismatch.qualifier);
+
+  // (q2) source breadth: single vs multi-source.
+  const single = confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: one source → 'single-source'", single.qualifier.includes("single-source"), single.qualifier);
+  const multi = confidenceDetail(fixture({ sources: ["HUDY p.32", "AE T6 manual p.9"] }), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: two+ sources → 'multi-source'", multi.qualifier.includes("multi-source"), multi.qualifier);
+
+  // (q3) this-condition history depth: better / worse / untested wording, and the
+  // matched-condition signal says 'in similar conditions' exactly when the tier did.
+  const untested = confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: no history → 'untested here'", untested.qualifier.includes("untested here"), untested.qualifier);
+
+  const R = "kb-fixture-001";
+  const betterRow: HistoryEntry = { change: "x: y", conditions: "low_grip", outcome: "better", citations: [R], track_id: "trk-here" };
+  const worseRow: HistoryEntry = { change: "x: y", conditions: "low_grip", outcome: "worse", citations: [R], track_id: "trk-here" };
+  const betterB = bundleWith([{ symptom: "understeer" }], [betterRow]);
+  const hBetter = historyForRule(R, betterB) ?? undefined;
+  const betterQ = confidenceDetail(fixture(), betterB, hBetter);
+  check("qualifier: untagged 'better' history → 'rated better here' (no condition claim)", betterQ.qualifier.includes("rated better here") && !betterQ.qualifier.includes("similar conditions"), betterQ.qualifier);
+
+  const worseB = bundleWith([{ symptom: "understeer" }], [worseRow]);
+  const hWorse = historyForRule(R, worseB) ?? undefined;
+  const worseQ = confidenceDetail(fixture(), worseB, hWorse);
+  check("qualifier: untagged 'worse' history → 'rated worse here'", worseQ.qualifier.includes("rated worse here"), worseQ.qualifier);
+
+  // condition-matched 'better' → must say 'in similar conditions', agreeing with the tier.
+  const segRow: HistoryEntry = { change: "x: y", conditions: "hot", outcome: "better", citations: [R], track_id: "trk-here", condition_tags: ["hot"] };
+  const segB: ContextBundle = { ...bundleWith([{ symptom: "understeer" }], [segRow]), weather: { air_temp_c: 34 } };
+  const hSeg = historyForRule(R, segB) ?? undefined;
+  const segQ = confidenceDetail(fixture(), segB, hSeg);
+  check("qualifier: condition-matched 'better' → 'rated better here in similar conditions' (agrees with tier)", segQ.qualifier.includes("rated better here in similar conditions") && historyTier(hSeg) === 1, segQ.qualifier);
+
+  // (q3b) HONESTY (review must-fix): no-symptom-match must NOT print a false 'symptom-only match'.
+  const noMatch = confidenceDetail(fixture(), bundleWith([{ symptom: "oversteer" }]));
+  check("qualifier: rule matches NO reported symptom → 'context-only match', never a false 'symptom-only'", noMatch.qualifier.includes("context-only match") && !noMatch.qualifier.includes("symptom-only match"), noMatch.qualifier);
+
+  // (q3c) net-0 history: all-'same' reads 'no change' (not 'mixed'); equal better+worse reads 'mixed results'.
+  const sameRow: HistoryEntry = { change: "x: y", conditions: "low_grip", outcome: "same", citations: [R], track_id: "trk-here" };
+  const hSame = historyForRule(R, bundleWith([{ symptom: "understeer" }], [sameRow, { ...sameRow }])) ?? undefined;
+  check("qualifier: all-'same' history (net 0) → 'no change here', not 'mixed'", confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }]), hSame).qualifier.includes("no change here"), JSON.stringify(hSame));
+  const hMix = historyForRule(R, bundleWith([{ symptom: "understeer" }], [betterRow, worseRow])) ?? undefined;
+  check("qualifier: equal better+worse history → 'mixed results here'", confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }]), hMix).qualifier.includes("mixed results here"), JSON.stringify(hMix));
+
+  // (q4) revert cost surfaced verbatim from the rule.
+  check("qualifier: revert cost surfaced as '~N min to revert'", exact.qualifier.includes("~12 min to revert"), exact.qualifier);
+  const cheap = confidenceDetail(fixture({ reversal_cost_minutes: 4, confidence: "low" }), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: low-confidence rule leads with 'Tentative'", cheap.qualifier.startsWith("Tentative —"), cheap.qualifier);
+  check("qualifier: '~4 min to revert' on the cheap rule", cheap.qualifier.includes("~4 min to revert"), cheap.qualifier);
+  const med = confidenceDetail(fixture({ confidence: "medium" }), bundleWith([{ symptom: "understeer" }]));
+  check("qualifier: medium-confidence rule leads with 'Worth a try'", med.qualifier.startsWith("Worth a try —"), med.qualifier);
+  check("qualifier: high-confidence rule leads with 'High confidence'", exact.qualifier.startsWith("High confidence —"), exact.qualifier);
+
+  // (q5) example-shape sanity: the full sentence reads honestly end-to-end.
+  const fullBetter = confidenceDetail(fixture({ sources: ["a", "b"] }), bundleWith([{ symptom: "understeer", phase: "mid_corner" }], [betterRow]), historyForRule(R, bundleWith([{ symptom: "understeer", phase: "mid_corner" }], [betterRow])) ?? undefined);
+  check(
+    "qualifier: composes the example shape (exact, better, multi-source, revert)",
+    fullBetter.qualifier === "High confidence — exact match, rated better here, multi-source, ~12 min to revert",
+    fullBetter.qualifier,
+  );
+
+  // (q6) base level is the rule's confidence, UNCHANGED.
+  check("qualifier: level passes rule.confidence through unchanged (high)", confidenceDetail(fixture(), bundleWith([{ symptom: "understeer" }])).level === "high");
+  check("qualifier: level passes rule.confidence through unchanged (low)", confidenceDetail(fixture({ confidence: "low" }), bundleWith([{ symptom: "understeer" }])).level === "low");
+
+  // (q7) DETERMINISM: same inputs → byte-identical qualifier, twice.
+  const d1 = confidenceDetail(fixture(), betterB, hBetter);
+  const d2 = confidenceDetail(fixture(), betterB, hBetter);
+  check("qualifier: deterministic (same inputs → identical string)", d1.qualifier === d2.qualifier && JSON.stringify(d1) === JSON.stringify(d2));
+
+  // (q8) ruleToOption populates confidence_qualifier additively, leaving the
+  // base confidence field untouched.
+  const opt = ruleToOption(fixture(), bundleWith([{ symptom: "understeer", phase: "mid_corner" }]));
+  check("ruleToOption: populates confidence_qualifier", typeof opt.confidence_qualifier === "string" && opt.confidence_qualifier!.startsWith("High confidence —"), opt.confidence_qualifier);
+  check("ruleToOption: confidence field still the raw rule.confidence (untouched)", opt.confidence === "high");
+}
+
+// ── M3 NON-INTERFERENCE: adding confidence_qualifier changed NEITHER which rules
+//    fire NOR their order. Assert the live-KB plan's citations + positions are
+//    exactly what they were before the field existed (regression-locked here). ─
+{
+  const plan = proposePlan(pushBundle(), data);
+  const citationOrder = plan.changes.map((c) => c.option.citations.join("|"));
+  check(
+    "non-interference: plan citations & order are the known-good sequence (field is additive only)",
+    JSON.stringify(citationOrder) === JSON.stringify([
+      "kb-swaybar-front-softer-301",
+      "kb-rideheight-rake-forward-208",
+      "kb-trackwidth-front-narrower-212",
+    ]),
+    JSON.stringify(citationOrder),
+  );
+  check(
+    "non-interference: every change now carries a qualifier (additive populated)",
+    plan.changes.every((c) => typeof c.option.confidence_qualifier === "string" && c.option.confidence_qualifier!.length > 0),
+  );
+  check(
+    "non-interference: the qualifier never replaces the base confidence field",
+    plan.changes.every((c) => c.option.confidence === "high" || c.option.confidence === "medium" || c.option.confidence === "low"),
+  );
+
+  // History promotion still re-ranks by rule.confidence/history, NOT the qualifier:
+  // a 'better' history on the rear-diff rule promotes it to #1 exactly as before.
+  const promoted = proposePlan(
+    pushBundle([{ change: "rear_diff_oil: thinner", conditions: "grip green, dusty", outcome: "better", citations: ["kb-diff-rear-thinner-005"], track_id: "trk-here" }]),
+    data,
+  );
+  check(
+    "non-interference: history promotion order is unchanged by the qualifier (rear-diff still #1)",
+    promoted.changes[0].option.citations.includes("kb-diff-rear-thinner-005"),
+  );
+  // and the promoted card's qualifier honestly reflects the better history.
+  check(
+    "non-interference: promoted card's qualifier reads 'rated better here'",
+    (promoted.changes[0].option.confidence_qualifier ?? "").includes("rated better here"),
+    promoted.changes[0].option.confidence_qualifier,
+  );
+
+  // Full determinism through proposePlan WITH the new field present.
+  const again = proposePlan(pushBundle(), data);
+  check("non-interference: proposePlan stays byte-deterministic with the qualifier present", JSON.stringify(plan) === JSON.stringify(again));
 }
 
 console.log(failures === 0 ? "\nPLAN: all proposePlan/history tests passed" : `\nPLAN: ${failures} failures`);
