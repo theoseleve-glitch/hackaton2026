@@ -63,12 +63,13 @@ export function init(ctx) {
   gsap.set(words, { yPercent: 110 });
   gsap.set([eyebrow, subhead, cta, cue], { autoAlpha: 0, y: 24 });
 
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.15 });
-  tl.to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.7 })
-    .to(words, { yPercent: 0, duration: 1.1, stagger: 0.08 }, "-=0.4")
-    .to(subhead, { autoAlpha: 1, y: 0, duration: 0.9 }, "-=0.7")
-    .to(cta, { autoAlpha: 1, y: 0, duration: 0.9 }, "-=0.7")
-    .to(cue, { autoAlpha: 1, y: 0, duration: 0.7 }, "-=0.5");
+  // Kept brisk so the headline (the LCP element) reaches its final paint fast.
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.05 });
+  tl.to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.45 })
+    .to(words, { yPercent: 0, duration: 0.75, stagger: 0.07 }, "-=0.25")
+    .to(subhead, { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.5")
+    .to(cta, { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.65")
+    .to(cue, { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.5");
 
   // Scroll cue: a soft looping pulse on the dot.
   gsap.to(".hero__scrollcue-dot", {

@@ -28,11 +28,13 @@ export function run(ctx, boot) {
   gsap.set(lines, { strokeDasharray: 1, strokeDashoffset: 1 });
   setCount(0);
 
-  let done = false;
-  const finish = () => {
-    if (done) return;
-    done = true;
-    el.remove();
+  // Inject + reveal content as the panel STARTS lifting (not after it finishes), so
+  // the hero headline paints behind the rising panel — keeps LCP under target while
+  // preserving the ceremony. The empty panel is removed once it has fully wiped away.
+  let booted = false;
+  const doBoot = () => {
+    if (booted) return;
+    booted = true;
     document.body.removeAttribute("data-loading");
     boot();
   };
@@ -40,12 +42,12 @@ export function run(ctx, boot) {
   const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
   // Draw the chassis (1) and run the counter (2) in parallel from t=0.
-  tl.to(lines, { strokeDashoffset: 0, duration: 1.4, stagger: 0.12 }, 0)
+  tl.to(lines, { strokeDashoffset: 0, duration: 1.1, stagger: 0.1 }, 0)
     .to(
       { v: 0 },
       {
         v: 100,
-        duration: 1.4,
+        duration: 1.1,
         ease: "power1.out",
         onUpdate() {
           setCount(this.targets()[0].v);
@@ -54,18 +56,19 @@ export function run(ctx, boot) {
       },
       0
     )
-    // Brief beat at 100 so the finished silhouette registers, then wipe up.
+    // Brief beat at 100, then wipe up — booting content as the wipe begins.
     .to(
       el,
       {
         yPercent: -100,
-        duration: 0.7,
+        duration: 0.6,
         ease: "power3.inOut",
-        onComplete: finish,
+        onStart: doBoot,
+        onComplete: () => el.remove(),
       },
-      ">+=0.2"
+      ">+=0.12"
     );
 
   // Safety net: if a tween hook ever stalls, never trap the page behind the panel.
-  gsap.delayedCall(4, finish);
+  gsap.delayedCall(3.5, () => { doBoot(); el.remove(); });
 }
