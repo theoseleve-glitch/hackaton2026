@@ -46,6 +46,7 @@ export function ImportPreviewScreen({
   const [diff, setDiff] = useState<ChangedField[]>([]);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // diff the payload against the chosen car's current draft (or kit if none yet)
   useEffect(() => {
@@ -62,6 +63,7 @@ export function ImportPreviewScreen({
 
   const fork = async () => {
     setBusy(true);
+    setError(null);
     try {
       let carId = targetId;
       if (!carId) {
@@ -113,6 +115,8 @@ export function ImportPreviewScreen({
       await AsyncStorage.setItem(key, serialize(withNote));
       setDone(true);
       setTimeout(() => onDone(carId!), 700);
+    } catch {
+      setError("Couldn't save the fork — storage may be full. Nothing was changed.");
     } finally {
       setBusy(false);
     }
@@ -196,7 +200,14 @@ export function ImportPreviewScreen({
       </ScrollView>
 
       <View style={styles.footer}>
-        <Pressable style={[styles.btn, styles.primary, (busy || done) && { opacity: 0.6 }]} onPress={() => void fork()} disabled={busy || done}>
+        {error && <Text style={styles.errorText}>{error}</Text>}
+        <Pressable
+          style={[styles.btn, styles.primary, (busy || done) && { opacity: 0.6 }]}
+          onPress={() => void fork()}
+          disabled={busy || done}
+          accessibilityRole="button"
+          accessibilityLabel={targetId ? "Fork onto this car" : "Add car and fork"}
+        >
           <Text style={styles.primaryText}>
             {done ? "✓ Forked to your garage" : busy ? "Forking…" : targetId ? "Fork onto this car" : "Add car & fork"}
           </Text>
@@ -231,12 +242,12 @@ const styles = StyleSheet.create({
   name: { color: colors.text, fontSize: 22, fontWeight: "900", marginTop: 4 },
   meta: { color: colors.sub, fontSize: 13, marginTop: 4 },
   ctx: { color: colors.text, fontSize: 13, marginTop: 10 },
-  result: { color: "#FFD700", fontSize: 15, fontWeight: "800", marginTop: 6 },
+  result: { color: colors.gold, fontSize: 15, fontWeight: "800", marginTop: 6 },
   comment: { color: colors.sub, fontSize: 13, fontStyle: "italic", marginTop: 8 },
   author: { color: colors.sub, fontSize: 11, marginTop: 8 },
   section: { color: colors.sub, fontSize: 11, fontWeight: "800", textTransform: "uppercase", letterSpacing: 1, marginTop: 8, marginBottom: 8 },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 4 },
-  chip: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingVertical: 7, paddingHorizontal: 14 },
+  chip: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, borderRadius: radius.pill, paddingVertical: 7, paddingHorizontal: 14 },
   chipOn: { backgroundColor: colors.accentSoft, borderColor: colors.accent },
   chipText: { color: colors.sub, fontSize: 13 },
   chipTextOn: { color: colors.accent, fontWeight: "700" },
@@ -246,7 +257,8 @@ const styles = StyleSheet.create({
   diffVal: { color: colors.text, fontSize: 13, fontWeight: "700" },
   diffFrom: { color: colors.sub, fontWeight: "400" },
   footer: { padding: 14, borderTopWidth: 1, borderTopColor: colors.border },
+  errorText: { color: colors.warn, fontSize: 12, marginBottom: 8, textAlign: "center" },
   btn: { borderRadius: radius.md, paddingVertical: 14, alignItems: "center" },
   primary: { backgroundColor: colors.accent },
-  primaryText: { color: "#fff", fontWeight: "800", fontSize: 15 },
+  primaryText: { color: colors.onAccent, fontWeight: "800", fontSize: 15 },
 });
