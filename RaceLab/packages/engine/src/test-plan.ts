@@ -267,5 +267,118 @@ const WORSE_301 = {
   check("condition-seg: all-untagged rows → all-rows fallback (legacy behavior unchanged)", hLegacy?.matched_count === 0 && historyTier(hLegacy) === -1);
 }
 
+// ── LEARNING-TRAJECTORY: the ±1 cap holds across a streak, tracks stay isolated,
+//    condition-segmentation picks the right signal per forecast, and a
+//    conflicting-only streak never leaks ──────────────────────────────────────
+{
+  const RULE = "kb-swaybar-front-softer-301";
+  const baseTags = (outcome: "better" | "worse"): HistoryEntry => ({
+    change: "front_sway_bar: softer",
+    conditions: "grip green, dusty",
+    outcome,
+    citations: [RULE],
+    track_id: "trk-here",
+  });
+
+  // (c1) a long 'better' streak still caps at tier +1 — a hot streak can never
+  // outrank the KB's own ordering by more than one tier.
+  const betterStreak = Array.from({ length: 6 }, () => baseTags("better"));
+  const hBetter = historyForRule(RULE, pushBundle(betterStreak));
+  check("trajectory: 6x 'better' here → net 6 but tier capped at +1 (±1 bound holds across a streak)", historyTier(hBetter) === 1 && hBetter?.net === 6);
+
+  // (c2) a long 'worse' streak caps at tier -1 (symmetric).
+  const worseStreak = Array.from({ length: 6 }, () => baseTags("worse"));
+  const hWorse = historyForRule(RULE, pushBundle(worseStreak));
+  check("trajectory: 6x 'worse' here → net -6 but tier floored at -1 (±1 bound holds across a streak)", historyTier(hWorse) === -1 && hWorse?.net === -6);
+
+  // (c3) and the cap survives the full proposePlan path, not just the tier math:
+  // a 'better' streak promotes the rule to #1 but never duplicates or empties.
+  const promotedStreak = proposePlan(
+    pushBundle(Array.from({ length: 6 }, () => ({ ...baseTags("better"), citations: ["kb-diff-rear-thinner-005"] }))),
+    data,
+  );
+  check(
+    "trajectory: a 'better' streak promotes to #1 through proposePlan (bounded, still grounded)",
+    promotedStreak.kind === "plan" && promotedStreak.changes[0].option.citations.includes("kb-diff-rear-thinner-005"),
+  );
+  const clean = proposePlan(pushBundle(), data);
+  check("trajectory: a streak never changes the plan LENGTH (no duplicate/empty)", promotedStreak.changes.length === clean.changes.length);
+  check(
+    "trajectory: every change in a re-ranked streak plan stays cited (grounded or silent)",
+    promotedStreak.changes.every((c) => c.option.citations.length > 0),
+  );
+
+  // (c4) TRACK ISOLATION across a streak: a 6-row 'worse' streak at ANOTHER
+  // track, mixed with the current track, never bleeds — only this-track rows
+  // count. Here all rows are other-track → no usable signal at all.
+  const otherTrackStreak = Array.from({ length: 6 }, () => ({ ...baseTags("worse"), track_id: "trk-other" }));
+  const hOther = historyForRule(RULE, pushBundle(otherTrackStreak));
+  check("trajectory: a 'worse' streak from ANOTHER track never bleeds in → null history", hOther === null && historyTier(hOther) === 0);
+  const isolated = proposePlan(pushBundle(otherTrackStreak), data);
+  check(
+    "trajectory: other-track streak leaves THIS track's ranking untouched (sway bar still #1)",
+    isolated.changes[0].option.citations.includes(RULE),
+  );
+
+  // (c5) CONDITION-SEGMENTATION picks the right signal per forecast across a
+  // trajectory: the SAME rule rated better-when-hot and worse-when-cold yields
+  // +1 under a hot forecast and -1 under a cold forecast (no cancellation).
+  const segRows: HistoryEntry[] = [
+    { change: "x: y", conditions: "hot", outcome: "better", citations: [RULE], track_id: "trk-here", condition_tags: ["hot"] },
+    { change: "x: y", conditions: "cold", outcome: "worse", citations: [RULE], track_id: "trk-here", condition_tags: ["cold"] },
+  ];
+  const segBundle = (air: number): ContextBundle => ({
+    ...pushBundle(segRows),
+    weather: { air_temp_c: air },
+  });
+  check("trajectory: same rule, HOT forecast → matches the hot-better row → tier +1", historyTier(historyForRule(RULE, segBundle(34))) === 1);
+  check("trajectory: same rule, COLD forecast → matches the cold-worse row → tier -1", historyTier(historyForRule(RULE, segBundle(4))) === -1);
+
+  // (c6) CONFLICTING-ONLY streak → null: a streak of only opposite-condition
+  // outcomes (all 'cold' rows under a 'hot' forecast) has NO usable signal and
+  // must NOT leak the conflicting net back through the fallback.
+  const conflictOnly: HistoryEntry[] = Array.from({ length: 5 }, () => ({
+    change: "x: y",
+    conditions: "cold",
+    outcome: "worse" as const,
+    citations: [RULE],
+    track_id: "trk-here",
+    condition_tags: ["cold"],
+  }));
+  const hConflict = historyForRule(RULE, { ...pushBundle(conflictOnly), weather: { air_temp_c: 34 } });
+  check("trajectory: a conflicting-ONLY streak (all cold rows vs a hot forecast) → null, tier 0 (no leak)", hConflict === null && historyTier(hConflict) === 0);
+}
+
+// ── COLD-START: a driver with zero or one rated run still gets a grounded
+//    recommendation — history just doesn't re-rank when there's nothing usable ─
+{
+  const baseline = proposePlan(pushBundle(), data); // no history key at all
+
+  // (d1) zero history (undefined) → grounded plan, every change cited, no notes.
+  check("cold-start: zero history → grounded plan (kind=plan, >=1 change)", baseline.kind === "plan" && baseline.changes.length >= 1);
+  check("cold-start: zero history → every change is cited (grounded or silent)", baseline.changes.every((c) => c.option.citations.length > 0));
+  check("cold-start: zero history → no history note on any change (nothing to re-rank)", baseline.changes.every((c) => c.option.history_note === undefined));
+
+  // (d2) an EMPTY history array behaves identically to no history.
+  const empty = proposePlan(pushBundle([]), data);
+  check(
+    "cold-start: empty history array → identical grounded plan to no-history",
+    JSON.stringify(empty.changes.map((c) => c.option.citations)) === JSON.stringify(baseline.changes.map((c) => c.option.citations)),
+  );
+
+  // (d3) ONE rated run on a rule the KB does NOT ground for this symptom (clutch
+  // vs understeer) → grounded-first cap: the recommendation is unchanged and
+  // still cited. A single unrelated datapoint cannot re-rank.
+  const oneUnrelated = proposePlan(
+    pushBundle([{ change: "clutch_spring: softer", conditions: "grip green", outcome: "better", citations: ["kb-clutch-springs-softer-009"], track_id: "trk-here" }]),
+    data,
+  );
+  check(
+    "cold-start: one rated run on an unrelated rule → grounded plan unchanged (grounded-first cap)",
+    JSON.stringify(oneUnrelated.changes.map((c) => c.option.citations)) === JSON.stringify(baseline.changes.map((c) => c.option.citations)),
+  );
+  check("cold-start: one-unrelated-run plan stays fully cited", oneUnrelated.kind === "plan" && oneUnrelated.changes.every((c) => c.option.citations.length > 0));
+}
+
 console.log(failures === 0 ? "\nPLAN: all proposePlan/history tests passed" : `\nPLAN: ${failures} failures`);
 if (failures > 0) process.exit(1);

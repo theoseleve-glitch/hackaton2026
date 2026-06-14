@@ -15,6 +15,10 @@ interface Scenario {
     primary_cites?: string;
     /** The primary must NOT cite this rule (history demotion scenarios). */
     primary_cites_not?: string;
+    /** Conflict scenarios: assert exactly one primary on one lever, every option
+     *  on a DISTINCT setting (so two opposite-pulling symptoms can never yield a
+     *  contradictory pair on the same setting), and a bounded option count. */
+    no_contradictory_pair?: boolean;
   };
   bundle: ContextBundle;
 }
@@ -72,6 +76,18 @@ for (const file of files) {
       rec.primary!.citations.includes(scenario.expect.primary_cites_not)
     ) {
       problems.push(`primary must not cite ${scenario.expect.primary_cites_not} (history-demoted)`);
+    }
+    if (scenario.expect.no_contradictory_pair) {
+      // Two opposite-pulling symptoms must resolve to ONE primary lever, and no
+      // two options may share a setting (the distinct-setting invariant IS the
+      // anti-contradiction guarantee: the engine can never propose "stiffen X"
+      // and "soften X" together). Every option stays grounded.
+      if (!rec.primary) problems.push("conflict: no single primary change");
+      if (new Set(settings).size !== settings.length)
+        problems.push(`conflict: a setting appears twice (possible contradictory pair): [${settings.join(", ")}]`);
+      if (options.some((o) => o.citations.length === 0))
+        problems.push("conflict: an option is ungrounded (grounded-or-silent)");
+      if (options.length > 1 + 2) problems.push("conflict: more than 1 primary + 2 alternatives");
     }
     if (!rec.conditions_echo || rec.conditions_echo.length < 10) problems.push("missing conditions echo");
   }

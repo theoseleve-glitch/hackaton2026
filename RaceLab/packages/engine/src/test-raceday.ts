@@ -236,6 +236,130 @@ const baseInput: RaceDayInput = {
   }
 }
 
+// ── WEATHER REGRESSION TIER (D40 hot/cold pack trap coverage) ─────────────────
+// Each forecast is isolated to ONE actionable condition so the grounding (or
+// the refusal) is asserted on its own, never tangled with another tag.
+{
+  // (a1) HOT in isolation (calm wind) → front shock THICKER, cited + race-day
+  // safe, and nothing else fires.
+  const hotOnly = planRaceDay(
+    {
+      ...baseInput,
+      practice: [],
+      forecast: [obs({ observed_at: "2026-06-13T13:00:00.000Z", source: "auto", air_temp_c: 34, wind_speed_kmh: 8 })],
+    },
+    data,
+  );
+  check("hot-only forecast → ok plan", hotOnly.ok);
+  if (hotOnly.ok) {
+    const hot = hotOnly.plan.adjustments.filter((a) => a.condition_tag === "hot");
+    check(
+      "hot → CITED race-day-safe front-shock-THICKER adjustment",
+      hot.length === 1 &&
+        hot[0].setting === "front_shock_oil" &&
+        hot[0].citations.includes("kb-weather-hot-front-shock-thicker-301") &&
+        hot[0].confidence === "high",
+      JSON.stringify(hot),
+    );
+    check("hot-only → no cold adjustment leaks in", !hotOnly.plan.adjustments.some((a) => a.condition_tag === "cold"));
+    check("hot-only (calm wind) → no wind refusal", !hotOnly.plan.refusals.some((x) => x.aspect === "wind"));
+  }
+
+  // (a2) COLD in isolation (calm wind) → front AND rear shock THINNER, both
+  // cited + race-day safe; cold is not refused.
+  const coldOnly = planRaceDay(
+    {
+      ...baseInput,
+      practice: [],
+      forecast: [obs({ observed_at: "2026-06-13T07:00:00.000Z", source: "auto", air_temp_c: 4, wind_speed_kmh: 8 })],
+    },
+    data,
+  );
+  check("cold-only forecast → ok plan", coldOnly.ok);
+  if (coldOnly.ok) {
+    const cold = coldOnly.plan.adjustments.filter((a) => a.condition_tag === "cold");
+    const settings = new Set(cold.map((a) => a.setting));
+    check(
+      "cold → CITED front-shock-THINNER adjustment",
+      cold.some((a) => a.setting === "front_shock_oil" && a.citations.includes("kb-weather-cold-front-shock-thinner-302")),
+      JSON.stringify(cold),
+    );
+    check(
+      "cold → CITED rear-shock-THINNER adjustment (front AND rear move)",
+      cold.some((a) => a.setting === "rear_shock_oil" && a.citations.includes("kb-weather-cold-rear-shock-thinner-303")),
+      JSON.stringify(cold),
+    );
+    check("cold → both shock adjustments on DISTINCT settings (no contradictory pair)", settings.size === cold.length && settings.size >= 2);
+    check("cold → every adjustment is race-day safe (high confidence + cited)", cold.length >= 2 && cold.every((a) => a.confidence === "high" && a.citations.length > 0));
+    check("cold-only (calm wind) → cold is NOT refused", !coldOnly.plan.refusals.some((x) => x.aspect === "cold"));
+  }
+
+  // (a3) WIND with an otherwise-uncovered forecast (mild temp, no rain) →
+  // wind REFUSES explicitly and produces ZERO adjustments (uncovered tag, never
+  // a guess). This is the standalone wind-refusal trap.
+  const windOnly = planRaceDay(
+    {
+      ...baseInput,
+      practice: [],
+      forecast: [obs({ observed_at: "2026-06-13T12:00:00.000Z", source: "auto", air_temp_c: 20, cloud_cover_pct: 30, wind_speed_kmh: 40 })],
+    },
+    data,
+  );
+  check("wind-only forecast → ok plan", windOnly.ok);
+  if (windOnly.ok) {
+    check(
+      "uncovered wind tag → EXPLICIT refusal (grounded or silent)",
+      windOnly.plan.refusals.some((x) => x.aspect === "wind" && x.message.includes("no wind condition tag")),
+      JSON.stringify(windOnly.plan.refusals),
+    );
+    check("uncovered wind tag → ZERO adjustments (never a guess)", windOnly.plan.adjustments.length === 0);
+  }
+
+  // (a4) WET (actual rain in the sky) still grounds → a cited clutch-softer
+  // adjustment, race-day safe.
+  const wetOnly = planRaceDay(
+    {
+      ...baseInput,
+      practice: [],
+      forecast: [obs({ observed_at: "2026-06-13T14:00:00.000Z", source: "auto", air_temp_c: 18, precipitation_probability_pct: 90, wind_speed_kmh: 10 })],
+      current_setup: { clutch_spring: 1.0 },
+    },
+    data,
+  );
+  check("wet forecast → ok plan", wetOnly.ok);
+  if (wetOnly.ok) {
+    const wet = wetOnly.plan.adjustments.filter((a) => a.condition_tag === "wet");
+    check(
+      "wet → CITED race-day-safe clutch-softer adjustment (still grounds)",
+      wet.some((a) => a.citations.includes("kb-clutch-springs-softer-009") && a.confidence === "high"),
+      JSON.stringify(wet),
+    );
+    check("wet → no spurious wind refusal at calm wind", !wetOnly.plan.refusals.some((x) => x.aspect === "wind"));
+  }
+
+  // (a5) A forecast with NO actionable condition (mild temp, no rain, calm
+  // wind) → an HONEST 'no change' read: zero adjustments, zero refusals, and the
+  // forecast_read says so out loud. The planner must not invent a change.
+  const mild = planRaceDay(
+    {
+      ...baseInput,
+      practice: [],
+      forecast: [obs({ observed_at: "2026-06-13T12:00:00.000Z", source: "auto", air_temp_c: 20, cloud_cover_pct: 30, wind_speed_kmh: 5 })],
+    },
+    data,
+  );
+  check("no-actionable-condition forecast → ok plan", mild.ok);
+  if (mild.ok) {
+    check(
+      "no actionable condition → honest 'no change the KB reasons about' read",
+      mild.plan.forecast_read.some((l) => l.includes("no condition change the KB reasons about")),
+      JSON.stringify(mild.plan.forecast_read),
+    );
+    check("no actionable condition → ZERO invented adjustments", mild.plan.adjustments.length === 0);
+    check("no actionable condition → ZERO refusals (nothing to refuse)", mild.plan.refusals.length === 0);
+  }
+}
+
 // ── Edge cases ────────────────────────────────────────────────────────────────
 {
   const r = planRaceDay({ ...baseInput, practice: [], forecast: [] }, data);
