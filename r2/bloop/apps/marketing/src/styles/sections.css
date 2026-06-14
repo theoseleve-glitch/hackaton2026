@@ -80,3 +80,9 @@
   color:#fff;font:700 10px/1 var(--font-body);padding:4px 6px;border-radius:var(--r-pill)}
 .qr{width:120px;height:120px;margin:0 auto;border-radius:var(--r-lg);
   background:repeating-conic-gradient(var(--ink) 0 25%, var(--cream) 0 50%) 0/24px 24px}
+.pre{position:fixed;inset:0;z-index:10001;background:var(--cream);display:grid;place-items:center;gap:var(--s3)}
+.pre__logo{font-family:var(--font-display);font-weight:700;font-size:64px}
+.pre__pct{font-family:var(--font-display);font-weight:600;font-size:24px;color:var(--coral)}
+.footer{display:grid;gap:var(--s2);text-align:center}
+.footer__tag{opacity:.6;font-size:14px}
+.footer__link{opacity:.7}

@@ -1,8 +1,9 @@
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/sections.css';
-import { detectLocale, applyI18n, type Locale } from './lib/i18n';
+import { detectLocale, type Locale } from './lib/i18n';
 import { initSmoothScroll, revealOnScroll } from './lib/scroll';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initCursor } from './lib/cursor';
 import { magnetize } from './lib/magnetic';
 import { el } from './lib/dom';
@@ -11,13 +12,43 @@ import { buildThesis } from './sections/thesis';
 import { buildHow } from './sections/how-it-works';
 import { buildEveryPhone } from './sections/every-phone';
 import { buildLibrary } from './sections/library';
+import { buildNight } from './sections/night-oracle';
+import { buildProof } from './sections/proof';
+import { buildSafety } from './sections/safety';
+import { buildDownload } from './sections/download';
+import { buildFooter } from './sections/footer';
+import { runPreloader } from './sections/preloader';
 
-const SECTION_IDS = ['hero','thesis','how','phone','library','night','proof','safety','download','footer'] as const;
+const BUILDERS: Record<string, (r: HTMLElement, l: Locale) => void> = {
+  hero: buildHero, thesis: buildThesis, how: buildHow, phone: buildEveryPhone,
+  library: buildLibrary, night: buildNight, proof: buildProof, safety: buildSafety,
+  download: buildDownload, footer: buildFooter,
+};
+const SECTION_IDS = Object.keys(BUILDERS);
 
-function mountNav(locale: Locale) {
-  const setLang = (l: Locale) => { applyI18n(l);
-    document.querySelectorAll<HTMLButtonElement>('.lang button')
-      .forEach((b) => b.setAttribute('aria-current', String(b.dataset.l === l))); };
+function renderSections(locale: Locale): void {
+  for (const [id, build] of Object.entries(BUILDERS)) {
+    const sec = document.getElementById(id)!;
+    sec.innerHTML = '';
+    sec.className = 'section';
+    build(sec, locale);
+  }
+  document.querySelectorAll<HTMLElement>('.section').forEach(revealOnScroll);
+  document.querySelectorAll<HTMLElement>('.btn,.badge').forEach((b) => magnetize(b));
+}
+
+function setActiveLang(locale: Locale): void {
+  document.querySelectorAll<HTMLButtonElement>('.lang button')
+    .forEach((b) => b.setAttribute('aria-current', String(b.dataset.l === locale)));
+}
+
+function mountNav(initial: Locale): void {
+  const setLang = (l: Locale) => {
+    document.documentElement.lang = l;
+    localStorage.setItem('bloop_locale', l);
+    setActiveLang(l);
+    renderSections(l);
+  };
   const frBtn = el('button', { 'data-l': 'fr' }, 'FR');
   const enBtn = el('button', { 'data-l': 'en' }, 'EN');
   frBtn.onclick = () => setLang('fr');
@@ -27,26 +58,18 @@ function mountNav(locale: Locale) {
       'bloop', el('span', { class: 'nav__dot' }, '.')),
     el('nav', { class: 'lang', 'aria-label': 'language' }, frBtn, enBtn));
   document.body.prepend(nav);
-  setLang(locale);
+  setActiveLang(initial);
 }
 
-function main() {
+function main(): void {
   const app = document.getElementById('app')!;
   const locale = detectLocale();
+  document.documentElement.lang = locale;
   for (const id of SECTION_IDS) app.append(el('section', { id, class: 'section' }));
-  const skip = el('a', { href: '#hero', class: 'skip' }, 'aller au contenu');
-  document.body.prepend(skip);
+  document.body.prepend(el('a', { href: '#hero', class: 'skip' }, 'aller au contenu'));
   mountNav(locale);
-
-  buildHero(document.getElementById('hero')!, locale);
-  buildThesis(document.getElementById('thesis')!, locale);
-  buildHow(document.getElementById('how')!, locale);
-  buildEveryPhone(document.getElementById('phone')!, locale);
-  buildLibrary(document.getElementById('library')!, locale);
-
+  renderSections(locale);
   initCursor();
-  initSmoothScroll();
-  document.querySelectorAll<HTMLElement>('.section').forEach(revealOnScroll);
-  document.querySelectorAll<HTMLElement>('.btn').forEach((b) => magnetize(b));
+  runPreloader(() => { initSmoothScroll(); ScrollTrigger.refresh(); });
 }
 main();
