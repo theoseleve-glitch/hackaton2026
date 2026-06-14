@@ -27,6 +27,7 @@ const BUILDERS: Record<string, (r: HTMLElement, l: Locale) => void> = {
 const SECTION_IDS = Object.keys(BUILDERS);
 
 function renderSections(locale: Locale): void {
+  ScrollTrigger.getAll().forEach((st) => st.kill());
   for (const [id, build] of Object.entries(BUILDERS)) {
     const sec = document.getElementById(id)!;
     sec.innerHTML = '';
@@ -35,6 +36,7 @@ function renderSections(locale: Locale): void {
   }
   document.querySelectorAll<HTMLElement>('.section').forEach(revealOnScroll);
   document.querySelectorAll<HTMLElement>('.btn,.badge').forEach((b) => magnetize(b));
+  ScrollTrigger.refresh();
 }
 
 function setActiveLang(locale: Locale): void {

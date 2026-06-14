@@ -3,9 +3,9 @@ import { t, type Locale } from '../lib/i18n';
 import { STORE } from '../content/links';
 
 function badge(label: string, href: string, placeholder: boolean): HTMLElement {
-  const a = el('a', { class: 'badge', href, 'data-cursor': 'go' }, label);
-  if (placeholder) { a.classList.add('badge--soon'); a.setAttribute('aria-disabled', 'true'); }
-  return a;
+  if (placeholder)
+    return el('span', { class: 'badge badge--soon', role: 'link', 'aria-disabled': 'true' }, label);
+  return el('a', { class: 'badge', href, 'data-cursor': 'go' }, label);
 }
 
 export function buildDownload(root: HTMLElement, locale: Locale): void {
