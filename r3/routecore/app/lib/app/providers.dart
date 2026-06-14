@@ -19,6 +19,8 @@ import '../features/trips/data/trip_repositories.dart';
 import '../features/trips/domain/trip_repository.dart';
 import '../features/places/data/saved_places_store.dart';
 import '../features/poi/data/fuel_station_service.dart';
+import '../features/sharing/data/trip_share_service.dart';
+import '../features/sharing/domain/trip_share.dart';
 import '../shared/models/models.dart';
 import '../shared/services/map_search_service.dart';
 import '../shared/services/osrm_routing_service.dart';
@@ -117,6 +119,18 @@ final fuelStationServiceProvider =
 /// — disponibles sans compte (mode anonyme).
 final savedPlacesStoreProvider =
     Provider<SavedPlacesStore>((ref) => SavedPlacesStore());
+
+/// Partage de trajet en direct : Supabase Realtime si configuré, sinon partage
+/// local (même appareil, démo). Voir supabase/migrations/0006_trip_shares.sql.
+final tripShareServiceProvider = Provider<TripShareService>((ref) =>
+    Env.hasSupabase
+        ? SupabaseTripShareService(_client)
+        : MockTripShareService());
+
+/// Flux temps réel d'un trajet partagé (pour le viewer `/share/:token`).
+final tripShareWatchProvider =
+    StreamProvider.family<TripShare?, String>((ref, token) =>
+        ref.read(tripShareServiceProvider).watch(token));
 
 /// Trafic incidents : Bison Futé (DATEX II) si un flux est configuré (.env),
 /// sinon vide honnête (MockTrafficService) — jamais de fausses données.

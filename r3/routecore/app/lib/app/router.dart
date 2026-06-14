@@ -7,6 +7,7 @@ import '../features/poi/presentation/poi_screens.dart';
 import '../features/routing/presentation/home_screen.dart';
 import '../features/routing/presentation/route_options_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
+import '../features/sharing/presentation/share_viewer_screen.dart';
 import '../features/tracking/presentation/tracking_screens.dart';
 import '../features/vehicle/presentation/vehicle_picker_screen.dart';
 import '../core/env/env.dart';
@@ -17,6 +18,7 @@ import '../product_modules/echappee/presentation/echappee_manifeste_screen.dart'
 import '../product_modules/echappee/presentation/echappee_map_screens.dart';
 import '../product_modules/echappee/presentation/echappee_places_screen.dart';
 import '../product_modules/echappee/presentation/echappee_services_screen.dart';
+import '../product_modules/echappee/presentation/echappee_stops_screen.dart';
 import '../product_modules/echappee/presentation/echappee_splash_screen.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
 import '../product_modules/terroir/presentation/terroir_screens.dart';
@@ -51,6 +53,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           builder: (_, state) =>
               TripSummaryScreen(tripId: state.pathParameters['tripId']!)),
       GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
+      // Suivi d'un trajet partagé (lien public, lecture seule).
+      GoRoute(
+          path: '/share/:token',
+          builder: (_, state) =>
+              ShareViewerScreen(token: state.pathParameters['token']!)),
       // --- product module: Terroir (marque: L'Échappée) ---
       GoRoute(
           path: '/terroir/plan',
@@ -100,6 +107,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/echappee/places',
           builder: (_, __) => const EchappeePlacesScreen()),
+      GoRoute(
+          path: '/echappee/stops',
+          builder: (_, __) => const EchappeeStopsScreen()),
       GoRoute(
           path: '/echappee/poi/:id',
           builder: (_, state) =>

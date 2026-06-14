@@ -29,12 +29,16 @@ class OsrmDirectionsService {
   Future<List<NavInstruction>> getDirections({
     required GeoPoint origin,
     required GeoPoint destination,
+    List<GeoPoint> vias = const [],
   }) async {
     try {
+      // origine → étapes manuelles (dans l'ordre) → destination. parseSteps
+      // parcourt déjà TOUS les legs, donc le tour-par-tour traverse les étapes.
+      final coords = [origin, ...vias, destination]
+          .map((p) => '${p.longitude},${p.latitude}')
+          .join(';');
       final uri = Uri.parse(
-        '$_base/route/v1/driving/'
-        '${origin.longitude},${origin.latitude};'
-        '${destination.longitude},${destination.latitude}'
+        '$_base/route/v1/driving/$coords'
         '?overview=full&geometries=geojson&steps=true',
       );
       final res = await _client.get(uri).timeout(const Duration(seconds: 8));

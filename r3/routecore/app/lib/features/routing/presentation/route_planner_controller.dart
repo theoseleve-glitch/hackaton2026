@@ -20,6 +20,7 @@ class RoutePlannerState {
     this.preferredPoiTags = const [],
     this.departureAt,
     this.surpriseMode = false,
+    this.manualStops = const [],
     this.options = const AsyncValue.data([]),
     this.selectedOption,
   });
@@ -44,6 +45,12 @@ class RoutePlannerState {
   /// « Surprends-moi » : ignore le budget détour et choisit LA meilleure
   /// halte, quel que soit le temps, tant qu'on finit à destination.
   final bool surpriseMode;
+
+  /// Étapes ajoutées MANUELLEMENT par l'utilisateur, dans l'ordre de passage
+  /// (origine → manualStops → destination). La navigation route à travers
+  /// elles (vrai tour-par-tour multi-legs).
+  final List<AddressSearchResult> manualStops;
+
   final AsyncValue<List<RouteOption>> options;
   final RouteOption? selectedOption;
 
@@ -62,6 +69,7 @@ class RoutePlannerState {
     DateTime? departureAt,
     bool clearDeparture = false,
     bool? surpriseMode,
+    List<AddressSearchResult>? manualStops,
     AsyncValue<List<RouteOption>>? options,
     RouteOption? selectedOption,
     bool clearSelection = false,
@@ -81,6 +89,7 @@ class RoutePlannerState {
         departureAt:
             clearDeparture ? null : (departureAt ?? this.departureAt),
         surpriseMode: surpriseMode ?? this.surpriseMode,
+        manualStops: manualStops ?? this.manualStops,
         options: options ?? this.options,
         selectedOption:
             clearSelection ? null : (selectedOption ?? this.selectedOption),
@@ -119,6 +128,28 @@ class RoutePlannerController extends Notifier<RoutePlannerState> {
 
   void setSurpriseMode(bool enabled) =>
       state = state.copyWith(surpriseMode: enabled);
+
+  void addStop(AddressSearchResult stop) =>
+      state = state.copyWith(manualStops: [...state.manualStops, stop]);
+
+  void removeStopAt(int index) {
+    if (index < 0 || index >= state.manualStops.length) return;
+    final next = [...state.manualStops]..removeAt(index);
+    state = state.copyWith(manualStops: next);
+  }
+
+  /// Réordonne les étapes (ReorderableListView : retire à [oldIndex], insère
+  /// à [newIndex] en compensant le décalage d'index).
+  void reorderStops(int oldIndex, int newIndex) {
+    final next = [...state.manualStops];
+    if (oldIndex < 0 || oldIndex >= next.length) return;
+    final item = next.removeAt(oldIndex);
+    final target = newIndex > oldIndex ? newIndex - 1 : newIndex;
+    next.insert(target.clamp(0, next.length), item);
+    state = state.copyWith(manualStops: next);
+  }
+
+  void clearStops() => state = state.copyWith(manualStops: const []);
 
   void selectOption(RouteOption option) {
     state = state.copyWith(selectedOption: option);

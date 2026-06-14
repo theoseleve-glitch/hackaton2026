@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show HapticFeedback;
+import 'package:flutter/services.dart' show Clipboard, ClipboardData, HapticFeedback;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +14,7 @@ import '../../../core/logging/app_logger.dart';
 import '../../../product_modules/ecodrive/data/driving_sensors.dart';
 import '../../../product_modules/echappee/design_system/design_system.dart';
 import '../../../product_modules/echappee/presentation/echappee_page.dart';
+import '../../../features/sharing/domain/trip_share.dart';
 import '../../../shared/models/models.dart';
 import '../../location/data/location_repositories.dart';
 import '../../../shared/services/traffic_service.dart';
@@ -196,6 +197,11 @@ class _EchappeeNavigationScreenState
   SpeedCamera? _nextCamera;
   SafetyPoint? _nextHazard;
 
+  // --- Partage de trajet en direct ---
+  String? _shareToken;
+  DateTime? _lastSharePush;
+  static const _sharePushInterval = Duration(seconds: 8);
+
   @override
   void initState() {
     super.initState();
@@ -270,6 +276,38 @@ class _EchappeeNavigationScreenState
         .ignore();
   }
 
+  /// Démarre / arrête le partage de trajet en direct. Au démarrage, copie le
+  /// lien de suivi (la position/ETA sont poussées ensuite à chaque fix).
+  Future<void> _toggleShare() async {
+    final destination = _destination;
+    if (destination == null) return;
+    final service = ref.read(tripShareServiceProvider);
+    if (_shareToken != null) {
+      final token = _shareToken!;
+      setState(() => _shareToken = null);
+      await service.endShare(token);
+      _snack('Partage du trajet arrêté.');
+      return;
+    }
+    final planner = ref.read(routePlannerProvider);
+    final share = await service.createShare(
+      destination: destination,
+      originLabel: planner.originLabel,
+      destinationLabel: planner.destinationLabel,
+    );
+    if (!mounted) return;
+    setState(() => _shareToken = share.token);
+    final url = TripShare.shareUrl(share.token);
+    await Clipboard.setData(ClipboardData(text: url));
+    _snack('Lien de suivi copié : $url');
+  }
+
+  void _snack(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   void dispose() {
     _gpsSub?.cancel();
@@ -277,6 +315,11 @@ class _EchappeeNavigationScreenState
     _compassSub?.cancel();
     unawaited(_compass.dispose());
     unawaited(_voice.dispose());
+    // Clôt le partage en cours (best-effort) pour ne pas laisser un lien actif.
+    final token = _shareToken;
+    if (token != null) {
+      unawaited(ref.read(tripShareServiceProvider).endShare(token));
+    }
     _mapController.dispose();
     super.dispose();
   }
@@ -309,10 +352,14 @@ class _EchappeeNavigationScreenState
     // limité), on NE BLOQUE PAS sur « Préparation ». On navigue alors sur la
     // géométrie de l'option déjà sélectionnée, sans instructions tour-par-tour
     // (la carte suit et tourne quand même, ETA et progression restent calculés).
+    // Étapes manuelles : la nav route à travers elles (vrai tour-par-tour).
+    final vias =
+        ref.read(routePlannerProvider).manualStops.map((s) => s.point).toList();
     List<NavInstruction> instructions = const [];
     try {
       instructions = await _directions
-          .getDirections(origin: origin, destination: destination)
+          .getDirections(
+              origin: origin, destination: destination, vias: vias)
           .timeout(const Duration(seconds: 9));
     } catch (e) {
       _log.warn('directions indisponibles, navigation sur la géométrie '
@@ -407,6 +454,21 @@ class _EchappeeNavigationScreenState
       if (_voiceOn) unawaited(_voice.speak('Tu dépasses la limite'));
     }
     _overSpeed = over;
+
+    // Partage en direct : pousse position + ETA, au plus toutes les 8 s.
+    if (_shareToken != null) {
+      final now = DateTime.now();
+      if (_lastSharePush == null ||
+          now.difference(_lastSharePush!) >= _sharePushInterval) {
+        _lastSharePush = now;
+        unawaited(ref.read(tripShareServiceProvider).updateProgress(
+              _shareToken!,
+              position: p,
+              eta: now.add(Duration(seconds: nav.etaSeconds.round())),
+              remainingMeters: nav.remainingMeters,
+            ));
+      }
+    }
 
     if (_cameraLocked) _followCamera(p, nav.headingDegrees, speedMps);
     if (nav.offRoute && !_simulated) unawaited(_maybeRecalculate(p));
@@ -584,6 +646,17 @@ class _EchappeeNavigationScreenState
                     child: Row(
                       children: [
                         _VoiceToggle(on: _voiceOn, onTap: _toggleVoice),
+                        const SizedBox(width: EchappeeSpacing.s8),
+                        _RoundButton(
+                          icon: _shareToken == null
+                              ? Icons.share_outlined
+                              : Icons.share,
+                          active: _shareToken != null,
+                          tooltip: _shareToken == null
+                              ? 'Partager mon trajet'
+                              : 'Arrêter le partage',
+                          onTap: _toggleShare,
+                        ),
                         const Spacer(),
                         if (_simulated) const _SimulationChip(),
                       ],
@@ -1217,6 +1290,43 @@ class _VoiceToggle extends StatelessWidget {
             size: 22,
             color: on ? EchappeeColors.primary : EchappeeColors.disabled,
             semanticLabel: on ? 'Couper la voix' : 'Activer la voix',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Petit bouton rond générique (carte de navigation).
+class _RoundButton extends StatelessWidget {
+  const _RoundButton({
+    required this.icon,
+    required this.onTap,
+    this.active = false,
+    this.tooltip,
+  });
+
+  final IconData icon;
+  final VoidCallback onTap;
+  final bool active;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: EchappeeColors.surface,
+      shape: const CircleBorder(),
+      elevation: 2,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(EchappeeSpacing.s8),
+          child: Icon(
+            icon,
+            size: 22,
+            color: active ? EchappeeColors.primary : EchappeeColors.textSecondary,
+            semanticLabel: tooltip,
           ),
         ),
       ),
