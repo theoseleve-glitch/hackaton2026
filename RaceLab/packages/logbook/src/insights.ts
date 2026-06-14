@@ -51,6 +51,10 @@ export interface DriverStats {
   wins: number;
   best_lap_s?: number;
   best_lap_track?: string;
+  /** podiums / placed races, 0..1 — undefined when no placed races yet */
+  podium_rate?: number;
+  /** wins / placed races, 0..1 — undefined when no placed races yet */
+  win_rate?: number;
 }
 
 /** year is a 4-digit string ("2026"); omitted = whole career. */
@@ -66,15 +70,117 @@ export function driverStats(state: LogbookState, year?: string): DriverStats {
     if (!best || lap < best.result!.best_lap_s!) best = r;
   }
 
+  const podiums = placed.filter((r) => r.result!.position! <= 3).length;
+  const wins = placed.filter((r) => r.result!.position! === 1).length;
+
   return {
     runs: runs.length,
     tracks: new Set(runs.map((r) => r.track.name)).size,
     races: competitive.length,
-    podiums: placed.filter((r) => r.result!.position! <= 3).length,
-    wins: placed.filter((r) => r.result!.position! === 1).length,
+    podiums,
+    wins,
     best_lap_s: best?.result?.best_lap_s,
     best_lap_track: best?.track.name,
+    podium_rate: placed.length ? podiums / placed.length : undefined,
+    win_rate: placed.length ? wins / placed.length : undefined,
   };
+}
+
+/** What records a single run newly set, evaluated against the rest of the log.
+ *  Powers the save-time celebration (PB splash). All four are independent. */
+export interface RunRecords {
+  /** fastest lap across the whole log (beats at least one prior lap) */
+  careerBestLap: boolean;
+  /** fastest lap at this track (beats at least one prior lap here) */
+  trackBestLap: boolean;
+  /** first-ever competitive top-3 finish */
+  firstPodium: boolean;
+  /** first-ever competitive win */
+  firstWin: boolean;
+}
+
+/** Given a `state` that ALREADY INCLUDES `run`, report which records `run` set.
+ *  Pure — the UI decides how to celebrate. A first-ever lap is not a "beat"
+ *  (nothing to beat), so a record requires at least one prior comparable lap. */
+export function checkRecords(state: LogbookState, run: RunEntry): RunRecords {
+  const others = state.runs.filter((r) => r.id !== run.id);
+  const lap = run.result?.best_lap_s;
+
+  let careerBestLap = false;
+  let trackBestLap = false;
+  if (lap !== undefined) {
+    const prior = (rs: RunEntry[]) =>
+      rs.map((r) => r.result?.best_lap_s).filter((l): l is number => l !== undefined);
+    const careerPrior = prior(others);
+    careerBestLap = careerPrior.length > 0 && careerPrior.every((l) => lap < l);
+    const trackPrior = prior(others.filter((r) => r.track.name === run.track.name));
+    trackBestLap = trackPrior.length > 0 && trackPrior.every((l) => lap < l);
+  }
+
+  const isCompetitive = run.type === "qualifier" || run.type === "main";
+  const pos = run.result?.position;
+  const otherPlaced = others.filter(
+    (r) => (r.type === "qualifier" || r.type === "main") && r.result?.position !== undefined,
+  );
+  const firstPodium =
+    isCompetitive && pos !== undefined && pos <= 3 && !otherPlaced.some((r) => r.result!.position! <= 3);
+  const firstWin =
+    isCompetitive && pos === 1 && !otherPlaced.some((r) => r.result!.position! === 1);
+
+  return { careerBestLap, trackBestLap, firstPodium, firstWin };
+}
+
+/** A long-tail goal derived purely from the log. `earned` ones are trophies,
+ *  unearned ones are the next thing to chase (with live `progress`). */
+export interface Achievement {
+  id: string;
+  label: string;
+  icon: string;
+  earned: boolean;
+  /** progress toward earning, 0..1 (1 once earned) */
+  progress: number;
+  /** human hint, e.g. "12 / 50 runs" */
+  hint: string;
+}
+
+/** All achievements with live progress — deterministic, recomputed from the log
+ *  (nothing to persist). Order = roughly the path a new driver walks. */
+export function computeAchievements(state: LogbookState): Achievement[] {
+  const d = driverStats(state);
+  const s = seasonStats(state);
+  const count = (label: string, icon: string, value: number, target: number, noun: string): Achievement => ({
+    id: label.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    label,
+    icon,
+    earned: value >= target,
+    progress: Math.min(1, target ? value / target : 1),
+    hint: value >= target ? "Earned" : `${value} / ${target} ${noun}`,
+  });
+
+  return [
+    count("First Run", "🏁", d.runs, 1, "runs"),
+    count("Regular", "📋", d.runs, 10, "runs"),
+    count("Veteran", "📚", d.runs, 50, "runs"),
+    count("Centurion", "💯", d.runs, 100, "runs"),
+    count("Explorer", "🗺️", d.tracks, 5, "tracks"),
+    count("First Podium", "🏆", d.podiums, 1, "podiums"),
+    count("First Win", "🥇", d.wins, 1, "wins"),
+    count("Podium Habit", "🎖️", d.podiums, 10, "podiums"),
+    count("On a Roll", "🔥", s.better_streak, 3, "better runs in a row"),
+  ];
+}
+
+/** Progress toward the next round-number milestone above `value`. Returns null
+ *  once `value` clears the top step. Used for "X away from your next 50". */
+export function nextMilestone(
+  value: number,
+  steps: number[] = [1, 5, 10, 25, 50, 100, 250, 500, 1000],
+): { next: number; prev: number; progress: number } | null {
+  const next = steps.find((s) => s > value);
+  if (next === undefined) return null;
+  const below = steps.filter((s) => s <= value);
+  const prev = below.length ? below[below.length - 1] : 0;
+  return { next, prev, progress: (value - prev) / (next - prev) };
 }
 
 export function seasonStats(state: LogbookState): SeasonStats {

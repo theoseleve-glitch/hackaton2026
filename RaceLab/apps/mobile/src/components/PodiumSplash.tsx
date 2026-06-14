@@ -3,18 +3,27 @@ import { Animated, Easing, StyleSheet, Text, View } from "react-native";
 import { colors } from "../theme";
 
 /**
- * Podium celebration (driver feedback pass): a competitive run saved with
- * P1–P3 earns ~2 seconds of glory — trophy pops in, confetti falls, then the
- * splash dismisses itself. Pure Animated API, no dependency.
+ * Celebration splash (driver feedback pass): a competitive run saved with
+ * P1–P3 — or a new personal-best lap — earns ~2 seconds of glory: the icon
+ * pops in, confetti falls, then the splash dismisses itself. Pure Animated
+ * API, no dependency. Pass `position` for a podium, or `record` for any other
+ * milestone (PB lap, first win, …).
  */
 
-const MEDAL: Record<number, { icon: string; line: string; tone: string }> = {
-  1: { icon: "🏆", line: "WINNER — P1", tone: "#FFD700" },
+export interface Celebration {
+  icon: string;
+  line: string;
+  tone: string;
+  sub?: string;
+}
+
+const MEDAL: Record<number, Celebration> = {
+  1: { icon: "🏆", line: "WINNER — P1", tone: colors.gold },
   2: { icon: "🥈", line: "PODIUM — P2", tone: "#C7CCD1" },
   3: { icon: "🥉", line: "PODIUM — P3", tone: "#D08A4E" },
 };
 
-const CONFETTI_COLORS = [colors.accent, "#FFD700", "#3DDC84", "#9D6BFF", "#4DA6FF"];
+const CONFETTI_COLORS = [colors.accent, colors.gold, colors.good, "#9D6BFF", "#4DA6FF"];
 const CONFETTI_COUNT = 14;
 
 function ConfettiDot({ index, progress }: { index: number; progress: Animated.Value }) {
@@ -46,11 +55,19 @@ function ConfettiDot({ index, progress }: { index: number; progress: Animated.Va
   );
 }
 
-export function PodiumSplash({ position, onDone }: { position: number; onDone: () => void }) {
+export function PodiumSplash({
+  position,
+  record,
+  onDone,
+}: {
+  position?: number;
+  record?: Celebration;
+  onDone: () => void;
+}) {
   const scale = useRef(new Animated.Value(0)).current;
   const fade = useRef(new Animated.Value(0)).current;
   const confetti = useRef(new Animated.Value(0)).current;
-  const medal = MEDAL[position] ?? MEDAL[3];
+  const medal = record ?? MEDAL[position ?? 3] ?? MEDAL[3];
 
   useEffect(() => {
     Animated.parallel([
@@ -78,7 +95,7 @@ export function PodiumSplash({ position, onDone }: { position: number; onDone: (
       <Animated.View style={[styles.card, { transform: [{ scale }] }]}>
         <Text style={styles.icon}>{medal.icon}</Text>
         <Text style={[styles.line, { color: medal.tone }]}>{medal.line}</Text>
-        <Text style={styles.sub}>logged to your record</Text>
+        <Text style={styles.sub}>{medal.sub ?? "logged to your record"}</Text>
       </Animated.View>
     </Animated.View>
   );
@@ -91,7 +108,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(14, 15, 18, 0.82)",
+    backgroundColor: colors.scrim,
     alignItems: "center",
     justifyContent: "center",
     zIndex: 10,

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { PRICING } from "../accountstore";
 import type { ExperienceLevel } from "../accountstore";
-import { ChipRow, LabeledInput, Section, num } from "../components/forms";
+import { ChipRow, KeyboardAwareForm, LabeledInput, Section, num } from "../components/forms";
 import { colors, radius } from "../theme";
 
 /**
@@ -20,12 +20,19 @@ const LEVEL_LABELS: Record<ExperienceLevel, string> = {
 };
 
 interface Props {
-  onDone: (profile: { email?: string; age?: number; country?: string; level?: string }) => void;
+  onDone: (profile: {
+    email?: string;
+    age?: number;
+    country?: string;
+    level?: string;
+    handle?: string;
+  }) => void;
 }
 
 export function OnboardingScreen({ onDone }: Props) {
   const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState("");
+  const [handle, setHandle] = useState("");
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
   const [level, setLevel] = useState<ExperienceLevel | undefined>();
@@ -33,6 +40,7 @@ export function OnboardingScreen({ onDone }: Props) {
   const start = () => {
     onDone({
       email: email.trim() || undefined,
+      handle: handle.trim() || undefined,
       age: num(age),
       country: country.trim() || undefined,
       level,
@@ -41,7 +49,7 @@ export function OnboardingScreen({ onDone }: Props) {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={styles.content}>
+      <KeyboardAwareForm contentStyle={styles.content}>
         {step === 1 ? (
           <>
             <Text style={styles.kicker}>RaceLab</Text>
@@ -57,6 +65,9 @@ export function OnboardingScreen({ onDone }: Props) {
               value={email}
               onChangeText={setEmail}
               placeholder="you@example.com"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
             />
 
             <View style={styles.webCard}>
@@ -91,6 +102,14 @@ export function OnboardingScreen({ onDone }: Props) {
 
             <View style={styles.spacer} />
             <LabeledInput
+              label="Driver handle (optional)"
+              value={handle}
+              onChangeText={setHandle}
+              placeholder="@yourname — shown on shared setups"
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+            <LabeledInput
               label="Age"
               value={age}
               onChangeText={setAge}
@@ -122,7 +141,7 @@ export function OnboardingScreen({ onDone }: Props) {
             </Text>
           </>
         )}
-      </ScrollView>
+      </KeyboardAwareForm>
     </View>
   );
 }
@@ -160,7 +179,7 @@ const styles = StyleSheet.create({
   webCardText: { color: colors.text, fontSize: 14, lineHeight: 20 },
   btn: { borderRadius: radius.md, paddingVertical: 14, alignItems: "center", marginBottom: 10 },
   btnPrimary: { backgroundColor: colors.accent },
-  btnPrimaryText: { color: "#fff", fontWeight: "800", fontSize: 16 },
+  btnPrimaryText: { color: colors.onAccent, fontWeight: "800", fontSize: 16 },
   btnGhost: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border },
   btnGhostText: { color: colors.text, fontWeight: "600", fontSize: 15 },
   pricingLine: { color: colors.sub, fontSize: 12, textAlign: "center", marginTop: 2 },

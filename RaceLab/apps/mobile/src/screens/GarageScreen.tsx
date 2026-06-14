@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Overlay } from "../components/Overlay";
+import { ProgressCard } from "../components/ProgressCard";
 import { carSubtitle, sheetProfile, updateCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
-import { addCar } from "../../../../packages/garage/src";
+import { addCar, deleteCar } from "../../../../packages/garage/src";
 import { carStatus, seasonStats } from "../../../../packages/logbook/src";
 import type { CarStatus, LogbookState } from "../../../../packages/logbook/src";
 import { NewCarForm } from "../components/NewCarForm";
+import { sheetsKeyForCar } from "../garagestore";
 import { colors, radius } from "../theme";
 
 /**
@@ -44,6 +47,14 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
             Add your first car — its typology (nitro/EP, scale, brand) customizes the setup sheet
             labels, and its kit baseline comes preloaded when we have the chassis template.
           </Text>
+          <Pressable
+            style={[styles.btn, styles.btnPrimary, styles.emptyCta]}
+            onPress={() => setModal("new")}
+            accessibilityRole="button"
+            accessibilityLabel="Add your first car"
+          >
+            <Text style={styles.btnPrimaryText}>＋ Add your first car</Text>
+          </Pressable>
         </View>
       )}
 
@@ -69,6 +80,8 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
         </View>
       )}
 
+      <ProgressCard logbook={logbook} />
+
     </ScrollView>
       <Overlay visible={modal !== null}>
         <NewCarForm
@@ -82,13 +95,23 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
             }
             setModal(null);
           }}
+          onDelete={
+            modal !== null && modal !== "new"
+              ? () => {
+                  const id = modal.edit.id;
+                  updateGarage((prev) => deleteCar(prev, id));
+                  AsyncStorage.removeItem(sheetsKeyForCar(id)).catch(() => {});
+                  setModal(null);
+                }
+              : undefined
+          }
         />
       </Overlay>
     </View>
   );
 }
 
-function CarCard({
+const CarCard = React.memo(function CarCard({
   car,
   logbook,
   onEdit,
@@ -102,10 +125,15 @@ function CarCard({
   onLogRun: () => void;
 }) {
   // this car's runs only (legacy runs without car_id belong to the legacy car)
-  const carRuns = {
-    runs: logbook.runs.filter((r) => r.car_id === car.id || (!r.car_id && car.id === "car-legacy-mp11")),
-  };
-  const status = carStatus(carRuns);
+  const status = useMemo(
+    () =>
+      carStatus({
+        runs: logbook.runs.filter(
+          (r) => r.car_id === car.id || (!r.car_id && car.id === "car-legacy-mp11"),
+        ),
+      }),
+    [logbook.runs, car.id],
+  );
   const profile = sheetProfile(car);
 
   return (
@@ -141,7 +169,7 @@ function CarCard({
       </View>
     </View>
   );
-}
+});
 
 function MoodLine({ status }: { status: CarStatus }) {
   const txt = (() => {
@@ -240,9 +268,10 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", gap: 8, marginTop: 14 },
   btn: { borderRadius: radius.md, paddingVertical: 11, paddingHorizontal: 14 },
   btnPrimary: { backgroundColor: colors.accent },
-  btnPrimaryText: { color: "#fff", fontWeight: "700" },
+  btnPrimaryText: { color: colors.onAccent, fontWeight: "700" },
   btnGhost: { borderWidth: 1, borderColor: colors.accent },
   btnGhostText: { color: colors.accent, fontWeight: "700" },
+  emptyCta: { marginTop: 14, alignItems: "center" },
   emptyTitle: { color: colors.text, fontSize: 16, fontWeight: "800", marginBottom: 6 },
   odometer: { flexDirection: "row", justifyContent: "space-between" },
   stat: { alignItems: "center", flex: 1 },

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import type { CarEntity, PowerType } from "../../../../packages/garage/src";
 import { KB } from "../kb";
 import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
-import { colors, radius } from "../theme";
+import { colors } from "../theme";
 import { AutofillInput } from "./AutofillInput";
-import { ChipRow, LabeledInput, Section, num } from "./forms";
+import { ChipRow, FormActions, KeyboardAwareForm, LabeledInput, Section, num } from "./forms";
 
 /**
  * Car identity sheet (D26). The typology answers here drive the custom sheet
@@ -22,9 +22,11 @@ interface Props {
   initial?: CarEntity;
   onSave: (car: Omit<CarEntity, "id" | "created_at">) => void;
   onCancel: () => void;
+  onDelete?: () => void;
 }
 
-export function NewCarForm({ initial, onSave, onCancel }: Props) {
+export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [name, setName] = useState(initial?.name ?? "");
   const [brand, setBrand] = useState(initial?.brand ?? "");
   const [model, setModel] = useState(initial?.model ?? "");
@@ -71,7 +73,8 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
   };
 
   return (
-    <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
+    <View style={styles.root}>
+      <KeyboardAwareForm contentStyle={{ padding: 14, paddingBottom: 30 }}>
       <Text style={styles.title}>{initial ? "Edit car" : "New car"}</Text>
 
       <Section title="Identity">
@@ -108,15 +111,22 @@ export function NewCarForm({ initial, onSave, onCancel }: Props) {
         <LabeledInput label="Transponder # (Speedhive)" value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder="link once — laps import on app open" />
       </Section>
 
-      <View style={styles.actions}>
-        <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
-          <Text style={styles.btnGhostText}>Cancel</Text>
+      <FormActions onCancel={onCancel} onSave={save} saveLabel={initial ? "Save" : "Add to garage"} />
+
+      {initial && onDelete && (
+        <Pressable
+          style={styles.deleteBtn}
+          onPress={() => (confirmDelete ? onDelete() : setConfirmDelete(true))}
+          accessibilityRole="button"
+          accessibilityLabel={confirmDelete ? "Confirm delete car" : "Delete car"}
+        >
+          <Text style={styles.deleteText}>
+            {confirmDelete ? "Tap again to delete this car" : "Delete car"}
+          </Text>
         </Pressable>
-        <Pressable style={[styles.btn, styles.btnPrimary]} onPress={save}>
-          <Text style={styles.btnPrimaryText}>{initial ? "Save" : "Add to garage"}</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+      )}
+      </KeyboardAwareForm>
+    </View>
   );
 }
 
@@ -124,10 +134,6 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   title: { color: colors.text, fontSize: 20, fontWeight: "800", marginBottom: 14 },
   hint: { color: colors.sub, fontSize: 12, marginTop: 8, marginBottom: 4 },
-  actions: { flexDirection: "row", gap: 10, marginTop: 6 },
-  btn: { flex: 1, borderRadius: radius.md, paddingVertical: 12, alignItems: "center" },
-  btnPrimary: { backgroundColor: colors.accent },
-  btnPrimaryText: { color: "#fff", fontWeight: "800", fontSize: 15 },
-  btnGhost: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border },
-  btnGhostText: { color: colors.text, fontWeight: "600", fontSize: 15 },
+  deleteBtn: { marginTop: 18, alignItems: "center", paddingVertical: 12 },
+  deleteText: { color: colors.warn, fontSize: 14, fontWeight: "700" },
 });
