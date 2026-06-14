@@ -45,3 +45,52 @@ export interface TrackCandidacy {
 export interface CandidacyData {
   items: TrackCandidacy[];
 }
+
+/**
+ * Driver identity — the public card a handle carries across the social layer:
+ * who they are (handle/display_name/avatar), where they run (country/home_track/
+ * classes), and a rolled-up career line. All but `handle` is optional so a fresh
+ * profile is just a name; the backend fills the rest as runs accrue.
+ */
+export interface DriverProfile {
+  handle: string;
+  display_name?: string;
+  avatar_uri?: string;
+  level?: "beginner" | "club" | "regional" | "pro";
+  country?: string;
+  home_track?: string;
+  classes?: string[];
+  career?: {
+    runs: number;
+    races: number;
+    podiums: number;
+    wins: number;
+    best_lap_s?: number;
+    best_lap_track?: string;
+  };
+}
+
+/** A feed entry is either a forkable shared setup or a posted race result. */
+export type FeedItemKind = "shared_setup" | "result";
+
+export interface FeedItem {
+  id: string;
+  kind: FeedItemKind;
+  created_at: string;
+  author: { handle: string; avatar_uri?: string; level?: string };
+  /** present when kind==="shared_setup" (forkable via the share module) */
+  payload?: SharedPayload;
+  result?: {
+    track_name: string;
+    position?: number;
+    entrants?: number;
+    best_lap_s?: number;
+    car?: string;
+  };
+  text?: string;
+}
+
+/** The set of handles the local user follows — order is the only state. */
+export interface FollowData {
+  handles: string[];
+}

@@ -24,6 +24,12 @@ export interface Account {
   trial_started_at?: string;
   onboarded: boolean;
   prefs?: Prefs;
+  // social identity (D32+): the @handle flows into shared-setup provenance
+  handle?: string;
+  display_name?: string;
+  avatar_uri?: string;
+  home_track?: string;
+  classes?: string[];
 }
 
 export const PRICING = { monthly_eur: 9.99, annual_eur: 99.99, trial_days: 15 } as const;
@@ -77,6 +83,11 @@ function parseAccount(raw: string): { ok: true; account: Account } | { ok: false
       level: asLevel(o.level),
       trial_started_at: typeof o.trial_started_at === "string" ? o.trial_started_at : undefined,
       prefs: asPrefs(o.prefs),
+      handle: typeof o.handle === "string" ? o.handle : undefined,
+      display_name: typeof o.display_name === "string" ? o.display_name : undefined,
+      avatar_uri: typeof o.avatar_uri === "string" ? o.avatar_uri : undefined,
+      home_track: typeof o.home_track === "string" ? o.home_track : undefined,
+      classes: Array.isArray(o.classes) ? o.classes.filter((c): c is string => typeof c === "string") : undefined,
     },
   };
 }

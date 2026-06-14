@@ -16,6 +16,15 @@ import {
   deserializeCandidacy,
   CANDIDACY_FORMAT_VERSION,
 } from "./candidacy";
+import {
+  initFollows,
+  follow,
+  unfollow,
+  isFollowing,
+  serializeFollows,
+  deserializeFollows,
+  FOLLOWS_FORMAT_VERSION,
+} from "./follow";
 import { forkProvenanceLine } from "./lineage";
 
 let failures = 0;
@@ -216,6 +225,63 @@ check("deserializeCandidacy: format ok but invalid state value → corrupt", (()
   const emptyHandle = buildSetupPayload(inputFixture({ author: { handle: "" }, context: undefined }), T0);
   check("forkProvenanceLine: empty handle falls back to anonymous", forkProvenanceLine(emptyHandle) === "Forked setup");
 }
+
+// — follow: init + follow/unfollow no-op rules + isFollowing
+{
+  let f = initFollows();
+  check("initFollows is empty", f.handles.length === 0);
+  check("isFollowing on empty → false", isFollowing(f, "ana") === false);
+
+  const before = f;
+  f = follow(f, "ana");
+  check("follow adds an absent handle (new ref)", f !== before && f.handles.length === 1 && f.handles[0] === "ana");
+  check("isFollowing reflects a followed handle", isFollowing(f, "ana") === true);
+
+  const afterFollow = f;
+  f = follow(f, "ana");
+  check("follow on an already-followed handle is a no-op (same reference)", f === afterFollow);
+
+  f = follow(f, "theo");
+  check("follow appends a second handle, order preserved", f.handles.length === 2 && f.handles[0] === "ana" && f.handles[1] === "theo");
+
+  const beforeUnfollow = f;
+  f = unfollow(f, "ana");
+  check("unfollow removes a present handle (new ref)", f !== beforeUnfollow && f.handles.length === 1 && f.handles[0] === "theo");
+  check("isFollowing false after unfollow", isFollowing(f, "ana") === false);
+
+  const afterUnfollow = f;
+  f = unfollow(f, "ana");
+  check("unfollow on an absent handle is a no-op (same reference)", f === afterUnfollow);
+
+  const empty = initFollows();
+  check("unfollow on empty state is a no-op (same reference)", unfollow(empty, "ghost") === empty);
+}
+
+// — follow persistence: round-trip + corruption + unknown format
+{
+  let f = initFollows();
+  f = follow(f, "ana");
+  f = follow(f, "theo");
+  const raw = serializeFollows(f);
+  check("serializeFollows wraps in a {format,state} envelope", raw.startsWith(`{"format":${FOLLOWS_FORMAT_VERSION}`));
+  const r = deserializeFollows(raw);
+  check("follows serialize/deserialize round-trips", r.ok && JSON.stringify(r.state) === JSON.stringify(f));
+}
+check("deserializeFollows: bad JSON → bad_json", (() => { const r = deserializeFollows("{nope"); return !r.ok && r.reason === "bad_json"; })());
+check("deserializeFollows: no envelope shape → corrupt", (() => { const r = deserializeFollows("42"); return !r.ok && r.reason === "corrupt"; })());
+check("deserializeFollows: null → corrupt", (() => { const r = deserializeFollows("null"); return !r.ok && r.reason === "corrupt"; })());
+check("deserializeFollows: newer format preserved as unknown_format (not corrupt)", (() => {
+  const r = deserializeFollows(JSON.stringify({ format: 99, state: { handles: [] } }));
+  return !r.ok && r.reason === "unknown_format";
+})());
+check("deserializeFollows: format ok but handles not an array → corrupt", (() => {
+  const r = deserializeFollows(JSON.stringify({ format: 1, state: { handles: "ana" } }));
+  return !r.ok && r.reason === "corrupt";
+})());
+check("deserializeFollows: format ok but non-string handle → corrupt", (() => {
+  const r = deserializeFollows(JSON.stringify({ format: 1, state: { handles: ["ana", 7] } }));
+  return !r.ok && r.reason === "corrupt";
+})());
 
 if (failures > 0) {
   console.error(`\n${failures} social test(s) failed`);

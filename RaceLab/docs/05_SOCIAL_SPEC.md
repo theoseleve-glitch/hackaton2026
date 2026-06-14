@@ -25,6 +25,8 @@
 - Props with RC-native reactions: **Dialed** 🔧 (clean/fast), **Send it** 🚀, **Tough break** 💥 (DNF empathy — half of nitro racing is carnage and commiseration is the glue).
 - Moderation (required by Apple UGC guideline 1.2 the moment comments ship): content filtering + report button + **block user** (hides their content, prevents interaction) + author-deletes-on-own-setup + admin tools + published contact info. This burden is exactly why comments are V1.1, not V1.0 (D10).
 
+> **V1.1 offline mock (the app ships this now — D32 + design doc `docs/superpowers/specs/2026-06-14-driver-profiles-social-home-design.md`).** The §1.3/§1.4 multi-user surfaces are demoable without a backend: **your own profile is real and local** (identity + palmarès + garage on the account) and **follow state is local** (`FollowData`), while the **feed, discover and others' profiles are a deterministic mock** isolated in `apps/mobile/src/socialnet.ts` behind a single `SOCIAL_MOCK = true` flag (mirroring `speedhive.ts`). The mock's `fetchFeed` / `fetchDiscover` / `fetchProfile` call sites and the `packages/social` shapes (`DriverProfile`, `FeedItem`, `FollowData`) **swap 1:1 to the hosted endpoints** (`GET /me/profile` + `PUT /me/profile`, `GET /profiles/{handle}`, `POST`/`DELETE /follow/{handle}`, `GET /feed`, `GET /discover` — see `BACKEND.md` P3) when the backend lands, one flag flipped. Props (🔧🚀💥) and comments stay design-only until their Apple-UGC moderation gate ships. This closes a D32 gap: the **profile `handle` now flows into shared-setup provenance** — every share/import carries `author: { handle }`, so a forked sheet attributes back to the driver (`SharedPayload.author.handle`, previously unset).
+
 ## 2. Why this beats So Dialed's sharing
 
 | So Dialed | RaceLab |

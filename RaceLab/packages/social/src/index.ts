@@ -21,5 +21,24 @@ export {
   CANDIDACY_FORMAT_VERSION,
 } from "./candidacy";
 export type { DeserializeCandidacyResult } from "./candidacy";
+export {
+  initFollows,
+  follow,
+  unfollow,
+  isFollowing,
+  serializeFollows,
+  deserializeFollows,
+  FOLLOWS_FORMAT_VERSION,
+} from "./follow";
+export type { DeserializeFollowsResult } from "./follow";
 export { forkProvenanceLine } from "./lineage";
-export type { CandidacyData, CandidacyState, SharedPayload, TrackCandidacy } from "./types";
+export type {
+  CandidacyData,
+  CandidacyState,
+  DriverProfile,
+  FeedItem,
+  FeedItemKind,
+  FollowData,
+  SharedPayload,
+  TrackCandidacy,
+} from "./types";
