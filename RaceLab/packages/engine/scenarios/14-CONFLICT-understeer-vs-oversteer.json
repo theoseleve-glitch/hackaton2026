@@ -1,0 +1,11 @@
+{
+  "name": "CONFLICT: understeer mid-corner AND oversteer on-power pull opposite ways → ONE primary, distinct levers, never a contradictory pair",
+  "expect": { "kind": "recommendation", "no_contradictory_pair": true, "settings_any_of": ["rear_diff_oil", "rear_shock_oil", "front_camber", "front_sway_bar", "rear_sway_bar", "rear_toe", "rear_spring"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_diff_oil": 8000, "center_diff_oil": 5000, "rear_diff_oil": 3000, "front_sway_bar": 2.3, "rear_sway_bar": 2.8, "rear_toe": 3, "front_camber": -1, "rear_camber": -2, "front_shock_oil": 450, "rear_shock_oil": 400 },
+    "track": { "track_id": "trk-conflict", "name": "Mixed Club Track", "surface": "clay", "grip": "medium", "conditions": [] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }, { "symptom": "oversteer", "phase": "on_power" }], "text": "pushes in the middle but then snaps loose the instant I get on the throttle" },
+    "mode": "practice"
+  }
+}

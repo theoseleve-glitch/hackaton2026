@@ -1,0 +1,214 @@
+/* tune.css — the SIGNATURE section: a pinned two-column stage (WebGL car) +
+   a setup-sheet rail. Full-bleed; the section's own padding is removed so the
+   pinned wrapper owns a clean 100vh. Tokens only; multi-layer shadows. */
+
+#tune {
+  padding: 0;
+  background: var(--bg);
+  /* a faint pit-lane wash so the live canvas has depth behind it */
+  background-image: radial-gradient(
+      120% 90% at 18% 30%,
+      rgba(255, 42, 42, 0.07) 0%,
+      rgba(255, 42, 42, 0) 55%
+    ),
+    radial-gradient(100% 80% at 90% 90%, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0) 60%);
+}
+
+.tune__pin {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-inline: var(--gutter);
+  overflow: hidden;
+}
+
+/* --- Stage: the WebGL canvas (or static SVG) lives here, full-height. --- */
+.tune__stage {
+  position: relative;
+  align-self: stretch;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent); /* drives the static SVG stroke via currentColor */
+}
+
+.tune__stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* contact-glow under the car so it reads grounded against the dark page */
+.tune__stage::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  width: 60%;
+  height: 28%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 42, 42, 0.14) 0%,
+    rgba(255, 42, 42, 0) 70%
+  );
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* static CSS-art fallback (no WebGL / reduced motion / reduced data) */
+.tune__static {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.tune__stage--static .tune__static {
+  display: flex;
+}
+.tune__stage--static {
+  border-radius: var(--radius);
+  background: linear-gradient(150deg, var(--surface) 0%, var(--bg-soft) 60%, var(--bg-deep) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 237, 238, 0.04),
+    inset 0 0 80px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 18px 50px rgba(0, 0, 0, 0.35);
+}
+.tune__chassis {
+  width: min(78%, 520px);
+  height: auto;
+  color: var(--accent);
+  filter: drop-shadow(0 0 18px rgba(255, 42, 42, 0.25));
+}
+
+/* --- Rail: the live setup sheet. --- */
+.tune__rail {
+  position: relative;
+  z-index: 1;
+  max-width: 30rem;
+  transform-origin: top right;
+  will-change: transform;
+}
+
+.tune__heading {
+  font-size: var(--fs-h2);
+  margin: 0.25rem 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.tune__steps {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.4vw, 0.85rem);
+}
+
+/* a single setup-sheet line: dim by default, lit when its scroll-segment hits */
+.tune__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "index part value"
+    "index note note";
+  align-items: baseline;
+  column-gap: 0.9rem;
+  row-gap: 0.15rem;
+  padding: 0.85rem 1.1rem 0.85rem 1.15rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  background: rgba(26, 28, 33, 0.35);
+  transition:
+    background-color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
+}
+
+.tune__index {
+  grid-area: index;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--sub);
+  opacity: 0.7;
+}
+.tune__part {
+  grid-area: part;
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.tune__value {
+  grid-area: value;
+  justify-self: end;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem);
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.tune__note {
+  grid-area: note;
+  font-size: 0.92rem;
+  color: var(--sub);
+  line-height: 1.4;
+}
+
+/* active step: brighter surface, accent left rail, lifted with layered shadow */
+.tune__step.is-active {
+  background: var(--surface);
+  border-color: var(--border);
+  border-left-color: var(--accent);
+  transform: translateX(6px);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 237, 238, 0.05),
+    -1px 0 0 rgba(255, 42, 42, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 10px 30px rgba(0, 0, 0, 0.32),
+    0 2px 18px rgba(255, 42, 42, 0.12);
+}
+.tune__step.is-active .tune__index {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.tune__caption {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 32ch;
+  color: var(--sub);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* --- Mobile: stack the stage above the rail; no transforms fight the layout. --- */
+@media (max-width: 768px) {
+  .tune__pin {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48vh auto;
+    align-content: center;
+    gap: clamp(1.25rem, 5vw, 2rem);
+    padding-block: clamp(4rem, 12vh, 6rem);
+    min-height: 100vh;
+  }
+  .tune__stage {
+    min-height: 0;
+    height: 48vh;
+  }
+  .tune__rail {
+    max-width: none;
+    transform: none !important; /* never skew the rail on small screens */
+  }
+  .tune__step.is-active {
+    transform: none;
+  }
+  .tune__value {
+    justify-self: end;
+  }
+}

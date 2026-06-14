@@ -1,0 +1,17 @@
+{
+  "name": "racelab-account",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab Tier A account client: 15-day trial orchestration, tamper-guarded clock, offline-first entitlements (advisor free forever, D18/D20), external-web subscribe URL (no IAP), server validation cache, account deletion with tombstone retry. Zero node built-ins, zero runtime deps — every capability (storage, fetch, clock, tokens) is injected.",
+  "scripts": {
+    "test": "tsx src/test-account.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

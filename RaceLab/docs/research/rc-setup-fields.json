@@ -1,0 +1,1754 @@
+{
+  "$comment": "RaceLab setup-sheet field schemas per category-group. Grounded in: XRAY online setup sheets (setup.teamxray.com, XB8/XB8E/T4), Kyosho MP10 blank sheets (RSRC/PetitRC), TLR 22 editable setup sheet, Associated RC8B4/B7, Losi 5IVE-T manual setup sheet, SWORKz S35-GT2 manual, rcformula1.com.au F1 setup guide, PetitRC 1/12 database. Ranges are deliberately generous. Units: cst=centistokes, T=teeth, deg=degrees.",
+  "category_groups": [
+    {
+      "id": "1_8_offroad_nitro",
+      "applies_to": ["1/8_offroad_nitro", "1/8_buggy_nitro"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 15, "max": 40, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 15, "max": 40, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / drop front (gauge)", "type": "number", "unit": "mm", "min": 50, "max": 140, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / drop rear (gauge)", "type": "number", "unit": "mm", "min": 50, "max": 140, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "kickup", "label": "Kick-up", "type": "number", "unit": "deg", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "track_width_front", "label": "Track width shims front", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "track_width_rear", "label": "Track width shims rear", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center / link position front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / link position rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / model)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] },
+            { "id": "wing_wickerbill", "label": "Wickerbill / gurney", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "spur_gear", "label": "Spur / crown gear", "type": "number", "unit": "T", "min": 36, "max": 54, "step": 1 },
+            { "id": "driveshaft_type", "label": "Driveshafts", "type": "choice", "choices": ["dogbone", "cvd"] },
+            { "id": "brake_bias_front", "label": "Brake bias front", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 5 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread / profile", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Engine",
+          "fields": [
+            { "id": "engine", "label": "Engine (brand / model)", "type": "text" },
+            { "id": "carb_venturi", "label": "Carb venturi / restrictor", "type": "number", "unit": "mm", "min": 4, "max": 10, "step": 0.5 },
+            { "id": "needle_high", "label": "High-speed needle (turns)", "type": "text" },
+            { "id": "needle_low", "label": "Low-speed needle (turns)", "type": "text" },
+            { "id": "glow_plug", "label": "Glow plug", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust pipe", "type": "text" },
+            { "id": "manifold", "label": "Manifold", "type": "text" },
+            { "id": "fuel_nitro_pct", "label": "Fuel nitro %", "type": "number", "unit": "%", "min": 10, "max": 40, "step": 1 },
+            { "id": "fuel_brand", "label": "Fuel brand", "type": "text" },
+            { "id": "fuel_tank_capacity", "label": "Fuel tank capacity", "type": "number", "unit": "cc", "min": 50, "max": 200, "step": 5 },
+            { "id": "clutch_bell_teeth", "label": "Clutch bell", "type": "number", "unit": "T", "min": 11, "max": 18, "step": 1 },
+            { "id": "clutch_spring", "label": "Clutch springs", "type": "text" },
+            { "id": "clutch_shoes", "label": "Clutch shoes (material / count)", "type": "text" },
+            { "id": "flywheel", "label": "Flywheel", "type": "text" },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" },
+            { "id": "throttle_servo", "label": "Throttle / brake servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_8_offroad_electric",
+      "applies_to": ["1/8_offroad_electric", "1/8_ebuggy"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 15, "max": 40, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 15, "max": 40, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / drop front (gauge)", "type": "number", "unit": "mm", "min": 50, "max": 140, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / drop rear (gauge)", "type": "number", "unit": "mm", "min": 50, "max": 140, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "kickup", "label": "Kick-up", "type": "number", "unit": "deg", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "track_width_front", "label": "Track width shims front", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "track_width_rear", "label": "Track width shims rear", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center / link position front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / link position rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / model)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] },
+            { "id": "wing_wickerbill", "label": "Wickerbill / gurney", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "driveshaft_type", "label": "Driveshafts", "type": "choice", "choices": ["dogbone", "cvd"] }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread / profile", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV", "type": "number", "unit": "kv", "min": 1000, "max": 5000, "step": 10 },
+            { "id": "motor_timing", "label": "Motor timing", "type": "number", "unit": "deg", "min": 0, "max": 60, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_profile", "label": "ESC profile / boost-turbo", "type": "text" },
+            { "id": "drag_brake", "label": "Drag brake", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 1 },
+            { "id": "battery_brand", "label": "Battery brand / model", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells", "type": "choice", "choices": ["2S", "3S", "4S", "6S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 15000, "step": 100 },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 10, "max": 30, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 36, "max": 58, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 5, "max": 25, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_8_truggy",
+      "applies_to": ["1/8_truggy_nitro", "1/8_truggy_electric"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 15, "max": 50, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 15, "max": 50, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / drop front (gauge)", "type": "number", "unit": "mm", "min": 60, "max": 170, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / drop rear (gauge)", "type": "number", "unit": "mm", "min": 60, "max": 170, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "kickup", "label": "Kick-up", "type": "number", "unit": "deg", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "track_width_front", "label": "Track width shims front", "type": "number", "unit": "mm", "min": 0, "max": 8, "step": 0.5 },
+            { "id": "track_width_rear", "label": "Track width shims rear", "type": "number", "unit": "mm", "min": 0, "max": 8, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center / link position front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / link position rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.5, "max": 4.5, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.5, "max": 4.5, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / model)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] },
+            { "id": "wing_wickerbill", "label": "Wickerbill / gurney", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "spur_gear", "label": "Spur / crown gear", "type": "number", "unit": "T", "min": 36, "max": 54, "step": 1 },
+            { "id": "driveshaft_type", "label": "Driveshafts", "type": "choice", "choices": ["dogbone", "cvd"] },
+            { "id": "brake_bias_front", "label": "Brake bias front (nitro)", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 5 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread / profile", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Power (nitro or electric)",
+          "fields": [
+            { "id": "power_type", "label": "Power type", "type": "choice", "choices": ["nitro", "electric"] },
+            { "id": "engine", "label": "Engine (nitro)", "type": "text" },
+            { "id": "carb_venturi", "label": "Carb venturi (nitro)", "type": "number", "unit": "mm", "min": 4, "max": 10, "step": 0.5 },
+            { "id": "needle_high", "label": "High-speed needle (nitro)", "type": "text" },
+            { "id": "needle_low", "label": "Low-speed needle (nitro)", "type": "text" },
+            { "id": "glow_plug", "label": "Glow plug (nitro)", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust pipe (nitro)", "type": "text" },
+            { "id": "manifold", "label": "Manifold (nitro)", "type": "text" },
+            { "id": "fuel_nitro_pct", "label": "Fuel nitro % (nitro)", "type": "number", "unit": "%", "min": 10, "max": 40, "step": 1 },
+            { "id": "fuel_tank_capacity", "label": "Fuel tank capacity (nitro)", "type": "number", "unit": "cc", "min": 50, "max": 200, "step": 5 },
+            { "id": "clutch_bell_teeth", "label": "Clutch bell (nitro)", "type": "number", "unit": "T", "min": 11, "max": 18, "step": 1 },
+            { "id": "clutch_spring", "label": "Clutch springs (nitro)", "type": "text" },
+            { "id": "clutch_shoes", "label": "Clutch shoes (nitro)", "type": "text" },
+            { "id": "motor", "label": "Motor (electric)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV (electric)", "type": "number", "unit": "kv", "min": 800, "max": 5000, "step": 10 },
+            { "id": "esc", "label": "ESC (electric)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells (electric)", "type": "choice", "choices": ["2S", "3S", "4S", "6S"] },
+            { "id": "battery_capacity", "label": "Battery capacity (electric)", "type": "number", "unit": "mAh", "min": 1000, "max": 15000, "step": 100 },
+            { "id": "pinion_teeth", "label": "Pinion (electric)", "type": "number", "unit": "T", "min": 10, "max": 30, "step": 1 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_8_gt",
+      "applies_to": ["1/8_gt_nitro", "1/8_gt_electric", "rally_game"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 3, "max": 15, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 3, "max": 15, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop front (downtravel)", "type": "number", "unit": "mm", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop rear (downtravel)", "type": "number", "unit": "mm", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 20, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 4, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "track_width_front", "label": "Track width shims front", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "track_width_rear", "label": "Track width shims rear", "type": "number", "unit": "mm", "min": 0, "max": 6, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.5, "max": 4.0, "step": 0.1 },
+            { "id": "wing", "label": "Rear wing (type)", "type": "text" },
+            { "id": "wing_angle", "label": "Wing angle", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "spur_gear", "label": "Spur / crown gear", "type": "number", "unit": "T", "min": 36, "max": 56, "step": 1 },
+            { "id": "brake_bias_front", "label": "Brake bias front (nitro)", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 5 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread (slick / treaded)", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Power (nitro or electric)",
+          "fields": [
+            { "id": "power_type", "label": "Power type", "type": "choice", "choices": ["nitro", "electric"] },
+            { "id": "engine", "label": "Engine (nitro)", "type": "text" },
+            { "id": "carb_venturi", "label": "Carb venturi (nitro)", "type": "number", "unit": "mm", "min": 4, "max": 10, "step": 0.5 },
+            { "id": "needle_high", "label": "High-speed needle (nitro)", "type": "text" },
+            { "id": "needle_low", "label": "Low-speed needle (nitro)", "type": "text" },
+            { "id": "glow_plug", "label": "Glow plug (nitro)", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust pipe (nitro)", "type": "text" },
+            { "id": "fuel_nitro_pct", "label": "Fuel nitro % (nitro)", "type": "number", "unit": "%", "min": 10, "max": 40, "step": 1 },
+            { "id": "fuel_tank_capacity", "label": "Fuel tank capacity (nitro)", "type": "number", "unit": "cc", "min": 50, "max": 200, "step": 5 },
+            { "id": "clutch_bell_teeth", "label": "Clutch bell (nitro)", "type": "number", "unit": "T", "min": 11, "max": 20, "step": 1 },
+            { "id": "motor", "label": "Motor (electric)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV (electric)", "type": "number", "unit": "kv", "min": 800, "max": 5000, "step": 10 },
+            { "id": "esc", "label": "ESC (electric)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells (electric)", "type": "choice", "choices": ["2S", "3S", "4S", "6S"] },
+            { "id": "battery_capacity", "label": "Battery capacity (electric)", "type": "number", "unit": "mAh", "min": 1000, "max": 15000, "step": 100 },
+            { "id": "pinion_teeth", "label": "Pinion (electric)", "type": "number", "unit": "T", "min": 10, "max": 35, "step": 1 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body (GT shell)", "type": "text" },
+            { "id": "body_height", "label": "Body mounting height", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_10_offroad_2wd",
+      "applies_to": ["1/10_buggy_2wd"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differential",
+          "fields": [
+            { "id": "diff_type", "label": "Diff type", "type": "choice", "choices": ["gear", "ball"] },
+            { "id": "diff_oil", "label": "Gear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "ball_diff_setting", "label": "Ball diff setting", "type": "text" }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 40, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 40, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "roll_center_front", "label": "Roll center / camber link front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / camber link rear", "type": "text" },
+            { "id": "bump_steer", "label": "Bump steer shims", "type": "text" },
+            { "id": "battery_position", "label": "Battery position", "type": "choice", "choices": ["front", "middle", "rear"] }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.6, "max": 2.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.6, "max": 2.0, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / size)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "transmission", "label": "Transmission", "type": "choice", "choices": ["3_gear_laydown", "3_gear_layback", "4_gear", "direct"] },
+            { "id": "slipper_setting", "label": "Slipper setting", "type": "text" },
+            { "id": "diff_height_shim", "label": "Diff height insert", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.25 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_model", "label": "Front tire model / tread", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_front_insert", "label": "Front insert", "type": "text" },
+            { "id": "wheel_front", "label": "Front wheel", "type": "text" },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_model", "label": "Rear tire model / tread", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_rear_insert", "label": "Rear insert", "type": "text" },
+            { "id": "wheel_rear", "label": "Rear wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "motor_timing", "label": "Motor timing", "type": "number", "unit": "deg", "min": 0, "max": 60, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_profile", "label": "ESC profile / boost-turbo", "type": "text" },
+            { "id": "battery_type", "label": "Battery format", "type": "choice", "choices": ["shorty", "stick", "saddle"] },
+            { "id": "battery_brand", "label": "Battery brand / model", "type": "text" },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["48P", "64P", "Mod1", "32P"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 60, "max": 110, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 4, "max": 15, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_10_offroad_4wd",
+      "applies_to": ["1/10_buggy_4wd"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_type", "label": "Front diff type", "type": "choice", "choices": ["gear", "ball", "spool"] },
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "center_type", "label": "Center", "type": "choice", "choices": ["slipper", "center_diff", "direct"] },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 40, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 40, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 35, "step": 0.5 },
+            { "id": "kickup", "label": "Kick-up", "type": "number", "unit": "deg", "min": 0, "max": 10, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "ackermann", "label": "Ackermann position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "roll_center_front", "label": "Roll center / camber link front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / camber link rear", "type": "text" },
+            { "id": "bump_steer", "label": "Bump steer shims", "type": "text" },
+            { "id": "battery_position", "label": "Battery position", "type": "choice", "choices": ["front", "middle", "rear"] }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.6, "max": 2.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.6, "max": 2.0, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / size)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "center_drive", "label": "Center drive", "type": "choice", "choices": ["shaft", "belt"] },
+            { "id": "slipper_setting", "label": "Slipper setting", "type": "text" }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_model", "label": "Front tire model / tread", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_front_insert", "label": "Front insert", "type": "text" },
+            { "id": "wheel_front", "label": "Front wheel", "type": "text" },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_model", "label": "Rear tire model / tread", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_rear_insert", "label": "Rear insert", "type": "text" },
+            { "id": "wheel_rear", "label": "Rear wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "motor_timing", "label": "Motor timing", "type": "number", "unit": "deg", "min": 0, "max": 60, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_profile", "label": "ESC profile / boost-turbo", "type": "text" },
+            { "id": "battery_type", "label": "Battery format", "type": "choice", "choices": ["shorty", "stick", "saddle"] },
+            { "id": "battery_brand", "label": "Battery brand / model", "type": "text" },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["48P", "64P", "Mod1", "32P"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 60, "max": 110, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 4, "max": 15, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "short_course",
+      "applies_to": ["short_course_2wd", "short_course_4wd"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil (4wd)", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil (4wd)", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_type", "label": "Rear diff type", "type": "choice", "choices": ["gear", "ball"] }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 15, "max": 50, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 15, "max": 50, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 50, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 50, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 35, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "roll_center_front", "label": "Roll center / camber link front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / camber link rear", "type": "text" },
+            { "id": "battery_position", "label": "Battery position", "type": "choice", "choices": ["front", "middle", "rear"] }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.8, "max": 2.5, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.8, "max": 2.5, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "transmission", "label": "Transmission (2wd)", "type": "choice", "choices": ["3_gear", "4_gear", "mid_motor", "direct"] },
+            { "id": "slipper_setting", "label": "Slipper setting", "type": "text" },
+            { "id": "center_drive", "label": "Center drive (4wd)", "type": "choice", "choices": ["shaft", "belt"] }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_model", "label": "Front tire model / tread", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_front_insert", "label": "Front insert", "type": "text" },
+            { "id": "wheel_front", "label": "Front wheel (offset)", "type": "text" },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_model", "label": "Rear tire model / tread", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_rear_insert", "label": "Rear insert", "type": "text" },
+            { "id": "wheel_rear", "label": "Rear wheel (offset)", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_profile", "label": "ESC profile / boost-turbo", "type": "text" },
+            { "id": "battery_type", "label": "Battery format", "type": "choice", "choices": ["shorty", "stick", "saddle"] },
+            { "id": "battery_cells", "label": "Battery cells", "type": "choice", "choices": ["2S", "3S", "4S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["48P", "Mod1", "32P"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 12, "max": 40, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 50, "max": 100, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 4, "max": 20, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stadium_truck",
+      "applies_to": ["1/10_stadium_truck"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differential",
+          "fields": [
+            { "id": "diff_type", "label": "Diff type", "type": "choice", "choices": ["gear", "ball"] },
+            { "id": "diff_oil", "label": "Gear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "ball_diff_setting", "label": "Ball diff setting", "type": "text" }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm hole)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm hole)", "type": "text" },
+            { "id": "shock_limiter_front", "label": "Internal limiter front", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_limiter_rear", "label": "Internal limiter rear", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.5 },
+            { "id": "shock_build", "label": "Shock build", "type": "choice", "choices": ["bladder", "emulsion"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 12, "max": 45, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 12, "max": 45, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 45, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 45, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 10, "max": 35, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "wheelbase", "label": "Wheelbase (hub shims)", "type": "choice", "choices": ["short", "neutral", "long"] },
+            { "id": "roll_center_front", "label": "Roll center / camber link front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / camber link rear", "type": "text" },
+            { "id": "battery_position", "label": "Battery position", "type": "choice", "choices": ["front", "middle", "rear"] }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.6, "max": 2.2, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.6, "max": 2.2, "step": 0.1 },
+            { "id": "wing", "label": "Wing (brand / size)", "type": "text" },
+            { "id": "wing_position", "label": "Wing position", "type": "choice", "choices": ["low", "middle", "high"] }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "transmission", "label": "Transmission", "type": "choice", "choices": ["3_gear", "4_gear", "mid_motor"] },
+            { "id": "slipper_setting", "label": "Slipper setting", "type": "text" },
+            { "id": "diff_height_shim", "label": "Diff height insert", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.25 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_model", "label": "Front tire model / tread", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_front_insert", "label": "Front insert", "type": "text" },
+            { "id": "wheel_front", "label": "Front wheel", "type": "text" },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_model", "label": "Rear tire model / tread", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_rear_insert", "label": "Rear insert", "type": "text" },
+            { "id": "wheel_rear", "label": "Rear wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_profile", "label": "ESC profile / boost-turbo", "type": "text" },
+            { "id": "battery_type", "label": "Battery format", "type": "choice", "choices": ["shorty", "stick", "saddle"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["48P", "64P", "Mod1"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 60, "max": 110, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 4, "max": 15, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_10_touring_electric",
+      "applies_to": ["1/10_touring_modified", "1/10_touring_stock", "1/10_touring_clubman"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_type", "label": "Front", "type": "choice", "choices": ["spool", "gear_diff", "one_way", "ball_diff"] },
+            { "id": "diff_front_oil", "label": "Front gear diff oil (if diff)", "type": "number", "unit": "cst", "min": 200, "max": 500000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear gear diff oil", "type": "number", "unit": "cst", "min": 200, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front (holes x diameter)", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear (holes x diameter)", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm)", "type": "text" },
+            { "id": "shock_length_front", "label": "Shock length front", "type": "number", "unit": "mm", "min": 40, "max": 75, "step": 0.5 },
+            { "id": "shock_length_rear", "label": "Shock length rear", "type": "number", "unit": "mm", "min": 40, "max": 75, "step": 0.5 }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 3, "max": 10, "step": 0.1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 3, "max": 10, "step": 0.1 },
+            { "id": "droop_front", "label": "Droop front (downstop)", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.1 },
+            { "id": "droop_rear", "label": "Droop rear (downstop)", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.1 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.1 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.1 },
+            { "id": "toe_rear", "label": "Toe rear (in)", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.1 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "anti_dive", "label": "Anti-dive", "type": "number", "unit": "deg", "min": -2, "max": 4, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -2, "max": 4, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center shims front (inner/outer)", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center shims rear (inner/outer)", "type": "text" },
+            { "id": "ackermann", "label": "Ackermann shims / position", "type": "text" },
+            { "id": "wheelbase", "label": "Wheelbase shims", "type": "text" },
+            { "id": "track_width_front", "label": "Track width front (shims)", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.1 },
+            { "id": "track_width_rear", "label": "Track width rear (shims)", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.1 },
+            { "id": "bump_steer", "label": "Bump steer shims", "type": "text" },
+            { "id": "tweak", "label": "Tweak check", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.8, "max": 2.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.8, "max": 2.0, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "drive_type", "label": "Drive type", "type": "choice", "choices": ["belt", "shaft"] },
+            { "id": "belt_tension_front", "label": "Belt tension front", "type": "text" },
+            { "id": "belt_tension_rear", "label": "Belt tension rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & additive",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand (handout)", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_compound", "label": "Compound (e.g. 28 / 32 / 36)", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" },
+            { "id": "tire_additive", "label": "Additive", "type": "text" },
+            { "id": "additive_time_front", "label": "Additive time front", "type": "number", "unit": "min", "min": 0, "max": 60, "step": 1 },
+            { "id": "additive_time_rear", "label": "Additive time rear", "type": "number", "unit": "min", "min": 0, "max": 60, "step": 1 }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "motor_timing", "label": "Motor timing", "type": "number", "unit": "deg", "min": 0, "max": 60, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_boost", "label": "ESC boost timing", "type": "number", "unit": "deg", "min": 0, "max": 64, "step": 1 },
+            { "id": "esc_turbo", "label": "ESC turbo timing", "type": "number", "unit": "deg", "min": 0, "max": 64, "step": 1 },
+            { "id": "battery_brand", "label": "Battery brand / model", "type": "text" },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["64P", "48P", "Mod0.8"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 60, "max": 140, "step": 1 },
+            { "id": "fdr", "label": "Final drive ratio", "type": "number", "unit": "ratio", "min": 2, "max": 12, "step": 0.01 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body (shell)", "type": "text" },
+            { "id": "wing", "label": "Rear wing", "type": "text" },
+            { "id": "body_mounting", "label": "Body mounting height / position", "type": "text" },
+            { "id": "ballast_weight", "label": "Ballast weight", "type": "number", "unit": "g", "min": 0, "max": 150, "step": 1 },
+            { "id": "ballast_position", "label": "Ballast position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_10_nitro_onroad",
+      "applies_to": ["1/10_nitro_touring_200mm"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_type", "label": "Front", "type": "choice", "choices": ["one_way", "spool", "gear_diff", "ball_diff"] },
+            { "id": "diff_rear_type", "label": "Rear diff type", "type": "choice", "choices": ["gear_diff", "ball_diff"] },
+            { "id": "diff_rear_oil", "label": "Rear gear diff oil", "type": "number", "unit": "cst", "min": 200, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 3, "max": 12, "step": 0.1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 3, "max": 12, "step": 0.1 },
+            { "id": "droop_front", "label": "Droop front (downstop)", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.1 },
+            { "id": "droop_rear", "label": "Droop rear (downstop)", "type": "number", "unit": "mm", "min": 0, "max": 12, "step": 0.1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.1 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.1 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.1 },
+            { "id": "toe_rear", "label": "Toe rear (in)", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.1 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -2, "max": 4, "step": 0.5 },
+            { "id": "roll_center_front", "label": "Roll center front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center rear", "type": "text" },
+            { "id": "ackermann", "label": "Ackermann", "type": "text" },
+            { "id": "track_width_front", "label": "Track width front (shims)", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.1 },
+            { "id": "track_width_rear", "label": "Track width rear (shims)", "type": "number", "unit": "mm", "min": 0, "max": 4, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.0, "max": 3.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.0, "max": 3.0, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "transmission", "label": "Transmission", "type": "choice", "choices": ["single_speed", "two_speed"] },
+            { "id": "gear_1st", "label": "1st gear (pinion/spur)", "type": "text" },
+            { "id": "gear_2nd", "label": "2nd gear (pinion/spur)", "type": "text" },
+            { "id": "shift_point", "label": "2-speed shift point", "type": "text" },
+            { "id": "brake_bias_front", "label": "Brake bias front", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 5 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_type", "label": "Tire type", "type": "choice", "choices": ["rubber", "foam"] },
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / shore", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" },
+            { "id": "tire_additive", "label": "Additive", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Engine",
+          "fields": [
+            { "id": "engine", "label": "Engine (.12 / .18 / .21)", "type": "text" },
+            { "id": "carb_venturi", "label": "Carb venturi / restrictor", "type": "number", "unit": "mm", "min": 3, "max": 9, "step": 0.5 },
+            { "id": "needle_high", "label": "High-speed needle (turns)", "type": "text" },
+            { "id": "needle_low", "label": "Low-speed needle (turns)", "type": "text" },
+            { "id": "glow_plug", "label": "Glow plug", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust pipe", "type": "text" },
+            { "id": "manifold", "label": "Manifold", "type": "text" },
+            { "id": "fuel_nitro_pct", "label": "Fuel nitro %", "type": "number", "unit": "%", "min": 10, "max": 40, "step": 1 },
+            { "id": "fuel_tank_capacity", "label": "Fuel tank capacity", "type": "number", "unit": "cc", "min": 40, "max": 150, "step": 5 },
+            { "id": "clutch_bell_teeth", "label": "Clutch bell", "type": "number", "unit": "T", "min": 14, "max": 30, "step": 1 },
+            { "id": "clutch_setup", "label": "Clutch (shoes / springs)", "type": "text" },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" },
+            { "id": "throttle_servo", "label": "Throttle / brake servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body (200mm shell)", "type": "text" },
+            { "id": "wing", "label": "Rear wing", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1_12_pan",
+      "applies_to": ["1/12_pan"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differential / rear axle",
+          "fields": [
+            { "id": "diff_type", "label": "Diff type", "type": "choice", "choices": ["ball", "gear", "spool"] },
+            { "id": "ball_diff_setting", "label": "Ball diff tension / lube", "type": "text" }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Springs & damping",
+          "fields": [
+            { "id": "center_shock_oil", "label": "Center shock oil", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "center_shock_spring", "label": "Center shock spring", "type": "text" },
+            { "id": "side_springs", "label": "Side springs", "type": "text" },
+            { "id": "side_damping", "label": "Side dampers / lube", "type": "text" },
+            { "id": "front_springs", "label": "Front springs", "type": "text" },
+            { "id": "tube_damper_oil", "label": "Tube / pitch damper oil", "type": "number", "unit": "cst", "min": 100, "max": 100000, "step": 100 }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 2, "max": 8, "step": 0.1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 2, "max": 8, "step": 0.1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 4, "step": 0.1 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -3, "max": 3, "step": 0.1 },
+            { "id": "front_reactive_caster", "label": "Reactive caster / arm shims", "type": "text" },
+            { "id": "tweak", "label": "Tweak", "type": "text" },
+            { "id": "rear_pod_position", "label": "Rear pod / link position", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["64P", "48P"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 70, "max": 130, "step": 1 },
+            { "id": "rollout", "label": "Rollout", "type": "number", "unit": "mm", "min": 20, "max": 60, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires (foam)",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_front_diameter", "label": "Front diameter", "type": "number", "unit": "mm", "min": 35, "max": 55, "step": 0.1 },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_rear_diameter", "label": "Rear diameter", "type": "number", "unit": "mm", "min": 35, "max": 55, "step": 0.1 },
+            { "id": "tire_additive", "label": "Additive", "type": "text" },
+            { "id": "additive_time_front", "label": "Additive time front", "type": "number", "unit": "min", "min": 0, "max": 60, "step": 1 },
+            { "id": "additive_time_rear", "label": "Additive time rear", "type": "number", "unit": "min", "min": 0, "max": 60, "step": 1 }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "motor_timing", "label": "Motor timing", "type": "number", "unit": "deg", "min": 0, "max": 60, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "esc_boost", "label": "ESC boost timing", "type": "number", "unit": "deg", "min": 0, "max": 64, "step": 1 },
+            { "id": "battery_cells", "label": "Battery", "type": "choice", "choices": ["1S", "2S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "battery_position", "label": "Battery position", "type": "text" },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "body_height", "label": "Body mounting height", "type": "text" },
+            { "id": "ballast_weight", "label": "Ballast weight", "type": "number", "unit": "g", "min": 0, "max": 150, "step": 1 },
+            { "id": "ballast_position", "label": "Ballast position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f1",
+      "applies_to": ["f1_1_10"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differential / rear axle",
+          "fields": [
+            { "id": "diff_type", "label": "Diff type", "type": "choice", "choices": ["ball", "gear", "spool"] },
+            { "id": "ball_diff_setting", "label": "Ball diff tension / lube", "type": "text" }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Springs & damping",
+          "fields": [
+            { "id": "center_shock_oil", "label": "Center / rear shock oil", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "center_shock_spring", "label": "Center / rear shock spring", "type": "text" },
+            { "id": "side_springs", "label": "Side springs", "type": "text" },
+            { "id": "side_damping", "label": "Side dampers / lube", "type": "text" },
+            { "id": "pitch_damper_oil", "label": "Pitch damper oil", "type": "number", "unit": "cst", "min": 100, "max": 100000, "step": 100 },
+            { "id": "front_springs", "label": "Front springs", "type": "text" }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 2, "max": 10, "step": 0.1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 2, "max": 10, "step": 0.1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 4, "step": 0.1 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -3, "max": 3, "step": 0.1 },
+            { "id": "ackermann", "label": "Ackermann", "type": "text" },
+            { "id": "tweak", "label": "Tweak", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Wings",
+          "fields": [
+            { "id": "front_wing", "label": "Front wing (type)", "type": "text" },
+            { "id": "front_wing_angle", "label": "Front wing angle", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 },
+            { "id": "rear_wing", "label": "Rear wing (type)", "type": "text" },
+            { "id": "rear_wing_angle", "label": "Rear wing angle", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "gear_pitch", "label": "Gear pitch", "type": "choice", "choices": ["64P", "48P"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 15, "max": 60, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 60, "max": 120, "step": 1 },
+            { "id": "rollout", "label": "Rollout", "type": "number", "unit": "mm", "min": 20, "max": 70, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires",
+          "fields": [
+            { "id": "tire_front_brand", "label": "Front tire brand", "type": "text" },
+            { "id": "tire_front_compound", "label": "Front compound", "type": "text" },
+            { "id": "tire_rear_brand", "label": "Rear tire brand", "type": "text" },
+            { "id": "tire_rear_compound", "label": "Rear compound", "type": "text" },
+            { "id": "tire_insert", "label": "Inserts / glue", "type": "text" },
+            { "id": "wheel", "label": "Wheels", "type": "text" },
+            { "id": "tire_additive", "label": "Additive", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_turns", "label": "Motor turns", "type": "number", "unit": "T", "min": 2, "max": 30, "step": 0.5 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery", "type": "choice", "choices": ["1S", "2S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "battery_position", "label": "Battery position", "type": "text" },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body / nose", "type": "text" },
+            { "id": "ballast_weight", "label": "Ballast weight", "type": "number", "unit": "g", "min": 0, "max": 150, "step": 1 },
+            { "id": "ballast_position", "label": "Ballast position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rally",
+      "applies_to": ["1/10_rally"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_type", "label": "Center", "type": "choice", "choices": ["open_diff", "oil_diff", "spool", "one_way"] },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear", "type": "text" }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 5, "max": 35, "step": 0.5 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 5, "max": 35, "step": 0.5 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 15, "step": 0.5 }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 0.8, "max": 2.5, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 0.8, "max": 2.5, "step": 0.1 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "drive_type", "label": "Drive type", "type": "choice", "choices": ["shaft", "belt"] },
+            { "id": "slipper_setting", "label": "Slipper setting", "type": "text" }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread (rally block / gravel)", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV", "type": "number", "unit": "kv", "min": 1000, "max": 7000, "step": 10 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells", "type": "choice", "choices": ["2S", "3S", "4S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 1000, "max": 10000, "step": 100 },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 12, "max": 40, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 50, "max": 110, "step": 1 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body (rally shell)", "type": "text" },
+            { "id": "mud_flaps", "label": "Mud flaps / underguard", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crawler",
+      "applies_to": ["crawler_trail", "crawler_comp"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Axles",
+          "fields": [
+            { "id": "axle_front_type", "label": "Front axle", "type": "choice", "choices": ["locked_spool", "open_diff", "selectable_locker"] },
+            { "id": "axle_rear_type", "label": "Rear axle", "type": "choice", "choices": ["locked_spool", "open_diff", "selectable_locker"] },
+            { "id": "axle_gearing", "label": "Axle gears (overdrive/underdrive)", "type": "text" }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 2000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Spring front (rate / color)", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Spring rear (rate / color)", "type": "text" },
+            { "id": "shock_length_front", "label": "Shock length front", "type": "number", "unit": "mm", "min": 60, "max": 130, "step": 1 },
+            { "id": "shock_length_rear", "label": "Shock length rear", "type": "number", "unit": "mm", "min": 60, "max": 130, "step": 1 },
+            { "id": "droop_setup", "label": "Droop setup", "type": "choice", "choices": ["standard", "droop_springs", "hybrid"] }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry & chassis",
+          "fields": [
+            { "id": "ground_clearance", "label": "Ground clearance", "type": "number", "unit": "mm", "min": 30, "max": 120, "step": 1 },
+            { "id": "wheelbase", "label": "Wheelbase", "type": "number", "unit": "mm", "min": 200, "max": 500, "step": 1 },
+            { "id": "caster_front", "label": "Caster / kingpin angle", "type": "number", "unit": "deg", "min": 0, "max": 20, "step": 0.5 },
+            { "id": "link_config", "label": "Link configuration / mount holes", "type": "text" },
+            { "id": "anti_squat_links", "label": "Upper link angle / anti-squat", "type": "text" },
+            { "id": "weight_bias_front", "label": "Weight bias front", "type": "number", "unit": "%", "min": 40, "max": 80, "step": 1 }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "transmission", "label": "Transmission", "type": "text" },
+            { "id": "overdrive_pct", "label": "Overdrive", "type": "number", "unit": "%", "min": 0, "max": 60, "step": 1 },
+            { "id": "overall_ratio", "label": "Overall gear ratio", "type": "number", "unit": "ratio", "min": 10, "max": 120, "step": 0.1 },
+            { "id": "dig_unit", "label": "Dig / 2-speed", "type": "choice", "choices": ["none", "dig", "two_speed"] },
+            { "id": "pinion_teeth", "label": "Pinion", "type": "number", "unit": "T", "min": 8, "max": 40, "step": 1 },
+            { "id": "spur_teeth", "label": "Spur", "type": "number", "unit": "T", "min": 50, "max": 120, "step": 1 }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_compound", "label": "Compound (soft / super soft)", "type": "text" },
+            { "id": "tire_insert", "label": "Foam insert (single / dual stage)", "type": "text" },
+            { "id": "wheel", "label": "Wheel (beadlock)", "type": "text" },
+            { "id": "wheel_weights_front", "label": "Wheel weights front", "type": "number", "unit": "g", "min": 0, "max": 300, "step": 5 },
+            { "id": "wheel_weights_rear", "label": "Wheel weights rear", "type": "number", "unit": "g", "min": 0, "max": 300, "step": 5 },
+            { "id": "tire_cut", "label": "Tire cutting / siping", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Electronics & power",
+          "fields": [
+            { "id": "motor", "label": "Motor (brand / model)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV (brushless)", "type": "number", "unit": "kv", "min": 800, "max": 4500, "step": 10 },
+            { "id": "motor_turns", "label": "Motor turns (brushed)", "type": "number", "unit": "T", "min": 5, "max": 80, "step": 1 },
+            { "id": "esc", "label": "ESC (brand / model)", "type": "text" },
+            { "id": "drag_brake", "label": "Drag brake", "type": "number", "unit": "%", "min": 0, "max": 100, "step": 1 },
+            { "id": "battery_cells", "label": "Battery cells", "type": "choice", "choices": ["2S", "3S", "4S"] },
+            { "id": "battery_capacity", "label": "Battery capacity", "type": "number", "unit": "mAh", "min": 500, "max": 10000, "step": 100 },
+            { "id": "battery_position", "label": "Battery position", "type": "choice", "choices": ["front_axle_boa", "chassis_front", "center", "belly"] },
+            { "id": "steering_servo", "label": "Steering servo (torque)", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "added_weight_front", "label": "Added weight front (axle / bumper)", "type": "number", "unit": "g", "min": 0, "max": 600, "step": 10 },
+            { "id": "added_weight_position", "label": "Other weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monster_truck",
+      "applies_to": ["monster_truck_basher", "monster_truck_race"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 500, "max": 1000000, "step": 100 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 500, "max": 500000, "step": 100 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 3000, "step": 10 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 3000, "step": 10 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear", "type": "text" },
+            { "id": "shock_preload_front", "label": "Preload clips front", "type": "number", "unit": "mm", "min": 0, "max": 20, "step": 1 },
+            { "id": "shock_preload_rear", "label": "Preload clips rear", "type": "number", "unit": "mm", "min": 0, "max": 20, "step": 1 }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 20, "max": 130, "step": 1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 20, "max": 130, "step": 1 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 80, "step": 1 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 80, "step": 1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 30, "step": 0.5 }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 1.5, "max": 5.0, "step": 0.1 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 1.5, "max": 5.0, "step": 0.1 },
+            { "id": "wing", "label": "Wing / spoiler", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "spur_gear", "label": "Spur gear", "type": "number", "unit": "T", "min": 36, "max": 60, "step": 1 },
+            { "id": "slipper_setting", "label": "Slipper setting (if fitted)", "type": "text" },
+            { "id": "driveshaft_type", "label": "Driveshafts", "type": "choice", "choices": ["dogbone", "cvd"] }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread / profile", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert / foam", "type": "text" },
+            { "id": "wheel", "label": "Wheel (hex size)", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Power (electric or nitro)",
+          "fields": [
+            { "id": "power_type", "label": "Power type", "type": "choice", "choices": ["electric", "nitro"] },
+            { "id": "motor", "label": "Motor (electric)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV (electric)", "type": "number", "unit": "kv", "min": 800, "max": 4000, "step": 10 },
+            { "id": "esc", "label": "ESC (electric)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells (electric)", "type": "choice", "choices": ["2S", "3S", "4S", "6S", "8S"] },
+            { "id": "battery_capacity", "label": "Battery capacity (electric)", "type": "number", "unit": "mAh", "min": 1000, "max": 15000, "step": 100 },
+            { "id": "pinion_teeth", "label": "Pinion (electric)", "type": "number", "unit": "T", "min": 10, "max": 35, "step": 1 },
+            { "id": "engine", "label": "Engine (nitro)", "type": "text" },
+            { "id": "glow_plug", "label": "Glow plug (nitro)", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust pipe (nitro)", "type": "text" },
+            { "id": "fuel_nitro_pct", "label": "Fuel nitro % (nitro)", "type": "number", "unit": "%", "min": 10, "max": 40, "step": 1 },
+            { "id": "clutch_bell_teeth", "label": "Clutch bell (nitro)", "type": "number", "unit": "T", "min": 11, "max": 20, "step": 1 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "large_scale_1_5",
+      "applies_to": ["1/5_offroad_gas", "1/5_offroad_electric", "1/6_offroad"],
+      "sections": [
+        {
+          "id": "diffs",
+          "label": "Differentials",
+          "fields": [
+            { "id": "diff_front_oil", "label": "Front diff oil", "type": "number", "unit": "cst", "min": 1000, "max": 1000000, "step": 500 },
+            { "id": "diff_center_oil", "label": "Center diff oil", "type": "number", "unit": "cst", "min": 1000, "max": 1000000, "step": 500 },
+            { "id": "diff_rear_oil", "label": "Rear diff oil", "type": "number", "unit": "cst", "min": 1000, "max": 1000000, "step": 500 }
+          ]
+        },
+        {
+          "id": "shocks",
+          "label": "Shocks",
+          "fields": [
+            { "id": "shock_oil_front", "label": "Shock oil front", "type": "number", "unit": "cst", "min": 100, "max": 5000, "step": 25 },
+            { "id": "shock_oil_rear", "label": "Shock oil rear", "type": "number", "unit": "cst", "min": 100, "max": 5000, "step": 25 },
+            { "id": "shock_spring_front", "label": "Shock spring front", "type": "text" },
+            { "id": "shock_spring_rear", "label": "Shock spring rear", "type": "text" },
+            { "id": "shock_piston_front", "label": "Piston front", "type": "text" },
+            { "id": "shock_piston_rear", "label": "Piston rear", "type": "text" },
+            { "id": "shock_position_front", "label": "Shock position front (tower / arm)", "type": "text" },
+            { "id": "shock_position_rear", "label": "Shock position rear (tower / arm)", "type": "text" },
+            { "id": "shock_length_front", "label": "Shock length front", "type": "number", "unit": "mm", "min": 100, "max": 220, "step": 1 },
+            { "id": "shock_length_rear", "label": "Shock length rear", "type": "number", "unit": "mm", "min": 100, "max": 220, "step": 1 }
+          ]
+        },
+        {
+          "id": "geometry",
+          "label": "Geometry",
+          "fields": [
+            { "id": "ride_height_front", "label": "Ride height front", "type": "number", "unit": "mm", "min": 25, "max": 100, "step": 1 },
+            { "id": "ride_height_rear", "label": "Ride height rear", "type": "number", "unit": "mm", "min": 25, "max": 100, "step": 1 },
+            { "id": "droop_front", "label": "Droop / downtravel front", "type": "number", "unit": "mm", "min": 0, "max": 80, "step": 1 },
+            { "id": "droop_rear", "label": "Droop / downtravel rear", "type": "number", "unit": "mm", "min": 0, "max": 80, "step": 1 },
+            { "id": "camber_front", "label": "Camber front", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "camber_rear", "label": "Camber rear", "type": "number", "unit": "deg", "min": -1, "max": 6, "step": 0.25 },
+            { "id": "toe_front", "label": "Toe front (- out / + in)", "type": "number", "unit": "deg", "min": -4, "max": 4, "step": 0.25 },
+            { "id": "toe_rear", "label": "Toe rear", "type": "number", "unit": "deg", "min": 0, "max": 5, "step": 0.25 },
+            { "id": "caster_front", "label": "Caster front", "type": "number", "unit": "deg", "min": 0, "max": 30, "step": 0.5 },
+            { "id": "anti_squat", "label": "Anti-squat", "type": "number", "unit": "deg", "min": -1, "max": 5, "step": 0.25 },
+            { "id": "roll_center_front", "label": "Roll center / camber link front", "type": "text" },
+            { "id": "roll_center_rear", "label": "Roll center / camber link rear", "type": "text" },
+            { "id": "bump_steer", "label": "Bump steer", "type": "text" }
+          ]
+        },
+        {
+          "id": "bars_wing",
+          "label": "Sway bars & wing",
+          "fields": [
+            { "id": "sway_bar_front", "label": "Sway bar front", "type": "number", "unit": "mm", "min": 3, "max": 10, "step": 0.5 },
+            { "id": "sway_bar_rear", "label": "Sway bar rear", "type": "number", "unit": "mm", "min": 3, "max": 10, "step": 0.5 },
+            { "id": "wing", "label": "Wing / spoiler", "type": "text" }
+          ]
+        },
+        {
+          "id": "drivetrain",
+          "label": "Drivetrain",
+          "fields": [
+            { "id": "spur_gear", "label": "Spur gear", "type": "number", "unit": "T", "min": 40, "max": 80, "step": 1 },
+            { "id": "pinion_gear", "label": "Pinion / clutch pinion", "type": "number", "unit": "T", "min": 12, "max": 30, "step": 1 },
+            { "id": "brake_setup", "label": "Brake setup / bias", "type": "text" }
+          ]
+        },
+        {
+          "id": "tires",
+          "label": "Tires & wheels",
+          "fields": [
+            { "id": "tire_brand", "label": "Tire brand", "type": "text" },
+            { "id": "tire_model", "label": "Tire model", "type": "text" },
+            { "id": "tire_tread", "label": "Tread / profile", "type": "text" },
+            { "id": "tire_compound", "label": "Compound / hardness", "type": "text" },
+            { "id": "tire_insert", "label": "Insert / foam", "type": "text" },
+            { "id": "wheel", "label": "Wheel", "type": "text" }
+          ]
+        },
+        {
+          "id": "engine_electronics",
+          "label": "Power (gas or electric)",
+          "fields": [
+            { "id": "power_type", "label": "Power type", "type": "choice", "choices": ["gas_2stroke", "electric"] },
+            { "id": "engine", "label": "Engine (gas, brand / model)", "type": "text" },
+            { "id": "engine_cc", "label": "Engine displacement (gas)", "type": "number", "unit": "cc", "min": 20, "max": 46, "step": 0.5 },
+            { "id": "carb", "label": "Carburetor (gas, e.g. Walbro)", "type": "text" },
+            { "id": "needle_high", "label": "High needle (gas, turns)", "type": "text" },
+            { "id": "needle_low", "label": "Low needle (gas, turns)", "type": "text" },
+            { "id": "air_filter", "label": "Air filter (gas)", "type": "text" },
+            { "id": "exhaust_pipe", "label": "Exhaust / tuned pipe (gas)", "type": "text" },
+            { "id": "clutch_shoes", "label": "Clutch shoes (gas)", "type": "text" },
+            { "id": "clutch_springs", "label": "Clutch springs (gas)", "type": "text" },
+            { "id": "fuel_mix_ratio", "label": "Fuel:oil mix ratio (gas, x:1)", "type": "number", "unit": "ratio", "min": 20, "max": 50, "step": 1 },
+            { "id": "motor", "label": "Motor (electric)", "type": "text" },
+            { "id": "motor_kv", "label": "Motor KV (electric)", "type": "number", "unit": "kv", "min": 400, "max": 2000, "step": 10 },
+            { "id": "esc", "label": "ESC (electric)", "type": "text" },
+            { "id": "battery_cells", "label": "Battery cells (electric)", "type": "choice", "choices": ["4S", "6S", "8S", "12S"] },
+            { "id": "battery_capacity", "label": "Battery capacity (electric)", "type": "number", "unit": "mAh", "min": 2000, "max": 20000, "step": 100 },
+            { "id": "steering_servo", "label": "Steering servo", "type": "text" }
+          ]
+        },
+        {
+          "id": "body_options",
+          "label": "Body & options",
+          "fields": [
+            { "id": "body", "label": "Body", "type": "text" },
+            { "id": "chassis_protection", "label": "Skid plates / guards", "type": "text" },
+            { "id": "chassis_weights", "label": "Added weights / position", "type": "text" },
+            { "id": "notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    }
+  ]
+}

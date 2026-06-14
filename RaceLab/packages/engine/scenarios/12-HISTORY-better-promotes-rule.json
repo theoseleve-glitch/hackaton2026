@@ -1,0 +1,20 @@
+{
+  "name": "HISTORY: past 'better' on the rear-diff rule at THIS track promotes it to primary",
+  "expect": { "kind": "recommendation", "primary_cites": "kb-diff-rear-thinner-005", "settings_any_of": ["rear_diff_oil"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_diff_oil": 8000, "center_diff_oil": 5000, "rear_diff_oil": 3000, "front_sway_bar": 2.3, "rear_sway_bar": 2.8, "rear_toe": 3 },
+    "track": { "track_id": "trk-eval-here", "name": "MRT Club Track", "surface": "clay", "grip": "green", "conditions": ["low_grip", "dusty"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }] },
+    "mode": "practice",
+    "history": [
+      {
+        "change": "rear_diff_oil: thinner 4000 -> 3000",
+        "conditions": "grip green, dusty",
+        "outcome": "better",
+        "citations": ["kb-diff-rear-thinner-005"],
+        "track_id": "trk-eval-here"
+      }
+    ]
+  }
+}

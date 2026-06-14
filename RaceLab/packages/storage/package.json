@@ -1,0 +1,17 @@
+{
+  "name": "racelab-storage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab B2 storage core (D11: local store is the only source of truth; append-only outbox; cloud backup is NOT sync). Injected drivers (KeyValueDriver/SqlExecutor), DocStore+AppendLog adapters (memory/sqlite/kv/expo-sqlite glue), typed repos with parse-on-read + quarantine, legacy-blob migration. Zero runtime deps, zero node built-ins in src/ — bundles into the app unchanged (D18 culture: all I/O injected).",
+  "scripts": {
+    "test": "tsx src/test-storage.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

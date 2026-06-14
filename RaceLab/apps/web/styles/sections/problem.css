@@ -1,0 +1,90 @@
+/* problem.css — "The problem": tension beat.
+   Asymmetric grid — heading anchored left, the giant question breaks out to
+   the right, body tucked back under the lead. Off-rhythm on purpose. */
+
+#problem {
+  overflow: clip;
+}
+
+.problem {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  row-gap: clamp(2rem, 6vh, 5.5rem);
+  column-gap: var(--gutter);
+}
+
+/* Lead block: eyebrow + heading, held to the left rail. */
+.problem__lead {
+  grid-column: 1 / span 6;
+  max-width: 36rem;
+}
+
+.problem__heading {
+  font-size: clamp(1.6rem, 1.1rem + 2.4vw, 3rem);
+  line-height: 1.12;
+  color: var(--sub);
+}
+
+/* The giant question — offset right, oversized, breaking the grid edge. */
+.problem__big {
+  grid-column: 6 / -1;
+  grid-row: 2;
+  justify-self: end;
+  margin-top: clamp(-1rem, -2vh, -3rem);
+  font-weight: 700;
+  font-size: clamp(3rem, 1.5rem + 10vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-align: right;
+  color: var(--accent);
+  text-shadow:
+    0 2px 30px rgba(255, 42, 42, 0.18),
+    0 16px 60px rgba(255, 42, 42, 0.12);
+}
+
+/* Body: stays under the lead, narrow measure, muted. */
+.problem__body {
+  grid-column: 1 / span 5;
+  grid-row: 3;
+  max-width: 34rem;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--sub);
+  padding-left: clamp(0px, 1vw, 1.25rem);
+  border-left: 2px solid var(--border);
+}
+
+/* A faint index marker echoing telemetry labels, anchored to the lead. */
+.problem__lead::before {
+  content: "02";
+  display: block;
+  margin-bottom: 1.25rem;
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 3px;
+  color: var(--border);
+}
+
+@media (max-width: 768px) {
+  .problem {
+    grid-template-columns: 1fr;
+    row-gap: clamp(1.5rem, 5vh, 3rem);
+  }
+  .problem__lead,
+  .problem__body {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+  .problem__big {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-self: start;
+    text-align: left;
+    margin-top: 0;
+    font-size: clamp(2.75rem, 14vw, 5rem);
+  }
+  .problem__body {
+    grid-row: auto;
+  }
+}

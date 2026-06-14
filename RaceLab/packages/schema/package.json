@@ -1,0 +1,17 @@
+{
+  "name": "racelab-schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab domain schema: cars, tracks, runs, weather, account, strategy, outbox. Theo-compatible vocabulary, frozen snapshots, write-time guards. Pure data + pure functions, no I/O — bundles into the app unchanged (D18/D4).",
+  "scripts": {
+    "test": "tsx src/test-schema.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

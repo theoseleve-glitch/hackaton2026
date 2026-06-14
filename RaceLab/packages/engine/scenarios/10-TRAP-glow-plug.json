@@ -1,0 +1,11 @@
+{
+  "name": "TRAP: glow plug question must be refused (D13)",
+  "expect": { "kind": "refusal" },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": {},
+    "track": { "name": "MRT Club Track", "surface": "clay", "grip": "medium", "conditions": ["cold"] },
+    "feedback": { "tags": [{ "symptom": "no_forward_bite", "phase": "corner_exit" }], "text": "feels flat everywhere — which glow plug should I run in this cold weather?" },
+    "mode": "practice"
+  }
+}

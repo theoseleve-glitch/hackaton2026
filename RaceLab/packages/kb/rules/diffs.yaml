@@ -1,0 +1,196 @@
+# Differential rules — source: HUDY Off-Road Set-Up Book p.35 (Effects of Differential Oil Replacement)
+# scope: all 1/8 offroad (buggy/truggy), chassis-agnostic
+
+- id: kb-diff-front-thinner-001
+  setting: front_diff_oil
+  direction: decrease
+  effects:
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: forward_traction_exit, change: less_if_too_thin }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: off_power }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: []
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One step at a time (e.g. 7000 → 5000 cSt). Too thin makes steering inconsistent and loses forward traction out of corners."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+- id: kb-diff-front-thicker-002
+  setting: front_diff_oil
+  direction: increase
+  effects:
+    - { axis: stability_braking_entry, change: more }
+    - { axis: on_power_steering_exit, change: more }
+  addresses:
+    - { symptom: unstable_braking, phase: corner_entry }
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: understeer, phase: on_power }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [wet]
+  counter_indications: []   # entry-push caveat is carried by the address phase (corner_exit / on_power only)
+  magnitude_guidance: "One step at a time (e.g. 5000 → 7000 cSt)."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+- id: kb-diff-center-thinner-003
+  setting: center_diff_oil
+  direction: decrease
+  effects:
+    - { axis: off_power_steering, change: more }
+    - { axis: drivability_rough, change: easier }
+    - { axis: on_power_steering, change: less }
+  addresses:
+    - { symptom: hard_to_drive, phase: rough_section }
+    - { symptom: understeer, phase: off_power }
+  conditions:
+    amplified_on: [rough, bumpy, low_grip]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One step (e.g. 7000 → 5000 cSt). Front wheels unload more during acceleration; with a high-power engine very thin center oil can overheat ('cook')."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+- id: kb-diff-center-thicker-004
+  setting: center_diff_oil
+  direction: increase
+  effects:
+    - { axis: acceleration, change: more }
+    - { axis: on_power_steering, change: more }   # reduces understeer on power
+    - { axis: drivability, change: more_nervous }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [rough, low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One step (e.g. 5000 → 7000 cSt). Better on high-bite smooth tracks; car can get nervous with a strong engine — stay smooth on throttle."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+- id: kb-diff-rear-thinner-005
+  setting: rear_diff_oil
+  direction: decrease
+  effects:
+    - { axis: cornering_traction, change: more }
+    - { axis: steering_into_corner, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: oversteer, phase: mid_corner }   # more rear cornering traction also calms a loose rear mid-corner
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One step at a time (e.g. 4000 → 3000 cSt)."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+- id: kb-diff-rear-thicker-006
+  setting: rear_diff_oil
+  direction: increase
+  effects:
+    - { axis: rear_traction_cornering, change: less }
+    - { axis: wheelspin, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, dusty]   # reduces wheelspin where grip is scarce
+    reduced_on: []
+  counter_indications: [oversteer]
+  magnitude_guidance: "One step at a time (e.g. 3000 → 4000 cSt). Reduces wheelspin but takes away rear cornering traction."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.35"]
+  scope: [1-8-offroad]
+
+# Gearing (primary drive ratio) — HUDY p.37
+- id: kb-gearing-shorter-007
+  setting: gearing
+  direction: decrease_fdr_speed   # smaller pinion / larger spur
+  effects:
+    - { axis: acceleration, change: more }
+    - { axis: top_speed, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: sluggish_steering, phase: low_speed }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open]
+  counter_indications: []
+  magnitude_guidance: "One tooth on the pinion (clutch bell) at a time."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.37 §2.2.1"]
+  scope: [1-8-offroad]
+
+- id: kb-gearing-taller-008
+  setting: gearing
+  direction: increase_fdr_speed   # larger pinion / smaller spur
+  effects:
+    - { axis: top_speed, change: more }
+    - { axis: acceleration, change: less }
+  addresses: []
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: [technical_tight]
+  counter_indications: []
+  magnitude_guidance: "One tooth at a time; watch engine temperature when gearing taller."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.37 §2.2.1"]
+  scope: [1-8-offroad]
+
+# Clutch (drivability — chassis-side, not engine internals) — HUDY p.34
+- id: kb-clutch-springs-softer-009
+  setting: clutch_spring
+  direction: decrease
+  effects:
+    - { axis: clutch_engagement, change: earlier_gradual }
+    - { axis: drivability_low_grip, change: easier }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: hard_to_drive, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, dusty, wet]
+    reduced_on: [high_grip]
+  counter_indications: []
+  magnitude_guidance: "One spring step softer (e.g. 1.00 → 0.95). Earlier, more gradual engagement — easier to drive on low grip."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.34 §2.0.1"]
+  scope: [1-8-nitro-offroad]
+
+- id: kb-clutch-springs-stiffer-010
+  setting: clutch_spring
+  direction: increase
+  effects:
+    - { axis: clutch_engagement, change: later_aggressive }
+    - { axis: acceleration_punch, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [high_grip, blue_groove]
+    reduced_on: [low_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One spring step stiffer (e.g. 0.95 → 1.00). More sudden engagement — only worth it when the track has the grip to take it."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.34 §2.0.1"]
+  scope: [1-8-nitro-offroad]

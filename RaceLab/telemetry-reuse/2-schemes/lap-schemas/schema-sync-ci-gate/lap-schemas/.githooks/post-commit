@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Post-commit hook for lap-schemas.
+#
+# Fires after every commit. If the commit touched any Pydantic v1 model under
+# python/src/lap_schemas/v1/, emits a reminder to regenerate the downstream
+# TypeScript / Swift / Kotlin bindings. Never blocks the commit.
+#
+# Install once per clone:
+#     git config core.hooksPath .githooks
+
+set -u
+
+changed=$(git diff-tree --no-commit-id --name-only -r --root HEAD -- python/src/lap_schemas/v1/ 2>/dev/null || true)
+
+if [[ -n "$changed" ]]; then
+    {
+        echo ""
+        echo "⚠  lap-schemas: Pydantic model change detected in this commit."
+        echo "   Regenerate downstream types before pushing:"
+        echo "     (cd python && uv run python -m lap_schemas.generate_openapi openapi.json)"
+        echo "     (cd typescript && npm run generate:ts)"
+        echo "     (cd swift && npm run generate:swift)"
+        echo "     (cd kotlin && npm run generate:kotlin)"
+        echo ""
+        echo "   Files changed:"
+        while IFS= read -r file; do
+            echo "     - $file"
+        done <<<"$changed"
+        echo ""
+    } >&2
+fi
+
+exit 0

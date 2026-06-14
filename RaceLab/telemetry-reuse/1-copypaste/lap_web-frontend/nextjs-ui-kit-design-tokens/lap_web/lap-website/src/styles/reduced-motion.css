@@ -1,0 +1,31 @@
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    /* Transitions kept at 200ms (not killed) to preserve spatial context
+       for state changes like focus/hover. This follows OS-level accessibility
+       guidance that allows brief transitions for orientation. */
+    transition-duration: 200ms !important;
+  }
+}
+
+/* User-toggled reduced motion (class on html) */
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  /* Transitions kept at 200ms (not killed) to preserve spatial context
+     for state changes like focus/hover. This follows OS-level accessibility
+     guidance that allows brief transitions for orientation. */
+  transition-duration: 200ms !important;
+}
+
+/* Mobile: disable scroll pinning, simplify transitions */
+@media (max-width: 767px) {
+  .room {
+    min-height: auto !important;
+  }
+
+  [data-scroll-pin] {
+    position: relative !important;
+  }
+}

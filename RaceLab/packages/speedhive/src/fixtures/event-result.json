@@ -1,0 +1,158 @@
+{
+  "_comment": "Event-results API fixture. event/sessions/classification shapes verified against live public endpoints 2026-06-12 (event 3545938 pattern); competitorLaps shape is the tolerant best-guess for the unverified laps endpoint. Times are clock strings, durations none.",
+  "event": {
+    "id": 3550118,
+    "name": "Spring GP - 1/8 Nitro Buggy Club Race",
+    "sport": "RC Car racing",
+    "startDate": "2026-06-06",
+    "location": {
+      "id": 507311,
+      "name": "Circuit du Soleil RC",
+      "country": { "id": 250, "name": "France", "alpha2": "FR" }
+    },
+    "organization": {
+      "id": 829912,
+      "name": "AMC Racing Club",
+      "logo": null,
+      "url": null,
+      "city": "Aix-en-Provence",
+      "country": { "id": 250, "name": "France", "alpha2": "FR" },
+      "sport": "RC Car racing"
+    }
+  },
+  "sessions": {
+    "sessions": [],
+    "groups": [
+      {
+        "id": 812310,
+        "name": "1/8 Nitro Buggy",
+        "date": "2026-06-06",
+        "subGroups": [],
+        "sessions": [
+          {
+            "id": 12300941,
+            "name": "Free Practice",
+            "comment": null,
+            "eventId": 3550118,
+            "type": "practice",
+            "startTime": "2026-06-06T09:00:00+02:00",
+            "groupName": "1/8 Nitro Buggy",
+            "isMerge": false,
+            "resultStatus": "Final",
+            "participated": 12,
+            "eventRef": "/api/events/3550118"
+          },
+          {
+            "id": 12300955,
+            "name": "Qualifier 1",
+            "comment": null,
+            "eventId": 3550118,
+            "type": "race",
+            "startTime": "2026-06-06T11:00:00+02:00",
+            "groupName": "1/8 Nitro Buggy",
+            "isMerge": false,
+            "resultStatus": "Final",
+            "participated": 12,
+            "eventRef": "/api/events/3550118"
+          },
+          {
+            "id": 12300978,
+            "name": "Main Final",
+            "comment": null,
+            "eventId": 3550118,
+            "type": "race",
+            "startTime": "2026-06-06T15:30:00+02:00",
+            "groupName": "1/8 Nitro Buggy",
+            "isMerge": false,
+            "resultStatus": "Final",
+            "participated": 10,
+            "eventRef": "/api/events/3550118"
+          }
+        ]
+      }
+    ]
+  },
+  "classification": {
+    "type": "Race",
+    "bestLaps": null,
+    "bestLap": null,
+    "classes": [],
+    "rows": [
+      {
+        "position": 1,
+        "positionInClass": 1,
+        "name": "Chase B.",
+        "startNumber": "23B",
+        "status": "Normal",
+        "numberOfLaps": 8,
+        "totalTime": "04:58.871",
+        "bestTime": "33.198",
+        "bestLap": 6,
+        "bestSpeed": 41.9,
+        "difference": { "lapsBehind": 0, "timeDifference": "" },
+        "diffClass": { "lapsBehind": 0, "timeDifference": "" },
+        "isQualified": true,
+        "transponder": "SW-99120",
+        "transponderCategory": "TR2",
+        "resultClass": "1/8 Nitro Buggy",
+        "accountId": 4471823,
+        "user": { "mstUserId": "u-991", "productCategory": "TR2" }
+      },
+      {
+        "position": 2,
+        "positionInClass": 2,
+        "name": "William K.",
+        "startNumber": "7",
+        "status": "Normal",
+        "numberOfLaps": 8,
+        "totalTime": "05:01.404",
+        "bestTime": "33.512",
+        "bestLap": 8,
+        "bestSpeed": 41.2,
+        "difference": { "lapsBehind": 0, "timeDifference": "+2.533" },
+        "diffClass": { "lapsBehind": 0, "timeDifference": "+2.533" },
+        "isQualified": true,
+        "transponder": "FX-48213",
+        "transponderCategory": "TR2",
+        "resultClass": "1/8 Nitro Buggy",
+        "accountId": 4481177,
+        "user": { "mstUserId": "u-441", "productCategory": "TR2" }
+      },
+      {
+        "position": 3,
+        "positionInClass": 3,
+        "name": "Theo M.",
+        "startNumber": "12",
+        "status": "DNF",
+        "numberOfLaps": 5,
+        "totalTime": "03:11.219",
+        "bestTime": "34.871",
+        "bestLap": 3,
+        "bestSpeed": 39.6,
+        "difference": { "lapsBehind": 3, "timeDifference": "" },
+        "diffClass": { "lapsBehind": 3, "timeDifference": "" },
+        "isQualified": false,
+        "transponder": "GX-11502",
+        "transponderCategory": "TR2",
+        "resultClass": "1/8 Nitro Buggy",
+        "accountId": 4490201,
+        "user": { "mstUserId": "u-672", "productCategory": "TR2" }
+      }
+    ]
+  },
+  "competitorLaps": {
+    "sessionId": 12300978,
+    "startNumber": "7",
+    "name": "William K.",
+    "laps": [
+      { "lapNr": 1, "lapTime": "35.812", "position": 3, "speed": 38.6, "status": "OK" },
+      { "lapNr": 2, "lapTime": "34.241", "position": 3, "speed": 40.3, "status": "OK" },
+      { "lapNr": 3, "lapTime": "34.027", "position": 2, "speed": 40.6, "status": "OK" },
+      { "lapNr": 4, "lapTime": "33.954", "position": 2, "speed": 40.7, "status": "OK" },
+      { "lapNr": 5, "lapTime": "1:02.345", "position": 4, "speed": 22.2, "status": "OK" },
+      { "lapNr": 6, "lapTime": "33.871", "position": 3, "speed": 40.8, "status": "OK" },
+      { "lapNr": 7, "lapTime": "33.642", "position": 2, "speed": 41.0, "status": "OK" },
+      { "lapNr": 8, "lapTime": "33.512", "position": 2, "speed": 41.2, "status": "OK" }
+    ]
+  }
+}

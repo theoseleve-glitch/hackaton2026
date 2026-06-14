@@ -1,0 +1,17 @@
+{
+  "name": "racelab-strategy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab race strategy (D30 v2, time-first): deterministic pit math in seconds — measured tank autonomy minus safety margin caps stints, cumulative race-clock pit moments, tyre-cliff detection, stop-saving stretch options. Pure functions, no I/O — bundles into the app unchanged.",
+  "scripts": {
+    "test": "tsx src/test-strategy.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

@@ -1,0 +1,149 @@
+# Weather-condition rules — make the forecast PAY OFF in planRaceDay.
+# Before this pack, hot/cold produced ONLY refusals (no rule was amplified_on
+# them), so the whole Open-Meteo forecast pipeline could not change a setup.
+#
+# Scope of THIS pack = bulletproof, grip-independent, direction-stable mechanisms
+# that survived strict refute-by-default review as confidence:high:
+#  • DIRECT-TEMPERATURE (hot/cold): silicone shock oil changes viscosity with
+#    temperature (thins when hot, thickens when cold), so the baseline damping
+#    drifts and is restored by an oil step — holds regardless of grip.
+#  • WET (M4): thinner front + rear shock oil. This one is NOT merely a low-grip
+#    change (a wet track is low-grip, but so is dry-dusty) — it survived because
+#    it carries a WATER-SPECIFIC mechanism: oil thin enough that the suspension
+#    reacts fast enough for the tyre to punch THROUGH the surface water film to
+#    the track beneath. The softer-spring / softer-bar / thinner-centre-diff
+#    candidates were REFUSED — they are low-grip transfers mislabelled as wet
+#    (they already fire via the low_grip tag when grip is genuinely low; a wet
+#    track is not always low-grip enough to want them).
+# All rules here are addresses:[] on purpose — they fire via planRaceDay's
+# condition path (amplified_on), NOT the symptom-based chat retrieval, so they
+# never perturb the chat eval. The wet thinner-oil rules share their setting +
+# direction with the COLD thinner-oil rules; planRaceDay's cross-condition
+# resolution merges them to ONE change on a cold+wet day (never advise two
+# steps) and refuses the setting outright when conditions conflict (hot+wet
+# front oil: hot wants thicker, wet wants thinner — your call on the day).
+#
+# DELIBERATELY NOT INCLUDED (deferred to William's domain review — a refusal
+# beats wrong advice, D18 grounded-or-silent): the HOT "high-grip" levers
+# (stiffer front spring / lower ride height / stiffer front bar) — grip-
+# triggered, not temperature, wrong on a hot+low-grip track; the COLD spring/bar
+# levers — they flip direction on good grip; WET softer springs / softer sway
+# bars / thinner centre+rear diff (low-grip transfers, not water-specific), wet
+# ride-height-up (canon contradicts itself on direction), and all tyre tread/
+# compound choices — brand/line-specific. Researched + reviewed candidates for
+# those are in the session notes for William to confirm + page-cite from HUDY.
+#
+# Sources are researched/verified (JQRacing 'THE Guide', RC Car Stars, EuroRC,
+# HUDY Off-Road Set-Up Book). ⚠ William: confirm directions + upgrade the web
+# citations to HUDY page refs where you have them before launch.
+
+- id: kb-weather-hot-front-shock-thicker-301
+  setting: front_shock_oil
+  direction: increase
+  effects:
+    - { axis: damping_in_heat, change: restored }
+    - { axis: chassis_stability, change: more }
+    - { axis: bottoming_resistance, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [hot]
+    reduced_on: [cold]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "One oil step thicker (e.g. 500 → 550 cSt), both fronts identical, keeping the front/rear oil offset. Silicone shock oil thins as it heats, so a hot track leaves the baseline under-damped — bouncy, packs less, bottoms on landings; thicker restores the intended damping. Thicken for the MAIN event's temperature, not a hot qualifier: if it cools by the final, over-thick oil goes wooden and loses grip."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "JQRacing — THE Guide (Joern Neumann, 1/8 buggy), Set-up Advice: hot weather calls for thicker shock oil"
+    - "RC Car Stars — The Effects of Temperature on Silicone Shock Oil (~50 cSt / 2.5wt per 10° change)"
+    - "EuroRC — Basic Shock Oil Setup (silicone oil thins in heat)"
+  scope: [1-8-offroad]
+
+- id: kb-weather-cold-front-shock-thinner-302
+  setting: front_shock_oil
+  direction: decrease
+  effects:
+    - { axis: damping_in_cold, change: restored }
+    - { axis: mechanical_grip, change: more }
+    - { axis: compliance, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [cold]
+    reduced_on: [hot]
+  counter_indications: []
+  magnitude_guidance: "One oil step thinner (e.g. 500 → 450 cSt), both fronts identical, keeping the front/rear offset — roughly ~50 cSt per 10° below your baseline temp. Silicone shock oil thickens as it cools, so a cold track leaves the baseline over-damped — harsh, low grip, slow to take a set; thinner restores the intended damping and mechanical grip in the cold."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "RC Car Stars — The Effects of Temperature on Silicone Shock Oil (cold thickens silicone; run lighter, ~50 cSt / 2.5wt per 10°)"
+    - "The RC Racer — Racing on Low Grip / cold conditions: softer, thinner shock oil"
+    - "EuroRC — Basic Shock Oil Setup (temperature ↔ viscosity)"
+  scope: [1-8-offroad]
+
+- id: kb-weather-cold-rear-shock-thinner-303
+  setting: rear_shock_oil
+  direction: decrease
+  effects:
+    - { axis: damping_in_cold, change: restored }
+    - { axis: forward_traction, change: more }
+    - { axis: compliance, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [cold]
+    reduced_on: [hot]
+  counter_indications: []
+  magnitude_guidance: "One oil step thinner on the rear (e.g. 450 → 400 cSt). Same cold-thickening mechanism as the front; thinner rear restores forward bite and compliance lost to over-damping in the cold."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "RC Car Stars — The Effects of Temperature on Silicone Shock Oil (cold thickens silicone)"
+    - "HUDY Off-Road Set-Up Book p.26 §1.9.1 — softer rear shock oil = more rear traction / compliance"
+    - "EuroRC — Basic Shock Oil Setup (temperature ↔ viscosity)"
+  scope: [1-8-offroad]
+
+# ── WET pack (M4) — thinner shock oil to cut the tyre through the water film ──
+# Survived 3/3 strict refute-by-default review (the only wet candidates to do so)
+# because the mechanism is WATER-specific, not merely low-grip. reduced_on: [] —
+# nothing in the taxonomy reliably opposes the water-film mechanism; the hot+wet
+# directional conflict is handled HONESTLY by planRaceDay (refuse the setting),
+# not hidden behind a reduced_on. ⚠ William: confirm + page-cite from HUDY.
+- id: kb-weather-wet-front-shock-thinner-304
+  setting: front_shock_oil
+  direction: decrease
+  effects:
+    - { axis: surface_water_response, change: faster }
+    - { axis: mechanical_grip, change: more }
+    - { axis: compliance, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [wet]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One oil step thinner on the fronts (e.g. 500 → 450 cSt), both identical, keeping the front/rear offset. On a wet or standing-water surface, thinner oil lets the suspension react fast enough for the tyre to punch THROUGH the water film to the track beneath and keep the limited grip working — too-thick oil skates the tyre across the surface. If the track is wet AND cold this is the SAME change as the cold step: make it once, not twice."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Hearns Hobbies — RC Shock Setup Guide for Different Track Conditions (Wet: thinner oil so tyres cut through the surface water)"
+    - "JQRacing — THE Guide (Joern Neumann, 1/8 buggy): on slippery, bumpy tracks thinner oils are better"
+    - "The RC Racer — Racing on Low Grip: softer, thinner shock oil"
+  scope: [1-8-offroad]
+
+- id: kb-weather-wet-rear-shock-thinner-305
+  setting: rear_shock_oil
+  direction: decrease
+  effects:
+    - { axis: surface_water_response, change: faster }
+    - { axis: forward_traction, change: more }
+    - { axis: compliance, change: more }
+  addresses: []
+  conditions:
+    amplified_on: [wet]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One oil step thinner on the rear (e.g. 450 → 400 cSt). Same water-film mechanism as the front: thinner rear oil reacts fast enough to cut through the wet surface for forward bite and compliance. Mind the rear — do not also thin the rear DIFF for wet (that is a deferred, conditional change); one lever at a time. Wet AND cold is the same single step."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Hearns Hobbies — RC Shock Setup Guide for Different Track Conditions (Wet: thinner oil so tyres cut through the surface water)"
+    - "JQRacing — THE Guide (Joern Neumann, 1/8 buggy): on slippery, bumpy tracks thinner oils are better"
+    - "The RC Racer — Racing on Low Grip: softer, thinner shock oil"
+  scope: [1-8-offroad]

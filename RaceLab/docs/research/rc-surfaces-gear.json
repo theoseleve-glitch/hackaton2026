@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "generated": "2026-06-12",
+    "purpose": "RaceLab autofill reference data: surfaces, tires, oils, springs",
+    "sources": [
+      "rsrc.biz (JetKo range + Matrix range + cst/wt charts)",
+      "prolineracing.com / horizonhobby.com (Pro-Line compound chart)",
+      "jconcepts.net blog (compound key)",
+      "amainhobbies.com product listings (AKA, Matrix, Schumacher, Hudy, Mugen, Kyosho, TLR, GRP)",
+      "beachrc.com / hotraceusa.com / hotrace.shop (Hot Race)",
+      "rawspeedrc.com, liverc.com (Procircuit V2, Raw Speed)",
+      "sweepracing.com / sweepracingusa.com / mibosport.com (Sweep offroad + EXP touring)",
+      "volantetire.com / redrc.net (Volante V8T)",
+      "kwrengineering.com / rctecracing.com (Solaris)",
+      "hobbyheroes.com (GRP GT8 compounds, Contact foams)",
+      "rc.kyosho.com XGS spring pages, trackstarrc.com spring chart",
+      "teamxray.com / rcmart.com (XRAY 4S C= and dot springs)",
+      "associatedelectrics.com spring rate charts, sodialed.com oil/spring references"
+    ]
+  },
+  "surfaces": [
+    { "id": "clay_groomed", "label": "Clay - smooth / groomed", "location": "indoor", "discipline": "offroad", "note": "Watered and groomed indoor clay; very high, consistent grip that blue-grooves along the racing line." },
+    { "id": "clay_dry_dusty", "label": "Clay - dry / dusty", "location": "both", "discipline": "offroad", "note": "Clay that has dried out; a dust film cuts side-bite and makes grip line-dependent." },
+    { "id": "hard_packed_dirt", "label": "Hard-packed dirt", "location": "outdoor", "discipline": "offroad", "note": "Compacted abrasive dirt; high grip but eats pins, favors long-wear compounds and low-profile treads." },
+    { "id": "blue_groove", "label": "Blue groove (rubbered hard pack)", "location": "both", "discipline": "offroad", "note": "Rubber laid into hard pack forms a dark groove; huge grip on line, slick off line." },
+    { "id": "dusty_blue_groove", "label": "Dusty blue groove", "location": "both", "discipline": "offroad", "note": "Blue groove with loose dust on top; grip improves as the line cleans, very inconsistent early in the day." },
+    { "id": "loose_dirt_loam", "label": "Loose dirt / loam", "location": "outdoor", "discipline": "offroad", "note": "Fresh, moist loamy soil; moderate diggy grip, full-pin tires bite well, surface evolves fast." },
+    { "id": "sugar_dirt", "label": "Sugar / fluffy dirt", "location": "both", "discipline": "offroad", "note": "Dry powdery 'sugar' surface; very low grip, polishes tires, soft compounds and big pins needed." },
+    { "id": "grass", "label": "Grass", "location": "outdoor", "discipline": "offroad", "note": "Slippery with high rolling resistance; full spikes work best, grip drops sharply when wet." },
+    { "id": "astroturf", "label": "Astroturf (artificial turf)", "location": "both", "discipline": "offroad", "note": "UK/EU-style astro; consistent medium-high grip, abrasive on pins, low-profile mini-pin territory." },
+    { "id": "carpet_offroad", "label": "Carpet offroad (EOS style)", "location": "indoor", "discipline": "offroad", "note": "Indoor needle-pile race carpet; extreme consistent grip, traction-rolling risk, hard mini-pin or slick tires." },
+    { "id": "mixed_astro_dirt", "label": "Mixed astro + dirt", "location": "outdoor", "discipline": "offroad", "note": "UK-style mixed sections of turf and dirt; compromise tire and setup between both surfaces." },
+    { "id": "wood_sections", "label": "Wood / plywood sections", "location": "indoor", "discipline": "offroad", "note": "Wood ramps and flooring sections on indoor tracks; low slippery grip, sensitive to dust." },
+    { "id": "sand", "label": "Sand", "location": "outdoor", "discipline": "offroad", "note": "Very low grip, car digs in; paddle or full-spike tires, grip improves slightly when damp." },
+    { "id": "gravel", "label": "Gravel", "location": "outdoor", "discipline": "offroad", "note": "Loose stones over base; low unpredictable grip (rally-style), harsh on tires and drivetrain." },
+    { "id": "mud_wet_dirt", "label": "Mud / wet dirt", "location": "outdoor", "discipline": "offroad", "note": "Wet sticky soil that clogs treads; open full-pin or cut-stagger treads to self-clean." },
+    { "id": "snow", "label": "Snow", "location": "outdoor", "discipline": "offroad", "note": "Very low grip and cold tires; spikes or paddles, compounds stay too hard in cold." },
+    { "id": "ice", "label": "Ice", "location": "outdoor", "discipline": "offroad", "note": "Minimal grip; studded or pin tires required, throttle and steering inputs must be tiny." },
+    { "id": "asphalt_low_grip", "label": "Asphalt - low grip (green/dusty)", "location": "outdoor", "discipline": "onroad", "note": "Unrubbered or dusty asphalt (parking lot); low traction, softer compounds and additive needed." },
+    { "id": "asphalt_high_grip", "label": "Asphalt - high grip (rubbered/treated)", "location": "outdoor", "discipline": "onroad", "note": "Rubbered-in or sugar/traction-treated race asphalt; very high grip, harder compounds, traction-roll watch." },
+    { "id": "tarmac_street", "label": "Tarmac street circuit", "location": "outdoor", "discipline": "onroad", "note": "Public-road tarmac; variable bumpy grip with dust and crowning, durability matters." },
+    { "id": "carpet_onroad", "label": "Carpet onroad (ETS/CRC)", "location": "indoor", "discipline": "onroad", "note": "ETS-style black carpet or CRC ozite; extreme consistent grip, dedicated carpet compounds (e.g. 28 shore) and stiff sidewalls." },
+    { "id": "painted_concrete", "label": "Painted / sealed concrete", "location": "both", "discipline": "onroad", "note": "Paint-sealed concrete; medium grip that builds with rubber, slippery when cold or dusty." },
+    { "id": "polished_concrete", "label": "Polished concrete", "location": "indoor", "discipline": "onroad", "note": "Smooth polished slab; low-to-medium grip, very sensitive to dust and tire additive." },
+    { "id": "concrete_rough", "label": "Rough concrete (unpainted)", "location": "both", "discipline": "onroad", "note": "Bare rough concrete; medium grip but very abrasive, accelerated tire wear." },
+    { "id": "rcp_foam_tile", "label": "RCP foam tile (mini scale)", "location": "indoor", "discipline": "onroad", "note": "Interlocking foam tile (Mini-Z/RCP); moderate predictable grip for small scales, wears in over time." }
+  ],
+  "tire_brands": [
+    {
+      "name": "JetKo",
+      "discipline": "1/8 offroad (buggy/truggy)",
+      "inserts": "Dual-stage closed-cell inserts included with tire sets",
+      "lines": [
+        { "name": "J-One", "profiles": ["low-profile micro pin (groomed/oiled clay, blue groove)"], "compounds": ["Composite Super Soft (CSS)", "Composite Soft (CS)", "Ultra Soft (red dot)", "Super Soft (orange dot)", "Soft (green dot)"] },
+        { "name": "Block-In", "profiles": ["pin-on-block (hard pack, blue groove)"], "compounds": ["Composite Super Soft", "Composite Soft", "Ultra Soft", "Super Soft", "Soft", "Medium"] },
+        { "name": "Marco", "profiles": ["dense mini pin (all-round, rutted tracks)"], "compounds": ["Ultra Soft", "Super Soft", "Soft", "Medium Soft"] },
+        { "name": "Sting", "profiles": ["small pin (between Block-In and Lesnar)"], "compounds": ["Ultra Soft", "Super Soft", "Soft"] },
+        { "name": "Lesnar", "profiles": ["block tread (loose to mixed)"], "compounds": ["Ultra Soft", "Super Soft", "Soft", "Medium"] },
+        { "name": "J-Zero", "profiles": ["taller pin (wet/low grip)"], "compounds": ["Wet", "Ultra Soft", "Super Soft", "Soft"] }
+      ]
+    },
+    {
+      "name": "Pro-Line",
+      "discipline": "offroad 1/8 + 1/10",
+      "inserts": "Closed-cell foam inserts included on 1/8; V2 foam on 1/10",
+      "lines": [
+        { "name": "Buck Shot", "profiles": ["directional micro pin (indoor high-bite clay)"], "compounds": ["M3 (soft)", "M4 (super soft)", "S3 (soft long wear)", "MC (ultra high-bite clay)", "X2 (medium)", "X3 (soft)", "X4 (super soft)"] },
+        { "name": "Hole Shot", "profiles": ["classic mini pin (loamy, wet, medium bite)"], "compounds": ["M3", "M4", "S3", "MC", "X2", "X3", "X4"] },
+        { "name": "Fugitive", "profiles": ["intermediate pin (blue groove, hard pack)"], "compounds": ["S3", "S4 (medium long wear)", "M4", "X1 (firm)", "X2", "X3", "X4"] },
+        { "name": "Slide Lock", "profiles": ["edgy alternating pin (loose, dusty)"], "compounds": ["M3", "M4", "S3", "X2", "X3", "X4"] },
+        { "name": "Convict 2.0", "profiles": ["aggressive bar/pin mix"], "compounds": ["M3", "M4 (watered tracks)", "S3", "S5 (firm long wear, abrasive dry)"] },
+        { "name": "LockDown / Suppressor / ElectroShot", "profiles": ["mini pin family (electric & nitro 1/8)"], "compounds": ["X1", "X2", "X3", "X4", "M3", "M4"] },
+        { "name": "Electron / Positron / Prism (1/10)", "profiles": ["micro pin rear / rib-spike front (carpet, astro, hard clay)"], "compounds": ["MC (clay)", "M4", "Z3 (medium carpet)", "Z4 (soft carpet)", "S3"] },
+        { "name": "Hole Shot 3.0 / Wedge (1/10)", "profiles": ["mini pin rear / wedge square front (dirt)"], "compounds": ["M3", "M4", "MC"] }
+      ]
+    },
+    {
+      "name": "AKA",
+      "discipline": "offroad 1/8 + 1/10",
+      "inserts": "Grooved closed-cell 'Grooved' inserts (red/soft and standard)",
+      "lines": [
+        { "name": "P1", "profiles": ["dense small pin (dust over hard pack, long wear)"], "compounds": ["Super Soft", "Soft", "Medium", "Super Soft Long Wear", "Soft Long Wear", "Clay"] },
+        { "name": "EVO Cityblock", "profiles": ["pin-on-block original (loose dust to high-bite hard pack)"], "compounds": ["Super Soft", "Soft", "Medium", "Super Soft Long Wear", "Clay"] },
+        { "name": "Component 2AB", "profiles": ["asymmetric dual tread - A side 4-row forgiving / B side 3-row direct"], "compounds": ["Super Soft Long Wear", "Soft Long Wear", "Clay"] },
+        { "name": "Impact / Double Down / Cross Brace", "profiles": ["mini pin / interlocked pin (blue groove, hard pack)"], "compounds": ["Super Soft", "Soft", "Medium", "Clay"] },
+        { "name": "EVO Gridiron / Typo / Scribble (1/10)", "profiles": ["pin & web treads for dirt and astro/carpet"], "compounds": ["Super Soft", "Soft", "Clay"] }
+      ]
+    },
+    {
+      "name": "Sweep",
+      "discipline": "1/8 offroad + 1/10 touring onroad",
+      "inserts": "Offroad: closed-cell inserts; touring: EXP-SX molded inserts",
+      "lines": [
+        { "name": "Nanobite", "profiles": ["nano pin (groomed clay, blue groove)"], "compounds": ["Gold dot", "Yellow dot", "Silver dot", "Blue dot", "Red dot"] },
+        { "name": "Super Carbide / Carbide", "profiles": ["small carbide pin (hard pack)"], "compounds": ["Yellow-X", "Blue", "Silver", "Gold"] },
+        { "name": "Defender / Cell Block / Whips / Birdshot", "profiles": ["block & pin treads (loose to mixed)"], "compounds": ["Blue", "Green (clay)", "Yellow", "Silver", "EXP (synthetic long-wear, max traction)"] },
+        { "name": "EXP EVO-R3 PRO (touring)", "profiles": ["slick, pre-glued asphalt"], "compounds": ["24deg", "28deg", "32deg", "36deg", "40deg"] },
+        { "name": "EXX-R3 / D-R3 (touring)", "profiles": ["slick, low-grip & sugar-surface asphalt"], "compounds": ["24deg", "32deg", "36deg"] }
+      ]
+    },
+    {
+      "name": "Matrix",
+      "discipline": "1/8 offroad + 1/8 onroad foam",
+      "inserts": "Offroad sold with inserts or pre-glued on white wheels",
+      "lines": [
+        { "name": "Blackhole", "profiles": ["pin-on-block (hard pack, blue groove)"], "compounds": ["Ultra Soft", "Super Soft", "Soft", "Medium", "Clay Ultra Soft", "Clay Super Soft", "Clay Soft", "Clay Medium"] },
+        { "name": "Nova", "profiles": ["mini pin (groomed clay, astro, oiled tracks)"], "compounds": ["Ultra Soft", "Super Soft", "Soft", "Medium", "Clay Ultra Soft", "Clay Super Soft", "Clay Soft", "Clay Medium"] },
+        { "name": "GT / 1/8 onroad foam", "profiles": ["foam donut on rim (asphalt)"], "compounds": ["25 shore", "30 shore", "32 shore", "35 shore", "37 shore", "40 shore"] }
+      ]
+    },
+    {
+      "name": "Hot Race",
+      "discipline": "1/8 offroad (buggy/truggy/GT)",
+      "inserts": "Soft closed-cell inserts included; compound choice driven by climate/temperature",
+      "lines": [
+        { "name": "Bangkok V2", "profiles": ["mini pin with inner mesh (indoor, groomed)"], "compounds": ["Super Soft", "Soft", "Medium", "Hard"] },
+        { "name": "Miami", "profiles": ["medium pin, round shoulders (rutted, worn tracks)"], "compounds": ["Super Soft", "Soft", "Medium", "Hard"] },
+        { "name": "Sahara", "profiles": ["dense pin (dry, dusty, abrasive)"], "compounds": ["Super Soft", "Soft", "Medium", "Hard", "Clay-specific rubber", "White compound"] },
+        { "name": "Roma / Amazzonia / Alaska", "profiles": ["block & spike treads (hard pack / wet / snow-mud)"], "compounds": ["Super Soft", "Soft", "Medium", "Hard"] },
+        { "name": "GT8 slicks/treaded", "profiles": ["slick & treaded 1/8 GT rubber"], "compounds": ["Soft", "Medium", "Hard"] }
+      ]
+    },
+    {
+      "name": "Procircuit",
+      "discipline": "1/8 offroad",
+      "inserts": "Closed-cell inserts included (V2 series)",
+      "lines": [
+        { "name": "H-Block V2", "profiles": ["pin-on-block (hard pack)"], "compounds": ["C1 Super Soft (white)", "C2 Soft (yellow)", "C3 Medium (orange)", "C4 Hard (blue)"] },
+        { "name": "Hot Dice V2", "profiles": ["dice-block tread (mixed)"], "compounds": ["C1 Super Soft", "C2 Soft", "C3 Medium", "C4 Hard"] },
+        { "name": "Addictive V2", "profiles": ["mini pin (groomed/indoor)"], "compounds": ["C1 Super Soft", "C2 Soft", "C3 Medium", "C4 Hard"] },
+        { "name": "Claymore V2", "profiles": ["small pin (clay)"], "compounds": ["C1 Super Soft", "C2 Soft", "C3 Medium", "C4 Hard"] }
+      ]
+    },
+    {
+      "name": "Raw Speed",
+      "discipline": "1/8 offroad + 1/10 offroad",
+      "inserts": "Sold tire-only or with inserts; standard closed-cell",
+      "lines": [
+        { "name": "Mach One", "profiles": ["mini pin (all-round)"], "compounds": ["Six compounds from Super Soft to Hard incl. Clay"] },
+        { "name": "Radar", "profiles": ["precision pin (steering response)"], "compounds": ["Six rubber compounds, Super Soft to Hard"] },
+        { "name": "Triumph", "profiles": ["tight tread (smooth, light dust, long wear)"], "compounds": ["Super Soft", "Soft", "Clay"] },
+        { "name": "Slick", "profiles": ["full slick (high-bite carpet/clay)"], "compounds": ["Clay", "Super Soft"] }
+      ]
+    },
+    {
+      "name": "GRP",
+      "discipline": "1/8 GT onroad (belted rubber) + foams",
+      "inserts": "Belted carcass, pre-mounted on spoked rims; no foam insert needed",
+      "lines": [
+        { "name": "GT TO3 (treaded)", "profiles": ["treaded belted GT (dirt/dusty or cold asphalt)"], "compounds": ["XB1 (extra soft)", "XB2 (extra soft, low temp)", "XB3 (soft)", "XM2 (super soft)", "XM3 (soft)", "XM4 (medium soft)", "XM5 (medium)", "XM7 (medium hard)"] },
+        { "name": "GT TO4 (slick)", "profiles": ["slick belted GT (clean asphalt)"], "compounds": ["XB1", "XB2", "XB3", "XM2", "XM3", "XM4", "XM5", "XM7"] }
+      ]
+    },
+    {
+      "name": "Schumacher",
+      "discipline": "1/10 offroad (carpet/astro/dirt)",
+      "inserts": "Most sold with medium foam inserts; yellow = benchmark race compound",
+      "lines": [
+        { "name": "Cactus", "profiles": ["low mini pin (EOS carpet)"], "compounds": ["Yellow (soft - dry benchmark)", "Silver (super soft - dust/wet)", "Blue (hard - durable wet/dry)"] },
+        { "name": "Cactus Fusion", "profiles": ["mini pin (astroturf)"], "compounds": ["Yellow", "Silver", "Blue"] },
+        { "name": "Mezzo", "profiles": ["varied pin carcass (long & short pile astro)"], "compounds": ["Yellow (dry performance)", "Silver (wet)", "Blue (long life)"] },
+        { "name": "Cut Stagger / Stagger Rib", "profiles": ["staggered block rear / ribbed front (dirt, loose)"], "compounds": ["Yellow", "Green (soft, lower temp)", "Silver", "Blue"] },
+        { "name": "Mini Pin / Mini Spike / Full Spike", "profiles": ["pin & spike (dirt, grass, wet)"], "compounds": ["Yellow", "Green", "Silver", "Blue"] }
+      ]
+    },
+    {
+      "name": "JConcepts",
+      "discipline": "1/10 offroad (+ 1/8)",
+      "inserts": "Dirt-Tech closed-cell inserts; compound suffix -01/-02/-03/-04 on part numbers",
+      "lines": [
+        { "name": "Dirt Webs", "profiles": ["web/bar tread (indoor clay control tire)"], "compounds": ["Green (super soft)", "Blue (soft all-purpose)", "Gold (indoor clay)", "Silver (indoor clay, softer than gold)", "Aqua (hot/abrasive)", "Aqua A2 (medium soft long wear)", "A3 (soft long wear)"] },
+        { "name": "Reflex", "profiles": ["micro pin (grooved indoor/outdoor)"], "compounds": ["Green (supersoft)", "Blue", "Silver", "Aqua A2"] },
+        { "name": "Swaggers", "profiles": ["stagger rib front (2WD carpet/turf/clay)"], "compounds": ["Green", "Blue", "Gold", "Silver", "Aqua A2"] },
+        { "name": "Ellipse / Space Bars / Twin Pins / Fuzz Bites", "profiles": ["bar & pin treads (high-bite clay, turf, loose)"], "compounds": ["Green", "Blue", "Aqua", "Gold", "Silver", "A2", "A3"] }
+      ]
+    },
+    {
+      "name": "Volante",
+      "discipline": "1/10 touring onroad",
+      "inserts": "Molded inserts, pre-glued sets; R-number = compound hardness",
+      "lines": [
+        { "name": "V8T / V8T Revolution", "profiles": ["slick with ultra-thin inner belt (asphalt)"], "compounds": ["24R (softest/cold)", "28R", "32R", "36R (hot/high grip)"] },
+        { "name": "V5 (legacy)", "profiles": ["slick (asphalt + carpet)"], "compounds": ["24R", "28R", "32R", "36R", "28-CP (indoor carpet)"] }
+      ]
+    },
+    {
+      "name": "Solaris",
+      "discipline": "1/10 touring onroad",
+      "inserts": "'J' designation = max-grip insert; pre-glued on dish or spoke wheels; Japan-made rubber",
+      "lines": [
+        { "name": "High Performance slick", "profiles": ["slick (asphalt/carpet)"], "compounds": ["28J", "32J", "36J", "40J"] }
+      ]
+    },
+    {
+      "name": "Contact",
+      "discipline": "1/10 + 1/8 onroad (rubber & foam)",
+      "inserts": "Foams mounted on rims (shore-rated); rubber touring pre-glued with inserts",
+      "lines": [
+        { "name": "1/10 touring rubber", "profiles": ["slick pre-glued (asphalt)"], "compounds": ["32 shore", "36 shore"] },
+        { "name": "GT8 / Rally foam", "profiles": ["foam GT donut (1/8 onroad)"], "compounds": ["25 shore", "35 shore", "38 shore", "40 shore", "45 shore"] },
+        { "name": "1/10 & 1/12 pan-car foam", "profiles": ["foam (carpet pan car)"], "compounds": ["shore-graded, incl. double-shore fronts/rears"] }
+      ]
+    }
+  ],
+  "oil_brands": [
+    {
+      "name": "Kyosho",
+      "shock_system": "Numbered #100-#1000, linear to cSt (#350 = ~350 cSt)",
+      "diff_system": "cSt direct (Silicone Differential Oil, 40cc)",
+      "shock_range": "#100 - #1000 (~100-1000 cSt)",
+      "diff_range": "500 - 100,000+ cSt (common: 1000 / 3000 / 5000 / 7000 / 10000)"
+    },
+    {
+      "name": "Mugen Seiki",
+      "shock_system": "cSt direct (Super Silicone Shock Oil, 50ml)",
+      "diff_system": "cSt direct (Silicone Differential Oil, 50ml)",
+      "shock_range": "150 - 800 cSt (e.g. 300 / 350 / 450 / 500 / 550 / 600 / 700)",
+      "diff_range": "1,000 - 500,000 cSt"
+    },
+    {
+      "name": "XRAY",
+      "shock_system": "cSt direct (XRAY Premium Silicone Oil; setup sheets quote cSt)",
+      "diff_system": "cSt direct",
+      "shock_range": "100 - 1,000 cSt",
+      "diff_range": "500 - 500,000 cSt"
+    },
+    {
+      "name": "Hudy",
+      "shock_system": "cSt direct (Ultimate Silicone Oil, lab-calibrated per batch)",
+      "diff_system": "cSt direct",
+      "shock_range": "100 - 1,000 cSt (e.g. 350 / 400 / 500 / 550 / 900)",
+      "diff_range": "1,000 - 2,000,000 cSt (e.g. 4000 / 6000 / 10,000 / 1M / 2M)"
+    },
+    {
+      "name": "Team Associated",
+      "shock_system": "wt (AE's own weight scale; AE 27.5wt ~ Losi 30wt - scales differ between brands)",
+      "diff_system": "cSt direct (FT Silicone Diff Fluid)",
+      "shock_range": "10wt - 80wt incl. half-weights (e.g. 27.5 / 30 / 32.5wt)",
+      "diff_range": "1,000 - 500,000 cSt"
+    },
+    {
+      "name": "Losi / TLR",
+      "shock_system": "wt with cSt equivalent printed (e.g. 50wt = 710 cSt, 60wt = 810 cSt)",
+      "diff_system": "cSt direct ('CS' suffix on diff fluids)",
+      "shock_range": "15wt - 60wt+ incl. half-weights (17.5 / 22.5 / 27.5 / 37.5 / 42.5wt)",
+      "diff_range": "1,000 - 1,000,000 cSt"
+    },
+    {
+      "name": "Yokomo",
+      "shock_system": "Numbered scale (Super Blend #50-#950; Racing Performer Ultra graded #20-#45)",
+      "diff_system": "cSt direct",
+      "shock_range": "#50 - #950 (Super Blend, ~cSt-like)",
+      "diff_range": "500 - 500,000 cSt"
+    },
+    {
+      "name": "Serpent",
+      "shock_system": "Own WT-style numbering 20-50 (NON-linear vs cSt - use brand conversion chart)",
+      "diff_system": "cSt direct for diff silicones",
+      "shock_range": "20 - 50 (Serpent scale), incl. half steps (e.g. 47.5wt)",
+      "diff_range": "1,000 - 300,000 cSt"
+    },
+    {
+      "name": "Generic reference",
+      "shock_system": "Shock oils: ~100-2,000 cSt (~10-100 wt); rule of thumb +/-5wt ~ +/-50 cSt; never mix wt scales between brands",
+      "diff_system": "Diff oils: ~1,000-1,000,000 cSt; front diff thickest, center medium, rear thinnest (1/8 offroad typical 7k/15k/3k)",
+      "shock_range": "100 - 2,000 cSt / 10 - 100 wt",
+      "diff_range": "1,000 - 1,000,000 cSt"
+    }
+  ],
+  "spring_systems": [
+    {
+      "brand": "Kyosho (Big Bore)",
+      "identification": "Paint color on coil + length class (S/M/L); rate rises through the color chart; XGS part numbers for 1/8, IF/XGS for MP9/MP10",
+      "examples": [
+        "1/8 S-length: Gold = Medium (XGS003), Red = Medium Hard (XGS004), Yellow = Hard (XGS005), Orange = Super Hard (XGS006)",
+        "White = Super Soft (front MP9/MP10, IF350-1016)",
+        "1/10 big bore: Green 9T 3.1 lb/in -> Grey 8T 3.6 -> Blue 7.5T 3.9 -> Yellow 7T 4.3 -> Red 6.5T 4.6 -> Orange 6T 5.1 lb/in"
+      ]
+    },
+    {
+      "brand": "XRAY",
+      "identification": "Touring: 'C=' spring constant printed on package (4S springs, 20mm, hand-matched pairs); 1/8 offroad: number of paint dots (1-5) identifies rate, sets offered linear and progressive",
+      "examples": [
+        "T4/X4 4S linear sets: C=2.1, C=2.3, C=2.6, C=3.0",
+        "4S progressive sets: C=2.3-2.6, C=2.5-2.8 (rate rises through stroke)",
+        "XB8 front 69mm progressive springs: 3-dot, 4-dot, 5-dot; rear 82mm: 2-dot etc."
+      ]
+    },
+    {
+      "brand": "Team Associated",
+      "identification": "Paint color per spring family with rate in lb/in on AE's published spring rate charts (12mm, 13mm V2, 1/8 RC8 big bore)",
+      "examples": [
+        "13mm V2 buggy springs: color-coded (grey/blue/yellow/green/red/orange/white) spanning roughly 3-6 lb/in",
+        "RC8 1/8 springs listed by rate + color on AE 1/8 off-road spring list",
+        "Same color can mean different rates across families - always check the chart by spring series"
+      ]
+    },
+    {
+      "brand": "Losi / TLR",
+      "identification": "Rate in lb/in with color paint stripe; separate standard and Low Frequency (LF) spring lines (LF = softer initial feel for high-grip tracks)",
+      "examples": [
+        "TLR 22-series 12mm springs by lb/in + color stripe",
+        "8IGHT 1/8 springs by rate and length",
+        "LF spring sets for carpet/astro high-bite conditions"
+      ]
+    },
+    {
+      "brand": "General concepts",
+      "identification": "Linear springs = constant coil pitch, one rate through the stroke; progressive springs = variable pitch, rate increases with compression (soft initial, firm bottoming); identify by uneven coil spacing or dual-rate markings",
+      "examples": [
+        "Progressive: predictable on bumpy outdoor tracks, resists bottoming",
+        "Linear: consistent feel preferred on smooth high-grip indoor tracks",
+        "Stiffer springs front = more on-power steering exit; stiffer rear = more steering into corner, less forward traction"
+      ]
+    }
+  ]
+}

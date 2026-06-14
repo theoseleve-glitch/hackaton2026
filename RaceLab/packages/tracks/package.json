@@ -1,0 +1,17 @@
+{
+  "name": "racelab-tracks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab tracks (D25): tracks as first-class entities — corners, traits, auto-updating lap records, deterministic bridge to the engine condition taxonomy. Pure functions, no I/O — bundles into the app unchanged.",
+  "scripts": {
+    "test": "tsx src/test-tracks.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "racelab-garage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "RaceLab garage (D26): multi-car entities + car-typology sheet customization (hidden sections, label overrides, badges). Pure functions, no I/O — bundles into the app unchanged.",
+  "scripts": {
+    "test": "tsx src/test-garage.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^24.0.0"
+  }
+}

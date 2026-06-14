@@ -1,0 +1,62 @@
+name: Schema Sync
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  schema-sync-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install Python package
+        working-directory: python
+        run: uv sync --all-groups
+
+      - name: Generate openapi.json
+        working-directory: python
+        run: uv run python -m lap_schemas.generate_openapi openapi.json
+
+      - name: Install TypeScript codegen deps
+        working-directory: typescript
+        run: npm ci
+
+      - name: Regenerate TypeScript types
+        working-directory: typescript
+        run: npm run generate:ts
+
+      - name: Install Swift codegen deps
+        working-directory: swift
+        run: npm ci
+
+      - name: Regenerate Swift types
+        working-directory: swift
+        run: npm run generate:swift
+
+      - name: Install Kotlin codegen deps
+        working-directory: kotlin
+        run: npm ci
+
+      - name: Regenerate Kotlin types
+        working-directory: kotlin
+        run: npm run generate:kotlin
