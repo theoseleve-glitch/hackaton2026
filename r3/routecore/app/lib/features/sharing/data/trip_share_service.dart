@@ -28,14 +28,17 @@ abstract class TripShareService {
   Stream<TripShare?> watch(String token);
 }
 
-/// Implémentation Supabase (Realtime gratuit). Le token public + RLS
-/// (active & non expiré) protègent l'accès — voir 0006_trip_shares.sql.
+/// Implémentation Supabase. Accès STRICTEMENT token-scopé via des RPC
+/// SECURITY DEFINER (la table n'est pas accessible directement, ni publiée en
+/// Realtime — voir 0006_trip_shares.sql). Le viewer interroge get_trip_share
+/// en polling. Le token (non devinable) est la capacité d'accès.
 class SupabaseTripShareService implements TripShareService {
-  SupabaseTripShareService(this._client);
+  SupabaseTripShareService(this._client, {Duration? pollInterval})
+      : _pollInterval = pollInterval ?? const Duration(seconds: 5);
 
   final SupabaseClient _client;
+  final Duration _pollInterval;
   static const _log = AppLogger('trip-share');
-  static const _table = 'trip_shares';
 
   @override
   Future<TripShare> createShare({
@@ -50,7 +53,13 @@ class SupabaseTripShareService implements TripShareService {
       destLat: destination.latitude,
       destLng: destination.longitude,
     );
-    await _client.from(_table).insert(share.toRow());
+    await _client.rpc('create_trip_share', params: {
+      'p_token': share.token,
+      'p_origin_label': originLabel,
+      'p_destination_label': destinationLabel,
+      'p_dest_lat': destination.latitude,
+      'p_dest_lng': destination.longitude,
+    });
     return share;
   }
 
@@ -62,13 +71,13 @@ class SupabaseTripShareService implements TripShareService {
     double? remainingMeters,
   }) async {
     try {
-      await _client.from(_table).update({
-        'last_lat': position.latitude,
-        'last_lng': position.longitude,
-        'eta_epoch_ms': eta?.millisecondsSinceEpoch,
-        'remaining_meters': remainingMeters,
-        'updated_at': DateTime.now().toUtc().toIso8601String(),
-      }).eq('token', token);
+      await _client.rpc('update_trip_progress', params: {
+        'p_token': token,
+        'p_lat': position.latitude,
+        'p_lng': position.longitude,
+        'p_eta_epoch_ms': eta?.millisecondsSinceEpoch,
+        'p_remaining': remainingMeters,
+      });
     } catch (e) {
       _log.warn('maj partage impossible: $e');
     }
@@ -77,18 +86,32 @@ class SupabaseTripShareService implements TripShareService {
   @override
   Future<void> endShare(String token) async {
     try {
-      await _client.from(_table).update({'active': false}).eq('token', token);
+      await _client.rpc('end_trip_share', params: {'p_token': token});
     } catch (e) {
       _log.warn('clôture partage impossible: $e');
     }
   }
 
+  Future<TripShare?> _fetch(String token) async {
+    try {
+      final result =
+          await _client.rpc('get_trip_share', params: {'p_token': token});
+      final rows = (result as List?) ?? const [];
+      if (rows.isEmpty) return null;
+      return TripShare.fromRow((rows.first as Map).cast<String, dynamic>());
+    } catch (e) {
+      _log.warn('lecture partage impossible: $e');
+      return null;
+    }
+  }
+
   @override
-  Stream<TripShare?> watch(String token) => _client
-      .from(_table)
-      .stream(primaryKey: ['id'])
-      .eq('token', token)
-      .map((rows) => rows.isEmpty ? null : TripShare.fromRow(rows.first));
+  Stream<TripShare?> watch(String token) async* {
+    // Polling (pas de Realtime sur la table pour éviter tout fan-out) :
+    // un fix immédiat, puis toutes les [_pollInterval].
+    yield await _fetch(token);
+    yield* Stream.periodic(_pollInterval).asyncMap((_) => _fetch(token));
+  }
 }
 
 /// Implémentation locale (sans Supabase) : partage VISIBLE dans la même
