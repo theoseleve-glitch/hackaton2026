@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { leakedSecrets, type GameEvent, type PlayerId } from '@bloop/engine';
+import { packForRef } from '../src/content/index.js';
 import { listGames, type GameEntry } from '../src/room/registry.js';
 
 /**
@@ -308,14 +309,17 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['trouvez-la-regle', {
     players: ['p1', 'p2', 'p3', 'p4', 'p5'],
     seed: 'audit-seed',
+    // seed 'audit-seed' makes p2 the round-0 detective, so the FOLLOWERS
+    // (p1,p3,p4,p5) ack and a follower (p1) accuses another follower (p3); the
+    // detective neither acks nor accuses under the current rule-hunt mechanics.
     events: [
-      rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
-      rhAccuse('p2', 'p3', 5_000),
+      rhAck('p1', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
+      rhAccuse('p1', 'p3', 5_000),
       rhVote('p4', true, 6_000), rhVote('p5', false, 7_000),
     ],
     eventsAlt: [
-      rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
-      rhAccuse('p2', 'p3', 5_000),
+      rhAck('p1', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
+      rhAccuse('p1', 'p3', 5_000),
       rhVote('p4', false, 6_000), rhVote('p5', true, 7_000),
     ],
     actors: ['p4', 'p5'],
@@ -405,7 +409,8 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
 const OUTSIDERS = ['viewer-not-in-roster', '__proto__'] as const;
 
 function fold(entry: GameEntry, audit: RedactionAudit, events: ReadonlyArray<GameEvent<unknown>>): unknown {
-  let state: unknown = entry.module.init(audit.seed, [...audit.players], entry.content);
+  // R2 seam: registry holds only a contentRef now; resolve the live pack from the seed module.
+  let state: unknown = entry.module.init(audit.seed, [...audit.players], packForRef(entry.contentRef)!);
   for (const e of events) {
     const next = entry.module.reduce(state, e).state;
     // a rejected fixture event (same reference, I4) would make the audit vacuous — fail loud

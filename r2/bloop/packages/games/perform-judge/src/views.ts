@@ -1,8 +1,16 @@
 import type { PlayerId } from '@bloop/engine';
-import { connectedPlayers, emptyPlayerMap } from '@bloop/kit';
+import {
+  connectedPlayers,
+  emptyPlayerMap,
+  isCloseFinish,
+  mvp,
+  statLeaders,
+  topGap,
+} from '@bloop/kit';
 import { crew, currentItem, eligibleJudges, reactionCounts, reactors, tapCount, tapGoal } from './helpers.js';
 import type {
   ConstraintCard,
+  Epilogue,
   PerformJudgeState,
   PerformJudgeView,
   SecretCard,
@@ -13,9 +21,28 @@ type S = PerformJudgeState;
 
 export const EMPTY_RESULT: TurnResult = {
   performer: '', partner: null, item: null, outcome: 'void',
-  tally: null, stars: null, fast: false, points: {},
+  tally: null, stars: null, fast: false, moneyRound: false, drama: null, points: {},
   reactions: { fire: 0, laugh: 0, cringe: 0 },
 };
+
+/** Top-2 gap (in points) that flags a cliffhanger 'closeFinish' at 'over'. */
+const CLOSE_FINISH_THRESHOLD = 25;
+
+/**
+ * CC-5 — derive the end-of-match epilogue cards PURELY from already-public state:
+ * final `scores` and the running, per-turn-public `reactionTotals`/`nailbiterCount`.
+ * No new secret, no RNG, no clock; stable ascending-id order via the kit helpers.
+ */
+function deriveEpilogue(state: S): Epilogue {
+  return {
+    bestPerformer: mvp(state.scores),
+    crowdFavourite: statLeaders(state.reactionTotals).players,
+    reactionTotals: Object.assign(emptyPlayerMap<number>(), state.reactionTotals),
+    closeFinish: isCloseFinish(state.scores, CLOSE_FINISH_THRESHOLD),
+    topGap: topGap(state.scores),
+    nailbiters: state.nailbiterCount,
+  };
+}
 
 /**
  * Per-viewer projection — the redaction matrix (synthesis §3.2):
@@ -30,7 +57,12 @@ export const EMPTY_RESULT: TurnResult = {
  */
 export function projectView(state: S, viewer: PlayerId): PerformJudgeView {
   if (state.phase === 'over') {
-    return { phase: 'over', mode: state.config.mode, scores: state.scores };
+    return {
+      phase: 'over',
+      mode: state.config.mode,
+      scores: state.scores,
+      epilogue: deriveEpilogue(state),
+    };
   }
   const config = state.config;
   const isRoster = state.players.includes(viewer);
@@ -56,6 +88,8 @@ export function projectView(state: S, viewer: PlayerId): PerformJudgeView {
     turnSeq: state.turnSeq,
     lap: state.lap,
     laps: config.laps,
+    // CC-2 Money Round: final lap AND the multiplier is actually armed (> 1).
+    isFinalLap: state.lap === config.laps - 1 && config.finalLapMultiplier > 1,
     performer: state.performer,
     partner: state.partner,
     rotation: state.rotation,

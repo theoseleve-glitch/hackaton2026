@@ -8,6 +8,7 @@ import {
   type TdItem,
   type TruthDareAction,
   type TruthDareContent,
+  type Reaction,
   type TruthDareState,
   type TruthDareView,
   type Verdict,
@@ -78,6 +79,8 @@ export const vote = (playerId: string, v: Verdict, at = 0): Ev =>
   ({ type: 'action', playerId, action: { kind: 'verdict', vote: v }, at });
 export const predict = (playerId: string, bet: Verdict, at = 0): Ev =>
   ({ type: 'action', playerId, action: { kind: 'predict', bet }, at });
+export const react = (playerId: string, reaction: Reaction, at = 0): Ev =>
+  ({ type: 'action', playerId, action: { kind: 'react', reaction }, at });
 export const deadline = (at = 0): Ev => ({ type: 'deadline', at });
 export const left = (playerId: string, at = 0): Ev => ({ type: 'playerLeft', playerId, at });
 export const rejoin = (playerId: string, at = 0): Ev => ({ type: 'playerRejoined', playerId, at });

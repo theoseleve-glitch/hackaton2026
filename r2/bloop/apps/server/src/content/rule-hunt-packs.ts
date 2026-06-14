@@ -2467,6 +2467,747 @@ export const TROUVEZ_LA_REGLE_PACK: ContentPack<RuleHuntContent> = {
         "en": "Request moral support from the room after every hard question. You're the victim here, okay?"
       }
     ]
+  },
+  {
+    "id": "rh-finger-guns",
+    "category": "gesture",
+    "difficulty": "easy",
+    "rule": {
+      "fr": "Fais des doigts en pistolet à quiconque dit ton prénom. Pan pan. La gâchette nerveuse d'un coupable détendu.",
+      "en": "Fire finger-guns at anyone who says your name. Pew pew. The twitchy trigger of a very relaxed suspect."
+    },
+    "decoys": [
+      {
+        "fr": "Pointe le plafond après chaque bonne réponse, comme si le mérite revenait à plus haut que toi.",
+        "en": "Point at the ceiling after every right answer, like the credit goes somewhere above your pay grade."
+      },
+      {
+        "fr": "Souffle sur ton index après chaque pique, tireur de l'Ouest qui range son flingue.",
+        "en": "Blow on your index finger after every dig, cowboy holstering after the shot."
+      },
+      {
+        "fr": "Tape deux fois ton poignet quand on te presse, comme si t'avais une montre et un emploi du temps.",
+        "en": "Tap your wrist twice whenever someone rushes you, like you own a watch and a schedule."
+      },
+      {
+        "fr": "Lève un sourcil dès qu'on te contredit, juge qui a déjà rédigé le verdict.",
+        "en": "Cock one eyebrow whenever you're contradicted, judge who already wrote the verdict."
+      },
+      {
+        "fr": "Fais semblant de dégainer un carnet à chaque accusation. Le dossier s'épaissit, en mime.",
+        "en": "Mime whipping out a notepad at every accusation. The file thickens, in pantomime."
+      },
+      {
+        "fr": "Claque dans tes mains une fois pour clore chaque débat, arbitre qui en a marre.",
+        "en": "Clap once to close every argument, referee who's had enough."
+      },
+      {
+        "fr": "Mets une main en porte-voix pour répondre au détective, même à dix centimètres.",
+        "en": "Cup a hand to your mouth to answer the detective, even from ten centimetres away."
+      }
+    ]
+  },
+  {
+    "id": "rh-slow-blink",
+    "category": "gesture",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Cligne des yeux au ralenti dès qu'on te pose une question. Le buffer d'un alibi qui charge mal.",
+      "en": "Blink in slow motion whenever you're asked a question. The buffering wheel of an alibi loading badly."
+    },
+    "decoys": [
+      {
+        "fr": "Garde un œil mi-clos en permanence, pirate à la retraite qui surveille encore le port.",
+        "en": "Keep one eye half-shut at all times, retired pirate still watching the harbour."
+      },
+      {
+        "fr": "Écarquille les yeux à chaque chiffre, comme si l'addition venait d'arriver.",
+        "en": "Go wide-eyed at every number, like the bill just landed on the table."
+      },
+      {
+        "fr": "Détourne le regard vers la fenêtre avant chaque mensonge. Le paysage est ton complice.",
+        "en": "Glance away to the window before every lie. The scenery is your accomplice."
+      },
+      {
+        "fr": "Fixe le front des gens au lieu des yeux. Presque sincère, jamais tout à fait.",
+        "en": "Stare at people's foreheads instead of their eyes. Almost sincere, never quite."
+      },
+      {
+        "fr": "Plisse les yeux comme si tu lisais une plaque d'immatriculation au loin, à chaque accusation.",
+        "en": "Squint like you're reading a number plate in the distance, at every accusation."
+      },
+      {
+        "fr": "Frotte un œil quand on répète ta question. Le grain de sable, c'est toujours la question.",
+        "en": "Rub one eye whenever your question gets repeated. The speck of dust is always the question."
+      },
+      {
+        "fr": "Ferme les deux yeux en répondant aux trucs gênants. Pas vu, pas pris, version aveugle.",
+        "en": "Shut both eyes when answering the awkward bits. Out of sight, out of custody."
+      }
+    ]
+  },
+  {
+    "id": "rh-hover-hand",
+    "category": "gesture",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "Garde une main en suspension à dix centimètres de la table, prête à tout saisir. Le réflexe d'un pickpocket entre deux contrats.",
+      "en": "Keep one hand hovering ten centimetres above the table, ready to grab. The reflex of a pickpocket between gigs."
+    },
+    "decoys": [
+      {
+        "fr": "Garde toujours une main sur un objet, comme si tu le protégeais d'une saisie.",
+        "en": "Always keep one hand on some object, like you're guarding it from repossession."
+      },
+      {
+        "fr": "Croise les doigts sous la table, à l'abri du regard. Le mensonge a besoin d'intimité.",
+        "en": "Cross your fingers under the table, out of sight. The lie needs privacy."
+      },
+      {
+        "fr": "Garde tes paumes ouvertes vers le plafond, comme si tu n'avais jamais rien serré de louche.",
+        "en": "Keep your palms open to the ceiling, like you've never gripped anything dodgy."
+      },
+      {
+        "fr": "Fais glisser ton verre de quelques centimètres à chaque accusation. La fuite, à l'échelle d'un sous-bock.",
+        "en": "Slide your glass a few centimetres at every accusation. Escape, at coaster scale."
+      },
+      {
+        "fr": "Garde un poing fermé contre ta poitrine, comme si t'avais avalé la preuve.",
+        "en": "Keep one fist pressed to your chest, like you swallowed the evidence."
+      },
+      {
+        "fr": "Tambourine de l'index sur la table dès qu'un silence dure. Le métronome de ta culpabilité.",
+        "en": "Drum one finger on the table whenever a silence drags. The metronome of your guilt."
+      },
+      {
+        "fr": "Garde les deux mains posées bien à plat, immobiles, comme à un détecteur de mensonges.",
+        "en": "Keep both hands flat and motionless, like you're hooked up to a polygraph."
+      }
+    ]
+  },
+  {
+    "id": "rh-point-floor",
+    "category": "gesture",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Pointe le sol du doigt chaque fois que tu n'es pas d'accord. La vérité est enterrée juste là, sous tes baskets.",
+      "en": "Jab a finger at the floor whenever you disagree. The truth is buried right there, under your trainers."
+    },
+    "decoys": [
+      {
+        "fr": "Pointe la porte à chaque mensonge, comme si la sortie te démangeait déjà.",
+        "en": "Point at the door at every lie, like the exit is already itching at you."
+      },
+      {
+        "fr": "Désigne le détective du menton au lieu du doigt. Le mépris a ses raffinements.",
+        "en": "Gesture at the detective with your chin instead of a finger. Contempt has its refinements."
+      },
+      {
+        "fr": "Tape la table du plat de la main quand t'as raison. Le marteau d'un juge sans tribunal.",
+        "en": "Slap the table flat when you're right. The gavel of a judge with no courtroom."
+      },
+      {
+        "fr": "Trace une croix imaginaire dans l'air après chaque accusation. Une de plus au tableau de chasse.",
+        "en": "Draw an invisible tally mark in the air after each accusation. One more for the wall."
+      },
+      {
+        "fr": "Montre l'horloge (ou ton poignet nu) quand quelqu'un traîne. Le temps presse, surtout le tien.",
+        "en": "Point at the clock (or your bare wrist) whenever someone drags. Time's short, especially yours."
+      },
+      {
+        "fr": "Pointe ton propre torse quand on cherche un coupable. L'humilité ou la provocation, à toi de voir.",
+        "en": "Point at your own chest whenever a culprit is wanted. Humility or provocation, your call."
+      },
+      {
+        "fr": "Désigne un absent à chaque problème. Le coupable parfait, c'est celui qui est aux toilettes.",
+        "en": "Point at whoever's not in the room at every problem. The perfect culprit is the one in the loo."
+      }
+    ]
+  },
+  {
+    "id": "rh-cheek-puff",
+    "category": "gesture",
+    "difficulty": "easy",
+    "rule": {
+      "fr": "Gonfle les joues et souffle bruyamment à chaque mauvaise nouvelle. Le pneu crevé de la sincérité.",
+      "en": "Puff your cheeks and exhale loudly at every bit of bad news. The flat tyre of sincerity."
+    },
+    "decoys": [
+      {
+        "fr": "Hausse les épaules jusqu'aux oreilles à chaque question, tortue qui rentre dans sa coquille.",
+        "en": "Shrug your shoulders up to your ears at every question, turtle retreating into its shell."
+      },
+      {
+        "fr": "Souffle sur ta frange (imaginaire ou pas) quand t'es agacé. Le dépit, version coiffure.",
+        "en": "Blow at your fringe (real or imaginary) whenever you're annoyed. Frustration, hairstyle edition."
+      },
+      {
+        "fr": "Pince les lèvres en trait fin à chaque accusation. Le coffre-fort de tes aveux.",
+        "en": "Press your lips into a thin line at every accusation. The vault where your confessions live."
+      },
+      {
+        "fr": "Émets un petit sifflement d'admiration à chaque chiffre. Même un 2 t'impressionne.",
+        "en": "Let out a little impressed whistle at every number. Even a 2 impresses you."
+      },
+      {
+        "fr": "Renifle bruyamment avant de répondre, comme si la vérité te donnait un rhume.",
+        "en": "Sniff loudly before answering, like the truth gives you a cold."
+      },
+      {
+        "fr": "Mords l'intérieur de ta joue dès que tu mens. Tout le monde voit, personne le dit.",
+        "en": "Bite the inside of your cheek whenever you lie. Everyone sees, nobody says."
+      },
+      {
+        "fr": "Pousse un « pfff » de marin à chaque effort. Le syndicat des fatigués, t'en es le délégué.",
+        "en": "Let out a sailor's \"pfff\" at every effort. Union of the exhausted, you're the rep."
+      }
+    ]
+  },
+  {
+    "id": "rh-shoulder-brush",
+    "category": "gesture",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Époussette ton épaule après chaque chose que tu dis. L'arrogance se porte sur le revers de la veste.",
+      "en": "Brush off your shoulder after everything you say. Arrogance is worn on the lapel."
+    },
+    "decoys": [
+      {
+        "fr": "Recoiffe une mèche après chaque bonne réplique, mannequin entre deux flashs.",
+        "en": "Tuck a strand of hair back after every good line, model between flashes."
+      },
+      {
+        "fr": "Lisse ta manche dès qu'on te complimente, comme si le compliment salissait le tissu.",
+        "en": "Smooth your sleeve whenever you're complimented, like the praise dirtied the fabric."
+      },
+      {
+        "fr": "Ajuste un col imaginaire avant de répondre au détective. La tenue d'audience, sans la tenue.",
+        "en": "Adjust an imaginary collar before answering the detective. Courtroom dress, minus the dress."
+      },
+      {
+        "fr": "Frotte tes paumes l'une contre l'autre après chaque accusation. Le boulot avance.",
+        "en": "Rub your palms together after every accusation. The work is coming along nicely."
+      },
+      {
+        "fr": "Tire sur le bas de ton t-shirt dès que tu te lèves, comme si tu remettais un costume trois-pièces.",
+        "en": "Tug the hem of your shirt whenever you stand, like you're straightening a three-piece suit."
+      },
+      {
+        "fr": "Souffle une poussière imaginaire de ta paume après chaque pique. Service après-vente du clash.",
+        "en": "Blow imaginary dust off your palm after every dig. After-sales service for the burn."
+      },
+      {
+        "fr": "Vérifie tes ongles quand quelqu'un s'énerve. Leur drame ne mérite pas ton attention.",
+        "en": "Check your nails whenever someone gets heated. Their drama doesn't deserve your attention."
+      }
+    ]
+  },
+  {
+    "id": "rh-loud-spelling",
+    "category": "verbal",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "Épelle à voix haute le mot le plus important de chaque phrase. P-R-E-U-V-E. Le greffier d'un procès que personne ne t'a demandé.",
+      "en": "Spell out loud the most important word in every sentence. E-V-I-D-E-N-C-E. The clerk of a trial nobody asked you to keep."
+    },
+    "decoys": [
+      {
+        "fr": "Répète deux fois le dernier mot de chaque phrase. Phrase.",
+        "en": "Repeat the last word of every sentence twice. Twice."
+      },
+      {
+        "fr": "Détache chaque syllabe quand tu réponds au détective. Le. Men. Songe. Ra. Len. Ti.",
+        "en": "Spell out every syllable when answering the detective. The. Lie. In. Slow. Mo. Tion."
+      },
+      {
+        "fr": "Mets le mot important en majuscules dans ta VOIX. On entend les capitales.",
+        "en": "Put the important word in CAPS with your voice. People can hear the capitals."
+      },
+      {
+        "fr": "Dis « entre guillemets » à voix haute avant chaque adjectif douteux. Tout est « vrai ».",
+        "en": "Say \"quote-unquote\" out loud before every dodgy adjective. Everything is \"true\"."
+      },
+      {
+        "fr": "Traduis un mot par phrase en anglais approximatif. La défense, en mode international.",
+        "en": "Translate one word per sentence into shaky French. The defence, gone international."
+      },
+      {
+        "fr": "Annonce la ponctuation : « virgule », « point ». Le dictée-thon de ta propre déposition.",
+        "en": "Announce your own punctuation: \"comma\", \"full stop\". Dictating your own statement."
+      },
+      {
+        "fr": "Numérote tes arguments à voix haute. « Premièrement… » Tu dépasses jamais le deux.",
+        "en": "Number your points out loud. \"Firstly…\" You never make it past two."
+      }
+    ]
+  },
+  {
+    "id": "rh-fake-modesty",
+    "category": "verbal",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Commence chaque réponse par « j'dis ça humblement, mais… ». La fausse modestie, le crime sans victime apparente.",
+      "en": "Start every answer with \"not to brag, but…\". False modesty: the crime with no obvious victim."
+    },
+    "decoys": [
+      {
+        "fr": "Ouvre chaque réponse par « franchement, je devrais pas dire ça ». Puis dis-le. Toujours.",
+        "en": "Open every answer with \"I really shouldn't say this\". Then say it. Every time."
+      },
+      {
+        "fr": "Commence par « tu vas pas me croire ». Ils te croient jamais, c'est documenté.",
+        "en": "Start with \"you won't believe this\". They never believe you. It's documented."
+      },
+      {
+        "fr": "Précède chaque avis de « personne me l'a demandé, mais ». Exactement. Personne.",
+        "en": "Preface every opinion with \"nobody asked, but\". Exactly. Nobody."
+      },
+      {
+        "fr": "Ouvre par « pour être totalement transparent ». Le drapeau rouge le plus poli du monde.",
+        "en": "Open with \"to be totally transparent\". The world's most polite red flag."
+      },
+      {
+        "fr": "Démarre par « je juge pas, mais ». Tu juges. Le « mais » fait tout le travail.",
+        "en": "Begin with \"no judgement, but\". You're judging. The \"but\" does all the work."
+      },
+      {
+        "fr": "Commence par « entre nous ». Vous êtes douze. Le secret est déjà mort.",
+        "en": "Start with \"between us\". There are twelve of you. The secret is already dead."
+      },
+      {
+        "fr": "Ouvre chaque histoire par « c'est une longue histoire ». Puis raconte la version courte. Mal.",
+        "en": "Open every story with \"long story short\". Then tell the long version. Badly."
+      }
+    ]
+  },
+  {
+    "id": "rh-translate-self",
+    "category": "verbal",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "Répète chacune de tes réponses « pour les gens du fond », comme si la salle était immense et sourde.",
+      "en": "Repeat each of your answers \"for the people in the back\", like the room is huge and half-deaf."
+    },
+    "decoys": [
+      {
+        "fr": "Reformule tout deux fois : « enfin, je veux dire… ». La version 2 n'arrange jamais rien.",
+        "en": "Rephrase everything twice: \"well, what I mean is…\". Draft two never helps."
+      },
+      {
+        "fr": "Réponds, puis ajoute « mais bon, tu vois le genre ». Ils voient pas. Personne voit.",
+        "en": "Answer, then add \"but yeah, you know the type\". They don't. Nobody does."
+      },
+      {
+        "fr": "Conclus chaque réponse par « bref ». Le résumé d'une chose que t'as déjà résumée.",
+        "en": "End every answer with \"anyway\". The summary of a thing you already summarised."
+      },
+      {
+        "fr": "Termine par « si ça a du sens ». Ça n'en a jamais. Tu demandes quand même.",
+        "en": "Finish with \"if that makes sense\". It never does. You ask anyway."
+      },
+      {
+        "fr": "Ajoute « tu comprends ce que je veux dire ? » après chaque phrase. Non. Continue.",
+        "en": "Add \"you get what I mean?\" after every sentence. No. Carry on."
+      },
+      {
+        "fr": "Réponds normalement, puis chuchote la même chose. La sous-titre vocale de toi-même.",
+        "en": "Answer normally, then whisper the same thing. The voice-over subtitle of yourself."
+      },
+      {
+        "fr": "Termine tout par « voilà voilà ». Deux fois. L'aveu qu'il n'y avait rien à dire.",
+        "en": "End everything with \"so, yeah, yeah\". Twice. The confession that there was nothing to say."
+      }
+    ]
+  },
+  {
+    "id": "rh-narrate-self",
+    "category": "verbal",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "Décris tes propres actions à voix haute, façon documentaire animalier. « Le suspect se gratte. Il se sait observé. »",
+      "en": "Narrate your own actions out loud, nature-documentary style. \"The suspect scratches. He knows he is being watched.\""
+    },
+    "decoys": [
+      {
+        "fr": "Commente la pièce comme un match de foot. « Et X reprend la parole, quelle audace ! »",
+        "en": "Commentate the room like a football match. \"And X takes the floor — what audacity!\""
+      },
+      {
+        "fr": "Annonce chacun de tes gestes avant de le faire. « Je vais boire une gorgée. » Suspense nul.",
+        "en": "Announce each of your moves before doing it. \"I am going to take a sip.\" Zero suspense."
+      },
+      {
+        "fr": "Fais le bruitage de tes propres mouvements. Tu te lèves : « tchak ». Tu t'assois : « pfff ».",
+        "en": "Sound-effect your own movements. You stand: \"shing\". You sit: \"pfff\"."
+      },
+      {
+        "fr": "Parle de toi à la troisième personne, voix de bande-annonce. « Dans un monde… où X a faim. »",
+        "en": "Refer to yourself in third person, movie-trailer voice. \"In a world… where X is hungry.\""
+      },
+      {
+        "fr": "Lis tes propres pensées à voix haute, l'air gêné. « Là, je devrais me taire… »",
+        "en": "Read your own thoughts aloud, looking embarrassed. \"I should probably stop talking now…\""
+      },
+      {
+        "fr": "Donne un titre à chaque chapitre de la soirée. « Chapitre 4 : la trahison. »",
+        "en": "Give each part of the evening a chapter title. \"Chapter 4: the betrayal.\""
+      },
+      {
+        "fr": "Termine tes anecdotes par « générique de fin ». Même celles qui n'ont pas commencé.",
+        "en": "End your anecdotes with \"roll credits\". Even the ones that never started."
+      }
+    ]
+  },
+  {
+    "id": "rh-disclaimer",
+    "category": "verbal",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Ajoute un avertissement légal à chaque affirmation : « sous réserve de modifications ». Tes propos ont leur propre service juridique.",
+      "en": "Add a legal disclaimer to every claim: \"subject to change without notice\". Your words have their own legal team."
+    },
+    "decoys": [
+      {
+        "fr": "Termine chaque phrase par « ceci n'engage que moi ». Surtout quand ça engage quelqu'un d'autre.",
+        "en": "End every sentence with \"speaking for myself here\". Especially when it implicates someone else."
+      },
+      {
+        "fr": "Ajoute « enfin, il paraît » à chaque ragot. La responsabilité, jamais.",
+        "en": "Add \"or so they say\" to every bit of gossip. Responsibility, never."
+      },
+      {
+        "fr": "Conclus par « mais je dis ça je dis rien ». Tu dis. C'est tout le problème.",
+        "en": "Close with \"just saying, not saying\". You're saying. That's the whole problem."
+      },
+      {
+        "fr": "Précise « hors contexte » avant chaque citation. Surtout quand le contexte t'accable.",
+        "en": "Say \"out of context\" before every quote. Especially when context destroys you."
+      },
+      {
+        "fr": "Ajoute « selon des sources proches du dossier » partout. La source, c'est encore toi.",
+        "en": "Add \"according to sources close to the matter\" everywhere. The source is, again, you."
+      },
+      {
+        "fr": "Termine par « à vérifier ». Tu vérifies jamais. Eux non plus, voilà l'arnaque.",
+        "en": "End with \"unconfirmed\". You never confirm. Neither do they. That's the con."
+      },
+      {
+        "fr": "Glisse « pour l'instant » à la fin de chaque promesse. La porte de sortie grammaticale.",
+        "en": "Slip \"for now\" onto the end of every promise. The grammatical fire exit."
+      }
+    ]
+  },
+  {
+    "id": "rh-rate-everything",
+    "category": "verbal",
+    "difficulty": "easy",
+    "rule": {
+      "fr": "Note tout sur 10 à voix haute, sans qu'on demande. Cette réponse : 4. Ce silence : 7. Toi : on en reparle.",
+      "en": "Rate everything out of 10 out loud, unprompted. That answer: 4. That silence: 7. You: we'll circle back."
+    },
+    "decoys": [
+      {
+        "fr": "Compare chaque chose à une autre, plus décevante. « C'est comme X, mais en pire. »",
+        "en": "Compare everything to something more disappointing. \"It's like X, but worse.\""
+      },
+      {
+        "fr": "Donne une médaille imaginaire (or, argent, bronze) à chaque réponse. Le podium de la médiocrité.",
+        "en": "Award an imaginary medal (gold, silver, bronze) to every answer. The podium of mediocrity."
+      },
+      {
+        "fr": "Classe les gens « équipe A » ou « équipe B » à voix haute. Personne sait les critères. Toi non plus.",
+        "en": "Sort people into \"team A\" or \"team B\" out loud. Nobody knows the criteria. Neither do you."
+      },
+      {
+        "fr": "Annonce un pourcentage de fiabilité après chaque réponse d'un autre. « Crédible à 30 %. »",
+        "en": "Announce a reliability percentage after everyone else's answer. \"30% believable.\""
+      },
+      {
+        "fr": "Mets une étoile (ou pas) à chaque histoire racontée, façon avis client. « Une étoile. Ne reviendrai pas. »",
+        "en": "Star-rate every story told, like a customer review. \"One star. Would not return.\""
+      },
+      {
+        "fr": "Dis « ça part en tendances » à chaque dérapage. Le journaliste du désastre.",
+        "en": "Say \"that's trending now\" at every slip-up. The correspondent of the disaster."
+      },
+      {
+        "fr": "Donne un pseudo de catcheur à chaque joueur selon sa dernière phrase. Le ring t'attend.",
+        "en": "Give every player a wrestler name based on their last sentence. The ring awaits."
+      }
+    ]
+  },
+  {
+    "id": "rh-alibi-time",
+    "category": "verbal",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Glisse une heure précise dans chaque réponse, comme un alibi. « 19h42, j'étais ailleurs. » Personne a demandé.",
+      "en": "Slip a precise time into every answer, like an alibi. \"7:42 p.m., I was elsewhere.\" Nobody asked."
+    },
+    "decoys": [
+      {
+        "fr": "Glisse un lieu précis dans chaque phrase. Plus c'est précis, moins c'est crédible.",
+        "en": "Slip a precise place into every sentence. The more precise, the less believable."
+      },
+      {
+        "fr": "Date tout : « ça remonte à mardi ». Tous les mardis se ressemblent, c'est pratique.",
+        "en": "Date everything: \"that was a Tuesday\". All Tuesdays look alike. Convenient."
+      },
+      {
+        "fr": "Mentionne un témoin imaginaire à chaque histoire. « Y'avait Kévin. » Y'a jamais de Kévin.",
+        "en": "Name an imaginary witness in every story. \"Kev was there.\" There's never a Kev."
+      },
+      {
+        "fr": "Précise la météo de chaque souvenir. « Il pleuvait. » L'alibi le plus humide du barreau.",
+        "en": "Specify the weather of every memory. \"It was raining.\" The dampest alibi at the bar."
+      },
+      {
+        "fr": "Donne un chiffre exact à tout. « J'ai croisé exactement quatre personnes. » Faux, mais précis.",
+        "en": "Put an exact number on everything. \"I saw exactly four people.\" False, but precise."
+      },
+      {
+        "fr": "Commence tes histoires par « c'était un jeudi, je crois ». Le doute fait partie du plan.",
+        "en": "Start your stories with \"it was a Thursday, I think\". The doubt is part of the plan."
+      },
+      {
+        "fr": "Insiste sur le fait que t'étais « clairement pas là ». Plus tu insistes, plus on note.",
+        "en": "Insist you were \"clearly not there\". The more you insist, the more they write down."
+      }
+    ]
+  },
+  {
+    "id": "rh-introduce-others",
+    "category": "social",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Présente chaque joueur qui parle avec un faux titre ronflant. « Voici X, directeur régional des mauvaises décisions. »",
+      "en": "Introduce every player who speaks with a fake grand title. \"This is X, regional director of bad decisions.\""
+    },
+    "decoys": [
+      {
+        "fr": "Annonce chaque arrivée comme à un gala. « Et voici… personne d'important. »",
+        "en": "Announce every entrance like a gala. \"And here we have… nobody important.\""
+      },
+      {
+        "fr": "Donne un surnom de gangster à chacun. La famille au complet, sans le talent.",
+        "en": "Hand everyone a gangster nickname. The whole family, minus the talent."
+      },
+      {
+        "fr": "Présente les gens les uns aux autres. Ils se connaissent depuis dix ans. C'est ça l'idée.",
+        "en": "Introduce people to each other. They've known each other ten years. That's the point."
+      },
+      {
+        "fr": "Décerne un poste fictif à qui répond bien. « Promu chef de rien du tout. »",
+        "en": "Assign a fictional job to anyone who answers well. \"Promoted to head of nothing.\""
+      },
+      {
+        "fr": "Cite le « CV » de chaque joueur avant qu'il parle. Inventé, à charge, jamais flatteur.",
+        "en": "Read out each player's \"résumé\" before they speak. Invented, damning, never flattering."
+      },
+      {
+        "fr": "Annonce le « palmarès » de chacun. « X, deux fois champion de l'esquive. »",
+        "en": "Announce everyone's \"honours list\". \"X, two-time dodging champion.\""
+      },
+      {
+        "fr": "Demande à chacun de « se présenter pour le dossier ». Le casting d'un procès.",
+        "en": "Make everyone \"state their name for the record\". Casting call for a trial."
+      }
+    ]
+  },
+  {
+    "id": "rh-volunteer-others",
+    "category": "social",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "À chaque question de groupe, désigne quelqu'un d'autre pour répondre. La délégation, c'est de la délation polie.",
+      "en": "At every group question, volunteer someone else to answer. Delegation is just polite snitching."
+    },
+    "decoys": [
+      {
+        "fr": "Réponds toujours en premier aux questions de groupe. Le zèle, signature du coupable.",
+        "en": "Always be first to answer group questions. Eagerness: the culprit's signature."
+      },
+      {
+        "fr": "Fais remarquer qui n'a pas encore parlé. La délation préventive, ton sport.",
+        "en": "Keep pointing out who hasn't spoken yet. Pre-emptive snitching, your sport."
+      },
+      {
+        "fr": "Demande un vote de groupe à chaque décision. Diluer la faute, vieux réflexe.",
+        "en": "Call for a group vote at every decision. Dilute the blame, an old reflex."
+      },
+      {
+        "fr": "Passe la parole « à un plus qualifié que toi ». Personne est qualifié pour ça.",
+        "en": "Hand the floor to \"someone more qualified than me\". Nobody is qualified for this."
+      },
+      {
+        "fr": "Renvoie chaque question difficile à son auteur. « Et toi, t'en penses quoi ? » Le boomerang.",
+        "en": "Bounce every hard question back to whoever asked. \"What do YOU think?\" The boomerang."
+      },
+      {
+        "fr": "Nomme un porte-parole différent à chaque round. La rotation des boucs émissaires.",
+        "en": "Appoint a different spokesperson each round. The scapegoat rota."
+      },
+      {
+        "fr": "Réponds « demandez à X » à toute question. X n'est même pas concerné. C'est le but.",
+        "en": "Answer every question with \"ask X\". X isn't even involved. That's the point."
+      }
+    ]
+  },
+  {
+    "id": "rh-witness-claim",
+    "category": "social",
+    "difficulty": "hard",
+    "rule": {
+      "fr": "Déclare-toi témoin oculaire de chaque histoire racontée. « J'y étais. » T'y étais jamais. Tu confirmes quand même.",
+      "en": "Declare yourself an eyewitness to every story told. \"I was there.\" You never were. You confirm anyway."
+    },
+    "decoys": [
+      {
+        "fr": "Conteste chaque détail des histoires des autres. « Non, c'était pas comme ça. » Tu y étais pas plus.",
+        "en": "Dispute every detail of other people's stories. \"No, it wasn't like that.\" You weren't there either."
+      },
+      {
+        "fr": "Ajoute un détail inventé à chaque récit. « Et il pleuvait des grenouilles. » Personne te reprend.",
+        "en": "Add an invented detail to every story. \"And it was raining frogs.\" Nobody corrects you."
+      },
+      {
+        "fr": "Réclame un « témoin » pour appuyer chacune de tes histoires. Brife-le mal, c'est plus drôle.",
+        "en": "Demand a \"witness\" to back up each of your stories. Brief them badly, it's funnier."
+      },
+      {
+        "fr": "Jure « sur ma vie » à chaque affirmation. Ta vie vaut de moins en moins cher.",
+        "en": "Swear \"on my life\" at every claim. Your life is worth less and less."
+      },
+      {
+        "fr": "Prétends avoir « tout vu de loin » à chaque incident. Le témoin myope du salon.",
+        "en": "Claim you \"saw it all from a distance\" at every incident. The short-sighted witness of the room."
+      },
+      {
+        "fr": "Confirme tout ce que dit ton voisin de droite, même les âneries. Alibi mutuel, contrat tacite.",
+        "en": "Confirm everything your right-hand neighbour says, even the nonsense. Mutual alibi, tacit contract."
+      },
+      {
+        "fr": "Dis « je peux témoigner » avant qu'on te le demande. La précipitation des faux témoins.",
+        "en": "Say \"I can vouch for that\" before anyone asks. The rush of the false witness."
+      }
+    ]
+  },
+  {
+    "id": "rh-counter-accuse",
+    "category": "social",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Dès qu'on accuse quelqu'un, accuse aussitôt l'accusateur. La meilleure défense, et la seule que tu connaisses.",
+      "en": "The moment anyone accuses someone, accuse the accuser right back. The best defence, and the only one you know."
+    },
+    "decoys": [
+      {
+        "fr": "Prends systématiquement la défense de l'accusé. L'avocat commis d'office du chaos.",
+        "en": "Always leap to the defence of the accused. Court-appointed counsel for the chaos."
+      },
+      {
+        "fr": "Demande des preuves à chaque accusation. Le scepticisme des gens qui en ont effacé.",
+        "en": "Demand evidence at every accusation. The scepticism of someone who's deleted some."
+      },
+      {
+        "fr": "Rappelle un vieux dossier de l'accusateur. « Tiens, comme par hasard, toi… »",
+        "en": "Bring up an old file on the accuser. \"Funny, that, coming from you…\""
+      },
+      {
+        "fr": "Déclare chaque accusation « non recevable ». Tu connais aucun terme juridique. Ça marche quand même.",
+        "en": "Rule every accusation \"inadmissible\". You know no legal terms. It works anyway."
+      },
+      {
+        "fr": "Réponds à toute critique par « toi-même ». Le débat redescend de vingt ans d'un coup.",
+        "en": "Reply to every criticism with \"no, YOU\". The debate drops twenty years instantly."
+      },
+      {
+        "fr": "Désigne un troisième coupable à chaque dispute. Le couteau suisse de la diversion.",
+        "en": "Point at a third culprit at every argument. The Swiss Army knife of diversion."
+      },
+      {
+        "fr": "Exige un procès en bonne et due forme pour chaque reproche. Faire traîner, c'est gagner.",
+        "en": "Demand a full and proper trial for every little reproach. Stalling is winning."
+      }
+    ]
+  },
+  {
+    "id": "rh-mirror-mood",
+    "category": "social",
+    "difficulty": "medium",
+    "rule": {
+      "fr": "Adopte exactement l'humeur du détective : il rit, tu ris ; il fronce, tu fronces. Caméléon ou indic, fais ton choix.",
+      "en": "Match the detective's mood exactly: they laugh, you laugh; they frown, you frown. Chameleon or informant, your call."
+    },
+    "decoys": [
+      {
+        "fr": "Ris seulement quand le détective rit, jamais avant. Ton humour a un patron maintenant.",
+        "en": "Only laugh when the detective laughs, never before. Your humour has a boss now."
+      },
+      {
+        "fr": "Copie la posture de qui parle le plus fort. Le ralliement à la puissance vocale.",
+        "en": "Copy the posture of whoever's loudest. Allegiance to vocal volume."
+      },
+      {
+        "fr": "Adopte l'avis de la dernière personne qui a parlé. Une girouette, mais ponctuelle.",
+        "en": "Adopt the opinion of whoever spoke last. A weathervane, but punctual."
+      },
+      {
+        "fr": "Imite le ton de voix de qui t'interroge. Le perroquet émotionnel met mal à l'aise.",
+        "en": "Mirror the tone of whoever questions you. The emotional parrot unsettles everyone."
+      },
+      {
+        "fr": "Bâille quand un autre bâille, soupire quand un autre soupire. La contagion comme alibi.",
+        "en": "Yawn when another yawns, sigh when another sighs. Contagion as an alibi."
+      },
+      {
+        "fr": "Change de camp dès que la majorité change. Tes convictions suivent le vent dominant.",
+        "en": "Switch sides the moment the majority does. Your convictions follow the prevailing wind."
+      },
+      {
+        "fr": "Approuve tout ce que dit le plus âgé de la table. Le respect des anciens, version stratégique.",
+        "en": "Agree with everything the oldest person says. Respecting your elders, strategically."
+      }
+    ]
+  },
+  {
+    "id": "rh-hype-man",
+    "category": "social",
+    "difficulty": "easy",
+    "rule": {
+      "fr": "Sois le « hype man » du joueur à ta gauche : approuve tout ce qu'il dit à voix haute. « Ouais ! Dis-leur ! »",
+      "en": "Be the hype man for the player on your left: loudly back everything they say. \"Yeah! Tell 'em!\""
+    },
+    "decoys": [
+      {
+        "fr": "Hue gentiment le joueur à ta droite à chaque réponse. La claque organisée, version inverse.",
+        "en": "Gently boo the player on your right at every answer. The organised claque, in reverse."
+      },
+      {
+        "fr": "Répète le dernier mot de ton voisin de gauche, plus fort. L'écho engagé.",
+        "en": "Repeat your left neighbour's last word, but louder. The committed echo."
+      },
+      {
+        "fr": "Tape dans la main de quelqu'un après chaque bonne réplique. Le contrat de complicité se signe en high-five.",
+        "en": "High-five someone after every good line. The complicity contract is signed in high-fives."
+      },
+      {
+        "fr": "Lance un « il a pas tort ! » à chaque argument bancal. Le supporter aveugle.",
+        "en": "Shout \"he's not wrong!\" at every shaky argument. The blind supporter."
+      },
+      {
+        "fr": "Fais des « ooooh » de foule à chaque pique. Le public sonore d'une émission annulée.",
+        "en": "Do crowd \"ooooh\"s at every dig. The sound effects of a cancelled show."
+      },
+      {
+        "fr": "Applaudis avant la fin des phrases des autres. L'enthousiasme prématuré, ça déstabilise.",
+        "en": "Applaud before other people finish their sentences. Premature enthusiasm rattles people."
+      },
+      {
+        "fr": "Acclame chaque réponse comme un but en finale. Même les « euh… je sais pas ».",
+        "en": "Cheer every answer like a cup-final goal. Even the \"uh… I dunno\"s."
+      }
+    ]
   }
 ] },
 };

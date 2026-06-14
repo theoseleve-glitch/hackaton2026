@@ -104,10 +104,13 @@ secrets) is pinned green against the real pack by
 ```ts
   ['trouvez-la-regle', {
     players: ['p1', 'p2', 'p3', 'p4', 'p5'],
-    seed: 'audit-seed',
-    // Seed makes p1 the round-0 detective. Followers ack -> live; p2 accuses
-    // p3 -> tribunal (voters p2/p4/p5); p4+p5 cast HIDDEN ballots, p2 still
-    // expected — phase NOT advanced (phaseKey 'tribunal:r0:i1' both scripts).
+    seed: 'audit-1',
+    // Seed 'audit-1' makes p1 the sole round-0 detective against the REAL pack
+    // (the item shuffle consumes the rng before the player shuffle, so the
+    // detective seat is pack-sensitive — 'audit-1' is pinned to keep p1 the
+    // detective). Followers ack -> live; p2 accuses p3 -> tribunal (voters
+    // p2/p4/p5); p4+p5 cast HIDDEN ballots, p2 still expected — phase NOT
+    // advanced (phaseKey 'tribunal:r0:i1' both scripts).
     events: [
       rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
       rhAccuse('p2', 'p3', 5_000),
@@ -139,9 +142,12 @@ secrets) is pinned green against the real pack by
   }],
 ```
 
-Deadline-walk budget: from the fixture state, `trouvez-la-regle` reaches
-`over` in 9 deadline steps (tribunal→live, live→reveal, then
-briefing→live→reveal for rounds 1–2, reveal→over) — well under 25.
+Deadline-walk note: the heat-check fills each round's `live` with forced
+`spotlight` micro-beats, so a monotonic-clock walk reaches `over` in ~50
+deadline steps (each `heatMs` slice stages one spotlight). The walk MUST
+advance a real clock by each phase's armed `phaseDurationMs` — a fixed-tiny
+`at` stalls inside the banked `live`/`spotlight` clock. The package
+`integration-audit.test.ts` only asserts the walk reaches an untimed phase.
 
 ## 4. Lobby — `apps/mobile/app/room/[code]/lobby.tsx`
 

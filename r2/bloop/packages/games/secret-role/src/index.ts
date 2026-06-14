@@ -13,5 +13,7 @@ export {
   type SecretRoleScoring,
   type SecretRoleState,
   type SecretRoleView,
+  type SessionCliffhanger,
+  type SessionStreak,
   type VoteRecord,
 } from './state.js';

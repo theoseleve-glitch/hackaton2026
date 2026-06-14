@@ -56,6 +56,21 @@ export interface RuleHuntConfig {
   candidateCount: number;
   /** Accusation tokens per follower per round. */
   accusationsPerPlayer: number;
+  /**
+   * CC-2 heat-meter payoff (DEFAULT 0 — identity). Flavour points awarded at
+   * reveal to each SURVIVING follower who drew ZERO suspicion-heat all round
+   * (the "crime parfait individuel" — stayed coolest under every spotlight).
+   * 0 => the existing exact-score matrix is byte-identical.
+   */
+  coolBonus: number;
+  /**
+   * CC-2 heat-meter payoff (DEFAULT 0 — identity). Flavour points awarded at
+   * reveal to the detective team when the round's accumulated suspicion heat
+   * "read true" — i.e. a conviction landed (the room's flinches pointed at a
+   * real breaker the tribunal then eliminated). Aggregate-only, never a
+   * per-ballot side channel. 0 => existing exact-score matrix unchanged.
+   */
+  detectiveReadBonus: number;
 }
 
 /** The catalog params for trouvez-la-regle (design 2.16 / by-game spec). */
@@ -72,6 +87,11 @@ export const TROUVEZ_LA_REGLE_CONFIG: RuleHuntConfig = {
   teamGuesses: 3,
   candidateCount: 8,
   accusationsPerPlayer: 1,
+  // Heat-meter payoff is OPT-IN flavour: 0/0 keeps the shipped scoring matrix
+  // byte-identical (the suspicion meter is visible & legible, but pays nothing
+  // unless a pack turns these on). Re-baseline only the cases that flip them.
+  coolBonus: 0,
+  detectiveReadBonus: 0,
 };
 
 export type RuleHuntPhase =
@@ -175,6 +195,26 @@ export interface RuleHuntState {
   lastOutcome: RoundOutcome | null;
   /** Convictions this round — perfect = 0 at reveal. */
   infractions: number;
+  /**
+   * PUBLIC per-target suspicion meter, round-local (reset each round in
+   * startRound). At each spotlight resolve the count of soft reads that landed
+   * AGAINST the spotlit performer (followers' `'flag'` + detectives'
+   * `'suspicious'`) is accumulated onto `heat[target]`. It is an AGGREGATE
+   * per-target total only — never a per-voter map, so it cannot be inverted to
+   * recover anyone's hidden read. Drives the legible "qui chauffe ?" UI and the
+   * CC-2 reveal payoff (coolest follower drew zero heat). The raw hidden
+   * `spotlight.flags`/`notes` buffers are still dropped at resolve.
+   */
+  heat: Record<PlayerId, number>;
+  /**
+   * CC-5 crime-parfait streak — consecutive `timeUp` + perfect (zero-conviction)
+   * rounds. Incremented at reveal when the round is a perfect time-up, reset to
+   * 0 on any conviction or a guessed round. Carried across rounds and surfaced
+   * on the reveal + over views so the shell can tease "2 crimes parfaits — un
+   * troisième et vous entrez dans la légende" into the next briefing. PUBLIC;
+   * no new secret (derived from the already-public outcome).
+   */
+  cleanStreak: number;
   scores: Record<PlayerId, number>;
   endReason: 'finished' | 'roomCollapsed' | null;
 }
@@ -191,6 +231,27 @@ export type RuleHuntAction =
   | { kind: 'noteSuspicious'; note: NoteBet };
 
 export type RuleHuntRole = 'detective' | 'follower' | null;
+
+/**
+ * CC-5 epilogue — derived at 'over' from ALREADY-PUBLIC state only (final
+ * scores + the public crime-parfait streak). No new in-match secret. Feeds the
+ * shell's roast + rematch CTA.
+ */
+export interface RuleHuntEpilogue {
+  /** The sole top-scorer, or null on a tied/empty crown (kit `mvp`). */
+  mvp: PlayerId | null;
+  /** Top-1 vs top-2 score gap (kit `topGap`); 0 when <2 players or tied. */
+  topGap: number;
+  /** True when the top-2 gap is within the close-finish threshold (kit `isCloseFinish`). */
+  closeFinish: boolean;
+  /**
+   * The crime-parfait superlative: the longest clean (perfect time-up) streak
+   * reached this match and who held it at the end. `length` 0 / empty `holders`
+   * when no perfect round ever landed — a superlative nobody earned is not
+   * awarded (kit `statLeaders` semantics, applied to the public streak).
+   */
+  cleanStreak: { length: number; holders: PlayerId[] };
+}
 
 export interface SeatView {
   id: PlayerId;
@@ -213,6 +274,15 @@ export interface RuleHuntViewBase {
   teamGuessesLeft: number;
   usedCandidates: number[];
   lastTribunal: TribunalResult | null;
+  /**
+   * PUBLIC per-target suspicion meter for the CURRENT round (aggregate read
+   * totals; 0-entries omitted, matching the `tally` convention). Lets the room
+   * see "qui chauffe ?" during live/spotlight/guess and the reveal pay it off.
+   * Aggregate-only — never a per-voter map, so it leaks no hidden read.
+   */
+  heat: Record<PlayerId, number>;
+  /** PUBLIC crime-parfait streak so far (consecutive perfect time-up rounds). */
+  cleanStreak: number;
 }
 
 export type RuleHuntView =
@@ -248,5 +318,24 @@ export type RuleHuntView =
       /** Byte-identical order for every roster viewer; null (omitted) for unknown viewers. */
       candidates: LText[] | null;
     })
-  | (RuleHuntViewBase & { phase: 'reveal'; outcome: RoundOutcome; candidates: LText[] })
-  | (RuleHuntViewBase & { phase: 'over'; endReason: 'finished' | 'roomCollapsed' });
+  | (RuleHuntViewBase & {
+      phase: 'reveal';
+      outcome: RoundOutcome;
+      candidates: LText[];
+      /**
+       * CC-2 payoff, derived at reveal from the PUBLIC `heat` meter: the
+       * surviving followers who drew ZERO suspicion-heat this round (the
+       * coolest performers). Stable ascending-id order. Always surfaced for the
+       * legible "crime parfait individuel" chrome even when `coolBonus` is 0;
+       * the actual points moved are visible via the climbing `scores`.
+       */
+      coolestFollowers: PlayerId[];
+      /** Flavour points each coolest follower just earned (0 by default — identity). */
+      coolBonusEach: number;
+    })
+  | (RuleHuntViewBase & {
+      phase: 'over';
+      endReason: 'finished' | 'roomCollapsed';
+      /** CC-5 epilogue derived from already-PUBLIC end-of-match state. */
+      epilogue: RuleHuntEpilogue;
+    });

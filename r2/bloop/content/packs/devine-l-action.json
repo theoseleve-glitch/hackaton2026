@@ -3362,6 +3362,1518 @@
         "social",
         "everyday"
       ]
+    },
+    {
+      "id": "gda-soft-061",
+      "action": {
+        "fr": "Mange une glace en plein cagnard : la boule tombe sur le trottoir au troisième coup de langue. Regarde-la fondre. Lèche le cornet vide jusqu'au bout, dignement.",
+        "en": "Eat an ice cream in a heatwave: the scoop drops on the pavement on lick three. Watch it melt. Lick the empty cone to the very end, with dignity."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+        "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "food",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-soft-062",
+      "action": {
+        "fr": "Ouvre un sac de chips ultra-récalcitrant : tu tires, tu tires, et il explose d'un coup, expédiant tout le contenu sur le joueur le plus proche. Ramasse une chip sur lui. Mange-la.",
+        "en": "Open an impossibly stubborn crisp packet: you pull, you pull, it bursts all at once, launching the whole lot over the nearest player. Pick one crisp off them. Eat it."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+        "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "food",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-soft-063",
+      "action": {
+        "fr": "Cherche tes lunettes partout dans la pièce, de plus en plus paniqué. Elles sont sur ta tête depuis le début. Trouve-les. Fais comme si de rien n'était.",
+        "en": "Search the whole room for your glasses, panic rising. They've been on your head the entire time. Find them. Act like that never happened."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+        "en": "fully muted. first one who whispers has lost, and they already know it."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "everyday",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-soft-064",
+      "action": {
+        "fr": "Sois un escargot de course qui prend un départ de Grand Prix, croit mener la course, et se fait doubler par sa propre coquille.",
+        "en": "Be a racing snail launching off a Grand Prix start line, convinced it's leading the pack, and getting overtaken by its own shell."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+        "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "animals",
+        "slow"
+      ]
+    },
+    {
+      "id": "gda-soft-065",
+      "action": {
+        "fr": "Sois la machine à laver en fin de cycle avec une basket coincée dedans : le ronron, le déséquilibre, le boum-boum qui fait avancer la machine sur tout le carrelage de la salle de bain.",
+        "en": "Be the washing machine on final spin with one trainer stuck inside: the hum, the wobble, the boom-boom that walks the whole machine across the bathroom tiles."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+        "en": "no words. noises only. you're a sound effect with legs now."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "household",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-soft-066",
+      "action": {
+        "fr": "Sois la bouilloire qui monte en pression pour le thé : le frémissement timide, la montée, le sifflement de mort, et le clic sec pile au pire moment.",
+        "en": "Be the kettle climbing to the boil for one cup of tea: the shy bubbling, the rising rumble, the death-whistle, then the sharp click at the worst possible second."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+        "en": "not one word. mouth-noises only. your dignity stays at the door."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "household",
+        "everyday"
+      ]
+    },
+    {
+      "id": "gda-soft-067",
+      "action": {
+        "fr": "Sois le GPS qui recalcule pour la huitième fois et qui commence à perdre patience : « recalcul », « recalcul », puis un soupir que toi seul peux faire en voix de robot.",
+        "en": "Be the sat-nav recalculating for the eighth time and starting to lose it: 'recalculating', 'recalculating', then a sigh only you can deliver in a robot voice."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+        "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "tech",
+        "travel"
+      ]
+    },
+    {
+      "id": "gda-soft-068",
+      "action": {
+        "fr": "Donne un cours de cuisine en direct façon émission : présente le plat, énumère les ingrédients invisibles, rate la cuisson. T'as trois mots pour sauver l'émission. Pointe le joueur qui cuisine le pire.",
+        "en": "Host a live TV cooking segment: present the dish, list the invisible ingredients, ruin the cooking. You get three words to save the show. Point at the worst cook in the room."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
+        "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "food",
+        "tv"
+      ]
+    },
+    {
+      "id": "gda-soft-069",
+      "action": {
+        "fr": "Sois le guide d'un musée vide qui fait visiter les tableaux invisibles avec une passion totale. Arrête-toi devant le joueur le plus proche comme si c'était l'œuvre maîtresse. Trois mots pour la commenter.",
+        "en": "Be a tour guide in an empty museum walking the room past invisible masterpieces with total passion. Stop in front of the nearest player like they're the prize exhibit. Three words to describe the piece."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+        "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "art",
+        "jobs"
+      ]
+    },
+    {
+      "id": "gda-soft-070",
+      "action": {
+        "fr": "Monte un meuble en kit avec une notice que t'as clairement pas lue. Il reste trois vis à la fin. Range-les dans ta poche. Le meuble penche. Pose un livre dessus.",
+        "en": "Assemble a flat-pack from instructions you clearly didn't read. Three screws are left over at the end. Pocket them. The thing leans. Put a book on it."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
+        "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "meuble",
+          "visser",
+          "notice"
+        ],
+        "en": [
+          "furniture",
+          "screw",
+          "instructions"
+        ]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "household",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-soft-071",
+      "action": {
+        "fr": "Apprends à un poisson rouge à faire le beau, avec la patience d'un dresseur et la déception d'un parent. Au bout de quatre essais, félicite-le quand même. Il a rien fait.",
+        "en": "Teach a goldfish to roll over, with a trainer's patience and a parent's disappointment. After four tries, praise it anyway. It did nothing."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+        "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "poisson",
+          "dresser",
+          "bocal"
+        ],
+        "en": [
+          "fish",
+          "train",
+          "bowl"
+        ]
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "animals",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-soft-072",
+      "action": {
+        "fr": "Sois la dernière feuille d'automne accrochée à sa branche en pleine tempête : tiens bon, lâche prise, et offre-toi une chute dramatique de trois étages. Atterris sur le joueur le plus proche.",
+        "en": "Be the last autumn leaf clinging to its branch in a gale: hold on, let go, and treat yourself to a dramatic three-storey fall. Land on the nearest player."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+        "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "feuille",
+          "tomber",
+          "branche"
+        ],
+        "en": [
+          "leaf",
+          "fall",
+          "branch"
+        ]
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "weather",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-soft-073",
+      "action": {
+        "fr": "Fige-toi en pleine victoire de jeu vidéo, manette en l'air, bouche grande ouverte — pile à la seconde où tu réalises que t'avais pas sauvegardé. Tiens la joie qui se transforme en horreur.",
+        "en": "Freeze mid video-game victory, controller in the air, mouth wide open — at the exact second you realize you never saved. Hold the joy curdling into horror."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
+        "en": "frozen poses only. you change pose when the performer claps. not before."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "games",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-soft-074",
+      "action": {
+        "fr": "Prends la pose du penseur de Rodin, sauf que t'es en train de réaliser que t'as laissé le four allumé en partant. Tiens la profondeur philosophique d'un quotidien en feu.",
+        "en": "Strike the Rodin Thinker pose, except you're realizing you left the oven on when you left the house. Hold the philosophical depth of a life on fire."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+        "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "art",
+        "everyday"
+      ]
+    },
+    {
+      "id": "gda-soft-075",
+      "action": {
+        "fr": "Fige-toi en surfeur au sommet d'une vague géante, genoux pliés, bras écartés, sourire de pro — juste avant la chute que tout le monde voit venir sauf toi. Tiens l'instant d'avant.",
+        "en": "Freeze as a surfer at the top of a giant wave, knees bent, arms out, pro smile on — right before the wipeout everyone sees coming except you. Hold the moment before."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+        "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
+      },
+      "intensity": "soft",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "sports",
+        "balance"
+      ]
+    },
+    {
+      "id": "gda-soft-076",
+      "action": {
+        "fr": "Prends la pose de la photo de classe : le sourire forcé qui tient depuis trop longtemps, le voisin qui te fait les oreilles de lapin, et toi qui le sais pas encore. Tiens l'innocence.",
+        "en": "Hold the school-photo pose: the forced smile held too long, the kid next to you doing bunny ears, and you not knowing yet. Hold the innocence."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+        "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
+      },
+      "intensity": "soft",
+      "difficulty": 1,
+      "props": false,
+      "tags": [
+        "social",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-party-073",
+      "action": {
+        "fr": "Rentre de soirée à 4 h du mat' et tente d'enlever un jean trop serré en équilibre sur un pied, sans réveiller personne. Tombe sur le lit. En silence. C'est non négociable.",
+        "en": "Get home from a night out at 4 a.m. and try to peel off too-tight jeans balancing on one foot without waking anyone. Fall onto the bed. Silently. That part is non-negotiable."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+        "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "everyday",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-party-074",
+      "action": {
+        "fr": "Vis ta meilleure vie de DJ sur une console imaginaire : tu lances le drop du siècle, tout le monde l'attend... et tu réalises que t'as appuyé sur pause. Sauve l'ambiance d'un seul geste de la main.",
+        "en": "Live your best DJ life on an imaginary deck: you tee up the drop of the century, the whole crowd is waiting — and you realize you hit pause. Save the night with a single wave of the hand."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+        "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "music",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-party-075",
+      "action": {
+        "fr": "Sois la dernière gorgée d'un Capri-Sun aspirée à la paille jusqu'à la dernière goutte d'air. Insiste. Encore. Tout le monde t'entend. Insiste quand même.",
+        "en": "Be the last sip of a juice pouch sucked through the straw down to the final bubble of air. Keep going. Again. Everyone can hear you. Keep going anyway."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+        "en": "mouth open for sound effects, shut for actual words. one word and it's done."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "food",
+        "annoying"
+      ]
+    },
+    {
+      "id": "gda-party-076",
+      "action": {
+        "fr": "Sois la canette de soda qu'on a secouée avant d'ouvrir : le hiss qui monte, la pulvérisation totale, et le filet de mousse qui dégouline en silence pendant que tu fixes le coupable. Désigne-le.",
+        "en": "Be the fizzy can someone shook before opening: the rising hiss, the full eruption, then the foam trickling down in silence while you stare at the culprit. Point at them."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+        "en": "no words. noises only. you're a sound effect with legs now."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "food",
+        "conflict"
+      ]
+    },
+    {
+      "id": "gda-party-077",
+      "action": {
+        "fr": "Tiens un discours de témoin de mariage qui part complètement en vrille : larmes, anecdote gênante, révélation de trop. T'as trois mots avant qu'on coupe le micro. Vise le marié.",
+        "en": "Give a best-man speech that goes completely off the rails: tears, an embarrassing anecdote, one revelation too far. You've got three words before they cut the mic. Aim at the groom."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+        "en": "three words max, not one more. pick them like they're your last will and testament."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "social",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-party-078",
+      "action": {
+        "fr": "Sois le présentateur d'un télé-achat à 3 h du mat' qui vend un objet de la pièce comme l'invention qui va changer ta vie. T'as trois mots de slogan. Le stock est limité. Il l'est pas.",
+        "en": "Be a 3 a.m. infomercial host selling an object from this room as the invention that will change your life. You get three words of slogan. Stock is limited. It is not."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+        "en": "3 words for the entire round. silence does the rest of the work. yours."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": [
+        "tv",
+        "jobs"
+      ]
+    },
+    {
+      "id": "gda-party-079",
+      "action": {
+        "fr": "Tu rentres chez tes parents à 27 ans et ta mère te demande, devant tout le monde, si t'as enfin « quelqu'un dans ta vie ». Esquive comme un politicien acculé. La table attend la réponse.",
+        "en": "You're 27 and back at your parents' place when your mum asks, in front of everyone, if you've finally got 'someone special'. Dodge like a cornered politician. The whole table waits."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+        "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "célibataire",
+          "mère",
+          "copain"
+        ],
+        "en": [
+          "single",
+          "mum",
+          "relationship"
+        ]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "social",
+        "dating"
+      ]
+    },
+    {
+      "id": "gda-party-080",
+      "action": {
+        "fr": "Reçois un cadeau que tu détestes profondément, devant la personne qui te l'offre. Ton visage doit hurler « merci ! » pendant que ton âme rend l'âme. Garde le sourire jusqu'au bout.",
+        "en": "Receive a gift you deeply hate, in front of the person who gave it to you. Your face must scream 'thank you!' while your soul leaves your body. Keep the smile to the very end."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
+        "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "cadeau",
+          "aimer",
+          "merci"
+        ],
+        "en": [
+          "gift",
+          "love",
+          "thanks"
+        ]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": true,
+      "tags": [
+        "social",
+        "acting"
+      ]
+    },
+    {
+      "id": "gda-party-081",
+      "action": {
+        "fr": "Sois le mec en boîte qui croit que tout le monde le regarde danser. Tout le monde le regarde danser. Pas pour les raisons qu'il croit. Continue. Plus fort. Choisis ton public dans la pièce.",
+        "en": "Be the guy in the club who thinks everyone's watching him dance. Everyone is watching him dance. Not for the reasons he thinks. Keep going. Harder. Pick your audience in the room."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+        "en": "fully muted. first one who whispers has lost, and they already know it."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dance",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-party-082",
+      "action": {
+        "fr": "Sois le ballon de baudruche qu'on dégonfle lentement en pinçant le bout pour faire le bruit le plus insupportable de la soirée. La pièce te supplie d'arrêter. Vise les aigus.",
+        "en": "Be the balloon being slowly deflated by pinching the neck to make the most unbearable noise of the night. The room is begging you to stop. Go for the high notes."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+        "en": "not one word. mouth-noises only. your dignity stays at the door."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "party",
+        "annoying"
+      ]
+    },
+    {
+      "id": "gda-party-083",
+      "action": {
+        "fr": "Fige-toi dans la pose de quelqu'un qui vient de se faire griller en train de parler de toi, pile au moment où tu entres dans la pièce. La main devant la bouche, l'horreur dans les yeux. Tiens la honte.",
+        "en": "Freeze in the pose of someone caught talking about you exactly as you walk into the room. Hand over the mouth, horror in the eyes. Hold the shame."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
+        "en": "frozen poses only. you change pose when the performer claps. not before."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "social",
+        "conflict"
+      ]
+    },
+    {
+      "id": "gda-party-084",
+      "action": {
+        "fr": "Sois le coach de vie le plus arnaqueur du monde qui vend un séminaire à toute la pièce. Promets-leur la réussite, l'amour, l'abondance. T'as trois mots. Encaisse d'abord.",
+        "en": "Be the most fraudulent life coach alive selling a seminar to the whole room. Promise them success, love, abundance. You've got three words. Take the payment first."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
+        "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "social",
+        "talking"
+      ]
+    },
+    {
+      "id": "gda-party-085",
+      "action": {
+        "fr": "Vis ta gueule de bois du dimanche matin : la lumière qui agresse, le moindre bruit qui résonne, et la reconstitution lente et horrifiée de ce que t'as fait hier soir. Désigne le témoin gênant.",
+        "en": "Live your Sunday-morning hangover: the light that attacks, every tiny sound echoing, and the slow horrified reconstruction of what you did last night. Point at the witness who knows."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+        "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "gueule",
+          "alcool",
+          "hier"
+        ],
+        "en": [
+          "hangover",
+          "drink",
+          "last-night"
+        ]
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "party",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-party-086",
+      "action": {
+        "fr": "Prends un selfie de groupe avec toute la pièce : trouve l'angle, lève le bras, et passe trois minutes à supprimer toutes les versions où TU es mal, en gardant celle où tout le monde est moche sauf toi.",
+        "en": "Take a group selfie with the whole room: find the angle, raise the arm, and spend three minutes deleting every version where YOU look bad, keeping the one where everyone's ugly except you."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+        "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "internet",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-party-087",
+      "action": {
+        "fr": "Sois le vieux climatiseur de bureau qui rend l'âme en plein été : le ronflement métallique, le claquement suspect, le dernier souffle d'air tiède, et le silence total qui condamne tout l'open space.",
+        "en": "Be the ancient office air-con dying mid-heatwave: the metallic rattle, the suspicious clunk, the last puff of lukewarm air, then the total silence that sentences the whole open-plan floor."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+        "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
+      },
+      "intensity": "party",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "tech",
+        "jobs"
+      ]
+    },
+    {
+      "id": "gda-party-088",
+      "action": {
+        "fr": "Fige-toi en pleine photo de saut de groupe sur la plage : tout le monde retombe, sauf toi, coincé en l'air dans la position la moins flatteuse de l'histoire. La salle a le droit de zoomer.",
+        "en": "Freeze mid group jump-photo on the beach: everyone else has landed, except you, stuck in the air in the least flattering position in recorded history. The room is allowed to zoom in."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+        "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
+      },
+      "intensity": "party",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "social",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-spicy-001",
+      "action": {
+        "fr": "Rejoue ton walk of shame du dimanche matin : tenue d'hier, chaussures à la main, et le calcul mental du trajet le plus discret. Croise un voisin. Salue. Meurs un peu. Désigne le témoin dans la pièce.",
+        "en": "Reenact your Sunday-morning walk of shame: last night's outfit, shoes in hand, mentally plotting the least-seen route home. Pass a neighbour. Wave. Die a little. Point at the witness in this room."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+        "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "party",
+        "dating"
+      ]
+    },
+    {
+      "id": "gda-spicy-002",
+      "action": {
+        "fr": "Cache frénétiquement les preuves d'un plan cul avant que ton ou ta coloc rentre : la deuxième paire de chaussures, le verre en trop, l'autre brosse à dents. T'as quinze secondes. Le coloc est déjà à la porte.",
+        "en": "Frantically hide the evidence of a sneaky link before your flatmate gets home: the second pair of shoes, the extra glass, the other toothbrush. You've got fifteen seconds. The flatmate's already at the door."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+        "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-spicy-003",
+      "action": {
+        "fr": "Mets une capote sur une banane invisible avec la même panique que la vraie première fois : le sens, la déchirure, le deuxième essai, la dignité qui s'évapore. La salle compte les essais.",
+        "en": "Roll a condom onto an invisible banana with the same panic as the actual first time: which way up, the rip, the second attempt, the dignity evaporating. The room counts the attempts."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+        "en": "fully muted. first one who whispers has lost, and they already know it."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-spicy-004",
+      "action": {
+        "fr": "Sois quelqu'un qui essaie de paraître sexy en sortant de l'eau au ralenti façon pub de parfum, mais le maillot a bougé, le sable colle partout, et une méduse a des projets. Garde la pose.",
+        "en": "Be someone trying to look sexy emerging from the sea in slow motion like a perfume ad, but the swimsuit has shifted, the sand is everywhere, and a jellyfish has plans. Hold the pose."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+        "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "fail",
+        "slowmo"
+      ]
+    },
+    {
+      "id": "gda-spicy-005",
+      "action": {
+        "fr": "Fais semblant de jouir au resto façon scène culte de cinéma, à fond, devant toute la table — puis croise le regard horrifié du serveur qui prenait juste la commande. Commande un dessert. Mime-le.",
+        "en": "Fake it loudly at the restaurant like the famous diner scene, full commitment, in front of the whole table — then meet the horrified eyes of the waiter who was just taking the order. Order dessert. Mime it."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+        "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "movies",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-006",
+      "action": {
+        "fr": "Tente d'enlever un soutien-gorge dans le dos d'une main, à l'aveugle, sous un t-shirt, façon démineur sous pression. Trois clips. Deux te détestent. Le troisième n'existe pas.",
+        "en": "Try to undo a bra one-handed, blind, behind your back, under a t-shirt, like a bomb-disposal expert under pressure. Three clasps. Two of them hate you. The third one isn't real."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+        "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "everyday",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-spicy-007",
+      "action": {
+        "fr": "Sois le voisin du dessus dont le lit grince à 2 h du mat' avec un rythme de plus en plus assumé. Toute la pièce dort sous toi. Personne ne dort. Accélère le tempo.",
+        "en": "Be the upstairs neighbour whose bed is creaking at 2 a.m. with an increasingly confident rhythm. The whole room is asleep below you. Nobody is asleep. Pick up the tempo."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+        "en": "mouth open for sound effects, shut for actual words. one word and it's done."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "night",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-008",
+      "action": {
+        "fr": "Sois le placard de la chambre où deux personnes se cachent en urgence, et qui choisit ce moment précis pour faire un grincement, puis s'effondrer. Sors-en avec dignité. En bruitages.",
+        "en": "Be the bedroom wardrobe two people hide in during an emergency, that picks this exact moment to creak, then collapse. Climb out of it with dignity. In sound effects only."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+        "en": "no words. noises only. you're a sound effect with legs now."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "fail",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-009",
+      "action": {
+        "fr": "Sois le matelas gonflable du canapé d'ami qui se dégonfle lentement sous un couple, dans un crissement qui dénonce chaque mouvement à toute la coloc. Termine à plat sur le sol.",
+        "en": "Be the air mattress on a friend's floor slowly deflating under a couple, in a squeak that snitches on every movement to the whole flat. End up flat on the floor."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+        "en": "not one word. mouth-noises only. your dignity stays at the door."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "fail",
+        "night"
+      ]
+    },
+    {
+      "id": "gda-spicy-010",
+      "action": {
+        "fr": "Sois le téléphone posé sur la table qui se met à vibrer sans fin pendant le dîner, pendant que son propriétaire blêmit. Chaque vibration est un message qu'il ne veut PAS que la table lise. Insiste.",
+        "en": "Be the phone face-down on the table that starts buzzing endlessly during dinner while its owner goes pale. Each buzz is a message they really do NOT want the table to read. Keep buzzing."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+        "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "tech",
+        "conflict"
+      ]
+    },
+    {
+      "id": "gda-spicy-011",
+      "action": {
+        "fr": "Raconte le pire date de ta vie en reconstitution complète : l'arrivée, le moment où ça a basculé, la fuite. T'as trois mots pour le résumer à la table. Choisis-les comme un traumatisme.",
+        "en": "Reenact the worst date of your life in full: the arrival, the moment it turned, the escape. You get three words to sum it up for the table. Choose them like trauma."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+        "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "dating",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-012",
+      "action": {
+        "fr": "Sois un prof d'éducation sexuelle qui a clairement pas signé pour ça, devant une classe morte de rire. Mime le diagramme au tableau. T'as trois mots pour finir le cours. Survis.",
+        "en": "Be a sex-ed teacher who clearly did not sign up for this, in front of a class crying with laughter. Mime the diagram on the board. You get three words to finish the lesson. Survive."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+        "en": "three words max, not one more. pick them like they're your last will and testament."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "jobs",
+        "silly"
+      ]
+    },
+    {
+      "id": "gda-spicy-013",
+      "action": {
+        "fr": "Annonce à toute la table que tu remets ta vie de couple « en pause », façon conférence de presse de star. Trois mots pour répondre aux questions. Le ou la partenaire est peut-être dans la pièce.",
+        "en": "Announce to the whole table that you're putting your relationship 'on a break', celebrity press-conference style. Three words to handle the questions. The partner might be in this room."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+        "en": "3 words for the entire round. silence does the rest of the work. yours."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-014",
+      "action": {
+        "fr": "Sois le serveur d'un sex-shop qui conseille un client perdu avec un professionnalisme total. Présente le produit phare d'un geste. T'as trois mots de vendeur. Reste classe.",
+        "en": "Be the assistant in an adult shop helping a lost customer with total professionalism. Present the flagship product with a single gesture. You've got three words of sales patter. Stay classy."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
+        "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "jobs",
+        "talking"
+      ]
+    },
+    {
+      "id": "gda-spicy-015",
+      "action": {
+        "fr": "Avoue à toute la table le pseudo le plus gênant que t'as utilisé sur une appli de rencontre, et défends-le comme si c'était un coup de génie marketing. Quelqu'un ici a peut-être déjà matché avec.",
+        "en": "Confess to the whole table the most embarrassing username you ever used on a dating app, and defend it like it was a stroke of marketing genius. Someone here might have matched with it."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+        "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "pseudo",
+          "appli",
+          "match"
+        ],
+        "en": [
+          "username",
+          "app",
+          "match"
+        ]
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-016",
+      "action": {
+        "fr": "Reconstitue le moment où t'as envoyé un message brûlant à la mauvaise personne. Le contact. L'envoi. La seconde de réalisation. Le sprint pour annuler. T'as échoué. Raconte qui c'était. Sans dire QUI.",
+        "en": "Reenact the moment you sent a spicy text to the wrong person. The contact. The send. The half-second of realization. The sprint to unsend. You failed. Tell us who it was. Without saying WHO."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+        "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "message",
+          "envoyer",
+          "mauvais"
+        ],
+        "en": [
+          "text",
+          "send",
+          "wrong"
+        ]
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-spicy-017",
+      "action": {
+        "fr": "Présente ton ex à la table comme un produit en fin de série : les défauts cachés, le service après-vente catastrophique, et pourquoi tu l'as quand même gardé deux ans. Reste commercial.",
+        "en": "Pitch your ex to the table like a discontinued product: the hidden defects, the catastrophic after-sales service, and why you kept them for two years anyway. Stay salesman-smooth."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
+        "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "ex",
+          "relation",
+          "rupture"
+        ],
+        "en": [
+          "ex",
+          "relationship",
+          "breakup"
+        ]
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "conflict"
+      ]
+    },
+    {
+      "id": "gda-spicy-018",
+      "action": {
+        "fr": "Fais le tour de la table et devine le « type » de chaque joueur sur les applis, façon profileur. Sois précis. Sois cruel. Le premier qui dit « c'est exactement ça » te donne raison pour toute la manche.",
+        "en": "Go round the table and guess each player's dating-app 'type', profiler-style. Be specific. Be cruel. The first one who says 'that's literally it' proves you right for the whole round."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+        "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "type",
+          "appli",
+          "profil"
+        ],
+        "en": [
+          "type",
+          "app",
+          "profile"
+        ]
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "dating",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-019",
+      "action": {
+        "fr": "Fige-toi dans la pose exacte de quelqu'un que ses parents viennent d'ouvrir la porte au pire moment imaginable. Le bras tendu, la couette mal placée, l'horreur figée. Tiens. Personne ne te sauve.",
+        "en": "Freeze in the exact pose of someone whose parents just opened the door at the worst imaginable moment. Arm out, duvet misplaced, frozen horror. Hold it. Nobody is saving you."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+        "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "fail",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-020",
+      "action": {
+        "fr": "Prends la pose la plus aguicheuse possible pour un soft launch sur les réseaux, puis tiens-la pendant que la salle calcule combien de likes elle te donne. Le sourcil ne tremble pas. Le chiffre va te faire mal.",
+        "en": "Strike the most seductive pose you can manage for a thirst-trap soft launch, then hold it while the room calculates how many likes you'd get. The eyebrow does not waver. The number will hurt."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+        "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "internet",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-021",
+      "action": {
+        "fr": "Fige-toi en pleine séance photo de couple sur la plage, façon faire-part — sauf que ton partenaire imaginaire vient de te quitter par message à l'instant. Tiens le sourire parfait. Les yeux savent.",
+        "en": "Freeze mid couple photoshoot on the beach, save-the-date style — except your imaginary partner just dumped you by text this very second. Hold the perfect smile. The eyes know."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
+        "en": "frozen poses only. you change pose when the performer claps. not before."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-022",
+      "action": {
+        "fr": "Sois quelqu'un qui tente de poser une mood lumineuse romantique avec des bougies : la première s'éteint, la deuxième met le feu au rideau, et tu maîtrises l'incendie en gardant l'ambiance sexy. Garde le regard charmeur.",
+        "en": "Be someone trying to set a romantic mood with candles: the first one goes out, the second sets the curtain on fire, and you fight the blaze while keeping the vibe sexy. Hold the smouldering eye contact."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+        "en": "fully muted. first one who whispers has lost, and they already know it."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "dating",
+        "fail"
+      ]
+    },
+    {
+      "id": "gda-spicy-023",
+      "action": {
+        "fr": "Sois le distributeur de capotes des toilettes d'un bar qui avale la pièce, fait semblant de réfléchir, et recrache une pièce de Monopoly. Au pire moment. Pour la personne la plus pressée.",
+        "en": "Be the condom machine in a bar toilet that swallows the coin, pretends to think, and spits out a Monopoly note. At the worst moment. For the person in the biggest hurry."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+        "en": "mouth open for sound effects, shut for actual words. one word and it's done."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "fail",
+        "tech"
+      ]
+    },
+    {
+      "id": "gda-spicy-024",
+      "action": {
+        "fr": "Sois l'avocat qui plaide en faveur d'un texto que t'as envoyé à 3 h du mat' et que tu regrettes profondément. Convaincs le jury que c'était une bonne idée. T'as trois mots. La pièce à conviction est dans la pièce.",
+        "en": "Be the lawyer defending a text you sent at 3 a.m. and deeply regret. Convince the jury it was a good idea. You've got three words. The evidence is sitting in this room."
+      },
+      "channel": "three-words",
+      "channelLabel": {
+        "fr": "3 MOTS MAX",
+        "en": "3 WORDS MAX"
+      },
+      "channelRule": {
+        "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+        "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "dating",
+        "talking"
+      ]
+    },
+    {
+      "id": "gda-spicy-025",
+      "action": {
+        "fr": "Décris ton red flag le plus indéfendable en amour, devant tout le monde, comme si c'était en fait ta plus grande qualité. Le premier qui hoche la tête connaît déjà l'histoire. Désigne-le.",
+        "en": "Describe your most indefensible red flag in relationships, in front of everyone, as if it's actually your greatest strength. The first one to nod already knows the story. Point at them."
+      },
+      "channel": "taboo",
+      "channelLabel": {
+        "fr": "MOTS INTERDITS",
+        "en": "FORBIDDEN WORDS"
+      },
+      "channelRule": {
+        "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+        "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
+      },
+      "forbiddenWords": {
+        "fr": [
+          "red flag",
+          "relation",
+          "défaut"
+        ],
+        "en": [
+          "red flag",
+          "relationship",
+          "flaw"
+        ]
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "social"
+      ]
+    },
+    {
+      "id": "gda-spicy-026",
+      "action": {
+        "fr": "Vis le moment où tu fais semblant de chercher ton portefeuille pour pas payer l'addition d'un premier date qui se passe déjà très mal. Le mime doit durer plus longtemps que le date n'aurait dû.",
+        "en": "Live the moment you pretend to look for your wallet to dodge paying the bill on a first date that's already going terribly. The mime must last longer than the date should have."
+      },
+      "channel": "mime",
+      "channelLabel": {
+        "fr": "MIME UNIQUEMENT",
+        "en": "MIME ONLY"
+      },
+      "channelRule": {
+        "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+        "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "dating",
+        "money"
+      ]
+    },
+    {
+      "id": "gda-spicy-027",
+      "action": {
+        "fr": "Fige-toi dans la pose de quelqu'un qui vient d'ouvrir la porte de la chambre d'hôtel sur ses parents en lune de miel. La main sur la poignée, l'âme qui quitte le corps. Tiens jusqu'au clap.",
+        "en": "Freeze in the pose of someone who just opened the hotel-room door onto their parents on their second honeymoon. Hand on the handle, soul leaving the body. Hold it until the clap."
+      },
+      "channel": "statues",
+      "channelLabel": {
+        "fr": "STATUES",
+        "en": "FREEZE FRAMES"
+      },
+      "channelRule": {
+        "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+        "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
+      },
+      "intensity": "spicy",
+      "difficulty": 3,
+      "props": false,
+      "tags": [
+        "fail",
+        "drama"
+      ]
+    },
+    {
+      "id": "gda-spicy-028",
+      "action": {
+        "fr": "Sois le réveil qui sonne le lendemain d'un date, dans une chambre qui n'est pas la tienne, à un volume qui réveille tout l'immeuble. Cherche le bouton snooze à l'aveugle. Renverse tout. En bruitages.",
+        "en": "Be the alarm going off the morning after a date, in a bedroom that isn't yours, at a volume that wakes the whole building. Grope blindly for snooze. Knock everything over. In sound effects only."
+      },
+      "channel": "sounds",
+      "channelLabel": {
+        "fr": "BRUITAGES SEULEMENT",
+        "en": "SOUND EFFECTS ONLY"
+      },
+      "channelRule": {
+        "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+        "en": "no words. noises only. you're a sound effect with legs now."
+      },
+      "intensity": "spicy",
+      "difficulty": 2,
+      "props": false,
+      "tags": [
+        "night",
+        "fail"
+      ]
     }
   ]
 }

@@ -76,6 +76,19 @@ export interface SecretRoleConfig {
   finalRevealMs: number;
   matchesPerSession: number;
   scoring: SecretRoleScoring;
+  /**
+   * CC-2 comeback weighting — a per-match score multiplier indexed by `match`
+   * (0-based). Applied ONCE per match, at endMatch, to the WHOLE match's points
+   * (ballots + bonuses + lean bonus) so a trailing player can still win the
+   * night on a heavier finale. Read clamp-safe via `matchMultiplier()`:
+   *   - omitted / shorter-than-match / a non-finite or <= 0 entry => 1 (identity),
+   *     so a misconfigured pack can never zero-out or invert a match's score.
+   *   - awards are rounded deterministically (Math.round, pure — no RNG).
+   * DEFAULT (omitted) is identity at every match, so every existing exact-score
+   * test (all match-0, ×1) stays byte-for-byte green; only double-jeu opts in to
+   * [1, 1.5, 2] and only the new multiplier tests assert the escalated awards.
+   */
+  matchScoreMultiplier?: number[];
 }
 
 export const DOUBLE_JEU_CONFIG: SecretRoleConfig = {
@@ -102,6 +115,9 @@ export const DOUBLE_JEU_CONFIG: SecretRoleConfig = {
     impostorDisconnectCivilianConsolation: 1,
     leanBonusCorrect: 1,
   },
+  // CC-2 comeback weighting: the night escalates — match 3 is worth double, so
+  // the leader is never safe and a trailing player can still win the session.
+  matchScoreMultiplier: [1, 1.5, 2],
 };
 
 export type SecretRolePhase =
@@ -131,6 +147,46 @@ export interface VoteRecord {
 }
 
 export type MatchEndReason = 'caughtVote1' | 'caughtVote2' | 'impostorWins' | 'impostorLeft';
+
+/**
+ * CC-5 between-matches cliffhanger, derived at finalReveal/over from the
+ * ALREADY-PUBLIC `results` array — NO new in-match secret. `side` is who won the
+ * current run of consecutive matches; `count` is its length. Drives the
+ * "Match 3. The hunters are 2-0. One impostor left to even the score." card.
+ */
+export interface SessionStreak {
+  /** Who is on the current consecutive-win run, or null before any match resolves. */
+  side: 'civilians' | 'impostor' | null;
+  /** Length of that run (0 before any match resolves). */
+  count: number;
+}
+
+/**
+ * CC-5 cliffhanger payload attached to finalReveal/over, all derived purely from
+ * the public `results`. No new secret: every field is a fold over completed,
+ * already-public match results.
+ */
+export interface SessionCliffhanger {
+  /** Current consecutive-win streak across matches (civilians vs impostor). */
+  streak: SessionStreak;
+  /**
+   * The "ace detective": the sole top-scoring player across the session, or
+   * null on a tie / empty roster. This is the kit's `mvp(scores)` — civilians
+   * score by catching the impostor, so the night's points leader IS the best
+   * deducer. Derived from the PUBLIC session scores; not a new secret.
+   */
+  detectiveMvp: PlayerId | null;
+  /**
+   * Per-player count of "caught" matches the player took part in as a civilian
+   * (a match the civilians won by a vote — `winners:'civilians'` with a non-null
+   * `caughtOnVote` — and the player was NOT that match's impostor). A pure fold
+   * over the public `results` (impostor id + winner are public at finalReveal),
+   * never an individual ballot. Zero entries are omitted (tally convention).
+   */
+  detectiveHits: Record<PlayerId, number>;
+  /** matchesPlayed so far (results.length) — lets the client phrase "Match N of M". */
+  matchesPlayed: number;
+}
 
 /** Full atomic reveal for one completed match — public from finalReveal on. */
 export interface MatchResult {
@@ -256,10 +312,19 @@ export type SecretRoleView =
   | (SecretRoleViewBase & {
       phase: 'finalReveal';
       result: MatchResult;
+      /**
+       * CC-5 between-matches cliffhanger, derived purely from the public
+       * `results` (no new secret). Present from finalReveal on so the client can
+       * render the "Match N. The hunters are X-Y." card on the way to the next
+       * match. null only when no match has resolved (never at finalReveal).
+       */
+      cliffhanger: SessionCliffhanger;
     })
   | {
       phase: 'over';
       totalMatches: number;
       scores: Record<PlayerId, number>;
       results: MatchResult[];
+      /** CC-5 final cliffhanger / epilogue payload (pure fold over public results). */
+      cliffhanger: SessionCliffhanger;
     };

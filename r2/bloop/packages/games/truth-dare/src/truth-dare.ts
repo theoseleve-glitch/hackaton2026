@@ -16,8 +16,11 @@ import {
 import type {
   ActivePrompt,
   Choice,
+  DramaTag,
   Intensity,
   LText,
+  Reaction,
+  ReactionCounts,
   TdItem,
   TruthDareAction,
   TruthDareConfig,
@@ -27,6 +30,7 @@ import type {
   TurnVerdict,
   Verdict,
 } from './state.js';
+import { REACTIONS } from './state.js';
 
 type S = TruthDareState;
 type R = ReduceResult<S>;
@@ -135,6 +139,15 @@ function toScore(
   }
   const specTotal = Object.keys(state.predictions).length;
   const prompt = state.prompt!;
+  // CC-5 drama tag (P1-2): derived purely from the public tally — no new secret.
+  const dramaTag = dramaTagOf(verdict, tally);
+  // CC-4 escape-react beat (P1-3): only on a NON-completed turn when opted in;
+  // seed a zeroed public count (the live buffer is empty at reveal entry and
+  // fills as spectators react during the score window). null = beat off / done.
+  const reactBeatLive = state.config.reactOnEscape === true && verdict !== 'done';
+  const reactions: ReactionCounts | null = reactBeatLive
+    ? { ouch: 0, respect: 0, coward: 0 }
+    : null;
   return {
     state: {
       ...state,
@@ -142,6 +155,8 @@ function toScore(
       phase: 'score',
       outcome: verdict,
       scores,
+      // Fresh empty reaction buffer for this reveal (cleared per turn anyway).
+      reactions: emptySideBets<Reaction>(),
       lastResult: {
         activePlayer: state.activePlayer,
         choice: prompt.choice,
@@ -152,6 +167,8 @@ function toScore(
         pointsAwarded: points,
         forfeitText,
         spectatorTally: { correct: specCorrect, total: specTotal, pointsEach: specPoints },
+        dramaTag,
+        reactions,
       },
     },
     effects,
@@ -164,8 +181,64 @@ function chickened(state: S, reason: string): R {
   ]);
 }
 
-function donePoints(config: TruthDareConfig, choice: Choice): number {
-  return config.donePoints + (choice === 'dare' ? config.dareBonus : 0);
+/**
+ * Points a verdicted-DONE turn earns. CC-2 P1-1: tier-weighted — a verdicted
+ * DONE adds `tierBonus[intensity]` so a spicier completion scores more. The map
+ * defaults to all-zero (identity), so without an opt-in the score is exactly
+ * `donePoints (+ dareBonus on a dare)` — byte-unchanged from before. A
+ * missing/garbage tier entry reads as 0 (never docks). Only ever called on a
+ * DONE verdict; pass/chicken keep their flat constants and are never weighted.
+ */
+function donePoints(config: TruthDareConfig, choice: Choice, intensity: Intensity): number {
+  const raw = config.tierBonus?.[intensity];
+  const bonus = typeof raw === 'number' && Number.isFinite(raw) && raw > 0 ? raw : 0;
+  return config.donePoints + (choice === 'dare' ? config.dareBonus : 0) + bonus;
+}
+
+/**
+ * CC-5 drama tag (P1-2) — DERIVED purely from the already-public verdict tally,
+ * no new secret, no per-voter names (TK10 floor intact). Brief §1.122:
+ *   'contested' — a CLOSE split (>=1 vote each side, |done-chickened| <= 1):
+ *                 "la salle est divisée".
+ *   'roasted'   — UNANIMOUS-against: every cast vote said chickened and at least
+ *                 one was cast (done == 0 < chickened): "tout le monde a dit non".
+ *   null        — clear/uncontested, or no votes cast.
+ * `contested` (a close split) takes precedence over `roasted` so a 1-vs-2 split
+ * reads as divided, not a unanimous roast. Pass/chicken/escape (no contested
+ * vote, cast == 0) never carry a tag.
+ */
+function dramaTagOf(verdict: TurnVerdict, tally: { done: number; chickened: number }): DramaTag {
+  if (verdict === 'passed') return null;
+  const { done, chickened } = tally;
+  const cast = done + chickened;
+  if (cast === 0) return null;
+  if (done >= 1 && chickened >= 1 && Math.abs(done - chickened) <= 1) return 'contested';
+  if (done === 0 && chickened > 0) return 'roasted';
+  return null;
+}
+
+/** CC-4 — public per-enum escape-reaction counts (aggregate; leaks no individual reaction). */
+function reactionCountsOf(buffer: Record<PlayerId, Reaction>): ReactionCounts {
+  const counts: ReactionCounts = { ouch: 0, respect: 0, coward: 0 };
+  for (const p of Object.keys(buffer)) {
+    const r = buffer[p];
+    if (r !== undefined && REACTIONS.includes(r)) counts[r] += 1;
+  }
+  return counts;
+}
+
+/**
+ * CC-4 — who may react during the escape reveal: every CONNECTED roster player
+ * who is NOT the active player. SEPARATE from the verdict's voter set; a
+ * reaction is a non-scoring cosmetic channel and never feeds a resolve.
+ */
+function escapeReactors(state: S): PlayerId[] {
+  return connectedPlayers(state.players, state.connected).filter((p) => p !== state.activePlayer);
+}
+
+/** Whether the escape-react beat is live on this reveal: opted-in AND the turn was NOT completed. */
+function escapeReactBeatActive(state: S): boolean {
+  return state.config.reactOnEscape === true && state.outcome !== null && state.outcome !== 'done';
 }
 
 /** Tally whatever votes are in. 0 cast -> done (benefit of the doubt); ties -> done (>= threshold). */
@@ -179,7 +252,11 @@ function resolveVerdict(state: S): R {
   const cast = done + chick;
   const verdict: TurnVerdict =
     cast === 0 || done / cast >= state.config.verdictThreshold ? 'done' : 'chickened';
-  const points = verdict === 'done' ? donePoints(state.config, state.choice ?? 'truth') : state.config.chickenedPoints;
+  const intensity = state.prompt?.intensity ?? 'soft';
+  const points =
+    verdict === 'done'
+      ? donePoints(state.config, state.choice ?? 'truth', intensity)
+      : state.config.chickenedPoints;
   return toScore(state, verdict, { done, chickened: chick }, points, null, [
     { type: 'analytics', name: 'verdict_resolved', props: { verdict, done, chickened: chick } },
   ]);
@@ -231,6 +308,7 @@ function enterTurn(state: S, effects: Effect[]): R {
     outcome: null,
     verdicts: emptyPlayerMap<Verdict>(),
     predictions: emptySideBets<Verdict>(),
+    reactions: emptySideBets<Reaction>(),
   };
   // TRUTH_DARE@2 allowedChoices: a single allowed choice has no choose beat.
   if (next.config.allowedChoices.length === 1) {
@@ -303,6 +381,7 @@ export function createTruthDare(
         usedPromptIds: [],
         verdicts: emptyPlayerMap<Verdict>(),
         predictions: emptySideBets<Verdict>(),
+        reactions: emptySideBets<Reaction>(),
         scores,
         passesLeft,
         lastResult: null,
@@ -392,6 +471,31 @@ export function createTruthDare(
           const next: S = { ...state, verdicts };
           if (allActed(eligibleVoters(next), verdicts)) return resolveVerdict(next);
           return { state: next, effects: [] };
+        }
+
+        if (action.kind === 'react' && state.phase === 'score') {
+          // CC-4 escape-react beat (P1-3): a fixed-enum, NON-SCORING reaction
+          // during the reveal of a turn the active player did NOT complete.
+          // Accumulated into the SEPARATE `reactions` buffer (first react per
+          // spectator locks); it NEVER resolves the turn — `score` still
+          // auto-advances on its own deadline regardless of any reaction.
+          // Reject-invalid (beat off, completed turn, the active player, a
+          // disconnected/duplicate reactor, a bad enum) returns the SAME state
+          // reference via NOOP.
+          if (!escapeReactBeatActive(state)) return NOOP(state);
+          if (!REACTIONS.includes(action.reaction)) return NOOP(state);
+          if (playerId === state.activePlayer) return NOOP(state);
+          if (state.connected[playerId] !== true) return NOOP(state);
+          if (state.reactions[playerId] !== undefined) return NOOP(state); // first react locked
+          const reactions = Object.assign(emptySideBets<Reaction>(), state.reactions, {
+            [playerId]: action.reaction,
+          });
+          // Re-stamp the public counts on the reveal card so the snapshot stays
+          // in lockstep with the live view (counts only — no names).
+          const lastResult = state.lastResult
+            ? { ...state.lastResult, reactions: reactionCountsOf(reactions) }
+            : state.lastResult;
+          return { state: { ...state, reactions, lastResult }, effects: [] };
         }
 
         return NOOP(state);
@@ -511,11 +615,26 @@ export function createTruthDare(
       // score
       const { index, wrapped } = nextActiveSeat(state.rotation, state.turnIndex, state.connected);
       const endsAfter = state.round + (wrapped ? 1 : 0) >= state.config.totalRounds;
+      // CC-4 escape-react beat: live public counts + owner-only echo. Off (null)
+      // unless opted in AND the turn was not completed.
+      const reactBeat = escapeReactBeatActive(state);
+      const reactionCounts = reactBeat ? reactionCountsOf(state.reactions) : null;
+      const youReacted = Object.prototype.hasOwnProperty.call(state.reactions, viewer)
+        ? state.reactions[viewer]!
+        : null;
+      const youCanReact =
+        reactBeat &&
+        viewer !== state.activePlayer &&
+        state.connected[viewer] === true &&
+        youReacted === null;
       return {
         phase: 'score',
         ...common,
         lastResult: state.lastResult!,
         nextActive: endsAfter ? null : state.rotation[index]!,
+        reactionCounts,
+        youReacted: reactBeat ? youReacted : null,
+        youCanReact,
       };
     },
 

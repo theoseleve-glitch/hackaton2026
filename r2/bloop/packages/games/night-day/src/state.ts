@@ -70,6 +70,16 @@ export interface NightDayConfig {
   revealRoleOnDeath: boolean;
   lynchTieBreak: 'noLynch';
   witchSelfHeal: boolean;
+  /**
+   * P1-1 first-night shield (A/B, opt-in — DEFAULT FALSE so the shipped loop is
+   * byte-identical). When true, a wolf kill on round 0 is converted to a public
+   * "mark" instead of a death: the marked player is announced at dawn as
+   * "attacked but survived the first night" (NO role leak) and only dies if the
+   * wolves target them again on a later night. Guarantees nobody is a
+   * 10-minute ghost from the literal first dawn. Poison and lynch are NEVER
+   * shielded — only the round-0 wolf kill. Off => no `marked` ever appears.
+   */
+  firstNightShield: boolean;
   maxRounds: number;
   roleRevealMs: number;
   nightSeerMs: number;
@@ -90,6 +100,8 @@ export const LOUP_GAROU_CONFIG: NightDayConfig = {
   revealRoleOnDeath: true,
   lynchTieBreak: 'noLynch',
   witchSelfHeal: true,
+  // P1-1 A/B: OFF by default — the live loop is unchanged; flip per-room to test.
+  firstNightShield: false,
   maxRounds: 10,
   roleRevealMs: 10_000,
   nightSeerMs: 20_000,
@@ -128,6 +140,14 @@ export interface DawnReport {
   died: PlayerId[];
   /** Present iff revealRoleOnDeath. */
   revealedRoles: Record<PlayerId, Role> | null;
+  /**
+   * P1-1 first-night shield: the player the wolves struck on round 0 who
+   * SURVIVED (the strike was converted to a mark). Public BY DESIGN — "you were
+   * hunted night 1, and you're still here" — but carries NO role information and
+   * never names a wolf, so the redaction surface is unchanged. `null` whenever
+   * the shield is off, no one was struck, or it is not the first dawn.
+   */
+  marked: PlayerId | null;
 }
 
 /** Public from lynchReveal on. */
@@ -187,6 +207,21 @@ export interface NightDayState {
   pendingHealed: boolean;
   /** HIDDEN until dawn. */
   pendingPoison: PlayerId | null;
+  /**
+   * P1-1 first-night shield: the player marked-not-killed on round 0 (public via
+   * the dawn report, so PUBLIC here too). A second wolf strike on this player on
+   * a later night kills them normally. `null` when the shield is off or no one
+   * was shielded. Carries no role info — only survival.
+   */
+  marked: PlayerId | null;
+  /**
+   * HIDDEN until `over`: the round each dead player died on (wolf kill / poison /
+   * lynch). Recorded at the resolution that flips `alive` to false; revealed only
+   * in the `over` epilogue to derive `survivedTo` / `cleanestWolf`. Never in a
+   * pre-over view (a death's round is already public via lastDawn/lastLynch, but
+   * this aggregate is surfaced only at `over` to keep the pre-over surface tight).
+   */
+  diedRound: Record<PlayerId, number>;
   lastDawn: DawnReport | null;
   /** Debate early-exit toggles — public booleans. */
   readyToVote: Record<PlayerId, true>;
@@ -216,6 +251,38 @@ export interface Seat {
 }
 
 export type NightStep = 'seer' | 'wolves' | 'witch';
+
+/**
+ * CC-5 — match epilogue payload (P1-2). Derived PURELY at `over` from
+ * already-public over-state (`finalRoles`, `alive`, `diedRound`, and the Night
+ * Read accuracy already tracked) — NO new in-match secret, no reducer change.
+ * Feeds the session-shell Oracle roast + the rematch CTA ("the wolf who fooled
+ * you was {name} — run it back?"). Cosmetic only: never touches placement
+ * `scores`. Deterministic (stable id-sorted ties; no rng, no wall-clock).
+ */
+export interface MatchEpilogue {
+  /**
+   * Town MVP — the player whose nightly reads clocked the most wolves. `null`
+   * on a tie for the top accuracy or when nobody read a wolf (no contested
+   * crown). Mirrors kit `statLeaders` semantics on the read-accuracy map.
+   */
+  townMvp: PlayerId | null;
+  /** The best read-accuracy value any player reached (0 when nobody clocked a wolf). */
+  bestReadAccuracy: number;
+  /** Every player tied at `bestReadAccuracy` (empty when it is 0), id-sorted. */
+  bestSeers: PlayerId[];
+  /**
+   * The wolf who survived longest undetected — the wolf with the highest
+   * `survivedTo`. `null` on a tie or when there are no wolves. The rematch hook.
+   */
+  cleanestWolf: PlayerId | null;
+  /**
+   * Per player: the last round they were still alive. A survivor (alive at
+   * `over`) reports the final round; a dead player reports the round they died.
+   * Public-derived; the headline "you lasted N nights" stat.
+   */
+  survivedTo: Record<PlayerId, number>;
+}
 
 /**
  * Base envelope (design redaction matrix): own-only secrets are null for
@@ -288,4 +355,10 @@ export type NightDayView =
        * are untouched by it.
        */
       nightReadAccuracy: Record<PlayerId, number>;
+      /**
+       * CC-5 match epilogue (P1-2) — town MVP / best seers / cleanest wolf /
+       * survived-to, derived purely from this public over-state. Cosmetic; for
+       * the shell's roast + rematch CTA. Never perturbs `scores`.
+       */
+      epilogue: MatchEpilogue;
     } & NightDayBaseView);

@@ -444,6 +444,138 @@
       "tags": ["friendship", "funny"]
     },
     {
+      "id": "totd-t-soft-041",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Le surnom que tu donnes à quelqu'un de cette pièce dans ta tête, et qu'il a jamais entendu. Lâche-le. Pas la peine de dire qui — on regardera qui rougit.",
+        "en": "The nickname you've got for someone in this room inside your head that they've never heard. Say it. No need to name them — we'll just watch who flinches."
+      },
+      "minAge": 0,
+      "tags": ["friendship", "funny"]
+    },
+    {
+      "id": "totd-t-soft-042",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Le plus gros mensonge que t'as raconté pour sécher un truc. Le faux rendez-vous médical compte. La fausse panne de réveil aussi. Le meilleur de ta carrière.",
+        "en": "The biggest lie you've told to skip something. The fake dentist appointment counts. The fake dead phone counts. Career best, go."
+      },
+      "minAge": 0,
+      "tags": ["lies", "funny"]
+    },
+    {
+      "id": "totd-t-soft-043",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Ouvre tes notes vocales et lis le titre du mémo le plus chelou que t'as enregistré. Si c'est toi qui chantes, on l'écoute.",
+        "en": "Open your voice memos and read the title of the weirdest one in there. If it's you singing, we're playing it."
+      },
+      "minAge": 0,
+      "tags": ["phone", "embarrassing"]
+    },
+    {
+      "id": "totd-t-soft-044",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Le truc minuscule que quelqu'un ici a fait y'a longtemps et que tu lui pardonneras JAMAIS. Décris le crime. La salle votera si t'as raison de garder rancune.",
+        "en": "The tiny thing someone here did ages ago that you will NEVER let go of. Describe the crime. The room votes on whether the grudge is justified."
+      },
+      "minAge": 0,
+      "tags": ["friendship", "petty"]
+    },
+    {
+      "id": "totd-t-soft-045",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Quel objet tu sauverais en premier dans cette pièce si ça prenait feu — un humain ne compte pas. Justifie devant les humains qui comptaient pas.",
+        "en": "Which object in this room would you save first if it caught fire — a human doesn't count. Justify it to the humans who didn't count."
+      },
+      "minAge": 0,
+      "tags": ["hypothetical", "funny"]
+    },
+    {
+      "id": "totd-t-soft-046",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "T'as déjà fait semblant de connaître une chanson devant tout le monde en bougeant juste les lèvres. C'était quel morceau, et qui t'a presque grillé ?",
+        "en": "You've lip-synced a song in front of everyone, pretending you knew the words. Which track was it, and who nearly caught you?"
+      },
+      "minAge": 0,
+      "tags": ["music", "embarrassing"]
+    },
+    {
+      "id": "totd-t-soft-047",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Quelqu'un ici t'a déjà clairement battu à un truc, et tu le digères toujours pas. C'était quoi, et tu réclames une revanche maintenant ou tu boudes encore ?",
+        "en": "Someone here has clearly beaten you at something and you're still not over it. What was it — and do you want a rematch now, or are you still sulking?"
+      },
+      "minAge": 0,
+      "tags": ["friendship", "funny"]
+    },
+    {
+      "id": "totd-t-soft-048",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "La dépense la plus ridicule de ton dernier relevé bancaire. Le montant exact, et défends-la comme si t'y croyais encore.",
+        "en": "The most ridiculous line on your last bank statement. The exact amount, and defend it like you still stand by it."
+      },
+      "minAge": 0,
+      "tags": ["money", "funny"]
+    },
+    {
+      "id": "totd-t-soft-049",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Tu mens sur quoi à ton médecin ? Le nombre de cafés, le sport, l'eau que tu bois pas ? Donne le chiffre que tu gonfles ET le vrai.",
+        "en": "What do you lie to your doctor about? The coffees, the exercise, the water you don't drink? Give us the number you inflate AND the real one."
+      },
+      "minAge": 0,
+      "tags": ["habits", "lies"]
+    },
+    {
+      "id": "totd-t-soft-050",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Quelle compétence tu prétends avoir sur ton CV et que tu maîtrises absolument pas ? Quelqu'un ici pourrait t'embaucher — réfléchis bien.",
+        "en": "Which skill on your CV do you absolutely not have? Someone in this room might hire you one day — choose your words."
+      },
+      "minAge": 0,
+      "tags": ["work", "lies"]
+    },
+    {
+      "id": "totd-t-soft-051",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Le pire conseil que t'as donné avec une confiance totale, et qui a fini en catastrophe pour la personne. Elle est peut-être ici. Elle s'en souvient, elle.",
+        "en": "The worst advice you've given with total confidence that ended in disaster for them. They might be here. They definitely remember."
+      },
+      "minAge": 0,
+      "tags": ["friendship", "fail"]
+    },
+    {
+      "id": "totd-t-soft-052",
+      "choice": "truth",
+      "intensity": "soft",
+      "text": {
+        "fr": "Désigne la personne ici dont tu copierais le style sans jamais l'avouer — et celle dont tu cacherais une tenue dans un placard si tu pouvais. Deux doigts, deux noms.",
+        "en": "Point at the person here whose style you'd quietly steal — and the one whose outfit you'd hide in a cupboard if you could. Two fingers, two names."
+      },
+      "minAge": 0,
+      "tags": ["style", "funny"]
+    },
+    {
       "id": "totd-t-party-001",
       "choice": "truth",
       "intensity": "party",
@@ -994,6 +1126,226 @@
       "tags": ["gossip", "secrets"]
     },
     {
+      "id": "totd-t-party-051",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le message que t'as tapé en entier puis supprimé sans envoyer, hier ou avant-hier. À qui il était destiné, et il disait quoi en gros ?",
+        "en": "The message you typed out in full then deleted without sending, yesterday or the day before. Who was it for, and roughly what did it say?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "confession"]
+    },
+    {
+      "id": "totd-t-party-052",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Tu stalkes le compte de qui en mode anonyme — l'ex de ton ex, le crush d'un pote, ton propre ex ? Pas de nom. Juste à quelle fréquence.",
+        "en": "Whose account do you stalk on a burner — your ex's ex, a mate's crush, your own ex? No names. Just how often."
+      },
+      "minAge": 18,
+      "tags": ["social-media", "secrets"]
+    },
+    {
+      "id": "totd-t-party-053",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Quelqu'un ici t'a déjà sauvé d'une situation chelou en soirée. Raconte, et avoue si tu l'as jamais vraiment remercié.",
+        "en": "Someone here once pulled you out of a sketchy spot at a party. Tell it, and admit whether you ever properly thanked them."
+      },
+      "minAge": 18,
+      "tags": ["friendship", "party"]
+    },
+    {
+      "id": "totd-t-party-054",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le pseudo le plus cramé que t'as utilisé pour mater un profil sans être reconnu. Épelle-le. On veut le niveau de désespoir exact.",
+        "en": "The most tragic fake username you've used to view a profile without being clocked. Spell it out. We want the exact desperation level."
+      },
+      "minAge": 18,
+      "tags": ["social-media", "embarrassing"]
+    },
+    {
+      "id": "totd-t-party-055",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as déjà annulé un plan avec quelqu'un d'ici pour un meilleur plan, puis menti sur la raison. Lui, il a son téléphone. Avoue avant qu'il scrolle.",
+        "en": "You've cancelled on someone here for a better offer, then lied about why. They've got their phone. Confess before they scroll back."
+      },
+      "minAge": 18,
+      "tags": ["lies", "petty"]
+    },
+    {
+      "id": "totd-t-party-056",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Quel secret de quelqu'un d'ici tu meurs d'envie de balancer là maintenant ? Pas besoin de le dire — juste à quel point ça te démange, sur 10.",
+        "en": "Whose secret in this room are you dying to spill right now? You don't have to say it — just rate how badly it itches, out of 10."
+      },
+      "minAge": 18,
+      "tags": ["gossip", "secrets"]
+    },
+    {
+      "id": "totd-t-party-057",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as combien de captures d'écran de conversations dans ta galerie en ce moment ? Compte. Et la plus récente, c'était pour griller qui ?",
+        "en": "How many screenshots of conversations are in your camera roll right now? Count. And the most recent one — who was it to expose?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "gossip"]
+    },
+    {
+      "id": "totd-t-party-058",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as déjà fait croire que t'avais lu un message alors que t'avais juste désactivé les accusés de réception. Tu fais ça à qui dans cette pièce ?",
+        "en": "You've let someone think you hadn't seen a message while quietly turning off your read receipts. Who in this room do you do that to?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "petty"]
+    },
+    {
+      "id": "totd-t-party-059",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Ton mensonge le plus élaboré pour quitter une soirée tôt : l'urgence familiale inventée, le faux malaise, le chat malade ? Donne la version complète.",
+        "en": "Your most elaborate lie to bail on a party early: the fake family emergency, the fake illness, the sick cat? Give us the full version."
+      },
+      "minAge": 18,
+      "tags": ["lies", "party"]
+    },
+    {
+      "id": "totd-t-party-060",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Combien tu donnerais, là maintenant, pour lire les notes vocales que quelqu'un d'ici a envoyées à ton sujet ? Un montant précis. Il sait de quoi tu parles.",
+        "en": "How much would you pay, right now, to hear the voice notes someone here has sent about you? An exact figure. They know what you mean."
+      },
+      "minAge": 18,
+      "tags": ["gossip", "money"]
+    },
+    {
+      "id": "totd-t-party-061",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le plus gros plan foireux que t'as monté avec quelqu'un d'ici : la fausse excuse de groupe, le mensonge à deux qui a viré au cauchemar. Racontez-le à deux voix.",
+        "en": "The biggest scheme you cooked up with someone here: the shared fake excuse, the two-person lie that went sideways. Tell it in two voices."
+      },
+      "minAge": 18,
+      "tags": ["friendship", "scheming"]
+    },
+    {
+      "id": "totd-t-party-062",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Ouvre tes favoris Instagram ou TikTok. Le dernier truc enregistré, c'était quoi — et t'es prêt à le montrer, ou tu bois ?",
+        "en": "Open your saved posts on Instagram or TikTok. What's the last thing you bookmarked — and are you ready to show it, or do you drink?"
+      },
+      "minAge": 18,
+      "tags": ["social-media", "embarrassing"]
+    },
+    {
+      "id": "totd-t-party-063",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as déjà laissé quelqu'un payer toute l'addition en faisant semblant de chercher ton téléphone. C'était qui, et combien de fois ? La personne est peut-être là.",
+        "en": "You've let someone cover the whole bill while you pretended to look for your phone. Who, and how many times? They might be sitting here."
+      },
+      "minAge": 18,
+      "tags": ["money", "petty"]
+    },
+    {
+      "id": "totd-t-party-064",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le compliment que tu détestais recevoir mais que tu réclamais en boucle quand même. Et la personne qui te le faisait, elle est ici ?",
+        "en": "The compliment you secretly hated but kept fishing for anyway. And the person who kept giving it — are they in this room?"
+      },
+      "minAge": 18,
+      "tags": ["confession", "funny"]
+    },
+    {
+      "id": "totd-t-party-065",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le dernier truc que t'as cherché à 3h du mat' en mode parano sur quelqu'un. Pas le nom — juste le genre de recherche. La salle complétera.",
+        "en": "The last 3 a.m. paranoid search you ran on someone. Not the name — just the type of search. The room will fill in the rest."
+      },
+      "minAge": 18,
+      "tags": ["phone", "secrets"]
+    },
+    {
+      "id": "totd-t-party-066",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as déjà inventé un avis sur un film, un resto ou un groupe juste pour pas avoir l'air à la masse devant quelqu'un d'ici. Lequel, et avec qui t'as bluffé ?",
+        "en": "You've faked an opinion on a film, a restaurant or a band just to not look clueless in front of someone here. Which one, and who did you bluff?"
+      },
+      "minAge": 18,
+      "tags": ["lies", "social"]
+    },
+    {
+      "id": "totd-t-party-067",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Classe les gens d'ici du plus au moins capable de garder un secret. Le dernier mérite des explications — et il les exige déjà.",
+        "en": "Rank the people here from best to worst at keeping a secret. Whoever's last is owed an explanation — and they're already demanding one."
+      },
+      "minAge": 18,
+      "tags": ["friendship", "ranking"]
+    },
+    {
+      "id": "totd-t-party-068",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Le truc le plus gênant que ton historique de commandes te ressort en haut de liste, là, si tu l'ouvres. Lis-le. On le verra de toute façon.",
+        "en": "The most embarrassing thing sitting at the top of your order history right now if you open it. Read it out. We'll see it anyway."
+      },
+      "minAge": 18,
+      "tags": ["phone", "embarrassing"]
+    },
+    {
+      "id": "totd-t-party-069",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "T'as déjà laissé quelqu'un croire une fausse version d'une soirée parce que la vraie te faisait passer pour un boulet. Quelle soirée, et qui croit encore le mensonge ?",
+        "en": "You've let someone believe a fake version of a night out because the real one made you look like a clown. Which night, and who still believes the lie?"
+      },
+      "minAge": 18,
+      "tags": ["lies", "party"]
+    },
+    {
+      "id": "totd-t-party-070",
+      "choice": "truth",
+      "intensity": "party",
+      "text": {
+        "fr": "Désigne les deux personnes d'ici qui se détesteraient le plus si elles étaient coincées trois jours dans le même appart. Et toi, t'es team qui ?",
+        "en": "Point at the two people here who'd loathe each other most if trapped in the same flat for three days. And you — whose team are you on?"
+      },
+      "minAge": 18,
+      "tags": ["friendship", "ranking"]
+    },
+    {
       "id": "totd-t-spicy-001",
       "choice": "truth",
       "intensity": "spicy",
@@ -1489,6 +1841,226 @@
       "tags": ["sex", "story"]
     },
     {
+      "id": "totd-t-spicy-046",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le pire moment pour qu'on t'envoie un nude par erreur, et c'est exactement là que c'est arrivé. Qui était à côté, et t'as fait quoi de ton écran ?",
+        "en": "The worst possible moment to get a nude by mistake — and that's exactly when it landed. Who was next to you, and what did you do with your screen?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "awkward"]
+    },
+    {
+      "id": "totd-t-spicy-047",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le surnom intime qu'on t'a donné au lit et que tu peux pas réentendre sans avoir envie de disparaître. Tu le dis, ou tu bois ?",
+        "en": "The pet name someone gave you in bed that you can't hear again without wanting to disappear. Say it, or drink?"
+      },
+      "minAge": 18,
+      "tags": ["sex", "embarrassing"]
+    },
+    {
+      "id": "totd-t-spicy-048",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Combien de personnes dans tes contacts là, maintenant, tu as déjà embrassées ? Ouvre, compte, annonce. Inclus celles que t'as bloquées.",
+        "en": "How many people in your contacts right now have you kissed? Open it, count, announce. Include the ones you've blocked."
+      },
+      "minAge": 18,
+      "tags": ["kissing", "phone"]
+    },
+    {
+      "id": "totd-t-spicy-049",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà menti sur 'c'était bien' juste pour pas vexer. C'était à quel point pas bien, sur une échelle de 'je remets ça' à 'j'ai fait semblant de dormir' ?",
+        "en": "You've lied about it 'being great' just to spare someone. How not-great was it, on a scale from 'I'd go again' to 'I pretended to fall asleep'?"
+      },
+      "minAge": 18,
+      "tags": ["sex", "lies"]
+    },
+    {
+      "id": "totd-t-spicy-050",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "L'endroit le plus improbable où t'as déjà rangé un préservatif 'au cas où'. Précis. La salle jugera ton optimisme.",
+        "en": "The most improbable place you've ever stashed a condom 'just in case'. Be precise. The room will judge your optimism."
+      },
+      "minAge": 18,
+      "tags": ["sex", "funny"]
+    },
+    {
+      "id": "totd-t-spicy-051",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà recouché avec un ex en jurant à tout le monde que c'était fini. Combien de rechutes au compteur — et le groupe était au courant à quelle rechute ?",
+        "en": "You've slept with an ex again after swearing to everyone it was over. How many relapses on the counter — and which one did the group find out about?"
+      },
+      "minAge": 18,
+      "tags": ["ex", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-052",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "La fantaisie la plus banale que t'oses pas demander parce que c'est trop gênant à formuler. Tu peux la décrire en trois mots max. Ou boire.",
+        "en": "The most ordinary fantasy you've never dared ask for because saying it out loud is too awkward. Three words max to describe it. Or drink."
+      },
+      "minAge": 18,
+      "tags": ["sex", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-053",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà chronométré un date pour décider de la suite. Combien de minutes avant de savoir si tu restais — et ce date, il l'a jamais su ?",
+        "en": "You've timed a date to decide what happens next. How many minutes before you knew if you were staying — and did they ever find out?"
+      },
+      "minAge": 18,
+      "tags": ["dating", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-054",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le pire endroit où tu t'es retrouvé bloqué après un coup d'un soir : mauvaise ville, plus de batterie, plus un sou. Raconte le retour de l'enfer.",
+        "en": "The worst place you've been stranded after a one-night thing: wrong town, dead battery, no cash. Walk us through the journey home from hell."
+      },
+      "minAge": 18,
+      "tags": ["hookup", "story"]
+    },
+    {
+      "id": "totd-t-spicy-055",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà fait passer un plan cul pour 'juste un pote' devant tes parents ou tes potes. Ça a tenu combien de temps avant que quelqu'un capte tout ?",
+        "en": "You've passed a hookup off as 'just a mate' in front of your parents or friends. How long did that hold before someone clocked the whole thing?"
+      },
+      "minAge": 18,
+      "tags": ["hookup", "lies"]
+    },
+    {
+      "id": "totd-t-spicy-056",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "La pire excuse que t'as inventée pour expliquer une marque dans le cou. Et la personne à qui tu mentais, elle y a cru combien de secondes ?",
+        "en": "The worst excuse you've invented to explain a mark on your neck. And the person you were lying to — how many seconds did they buy it?"
+      },
+      "minAge": 18,
+      "tags": ["hookup", "funny"]
+    },
+    {
+      "id": "totd-t-spicy-057",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà répondu à un message d'un ex juste pour voir si t'avais encore du pouvoir. Ça date de quand, et t'es reparti avec quoi — l'ego boosté ou la honte ?",
+        "en": "You've replied to an ex purely to test whether you still had power over them. How recent, and what did you walk away with — the ego boost or the shame?"
+      },
+      "minAge": 18,
+      "tags": ["ex", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-058",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le truc que tu googles avant un date pour pas avoir l'air débutant. Lis ta dernière recherche du genre. La vraie, pas la présentable.",
+        "en": "The thing you google before a date so you don't look like a beginner. Read your last search of that kind. The real one, not the presentable one."
+      },
+      "minAge": 18,
+      "tags": ["sex", "phone"]
+    },
+    {
+      "id": "totd-t-spicy-059",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà fait semblant d'aimer un truc au lit pour faire plaisir, et maintenant c'est devenu ton 'signature move' imposé. C'était quoi à l'origine ?",
+        "en": "You've faked enjoying something in bed to please someone, and now it's your imposed 'signature move'. What was it originally?"
+      },
+      "minAge": 18,
+      "tags": ["sex", "funny"]
+    },
+    {
+      "id": "totd-t-spicy-060",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Tu suis encore le compte de combien d'ex ou de plans, là, maintenant ? Compte. Et tu likes encore lequel 'par accident' ?",
+        "en": "How many exes or hookups do you still follow right now? Count. And whose posts do you still like 'by accident'?"
+      },
+      "minAge": 18,
+      "tags": ["ex", "social-media"]
+    },
+    {
+      "id": "totd-t-spicy-061",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "La conversation la plus chaude que t'as eue avec quelqu'un que t'as jamais rencontré en vrai. Ça a duré combien de temps, et pourquoi ça s'est jamais concrétisé ?",
+        "en": "The steamiest conversation you've had with someone you've never met in person. How long did it run, and why did it never go anywhere?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-062",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "T'as déjà fait le ménage dans ton tel en panique avant que quelqu'un l'emprunte. Tu cachais quoi exactement, et la personne, elle est dans la pièce ?",
+        "en": "You've frantically cleaned out your phone before someone borrowed it. What exactly were you hiding, and is that person in this room?"
+      },
+      "minAge": 18,
+      "tags": ["phone", "secrets"]
+    },
+    {
+      "id": "totd-t-spicy-063",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le plus long que t'as fait durer un 'on verra' avec quelqu'un que t'avais zéro intention de revoir. Combien de semaines de faux espoir t'as distribué ?",
+        "en": "The longest you've strung out a 'we'll see' with someone you had zero intention of seeing again. How many weeks of false hope did you hand out?"
+      },
+      "minAge": 18,
+      "tags": ["dating", "confession"]
+    },
+    {
+      "id": "totd-t-spicy-064",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Désigne la personne ici à qui tu confierais le moins ton historique de rencontres — et celle qui en a déjà trop vu. Deux noms, deux raisons.",
+        "en": "Point at the person here you'd least trust with your dating history — and the one who's already seen too much. Two names, two reasons."
+      },
+      "minAge": 18,
+      "tags": ["dating", "friendship"]
+    },
+    {
+      "id": "totd-t-spicy-065",
+      "choice": "truth",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Le mensonge le plus gros que t'as dit pour finir la nuit avec quelqu'un. Faux métier, fausse dispo, faux 'je vis pas loin' ? Donne la ligne exacte.",
+        "en": "The biggest lie you've told to close out the night with someone. Fake job, fake availability, fake 'I live nearby'? Give us the exact line."
+      },
+      "minAge": 18,
+      "tags": ["hookup", "lies"]
+    },
+    {
       "id": "totf-f-soft-001",
       "choice": "dare",
       "intensity": "soft",
@@ -1685,6 +2257,72 @@
       },
       "minAge": 0,
       "tags": ["forfeit", "funny"]
+    },
+    {
+      "id": "totf-f-soft-019",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : jusqu'à ton prochain tour, tu dois traduire en langage corporate tout ce que tu dis. 'J'ai faim' devient 'je souhaiterais aligner mes besoins nutritionnels'. Le groupe sanctionne les rechutes.",
+        "en": "No answer? Forfeit: until your next turn, translate everything you say into corporate-speak. 'I'm hungry' becomes 'I'd like to align on my nutritional needs'. The group penalises every slip."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "funny"]
+    },
+    {
+      "id": "totf-f-soft-020",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : fais la voix off dramatique de ce qui se passe dans la pièce, façon bande-annonce, jusqu'à ce que quelqu'un rie. S'ils tiennent, ça continue.",
+        "en": "No answer? Forfeit: do the dramatic movie-trailer voice-over of whatever's happening in the room until someone laughs. If they hold out, you keep going."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "performance"]
+    },
+    {
+      "id": "totf-f-soft-021",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : présente la personne à ta droite comme si tu la nommais à une remise de prix, avec un palmarès entièrement inventé et beaucoup trop élogieux. Elle reste digne.",
+        "en": "No answer? Forfeit: introduce the person on your right like you're announcing them at an awards show, with a completely invented and wildly flattering résumé. They must stay composed."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "performance"]
+    },
+    {
+      "id": "totf-f-soft-022",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : le groupe te donne un objet de la pièce. Tu lui fais une déclaration d'amour de 15 secondes, debout, totalement sérieux.",
+        "en": "No answer? Forfeit: the group hands you an object from the room. You give it a 15-second love confession, standing up, completely straight-faced."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "performance"]
+    },
+    {
+      "id": "totf-f-soft-023",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : jusqu'à ton prochain tour, tu dois acquiescer à tout ce que dit la personne en face de toi comme si c'était la chose la plus profonde jamais énoncée. Hochements lents obligatoires.",
+        "en": "No answer? Forfeit: until your next turn, agree with everything the person opposite you says as if it were the most profound thing ever spoken. Slow, reverent nodding required."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "funny"]
+    },
+    {
+      "id": "totf-f-soft-024",
+      "choice": "dare",
+      "intensity": "soft",
+      "text": {
+        "fr": "Pas de réponse ? Gage : reconstitue ton réveil de ce matin en temps réel, du premier grognement au moment où t'as renoncé à être quelqu'un de bien. Le groupe note le réalisme.",
+        "en": "No answer? Forfeit: re-enact this morning's wake-up in real time, from the first groan to the moment you gave up on being a functional person. The group scores it on realism."
+      },
+      "minAge": 0,
+      "tags": ["forfeit", "performance"]
     },
     {
       "id": "totd-f-party-001",
@@ -1885,6 +2523,116 @@
       "tags": ["drink", "forfeit"]
     },
     {
+      "id": "totd-f-party-019",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Le jury retient que t'avais une réponse — t'as juste préféré la garder pour ton avocat.",
+        "en": "One sip. The jury notes that you had an answer — you just decided to save it for your lawyer."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-020",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Tu viens de transformer une simple question en mystère national. Bien joué — maintenant tout le monde y pense.",
+        "en": "One sip. You just turned a simple question into a national mystery. Well played — now everyone's thinking about it."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-021",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Le silence est gratuit, mais l'addition arrive plus tard — la question reviendra quand tu t'y attendras le moins.",
+        "en": "One sip. Silence is free, but the bill comes later — this question is coming back when you least expect it."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-022",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Officiellement : aucun commentaire. Officieusement : ton regard vient de tout balancer à la table.",
+        "en": "One sip. Officially: no comment. Unofficially: your eyes just told the whole table everything."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-023",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Tu paies pour ne rien dire. Le groupe, lui, paiera pour reposer la question — et il a les moyens.",
+        "en": "One sip. You're paying to say nothing. The group, however, will pay to ask again — and it can afford it."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-024",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Le groupe enregistre une absence de réponse — et une présence de culpabilité absolument évidente.",
+        "en": "One sip. The group logs a missing answer — and a thoroughly present sense of guilt."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-025",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Lève ton verre : à la version de toi que la table vient juste d'imaginer, et qui est sûrement pire que la vraie.",
+        "en": "One sip. Raise your glass: to the version of you the table just imagined, which is almost certainly worse than the real one."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-026",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. C'est la troisième fois ce soir que tu choisis le verre. Le groupe commence à tenir un registre — et il est public.",
+        "en": "One sip. That's the third time tonight you've gone for the glass. The group is starting to keep a tally — and it's public."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-027",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. Esquive enregistrée. Le groupe te rappelle gentiment que ceux qui n'ont rien à cacher répondent, en général, plus vite.",
+        "en": "One sip. Dodge logged. The group gently reminds you that people with nothing to hide usually answer a little faster."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-party-028",
+      "choice": "dare",
+      "intensity": "party",
+      "text": {
+        "fr": "Une gorgée. T'as choisi le mystère. Le problème du mystère, c'est qu'on finit toujours par enquêter.",
+        "en": "One sip. You chose mystery. The trouble with mystery is that somebody always ends up investigating."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
       "id": "totd-f-spicy-001",
       "choice": "dare",
       "intensity": "spicy",
@@ -2078,6 +2826,116 @@
       "text": {
         "fr": "Une gorgée, une seule, et le dossier est scellé. Jusqu'à 1h du mat', quand quelqu'un le rouvrira. Quelqu'un le rouvrira.",
         "en": "One sip — just one — and the file is sealed. Until around 1 a.m., when somebody reopens it. Somebody will."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-019",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Le seul qui aurait pu répondre à ta place vient de sourire au fond de la pièce. On l'a tous vu.",
+        "en": "One sip. The one person who could've answered for you just smirked from the back of the room. We all saw it."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-020",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. La question était à deux doigts de tout. Le verre, lui, vient de confirmer qu'il y avait bien un tout.",
+        "en": "One sip. The question was one inch from everything. The glass just confirmed there was, in fact, an everything."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-021",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Tu protèges quelqu'un, là. La salle aimerait beaucoup savoir qui — et elle a toute la nuit pour deviner.",
+        "en": "One sip. You're protecting someone right now. The room would very much like to know who — and it has all night to guess."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-022",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Pas de réponse, mais ce demi-sourire vient d'écrire trois chapitres dans la tête de tout le monde.",
+        "en": "One sip. No answer — but that half-smile just wrote three chapters in everyone's head."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-023",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Trop personnel pour ce salon. Noté : t'as une vie privée digne de ce nom, et tu comptes la garder. Pour l'instant.",
+        "en": "One sip. Too personal for this living room. Noted: you have a private life worth the name, and you intend to keep it. For now."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-024",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Le silence te coûte un verre ; il vient de coûter une nuit blanche à ton ex, qui sent qu'on parle de lui sans savoir pourquoi.",
+        "en": "One sip. Silence costs you a drink; it just cost your ex a sleepless night, sensing they're being discussed without knowing why."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-025",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Tu viens de payer pour qu'on n'apprenne rien. La salle, elle, vient de décider d'inventer pire. Beaucoup pire.",
+        "en": "One sip. You just paid for us to learn nothing. The room just decided to invent worse. Much worse."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-026",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Le verre est vide, le mystère est plein. À ce stade, c'est plus une esquive, c'est un aveu avec du style.",
+        "en": "One sip. The glass is empty, the mystery is full. At this point it's not a dodge, it's a confession with good lighting."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-027",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée. Quelque part, un téléphone contient la preuve de exactement ce que tu refuses de dire. Et il n'est peut-être pas loin.",
+        "en": "One sip. Somewhere, a phone holds proof of precisely what you won't say. And it might not be far away."
+      },
+      "minAge": 18,
+      "tags": ["drink", "forfeit"]
+    },
+    {
+      "id": "totd-f-spicy-028",
+      "choice": "dare",
+      "intensity": "spicy",
+      "text": {
+        "fr": "Une gorgée pour sceller le dossier. Petit rappel : dans ce groupe, les dossiers scellés ont une durée de vie d'environ deux verres.",
+        "en": "One sip to seal the file. Small reminder: in this group, sealed files have a shelf life of roughly two drinks."
       },
       "minAge": 18,
       "tags": ["drink", "forfeit"]

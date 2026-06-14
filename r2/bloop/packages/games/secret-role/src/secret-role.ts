@@ -7,6 +7,7 @@ import {
   emptySideBets,
   gameOver,
   initPresence,
+  mvp,
   placeSideBet,
   redactSideBets,
   resolveSideBets,
@@ -23,6 +24,8 @@ import type {
   SecretRoleContent,
   SecretRoleState,
   SecretRoleView,
+  SessionCliffhanger,
+  SessionStreak,
   VoteRecord,
 } from './state.js';
 
@@ -42,6 +45,78 @@ function zeroPoints(players: readonly PlayerId[]): Record<PlayerId, number> {
 
 function clonePoints(m: Record<PlayerId, number>): Record<PlayerId, number> {
   return Object.assign(emptyPlayerMap<number>(), m);
+}
+
+/**
+ * CC-2 comeback weighting — the per-match score multiplier for `match`, read
+ * clamp-safe from `config.matchScoreMultiplier`. DEFAULT-IDENTITY: a missing
+ * array, a missing/short entry, or a non-finite / <= 0 value all yield 1, so an
+ * unconfigured (or misconfigured) template is byte-for-byte unchanged and can
+ * never zero-out or invert a match's score. Pure — no RNG, no wall-clock.
+ */
+function matchMultiplier(config: SecretRoleConfig, match: number): number {
+  const arr = config.matchScoreMultiplier;
+  if (arr === undefined) return 1;
+  const m = arr[match];
+  if (m === undefined || !Number.isFinite(m) || m <= 0) return 1;
+  return m;
+}
+
+/**
+ * Apply the CC-2 match multiplier to a per-player points map, ONCE, in place on
+ * a fresh clone. Deterministic rounding (Math.round — pure, no RNG); identity
+ * (×1) is a structural no-op so existing match-0 scores stay byte-identical.
+ */
+function applyMatchMultiplier(
+  points: Record<PlayerId, number>,
+  players: readonly PlayerId[],
+  mult: number,
+): Record<PlayerId, number> {
+  if (mult === 1) return points;
+  const scaled = clonePoints(points);
+  for (const p of players) scaled[p] = Math.round((scaled[p] ?? 0) * mult);
+  return scaled;
+}
+
+/**
+ * CC-5 cliffhanger — derived PURELY from the already-public `results` array at
+ * finalReveal/over. No new in-match secret: every input (winner, impostor id,
+ * caughtOnVote) is public from finalReveal on. Deterministic; input untouched.
+ */
+function deriveCliffhanger(
+  results: readonly MatchResult[],
+  scores: Record<PlayerId, number>,
+): SessionCliffhanger {
+  // Current consecutive-win run (civilians vs impostor), folded from the tail.
+  let streak: SessionStreak = { side: null, count: 0 };
+  if (results.length > 0) {
+    const side = results[results.length - 1]!.winners;
+    let count = 0;
+    for (let i = results.length - 1; i >= 0; i--) {
+      if (results[i]!.winners === side) count += 1;
+      else break;
+    }
+    streak = { side, count };
+  }
+  // Per-player "caught" participation: civilian side of a vote-catch match.
+  const detectiveHits = emptyPlayerMap<number>();
+  for (const r of results) {
+    if (r.winners !== 'civilians' || r.caughtOnVote === null) continue;
+    for (const p of Object.keys(r.points)) {
+      if (p === r.impostor) continue;
+      detectiveHits[p] = (detectiveHits[p] ?? 0) + 1;
+    }
+  }
+  // Drop zero entries (tally convention) for a clean public payload.
+  for (const p of Object.keys(detectiveHits)) {
+    if (detectiveHits[p] === 0) delete detectiveHits[p];
+  }
+  return {
+    streak,
+    detectiveMvp: mvp(scores),
+    detectiveHits,
+    matchesPlayed: results.length,
+  };
 }
 
 /** Unique plurality target, or null on tie / all-abstain (impostor doc §4.5, verbatim). */
@@ -97,7 +172,7 @@ function endMatch(
   effects: Effect[],
 ): ReduceResult<SecretRoleState> {
   const item = state.items[state.match] ?? { id: '', theme: EMPTY_L, majority: EMPTY_L, impostor: EMPTY_L };
-  const points = clonePoints(state.pendingPoints);
+  const raw = clonePoints(state.pendingPoints);
   // CC-1 lean side-bet resolves now, against the (about-to-be-public) impostor:
   // any player whose hidden discuss lean named the impostor earns a small bonus.
   // resolveSideBets is upside-only (clamps non-positive), so a 0 bonus or a
@@ -107,7 +182,11 @@ function endMatch(
     state.impostor,
     (suspect, impostor) => (suspect === impostor ? state.config.scoring.leanBonusCorrect : 0),
   );
-  for (const p of state.players) points[p] = (points[p] ?? 0) + (leanBonus[p] ?? 0);
+  for (const p of state.players) raw[p] = (raw[p] ?? 0) + (leanBonus[p] ?? 0);
+  // CC-2 comeback weighting: scale this WHOLE match's points once (default ×1 =
+  // identity, so match-0 / unconfigured awards are byte-for-byte unchanged). The
+  // multiplier reshapes WHO wins the night, not the per-award rules above.
+  const points = applyMatchMultiplier(raw, state.players, matchMultiplier(state.config, state.match));
   const scores = clonePoints(state.scores);
   for (const p of state.players) scores[p] = (scores[p] ?? 0) + (points[p] ?? 0);
   const result: MatchResult = {
@@ -418,6 +497,8 @@ export function createSecretRole(
         return {
           phase: 'finalReveal', ...base,
           result: state.results[state.results.length - 1] ?? EMPTY_RESULT,
+          // CC-5: derived purely from the now-public results (no new secret).
+          cliffhanger: deriveCliffhanger(state.results, state.scores),
         };
       }
       return {
@@ -425,6 +506,7 @@ export function createSecretRole(
         totalMatches: state.totalMatches,
         scores: state.scores,
         results: state.results,
+        cliffhanger: deriveCliffhanger(state.results, state.scores),
       };
     },
 

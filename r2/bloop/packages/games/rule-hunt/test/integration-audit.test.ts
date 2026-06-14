@@ -58,12 +58,15 @@ const rhAccuse = (playerId: string, target: string, at: number): GameEvent<unkno
 const rhVote = (playerId: string, guilty: boolean, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'tribunalVote', guilty }, at });
 
-// Seed 'audit-seed' with this roster makes p1 the round-0 detective, so the
+// Seed 'audit-1' with this roster makes p1 the sole round-0 detective against
+// the REAL authored pack (the item shuffle consumes the rng before the player
+// shuffle, so the detective seat is pack-sensitive; 'audit-1' is pinned to keep
+// p1 the detective so the hardcoded follower events below stay valid). The
 // followers p2..p5 ack; p2 accuses p3; voters = p2 (accuser), p4, p5. p4 and
 // p5 cast HIDDEN ballots, p2 is still expected — the tribunal stays open.
 const AUDIT = {
   players: ['p1', 'p2', 'p3', 'p4', 'p5'] as const,
-  seed: 'audit-seed',
+  seed: 'audit-1',
   events: [
     rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
     rhAccuse('p2', 'p3', 5_000),
@@ -272,5 +275,27 @@ describe('heat-check hidden values pass the same redaction audit (new spotlight 
     expect(v.noteCount).toBe(1); // one detective noted
     expect(v.myFlag).toBeNull(); // ...but the outsider sees no value
     expect(v.myNote).toBeNull();
+  });
+
+  it('on resume the suspicion meter banks the AGGREGATE only — a per-target total, no ballot', () => {
+    // Resume the spotlight: the hidden flag+note collapse to +heat on the target,
+    // the raw buffers are dropped, and the meter is public to everyone.
+    const open = foldToSpotlight();
+    const at = (open.state as { segmentStartedAt: number }).segmentStartedAt;
+    let s = open.state;
+    s = module_.reduce(s as never, rhFlag(open.flagger, 'flag', at + 1) as never).state;
+    s = module_.reduce(s as never, rhNote(open.det, 'suspicious', at + 2) as never).state;
+    s = module_.reduce(s as never, { type: 'deadline', at: at + 10_000 } as never).state;
+    const resumed = s as { phase: string; heat: Record<string, number>; spotlight: unknown };
+    expect(resumed.phase).toBe('live');
+    expect(resumed.spotlight).toBeNull();
+    expect(resumed.heat[open.target]).toBe(2); // 1 flag + 1 note, AGGREGATE
+    for (const viewer of [...AUDIT.players, ...OUTSIDERS]) {
+      const v = module_.view(s as never, viewer);
+      expect(v.heat[open.target]).toBe(2); // public meter
+      const str = JSON.stringify(v);
+      expect(str).not.toContain('"flags"');
+      expect(str).not.toContain('"notes"');
+    }
   });
 });

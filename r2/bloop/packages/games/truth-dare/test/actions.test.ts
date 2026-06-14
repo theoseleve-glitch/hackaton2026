@@ -263,6 +263,9 @@ describe('zod action schema (DO boundary)', () => {
       { kind: 'verdict', vote: 'chickened' },
       { kind: 'predict', bet: 'done' },
       { kind: 'predict', bet: 'chickened' },
+      { kind: 'react', reaction: 'ouch' },
+      { kind: 'react', reaction: 'respect' },
+      { kind: 'react', reaction: 'coward' },
     ];
     for (const a of legal) expect(truthDareActionSchema.safeParse(a).success).toBe(true);
   });
@@ -280,6 +283,9 @@ describe('zod action schema (DO boundary)', () => {
       { kind: 'predict' },
       { kind: 'predict', bet: 'passed' },
       { kind: 'predict', bet: 'maybe' },
+      { kind: 'react' },
+      { kind: 'react', reaction: 'done' },
+      { kind: 'react', reaction: 'laugh' },
       { kind: 'nuke' },
     ];
     for (const a of bad) expect(truthDareActionSchema.safeParse(a).success).toBe(false);

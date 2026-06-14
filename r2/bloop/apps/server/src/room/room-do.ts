@@ -1,5 +1,5 @@
 import { DurableObject } from 'cloudflare:workers';
-import { replay, type Effect, type GameEvent } from '@bloop/engine';
+import { replay, type ContentPack, type Effect, type GameEvent } from '@bloop/engine';
 import { clientMessageSchema, type ClientMessage, type ErrorCode, type RoomPlayer, type ServerMessage } from '@bloop/protocol';
 import type { Env } from '../types.js';
 import { AlarmQueue, nextPhaseDeadline } from './alarm-mux.js';
@@ -42,6 +42,8 @@ export class RoomDO extends DurableObject<Env> {
   private game: GameRuntime | null = null;
   /** §7.4 per-connection buckets, keyed by attachment cid. In-memory by design — see ratelimit.ts: hibernation implies idleness implies a full bucket. */
   private readonly limiters = new Map<string, RateLimiter>();
+  /** R2 seam: content packs are immutable per id, so an in-memory cache by contentRef keeps replay deterministic AND avoids a per-event R2 round-trip. */
+  private readonly contentCache = new Map<string, ContentPack<any>>();
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
@@ -164,14 +166,18 @@ export class RoomDO extends DurableObject<Env> {
     if (roster.length < entry.module.minPlayers || roster.length > entry.module.maxPlayers) {
       return this.sendError(ws, 'BAD_MESSAGE');
     }
+    // R2 seam: the pack the game inits with is loaded (and cached) from the CONTENT bucket.
+    const content = await this.loadContent(entry.contentRef);
+    if (content === null) return this.sendError(ws, 'UNKNOWN_GAME');
     const at = Date.now();
     const seed = crypto.randomUUID(); // unguessable; persisted so init and every replay agree
-    const state = entry.module.init(seed, roster, entry.content);
+    const state = entry.module.init(seed, roster, content);
     const dur = entry.module.phaseDurationMs(state);
     this.store.clearEvents(); // a previous game's log must never replay into this one
     this.store.patchMeta({
       status: 'playing', gameId: entry.module.id, gameVersion: entry.module.version, seed,
-      contentRef: { gameId: entry.module.id, contentId: entry.content.id, version: entry.content.version },
+      // contentId === entry.contentRef === content.id — the exact R2 key rehydrate() reloads.
+      contentRef: { gameId: entry.module.id, contentId: content.id, version: content.version },
       roster, phaseKey: entry.module.phaseKey(state),
       deadlineAt: dur === null ? null : at + dur, lastActivityAt: at,
     });
@@ -185,7 +191,7 @@ export class RoomDO extends DurableObject<Env> {
     if (att.state !== 'joined' || att.playerId === undefined) return this.sendError(ws, 'BAD_MESSAGE');
     const meta = this.store.getMeta();
     if (meta === null || meta.status !== 'playing') return this.sendError(ws, 'BAD_MESSAGE');
-    const rt = this.rehydrate();
+    const rt = await this.rehydrate();
     if (rt === null) return this.sendError(ws, 'BAD_MESSAGE');
     // Per-game payload validation; the module never sees junk. (Free-text
     // scrubbing — sanitizeGameText — joins here when a text game lands.)
@@ -203,15 +209,37 @@ export class RoomDO extends DurableObject<Env> {
    * (Seam: if a marathon game ever needs snapshots, they must round-trip
    * through a module-aware revive — never bare JSON.parse.)
    */
-  private rehydrate(): GameRuntime | null {
+  private async rehydrate(): Promise<GameRuntime | null> {
     if (this.game !== null) return this.game;
     const meta = this.store.getMeta();
-    if (meta === null || meta.gameId === null || meta.seed === null || meta.roster === null) return null;
+    // contentRef is stamped atomically with gameId/seed/roster in onStartGame — checking it here
+    // narrows the type for the R2 reload below AND keeps the invariant explicit.
+    if (meta === null || meta.gameId === null || meta.seed === null || meta.roster === null || meta.contentRef === null) return null;
     const entry = lookupGame(meta.gameId);
     if (entry === null || entry.module.version !== meta.gameVersion) return null; // killed/bumped mid-game: unrecoverable, room TTLs out
-    const state = replay(entry.module, meta.seed, meta.roster, entry.content, this.store.listEvents());
+    // R2 seam: reload the EXACT pack this game init'd with (meta.contentRef.contentId === pack.id),
+    // cached so replay reuses one immutable object and stays deterministic across eviction.
+    const content = await this.loadContent(meta.contentRef.contentId);
+    if (content === null) return null; // pack vanished from R2: unrecoverable, room TTLs out
+    const state = replay(entry.module, meta.seed, meta.roster, content, this.store.listEvents());
     this.game = { entry, state };
     return this.game;
+  }
+
+  /**
+   * R2 seam: load a content pack by its bucket key (= contentRef = pack.id),
+   * cached per-DO. R2 keys are immutable per id, so caching the parsed pack is
+   * safe AND mandatory — it keeps replay deterministic (one object) and spares a
+   * round-trip per event. A cache hit short-circuits before any await.
+   */
+  private async loadContent(contentRef: string): Promise<ContentPack<any> | null> {
+    const hit = this.contentCache.get(contentRef);
+    if (hit !== undefined) return hit;
+    const obj = await this.env.CONTENT.get(contentRef);
+    if (obj === null) return null;
+    const pack = (await obj.json()) as ContentPack<any>;
+    this.contentCache.set(contentRef, pack);
+    return pack;
   }
 
   /**
@@ -282,7 +310,7 @@ export class RoomDO extends DurableObject<Env> {
     // phone its current personal view so it catches up regardless.
     const meta = this.store.getMeta();
     if (meta !== null && meta.gameId !== null && meta.status !== 'lobby') {
-      const rt = this.rehydrate();
+      const rt = await this.rehydrate();
       if (rt !== null) {
         await this.applyEvent(rt, { type: 'playerRejoined', playerId: seat.playerId, at: now });
         this.sendView(ws, rt, seat.playerId, this.store.getMeta()?.deadlineAt ?? null);
@@ -359,7 +387,7 @@ export class RoomDO extends DurableObject<Env> {
 
   /** Phase deadline -> a server-stamped `deadline` GameEvent. The phaseKey guard makes a stale/duplicate alarm a no-op (§6.2). */
   private async firePhase(key: string, now: number): Promise<void> {
-    const rt = this.rehydrate();
+    const rt = await this.rehydrate();
     if (rt === null) return;
     if (rt.entry.module.phaseKey(rt.state) !== key) return; // the phase already advanced
     await this.applyEvent(rt, { type: 'deadline', at: now });
@@ -377,7 +405,7 @@ export class RoomDO extends DurableObject<Env> {
     const playing = this.store.getMeta()?.status === 'playing';
     this.removeSeat(seat, now);
     if (playing) {
-      const rt = this.rehydrate();
+      const rt = await this.rehydrate();
       if (rt !== null) await this.applyEvent(rt, { type: 'playerLeft', playerId: seat.playerId, at: now });
     }
   }

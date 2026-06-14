@@ -6,8 +6,14 @@ import {
   emptyPlayerMap,
   gameOver,
   initPresence,
+  isCloseFinish,
+  mvp,
+  nextStreak,
   setConnected,
   statLeaders,
+  streakBonus,
+  superlativeWinners,
+  topGap,
 } from '@bloop/kit';
 import type {
   ClosestNumberConfig,
@@ -23,6 +29,8 @@ import type {
   InputGuessView,
   LText,
   NumberQuestionItem,
+  OverEpilogue,
+  PlayerMatchStats,
 } from './state.js';
 import { isCrowdItem, isNumberItem } from './state.js';
 
@@ -31,14 +39,72 @@ const EMPTY_TEXT: LText = { fr: '', en: '' };
 const EMPTY_CLOSEST: ClosestRoundResult = {
   kind: 'closest-number', itemId: '', answer: 0, guesses: {}, ranking: [],
   pointsEarned: {}, exact: [], multiplier: 1, busted: [],
-  callOuts: { pile: [], closest: [], wildest: [] },
+  callOuts: { pile: [], closest: [], wildest: [] }, streak: {},
 };
 
 const EMPTY_CROWD: CrowdRoundResult = {
   kind: 'crowd-target', itemId: '', targetYesPct: 50, picks: {},
   winningCards: [], secondCards: [], bullseye: false, pointsEarned: {},
-  callOuts: { loneGenius: [], mostFooled: [] },
+  callOuts: { loneGenius: [], mostFooled: [] }, streak: {},
 };
+
+const EMPTY_STATS: PlayerMatchStats = {
+  rounds: 0, exactCount: 0, totalDistance: 0, worstDistance: 0, bestStreak: 0,
+};
+
+/**
+ * CC-2 / CC-5 shared per-round fold over the now-PUBLIC outcome. Pure: given
+ * the prior `streak`/`stats` and this round's participant outcomes (top-2
+ * finish flag, an exact-hit flag, and a per-player distance), it advances the
+ * streak via the kit `nextStreak`, applies a small capped `streakBonus` to the
+ * award map + running scores, and accumulates the match-stats. NO secret, NO
+ * RNG, NO clock — every input is already public at reveal.
+ *
+ * With `bonusPer` 0/undefined the kit `streakBonus` returns 0, so the points
+ * are byte-identical to the pre-streak template (default-identity invariant).
+ */
+function foldStreakAndStats(
+  state: InputGuessState,
+  participants: PlayerId[],
+  topTwo: (p: PlayerId) => boolean,
+  distance: (p: PlayerId) => number,
+  isExact: (p: PlayerId) => boolean,
+  pointsEarned: Record<PlayerId, number>,
+  scores: Record<PlayerId, number>,
+  bonusPer: number | undefined,
+  bonusCap: number | undefined,
+): { streak: Record<PlayerId, number>; stats: Record<PlayerId, PlayerMatchStats> } {
+  const streak = Object.assign(emptyPlayerMap<number>(), state.streak);
+  const stats = emptyPlayerMap<PlayerMatchStats>();
+  for (const p of Object.keys(state.stats)) stats[p] = { ...state.stats[p]! };
+  // Every roster player has a streak entry (resets to 0 on a non-top round even
+  // when they didn't act) so the public counter is total-order stable.
+  for (const p of state.players) {
+    const top = participants.includes(p) && topTwo(p);
+    streak[p] = nextStreak(streak[p] ?? 0, top);
+    if (top && (bonusPer ?? 0) !== 0) {
+      const bonus = streakBonus(streak[p]!, { perStreak: bonusPer!, cap: bonusCap });
+      if (bonus !== 0) {
+        pointsEarned[p] = (pointsEarned[p] ?? 0) + bonus;
+        scores[p] = (scores[p] ?? 0) + bonus;
+      }
+    }
+    if (participants.includes(p)) {
+      const prior = stats[p] ?? EMPTY_STATS;
+      const d = distance(p);
+      stats[p] = {
+        rounds: prior.rounds + 1,
+        exactCount: prior.exactCount + (isExact(p) ? 1 : 0),
+        totalDistance: prior.totalDistance + d,
+        worstDistance: Math.max(prior.worstDistance, d),
+        bestStreak: Math.max(prior.bestStreak, streak[p]!),
+      };
+    } else if (stats[p] === undefined) {
+      stats[p] = { ...EMPTY_STATS };
+    }
+  }
+  return { streak, stats };
+}
 
 function numberItem(state: InputGuessState): NumberQuestionItem | null {
   const item = state.items[state.round];
@@ -77,7 +143,12 @@ function resolveClosest(state: InputGuessState, config: ClosestNumberConfig): Re
   const pointsEarned = emptyPlayerMap<number>();
   const exact: PlayerId[] = [];
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+  // CC-2 — "top-2 finish" = a player in the first or second DISTINCT-distance
+  // rank group (competition ranking; ties share a group). Tracked by counting
+  // distinct groups as we walk them, so a 5-way tie still counts as group 0.
+  const topTwo = new Set<PlayerId>();
   let i = 0;
+  let group = 0;
   while (i < ranked.length) {
     let j = i;
     while (j < ranked.length && ranked[j]!.d === ranked[i]!.d) j += 1;
@@ -86,13 +157,29 @@ function resolveClosest(state: InputGuessState, config: ClosestNumberConfig): Re
       const { p, d } = ranked[k]!;
       const isExact = item !== null && d === 0;
       if (isExact) exact.push(p);
+      if (item !== null && group < 2) topTwo.add(p);
       const pts = (rankPts + (isExact ? config.exactBonus : 0)) * multiplier;
       pointsEarned[p] = pts;
       scores[p] = (scores[p] ?? 0) + pts;
     }
     i = j;
+    group += 1;
   }
   for (const p of busted) pointsEarned[p] = 0;
+
+  // CC-2 streak + CC-5 stats fold over the now-public outcome. Distance is the
+  // ranked |guess−answer| (busted excluded from the answerer set => not a
+  // participant). bonusPer defaults to identity (0) so points are unchanged.
+  const distOfClosest = emptyPlayerMap<number>();
+  for (const { p, d } of ranked) distOfClosest[p] = d;
+  const participants = ranked.map((r) => r.p);
+  const { streak, stats } = foldStreakAndStats(
+    state, participants,
+    (p) => topTwo.has(p),
+    (p) => distOfClosest[p] ?? 0,
+    (p) => (distOfClosest[p] ?? -1) === 0,
+    pointsEarned, scores, config.streakBonus, config.streakCap,
+  );
 
   // Call-outs — derived PURELY from the now-public guesses/answer (no secret).
   // closest = the smallest-distance group; wildest = the largest. Both via the
@@ -113,10 +200,10 @@ function resolveClosest(state: InputGuessState, config: ClosestNumberConfig): Re
   const lastResult: ClosestRoundResult = {
     kind: 'closest-number', itemId: item?.id ?? '', answer, guesses,
     ranking: ranked.map((r) => r.p), pointsEarned, exact, multiplier, busted,
-    callOuts: { pile: [...exact], closest, wildest },
+    callOuts: { pile: [...exact], closest, wildest }, streak,
   };
   return {
-    state: { ...state, phase: 'reveal', scores, lastResult },
+    state: { ...state, phase: 'reveal', scores, streak, stats, lastResult },
     effects: [{ type: 'analytics', name: 'round_revealed', props: { round: state.round } }],
   };
 }
@@ -170,13 +257,24 @@ function resolveCrowd(state: InputGuessState, config: CrowdTargetConfig): Reduce
     ? []
     : pickers.filter((p) => ds[picks[p]!] === worstPicked);
 
+  // CC-2 streak + CC-5 stats fold. A "top-2 finish" = a picker of a winning
+  // (closest) card; per-player distance = the distance of the card they picked;
+  // exact = that distance is 0. bonusPer defaults to identity (0): no change.
+  const { streak, stats } = foldStreakAndStats(
+    state, pickers,
+    (p) => winningCards.includes(picks[p]!),
+    (p) => ds[picks[p]!] ?? 0,
+    (p) => (ds[picks[p]!] ?? -1) === 0,
+    pointsEarned, scores, config.streakBonus, config.streakCap,
+  );
+
   const lastResult: CrowdRoundResult = {
     kind: 'crowd-target', itemId: item?.id ?? '', targetYesPct: item?.targetYesPct ?? 50,
     picks, winningCards, secondCards, bullseye, pointsEarned,
-    callOuts: { loneGenius: [...loneGenius], mostFooled: [...mostFooled] },
+    callOuts: { loneGenius: [...loneGenius], mostFooled: [...mostFooled] }, streak,
   };
   return {
-    state: { ...state, phase: 'reveal', scores, lastResult },
+    state: { ...state, phase: 'reveal', scores, streak, stats, lastResult },
     effects: [{ type: 'analytics', name: 'round_revealed', props: { round: state.round } }],
   };
 }
@@ -229,6 +327,61 @@ function validSubmission(state: InputGuessState, action: InputGuessAction): numb
 }
 
 /**
+ * CC-5 — derive the 'over' epilogue PURELY from already-PUBLIC state: the final
+ * `scores` and the public per-player `stats` accumulator (itself folded only
+ * from public reveal data). NO new secret, NO RNG, NO clock — superlatives use
+ * the kit `mvp`/`topGap`/`isCloseFinish`/`superlativeWinners`, all stable
+ * ascending-id ordered, so the payload is replay-identical.
+ *
+ *   - mostExact:      players with the MAX exact-hit count (>=1).
+ *   - closestOverall: players with the MIN total distance, among those who played.
+ *   - biggestWhiff:   players with the MAX single-round distance, among players.
+ *   - onFire:         players whose best streak == the match maximum (>=2).
+ */
+function epilogueOf(
+  scores: Record<PlayerId, number>,
+  stats: Record<PlayerId, PlayerMatchStats>,
+  closeThreshold: number | undefined,
+): OverEpilogue {
+  const played = Object.keys(stats).filter((p) => (stats[p]?.rounds ?? 0) > 0);
+
+  // most exact — MAX exactCount, only awarded when someone hit at least one.
+  let maxExact = 0;
+  for (const p of played) maxExact = Math.max(maxExact, stats[p]!.exactCount);
+  const mostExact = maxExact === 0
+    ? []
+    : superlativeWinners(stats, (s, p) => played.includes(p) && s.exactCount === maxExact);
+
+  // sharpest overall — MIN totalDistance among players who actually played.
+  let minTotal = Number.POSITIVE_INFINITY;
+  for (const p of played) minTotal = Math.min(minTotal, stats[p]!.totalDistance);
+  const closestOverall = played.length === 0
+    ? []
+    : superlativeWinners(stats, (s, p) => played.includes(p) && s.totalDistance === minTotal);
+
+  // biggest whiff — MAX worstDistance among players who played.
+  let maxWorst = -1;
+  for (const p of played) maxWorst = Math.max(maxWorst, stats[p]!.worstDistance);
+  const biggestWhiff = maxWorst < 0
+    ? []
+    : superlativeWinners(stats, (s, p) => played.includes(p) && s.worstDistance === maxWorst);
+
+  // on fire — MAX bestStreak, only an award when it actually caught fire (>=2).
+  let maxStreak = 0;
+  for (const p of Object.keys(stats)) maxStreak = Math.max(maxStreak, stats[p]!.bestStreak);
+  const onFire = maxStreak < 2
+    ? []
+    : superlativeWinners(stats, (s) => s.bestStreak === maxStreak);
+
+  return {
+    mvp: mvp(scores),
+    closeFinish: closeThreshold !== undefined && isCloseFinish(scores, closeThreshold),
+    topGap: topGap(scores),
+    mostExact, closestOverall, biggestWhiff, onFire,
+  };
+}
+
+/**
  * INPUT_GUESS template — two zero-text numeric modes (wave2 design §2.4/§2.5):
  * closest-number (quizz-culture-ge "Au Pif !") and crowd-target
  * (cinquante-cinquante "Fifty-Fifty"). One module, per-game configs. Platform
@@ -260,7 +413,13 @@ export function createInputGuess(
       }
       const totalRounds = Math.min(config.totalRounds, items.length);
       const scores = emptyPlayerMap<number>();
-      for (const p of players) scores[p] = 0;
+      const streak = emptyPlayerMap<number>();
+      const stats = emptyPlayerMap<PlayerMatchStats>();
+      for (const p of players) {
+        scores[p] = 0;
+        streak[p] = 0;
+        stats[p] = { ...EMPTY_STATS };
+      }
       return {
         config: { ...config, totalRounds },
         players: [...players],
@@ -271,6 +430,8 @@ export function createInputGuess(
         submissions: emptyPlayerMap<number>(),
         submitOrder: [],
         scores,
+        streak,
+        stats,
         lastResult: null,
       };
     },
@@ -321,7 +482,12 @@ export function createInputGuess(
 
     view(state, viewer) {
       if (state.phase === 'over') {
-        return { phase: 'over', mode: state.config.mode, scores: state.scores };
+        // CC-5 — epilogue derived at 'over' from PUBLIC scores + stats ONLY
+        // (no new secret). `stats` is cloned so the view never aliases state.
+        const statsView = emptyPlayerMap<PlayerMatchStats>();
+        for (const p of Object.keys(state.stats)) statsView[p] = { ...state.stats[p]! };
+        const epilogue = epilogueOf(state.scores, state.stats, state.config.closeFinishThreshold);
+        return { phase: 'over', mode: state.config.mode, scores: state.scores, epilogue, stats: statsView };
       }
       const base = { round: state.round, totalRounds: state.config.totalRounds, scores: state.scores };
 

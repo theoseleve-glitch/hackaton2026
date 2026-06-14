@@ -6,13 +6,20 @@ import {
   emptyPlayerMap,
   emptySideBets,
   initPresence,
+  isCloseFinish,
+  leaderboard,
+  mvp,
+  nextStreak,
   placeSideBet,
   redactSideBets,
   resolveSideBets,
   setConnected,
+  streakBonus,
+  topGap,
 } from '@bloop/kit';
 import type {
   Ballot,
+  Cliffhanger,
   Option,
   OptionVoteAction,
   OptionVoteConfig,
@@ -21,11 +28,26 @@ import type {
   OptionVoteView,
   PredictionReveal,
   RoundResult,
+  StreakTag,
 } from './state.js';
 
 const EMPTY_RESULT: RoundResult = {
-  itemId: '', counts: { A: 0, B: 0 }, majority: null, picks: {}, awarded: [], predictions: [],
+  itemId: '', counts: { A: 0, B: 0 }, majority: null, picks: {}, awarded: [],
+  predictions: [], streaks: [], tieReliefApplied: false,
 };
+
+/** Close-finish threshold (top-2 gap): a 1-point race is a cliffhanger. */
+const CLIFFHANGER_GAP = 1;
+
+/** Derive the CC-5 cliffhanger from the ALREADY-PUBLIC final scores. Pure. */
+function deriveCliffhanger(scores: Record<string, number>): Cliffhanger {
+  return {
+    leaderboard: leaderboard(scores),
+    topGap: topGap(scores),
+    closeFinish: isCloseFinish(scores, CLIFFHANGER_GAP),
+    mvp: mvp(scores),
+  };
+}
 
 /** Whether the prediction side-bet channel is live for this config. */
 function predictionsEnabled(state: OptionVoteState): boolean {
@@ -55,6 +77,12 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
   let minorityCount = state.minorityCount;
   const awarded: PlayerId[] = [];
+  // P1 CC-2 — players who landed the PRIMARY scoring event this round (correct
+  // predictor / majority voter). Drives the per-player streak below. The
+  // side-bet prediction bonus is a SEPARATE channel and does NOT feed the streak.
+  const scoredThisRound = new Set<PlayerId>();
+  // P1 tie-relief — only consoles a perfect split, opt-in, default off.
+  let tieReliefApplied = false;
   if (majority !== null) {
     if (state.config.scoring === 'predict-majority') {
       // Your own pick never scores — only a correct majority prediction does.
@@ -63,6 +91,7 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
         if (ballot !== undefined && ballot.predict === majority) {
           scores[p] = (scores[p] ?? 0) + state.config.pointsCorrect;
           awarded.push(p);
+          scoredThisRound.add(p);
         }
       }
     } else {
@@ -73,10 +102,23 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
         if (ballot.pick === majority) {
           scores[p] = (scores[p] ?? 0) + state.config.pointsCorrect;
           awarded.push(p);
+          scoredThisRound.add(p);
         } else {
           minorityCount[p] = (minorityCount[p] ?? 0) + 1;
         }
       }
+    }
+  } else if (state.config.tiePolicy === 'all-plus-one') {
+    // PERFECT SPLIT consolation (opt-in). Every player who balloted scores
+    // `pointsCorrect`; the banner becomes a *good* outcome for starved small
+    // rooms. A split is NOT "landing on the majority", so it is not a primary
+    // scoring event: relief points neither advance NOR preserve the streak (a
+    // balloter not in `scoredThisRound` resets below, like any non-scoring round).
+    for (const p of state.players) {
+      if (state.ballots[p] === undefined) continue;
+      scores[p] = (scores[p] ?? 0) + state.config.pointsCorrect;
+      awarded.push(p);
+      tieReliefApplied = true;
     }
   }
 
@@ -108,6 +150,33 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
     }
   }
 
+  // P1 CC-2 — advance/reset each BALLOTER's streak and pay the (default-zero)
+  // bonus. success = landed the primary scoring event this round; any other
+  // balloter resets to 0 (`nextStreak(prev, false)`). A non-balloter (absent /
+  // never voted) keeps their prior streak untouched — a disconnect is not a
+  // miss. The bonus defaults to identity (+0) so existing scores stay green;
+  // the public TAG is the retention surface either way.
+  const streak = Object.assign(emptyPlayerMap<number>(), state.streak);
+  const streaks: StreakTag[] = [];
+  for (const p of state.players) {
+    if (state.ballots[p] === undefined) continue;
+    const success = scoredThisRound.has(p);
+    const next = nextStreak(streak[p] ?? 0, success);
+    streak[p] = next;
+    if (success) {
+      const bonus = streakBonus(next, state.config.streakBonus);
+      if (bonus !== 0) {
+        scores[p] = (scores[p] ?? 0) + bonus;
+        if (!awarded.includes(p)) awarded.push(p);
+      }
+    }
+  }
+  // Surface a tag for every player currently ON a streak (>= 1), stable id order.
+  for (const p of [...state.players].sort((x, y) => (x < y ? -1 : x > y ? 1 : 0))) {
+    const s = streak[p] ?? 0;
+    if (s >= 1) streaks.push({ playerId: p, streak: s, bonus: streakBonus(s, state.config.streakBonus) });
+  }
+
   const lastResult: RoundResult = {
     itemId: state.items[state.round]?.id ?? '',
     counts: { A: a, B: b },
@@ -115,9 +184,11 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
     picks,
     awarded,
     predictions,
+    streaks,
+    tieReliefApplied,
   };
   return {
-    state: { ...state, phase: 'reveal', scores, minorityCount, lastResult },
+    state: { ...state, phase: 'reveal', scores, minorityCount, streak, lastResult },
     effects: [{ type: 'analytics', name: 'round_revealed', props: { round: state.round } }],
   };
 }
@@ -174,9 +245,11 @@ export function createOptionVote(
       const totalRounds = Math.min(config.totalRounds, items.length);
       const scores = emptyPlayerMap<number>();
       const minorityCount = emptyPlayerMap<number>();
+      const streak = emptyPlayerMap<number>();
       for (const p of players) {
         scores[p] = 0;
         minorityCount[p] = 0;
+        streak[p] = 0;
       }
       return {
         config: { ...config, totalRounds },
@@ -190,6 +263,7 @@ export function createOptionVote(
         skips: emptyPlayerMap<true>(),
         scores,
         minorityCount,
+        streak,
         lastResult: null,
       };
     },
@@ -280,6 +354,8 @@ export function createOptionVote(
         totalRounds: state.config.totalRounds,
         scoring: state.config.scoring,
         scores: state.scores,
+        // P1 CC-2 — public streak counters ride every in-match phase view.
+        streak: state.streak,
       };
       if (state.phase === 'choose') {
         const hasSubmitted = emptyPlayerMap<boolean>();
@@ -328,6 +404,8 @@ export function createOptionVote(
         minorityCount: state.minorityCount,
         // CC-1 KEYSTONE — the final reveal's named predictions persist onto the podium.
         lastPredictions: state.lastResult?.predictions ?? [],
+        // P1 CC-5 — cliffhanger epilogue, derived from the PUBLIC final scores only.
+        cliffhanger: deriveCliffhanger(state.scores),
       };
     },
 

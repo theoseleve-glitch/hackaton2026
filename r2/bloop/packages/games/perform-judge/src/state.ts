@@ -98,6 +98,17 @@ export interface PerformJudgeConfig {
   earlyMajorityResolve: boolean;
   /** puppet: show the category hint to the performer (and unknown viewers). */
   showCategoryToPerformer: boolean;
+  /**
+   * CC-2 — "Money Round" final-lap multiplier. The awarded points map is scaled
+   * by this on the FINAL lap only (via the kit `roundMultiplier`, which returns
+   * identity off the final lap). DEFAULT 1 = OFF (single-lap puppet/rate are
+   * unaffected — final lap == only lap, ×1 — and every existing exact-score test
+   * runs on lap 0 of a multi-lap config, so it stays byte-identical at ×1). The
+   * 2-lap guided/credit set this to 1.5 so a trailing seat stays mathematically
+   * alive into the finale (risk register #5: re-baseline only the cases that
+   * intentionally land on the final lap).
+   */
+  finalLapMultiplier: number;
 }
 
 /** devine-l-action — PERFORM_JUDGE `guided` (design §2.9). */
@@ -127,6 +138,7 @@ export const DEVINE_L_ACTION_CONFIG: PerformJudgeConfig = {
   zeroVotesSucceed: true,
   earlyMajorityResolve: false,
   showCategoryToPerformer: false,
+  finalLapMultiplier: 1.5, // Money Round: 2-lap match, final lap scores ×1.5
 };
 
 /** devine-l-objet — PERFORM_JUDGE `credit` (design §2.15). */
@@ -156,6 +168,7 @@ export const DEVINE_L_OBJET_CONFIG: PerformJudgeConfig = {
   zeroVotesSucceed: true,
   earlyMajorityResolve: false,
   showCategoryToPerformer: true,
+  finalLapMultiplier: 1.5, // Money Round: 2-lap match, final lap scores ×1.5
 };
 
 /** mime-inverse — PERFORM_JUDGE `puppet` (design §2.13). */
@@ -185,6 +198,7 @@ export const MIME_INVERSE_CONFIG: PerformJudgeConfig = {
   zeroVotesSucceed: false,
   earlyMajorityResolve: true,
   showCategoryToPerformer: true,
+  finalLapMultiplier: 1, // single lap (laps:1): final lap == only lap, ×1 = off
 };
 
 /** double-le-mouvement — PERFORM_JUDGE `rate`, crew of 2 (design §2.12). */
@@ -214,6 +228,7 @@ export const DOUBLE_LE_MOUVEMENT_CONFIG: PerformJudgeConfig = {
   zeroVotesSucceed: true,
   earlyMajorityResolve: false,
   showCategoryToPerformer: false,
+  finalLapMultiplier: 1, // single lap (laps:1): final lap == only lap, ×1 = off
 };
 
 /**
@@ -244,6 +259,16 @@ export type PerformJudgePhase = 'ready' | 'perform' | 'judge' | 'reveal' | 'scor
  */
 export type PerformJudgeOutcome = 'success' | 'success-early' | 'passed' | 'fail' | 'contested' | 'void';
 
+/**
+ * P1-2 — post-reveal social-fuel stamp, derived from the AGGREGATE tally/stars
+ * ONLY (never a per-voter ballot — anonymity invariant locked, keepAsIs §4):
+ * - 'nailbiter' — a verdict/validate within ONE vote of flipping
+ *   (`abs(yes-no) <= 1`, at least one ballot cast). "the room nearly let it slide".
+ * - 'split'     — a polarised star table (`max - min >= 3` with >= 2 ballots).
+ *   Min/max of an ANONYMOUS multiset leaks no individual ballot.
+ */
+export type PerformJudgeDrama = 'nailbiter' | 'split' | null;
+
 /** Promoted at reveal — fully public from then on. */
 export interface TurnResult {
   performer: PlayerId;
@@ -253,9 +278,17 @@ export interface TurnResult {
   outcome: PerformJudgeOutcome;
   /** Aggregate ONLY — individual votes are never published. */
   tally: { yes: number; no: number } | null;
-  stars: { avg: number; cast: number; ovation: boolean } | null;
+  /** Aggregate ONLY — min/max of an anonymous multiset, never a per-rater value. */
+  stars: { avg: number; cast: number; ovation: boolean; min: number; max: number } | null;
   /** credit: claim landed in the first half of the perform timer. */
   fast: boolean;
+  /**
+   * Whether the Money Round (final-lap CC-2 multiplier) applied to this turn's
+   * points — lets the reveal card scream "DOUBLE POINTS". Public flag, no secret.
+   */
+  moneyRound: boolean;
+  /** P1-2 aggregate-only near-miss/split stamp (no per-voter ballot). */
+  drama: PerformJudgeDrama;
   /** Points gained this turn (cloned plain record; only non-zero gains listed). */
   points: Record<PlayerId, number>;
   /**
@@ -263,6 +296,28 @@ export interface TurnResult {
    * the reveal card ("the room reacted 11×"). Aggregate counts only; no ballot.
    */
   reactions: ReactionCounts;
+}
+
+/**
+ * CC-5 — end-of-match epilogue cards, derived at 'over' PURELY from ALREADY-PUBLIC
+ * state (final `scores` + the running, per-turn-public `reactionTotals` /
+ * `nailbiterCount` tallies) via the kit epilogue helpers. NO new in-match secret,
+ * no RNG, no clock; every list is stable ascending-playerId order. Respects the
+ * anonymity lock — nothing here names an individual ballot.
+ */
+export interface Epilogue {
+  /** Best performer = the sole top scorer, or null on a tied/empty crown. */
+  bestPerformer: PlayerId | null;
+  /** Crowd favourite(s) = performer(s) who drew the most audience reactions. */
+  crowdFavourite: PlayerId[];
+  /** Total reactions each performer drew across the match (public running tally). */
+  reactionTotals: Record<PlayerId, number>;
+  /** Cliffhanger flag: the top-2 gap is within the closeFinish threshold. */
+  closeFinish: boolean;
+  /** Top score minus runner-up (0 when < 2 players or a tie at the top). */
+  topGap: number;
+  /** How many turns were nailbiters this match (aggregate drama stat). */
+  nailbiters: number;
 }
 
 export interface PerformJudgeState {
@@ -309,6 +364,15 @@ export interface PerformJudgeState {
   /** Turns completed since the last scoreboard beat (puppet). */
   sinceScoreboard: number;
   lastResult: TurnResult | null;
+  /**
+   * CC-5 running PUBLIC tally: total audience reactions each PERFORMER drew over
+   * the match (summed at each reveal from the already-public per-turn counts).
+   * Drives the 'crowd favourite' epilogue card — no new secret, just an
+   * accumulation of data that was public every turn.
+   */
+  reactionTotals: Record<PlayerId, number>;
+  /** CC-5 running count of nailbiter turns (aggregate drama stat). */
+  nailbiterCount: number;
 }
 
 export type PerformJudgeAction =
@@ -349,6 +413,12 @@ interface ViewBase {
   turnSeq: number;
   lap: number;
   laps: number;
+  /**
+   * CC-2 Money Round flag — true on the final lap when the multiplier is armed
+   * (> 1). Lets every in-turn card (ready/perform/judge/reveal) scream "DOUBLE
+   * POINTS". Pure projection of lap/laps/config; no secret.
+   */
+  isFinalLap: boolean;
   performer: PlayerId;
   partner: PlayerId | null;
   rotation: PlayerId[];
@@ -411,4 +481,10 @@ export type PerformJudgeView =
     })
   | (ViewBase & { phase: 'reveal'; result: TurnResult })
   | (ViewBase & { phase: 'scoreboard' })
-  | { phase: 'over'; mode: PerformJudgeMode; scores: Record<PlayerId, number> };
+  | {
+      phase: 'over';
+      mode: PerformJudgeMode;
+      scores: Record<PlayerId, number>;
+      /** CC-5 epilogue cards, derived from already-public state at 'over'. */
+      epilogue: Epilogue;
+    };

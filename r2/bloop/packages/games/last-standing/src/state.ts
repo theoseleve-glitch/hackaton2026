@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence } from '@bloop/kit';
+import type { Presence, RoundMultiplierOpts } from '@bloop/kit';
 
 /** Bilingual UI string — the client picks a locale at render time. */
 export interface LText {
@@ -42,6 +42,20 @@ export interface LastStandingConfig {
   roundEndMs: number;
   validWordPoints: number;
   survivorPoints: number;
+  /**
+   * P1 comeback rebalance (CC-2 — Comeback Scoring Kit). A late-round multiplier
+   * applied to the `survivorPoints` crown so a LATER survival is worth more than
+   * an early one: a player frozen out of rounds 1–2 can still surge on the final
+   * round. Passed straight to `roundMultiplier(round, totalRounds, opts)`.
+   *
+   * DEFAULT IDENTITY (CC-2 risk register #5): `undefined` => `roundMultiplier`
+   * returns 1, so the crown stays exactly `survivorPoints` and every existing
+   * exact-score test is byte-for-byte unchanged. Set e.g.
+   * `{ finalRoundMultiplier: 2 }` to double only the final round's crown, or
+   * `{ finalRoundMultiplier: 2, multiplierRounds: 2 }` for the last two. The
+   * award rounds (`Math.round`) so the crown is always an integer.
+   */
+  survivorRoundMultiplier?: RoundMultiplierOpts;
   /**
    * Side-bet reward (P0-1 keystone). Points a non-spotlight predictor earns for
    * a CORRECT "survives | chokes" call on the spotlight, paid into the SEPARATE
@@ -155,6 +169,15 @@ export interface LastStandingState {
   betPoints: Record<PlayerId, number>;
   /** Validated-words count per player (end-screen superlative + participation). */
   wordsValidated: Record<PlayerId, number>;
+  /**
+   * P1 cliffhanger superlative signal (CC-5). Count of rounds each player has
+   * been crowned a survivor of (incremented in endRound for every roundWinner).
+   * It is a PUBLIC end-of-match stat — but exposed ONLY in the `over` view (the
+   * epilogue), never mid-match, so it can never hint at the live alive/score
+   * picture beyond what scores already say. Feeds the Oracle roast superlatives:
+   * survivedAllRounds ("Unbreakable") + the longest-survival-streak leader.
+   */
+  roundsSurvived: Record<PlayerId, number>;
 }
 
 export type LastStandingAction =
@@ -217,4 +240,34 @@ export type LastStandingView =
       wordsValidated: Record<PlayerId, number>;
       /** Side-bet currency (P0-1) — public end-screen tally of correct calls. */
       betPoints: Record<PlayerId, number>;
+      /**
+       * P1 CC-5 cliffhanger / superlative epilogue — ALL derived at 'over' from
+       * already-PUBLIC state (scores, roundsSurvived, the final roundWinners). No
+       * new in-match secret. Feeds the session-shell Oracle roast + rematch CTA.
+       */
+      epilogue: LastStandingEpilogue;
     };
+
+/**
+ * P1 CC-5 epilogue payload, derived purely at 'over' from public state. Stable,
+ * replay-identical (ascending-playerId tie-breaks via the kit's epilogue
+ * helpers); no RNG, no wall-clock, no new secret.
+ */
+export interface LastStandingEpilogue {
+  /** Sole top-scorer, or null on a contested crown (tie for first). */
+  mvp: PlayerId | null;
+  /** Top scorer(s) by rank — the leaderboard head (ties share rank 1). */
+  leaderId: PlayerId | null;
+  /** Runner-up id (2nd distinct rank), or null when there is no clear runner-up. */
+  runnerUpId: PlayerId | null;
+  /** Gap between 1st and 2nd score (>= 0). */
+  topGap: number;
+  /** True when the top-2 gap is within one survival crown — the "so close" hook. */
+  closeFinish: boolean;
+  /** "Unbreakable": every player who survived ALL totalRounds rounds. */
+  survivedAllRounds: PlayerId[];
+  /** Longest survival run: the rounds-survived leader(s) + that value (0/[] if nobody survived a round). */
+  longestSurvivalStreak: { value: number; players: PlayerId[] };
+  /** "Last one standing": the sole survivor of the FINAL round, or null (cap/tie/empty). */
+  lastOneStanding: PlayerId | null;
+}

@@ -1826,6 +1826,930 @@
       "high": { "fr": "Greffée à la main", "en": "Surgically attached to your hand" },
       "tags": ["tech", "daily"],
       "intensity": "classic"
+    },
+    {
+      "id": "note-toast-103",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise un discours de témoin pour le mariage de la personne à ta droite, réussi exactement comme cette note.",
+        "en": "Improvise a best-man speech for the person on your right's wedding, executed exactly to this score."
+      },
+      "low": { "fr": "Tu balances un secret avant le « santé »", "en": "You leak a secret before the 'cheers'" },
+      "high": { "fr": "Le marié t'embauche pour le prochain", "en": "The groom hires you for his next one" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-spotify-104",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Défends ton top 5 Spotify Wrapped de l'année, assumable exactement comme cette note.",
+        "en": "Defend your Spotify Wrapped top five, exactly this defensible."
+      },
+      "low": { "fr": "Une seule chanson, écoutée 4 000 fois, en boucle, seul", "en": "One song, 4,000 plays, on loop, alone" },
+      "high": { "fr": "Goût impeccable. Personne te croit, c'est suspect.", "en": "Flawless taste. Nobody believes you. Suspicious." },
+      "tags": ["music", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-translate-105",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Traduis le dernier « ça va » que t'as envoyé à un pote, sincère exactement comme cette note.",
+        "en": "Translate the last 'I'm fine' you texted a mate, exactly this honest."
+      },
+      "low": { "fr": "« Ça va » = je suis en PLS depuis mardi", "en": "'I'm fine' = I've been crashing out since Tuesday" },
+      "high": { "fr": "« Ça va » = ça va vraiment, pour une fois, flippant", "en": "'I'm fine' = genuinely fine, for once, unsettling" },
+      "tags": ["social", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-mom-106",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Imite ta daronne qui découvre une bêtise, avec exactement ce niveau de calme.",
+        "en": "Impersonate your mum finding out you messed up, with exactly this much calm."
+      },
+      "low": { "fr": "Elle dit ton prénom en entier. Tout le quartier le sait.", "en": "She uses your full name. The whole street knows." },
+      "high": { "fr": "Un soupir. Un seul. Pire que tout.", "en": "One sigh. Just one. Worse than shouting." },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-gymrat-107",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris à quel point t'es vraiment assidu à la salle, exactement comme cette note.",
+        "en": "Describe how committed you actually are to the gym, exactly this score."
+      },
+      "low": { "fr": "Abonnement payé, vu deux fois en huit mois", "en": "Membership paid, seen twice in eight months" },
+      "high": { "fr": "Tu parles « volume » et « sèche » au repas de famille", "en": "You bring up 'bulking' at family dinner, uninvited" },
+      "tags": ["sport", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-voicemsg-108",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue le vocal de trois minutes que t'as envoyé hier, indispensable exactement comme cette note.",
+        "en": "Re-enact the three-minute voice note you sent yesterday, exactly this essential."
+      },
+      "low": { "fr": "Zéro info, deux soupirs, un « bref »", "en": "Zero info, two sighs, ends on 'anyway'" },
+      "high": { "fr": "Archivé, réécouté, cité au tribunal du groupe", "en": "Saved, replayed, quoted in the group-chat trial" },
+      "tags": ["social", "tech"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-keynote-109",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente ton hobby de niche comme une keynote Apple, convaincant exactement comme cette note.",
+        "en": "Present your niche hobby like an Apple keynote, exactly this convincing."
+      },
+      "low": { "fr": "« One more thing… » Personne reste.", "en": "'One more thing…' The room has left." },
+      "high": { "fr": "Standing ovation, trois précommandes dans la pièce", "en": "Standing ovation, three pre-orders in the room" },
+      "tags": ["tech", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-cancel-110",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue ta joie quand un plan que tu redoutais est annulé, intense exactement comme cette note.",
+        "en": "Act out your joy when a plan you dreaded gets cancelled, exactly this intense."
+      },
+      "low": { "fr": "« Ah dommage » — tu danses à l'intérieur", "en": "'Aw, shame' — you're dancing inside" },
+      "high": { "fr": "Tu cries, tu remets ton pyjama avant la fin du message", "en": "You scream, you're in pyjamas before the text finishes" },
+      "tags": ["social", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-fridge-111",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais visiter ton frigo comme un agent immobilier, vendeur exactement comme cette note.",
+        "en": "Give a tour of your fridge like an estate agent, exactly this persuasive."
+      },
+      "low": { "fr": "Trois condiments et une lumière qui clignote", "en": "Three condiments and a flickering light" },
+      "high": { "fr": "Rangé par couleur, photographié, posté", "en": "Colour-coded, photographed, posted" },
+      "tags": ["food", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-improv-cry-112",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Pleure sur commande, là, maintenant, crédible exactement comme cette note.",
+        "en": "Cry on command, right now, exactly this convincing."
+      },
+      "low": { "fr": "Tu fronces. C'est tout. C'est gênant.", "en": "You frown. That's it. It's awkward." },
+      "high": { "fr": "La pièce te tend des mouchoirs, pour de vrai", "en": "The room hands you real tissues" },
+      "tags": ["performance", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-tinder-113",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lis le premier message que tu envoies sur une app de rencontre, irrésistible exactement comme cette note.",
+        "en": "Read out the opener you send on a dating app, exactly this irresistible."
+      },
+      "low": { "fr": "« slt sava » — vu, jamais répondu", "en": "'hey' — seen, never answered" },
+      "high": { "fr": "Réponse, numéro et date fixé en trois lignes", "en": "Reply, number and a date locked in three lines" },
+      "tags": ["love", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-elevator-114",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Tiens une conversation d'ascenseur avec un inconnu, à l'aise exactement comme cette note.",
+        "en": "Hold an elevator conversation with a stranger, comfortable exactly to this score."
+      },
+      "low": { "fr": "Tu fixes les boutons, tu retiens ta respiration", "en": "You stare at the buttons and hold your breath" },
+      "high": { "fr": "Vous descendez ensemble, t'as son insta et un job", "en": "You both get out together, you have their insta and a job" },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-fan-115",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris à quel point t'es fan d'une série, dévoué exactement comme cette note.",
+        "en": "Describe how devoted a fan you are of one show, exactly this score."
+      },
+      "low": { "fr": "T'as vu deux épisodes, t'en parles comme dix saisons", "en": "You've seen two episodes, you talk like it's ten seasons" },
+      "high": { "fr": "Tatouage, pseudo, théorie de 40 pages épinglée", "en": "Tattoo, username, a pinned 40-page theory" },
+      "tags": ["culture", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-driver-116",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris le conducteur que t'es vraiment en covoiturage, supportable exactement comme cette note.",
+        "en": "Describe the driver you actually are on a car share, exactly this bearable."
+      },
+      "low": { "fr": "Tu commentes chaque rond-point à voix haute", "en": "You narrate every roundabout out loud" },
+      "high": { "fr": "Playlist parfaite, zéro freinage brusque, on dort", "en": "Perfect playlist, zero hard braking, everyone naps" },
+      "tags": ["travel", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-savings-117",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Justifie ton rapport à l'argent ce mois-ci, responsable exactement comme cette note.",
+        "en": "Justify your relationship with money this month, exactly this responsible."
+      },
+      "low": { "fr": "Le 8 du mois t'es déjà en mode survie", "en": "Broke by the 8th, full survival mode" },
+      "high": { "fr": "Tableur, enveloppes, tu refuses un café à 2 €", "en": "Spreadsheet, envelopes, you turn down a £2 coffee" },
+      "tags": ["daily", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-tourguide-118",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Fais visiter ta ville à un touriste, enthousiaste exactement comme cette note.",
+        "en": "Show a tourist around your town, enthusiastic exactly to this score."
+      },
+      "low": { "fr": "« Là c'est… un truc. On rentre ? »", "en": "'That's… a thing. Can we go home?'" },
+      "high": { "fr": "Trois heures de tour gratuit, le touriste pleure en partant", "en": "Three-hour free tour, the tourist cries on the way out" },
+      "tags": ["travel", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-petname-119",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Annonce le surnom que tout le groupe t'a collé, assumable exactement comme cette note.",
+        "en": "Announce the nickname the whole group gave you, exactly this livable-with."
+      },
+      "low": { "fr": "Tu refuses de le dire. Quelqu'un le dit pour toi.", "en": "You refuse to say it. Someone says it for you." },
+      "high": { "fr": "T'en as fait ton @, c'est sur ton CV", "en": "You made it your @, it's on your CV" },
+      "tags": ["social", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-weather-120",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Présente la météo comme à la télé, professionnel exactement comme cette note.",
+        "en": "Present the weather like on TV, professional exactly to this score."
+      },
+      "low": { "fr": "Tu pointes le vide, « il fera… du temps »", "en": "You point at nothing, 'there will be… weather'" },
+      "high": { "fr": "Pull assorti, geste de la main parfait, on te croit", "en": "Matching jumper, perfect hand sweep, we believe you" },
+      "tags": ["performance", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-grudge-121",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris une rancune que tu tiens encore, ancienne exactement comme cette note.",
+        "en": "Describe a grudge you're still holding, exactly this old."
+      },
+      "low": { "fr": "Datée de la semaine dernière, déjà oubliée demain", "en": "From last week, gone by tomorrow" },
+      "high": { "fr": "École primaire. Tu te souviens du prénom. Et du jour.", "en": "Primary school. You remember the name. And the day." },
+      "tags": ["social", "story"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-host-122",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris l'hôte que t'es vraiment quand tu reçois, accueillant exactement comme cette note.",
+        "en": "Describe the host you actually are, welcoming exactly to this score."
+      },
+      "low": { "fr": "« Servez-vous » = un paquet de chips ouvert de travers", "en": "'Help yourselves' = one bag of crisps, opened wrong" },
+      "high": { "fr": "Plaid pour chacun, playlist par humeur, personne veut partir", "en": "A blanket each, a playlist per mood, nobody wants to leave" },
+      "tags": ["social", "food"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-debate-123",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Défends une opinion impopulaire que t'as vraiment, convaincant exactement comme cette note.",
+        "en": "Defend an unpopular opinion you genuinely hold, convincing exactly to this score."
+      },
+      "low": { "fr": "Tu te rétractes à la première question", "en": "You fold at the first question" },
+      "high": { "fr": "La moitié de la pièce a changé d'avis. Tu fais peur.", "en": "Half the room switched sides. It's frightening." },
+      "tags": ["social", "performance"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-recovery-124",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ta gestion du lendemain de soirée, fonctionnelle exactement comme cette note.",
+        "en": "Describe how you handle the morning after a big night, exactly this functional."
+      },
+      "low": { "fr": "Tu fixes le plafond, ton téléphone te juge", "en": "You stare at the ceiling, your phone is judging you" },
+      "high": { "fr": "Sport, smoothie, tu réponds aux mails à 8h", "en": "Workout, smoothie, answering emails by 8 a.m." },
+      "tags": ["party", "daily"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-impression-125",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Imite quelqu'un de célèbre de ton choix, ressemblant exactement comme cette note.",
+        "en": "Do an impression of anyone famous, accurate exactly to this score."
+      },
+      "low": { "fr": "On devine au bout de trois indices et d'un soupir", "en": "We guess after three hints and a sigh" },
+      "high": { "fr": "Frissons. Quelqu'un applaudit avant la fin.", "en": "Goosebumps. Someone claps before you finish." },
+      "tags": ["performance", "humor"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-text-051",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un délai de réponse à un message qui se situe exactement ici sur la roue.",
+        "en": "Name a reply time to a text that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Avant même que t'aies fini de l'envoyer", "en": "Before you've even hit send" },
+      "high": { "fr": "Réponse en mars, à un message de janvier", "en": "Replies in March, to a January text" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-flex-052",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un truc qu'on poste pour flex, situé exactement ici sur la roue.",
+        "en": "Name something people post to flex that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Mérité, on like sincèrement", "en": "Earned, we like it sincerely" },
+      "high": { "fr": "Tout le groupe screenshot pour s'en moquer", "en": "The whole group screenshots it to mock you" },
+      "tags": ["tech", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-roommate-053",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une habitude de coloc qui se situe exactement ici sur la roue.",
+        "en": "Name a flatmate habit that sits exactly here on the wheel."
+      },
+      "low": { "fr": "On signe pour dix ans de bail", "en": "Sign the ten-year lease immediately" },
+      "high": { "fr": "Réunion de crise, tableau blanc, vote à bulletin secret", "en": "Crisis meeting, whiteboard, a secret ballot" },
+      "tags": ["daily", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-petfood-054",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un aliment qu'on mange seul à minuit, situé exactement ici sur la roue.",
+        "en": "Name a food you eat alone at midnight that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tu le racontes au brunch, fièrement", "en": "You bring it up at brunch, proudly" },
+      "high": { "fr": "Aucun témoin. Aucune preuve. Aucun regret. Si, un peu.", "en": "No witnesses. No evidence. No regrets. Okay, some." },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-skill-055",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un talent inutile qui se situe exactement ici sur la roue.",
+        "en": "Name a useless talent that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Ça impressionne au moins une personne", "en": "Impresses at least one person" },
+      "high": { "fr": "Personne a demandé, tu le fais quand même", "en": "Nobody asked, you do it anyway" },
+      "tags": ["humor", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-apology-056",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une excuse après une embrouille, située exactement ici sur la roue.",
+        "en": "Name an apology after a fight that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Acceptée, câlin, on n'en parle plus", "en": "Accepted, hug, never mentioned again" },
+      "high": { "fr": "« Désolé que tu l'aies mal pris », guerre relancée", "en": "'Sorry you took it that way' — war restarts" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-meme-057",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un truc qu'on partage dans le groupe à 2h du matin, situé exactement ici sur la roue.",
+        "en": "Name something you share in the group chat at 2 a.m. that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Réaction immédiate, trois 💀", "en": "Instant reaction, three 💀" },
+      "high": { "fr": "Vu par six personnes, zéro réponse, silence glacial", "en": "Seen by six people, zero replies, ice-cold silence" },
+      "tags": ["tech", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-firstdate-058",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un détail repéré sur un premier date, situé exactement ici sur la roue.",
+        "en": "Name a detail you'd clock on a first date that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tu fonds, deuxième date réservé", "en": "You melt, second date booked" },
+      "high": { "fr": "Tu textes le groupe sous la table, code rouge", "en": "You text the group under the table, code red" },
+      "tags": ["love", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-childhood-059",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un truc de ton enfance qui se situe exactement ici sur la roue.",
+        "en": "Name a thing from your childhood that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Pure nostalgie, tu souris bêtement", "en": "Pure nostalgia, you grin like an idiot" },
+      "high": { "fr": "Ça explique tout, ton thérapeute prend des notes", "en": "It explains everything, your therapist takes notes" },
+      "tags": ["social", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-restaurant-060",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un comportement au restaurant qui se situe exactement ici sur la roue.",
+        "en": "Name a restaurant behavior that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Parfait convive, le serveur t'adore", "en": "Perfect guest, the waiter loves you" },
+      "high": { "fr": "On change de table, on prétend pas te connaître", "en": "We move tables and pretend we don't know you" },
+      "tags": ["food", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-instory-061",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une légende de story Insta qui se situe exactement ici sur la roue.",
+        "en": "Name an Instagram story caption that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Sincère, mignonne, zéro arrière-pensée", "en": "Sincere, cute, zero subtext" },
+      "high": { "fr": "Visé à une seule personne, tout le monde a capté", "en": "Aimed at one person, everyone clocked it" },
+      "tags": ["tech", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "roue-talent-062",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une activité qu'on met sur un profil de rencontre, située exactement ici sur la roue.",
+        "en": "Name a hobby you'd put on a dating profile that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Match immédiat, conversation lancée", "en": "Instant match, conversation flowing" },
+      "high": { "fr": "Swipe gauche si rapide qu'on entend le « non »", "en": "Left swipe so fast you can hear the 'no'" },
+      "tags": ["love", "debate"],
+      "intensity": "classic"
+    },
+    {
+      "id": "note-sp-rizz-201",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Refais ta meilleure approche de fin de soirée, efficace exactement comme cette note.",
+        "en": "Re-enact your best end-of-night move, effective exactly to this score."
+      },
+      "low": { "fr": "Tu finis par parler de ton forfait mobile", "en": "You end up talking about your phone plan" },
+      "high": { "fr": "Vous partez ensemble avant la fin de ta phrase", "en": "You both leave before you finish the sentence" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-bodycount-202",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Justifie le chiffre que tu donnes quand on te demande « combien », crédible exactement comme cette note.",
+        "en": "Justify the number you give when someone asks 'how many', exactly this believable."
+      },
+      "low": { "fr": "Tu arrondis. Vers le bas. De beaucoup. On le sait.", "en": "You round down. A lot. We all know." },
+      "high": { "fr": "Chiffre exact, dates, anecdote bonus que personne a demandée", "en": "Exact number, dates, a bonus anecdote nobody asked for" },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-sext-203",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lis à voix haute le dernier message osé que t'as envoyé, audacieux exactement comme cette note.",
+        "en": "Read out loud the last bold text you sent, daring exactly to this score."
+      },
+      "low": { "fr": "Un seul mot, suivi de « oups mauvaise personne »", "en": "One word, then 'oops wrong person'" },
+      "high": { "fr": "Capture prise, ré-envoyée à ta propre maman par accident", "en": "Screenshotted, accidentally re-sent to your own mum" },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-exback-204",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue ta capacité à résister à recontacter ton ex après deux verres, solide exactement comme cette note.",
+        "en": "Act out your ability to resist texting your ex after two drinks, exactly this strong."
+      },
+      "low": { "fr": "Le message est déjà parti. Il y a une faute. Et un cœur.", "en": "The text is already gone. There's a typo. And a heart." },
+      "high": { "fr": "Bloqué, archivé, tu sais même plus son nom de famille", "en": "Blocked, archived, you forgot their surname on purpose" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-walkofshame-205",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ton trajet du retour le lendemain matin, discret exactement comme cette note.",
+        "en": "Describe your walk home the morning after, exactly this discreet."
+      },
+      "low": { "fr": "Talons à la main, lunettes de soleil, il pleut", "en": "Heels in hand, sunglasses on, it's raining" },
+      "high": { "fr": "Café, croissant, t'as l'air d'être en vacances", "en": "Coffee, croissant, you look like you're on holiday" },
+      "tags": ["party", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-dirtytalk-206",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Murmure un compliment chargé à un objet de la pièce, troublant exactement comme cette note.",
+        "en": "Whisper a loaded compliment to an object in the room, exactly this unsettling."
+      },
+      "low": { "fr": "Tu rougis au troisième mot, tu abandonnes", "en": "You go red by word three and give up" },
+      "high": { "fr": "La pièce détourne le regard, l'objet aussi", "en": "The room looks away. So does the object." },
+      "tags": ["love", "performance", "humor"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-redflag-207",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Avoue le red flag que t'as toi-même, assumé exactement comme cette note.",
+        "en": "Confess the red flag that is actually yours, owned exactly to this score."
+      },
+      "low": { "fr": "« J'ai pas de red flag » — c'est ÇA le red flag", "en": "'I don't have red flags' — that IS the red flag" },
+      "high": { "fr": "Tu le listes en PowerPoint, slide par slide, fier", "en": "You list them in a PowerPoint, slide by slide, proud" },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-fakeit-208",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue ton meilleur visage de « c'était incroyable » quand c'était moyen, convaincant exactement comme cette note.",
+        "en": "Act out your best 'that was amazing' face when it was mid, convincing exactly to this score."
+      },
+      "low": { "fr": "Ton visage te trahit avant ta voix", "en": "Your face snitches before your voice does" },
+      "high": { "fr": "Oscar. La personne te recroise, te resourit, y croit.", "en": "Oscar-worthy. They see you again, smile back, believe it." },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-dm-209",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris le contenu de tes DM glissés, audacieux exactement comme cette note.",
+        "en": "Describe the contents of your slid-into DMs, bold exactly to this score."
+      },
+      "low": { "fr": "Un seul emoji 🔥, vu, jamais répondu, deux fois", "en": "One 🔥 emoji, seen, never answered, twice" },
+      "high": { "fr": "Paragraphe entier, t'as relu trois fois, t'assumes tout", "en": "A full paragraph, proofread three times, fully owned" },
+      "tags": ["love", "tech"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-history-210",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris l'onglet de navigation privée que personne verra jamais, compromettant exactement comme cette note.",
+        "en": "Describe the incognito tab nobody will ever see, exactly this incriminating."
+      },
+      "low": { "fr": "Idées cadeaux et un test « quel fromage es-tu »", "en": "Gift ideas and a 'which cheese are you' quiz" },
+      "high": { "fr": "Si ça fuite, tu changes de pays", "en": "If it leaks, you change countries" },
+      "tags": ["tech", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-roleplay-211",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue la scène de retrouvailles d'un couple après deux jours, intense exactement comme cette note.",
+        "en": "Act out a couple reuniting after two days apart, intense exactly to this score."
+      },
+      "low": { "fr": "« T'as pris le pain ? » Bisou sur la joue. Voilà.", "en": "'Did you get the bread?' Cheek kiss. Done." },
+      "high": { "fr": "Ralenti, pluie, la pièce applaudit puis détourne les yeux", "en": "Slow motion, rain, the room cheers then looks away" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-ick-212",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Avoue le truc qui te fait fuir au lit, futile exactement comme cette note.",
+        "en": "Confess the bedroom dealbreaker that ends it for you, exactly this petty."
+      },
+      "low": { "fr": "Compréhensible, le tribunal valide à l'unanimité", "en": "Fair enough, the court agrees unanimously" },
+      "high": { "fr": "Il a dit « hihi ». Tu t'es rhabillé. Fini.", "en": "They said 'tee-hee'. You got dressed. Over." },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-confess-213",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Avoue le truc de ta vie de couple que t'as jamais dit à voix haute, lourd exactement comme cette note.",
+        "en": "Confess the relationship thing you've never said out loud, exactly this heavy."
+      },
+      "low": { "fr": "Tu manges ses restes sans demander. Voilà le crime.", "en": "You eat their leftovers without asking. That's the crime." },
+      "high": { "fr": "La pièce fait silence. Quelqu'un pose son verre.", "en": "The room goes quiet. Someone puts their drink down." },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-tipsy-214",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue la personne que tu deviens après le troisième verre, fidèle exactement comme cette note.",
+        "en": "Play the person you become after the third drink, exactly this accurate."
+      },
+      "low": { "fr": "Pareil qu'avant, juste plus de câlins non sollicités", "en": "Same as before, just more unsolicited hugs" },
+      "high": { "fr": "Tu déclares ta flamme à tout le monde, individuellement", "en": "You declare your love to everyone, one by one" },
+      "tags": ["party", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-thirst-215",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ta dernière photo postée pour l'attention, assumée exactement comme cette note.",
+        "en": "Describe your last post that was clearly fishing for attention, owned exactly to this score."
+      },
+      "low": { "fr": "« Belle journée 🌸 » avec un angle très étudié", "en": "'Nice day 🌸' with one very studied angle" },
+      "high": { "fr": "Légende citation profonde, miroir de salle de sport, on a compris", "en": "Deep quote caption, gym mirror, we all understood" },
+      "tags": ["tech", "love"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-firsttime-216",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Raconte la version « date » d'une de tes pires soirées, édulcorée exactement comme cette note.",
+        "en": "Tell the 'date version' of one of your worst nights out, sanitised exactly to this score."
+      },
+      "low": { "fr": "Toute la vérité crue, témoins cités, dégâts chiffrés", "en": "The full raw truth, witnesses named, damages itemised" },
+      "high": { "fr": "« On a pris un verre tranquille. » Trois mots. Zéro vrai.", "en": "'We had a quiet drink.' Five words. Zero true." },
+      "tags": ["party", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-toaster-217",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Improvise une excuse pour ce suçon, crédible exactement comme cette note.",
+        "en": "Improvise an excuse for that hickey, believable exactly to this score."
+      },
+      "low": { "fr": "« Un fer à friser. » Personne y croit. Toi non plus.", "en": "'Curling iron.' Nobody buys it. You don't either." },
+      "high": { "fr": "Certificat médical, témoin, t'as un alibi en béton", "en": "Doctor's note, a witness, a rock-solid alibi" },
+      "tags": ["love", "humor"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-lover-pitch-218",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Vends-toi comme partenaire idéal en trois phrases, irrésistible exactement comme cette note.",
+        "en": "Sell yourself as the ideal partner in three sentences, irresistible exactly to this score."
+      },
+      "low": { "fr": "Tu listes surtout ce que t'es PAS. Long silence.", "en": "You mostly list what you're NOT. Long pause." },
+      "high": { "fr": "Deux personnes ici notent ton numéro. Pour un ami.", "en": "Two people here take your number. For a friend." },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-greenflag-219",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ce que tu fais au lit qui ferait tomber n'importe qui amoureux, modeste exactement comme cette note.",
+        "en": "Describe the thing you do that makes anyone fall for you, modest exactly to this score."
+      },
+      "low": { "fr": "Tu prêtes ton chargeur. C'est ton atout principal.", "en": "You lend your charger. That's your main asset." },
+      "high": { "fr": "Tu le décris, deux personnes prennent des notes, sérieux", "en": "You describe it, two people take actual notes" },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-morning-220",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue ton premier mot du matin à côté de quelqu'un, charmant exactement comme cette note.",
+        "en": "Act out your first word of the morning lying next to someone, charming exactly to this score."
+      },
+      "low": { "fr": "Un grognement et une demande de café, dans cet ordre", "en": "A groan and a coffee request, in that order" },
+      "high": { "fr": "Voix de velours, sourire, on veut t'épouser sur-le-champ", "en": "Velvet voice, soft smile, they want to marry you on the spot" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-stalk-221",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris ta dernière session de stalk du nouveau date d'un ex, poussée exactement comme cette note.",
+        "en": "Describe your last deep-dive on an ex's new date, thorough exactly to this score."
+      },
+      "low": { "fr": "Un coup d'œil rapide, fierté intacte, pouce sage", "en": "One quick glance, pride intact, thumb behaved" },
+      "high": { "fr": "Tu connais son métier, son chien et son tattoo de 2018", "en": "You know their job, their dog and their 2018 tattoo" },
+      "tags": ["love", "tech"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-pickup-222",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lance la phrase d'accroche la plus osée que t'oserais dire en vrai, gonflé exactement comme cette note.",
+        "en": "Drop the boldest pickup line you'd actually say out loud, gutsy exactly to this score."
+      },
+      "low": { "fr": "Tu la chuchotes, personne entend, tu dis « laisse »", "en": "You mumble it, nobody hears, you say 'never mind'" },
+      "high": { "fr": "Tu la dis fort, quelqu'un applaudit, quelqu'un rougit", "en": "You say it loud, someone claps, someone blushes" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-toy-223",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris l'objet le plus gênant à découvrir dans ton tiroir de nuit, compromettant exactement comme cette note.",
+        "en": "Describe the most awkward thing to find in your bedside drawer, exactly this incriminating."
+      },
+      "low": { "fr": "Un vieux chargeur et trois tickets de caisse", "en": "An old charger and three receipts" },
+      "high": { "fr": "Tu fermerais le tiroir à clé avant toute visite", "en": "You'd padlock that drawer before any visitor" },
+      "tags": ["love", "humor"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-jealous-224",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue ta réaction quand ton date like la photo de quelqu'un d'autre, mesurée exactement comme cette note.",
+        "en": "Act out your reaction when your date likes someone else's photo, measured exactly to this score."
+      },
+      "low": { "fr": "Zéro réaction, t'as une vie, t'es au-dessus", "en": "Zero reaction, you have a life, you're above it" },
+      "high": { "fr": "Capture, zoom, enquête, dossier nommé, tu cliques pas, encore", "en": "Screenshot, zoom, investigation, a named folder, you don't click, yet" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-flirt-225",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Drague quelqu'un dans la pièce sans dire un seul mot, efficace exactement comme cette note.",
+        "en": "Flirt with someone in the room without saying a single word, effective exactly to this score."
+      },
+      "low": { "fr": "Tu clignes des yeux bizarrement, on demande si ça va", "en": "You blink weirdly, someone asks if you're okay" },
+      "high": { "fr": "Un regard. La pièce le sent. Quelqu'un quitte la table.", "en": "One look. The room feels it. Someone leaves the table." },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-rate-room-226",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Décris l'énergie de séduction de la personne à ta gauche, généreux exactement comme cette note.",
+        "en": "Describe the pulling power of the person on your left, generous exactly to this score."
+      },
+      "low": { "fr": "Elle drague comme on remplit un formulaire", "en": "They flirt like they're filling out a form" },
+      "high": { "fr": "Elle entre dans une pièce, trois plans tombent, instantané", "en": "They walk into a room, three plans collapse, instantly" },
+      "tags": ["love", "social"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-overshare-227",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Balance le truc trop perso que tu sors toujours en date trop tôt, intime exactement comme cette note.",
+        "en": "Drop the too-personal thing you always overshare on a date, intimate exactly to this score."
+      },
+      "low": { "fr": "Ton plat préféré. Tu trouves ça déjà osé.", "en": "Your favourite food. You think that's already bold." },
+      "high": { "fr": "Au dessert, le date connaît ton enfance et ton thérapeute", "en": "By dessert they know your childhood and your therapist's name" },
+      "tags": ["love", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-shower-228",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Avoue à quoi tu penses vraiment sous la douche, gênant exactement comme cette note.",
+        "en": "Confess what you actually think about in the shower, exactly this embarrassing."
+      },
+      "low": { "fr": "La liste de courses et un riff de guitare imaginaire", "en": "The shopping list and an imaginary guitar solo" },
+      "high": { "fr": "Une dispute de 2021 que tu gagnes enfin, à voix haute", "en": "A 2021 argument you finally win, out loud" },
+      "tags": ["daily", "story"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-pda-229",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Joue un couple trop affectueux en public, insupportable exactement comme cette note.",
+        "en": "Play a couple being too affectionate in public, unbearable exactly to this score."
+      },
+      "low": { "fr": "Ils se tiennent la main, c'est mignon, on respire", "en": "They hold hands, it's cute, we can breathe" },
+      "high": { "fr": "Le métro entier soupire, quelqu'un change de rame", "en": "The whole carriage sighs, someone changes trains" },
+      "tags": ["love", "performance"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "note-sp-besttext-230",
+      "kind": "scale10",
+      "prompt": {
+        "fr": "Lis le message de bonne nuit que t'enverrais à un crush, fondant exactement comme cette note.",
+        "en": "Read out the goodnight text you'd send a crush, melting exactly to this score."
+      },
+      "low": { "fr": "« Bn » — point. Suivi de rien.", "en": "'Gn' — full stop. Nothing after." },
+      "high": { "fr": "Trois lignes, réponse en dix secondes, un cœur revient", "en": "Three lines, reply in ten seconds, a heart comes back" },
+      "tags": ["love", "tech"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-text-301",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un message qu'on peut envoyer à 2h du matin, situé exactement ici sur la roue.",
+        "en": "Name a 2 a.m. text someone could send that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Rattrapable, on en rit demain", "en": "Survivable, we laugh about it tomorrow" },
+      "high": { "fr": "Tu désinstalles l'appli et tu déménages", "en": "You delete the app and move out" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-ick-302",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un truc qui peut couper toute envie d'un coup, situé exactement ici sur la roue.",
+        "en": "Name something that can kill the mood instantly that sits exactly here on the wheel."
+      },
+      "low": { "fr": "On rit, on continue, zéro dégât", "en": "We laugh, we carry on, no damage" },
+      "high": { "fr": "Tu te rhabilles, tu commandes un taxi, terminé", "en": "You get dressed, order a taxi, it's over" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-redflag-303",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un comportement d'un date qui se situe exactement ici sur la roue.",
+        "en": "Name a date's behavior that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Green flag, tu présentes à ta daronne", "en": "Green flag, you introduce them to your mum" },
+      "high": { "fr": "Tu textes le groupe : « venez me chercher MAINTENANT »", "en": "You text the group: 'come get me NOW'" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-confession-304",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un truc qu'on avoue après trois verres, situé exactement ici sur la roue.",
+        "en": "Name something you confess after three drinks that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tout le monde le sait déjà, on hoche la tête", "en": "Everyone already knew, we nod" },
+      "high": { "fr": "Silence total, quelqu'un pose son verre", "en": "Total silence, someone puts their glass down" },
+      "tags": ["party", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-pic-305",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une photo qui pourrait être dans ta galerie, située exactement ici sur la roue.",
+        "en": "Name a photo that could be in your camera roll that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tu la montres à la pièce sans réfléchir", "en": "You'd show the whole room without thinking" },
+      "high": { "fr": "Dossier verrouillé, dans un dossier, dans un autre dossier", "en": "Locked folder, inside a folder, inside another folder" },
+      "tags": ["tech", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-exreason-306",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une raison de recoucher avec un ex, située exactement ici sur la roue.",
+        "en": "Name a reason to get back with an ex that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Le groupe comprend, presque", "en": "The group almost gets it" },
+      "high": { "fr": "Intervention complète, diaporama à l'appui", "en": "Full intervention, with a slideshow" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-position-307",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un endroit pour un premier bisou qui se situe exactement ici sur la roue.",
+        "en": "Name a place for a first kiss that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Digne d'une fin de comédie romantique", "en": "Worthy of a rom-com ending" },
+      "high": { "fr": "Tu nies l'avoir fait, même sous serment", "en": "You'd deny it even under oath" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-date-308",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un message reçu d'un date qui se situe exactement ici sur la roue.",
+        "en": "Name a text received from a date that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tu screenshot pour le montrer, fière", "en": "You screenshot it to show off, proudly" },
+      "high": { "fr": "Tu screenshot pour le montrer aux autorités", "en": "You screenshot it for the authorities" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-secret-309",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un secret de couple qui se situe exactement ici sur la roue.",
+        "en": "Name a couple's secret that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Mignon, on s'en fiche, on sourit", "en": "Cute, who cares, we smile" },
+      "high": { "fr": "Ça sort, le couple existe plus, témoins requis", "en": "It comes out, the couple is over, witnesses needed" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-app-310",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite une appli sur ton téléphone qui se situe exactement ici sur la roue.",
+        "en": "Name an app on your phone that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Tu la laisses ouverte quand on regarde ton écran", "en": "You'd leave it open while someone watches your screen" },
+      "high": { "fr": "Notifs coupées, icône cachée, nom changé", "en": "Notifications off, icon hidden, renamed" },
+      "tags": ["tech", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-noise-311",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un bruit qu'on peut entendre à travers un mur de coloc, situé exactement ici sur la roue.",
+        "en": "Name a noise you can hear through a flatmate's wall that sits exactly here on the wheel."
+      },
+      "low": { "fr": "On met des écouteurs, on n'en parle jamais", "en": "We put headphones in and never mention it" },
+      "high": { "fr": "Réunion de coloc, ordre du jour : ça", "en": "Flat meeting, single agenda item: that" },
+      "tags": ["daily", "debate"],
+      "intensity": "spicy"
+    },
+    {
+      "id": "roue-sp-lie-312",
+      "kind": "wheel100",
+      "prompt": {
+        "fr": "Cite un mensonge qu'on dit au lit, situé exactement ici sur la roue.",
+        "en": "Name a lie told in bed that sits exactly here on the wheel."
+      },
+      "low": { "fr": "Inoffensif, gentil, tout le monde le dit", "en": "Harmless, kind, everyone says it" },
+      "high": { "fr": "Si ça se sait, c'est la rupture, fais gaffe", "en": "If this gets out, it's a breakup, careful" },
+      "tags": ["love", "debate"],
+      "intensity": "spicy"
     }
   ]
 }

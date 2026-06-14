@@ -90,7 +90,7 @@ describe('disconnected players never block', () => {
     const s1 = game.reduce(s0, left(wolf)).state;
     const dawn = drive(game, s1, [deadline(2), deadline(3), deadline(4)]);
     expect(dawn.phase).toBe('dawn');
-    expect(dawn.lastDawn).toEqual({ died: [], revealedRoles: {} });
+    expect(dawn.lastDawn).toEqual({ died: [], revealedRoles: {}, marked: null });
     expect(dawn.alive[wolf]).toBe(true); // disconnected, not dead
   });
 

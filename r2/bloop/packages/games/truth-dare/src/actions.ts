@@ -10,4 +10,5 @@ export const truthDareActionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('pass') }),
   z.object({ kind: z.literal('verdict'), vote: z.enum(['done', 'chickened']) }),
   z.object({ kind: z.literal('predict'), bet: z.enum(['done', 'chickened']) }),
+  z.object({ kind: z.literal('react'), reaction: z.enum(['ouch', 'respect', 'coward']) }),
 ]);

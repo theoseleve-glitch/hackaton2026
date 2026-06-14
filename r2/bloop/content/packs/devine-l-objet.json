@@ -1082,6 +1082,542 @@
       "difficulty": "hard",
       "tags": ["tech", "funny"],
       "spicy": 0
+    },
+    {
+      "id": "obj-easy-046",
+      "object": { "fr": "la bouilloire qui a fait quatre cafés ce matin parce que quelqu'un trouve la cafetière « trop d'étapes »", "en": "the kettle that's made four coffees this morning because someone thinks the coffee machine is 'too many steps'" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-047",
+      "object": { "fr": "le chargeur enroulé pile poil, planqué dans une chaussette, pour qu'aucun coloc le retrouve. Le proprio est dans cette pièce.", "en": "the charger wound up neatly and hidden inside a sock so no flatmate finds it. its owner is in this room." },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "easy",
+      "tags": ["tech", "inRoomLikely", "sneaky"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-048",
+      "object": { "fr": "le mug « best boss » offert au manager par l'équipe qui a un Google Doc privé sur lui", "en": "the 'world's best boss' mug given to the manager by the team that keeps a private Google Doc about him" },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
+      "difficulty": "easy",
+      "tags": ["office", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-049",
+      "object": { "fr": "le coupe-ongles dégainé sur le canapé du salon, devant tout le monde, par quelqu'un ici", "en": "the nail clippers brought out on the living-room sofa, in full view, by someone in this room" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
+      "difficulty": "easy",
+      "tags": ["bathroom", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-050",
+      "object": { "fr": "la gourde réutilisable de 2 litres trimballée partout pour prouver qu'on a changé de vie. Vide depuis mardi.", "en": "the 2-litre reusable water bottle carried everywhere as proof of a new lifestyle. empty since Tuesday." },
+      "category": { "fr": "Sport, zerma", "en": "New year, new me" },
+      "difficulty": "easy",
+      "tags": ["fitness", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-051",
+      "object": { "fr": "la couette volée à 4 h du mat par celui qui jure dormir « comme un bébé ». Le voleur est ici.", "en": "the duvet stolen at 4 a.m. by the one who swears they sleep 'like a baby'. the thief is in this room." },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-052",
+      "object": { "fr": "le tablier sorti pour faire trois pâtes au beurre, comme si c'était Top Chef", "en": "the apron put on to make plain buttered pasta, like it's a cooking competition" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-053",
+      "object": { "fr": "le parapluie emprunté en novembre, jamais rendu, repéré aujourd'hui dans l'entrée de celui qui « se souvient de rien »", "en": "the umbrella borrowed in November, never returned, spotted today in the hallway of someone who 'doesn't remember'" },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-054",
+      "object": { "fr": "le casque à réduction de bruit mis pour ignorer une conversation à laquelle tu participais", "en": "the noise-cancelling headphones put on to ignore a conversation you were actually part of" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "easy",
+      "tags": ["tech", "inRoomLikely", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-055",
+      "object": { "fr": "la trottinette électrique abandonnée en travers du trottoir par quelqu'un qui se dit écolo", "en": "the e-scooter dumped across the pavement by someone who calls themselves an environmentalist" },
+      "category": { "fr": "Avant de sortir", "en": "On your way out" },
+      "difficulty": "easy",
+      "tags": ["funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-056",
+      "object": { "fr": "le claquette-chaussette assumé pour descendre la poubelle, et finalement pour aller au supermarché", "en": "the socks-and-sliders combo justified for the bins, then somehow worn to the supermarket" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
+      "difficulty": "easy",
+      "tags": ["clothing", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-057",
+      "object": { "fr": "le ticket de caisse gardé « pour les comptes » qui ne servira jamais à aucun compte, jamais", "en": "the receipt kept 'for the budget' that will never be used for any budget, ever" },
+      "category": { "fr": "Fond de sac", "en": "Bottom of the bag" },
+      "difficulty": "easy",
+      "tags": ["sneaky", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-058",
+      "object": { "fr": "le plaid électrique allumé en juillet par celui qui a « toujours froid » et a confisqué la télécommande de la clim", "en": "the heated blanket switched on in July by the one who's 'always cold' and confiscated the AC remote" },
+      "category": { "fr": "La grotte", "en": "Bed rotting HQ" },
+      "difficulty": "easy",
+      "tags": ["household", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-easy-059",
+      "object": { "fr": "le verre du robinet bu directement à la main parce que faire la vaisselle c'est une décision politique", "en": "the tap water drunk straight from a cupped hand because doing the washing-up is a political decision" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "easy",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-053",
+      "object": { "fr": "la batterie externe prêtée à 12 % de batterie, rendue à 3 %, par un pote qui te regarde dans les yeux", "en": "the power bank lent at 12% and returned at 3% by a friend who maintains eye contact the whole time" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "medium",
+      "tags": ["tech", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-054",
+      "object": { "fr": "le mixeur lancé sans couvercle. La cuisine porte encore le souvenir. Le coupable est dans cette pièce.", "en": "the blender started without the lid on. the kitchen still carries the memory. the culprit is in this room." },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-055",
+      "object": { "fr": "la balance de cuisine sortie une seule fois pour peser 0 g de bonne foi pendant un régime de janvier", "en": "the kitchen scale used exactly once to weigh out 0 grams of self-discipline during a January diet" },
+      "category": { "fr": "Sport, zerma", "en": "New year, new me" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "fitness", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-056",
+      "object": { "fr": "le porte-clés du logement de vacances jamais rendu, gardé comme trophée par quelqu'un ici", "en": "the keyring from the holiday rental never given back, kept as a trophy by someone here" },
+      "category": { "fr": "Honte touristique", "en": "Tourist behaviour" },
+      "difficulty": "medium",
+      "tags": ["sneaky", "inRoomLikely"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-057",
+      "object": { "fr": "le diffuseur d'huiles essentielles offert par la coloc qui range sa chambre une fois par trimestre", "en": "the essential-oil diffuser gifted by the flatmate who tidies their room once a quarter" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
+      "difficulty": "medium",
+      "tags": ["decor", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-058",
+      "object": { "fr": "le ramequin de sauce volé au resto, planqué dans le sac, ressorti fièrement à la maison", "en": "the little pot of sauce nicked from the restaurant, hidden in a bag, produced proudly back home" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "sneaky", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-059",
+      "object": { "fr": "le sticker « attention au chien » sur la porte d'un appart sans chien, juste un coloc qui mord pas non plus", "en": "the 'beware of the dog' sticker on a flat with no dog, just a flatmate who also doesn't bite" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
+      "difficulty": "medium",
+      "tags": ["decor", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-060",
+      "object": { "fr": "la machine à pâtes reçue à un mariage, jamais déballée, transmise telle quelle au prochain mariage", "en": "the pasta machine received at a wedding, never unboxed, re-gifted as-is to the next wedding" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-061",
+      "object": { "fr": "le marqueur indélébile utilisé sur le tableau blanc du bureau. Trois semaines que c'est là. On cherche encore le nom.", "en": "the permanent marker used on the office whiteboard. it's been there three weeks. we're still hunting for the name." },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
+      "difficulty": "medium",
+      "tags": ["office", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-062",
+      "object": { "fr": "le parasol planté à 7 h du mat sur la plage pour réserver le spot, par quelqu'un qui parle de « liberté »", "en": "the parasol staked into the beach at 7 a.m. to bagsy the spot, by someone who talks a lot about 'freedom'" },
+      "category": { "fr": "Honte touristique", "en": "Tourist behaviour" },
+      "difficulty": "medium",
+      "tags": ["funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-063",
+      "object": { "fr": "le diplôme accroché dans l'entrée pour que les invités le voient avant même d'enlever leur manteau", "en": "the framed diploma hung in the hallway so guests see it before they've even taken their coat off" },
+      "category": { "fr": "Snobisme assumé", "en": "Snob behaviour" },
+      "difficulty": "medium",
+      "tags": ["decor", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-064",
+      "object": { "fr": "la prise multiple sous le bureau qui a déjà fait sauter le plomb deux fois en pleine visio importante", "en": "the extension lead under the desk that's already tripped the fuses twice during an important video call" },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
+      "difficulty": "medium",
+      "tags": ["tech", "office", "household"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-065",
+      "object": { "fr": "le grille-pain qui garde encore les miettes du dernier locataire, parti il y a deux ans", "en": "the toaster still holding crumbs from the last tenant, who moved out two years ago" },
+      "category": { "fr": "Crimes de cuisine", "en": "Kitchen crimes" },
+      "difficulty": "medium",
+      "tags": ["kitchen", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-066",
+      "object": { "fr": "le carnet de bonnes résolutions acheté chaque 31 décembre, jamais rempli au-delà du 6 janvier", "en": "the brand-new resolutions journal bought every December 31st, never filled past January 6th" },
+      "category": { "fr": "Sport, zerma", "en": "New year, new me" },
+      "difficulty": "medium",
+      "tags": ["office", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-med-067",
+      "object": { "fr": "le coffret de jeu de société encore sous cellophane, offert par quelqu'un qui jure « tu vas adorer ». On l'a jamais ouvert.", "en": "the board game still in its cellophane, gifted by someone who swore 'you'll love it'. it has never been opened." },
+      "category": { "fr": "Jeux & embrouilles", "en": "Games & grudges" },
+      "difficulty": "medium",
+      "tags": ["games", "funny"],
+      "spicy": 0
+    },
+    {
+      "id": "obj-spicy-001",
+      "object": { "fr": "le préservatif périmé sorti du fond du tiroir en pleine soirée. La date de péremption déclenche un débat. Le tiroir appartient à quelqu'un ici.", "en": "the expired condom pulled from the back of the drawer mid-party. the date sparks a debate. the drawer belongs to someone here." },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "easy",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-002",
+      "object": { "fr": "le test de grossesse posé sur le rebord du lavabo de la coloc qui jurait « zéro stress ce mois-ci »", "en": "the pregnancy test balanced on the bathroom sink of the flatmate who swore she was 'totally chill this month'" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-003",
+      "object": { "fr": "le string oublié sous le canapé après LA soirée. Personne le réclame. Tout le monde a une théorie sur le proprio.", "en": "the thong found under the sofa after THAT party. nobody's claiming it. everybody has a theory about the owner." },
+      "category": { "fr": "Vestiges de soirée", "en": "Party damage" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-004",
+      "object": { "fr": "le téléphone retourné face cachée à la seconde où le date arrive, par quelqu'un qui a trois conversations en cours", "en": "the phone flipped face-down the second the date arrives, by someone running three talking stages at once" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "easy",
+      "tags": ["adult", "tech", "inRoomLikely"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-005",
+      "object": { "fr": "le suçon caché sous un col roulé en plein été par quelqu'un qui jure que c'était « le fer à friser »", "en": "the hickey hidden under a turtleneck in mid-summer by someone insisting it was 'the curling iron'" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-006",
+      "object": { "fr": "la culotte propre planquée dans le sac à main « au cas où on rentre pas ce soir ». Le sac est dans cette pièce.", "en": "the spare clean underwear stashed in the handbag 'in case we don't come home tonight'. the bag is in this room." },
+      "category": { "fr": "Fond de sac", "en": "Bottom of the bag" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-007",
+      "object": { "fr": "le réveil mis à 5 h 30 pour s'éclipser avant le réveil de l'autre. Le walk of shame est planifié à la minute.", "en": "the alarm set for 5:30 a.m. to sneak out before the other one wakes up. the walk of shame is planned to the minute." },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "easy",
+      "tags": ["adult", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-008",
+      "object": { "fr": "le rouge à lèvres retrouvé sur un col de chemise qui n'appartient pas à la personne qui vit ici", "en": "the lipstick mark found on a shirt collar that doesn't match anyone who lives at this address" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "medium",
+      "tags": ["adult", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-009",
+      "object": { "fr": "le badge d'hôtel d'une nuit que personne n'avait annoncée au groupe. Retrouvé dans une poche, deux semaines après.", "en": "the hotel key card from a night nobody told the group about. found in a coat pocket two weeks later." },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "medium",
+      "tags": ["adult", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-010",
+      "object": { "fr": "la appli de rencontre ouverte « par accident » devant le date actuel, qui a très bien vu l'écran", "en": "the dating app opened 'by accident' in front of the current date, who absolutely saw the screen" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "easy",
+      "tags": ["adult", "tech", "inRoomLikely"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-011",
+      "object": { "fr": "la brosse à dents de secours apparue dans la salle de bain de quelqu'un qui « voit personne en ce moment »", "en": "the spare toothbrush that's appeared in the bathroom of someone who's 'not seeing anyone right now'" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-012",
+      "object": { "fr": "le ticket de pharmacie de 7 h du matin, plié vite fait, glissé tout au fond de la poubelle de la salle de bain", "en": "the 7 a.m. pharmacy receipt, folded fast, pushed right to the bottom of the bathroom bin" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "hard",
+      "tags": ["adult", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-013",
+      "object": { "fr": "la bouteille de vin descendue à deux un mardi soir « juste pour goûter », finie à 23 h avec des décisions à l'appui", "en": "the bottle of wine finished by two people on a Tuesday 'just to taste', gone by 11 p.m. with decisions to match" },
+      "category": { "fr": "Tise du mardi", "en": "Tuesday wine club" },
+      "difficulty": "easy",
+      "tags": ["adult", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-014",
+      "object": { "fr": "le verre de la veille encore sur la table de nuit, à côté d'une chaussette qui n'est pas la sienne", "en": "last night's glass still on the nightstand, next to a sock that isn't theirs" },
+      "category": { "fr": "Panique du matin", "en": "Morning-after panic" },
+      "difficulty": "medium",
+      "tags": ["adult", "sneaky", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-015",
+      "object": { "fr": "le shot de tequila qui a précédé le SMS à l'ex. On a tous lu le SMS le lendemain. L'auteur est dans cette pièce.", "en": "the tequila shot that came right before the text to the ex. we all read the text the next day. the author is in this room." },
+      "category": { "fr": "Tise du mardi", "en": "Tuesday wine club" },
+      "difficulty": "easy",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-016",
+      "object": { "fr": "le porte-jarretelles acheté pour la Saint-Valentin, porté zéro fois, qui prend la poussière à côté des chaussettes trouées", "en": "the suspenders bought for Valentine's Day, worn zero times, gathering dust next to the holey socks" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "medium",
+      "tags": ["adult", "clothing", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-017",
+      "object": { "fr": "le cendrier de balcon vidé en panique avant la visite des parents, qui pensent toujours que personne ne fume ici", "en": "the balcony ashtray emptied in a panic before the parents' visit, who still think nobody smokes here" },
+      "category": { "fr": "Ménage panique", "en": "Panic cleaning" },
+      "difficulty": "medium",
+      "tags": ["adult", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-018",
+      "object": { "fr": "la photo floue à 2 h du mat envoyée au mauvais groupe WhatsApp, dont celui de la famille", "en": "the blurry 2 a.m. photo sent to the wrong WhatsApp group, including the family one" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "medium",
+      "tags": ["adult", "tech", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-019",
+      "object": { "fr": "le tube de lubrifiant rangé en vitesse dans le tiroir à chaussettes pile avant que la mère « range un peu »", "en": "the bottle of lube shoved into the sock drawer right before mum offered to 'tidy up a bit'" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "hard",
+      "tags": ["adult", "sneaky", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-020",
+      "object": { "fr": "le vibromasseur dont les piles sont mortes au pire moment, remplacées en douce par celles de la télécommande de la télé", "en": "the vibrator whose batteries died at the worst moment, quietly replaced with the ones from the TV remote" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "hard",
+      "tags": ["adult", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-021",
+      "object": { "fr": "les menottes en fausse fourrure offertes pour rire à un anniversaire, finalement utilisées sans rire", "en": "the fluffy handcuffs given as a joke at a birthday, eventually used entirely un-ironically" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "medium",
+      "tags": ["adult", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-022",
+      "object": { "fr": "le carton d'un colis discret « emballage neutre » réceptionné par le coloc, qui a parfaitement compris", "en": "the box from a discreet 'plain packaging' parcel signed for by the flatmate, who understood perfectly" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-023",
+      "object": { "fr": "le sextoy qui s'est allumé tout seul dans le sac de cabine au moment du contrôle aéroport. Le proprio fixait le plafond.", "en": "the sex toy that switched itself on inside the carry-on at airport security. the owner stared at the ceiling." },
+      "category": { "fr": "Honte touristique", "en": "Tourist behaviour" },
+      "difficulty": "hard",
+      "tags": ["adult", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-024",
+      "object": { "fr": "le drap qu'on retourne au lieu de le laver, secret le mieux gardé de la coloc, partagé ce soir devant tout le monde", "en": "the bedsheet flipped over instead of washed, the flatmate's best-kept secret, now shared in front of everyone" },
+      "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
+      "difficulty": "medium",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-025",
+      "object": { "fr": "la lingerie comestible offerte en secret santa au boulot, qui a transformé l'ambiance de l'open space pour six mois", "en": "the edible underwear handed over at the office secret santa, which changed the mood of the open-plan for six months" },
+      "category": { "fr": "L'open space", "en": "Corporate hell" },
+      "difficulty": "hard",
+      "tags": ["adult", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-026",
+      "object": { "fr": "le body count noté sur un post-it caché dans le portefeuille, tombé par terre au pire moment, ramassé par un pote", "en": "the body count written on a sticky note hidden in a wallet, dropped at the worst moment, picked up by a mate" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "hard",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-027",
+      "object": { "fr": "le déguisement d'infirmière sorti du placard une seule fois par an, pour une raison qui n'a rien à voir avec Halloween", "en": "the nurse costume taken out of the wardrobe exactly once a year, for a reason that has nothing to do with Halloween" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "medium",
+      "tags": ["adult", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-028",
+      "object": { "fr": "le cendrier qui sert plus souvent à autre chose qu'à des cigarettes, posé en évidence quand les parents passent", "en": "the ashtray used more often for other things than cigarettes, displayed proudly when the parents drop by" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "hard",
+      "tags": ["adult", "sneaky", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-029",
+      "object": { "fr": "le slip chanceux gardé depuis trois ans pour les premiers rendez-vous, jamais lavé entre deux par superstition", "en": "the lucky pants kept for three years of first dates, never washed in between out of pure superstition" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
+      "difficulty": "medium",
+      "tags": ["adult", "clothing", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-030",
+      "object": { "fr": "la facture de bar du date où c'est l'autre qui a payé, gardée comme preuve dans une dispute future", "en": "the bar tab from the date where the other one paid, kept as evidence for a future argument" },
+      "category": { "fr": "Comptes entre amis", "en": "Friendship maths" },
+      "difficulty": "medium",
+      "tags": ["adult", "sneaky"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-031",
+      "object": { "fr": "le sweat à capuche piqué à un ex et jamais rendu, porté ce soir devant le nouveau date qui ne sait rien", "en": "the hoodie nicked from an ex and never returned, worn tonight in front of the new date who knows nothing" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
+      "difficulty": "easy",
+      "tags": ["adult", "clothing", "inRoomLikely"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-032",
+      "object": { "fr": "le numéro griffonné sur un sous-bock, glissé dans une poche, retrouvé deux jours plus tard avec aucun souvenir", "en": "the number scrawled on a beer mat, slipped into a pocket, found two days later with zero memory attached" },
+      "category": { "fr": "Tise du mardi", "en": "Tuesday wine club" },
+      "difficulty": "easy",
+      "tags": ["adult", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-033",
+      "object": { "fr": "le talkie d'une appli de localisation laissé activé « par sécurité », surtout pour vérifier où traîne le date", "en": "the location-sharing left on 'for safety', mostly to check exactly where the date is hanging out" },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
+      "difficulty": "medium",
+      "tags": ["adult", "tech", "inRoomLikely"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-034",
+      "object": { "fr": "le carnet de notes où sont classés tous les ex par performance, planqué au fond du tiroir, trouvé par le coloc", "en": "the little notebook ranking every ex by performance, hidden at the back of a drawer, found by the flatmate" },
+      "category": { "fr": "Tiroir du bas", "en": "Bottom drawer business" },
+      "difficulty": "hard",
+      "tags": ["adult", "inRoomLikely", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-035",
+      "object": { "fr": "le miroir du plafond installé par l'ancien proprio, jamais retiré, qui regarde toujours, dont on ne parle jamais aux invités", "en": "the ceiling mirror left by the previous owner, never removed, always watching, never mentioned to guests" },
+      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
+      "difficulty": "hard",
+      "tags": ["adult", "decor", "funny"],
+      "spicy": 2
+    },
+    {
+      "id": "obj-spicy-036",
+      "object": { "fr": "le peignoir d'hôtel « emprunté » lors d'un week-end en amoureux qui n'a duré que ce week-end-là", "en": "the hotel bathrobe 'borrowed' on a romantic weekend that turned out to last exactly that one weekend" },
+      "category": { "fr": "Honte touristique", "en": "Tourist behaviour" },
+      "difficulty": "medium",
+      "tags": ["adult", "clothing", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-037",
+      "object": { "fr": "le bouquet de fleurs acheté à la station-service à 23 h pour rattraper une dispute, encore dans son film plastique", "en": "the bunch of flowers bought at the petrol station at 11 p.m. to patch up a row, still in its plastic wrap" },
+      "category": { "fr": "Achat impulsif", "en": "Impulse buy" },
+      "difficulty": "easy",
+      "tags": ["adult", "funny"],
+      "spicy": 1
+    },
+    {
+      "id": "obj-spicy-038",
+      "object": { "fr": "le costume de couple de Halloween toujours suspendu dans le placard, six mois après la fin du couple", "en": "the couples' Halloween costume still hanging in the wardrobe, six months after the couple ended" },
+      "category": { "fr": "Crimes de mode", "en": "Fashion crimes" },
+      "difficulty": "medium",
+      "tags": ["adult", "clothing", "funny"],
+      "spicy": 1
     }
   ]
 }

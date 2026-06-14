@@ -2694,6 +2694,837 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
       "fr": "1 006 km, le dernier fleuve « sauvage » d'Europe occidentale : aucun grand barrage. Plus indomptable que toi devant un buffet à volonté.",
       "en": "1,006 km, western Europe's last 'wild' river: not a single major dam. More untamed than you at an all-you-can-eat buffet."
     }
+  },
+  {
+    "id": "human-spit-litres-year",
+    "question": {
+      "fr": "En un an, un humain produit combien de LITRES de salive ? Tu en avales chaque jour sans y penser. Là, tu y penses. De rien.",
+      "en": "In one year, a human produces how many LITERS of saliva? You swallow it daily without thinking. Now you're thinking about it. You're welcome."
+    },
+    "answer": 500,
+    "unit": {
+      "fr": "litres",
+      "en": "liters"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 500 litres par an — de quoi remplir deux baignoires et demie. Tu transportes une piscine miniature dans ta bouche et tu te plaignais d'avoir soif.",
+      "en": "About 500 liters a year — enough to fill two and a half bathtubs. You carry a tiny swimming pool in your mouth and still complain you're thirsty."
+    }
+  },
+  {
+    "id": "blink-times-day",
+    "question": {
+      "fr": "Combien de fois cligne-t-on des yeux par jour, en moyenne ? Tu viens d'en faire trois rien qu'en lisant la question. On compte pas ceux-là.",
+      "en": "How many times does the average person blink per day? You just did three reading this. Those don't count."
+    },
+    "answer": 20000,
+    "unit": {
+      "fr": "fois",
+      "en": "times"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "Environ 20 000 clignements : tes yeux passent près de 10 % de tes heures éveillées fermés. Tu rates 10 % de ta vie et c'est toi le mieux placé pour juger les autres.",
+      "en": "About 20,000 blinks: your eyes spend roughly 10% of your waking hours shut. You miss 10% of your life and still feel qualified to judge everyone."
+    }
+  },
+  {
+    "id": "taste-buds-count",
+    "question": {
+      "fr": "Combien de papilles gustatives sur une langue humaine, environ ? Toi qui mets du ketchup sur tout, t'en gâches combien exactement ?",
+      "en": "Roughly how many taste buds on a human tongue? You who drown everything in ketchup — exactly how many are you wasting?"
+    },
+    "answer": 10000,
+    "unit": {
+      "fr": "papilles",
+      "en": "taste buds"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "Environ 10 000, renouvelées tous les dix jours. Tu possèdes un instrument de haute précision et tu l'utilises pour des nuggets réchauffés. Sacrilège.",
+      "en": "About 10,000, replaced every ten days. You own a high-precision instrument and use it for reheated nuggets. Sacrilege."
+    }
+  },
+  {
+    "id": "skin-cells-shed-day",
+    "question": {
+      "fr": "Combien de cellules de peau perds-tu CHAQUE jour, environ ? Une partie de la poussière de ton salon, c'est littéralement toi. Bon courage avec cette info.",
+      "en": "How many skin cells do you shed EVERY day, roughly? A good chunk of the dust in your room is literally you. Good luck with that one."
+    },
+    "answer": 1000000,
+    "unit": {
+      "fr": "cellules",
+      "en": "cells"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "Environ un million par jour, près de 18 kg sur une vie. Quand tu passes l'aspirateur, tu te ranges en partie toi-même. Glamour.",
+      "en": "About a million a day, nearly 18 kg over a lifetime. When you vacuum, you're partly tidying away yourself. Glamorous."
+    }
+  },
+  {
+    "id": "stomach-acid-ph",
+    "question": {
+      "fr": "L'acide de ton estomac a un pH d'environ combien ? Plus bas = plus corrosif. Vise bien : il pourrait dissoudre une lame de rasoir.",
+      "en": "Your stomach acid has a pH of roughly what? Lower = more corrosive. Aim carefully: it could dissolve a razor blade."
+    },
+    "answer": 2,
+    "unit": null,
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "pH d'environ 1,5 à 2, assez pour ronger du métal. La seule raison qu'il te digère pas toi, c'est une muqueuse renouvelée tous les quelques jours. Ton corps se répare en douce pendant que tu doutes de tout.",
+      "en": "A pH around 1.5 to 2, strong enough to eat metal. The only reason it doesn't digest you is a lining replaced every few days. Your body quietly repairs itself while you doubt everything."
+    }
+  },
+  {
+    "id": "atoms-in-body-power",
+    "question": {
+      "fr": "Le nombre d'atomes dans un corps humain s'écrit 7 suivi de combien de zéros, environ ? Vise grand. Plus grand. Tu peux pas viser assez grand.",
+      "en": "The number of atoms in a human body is a 7 followed by roughly how many zeros? Aim big. Bigger. You physically cannot aim big enough."
+    },
+    "answer": 27,
+    "unit": {
+      "fr": "zéros",
+      "en": "zeros"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 7 × 10²⁷ atomes, soit 7 suivi de 27 zéros. Et la plupart ont été forgés dans des étoiles mortes. T'es littéralement de la poussière d'étoile qui se dispute sur un jeu d'apéro.",
+      "en": "About 7 × 10²⁷ atoms — a 7 followed by 27 zeros. Most were forged in dead stars. You are literally stardust arguing over a party game."
+    }
+  },
+  {
+    "id": "fingernail-growth-mm-month",
+    "question": {
+      "fr": "Un ongle de main pousse d'environ combien de millimètres par mois ? Question piège pour les gens qui se rongent les ongles : vous, vous savez pas, vous mesurez jamais.",
+      "en": "A fingernail grows roughly how many millimeters per month? Trick question for the nail-biters: you'll never know, you keep eating the evidence."
+    },
+    "answer": 3,
+    "unit": {
+      "fr": "millimètres",
+      "en": "millimeters"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 3 mm par mois, et le majeur pousse le plus vite — personne ne sait vraiment pourquoi. Même tes ongles ont un préféré, et c'est pas toi.",
+      "en": "About 3 mm a month, and the middle finger grows fastest — nobody quite knows why. Even your nails have a favorite, and it isn't you."
+    }
+  },
+  {
+    "id": "sneeze-speed-kmh",
+    "question": {
+      "fr": "Un éternuement projette des particules à environ combien de km/h ? Le voisin qui éternue sans se couvrir, c'est un délit à cette vitesse-là.",
+      "en": "A sneeze launches particles at roughly how many km/h? The guy who sneezes without covering up is basically committing a crime at this speed."
+    },
+    "answer": 160,
+    "unit": {
+      "fr": "km/h",
+      "en": "km/h"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Jusqu'à 160 km/h, avec un nuage de gouttelettes qui file jusqu'à 8 mètres. Le « à tes souhaits » poli cache une scène de crime balistique.",
+      "en": "Up to 160 km/h, with a droplet cloud that can travel up to 8 meters. That polite 'bless you' is covering for a ballistic crime scene."
+    }
+  },
+  {
+    "id": "lego-people-produced",
+    "question": {
+      "fr": "LEGO produit chaque année plus de figurines humaines que la population de quel ordre de grandeur ? Réponds en MILLIARDS de minifigs par an.",
+      "en": "LEGO produces more tiny human figures per year than the population of an entire planet. How many BILLION minifigs a year?"
+    },
+    "answer": 4,
+    "unit": {
+      "fr": "milliards",
+      "en": "billion"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plusieurs milliards de minifigs par an : la « population » LEGO dépasse désormais celle des humains. Une armée de petits bonshommes au sourire figé attend son heure sous ton canapé.",
+      "en": "Several billion minifigs a year: the LEGO 'population' now outnumbers actual humans. An army of tiny frozen-smile men is biding its time under your sofa."
+    }
+  },
+  {
+    "id": "tetris-blocks-record-print",
+    "question": {
+      "fr": "Le record de pièces alignées avant le « kill screen » de Tetris NES n'existe pas — mais à quel niveau le jeu devenait-il injouable à l'origine ? Indice : numéro à deux chiffres.",
+      "en": "The original NES Tetris becomes nearly unplayable at which level, where pieces drop almost instantly? Hint: a two-digit number."
+    },
+    "answer": 29,
+    "unit": {
+      "fr": "e niveau",
+      "en": "th level"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Le niveau 29 : les pièces tombent si vite qu'on le croyait infranchissable. Un ado l'a brisé en 2018 avec une technique au pouce inventée pour ça. Pendant que tu « jouais à Tetris », des gens repoussaient la science.",
+      "en": "Level 29: pieces fall so fast it was thought impassable. A teenager broke it in 2018 with a thumb technique invented for the job. While you 'played Tetris', others advanced science."
+    }
+  },
+  {
+    "id": "rubik-combinations-quintillion",
+    "question": {
+      "fr": "Un Rubik's Cube a combien de configurations possibles ? Réponds en TRILLIARDS (10¹⁸). Spoiler : ta face bleue à moitié faite n'en représente aucune.",
+      "en": "A Rubik's Cube has how many possible configurations? Answer in QUINTILLIONS (10¹⁸). Spoiler: your half-done blue side is none of them."
+    },
+    "answer": 43,
+    "unit": {
+      "fr": "trilliards",
+      "en": "quintillion"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "43 trilliards de combinaisons (43 × 10¹⁸). Si chaque position était un grain de sable, tu couvrirais la Terre sur plusieurs mètres. Toi t'as décollé les autocollants, je sais, on en a déjà parlé.",
+      "en": "43 quintillion combinations (43 × 10¹⁸). If each position were a grain of sand, you'd bury Earth meters deep. You peeled the stickers off, I know, we discussed this."
+    }
+  },
+  {
+    "id": "minecraft-copies-millions",
+    "question": {
+      "fr": "Minecraft, jeu le plus vendu de l'histoire : combien de MILLIONS d'exemplaires écoulés ? Tout le monde y a joué, personne sait construire autre chose qu'un cube.",
+      "en": "Minecraft, the best-selling game in history: how many MILLION copies sold? Everyone has played it, nobody can build anything but a cube."
+    },
+    "answer": 300,
+    "unit": {
+      "fr": "millions",
+      "en": "million"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plus de 300 millions d'exemplaires. Si chaque joueur posait un seul bloc, on referait la Grande Muraille tous les week-ends. À la place, on creuse des trous et on perd ses affaires dans la lave.",
+      "en": "Over 300 million copies. If every player laid one block, we'd rebuild the Great Wall every weekend. Instead we dig holes and drop our gear into lava."
+    }
+  },
+  {
+    "id": "scrabble-tiles-count",
+    "question": {
+      "fr": "Combien de tuiles dans un jeu de Scrabble classique ? Celui qui conteste tous les mots des autres répond en premier. On le surveille de près.",
+      "en": "How many tiles in a classic Scrabble set? The one who challenges everyone else's words answers first. We're watching closely."
+    },
+    "answer": 100,
+    "unit": {
+      "fr": "tuiles",
+      "en": "tiles"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "100 tuiles, dont deux jokers blancs. Le Z et le K valent 10 points et n'arrivent jamais quand il faut. Le Scrabble, c'est de l'injustice organisée avec des lettres en bois.",
+      "en": "100 tiles, including two blanks. The Z and the Q are worth 10 and never show up when you need them. Scrabble is organized injustice with wooden letters."
+    }
+  },
+  {
+    "id": "chess-possible-games-power",
+    "question": {
+      "fr": "Le nombre de parties d'échecs possibles dépasse le nombre d'atomes dans l'univers observable. Il s'écrit 10 puissance combien, environ ? Vise délirant.",
+      "en": "The number of possible chess games exceeds the atoms in the observable universe. It's 10 to roughly what power? Aim absurd."
+    },
+    "answer": 120,
+    "unit": {
+      "fr": "puissance",
+      "en": "power"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 10¹²⁰ — le « nombre de Shannon ». Il y a plus de parties d'échecs imaginables que d'atomes dans l'univers (~10⁸⁰). Un plateau de 64 cases bat l'univers entier. Médite, puis perds encore en 9 coups.",
+      "en": "About 10¹²⁰ — the 'Shannon number'. There are more conceivable chess games than atoms in the universe (~10⁸⁰). A 64-square board out-vasts the cosmos. Reflect, then lose again in 9 moves."
+    }
+  },
+  {
+    "id": "card-shuffles-factorial",
+    "question": {
+      "fr": "Quand tu mélanges bien un jeu de 52 cartes, la probabilité que cet ordre exact ait déjà existé est quasi nulle. L'ordre s'écrit en gros 8 × 10 puissance combien ?",
+      "en": "When you properly shuffle 52 cards, the odds that exact order ever existed before are near zero. The count is roughly 8 × 10 to what power?"
+    },
+    "answer": 67,
+    "unit": {
+      "fr": "puissance",
+      "en": "power"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "52 ! ≈ 8 × 10⁶⁷ ordres possibles. Chaque fois que tu bats les cartes, tu crées probablement une combinaison jamais vue dans l'histoire de l'univers. Et tu t'en sers pour jouer à la bataille.",
+      "en": "52! ≈ 8 × 10⁶⁷ possible orders. Every proper shuffle likely creates a sequence never seen before in the history of the universe. And you use it to play War."
+    }
+  },
+  {
+    "id": "darts-board-max-checkout",
+    "question": {
+      "fr": "Aux fléchettes, le score maximum qu'on peut « checkout » (finir) en trois fléchettes est combien ? Le pub-quiz t'attend, prouve que t'y traînes pour autre chose que la bière.",
+      "en": "In darts, the highest score you can 'check out' (finish) with three darts is what? The pub quiz is waiting — prove you go there for more than the lager."
+    },
+    "answer": 170,
+    "unit": {
+      "fr": "points",
+      "en": "points"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "170 : triple 20, triple 20, double bull. Le « big fish », le plus beau finish du jeu. Toi t'as déjà touché le mur, le tableau d'à côté et ton propre pied. Pas dans cet ordre.",
+      "en": "170: treble 20, treble 20, double bull. The 'big fish', the prettiest finish in the game. You've hit the wall, the next board, and your own foot. Not in that order."
+    }
+  },
+  {
+    "id": "domino-toppling-record",
+    "question": {
+      "fr": "Le record du monde de dominos tombés en chaîne dépasse combien de MILLIONS de pièces ? Tu t'énervais déjà à 12 dominos. Imagine la patience.",
+      "en": "The world record for dominoes toppled in a chain tops how many MILLION pieces? You lost patience at 12. Imagine the discipline."
+    },
+    "answer": 4,
+    "unit": {
+      "fr": "millions",
+      "en": "million"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plus de 4 millions de dominos sur un seul record. Des semaines de montage, anéanties en quelques minutes — et un seul faux geste pendant l'install peut tout déclencher. Le stress le plus pur du genre humain.",
+      "en": "Over 4 million dominoes in a single record. Weeks of setup, gone in minutes — and one wrong move during the build can trigger the whole thing. The purest stress known to humankind."
+    }
+  },
+  {
+    "id": "world-fastest-typist-wpm",
+    "question": {
+      "fr": "La dactylo la plus rapide jamais enregistrée tapait combien de mots par minute ? Toi tu tapes à deux doigts en regardant le clavier. On a vu.",
+      "en": "The fastest typist ever recorded hit how many words per minute? You type with two fingers while staring at the keyboard. We've seen."
+    },
+    "answer": 216,
+    "unit": {
+      "fr": "mots/min",
+      "en": "words/min"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "216 mots par minute, sur une machine à écrire électrique dans les années 40. Plus rapide que la plupart des gens ne parlent. Toi tu mets trois minutes à écrire « ok ».",
+      "en": "216 words per minute, on an electric typewriter in the 1940s. Faster than most people speak. You take three minutes to type 'ok'."
+    }
+  },
+  {
+    "id": "internet-data-per-minute-power",
+    "question": {
+      "fr": "Chaque minute, l'humanité génère environ combien de MILLIONS de Go de données ? Réponds gros : la moitié, c'est des gens qui se renvoient le même mème.",
+      "en": "Every minute, humanity generates roughly how many MILLION GB of data? Aim high: half of it is people resending each other the same meme."
+    },
+    "answer": 400,
+    "unit": {
+      "fr": "millions de Go",
+      "en": "million GB"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "Environ 400 millions de Go par minute. Une part énorme : des vidéos de chats, des stories ratées et ton historique que tu jures effacer. L'humanité documente surtout son ennui.",
+      "en": "About 400 million GB per minute. A huge share: cat videos, failed stories, and the browser history you keep swearing you'll clear. Humanity mostly documents its own boredom."
+    }
+  },
+  {
+    "id": "first-webcam-coffee-purpose",
+    "question": {
+      "fr": "La toute première webcam de l'histoire, à Cambridge en 1991, surveillait quoi exactement ? Réponds par l'objet. C'est si bête que c'est génial.",
+      "en": "The very first webcam in history, at Cambridge in 1991, was pointed at what exactly? Answer with the object. It's so dumb it's brilliant."
+    },
+    "answer": 1,
+    "unit": {
+      "fr": "cafetière",
+      "en": "coffee pot"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "UNE cafetière. Des chercheurs en avaient marre de monter pour la trouver vide : ils l'ont filmée en direct. Internet visuel est né de la flemme de marcher jusqu'au café. Respect.",
+      "en": "A single coffee pot. Researchers were sick of walking upstairs to find it empty, so they livestreamed it. The visual internet was born from being too lazy to walk to coffee. Respect."
+    }
+  },
+  {
+    "id": "wifi-name-origin-year",
+    "question": {
+      "fr": "Le mot « Wi-Fi » a été inventé par une agence marketing en quelle année ? Il ne veut littéralement rien dire. Tu t'énerves dessus tous les jours sans savoir ça.",
+      "en": "The word 'Wi-Fi' was made up by a marketing agency in what year? It literally means nothing. You rage at it daily without knowing this."
+    },
+    "answer": 1999,
+    "unit": null,
+    "format": "year",
+    "scale": "linear",
+    "funFact": {
+      "fr": "1999. « Wi-Fi » ne signifie PAS « Wireless Fidelity » : c'est juste un nom qui sonne bien, choisi parce que « IEEE 802.11b » faisait fuir. Tu cries sur un slogan publicitaire depuis 25 ans.",
+      "en": "1999. 'Wi-Fi' does NOT stand for 'Wireless Fidelity': it's just a catchy name, picked because 'IEEE 802.11b' scared people off. You've been yelling at an ad slogan for 25 years."
+    }
+  },
+  {
+    "id": "ctrl-alt-del-inventor-print",
+    "question": {
+      "fr": "Le raccourci Ctrl+Alt+Suppr a été créé par UN ingénieur IBM. Combien de touches dans cette combinaison de panique universelle ? C'est un piège bête, ne te plante pas.",
+      "en": "The Ctrl+Alt+Delete shortcut was created by ONE IBM engineer. How many keys in this universal panic combo? Dumb trap, don't fall in."
+    },
+    "answer": 3,
+    "unit": {
+      "fr": "touches",
+      "en": "keys"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "3 touches, dessinées par David Bradley pour redémarrer vite — il l'a voulu inconfortable exprès, pour qu'on ne le tape pas par accident. Le geste de stress le plus célèbre du monde est un anti-accident raté.",
+      "en": "Three keys, designed by David Bradley for a quick reboot — he deliberately made it awkward so nobody would hit it by accident. The world's most famous stress gesture is a fail-safe that didn't quite fail safe."
+    }
+  },
+  {
+    "id": "most-expensive-painting-millions",
+    "question": {
+      "fr": "Le tableau le plus cher jamais vendu aux enchères a atteint combien de MILLIONS de dollars ? Vise haut. Plus haut que tout ce que ta lignée a possédé.",
+      "en": "The most expensive painting ever sold at auction reached how many MILLION dollars? Aim high. Higher than your entire bloodline's net worth."
+    },
+    "answer": 450,
+    "unit": {
+      "fr": "millions de dollars",
+      "en": "million dollars"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "450 millions de dollars, en 2017, pour un « Vinci » dont l'authenticité est toujours débattue. Presque un demi-milliard pour un tableau peut-être pas du bon peintre. L'art, c'est de la confiance et beaucoup d'ego.",
+      "en": "450 million dollars, in 2017, for a 'Leonardo' whose authenticity is still argued. Nearly half a billion for a painting maybe not by the right painter. Art is trust and a great deal of ego."
+    }
+  },
+  {
+    "id": "banksy-shredded-price-print",
+    "question": {
+      "fr": "Un tableau de Banksy s'est auto-détruit dans un broyeur juste après avoir été adjugé. Sa valeur a fait quoi ensuite ? Réponds par le facteur : elle a été multipliée par combien, environ ?",
+      "en": "A Banksy painting shredded itself right after being sold at auction. What happened to its value? Answer the factor: it multiplied by roughly how much?"
+    },
+    "answer": 18,
+    "unit": {
+      "fr": "fois",
+      "en": "times"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Vendue ~1,4 M£ en 2018, puis ~18,6 M£ en 2021 une fois détruite. Banksy a détruit son œuvre et l'a rendue 18 fois plus chère. Le marché de l'art a applaudi son propre ridicule.",
+      "en": "Sold for ~£1.4M in 2018, then ~£18.6M in 2021 once destroyed. Banksy shredded his own work and made it 18 times more valuable. The art market applauded its own absurdity."
+    }
+  },
+  {
+    "id": "longest-novel-words-millions",
+    "question": {
+      "fr": "Le plus long roman jamais écrit (Proust) compte environ combien de MILLIONS de mots ? Toi t'as résumé un livre de 200 pages avec « c'était bien ».",
+      "en": "The longest novel ever written (Proust) runs roughly how many MILLION words? You once reviewed a 200-page book with 'it was good'."
+    },
+    "answer": 1,
+    "unit": {
+      "fr": "million de mots",
+      "en": "million words"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 1,2 million de mots dans « À la recherche du temps perdu ». La première phrase fait des lignes. Personne à cette table ne l'a fini. Personne au monde, peut-être.",
+      "en": "About 1.2 million words in Proust's 'In Search of Lost Time'. The first sentence runs for lines. Nobody at this table has finished it. Possibly nobody on Earth."
+    }
+  },
+  {
+    "id": "dictionary-longest-definition-print",
+    "question": {
+      "fr": "Le mot anglais avec le plus de définitions distinctes dans l'Oxford est un mot de DEUX lettres. Combien de sens, environ ? Plus de 400. Vise.",
+      "en": "The English word with the most distinct dictionary senses in the Oxford is just TWO letters long. How many meanings, roughly? Over 400. Guess."
+    },
+    "answer": 430,
+    "unit": {
+      "fr": "sens",
+      "en": "meanings"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Le verbe « set » : plus de 430 sens dans l'Oxford. Le mot le plus surchargé de la langue anglaise est aussi l'un des plus courts. La preuve que l'efficacité, c'est surtout du foutoir bien rangé.",
+      "en": "The verb 'set': over 430 senses in the Oxford. The most overloaded word in English is also one of the shortest. Proof that efficiency is mostly well-organized chaos."
+    }
+  },
+  {
+    "id": "most-translated-book-languages",
+    "question": {
+      "fr": "Le livre le plus traduit du monde (hors textes religieux) est « Le Petit Prince ». Dans combien de langues, environ ? Vise haut, c'est plus que tu crois.",
+      "en": "The most translated book in the world (excluding religious texts) is 'The Little Prince'. Into how many languages, roughly? Aim high."
+    },
+    "answer": 500,
+    "unit": {
+      "fr": "langues",
+      "en": "languages"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plus de 500 langues et dialectes. Un conte de 96 pages écrit par un pilote français a touché plus de cultures que la plupart des religions. « On ne voit bien qu'avec le cœur » — et apparemment dans toutes les langues.",
+      "en": "Over 500 languages and dialects. A 96-page tale by a French pilot has reached more cultures than most religions. 'One sees clearly only with the heart' — apparently in every tongue going."
+    }
+  },
+  {
+    "id": "first-novel-author-print",
+    "question": {
+      "fr": "Le tout premier roman de l'histoire, « Le Dit du Genji », a été écrit au Japon vers l'an mille. Par qui ? Réponds : un homme ou une femme ? Et engage-toi.",
+      "en": "The world's first novel, 'The Tale of Genji', was written in Japan around the year 1000. By whom — a man or a woman? Commit."
+    },
+    "answer": 1000,
+    "unit": null,
+    "format": "year",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Vers l'an 1000, par Murasaki Shikibu, une femme de la cour japonaise. Le tout premier roman psychologique du monde a été écrit par une dame d'honneur, des siècles avant que l'Europe invente le genre. Replace ton « mais à l'époque… » dans ta poche.",
+      "en": "Around 1000 AD, by Murasaki Shikibu, a woman of the Japanese court. The world's first psychological novel was written by a lady-in-waiting, centuries before Europe invented the form. Put your 'but back then…' away."
+    }
+  },
+  {
+    "id": "shakespeare-words-invented",
+    "question": {
+      "fr": "Shakespeare aurait inventé ou popularisé environ combien de mots anglais encore utilisés aujourd'hui ? Vise gros : tu en as dit plusieurs ce soir sans le savoir.",
+      "en": "Shakespeare is credited with inventing or popularizing roughly how many English words still used today? Aim big: you've said several tonight without knowing."
+    },
+    "answer": 1700,
+    "unit": {
+      "fr": "mots",
+      "en": "words"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 1 700 mots, dont « eyeball », « lonely » et « swagger ». Le swag vient littéralement d'un dramaturge mort il y a 400 ans. Médite là-dessus la prochaine fois que tu dis que c'est « du vieux français ».",
+      "en": "About 1,700 words, including 'eyeball', 'lonely' and 'swagger'. Swagger comes literally from a playwright dead 400 years. Chew on that next time you call old English 'boring'."
+    }
+  },
+  {
+    "id": "fastest-bird-level-flight-kmh",
+    "question": {
+      "fr": "Quel est l'oiseau le plus rapide en vol HORIZONTAL (pas en piqué), en km/h ? Le faucon triche avec la gravité. Lui, non.",
+      "en": "What's the fastest bird in LEVEL flight (no diving), in km/h? The falcon cheats with gravity. This one doesn't."
+    },
+    "answer": 110,
+    "unit": {
+      "fr": "km/h",
+      "en": "km/h"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Le martinet à gorge blanche, environ 110 km/h en vol battu, sans descente. Il mange, dort et s'accouple en vol — il peut rester en l'air près de dix mois d'affilée. Toi tu te plains d'avoir « beaucoup marché aujourd'hui ».",
+      "en": "The white-throated needletail, around 110 km/h in flapping flight, no diving. It eats, sleeps and mates on the wing — staying airborne for up to ten months straight. You complain about 'walking a lot today'."
+    }
+  },
+  {
+    "id": "tardigrade-survival-years",
+    "question": {
+      "fr": "Un tardigrade (ourson d'eau) peut survivre sans eau, déshydraté, pendant combien d'années, dans les estimations extrêmes ? Vise délirant. Cette bestiole se moque de la mort.",
+      "en": "A tardigrade (water bear) can survive dehydrated, without water, for how many years in extreme estimates? Aim absurd. This thing laughs at death."
+    },
+    "answer": 30,
+    "unit": {
+      "fr": "ans",
+      "en": "years"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Jusqu'à 30 ans en état desséché, et il survit au vide spatial, aux radiations et à -272 °C. On en a renvoyé dans l'espace : ils sont revenus vivants. Le seul être que l'apocalypse n'inquiète pas.",
+      "en": "Up to 30 years in a dried state, and it survives the vacuum of space, radiation and -272°C. We sent some to space: they came back alive. The only creature totally unbothered by the apocalypse."
+    }
+  },
+  {
+    "id": "immortal-jellyfish-print",
+    "question": {
+      "fr": "Il existe une méduse considérée comme biologiquement « immortelle » : elle peut rajeunir indéfiniment. Sa taille adulte fait environ combien de millimètres ? Indice : minuscule.",
+      "en": "There's a jellyfish considered biologically 'immortal': it can revert to youth indefinitely. Its adult size is roughly how many millimeters? Hint: tiny."
+    },
+    "answer": 4,
+    "unit": {
+      "fr": "millimètres",
+      "en": "millimeters"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 4 mm. Turritopsis dohrnii peut, en cas de stress, repasser au stade juvénile et recommencer sa vie — potentiellement à l'infini. La créature qui a battu la mort fait la taille d'un grain de poivre. La nature se moque de nous.",
+      "en": "About 4 mm. Turritopsis dohrnii can, under stress, revert to its juvenile stage and start over — potentially forever. The creature that beat death is the size of a peppercorn. Nature is mocking us."
+    }
+  },
+  {
+    "id": "mantis-shrimp-punch-kmh",
+    "question": {
+      "fr": "La crevette-mante frappe avec ses pinces à environ combien de km/h ? Si vite que l'eau bout localement. Vise haut, ce truc est une arme à feu vivante.",
+      "en": "The mantis shrimp strikes with its club at roughly how many km/h? Fast enough to boil the water around it. Aim high — this thing is a living firearm."
+    },
+    "answer": 80,
+    "unit": {
+      "fr": "km/h",
+      "en": "km/h"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 80 km/h, l'accélération d'une balle de petit calibre. Le coup crée une bulle qui s'effondre en flash de chaleur. Elle casse des aquariums en verre. Garde tes distances avec la nature.",
+      "en": "About 80 km/h, the acceleration of a small-caliber bullet. The strike spawns a bubble that collapses in a flash of heat. It cracks glass tanks. Keep your distance from nature."
+    }
+  },
+  {
+    "id": "honey-never-spoils-bacteria-print",
+    "question": {
+      "fr": "Le miel ne périme jamais grâce à son taux d'eau extrêmement bas : combien de pourcent d'eau, environ ? En dessous, aucune bactérie ne survit.",
+      "en": "Honey never spoils thanks to its extremely low water content: roughly what percentage water? Below that, no bacteria survives."
+    },
+    "answer": 17,
+    "unit": {
+      "fr": "%",
+      "en": "%"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 17 % d'eau, trop peu pour les microbes, et son acidité finit le travail. C'est pour ça que le miel de tombe égyptienne se mange encore. Ton yaourt, lui, t'a trahi au bout de cinq jours.",
+      "en": "About 17% water, too little for microbes, and its acidity finishes the job. That's why honey from Egyptian tombs is still edible. Your yogurt betrayed you after five days."
+    }
+  },
+  {
+    "id": "banana-radioactive-bed-count",
+    "question": {
+      "fr": "Une banane est légèrement radioactive (potassium-40). Il faudrait en manger environ combien d'UN COUP pour une dose dangereuse ? Réponds en MILLIONS. Vise grand.",
+      "en": "A banana is mildly radioactive (potassium-40). How many would you need to eat AT ONCE for a dangerous dose? Answer in MILLIONS. Aim big."
+    },
+    "answer": 10,
+    "unit": {
+      "fr": "millions",
+      "en": "million"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 10 millions de bananes d'un coup pour une dose mortelle de radiation — bien avant ça, c'est le potassium qui te tue. Ta banane du petit-déj est radioactive et c'est totalement OK. La science adore te stresser pour rien.",
+      "en": "About 10 million bananas at once for a lethal radiation dose — long before that, the potassium itself gets you. Your breakfast banana is radioactive and totally fine. Science loves to stress you out over nothing."
+    }
+  },
+  {
+    "id": "hottest-chili-scoville-millions",
+    "question": {
+      "fr": "Le piment le plus fort du monde dépasse combien de MILLIONS d'unités Scoville ? Le piment d'Espelette de ta grand-mère plafonne à 4 000. Sens la différence.",
+      "en": "The hottest chili in the world tops how many MILLION Scoville units? Your grandma's mild pepper caps at 4,000. Feel the gap."
+    },
+    "answer": 2,
+    "unit": {
+      "fr": "millions",
+      "en": "million"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plus de 2 millions de Scoville pour le « Pepper X ». À ce niveau, c'est moins un aliment qu'une arme chimique de catégorie défense personnelle. Le pote qui jure qu'il « mange super épicé » mentait, comme toujours.",
+      "en": "Over 2 million Scoville for 'Pepper X'. At that level it's less a food than self-defense-grade chemical warfare. The friend who swears they 'eat really spicy' was lying, as usual."
+    }
+  },
+  {
+    "id": "coffee-beans-per-year-billions",
+    "question": {
+      "fr": "L'humanité boit environ combien de MILLIARDS de tasses de café par jour ? Réponds gros : la moitié de cette table en a déjà besoin d'une rien qu'à lire ça.",
+      "en": "Humanity drinks roughly how many BILLION cups of coffee per day? Aim big: half this table already needs one just reading the question."
+    },
+    "answer": 2,
+    "unit": {
+      "fr": "milliards",
+      "en": "billion"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Plus de 2 milliards de tasses par jour. Une civilisation entière fonctionne à la caféine et au déni du manque de sommeil. Sans café, la moitié de l'économie mondiale ferait juste la sieste.",
+      "en": "Over 2 billion cups a day. An entire civilization runs on caffeine and the denial of sleep deprivation. Without coffee, half the global economy would simply take a nap."
+    }
+  },
+  {
+    "id": "deepest-point-ocean-m",
+    "question": {
+      "fr": "Le point le plus profond de l'océan (fosse des Mariannes) descend à combien de mètres ? Si tu y jetais l'Everest, il serait encore noyé. Vise.",
+      "en": "The deepest point in the ocean (Mariana Trench) drops to how many meters? Drop Everest in and it would still be underwater. Guess."
+    },
+    "answer": 10984,
+    "unit": {
+      "fr": "mètres",
+      "en": "meters"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "10 984 m. Plus de gens ont marché sur la Lune que descendus tout au fond. Et même là, on a retrouvé un sac plastique. L'humanité touche le fond, littéralement, avec ses déchets.",
+      "en": "10,984 m. More people have walked on the Moon than reached the very bottom. And even there, we found a plastic bag. Humanity hits rock bottom, literally, and leaves litter."
+    }
+  },
+  {
+    "id": "lightning-temperature-celsius",
+    "question": {
+      "fr": "Un éclair atteint quelle température, en degrés Celsius ? Indice : c'est plusieurs fois la surface du Soleil. Vise délirant.",
+      "en": "A lightning bolt reaches what temperature, in degrees Celsius? Hint: it's several times hotter than the Sun's surface. Aim absurd."
+    },
+    "answer": 30000,
+    "unit": {
+      "fr": "°C",
+      "en": "°C"
+    },
+    "format": "plain",
+    "scale": "log",
+    "funFact": {
+      "fr": "Environ 30 000 °C, cinq fois la surface du Soleil (5 500 °C). Le « bang » du tonnerre, c'est l'air qui explose sous le choc thermique. Et toi tu te caches sous une couette comme si ça allait t'aider.",
+      "en": "About 30,000°C, five times hotter than the Sun's surface (5,500°C). Thunder is just air exploding from the thermal shock. And you hide under a duvet like that's going to help."
+    }
+  },
+  {
+    "id": "sahara-snow-years-print",
+    "question": {
+      "fr": "Il a déjà NEIGÉ dans le désert du Sahara. Combien de fois, environ, l'a-t-on documenté depuis 1979 ? Petit chiffre. Le désert le plus chaud du monde a connu la poudreuse.",
+      "en": "It has actually SNOWED in the Sahara desert. Roughly how many documented times since 1979? Small number. The hottest desert on Earth has seen powder."
+    },
+    "answer": 5,
+    "unit": {
+      "fr": "fois",
+      "en": "times"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ cinq fois documentées, dont des dunes recouvertes de neige à Aïn Sefra. Le Sahara a vu plus de neige certaines années que ta ville en hiver. La météo n'a aucune logique et ne s'en excuse pas.",
+      "en": "About five documented times, including snow-covered dunes at Aïn Sefra. The Sahara has seen more snow some years than your hometown does in winter. Weather has no logic and offers no apology."
+    }
+  },
+  {
+    "id": "amazon-oxygen-percent-mythbust",
+    "question": {
+      "fr": "On dit que l'Amazonie produit « 20 % de l'oxygène de la Terre ». La vraie part NETTE qu'elle nous laisse, en pourcentage, est environ combien ? Prépare-toi à un mythe qui s'effondre.",
+      "en": "People say the Amazon makes '20% of Earth's oxygen'. The real NET share it actually leaves us, in percent, is roughly what? Brace for a collapsing myth."
+    },
+    "answer": 0,
+    "unit": {
+      "fr": "%",
+      "en": "%"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Quasiment 0 % net : la forêt consomme presque tout l'oxygène qu'elle produit via sa propre respiration et décomposition. Le « poumon de la planète » respire surtout pour lui-même. T'as relayé ce mythe en story, avoue.",
+      "en": "Nearly 0% net: the forest consumes almost all the oxygen it produces through its own respiration and decomposition. The 'lungs of the planet' mostly breathe for themselves. You reshared that myth in a story, admit it."
+    }
+  },
+  {
+    "id": "cleopatra-pyramids-moon-print",
+    "question": {
+      "fr": "Cléopâtre a vécu plus près dans le temps de quel événement : la construction de la pyramide de Khéops, ou le premier pas sur la Lune ? Réponds par l'année de sa mort (av. J.-C.) et tu comprendras le piège.",
+      "en": "Did Cleopatra live closer in time to the building of the Great Pyramid, or to the first Moon landing? Answer the year of her death (BC) and the trap reveals itself."
+    },
+    "answer": 30,
+    "unit": {
+      "fr": "av. J.-C.",
+      "en": "BC"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Morte en 30 av. J.-C. La pyramide de Khéops a ~4 500 ans, le premier pas sur la Lune en 1969 : Cléopâtre est plus proche de l'iPhone que des pyramides qu'elle visitait déjà comme des ruines antiques. Le temps est plus grand que ton cerveau.",
+      "en": "Died 30 BC. The Great Pyramid is ~4,500 years old, the Moon landing was 1969: Cleopatra is closer to the iPhone than to the pyramids, which she already toured as ancient ruins. Time is bigger than your brain."
+    }
+  },
+  {
+    "id": "oxford-aztec-already-done",
+    "question": {
+      "fr": "Quand l'université d'Oxford donnait déjà des cours, un certain empire n'existait pas encore. De combien d'ANNÉES Oxford devance-t-il la fondation de l'Empire aztèque (1428) ? Vise large.",
+      "en": "While Oxford was already teaching, a certain empire didn't yet exist. By how many YEARS does Oxford predate the founding of the Aztec Empire (1428)? Aim wide."
+    },
+    "answer": 332,
+    "unit": {
+      "fr": "ans",
+      "en": "years"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "332 ans : Oxford enseignait dès 1096, l'Empire aztèque n'est né qu'en 1428. Des étudiants stressaient déjà pour leurs partiels plus de trois siècles avant Tenochtitlan. L'histoire n'est pas une frise bien rangée.",
+      "en": "332 years: Oxford was teaching from 1096, the Aztec Empire was only founded in 1428. Students were already cramming for exams over three centuries before Tenochtitlan. History is not a tidy timeline."
+    }
+  },
+  {
+    "id": "fax-machine-invented-year",
+    "question": {
+      "fr": "Le fax a été inventé avant ou après le téléphone ? Réponds par l'année du brevet. Indice : le téléphone, c'est 1876. Tu vas être surpris.",
+      "en": "Was the fax machine invented before or after the telephone? Answer the patent year. Hint: the telephone is 1876. You're about to be surprised."
+    },
+    "answer": 1843,
+    "unit": null,
+    "format": "year",
+    "scale": "linear",
+    "funFact": {
+      "fr": "1843 : le fax précède le téléphone de plus de 30 ans. La machine que ton entreprise refusait de jeter en 2015 est plus vieille que l'appel vocal. Le futur arrive parfois en désordre.",
+      "en": "1843: the fax predates the telephone by over 30 years. The machine your office refused to scrap in 2015 is older than the voice call. The future sometimes arrives out of order."
+    }
+  },
+  {
+    "id": "first-vending-machine-print",
+    "question": {
+      "fr": "Le premier distributeur automatique de l'histoire date de quel siècle ? Réponds par l'année (peut être avant ou après J.-C.). Indice : c'est l'Antiquité.",
+      "en": "The first vending machine in history dates from which era? Answer the year (can be BC or AD). Hint: it's antiquity."
+    },
+    "answer": 50,
+    "unit": null,
+    "format": "year",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Vers l'an 50, à Alexandrie : Héron a inventé une machine qui distribuait de l'eau bénite contre une pièce — pour empêcher les fidèles de se servir gratis. Le premier distributeur a été créé par méfiance envers les croyants. Rien de neuf sous le soleil.",
+      "en": "Around 50 AD, in Alexandria: Hero invented a machine that dispensed holy water for a coin — to stop worshippers helping themselves for free. The first vending machine was born from distrust of the faithful. Nothing new under the sun."
+    }
+  },
+  {
+    "id": "world-richest-vs-poorest-country-gdp",
+    "question": {
+      "fr": "Combien de pays faut-il pour rassembler autant de richesse que les 1 % les plus riches du monde possèdent ? Réponds par le pourcentage de la richesse mondiale détenu par ce 1 %. Vise haut.",
+      "en": "What percentage of the world's total wealth is held by the richest 1%? Aim high — higher than feels fair."
+    },
+    "answer": 45,
+    "unit": {
+      "fr": "%",
+      "en": "%"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 45 % de la richesse mondiale pour 1 % des gens. Pendant que tu calculais ton pourboire au centime près, ces chiffres-là ne bougent pas d'un cil. La précision, c'est pour les pauvres.",
+      "en": "About 45% of global wealth for 1% of people. While you split the bill down to the cent, those numbers don't flinch. Precision is a poor person's hobby."
+    }
+  },
+  {
+    "id": "most-spoken-language-millions",
+    "question": {
+      "fr": "La langue la plus parlée au monde (locuteurs natifs) est le mandarin : combien de MILLIONS de natifs, environ ? Vise haut. L'anglais arrive loin derrière.",
+      "en": "The most spoken native language on Earth is Mandarin: how many MILLION native speakers, roughly? Aim high. English is way behind."
+    },
+    "answer": 940,
+    "unit": {
+      "fr": "millions",
+      "en": "million"
+    },
+    "format": "plain",
+    "scale": "linear",
+    "funFact": {
+      "fr": "Environ 940 millions de natifs en mandarin, contre ~380 pour l'anglais. La langue dans laquelle tu te crois cultivé est minoritaire à l'échelle de la planète. Humilité linguistique offerte.",
+      "en": "About 940 million native Mandarin speakers, versus ~380 million for English. The language you feel so cultured in is a minority worldwide. Free dose of linguistic humility."
+    }
   }
 ] },
 };
@@ -10369,6 +11200,1953 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
           "en": "…admit the crowd was right all along"
         },
         "crowdYesPct": 27
+      }
+    ]
+  },
+  {
+    "id": "cc-snitch-133",
+    "targetYesPct": 95,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Soyons honnêtes deux secondes…",
+      "en": "Real for two seconds…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…'je dis ça pour ton bien' veut dire 'je vais te démolir, mais poliment'",
+          "en": "…'I'm telling you this as a friend' means 'I'm about to wreck you, politely'"
+        },
+        "crowdYesPct": 90
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…dans chaque groupe, quelqu'un retient toutes les dettes au centime près",
+          "en": "…every group has one person tracking every debt down to the last cent"
+        },
+        "crowdYesPct": 84
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…on a tous un pote dont on accepte l'invit en sachant qu'on annulera",
+          "en": "…we all have one friend whose invite we accept already planning to bail"
+        },
+        "crowdYesPct": 76
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…tout le monde ici a déjà parlé d'un absent à la seconde où il sortait",
+          "en": "…everyone here has started talking about someone the second they left the room"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…le pote 'trop honnête' est juste méchant avec un alibi",
+          "en": "…the 'I'm just brutally honest' friend is just mean with a cover story"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…il y a une personne dans cette pièce que personne n'inviterait en premier",
+          "en": "…there is one person in this room nobody would invite first"
+        },
+        "crowdYesPct": 47
+      }
+    ]
+  },
+  {
+    "id": "cc-broke-134",
+    "targetYesPct": 75,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En mode fin de mois, j'ai déjà…",
+      "en": "In end-of-the-month survival mode, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…vérifié mon solde comme on désamorce une bombe",
+          "en": "…checked my balance like I was defusing a bomb"
+        },
+        "crowdYesPct": 82
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…refusé une sortie en inventant un 'truc de prévu' qui était zéro euro",
+          "en": "…declined a night out with a fake 'plans' that were actually being broke"
+        },
+        "crowdYesPct": 73
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…mangé exactement ce qu'il restait, dans un ordre douteux",
+          "en": "…eaten whatever was left, in a deeply questionable order"
+        },
+        "crowdYesPct": 68
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…laissé un pote payer en jurant 'je te rends demain' (on est demain)",
+          "en": "…let a friend cover me swearing 'I'll pay you back tomorrow' (it is now tomorrow)"
+        },
+        "crowdYesPct": 55
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…annulé un abonnement le jour du prélèvement, à la seconde près",
+          "en": "…cancelled a subscription on billing day, down to the minute"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…demandé 'tu peux m'avancer' à quelqu'un que je dois déjà rembourser",
+          "en": "…asked 'can you spot me' from a person I already owe money to"
+        },
+        "crowdYesPct": 36
+      }
+    ]
+  },
+  {
+    "id": "cc-pettyrevenge-135",
+    "targetYesPct": 45,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Niveau micro-vengeance, j'ai déjà…",
+      "en": "On the petty-revenge ledger, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…repris MA chaise pile quand l'autre se levait deux secondes",
+          "en": "…reclaimed MY chair the exact second they got up for two seconds"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…laissé 'lu' un message en sachant très bien l'effet que ça fait",
+          "en": "…left someone on read knowing full well what it does to a person"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…fait exprès de finir le truc que quelqu'un 'gardait pour plus tard'",
+          "en": "…deliberately finished the thing someone was 'saving for later'"
+        },
+        "crowdYesPct": 51
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…remonté une vieille embrouille au pire moment, juste pour gagner",
+          "en": "…brought up an old fight at the worst moment, purely to win the new one"
+        },
+        "crowdYesPct": 43
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…retiré un like sur un post pour faire passer un message à UNE personne",
+          "en": "…un-liked someone's post to send a silent message to exactly one person"
+        },
+        "crowdYesPct": 31
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…gardé une rancune si vieille que la personne a oublié le crime initial",
+          "en": "…held a grudge so old the other person forgot the original crime"
+        },
+        "crowdYesPct": 38
+      }
+    ]
+  },
+  {
+    "id": "cc-grouppic-136",
+    "targetYesPct": 60,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Pour une photo de groupe, j'ai déjà…",
+      "en": "For a group photo, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…réclamé une deuxième prise uniquement parce que MOI j'étais mal dessus",
+          "en": "…demanded a re-take only because I personally looked bad in the first one"
+        },
+        "crowdYesPct": 67
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…vérifié ma tête en premier, le reste du groupe en option",
+          "en": "…checked my own face first, everyone else's strictly optional"
+        },
+        "crowdYesPct": 79
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…posté une photo où un pote était flou et raté, sans culpabiliser",
+          "en": "…posted a photo where a friend looked blurry and rough, with zero guilt"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…gardé en secret la version où tout le monde est moche sauf moi",
+          "en": "…secretly kept the version where everyone looks bad except me"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…recadré un pote hors de la photo pour avoir le meilleur angle sur moi",
+          "en": "…cropped a friend out of the shot to get the best angle on myself"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…fait recommencer cinq fois jusqu'à ce que MOI je sois parfait, au détriment de tous",
+          "en": "…made everyone redo it five times until I was perfect, at the whole group's expense"
+        },
+        "crowdYesPct": 29
+      }
+    ]
+  },
+  {
+    "id": "cc-textback-137",
+    "targetYesPct": 85,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Question réponses aux messages, j'ai déjà…",
+      "en": "On the matter of replying to texts, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…vu un message, pensé 'je réponds plus tard', et trahi cette promesse trois jours",
+          "en": "…seen a text, thought 'I'll reply later', and betrayed that vow for three days"
+        },
+        "crowdYesPct": 88
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…répondu à la vitesse de l'éclair à une personne, et en 48 h à une autre",
+          "en": "…replied at light speed to one person and in 48 hours to another"
+        },
+        "crowdYesPct": 81
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…tapé une réponse complète puis tout effacé pour mettre juste un emoji",
+          "en": "…typed a full reply then deleted it all to send a single emoji"
+        },
+        "crowdYesPct": 70
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…laissé exprès en 'vu' une personne précise, une seule, vous savez qui",
+          "en": "…deliberately left one specific person on read, just one, you know who"
+        },
+        "crowdYesPct": 54
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…répondu 'haha' à un truc pas drôle pour clore la conversation",
+          "en": "…replied 'haha' to something not funny just to end the conversation"
+        },
+        "crowdYesPct": 73
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…attendu pile le double de son temps de réponse, par principe",
+          "en": "…waited exactly double their reply time back, on principle"
+        },
+        "crowdYesPct": 41
+      }
+    ]
+  },
+  {
+    "id": "cc-favouritism-138",
+    "targetYesPct": 35,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Dans tout groupe d'amis…",
+      "en": "In every friend group…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…il y a un classement officieux, et tout le monde connaît sa place",
+          "en": "…there's an unspoken ranking, and everyone knows exactly where they sit"
+        },
+        "crowdYesPct": 48
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…une personne est invitée 'parce qu'il faut bien', pas parce qu'on veut",
+          "en": "…one person gets invited 'because we have to', not because anyone wants to"
+        },
+        "crowdYesPct": 39
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…il existe un sous-groupe qui prend les vraies décisions sans les autres",
+          "en": "…there's a smaller group that makes the real plans without the others"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…quelqu'un parle le plus et écoute le moins, et il est dans cette pièce",
+          "en": "…someone talks the most and listens the least, and they're in this room"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…on aime tous quelqu'un un cran de moins que ce qu'on prétend",
+          "en": "…we all like someone one notch less than we let on"
+        },
+        "crowdYesPct": 31
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…le 'meilleur ami' de quelqu'un ici ne le placerait pas dans son top 3",
+          "en": "…someone's 'best friend' here would not put them in their own top 3"
+        },
+        "crowdYesPct": 26
+      }
+    ]
+  },
+  {
+    "id": "cc-eavesdrop-139",
+    "targetYesPct": 70,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Niveau curiosité mal placée, j'ai déjà…",
+      "en": "On the topic of misplaced nosiness, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…baissé le son de ma musique pour mieux écouter la dispute d'à côté",
+          "en": "…turned down my own music to better hear the argument next door"
+        },
+        "crowdYesPct": 74
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…lu un message sur l'épaule d'un inconnu, puis pris parti dans sa vie",
+          "en": "…read a stranger's text over their shoulder, then picked a side in their life"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…ralenti le pas pour suivre la fin d'une conversation qui ne me regardait pas",
+          "en": "…slowed my walk to catch the end of a conversation that was none of my business"
+        },
+        "crowdYesPct": 66
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…stalké jusqu'en 2018 le nouveau date d'un pote, par 'sécurité'",
+          "en": "…scrolled to 2018 on a friend's new date's page, 'for safety reasons'"
+        },
+        "crowdYesPct": 53
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…tendu l'oreille à un appel privé en faisant semblant de chercher mes clés",
+          "en": "…leaned into someone's private call while pretending to look for my keys"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…ouvert une conversation qui n'était pas pour moi et tout lu jusqu'au bout",
+          "en": "…opened a chat that wasn't meant for me and read every single message"
+        },
+        "crowdYesPct": 33
+      }
+    ]
+  },
+  {
+    "id": "cc-cancelplans-140",
+    "targetYesPct": 90,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Tout le monde sait que…",
+      "en": "Everyone knows that…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…le vrai cadeau, c'est l'autre qui annule en premier",
+          "en": "…the real gift is the other person cancelling first"
+        },
+        "crowdYesPct": 92
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…'on cale ça cette semaine' n'a jamais débouché sur une date",
+          "en": "…'let's sort out a day this week' has never once produced an actual day"
+        },
+        "crowdYesPct": 85
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…confirmer un plan deux heures avant, c'est prier pour un désistement mutuel",
+          "en": "…confirming plans two hours before is just praying for a mutual bail"
+        },
+        "crowdYesPct": 78
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…l'enthousiasme à l'invitation est inversement proportionnel à l'envie d'y aller",
+          "en": "…how excited you sound when invited is inversely proportional to wanting to go"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…il y a un pote dont on espère secrètement qu'il annulera à chaque fois",
+          "en": "…there's one friend we secretly hope cancels every single time"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…quelqu'un ici a déjà annulé sur moi avec une excuse que j'ai fait semblant de croire",
+          "en": "…someone here has bailed on me with an excuse I pretended to believe"
+        },
+        "crowdYesPct": 49
+      }
+    ]
+  },
+  {
+    "id": "cc-flatpack-141",
+    "targetYesPct": 65,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Devant un meuble à monter, j'ai déjà…",
+      "en": "Facing flat-pack furniture, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…ouvert la notice, soupiré, et fermé la notice",
+          "en": "…opened the manual, sighed, and closed the manual"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…fini avec une vis 'en trop' et décidé que c'était décoratif",
+          "en": "…finished with one 'extra' screw and decided it was decorative"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…tout démonté à l'étape 9 parce que l'étape 3 était à l'envers",
+          "en": "…un-built everything at step 9 because step 3 was backwards"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…transformé le montage en grosse dispute de couple ou de coloc",
+          "en": "…turned the assembly into a full-blown couple or roommate argument"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…juré que j'avais 'compris le système' avant de tout faire à l'envers",
+          "en": "…sworn I 'understood the system' before doing the whole thing backwards"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…laissé le meuble à moitié monté assez longtemps pour qu'il devienne 'un style'",
+          "en": "…left it half-built long enough that it became 'a vibe'"
+        },
+        "crowdYesPct": 31
+      }
+    ]
+  },
+  {
+    "id": "cc-pickme-142",
+    "targetYesPct": 50,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Pour qu'on me trouve cool, j'ai déjà…",
+      "en": "To seem effortlessly cool, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…dit que j'aimais un truc niche cinq minutes après l'avoir découvert",
+          "en": "…claimed to be into something niche five minutes after discovering it"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…prétendu 'jamais regarder cette émission' que je connais par cœur",
+          "en": "…pretended to 'never watch that show' I know episode by episode"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…sorti une opinion forte juste pour ne pas être d'accord avec tout le monde",
+          "en": "…dropped a strong opinion purely to disagree with everyone in the room"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…fait semblant d'avoir lu un livre dont j'avais juste lu le résumé",
+          "en": "…faked having read a book I'd only read the summary of"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…minimisé un effort de deux heures en 'oh ça, vite fait'",
+          "en": "…downplayed a two-hour effort as 'oh that, took me a sec'"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…laissé croire que je connaissais quelqu'un de connu, très vaguement",
+          "en": "…let people think I knew someone famous, extremely loosely"
+        },
+        "crowdYesPct": 27
+      }
+    ]
+  },
+  {
+    "id": "cc-grudgematch-143",
+    "targetYesPct": 30,
+    "askKind": "wouldYou",
+    "stem": {
+      "fr": "Là, maintenant, je serais cap de…",
+      "en": "Right now, this second, I could…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…dire à la personne à ma gauche la seule chose qui m'agace chez elle",
+          "en": "…tell the person on my left the one thing about them that bugs me"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…classer tout le monde ici du plus au moins fiable, à voix haute",
+          "en": "…rank everyone here from most to least reliable, out loud"
+        },
+        "crowdYesPct": 24
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…révéler qui, dans cette pièce, m'a déjà déçu sans le savoir",
+          "en": "…name who in this room has let me down without ever knowing it"
+        },
+        "crowdYesPct": 19
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…dire combien je dépenserais pour récupérer un pote, pour chacun ici",
+          "en": "…say how much I'd pay to rescue each person here, individually"
+        },
+        "crowdYesPct": 33
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…désigner qui je balancerais aux zombies en premier, sans débat",
+          "en": "…point at who I'd feed to the zombies first, no debate allowed"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…avouer lequel d'entre vous je n'aurais jamais ajouté si on se rencontrait aujourd'hui",
+          "en": "…admit which of you I'd never have added if we met today"
+        },
+        "crowdYesPct": 16
+      }
+    ]
+  },
+  {
+    "id": "cc-snacking-144",
+    "targetYesPct": 85,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Devant un truc à grignoter, j'ai déjà…",
+      "en": "Around something to snack on, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…dit 'juste un' avec une sincérité absolue, puis menti à moi-même",
+          "en": "…said 'just one' with total sincerity, then lied to my own face"
+        },
+        "crowdYesPct": 88
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…mangé le dernier morceau que tout le monde 'laissait par politesse'",
+          "en": "…taken the last piece everyone was 'leaving out of politeness'"
+        },
+        "crowdYesPct": 72
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…remis le paquet à sa place vide, pour que ce soit le problème de quelqu'un d'autre",
+          "en": "…put the empty pack back so it would become someone else's problem"
+        },
+        "crowdYesPct": 61
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…calculé secrètement combien chacun a pris pour vérifier que j'avais ma part",
+          "en": "…secretly counted how much everyone took to confirm I got my share"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…caché ma réserve perso dans un endroit où personne ne fouille",
+          "en": "…hidden my personal stash somewhere nobody would think to look"
+        },
+        "crowdYesPct": 54
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…accusé quelqu'un d'autre d'avoir fini le truc que j'avais fini",
+          "en": "…blamed someone else for finishing the thing I personally finished"
+        },
+        "crowdYesPct": 37
+      }
+    ]
+  },
+  {
+    "id": "cc-overheard-145",
+    "targetYesPct": 40,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Question commérages assumés, j'ai déjà…",
+      "en": "On the record about gossip, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…rapporté un secret en l'emballant dans un 'je m'inquiète pour lui'",
+          "en": "…passed on a secret wrapped in a heartfelt 'I'm just worried about them'"
+        },
+        "crowdYesPct": 51
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…lancé une rumeur avec 'askip' pour ne pas en être la source",
+          "en": "…started a rumor with 'apparently…' so it couldn't be traced to me"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…fait l'étonné devant une nouvelle que je connaissais avant tout le monde",
+          "en": "…acted shocked at news I knew before literally everyone else"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…posé une question dont je connaissais la réponse pour tester la version de l'autre",
+          "en": "…asked a question I knew the answer to, just to test their version"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…dit 'ça reste entre nous' en sachant que ça tiendrait jusqu'au prochain café",
+          "en": "…said 'this stays between us' knowing it would last until the next coffee"
+        },
+        "crowdYesPct": 39
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…parlé d'un absent au moment précis où il revenait dans la pièce",
+          "en": "…talked about someone at the exact moment they walked back into the room"
+        },
+        "crowdYesPct": 33
+      }
+    ]
+  },
+  {
+    "id": "cc-firstworld-146",
+    "targetYesPct": 95,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Petits drames quotidiens, tous d'accord…",
+      "en": "Tiny daily tragedies, all agreed…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…lancer une machine et retrouver UNE chaussette orpheline, c'est la loi",
+          "en": "…running a wash and finding ONE orphan sock is a law of physics"
+        },
+        "crowdYesPct": 91
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…l'écouteur qui se déconnecte pile au moment du meilleur passage",
+          "en": "…the earbud disconnecting at the exact best part of the song"
+        },
+        "crowdYesPct": 87
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…mordre l'intérieur de la joue au même endroit, deux jours de suite",
+          "en": "…biting the inside of your cheek in the same spot two days running"
+        },
+        "crowdYesPct": 82
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…la pièce qui tombe et roule jusque sous le meuble le plus lourd",
+          "en": "…the coin that drops and rolls straight under the heaviest furniture"
+        },
+        "crowdYesPct": 79
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…dire 'au revoir' puis devoir marcher dans la même direction, en silence",
+          "en": "…saying goodbye then having to walk the same way, in total silence"
+        },
+        "crowdYesPct": 84
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…taper son code de carte alors qu'il fallait juste approcher",
+          "en": "…typing your card PIN when you only needed to tap"
+        },
+        "crowdYesPct": 76
+      }
+    ]
+  },
+  {
+    "id": "cc-couplesfight-147",
+    "targetYesPct": 55,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Les couples, on les voit venir…",
+      "en": "You can spot a couple's fight coming…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…'non non tout va bien' est la phrase la plus dangereuse de toutes",
+          "en": "…'no no, everything's fine' is the single most dangerous sentence"
+        },
+        "crowdYesPct": 88
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…ils nous prennent à témoin et personne ne veut être le juge",
+          "en": "…they drag you in as a witness and nobody wants to be the judge"
+        },
+        "crowdYesPct": 74
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…le couple qui poste le plus de photos est celui qui va le moins bien",
+          "en": "…the couple posting the most photos is doing the worst behind the scenes"
+        },
+        "crowdYesPct": 61
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…la moitié des couples tiennent surtout par flemme de tout séparer",
+          "en": "…half of couples are mostly held together by the hassle of splitting up"
+        },
+        "crowdYesPct": 48
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…il y a un couple dans le groupe dont on a déjà parié la date de rupture",
+          "en": "…there's a couple in the group whose breakup date we've already bet on"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…un couple ici nous fait choisir un camp à chaque soirée, et c'est épuisant",
+          "en": "…one couple here makes us pick a side every party, and it's exhausting"
+        },
+        "crowdYesPct": 35
+      }
+    ]
+  },
+  {
+    "id": "cc-fakeexpert-148",
+    "targetYesPct": 70,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En faux expert total, j'ai déjà…",
+      "en": "In full fake-expert mode, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…expliqué avec assurance un truc que j'avais lu en diagonale ce matin",
+          "en": "…confidently explained something I'd skim-read that very morning"
+        },
+        "crowdYesPct": 73
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…dit 'en vrai c'est simple' avant de tout embrouiller davantage",
+          "en": "…said 'honestly it's simple' right before making it far more confusing"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…défendu une opinion forte sur un pays où je n'ai jamais mis les pieds",
+          "en": "…defended a strong opinion about a country I have never once visited"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…corrigé quelqu'un avant de découvrir que c'était lui qui avait raison",
+          "en": "…corrected someone before discovering they were the one who was right"
+        },
+        "crowdYesPct": 51
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…cité 'une étude' qui était en fait un commentaire vu quelque part",
+          "en": "…cited 'a study' that was in fact a comment I saw somewhere once"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…continué à argumenter alors que je savais déjà que j'avais tort",
+          "en": "…kept arguing long after I privately knew I was wrong"
+        },
+        "crowdYesPct": 42
+      }
+    ]
+  },
+  {
+    "id": "cc-roommatewar-149",
+    "targetYesPct": 35,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En guerre froide de coloc ou de famille, j'ai déjà…",
+      "en": "In a cold war with a roommate or family, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…laissé une seule assiette sale très en évidence, comme un message",
+          "en": "…left one dirty plate very visibly out, as a message"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…noté mentalement chaque fois que c'était moi qui sortais la poubelle",
+          "en": "…kept a running mental tally of every time I was the one taking out the bin"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…lavé exactement ma vaisselle et rien d'autre, par pur principe",
+          "en": "…washed exactly my dishes and nothing else, on pure principle"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…fait du bruit 'innocemment' tôt le matin pour me venger d'une nuit blanche",
+          "en": "…made 'innocent' noise early to get back at someone for a sleepless night"
+        },
+        "crowdYesPct": 33
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…caché mon snack préféré pour qu'il ne 'disparaisse' plus mystérieusement",
+          "en": "…hidden my favourite snack so it would stop 'mysteriously' disappearing"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…convoqué une 'petite réunion' qui était en fait un procès",
+          "en": "…called a 'quick house chat' that was in fact a full trial"
+        },
+        "crowdYesPct": 26
+      }
+    ]
+  },
+  {
+    "id": "cc-airportself-150",
+    "targetYesPct": 60,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Version aéroport de moi-même, j'ai déjà…",
+      "en": "Airport version of myself, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…été à la porte trois heures avant, par pure angoisse",
+          "en": "…been at the gate three hours early out of pure anxiety"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…bu une bière à 7 h du matin parce que 'on est en vacances'",
+          "en": "…had a beer at 7 a.m. because 'technically we're on holiday'"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…couru jusqu'à la porte pour finalement attendre 40 minutes",
+          "en": "…sprinted to the gate only to then wait 40 minutes"
+        },
+        "crowdYesPct": 66
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…tapé dans le duty-free un parfum que je n'ai jamais reporté",
+          "en": "…bought a duty-free perfume I have never worn again"
+        },
+        "crowdYesPct": 39
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…stressé tout le groupe alors que le vol avait deux heures de retard",
+          "en": "…stressed out the whole group when the flight was two hours delayed"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…vérifié mon passeport tellement de fois que j'ai cru l'avoir perdu",
+          "en": "…checked for my passport so many times I convinced myself I'd lost it"
+        },
+        "crowdYesPct": 71
+      }
+    ]
+  },
+  {
+    "id": "cc-wouldsell-151",
+    "targetYesPct": 50,
+    "askKind": "wouldYou",
+    "stem": {
+      "fr": "Pour 200 €, je…",
+      "en": "For two hundred bucks, I'd…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…laisserais le groupe poster LA photo dossier qu'ils ont tous gardée de moi",
+          "en": "…let the group post THE blackmail photo they've all secretly kept of me"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…lirais à voix haute le dernier message envoyé à mon ex",
+          "en": "…read out loud the last message I ever sent my ex"
+        },
+        "crowdYesPct": 33
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…révélerais mon vrai temps d'écran de la semaine, au groupe entier",
+          "en": "…reveal my real weekly screen time to the entire group"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…porterais sur moi une pancarte avec mon défaut le plus pénible, une soirée",
+          "en": "…wear a sign listing my most annoying trait for a full night out"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…vendrais le secret le plus juteux du groupe sans aucune négociation",
+          "en": "…sell this group's juiciest secret with zero negotiation"
+        },
+        "crowdYesPct": 29
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…rendrais mon téléphone au groupe pendant exactement une minute, sans regarder",
+          "en": "…hand my phone to the group for exactly one minute, without watching"
+        },
+        "crowdYesPct": 22
+      }
+    ]
+  },
+  {
+    "id": "cc-deniedfeelings-152",
+    "targetYesPct": 75,
+    "askKind": "agree",
+    "stem": {
+      "fr": "On le dit jamais à voix haute, mais…",
+      "en": "Nobody says it out loud, but…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…on adore secrètement le drama des autres groupes d'amis",
+          "en": "…we secretly love other friend groups' drama like a free show"
+        },
+        "crowdYesPct": 86
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…apprendre l'échec de quelqu'un qui nous a snobé fait un bien fou",
+          "en": "…hearing about the downfall of someone who snubbed us feels genuinely amazing"
+        },
+        "crowdYesPct": 73
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…on garde certains potes surtout pour leurs anecdotes, pas pour eux",
+          "en": "…we keep certain friends mostly for the stories, not for them"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…on a tous un compte qu'on suit uniquement pour juger sa vie",
+          "en": "…we all follow one account purely to judge their life choices"
+        },
+        "crowdYesPct": 81
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…on a déjà été soulagé qu'un date d'un pote tombe à l'eau, pour le récit",
+          "en": "…we've been quietly relieved a friend's date flopped, just for the story"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…au moins une amitié ici tient surtout par habitude, et on le sait",
+          "en": "…at least one friendship here survives mostly on habit, and we know it"
+        },
+        "crowdYesPct": 52
+      }
+    ]
+  },
+  {
+    "id": "cc-laundryday-153",
+    "targetYesPct": 65,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Côté lessive et ménage, j'ai déjà…",
+      "en": "On laundry and cleaning, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…repoussé une lessive en achetant des sous-vêtements neufs, c'était plus simple",
+          "en": "…dodged laundry by buying new underwear, it was simply easier"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…porté un haut sorti du panier après le test olfactif réglementaire",
+          "en": "…worn a top straight from the basket after the official smell test"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…laissé du linge propre 'à plier' assez longtemps pour qu'il se froisse à nouveau",
+          "en": "…left clean laundry 'to fold' so long it became wrinkled again"
+        },
+        "crowdYesPct": 79
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…fait un grand ménage uniquement parce que quelqu'un venait",
+          "en": "…deep-cleaned the place only because someone was coming over"
+        },
+        "crowdYesPct": 84
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…poussé tout le bazar dans une pièce dont je fermais la porte",
+          "en": "…shoved all the mess into one room and shut the door on it"
+        },
+        "crowdYesPct": 68
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…rallumé le sèche-linge juste pour ne pas avoir à plier maintenant",
+          "en": "…re-run the dryer just to avoid folding it right now"
+        },
+        "crowdYesPct": 44
+      }
+    ]
+  },
+  {
+    "id": "cc-overpromise-154",
+    "targetYesPct": 80,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En promettant plus que je ne tiens, j'ai déjà…",
+      "en": "Over-promising what I'd never deliver, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…dit 'la prochaine tournée est pour moi' en priant qu'il n'y en ait pas",
+          "en": "…said 'next round's on me' while praying there'd be no next round"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…proposé 'tu peux dormir chez moi' sans avoir le moindre lit prêt",
+          "en": "…offered 'you can crash at mine' with absolutely no spare bed ready"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…juré 'je t'aide à déménager' puis trouvé un imprévu providentiel",
+          "en": "…swore 'I'll help you move' then conveniently developed an emergency"
+        },
+        "crowdYesPct": 53
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…dit 'je te rends ça demain' à propos d'un objet que je considère désormais mien",
+          "en": "…said 'I'll give it back tomorrow' about a thing I now consider mine"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…promis 'on s'appelle' sans aucune intention d'appeler, jamais",
+          "en": "…promised 'we'll call each other' with no intention of ever calling"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…lancé 'compte sur moi' avant de réaliser ce que ça impliquait vraiment",
+          "en": "…said 'you can count on me' before realizing what it actually involved"
+        },
+        "crowdYesPct": 58
+      }
+    ]
+  },
+  {
+    "id": "cc-cheatgame-155",
+    "targetYesPct": 45,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En soirée jeux, version sans pitié, j'ai déjà…",
+      "en": "On game night, ruthless edition, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…inventé une règle au beau milieu de la partie, pile quand ça m'arrangeait",
+          "en": "…invented a rule mid-game, precisely when it suited me"
+        },
+        "crowdYesPct": 51
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…fait alliance avec quelqu'un pour le trahir à la seconde parfaite",
+          "en": "…allied with someone purely to betray them at the perfect second"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…visé une seule personne toute la partie, par pure rancune personnelle",
+          "en": "…targeted one specific person all game, out of pure personal spite"
+        },
+        "crowdYesPct": 53
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…fait gagner quelqu'un exprès, juste pour qu'un autre perde",
+          "en": "…handed someone the win on purpose, just so a different person would lose"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…menacé de renverser le plateau, et failli vraiment le faire",
+          "en": "…threatened to flip the board, and very nearly went through with it"
+        },
+        "crowdYesPct": 31
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…gâché l'ambiance d'une soirée entière pour un jeu de société, sans regret",
+          "en": "…ruined an entire night's mood over a board game, with zero regret"
+        },
+        "crowdYesPct": 27
+      }
+    ]
+  },
+  {
+    "id": "cc-mainquest-156",
+    "targetYesPct": 55,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En personnage principal de ma propre vie, j'ai déjà…",
+      "en": "As the main character of my own life, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…rejoué une dispute dans ma tête et gagné avec une réplique parfaite",
+          "en": "…replayed an argument in my head and won it with a flawless comeback"
+        },
+        "crowdYesPct": 79
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…cru qu'une chanson passait exactement pour mon moment, à cet instant",
+          "en": "…been certain a song was playing exactly for my moment, right then"
+        },
+        "crowdYesPct": 61
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…imaginé le documentaire qu'on tournerait un jour sur ma vie",
+          "en": "…pictured the documentary they'll one day make about my life"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…préparé une phrase 'spontanée' pour la sortir au bon moment",
+          "en": "…pre-loaded a 'spontaneous' line to deliver at exactly the right moment"
+        },
+        "crowdYesPct": 54
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…secrètement pensé être la personne la plus normale du groupe",
+          "en": "…secretly believed I'm the most normal person in the friend group"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…supposé être le pote préféré de tout le monde ici, sans aucune preuve",
+          "en": "…assumed I'm everyone's favourite friend here, with zero supporting evidence"
+        },
+        "crowdYesPct": 36
+      }
+    ]
+  },
+  {
+    "id": "cc-fivepercent-157",
+    "targetYesPct": 5,
+    "askKind": "wouldYou",
+    "stem": {
+      "fr": "Pour 50 € seulement, je…",
+      "en": "For just fifty bucks, I'd…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…laisserais le groupe lire tous mes messages d'aujourd'hui, sans tri",
+          "en": "…let the group read every text I sent today, completely unfiltered"
+        },
+        "crowdYesPct": 11
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…appellerais mon ex en haut-parleur, là, devant tout le monde",
+          "en": "…call my ex on speaker, right now, in front of everyone"
+        },
+        "crowdYesPct": 6
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…dirais en face à chacun ici sa pire qualité, sans amortir",
+          "en": "…tell each person here their worst quality, to their face, no cushioning"
+        },
+        "crowdYesPct": 14
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…me lèverais à 5 h pour aider un quasi-inconnu à déménager un piano",
+          "en": "…wake up at 5 a.m. to help a near-stranger move a piano"
+        },
+        "crowdYesPct": 9
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…laisserais ma localisation visible par tout le groupe pendant un mois",
+          "en": "…leave my live location visible to the whole group for a month"
+        },
+        "crowdYesPct": 17
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…révélerais le montant exact que j'ai sur mon compte, à la décimale",
+          "en": "…reveal the exact amount in my bank account, to the cent"
+        },
+        "crowdYesPct": 8
+      }
+    ]
+  },
+  {
+    "id": "cc-newcity-158",
+    "targetYesPct": 30,
+    "askKind": "wouldYou",
+    "stem": {
+      "fr": "Pour repartir à zéro, je serais cap de…",
+      "en": "To start completely over, I could honestly…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…déménager dans une autre ville sans prévenir personne d'ici",
+          "en": "…move to a different city without telling a single person here"
+        },
+        "crowdYesPct": 27
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…quitter mon boulot par message vocal, à 9 h pile",
+          "en": "…quit my job via voice note, at 9 a.m. sharp"
+        },
+        "crowdYesPct": 19
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…supprimer toutes mes applis sociales pendant six mois entiers",
+          "en": "…delete every social app for six full months"
+        },
+        "crowdYesPct": 33
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…couper les ponts avec une personne du groupe sans une explication",
+          "en": "…cut off one person in this group without a word of explanation"
+        },
+        "crowdYesPct": 16
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…changer complètement de style en assumant le regard de tout le monde ici",
+          "en": "…totally reinvent my style and face every single one of you about it"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…repartir avec un seul sac et abandonner tout le reste sur place",
+          "en": "…leave with one bag and abandon literally everything else where it stands"
+        },
+        "crowdYesPct": 24
+      }
+    ]
+  },
+  {
+    "id": "cc-secondhand-159",
+    "targetYesPct": 70,
+    "askKind": "agree",
+    "stem": {
+      "fr": "La honte par procuration, c'est réel…",
+      "en": "Second-hand embarrassment is very real…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…voir quelqu'un rater une blague devant tout le monde fait physiquement mal",
+          "en": "…watching someone bomb a joke in front of everyone physically hurts"
+        },
+        "crowdYesPct": 78
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…on a tous déjà quitté une pièce à cause d'une gêne qui n'était pas la nôtre",
+          "en": "…we've all left a room over an awkward moment that wasn't even ours"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…revivre une vieille honte à soi à 3 h du matin, c'est un sport national",
+          "en": "…reliving your own old cringe at 3 a.m. is basically a national sport"
+        },
+        "crowdYesPct": 81
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…il y a une scène d'un film qu'on ne peut littéralement pas regarder",
+          "en": "…there's a scene in one film we genuinely cannot bring ourselves to watch"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…voir un pote draguer mal, c'est pire que de le faire soi-même",
+          "en": "…watching a friend flirt badly is worse than doing it yourself"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…quelqu'un ici a déjà déclenché chez nous une honte par procuration record",
+          "en": "…someone in this room has caused us record-breaking second-hand cringe"
+        },
+        "crowdYesPct": 43
+      }
+    ]
+  },
+  {
+    "id": "cc-wouldtell-160",
+    "targetYesPct": 40,
+    "askKind": "wouldYou",
+    "stem": {
+      "fr": "Si on me payait pour être brutalement honnête, je…",
+      "en": "If I got paid to be brutally honest, I'd…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…dirais à un couple d'amis, en face, que ça ne passera pas l'année",
+          "en": "…tell a couple in this group, to their faces, it won't last the year"
+        },
+        "crowdYesPct": 23
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…avouerais à un pote que son projet dont il parle depuis un an est mauvais",
+          "en": "…tell a friend the project he's pitched for a year is genuinely bad"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…annoncerais qui, dans cette pièce, raconte la même histoire en boucle",
+          "en": "…announce who in this room tells the same story on a loop"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…dirais à un proche que sa coupe d'il y a deux ans était une erreur",
+          "en": "…tell someone close that their haircut two years ago was a mistake"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…révélerais lequel de mes potes parle le plus mal des autres",
+          "en": "…reveal which of my friends talks the most trash about the others"
+        },
+        "crowdYesPct": 31
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…dirais à mes darons lequel des deux est, soyons clairs, mon préféré",
+          "en": "…tell my parents which of the two is, let's be honest, my favourite"
+        },
+        "crowdYesPct": 19
+      }
+    ]
+  },
+  {
+    "id": "cc-saturdaynight-161",
+    "targetYesPct": 60,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Un samedi soir, j'ai déjà…",
+      "en": "On a Saturday night, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…annulé une sortie pour rester au lit, et vécu ça comme une victoire totale",
+          "en": "…cancelled a night out to stay in bed and experienced it as total victory"
+        },
+        "crowdYesPct": 76
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…dit 'je sors 30 minutes' et fermé le bar avec le personnel",
+          "en": "…said 'I'm staying 30 minutes' and closed the bar with the staff"
+        },
+        "crowdYesPct": 64
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…mis deux heures à me préparer pour finir par ne pas y aller",
+          "en": "…spent two hours getting ready only to not go at all"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…envoyé 'j'arrive' depuis mon canapé, douche même pas lancée",
+          "en": "…texted 'on my way' from my couch, shower not even started"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…fait semblant d'être déjà sorti pour ne pas avoir à expliquer que non",
+          "en": "…pretended I was already out to avoid explaining that I wasn't"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…regretté de ne pas être sorti, sans rien faire pour y remédier",
+          "en": "…regretted not going out, while doing absolutely nothing about it"
+        },
+        "crowdYesPct": 58
+      }
+    ]
+  },
+  {
+    "id": "cc-petnames-162",
+    "targetYesPct": 50,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Niveau honte douce et privée, j'ai déjà…",
+      "en": "On the soft, private cringe ledger, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…parlé à mon animal comme à un avocat, en lui demandant son avis",
+          "en": "…talked to my pet like a lawyer, genuinely asking for their opinion"
+        },
+        "crowdYesPct": 63
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…gardé une conversation entière avec moi-même sous la douche",
+          "en": "…held a full conversation with myself in the shower"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…répété à voix haute une phrase 'spontanée' avant un appel important",
+          "en": "…rehearsed a 'spontaneous' line out loud before an important call"
+        },
+        "crowdYesPct": 58
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…ri tout seul dans la rue à un souvenir, en croisant le regard d'un inconnu",
+          "en": "…laughed alone in the street at a memory, locking eyes with a stranger"
+        },
+        "crowdYesPct": 54
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…donné un petit surnom secret à un objet du quotidien",
+          "en": "…given a secret little nickname to a household object"
+        },
+        "crowdYesPct": 39
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…fait un câlin à mon coussin comme à un être humain, sans honte",
+          "en": "…hugged a pillow like an actual person, no shame attached"
+        },
+        "crowdYesPct": 47
+      }
+    ]
+  },
+  {
+    "id": "cc-momfriend-163",
+    "targetYesPct": 45,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "En 'parent du groupe' non rémunéré, j'ai déjà…",
+      "en": "As the group's unpaid parent, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…tenu les affaires de tout le monde pendant qu'ils s'amusaient",
+          "en": "…held everyone's stuff while they all went off to have fun"
+        },
+        "crowdYesPct": 56
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…compté les têtes en sortie comme une maîtresse d'école stressée",
+          "en": "…counted heads on a night out like a stressed primary school teacher"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…ramené quelqu'un chez lui en notant mentalement qu'on me remerciera jamais",
+          "en": "…walked someone home while mentally noting I'd never be thanked"
+        },
+        "crowdYesPct": 44
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…avancé l'argent pour tous puis traqué chaque remboursement à l'euro près",
+          "en": "…fronted the money for everyone then chased every repayment to the cent"
+        },
+        "crowdYesPct": 52
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…gardé une rancune silencieuse contre le pote qui n'organise jamais rien",
+          "en": "…held a silent grudge against the friend who never plans a single thing"
+        },
+        "crowdYesPct": 47
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…secrètement adoré être indispensable, tout en m'en plaignant à voix haute",
+          "en": "…secretly loved being indispensable, while loudly complaining about it"
+        },
+        "crowdYesPct": 38
+      }
+    ]
+  },
+  {
+    "id": "cc-impulse-164",
+    "targetYesPct": 65,
+    "askKind": "didYou",
+    "stem": {
+      "fr": "Sur un coup de tête, j'ai déjà…",
+      "en": "On a pure impulse, I have…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…acheté un truc à 23 h que j'ai regretté avant même la livraison",
+          "en": "…bought something at 11 p.m. I regretted before it even shipped"
+        },
+        "crowdYesPct": 71
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…coupé moi-même mes cheveux dans la salle de bain, par confiance excessive",
+          "en": "…cut my own hair in the bathroom out of dangerous overconfidence"
+        },
+        "crowdYesPct": 41
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…réservé un voyage que je n'avais ni le temps ni l'argent de faire",
+          "en": "…booked a trip I had neither the time nor the money to take"
+        },
+        "crowdYesPct": 38
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…envoyé un message important sans relire, et prié immédiatement après",
+          "en": "…sent an important text without re-reading and prayed immediately after"
+        },
+        "crowdYesPct": 54
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…adopté un nouveau loisir coûteux, abandonné en deux semaines",
+          "en": "…picked up an expensive new hobby, abandoned within two weeks"
+        },
+        "crowdYesPct": 49
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…dit oui à un plan douteux juste pour ne pas avoir l'air rabat-joie",
+          "en": "…said yes to a questionable plan just to avoid being the buzzkill"
+        },
+        "crowdYesPct": 62
+      }
+    ]
+  },
+  {
+    "id": "cc-undeniable-165",
+    "targetYesPct": 95,
+    "askKind": "agree",
+    "stem": {
+      "fr": "Vérités que personne n'osera contredire…",
+      "en": "Truths nobody at this table will dare deny…"
+    },
+    "completions": [
+      {
+        "id": "a",
+        "text": {
+          "fr": "…retrouver un truc qu'on croyait perdu pour toujours, c'est de l'euphorie pure",
+          "en": "…finding something you'd given up for lost is pure, undiluted euphoria"
+        },
+        "crowdYesPct": 94
+      },
+      {
+        "id": "b",
+        "text": {
+          "fr": "…le côté frais de l'oreiller à 3 h du matin est un petit miracle",
+          "en": "…the cool side of the pillow at 3 a.m. is a genuine small miracle"
+        },
+        "crowdYesPct": 90
+      },
+      {
+        "id": "c",
+        "text": {
+          "fr": "…le 'tu m'as manqué' d'un animal après une journée bat tous les humains",
+          "en": "…a pet missing you after one day beats every human being's welcome"
+        },
+        "crowdYesPct": 84
+      },
+      {
+        "id": "d",
+        "text": {
+          "fr": "…une sieste non prévue est meilleure que n'importe quel sommeil planifié",
+          "en": "…an unplanned nap is better than any sleep you actually scheduled"
+        },
+        "crowdYesPct": 88
+      },
+      {
+        "id": "e",
+        "text": {
+          "fr": "…le pain offert au resto disparaît toujours avant le plat",
+          "en": "…the free bread at a restaurant is always gone before the mains arrive"
+        },
+        "crowdYesPct": 80
+      },
+      {
+        "id": "f",
+        "text": {
+          "fr": "…enlever ses chaussures en rentrant, c'est le vrai début du week-end",
+          "en": "…taking your shoes off the moment you get home is the weekend's real start"
+        },
+        "crowdYesPct": 86
       }
     ]
   }

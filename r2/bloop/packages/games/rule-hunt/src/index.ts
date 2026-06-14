@@ -12,6 +12,7 @@ export type {
   RuleHuntAction,
   RuleHuntConfig,
   RuleHuntContent,
+  RuleHuntEpilogue,
   RuleHuntPhase,
   RuleHuntRole,
   RuleHuntState,

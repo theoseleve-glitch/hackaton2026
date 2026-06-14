@@ -51,6 +51,16 @@ export const wheelItems: ScaleItem[] = [
     low: { fr: 'Fier en public', en: 'Proudly in public' },
     high: { fr: 'Rideaux tirés', en: 'Blinds down' },
   },
+  // Third wheel item: keeps round 0 OUTSIDE the late-round multiplier window
+  // (JEU_DE_LA_NOTE_CONFIG boosts the last 2 rounds; a 3-round pool leaves r0 ×1),
+  // so the band-ladder assertions read the pure ×1 bands they are testing.
+  {
+    id: 'wh-skill',
+    kind: 'wheel100',
+    prompt: { fr: 'Cite un talent placé ici sur la roue.', en: 'Name a skill that sits here on the wheel.' },
+    low: { fr: 'Catastrophe ambulante', en: 'Walking disaster' },
+    high: { fr: 'Niveau pro', en: 'Pro level' },
+  },
 ];
 
 export const reverseItems: ReverseItem[] = [

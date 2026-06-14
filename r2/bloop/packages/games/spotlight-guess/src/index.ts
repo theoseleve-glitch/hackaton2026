@@ -13,6 +13,7 @@ export {
   type ScaleItem,
   type ScaleItemView,
   type ScaleRound,
+  type SpotlightEpilogue,
   type SpotlightGuessAction,
   type SpotlightGuessConfig,
   type SpotlightGuessContent,

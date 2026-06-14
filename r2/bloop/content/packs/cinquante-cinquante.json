@@ -2114,6 +2114,1014 @@
       ],
       "tone": "classic",
       "tags": ["party", "meta"]
+    },
+    {
+      "id": "cc-snitch-133",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": { "fr": "Soyons honnêtes deux secondes…", "en": "Real for two seconds…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…'je dis ça pour ton bien' veut dire 'je vais te démolir, mais poliment'", "en": "…'I'm telling you this as a friend' means 'I'm about to wreck you, politely'" }, "crowdYesPct": 90 },
+        { "id": "b", "text": { "fr": "…dans chaque groupe, quelqu'un retient toutes les dettes au centime près", "en": "…every group has one person tracking every debt down to the last cent" }, "crowdYesPct": 84 },
+        { "id": "c", "text": { "fr": "…on a tous un pote dont on accepte l'invit en sachant qu'on annulera", "en": "…we all have one friend whose invite we accept already planning to bail" }, "crowdYesPct": 76 },
+        { "id": "d", "text": { "fr": "…tout le monde ici a déjà parlé d'un absent à la seconde où il sortait", "en": "…everyone here has started talking about someone the second they left the room" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…le pote 'trop honnête' est juste méchant avec un alibi", "en": "…the 'I'm just brutally honest' friend is just mean with a cover story" }, "crowdYesPct": 64 },
+        { "id": "f", "text": { "fr": "…il y a une personne dans cette pièce que personne n'inviterait en premier", "en": "…there is one person in this room nobody would invite first" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["social", "opinions"]
+    },
+    {
+      "id": "cc-broke-134",
+      "targetYesPct": 75,
+      "askKind": "didYou",
+      "stem": { "fr": "En mode fin de mois, j'ai déjà…", "en": "In end-of-the-month survival mode, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…vérifié mon solde comme on désamorce une bombe", "en": "…checked my balance like I was defusing a bomb" }, "crowdYesPct": 82 },
+        { "id": "b", "text": { "fr": "…refusé une sortie en inventant un 'truc de prévu' qui était zéro euro", "en": "…declined a night out with a fake 'plans' that were actually being broke" }, "crowdYesPct": 73 },
+        { "id": "c", "text": { "fr": "…mangé exactement ce qu'il restait, dans un ordre douteux", "en": "…eaten whatever was left, in a deeply questionable order" }, "crowdYesPct": 68 },
+        { "id": "d", "text": { "fr": "…laissé un pote payer en jurant 'je te rends demain' (on est demain)", "en": "…let a friend cover me swearing 'I'll pay you back tomorrow' (it is now tomorrow)" }, "crowdYesPct": 55 },
+        { "id": "e", "text": { "fr": "…annulé un abonnement le jour du prélèvement, à la seconde près", "en": "…cancelled a subscription on billing day, down to the minute" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…demandé 'tu peux m'avancer' à quelqu'un que je dois déjà rembourser", "en": "…asked 'can you spot me' from a person I already owe money to" }, "crowdYesPct": 36 }
+      ],
+      "tone": "classic",
+      "tags": ["money", "confessions"]
+    },
+    {
+      "id": "cc-pettyrevenge-135",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau micro-vengeance, j'ai déjà…", "en": "On the petty-revenge ledger, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…repris MA chaise pile quand l'autre se levait deux secondes", "en": "…reclaimed MY chair the exact second they got up for two seconds" }, "crowdYesPct": 58 },
+        { "id": "b", "text": { "fr": "…laissé 'lu' un message en sachant très bien l'effet que ça fait", "en": "…left someone on read knowing full well what it does to a person" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…fait exprès de finir le truc que quelqu'un 'gardait pour plus tard'", "en": "…deliberately finished the thing someone was 'saving for later'" }, "crowdYesPct": 51 },
+        { "id": "d", "text": { "fr": "…remonté une vieille embrouille au pire moment, juste pour gagner", "en": "…brought up an old fight at the worst moment, purely to win the new one" }, "crowdYesPct": 43 },
+        { "id": "e", "text": { "fr": "…retiré un like sur un post pour faire passer un message à UNE personne", "en": "…un-liked someone's post to send a silent message to exactly one person" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…gardé une rancune si vieille que la personne a oublié le crime initial", "en": "…held a grudge so old the other person forgot the original crime" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-grouppic-136",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Pour une photo de groupe, j'ai déjà…", "en": "For a group photo, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…réclamé une deuxième prise uniquement parce que MOI j'étais mal dessus", "en": "…demanded a re-take only because I personally looked bad in the first one" }, "crowdYesPct": 67 },
+        { "id": "b", "text": { "fr": "…vérifié ma tête en premier, le reste du groupe en option", "en": "…checked my own face first, everyone else's strictly optional" }, "crowdYesPct": 79 },
+        { "id": "c", "text": { "fr": "…posté une photo où un pote était flou et raté, sans culpabiliser", "en": "…posted a photo where a friend looked blurry and rough, with zero guilt" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…gardé en secret la version où tout le monde est moche sauf moi", "en": "…secretly kept the version where everyone looks bad except me" }, "crowdYesPct": 52 },
+        { "id": "e", "text": { "fr": "…recadré un pote hors de la photo pour avoir le meilleur angle sur moi", "en": "…cropped a friend out of the shot to get the best angle on myself" }, "crowdYesPct": 38 },
+        { "id": "f", "text": { "fr": "…fait recommencer cinq fois jusqu'à ce que MOI je sois parfait, au détriment de tous", "en": "…made everyone redo it five times until I was perfect, at the whole group's expense" }, "crowdYesPct": 29 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "social"]
+    },
+    {
+      "id": "cc-textback-137",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "Question réponses aux messages, j'ai déjà…", "en": "On the matter of replying to texts, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…vu un message, pensé 'je réponds plus tard', et trahi cette promesse trois jours", "en": "…seen a text, thought 'I'll reply later', and betrayed that vow for three days" }, "crowdYesPct": 88 },
+        { "id": "b", "text": { "fr": "…répondu à la vitesse de l'éclair à une personne, et en 48 h à une autre", "en": "…replied at light speed to one person and in 48 hours to another" }, "crowdYesPct": 81 },
+        { "id": "c", "text": { "fr": "…tapé une réponse complète puis tout effacé pour mettre juste un emoji", "en": "…typed a full reply then deleted it all to send a single emoji" }, "crowdYesPct": 70 },
+        { "id": "d", "text": { "fr": "…laissé exprès en 'vu' une personne précise, une seule, vous savez qui", "en": "…deliberately left one specific person on read, just one, you know who" }, "crowdYesPct": 54 },
+        { "id": "e", "text": { "fr": "…répondu 'haha' à un truc pas drôle pour clore la conversation", "en": "…replied 'haha' to something not funny just to end the conversation" }, "crowdYesPct": 73 },
+        { "id": "f", "text": { "fr": "…attendu pile le double de son temps de réponse, par principe", "en": "…waited exactly double their reply time back, on principle" }, "crowdYesPct": 41 }
+      ],
+      "tone": "classic",
+      "tags": ["tech", "relatable"]
+    },
+    {
+      "id": "cc-favouritism-138",
+      "targetYesPct": 35,
+      "askKind": "agree",
+      "stem": { "fr": "Dans tout groupe d'amis…", "en": "In every friend group…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…il y a un classement officieux, et tout le monde connaît sa place", "en": "…there's an unspoken ranking, and everyone knows exactly where they sit" }, "crowdYesPct": 48 },
+        { "id": "b", "text": { "fr": "…une personne est invitée 'parce qu'il faut bien', pas parce qu'on veut", "en": "…one person gets invited 'because we have to', not because anyone wants to" }, "crowdYesPct": 39 },
+        { "id": "c", "text": { "fr": "…il existe un sous-groupe qui prend les vraies décisions sans les autres", "en": "…there's a smaller group that makes the real plans without the others" }, "crowdYesPct": 52 },
+        { "id": "d", "text": { "fr": "…quelqu'un parle le plus et écoute le moins, et il est dans cette pièce", "en": "…someone talks the most and listens the least, and they're in this room" }, "crowdYesPct": 44 },
+        { "id": "e", "text": { "fr": "…on aime tous quelqu'un un cran de moins que ce qu'on prétend", "en": "…we all like someone one notch less than we let on" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…le 'meilleur ami' de quelqu'un ici ne le placerait pas dans son top 3", "en": "…someone's 'best friend' here would not put them in their own top 3" }, "crowdYesPct": 26 }
+      ],
+      "tone": "classic",
+      "tags": ["social", "opinions"]
+    },
+    {
+      "id": "cc-eavesdrop-139",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau curiosité mal placée, j'ai déjà…", "en": "On the topic of misplaced nosiness, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…baissé le son de ma musique pour mieux écouter la dispute d'à côté", "en": "…turned down my own music to better hear the argument next door" }, "crowdYesPct": 74 },
+        { "id": "b", "text": { "fr": "…lu un message sur l'épaule d'un inconnu, puis pris parti dans sa vie", "en": "…read a stranger's text over their shoulder, then picked a side in their life" }, "crowdYesPct": 58 },
+        { "id": "c", "text": { "fr": "…ralenti le pas pour suivre la fin d'une conversation qui ne me regardait pas", "en": "…slowed my walk to catch the end of a conversation that was none of my business" }, "crowdYesPct": 66 },
+        { "id": "d", "text": { "fr": "…stalké jusqu'en 2018 le nouveau date d'un pote, par 'sécurité'", "en": "…scrolled to 2018 on a friend's new date's page, 'for safety reasons'" }, "crowdYesPct": 53 },
+        { "id": "e", "text": { "fr": "…tendu l'oreille à un appel privé en faisant semblant de chercher mes clés", "en": "…leaned into someone's private call while pretending to look for my keys" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…ouvert une conversation qui n'était pas pour moi et tout lu jusqu'au bout", "en": "…opened a chat that wasn't meant for me and read every single message" }, "crowdYesPct": 33 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-cancelplans-140",
+      "targetYesPct": 90,
+      "askKind": "agree",
+      "stem": { "fr": "Tout le monde sait que…", "en": "Everyone knows that…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…le vrai cadeau, c'est l'autre qui annule en premier", "en": "…the real gift is the other person cancelling first" }, "crowdYesPct": 92 },
+        { "id": "b", "text": { "fr": "…'on cale ça cette semaine' n'a jamais débouché sur une date", "en": "…'let's sort out a day this week' has never once produced an actual day" }, "crowdYesPct": 85 },
+        { "id": "c", "text": { "fr": "…confirmer un plan deux heures avant, c'est prier pour un désistement mutuel", "en": "…confirming plans two hours before is just praying for a mutual bail" }, "crowdYesPct": 78 },
+        { "id": "d", "text": { "fr": "…l'enthousiasme à l'invitation est inversement proportionnel à l'envie d'y aller", "en": "…how excited you sound when invited is inversely proportional to wanting to go" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…il y a un pote dont on espère secrètement qu'il annulera à chaque fois", "en": "…there's one friend we secretly hope cancels every single time" }, "crowdYesPct": 58 },
+        { "id": "f", "text": { "fr": "…quelqu'un ici a déjà annulé sur moi avec une excuse que j'ai fait semblant de croire", "en": "…someone here has bailed on me with an excuse I pretended to believe" }, "crowdYesPct": 49 }
+      ],
+      "tone": "classic",
+      "tags": ["social", "relatable"]
+    },
+    {
+      "id": "cc-flatpack-141",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Devant un meuble à monter, j'ai déjà…", "en": "Facing flat-pack furniture, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…ouvert la notice, soupiré, et fermé la notice", "en": "…opened the manual, sighed, and closed the manual" }, "crowdYesPct": 71 },
+        { "id": "b", "text": { "fr": "…fini avec une vis 'en trop' et décidé que c'était décoratif", "en": "…finished with one 'extra' screw and decided it was decorative" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…tout démonté à l'étape 9 parce que l'étape 3 était à l'envers", "en": "…un-built everything at step 9 because step 3 was backwards" }, "crowdYesPct": 56 },
+        { "id": "d", "text": { "fr": "…transformé le montage en grosse dispute de couple ou de coloc", "en": "…turned the assembly into a full-blown couple or roommate argument" }, "crowdYesPct": 49 },
+        { "id": "e", "text": { "fr": "…juré que j'avais 'compris le système' avant de tout faire à l'envers", "en": "…sworn I 'understood the system' before doing the whole thing backwards" }, "crowdYesPct": 52 },
+        { "id": "f", "text": { "fr": "…laissé le meuble à moitié monté assez longtemps pour qu'il devienne 'un style'", "en": "…left it half-built long enough that it became 'a vibe'" }, "crowdYesPct": 31 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "fails"]
+    },
+    {
+      "id": "cc-pickme-142",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Pour qu'on me trouve cool, j'ai déjà…", "en": "To seem effortlessly cool, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit que j'aimais un truc niche cinq minutes après l'avoir découvert", "en": "…claimed to be into something niche five minutes after discovering it" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…prétendu 'jamais regarder cette émission' que je connais par cœur", "en": "…pretended to 'never watch that show' I know episode by episode" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…sorti une opinion forte juste pour ne pas être d'accord avec tout le monde", "en": "…dropped a strong opinion purely to disagree with everyone in the room" }, "crowdYesPct": 41 },
+        { "id": "d", "text": { "fr": "…fait semblant d'avoir lu un livre dont j'avais juste lu le résumé", "en": "…faked having read a book I'd only read the summary of" }, "crowdYesPct": 52 },
+        { "id": "e", "text": { "fr": "…minimisé un effort de deux heures en 'oh ça, vite fait'", "en": "…downplayed a two-hour effort as 'oh that, took me a sec'" }, "crowdYesPct": 58 },
+        { "id": "f", "text": { "fr": "…laissé croire que je connaissais quelqu'un de connu, très vaguement", "en": "…let people think I knew someone famous, extremely loosely" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-grudgematch-143",
+      "targetYesPct": 30,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Là, maintenant, je serais cap de…", "en": "Right now, this second, I could…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dire à la personne à ma gauche la seule chose qui m'agace chez elle", "en": "…tell the person on my left the one thing about them that bugs me" }, "crowdYesPct": 38 },
+        { "id": "b", "text": { "fr": "…classer tout le monde ici du plus au moins fiable, à voix haute", "en": "…rank everyone here from most to least reliable, out loud" }, "crowdYesPct": 24 },
+        { "id": "c", "text": { "fr": "…révéler qui, dans cette pièce, m'a déjà déçu sans le savoir", "en": "…name who in this room has let me down without ever knowing it" }, "crowdYesPct": 19 },
+        { "id": "d", "text": { "fr": "…dire combien je dépenserais pour récupérer un pote, pour chacun ici", "en": "…say how much I'd pay to rescue each person here, individually" }, "crowdYesPct": 33 },
+        { "id": "e", "text": { "fr": "…désigner qui je balancerais aux zombies en premier, sans débat", "en": "…point at who I'd feed to the zombies first, no debate allowed" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…avouer lequel d'entre vous je n'aurais jamais ajouté si on se rencontrait aujourd'hui", "en": "…admit which of you I'd never have added if we met today" }, "crowdYesPct": 16 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "social"]
+    },
+    {
+      "id": "cc-snacking-144",
+      "targetYesPct": 85,
+      "askKind": "didYou",
+      "stem": { "fr": "Devant un truc à grignoter, j'ai déjà…", "en": "Around something to snack on, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit 'juste un' avec une sincérité absolue, puis menti à moi-même", "en": "…said 'just one' with total sincerity, then lied to my own face" }, "crowdYesPct": 88 },
+        { "id": "b", "text": { "fr": "…mangé le dernier morceau que tout le monde 'laissait par politesse'", "en": "…taken the last piece everyone was 'leaving out of politeness'" }, "crowdYesPct": 72 },
+        { "id": "c", "text": { "fr": "…remis le paquet à sa place vide, pour que ce soit le problème de quelqu'un d'autre", "en": "…put the empty pack back so it would become someone else's problem" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…calculé secrètement combien chacun a pris pour vérifier que j'avais ma part", "en": "…secretly counted how much everyone took to confirm I got my share" }, "crowdYesPct": 49 },
+        { "id": "e", "text": { "fr": "…caché ma réserve perso dans un endroit où personne ne fouille", "en": "…hidden my personal stash somewhere nobody would think to look" }, "crowdYesPct": 54 },
+        { "id": "f", "text": { "fr": "…accusé quelqu'un d'autre d'avoir fini le truc que j'avais fini", "en": "…blamed someone else for finishing the thing I personally finished" }, "crowdYesPct": 37 }
+      ],
+      "tone": "classic",
+      "tags": ["food", "confessions"]
+    },
+    {
+      "id": "cc-overheard-145",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "Question commérages assumés, j'ai déjà…", "en": "On the record about gossip, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…rapporté un secret en l'emballant dans un 'je m'inquiète pour lui'", "en": "…passed on a secret wrapped in a heartfelt 'I'm just worried about them'" }, "crowdYesPct": 51 },
+        { "id": "b", "text": { "fr": "…lancé une rumeur avec 'askip' pour ne pas en être la source", "en": "…started a rumor with 'apparently…' so it couldn't be traced to me" }, "crowdYesPct": 44 },
+        { "id": "c", "text": { "fr": "…fait l'étonné devant une nouvelle que je connaissais avant tout le monde", "en": "…acted shocked at news I knew before literally everyone else" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…posé une question dont je connaissais la réponse pour tester la version de l'autre", "en": "…asked a question I knew the answer to, just to test their version" }, "crowdYesPct": 47 },
+        { "id": "e", "text": { "fr": "…dit 'ça reste entre nous' en sachant que ça tiendrait jusqu'au prochain café", "en": "…said 'this stays between us' knowing it would last until the next coffee" }, "crowdYesPct": 39 },
+        { "id": "f", "text": { "fr": "…parlé d'un absent au moment précis où il revenait dans la pièce", "en": "…talked about someone at the exact moment they walked back into the room" }, "crowdYesPct": 33 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-firstworld-146",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": { "fr": "Petits drames quotidiens, tous d'accord…", "en": "Tiny daily tragedies, all agreed…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…lancer une machine et retrouver UNE chaussette orpheline, c'est la loi", "en": "…running a wash and finding ONE orphan sock is a law of physics" }, "crowdYesPct": 91 },
+        { "id": "b", "text": { "fr": "…l'écouteur qui se déconnecte pile au moment du meilleur passage", "en": "…the earbud disconnecting at the exact best part of the song" }, "crowdYesPct": 87 },
+        { "id": "c", "text": { "fr": "…mordre l'intérieur de la joue au même endroit, deux jours de suite", "en": "…biting the inside of your cheek in the same spot two days running" }, "crowdYesPct": 82 },
+        { "id": "d", "text": { "fr": "…la pièce qui tombe et roule jusque sous le meuble le plus lourd", "en": "…the coin that drops and rolls straight under the heaviest furniture" }, "crowdYesPct": 79 },
+        { "id": "e", "text": { "fr": "…dire 'au revoir' puis devoir marcher dans la même direction, en silence", "en": "…saying goodbye then having to walk the same way, in total silence" }, "crowdYesPct": 84 },
+        { "id": "f", "text": { "fr": "…taper son code de carte alors qu'il fallait juste approcher", "en": "…typing your card PIN when you only needed to tap" }, "crowdYesPct": 76 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "daily-life"]
+    },
+    {
+      "id": "cc-couplesfight-147",
+      "targetYesPct": 55,
+      "askKind": "agree",
+      "stem": { "fr": "Les couples, on les voit venir…", "en": "You can spot a couple's fight coming…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…'non non tout va bien' est la phrase la plus dangereuse de toutes", "en": "…'no no, everything's fine' is the single most dangerous sentence" }, "crowdYesPct": 88 },
+        { "id": "b", "text": { "fr": "…ils nous prennent à témoin et personne ne veut être le juge", "en": "…they drag you in as a witness and nobody wants to be the judge" }, "crowdYesPct": 74 },
+        { "id": "c", "text": { "fr": "…le couple qui poste le plus de photos est celui qui va le moins bien", "en": "…the couple posting the most photos is doing the worst behind the scenes" }, "crowdYesPct": 61 },
+        { "id": "d", "text": { "fr": "…la moitié des couples tiennent surtout par flemme de tout séparer", "en": "…half of couples are mostly held together by the hassle of splitting up" }, "crowdYesPct": 48 },
+        { "id": "e", "text": { "fr": "…il y a un couple dans le groupe dont on a déjà parié la date de rupture", "en": "…there's a couple in the group whose breakup date we've already bet on" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…un couple ici nous fait choisir un camp à chaque soirée, et c'est épuisant", "en": "…one couple here makes us pick a side every party, and it's exhausting" }, "crowdYesPct": 35 }
+      ],
+      "tone": "classic",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-fakeexpert-148",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "En faux expert total, j'ai déjà…", "en": "In full fake-expert mode, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…expliqué avec assurance un truc que j'avais lu en diagonale ce matin", "en": "…confidently explained something I'd skim-read that very morning" }, "crowdYesPct": 73 },
+        { "id": "b", "text": { "fr": "…dit 'en vrai c'est simple' avant de tout embrouiller davantage", "en": "…said 'honestly it's simple' right before making it far more confusing" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…défendu une opinion forte sur un pays où je n'ai jamais mis les pieds", "en": "…defended a strong opinion about a country I have never once visited" }, "crowdYesPct": 56 },
+        { "id": "d", "text": { "fr": "…corrigé quelqu'un avant de découvrir que c'était lui qui avait raison", "en": "…corrected someone before discovering they were the one who was right" }, "crowdYesPct": 51 },
+        { "id": "e", "text": { "fr": "…cité 'une étude' qui était en fait un commentaire vu quelque part", "en": "…cited 'a study' that was in fact a comment I saw somewhere once" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…continué à argumenter alors que je savais déjà que j'avais tort", "en": "…kept arguing long after I privately knew I was wrong" }, "crowdYesPct": 42 }
+      ],
+      "tone": "classic",
+      "tags": ["social", "confessions"]
+    },
+    {
+      "id": "cc-roommatewar-149",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "En guerre froide de coloc ou de famille, j'ai déjà…", "en": "In a cold war with a roommate or family, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laissé une seule assiette sale très en évidence, comme un message", "en": "…left one dirty plate very visibly out, as a message" }, "crowdYesPct": 41 },
+        { "id": "b", "text": { "fr": "…noté mentalement chaque fois que c'était moi qui sortais la poubelle", "en": "…kept a running mental tally of every time I was the one taking out the bin" }, "crowdYesPct": 52 },
+        { "id": "c", "text": { "fr": "…lavé exactement ma vaisselle et rien d'autre, par pur principe", "en": "…washed exactly my dishes and nothing else, on pure principle" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…fait du bruit 'innocemment' tôt le matin pour me venger d'une nuit blanche", "en": "…made 'innocent' noise early to get back at someone for a sleepless night" }, "crowdYesPct": 33 },
+        { "id": "e", "text": { "fr": "…caché mon snack préféré pour qu'il ne 'disparaisse' plus mystérieusement", "en": "…hidden my favourite snack so it would stop 'mysteriously' disappearing" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…convoqué une 'petite réunion' qui était en fait un procès", "en": "…called a 'quick house chat' that was in fact a full trial" }, "crowdYesPct": 26 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "confessions"]
+    },
+    {
+      "id": "cc-airportself-150",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Version aéroport de moi-même, j'ai déjà…", "en": "Airport version of myself, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…été à la porte trois heures avant, par pure angoisse", "en": "…been at the gate three hours early out of pure anxiety" }, "crowdYesPct": 58 },
+        { "id": "b", "text": { "fr": "…bu une bière à 7 h du matin parce que 'on est en vacances'", "en": "…had a beer at 7 a.m. because 'technically we're on holiday'" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…couru jusqu'à la porte pour finalement attendre 40 minutes", "en": "…sprinted to the gate only to then wait 40 minutes" }, "crowdYesPct": 66 },
+        { "id": "d", "text": { "fr": "…tapé dans le duty-free un parfum que je n'ai jamais reporté", "en": "…bought a duty-free perfume I have never worn again" }, "crowdYesPct": 39 },
+        { "id": "e", "text": { "fr": "…stressé tout le groupe alors que le vol avait deux heures de retard", "en": "…stressed out the whole group when the flight was two hours delayed" }, "crowdYesPct": 44 },
+        { "id": "f", "text": { "fr": "…vérifié mon passeport tellement de fois que j'ai cru l'avoir perdu", "en": "…checked for my passport so many times I convinced myself I'd lost it" }, "crowdYesPct": 71 }
+      ],
+      "tone": "classic",
+      "tags": ["travel", "relatable"]
+    },
+    {
+      "id": "cc-wouldsell-151",
+      "targetYesPct": 50,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour 200 €, je…", "en": "For two hundred bucks, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laisserais le groupe poster LA photo dossier qu'ils ont tous gardée de moi", "en": "…let the group post THE blackmail photo they've all secretly kept of me" }, "crowdYesPct": 44 },
+        { "id": "b", "text": { "fr": "…lirais à voix haute le dernier message envoyé à mon ex", "en": "…read out loud the last message I ever sent my ex" }, "crowdYesPct": 33 },
+        { "id": "c", "text": { "fr": "…révélerais mon vrai temps d'écran de la semaine, au groupe entier", "en": "…reveal my real weekly screen time to the entire group" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…porterais sur moi une pancarte avec mon défaut le plus pénible, une soirée", "en": "…wear a sign listing my most annoying trait for a full night out" }, "crowdYesPct": 41 },
+        { "id": "e", "text": { "fr": "…vendrais le secret le plus juteux du groupe sans aucune négociation", "en": "…sell this group's juiciest secret with zero negotiation" }, "crowdYesPct": 29 },
+        { "id": "f", "text": { "fr": "…rendrais mon téléphone au groupe pendant exactement une minute, sans regarder", "en": "…hand my phone to the group for exactly one minute, without watching" }, "crowdYesPct": 22 }
+      ],
+      "tone": "classic",
+      "tags": ["money", "challenges"]
+    },
+    {
+      "id": "cc-deniedfeelings-152",
+      "targetYesPct": 75,
+      "askKind": "agree",
+      "stem": { "fr": "On le dit jamais à voix haute, mais…", "en": "Nobody says it out loud, but…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…on adore secrètement le drama des autres groupes d'amis", "en": "…we secretly love other friend groups' drama like a free show" }, "crowdYesPct": 86 },
+        { "id": "b", "text": { "fr": "…apprendre l'échec de quelqu'un qui nous a snobé fait un bien fou", "en": "…hearing about the downfall of someone who snubbed us feels genuinely amazing" }, "crowdYesPct": 73 },
+        { "id": "c", "text": { "fr": "…on garde certains potes surtout pour leurs anecdotes, pas pour eux", "en": "…we keep certain friends mostly for the stories, not for them" }, "crowdYesPct": 64 },
+        { "id": "d", "text": { "fr": "…on a tous un compte qu'on suit uniquement pour juger sa vie", "en": "…we all follow one account purely to judge their life choices" }, "crowdYesPct": 81 },
+        { "id": "e", "text": { "fr": "…on a déjà été soulagé qu'un date d'un pote tombe à l'eau, pour le récit", "en": "…we've been quietly relieved a friend's date flopped, just for the story" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…au moins une amitié ici tient surtout par habitude, et on le sait", "en": "…at least one friendship here survives mostly on habit, and we know it" }, "crowdYesPct": 52 }
+      ],
+      "tone": "classic",
+      "tags": ["opinions", "social"]
+    },
+    {
+      "id": "cc-laundryday-153",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté lessive et ménage, j'ai déjà…", "en": "On laundry and cleaning, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…repoussé une lessive en achetant des sous-vêtements neufs, c'était plus simple", "en": "…dodged laundry by buying new underwear, it was simply easier" }, "crowdYesPct": 38 },
+        { "id": "b", "text": { "fr": "…porté un haut sorti du panier après le test olfactif réglementaire", "en": "…worn a top straight from the basket after the official smell test" }, "crowdYesPct": 56 },
+        { "id": "c", "text": { "fr": "…laissé du linge propre 'à plier' assez longtemps pour qu'il se froisse à nouveau", "en": "…left clean laundry 'to fold' so long it became wrinkled again" }, "crowdYesPct": 79 },
+        { "id": "d", "text": { "fr": "…fait un grand ménage uniquement parce que quelqu'un venait", "en": "…deep-cleaned the place only because someone was coming over" }, "crowdYesPct": 84 },
+        { "id": "e", "text": { "fr": "…poussé tout le bazar dans une pièce dont je fermais la porte", "en": "…shoved all the mess into one room and shut the door on it" }, "crowdYesPct": 68 },
+        { "id": "f", "text": { "fr": "…rallumé le sèche-linge juste pour ne pas avoir à plier maintenant", "en": "…re-run the dryer just to avoid folding it right now" }, "crowdYesPct": 44 }
+      ],
+      "tone": "classic",
+      "tags": ["home", "confessions"]
+    },
+    {
+      "id": "cc-overpromise-154",
+      "targetYesPct": 80,
+      "askKind": "didYou",
+      "stem": { "fr": "En promettant plus que je ne tiens, j'ai déjà…", "en": "Over-promising what I'd never deliver, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dit 'la prochaine tournée est pour moi' en priant qu'il n'y en ait pas", "en": "…said 'next round's on me' while praying there'd be no next round" }, "crowdYesPct": 64 },
+        { "id": "b", "text": { "fr": "…proposé 'tu peux dormir chez moi' sans avoir le moindre lit prêt", "en": "…offered 'you can crash at mine' with absolutely no spare bed ready" }, "crowdYesPct": 49 },
+        { "id": "c", "text": { "fr": "…juré 'je t'aide à déménager' puis trouvé un imprévu providentiel", "en": "…swore 'I'll help you move' then conveniently developed an emergency" }, "crowdYesPct": 53 },
+        { "id": "d", "text": { "fr": "…dit 'je te rends ça demain' à propos d'un objet que je considère désormais mien", "en": "…said 'I'll give it back tomorrow' about a thing I now consider mine" }, "crowdYesPct": 47 },
+        { "id": "e", "text": { "fr": "…promis 'on s'appelle' sans aucune intention d'appeler, jamais", "en": "…promised 'we'll call each other' with no intention of ever calling" }, "crowdYesPct": 71 },
+        { "id": "f", "text": { "fr": "…lancé 'compte sur moi' avant de réaliser ce que ça impliquait vraiment", "en": "…said 'you can count on me' before realizing what it actually involved" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-cheatgame-155",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "En soirée jeux, version sans pitié, j'ai déjà…", "en": "On game night, ruthless edition, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…inventé une règle au beau milieu de la partie, pile quand ça m'arrangeait", "en": "…invented a rule mid-game, precisely when it suited me" }, "crowdYesPct": 51 },
+        { "id": "b", "text": { "fr": "…fait alliance avec quelqu'un pour le trahir à la seconde parfaite", "en": "…allied with someone purely to betray them at the perfect second" }, "crowdYesPct": 47 },
+        { "id": "c", "text": { "fr": "…visé une seule personne toute la partie, par pure rancune personnelle", "en": "…targeted one specific person all game, out of pure personal spite" }, "crowdYesPct": 53 },
+        { "id": "d", "text": { "fr": "…fait gagner quelqu'un exprès, juste pour qu'un autre perde", "en": "…handed someone the win on purpose, just so a different person would lose" }, "crowdYesPct": 38 },
+        { "id": "e", "text": { "fr": "…menacé de renverser le plateau, et failli vraiment le faire", "en": "…threatened to flip the board, and very nearly went through with it" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…gâché l'ambiance d'une soirée entière pour un jeu de société, sans regret", "en": "…ruined an entire night's mood over a board game, with zero regret" }, "crowdYesPct": 27 }
+      ],
+      "tone": "classic",
+      "tags": ["games", "party"]
+    },
+    {
+      "id": "cc-mainquest-156",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En personnage principal de ma propre vie, j'ai déjà…", "en": "As the main character of my own life, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…rejoué une dispute dans ma tête et gagné avec une réplique parfaite", "en": "…replayed an argument in my head and won it with a flawless comeback" }, "crowdYesPct": 79 },
+        { "id": "b", "text": { "fr": "…cru qu'une chanson passait exactement pour mon moment, à cet instant", "en": "…been certain a song was playing exactly for my moment, right then" }, "crowdYesPct": 61 },
+        { "id": "c", "text": { "fr": "…imaginé le documentaire qu'on tournerait un jour sur ma vie", "en": "…pictured the documentary they'll one day make about my life" }, "crowdYesPct": 47 },
+        { "id": "d", "text": { "fr": "…préparé une phrase 'spontanée' pour la sortir au bon moment", "en": "…pre-loaded a 'spontaneous' line to deliver at exactly the right moment" }, "crowdYesPct": 54 },
+        { "id": "e", "text": { "fr": "…secrètement pensé être la personne la plus normale du groupe", "en": "…secretly believed I'm the most normal person in the friend group" }, "crowdYesPct": 58 },
+        { "id": "f", "text": { "fr": "…supposé être le pote préféré de tout le monde ici, sans aucune preuve", "en": "…assumed I'm everyone's favourite friend here, with zero supporting evidence" }, "crowdYesPct": 36 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-fivepercent-157",
+      "targetYesPct": 5,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour 50 € seulement, je…", "en": "For just fifty bucks, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laisserais le groupe lire tous mes messages d'aujourd'hui, sans tri", "en": "…let the group read every text I sent today, completely unfiltered" }, "crowdYesPct": 11 },
+        { "id": "b", "text": { "fr": "…appellerais mon ex en haut-parleur, là, devant tout le monde", "en": "…call my ex on speaker, right now, in front of everyone" }, "crowdYesPct": 6 },
+        { "id": "c", "text": { "fr": "…dirais en face à chacun ici sa pire qualité, sans amortir", "en": "…tell each person here their worst quality, to their face, no cushioning" }, "crowdYesPct": 14 },
+        { "id": "d", "text": { "fr": "…me lèverais à 5 h pour aider un quasi-inconnu à déménager un piano", "en": "…wake up at 5 a.m. to help a near-stranger move a piano" }, "crowdYesPct": 9 },
+        { "id": "e", "text": { "fr": "…laisserais ma localisation visible par tout le groupe pendant un mois", "en": "…leave my live location visible to the whole group for a month" }, "crowdYesPct": 17 },
+        { "id": "f", "text": { "fr": "…révélerais le montant exact que j'ai sur mon compte, à la décimale", "en": "…reveal the exact amount in my bank account, to the cent" }, "crowdYesPct": 8 }
+      ],
+      "tone": "classic",
+      "tags": ["money", "challenges"]
+    },
+    {
+      "id": "cc-newcity-158",
+      "targetYesPct": 30,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour repartir à zéro, je serais cap de…", "en": "To start completely over, I could honestly…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…déménager dans une autre ville sans prévenir personne d'ici", "en": "…move to a different city without telling a single person here" }, "crowdYesPct": 27 },
+        { "id": "b", "text": { "fr": "…quitter mon boulot par message vocal, à 9 h pile", "en": "…quit my job via voice note, at 9 a.m. sharp" }, "crowdYesPct": 19 },
+        { "id": "c", "text": { "fr": "…supprimer toutes mes applis sociales pendant six mois entiers", "en": "…delete every social app for six full months" }, "crowdYesPct": 33 },
+        { "id": "d", "text": { "fr": "…couper les ponts avec une personne du groupe sans une explication", "en": "…cut off one person in this group without a word of explanation" }, "crowdYesPct": 16 },
+        { "id": "e", "text": { "fr": "…changer complètement de style en assumant le regard de tout le monde ici", "en": "…totally reinvent my style and face every single one of you about it" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…repartir avec un seul sac et abandonner tout le reste sur place", "en": "…leave with one bag and abandon literally everything else where it stands" }, "crowdYesPct": 24 }
+      ],
+      "tone": "classic",
+      "tags": ["dreams", "challenges"]
+    },
+    {
+      "id": "cc-secondhand-159",
+      "targetYesPct": 70,
+      "askKind": "agree",
+      "stem": { "fr": "La honte par procuration, c'est réel…", "en": "Second-hand embarrassment is very real…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…voir quelqu'un rater une blague devant tout le monde fait physiquement mal", "en": "…watching someone bomb a joke in front of everyone physically hurts" }, "crowdYesPct": 78 },
+        { "id": "b", "text": { "fr": "…on a tous déjà quitté une pièce à cause d'une gêne qui n'était pas la nôtre", "en": "…we've all left a room over an awkward moment that wasn't even ours" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…revivre une vieille honte à soi à 3 h du matin, c'est un sport national", "en": "…reliving your own old cringe at 3 a.m. is basically a national sport" }, "crowdYesPct": 81 },
+        { "id": "d", "text": { "fr": "…il y a une scène d'un film qu'on ne peut littéralement pas regarder", "en": "…there's a scene in one film we genuinely cannot bring ourselves to watch" }, "crowdYesPct": 56 },
+        { "id": "e", "text": { "fr": "…voir un pote draguer mal, c'est pire que de le faire soi-même", "en": "…watching a friend flirt badly is worse than doing it yourself" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…quelqu'un ici a déjà déclenché chez nous une honte par procuration record", "en": "…someone in this room has caused us record-breaking second-hand cringe" }, "crowdYesPct": 43 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "awkward"]
+    },
+    {
+      "id": "cc-wouldtell-160",
+      "targetYesPct": 40,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Si on me payait pour être brutalement honnête, je…", "en": "If I got paid to be brutally honest, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…dirais à un couple d'amis, en face, que ça ne passera pas l'année", "en": "…tell a couple in this group, to their faces, it won't last the year" }, "crowdYesPct": 23 },
+        { "id": "b", "text": { "fr": "…avouerais à un pote que son projet dont il parle depuis un an est mauvais", "en": "…tell a friend the project he's pitched for a year is genuinely bad" }, "crowdYesPct": 38 },
+        { "id": "c", "text": { "fr": "…annoncerais qui, dans cette pièce, raconte la même histoire en boucle", "en": "…announce who in this room tells the same story on a loop" }, "crowdYesPct": 47 },
+        { "id": "d", "text": { "fr": "…dirais à un proche que sa coupe d'il y a deux ans était une erreur", "en": "…tell someone close that their haircut two years ago was a mistake" }, "crowdYesPct": 52 },
+        { "id": "e", "text": { "fr": "…révélerais lequel de mes potes parle le plus mal des autres", "en": "…reveal which of my friends talks the most trash about the others" }, "crowdYesPct": 31 },
+        { "id": "f", "text": { "fr": "…dirais à mes darons lequel des deux est, soyons clairs, mon préféré", "en": "…tell my parents which of the two is, let's be honest, my favourite" }, "crowdYesPct": 19 }
+      ],
+      "tone": "classic",
+      "tags": ["challenges", "social"]
+    },
+    {
+      "id": "cc-saturdaynight-161",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Un samedi soir, j'ai déjà…", "en": "On a Saturday night, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…annulé une sortie pour rester au lit, et vécu ça comme une victoire totale", "en": "…cancelled a night out to stay in bed and experienced it as total victory" }, "crowdYesPct": 76 },
+        { "id": "b", "text": { "fr": "…dit 'je sors 30 minutes' et fermé le bar avec le personnel", "en": "…said 'I'm staying 30 minutes' and closed the bar with the staff" }, "crowdYesPct": 64 },
+        { "id": "c", "text": { "fr": "…mis deux heures à me préparer pour finir par ne pas y aller", "en": "…spent two hours getting ready only to not go at all" }, "crowdYesPct": 49 },
+        { "id": "d", "text": { "fr": "…envoyé 'j'arrive' depuis mon canapé, douche même pas lancée", "en": "…texted 'on my way' from my couch, shower not even started" }, "crowdYesPct": 71 },
+        { "id": "e", "text": { "fr": "…fait semblant d'être déjà sorti pour ne pas avoir à expliquer que non", "en": "…pretended I was already out to avoid explaining that I wasn't" }, "crowdYesPct": 41 },
+        { "id": "f", "text": { "fr": "…regretté de ne pas être sorti, sans rien faire pour y remédier", "en": "…regretted not going out, while doing absolutely nothing about it" }, "crowdYesPct": 58 }
+      ],
+      "tone": "classic",
+      "tags": ["party", "relatable"]
+    },
+    {
+      "id": "cc-petnames-162",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau honte douce et privée, j'ai déjà…", "en": "On the soft, private cringe ledger, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…parlé à mon animal comme à un avocat, en lui demandant son avis", "en": "…talked to my pet like a lawyer, genuinely asking for their opinion" }, "crowdYesPct": 63 },
+        { "id": "b", "text": { "fr": "…gardé une conversation entière avec moi-même sous la douche", "en": "…held a full conversation with myself in the shower" }, "crowdYesPct": 71 },
+        { "id": "c", "text": { "fr": "…répété à voix haute une phrase 'spontanée' avant un appel important", "en": "…rehearsed a 'spontaneous' line out loud before an important call" }, "crowdYesPct": 58 },
+        { "id": "d", "text": { "fr": "…ri tout seul dans la rue à un souvenir, en croisant le regard d'un inconnu", "en": "…laughed alone in the street at a memory, locking eyes with a stranger" }, "crowdYesPct": 54 },
+        { "id": "e", "text": { "fr": "…donné un petit surnom secret à un objet du quotidien", "en": "…given a secret little nickname to a household object" }, "crowdYesPct": 39 },
+        { "id": "f", "text": { "fr": "…fait un câlin à mon coussin comme à un être humain, sans honte", "en": "…hugged a pillow like an actual person, no shame attached" }, "crowdYesPct": 47 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "relatable"]
+    },
+    {
+      "id": "cc-momfriend-163",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "En 'parent du groupe' non rémunéré, j'ai déjà…", "en": "As the group's unpaid parent, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tenu les affaires de tout le monde pendant qu'ils s'amusaient", "en": "…held everyone's stuff while they all went off to have fun" }, "crowdYesPct": 56 },
+        { "id": "b", "text": { "fr": "…compté les têtes en sortie comme une maîtresse d'école stressée", "en": "…counted heads on a night out like a stressed primary school teacher" }, "crowdYesPct": 49 },
+        { "id": "c", "text": { "fr": "…ramené quelqu'un chez lui en notant mentalement qu'on me remerciera jamais", "en": "…walked someone home while mentally noting I'd never be thanked" }, "crowdYesPct": 44 },
+        { "id": "d", "text": { "fr": "…avancé l'argent pour tous puis traqué chaque remboursement à l'euro près", "en": "…fronted the money for everyone then chased every repayment to the cent" }, "crowdYesPct": 52 },
+        { "id": "e", "text": { "fr": "…gardé une rancune silencieuse contre le pote qui n'organise jamais rien", "en": "…held a silent grudge against the friend who never plans a single thing" }, "crowdYesPct": 47 },
+        { "id": "f", "text": { "fr": "…secrètement adoré être indispensable, tout en m'en plaignant à voix haute", "en": "…secretly loved being indispensable, while loudly complaining about it" }, "crowdYesPct": 38 }
+      ],
+      "tone": "classic",
+      "tags": ["social", "confessions"]
+    },
+    {
+      "id": "cc-impulse-164",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "Sur un coup de tête, j'ai déjà…", "en": "On a pure impulse, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…acheté un truc à 23 h que j'ai regretté avant même la livraison", "en": "…bought something at 11 p.m. I regretted before it even shipped" }, "crowdYesPct": 71 },
+        { "id": "b", "text": { "fr": "…coupé moi-même mes cheveux dans la salle de bain, par confiance excessive", "en": "…cut my own hair in the bathroom out of dangerous overconfidence" }, "crowdYesPct": 41 },
+        { "id": "c", "text": { "fr": "…réservé un voyage que je n'avais ni le temps ni l'argent de faire", "en": "…booked a trip I had neither the time nor the money to take" }, "crowdYesPct": 38 },
+        { "id": "d", "text": { "fr": "…envoyé un message important sans relire, et prié immédiatement après", "en": "…sent an important text without re-reading and prayed immediately after" }, "crowdYesPct": 54 },
+        { "id": "e", "text": { "fr": "…adopté un nouveau loisir coûteux, abandonné en deux semaines", "en": "…picked up an expensive new hobby, abandoned within two weeks" }, "crowdYesPct": 49 },
+        { "id": "f", "text": { "fr": "…dit oui à un plan douteux juste pour ne pas avoir l'air rabat-joie", "en": "…said yes to a questionable plan just to avoid being the buzzkill" }, "crowdYesPct": 62 }
+      ],
+      "tone": "classic",
+      "tags": ["confessions", "money"]
+    },
+    {
+      "id": "cc-undeniable-165",
+      "targetYesPct": 95,
+      "askKind": "agree",
+      "stem": { "fr": "Vérités que personne n'osera contredire…", "en": "Truths nobody at this table will dare deny…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…retrouver un truc qu'on croyait perdu pour toujours, c'est de l'euphorie pure", "en": "…finding something you'd given up for lost is pure, undiluted euphoria" }, "crowdYesPct": 94 },
+        { "id": "b", "text": { "fr": "…le côté frais de l'oreiller à 3 h du matin est un petit miracle", "en": "…the cool side of the pillow at 3 a.m. is a genuine small miracle" }, "crowdYesPct": 90 },
+        { "id": "c", "text": { "fr": "…le 'tu m'as manqué' d'un animal après une journée bat tous les humains", "en": "…a pet missing you after one day beats every human being's welcome" }, "crowdYesPct": 84 },
+        { "id": "d", "text": { "fr": "…une sieste non prévue est meilleure que n'importe quel sommeil planifié", "en": "…an unplanned nap is better than any sleep you actually scheduled" }, "crowdYesPct": 88 },
+        { "id": "e", "text": { "fr": "…le pain offert au resto disparaît toujours avant le plat", "en": "…the free bread at a restaurant is always gone before the mains arrive" }, "crowdYesPct": 80 },
+        { "id": "f", "text": { "fr": "…enlever ses chaussures en rentrant, c'est le vrai début du week-end", "en": "…taking your shoes off the moment you get home is the weekend's real start" }, "crowdYesPct": 86 }
+      ],
+      "tone": "classic",
+      "tags": ["relatable", "opinions"]
+    },
+    {
+      "id": "cc-exfiles-166",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau ex, sans filtre, j'ai déjà…", "en": "On the ex front, no filter, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…stalké le nouveau date de mon ex jusqu'à ses photos de 2017", "en": "…stalked my ex's new date all the way back to their 2017 photos" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…gardé son sweat 'par oubli', et je le mets encore", "en": "…kept their hoodie 'by accident', and I still wear it" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…liké une story trois mois après l'avoir ghosté, comme si de rien", "en": "…liked a story three months after ghosting them, like nothing happened" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…relu nos vieilles conversations un soir de petite forme", "en": "…re-read our old chats on a low night, alone in the dark" }, "crowdYesPct": 62, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…envoyé un 'tu fais quoi' à 1 h du matin en sachant exactement ce que je faisais", "en": "…sent a 'you up?' at 1 a.m. knowing exactly what I was doing" }, "crowdYesPct": 39, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…recontacté un ex uniquement parce que j'étais en manque d'attention", "en": "…texted an ex purely because I was running low on attention" }, "crowdYesPct": 47, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-bodycount-167",
+      "targetYesPct": 45,
+      "askKind": "agree",
+      "stem": { "fr": "Soyons adultes deux minutes…", "en": "Let's be grown-ups for two minutes…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tout le monde ment sur son body count, vers le haut ou vers le bas", "en": "…everyone lies about their body count, rounding up or rounding down" }, "crowdYesPct": 72, "spicy": 2 },
+        { "id": "b", "text": { "fr": "…on a tous un 'plan' qu'on n'assumerait jamais devant ce groupe", "en": "…we all have one 'situation' we'd never admit to in front of this group" }, "crowdYesPct": 58, "spicy": 2 },
+        { "id": "c", "text": { "fr": "…il y a deux personnes dans un groupe d'amis qui ont une histoire cachée", "en": "…in every friend group there are two people with a hidden history" }, "crowdYesPct": 49, "spicy": 2 },
+        { "id": "d", "text": { "fr": "…le 'on est juste amis' est faux dans au moins un cas par groupe", "en": "…'we're just friends' is a lie in at least one case per group" }, "crowdYesPct": 54, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…quelqu'un ici a déjà eu un crush sur quelqu'un d'autre ici, c'est mathématique", "en": "…someone here has had a crush on someone else here, it's basically maths" }, "crowdYesPct": 63, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…le pire date de chacun ferait un bien meilleur récit que ses meilleurs", "en": "…everyone's worst date is a far better story than any of their best ones" }, "crowdYesPct": 67, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-drunkself-168",
+      "targetYesPct": 60,
+      "askKind": "didYou",
+      "stem": { "fr": "Version moi-bourré, j'ai déjà…", "en": "Drunk version of me has…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…juré une amitié éternelle à quelqu'un rencontré aux toilettes du bar", "en": "…sworn eternal friendship to someone I met in the bar bathroom" }, "crowdYesPct": 71, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…envoyé un message que j'ai dû désamorcer le lendemain matin", "en": "…sent a text I had to do serious damage control on the next morning" }, "crowdYesPct": 64, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…fait un discours larmoyant sur l'amour à des gens qui voulaient juste danser", "en": "…delivered a tearful speech about love to people who just wanted to dance" }, "crowdYesPct": 53, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…avoué un crush à la pire personne possible, fort, devant témoins", "en": "…confessed a crush to the worst possible person, loudly, with witnesses" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…recontacté un ex à 3 h en jurant que c'était 'juste pour discuter'", "en": "…drunk-texted an ex at 3 a.m. swearing it was 'just to talk'" }, "crowdYesPct": 47, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…embrassé quelqu'un que je n'aurais jamais embrassé à jeun", "en": "…kissed someone I would never have kissed sober" }, "crowdYesPct": 44, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["party", "confessions"]
+    },
+    {
+      "id": "cc-talkingstage-169",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "En phase de talking stage, j'ai déjà…", "en": "In a talking stage, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…relu une conversation quinze fois avant d'oser répondre 'ok cool'", "en": "…re-read a chat fifteen times before daring to send 'ok cool'" }, "crowdYesPct": 66, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…adopté ses goûts musicaux en temps réel, sans aucune dignité", "en": "…adopted their music taste in real time, with zero remaining dignity" }, "crowdYesPct": 52, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…fait croire que j'étais occupé alors que je fixais mon écran", "en": "…pretended to be busy while genuinely just staring at my screen" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…parlé à plusieurs personnes en même temps en jurant le contraire", "en": "…talked to several people at once while swearing I absolutely wasn't" }, "crowdYesPct": 43, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…envoyé un 'bonne nuit' calculé à la minute près pour l'effet", "en": "…sent a 'goodnight' timed to the minute purely for the effect" }, "crowdYesPct": 39, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…ghosté quelqu'un de gentil parce qu'il était 'trop disponible'", "en": "…ghosted someone genuinely nice because they were 'too available'" }, "crowdYesPct": 35, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-phonesecrets-170",
+      "targetYesPct": 25,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour 300 €, là devant ce groupe, je…", "en": "For three hundred bucks, in front of this group, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laisserais lire mes dix derniers messages envoyés, sans aucun tri", "en": "…let them read my last ten sent texts, with no filtering at all" }, "crowdYesPct": 33, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…montrerais mon dossier de captures d'écran, la vraie archive", "en": "…show my screenshots folder, the real, uncurated archive" }, "crowdYesPct": 27, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…ouvrirais mes conversations archivées, celles que personne ne doit voir", "en": "…open my archived chats, the ones nobody is ever supposed to see" }, "crowdYesPct": 18, "spicy": 2 },
+        { "id": "d", "text": { "fr": "…lirais à voix haute le dernier message envoyé à mon plan du moment", "en": "…read out loud the last text I sent to my current 'situation'" }, "crowdYesPct": 14, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…laisserais le groupe faire défiler ma galerie, dossier par dossier", "en": "…let the group scroll my camera roll, folder by folder" }, "crowdYesPct": 22, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…révélerais qui est en haut de mes contacts les plus contactés", "en": "…reveal who sits at the very top of my most-messaged contacts" }, "crowdYesPct": 41, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["fear", "challenges"]
+    },
+    {
+      "id": "cc-cringeflirt-171",
+      "targetYesPct": 65,
+      "askKind": "didYou",
+      "stem": { "fr": "En mode drague catastrophe, j'ai déjà…", "en": "In disaster-flirting mode, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…sorti une phrase d'approche tellement mauvaise que j'en frissonne encore", "en": "…delivered a pickup line so bad I still shudder thinking about it" }, "crowdYesPct": 68, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…liké par 'accident' un post de 2019 en stalkant, et tout assumé", "en": "…'accidentally' liked a 2019 post while lurking, and owned it" }, "crowdYesPct": 54, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…fait semblant d'aimer un truc juste pour avoir un sujet de conversation", "en": "…faked liking something just to manufacture a conversation topic" }, "crowdYesPct": 61, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…confondu deux personnes que je draguais, en plein message", "en": "…mixed up two people I was flirting with, mid-message" }, "crowdYesPct": 32, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…envoyé un 'soft launch' évident d'une relation pas vraiment officielle", "en": "…posted an obvious soft launch of a relationship that wasn't really official" }, "crowdYesPct": 38, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…dragué quelqu'un puis découvert que c'était l'ex d'un pote présent ici", "en": "…flirted with someone, then discovered they were the ex of a friend in this room" }, "crowdYesPct": 41, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "awkward"]
+    },
+    {
+      "id": "cc-roomtruths-172",
+      "targetYesPct": 35,
+      "askKind": "agree",
+      "stem": { "fr": "Sans preuve, juste un pressentiment dans cette pièce…", "en": "No proof, just a feeling about this room…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…deux personnes ici se sont déjà embrassées sans que les autres le sachent", "en": "…two people here have kissed and the rest of us have no idea" }, "crowdYesPct": 44, "spicy": 2 },
+        { "id": "b", "text": { "fr": "…quelqu'un ici a eu un crush sur moi et ne l'a jamais avoué", "en": "…someone here has had a crush on me and never once admitted it" }, "crowdYesPct": 31, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…il existe un groupe sans moi où je suis un sujet régulier", "en": "…there's a chat without me where I am a recurring topic" }, "crowdYesPct": 56, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…une personne ici a déjà parlé d'un date avec quelqu'un d'autre ici", "en": "…one person here has discussed a date with someone else in this very room" }, "crowdYesPct": 38, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…quelqu'un ici me trouve insupportable et reste poli par pure tactique", "en": "…someone here finds me unbearable and stays polite as pure strategy" }, "crowdYesPct": 41, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…il y a au moins un secret dans cette pièce qui ferait exploser la soirée", "en": "…there's at least one secret in this room that would detonate the whole night" }, "crowdYesPct": 52, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["social", "opinions"]
+    },
+    {
+      "id": "cc-datingapps-173",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "Sur les applis de rencontre, j'ai déjà…", "en": "On the dating apps, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…utilisé une photo qui a trois ans et zéro ressemblance avec moi aujourd'hui", "en": "…used a photo that's three years old and bears no resemblance to current me" }, "crowdYesPct": 49, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…matché avec quelqu'un, parlé deux semaines, puis disparu sans un mot", "en": "…matched, talked for two weeks, then vanished without a single word" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…swipé sur quelqu'un que je connaissais dans la vraie vie, par curiosité", "en": "…swiped on someone I knew in real life, purely out of curiosity" }, "crowdYesPct": 52, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…accepté un date surtout pour le resto, pas du tout pour la personne", "en": "…said yes to a date mostly for the restaurant, not at all for the person" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…parlé à plusieurs matchs le même soir, chacun croyant être le seul", "en": "…talked to several matches the same night, each one thinking they were the only one" }, "crowdYesPct": 38, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…re-téléchargé l'appli un soir de solitude après l'avoir juré 'plus jamais'", "en": "…re-downloaded the app on a lonely night after swearing 'never again'" }, "crowdYesPct": 47, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-wildnights-174",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "En soirée qui dérape, j'ai déjà…", "en": "On a night that got out of hand, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…perdu mon groupe entier et reconstruit la soirée le lendemain par messages", "en": "…lost my entire group and reconstructed the night the next day via texts" }, "crowdYesPct": 57, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…fini dans un endroit dont je n'ai jamais su le nom ni l'adresse", "en": "…ended up somewhere I never learned the name or address of" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…rentré au lever du soleil en jurant 'plus jamais', encore une fois", "en": "…got home at sunrise swearing 'never again', once again" }, "crowdYesPct": 61, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…rentré chez quelqu'un dont j'avais oublié le prénom au réveil", "en": "…gone home with someone whose name I'd forgotten by morning" }, "crowdYesPct": 33, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…fait un truc dont je n'ai appris l'existence que par une vidéo le lendemain", "en": "…done something I only learned about from a video the next day" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…dit oui à une 'dernière' qui a ruiné les deux jours suivants", "en": "…said yes to 'one last one' that wrecked the following two days" }, "crowdYesPct": 49, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["party", "confessions"]
+    },
+    {
+      "id": "cc-honestbedroom-175",
+      "targetYesPct": 50,
+      "askKind": "agree",
+      "stem": { "fr": "Entre adultes, on peut bien l'admettre…", "en": "Between adults, we can admit it…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…tout le monde a déjà fait semblant d'aimer un truc pour ne pas vexer l'autre", "en": "…everyone has faked enjoying something to avoid hurting the other person" }, "crowdYesPct": 64, "spicy": 2 },
+        { "id": "b", "text": { "fr": "…les gens les plus sages en public sont rarement les plus sages en privé", "en": "…the most well-behaved people in public are rarely the most behaved in private" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…on a tous un message envoyé qu'on aimerait pouvoir effacer de l'univers", "en": "…we all have one sent message we wish we could erase from the universe" }, "crowdYesPct": 71, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…le 'je rentre tôt' avant une date est le plus gros mensonge du vocabulaire", "en": "…'I'll have an early night' before a date is the biggest lie in the language" }, "crowdYesPct": 53, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…tout le monde a un type qu'il défend en public et nie en privé", "en": "…everyone has a 'type' they defend in public and deny in private" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…au moins une personne ici a un secret de chambre qu'elle emportera dans la tombe", "en": "…at least one person here has a bedroom secret they'll take to the grave" }, "crowdYesPct": 56, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-betrayal-176",
+      "targetYesPct": 30,
+      "askKind": "didYou",
+      "stem": { "fr": "Trahison niveau pro, j'ai déjà…", "en": "Professional-grade betrayal: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…répété un secret juré-craché en jurant que c'était la dernière fois", "en": "…repeated a sworn secret while swearing it was the very last time" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…montré une conversation privée d'un pote 'juste pour un avis neutre'", "en": "…shown a friend's private chat 'purely for a neutral opinion'" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…pris le parti de l'ennemi d'un pote, en secret, parce qu'il avait raison", "en": "…secretly sided with a friend's enemy, because the enemy was right" }, "crowdYesPct": 33, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…dragué ou été dragué par l'ex d'un pote présent dans cette pièce", "en": "…flirted with, or got flirted with by, the ex of a friend in this room" }, "crowdYesPct": 24, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…gardé un screenshot d'un pote 'au cas où' on serait un jour en froid", "en": "…saved a screenshot of a friend 'just in case' we ever fell out" }, "crowdYesPct": 38, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…choisi un camp dans une rupture en fonction de qui avait le meilleur canapé", "en": "…picked a side in a breakup based on who had the better couch" }, "crowdYesPct": 29, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["social", "confessions"]
+    },
+    {
+      "id": "cc-shamelist-177",
+      "targetYesPct": 70,
+      "askKind": "didYou",
+      "stem": { "fr": "Pulsions nocturnes sans honte, j'ai déjà…", "en": "Late-night urges, no shame: I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…regardé le profil de quelqu'un jusqu'à risquer le like fatal", "en": "…scrolled someone's profile until I was one slip from the fatal like" }, "crowdYesPct": 64, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…rédigé un message de réconciliation que je n'ai jamais envoyé", "en": "…drafted a make-up message I never actually sent" }, "crowdYesPct": 71, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…commandé de la nourriture à une heure indéfendable, seul dans le noir", "en": "…ordered food at an indefensible hour, alone in the dark" }, "crowdYesPct": 67, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…relancé une conversation morte uniquement par ennui et solitude", "en": "…revived a dead conversation purely out of boredom and loneliness" }, "crowdYesPct": 53, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…ré-écouté un vocal de quelqu'un que je devrais avoir oublié", "en": "…replayed a voice note from someone I really should have moved on from" }, "crowdYesPct": 48, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…envoyé un 'tu dors ?' en sachant pertinemment ce que ça déclenche", "en": "…sent a 'you awake?' fully aware of what that text sets in motion" }, "crowdYesPct": 41, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-jealousy-178",
+      "targetYesPct": 45,
+      "askKind": "agree",
+      "stem": { "fr": "La jalousie, on fait semblant, mais…", "en": "We pretend we're chill, but jealousy…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…on a tous déjà vérifié les likes de quelqu'un sur les photos de son/sa partenaire", "en": "…we've all checked who's liking our partner's photos a bit too closely" }, "crowdYesPct": 56, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…'ça me dérange pas' est faux dans environ 90 % des cas", "en": "…'I'm fine with it' is a lie roughly 90% of the time" }, "crowdYesPct": 61, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…on garde un œil sur les ex qui réapparaissent dans les stories", "en": "…we keep one eye on exes who resurface in the story feed" }, "crowdYesPct": 53, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…partager sa localisation en couple, c'est de la surveillance avec un joli nom", "en": "…couples sharing live location is surveillance with a cuter name" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…quelqu'un ici a déjà fouillé le téléphone d'un partenaire endormi", "en": "…someone in this room has gone through a sleeping partner's phone" }, "crowdYesPct": 34, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…on a un avis très précis sur l'ex d'un partenaire qu'on n'a jamais rencontré", "en": "…we have a very detailed opinion on a partner's ex we have never met" }, "crowdYesPct": 49, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-wouldconfess-179",
+      "targetYesPct": 20,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Là, maintenant, à voix haute, je serais cap de…", "en": "Right now, out loud, I could honestly…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…révéler le crush le plus gênant de toute ma vie, prénom inclus", "en": "…reveal the most embarrassing crush of my entire life, name included" }, "crowdYesPct": 28, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…dire combien de fois j'ai recontacté un ex après une rupture 'définitive'", "en": "…say exactly how many times I've crawled back to an ex after a 'final' breakup" }, "crowdYesPct": 22, "spicy": 2 },
+        { "id": "c", "text": { "fr": "…avouer si j'ai déjà eu un crush sur quelqu'un présent dans cette pièce", "en": "…admit whether I've ever had a crush on someone in this room" }, "crowdYesPct": 17, "spicy": 2 },
+        { "id": "d", "text": { "fr": "…raconter mon pire date dans sa version intégrale, non négociée", "en": "…tell my worst date in its full, uncut, unedited version" }, "crowdYesPct": 38, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…lire à voix haute le message le plus cringe que j'aie jamais envoyé en drague", "en": "…read out loud the cringiest flirty text I have ever sent" }, "crowdYesPct": 24, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…dire qui, dans mes contacts, je rappellerais en premier après quelques verres", "en": "…name who in my contacts I'd text first after a few drinks" }, "crowdYesPct": 31, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "challenges"]
+    },
+    {
+      "id": "cc-friendzone-180",
+      "targetYesPct": 50,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté flou amical-romantique, j'ai déjà…", "en": "In the blurry friend-or-more zone, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…gardé un 'ami' précis dans ma vie en espérant secrètement plus", "en": "…kept one specific 'friend' around secretly hoping for more" }, "crowdYesPct": 57, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…fait semblant d'être heureux pour un pote dont le date m'agaçait", "en": "…pretended to be happy for a friend whose new date secretly bugged me" }, "crowdYesPct": 49, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…analysé un simple emoji pendant une heure entière avec un autre pote", "en": "…analysed a single emoji for a full hour with another friend" }, "crowdYesPct": 62, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…eu un 'meilleur ami' avec qui la frontière a été franchie une fois", "en": "…had a 'best friend' where the line got crossed exactly once" }, "crowdYesPct": 34, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…laissé entendre que j'étais célibataire alors que c'était compliqué", "en": "…implied I was single when the real answer was 'it's complicated'" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…gardé une porte ouverte avec quelqu'un 'au cas où', pendant des années", "en": "…kept a door open with someone 'just in case', for actual years" }, "crowdYesPct": 46, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-pettyspicy-181",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "En vengeance d'adulte, j'ai déjà…", "en": "In adult-grade revenge mode, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…posté une story canon le jour précis où je savais qu'un ex la verrait", "en": "…posted a knockout story on the exact day I knew an ex would see it" }, "crowdYesPct": 53, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…fait croire que j'allais super bien alors que je guettais sa réaction", "en": "…performed 'doing amazing' while secretly watching for their reaction" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…retiré quelqu'un de mes 'amis proches' sans préavis, comme un licenciement", "en": "…cut someone from my close-friends list with no notice, like a layoff" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…sorti avec quelqu'un en partie pour qu'une autre personne l'apprenne", "en": "…dated someone partly so a different person would find out about it" }, "crowdYesPct": 27, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…liké le post d'un ex juste pour lui rappeler que j'existe encore", "en": "…liked an ex's post purely to remind them I still exist" }, "crowdYesPct": 39, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…bloqué puis débloqué quelqu'un trois fois dans la même soirée", "en": "…blocked and unblocked someone three times in one single night" }, "crowdYesPct": 31, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-grownadmit-182",
+      "targetYesPct": 60,
+      "askKind": "agree",
+      "stem": { "fr": "À cette table, on est tous d'accord…", "en": "At this table, we all secretly agree…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…un date qui paie l'addition sans drame, ça reste rare et précieux", "en": "…a date who covers the bill without a scene is rare and precious" }, "crowdYesPct": 64, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…on juge un date à la façon dont il parle au serveur, et on a raison", "en": "…we judge a date by how they treat the waiter, and we're right to" }, "crowdYesPct": 73, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…le 'on verra où ça nous mène' veut dire des choses différentes pour chacun", "en": "…'let's see where it goes' means wildly different things to each person" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…tout le monde a un 'plan' qu'il garde précisément hors du groupe", "en": "…everyone has one 'situation' they keep precisely out of the group chat" }, "crowdYesPct": 47, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…on est tous resté trop longtemps avec quelqu'un par flemme de rompre", "en": "…we've all stayed too long with someone out of pure breakup laziness" }, "crowdYesPct": 52, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…au moins un couple ici a survécu à un secret que les deux préfèrent enterrer", "en": "…at least one couple here survived a secret both would rather bury" }, "crowdYesPct": 39, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-overshare-183",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En roi ou reine de l'oversharing, j'ai déjà…", "en": "As a champion oversharer, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…raconté toute ma vie amoureuse à un inconnu dans une file d'attente", "en": "…told a complete stranger my entire love life in a queue" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…envoyé un pavé sur mon ex à un pote qui avait juste dit 'ça va ?'", "en": "…sent a friend a wall of text about my ex when they just asked 'you good?'" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…partagé un détail intime puis regretté pile une seconde trop tard", "en": "…shared an intimate detail then regretted it exactly one second too late" }, "crowdYesPct": 62, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…révélé un truc gênant sur ma vie de couple devant tout le monde, sans réfléchir", "en": "…dropped something awkward about my relationship in front of everyone, thoughtlessly" }, "crowdYesPct": 44, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…fait des confidences à quelqu'un que je connaissais depuis 20 minutes", "en": "…trauma-dumped on someone I had known for twenty whole minutes" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…dit un secret sur moi-même juste pour que la conversation reste sur moi", "en": "…confessed a secret about myself purely to keep the conversation on me" }, "crowdYesPct": 36, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["confessions", "social"]
+    },
+    {
+      "id": "cc-redflags-184",
+      "targetYesPct": 50,
+      "askKind": "agree",
+      "stem": { "fr": "Red flags qu'on a tous ignorés…", "en": "Red flags we have all chosen to ignore…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…'mes ex sont toutes folles' veut dire que le problème, c'est lui", "en": "…'all my exes are crazy' means the common factor is, in fact, them" }, "crowdYesPct": 76, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…quelqu'un qui ne dit jamais merci en date ne changera pas après", "en": "…someone who never says thanks on a date does not improve later" }, "crowdYesPct": 68, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…on a tous resté pour quelqu'un dont le premier red flag était énorme", "en": "…we've all stayed for someone whose first red flag was the size of a flag" }, "crowdYesPct": 57, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…un date qui te montre des captures de son ex est déjà un avertissement", "en": "…a date who shows you screenshots of their ex is its own warning label" }, "crowdYesPct": 61, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…on a tous un type récurrent qui n'a jamais, jamais marché", "en": "…we all have one recurring type that has never, ever once worked out" }, "crowdYesPct": 53, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…quelqu'un ici sort encore avec un red flag que tout le groupe a vu venir", "en": "…someone here is still dating a red flag the whole group saw coming" }, "crowdYesPct": 42, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-morningafter-185",
+      "targetYesPct": 35,
+      "askKind": "didYou",
+      "stem": { "fr": "Au réveil après une soirée trouble, j'ai déjà…", "en": "Waking up after a hazy night, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…vérifié mes messages envoyés avec une vraie peur au ventre", "en": "…checked my sent texts with genuine fear in my stomach" }, "crowdYesPct": 64, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…reconstitué la soirée uniquement grâce aux témoignages des autres", "en": "…pieced the night back together only from other people's accounts" }, "crowdYesPct": 52, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…trouvé dans ma poche un objet dont j'ignore totalement l'origine", "en": "…found an object in my pocket with no idea where it came from" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…dû envoyer un 'désolé pour hier' sans me souvenir de ce que j'avais fait", "en": "…had to send a 'sorry about last night' without remembering what I did" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…réalisé à qui j'avais écrit, et fermé les yeux très fort", "en": "…realised who I'd messaged, and shut my eyes very tightly" }, "crowdYesPct": 38, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…juré sur ma vie de ne plus jamais boire, jusqu'au week-end suivant", "en": "…sworn on my life to never drink again, until the next weekend" }, "crowdYesPct": 67, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["party", "confessions"]
+    },
+    {
+      "id": "cc-typecast-186",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "Niveau 'mon type', honnêtement, j'ai déjà…", "en": "On the matter of 'my type', honestly, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…retombé exactement sur le même genre de personne, encore une fois", "en": "…fallen for the exact same kind of person, yet again" }, "crowdYesPct": 62, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…nié avoir un type tout en l'illustrant parfaitement dans mes choix", "en": "…denied having a type while perfectly illustrating it in every choice" }, "crowdYesPct": 54, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…été attiré par quelqu'un précisément parce que c'était une mauvaise idée", "en": "…been into someone precisely because it was a terrible idea" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…ignoré quelqu'un de parfait pour quelqu'un de chaotique, en connaissance de cause", "en": "…passed on someone perfect for someone chaotic, fully aware of what I was doing" }, "crowdYesPct": 47, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…changé de 'type' pile au moment où une personne précise est entrée dans ma vie", "en": "…changed my whole 'type' the exact moment one specific person showed up" }, "crowdYesPct": 41, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…su que ça finirait mal dès le premier message, et foncé quand même", "en": "…known it would end badly from the first text, and dived in anyway" }, "crowdYesPct": 51, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-honestvotes-187",
+      "targetYesPct": 30,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Si personne ne pouvait m'en vouloir, je dirais…", "en": "If nobody could hold it against me, I'd say…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…lequel des couples du groupe ne tiendra clairement pas l'année", "en": "…which couple in the group is very clearly not making it to next year" }, "crowdYesPct": 33, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…qui ici a, selon moi, le pire goût en matière de dates", "en": "…who in this room has, frankly, the worst taste in dates" }, "crowdYesPct": 41, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…qui retournera avec son ex avant la fin de l'année, garanti", "en": "…who will get back with their ex before the year is out, guaranteed" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…lequel d'entre vous a déjà flirté avec quelqu'un qu'il n'aurait pas dû", "en": "…which of you has flirted with someone you really, really shouldn't have" }, "crowdYesPct": 36, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…qui ici ment le plus sur sa vie amoureuse, et de loin", "en": "…who in this room lies the most about their love life, and by a mile" }, "crowdYesPct": 29, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…lequel de mes potes je déconseillerais formellement à un autre pote", "en": "…which of my friends I would formally advise another friend never to date" }, "crowdYesPct": 24, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "challenges"]
+    },
+    {
+      "id": "cc-finsta-188",
+      "targetYesPct": 40,
+      "askKind": "didYou",
+      "stem": { "fr": "Côté double-vie en ligne, j'ai déjà…", "en": "On the online double-life front, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…eu un deuxième compte privé pour stalker tranquillement", "en": "…kept a second private account purely for undisturbed stalking" }, "crowdYesPct": 49, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…suivi quelqu'un avec un compte anonyme parce que le mien me grillait", "en": "…followed someone from a burner account because my real one would expose me" }, "crowdYesPct": 42, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…posté une story 'amis proches' qui visait précisément une personne", "en": "…posted a 'close friends' story aimed precisely at one person" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…créé un faux profil pour voir ce que quelqu'un postait après m'avoir bloqué", "en": "…made a fake profile to see what someone posted after blocking me" }, "crowdYesPct": 28, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…archivé une relation entière de mon feed le jour exact de la rupture", "en": "…archived an entire relationship off my feed on the exact day of the breakup" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "f", "text": { "fr": "…vérifié qui avait vu ma story toutes les dix minutes, en attendant UNE personne", "en": "…checked my story views every ten minutes, waiting for exactly one person" }, "crowdYesPct": 47, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["tech", "confessions"]
+    },
+    {
+      "id": "cc-couplehabits-189",
+      "targetYesPct": 50,
+      "askKind": "agree",
+      "stem": { "fr": "En couple, on le nie, mais…", "en": "In a relationship, we deny it, but…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…on garde tous une liste mentale des trucs qu'on ressortira en dispute", "en": "…we all keep a mental list of things to bring up in the next argument" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…'je m'en fiche, fais ce que tu veux' est un piège, toujours", "en": "…'I don't care, do whatever you want' is a trap, every single time" }, "crowdYesPct": 71, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…on a tous fait semblant de dormir pour éviter une conversation", "en": "…we've all faked being asleep to dodge a conversation" }, "crowdYesPct": 64, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…on a tous comparé un partenaire actuel à un ex, en silence", "en": "…we've all compared a current partner to an ex, silently, in our heads" }, "crowdYesPct": 53, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…on connaît le mot de passe de l'autre, et on s'en est déjà servi", "en": "…we know our partner's passcode, and we have absolutely used it" }, "crowdYesPct": 38, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…au moins un couple ici a une 'règle' que tout le monde trouve étrange", "en": "…at least one couple here has a 'rule' the rest of us find genuinely strange" }, "crowdYesPct": 44, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-wildcard-190",
+      "targetYesPct": 15,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour 1 000 €, sans broncher, je…", "en": "For a thousand bucks, without flinching, I'd…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…laisserais ce groupe gérer mes applis de rencontre pendant un mois entier", "en": "…let this group run my dating apps for a full month" }, "crowdYesPct": 27, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…rappellerais en haut-parleur la dernière personne à qui j'ai dit 'je t'aime'", "en": "…speaker-call the last person I ever said 'I love you' to" }, "crowdYesPct": 18, "spicy": 2 },
+        { "id": "c", "text": { "fr": "…laisserais le groupe lire le tout dernier message échangé avec mon ex", "en": "…let the group read the very last message I exchanged with my ex" }, "crowdYesPct": 22, "spicy": 2 },
+        { "id": "d", "text": { "fr": "…révélerais à voix haute mon vrai body count, sans arrondir", "en": "…announce my real body count out loud, with no rounding whatsoever" }, "crowdYesPct": 14, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…laisserais quelqu'un ici envoyer UN message depuis mon compte de rencontre", "en": "…let someone here send ONE message from my dating account, no preview" }, "crowdYesPct": 19, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…dirais à chaque personne ici si je l'aurais déjà 'envisagée', oui ou non", "en": "…tell every person here whether I have ever 'considered' them, yes or no" }, "crowdYesPct": 11, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "challenges"]
+    },
+    {
+      "id": "cc-firsthand-191",
+      "targetYesPct": 55,
+      "askKind": "didYou",
+      "stem": { "fr": "En premier rendez-vous, sans pudeur, j'ai déjà…", "en": "On a first date, no shame, I have…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…envoyé un 'sors-moi de là' à un pote depuis les toilettes", "en": "…texted a friend 'get me out of here' from the bathroom" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…inventé un faux 'demain je me lève tôt' à 22 h pile", "en": "…invented a fake early start at exactly 10 p.m." }, "crowdYesPct": 57, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…prévu des anecdotes 'spontanées' la veille, et oublié la moitié sur place", "en": "…pre-scripted 'spontaneous' stories the night before, then forgot half on the spot" }, "crowdYesPct": 49, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…déjà su que je ne reverrais jamais la personne avant même l'entrée", "en": "…already known I'd never see them again before the starters even arrived" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "e", "text": { "fr": "…comparé le date en direct à un ex, mentalement, à chaque phrase", "en": "…compared the date to an ex in real time, mentally, every sentence" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…proposé de 'continuer ailleurs' en sachant exactement ce que ça voulait dire", "en": "…suggested we 'go somewhere else' knowing exactly what that meant" }, "crowdYesPct": 38, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "awkward"]
+    },
+    {
+      "id": "cc-grudgeroom-192",
+      "targetYesPct": 40,
+      "askKind": "agree",
+      "stem": { "fr": "Vérités salées sur ce groupe précis…", "en": "Salty truths about this specific group…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…il y a une amitié ici qui ne survit que parce que personne n'ose la finir", "en": "…there's one friendship here surviving only because nobody dares end it" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…deux personnes ici ne se supportent pas et le cachent très mal", "en": "…two people here can't stand each other and hide it very badly" }, "crowdYesPct": 44, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…quelqu'un ici a déjà été exclu d'un plan avec un mensonge coordonné", "en": "…someone here has been cut from a plan with a fully coordinated cover story" }, "crowdYesPct": 38, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…il existe un drama enterré dans ce groupe qui referait tout exploser", "en": "…there's a buried drama in this group that would blow everything up again" }, "crowdYesPct": 41, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…une personne ici a déjà eu une histoire avec l'ex d'une autre personne ici", "en": "…one person here once had a thing with another person here's ex" }, "crowdYesPct": 33, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…si tous les groupes privés du groupe fuitaient, la soirée s'arrêterait là", "en": "…if every side chat in this group leaked, this party would end right here" }, "crowdYesPct": 52, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["social", "opinions"]
+    },
+    {
+      "id": "cc-latenight-193",
+      "targetYesPct": 45,
+      "askKind": "didYou",
+      "stem": { "fr": "À 2 h du matin, version pas raisonnable, j'ai déjà…", "en": "At 2 a.m., the unreasonable version of me has…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…rédigé un long message d'explication que je n'ai jamais osé envoyer", "en": "…written a long explaining-myself message I never dared to send" }, "crowdYesPct": 58, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…rouvert une vieille conversation juste pour relire un compliment", "en": "…reopened an old chat just to re-read one compliment" }, "crowdYesPct": 51, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…été à un clic d'envoyer un message que j'aurais regretté à vie", "en": "…been one tap away from sending a message I'd have regretted forever" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…recontacté quelqu'un que tout mon entourage m'a supplié d'oublier", "en": "…messaged someone my whole circle has begged me to forget" }, "crowdYesPct": 39, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…envoyé un message dont je me suis réveillé en sueur le lendemain", "en": "…sent a message I woke up in a cold sweat about the next day" }, "crowdYesPct": 36, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…cédé à un 'tu fais quoi' que je m'étais juré de ne jamais envoyer", "en": "…caved to a 'you up?' I had sworn to myself I would never send" }, "crowdYesPct": 33, "spicy": 2 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "confessions"]
+    },
+    {
+      "id": "cc-honesttypes-194",
+      "targetYesPct": 60,
+      "askKind": "agree",
+      "stem": { "fr": "Sur les dates en général, soyons crus…", "en": "On dating in general, let's be blunt…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…la première chose qu'on fait après un match, c'est stalker, pas écrire", "en": "…the first thing we do after a match is stalk, not message" }, "crowdYesPct": 74, "spicy": 1 },
+        { "id": "b", "text": { "fr": "…on a tous un message type 'copié-collé' pour les débuts de conversation", "en": "…we all have one copy-paste opening line we recycle for everyone" }, "crowdYesPct": 49, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…on juge un date sur sa photo de groupe : lequel est lui, vraiment ?", "en": "…we judge a date by their group photo: which one are they, really?" }, "crowdYesPct": 66, "spicy": 1 },
+        { "id": "d", "text": { "fr": "…tout le monde a un 'ex de secours' qu'il garde précisément au chaud", "en": "…everyone keeps one 'backup ex' precisely on standby" }, "crowdYesPct": 44, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…on a tous fait croire qu'on cherchait du sérieux alors que non", "en": "…we've all claimed we were looking for something serious when we really weren't" }, "crowdYesPct": 53, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…quelqu'un ici parle encore à une personne qu'il devrait avoir supprimée", "en": "…someone here still talks to a person they should have deleted long ago" }, "crowdYesPct": 57, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "opinions"]
+    },
+    {
+      "id": "cc-finalspicy-195",
+      "targetYesPct": 50,
+      "askKind": "wouldYou",
+      "stem": { "fr": "Pour clore la soirée en beauté, je serais cap de…", "en": "To end the night with a bang, I could honestly…" },
+      "completions": [
+        { "id": "a", "text": { "fr": "…révéler le crush le plus inavouable que j'ai eu dans ce groupe", "en": "…reveal the most unspeakable crush I have ever had inside this group" }, "crowdYesPct": 31, "spicy": 2 },
+        { "id": "b", "text": { "fr": "…laisser la personne à ma droite raconter MA pire histoire de date", "en": "…let the person on my right tell MY worst dating story for me" }, "crowdYesPct": 47, "spicy": 1 },
+        { "id": "c", "text": { "fr": "…dire à voix haute combien de fois j'ai recommencé avec la même personne", "en": "…say out loud how many times I've restarted things with the same person" }, "crowdYesPct": 38, "spicy": 2 },
+        { "id": "d", "text": { "fr": "…montrer le dernier date dans mes messages, conversation entière, sans tri", "en": "…show my most recent date in my messages, full thread, unfiltered" }, "crowdYesPct": 26, "spicy": 2 },
+        { "id": "e", "text": { "fr": "…avouer qui, dans mes contacts, je rappellerais ce soir si on me défiait", "en": "…confess who in my contacts I'd text tonight if the group dared me" }, "crowdYesPct": 34, "spicy": 2 },
+        { "id": "f", "text": { "fr": "…assumer mon historique de dates devant tout le monde, sans en renier un seul", "en": "…own my entire dating history in front of everyone, disowning not a single one" }, "crowdYesPct": 52, "spicy": 1 }
+      ],
+      "tone": "spicy",
+      "tags": ["love", "meta"]
     }
   ]
 }

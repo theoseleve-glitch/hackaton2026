@@ -8,6 +8,7 @@ export {
   type EndReason,
   type LText,
   type LynchReport,
+  type MatchEpilogue,
   type NarrationItem,
   type NarrationSlot,
   type NightDayAction,

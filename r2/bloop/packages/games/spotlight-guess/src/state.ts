@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence, SideBetBuffer } from '@bloop/kit';
+import type { Presence, RoundMultiplierOpts, SideBetBuffer } from '@bloop/kit';
 
 /**
  * KEYSTONE (P0-B-lite) — devine react-lite token. A CONTENT-FREE liveness tap
@@ -85,6 +85,26 @@ export interface SpotlightGuessConfig {
   scoreboardMs: number;
   /** Insert a scoreboard beat every N revealed rounds (and always before over). 0 = final only. */
   scoreboardEvery: number;
+  /**
+   * P1 (CC-2) — escalating late-round score multiplier. Applied at BOTH award
+   * sites (scale band points + spotlight median band; reverse tier points +
+   * reader bonus) via the kit's `roundMultiplier`, so late accuracy can erase
+   * an early lead (comeback) without touching the band/tier math itself.
+   *
+   * DEFAULT-IDENTITY: omitting this (or an empty `{}`) yields `roundMultiplier`
+   * === 1 every round, so EVERY existing exact-score test stays byte-identical;
+   * only the explicitly late-weighted cases re-baseline.
+   *   - jeu-de-la-note: the last `multiplierRounds` rounds are worth more.
+   *   - devine-la-question: the final round's tier (and reader) points double.
+   */
+  lateRoundMultiplier?: RoundMultiplierOpts;
+  /**
+   * P1 (CC-5) — top-2 score gap at/under which the 'over' epilogue flags a
+   * close finish (cliffhanger chrome). Tuned per game's point scale. Omitted /
+   * negative => the flag is simply never raised (default-safe, no behaviour
+   * change beyond an inert `closeFinish:false`).
+   */
+  closeFinishThreshold?: number;
 }
 
 /** jeu-de-la-note — design docs/designs/wave2-raw/by-game/jeu-de-la-note.json (binding). */
@@ -107,6 +127,12 @@ export const JEU_DE_LA_NOTE_CONFIG: SpotlightGuessConfig = {
   readerPointsPerCorrectGuess: 0,
   scoreboardMs: 0,
   scoreboardEvery: 0,
+  // P1 (CC-2) — the last two rounds are worth double, so a tight 8-round game
+  // stays live to the end instead of compressing to a dead rubber (every round
+  // otherwise caps at 4 pts). Rounds 0-5 ×1 (identity), rounds 6-7 ×2.
+  lateRoundMultiplier: { finalRoundMultiplier: 2, multiplierRounds: 2 },
+  // A 4-point swing (one ×2 perfect read) or less at the buzzer is a photo finish.
+  closeFinishThreshold: 4,
 };
 
 /** devine-la-question — design docs/designs/wave2-raw/by-game/devine-la-question.json (binding). */
@@ -129,6 +155,12 @@ export const DEVINE_LA_QUESTION_CONFIG: SpotlightGuessConfig = {
   readerPointsPerCorrectGuess: 75,
   scoreboardMs: 6_000,
   scoreboardEvery: 2,
+  // P1 (CC-2) — the LAST round's tier ladder (and reader bonus) doubles, so a
+  // player 300 behind at round 5 still has a live shot at the crown. Rounds 0-4
+  // ×1 (identity — every shipped tier-ladder test runs at round 0), round 5 ×2.
+  lateRoundMultiplier: { finalRoundMultiplier: 2, multiplierRounds: 1 },
+  // One missed h0 lock (300) or less between the top two is a nail-biter.
+  closeFinishThreshold: 300,
 };
 
 /**
@@ -205,6 +237,19 @@ export interface SpotlightGuessState {
   /** Points gained in the last resolved round — public from reveal on. */
   lastGained: Record<PlayerId, number>;
   scores: Record<PlayerId, number>;
+  /**
+   * P1 (CC-5) — PUBLIC per-player tallies, accrued ONLY at reveal from outcomes
+   * that are already public there (no new in-match secret). They summarise the
+   * reveal nobody could un-see, so the 'over' epilogue is a pure fold over them:
+   *   - mindReads: rounds a guesser read the secret perfectly (scale: distance 0
+   *     i.e. the top band; reverse: a correct candidate lock). Feeds "best
+   *     mind-reader".
+   *   - whiffs: rounds a guesser submitted but scored nothing (scale: band 0;
+   *     reverse: a wrong lock). Feeds "most-fooled".
+   * The spotlight never guesses, so neither counter ever moves for them.
+   */
+  mindReads: Record<PlayerId, number>;
+  whiffs: Record<PlayerId, number>;
 }
 
 export type SpotlightGuessAction =
@@ -329,8 +374,32 @@ export type SpotlightGuessView =
       phase: 'scoreboard';
       gained: Record<PlayerId, number>;
     })
-  | {
+  | (SpotlightEpilogue & {
       mode: SpotlightMode;
       phase: 'over';
       scores: Record<PlayerId, number>;
-    };
+    });
+
+/**
+ * P1 (CC-5) — the game-over epilogue, DERIVED at 'over' from already-PUBLIC
+ * state only (final scores + the public mindReads/whiffs tallies). No new
+ * secret; pure, deterministic, replay-identical (kit `mvp`/`statLeaders` use a
+ * stable ascending-id order). Feeds the session-shell roast + rematch CTA.
+ */
+export interface SpotlightEpilogue {
+  /** Sole crown holder, or null on a contested (tied) first place. */
+  mvp: PlayerId | null;
+  /** True when the top-2 score gap is within `closeFinishThreshold` (cliffhanger chrome). */
+  closeFinish: boolean;
+  /** Superlative: best mind-reader(s) — most perfect reads; [] when nobody read anyone. */
+  bestMindReaders: PlayerId[];
+  /** The winning read count behind `bestMindReaders` (0 when nobody read). */
+  bestMindReads: number;
+  /** Superlative: most-fooled — the guesser(s) with the most whiffed rounds; [] when nobody whiffed. */
+  mostFooled: PlayerId[];
+  /** The whiff count behind `mostFooled` (0 when nobody whiffed). */
+  mostFooledWhiffs: number;
+  /** PUBLIC per-player tallies the superlatives fold over (for the client breakdown). */
+  mindReads: Record<PlayerId, number>;
+  whiffs: Record<PlayerId, number>;
+}

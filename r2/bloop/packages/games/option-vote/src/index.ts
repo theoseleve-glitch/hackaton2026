@@ -4,6 +4,7 @@ export {
   GAUCHE_DROITE_CONFIG,
   TU_PREFERES_CONFIG,
   type Ballot,
+  type Cliffhanger,
   type LText,
   type Option,
   type OptionVoteAction,
@@ -16,4 +17,6 @@ export {
   type OptionVoteView,
   type PredictionReveal,
   type RoundResult,
+  type StreakTag,
+  type TiePolicy,
 } from './state.js';

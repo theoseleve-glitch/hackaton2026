@@ -197,6 +197,27 @@ describe('rate: prompt data is mover-only until the reveal', () => {
       expect(rateMod.view(sLow, viewer)).toEqual(rateMod.view(sHigh, viewer));
     }
   });
+
+  it("P1-2 split: published reveal min/max leaks NO per-rater ballot (swapped multiset is identical)", () => {
+    // two scripts assign the SAME star multiset {1,5} to the two raters in
+    // SWAPPED order. The reveal aggregate (avg/min/max/drama) is byte-identical
+    // for EVERY viewer — proving min/max is a property of the anonymous multiset,
+    // not an attributable per-rater value.
+    let s = fold(rateMod, start(), [deadline(0), deadline(1)]);
+    const raters = P4.filter((p) => p !== s.performer && p !== s.partner);
+    const sA = fold(rateMod, s, [rate(raters[0]!, 1, 2), rate(raters[1]!, 5, 3)]);
+    const sB = fold(rateMod, s, [rate(raters[0]!, 5, 2), rate(raters[1]!, 1, 3)]);
+    expect(sA.phase).toBe('reveal');
+    expect(sB.phase).toBe('reveal');
+    expect(rateMod.phaseKey(sA)).toBe(rateMod.phaseKey(sB));
+    // the public reveal aggregate is identical (min 1, max 5, split) across scripts
+    expect(sA.lastResult?.stars).toEqual({ avg: 3, cast: 2, ovation: false, min: 1, max: 5 });
+    expect(sA.lastResult?.drama).toBe('split');
+    // NO viewer — not even a rater — can tell the two attributions apart at reveal
+    for (const viewer of [...P4, ...OUTSIDERS]) {
+      expect(rateMod.view(sA, viewer)).toEqual(rateMod.view(sB, viewer));
+    }
+  });
 });
 
 describe('verdict ballots are invariant for non-actors', () => {

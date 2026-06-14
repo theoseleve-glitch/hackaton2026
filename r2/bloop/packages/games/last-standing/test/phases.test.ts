@@ -203,3 +203,81 @@ describe('phase chain, durations and phaseKey discipline', () => {
     expect(gameOver).toBeDefined();
   });
 });
+
+describe('P1 comeback rebalance — CC-2 escalating survivor crown', () => {
+  /** Run a single round to its roundEnd where ONLY `survivor` is left standing. */
+  function roundToSurvivor(g: typeof game, s0: LastStandingState): LastStandingState {
+    let s = g.reduce(s0, deadline()).state; // say t1
+    // Time out every spotlight until a single survivor remains -> roundEnd.
+    for (let i = 0; i < 40 && s.phase !== 'roundEnd'; i++) s = g.reduce(s, deadline()).state;
+    expect(s.phase).toBe('roundEnd');
+    expect(s.roundWinners).toHaveLength(1);
+    return s;
+  }
+
+  it('DEFAULT config is identity: the crown is exactly survivorPoints every round (existing barème unchanged)', () => {
+    // No survivorRoundMultiplier => roundMultiplier returns 1 => +3 each round.
+    let s = roundToSurvivor(game, game.init('s', players, content)); // roundEnd:r0
+    const w0 = s.roundWinners[0]!;
+    expect(s.scores[w0]).toBe(3); // round 0 crown = survivorPoints (identity)
+    const vEnd0 = game.view(s, 'p1');
+    if (vEnd0.phase !== 'roundEnd') throw new Error('expected roundEnd');
+    expect(vEnd0.pointsAwarded).toBe(3); // view mirrors the identity crown
+
+    s = game.reduce(s, deadline()).state; // draw:r1
+    s = roundToSurvivor(game, s); // roundEnd:r1
+    const vEnd1 = game.view(s, 'p1');
+    if (vEnd1.phase !== 'roundEnd') throw new Error('expected roundEnd');
+    expect(vEnd1.pointsAwarded).toBe(3); // still +3 under default identity (no escalation)
+  });
+
+  it('finalRoundMultiplier DOUBLES only the final round\'s crown — a trailing player can surge', () => {
+    // Crown by round: r0 -> 3 (×1), r1 -> 3 (×1), r2 (final) -> 6 (×2).
+    const surge = createLastStanding('jeu-du-theme', {
+      ...JEU_DU_THEME_CONFIG,
+      survivorRoundMultiplier: { finalRoundMultiplier: 2 },
+    });
+    let s = roundToSurvivor(surge, surge.init('s', players, content)); // roundEnd:r0
+    const vr0 = surge.view(s, 'p1');
+    if (vr0.phase !== 'roundEnd') throw new Error('expected roundEnd');
+    expect(vr0.pointsAwarded).toBe(3); // round 0 NOT boosted
+
+    s = roundToSurvivor(surge, surge.reduce(s, deadline()).state); // roundEnd:r1
+    const vr1 = surge.view(s, 'p1');
+    if (vr1.phase !== 'roundEnd') throw new Error('expected roundEnd');
+    expect(vr1.pointsAwarded).toBe(3); // round 1 NOT boosted
+
+    s = roundToSurvivor(surge, surge.reduce(s, deadline()).state); // roundEnd:r2 (final)
+    const vr2 = surge.view(s, 'p1');
+    if (vr2.phase !== 'roundEnd') throw new Error('expected roundEnd');
+    expect(vr2.pointsAwarded).toBe(6); // final crown DOUBLED (3 × 2)
+    const finalWinner = s.roundWinners[0]!;
+    // the final survivor banked the escalated +6 from this round alone
+    expect(s.scores[finalWinner]).toBeGreaterThanOrEqual(6);
+  });
+
+  it('multiplierRounds escalates the last N rounds; the crown is always an integer (rounded)', () => {
+    const opts = createLastStanding('jeu-du-theme', {
+      ...JEU_DU_THEME_CONFIG,
+      survivorPoints: 3,
+      survivorRoundMultiplier: { finalRoundMultiplier: 1.5, multiplierRounds: 2 },
+    });
+    // r0 -> 3 (×1); r1 -> round(3×1.5)=round(4.5)=5; r2 -> 5.
+    let s = roundToSurvivor(opts, opts.init('s', players, content)); // r0
+    expect((opts.view(s, 'p1') as { pointsAwarded: number }).pointsAwarded).toBe(3);
+    s = roundToSurvivor(opts, opts.reduce(s, deadline()).state); // r1
+    expect((opts.view(s, 'p1') as { pointsAwarded: number }).pointsAwarded).toBe(5);
+    s = roundToSurvivor(opts, opts.reduce(s, deadline()).state); // r2
+    expect((opts.view(s, 'p1') as { pointsAwarded: number }).pointsAwarded).toBe(5);
+  });
+
+  it('a misconfigured (0 / negative) multiplier never zeroes or inverts the crown — falls back to identity', () => {
+    const bad = createLastStanding('jeu-du-theme', {
+      ...JEU_DU_THEME_CONFIG,
+      survivorRoundMultiplier: { finalRoundMultiplier: 0 },
+    });
+    const s = roundToSurvivor(bad, bad.init('s', players, content));
+    expect((bad.view(s, 'p1') as { pointsAwarded: number }).pointsAwarded).toBe(3); // identity, not 0
+    expect(s.scores[s.roundWinners[0]!]).toBe(3);
+  });
+});

@@ -186,7 +186,7 @@ describe('rate scoring (double-le-mouvement §2.12 exact)', () => {
   it('stars 4 and 5 -> avg 4.5 -> round(4.5 × 20) = 90 to BOTH crew members', () => {
     const { s, raters, mover, dubber } = atRate();
     const s2 = fold(rateMod, s, [rate(raters[0]!, 4, 2), rate(raters[1]!, 5, 3)]);
-    expect(s2.lastResult?.stars).toEqual({ avg: 4.5, cast: 2, ovation: false });
+    expect(s2.lastResult?.stars).toEqual({ avg: 4.5, cast: 2, ovation: false, min: 4, max: 5 });
     expect(s2.scores[mover]).toBe(90);
     expect(s2.scores[dubber]).toBe(90);
     expect(raters.every((p) => s2.scores[p] === 0)).toBe(true); // rating earns nothing
@@ -195,7 +195,7 @@ describe('rate scoring (double-le-mouvement §2.12 exact)', () => {
   it('unanimous 5★ with >= 2 ballots: ovation, 100 + 25 each', () => {
     const { s, raters, mover, dubber } = atRate();
     const s2 = fold(rateMod, s, [rate(raters[0]!, 5, 2), rate(raters[1]!, 5, 3)]);
-    expect(s2.lastResult?.stars).toEqual({ avg: 5, cast: 2, ovation: true });
+    expect(s2.lastResult?.stars).toEqual({ avg: 5, cast: 2, ovation: true, min: 5, max: 5 });
     expect(s2.scores[mover]).toBe(125);
     expect(s2.scores[dubber]).toBe(125);
   });
@@ -204,14 +204,14 @@ describe('rate scoring (double-le-mouvement §2.12 exact)', () => {
     const { s, raters, mover } = atRate();
     const s2 = fold(rateMod, s, [rate(raters[0]!, 5, 2), left(raters[1]!, 3)]);
     expect(s2.phase).toBe('reveal'); // the leave completed the expected set
-    expect(s2.lastResult?.stars).toEqual({ avg: 5, cast: 1, ovation: false });
+    expect(s2.lastResult?.stars).toEqual({ avg: 5, cast: 1, ovation: false, min: 5, max: 5 });
     expect(s2.scores[mover]).toBe(100);
   });
 
   it('zero ballots default to 3.0 stars -> 60 each', () => {
     const { s, mover, dubber } = atRate();
     const s2 = fold(rateMod, s, [deadline(9)]);
-    expect(s2.lastResult?.stars).toEqual({ avg: 3, cast: 0, ovation: false });
+    expect(s2.lastResult?.stars).toEqual({ avg: 3, cast: 0, ovation: false, min: 3, max: 3 });
     expect(s2.scores[mover]).toBe(60);
     expect(s2.scores[dubber]).toBe(60);
   });

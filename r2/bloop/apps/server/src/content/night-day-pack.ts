@@ -1250,6 +1250,510 @@ export const LOUP_GAROU_PACK: ContentPack<NightDayContent> = {
       "fr": "La meute gagne sans trembler. Les loups étaient assis parmi vous depuis le début — vous leur passiez le sel, vous leur confiiez vos soupçons. Surtout vos soupçons.",
       "en": "The pack wins without breaking a sweat. The wolves sat among you the whole time — you passed them the salt, you told them your suspicions. Especially your suspicions."
     }
+  },
+  {
+    "id": "narration-night-intro-19",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "La cloche du soir n'a pas sonné. Le sonneur dormait déjà. Personne ne l'a réveillé. Personne n'a osé.",
+      "en": "The evening bell didn't ring. The bell-ringer was already asleep. Nobody woke him. Nobody dared."
+    }
+  },
+  {
+    "id": "narration-night-intro-20",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "Que la nuit commence. Comptez les respirations autour de vous. L'une d'elles est plus lente que les autres. Elle attend.",
+      "en": "Let the night begin. Count the breaths around you. One of them is slower than the rest. It's waiting."
+    }
+  },
+  {
+    "id": "narration-night-intro-21",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "Les chandelles s'éteignent une à une. La dernière main à les souffler connaît déjà l'ordre dans lequel elles se rallumeront. Une de moins, à chaque fois.",
+      "en": "The candles go out one by one. The last hand to snuff them already knows the order they'll be relit in. One fewer, every time."
+    }
+  },
+  {
+    "id": "narration-night-intro-22",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "Nuit sans vent. Les épouvantails des champs sont tournés vers le village ce soir. Personne ne les a déplacés.",
+      "en": "A windless night. The scarecrows in the fields are facing the village tonight. Nobody turned them."
+    }
+  },
+  {
+    "id": "narration-night-intro-23",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "Le noir tombe d'un bloc. Le puits au centre de la place renvoie un écho qu'il n'avait pas hier. Quelque chose y est descendu. Quelque chose en est ressorti.",
+      "en": "The dark comes down all at once. The well in the square gives back an echo it didn't have yesterday. Something went down. Something came back up."
+    }
+  },
+  {
+    "id": "narration-night-intro-24",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "On éteint. Dans le silence, écoutez : pas un loup ne hurle. Les loups qui hurlent chassent ailleurs. Les vôtres sont déjà à table.",
+      "en": "Lights out. In the hush, listen: not one wolf is howling. Wolves that howl are hunting elsewhere. Yours are already at the table."
+    }
+  },
+  {
+    "id": "narration-night-intro-25",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "La nuit referme le village comme un poing. Demain, il s'ouvrira sur une main de moins. Vous avez tous compté la vôtre, ce soir, sans en parler.",
+      "en": "Night closes over the village like a fist. Tomorrow it opens with one fewer hand. You all counted your own tonight, without saying so."
+    }
+  },
+  {
+    "id": "narration-night-intro-26",
+    "type": "narration",
+    "slot": "night.intro",
+    "text": {
+      "fr": "Couvre-feu. La lune ne se cache pas ce soir : elle veut voir. Elle a déjà choisi son côté, et ce n'est pas le vôtre.",
+      "en": "Curfew. The moon isn't hiding tonight: it wants to watch. It has already picked a side, and it isn't yours."
+    }
+  },
+  {
+    "id": "narration-dawn-death-21",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "Le pain de {victim} est encore tiède sur la table. La chaise est froide depuis des heures. Faites le calcul, et regardez bien qui ne le fait pas.",
+      "en": "{victim}'s bread is still warm on the table. The chair has been cold for hours. Do the math, and watch closely who doesn't."
+    }
+  },
+  {
+    "id": "narration-dawn-death-22",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "On a sonné le glas pour {victim} avant même de trouver le corps. Quelqu'un connaissait l'heure du décès mieux que le mort.",
+      "en": "They tolled the bell for {victim} before the body was even found. Someone knew the time of death better than the dead."
+    }
+  },
+  {
+    "id": "narration-dawn-death-23",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "Le lit de {victim} est fait au carré. Les draps sont propres. Le sol, sous le lit, raconte une autre version. Ne regardez pas sous le lit.",
+      "en": "{victim}'s bed is made, hospital corners and all. The sheets are clean. The floor under the bed tells another version. Don't look under the bed."
+    }
+  },
+  {
+    "id": "narration-dawn-death-24",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "{victim} avait fermé sa fenêtre. Elle est grande ouverte ce matin. Rien n'est entré par là — quelque chose est sorti.",
+      "en": "{victim} had shut the window. It's wide open this morning. Nothing came in that way — something left."
+    }
+  },
+  {
+    "id": "narration-dawn-death-25",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "Le chien de {victim} attend toujours devant la porte. Il n'aboie pas. Il regarde quelqu'un, ici, à la table. Suivez son regard.",
+      "en": "{victim}'s dog is still waiting at the door. It isn't barking. It's looking at someone here at the table. Follow its eyes."
+    }
+  },
+  {
+    "id": "narration-dawn-death-26",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "Au registre paroissial, le nom de {victim} a été rayé d'un trait net. L'encre date d'avant-hier. L'écriture, vous la connaissez tous.",
+      "en": "In the parish register, {victim}'s name was struck out in one clean line. The ink dates from two days ago. The handwriting, you all recognize it."
+    }
+  },
+  {
+    "id": "narration-dawn-death-27",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "{victim} dormait la porte barricadée, un couteau sous l'oreiller. Le couteau est toujours là. Il n'a servi à rien. Ça non plus, ça ne sert jamais à rien.",
+      "en": "{victim} slept with the door barred and a knife under the pillow. The knife is still there. It did nothing. That never does anything either."
+    }
+  },
+  {
+    "id": "narration-dawn-death-28",
+    "type": "narration",
+    "slot": "dawn.death",
+    "text": {
+      "fr": "Le fossoyeur s'est plaint : la tombe de {victim} était déjà creusée à son arrivée. Bien creusée. Aux bonnes dimensions. Quelqu'un a de l'avance.",
+      "en": "The gravedigger complained: {victim}'s grave was already dug when he got there. Dug well. To the right measurements. Someone is ahead of schedule."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-17",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Personne ne manque. Pourtant le boulanger jure avoir compté un couvert de trop, hier soir, à la table commune. Il a recompté ce matin. Le compte est juste. Pour l'instant.",
+      "en": "Nobody's missing. And yet the baker swears he counted one place setting too many last night at the common table. He counted again this morning. The numbers add up. For now."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-18",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Aube tranquille. Trop. Sur le seuil de chaque maison, des empreintes : elles sont venues, elles ont reniflé, elles sont reparties. Elles savent maintenant où dort chacun.",
+      "en": "A quiet dawn. Too quiet. On every doorstep, tracks: they came, they sniffed, they left. They know now where each of you sleeps."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-19",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Tout le monde respire encore. Le doyen sourit. Le doyen n'a pas dormi : il a passé la nuit à écouter une porte qu'on essayait d'ouvrir doucement. Très doucement.",
+      "en": "Everyone's still breathing. The elder smiles. The elder didn't sleep: he spent the night listening to a door someone was trying to open softly. Very softly."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-20",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Aucun corps. Le village voudrait y voir un miracle. Un miracle ne laisse pas de salive sur le loquet de la grange.",
+      "en": "No body. The village would like to call it a miracle. A miracle doesn't leave spit on the barn latch."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-21",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Nuit blanche, sans victime. Le silence pèse plus lourd qu'un mort. Un mort, au moins, on sait quoi en faire.",
+      "en": "A sleepless night, no victim. The silence weighs more than a corpse. A corpse, at least, you know what to do with."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-22",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Pas de deuil ce matin. Inhabituel. La bête n'a pas eu faim — ou elle a simplement préféré observer comment vous dormez quand vous vous croyez en sécurité.",
+      "en": "No mourning this morning. Unusual. The beast wasn't hungry — or it simply preferred to study how you sleep when you think you're safe."
+    }
+  },
+  {
+    "id": "narration-dawn-nodeath-23",
+    "type": "narration",
+    "slot": "dawn.noDeath",
+    "text": {
+      "fr": "Réveil sans manquant. Quelqu'un, cette nuit, s'est levé entre la meute et une porte, et s'est rassis sans un mot. Il est parmi vous. Il ne réclamera jamais son dû.",
+      "en": "Everyone wakes. Last night, someone rose between the pack and a door, then sat back down without a word. They're among you. They will never call in the debt."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-17",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "Verdict : {target} était un loup. On a fouillé ses poches : un mouchoir, une pièce, et trois dents qui n'étaient pas les siennes. L'enquête s'arrête là. Vous, non.",
+      "en": "Verdict: {target} was a wolf. They searched the pockets: a handkerchief, a coin, and three teeth that weren't theirs. The inquiry stops there. You don't."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-18",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "{target} était un loup. Au moment de tomber, il a regardé une seule personne dans la foule. Pas vous. Souvenez-vous de qui n'a pas soutenu ce regard.",
+      "en": "{target} was a wolf. At the moment of falling, they looked at one single person in the crowd. Not you. Remember who couldn't hold that look."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-19",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "C'était bien un loup : {target}. Le village exulte. Les loups, eux, ont perdu un frère ce soir — et ils n'ont jamais pardonné une perte. Jamais.",
+      "en": "It really was a wolf: {target}. The village rejoices. The wolves, though, lost a brother tonight — and they've never once forgiven a loss. Never."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-20",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "Loup confirmé : {target}. Sa dernière phrase fut « vous regretterez ça ». Ce n'était pas une menace en l'air. C'était un rendez-vous.",
+      "en": "Wolf confirmed: {target}. Their last words were 'you'll regret this.' It wasn't an idle threat. It was an appointment."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-21",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "{target} portait bien le pelage. Le village a eu raison pour une fois, et le célèbre bruyamment. Réjouissez-vous tout haut : la meute apprend vos voix.",
+      "en": "{target} did wear the fur. The village was right for once, and is loud about it. Celebrate at full volume: the pack is learning your voices."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-22",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "Le tribunal a vu juste : {target}, un loup. On grave une encoche de plus sur la poutre de la mairie. Comptez les encoches. Comptez les chaises. Le compte ne tombe pas juste.",
+      "en": "The court saw true: {target}, a wolf. One more notch is carved into the town-hall beam. Count the notches. Count the chairs. The numbers don't match."
+    }
+  },
+  {
+    "id": "narration-lynch-wolf-23",
+    "type": "narration",
+    "slot": "lynch.wolf",
+    "text": {
+      "fr": "{target} était un loup, et un bon : trois jours sans qu'une seule voix le soupçonne. Réfléchissez à ce que ça dit des autres qui n'ont jamais été soupçonnés non plus.",
+      "en": "{target} was a wolf, and a good one: three days without a single voice suspecting them. Think about what that says about the others who were never suspected either."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-19",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "{target} n'était pas un loup. Le village baisse les yeux. La voyante, elle, ne les baisse pas : elle savait, et personne ne l'a écoutée. Demain non plus, on ne l'écoutera pas.",
+      "en": "{target} was no wolf. The village looks away. The seer doesn't: she knew, and nobody listened. Tomorrow, nobody will listen either."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-20",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "Innocent : {target}. Il avait demandé une seule chose avant le vote : « regardez-moi dans les yeux ». Vous avez tous regardé ailleurs. Vous regardez encore ailleurs.",
+      "en": "Innocent: {target}. They asked one thing before the vote: 'look me in the eye.' You all looked elsewhere. You're still looking elsewhere."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-21",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "{target} était des vôtres. La fourche qui a porté le premier coup tremblait. Pas de remords — de fatigue. On s'habitue à tout, dans ce village. C'est le plus terrible.",
+      "en": "{target} was one of yours. The pitchfork that struck first was trembling. Not from regret — from exhaustion. You get used to anything in this village. That's the worst of it."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-22",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "Pas un poil de loup sur {target}. Le vrai loup a voté comme vous, soupiré comme vous, et serré la main du condamné comme vous. Surtout comme vous.",
+      "en": "Not a wolf hair on {target}. The real wolf voted like you, sighed like you, and shook the condemned's hand like you. Especially like you."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-23",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "{target}, innocent, s'en va. Le village promet une enquête. Le village promet toujours une enquête. Il n'a jamais eu le temps : il était occupé à enterrer.",
+      "en": "{target}, innocent, is gone. The village promises an inquiry. The village always promises an inquiry. It's never had the time: it was busy burying."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-24",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "Erreur : {target} ne mordait personne. Sa place restera vide à la table. Le loup, lui, demandera bientôt à se rapprocher du feu. Il aura un peu froid, sans doute.",
+      "en": "A mistake: {target} bit no one. Their place at the table will stay empty. The wolf, meanwhile, will soon ask to sit closer to the fire. A little chilly, no doubt."
+    }
+  },
+  {
+    "id": "narration-lynch-villager-25",
+    "type": "narration",
+    "slot": "lynch.villager",
+    "text": {
+      "fr": "{target} n'avait pas de crocs, seulement des arguments. Mauvaise nuit pour avoir raison. Dans ce village, toutes les nuits sont mauvaises nuits pour avoir raison.",
+      "en": "{target} had no fangs, only arguments. A bad night to be right. In this village, every night is a bad night to be right."
+    }
+  },
+  {
+    "id": "narration-lynch-none-17",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Aucune majorité. Le bourreau range sa corde, presque déçu. Il la ressortira demain. Il la ressort toujours.",
+      "en": "No majority. The hangman coils his rope, almost disappointed. He'll take it out again tomorrow. He always does."
+    }
+  },
+  {
+    "id": "narration-lynch-none-18",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Voix partagées, personne d'éliminé. Le village appelle ça « laisser une chance ». La nuit appelle ça « un service rendu ». Devinez qui a raison.",
+      "en": "Split votes, nobody out. The village calls it 'giving a chance.' The night calls it 'a favor done.' Guess which one is right."
+    }
+  },
+  {
+    "id": "narration-lynch-none-19",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Match nul au tribunal. Tous rentrent vivants. Demain, ce ne sera plus vrai pour tout le monde, et l'un de vous le sait déjà précisément.",
+      "en": "A draw in court. Everyone goes home alive. Tomorrow that won't be true for everyone, and one of you already knows exactly who."
+    }
+  },
+  {
+    "id": "narration-lynch-none-20",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Égalité. Le banc des accusés se vide sans verdict. Le seul satisfait, ce soir, est celui qui a glissé la dernière voix pour bloquer le vote. Il dort déjà bien.",
+      "en": "A tie. The dock empties with no verdict. The only satisfied one tonight is whoever slipped in the last vote to deadlock it. They're sleeping well already."
+    }
+  },
+  {
+    "id": "narration-lynch-none-21",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Pas d'éliminé. L'indécision a un coût, et il se paie la nuit, en monnaie de chair. Le village n'a jamais lu les petits caractères du contrat.",
+      "en": "No one out. Indecision has a price, and it's paid at night, in the currency of flesh. The village never read the fine print on the contract."
+    }
+  },
+  {
+    "id": "narration-lynch-none-22",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Scrutin sans condamné. Le village se félicite de sa retenue. La retenue est une vertu de gens qui ont le temps. Vous n'avez plus le temps.",
+      "en": "A ballot with no convict. The village congratulates itself on its restraint. Restraint is a virtue of people who have time. You're out of time."
+    }
+  },
+  {
+    "id": "narration-lynch-none-23",
+    "type": "narration",
+    "slot": "lynch.none",
+    "text": {
+      "fr": "Égalité, encore. Trois soirs que le tribunal accouche d'un haussement d'épaules. Trois soirs que la meute prend des notes. Elle a presque fini de compter.",
+      "en": "A tie, again. Three nights the court has delivered a shrug. Three nights the pack has taken notes. It's nearly done counting."
+    }
+  },
+  {
+    "id": "narration-over-village-15",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "Le dernier loup s'est tu. Le village a gagné, et il enterre encore. La victoire et le deuil ont creusé la même fosse, côte à côte, sans se gêner.",
+      "en": "The last wolf has gone silent. The village has won, and it is still burying. Victory and grief dug the same pit, side by side, without getting in each other's way."
+    }
+  },
+  {
+    "id": "narration-over-village-16",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "Plus de loups. On rallume les feux. Les enfants pourront ressortir — quand ils auront cessé de se réveiller la nuit en comptant les ombres autour du lit.",
+      "en": "No more wolves. The fires are lit again. The children can go back outside — once they stop waking at night to count the shadows around the bed."
+    }
+  },
+  {
+    "id": "narration-over-village-17",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "Le village l'emporte. On grave les noms des survivants sur la pierre du puits. On grave aussi les autres, en dessous, plus petits. La pierre est presque pleine.",
+      "en": "The village prevails. The survivors' names are carved into the well-stone. The others are carved too, beneath, smaller. The stone is nearly full."
+    }
+  },
+  {
+    "id": "narration-over-village-18",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "Victoire. Le dernier loup abattu, le village se découvre une nouvelle peur : le silence des nuits désormais sans danger. Il s'était habitué à avoir une raison de veiller.",
+      "en": "Victory. With the last wolf down, the village discovers a new fear: the silence of nights with no danger left. It had grown used to having a reason to stay awake."
+    }
+  },
+  {
+    "id": "narration-over-village-19",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "La meute est éteinte. Les survivants se serrent la main, longuement, en cherchant dans la paume de l'autre une trace de griffe qui n'y est plus. L'habitude reste.",
+      "en": "The pack is extinguished. The survivors shake hands, slowly, searching each other's palm for a claw mark that's no longer there. The habit stays."
+    }
+  },
+  {
+    "id": "narration-over-village-20",
+    "type": "narration",
+    "slot": "over.village",
+    "text": {
+      "fr": "Fin de la traque : zéro loup. Le forgeron range les fourches. Il les graisse d'abord, et les pend bien en vue. On ne sait jamais. On ne sait jamais, ici.",
+      "en": "End of the hunt: zero wolves. The blacksmith stows the pitchforks. He oils them first, and hangs them in plain sight. You never know. You never know, around here."
+    }
+  },
+  {
+    "id": "narration-over-wolves-15",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "La meute l'emporte. Le plus doux d'entre eux a gardé pour la fin la personne qui lui faisait le plus confiance. Il a dit que c'était par respect. Les loups ont leur étiquette.",
+      "en": "The pack wins. The gentlest of them saved for last the one who trusted them most. They said it was out of respect. Wolves have their etiquette."
+    }
+  },
+  {
+    "id": "narration-over-wolves-16",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "Les crocs triomphent. Le village s'éteint sans un cri — il avait épuisé tous ses cris sur des innocents. Il n'en restait plus pour les vrais monstres.",
+      "en": "The fangs triumph. The village goes out without a scream — it had spent every scream on innocents. None were left for the real monsters."
+    }
+  },
+  {
+    "id": "narration-over-wolves-17",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "La meute règne. Demain, à la même table, les mêmes plats, les mêmes rires. Seuls les convives auront changé. Vous ne serez pas du repas. Vous serez le repas.",
+      "en": "The pack reigns. Tomorrow, the same table, the same dishes, the same laughter. Only the guests will have changed. You won't be at the meal. You'll be the meal."
+    }
+  },
+  {
+    "id": "narration-over-wolves-18",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "Les loups gagnent. La dernière chose que le village a entendue, ce n'était pas un grognement. C'était un « bonne nuit » familier, dit d'une voix qu'il connaissait par cœur.",
+      "en": "The wolves win. The last thing the village heard wasn't a snarl. It was a familiar 'good night,' said in a voice it knew by heart."
+    }
+  },
+  {
+    "id": "narration-over-wolves-19",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "Fin de partie : la meute possède le village. Elle ne le pille pas, ne le brûle pas. Elle l'entretient. Un troupeau bien soigné dure plus longtemps. Vous êtes le troupeau.",
+      "en": "Game over: the pack owns the village. It won't loot it, won't burn it. It tends it. A well-kept flock lasts longer. You're the flock."
+    }
+  },
+  {
+    "id": "narration-over-wolves-20",
+    "type": "narration",
+    "slot": "over.wolves",
+    "text": {
+      "fr": "Les loups raflent la mise. La voyante avait tout deviné dès la première nuit. On l'a fait taire dès la deuxième. Avoir raison, ici, c'est mourir un peu plus tôt que les autres.",
+      "en": "The wolves take the pot. The seer had it all figured out by the first night. They silenced her by the second. Being right, here, just means dying a little ahead of the others."
+    }
   }
 ] },
 };

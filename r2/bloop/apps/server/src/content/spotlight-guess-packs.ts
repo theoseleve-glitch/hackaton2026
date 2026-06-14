@@ -2442,6 +2442,566 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
       "fr": "Greffée à la main",
       "en": "Surgically attached to your hand"
     }
+  },
+  {
+    "id": "note-toast-103",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Improvise un discours de témoin pour le mariage de la personne à ta droite, réussi exactement comme cette note.",
+      "en": "Improvise a best-man speech for the person on your right's wedding, executed exactly to this score."
+    },
+    "low": {
+      "fr": "Tu balances un secret avant le « santé »",
+      "en": "You leak a secret before the 'cheers'"
+    },
+    "high": {
+      "fr": "Le marié t'embauche pour le prochain",
+      "en": "The groom hires you for his next one"
+    }
+  },
+  {
+    "id": "note-spotify-104",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Défends ton top 5 Spotify Wrapped de l'année, assumable exactement comme cette note.",
+      "en": "Defend your Spotify Wrapped top five, exactly this defensible."
+    },
+    "low": {
+      "fr": "Une seule chanson, écoutée 4 000 fois, en boucle, seul",
+      "en": "One song, 4,000 plays, on loop, alone"
+    },
+    "high": {
+      "fr": "Goût impeccable. Personne te croit, c'est suspect.",
+      "en": "Flawless taste. Nobody believes you. Suspicious."
+    }
+  },
+  {
+    "id": "note-translate-105",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Traduis le dernier « ça va » que t'as envoyé à un pote, sincère exactement comme cette note.",
+      "en": "Translate the last 'I'm fine' you texted a mate, exactly this honest."
+    },
+    "low": {
+      "fr": "« Ça va » = je suis en PLS depuis mardi",
+      "en": "'I'm fine' = I've been crashing out since Tuesday"
+    },
+    "high": {
+      "fr": "« Ça va » = ça va vraiment, pour une fois, flippant",
+      "en": "'I'm fine' = genuinely fine, for once, unsettling"
+    }
+  },
+  {
+    "id": "note-mom-106",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Imite ta daronne qui découvre une bêtise, avec exactement ce niveau de calme.",
+      "en": "Impersonate your mum finding out you messed up, with exactly this much calm."
+    },
+    "low": {
+      "fr": "Elle dit ton prénom en entier. Tout le quartier le sait.",
+      "en": "She uses your full name. The whole street knows."
+    },
+    "high": {
+      "fr": "Un soupir. Un seul. Pire que tout.",
+      "en": "One sigh. Just one. Worse than shouting."
+    }
+  },
+  {
+    "id": "note-gymrat-107",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris à quel point t'es vraiment assidu à la salle, exactement comme cette note.",
+      "en": "Describe how committed you actually are to the gym, exactly this score."
+    },
+    "low": {
+      "fr": "Abonnement payé, vu deux fois en huit mois",
+      "en": "Membership paid, seen twice in eight months"
+    },
+    "high": {
+      "fr": "Tu parles « volume » et « sèche » au repas de famille",
+      "en": "You bring up 'bulking' at family dinner, uninvited"
+    }
+  },
+  {
+    "id": "note-voicemsg-108",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Joue le vocal de trois minutes que t'as envoyé hier, indispensable exactement comme cette note.",
+      "en": "Re-enact the three-minute voice note you sent yesterday, exactly this essential."
+    },
+    "low": {
+      "fr": "Zéro info, deux soupirs, un « bref »",
+      "en": "Zero info, two sighs, ends on 'anyway'"
+    },
+    "high": {
+      "fr": "Archivé, réécouté, cité au tribunal du groupe",
+      "en": "Saved, replayed, quoted in the group-chat trial"
+    }
+  },
+  {
+    "id": "note-keynote-109",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Présente ton hobby de niche comme une keynote Apple, convaincant exactement comme cette note.",
+      "en": "Present your niche hobby like an Apple keynote, exactly this convincing."
+    },
+    "low": {
+      "fr": "« One more thing… » Personne reste.",
+      "en": "'One more thing…' The room has left."
+    },
+    "high": {
+      "fr": "Standing ovation, trois précommandes dans la pièce",
+      "en": "Standing ovation, three pre-orders in the room"
+    }
+  },
+  {
+    "id": "note-cancel-110",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Joue ta joie quand un plan que tu redoutais est annulé, intense exactement comme cette note.",
+      "en": "Act out your joy when a plan you dreaded gets cancelled, exactly this intense."
+    },
+    "low": {
+      "fr": "« Ah dommage » — tu danses à l'intérieur",
+      "en": "'Aw, shame' — you're dancing inside"
+    },
+    "high": {
+      "fr": "Tu cries, tu remets ton pyjama avant la fin du message",
+      "en": "You scream, you're in pyjamas before the text finishes"
+    }
+  },
+  {
+    "id": "note-fridge-111",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Fais visiter ton frigo comme un agent immobilier, vendeur exactement comme cette note.",
+      "en": "Give a tour of your fridge like an estate agent, exactly this persuasive."
+    },
+    "low": {
+      "fr": "Trois condiments et une lumière qui clignote",
+      "en": "Three condiments and a flickering light"
+    },
+    "high": {
+      "fr": "Rangé par couleur, photographié, posté",
+      "en": "Colour-coded, photographed, posted"
+    }
+  },
+  {
+    "id": "note-improv-cry-112",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Pleure sur commande, là, maintenant, crédible exactement comme cette note.",
+      "en": "Cry on command, right now, exactly this convincing."
+    },
+    "low": {
+      "fr": "Tu fronces. C'est tout. C'est gênant.",
+      "en": "You frown. That's it. It's awkward."
+    },
+    "high": {
+      "fr": "La pièce te tend des mouchoirs, pour de vrai",
+      "en": "The room hands you real tissues"
+    }
+  },
+  {
+    "id": "note-tinder-113",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Lis le premier message que tu envoies sur une app de rencontre, irrésistible exactement comme cette note.",
+      "en": "Read out the opener you send on a dating app, exactly this irresistible."
+    },
+    "low": {
+      "fr": "« slt sava » — vu, jamais répondu",
+      "en": "'hey' — seen, never answered"
+    },
+    "high": {
+      "fr": "Réponse, numéro et date fixé en trois lignes",
+      "en": "Reply, number and a date locked in three lines"
+    }
+  },
+  {
+    "id": "note-elevator-114",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Tiens une conversation d'ascenseur avec un inconnu, à l'aise exactement comme cette note.",
+      "en": "Hold an elevator conversation with a stranger, comfortable exactly to this score."
+    },
+    "low": {
+      "fr": "Tu fixes les boutons, tu retiens ta respiration",
+      "en": "You stare at the buttons and hold your breath"
+    },
+    "high": {
+      "fr": "Vous descendez ensemble, t'as son insta et un job",
+      "en": "You both get out together, you have their insta and a job"
+    }
+  },
+  {
+    "id": "note-fan-115",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris à quel point t'es fan d'une série, dévoué exactement comme cette note.",
+      "en": "Describe how devoted a fan you are of one show, exactly this score."
+    },
+    "low": {
+      "fr": "T'as vu deux épisodes, t'en parles comme dix saisons",
+      "en": "You've seen two episodes, you talk like it's ten seasons"
+    },
+    "high": {
+      "fr": "Tatouage, pseudo, théorie de 40 pages épinglée",
+      "en": "Tattoo, username, a pinned 40-page theory"
+    }
+  },
+  {
+    "id": "note-driver-116",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris le conducteur que t'es vraiment en covoiturage, supportable exactement comme cette note.",
+      "en": "Describe the driver you actually are on a car share, exactly this bearable."
+    },
+    "low": {
+      "fr": "Tu commentes chaque rond-point à voix haute",
+      "en": "You narrate every roundabout out loud"
+    },
+    "high": {
+      "fr": "Playlist parfaite, zéro freinage brusque, on dort",
+      "en": "Perfect playlist, zero hard braking, everyone naps"
+    }
+  },
+  {
+    "id": "note-savings-117",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Justifie ton rapport à l'argent ce mois-ci, responsable exactement comme cette note.",
+      "en": "Justify your relationship with money this month, exactly this responsible."
+    },
+    "low": {
+      "fr": "Le 8 du mois t'es déjà en mode survie",
+      "en": "Broke by the 8th, full survival mode"
+    },
+    "high": {
+      "fr": "Tableur, enveloppes, tu refuses un café à 2 €",
+      "en": "Spreadsheet, envelopes, you turn down a £2 coffee"
+    }
+  },
+  {
+    "id": "note-tourguide-118",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Fais visiter ta ville à un touriste, enthousiaste exactement comme cette note.",
+      "en": "Show a tourist around your town, enthusiastic exactly to this score."
+    },
+    "low": {
+      "fr": "« Là c'est… un truc. On rentre ? »",
+      "en": "'That's… a thing. Can we go home?'"
+    },
+    "high": {
+      "fr": "Trois heures de tour gratuit, le touriste pleure en partant",
+      "en": "Three-hour free tour, the tourist cries on the way out"
+    }
+  },
+  {
+    "id": "note-petname-119",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Annonce le surnom que tout le groupe t'a collé, assumable exactement comme cette note.",
+      "en": "Announce the nickname the whole group gave you, exactly this livable-with."
+    },
+    "low": {
+      "fr": "Tu refuses de le dire. Quelqu'un le dit pour toi.",
+      "en": "You refuse to say it. Someone says it for you."
+    },
+    "high": {
+      "fr": "T'en as fait ton @, c'est sur ton CV",
+      "en": "You made it your @, it's on your CV"
+    }
+  },
+  {
+    "id": "note-weather-120",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Présente la météo comme à la télé, professionnel exactement comme cette note.",
+      "en": "Present the weather like on TV, professional exactly to this score."
+    },
+    "low": {
+      "fr": "Tu pointes le vide, « il fera… du temps »",
+      "en": "You point at nothing, 'there will be… weather'"
+    },
+    "high": {
+      "fr": "Pull assorti, geste de la main parfait, on te croit",
+      "en": "Matching jumper, perfect hand sweep, we believe you"
+    }
+  },
+  {
+    "id": "note-grudge-121",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris une rancune que tu tiens encore, ancienne exactement comme cette note.",
+      "en": "Describe a grudge you're still holding, exactly this old."
+    },
+    "low": {
+      "fr": "Datée de la semaine dernière, déjà oubliée demain",
+      "en": "From last week, gone by tomorrow"
+    },
+    "high": {
+      "fr": "École primaire. Tu te souviens du prénom. Et du jour.",
+      "en": "Primary school. You remember the name. And the day."
+    }
+  },
+  {
+    "id": "note-host-122",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris l'hôte que t'es vraiment quand tu reçois, accueillant exactement comme cette note.",
+      "en": "Describe the host you actually are, welcoming exactly to this score."
+    },
+    "low": {
+      "fr": "« Servez-vous » = un paquet de chips ouvert de travers",
+      "en": "'Help yourselves' = one bag of crisps, opened wrong"
+    },
+    "high": {
+      "fr": "Plaid pour chacun, playlist par humeur, personne veut partir",
+      "en": "A blanket each, a playlist per mood, nobody wants to leave"
+    }
+  },
+  {
+    "id": "note-debate-123",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Défends une opinion impopulaire que t'as vraiment, convaincant exactement comme cette note.",
+      "en": "Defend an unpopular opinion you genuinely hold, convincing exactly to this score."
+    },
+    "low": {
+      "fr": "Tu te rétractes à la première question",
+      "en": "You fold at the first question"
+    },
+    "high": {
+      "fr": "La moitié de la pièce a changé d'avis. Tu fais peur.",
+      "en": "Half the room switched sides. It's frightening."
+    }
+  },
+  {
+    "id": "note-recovery-124",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Décris ta gestion du lendemain de soirée, fonctionnelle exactement comme cette note.",
+      "en": "Describe how you handle the morning after a big night, exactly this functional."
+    },
+    "low": {
+      "fr": "Tu fixes le plafond, ton téléphone te juge",
+      "en": "You stare at the ceiling, your phone is judging you"
+    },
+    "high": {
+      "fr": "Sport, smoothie, tu réponds aux mails à 8h",
+      "en": "Workout, smoothie, answering emails by 8 a.m."
+    }
+  },
+  {
+    "id": "note-impression-125",
+    "kind": "scale10",
+    "prompt": {
+      "fr": "Imite quelqu'un de célèbre de ton choix, ressemblant exactement comme cette note.",
+      "en": "Do an impression of anyone famous, accurate exactly to this score."
+    },
+    "low": {
+      "fr": "On devine au bout de trois indices et d'un soupir",
+      "en": "We guess after three hints and a sigh"
+    },
+    "high": {
+      "fr": "Frissons. Quelqu'un applaudit avant la fin.",
+      "en": "Goosebumps. Someone claps before you finish."
+    }
+  },
+  {
+    "id": "roue-text-051",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un délai de réponse à un message qui se situe exactement ici sur la roue.",
+      "en": "Name a reply time to a text that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Avant même que t'aies fini de l'envoyer",
+      "en": "Before you've even hit send"
+    },
+    "high": {
+      "fr": "Réponse en mars, à un message de janvier",
+      "en": "Replies in March, to a January text"
+    }
+  },
+  {
+    "id": "roue-flex-052",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un truc qu'on poste pour flex, situé exactement ici sur la roue.",
+      "en": "Name something people post to flex that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Mérité, on like sincèrement",
+      "en": "Earned, we like it sincerely"
+    },
+    "high": {
+      "fr": "Tout le groupe screenshot pour s'en moquer",
+      "en": "The whole group screenshots it to mock you"
+    }
+  },
+  {
+    "id": "roue-roommate-053",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite une habitude de coloc qui se situe exactement ici sur la roue.",
+      "en": "Name a flatmate habit that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "On signe pour dix ans de bail",
+      "en": "Sign the ten-year lease immediately"
+    },
+    "high": {
+      "fr": "Réunion de crise, tableau blanc, vote à bulletin secret",
+      "en": "Crisis meeting, whiteboard, a secret ballot"
+    }
+  },
+  {
+    "id": "roue-petfood-054",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un aliment qu'on mange seul à minuit, situé exactement ici sur la roue.",
+      "en": "Name a food you eat alone at midnight that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Tu le racontes au brunch, fièrement",
+      "en": "You bring it up at brunch, proudly"
+    },
+    "high": {
+      "fr": "Aucun témoin. Aucune preuve. Aucun regret. Si, un peu.",
+      "en": "No witnesses. No evidence. No regrets. Okay, some."
+    }
+  },
+  {
+    "id": "roue-skill-055",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un talent inutile qui se situe exactement ici sur la roue.",
+      "en": "Name a useless talent that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Ça impressionne au moins une personne",
+      "en": "Impresses at least one person"
+    },
+    "high": {
+      "fr": "Personne a demandé, tu le fais quand même",
+      "en": "Nobody asked, you do it anyway"
+    }
+  },
+  {
+    "id": "roue-apology-056",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite une excuse après une embrouille, située exactement ici sur la roue.",
+      "en": "Name an apology after a fight that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Acceptée, câlin, on n'en parle plus",
+      "en": "Accepted, hug, never mentioned again"
+    },
+    "high": {
+      "fr": "« Désolé que tu l'aies mal pris », guerre relancée",
+      "en": "'Sorry you took it that way' — war restarts"
+    }
+  },
+  {
+    "id": "roue-meme-057",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un truc qu'on partage dans le groupe à 2h du matin, situé exactement ici sur la roue.",
+      "en": "Name something you share in the group chat at 2 a.m. that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Réaction immédiate, trois 💀",
+      "en": "Instant reaction, three 💀"
+    },
+    "high": {
+      "fr": "Vu par six personnes, zéro réponse, silence glacial",
+      "en": "Seen by six people, zero replies, ice-cold silence"
+    }
+  },
+  {
+    "id": "roue-firstdate-058",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un détail repéré sur un premier date, situé exactement ici sur la roue.",
+      "en": "Name a detail you'd clock on a first date that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Tu fonds, deuxième date réservé",
+      "en": "You melt, second date booked"
+    },
+    "high": {
+      "fr": "Tu textes le groupe sous la table, code rouge",
+      "en": "You text the group under the table, code red"
+    }
+  },
+  {
+    "id": "roue-childhood-059",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un truc de ton enfance qui se situe exactement ici sur la roue.",
+      "en": "Name a thing from your childhood that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Pure nostalgie, tu souris bêtement",
+      "en": "Pure nostalgia, you grin like an idiot"
+    },
+    "high": {
+      "fr": "Ça explique tout, ton thérapeute prend des notes",
+      "en": "It explains everything, your therapist takes notes"
+    }
+  },
+  {
+    "id": "roue-restaurant-060",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite un comportement au restaurant qui se situe exactement ici sur la roue.",
+      "en": "Name a restaurant behavior that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Parfait convive, le serveur t'adore",
+      "en": "Perfect guest, the waiter loves you"
+    },
+    "high": {
+      "fr": "On change de table, on prétend pas te connaître",
+      "en": "We move tables and pretend we don't know you"
+    }
+  },
+  {
+    "id": "roue-instory-061",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite une légende de story Insta qui se situe exactement ici sur la roue.",
+      "en": "Name an Instagram story caption that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Sincère, mignonne, zéro arrière-pensée",
+      "en": "Sincere, cute, zero subtext"
+    },
+    "high": {
+      "fr": "Visé à une seule personne, tout le monde a capté",
+      "en": "Aimed at one person, everyone clocked it"
+    }
+  },
+  {
+    "id": "roue-talent-062",
+    "kind": "wheel100",
+    "prompt": {
+      "fr": "Cite une activité qu'on met sur un profil de rencontre, située exactement ici sur la roue.",
+      "en": "Name a hobby you'd put on a dating profile that sits exactly here on the wheel."
+    },
+    "low": {
+      "fr": "Match immédiat, conversation lancée",
+      "en": "Instant match, conversation flowing"
+    },
+    "high": {
+      "fr": "Swipe gauche si rapide qu'on entend le « non »",
+      "en": "Left swipe so fast you can hear the 'no'"
+    }
   }
 ] },
 };
@@ -3280,6 +3840,349 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
       {
         "fr": "Tu vas arriver. Au dessert. Avec le sourire.",
         "en": "You’ll show up. At dessert. Smiling."
+      }
+    ]
+  },
+  {
+    "id": "q_open_tabs",
+    "question": {
+      "fr": "T’as combien d’onglets ouverts sur ton tel, là, maintenant ?",
+      "en": "How many tabs are open on your phone right now?"
+    },
+    "answers": [
+      {
+        "fr": "Trois, je suis organisé",
+        "en": "Three — I’m an organised person"
+      },
+      {
+        "fr": "Genre quinze, j’assume",
+        "en": "Like fifteen, and I own it"
+      },
+      {
+        "fr": "Le compteur affiche juste un point",
+        "en": "The counter just shows a dot now"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "T’as combien de groupes WhatsApp en sourdine que tu lis jamais ?",
+        "en": "How many muted group chats do you never open?"
+      },
+      {
+        "fr": "T’as combien de projets « je commence lundi » en cours, soyons honnêtes ?",
+        "en": "How many 'starting Monday' projects do you have going, honestly?"
+      },
+      {
+        "fr": "T’as combien de relations en cours que personne ici connaît ?",
+        "en": "How many situationships have you got running that nobody here knows about?"
+      },
+      {
+        "fr": "T’as combien de plans en simultané ce soir au cas où celui-là serait nul ?",
+        "en": "How many backup plans have you got running tonight in case this one flops?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Tu sauras pas répondre sans regarder. C’est tout le drame.",
+        "en": "You can’t answer without looking. That’s the whole tragedy."
+      },
+      {
+        "fr": "Aucun de ces onglets sera relu. Aucun.",
+        "en": "Not one of those tabs will ever be reopened. Not one."
+      }
+    ]
+  },
+  {
+    "id": "q_pizza_pineapple",
+    "question": {
+      "fr": "Ananas sur la pizza : tu valides ou c’est non ?",
+      "en": "Pineapple on pizza: are you in or out?"
+    },
+    "answers": [
+      {
+        "fr": "Validé, et je dors très bien",
+        "en": "In, and I sleep just fine"
+      },
+      {
+        "fr": "Non, c’est une ligne rouge",
+        "en": "Out — it’s a red line"
+      },
+      {
+        "fr": "Selon avec qui je suis",
+        "en": "Depends who I’m with"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Couper les pâtes avant de les faire cuire : tu valides ou c’est non ?",
+        "en": "Snapping the pasta before you cook it: in or out?"
+      },
+      {
+        "fr": "Garder ses chaussettes au lit en hiver : tu valides ou c’est non ?",
+        "en": "Keeping your socks on in bed in winter: in or out?"
+      },
+      {
+        "fr": "Répondre « lol » à une vanne sans avoir souri une seule seconde : tu valides ou c’est non ?",
+        "en": "Replying 'lol' to a joke you didn’t crack a smile at: in or out?"
+      },
+      {
+        "fr": "Liker sa propre photo deux secondes après l’avoir postée : tu valides ou c’est non ?",
+        "en": "Liking your own post two seconds after you put it up: in or out?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Chaud, fondu, sucré. Tout le monde a un avis bien trop fort.",
+        "en": "Hot, melted, sweet. Everyone has a far too strong opinion."
+      },
+      {
+        "fr": "Ça déclenche des disputes plus longues que des divorces.",
+        "en": "It starts arguments that outlast some marriages."
+      }
+    ]
+  },
+  {
+    "id": "q_group_chat_left",
+    "question": {
+      "fr": "Tu laisses combien de messages sans réponse dans le groupe avant de répondre ?",
+      "en": "How many messages pile up in the group chat before you reply?"
+    },
+    "answers": [
+      {
+        "fr": "Aucun, je réponds direct",
+        "en": "None — I reply straight away"
+      },
+      {
+        "fr": "Une dizaine, le temps de respirer",
+        "en": "About ten, just to breathe"
+      },
+      {
+        "fr": "Je lis tout, je réponds à rien",
+        "en": "I read everything, reply to nothing"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tu lis combien de fois « t’en penses quoi ? » avant de faire le mort dans le groupe ?",
+        "en": "How many 'what do you reckon?'s do you read before playing dead in the chat?"
+      },
+      {
+        "fr": "Tu laisses combien de plans s’organiser sans toi avant de dire « ah j’avais pas vu » ?",
+        "en": "How many plans get sorted without you before you go 'oh I didn’t see that'?"
+      },
+      {
+        "fr": "Tu laisses combien de messages de quelqu’un ici en vu, exprès, là, ce soir ?",
+        "en": "How many texts from someone here are you leaving on read, on purpose, tonight?"
+      },
+      {
+        "fr": "Tu mutes combien de groupes où tu fais semblant d’être encore investi ?",
+        "en": "How many chats have you muted while pretending you’re still invested?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Tu vois tout. Tu réponds quand ça t’arrange.",
+        "en": "You see it all. You reply when it suits you."
+      },
+      {
+        "fr": "« Vu » à 200 messages. Le record, c’est toi.",
+        "en": "200 messages in, all seen. The record-holder is you."
+      }
+    ]
+  },
+  {
+    "id": "q_apocalypse_team",
+    "question": {
+      "fr": "Tu choisis qui dans cette pièce pour ton équipe en cas d’apocalypse ?",
+      "en": "Who in this room do you pick for your apocalypse team?"
+    },
+    "answers": [
+      {
+        "fr": "Le plus calme sous pression",
+        "en": "The calmest one under pressure"
+      },
+      {
+        "fr": "Le plus débrouillard",
+        "en": "The most resourceful one"
+      },
+      {
+        "fr": "Personne, je pars seul",
+        "en": "Nobody — I go solo"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tu sacrifies qui en premier dans cette pièce pour gagner douze secondes face aux zombies ?",
+        "en": "Who in this room do you sacrifice first to buy twelve seconds against the zombies?"
+      },
+      {
+        "fr": "Qui ici craque et balance le plan à l’ennemi sous le moindre stress ?",
+        "en": "Who in this room cracks and hands the plan to the enemy under the slightest pressure?"
+      },
+      {
+        "fr": "Qui dans cette pièce mange les rations des autres en douce dès la deuxième nuit ?",
+        "en": "Who in this room sneaks the others’ rations by the second night?"
+      },
+      {
+        "fr": "Qui ici te poignarde dans le dos pour la dernière conserve de haricots ?",
+        "en": "Who in this room knifes you in the back over the last tin of beans?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Fin du monde, ressources zéro, et tu dois faire un choix.",
+        "en": "End of the world, zero resources, and you have to choose."
+      },
+      {
+        "fr": "Regarde bien autour de la table. L’un d’eux te ralentit déjà.",
+        "en": "Look around the table. One of them is already slowing you down."
+      }
+    ]
+  },
+  {
+    "id": "q_playlist_judge",
+    "question": {
+      "fr": "Ton historique d’écoute s’affiche sur la TV : tu paniques à quel point ?",
+      "en": "Your listening history goes up on the TV: how hard do you panic?"
+    },
+    "answers": [
+      {
+        "fr": "Zéro, j’ai un goût impeccable",
+        "en": "Zero — my taste is impeccable"
+      },
+      {
+        "fr": "Un peu, y’a deux-trois trucs",
+        "en": "A bit — there’s a couple of things"
+      },
+      {
+        "fr": "Je débranche la télé avant la fin de la phrase",
+        "en": "I’m unplugging the TV before you finish that sentence"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Ton historique de recherche s’affiche sur la TV : tu paniques à quel point ?",
+        "en": "Your search history goes up on the TV: how hard do you panic?"
+      },
+      {
+        "fr": "Tes brouillons de messages jamais envoyés s’affichent sur la TV : tu paniques à quel point ?",
+        "en": "Your unsent message drafts go up on the TV: how hard do you panic?"
+      },
+      {
+        "fr": "Ce que tu dis de chaque personne ici s’affiche sur la TV : tu paniques à quel point ?",
+        "en": "What you say about each person here goes up on the TV: how hard do you panic?"
+      },
+      {
+        "fr": "Ta galerie photo en mode lecture auto devant tes parents : tu paniques à quel point ?",
+        "en": "Your camera roll on auto-play in front of your parents: how hard do you panic?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Tout le monde regarde l’écran. Toi tu regardes la prise.",
+        "en": "Everyone’s watching the screen. You’re watching the plug socket."
+      },
+      {
+        "fr": "La chanson honteuse arrive. Elle est en boucle depuis trois jours.",
+        "en": "The shameful song is coming. You’ve had it on loop for three days."
+      }
+    ]
+  },
+  {
+    "id": "q_open_window_argue",
+    "question": {
+      "fr": "En voiture l’hiver : fenêtre ouverte ou chauffage à fond ?",
+      "en": "In the car in winter: window down or heating blasting?"
+    },
+    "answers": [
+      {
+        "fr": "Fenêtre ouverte, j’aime l’air vrai",
+        "en": "Window down — I like real air"
+      },
+      {
+        "fr": "Chauffage à fond, je suis pas un animal",
+        "en": "Heating on full — I’m not an animal"
+      },
+      {
+        "fr": "Les deux en même temps, et j’assume",
+        "en": "Both at once, and I stand by it"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "En soirée : tu pars sans dire au revoir ou tu fais le tour de toute la pièce ?",
+        "en": "At a party: do you ghost out the door or hug the entire room goodbye?"
+      },
+      {
+        "fr": "Au resto : tu rends ton plat raté ou tu manges en silence en faisant la gueule ?",
+        "en": "At a restaurant: do you send the bad dish back or eat it sulking in silence?"
+      },
+      {
+        "fr": "Au ciné : tu commentes le film à voix basse ou tu fusilles du regard ceux qui parlent ?",
+        "en": "At the cinema: do you whisper through the film or death-stare the talkers?"
+      },
+      {
+        "fr": "Dans cette pièce : tu lances le débat qui fâche ou tu attends que quelqu’un d’autre le fasse ?",
+        "en": "In this room: do you start the argument that splits everyone, or wait for someone else to?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Deux personnes meurent de ce conflit dans chaque voiture.",
+        "en": "Two people die a little over this in every car."
+      },
+      {
+        "fr": "La main est sur le bouton. La guerre est froide. Littéralement.",
+        "en": "A hand is on the button. The war is cold. Literally."
+      }
+    ]
+  },
+  {
+    "id": "q_voice_note_length",
+    "question": {
+      "fr": "Tes vocaux durent en moyenne combien de temps ?",
+      "en": "On average, how long are your voice notes?"
+    },
+    "answers": [
+      {
+        "fr": "Trente secondes, je vais à l’essentiel",
+        "en": "Thirty seconds — I get to the point"
+      },
+      {
+        "fr": "Deux-trois minutes, c’est normal ça",
+        "en": "Two or three minutes — that’s normal, right?"
+      },
+      {
+        "fr": "Le format podcast, sans coupures",
+        "en": "Full podcast format, no edits"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tes vocaux de crise à 3 h du mat durent en moyenne combien de temps ?",
+        "en": "Your 3am crisis voice notes run for how long on average?"
+      },
+      {
+        "fr": "Tu mets combien de temps à raconter un truc qui tenait en un mot ?",
+        "en": "How long do you take to tell a story that needed exactly one word?"
+      },
+      {
+        "fr": "Tu monologues combien de temps sur ton ex avant que quelqu’un t’arrête ?",
+        "en": "How long do you monologue about your ex before someone cuts you off?"
+      },
+      {
+        "fr": "Tu parles combien de temps de toi avant de demander des nouvelles à quelqu’un d’ici ?",
+        "en": "How long do you talk about yourself before asking how someone here is doing?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Quelqu’un accélère ton message à 2x, là, en ce moment.",
+        "en": "Someone is playing your message at 2x speed, right now."
+      },
+      {
+        "fr": "La petite barre rouge avance. Elle a peur, elle aussi.",
+        "en": "The little red bar keeps going. It’s scared too."
       }
     ]
   }

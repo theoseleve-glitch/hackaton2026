@@ -74,6 +74,28 @@ export function isCrowdItem(item: InputGuessItem): item is CrowdTargetItem {
 interface InputGuessBaseConfig {
   totalRounds: number;
   revealMs: number;
+  /**
+   * CC-2 "on fire" streak bonus — flavour points added per consecutive top-2
+   * finish (closest-number: a rank-0/1 finish; crowd-target: a winning-card
+   * pick). DEFAULTS TO 0 (identity): with the bonus unset the scoring is
+   * byte-identical to the pre-streak template, so every existing exact-score
+   * test stays green. The retention work is done by the client "🔥 En feu"
+   * TAG (always surfaced via the public `streak`), NOT the points — keep this
+   * small. Pure: fed to the kit `streakBonus(streak, { perStreak, cap })`.
+   */
+  streakBonus?: number;
+  /**
+   * Cap on the streak length that earns `streakBonus`, so a runaway streak
+   * can't snowball the lead. Undefined => uncapped (still capped in practice
+   * by `totalRounds`). Clamped to >= 0 by the kit helper.
+   */
+  streakCap?: number;
+  /**
+   * CC-5 — top-2 score gap (inclusive) at/below which the 'over' epilogue flags
+   * `closeFinish` for the cliffhanger rematch chrome. Undefined/negative => the
+   * flag is never set (default-safe). Pure display derivation; no scoring effect.
+   */
+  closeFinishThreshold?: number;
 }
 
 export interface ClosestNumberConfig extends InputGuessBaseConfig {
@@ -116,6 +138,11 @@ export const QUIZZ_CULTURE_GE_CONFIG: ClosestNumberConfig = {
   bustIfOver: false,
   maxInputDigits: 9,
   earlyAdvanceOnAllSubmitted: true,
+  // CC-2 streak bonus stays UNSET => identity (0): scoring is byte-identical to
+  // the pre-streak template. The "🔥 En feu" tag (public `streak`) does the
+  // retention work; the bonus is opt-in per the brief's A/B-the-size mitigation.
+  // CC-5: a ≤ one-rank (100-pt) finish reads as "close" for the cliffhanger CTA.
+  closeFinishThreshold: 100,
 };
 
 /** cinquante-cinquante — "Cinquante-Cinquante" / "Fifty-Fifty" (design wave2 §2.5). */
@@ -129,6 +156,9 @@ export const CINQUANTE_CINQUANTE_CONFIG: CrowdTargetConfig = {
   secondPoints: 1,
   bullseyeBonus: 2,
   bullseyeWindowPct: 2,
+  // CC-2 streak bonus UNSET => identity (0): existing exact-score tests stay
+  // byte-identical. CC-5: a ≤ one-pick (3-pt) gap reads as a "close" finish.
+  closeFinishThreshold: 3,
 };
 
 // ---------------------------------------------------------------------------
@@ -172,6 +202,12 @@ export interface ClosestRoundResult {
   busted: PlayerId[];
   /** Named call-outs derived from the public guesses/answer (reveal-only social fuel). */
   callOuts: ClosestCallOuts;
+  /**
+   * CC-2 — per-player consecutive top-2-finish count AFTER this round
+   * (0 = streak broken/none). Public from reveal on (no secret); drives the
+   * client "🔥 En feu" streak tag. A value >= 2 is "on fire".
+   */
+  streak: Record<PlayerId, number>;
 }
 
 /**
@@ -201,9 +237,61 @@ export interface CrowdRoundResult {
   pointsEarned: Record<PlayerId, number>;
   /** Named call-outs derived from the public picks/distances (reveal-only social fuel). */
   callOuts: CrowdCallOuts;
+  /**
+   * CC-2 — per-player consecutive top-2-finish count AFTER this round (a
+   * winning-card pick continues the streak; anything else resets to 0). Public
+   * from reveal on; drives the client "🔥 En feu" streak tag.
+   */
+  streak: Record<PlayerId, number>;
 }
 
 export type InputGuessRoundResult = ClosestRoundResult | CrowdRoundResult;
+
+// ---------------------------------------------------------------------------
+// CC-5 — 'over' epilogue (derived at game-over from ALREADY-PUBLIC state)
+// ---------------------------------------------------------------------------
+
+/**
+ * Per-player match stats accumulated PURELY from already-public round results
+ * (guesses/answer/picks/distances surfaced at each reveal) — NO new in-match
+ * secret. Carried in public state and surfaced every reveal; the 'over'
+ * epilogue is folded from this map plus the public `scores`.
+ */
+export interface PlayerMatchStats {
+  /** Rounds the player actually answered/picked (denominator for whiff fairness). */
+  rounds: number;
+  /** Exact hits (closest: |guess−answer|===0 "Pile !"; crowd: picked-card distance 0). */
+  exactCount: number;
+  /** Σ of this player's per-round distance (lower = sharper overall). */
+  totalDistance: number;
+  /** Largest single-round distance (the biggest whiff). */
+  worstDistance: number;
+  /** Longest "on fire" streak reached at any point in the match. */
+  bestStreak: number;
+}
+
+/**
+ * CC-5 epilogue — derived at 'over' from PUBLIC state only (scores + the public
+ * `stats` map), NO new secret, NO RNG, NO clock. Stable ascending-id order
+ * inside every list (via the kit `leaderboard`/`statLeaders`/`superlativeWinners`
+ * helpers), so it is replay-identical. Feeds the session-shell roast + rematch CTA.
+ */
+export interface OverEpilogue {
+  /** Sole top-scorer, or null on a contested crown (tie for first). */
+  mvp: PlayerId | null;
+  /** True when the top-2 score gap is within the close-finish threshold. */
+  closeFinish: boolean;
+  /** Top-2 score gap (0 when <2 players or a tie for first). */
+  topGap: number;
+  /** Most exact hits ("Pile !" / bullseye-0). Empty when nobody hit one. */
+  mostExact: PlayerId[];
+  /** Sharpest overall — the SMALLEST total distance among players who played. Empty when nobody played. */
+  closestOverall: PlayerId[];
+  /** Biggest single-round whiff — the LARGEST distance anyone posted. Empty when nobody played. */
+  biggestWhiff: PlayerId[];
+  /** Longest "on fire" streak of the match (>= 2 to qualify). Empty when nobody got on fire. */
+  onFire: PlayerId[];
+}
 
 export interface InputGuessState {
   config: InputGuessConfig;
@@ -232,6 +320,20 @@ export interface InputGuessState {
    */
   submitOrder: PlayerId[];
   scores: Record<PlayerId, number>;
+  /**
+   * CC-2 — PUBLIC per-player consecutive top-2-finish counter, carried across
+   * rounds. Updated at every resolve (a top-2 finish increments, anything else
+   * resets to 0) via the kit `nextStreak`. Surfaced in the reveal result;
+   * NO secret (it's derived from the already-public per-round outcome).
+   */
+  streak: Record<PlayerId, number>;
+  /**
+   * CC-5 — PUBLIC per-player match-stats accumulator, folded purely from each
+   * round's already-public result. The 'over' epilogue is derived from this +
+   * `scores` at game-over; carrying it in state keeps the derivation O(1) and
+   * adds NO new secret (every field is already visible at the round it updates).
+   */
+  stats: Record<PlayerId, PlayerMatchStats>;
   lastResult: InputGuessRoundResult | null;
 }
 
@@ -321,4 +423,8 @@ export type InputGuessView =
       phase: 'over';
       mode: InputGuessMode;
       scores: Record<PlayerId, number>;
+      /** CC-5 superlatives, derived at 'over' from public scores + stats only. */
+      epilogue: OverEpilogue;
+      /** Per-player public match stats (the epilogue's evidence; client roast fuel). */
+      stats: Record<PlayerId, PlayerMatchStats>;
     };

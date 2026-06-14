@@ -179,3 +179,86 @@ describe('per-phase views', () => {
     }
   });
 });
+
+describe('P1 CC-5 epilogue at over — superlatives derived from public state', () => {
+  /** Deadline-only walk to over (every spotlight times out each round). */
+  function toOver(g = game, ps = players, seed = 's'): LastStandingState {
+    let s = g.init(seed, ps, content);
+    for (let i = 0; i < 80 && s.phase !== 'over'; i++) s = g.reduce(s, deadline(i)).state;
+    expect(s.phase).toBe('over');
+    return s;
+  }
+
+  it('a deadline-only match: the survival superlatives name the eventual finalists, never a never-surviving player', () => {
+    const s = toOver();
+    const v = game.view(s, 'p1');
+    if (v.phase !== 'over') throw new Error('expected over');
+    const e = v.epilogue;
+    // longest survival streak is the rounds-survived leader: value >= 1, in stable id order.
+    expect(e.longestSurvivalStreak.value).toBeGreaterThanOrEqual(1);
+    expect(e.longestSurvivalStreak.players.length).toBeGreaterThanOrEqual(1);
+    // sorted ascending id (replay-stable)
+    const ids = e.longestSurvivalStreak.players;
+    expect([...ids].sort()).toEqual(ids);
+    // survivedAllRounds is a subset of the roster, also stable-sorted.
+    for (const p of e.survivedAllRounds) expect(players).toContain(p);
+    expect([...e.survivedAllRounds].sort()).toEqual(e.survivedAllRounds);
+  });
+
+  it('survivedAllRounds names ONLY a player crowned every single round (Unbreakable)', () => {
+    // Cap config: every round ends at the turn cap with ALL three still alive, so
+    // all three survive all 3 rounds -> all three are Unbreakable.
+    const capped = createLastStanding('jeu-du-theme', { ...JEU_DU_THEME_CONFIG, maxTurnsPerRoundFactor: 1 });
+    let s = capped.init('s', players, content);
+    for (let i = 0; i < 200 && s.phase !== 'over'; i++) {
+      if (s.phase === 'say') {
+        const spot = s.spotlight!;
+        s = capped.reduce(s, act(spot, { kind: 'wordSaid' })).state;
+        for (const p of players) {
+          if (p !== spot && s.phase === 'judge') s = capped.reduce(s, act(p, { kind: 'judge', vote: 'valid' })).state;
+        }
+      }
+      if (s.phase !== 'over') s = capped.reduce(s, deadline(i)).state;
+    }
+    expect(s.phase).toBe('over');
+    const v = capped.view(s, 'p1');
+    if (v.phase !== 'over') throw new Error('expected over');
+    expect(v.epilogue.survivedAllRounds.slice().sort()).toEqual([...players].sort());
+    expect(v.epilogue.longestSurvivalStreak.value).toBe(3); // 3 rounds survived each
+  });
+
+  it('lastOneStanding is the SOLE final-round survivor; closeFinish + leader/runnerUp derive from public scores', () => {
+    const s = toOver();
+    const v = game.view(s, 'p1');
+    if (v.phase !== 'over') throw new Error('expected over');
+    const e = v.epilogue;
+    // the final round of a deadline-only walk leaves exactly one survivor
+    expect(e.lastOneStanding).not.toBeNull();
+    expect(players).toContain(e.lastOneStanding!);
+    // leader is the top of the public leaderboard; topGap is non-negative
+    expect(e.leaderId).not.toBeNull();
+    expect(e.topGap).toBeGreaterThanOrEqual(0);
+    // closeFinish is a derived boolean (no crash, real boolean)
+    expect(typeof e.closeFinish).toBe('boolean');
+    // mvp matches leader unless the crown is contested (a tie => mvp null)
+    if (e.mvp !== null) expect(e.mvp).toBe(e.leaderId);
+  });
+
+  it('the over epilogue is IDENTICAL for roster, spectator and hostile viewers (derived from public state, no per-viewer secret)', () => {
+    const s = toOver();
+    const ref = JSON.stringify((game.view(s, 'p1') as { epilogue: unknown }).epilogue);
+    for (const viewer of ['p2', 'p3', 'viewer-not-in-roster', '__proto__']) {
+      const v = game.view(s, viewer);
+      if (v.phase !== 'over') throw new Error('expected over');
+      expect(JSON.stringify(v.epilogue)).toBe(ref);
+    }
+  });
+
+  it('the over epilogue is replay-deterministic: same seed -> byte-identical payload', () => {
+    const a = toOver(game, players, 'replay-seed');
+    const b = toOver(game, players, 'replay-seed');
+    const ea = (game.view(a, 'p1') as { epilogue: unknown }).epilogue;
+    const eb = (game.view(b, 'p1') as { epilogue: unknown }).epilogue;
+    expect(JSON.stringify(ea)).toBe(JSON.stringify(eb));
+  });
+});

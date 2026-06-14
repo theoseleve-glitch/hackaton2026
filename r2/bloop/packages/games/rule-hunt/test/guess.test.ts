@@ -61,7 +61,9 @@ describe('picking a candidate', () => {
     });
     expect(effects).toEqual([
       { type: 'analytics', name: 'guess_attempted', props: { round: 0, correct: true } },
-      { type: 'analytics', name: 'round_completed', props: { round: 0, kind: 'guessed', perfect: true } },
+      // cleanStreak carried in the round_completed event (CC-5 one-more-round tease);
+      // a guessed round breaks the crime-parfait streak -> 0.
+      { type: 'analytics', name: 'round_completed', props: { round: 0, kind: 'guessed', perfect: true, cleanStreak: 0 } },
     ]);
   });
 

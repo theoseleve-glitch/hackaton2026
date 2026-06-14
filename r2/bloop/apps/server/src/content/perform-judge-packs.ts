@@ -2314,6 +2314,558 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
         "minutes"
       ]
     }
+  },
+  {
+    "id": "gda-soft-061",
+    "prompt": {
+      "fr": "Mange une glace en plein cagnard : la boule tombe sur le trottoir au troisième coup de langue. Regarde-la fondre. Lèche le cornet vide jusqu'au bout, dignement.",
+      "en": "Eat an ice cream in a heatwave: the scoop drops on the pavement on lick three. Watch it melt. Lick the empty cone to the very end, with dignity."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+    }
+  },
+  {
+    "id": "gda-soft-062",
+    "prompt": {
+      "fr": "Ouvre un sac de chips ultra-récalcitrant : tu tires, tu tires, et il explose d'un coup, expédiant tout le contenu sur le joueur le plus proche. Ramasse une chip sur lui. Mange-la.",
+      "en": "Open an impossibly stubborn crisp packet: you pull, you pull, it bursts all at once, launching the whole lot over the nearest player. Pick one crisp off them. Eat it."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+    }
+  },
+  {
+    "id": "gda-soft-063",
+    "prompt": {
+      "fr": "Cherche tes lunettes partout dans la pièce, de plus en plus paniqué. Elles sont sur ta tête depuis le début. Trouve-les. Fais comme si de rien n'était.",
+      "en": "Search the whole room for your glasses, panic rising. They've been on your head the entire time. Find them. Act like that never happened."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
+    }
+  },
+  {
+    "id": "gda-soft-064",
+    "prompt": {
+      "fr": "Sois un escargot de course qui prend un départ de Grand Prix, croit mener la course, et se fait doubler par sa propre coquille.",
+      "en": "Be a racing snail launching off a Grand Prix start line, convinced it's leading the pack, and getting overtaken by its own shell."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+    }
+  },
+  {
+    "id": "gda-soft-065",
+    "prompt": {
+      "fr": "Sois la machine à laver en fin de cycle avec une basket coincée dedans : le ronron, le déséquilibre, le boum-boum qui fait avancer la machine sur tout le carrelage de la salle de bain.",
+      "en": "Be the washing machine on final spin with one trainer stuck inside: the hum, the wobble, the boom-boom that walks the whole machine across the bathroom tiles."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+      "en": "no words. noises only. you're a sound effect with legs now."
+    }
+  },
+  {
+    "id": "gda-soft-066",
+    "prompt": {
+      "fr": "Sois la bouilloire qui monte en pression pour le thé : le frémissement timide, la montée, le sifflement de mort, et le clic sec pile au pire moment.",
+      "en": "Be the kettle climbing to the boil for one cup of tea: the shy bubbling, the rising rumble, the death-whistle, then the sharp click at the worst possible second."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
+    }
+  },
+  {
+    "id": "gda-soft-067",
+    "prompt": {
+      "fr": "Sois le GPS qui recalcule pour la huitième fois et qui commence à perdre patience : « recalcul », « recalcul », puis un soupir que toi seul peux faire en voix de robot.",
+      "en": "Be the sat-nav recalculating for the eighth time and starting to lose it: 'recalculating', 'recalculating', then a sigh only you can deliver in a robot voice."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
+    }
+  },
+  {
+    "id": "gda-soft-068",
+    "prompt": {
+      "fr": "Donne un cours de cuisine en direct façon émission : présente le plat, énumère les ingrédients invisibles, rate la cuisson. T'as trois mots pour sauver l'émission. Pointe le joueur qui cuisine le pire.",
+      "en": "Host a live TV cooking segment: present the dish, list the invisible ingredients, ruin the cooking. You get three words to save the show. Point at the worst cook in the room."
+    },
+    "constraintLabel": {
+      "fr": "3 MOTS MAX",
+      "en": "3 WORDS MAX"
+    },
+    "constraintRule": {
+      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
+    }
+  },
+  {
+    "id": "gda-soft-069",
+    "prompt": {
+      "fr": "Sois le guide d'un musée vide qui fait visiter les tableaux invisibles avec une passion totale. Arrête-toi devant le joueur le plus proche comme si c'était l'œuvre maîtresse. Trois mots pour la commenter.",
+      "en": "Be a tour guide in an empty museum walking the room past invisible masterpieces with total passion. Stop in front of the nearest player like they're the prize exhibit. Three words to describe the piece."
+    },
+    "constraintLabel": {
+      "fr": "3 MOTS MAX",
+      "en": "3 WORDS MAX"
+    },
+    "constraintRule": {
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
+    }
+  },
+  {
+    "id": "gda-soft-070",
+    "prompt": {
+      "fr": "Monte un meuble en kit avec une notice que t'as clairement pas lue. Il reste trois vis à la fin. Range-les dans ta poche. Le meuble penche. Pose un livre dessus.",
+      "en": "Assemble a flat-pack from instructions you clearly didn't read. Three screws are left over at the end. Pocket them. The thing leans. Put a book on it."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
+      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+    },
+    "forbidden": {
+      "fr": [
+        "meuble",
+        "visser",
+        "notice"
+      ],
+      "en": [
+        "furniture",
+        "screw",
+        "instructions"
+      ]
+    }
+  },
+  {
+    "id": "gda-soft-071",
+    "prompt": {
+      "fr": "Apprends à un poisson rouge à faire le beau, avec la patience d'un dresseur et la déception d'un parent. Au bout de quatre essais, félicite-le quand même. Il a rien fait.",
+      "en": "Teach a goldfish to roll over, with a trainer's patience and a parent's disappointment. After four tries, praise it anyway. It did nothing."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
+    },
+    "forbidden": {
+      "fr": [
+        "poisson",
+        "dresser",
+        "bocal"
+      ],
+      "en": [
+        "fish",
+        "train",
+        "bowl"
+      ]
+    }
+  },
+  {
+    "id": "gda-soft-072",
+    "prompt": {
+      "fr": "Sois la dernière feuille d'automne accrochée à sa branche en pleine tempête : tiens bon, lâche prise, et offre-toi une chute dramatique de trois étages. Atterris sur le joueur le plus proche.",
+      "en": "Be the last autumn leaf clinging to its branch in a gale: hold on, let go, and treat yourself to a dramatic three-storey fall. Land on the nearest player."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
+    },
+    "forbidden": {
+      "fr": [
+        "feuille",
+        "tomber",
+        "branche"
+      ],
+      "en": [
+        "leaf",
+        "fall",
+        "branch"
+      ]
+    }
+  },
+  {
+    "id": "gda-soft-073",
+    "prompt": {
+      "fr": "Fige-toi en pleine victoire de jeu vidéo, manette en l'air, bouche grande ouverte — pile à la seconde où tu réalises que t'avais pas sauvegardé. Tiens la joie qui se transforme en horreur.",
+      "en": "Freeze mid video-game victory, controller in the air, mouth wide open — at the exact second you realize you never saved. Hold the joy curdling into horror."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
+      "en": "frozen poses only. you change pose when the performer claps. not before."
+    }
+  },
+  {
+    "id": "gda-soft-074",
+    "prompt": {
+      "fr": "Prends la pose du penseur de Rodin, sauf que t'es en train de réaliser que t'as laissé le four allumé en partant. Tiens la profondeur philosophique d'un quotidien en feu.",
+      "en": "Strike the Rodin Thinker pose, except you're realizing you left the oven on when you left the house. Hold the philosophical depth of a life on fire."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
+    }
+  },
+  {
+    "id": "gda-soft-075",
+    "prompt": {
+      "fr": "Fige-toi en surfeur au sommet d'une vague géante, genoux pliés, bras écartés, sourire de pro — juste avant la chute que tout le monde voit venir sauf toi. Tiens l'instant d'avant.",
+      "en": "Freeze as a surfer at the top of a giant wave, knees bent, arms out, pro smile on — right before the wipeout everyone sees coming except you. Hold the moment before."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
+    }
+  },
+  {
+    "id": "gda-soft-076",
+    "prompt": {
+      "fr": "Prends la pose de la photo de classe : le sourire forcé qui tient depuis trop longtemps, le voisin qui te fait les oreilles de lapin, et toi qui le sais pas encore. Tiens l'innocence.",
+      "en": "Hold the school-photo pose: the forced smile held too long, the kid next to you doing bunny ears, and you not knowing yet. Hold the innocence."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
+    }
+  },
+  {
+    "id": "gda-party-073",
+    "prompt": {
+      "fr": "Rentre de soirée à 4 h du mat' et tente d'enlever un jean trop serré en équilibre sur un pied, sans réveiller personne. Tombe sur le lit. En silence. C'est non négociable.",
+      "en": "Get home from a night out at 4 a.m. and try to peel off too-tight jeans balancing on one foot without waking anyone. Fall onto the bed. Silently. That part is non-negotiable."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
+    }
+  },
+  {
+    "id": "gda-party-074",
+    "prompt": {
+      "fr": "Vis ta meilleure vie de DJ sur une console imaginaire : tu lances le drop du siècle, tout le monde l'attend... et tu réalises que t'as appuyé sur pause. Sauve l'ambiance d'un seul geste de la main.",
+      "en": "Live your best DJ life on an imaginary deck: you tee up the drop of the century, the whole crowd is waiting — and you realize you hit pause. Save the night with a single wave of the hand."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
+    }
+  },
+  {
+    "id": "gda-party-075",
+    "prompt": {
+      "fr": "Sois la dernière gorgée d'un Capri-Sun aspirée à la paille jusqu'à la dernière goutte d'air. Insiste. Encore. Tout le monde t'entend. Insiste quand même.",
+      "en": "Be the last sip of a juice pouch sucked through the straw down to the final bubble of air. Keep going. Again. Everyone can hear you. Keep going anyway."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
+    }
+  },
+  {
+    "id": "gda-party-076",
+    "prompt": {
+      "fr": "Sois la canette de soda qu'on a secouée avant d'ouvrir : le hiss qui monte, la pulvérisation totale, et le filet de mousse qui dégouline en silence pendant que tu fixes le coupable. Désigne-le.",
+      "en": "Be the fizzy can someone shook before opening: the rising hiss, the full eruption, then the foam trickling down in silence while you stare at the culprit. Point at them."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
+      "en": "no words. noises only. you're a sound effect with legs now."
+    }
+  },
+  {
+    "id": "gda-party-077",
+    "prompt": {
+      "fr": "Tiens un discours de témoin de mariage qui part complètement en vrille : larmes, anecdote gênante, révélation de trop. T'as trois mots avant qu'on coupe le micro. Vise le marié.",
+      "en": "Give a best-man speech that goes completely off the rails: tears, an embarrassing anecdote, one revelation too far. You've got three words before they cut the mic. Aim at the groom."
+    },
+    "constraintLabel": {
+      "fr": "3 MOTS MAX",
+      "en": "3 WORDS MAX"
+    },
+    "constraintRule": {
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
+    }
+  },
+  {
+    "id": "gda-party-078",
+    "prompt": {
+      "fr": "Sois le présentateur d'un télé-achat à 3 h du mat' qui vend un objet de la pièce comme l'invention qui va changer ta vie. T'as trois mots de slogan. Le stock est limité. Il l'est pas.",
+      "en": "Be a 3 a.m. infomercial host selling an object from this room as the invention that will change your life. You get three words of slogan. Stock is limited. It is not."
+    },
+    "constraintLabel": {
+      "fr": "3 MOTS MAX",
+      "en": "3 WORDS MAX"
+    },
+    "constraintRule": {
+      "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+      "en": "3 words for the entire round. silence does the rest of the work. yours."
+    }
+  },
+  {
+    "id": "gda-party-079",
+    "prompt": {
+      "fr": "Tu rentres chez tes parents à 27 ans et ta mère te demande, devant tout le monde, si t'as enfin « quelqu'un dans ta vie ». Esquive comme un politicien acculé. La table attend la réponse.",
+      "en": "You're 27 and back at your parents' place when your mum asks, in front of everyone, if you've finally got 'someone special'. Dodge like a cornered politician. The whole table waits."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
+    },
+    "forbidden": {
+      "fr": [
+        "célibataire",
+        "mère",
+        "copain"
+      ],
+      "en": [
+        "single",
+        "mum",
+        "relationship"
+      ]
+    }
+  },
+  {
+    "id": "gda-party-080",
+    "prompt": {
+      "fr": "Reçois un cadeau que tu détestes profondément, devant la personne qui te l'offre. Ton visage doit hurler « merci ! » pendant que ton âme rend l'âme. Garde le sourire jusqu'au bout.",
+      "en": "Receive a gift you deeply hate, in front of the person who gave it to you. Your face must scream 'thank you!' while your soul leaves your body. Keep the smile to the very end."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
+      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+    },
+    "forbidden": {
+      "fr": [
+        "cadeau",
+        "aimer",
+        "merci"
+      ],
+      "en": [
+        "gift",
+        "love",
+        "thanks"
+      ]
+    }
+  },
+  {
+    "id": "gda-party-081",
+    "prompt": {
+      "fr": "Sois le mec en boîte qui croit que tout le monde le regarde danser. Tout le monde le regarde danser. Pas pour les raisons qu'il croit. Continue. Plus fort. Choisis ton public dans la pièce.",
+      "en": "Be the guy in the club who thinks everyone's watching him dance. Everyone is watching him dance. Not for the reasons he thinks. Keep going. Harder. Pick your audience in the room."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
+    }
+  },
+  {
+    "id": "gda-party-082",
+    "prompt": {
+      "fr": "Sois le ballon de baudruche qu'on dégonfle lentement en pinçant le bout pour faire le bruit le plus insupportable de la soirée. La pièce te supplie d'arrêter. Vise les aigus.",
+      "en": "Be the balloon being slowly deflated by pinching the neck to make the most unbearable noise of the night. The room is begging you to stop. Go for the high notes."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
+    }
+  },
+  {
+    "id": "gda-party-083",
+    "prompt": {
+      "fr": "Fige-toi dans la pose de quelqu'un qui vient de se faire griller en train de parler de toi, pile au moment où tu entres dans la pièce. La main devant la bouche, l'horreur dans les yeux. Tiens la honte.",
+      "en": "Freeze in the pose of someone caught talking about you exactly as you walk into the room. Hand over the mouth, horror in the eyes. Hold the shame."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
+      "en": "frozen poses only. you change pose when the performer claps. not before."
+    }
+  },
+  {
+    "id": "gda-party-084",
+    "prompt": {
+      "fr": "Sois le coach de vie le plus arnaqueur du monde qui vend un séminaire à toute la pièce. Promets-leur la réussite, l'amour, l'abondance. T'as trois mots. Encaisse d'abord.",
+      "en": "Be the most fraudulent life coach alive selling a seminar to the whole room. Promise them success, love, abundance. You've got three words. Take the payment first."
+    },
+    "constraintLabel": {
+      "fr": "3 MOTS MAX",
+      "en": "3 WORDS MAX"
+    },
+    "constraintRule": {
+      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
+    }
+  },
+  {
+    "id": "gda-party-085",
+    "prompt": {
+      "fr": "Vis ta gueule de bois du dimanche matin : la lumière qui agresse, le moindre bruit qui résonne, et la reconstitution lente et horrifiée de ce que t'as fait hier soir. Désigne le témoin gênant.",
+      "en": "Live your Sunday-morning hangover: the light that attacks, every tiny sound echoing, and the slow horrified reconstruction of what you did last night. Point at the witness who knows."
+    },
+    "constraintLabel": {
+      "fr": "MOTS INTERDITS",
+      "en": "FORBIDDEN WORDS"
+    },
+    "constraintRule": {
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
+    },
+    "forbidden": {
+      "fr": [
+        "gueule",
+        "alcool",
+        "hier"
+      ],
+      "en": [
+        "hangover",
+        "drink",
+        "last-night"
+      ]
+    }
+  },
+  {
+    "id": "gda-party-086",
+    "prompt": {
+      "fr": "Prends un selfie de groupe avec toute la pièce : trouve l'angle, lève le bras, et passe trois minutes à supprimer toutes les versions où TU es mal, en gardant celle où tout le monde est moche sauf toi.",
+      "en": "Take a group selfie with the whole room: find the angle, raise the arm, and spend three minutes deleting every version where YOU look bad, keeping the one where everyone's ugly except you."
+    },
+    "constraintLabel": {
+      "fr": "MIME UNIQUEMENT",
+      "en": "MIME ONLY"
+    },
+    "constraintRule": {
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
+    }
+  },
+  {
+    "id": "gda-party-087",
+    "prompt": {
+      "fr": "Sois le vieux climatiseur de bureau qui rend l'âme en plein été : le ronflement métallique, le claquement suspect, le dernier souffle d'air tiède, et le silence total qui condamne tout l'open space.",
+      "en": "Be the ancient office air-con dying mid-heatwave: the metallic rattle, the suspicious clunk, the last puff of lukewarm air, then the total silence that sentences the whole open-plan floor."
+    },
+    "constraintLabel": {
+      "fr": "BRUITAGES SEULEMENT",
+      "en": "SOUND EFFECTS ONLY"
+    },
+    "constraintRule": {
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
+    }
+  },
+  {
+    "id": "gda-party-088",
+    "prompt": {
+      "fr": "Fige-toi en pleine photo de saut de groupe sur la plage : tout le monde retombe, sauf toi, coincé en l'air dans la position la moins flatteuse de l'histoire. La salle a le droit de zoomer.",
+      "en": "Freeze mid group jump-photo on the beach: everyone else has landed, except you, stuck in the air in the least flattering position in recorded history. The room is allowed to zoom in."
+    },
+    "constraintLabel": {
+      "fr": "STATUES",
+      "en": "FREEZE FRAMES"
+    },
+    "constraintRule": {
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
+    }
   }
 ] },
 };
@@ -3383,6 +3935,325 @@ export const DEVINE_L_OBJET_PACK: ContentPack<PerformJudgeContent> = {
     "prompt": {
       "fr": "le puzzle 1000 pièces arrêté à la pièce 870, le jour où on a compris qu'il en manquait trois. Y'a un suspect.",
       "en": "the 1000-piece jigsaw stopped at piece 870, the day three pieces came up missing. there is a suspect."
+    },
+    "category": {
+      "fr": "Jeux & embrouilles",
+      "en": "Games & grudges"
+    }
+  },
+  {
+    "id": "obj-easy-046",
+    "prompt": {
+      "fr": "la bouilloire qui a fait quatre cafés ce matin parce que quelqu'un trouve la cafetière « trop d'étapes »",
+      "en": "the kettle that's made four coffees this morning because someone thinks the coffee machine is 'too many steps'"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-easy-047",
+    "prompt": {
+      "fr": "le chargeur enroulé pile poil, planqué dans une chaussette, pour qu'aucun coloc le retrouve. Le proprio est dans cette pièce.",
+      "en": "the charger wound up neatly and hidden inside a sock so no flatmate finds it. its owner is in this room."
+    },
+    "category": {
+      "fr": "Tech qui trahit",
+      "en": "Tech that betrays you"
+    }
+  },
+  {
+    "id": "obj-easy-048",
+    "prompt": {
+      "fr": "le mug « best boss » offert au manager par l'équipe qui a un Google Doc privé sur lui",
+      "en": "the 'world's best boss' mug given to the manager by the team that keeps a private Google Doc about him"
+    },
+    "category": {
+      "fr": "L'open space",
+      "en": "Corporate hell"
+    }
+  },
+  {
+    "id": "obj-easy-049",
+    "prompt": {
+      "fr": "le coupe-ongles dégainé sur le canapé du salon, devant tout le monde, par quelqu'un ici",
+      "en": "the nail clippers brought out on the living-room sofa, in full view, by someone in this room"
+    },
+    "category": {
+      "fr": "Hygiène douteuse",
+      "en": "Hygiene, allegedly"
+    }
+  },
+  {
+    "id": "obj-easy-050",
+    "prompt": {
+      "fr": "la gourde réutilisable de 2 litres trimballée partout pour prouver qu'on a changé de vie. Vide depuis mardi.",
+      "en": "the 2-litre reusable water bottle carried everywhere as proof of a new lifestyle. empty since Tuesday."
+    },
+    "category": {
+      "fr": "Sport, zerma",
+      "en": "New year, new me"
+    }
+  },
+  {
+    "id": "obj-easy-051",
+    "prompt": {
+      "fr": "la couette volée à 4 h du mat par celui qui jure dormir « comme un bébé ». Le voleur est ici.",
+      "en": "the duvet stolen at 4 a.m. by the one who swears they sleep 'like a baby'. the thief is in this room."
+    },
+    "category": {
+      "fr": "La grotte",
+      "en": "Bed rotting HQ"
+    }
+  },
+  {
+    "id": "obj-easy-052",
+    "prompt": {
+      "fr": "le tablier sorti pour faire trois pâtes au beurre, comme si c'était Top Chef",
+      "en": "the apron put on to make plain buttered pasta, like it's a cooking competition"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-easy-053",
+    "prompt": {
+      "fr": "le parapluie emprunté en novembre, jamais rendu, repéré aujourd'hui dans l'entrée de celui qui « se souvient de rien »",
+      "en": "the umbrella borrowed in November, never returned, spotted today in the hallway of someone who 'doesn't remember'"
+    },
+    "category": {
+      "fr": "Avant de sortir",
+      "en": "On your way out"
+    }
+  },
+  {
+    "id": "obj-easy-054",
+    "prompt": {
+      "fr": "le casque à réduction de bruit mis pour ignorer une conversation à laquelle tu participais",
+      "en": "the noise-cancelling headphones put on to ignore a conversation you were actually part of"
+    },
+    "category": {
+      "fr": "Tech qui trahit",
+      "en": "Tech that betrays you"
+    }
+  },
+  {
+    "id": "obj-easy-055",
+    "prompt": {
+      "fr": "la trottinette électrique abandonnée en travers du trottoir par quelqu'un qui se dit écolo",
+      "en": "the e-scooter dumped across the pavement by someone who calls themselves an environmentalist"
+    },
+    "category": {
+      "fr": "Avant de sortir",
+      "en": "On your way out"
+    }
+  },
+  {
+    "id": "obj-easy-056",
+    "prompt": {
+      "fr": "le claquette-chaussette assumé pour descendre la poubelle, et finalement pour aller au supermarché",
+      "en": "the socks-and-sliders combo justified for the bins, then somehow worn to the supermarket"
+    },
+    "category": {
+      "fr": "Crimes de mode",
+      "en": "Fashion crimes"
+    }
+  },
+  {
+    "id": "obj-easy-057",
+    "prompt": {
+      "fr": "le ticket de caisse gardé « pour les comptes » qui ne servira jamais à aucun compte, jamais",
+      "en": "the receipt kept 'for the budget' that will never be used for any budget, ever"
+    },
+    "category": {
+      "fr": "Fond de sac",
+      "en": "Bottom of the bag"
+    }
+  },
+  {
+    "id": "obj-easy-058",
+    "prompt": {
+      "fr": "le plaid électrique allumé en juillet par celui qui a « toujours froid » et a confisqué la télécommande de la clim",
+      "en": "the heated blanket switched on in July by the one who's 'always cold' and confiscated the AC remote"
+    },
+    "category": {
+      "fr": "La grotte",
+      "en": "Bed rotting HQ"
+    }
+  },
+  {
+    "id": "obj-easy-059",
+    "prompt": {
+      "fr": "le verre du robinet bu directement à la main parce que faire la vaisselle c'est une décision politique",
+      "en": "the tap water drunk straight from a cupped hand because doing the washing-up is a political decision"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-med-053",
+    "prompt": {
+      "fr": "la batterie externe prêtée à 12 % de batterie, rendue à 3 %, par un pote qui te regarde dans les yeux",
+      "en": "the power bank lent at 12% and returned at 3% by a friend who maintains eye contact the whole time"
+    },
+    "category": {
+      "fr": "Tech qui trahit",
+      "en": "Tech that betrays you"
+    }
+  },
+  {
+    "id": "obj-med-054",
+    "prompt": {
+      "fr": "le mixeur lancé sans couvercle. La cuisine porte encore le souvenir. Le coupable est dans cette pièce.",
+      "en": "the blender started without the lid on. the kitchen still carries the memory. the culprit is in this room."
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-med-055",
+    "prompt": {
+      "fr": "la balance de cuisine sortie une seule fois pour peser 0 g de bonne foi pendant un régime de janvier",
+      "en": "the kitchen scale used exactly once to weigh out 0 grams of self-discipline during a January diet"
+    },
+    "category": {
+      "fr": "Sport, zerma",
+      "en": "New year, new me"
+    }
+  },
+  {
+    "id": "obj-med-056",
+    "prompt": {
+      "fr": "le porte-clés du logement de vacances jamais rendu, gardé comme trophée par quelqu'un ici",
+      "en": "the keyring from the holiday rental never given back, kept as a trophy by someone here"
+    },
+    "category": {
+      "fr": "Honte touristique",
+      "en": "Tourist behaviour"
+    }
+  },
+  {
+    "id": "obj-med-057",
+    "prompt": {
+      "fr": "le diffuseur d'huiles essentielles offert par la coloc qui range sa chambre une fois par trimestre",
+      "en": "the essential-oil diffuser gifted by the flatmate who tidies their room once a quarter"
+    },
+    "category": {
+      "fr": "Déco contestable",
+      "en": "Questionable decor"
+    }
+  },
+  {
+    "id": "obj-med-058",
+    "prompt": {
+      "fr": "le ramequin de sauce volé au resto, planqué dans le sac, ressorti fièrement à la maison",
+      "en": "the little pot of sauce nicked from the restaurant, hidden in a bag, produced proudly back home"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-med-059",
+    "prompt": {
+      "fr": "le sticker « attention au chien » sur la porte d'un appart sans chien, juste un coloc qui mord pas non plus",
+      "en": "the 'beware of the dog' sticker on a flat with no dog, just a flatmate who also doesn't bite"
+    },
+    "category": {
+      "fr": "Déco contestable",
+      "en": "Questionable decor"
+    }
+  },
+  {
+    "id": "obj-med-060",
+    "prompt": {
+      "fr": "la machine à pâtes reçue à un mariage, jamais déballée, transmise telle quelle au prochain mariage",
+      "en": "the pasta machine received at a wedding, never unboxed, re-gifted as-is to the next wedding"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-med-061",
+    "prompt": {
+      "fr": "le marqueur indélébile utilisé sur le tableau blanc du bureau. Trois semaines que c'est là. On cherche encore le nom.",
+      "en": "the permanent marker used on the office whiteboard. it's been there three weeks. we're still hunting for the name."
+    },
+    "category": {
+      "fr": "L'open space",
+      "en": "Corporate hell"
+    }
+  },
+  {
+    "id": "obj-med-062",
+    "prompt": {
+      "fr": "le parasol planté à 7 h du mat sur la plage pour réserver le spot, par quelqu'un qui parle de « liberté »",
+      "en": "the parasol staked into the beach at 7 a.m. to bagsy the spot, by someone who talks a lot about 'freedom'"
+    },
+    "category": {
+      "fr": "Honte touristique",
+      "en": "Tourist behaviour"
+    }
+  },
+  {
+    "id": "obj-med-063",
+    "prompt": {
+      "fr": "le diplôme accroché dans l'entrée pour que les invités le voient avant même d'enlever leur manteau",
+      "en": "the framed diploma hung in the hallway so guests see it before they've even taken their coat off"
+    },
+    "category": {
+      "fr": "Snobisme assumé",
+      "en": "Snob behaviour"
+    }
+  },
+  {
+    "id": "obj-med-064",
+    "prompt": {
+      "fr": "la prise multiple sous le bureau qui a déjà fait sauter le plomb deux fois en pleine visio importante",
+      "en": "the extension lead under the desk that's already tripped the fuses twice during an important video call"
+    },
+    "category": {
+      "fr": "L'open space",
+      "en": "Corporate hell"
+    }
+  },
+  {
+    "id": "obj-med-065",
+    "prompt": {
+      "fr": "le grille-pain qui garde encore les miettes du dernier locataire, parti il y a deux ans",
+      "en": "the toaster still holding crumbs from the last tenant, who moved out two years ago"
+    },
+    "category": {
+      "fr": "Crimes de cuisine",
+      "en": "Kitchen crimes"
+    }
+  },
+  {
+    "id": "obj-med-066",
+    "prompt": {
+      "fr": "le carnet de bonnes résolutions acheté chaque 31 décembre, jamais rempli au-delà du 6 janvier",
+      "en": "the brand-new resolutions journal bought every December 31st, never filled past January 6th"
+    },
+    "category": {
+      "fr": "Sport, zerma",
+      "en": "New year, new me"
+    }
+  },
+  {
+    "id": "obj-med-067",
+    "prompt": {
+      "fr": "le coffret de jeu de société encore sous cellophane, offert par quelqu'un qui jure « tu vas adorer ». On l'a jamais ouvert.",
+      "en": "the board game still in its cellophane, gifted by someone who swore 'you'll love it'. it has never been opened."
     },
     "category": {
       "fr": "Jeux & embrouilles",
@@ -7993,6 +8864,1256 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
         "one trip"
       ]
     }
+  },
+  {
+    "id": "mi-act-185",
+    "prompt": {
+      "fr": "Décongeler la baguette oubliée au congélateur en la posant sur le radiateur, et obtenir un objet ni pain ni arme",
+      "en": "Defrosting the forgotten freezer bread on the radiator and ending up with an object that is neither food nor weapon"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "congeler",
+        "baguette",
+        "radiateur",
+        "dur"
+      ],
+      "en": [
+        "freezer",
+        "bread",
+        "radiator",
+        "hard"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-186",
+    "prompt": {
+      "fr": "Sortir le plat du four sans gant, le tenir trois secondes de trop par fierté, et le poser en catastrophe sur la première surface venue",
+      "en": "Pulling the dish out of the oven with no mitt, holding it three seconds too long out of pride, and dumping it on the nearest surface in a panic"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "four",
+        "chaud",
+        "plat",
+        "gant"
+      ],
+      "en": [
+        "oven",
+        "hot",
+        "dish",
+        "mitt"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-187",
+    "prompt": {
+      "fr": "Goûter sa propre cuisine, comprendre instantanément que c'est raté, et garder le sourire pendant que les invités attaquent leur assiette",
+      "en": "Tasting your own cooking, knowing instantly it's a disaster, and keeping the smile up while the guests dig in"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "goûter",
+        "raté",
+        "cuisine",
+        "sourire"
+      ],
+      "en": [
+        "taste",
+        "disaster",
+        "cooking",
+        "smile"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-188",
+    "prompt": {
+      "fr": "Faire la mousse de chantilly au fouet à la main, abandonner à mi-chemin, et tendre le saladier à quelqu'un de plus motivé",
+      "en": "Whipping cream by hand, giving up halfway, and handing the bowl to someone with more will to live"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "chantilly",
+        "fouet",
+        "battre",
+        "bras"
+      ],
+      "en": [
+        "cream",
+        "whisk",
+        "whip",
+        "arm"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-189",
+    "prompt": {
+      "fr": "Découper une part de tarte parfaite pour la photo, la rater complètement, et tourner le plat pour cacher le massacre",
+      "en": "Cutting a flawless slice of pie for the photo, ruining it completely, and rotating the dish to hide the carnage"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "tarte",
+        "part",
+        "couteau",
+        "ratée"
+      ],
+      "en": [
+        "pie",
+        "slice",
+        "knife",
+        "ruined"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-190",
+    "prompt": {
+      "fr": "Râper le fromage à pleine vitesse, sentir venir le moment fatidique, ralentir trop tard, et glisser un doigt dans la râpe",
+      "en": "Grating cheese at full speed, sensing the fateful moment coming, slowing down too late, and catching a fingertip"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "râpe",
+        "fromage",
+        "doigt",
+        "vitesse"
+      ],
+      "en": [
+        "grater",
+        "cheese",
+        "finger",
+        "speed"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-191",
+    "prompt": {
+      "fr": "Pousser le caddie avec la roue qui part toute seule sur le côté, lutter pour aller droit, et percuter exactement la pyramide de conserves",
+      "en": "Pushing the trolley with the one wheel that veers off sideways, fighting to go straight, and hitting the exact tin-can pyramid"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "caddie",
+        "roue",
+        "supermarché",
+        "dévier"
+      ],
+      "en": [
+        "trolley",
+        "wheel",
+        "supermarket",
+        "veer"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-192",
+    "prompt": {
+      "fr": "Faire la queue à la caisse rapide derrière la personne qui a clairement quinze articles, les compter du regard, et soupirer en morse",
+      "en": "Queuing at the express till behind someone with clearly fifteen items, counting them with your eyes, and sighing in Morse code"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "caisse",
+        "queue",
+        "articles",
+        "attendre"
+      ],
+      "en": [
+        "till",
+        "queue",
+        "items",
+        "wait"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-193",
+    "prompt": {
+      "fr": "Essayer trois chariots collés avant d'en libérer un, gagner le combat, et réaliser que c'est celui avec le tiroir cassé",
+      "en": "Yanking three stuck-together trolleys before freeing one, winning the fight, and realising it's the one with the busted basket"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "chariot",
+        "coincé",
+        "tirer",
+        "pièce"
+      ],
+      "en": [
+        "trolley",
+        "stuck",
+        "pull",
+        "coin"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-194",
+    "prompt": {
+      "fr": "Tenir la pose du serveur photographe pour un couple, reculer pour mieux cadrer, et tomber dans la fontaine derrière",
+      "en": "Holding the volunteer-photographer pose for a couple, stepping back for a better frame, and falling into the fountain behind you"
+    },
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel"
+    },
+    "forbidden": {
+      "fr": [
+        "photo",
+        "couple",
+        "reculer",
+        "fontaine"
+      ],
+      "en": [
+        "photo",
+        "couple",
+        "step back",
+        "fountain"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-195",
+    "prompt": {
+      "fr": "Récupérer sa valise sur le tapis qui tourne, rater la prise trois fois, et faire un tour complet du tapis pour la rattraper",
+      "en": "Grabbing your case off the luggage belt, fumbling it three times, and riding a full lap of the carousel to catch up"
+    },
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel"
+    },
+    "forbidden": {
+      "fr": [
+        "valise",
+        "tapis",
+        "bagages",
+        "tourner"
+      ],
+      "en": [
+        "suitcase",
+        "belt",
+        "carousel",
+        "spin"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-196",
+    "prompt": {
+      "fr": "Composter son billet à l'envers, s'acharner, le retourner, et entendre le contrôleur arriver pile à ce moment",
+      "en": "Stamping your train ticket upside down, jamming it, flipping it, and hearing the inspector arrive at that exact second"
+    },
+    "category": {
+      "fr": "Transports",
+      "en": "Getting around"
+    },
+    "forbidden": {
+      "fr": [
+        "billet",
+        "composter",
+        "train",
+        "contrôleur"
+      ],
+      "en": [
+        "ticket",
+        "stamp",
+        "train",
+        "inspector"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-197",
+    "prompt": {
+      "fr": "Courir après le bus en faisant signe au chauffeur, le voir démarrer, ralentir net, et faire semblant de juste s'étirer",
+      "en": "Sprinting after the bus waving at the driver, watching it pull off, stopping dead, and pretending you were just stretching"
+    },
+    "category": {
+      "fr": "Transports",
+      "en": "Getting around"
+    },
+    "forbidden": {
+      "fr": [
+        "bus",
+        "courir",
+        "chauffeur",
+        "partir"
+      ],
+      "en": [
+        "bus",
+        "run",
+        "driver",
+        "leave"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-198",
+    "prompt": {
+      "fr": "Tenir la barre du métro avec le bras d'un inconnu juste au-dessus, choisir précisément où poser la main, et regretter ce choix",
+      "en": "Holding the subway rail with a stranger's arm right above yours, choosing exactly where to put your hand, and regretting that choice"
+    },
+    "category": {
+      "fr": "Transports",
+      "en": "Getting around"
+    },
+    "forbidden": {
+      "fr": [
+        "métro",
+        "barre",
+        "main",
+        "inconnu"
+      ],
+      "en": [
+        "subway",
+        "rail",
+        "hand",
+        "stranger"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-199",
+    "prompt": {
+      "fr": "Tenter de remonter une fermeture éclair coincée à mi-dos toute seule, se contorsionner, et finir bloquée les deux bras en l'air",
+      "en": "Trying to zip up a stuck back zipper solo, contorting, and ending up locked with both arms in the air"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "fermeture",
+        "zip",
+        "dos",
+        "coincé"
+      ],
+      "en": [
+        "zipper",
+        "zip",
+        "back",
+        "stuck"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-200",
+    "prompt": {
+      "fr": "Essayer une veste trop petite en cabine, gagner contre la manche, perdre contre l'autre, et appeler à l'aide par-dessus le rideau",
+      "en": "Trying a too-small jacket in the fitting room, winning against one sleeve, losing to the other, and calling for help over the curtain"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "veste",
+        "cabine",
+        "essayer",
+        "manche"
+      ],
+      "en": [
+        "jacket",
+        "fitting room",
+        "try on",
+        "sleeve"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-201",
+    "prompt": {
+      "fr": "Marcher avec une étiquette antivol oubliée qui bipe à chaque portique, lever les mains, et expliquer en mime au vigile",
+      "en": "Walking around with a forgotten security tag that beeps at every gate, raising your hands, and explaining to the guard in mime"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "antivol",
+        "biper",
+        "portique",
+        "vigile"
+      ],
+      "en": [
+        "security tag",
+        "beep",
+        "gate",
+        "guard"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-202",
+    "prompt": {
+      "fr": "Ouvrir un parapluie pile dans l'ascenseur bondé, ne plus pouvoir le refermer, et s'excuser à chaque étage",
+      "en": "Opening an umbrella inside the packed lift, finding you can't close it again, and apologising at every floor"
+    },
+    "category": {
+      "fr": "Galères",
+      "en": "Mishaps"
+    },
+    "forbidden": {
+      "fr": [
+        "parapluie",
+        "ascenseur",
+        "ouvrir",
+        "coincé"
+      ],
+      "en": [
+        "umbrella",
+        "lift",
+        "open",
+        "stuck"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-203",
+    "prompt": {
+      "fr": "Appuyer frénétiquement sur le bouton d'ascenseur déjà allumé en croyant accélérer les choses, et fixer la porte avec autorité",
+      "en": "Mashing the already-lit lift button thinking it speeds things up, and staring at the doors with authority"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "ascenseur",
+        "bouton",
+        "appuyer",
+        "attendre"
+      ],
+      "en": [
+        "lift",
+        "button",
+        "press",
+        "wait"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-204",
+    "prompt": {
+      "fr": "Pousser la porte vitrée du magasin en se voyant en reflet, croire à un sosie, le saluer, et comprendre trop tard",
+      "en": "Pushing the shop's glass door, catching your reflection, mistaking it for a lookalike, waving, and getting it too late"
+    },
+    "category": {
+      "fr": "Galères",
+      "en": "Mishaps"
+    },
+    "forbidden": {
+      "fr": [
+        "vitre",
+        "reflet",
+        "saluer",
+        "miroir"
+      ],
+      "en": [
+        "glass",
+        "reflection",
+        "wave",
+        "mirror"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-205",
+    "prompt": {
+      "fr": "Faire le ménage en glissant en chaussettes sur le carrelage mouillé, le transformer en patinage artistique, et noter mentalement la chute",
+      "en": "Cleaning the floor, sliding in socks on the wet tiles, turning it into figure skating, and mentally scoring the wipeout"
+    },
+    "category": {
+      "fr": "Corvées",
+      "en": "Chores"
+    },
+    "forbidden": {
+      "fr": [
+        "serpillère",
+        "glisser",
+        "chaussettes",
+        "mouillé"
+      ],
+      "en": [
+        "mop",
+        "slide",
+        "socks",
+        "wet"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-206",
+    "prompt": {
+      "fr": "Étendre le linge sur un étendoir qui se replie tout seul d'un côté à chaque pince posée",
+      "en": "Hanging the washing on a drying rack that folds itself shut on one side with every peg you clip"
+    },
+    "category": {
+      "fr": "Corvées",
+      "en": "Chores"
+    },
+    "forbidden": {
+      "fr": [
+        "étendoir",
+        "linge",
+        "pince",
+        "replier"
+      ],
+      "en": [
+        "rack",
+        "washing",
+        "peg",
+        "collapse"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-207",
+    "prompt": {
+      "fr": "Changer le sac de l'aspirateur, déclencher le nuage de poussière, le respirer en plein, et reprendre comme si de rien n'était",
+      "en": "Changing the vacuum bag, triggering the dust cloud, inhaling all of it, and carrying on like nothing happened"
+    },
+    "category": {
+      "fr": "Corvées",
+      "en": "Chores"
+    },
+    "forbidden": {
+      "fr": [
+        "aspirateur",
+        "sac",
+        "poussière",
+        "nuage"
+      ],
+      "en": [
+        "vacuum",
+        "bag",
+        "dust",
+        "cloud"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-208",
+    "prompt": {
+      "fr": "Démonter une étagère murale, tenir tout l'édifice d'une main en cherchant le tournevis de l'autre, et sentir ça partir",
+      "en": "Taking down a wall shelf, holding the whole thing up with one hand while hunting the screwdriver with the other, and feeling it go"
+    },
+    "category": {
+      "fr": "Corvées",
+      "en": "Chores"
+    },
+    "forbidden": {
+      "fr": [
+        "étagère",
+        "mur",
+        "tournevis",
+        "tenir"
+      ],
+      "en": [
+        "shelf",
+        "wall",
+        "screwdriver",
+        "hold"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-209",
+    "prompt": {
+      "fr": "Repeindre un mur, reculer pour admirer, et poser tout son dos contre la partie encore fraîche",
+      "en": "Repainting a wall, stepping back to admire it, and pressing your whole back into the still-wet section"
+    },
+    "category": {
+      "fr": "Métiers",
+      "en": "Jobs"
+    },
+    "forbidden": {
+      "fr": [
+        "peinture",
+        "mur",
+        "fraîche",
+        "dos"
+      ],
+      "en": [
+        "paint",
+        "wall",
+        "wet",
+        "back"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-210",
+    "prompt": {
+      "fr": "Visser une vis dans le mur, tenir la perceuse trop bas, et écrire mentalement son testament quand elle dérape",
+      "en": "Drilling a screw into the wall, holding the drill too low, and mentally writing your will when it slips"
+    },
+    "category": {
+      "fr": "Corvées",
+      "en": "Chores"
+    },
+    "forbidden": {
+      "fr": [
+        "perceuse",
+        "vis",
+        "mur",
+        "déraper"
+      ],
+      "en": [
+        "drill",
+        "screw",
+        "wall",
+        "slip"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-211",
+    "prompt": {
+      "fr": "Surveiller deux enfants au parc, les compter, n'en trouver qu'un, paniquer, recompter, et en retrouver trois",
+      "en": "Watching two kids at the park, counting them, finding only one, panicking, recounting, and ending up with three"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "enfants",
+        "parc",
+        "compter",
+        "perdu"
+      ],
+      "en": [
+        "kids",
+        "park",
+        "count",
+        "lost"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-212",
+    "prompt": {
+      "fr": "Pousser la poussette d'une main, tenir le café de l'autre, ouvrir la porte du pied, et perdre exactement un des trois",
+      "en": "Pushing the pram with one hand, holding the coffee in the other, opening the door with a foot, and losing exactly one of the three"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "poussette",
+        "café",
+        "porte",
+        "jongler"
+      ],
+      "en": [
+        "pram",
+        "coffee",
+        "door",
+        "juggle"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-213",
+    "prompt": {
+      "fr": "Donner la cuillère à un bébé qui détourne la tête au dernier moment, faire l'avion, et recevoir la purée en plein visage",
+      "en": "Spoon-feeding a baby that turns its head at the last second, doing the aeroplane, and wearing the puree full in the face"
+    },
+    "category": {
+      "fr": "Quotidien",
+      "en": "Daily life"
+    },
+    "forbidden": {
+      "fr": [
+        "bébé",
+        "cuillère",
+        "purée",
+        "manger"
+      ],
+      "en": [
+        "baby",
+        "spoon",
+        "puree",
+        "feed"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-214",
+    "prompt": {
+      "fr": "Tenter de prendre une photo de groupe avec le retardateur, sprinter vers le cadre, et arriver pile une seconde après le flash",
+      "en": "Setting up the group photo on a timer, sprinting into frame, and arriving exactly one second after the flash"
+    },
+    "category": {
+      "fr": "Soirée",
+      "en": "Party"
+    },
+    "forbidden": {
+      "fr": [
+        "retardateur",
+        "photo",
+        "courir",
+        "flash"
+      ],
+      "en": [
+        "timer",
+        "photo",
+        "run",
+        "flash"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-215",
+    "prompt": {
+      "fr": "Arroser la bougie d'anniversaire d'un peu trop de souffle, éteindre la moitié du gâteau, et rallumer une bougie avec la dernière",
+      "en": "Blowing the birthday candle with a bit too much lung, taking out half the cake, and relighting one candle with the last"
+    },
+    "category": {
+      "fr": "Soirée",
+      "en": "Party"
+    },
+    "forbidden": {
+      "fr": [
+        "bougie",
+        "anniversaire",
+        "souffler",
+        "gâteau"
+      ],
+      "en": [
+        "candle",
+        "birthday",
+        "blow",
+        "cake"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-216",
+    "prompt": {
+      "fr": "Ouvrir le champagne en visant le plafond, comprendre que le bouchon ne part pas, forcer, et le perdre dans le lustre",
+      "en": "Opening the bubbly aimed at the ceiling, realising the cork won't budge, forcing it, and losing it in the chandelier"
+    },
+    "category": {
+      "fr": "Soirée",
+      "en": "Party"
+    },
+    "forbidden": {
+      "fr": [
+        "bouchon",
+        "bouteille",
+        "plafond",
+        "viser"
+      ],
+      "en": [
+        "cork",
+        "bottle",
+        "ceiling",
+        "aim"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-217",
+    "prompt": {
+      "fr": "Tenter le toast émouvant en levant son verre, oublier complètement ce qu'on voulait dire, et improviser une fin qui ne tient pas debout",
+      "en": "Going for the heartfelt toast, glass raised, completely blanking on the words, and improvising an ending that makes no sense"
+    },
+    "category": {
+      "fr": "Soirée",
+      "en": "Party"
+    },
+    "forbidden": {
+      "fr": [
+        "toast",
+        "verre",
+        "discours",
+        "oublier"
+      ],
+      "en": [
+        "toast",
+        "glass",
+        "speech",
+        "blank"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-218",
+    "prompt": {
+      "fr": "Tenter d'enfiler le costume gonflable de dinosaure tout seul avant la fête, se coincer dans la queue, et appeler à l'aide en grognant",
+      "en": "Trying to get into the inflatable dinosaur costume solo before the party, getting tangled in the tail, and calling for help in growls"
+    },
+    "category": {
+      "fr": "Soirée",
+      "en": "Party"
+    },
+    "forbidden": {
+      "fr": [
+        "costume",
+        "gonflable",
+        "déguisement",
+        "coincé"
+      ],
+      "en": [
+        "costume",
+        "inflatable",
+        "outfit",
+        "stuck"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-219",
+    "prompt": {
+      "fr": "Faire le DJ du mariage en demandant « une dernière », la lancer, et voir la mariée elle-même venir débrancher la sono",
+      "en": "DJing the wedding, calling out one last song, dropping it, and watching the bride herself come unplug the speakers"
+    },
+    "category": {
+      "fr": "Musique",
+      "en": "Music"
+    },
+    "forbidden": {
+      "fr": [
+        "DJ",
+        "mariage",
+        "musique",
+        "débrancher"
+      ],
+      "en": [
+        "DJ",
+        "wedding",
+        "music",
+        "unplug"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-220",
+    "prompt": {
+      "fr": "Accorder une guitare devant tout le monde, tourner la mauvaise clé, casser une corde, et déclarer que c'était l'effet voulu",
+      "en": "Tuning a guitar in front of everyone, turning the wrong peg, snapping a string, and declaring it the intended effect"
+    },
+    "category": {
+      "fr": "Musique",
+      "en": "Music"
+    },
+    "forbidden": {
+      "fr": [
+        "guitare",
+        "accorder",
+        "corde",
+        "clé"
+      ],
+      "en": [
+        "guitar",
+        "tune",
+        "string",
+        "peg"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-221",
+    "prompt": {
+      "fr": "Souffler dans une flûte à bec pour la première fois en cours, produire un son qui fait fuir les pigeons, et continuer fièrement",
+      "en": "Blowing into a recorder for the first time in class, producing a noise that scatters the pigeons, and pressing on proudly"
+    },
+    "category": {
+      "fr": "Musique",
+      "en": "Music"
+    },
+    "forbidden": {
+      "fr": [
+        "flûte",
+        "souffler",
+        "note",
+        "fausse"
+      ],
+      "en": [
+        "recorder",
+        "blow",
+        "note",
+        "off-key"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-222",
+    "prompt": {
+      "fr": "Faire applaudir une salle qui n'a pas du tout aimé, lancer le rappel soi-même, et l'assumer dans le silence",
+      "en": "Trying to start the applause in a room that did not enjoy it at all, calling your own encore, and owning it through the silence"
+    },
+    "category": {
+      "fr": "Spectacle",
+      "en": "Showbiz"
+    },
+    "forbidden": {
+      "fr": [
+        "applaudir",
+        "salle",
+        "rappel",
+        "silence"
+      ],
+      "en": [
+        "applause",
+        "crowd",
+        "encore",
+        "silence"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-223",
+    "prompt": {
+      "fr": "Faire le ventriloque avec une marionnette qui dit clairement la vérité à ta place, et tenter de la faire taire de la main",
+      "en": "Doing the ventriloquist act with a puppet that clearly says the quiet part out loud for you, and trying to muzzle it by hand"
+    },
+    "category": {
+      "fr": "Spectacle",
+      "en": "Showbiz"
+    },
+    "forbidden": {
+      "fr": [
+        "ventriloque",
+        "marionnette",
+        "parler",
+        "main"
+      ],
+      "en": [
+        "ventriloquist",
+        "puppet",
+        "talk",
+        "hand"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-224",
+    "prompt": {
+      "fr": "Lancer le frisbee au chien, le voir partir parfaitement, et réaliser que le chien n'a pas bougé d'un poil",
+      "en": "Launching the frisbee for the dog, watching it fly perfectly, and realising the dog hasn't moved a muscle"
+    },
+    "category": {
+      "fr": "Animaux",
+      "en": "Animals"
+    },
+    "forbidden": {
+      "fr": [
+        "frisbee",
+        "chien",
+        "lancer",
+        "rapporter"
+      ],
+      "en": [
+        "frisbee",
+        "dog",
+        "throw",
+        "fetch"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-225",
+    "prompt": {
+      "fr": "Ramasser la crotte du chien avec le sac retourné sur la main, rater la prise, et toucher exactement ce qu'il ne fallait pas",
+      "en": "Picking up after the dog with the bag inside out over your hand, missing the grab, and touching exactly the thing you shouldn't"
+    },
+    "category": {
+      "fr": "Animaux",
+      "en": "Animals"
+    },
+    "forbidden": {
+      "fr": [
+        "chien",
+        "sac",
+        "ramasser",
+        "crotte"
+      ],
+      "en": [
+        "dog",
+        "bag",
+        "scoop",
+        "poop"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-226",
+    "prompt": {
+      "fr": "Mettre le chat dans la cage de transport pour le véto, voir le chat devenir liquide, et perdre cinq minutes de sa vie et de sa peau",
+      "en": "Getting the cat into the carrier for the vet, watching the cat turn to liquid, and losing five minutes of your life and skin"
+    },
+    "category": {
+      "fr": "Animaux",
+      "en": "Animals"
+    },
+    "forbidden": {
+      "fr": [
+        "chat",
+        "cage",
+        "véto",
+        "griffes"
+      ],
+      "en": [
+        "cat",
+        "carrier",
+        "vet",
+        "claws"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-227",
+    "prompt": {
+      "fr": "Donner à manger aux pigeons d'une main, en attirer cinquante, comprendre l'erreur, et battre en retraite sous un nuage gris",
+      "en": "Feeding the pigeons with one hand, drawing fifty of them, realising the mistake, and retreating under a grey cloud"
+    },
+    "category": {
+      "fr": "Animaux",
+      "en": "Animals"
+    },
+    "forbidden": {
+      "fr": [
+        "pigeons",
+        "nourrir",
+        "miettes",
+        "nuée"
+      ],
+      "en": [
+        "pigeons",
+        "feed",
+        "crumbs",
+        "swarm"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-228",
+    "prompt": {
+      "fr": "Récupérer un ballon coincé dans l'arbre en lançant une chaussure, perdre la chaussure aussi, et lancer la deuxième",
+      "en": "Getting a ball out of the tree by throwing a shoe, losing the shoe too, and throwing the second one"
+    },
+    "category": {
+      "fr": "Loisirs",
+      "en": "Hobbies"
+    },
+    "forbidden": {
+      "fr": [
+        "ballon",
+        "arbre",
+        "chaussure",
+        "coincé"
+      ],
+      "en": [
+        "ball",
+        "tree",
+        "shoe",
+        "stuck"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-229",
+    "prompt": {
+      "fr": "Monter sur le trampoline avec un peu trop de confiance, mal retomber, rebondir une fois de trop, et atterrir hors du trampoline",
+      "en": "Getting on the trampoline with a bit too much confidence, landing badly, bouncing once too many, and ending up off the trampoline"
+    },
+    "category": {
+      "fr": "Loisirs",
+      "en": "Hobbies"
+    },
+    "forbidden": {
+      "fr": [
+        "trampoline",
+        "rebondir",
+        "sauter",
+        "tomber"
+      ],
+      "en": [
+        "trampoline",
+        "bounce",
+        "jump",
+        "fall"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-230",
+    "prompt": {
+      "fr": "Apprendre à faire du monocycle dans le salon, tenir trois secondes record, et emporter le lampadaire dans la chute",
+      "en": "Learning to ride a unicycle in the living room, holding a record three seconds, and taking the floor lamp down with you"
+    },
+    "category": {
+      "fr": "Loisirs",
+      "en": "Hobbies"
+    },
+    "forbidden": {
+      "fr": [
+        "monocycle",
+        "équilibre",
+        "rouler",
+        "tomber"
+      ],
+      "en": [
+        "unicycle",
+        "balance",
+        "ride",
+        "fall"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-231",
+    "prompt": {
+      "fr": "Ouvrir une chaise longue de plage récalcitrante, comprendre le mécanisme à l'envers, et s'y pincer le doigt en s'asseyant",
+      "en": "Wrestling open a stubborn deck chair, working out the mechanism backwards, and pinching a finger as you sit"
+    },
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel"
+    },
+    "forbidden": {
+      "fr": [
+        "transat",
+        "chaise",
+        "déplier",
+        "pincer"
+      ],
+      "en": [
+        "deck chair",
+        "chair",
+        "unfold",
+        "pinch"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-232",
+    "prompt": {
+      "fr": "Étaler la serviette de plage en luttant contre le vent, gagner un coin, perdre l'autre, et finir assis dessus de tout son poids",
+      "en": "Spreading the beach towel against the wind, winning one corner, losing the other, and finally sitting your full weight on it"
+    },
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel"
+    },
+    "forbidden": {
+      "fr": [
+        "serviette",
+        "plage",
+        "vent",
+        "étaler"
+      ],
+      "en": [
+        "towel",
+        "beach",
+        "wind",
+        "spread"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-233",
+    "prompt": {
+      "fr": "Tenter d'allumer le barbecue avec trop d'allume-feu, reculer juste à temps, et perdre les sourcils dans la détonation",
+      "en": "Lighting the barbecue with way too much firelighter, stepping back just in time, and losing the eyebrows in the whoomph"
+    },
+    "category": {
+      "fr": "Nature",
+      "en": "Outdoors"
+    },
+    "forbidden": {
+      "fr": [
+        "barbecue",
+        "feu",
+        "allumer",
+        "sourcils"
+      ],
+      "en": [
+        "barbecue",
+        "fire",
+        "light",
+        "eyebrows"
+      ]
+    }
+  },
+  {
+    "id": "mi-act-234",
+    "prompt": {
+      "fr": "Mettre la crème glacée du distributeur dans le cornet, tourner trop longtemps, faire une tour de cinquante centimètres, et la voir s'effondrer",
+      "en": "Pulling soft-serve into the cone, swirling too long, building a fifty-centimetre tower, and watching it topple"
+    },
+    "category": {
+      "fr": "Cuisine",
+      "en": "Kitchen"
+    },
+    "forbidden": {
+      "fr": [
+        "glace",
+        "cornet",
+        "tourner",
+        "tour"
+      ],
+      "en": [
+        "soft-serve",
+        "cone",
+        "swirl",
+        "tower"
+      ]
+    }
   }
 ] },
 };
@@ -9374,6 +11495,391 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     "hint": {
       "fr": "Échauffement très sérieux, sprint, la roue hurle, éjection, remonte direct. Les JO sont dans quatre ans. T'y crois, toi.",
       "en": "dead serious warm-up, sprint, the wheel screams, ejection, straight back on. the olympics are in four years. believe"
+    }
+  },
+  {
+    "id": "dlm-126-octopus-jar",
+    "prompt": {
+      "fr": "Une pieuvre qui essaie d'ouvrir un bocal avec ses huit bras et s'embrouille toute seule",
+      "en": "An octopus trying to open a jar with all eight arms and getting completely tangled in itself"
+    },
+    "hint": {
+      "fr": "Huit bras, un seul cerveau, zéro coordination. Deux bras se disputent, un troisième abandonne. Le bocal gagne. Encore.",
+      "en": "eight arms, one brain, zero teamwork. two arms start arguing, a third quits. the jar wins. obviously"
+    }
+  },
+  {
+    "id": "dlm-127-snail-marathon",
+    "prompt": {
+      "fr": "Un escargot qui se croit en plein sprint olympique alors qu'il a fait deux centimètres en dix minutes",
+      "en": "A snail convinced it's mid-Olympic-sprint, having covered two centimeters in ten minutes"
+    },
+    "hint": {
+      "fr": "Visage de coureur en feu, corps au point mort. Souffle, grimace, regarde derrière toi comme si on te rattrapait. Personne te rattrape. Personne bouge.",
+      "en": "face of a sprinter on fire, body in absolute neutral. pant, grimace, glance back like someone's gaining. nobody is gaining. nobody is moving"
+    }
+  },
+  {
+    "id": "dlm-128-penguin-ice",
+    "prompt": {
+      "fr": "Un manchot trop classe qui glisse sur la banquise et fait semblant que c'était prévu",
+      "en": "An overly dignified penguin slipping on the ice and pretending it was all part of the plan"
+    },
+    "hint": {
+      "fr": "Démarche de gentleman, dérapage soudain, atterrissage sur le ventre, redressement façon « j'ai rien fait ». Scan des autres manchots. Ils ont vu. Continue, digne.",
+      "en": "gentleman waddle, sudden slide, belly landing, get up like 'I meant that'. scan the other penguins. they saw. carry on, dignified"
+    }
+  },
+  {
+    "id": "dlm-129-spider-bath",
+    "prompt": {
+      "fr": "L'araignée géante dans la baignoire et toi qui négocies avec elle depuis la porte",
+      "en": "The huge spider in the bathtub and you negotiating with it from the doorway"
+    },
+    "hint": {
+      "fr": "Joue les deux : l'humain terrifié armé d'une chaussure tremblante, et l'araignée qui avance d'un pas pile quand tu approches. Le verre arrive. Elle disparaît. Personne dormira ici.",
+      "en": "play both: the terrified human armed with a wobbling shoe, and the spider that takes one step forward the instant you approach. the glass comes out. it vanishes. nobody sleeps here tonight"
+    }
+  },
+  {
+    "id": "dlm-130-cow-fly",
+    "prompt": {
+      "fr": "Une vache qui chasse une mouche avec sa queue et se met une claque toute seule",
+      "en": "A cow trying to swat a fly with its tail and slapping itself in the face instead"
+    },
+    "hint": {
+      "fr": "Broute peinarde, mouche, coup de queue raté, AÏE. Recommence. Re-AÏE. La mouche, elle, vit sa meilleure vie. Toi tu te frappes en boucle.",
+      "en": "graze in peace, fly, tail swing, MISS, smack yourself. again. smack again. the fly is thriving. you are just hitting yourself on loop"
+    }
+  },
+  {
+    "id": "dlm-131-grandma-self-checkout",
+    "prompt": {
+      "fr": "Mamie face à la caisse automatique pour la première fois, et la machine perd patience avant elle",
+      "en": "Grandma facing the self-checkout for the first time, and the machine loses patience before she does"
+    },
+    "hint": {
+      "fr": "Scan retourné, code-barres cherché à l'envers, tape l'écran trop fort, parle à la machine poliment. La file de huit personnes derrière respire fort. Mamie a tout son temps. Eux non.",
+      "en": "scan it upside down, hunt for the barcode the wrong way, jab the screen too hard, talk to the machine politely. the queue of eight behind is breathing loudly. grandma has all the time in the world. they do not"
+    }
+  },
+  {
+    "id": "dlm-132-earphone-snag",
+    "prompt": {
+      "fr": "Ton écouteur filaire s'accroche à la poignée de porte et t'arrache l'oreille en plein pas pressé",
+      "en": "Your wired earbud snags on the door handle and rips out of your ear mid-rushed-walk"
+    },
+    "hint": {
+      "fr": "Marche déterminée, ARRACHEMENT, tête qui part en arrière, oreille en feu, regard panoramique pour vérifier qui a vu. Tout le monde a vu. Range le fil comme si de rien.",
+      "en": "determined stride, YANK, head snaps back, ear on fire, panoramic scan for witnesses. everyone saw. tuck the wire away like nothing happened"
+    }
+  },
+  {
+    "id": "dlm-133-hot-plate-waiter",
+    "prompt": {
+      "fr": "Le serveur qui pose ton assiette brûlante en chantant « attention c'est chaud » trois secondes trop tard",
+      "en": "The waiter setting down your scalding plate while singing 'careful it's hot' three seconds too late"
+    },
+    "hint": {
+      "fr": "Joue le serveur trop zélé ET le client qui touche l'assiette par réflexe. Doigts en feu, sourire poli maintenu, souffle discret sur la main sous la table. « C'est très chaud » — oui, on sait, MERCI.",
+      "en": "play the over-eager waiter AND the customer who touches the plate on reflex. fingers on fire, polite smile held, secret blow on the hand under the table. 'it's very hot' — yes, thank you, we KNOW"
+    }
+  },
+  {
+    "id": "dlm-134-fitted-sheet",
+    "prompt": {
+      "fr": "Plier un drap-housse : un combat que l'humanité n'a jamais gagné, et toi non plus",
+      "en": "Folding a fitted sheet: a battle humanity has never won, and neither will you"
+    },
+    "hint": {
+      "fr": "Confiance de tutoriel, coin dans coin, ça gondole, tu secoues, c'est pire, tu finis par tout rouler en boule et le ranger en cachette. La défaite est totale. Souris.",
+      "en": "tutorial confidence, corner into corner, it bunches, you shake it, it's worse, you end up rolling the whole thing into a ball and hiding it. total defeat. smile"
+    }
+  },
+  {
+    "id": "dlm-135-elevator-music-jam",
+    "prompt": {
+      "fr": "Seul dans l'ascenseur, tu te lâches sur la musique d'ambiance, et les portes s'ouvrent au pire moment",
+      "en": "Alone in the elevator, you fully vibe to the muzak, and the doors open at the worst possible second"
+    },
+    "hint": {
+      "fr": "Vérifie que t'es seul, petit dodelinement, ça monte, choré complète, GROS move… portes ouvertes, trois inconnus. Fige-toi en demi-mouvement. Transforme-le en « j'ajustais ma veste ». Personne y croit.",
+      "en": "check you're alone, small head bob, it builds, full choreo, BIG move… doors open, three strangers. freeze mid-move. convert it to 'just adjusting my jacket'. nobody buys it"
+    }
+  },
+  {
+    "id": "dlm-136-revolving-door",
+    "prompt": {
+      "fr": "Coincé dans la porte tambour avec un inconnu qui pousse exactement à ton rythme",
+      "en": "Trapped in a revolving door with a stranger pushing at the exact same rhythm as you"
+    },
+    "hint": {
+      "fr": "Pousse, ça avance, l'autre pousse aussi, ça s'arrête. Re-pousse. Re-blocage. Vous êtes désormais liés à vie. Échange un regard de pure haine polie à travers la vitre.",
+      "en": "push, it moves, the other pushes too, it stalls. push again. stall again. you are now bound for life. exchange a look of pure polite hatred through the glass"
+    }
+  },
+  {
+    "id": "dlm-137-mom-licked-tissue",
+    "prompt": {
+      "fr": "La daronne qui lèche le mouchoir pour te nettoyer la joue devant tes potes, à 25 ans",
+      "en": "Your mum licking the tissue to wipe your cheek in front of your mates, at 25 years old"
+    },
+    "hint": {
+      "fr": "Joue la daronne en mission ET toi qui recules en niant tout. Esquive, capture du menton, frottage humide implacable. Tes potes filment. T'as 25 ans. Ça change rien.",
+      "en": "play the mum on a mission AND you backing away in denial. dodge, chin capture, relentless damp scrub. your mates are filming. you're 25. it changes nothing"
+    }
+  },
+  {
+    "id": "dlm-138-charger-angle",
+    "prompt": {
+      "fr": "Maintenir le chargeur au seul angle exact où il charge encore, pendant tout un appel important",
+      "en": "Holding the charger at the one precise angle where it still charges, for the entire length of an important call"
+    },
+    "hint": {
+      "fr": "Trouve l'angle sacré, fige le bras, tremblement, perds le contact, recule de panique, retrouve l'angle. Parle au téléphone avec le sourire d'un otage. Bouge pas. BOUGE PAS.",
+      "en": "find the sacred angle, freeze the arm, tremor, lose contact, panic-recover, find it again. talk on the phone with the smile of a hostage. do not move. do NOT move"
+    }
+  },
+  {
+    "id": "dlm-139-wrong-floor-meeting",
+    "prompt": {
+      "fr": "Tu entres dans la mauvaise réunion, tu le réalises trop tard, et tu décides de rester pour pas faire de vague",
+      "en": "You walk into the wrong meeting, realize too late, and decide to just stay so you don't make a scene"
+    },
+    "hint": {
+      "fr": "Entrée confiante, salut à la cantonade, t'assois, réalisation lente que tu connais personne, hochements de tête engagés sur un sujet que tu comprends pas. Quelqu'un te désigne pour « ton avis ». Improvise. Survis.",
+      "en": "confident entrance, nod to the room, sit down, slow realization you know nobody, engaged nodding on a topic you don't understand. someone asks for 'your take'. improvise. survive"
+    }
+  },
+  {
+    "id": "dlm-140-autocorrect-read-aloud",
+    "prompt": {
+      "fr": "Lire à voix haute le SMS du correcteur auto qui a transformé un mot normal en horreur incompréhensible",
+      "en": "Reading aloud the autocorrect text that turned one normal word into pure incomprehensible chaos"
+    },
+    "hint": {
+      "fr": "Lecture fière, blocage sur le mot mutant, relecture, panique, tentative de prononcer l'imprononçable. La salle attend. T'as plus de sortie. Lis-le. Tout fort.",
+      "en": "proud read, choke on the mutant word, re-read, panic, attempt to pronounce the unpronounceable. the room waits. there's no exit. read it. out loud"
+    }
+  },
+  {
+    "id": "dlm-141-laugh-coffin",
+    "prompt": {
+      "fr": "Le porteur de cercueil dont une chaussure se délace au pire moment de la cérémonie",
+      "en": "The pallbearer whose shoelace comes undone at the most solemn moment of the ceremony"
+    },
+    "hint": {
+      "fr": "Visage de marbre, démarche lente et grave, lacet traître sous le pied, micro-trébuchement, rééquilibrage discret pour pas faire tomber le poids. Personne doit voir. Tout le monde voit.",
+      "en": "stone face, slow grave march, traitor lace underfoot, micro-stumble, discreet rebalance so the weight doesn't drop. nobody must see. everybody sees"
+    }
+  },
+  {
+    "id": "dlm-142-name-forgotten",
+    "prompt": {
+      "fr": "Présenter deux personnes et réaliser au milieu de la phrase que t'as oublié le prénom des deux",
+      "en": "Introducing two people and realizing mid-sentence you've forgotten both of their names"
+    },
+    "hint": {
+      "fr": "Geste de présentation assuré, « alors voici… euh… », sourire qui se fige, main qui flotte entre les deux, espoir qu'ils se présentent seuls. Ils attendent. Ils savent. Meurs lentement.",
+      "en": "confident intro gesture, 'so this is… uh…', smile freezes, hand floating between them, praying they introduce themselves. they wait. they know. die slowly"
+    }
+  },
+  {
+    "id": "dlm-143-tucked-skirt",
+    "prompt": {
+      "fr": "Sortir des toilettes en public avec un truc coincé là où il faut pas, et tout le monde le voit avant toi",
+      "en": "Walking out of a public bathroom with something tucked where it shouldn't be, and everyone sees it before you do"
+    },
+    "hint": {
+      "fr": "Démarche assurée, sourires bizarres autour, doute, vérification arrière en panique, réalisation, marche arrière vers les toilettes en mode crabe digne. Garde la tête haute. C'est tout ce qu'il te reste.",
+      "en": "confident strut, weird smiles around you, doubt, panicked rear check, realization, dignified crab-walk reverse back toward the bathroom. keep your head high. it's all you've got left"
+    }
+  },
+  {
+    "id": "dlm-144-superhero-landing-knee",
+    "prompt": {
+      "fr": "L'atterrissage de super-héros parfait… sauf que ton genou n'a pas signé pour ça",
+      "en": "The perfect superhero landing… except your knee did not sign up for this"
+    },
+    "hint": {
+      "fr": "Saut épique, pose poing-au-sol impeccable, CRAC du genou, visage qui encaisse la douleur tout en gardant la pose héroïque. Lève-toi à 10 % de la vitesse prévue. Sauve la dignité, perds le ménisque.",
+      "en": "epic leap, flawless fist-to-ground pose, knee CRACK, face absorbing the pain while holding the heroic stance. rise at 10% of intended speed. save the dignity, lose the meniscus"
+    }
+  },
+  {
+    "id": "dlm-145-slowmo-baywatch-sand",
+    "prompt": {
+      "fr": "La course au ralenti type Alerte à Malibu, sauf que tu te prends tous les châteaux de sable",
+      "en": "The slow-motion Baywatch beach run, except you plow through every single sandcastle on the way"
+    },
+    "hint": {
+      "fr": "Cheveux au vent imaginaire, foulée héroïque au ralenti, sourire de sauveteur… puis crash dans un château, et un autre, et un gosse qui pleure. Continue au ralenti. La gloire n'attend pas.",
+      "en": "imaginary hair in the wind, heroic slow-mo stride, lifeguard smile… then crash through a castle, and another, and a crying kid. keep going in slow motion. glory waits for no one"
+    }
+  },
+  {
+    "id": "dlm-146-bond-intro-trip",
+    "prompt": {
+      "fr": "L'agent secret qui se présente « Bond. James Bond » et se mange le coin de la table dans la foulée",
+      "en": "The secret agent introducing himself 'Bond. James Bond' and immediately clipping the corner of the table"
+    },
+    "hint": {
+      "fr": "Charisme maximal, regard de braise, réplique culte, pas en avant confiant, hanche contre la table, douleur ravalée, sourire qui ne flanche pas. Reste classe. La table a gagné mais personne le saura.",
+      "en": "max charisma, smoldering look, the iconic line, confident step forward, hip into the table, swallowed pain, smile that refuses to break. stay suave. the table won but no one will ever know"
+    }
+  },
+  {
+    "id": "dlm-147-titanic-railing",
+    "prompt": {
+      "fr": "La scène « je suis le roi du monde » à l'avant du bateau, mais t'as le vertige et le mal de mer",
+      "en": "The 'I'm the king of the world' bow scene, but you're scared of heights AND seasick"
+    },
+    "hint": {
+      "fr": "Bras grands ouverts, déclaration épique, vent dans la face… puis le tangage, le teint qui verdit, les bras qui se cramponnent au lieu de s'ouvrir. Roi du monde, otage de ton estomac. Finis la réplique quand même.",
+      "en": "arms wide open, epic declaration, wind in your face… then the rocking, the greening face, arms clamping instead of opening. king of the world, hostage of your own stomach. finish the line anyway"
+    }
+  },
+  {
+    "id": "dlm-148-jedi-mind-trick-fail",
+    "prompt": {
+      "fr": "Le chevalier qui tente le contrôle mental sur quelqu'un de complètement immunisé et de plus en plus agacé",
+      "en": "The knight attempting a mind trick on someone completely immune and increasingly annoyed by it"
+    },
+    "hint": {
+      "fr": "Geste lent et solennel de la main, voix grave et confiante, « tu vas faire ce que je dis »… l'autre cligne des yeux, croise les bras, attend. Re-geste, plus fort, plus désespéré. Ça marche pas. Ça marchera jamais. Insiste.",
+      "en": "slow solemn hand wave, deep confident voice, 'you will do as I say'… the other blinks, crosses arms, waits. wave again, harder, more desperate. it isn't working. it never will. keep going"
+    }
+  },
+  {
+    "id": "dlm-149-dramatic-cough-monologue",
+    "prompt": {
+      "fr": "Le personnage mourant qui veut faire sa dernière réplique bouleversante mais qui tousse pile sur les mots importants",
+      "en": "The dying character trying to deliver a heartbreaking final line but coughing right over the important words"
+    },
+    "hint": {
+      "fr": "Effondrement tragique, main tendue vers le ciel, « dis à ma famille que je… » TOUSSE, reprends, « que je… » RE-TOUSSE. L'ami penché au-dessus de toi attend le mot clé qui vient jamais. Meurs frustré.",
+      "en": "tragic collapse, hand reaching skyward, 'tell my family that I…' COUGH, recover, 'that I…' COUGH again. the friend leaning over you waits for the key word that never lands. die frustrated"
+    }
+  },
+  {
+    "id": "dlm-150-influencer-take-47",
+    "prompt": {
+      "fr": "L'influenceur qui refait la même intro enjouée pour la 47e fois parce que ça « sonne pas naturel »",
+      "en": "The influencer redoing the same chirpy intro for the 47th time because it 'doesn't sound natural'"
+    },
+    "hint": {
+      "fr": "« Coucou mes amooours ! » sourire éclatant, coupe, soupir, regard mort, reset du sourire, « Coucou mes amooours ! » exactement pareil. La joie est un travail. Le travail te détruit. Souris encore.",
+      "en": "'heyyy besties!' beaming smile, cut, sigh, dead eyes, reset the smile, 'heyyy besties!' exactly the same. joy is a job. the job is destroying you. smile again"
+    }
+  },
+  {
+    "id": "dlm-151-gym-mirror-flex",
+    "prompt": {
+      "fr": "Celui qui se prend en photo devant le miroir de la salle et croit que personne le calcule",
+      "en": "The guy taking mirror selfies at the gym convinced absolutely nobody is watching"
+    },
+    "hint": {
+      "fr": "Vérifie discrètement autour, pose de dos contractée, change d'angle, fronce les sourcils façon « j'm'en fous du résultat », vingt photos. Quelqu'un passe : range le tel et fais semblant de t'étirer. Quelqu'un dans cette pièce, c'est lui.",
+      "en": "discreet scan around, flexed back pose, change angle, frown like 'I don't even care how it looks', twenty photos. someone walks by: pocket the phone and fake a stretch. someone in this room is that guy"
+    }
+  },
+  {
+    "id": "dlm-152-cart-runaway-slope",
+    "prompt": {
+      "fr": "Le caddie qui s'échappe sur la pente du parking pendant que tu charges le coffre",
+      "en": "The shopping trolley escaping down the car park slope while you're loading the boot"
+    },
+    "hint": {
+      "fr": "Charge tranquille, bruit suspect, tu te retournes, le caddie part en roue libre vers une voiture neuve. Sprint désespéré, plongeon raté, prière. Joue aussi le proprio de la voiture qui regarde, impuissant.",
+      "en": "load in peace, suspicious noise, you turn, the trolley is free-rolling toward a brand-new car. desperate sprint, failed dive, prayer. also play the car owner watching, helpless"
+    }
+  },
+  {
+    "id": "dlm-153-trampoline-confidence",
+    "prompt": {
+      "fr": "Celui qui annonce un salto arrière sur le trampoline devant tout le jardin et atterrit sur la nuque",
+      "en": "The one announcing a backflip on the trampoline to the whole garden and landing on their neck"
+    },
+    "hint": {
+      "fr": "Rebonds d'échauffement confiants, annonce solennelle « regardez bien », public qui sort les téléphones, élan, rotation à 80 %, atterrissage catastrophique. Lève le pouce depuis le sol. C'est pour les internets maintenant.",
+      "en": "confident warm-up bounces, solemn announcement 'watch this', crowd pulls out phones, launch, 80% rotation, catastrophic landing. thumbs up from the ground. it belongs to the internet now"
+    }
+  },
+  {
+    "id": "dlm-154-rowing-machine-pride",
+    "prompt": {
+      "fr": "Le rameur de salle qui rame comme aux JO et réalise au bout de cinq minutes qu'il avance pas",
+      "en": "The gym rower going full Olympic and realizing after five minutes they're not actually going anywhere"
+    },
+    "hint": {
+      "fr": "Tirées puissantes, grognements de finale olympique, regard vers un horizon imaginaire… puis la lente prise de conscience que la machine est fixée au sol. Continue quand même. L'effort est réel. Le bateau, non.",
+      "en": "powerful pulls, Olympic-final grunts, gaze toward an imaginary horizon… then the slow realization that the machine is bolted to the floor. keep going anyway. the effort is real. the boat is not"
+    }
+  },
+  {
+    "id": "dlm-155-archery-eyes-closed",
+    "prompt": {
+      "fr": "L'archer qui ferme les yeux au moment de tirer et touche absolument tout sauf la cible",
+      "en": "The archer who closes their eyes at the moment of release and hits absolutely everything except the target"
+    },
+    "hint": {
+      "fr": "Concentration de maître, tension de la corde, souffle, yeux fermés à la dernière seconde, lâcher. Suis la flèche du regard : elle part vers le public, le juge, le chien. Fais comme si c'était le plan. Re-tire les yeux fermés.",
+      "en": "master-level focus, draw the string, breath, eyes shut at the last second, release. follow the arrow with your eyes: it heads for the crowd, the judge, the dog. act like that was the plan. shoot again, eyes shut"
+    }
+  },
+  {
+    "id": "dlm-156-soccer-celebration-card",
+    "prompt": {
+      "fr": "Le buteur qui enlève son maillot pour célébrer, prend un carton, et réalise qu'il a marqué contre son camp",
+      "en": "The scorer ripping off his shirt to celebrate, getting booked, then realizing he scored an own goal"
+    },
+    "hint": {
+      "fr": "Course folle vers le poteau de corner, maillot sur la tête, glissade à genoux… puis le silence. Tes coéquipiers te fixent. C'était ton propre but. Remets le maillot. Très lentement. La honte en boucle.",
+      "en": "wild run to the corner flag, shirt over the head, knee slide… then silence. your teammates stare. it was your own goal. put the shirt back on. very slowly. shame on a loop"
+    }
+  },
+  {
+    "id": "dlm-157-conductor-imaginary",
+    "prompt": {
+      "fr": "Le chef d'orchestre qui dirige avec passion un orchestre qui n'est jamais arrivé",
+      "en": "The conductor passionately leading an orchestra that simply never showed up"
+    },
+    "hint": {
+      "fr": "Baguette levée, silence solennel, départ grandiose des deux bras, montée en intensité, transpiration artistique, final explosif vers le néant. Tourne-toi pour saluer la salle vide. Salue plus bas. Tu le mérites.",
+      "en": "baton raised, solemn silence, grand two-armed downbeat, building intensity, artistic sweating, explosive finale into the void. turn to bow to the empty hall. bow lower. you've earned it"
+    }
+  },
+  {
+    "id": "dlm-158-floss-dad",
+    "prompt": {
+      "fr": "Le daron qui découvre le « floss » dix ans trop tard et le sort fièrement au repas de famille",
+      "en": "The dad discovering the floss dance ten years too late and proudly unleashing it at family dinner"
+    },
+    "hint": {
+      "fr": "Annonce « regardez ce que je sais faire », bras qui balaient à contretemps total, fierté absolue, hanches qui suivent pas. Les ados ont honte pour toute la lignée. Refais-le. Plus lentement. Encore plus fier.",
+      "en": "announce 'watch what I can do', arms swinging completely off-beat, total pride, hips refusing to cooperate. the teenagers are ashamed on behalf of the bloodline. do it again. slower. even prouder"
+    }
+  },
+  {
+    "id": "dlm-159-mime-trapped-real",
+    "prompt": {
+      "fr": "Le mime coincé dans sa boîte invisible qui réalise qu'il a vraiment oublié comment on en sort",
+      "en": "The mime trapped in his invisible box who genuinely forgot how the getting-out part works"
+    },
+    "hint": {
+      "fr": "Mains à plat sur les parois invisibles, sourire pro, recherche de la sortie, panique discrète sous le maquillage, tape aux quatre murs, supplie le public des yeux. Le mime ne parle pas. Le mime ne peut pas appeler à l'aide. Mime ta propre fin.",
+      "en": "flat hands on the invisible walls, pro smile, search for the exit, quiet panic under the makeup, knock on all four walls, beg the audience with your eyes. the mime cannot speak. the mime cannot call for help. mime your own demise"
+    }
+  },
+  {
+    "id": "dlm-160-baby-shark-loop",
+    "prompt": {
+      "fr": "Le parent piégé qui fait les gestes de la chanson pour enfants la plus collante du monde pour la 30e fois d'affilée",
+      "en": "The trapped parent doing the hand moves to the world's most relentless kids' song for the 30th time in a row"
+    },
+    "hint": {
+      "fr": "Gestes énergiques au début, sourire forcé qui se fige tour après tour, regard vide de quelqu'un qui a entendu cette mélodie 4000 fois. L'enfant veut « encore ». Tu recommences. Tes yeux supplient. Tes mains obéissent.",
+      "en": "energetic gestures at first, forced smile freezing round after round, the empty stare of someone who has heard this melody 4000 times. the child wants 'again'. you start over. your eyes beg. your hands obey"
     }
   }
 ] },

@@ -1,8 +1,11 @@
 import type { Effect, PlayerId, ReduceResult } from '@bloop/engine';
 import {
-  connectedPlayers, emptyPlayerMap, emptySideBets, gameOver, nextActiveSeat,
+  connectedPlayers, emptyPlayerMap, emptySideBets, gameOver, isCloseFinish, mvp,
+  nextActiveSeat, roundMultiplier, statLeaders,
 } from '@bloop/kit';
-import type { GuessEntry, ReactToken, ScaleDomain, SpotlightGuessState } from './state.js';
+import type {
+  GuessEntry, ReactToken, ScaleDomain, SpotlightEpilogue, SpotlightGuessState,
+} from './state.js';
 
 // ---------------------------------------------------------------------------
 // Pure helpers shared by the reducer, the views and the resolvers.
@@ -53,6 +56,38 @@ export function zeroMap(players: readonly PlayerId[]): Record<PlayerId, number> 
   return m;
 }
 
+/**
+ * P1 (CC-2) — the late-round score multiplier for the CURRENT round. Pure pass
+ * through to the kit's `roundMultiplier`; with no `lateRoundMultiplier` config
+ * it returns 1 (identity) so every existing exact-score test is unchanged.
+ */
+export function roundScoreMultiplier(state: SpotlightGuessState): number {
+  return roundMultiplier(state.round, state.config.totalRounds, state.config.lateRoundMultiplier);
+}
+
+/**
+ * P1 (CC-5) — derive the game-over epilogue from already-PUBLIC end-of-match
+ * state ONLY (final scores + the public mindReads/whiffs tallies). Pure &
+ * replay-identical: `mvp`/`statLeaders` resolve ties by a stable ascending-id
+ * order; no RNG, no wall-clock, NO new secret. Default-safe when the tallies
+ * are empty (a non-leaked superlative is simply not awarded).
+ */
+export function deriveEpilogue(state: SpotlightGuessState): SpotlightEpilogue {
+  const readers = statLeaders(state.mindReads);
+  const fooled = statLeaders(state.whiffs);
+  const threshold = state.config.closeFinishThreshold ?? -1;
+  return {
+    mvp: mvp(state.scores),
+    closeFinish: isCloseFinish(state.scores, threshold),
+    bestMindReaders: readers.players,
+    bestMindReads: readers.value,
+    mostFooled: fooled.players,
+    mostFooledWhiffs: fooled.value,
+    mindReads: state.mindReads,
+    whiffs: state.whiffs,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Round resolution
 // ---------------------------------------------------------------------------
@@ -84,26 +119,35 @@ export function resolveScale(state: SpotlightGuessState): ReduceResult<Spotlight
   const target = state.targets[state.round] ?? 0;
   const gained = zeroMap(state.players);
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+  // P1 (CC-2) — escalating late-round weight (×1 by default; the band math below
+  // is untouched, so the closeness ladder's shape stays exactly the same).
+  const mult = roundScoreMultiplier(state);
+  // P1 (CC-5) — clone the PUBLIC tallies; the band reveal is public, so reading
+  // exact/whiffed off it adds no secret.
+  const mindReads = Object.assign(emptyPlayerMap<number>(), state.mindReads);
+  const whiffs = Object.assign(emptyPlayerMap<number>(), state.whiffs);
   const distances: number[] = [];
   for (const p of state.players) {
     const entry = state.guesses[p];
     if (entry === undefined) continue;
     const d = Math.abs(entry.value - target);
     distances.push(d);
-    const pts = band(domain, d);
+    const pts = band(domain, d) * mult;
     gained[p] = pts;
     scores[p] = (scores[p] ?? 0) + pts;
+    if (d === 0) mindReads[p] = (mindReads[p] ?? 0) + 1; // a perfect read of the secret number
+    else if (band(domain, d) === 0) whiffs[p] = (whiffs[p] ?? 0) + 1; // submitted, scored nothing
   }
   if (distances.length > 0) {
     distances.sort((a, b) => a - b);
     const spot = spotlightOf(state);
     const median = distances[Math.floor((distances.length - 1) / 2)]!;
-    const pts = band(domain, median);
+    const pts = band(domain, median) * mult;
     gained[spot] = pts; // the spotlight never guesses, so this never overwrites a guesser band
     scores[spot] = (scores[spot] ?? 0) + pts;
   }
   return {
-    state: { ...state, phase: 'reveal', scores, lastGained: gained },
+    state: { ...state, phase: 'reveal', scores, lastGained: gained, mindReads, whiffs },
     effects: [{ type: 'analytics', name: 'round_revealed', props: { round: state.round } }],
   };
 }
@@ -117,21 +161,31 @@ export function resolveReverse(state: SpotlightGuessState): ReduceResult<Spotlig
   const real = state.reverseRounds[state.round]?.realIndex ?? -1;
   const gained = zeroMap(state.players);
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+  // P1 (CC-2) — final-round tier ladder + reader bonus double (×1 by default).
+  const mult = roundScoreMultiplier(state);
+  // P1 (CC-5) — public tallies cloned from the now-public lock outcomes.
+  const mindReads = Object.assign(emptyPlayerMap<number>(), state.mindReads);
+  const whiffs = Object.assign(emptyPlayerMap<number>(), state.whiffs);
   let correct = 0;
   for (const p of state.players) {
     const entry = state.guesses[p];
-    if (entry === undefined || entry.value !== real) continue;
-    const pts = state.config.tierPoints[entry.tier] ?? 0;
-    gained[p] = pts;
-    scores[p] = (scores[p] ?? 0) + pts;
-    correct += 1;
+    if (entry === undefined) continue; // a non-locker is neither a read nor a whiff
+    if (entry.value === real) {
+      const pts = (state.config.tierPoints[entry.tier] ?? 0) * mult;
+      gained[p] = pts;
+      scores[p] = (scores[p] ?? 0) + pts;
+      correct += 1;
+      mindReads[p] = (mindReads[p] ?? 0) + 1; // read the secret question behind the answer
+    } else {
+      whiffs[p] = (whiffs[p] ?? 0) + 1; // locked the wrong candidate — fooled
+    }
   }
   const spot = spotlightOf(state);
-  const readerPts = correct * state.config.readerPointsPerCorrectGuess;
+  const readerPts = correct * state.config.readerPointsPerCorrectGuess * mult;
   gained[spot] = readerPts;
   scores[spot] = (scores[spot] ?? 0) + readerPts;
   return {
-    state: { ...state, phase: 'reveal', scores, lastGained: gained },
+    state: { ...state, phase: 'reveal', scores, lastGained: gained, mindReads, whiffs },
     effects: [
       { type: 'analytics', name: 'round_revealed', props: { round: state.round, correct } },
     ],

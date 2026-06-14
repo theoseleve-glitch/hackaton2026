@@ -11,5 +11,9 @@
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RoomDO"] }],
   // replace the placeholder id before the first real deploy
   "kv_namespaces": [{ "binding": "CONFIG", "id": "00000000000000000000000000000000" }],
+  // R2 content seam: packs live in this bucket keyed by pack.id and load at
+  // runtime (room-do.loadContent), keeping them OUT of the worker bundle. Seed
+  // dev/prod once with scripts/seed-r2.mjs before serving.
+  "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "bloop-content" }],
   "vars": { "ENV": "dev" }
 }

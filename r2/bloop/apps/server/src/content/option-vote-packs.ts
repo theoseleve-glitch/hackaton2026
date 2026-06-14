@@ -2882,6 +2882,809 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
       "fr": "Tu paies la part de tout le monde à chaque sortie, et personne te le rend jamais",
       "en": "You cover everyone's share on every outing, and nobody ever pays you back"
     }
+  },
+  {
+    "id": "wyr-friend-rates-dates-vs-you-rate-theirs",
+    "optionA": {
+      "fr": "Le pote à ta gauche note chacun de tes ex sur 10, à voix haute, devant tout le monde",
+      "en": "The friend on your left rates every ex you've had out of 10, out loud, in front of everyone"
+    },
+    "optionB": {
+      "fr": "Tu dois noter ceux de la table, même la personne en couple ici ce soir",
+      "en": "You have to rate everyone's here, including the one person who came with their partner tonight"
+    }
+  },
+  {
+    "id": "wyr-group-picks-your-caption-vs-your-pfp",
+    "optionA": {
+      "fr": "Ce groupe écrit ta légende sous chaque photo que tu postes pendant un mois",
+      "en": "This group writes the caption under every photo you post for a month"
+    },
+    "optionB": {
+      "fr": "Ce groupe choisit ta photo de profil partout pendant un an, interdit de la changer",
+      "en": "This group picks your profile pic everywhere for a year, you're banned from changing it"
+    }
+  },
+  {
+    "id": "wyr-last-text-read-aloud-vs-first-photo-shown",
+    "optionA": {
+      "fr": "Le dernier message que t'as envoyé est lu à voix haute, là, maintenant",
+      "en": "The last text you sent gets read out loud, right now, this second"
+    },
+    "optionB": {
+      "fr": "La première photo de ta galerie s'affiche sur l'écran le plus proche",
+      "en": "The first photo in your camera roll shows up on the nearest screen"
+    }
+  },
+  {
+    "id": "wyr-friend-controls-your-replies-vs-reads-your-drafts",
+    "optionA": {
+      "fr": "Un pote d'ici répond à ta place à tous tes messages pendant 24h, sans filtre",
+      "en": "A friend here answers all your texts for you for 24h, no filter"
+    },
+    "optionB": {
+      "fr": "Tout le monde voit les brouillons que t'as écrits mais jamais osé envoyer",
+      "en": "Everyone sees the drafts you typed but never dared to send"
+    }
+  },
+  {
+    "id": "wyr-everyone-knows-your-rank-vs-you-know-theirs",
+    "optionA": {
+      "fr": "Tout le monde ici sait exactement à quelle place tu classes chacun d'eux",
+      "en": "Everyone here knows exactly where you rank each of them"
+    },
+    "optionB": {
+      "fr": "Toi seul connais leur classement de toi, et tu dois vivre avec",
+      "en": "Only you know how they rank you, and you have to live with it"
+    }
+  },
+  {
+    "id": "wyr-host-reads-your-notes-app-vs-your-bookmarks",
+    "optionA": {
+      "fr": "L'hôte de ce soir fait défiler ton appli Notes devant tout le monde",
+      "en": "Tonight's host scrolls through your Notes app in front of everyone"
+    },
+    "optionB": {
+      "fr": "L'hôte montre tout ce que t'as mis en favoris cette année, dossier compris",
+      "en": "The host shows everything you've bookmarked this year, the folder included"
+    }
+  },
+  {
+    "id": "wyr-friends-vote-your-job-vs-vote-your-partner",
+    "optionA": {
+      "fr": "Ce groupe choisit ton métier pour les 5 prochaines années, sans appel",
+      "en": "This group picks your career for the next 5 years, no appeal"
+    },
+    "optionB": {
+      "fr": "Ce groupe choisit qui tu fréquentes l'année prochaine, sans appel",
+      "en": "This group picks who you date next year, no appeal"
+    }
+  },
+  {
+    "id": "wyr-late-by-an-hour-blamed-vs-early-and-ignored",
+    "optionA": {
+      "fr": "Arriver une heure en retard et te faire charrier publiquement à chaque fois",
+      "en": "Show up an hour late and get publicly dragged for it every time"
+    },
+    "optionB": {
+      "fr": "Arriver pile à l'heure et que personne ne le remarque jamais, à vie",
+      "en": "Show up bang on time and have no one ever notice, for life"
+    }
+  },
+  {
+    "id": "wyr-win-every-debate-hated-vs-lose-every-debate-loved",
+    "optionA": {
+      "fr": "Avoir toujours raison dans les débats du groupe, et que tout le monde t'évite pour ça",
+      "en": "Always be right in the group's arguments, and have everyone avoid you for it"
+    },
+    "optionB": {
+      "fr": "Avoir toujours tort, mais que tout le monde adore débattre avec toi",
+      "en": "Always be wrong, but have everyone love arguing with you"
+    }
+  },
+  {
+    "id": "wyr-friend-picks-your-tattoo-vs-your-nickname",
+    "optionA": {
+      "fr": "Le pote en face de toi choisit ton prochain tatouage, emplacement compris",
+      "en": "The friend across from you picks your next tattoo, placement included"
+    },
+    "optionB": {
+      "fr": "Le pote en face choisit le surnom par lequel tout le monde t'appellera à vie",
+      "en": "The friend across picks the nickname everyone will call you forever"
+    }
+  },
+  {
+    "id": "wyr-your-search-history-screen-vs-your-bank-app-screen",
+    "optionA": {
+      "fr": "Ton historique de recherche de la semaine passe sur le grand écran",
+      "en": "Your search history from this week goes up on the big screen"
+    },
+    "optionB": {
+      "fr": "Ton appli bancaire passe sur le grand écran, dépenses honteuses comprises",
+      "en": "Your banking app goes up on the big screen, shameful spends included"
+    }
+  },
+  {
+    "id": "wyr-always-the-driver-vs-always-the-passenger",
+    "optionA": {
+      "fr": "Toujours conduire pour tout le monde, sobre, pendant que les autres s'amusent",
+      "en": "Always be the designated driver, sober, while everyone else has fun"
+    },
+    "optionB": {
+      "fr": "Ne jamais conduire, et dépendre à vie de qui veut bien venir te chercher",
+      "en": "Never drive, and depend forever on whoever feels like picking you up"
+    }
+  },
+  {
+    "id": "wyr-friend-narrates-your-dates-vs-your-fails",
+    "optionA": {
+      "fr": "Un pote commente en direct chacun de tes rencards depuis la table d'à côté",
+      "en": "A friend live-commentates every one of your dates from the next table"
+    },
+    "optionB": {
+      "fr": "Un pote raconte tous tes plus gros ratés à chaque nouvelle rencontre, dès le bonjour",
+      "en": "A friend tells every new person you meet your biggest fails, right at hello"
+    }
+  },
+  {
+    "id": "wyr-everyone-sees-your-spotify-vs-your-screen-time",
+    "optionA": {
+      "fr": "Tout le monde voit ton top écouté de l'année, titres gênants en gras",
+      "en": "Everyone sees your most-played of the year, embarrassing tracks in bold"
+    },
+    "optionB": {
+      "fr": "Tout le monde voit ton temps d'écran par appli, classé du pire au moins pire",
+      "en": "Everyone sees your screen time per app, ranked worst to least bad"
+    }
+  },
+  {
+    "id": "wyr-friend-finishes-your-stories-vs-corrects-them",
+    "optionA": {
+      "fr": "Un pote finit toujours tes histoires à ta place, juste avant la chute",
+      "en": "A friend always finishes your stories for you, right before the punchline"
+    },
+    "optionB": {
+      "fr": "Un pote te corrige à voix haute à chaque détail faux, devant ton public",
+      "en": "A friend corrects you out loud on every wrong detail, in front of your audience"
+    }
+  },
+  {
+    "id": "wyr-be-the-funny-friend-broke-vs-rich-boring",
+    "optionA": {
+      "fr": "Être le pote le plus drôle du groupe, mais toujours le plus fauché",
+      "en": "Be the funniest friend in the group, but always the most broke"
+    },
+    "optionB": {
+      "fr": "Être celui qui paie toujours, mais celui qu'on invite que pour ça",
+      "en": "Be the one who always pays, but the one who only gets invited for it"
+    }
+  },
+  {
+    "id": "wyr-know-who-screenshots-you-vs-who-mutes-you",
+    "optionA": {
+      "fr": "Savoir exactement qui dans ce groupe screenshote tes messages pour les montrer ailleurs",
+      "en": "Know exactly who in this group screenshots your texts to show elsewhere"
+    },
+    "optionB": {
+      "fr": "Savoir qui t'a mis en sourdine depuis des mois mais te sourit ce soir",
+      "en": "Know who muted you months ago but is smiling at you tonight"
+    }
+  },
+  {
+    "id": "wyr-redo-worst-haircut-vs-worst-outfit-uniform",
+    "optionA": {
+      "fr": "Reprendre à vie la pire coupe de cheveux de ta vie, photos officielles comprises",
+      "en": "Get your worst-ever haircut back for life, official photos included"
+    },
+    "optionB": {
+      "fr": "Que ta pire tenue de collège devienne ton uniforme obligatoire, tous les jours",
+      "en": "Your worst middle-school outfit becomes your mandatory uniform, every day"
+    }
+  },
+  {
+    "id": "wyr-friend-answers-on-dates-vs-parents-at-interviews",
+    "optionA": {
+      "fr": "Un pote répond à ta place à toutes tes questions de rencard, sans que tu puisses corriger",
+      "en": "A friend answers for you on every date question, no chance to correct"
+    },
+    "optionB": {
+      "fr": "Tes darons répondent à ta place à chaque entretien d'embauche",
+      "en": "Your parents answer for you at every job interview"
+    }
+  },
+  {
+    "id": "wyr-always-cancelled-on-vs-never-invited-first",
+    "optionA": {
+      "fr": "Qu'on annule sur toi à la dernière minute une fois sur deux",
+      "en": "Get cancelled on last minute half the time"
+    },
+    "optionB": {
+      "fr": "Qu'on t'invite toujours en dernier, après que tout est déjà décidé",
+      "en": "Always get invited last, after everything's already been decided"
+    }
+  },
+  {
+    "id": "wyr-your-ex-in-every-group-photo-vs-you-in-none",
+    "optionA": {
+      "fr": "Ton ex apparaît dans chaque photo de groupe des 10 prochaines années",
+      "en": "Your ex shows up in every group photo for the next 10 years"
+    },
+    "optionB": {
+      "fr": "Toi tu disparais de toutes les photos de groupe, comme si t'étais jamais venu",
+      "en": "You vanish from every group photo, like you were never even there"
+    }
+  },
+  {
+    "id": "wyr-friend-controls-the-aux-vs-the-thermostat",
+    "optionA": {
+      "fr": "Un pote du groupe gère l'aux à vie dans chaque trajet, zéro veto pour toi",
+      "en": "One friend runs the aux for life on every trip, zero veto for you"
+    },
+    "optionB": {
+      "fr": "Un pote gère le thermostat de chez toi à vie, et il a toujours froid",
+      "en": "One friend runs your thermostat for life, and they're always cold"
+    }
+  },
+  {
+    "id": "wyr-everyone-laughs-late-vs-no-one-laughs",
+    "optionA": {
+      "fr": "Que tout le monde rie à tes blagues, mais toujours 5 secondes trop tard, par pitié",
+      "en": "Have everyone laugh at your jokes, but always 5 seconds late, out of pity"
+    },
+    "optionB": {
+      "fr": "Que personne ne rie jamais, mais qu'on te trouve quand même drôle en secret",
+      "en": "Have no one ever laugh, but secretly everyone thinks you're funny"
+    }
+  },
+  {
+    "id": "wyr-friends-rank-your-cooking-vs-your-cleaning",
+    "optionA": {
+      "fr": "Tes potes notent chaque plat que tu cuisines, moyenne affichée sur le frigo",
+      "en": "Your friends grade every dish you cook, average posted on the fridge"
+    },
+    "optionB": {
+      "fr": "Tes potes notent à quel point ton appart est sale, à chaque visite, à voix haute",
+      "en": "Your friends rate how dirty your place is, every visit, out loud"
+    }
+  },
+  {
+    "id": "wyr-relive-best-day-no-memory-vs-worst-day-full-memory",
+    "optionA": {
+      "fr": "Revivre ton meilleur jour en boucle, mais sans jamais t'en souvenir après",
+      "en": "Relive your best day on loop, but never remember it afterward"
+    },
+    "optionB": {
+      "fr": "Ne jamais le revivre, mais te rappeler chaque détail de ton pire jour, en HD",
+      "en": "Never relive it, but remember every detail of your worst day, in HD"
+    }
+  },
+  {
+    "id": "wyr-your-group-chat-name-public-vs-your-contact-names",
+    "optionA": {
+      "fr": "Le nom de votre groupe WhatsApp s'affiche en bio de chacun, à vie",
+      "en": "Your group chat's name shows in everyone's bio, for life"
+    },
+    "optionB": {
+      "fr": "Les noms sous lesquels t'as enregistré chaque personne ici sont révélés, là",
+      "en": "The names you've saved each person here under get revealed, right now"
+    }
+  },
+  {
+    "id": "wyr-be-everyones-therapist-vs-no-one-listens",
+    "optionA": {
+      "fr": "Être le confident de tout le monde, à 3h du mat, sans que personne t'écoute jamais toi",
+      "en": "Be everyone's 3 a.m. confidant, with no one ever listening to you back"
+    },
+    "optionB": {
+      "fr": "Que personne ne te confie jamais rien, et le sentir à chaque silence",
+      "en": "Have no one ever confide in you, and feel it in every silence"
+    }
+  },
+  {
+    "id": "wyr-friend-picks-your-wedding-song-vs-your-best-man",
+    "optionA": {
+      "fr": "Le pote à ta droite choisit la chanson de ton mariage, sans veto",
+      "en": "The friend on your right picks your wedding song, no veto"
+    },
+    "optionB": {
+      "fr": "Le pote à ta droite choisit qui fera ton discours de témoin, et il l'écrit aussi",
+      "en": "The friend on your right picks who gives your best-man speech, and writes it too"
+    }
+  },
+  {
+    "id": "wyr-always-overshare-vs-never-open-up",
+    "optionA": {
+      "fr": "Trop en dire à chaque rencontre, et le regretter à chaque fois",
+      "en": "Overshare at every first meeting, and cringe about it every time"
+    },
+    "optionB": {
+      "fr": "Ne jamais réussir à t'ouvrir, et que les gens te trouvent froid à vie",
+      "en": "Never manage to open up, and have people find you cold for life"
+    }
+  },
+  {
+    "id": "wyr-your-voice-notes-leaked-vs-your-typing-shown",
+    "optionA": {
+      "fr": "Le dernier vocal que t'as envoyé sur quelqu'un d'ici passe en haut-parleur",
+      "en": "The last voice note you sent about someone here plays on speaker"
+    },
+    "optionB": {
+      "fr": "Ce que t'es en train de taper s'affiche en direct au-dessus de ta tête, pour tous",
+      "en": "What you're typing shows up live above your head, for everyone"
+    }
+  },
+  {
+    "id": "wyr-always-the-organiser-blamed-vs-never-decide",
+    "optionA": {
+      "fr": "Organiser chaque sortie, et porter le chapeau dès qu'un truc foire",
+      "en": "Organise every outing, and take the blame the second anything flops"
+    },
+    "optionB": {
+      "fr": "Ne jamais rien décider, et subir tous les plans pourris des autres en silence",
+      "en": "Never decide a thing, and silently suffer everyone else's rubbish plans"
+    }
+  },
+  {
+    "id": "wyr-know-real-opinion-on-your-choice-vs-stay-blissful",
+    "optionA": {
+      "fr": "Savoir ce que chaque pote ici pense vraiment de ta dernière grande décision",
+      "en": "Know what each friend here really thinks of your last big decision"
+    },
+    "optionB": {
+      "fr": "Ne jamais le savoir, mais voir leurs regards quand t'en parles",
+      "en": "Never know, but catch their looks every time you bring it up"
+    }
+  },
+  {
+    "id": "wyr-friend-borrows-and-loses-vs-you-never-lend",
+    "optionA": {
+      "fr": "Prêter à vie à un pote qui perd ou casse tout, sans jamais rembourser",
+      "en": "Lend forever to a friend who loses or breaks everything, never paying back"
+    },
+    "optionB": {
+      "fr": "Ne plus jamais rien prêter à personne, et passer pour le radin du groupe",
+      "en": "Never lend anyone anything again, and be known as the group's tightwad"
+    }
+  },
+  {
+    "id": "wyr-be-the-glue-exhausted-vs-cut-loose-forgotten",
+    "optionA": {
+      "fr": "Être le ciment du groupe, épuisé, celui sans qui plus personne ne se voit",
+      "en": "Be the glue of the group, exhausted, the one without whom no one meets up"
+    },
+    "optionB": {
+      "fr": "Te détacher tranquille, et regarder le groupe continuer très bien sans toi",
+      "en": "Quietly step back, and watch the group carry on just fine without you"
+    }
+  },
+  {
+    "id": "wyr-photo-from-your-worst-year-vs-text-from-your-worst-mood",
+    "optionA": {
+      "fr": "La photo la plus gênante de ta pire année devient ton avatar partout, un an",
+      "en": "The most embarrassing photo from your worst year becomes your avatar everywhere, for a year"
+    },
+    "optionB": {
+      "fr": "Le message le plus salé que t'as envoyé dans ta pire humeur est renvoyé à son destinataire",
+      "en": "The saltiest text you sent in your worst mood gets re-sent to whoever it was about"
+    }
+  },
+  {
+    "id": "wyr-always-pick-the-bad-restaurant-vs-never-pick",
+    "optionA": {
+      "fr": "Choisir le resto à chaque fois, et tomber sur le pire une fois sur deux",
+      "en": "Pick the restaurant every time, and land on the worst one half the time"
+    },
+    "optionB": {
+      "fr": "Ne jamais choisir, et manger ce que le groupe impose, même quand t'as dit non",
+      "en": "Never pick, and eat whatever the group forces, even when you said no"
+    }
+  },
+  {
+    "id": "wyr-friend-reads-your-mind-on-dates-vs-parents-at-dinner",
+    "optionA": {
+      "fr": "Le pote le plus cash du groupe lit tes pensées pendant tous tes rencards",
+      "en": "The most blunt friend in the group reads your mind on every date"
+    },
+    "optionB": {
+      "fr": "Tes darons lisent tes pensées à chaque repas de famille du dimanche",
+      "en": "Your parents read your mind at every Sunday family lunch"
+    }
+  },
+  {
+    "id": "wyr-everyone-claps-when-you-fail-vs-silence-when-you-win",
+    "optionA": {
+      "fr": "Une salve d'applaudissements ironiques à chacun de tes ratés en public",
+      "en": "A round of ironic applause for every public fail you have"
+    },
+    "optionB": {
+      "fr": "Un silence total à chacune de tes réussites, comme si de rien n'était",
+      "en": "Total silence at every win you get, like nothing happened"
+    }
+  },
+  {
+    "id": "wyr-your-2am-thoughts-posted-vs-your-9am-texts-reread",
+    "optionA": {
+      "fr": "Tes pensées de 2h du mat sont publiées sur le groupe chaque matin",
+      "en": "Your 2 a.m. thoughts get posted in the group chat every morning"
+    },
+    "optionB": {
+      "fr": "Tous tes messages envoyés avant ton café sont relus par leurs destinataires",
+      "en": "Every text you send before coffee gets re-read by whoever got it"
+    }
+  },
+  {
+    "id": "wyr-friend-rates-your-flirting-vs-your-arguing",
+    "optionA": {
+      "fr": "Un pote note ta drague sur 10 à chaque fois, en direct, son par son",
+      "en": "A friend rates your flirting out of 10 every time, live, line by line"
+    },
+    "optionB": {
+      "fr": "Un pote note la façon dont tu te défends en dispute, perdant annoncé à voix haute",
+      "en": "A friend rates how you argue, the loser announced out loud"
+    }
+  },
+  {
+    "id": "wyr-relive-the-cringe-vs-relive-the-heartbreak",
+    "optionA": {
+      "fr": "Revivre une fois par an ton moment le plus gênant, devant les mêmes témoins",
+      "en": "Relive your most cringe moment once a year, in front of the same witnesses"
+    },
+    "optionB": {
+      "fr": "Revivre une fois par an ton pire chagrin, avec la même intensité qu'au jour 1",
+      "en": "Relive your worst heartbreak once a year, as raw as day one"
+    }
+  },
+  {
+    "id": "wyr-be-trusted-with-every-secret-vs-trust-no-one",
+    "optionA": {
+      "fr": "Que tout le monde te confie ses secrets, et porter ce poids à vie sans rien dire",
+      "en": "Have everyone trust you with their secrets, and carry that weight for life in silence"
+    },
+    "optionB": {
+      "fr": "Que personne ne te fasse jamais confiance, et le voir à chaque fois qu'on baisse la voix sans toi",
+      "en": "Have no one ever trust you, and see it every time the voices drop without you"
+    }
+  },
+  {
+    "id": "wyr-friend-decides-your-haircut-vs-the-room-votes",
+    "optionA": {
+      "fr": "Le pote en qui tu as le moins confiance ici choisit ta prochaine coupe",
+      "en": "The friend you trust least here picks your next haircut"
+    },
+    "optionB": {
+      "fr": "Toute la table vote ta prochaine coupe, et la majorité l'emporte",
+      "en": "The whole table votes on your next haircut, and the majority wins"
+    }
+  },
+  {
+    "id": "wyr-your-most-replayed-clip-vs-your-most-deleted",
+    "optionA": {
+      "fr": "La vidéo de toi que tes potes se renvoient le plus repasse en boucle ce soir",
+      "en": "The clip of you your friends forward the most plays on loop tonight"
+    },
+    "optionB": {
+      "fr": "La vidéo que t'as supprimée le plus vite de ta vie réapparaît, intacte",
+      "en": "The video you deleted fastest in your life reappears, intact"
+    }
+  },
+  {
+    "id": "wyr-always-the-one-roasted-vs-always-the-one-ignored",
+    "optionA": {
+      "fr": "Être la cible numéro un de chaque vanne du groupe, mais toujours au centre",
+      "en": "Be the number-one target of every group roast, but always in the middle of it"
+    },
+    "optionB": {
+      "fr": "Que personne ne te charrie jamais, parce qu'on t'oublie une fois sur deux",
+      "en": "Have no one ever roast you, because they forget you half the time"
+    }
+  },
+  {
+    "id": "wyr-know-the-friendship-that-ends-vs-the-one-thats-fake",
+    "optionA": {
+      "fr": "Savoir quelle amitié de cette pièce sera finie dans deux ans",
+      "en": "Know which friendship in this room will be over in two years"
+    },
+    "optionB": {
+      "fr": "Savoir laquelle est déjà fausse, mais ne pas pouvoir prouver laquelle",
+      "en": "Know which one is already fake, but never be able to prove which"
+    }
+  },
+  {
+    "id": "wyr-pay-for-everyone-unthanked-vs-never-pay-judged",
+    "optionA": {
+      "fr": "Payer pour tout le groupe à chaque sortie, sans jamais un merci",
+      "en": "Pay for the whole group on every outing, never a thank you"
+    },
+    "optionB": {
+      "fr": "Ne jamais payer ta part, et le sentir dans chaque regard à l'addition",
+      "en": "Never pay your share, and feel it in every look when the bill lands"
+    }
+  },
+  {
+    "id": "wyr-friend-narrates-your-breakup-vs-your-rebound",
+    "optionA": {
+      "fr": "Un pote raconte ta dernière rupture à chaque nouvelle personne que tu rencontres",
+      "en": "A friend tells your last breakup to every new person you meet"
+    },
+    "optionB": {
+      "fr": "Un pote raconte qui t'as fréquenté juste après, version pas flatteuse",
+      "en": "A friend tells everyone who you rebounded with, the unflattering version"
+    }
+  },
+  {
+    "id": "wyr-be-the-first-call-in-a-crisis-vs-the-last",
+    "optionA": {
+      "fr": "Être le premier qu'on appelle en cas de galère, à 4h, à chaque fois",
+      "en": "Be the first one called in a crisis, at 4 a.m., every time"
+    },
+    "optionB": {
+      "fr": "N'être jamais appelé, et l'apprendre toujours une fois que c'est réglé sans toi",
+      "en": "Never get called, and always find out once it's sorted without you"
+    }
+  },
+  {
+    "id": "wyr-your-camera-roll-shuffled-vs-your-dms-projected",
+    "optionA": {
+      "fr": "Ta galerie passe en diaporama aléatoire sur la TV pendant le repas de famille",
+      "en": "Your camera roll plays on shuffle on the TV during family dinner"
+    },
+    "optionB": {
+      "fr": "Tes DM les plus récents défilent sur le projecteur de la soirée",
+      "en": "Your most recent DMs scroll across the party projector"
+    }
+  },
+  {
+    "id": "wyr-always-believed-when-lying-vs-doubted-when-honest",
+    "optionA": {
+      "fr": "Qu'on te croie toujours quand tu mens, et que ça te ronge",
+      "en": "Always be believed when you lie, and have it eat at you"
+    },
+    "optionB": {
+      "fr": "Qu'on doute toujours de toi quand tu dis la vérité, à vie",
+      "en": "Always be doubted when you tell the truth, for life"
+    }
+  },
+  {
+    "id": "wyr-friend-edits-your-photos-vs-writes-your-bio",
+    "optionA": {
+      "fr": "Un pote retouche toutes tes photos avant que tu les postes, à sa sauce",
+      "en": "A friend edits all your photos before you post them, their way"
+    },
+    "optionB": {
+      "fr": "Un pote écrit toutes tes bios et descriptions, et tu peux pas les changer",
+      "en": "A friend writes all your bios and descriptions, and you can't change them"
+    }
+  },
+  {
+    "id": "wyr-everyone-knows-your-crush-vs-you-know-everyones",
+    "optionA": {
+      "fr": "Tout le monde ici sait sur qui tu craques, sauf la personne concernée",
+      "en": "Everyone here knows who you have a crush on, except the person themselves"
+    },
+    "optionB": {
+      "fr": "Toi tu sais sur qui chacun craque, et tu dois te taire toute la soirée",
+      "en": "You know everyone's crush, and you have to keep quiet all night"
+    }
+  },
+  {
+    "id": "wyr-be-late-to-your-own-party-vs-first-to-everyone-elses",
+    "optionA": {
+      "fr": "Arriver en retard à ta propre fête, après que l'ambiance soit déjà retombée",
+      "en": "Show up late to your own party, after the vibe has already died"
+    },
+    "optionB": {
+      "fr": "Arriver le premier à toutes les fêtes des autres, quand l'hôte est encore en serviette",
+      "en": "Show up first to everyone else's, when the host is still in a towel"
+    }
+  },
+  {
+    "id": "wyr-friend-keeps-score-of-favors-vs-never-returns-any",
+    "optionA": {
+      "fr": "Un pote compte chaque service rendu et te le ressort au pire moment",
+      "en": "A friend keeps a tally of every favor and throws it back at the worst moment"
+    },
+    "optionB": {
+      "fr": "Un pote ne rend jamais aucun service, mais te demande sans arrêt",
+      "en": "A friend never returns a single favor, but asks for them nonstop"
+    }
+  },
+  {
+    "id": "wyr-your-old-username-public-vs-your-old-status",
+    "optionA": {
+      "fr": "Ton tout premier pseudo internet redevient public, partout, à vie",
+      "en": "Your very first internet username goes public again, everywhere, for life"
+    },
+    "optionB": {
+      "fr": "Le statut le plus cringe que t'as jamais mis ressort, daté et signé",
+      "en": "The cringiest status you ever posted resurfaces, dated and signed"
+    }
+  },
+  {
+    "id": "wyr-be-the-one-who-always-texts-first-vs-never-does",
+    "optionA": {
+      "fr": "Toujours écrire en premier, sinon plus personne ne te calcule pendant des mois",
+      "en": "Always text first, or no one reaches out to you for months"
+    },
+    "optionB": {
+      "fr": "Ne jamais écrire en premier par fierté, et perdre des potes un par un",
+      "en": "Never text first out of pride, and lose friends one by one"
+    }
+  },
+  {
+    "id": "wyr-know-who-would-bail-on-you-vs-who-already-did",
+    "optionA": {
+      "fr": "Savoir qui dans cette pièce te lâcherait si ça devenait dur",
+      "en": "Know who in this room would bail on you if things got hard"
+    },
+    "optionB": {
+      "fr": "Savoir qui l'a déjà fait, sans jamais te l'avoir dit",
+      "en": "Know who already has, and never told you"
+    }
+  },
+  {
+    "id": "wyr-friend-picks-your-ringtone-vs-your-alarm",
+    "optionA": {
+      "fr": "Un pote choisit ta sonnerie, et elle se déclenche fort dans chaque réunion",
+      "en": "A friend picks your ringtone, and it blasts in every meeting"
+    },
+    "optionB": {
+      "fr": "Un pote choisit ton réveil, et il sonne 30 min plus tôt que prévu, à vie",
+      "en": "A friend picks your alarm, and it goes off 30 min early, for life"
+    }
+  },
+  {
+    "id": "wyr-always-the-photographer-vs-never-in-frame",
+    "optionA": {
+      "fr": "Prendre toutes les photos du groupe, et n'apparaître sur aucun souvenir",
+      "en": "Take all the group's photos, and appear in none of the memories"
+    },
+    "optionB": {
+      "fr": "Apparaître sur toutes, mais toujours en train de cligner ou de mâcher",
+      "en": "Appear in all of them, but always mid-blink or mid-chew"
+    }
+  },
+  {
+    "id": "wyr-your-honest-review-of-friends-vs-theirs-of-you",
+    "optionA": {
+      "fr": "Tu lis à voix haute ton avis honnête sur chaque personne ici",
+      "en": "You read out loud your honest review of every person here"
+    },
+    "optionB": {
+      "fr": "Chacun lit le sien sur toi, et tu n'as pas le droit de répondre",
+      "en": "Each of them reads theirs about you, and you don't get to reply"
+    }
+  },
+  {
+    "id": "wyr-be-funny-only-when-drunk-vs-boring-but-reliable",
+    "optionA": {
+      "fr": "N'être drôle que bourré, et insupportable le reste du temps",
+      "en": "Only be funny when drunk, and unbearable the rest of the time"
+    },
+    "optionB": {
+      "fr": "Être chiant mais le plus fiable du groupe, celui qu'on appelle jamais pour rigoler",
+      "en": "Be boring but the most reliable in the group, the one never called to have fun"
+    }
+  },
+  {
+    "id": "wyr-friend-decides-your-next-trip-vs-your-next-move",
+    "optionA": {
+      "fr": "Un pote décide ta prochaine destination de vacances, billet non remboursable",
+      "en": "A friend decides your next holiday destination, ticket non-refundable"
+    },
+    "optionB": {
+      "fr": "Un pote décide la ville où tu déménages, bail signé à ta place",
+      "en": "A friend decides the city you move to, lease signed for you"
+    }
+  },
+  {
+    "id": "wyr-know-the-nicest-lie-told-to-you-vs-the-cruelest-truth",
+    "optionA": {
+      "fr": "Découvrir le plus beau mensonge qu'un pote ici t'a dit pour te ménager",
+      "en": "Find out the kindest lie a friend here told you to spare you"
+    },
+    "optionB": {
+      "fr": "Découvrir la vérité la plus dure qu'on t'a cachée par gentillesse",
+      "en": "Find out the harshest truth they hid from you out of kindness"
+    }
+  },
+  {
+    "id": "wyr-be-everyones-backup-plan-vs-no-ones-plan",
+    "optionA": {
+      "fr": "Être le plan B de tout le monde, appelé seulement quand les autres annulent",
+      "en": "Be everyone's backup plan, only called when the others cancel"
+    },
+    "optionB": {
+      "fr": "N'être le plan de personne, et organiser toutes tes soirées seul",
+      "en": "Be no one's plan, and spend every night out on your own"
+    }
+  },
+  {
+    "id": "wyr-friend-texts-your-ex-vs-texts-your-crush",
+    "optionA": {
+      "fr": "Un pote écrit tous tes messages à ton ex pendant un mois, sans te montrer",
+      "en": "A friend writes all your texts to your ex for a month, without showing you"
+    },
+    "optionB": {
+      "fr": "Un pote écrit tous tes messages à ton crush, et appuie sur envoyer",
+      "en": "A friend writes all your texts to your crush, and hits send"
+    }
+  },
+  {
+    "id": "wyr-your-funeral-playlist-by-the-group-vs-your-eulogy",
+    "optionA": {
+      "fr": "Ce groupe choisit la playlist de ton enterrement, sans veto",
+      "en": "This group picks your funeral playlist, no veto"
+    },
+    "optionB": {
+      "fr": "Ce groupe écrit ton éloge funèbre, version qu'ils trouvent honnête",
+      "en": "This group writes your eulogy, the version they call honest"
+    }
+  },
+  {
+    "id": "wyr-always-told-the-truth-too-late-vs-the-lie-on-time",
+    "optionA": {
+      "fr": "Qu'on te dise toujours la vérité, mais une fois qu'il est trop tard",
+      "en": "Always be told the truth, but always once it's too late"
+    },
+    "optionB": {
+      "fr": "Qu'on te mente toujours pile au bon moment pour t'éviter la douleur",
+      "en": "Always be lied to at exactly the right moment to spare you the pain"
+    }
+  },
+  {
+    "id": "wyr-friend-rates-your-parenting-vs-your-relationship",
+    "optionA": {
+      "fr": "Un pote note publiquement comment tu élèveras tes futurs gosses, à chaque repas",
+      "en": "A friend publicly grades how you'll raise your future kids, every dinner"
+    },
+    "optionB": {
+      "fr": "Un pote note ta relation actuelle sur 10, devant ton/ta partenaire",
+      "en": "A friend rates your current relationship out of 10, in front of your partner"
+    }
+  },
+  {
+    "id": "wyr-remember-every-debt-vs-forget-it-all",
+    "optionA": {
+      "fr": "Te souvenir de chaque dette, promesse et vanne du groupe, et porter ça seul",
+      "en": "Remember every debt, promise and joke in the group, and carry it alone"
+    },
+    "optionB": {
+      "fr": "Tout oublier au bout d'une semaine, et qu'on te le reproche à vie",
+      "en": "Forget it all within a week, and get reminded of it forever"
+    }
+  },
+  {
+    "id": "wyr-your-search-autofill-vs-your-keyboard-suggestions",
+    "optionA": {
+      "fr": "Les premières suggestions de ta barre de recherche s'affichent à l'écran",
+      "en": "The top autofill of your search bar shows up on screen"
+    },
+    "optionB": {
+      "fr": "Les trois mots que ton clavier te propose en premier sont lus à voix haute",
+      "en": "The three words your keyboard suggests first get read out loud"
+    }
+  },
+  {
+    "id": "wyr-narrator-sugarcoats-vs-narrator-brutally-honest",
+    "optionA": {
+      "fr": "Une voix off enjolive ta vie en permanence, et tout le monde sait que c'est faux",
+      "en": "A narrator sugarcoats your life nonstop, and everyone knows it's fake"
+    },
+    "optionB": {
+      "fr": "Une voix off décrit ta vie avec une honnêteté brutale, à voix haute, partout",
+      "en": "A narrator describes your life with brutal honesty, out loud, everywhere"
+    }
+  },
+  {
+    "id": "wyr-be-the-last-to-know-vs-the-one-who-cant-tell",
+    "optionA": {
+      "fr": "Être toujours le dernier prévenu des drames du groupe",
+      "en": "Always be the last to know the group's drama"
+    },
+    "optionB": {
+      "fr": "Être le premier au courant, mais ne jamais avoir le droit d'en parler",
+      "en": "Be the first to know, but never allowed to say a word"
+    }
   }
 ] },
 };
@@ -7328,6 +8131,1526 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     "debateStarter": {
       "fr": "Il hurle des consignes tactiques à des millionnaires à 800 km. Eux jouent. Lui transpire sur le canapé.",
       "en": "Screaming tactics at millionaires 500 miles away. They're playing. He's sweating on a couch."
+    }
+  },
+  {
+    "id": "the-en-sachet",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le thé en sachet",
+      "en": "Tea from a bag"
+    },
+    "emoji": "🫖",
+    "debateStarter": {
+      "fr": "Le sachet, c'est du thé qui assume pas. Celui qui sort la théière en fonte juge la table entière depuis 2014.",
+      "en": "A teabag is tea that gave up. Whoever owns a loose-leaf strainer has been quietly judging this table since 2014."
+    }
+  },
+  {
+    "id": "smoothie-vert",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le smoothie vert",
+      "en": "A green smoothie"
+    },
+    "emoji": "🥬",
+    "debateStarter": {
+      "fr": "Mixer une salade et la boire à la paille, c'est pas un repas, c'est une pénitence qu'on poste en story.",
+      "en": "Blending a salad and drinking it through a straw isn't breakfast, it's a penance you posted for credit."
+    }
+  },
+  {
+    "id": "cookie-geant",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le cookie géant",
+      "en": "A giant bakery cookie"
+    },
+    "emoji": "🍪",
+    "debateStarter": {
+      "fr": "4 € le cookie « artisanal » coulant au cœur, photographié sous trois angles. Le sucre est devenu une expérience curatée.",
+      "en": "A $5 'gooey-center' cookie, photographed from three angles. Sugar became a curated experience and you funded it."
+    }
+  },
+  {
+    "id": "soupe-en-hiver",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La soupe maison en hiver",
+      "en": "Homemade winter soup"
+    },
+    "emoji": "🍲",
+    "debateStarter": {
+      "fr": "Il a passé deux heures à mixer des légumes pour servir un truc qui ressemble à de l'eau marron. « C'est plein d'amour », dit-il.",
+      "en": "Two hours blending vegetables to serve something the color of a puddle. 'It's full of love,' he says. It's full of leeks."
+    }
+  },
+  {
+    "id": "gaufre-de-bruxelles",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La gaufre au sucre",
+      "en": "A sugar waffle"
+    },
+    "emoji": "🧇",
+    "debateStarter": {
+      "fr": "La gaufre simple au sucre contre la gaufre à six toppings : un camp mange un dessert, l'autre construit un immeuble.",
+      "en": "A plain sugar waffle versus the six-topping tower: one camp eats a dessert, the other commissions architecture."
+    }
+  },
+  {
+    "id": "pain-aux-cereales",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le pain aux céréales",
+      "en": "Multigrain bread"
+    },
+    "emoji": "🌰",
+    "debateStarter": {
+      "fr": "Choisir le pain « aux graines » au resto, c'est pas un goût, c'est un dossier médical déposé devant tout le monde.",
+      "en": "Asking for the 'seeded' bread at dinner isn't a preference, it's a medical disclosure to the whole table."
+    }
+  },
+  {
+    "id": "cafe-allonge-douze-fois",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le café qu'on réchauffe trois fois",
+      "en": "Coffee microwaved three times"
+    },
+    "emoji": "♨️",
+    "debateStarter": {
+      "fr": "Réchauffer le même café trois fois jusqu'à 16 h, c'est pas de l'amour du café, c'est l'oubli de soi à l'état pur.",
+      "en": "Reheating the same coffee three times till 4pm isn't a caffeine ritual, it's pure self-neglect with a handle."
+    }
+  },
+  {
+    "id": "chocolat-noir-90",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le chocolat noir à 90 %",
+      "en": "90% dark chocolate"
+    },
+    "emoji": "🍫",
+    "debateStarter": {
+      "fr": "Le chocolat à 90 %, c'est pas un dessert, c'est une discipline. Il en offre un carré et te regarde grimacer, satisfait.",
+      "en": "90% dark isn't dessert, it's a character test. He offers you one square and watches you wince, satisfied."
+    }
+  },
+  {
+    "id": "frites-au-four",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les frites au four",
+      "en": "Oven fries"
+    },
+    "emoji": "🍠",
+    "debateStarter": {
+      "fr": "Servir des frites au four et appeler ça des frites, c'est le plus grand mensonge tranquille de la cuisine domestique.",
+      "en": "Serving oven fries and calling them fries is the calmest, most confident lie in home cooking. Nobody's fooled."
+    }
+  },
+  {
+    "id": "yaourt-nature-vs-sucre",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le yaourt nature sans rien",
+      "en": "Plain unsweetened yogurt"
+    },
+    "emoji": "🥛",
+    "debateStarter": {
+      "fr": "Manger un yaourt nature sans sucre, sans miel, sans rien, c'est pas une habitude, c'est une menace voilée pour la tablée.",
+      "en": "Eating plain yogurt with nothing on it isn't a habit, it's a veiled threat aimed at everyone else at the table."
+    }
+  },
+  {
+    "id": "the-glace-maison",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le sirop à l'eau",
+      "en": "Squash / cordial in water"
+    },
+    "emoji": "🍹",
+    "debateStarter": {
+      "fr": "Le sirop à l'eau, c'est la boisson la plus honnête du frigo : zéro prétention, zéro story, juste du rouge sucré qui tache.",
+      "en": "Cordial in water is the most honest drink in the fridge: zero pretension, zero story, just red sugar that stains."
+    }
+  },
+  {
+    "id": "raviolis-en-boite",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les raviolis en boîte",
+      "en": "Canned ravioli"
+    },
+    "emoji": "🥫",
+    "debateStarter": {
+      "fr": "Manger les raviolis froids directement dans la boîte un soir de semaine : personne le revendique, beaucoup le vivent.",
+      "en": "Eating canned ravioli cold, straight from the tin, on a weeknight: nobody claims it, plenty of people live it."
+    }
+  },
+  {
+    "id": "verveine-apres-diner",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La verveine après le dîner",
+      "en": "Herbal tea after dinner"
+    },
+    "emoji": "🌼",
+    "debateStarter": {
+      "fr": "Proposer une verveine à 22 h, c'est l'annonce officielle que la soirée est terminée. C'est un congé déguisé en gentillesse.",
+      "en": "Offering herbal tea at 10pm is the official announcement that the night is over. It's an eviction wearing slippers."
+    }
+  },
+  {
+    "id": "energy-drink",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La canette d'energy drink",
+      "en": "An energy drink"
+    },
+    "emoji": "🧃",
+    "debateStarter": {
+      "fr": "Boire trois energy drinks pour « tenir » et appeler ça de la productivité. Le cœur dépose un préavis que tu lis pas.",
+      "en": "Three energy drinks to 'power through' and calling it productivity. Your heart filed a complaint you never opened."
+    }
+  },
+  {
+    "id": "bol-de-cereales-le-soir",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le bol de céréales en guise de dîner",
+      "en": "Cereal for dinner"
+    },
+    "emoji": "🥣",
+    "debateStarter": {
+      "fr": "Manger un bol de céréales à 21 h en guise de repas, c'est pas un échec, c'est de la liberté que les gens en couple t'envient.",
+      "en": "A bowl of cereal at 9pm as dinner isn't a failure, it's a freedom every coupled-up person at the table secretly envies."
+    }
+  },
+  {
+    "id": "ketchup-sur-tout",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Mettre du ketchup sur tout",
+      "en": "Ketchup on everything"
+    },
+    "emoji": "🍅",
+    "debateStarter": {
+      "fr": "Noyer le plat de quelqu'un sous le ketchup avant de goûter, c'est pas un goût, c'est une insulte au cuistot devant témoins.",
+      "en": "Drowning someone's cooking in ketchup before tasting it isn't a preference, it's a public insult to the chef. Witnessed."
+    }
+  },
+  {
+    "id": "machine-a-pain",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La machine à pain",
+      "en": "A bread machine"
+    },
+    "emoji": "🍞",
+    "debateStarter": {
+      "fr": "Elle a coûté 120 €, fait du pain trois fois, et dort sous l'évier depuis. Le placard à appareils est un cimetière d'élans.",
+      "en": "Cost $150, baked three loaves, has slept under the sink since. The appliance cupboard is a graveyard of good intentions."
+    }
+  },
+  {
+    "id": "abonnement-magazine-papier",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "L'abonnement au magazine papier",
+      "en": "A print magazine subscription"
+    },
+    "emoji": "🗞️",
+    "debateStarter": {
+      "fr": "Recevoir un magazine papier qu'on feuillette jamais mais qu'on garde « pour la déco ». L'abonnement est devenu un meuble.",
+      "en": "A print magazine you never open but keep 'for the coffee table'. The subscription quietly became furniture."
+    }
+  },
+  {
+    "id": "plante-grasse-de-bureau",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La plante grasse sur le bureau",
+      "en": "The desk succulent"
+    },
+    "emoji": "🪴",
+    "debateStarter": {
+      "fr": "Tuer une plante grasse, l'objet végétal le plus increvable de la planète, c'est pas de la malchance, c'est un signal.",
+      "en": "Killing a succulent — the single most unkillable plant on Earth — isn't bad luck, it's a personality red flag."
+    }
+  },
+  {
+    "id": "bougie-parfumee-jamais-allumee",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La bougie parfumée jamais allumée",
+      "en": "The candle too nice to burn"
+    },
+    "emoji": "🕯️",
+    "debateStarter": {
+      "fr": "Acheter une bougie à 35 € et jamais l'allumer « pour pas la gâcher ». Tu l'as déjà gâchée : elle sert à rien.",
+      "en": "A $40 candle you never light 'so you don't waste it'. You already wasted it. It's a paperweight that smells nice."
+    }
+  },
+  {
+    "id": "carnet-vierge",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le carnet trop beau pour écrire dedans",
+      "en": "The notebook too pretty to use"
+    },
+    "emoji": "📓",
+    "debateStarter": {
+      "fr": "Une pile de jolis carnets vierges « pour la bonne idée ». La bonne idée vient jamais : t'as peur de salir la première page.",
+      "en": "A stack of beautiful empty notebooks 'for the right idea'. The right idea never comes: you're scared to ruin page one."
+    }
+  },
+  {
+    "id": "plaid-sur-le-canape",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le plaid déco sur le canapé",
+      "en": "The decorative throw blanket"
+    },
+    "emoji": "🛋️",
+    "debateStarter": {
+      "fr": "Le plaid posé en diagonale qu'on remet en place dès qu'un invité ose s'en couvrir. Décoratif veut dire : regarde, touche pas.",
+      "en": "The throw folded at an angle that gets re-placed the second a guest dares use it. 'Decorative' means: look, don't live."
+    }
+  },
+  {
+    "id": "salle-de-bain-rituel",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La routine soin en 11 étapes",
+      "en": "The 11-step skincare routine"
+    },
+    "emoji": "🧴",
+    "debateStarter": {
+      "fr": "Onze produits dans un ordre sacré, chaque soir, sans faute. La peau va bien : c'est le portefeuille qui a des cernes.",
+      "en": "Eleven products in a sacred order, every night, no exceptions. The skin is fine. It's the bank account that looks tired."
+    }
+  },
+  {
+    "id": "marie-kondo",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Tout ranger par couleur",
+      "en": "Organizing everything by color"
+    },
+    "emoji": "🌈",
+    "debateStarter": {
+      "fr": "Ranger sa bibliothèque par couleur plutôt que par auteur, c'est avouer publiquement qu'on l'utilise pour les photos.",
+      "en": "Sorting the bookshelf by color instead of author is a public confession that you use it for the photos, not the reading."
+    }
+  },
+  {
+    "id": "lampe-de-sel",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La lampe en cristal de sel",
+      "en": "A Himalayan salt lamp"
+    },
+    "emoji": "🧂",
+    "debateStarter": {
+      "fr": "Une lampe de sel « qui purifie les ondes » sur la table de chevet. C'est un caillou orange qui chauffe. Ça console, paraît-il.",
+      "en": "A salt lamp 'that cleanses the air' on the nightstand. It's a warm orange rock. It comforts, apparently. That's allowed."
+    }
+  },
+  {
+    "id": "tapis-de-course-portant-manteaux",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le tapis de course porte-manteaux",
+      "en": "The treadmill clothes rack"
+    },
+    "emoji": "🏃",
+    "debateStarter": {
+      "fr": "Un tapis de course à 600 € reconverti en porte-manteaux depuis février. La motivation a une date de péremption, et elle est passée.",
+      "en": "An $800 treadmill that's been a coat rack since February. Motivation has an expiry date, and yours quietly passed."
+    }
+  },
+  {
+    "id": "chargeur-partout",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le chargeur dans chaque pièce",
+      "en": "A charger in every room"
+    },
+    "emoji": "🔋",
+    "debateStarter": {
+      "fr": "Avoir un chargeur dans chaque pièce, c'est pas de l'organisation, c'est l'aveu qu'on supporte pas d'être loin du téléphone trois mètres.",
+      "en": "A charger in every room isn't organization, it's admitting you can't survive being three feet from your phone. Diagnosed."
+    }
+  },
+  {
+    "id": "courses-le-dimanche-soir",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Faire les courses le dimanche soir",
+      "en": "Grocery shopping Sunday night"
+    },
+    "emoji": "🛒",
+    "debateStarter": {
+      "fr": "Faire ses courses le dimanche à 19 h dans un magasin vide, c'est soit une organisation de génie, soit une vie qu'on évite de regarder.",
+      "en": "Grocery shopping at 7pm Sunday in an empty aisle is either genius planning or a life you're carefully avoiding looking at."
+    }
+  },
+  {
+    "id": "garder-les-cartons",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder les cartons « au cas où »",
+      "en": "Keeping every box 'just in case'"
+    },
+    "emoji": "📦",
+    "debateStarter": {
+      "fr": "Garder le carton de la télé trois ans « pour la revente », c'est pas de la prévoyance, c'est une cave qui rétrécit chaque mois.",
+      "en": "Keeping the TV box for three years 'for resale' isn't foresight, it's a basement that shrinks a little every month."
+    }
+  },
+  {
+    "id": "humidificateur",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "L'humidificateur dans le salon",
+      "en": "A living-room humidifier"
+    },
+    "emoji": "💨",
+    "debateStarter": {
+      "fr": "Il a acheté un humidificateur, puis un déshumidificateur. Les deux tournent. Quelque part, un climat se fait la guerre dans son salon.",
+      "en": "He bought a humidifier, then a dehumidifier. Both run. Somewhere in his living room, a tiny climate is at war with itself."
+    }
+  },
+  {
+    "id": "fauteuil-massant",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le fauteuil massant",
+      "en": "A massage chair"
+    },
+    "emoji": "💺",
+    "debateStarter": {
+      "fr": "Un fauteuil massant à 2 000 € qu'on utilise deux minutes avant de trouver ça « bizarre » et de poser le linge dessus. Classique.",
+      "en": "A $2,500 massage chair used for two minutes before it gets 'weird', then becomes the official place to drop the laundry."
+    }
+  },
+  {
+    "id": "abonnement-box-mensuelle",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La box surprise mensuelle",
+      "en": "A monthly subscription box"
+    },
+    "emoji": "🎁",
+    "debateStarter": {
+      "fr": "Payer 25 € par mois pour recevoir des trucs dont on a pas besoin, choisis par un inconnu. C'est de l'achat impulsif par abonnement.",
+      "en": "Paying $30 a month for stuff you didn't need, chosen by a stranger. It's impulse buying on autopilot, billed monthly."
+    }
+  },
+  {
+    "id": "pyjama-assorti",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le pyjama en soie assorti",
+      "en": "A matching silk pajama set"
+    },
+    "emoji": "🩳",
+    "debateStarter": {
+      "fr": "Dormir en pyjama de soie assorti contre dormir en t-shirt troué de 2016 : deux philosophies de vie, aucune réconciliation possible.",
+      "en": "Sleeping in a matching silk set versus a holey 2016 band tee: two entire philosophies of life, zero possible reconciliation."
+    }
+  },
+  {
+    "id": "telephone-pro-et-perso",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Avoir deux téléphones",
+      "en": "Carrying two phones"
+    },
+    "emoji": "📱",
+    "debateStarter": {
+      "fr": "Sortir deux téléphones « un pro, un perso », c'est soit un cadre très occupé, soit quelqu'un avec beaucoup de choses à compartimenter.",
+      "en": "Pulling out two phones, 'one work, one personal', is either a very busy executive or someone with a lot to compartmentalize."
+    }
+  },
+  {
+    "id": "fond-decran-de-couple",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le fond d'écran en couple",
+      "en": "A couple photo as your lock screen"
+    },
+    "emoji": "💑",
+    "debateStarter": {
+      "fr": "Mettre une photo de couple en fond d'écran, c'est mignon jusqu'à la rupture. Après, c'est un crime scène que tout le monde reconnaît.",
+      "en": "A couple photo as your lock screen is sweet until the breakup. After that it's a crime scene everyone in the room recognizes."
+    }
+  },
+  {
+    "id": "notifications-toutes-actives",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder toutes les notifications activées",
+      "en": "Leaving every notification on"
+    },
+    "emoji": "🔴",
+    "debateStarter": {
+      "fr": "Un téléphone qui vibre 200 fois par jour avec des badges rouges partout. C'est pas une vie sociale active, c'est un harcèlement consenti.",
+      "en": "A phone buzzing 200 times a day, red badges everywhere. That's not an active social life, it's consensual harassment."
+    }
+  },
+  {
+    "id": "mot-de-passe-azerty",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le mot de passe « azerty123 »",
+      "en": "Using 'password123'"
+    },
+    "emoji": "🔑",
+    "debateStarter": {
+      "fr": "Le même mot de passe faible sur tous ses comptes depuis 2011, contre le gestionnaire de mots de passe paranoïaque. Un camp dort mal.",
+      "en": "The same weak password on every account since 2011, versus the paranoid password-manager person. One of them sleeps worse."
+    }
+  },
+  {
+    "id": "fond-decran-usine",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder le fond d'écran d'usine",
+      "en": "Keeping the factory wallpaper"
+    },
+    "emoji": "🖼️",
+    "debateStarter": {
+      "fr": "Garder le fond d'écran d'usine deux ans après l'achat, c'est pas de la sobriété, c'est l'aveu qu'on a jamais ouvert les réglages.",
+      "en": "Keeping the factory wallpaper two years in isn't minimalism, it's a confession you've never once opened the settings menu."
+    }
+  },
+  {
+    "id": "tablette-graphique",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La tablette graphique inutilisée",
+      "en": "The untouched drawing tablet"
+    },
+    "emoji": "🖊️",
+    "debateStarter": {
+      "fr": "Une tablette graphique à 300 € achetée pour « se remettre au dessin ». Elle a fait deux gribouillis et un long sommeil dans un tiroir.",
+      "en": "A $350 drawing tablet bought to 'get back into art'. It produced two doodles and a long, peaceful nap in a drawer."
+    }
+  },
+  {
+    "id": "thermomix-de-conversation",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le purificateur d'air connecté",
+      "en": "A smart air purifier"
+    },
+    "emoji": "🌫️",
+    "debateStarter": {
+      "fr": "Il regarde l'appli de son purificateur d'air comme un médecin lit un électrocardiogramme. « L'indice est à 12 ce soir », annonce-t-il, ému.",
+      "en": "He checks his air-purifier app like a doctor reading an ECG. 'We're at a 12 tonight,' he announces, genuinely moved."
+    }
+  },
+  {
+    "id": "regarder-en-1-25x",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Regarder les vidéos en x1,5",
+      "en": "Watching everything at 1.5x"
+    },
+    "emoji": "⏩",
+    "debateStarter": {
+      "fr": "Regarder tous les films en accéléré « pour gagner du temps », c'est pas de l'efficacité, c'est avoir perdu le goût de vivre lentement.",
+      "en": "Watching every film at 1.5x 'to save time' isn't efficiency, it's a quiet announcement that you no longer enjoy anything slowly."
+    }
+  },
+  {
+    "id": "trois-mille-photos-floues",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les 12 000 photos jamais triées",
+      "en": "12,000 photos never sorted"
+    },
+    "emoji": "🖼️",
+    "debateStarter": {
+      "fr": "12 000 photos dont 400 captures d'écran d'horaires de train de 2019. Trier la pellicule est devenu le plus vieux projet de ta vie.",
+      "en": "12,000 photos, 400 of them screenshots of 2019 train times. Cleaning the camera roll is now the oldest project of your life."
+    }
+  },
+  {
+    "id": "mode-economie-energie-permanent",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le mode économie d'énergie en permanence",
+      "en": "Permanent low-power mode"
+    },
+    "emoji": "🟡",
+    "debateStarter": {
+      "fr": "Vivre en mode économie d'énergie 24h/24 « pour préserver la batterie », c'est s'imposer une vie ralentie pour un objet qui te survivra pas.",
+      "en": "Living in low-power mode 24/7 'to save the battery' is rationing your own life for a device that won't even outlast the phone after it."
+    }
+  },
+  {
+    "id": "comedie-musicale",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La comédie musicale",
+      "en": "Musical theatre"
+    },
+    "emoji": "🎭",
+    "debateStarter": {
+      "fr": "Des gens qui s'arrêtent de parler pour chanter leurs sentiments en pleine rue : un camp trouve ça magique, l'autre appelle ça une menace.",
+      "en": "People who stop talking to sing their feelings in the street: one camp finds it magical, the other files it under personal threat."
+    }
+  },
+  {
+    "id": "relire-le-meme-livre",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Relire le même livre chaque année",
+      "en": "Rereading the same book yearly"
+    },
+    "emoji": "📗",
+    "debateStarter": {
+      "fr": "Relire le même roman tous les ans contre la pile de 40 livres jamais ouverts : un camp a une relation, l'autre a une collection.",
+      "en": "Rereading the same novel every year versus the pile of 40 books never opened: one camp has a relationship, the other has a hoard."
+    }
+  },
+  {
+    "id": "spoiler-la-fin",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Lire la fin du livre d'abord",
+      "en": "Reading the last page first"
+    },
+    "emoji": "🔚",
+    "debateStarter": {
+      "fr": "Lire la dernière page d'abord « pour savoir si ça vaut le coup », c'est pas une méthode, c'est un trouble que les autres ont le droit de juger.",
+      "en": "Reading the last page first 'to see if it's worth it' isn't a method, it's a disorder, and the table is allowed to react."
+    }
+  },
+  {
+    "id": "documentaire-vs-action",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Choisir un documentaire un vendredi soir",
+      "en": "Picking a documentary on a Friday night"
+    },
+    "emoji": "📺",
+    "debateStarter": {
+      "fr": "Proposer un documentaire de trois heures sur les fonds marins un vendredi soir, c'est pas un choix de film, c'est un test de la relation.",
+      "en": "Proposing a three-hour documentary about the deep sea on a Friday night isn't a movie pick, it's a test of the relationship."
+    }
+  },
+  {
+    "id": "applaudir-au-cinema",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Applaudir à la fin du film au cinéma",
+      "en": "Clapping at the end of a movie"
+    },
+    "emoji": "👏",
+    "debateStarter": {
+      "fr": "Applaudir dans une salle de cinéma, c'est applaudir un écran qui t'entend pas, devant des inconnus qui t'en veulent. Et pourtant, quelqu'un commence.",
+      "en": "Clapping in a cinema means applauding a screen that can't hear you, in front of strangers who resent you. And yet, someone always starts."
+    }
+  },
+  {
+    "id": "musique-de-noel-en-novembre",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les chants de Noël dès novembre",
+      "en": "Christmas music in November"
+    },
+    "emoji": "🔔",
+    "debateStarter": {
+      "fr": "Lancer les chants de Noël le 2 novembre, c'est pas de la joie de vivre, c'est une déclaration de guerre à tous ceux qui aiment l'automne.",
+      "en": "Starting the Christmas playlist on November 2nd isn't festive cheer, it's a declaration of war on everyone who liked autumn."
+    }
+  },
+  {
+    "id": "garder-les-tickets-de-concert",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder tous ses tickets de concert",
+      "en": "Keeping every concert ticket"
+    },
+    "emoji": "🎟️",
+    "debateStarter": {
+      "fr": "Une boîte de vieux tickets de concert dont l'encre a disparu. Tu te souviens d'aucune date, mais tu jetteras jamais la boîte. Pourquoi ?",
+      "en": "A box of old concert stubs, the ink long faded. You can't read a single date, but you'll never throw the box out. Explain that."
+    }
+  },
+  {
+    "id": "podcast-en-faisant-la-vaisselle",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Pas supporter le silence",
+      "en": "Never tolerating silence"
+    },
+    "emoji": "🎧",
+    "debateStarter": {
+      "fr": "Mettre un podcast pour sortir les poubelles, c'est pas remplir le temps, c'est ne plus jamais oser être seul avec ses pensées. Avoue.",
+      "en": "Putting on a podcast just to take out the bins isn't filling time, it's never daring to be alone with your own thoughts. Admit it."
+    }
+  },
+  {
+    "id": "collectionner-les-figurines",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Collectionner les figurines sous blister",
+      "en": "Collecting figures in the box"
+    },
+    "emoji": "🧸",
+    "debateStarter": {
+      "fr": "Acheter une figurine à 80 € et jamais ouvrir la boîte « pour garder la valeur ». C'est pas une collection, c'est un placement émotionnel.",
+      "en": "Buying an $80 figure and never opening the box 'to keep the value' isn't a collection, it's an emotional investment portfolio."
+    }
+  },
+  {
+    "id": "jeux-video-a-40-ans",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les jeux vidéo passé 35 ans",
+      "en": "Gaming past 35"
+    },
+    "emoji": "🎮",
+    "debateStarter": {
+      "fr": "Jouer aux jeux vidéo à 38 ans contre trouver ça « pas de son âge » : un camp s'amuse encore, l'autre a renoncé et veut de la compagnie.",
+      "en": "Gaming at 38 versus calling it 'a bit young for you': one camp is still having fun, the other gave up and wants company in it."
+    }
+  },
+  {
+    "id": "noter-les-restos",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Laisser un avis sur chaque resto",
+      "en": "Reviewing every restaurant online"
+    },
+    "emoji": "⭐",
+    "debateStarter": {
+      "fr": "Laisser un avis détaillé en trois paragraphes après chaque repas, c'est pas de la générosité, c'est un pouvoir minuscule dont il abuse.",
+      "en": "Leaving a detailed three-paragraph review after every meal isn't generosity, it's a tiny scrap of power and he abuses it daily."
+    }
+  },
+  {
+    "id": "natation-en-piscine",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La natation en piscine municipale",
+      "en": "Lap swimming at the public pool"
+    },
+    "emoji": "🏊",
+    "debateStarter": {
+      "fr": "Le mec qui double tout le monde dans la ligne lente et soupire bruyamment. La piscine municipale a aussi ses tyrans, en bonnet.",
+      "en": "The guy who overtakes everyone in the slow lane and sighs loudly about it. The public pool has tyrants too, just in swim caps."
+    }
+  },
+  {
+    "id": "course-a-pied-le-matin",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le footing à 6 h avant le boulot",
+      "en": "A 6am run before work"
+    },
+    "emoji": "🌅",
+    "debateStarter": {
+      "fr": "Courir à 6 h avant le travail, c'est de la discipline jusqu'à ce qu'il en parle. À partir de la troisième fois, c'est du prosélytisme.",
+      "en": "A 6am run before work is discipline until he mentions it. By the third mention it stops being a habit and becomes a sermon."
+    }
+  },
+  {
+    "id": "musculation-a-la-maison",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Les pompes dans le salon",
+      "en": "Push-ups in the living room"
+    },
+    "emoji": "🤸",
+    "debateStarter": {
+      "fr": "S'entraîner gratuitement dans le salon contre payer 50 € de salle pour les mêmes pompes : un camp économise, l'autre paie un public.",
+      "en": "Training for free in the living room versus a $60 gym for the same push-ups: one camp saves money, the other pays for an audience."
+    }
+  },
+  {
+    "id": "danse-en-ligne",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le cours de danse en ligne",
+      "en": "Line-dancing class"
+    },
+    "emoji": "🕺",
+    "debateStarter": {
+      "fr": "La danse en ligne, c'est de la chorégraphie pour gens qui veulent danser sans avoir à toucher personne ni improviser. Honnête, au fond.",
+      "en": "Line dancing is choreography for people who want to dance without touching anyone or improvising anything. Honestly, fair enough."
+    }
+  },
+  {
+    "id": "velo-d-appartement",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le vélo d'appartement connecté",
+      "en": "A connected exercise bike"
+    },
+    "emoji": "🚴",
+    "debateStarter": {
+      "fr": "Pédaler dans le vide en regardant un coach crier dans un écran à 2 000 €, contre sortir dehors gratuitement. Un camp a peur de la pluie.",
+      "en": "Pedaling nowhere while a coach screams from a $2,000 screen, versus going outside for free. One of these camps is scared of weather."
+    }
+  },
+  {
+    "id": "yoga-chevre",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le yoga avec des chèvres",
+      "en": "Goat yoga"
+    },
+    "emoji": "🐐",
+    "debateStarter": {
+      "fr": "Payer 40 € pour faire la posture du chien tête en bas pendant qu'une chèvre te marche dessus, et appeler ça du bien-être. Magnifique époque.",
+      "en": "Paying $50 to hold downward dog while a goat walks across your spine, and calling it wellness. What a beautiful time to be alive."
+    }
+  },
+  {
+    "id": "compter-ses-pas",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Faire des allers-retours pour les 10 000 pas",
+      "en": "Pacing to hit 10,000 steps"
+    },
+    "emoji": "👣",
+    "debateStarter": {
+      "fr": "Faire les cent pas dans le couloir à 23 h 50 pour atteindre 10 000 pas, c'est pas de la santé, c'est une montre qui te tient en otage.",
+      "en": "Pacing the hallway at 11:50pm to hit 10,000 steps isn't health, it's a watch holding you hostage and you thanking it for it."
+    }
+  },
+  {
+    "id": "course-d-obstacles-boue",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "La course à obstacles dans la boue",
+      "en": "A mud obstacle race"
+    },
+    "emoji": "🪖",
+    "debateStarter": {
+      "fr": "Payer 70 € pour ramper sous des barbelés dans la boue un dimanche. Personne t'y oblige. Ta photo couverte de boue, par contre, on l'aura tous.",
+      "en": "Paying $90 to crawl under barbed wire through mud on a Sunday. Nobody made you. But your mud-covered finish photo? We'll all get that."
+    }
+  },
+  {
+    "id": "skate-a-30-ans",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le skateboard passé 30 ans",
+      "en": "Skateboarding past 30"
+    },
+    "emoji": "🛹",
+    "debateStarter": {
+      "fr": "Reprendre le skate à 32 ans, c'est soit la plus belle jeunesse retrouvée, soit une visite aux urgences avec témoins. Souvent les deux.",
+      "en": "Picking up a skateboard again at 32 is either youth gloriously reclaimed or a trip to A&E with witnesses. Frequently both, same day."
+    }
+  },
+  {
+    "id": "repondre-pour-tout-le-groupe",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Répondre pour tout le groupe au serveur",
+      "en": "Ordering for the whole table"
+    },
+    "emoji": "🗣️",
+    "debateStarter": {
+      "fr": "Celui qui répond « on va prendre… » pour toute la table sans demander, c'est pas de l'efficacité, c'est un coup d'État au resto. Y'en a un ici.",
+      "en": "The one who says 'we'll have…' for the whole table without asking isn't being efficient, it's a coup at dinner. This group has one."
+    }
+  },
+  {
+    "id": "garder-le-recu-de-tout",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder tous les tickets de caisse",
+      "en": "Keeping every receipt"
+    },
+    "emoji": "🧾",
+    "debateStarter": {
+      "fr": "Garder le ticket de caisse d'un café à 1,50 €, c'est pas de la rigueur comptable, c'est une méfiance envers le monde entier, encaissée.",
+      "en": "Keeping the receipt from a $2 coffee isn't tidy accounting, it's a deep distrust of the entire world, itemized and stapled."
+    }
+  },
+  {
+    "id": "lire-la-notice",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Lire la notice en entier",
+      "en": "Reading the whole manual"
+    },
+    "emoji": "📄",
+    "debateStarter": {
+      "fr": "Lire la notice de A à Z avant de brancher contre tout brancher et appuyer au hasard : deux personnalités qui finissent jamais ensemble.",
+      "en": "Reading the manual cover to cover before plugging it in versus plugging it in and pressing things: two people who should never cohabit."
+    }
+  },
+  {
+    "id": "raconter-ses-reves",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Raconter ses rêves en détail",
+      "en": "Recounting your dreams in detail"
+    },
+    "emoji": "💭",
+    "debateStarter": {
+      "fr": "Raconter son rêve de la nuit en détail au petit-déj, c'est la chose la plus égoïste qu'un humain puisse faire avant 9 h. Personne s'en remet.",
+      "en": "Recounting last night's dream in full at breakfast is the single most selfish thing a human can do before 9am. Nobody recovers from it."
+    }
+  },
+  {
+    "id": "corriger-la-grammaire-des-gens",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Corriger la grammaire des autres",
+      "en": "Correcting people's grammar"
+    },
+    "emoji": "✍️",
+    "debateStarter": {
+      "fr": "Corriger la faute de quelqu'un en pleine discussion, c'est pas aider, c'est répondre à un argument qu'on a pas su contrer. Et la table le sait.",
+      "en": "Correcting someone's grammar mid-argument isn't helping, it's losing the actual point and pretending you won. And the table clocks it."
+    }
+  },
+  {
+    "id": "arriver-toujours-en-retard",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Arriver toujours 20 minutes en retard",
+      "en": "Always 20 minutes late"
+    },
+    "emoji": "⌛",
+    "debateStarter": {
+      "fr": "Le retardataire chronique qui dit « je suis comme ça », contre celui qui le couvre depuis dix ans. Un des deux est dans cette pièce. Trouvez-le.",
+      "en": "The chronic late one who says 'that's just me', versus the one who's covered for them for ten years. One is in this room. Name them."
+    }
+  },
+  {
+    "id": "garder-son-manteau-a-table",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder son manteau à table chez les gens",
+      "en": "Keeping your coat on indoors"
+    },
+    "emoji": "🧥",
+    "debateStarter": {
+      "fr": "Garder son manteau à table chez quelqu'un, c'est annoncer en silence « je reste pas, je vous juge, je pars dès que poli ». L'hôte a compris.",
+      "en": "Keeping your coat on at someone's dinner table silently announces 'I'm not staying, I'm judging, I'll leave the second it's polite'."
+    }
+  },
+  {
+    "id": "negocier-au-marche",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Marchander chez le primeur",
+      "en": "Haggling at the farmers market"
+    },
+    "emoji": "🤝",
+    "debateStarter": {
+      "fr": "Marchander 50 centimes sur une barquette de fraises chez un petit producteur, c'est pas du flair, c'est un sport de combat contre plus pauvre que soi.",
+      "en": "Haggling 50 cents off a punnet of strawberries from a small grower isn't shrewd, it's a combat sport against someone poorer than you."
+    }
+  },
+  {
+    "id": "garder-le-son-du-clavier",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Garder le son des touches du clavier du téléphone",
+      "en": "Keeping keyboard tap sounds on"
+    },
+    "emoji": "🔊",
+    "debateStarter": {
+      "fr": "Garder le « tac tac tac » des touches du téléphone activé en public, c'est pas un oubli, c'est une agression sonore que tout le wagon subit.",
+      "en": "Leaving the keyboard click sounds on in public isn't an oversight, it's a sonic assault the entire train carriage is forced to endure."
+    }
+  },
+  {
+    "id": "parler-fort-au-telephone",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Parler fort au téléphone dans le train",
+      "en": "Loud phone calls on the train"
+    },
+    "emoji": "🚆",
+    "debateStarter": {
+      "fr": "Raconter sa vie au téléphone à voix haute dans le train silence, c'est pas un manque d'éducation, c'est croire que ta journée intéresse 40 inconnus.",
+      "en": "Loudly narrating your day on a phone call in the quiet carriage isn't rudeness, it's believing 40 strangers are invested in your afternoon."
+    }
+  },
+  {
+    "id": "double-texter",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Renvoyer un message si on répond pas en 5 min",
+      "en": "Double-texting after 5 minutes"
+    },
+    "emoji": "📩",
+    "debateStarter": {
+      "fr": "Renvoyer « ??? » cinq minutes après un message non lu, c'est pas de l'impatience, c'est une demande de rançon affective. Quelqu'un ici le fait.",
+      "en": "Sending '???' five minutes after an unread text isn't impatience, it's an emotional ransom note. Someone in this room sends those."
+    }
+  },
+  {
+    "id": "garder-la-lumiere-allumee",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Laisser les lumières allumées partout",
+      "en": "Leaving every light on"
+    },
+    "emoji": "💡",
+    "debateStarter": {
+      "fr": "Laisser toutes les lumières allumées dans une pièce vide contre éteindre derrière les gens en soupirant : deux camps, une facture, zéro paix conjugale.",
+      "en": "Leaving every light on in an empty room versus turning them off behind people with a sigh: two camps, one bill, zero domestic peace."
+    }
+  },
+  {
+    "id": "garder-les-piles-dans-le-tiroir",
+    "optionA": {
+      "fr": "De gauche",
+      "en": "Left-coded"
+    },
+    "optionB": {
+      "fr": "De droite",
+      "en": "Right-coded"
+    },
+    "prompt": {
+      "fr": "Le tiroir de piles à moitié mortes",
+      "en": "The drawer of half-dead batteries"
+    },
+    "emoji": "🔋",
+    "debateStarter": {
+      "fr": "Garder un tiroir de piles à moitié mortes « on sait jamais », c'est pas de l'économie, c'est repousser une décision qu'on prendra jamais. Lâche les piles.",
+      "en": "A drawer of half-dead batteries kept 'just in case' isn't thrift, it's postponing a decision you'll never make. Let the batteries go."
     }
   }
 ] },

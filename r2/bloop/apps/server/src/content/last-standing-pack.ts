@@ -1627,6 +1627,484 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
       "N"
     ],
     "difficulty": 1
+  },
+  {
+    "id": "jdt-grouptchat-109",
+    "theme": {
+      "fr": "Un nom de groupe WhatsApp. Le vôtre s'appelle encore « Soirée 2019 » et personne y parle.",
+      "en": "A group chat name. Yours is still 'Squad 2k19' and it's been silent for two years."
+    },
+    "letters": [
+      "L",
+      "T",
+      "S",
+      "B",
+      "C",
+      "G",
+      "F",
+      "M"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-pseudo-110",
+    "theme": {
+      "fr": "Un mot dans le pseudo que t'avais à 13 ans. On le ressortira au mariage.",
+      "en": "A word from the username you had at 13. It's coming out at your wedding."
+    },
+    "letters": [
+      "X",
+      "D",
+      "L",
+      "S",
+      "N",
+      "B",
+      "C",
+      "P"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-notif-111",
+    "theme": {
+      "fr": "Une notif que t'ouvres jamais. Y'en a 4000 et ça te fait zéro stress.",
+      "en": "A notification you never open. 4,000 unread and you sleep fine."
+    },
+    "letters": [
+      "M",
+      "S",
+      "L",
+      "P",
+      "B",
+      "A",
+      "C",
+      "N"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-onglet-112",
+    "theme": {
+      "fr": "Un onglet ouvert sur ton tel depuis trois semaines que tu rouvriras jamais",
+      "en": "A browser tab open for three weeks that you will never reopen"
+    },
+    "letters": [
+      "R",
+      "P",
+      "V",
+      "A",
+      "C",
+      "M",
+      "T",
+      "S"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-excuse-quitter-113",
+    "theme": {
+      "fr": "L'excuse que tu sors pour quitter une soirée pourrie. Celle d'hier marche encore.",
+      "en": "The excuse you use to bail on a dead party. Yesterday's still works."
+    },
+    "letters": [
+      "B",
+      "T",
+      "C",
+      "M",
+      "D",
+      "L"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-feraitpas-114",
+    "theme": {
+      "fr": "Un truc que tout le monde a fait mais que personne avoue. Toi le premier, là.",
+      "en": "Something everyone's done but nobody admits. You're doing it right now."
+    },
+    "letters": [
+      "P",
+      "M",
+      "S",
+      "G",
+      "C",
+      "L",
+      "F"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-revend-115",
+    "theme": {
+      "fr": "Un cadeau que t'as revendu en ligne. Le tag « jamais servi » mentait.",
+      "en": "A gift you flipped online. The 'never used' tag was a lie."
+    },
+    "letters": [
+      "B",
+      "C",
+      "P",
+      "L",
+      "M",
+      "T",
+      "S"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-mensonge-cv-116",
+    "theme": {
+      "fr": "Un truc gonflé sur ton CV. « Niveau intermédiaire » = deux clics et Google Traduction.",
+      "en": "Something inflated on your CV. 'Conversational' means two phrases and Google Translate."
+    },
+    "letters": [
+      "E",
+      "N",
+      "P",
+      "L",
+      "M",
+      "G",
+      "C"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-derniere-recherche-117",
+    "theme": {
+      "fr": "Une recherche Google de honteux. La tienne d'hier soir s'affiche sur la TV dans 3 secondes.",
+      "en": "An embarrassing Google search. Yours from last night hits the living-room TV in three seconds."
+    },
+    "letters": [
+      "C",
+      "P",
+      "S",
+      "D",
+      "T"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-roadtrip-118",
+    "theme": {
+      "fr": "Un truc du road trip où le GPS vous a lâchés au pire moment",
+      "en": "Something from the road trip where the GPS died at the worst moment"
+    },
+    "letters": [
+      "S",
+      "C",
+      "P",
+      "R",
+      "B",
+      "G"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-poche-veste-119",
+    "theme": {
+      "fr": "Un truc oublié dans une poche de veste que tu retrouves un an plus tard",
+      "en": "Something forgotten in a coat pocket you find a year later"
+    },
+    "letters": [
+      "B",
+      "T",
+      "M",
+      "C",
+      "G",
+      "L"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-arnaque-120",
+    "theme": {
+      "fr": "Un truc surcoté pour lequel les gens font la queue. T'as fait la queue.",
+      "en": "An overrated thing people queue for. You queued."
+    },
+    "letters": [
+      "B",
+      "C",
+      "M",
+      "F",
+      "S",
+      "T",
+      "P"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-emoji-121",
+    "theme": {
+      "fr": "Un truc que tu remplaces par un emoji parce que t'as la flemme du mot",
+      "en": "A thing you replace with an emoji because typing the word is too much effort"
+    },
+    "letters": [
+      "C",
+      "F",
+      "P",
+      "M",
+      "A",
+      "S",
+      "L"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-talent-inutile-122",
+    "theme": {
+      "fr": "Un talent totalement inutile dont quelqu'un ici est bizarrement fier",
+      "en": "A completely useless talent someone here is weirdly proud of"
+    },
+    "letters": [
+      "S",
+      "C",
+      "R",
+      "B",
+      "M",
+      "D"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-meteo-bizarre-123",
+    "theme": {
+      "fr": "Un truc que tu portes alors qu'il fait clairement pas la bonne température dehors",
+      "en": "Something you wear when the weather clearly disagrees with your outfit"
+    },
+    "letters": [
+      "S",
+      "T",
+      "C",
+      "D",
+      "B"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-souvenir-honte-124",
+    "theme": {
+      "fr": "Un truc que t'as crié dans ton sommeil. Quelqu'un l'a entendu. Quelqu'un est ici.",
+      "en": "Something you've shouted in your sleep. Someone heard it. Someone is in this room."
+    },
+    "letters": [
+      "N",
+      "S",
+      "M",
+      "P",
+      "C",
+      "R",
+      "T"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-objet-perdu-bus-125",
+    "theme": {
+      "fr": "Un truc que t'as laissé dans le bus et que tu reverras jamais",
+      "en": "Something you left on the bus that you'll never see again"
+    },
+    "letters": [
+      "P",
+      "S",
+      "C",
+      "G",
+      "B"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-bouton-panique-126",
+    "theme": {
+      "fr": "Un truc que tu cliques « plus tard » à chaque fois, depuis toujours",
+      "en": "Something you've clicked 'remind me later' on since the dawn of time"
+    },
+    "letters": [
+      "S",
+      "C",
+      "P",
+      "R",
+      "I",
+      "T"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-radin-127",
+    "theme": {
+      "fr": "Un truc sur lequel quelqu'un ici est radin alors qu'il claque 5 € en café chaque matin",
+      "en": "Something someone here is stingy about while dropping a fiver on coffee every morning"
+    },
+    "letters": [
+      "P",
+      "C",
+      "T",
+      "R",
+      "L",
+      "B"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-photo-jamais-postee-128",
+    "theme": {
+      "fr": "Un truc que t'as pris en photo 40 fois et jamais posté. Le téléphone est plein.",
+      "en": "Something you've photographed 40 times and never posted. The phone is full."
+    },
+    "letters": [
+      "C",
+      "S",
+      "P",
+      "N",
+      "M",
+      "F",
+      "L"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-jamais-fini-129",
+    "theme": {
+      "fr": "Un truc que t'as commencé en grande pompe et jamais fini. Le jury sait lequel.",
+      "en": "Something you started with huge energy and never finished. The jury knows which."
+    },
+    "letters": [
+      "L",
+      "S",
+      "P",
+      "M",
+      "T",
+      "C",
+      "F"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-supermarche-impulse-130",
+    "theme": {
+      "fr": "Un truc que t'achètes en caisse alors que t'avais rien prévu. À chaque fois.",
+      "en": "Something you grab at the till that wasn't on the list. Every single time."
+    },
+    "letters": [
+      "C",
+      "B",
+      "M",
+      "G",
+      "P",
+      "T",
+      "S",
+      "L"
+    ],
+    "difficulty": 1
+  },
+  {
+    "id": "jdt-voisin-bruit-131",
+    "theme": {
+      "fr": "Un bruit du voisin du dessus à 23h. Tu connais le rythme par cœur maintenant.",
+      "en": "A sound from the upstairs neighbour at 11pm. You know the rhythm by heart now."
+    },
+    "letters": [
+      "M",
+      "T",
+      "B",
+      "D"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-pari-stupide-132",
+    "theme": {
+      "fr": "Un pari débile que quelqu'un ici a tenu jusqu'au bout. On a la vidéo.",
+      "en": "A stupid bet someone here actually went through with. There is footage."
+    },
+    "letters": [
+      "S",
+      "C",
+      "B",
+      "T",
+      "R",
+      "D",
+      "P"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-cantine-133",
+    "theme": {
+      "fr": "Un truc de la cantine que t'as fait semblant d'aimer pendant dix ans",
+      "en": "A school-canteen thing you pretended to like for ten years"
+    },
+    "letters": [
+      "P",
+      "C",
+      "S",
+      "F",
+      "B"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-rentre-tard-134",
+    "theme": {
+      "fr": "Un truc que tu fais en rentrant bourré à 4h. Discrétion : zéro.",
+      "en": "Something you do walking in drunk at 4am. Stealth level: zero."
+    },
+    "letters": [
+      "F",
+      "M",
+      "C",
+      "T",
+      "P",
+      "D",
+      "R",
+      "S"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-promesse-135",
+    "theme": {
+      "fr": "Un truc que t'as juré de faire « demain » depuis six mois. Le jury attend.",
+      "en": "Something you've sworn to do 'tomorrow' for six months. The jury is waiting."
+    },
+    "letters": [
+      "M",
+      "L",
+      "S",
+      "C",
+      "A",
+      "T",
+      "D"
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "jdt-cadeau-derniere-minute-136",
+    "theme": {
+      "fr": "Un cadeau que t'achètes 20 minutes avant l'anniv, à la station-service",
+      "en": "A gift you buy 20 minutes before the party, from a petrol station"
+    },
+    "letters": [
+      "C",
+      "B",
+      "F",
+      "P",
+      "M",
+      "S"
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "jdt-bouton-cousu-137",
+    "theme": {
+      "fr": "Un truc cassé chez toi que tu « répareras » jamais et que t'as appris à contourner",
+      "en": "Something broken at home you'll 'fix' never and have learned to live around"
+    },
+    "letters": [
+      "C",
+      "S",
+      "T",
+      "L"
+    ],
+    "difficulty": 3
   }
 ] },
 };

@@ -7,8 +7,8 @@ import { expectSilence, expectTracerView, sendJson, startTracer } from './helper
 
 /** Simulate eviction: drop the in-memory runtime cache — the next touch MUST rebuild from storage alone. (Test-only reach into a private field.) */
 const evict = (i: RoomDO) => { (i as unknown as { game: unknown }).game = null; };
-/** Test-only reach into the private rehydrate(). */
-const rehydrated = (i: RoomDO) => (i as unknown as { rehydrate(): { state: TracerState } | null }).rehydrate();
+/** Test-only reach into the private (now async, R2-loading) rehydrate(). */
+const rehydrated = (i: RoomDO) => (i as unknown as { rehydrate(): Promise<{ state: TracerState } | null> }).rehydrate();
 
 describe('rehydration chaos (design §5.2 + review C1)', () => {
   it('ballots cast before eviction shape the round after it (replay-from-zero equivalence)', async () => {
@@ -42,9 +42,9 @@ describe('rehydration chaos (design §5.2 + review C1)', () => {
     const { code, socks, welcomes } = await startTracer(['Anna', 'Bert']);
     sendJson(socks[0]!, { type: 'action', payload: { kind: 'vote', target: welcomes[1]!.playerId } });
     for (const s of socks) await expectTracerView(s);
-    await runInDurableObject(env.ROOM.getByName(code), (i) => {
+    await runInDurableObject(env.ROOM.getByName(code), async (i) => {
       evict(i);
-      const rt = rehydrated(i);
+      const rt = await rehydrated(i);
       expect(rt).not.toBeNull();
       expect(Object.getPrototypeOf(rt!.state.votes)).toBeNull();
       expect(Object.getPrototypeOf(rt!.state.scores)).toBeNull();
@@ -59,8 +59,8 @@ describe('rehydration chaos (design §5.2 + review C1)', () => {
     sendJson(socks[0]!, { type: 'action', payload: { kind: 'vote', target: '__proto__' } }); // passes zod (any string); the module rejects non-roster targets by reference
     await expectSilence(socks[0]!);
     expect(socks[1]!.drain()).toEqual([]);
-    await runInDurableObject(stub, (i) => {
-      const rt = rehydrated(i);
+    await runInDurableObject(stub, async (i) => {
+      const rt = await rehydrated(i);
       expect((rt!.state.votes as Record<string, unknown>)['__proto__']).toBeUndefined();
       expect(({} as Record<string, unknown>)['polluted']).toBeUndefined(); // global prototype untouched
     });

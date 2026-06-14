@@ -1,10 +1,20 @@
 import type { Effect, GameModule, PlayerId, ReduceResult } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { emptyPlayerMap, scoreDelta } from '@bloop/kit';
+import {
+  emptyPlayerMap,
+  isCloseFinish,
+  mvp,
+  nextStreak,
+  roundMultiplier,
+  scoreDelta,
+  statLeaders,
+  topGap,
+} from '@bloop/kit';
 import {
   DEFAULT_CONFIG,
   type TracerAction,
   type TracerConfig,
+  type TracerEpilogue,
   type TracerPrompt,
   type TracerState,
   type TracerView,
@@ -50,17 +60,72 @@ function designatedTargets(state: TracerState): PlayerId[] {
 }
 
 /**
- * The post-round scoreboard: `+1` to every designated player. PURE — does not
- * mutate `state.scores`; the caller decides whether/when to commit it. The
- * deferred-scoring keystone (CC-3): `resolveReveal` computes this but holds it,
- * `resolveVerdict` commits it, so the number visibly CLIMBS at the slam.
+ * CC-2 — the score multiplier in effect for `state.round`. Pure delegation to
+ * the kit `roundMultiplier`, which DEFAULTS TO IDENTITY (×1): with no config
+ * opts it returns 1, so the award path is byte-for-byte the legacy `+1` and
+ * every existing exact-score test stays green. Only an explicit
+ * `finalRoundMultiplier` (with `multiplierRounds` / `doubleFromRound`) re-weights
+ * the climax round. Deterministic — inputs only, no RNG, no wall clock.
+ */
+function activeMultiplier(state: TracerState): number {
+  return roundMultiplier(state.round, state.config.totalRounds, {
+    finalRoundMultiplier: state.config.finalRoundMultiplier,
+    multiplierRounds: state.config.multiplierRounds,
+    doubleFromRound: state.config.doubleFromRound,
+  });
+}
+
+/**
+ * The post-round scoreboard: `+1 × roundMultiplier` to every designated player.
+ * PURE — does not mutate `state.scores`; the caller decides whether/when to
+ * commit it. The deferred-scoring keystone (CC-3): `resolveReveal` computes this
+ * but holds it, `resolveVerdict` commits it, so the number visibly CLIMBS at the
+ * slam. The CC-2 multiplier defaults to ×1 (identity) so the legacy `+1` award
+ * is unchanged unless a config opts into late-round weighting.
  */
 function awardedScores(state: TracerState): Record<PlayerId, number> {
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+  const award = activeMultiplier(state);
   for (const p of designatedTargets(state)) {
-    scores[p] = (scores[p] ?? 0) + 1;
+    scores[p] = (scores[p] ?? 0) + award;
   }
   return scores;
+}
+
+/**
+ * CC-5 — advance the public hot-seat streaks at the verdict slam (kit
+ * `nextStreak`): each designated player's consecutive-designation `current`
+ * increments and `best` keeps their longest run; everyone else resets to 0.
+ * Derived from the already-public `designated` set — no new secret. PURE.
+ */
+function advanceHotStreaks(state: TracerState): TracerState['hotStreaks'] {
+  const designated = new Set(designatedTargets(state));
+  const next: TracerState['hotStreaks'] = {};
+  for (const p of state.players) {
+    const prev = state.hotStreaks[p] ?? { current: 0, best: 0 };
+    const current = nextStreak(prev.current, designated.has(p));
+    next[p] = { current, best: Math.max(prev.best, current) };
+  }
+  return next;
+}
+
+/**
+ * CC-5 — derive the over-view cliffhanger from ALREADY-PUBLIC end-of-match
+ * state: final `scores` (kit `isCloseFinish` / `topGap` / `mvp`) and the public
+ * hot-seat history (kit `statLeaders` over each player's `best`). No new secret;
+ * deterministic (the kit folds are stable-sorted). The threshold defaults to 1
+ * so a one-card crown reads as a nailbiter.
+ */
+function deriveEpilogue(state: TracerState): TracerEpilogue {
+  const best = emptyPlayerMap<number>();
+  for (const p of state.players) best[p] = state.hotStreaks[p]?.best ?? 0;
+  const threshold = state.config.closeFinishThreshold ?? 1;
+  return {
+    closeFinish: isCloseFinish(state.scores, threshold),
+    topGap: topGap(state.scores),
+    mvp: mvp(state.scores),
+    longestHotSeat: statLeaders(best),
+  };
 }
 
 /**
@@ -82,10 +147,13 @@ function resolveReveal(state: TracerState): ReduceResult<TracerState> {
  */
 function resolveVerdict(state: TracerState): ReduceResult<TracerState> {
   const scores = awardedScores(state);
+  // CC-5: advance public hot-seat streaks at the slam (from the public
+  // designation, computed before the streak update — order-independent).
+  const hotStreaks = advanceHotStreaks(state);
   const effects: Effect[] = [
     { type: 'analytics', name: 'round_revealed', props: { round: state.round } },
   ];
-  return { state: { ...state, revealStep: 'verdict', scores }, effects };
+  return { state: { ...state, revealStep: 'verdict', scores, hotStreaks }, effects };
 }
 
 function nextRound(state: TracerState): ReduceResult<TracerState> {
@@ -130,7 +198,11 @@ export function createTracer(
       const shuffled = shuffle(createRng(seed), prompts);
       const totalRounds = Math.min(baseConfig.totalRounds, shuffled.length);
       const scores = emptyPlayerMap<number>();
-      for (const p of players) scores[p] = 0;
+      const hotStreaks = emptyPlayerMap<{ current: number; best: number }>();
+      for (const p of players) {
+        scores[p] = 0;
+        hotStreaks[p] = { current: 0, best: 0 };
+      }
       return {
         config: { ...baseConfig, totalRounds },
         players: [...players],
@@ -140,6 +212,7 @@ export function createTracer(
         revealStep: null,
         votes: emptyPlayerMap<PlayerId>(),
         scores,
+        hotStreaks,
       };
     },
 
@@ -193,19 +266,32 @@ export function createTracer(
       if (state.phase === 'reveal') {
         const designated = designatedTargets(state);
         const isVerdict = state.revealStep === 'verdict';
+        // CC-2: the award per designated player THIS round (×1 unless weighted).
+        const award = activeMultiplier(state);
         // SUSPENSE: scores frozen at pre-round value, nothing awarded yet (empty
         // delta) so the client holds. VERDICT: state.scores already carries the
         // climbed total; reconstruct the pre-round scores (post minus this
-        // round's +1 to each designated player) so kit scoreDelta animates the
-        // honest climb. Derived from PUBLIC scores only — never leaks ballots.
+        // round's `award` to each designated player) so kit scoreDelta animates
+        // the honest climb — by the FULL weighted award, not a flat 1. Derived
+        // from PUBLIC scores only — never leaks ballots.
         let delta: Record<PlayerId, number> = emptyPlayerMap<number>();
         if (isVerdict) {
           const before = emptyPlayerMap<number>();
           const awarded = new Set(designated);
           for (const p of state.players) {
-            before[p] = (state.scores[p] ?? 0) - (awarded.has(p) ? 1 : 0);
+            before[p] = (state.scores[p] ?? 0) - (awarded.has(p) ? award : 0);
           }
           delta = scoreDelta(before, state.scores);
+        }
+        // CC-5: surface the live per-player current streak ONLY at verdict (the
+        // streak updates on the slam; at suspense it has not advanced yet, so we
+        // hold an empty map to match the "nothing has landed" suspense beat).
+        const hotSeat = emptyPlayerMap<number>();
+        if (isVerdict) {
+          for (const p of state.players) {
+            const c = state.hotStreaks[p]?.current ?? 0;
+            if (c > 0) hotSeat[p] = c;
+          }
         }
         return {
           phase: 'reveal',
@@ -216,10 +302,14 @@ export function createTracer(
           revealStep: isVerdict ? 'verdict' : 'suspense',
           delta,
           designated,
+          // CC-2: the multiplier in effect for THIS round (×1 unless weighted).
+          roundMultiplier: award,
+          hotSeat,
           scores: state.scores,
         };
       }
-      return { phase: 'over', scores: state.scores };
+      // CC-5: cliffhanger epilogue derived at 'over' from PUBLIC state only.
+      return { phase: 'over', scores: state.scores, cliffhanger: deriveEpilogue(state) };
     },
 
     phaseDurationMs(state) {

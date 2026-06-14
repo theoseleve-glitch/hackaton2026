@@ -7,11 +7,18 @@ import {
   emptySideBets,
   gameOver,
   initPresence,
+  isCloseFinish,
+  leaderboard,
+  mvp,
   nextActiveSeat,
   placeSideBet,
   redactSideBets,
   resolveSideBets,
+  roundMultiplier,
   setConnected,
+  statLeaders,
+  superlativeWinners,
+  topGap,
 } from '@bloop/kit';
 import type {
   CurrentDraw,
@@ -19,6 +26,7 @@ import type {
   LastStandingAction,
   LastStandingConfig,
   LastStandingContent,
+  LastStandingEpilogue,
   LastStandingItem,
   LastStandingState,
   LastStandingView,
@@ -237,19 +245,39 @@ function drawRound(state: LastStandingState, round: number): Result {
 }
 
 /**
- * Crown the survivor(s): +survivorPoints to the last one standing — cap case:
- * every still-alive player gets it; zero survivors: no bonus. Emits
- * 'round_completed' (the shell's interstitial-ad boundary).
+ * P1 comeback rebalance (CC-2). The survivor crown for THIS round, escalated by
+ * the late-round multiplier so a later survival is worth more than an early one.
+ * DEFAULT IDENTITY: with no `survivorRoundMultiplier` opt, `roundMultiplier`
+ * returns 1 and this is exactly `survivorPoints` — every existing exact-score
+ * test stays byte-for-byte green. Rounded to keep the crown an integer.
+ */
+function survivorCrown(config: LastStandingConfig, round: number): number {
+  const mult = roundMultiplier(round, config.totalRounds, config.survivorRoundMultiplier);
+  return Math.round(config.survivorPoints * mult);
+}
+
+/**
+ * Crown the survivor(s): +survivorCrown (the round-escalated survivorPoints) to
+ * the last one standing — cap case: every still-alive player gets it; zero
+ * survivors: no bonus. Each winner's roundsSurvived counter ticks up (CC-5
+ * superlative signal, exposed only at 'over'). Emits 'round_completed' (the
+ * shell's interstitial-ad boundary).
  */
 function endRound(state: LastStandingState): Result {
   const winners = aliveOf(state);
+  const crown = survivorCrown(state.config, state.round);
   let scores = state.scores;
-  if (winners.length > 0 && state.config.survivorPoints !== 0) {
-    scores = Object.assign(emptyPlayerMap<number>(), state.scores);
-    for (const w of winners) scores[w] = (scores[w] ?? 0) + state.config.survivorPoints;
+  let roundsSurvived = state.roundsSurvived;
+  if (winners.length > 0) {
+    roundsSurvived = Object.assign(emptyPlayerMap<number>(), state.roundsSurvived);
+    for (const w of winners) roundsSurvived[w] = (roundsSurvived[w] ?? 0) + 1;
+    if (crown !== 0) {
+      scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+      for (const w of winners) scores[w] = (scores[w] ?? 0) + crown;
+    }
   }
   return {
-    state: { ...state, phase: 'roundEnd', roundWinners: winners, scores },
+    state: { ...state, phase: 'roundEnd', roundWinners: winners, scores, roundsSurvived },
     effects: [{ type: 'analytics', name: 'round_completed', props: { round: state.round } }],
   };
 }
@@ -284,6 +312,45 @@ function buildDeck(seed: string, config: LastStandingConfig, items: readonly Las
 }
 
 /**
+ * P1 cliffhanger / superlative epilogue (CC-5). Derived ONLY at 'over' from
+ * already-PUBLIC state — scores, the public per-player roundsSurvived counter,
+ * and the final round's roundWinners. NO new in-match secret, NO RNG, NO
+ * wall-clock: every helper is the kit's stable (descending-score then
+ * ascending-id) epilogue derivation, so the payload is replay-identical.
+ *
+ * - closeFinish threshold = the actual FINAL-round survivor crown (the
+ *   round-escalated survivorPoints): the finish is "close" when the top-2 gap is
+ *   at most one last survival — i.e. the runner-up was one crown from the win.
+ * - lastOneStanding is the SOLE survivor of the final round (roundWinners has
+ *   exactly one): the cap/duel/tie cases (0 or >1 winners) have no single
+ *   last-one-standing, so it is null there.
+ */
+function deriveEpilogue(state: LastStandingState): LastStandingEpilogue {
+  const board = leaderboard(state.scores);
+  const leaderId = board.length > 0 ? board[0]!.playerId : null;
+  // First entry whose rank is 2 = the clear runner-up; null when the top is tied
+  // (no distinct runner-up) or there is no second rank.
+  const runnerUp = board.find((e) => e.rank === 2);
+  const finalCrown = survivorCrown(state.config, state.config.totalRounds - 1);
+  // A 0/negative crown can't drive a "one survival away" cliffhanger — fall back
+  // to an exact tie so closeFinish stays meaningful.
+  const closeThreshold = finalCrown > 0 ? finalCrown : 0;
+  return {
+    mvp: mvp(state.scores),
+    leaderId,
+    runnerUpId: runnerUp?.playerId ?? null,
+    topGap: topGap(state.scores),
+    closeFinish: isCloseFinish(state.scores, closeThreshold),
+    survivedAllRounds: superlativeWinners(
+      state.roundsSurvived,
+      (v) => v >= state.config.totalRounds,
+    ),
+    longestSurvivalStreak: statLeaders(state.roundsSurvived),
+    lastOneStanding: state.roundWinners.length === 1 ? state.roundWinners[0]! : null,
+  };
+}
+
+/**
  * LAST_STANDING: turn-based survival-verdict battle royale (wave-2 design
  * 2.14, jeu-du-theme). Theme + letter per round; survivors SHOUT a word under
  * a decaying shot clock; the room thumbs-votes; fail/timeout/leave =
@@ -306,11 +373,13 @@ export function createLastStanding(
       const scores = emptyPlayerMap<number>();
       const betPoints = emptyPlayerMap<number>();
       const wordsValidated = emptyPlayerMap<number>();
+      const roundsSurvived = emptyPlayerMap<number>();
       const alive = emptyPlayerMap<boolean>();
       for (const p of players) {
         scores[p] = 0;
         betPoints[p] = 0;
         wordsValidated[p] = 0;
+        roundsSurvived[p] = 0;
         alive[p] = true;
       }
       const base: LastStandingState = {
@@ -338,6 +407,7 @@ export function createLastStanding(
         scores,
         betPoints,
         wordsValidated,
+        roundsSurvived,
       };
       return drawRound(base, 0).state;
     },
@@ -435,6 +505,7 @@ export function createLastStanding(
           rotation: state.rotation,
           wordsValidated: state.wordsValidated,
           betPoints: state.betPoints,
+          epilogue: deriveEpilogue(state),
         };
       }
       // Never expose: deck/themeCursor (upcoming themes), usedLetters, the
@@ -489,7 +560,9 @@ export function createLastStanding(
           ...base,
           phase: 'roundEnd',
           roundWinners: state.roundWinners,
-          pointsAwarded: state.roundWinners.length > 0 ? state.config.survivorPoints : 0,
+          // The ACTUAL crown just paid (CC-2 round-escalated). Identity-equal to
+          // survivorPoints under the default config.
+          pointsAwarded: state.roundWinners.length > 0 ? survivorCrown(state.config, state.round) : 0,
         };
       }
       if (state.phase === 'result') return { ...base, phase: 'result' };

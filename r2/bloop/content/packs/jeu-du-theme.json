@@ -947,6 +947,627 @@
       "spicy": 0,
       "tags": ["nourriture"],
       "exampleWords": { "fr": ["pizza", "frites", "sandwich", "chips", "burger", "nuggets"], "en": ["pizza", "fries", "sushi", "cookies", "burrito", "wings"] }
+    },
+    {
+      "id": "jdt-grouptchat-109",
+      "theme": { "fr": "Un nom de groupe WhatsApp. Le vôtre s'appelle encore « Soirée 2019 » et personne y parle.", "en": "A group chat name. Yours is still 'Squad 2k19' and it's been silent for two years." },
+      "letters": { "fr": ["L", "T", "S", "B", "C", "G", "F", "M"], "en": ["T", "S", "B", "C", "G", "F", "M", "L"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["les boys", "team apéro", "famille", "coloc", "girls", "mariage de Théo"], "en": ["the boys", "brunch crew", "family", "flatmates", "girls", "fantasy league"] }
+    },
+    {
+      "id": "jdt-pseudo-110",
+      "theme": { "fr": "Un mot dans le pseudo que t'avais à 13 ans. On le ressortira au mariage.", "en": "A word from the username you had at 13. It's coming out at your wedding." },
+      "letters": { "fr": ["X", "D", "L", "S", "N", "B", "C", "P"], "en": ["X", "D", "L", "S", "N", "B", "C", "P"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "pop"],
+      "exampleWords": { "fr": ["xX", "dark", "loup", "ninja", "swag", "pro"], "en": ["xX", "dark", "wolf", "ninja", "swag", "pro"] }
+    },
+    {
+      "id": "jdt-notif-111",
+      "theme": { "fr": "Une notif que t'ouvres jamais. Y'en a 4000 et ça te fait zéro stress.", "en": "A notification you never open. 4,000 unread and you sleep fine." },
+      "letters": { "fr": ["M", "S", "L", "P", "B", "A", "C", "N"], "en": ["M", "S", "L", "P", "B", "A", "C", "N"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["mails", "snaps", "LinkedIn", "pub", "appli banque", "candy crush"], "en": ["emails", "snaps", "LinkedIn", "promos", "banking app", "Candy Crush"] }
+    },
+    {
+      "id": "jdt-onglet-112",
+      "theme": { "fr": "Un onglet ouvert sur ton tel depuis trois semaines que tu rouvriras jamais", "en": "A browser tab open for three weeks that you will never reopen" },
+      "letters": { "fr": ["R", "P", "V", "A", "C", "M", "T", "S"], "en": ["R", "P", "V", "A", "C", "M", "T", "S"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["recette", "panier Vinted", "article", "match", "vol pas réservé", "tuto"], "en": ["recipe", "Vinted basket", "article", "match", "flight never booked", "tutorial"] }
+    },
+    {
+      "id": "jdt-excuse-quitter-113",
+      "theme": { "fr": "L'excuse que tu sors pour quitter une soirée pourrie. Celle d'hier marche encore.", "en": "The excuse you use to bail on a dead party. Yesterday's still works." },
+      "letters": { "fr": ["F", "B", "T", "C", "M", "D", "R", "L"], "en": ["W", "B", "T", "C", "M", "D", "L", "S"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["fatigué", "boulot demain", "le train", "le chat", "mal de tête", "le dernier métro"], "en": ["work tomorrow", "the train", "tired", "the dog", "headache", "last bus"] }
+    },
+    {
+      "id": "jdt-feraitpas-114",
+      "theme": { "fr": "Un truc que tout le monde a fait mais que personne avoue. Toi le premier, là.", "en": "Something everyone's done but nobody admits. You're doing it right now." },
+      "letters": { "fr": ["P", "M", "S", "R", "G", "C", "L", "F"], "en": ["P", "S", "G", "C", "L", "F", "T", "M"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["pleurer en voiture", "mater son ex", "google ses symptômes", "se reparler à soi-même", "lire les conversations", "faire pipi sous la douche"], "en": ["cry in the car", "stalk an ex", "google symptoms", "talk to yourself", "reread old texts", "pee in the shower"] }
+    },
+    {
+      "id": "jdt-revend-115",
+      "theme": { "fr": "Un cadeau que t'as revendu en ligne. Le tag « jamais servi » mentait.", "en": "A gift you flipped online. The 'never used' tag was a lie." },
+      "letters": { "fr": ["B", "C", "P", "L", "M", "T", "E", "S"], "en": ["C", "P", "M", "T", "S", "B", "G", "L"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["bougie", "coffret", "pull", "livre", "mug", "écharpe"], "en": ["candle", "perfume set", "mug", "jumper", "book", "gift card"] }
+    },
+    {
+      "id": "jdt-mensonge-cv-116",
+      "theme": { "fr": "Un truc gonflé sur ton CV. « Niveau intermédiaire » = deux clics et Google Traduction.", "en": "Something inflated on your CV. 'Conversational' means two phrases and Google Translate." },
+      "letters": { "fr": ["A", "E", "N", "P", "L", "M", "G", "C"], "en": ["E", "N", "P", "L", "M", "G", "C", "T"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "travail"],
+      "exampleWords": { "fr": ["anglais", "Excel", "négociation", "leadership", "ponctualité", "gestion du stress"], "en": ["English", "Excel", "negotiation", "leadership", "punctual", "team player"] }
+    },
+    {
+      "id": "jdt-derniere-recherche-117",
+      "theme": { "fr": "Une recherche Google de honteux. La tienne d'hier soir s'affiche sur la TV dans 3 secondes.", "en": "An embarrassing Google search. Yours from last night hits the living-room TV in three seconds." },
+      "letters": { "fr": ["C", "P", "S", "D", "M", "E", "Q", "T"], "en": ["H", "P", "S", "D", "W", "C", "I", "T"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["symptômes", "comment dire", "prix", "définition", "météo", "ex célèbre"], "en": ["symptoms", "how to say", "price of", "definition", "is it normal", "celebrity age"] }
+    },
+    {
+      "id": "jdt-roadtrip-118",
+      "theme": { "fr": "Un truc du road trip où le GPS vous a lâchés au pire moment", "en": "Something from the road trip where the GPS died at the worst moment" },
+      "letters": { "fr": ["S", "C", "P", "A", "R", "E", "B", "G"], "en": ["S", "C", "P", "R", "B", "G", "M", "T"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["voyage", "vacances"],
+      "exampleWords": { "fr": ["station-service", "playlist", "péage", "aire d'autoroute", "ronds-points", "sandwich triste"], "en": ["petrol station", "playlist", "tolls", "snacks", "roundabouts", "sad sandwich"] }
+    },
+    {
+      "id": "jdt-poche-veste-119",
+      "theme": { "fr": "Un truc oublié dans une poche de veste que tu retrouves un an plus tard", "en": "Something forgotten in a coat pocket you find a year later" },
+      "letters": { "fr": ["B", "T", "M", "P", "C", "E", "G", "L"], "en": ["T", "R", "C", "G", "L", "M", "B", "K"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["billet", "ticket", "mouchoir", "pièce", "chewing-gum", "écouteur"], "en": ["tenner", "receipt", "tissue", "coin", "gum", "earbud"] }
+    },
+    {
+      "id": "jdt-arnaque-120",
+      "theme": { "fr": "Un truc surcoté pour lequel les gens font la queue. T'as fait la queue.", "en": "An overrated thing people queue for. You queued." },
+      "letters": { "fr": ["B", "C", "M", "F", "S", "R", "T", "P"], "en": ["B", "C", "F", "S", "T", "P", "M", "A"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["brunch", "bubble tea", "macarons", "le iPhone", "festival", "resto à la mode"], "en": ["brunch", "bubble tea", "festivals", "the new iPhone", "trainers drop", "viral cookie"] }
+    },
+    {
+      "id": "jdt-emoji-121",
+      "theme": { "fr": "Un truc que tu remplaces par un emoji parce que t'as la flemme du mot", "en": "A thing you replace with an emoji because typing the word is too much effort" },
+      "letters": { "fr": ["C", "F", "P", "R", "M", "A", "S", "L"], "en": ["F", "C", "L", "H", "S", "M", "P", "A"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["cœur", "feu", "pleure", "rire", "mort de rire", "applaudir"], "en": ["fire", "crying", "laughing", "heart", "skull", "praying"] }
+    },
+    {
+      "id": "jdt-talent-inutile-122",
+      "theme": { "fr": "Un talent totalement inutile dont quelqu'un ici est bizarrement fier", "en": "A completely useless talent someone here is weirdly proud of" },
+      "letters": { "fr": ["S", "C", "I", "R", "B", "M", "D", "L"], "en": ["W", "C", "B", "R", "M", "S", "D", "T"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["siffler", "claquer des doigts", "imiter", "réciter l'alphabet à l'envers", "bouger les oreilles", "lécher son coude"], "en": ["whistling", "burping the alphabet", "wiggling ears", "rolling tongue", "doing impressions", "cracking knuckles"] }
+    },
+    {
+      "id": "jdt-meteo-bizarre-123",
+      "theme": { "fr": "Un truc que tu portes alors qu'il fait clairement pas la bonne température dehors", "en": "Something you wear when the weather clearly disagrees with your outfit" },
+      "letters": { "fr": ["S", "T", "P", "C", "G", "D", "M", "B"], "en": ["S", "T", "C", "D", "H", "F", "B", "J"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["quotidien", "humour"],
+      "exampleWords": { "fr": ["short", "tongs", "pull", "doudoune", "débardeur", "bottes"], "en": ["shorts", "flip-flops", "hoodie", "coat", "sandals", "boots"] }
+    },
+    {
+      "id": "jdt-souvenir-honte-124",
+      "theme": { "fr": "Un truc que t'as crié dans ton sommeil. Quelqu'un l'a entendu. Quelqu'un est ici.", "en": "Something you've shouted in your sleep. Someone heard it. Someone is in this room." },
+      "letters": { "fr": ["N", "S", "M", "A", "P", "C", "R", "T"], "en": ["N", "S", "M", "P", "C", "R", "H", "T"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["un prénom", "stop", "maman", "au secours", "le code de la carte", "non"], "en": ["a name", "stop", "mum", "help", "a password", "no"] }
+    },
+    {
+      "id": "jdt-objet-perdu-bus-125",
+      "theme": { "fr": "Un truc que t'as laissé dans le bus et que tu reverras jamais", "en": "Something you left on the bus that you'll never see again" },
+      "letters": { "fr": ["P", "S", "C", "L", "E", "G", "B", "T"], "en": ["P", "S", "C", "G", "B", "U", "K", "H"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["voyage", "humour"],
+      "exampleWords": { "fr": ["parapluie", "sac", "clés", "livre", "écharpe", "gourde"], "en": ["umbrella", "bag", "scarf", "gloves", "book", "headphones"] }
+    },
+    {
+      "id": "jdt-bouton-panique-126",
+      "theme": { "fr": "Un truc que tu cliques « plus tard » à chaque fois, depuis toujours", "en": "Something you've clicked 'remind me later' on since the dawn of time" },
+      "letters": { "fr": ["M", "S", "A", "C", "P", "R", "I", "T"], "en": ["U", "S", "C", "P", "R", "I", "T", "B"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["mise à jour", "sauvegarde", "abonnement à résilier", "CGU", "rendez-vous dentiste", "impôts"], "en": ["software update", "cloud backup", "subscription cancel", "terms and conditions", "dentist booking", "taxes"] }
+    },
+    {
+      "id": "jdt-radin-127",
+      "theme": { "fr": "Un truc sur lequel quelqu'un ici est radin alors qu'il claque 5 € en café chaque matin", "en": "Something someone here is stingy about while dropping a fiver on coffee every morning" },
+      "letters": { "fr": ["P", "C", "T", "A", "E", "R", "L", "B"], "en": ["T", "C", "R", "P", "G", "B", "L", "D"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["pourboire", "cadeaux", "transports", "l'addition", "le rendu", "les rounds"], "en": ["tips", "rounds", "gifts", "the bill", "petrol money", "donations"] }
+    },
+    {
+      "id": "jdt-photo-jamais-postee-128",
+      "theme": { "fr": "Un truc que t'as pris en photo 40 fois et jamais posté. Le téléphone est plein.", "en": "Something you've photographed 40 times and never posted. The phone is full." },
+      "letters": { "fr": ["C", "S", "P", "A", "N", "M", "F", "L"], "en": ["S", "C", "P", "F", "L", "M", "N", "D"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "tech"],
+      "exampleWords": { "fr": ["coucher de soleil", "assiette", "nuages", "le chat", "selfie raté", "latte"], "en": ["sunset", "food", "clouds", "the cat", "failed selfie", "latte art"] }
+    },
+    {
+      "id": "jdt-jamais-fini-129",
+      "theme": { "fr": "Un truc que t'as commencé en grande pompe et jamais fini. Le jury sait lequel.", "en": "Something you started with huge energy and never finished. The jury knows which." },
+      "letters": { "fr": ["L", "S", "P", "R", "M", "T", "C", "F"], "en": ["B", "S", "P", "M", "C", "F", "T", "L"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["livre", "série", "puzzle", "régime", "musculation", "tricot"], "en": ["book", "series", "puzzle", "diet", "marathon plan", "language app"] }
+    },
+    {
+      "id": "jdt-supermarche-impulse-130",
+      "theme": { "fr": "Un truc que t'achètes en caisse alors que t'avais rien prévu. À chaque fois.", "en": "Something you grab at the till that wasn't on the list. Every single time." },
+      "letters": { "fr": ["C", "B", "M", "G", "P", "T", "S", "L"], "en": ["C", "G", "M", "S", "B", "T", "L", "P"] },
+      "difficulty": 1,
+      "spicy": 0,
+      "tags": ["nourriture", "quotidien"],
+      "exampleWords": { "fr": ["chewing-gum", "barre choco", "magazine", "piles", "briquet", "bonbons"], "en": ["chewing gum", "chocolate bar", "magazine", "batteries", "lighter", "sweets"] }
+    },
+    {
+      "id": "jdt-voisin-bruit-131",
+      "theme": { "fr": "Un bruit du voisin du dessus à 23h. Tu connais le rythme par cœur maintenant.", "en": "A sound from the upstairs neighbour at 11pm. You know the rhythm by heart now." },
+      "letters": { "fr": ["P", "M", "T", "A", "C", "B", "R", "D"], "en": ["F", "M", "T", "B", "D", "S", "V", "H"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "maison"],
+      "exampleWords": { "fr": ["pas lourds", "musique", "travaux", "aspirateur", "chaise traînée", "dispute"], "en": ["footsteps", "music", "drilling", "vacuum", "dragged chairs", "shouting"] }
+    },
+    {
+      "id": "jdt-pari-stupide-132",
+      "theme": { "fr": "Un pari débile que quelqu'un ici a tenu jusqu'au bout. On a la vidéo.", "en": "A stupid bet someone here actually went through with. There is footage." },
+      "letters": { "fr": ["M", "S", "C", "B", "T", "R", "D", "P"], "en": ["E", "S", "C", "B", "T", "R", "D", "P"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "social"],
+      "exampleWords": { "fr": ["manger un piment", "se raser le crâne", "courir nu", "boire la sauce", "tatouage", "plonger habillé"], "en": ["eat the chilli", "shave the head", "run outside", "drink the sauce", "get the tattoo", "jump in dressed"] }
+    },
+    {
+      "id": "jdt-cantine-133",
+      "theme": { "fr": "Un truc de la cantine que t'as fait semblant d'aimer pendant dix ans", "en": "A school-canteen thing you pretended to like for ten years" },
+      "letters": { "fr": ["P", "C", "E", "S", "F", "R", "H", "B"], "en": ["P", "C", "S", "F", "B", "M", "G", "T"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["ecole", "nourriture"],
+      "exampleWords": { "fr": ["purée", "chou-fleur", "épinards", "semoule", "flan", "betterave"], "en": ["mashed potato", "soggy chips", "beans", "mystery meat", "custard", "gravy"] }
+    },
+    {
+      "id": "jdt-rentre-tard-134",
+      "theme": { "fr": "Un truc que tu fais en rentrant bourré à 4h. Discrétion : zéro.", "en": "Something you do walking in drunk at 4am. Stealth level: zero." },
+      "letters": { "fr": ["F", "M", "C", "T", "P", "D", "R", "S"], "en": ["R", "M", "C", "T", "P", "D", "S", "F"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "fete"],
+      "exampleWords": { "fr": ["frigo", "musique", "texto à l'ex", "douche", "ranger", "parler fort"], "en": ["raid the fridge", "loud music", "text the ex", "shower", "tidy up", "talk loudly"] }
+    },
+    {
+      "id": "jdt-promesse-135",
+      "theme": { "fr": "Un truc que t'as juré de faire « demain » depuis six mois. Le jury attend.", "en": "Something you've sworn to do 'tomorrow' for six months. The jury is waiting." },
+      "letters": { "fr": ["R", "M", "L", "S", "C", "A", "T", "D"], "en": ["C", "M", "L", "S", "G", "A", "T", "D"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "quotidien"],
+      "exampleWords": { "fr": ["ranger", "rappeler mamie", "le dentiste", "le sport", "déclarer", "trier les mails"], "en": ["call grandma", "the dentist", "the gym", "laundry", "admin", "clear the inbox"] }
+    },
+    {
+      "id": "jdt-cadeau-derniere-minute-136",
+      "theme": { "fr": "Un cadeau que t'achètes 20 minutes avant l'anniv, à la station-service", "en": "A gift you buy 20 minutes before the party, from a petrol station" },
+      "letters": { "fr": ["C", "B", "F", "P", "M", "S", "R", "L"], "en": ["C", "F", "P", "S", "M", "W", "B", "G"] },
+      "difficulty": 2,
+      "spicy": 0,
+      "tags": ["humour", "fete"],
+      "exampleWords": { "fr": ["chocolats", "bougie", "fleurs", "porte-clés", "magnet", "savon"], "en": ["chocolates", "flowers", "scratch card", "sweets", "magnet", "weird wine"] }
+    },
+    {
+      "id": "jdt-bouton-cousu-137",
+      "theme": { "fr": "Un truc cassé chez toi que tu « répareras » jamais et que t'as appris à contourner", "en": "Something broken at home you'll 'fix' never and have learned to live around" },
+      "letters": { "fr": ["P", "R", "C", "S", "V", "T", "L", "I"], "en": ["D", "T", "C", "S", "L", "W", "H", "B"] },
+      "difficulty": 3,
+      "spicy": 0,
+      "tags": ["humour", "maison"],
+      "exampleWords": { "fr": ["poignée", "robinet", "store", "chasse d'eau", "volet", "interrupteur"], "en": ["door handle", "tap", "blind", "toilet flush", "light switch", "wobbly chair"] }
+    },
+    {
+      "id": "jdt-redflag-138",
+      "theme": { "fr": "Un red flag que t'as ignoré chez ton ex parce qu'il était mignon. Cite-le.", "en": "A red flag you ignored in your ex because they were hot. Name it." },
+      "letters": { "fr": ["J", "M", "P", "C", "R", "T", "A", "S"], "en": ["B", "M", "C", "R", "T", "A", "S", "L"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["jaloux", "menteur", "radin", "toujours en retard", "accroché à son ex", "snap secret"], "en": ["broke", "messy", "clingy", "always late", "still texts the ex", "lies about everything"] }
+    },
+    {
+      "id": "jdt-talkingstage-139",
+      "theme": { "fr": "Un truc qui tue une talking stage en un message. Quelqu'un ici l'a déjà envoyé.", "en": "Something that kills a talking stage in one text. Someone here has sent it." },
+      "letters": { "fr": ["W", "B", "P", "S", "M", "R", "C", "V"], "en": ["W", "P", "S", "M", "R", "C", "U", "G"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["wsh", "vocal de 4 min", "photo de pieds", "« t'es réveillé ? »", "fautes partout", "réponse à 3 jours"], "en": ["wyd at 2am", "wrong name", "4-min voice note", "no punctuation", "u up", "reply after 3 days"] }
+    },
+    {
+      "id": "jdt-finsta-140",
+      "theme": { "fr": "Un truc qu'on trouve sur le finsta secret de quelqu'un ici. On dira pas qui.", "en": "Something you'd find on someone's secret finsta. We won't say whose." },
+      "letters": { "fr": ["S", "P", "C", "V", "M", "T", "R", "B"], "en": ["S", "P", "C", "M", "T", "R", "B", "D"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["story sur l'ex", "screen de conversation", "vocal réécouté", "captures Tinder", "rant à 3h", "best secret"], "en": ["screenshots", "crush stalking", "petty rants", "Tinder caps", "subtweets", "drunk takes"] }
+    },
+    {
+      "id": "jdt-camera-roll-141",
+      "theme": { "fr": "Un truc dans ta pellicule que tu supprimerais avant de passer ton tel à ta mère", "en": "Something in your camera roll you'd delete before handing your phone to your mum" },
+      "letters": { "fr": ["S", "P", "C", "M", "T", "B", "D", "V"], "en": ["S", "P", "C", "M", "T", "D", "B", "N"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["screen de date", "selfie tard le soir", "captures gênantes", "memes douteux", "photo d'ex", "story alcoolisée"], "en": ["thirst traps", "late-night selfies", "screenshots", "spicy memes", "ex photos", "drunk videos"] }
+    },
+    {
+      "id": "jdt-situationship-142",
+      "theme": { "fr": "Un mot pour décrire ta situation amoureuse actuelle. « Compliqué » compte pas.", "en": "A word for your current love situation. 'It's complicated' doesn't count." },
+      "letters": { "fr": ["C", "S", "P", "T", "F", "R", "L", "M"], "en": ["S", "T", "C", "B", "L", "M", "G", "F"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["célibataire", "situationship", "plan", "talking stage", "friendzone", "ré-ex"], "en": ["single", "situationship", "talking stage", "back with the ex", "ghosting era", "fling"] }
+    },
+    {
+      "id": "jdt-sneaky-link-143",
+      "theme": { "fr": "Un lieu improbable pour un date discret. Quelqu'un ici a une histoire.", "en": "An unlikely spot for a discreet hookup. Someone here has a story." },
+      "letters": { "fr": ["P", "V", "T", "C", "B", "A", "S", "F"], "en": ["P", "C", "B", "A", "S", "T", "G", "L"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["parking", "voiture", "toilettes", "cave", "ascenseur", "festival"], "en": ["parking lot", "car", "club bathroom", "back of an Uber", "festival tent", "stairwell"] }
+    },
+    {
+      "id": "jdt-message-regret-144",
+      "theme": { "fr": "Un truc que t'as envoyé bourré et regretté à 8h. La capture circule.", "en": "Something you sent drunk and regretted by 8am. The screenshot is circulating." },
+      "letters": { "fr": ["T", "V", "P", "D", "M", "C", "S", "L"], "en": ["T", "V", "P", "D", "M", "C", "S", "N"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "fete"],
+      "exampleWords": { "fr": ["texto à l'ex", "vocal larmoyant", "déclaration", "photo", "« je t'aime »", "demande en ami"], "en": ["text to the ex", "voice note", "a confession", "a selfie", "'i miss u'", "a follow request"] }
+    },
+    {
+      "id": "jdt-tinder-bio-145",
+      "theme": { "fr": "Un cliché de bio Tinder qui te fait swipe à gauche direct. T'en as déjà mis un.", "en": "A Tinder-bio cliché that makes you swipe left instantly. You've used one." },
+      "letters": { "fr": ["V", "S", "F", "P", "C", "A", "M", "T"], "en": ["F", "S", "P", "C", "A", "M", "T", "G"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["voyages", "fan de sushis", "pas de prise de tête", "sportif", "« demande »", "team chien"], "en": ["fluent in sarcasm", "love to travel", "no drama", "gym rat", "dog person", "'ask me'"] }
+    },
+    {
+      "id": "jdt-ick-146",
+      "theme": { "fr": "Un détail minuscule qui te fait perdre toute attirance d'un coup. Le fameux ick.", "en": "A tiny detail that nukes all attraction instantly. The legendary ick." },
+      "letters": { "fr": ["C", "R", "M", "V", "P", "T", "S", "B"], "en": ["C", "R", "T", "S", "B", "L", "M", "G"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["court après le bus", "rit trop fort", "voix bizarre", "trébuche", "parle aux serveurs comme ça", "mange salement"], "en": ["chasing the bus", "baby voice", "rude to waiters", "trips over", "laughs too loud", "uses a tiny umbrella"] }
+    },
+    {
+      "id": "jdt-soft-launch-147",
+      "theme": { "fr": "Un truc qu'on poste pour « soft launch » sa nouvelle relation sans le dire", "en": "Something you post to soft-launch a new relationship without admitting it" },
+      "letters": { "fr": ["M", "B", "P", "C", "V", "S", "T", "O"], "en": ["H", "B", "P", "C", "S", "T", "D", "M"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["main floue", "deux cafés", "story tard le soir", "bras dans le cadre", "ombre", "playlist partagée"], "en": ["blurry hand", "two coffees", "shadow on the wall", "an arm in frame", "playlist", "matching mug"] }
+    },
+    {
+      "id": "jdt-body-count-debat-148",
+      "theme": { "fr": "Un sujet qui plombe un dîner entre couples en trois secondes. On le teste là ?", "en": "A topic that nukes a couples' dinner in three seconds. Shall we test it now?" },
+      "letters": { "fr": ["E", "A", "M", "F", "B", "J", "P", "R"], "en": ["E", "M", "F", "B", "P", "R", "K", "W"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["les ex", "l'argent", "le mariage", "fidélité", "belle-famille", "réseaux"], "en": ["exes", "money", "marriage", "kids", "the past", "who's right"] }
+    },
+    {
+      "id": "jdt-coloc-toxique-149",
+      "theme": { "fr": "Un truc de coloc qui justifierait un meurtre devant n'importe quel jury", "en": "A flatmate crime any jury in the world would call justified homicide" },
+      "letters": { "fr": ["V", "P", "C", "B", "F", "L", "D", "S"], "en": ["D", "B", "F", "L", "S", "P", "M", "T"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["maison", "humour"],
+      "exampleWords": { "fr": ["vaisselle abandonnée", "frigo pillé", "PQ jamais racheté", "bruit à 3h", "loyer en retard", "douche bouchée"], "en": ["dishes in the sink", "fridge theft", "never buys loo roll", "noise at 3am", "late rent", "clogged shower"] }
+    },
+    {
+      "id": "jdt-mauvais-plan-150",
+      "theme": { "fr": "Un endroit où t'as fini une soirée et que t'as juré de cacher à tes darons", "en": "A place a night out ended that you swore to hide from your parents" },
+      "letters": { "fr": ["P", "C", "B", "G", "T", "K", "M", "U"], "en": ["P", "C", "B", "G", "T", "K", "M", "S"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["fete", "humour"],
+      "exampleWords": { "fr": ["commissariat", "garde à vue", "urgences", "kebab à 5h", "canapé d'inconnu", "mauvais quartier"], "en": ["a police station", "A&E", "a stranger's sofa", "kebab shop at 5am", "the wrong city", "a stranger's bed"] }
+    },
+    {
+      "id": "jdt-gros-mytho-151",
+      "theme": { "fr": "Un mensonge que tout le monde raconte sur sa vie sexuelle ou amoureuse", "en": "A lie everyone tells about their love or sex life" },
+      "letters": { "fr": ["J", "C", "P", "T", "S", "M", "B", "L"], "en": ["I", "N", "P", "T", "S", "M", "B", "W"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["« je m'en fous de mon ex »", "le body count", "« on s'est juste parlé »", "premier date sans rien", "« je l'ai pas relancé »", "« j'ai pas stalké »"], "en": ["'i'm over my ex'", "the body count", "'we just talked'", "'i never texted first'", "'i didn't stalk'", "'it meant nothing'"] }
+    },
+    {
+      "id": "jdt-poste-minuit-152",
+      "theme": { "fr": "Un truc qu'on poste après minuit et qu'on supprime à 9h, mort de honte", "en": "Something you post after midnight and delete by 9am, dying of shame" },
+      "letters": { "fr": ["S", "P", "C", "V", "T", "M", "R", "D"], "en": ["S", "P", "T", "C", "M", "R", "D", "N"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["story cryptique", "selfie", "paroles tristes", "rant sur l'ex", "tweet", "photo floue"], "en": ["cryptic story", "sad lyrics", "a selfie", "ex rant", "a thirst trap", "a 'who's awake'"] }
+    },
+    {
+      "id": "jdt-date-rouge-153",
+      "theme": { "fr": "Le truc qui te fait dire « jamais de deuxième date » dès la première gorgée", "en": "The thing that makes it a one-and-done date by the first sip" },
+      "letters": { "fr": ["R", "P", "M", "S", "T", "V", "C", "B"], "en": ["T", "P", "M", "S", "C", "B", "L", "G"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["retard", "parle de son ex", "regarde son tel", "paie pas", "vocal en plein date", "mâche fort"], "en": ["talks about the ex", "phone on the table", "rude to staff", "splits to the cent", "no questions back", "loud chewer"] }
+    },
+    {
+      "id": "jdt-screenshot-balance-154",
+      "theme": { "fr": "Un truc que t'as screen pour le balancer au groupe. Ça concernait peut-être quelqu'un ici.", "en": "Something you screenshotted to drop in the group chat. Maybe about someone here." },
+      "letters": { "fr": ["M", "S", "C", "P", "V", "T", "B", "D"], "en": ["M", "S", "C", "P", "T", "B", "D", "R"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "social"],
+      "exampleWords": { "fr": ["message d'ex", "bio Tinder", "story", "réponse cringe", "déclaration", "vocal"], "en": ["a text from the ex", "a Tinder bio", "a cringe reply", "a story", "a voice note", "a confession"] }
+    },
+    {
+      "id": "jdt-jalousie-155",
+      "theme": { "fr": "Un truc que tu fais quand t'es jaloux et que t'assumeras jamais devant la personne", "en": "Something you do when you're jealous and will never admit to their face" },
+      "letters": { "fr": ["S", "C", "B", "L", "R", "M", "V", "F"], "en": ["S", "C", "L", "R", "M", "B", "G", "F"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["stalker le profil", "checker les likes", "froideur", "lire les vues", "fouiller", "passif-agressif"], "en": ["stalk the profile", "check their likes", "go cold", "read receipts", "snoop", "passive-aggressive"] }
+    },
+    {
+      "id": "jdt-ex-revient-156",
+      "theme": { "fr": "Le message type que ton ex envoie à minuit et demi quand il s'ennuie", "en": "The classic text your ex sends at half twelve when they're bored" },
+      "letters": { "fr": ["S", "C", "T", "J", "M", "P", "V", "B"], "en": ["H", "S", "T", "M", "W", "I", "U", "B"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["« slt »", "« tu fais quoi »", "« je pensais à toi »", "« tu me manques »", "story vue", "« on parle ? »"], "en": ["'hey'", "'wyd'", "'i miss u'", "'thinking about us'", "viewed your story", "'u up?'"] }
+    },
+    {
+      "id": "jdt-honte-fete-157",
+      "theme": { "fr": "Un truc qui arrive à CHAQUE soirée trop arrosée et dont quelqu'un ici est responsable", "en": "Something that happens at EVERY messy night out and someone here is the cause" },
+      "letters": { "fr": ["P", "V", "D", "C", "L", "B", "M", "T"], "en": ["P", "C", "L", "B", "M", "T", "F", "S"] },
+      "difficulty": 2,
+      "spicy": 1,
+      "tags": ["fete", "humour"],
+      "exampleWords": { "fr": ["pleurs", "vomi", "dispute", "déclaration d'amour", "tel perdu", "bagarre de couple"], "en": ["crying", "puking", "a couple fight", "a love confession", "a lost phone", "a fall"] }
+    },
+    {
+      "id": "jdt-secret-couple-158",
+      "theme": { "fr": "Un truc que les couples se cachent et avouent jamais, même au pinard", "en": "Something couples hide from each other and never confess, even three wines deep" },
+      "letters": { "fr": ["M", "P", "S", "C", "F", "A", "L", "T"], "en": ["P", "S", "C", "F", "A", "L", "T", "M"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["mot de passe changé", "ex encore en contact", "vraies dépenses", "stalking", "fantasme", "lassitude"], "en": ["password changed", "still texts the ex", "real spending", "secret stalking", "a fantasy", "being bored"] }
+    },
+    {
+      "id": "jdt-bizarre-au-lit-159",
+      "theme": { "fr": "Une manie inavouable au moment de dormir à deux. On juge pas. On vote.", "en": "An unconfessable habit when you share a bed. No judgement. Just votes." },
+      "letters": { "fr": ["R", "C", "P", "V", "B", "T", "D", "S"], "en": ["S", "C", "H", "B", "T", "D", "P", "F"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["relations", "humour"],
+      "exampleWords": { "fr": ["ronfler", "voler la couette", "parler", "pieds glacés", "bave", "dormir en étoile"], "en": ["snoring", "duvet stealing", "sleep talking", "cold feet", "drooling", "starfishing"] }
+    },
+    {
+      "id": "jdt-apero-trop-160",
+      "theme": { "fr": "Un truc que tu dis à l'apéro après le 3e verre et que tu regrettes au 4e", "en": "Something you say at the third drink and regret by the fourth" },
+      "letters": { "fr": ["J", "T", "S", "V", "C", "L", "M", "P"], "en": ["I", "T", "S", "Y", "L", "M", "W", "H"] },
+      "difficulty": 3,
+      "spicy": 1,
+      "tags": ["fete", "humour"],
+      "exampleWords": { "fr": ["« je t'adore »", "un secret", "la vérité sur quelqu'un", "« on s'appelle ! »", "un avis cash", "un crush"], "en": ["'i love you all'", "a secret", "the truth about someone", "'we should hang!'", "a hot take", "a crush"] }
+    },
+    {
+      "id": "jdt-spicy2-corps-161",
+      "theme": { "fr": "Une zone érogène. Le jury note si c'est crédible. Sois précis, pas vulgaire.", "en": "An erogenous zone. The jury rates plausibility. Be precise, not crude." },
+      "letters": { "fr": ["C", "N", "O", "L", "T", "H", "D", "B"], "en": ["N", "E", "L", "T", "H", "B", "C", "I"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["cou", "nuque", "oreilles", "lèvres", "hanches", "dos"], "en": ["neck", "ears", "lips", "thighs", "hips", "back"] }
+    },
+    {
+      "id": "jdt-spicy2-sextoy-162",
+      "theme": { "fr": "Un truc qu'on trouve dans le tiroir du bas de quelqu'un ici. On vérifie pas. On suppose.", "en": "Something in someone's bottom drawer in this room. We won't check. We'll assume." },
+      "letters": { "fr": ["M", "P", "L", "C", "H", "B", "V", "G"], "en": ["L", "C", "H", "B", "V", "G", "M", "T"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["menottes", "préservatifs", "lubrifiant", "carnet secret", "huile", "bandeau"], "en": ["lube", "handcuffs", "blindfold", "condoms", "candles", "a toy"] }
+    },
+    {
+      "id": "jdt-spicy2-fantasme-163",
+      "theme": { "fr": "Un mot pour un fantasme classique. Tout le monde y pense, personne le dit en premier.", "en": "A word for a common fantasy. Everyone's thought it, nobody says it first." },
+      "letters": { "fr": ["U", "R", "P", "D", "C", "T", "M", "I"], "en": ["R", "P", "D", "C", "T", "M", "S", "U"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["uniforme", "roleplay", "public", "domination", "trio", "menottes"], "en": ["roleplay", "public", "domination", "threesome", "uniform", "tied up"] }
+    },
+    {
+      "id": "jdt-spicy2-pire-date-164",
+      "theme": { "fr": "Un truc qui transforme une nuit prometteuse en désastre. Quelqu'un ici l'a vécu.", "en": "Something that turns a promising night into a disaster. Someone here lived it." },
+      "letters": { "fr": ["R", "S", "C", "T", "P", "V", "M", "B"], "en": ["S", "C", "T", "P", "M", "B", "L", "W"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["ronflement", "ex qui appelle", "coloc rentre", "panne", "tel qui sonne", "mauvais prénom"], "en": ["snoring", "the ex calling", "flatmate walks in", "phone rings", "wrong name", "can't perform"] }
+    },
+    {
+      "id": "jdt-spicy2-lieu-165",
+      "theme": { "fr": "L'endroit le plus improbable où quelqu'un ici a déjà conclu. On attend le récit.", "en": "The most unlikely place someone here has sealed the deal. We await the story." },
+      "letters": { "fr": ["P", "V", "T", "C", "A", "B", "S", "F"], "en": ["P", "C", "A", "B", "T", "G", "S", "K"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["parking", "voiture", "toilettes", "camping", "ascenseur", "bureau"], "en": ["parking lot", "car", "office", "tent", "lift", "club bathroom"] }
+    },
+    {
+      "id": "jdt-spicy2-app-166",
+      "theme": { "fr": "Une appli de rencontre que quelqu'un ici a en mode invisible, là, maintenant", "en": "A dating app someone here has on incognito, right now, in their pocket" },
+      "letters": { "fr": ["T", "B", "H", "G", "F", "O", "S", "C"], "en": ["T", "B", "H", "G", "F", "O", "S", "P"] },
+      "difficulty": 2,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["Tinder", "Bumble", "Hinge", "Grindr", "Fruitz", "OnlyFans"], "en": ["Tinder", "Bumble", "Hinge", "Grindr", "Feeld", "OnlyFans"] }
+    },
+    {
+      "id": "jdt-spicy2-texto-167",
+      "theme": { "fr": "Un mot qu'on tape dans un texto coquin à 1h du mat. Lis-le à voix haute, lâche.", "en": "A word you type in a spicy text at 1am. Read it aloud, coward." },
+      "letters": { "fr": ["C", "B", "M", "E", "V", "S", "T", "L"], "en": ["B", "M", "T", "S", "L", "U", "W", "H"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["chaud", "viens", "envie", "seul", "lit", "maintenant"], "en": ["bed", "miss u", "tonight", "alone", "come over", "wyd"] }
+    },
+    {
+      "id": "jdt-spicy2-confession-168",
+      "theme": { "fr": "Un truc qu'on avoue qu'après plusieurs verres et jamais devant ses darons", "en": "Something you only admit several drinks in and never in front of your parents" },
+      "letters": { "fr": ["P", "C", "T", "F", "S", "B", "M", "E"], "en": ["P", "C", "T", "S", "B", "M", "H", "F"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["plan d'un soir", "ex recontacté", "snap envoyé", "double date", "le vrai chiffre", "fantasme"], "en": ["a one-night thing", "texted the ex", "the real number", "a sneaky link", "a secret crush", "a fantasy"] }
+    },
+    {
+      "id": "jdt-spicy2-cri-169",
+      "theme": { "fr": "Un truc qui ferait débarquer les voisins à 23h en pyjama, furieux", "en": "Something that brings the neighbours to the door at 11pm in pyjamas, furious" },
+      "letters": { "fr": ["B", "M", "C", "L", "D", "T", "P", "G"], "en": ["B", "M", "C", "L", "D", "T", "S", "H"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["bruit du lit", "musique", "cris", "dispute", "talons", "fête"], "en": ["bed noises", "loud music", "shouting", "a fight", "the headboard", "a party"] }
+    },
+    {
+      "id": "jdt-spicy2-walkofshame-170",
+      "theme": { "fr": "Un truc que tu portes au walk of shame du dimanche matin. Le bus te juge.", "en": "Something you wear on the Sunday-morning walk of shame. The bus is judging." },
+      "letters": { "fr": ["T", "R", "C", "V", "E", "M", "S", "L"], "en": ["H", "D", "C", "T", "S", "M", "L", "J"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["fete", "adulte"],
+      "exampleWords": { "fr": ["robe de la veille", "talons à la main", "veste d'inconnu", "maquillage coulé", "sac", "lunettes de soleil"], "en": ["last night's dress", "heels in hand", "a stranger's hoodie", "smudged makeup", "sunglasses", "the jacket"] }
+    },
+    {
+      "id": "jdt-spicy2-tise-171",
+      "theme": { "fr": "Une boisson qui a déjà détruit une de tes nuits. Tu la sens encore rien qu'au nom.", "en": "A drink that has ruined one of your nights. The name alone makes you queasy." },
+      "letters": { "fr": ["T", "V", "R", "S", "B", "W", "M", "C"], "en": ["T", "V", "R", "S", "B", "W", "G", "J"] },
+      "difficulty": 2,
+      "spicy": 2,
+      "tags": ["fete", "adulte"],
+      "exampleWords": { "fr": ["tequila", "vodka", "rhum", "shots", "biere", "whisky"], "en": ["tequila", "vodka", "rum", "shots", "wine", "Jägerbombs"] }
+    },
+    {
+      "id": "jdt-spicy2-regret-matin-172",
+      "theme": { "fr": "La première pensée au réveil après une nuit qui a dérapé. Sois honnête.", "en": "The first thought when you wake after a night that went sideways. Be honest." },
+      "letters": { "fr": ["O", "Q", "P", "M", "C", "J", "T", "S"], "en": ["W", "P", "O", "M", "C", "T", "S", "H"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["fete", "adulte"],
+      "exampleWords": { "fr": ["« où je suis »", "« qui c'est »", "« mon tel »", "« j'ai envoyé quoi »", "« c'était qui »", "« plus jamais »"], "en": ["'where am i'", "'who is this'", "'my phone'", "'what did i text'", "'whose hoodie'", "'never again'"] }
+    },
+    {
+      "id": "jdt-spicy2-deal-breaker-173",
+      "theme": { "fr": "Un détail au pieu qui te fait dire « bon, ça ira pas » et zapper la suite", "en": "A bedroom detail that makes you think 'yeah, this won't work' and bail" },
+      "letters": { "fr": ["R", "O", "S", "M", "T", "C", "P", "B"], "en": ["S", "T", "C", "B", "L", "M", "N", "G"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["ronfle", "odeur", "silence total", "trop pressé", "commente", "tel qui sonne"], "en": ["snoring", "the smell", "total silence", "too rushed", "keeps narrating", "phone goes off"] }
+    },
+    {
+      "id": "jdt-spicy2-mensonge-lit-174",
+      "theme": { "fr": "Un mensonge classique qu'on raconte au lit pour ménager l'ego de l'autre", "en": "A classic bedroom lie people tell to spare the other person's ego" },
+      "letters": { "fr": ["C", "T", "M", "S", "J", "P", "B", "L"], "en": ["I", "T", "S", "Y", "B", "F", "N", "G"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["« c'était top »", "« j'ai joui »", "« t'es le meilleur »", "« j'ai pas senti »", "« moi aussi »", "« la taille compte pas »"], "en": ["'it was great'", "'i finished'", "'you're the best'", "'it's not about size'", "'me too'", "'i didn't notice'"] }
+    },
+    {
+      "id": "jdt-spicy2-cachette-175",
+      "theme": { "fr": "Un truc que tu planques en quatrième vitesse quand un date dort chez toi", "en": "Something you hide at lightning speed when a date sleeps over" },
+      "letters": { "fr": ["D", "P", "C", "V", "L", "T", "M", "B"], "en": ["D", "P", "C", "L", "T", "M", "B", "S"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["doudou", "photos d'ex", "désordre", "le toy", "vaisselle", "le linge sale"], "en": ["the teddy bear", "ex photos", "the mess", "the toy", "dirty laundry", "old pics"] }
+    },
+    {
+      "id": "jdt-spicy2-shot-176",
+      "theme": { "fr": "Un truc qui finit toujours par un « cul sec » qu'on regrette. Le mot, pas l'acte.", "en": "Something that always ends in a shot you'll regret. The word, not the deed." },
+      "letters": { "fr": ["T", "V", "S", "P", "B", "R", "C", "M"], "en": ["T", "V", "S", "B", "R", "G", "D", "L"] },
+      "difficulty": 2,
+      "spicy": 2,
+      "tags": ["fete", "adulte"],
+      "exampleWords": { "fr": ["tequila", "verdict perdu", "pari", "défi", "remontada", "anniv"], "en": ["tequila", "a lost bet", "a dare", "a birthday", "the group", "round two"] }
+    },
+    {
+      "id": "jdt-spicy2-message-vu-177",
+      "theme": { "fr": "Ce que tu fais quand le crush a vu ton message et répond pas depuis 6h", "en": "What you do when the crush has read your text and said nothing for six hours" },
+      "letters": { "fr": ["S", "R", "C", "P", "D", "M", "V", "B"], "en": ["S", "R", "C", "P", "D", "M", "O", "T"] },
+      "difficulty": 3,
+      "spicy": 2,
+      "tags": ["relations", "adulte"],
+      "exampleWords": { "fr": ["stalker", "relancer", "crise", "spam de story", "désinstaller l'appli", "bloquer"], "en": ["spiral", "double text", "stalk", "post a story", "delete the app", "block them"] }
     }
   ]
 }

@@ -6,6 +6,7 @@ export {
   type LText,
   type TracerAction,
   type TracerConfig,
+  type TracerEpilogue,
   type TracerPhase,
   type TracerPrompt,
   type TracerState,

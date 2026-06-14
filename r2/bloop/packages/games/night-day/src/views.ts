@@ -1,9 +1,10 @@
 import type { PlayerId } from '@bloop/engine';
-import { emptyPlayerMap, redactSideBets } from '@bloop/kit';
+import { emptyPlayerMap, redactSideBets, statLeaders } from '@bloop/kit';
 import type {
   DawnReport,
   LText,
   LynchReport,
+  MatchEpilogue,
   NightDayBaseView,
   NightDayState,
   NightDayView,
@@ -12,7 +13,7 @@ import type {
   Seat,
 } from './state.js';
 
-const EMPTY_DAWN: DawnReport = { died: [], revealedRoles: null };
+const EMPTY_DAWN: DawnReport = { died: [], revealedRoles: null, marked: null };
 const EMPTY_LYNCH: LynchReport = { evicted: null, revealedRole: null, tally: {}, abstained: [] };
 
 /** Seeded-shuffled variant list, indexed deterministically — no rng at view time. */
@@ -77,6 +78,53 @@ function nightReadAccuracy(state: NightDayState): Record<PlayerId, number> {
     }
   }
   return acc;
+}
+
+/**
+ * CC-5 match epilogue (P1-2) — derived PURELY at `over` from already-public
+ * over-state: `finalRoles` (roles are public at over), `alive`, the `diedRound`
+ * tracking map, and the Night Read accuracy already computed. NO new in-match
+ * secret, NO reducer change, never folded into placement `scores`.
+ *
+ * - survivedTo[p]: the last round p was alive — final round for a survivor,
+ *   their death round for the fallen. The "you lasted N nights" headline.
+ * - townMvp / bestSeers / bestReadAccuracy: kit `statLeaders` over the read
+ *   accuracy (the sole top scorer is the MVP; a tie has no single MVP but still
+ *   lists the tied `bestSeers`).
+ * - cleanestWolf: the wolf with the highest survivedTo (longest undetected);
+ *   `statLeaders` over a wolves-only survivedTo map, null on a tie / no wolves.
+ *
+ * Deterministic: `statLeaders` resolves ties by ascending id, no rng/clock.
+ */
+function epilogueOf(
+  state: NightDayState,
+  readAccuracy: Record<PlayerId, number>,
+): MatchEpilogue {
+  const survivedTo = emptyPlayerMap<number>();
+  for (const p of state.players) {
+    survivedTo[p] = state.alive[p] === true ? state.round : state.diedRound[p] ?? 0;
+  }
+
+  // Town MVP from the read-accuracy leaders (sole leader => MVP; else no crown).
+  const reads = statLeaders(readAccuracy);
+  const townMvp = reads.players.length === 1 ? reads.players[0]! : null;
+
+  // Cleanest wolf: survivedTo restricted to wolves; +1 so a round-0 survivor is
+  // a positive value (statLeaders ignores <= 0), preserving the "longest" order.
+  const wolfSurvival = emptyPlayerMap<number>();
+  for (const p of state.players) {
+    if (state.roles[p] === 'wolf') wolfSurvival[p] = survivedTo[p]! + 1;
+  }
+  const wolves = statLeaders(wolfSurvival);
+  const cleanestWolf = wolves.players.length === 1 ? wolves.players[0]! : null;
+
+  return {
+    townMvp,
+    bestReadAccuracy: reads.value,
+    bestSeers: reads.players,
+    cleanestWolf,
+    survivedTo,
+  };
 }
 
 /**
@@ -167,14 +215,17 @@ export function buildView(state: NightDayState, viewer: PlayerId): NightDayView 
       };
     case 'lynchReveal':
       return { phase: 'lynchReveal', ...base, lastLynch: state.lastLynch ?? EMPTY_LYNCH };
-    default:
+    default: {
+      const readAccuracy = nightReadAccuracy(state);
       return {
         phase: 'over',
         ...base,
         finalRoles: state.roles,
         winners: state.winners,
         endReason: state.endReason ?? 'maxRounds',
-        nightReadAccuracy: nightReadAccuracy(state),
+        nightReadAccuracy: readAccuracy,
+        epilogue: epilogueOf(state, readAccuracy),
       };
+    }
   }
 }

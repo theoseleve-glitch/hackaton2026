@@ -51,13 +51,34 @@ function enterNightStep(state: NightDayState, fromIdx: number, effects: Effect[]
  * DEADLINE (the dawn card is a fixed display window).
  */
 function enterDawn(state: NightDayState, effects: Effect[]): ReduceResult<NightDayState> {
+  // P1-1 first-night shield: on round 0 (only), a LIVE unhealed wolf kill is
+  // converted to a public mark instead of a death — nobody can be a ghost from
+  // the literal first dawn. Poison and lynch are NEVER shielded. Default-off:
+  // with the flag false this branch is dead and dawn resolves exactly as before.
+  const wolfKill = state.pendingKill !== null && !state.pendingHealed ? state.pendingKill : null;
+  const shieldHere = state.config.firstNightShield && state.round === 0;
+  // Whom did THIS dawn shield (null unless a round-0 strike was converted).
+  const markedThisDawn: PlayerId | null = shieldHere ? wolfKill : null;
+  let marked: PlayerId | null = state.marked;
   const died: PlayerId[] = [];
-  if (state.pendingKill !== null && !state.pendingHealed) died.push(state.pendingKill);
+  if (wolfKill !== null) {
+    if (shieldHere) {
+      // Struck but spared — record the (public) mark; it does NOT die tonight.
+      marked = wolfKill;
+    } else {
+      died.push(wolfKill);
+    }
+  }
   if (state.pendingPoison !== null && !died.includes(state.pendingPoison)) died.push(state.pendingPoison);
   let alive = state.alive;
+  let diedRound = state.diedRound;
   if (died.length > 0) {
     alive = Object.assign(emptyPlayerMap<boolean>(), state.alive);
-    for (const p of died) alive[p] = false;
+    diedRound = Object.assign(emptyPlayerMap<number>(), state.diedRound);
+    for (const p of died) {
+      alive[p] = false;
+      diedRound[p] = state.round;
+    }
   }
   let revealedRoles: Record<PlayerId, Role> | null = null;
   if (state.config.revealRoleOnDeath) {
@@ -69,7 +90,9 @@ function enterDawn(state: NightDayState, effects: Effect[]): ReduceResult<NightD
       ...state,
       phase: 'dawn',
       alive,
-      lastDawn: { died, revealedRoles },
+      diedRound,
+      marked,
+      lastDawn: { died, revealedRoles, marked: markedThisDawn },
       pendingKill: null,
       pendingHealed: false,
       pendingPoison: null,
@@ -136,15 +159,18 @@ function resolveLynch(state: NightDayState): ReduceResult<NightDayState> {
   if (tied || bestN === 0) evicted = null;
   const abstained = alivePlayers(state).filter((p) => state.votes[p] === undefined);
   let alive = state.alive;
+  let diedRound = state.diedRound;
   if (evicted !== null) {
     alive = Object.assign(emptyPlayerMap<boolean>(), state.alive);
     alive[evicted] = false;
+    diedRound = Object.assign(emptyPlayerMap<number>(), state.diedRound, { [evicted]: state.round });
   }
   return {
     state: {
       ...state,
       phase: 'lynchReveal',
       alive,
+      diedRound,
       votes: emptyPlayerMap<PlayerId>(),
       lastLynch: {
         evicted,
@@ -290,6 +316,8 @@ export function createNightDay(
         pendingKill: null,
         pendingHealed: false,
         pendingPoison: null,
+        marked: null,
+        diedRound: emptyPlayerMap<number>(),
         lastDawn: null,
         readyToVote: emptyPlayerMap<true>(),
         votes: emptyPlayerMap<PlayerId>(),

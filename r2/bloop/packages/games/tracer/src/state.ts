@@ -21,6 +21,29 @@ export interface TracerConfig {
   totalRounds: number;
   voteMs: number;
   revealMs: number;
+  /**
+   * CC-2 final-round weighting (comeback lever, brief P1-2). The award at the
+   * verdict beat is multiplied by `roundMultiplier(round, totalRounds, …)` so
+   * the climax round can decide the crown and no round is a dead rubber.
+   *
+   * DEFAULTS TO IDENTITY: omitted / undefined / <= 0 / non-finite => ×1, so
+   * every existing exact-score test stays byte-for-byte green. Only the cases
+   * that explicitly opt into a multiplier are re-baselined. Magnitude of the
+   * late-round multiplier; `multiplierRounds` (default 1 = final round only)
+   * sets how many trailing rounds get it, `doubleFromRound` is an absolute
+   * fixed-round trigger that takes precedence when set. Passed straight to the
+   * kit `roundMultiplier` — same clamps, same identity default.
+   */
+  finalRoundMultiplier?: number;
+  multiplierRounds?: number;
+  doubleFromRound?: number;
+  /**
+   * CC-5 close-finish threshold for the over-view cliffhanger payload. The
+   * `closeFinish` flag is true when the top-2 score gap is at most this many
+   * points. Default 1 (a one-card crown reads as a nailbiter). A negative /
+   * non-finite value disables the flag (kit `isCloseFinish` contract).
+   */
+  closeFinishThreshold?: number;
 }
 
 export const DEFAULT_CONFIG: TracerConfig = {
@@ -59,6 +82,17 @@ export interface TracerState {
   /** HIDDEN: never exposed through view(). */
   votes: Record<PlayerId, PlayerId>;
   scores: Record<PlayerId, number>;
+  /**
+   * CC-5 hot-seat tracking (kit `nextStreak`). Derived ENTIRELY from PUBLIC
+   * reveals: at each verdict beat every designated (room-pointed-at) player's
+   * consecutive-designation `current` streak increments, everyone else resets
+   * to 0, and `best` keeps that player's longest run. This is NOT a new secret
+   * — `designated` is already published every reveal, so `best` is just an
+   * accumulated function of already-public data. The over-view cliffhanger
+   * reads `best` to name the longest hot-seat streak; the reveal view surfaces
+   * the live `current` map as the "X est en PLS / on a roll" tease.
+   */
+  hotStreaks: Record<PlayerId, { current: number; best: number }>;
 }
 
 export type TracerAction = { kind: 'vote'; target: PlayerId };
@@ -98,6 +132,43 @@ export type TracerView =
        * a zero-vote round.
        */
       designated: PlayerId[];
+      /**
+       * CC-2 — the score multiplier IN EFFECT for this round (kit
+       * `roundMultiplier`). 1 on a normal round, `finalRoundMultiplier` on a
+       * weighted climax round so the client can render "ROUND DOUBLE" and the
+       * verdict delta reads as caused, not arbitrary. Public, viewer-identical.
+       */
+      roundMultiplier: number;
+      /**
+       * CC-5 hot-seat tease (kit `nextStreak`). Per-player CURRENT consecutive
+       * designation streak AFTER this verdict (empty during suspense — the
+       * streak only updates on the slam). Derived from public designations; lets
+       * the client surface "X est sur une lancée" on a 2+ run. Viewer-identical.
+       */
+      hotSeat: Record<PlayerId, number>;
       scores: Record<PlayerId, number>;
     }
-  | { phase: 'over'; scores: Record<PlayerId, number> };
+  | {
+      phase: 'over';
+      scores: Record<PlayerId, number>;
+      /**
+       * CC-5 cliffhanger epilogue (cross-game synthesis §1, CC-5). Derived at
+       * 'over' from ALREADY-PUBLIC state only — final `scores` (kit
+       * `isCloseFinish` / `mvp`) and the public hot-seat history (kit
+       * `statLeaders` over `best`). No new in-match secret. Feeds the shell
+       * Oracle roast + rematch CTA.
+       */
+      cliffhanger: TracerEpilogue;
+    };
+
+/** CC-5 over-view epilogue payload, derived from PUBLIC end-of-match state. */
+export interface TracerEpilogue {
+  /** True when the top-2 score gap is within `closeFinishThreshold` (a nailbiter). */
+  closeFinish: boolean;
+  /** Top-2 score gap (0 on a tie / solo). Drives "lost by N cards" chrome. */
+  topGap: number;
+  /** The sole crowned player, or null on a contested (tied-for-first) crown. */
+  mvp: PlayerId | null;
+  /** The longest hot-seat run any player held, and who held it (kit `statLeaders`). */
+  longestHotSeat: { value: number; players: PlayerId[] };
+}

@@ -9,7 +9,7 @@ describe('game registry + static content (design §4.1)', () => {
     expect(entry).not.toBeNull();
     expect(entry!.module.id).toBe('tracer');
     expect(entry!.module.version).toBe(1);
-    expect(entry!.content).toBe(TRACER_PACK);
+    expect(entry!.contentRef).toBe(TRACER_PACK.id);
   });
 
   it('the action schema accepts a vote and rejects junk shapes', () => {

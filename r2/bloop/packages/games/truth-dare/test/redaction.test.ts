@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { leakedSecrets } from '@bloop/engine';
-import type { TruthDareState, Verdict } from '@bloop/game-truth-dare';
+import { createTruthDare, TRUTH_OR_DARE_2_CONFIG, type Reaction, type TruthDareState, type Verdict } from '@bloop/game-truth-dare';
 import {
   choose,
   declare,
@@ -10,6 +10,7 @@ import {
   othersOf,
   PLAYERS,
   predict,
+  react,
   TOD_PACK,
   tod,
   vote,
@@ -155,6 +156,102 @@ describe('CC-1 hidden call-your-shot predictions (structural invariance)', () =>
     expect(can(predictor!)).toBe(false); // first bet locked
     expect(can(active)).toBe(false); // the active player can never predict
     for (const o of OUTSIDERS) expect(can(o)).toBe(false); // non-roster
+  });
+});
+
+describe('CC-4 hidden escape reactions (per-spectator identity floor)', () => {
+  // A react-enabled FUN sibling: identical except the escape-react beat is on.
+  const reactTod = createTruthDare('truth-or-dare-2', { ...TRUTH_OR_DARE_2_CONFIG, reactOnEscape: true });
+  const PLAYERS4 = ['p1', 'p2', 'p3', 'p4'];
+
+  /**
+   * Park at the score reveal of a CHICKENED turn where TWO spectators react with
+   * DIFFERENT enums. The per-enum COUNT is a public aggregate (exactly like the
+   * verdict tally is public at score) — the redaction floor is per-spectator
+   * IDENTITY: no non-owner view ever binds a playerId to its reaction value.
+   */
+  function midScore(rA: Reaction, rB: Reaction): { state: TruthDareState; active: string; r1: string; r2: string; r3: string } {
+    const s0 = reactTod.init('redact', PLAYERS4, TOD_PACK);
+    const active = s0.activePlayer;
+    const [r1, r2, r3] = othersOf(s0);
+    const state = fold(reactTod, s0, [choose(active, 'dare'), declare(active, 'chickened'), react(r1!, rA), react(r2!, rB)]);
+    return { state, active, r1: r1!, r2: r2!, r3: r3! };
+  }
+
+  it('the fixture is live: score phase, public counts aggregate, owner echoes differ', () => {
+    const { state, active, r1, r2 } = midScore('ouch', 'respect');
+    expect(state.phase).toBe('score');
+    // public per-enum aggregate — same for EVERY viewer (no identity attached)
+    const counts = (viewer: string) => {
+      const v = reactTod.view(state, viewer);
+      return v.phase === 'score' ? v.reactionCounts : null;
+    };
+    expect(counts(active)).toEqual({ ouch: 1, respect: 1, coward: 0 });
+    for (const viewer of [...PLAYERS4, ...OUTSIDERS]) {
+      expect(counts(viewer)).toEqual({ ouch: 1, respect: 1, coward: 0 });
+    }
+    // owner echoes are owner-scoped and differ
+    const echo = (viewer: string) => {
+      const v = reactTod.view(state, viewer);
+      return v.phase === 'score' ? v.youReacted : null;
+    };
+    expect(echo(r1)).toBe('ouch');
+    expect(echo(r2)).toBe('respect');
+  });
+
+  it('IDENTITY FLOOR: who reacted ouch vs respect is INVARIANT to every non-owner', () => {
+    // sA: r1=ouch, r2=respect.  sB: r1=respect, r2=ouch (the two values SWAPPED).
+    const sA = midScore('ouch', 'respect');
+    const sB = midScore('respect', 'ouch');
+    // counts are identical (aggregate), so a viewer who is NEITHER reactor cannot
+    // tell which player picked which — the per-player mapping never leaks.
+    for (const viewer of [sA.active, sA.r3, ...OUTSIDERS]) {
+      expect(reactTod.view(sA.state, viewer)).toEqual(reactTod.view(sB.state, viewer));
+    }
+  });
+
+  it('the reactor echo is youReacted only — never anyone else’s reaction', () => {
+    const { state, active, r1, r3 } = midScore('ouch', 'respect');
+    const mine = reactTod.view(state, r1);
+    if (mine.phase !== 'score') throw new Error('expected score view');
+    expect(mine.youReacted).toBe('ouch');
+    expect(mine.youCanReact).toBe(false); // first react locked
+    // a non-reacting spectator, the active player and outsiders see no own echo
+    for (const viewer of [active, r3, ...OUTSIDERS]) {
+      const v = reactTod.view(state, viewer);
+      if (v.phase !== 'score') throw new Error('expected score view');
+      expect(v.youReacted).toBeNull();
+    }
+  });
+
+  it('youCanReact: non-active connected spectators who have not reacted; active and outsiders no', () => {
+    const { state, active, r1, r3 } = midScore('ouch', 'respect');
+    const can = (viewer: string) => {
+      const v = reactTod.view(state, viewer);
+      return v.phase === 'score' ? v.youCanReact : null;
+    };
+    expect(can(r3)).toBe(true); // not yet reacted
+    expect(can(r1)).toBe(false); // first react locked
+    expect(can(active)).toBe(false); // the active player never reacts to their own escape
+    for (const o of OUTSIDERS) expect(can(o)).toBe(false); // non-roster
+  });
+
+  it('a COMPLETED turn never opens the react beat (reactionCounts null, youCanReact false)', () => {
+    const s0 = reactTod.init('redact', PLAYERS, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2] = othersOf(s0);
+    const sDone = fold(reactTod, s0, [choose(active, 'dare'), declare(active, 'done'), vote(v1!, 'done'), vote(v2!, 'done')]);
+    expect(sDone.phase).toBe('score');
+    expect(sDone.lastResult?.verdict).toBe('done');
+    for (const viewer of [...PLAYERS, ...OUTSIDERS]) {
+      const v = reactTod.view(sDone, viewer);
+      if (v.phase !== 'score') throw new Error('expected score view');
+      expect(v.reactionCounts).toBeNull();
+      expect(v.youReacted).toBeNull();
+      expect(v.youCanReact).toBe(false);
+    }
+    // a react on a completed turn is a SAME-REFERENCE no-op
+    expect(reactTod.reduce(sDone, react(v1!, 'ouch')).state).toBe(sDone);
   });
 });
 

@@ -6,6 +6,7 @@ import {
   gameOver,
   initPresence,
   nextActiveSeat,
+  roundMultiplier,
   setConnected,
 } from '@bloop/kit';
 import {
@@ -24,6 +25,7 @@ import type {
   PerformJudgeAction,
   PerformJudgeConfig,
   PerformJudgeContent,
+  PerformJudgeDrama,
   PerformJudgeOutcome,
   PerformJudgeState,
   PerformJudgeView,
@@ -37,17 +39,50 @@ type Result = ReduceResult<S>;
 /** CONTRACT (shell no-op detection): rejection = the SAME state reference. */
 const keep = (state: S): Result => ({ state, effects: [] });
 
+/**
+ * CC-2 — the Money Round multiplier for THIS turn. Pure delegation to the kit
+ * `roundMultiplier`: identity (1) off the final lap or when the config knob is 1
+ * (default), `finalLapMultiplier` on the final lap. Single-lap configs (puppet/
+ * rate) have only lap 0, so this is ×1 there even with a knob set.
+ */
+function moneyRoundMultiplier(state: S): number {
+  return roundMultiplier(state.lap, state.config.laps, {
+    finalRoundMultiplier: state.config.finalLapMultiplier,
+  });
+}
+
+/** Scale a points map by `mult`, rounding to an integer score (placement-based). */
+function scalePoints(points: Record<PlayerId, number>, mult: number): Record<PlayerId, number> {
+  if (mult === 1) return points; // identity: byte-identical map, no re-keying
+  const scaled = emptyPlayerMap<number>();
+  for (const [p, n] of Object.entries(points)) scaled[p] = Math.round(n * mult);
+  return scaled;
+}
+
 /** Atomic end-of-turn: apply points, build the public TurnResult, enter reveal. */
 function finishTurn(
   state: S,
   outcome: PerformJudgeOutcome,
   tally: { yes: number; no: number } | null,
-  starsAgg: { avg: number; cast: number; ovation: boolean } | null,
+  starsAgg: { avg: number; cast: number; ovation: boolean; min: number; max: number } | null,
   fast: boolean,
-  points: Record<PlayerId, number>,
+  rawPoints: Record<PlayerId, number>,
+  drama: PerformJudgeDrama = null,
 ): Result {
+  // CC-2 Money Round: scale the awarded points on the final lap (identity off it
+  // and at the default ×1, so existing exact-score tests stay byte-identical).
+  const mult = moneyRoundMultiplier(state);
+  const points = scalePoints(rawPoints, mult);
+  const moneyRound = mult !== 1;
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
   for (const [p, n] of Object.entries(points)) scores[p] = (scores[p] ?? 0) + n;
+  // CC-5 running PUBLIC tallies (already-public per-turn data, accumulated):
+  // crowd-favourite reactions per performer + the nailbiter count.
+  const counts = reactionCounts(state);
+  const turnReactions = counts.fire + counts.laugh + counts.cringe;
+  const reactionTotals = Object.assign(emptyPlayerMap<number>(), state.reactionTotals);
+  reactionTotals[state.performer] = (reactionTotals[state.performer] ?? 0) + turnReactions;
+  const nailbiterCount = state.nailbiterCount + (drama === 'nailbiter' ? 1 : 0);
   const lastResult: TurnResult = {
     performer: state.performer,
     partner: state.config.adjudication === 'claim-validate' ? (state.claim?.guesser ?? null) : state.partner,
@@ -56,12 +91,14 @@ function finishTurn(
     tally,
     stars: starsAgg,
     fast,
+    moneyRound,
+    drama,
     points,
     // CC-4: snapshot the PUBLIC audience reaction counts into the reveal card.
-    reactions: reactionCounts(state),
+    reactions: counts,
   };
   return {
-    state: { ...state, phase: 'reveal', scores, lastResult },
+    state: { ...state, phase: 'reveal', scores, lastResult, reactionTotals, nailbiterCount },
     effects: [{ type: 'analytics', name: 'turn_resolved', props: { turnSeq: state.turnSeq, outcome } }],
   };
 }
@@ -76,11 +113,22 @@ function verdictPoints(state: S, early: boolean): Record<PlayerId, number> {
   return points;
 }
 
+/**
+ * P1-2 — aggregate-only nailbiter flag. 'nailbiter' when the verdict/validate
+ * was within ONE vote of flipping AND at least one ballot was cast. Computed
+ * from the public tally alone — never a per-voter ballot.
+ */
+function verdictDrama(tally: { yes: number; no: number }): PerformJudgeDrama {
+  const cast = tally.yes + tally.no;
+  return cast > 0 && Math.abs(tally.yes - tally.no) <= 1 ? 'nailbiter' : null;
+}
+
 function resolveVerdict(state: S): Result {
   const eligible = eligibleJudges(state);
   const cast = Object.values(state.votes);
   const yes = cast.filter((v) => v === 'yes').length;
   const tally = { yes, no: cast.length - yes };
+  const drama = verdictDrama(tally);
   let success: boolean;
   if (cast.length === 0) {
     // guided: benefit of the doubt. puppet: fail — unless NOBODY could vote (void).
@@ -91,24 +139,25 @@ function resolveVerdict(state: S): Result {
   } else {
     success = yes / cast.length >= state.config.verdictThreshold; // ties generous
   }
-  if (!success) return finishTurn(state, 'fail', tally, null, false, emptyPlayerMap<number>());
-  return finishTurn(state, 'success', tally, null, false, verdictPoints(state, false));
+  if (!success) return finishTurn(state, 'fail', tally, null, false, emptyPlayerMap<number>(), drama);
+  return finishTurn(state, 'success', tally, null, false, verdictPoints(state, false), drama);
 }
 
 function resolveValidate(state: S): Result {
   const cast = Object.values(state.votes);
   const yes = cast.filter((v) => v === 'yes').length;
   const tally = { yes, no: cast.length - yes };
+  const drama = verdictDrama(tally);
   // zero cast (incl. empty voter set) => valid — benefit of the doubt
   const valid = cast.length === 0 ? true : yes / cast.length >= state.config.verdictThreshold;
-  if (!valid) return finishTurn(state, 'contested', tally, null, false, emptyPlayerMap<number>());
+  if (!valid) return finishTurn(state, 'contested', tally, null, false, emptyPlayerMap<number>(), drama);
   const fast = state.claim !== null && state.performStartedAt !== null
     && state.claim.at - state.performStartedAt <= state.config.performMs / 2;
   const award = state.config.successPoints + (fast ? state.config.fastBonusPoints : 0);
   const points = emptyPlayerMap<number>();
   points[state.performer] = award;
   if (state.claim !== null) points[state.claim.guesser] = award;
-  return finishTurn(state, 'success', tally, null, fast, points);
+  return finishTurn(state, 'success', tally, null, fast, points, drama);
 }
 
 function resolveStars(state: S): Result {
@@ -121,8 +170,14 @@ function resolveStars(state: S): Result {
   const points = emptyPlayerMap<number>();
   points[state.performer] = pts;
   if (state.partner !== null) points[state.partner] = pts;
-  const starsAgg = { avg: Math.round(rawAvg * 10) / 10, cast: cast.length, ovation };
-  return finishTurn(state, 'success', null, starsAgg, false, points);
+  // Aggregate min/max of the ANONYMOUS multiset (no per-rater value); default to
+  // the no-vote average so a zero-ballot card carries a coherent min==max==avg.
+  const min = cast.length > 0 ? Math.min(...cast) : state.config.noVoteDefaultStars;
+  const max = cast.length > 0 ? Math.max(...cast) : state.config.noVoteDefaultStars;
+  // P1-2 'split': a polarised table (>= 2 ballots spanning >= 3 stars).
+  const drama: PerformJudgeDrama = cast.length >= 2 && max - min >= 3 ? 'split' : null;
+  const starsAgg = { avg: Math.round(rawAvg * 10) / 10, cast: cast.length, ovation, min, max };
+  return finishTurn(state, 'success', null, starsAgg, false, points, drama);
 }
 
 function resolveJudge(state: S): Result {
@@ -417,6 +472,8 @@ export function createPerformJudge(
         scores,
         sinceScoreboard: 0,
         lastResult: null,
+        reactionTotals: emptyPlayerMap<number>(),
+        nailbiterCount: 0,
       };
     },
 

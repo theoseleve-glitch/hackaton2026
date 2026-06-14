@@ -2002,6 +2002,1462 @@
       "intensity": "safe",
       "props": false,
       "tags": ["funny", "animals", "sport"]
+    },
+    {
+      "id": "dlm-126-octopus-jar",
+      "text": {
+        "fr": "Une pieuvre qui essaie d'ouvrir un bocal avec ses huit bras et s'embrouille toute seule",
+        "en": "An octopus trying to open a jar with all eight arms and getting completely tangled in itself"
+      },
+      "hint": {
+        "fr": "Huit bras, un seul cerveau, zéro coordination. Deux bras se disputent, un troisième abandonne. Le bocal gagne. Encore.",
+        "en": "eight arms, one brain, zero teamwork. two arms start arguing, a third quits. the jar wins. obviously"
+      },
+      "category": "animals",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "absurd", "struggle"]
+    },
+    {
+      "id": "dlm-127-snail-marathon",
+      "text": {
+        "fr": "Un escargot qui se croit en plein sprint olympique alors qu'il a fait deux centimètres en dix minutes",
+        "en": "A snail convinced it's mid-Olympic-sprint, having covered two centimeters in ten minutes"
+      },
+      "hint": {
+        "fr": "Visage de coureur en feu, corps au point mort. Souffle, grimace, regarde derrière toi comme si on te rattrapait. Personne te rattrape. Personne bouge.",
+        "en": "face of a sprinter on fire, body in absolute neutral. pant, grimace, glance back like someone's gaining. nobody is gaining. nobody is moving"
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "sport", "absurd"]
+    },
+    {
+      "id": "dlm-128-penguin-ice",
+      "text": {
+        "fr": "Un manchot trop classe qui glisse sur la banquise et fait semblant que c'était prévu",
+        "en": "An overly dignified penguin slipping on the ice and pretending it was all part of the plan"
+      },
+      "hint": {
+        "fr": "Démarche de gentleman, dérapage soudain, atterrissage sur le ventre, redressement façon « j'ai rien fait ». Scan des autres manchots. Ils ont vu. Continue, digne.",
+        "en": "gentleman waddle, sudden slide, belly landing, get up like 'I meant that'. scan the other penguins. they saw. carry on, dignified"
+      },
+      "category": "animals",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "fail", "physical"]
+    },
+    {
+      "id": "dlm-129-spider-bath",
+      "text": {
+        "fr": "L'araignée géante dans la baignoire et toi qui négocies avec elle depuis la porte",
+        "en": "The huge spider in the bathtub and you negotiating with it from the doorway"
+      },
+      "hint": {
+        "fr": "Joue les deux : l'humain terrifié armé d'une chaussure tremblante, et l'araignée qui avance d'un pas pile quand tu approches. Le verre arrive. Elle disparaît. Personne dormira ici.",
+        "en": "play both: the terrified human armed with a wobbling shoe, and the spider that takes one step forward the instant you approach. the glass comes out. it vanishes. nobody sleeps here tonight"
+      },
+      "category": "animals",
+      "difficulty": 3,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "multi-role", "suspense"]
+    },
+    {
+      "id": "dlm-130-cow-fly",
+      "text": {
+        "fr": "Une vache qui chasse une mouche avec sa queue et se met une claque toute seule",
+        "en": "A cow trying to swat a fly with its tail and slapping itself in the face instead"
+      },
+      "hint": {
+        "fr": "Broute peinarde, mouche, coup de queue raté, AÏE. Recommence. Re-AÏE. La mouche, elle, vit sa meilleure vie. Toi tu te frappes en boucle.",
+        "en": "graze in peace, fly, tail swing, MISS, smack yourself. again. smack again. the fly is thriving. you are just hitting yourself on loop"
+      },
+      "category": "animals",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "animals", "fail", "physical"]
+    },
+    {
+      "id": "dlm-131-grandma-self-checkout",
+      "text": {
+        "fr": "Mamie face à la caisse automatique pour la première fois, et la machine perd patience avant elle",
+        "en": "Grandma facing the self-checkout for the first time, and the machine loses patience before she does"
+      },
+      "hint": {
+        "fr": "Scan retourné, code-barres cherché à l'envers, tape l'écran trop fort, parle à la machine poliment. La file de huit personnes derrière respire fort. Mamie a tout son temps. Eux non.",
+        "en": "scan it upside down, hunt for the barcode the wrong way, jab the screen too hard, talk to the machine politely. the queue of eight behind is breathing loudly. grandma has all the time in the world. they do not"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "family", "struggle"]
+    },
+    {
+      "id": "dlm-132-earphone-snag",
+      "text": {
+        "fr": "Ton écouteur filaire s'accroche à la poignée de porte et t'arrache l'oreille en plein pas pressé",
+        "en": "Your wired earbud snags on the door handle and rips out of your ear mid-rushed-walk"
+      },
+      "hint": {
+        "fr": "Marche déterminée, ARRACHEMENT, tête qui part en arrière, oreille en feu, regard panoramique pour vérifier qui a vu. Tout le monde a vu. Range le fil comme si de rien.",
+        "en": "determined stride, YANK, head snaps back, ear on fire, panoramic scan for witnesses. everyone saw. tuck the wire away like nothing happened"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "pain", "physical"]
+    },
+    {
+      "id": "dlm-133-hot-plate-waiter",
+      "text": {
+        "fr": "Le serveur qui pose ton assiette brûlante en chantant « attention c'est chaud » trois secondes trop tard",
+        "en": "The waiter setting down your scalding plate while singing 'careful it's hot' three seconds too late"
+      },
+      "hint": {
+        "fr": "Joue le serveur trop zélé ET le client qui touche l'assiette par réflexe. Doigts en feu, sourire poli maintenu, souffle discret sur la main sous la table. « C'est très chaud » — oui, on sait, MERCI.",
+        "en": "play the over-eager waiter AND the customer who touches the plate on reflex. fingers on fire, polite smile held, secret blow on the hand under the table. 'it's very hot' — yes, thank you, we KNOW"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "pain", "multi-role"]
+    },
+    {
+      "id": "dlm-134-fitted-sheet",
+      "text": {
+        "fr": "Plier un drap-housse : un combat que l'humanité n'a jamais gagné, et toi non plus",
+        "en": "Folding a fitted sheet: a battle humanity has never won, and neither will you"
+      },
+      "hint": {
+        "fr": "Confiance de tutoriel, coin dans coin, ça gondole, tu secoues, c'est pire, tu finis par tout rouler en boule et le ranger en cachette. La défaite est totale. Souris.",
+        "en": "tutorial confidence, corner into corner, it bunches, you shake it, it's worse, you end up rolling the whole thing into a ball and hiding it. total defeat. smile"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "struggle", "fail"]
+    },
+    {
+      "id": "dlm-135-elevator-music-jam",
+      "text": {
+        "fr": "Seul dans l'ascenseur, tu te lâches sur la musique d'ambiance, et les portes s'ouvrent au pire moment",
+        "en": "Alone in the elevator, you fully vibe to the muzak, and the doors open at the worst possible second"
+      },
+      "hint": {
+        "fr": "Vérifie que t'es seul, petit dodelinement, ça monte, choré complète, GROS move… portes ouvertes, trois inconnus. Fige-toi en demi-mouvement. Transforme-le en « j'ajustais ma veste ». Personne y croit.",
+        "en": "check you're alone, small head bob, it builds, full choreo, BIG move… doors open, three strangers. freeze mid-move. convert it to 'just adjusting my jacket'. nobody buys it"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "dance", "awkward"]
+    },
+    {
+      "id": "dlm-136-revolving-door",
+      "text": {
+        "fr": "Coincé dans la porte tambour avec un inconnu qui pousse exactement à ton rythme",
+        "en": "Trapped in a revolving door with a stranger pushing at the exact same rhythm as you"
+      },
+      "hint": {
+        "fr": "Pousse, ça avance, l'autre pousse aussi, ça s'arrête. Re-pousse. Re-blocage. Vous êtes désormais liés à vie. Échange un regard de pure haine polie à travers la vitre.",
+        "en": "push, it moves, the other pushes too, it stalls. push again. stall again. you are now bound for life. exchange a look of pure polite hatred through the glass"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "awkward", "physical"]
+    },
+    {
+      "id": "dlm-137-mom-licked-tissue",
+      "text": {
+        "fr": "La daronne qui lèche le mouchoir pour te nettoyer la joue devant tes potes, à 25 ans",
+        "en": "Your mum licking the tissue to wipe your cheek in front of your mates, at 25 years old"
+      },
+      "hint": {
+        "fr": "Joue la daronne en mission ET toi qui recules en niant tout. Esquive, capture du menton, frottage humide implacable. Tes potes filment. T'as 25 ans. Ça change rien.",
+        "en": "play the mum on a mission AND you backing away in denial. dodge, chin capture, relentless damp scrub. your mates are filming. you're 25. it changes nothing"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "family", "multi-role"]
+    },
+    {
+      "id": "dlm-138-charger-angle",
+      "text": {
+        "fr": "Maintenir le chargeur au seul angle exact où il charge encore, pendant tout un appel important",
+        "en": "Holding the charger at the one precise angle where it still charges, for the entire length of an important call"
+      },
+      "hint": {
+        "fr": "Trouve l'angle sacré, fige le bras, tremblement, perds le contact, recule de panique, retrouve l'angle. Parle au téléphone avec le sourire d'un otage. Bouge pas. BOUGE PAS.",
+        "en": "find the sacred angle, freeze the arm, tremor, lose contact, panic-recover, find it again. talk on the phone with the smile of a hostage. do not move. do NOT move"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "struggle", "tech"]
+    },
+    {
+      "id": "dlm-139-wrong-floor-meeting",
+      "text": {
+        "fr": "Tu entres dans la mauvaise réunion, tu le réalises trop tard, et tu décides de rester pour pas faire de vague",
+        "en": "You walk into the wrong meeting, realize too late, and decide to just stay so you don't make a scene"
+      },
+      "hint": {
+        "fr": "Entrée confiante, salut à la cantonade, t'assois, réalisation lente que tu connais personne, hochements de tête engagés sur un sujet que tu comprends pas. Quelqu'un te désigne pour « ton avis ». Improvise. Survis.",
+        "en": "confident entrance, nod to the room, sit down, slow realization you know nobody, engaged nodding on a topic you don't understand. someone asks for 'your take'. improvise. survive"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "work", "awkward"]
+    },
+    {
+      "id": "dlm-140-autocorrect-read-aloud",
+      "text": {
+        "fr": "Lire à voix haute le SMS du correcteur auto qui a transformé un mot normal en horreur incompréhensible",
+        "en": "Reading aloud the autocorrect text that turned one normal word into pure incomprehensible chaos"
+      },
+      "hint": {
+        "fr": "Lecture fière, blocage sur le mot mutant, relecture, panique, tentative de prononcer l'imprononçable. La salle attend. T'as plus de sortie. Lis-le. Tout fort.",
+        "en": "proud read, choke on the mutant word, re-read, panic, attempt to pronounce the unpronounceable. the room waits. there's no exit. read it. out loud"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "tech"]
+    },
+    {
+      "id": "dlm-141-laugh-coffin",
+      "text": {
+        "fr": "Le porteur de cercueil dont une chaussure se délace au pire moment de la cérémonie",
+        "en": "The pallbearer whose shoelace comes undone at the most solemn moment of the ceremony"
+      },
+      "hint": {
+        "fr": "Visage de marbre, démarche lente et grave, lacet traître sous le pied, micro-trébuchement, rééquilibrage discret pour pas faire tomber le poids. Personne doit voir. Tout le monde voit.",
+        "en": "stone face, slow grave march, traitor lace underfoot, micro-stumble, discreet rebalance so the weight doesn't drop. nobody must see. everybody sees"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "suspense", "dark-comedy"]
+    },
+    {
+      "id": "dlm-142-name-forgotten",
+      "text": {
+        "fr": "Présenter deux personnes et réaliser au milieu de la phrase que t'as oublié le prénom des deux",
+        "en": "Introducing two people and realizing mid-sentence you've forgotten both of their names"
+      },
+      "hint": {
+        "fr": "Geste de présentation assuré, « alors voici… euh… », sourire qui se fige, main qui flotte entre les deux, espoir qu'ils se présentent seuls. Ils attendent. Ils savent. Meurs lentement.",
+        "en": "confident intro gesture, 'so this is… uh…', smile freezes, hand floating between them, praying they introduce themselves. they wait. they know. die slowly"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "social", "awkward"]
+    },
+    {
+      "id": "dlm-143-tucked-skirt",
+      "text": {
+        "fr": "Sortir des toilettes en public avec un truc coincé là où il faut pas, et tout le monde le voit avant toi",
+        "en": "Walking out of a public bathroom with something tucked where it shouldn't be, and everyone sees it before you do"
+      },
+      "hint": {
+        "fr": "Démarche assurée, sourires bizarres autour, doute, vérification arrière en panique, réalisation, marche arrière vers les toilettes en mode crabe digne. Garde la tête haute. C'est tout ce qu'il te reste.",
+        "en": "confident strut, weird smiles around you, doubt, panicked rear check, realization, dignified crab-walk reverse back toward the bathroom. keep your head high. it's all you've got left"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "relatable", "awkward"]
+    },
+    {
+      "id": "dlm-144-superhero-landing-knee",
+      "text": {
+        "fr": "L'atterrissage de super-héros parfait… sauf que ton genou n'a pas signé pour ça",
+        "en": "The perfect superhero landing… except your knee did not sign up for this"
+      },
+      "hint": {
+        "fr": "Saut épique, pose poing-au-sol impeccable, CRAC du genou, visage qui encaisse la douleur tout en gardant la pose héroïque. Lève-toi à 10 % de la vitesse prévue. Sauve la dignité, perds le ménisque.",
+        "en": "epic leap, flawless fist-to-ground pose, knee CRACK, face absorbing the pain while holding the heroic stance. rise at 10% of intended speed. save the dignity, lose the meniscus"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "superhero", "pain"]
+    },
+    {
+      "id": "dlm-145-slowmo-baywatch-sand",
+      "text": {
+        "fr": "La course au ralenti type Alerte à Malibu, sauf que tu te prends tous les châteaux de sable",
+        "en": "The slow-motion Baywatch beach run, except you plow through every single sandcastle on the way"
+      },
+      "hint": {
+        "fr": "Cheveux au vent imaginaire, foulée héroïque au ralenti, sourire de sauveteur… puis crash dans un château, et un autre, et un gosse qui pleure. Continue au ralenti. La gloire n'attend pas.",
+        "en": "imaginary hair in the wind, heroic slow-mo stride, lifeguard smile… then crash through a castle, and another, and a crying kid. keep going in slow motion. glory waits for no one"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "slowmo", "fail"]
+    },
+    {
+      "id": "dlm-146-bond-intro-trip",
+      "text": {
+        "fr": "L'agent secret qui se présente « Bond. James Bond » et se mange le coin de la table dans la foulée",
+        "en": "The secret agent introducing himself 'Bond. James Bond' and immediately clipping the corner of the table"
+      },
+      "hint": {
+        "fr": "Charisme maximal, regard de braise, réplique culte, pas en avant confiant, hanche contre la table, douleur ravalée, sourire qui ne flanche pas. Reste classe. La table a gagné mais personne le saura.",
+        "en": "max charisma, smoldering look, the iconic line, confident step forward, hip into the table, swallowed pain, smile that refuses to break. stay suave. the table won but no one will ever know"
+      },
+      "category": "cinema",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "fail", "physical"]
+    },
+    {
+      "id": "dlm-147-titanic-railing",
+      "text": {
+        "fr": "La scène « je suis le roi du monde » à l'avant du bateau, mais t'as le vertige et le mal de mer",
+        "en": "The 'I'm the king of the world' bow scene, but you're scared of heights AND seasick"
+      },
+      "hint": {
+        "fr": "Bras grands ouverts, déclaration épique, vent dans la face… puis le tangage, le teint qui verdit, les bras qui se cramponnent au lieu de s'ouvrir. Roi du monde, otage de ton estomac. Finis la réplique quand même.",
+        "en": "arms wide open, epic declaration, wind in your face… then the rocking, the greening face, arms clamping instead of opening. king of the world, hostage of your own stomach. finish the line anyway"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "parody", "physical"]
+    },
+    {
+      "id": "dlm-148-jedi-mind-trick-fail",
+      "text": {
+        "fr": "Le chevalier qui tente le contrôle mental sur quelqu'un de complètement immunisé et de plus en plus agacé",
+        "en": "The knight attempting a mind trick on someone completely immune and increasingly annoyed by it"
+      },
+      "hint": {
+        "fr": "Geste lent et solennel de la main, voix grave et confiante, « tu vas faire ce que je dis »… l'autre cligne des yeux, croise les bras, attend. Re-geste, plus fort, plus désespéré. Ça marche pas. Ça marchera jamais. Insiste.",
+        "en": "slow solemn hand wave, deep confident voice, 'you will do as I say'… the other blinks, crosses arms, waits. wave again, harder, more desperate. it isn't working. it never will. keep going"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "multi-role", "absurd"]
+    },
+    {
+      "id": "dlm-149-dramatic-cough-monologue",
+      "text": {
+        "fr": "Le personnage mourant qui veut faire sa dernière réplique bouleversante mais qui tousse pile sur les mots importants",
+        "en": "The dying character trying to deliver a heartbreaking final line but coughing right over the important words"
+      },
+      "hint": {
+        "fr": "Effondrement tragique, main tendue vers le ciel, « dis à ma famille que je… » TOUSSE, reprends, « que je… » RE-TOUSSE. L'ami penché au-dessus de toi attend le mot clé qui vient jamais. Meurs frustré.",
+        "en": "tragic collapse, hand reaching skyward, 'tell my family that I…' COUGH, recover, 'that I…' COUGH again. the friend leaning over you waits for the key word that never lands. die frustrated"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cinema", "drama", "absurd"]
+    },
+    {
+      "id": "dlm-150-influencer-take-47",
+      "text": {
+        "fr": "L'influenceur qui refait la même intro enjouée pour la 47e fois parce que ça « sonne pas naturel »",
+        "en": "The influencer redoing the same chirpy intro for the 47th time because it 'doesn't sound natural'"
+      },
+      "hint": {
+        "fr": "« Coucou mes amooours ! » sourire éclatant, coupe, soupir, regard mort, reset du sourire, « Coucou mes amooours ! » exactement pareil. La joie est un travail. Le travail te détruit. Souris encore.",
+        "en": "'heyyy besties!' beaming smile, cut, sigh, dead eyes, reset the smile, 'heyyy besties!' exactly the same. joy is a job. the job is destroying you. smile again"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "tiktok", "relatable"]
+    },
+    {
+      "id": "dlm-151-gym-mirror-flex",
+      "text": {
+        "fr": "Celui qui se prend en photo devant le miroir de la salle et croit que personne le calcule",
+        "en": "The guy taking mirror selfies at the gym convinced absolutely nobody is watching"
+      },
+      "hint": {
+        "fr": "Vérifie discrètement autour, pose de dos contractée, change d'angle, fronce les sourcils façon « j'm'en fous du résultat », vingt photos. Quelqu'un passe : range le tel et fais semblant de t'étirer. Quelqu'un dans cette pièce, c'est lui.",
+        "en": "discreet scan around, flexed back pose, change angle, frown like 'I don't even care how it looks', twenty photos. someone walks by: pocket the phone and fake a stretch. someone in this room is that guy"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "cringe", "gym", "social"]
+    },
+    {
+      "id": "dlm-152-cart-runaway-slope",
+      "text": {
+        "fr": "Le caddie qui s'échappe sur la pente du parking pendant que tu charges le coffre",
+        "en": "The shopping trolley escaping down the car park slope while you're loading the boot"
+      },
+      "hint": {
+        "fr": "Charge tranquille, bruit suspect, tu te retournes, le caddie part en roue libre vers une voiture neuve. Sprint désespéré, plongeon raté, prière. Joue aussi le proprio de la voiture qui regarde, impuissant.",
+        "en": "load in peace, suspicious noise, you turn, the trolley is free-rolling toward a brand-new car. desperate sprint, failed dive, prayer. also play the car owner watching, helpless"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "chaos", "multi-role"]
+    },
+    {
+      "id": "dlm-153-trampoline-confidence",
+      "text": {
+        "fr": "Celui qui annonce un salto arrière sur le trampoline devant tout le jardin et atterrit sur la nuque",
+        "en": "The one announcing a backflip on the trampoline to the whole garden and landing on their neck"
+      },
+      "hint": {
+        "fr": "Rebonds d'échauffement confiants, annonce solennelle « regardez bien », public qui sort les téléphones, élan, rotation à 80 %, atterrissage catastrophique. Lève le pouce depuis le sol. C'est pour les internets maintenant.",
+        "en": "confident warm-up bounces, solemn announcement 'watch this', crowd pulls out phones, launch, 80% rotation, catastrophic landing. thumbs up from the ground. it belongs to the internet now"
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fail", "physical"]
+    },
+    {
+      "id": "dlm-154-rowing-machine-pride",
+      "text": {
+        "fr": "Le rameur de salle qui rame comme aux JO et réalise au bout de cinq minutes qu'il avance pas",
+        "en": "The gym rower going full Olympic and realizing after five minutes they're not actually going anywhere"
+      },
+      "hint": {
+        "fr": "Tirées puissantes, grognements de finale olympique, regard vers un horizon imaginaire… puis la lente prise de conscience que la machine est fixée au sol. Continue quand même. L'effort est réel. Le bateau, non.",
+        "en": "powerful pulls, Olympic-final grunts, gaze toward an imaginary horizon… then the slow realization that the machine is bolted to the floor. keep going anyway. the effort is real. the boat is not"
+      },
+      "category": "sports",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "gym", "absurd"]
+    },
+    {
+      "id": "dlm-155-archery-eyes-closed",
+      "text": {
+        "fr": "L'archer qui ferme les yeux au moment de tirer et touche absolument tout sauf la cible",
+        "en": "The archer who closes their eyes at the moment of release and hits absolutely everything except the target"
+      },
+      "hint": {
+        "fr": "Concentration de maître, tension de la corde, souffle, yeux fermés à la dernière seconde, lâcher. Suis la flèche du regard : elle part vers le public, le juge, le chien. Fais comme si c'était le plan. Re-tire les yeux fermés.",
+        "en": "master-level focus, draw the string, breath, eyes shut at the last second, release. follow the arrow with your eyes: it heads for the crowd, the judge, the dog. act like that was the plan. shoot again, eyes shut"
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "fail", "absurd"]
+    },
+    {
+      "id": "dlm-156-soccer-celebration-card",
+      "text": {
+        "fr": "Le buteur qui enlève son maillot pour célébrer, prend un carton, et réalise qu'il a marqué contre son camp",
+        "en": "The scorer ripping off his shirt to celebrate, getting booked, then realizing he scored an own goal"
+      },
+      "hint": {
+        "fr": "Course folle vers le poteau de corner, maillot sur la tête, glissade à genoux… puis le silence. Tes coéquipiers te fixent. C'était ton propre but. Remets le maillot. Très lentement. La honte en boucle.",
+        "en": "wild run to the corner flag, shirt over the head, knee slide… then silence. your teammates stare. it was your own goal. put the shirt back on. very slowly. shame on a loop"
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "sports", "football", "fail"]
+    },
+    {
+      "id": "dlm-157-conductor-imaginary",
+      "text": {
+        "fr": "Le chef d'orchestre qui dirige avec passion un orchestre qui n'est jamais arrivé",
+        "en": "The conductor passionately leading an orchestra that simply never showed up"
+      },
+      "hint": {
+        "fr": "Baguette levée, silence solennel, départ grandiose des deux bras, montée en intensité, transpiration artistique, final explosif vers le néant. Tourne-toi pour saluer la salle vide. Salue plus bas. Tu le mérites.",
+        "en": "baton raised, solemn silence, grand two-armed downbeat, building intensity, artistic sweating, explosive finale into the void. turn to bow to the empty hall. bow lower. you've earned it"
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "music", "absurd"]
+    },
+    {
+      "id": "dlm-158-floss-dad",
+      "text": {
+        "fr": "Le daron qui découvre le « floss » dix ans trop tard et le sort fièrement au repas de famille",
+        "en": "The dad discovering the floss dance ten years too late and proudly unleashing it at family dinner"
+      },
+      "hint": {
+        "fr": "Annonce « regardez ce que je sais faire », bras qui balaient à contretemps total, fierté absolue, hanches qui suivent pas. Les ados ont honte pour toute la lignée. Refais-le. Plus lentement. Encore plus fier.",
+        "en": "announce 'watch what I can do', arms swinging completely off-beat, total pride, hips refusing to cooperate. the teenagers are ashamed on behalf of the bloodline. do it again. slower. even prouder"
+      },
+      "category": "dance",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "dance", "family", "cringe"]
+    },
+    {
+      "id": "dlm-159-mime-trapped-real",
+      "text": {
+        "fr": "Le mime coincé dans sa boîte invisible qui réalise qu'il a vraiment oublié comment on en sort",
+        "en": "The mime trapped in his invisible box who genuinely forgot how the getting-out part works"
+      },
+      "hint": {
+        "fr": "Mains à plat sur les parois invisibles, sourire pro, recherche de la sortie, panique discrète sous le maquillage, tape aux quatre murs, supplie le public des yeux. Le mime ne parle pas. Le mime ne peut pas appeler à l'aide. Mime ta propre fin.",
+        "en": "flat hands on the invisible walls, pro smile, search for the exit, quiet panic under the makeup, knock on all four walls, beg the audience with your eyes. the mime cannot speak. the mime cannot call for help. mime your own demise"
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "mime", "absurd", "fail"]
+    },
+    {
+      "id": "dlm-160-baby-shark-loop",
+      "text": {
+        "fr": "Le parent piégé qui fait les gestes de la chanson pour enfants la plus collante du monde pour la 30e fois d'affilée",
+        "en": "The trapped parent doing the hand moves to the world's most relentless kids' song for the 30th time in a row"
+      },
+      "hint": {
+        "fr": "Gestes énergiques au début, sourire forcé qui se fige tour après tour, regard vide de quelqu'un qui a entendu cette mélodie 4000 fois. L'enfant veut « encore ». Tu recommences. Tes yeux supplient. Tes mains obéissent.",
+        "en": "energetic gestures at first, forced smile freezing round after round, the empty stare of someone who has heard this melody 4000 times. the child wants 'again'. you start over. your eyes beg. your hands obey"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "safe",
+      "props": false,
+      "tags": ["funny", "relatable", "family", "music"]
+    },
+    {
+      "id": "dlm-161-thirst-trap-gone-wrong",
+      "text": {
+        "fr": "La photo sexy ratée : tu poses comme une bombe et tu te manges le coin du lit en reculant",
+        "en": "The thirst trap gone wrong: you pose like a smokeshow and walk straight into the bed frame backing up for the angle"
+      },
+      "hint": {
+        "fr": "Regard de braise vers l'objectif, hanche cassée, recul pour le bon cadrage, TIBIA contre le lit, grimace de douleur immédiatement reconvertie en moue sexy. La photo est floue. Le bleu, lui, est net. Réessaie. Aïe.",
+        "en": "smoldering look to the lens, broken hip pose, step back for the framing, SHIN into the bed frame, pain grimace instantly converted back into a sexy pout. the photo is blurry. the bruise is not. try again. ow"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "relatable", "fail"]
+    },
+    {
+      "id": "dlm-162-walk-of-shame-heels",
+      "text": {
+        "fr": "Le walk of shame du dimanche matin en tenue de soirée, lunettes de soleil, talons à la main, qui croise le marché bio du quartier",
+        "en": "The Sunday morning walk of shame in last night's outfit, sunglasses on, heels in hand, cutting through the neighborhood farmers' market"
+      },
+      "hint": {
+        "fr": "Démarche pieds nus prudente, maquillage de la veille, lunettes même à l'ombre, évitement de tout contact visuel, salut gêné à un voisin qui a TOUT compris. La dignité est restée chez l'autre. Avance.",
+        "en": "careful barefoot shuffle, last night's makeup, sunglasses even in the shade, dodging all eye contact, awkward nod to a neighbor who has figured out EVERYTHING. your dignity stayed at their place. keep walking"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "party", "awkward"]
+    },
+    {
+      "id": "dlm-163-condom-pharmacy",
+      "text": {
+        "fr": "Acheter des préservatifs à la pharmacie du quartier quand c'est la mère de ton ex qui tient la caisse",
+        "en": "Buying condoms at the local pharmacy when it's your ex's mum working the till"
+      },
+      "hint": {
+        "fr": "Entrée détendue, repérage du rayon, prise discrète, reconnaissance horrifiée à la caisse, tentative de dissimuler la boîte sous un paquet de mouchoirs, regard appuyé d'elle. « Ça va, toi ? » Survis à la question. Paie. Fuis.",
+        "en": "casual entrance, scan the aisle, discreet grab, horrified recognition at the till, attempt to hide the box under a pack of tissues, her pointed look. 'how ARE you, dear?' survive the question. pay. flee"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "awkward", "relatable"]
+    },
+    {
+      "id": "dlm-164-stuck-in-jeans",
+      "text": {
+        "fr": "Essayer de retirer un jean trop serré après une soirée raclette, seul, et perdre le combat",
+        "en": "Trying to peel off skin-tight jeans after a raclette night, alone, and losing the fight"
+      },
+      "hint": {
+        "fr": "Confiance, blocage aux cuisses, sauts sur place, jambe coincée, chute sur le lit, lutte au sol façon scarabée retourné. Le jean gagne. Reste coincé à mi-cuisse et accepte ton sort. Mime la reddition.",
+        "en": "confidence, lock at the thighs, hopping in place, leg trapped, fall onto the bed, floor struggle like a flipped beetle. the jeans win. stay stuck at mid-thigh and accept your fate. mime the surrender"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "struggle", "fail"]
+    },
+    {
+      "id": "dlm-165-fake-orgasm-deli",
+      "text": {
+        "fr": "Rejouer LA scène du resto de Quand Harry rencontre Sally, mais à la table d'un repas de famille silencieux",
+        "en": "Recreating THE diner scene from When Harry Met Sally, but at a dead-silent family dinner table"
+      },
+      "hint": {
+        "fr": "Commence à manger normalement, monte progressivement le « mmh », tape la table, performance crescendo, puis stop net et reprends ta fourchette comme si de rien. La tablée est figée. Mamie a lâché sa cuillère. Reprends une bouchée.",
+        "en": "start eating normally, gradually build the 'mmm', table slaps, crescendo performance, then dead stop and pick your fork back up like nothing happened. the table is frozen. grandma dropped her spoon. take another bite"
+      },
+      "category": "cinema",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cinema", "parody", "loud"]
+    },
+    {
+      "id": "dlm-166-tinder-irl",
+      "text": {
+        "fr": "Reconnaître ton date Tinder qui était SUR la photo retouchée mais qui a 15 ans et 20 kilos de différence en vrai",
+        "en": "Recognizing your Tinder date who was technically IN the photo but is 15 years and 20 kilos off in real life"
+      },
+      "hint": {
+        "fr": "Sourire d'arrivée, repérage, double prise, recalcul mental express, sourire qui se fige puis se force, poignée de main trop ferme. Joue les deux : ton visage qui ment, et l'autre qui sait très bien et te défie de dire quelque chose. Assieds-toi. Commande un verre. Vite.",
+        "en": "arrival smile, scan, double take, express mental recalculation, smile freezing then forcing itself, overly firm handshake. play both: your face lying, and them knowing exactly and daring you to say something. sit down. order a drink. fast"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-167-hickey-collar",
+      "text": {
+        "fr": "Arriver au boulot lundi en essayant de cacher le suçon avec un col roulé en plein mois de juillet",
+        "en": "Showing up to work on Monday trying to hide the hickey with a turtleneck in the middle of July"
+      },
+      "hint": {
+        "fr": "Tire le col vers le haut toutes les dix secondes, transpire à grosses gouttes, refuse d'enlever ta veste, ris nerveusement quand un collègue te demande si t'as pas chaud. Le col glisse. Tu le remontes. Il reglisse. La canicule est ton ennemie maintenant.",
+        "en": "yank the collar up every ten seconds, sweat buckets, refuse to take off your jacket, laugh nervously when a colleague asks if you're not hot. the collar slips. you pull it up. it slips again. the heatwave is your enemy now"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "work", "relatable"]
+    },
+    {
+      "id": "dlm-168-noisy-neighbors-wall",
+      "text": {
+        "fr": "Toi et ton coloc qui collez l'oreille au mur pour écouter les voisins qui s'envoient en l'air bruyamment à 23h",
+        "en": "You and your flatmate pressing your ears to the wall to listen to the very loud neighbors going at it at 11pm"
+      },
+      "hint": {
+        "fr": "Joue les deux colocs : oreille au mur, yeux écarquillés, fou rire étouffé, échange de regards de plus en plus choqués, applaudissements muets d'admiration. Tape un coup au mur pour « féliciter ». Réalise que ça s'est arrêté. Recule, gêné. Quelqu'un dans cette pièce a déjà fait ça.",
+        "en": "play both flatmates: ear to the wall, eyes wide, stifled laughter, exchanging increasingly shocked looks, silent applause of admiration. knock on the wall once to 'congratulate' them. realize it stopped. back away, awkward. someone in this room has done this"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "awkward"]
+    },
+    {
+      "id": "dlm-169-drunk-text-regret",
+      "text": {
+        "fr": "Relire à jeun le pavé de SMS que t'as envoyé bourré à ton ex à 4h du matin",
+        "en": "Sober-reading the wall of texts you sent your ex while drunk at 4am"
+      },
+      "hint": {
+        "fr": "Réveil douloureux, main qui cherche le téléphone, ouverture de la conversation, lecture, horreur croissante, faire défiler et réaliser que ça continue, ENCORE, le « lu à 4h12 » sans réponse. Repose le téléphone face contre le matelas. Le seum est physique.",
+        "en": "painful wake-up, hand searching for the phone, open the conversation, read, growing horror, scroll and realize it keeps going, MORE, the 'seen 4:12am' with no reply. set the phone face down on the mattress. the cringe is physical"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "relatable"]
+    },
+    {
+      "id": "dlm-170-spray-tan-streaks",
+      "text": {
+        "fr": "Découvrir au réveil que ton autobronzant a viré orange par plaques et que t'as un date dans deux heures",
+        "en": "Waking up to discover your fake tan went streaky orange in patches and you have a date in two hours"
+      },
+      "hint": {
+        "fr": "Étirement matinal, regard au miroir, double prise, examen horrifié des coudes et des genoux tachés, frottage paniqué qui aggrave tout, application de fond de teint partout en désespoir. Le date approche. T'es zébré. Souris quand même.",
+        "en": "morning stretch, look in the mirror, double take, horrified inspection of the streaky elbows and knees, panicked scrubbing that makes it worse, slapping foundation everywhere in desperation. the date is coming. you're striped. smile anyway"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "fail"]
+    },
+    {
+      "id": "dlm-171-pole-class-beginner",
+      "text": {
+        "fr": "Ton premier cours de pole dance : tu vises la figure sexy et tu finis suspendu par une cheville en mode jambon",
+        "en": "Your first pole class: you go for the sexy move and end up dangling from one ankle like a ham"
+      },
+      "hint": {
+        "fr": "Approche confiante, prise sensuelle de la barre, élan gracieux, rotation qui tourne mal, suspension par une cheville, glissade au sol façon serpillière. La prof applaudit poliment. Relève-toi avec dignité. Retente la pose sexy. Aïe la cuisse.",
+        "en": "confident approach, sensual grip of the pole, graceful swing, rotation gone wrong, dangling by one ankle, slide to the floor like a wet mop. the instructor claps politely. get up with dignity. attempt the sexy pose again. ow the thigh"
+      },
+      "category": "dance",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "dance", "fail", "physical"]
+    },
+    {
+      "id": "dlm-172-bra-removal-magic",
+      "text": {
+        "fr": "Le grand classique : retirer son soutien-gorge sans enlever son tee-shirt, niveau de difficulté olympique",
+        "en": "The great classic: removing your bra without taking off your t-shirt, Olympic difficulty level"
+      },
+      "hint": {
+        "fr": "Bras qui disparaissent dans les manches, contorsion d'épaules, lutte invisible dans le dos, mouvements de plus en plus suspects vus de l'extérieur, victoire brandie comme un trophée. Personne sait ce qui se passe sous le tissu. Personne veut savoir. Brandis-le.",
+        "en": "arms vanishing into sleeves, shoulder contortion, invisible struggle behind the back, increasingly suspicious movements from the outside, victory held aloft like a trophy. nobody knows what's happening under the fabric. nobody wants to know. brandish it"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "struggle", "physical"]
+    },
+    {
+      "id": "dlm-173-strip-poker-loser",
+      "text": {
+        "fr": "Celui qui perd à un jeu de gages et doit enlever une chaussette en faisant durer le suspense comme un effeuillage de gala",
+        "en": "The one who loses a dare game and has to remove a single sock, milking the suspense like a gala striptease"
+      },
+      "hint": {
+        "fr": "Musique imaginaire, regard de braise, retrait ultra lent et théâtral de la chaussette, lancer dans le public, pose finale glorieuse. C'est UNE chaussette. Tu la traites comme un final de cabaret. Le salon hurle. Salue.",
+        "en": "imaginary music, smoldering look, ultra-slow theatrical sock removal, toss into the crowd, glorious final pose. it's ONE sock. you treat it like a cabaret finale. the room is screaming. take a bow"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "party", "loud", "absurd"]
+    },
+    {
+      "id": "dlm-174-locked-out-towel",
+      "text": {
+        "fr": "Sortir chercher un colis et s'enfermer dehors en serviette, devant l'interphone et le facteur",
+        "en": "Stepping out for a parcel and locking yourself out wearing only a towel, in front of the intercom and the postman"
+      },
+      "hint": {
+        "fr": "Sortie insouciante, clac de la porte, réalisation glaçante, vérification frénétique de toutes les poches inexistantes, maintien désespéré de la serviette d'une main, sonnette de la main libre, négociation honteuse avec le facteur. Le vent se lève. Tiens la serviette. TIENS-LA.",
+        "en": "carefree step out, door click, blood-freezing realization, frantic check of all the pockets you don't have, desperate one-handed grip on the towel, ring the bell with the free hand, shameful negotiation with the postman. the wind picks up. hold the towel. HOLD IT"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "panic", "fail"]
+    },
+    {
+      "id": "dlm-175-club-bathroom-line",
+      "text": {
+        "fr": "La file des toilettes en boîte à 2h : tu danses sur place en te retenant pendant que la fille devant raconte toute sa vie",
+        "en": "The club bathroom queue at 2am: you're dancing in place holding it in while the girl in front tells you her entire life story"
+      },
+      "hint": {
+        "fr": "Croisement de jambes discret, sourire crispé, hochements de tête à une inconnue trop bavarde, petits sauts de désespoir sur le rythme de la basse, regard suppliant vers la porte. Joue aussi l'inconnue qui veut devenir ta meilleure amie MAINTENANT. La porte s'ouvre. Sprint.",
+        "en": "discreet leg cross, tight smile, nodding at an over-chatty stranger, little hops of desperation to the bassline, pleading look at the door. also play the stranger who wants to be your best friend RIGHT NOW. the door opens. sprint"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "party", "multi-role", "relatable"]
+    },
+    {
+      "id": "dlm-176-massage-too-far",
+      "text": {
+        "fr": "Le massage entre potes qui dérape doucement vers un truc beaucoup trop intense et bizarrement intime",
+        "en": "The friendly shoulder massage that slowly drifts into something way too intense and weirdly intimate"
+      },
+      "hint": {
+        "fr": "Joue les deux : celui qui masse, parti dans un trip un peu trop concentré, et celui qui reçoit et qui passe du « ah ça fait du bien » au « ok c'est devenu chelou ». Échange de regards, malaise qui monte, retrait gêné, rires nerveux. On en reparle plus jamais.",
+        "en": "play both: the one giving the massage, lost in a slightly-too-focused trance, and the one receiving who goes from 'oh that's nice' to 'ok this got weird'. exchange of looks, rising discomfort, awkward pullback, nervous laughter. we never speak of this again"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "multi-role", "awkward"]
+    },
+    {
+      "id": "dlm-177-wax-strip-regret",
+      "text": {
+        "fr": "Le premier épilage à la cire maison : tu poses la bande, tu comptes jusqu'à trois, et tu te dégonfles douze fois",
+        "en": "The first at-home wax strip: you press it down, count to three, and chicken out twelve times in a row"
+      },
+      "hint": {
+        "fr": "Application confiante, prise du bord, « 1, 2, 3 »… rien. Re-souffle. « 1, 2… » rien. Négociation intérieure, regard au plafond, arrachage final dans un cri qui réveille l'immeuble. Examine le résultat. Recommence ailleurs. Le pire est devant toi.",
+        "en": "confident application, grip the edge, '1, 2, 3'… nothing. breathe again. '1, 2…' nothing. inner negotiation, stare at the ceiling, final rip with a scream that wakes the building. inspect the result. start again elsewhere. the worst is still ahead"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "pain", "suspense"]
+    },
+    {
+      "id": "dlm-178-ex-at-party",
+      "text": {
+        "fr": "Repérer ton ex à la soirée et faire semblant d'être passionnément absorbé par ton verre vide",
+        "en": "Spotting your ex at the party and pretending to be deeply fascinated by your empty cup"
+      },
+      "hint": {
+        "fr": "Rire trop fort à une blague que personne a faite, repositionnement stratégique dos tourné, vérification reflet dans la vitre, faux appel téléphonique animé, gorgée d'un verre vide depuis dix minutes. Joue aussi l'ex qui fait EXACTEMENT pareil de l'autre côté. Vous vous évitez en miroir.",
+        "en": "laugh too hard at a joke nobody made, strategic back-turned repositioning, check your reflection in the window, fake animated phone call, sip from a cup that's been empty for ten minutes. also play the ex doing EXACTLY the same on the other side. you avoid each other in perfect mirror"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-179-period-leak-panic",
+      "text": {
+        "fr": "Réaliser en plein open space que ton pull noué autour de la taille est devenu une nécessité absolue",
+        "en": "Realizing mid-open-plan-office that the jumper tied around your waist just became a non-negotiable necessity"
+      },
+      "hint": {
+        "fr": "Travail tranquille, sensation suspecte, vérification arrière en mode espion, panique intérieure totale, dénouage du pull autour de la taille avec une nonchalance forcée, marche en crabe digne vers les toilettes. Le sourire ne flanche pas. À l'intérieur c'est l'apocalypse.",
+        "en": "working calmly, suspicious feeling, spy-mode rear check, total internal panic, untie the jumper from around your waist with forced nonchalance, dignified crab-walk toward the bathroom. the smile holds. inside it's the apocalypse"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "relatable", "panic"]
+    },
+    {
+      "id": "dlm-180-sexy-dance-pulled-muscle",
+      "text": {
+        "fr": "Tenter une danse sensuelle pour ton/ta partenaire et te bloquer le dos sur le premier déhanché",
+        "en": "Attempting a sultry dance for your partner and throwing your back out on the very first hip roll"
+      },
+      "hint": {
+        "fr": "Regard intense, approche lente et confiante, premier déhanché ambitieux, CRAC, douleur fulgurante, tentative désespérée de transformer la grimace en moue séductrice, immobilisation totale à mi-mouvement. « Tout va bien », mensonge évident. Tends la main pour qu'on te relève. Sexy, hein.",
+        "en": "intense gaze, slow confident approach, ambitious first hip roll, CRACK, searing pain, desperate attempt to convert the grimace into a seductive pout, total freeze mid-move. 'I'm fine', obvious lie. reach out a hand to be helped up. sexy, right"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "pain"]
+    },
+    {
+      "id": "dlm-181-hangover-shower-floor",
+      "text": {
+        "fr": "La gueule de bois du siècle : tu prends ta douche assis par terre parce que rester debout c'est trop ambitieux",
+        "en": "The hangover of the century: you take your shower sitting on the floor because standing up is far too ambitious"
+      },
+      "hint": {
+        "fr": "Entrée chancelante dans la douche, glissade contrôlée jusqu'au sol, position fœtale sous le jet, regard dans le vide, regret existentiel, promesse de plus jamais boire que personne ne croit. Lève un bras vers le shampoing. C'est trop loin. Renonce.",
+        "en": "stagger into the shower, controlled slide to the floor, fetal position under the spray, thousand-yard stare, existential regret, the never-drinking-again promise nobody believes. raise one arm toward the shampoo. it's too far. give up"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "party", "relatable", "fail"]
+    },
+    {
+      "id": "dlm-182-online-date-coughs-meal",
+      "text": {
+        "fr": "Au resto pour un premier date, tu t'étouffes avec ton plat et tu choisis de mourir plutôt que de tousser bruyamment",
+        "en": "On a first dinner date, you choke on your food and choose death over coughing loudly in front of them"
+      },
+      "hint": {
+        "fr": "Bouchée élégante, fausse route, yeux qui se mouillent, sourire maintenu coûte que coûte, gorgée d'eau discrète et désespérée, toux étouffée dans la serviette transformée en « petite quinte de rien du tout ». La table d'à côté s'inquiète. Toi tu vois la lumière. Souris encore.",
+        "en": "elegant bite, wrong pipe, eyes watering, smile maintained at all costs, discreet desperate sip of water, cough smothered into the napkin and rebranded as 'just a tickle'. the next table is concerned. you see the light. smile again"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "suspense"]
+    },
+    {
+      "id": "dlm-183-thong-visible-bend",
+      "text": {
+        "fr": "Te baisser pour ramasser un truc en soirée et sentir que le pantalon taille basse a trahi bien plus que prévu",
+        "en": "Bending down to grab something at a party and feeling the low-rise jeans betray way more than you signed up for"
+      },
+      "hint": {
+        "fr": "Repère l'objet au sol, baisse-toi sans réfléchir, sens le courant d'air, FIGE, remonte le pantalon d'un geste éclair, vérifie qui était dans ton dos, sourire crispé à un témoin trop souriant. La dignité a glissé. Rattrape-la. Trop tard.",
+        "en": "spot the thing on the floor, bend down without thinking, feel the breeze, FREEZE, yank the jeans up in a flash, check who was behind you, tight smile at a witness smiling far too much. your dignity slipped. catch it. too late"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "party", "relatable"]
+    },
+    {
+      "id": "dlm-184-romance-novel-cover",
+      "text": {
+        "fr": "Poser comme le couple sur la couverture d'un roman à l'eau de rose, mais en jouant les DEUX en même temps",
+        "en": "Posing like the couple on a cheesy romance novel cover, but playing BOTH halves at the same time"
+      },
+      "hint": {
+        "fr": "Joue le héros torse bombé, cheveux au vent imaginaire, bras tendu… puis pivote et deviens l'héroïne pâmée renversée en arrière dans ce même bras. Alterne de plus en plus vite. Embrasse-toi presque. Le vent de la passion souffle. Tu te tiens toi-même. C'est tragique et magnifique.",
+        "en": "play the chiseled hero, puffed chest, imaginary wind in the hair, arm outstretched… then pivot and become the swooning heroine draped backward over that same arm. switch faster and faster. almost kiss yourself. the wind of passion blows. you are holding yourself. it's tragic and magnificent"
+      },
+      "category": "cinema",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cinema", "multi-role", "absurd"]
+    },
+    {
+      "id": "dlm-185-toy-buzz-quiet",
+      "text": {
+        "fr": "Chercher d'où vient le bourdonnement suspect dans la chambre pile quand ta coloc' frappe à la porte",
+        "en": "Hunting for the source of the suspicious buzzing in your room exactly when your flatmate knocks on the door"
+      },
+      "hint": {
+        "fr": "Bourdonnement lointain, sourcils froncés, recherche sous l'oreiller, panique en localisant la source dans le tiroir, toc-toc à la porte, plongeon sur le tiroir pour l'étouffer, sourire d'innocence totale face à la porte. « Tout va bien ! » Le bourdonnement reprend. Replonge.",
+        "en": "distant buzzing, furrowed brow, search under the pillow, panic when you locate the source in the drawer, knock-knock at the door, dive onto the drawer to muffle it, smile of total innocence toward the door. 'all good in here!' the buzzing resumes. dive again"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "panic", "sound-rich"]
+    },
+    {
+      "id": "dlm-186-makeout-interrupted-parents",
+      "text": {
+        "fr": "Le câlin sur le canapé qui s'arrête net quand la clé tourne dans la serrure : reprise express d'une distance de cousins éloignés",
+        "en": "The couch makeout that stops dead when the key turns in the lock: instant reset to a distant-cousins seating distance"
+      },
+      "hint": {
+        "fr": "Joue le couple : rapprochement, clé dans la serrure, bond de panthère vers les extrémités opposées du canapé, lissage de cheveux frénétique, prise d'une télécommande retournée, sourire ultra naturel vers la porte. « On regardait un documentaire ! » Le cœur bat à 200. Tiens la pose.",
+        "en": "play the couple: leaning in, key in the lock, panther leap to opposite ends of the couch, frantic hair-smoothing, grab the remote upside down, ultra-natural smile toward the door. 'we were watching a documentary!' heart pounding at 200. hold the pose"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "panic"]
+    },
+    {
+      "id": "dlm-187-twerk-class-pulled",
+      "text": {
+        "fr": "Le cours de twerk où la prof descend jusqu'au sol et toi tu restes coincé en position canard sans pouvoir remonter",
+        "en": "The twerk class where the instructor drops to the floor and you get stuck in a duck squat with no way back up"
+      },
+      "hint": {
+        "fr": "Descente confiante, secousses énergiques, jambes qui tremblent, point de non-retour, blocage total en bas, sourire qui se transforme en grimace, tentatives discrètes et ratées de remonter en rythme. La prof continue. Tu vis ici maintenant. Twerke ta défaite.",
+        "en": "confident drop, energetic shakes, legs trembling, point of no return, total lock at the bottom, smile morphing into a grimace, discreet failed attempts to rise back up on beat. the instructor keeps going. you live here now. twerk your defeat"
+      },
+      "category": "dance",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "dance", "gym", "fail"]
+    },
+    {
+      "id": "dlm-188-camera-roll-passed-around",
+      "text": {
+        "fr": "Tu montres une photo en faisant glisser ton téléphone, et tu réalises trop tard que la galerie continue de défiler toute seule",
+        "en": "You show one photo by sliding your phone over, then realize too late the camera roll is still swiping on its own"
+      },
+      "hint": {
+        "fr": "Présentation fière de LA photo, lâcher du téléphone, deux secondes de paix, réalisation qu'un doigt traîne sur l'écran, plongeon désespéré pour récupérer l'appareil, course-poursuite du téléphone qui passe de main en main. Le salon a tout vu. Tu vivras avec.",
+        "en": "proud presentation of THE photo, hand over the phone, two seconds of peace, realization that a finger is dragging across the screen, desperate dive to retrieve the device, chase the phone as it passes hand to hand. the room saw everything. you'll live with it"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "panic", "tech"]
+    },
+    {
+      "id": "dlm-189-honeymoon-suite-luggage",
+      "text": {
+        "fr": "Le couple en lune de miel qui débarque dans la suite romantique avec quatre valises et zéro romantisme, juste épuisé",
+        "en": "The honeymoon couple arriving at the romantic suite with four suitcases and zero romance, just exhausted"
+      },
+      "hint": {
+        "fr": "Joue les deux : entrée censée être sensuelle, pétales de roses sur le lit, regards lourds de fatigue plutôt que de désir, lâcher des valises, un qui tente une approche romantique, l'autre qui s'effondre tout habillé en travers du lit et ronfle direct. La passion attendra. Mime le ronflement.",
+        "en": "play both: an entrance meant to be sensual, rose petals on the bed, looks heavy with exhaustion rather than desire, drop the suitcases, one attempts a romantic move, the other collapses fully clothed across the bed and snores instantly. passion can wait. mime the snore"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "wedding"]
+    },
+    {
+      "id": "dlm-190-gym-shorts-split",
+      "text": {
+        "fr": "Le squat de trop à la salle : ton short craque au pire endroit et tu dois finir ta série en faisant comme si de rien",
+        "en": "One squat too many at the gym: your shorts split in the worst spot and you have to finish the set like nothing happened"
+      },
+      "hint": {
+        "fr": "Squat profond, RIIIP sonore, freeze en bas, vérification arrière subtile et horrifiée, calcul express du chemin le plus court jusqu'au sac, descente lente à la salle de bain en collant le dos au mur. Personne doit voir la brèche. Marche en crabe. Garde le mur.",
+        "en": "deep squat, audible RIIIP, freeze at the bottom, subtle horrified rear check, express calculation of the shortest path to your bag, slow exit to the locker room with your back glued to the wall. nobody must see the gap. crab walk. keep the wall"
+      },
+      "category": "sports",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "sports", "gym", "fail"]
+    },
+    {
+      "id": "dlm-191-sext-wrong-chat",
+      "text": {
+        "fr": "Réaliser au ralenti que le message brûlant destiné à ton crush est parti dans le groupe famille",
+        "en": "Realizing in slow motion that the steamy message meant for your crush just landed in the family group chat"
+      },
+      "hint": {
+        "fr": "Pouce satisfait sur « envoyer », deux secondes de paix, regard sur le nom du destinataire, horreur pure, sueur froide, tentative frénétique de supprimer pour tout le monde, le « lu » de ta tante qui apparaît, le téléphone lâché comme s'il brûlait. Y'a plus rien à faire. Allonge-toi par terre.",
+        "en": "satisfied thumb on 'send', two seconds of peace, glance at the recipient name, pure horror, cold sweat, frantic attempt to delete for everyone, your aunt's 'seen' appearing, drop the phone like it's burning. there's nothing left to do. lie down on the floor"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "relatable"]
+    },
+    {
+      "id": "dlm-192-changing-room-curtain",
+      "text": {
+        "fr": "En cabine d'essayage à moitié déshabillé, le rideau qui s'ouvre tout seul sur le magasin entier",
+        "en": "Half-undressed in the fitting room, the curtain that slides wide open onto the entire shop"
+      },
+      "hint": {
+        "fr": "Essayage tranquille, vêtement coincé sur la tête, le rideau qui glisse mystérieusement, courant d'air, réalisation aveugle, plongeon pour rattraper le rideau les bras emmêlés dans le tissu, regards horrifiés des clients. Referme. Trop tard. Le magasin a vu. Réessaie le vêtement.",
+        "en": "trying on in peace, garment stuck over your head, the curtain mysteriously sliding open, a breeze, blind realization, dive to grab the curtain with arms tangled in fabric, horrified shopper stares. close it. too late. the shop saw. try the garment on again"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "panic", "fail"]
+    },
+    {
+      "id": "dlm-193-lap-dance-birthday-fail",
+      "text": {
+        "fr": "La danse d'anniversaire surprise pour un pote, lancée avec assurance, qui devient horriblement gênante pour tout le monde",
+        "en": "The surprise birthday dance for a mate, launched with confidence, that turns horribly awkward for everyone"
+      },
+      "hint": {
+        "fr": "Entrée triomphale sur une musique imaginaire, premiers déhanchés assurés, lecture de la salle qui ne rit PAS, le pote tétanisé, doute qui s'installe, déhanchés qui ralentissent, sourire qui meurt, recul gêné vers la sortie. Personne sait où regarder. Toi non plus. Continue. Pourquoi.",
+        "en": "triumphant entrance to imaginary music, confident first moves, reading the room that is NOT laughing, the birthday mate frozen, doubt creeping in, moves slowing down, smile dying, awkward retreat toward the door. nobody knows where to look. neither do you. keep going. why"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "party", "dance"]
+    },
+    {
+      "id": "dlm-194-bathtub-romance-slip",
+      "text": {
+        "fr": "Le bain romantique à deux dans une baignoire prévue pour zéro virgule cinq personne",
+        "en": "The romantic two-person bath in a tub designed for zero point five people"
+      },
+      "hint": {
+        "fr": "Joue les deux : entrée glamour dans le bain, recherche d'une position confortable impossible, genou dans les côtes, débordement d'eau sur le sol, glissade soudaine sous l'eau, remontée en crachotant, abandon total du romantisme. On se regarde, trempés, vaincus. On rit. C'est déjà ça.",
+        "en": "play both: glamorous entry into the bath, search for an impossible comfortable position, knee in the ribs, water flooding the floor, sudden slide under the surface, resurface spluttering, total surrender of the romance. you look at each other, soaked, defeated. you laugh. that's something"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "fail"]
+    },
+    {
+      "id": "dlm-195-double-booked-dates",
+      "text": {
+        "fr": "Réaliser que t'as deux dates au même bar à la même heure et que tu fais des allers-retours entre les deux tables",
+        "en": "Realizing you booked two dates at the same bar at the same time and you're now sprinting between the two tables"
+      },
+      "hint": {
+        "fr": "Sourire à la table 1, excuse « je reviens », sprint discret à la table 2, autre sourire, autre excuse, retour table 1 hors d'haleine, mensonge sur un « appel du boulot ». Joue les deux dates qui commencent à trouver ça louche. Le bar entier suit le match. Tu vas perdre les deux.",
+        "en": "smile at table 1, excuse 'be right back', discreet sprint to table 2, another smile, another excuse, back to table 1 out of breath, lie about a 'work call'. play both dates starting to find this suspicious. the whole bar is watching the match. you're going to lose both"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-196-banana-eat-stare",
+      "text": {
+        "fr": "Manger une banane tranquillement en réunion sans réaliser que toute la table te fixe en retenant un fou rire",
+        "en": "Eating a banana calmly in a meeting without realizing the whole table is staring, holding back laughter"
+      },
+      "hint": {
+        "fr": "Épluche, mords innocemment, prends des notes, remarque les regards, hausse les épaules, continue à manger, réalise LENTEMENT pourquoi tout le monde sourit, fige la banane à mi-chemin de ta bouche, repose-la dignement sur la table. Reprends la réunion comme si de rien. Quelqu'un tousse.",
+        "en": "peel, bite innocently, take notes, notice the looks, shrug, keep eating, SLOWLY realize why everyone is smirking, freeze the banana halfway to your mouth, set it down on the table with dignity. resume the meeting like nothing happened. someone coughs"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "work", "awkward"]
+    },
+    {
+      "id": "dlm-197-honeytrap-flirt-bartender",
+      "text": {
+        "fr": "Tenter le regard de braise le plus charmeur du monde au barman, qui te répond « c'est 12 euros »",
+        "en": "Trying the world's most charming smoldering look at the bartender, who replies 'that's 12 euros'"
+      },
+      "hint": {
+        "fr": "Accoude-toi au bar façon film, regard appuyé par-dessus l'épaule, sourire en coin, réplique murmurée pleine de sous-entendus… le barman cligne des yeux, tend la main, « 12 euros ». Effondrement intérieur instantané, sourire qui se décompose, fouille gênée des poches. La séduction a un prix. Paie-le.",
+        "en": "lean on the bar movie-style, pointed look over the shoulder, half-smile, a murmured line dripping with subtext… the bartender blinks, holds out a hand, '12 euros'. instant internal collapse, smile decomposing, awkward pocket search. seduction has a price. pay it"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "fail"]
+    },
+    {
+      "id": "dlm-198-snapchat-streak-toilet",
+      "text": {
+        "fr": "Prendre le selfie quotidien pour garder tes flammes Snap pile au pire moment et au pire endroit, sur le trône",
+        "en": "Taking the daily selfie to keep your Snap streak alive at the worst possible moment and place, on the throne"
+      },
+      "hint": {
+        "fr": "Position assise compromettante, téléphone levé, recherche du moins mauvais angle, sourire forcé, vérification frénétique qu'on voit RIEN derrière, flash accidentel, sursaut, presque lâcher le téléphone dans la cuvette. Plongeon pour le rattraper. La flamme est sauvée. La dignité, non.",
+        "en": "compromising seated position, phone up, search for the least-bad angle, forced smile, frantic check that NOTHING shows behind, accidental flash, jolt, nearly drop the phone in the bowl. dive to catch it. the streak is saved. the dignity is not"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "relatable", "tech"]
+    },
+    {
+      "id": "dlm-199-yoga-fart-class",
+      "text": {
+        "fr": "La posture de yoga la plus profonde du cours, le silence le plus total, et ton corps qui te trahit acoustiquement",
+        "en": "The deepest pose of the yoga class, the most total silence, and your body betraying you acoustically"
+      },
+      "hint": {
+        "fr": "Sérénité parfaite, descente lente dans la posture, respiration profonde, le silence de la salle… PRRT, freeze absolu, yeux grands ouverts, scan discret des voisins, retour à la posture zen avec une concentration suspecte. La prof dit « relâchez les tensions ». Trop tard. C'est fait.",
+        "en": "perfect serenity, slow descent into the pose, deep breath, the total silence of the room… PFFT, absolute freeze, eyes wide open, discreet scan of the neighbors, return to the zen pose with suspicious concentration. the instructor says 'release the tension'. too late. already released"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "gym", "awkward"]
+    },
+    {
+      "id": "dlm-200-magic-mike-chair",
+      "text": {
+        "fr": "Le numéro de strip-tease sur chaise façon film, sauf que la chaise est en plastique de jardin et qu'elle craque",
+        "en": "The chair striptease routine from the movie, except the chair is cheap garden plastic and it's creaking"
+      },
+      "hint": {
+        "fr": "Approche confiante de la chaise, regard de braise, jambe par-dessus le dossier, ondulation lente et sensuelle, CRAC du plastique, freeze, redistribution prudente du poids, reprise du show à 30 % d'amplitude, deuxième CRAC plus inquiétant. Garde le regard intense. La chaise va lâcher. Continue.",
+        "en": "confident approach to the chair, smoldering look, leg over the backrest, slow sensual roll, plastic CRACK, freeze, careful redistribution of weight, resume the show at 30% amplitude, second more worrying CRACK. keep the intense gaze. the chair is going to give. keep going"
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "dance", "parody", "fail"]
+    },
+    {
+      "id": "dlm-201-confession-booth-overshare",
+      "text": {
+        "fr": "Avouer un truc beaucoup trop intime à un inconnu dans un Uber partagé à 3h du matin",
+        "en": "Confessing something way too intimate to a stranger in a shared Uber at 3am"
+      },
+      "hint": {
+        "fr": "Installation cosy sur la banquette, début de conversation anodin, montée progressive vers le déballage total, gestes de plus en plus expressifs, l'inconnu qui se colle à la portière, le chauffeur qui croise ton regard dans le rétro. Tu continues. Tu peux plus t'arrêter. Joue aussi l'inconnu qui regrette d'être monté.",
+        "en": "cozy settle into the seat, harmless start to the conversation, gradual build toward the full unloading, increasingly expressive gestures, the stranger pressing against the door, the driver catching your eye in the mirror. you keep going. you can't stop. also play the stranger regretting this ride"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "party", "multi-role"]
+    },
+    {
+      "id": "dlm-202-romantic-movie-rewind",
+      "text": {
+        "fr": "Le couple qui regarde un film torride sur le canapé avec les parents qui débarquent pile à LA scène",
+        "en": "The couple watching a steamy film on the couch when the parents walk in at exactly THE scene"
+      },
+      "hint": {
+        "fr": "Joue tout le monde : le couple à demi avachi qui sursaute, la course frénétique vers la télécommande, le bouton pause raté trois fois, l'écran figé au pire moment possible, les parents dans l'embrasure de la porte, le silence cosmique. « C'est un film d'auteur ! » Personne respire. Mime le malaise total.",
+        "en": "play everyone: the half-slumped couple jolting upright, the frantic dash for the remote, the pause button missed three times, the screen frozen at the worst possible moment, the parents in the doorway, the cosmic silence. 'it's an arthouse film!' nobody breathes. mime the total mortification"
+      },
+      "category": "everyday",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "awkward"]
+    },
+    {
+      "id": "dlm-203-pickup-line-mirror",
+      "text": {
+        "fr": "Répéter ta meilleure phrase de drague devant le miroir des toilettes, en boucle, juste avant de l'oublier complètement",
+        "en": "Rehearsing your best pickup line in the bathroom mirror, on loop, right before forgetting it completely"
+      },
+      "hint": {
+        "fr": "Vérifie ta tête, sourire d'essai numéro un, réplique murmurée, ajustement du sourcil, version plus cool, version plus mystérieuse, regard de braise testé sous tous les angles, confiance au max. Tu sors. Tu reviens. T'as TOUT oublié. Re-répète. Quelqu'un entre. Fais semblant de te laver les mains.",
+        "en": "check your face, test smile number one, murmured line, eyebrow adjustment, cooler version, more mysterious version, smolder tested from every angle, confidence maxed. you walk out. you walk back in. you've forgotten EVERYTHING. rehearse again. someone walks in. pretend to wash your hands"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "relatable"]
+    },
+    {
+      "id": "dlm-204-sauna-stranger-stare",
+      "text": {
+        "fr": "Le sauna minuscule où tu te retrouves en tête à tête avec un inconnu et où tu sais plus où poser les yeux",
+        "en": "The tiny sauna where you end up one-on-one with a stranger and have absolutely no idea where to look"
+      },
+      "hint": {
+        "fr": "Installation digne sur le banc, ajustement nerveux de la serviette, recherche désespérée d'un point neutre à fixer au plafond, gouttes de sueur, regard qui croise celui de l'inconnu par accident, sourire crispé, re-fixage du plafond. Joue aussi l'inconnu qui fait pareil. Vous fixez deux coins opposés. L'éternité passe.",
+        "en": "dignified settle on the bench, nervous towel adjustment, desperate search for a neutral spot on the ceiling to stare at, sweat drops, your gaze accidentally meeting the stranger's, tight smile, back to the ceiling. also play the stranger doing the same. you both stare at opposite corners. eternity passes"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "multi-role", "awkward"]
+    },
+    {
+      "id": "dlm-205-gyno-stirrups-smalltalk",
+      "text": {
+        "fr": "Faire la conversation la plus détendue du monde dans une position d'examen médical absolument pas détendue",
+        "en": "Making the most relaxed small talk in the world in a medical exam position that is absolutely not relaxed"
+      },
+      "hint": {
+        "fr": "Allongé, position compromettante, regard fixé au plafond avec une nonchalance forcée, sourire pincé, réponses enjouées aux questions sur la météo et les vacances, rire poli qui sonne creux, doigts qui agrippent discrètement la table. « Oui oui, super été ! » Garde la conversation vivante. Surtout, garde-la vivante.",
+        "en": "lying down, compromising position, eyes fixed on the ceiling with forced nonchalance, tight smile, cheery answers to questions about the weather and holidays, polite hollow laugh, fingers discreetly gripping the table. 'yeah, great summer!' keep the conversation alive. above all, keep it alive"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "awkward", "relatable"]
+    },
+    {
+      "id": "dlm-206-love-bite-mirror-cover",
+      "text": {
+        "fr": "Le matin d'après : tu testes douze positions de cheveux et trois écharpes pour cacher les preuves dans le miroir",
+        "en": "The morning after: you test twelve hair positions and three scarves to hide the evidence in the mirror"
+      },
+      "hint": {
+        "fr": "Examen rapproché du cou dans le miroir, horreur, cheveux ramenés d'un côté, vérification, ça se voit encore, écharpe nouée façon hôtesse de l'air, trop chaud, pull à col haut, étouffement, retour aux cheveux, désespoir total. Choisis la pire option. Sors la tête haute. On verra de toute façon.",
+        "en": "close-up neck inspection in the mirror, horror, hair pulled to one side, check, still visible, scarf knotted flight-attendant style, too hot, high-collared jumper, suffocation, back to the hair, total despair. pick the worst option. walk out head high. they'll see anyway"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "relatable", "fail"]
+    },
+    {
+      "id": "dlm-207-burlesque-glove-stuck",
+      "text": {
+        "fr": "Le numéro de burlesque où tu retires le long gant avec une lenteur sensuelle… mais il reste coincé à mi-bras",
+        "en": "The burlesque act where you peel off the long glove with sensual slowness… except it gets stuck mid-arm"
+      },
+      "hint": {
+        "fr": "Musique imaginaire, regard aguicheur vers le public, pincement du bout du gant entre les dents, traction lente et théâtrale, blocage net au coude, sourire qui vacille, deuxième tentative plus énergique, lutte de moins en moins sensuelle, arrachage final inélégant. Lance le gant. Pose finale glorieuse. Salue.",
+        "en": "imaginary music, teasing look to the crowd, pinch the fingertip of the glove between your teeth, slow theatrical pull, sharp jam at the elbow, faltering smile, more energetic second attempt, an increasingly un-sensual struggle, inelegant final yank. throw the glove. glorious final pose. bow"
+      },
+      "category": "dance",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "dance", "parody", "fail"]
+    },
+    {
+      "id": "dlm-208-romantic-feeding-miss",
+      "text": {
+        "fr": "Le couple romantique qui se donne la béchamel à la fourchette et qui rate la bouche à chaque fois",
+        "en": "The romantic couple feeding each other forkfuls of cake and missing the mouth every single time"
+      },
+      "hint": {
+        "fr": "Joue les deux : regards amoureux, fourchette tendue avec délicatesse, ouverture de bouche, la fourchette qui rate et atterrit sur la joue, le nez, le menton, rires gênés, deuxième essai, re-raté, sauce partout, abandon de l'élégance, on finit par manger avec les mains comme des animaux. La romance survivra. Peut-être.",
+        "en": "play both: loving looks, fork extended delicately, mouth opening, the fork missing and landing on the cheek, the nose, the chin, awkward laughter, second attempt, missed again, sauce everywhere, abandon all elegance, end up eating with your hands like animals. the romance will survive. maybe"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-209-night-out-shoe-loss",
+      "text": {
+        "fr": "5h du matin, fin de soirée : tu rentres pieds nus, une seule chaussure à la main, en jurant que t'as passé une super soirée",
+        "en": "5am, end of the night: you walk home barefoot, one shoe in hand, swearing you had a great time"
+      },
+      "hint": {
+        "fr": "Démarche zigzagante et fière, une chaussure brandie comme un trophée, recherche vague de la deuxième dans le vide, sourire béat à un lampadaire, tentative de marcher droit sur une ligne imaginaire, glissade évitée de justesse. Salue un chat. Continue. Tout va « parfaitement bien ». Mime la conviction absolue.",
+        "en": "zigzagging proud strut, one shoe held aloft like a trophy, vague search for the second one in thin air, blissful smile at a lamppost, attempt to walk straight along an imaginary line, narrowly avoided slip. greet a cat. keep going. everything is 'perfectly fine'. mime the absolute conviction"
+      },
+      "category": "everyday",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "party", "relatable", "fail"]
+    },
+    {
+      "id": "dlm-210-couple-selfie-timer",
+      "text": {
+        "fr": "Le couple qui tente la photo sexy au retardateur et qui se vautre en courant se mettre en position avant le déclic",
+        "en": "The couple attempting the sexy timer-selfie, wiping out as they sprint into position before the click"
+      },
+      "hint": {
+        "fr": "Joue les deux : calage du téléphone, lancement du retardateur, sprint vers le lit, pose sensuelle préparée à la hâte, l'un qui glisse sur le tapis, l'autre qui le rattrape mal, chute groupée PILE au moment du flash. La photo immortalise le désastre. Regardez-la ensemble. Re-réessayez. Re-vautrez-vous.",
+        "en": "play both: prop the phone, start the timer, sprint to the bed, hastily prepared sensual pose, one slips on the rug, the other catches them badly, group collapse EXACTLY as the flash goes off. the photo immortalizes the disaster. look at it together. try again. wipe out again"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-211-vibrating-phone-meeting",
+      "text": {
+        "fr": "Ton téléphone qui vibre fort sur la table en réunion avec le nom d'un contact très gênant affiché bien en grand",
+        "en": "Your phone buzzing loudly on the meeting table with a very embarrassing contact name displayed nice and large"
+      },
+      "hint": {
+        "fr": "Concentration pro, BZZZ sur la table, regard horrifié vers l'écran, plongeon de la main pour retourner le téléphone, trop tard, le collègue d'à côté a lu le nom et hausse un sourcil, sourire crispé, le téléphone re-vibre, re-plongeon, retournement définitif. Reprends la réunion. Le sourcil est toujours levé.",
+        "en": "professional focus, BZZZ on the table, horrified glance at the screen, hand-dive to flip the phone face-down, too late, the colleague beside you read the name and raises an eyebrow, tight smile, the phone buzzes again, dive again, final flip. resume the meeting. the eyebrow is still raised"
+      },
+      "category": "cringe",
+      "difficulty": 1,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "work", "sound-rich"]
+    },
+    {
+      "id": "dlm-212-tango-too-close",
+      "text": {
+        "fr": "Le cours de tango où le prof te colle à un parfait inconnu et où vous devez faire semblant que c'est normal",
+        "en": "The tango class where the teacher pairs you with a total stranger and you both have to pretend this is normal"
+      },
+      "hint": {
+        "fr": "Joue les deux : mise en position rapprochée imposée, mains qui ne savent pas où se poser, regard intense obligatoire que vous fuyez tous les deux, pas hésitants, fronts qui se cognent presque, micro-sourires gênés, le prof qui crie « PLUS DE PASSION », horreur mutuelle, mais vous y allez. Pour l'art. Uniquement pour l'art.",
+        "en": "play both: the imposed close hold, hands that don't know where to land, the mandatory intense gaze you both avoid, hesitant steps, foreheads nearly bumping, tiny awkward smiles, the teacher shouting 'MORE PASSION', mutual horror, but you commit. for the art. purely for the art"
+      },
+      "category": "dance",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "dance", "multi-role", "awkward"]
+    },
+    {
+      "id": "dlm-213-shower-singer-roommate",
+      "text": {
+        "fr": "Chanter à pleine voix une chanson d'amour très intense sous la douche sans savoir que ton coloc écoute derrière la porte",
+        "en": "Belting an extremely intense love song in the shower with no idea your flatmate is listening behind the door"
+      },
+      "hint": {
+        "fr": "Performance habitée, micro-pommeau de douche, regard vers un public imaginaire, notes hautes risquées, gestes dramatiques, déhanchés mouillés. Joue aussi le coloc derrière la porte, plié de rire en filmant. Tu sors, serviette autour de la taille, tu le vois. Le téléphone est levé. Trop tard. Tu es légende.",
+        "en": "possessed performance, showerhead microphone, gaze toward an imaginary crowd, risky high notes, dramatic gestures, wet hip rolls. also play the flatmate behind the door, doubled over laughing while filming. you step out, towel around your waist, you see them. the phone is up. too late. you're a legend now"
+      },
+      "category": "cringe",
+      "difficulty": 3,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "music", "multi-role"]
+    },
+    {
+      "id": "dlm-214-first-kiss-glasses",
+      "text": {
+        "fr": "Le premier baiser maladroit où vous vous cognez les dents, les nez, et où les lunettes de l'un finissent de travers",
+        "en": "The awkward first kiss where you clash teeth, bump noses, and one person's glasses end up sideways"
+      },
+      "hint": {
+        "fr": "Joue les deux : rapprochement hésitant, mauvais timing, têtes du même côté, re-correction, choc des nez, petit rire gêné, deuxième tentative, choc des dents, lunettes de travers, recul, regard, on retente une troisième fois en mode prudent. Ça marche enfin. Presque. Mime le « presque ».",
+        "en": "play both: hesitant lean-in, bad timing, heads tilting the same way, re-correction, nose collision, small awkward laugh, second attempt, teeth clash, glasses knocked sideways, pull back, a look, you try a careful third time. it finally works. almost. mime the 'almost'"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "dating", "multi-role"]
+    },
+    {
+      "id": "dlm-215-airport-pat-down",
+      "text": {
+        "fr": "La fouille de sécurité à l'aéroport qui s'éternise pendant que toute la file te regarde lever les bras de plus en plus longtemps",
+        "en": "The airport security pat-down dragging on while the whole queue watches you hold your arms up longer and longer"
+      },
+      "hint": {
+        "fr": "Bras en croix, sourire innocent, l'agent qui bipe partout, ceinture, chaussures, poches, re-bip mystérieux, fouille de plus en plus poussée, bras qui fatiguent et tremblent, file impatiente qui soupire, regard suppliant vers l'agent impassible. Tu n'as rien fait. Tu te sens coupable de tout. Garde les bras levés.",
+        "en": "arms out wide, innocent smile, the officer beeping everywhere, belt, shoes, pockets, mysterious re-beep, increasingly thorough search, arms tiring and trembling, impatient queue sighing, pleading look at the impassive officer. you did nothing. you feel guilty of everything. keep your arms up"
+      },
+      "category": "everyday",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "relatable", "awkward", "suspense"]
+    },
+    {
+      "id": "dlm-216-tipsy-toast-too-honest",
+      "text": {
+        "fr": "Le toast de mariage censé être touchant qui dérape vers beaucoup trop d'honnêteté quand le micro est déjà allumé",
+        "en": "The wedding toast meant to be touching that veers into way too much honesty with the mic already live"
+      },
+      "hint": {
+        "fr": "Verre levé, début attendrissant, regard vers les mariés, montée d'émotion, puis une révélation de trop, freeze en réalisant ce que tu viens de dire, regard panoramique sur la salle silencieuse, tentative de rattrapage qui aggrave, le marié qui pâlit, la belle-mère qui pose son verre. « À l'amour ! » Bois. Fuis.",
+        "en": "glass raised, heartwarming opening, look toward the newlyweds, swell of emotion, then one revelation too far, freeze as you realize what you just said, panoramic scan of the silent room, recovery attempt that makes it worse, the groom going pale, the mother-in-law setting down her glass. 'to love!' drink. flee"
+      },
+      "category": "cringe",
+      "difficulty": 2,
+      "intensity": "spicy",
+      "props": false,
+      "tags": ["spicy", "cringe", "wedding", "party"]
     }
   ]
 }

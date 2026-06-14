@@ -673,6 +673,190 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
   {
     "fr": "Qui finirait ce jeu en exigeant une revanche immédiate « parce que c'était truqué » ?",
     "en": "Who would end this game demanding an instant rematch because 'it was clearly rigged'?"
+  },
+  {
+    "fr": "Qui dirait « je gère le son » à TON anniv, brancherait une seule playlist de 11 titres, et la relancerait au début à chaque fin ?",
+    "en": "Who calls dibs on the music at YOUR party, plugs in one 11-song playlist, and restarts it from the top every time it ends?"
+  },
+  {
+    "fr": "Qui répondrait à ta bonne nouvelle par « ah ok » suivi de trois points, puis poserait une question sur lui dans le message d'après ?",
+    "en": "Who replies to your big news with 'oh nice' and a full stop, then makes the next message about themselves?"
+  },
+  {
+    "fr": "Qui prendrait le dernier parapluie du bureau en te disant « tiens-toi près des murs », alors que vous rentrez dans la même direction ?",
+    "en": "Who grabs the office's last umbrella telling you to 'just hug the buildings', when you're both walking the exact same way home?"
+  },
+  {
+    "fr": "Qui ramènerait une guitare à un enterrement et demanderait « vous voulez que je joue un truc ? » devant le cercueil ?",
+    "en": "Who brings a guitar to a funeral and asks 'want me to play something?' directly over the open casket?"
+  },
+  {
+    "fr": "Qui jurerait qu'il « écoute tout », répéterait ta phrase mot pour mot, et serait incapable de dire de quoi tu parlais ?",
+    "en": "Who swears they're 'fully listening', repeats your last sentence word for word, and still has no idea what you were talking about?"
+  },
+  {
+    "fr": "Qui transformerait une partie de Trivial Pursuit en garde à vue, contesterait la réponse officielle, et appellerait un cousin pour trancher ?",
+    "en": "Who turns a round of trivia into a police interrogation, disputes the official answer, and phones a cousin to settle it?"
+  },
+  {
+    "fr": "Qui mettrait deux heures à choisir un resto, refuserait tes douze propositions, puis dirait « bon, n'importe quoi » d'un ton de victime ?",
+    "en": "Who spends two hours picking a restaurant, vetoes all twelve of your suggestions, then sighs 'honestly, anywhere' like a martyr?"
+  },
+  {
+    "fr": "Qui te demanderait « tu peux me tenir ça deux secondes ? » et disparaîtrait pendant que tu gardes son kebab et son sac ?",
+    "en": "Who hands you their kebab and their bag with 'hold this two secs', then evaporates for the rest of the night?"
+  },
+  {
+    "fr": "Qui ouvrirait un compte pro pour vendre du miel, posterait douze fois, puis te bloquerait pour pas avoir commandé ?",
+    "en": "Who launches a small honey business on Instagram, posts twelve times, then unfollows you for not ordering a jar?"
+  },
+  {
+    "fr": "Qui mettrait la clim à 17 dans TA voiture, baisserait sa vitre en même temps, et dirait que c'est toi qui a froid « dans ta tête » ?",
+    "en": "Who blasts the AC to max in YOUR car, rolls their own window down at the same time, and says you're cold 'in your head'?"
+  },
+  {
+    "fr": "Qui jouerait au médecin avec le groupe à partir d'un seul article, diagnostiquerait ton mal de tête comme « probablement neurologique », puis changerait de sujet ?",
+    "en": "Who plays group doctor off one article, diagnoses your headache as 'probably neurological', then changes the subject?"
+  },
+  {
+    "fr": "Qui mettrait « ouvert à de nouveaux projets » sur LinkedIn en étant en CDI, juste pour les petits cœurs ?",
+    "en": "Who puts 'open to opportunities' on LinkedIn from inside a permanent job, purely for the little hearts?"
+  },
+  {
+    "fr": "Qui ramènerait un plat industriel à un repas partagé, le sortirait de la boîte dans TA cuisine, et le présenterait comme « ma petite recette » ?",
+    "en": "Who brings a supermarket dip to the potluck, scoops it into your bowl in YOUR kitchen, and presents it as 'my little recipe'?"
+  },
+  {
+    "fr": "Qui s'endormirait devant le film qu'il a CHOISI, ronflerait pendant le moment clé, et déciderait que la fin « était nulle » au réveil ?",
+    "en": "Who falls asleep during the film THEY picked, snores through the key scene, and decides the ending 'was rubbish' on waking?"
+  },
+  {
+    "fr": "Qui jurerait « moi je dis toujours les choses en face », puis attendrait que tu sortes fumer pour te démonter ?",
+    "en": "Who swears 'I always say things to your face', then waits for you to step out for a smoke to take you apart?"
+  },
+  {
+    "fr": "Qui paierait sa part avec exactement 9,80 € en pièces de 5 centimes, comptées sur la table, pendant que le serveur attend ?",
+    "en": "Who pays their share in exactly £9.80 of five-pence coins, counted out on the table, while the waiter stands there?"
+  },
+  {
+    "fr": "Qui te confierait sa plante « une semaine, tranquille », fournirait des instructions de douze lignes, puis te traiterait d'assassin au retour ?",
+    "en": "Who leaves you their plant 'for one chill week', hands over a twelve-line care sheet, then calls you a murderer on return?"
+  },
+  {
+    "fr": "Qui répondrait « non mais c'est pas une critique » juste avant de lâcher la critique la plus brutale du repas ?",
+    "en": "Who says 'not being funny but' immediately before the single most brutal sentence of the entire dinner?"
+  },
+  {
+    "fr": "Qui mettrait un vocal de huit minutes dans le groupe pour dire qu'il a « pas trop le temps de répondre en ce moment » ?",
+    "en": "Who leaves an eight-minute voice note in the group chat to explain they 'don't really have time to text right now'?"
+  },
+  {
+    "fr": "Qui arriverait chez toi, ouvrirait ton frigo sans demander, jugerait le contenu à voix haute, et repartirait avec ta moutarde ?",
+    "en": "Who walks into yours, opens the fridge uninvited, reviews the contents out loud, and leaves with your good mustard?"
+  },
+  {
+    "fr": "Qui te conseillerait un livre, te le « prêterait » pour 15 €, puis te demanderait ton avis avant que tu l'aies fini ?",
+    "en": "Who recommends you a book, 'lends' it to you for a tenner, then demands your verdict before you've finished chapter two?"
+  },
+  {
+    "fr": "Qui se ferait un café dans une cuisine inconnue en soirée, casserait la cafetière de l'hôte, et accuserait « la qualité du modèle » ?",
+    "en": "Who makes themselves a coffee in a stranger's kitchen at the party, breaks the host's machine, and blames 'the build quality'?"
+  },
+  {
+    "fr": "Qui posterait « les vrais savent » sous une photo de groupe en te coupant pile au bord du cadre ?",
+    "en": "Who captions a group photo 'the real ones know', having cropped you right out at the edge of the frame?"
+  },
+  {
+    "fr": "Qui ferait un détour de quarante minutes pour économiser 3 € d'essence, puis s'arrêterait acheter un café à 4,50 € ?",
+    "en": "Who takes a forty-minute detour to save £3 on petrol, then pulls over for a £4.50 oat-milk latte?"
+  },
+  {
+    "fr": "Qui jurerait « je touche plus à mon tel à table », poserait l'écran face en bas, et le retournerait toutes les huit secondes ?",
+    "en": "Who swears 'no phones at dinner', places it face-down with ceremony, then flips it back over every eight seconds?"
+  },
+  {
+    "fr": "Qui se mettrait debout dans le canoë « pour la photo », te ferait tout perdre dans l'eau, et garderait son tel au sec sur lui ?",
+    "en": "Who stands up in the canoe 'for the photo', tips everything you own into the lake, and somehow keeps their own phone dry?"
+  },
+  {
+    "fr": "Qui annoncerait qu'il devient végétarien à TON barbecue, devant tes saucisses, à la troisième saucisse ?",
+    "en": "Who announces they're going vegetarian at YOUR barbecue, over your sausages, on their third sausage?"
+  },
+  {
+    "fr": "Qui aurait un avis tranché sur la déco de ton appart, repeindrait mentalement le salon à voix haute, et n'aurait jamais accroché un cadre chez lui ?",
+    "en": "Who has strong opinions on your flat's décor, mentally repaints your living room out loud, and has never hung a single frame in their own?"
+  },
+  {
+    "fr": "Qui ferait semblant de chercher son portefeuille au ralenti jusqu'à ce que quelqu'un d'autre paie, puis dirait « ah merci, je te revaudrai ça » ?",
+    "en": "Who does the slow-motion wallet search until someone else pays, then says 'oh cheers, I'll get the next one' (they will not)?"
+  },
+  {
+    "fr": "Qui réclamerait le silence pour porter un toast, perdrait le fil au mot trois, et finirait par « bref, à nous » ?",
+    "en": "Who taps a glass for a toast, loses the thread by word three, and lands on 'anyway, to us'?"
+  },
+  {
+    "fr": "Qui jouerait à ne « jamais avoir froid », claquerait des dents toute la soirée, et refuserait la veste que tu lui tends ?",
+    "en": "Who plays the 'I never get cold' character, shivers visibly all evening, and refuses the jacket you keep offering?"
+  },
+  {
+    "fr": "Qui demanderait « on partage ? » devant ton dessert, mangerait la moitié, et commanderait le sien quand le tien est fini ?",
+    "en": "Who asks 'shall we share?' over your pudding, eats half of it, then orders their own once yours is gone?"
+  },
+  {
+    "fr": "Qui te ferait répéter une blague trois fois, ne rirait pas, puis la raconterait à la table deux minutes plus tard en riant ?",
+    "en": "Who makes you repeat a joke three times, doesn't laugh, then retells it to the table two minutes later cracking up?"
+  },
+  {
+    "fr": "Qui jurerait « je suis pas compétitif » en menant l'enquête sur ta main de cartes par-dessus ton épaule ?",
+    "en": "Who insists 'I'm not even competitive' while conducting a full investigation of your card hand over your shoulder?"
+  },
+  {
+    "fr": "Qui mettrait quatre alarmes, snoozerait les quatre, et t'enverrait « tu m'as pas réveillé ?? » alors que vous dormez pas chez la même personne ?",
+    "en": "Who sets four alarms, snoozes all four, and texts 'why didn't you wake me??' from a completely different building?"
+  },
+  {
+    "fr": "Qui se réveillerait au camping en jurant « j'ai pas du tout ronflé », alors que la tente d'à côté a déménagé pendant la nuit ?",
+    "en": "Who wakes up at the campsite insisting 'I did not snore', while the neighbouring tent has packed up and moved overnight?"
+  },
+  {
+    "fr": "Qui te raconterait l'intrigue complète de la série qu'il te conseille « sans rien spoiler », fin comprise ?",
+    "en": "Who recaps the entire plot of the show they're recommending 'without spoiling anything', ending included?"
+  },
+  {
+    "fr": "Qui prendrait la dernière place côté hublot réservée pour mamie, et la garderait en jurant qu'il « a mal au cœur autrement » ?",
+    "en": "Who takes the window seat that was being saved for grandma, and keeps it swearing they 'get carsick otherwise'?"
+  },
+  {
+    "fr": "Qui dirait « moi je dors n'importe où » et passerait la nuit entière à se plaindre du matelas gonflable qu'il a lui-même choisi ?",
+    "en": "Who claims 'I can sleep anywhere', then spends the whole night complaining about the air mattress they personally picked?"
+  },
+  {
+    "fr": "Qui amènerait son propre micro au karaoké, monopoliserait le classement, et débrancherait le tien à ta meilleure note ?",
+    "en": "Who brings their own microphone to karaoke, dominates the leaderboard, and unplugs yours right on your best note?"
+  },
+  {
+    "fr": "Qui jurerait « j'ai zéro avis sur la politique » puis tiendrait la table en otage vingt minutes sur le sens de circulation des ronds-points ?",
+    "en": "Who claims to 'have no opinions on anything', then holds the table hostage for twenty minutes on the correct way to load a dishwasher?"
+  },
+  {
+    "fr": "Qui réserverait la table pour six à TON nom, arriverait en dernier, et exigerait quand même la place en bout de table ?",
+    "en": "Who books the table for six under YOUR name, arrives last, and still demands the seat at the head of it?"
+  },
+  {
+    "fr": "Qui dirait « je conduis, j'ai pas bu » à 2h, perdrait les clés, et déciderait que c'est la voiture qui s'est garée toute seule ?",
+    "en": "Who says 'I'll drive, I'm fine' at 2 a.m., loses the keys, and decides the car must have parked itself somewhere?"
+  },
+  {
+    "fr": "Qui ferait une réclamation écrite à la boulangerie pour un croissant « pas assez feuilleté », avec photos en pièces jointes ?",
+    "en": "Who files a written complaint to the bakery over a croissant that was 'insufficiently flaky', photos attached?"
+  },
+  {
+    "fr": "Qui ferait répéter « non mais raconte » à tout le monde, écouterait l'histoire, et conclurait « ouais, fallait être là » ?",
+    "en": "Who makes the whole table beg 'no but tell it', delivers the story, and finishes on 'yeah, you had to be there'?"
+  },
+  {
+    "fr": "Qui jurerait avoir « déjà envoyé l'argent », montrerait un écran flou pendant deux secondes, puis changerait de sujet ?",
+    "en": "Who swears they 'already sent the money', flashes a blurry screenshot for two seconds, then changes the subject?"
   }
 ] },
 };

@@ -2090,6 +2090,966 @@
       "category": "social",
       "spicyLevel": 0,
       "tags": ["money", "friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-rates-dates-vs-you-rate-theirs",
+      "optionA": { "fr": "Le pote à ta gauche note chacun de tes ex sur 10, à voix haute, devant tout le monde", "en": "The friend on your left rates every ex you've had out of 10, out loud, in front of everyone" },
+      "optionB": { "fr": "Tu dois noter ceux de la table, même la personne en couple ici ce soir", "en": "You have to rate everyone's here, including the one person who came with their partner tonight" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-group-picks-your-caption-vs-your-pfp",
+      "optionA": { "fr": "Ce groupe écrit ta légende sous chaque photo que tu postes pendant un mois", "en": "This group writes the caption under every photo you post for a month" },
+      "optionB": { "fr": "Ce groupe choisit ta photo de profil partout pendant un an, interdit de la changer", "en": "This group picks your profile pic everywhere for a year, you're banned from changing it" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-last-text-read-aloud-vs-first-photo-shown",
+      "optionA": { "fr": "Le dernier message que t'as envoyé est lu à voix haute, là, maintenant", "en": "The last text you sent gets read out loud, right now, this second" },
+      "optionB": { "fr": "La première photo de ta galerie s'affiche sur l'écran le plus proche", "en": "The first photo in your camera roll shows up on the nearest screen" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-controls-your-replies-vs-reads-your-drafts",
+      "optionA": { "fr": "Un pote d'ici répond à ta place à tous tes messages pendant 24h, sans filtre", "en": "A friend here answers all your texts for you for 24h, no filter" },
+      "optionB": { "fr": "Tout le monde voit les brouillons que t'as écrits mais jamais osé envoyer", "en": "Everyone sees the drafts you typed but never dared to send" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-knows-your-rank-vs-you-know-theirs",
+      "optionA": { "fr": "Tout le monde ici sait exactement à quelle place tu classes chacun d'eux", "en": "Everyone here knows exactly where you rank each of them" },
+      "optionB": { "fr": "Toi seul connais leur classement de toi, et tu dois vivre avec", "en": "Only you know how they rank you, and you have to live with it" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "ranking", "debate-starter"]
+    },
+    {
+      "id": "wyr-host-reads-your-notes-app-vs-your-bookmarks",
+      "optionA": { "fr": "L'hôte de ce soir fait défiler ton appli Notes devant tout le monde", "en": "Tonight's host scrolls through your Notes app in front of everyone" },
+      "optionB": { "fr": "L'hôte montre tout ce que t'as mis en favoris cette année, dossier compris", "en": "The host shows everything you've bookmarked this year, the folder included" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-friends-vote-your-job-vs-vote-your-partner",
+      "optionA": { "fr": "Ce groupe choisit ton métier pour les 5 prochaines années, sans appel", "en": "This group picks your career for the next 5 years, no appeal" },
+      "optionB": { "fr": "Ce groupe choisit qui tu fréquentes l'année prochaine, sans appel", "en": "This group picks who you date next year, no appeal" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "life-choices", "debate-starter"]
+    },
+    {
+      "id": "wyr-late-by-an-hour-blamed-vs-early-and-ignored",
+      "optionA": { "fr": "Arriver une heure en retard et te faire charrier publiquement à chaque fois", "en": "Show up an hour late and get publicly dragged for it every time" },
+      "optionB": { "fr": "Arriver pile à l'heure et que personne ne le remarque jamais, à vie", "en": "Show up bang on time and have no one ever notice, for life" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["time", "recognition", "debate-starter"]
+    },
+    {
+      "id": "wyr-win-every-debate-hated-vs-lose-every-debate-loved",
+      "optionA": { "fr": "Avoir toujours raison dans les débats du groupe, et que tout le monde t'évite pour ça", "en": "Always be right in the group's arguments, and have everyone avoid you for it" },
+      "optionB": { "fr": "Avoir toujours tort, mais que tout le monde adore débattre avec toi", "en": "Always be wrong, but have everyone love arguing with you" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-picks-your-tattoo-vs-your-nickname",
+      "optionA": { "fr": "Le pote en face de toi choisit ton prochain tatouage, emplacement compris", "en": "The friend across from you picks your next tattoo, placement included" },
+      "optionB": { "fr": "Le pote en face choisit le surnom par lequel tout le monde t'appellera à vie", "en": "The friend across picks the nickname everyone will call you forever" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "trust", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-search-history-screen-vs-your-bank-app-screen",
+      "optionA": { "fr": "Ton historique de recherche de la semaine passe sur le grand écran", "en": "Your search history from this week goes up on the big screen" },
+      "optionB": { "fr": "Ton appli bancaire passe sur le grand écran, dépenses honteuses comprises", "en": "Your banking app goes up on the big screen, shameful spends included" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["phone", "exposure", "money", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-the-driver-vs-always-the-passenger",
+      "optionA": { "fr": "Toujours conduire pour tout le monde, sobre, pendant que les autres s'amusent", "en": "Always be the designated driver, sober, while everyone else has fun" },
+      "optionB": { "fr": "Ne jamais conduire, et dépendre à vie de qui veut bien venir te chercher", "en": "Never drive, and depend forever on whoever feels like picking you up" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "roles", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-narrates-your-dates-vs-your-fails",
+      "optionA": { "fr": "Un pote commente en direct chacun de tes rencards depuis la table d'à côté", "en": "A friend live-commentates every one of your dates from the next table" },
+      "optionB": { "fr": "Un pote raconte tous tes plus gros ratés à chaque nouvelle rencontre, dès le bonjour", "en": "A friend tells every new person you meet your biggest fails, right at hello" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-sees-your-spotify-vs-your-screen-time",
+      "optionA": { "fr": "Tout le monde voit ton top écouté de l'année, titres gênants en gras", "en": "Everyone sees your most-played of the year, embarrassing tracks in bold" },
+      "optionB": { "fr": "Tout le monde voit ton temps d'écran par appli, classé du pire au moins pire", "en": "Everyone sees your screen time per app, ranked worst to least bad" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-finishes-your-stories-vs-corrects-them",
+      "optionA": { "fr": "Un pote finit toujours tes histoires à ta place, juste avant la chute", "en": "A friend always finishes your stories for you, right before the punchline" },
+      "optionB": { "fr": "Un pote te corrige à voix haute à chaque détail faux, devant ton public", "en": "A friend corrects you out loud on every wrong detail, in front of your audience" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "pet-peeve", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-the-funny-friend-broke-vs-rich-boring",
+      "optionA": { "fr": "Être le pote le plus drôle du groupe, mais toujours le plus fauché", "en": "Be the funniest friend in the group, but always the most broke" },
+      "optionB": { "fr": "Être celui qui paie toujours, mais celui qu'on invite que pour ça", "en": "Be the one who always pays, but the one who only gets invited for it" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "money", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-who-screenshots-you-vs-who-mutes-you",
+      "optionA": { "fr": "Savoir exactement qui dans ce groupe screenshote tes messages pour les montrer ailleurs", "en": "Know exactly who in this group screenshots your texts to show elsewhere" },
+      "optionB": { "fr": "Savoir qui t'a mis en sourdine depuis des mois mais te sourit ce soir", "en": "Know who muted you months ago but is smiling at you tonight" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "paranoia", "debate-starter"]
+    },
+    {
+      "id": "wyr-redo-worst-haircut-vs-worst-outfit-uniform",
+      "optionA": { "fr": "Reprendre à vie la pire coupe de cheveux de ta vie, photos officielles comprises", "en": "Get your worst-ever haircut back for life, official photos included" },
+      "optionB": { "fr": "Que ta pire tenue de collège devienne ton uniforme obligatoire, tous les jours", "en": "Your worst middle-school outfit becomes your mandatory uniform, every day" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["fashion", "public-shame", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-answers-on-dates-vs-parents-at-interviews",
+      "optionA": { "fr": "Un pote répond à ta place à toutes tes questions de rencard, sans que tu puisses corriger", "en": "A friend answers for you on every date question, no chance to correct" },
+      "optionB": { "fr": "Tes darons répondent à ta place à chaque entretien d'embauche", "en": "Your parents answer for you at every job interview" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["awkward", "family", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-cancelled-on-vs-never-invited-first",
+      "optionA": { "fr": "Qu'on annule sur toi à la dernière minute une fois sur deux", "en": "Get cancelled on last minute half the time" },
+      "optionB": { "fr": "Qu'on t'invite toujours en dernier, après que tout est déjà décidé", "en": "Always get invited last, after everything's already been decided" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-in-every-group-photo-vs-you-in-none",
+      "optionA": { "fr": "Ton ex apparaît dans chaque photo de groupe des 10 prochaines années", "en": "Your ex shows up in every group photo for the next 10 years" },
+      "optionB": { "fr": "Toi tu disparais de toutes les photos de groupe, comme si t'étais jamais venu", "en": "You vanish from every group photo, like you were never even there" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["ex", "memories", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-controls-the-aux-vs-the-thermostat",
+      "optionA": { "fr": "Un pote du groupe gère l'aux à vie dans chaque trajet, zéro veto pour toi", "en": "One friend runs the aux for life on every trip, zero veto for you" },
+      "optionB": { "fr": "Un pote gère le thermostat de chez toi à vie, et il a toujours froid", "en": "One friend runs your thermostat for life, and they're always cold" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "pet-peeve", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-laughs-late-vs-no-one-laughs",
+      "optionA": { "fr": "Que tout le monde rie à tes blagues, mais toujours 5 secondes trop tard, par pitié", "en": "Have everyone laugh at your jokes, but always 5 seconds late, out of pity" },
+      "optionB": { "fr": "Que personne ne rie jamais, mais qu'on te trouve quand même drôle en secret", "en": "Have no one ever laugh, but secretly everyone thinks you're funny" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["humor", "recognition", "debate-starter"]
+    },
+    {
+      "id": "wyr-friends-rank-your-cooking-vs-your-cleaning",
+      "optionA": { "fr": "Tes potes notent chaque plat que tu cuisines, moyenne affichée sur le frigo", "en": "Your friends grade every dish you cook, average posted on the fridge" },
+      "optionB": { "fr": "Tes potes notent à quel point ton appart est sale, à chaque visite, à voix haute", "en": "Your friends rate how dirty your place is, every visit, out loud" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["friendship", "judgment", "debate-starter"]
+    },
+    {
+      "id": "wyr-relive-best-day-no-memory-vs-worst-day-full-memory",
+      "optionA": { "fr": "Revivre ton meilleur jour en boucle, mais sans jamais t'en souvenir après", "en": "Relive your best day on loop, but never remember it afterward" },
+      "optionB": { "fr": "Ne jamais le revivre, mais te rappeler chaque détail de ton pire jour, en HD", "en": "Never relive it, but remember every detail of your worst day, in HD" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["memories", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-group-chat-name-public-vs-your-contact-names",
+      "optionA": { "fr": "Le nom de votre groupe WhatsApp s'affiche en bio de chacun, à vie", "en": "Your group chat's name shows in everyone's bio, for life" },
+      "optionB": { "fr": "Les noms sous lesquels t'as enregistré chaque personne ici sont révélés, là", "en": "The names you've saved each person here under get revealed, right now" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-everyones-therapist-vs-no-one-listens",
+      "optionA": { "fr": "Être le confident de tout le monde, à 3h du mat, sans que personne t'écoute jamais toi", "en": "Be everyone's 3 a.m. confidant, with no one ever listening to you back" },
+      "optionB": { "fr": "Que personne ne te confie jamais rien, et le sentir à chaque silence", "en": "Have no one ever confide in you, and feel it in every silence" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-picks-your-wedding-song-vs-your-best-man",
+      "optionA": { "fr": "Le pote à ta droite choisit la chanson de ton mariage, sans veto", "en": "The friend on your right picks your wedding song, no veto" },
+      "optionB": { "fr": "Le pote à ta droite choisit qui fera ton discours de témoin, et il l'écrit aussi", "en": "The friend on your right picks who gives your best-man speech, and writes it too" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "trust", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-overshare-vs-never-open-up",
+      "optionA": { "fr": "Trop en dire à chaque rencontre, et le regretter à chaque fois", "en": "Overshare at every first meeting, and cringe about it every time" },
+      "optionB": { "fr": "Ne jamais réussir à t'ouvrir, et que les gens te trouvent froid à vie", "en": "Never manage to open up, and have people find you cold for life" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["psychology", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-voice-notes-leaked-vs-your-typing-shown",
+      "optionA": { "fr": "Le dernier vocal que t'as envoyé sur quelqu'un d'ici passe en haut-parleur", "en": "The last voice note you sent about someone here plays on speaker" },
+      "optionB": { "fr": "Ce que t'es en train de taper s'affiche en direct au-dessus de ta tête, pour tous", "en": "What you're typing shows up live above your head, for everyone" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-the-organiser-blamed-vs-never-decide",
+      "optionA": { "fr": "Organiser chaque sortie, et porter le chapeau dès qu'un truc foire", "en": "Organise every outing, and take the blame the second anything flops" },
+      "optionB": { "fr": "Ne jamais rien décider, et subir tous les plans pourris des autres en silence", "en": "Never decide a thing, and silently suffer everyone else's rubbish plans" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "roles", "blame", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-real-opinion-on-your-choice-vs-stay-blissful",
+      "optionA": { "fr": "Savoir ce que chaque pote ici pense vraiment de ta dernière grande décision", "en": "Know what each friend here really thinks of your last big decision" },
+      "optionB": { "fr": "Ne jamais le savoir, mais voir leurs regards quand t'en parles", "en": "Never know, but catch their looks every time you bring it up" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-borrows-and-loses-vs-you-never-lend",
+      "optionA": { "fr": "Prêter à vie à un pote qui perd ou casse tout, sans jamais rembourser", "en": "Lend forever to a friend who loses or breaks everything, never paying back" },
+      "optionB": { "fr": "Ne plus jamais rien prêter à personne, et passer pour le radin du groupe", "en": "Never lend anyone anything again, and be known as the group's tightwad" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "money", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-the-glue-exhausted-vs-cut-loose-forgotten",
+      "optionA": { "fr": "Être le ciment du groupe, épuisé, celui sans qui plus personne ne se voit", "en": "Be the glue of the group, exhausted, the one without whom no one meets up" },
+      "optionB": { "fr": "Te détacher tranquille, et regarder le groupe continuer très bien sans toi", "en": "Quietly step back, and watch the group carry on just fine without you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-photo-from-your-worst-year-vs-text-from-your-worst-mood",
+      "optionA": { "fr": "La photo la plus gênante de ta pire année devient ton avatar partout, un an", "en": "The most embarrassing photo from your worst year becomes your avatar everywhere, for a year" },
+      "optionB": { "fr": "Le message le plus salé que t'as envoyé dans ta pire humeur est renvoyé à son destinataire", "en": "The saltiest text you sent in your worst mood gets re-sent to whoever it was about" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["exposure", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-pick-the-bad-restaurant-vs-never-pick",
+      "optionA": { "fr": "Choisir le resto à chaque fois, et tomber sur le pire une fois sur deux", "en": "Pick the restaurant every time, and land on the worst one half the time" },
+      "optionB": { "fr": "Ne jamais choisir, et manger ce que le groupe impose, même quand t'as dit non", "en": "Never pick, and eat whatever the group forces, even when you said no" },
+      "category": "food",
+      "spicyLevel": 0,
+      "tags": ["friendship", "blame", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-reads-your-mind-on-dates-vs-parents-at-dinner",
+      "optionA": { "fr": "Le pote le plus cash du groupe lit tes pensées pendant tous tes rencards", "en": "The most blunt friend in the group reads your mind on every date" },
+      "optionB": { "fr": "Tes darons lisent tes pensées à chaque repas de famille du dimanche", "en": "Your parents read your mind at every Sunday family lunch" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["exposure", "family", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-claps-when-you-fail-vs-silence-when-you-win",
+      "optionA": { "fr": "Une salve d'applaudissements ironiques à chacun de tes ratés en public", "en": "A round of ironic applause for every public fail you have" },
+      "optionB": { "fr": "Un silence total à chacune de tes réussites, comme si de rien n'était", "en": "Total silence at every win you get, like nothing happened" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["public-shame", "recognition", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-2am-thoughts-posted-vs-your-9am-texts-reread",
+      "optionA": { "fr": "Tes pensées de 2h du mat sont publiées sur le groupe chaque matin", "en": "Your 2 a.m. thoughts get posted in the group chat every morning" },
+      "optionB": { "fr": "Tous tes messages envoyés avant ton café sont relus par leurs destinataires", "en": "Every text you send before coffee gets re-read by whoever got it" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["exposure", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-rates-your-flirting-vs-your-arguing",
+      "optionA": { "fr": "Un pote note ta drague sur 10 à chaque fois, en direct, son par son", "en": "A friend rates your flirting out of 10 every time, live, line by line" },
+      "optionB": { "fr": "Un pote note la façon dont tu te défends en dispute, perdant annoncé à voix haute", "en": "A friend rates how you argue, the loser announced out loud" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "judgment", "debate-starter"]
+    },
+    {
+      "id": "wyr-relive-the-cringe-vs-relive-the-heartbreak",
+      "optionA": { "fr": "Revivre une fois par an ton moment le plus gênant, devant les mêmes témoins", "en": "Relive your most cringe moment once a year, in front of the same witnesses" },
+      "optionB": { "fr": "Revivre une fois par an ton pire chagrin, avec la même intensité qu'au jour 1", "en": "Relive your worst heartbreak once a year, as raw as day one" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["memories", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-trusted-with-every-secret-vs-trust-no-one",
+      "optionA": { "fr": "Que tout le monde te confie ses secrets, et porter ce poids à vie sans rien dire", "en": "Have everyone trust you with their secrets, and carry that weight for life in silence" },
+      "optionB": { "fr": "Que personne ne te fasse jamais confiance, et le voir à chaque fois qu'on baisse la voix sans toi", "en": "Have no one ever trust you, and see it every time the voices drop without you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-decides-your-haircut-vs-the-room-votes",
+      "optionA": { "fr": "Le pote en qui tu as le moins confiance ici choisit ta prochaine coupe", "en": "The friend you trust least here picks your next haircut" },
+      "optionB": { "fr": "Toute la table vote ta prochaine coupe, et la majorité l'emporte", "en": "The whole table votes on your next haircut, and the majority wins" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "trust", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-most-replayed-clip-vs-your-most-deleted",
+      "optionA": { "fr": "La vidéo de toi que tes potes se renvoient le plus repasse en boucle ce soir", "en": "The clip of you your friends forward the most plays on loop tonight" },
+      "optionB": { "fr": "La vidéo que t'as supprimée le plus vite de ta vie réapparaît, intacte", "en": "The video you deleted fastest in your life reappears, intact" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["exposure", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-the-one-roasted-vs-always-the-one-ignored",
+      "optionA": { "fr": "Être la cible numéro un de chaque vanne du groupe, mais toujours au centre", "en": "Be the number-one target of every group roast, but always in the middle of it" },
+      "optionB": { "fr": "Que personne ne te charrie jamais, parce qu'on t'oublie une fois sur deux", "en": "Have no one ever roast you, because they forget you half the time" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "roles", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-the-friendship-that-ends-vs-the-one-thats-fake",
+      "optionA": { "fr": "Savoir quelle amitié de cette pièce sera finie dans deux ans", "en": "Know which friendship in this room will be over in two years" },
+      "optionB": { "fr": "Savoir laquelle est déjà fausse, mais ne pas pouvoir prouver laquelle", "en": "Know which one is already fake, but never be able to prove which" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "paranoia", "debate-starter"]
+    },
+    {
+      "id": "wyr-pay-for-everyone-unthanked-vs-never-pay-judged",
+      "optionA": { "fr": "Payer pour tout le groupe à chaque sortie, sans jamais un merci", "en": "Pay for the whole group on every outing, never a thank you" },
+      "optionB": { "fr": "Ne jamais payer ta part, et le sentir dans chaque regard à l'addition", "en": "Never pay your share, and feel it in every look when the bill lands" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["money", "friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-narrates-your-breakup-vs-your-rebound",
+      "optionA": { "fr": "Un pote raconte ta dernière rupture à chaque nouvelle personne que tu rencontres", "en": "A friend tells your last breakup to every new person you meet" },
+      "optionB": { "fr": "Un pote raconte qui t'as fréquenté juste après, version pas flatteuse", "en": "A friend tells everyone who you rebounded with, the unflattering version" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["ex", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-the-first-call-in-a-crisis-vs-the-last",
+      "optionA": { "fr": "Être le premier qu'on appelle en cas de galère, à 4h, à chaque fois", "en": "Be the first one called in a crisis, at 4 a.m., every time" },
+      "optionB": { "fr": "N'être jamais appelé, et l'apprendre toujours une fois que c'est réglé sans toi", "en": "Never get called, and always find out once it's sorted without you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-camera-roll-shuffled-vs-your-dms-projected",
+      "optionA": { "fr": "Ta galerie passe en diaporama aléatoire sur la TV pendant le repas de famille", "en": "Your camera roll plays on shuffle on the TV during family dinner" },
+      "optionB": { "fr": "Tes DM les plus récents défilent sur le projecteur de la soirée", "en": "Your most recent DMs scroll across the party projector" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["exposure", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-believed-when-lying-vs-doubted-when-honest",
+      "optionA": { "fr": "Qu'on te croie toujours quand tu mens, et que ça te ronge", "en": "Always be believed when you lie, and have it eat at you" },
+      "optionB": { "fr": "Qu'on doute toujours de toi quand tu dis la vérité, à vie", "en": "Always be doubted when you tell the truth, for life" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["honesty", "psychology", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-edits-your-photos-vs-writes-your-bio",
+      "optionA": { "fr": "Un pote retouche toutes tes photos avant que tu les postes, à sa sauce", "en": "A friend edits all your photos before you post them, their way" },
+      "optionB": { "fr": "Un pote écrit toutes tes bios et descriptions, et tu peux pas les changer", "en": "A friend writes all your bios and descriptions, and you can't change them" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "trust", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-knows-your-crush-vs-you-know-everyones",
+      "optionA": { "fr": "Tout le monde ici sait sur qui tu craques, sauf la personne concernée", "en": "Everyone here knows who you have a crush on, except the person themselves" },
+      "optionB": { "fr": "Toi tu sais sur qui chacun craque, et tu dois te taire toute la soirée", "en": "You know everyone's crush, and you have to keep quiet all night" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-late-to-your-own-party-vs-first-to-everyone-elses",
+      "optionA": { "fr": "Arriver en retard à ta propre fête, après que l'ambiance soit déjà retombée", "en": "Show up late to your own party, after the vibe has already died" },
+      "optionB": { "fr": "Arriver le premier à toutes les fêtes des autres, quand l'hôte est encore en serviette", "en": "Show up first to everyone else's, when the host is still in a towel" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["party", "awkward", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-keeps-score-of-favors-vs-never-returns-any",
+      "optionA": { "fr": "Un pote compte chaque service rendu et te le ressort au pire moment", "en": "A friend keeps a tally of every favor and throws it back at the worst moment" },
+      "optionB": { "fr": "Un pote ne rend jamais aucun service, mais te demande sans arrêt", "en": "A friend never returns a single favor, but asks for them nonstop" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "petty", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-old-username-public-vs-your-old-status",
+      "optionA": { "fr": "Ton tout premier pseudo internet redevient public, partout, à vie", "en": "Your very first internet username goes public again, everywhere, for life" },
+      "optionB": { "fr": "Le statut le plus cringe que t'as jamais mis ressort, daté et signé", "en": "The cringiest status you ever posted resurfaces, dated and signed" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["exposure", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-the-one-who-always-texts-first-vs-never-does",
+      "optionA": { "fr": "Toujours écrire en premier, sinon plus personne ne te calcule pendant des mois", "en": "Always text first, or no one reaches out to you for months" },
+      "optionB": { "fr": "Ne jamais écrire en premier par fierté, et perdre des potes un par un", "en": "Never text first out of pride, and lose friends one by one" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-who-would-bail-on-you-vs-who-already-did",
+      "optionA": { "fr": "Savoir qui dans cette pièce te lâcherait si ça devenait dur", "en": "Know who in this room would bail on you if things got hard" },
+      "optionB": { "fr": "Savoir qui l'a déjà fait, sans jamais te l'avoir dit", "en": "Know who already has, and never told you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "paranoia", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-picks-your-ringtone-vs-your-alarm",
+      "optionA": { "fr": "Un pote choisit ta sonnerie, et elle se déclenche fort dans chaque réunion", "en": "A friend picks your ringtone, and it blasts in every meeting" },
+      "optionB": { "fr": "Un pote choisit ton réveil, et il sonne 30 min plus tôt que prévu, à vie", "en": "A friend picks your alarm, and it goes off 30 min early, for life" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["phone", "curse", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-the-photographer-vs-never-in-frame",
+      "optionA": { "fr": "Prendre toutes les photos du groupe, et n'apparaître sur aucun souvenir", "en": "Take all the group's photos, and appear in none of the memories" },
+      "optionB": { "fr": "Apparaître sur toutes, mais toujours en train de cligner ou de mâcher", "en": "Appear in all of them, but always mid-blink or mid-chew" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["memories", "roles", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-honest-review-of-friends-vs-theirs-of-you",
+      "optionA": { "fr": "Tu lis à voix haute ton avis honnête sur chaque personne ici", "en": "You read out loud your honest review of every person here" },
+      "optionB": { "fr": "Chacun lit le sien sur toi, et tu n'as pas le droit de répondre", "en": "Each of them reads theirs about you, and you don't get to reply" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-funny-only-when-drunk-vs-boring-but-reliable",
+      "optionA": { "fr": "N'être drôle que bourré, et insupportable le reste du temps", "en": "Only be funny when drunk, and unbearable the rest of the time" },
+      "optionB": { "fr": "Être chiant mais le plus fiable du groupe, celui qu'on appelle jamais pour rigoler", "en": "Be boring but the most reliable in the group, the one never called to have fun" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["friendship", "roles", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-decides-your-next-trip-vs-your-next-move",
+      "optionA": { "fr": "Un pote décide ta prochaine destination de vacances, billet non remboursable", "en": "A friend decides your next holiday destination, ticket non-refundable" },
+      "optionB": { "fr": "Un pote décide la ville où tu déménages, bail signé à ta place", "en": "A friend decides the city you move to, lease signed for you" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["life-choices", "trust", "debate-starter"]
+    },
+    {
+      "id": "wyr-know-the-nicest-lie-told-to-you-vs-the-cruelest-truth",
+      "optionA": { "fr": "Découvrir le plus beau mensonge qu'un pote ici t'a dit pour te ménager", "en": "Find out the kindest lie a friend here told you to spare you" },
+      "optionB": { "fr": "Découvrir la vérité la plus dure qu'on t'a cachée par gentillesse", "en": "Find out the harshest truth they hid from you out of kindness" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "honesty", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-everyones-backup-plan-vs-no-ones-plan",
+      "optionA": { "fr": "Être le plan B de tout le monde, appelé seulement quand les autres annulent", "en": "Be everyone's backup plan, only called when the others cancel" },
+      "optionB": { "fr": "N'être le plan de personne, et organiser toutes tes soirées seul", "en": "Be no one's plan, and spend every night out on your own" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-texts-your-ex-vs-texts-your-crush",
+      "optionA": { "fr": "Un pote écrit tous tes messages à ton ex pendant un mois, sans te montrer", "en": "A friend writes all your texts to your ex for a month, without showing you" },
+      "optionB": { "fr": "Un pote écrit tous tes messages à ton crush, et appuie sur envoyer", "en": "A friend writes all your texts to your crush, and hits send" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["ex", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-funeral-playlist-by-the-group-vs-your-eulogy",
+      "optionA": { "fr": "Ce groupe choisit la playlist de ton enterrement, sans veto", "en": "This group picks your funeral playlist, no veto" },
+      "optionB": { "fr": "Ce groupe écrit ton éloge funèbre, version qu'ils trouvent honnête", "en": "This group writes your eulogy, the version they call honest" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["in-room", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-always-told-the-truth-too-late-vs-the-lie-on-time",
+      "optionA": { "fr": "Qu'on te dise toujours la vérité, mais une fois qu'il est trop tard", "en": "Always be told the truth, but always once it's too late" },
+      "optionB": { "fr": "Qu'on te mente toujours pile au bon moment pour t'éviter la douleur", "en": "Always be lied to at exactly the right moment to spare you the pain" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["honesty", "heavy", "debate-starter"]
+    },
+    {
+      "id": "wyr-friend-rates-your-parenting-vs-your-relationship",
+      "optionA": { "fr": "Un pote note publiquement comment tu élèveras tes futurs gosses, à chaque repas", "en": "A friend publicly grades how you'll raise your future kids, every dinner" },
+      "optionB": { "fr": "Un pote note ta relation actuelle sur 10, devant ton/ta partenaire", "en": "A friend rates your current relationship out of 10, in front of your partner" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["judgment", "awkward", "debate-starter"]
+    },
+    {
+      "id": "wyr-remember-every-debt-vs-forget-it-all",
+      "optionA": { "fr": "Te souvenir de chaque dette, promesse et vanne du groupe, et porter ça seul", "en": "Remember every debt, promise and joke in the group, and carry it alone" },
+      "optionB": { "fr": "Tout oublier au bout d'une semaine, et qu'on te le reproche à vie", "en": "Forget it all within a week, and get reminded of it forever" },
+      "category": "deep",
+      "spicyLevel": 0,
+      "tags": ["friendship", "memories", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-search-autofill-vs-your-keyboard-suggestions",
+      "optionA": { "fr": "Les premières suggestions de ta barre de recherche s'affichent à l'écran", "en": "The top autofill of your search bar shows up on screen" },
+      "optionB": { "fr": "Les trois mots que ton clavier te propose en premier sont lus à voix haute", "en": "The three words your keyboard suggests first get read out loud" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-narrator-sugarcoats-vs-narrator-brutally-honest",
+      "optionA": { "fr": "Une voix off enjolive ta vie en permanence, et tout le monde sait que c'est faux", "en": "A narrator sugarcoats your life nonstop, and everyone knows it's fake" },
+      "optionB": { "fr": "Une voix off décrit ta vie avec une honnêteté brutale, à voix haute, partout", "en": "A narrator describes your life with brutal honesty, out loud, everywhere" },
+      "category": "absurd",
+      "spicyLevel": 0,
+      "tags": ["exposure", "honesty", "debate-starter"]
+    },
+    {
+      "id": "wyr-be-the-last-to-know-vs-the-one-who-cant-tell",
+      "optionA": { "fr": "Être toujours le dernier prévenu des drames du groupe", "en": "Always be the last to know the group's drama" },
+      "optionB": { "fr": "Être le premier au courant, mais ne jamais avoir le droit d'en parler", "en": "Be the first to know, but never allowed to say a word" },
+      "category": "social",
+      "spicyLevel": 0,
+      "tags": ["in-room", "friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-ex-reads-your-old-texts-vs-your-current-ones",
+      "optionA": { "fr": "Ton ex relit tous les messages que vous vous envoyiez au début, devant la table", "en": "Your ex re-reads all the texts you sent each other early on, in front of the table" },
+      "optionB": { "fr": "Ton ex lit tous les messages que t'envoies à ton crush actuel, en direct", "en": "Your ex reads every text you send your current crush, live" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["ex", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-date-knows-your-body-count-vs-your-talking-stages",
+      "optionA": { "fr": "Ton prochain date connaît ton body count avant même de dire bonjour", "en": "Your next date knows your body count before they even say hi" },
+      "optionB": { "fr": "Ton prochain date connaît la liste de tous tes talking stages ratés", "en": "Your next date knows the full list of your failed talking stages" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-room-reads-your-dms-vs-your-saved-folder",
+      "optionA": { "fr": "Toute la pièce lit ta conversation la plus chaude des trois derniers mois", "en": "The whole room reads your spiciest chat from the last three months" },
+      "optionB": { "fr": "Toute la pièce voit ton dossier de posts enregistrés, l'onglet caché compris", "en": "The whole room sees your saved folder, the hidden tab included" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["in-room", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-rates-you-vs-your-situationship-does",
+      "optionA": { "fr": "Ton ex te note sur 10 en public, et explique chaque point retiré", "en": "Your ex rates you out of 10 in public, and explains every point docked" },
+      "optionB": { "fr": "Ta dernière situationship te note, et révèle pourquoi ça a jamais été officiel", "en": "Your last situationship rates you, and reveals why it was never official" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["ex", "dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-sees-who-you-stalk-vs-who-stalks-you",
+      "optionA": { "fr": "Tout le monde voit les trois profils que tu visites le plus, ex inclus", "en": "Everyone sees the three profiles you visit the most, ex included" },
+      "optionB": { "fr": "Tout le monde voit qui te stalke toi, compteur et fréquence affichés", "en": "Everyone sees who stalks you, with the count and frequency shown" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["phone", "ex", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-type-revealed-vs-your-ick-revealed",
+      "optionA": { "fr": "La table devine ton vrai type, et tu confirmes en regardant qui correspond ici", "en": "The table guesses your real type, and you confirm while looking at who fits here" },
+      "optionB": { "fr": "La table devine ton plus gros ick, et nomme qui le fait sans le savoir", "en": "The table guesses your biggest ick, and names who does it without knowing" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["in-room", "dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-date-sees-your-google-history-vs-your-ex-photos",
+      "optionA": { "fr": "Ton date voit ton historique Google des trois derniers jours, tout", "en": "Your date sees your Google history from the last three days, all of it" },
+      "optionB": { "fr": "Ton date voit toutes les photos de tes ex que t'as jamais supprimées", "en": "Your date sees every ex photo you never deleted" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["dating", "phone", "ex", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-flirty-typos-vs-your-double-texts",
+      "optionA": { "fr": "Chaque faute de frappe gênante de tes messages de drague est révélée, datée", "en": "Every cringe typo from your flirty texts gets revealed, dated" },
+      "optionB": { "fr": "Chaque double-message que t'as envoyé sans réponse est compté et affiché", "en": "Every unanswered double-text you sent gets counted and shown" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["dating", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-at-every-party-vs-their-new-flame",
+      "optionA": { "fr": "Ton ex est invité à chaque soirée du groupe pour le reste de l'année", "en": "Your ex gets invited to every group party for the rest of the year" },
+      "optionB": { "fr": "Leur nouvelle flamme y est aussi, et s'assoit toujours en face de toi", "en": "Their new flame comes too, and always sits across from you" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["ex", "party", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-your-oldest-crush-vs-your-current-one",
+      "optionA": { "fr": "Avouer devant la table sur qui ici tu craquais en secret il y a des années", "en": "Confess to the table who here you secretly fancied years ago" },
+      "optionB": { "fr": "Avouer sur qui ici tu craques en ce moment, sans pouvoir mentir", "en": "Confess who here you currently fancy, with no option to lie" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["in-room", "dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-late-night-texts-vs-your-morning-regrets",
+      "optionA": { "fr": "Le dernier message que t'as envoyé après minuit, bourré, passe en grand", "en": "The last text you sent after midnight, drunk, goes up on the big screen" },
+      "optionB": { "fr": "Le premier que t'as supprimé au réveil le lendemain réapparaît, intact", "en": "The first one you deleted the next morning reappears, intact" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["phone", "party", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-group-sets-you-up-vs-bans-you-from-dating",
+      "optionA": { "fr": "Ce groupe te case avec quelqu'un de leur choix, rencard obligatoire", "en": "This group sets you up with someone of their choosing, date mandatory" },
+      "optionB": { "fr": "Ce groupe valide ou refuse chaque personne que tu fréquentes, droit de veto", "en": "This group approves or vetoes everyone you date, veto power included" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "in-room", "debate-starter"]
+    },
+    {
+      "id": "wyr-ex-best-man-speech-vs-ex-plus-one",
+      "optionA": { "fr": "Ton ex fait le discours à ton mariage, micro et famille au complet", "en": "Your ex gives the speech at your wedding, mic and full family present" },
+      "optionB": { "fr": "Ton ex est l'accompagnant officiel de ton/ta partenaire à ce mariage", "en": "Your ex is your partner's official plus-one at that wedding" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["ex", "awkward", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-dating-app-bio-by-friends-vs-your-photos",
+      "optionA": { "fr": "Tes potes écrivent ta bio d'appli de rencontre, version qu'ils jugent honnête", "en": "Your friends write your dating-app bio, the version they call honest" },
+      "optionB": { "fr": "Tes potes choisissent tes photos d'appli, celle du réveillon 2019 comprise", "en": "Your friends pick your dating-app photos, the 2019 NYE one included" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["dating", "friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-your-worst-date-vs-your-worst-ghosting",
+      "optionA": { "fr": "Raconter ton pire rencard en détail, en regardant si la personne est ici", "en": "Tell your worst date in full, while checking if the person is here" },
+      "optionB": { "fr": "Raconter la fois où t'as ghosté quelqu'un le plus salement, son prénom compris", "en": "Tell the time you ghosted someone the dirtiest, their name included" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-knows-your-rebound-vs-your-rebound-knows-your-ex",
+      "optionA": { "fr": "Ton ex apprend exactement qui t'as fréquenté juste après, et quand", "en": "Your ex learns exactly who you got with right after, and when" },
+      "optionB": { "fr": "La personne d'après apprend tout sur ton ex, version pas censurée", "en": "Your rebound learns everything about your ex, the uncensored version" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["ex", "dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-table-guesses-your-spiciest-text-vs-your-secret-crush",
+      "optionA": { "fr": "La table devine ton message le plus chaud, et tu confirmes ou tu bois", "en": "The table guesses your spiciest text, and you confirm or you drink" },
+      "optionB": { "fr": "La table devine à qui tu n'oses toujours pas avouer un truc, ici présent", "en": "The table guesses who here you still don't dare confess something to" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["in-room", "dating", "debate-starter"]
+    },
+    {
+      "id": "wyr-relive-your-first-kiss-vs-your-worst-one",
+      "optionA": { "fr": "Revivre ton premier baiser, public et témoins compris, en boucle un an", "en": "Relive your first kiss, public, witnesses included, on loop for a year" },
+      "optionB": { "fr": "Revivre ton pire baiser une fois par mois, avec la même personne", "en": "Relive your worst kiss once a month, with the same person" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "memories", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-picks-your-next-partner-vs-your-mum-does",
+      "optionA": { "fr": "Ton ex choisit ta prochaine relation, et a déjà quelqu'un en tête", "en": "Your ex picks your next relationship, and already has someone in mind" },
+      "optionB": { "fr": "Ta daronne choisit ta prochaine relation, repas de présentation obligatoire", "en": "Your mum picks your next relationship, intro dinner mandatory" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["ex", "family", "dating", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-knows-your-number-vs-you-know-theirs",
+      "optionA": { "fr": "Tout le monde ici connaît ton body count exact, arrondi interdit", "en": "Everyone here knows your exact body count, no rounding allowed" },
+      "optionB": { "fr": "Toi tu connais celui de chacun ici, et tu dois garder un visage neutre", "en": "You know everyone's here, and you have to keep a straight face" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["in-room", "dating", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-search-history-after-a-date-vs-before",
+      "optionA": { "fr": "Ton historique de recherche d'avant ton dernier rencard est révélé", "en": "Your search history from before your last date gets revealed" },
+      "optionB": { "fr": "Ton historique d'après le rencard, à 2h du mat, est révélé aussi", "en": "Your search history from after, at 2 a.m., gets revealed too" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-the-crush-you-kept-vs-the-one-you-acted-on",
+      "optionA": { "fr": "Avouer le crush que t'as gardé secret le plus longtemps, et sur qui", "en": "Confess the crush you kept secret the longest, and on whom" },
+      "optionB": { "fr": "Avouer celui sur lequel t'es passé à l'action et que t'as jamais raconté", "en": "Confess the one you actually acted on and never told anyone about" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["dating", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-comments-on-your-posts-vs-likes-your-old-ones",
+      "optionA": { "fr": "Ton ex commente publiquement chacun de tes posts pendant un an", "en": "Your ex publicly comments on every post you make for a year" },
+      "optionB": { "fr": "Ton ex like, en direct et visible, tes plus vieilles photos une par une", "en": "Your ex likes, live and visible, your oldest photos one by one" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["ex", "phone", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-room-votes-your-hottest-ex-vs-your-most-toxic",
+      "optionA": { "fr": "La pièce vote lequel de tes ex était le plus canon, photos à l'appui", "en": "The room votes which of your exes was the hottest, with photos" },
+      "optionB": { "fr": "La pièce vote lequel était le plus toxique, et tu dois défendre ton choix", "en": "The room votes which was the most toxic, and you defend your pick" },
+      "category": "deep",
+      "spicyLevel": 1,
+      "tags": ["ex", "dating", "debate-starter"]
+    },
+    {
+      "id": "wyr-flirt-only-in-front-of-friends-vs-only-by-text",
+      "optionA": { "fr": "Ne pouvoir draguer qu'en présence de tes potes, qui notent en direct", "en": "Only be able to flirt with your friends watching, scoring live" },
+      "optionB": { "fr": "Ne pouvoir draguer que par message, et que chaque échange soit relu plus tard par eux", "en": "Only be able to flirt by text, and have every thread re-read later by them" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["dating", "friendship", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-most-recent-match-shown-vs-your-oldest",
+      "optionA": { "fr": "Ton dernier match d'appli s'affiche, conversation comprise, à toute la table", "en": "Your most recent app match shows up, chat included, to the whole table" },
+      "optionB": { "fr": "Ton tout premier match de l'histoire ressort, avec ton premier message gênant", "en": "Your very first match ever resurfaces, with your cringe opener" },
+      "category": "social",
+      "spicyLevel": 1,
+      "tags": ["dating", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-room-knows-your-wildest-vs-your-most-vanilla",
+      "optionA": { "fr": "Toute la pièce apprend la chose la plus folle que t'as faite au lit", "en": "The whole room learns the wildest thing you've done in bed" },
+      "optionB": { "fr": "Toute la pièce apprend la chose la plus ennuyeuse, et te juge pour ça aussi", "en": "The whole room learns the most boring thing, and judges you for that too" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-your-fake-it-count-vs-your-real-count",
+      "optionA": { "fr": "Avouer combien de fois t'as fait semblant, sans pouvoir mentir", "en": "Confess how many times you've faked it, no lying allowed" },
+      "optionB": { "fr": "Avouer ton vrai body count, et la table compare avec ce que t'avais dit avant", "en": "Confess your real body count, and the table compares it to what you said before" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-ex-rates-you-in-bed-vs-your-most-recent-does",
+      "optionA": { "fr": "Ton ex te note au lit sur 10, en public, et justifie chaque point", "en": "Your ex rates you in bed out of 10, in public, and justifies every point" },
+      "optionB": { "fr": "Ta dernière rencontre te note, et la pièce devine qui c'était", "en": "Your most recent hookup rates you, and the room guesses who it was" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-sexting-read-aloud-vs-your-photo-described",
+      "optionA": { "fr": "Ton dernier message coquin est lu à voix haute, mot pour mot", "en": "Your last sext gets read out loud, word for word" },
+      "optionB": { "fr": "La dernière photo que t'as envoyée est décrite en détail par la personne qui l'a reçue", "en": "The last photo you sent gets described in detail by whoever received it" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-room-guesses-your-kink-vs-your-dealbreaker",
+      "optionA": { "fr": "La pièce devine ton plus gros kink, et tu confirmes ou tu bois", "en": "The room guesses your biggest kink, and you confirm or you drink" },
+      "optionB": { "fr": "La pièce devine le truc qui te coupe direct, et nomme qui le fait ici", "en": "The room guesses your instant dealbreaker, and names who here does it" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "dating", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-the-riskiest-place-vs-confess-the-person-here",
+      "optionA": { "fr": "Avouer l'endroit le plus risqué où t'as couché, lieu exact", "en": "Confess the riskiest place you've hooked up, exact spot" },
+      "optionB": { "fr": "Avouer si la personne la plus inattendue est dans cette pièce ce soir", "en": "Confess whether the most unexpected person is in this room tonight" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-best-night-with-an-ex-vs-your-worst-with-anyone",
+      "optionA": { "fr": "Raconter ta meilleure nuit avec un ex, en sachant qu'il l'apprendra", "en": "Tell your best night with an ex, knowing they'll find out" },
+      "optionB": { "fr": "Raconter ta pire nuit avec n'importe qui, version sans filtre", "en": "Tell your worst night with anyone, the no-filter version" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-search-history-after-a-breakup-vs-after-a-hookup",
+      "optionA": { "fr": "Ton historique de recherche du soir d'une rupture est révélé en entier", "en": "Your full search history from a breakup night gets revealed" },
+      "optionB": { "fr": "Ton historique du lendemain d'un coup d'un soir l'est aussi, tout", "en": "Your search history the morning after a one-night stand too, all of it" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-room-votes-your-biggest-mistake-vs-your-best-decision",
+      "optionA": { "fr": "La pièce vote quelle personne avec qui t'as couché était LA plus grosse erreur", "en": "The room votes which person you slept with was THE biggest mistake" },
+      "optionB": { "fr": "La pièce vote laquelle était ta meilleure décision, et tu défends", "en": "The room votes which was your best decision, and you defend it" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-partner-sees-your-history-vs-your-ex-sees-your-now",
+      "optionA": { "fr": "Ton/ta partenaire actuel·le voit tout ton passé, chiffres et noms compris", "en": "Your current partner sees your full past, numbers and names included" },
+      "optionB": { "fr": "Ton ex voit toute ta vie intime actuelle, fréquence comprise", "en": "Your ex sees your full current intimate life, frequency included" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-your-fantasy-vs-confess-who-its-about",
+      "optionA": { "fr": "Avouer ton fantasme le plus secret à voix haute", "en": "Confess your most secret fantasy out loud" },
+      "optionB": { "fr": "Avouer s'il concerne quelqu'un dans cette pièce, oui ou non", "en": "Confess whether it's about someone in this room, yes or no" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-loudest-night-heard-by-neighbours-vs-by-the-group",
+      "optionA": { "fr": "Que tes voisins aient tout entendu de ta nuit la plus bruyante, et te croisent demain", "en": "Your neighbours heard everything from your loudest night, and see you tomorrow" },
+      "optionB": { "fr": "Que ce groupe ait l'enregistrement audio, et menace de le mettre à chaque silence", "en": "This group has the audio, and threatens to play it in every silence" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "in-room", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-worst-text-you-sent-an-ex-vs-the-best-they-sent-you",
+      "optionA": { "fr": "Le message le plus pathétique que t'as envoyé à un ex est lu en public", "en": "The most pathetic text you sent an ex gets read in public" },
+      "optionB": { "fr": "Le plus beau qu'il/elle t'a envoyé est lu juste après, pour le contraste", "en": "The sweetest they sent you gets read right after, for the contrast" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-walk-of-shame-replayed-vs-your-worst-morning-after",
+      "optionA": { "fr": "Ton retour de soirée le plus honteux est rejoué en vidéo, témoins compris", "en": "Your most shameful walk of shame gets replayed on video, witnesses included" },
+      "optionB": { "fr": "Ton pire lendemain matin est raconté par la personne qui était là", "en": "Your worst morning-after gets told by the person who was there" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "party", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-the-lie-you-told-in-bed-vs-the-truth-you-hid",
+      "optionA": { "fr": "Avouer le plus gros mensonge que t'as dit pour finir au lit avec quelqu'un", "en": "Confess the biggest lie you told to end up in bed with someone" },
+      "optionB": { "fr": "Avouer la vérité que tu caches encore à ton/ta partenaire actuel·le", "en": "Confess the truth you're still hiding from your current partner" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-the-room-ranks-your-exes-hotness-vs-their-mistakes",
+      "optionA": { "fr": "La pièce classe tes ex du plus au moins canon, et tu valides ou contestes", "en": "The room ranks your exes hottest to least, and you approve or argue" },
+      "optionB": { "fr": "La pièce les classe du plus toxique au moins, justification à voix haute exigée", "en": "The room ranks them most to least toxic, out-loud justification required" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-most-recent-dm-slide-vs-your-most-ignored",
+      "optionA": { "fr": "Le dernier DM que t'as envoyé pour tenter ta chance est lu en public", "en": "The last DM you slid into someone's inbox gets read in public" },
+      "optionB": { "fr": "Celui qu'on a le plus salement ignoré ressort, vu mais jamais répondu", "en": "The one most savagely ignored resurfaces, seen but never replied to" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "dating", "phone", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-your-count-to-your-parents-vs-to-your-ex",
+      "optionA": { "fr": "Annoncer ton body count à tes darons, au repas de Noël", "en": "Announce your body count to your parents, at Christmas dinner" },
+      "optionB": { "fr": "L'annoncer à ton ex, qui pensait être au courant et ne l'était pas", "en": "Announce it to your ex, who thought they knew and didn't" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "family", "ex", "confession", "debate-starter"]
+    },
+    {
+      "id": "wyr-everyone-sees-who-you-text-drunk-vs-who-you-call",
+      "optionA": { "fr": "Tout le monde voit à qui t'envoies des messages dès que t'as bu, ex en tête", "en": "Everyone sees who you text the second you've been drinking, ex at the top" },
+      "optionB": { "fr": "Tout le monde entend à qui t'as laissé un vocal bourré, en entier", "en": "Everyone hears who you left a drunk voice note for, in full" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "party", "exposure", "debate-starter"]
+    },
+    {
+      "id": "wyr-your-type-confirmed-by-your-exes-vs-denied-by-you",
+      "optionA": { "fr": "Tes ex se réunissent et confirment ton vrai type, preuves à l'appui", "en": "Your exes gather and confirm your real type, with evidence" },
+      "optionB": { "fr": "Toi tu dois le nier en face, en sachant que la table voit clair", "en": "You have to deny it to their faces, knowing the table sees right through you" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "dating", "debate-starter"]
+    },
+    {
+      "id": "wyr-confess-the-one-that-got-away-vs-the-one-you-regret",
+      "optionA": { "fr": "Avouer qui est le « celui/celle qui s'est échappé·e », nom et raison", "en": "Confess who your \"one that got away\" is, name and reason" },
+      "optionB": { "fr": "Avouer celui/celle que tu regrettes le plus d'avoir touché, sans détour", "en": "Confess the one you most regret ever touching, no dodging" },
+      "category": "deep",
+      "spicyLevel": 2,
+      "tags": ["sex", "ex", "confession", "debate-starter"]
     }
   ]
 }

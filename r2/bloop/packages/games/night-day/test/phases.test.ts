@@ -170,7 +170,7 @@ describe('nightWitch', () => {
     expect(s1.witchState).toEqual({ healLeft: false, poisonLeft: true });
     const dawn = game.reduce(s1, deadline(4)).state;
     expect(dawn.phase).toBe('dawn');
-    expect(dawn.lastDawn).toEqual({ died: [], revealedRoles: {} });
+    expect(dawn.lastDawn).toEqual({ died: [], revealedRoles: {}, marked: null });
     expect(dawn.alive[victim]).toBe(true);
     // next night: heal is spent — a second heal attempt is same-reference
     const witch2 = walkUntil(game, dawn, (s) => s.phase === 'nightWitch');
@@ -236,7 +236,7 @@ describe('dawn, skip rule, debate, vote, lynch', () => {
     const dawn = drive(game, s0, [deadline(2), wolfVote(wolf, victim), deadline(3), deadline(4)]);
     expect(dawn.phase).toBe('dawn');
     expect(game.phaseKey(dawn)).toBe('dawn:r0');
-    expect(dawn.lastDawn).toEqual({ died: [victim], revealedRoles: { [victim]: 'villager' } });
+    expect(dawn.lastDawn).toEqual({ died: [victim], revealedRoles: { [victim]: 'villager' }, marked: null });
     const debate = game.reduce(dawn, deadline(5)).state;
     expect(debate.phase).toBe('debate');
     expect(game.phaseDurationMs(debate)).toBe(90_000);

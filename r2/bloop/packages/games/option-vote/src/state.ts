@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence, SideBetBuffer } from '@bloop/kit';
+import type { LeaderboardEntry, Presence, SideBetBuffer, StreakBonusOpts } from '@bloop/kit';
 
 /** Bilingual UI string — the client picks a locale at render time. */
 export interface LText {
@@ -33,6 +33,16 @@ export interface OptionVoteContent {
  */
 export type OptionVoteScoring = 'predict-majority' | 'majority-herd';
 
+/**
+ * P1 tie-relief. `none` (default) keeps the shipped behaviour: a perfect split
+ * (`majority === null`) scores nobody. `all-plus-one` is an OPT-IN consolation
+ * for starved small even rooms — on a perfect split EVERY player who balloted is
+ * awarded `pointsCorrect`, so the PERFECT SPLIT banner becomes a *good* outcome
+ * instead of a dead scoreboard. Identity-by-default: existing "a tie awards
+ * nothing" tests stay green under `none`.
+ */
+export type TiePolicy = 'none' | 'all-plus-one';
+
 export interface OptionVoteConfig {
   scoring: OptionVoteScoring;
   totalRounds: number;
@@ -51,6 +61,21 @@ export interface OptionVoteConfig {
    * predict-majority; majority-herd keeps it 0.
    */
   predictionBonus: number;
+  /**
+   * P1 tie-relief (CC — small-room starvation). Default `none`. Opt-in
+   * `all-plus-one` consoles a perfect split. Identity-by-default so the existing
+   * tie tests stay green.
+   */
+  tiePolicy?: TiePolicy;
+  /**
+   * P1 CC-2 streak bonus opts (DEFAULT IDENTITY — omitted/`{}` => +0). The
+   * per-player `streak` counter is ALWAYS tracked and surfaced as a TAG
+   * ("🔥 x3") regardless; this only adds optional flavour POINTS for landing on
+   * the majority repeatedly. Omitting it (both shipped configs) leaves every
+   * exact-score test byte-identical — the tag, not the points, is the retention
+   * surface (see kit/comeback.ts).
+   */
+  streakBonus?: StreakBonusOpts;
 }
 
 export const TU_PREFERES_CONFIG: OptionVoteConfig = {
@@ -100,6 +125,19 @@ export interface PredictionReveal {
   correct: boolean;
 }
 
+/**
+ * P1 CC-2 — a player's live consecutive-success streak, promoted to the public
+ * reveal so the client can render the "🔥 x3" tag and any bonus animation. Only
+ * players whose streak is >= 1 after this round appear. `bonus` is the flavour
+ * points the streak just paid (0 under the default identity opts). Drives the
+ * "on fire" tag + "one more for the bonus" one-more-round pull.
+ */
+export interface StreakTag {
+  playerId: PlayerId;
+  streak: number;
+  bonus: number;
+}
+
 /** Promoted from the hidden buffers at resolve — public from reveal on. */
 export interface RoundResult {
   itemId: string;
@@ -116,6 +154,32 @@ export interface RoundResult {
    * flag and the matching `awarded` id power the reveal taunt + bonus animation.
    */
   predictions: PredictionReveal[];
+  /**
+   * P1 CC-2 — public streak TAGS for every player currently on a streak (>= 1).
+   * Surfaced as a tag, not a score change, by default. Stable ascending-id order.
+   */
+  streaks: StreakTag[];
+  /**
+   * P1 tie-relief — true iff this round was a perfect split AND `tiePolicy`
+   * consoled every balloter (so the PERFECT SPLIT banner reads as a *win*).
+   */
+  tieReliefApplied: boolean;
+}
+
+/**
+ * P1 CC-5 cliffhanger epilogue — derived at `over` from the ALREADY-PUBLIC final
+ * scores only (no new secret). Feeds the "tout se joue maintenant" sting + the
+ * rematch CTA.
+ */
+export interface Cliffhanger {
+  /** Standings, highest first, ties broken by ascending id (kit `leaderboard`). */
+  leaderboard: LeaderboardEntry[];
+  /** Top1 − top2 (>= 0); 0 when fewer than two players or the top two tie. */
+  topGap: number;
+  /** True when the crown was contested to the wire (top-2 gap <= 1). */
+  closeFinish: boolean;
+  /** The sole winner, or null on a contested (tied-for-first) crown. */
+  mvp: PlayerId | null;
 }
 
 export interface OptionVoteState {
@@ -140,6 +204,13 @@ export interface OptionVoteState {
   scores: Record<PlayerId, number>;
   /** majority-herd: rounds spent in the minority (end-screen superlative, never affects points). */
   minorityCount: Record<PlayerId, number>;
+  /**
+   * P1 CC-2 — per-player consecutive-scoring streak (PUBLIC, same class as
+   * `scores`). Incremented on a scoring round (correct predictor / majority
+   * voter), reset to 0 on a miss. Drives the surfaced streak tag + the opt-in
+   * bonus. Never carries an in-match secret.
+   */
+  streak: Record<PlayerId, number>;
   lastResult: RoundResult | null;
 }
 
@@ -166,6 +237,8 @@ export type OptionVoteView =
        */
       myPrediction: Option | null;
       predictedCount: number;
+      /** P1 CC-2 — PUBLIC per-player streak counters (same class as scores). */
+      streak: Record<PlayerId, number>;
     }
   | {
       phase: 'reveal';
@@ -176,6 +249,8 @@ export type OptionVoteView =
       result: RoundResult;
       hasDebate: boolean;
       scores: Record<PlayerId, number>;
+      /** P1 CC-2 — PUBLIC per-player streak counters (same class as scores). */
+      streak: Record<PlayerId, number>;
     }
   | {
       phase: 'debate';
@@ -188,6 +263,8 @@ export type OptionVoteView =
       skipNeeded: number;
       mySkip: boolean;
       scores: Record<PlayerId, number>;
+      /** P1 CC-2 — PUBLIC per-player streak counters (same class as scores). */
+      streak: Record<PlayerId, number>;
     }
   | {
       phase: 'over';
@@ -199,4 +276,9 @@ export type OptionVoteView =
        * reveal's call-outs persist onto the podium). Empty under majority-herd.
        */
       lastPredictions: PredictionReveal[];
+      /**
+       * P1 CC-5 — cliffhanger epilogue derived from the PUBLIC final scores only
+       * (no new secret). Powers the "tout se joue maintenant" sting + rematch CTA.
+       */
+      cliffhanger: Cliffhanger;
     };

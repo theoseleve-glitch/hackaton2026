@@ -2443,6 +2443,1527 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
       "en": "Announce your post-game plans to the room with the confidence of a weather forecast. Your partner confirms or denies with one thumb. The thumb is legally binding."
     },
     "deck": "lover"
+  },
+  {
+    "id": "fun-t-soft-036",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le tableau Pinterest que tu nourris en secret depuis trois ans. Le thème exact, le nombre d'épingles. Le groupe vote : projet de vie ou signal d'alerte.",
+      "en": "The Pinterest board you've been secretly feeding for three years. The exact theme, the pin count. The room votes: life plan or cry for help."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-037",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quel objet inutile t'as gardé juste pour l'attachement émotionnel ? Va le chercher si t'oses. Le groupe décide si l'histoire derrière vaut la place qu'il prend.",
+      "en": "What useless object have you kept purely for the sentimental value? Go fetch it if you dare. The room decides if the backstory justifies the shelf space."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-038",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le talent complètement inutile que tu sors fièrement en soirée. Démontre-le maintenant. Le groupe note l'écart entre ta fierté et la réalité.",
+      "en": "The completely useless talent you proudly trot out at parties. Demonstrate it now. The room scores the gap between your pride and the result."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-039",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle règle débile tu suis encore alors que personne te surveille ? Genre attendre que le four ait bipé deux fois. Cite la tienne, défends-la zéro seconde.",
+      "en": "What pointless rule do you still follow even when nobody's watching? Like waiting for the microwave to beep twice. Name yours, defend it for zero seconds."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-040",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "La dépense la plus ridicule de ton compte ce mois-ci. Le montant, l'heure, l'état d'esprit. Le groupe vote : justifiable ou diagnostic.",
+      "en": "The most ridiculous purchase on your bank statement this month. The amount, the time, the state of mind. The room votes: justifiable or a diagnosis."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-041",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le compliment que t'as reçu une fois et que tu ressors encore dans ta tête trois ans plus tard. Qui l'a dit, et pourquoi tu vis dessus depuis ?",
+      "en": "The one compliment you got once and still replay in your head three years later. Who said it, and why have you been living off it ever since?"
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-042",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "À quel personnage de fiction tu t'identifiais à fond petit… et que tu trouves complètement cringe aujourd'hui ? Avoue, puis fais sa pose signature.",
+      "en": "Which fictional character did you fully identify with as a kid… that you now find deeply embarrassing? Confess, then strike their signature pose."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-043",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le mot de passe le plus gênant que t'as déjà utilisé. Pas l'actuel — un ancien. Le groupe devine le fandom rien qu'à ta tête pendant que tu y penses.",
+      "en": "The most embarrassing password you've ever used. Not the current one — an old one. The room guesses the fandom from your face while you think about it."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-044",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quel surnom tu t'étais inventé en espérant qu'il prenne… et qui a fait un flop total ? Réessaie de le lancer maintenant, devant le groupe. Pour voir.",
+      "en": "What nickname did you invent for yourself hoping it would catch on… and that crashed instantly? Try to launch it again now, in front of the room. Just to see."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-045",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le bruit que tu fais sans t'en rendre compte et que quelqu'un t'a un jour fait remarquer. Reproduis-le. Le groupe confirme à quel point c'est pire que dans ton souvenir.",
+      "en": "The noise you make without realising it that someone once pointed out to you. Reproduce it. The room confirms how much worse it is than you remember."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-046",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "T'as déjà fait semblant de connaître quelqu'un qui te disait bonjour pour pas avouer que tu l'avais oublié. Raconte la conversation entière que t'as tenue à l'aveugle.",
+      "en": "You've faked knowing someone who greeted you rather than admit you forgot them. Tell us the entire conversation you held completely blind."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-047",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle compétence tu prétends avoir sur ton CV ou ta bio que t'es absolument incapable de prouver là, maintenant ? Le groupe te met au défi de la prouver.",
+      "en": "What skill do you claim on your CV or bio that you absolutely cannot prove right here, right now? The room dares you to prove it."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-048",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le truc parfaitement légal mais qui te donne l'impression d'être un génie criminel à chaque fois. Le wifi du voisin ? Le rab de sauce gratuit ? Balance ta combine.",
+      "en": "The thing that's completely legal but makes you feel like a criminal mastermind every time. The neighbour's wifi? The free extra sauce? Spill your hustle."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-049",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle conviction profonde tu défendais à 14 ans et qui te fait te recroqueviller aujourd'hui ? Récite ton ancien discours, intonation d'ado comprise.",
+      "en": "What deep conviction did you defend at 14 that makes you curl up inside today? Recite the old speech, teenage intonation included."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-050",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le détour le plus absurde que t'as fait juste pour éviter de croiser une connaissance. Distance parcourue, magasin où t'as fait semblant d'entrer. Reconstitution rapide exigée.",
+      "en": "The most absurd detour you've taken purely to avoid bumping into an acquaintance. Distance covered, the shop you pretended to enter. Quick reenactment required."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-051",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le plat que tu sais faire et que tu sors à CHAQUE fois qu'on te demande de cuisiner. Décris-le. Le groupe estime depuis combien d'années tu mens sur tes talents.",
+      "en": "The one dish you can make and roll out EVERY time someone asks you to cook. Describe it. The room estimates how many years you've been lying about your range."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-052",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle conversation entière t'as déjà répétée dans ta tête avant un coup de fil… pour que la personne réponde même pas comme prévu ? Rejoue ton script gâché.",
+      "en": "What entire conversation have you rehearsed in your head before a phone call… only for the person to not even answer as scripted? Replay your wasted script."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-053",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le truc que tu fais bien uniquement quand personne te regarde et que tu rates à tous les coups en public. Nomme-le. Le groupe va te demander une démo, évidemment.",
+      "en": "The thing you only do well when nobody's watching and fumble every time in public. Name it. The room is going to demand a demo, obviously."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-054",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle excuse bidon t'as donnée pour quitter une conversation… qui était tellement nulle que la personne a forcément capté ? Ressors-la, on jugera.",
+      "en": "What flimsy excuse did you give to escape a conversation… that was so bad the person definitely clocked it? Use it again on us, we'll judge."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-soft-055",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quel petit pouvoir totalement inutile tu choisirais sans hésiter : toujours savoir l'heure, ou ne plus jamais avoir de lacet défait ? Tranche, puis défends ton choix face au groupe qui te trouvera pathétique.",
+      "en": "Which totally useless tiny power would you grab without hesitating: always knowing the time, or never having an undone shoelace again? Pick, then defend it to a room that will find you pathetic."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-036",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe te donne une émotion. Tu dois la jouer uniquement avec tes sourcils pendant 15 secondes pendant qu'on essaie de la deviner. Le reste du visage figé.",
+      "en": "The room gives you an emotion. You must perform it using only your eyebrows for 15 seconds while we try to guess it. The rest of your face frozen."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-037",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Présente le contenu de tes poches ou de ton sac au groupe comme un guide de musée devant une collection inestimable. Chaque objet a une histoire tragique. Invente-la.",
+      "en": "Present the contents of your pockets or bag to the room like a museum guide before a priceless collection. Every object has a tragic story. Invent it."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-soft-038",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Marche au plafond. Allonge-toi par terre, jambes en l'air contre le mur, et raconte ta journée comme si la pièce était à l'envers et que c'était parfaitement normal.",
+      "en": "Walk on the ceiling. Lie on the floor, legs up against the wall, and narrate your day as if the room were upside down and this were perfectly normal."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-039",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Jusqu'à ton prochain tour, tu dois traduire en direct, à voix basse, tout ce que dit la personne à ta droite — façon doublage d'un documentaire animalier.",
+      "en": "Until your next turn, you must live-translate, in a low voice, everything the person on your right says — like the dub of a nature documentary."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-040",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe te donne trois objets de la pièce. Invente en 30 secondes un super-héros dont ce sont les seuls pouvoirs. Pose finale obligatoire, avec le cri de guerre.",
+      "en": "The room hands you three objects from the room. Invent, in 30 seconds, a superhero whose only powers are those. Final pose mandatory, with the battle cry."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-soft-041",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Tiens un débat de 30 secondes contre toi-même : pour et contre les pâtes le matin, en changeant de chaise et de voix à chaque camp. Le groupe désigne le vainqueur.",
+      "en": "Hold a 30-second debate against yourself: for and against pasta for breakfast, switching chair and voice for each side. The room names the winner."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-042",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Imite la sonnerie, la vibration et l'écran d'accueil de ton téléphone, à la bouche, jusqu'à ce que le groupe devine la marque. Aucun mot autorisé.",
+      "en": "Imitate your phone's ringtone, vibration and lock-screen, all with your mouth, until the room guesses the brand. No words allowed."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-043",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe choisit deux joueurs. Tu inventes en 20 secondes la légende de comment ils se sont rencontrés — version mythologie grecque, avec dieux et trahison.",
+      "en": "The room picks two players. In 20 seconds you invent the legend of how they met — Greek-mythology edition, with gods and betrayal."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-044",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Mange ou bois quelque chose de parfaitement normal, mais avec le sérieux et les bruitages d'un critique gastronomique au bord des larmes. 30 secondes, sans rire.",
+      "en": "Eat or drink something perfectly ordinary, but with the gravity and sound effects of a food critic on the verge of tears. 30 seconds, no laughing."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-soft-045",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe t'impose un nouveau prénom pour le reste de la partie. Tu ne réponds plus qu'à celui-là — et tu corriges poliment quiconque utilise l'ancien.",
+      "en": "The room assigns you a new name for the rest of the game. You only answer to that one — and you politely correct anyone who uses the old one."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-046",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Refais la pub la plus marquante de ton enfance, de mémoire, jingle compris. Si le groupe reconnaît la marque, t'es libre. Sinon, tu remontes plus loin dans le temps.",
+      "en": "Recreate the most iconic advert from your childhood, from memory, jingle included. If the room names the brand, you're free. If not, you go further back in time."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-047",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Tu deviens le narrateur de ta propre vie à la troisième personne jusqu'à ton prochain tour. « Il prit une gorgée d'eau, sans savoir ce qui l'attendait. » Tout doit être commenté.",
+      "en": "You become the third-person narrator of your own life until your next turn. 'He took a sip of water, unaware of what awaited him.' Everything must be narrated."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-048",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe nomme un sentiment (la déception, la fierté, la trahison). Tu dois quitter la pièce et la rouvrir en l'incarnant à 200 %. Refais l'entrée jusqu'à ce qu'on valide.",
+      "en": "The room names a feeling (disappointment, pride, betrayal). You must leave the room and re-enter embodying it at 200%. Redo the entrance until we approve."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-049",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Tiens un objet de la pièce comme s'il pesait 80 kilos et traverse le salon avec, en haletant. Si quelqu'un sourit, c'est qu'il devient encore plus lourd.",
+      "en": "Hold an object from the room as if it weighs 80 kilos and cross the living room with it, gasping. If anyone smirks, it just got heavier."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-soft-050",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Annonce la météo de la soirée comme à la télé : la pression sociale, le risque de malaise, les chances de fou rire. Carte et gestes du bras obligatoires.",
+      "en": "Deliver tonight's weather forecast like on TV: the social pressure, the awkwardness risk, the chance of a giggle fit. Map and sweeping arm gestures mandatory."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-051",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Jusqu'à ton prochain tour, tu dois faire un bruitage de jeu vidéo à chaque fois que tu te lèves, t'assois ou bois. Le groupe a ordre de te faire bouger souvent.",
+      "en": "Until your next turn, you must make a video-game sound effect every time you stand, sit, or drink. The room is under orders to keep you moving."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-052",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Fais le tutoriel sérieux d'un geste totalement banal — ouvrir une porte, te moucher — comme une vidéo « pour débutants » de douze minutes condensée en 30 secondes.",
+      "en": "Give a serious tutorial for a totally mundane action — opening a door, blowing your nose — like a twelve-minute 'for beginners' video crammed into 30 seconds."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-053",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le groupe désigne un joueur. Tu deviens son garde du corps jusqu'à ton prochain tour : tu scrutes la pièce, tu parles dans ta manche, tu le protèges des menaces invisibles.",
+      "en": "The room picks a player. You become their bodyguard until your next turn: you scan the room, you speak into your sleeve, you shield them from invisible threats."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-054",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Récite l'alphabet en faisant semblant d'être de plus en plus ému, jusqu'à finir en sanglots devant la lettre Z. Le groupe note ta carrière d'acteur sur 10.",
+      "en": "Recite the alphabet while pretending to get more and more emotional, ending in full sobs at the letter Z. The room scores your acting career out of 10."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-soft-055",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Mime un sport sans dire lequel, mais en le rendant ÉPIQUE — ralenti, victoire, larmes du champion. Le groupe devine. Mauvaise devinette = tu mimes la défaite, encore plus dramatique.",
+      "en": "Mime a sport without naming it, but make it EPIC — slow motion, victory, the champion's tears. The room guesses. Wrong guess = you mime the defeat, even more dramatic."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-036",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Qui ici a déjà liké une photo de plus de deux ans en stalkant, puis vécu une crise cardiaque de trois jours ? Désigne, puis avoue que c'était toi.",
+      "en": "Who here has accidentally liked a 2-year-old photo mid-stalk, then survived a three-day cardiac event? Point — then admit it was you."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-037",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le pseudo le plus humiliant que t'aies jamais eu sur un réseau. Épelle-le. Le groupe a 15 secondes pour deviner ton âge exact à l'époque.",
+      "en": "The most humiliating username you've ever had on any platform. Spell it out. The room gets 15 seconds to guess your exact age at the time."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-038",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Combien de comptes secrets tu as au total — finsta, compte fan, compte pour mater une seule personne ? Le chiffre brut. Le groupe devine à qui sert chacun.",
+      "en": "How many secret accounts do you have in total — finsta, stan account, an account for watching exactly one person? The raw number. The room guesses what each is for."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-039",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le message le plus gênant que ton crush a forcément vu sans répondre. Cite-le mot pour mot. Le groupe vote : il t'a ghosté pour ça, ou malgré ça ?",
+      "en": "The most cringe message your crush definitely saw and never answered. Quote it word for word. The room votes: did they ghost you for it, or despite it?"
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-040",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Classe trois joueurs ici du plus au moins susceptible de retourner avec son ex à 2 h du matin. Justifie ta première place. Elle se reconnaîtra.",
+      "en": "Rank three players here from most to least likely to crawl back to their ex at 2 a.m. Justify your top pick. They'll know it's them."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-041",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le truc le plus délirant que t'as fait pour récupérer l'attention de quelqu'un qui t'ignorait. Story postée exprès, like calculé, faux départ en soirée. Balance le plan complet.",
+      "en": "The most unhinged thing you've done to win back the attention of someone ignoring you. Story posted on purpose, calculated like, fake party exit. Lay out the whole scheme."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-042",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Ton plus gros mensonge sur une appli de rencontre. La taille, le métier, le « j'adore la rando » ? Le groupe vote : mensonge mignon ou arnaque caractérisée.",
+      "en": "Your biggest lie on a dating app. The height, the job, the 'I love hiking'? The room votes: cute white lie or full-on catfish."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-043",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Qui dans cette pièce serait le plus capable de lire en douce les messages de son date pendant qu'il va aux toilettes ? Désigne. La défense a 15 secondes, mais on y croit déjà pas.",
+      "en": "Who in this room is most capable of sneaking a look at their date's messages while they're in the bathroom? Point. The defence gets 15 seconds, but nobody's buying it."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-044",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le ick le plus injuste que t'as eu sur quelqu'un de bien. Il a couru pour attraper le bus ? Il a dit « patate » bizarrement ? Avoue le tien, le groupe juge si t'es irrécupérable.",
+      "en": "The most unfair ick you've caught from a genuinely nice person. They ran for the bus? They said 'literally' weird? Confess yours, the room judges if you're a lost cause."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-045",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "La dernière fois que t'as fait semblant d'être occupé pour pas répondre à quelqu'un… qui t'a vu poster une story dix minutes après. C'était qui, et t'as géré comment ?",
+      "en": "The last time you pretended to be busy to dodge someone… who then watched you post a story ten minutes later. Who was it, and how did you handle it?"
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-046",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le pire moment où t'as confondu deux personnes — deux dates, deux matchs, deux prénoms. Raconte la seconde exacte où t'as compris ton erreur.",
+      "en": "The worst time you mixed up two people — two dates, two matches, two names. Tell us the exact second you realised your mistake."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-047",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Combien de fois t'as relu un message avant de l'envoyer à ton crush, record absolu ? Et le mot sur lequel t'as bloqué le plus longtemps ? Le groupe estime d'abord.",
+      "en": "How many times did you reread one message before sending it to your crush, all-time record? And the word you got stuck on longest? The room estimates first."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-048",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà créé un faux sondage en story juste pour qu'une personne précise réponde. C'était quoi le sondage, et la cible est-elle dans cette pièce ?",
+      "en": "You've made a fake story poll purely so one specific person would reply. What was the poll, and is the target in this room?"
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-049",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Qui dans cette pièce a le plus de chances de tomber amoureux de son barista ou de son prof de sport sur une seule interaction ? Désigne, et donne la preuve.",
+      "en": "Who in this room is most likely to fall in love with their barista or gym instructor off a single interaction? Point, and bring the receipts."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-050",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le compte que tu surveilles si religieusement que tu connais ses horaires de post par cœur. Pas de nom — juste l'horaire. Le groupe en déduit le niveau d'obsession.",
+      "en": "The account you monitor so religiously you know its posting schedule by heart. No name — just the schedule. The room deduces the obsession level."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-051",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le surnom secret que ton groupe d'amis a donné à ton ex ou à ton crush. Le vrai. Quelqu'un dans cette pièce peut confirmer ou aggraver.",
+      "en": "The secret nickname your friend group gave your ex or your crush. The real one. Someone in this room can confirm it — or make it worse."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-052",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "La fois où t'as le plus regretté d'avoir envoyé un vocal. Sa durée, son contenu, et si la personne l'a écouté en entier ou pas. On veut le drame complet.",
+      "en": "The time you most regretted sending a voice note. Its length, its content, and whether the person listened to the whole thing or not. We want the full drama."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-053",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Si on affichait ton historique de likes des trois derniers jours sur l'écran maintenant, quel like te trahirait le plus ? Décris-le sans le montrer. On sentira si tu mens.",
+      "en": "If we put your last three days of likes on the screen right now, which like would expose you the most? Describe it without showing it. We'll know if you lie."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-054",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Qui dans cette pièce répondrait le plus vite à un ex qui écrit « tu fais quoi ? » à minuit ? Désigne, donne ton temps de réponse estimé en secondes. La défense plaide.",
+      "en": "Who in this room would reply fastest to an ex texting 'wyd' at midnight? Point, give your estimated reply time in seconds. The defence may now plead."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-t-party-055",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "La théorie complotiste que t'as construite sur la vie amoureuse de quelqu'un de ce groupe à partir de trois indices microscopiques. Présente le dossier. L'accusé répond après.",
+      "en": "The conspiracy theory you've built about someone in this group's love life from three microscopic clues. Present the case file. The accused responds after."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-036",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Ouvre tes suggestions d'amis et lis à voix haute les trois premiers noms. Aucun veto. Le groupe choisit lequel tu dois expliquer.",
+      "en": "Open your friend suggestions and read out the first three names. No vetoes. The room picks which one you have to explain."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-037",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe dicte une légende. Tu la postes sous ta dernière photo de profil pendant exactement 5 minutes. Chronomètre lancé. Tu réponds à tous les commentaires en direct.",
+      "en": "The room dictates a caption. You post it under your current profile photo for exactly 5 minutes. Timer's running. You reply to every comment live."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-038",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Envoie un « je pense à toi » au troisième contact de ta liste de discussions récentes. Tu lis tout haut qui c'est seulement après l'envoi. Pas de retour en arrière.",
+      "en": "Send 'thinking about you' to the third contact in your recent chats. You read out who it is only after hitting send. No takebacks."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-039",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe ouvre ton appli de musique. Tu dois défendre ta chanson la plus écoutée de l'année comme si ta réputation en dépendait. Parce qu'elle en dépend.",
+      "en": "The room opens your music app. You must defend your most-played song of the year as if your reputation depended on it. Because it does."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-040",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Appelle le dernier numéro inconnu de ton journal d'appels et tente de te faire passer pour un sondage. Tu tiens jusqu'à ce qu'on raccroche pour toi.",
+      "en": "Call the last unknown number in your call log and try to pass yourself off as a survey. You hold the bit until someone hangs up for you."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-041",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Recrée ta pire photo de profil de toute ta vie en live : même pose, même tête, même énergie. Le groupe compare avec l'originale si elle existe encore.",
+      "en": "Recreate the worst profile picture of your entire life, live: same pose, same face, same energy. The room compares it to the original if it still exists."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-042",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Lis à voix haute, avec la voix d'un présentateur du JT, le brouillon non envoyé le plus ancien de tes messages. S'il y en a pas, c'est ton dernier message envoyé à un ex.",
+      "en": "Read aloud, in a news-anchor voice, the oldest unsent draft in your messages. If there's none, it's your last sent message to an ex."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-043",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe te désigne un joueur. Tu dois lui faire une déclaration d'amitié exagérément dramatique, à genoux, en listant trois moments précis qui scellent votre lien. Pleurs simulés bienvenus.",
+      "en": "The room picks a player. You must make them an over-the-top dramatic declaration of friendship, on your knees, listing three specific moments that sealed your bond. Fake tears welcome."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-044",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Ouvre ton appli de rencontre devant le groupe. Pour les trois prochains profils, c'est LE GROUPE qui décide : on like ou on passe. Tu n'as plus aucun droit de vote.",
+      "en": "Open your dating app in front of the room. For the next three profiles, THE ROOM decides: swipe right or left. You forfeit all voting rights."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-045",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Écris un message de réconciliation totalement sincère à un objet que tu as récemment maltraité — la wifi, ton réveil, la balance. Lis-le les yeux humides.",
+      "en": "Write a completely sincere reconciliation message to an object you've recently mistreated — the wifi, your alarm clock, the bathroom scale. Read it with watering eyes."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-046",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Imite la façon de flirter que tu avais à 15 ans face à ton crush de l'époque. Le groupe note l'efficacité. Spoiler : zéro. C'est tout l'intérêt.",
+      "en": "Reenact how you flirted at 15 in front of your crush of the time. The room scores the effectiveness. Spoiler: zero. That's the whole point."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-047",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe choisit un de tes ex ou crush (sans le nommer tout haut s'il faut). Tu fais son éloge funèbre de 20 secondes — celui de votre histoire morte. Très ému.",
+      "en": "The room picks one of your exes or crushes (no need to say the name out loud). You deliver a 20-second eulogy — for your dead history with them. Visibly moved."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-048",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Jusqu'à ton prochain tour, tu dois commencer chaque phrase par « bon, je devrais pas dire ça, mais… » puis enchaîner sur un truc totalement banal. Le groupe attend le scoop à chaque fois.",
+      "en": "Until your next turn, you must start every sentence with 'okay I shouldn't say this, but…' then continue with something totally mundane. The room leans in for the scoop every time."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-049",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Ouvre tes recherches récentes sur une appli de shopping et lis les trois dernières à voix haute. Le groupe désigne celle qui en dit le plus long sur ta vie en ce moment.",
+      "en": "Open your recent searches on a shopping app and read the last three out loud. The room picks the one that says the most about your life right now."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-050",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe te donne un trait de caractère. Tu dois draguer la personne à ta gauche EN INCARNANT ce trait à fond pendant 20 secondes : le désespéré, le trop sûr de lui, le mystérieux raté.",
+      "en": "The room gives you a personality trait. You must hit on the player to your left FULLY embodying that trait for 20 seconds: the desperate, the overconfident, the failed-mysterious."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-051",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Compose un texto de rupture parfait, générique, réutilisable, en 30 secondes. Lis-le au groupe. On le notera, et quelqu'un ici le resservira un jour, on le sait.",
+      "en": "Draft the perfect generic reusable breakup text in 30 seconds. Read it to the room. We'll score it, and someone here will absolutely use it one day, we all know."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-052",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe te dicte un statut d'humeur dramatique. Tu le mets sur ton profil le plus public pendant 10 minutes, sans contexte, et tu ignores tous ceux qui demandent si ça va.",
+      "en": "The room dictates a dramatic mood status. You put it on your most public profile for 10 minutes, no context, and you ignore everyone who asks if you're okay."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-053",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Rejoue ta réaction physique exacte la dernière fois que ton crush a liké ta story. Le tremblement, le sourire bête, le tour de pièce. Le groupe note le niveau de dignité perdue.",
+      "en": "Reenact your exact physical reaction the last time your crush liked your story. The shake, the stupid smile, the lap of the room. The room scores the dignity lost."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "fun-d-party-054",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Donne ton tel à la personne en face. Elle a 15 secondes pour t'écrire une bio de rencontre brutalement honnête sur ton vrai profil. Tu la gardes jusqu'à la fin de la partie.",
+      "en": "Hand your phone to the person across from you. They get 15 seconds to write you a brutally honest dating bio on your actual profile. You keep it until the game ends."
+    },
+    "deck": "fun",
+    "props": true
+  },
+  {
+    "id": "fun-d-party-055",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Jusqu'à ton prochain tour, chaque fois que quelqu'un dit « non », tu dois réagir comme si on venait de te briser le cœur en direct. Plein écran, plein drame.",
+      "en": "Until your next turn, every time anyone says 'no', you must react as if your heart has just been broken live. Full screen, full drama."
+    },
+    "deck": "fun"
+  },
+  {
+    "id": "lov-t-party-026",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le tout premier message que tu as envoyé à ton/ta partenaire. Retrouve-le et lis-le mot pour mot. Il/elle note ton niveau de game de l'époque sur 10.",
+      "en": "The very first message you ever sent your partner. Dig it up and read it word for word. They rate your game from back then out of 10."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-t-party-027",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "La tâche ménagère que tu fais exprès mal pour ne plus jamais qu'on te la confie. Avoue la technique. Ton/ta partenaire découvre la machination en direct.",
+      "en": "The chore you do badly on purpose so you're never asked again. Confess the technique. Your partner discovers the long con live."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-028",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le mensonge que tu sors à ton/ta partenaire à chaque « t'as vu mon message ? ». Donne le délai exact entre la lecture et ta réponse. Il/elle confirme le pattern.",
+      "en": "The lie you tell your partner every time they ask 'did you see my message?'. Give the exact gap between read and reply. They confirm the pattern."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-029",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Qui craque en premier après une dispute, statistiquement ? Annoncez chacun votre chiffre en secret, révélez ensemble. Le groupe garde le score pour les prochaines disputes.",
+      "en": "Who caves first after a fight, statistically? Each name your number in secret, reveal together. The room keeps score for all future fights."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-030",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le truc que ton/ta partenaire t'a dit un jour et que tu n'as jamais digéré. Sors-le maintenant, devant témoins. Il/elle a 30 secondes pour s'en souvenir et plaider.",
+      "en": "The thing your partner once said to you that you've never let go of. Bring it out now, in front of witnesses. They get 30 seconds to remember it and plead."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-031",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le moment où tu as failli annuler votre premier date — l'excuse déjà tapée, le doigt sur « envoyer ». Qu'est-ce qui t'a arrêté ? Il/elle l'apprend peut-être à l'instant.",
+      "en": "The moment you nearly cancelled your first date — the excuse already typed, finger on 'send'. What stopped you? They might be hearing this for the first time."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-032",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Ce que ta mère ou ton meilleur ami a vraiment dit la première fois qu'il a rencontré ton/ta partenaire — la version non filtrée, pas celle que tu as rapportée. Il/elle écoute.",
+      "en": "What your mum or your best friend actually said the first time they met your partner — the unfiltered version, not the one you relayed. They're listening."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-033",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Vous partez en week-end : qui oublie quoi, qui panique pour l'horaire, qui boude à la première galère ? Décris la scène. Le groupe vote pour le plus insupportable des deux.",
+      "en": "You're off for a weekend away: who forgets what, who panics about the schedule, who sulks at the first hitch? Describe the scene. The room votes for the more unbearable of the two."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-034",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le compte que ton/ta partenaire ne sait pas que tu suis. Pas de nom — juste pourquoi tu le suis et pourquoi tu lui as caché. Le groupe juge la gravité.",
+      "en": "The account your partner doesn't know you follow. No name — just why you follow it and why you hid it. The room judges the severity."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-035",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Si ton/ta partenaire lisait toutes tes recherches Google du dernier mois, quelle est celle qui demanderait le plus d'explications ? Décris-la. Il/elle décide si l'explication tient.",
+      "en": "If your partner read every Google search of yours from the last month, which one would need the most explaining? Describe it. They decide if the explanation holds."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-036",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "La promesse que vous vous êtes faite au début et que vous avez tous les deux discrètement enterrée. Lequel des deux l'a trahie en premier ? Pointez en même temps.",
+      "en": "The promise you both made early on and both quietly buried. Which of you broke it first? Point at the same time."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-037",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Ce que tu as vraiment ressenti la première fois que ton/ta partenaire a pleuré devant toi. La version honnête, pas la noble. Il/elle a le droit de demander un seul détail de plus.",
+      "en": "What you actually felt the first time your partner cried in front of you. The honest version, not the noble one. They get to demand exactly one more detail."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-038",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le truc que tu fais juste pour voir la réaction de ton/ta partenaire, encore et encore, parce qu'elle te fait toujours marrer. Avoue-le. À partir de ce soir, ça marchera plus.",
+      "en": "The thing you do purely to trigger your partner's reaction, over and over, because it always makes you laugh. Confess it. From tonight it stops working."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-039",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le dernier vocal que ton/ta partenaire t'a envoyé et que t'as fait semblant d'écouter en entier. Sa durée, et le moment exact où t'as décroché. Il/elle ouvre une enquête.",
+      "en": "The last voice note your partner sent that you pretended to listen to in full. Its length, and the exact moment you checked out. They open an investigation."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-party-040",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le moment où ton/ta partenaire t'a le plus impressionné sans le savoir. Pas le compliment de couple cliché — un vrai moment précis. Décris-le en le/la regardant.",
+      "en": "The moment your partner impressed you most without knowing it. Not the cliché couple compliment — one real specific moment. Describe it while looking at them."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-026",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Échangez vos téléphones et chacun ouvre la dernière photo prise par l'autre. Commentez-la à voix haute comme un audioguide de musée. L'auteur de la photo n'a pas le droit de se justifier.",
+      "en": "Swap phones and each open the last photo the other took. Narrate it out loud like a museum audioguide. The photographer is not allowed to justify themselves."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-d-party-027",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Refais la voix et le visage de ton/ta partenaire qui te demande « on mange quoi ce soir ? » pour la trois-centième fois. Il/elle juge la ressemblance. Le groupe juge l'usure.",
+      "en": "Recreate the voice and face of your partner asking 'what are we eating tonight?' for the three-hundredth time. They judge the accuracy. The room judges the wear and tear."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-028",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Présente ton/ta partenaire au groupe comme une fiche produit en magasin : caractéristiques, points forts, défaut de fabrication assumé, garantie. Il/elle écoute le pitch sans broncher.",
+      "en": "Introduce your partner to the room like an in-store product listing: specs, key features, one accepted manufacturing flaw, warranty. They listen to the pitch without flinching."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-029",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Reconstituez votre dispute la plus stupide, mais en comédie musicale : tout est chanté, refrain compris. Le groupe désigne le meilleur passage et le vrai coupable.",
+      "en": "Reenact your most stupid argument, but as a musical: everything sung, chorus included. The room picks the best number and the actual guilty party."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-030",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Tu as 30 secondes pour deviner les trois applis que ton/ta partenaire utilise le plus. Il/elle ouvre le classement ensuite. Chaque erreur, c'est une question de ton choix qu'il/elle doit répondre.",
+      "en": "You get 30 seconds to guess your partner's three most-used apps. They open the ranking after. Each wrong guess = one question of your choice they must answer."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-d-party-031",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Imite ton/ta partenaire en train de raconter une histoire dont il/elle est très fier — la même qu'il/elle ressort à chaque dîner. Inclus le moment où il/elle attend les rires. Il/elle ne peut pas t'interrompre.",
+      "en": "Impersonate your partner telling a story they're very proud of — the one they wheel out at every dinner. Include the moment they wait for the laughs. They cannot interrupt you."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-032",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Sans un mot, mime la soirée parfaite selon toi. Ton/ta partenaire devine à voix haute. Chaque détail qu'il/elle rate, c'est un indice de plus sur ce qu'il/elle écoute pas.",
+      "en": "Without a word, mime your idea of the perfect evening. Your partner guesses out loud. Every detail they miss is another clue about what they don't listen to."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-033",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe vous donne un sujet bidon (le sens des rouleaux de PQ, la température de la clim). Vous improvisez votre prochaine dispute de couple sur ce sujet, en direct, pendant 30 secondes.",
+      "en": "The room gives you a petty topic (which way the loo roll goes, the thermostat). You improvise your next couple's argument about it, live, for 30 seconds."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-034",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Dis trois choses que tu admires chez ton/ta partenaire en le/la regardant dans les yeux, sans sourire et sans rigoler. Le premier qui craque doit en ajouter une quatrième, plus gênante.",
+      "en": "Say three things you admire about your partner while looking them in the eyes, no smiling, no laughing. Whoever cracks first must add a fourth, more embarrassing one."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-035",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Refais l'instant exact où tu as réalisé que ton/ta partenaire te plaisait vraiment — le décor, ta tête, la phrase intérieure. Il/elle confirme si la date colle.",
+      "en": "Reenact the exact instant you realised you genuinely fancied your partner — the setting, your face, the line in your head. They confirm whether the date checks out."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-036",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Le groupe vous filme mentalement pour une pub de couple parfait. Vous devez sourire à la caméra invisible et dire votre slogan commun en chœur. Premier essai non répété.",
+      "en": "The room mentally films you for a perfect-couple advert. You must smile at the invisible camera and say your shared slogan in unison. First take, unrehearsed."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-037",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Devine, sans ouvrir le tel, le dernier emoji que ton/ta partenaire t'a envoyé. Il/elle vérifie. Si tu te trompes, tu lui envoies maintenant celui qu'il/elle mérite.",
+      "en": "Guess, without opening the phone, the last emoji your partner sent you. They check. If you're wrong, you send them right now the one they deserve."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-d-party-038",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Joue la scène : ton/ta partenaire t'a oublié pour ton anniversaire. Confronte-le/la en pleine performance dramatique. Il/elle doit improviser des excuses crédibles. Le groupe note la sincérité.",
+      "en": "Act it out: your partner forgot your birthday. Confront them in full dramatic performance. They must improvise believable excuses. The room scores the sincerity."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-039",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Sans te retourner, décris la tenue exacte de ton/ta partenaire ce soir, pièce par pièce. Chaque erreur, le groupe te l'inscrit au tableau de l'inattention.",
+      "en": "Without turning around, describe your partner's exact outfit tonight, piece by piece. Every mistake gets logged by the room on the inattention scoreboard."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-party-040",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Écris en 30 secondes le SMS d'excuse parfait que tu devrais envoyer à ton/ta partenaire pour la dernière fois où t'avais tort. Lis-le tout haut. Il/elle décide s'il est accepté.",
+      "en": "Write in 30 seconds the perfect apology text you should send your partner for the last time you were wrong. Read it out loud. They decide if it's accepted."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-026",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le moment exact de la journée où tu penses le plus à ton/ta partenaire de cette façon-là. L'heure, le contexte. Il/elle découvre peut-être qu'il/elle bosse à ce moment-là.",
+      "en": "The exact time of day you think about your partner that way the most. The hour, the context. They might discover they're at work right then."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-027",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La phrase la plus innocente que ton/ta partenaire peut dire en public et qui, pour toi, veut dire tout autre chose. Révèle le code. Le groupe l'entendra différemment toute la soirée.",
+      "en": "The most innocent sentence your partner can say in public that, to you, means something else entirely. Reveal the code. The room will hear it differently all night."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-028",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "À quel moment précis de votre première soirée ensemble t'as su que ça allait finir au lit ? Donne le signal exact. Ton/ta partenaire confirme s'il/elle l'avait envoyé exprès.",
+      "en": "At what exact moment of your first night together did you know it would end in bed? Name the exact signal. Your partner confirms whether they sent it on purpose."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-029",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le truc que ton/ta partenaire fait juste avant que vous passiez à l'acte et qui marche à 100 %. Décris le geste précis. Il/elle saura qu'à partir de ce soir, t'as vendu la mèche.",
+      "en": "The thing your partner does right before things kick off that works 100% of the time. Describe the precise move. They'll know that from tonight, you've given the game away."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-030",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le mensonge le plus généreux que tu aies dit au lit pour ménager l'ego de ton/ta partenaire. Avoue-le. Il/elle a un veto unique — l'utiliser, c'est confirmer.",
+      "en": "The most generous lie you've ever told in bed to protect your partner's ego. Confess it. They hold a single veto — using it confirms it."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-031",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La fois où vous avez dû arrêter en plein milieu pour la raison la plus absurde — un appel, un animal, un fou rire. Racontez à deux voix. Le groupe note l'humiliation sur 10.",
+      "en": "The time you had to stop halfway for the most absurd reason — a phone call, a pet, a giggle fit. Tell it as a duet. The room scores the humiliation out of 10."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-032",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Quelle est la chose que ton/ta partenaire a proposée une fois et que tu as refusée sur le moment… mais à laquelle tu repenses encore ? Le bouton Passe existe. Tout le monde saura.",
+      "en": "What's the thing your partner proposed once that you turned down in the moment… but still think about? The pass button exists. Everyone will know."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-033",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le pire endroit où ton/ta partenaire t'a chauffé alors que tu pouvais absolument rien faire — un dîner de famille, un trajet en voiture, une réunion. Donne la scène. Il/elle plaide non coupable.",
+      "en": "The worst place your partner has wound you up when you could do absolutely nothing about it — a family dinner, a car ride, a meeting. Set the scene. They plead not guilty."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-034",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Combien de temps après votre rencontre vous y avez pensé tous les deux pour la première fois ? Tapez chacun votre estimation en secret, révélez ensemble. L'écart en dit long.",
+      "en": "How long after meeting did each of you first think about it? Each type your estimate in secret, reveal together. The gap says plenty."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-t-spicy-035",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le fantasme parfaitement avouable que vous partagez et que vous n'avez jamais concrétisé. Lequel de vous deux freine ? Pointez en même temps. Le groupe garde le secret du quoi.",
+      "en": "The perfectly shareable fantasy you two have in common but never made happen. Which of you is the brake? Point at the same time. The room never learns the what."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-036",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Décris la voix que prend ton/ta partenaire uniquement dans ces moments-là, sans l'imiter — juste avec des mots. Il/elle décide si la description est trop précise pour ce groupe.",
+      "en": "Describe the voice your partner only uses in those moments, without imitating it — just with words. They decide whether the description is too accurate for this room."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-037",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le souvenir précis avec ton/ta partenaire que tu ressors quand il/elle est en déplacement. Pas de détails graphiques — juste la date et le lieu. Il/elle saura lequel.",
+      "en": "The specific memory with your partner you revisit when they're away. No graphic details — just the date and the place. They'll know which one."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-038",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Si ton/ta partenaire devait te noter sur l'effort, pas le résultat, ça donnerait quoi sur 10 ? Réponds, puis laisse-le/la donner la vraie note. Le groupe mesure l'écart.",
+      "en": "If your partner had to rate you on effort, not outcome, what would it be out of 10? Answer, then let them give the real score. The room measures the gap."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-039",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La tenue que tu gardes au fond du placard spécialement pour ton/ta partenaire et qu'il/elle a peut-être jamais reliée à ça. Décris-la. Il/elle fait le lien en direct.",
+      "en": "The outfit you keep at the back of the wardrobe specifically for your partner that they may have never connected to that. Describe it. They make the link live."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-040",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le compliment au lit que ton/ta partenaire t'a fait une fois et que tu n'as jamais oublié. Cite-le mot pour mot. Il/elle confirme s'il/elle s'en souvient — ou avoue que c'était spontané.",
+      "en": "The compliment in bed your partner once gave you that you've never forgotten. Quote it word for word. They confirm if they remember — or admit it was spur of the moment."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-041",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Lequel de vous deux a déjà fait semblant d'être fatigué pour éviter, et lequel a déjà fait semblant de l'être pas pour pas vexer ? Pointez chacun votre vérité. Le groupe encaisse.",
+      "en": "Which of you has faked being tired to dodge it, and which has faked not being to avoid hurting the other? Each point at your truth. The room takes the hit."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-042",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le détail le plus précis que tu connais sur le corps de ton/ta partenaire que lui/elle-même ignore. Décris-le pudiquement. Il/elle découvre qu'il/elle est observé à ce point.",
+      "en": "The most precise detail you know about your partner's body that they themselves don't know. Describe it decently. They learn they're observed that closely."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-043",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Votre pire timing : la fois où l'un voulait et l'autre absolument pas, pour la raison la plus banale du monde. Racontez à deux. Le groupe désigne la victime de l'histoire.",
+      "en": "Your worst timing: the time one of you was up for it and the other absolutely not, for the most mundane reason on earth. Tell it together. The room names the victim of the story."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-t-spicy-044",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "S'il fallait résumer votre meilleure nuit ensemble par un seul lieu, une seule date et une seule chanson, ce serait quoi ? Tapez chacun les trois en secret. Le groupe lit les visages à la révélation.",
+      "en": "If you had to sum up your best night together with one place, one date and one song, what would it be? Each type all three in secret. The room reads the faces at the reveal."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-t-spicy-045",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La chose que tu fais semblant de détester quand ton/ta partenaire la fait, mais qui en réalité te fait totalement craquer. Avoue-la. Désormais il/elle a une arme.",
+      "en": "The thing you pretend to hate when your partner does it, but that actually gets you completely. Confess it. From now on they have a weapon."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-026",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Trace du bout du doigt, dans le creux de la main de ton/ta partenaire, l'endroit où tu aimerais qu'on soit là, tout de suite. Il/elle garde un visage neutre. Le groupe lit le visage.",
+      "en": "With a fingertip, trace in your partner's palm the place you wish you both were right now. They keep a neutral face. The room reads the face."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-027",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Approche-toi de l'oreille de ton/ta partenaire et compte de un à dix, le plus lentement possible, comme si chaque chiffre comptait. Il/elle doit rester immobile. Le groupe chronomètre la résistance.",
+      "en": "Lean to your partner's ear and count from one to ten, as slowly as possible, as if every number mattered. They must stay still. The room times the resistance."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-028",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Décris à ton/ta partenaire, à voix basse, la tenue dans laquelle tu rêverais de le/la voir ce soir. Pièce par pièce. Le groupe n'entend rien. Vous deux savez exactement où ça va.",
+      "en": "Describe to your partner, in a low voice, the outfit you'd dream of seeing them in tonight. Piece by piece. The room hears nothing. You two know exactly where this goes."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-029",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Pose ta main là où, d'après toi, le cœur de ton/ta partenaire bat le plus vite en ce moment. Tiens 15 secondes sans rien dire. Il/elle a le droit de mentir sur la mesure.",
+      "en": "Put your hand where you think your partner's heart is beating fastest right now. Hold it 15 seconds, saying nothing. They're allowed to lie about the reading."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-030",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Donne à ton/ta partenaire un ordre, un seul, à exécuter discrètement avant la fin de la partie. Murmure-le. Le groupe ne saura jamais — mais surveillera.",
+      "en": "Give your partner one single instruction, to be carried out discreetly before the game ends. Whisper it. The room never finds out — but it will be watching."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-031",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Fixe ton/ta partenaire et liste à voix haute trois endroits où tu voudrais l'embrasser, en commençant par le plus sage. Tu t'arrêtes quand le groupe juge que c'est plus diffusable.",
+      "en": "Stare at your partner and list out loud three places you'd want to kiss them, starting with the tamest. You stop when the room rules it's no longer broadcastable."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-032",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Mords-toi la lèvre et soutiens le regard de ton/ta partenaire pendant 20 secondes sans rien dire. Le premier qui détourne les yeux ou rougit perd. Le groupe arbitre.",
+      "en": "Bite your lip and hold your partner's gaze for 20 seconds without a word. First to look away or blush loses. The room arbitrates."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-033",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Refais, geste pour geste mais habillé et au ralenti, la façon dont tu déshabilles ton/ta partenaire. Sur ta propre veste ou ton écharpe. Il/elle note la fidélité technique sur 10.",
+      "en": "Recreate, move for move but fully clothed and in slow motion, the way you undress your partner. On your own jacket or scarf. They score the technical accuracy out of 10."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-034",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Prends la main de ton/ta partenaire et embrasse trois endroits dessus — poignet compris — en le/la regardant entre chaque. Il/elle doit rester de marbre. Le groupe désigne le craquage.",
+      "en": "Take your partner's hand and kiss three spots on it — wrist included — looking at them between each. They must stay stone-faced. The room calls the crack."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-035",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Chuchote à ton/ta partenaire le souvenir précis de votre meilleure nuit, juste assez pour qu'il/elle reconnaisse lequel. Trois mots maximum. Le groupe ne récolte que le sourire.",
+      "en": "Whisper to your partner the precise memory of your best night, just enough that they recognise which one. Three words maximum. The room harvests only the smile."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-036",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Approche-toi très lentement de ton/ta partenaire comme pour l'embrasser… puis arrête-toi à un souffle et recule. Recommence une fois. Le groupe note la cruauté du timing.",
+      "en": "Lean in very slowly toward your partner as if to kiss them… then stop a breath away and pull back. Do it once more. The room scores the cruelty of the timing."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-037",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Lis le menu de la cuisine, une recette, n'importe quel texte banal, mais à ton/ta partenaire et avec la voix que tu réserves au lit. Le groupe note l'écart entre le texte et la performance.",
+      "en": "Read the kitchen menu, a recipe, any mundane text, but to your partner and in the voice you reserve for bed. The room scores the gap between the text and the performance."
+    },
+    "deck": "lover",
+    "props": true
+  },
+  {
+    "id": "lov-d-spicy-038",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Pose une seule question à ton/ta partenaire dont la réponse honnête ferait monter la température de la pièce. Il/elle répond uniquement par « oui », « non » ou un silence. Le groupe interprète.",
+      "en": "Ask your partner one single question whose honest answer would raise the room's temperature. They answer only with 'yes', 'no', or silence. The room interprets."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-039",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Sans le toucher, fais rougir ton/ta partenaire en 30 secondes, uniquement avec des mots et un regard. Le groupe surveille les joues. Échec = c'est lui/elle qui te fait rougir en retour.",
+      "en": "Without touching them, make your partner blush in 30 seconds, using only words and a look. The room watches the cheeks. Fail = they make you blush back."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-040",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Murmure à ton/ta partenaire la première chose que tu feras une fois rentrés. Puis affiche le sourire le plus innocent possible pendant que le groupe te cuisine. Tu ne lâches rien.",
+      "en": "Whisper to your partner the first thing you'll do once you're home. Then put on the most innocent smile possible while the room interrogates you. You give nothing away."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-041",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Place ta main sur la nuque de ton/ta partenaire et approche-toi à un centimètre de ses lèvres. Restez ainsi pendant que le groupe compte jusqu'à dix. Interdiction d'aller plus loin. C'est ça le supplice.",
+      "en": "Put your hand on the back of your partner's neck and come within an inch of their lips. Stay there while the room counts to ten. Going further is forbidden. That's the torture."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-042",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Décris à ton/ta partenaire, en une phrase et les yeux dans les yeux, l'effet exact qu'il/elle te fait quand il/elle sort de la douche. Le groupe lit le thermomètre sur ton/ta partenaire.",
+      "en": "Describe to your partner, in one sentence and eye to eye, the exact effect they have on you when they step out of the shower. The room reads the thermometer on your partner."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-043",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Glisse ta main dans celle de ton/ta partenaire et serre un code secret de ton invention qui veut dire « plus tard, c'est promis ». Apprends-le-lui en direct. Le groupe ne le déchiffrera jamais.",
+      "en": "Slip your hand into your partner's and squeeze a secret code of your own invention meaning 'later, I promise'. Teach it to them live. The room will never crack it."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-044",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Fais à ton/ta partenaire la promesse la plus indécente que tu puisses formuler… sans un seul mot interdit. Le groupe doit pouvoir l'entendre et ne rien pouvoir te reprocher. Le sous-texte fait tout.",
+      "en": "Make your partner the most indecent promise you can phrase… without a single banned word. The room must be able to hear it and pin nothing on you. The subtext does all the work."
+    },
+    "deck": "lover"
+  },
+  {
+    "id": "lov-d-spicy-045",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Embrasse l'épaule de ton/ta partenaire, remonte lentement jusqu'à son oreille sans jamais l'atteindre, et arrête-toi net. Il/elle décrit en un mot ce qu'il/elle ressent. Le groupe ne juge que le mot.",
+      "en": "Kiss your partner's shoulder, travel slowly up toward their ear without ever reaching it, and stop dead. They describe in one word what they feel. The room judges only the word."
+    },
+    "deck": "lover"
   }
 ] },
 };
@@ -2809,6 +4330,114 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "text": {
       "fr": "La pièce te décerne un trophée 100 % honnête, là, maintenant. Y'a quoi de gravé dessus ? Les autres ont le droit de corriger.",
       "en": "This room hands you a brutally honest trophy right now. What's engraved on it? The room is allowed to issue corrections."
+    }
+  },
+  {
+    "id": "totd-t-soft-041",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le surnom que tu donnes à quelqu'un de cette pièce dans ta tête, et qu'il a jamais entendu. Lâche-le. Pas la peine de dire qui — on regardera qui rougit.",
+      "en": "The nickname you've got for someone in this room inside your head that they've never heard. Say it. No need to name them — we'll just watch who flinches."
+    }
+  },
+  {
+    "id": "totd-t-soft-042",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le plus gros mensonge que t'as raconté pour sécher un truc. Le faux rendez-vous médical compte. La fausse panne de réveil aussi. Le meilleur de ta carrière.",
+      "en": "The biggest lie you've told to skip something. The fake dentist appointment counts. The fake dead phone counts. Career best, go."
+    }
+  },
+  {
+    "id": "totd-t-soft-043",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Ouvre tes notes vocales et lis le titre du mémo le plus chelou que t'as enregistré. Si c'est toi qui chantes, on l'écoute.",
+      "en": "Open your voice memos and read the title of the weirdest one in there. If it's you singing, we're playing it."
+    }
+  },
+  {
+    "id": "totd-t-soft-044",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le truc minuscule que quelqu'un ici a fait y'a longtemps et que tu lui pardonneras JAMAIS. Décris le crime. La salle votera si t'as raison de garder rancune.",
+      "en": "The tiny thing someone here did ages ago that you will NEVER let go of. Describe the crime. The room votes on whether the grudge is justified."
+    }
+  },
+  {
+    "id": "totd-t-soft-045",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quel objet tu sauverais en premier dans cette pièce si ça prenait feu — un humain ne compte pas. Justifie devant les humains qui comptaient pas.",
+      "en": "Which object in this room would you save first if it caught fire — a human doesn't count. Justify it to the humans who didn't count."
+    }
+  },
+  {
+    "id": "totd-t-soft-046",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "T'as déjà fait semblant de connaître une chanson devant tout le monde en bougeant juste les lèvres. C'était quel morceau, et qui t'a presque grillé ?",
+      "en": "You've lip-synced a song in front of everyone, pretending you knew the words. Which track was it, and who nearly caught you?"
+    }
+  },
+  {
+    "id": "totd-t-soft-047",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelqu'un ici t'a déjà clairement battu à un truc, et tu le digères toujours pas. C'était quoi, et tu réclames une revanche maintenant ou tu boudes encore ?",
+      "en": "Someone here has clearly beaten you at something and you're still not over it. What was it — and do you want a rematch now, or are you still sulking?"
+    }
+  },
+  {
+    "id": "totd-t-soft-048",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "La dépense la plus ridicule de ton dernier relevé bancaire. Le montant exact, et défends-la comme si t'y croyais encore.",
+      "en": "The most ridiculous line on your last bank statement. The exact amount, and defend it like you still stand by it."
+    }
+  },
+  {
+    "id": "totd-t-soft-049",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Tu mens sur quoi à ton médecin ? Le nombre de cafés, le sport, l'eau que tu bois pas ? Donne le chiffre que tu gonfles ET le vrai.",
+      "en": "What do you lie to your doctor about? The coffees, the exercise, the water you don't drink? Give us the number you inflate AND the real one."
+    }
+  },
+  {
+    "id": "totd-t-soft-050",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Quelle compétence tu prétends avoir sur ton CV et que tu maîtrises absolument pas ? Quelqu'un ici pourrait t'embaucher — réfléchis bien.",
+      "en": "Which skill on your CV do you absolutely not have? Someone in this room might hire you one day — choose your words."
+    }
+  },
+  {
+    "id": "totd-t-soft-051",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Le pire conseil que t'as donné avec une confiance totale, et qui a fini en catastrophe pour la personne. Elle est peut-être ici. Elle s'en souvient, elle.",
+      "en": "The worst advice you've given with total confidence that ended in disaster for them. They might be here. They definitely remember."
+    }
+  },
+  {
+    "id": "totd-t-soft-052",
+    "choice": "truth",
+    "intensity": "soft",
+    "text": {
+      "fr": "Désigne la personne ici dont tu copierais le style sans jamais l'avouer — et celle dont tu cacherais une tenue dans un placard si tu pouvais. Deux doigts, deux noms.",
+      "en": "Point at the person here whose style you'd quietly steal — and the one whose outfit you'd hide in a cupboard if you could. Two fingers, two names."
     }
   },
   {
@@ -3262,6 +4891,186 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     }
   },
   {
+    "id": "totd-t-party-051",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le message que t'as tapé en entier puis supprimé sans envoyer, hier ou avant-hier. À qui il était destiné, et il disait quoi en gros ?",
+      "en": "The message you typed out in full then deleted without sending, yesterday or the day before. Who was it for, and roughly what did it say?"
+    }
+  },
+  {
+    "id": "totd-t-party-052",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Tu stalkes le compte de qui en mode anonyme — l'ex de ton ex, le crush d'un pote, ton propre ex ? Pas de nom. Juste à quelle fréquence.",
+      "en": "Whose account do you stalk on a burner — your ex's ex, a mate's crush, your own ex? No names. Just how often."
+    }
+  },
+  {
+    "id": "totd-t-party-053",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Quelqu'un ici t'a déjà sauvé d'une situation chelou en soirée. Raconte, et avoue si tu l'as jamais vraiment remercié.",
+      "en": "Someone here once pulled you out of a sketchy spot at a party. Tell it, and admit whether you ever properly thanked them."
+    }
+  },
+  {
+    "id": "totd-t-party-054",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le pseudo le plus cramé que t'as utilisé pour mater un profil sans être reconnu. Épelle-le. On veut le niveau de désespoir exact.",
+      "en": "The most tragic fake username you've used to view a profile without being clocked. Spell it out. We want the exact desperation level."
+    }
+  },
+  {
+    "id": "totd-t-party-055",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà annulé un plan avec quelqu'un d'ici pour un meilleur plan, puis menti sur la raison. Lui, il a son téléphone. Avoue avant qu'il scrolle.",
+      "en": "You've cancelled on someone here for a better offer, then lied about why. They've got their phone. Confess before they scroll back."
+    }
+  },
+  {
+    "id": "totd-t-party-056",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Quel secret de quelqu'un d'ici tu meurs d'envie de balancer là maintenant ? Pas besoin de le dire — juste à quel point ça te démange, sur 10.",
+      "en": "Whose secret in this room are you dying to spill right now? You don't have to say it — just rate how badly it itches, out of 10."
+    }
+  },
+  {
+    "id": "totd-t-party-057",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as combien de captures d'écran de conversations dans ta galerie en ce moment ? Compte. Et la plus récente, c'était pour griller qui ?",
+      "en": "How many screenshots of conversations are in your camera roll right now? Count. And the most recent one — who was it to expose?"
+    }
+  },
+  {
+    "id": "totd-t-party-058",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà fait croire que t'avais lu un message alors que t'avais juste désactivé les accusés de réception. Tu fais ça à qui dans cette pièce ?",
+      "en": "You've let someone think you hadn't seen a message while quietly turning off your read receipts. Who in this room do you do that to?"
+    }
+  },
+  {
+    "id": "totd-t-party-059",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Ton mensonge le plus élaboré pour quitter une soirée tôt : l'urgence familiale inventée, le faux malaise, le chat malade ? Donne la version complète.",
+      "en": "Your most elaborate lie to bail on a party early: the fake family emergency, the fake illness, the sick cat? Give us the full version."
+    }
+  },
+  {
+    "id": "totd-t-party-060",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Combien tu donnerais, là maintenant, pour lire les notes vocales que quelqu'un d'ici a envoyées à ton sujet ? Un montant précis. Il sait de quoi tu parles.",
+      "en": "How much would you pay, right now, to hear the voice notes someone here has sent about you? An exact figure. They know what you mean."
+    }
+  },
+  {
+    "id": "totd-t-party-061",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le plus gros plan foireux que t'as monté avec quelqu'un d'ici : la fausse excuse de groupe, le mensonge à deux qui a viré au cauchemar. Racontez-le à deux voix.",
+      "en": "The biggest scheme you cooked up with someone here: the shared fake excuse, the two-person lie that went sideways. Tell it in two voices."
+    }
+  },
+  {
+    "id": "totd-t-party-062",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Ouvre tes favoris Instagram ou TikTok. Le dernier truc enregistré, c'était quoi — et t'es prêt à le montrer, ou tu bois ?",
+      "en": "Open your saved posts on Instagram or TikTok. What's the last thing you bookmarked — and are you ready to show it, or do you drink?"
+    }
+  },
+  {
+    "id": "totd-t-party-063",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà laissé quelqu'un payer toute l'addition en faisant semblant de chercher ton téléphone. C'était qui, et combien de fois ? La personne est peut-être là.",
+      "en": "You've let someone cover the whole bill while you pretended to look for your phone. Who, and how many times? They might be sitting here."
+    }
+  },
+  {
+    "id": "totd-t-party-064",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le compliment que tu détestais recevoir mais que tu réclamais en boucle quand même. Et la personne qui te le faisait, elle est ici ?",
+      "en": "The compliment you secretly hated but kept fishing for anyway. And the person who kept giving it — are they in this room?"
+    }
+  },
+  {
+    "id": "totd-t-party-065",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le dernier truc que t'as cherché à 3h du mat' en mode parano sur quelqu'un. Pas le nom — juste le genre de recherche. La salle complétera.",
+      "en": "The last 3 a.m. paranoid search you ran on someone. Not the name — just the type of search. The room will fill in the rest."
+    }
+  },
+  {
+    "id": "totd-t-party-066",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà inventé un avis sur un film, un resto ou un groupe juste pour pas avoir l'air à la masse devant quelqu'un d'ici. Lequel, et avec qui t'as bluffé ?",
+      "en": "You've faked an opinion on a film, a restaurant or a band just to not look clueless in front of someone here. Which one, and who did you bluff?"
+    }
+  },
+  {
+    "id": "totd-t-party-067",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Classe les gens d'ici du plus au moins capable de garder un secret. Le dernier mérite des explications — et il les exige déjà.",
+      "en": "Rank the people here from best to worst at keeping a secret. Whoever's last is owed an explanation — and they're already demanding one."
+    }
+  },
+  {
+    "id": "totd-t-party-068",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Le truc le plus gênant que ton historique de commandes te ressort en haut de liste, là, si tu l'ouvres. Lis-le. On le verra de toute façon.",
+      "en": "The most embarrassing thing sitting at the top of your order history right now if you open it. Read it out. We'll see it anyway."
+    }
+  },
+  {
+    "id": "totd-t-party-069",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "T'as déjà laissé quelqu'un croire une fausse version d'une soirée parce que la vraie te faisait passer pour un boulet. Quelle soirée, et qui croit encore le mensonge ?",
+      "en": "You've let someone believe a fake version of a night out because the real one made you look like a clown. Which night, and who still believes the lie?"
+    }
+  },
+  {
+    "id": "totd-t-party-070",
+    "choice": "truth",
+    "intensity": "party",
+    "text": {
+      "fr": "Désigne les deux personnes d'ici qui se détesteraient le plus si elles étaient coincées trois jours dans le même appart. Et toi, t'es team qui ?",
+      "en": "Point at the two people here who'd loathe each other most if trapped in the same flat for three days. And you — whose team are you on?"
+    }
+  },
+  {
     "id": "totd-t-spicy-001",
     "choice": "truth",
     "intensity": "spicy",
@@ -3667,6 +5476,186 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     }
   },
   {
+    "id": "totd-t-spicy-046",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le pire moment pour qu'on t'envoie un nude par erreur, et c'est exactement là que c'est arrivé. Qui était à côté, et t'as fait quoi de ton écran ?",
+      "en": "The worst possible moment to get a nude by mistake — and that's exactly when it landed. Who was next to you, and what did you do with your screen?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-047",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le surnom intime qu'on t'a donné au lit et que tu peux pas réentendre sans avoir envie de disparaître. Tu le dis, ou tu bois ?",
+      "en": "The pet name someone gave you in bed that you can't hear again without wanting to disappear. Say it, or drink?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-048",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Combien de personnes dans tes contacts là, maintenant, tu as déjà embrassées ? Ouvre, compte, annonce. Inclus celles que t'as bloquées.",
+      "en": "How many people in your contacts right now have you kissed? Open it, count, announce. Include the ones you've blocked."
+    }
+  },
+  {
+    "id": "totd-t-spicy-049",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà menti sur 'c'était bien' juste pour pas vexer. C'était à quel point pas bien, sur une échelle de 'je remets ça' à 'j'ai fait semblant de dormir' ?",
+      "en": "You've lied about it 'being great' just to spare someone. How not-great was it, on a scale from 'I'd go again' to 'I pretended to fall asleep'?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-050",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "L'endroit le plus improbable où t'as déjà rangé un préservatif 'au cas où'. Précis. La salle jugera ton optimisme.",
+      "en": "The most improbable place you've ever stashed a condom 'just in case'. Be precise. The room will judge your optimism."
+    }
+  },
+  {
+    "id": "totd-t-spicy-051",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà recouché avec un ex en jurant à tout le monde que c'était fini. Combien de rechutes au compteur — et le groupe était au courant à quelle rechute ?",
+      "en": "You've slept with an ex again after swearing to everyone it was over. How many relapses on the counter — and which one did the group find out about?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-052",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La fantaisie la plus banale que t'oses pas demander parce que c'est trop gênant à formuler. Tu peux la décrire en trois mots max. Ou boire.",
+      "en": "The most ordinary fantasy you've never dared ask for because saying it out loud is too awkward. Three words max to describe it. Or drink."
+    }
+  },
+  {
+    "id": "totd-t-spicy-053",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà chronométré un date pour décider de la suite. Combien de minutes avant de savoir si tu restais — et ce date, il l'a jamais su ?",
+      "en": "You've timed a date to decide what happens next. How many minutes before you knew if you were staying — and did they ever find out?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-054",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le pire endroit où tu t'es retrouvé bloqué après un coup d'un soir : mauvaise ville, plus de batterie, plus un sou. Raconte le retour de l'enfer.",
+      "en": "The worst place you've been stranded after a one-night thing: wrong town, dead battery, no cash. Walk us through the journey home from hell."
+    }
+  },
+  {
+    "id": "totd-t-spicy-055",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà fait passer un plan cul pour 'juste un pote' devant tes parents ou tes potes. Ça a tenu combien de temps avant que quelqu'un capte tout ?",
+      "en": "You've passed a hookup off as 'just a mate' in front of your parents or friends. How long did that hold before someone clocked the whole thing?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-056",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La pire excuse que t'as inventée pour expliquer une marque dans le cou. Et la personne à qui tu mentais, elle y a cru combien de secondes ?",
+      "en": "The worst excuse you've invented to explain a mark on your neck. And the person you were lying to — how many seconds did they buy it?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-057",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà répondu à un message d'un ex juste pour voir si t'avais encore du pouvoir. Ça date de quand, et t'es reparti avec quoi — l'ego boosté ou la honte ?",
+      "en": "You've replied to an ex purely to test whether you still had power over them. How recent, and what did you walk away with — the ego boost or the shame?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-058",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le truc que tu googles avant un date pour pas avoir l'air débutant. Lis ta dernière recherche du genre. La vraie, pas la présentable.",
+      "en": "The thing you google before a date so you don't look like a beginner. Read your last search of that kind. The real one, not the presentable one."
+    }
+  },
+  {
+    "id": "totd-t-spicy-059",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà fait semblant d'aimer un truc au lit pour faire plaisir, et maintenant c'est devenu ton 'signature move' imposé. C'était quoi à l'origine ?",
+      "en": "You've faked enjoying something in bed to please someone, and now it's your imposed 'signature move'. What was it originally?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-060",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Tu suis encore le compte de combien d'ex ou de plans, là, maintenant ? Compte. Et tu likes encore lequel 'par accident' ?",
+      "en": "How many exes or hookups do you still follow right now? Count. And whose posts do you still like 'by accident'?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-061",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "La conversation la plus chaude que t'as eue avec quelqu'un que t'as jamais rencontré en vrai. Ça a duré combien de temps, et pourquoi ça s'est jamais concrétisé ?",
+      "en": "The steamiest conversation you've had with someone you've never met in person. How long did it run, and why did it never go anywhere?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-062",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "T'as déjà fait le ménage dans ton tel en panique avant que quelqu'un l'emprunte. Tu cachais quoi exactement, et la personne, elle est dans la pièce ?",
+      "en": "You've frantically cleaned out your phone before someone borrowed it. What exactly were you hiding, and is that person in this room?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-063",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le plus long que t'as fait durer un 'on verra' avec quelqu'un que t'avais zéro intention de revoir. Combien de semaines de faux espoir t'as distribué ?",
+      "en": "The longest you've strung out a 'we'll see' with someone you had zero intention of seeing again. How many weeks of false hope did you hand out?"
+    }
+  },
+  {
+    "id": "totd-t-spicy-064",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Désigne la personne ici à qui tu confierais le moins ton historique de rencontres — et celle qui en a déjà trop vu. Deux noms, deux raisons.",
+      "en": "Point at the person here you'd least trust with your dating history — and the one who's already seen too much. Two names, two reasons."
+    }
+  },
+  {
+    "id": "totd-t-spicy-065",
+    "choice": "truth",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Le mensonge le plus gros que t'as dit pour finir la nuit avec quelqu'un. Faux métier, fausse dispo, faux 'je vis pas loin' ? Donne la ligne exacte.",
+      "en": "The biggest lie you've told to close out the night with someone. Fake job, fake availability, fake 'I live nearby'? Give us the exact line."
+    }
+  },
+  {
     "id": "totf-f-soft-001",
     "choice": "dare",
     "intensity": "soft",
@@ -3826,6 +5815,60 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "text": {
       "fr": "Pas de réponse ? Gage : le groupe invente le rêve que t'as fait cette nuit. Tu le racontes à la première personne et tu le défends comme un vrai souvenir.",
       "en": "No answer? Forfeit: the group invents the dream you had last night. You retell it in first person and defend it as a genuine memory."
+    }
+  },
+  {
+    "id": "totf-f-soft-019",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : jusqu'à ton prochain tour, tu dois traduire en langage corporate tout ce que tu dis. 'J'ai faim' devient 'je souhaiterais aligner mes besoins nutritionnels'. Le groupe sanctionne les rechutes.",
+      "en": "No answer? Forfeit: until your next turn, translate everything you say into corporate-speak. 'I'm hungry' becomes 'I'd like to align on my nutritional needs'. The group penalises every slip."
+    }
+  },
+  {
+    "id": "totf-f-soft-020",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : fais la voix off dramatique de ce qui se passe dans la pièce, façon bande-annonce, jusqu'à ce que quelqu'un rie. S'ils tiennent, ça continue.",
+      "en": "No answer? Forfeit: do the dramatic movie-trailer voice-over of whatever's happening in the room until someone laughs. If they hold out, you keep going."
+    }
+  },
+  {
+    "id": "totf-f-soft-021",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : présente la personne à ta droite comme si tu la nommais à une remise de prix, avec un palmarès entièrement inventé et beaucoup trop élogieux. Elle reste digne.",
+      "en": "No answer? Forfeit: introduce the person on your right like you're announcing them at an awards show, with a completely invented and wildly flattering résumé. They must stay composed."
+    }
+  },
+  {
+    "id": "totf-f-soft-022",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : le groupe te donne un objet de la pièce. Tu lui fais une déclaration d'amour de 15 secondes, debout, totalement sérieux.",
+      "en": "No answer? Forfeit: the group hands you an object from the room. You give it a 15-second love confession, standing up, completely straight-faced."
+    }
+  },
+  {
+    "id": "totf-f-soft-023",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : jusqu'à ton prochain tour, tu dois acquiescer à tout ce que dit la personne en face de toi comme si c'était la chose la plus profonde jamais énoncée. Hochements lents obligatoires.",
+      "en": "No answer? Forfeit: until your next turn, agree with everything the person opposite you says as if it were the most profound thing ever spoken. Slow, reverent nodding required."
+    }
+  },
+  {
+    "id": "totf-f-soft-024",
+    "choice": "dare",
+    "intensity": "soft",
+    "text": {
+      "fr": "Pas de réponse ? Gage : reconstitue ton réveil de ce matin en temps réel, du premier grognement au moment où t'as renoncé à être quelqu'un de bien. Le groupe note le réalisme.",
+      "en": "No answer? Forfeit: re-enact this morning's wake-up in real time, from the first groan to the moment you gave up on being a functional person. The group scores it on realism."
     }
   },
   {
@@ -3991,6 +6034,96 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     }
   },
   {
+    "id": "totd-f-party-019",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Le jury retient que t'avais une réponse — t'as juste préféré la garder pour ton avocat.",
+      "en": "One sip. The jury notes that you had an answer — you just decided to save it for your lawyer."
+    }
+  },
+  {
+    "id": "totd-f-party-020",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Tu viens de transformer une simple question en mystère national. Bien joué — maintenant tout le monde y pense.",
+      "en": "One sip. You just turned a simple question into a national mystery. Well played — now everyone's thinking about it."
+    }
+  },
+  {
+    "id": "totd-f-party-021",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Le silence est gratuit, mais l'addition arrive plus tard — la question reviendra quand tu t'y attendras le moins.",
+      "en": "One sip. Silence is free, but the bill comes later — this question is coming back when you least expect it."
+    }
+  },
+  {
+    "id": "totd-f-party-022",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Officiellement : aucun commentaire. Officieusement : ton regard vient de tout balancer à la table.",
+      "en": "One sip. Officially: no comment. Unofficially: your eyes just told the whole table everything."
+    }
+  },
+  {
+    "id": "totd-f-party-023",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Tu paies pour ne rien dire. Le groupe, lui, paiera pour reposer la question — et il a les moyens.",
+      "en": "One sip. You're paying to say nothing. The group, however, will pay to ask again — and it can afford it."
+    }
+  },
+  {
+    "id": "totd-f-party-024",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Le groupe enregistre une absence de réponse — et une présence de culpabilité absolument évidente.",
+      "en": "One sip. The group logs a missing answer — and a thoroughly present sense of guilt."
+    }
+  },
+  {
+    "id": "totd-f-party-025",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Lève ton verre : à la version de toi que la table vient juste d'imaginer, et qui est sûrement pire que la vraie.",
+      "en": "One sip. Raise your glass: to the version of you the table just imagined, which is almost certainly worse than the real one."
+    }
+  },
+  {
+    "id": "totd-f-party-026",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. C'est la troisième fois ce soir que tu choisis le verre. Le groupe commence à tenir un registre — et il est public.",
+      "en": "One sip. That's the third time tonight you've gone for the glass. The group is starting to keep a tally — and it's public."
+    }
+  },
+  {
+    "id": "totd-f-party-027",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. Esquive enregistrée. Le groupe te rappelle gentiment que ceux qui n'ont rien à cacher répondent, en général, plus vite.",
+      "en": "One sip. Dodge logged. The group gently reminds you that people with nothing to hide usually answer a little faster."
+    }
+  },
+  {
+    "id": "totd-f-party-028",
+    "choice": "dare",
+    "intensity": "party",
+    "text": {
+      "fr": "Une gorgée. T'as choisi le mystère. Le problème du mystère, c'est qu'on finit toujours par enquêter.",
+      "en": "One sip. You chose mystery. The trouble with mystery is that somebody always ends up investigating."
+    }
+  },
+  {
     "id": "totd-f-spicy-001",
     "choice": "dare",
     "intensity": "spicy",
@@ -4150,6 +6283,96 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "text": {
       "fr": "Une gorgée, une seule, et le dossier est scellé. Jusqu'à 1h du mat', quand quelqu'un le rouvrira. Quelqu'un le rouvrira.",
       "en": "One sip — just one — and the file is sealed. Until around 1 a.m., when somebody reopens it. Somebody will."
+    }
+  },
+  {
+    "id": "totd-f-spicy-019",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Le seul qui aurait pu répondre à ta place vient de sourire au fond de la pièce. On l'a tous vu.",
+      "en": "One sip. The one person who could've answered for you just smirked from the back of the room. We all saw it."
+    }
+  },
+  {
+    "id": "totd-f-spicy-020",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. La question était à deux doigts de tout. Le verre, lui, vient de confirmer qu'il y avait bien un tout.",
+      "en": "One sip. The question was one inch from everything. The glass just confirmed there was, in fact, an everything."
+    }
+  },
+  {
+    "id": "totd-f-spicy-021",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Tu protèges quelqu'un, là. La salle aimerait beaucoup savoir qui — et elle a toute la nuit pour deviner.",
+      "en": "One sip. You're protecting someone right now. The room would very much like to know who — and it has all night to guess."
+    }
+  },
+  {
+    "id": "totd-f-spicy-022",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Pas de réponse, mais ce demi-sourire vient d'écrire trois chapitres dans la tête de tout le monde.",
+      "en": "One sip. No answer — but that half-smile just wrote three chapters in everyone's head."
+    }
+  },
+  {
+    "id": "totd-f-spicy-023",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Trop personnel pour ce salon. Noté : t'as une vie privée digne de ce nom, et tu comptes la garder. Pour l'instant.",
+      "en": "One sip. Too personal for this living room. Noted: you have a private life worth the name, and you intend to keep it. For now."
+    }
+  },
+  {
+    "id": "totd-f-spicy-024",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Le silence te coûte un verre ; il vient de coûter une nuit blanche à ton ex, qui sent qu'on parle de lui sans savoir pourquoi.",
+      "en": "One sip. Silence costs you a drink; it just cost your ex a sleepless night, sensing they're being discussed without knowing why."
+    }
+  },
+  {
+    "id": "totd-f-spicy-025",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Tu viens de payer pour qu'on n'apprenne rien. La salle, elle, vient de décider d'inventer pire. Beaucoup pire.",
+      "en": "One sip. You just paid for us to learn nothing. The room just decided to invent worse. Much worse."
+    }
+  },
+  {
+    "id": "totd-f-spicy-026",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Le verre est vide, le mystère est plein. À ce stade, c'est plus une esquive, c'est un aveu avec du style.",
+      "en": "One sip. The glass is empty, the mystery is full. At this point it's not a dodge, it's a confession with good lighting."
+    }
+  },
+  {
+    "id": "totd-f-spicy-027",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée. Quelque part, un téléphone contient la preuve de exactement ce que tu refuses de dire. Et il n'est peut-être pas loin.",
+      "en": "One sip. Somewhere, a phone holds proof of precisely what you won't say. And it might not be far away."
+    }
+  },
+  {
+    "id": "totd-f-spicy-028",
+    "choice": "dare",
+    "intensity": "spicy",
+    "text": {
+      "fr": "Une gorgée pour sceller le dossier. Petit rappel : dans ce groupe, les dossiers scellés ont une durée de vie d'environ deux verres.",
+      "en": "One sip to seal the file. Small reminder: in this group, sealed files have a shelf life of roughly two drinks."
     }
   }
 ] },

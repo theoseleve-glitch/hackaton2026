@@ -5,6 +5,7 @@ export {
   type CurrentDraw,
   type DifficultyCurve,
   type JudgeVote,
+  type LastStandingEpilogue,
   type LastStandingAction,
   type LastStandingConfig,
   type LastStandingContent,

@@ -2786,6 +2786,756 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
       "fr": "Huit américain",
       "en": "Crazy Eights"
     }
+  },
+  {
+    "id": "boisson-biere-cidre",
+    "theme": {
+      "fr": "Le verre que quelqu'un ici a fini sans demander. Le sien était plein.",
+      "en": "the glass someone here finished uninvited. theirs was full."
+    },
+    "majority": {
+      "fr": "Bière",
+      "en": "Beer"
+    },
+    "impostor": {
+      "fr": "Cidre",
+      "en": "Cider"
+    }
+  },
+  {
+    "id": "apero-spritz-mojito",
+    "theme": {
+      "fr": "Commandé pour la photo, abandonné au quart. On t'a vu.",
+      "en": "ordered for the photo, left a quarter full. we saw."
+    },
+    "majority": {
+      "fr": "Spritz",
+      "en": "Spritz"
+    },
+    "impostor": {
+      "fr": "Mojito",
+      "en": "Mojito"
+    }
+  },
+  {
+    "id": "vinrouge-bordeaux-bourgogne",
+    "theme": {
+      "fr": "Quelqu'un ici a juré savoir le décrire. Il a dit « ça a un goût de vin ».",
+      "en": "someone here swore they could describe it. they said 'it tastes like wine'."
+    },
+    "majority": {
+      "fr": "Bordeaux",
+      "en": "Bordeaux"
+    },
+    "impostor": {
+      "fr": "Bourgogne",
+      "en": "Burgundy"
+    }
+  },
+  {
+    "id": "petitdej-tartine-cereales",
+    "theme": {
+      "fr": "Le dernier de la boîte. Personne avoue. Désignez.",
+      "en": "the last one in the box. nobody confesses. point."
+    },
+    "majority": {
+      "fr": "Tartine",
+      "en": "Toast"
+    },
+    "impostor": {
+      "fr": "Céréales",
+      "en": "Cereal"
+    }
+  },
+  {
+    "id": "fruitrouge-fraise-framboise",
+    "theme": {
+      "fr": "Quelqu'un ici a mangé toutes les bonnes et laissé les écrasées",
+      "en": "someone here ate the good ones and left the squashed half"
+    },
+    "majority": {
+      "fr": "Fraise",
+      "en": "Strawberry"
+    },
+    "impostor": {
+      "fr": "Framboise",
+      "en": "Raspberry"
+    }
+  },
+  {
+    "id": "noix-amande-noisette",
+    "theme": {
+      "fr": "Trié dans le paquet mélangé. Les autres ont eu les restes.",
+      "en": "picked out of the mixed bag. everyone else got the leftovers."
+    },
+    "majority": {
+      "fr": "Amande",
+      "en": "Almond"
+    },
+    "impostor": {
+      "fr": "Noisette",
+      "en": "Hazelnut"
+    }
+  },
+  {
+    "id": "gateau-fondant-brownie",
+    "theme": {
+      "fr": "Quelqu'un ici a repris une part « pour pas gâcher ». Trois fois.",
+      "en": "someone here took 'just one more so it doesn't go to waste'. three times."
+    },
+    "majority": {
+      "fr": "Fondant",
+      "en": "Molten cake"
+    },
+    "impostor": {
+      "fr": "Brownie",
+      "en": "Brownie"
+    }
+  },
+  {
+    "id": "viennoise-chausson-roule",
+    "theme": {
+      "fr": "Sept dans le sachet. Quelqu'un en a pris deux et compté à voix haute.",
+      "en": "seven in the bag. someone took two and counted out loud."
+    },
+    "majority": {
+      "fr": "Chausson aux pommes",
+      "en": "Apple turnover"
+    },
+    "impostor": {
+      "fr": "Pain aux raisins",
+      "en": "Raisin swirl"
+    }
+  },
+  {
+    "id": "epice-cannelle-muscade",
+    "theme": {
+      "fr": "Mis dans le plat de quelqu'un par vengeance. Avoue.",
+      "en": "added to someone's plate out of spite. admit it."
+    },
+    "majority": {
+      "fr": "Cannelle",
+      "en": "Cinnamon"
+    },
+    "impostor": {
+      "fr": "Muscade",
+      "en": "Nutmeg"
+    }
+  },
+  {
+    "id": "platasie-curry-pad-thai",
+    "theme": {
+      "fr": "Quelqu'un ici a dit « pas trop épicé », a pleuré, a continué",
+      "en": "someone here said 'mild please', cried, kept eating"
+    },
+    "majority": {
+      "fr": "Curry",
+      "en": "Curry"
+    },
+    "impostor": {
+      "fr": "Pad thaï",
+      "en": "Pad thai"
+    }
+  },
+  {
+    "id": "grec-kebab-gyros",
+    "theme": {
+      "fr": "Décidé à 2h du mat, regretté à 9h, redécidé le lendemain",
+      "en": "decided at 2am, regretted at 9, decided again the next night"
+    },
+    "majority": {
+      "fr": "Kebab",
+      "en": "Kebab"
+    },
+    "impostor": {
+      "fr": "Gyros",
+      "en": "Gyro"
+    }
+  },
+  {
+    "id": "friture-tempura-beignet",
+    "theme": {
+      "fr": "Le truc dont quelqu'un ici a juré « j'en prends qu'un » avant d'en prendre huit",
+      "en": "the thing someone here said 'i'll just have one' before having eight"
+    },
+    "majority": {
+      "fr": "Tempura",
+      "en": "Tempura"
+    },
+    "impostor": {
+      "fr": "Beignet",
+      "en": "Fritter"
+    }
+  },
+  {
+    "id": "soupe-veloute-gaspacho",
+    "theme": {
+      "fr": "Servi froid exprès, et quelqu'un ici l'a renvoyé en cuisine",
+      "en": "served cold on purpose, and someone here sent it back"
+    },
+    "majority": {
+      "fr": "Velouté",
+      "en": "Bisque"
+    },
+    "impostor": {
+      "fr": "Gaspacho",
+      "en": "Gazpacho"
+    }
+  },
+  {
+    "id": "salade-coleslaw-taboule",
+    "theme": {
+      "fr": "Apporté au repas commun par celui qui apporte jamais rien d'autre",
+      "en": "brought to the potluck by the one who never brings anything else"
+    },
+    "majority": {
+      "fr": "Coleslaw",
+      "en": "Coleslaw"
+    },
+    "impostor": {
+      "fr": "Taboulé",
+      "en": "Tabbouleh"
+    }
+  },
+  {
+    "id": "poisson-saumon-truite",
+    "theme": {
+      "fr": "Quelqu'un ici a juré le reconnaître au goût. Il s'est trompé. Devant tout le monde.",
+      "en": "someone here swore they could tell by taste. they were wrong. publicly."
+    },
+    "majority": {
+      "fr": "Saumon",
+      "en": "Salmon"
+    },
+    "impostor": {
+      "fr": "Truite",
+      "en": "Trout"
+    }
+  },
+  {
+    "id": "viande-steak-entrecote",
+    "theme": {
+      "fr": "Commandé saignant, renvoyé deux fois, mangé en boudant",
+      "en": "ordered rare, sent back twice, eaten in a sulk"
+    },
+    "majority": {
+      "fr": "Steak",
+      "en": "Steak"
+    },
+    "impostor": {
+      "fr": "Entrecôte",
+      "en": "Ribeye"
+    }
+  },
+  {
+    "id": "charcut-jambon-saucisson",
+    "theme": {
+      "fr": "L'apéro vidé pendant que quelqu'un ici « allait juste aux toilettes »",
+      "en": "the board cleared while someone here 'just nipped to the loo'"
+    },
+    "majority": {
+      "fr": "Jambon",
+      "en": "Ham"
+    },
+    "impostor": {
+      "fr": "Saucisson",
+      "en": "Salami"
+    }
+  },
+  {
+    "id": "boulange-baguette-batard",
+    "theme": {
+      "fr": "Le quignon mangé en chemin. Arrivé à moitié à la maison.",
+      "en": "the heel eaten on the walk home. arrived half-size."
+    },
+    "majority": {
+      "fr": "Baguette",
+      "en": "Baguette"
+    },
+    "impostor": {
+      "fr": "Bâtard",
+      "en": "Bloomer"
+    }
+  },
+  {
+    "id": "patefraiche-ravioli-tortellini",
+    "theme": {
+      "fr": "Quelqu'un ici a compté les siens dans l'assiette commune",
+      "en": "someone here counted their share out of the communal bowl"
+    },
+    "majority": {
+      "fr": "Ravioli",
+      "en": "Ravioli"
+    },
+    "impostor": {
+      "fr": "Tortellini",
+      "en": "Tortellini"
+    }
+  },
+  {
+    "id": "agrume-citron-citronvert",
+    "theme": {
+      "fr": "Pressé sur le plat de quelqu'un sans demander. Acte de guerre.",
+      "en": "squeezed over someone's plate without asking. act of war."
+    },
+    "majority": {
+      "fr": "Citron",
+      "en": "Lemon"
+    },
+    "impostor": {
+      "fr": "Citron vert",
+      "en": "Lime"
+    }
+  },
+  {
+    "id": "boissonchaude-cappuccino-latte",
+    "theme": {
+      "fr": "Le prénom mal orthographié sur le gobelet. Quelqu'un ici garde la rancune.",
+      "en": "the name spelled wrong on the cup. someone here still holds a grudge."
+    },
+    "majority": {
+      "fr": "Cappuccino",
+      "en": "Cappuccino"
+    },
+    "impostor": {
+      "fr": "Latte",
+      "en": "Latte"
+    }
+  },
+  {
+    "id": "lait-vache-avoine",
+    "theme": {
+      "fr": "Le débat qui a duré plus longtemps que la commande",
+      "en": "the debate that outlasted the actual order"
+    },
+    "majority": {
+      "fr": "Lait de vache",
+      "en": "Cow's milk"
+    },
+    "impostor": {
+      "fr": "Lait d'avoine",
+      "en": "Oat milk"
+    }
+  },
+  {
+    "id": "infusion-camomille-verveine",
+    "theme": {
+      "fr": "Servi pour calmer quelqu'un ici. Ça n'a pas marché. On était là.",
+      "en": "served to calm someone here down. it did not work. we were there."
+    },
+    "majority": {
+      "fr": "Camomille",
+      "en": "Chamomile"
+    },
+    "impostor": {
+      "fr": "Verveine",
+      "en": "Verbena"
+    }
+  },
+  {
+    "id": "fromagepate-comte-gruyere",
+    "theme": {
+      "fr": "Quelqu'un ici a juré faire la différence. Le test à l'aveugle dit non.",
+      "en": "someone here swore they could tell them apart. the blind test said otherwise."
+    },
+    "majority": {
+      "fr": "Comté",
+      "en": "Comté"
+    },
+    "impostor": {
+      "fr": "Gruyère",
+      "en": "Gruyère"
+    }
+  },
+  {
+    "id": "fromagebleu-roquefort-gorgonzola",
+    "theme": {
+      "fr": "L'odeur dans le frigo partagé qu'on a mis sur le dos d'un coloc innocent",
+      "en": "the shared-fridge smell pinned on an innocent flatmate"
+    },
+    "majority": {
+      "fr": "Roquefort",
+      "en": "Roquefort"
+    },
+    "impostor": {
+      "fr": "Gorgonzola",
+      "en": "Gorgonzola"
+    }
+  },
+  {
+    "id": "yaourt-grec-skyr",
+    "theme": {
+      "fr": "Acheté pour « manger mieux ». Périmé dans le frigo. On juge.",
+      "en": "bought to 'eat better'. expired in the fridge. we judge."
+    },
+    "majority": {
+      "fr": "Yaourt grec",
+      "en": "Greek yoghurt"
+    },
+    "impostor": {
+      "fr": "Skyr",
+      "en": "Skyr"
+    }
+  },
+  {
+    "id": "chocolat-noir-lait",
+    "theme": {
+      "fr": "Le carré « pris pour goûter » qui a fini la tablette. Désignez.",
+      "en": "the 'just one square to try' that finished the whole bar. point."
+    },
+    "majority": {
+      "fr": "Chocolat noir",
+      "en": "Dark chocolate"
+    },
+    "impostor": {
+      "fr": "Chocolat au lait",
+      "en": "Milk chocolate"
+    }
+  },
+  {
+    "id": "boissongaz-tonic-ginger",
+    "theme": {
+      "fr": "Commandé pour faire l'adulte sobre. Personne y a cru.",
+      "en": "ordered to look like the sober adult. nobody bought it."
+    },
+    "majority": {
+      "fr": "Tonic",
+      "en": "Tonic water"
+    },
+    "impostor": {
+      "fr": "Ginger ale",
+      "en": "Ginger ale"
+    }
+  },
+  {
+    "id": "siroperie-grenadine-menthe",
+    "theme": {
+      "fr": "La commande qui trahit que quelqu'un ici a toujours huit ans dans sa tête",
+      "en": "the order that proves someone here is still eight inside"
+    },
+    "majority": {
+      "fr": "Grenadine",
+      "en": "Grenadine"
+    },
+    "impostor": {
+      "fr": "Sirop de menthe",
+      "en": "Mint syrup"
+    }
+  },
+  {
+    "id": "ranger-tiroir-placard",
+    "theme": {
+      "fr": "Là où quelqu'un ici planque le bordel avant que les invités arrivent",
+      "en": "where someone here hides the chaos before guests arrive"
+    },
+    "majority": {
+      "fr": "Tiroir",
+      "en": "Drawer"
+    },
+    "impostor": {
+      "fr": "Placard",
+      "en": "Cupboard"
+    }
+  },
+  {
+    "id": "literie-couette-plaid",
+    "theme": {
+      "fr": "Volé pendant la nuit par quelqu'un ici. Bataille silencieuse à 3h.",
+      "en": "stolen in the night by someone here. silent 3am battle."
+    },
+    "majority": {
+      "fr": "Couette",
+      "en": "Duvet"
+    },
+    "impostor": {
+      "fr": "Plaid",
+      "en": "Throw blanket"
+    }
+  },
+  {
+    "id": "reveil-sonnerie-snooze",
+    "theme": {
+      "fr": "Quelqu'un ici l'a repoussé huit fois et a accusé son téléphone",
+      "en": "someone here hit it eight times and blamed the phone"
+    },
+    "majority": {
+      "fr": "Sonnerie",
+      "en": "Alarm tone"
+    },
+    "impostor": {
+      "fr": "Snooze",
+      "en": "Snooze"
+    }
+  },
+  {
+    "id": "clean-douche-bain",
+    "theme": {
+      "fr": "Là où quelqu'un ici a passé 45 minutes pendant que les autres attendaient",
+      "en": "where someone here spent 45 minutes while everyone waited"
+    },
+    "majority": {
+      "fr": "Douche",
+      "en": "Shower"
+    },
+    "impostor": {
+      "fr": "Bain",
+      "en": "Bath"
+    }
+  },
+  {
+    "id": "dent-brosse-fildentaire",
+    "theme": {
+      "fr": "Quelqu'un ici a menti au dentiste à ce sujet. On le sait.",
+      "en": "someone here lied to the dentist about this. we know."
+    },
+    "majority": {
+      "fr": "Brosse à dents",
+      "en": "Toothbrush"
+    },
+    "impostor": {
+      "fr": "Fil dentaire",
+      "en": "Floss"
+    }
+  },
+  {
+    "id": "parfum-eaudetoilette-eaudeparfum",
+    "theme": {
+      "fr": "Le truc dont quelqu'un ici met trop, et personne ose lui dire",
+      "en": "the thing someone here wears too much of, and nobody dares say"
+    },
+    "majority": {
+      "fr": "Eau de toilette",
+      "en": "Eau de toilette"
+    },
+    "impostor": {
+      "fr": "Eau de parfum",
+      "en": "Eau de parfum"
+    }
+  },
+  {
+    "id": "argent-especes-carte",
+    "theme": {
+      "fr": "« J'ai oublié mon moyen de paiement. » Quelqu'un ici le dit à chaque addition.",
+      "en": "'i left mine at home.' someone here says it every single bill."
+    },
+    "majority": {
+      "fr": "Espèces",
+      "en": "Cash"
+    },
+    "impostor": {
+      "fr": "Carte",
+      "en": "Card"
+    }
+  },
+  {
+    "id": "addition-partage-chacunsapart",
+    "theme": {
+      "fr": "Le moment où quelqu'un ici sort la calculatrice pour 3 euros",
+      "en": "the moment someone here opens the calculator over £3"
+    },
+    "majority": {
+      "fr": "Partage égal",
+      "en": "Split evenly"
+    },
+    "impostor": {
+      "fr": "Chacun sa part",
+      "en": "Pay your own"
+    }
+  },
+  {
+    "id": "pourboire-cinq-dix",
+    "theme": {
+      "fr": "Le débat à la sortie du resto qui dure plus que le repas",
+      "en": "the post-dinner debate that lasts longer than dinner"
+    },
+    "majority": {
+      "fr": "Cinq pour cent",
+      "en": "Five percent"
+    },
+    "impostor": {
+      "fr": "Dix pour cent",
+      "en": "Ten percent"
+    }
+  },
+  {
+    "id": "epargne-livreta-pel",
+    "theme": {
+      "fr": "Quelqu'un ici en parle comme s'il comprenait. Il ne comprend pas.",
+      "en": "someone here talks about it like they get it. they do not."
+    },
+    "majority": {
+      "fr": "Livret A",
+      "en": "Savings account"
+    },
+    "impostor": {
+      "fr": "Plan épargne logement",
+      "en": "ISA"
+    }
+  },
+  {
+    "id": "promo-soldes-blackfriday",
+    "theme": {
+      "fr": "L'achat « j'économise » que le relevé bancaire dément",
+      "en": "the 'i'm saving money' purchase the statement disagrees with"
+    },
+    "majority": {
+      "fr": "Soldes",
+      "en": "Sales"
+    },
+    "impostor": {
+      "fr": "Black Friday",
+      "en": "Black Friday"
+    }
+  },
+  {
+    "id": "colis-amazon-vinted",
+    "theme": {
+      "fr": "Le paquet que quelqu'un ici cache à son ou sa partenaire à l'arrivée",
+      "en": "the parcel someone here hides from their partner on arrival"
+    },
+    "majority": {
+      "fr": "Amazon",
+      "en": "Amazon"
+    },
+    "impostor": {
+      "fr": "Vinted",
+      "en": "Depop"
+    }
+  },
+  {
+    "id": "weekend-grassemat-brunchtardif",
+    "theme": {
+      "fr": "L'heure à laquelle quelqu'un ici a « commencé sa journée ». Il était 15h.",
+      "en": "the time someone here 'started their day'. it was 3pm."
+    },
+    "majority": {
+      "fr": "Réveil à midi",
+      "en": "Noon wake-up"
+    },
+    "impostor": {
+      "fr": "Réveil à 14h",
+      "en": "2pm wake-up"
+    }
+  },
+  {
+    "id": "menage-rangement-tri",
+    "theme": {
+      "fr": "Promis pour ce week-end. Depuis trois week-ends. Désignez le menteur.",
+      "en": "promised this weekend. for three weekends now. point at the liar."
+    },
+    "majority": {
+      "fr": "Le rangement",
+      "en": "Tidying up"
+    },
+    "impostor": {
+      "fr": "Le grand tri",
+      "en": "The big declutter"
+    }
+  },
+  {
+    "id": "anniv-surprise-classique",
+    "theme": {
+      "fr": "Quelqu'un ici a vendu la mèche. On sait qui. On attend.",
+      "en": "someone here spoiled it. we know who. we're waiting."
+    },
+    "majority": {
+      "fr": "Fête surprise",
+      "en": "Surprise party"
+    },
+    "impostor": {
+      "fr": "Fête classique",
+      "en": "Normal party"
+    }
+  },
+  {
+    "id": "cadeau-bonpapier-sacplastique",
+    "theme": {
+      "fr": "L'effort d'emballage qui trahit combien quelqu'un ici tient à toi",
+      "en": "the wrapping effort that reveals exactly how much someone here cares"
+    },
+    "majority": {
+      "fr": "Papier cadeau",
+      "en": "Gift wrap"
+    },
+    "impostor": {
+      "fr": "Sac kraft",
+      "en": "Gift bag"
+    }
+  },
+  {
+    "id": "saintvalentin-fleurs-chocolats",
+    "theme": {
+      "fr": "Acheté à 19h le 14 février par quelqu'un ici. La panique se voyait.",
+      "en": "bought at 7pm on the 14th by someone here. the panic showed."
+    },
+    "majority": {
+      "fr": "Fleurs",
+      "en": "Flowers"
+    },
+    "impostor": {
+      "fr": "Chocolats",
+      "en": "Chocolates"
+    }
+  },
+  {
+    "id": "voiture-citadine-suv",
+    "theme": {
+      "fr": "Le créneau qui a pris six minutes et trois témoins ici présents",
+      "en": "the parallel park that took six minutes and three witnesses in this room"
+    },
+    "majority": {
+      "fr": "Citadine",
+      "en": "City car"
+    },
+    "impostor": {
+      "fr": "SUV",
+      "en": "SUV"
+    }
+  },
+  {
+    "id": "permis-boite-auto",
+    "theme": {
+      "fr": "Quelqu'un ici a calé au démarrage devant tout le monde. Il en parle jamais.",
+      "en": "someone here stalled at the lights in front of everyone. never mentions it."
+    },
+    "majority": {
+      "fr": "Boîte manuelle",
+      "en": "Manual"
+    },
+    "impostor": {
+      "fr": "Boîte auto",
+      "en": "Automatic"
+    }
+  },
+  {
+    "id": "ferie-covoiturage-blablacar",
+    "theme": {
+      "fr": "Le trajet où quelqu'un ici a parlé pendant 400 km sans pause",
+      "en": "the trip where someone here talked for 250 miles straight"
+    },
+    "majority": {
+      "fr": "Covoiturage",
+      "en": "Carpool"
+    },
+    "impostor": {
+      "fr": "BlaBlaCar",
+      "en": "Rideshare"
+    }
+  },
+  {
+    "id": "meteoete-canicule-orage",
+    "theme": {
+      "fr": "Quelqu'un ici a juré « il va pas pleuvoir ». On était trempés.",
+      "en": "someone here swore 'it won't rain'. we were drenched."
+    },
+    "majority": {
+      "fr": "Canicule",
+      "en": "Heatwave"
+    },
+    "impostor": {
+      "fr": "Orage d'été",
+      "en": "Summer storm"
+    }
   }
 ] },
 };

@@ -120,13 +120,33 @@ describe('hidden-state redaction', () => {
     }
   });
 
-  it('no internal field name (deck, judgeVotes, spotBets, usedLetters, seed, itemId) leaks into any view JSON', () => {
+  it('no internal field name (deck, judgeVotes, spotBets, usedLetters, seed, itemId, roundsSurvived) leaks into any view JSON', () => {
     let s = game.init(SEED, players, content);
     for (let i = 0; i < 60; i++) {
       for (const viewer of [...players, ...OUTSIDERS]) {
         const json = JSON.stringify(game.view(s, viewer));
-        for (const key of ['"deck"', '"themeCursor"', '"judgeVotes"', '"spotBets"', '"usedLetters"', '"seed"', '"itemId"', '"difficulty"', '"letters"']) {
+        // roundsSurvived is the raw P1 CC-5 counter: only its DERIVED epilogue
+        // surfaces at 'over' — the raw map name never appears in any view.
+        for (const key of ['"deck"', '"themeCursor"', '"judgeVotes"', '"spotBets"', '"usedLetters"', '"seed"', '"itemId"', '"difficulty"', '"letters"', '"roundsSurvived"']) {
           expect(json).not.toContain(key);
+        }
+      }
+      if (s.phase === 'over') break;
+      s = game.reduce(s, deadline(i)).state;
+    }
+    expect(s.phase).toBe('over');
+  });
+
+  it('the P1 CC-5 epilogue appears ONLY at over (no mid-match leak of the superlative signal)', () => {
+    let s = game.init(SEED, players, content);
+    for (let i = 0; i < 60; i++) {
+      for (const viewer of [...players, ...OUTSIDERS]) {
+        const v = game.view(s, viewer);
+        if (v.phase === 'over') {
+          expect(v.epilogue).toBeDefined();
+        } else {
+          // no in-game phase view carries the epilogue field
+          expect((v as unknown as Record<string, unknown>).epilogue).toBeUndefined();
         }
       }
       if (s.phase === 'over') break;

@@ -3,8 +3,24 @@
 // the exact scoring matrix (design 2.16 §9).
 import type { PlayerId } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { connectedPlayers, emptyPlayerMap } from '@bloop/kit';
-import type { LText, RuleHuntConfig, RuleHuntState, RuleItem } from './state.js';
+import {
+  connectedPlayers,
+  emptyPlayerMap,
+  isCloseFinish,
+  mvp,
+  statLeaders,
+  streakBonus,
+  topGap,
+} from '@bloop/kit';
+import type {
+  FlagBet,
+  NoteBet,
+  RuleHuntConfig,
+  RuleHuntEpilogue,
+  RuleHuntState,
+  RuleItem,
+  LText,
+} from './state.js';
 
 /** 'auto' = 1 detective for 4-7 players, 2 for 8-16 (impostor-table style). */
 export function resolveDetectiveCount(config: RuleHuntConfig, rosterSize: number): number {
@@ -98,13 +114,77 @@ export function bank(state: RuleHuntState, at: number): number {
   return Math.max(0, state.liveRemainingMs - Math.max(0, at - state.segmentStartedAt));
 }
 
-/** Exact scoring matrix (design 2.16). Cloned map — never aliases live state. */
+/**
+ * Count the soft reads that landed AGAINST the spotlit performer this beat: a
+ * follower's `'flag'` + a detective's `'suspicious'` each add 1 (a `'clean'` /
+ * `'clear'` read does not). Pure fold over the hidden buffers — collapses them
+ * to a single AGGREGATE integer (no player identity survives), which is exactly
+ * what `resolveSpotlight` banks onto the public `heat` meter before dropping
+ * the raw buffers. So nobody's hidden read can be recovered from `heat`.
+ */
+export function spotlightHeat(
+  flags: Record<PlayerId, FlagBet>,
+  notes: Record<PlayerId, NoteBet>,
+): number {
+  let h = 0;
+  for (const p of Object.keys(flags)) if (flags[p] === 'flag') h += 1;
+  for (const p of Object.keys(notes)) if (notes[p] === 'suspicious') h += 1;
+  return h;
+}
+
+/**
+ * Add `delta` heat to `target` on a CLONED copy of the public meter (never
+ * aliases live state). 0-deltas leave the meter untouched so it stays a sparse,
+ * tally-style aggregate (0-entries omitted).
+ */
+export function accrueHeat(
+  heat: Record<PlayerId, number>,
+  target: PlayerId,
+  delta: number,
+): Record<PlayerId, number> {
+  const next = Object.assign(emptyPlayerMap<number>(), heat);
+  if (delta > 0) next[target] = (next[target] ?? 0) + delta;
+  return next;
+}
+
+/**
+ * CC-2 reveal payoff input: the SURVIVING (connected, non-eliminated) followers
+ * who drew ZERO suspicion-heat all round — the coolest performers. Derived from
+ * the PUBLIC `heat` meter in stable ascending-id order, so it is replay-stable
+ * and a non-secret. Detectives and eliminated/convicted followers are excluded
+ * (a convicted follower was the heat sink; a detective is never "cool").
+ */
+export function coolestFollowers(state: RuleHuntState): PlayerId[] {
+  return connectedFollowers(state)
+    .filter((p) => state.eliminated[p] !== true && (state.heat[p] ?? 0) === 0)
+    .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+}
+
+/**
+ * Exact scoring matrix (design 2.16) PLUS the CC-2 heat-meter payoff. Cloned map
+ * — never aliases live state.
+ *
+ * CC-2 is DEFAULT-IDENTITY: `config.coolBonus`/`detectiveReadBonus` default to 0,
+ * so with the shipped config every existing exact-score test stays byte-for-byte
+ * green — the bonuses only move points once a pack opts in.
+ *   - coolest-follower bonus: each SURVIVING follower who drew zero suspicion
+ *     heat all round earns `coolBonus` (kit `streakBonus` with a 1-streak — a
+ *     pure, clamped non-negative add). The crime parfait individuel.
+ *   - detective-read bonus: when the round's heat "read true" (a conviction
+ *     landed — the room's flinches pointed at a real breaker the tribunal then
+ *     eliminated) every detective earns `detectiveReadBonus`. Aggregate-only,
+ *     never per-ballot.
+ */
 export function scoreRound(
   state: RuleHuntState,
   kind: 'guessed' | 'timeUp',
   perfect: boolean,
 ): Record<PlayerId, number> {
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
+  const cool = new Set(coolestFollowers(state));
+  // Heat "read true" iff a conviction landed this round (a real breaker was
+  // eliminated by the tribunal the spotlight heat pointed at).
+  const heatReadTrue = state.infractions > 0;
   for (const p of state.players) {
     const det = isDetectiveOf(state, p);
     const elim = state.eliminated[p] === true;
@@ -112,7 +192,39 @@ export function scoreRound(
     if (kind === 'guessed') pts = det ? 4 : elim ? 0 : 1;
     else if (perfect) pts = det ? 1 : 3;
     else pts = det ? 1 : elim ? 1 : 2;
+    // CC-2 heat-meter payoff (default 0 => identity).
+    if (det) {
+      if (heatReadTrue) pts += streakBonus(1, { perStreak: state.config.detectiveReadBonus });
+    } else if (cool.has(p)) {
+      pts += streakBonus(1, { perStreak: state.config.coolBonus });
+    }
     scores[p] = (scores[p] ?? 0) + pts;
   }
   return scores;
+}
+
+/**
+ * CC-5 epilogue — derived at 'over' from already-PUBLIC end-of-match state only
+ * (final scores + the public crime-parfait `cleanStreak`). No new secret, no
+ * RNG, no wall clock. The streak superlative folds the single public streak
+ * counter to its holder(s) — every still-connected player who carried the
+ * final clean streak (kit `statLeaders` semantics over a roster-wide map, so a
+ * 0 streak awards nobody).
+ */
+export function buildEpilogue(state: RuleHuntState, closeThreshold: number): RuleHuntEpilogue {
+  // The crime-parfait superlative belongs to whoever is "still in the room"
+  // holding the final clean streak. We project the single public streak onto a
+  // roster-wide map (followers + detectives all share the room's clean run) and
+  // let `statLeaders` award it only when the streak is > 0.
+  const streakMap = emptyPlayerMap<number>();
+  for (const p of state.players) {
+    if (state.connected[p] === true) streakMap[p] = state.cleanStreak;
+  }
+  const leaders = statLeaders(streakMap);
+  return {
+    mvp: mvp(state.scores),
+    topGap: topGap(state.scores),
+    closeFinish: isCloseFinish(state.scores, closeThreshold),
+    cleanStreak: { length: leaders.value, holders: leaders.players },
+  };
 }

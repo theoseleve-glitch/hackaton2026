@@ -13,6 +13,7 @@ import {
   advanceFromReveal,
   advanceFromScoreboard,
   currentDomain,
+  deriveEpilogue,
   expectedGuessers,
   inDomain,
   resolveReverse,
@@ -113,6 +114,9 @@ export function createSpotlightGuess(
         voided: false,
         lastGained: emptyPlayerMap<number>(),
         scores,
+        // P1 (CC-5) — public per-player superlative tallies, accrued at reveal.
+        mindReads: emptyPlayerMap<number>(),
+        whiffs: emptyPlayerMap<number>(),
       };
     },
 
@@ -251,7 +255,12 @@ export function createSpotlightGuess(
 
     view(state, viewer) {
       if (state.phase === 'over') {
-        return { mode: state.config.mode, phase: 'over', scores: state.scores };
+        // P1 (CC-5) — the epilogue is DERIVED here from already-public state
+        // (final scores + public mindReads/whiffs); no new in-match secret.
+        return {
+          mode: state.config.mode, phase: 'over', scores: state.scores,
+          ...deriveEpilogue(state),
+        };
       }
       const spotlightId = spotlightOf(state);
       const isSpot = viewer === spotlightId;

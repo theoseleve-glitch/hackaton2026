@@ -11,17 +11,21 @@ import {
   setConnected,
 } from '@bloop/kit';
 import {
+  accrueHeat,
   aliveConnectedFollowers,
   bank,
+  buildEpilogue,
   buildGrid,
   collapsed,
   connectedFollowers,
+  coolestFollowers,
   eligibleVoters,
   isDetectiveOf,
   pickDetectives,
   pickSpotlight,
   resolveDetectiveCount,
   scoreRound,
+  spotlightHeat,
 } from './round.js';
 import type {
   FlagBet,
@@ -76,8 +80,14 @@ function startRound(state: RuleHuntState, round: number): RuleHuntState {
     lastTribunal: null,
     lastOutcome: null,
     infractions: 0,
+    // Heat meter is round-local: a fresh suspicion read every round. cleanStreak
+    // is NOT reset here — it is carried across rounds (enterReveal owns it).
+    heat: emptyPlayerMap<number>(),
   };
 }
+
+/** Close-finish threshold for the CC-5 epilogue: a top-2 gap within this is "close". */
+const CLOSE_FINISH_GAP = 1;
 
 function endGame(
   state: RuleHuntState,
@@ -111,16 +121,22 @@ function enterReveal(
     trueIndex: state.trueCandidateIndex,
     ruleText: state.items[state.round]?.rule ?? EMPTY_LTEXT,
   };
+  // CC-5 crime-parfait streak: a perfect time-up extends the streak; any
+  // conviction or a guessed round breaks it (kit `nextStreak` semantics inline —
+  // the success condition is "zero-conviction time-up").
+  const cleanWin = kind === 'timeUp' && perfect;
+  const cleanStreak = cleanWin ? state.cleanStreak + 1 : 0;
   return {
     state: {
       ...state,
       phase: 'reveal',
       lastOutcome: outcome,
       scores: scoreRound(state, kind, perfect),
+      cleanStreak,
       tribunal: null,
       guess: null,
     },
-    effects: [...extra, { type: 'analytics', name: 'round_completed', props: { round: state.round, kind, perfect } }],
+    effects: [...extra, { type: 'analytics', name: 'round_completed', props: { round: state.round, kind, perfect, cleanStreak } }],
   };
 }
 
@@ -179,6 +195,14 @@ function enterSpotlight(state: RuleHuntState, at: number): ReduceResult<RuleHunt
  */
 function resolveSpotlight(state: RuleHuntState, at: number): ReduceResult<RuleHuntState> {
   if (collapsed(state)) return endGame(state, 'roomCollapsed');
+  // CC-2 heat-meter accrual: collapse this beat's HIDDEN reads into a single
+  // aggregate (no identity survives) and bank it onto the PUBLIC `heat` meter
+  // BEFORE dropping the raw buffers. The meter is what the room reads and the
+  // reveal pays off; the per-player flags/notes never leave this function.
+  const sp = state.spotlight;
+  const heat = sp === null
+    ? state.heat
+    : accrueHeat(state.heat, sp.target, spotlightHeat(sp.flags, sp.notes));
   return {
     state: {
       ...state,
@@ -187,6 +211,7 @@ function resolveSpotlight(state: RuleHuntState, at: number): ReduceResult<RuleHu
       liveSeg: state.liveSeg + 1,
       spotlight: null,
       spotlightCount: state.spotlightCount + 1,
+      heat,
     },
     effects: [],
   };
@@ -295,6 +320,8 @@ export function createRuleHunt(
         lastTribunal: null,
         lastOutcome: null,
         infractions: 0,
+        heat: emptyPlayerMap<number>(),
+        cleanStreak: 0,
         scores,
         endReason: null,
       };
@@ -477,6 +504,10 @@ export function createRuleHunt(
         teamGuessesLeft: state.teamGuessesLeft,
         usedCandidates: state.usedCandidates,
         lastTribunal: state.lastTribunal,
+        // PUBLIC aggregates: the round's suspicion meter + the crime-parfait
+        // streak. Both leak nothing (per-target totals, never a per-voter map).
+        heat: state.heat,
+        cleanStreak: state.cleanStreak,
       };
       if (state.phase === 'briefing') {
         const acked = emptyPlayerMap<boolean>();
@@ -528,10 +559,26 @@ export function createRuleHunt(
         };
       }
       if (state.phase === 'reveal') {
-        return { phase: 'reveal', ...base, outcome: state.lastOutcome ?? EMPTY_OUTCOME, candidates: state.candidateTexts };
+        // CC-2 payoff chrome derived from the PUBLIC heat meter — the same set
+        // `scoreRound` paid `coolBonus` to. coolBonusEach mirrors the config so
+        // the client can caption the climb (0 by default => no points moved).
+        return {
+          phase: 'reveal',
+          ...base,
+          outcome: state.lastOutcome ?? EMPTY_OUTCOME,
+          candidates: state.candidateTexts,
+          coolestFollowers: coolestFollowers(state),
+          coolBonusEach: state.config.coolBonus,
+        };
       }
       if (state.phase === 'over') {
-        return { phase: 'over', ...base, endReason: state.endReason ?? 'finished' };
+        // CC-5 epilogue derived at 'over' from already-PUBLIC state only.
+        return {
+          phase: 'over',
+          ...base,
+          endReason: state.endReason ?? 'finished',
+          epilogue: buildEpilogue(state, CLOSE_FINISH_GAP),
+        };
       }
       return { phase: 'live', ...base };
     },
