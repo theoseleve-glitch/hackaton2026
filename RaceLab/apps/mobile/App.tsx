@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Linking from "expo-linking";
 import { GarageScreen } from "./src/screens/GarageScreen";
@@ -344,7 +344,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.bg },
+  // SafeAreaView (from react-native) is a no-op for the top inset on Android,
+  // so the header rode under the status bar there — pad by its height on Android
+  // (iOS keeps SafeAreaView's own inset; currentHeight is undefined there → 0).
+  root: { flex: 1, backgroundColor: colors.bg, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 },
   header: {
     flexDirection: "row",
     alignItems: "baseline",
