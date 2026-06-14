@@ -8,6 +8,7 @@ import { asNightDayView, deviceLang, pickL, type Lang } from '../games/night-day
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import { haptics, SuperlativeRow, type EpilogueSuperlative } from './juice';
 import { Avatar, VoteCard } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -87,6 +88,14 @@ export function NightDayPlay({ code }: { code: string }) {
   // Reset the local witch drafts whenever the beat changes.
   const beatKey = nv === null ? '' : `${nv.phase}:${nv.phase === 'night' ? nv.step : ''}:${nv.round}`;
   useEffect(() => { setWitchHeal(false); setPoisonArmed(false); setReadArmed(false); }, [beatKey]);
+
+  // Heavy haptic on the dawn death reveal — the gut-punch when the night took
+  // someone. Keyed on the dawn beat so it fires once per reveal, only on a death
+  // (a no-death dawn stays silent). haptics is a no-op under Reduce Motion.
+  const dawnDeaths = nv !== null && nv.phase === 'dawn' ? nv.lastDawn.died.length : 0;
+  useEffect(() => {
+    if (nv !== null && nv.phase === 'dawn' && dawnDeaths > 0) haptics.impact('heavy');
+  }, [beatKey]);
 
   useEffect(() => {
     if (nv === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
@@ -359,6 +368,21 @@ export function NightDayPlay({ code }: { code: string }) {
           <View style={{ gap: tokens.spacing.lg }}>
             <AppText role="titleL" style={{ textAlign: 'center' }}>{L('Le soleil se lève ☀️', 'The sun rises ☀️')}</AppText>
             <Narration text={nv.narration} names={nv.lastDawn.died.map(nick)} lang={lang} />
+            {/* P1-1 first-night shield — struck night 1 but survived; no role leak. */}
+            {nv.lastDawn.marked !== null && (
+              <View style={{
+                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
+                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, borderWidth: 3, borderColor: theme.xp, ...tokens.elevation.e1,
+              }}>
+                <Avatar name={nick(nv.lastDawn.marked)} size="md" />
+                <View style={{ flex: 1 }}>
+                  <AppText role="bodyStrong">🛡️ {nick(nv.lastDawn.marked)}</AppText>
+                  <AppText role="caption" color="textMuted">
+                    {L('Attaqué·e la 1re nuit — mais a survécu.', 'Attacked night 1 — but survived.')}
+                  </AppText>
+                </View>
+              </View>
+            )}
             {nv.lastDawn.died.length === 0 ? (
               <AppText role="titleM" style={{ textAlign: 'center' }}>
                 {L('Personne n’est mort cette nuit.', 'Nobody died last night.')}
@@ -515,6 +539,57 @@ export function NightDayPlay({ code }: { code: string }) {
                   {L(`👑 ${nick(ranked(nv.scores)[0]![0])} finit en tête`, `👑 ${nick(ranked(nv.scores)[0]![0])} tops the board`)}
                 </AppText>
               )}
+
+              {/* CC-5 match epilogue — cosmetic superlative stickers (town MVP / best
+                  seers / cleanest wolf / longest survivor). Empty-state gated: each
+                  row only appears when the underlying field is populated. */}
+              {(() => {
+                const ep = nv.epilogue;
+                const survivors = ranked(ep.survivedTo).filter(([, n]) => n > 0);
+                const longest = survivors[0];
+                const sups: EpilogueSuperlative[] = [];
+                if (ep.townMvp !== null) {
+                  sups.push({
+                    key: 'mvp', icon: '🏆', tone: 'win',
+                    label: L('MEILLEUR·E DU VILLAGE', 'TOWN MVP'),
+                    names: nick(ep.townMvp),
+                    detail: L(`A démasqué ${ep.bestReadAccuracy} loup·s`, `Clocked ${ep.bestReadAccuracy} wolf${ep.bestReadAccuracy > 1 ? 's' : ''}`),
+                  });
+                } else if (ep.bestSeers.length > 1 && ep.bestReadAccuracy > 0) {
+                  // No sole MVP, but a contested top read — celebrate the tie.
+                  sups.push({
+                    key: 'seers', icon: '🔮', tone: 'neutral',
+                    label: L('MEILLEURES LECTURES', 'BEST SEERS'),
+                    names: ep.bestSeers.map(nick).join(' · '),
+                    detail: L(`${ep.bestReadAccuracy} loup·s chacun·e`, `${ep.bestReadAccuracy} wolf${ep.bestReadAccuracy > 1 ? 's' : ''} each`),
+                  });
+                }
+                if (ep.cleanestWolf !== null) {
+                  sups.push({
+                    key: 'wolf', icon: '🐺', tone: 'spice',
+                    label: L('LOUP INSAISISSABLE', 'CLEANEST WOLF'),
+                    names: nick(ep.cleanestWolf),
+                    detail: L('A survécu le plus longtemps sans se faire repérer', 'Survived longest undetected'),
+                  });
+                }
+                if (longest !== undefined) {
+                  sups.push({
+                    key: 'survivor', icon: '🌙', tone: 'neutral',
+                    label: L('A TENU LE PLUS LONGTEMPS', 'LASTED THE LONGEST'),
+                    names: nick(longest[0]),
+                    detail: L(`${longest[1] + 1} nuit·s traversée·s`, `${longest[1] + 1} night${longest[1] + 1 > 1 ? 's' : ''} survived`),
+                  });
+                }
+                if (sups.length === 0) return null;
+                return (
+                  <View style={{ gap: tokens.spacing.md }}>
+                    <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+                      {L('🎬 LE PALMARÈS', '🎬 THE EPILOGUE')}
+                    </AppText>
+                    {sups.map(({ key, ...s }) => <SuperlativeRow key={key} {...s} />)}
+                  </View>
+                );
+              })()}
 
               {/* CC-1 Night Read reveal — cosmetic accuracy, never folded into placement scores. */}
               {(() => {

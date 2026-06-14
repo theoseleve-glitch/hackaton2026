@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
-import type { LText, SeatView } from '@bloop/game-rule-hunt';
+import type { LText, RuleHuntEpilogue, SeatView } from '@bloop/game-rule-hunt';
 import {
   asRuleHuntView, deviceLang, pickL,
   type FlagBet, type Lang, type NoteBet,
@@ -11,6 +11,10 @@ import {
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard, haptics, StreakTag,
+  type EpilogueStanding, type EpilogueSuperlative,
+} from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -98,6 +102,98 @@ function HeatChip({ label, tone, active, onPress, lang, srLabel }: {
       </AppText>
     </Pressable>
   );
+}
+
+/**
+ * The PUBLIC suspicion meter (Wave-2 CC-2 heat). `heat` accumulates each
+ * spotlight's soft reads (followers' 🚩 flag + detectives' 🔎 suspicious) onto a
+ * per-target aggregate — never a per-voter map, so it leaks no hidden read. We
+ * render the warmest seats as relative bars: "qui chauffe ?" at a glance. Renders
+ * nothing until a single read has landed (empty map => the room is still cold).
+ */
+function HeatMeter({ heat, nick, lang }: {
+  heat: Record<string, number>; nick: (id: string) => string; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const ranked = Object.entries(heat)
+    .filter(([, n]) => n > 0)
+    .sort((a, b) => b[1] - a[1]);
+  if (ranked.length === 0) return null;
+  const max = ranked[0][1];
+  return (
+    <View
+      accessibilityLabel={lang === 'fr' ? 'Compteur de suspicion' : 'Suspicion meter'}
+      style={{
+        backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding,
+        borderWidth: 3, borderColor: theme.danger, gap: tokens.spacing.sm, ...tokens.elevation.e1,
+      }}>
+      <AppText role="overline" color="danger">{lang === 'fr' ? '🌡️ QUI CHAUFFE ?' : '🌡️ WHO’S HEATING UP?'}</AppText>
+      {ranked.map(([id, n], i) => (
+        <View key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
+          <Avatar name={nick(id)} size="sm" />
+          <View style={{ flex: 1, gap: 2 }}>
+            <AppText role="caption" color={i === 0 ? 'danger' : 'textSecondary'}>
+              {i === 0 ? '🔥 ' : ''}{nick(id)}
+            </AppText>
+            <View style={{ height: 8, borderRadius: tokens.radii.pill, backgroundColor: theme.surfaceAlt, overflow: 'hidden' }}>
+              <View style={{
+                height: '100%', width: `${Math.max(8, Math.round((n / max) * 100))}%`,
+                borderRadius: tokens.radii.pill, backgroundColor: i === 0 ? theme.danger : theme.xp,
+              }} />
+            </View>
+          </View>
+          <AppText role="label" color={i === 0 ? 'danger' : 'textMuted'}>{n}</AppText>
+        </View>
+      ))}
+      <AppText role="caption" color="textMuted">
+        {lang === 'fr'
+          ? 'Total agrégé des lectures (🚩 + 🔎) — qui a voté reste secret.'
+          : 'Aggregate read total (🚩 + 🔎) — who voted stays secret.'}
+      </AppText>
+    </View>
+  );
+}
+
+/**
+ * Maps the Wave-2 CC-5 {@link RuleHuntEpilogue} onto the shared juice
+ * {@link EpilogueCard}'s superlative band. Awards only the bands actually earned
+ * (a superlative nobody reached is never shown): the sole MVP crown, the
+ * crime-parfait streak (only when a perfect time-up ever landed), and a
+ * close-finish flag. All copy bilingual via `lang`.
+ */
+function epilogueSuperlatives(
+  epilogue: RuleHuntEpilogue, nick: (id: string) => string, lang: Lang,
+): EpilogueSuperlative[] {
+  const out: EpilogueSuperlative[] = [];
+  if (epilogue.mvp !== null) {
+    out.push({
+      key: 'mvp', icon: '🏆', tone: 'win',
+      label: lang === 'fr' ? 'MVP' : 'MVP',
+      names: nick(epilogue.mvp),
+      detail: lang === 'fr' ? 'Plus haut score de la partie.' : 'Top score of the match.',
+    });
+  }
+  // The crime-parfait superlative — the longest clean (perfect time-up) streak
+  // anyone held. Only awarded when at least one perfect round ever landed.
+  if (epilogue.cleanStreak.length > 0 && epilogue.cleanStreak.holders.length > 0) {
+    const n = epilogue.cleanStreak.length;
+    out.push({
+      key: 'cleanStreak', icon: '🕵️‍♂️', tone: 'spice',
+      label: lang === 'fr' ? 'CRIME PARFAIT' : 'PERFECT CRIME',
+      names: epilogue.cleanStreak.holders.map(nick).join(' · '),
+      detail: lang === 'fr'
+        ? `${n} manche${n > 1 ? 's' : ''} parfaite${n > 1 ? 's' : ''} d’affilée — jamais enfreinte, jamais devinée.`
+        : `${n} perfect round${n > 1 ? 's' : ''} in a row — never broken, never guessed.`,
+    });
+  }
+  if (epilogue.closeFinish && epilogue.topGap > 0) {
+    out.push({
+      key: 'closeFinish', icon: '🤏', tone: 'neutral',
+      label: lang === 'fr' ? 'FINI DE JUSTESSE' : 'PHOTO FINISH',
+      names: lang === 'fr' ? `${epilogue.topGap} pt d’écart en tête` : `${epilogue.topGap} pt apart at the top`,
+    });
+  }
+  return out;
 }
 
 export function RuleHuntPlay({ code }: { code: string }) {
@@ -243,6 +339,15 @@ export function RuleHuntPlay({ code }: { code: string }) {
                 {L('Jeton d’accusation déjà utilisé pour cette manche.', 'Accusation token already spent this round.')}
               </AppText>
             )}
+
+            {/* Crime-parfait streak carried in from past rounds (≥2 only — the
+                kit hides a streak of one). Teases the legend-run heating up. */}
+            <View style={{ alignItems: 'center' }}>
+              <StreakTag count={rv.cleanStreak} label={L('CRIME PARFAIT', 'PERFECT CRIME')} />
+            </View>
+
+            {/* PUBLIC suspicion meter — accumulated heat from this round's spotlights. */}
+            <HeatMeter heat={rv.heat} nick={nick} lang={lang} />
           </View>
         )}
 
@@ -294,13 +399,13 @@ export function RuleHuntPlay({ code }: { code: string }) {
                     <HeatChip
                       label={L('🚩 Enfreint', '🚩 Broke it')} tone="stop" lang={lang}
                       active={flagLocked === 'flag'}
-                      onPress={flagLocked === null ? () => sendAction({ kind: 'flagBreak', flag: 'flag' satisfies FlagBet }) : null}
+                      onPress={flagLocked === null ? () => { haptics.impact('light'); sendAction({ kind: 'flagBreak', flag: 'flag' satisfies FlagBet }); } : null}
                       srLabel={L('Signaler une infraction', 'Flag a break')}
                     />
                     <HeatChip
                       label={L('✅ Clean', '✅ Clean')} tone="go" lang={lang}
                       active={flagLocked === 'clean'}
-                      onPress={flagLocked === null ? () => sendAction({ kind: 'flagBreak', flag: 'clean' satisfies FlagBet }) : null}
+                      onPress={flagLocked === null ? () => { haptics.impact('light'); sendAction({ kind: 'flagBreak', flag: 'clean' satisfies FlagBet }); } : null}
                       srLabel={L('Marquer comme clean', 'Mark as clean')}
                     />
                   </View>
@@ -322,13 +427,13 @@ export function RuleHuntPlay({ code }: { code: string }) {
                     <HeatChip
                       label={L('🔎 Suspect·e', '🔎 Suspicious')} tone="stop" lang={lang}
                       active={noteLocked === 'suspicious'}
-                      onPress={noteLocked === null ? () => sendAction({ kind: 'noteSuspicious', note: 'suspicious' satisfies NoteBet }) : null}
+                      onPress={noteLocked === null ? () => { haptics.impact('light'); sendAction({ kind: 'noteSuspicious', note: 'suspicious' satisfies NoteBet }); } : null}
                       srLabel={L('Noter comme suspect', 'Note as suspicious')}
                     />
                     <HeatChip
                       label={L('🆗 Clair', '🆗 Clear')} tone="go" lang={lang}
                       active={noteLocked === 'clear'}
-                      onPress={noteLocked === null ? () => sendAction({ kind: 'noteSuspicious', note: 'clear' satisfies NoteBet }) : null}
+                      onPress={noteLocked === null ? () => { haptics.impact('light'); sendAction({ kind: 'noteSuspicious', note: 'clear' satisfies NoteBet }); } : null}
                       srLabel={L('Noter comme clair', 'Note as clear')}
                     />
                   </View>
@@ -354,6 +459,9 @@ export function RuleHuntPlay({ code }: { code: string }) {
                 {L(`🚩 ${rv.flagCount} signalement${rv.flagCount === 1 ? '' : 's'} · 🔎 ${rv.noteCount} note${rv.noteCount === 1 ? '' : 's'} détective`,
                   `🚩 ${rv.flagCount} flag${rv.flagCount === 1 ? '' : 's'} · 🔎 ${rv.noteCount} detective note${rv.noteCount === 1 ? '' : 's'}`)}
               </AppText>
+
+              {/* PUBLIC suspicion meter — the accumulated heat from PAST spotlights. */}
+              <HeatMeter heat={rv.heat} nick={nick} lang={lang} />
             </View>
           );
         })()}
@@ -486,28 +594,30 @@ export function RuleHuntPlay({ code }: { code: string }) {
           );
         })()}
 
-        {rv.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {rv.endReason === 'roomCollapsed' && (
-              <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
-                {L('Partie écourtée — trop de joueurs ont quitté la pièce.', 'Match cut short — too many players left the room.')}
-              </AppText>
-            )}
-            {ranked(rv.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={nick(id)} size="md" />
-                <AppText role="bodyStrong" style={{ flex: 1 }}>{nick(id)}</AppText>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
-              </View>
-            ))}
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+        {rv.phase === 'over' && (() => {
+          // Epilogue cards ONLY on the over screen: the Wave-2 CC-5 award band
+          // (crime-parfait superlative + MVP) rides the shared EpilogueCard juice.
+          const standings: EpilogueStanding[] = ranked(rv.scores).map(([id, pts]) => ({
+            id, name: nick(id), score: pts,
+          }));
+          return (
+            <View style={{ gap: tokens.spacing.lg }}>
+              {rv.endReason === 'roomCollapsed' && (
+                <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
+                  {L('Partie écourtée — trop de joueurs ont quitté la pièce.', 'Match cut short — too many players left the room.')}
+                </AppText>
+              )}
+              <EpilogueCard
+                title={L('Fini ! 🎉', 'Game over! 🎉')}
+                standings={standings}
+                superlatives={epilogueSuperlatives(rv.epilogue, nick, lang)}
+                footer={
+                  <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+                }
+              />
+            </View>
+          );
+        })()}
 
         {rv.phase !== 'over' && (
           <SecondaryButton label={L('Quitter la partie', 'Leave Game')} onPress={() => { leave(); router.replace('/'); }} />

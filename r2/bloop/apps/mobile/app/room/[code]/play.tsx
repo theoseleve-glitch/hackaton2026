@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { ScrollView, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,7 +24,16 @@ import { isRuleHuntGame } from '../../../src/games/rule-hunt-view';
 import { isSecretRoleGame } from '../../../src/games/secret-role-view';
 import { isSpotlightGuessGame } from '../../../src/games/spotlight-guess-view';
 import { isTruthDareGame } from '../../../src/games/truth-dare-view';
-import { asTracerView, deviceLang, promptText, secondsLeft, type TracerRevealView } from '../../../src/games/tracer-view';
+import { asTracerView, deviceLang, promptText, secondsLeft, type Lang, type TracerEpilogue, type TracerOverView, type TracerRevealView } from '../../../src/games/tracer-view';
+import {
+  EpilogueCard,
+  MultiplierBadge,
+  ScoreClimb as JuiceScoreClimb,
+  StreakTag,
+  haptics,
+  type EpilogueStanding,
+  type EpilogueSuperlative,
+} from '../../../src/components/juice';
 import { useRoom } from '../../../src/net/context';
 import { useTheme } from '../../../src/theme/useTheme';
 
@@ -73,6 +82,10 @@ function RevealBeats({ tv, player }: {
   const step = tv.revealStep ?? 'verdict'; // legacy reveal had no beats → behave as the slam
   const delta = tv.delta ?? {};
   const designated = tv.designated ?? [];
+  // CC-2: the score multiplier in effect this round (1 unless a weighted climax
+  // round); CC-5: per-player current designation streak (populated at verdict).
+  const roundMultiplier = tv.roundMultiplier ?? 1;
+  const hotSeat = tv.hotSeat ?? {};
   const ranked = Object.entries(tv.tally).sort((a, b) => b[1] - a[1]);
 
   // Suspense pulses; the verdict card slams in with a pop on the step flip.
@@ -81,6 +94,8 @@ function RevealBeats({ tv, player }: {
     slam.value = step === 'verdict'
       ? withSequence(withTiming(1.08, { duration: 140 }), withSpring(1, tokens.motion.spring.pop))
       : withSpring(0.7, tokens.motion.spring.pulse);
+    // Haptic medium on the verdict SLAM (a no-op under Reduce Motion / no engine).
+    if (step === 'verdict') haptics.impact('medium');
   }, [step]);
   const slamStyle = useAnimatedStyle(() => ({ transform: [{ scale: slam.value }] }));
 
@@ -89,6 +104,17 @@ function RevealBeats({ tv, player }: {
   return (
     <View style={{ gap: tokens.spacing.lg }}>
       <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>{promptText(tv.prompt, lang)}</AppText>
+
+      {/* CC-2 — weighted climax round: "ROUND DOUBLE ×N" so the verdict climb reads
+          as caused, not arbitrary. Gated to a non-base multiplier (never on ×1). */}
+      {roundMultiplier > 1 && (
+        <MultiplierBadge
+          multiplier={roundMultiplier}
+          title={L('MANCHE DOUBLE', 'ROUND DOUBLE')}
+          tone="dare"
+          style={{ alignSelf: 'center' }}
+        />
+      )}
 
       {step === 'suspense'
         ? (
@@ -128,6 +154,8 @@ function RevealBeats({ tv, player }: {
       {ranked.map(([id, votes], i) => {
         const isDesignated = designated.includes(id);
         const gained = step === 'verdict' ? (delta[id] ?? 0) : 0;
+        // CC-5: the live consecutive-designation streak after this verdict.
+        const streak = step === 'verdict' ? (hotSeat[id] ?? 0) : 0;
         return (
           <View key={id} style={{
             flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
@@ -137,13 +165,20 @@ function RevealBeats({ tv, player }: {
           }}>
             <AppText role="titleM" color="textMuted">{i + 1}</AppText>
             <Avatar name={player(id).profile.nickname} size="md" ring={isDesignated ? 'you' : null} connected />
-            <AppText role="bodyStrong" style={{ flex: 1 }}>
-              {isDesignated ? '🎯 ' : ''}{player(id).profile.nickname}
-            </AppText>
+            <View style={{ flex: 1, gap: tokens.spacing.xs }}>
+              <AppText role="bodyStrong">
+                {isDesignated ? '🎯 ' : ''}{player(id).profile.nickname}
+              </AppText>
+              {/* CC-5 hot-seat tease — only on a 2+ run (StreakTag self-hides below 2). */}
+              <StreakTag count={streak} label={L('EN PLS', 'ON A ROLL')} />
+            </View>
             <AppText role="headline" color="brand">{votes} {L('voix', votes === 1 ? 'vote' : 'votes')}</AppText>
             <View style={{ alignItems: 'flex-end', minWidth: 56 }}>
               <AppText role="caption" color="textMuted">{tv.scores[id] ?? 0} pts</AppText>
-              {gained > 0 && <ScoreClimb gained={gained} />}
+              {/* Weighted +delta climbs in via the shared juice ScoreClimb (reduced-motion-safe). */}
+              {gained > 0 && (
+                <JuiceScoreClimb value={gained} role="headline" color="success" signed />
+              )}
             </View>
           </View>
         );
@@ -158,19 +193,72 @@ function RevealBeats({ tv, player }: {
   );
 }
 
-/** The +points sticker that pops in on the verdict slam — emphasises the climb. */
-function ScoreClimb({ gained }: { gained: number }) {
-  const { tokens } = useTheme();
-  const lang = deviceLang();
-  const pop = useSharedValue(0);
-  useEffect(() => {
-    pop.value = withSequence(withTiming(1.25, { duration: 160 }), withSpring(1, tokens.motion.spring.bounce));
-  }, []);
-  const popStyle = useAnimatedStyle(() => ({ transform: [{ scale: pop.value }] }));
+/**
+ * Wave-2 (CC-5) game-over epilogue → juice-kit EpilogueCard. Maps the final
+ * `scores` onto climbing standings and the server-derived `cliffhanger` onto
+ * superlative call-outs (MVP, photo finish, longest hot-seat). All copy bilingual
+ * via L; the card itself is reduced-motion-safe (Pop / ScoreClimb degrade to
+ * instant). Defensive on `cliffhanger` so a legacy over view (no epilogue) still
+ * renders the plain leaderboard.
+ */
+function TracerEpilogueView({ tv, player, ranked, footer, lang }: {
+  tv: TracerOverView;
+  player: (id: string) => RoomPlayer;
+  ranked: (scores: Record<string, number>) => [string, number][];
+  footer: ReactNode;
+  lang: Lang;
+}) {
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const standings: EpilogueStanding[] = ranked(tv.scores).map(([id, score]) => ({
+    id,
+    name: player(id).profile.nickname,
+    score,
+  }));
+
+  const cliffhanger: TracerEpilogue | undefined = tv.cliffhanger;
+  const names = (ids: readonly string[]) => ids.map((id) => player(id).profile.nickname).join(' & ');
+  const superlatives: EpilogueSuperlative[] = [];
+  if (cliffhanger !== undefined) {
+    if (cliffhanger.mvp !== null) {
+      superlatives.push({
+        key: 'mvp',
+        icon: '👑',
+        label: L('PIRE POTE', 'MVP'),
+        names: player(cliffhanger.mvp).profile.nickname,
+        tone: 'win',
+      });
+    }
+    if (cliffhanger.closeFinish) {
+      superlatives.push({
+        key: 'photo-finish',
+        icon: '🤏',
+        label: L('FINISH SERRÉ', 'PHOTO FINISH'),
+        names: L(`${cliffhanger.topGap} carte${cliffhanger.topGap === 1 ? '' : 's'} d'écart`,
+          `${cliffhanger.topGap} card${cliffhanger.topGap === 1 ? '' : 's'} apart`),
+        detail: L('Ça s\'est joué à rien !', 'Down to the wire!'),
+        tone: 'spice',
+      });
+    }
+    if (cliffhanger.longestHotSeat.value >= 2 && cliffhanger.longestHotSeat.players.length > 0) {
+      superlatives.push({
+        key: 'hot-seat',
+        icon: '🔥',
+        label: L('PLUS GROSSE LANCÉE', 'LONGEST HOT SEAT'),
+        names: names(cliffhanger.longestHotSeat.players),
+        detail: L(`${cliffhanger.longestHotSeat.value} manches désigné·e d'affilée`,
+          `pointed at ${cliffhanger.longestHotSeat.value} rounds in a row`),
+        tone: 'neutral',
+      });
+    }
+  }
+
   return (
-    <Animated.View style={popStyle} accessibilityLabel={lang === 'fr' ? `plus ${gained} point` : `plus ${gained} points`}>
-      <AppText role="headline" color="success">+{gained}</AppText>
-    </Animated.View>
+    <EpilogueCard
+      title={L('Fini ! 🎉', 'Game over! 🎉')}
+      standings={standings}
+      superlatives={superlatives}
+      footer={footer}
+    />
   );
 }
 
@@ -227,22 +315,22 @@ function TracerPlay({ code }: { code: string }) {
 
         {tv.phase === 'reveal' && <RevealBeats tv={tv} player={player} />}
 
+        {/* Wave-2 (CC-5): the cliffhanger epilogue lands on the OVER screen only —
+            crowned MVP, photo-finish call-out, longest hot-seat, on the shared
+            juice-kit EpilogueCard (climbing scores, name-hashed avatars). */}
         {tv.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>Game over! 🎉</AppText>
-            {ranked(tv.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={player(id).profile.nickname} size="md" />
-                <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
-              </View>
-            ))}
-            <PrimaryButton label="Back to Lobby" onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
+          <TracerEpilogueView
+            tv={tv}
+            player={player}
+            ranked={ranked}
+            lang={lang}
+            footer={
+              <PrimaryButton
+                label={L('Retour au salon', 'Back to Lobby')}
+                onPress={() => router.replace(`/room/${code}/lobby`)}
+              />
+            }
+          />
         )}
 
         {/* Mid-game there is no "back to lobby" — the lobby route redirects to a live game.

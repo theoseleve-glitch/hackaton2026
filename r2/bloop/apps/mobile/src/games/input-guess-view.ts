@@ -6,6 +6,18 @@ import type {
   LText,
 } from '@bloop/game-input-guess';
 
+// Wave-2 (CC-2 / CC-5) added fields surfaced to the client. `OverEpilogue` /
+// `PlayerMatchStats` are part of the `over` branch of `InputGuessView`
+// structurally but aren't re-exported by name from the package entry, so the
+// narrow validates them with hand-rolled predicates and the TYPE flows through
+// `InputGuessView`. Pulled out here so the view this module hands the screen is
+// the SOURCE OF TRUTH for `result.streak`, `epilogue`, and `stats`.
+type OverView = Extract<InputGuessView, { phase: 'over' }>;
+/** Wave-2 'over' epilogue — exposed on the narrowed view so the screen renders it with juice. */
+export type OverEpilogue = OverView['epilogue'];
+/** Wave-2 public match-stats map — the epilogue's evidence, exposed on the narrowed view. */
+export type PlayerMatchStats = OverView['stats'][string];
+
 export const INPUT_GUESS_GAME_IDS = ['quizz-culture-ge', 'cinquante-cinquante'] as const;
 
 export function isInputGuessGame(gameId: string | null): boolean {
@@ -52,7 +64,9 @@ const isClosestResult = (v: unknown): v is ClosestRoundResult => {
     && isRec(o.guesses, 'number') && Array.isArray(o.ranking)
     && isRec(o.pointsEarned, 'number') && Array.isArray(o.exact)
     && typeof o.multiplier === 'number' && Array.isArray(o.busted)
-    && isClosestCallOuts(o.callOuts);
+    && isClosestCallOuts(o.callOuts)
+    // CC-2 — per-player "on fire" streak counter (public from reveal on).
+    && isRec(o.streak, 'number');
 };
 
 const isCrowdResult = (v: unknown): v is CrowdRoundResult => {
@@ -61,8 +75,33 @@ const isCrowdResult = (v: unknown): v is CrowdRoundResult => {
   return o.kind === 'crowd-target' && typeof o.targetYesPct === 'number'
     && isRec(o.picks, 'number') && Array.isArray(o.winningCards)
     && Array.isArray(o.secondCards) && typeof o.bullseye === 'boolean'
-    && isRec(o.pointsEarned, 'number') && isCrowdCallOuts(o.callOuts);
+    && isRec(o.pointsEarned, 'number') && isCrowdCallOuts(o.callOuts)
+    // CC-2 — per-player "on fire" streak counter (public from reveal on).
+    && isRec(o.streak, 'number');
 };
+
+// CC-5 — 'over' epilogue superlatives, derived at game-over from public state.
+// mvp is a PlayerId or null; closeFinish is a flag; topGap a number; the four
+// superlative lists are id arrays. Validated so the narrowed TYPE exposes them.
+const isOverEpilogue = (v: unknown): boolean => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return (o.mvp === null || typeof o.mvp === 'string')
+    && typeof o.closeFinish === 'boolean' && typeof o.topGap === 'number'
+    && isStrArr(o.mostExact) && isStrArr(o.closestOverall)
+    && isStrArr(o.biggestWhiff) && isStrArr(o.onFire);
+};
+
+// CC-5 — per-player public match stats: every value is a non-negative count map.
+const isMatchStats = (v: unknown): boolean =>
+  Array.isArray(v) ? false
+    : typeof v === 'object' && v !== null && Object.values(v).every((s) => {
+        if (typeof s !== 'object' || s === null) return false;
+        const o = s as Record<string, unknown>;
+        return typeof o.rounds === 'number' && typeof o.exactCount === 'number'
+          && typeof o.totalDistance === 'number' && typeof o.worstDistance === 'number'
+          && typeof o.bestStreak === 'number';
+      });
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
 export function asInputGuessView(v: unknown): InputGuessView | null {
@@ -70,7 +109,11 @@ export function asInputGuessView(v: unknown): InputGuessView | null {
   const o = v as Record<string, unknown>;
   const modeOk = o.mode === 'closest-number' || o.mode === 'crowd-target';
   if (!modeOk || !isRec(o.scores, 'number')) return null;
-  if (o.phase === 'over') return v as InputGuessView;
+  if (o.phase === 'over') {
+    // CC-5 — only narrow once the public epilogue + stats are well-formed, so
+    // the over screen can render the superlatives without a shape guard.
+    return isOverEpilogue(o.epilogue) && isMatchStats(o.stats) ? (v as InputGuessView) : null;
+  }
   const roundOk = typeof o.round === 'number' && typeof o.totalRounds === 'number';
   if (!roundOk) return null;
   if (o.phase === 'guess') {

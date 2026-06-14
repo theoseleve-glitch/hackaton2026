@@ -19,6 +19,7 @@ import {
   resolveReverse,
   resolveRound,
   resolveScale,
+  roundScoreMultiplier,
   spotlightOf,
   voidRound,
 } from './resolve.js';
@@ -270,6 +271,11 @@ export function createSpotlightGuess(
         spotlightId,
         scores: state.scores,
         connected: state.connected,
+        // P1 (CC-2) — PUBLIC late-round score multiplier for the CURRENT round
+        // (×1 by default, ×2 on the weighted climax rounds). Pure fold over
+        // round/totalRounds/config — identical in every hidden-value world, so it
+        // adds no secret and leaves every redaction-invariance test green.
+        multiplier: roundScoreMultiplier(state),
       };
 
       if (state.config.mode === 'scale') {

@@ -1,4 +1,9 @@
 // IMPORT FIREWALL: type-only — erased at compile time; spotlight-guess server logic never enters the bundle.
+// The narrowed view re-exports the package `SpotlightGuessView` verbatim, so the
+// Wave-2 retention fields land in the mobile types automatically:
+//   - per-round `multiplier` (ViewBase, CC-2) → MultiplierBadge on the weighted climax;
+//   - the 'over' SpotlightEpilogue { mvp, closeFinish, bestMindReaders, bestMindReads,
+//     mostFooled, mostFooledWhiffs, mindReads, whiffs } (CC-5) → EpilogueCard.
 import type { GuessEntry, LText, SpotlightGuessView } from '@bloop/game-spotlight-guess';
 
 export const SPOTLIGHT_GUESS_GAME_IDS = ['jeu-de-la-note', 'devine-la-question'] as const;
@@ -49,8 +54,11 @@ export function asSpotlightGuessView(v: unknown): SpotlightGuessView | null {
   if (!modeOk || !isRec(o.scores, 'number')) return null;
   if (o.phase === 'over') return v as SpotlightGuessView;
 
+  // `multiplier` (P1 CC-2 late-round weight) rides every non-over view; tolerate
+  // an absent field on drift by treating it as the ×1 identity downstream.
   const baseOk = typeof o.round === 'number' && typeof o.totalRounds === 'number'
-    && typeof o.spotlightId === 'string' && isRec(o.connected, 'boolean');
+    && typeof o.spotlightId === 'string' && isRec(o.connected, 'boolean')
+    && (o.multiplier === undefined || typeof o.multiplier === 'number');
   if (!baseOk) return null;
 
   if (o.mode === 'scale') {

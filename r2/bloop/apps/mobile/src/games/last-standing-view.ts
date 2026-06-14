@@ -1,5 +1,12 @@
 // IMPORT FIREWALL: type-only — erased at compile time; last-standing server logic never enters the bundle.
-import type { JudgeVote, LastStandingView, LText, SpotBet, TurnResult } from '@bloop/game-last-standing';
+import type {
+  JudgeVote,
+  LastStandingEpilogue,
+  LastStandingView,
+  LText,
+  SpotBet,
+  TurnResult,
+} from '@bloop/game-last-standing';
 
 export const LAST_STANDING_GAME_IDS = ['jeu-du-theme'] as const;
 
@@ -41,6 +48,23 @@ const isTurnResult = (v: unknown): v is TurnResult | null => {
 
 const isVote = (v: unknown): v is JudgeVote | null => v === null || v === 'valid' || v === 'reject';
 
+// CC-5: the over-view cliffhanger/superlative epilogue. All fields are derived
+// at 'over' from already-public state — narrow the shape so the over screen can
+// render the superlative band without a defensive guard at every read.
+const isEpilogue = (v: unknown): v is LastStandingEpilogue => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  const nullableId = (x: unknown) => x === null || typeof x === 'string';
+  const streak = o.longestSurvivalStreak as Record<string, unknown> | null;
+  return (
+    nullableId(o.mvp) && nullableId(o.leaderId) && nullableId(o.runnerUpId)
+    && typeof o.topGap === 'number' && typeof o.closeFinish === 'boolean'
+    && isStrArray(o.survivedAllRounds) && nullableId(o.lastOneStanding)
+    && typeof streak === 'object' && streak !== null
+    && typeof streak.value === 'number' && isStrArray(streak.players)
+  );
+};
+
 // P0-1: the spotlight survives/chokes side-bet token — own-echo only, never a foreign call.
 const isBet = (v: unknown): v is SpotBet | null => v === null || v === 'survives' || v === 'chokes';
 
@@ -50,7 +74,9 @@ export function asLastStandingView(v: unknown): LastStandingView | null {
   const o = v as Record<string, unknown>;
   if (!isRec(o.scores, 'number') || !isStrArray(o.rotation) || !isRec(o.wordsValidated, 'number')) return null;
   if (!isRec(o.betPoints, 'number')) return null; // P0-1: public side-bet currency, present in every base view
-  if (o.phase === 'over') return v as LastStandingView;
+  // CC-5: the 'over' view carries the derived epilogue (mvp/streak/last-one-standing) —
+  // validate it so the narrowed type exposes the superlative fields to the over screen.
+  if (o.phase === 'over') return isEpilogue(o.epilogue) ? (v as LastStandingView) : null;
   const baseOk = typeof o.round === 'number' && typeof o.totalRounds === 'number'
     && typeof o.turnSeq === 'number'
     && isRec(o.alive, 'boolean') && isRec(o.connected, 'boolean')
@@ -79,3 +105,4 @@ export function asLastStandingView(v: unknown): LastStandingView | null {
 }
 
 export { deviceLang, pickL, type Lang } from '../i18n';
+export type { LastStandingEpilogue } from '@bloop/game-last-standing';

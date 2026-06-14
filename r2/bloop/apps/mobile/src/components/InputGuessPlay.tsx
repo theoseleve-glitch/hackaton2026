@@ -4,11 +4,18 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
 import type { ClosestRoundResult, CrowdCardRevealed, CrowdRoundResult } from '@bloop/game-input-guess';
-import { asInputGuessView, deviceLang, pickL, type Lang } from '../games/input-guess-view';
+import {
+  asInputGuessView, deviceLang, pickL,
+  type Lang, type OverEpilogue,
+} from '../games/input-guess-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
 import { Avatar } from './players';
+import {
+  EpilogueCard, MultiplierBadge, ScoreClimb, StreakTag, haptics,
+  type EpilogueStanding, type EpilogueSuperlative,
+} from './juice';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
 const UNKNOWN: Omit<RoomPlayer, 'id'> = { profile: { nickname: '???', avatar: '' }, connected: false, isHost: false };
@@ -193,6 +200,15 @@ function Keypad({ draft, setDraft, maxDigits, onSubmit, lang }: {
   );
 }
 
+/**
+ * "On fire" streak tag for a single player, driven by the PUBLIC `streak` map on
+ * the reveal result (CC-2). The juice {@link StreakTag} self-hides below x2, so
+ * a non-streaking player renders nothing — no gating needed at the call site.
+ */
+function PlayerStreakTag({ count, lang }: { count: number; lang: Lang }) {
+  return <StreakTag count={count} label={lang === 'fr' ? 'EN FEU' : 'ON FIRE'} />;
+}
+
 /** Reveal list (closest-number): ranked guesses around the slammed-in answer. */
 function NumberReveal({ result, isYear, players, lang }: {
   result: ClosestRoundResult; isYear: boolean; players: readonly RoomPlayer[]; lang: Lang;
@@ -208,6 +224,8 @@ function NumberReveal({ result, isYear, players, lang }: {
         const pts = result.pointsEarned[id] ?? 0;
         const exact = result.exact.includes(id);
         const busted = result.busted.includes(id);
+        // CC-2 — public per-player consecutive top-2 count after this round.
+        const streak = result.streak[id] ?? 0;
         return (
           <View key={id} style={{
             flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
@@ -216,15 +234,19 @@ function NumberReveal({ result, isYear, players, lang }: {
           }}>
             <AppText role="titleM" color="textMuted">{busted ? '✕' : i + 1}</AppText>
             <Avatar name={nick(id)} size="sm" />
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, gap: tokens.spacing.xs }}>
               <AppText role="bodyStrong">{nick(id)}</AppText>
               <AppText role="caption" color="textSecondary">
                 {guessed !== undefined ? fmt(guessed, lang, isYear) : '—'}
                 {exact ? (lang === 'fr' ? '  🎯 PILE !' : '  🎯 NAILED IT!') : ''}
                 {busted ? (lang === 'fr' ? '  💥 AU-DESSUS !' : '  💥 OVER!') : ''}
               </AppText>
+              <PlayerStreakTag count={streak} lang={lang} />
             </View>
-            <AppText role="headline" color={pts > 0 ? 'success' : 'textMuted'}>+{pts}</AppText>
+            {/* Pile!/closest awards climb in via the juice ScoreClimb. */}
+            {pts > 0
+              ? <ScoreClimb value={pts} role="headline" color="success" signed />
+              : <AppText role="headline" color="textMuted">+0</AppText>}
           </View>
         );
       })}
@@ -265,20 +287,77 @@ function CrowdReveal({ cards, result, players, lang }: {
               <AppText role="caption" color="textMuted">
                 {lang === 'fr' ? `écart ${card.distance}` : `off by ${card.distance}`}
               </AppText>
-              {pickers.map((id) => (
-                <View key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-                  <Avatar name={nick(id)} size="sm" />
-                  <AppText role="caption" color={(result.pointsEarned[id] ?? 0) > 0 ? 'success' : 'textMuted'}>
-                    +{result.pointsEarned[id] ?? 0}
-                  </AppText>
-                </View>
-              ))}
+              {pickers.map((id) => {
+                const pts = result.pointsEarned[id] ?? 0;
+                return (
+                  <View key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+                    <Avatar name={nick(id)} size="sm" />
+                    {/* Card award climbs in via the juice ScoreClimb. */}
+                    {pts > 0
+                      ? <ScoreClimb value={pts} role="caption" color="success" signed />
+                      : <AppText role="caption" color="textMuted">+0</AppText>}
+                    {/* CC-2 — "on fire" streak after this pick (self-hides below x2). */}
+                    <PlayerStreakTag count={result.streak[id] ?? 0} lang={lang} />
+                  </View>
+                );
+              })}
             </View>
           </View>
         );
       })}
     </View>
   );
+}
+
+/**
+ * Map the CC-5 `OverEpilogue` onto the juice {@link EpilogueCard}'s superlative
+ * rows. Every award is gated on a non-empty winner list (the engine already
+ * empties a list when nobody qualifies — e.g. no exact hit, nobody on fire), so
+ * a quiet game shows fewer (or zero) rows rather than empty "—" placeholders.
+ * MVP only appears on a CLEAR crown (mvp non-null); a tie omits it. All copy
+ * bilingual via the passed `lang`.
+ */
+function epilogueSuperlatives(
+  epilogue: OverEpilogue,
+  nick: (id: string) => string,
+  lang: Lang,
+): EpilogueSuperlative[] {
+  const join = (ids: readonly string[]) => ids.map(nick).join(' & ');
+  const out: EpilogueSuperlative[] = [];
+  if (epilogue.mvp !== null) {
+    out.push({
+      key: 'mvp', icon: '🏆', tone: 'win',
+      label: lang === 'fr' ? 'MVP' : 'MVP', names: nick(epilogue.mvp),
+      detail: epilogue.closeFinish
+        ? (lang === 'fr' ? `Photo finish — +${epilogue.topGap} d’écart !` : `Photo finish — won by ${epilogue.topGap}!`)
+        : undefined,
+    });
+  }
+  if (epilogue.mostExact.length > 0) {
+    out.push({
+      key: 'mostExact', icon: '🎯', tone: 'win',
+      label: lang === 'fr' ? 'ROI DU PILE' : 'MOST EXACT', names: join(epilogue.mostExact),
+    });
+  }
+  if (epilogue.closestOverall.length > 0) {
+    out.push({
+      key: 'closestOverall', icon: '🔮', tone: 'win',
+      label: lang === 'fr' ? 'ŒIL DE LYNX' : 'SHARPEST OVERALL', names: join(epilogue.closestOverall),
+    });
+  }
+  if (epilogue.onFire.length > 0) {
+    out.push({
+      key: 'onFire', icon: '🔥', tone: 'spice',
+      label: lang === 'fr' ? 'EN FEU' : 'ON FIRE', names: join(epilogue.onFire),
+    });
+  }
+  if (epilogue.biggestWhiff.length > 0) {
+    out.push({
+      key: 'biggestWhiff', icon: '💨', tone: 'neutral',
+      label: lang === 'fr' ? 'PLUS GROS HORS-PISTE' : 'BIGGEST WHIFF', names: join(epilogue.biggestWhiff),
+    });
+  }
+  return out;
 }
 
 export function InputGuessPlay({ code }: { code: string }) {
@@ -293,6 +372,13 @@ export function InputGuessPlay({ code }: { code: string }) {
   // Reset the keypad draft whenever a new guess phase begins.
   const guessKey = ig !== null && ig.phase === 'guess' ? ig.round : -1;
   useEffect(() => { setDraft(''); }, [guessKey]);
+
+  // Success buzz once per closest-number reveal that lands an exact "Pile !".
+  // Keyed on the round so it fires exactly once when that reveal mounts; the
+  // haptics util self-noops when Reduce Motion is on or there's no engine.
+  const pileKey = ig !== null && ig.phase === 'reveal' && ig.mode === 'closest-number'
+    && ig.result.exact.length > 0 ? ig.round : -1;
+  useEffect(() => { if (pileKey >= 0) haptics.success(); }, [pileKey]);
 
   useEffect(() => {
     if (ig === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
@@ -454,12 +540,14 @@ export function InputGuessPlay({ code }: { code: string }) {
                 {fmt(ig.result.answer, lang, ig.format === 'year')}
                 {ig.unit !== null ? ` ${pickL(ig.unit, lang)}` : ''}
               </AppText>
-              {ig.result.multiplier > 1 && (
-                <AppText role="label" color="xp" style={{ textAlign: 'center' }}>
-                  {L(`POINTS ×${ig.result.multiplier} !`, `POINTS ×${ig.result.multiplier}!`)}
-                </AppText>
-              )}
             </View>
+            {/* Multiplier badge ONLY when the round actually multiplied (final round). */}
+            {ig.result.multiplier > 1 && (
+              <MultiplierBadge
+                multiplier={ig.result.multiplier}
+                title={L('POINTS', 'POINTS')}
+              />
+            )}
             <CallOutBand
               players={state.players}
               lang={lang}
@@ -508,30 +596,31 @@ export function InputGuessPlay({ code }: { code: string }) {
         )}
 
         {/* ——— OVER ——— */}
-        {ig.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {ranked(ig.scores)[0] !== undefined && (
-              <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
-                {ig.mode === 'closest-number'
-                  ? `${L('🔮 Œil de lynx : ', '🔮 Sharpest eye: ')}${player(ranked(ig.scores)[0]![0]).profile.nickname}`
-                  : `${L('📊 Lecteur de foule : ', '📊 Crowd whisperer: ')}${player(ranked(ig.scores)[0]![0]).profile.nickname}`}
-              </AppText>
-            )}
-            {ranked(ig.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={player(id).profile.nickname} size="md" />
-                <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
-              </View>
-            ))}
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+        {ig.phase === 'over' && (() => {
+          const standings: EpilogueStanding[] = ranked(ig.scores).map(([id, pts]) => ({
+            id, name: player(id).profile.nickname, score: pts,
+          }));
+          // CC-5 — the public epilogue superlatives (MVP / sharpest / on fire /
+          // biggest whiff), empty-state-gated inside the mapper.
+          const superlatives = epilogueSuperlatives(
+            ig.epilogue, (id) => player(id).profile.nickname, lang,
+          );
+          return (
+            <View style={{ gap: tokens.spacing.lg }}>
+              <EpilogueCard
+                title={L('Fini ! 🎉', 'Game over! 🎉')}
+                standings={standings}
+                superlatives={superlatives}
+                footer={
+                  <PrimaryButton
+                    label={L('Retour au salon', 'Back to Lobby')}
+                    onPress={() => router.replace(`/room/${code}/lobby`)}
+                  />
+                }
+              />
+            </View>
+          );
+        })()}
 
         {/* Mid-game there is no "back to lobby" — leaving mid-game is a real leave. */}
         {ig.phase !== 'over' && (

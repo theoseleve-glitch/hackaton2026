@@ -1,5 +1,5 @@
 // IMPORT FIREWALL: type-only — erased at compile time; perform-judge server logic never enters the bundle.
-import type { LText, PerformJudgeView, TurnResult } from '@bloop/game-perform-judge';
+import type { Epilogue, LText, PerformJudgeView, TurnResult } from '@bloop/game-perform-judge';
 
 export const PERFORM_JUDGE_GAME_IDS = [
   'devine-l-action',
@@ -50,6 +50,10 @@ const isReactionCounts = (v: unknown): boolean => {
 const isReactionOrNull = (v: unknown): boolean =>
   v === null || v === 'fire' || v === 'laugh' || v === 'cringe';
 
+/** P1-2 — aggregate-only near-miss/split stamp (or null). */
+const isDrama = (v: unknown): boolean =>
+  v === null || v === undefined || v === 'nailbiter' || v === 'split';
+
 const isResult = (v: unknown): v is TurnResult => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
@@ -57,13 +61,34 @@ const isResult = (v: unknown): v is TurnResult => {
     && typeof o.outcome === 'string'
     && typeof o.fast === 'boolean'
     && typeof o.points === 'object' && o.points !== null
-    && isReactionCounts(o.reactions);
+    && isReactionCounts(o.reactions)
+    // CC-2 / P1-2 wave-2 reveal extras (default-tolerant so older snapshots still narrow).
+    && (o.moneyRound === undefined || typeof o.moneyRound === 'boolean')
+    && isDrama(o.drama);
+};
+
+/**
+ * CC-5 — end-of-match epilogue cards (best performer + crowd favourite, derived
+ * from already-public scores/reaction totals). Tolerant: a drifted/absent field
+ * degrades gracefully rather than blanking the whole over screen.
+ */
+const isEpilogue = (v: unknown): v is Epilogue => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return (o.bestPerformer === null || typeof o.bestPerformer === 'string')
+    && Array.isArray(o.crowdFavourite) && o.crowdFavourite.every((p) => typeof p === 'string')
+    && isRec(o.reactionTotals, 'number')
+    && typeof o.closeFinish === 'boolean'
+    && typeof o.topGap === 'number'
+    && typeof o.nailbiters === 'number';
 };
 
 function baseOk(o: Record<string, unknown>): boolean {
   return typeof o.turnSeq === 'number'
     && typeof o.lap === 'number'
     && typeof o.laps === 'number'
+    // CC-2 Money Round flag — tolerant so a snapshot from before the flag still narrows.
+    && (o.isFinalLap === undefined || typeof o.isFinalLap === 'boolean')
     && typeof o.performer === 'string'
     && (o.partner === null || typeof o.partner === 'string')
     && Array.isArray(o.rotation) && o.rotation.every((p) => typeof p === 'string')
@@ -78,7 +103,8 @@ export function asPerformJudgeView(v: unknown): PerformJudgeView | null {
   const o = v as Record<string, unknown>;
   if (!isMode(o.mode)) return null;
   if (o.phase === 'over') {
-    return isRec(o.scores, 'number') ? (v as PerformJudgeView) : null;
+    // CC-5 — epilogue must narrow too so the over screen can render the cards.
+    return isRec(o.scores, 'number') && isEpilogue(o.epilogue) ? (v as PerformJudgeView) : null;
   }
   if (!baseOk(o)) return null;
   if (o.phase === 'ready') {

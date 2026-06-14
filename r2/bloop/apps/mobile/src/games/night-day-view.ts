@@ -3,6 +3,7 @@ import type {
   DawnReport,
   LText,
   LynchReport,
+  MatchEpilogue,
   NightDayView,
   Role,
   RoleCard,
@@ -55,7 +56,30 @@ const isStrings = (v: unknown): boolean => Array.isArray(v) && v.every((x) => ty
 const isDawn = (v: unknown): v is DawnReport => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
-  return isStrings(o.died) && (o.revealedRoles === null || (typeof o.revealedRoles === 'object' && o.revealedRoles !== null));
+  return (
+    isStrings(o.died) &&
+    (o.revealedRoles === null || (typeof o.revealedRoles === 'object' && o.revealedRoles !== null)) &&
+    // P1-1 first-night shield indicator — null/string, tolerant of older payloads that omit it.
+    (o.marked === undefined || o.marked === null || typeof o.marked === 'string')
+  );
+};
+
+/**
+ * CC-5 match epilogue (P1-2) — cosmetic over-state superlatives. Tolerant of
+ * older payloads (`undefined` is allowed) so a missing epilogue degrades to "no
+ * cards" rather than dropping the whole over view.
+ */
+const isEpilogue = (v: unknown): v is MatchEpilogue => {
+  if (v === undefined) return true;
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return (
+    (o.townMvp === null || typeof o.townMvp === 'string') &&
+    typeof o.bestReadAccuracy === 'number' &&
+    isStrings(o.bestSeers) &&
+    (o.cleanestWolf === null || typeof o.cleanestWolf === 'string') &&
+    isRec(o.survivedTo, 'number')
+  );
 };
 
 const isLynch = (v: unknown): v is LynchReport => {
@@ -135,7 +159,9 @@ export function asNightDayView(v: unknown): NightDayView | null {
       (o.winners === null || o.winners === 'village' || o.winners === 'wolves') &&
       typeof o.endReason === 'string' &&
       // CC-1 Night Read — per-player count of correct wolf-hunches (cosmetic).
-      (o.nightReadAccuracy === undefined || isRec(o.nightReadAccuracy, 'number'))
+      (o.nightReadAccuracy === undefined || isRec(o.nightReadAccuracy, 'number')) &&
+      // CC-5 match epilogue — town MVP / best seers / cleanest wolf (cosmetic).
+      isEpilogue(o.epilogue)
       ? (v as NightDayView)
       : null;
   }

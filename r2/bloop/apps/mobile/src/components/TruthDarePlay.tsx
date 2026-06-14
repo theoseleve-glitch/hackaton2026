@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
-import type { Choice, TdResult, Verdict } from '@bloop/game-truth-dare';
-import { asTruthDareView, deviceLang, pickL, type Lang } from '../games/truth-dare-view';
+import type { Choice, DramaTag, Intensity, Reaction, ReactionCounts, TdResult, Verdict } from '@bloop/game-truth-dare';
+import { asTruthDareView, deviceLang, pickL, TD_REACTIONS, type Lang } from '../games/truth-dare-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import { EpilogueCard, haptics, MultiplierBadge, Pop, type EpilogueStanding } from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -142,6 +143,112 @@ function CallYourShot({ activeName, myBet, count, onBet, lang }: {
   );
 }
 
+// CC-2 tier-weight surfacing: each intensity gets a bilingual label + tone so a
+// spicier completion's heavier points read at a glance (the engine adds a
+// tier-keyed bonus to a verdicted-DONE turn). Order matches TIER_ORDER weight.
+const TIER_META: Record<Intensity, { fr: string; en: string; tone: 'xp' | 'dare' | 'brand' }> = {
+  soft: { fr: 'SOFT', en: 'SOFT', tone: 'xp' },
+  party: { fr: 'PARTY', en: 'PARTY', tone: 'brand' },
+  spicy: { fr: 'PIQUANT', en: 'SPICY', tone: 'dare' },
+};
+
+/**
+ * CC-5 drama stamp — a derived chip on the score reveal, surfaced ONLY when the
+ * public verdict tally produced a tag (`contested` = the room split, `roasted` =
+ * the room called bullshit). null tag → renders nothing (no new secret, just the
+ * already-public tally dramatised). Pops in via the shared kit (reduced-motion-safe).
+ */
+function DramaChip({ tag, lang }: { tag: DramaTag; lang: Lang }) {
+  const { theme, tokens } = useTheme();
+  if (tag === null) return null;
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const meta = tag === 'contested'
+    ? { emoji: '⚖️', text: L('LA SALLE EST DIVISÉE', 'THE ROOM IS SPLIT'), bg: theme.xp, fg: 'textPrimary' as const }
+    : { emoji: '🔥', text: L('GRILLÉ·E PAR LA SALLE', 'ROASTED BY THE ROOM'), bg: theme.dare, fg: 'textOnBrand' as const };
+  return (
+    <Pop key={tag} from={0.6} style={{ alignSelf: 'center' }}>
+      <View
+        accessibilityLabel={meta.text}
+        style={{
+          flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs,
+          backgroundColor: meta.bg, borderRadius: tokens.radii.pill,
+          paddingHorizontal: tokens.spacing.lg, paddingVertical: tokens.spacing.xs,
+          borderWidth: 2, borderColor: theme.stickerOutline,
+          ...tokens.elevation.sticker,
+        }}>
+        <AppText role="label">{meta.emoji}</AppText>
+        <AppText role="overline" color={meta.fg}>{meta.text}</AppText>
+      </View>
+    </Pop>
+  );
+}
+
+// CC-4 — fixed escape-reaction set (enum-only, zero free text → zero moderation
+// surface). Order is the public bar order: ouch → respect → coward. Keyed off the
+// shared TD_REACTIONS tuple so the enum can never drift from the package.
+const REACT_META: Record<Reaction, { emoji: string; fr: string; en: string }> = {
+  ouch: { emoji: '😬', fr: 'Aïe', en: 'Ouch' },
+  respect: { emoji: '🙏', fr: 'Respect', en: 'Respect' },
+  coward: { emoji: '🐔', fr: 'Dégonflé', en: 'Coward' },
+};
+
+/**
+ * CC-4 escape-react beat — during the score reveal of a turn the active player did
+ * NOT complete (escaped/chickened) the room reacts with a fixed enum. Every phone
+ * shows the PUBLIC per-enum counts building live; eligible spectators (connected
+ * non-active, not-yet-reacted) tap once to add theirs. NON-SCORING — a react never
+ * resolves the turn. `mine` highlights the locked choice; a light haptic fires on
+ * a successful tap (the kit's haptics no-op under Reduce Motion / no engine).
+ */
+function EscapeReactBar({ counts, mine, canReact, onReact, lang }: {
+  counts: ReactionCounts; mine: Reaction | null; canReact: boolean;
+  onReact: (r: Reaction) => void; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const locked = mine !== null;
+  return (
+    <View style={{ gap: tokens.spacing.sm, alignItems: 'center' }}>
+      <AppText role="overline" color="textSecondary">
+        {locked
+          ? L('TA RÉACTION EST PARTIE', 'YOUR REACTION IS IN')
+          : canReact
+            ? L('RÉAGIS EN DIRECT', 'REACT LIVE')
+            : L('RÉACTIONS DE LA SALLE', 'CROWD REACTIONS')}
+      </AppText>
+      <View style={{ flexDirection: 'row', gap: tokens.spacing.sm, justifyContent: 'center' }}>
+        {TD_REACTIONS.map((key) => {
+          const r = REACT_META[key];
+          const isMine = mine === key;
+          const tappable = canReact && !locked;
+          const count = counts[key];
+          return (
+            <Pressable
+              key={key}
+              disabled={!tappable}
+              onPress={() => { onReact(key); haptics.impact('light'); }}
+              accessibilityRole="button"
+              accessibilityState={{ disabled: !tappable, selected: isMine }}
+              accessibilityLabel={L(`${r.fr} — ${count}`, `${r.en} — ${count}`)}
+              style={{
+                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs,
+                minHeight: 44, paddingHorizontal: tokens.spacing.md, paddingVertical: tokens.spacing.xs,
+                borderRadius: tokens.radii.pill,
+                backgroundColor: isMine ? theme.brand : theme.surface,
+                borderWidth: 2, borderColor: isMine ? theme.brand : theme.border,
+                opacity: tappable || isMine ? 1 : 0.85,
+                ...tokens.elevation.e1,
+              }}>
+              <AppText role="titleM">{r.emoji}</AppText>
+              <AppText role="bodyStrong" color={isMine ? 'textOnBrand' : 'textPrimary'}>{count}</AppText>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
 /** Score reveal: stamp + tally bar + points burst + forfeit card. */
 function ScoreCard({ result, stamp, nick, lang }: {
   result: TdResult; stamp: string; nick: (id: string) => string; lang: Lang;
@@ -151,9 +258,16 @@ function ScoreCard({ result, stamp, nick, lang }: {
   const cast = result.tally.done + result.tally.chickened;
   const donePct = cast === 0 ? 0 : Math.round((result.tally.done / cast) * 100);
   const stampColor = result.verdict === 'done' ? 'success' as const : result.verdict === 'passed' ? 'xp' as const : 'danger' as const;
+  // CC-2: a verdicted-DONE turn earns a tier-keyed bonus, so surface the prompt's
+  // intensity beside the points (a spicier completion reads as worth more). Only on
+  // a DONE turn — pass/chicken keep their flat constants and carry no tier weight.
+  const tier = TIER_META[result.intensity];
+  const showTierWeight = result.verdict === 'done';
   return (
     <View style={{ gap: tokens.spacing.lg }}>
       <AppText role="displayL" color={stampColor} style={{ textAlign: 'center' }}>{stamp}</AppText>
+      {/* CC-5 drama stamp — derived from the public tally; null tag renders nothing. */}
+      <DramaChip tag={result.dramaTag} lang={lang} />
       <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
         {nick(result.activePlayer)} — {pickL(result.promptText, lang)}
       </AppText>
@@ -168,9 +282,21 @@ function ScoreCard({ result, stamp, nick, lang }: {
           </View>
         </View>
       )}
-      <AppText role="headline" color="xp" style={{ textAlign: 'center' }}>
-        +{result.pointsAwarded} pts → {nick(result.activePlayer)}
-      </AppText>
+      <Pop key={result.pointsAwarded} from={0.7} style={{ alignItems: 'center', gap: tokens.spacing.sm }}>
+        <AppText role="headline" color="xp" style={{ textAlign: 'center' }}>
+          +{result.pointsAwarded} pts → {nick(result.activePlayer)}
+        </AppText>
+        {/* CC-2 tier-weight badge — title-only plate (no fake multiplier), shown only on a
+            DONE turn where the intensity bonus actually applied. */}
+        {showTierWeight && (
+          <MultiplierBadge
+            multiplier={1}
+            title={L(`${tier.fr} · ${result.choice === 'dare' ? 'ACTION' : 'VÉRITÉ'}`,
+              `${tier.en} · ${result.choice === 'dare' ? 'DARE' : 'TRUTH'}`)}
+            tone={tier.tone}
+          />
+        )}
+      </Pop>
       {result.spectatorTally.total > 0 && (
         <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, gap: tokens.spacing.xs }}>
           <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
@@ -347,6 +473,18 @@ export function TruthDarePlay({ code }: { code: string }) {
                   : pickL(labels.verdictChickened, lang)}
               nick={nick} lang={lang}
             />
+            {/* CC-4 escape-react beat: live bar only when the beat is on (non-completed
+                turn + reactOnEscape) — reactionCounts is null otherwise. Public counts
+                show to all; the buttons are tappable only when youCanReact. */}
+            {td.reactionCounts !== null && (
+              <EscapeReactBar
+                counts={td.reactionCounts}
+                mine={td.youReacted}
+                canReact={td.youCanReact}
+                onReact={(reaction) => sendAction({ kind: 'react', reaction })}
+                lang={lang}
+              />
+            )}
             <AppText role="label" color="brand" style={{ textAlign: 'center' }}>
               {td.nextActive !== null
                 ? L(`AU TOUR DE ${nick(td.nextActive).toUpperCase()} →`, `NEXT UP: ${nick(td.nextActive).toUpperCase()} →`)
@@ -365,23 +503,30 @@ export function TruthDarePlay({ code }: { code: string }) {
           </View>
         )}
 
-        {td.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {ranked(td.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={nick(id)} size="md" />
-                <AppText role="bodyStrong" style={{ flex: 1 }}>{nick(id)}</AppText>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
-              </View>
-            ))}
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+        {td.phase === 'over' && (() => {
+          // EPILOGUE (over screen only): map the final scores onto the shared kit's
+          // branded leaderboard (name-hashed avatars, crown, climbing scores). A
+          // single MVP superlative when there's a clear leader.
+          const finalRanked = ranked(td.scores);
+          const standings: EpilogueStanding[] = finalRanked.map(([id, pts]) => ({
+            id, name: nick(id), score: pts,
+          }));
+          const top = finalRanked[0];
+          const clearLeader = top !== undefined && (finalRanked[1]?.[1] ?? -1) < top[1];
+          return (
+            <EpilogueCard
+              title={L('Fini ! 🎉', 'Game over! 🎉')}
+              standings={standings}
+              superlatives={clearLeader
+                ? [{ key: 'mvp', icon: '🏆', label: L('MVP', 'MVP'), names: nick(top[0]),
+                    detail: L(`${top[1]} pts`, `${top[1]} pts`), tone: 'win' }]
+                : []}
+              footer={
+                <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+              }
+            />
+          );
+        })()}
 
         {td.phase !== 'over' && (
           <SecondaryButton label={L('Quitter la partie', 'Leave Game')} onPress={() => { leave(); router.replace('/'); }} />

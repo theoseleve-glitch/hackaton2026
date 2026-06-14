@@ -4,12 +4,34 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
 import type { LastStandingView, SpotBet, TurnOutcome } from '@bloop/game-last-standing';
-import { asLastStandingView, deviceLang, pickL, type Lang } from '../games/last-standing-view';
+import {
+  asLastStandingView,
+  deviceLang,
+  pickL,
+  type Lang,
+  type LastStandingEpilogue,
+} from '../games/last-standing-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard,
+  MultiplierBadge,
+  ScoreClimb,
+  haptics,
+  type EpilogueStanding,
+  type EpilogueSuperlative,
+} from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
+
+/**
+ * CC-2 base survivor crown (jeu-du-theme design param). The view publishes only
+ * the ALREADY-escalated `pointsAwarded`; the round multiplier is therefore
+ * derived client-side as `pointsAwarded / BASE_SURVIVOR_POINTS`. Kept as a local
+ * documented constant (NOT a value import) so the type-only import firewall holds.
+ */
+const BASE_SURVIVOR_POINTS = 3;
 
 const UNKNOWN: Omit<RoomPlayer, 'id'> = { profile: { nickname: '???', avatar: '' }, connected: false, isHost: false };
 
@@ -113,6 +135,54 @@ function BetButton({ label, color, onPress }: { label: string; color: string; on
   );
 }
 
+/**
+ * Map the CC-5 over-view epilogue onto the juice-kit superlative rows. Each
+ * award is EMPTY-STATE GATED: "Unbreakable" only when at least one player ran
+ * the table, "longest streak" only when somebody survived a round (value >= 1
+ * with named leaders), and "last one standing" only when the final round had a
+ * sole survivor. All copy is bilingual via the caller's L().
+ */
+function buildSuperlatives(
+  epilogue: LastStandingEpilogue,
+  names: (ids: readonly string[]) => string,
+  L: (fr: string, en: string) => string,
+): EpilogueSuperlative[] {
+  const out: EpilogueSuperlative[] = [];
+  if (epilogue.survivedAllRounds.length > 0) {
+    out.push({
+      key: 'unbreakable',
+      icon: '🛡️',
+      label: L('INCASSABLE', 'UNBREAKABLE'),
+      names: names(epilogue.survivedAllRounds),
+      detail: L('Survie à toutes les manches', 'Survived every single round'),
+      tone: 'win',
+    });
+  }
+  const streak = epilogue.longestSurvivalStreak;
+  if (streak.value > 0 && streak.players.length > 0) {
+    out.push({
+      key: 'streak',
+      icon: '🔥',
+      label: L('PLUS LONGUE SÉRIE', 'LONGEST STREAK'),
+      names: names(streak.players),
+      detail: L(`${streak.value} manche${streak.value > 1 ? 's' : ''} survécue${streak.value > 1 ? 's' : ''}`,
+        `${streak.value} round${streak.value > 1 ? 's' : ''} survived`),
+      tone: 'spice',
+    });
+  }
+  if (epilogue.lastOneStanding !== null) {
+    out.push({
+      key: 'last-standing',
+      icon: '👑',
+      label: L('DERNIER·E EN LICE', 'LAST ONE STANDING'),
+      names: names([epilogue.lastOneStanding]),
+      detail: L('Seul·e survivant·e de la manche finale', 'Sole survivor of the final round'),
+      tone: 'win',
+    });
+  }
+  return out;
+}
+
 export function LastStandingPlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendAction, leave } = useRoom();
@@ -133,6 +203,18 @@ export function LastStandingPlay({ code }: { code: string }) {
   useEffect(() => {
     if (ls === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
   }, [ls === null]);
+
+  // JUICE: fire a single medium impact when an elimination lands on the result
+  // beat (any non-'valid' outcome eliminates the spotlight). Keyed on turnSeq so
+  // it pulses exactly once per turn, not on every 250 ms re-render. The haptics
+  // util is itself reduced-motion-safe (no-ops when Reduce Motion is on).
+  const eliminated =
+    ls !== null && ls.phase === 'result' && ls.lastTurn !== null && ls.lastTurn.outcome !== 'valid';
+  const elimSeq = ls !== null && ls.phase !== 'over' ? ls.turnSeq : -1;
+  useEffect(() => {
+    if (eliminated) haptics.impact('medium');
+  }, [eliminated, elimSeq]);
+
   if (ls === null) return null;
 
   const left = secondsLeft(state.deadlineAt, now);
@@ -334,49 +416,78 @@ export function LastStandingPlay({ code }: { code: string }) {
           );
         })()}
 
-        {ls.phase === 'roundEnd' && (
-          <View style={{ gap: tokens.spacing.md, alignItems: 'center' }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>👑</AppText>
-            <AppText role="titleL" style={{ textAlign: 'center' }}>
-              {ls.roundWinners.length === 0
-                ? L('Personne ne survit !', 'Nobody survives!')
-                : ls.roundWinners.length === 1
-                  ? L(`${nick(ls.roundWinners[0]!)} survit !`, `${nick(ls.roundWinners[0]!)} survives!`)
-                  : L('Les survivants se partagent la couronne !', 'The survivors share the crown!')}
-            </AppText>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, justifyContent: 'center' }}>
-              {ls.roundWinners.map((id) => (
-                <View key={id} style={{ alignItems: 'center', gap: 2 }}>
-                  <Avatar name={nick(id)} size="md" ring="host" connected />
-                  <AppText role="caption" color="success">+{ls.pointsAwarded} pts</AppText>
-                </View>
-              ))}
-            </View>
-          </View>
-        )}
-
-        {ls.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {ranked(ls.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={nick(id)} size="md" />
-                <View style={{ flex: 1 }}>
-                  <AppText role="bodyStrong">{nick(id)}</AppText>
-                  <AppText role="caption" color="textMuted">
-                    {L(`🗣️ ${ls.wordsValidated[id] ?? 0} mots validés`, `🗣️ ${ls.wordsValidated[id] ?? 0} words validated`)}
-                  </AppText>
-                </View>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
+        {ls.phase === 'roundEnd' && (() => {
+          // JUICE — escalating survivorPoints chrome (CC-2). A later survival is
+          // worth more: derive the round multiplier from the escalated crown the
+          // view just paid vs the base survivor crown. Show the badge ONLY when
+          // it actually escalated (mult != 1) and the round paid out.
+          const mult = ls.pointsAwarded > 0
+            ? Math.round((ls.pointsAwarded / BASE_SURVIVOR_POINTS) * 10) / 10
+            : 1;
+          const escalated = ls.roundWinners.length > 0 && mult > 1;
+          return (
+            <View style={{ gap: tokens.spacing.md, alignItems: 'center' }}>
+              <AppText role="displayL" style={{ textAlign: 'center' }}>👑</AppText>
+              <AppText role="titleL" style={{ textAlign: 'center' }}>
+                {ls.roundWinners.length === 0
+                  ? L('Personne ne survit !', 'Nobody survives!')
+                  : ls.roundWinners.length === 1
+                    ? L(`${nick(ls.roundWinners[0]!)} survit !`, `${nick(ls.roundWinners[0]!)} survives!`)
+                    : L('Les survivants se partagent la couronne !', 'The survivors share the crown!')}
+              </AppText>
+              {/* Multiplier badge gated to a true escalation (mult != 1). */}
+              {escalated && (
+                <MultiplierBadge
+                  multiplier={mult}
+                  title={L('SURVIE EN OR', 'CLUTCH SURVIVAL')}
+                />
+              )}
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, justifyContent: 'center' }}>
+                {ls.roundWinners.map((id) => (
+                  <View key={id} style={{ alignItems: 'center', gap: 2 }}>
+                    <Avatar name={nick(id)} size="md" ring="host" connected />
+                    {/* The awarded crown climbs in (escalated value pops harder). */}
+                    <ScoreClimb value={ls.pointsAwarded} role="caption" color="success" prefix="+" suffix=" pts" />
+                  </View>
+                ))}
               </View>
-            ))}
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+            </View>
+          );
+        })()}
+
+        {ls.phase === 'over' && (() => {
+          // JUICE — game-over epilogue. Map the public scores onto the shared
+          // EpilogueCard standings (climbing scores + crown + sticker rows), and
+          // build the CC-5 superlative band from the derived epilogue payload.
+          // Epilogue cards render on the OVER screen ONLY (this branch).
+          const names = (ids: readonly string[]) => ids.map(nick).join(lang === 'fr' ? ' & ' : ' & ');
+          const standings: EpilogueStanding[] = ranked(ls.scores).map(([id, pts]) => ({
+            id, name: nick(id), score: pts,
+          }));
+          const superlatives: EpilogueSuperlative[] = buildSuperlatives(ls.epilogue, names, L);
+          return (
+            <View style={{ gap: tokens.spacing.lg }}>
+              <EpilogueCard
+                title={L('Fini ! 🎉', 'Game over! 🎉')}
+                standings={standings}
+                superlatives={superlatives}
+                footer={
+                  <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+                }
+              />
+              {/* Additive participation recap — preserves the per-player
+                  words-validated stat the prior leaderboard carried. */}
+              <View style={{ gap: tokens.spacing.xs }}>
+                {ranked(ls.scores).map(([id]) => (
+                  <AppText key={id} role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {L(`🗣️ ${nick(id)} — ${ls.wordsValidated[id] ?? 0} mots validés`,
+                      `🗣️ ${nick(id)} — ${ls.wordsValidated[id] ?? 0} words validated`)}
+                  </AppText>
+                ))}
+              </View>
+            </View>
+          );
+        })()}
 
         {/* Mid-game there is no "back to lobby" — leaving mid-game is a real leave. */}
         {ls.phase !== 'over' && (

@@ -8,6 +8,10 @@ import { asSpotlightGuessView, deviceLang, pickL, type Lang } from '../games/spo
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard, haptics, MultiplierBadge,
+  type EpilogueStanding, type EpilogueSuperlative,
+} from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -158,6 +162,12 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
   const guessKey = sg !== null && sg.phase === 'guess' ? sg.round : -1;
   useEffect(() => { setWheelDraft(50); }, [guessKey]);
 
+  // JUICE — one medium impact at the atomic reveal beat (the secret drops). Keyed
+  // on the round so it fires exactly once per round, in BOTH modes. haptics is a
+  // no-op under Reduce Motion / on web, so this is reduced-motion-safe by design.
+  const revealKey = sg !== null && sg.phase === 'reveal' ? sg.round : -1;
+  useEffect(() => { if (revealKey >= 0) haptics.impact('medium'); }, [revealKey]);
+
   useEffect(() => {
     if (sg === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
   }, [sg === null]);
@@ -194,6 +204,10 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
       </View>
     ));
 
+  // CC-5 epilogue helpers — join winner ids into a display name string.
+  const joinNames = (ids: readonly string[]): string =>
+    ids.map((id) => player(id).profile.nickname).join(L(' & ', ' & '));
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ padding: tokens.layout.screenPadding, gap: tokens.spacing.lg }}>
@@ -206,6 +220,16 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
               <AppText role="titleM" color={left <= 5 ? 'danger' : 'textSecondary'}>{left}s</AppText>
             )}
           </View>
+        )}
+
+        {/* JUICE (CC-2) — late-round score multiplier. Only on the weighted climax
+            rounds (multiplier > 1); the base-rate ×1 shows nothing. Self-hiding +
+            reduced-motion-safe via MultiplierBadge/Pop. */}
+        {sg.phase !== 'over' && sg.multiplier > 1 && (
+          <MultiplierBadge
+            multiplier={sg.multiplier}
+            title={sg.round + 1 >= sg.totalRounds ? L('DERNIÈRE MANCHE', 'FINAL ROUND') : L('POINTS DOUBLÉS', 'DOUBLE POINTS')}
+          />
         )}
 
         {/* ——— SCALE · target + talk (jeu-de-la-note) ——— */}
@@ -524,21 +548,66 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
           </View>
         )}
 
-        {/* ——— OVER ——— */}
-        {sg.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {ranked(sg.scores)[0] !== undefined && (
-              <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
-                {sg.mode === 'scale'
-                  ? `${L('🔮 Télépathe du groupe : ', '🔮 Mind reader of the group: ')}${player(ranked(sg.scores)[0]![0]).profile.nickname}`
-                  : `${L('🕵️ Fin limier : ', '🕵️ Sharpest sleuth: ')}${player(ranked(sg.scores)[0]![0]).profile.nickname}`}
-              </AppText>
-            )}
-            {scoreRows(sg.scores)}
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+        {/* ——— OVER — CC-5 retention epilogue (EpilogueCard + superlatives) ——— */}
+        {sg.phase === 'over' && (() => {
+          const standings: EpilogueStanding[] = ranked(sg.scores).map(([id, pts]) => ({
+            id, name: player(id).profile.nickname, score: pts,
+          }));
+          const superlatives: EpilogueSuperlative[] = [];
+          // MVP — sole crown holder (null on a tie → no MVP banner, the leaderboard
+          // crown still marks the top row).
+          if (sg.mvp !== null) {
+            superlatives.push({
+              key: 'mvp', icon: '🏆', tone: 'win',
+              label: L('MVP', 'MVP'),
+              names: player(sg.mvp).profile.nickname,
+              detail: sg.mode === 'scale'
+                ? L('Plus grosse moisson de la partie', 'Biggest haul of the game')
+                : L('Le crâne le plus affûté', 'Sharpest mind in the room'),
+            });
+          }
+          // Photo finish — top-2 within closeFinishThreshold.
+          if (sg.closeFinish) {
+            superlatives.push({
+              key: 'close', icon: '🤏', tone: 'spice',
+              label: L('FIN SERRÉE', 'PHOTO FINISH'),
+              names: joinNames(ranked(sg.scores).slice(0, 2).map(([id]) => id)),
+              detail: L('Ça s’est joué à un cheveu !', 'Decided by a hair!'),
+            });
+          }
+          // Best mind-reader(s) — most perfect reads (only if anyone read at all).
+          if (sg.bestMindReaders.length > 0 && sg.bestMindReads > 0) {
+            superlatives.push({
+              key: 'reader', icon: '🔮', tone: 'win',
+              label: L('TÉLÉPATHE', 'MIND READER'),
+              names: joinNames(sg.bestMindReaders),
+              detail: sg.bestMindReads === 1
+                ? L('1 lecture parfaite', '1 perfect read')
+                : L(`${sg.bestMindReads} lectures parfaites`, `${sg.bestMindReads} perfect reads`),
+            });
+          }
+          // Most-fooled — most whiffed rounds (only if anyone whiffed at all).
+          if (sg.mostFooled.length > 0 && sg.mostFooledWhiffs > 0) {
+            superlatives.push({
+              key: 'fooled', icon: '🤡', tone: 'spice',
+              label: L('LE PLUS BERNÉ', 'MOST FOOLED'),
+              names: joinNames(sg.mostFooled),
+              detail: sg.mostFooledWhiffs === 1
+                ? L('1 manche à côté de la plaque', '1 round way off')
+                : L(`${sg.mostFooledWhiffs} manches à côté`, `${sg.mostFooledWhiffs} rounds way off`),
+            });
+          }
+          return (
+            <EpilogueCard
+              title={L('Fini ! 🎉', 'Game over! 🎉')}
+              standings={standings}
+              superlatives={superlatives}
+              footer={
+                <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+              }
+            />
+          );
+        })()}
 
         {/* Mid-game there is no "back to lobby" — leaving mid-game is a real leave. */}
         {sg.phase !== 'over' && (

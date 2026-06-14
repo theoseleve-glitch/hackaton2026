@@ -277,6 +277,13 @@ interface ViewBase {
   spotlightId: PlayerId;
   scores: Record<PlayerId, number>;
   connected: Record<PlayerId, boolean>;
+  /**
+   * P1 (CC-2) — PUBLIC late-round score multiplier for the CURRENT round (×1 by
+   * default; ×2 on the weighted climax rounds per `lateRoundMultiplier`). Pure
+   * fold over round/totalRounds/config — carries no secret. Drives the client's
+   * "DOUBLE POINTS · ×N" chrome; the 'over' epilogue variant omits it (no round).
+   */
+  multiplier: number;
 }
 
 export type SpotlightGuessView =

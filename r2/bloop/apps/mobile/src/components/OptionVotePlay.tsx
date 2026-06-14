@@ -8,6 +8,10 @@ import { asOptionVoteView, deviceLang, pickL, type Lang } from '../games/option-
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard, StreakTag as StreakTagChip, haptics,
+  type EpilogueStanding, type EpilogueSuperlative,
+} from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -62,10 +66,16 @@ function Split({ result, item, players, lang }: {
   return (
     <View style={{ gap: tokens.spacing.lg }}>
       {result.majority === null && (
-        <View style={{ backgroundColor: theme.xp, borderRadius: tokens.radii.lg, padding: tokens.spacing.md }}>
+        <View style={{ backgroundColor: theme.xp, borderRadius: tokens.radii.lg, padding: tokens.spacing.md, gap: tokens.spacing.xs }}>
           <AppText role="titleM" style={{ textAlign: 'center' }}>
             {lang === 'fr' ? '⚖️ ÉGALITÉ PARFAITE !' : '⚖️ PERFECT SPLIT!'}
           </AppText>
+          {/* P1 tie-relief — a consoled split is a *good* outcome: everyone scores. */}
+          {result.tieReliefApplied && (
+            <AppText role="bodyStrong" color="success" style={{ textAlign: 'center' }}>
+              {lang === 'fr' ? '🎁 Pile au milieu — tout le monde +1 !' : '🎁 Dead even — everyone +1!'}
+            </AppText>
+          )}
         </View>
       )}
       {sides.map((side) => {
@@ -218,6 +228,38 @@ function PredictionsReveal({ predictions, item, majority, players, lang }: {
   );
 }
 
+/**
+ * P1 CC-2 reveal/over "on fire" wall — the now-PUBLIC per-player streaks, each as
+ * a brand 🔥 xN chip (juice-kit StreakTag, reduced-motion-safe). Only players on a
+ * run of >= 2 surface a chip; a streak of one isn't a streak, so the row hides
+ * entirely when nobody qualifies.
+ */
+function StreaksRow({ streaks, players, lang }: {
+  streaks: readonly { playerId: string; streak: number; bonus: number }[];
+  players: readonly RoomPlayer[]; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const byId = new Map(players.map((p) => [p.id, p]));
+  const nick = (id: string) => (byId.get(id) ?? { id, ...UNKNOWN }).profile.nickname;
+  const onFire = streaks.filter((s) => s.streak >= 2);
+  if (onFire.length === 0) return null;
+  return (
+    <View style={{ gap: tokens.spacing.sm }}>
+      <AppText role="overline" color="brand">{L('🔥 EN FEU', '🔥 ON FIRE')}</AppText>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm, alignItems: 'center' }}>
+        {onFire.map((s) => (
+          <View key={s.playerId} style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs }}>
+            <Avatar name={nick(s.playerId)} size="sm" />
+            <StreakTagChip count={s.streak} label={nick(s.playerId)} />
+          </View>
+        ))}
+      </View>
+      <View style={{ height: 1, backgroundColor: theme.border }} />
+    </View>
+  );
+}
+
 export function OptionVotePlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendAction, leave } = useRoom();
@@ -235,6 +277,18 @@ export function OptionVotePlay({ code }: { code: string }) {
   useEffect(() => {
     if (ov === null) router.replace(`/room/${code}/lobby`);
   }, [ov === null]);
+
+  // Haptic light when MY own hidden majority-prediction landed — fired once as the
+  // reveal arrives (keyed on the round so it never re-buzzes on re-render). The
+  // haptics util is itself reduced-motion-safe (no-op when Reduce Motion is on).
+  const myReadHitKey = (ov?.phase === 'reveal' || ov?.phase === 'debate')
+    && state.playerId !== null
+    && ov.result.predictions.some((p) => p.playerId === state.playerId && p.correct)
+    ? `${ov.round}` : null;
+  useEffect(() => {
+    if (myReadHitKey !== null) haptics.impact('light');
+  }, [myReadHitKey]);
+
   if (ov === null) return null;
 
   const left = secondsLeft(state.deadlineAt, now);
@@ -331,6 +385,8 @@ export function OptionVotePlay({ code }: { code: string }) {
               </AppText>
             )}
             <Split result={ov.result} item={ov.item} players={state.players} lang={lang} />
+            {/* P1 CC-2 — public "🔥 xN" streak wall, now that runs are revealed. */}
+            <StreaksRow streaks={ov.result.streaks} players={state.players} lang={lang} />
             {/* CC-1 — public, by-name majority predictions: "tu connais pas tes potes". */}
             <PredictionsReveal
               predictions={ov.result.predictions}
@@ -361,46 +417,66 @@ export function OptionVotePlay({ code }: { code: string }) {
         )}
 
         {ov.phase === 'over' && (() => {
+          // P1 CC-5 — the cliffhanger epilogue is the SOURCE OF TRUTH for the
+          // podium (already-public final scores, ordered + tie-aware). Map it onto
+          // the juice-kit EpilogueCard: climbing scores, crown, sticker superlatives.
+          const cliff = ov.cliffhanger;
+          const standings: EpilogueStanding[] = cliff.leaderboard.map((e) => ({
+            id: e.playerId,
+            name: player(e.playerId).profile.nickname,
+            score: e.score,
+          }));
           const contrarian = ov.scoring === 'majority-herd'
             ? ranked(ov.minorityCount).filter(([, n]) => n > 0)[0]
             : undefined;
+          const supers: EpilogueSuperlative[] = [];
+          // CC-5 — "tout se joue maintenant": a photo-finish crown is its own award.
+          if (cliff.mvp !== null) {
+            supers.push({
+              key: 'mvp', icon: '🏆', label: L('MVP', 'MVP'),
+              names: player(cliff.mvp).profile.nickname,
+              detail: cliff.closeFinish
+                ? L(`Au finish — ${cliff.topGap} pt d'écart !`, `Down to the wire — won by ${cliff.topGap}!`)
+                : undefined,
+            });
+          } else if (cliff.closeFinish) {
+            supers.push({
+              key: 'tie-crown', icon: '🤝', label: L('COURONNE PARTAGÉE', 'SHARED CROWN'),
+              names: standings.filter((s) => s.score === standings[0]?.score).map((s) => s.name).join(' & '),
+              detail: L('Ex æquo — personne ne lâche !', 'Dead heat — nobody backed down!'),
+              tone: 'spice',
+            });
+          }
+          // CC-1 — the group Oracle (best predictor) keeps its flagship call-out.
+          if (ov.scoring === 'predict-majority' && ranked(ov.scores)[0] !== undefined) {
+            const lastRight = ov.lastPredictions.filter((p) => p.correct).length;
+            supers.push({
+              key: 'oracle', icon: '🔮', label: L('ORACLE DU GROUPE', 'GROUP ORACLE'),
+              names: player(ranked(ov.scores)[0]![0]).profile.nickname,
+              detail: ov.lastPredictions.length > 0
+                ? L(`Dernière manche : ${lastRight}/${ov.lastPredictions.length} ont lu la salle.`,
+                    `Last round: ${lastRight}/${ov.lastPredictions.length} read the room.`)
+                : undefined,
+            });
+          }
+          // The non-scoring Contrarian superlative (majority-herd only).
+          if (contrarian !== undefined) {
+            supers.push({
+              key: 'contrarian', icon: '🐐', label: L("L'ESPRIT CONTRAIRE", 'THE CONTRARIAN'),
+              names: player(contrarian[0]).profile.nickname,
+              detail: L(`${contrarian[1]}× dans la minorité`, `${contrarian[1]}× in the minority`),
+              tone: 'spice',
+            });
+          }
           return (
-            <View style={{ gap: tokens.spacing.lg }}>
-              <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-              {ov.scoring === 'predict-majority' && ranked(ov.scores)[0] !== undefined && (
-                <AppText role="body" color="textSecondary" style={{ textAlign: 'center' }}>
-                  {L("🔮 Oracle du groupe : ", '🔮 Oracle of the group: ')}{player(ranked(ov.scores)[0]![0]).profile.nickname}
-                </AppText>
-              )}
-              {/* CC-1 — the final round's reads persist onto the podium. */}
-              {ov.scoring === 'predict-majority' && ov.lastPredictions.length > 0 && (() => {
-                const right = ov.lastPredictions.filter((p) => p.correct).length;
-                return (
-                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
-                    {L(`Dernière manche : ${right}/${ov.lastPredictions.length} ont lu la salle.`,
-                      `Last round: ${right}/${ov.lastPredictions.length} read the room.`)}
-                  </AppText>
-                );
-              })()}
-              {ranked(ov.scores).map(([id, pts], i) => (
-                <View key={id} style={{
-                  flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                  borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-                }}>
-                  <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                  <Avatar name={player(id).profile.nickname} size="md" />
-                  <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
-                  <AppText role="headline" color="xp">{pts} pts</AppText>
-                </View>
-              ))}
-              {contrarian !== undefined && (
-                <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
-                  {L(`🐐 L'esprit contraire : ${player(contrarian[0]).profile.nickname} (${contrarian[1]}× minoritaire)`,
-                    `🐐 The Contrarian: ${player(contrarian[0]).profile.nickname} (${contrarian[1]}× in the minority)`)}
-                </AppText>
-              )}
-              <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-            </View>
+            <EpilogueCard
+              title={L('Fini ! 🎉', 'Game over! 🎉')}
+              standings={standings}
+              superlatives={supers}
+              footer={
+                <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+              }
+            />
           );
         })()}
 

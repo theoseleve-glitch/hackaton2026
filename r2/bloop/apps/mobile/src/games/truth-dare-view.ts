@@ -1,5 +1,8 @@
 // IMPORT FIREWALL: type-only — erased at compile time; truth-dare server logic never enters the bundle.
-import type { LText, TdLabels, TdResult, TruthDareView } from '@bloop/game-truth-dare';
+import type { DramaTag, LText, Reaction, ReactionCounts, TdLabels, TdResult, TruthDareView } from '@bloop/game-truth-dare';
+
+/** CC-4 fixed-enum reaction set (must match the package's REACTIONS) — used by the narrow + the react bar. */
+export const TD_REACTIONS = ['ouch', 'respect', 'coward'] as const satisfies readonly Reaction[];
 
 export const TRUTH_DARE_GAME_IDS = ['truth-or-dare-2', 'truth-or-drink'] as const;
 
@@ -28,6 +31,15 @@ const isChoice = (v: unknown): v is 'truth' | 'dare' => v === 'truth' || v === '
 const isTier = (v: unknown): boolean => v === 'soft' || v === 'party' || v === 'spicy';
 const isVerdict = (v: unknown): v is 'done' | 'chickened' => v === 'done' || v === 'chickened';
 const isTurnVerdict = (v: unknown): boolean => isVerdict(v) || v === 'passed';
+// CC-5 drama stamp (derived from the public tally) — 'contested' | 'roasted' | null.
+const isDramaTag = (v: unknown): v is DramaTag => v === null || v === 'contested' || v === 'roasted';
+// CC-4 escape-reaction enum + its public per-enum count plate (counts only, no names).
+const isReaction = (v: unknown): v is Reaction => (TD_REACTIONS as readonly string[]).includes(v as string);
+const isReactionCounts = (v: unknown): v is ReactionCounts => {
+  if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+  const o = v as Record<string, unknown>;
+  return typeof o.ouch === 'number' && typeof o.respect === 'number' && typeof o.coward === 'number';
+};
 
 /** Scaffolding present in every non-over view (rotation rail + HUD). */
 const isCommon = (o: Record<string, unknown>): boolean =>
@@ -52,7 +64,10 @@ const isResult = (v: unknown): v is TdResult => {
     && typeof o.pointsAwarded === 'number'
     && (o.forfeitText === null || isLText(o.forfeitText))
     && typeof spec === 'object' && spec !== null
-    && typeof spec.correct === 'number' && typeof spec.total === 'number' && typeof spec.pointsEach === 'number';
+    && typeof spec.correct === 'number' && typeof spec.total === 'number' && typeof spec.pointsEach === 'number'
+    // Wave-2 (CC-5 / CC-4): drama stamp + per-enum reaction counts ride on the result card.
+    && isDramaTag(o.dramaTag)
+    && (o.reactions === null || isReactionCounts(o.reactions));
 };
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
@@ -85,7 +100,13 @@ export function asTruthDareView(v: unknown): TruthDareView | null {
       ? (v as TruthDareView) : null;
   }
   if (o.phase === 'score') {
+    // CC-4: the live escape-react beat — public per-enum counts, owner-only echo,
+    // and the viewer-specific eligibility gate. All null/false when the beat is off
+    // (reactOnEscape false, or the turn was completed).
     return isResult(o.lastResult) && (o.nextActive === null || typeof o.nextActive === 'string')
+      && (o.reactionCounts === null || isReactionCounts(o.reactionCounts))
+      && (o.youReacted === null || isReaction(o.youReacted))
+      && typeof o.youCanReact === 'boolean'
       ? (v as TruthDareView) : null;
   }
   return null;

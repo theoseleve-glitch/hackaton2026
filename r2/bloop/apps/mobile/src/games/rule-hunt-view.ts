@@ -4,6 +4,7 @@ import type {
   LText,
   NoteBet,
   RoundOutcome,
+  RuleHuntEpilogue,
   RuleHuntView,
   SeatView,
   TribunalResult,
@@ -12,7 +13,9 @@ import type {
 // Re-export the heat-check bet TYPES (type-only) so the Play component can read the
 // spotlight view's myFlag/myNote echoes — and shape its flagBreak/noteSuspicious
 // actions — without reaching past the firewall into the game's runtime module.
-export type { FlagBet, NoteBet };
+// RuleHuntEpilogue is re-exported the same way so the `over` screen can map the
+// Wave-2 crime-parfait superlative onto the shared EpilogueCard juice component.
+export type { FlagBet, NoteBet, RuleHuntEpilogue };
 
 export const RULE_HUNT_GAME_IDS = ['trouvez-la-regle'] as const;
 
@@ -56,6 +59,22 @@ const isOutcome = (v: unknown): v is RoundOutcome => {
 
 const isCandidates = (v: unknown): v is LText[] => Array.isArray(v) && v.every(isLText);
 
+const isPlayerIds = (v: unknown): v is string[] =>
+  Array.isArray(v) && v.every((x) => typeof x === 'string');
+
+// CC-5 epilogue (Wave-2): derived-at-over award block. mvp may be null on a tie;
+// the crime-parfait superlative is a length + holder list (empty when nobody
+// earned it). Aggregate-only — no per-voter data ever crosses the firewall.
+const isEpilogue = (v: unknown): v is RuleHuntEpilogue => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  const cs = o.cleanStreak as Record<string, unknown> | null;
+  return (o.mvp === null || typeof o.mvp === 'string')
+    && typeof o.topGap === 'number' && typeof o.closeFinish === 'boolean'
+    && typeof cs === 'object' && cs !== null
+    && typeof cs.length === 'number' && isPlayerIds(cs.holders);
+};
+
 function baseOk(o: Record<string, unknown>): boolean {
   return typeof o.round === 'number' && typeof o.totalRounds === 'number'
     && Array.isArray(o.seats) && o.seats.every(isSeat)
@@ -65,7 +84,10 @@ function baseOk(o: Record<string, unknown>): boolean {
     && (o.myRule === null || isLText(o.myRule))
     && typeof o.myAccusationsLeft === 'number' && typeof o.teamGuessesLeft === 'number'
     && Array.isArray(o.usedCandidates) && o.usedCandidates.every((x) => typeof x === 'number')
-    && isTribunalResult(o.lastTribunal ?? null);
+    && isTribunalResult(o.lastTribunal ?? null)
+    // Wave-2 PUBLIC aggregates, present on EVERY phase: per-target suspicion meter
+    // + the crime-parfait streak. Both leak nothing (per-target totals only).
+    && isRec(o.heat, 'number') && typeof o.cleanStreak === 'number';
 }
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
@@ -96,10 +118,15 @@ export function asRuleHuntView(v: unknown): RuleHuntView | null {
       ? (v as RuleHuntView) : null;
   }
   if (o.phase === 'reveal') {
-    return isOutcome(o.outcome) && isCandidates(o.candidates) ? (v as RuleHuntView) : null;
+    // Wave-2 CC-2 payoff chrome: the coolest (zero-heat) survivors + per-head bonus.
+    return isOutcome(o.outcome) && isCandidates(o.candidates)
+      && isPlayerIds(o.coolestFollowers) && typeof o.coolBonusEach === 'number'
+      ? (v as RuleHuntView) : null;
   }
   if (o.phase === 'over') {
-    return o.endReason === 'finished' || o.endReason === 'roomCollapsed' ? (v as RuleHuntView) : null;
+    // Wave-2 CC-5: the derived-at-over epilogue (mvp + crime-parfait superlative).
+    return (o.endReason === 'finished' || o.endReason === 'roomCollapsed') && isEpilogue(o.epilogue)
+      ? (v as RuleHuntView) : null;
   }
   return null;
 }

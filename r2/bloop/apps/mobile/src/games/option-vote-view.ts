@@ -1,5 +1,7 @@
 // IMPORT FIREWALL: type-only — erased at compile time; option-vote server logic never enters the bundle.
-import type { Ballot, LText, OptionVoteView, PredictionReveal, RoundResult } from '@bloop/game-option-vote';
+import type {
+  Ballot, Cliffhanger, LText, OptionVoteView, PredictionReveal, RoundResult, StreakTag,
+} from '@bloop/game-option-vote';
 
 export const OPTION_VOTE_GAME_IDS = ['tu-preferes', 'gauche-ou-droite'] as const;
 
@@ -43,6 +45,34 @@ const isPredictionReveal = (v: unknown): v is PredictionReveal => {
 const isPredictionList = (v: unknown): v is PredictionReveal[] =>
   v === undefined || (Array.isArray(v) && v.every(isPredictionReveal));
 
+// P1 CC-2: one public, by-name streak TAG promoted at reveal ("🔥 x3").
+const isStreakTag = (v: unknown): v is StreakTag => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return typeof o.playerId === 'string'
+    && typeof o.streak === 'number'
+    && typeof o.bonus === 'number';
+};
+
+// Tolerant: drift that omits `streaks` is treated as an empty tag list.
+const isStreakList = (v: unknown): v is StreakTag[] =>
+  v === undefined || (Array.isArray(v) && v.every(isStreakTag));
+
+// P1 CC-5: the over-screen cliffhanger epilogue, derived from public final scores.
+const isLeaderboardEntry = (v: unknown): boolean => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return typeof o.playerId === 'string' && typeof o.score === 'number' && typeof o.rank === 'number';
+};
+const isCliffhanger = (v: unknown): v is Cliffhanger => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return Array.isArray(o.leaderboard) && o.leaderboard.every(isLeaderboardEntry)
+    && typeof o.topGap === 'number'
+    && typeof o.closeFinish === 'boolean'
+    && (typeof o.mvp === 'string' || o.mvp === null);
+};
+
 const isResult = (v: unknown): v is RoundResult => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
@@ -53,7 +83,11 @@ const isResult = (v: unknown): v is RoundResult => {
     && typeof o.picks === 'object' && o.picks !== null
     && Array.isArray(o.awarded)
     // CC-1 KEYSTONE — the public predictions-by-name the reveal renders.
-    && isPredictionList(o.predictions);
+    && isPredictionList(o.predictions)
+    // P1 CC-2 — public "🔥 xN" streak tags (tolerant of pre-feature drift).
+    && isStreakList(o.streaks)
+    // P1 tie-relief — the "perfect split, everyone +1" banner flag.
+    && (typeof o.tieReliefApplied === 'boolean' || o.tieReliefApplied === undefined);
 };
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
@@ -64,10 +98,14 @@ export function asOptionVoteView(v: unknown): OptionVoteView | null {
   if (!scoringOk || !isRec(o.scores, 'number')) return null;
   if (o.phase === 'over') {
     // CC-1 KEYSTONE — the final round's named predictions persist onto the podium.
+    // P1 CC-5 KEYSTONE — the cliffhanger epilogue (tolerant of pre-feature drift).
     return isRec(o.minorityCount, 'number') && isPredictionList(o.lastPredictions)
+      && (o.cliffhanger === undefined || isCliffhanger(o.cliffhanger))
       ? (v as OptionVoteView) : null;
   }
-  const roundOk = typeof o.round === 'number' && typeof o.totalRounds === 'number' && isItem(o.item ?? null);
+  const roundOk = typeof o.round === 'number' && typeof o.totalRounds === 'number' && isItem(o.item ?? null)
+    // P1 CC-2 — public per-player streak counters ride every in-match phase.
+    && (isRec(o.streak, 'number') || o.streak === undefined);
   if (!roundOk) return null;
   if (o.phase === 'choose') {
     // CC-1 KEYSTONE — owner-only echo (A/B/null) + aggregate "how many predicted".

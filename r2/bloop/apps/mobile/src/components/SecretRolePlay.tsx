@@ -3,11 +3,25 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
-import type { VoteRecord } from '@bloop/game-secret-role';
-import { asSecretRoleView, deviceLang, pickL, type Lang } from '../games/secret-role-view';
+import type { SessionCliffhanger, VoteRecord } from '@bloop/game-secret-role';
+import {
+  asSecretRoleView,
+  deviceLang,
+  pickL,
+  secretRoleMatchMultiplier,
+  type Lang,
+} from '../games/secret-role-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard,
+  MultiplierBadge,
+  SuperlativeRow,
+  haptics,
+  type EpilogueStanding,
+  type EpilogueSuperlative,
+} from './juice';
 import { Avatar, VoteCard } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
 
@@ -130,6 +144,65 @@ function TallyBars({ record, players, lang }: { record: VoteRecord; players: rea
   );
 }
 
+/**
+ * Wave-2 CC-5 cliffhanger -> juice superlatives. Pure fold over the ALREADY-PUBLIC
+ * payload (win streak, ace detective, most caught-with hits) into bilingual
+ * {@link EpilogueSuperlative} rows. Shared by the finalReveal teaser and the over
+ * epilogue so both screens phrase the night identically.
+ */
+function cliffhangerSuperlatives(
+  c: SessionCliffhanger,
+  nick: (id: string) => string,
+  L: (fr: string, en: string) => string,
+): EpilogueSuperlative[] {
+  const out: EpilogueSuperlative[] = [];
+
+  // Consecutive-win streak across matches (civilians vs impostor).
+  if (c.streak.side !== null && c.streak.count >= 2) {
+    const civ = c.streak.side === 'civilians';
+    out.push({
+      key: 'streak',
+      icon: civ ? '🕵️' : '🎭',
+      label: L('SÉRIE EN COURS', 'WIN STREAK'),
+      names: civ
+        ? L(`Les enquêteurs mènent ${c.streak.count}-0`, `Hunters on a ${c.streak.count}-0 run`)
+        : L(`L'imposteur enchaîne ×${c.streak.count}`, `The impostor on a ×${c.streak.count} run`),
+      detail: L('Une manche pour tout renverser…', 'One match can flip the night…'),
+      tone: civ ? 'win' : 'spice',
+    });
+  }
+
+  // Ace detective — the night's sole points leader (civilians score by catching).
+  if (c.detectiveMvp !== null) {
+    out.push({
+      key: 'mvp',
+      icon: '🏆',
+      label: L('AS DE L’ENQUÊTE', 'ACE DETECTIVE'),
+      names: nick(c.detectiveMvp),
+      detail: L('Meilleur flair de la soirée', 'Best nose of the night'),
+      tone: 'win',
+    });
+  }
+
+  // Sharpest sleuth by raw catches participated in (omit when nobody caught anyone).
+  const hits = Object.entries(c.detectiveHits).sort((a, b) => b[1] - a[1]);
+  if (hits.length > 0 && hits[0]![1] > 0) {
+    const [topId, n] = hits[0]!;
+    if (topId !== c.detectiveMvp) {
+      out.push({
+        key: 'hits',
+        icon: '🔎',
+        label: L('LIMIER', 'SHARPEST SLEUTH'),
+        names: nick(topId),
+        detail: L(`${n} démasquage${n > 1 ? 's' : ''} en équipe`, `${n} team unmask${n > 1 ? 's' : ''}`),
+        tone: 'neutral',
+      });
+    }
+  }
+
+  return out;
+}
+
 export function SecretRolePlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendAction, leave } = useRoom();
@@ -142,6 +215,15 @@ export function SecretRolePlay({ code }: { code: string }) {
   useEffect(() => {
     if (sv === null) router.replace(`/room/${code}/lobby`);
   }, [sv === null]);
+
+  // Heavy haptic the instant the impostor is unmasked (once per match's reveal).
+  // Re-fires when the finalReveal match changes; the kit's haptics util is a
+  // no-op under Reduce Motion / on unsupported platforms, so this stays safe.
+  const revealMatch = sv !== null && sv.phase === 'finalReveal' ? sv.result.match : -1;
+  useEffect(() => {
+    if (revealMatch >= 0) haptics.impact('heavy');
+  }, [revealMatch]);
+
   if (sv === null) return null;
 
   const left = secondsLeft(state.deadlineAt, now);
@@ -316,8 +398,22 @@ export function SecretRolePlay({ code }: { code: string }) {
         {sv.phase === 'finalReveal' && (() => {
           const r = sv.result;
           const impostorWon = r.winners === 'impostor';
+          // CC-2 doubled-finale chrome: only show when this match was weighted up.
+          const mult = secretRoleMatchMultiplier(r.match);
+          const cliffSupers = cliffhangerSuperlatives(
+            sv.cliffhanger,
+            (id) => player(id).profile.nickname,
+            L,
+          );
           return (
             <View style={{ gap: tokens.spacing.lg }}>
+              {mult !== 1 && (
+                <MultiplierBadge
+                  multiplier={mult}
+                  title={L('MANCHE DOUBLÉE', 'DOUBLED MATCH')}
+                  tone="dare"
+                />
+              )}
               <View style={{ backgroundColor: impostorWon ? theme.dare : theme.truth, borderRadius: tokens.radii.xl, padding: tokens.spacing.lg }}>
                 <AppText role="titleL" style={{ textAlign: 'center', color: '#FFFFFF' }}>
                   {impostorWon
@@ -355,31 +451,46 @@ export function SecretRolePlay({ code }: { code: string }) {
                   <AppText role="headline" color="xp">+{pts}</AppText>
                 </View>
               ))}
+              {/* CC-5 cliffhanger teaser on the way to the next match (epilogue building blocks). */}
+              {cliffSupers.length > 0 && (
+                <View style={{ gap: tokens.spacing.sm }}>
+                  <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+                    {L(`MANCHE ${sv.cliffhanger.matchesPlayed} TERMINÉE`, `MATCH ${sv.cliffhanger.matchesPlayed} DONE`)}
+                  </AppText>
+                  {cliffSupers.map(({ key, ...s }) => <SuperlativeRow key={key} {...s} />)}
+                </View>
+              )}
             </View>
           );
         })()}
 
-        {sv.phase === 'over' && (
-          <View style={{ gap: tokens.spacing.lg }}>
-            <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-            {ranked(sv.scores).map(([id, pts], i) => (
-              <View key={id} style={{
-                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
-                borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, ...tokens.elevation.e1,
-              }}>
-                <AppText role="titleM">{i === 0 ? '👑' : i + 1}</AppText>
-                <Avatar name={player(id).profile.nickname} size="md" />
-                <AppText role="bodyStrong" style={{ flex: 1 }}>{player(id).profile.nickname}</AppText>
-                <AppText role="headline" color="xp">{pts} pts</AppText>
-              </View>
-            ))}
-            <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
-              {L(`${sv.results.filter((r) => r.winners === 'impostor').length} victoire(s) d'imposteur sur ${sv.results.length} manche(s)`,
-                `${sv.results.filter((r) => r.winners === 'impostor').length} impostor win(s) across ${sv.results.length} match(es)`)}
-            </AppText>
-            <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
-          </View>
-        )}
+        {sv.phase === 'over' && (() => {
+          // CC-5 epilogue: the cliffhanger drives the superlative band; the public
+          // session scores become the ranked standings (crown + climbing pts).
+          const standings: EpilogueStanding[] = ranked(sv.scores).map(([id, pts]) => ({
+            id,
+            name: player(id).profile.nickname,
+            score: pts,
+          }));
+          const supers = cliffhangerSuperlatives(sv.cliffhanger, (id) => player(id).profile.nickname, L);
+          const impostorWins = sv.results.filter((r) => r.winners === 'impostor').length;
+          return (
+            <EpilogueCard
+              title={L('Fini ! 🎉', 'Game over! 🎉')}
+              standings={standings}
+              superlatives={supers}
+              footer={
+                <View style={{ gap: tokens.spacing.lg }}>
+                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {L(`${impostorWins} victoire(s) d'imposteur sur ${sv.results.length} manche(s)`,
+                      `${impostorWins} impostor win(s) across ${sv.results.length} match(es)`)}
+                  </AppText>
+                  <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+                </View>
+              }
+            />
+          );
+        })()}
 
         {sv.phase !== 'over' && (
           <SecondaryButton label={L('Quitter la partie', 'Leave Game')} onPress={() => { leave(); router.replace('/'); }} />

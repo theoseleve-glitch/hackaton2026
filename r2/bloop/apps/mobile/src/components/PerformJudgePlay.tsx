@@ -15,8 +15,20 @@ import { asPerformJudgeView, deviceLang, pickL, type Lang } from '../games/perfo
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
+import {
+  EpilogueCard,
+  haptics,
+  MultiplierBadge,
+  type EpilogueStanding,
+  type EpilogueSuperlative,
+} from './juice';
 import { Avatar } from './players';
 import { AppText, PrimaryButton, SecondaryButton } from './ui';
+
+// CC-2 — the armed final-lap multiplier (every PERFORM_JUDGE Money-Round config
+// uses 1.5). The view exposes only the boolean `isFinalLap`; this is the value it
+// flags. Kept here so the badge can scream the exact "×1.5".
+const MONEY_ROUND_MULTIPLIER = 1.5;
 
 const UNKNOWN: Omit<RoomPlayer, 'id'> = { profile: { nickname: '???', avatar: '' }, connected: false, isHost: false };
 
@@ -192,6 +204,15 @@ export function PerformJudgePlay({ code }: { code: string }) {
   useEffect(() => {
     if (pj === null) router.replace(`/room/${code}/lobby`);
   }, [pj === null]);
+
+  // Medium impact on the reveal beat — the result stamp lands with a thud.
+  // No-op under Reduce Motion (haptics util gates on it). Fires once per entry
+  // into 'reveal' since the phase string is the only dependency.
+  const phase = pj?.phase ?? null;
+  useEffect(() => {
+    if (phase === 'reveal') haptics.impact('medium');
+  }, [phase]);
+
   if (pj === null) return null;
 
   const left = secondsLeft(state.deadlineAt, now);
@@ -219,12 +240,52 @@ export function PerformJudgePlay({ code }: { code: string }) {
   );
 
   if (pj.phase === 'over') {
+    const epi = pj.epilogue;
+    // Pre-join names for the crowd favourite (≥1 performer who drew the most
+    // reactions). Empty when nobody reacted all match — that card is skipped.
+    const crowdNames = epi.crowdFavourite.map(nick).join(L(' & ', ' & '));
+    const standings: EpilogueStanding[] = ranked(pj.scores).map(([id, score]) => ({
+      id, name: nick(id), score,
+    }));
+    // CC-5 superlatives — MVP (sole top scorer), crowd favourite (most reacts),
+    // and the photo-finish call-out. All derived from already-public state.
+    const superlatives: EpilogueSuperlative[] = [];
+    if (epi.bestPerformer !== null) {
+      superlatives.push({
+        key: 'mvp', icon: '🏆', tone: 'win',
+        label: L('MVP', 'MVP'),
+        names: nick(epi.bestPerformer),
+      });
+    }
+    if (epi.crowdFavourite.length > 0) {
+      superlatives.push({
+        key: 'crowd', icon: '🔥', tone: 'spice',
+        label: L('CHOUCHOU DU PUBLIC', 'CROWD FAVOURITE'),
+        names: crowdNames,
+        detail: L('A déclenché le plus de réactions', 'Sparked the most crowd reactions'),
+      });
+    }
+    if (epi.closeFinish) {
+      superlatives.push({
+        key: 'photo', icon: '🤏', tone: 'neutral',
+        label: L('FINISH SERRÉ', 'PHOTO FINISH'),
+        names: L(`${epi.topGap} pt d'écart en tête`, `${epi.topGap} pt at the top`),
+        detail: epi.nailbiters > 0
+          ? L(`${epi.nailbiters} tour(s) sur le fil`, `${epi.nailbiters} nailbiter turn(s)`)
+          : undefined,
+      });
+    }
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: tokens.layout.screenPadding, gap: tokens.spacing.lg }}>
-          <AppText role="displayL" style={{ textAlign: 'center' }}>{L('Fini ! 🎉', 'Game over! 🎉')}</AppText>
-          <Leaderboard scores={pj.scores} />
-          <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+          <EpilogueCard
+            title={L('Fini ! 🎉', 'Game over! 🎉')}
+            standings={standings}
+            superlatives={superlatives}
+            footer={
+              <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
+            }
+          />
         </ScrollView>
       </SafeAreaView>
     );
@@ -248,6 +309,14 @@ export function PerformJudgePlay({ code }: { code: string }) {
             </View>
           )}
         </View>
+
+        {/* CC-2 Money Round — final lap with the armed multiplier: scream ×1.5. */}
+        {pj.isFinalLap && (
+          <MultiplierBadge
+            multiplier={MONEY_ROUND_MULTIPLIER}
+            title={L('DERNIÈRE MANCHE', 'FINAL ROUND')}
+          />
+        )}
 
         {/* rotation strip: spotlight ringed, disconnected dimmed */}
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm, justifyContent: 'center' }}>
@@ -407,7 +476,11 @@ export function PerformJudgePlay({ code }: { code: string }) {
               counts={pj.reactionCounts}
               mine={pj.myReaction}
               canReact={pj.canReact}
-              onReact={(reaction) => sendAction({ kind: 'react', reaction })}
+              onReact={(reaction) => {
+                // Light tap on a live react — a small physical "sent" cue.
+                haptics.impact('light');
+                sendAction({ kind: 'react', reaction });
+              }}
               lang={lang}
             />
           </View>
@@ -517,6 +590,21 @@ export function PerformJudgePlay({ code }: { code: string }) {
               {result.fast && (
                 <AppText role="label" color="success" style={{ textAlign: 'center' }}>
                   {L('⚡ Bonus rapidité !', '⚡ Speed bonus!')}
+                </AppText>
+              )}
+              {/* CC-2 — Money Round applied to this turn's points: scream ×1.5. */}
+              {result.moneyRound && (
+                <MultiplierBadge
+                  multiplier={MONEY_ROUND_MULTIPLIER}
+                  title={L('POINTS DOUBLÉS', 'DOUBLE POINTS')}
+                />
+              )}
+              {/* P1-2 — aggregate-only near-miss / split drama stamp. */}
+              {result.drama !== null && (
+                <AppText role="label" color={result.drama === 'split' ? 'dare' : 'xp'} style={{ textAlign: 'center' }}>
+                  {result.drama === 'nailbiter'
+                    ? L('😱 À UN VOTE PRÈS !', '😱 ONE VOTE AWAY!')
+                    : L('⚖️ LA SALLE EST DIVISÉE !', '⚖️ THE ROOM IS SPLIT!')}
                 </AppText>
               )}
               {/* CC-4 — public audience reaction tally rides onto the reveal card. */}
