@@ -18,6 +18,7 @@ import { buildSafety } from './sections/safety';
 import { buildDownload } from './sections/download';
 import { buildFooter } from './sections/footer';
 import { runPreloader } from './sections/preloader';
+import { shouldRenderBlob } from './webgl/fallback';
 
 const BUILDERS: Record<string, (r: HTMLElement, l: Locale) => void> = {
   hero: buildHero, thesis: buildThesis, how: buildHow, phone: buildEveryPhone,
@@ -25,6 +26,8 @@ const BUILDERS: Record<string, (r: HTMLElement, l: Locale) => void> = {
   download: buildDownload, footer: buildFooter,
 };
 const SECTION_IDS = Object.keys(BUILDERS);
+
+let bloopChoreograph: (() => void) | null = null;
 
 function renderSections(locale: Locale): void {
   ScrollTrigger.getAll().forEach((st) => st.kill());
@@ -36,7 +39,23 @@ function renderSections(locale: Locale): void {
   }
   document.querySelectorAll<HTMLElement>('.section').forEach(revealOnScroll);
   document.querySelectorAll<HTMLElement>('.btn,.badge').forEach((b) => magnetize(b));
+  bloopChoreograph?.();
   ScrollTrigger.refresh();
+}
+
+async function mountBlob(): Promise<void> {
+  if (!shouldRenderBlob()) return;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'bloop-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(canvas);
+  const [{ BloopScene }, { choreograph }] = await Promise.all([
+    import('./webgl/bloop'),
+    import('./webgl/droplets'),
+  ]);
+  const scene = new BloopScene(canvas);
+  bloopChoreograph = () => choreograph(scene);
+  bloopChoreograph();
 }
 
 function setActiveLang(locale: Locale): void {
@@ -73,5 +92,6 @@ function main(): void {
   renderSections(locale);
   initCursor();
   runPreloader(() => { initSmoothScroll(); ScrollTrigger.refresh(); });
+  void mountBlob();
 }
 main();

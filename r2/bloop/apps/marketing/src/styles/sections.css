@@ -86,3 +86,4 @@
 .footer{display:grid;gap:var(--s2);text-align:center}
 .footer__tag{opacity:.6;font-size:14px}
 .footer__link{opacity:.7}
+#how,#library,#safety,#download,#footer{background:var(--cream)}

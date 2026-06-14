@@ -35,3 +35,5 @@ body::after{
 .cursor--active::after{content:attr(data-label);position:absolute;inset:0;display:grid;
   place-items:center;color:var(--cream);font:500 11px/1 var(--font-body);text-transform:uppercase;letter-spacing:1px}
 @media (pointer: coarse){.cursor{display:none}}
+#bloop-canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+#app{position:relative;z-index:2}
