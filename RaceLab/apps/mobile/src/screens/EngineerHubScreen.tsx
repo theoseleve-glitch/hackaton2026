@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import type Svg from "react-native-svg";
 import { buildReport } from "../../../../packages/engine/src";
 import { buildRacePlan } from "../../../../packages/engine/src/planner";
 import type { SelectedRunSummary } from "../../../../packages/engine/src/planner";
@@ -12,9 +13,11 @@ import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src"
 import { fmtTime, PitPlanView, RacePlanView, RunPicker, StrategyForm } from "../components/PlanViews";
 import type { StrategyPrefill, TrackChoice } from "../components/PlanViews";
 import { RunReportCard } from "../components/RunReportCard";
+import { ReportCard } from "../components/ReportCard";
 import { KB } from "../kb";
 import type { SavedReport } from "../reportstore";
 import { loadCarSheets } from "../store";
+import { sharePng } from "../share";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
 
@@ -53,6 +56,17 @@ function parseRaceWindow(label: string): { race_length_s?: number; race_type?: "
 export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport, requestRunId }: Props) {
   const [view, setView] = useState<ViewState>({ k: "list" });
   const [busy, setBusy] = useState(false);
+  // share the engineer report as a PNG poster (off-screen SVG → toDataURL)
+  const reportCardRef = useRef<Svg>(null);
+  const [sharingReport, setSharingReport] = useState(false);
+  const shareReport = () => {
+    const svg = reportCardRef.current;
+    if (!svg) return;
+    setSharingReport(true);
+    svg.toDataURL((b64: string) => {
+      void sharePng(b64, "engineer-report").finally(() => setSharingReport(false));
+    });
+  };
 
   // one-shot auto-generation when the run log handed us a run
   const [consumedRequest, setConsumedRequest] = useState<string | undefined>();
@@ -295,6 +309,23 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
               </View>
             )}
             <RunReportCard report={s.report} />
+            {s.report.kind === "report" && (
+              <View style={styles.shareBar}>
+                <Pressable
+                  style={styles.shareBtn}
+                  onPress={shareReport}
+                  disabled={sharingReport}
+                  accessibilityRole="button"
+                  accessibilityLabel="Share report"
+                >
+                  <Text style={styles.shareBtnText}>{sharingReport ? "Rendering…" : "⤴ Share report"}</Text>
+                </Pressable>
+              </View>
+            )}
+            {/* off-screen poster for toDataURL capture */}
+            <View style={styles.offscreen} pointerEvents="none">
+              <ReportCard ref={reportCardRef} report={s.report} subtitle={s.run_label} />
+            </View>
           </View>
         ) : s.strategy ? (
           <PitPlanView plan={s.strategy} options={[]} />
@@ -465,4 +496,8 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   askMoreText: { color: colors.text, fontSize: 12, lineHeight: 18 },
+  shareBar: { paddingHorizontal: 14, paddingVertical: 10, borderTopWidth: 1, borderTopColor: colors.border },
+  shareBtn: { backgroundColor: colors.accent, borderRadius: radius.md, paddingVertical: 12, alignItems: "center" },
+  shareBtnText: { color: colors.onAccent, fontWeight: "800", fontSize: 14 },
+  offscreen: { position: "absolute", left: -10000, top: 0, width: 1080, height: 1350 },
 });
