@@ -13,6 +13,8 @@ import type { LogbookState, Outcome, RunEntry, RunSortKey } from "../../../../pa
 import { deserialize, initSheets, renameDraft, saveVersion, serialize } from "../../../../packages/sheets/src";
 import { addTrack, getTrack, upsertRecord } from "../../../../packages/tracks/src";
 import type { TrackEntity, TracksState } from "../../../../packages/tracks/src";
+import { buildSetupPayload } from "../../../../packages/social/src";
+import type { SharedPayload } from "../../../../packages/social/src";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NewCarForm } from "../components/NewCarForm";
 import { Overlay } from "../components/Overlay";
@@ -53,6 +55,8 @@ interface Props {
   onEngineer: (runId: string) => void;
   /** open the comparison for two selected runs */
   onCompare: (aId: string, bId: string) => void;
+  /** share a run (setup + conditions + result) as a card/link */
+  onShareRun: (p: SharedPayload) => void;
 }
 
 type Popup = null | "car" | "track" | "setup";
@@ -198,6 +202,44 @@ export function RunsScreen(props: Props) {
     .map((id) => logbook.runs.find((r) => r.id === id))
     .filter(Boolean) as RunEntry[];
 
+  // share a run: pull its setup values from the car's sheets, add the run's
+  // context (track / conditions / result), open the share sheet
+  const shareRun = async (run: RunEntry) => {
+    const car = garage.cars.find((c) => c.id === run.car_id);
+    let values: Record<string, string | number> = {};
+    if (run.car_id) {
+      const sheets = await loadCarSheets(run.car_id);
+      values = sheets?.versions.find((v) => v.id === run.setup_version_id)?.values ?? sheets?.draft ?? {};
+    }
+    props.onShareRun(
+      buildSetupPayload(
+        {
+          setup: { name: run.setup_name || "Race setup", template_id: run.car_template_id, values },
+          car: {
+            brand: car?.brand ?? "RC",
+            model: car?.model ?? run.track.name,
+            category: car?.category ?? "buggy",
+            scale: car?.scale ?? "1/8",
+            power: car?.power ?? "nitro",
+          },
+          context: {
+            track_name: run.track.name,
+            surface: run.track.surface,
+            grip: run.conditions.grip,
+            date: run.created_at.slice(0, 10),
+            weather: {
+              air_temp_c: run.conditions.air_temp_c,
+              humidity_pct: run.conditions.humidity_pct,
+              wind_kmh: run.conditions.wind_kmh,
+            },
+            result: { position: run.result?.position, entrants: run.result?.entrants, best_lap_s: run.result?.best_lap_s },
+          },
+        },
+        new Date().toISOString(),
+      ),
+    );
+  };
+
   return (
     <View style={styles.root}>
       {podium !== null && <PodiumSplash position={podium} onDone={() => setPodium(null)} />}
@@ -264,6 +306,9 @@ export function RunsScreen(props: Props) {
               </View>
               <Pressable style={styles.floatBtn} onPress={() => props.onEngineer(selectedRuns[0].id)}>
                 <Text style={styles.floatBtnText}>🔧 Engineer</Text>
+              </Pressable>
+              <Pressable style={styles.floatBtn} onPress={() => void shareRun(selectedRuns[0])}>
+                <Text style={styles.floatBtnText}>⤴ Share</Text>
               </Pressable>
             </>
           )}

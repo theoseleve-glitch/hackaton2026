@@ -12,6 +12,7 @@ import type {
   TrackTrait,
   TrackVisibility,
 } from "../../../../packages/tracks/src";
+import type { CandidacyState } from "../../../../packages/social/src";
 import { surfacesByDiscipline } from "../rcdata";
 import { colors, radius } from "../theme";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
@@ -33,6 +34,9 @@ const VISIBILITIES: TrackVisibility[] = ["private", "public"];
 
 interface Props {
   initial?: TrackEntity;
+  /** official-track candidacy (only when editing an existing track) */
+  candidacyState?: CandidacyState;
+  onSubmitOfficial?: () => void;
   onSave: (track: Omit<TrackEntity, "id">) => void;
   onCancel: () => void;
   onDelete?: () => void;
@@ -57,7 +61,7 @@ interface RecordRow {
   date?: string; // preserved across edits, never typed by hand
 }
 
-export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
+export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, onSave, onCancel, onDelete }: Props) {
   const [name, setName] = useState(initial?.name ?? "");
   const [surfaces, setSurfaces] = useState<string[]>(
     initial?.surfaces ?? (initial?.surface !== undefined ? [initial.surface] : []),
@@ -341,6 +345,27 @@ export function TrackForm({ initial, onSave, onCancel, onDelete }: Props) {
         </Pressable>
       </View>
 
+      {onSubmitOfficial && (
+        <Pressable
+          style={[styles.officialBtn, candidacyState !== "none" && candidacyState !== "rejected" && styles.officialBtnDone]}
+          disabled={candidacyState === "candidate" || candidacyState === "official"}
+          onPress={onSubmitOfficial}
+        >
+          <Text style={styles.officialBtnText}>
+            {candidacyState === "official"
+              ? "🏁 Official track ✓"
+              : candidacyState === "candidate"
+                ? "⏳ Pending review"
+                : candidacyState === "rejected"
+                  ? "Submit again as official"
+                  : "🏁 Submit as official track"}
+          </Text>
+          {candidacyState === "none" && (
+            <Text style={styles.officialBtnHint}>Curators vet it into the shared library + leaderboard</Text>
+          )}
+        </Pressable>
+      )}
+
       {onDelete && (
         <View style={styles.deleteZone}>
           {deleteArmed && (
@@ -499,6 +524,18 @@ const styles = StyleSheet.create({
   btnPrimaryText: { color: "#fff", fontWeight: "800", fontSize: 15 },
   btnGhost: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border },
   btnGhostText: { color: colors.text, fontWeight: "600", fontSize: 15 },
+  officialBtn: {
+    marginTop: 14,
+    backgroundColor: colors.accentSoft,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderRadius: radius.md,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+  officialBtnDone: { opacity: 0.7 },
+  officialBtnText: { color: colors.accent, fontWeight: "800", fontSize: 14 },
+  officialBtnHint: { color: colors.sub, fontSize: 11, marginTop: 3 },
   deleteZone: { marginTop: 18 },
   deleteWarn: { color: colors.warn, fontSize: 12, marginBottom: 6, lineHeight: 17 },
   deleteBtn: { borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, paddingVertical: 11, alignItems: "center" },

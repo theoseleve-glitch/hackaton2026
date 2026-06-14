@@ -25,6 +25,8 @@
 - Props with RC-native reactions: **Dialed** 🔧 (clean/fast), **Send it** 🚀, **Tough break** 💥 (DNF empathy — half of nitro racing is carnage and commiseration is the glue).
 - Moderation (required by Apple UGC guideline 1.2 the moment comments ship): content filtering + report button + **block user** (hides their content, prevents interaction) + author-deletes-on-own-setup + admin tools + published contact info. This burden is exactly why comments are V1.1, not V1.0 (D10).
 
+> **V1.1 offline mock (the app ships this now — D32 + design doc `docs/superpowers/specs/2026-06-14-driver-profiles-social-home-design.md`).** The §1.3/§1.4 multi-user surfaces are demoable without a backend: **your own profile is real and local** (identity + palmarès + garage on the account) and **follow state is local** (`FollowData`), while the **feed, discover and others' profiles are a deterministic mock** isolated in `apps/mobile/src/socialnet.ts` behind a single `SOCIAL_MOCK = true` flag (mirroring `speedhive.ts`). The mock's `fetchFeed` / `fetchDiscover` / `fetchProfile` call sites and the `packages/social` shapes (`DriverProfile`, `FeedItem`, `FollowData`) **swap 1:1 to the hosted endpoints** (`GET /me/profile` + `PUT /me/profile`, `GET /profiles/{handle}`, `POST`/`DELETE /follow/{handle}`, `GET /feed`, `GET /discover` — see `BACKEND.md` P3) when the backend lands, one flag flipped. Props (🔧🚀💥) and comments stay design-only until their Apple-UGC moderation gate ships. This closes a D32 gap: the **profile `handle` now flows into shared-setup provenance** — every share/import carries `author: { handle }`, so a forked sheet attributes back to the driver (`SharedPayload.author.handle`, previously unset).
+
 ## 2. Why this beats So Dialed's sharing
 
 | So Dialed | RaceLab |
@@ -56,3 +58,27 @@
 - Anything public must be servable without auth (web view) → plan the public/private split at the API layer from day one, not as an afterthought.
 - Aggregated stats shown publicly (later: Track Intel A2, fleet learning C9) always gated on minimum sample size (n ≥ 8) — small clubs are deanonymizable.
 - GDPR: we're EU-based; export + full deletion paths planned in the schema (tombstones, not hard cascades).
+
+## 6. Official tracks (candidacy)
+
+> Hosted. **Designed only — needs William's backend** (not in V1.0; the app ships the offline half: submit → outbox + "Pending review" badge, plus a stubbed Official Tracks browser). This is the public track library D25 promised "when sync ships", made concrete as an **admin-curated** library (decision 2026-06-14). Honors D10 (no public browse/discovery API in V1.0) and D11 (server snapshot at publish, no live replication).
+
+### 6.1 Submitting a candidate
+- Any track in a user's garage can be **submitted as official** from the app. The app writes a `TrackCandidacy` (`packages/social`) and queues the submission in an **append-only outbox** (D11) — it works fully offline, like every other write, and flushes when the backend lands.
+- A submission carries a **self-contained snapshot** of the `TrackEntity` (name, GPS, surface/surfaces, indoor, traits, corners, photos as media refs, lap records) — the snapshot is the candidate, not a live pointer (D11). EXIF GPS is stripped from photos before they enter any shared artifact (consistent with the blob rules).
+- The user's local track stays theirs and editable; the candidate is a frozen copy under review. The app shows a **"Pending review"** badge until the backend reflects an outcome.
+
+### 6.2 Curation (admin-curated approval)
+- A track candidate is **not auto-published**. A curator (William, or a delegated admin) reviews each candidate in an admin console and approves it into the official library, or rejects it. **Curation is the moderation gate** — the same human-in-the-loop role comments/UGC will need in V1.1 (§1.4), here applied to track data.
+- **State machine** (mirrors `packages/social` `CandidacyState`): `none → candidate → official | rejected`. `none` = an ordinary private track; `candidate` = submitted and queued/under review; `official` = approved into the library; `rejected` = declined (with an optional reason surfaced back to the submitter). Transitions past `candidate` are **server-authoritative** and reflected to the app on sync — the client never self-promotes.
+- **Dedup / merge.** Before a candidate becomes official, the curator dedups against existing venues by **GPS proximity + name similarity** (the same physical track gets submitted by many drivers). The console proposes likely duplicates; approving a candidate can **merge** it into an existing official venue (its lap records fold into that venue's pool) rather than creating a parallel entry. This keeps one canonical venue per real-world track — load-bearing for the leaderboard below, which is only meaningful if records aggregate onto a single venue.
+
+### 6.3 Community leaderboard (per venue)
+- An official venue exposes a **community leaderboard** built by aggregating `LapRecord`s (and run results) **across users**, bucketed by **category + conditions** (e.g. *1/8 nitro buggy · high grip*). Different categories/conditions are different boards — a green-track 2WD time and a blue-groove 4WD time aren't comparable.
+- **n ≥ 8 gate.** A leaderboard bucket is only shown publicly once it holds **at least 8 contributing entries** — the existing anti-deanonymization rule (§5): below that threshold a small club's times de-anonymize individuals, so the bucket stays hidden until the sample is large enough.
+- Leaderboards are a **read-only aggregate**, computed server-side from the aggregated record pool. `driverStats()` already computes the per-driver career/podium/win numbers client-side; the server only does the cross-user roll-up the device can't see. **No advice, ever, on the server (D18)** — a leaderboard is timing data, not a recommendation.
+
+### 6.4 Consistency with D10 / D11 / D25
+- **D10**: candidacy is an *admin-curated submit + a gated read*, not a public browse/discovery API or web app — V1.0 still ships only the unlisted share-link + fork loop; the Official Tracks browser is designed and stubbed, not a live public surface.
+- **D11**: the candidate is a publish-time snapshot in an append-only outbox; there is no bidirectional track sync, and approval/rejection arrive as a one-way server→client reflection.
+- **D25**: this *is* the "public library when sync ships" for first-class tracks — now pinned as admin-curated so quality and dedup are enforced before anything goes public.
