@@ -194,21 +194,45 @@ const baseInput: RaceDayInput = {
   const r = planRaceDay(cold, data);
   check("cold+wind forecast → ok plan", r.ok);
   if (r.ok) {
+    const coldAdj = r.plan.adjustments.filter((a) => a.condition_tag === "cold");
     check(
-      "no KB rule covers 'cold' → explicit refusal",
-      r.plan.refusals.some((x) => x.aspect === "cold" && x.message.includes("No KB rule covers 'cold'")),
-      JSON.stringify(r.plan.refusals),
+      "cold now produces cited shock-oil adjustments (weather pack — was a refusal)",
+      coldAdj.length >= 1 && coldAdj.every((a) => a.citations.some((c) => c.startsWith("kb-weather-cold-"))),
+      JSON.stringify(coldAdj),
     );
+    check("cold adjustments are race-day safe (high confidence)", coldAdj.length >= 1 && coldAdj.every((a) => a.confidence === "high"));
+    check("cold is no longer refused (now grounded by the weather pack)", !r.plan.refusals.some((x) => x.aspect === "cold"));
     check(
-      "wind has no taxonomy tag → explicit refusal, never an adjustment",
+      "wind STILL has no taxonomy tag → explicit refusal, never an adjustment",
       r.plan.refusals.some((x) => x.aspect === "wind") &&
         !r.plan.adjustments.some((a) => a.condition_tag === "wind"),
     );
-    check("cold yields zero adjustments (grounded or silent)", r.plan.adjustments.length === 0);
     check(
       "no practice at this track is said out loud",
       r.plan.practice_read.some((l) => l.includes("no practice history at this track")),
     );
+  }
+}
+
+// ── HOT forecast → thicker-shock adjustment (weather pack, was a refusal) ──────
+{
+  const hot = {
+    ...baseInput,
+    practice: [],
+    forecast: [obs({ observed_at: "2026-06-13T13:00:00.000Z", source: "auto", air_temp_c: 34, wind_speed_kmh: 8 })],
+  };
+  const r = planRaceDay(hot, data);
+  check("hot forecast → ok plan", r.ok);
+  if (r.ok) {
+    check("forecast read predicts hot", r.plan.forecast_read.some((l) => l.startsWith("hot expected") && l.includes("34")));
+    const hotAdj = r.plan.adjustments.filter((a) => a.condition_tag === "hot");
+    check(
+      "hot produces a cited shock-oil adjustment (front_shock_oil thicker)",
+      hotAdj.some((a) => a.setting === "front_shock_oil" && a.citations.some((c) => c.startsWith("kb-weather-hot-"))),
+      JSON.stringify(hotAdj),
+    );
+    check("hot adjustment is race-day safe (high confidence + cited)", hotAdj.length >= 1 && hotAdj.every((a) => a.confidence === "high" && a.citations.length > 0));
+    check("hot is no longer in the refusals (now grounded)", !r.plan.refusals.some((x) => x.aspect === "hot"));
   }
 }
 
