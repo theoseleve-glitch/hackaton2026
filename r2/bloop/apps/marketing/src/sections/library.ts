@@ -10,6 +10,6 @@ export function buildLibrary(root: HTMLElement, locale: Locale): void {
       el('p', { class: 'lib__hook' }, g.hook[locale]),
       g.creator ? el('span', { class: 'lib__chip' }, g.creator) : '')));
   root.append(
-    el('p', { class: 'overline', 'data-i18n': 'library.title' }, t('library.title', locale)),
+    el('h2', { class: 'overline', 'data-i18n': 'library.title' }, t('library.title', locale)),
     el('div', { class: 'lib__scroller', 'data-reveal': '', tabindex: '0', role: 'group', 'aria-label': t('library.title', locale) }, track));
 }

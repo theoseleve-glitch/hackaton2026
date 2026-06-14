@@ -71,8 +71,8 @@ function mountNav(initial: Locale): void {
     setActiveLang(l);
     renderSections(l);
   };
-  const frBtn = el('button', { 'data-l': 'fr' }, 'FR');
-  const enBtn = el('button', { 'data-l': 'en' }, 'EN');
+  const frBtn = el('button', { 'data-l': 'fr', 'aria-label': 'Français' }, 'FR');
+  const enBtn = el('button', { 'data-l': 'en', 'aria-label': 'English' }, 'EN');
   frBtn.onclick = () => setLang('fr');
   enBtn.onclick = () => setLang('en');
   const nav = el('header', { class: 'nav' },
