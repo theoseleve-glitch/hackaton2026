@@ -3,6 +3,8 @@ import { t, type Locale } from '../lib/i18n';
 import { splitChars } from '../lib/splitText';
 import gsap from 'gsap';
 import { prefersReducedMotion } from '../lib/scroll';
+import { shouldRenderBlob } from '../webgl/fallback';
+import blobUrl from '../assets/blob.svg';
 
 export function buildHero(root: HTMLElement, locale: Locale): void {
   root.classList.add('section--full', 'hero');
@@ -14,6 +16,10 @@ export function buildHero(root: HTMLElement, locale: Locale): void {
     el('p', { class: 'hero__sub', 'data-i18n': 'hero.sub' }, t('hero.sub', locale)),
     cta,
   );
+  if (!shouldRenderBlob()) {
+    const img = el('img', { class: 'hero__blob', src: blobUrl, alt: '', 'aria-hidden': 'true', width: '520', height: '520' });
+    root.prepend(img);
+  }
   const chars = splitChars(head);
   if (!prefersReducedMotion())
     gsap.from(chars, { yPercent: 120, opacity: 0, duration: 0.9, ease: 'power4.out', stagger: 0.03, delay: 0.2 });
