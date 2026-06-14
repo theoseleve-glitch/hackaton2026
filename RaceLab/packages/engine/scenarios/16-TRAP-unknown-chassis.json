@@ -1,0 +1,11 @@
+{
+  "name": "TRAP: unknown chassis template → graceful in-band refusal, never a throw",
+  "expect": { "kind": "refusal" },
+  "bundle": {
+    "chassis_template_id": "not-extracted-yet",
+    "setup": {},
+    "track": { "name": "Anywhere", "surface": "clay", "grip": "green", "conditions": ["low_grip"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }], "text": "pushes mid-corner" },
+    "mode": "practice"
+  }
+}

@@ -42,18 +42,33 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
   check("rationale invites rating when no history", /rate this run/i.test(r.rationale), r.rationale);
 }
 
-// 2. History is surfaced in the rationale (the learning loop made visible)
+// 2. History is surfaced in the rationale — but ONLY for THIS change (rows that
+//    cite the fired rule). Rows citing other levers must NOT be attributed here.
 {
-  const r = buildReport(
+  // (a) rows citing the fired primary (kb-swaybar-front-softer-301) → counts surface
+  const cited = buildReport(
     bundle({
       history: [
-        { change: 'ran "Softer front"', conditions: "green grip clay", outcome: "better" },
-        { change: 'ran "Q2 sheet"', conditions: "green grip clay", outcome: "worse" },
+        { change: 'ran "Softer front bar"', conditions: "green grip clay", outcome: "better", citations: ["kb-swaybar-front-softer-301"] },
+        { change: 'ran "Softer front bar v2"', conditions: "green grip clay", outcome: "worse", citations: ["kb-swaybar-front-softer-301"] },
       ],
     }),
     data,
   );
-  check("history counts surfaced", /1 run rated better, 1 worse, of 2 rated/.test(r.rationale), r.rationale);
+  check("rule-scoped history counts surfaced", /this exact change.*1 rated better, 1 worse/.test(cited.rationale), cited.rationale);
+
+  // (b) rows that DON'T cite the fired rule must NOT be counted as its record
+  //     (the old bug attributed every rated run at the track to the primary)
+  const unrelated = buildReport(
+    bundle({
+      history: [
+        { change: 'ran "Q2 sheet"', conditions: "green grip clay", outcome: "better", citations: ["kb-some-other-rule-999"] },
+        { change: 'ran "Q3 sheet"', conditions: "green grip clay", outcome: "worse", citations: ["kb-some-other-rule-999"] },
+      ],
+    }),
+    data,
+  );
+  check("unrelated history is NOT attributed to this change", /No rated runs for this change/.test(unrelated.rationale), unrelated.rationale);
 }
 
 // 3. Engine-scope question → hard refusal, no setup advice (D13)
@@ -61,6 +76,21 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
   const r = buildReport(bundle({ question: "should I lean the HSN a bit?" }), data);
   check("needle question refused", r.kind === "refusal" && r.primary === undefined);
   check("refusal carries the canned message", (r.message ?? "").includes("out of my scope"));
+}
+
+// 3b. Unknown chassis → graceful in-band refusal, NEVER a throw (the registry
+//     carries pending_pdf chassis the app can legitimately ask about)
+{
+  let threw = false;
+  let r: ReturnType<typeof buildReport> | undefined;
+  try {
+    r = buildReport(bundle({ chassis_template_id: "not-extracted-yet" }), data);
+  } catch {
+    threw = true;
+  }
+  check("unknown chassis does not throw", !threw);
+  check("unknown chassis → refusal report", r?.kind === "refusal" && r?.primary === undefined);
+  check("unknown-chassis refusal won't guess", (r?.message ?? "").includes("won't guess"));
 }
 
 // 4. Race day + unknown symptom → do_nothing protects the result

@@ -115,7 +115,7 @@ export function ruleToOption(
     confidence_qualifier: confidenceDetail(rule, bundle, history).qualifier,
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,
-    if_it_does_not_help: "Revert, then re-test — the cause is likely the next-ranked option below, or tires for this surface.",
+    if_it_does_not_help: "Revert, then re-test. If the symptom persists, the next-ranked option below is the next candidate to try; tyres/inserts for this surface are also a common cause.",
     ...(history ? { history_note: historyNote(history) } : {}),
   };
 }
@@ -140,8 +140,13 @@ export function buildOfflineCard(
 
 export function conditionsEcho(bundle: ContextBundle): string {
   const w = bundle.weather;
-  const weatherTxt =
-    w?.air_temp_c !== undefined ? `, ${w.air_temp_c}°C${w.rain_risk_pct ? `, ${w.rain_risk_pct}% rain risk` : ""}` : "";
+  // Independent optional parts — rain risk must show even with no air temp (the
+  // live logbook bundle can carry rain_risk_pct without air_temp_c).
+  const weatherParts = [
+    w?.air_temp_c !== undefined ? `${w.air_temp_c}°C` : null,
+    w?.rain_risk_pct ? `${w.rain_risk_pct}% rain risk` : null,
+  ].filter(Boolean);
+  const weatherTxt = weatherParts.length ? `, ${weatherParts.join(", ")}` : "";
   return `${bundle.track.grip.replace("_", " ")} grip ${bundle.track.surface} at ${bundle.track.name}${weatherTxt} (${bundle.track.conditions.join(", ") || "no condition tags"}) — ${bundle.mode === "race_day" ? "RACE DAY" : "practice"}`;
 }
 

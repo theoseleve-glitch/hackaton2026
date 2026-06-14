@@ -27,6 +27,7 @@ const scenariosDir = join(dirname(fileURLToPath(import.meta.url)), "..", "scenar
 const files = readdirSync(scenariosDir).filter((f) => f.endsWith(".json")).sort();
 const kbData = loadKBData();
 const kbIds = new Set(kbData.rules.map((r) => r.id));
+const ruleById = new Map(kbData.rules.map((r) => [r.id, r]));
 
 let passed = 0;
 const failures: string[] = [];
@@ -76,6 +77,17 @@ for (const file of files) {
       rec.primary!.citations.includes(scenario.expect.primary_cites_not)
     ) {
       problems.push(`primary must not cite ${scenario.expect.primary_cites_not} (history-demoted)`);
+    }
+    if (scenario.expect.max_reversal_minutes !== undefined) {
+      const cap = scenario.expect.max_reversal_minutes;
+      for (const o of options) {
+        for (const c of o.citations) {
+          const r = ruleById.get(c);
+          if (r && r.reversal_cost_minutes > cap) {
+            problems.push(`${o.setting} cites ${c} (reversal ${r.reversal_cost_minutes}min) over the race-day cap ${cap}min`);
+          }
+        }
+      }
     }
     if (scenario.expect.no_contradictory_pair) {
       // Two opposite-pulling symptoms must resolve to ONE primary lever, and no

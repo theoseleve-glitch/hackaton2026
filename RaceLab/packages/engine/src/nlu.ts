@@ -137,10 +137,12 @@ export function parseFeedback(text: string): NLUResult {
     }
   }
 
-  // unstable_braking subsumes a braking-phase oversteer reading of the same words
+  // unstable_braking subsumes both the braking-phase oversteer reading AND the
+  // generic "nervous" (twitchy) reading of the same words — "nervous under
+  // braking" is one behaviour, not two unrelated symptoms pulling retrieval apart.
   let filtered = symptoms;
   if (symptoms.includes("unstable_braking")) {
-    filtered = symptoms.filter((s) => s !== "oversteer");
+    filtered = symptoms.filter((s) => s !== "oversteer" && s !== "twitchy");
   }
   // twitchy's "can't hold it straight" overlaps poor_bump_handling wording only when bumps present
   const phases = PHASE_PATTERNS.filter(({ patterns }) => patterns.some((p) => p.test(text))).map(

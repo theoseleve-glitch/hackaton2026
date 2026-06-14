@@ -1,4 +1,4 @@
-import { getTemplate, type KBData } from "./data";
+import { type KBData } from "./data";
 import { retrieve } from "./retrieval";
 import {
   DO_NOTHING_MESSAGE,
@@ -15,8 +15,20 @@ import type { ContextBundle, Recommendation } from "./types";
  * Pure function of (bundle, data) — runs identically in node and in the app.
  */
 export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
-  const template = getTemplate(data, bundle.chassis_template_id);
   const echo = conditionsEcho(bundle);
+
+  // 0. Unknown chassis → refuse in-band (never throw on the data path), matching
+  //    proposePlan/planRaceDay. The registry carries pending_pdf chassis, so the
+  //    app can legitimately ask about one not yet extracted.
+  const template = data.templates[bundle.chassis_template_id];
+  if (!template) {
+    return {
+      kind: "refusal",
+      source: "offline_deterministic",
+      message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
+      conditions_echo: echo,
+    };
+  }
 
   // 1. Engine-scope refusal (D13) — before anything else
   const refusal = engineScopeViolation(bundle, data.taxonomy);

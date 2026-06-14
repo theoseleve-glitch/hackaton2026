@@ -1,4 +1,4 @@
-import { getTemplate, type KBData } from "./data";
+import { type KBData } from "./data";
 import { drivingTips } from "./driving-tips";
 import {
   DO_NOTHING_MESSAGE,
@@ -6,6 +6,7 @@ import {
   engineScopeViolation,
   raceDayFilter,
 } from "./guard";
+import { historyForRule, matchedSignalUsed } from "./history";
 import { conditionsEcho, ruleToOption } from "./offline";
 import { retrieve } from "./retrieval";
 import type { Confidence, ContextBundle, KBRule, RecommendationOption } from "./types";
@@ -42,9 +43,25 @@ export interface EngineerReport {
 }
 
 export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport {
-  const template = getTemplate(data, bundle.chassis_template_id);
   const echo = conditionsEcho(bundle);
   const diagnosis = buildDiagnosis(bundle);
+
+  // 0. Unknown chassis → refuse in-band (never throw on the data path). The
+  //    registry carries pending_pdf chassis, so the app can ask about one not
+  //    yet extracted; that must be a clean refusal, not a crash at the border.
+  const template = data.templates[bundle.chassis_template_id];
+  if (!template) {
+    return {
+      kind: "refusal",
+      conditions_echo: echo,
+      diagnosis,
+      do_not_touch: [],
+      driving_tips: drivingTips(bundle),
+      confidence: "none",
+      rationale: `Chassis template '${bundle.chassis_template_id}' is not in the KB.`,
+      message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
+    };
+  }
 
   // 1. Engine-scope refusal (D13) — before anything else
   const refusal = engineScopeViolation(bundle, data.taxonomy);
@@ -96,8 +113,13 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
     if (distinct.length === 4) break;
   }
   const [primaryRule, secondaryRule, ...parked] = distinct;
-  const primary = ruleToOption(primaryRule, bundle);
-  const secondary = secondaryRule ? ruleToOption(secondaryRule, bundle) : undefined;
+  // Pass per-rule, condition-segmented history into the cards so the report
+  // carries the SAME honest confidence_qualifier + history_note as proposePlan
+  // (M3) — without this the cards always read "untested here".
+  const primary = ruleToOption(primaryRule, bundle, historyForRule(primaryRule.id, bundle) ?? undefined);
+  const secondary = secondaryRule
+    ? ruleToOption(secondaryRule, bundle, historyForRule(secondaryRule.id, bundle) ?? undefined)
+    : undefined;
 
   const do_not_touch = [
     ...parked.map(
@@ -158,15 +180,21 @@ function buildRationale(bundle: ContextBundle, rule: KBRule): string {
     parts.push(`Current conditions (${amplifiers.map(humanize).join(", ")}) amplify this rule.`);
   }
 
-  const history = bundle.history ?? [];
-  if (history.length > 0) {
-    const better = history.filter((h) => h.outcome === "better").length;
-    const worse = history.filter((h) => h.outcome === "worse").length;
-    parts.push(
-      `Your log in similar conditions: ${better} run${better === 1 ? "" : "s"} rated better, ${worse} worse, of ${history.length} rated.`,
-    );
+  // History scoped to THIS rule's outcomes (matched by citation) and segmented
+  // by the current conditions — the same grounded path the re-ranker uses. The
+  // old code counted EVERY rated run at this track, attributing other levers'
+  // (and opposite conditions') outcomes to this change — an overclaim that
+  // contradicted the per-card qualifier. Only say "in similar conditions" when
+  // the matched signal is actually what's reported.
+  const h = historyForRule(rule.id, bundle);
+  if (h) {
+    const scoped = matchedSignalUsed(h);
+    const better = scoped ? h.matched_better : h.better;
+    const worse = scoped ? h.matched_worse : h.worse;
+    const where = scoped ? "in similar conditions" : "at this track";
+    parts.push(`Your log for this exact change ${where}: ${better} rated better, ${worse} worse.`);
   } else {
-    parts.push("No rated runs in similar conditions yet — rate this run afterwards and the next report gets smarter.");
+    parts.push("No rated runs for this change in these conditions yet — rate this run afterwards and the next report gets smarter.");
   }
   return parts.join(" ");
 }

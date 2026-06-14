@@ -1,9 +1,9 @@
-import { getTemplate, type KBData } from "./data";
+import { type KBData } from "./data";
 import { parseFeedback } from "./nlu";
 import { proposePlan } from "./plan";
 import { engineScopeViolation } from "./guard";
 import { conditionsEcho } from "./offline";
-import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types";
+import type { ChassisTemplate, ContextBundle, FeedbackTag, RecommendationOption } from "./types";
 
 /**
  * RaceLab's deterministic race-engineer chatbot (D18) — no API, no model.
@@ -49,17 +49,25 @@ export class RaceEngineerChat {
   private planSize = 0; // changes in the active plan (0 = no plan presented)
   private planPos = 0; //  1-based position of `current` within the plan
   private data: KBData;
-  private template;
+  private template: ChassisTemplate | undefined;
   private hooks: ChatHooks;
 
   constructor(bundle: ContextBundle, data: KBData, hooks: ChatHooks = {}) {
     this.bundle = bundle;
     this.data = data;
     this.hooks = hooks;
-    this.template = getTemplate(data, bundle.chassis_template_id);
+    // Never throw on an unknown chassis — proposePlan refuses in-band, and the
+    // greeting degrades to a refusal line below.
+    this.template = data.templates[bundle.chassis_template_id];
   }
 
   greeting(): string[] {
+    if (!this.template) {
+      return [
+        `I don't have a verified setup sheet for this chassis yet, so I can't run the engineer here.`,
+        `Session: ${conditionsEcho(this.bundle)}.`,
+      ];
+    }
     return [
       `Race engineer ready — ${this.template.brand} ${this.template.model}.`,
       `Session: ${conditionsEcho(this.bundle)}.`,

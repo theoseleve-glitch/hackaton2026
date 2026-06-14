@@ -6,12 +6,17 @@ import type {
   Taxonomy,
 } from "./types";
 
-/** D13: engine/needle questions get a hard canned refusal — checked BEFORE anything else. */
+/** D13: engine/needle questions get a hard canned refusal — checked BEFORE anything else.
+ *  Match keywords on WORD BOUNDARIES, not raw substrings: a substring `text.includes("lean")`
+ *  false-refused everyday chassis words ("clean", "leans", "cleaned"), going silent on a
+ *  grounded symptom — the opposite of what D13 intends. A missed engine word (e.g. "carbs")
+ *  degrades safely to the generic no-rule refusal, since the KB has no engine rules anyway. */
 export function engineScopeViolation(bundle: ContextBundle, taxonomy: Taxonomy): string | null {
   const text = [bundle.question ?? "", bundle.feedback.text ?? ""].join(" ").toLowerCase();
   if (!text.trim()) return null;
   for (const kw of taxonomy.engine_scope_refusal.keywords) {
-    if (text.includes(kw.toLowerCase())) return taxonomy.engine_scope_refusal.refusal;
+    const escaped = kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    if (new RegExp(`\\b${escaped}\\b`).test(text)) return taxonomy.engine_scope_refusal.refusal;
   }
   return null;
 }
