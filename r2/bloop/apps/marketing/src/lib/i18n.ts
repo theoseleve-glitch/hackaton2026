@@ -26,12 +26,3 @@ export function t(key: string, locale: Locale): string {
   const v = lookup(DICTS[locale]) ?? lookup(DICTS.fr);
   return typeof v === 'string' ? v : key;
 }
-
-export function applyI18n(locale: Locale): void {
-  localStorage.setItem(KEY, locale);
-  document.documentElement.lang = locale;
-  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
-    el.textContent = t(el.dataset.i18n!, locale);
-  });
-  document.dispatchEvent(new CustomEvent('localechange', { detail: locale }));
-}

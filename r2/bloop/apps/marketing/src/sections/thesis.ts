@@ -1,6 +1,8 @@
 import { el } from '../lib/dom';
 import { t, type Locale } from '../lib/i18n';
 import { pinScrub, prefersReducedMotion } from '../lib/scroll';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { burstConfetti } from '../lib/confetti';
 import gsap from 'gsap';
 
 export function buildThesis(root: HTMLElement, locale: Locale): void {
@@ -20,5 +22,12 @@ export function buildThesis(root: HTMLElement, locale: Locale): void {
       .from(line, { scale: 0.6, opacity: 0, ease: 'back.out(2)', duration: 0.3 }, '>-0.1');
   } else {
     gsap.set(stage.querySelectorAll('.vote__bar'), { scaleX: 1 });
+  }
+
+  if (!prefersReducedMotion()) {
+    ScrollTrigger.create({
+      trigger: root, start: 'top 45%', once: true,
+      onEnter: () => burstConfetti(root),
+    });
   }
 }

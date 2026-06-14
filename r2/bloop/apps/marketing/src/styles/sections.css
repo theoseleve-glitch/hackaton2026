@@ -76,8 +76,8 @@
 .badge{background:var(--ink);color:var(--cream);padding:16px 28px;border-radius:var(--r-pill);
   box-shadow:var(--pop);font-weight:700}
 .badge--soon{opacity:.5;position:relative}
-.badge--soon::after{content:'soon';position:absolute;top:-10px;right:-6px;background:var(--coral);
-  color:#fff;font:700 10px/1 var(--font-body);padding:4px 6px;border-radius:var(--r-pill)}
+.badge__soon{position:absolute;top:-10px;right:-6px;background:var(--coral);color:#fff;
+  font:700 10px/1 var(--font-body);padding:4px 6px;border-radius:var(--r-pill)}
 .qr{width:120px;height:120px;margin:0 auto;border-radius:var(--r-lg);
   background:repeating-conic-gradient(var(--ink) 0 25%, var(--cream) 0 50%) 0/24px 24px}
 .pre{position:fixed;inset:0;z-index:10001;background:var(--cream);display:grid;place-items:center;gap:var(--s3)}
@@ -91,3 +91,5 @@
   opacity:.9;animation:float 6s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-18px)}}
 @media (prefers-reduced-motion: reduce){.hero__blob{animation:none}}
+.confetti{position:absolute;top:42%;left:50%;width:10px;height:10px;border-radius:3px;
+  pointer-events:none;z-index:5}
