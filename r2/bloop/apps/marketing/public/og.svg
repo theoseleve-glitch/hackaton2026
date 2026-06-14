@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FBF6EC"/>
+  <!-- decorative coral blob, low opacity, bottom-right -->
+  <circle cx="1040" cy="510" r="190" fill="#FF6F61" opacity="0.12"/>
+  <circle cx="150" cy="120" r="90" fill="#FFCC4D" opacity="0.14"/>
+  <!-- wordmark -->
+  <text x="100" y="345" font-family="Fredoka, 'Trebuchet MS', Verdana, sans-serif" font-size="200" font-weight="700" fill="#0F1633" letter-spacing="-6">bloop<tspan fill="#FF6F61">.</tspan></text>
+  <!-- tagline -->
+  <text x="108" y="430" font-family="'DM Sans', 'Trebuchet MS', sans-serif" font-size="48" font-weight="500" fill="#0F1633">le jeu qui expose ton groupe</text>
+  <!-- meta line -->
+  <text x="108" y="495" font-family="'DM Sans', 'Trebuchet MS', sans-serif" font-size="30" font-weight="400" fill="#0F1633" opacity="0.7">2&#8211;16 joueurs &#183; z&#233;ro compte &#183; une dispute en 30 secondes</text>
+</svg>
