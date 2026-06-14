@@ -33,7 +33,7 @@ All handlers are pure `(ctx, req) → {status, json}`, zero committed runtime de
 | Task | Status | Where / note |
 |---|---|---|
 | `POST /api/media/upload-url` (presigned PUT) | ✅ | `handlers/uploadUrl.ts` — mime allowlist, **per-user quota enforced atomically** (single conditional INSERT, no TOCTOU), **declared-bytes ceiling** on the presign, **user_id charset-guarded** before the blob key (no IDOR path-escape) |
-| Local-URI → media-reference rewrite, EXIF GPS strip | 🟡 | Reference model is in place; EXIF strip happens at render/processing before a photo enters a shared artifact (worker) |
+| Local-URI → media-reference rewrite, EXIF GPS strip | ✅ (plan) | `workers/mediaMaintenance.ts` — `exifStripPlan` (strip GPS on shared images before publish) + `presignSweep` (reclaim abandoned unconfirmed presigns so they can't permanently eat quota); pure/tested, the byte-rewrite is a deploy image-lib seam |
 | S3 / Supabase Storage presign | 🔒 | `BlobStore` seam; `BLOB_PUT_BASE` + creds at deploy |
 
 ## P1 — Cloud backup & restore (NOT sync, D11)
@@ -69,7 +69,7 @@ All handlers are pure `(ctx, req) → {status, json}`, zero committed runtime de
 | Task | Status | Where / note |
 |---|---|---|
 | `DELETE /api/account` (wipe + tombstone) | ✅ | `handlers/accountDelete.ts` — atomic wipe, deletion tombstone survives (legit-interest), idempotent |
-| `POST/GET /api/me/export` (async archive job) | ✅ | `handlers/dataExport.ts` — owner-scoped job; **the archive-assembly worker** (blobs + media + billing) is deferred 🟡 |
+| `POST/GET /api/me/export` (async archive job) | ✅ | `handlers/dataExport.ts` mints the job; `workers/exportAssembler.ts` assembles the archive (all domain blobs + outbox count + media refs + billing), owner-scoped, `markReady` seam — pure/tested (36 checks), code-ready |
 | Privacy policy endpoint, PII-redacted logs | 🟡🔒 | Policy page + log redaction at deploy |
 
 ## P2 — Speedhive
@@ -82,13 +82,13 @@ All handlers are pure `(ctx, req) → {status, json}`, zero committed runtime de
 | Task | Status | Where / note |
 |---|---|---|
 | `POST/DELETE /api/push/token` (device-scoped, consent-gated) | ✅ | `handlers/pushToken.ts` — many devices/user, marketing-consent flag (GDPR), idempotent |
-| Expo receipt processing + `DeviceNotRegistered` prune, triggers | 🟡 | Worker deferred; trigger types constrained to Speedhive/trial/social |
+| Expo receipt processing + `DeviceNotRegistered` prune, triggers | ✅ | `workers/pushReceipts.ts` — prunes dead tokens, reports transient errors for retry, `sendEligible` gates on per-device opt-in + marketing consent (trial nudge), 4-type allow-list enforced at runtime; pure/tested (47 checks), code-ready |
 
 ## P3 — Social V1.1+
 ⬜ Profiles, follows, props, comments, discovery, leaderboards (`driverStats` already client-side) + **UGC moderation** (Apple 1.2: filter + report + block + takedown) + n≥8 anonymity floor. After launch (D10 phasing).
 
 ## Cross-cutting — Observability
-✅ `/api/healthz` (db `SELECT 1` ping + per-seam configured booleans, no secret values) + **structured stderr logging with a correlation id** (`src/log.ts`; every 500 logged, never bodies/tokens/PII; `x-request-id` echoed) shipped. ⬜ Sentry + alert rules wire at deploy.
+✅ `/api/healthz` (db `SELECT 1` ping + per-seam configured booleans, no secret values) + **structured stderr logging with a correlation id** (`src/log.ts`; every 500 logged, never bodies/tokens/PII; `x-request-id` echoed) + a **metric-emitter seam** (`src/metrics.ts` — named alert-worthy metrics: stripe signature/webhook fail, auth-fail, backup-409, http-5xx) + the alert catalog + Sentry/PII policy in `docs/OBSERVABILITY.md`. A **token-bucket rate-limit util** (`src/rateLimit.ts`, ip+account key, fails-open on store outage) is ready for any self-hosted auth surface. ⬜ Sentry SDK + the alert rules wire at deploy. **CI:** a green-gate GitHub Actions template is at `RaceLab/ci/racelab-ci.yml` (move to repo-root `.github/workflows/` to activate).
 
 ---
 
@@ -105,8 +105,8 @@ A second, deeper audit (security · correctness · API · tests · deploy/ops ·
 
 ## Deferred (next sessions, no human prereq)
 - ~~`api/*.ts` wrappers~~ ✅ done · ~~`/api/healthz` + structured logging~~ ✅ done · ~~SQL contract tests~~ ✅ done (hardening pass).
-- The async workers (GDPR archive assembly, Expo receipts, media EXIF strip + presign sweep) — pure functions, but hang off deploy seams (S3/HTTP) with no human-free verification path; build alongside the seams.
+- ~~The async workers (GDPR archive assembly, Expo receipts, media EXIF strip + presign sweep)~~ ✅ built as pure tested fns (`src/workers/`); their external seams (S3 image lib, Expo SDK) wire at deploy.
 - Wire `rc-setup-fields.json` into the runtime KB bundle (KB/content session, my zone).
-- A rate-limit utility for any self-hosted auth surface (Clerk currently owns `/auth/*` rate-limiting).
+- ~~A rate-limit utility~~ ✅ built (`src/rateLimit.ts`); wire it onto any self-hosted auth surface (Clerk still owns `/auth/*` rate-limiting).
 - One env-gated pglite test for the 3 Postgres-semantic statements (atomic-quota / ON CONFLICT watermark / timestamptz-equality OCC) — the recording-QueryFn contract tests already buy ~90% of that risk.
 - Minor audit should-fixes: media orphaned-presign sweep, a `makeSql*` contract test against a stub QueryFn for backup-blob.
