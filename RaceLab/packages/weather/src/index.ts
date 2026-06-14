@@ -19,6 +19,7 @@ export {
   fetchArchive,
   validateOpenMeteoPayload,
   payloadHasData,
+  payloadDayComplete,
 } from "./client";
 export type {
   ForecastOpts,
@@ -50,6 +51,7 @@ export {
   forecastLatestKey,
   archiveCacheKey,
   hourBucketUtc,
+  INVALID_HOUR_BUCKET,
   roundCoord,
   DEFAULT_FORECAST_TTL_MS,
   DEFAULT_ARCHIVE_TTL_MS,

@@ -280,6 +280,32 @@ check("lapSeconds numeric lapTime taken as seconds", lapSeconds({ lapTime: 33.5 
 check("lapSeconds duration is milliseconds", lapSeconds({ duration: 33417 }) === 33.417);
 check("lapSeconds nothing usable → null", lapSeconds({}) === null);
 check("lapSeconds non-positive duration → null", lapSeconds({ duration: 0 }) === null);
+// Fix 2: a blank/unparseable clock STRING must not discard a recoverable
+// numeric duration on the same lap (it used to short-circuit to null).
+check(
+  "lapSeconds blank lapTime string falls through to duration",
+  lapSeconds({ lapTime: "", duration: 33417 }) === 33.417,
+);
+check(
+  "lapSeconds blank-whitespace lapTime string falls through to duration",
+  lapSeconds({ lapTime: "   ", duration: 33417 }) === 33.417,
+);
+check(
+  "lapSeconds unparseable lapTime string falls through to duration",
+  lapSeconds({ lapTime: "DNF", duration: 33417 }) === 33.417,
+);
+check(
+  "lapSeconds blank lapTime string with no numeric fallback → null",
+  lapSeconds({ lapTime: "" }) === null,
+);
+// A parseable clock string still wins outright over a numeric field.
+check(
+  "lapSeconds parseable clock string still wins over duration",
+  lapSeconds({ lapTime: "1:02.345", duration: 99999 }) === 62.345,
+);
+// Fix 1: a non-object lap element never throws — guards to null.
+check("lapSeconds on null element → null (no throw)", lapSeconds(null as unknown as SHLap) === null);
+check("lapSeconds on scalar element → null (no throw)", lapSeconds(42 as unknown as SHLap) === null);
 
 // ── 5. fromEventLaps mapping ─────────────────────────────────────────────────
 
@@ -454,11 +480,131 @@ console.log("— competitorLapchartPositions —");
   const r9 = competitorLapchartPositions(retired, "9");
   check("retired car: truncated row yields only the columns it ran", eq(r9, [{ lap: 0, position: 2 }]));
   check("missing positionRows → empty", competitorLapchartPositions({ id: 1 }, "7").length === 0);
+  // A matched cell with no valid integer position is OMITTED (the row index is
+  // FINISHING order, not running position — back-filling it mislabeled data).
   const noPos = competitorLapchartPositions(
     { id: 1, positionRows: [[{ startNumber: "7" }]] },
     "7",
   );
-  check("cell without position falls back to row index + 1", eq(noPos, [{ lap: 0, position: 1 }]));
+  check("cell without valid position → column omitted (no finishing-order fallback)", eq(noPos, []));
+  // Only the columns with a real position survive; the bad one is dropped, the
+  // good ones keep their true column index (gaps, never invented positions).
+  const mixedPos = competitorLapchartPositions(
+    {
+      id: 1,
+      positionRows: [
+        [
+          { position: 1, startNumber: "7" },
+          { startNumber: "7" }, // no position → omit this column
+          { position: 1, startNumber: "7" },
+          { position: 0, startNumber: "7" }, // non-positive → omit
+          { position: 2.5, startNumber: "7" }, // non-integer → omit
+        ],
+      ],
+    },
+    "7",
+  );
+  check(
+    "lapchart omits only the position-less columns",
+    eq(mixedPos, [
+      { lap: 0, position: 1 },
+      { lap: 2, position: 1 },
+    ]),
+    JSON.stringify(mixedPos),
+  );
+}
+
+// ── 7c. Fix 1: null / non-object wire elements never throw the boundary ──────
+
+console.log("— element-guards (null / non-object wire elements) —");
+function captured<T>(fn: () => T): { threw: boolean; value?: T } {
+  try {
+    return { threw: false, value: fn() };
+  } catch {
+    return { threw: true };
+  }
+}
+{
+  // fromEventLaps: null + scalar elements among the laps. Never-wipe: the whole
+  // import is rejected (no silent drop), with the FIRST bad index reported —
+  // and crucially the call does NOT throw.
+  const dirty = [null, 42, "x", { lapNr: 1, lapTime: "35.1" }] as unknown as SHLap[];
+  const c = captured(() => fromEventLaps(dirty, { imported_at: META.imported_at }));
+  check("fromEventLaps: null/non-object element does not throw", !c.threw);
+  check(
+    "fromEventLaps: null/non-object element → bad_lap_time at its index (no silent drop)",
+    !c.threw && c.value !== undefined && !c.value.ok && c.value.reason === "bad_lap_time" && c.value.lap_index === 0,
+  );
+  // A valid lap first, then a null element: index 1 is reported (proves the
+  // guard maps the bad element to a null-time view rather than skipping it).
+  const c2 = captured(() =>
+    fromEventLaps([{ lapNr: 1, lapTime: "35.1" }, null] as unknown as SHLap[], { imported_at: META.imported_at }),
+  );
+  check(
+    "fromEventLaps: trailing null reported at its true index",
+    !c2.threw && c2.value !== undefined && !c2.value.ok && c2.value.reason === "bad_lap_time" && c2.value.lap_index === 1,
+  );
+}
+{
+  // fromPracticeSession: null + scalar laps inside the selected sub-session.
+  const detail = {
+    id: 9105533,
+    sessions: [{ laps: [null, "x", { nr: 1, duration: 33000 }] }],
+  } as unknown as SHPracticeSession;
+  const c = captured(() => fromPracticeSession(detail, { imported_at: "2026-06-07T10:00:00.000Z" }, 0));
+  check("fromPracticeSession: null/non-object lap does not throw", !c.threw);
+  check(
+    "fromPracticeSession: null/non-object lap → bad_lap_time at index 0",
+    !c.threw && c.value !== undefined && !c.value.ok && c.value.reason === "bad_lap_time" && c.value.lap_index === 0,
+  );
+  // The selected SUB-SESSION itself is null/scalar → no `.laps` access throw;
+  // empty laps surface as no_laps.
+  const detail2 = { id: 1, sessions: [null] } as unknown as SHPracticeSession;
+  const c2 = captured(() => fromPracticeSession(detail2, { imported_at: "2026-06-07T10:00:00.000Z" }, 0));
+  check("fromPracticeSession: null sub-session does not throw", !c2.threw);
+  check(
+    "fromPracticeSession: null sub-session → no_laps",
+    !c2.threw && c2.value !== undefined && !c2.value.ok && c2.value.reason === "no_laps",
+  );
+}
+{
+  // findTransponderResults: null + scalar rows must be skipped, match still found
+  // at its true row_index (no compaction).
+  const cls = {
+    rows: [null, 42, "x", { transponder: "FX-48213", startNumber: "7", position: 2 }],
+  } as unknown as SHClassification;
+  const c = captured(() => findTransponderResults(cls, "FX-48213"));
+  check("findTransponderResults: null/non-object row does not throw", !c.threw);
+  check(
+    "findTransponderResults: skips bad rows, matches at true index",
+    !c.threw && c.value !== undefined && c.value.ok && c.value.row_index === 3 && c.value.row.startNumber === "7",
+  );
+  // All rows bad → not_found, never a throw.
+  const c2 = captured(() =>
+    findTransponderResults({ rows: [null, 7] } as unknown as SHClassification, "FX-48213"),
+  );
+  check(
+    "findTransponderResults: all-bad rows → not_found (no throw)",
+    !c2.threw && c2.value !== undefined && !c2.value.ok && c2.value.reason === "not_found",
+  );
+}
+{
+  // competitorLapchartPositions: null/scalar rows AND null/scalar cells.
+  const chart = {
+    id: 1,
+    positionRows: [
+      null,
+      42,
+      [null, "x", { position: 3, startNumber: "7" }],
+    ],
+  } as unknown as SHLapchart;
+  const c = captured(() => competitorLapchartPositions(chart, "7"));
+  check("competitorLapchartPositions: null/non-object row/cell does not throw", !c.threw);
+  check(
+    "competitorLapchartPositions: skips bad rows/cells, keeps the real match",
+    !c.threw && c.value !== undefined && eq(c.value, [{ lap: 2, position: 3 }]),
+    c.value !== undefined ? JSON.stringify(c.value) : "threw",
+  );
 }
 
 // ── 8. buildRunTiming (schema bridge) ────────────────────────────────────────

@@ -57,6 +57,17 @@ function isFiniteNumber(v: unknown): v is number {
   return typeof v === "number" && Number.isFinite(v);
 }
 
+/** True only for a plain non-null, non-array object. Every wire-array element
+ *  is guarded with this BEFORE any property access: an unofficial API can ship
+ *  a `null` or a scalar in any array, and `null.foo` / reading a key off a
+ *  primitive would throw across our public boundary. House rule: never throw —
+ *  a non-object element is treated as missing data (skipped or, for laps where
+ *  never-wipe forbids a silent drop, surfaced as a null-time view that rejects
+ *  the whole import with its index). */
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+
 function round3(v: number): number {
   return Math.round(v * 1000) / 1000;
 }
@@ -78,10 +89,22 @@ export function parseClockTime(raw: string): number | null {
 
 /** Seconds from a tolerant SHLap, in priority order:
  *  lapTime string (clock) → lapTime number (taken as seconds) → duration (ms).
- *  Anything non-positive/non-finite → null. */
+ *  Anything non-positive/non-finite → null.
+ *
+ *  A NON-EMPTY clock string that parses wins outright. But a blank/unparseable
+ *  lapTime string must NOT short-circuit and discard a perfectly good numeric
+ *  `duration` on the same lap — the string branch only commits when
+ *  parseClockTime actually yields a time; otherwise we fall through to the
+ *  numeric fields. (A non-record element guards to null — never throws.) */
 export function lapSeconds(raw: SHLap): number | null {
-  if (typeof raw.lapTime === "string") return parseClockTime(raw.lapTime);
-  if (isFiniteNumber(raw.lapTime) && raw.lapTime > 0) return round3(raw.lapTime);
+  if (!isRecord(raw)) return null;
+  if (typeof raw.lapTime === "string") {
+    const fromClock = parseClockTime(raw.lapTime);
+    if (fromClock !== null) return fromClock;
+    // blank / unparseable string: fall through to the numeric fields below.
+  } else if (isFiniteNumber(raw.lapTime) && raw.lapTime > 0) {
+    return round3(raw.lapTime);
+  }
   if (isFiniteNumber(raw.duration) && raw.duration > 0) return round3(raw.duration / 1000);
   return null;
 }
@@ -144,11 +167,19 @@ function buildImportedLaps(
  *  running positions are carried when present (positive integers only —
  *  schema positionDeltas then derives gains/losses). */
 export function fromEventLaps(laps: readonly SHLap[], meta: ImportMetaInput): MapLapsResult {
-  const views: RawLapView[] = laps.map((l) => ({
-    n: isFiniteNumber(l.lapNr) ? l.lapNr : isFiniteNumber(l.nr) ? l.nr : null,
-    t_s: lapSeconds(l),
-    position: isFiniteNumber(l.position) && Number.isInteger(l.position) && l.position >= 1 ? l.position : null,
-  }));
+  // Element-guard: a null/scalar element has no usable time → null-time view,
+  // which buildImportedLaps rejects with its index (never-wipe: no silent
+  // drop, no throw).
+  const views: RawLapView[] = laps.map((l) =>
+    isRecord(l)
+      ? {
+          n: isFiniteNumber(l.lapNr) ? l.lapNr : isFiniteNumber(l.nr) ? l.nr : null,
+          t_s: lapSeconds(l),
+          position:
+            isFiniteNumber(l.position) && Number.isInteger(l.position) && l.position >= 1 ? l.position : null,
+        }
+      : { n: null, t_s: null, position: null },
+  );
   return buildImportedLaps(views, meta);
 }
 
@@ -167,12 +198,22 @@ export function fromPracticeSession(
   if (!Number.isInteger(session_index) || session_index < 0 || session_index >= subs.length) {
     return { ok: false, reason: "session_index_out_of_range", session_count: subs.length };
   }
-  const laps = subs[session_index].laps ?? [];
-  const views: RawLapView[] = laps.map((l) => ({
-    n: isFiniteNumber(l.nr) ? l.nr : null,
-    t_s: isFiniteNumber(l.duration) && l.duration > 0 ? round3(l.duration / 1000) : null,
-    position: null,
-  }));
+  // The sub-session itself may be a null/scalar wire element (the type says
+  // SHPracticeSubSession, but the unofficial API gets no benefit of the doubt)
+  // — guard before reading `.laps`, else `.laps` throws across the boundary.
+  const sub = subs[session_index] as unknown;
+  const laps: readonly SHLap[] = isRecord(sub) && Array.isArray(sub["laps"]) ? (sub["laps"] as SHLap[]) : [];
+  // Element-guard each lap: a null/scalar lap → null-time view (rejected with
+  // its index by buildImportedLaps; never-wipe, never thrown).
+  const views: RawLapView[] = laps.map((l) =>
+    isRecord(l)
+      ? {
+          n: isFiniteNumber(l.nr) ? l.nr : null,
+          t_s: isFiniteNumber(l.duration) && l.duration > 0 ? round3(l.duration / 1000) : null,
+          position: null,
+        }
+      : { n: null, t_s: null, position: null },
+  );
 
   const chipCode = detail.chip?.code;
   const locationName = detail.location?.name;
@@ -208,9 +249,13 @@ export function findTransponderResults(
   const want = normalizeTransponder(transponder_id);
   if (want === "") return { ok: false, reason: "not_found" };
   for (let i = 0; i < rows.length; i++) {
-    const t = rows[i].transponder;
+    const row = rows[i];
+    // Element-guard: a null/scalar row would throw on `.transponder`. Skip it
+    // (row_index stays the true position in the array — we don't compact).
+    if (!isRecord(row)) continue;
+    const t = row.transponder;
     if (typeof t === "string" && normalizeTransponder(t) === want) {
-      return { ok: true, row: rows[i], row_index: i };
+      return { ok: true, row: row as SHClassificationRow, row_index: i };
     }
   }
   return { ok: false, reason: "not_found" };
@@ -230,7 +275,13 @@ export interface LapchartPosition {
  *  client.ts). positionRows is one row per position, one cell per column;
  *  a retired car's row truncates early, so columns where the car is absent
  *  are skipped (never invented). startNumber matching is tolerant the same
- *  way transponder matching is ("23 B" matches "23b"). */
+ *  way transponder matching is ("23 B" matches "23b").
+ *
+ *  A cell whose `position` is not a valid positive integer is OMITTED (the
+ *  column is left out) rather than back-filled with the row index. The row
+ *  index is FINISHING order, not the running position at that column, so the
+ *  old fallback silently mislabeled data — same posture as a truncated row:
+ *  when we don't have the real position, we don't invent one. */
 export function competitorLapchartPositions(
   chart: SHLapchart,
   start_number: string,
@@ -241,21 +292,27 @@ export function competitorLapchartPositions(
 
   let columns = 0;
   for (const row of rows) {
-    if (row !== null && row !== undefined && row.length > columns) columns = row.length;
+    // Only arrays contribute columns; a null/scalar row has no `.length` we
+    // trust (reading it off a primitive would be undefined, off null throws).
+    if (Array.isArray(row) && row.length > columns) columns = row.length;
   }
 
   const out: LapchartPosition[] = [];
   for (let col = 0; col < columns; col++) {
     for (let r = 0; r < rows.length; r++) {
-      const cell = rows[r]?.[col];
-      if (cell === undefined || cell === null) continue;
+      const row = rows[r];
+      if (!Array.isArray(row)) continue;
+      const cell = row[col];
+      // Element-guard the cell: skip a null/scalar cell before reading keys.
+      if (!isRecord(cell)) continue;
       const sn = cell.startNumber;
       if (typeof sn === "string" && normalizeTransponder(sn) === want) {
         const p = cell.position;
-        out.push({
-          lap: col,
-          position: isFiniteNumber(p) && Number.isInteger(p) && p >= 1 ? p : r + 1,
-        });
+        // No valid running position → omit the column entirely. The row index
+        // is finishing order, not running position; back-filling it lied.
+        if (isFiniteNumber(p) && Number.isInteger(p) && p >= 1) {
+          out.push({ lap: col, position: p });
+        }
         break;
       }
     }

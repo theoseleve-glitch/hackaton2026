@@ -1,3 +1,4 @@
+import { freezeHistory, kitVersionId } from "./sheets";
 import type { SetupVersion, SheetsState } from "./sheets";
 
 /** Versioned serialization for AsyncStorage (or any string store).
@@ -45,25 +46,43 @@ export function deserialize(raw: string, expectedTemplateId: string): Deserializ
 
   if (!isValidState(state)) return { ok: false, reason: "corrupt" };
   if (state.template_id !== expectedTemplateId) return { ok: false, reason: "wrong_template" };
-  return { ok: true, state };
+  // JSON.parse returns fully-mutable objects: re-establish the in-memory
+  // invariant that saved versions (and the locked kit baseline) are immutable.
+  return { ok: true, state: freezeHistory(state) };
 }
 
 function isValidState(s: SheetsState): boolean {
-  return (
-    typeof s === "object" &&
-    s !== null &&
-    typeof s.template_id === "string" &&
-    Array.isArray(s.versions) &&
-    s.versions.length > 0 &&
-    s.versions.every(isValidVersion) &&
-    typeof s.draft === "object" &&
-    s.draft !== null &&
-    typeof s.draft_base_id === "string" &&
-    s.versions.some((v) => v.id === s.draft_base_id) &&
-    typeof s.draft_name === "string" &&
-    Array.isArray(s.starred) &&
-    s.starred.every((f) => typeof f === "string")
-  );
+  if (
+    !(
+      typeof s === "object" &&
+      s !== null &&
+      typeof s.template_id === "string" &&
+      Array.isArray(s.versions) &&
+      s.versions.length > 0 &&
+      s.versions.every(isValidVersion) &&
+      typeof s.draft === "object" &&
+      s.draft !== null &&
+      typeof s.draft_base_id === "string" &&
+      s.versions.some((v) => v.id === s.draft_base_id) &&
+      typeof s.draft_name === "string" &&
+      Array.isArray(s.starred) &&
+      s.starred.every((f) => typeof f === "string")
+    )
+  ) {
+    return false;
+  }
+  // Ids must be unique — a duplicate id makes getVersion/diff ambiguous and lets
+  // a forged version shadow the real one.
+  if (new Set(s.versions.map((v) => v.id)).size !== s.versions.length) return false;
+  // Kit-root invariant: exactly the version diffVsKit() and lineage assume must
+  // exist — a locked, parent-less root whose id is the template's kit id. Without
+  // this a kit-less blob passes validation, then diffVsKit() throws an uncaught
+  // Error across the boundary on first use.
+  const kitId = kitVersionId(s.template_id);
+  if (!s.versions.some((v) => v.id === kitId && v.parent_id === null && v.locked === true)) {
+    return false;
+  }
+  return true;
 }
 
 function isValidVersion(v: SetupVersion): boolean {

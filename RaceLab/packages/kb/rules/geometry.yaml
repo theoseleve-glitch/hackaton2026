@@ -612,7 +612,7 @@
   conditions:
     amplified_on: [fast_open, bumpy]
     reduced_on: [technical_tight]
-  counter_indications: [understeer]   # entry push gets worse
+  counter_indications: []   # entry push caveat is carried by the address phase (corner_exit only)
   magnitude_guidance: "Move one shim at a time, both sides."
   reversal_cost_minutes: 8
   confidence: high

@@ -17,6 +17,7 @@ import {
   fetchForecast,
   fetchOpenMeteo,
   payloadHasData,
+  payloadDayComplete,
   validateOpenMeteoPayload,
 } from "./client";
 import type { FetchLike, OpenMeteoResponse } from "./client";
@@ -36,6 +37,7 @@ import {
   forecastCacheKey,
   forecastLatestKey,
   hourBucketUtc,
+  INVALID_HOUR_BUCKET,
   roundCoord,
 } from "./cache";
 import type { KeyValueDriver } from "./cache";
@@ -355,6 +357,29 @@ const T_NOW = Date.parse("2026-06-11T10:30:00.000Z");
   check("roundCoord 2dp", roundCoord(45.18444) === "45.18" && roundCoord(5.726) === "5.73");
   check("roundCoord normalizes -0", roundCoord(-0.004) === "0.00");
   check("hourBucketUtc", hourBucketUtc(T_NOW) === "2026-06-11T10");
+  // FIX 3: hourBucketUtc is an exported helper — new Date(NaN).toISOString()
+  // throws RangeError, which would violate never-throw across the boundary.
+  // A non-finite clock must yield a harmless sentinel (cache miss), not a throw.
+  {
+    let threwNaN = false;
+    let bucketNaN = "";
+    try {
+      bucketNaN = hourBucketUtc(NaN);
+    } catch {
+      threwNaN = true;
+    }
+    check("hourBucketUtc(NaN) does not throw and returns the sentinel", !threwNaN && bucketNaN === INVALID_HOUR_BUCKET);
+    let threwInf = false;
+    try {
+      check("hourBucketUtc(Infinity) → sentinel", hourBucketUtc(Infinity) === INVALID_HOUR_BUCKET);
+      check("hourBucketUtc(-Infinity) → sentinel", hourBucketUtc(-Infinity) === INVALID_HOUR_BUCKET);
+    } catch {
+      threwInf = true;
+    }
+    check("hourBucketUtc(±Infinity) never throws", !threwInf);
+    // the sentinel key is a guaranteed miss — no real payload ever lands there
+    check("forecastCacheKey on a non-finite clock is the sentinel-bucket miss key", forecastCacheKey(GPS, NaN) === "weather:fc:45.18,5.72:invalid");
+  }
   check("forecastCacheKey = rounded gps + hour bucket", forecastCacheKey(GPS, T_NOW) === "weather:fc:45.18,5.72:2026-06-11T10");
   check("forecastLatestKey is stable per cell", forecastLatestKey(GPS) === "weather:fc:45.18,5.72:latest");
   check(
@@ -420,6 +445,43 @@ console.log("\n— cache: TTL + stale-if-offline —");
   const { fn: fn3 } = countingFetch(forecastFixtureJson);
   const r9 = await fetchWithCache({ driver: badDriver, now_ms: T_NOW, ttl_ms: ttl }, key(T_NOW), latest, doFetch(fn3));
   check("cache write failure never fails the fetch", r9.ok && r9.from === "network" && r9.stale === false && r9.cache_write_failed === true);
+
+  // FIX 2: a corrupt PRIMARY entry rescued by the pointer (or a fresh fetch) was
+  // silently swallowed — the {ok:true} result dropped corruptSeen, hiding the
+  // unreadable slot. cache_corrupt must now ride EVERY return path (never-wipe
+  // visibility). Set up: valid envelope at an OLD bucket the pointer references,
+  // corrupt blob at the CURRENT bucket that the read tries first.
+  {
+    // old entry sits in the PREVIOUS hour bucket (≠ current key, so the pointer
+    // chase actually runs); a 60-min TTL keeps the 40-min-old entry fresh.
+    const ptrTtl = 60 * MIN;
+    const oldMs = T_NOW - 40 * MIN;
+    const oldKey = key(oldMs);
+    check("pointer-rescue setup: old bucket differs from the current bucket", oldKey !== key(T_NOW));
+    const goodEnv = JSON.stringify({ stored_at_ms: oldMs, payload: forecastFixtureJson });
+    const seeded = memDriver({ [oldKey]: goodEnv, [latest]: oldKey, [key(T_NOW)]: "{not json" });
+    const rPtr = await fetchWithCache({ driver: seeded.driver, now_ms: T_NOW, ttl_ms: ptrTtl }, key(T_NOW), latest, doFetch(offlineFetch));
+    check(
+      "corrupt primary rescued by pointer still flags cache_corrupt on the {ok:true} cache hit",
+      rPtr.ok && rPtr.from === "cache" && !rPtr.stale && rPtr.cache_corrupt === true,
+    );
+    check("corrupt primary slot is preserved, never deleted (never-wipe)", seeded.store.get(key(T_NOW)) === "{not json");
+
+    // corrupt primary + NO covering pointer + online → fresh fetch rescues, but
+    // the {ok:true} network result must still surface that the slot was corrupt.
+    const seeded2 = memDriver({ [key(T_NOW)]: "{not json" });
+    const { fn: fnFix } = countingFetch(forecastFixtureJson);
+    const rNet = await fetchWithCache({ driver: seeded2.driver, now_ms: T_NOW, ttl_ms: ttl }, key(T_NOW), latest, doFetch(fnFix));
+    check(
+      "corrupt primary rescued by a fresh fetch still flags cache_corrupt on the network result",
+      rNet.ok && rNet.from === "network" && rNet.cache_corrupt === true,
+    );
+
+    // sanity: a clean read carries NO cache_corrupt flag (no false positives)
+    const cleanSeed = memDriver({ [oldKey]: goodEnv, [latest]: oldKey });
+    const rClean = await fetchWithCache({ driver: cleanSeed.driver, now_ms: T_NOW, ttl_ms: ptrTtl }, key(T_NOW), latest, doFetch(offlineFetch));
+    check("clean pointer hit has no cache_corrupt flag (no false positive)", rClean.ok && rClean.from === "cache" && !rClean.stale && rClean.cache_corrupt === undefined);
+  }
 }
 
 console.log("\n— cache: covers predicate (request-window guard) —");
@@ -614,6 +676,38 @@ console.log("\n— service: backfillSession —");
   check("dataless day is NOT cached (no 30-day 'no data' pin)", nd.store.size === 0);
   const r5 = await backfillSession({ fetchFn: nfn, driver: nd.driver, now_ms: T_NOW + 2 * DAY }, GPS, "2026-06-10");
   check("retry later refetches instead of hitting a poisoned cache", r5.ok && nstate.calls === 2);
+
+  // FIX 1: a PARTIALLY-published day (the archive fills hour-by-hour at the ~5-day
+  // boundary) — first 12 hours have data, last 12 are still null. payloadHasData
+  // is TRUE for this block, so the old gate cached it for the 30-day archive TTL
+  // and PERMANENTLY lost the 12 hours that publish a day later. The complete-day
+  // gate must return the partial day to the caller but refuse to cache it, then
+  // cache it for good once the whole block is published.
+  const partialDay = synth({
+    time: Array.from({ length: 24 }, (_, i) => `2026-06-09T${String(i).padStart(2, "0")}:00`),
+    temperature_2m: Array.from({ length: 24 }, (_, i) => (i < 12 ? 18 + i * 0.1 : null)),
+    weather_code: Array.from({ length: 24 }, (_, i) => (i < 12 ? 1 : null)),
+  });
+  check("payloadHasData TRUE but payloadDayComplete FALSE for a half-published day", payloadHasData(partialDay) && !payloadDayComplete(partialDay));
+  check("payloadDayComplete TRUE for a gap-free real archive day", payloadDayComplete(archiveFixture));
+  const pd = memDriver();
+  const { fn: pfn, state: pstate } = countingFetch(partialDay);
+  const rp = await backfillSession({ fetchFn: pfn, driver: pd.driver, now_ms: T_NOW }, GPS, "2026-06-09");
+  check(
+    "partial day → ok, 12 observations returned, 12 empty_row rejections (data still surfaced)",
+    rp.ok && rp.observations.length === 12 && rp.rejected_rows.length === 12 && rp.rejected_rows.every((x) => x.reason === "empty_row"),
+  );
+  check("partial day is NOT cached (would permanently lose the unpublished hours)", pd.store.size === 0);
+  const rp2 = await backfillSession({ fetchFn: pfn, driver: pd.driver, now_ms: T_NOW + DAY }, GPS, "2026-06-09");
+  check("once-partial day re-fetches on retry rather than serving the gappy cache", rp2.ok && pstate.calls === 2);
+
+  // and once the full day publishes, it IS cached for good
+  const cd = memDriver();
+  const { fn: cfn, state: cstate } = countingFetch(archiveFixtureJson);
+  const rc1 = await backfillSession({ fetchFn: cfn, driver: cd.driver, now_ms: T_NOW }, GPS, "2026-06-01");
+  check("complete day → cached", rc1.ok && cd.store.size === 1);
+  const rc2 = await backfillSession({ fetchFn: cfn, driver: cd.driver, now_ms: T_NOW + DAY }, GPS, "2026-06-01");
+  check("complete day served from cache on retry (no refetch)", rc2.ok && rc2.from === "cache" && cstate.calls === 1);
 }
 
 // ═══ service: manual override (schema resolveConditions wiring) ══════════════

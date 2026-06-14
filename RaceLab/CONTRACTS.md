@@ -83,8 +83,8 @@
 Source-level import: `packages/weather/src/index` (relative path, like every package). Bundles into React Native: zero node built-ins, zero runtime deps; fetch / key-value storage / clock are ALL injected via parameters. **The advisor/engine must never import this package (D18) — it enriches session logging only, and every result is discriminated so the app works fully with every endpoint down.**
 
 **Service (what the app calls):**
-- `autoFillSession(deps, gps, sessionStartIso)` → `{ok:true, observations, rejected_rows, at_start?, from:"network"|"cache", stale}` | `{ok:false, reason}` — live forecast auto-fill, cache-first, stale-if-offline; `at_start` = observation governing the session start.
-- `backfillSession(deps, gps, dateIso)` → same shape minus `at_start` — archive reconstruction for sessions logged offline (source `"backfill"`); all-null not-yet-published days return `empty_row` rejections and are NOT cached.
+- `autoFillSession(deps, gps, sessionStartIso)` → `{ok:true, observations, rejected_rows, at_start?, from:"network"|"cache", stale, cache_corrupt?}` | `{ok:false, reason}` — live forecast auto-fill, cache-first, stale-if-offline; `at_start` = observation governing the session start. `cache_corrupt?:true` (additive) when an unreadable cache slot was seen but the read was rescued.
+- `backfillSession(deps, gps, dateIso)` → same shape minus `at_start` — archive reconstruction for sessions logged offline (source `"backfill"`); a not-yet-published OR partially-published day (any null hour) returns `empty_row` rejections for its missing hours and is NOT cached — only a COMPLETE gap-free day is cached for the archive TTL (it refetches until whole, never pinning lost hours).
 - `pickConditions(observations, atIso)` → `WeatherObservation | undefined` — schema `weatherAtTime` (at-or-before), resolves later runs without another network call.
 - `applyManualOverride(auto, manual)` → schema `resolveConditions` verbatim: manual wins per-field, blanks auto-fill, `provenance.{auto_filled,overridden}` tracked.
 - `WeatherDeps = { fetchFn, driver, now_ms, forecast_ttl_ms?, archive_ttl_ms? }`; `forecastWindow(now_ms, start_ms)` exported for inspection.
@@ -92,7 +92,7 @@ Source-level import: `packages/weather/src/index` (relative path, like every pac
 **Client (lower level, used by service):**
 - `buildForecastUrl(gps, opts?)` / `buildArchiveUrl(gps, range)` — exact-string-tested URLs; archive hourly list has NO `precipitation_probability` (forecast-only variable).
 - `fetchForecast(fetchFn, gps, opts?)` / `fetchArchive(fetchFn, gps, range)` / `fetchOpenMeteo(fetchFn, url)` → `{ok:true,data}` | `{ok:false, reason:"network_error"|"bad_status"|"bad_payload"}` — offline is a normal result, nothing throws.
-- `validateOpenMeteoPayload(unknown)` — structural payload guard (also run on every cache read); `payloadHasData(data)` — all-null-day detector.
+- `validateOpenMeteoPayload(unknown)` — structural payload guard (also run on every cache read); `payloadHasData(data)` — at-least-one-value detector; `payloadDayComplete(data)` — gap-free-day detector (the archive-cache gate).
 - Types: `FetchLike`, `FetchResponseLike`, `OpenMeteoResponse`, `OpenMeteoHourly`, `ForecastOpts`, `IsoDateRange`, `FetchFailure`.
 
 **Map:**

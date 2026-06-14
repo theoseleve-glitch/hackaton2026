@@ -104,12 +104,15 @@ function deepFreeze<T>(value: T): T {
   }
   return value;
 }
-/** No-dup string list whose every id belongs to the given schema bucket. */
+/** A section bucket must EQUAL its schema array exactly — same length, same
+ *  element order. The class declaration drives the sheet's render order, so a
+ *  reordered or short-but-valid bucket is malformed (it would silently desync
+ *  the sheet from the schema). Subset/no-dup is not enough; require identity. */
 function sectionListBad(v: unknown, bucket: readonly string[]): boolean {
   return !(
     Array.isArray(v) &&
-    v.every((id) => inEnum(bucket, id)) &&
-    new Set(v).size === v.length
+    v.length === bucket.length &&
+    v.every((id, i) => id === bucket[i])
   );
 }
 

@@ -35,7 +35,7 @@
   conditions:
     amplified_on: [high_grip]
     reduced_on: [wet]
-  counter_indications: [understeer]   # if already pushing entry, thicker front makes entry worse
+  counter_indications: []   # entry-push caveat is carried by the address phase (corner_exit / on_power only)
   magnitude_guidance: "One step at a time (e.g. 5000 → 7000 cSt)."
   reversal_cost_minutes: 12
   confidence: high

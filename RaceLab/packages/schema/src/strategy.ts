@@ -164,9 +164,15 @@ export function detectTyreCliff(
   if (laps.length < Math.max(min_laps, window + 1)) return silent;
   if (!laps.every((l) => isFiniteNum(l.t_s) && l.t_s > 0)) return silent;
 
-  const half = laps.slice(0, Math.max(window, Math.floor(laps.length / 2)));
+  // Baseline = best laps from the FIRST HALF only. The pool is CAPPED at
+  // floor(len/2): a large `window` must never reach into the degraded second
+  // half and inflate the baseline (which would mask a real cliff). We take the
+  // best min(window, firstHalf.length) laps and divide by the actual count
+  // taken — never by `window` when fewer laps were available.
+  const firstHalf = laps.slice(0, Math.floor(laps.length / 2));
+  const take = Math.min(window, firstHalf.length);
   const baseline =
-    [...half.map((l) => l.t_s)].sort((a, b) => a - b).slice(0, window).reduce((a, b) => a + b, 0) / window;
+    firstHalf.map((l) => l.t_s).sort((a, b) => a - b).slice(0, take).reduce((a, b) => a + b, 0) / take;
 
   // Longest suffix of consecutive laps all slower than baseline + threshold.
   let suffixStart = laps.length;

@@ -12,7 +12,7 @@
 import type { Gps, IsoDate, IsoDateTime, RunConditions, ResolvedRunConditions, WeatherObservation } from "../../schema/src/index";
 import { resolveConditions, weatherAtTime } from "../../schema/src/index";
 import type { FetchFailure, FetchLike, OpenMeteoResponse } from "./client";
-import { buildArchiveUrl, buildForecastUrl, fetchOpenMeteo, payloadHasData } from "./client";
+import { buildArchiveUrl, buildForecastUrl, fetchOpenMeteo, payloadDayComplete } from "./client";
 import type { KeyValueDriver } from "./cache";
 import {
   DEFAULT_ARCHIVE_TTL_MS,
@@ -61,6 +61,10 @@ export interface SessionWeather {
   /** stale only: the fetch failure that forced serving expired cache
    *  ("offline" vs "HTTP 500" are different stories for the user). */
   fetch_failure?: FetchFailure;
+  /** true when a corrupt cache slot was seen on this read but the result was
+   *  rescued (pointer chase or fresh fetch). Never-wipe visibility: a healthy
+   *  result must still report that something in storage was unreadable. */
+  cache_corrupt?: true;
 }
 
 export type WeatherFailure =
@@ -146,6 +150,8 @@ function finish(
     base.age_ms = res.age_ms;
     if (res.stale) base.fetch_failure = res.fetch_failure;
   }
+  // surface a corrupt-slot sighting on the healthy result too (never-wipe)
+  if (res.cache_corrupt === true) base.cache_corrupt = true;
   if (atStartIso !== undefined) {
     const at_start = pickConditions(mapped.observations, atStartIso);
     if (at_start !== undefined) {
@@ -228,10 +234,12 @@ export async function backfillSession(
       driver: deps.driver,
       now_ms: deps.now_ms,
       ttl_ms: deps.archive_ttl_ms ?? DEFAULT_ARCHIVE_TTL_MS,
-      // archive publishes ~5 days behind: an all-null day is returned (caller
-      // retries later) but never cached — caching it would pin "no data" for
-      // the whole 30-day archive TTL.
-      should_cache: payloadHasData,
+      // archive publishes ~5 days behind, hour-by-hour at the boundary: only a
+      // COMPLETE (gap-free) day is cached for the 30-day archive TTL. An all-null
+      // day OR a half-published day (some hours still null) is returned to the
+      // caller but never cached — caching either would pin missing hours we can
+      // never refetch. The day re-fetches cheaply until it is whole.
+      should_cache: payloadDayComplete,
     },
     archiveCacheKey(gps, range),
     undefined, // range IS the identity — no rotating bucket, no pointer needed

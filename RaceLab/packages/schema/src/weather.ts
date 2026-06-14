@@ -11,7 +11,6 @@
 
 import type { IsoDateTime, Sky } from "./vocab";
 import { clampNum, deepFreeze, isFiniteNum } from "./vocab";
-import { isoToMs } from "./ids";
 import type { RunConditions } from "./runs"; // type-only — no runtime cycle
 
 export const WEATHER_SOURCES = ["auto", "manual", "backfill"] as const;
@@ -177,19 +176,39 @@ export function resolveConditions(
   return deepFreeze({ conditions, provenance: { auto_filled, overridden } });
 }
 
+/** Parse an ISO timestamp to epoch ms, interpreting an OFFSET-LESS string as
+ *  UTC (append "Z") rather than letting Date.parse read it device-locally.
+ *  observed_at is offset-required, but an entity timestamp arriving at the join
+ *  (RunEntry/OutcomeRecord.created_at) is only offset-CHECKED on the load path —
+ *  a write-path or lifted-legacy timestamp can still be offset-less. Without
+ *  this normalization the cutoff and the log would be compared on different time
+ *  bases and weatherAtTime would skew by the device's UTC offset (hours). NaN
+ *  on unparseable input is handled by the caller's Number.isNaN guard. */
+function isoToMsUtc(iso: string): number {
+  return Date.parse(hasExplicitOffset(iso) ? iso : `${iso}Z`);
+}
+
 /** Latest observation at-or-before `at` (ties: the LAST matching entry wins).
  *  Observations are immutable facts, so this lookup can never retro-falsify a
- *  run — full atmosphere (pressure_hpa for nitro) is resolved here. */
+ *  run — full atmosphere (pressure_hpa for nitro) is resolved here. Both the
+ *  cutoff and every observed_at are parsed UTC-consistently (see isoToMsUtc):
+ *  an offset-less `at` (e.g. a lifted-legacy created_at) is read as UTC, never
+ *  device-local, so the join is deterministic regardless of device timezone. */
 export function weatherAtTime(
   log: readonly WeatherObservation[] | undefined,
   at: IsoDateTime,
 ): WeatherObservation | undefined {
-  const cutoff = isoToMs(at);
+  const cutoff = isoToMsUtc(at);
+  if (Number.isNaN(cutoff)) return undefined;
   let found: WeatherObservation | undefined;
+  let foundMs = -Infinity;
   for (const obs of log ?? []) {
-    const t = Date.parse(obs.observed_at);
+    const t = isoToMsUtc(obs.observed_at);
     if (!Number.isNaN(t) && t <= cutoff) {
-      if (found === undefined || t >= Date.parse(found.observed_at)) found = obs;
+      if (found === undefined || t >= foundMs) {
+        found = obs;
+        foundMs = t;
+      }
     }
   }
   return found;

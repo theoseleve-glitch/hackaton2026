@@ -237,6 +237,53 @@ declRejects(
   declFix({ sections: { common: ["tyres", "tyres"], nitro: [], brushless: [] } }),
   "invalid:sections.common",
 );
+// section buckets must EQUAL the schema arrays exactly (length + order) — the
+// class declaration drives the sheet render order, so a reordered or short
+// bucket of otherwise-valid ids silently desyncs the sheet from the schema.
+declRejects(
+  "reordered common bucket rejected (order must match schema exactly)",
+  declFix({
+    sections: {
+      common: ["rear_suspension", "front_suspension", "diffs", "tyres", "geometry", "electronics_radio"],
+      nitro: [...NITRO_SECTIONS],
+      brushless: [...BRUSHLESS_SECTIONS],
+    },
+  }),
+  "invalid:sections.common",
+);
+declRejects(
+  "short common bucket rejected (valid ids but missing one = incomplete)",
+  declFix({
+    sections: {
+      common: ["front_suspension", "rear_suspension", "diffs", "tyres", "geometry"],
+      nitro: [...NITRO_SECTIONS],
+      brushless: [...BRUSHLESS_SECTIONS],
+    },
+  }),
+  "invalid:sections.common",
+);
+declRejects(
+  "reordered nitro bucket rejected",
+  declFix({
+    sections: {
+      common: [...COMMON_SECTIONS],
+      nitro: ["clutch", "engine", "fuel_system", "exhaust"],
+      brushless: [...BRUSHLESS_SECTIONS],
+    },
+  }),
+  "invalid:sections.nitro",
+);
+declRejects(
+  "short brushless bucket rejected",
+  declFix({
+    sections: {
+      common: [...COMMON_SECTIONS],
+      nitro: [...NITRO_SECTIONS],
+      brushless: ["esc", "motor", "gearing"],
+    },
+  }),
+  "invalid:sections.brushless",
+);
 declRejects("empty power_types rejected", declFix({ power_types: [] }), "invalid:power_types");
 
 // ═══ compiled bundle (kb/bundle.json — finding-1 regression) ═════════════════

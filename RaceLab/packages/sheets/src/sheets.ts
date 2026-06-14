@@ -89,24 +89,39 @@ export function getVersion(state: SheetsState, id: string): SetupVersion | undef
   return state.versions.find((v) => v.id === id);
 }
 
+/** Result of `saveVersion`. `saved: null` means "draft equals its base, nothing
+ *  to mint" (a no-op, not an error). `ok: false` is a real refusal — currently a
+ *  bad clock (`now` not a parseable ISO instant): an id with a NaN timestamp half
+ *  is corruption, not data, so it never crosses the boundary as a thrown Error. */
+export type SaveResult =
+  | { ok: true; state: SheetsState; saved: SetupVersion | null }
+  | { ok: false; reason: "bad_clock" };
+
 /**
  * Freeze the draft as a new immutable version (parent = the version the draft
  * was branched from) and rebase the draft onto it. Identical values never
  * mint a version — renaming is `renameVersion`, not duplicate-to-rename.
+ *
+ * `rand` is the injected entropy source for the id suffix (defaults to
+ * Math.random; inject a deterministic source for reproducible golden tests).
  */
 export function saveVersion(
   state: SheetsState,
   now: string,
   name?: string,
-): { state: SheetsState; saved: SetupVersion | null } {
+  rand: () => number = Math.random,
+): SaveResult {
+  const now_ms = Date.parse(now);
+  if (Number.isNaN(now_ms)) return { ok: false, reason: "bad_clock" };
+
   const base = getVersion(state, state.draft_base_id);
   if (base !== undefined && shallowEqual(state.draft, base.values)) {
-    return { state, saved: null };
+    return { ok: true, state, saved: null };
   }
   const versionName = (name ?? state.draft_name).trim() || "Unnamed setup";
 
   const version = freezeVersion({
-    id: nextId(now),
+    id: nextId(now_ms, rand),
     name: versionName,
     parent_id: state.draft_base_id,
     template_id: state.template_id,
@@ -115,6 +130,7 @@ export function saveVersion(
     locked: false,
   });
   return {
+    ok: true,
     state: {
       ...state,
       versions: [...state.versions, version],
@@ -156,9 +172,35 @@ function freezeVersion(version: SetupVersion): SetupVersion {
   return Object.freeze(version);
 }
 
-function nextId(now: string): string {
-  const rand = Math.random().toString(36).slice(2, 10);
-  return `sv-${Date.parse(now).toString(36)}-${rand}`;
+/** Deep-freeze the immutable half of a state after a persist round-trip:
+ *  JSON.parse hands back fully-mutable objects, so without this the "locked"
+ *  kit baseline and every saved version become editable again. Freezes each
+ *  version's values, each version object, and the versions array itself. The
+ *  draft stays mutable on purpose — it is the one editing surface. Returns the
+ *  same state (mutated in place) for call-site convenience. */
+export function freezeHistory(state: SheetsState): SheetsState {
+  for (const version of state.versions) freezeVersion(version);
+  Object.freeze(state.versions);
+  return state;
+}
+
+/** `sv-${ts36}-${rand8}` — same shape as the schema/sessions id contract: a
+ *  FIXED-WIDTH 8-char base36 suffix (a bare Math.random().toString(36) can
+ *  terminate early and collapse the collision space). Caller passes a validated
+ *  finite `now_ms`, so the timestamp half is never the literal 'NaN'. */
+function nextId(now_ms: number, rand: () => number): string {
+  return `sv-${Math.floor(now_ms).toString(36)}-${randomSuffix(rand)}`;
+}
+
+/** Fixed-width 8-char base36 suffix from the injected entropy source.
+ *  A rand that yields 0 contributes "0" (never loops forever). */
+function randomSuffix(rand: () => number): string {
+  let s = "";
+  while (s.length < 8) {
+    const part = rand().toString(36).slice(2);
+    s += part === "" ? "0" : part;
+  }
+  return s.slice(0, 8);
 }
 
 function shallowEqual(a: SetupValues, b: SetupValues): boolean {

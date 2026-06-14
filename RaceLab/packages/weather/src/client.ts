@@ -168,6 +168,26 @@ export function payloadHasData(data: OpenMeteoResponse): boolean {
   return HOURLY_NUMERIC_FIELDS.some((f) => h[f]?.some((v) => v !== null) ?? false);
 }
 
+/** True iff the payload is a COMPLETE day: it has data (payloadHasData) AND no
+ *  present numeric variable array contains a null at any hour. This is the
+ *  archive-cache gate, NOT payloadHasData: the archive publishes hour-by-hour
+ *  near the ~5-day boundary, so a single-day request can come back with some
+ *  hours filled and the rest still null. payloadHasData is true for that day, so
+ *  caching it for the 30-day archive TTL would PERMANENTLY pin the half-published
+ *  block and lose the hours that publish a day later. Requiring a gap-free block
+ *  means we return the partial day to the caller but refetch (cheap, archive is
+ *  immutable once whole) until it is fully published, then cache it for good. */
+export function payloadDayComplete(data: OpenMeteoResponse): boolean {
+  if (!payloadHasData(data)) return false;
+  const h = data.hourly as unknown as Record<string, readonly (number | null)[] | undefined>;
+  for (const f of HOURLY_NUMERIC_FIELDS) {
+    const arr = h[f];
+    if (arr === undefined) continue; // absent variable (archive omits probability) — not a gap
+    if (arr.some((v) => v === null)) return false; // an unpublished hour in a present variable
+  }
+  return true;
+}
+
 // ── fetch wrappers (discriminated, never throw) ──────────────────────────────
 
 export type FetchFailure =

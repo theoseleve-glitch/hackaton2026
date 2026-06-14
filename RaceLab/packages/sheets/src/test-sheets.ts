@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ChassisTemplate } from "../../engine/src/types";
 import {
+  freezeHistory,
   initSheets,
   kitVersionId,
   loadVersion,
@@ -11,6 +12,7 @@ import {
   setValue,
   toggleStar,
 } from "./sheets";
+import type { SetupVersion, SheetsState } from "./sheets";
 import { diffValues, diffVersions, diffVsKit, draftDiff } from "./diff";
 import { deserialize, serialize } from "./persist";
 
@@ -52,16 +54,29 @@ check("setValue same value is a no-op (same reference)", setValue(s, "front_sway
 
 // save → immutable version with correct lineage, draft rebased
 const save1 = saveVersion(s, T1, "Softer front bar");
+check("saveVersion succeeds (ok:true)", save1.ok);
+if (!save1.ok) throw new Error("save1 unexpectedly failed");
 s = save1.state;
 check("saveVersion appends with parent = old base", save1.saved !== null && save1.saved.parent_id === KIT && s.versions.length === 2);
 check("draft rebased onto the new version (diff now empty)", s.draft_base_id === save1.saved!.id && draftDiff(s).length === 0);
-check("saving identical values is a no-op even with a new name", saveVersion(s, T2, "fancy new name").saved === null);
+const noop = saveVersion(s, T2, "fancy new name");
+check("saving identical values is a no-op even with a new name", noop.ok && noop.saved === null);
 check("saved versions are deep-frozen", Object.isFrozen(save1.saved) && Object.isFrozen(save1.saved!.values));
 check("mutating a saved version's values throws", (() => { try { (save1.saved!.values as Record<string, number>).front_sway_bar = 9; return false; } catch { return true; } })());
+
+// FIX 4: id has the schema-style fixed-width 8-char base36 suffix, injected rand
+const detSave = saveVersion(setValue(s, "front_sway_bar", 1.9), T1, "det", () => 0.5);
+check("saveVersion id matches sv-<ts36>-<rand8> shape", detSave.ok && /^sv-[0-9a-z]+-[0-9a-z]{8}$/.test(detSave.saved!.id));
+const detSave2 = saveVersion(setValue(s, "front_sway_bar", 1.9), T1, "det", () => 0.5);
+check("injected rand is deterministic (same inputs → same id)", detSave.ok && detSave2.ok && detSave.saved!.id === detSave2.saved!.id);
+// FIX 4: bad clock → discriminated refusal, never a NaN-poisoned id or a throw
+const bad = saveVersion(setValue(s, "front_sway_bar", 1.8), "not-a-date", "x");
+check("saveVersion on a bad clock refuses (ok:false, bad_clock), never NaN id", !bad.ok && (bad as { reason: string }).reason === "bad_clock");
 
 // second change + save → lineage chain; version-vs-version diff; unique ids
 s = setValue(s, "rear_diff_oil", 4000);
 const save2 = saveVersion(s, T2, "Thicker rear diff");
+if (!save2.ok) throw new Error("save2 unexpectedly failed");
 s = save2.state;
 check("lineage chains saves", save2.saved!.parent_id === save1.saved!.id);
 check("version ids are unique", new Set(s.versions.map((v) => v.id)).size === s.versions.length);
@@ -99,6 +114,47 @@ check("deserialize discriminates garbage as corrupt", (deserialize("{not json", 
 check("deserialize discriminates future formats (no silent wipe)", (deserialize(raw.replace('"format":1', '"format":99'), template.template_id) as { reason: string }).reason === "unknown_format");
 check("deserialize rejects dangling draft_base_id", !deserialize(raw.replace(new RegExp(`"draft_base_id":"[^"]+"`), '"draft_base_id":"sv-ghost"'), template.template_id).ok);
 check("deserialize rejects a version missing values", !deserialize(raw.replace('"values"', '"valuez"'), template.template_id).ok);
+
+// FIX 1: deep-freeze MUST survive the persist round-trip — JSON.parse hands back
+// mutable objects, so without re-freezing the "locked" kit and saved versions
+// become editable again.
+const rt = deserialize(raw, template.template_id);
+check("deserialize result is ok", rt.ok);
+if (!rt.ok) throw new Error("roundtrip unexpectedly failed");
+check("round-trip: versions array is frozen", Object.isFrozen(rt.state.versions));
+check("round-trip: every version + its values are frozen", rt.state.versions.every((v) => Object.isFrozen(v) && Object.isFrozen(v.values)));
+const rtKit = rt.state.versions.find((v) => v.id === KIT)!;
+check("round-trip: mutating the locked kit values is a no-op / throws (stays frozen)", (() => { try { (rtKit.values as Record<string, number>).front_sway_bar = 99; } catch { /* strict mode throws */ } return rtKit.values.front_sway_bar !== 99 && Object.isFrozen(rtKit.values); })());
+check("round-trip: pushing onto the frozen versions array is a no-op / throws", (() => { const n = rt.state.versions.length; try { (rt.state.versions as SetupVersion[]).push(rtKit); } catch { /* strict mode throws */ } return rt.state.versions.length === n; })());
+// the draft stays mutable on purpose (it is the editing surface)
+check("round-trip: draft remains mutable (editing surface)", !Object.isFrozen(rt.state.draft));
+
+// FIX 2: a kit-less blob must fail validation as 'corrupt' up front, NOT pass
+// then throw an uncaught Error out of diffVsKit on first use.
+const kitless: SheetsState = {
+  template_id: template.template_id,
+  versions: [{ id: "sv-orphan", name: "orphan", parent_id: "sv-missing", template_id: template.template_id, values: { a: 1 }, created_at: T0, locked: false }],
+  draft: { a: 1 },
+  draft_base_id: "sv-orphan",
+  draft_name: "x",
+  starred: [],
+};
+const kitlessRaw = serialize(kitless);
+const kitlessRes = deserialize(kitlessRaw, template.template_id);
+check("deserialize rejects a kit-less blob as corrupt (no later diffVsKit throw)", !kitlessRes.ok && (kitlessRes as { reason: string }).reason === "corrupt");
+// and prove the danger the guard removes: such a state WOULD throw in diffVsKit
+check("kit-less state would have thrown in diffVsKit (the bug the guard prevents)", (() => { try { diffVsKit(kitless); return false; } catch { return true; } })());
+// a state whose locked root exists but under the WRONG id is also corrupt
+const wrongKitId = serialize({ ...kitless, versions: [{ ...kitless.versions[0], id: "sv-orphan", parent_id: null, locked: true }] });
+check("deserialize rejects a locked root whose id is not the kit id", !deserialize(wrongKitId, template.template_id).ok);
+
+// FIX 3: duplicate version ids are corruption (forged version shadows the real one)
+const dupRaw = serialize({ ...s, versions: [...s.versions, s.versions[0]] });
+check("deserialize rejects duplicate version ids", !deserialize(dupRaw, template.template_id).ok && (deserialize(dupRaw, template.template_id) as { reason: string }).reason === "corrupt");
+
+// freezeHistory helper is idempotent and leaves the draft alone
+const ih = freezeHistory(initSheets(template, T0));
+check("freezeHistory freezes versions + kit values, leaves draft mutable", Object.isFrozen(ih.versions) && Object.isFrozen(ih.versions[0].values) && !Object.isFrozen(ih.draft));
 
 // diff edge: field present on one side only
 check("diff handles one-sided fields", JSON.stringify(diffValues({ a: 1 }, {})) === JSON.stringify([{ field: "a", from: 1, to: undefined }]));

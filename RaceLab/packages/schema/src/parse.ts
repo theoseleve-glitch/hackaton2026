@@ -222,6 +222,11 @@ export function parseRunEntry(value: unknown): ParseResult<RunEntry> {
   if (!isRecord(value)) return { ok: false, reason: "not_an_object" };
   if (!deepNumbersFinite(value)) return { ok: false, reason: "non_finite_numeric" };
   if (!idOk("run", value.id)) return no("id");
+  // created_at is intentionally NOT offset-required here (weather.observed_at IS):
+  // lifted-legacy rows may carry offset-less ISO and rejecting them would wipe
+  // valid history. The skew this could cause at the weather join is neutralized
+  // at the seam — weatherAtTime() reads an offset-less timestamp as UTC, never
+  // device-local — so an offset-less created_at can never silently misjoin.
   if (!isoDateTime(value.created_at)) return no("created_at");
   if (!inEnum(RUN_TYPES, value.type)) return no("type");
   if (!idOk("ss", value.session_id)) return no("session_id");

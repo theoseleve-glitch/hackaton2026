@@ -69,9 +69,19 @@ export function appendOutbox<T extends object>(
   } catch {
     return { ok: false, reason: "unserializable_payload" }; // circular refs
   }
+  // The id is the sync idempotency key. makeId's ms+rand halves can COLLIDE for
+  // two entries minted in the same ms under a deterministic injected rand (a
+  // crash-replay can mint several at one timestamp). The monotonic `seq` is
+  // already unique within a journal by construction, so we fold it into the id's
+  // (unbounded `[0-9a-z]+`) timestamp segment as `…<ms36>s<seq36>…` — keeping the
+  // ob-<seg>-<rand8> shape isId/parseOutboxState require, while making the id
+  // collision-proof within the journal regardless of clock or entropy.
+  const baseId = makeId("ob", isoToMs(now), rand);
+  const dash = baseId.indexOf("-", 3); // end of the ms36 segment (after "ob-")
+  const id = `${baseId.slice(0, dash)}s${state.next_seq.toString(36)}${baseId.slice(dash)}` as OutboxId;
   const entry: OutboxEntry = deepFreeze({
     seq: state.next_seq,
-    id: makeId("ob", isoToMs(now), rand),
+    id,
     ts: now,
     domain: input.domain,
     op: input.op,

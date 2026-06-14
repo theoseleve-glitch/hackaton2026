@@ -14,6 +14,6 @@ export {
 } from "./sheets";
 export { diffValues, draftDiff, diffVersions, diffVsKit } from "./diff";
 export { serialize, deserialize, FORMAT_VERSION } from "./persist";
-export type { SetupValues, SetupVersion, SheetsState } from "./sheets";
+export type { SetupValues, SetupVersion, SheetsState, SaveResult } from "./sheets";
 export type { ChangedField } from "./diff";
 export type { DeserializeResult } from "./persist";

@@ -59,8 +59,18 @@ export function roundCoord(v: number): string {
   return (Object.is(r, -0) ? 0 : r).toFixed(2);
 }
 
-/** UTC hour bucket from an injected clock, e.g. "2026-06-12T14". */
+/** Sentinel hour bucket for a non-finite clock — never a valid ISO prefix, so a
+ *  key built from it is a guaranteed cache miss (no real payload ever lands in
+ *  this slot) rather than a thrown RangeError. */
+export const INVALID_HOUR_BUCKET = "invalid";
+
+/** UTC hour bucket from an injected clock, e.g. "2026-06-12T14".
+ *  Exported helper → must never throw: `new Date(NaN).toISOString()` raises a
+ *  RangeError, so a non-finite now_ms yields the harmless sentinel bucket (a
+ *  cache miss) instead. The service rejects non-finite now_ms up front; this is
+ *  defense in depth for any direct caller of the key builders. */
 export function hourBucketUtc(now_ms: number): string {
+  if (!Number.isFinite(now_ms)) return INVALID_HOUR_BUCKET;
   return new Date(now_ms).toISOString().slice(0, 13);
 }
 
@@ -140,8 +150,8 @@ export interface CachedFetchDeps {
 }
 
 export type CachedFetchResult =
-  | { ok: true; data: OpenMeteoResponse; from: "network"; stale: false; cache_write_failed?: boolean }
-  | { ok: true; data: OpenMeteoResponse; from: "cache"; stale: false; age_ms: number }
+  | { ok: true; data: OpenMeteoResponse; from: "network"; stale: false; cache_write_failed?: boolean; cache_corrupt?: true }
+  | { ok: true; data: OpenMeteoResponse; from: "cache"; stale: false; age_ms: number; cache_corrupt?: true }
   | {
       ok: true;
       data: OpenMeteoResponse;
@@ -149,6 +159,7 @@ export type CachedFetchResult =
       stale: true; // expired entry served because the network failed — better than nothing
       age_ms: number;
       fetch_failure: FetchFailure;
+      cache_corrupt?: true;
     }
   | ({ ok: false; cache_corrupt?: true } & FetchFailure);
 
@@ -196,10 +207,15 @@ export async function fetchWithCache(
     }
   }
 
+  // never-wipe visibility: a corrupt slot seen on ANY read this call is surfaced
+  // on EVERY return path (success included), even when the pointer or a fresh
+  // fetch rescues the read — silent rescue would hide repeating corruption.
+  const corrupt = corruptSeen ? ({ cache_corrupt: true } as const) : ({} as const);
+
   if (cached.hit) {
     const age_ms = Math.max(0, now_ms - cached.env.stored_at_ms);
     if (age_ms <= ttl_ms) {
-      return { ok: true, data: cached.env.payload, from: "cache", stale: false, age_ms };
+      return { ok: true, data: cached.env.payload, from: "cache", stale: false, age_ms, ...corrupt };
     }
   }
 
@@ -216,14 +232,14 @@ export async function fetchWithCache(
       }
     }
     return cache_write_failed
-      ? { ok: true, data: fetched.data, from: "network", stale: false, cache_write_failed: true }
-      : { ok: true, data: fetched.data, from: "network", stale: false };
+      ? { ok: true, data: fetched.data, from: "network", stale: false, cache_write_failed: true, ...corrupt }
+      : { ok: true, data: fetched.data, from: "network", stale: false, ...corrupt };
   }
 
   if (cached.hit) {
     const age_ms = Math.max(0, now_ms - cached.env.stored_at_ms);
     const { ok: _ok, ...failure } = fetched;
-    return { ok: true, data: cached.env.payload, from: "cache", stale: true, age_ms, fetch_failure: failure };
+    return { ok: true, data: cached.env.payload, from: "cache", stale: true, age_ms, fetch_failure: failure, ...corrupt };
   }
 
   const { ok: _ok, ...failure } = fetched;

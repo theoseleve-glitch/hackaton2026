@@ -292,6 +292,13 @@ check("resolveConditions: auto without sky never fills sky", (() => { const o = 
   check("weatherAtTime: exact match wins", weatherAtTime(log, T2)?.air_temp_c === 26);
   check("weatherAtTime: nothing before the first observation", weatherAtTime(log, "2026-06-11T08:00:00.000Z") === undefined);
   check("weatherAtTime: undefined log is undefined", weatherAtTime(undefined, T1) === undefined);
+  // Regression (offset-less created_at skew): an OFFSET-LESS `at` (a lifted-legacy
+  // or write-path created_at that escaped the load-path offset check) must be
+  // read as UTC, never device-local — so it resolves to the SAME observation as
+  // its Z-suffixed twin regardless of the runner's timezone.
+  const tNoOffset = "2026-06-11T09:20:00.000"; // T1 minus the Z
+  check("weatherAtTime: offset-less `at` is interpreted as UTC (no device-local skew)", weatherAtTime(log, tNoOffset)?.air_temp_c === weatherAtTime(log, T1)?.air_temp_c && weatherAtTime(log, tNoOffset)?.air_temp_c === 20);
+  check("weatherAtTime: unparseable `at` yields undefined, never NaN-joins", weatherAtTime(log, "not-a-date") === undefined);
 }
 
 // ═══ runs ════════════════════════════════════════════════════════════════════
@@ -705,6 +712,17 @@ check("detectTyreCliff: whole-run-slow (suffixStart 0, bogus baseline) stays sil
 check("detectTyreCliff: lap exactly at baseline+threshold counts as slow", (() => { const r = detectTyreCliff(mkLaps([...Array(8).fill(30), 30.5, 30.5, 30.5])); return r.detected && r.cliff_lap === 9 && r.confidence === "medium"; })());
 check("detectTyreCliff: custom window/threshold change detection as documented", (() => { const laps = mkLaps([...Array(6).fill(30), 31.2, 31.2]); const strict = detectTyreCliff(laps); const custom = detectTyreCliff(laps, { window: 2, threshold_s: 1 }); return !strict.detected && custom.detected && custom.cliff_lap === 7; })());
 check("detectTyreCliff: custom min_laps gates the claim", (() => { const laps = mkLaps([30, 30, 30, 31, 31, 31]); const strict = detectTyreCliff(laps); const custom = detectTyreCliff(laps, { min_laps: 5 }); return !strict.detected && custom.detected && custom.cliff_lap === 4; })());
+// Regression (baseline masking): window LARGER than floor(len/2). The old pool
+// `Math.max(window, floor(len/2))` reached into the degraded second half and the
+// best-`window` baseline got inflated (then divided by window even with fewer
+// laps), masking a true cliff. Capping the pool to floor(len/2) and dividing by
+// the actual count taken keeps the baseline clean → cliff is correctly DETECTED.
+check("detectTyreCliff: large window vs short series no longer masks a real cliff", (() => {
+  // len 9, window 5 (> floor(9/2)=4): clean first 4 @30, then a sustained +0.5s suffix.
+  const laps = mkLaps([30, 30, 30, 30, 30.5, 30.5, 30.5, 30.5, 30.5]);
+  const r = detectTyreCliff(laps, { window: 5 });
+  return r.detected && r.cliff_lap === 5;
+})());
 
 // ═══ outbox ══════════════════════════════════════════════════════════════════
 
@@ -718,7 +736,18 @@ const a2 = appendOutbox(a1.state, { domain: "runs", op: "create", payload: { id:
 if (!a2.ok) fatal("appendOutbox second append rejected");
 ob = a2.state;
 check("appendOutbox: monotonic seq", a1.entry.seq === 1 && a2.entry.seq === 2 && ob.next_seq === 3);
-check("appendOutbox: id uses ob- prefix, ts = now", a1.entry.id.startsWith(`ob-${Date.parse(T0).toString(36)}-`) && a1.entry.ts === T0);
+check("appendOutbox: id uses ob- prefix + folded seq, ts = now", a1.entry.id.startsWith(`ob-${Date.parse(T0).toString(36)}s${(1).toString(36)}-`) && a1.entry.ts === T0);
+check("appendOutbox: folded-seq id still passes isId('ob')", isId("ob", a1.entry.id) && isId("ob", a2.entry.id));
+// Regression (id-collision): two appends at the SAME now with a DETERMINISTIC
+// rand collide on the ms+rand halves; the folded monotonic seq makes them DISTINCT.
+check("appendOutbox: distinct ids for same-now deterministic-rand appends (seq-folded)", (() => {
+  const fixedRand = () => 0.5;
+  const x = appendOutbox(initOutbox(), { domain: "runs", op: "create", payload: { id: "a" } }, T0, fixedRand);
+  if (!x.ok) return false;
+  const y = appendOutbox(x.state, { domain: "runs", op: "create", payload: { id: "b" } }, T0, fixedRand);
+  if (!y.ok) return false;
+  return x.entry.id !== y.entry.id && isId("ob", x.entry.id) && isId("ob", y.entry.id);
+})());
 check("appendOutbox: previous state untouched", a1.state.entries.length === 1 && ob.entries.length === 2);
 check("appendOutbox: payload is JSON-cloned (caller detached)", (() => { (payload.nested.laps as number[])[0] = 99; return (a1.entry.payload as { nested: { laps: number[] } }).nested.laps[0] === 1; })());
 check("appendOutbox: entry payload frozen", throws(() => { (a1.entry.payload as { name: string }).name = "x"; }));
