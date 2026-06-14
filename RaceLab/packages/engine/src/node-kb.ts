@@ -115,3 +115,13 @@ export function loadKBData(): KBData {
   assertValidKBData(data);
   return data;
 }
+
+/** Where the compiled bundle the app imports lives (packages/kb/bundle.json). */
+export const KB_BUNDLE_PATH = join(KB_DIR, "bundle.json");
+
+/** The exact string the bundler writes — the SINGLE source of truth shared by
+ *  `npm run bundle` (bundle-kb.ts) and the freshness guard (test-bundle-fresh.ts),
+ *  so the two can never silently diverge and ship a stale bundle to the app. */
+export function serializeBundle(data: KBData = loadKBData()): string {
+  return JSON.stringify(data);
+}
