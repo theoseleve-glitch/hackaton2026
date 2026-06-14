@@ -209,5 +209,48 @@ void main() {
       };
       expect(estimator.estimateFromRoute(city), 0);
     });
+
+    test('une nationale/départementale RAPIDE (ref N/D) n\'est jamais facturée',
+        () {
+      // 60 km à 105 km/h sur une 2x2 voies gratuite : malgré la vitesse, une
+      // route N/D ne coûte rien (ne pas la prendre pour une autoroute).
+      expect(
+          estimator.estimateFromRoute({
+            'legs': [
+              {'steps': [step(60, 105, ref: 'N 7')]}
+            ]
+          }),
+          0);
+      expect(
+          estimator.estimateFromRoute({
+            'legs': [
+              {'steps': [step(40, 100, ref: 'D 1006')]}
+            ]
+          }),
+          0);
+    });
+
+    test('un tronçon mal tagué « M 7 » rapide reste récupéré comme autoroute',
+        () {
+      // « M 7 » est l\'A7 mal taguée par le démo OSRM : doit rester facturée.
+      expect(
+          estimator.estimateFromRoute({
+            'legs': [
+              {'steps': [step(60, 110, ref: 'M 7')]}
+            ]
+          }),
+          greaterThan(0));
+    });
+
+    test('namesFreeRoad: N/D oui, A/M/E non', () {
+      expect(TollEstimator.namesFreeRoad('N 7'), isTrue);
+      expect(TollEstimator.namesFreeRoad('D86'), isTrue);
+      expect(TollEstimator.namesFreeRoad('A7;N86'), isTrue);
+      expect(TollEstimator.namesFreeRoad('A 7'), isFalse);
+      expect(TollEstimator.namesFreeRoad('M 7'), isFalse);
+      expect(TollEstimator.namesFreeRoad('E15'), isFalse);
+      expect(TollEstimator.namesFreeRoad(null), isFalse);
+      expect(TollEstimator.namesFreeRoad(''), isFalse);
+    });
   });
 }

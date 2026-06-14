@@ -324,6 +324,13 @@ class EchappeeRouteOptionsScreen extends ConsumerWidget {
               ? null
               : () => context.push('/echappee/map'),
         ),
+        const SizedBox(height: EchappeeSpacing.s8),
+        EchappeeButton(
+          label: 'Services sur la route',
+          variant: EchappeeButtonVariant.secondary,
+          icon: Icons.local_gas_station_outlined,
+          onPressed: () => context.push('/echappee/services'),
+        ),
       ],
     );
   }

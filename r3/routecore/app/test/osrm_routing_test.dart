@@ -316,6 +316,101 @@ void main() {
         isEmpty,
       );
     });
+
+    // Régression du bug « même temps, même km, mais un prix différent ».
+    group('honnêteté — pas de routes dupliquées', () {
+      // (a) une voie rapide GRATUITE, une seule route, pas d'A-ref : le démo
+      // OSRM la prend pour de l'autoroute (vitesse > 90) -> faux péage.
+      final freeFast = {
+        'code': 'Ok',
+        'routes': [
+          {
+            'distance': 60000.0,
+            'duration': 2100.0, // ~103 km/h
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': [
+                [4.8357, 45.7640],
+                [4.86, 45.40],
+                [4.8924, 44.9334],
+              ],
+            },
+            'legs': [
+              {
+                'steps': [
+                  {'distance': 60000.0, 'duration': 2100.0, 'name': 'Voie rapide'},
+                ],
+              },
+            ],
+          },
+        ],
+      };
+      // exclude=motorway renvoie quasi la même route (rien à éviter).
+      final bSame = {
+        'code': 'Ok',
+        'routes': [
+          {
+            'distance': 60200.0,
+            'duration': 2110.0,
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': [
+                [4.8357, 45.7640],
+                [4.86, 45.40],
+                [4.8924, 44.9334],
+              ],
+            },
+          },
+        ],
+      };
+
+      test('exclude=motorway == rapide -> UNE carte, péage remis à zéro', () {
+        const request = RouteRequest(origin: lyon, destination: valence);
+        final options = service.assembleOptions(freeFast, bSame, request);
+        expect(options, hasLength(1),
+            reason: 'une seule route réelle, pas de doublon');
+        expect(options.single.routeMode, RouteMode.fastest);
+        expect(options.single.metadata['tollEstimateEur'], 0.0,
+            reason: 'aucune autoroute à éviter -> aucun péage');
+      });
+
+      test('OSRM ne renvoie QU\'UNE route, pas de (b) -> UNE carte, '
+          'mais le vrai péage est conservé', () {
+        // Lyon->Marseille tout A7 : OSRM sans alternative, exclude indispo.
+        final single = {
+          'code': 'Ok',
+          'routes': [
+            {
+              'distance': 314000.0,
+              'duration': 11000.0,
+              'geometry': {
+                'type': 'LineString',
+                'coordinates': [
+                  [4.8357, 45.7640],
+                  [5.0, 44.0],
+                  [5.3698, 43.2965],
+                ],
+              },
+              'legs': [
+                {
+                  'steps': [
+                    {'distance': 300000.0, 'duration': 10000.0, 'ref': 'A 7'},
+                    {'distance': 14000.0, 'duration': 1000.0, 'name': 'Ville'},
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+        const request = RouteRequest(origin: lyon, destination: valence);
+        final options = service.assembleOptions(single, null, request);
+        expect(options, hasLength(1), reason: 'pas d\'alternative -> pas de doublon');
+        expect(options.single.routeMode, RouteMode.fastest);
+        expect((options.single.metadata['tollEstimateEur'] as num).toDouble(),
+            greaterThan(20),
+            reason: 'A7 réelle : le péage NE doit PAS être mis à zéro');
+      });
+    });
   });
 
   group('toll estimation', () {
@@ -363,11 +458,13 @@ void main() {
       expect(incidents, isEmpty);
     });
 
-    test('BisonFuteTrafficService is an explicit stub', () {
-      expect(
-        () => const BisonFuteTrafficService().incidentsAlong([lyon, valence]),
-        throwsUnimplementedError,
-      );
+    test('BisonFuteTrafficService is honest-empty without a configured feed',
+        () async {
+      // Sans URL DATEX II configurée, le service est honnêtement vide
+      // (jamais de fausses données) et ne lève plus UnimplementedError.
+      final incidents =
+          await const BisonFuteTrafficService().incidentsAlong([lyon, valence]);
+      expect(incidents, isEmpty);
     });
   });
 }

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform;
 import 'package:geolocator/geolocator.dart';
 
 import '../../../core/errors/app_exception.dart';
@@ -31,7 +33,7 @@ class GeolocatorLocationRepository implements LocationRepository {
       throw const PermissionException('Permission de localisation refusée.');
     }
     yield* Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(distanceFilter: 10),
+      locationSettings: _navigationSettings(),
     ).map((pos) => GpsTrackPoint(
           id: '$tripId-${pos.timestamp.millisecondsSinceEpoch}',
           tripId: tripId,
@@ -44,6 +46,36 @@ class GeolocatorLocationRepository implements LocationRepository {
           heading: pos.heading,
           recordedAt: pos.timestamp,
         ));
+  }
+
+  /// Réglages de localisation pour le guidage : sur Android, un service de
+  /// premier plan (notification persistante + wakelock) garde le GPS vivant
+  /// écran éteint ; sur iOS, mises à jour en arrière-plan autorisées.
+  static LocationSettings _navigationSettings() {
+    const distanceFilter = 10;
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return AndroidSettings(
+          accuracy: LocationAccuracy.bestForNavigation,
+          distanceFilter: distanceFilter,
+          foregroundNotificationConfig: const ForegroundNotificationConfig(
+            notificationTitle: 'L\'Échappée — navigation',
+            notificationText: 'Guidage en cours',
+            enableWakeLock: true,
+          ),
+        );
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return AppleSettings(
+          accuracy: LocationAccuracy.bestForNavigation,
+          distanceFilter: distanceFilter,
+          allowBackgroundLocationUpdates: true,
+          showBackgroundLocationIndicator: true,
+          pauseLocationUpdatesAutomatically: false,
+        );
+      default:
+        return const LocationSettings(distanceFilter: distanceFilter);
+    }
   }
 }
 

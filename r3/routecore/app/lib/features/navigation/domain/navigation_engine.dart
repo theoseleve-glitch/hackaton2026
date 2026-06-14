@@ -16,6 +16,7 @@ class NavState {
     this.matchedIndex = 0,
     this.current,
     this.next,
+    this.currentRoadName,
   });
 
   /// Upcoming maneuver to announce (null when the route has no instructions).
@@ -23,6 +24,10 @@ class NavState {
 
   /// The maneuver after [current] (null near the arrival).
   final NavInstruction? next;
+
+  /// Name of the road currently being driven (the step leading to [current]),
+  /// for the "current street" banner. Null when OSRM gave no name.
+  final String? currentRoadName;
 
   /// Meters left along the route before [current] happens.
   final double distanceToManeuverMeters;
@@ -204,6 +209,7 @@ class NavigationEngine {
 
     NavInstruction? current;
     NavInstruction? next;
+    String? currentRoadName;
     var distanceToManeuver = remaining;
     if (_instructions.isNotEmpty) {
       var index = _instructionAlong.indexWhere(
@@ -212,6 +218,9 @@ class NavigationEngine {
       current = _instructions[index];
       next =
           index + 1 < _instructions.length ? _instructions[index + 1] : null;
+      // Route actuellement parcourue = le step qui MÈNE à la manœuvre à venir
+      // (son nom est le nom de la voie sur laquelle on roule).
+      currentRoadName = _instructions[index > 0 ? index - 1 : 0].roadName;
       distanceToManeuver =
           math.max(0.0, _instructionAlong[index] - projection.along);
     }
@@ -236,6 +245,7 @@ class NavigationEngine {
     return NavState(
       current: current,
       next: next,
+      currentRoadName: currentRoadName,
       distanceToManeuverMeters: distanceToManeuver,
       remainingMeters: remaining,
       etaSeconds: eta,

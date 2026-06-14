@@ -15,6 +15,8 @@ import '../product_modules/echappee/presentation/echappee_flow_screens.dart';
 import '../product_modules/echappee/presentation/echappee_guided_navigation.dart';
 import '../product_modules/echappee/presentation/echappee_manifeste_screen.dart';
 import '../product_modules/echappee/presentation/echappee_map_screens.dart';
+import '../product_modules/echappee/presentation/echappee_places_screen.dart';
+import '../product_modules/echappee/presentation/echappee_services_screen.dart';
 import '../product_modules/echappee/presentation/echappee_splash_screen.dart';
 import '../product_modules/ecodrive/presentation/ecodrive_screens.dart';
 import '../product_modules/terroir/presentation/terroir_screens.dart';
@@ -92,6 +94,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/echappee/map',
           builder: (_, __) => const EchappeeMapScreen()),
+      GoRoute(
+          path: '/echappee/services',
+          builder: (_, __) => const EchappeeServicesScreen()),
+      GoRoute(
+          path: '/echappee/places',
+          builder: (_, __) => const EchappeePlacesScreen()),
       GoRoute(
           path: '/echappee/poi/:id',
           builder: (_, state) =>

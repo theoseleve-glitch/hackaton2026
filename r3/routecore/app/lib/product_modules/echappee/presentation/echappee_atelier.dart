@@ -547,6 +547,11 @@ class _EchappeeHomeScreenState extends ConsumerState<EchappeeHomeScreen> {
           leading: const Center(child: EchappeeLogo(size: 32)),
           actions: [
             IconButton(
+              icon: const Icon(Icons.bookmark_outline),
+              tooltip: 'Mes lieux',
+              onPressed: () => context.push('/echappee/places'),
+            ),
+            IconButton(
               icon: const Icon(Icons.settings_outlined),
               tooltip: 'Réglages',
               onPressed: () => context.push('/settings'),

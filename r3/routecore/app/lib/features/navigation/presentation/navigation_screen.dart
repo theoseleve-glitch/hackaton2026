@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/providers.dart';
 import '../../../core/logging/app_logger.dart';
@@ -14,9 +16,15 @@ import '../../../product_modules/echappee/design_system/design_system.dart';
 import '../../../product_modules/echappee/presentation/echappee_page.dart';
 import '../../../shared/models/models.dart';
 import '../../location/data/location_repositories.dart';
+import '../../../shared/services/traffic_service.dart';
 import '../../routing/presentation/route_planner_controller.dart';
+import '../../safety/data/safety_alerts_service.dart';
+import '../../safety/data/speed_camera_service.dart';
+import '../data/nav_voice.dart';
 import '../data/osrm_directions_service.dart';
+import '../data/road_speed_service.dart';
 import '../domain/navigation_engine.dart';
+import '../domain/voice_announcer.dart';
 
 /// Navigation guidée L'Échappée, façon Waze : carte course-up qui tourne avec
 /// le cap (la voiture reste fixe et pointe vers le haut de l'écran), caméra
@@ -59,6 +67,8 @@ class _EchappeeNavigationScreenState
   /// Zoom de croisière / zoom « anticipation » au-delà de 80 km/h.
   static const double _cruiseZoom = 16.5;
   static const double _fastZoom = 15.5;
+  static const double _maneuverZoom = 17.5; // zoom serré à l'approche d'un virage
+  static const double _maneuverZoomMeters = 160; // distance d'enclenchement
   static const double _fastSpeedMps = 80 / 3.6;
 
   /// Lissage du zoom : fraction du chemin vers la cible parcourue à chaque
@@ -90,6 +100,23 @@ class _EchappeeNavigationScreenState
     0.0611, 0.2056, 0.8833, 0, -13.2, // B
     0, 0, 0, 1, 0, // A
   ];
+
+  /// Variante NUIT (bascule auto sur la luminosité système) : on assombrit et
+  /// on désature le fond OSM tout en gardant le réseau lisible — confort de
+  /// conduite de nuit, sans changer de fournisseur de tuiles (toujours OSM
+  /// gratuit). Luminosité ~0,5, légère teinte froide.
+  static const List<double> _navTileMatrixDark = [
+    0.50, 0.10, 0.02, 0, -28, // R
+    0.04, 0.55, 0.02, 0, -26, // G
+    0.04, 0.10, 0.58, 0, -20, // B
+    0, 0, 0, 1, 0, // A
+  ];
+
+  /// Clé de persistance du réglage voix (shared_preferences).
+  static const _voicePrefKey = 'nav.voiceEnabled';
+
+  /// Marge de tolérance avant l'alerte de survitesse (km/h).
+  static const int _overSpeedToleranceKmh = 7;
 
   /// Sources d'événements carte déclenchées par un geste utilisateur : la
   /// caméra se déverrouille dès qu'on en voit une (le suivi reprend via le
@@ -150,6 +177,25 @@ class _EchappeeNavigationScreenState
   bool _cameraLocked = true;
   double _zoom = _cruiseZoom;
 
+  // --- Voix (guidage vocal TTS) ---
+  final NavVoice _voice = NavVoice();
+  final VoiceAnnouncer _announcer = VoiceAnnouncer();
+  bool _voiceOn = true;
+
+  // --- Données route (limites, radars, dangers) pré-chargées au plan ---
+  final RoadSpeedService _roadSpeed = RoadSpeedService();
+  List<SpeedZone> _speedZones = const [];
+  List<SpeedCamera> _cameras = const [];
+  List<SafetyPoint> _hazards = const [];
+  List<TrafficIncident> _incidents = const [];
+
+  /// Vitesse sol courante (km/h) et limite réglementaire au point courant.
+  double _speedKmh = 0;
+  int? _currentLimit;
+  bool _overSpeed = false;
+  SpeedCamera? _nextCamera;
+  SafetyPoint? _nextHazard;
+
   @override
   void initState() {
     super.initState();
@@ -167,6 +213,61 @@ class _EchappeeNavigationScreenState
     }
     // Boussole : on garde juste le dernier cap lissé pour la caméra à l'arrêt.
     _compassSub = _compass.compassHeadings.listen((h) => _compassHeading = h);
+    // Réglage voix persisté + radars embarqués (asset, gratuit).
+    unawaited(_restoreVoicePref());
+    unawaited(_loadCameras());
+  }
+
+  Future<void> _restoreVoicePref() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final on = prefs.getBool(_voicePrefKey) ?? true;
+      if (!mounted) return;
+      setState(() {
+        _voiceOn = on;
+        _voice.muted = !on;
+      });
+    } catch (_) {/* défaut : voix active */}
+  }
+
+  Future<void> _loadCameras() async {
+    final cams = await SpeedCameraService.load();
+    if (mounted) setState(() => _cameras = cams);
+  }
+
+  /// Limites de vitesse (Overpass) + dangers (passages à niveau / écoles) le
+  /// long du tracé — pré-chargés UNE fois, best-effort, jamais bloquant.
+  Future<void> _loadRoadData() async {
+    if (_routePolyline.length < 2) return;
+    final line = _routePolyline;
+    final results = await Future.wait([
+      _roadSpeed.speedLimitsAlong(line),
+      SafetyAlertsService().hazardsAlong(line),
+      // Incidents trafic nationaux (vide tant qu'aucun flux DATEX configuré).
+      ref.read(trafficServiceProvider).incidentsAlong(line),
+    ]);
+    if (!mounted) return;
+    final zones = results[0] as List<SpeedZone>;
+    final hazards = [
+      ...results[1] as List<SafetyPoint>,
+      ...SafetyAlertsService.parseCurves(line),
+    ];
+    setState(() {
+      _speedZones = zones;
+      _hazards = hazards;
+      _incidents = results[2] as List<TrafficIncident>;
+    });
+  }
+
+  void _toggleVoice() {
+    setState(() {
+      _voiceOn = !_voiceOn;
+      _voice.muted = !_voiceOn;
+    });
+    if (!_voiceOn) unawaited(_voice.stop());
+    SharedPreferences.getInstance()
+        .then((p) => p.setBool(_voicePrefKey, _voiceOn))
+        .ignore();
   }
 
   @override
@@ -175,6 +276,7 @@ class _EchappeeNavigationScreenState
     _simSub?.cancel();
     _compassSub?.cancel();
     unawaited(_compass.dispose());
+    unawaited(_voice.dispose());
     _mapController.dispose();
     super.dispose();
   }
@@ -231,6 +333,7 @@ class _EchappeeNavigationScreenState
           instructions: instructions, polyline: _routePolyline);
     });
     _startPositionStream();
+    unawaited(_loadRoadData());
   }
 
   /// GPS réel quand le device en a un (repo Geolocator) ; sinon — émulateur,
@@ -270,10 +373,41 @@ class _EchappeeNavigationScreenState
     if (!mounted || engine == null) return;
     final nav = engine.update(p, speedMps: speedMps);
     widget.onPositionUpdate?.call(p, speedMps ?? 0);
+
+    // Vitesse sol + limite réglementaire (Overpass) au point courant.
+    final speedKmh = (speedMps ?? 0) * 3.6;
+    final limit = RoadSpeedService.limitAt(p, _speedZones);
+    final over = limit != null && speedKmh > limit + _overSpeedToleranceKmh;
+    // Radar / danger le plus proche DEVANT (dans le couloir, selon le cap).
+    final camera =
+        SpeedCameraService.nextCamera(p, nav.headingDegrees, _cameras);
+    final hazard =
+        SafetyAlertsService.nextHazardAhead(p, nav.headingDegrees, _hazards);
+
     setState(() {
       _position = p;
       _nav = nav;
+      _speedKmh = speedKmh;
+      _currentLimit = limit;
+      _nextCamera = camera;
+      _nextHazard = hazard;
     });
+
+    // Guidage vocal : la bonne consigne au bon moment + haptique à l'imminence.
+    if (_voiceOn) {
+      final phrase = _announcer.onNav(nav);
+      if (phrase != null) {
+        unawaited(_voice.speak(phrase));
+        if (_announcer.isImminent) HapticFeedback.mediumImpact();
+      }
+    }
+    // Alerte survitesse au FRONT MONTANT (une annonce, une vibration franche).
+    if (over && !_overSpeed) {
+      HapticFeedback.heavyImpact();
+      if (_voiceOn) unawaited(_voice.speak('Tu dépasses la limite'));
+    }
+    _overSpeed = over;
+
     if (_cameraLocked) _followCamera(p, nav.headingDegrees, speedMps);
     if (nav.offRoute && !_simulated) unawaited(_maybeRecalculate(p));
     // Arrivée : un seul déclenchement, avec la distance réellement parcourue
@@ -309,8 +443,17 @@ class _EchappeeNavigationScreenState
       compass: _compassHeading,
       speedMps: speedMps ?? 0,
     );
-    final targetZoom =
-        (speedMps ?? 0) > _fastSpeedMps ? _fastZoom : _cruiseZoom;
+    // Auto-zoom : on resserre à l'approche d'une manœuvre (distance déjà
+    // calculée par le moteur), sinon zoom de croisière, dézoomé à haute vitesse.
+    final maneuverAhead = _nav?.distanceToManeuverMeters ?? double.infinity;
+    final double targetZoom;
+    if (maneuverAhead < _maneuverZoomMeters) {
+      targetZoom = _maneuverZoom;
+    } else if ((speedMps ?? 0) > _fastSpeedMps) {
+      targetZoom = _fastZoom;
+    } else {
+      targetZoom = _cruiseZoom;
+    }
     _zoom += (targetZoom - _zoom) * _zoomEase;
     final ahead =
         NavigationEngine.offsetBy(p, heading, _lookAheadMeters(p.latitude));
@@ -364,6 +507,9 @@ class _EchappeeNavigationScreenState
     }
     _lastRecalcAt = DateTime.now();
     setState(() => _recalculating = true);
+    // Annonce le recalcul (voix + réarme l'annonceur pour le nouveau tracé).
+    _announcer.reset();
+    if (_voiceOn) unawaited(_voice.speak('Recalcul de l\'itinéraire'));
     try {
       final instructions = await _directions.getDirections(
           origin: from, destination: destination);
@@ -374,6 +520,7 @@ class _EchappeeNavigationScreenState
         _engine = NavigationEngine(
             instructions: instructions, polyline: _routePolyline);
       });
+      unawaited(_loadRoadData());
     } catch (e) {
       _log.warn('recalcul impossible: $e');
     } finally {
@@ -427,16 +574,22 @@ class _EchappeeNavigationScreenState
                         EchappeeSpacing.s12, EchappeeSpacing.screen, 0),
                     child: _buildInstructionCard(),
                   ),
-                  if (_simulated)
-                    const Padding(
-                      padding: EdgeInsets.only(
-                          top: EchappeeSpacing.s8,
-                          right: EchappeeSpacing.screen),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: _SimulationChip(),
-                      ),
+                  _buildLaneStrip(),
+                  _buildStreetBanner(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: EchappeeSpacing.s8,
+                        left: EchappeeSpacing.screen,
+                        right: EchappeeSpacing.screen),
+                    child: Row(
+                      children: [
+                        _VoiceToggle(on: _voiceOn, onTap: _toggleVoice),
+                        const Spacer(),
+                        if (_simulated) const _SimulationChip(),
+                      ],
                     ),
+                  ),
+                  _buildAlertBanner(),
                   const Spacer(),
                   // Slot EcoCoach : bottom-center, au-dessus de la barre basse.
                   if (widget.coachOverlay != null)
@@ -462,14 +615,23 @@ class _EchappeeNavigationScreenState
                         ),
                       ),
                     ),
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: EchappeeSpacing.screen,
                         right: EchappeeSpacing.screen,
                         bottom: EchappeeSpacing.s4),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text('© OpenStreetMap',
-                          style: EchappeeTypography.bodySmall),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _Speedometer(speedKmh: _speedKmh, overSpeed: _overSpeed),
+                        if (_currentLimit != null) ...[
+                          const SizedBox(width: EchappeeSpacing.s8),
+                          _SpeedLimitSign(limitKmh: _currentLimit!),
+                        ],
+                        const Spacer(),
+                        const Text('© OpenStreetMap',
+                            style: EchappeeTypography.bodySmall),
+                      ],
                     ),
                   ),
                   _buildBottomBar(context),
@@ -523,7 +685,12 @@ class _EchappeeNavigationScreenState
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.routecore.routecore',
           tileBuilder: (context, tileWidget, tile) => ColorFiltered(
-            colorFilter: const ColorFilter.matrix(_navTileMatrix),
+            // Bascule jour/nuit auto sur la luminosité système (gratuit, même
+            // fournisseur OSM — la nuit assombrit/désature le fond).
+            colorFilter: ColorFilter.matrix(
+                MediaQuery.platformBrightnessOf(context) == Brightness.dark
+                    ? _navTileMatrixDark
+                    : _navTileMatrix),
             child: tileWidget,
           ),
         ),
@@ -552,6 +719,37 @@ class _EchappeeNavigationScreenState
           ),
         MarkerLayer(
           markers: [
+            // Radars fixes (asset officiel) le long du tracé.
+            for (final cam in _cameras)
+              Marker(
+                point: LatLng(cam.location.latitude, cam.location.longitude),
+                width: 26,
+                height: 26,
+                child: _MapBadge(
+                    icon: Icons.speed_rounded, color: Colors.red.shade700),
+              ),
+            // Dangers ponctuels (passage à niveau, zone scolaire) — pas les
+            // virages (utilisés seulement pour l'alerte de proximité).
+            for (final h in _hazards)
+              if (h.kind != SafetyKind.sharpCurve)
+                Marker(
+                  point: LatLng(h.location.latitude, h.location.longitude),
+                  width: 26,
+                  height: 26,
+                  child: _MapBadge(
+                      icon: _hazardIcon(h.kind), color: Colors.amber.shade800),
+                ),
+            // Incidents trafic (Bison Futé) le long du tracé.
+            for (final inc in _incidents)
+              Marker(
+                point:
+                    LatLng(inc.location.latitude, inc.location.longitude),
+                width: 26,
+                height: 26,
+                child: const _MapBadge(
+                    icon: Icons.warning_amber_rounded,
+                    color: EchappeeColors.error),
+              ),
             if (route.isNotEmpty)
               Marker(
                 point: route.last,
@@ -634,6 +832,116 @@ class _EchappeeNavigationScreenState
     );
   }
 
+  /// Bande de guidage de file (flèches de voie) pour la manœuvre à venir ;
+  /// les voies invalides sont grisées. Vide quand OSRM ne porte pas de lanes.
+  Widget _buildLaneStrip() {
+    final lanes = _nav?.current?.lanes ?? const <NavLane>[];
+    if (lanes.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: EchappeeSpacing.s8,
+          left: EchappeeSpacing.screen,
+          right: EchappeeSpacing.screen),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: EchappeeSpacing.s12, vertical: EchappeeSpacing.s8),
+        decoration: const BoxDecoration(
+          color: EchappeeColors.surface,
+          borderRadius: EchappeeRadius.lgAll,
+          boxShadow: EchappeeShadows.sm,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (final lane in lanes)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Icon(
+                  _laneIcon(lane),
+                  size: 26,
+                  color: lane.valid
+                      ? EchappeeColors.primary
+                      : EchappeeColors.disabled,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Bandeau discret « rue courante » (nom de la voie en cours).
+  Widget _buildStreetBanner() {
+    final road = _nav?.currentRoadName;
+    if (road == null || road.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: EchappeeSpacing.s8,
+          left: EchappeeSpacing.screen,
+          right: EchappeeSpacing.screen),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: EchappeeSpacing.s12, vertical: EchappeeSpacing.s4),
+          decoration: const BoxDecoration(
+            color: EchappeeColors.surface,
+            borderRadius: EchappeeRadius.fullAll,
+            boxShadow: EchappeeShadows.sm,
+          ),
+          child: Text(road,
+              style: EchappeeTypography.body
+                  .copyWith(fontWeight: FontWeight.w600)),
+        ),
+      ),
+    );
+  }
+
+  /// Bandeau d'alerte de proximité : radar (priorité) ou danger géo imminent.
+  Widget _buildAlertBanner() {
+    final cam = _nextCamera;
+    final hazard = _nextHazard;
+    String? label;
+    IconData icon = Icons.warning_amber_rounded;
+    Color color = Colors.amber.shade800;
+    if (cam != null) {
+      icon = Icons.speed_rounded;
+      color = EchappeeColors.error;
+      label = cam.limitKmh != null ? 'Radar ${cam.limitKmh} km/h' : 'Radar';
+    } else if (hazard != null) {
+      icon = _hazardIcon(hazard.kind);
+      label = _hazardLabel(hazard.kind);
+    }
+    if (label == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: EchappeeSpacing.s8,
+          left: EchappeeSpacing.screen,
+          right: EchappeeSpacing.screen),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: EchappeeSpacing.s12, vertical: EchappeeSpacing.s8),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: EchappeeRadius.fullAll,
+            boxShadow: EchappeeShadows.sm,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 18, color: Colors.white),
+              const SizedBox(width: EchappeeSpacing.s8),
+              Text(label,
+                  style: EchappeeTypography.caption.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w700)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildBottomBar(BuildContext context) {
     final nav = _nav;
     final etaClock = nav == null
@@ -710,6 +1018,31 @@ IconData _maneuverIcon(NavInstruction instruction) {
   }
   return Icons.straight;
 }
+
+/// Flèche d'une voie (guidage de file) — première indication OSRM connue.
+IconData _laneIcon(NavLane lane) {
+  final ind = lane.indications.isEmpty ? 'straight' : lane.indications.first;
+  if (ind.contains('uturn')) return Icons.u_turn_left;
+  if (ind.contains('sharp left')) return Icons.turn_sharp_left;
+  if (ind.contains('sharp right')) return Icons.turn_sharp_right;
+  if (ind.contains('slight left')) return Icons.turn_slight_left;
+  if (ind.contains('slight right')) return Icons.turn_slight_right;
+  if (ind.contains('left')) return Icons.turn_left;
+  if (ind.contains('right')) return Icons.turn_right;
+  return Icons.straight;
+}
+
+IconData _hazardIcon(SafetyKind kind) => switch (kind) {
+      SafetyKind.railwayCrossing => Icons.train_rounded,
+      SafetyKind.school => Icons.school_rounded,
+      SafetyKind.sharpCurve => Icons.turn_sharp_right,
+    };
+
+String _hazardLabel(SafetyKind kind) => switch (kind) {
+      SafetyKind.railwayCrossing => 'Passage à niveau',
+      SafetyKind.school => 'Zone scolaire',
+      SafetyKind.sharpCurve => 'Virage serré',
+    };
 
 /// « 300 m », « 1,2 km », « 42 km ».
 String _formatDistance(double meters) {
@@ -857,6 +1190,133 @@ class _Stat extends StatelessWidget {
         Text(value, style: EchappeeTypography.h3),
         Text(label, style: EchappeeTypography.caption),
       ],
+    );
+  }
+}
+
+/// Bouton de bascule de la voix (guidage vocal on/off).
+class _VoiceToggle extends StatelessWidget {
+  const _VoiceToggle({required this.on, required this.onTap});
+
+  final bool on;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: EchappeeColors.surface,
+      shape: const CircleBorder(),
+      elevation: 2,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(EchappeeSpacing.s8),
+          child: Icon(
+            on ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+            size: 22,
+            color: on ? EchappeeColors.primary : EchappeeColors.disabled,
+            semanticLabel: on ? 'Couper la voix' : 'Activer la voix',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Compteur de vitesse (km/h). Anneau rouge quand on dépasse la limite.
+class _Speedometer extends StatelessWidget {
+  const _Speedometer({required this.speedKmh, required this.overSpeed});
+
+  final double speedKmh;
+  final bool overSpeed;
+
+  static const double _size = 58;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: _size,
+      height: _size,
+      decoration: BoxDecoration(
+        color: EchappeeColors.surface,
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: overSpeed ? EchappeeColors.error : EchappeeColors.surface,
+          width: 3,
+        ),
+        boxShadow: EchappeeShadows.sm,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '${speedKmh.round()}',
+            style: EchappeeTypography.h3.copyWith(
+              height: 1,
+              color: overSpeed
+                  ? EchappeeColors.error
+                  : EchappeeColors.textPrimary,
+            ),
+          ),
+          Text('km/h',
+              style: EchappeeTypography.caption
+                  .copyWith(height: 1, color: EchappeeColors.textSecondary)),
+        ],
+      ),
+    );
+  }
+}
+
+/// Panneau de limite de vitesse façon européen (disque blanc, cerclé rouge).
+class _SpeedLimitSign extends StatelessWidget {
+  const _SpeedLimitSign({required this.limitKmh});
+
+  final int limitKmh;
+
+  static const double _size = 50;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: _size,
+      height: _size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        border: Border.all(color: EchappeeColors.error, width: 4),
+        boxShadow: EchappeeShadows.sm,
+      ),
+      child: Text(
+        '$limitKmh',
+        style: EchappeeTypography.h3.copyWith(
+          color: Colors.black,
+          fontWeight: FontWeight.w800,
+          height: 1,
+        ),
+      ),
+    );
+  }
+}
+
+/// Pastille de carte (radar, danger) — petit disque coloré avec icône.
+class _MapBadge extends StatelessWidget {
+  const _MapBadge({required this.icon, required this.color});
+
+  final IconData icon;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white, width: 2),
+        boxShadow: EchappeeShadows.sm,
+      ),
+      child: Icon(icon, size: 14, color: Colors.white),
     );
   }
 }

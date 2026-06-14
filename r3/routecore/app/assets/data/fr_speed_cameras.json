@@ -1,0 +1,24 @@
+{
+  "source": "Echantillon partiel — base officielle des radars fixes France: data.gouv.fr 'Radars automatiques' / securite-routiere.gouv.fr (Licence Ouverte). Coordonnees approximatives plausibles a rafraichir depuis le dataset complet.",
+  "datasetUrl": "https://www.data.gouv.fr/fr/datasets/radars-automatiques/",
+  "license": "Licence Ouverte (Etalab)",
+  "compiled": "2026-06-14",
+  "note": "Couverture PARTIELLE (~15 radars fixes connus). Ne pas considerer comme exhaustif.",
+  "cameras": [
+    {"lat": 45.1880, "lng": 4.8000, "road": "A7", "limitKmh": 130, "type": "fixed"},
+    {"lat": 44.5600, "lng": 4.7560, "road": "A7", "limitKmh": 110, "type": "fixed"},
+    {"lat": 43.9020, "lng": 4.8100, "road": "A7", "limitKmh": 130, "type": "fixed"},
+    {"lat": 46.7350, "lng": 4.8460, "road": "A6", "limitKmh": 130, "type": "fixed"},
+    {"lat": 47.7200, "lng": 4.7350, "road": "A6", "limitKmh": 130, "type": "fixed"},
+    {"lat": 43.5900, "lng": 3.9400, "road": "A9", "limitKmh": 130, "type": "fixed"},
+    {"lat": 43.2100, "lng": 2.8900, "road": "A9", "limitKmh": 130, "type": "fixed"},
+    {"lat": 49.5200, "lng": 2.7900, "road": "A1", "limitKmh": 130, "type": "fixed"},
+    {"lat": 50.3200, "lng": 2.9300, "road": "A1", "limitKmh": 130, "type": "fixed"},
+    {"lat": 48.8240, "lng": 2.4060, "road": "Peripherique Paris", "limitKmh": 70, "type": "fixed"},
+    {"lat": 48.8980, "lng": 2.3050, "road": "Peripherique Paris", "limitKmh": 70, "type": "fixed"},
+    {"lat": 48.8340, "lng": 2.2530, "road": "Peripherique Paris", "limitKmh": 70, "type": "fixed"},
+    {"lat": 45.7250, "lng": 4.8060, "road": "Rocade Est Lyon (A46)", "limitKmh": 90, "type": "fixed"},
+    {"lat": 43.4700, "lng": -1.5100, "road": "A63", "limitKmh": 130, "type": "fixed"},
+    {"lat": 48.5900, "lng": 7.7100, "road": "A35 (rocade Strasbourg)", "limitKmh": 90, "type": "fixed"}
+  ]
+}

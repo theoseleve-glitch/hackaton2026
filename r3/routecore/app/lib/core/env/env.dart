@@ -27,4 +27,11 @@ class Env {
 
   static bool get hasSupabase =>
       supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
+
+  /// Optionnel : flux trafic Bison Futé (DATEX II XML, réseau national FR).
+  /// Vide = pas de trafic (le service renvoie alors honnêtement []).
+  static String get bisonFuteDatexUrl =>
+      dotenv.maybeGet('BISON_FUTE_DATEX_URL') ?? '';
+  static String get bisonFuteToken =>
+      dotenv.maybeGet('BISON_FUTE_TOKEN') ?? '';
 }

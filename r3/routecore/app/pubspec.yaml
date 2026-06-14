@@ -19,6 +19,9 @@ dependencies:
   latlong2: ^0.9.1
   shared_preferences: ^2.2.3
   sensors_plus: ^6.0.1
+  flutter_tts: ^4.2.0
+  audio_session: ^0.1.21
+  xml: ^6.5.0
 
 dev_dependencies:
   flutter_test:

@@ -52,6 +52,16 @@ class OsrmDirectionsService {
   }
 }
 
+/// One lane of the road at the upcoming maneuver (OSRM
+/// `intersections[].lanes`). [valid] = this lane can be used for the maneuver;
+/// [indications] = the arrows it carries ('straight', 'slight right', 'left'…).
+class NavLane {
+  const NavLane({required this.valid, this.indications = const []});
+
+  final bool valid;
+  final List<String> indications;
+}
+
 /// One navigable maneuver parsed from an OSRM step.
 class NavInstruction {
   const NavInstruction({
@@ -63,6 +73,7 @@ class NavInstruction {
     this.exitNumber,
     this.roadName,
     this.points = const [],
+    this.lanes = const [],
   });
 
   /// OSRM maneuver type: turn / roundabout / rotary / depart / arrive /
@@ -88,6 +99,9 @@ class NavInstruction {
 
   /// Step geometry (from the maneuver to the next one).
   final List<GeoPoint> points;
+
+  /// Lane guidance for this maneuver (empty when OSRM carries no `lanes`).
+  final List<NavLane> lanes;
 }
 
 /// Pure mapping OSRM `/route?steps=true` JSON → instructions in driving
@@ -109,11 +123,32 @@ List<NavInstruction> parseSteps(Map<String, dynamic> json) {
       final geometry = step['geometry'] as Map<String, dynamic>? ?? const {};
       final coords = (geometry['coordinates'] as List? ?? const []).cast<List>();
       final name = (step['name'] as String?)?.trim();
+      // Guidage de file : on prend les lanes de la DERNIÈRE intersection du
+      // step qui en porte (la plus proche de la manœuvre). Souvent absent du
+      // serveur démo OSRM (tag turn:lanes clairsemé) -> liste vide alors.
+      final intersections =
+          (step['intersections'] as List? ?? const []).whereType<Map>();
+      var lanes = const <NavLane>[];
+      for (final intersection in intersections) {
+        final raw = intersection['lanes'] as List?;
+        if (raw != null && raw.isNotEmpty) {
+          lanes = [
+            for (final lane in raw.whereType<Map>())
+              NavLane(
+                valid: (lane['valid'] as bool?) ?? false,
+                indications: ((lane['indications'] as List?) ?? const [])
+                    .map((e) => e.toString())
+                    .toList(growable: false),
+              ),
+          ];
+        }
+      }
       instructions.add(NavInstruction(
         maneuverType: maneuver['type'] as String? ?? 'continue',
         modifier: maneuver['modifier'] as String?,
         exitNumber: (maneuver['exit'] as num?)?.toInt(),
         roadName: (name == null || name.isEmpty) ? null : name,
+        lanes: lanes,
         location: GeoPoint(
           latitude: (location[1] as num).toDouble(),
           longitude: (location[0] as num).toDouble(),

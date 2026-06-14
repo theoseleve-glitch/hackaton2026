@@ -17,10 +17,13 @@ import '../features/scoring/domain/scoring_service.dart';
 import '../features/trips/data/mock_trip_repositories.dart';
 import '../features/trips/data/trip_repositories.dart';
 import '../features/trips/domain/trip_repository.dart';
+import '../features/places/data/saved_places_store.dart';
+import '../features/poi/data/fuel_station_service.dart';
 import '../shared/models/models.dart';
 import '../shared/services/map_search_service.dart';
 import '../shared/services/osrm_routing_service.dart';
 import '../shared/services/routing_service.dart';
+import '../shared/services/traffic_service.dart';
 
 /// Central dependency wiring. Every repository switches between its Supabase
 /// implementation (when .env is configured) and a mock (demo mode).
@@ -105,6 +108,23 @@ final analyticsRepositoryProvider = Provider<AnalyticsRepository>(
 
 final scoringServiceProvider =
     Provider<ScoringService>((ref) => const BasicTripScoringService());
+
+/// Carburant / bornes VE / parking (données ouvertes FR + OSM, gratuit).
+final fuelStationServiceProvider =
+    Provider<FuelStationService>((ref) => FuelStationService());
+
+/// Lieux enregistrés (Domicile/Travail/favoris/récents), persistés localement
+/// — disponibles sans compte (mode anonyme).
+final savedPlacesStoreProvider =
+    Provider<SavedPlacesStore>((ref) => SavedPlacesStore());
+
+/// Trafic incidents : Bison Futé (DATEX II) si un flux est configuré (.env),
+/// sinon vide honnête (MockTrafficService) — jamais de fausses données.
+final trafficServiceProvider = Provider<TrafficService>((ref) =>
+    Env.bisonFuteDatexUrl.isEmpty
+        ? const MockTrafficService()
+        : BisonFuteTrafficService(
+            datexUrl: Env.bisonFuteDatexUrl, token: Env.bisonFuteToken));
 
 // ---------------------------------------------------------------------------
 // Auth state

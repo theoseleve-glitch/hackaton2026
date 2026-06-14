@@ -263,6 +263,15 @@ class OsrmRoutingService extends MockRoutingService {
       return best;
     }
 
+    // HONNÊTETÉ (1/2) : si exclude=motorway renvoie la MÊME route que la
+    // rapide, c'est qu'il n'y a aucune autoroute à éviter sur ce trajet — donc
+    // tout péage estimé est un faux positif (une voie rapide gratuite que
+    // l'heuristique vitesse a prise pour une autoroute). On le remet à zéro.
+    if (noMotorway != null && _sameRoute(main, noMotorway)) {
+      fastestMeta['tollEstimateEur'] = 0.0;
+      fastestMeta.remove('tollByAutoroute');
+    }
+
     final shortestSource = noMotorway ?? leastMotorwayAlternative();
     final shortestIsMotorwayFree = noMotorway != null ||
         (_hasSteps(shortestSource) &&
@@ -275,17 +284,29 @@ class OsrmRoutingService extends MockRoutingService {
           }
         : const <String, dynamic>{'polylineFormat': 'latlng-list'};
 
-    return <RouteOption>[
+    final options = <RouteOption>[
       _buildOption(main, request, RouteMode.fastest, 'osrm-fastest',
           fastestMeta),
-      _buildOption(shortestSource, request, RouteMode.shortest,
-          'osrm-shortest', shortestMeta),
-      _buildOption(shortestSource, request, RouteMode.eco, 'osrm-eco',
-          shortestMeta),
-      if (request.routeMode == RouteMode.discovery)
-        _buildOption(byDistance.last, request, RouteMode.discovery,
-            'osrm-discovery', const {'polylineFormat': 'latlng-list'}),
     ];
+
+    // HONNÊTETÉ (2/2) : ne JAMAIS présenter deux fois la même route. « Sans
+    // autoroute » / « Éco » ne sont émises que si elles diffèrent vraiment de
+    // la rapide. Sinon OSRM n'a pas d'alternative réelle -> une seule carte
+    // (évite « même km, même temps, mais un prix différent »).
+    if (!_sameRoute(main, shortestSource)) {
+      options
+        ..add(_buildOption(shortestSource, request, RouteMode.shortest,
+            'osrm-shortest', shortestMeta))
+        ..add(_buildOption(shortestSource, request, RouteMode.eco, 'osrm-eco',
+            shortestMeta));
+    }
+
+    if (request.routeMode == RouteMode.discovery) {
+      options.add(_buildOption(byDistance.last, request, RouteMode.discovery,
+          'osrm-discovery', const {'polylineFormat': 'latlng-list'}));
+    }
+
+    return options;
   }
 
   RouteOption _buildOption(
@@ -320,6 +341,25 @@ class OsrmRoutingService extends MockRoutingService {
   static bool _hasSteps(Map<String, dynamic> routeJson) =>
       (routeJson['legs'] as List? ?? const []).any((leg) =>
           leg is Map && (leg['steps'] as List? ?? const []).isNotEmpty);
+
+  /// Pure: two OSRM routes are "the same road" when their distance AND
+  /// duration match within a tight tolerance (100 m or 1 % on distance,
+  /// 30 s or 1 % on duration). Used to avoid presenting the fastest route a
+  /// second time as a fake « sans autoroute » / « éco » card when OSRM has no
+  /// genuine alternative (or exclude=motorway returns the same road).
+  static bool _sameRoute(Map<String, dynamic> a, Map<String, dynamic> b) {
+    double num_(Object? v) => (v as num?)?.toDouble() ?? double.nan;
+    final da = num_(a['distance']);
+    final db = num_(b['distance']);
+    final ta = num_(a['duration']);
+    final tb = num_(b['duration']);
+    if (da.isNaN || db.isNaN || ta.isNaN || tb.isNaN) return false;
+    bool near(double x, double y, double absTol, double relTol) {
+      final d = (x - y).abs();
+      return d <= absTol || (y != 0 && d / y <= relTol);
+    }
+    return near(da, db, 100, 0.01) && near(ta, tb, 30, 0.01);
+  }
 
   /// French autoroute refs: 'A7', 'A 7', 'A 7;E 15'…
   static final RegExp _motorwayRef = RegExp(r'^A\s?\d+');

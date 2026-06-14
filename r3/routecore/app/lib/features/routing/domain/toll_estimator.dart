@@ -65,6 +65,18 @@ class TollEstimator {
   /// 'A6a', 'A 6a'. The `[a-z]?` optional suffix captures bis/ter spurs.
   static final RegExp _refToken = RegExp(r'A\s?\d+[a-z]?', caseSensitive: false);
 
+  /// Matches a French FREE road ref: route nationale ('N 7') or
+  /// départementale ('D 86'). These are never tolled — so a fast step that
+  /// names one must NOT be recovered as autoroute by the speed heuristic
+  /// (a 2×2 voies gratuite sustains >90 km/h yet costs nothing). The leading
+  /// boundary avoids matching the 'N'/'D' inside other words.
+  static final RegExp _freeRoadToken =
+      RegExp(r'(^|[\s;]) *[ND]\s?\d', caseSensitive: false);
+
+  /// Pure: true when [ref] names a route nationale/départementale (free).
+  static bool namesFreeRoad(String? ref) =>
+      ref != null && _freeRoadToken.hasMatch(ref);
+
   /// Normalizes a raw token to canonical form: 'A 7' -> 'A7', 'a6A' -> 'A6A'
   /// keeping any letter suffix uppercased ('A6a' -> 'A6A').
   static String _normalizeRef(String token) =>
@@ -172,6 +184,11 @@ class TollEstimator {
           }
           continue;
         }
+        // Route nationale/départementale (N/D) = gratuite, même rapide : ne
+        // jamais la facturer. Seuls les tronçons SANS ref ou mal tagués
+        // (« M 7 » par le démo OSRM) sont récupérés comme autoroute probable.
+        final refStr = step['ref'] is String ? step['ref'] as String : null;
+        if (namesFreeRoad(refStr)) continue;
         final dur = ((step['duration'] as num?) ?? 0).toDouble();
         if (dur > 0 && (km * 1000.0 / dur) > motorwayMps) {
           otherKm += km; // probable autoroute mal/non taguée
