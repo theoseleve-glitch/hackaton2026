@@ -45,6 +45,7 @@ function renderSections(locale: Locale): void {
 
 async function mountBlob(): Promise<void> {
   if (!shouldRenderBlob()) return;
+  if (document.getElementById('bloop-canvas')) return;
   const canvas = document.createElement('canvas');
   canvas.id = 'bloop-canvas';
   canvas.setAttribute('aria-hidden', 'true');

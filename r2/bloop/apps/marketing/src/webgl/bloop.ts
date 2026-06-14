@@ -15,7 +15,7 @@ export class BloopScene {
 
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1));
     this.mat = new THREE.ShaderMaterial({
       vertexShader: vert, fragmentShader: frag, transparent: true,
       uniforms: {
@@ -43,10 +43,11 @@ export class BloopScene {
     this.mat.uniforms.uBlobCount.value = Math.min(blobs.length, 8);
   }
   private loop = (ms: number) => {
+    this.raf = requestAnimationFrame(this.loop);
+    if (document.hidden) return;
     this.mouse.lerp(this.targetMouse, 0.08);
     this.mat.uniforms.uTime.value = ms / 1000;
     this.renderer.render(this.scene, this.cam);
-    this.raf = requestAnimationFrame(this.loop);
   };
   dispose() { cancelAnimationFrame(this.raf); this.renderer.dispose(); }
 }

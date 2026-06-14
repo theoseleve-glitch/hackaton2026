@@ -29,7 +29,7 @@ void main(){
   vec3 ro = vec3(0.0,0.0,3.0);
   vec3 rd = normalize(vec3(uv, -2.2));
   float t=0.0; bool hit=false;
-  for(int i=0;i<72;i++){
+  for(int i=0;i<48;i++){
     float d = map(ro+rd*t);
     if(d<0.001){ hit=true; break; }
     if(t>6.0) break;
