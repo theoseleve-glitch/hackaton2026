@@ -147,6 +147,24 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
     actors: ['p1', 'p2'],
     secrets: () => [],
   }],
+  ['courtroom', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // majority-herd, same as gauche-ou-droite: two pick-only ballots buffered, p3 still expected
+    events: [ballot('p1', 'A', null, 1_000), ballot('p2', 'B', null, 2_000)],
+    eventsAlt: [ballot('p1', 'B', null, 1_000), ballot('p2', 'A', null, 2_000)],
+    actors: ['p1', 'p2'],
+    secrets: () => [],
+  }],
+  ['red-green-flag', {
+    players: ['p1', 'p2', 'p3'],
+    seed: 'audit-seed',
+    // majority-herd, same as gauche-ou-droite: two pick-only ballots buffered, p3 still expected
+    events: [ballot('p1', 'A', null, 1_000), ballot('p2', 'B', null, 2_000)],
+    eventsAlt: [ballot('p1', 'B', null, 1_000), ballot('p2', 'A', null, 2_000)],
+    actors: ['p1', 'p2'],
+    secrets: () => [],
+  }],
   ['double-jeu', {
     players: ['p1', 'p2', 'p3', 'p4'],  // module minPlayers is 4
     seed: 'audit-seed',

@@ -9655,3 +9655,1897 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
   }
 ] },
 };
+
+export const COURTROOM_PACK: ContentPack<OptionVoteContent> = {
+  id: 'courtroom-core',
+  version: 1,
+  data: { items: [
+  {
+    "id": "derniere-part-niee",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Manger la dernière part et jurer que c'était déjà comme ça",
+      "en": "Eating the last slice and swearing it was already gone"
+    },
+    "emoji": "🍕",
+    "debateStarter": {
+      "fr": "Manger la dernière part puis jurer « moi ? jamais », c'est pas un vol, c'est un crime parfait. Et quelqu'un ici l'a commis ce soir.",
+      "en": "Eating the last slice then swearing 'wasn't me' isn't theft, it's the perfect crime. And someone here pulled it tonight."
+    }
+  },
+  {
+    "id": "repondre-ok-au-paragraphe",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Répondre « ok » à un message de trois paragraphes",
+      "en": "Replying 'k' to a three-paragraph message"
+    },
+    "emoji": "📱",
+    "debateStarter": {
+      "fr": "Quelqu'un vide son cœur sur dix lignes et tu réponds « ok ». C'est pas de la concision, c'est une exécution. Cite ta dernière victime.",
+      "en": "Someone pours their heart out over ten lines and you reply 'k'. That's not being concise, it's an execution. Name your last victim."
+    }
+  },
+  {
+    "id": "rechauffer-poisson-bureau",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Réchauffer du poisson au micro-ondes du bureau",
+      "en": "Microwaving fish in the office kitchen"
+    },
+    "emoji": "🐟",
+    "debateStarter": {
+      "fr": "Réchauffer du poisson à midi au boulot, c'est pas un déjeuner, c'est une attaque chimique sur tout l'étage. L'open space porte plainte.",
+      "en": "Microwaving fish at noon at work isn't lunch, it's a chemical attack on the whole floor. The open space is pressing charges."
+    }
+  },
+  {
+    "id": "vu-sans-repondre-trois-jours",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Mettre « vu » et répondre trois jours plus tard « ah pardon j'avais pas vu »",
+      "en": "Leaving someone on read, then replying 3 days later 'omg just saw this'"
+    },
+    "emoji": "👀",
+    "debateStarter": {
+      "fr": "Laisser « vu » trois jours puis sortir « ah pardon j'avais pas vu », c'est pas un oubli, c'est un mensonge horodaté. L'app le sait, le groupe aussi.",
+      "en": "Leaving someone on read for three days then saying 'omg just saw this' isn't forgetting, it's a timestamped lie. The app knows. So does the group."
+    }
+  },
+  {
+    "id": "voler-frites-en-disant-regime",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Voler les frites des autres en disant « moi je prends pas de frites »",
+      "en": "Stealing everyone's fries after saying 'I'm not getting fries'"
+    },
+    "emoji": "🍟",
+    "debateStarter": {
+      "fr": "« Moi je prends pas de frites » puis piocher dans l'assiette de tout le monde, c'est pas un régime, c'est de l'escroquerie à la frite. La table connaît le coupable.",
+      "en": "Saying 'I'm not getting fries' then raiding everyone's plate isn't a diet, it's fry fraud. The table knows who's on trial."
+    }
+  },
+  {
+    "id": "garder-stylo-emprunte",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Ne jamais rendre le stylo qu'on a emprunté",
+      "en": "Never returning a borrowed pen"
+    },
+    "emoji": "🖊️",
+    "debateStarter": {
+      "fr": "Emprunter un stylo et le garder « par accident » pendant six ans, c'est pas de l'étourderie, c'est de la récidive. Compte tes stylos, accuse en conséquence.",
+      "en": "Borrowing a pen and keeping it 'by accident' for six years isn't forgetfulness, it's a repeat offense. Count your pens, charge accordingly."
+    }
+  },
+  {
+    "id": "parler-pendant-le-film",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Demander « attends c'est qui lui ? » à chaque scène du film",
+      "en": "Asking 'wait who's that?' at every scene of the movie"
+    },
+    "emoji": "🎬",
+    "debateStarter": {
+      "fr": "Poser « attends c'est qui lui ? » à chaque scène, c'est pas de la curiosité, c'est du sabotage de soirée ciné. La télécommande devrait être une preuve à charge.",
+      "en": "Asking 'wait who's that?' at every scene isn't curiosity, it's movie-night sabotage. The remote should be entered into evidence."
+    }
+  },
+  {
+    "id": "klaxonner-au-feu-vert",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Klaxonner une demi-seconde après que le feu passe au vert",
+      "en": "Honking half a second after the light turns green"
+    },
+    "emoji": "🚗",
+    "debateStarter": {
+      "fr": "Klaxonner avant même que le vert se stabilise, c'est pas de la conduite, c'est de l'agression au volant. Quelqu'un ici le fait et trouve ça normal.",
+      "en": "Honking before the green even settles isn't driving, it's road rage with a steering wheel. Someone here does it and thinks it's fine."
+    }
+  },
+  {
+    "id": "spoiler-sans-prevenir",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Spoiler la fin de la série « parce que tout le monde l'a vue »",
+      "en": "Spoiling the finale because 'everyone's seen it by now'"
+    },
+    "emoji": "🤐",
+    "debateStarter": {
+      "fr": "Balancer la fin en disant « bah tout le monde l'a vue », c'est pas une excuse, c'est une circonstance aggravante. Y'a un récidiviste dans cette pièce.",
+      "en": "Dropping the ending with 'everyone's seen it by now' isn't an excuse, it's an aggravating factor. There's a repeat offender in this room."
+    }
+  },
+  {
+    "id": "mettre-30-min-pour-choisir-resto",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « moi ça m'est égal » puis refuser chaque resto proposé",
+      "en": "Saying 'I'm easy' then vetoing every restaurant suggested"
+    },
+    "emoji": "🍽️",
+    "debateStarter": {
+      "fr": "« Moi ça m'est égal » puis dire non à treize restos d'affilée, c'est pas de la souplesse, c'est une prise d'otage du groupe. Le procès est ouvert.",
+      "en": "Saying 'I'm easy' then shooting down thirteen restaurants isn't flexibility, it's a group hostage situation. Court is in session."
+    }
+  },
+  {
+    "id": "doubler-la-file",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Doubler dans la file en disant « je demande juste une info »",
+      "en": "Cutting the line claiming 'I just have a quick question'"
+    },
+    "emoji": "🧍",
+    "debateStarter": {
+      "fr": "Couper la file avec « je demande juste un truc » et finir par commander, c'est pas une question, c'est un braquage poli. La file entière est témoin.",
+      "en": "Cutting the line with 'just a quick question' and then ordering anyway isn't a question, it's a polite robbery. The whole queue is a witness."
+    }
+  },
+  {
+    "id": "laisser-vaisselle-tremper",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Laisser la vaisselle « tremper » trois jours dans l'évier",
+      "en": "Leaving dishes to 'soak' in the sink for three days"
+    },
+    "emoji": "🍳",
+    "debateStarter": {
+      "fr": "« Je la laisse tremper », c'est le mot des gens qui n'ont jamais relavé une assiette de leur vie. Trois jours, c'est plus du trempage, c'est un écosystème.",
+      "en": "'I'm letting it soak' is the phrase of people who have never once come back to that plate. Three days isn't soaking, it's an ecosystem."
+    }
+  },
+  {
+    "id": "raconter-reve-en-detail",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Raconter son rêve de la nuit minute par minute au petit-déj",
+      "en": "Recounting your entire dream minute-by-minute at breakfast"
+    },
+    "emoji": "💤",
+    "debateStarter": {
+      "fr": "Raconter son rêve en quatorze chapitres au petit-déj, c'est pas du partage, c'est une prise d'otage avant le café. Personne n'a demandé, tout le monde subit.",
+      "en": "Recounting your dream in fourteen chapters before anyone's had coffee isn't sharing, it's a hostage situation. Nobody asked, everyone suffers."
+    }
+  },
+  {
+    "id": "envoyer-vocal-de-7-minutes",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Envoyer un vocal de 7 minutes pour dire « ouais ça marche »",
+      "en": "Sending a 7-minute voice note to say 'yeah sounds good'"
+    },
+    "emoji": "🎙️",
+    "debateStarter": {
+      "fr": "Sept minutes de vocal pour une info qui tenait en un mot, c'est pas de la chaleur humaine, c'est une condamnation à écouter. Le bouton x2 est ta seule défense.",
+      "en": "A seven-minute voice note for a one-word answer isn't warmth, it's a sentence to listen. The 2x button is your only defense."
+    }
+  },
+  {
+    "id": "promettre-cinq-minutes",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « je suis là dans 5 minutes » en sortant tout juste de la douche",
+      "en": "Texting 'omw, 5 mins' while still in the shower"
+    },
+    "emoji": "⏱️",
+    "debateStarter": {
+      "fr": "« 5 minutes » envoyé alors que t'es même pas habillé, c'est pas de l'optimisme, c'est un faux en écriture. Tout le monde ici a déjà été le menteur ou la dupe.",
+      "en": "'5 mins' sent while you're not even dressed isn't optimism, it's perjury by text. Everyone here has been the liar or the fool."
+    }
+  },
+  {
+    "id": "garder-clim-a-19-et-prendre-pull",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Mettre la clim à 19° et se plaindre d'avoir froid",
+      "en": "Cranking the AC to 65 then complaining about being cold"
+    },
+    "emoji": "❄️",
+    "debateStarter": {
+      "fr": "Pousser la clim à 19° puis enfiler un pull en disant « il fait frais », c'est pas un avis, c'est un trouble à l'ordre du salon. La facture est une pièce à conviction.",
+      "en": "Cranking the AC to 65 then grabbing a hoodie because 'it's chilly' isn't a preference, it's a public disturbance. The power bill is exhibit A."
+    }
+  },
+  {
+    "id": "applaudir-atterrissage-avion",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Applaudir quand l'avion atterrit",
+      "en": "Clapping when the plane lands"
+    },
+    "emoji": "✈️",
+    "debateStarter": {
+      "fr": "Applaudir l'atterrissage, c'est mignon ou c'est un délit contre la dignité de la cabine ? Y'a deux camps dans cette pièce et aucun ne lâchera.",
+      "en": "Clapping when the plane lands: wholesome, or a crime against cabin dignity? There are two camps in this room and neither will fold."
+    }
+  },
+  {
+    "id": "mettre-haut-parleur-en-public",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Regarder des vidéos sans écouteurs dans le bus",
+      "en": "Watching videos with no headphones on the bus"
+    },
+    "emoji": "🔊",
+    "debateStarter": {
+      "fr": "Faire écouter ton feed au bus entier sans écouteurs, c'est pas un oubli, c'est une déclaration de guerre sonore. Le wagon a le droit de te juger.",
+      "en": "Forcing the whole bus to hear your feed with no headphones isn't an oversight, it's a declaration of sonic war. The carriage gets to pass judgment."
+    }
+  },
+  {
+    "id": "dire-on-se-fait-ca-jamais",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « faut qu'on se fasse ça » sans jamais avoir l'intention",
+      "en": "Saying 'we should totally hang' with zero intention of doing it"
+    },
+    "emoji": "🤝",
+    "debateStarter": {
+      "fr": "« Faut qu'on se fasse un truc » dit pour la 40e fois sans jamais de date, c'est pas une promesse, c'est une fausse monnaie sociale. Tu connais déjà le coupable.",
+      "en": "'We should totally hang' said for the 40th time with no date ever set isn't a plan, it's social counterfeit currency. You already know who's guilty."
+    }
+  },
+  {
+    "id": "finir-le-lait-et-remettre-vide",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Remettre la brique de lait vide dans le frigo",
+      "en": "Putting the empty milk carton back in the fridge"
+    },
+    "emoji": "🥛",
+    "debateStarter": {
+      "fr": "Reposer la brique vide dans le frigo, c'est pas de la distraction, c'est un piège tendu au prochain qui aura faim. Le coloc qui le fait sait très bien ce qu'il fait.",
+      "en": "Putting the empty carton back in the fridge isn't absent-mindedness, it's a trap set for whoever's hungry next. The roommate who does it knows exactly what they did."
+    }
+  },
+  {
+    "id": "corriger-prononciation-des-mots",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Corriger la prononciation des gens pendant qu'ils parlent",
+      "en": "Correcting how people pronounce words mid-sentence"
+    },
+    "emoji": "🗣️",
+    "debateStarter": {
+      "fr": "Couper quelqu'un pour reprendre sa prononciation, c'est pas de la pédagogie, c'est un abus de pouvoir grammatical. Quelqu'un ici le fait et croit que ça le rend cultivé.",
+      "en": "Cutting someone off to fix their pronunciation isn't teaching, it's an abuse of grammatical power. Someone here does it and thinks it makes them smart."
+    }
+  },
+  {
+    "id": "prendre-deux-places-de-parking",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Se garer sur deux places pour pas qu'on raye la voiture",
+      "en": "Parking across two spots so nobody scratches the car"
+    },
+    "emoji": "🅿️",
+    "debateStarter": {
+      "fr": "Prendre deux places « pour protéger la carrosserie », c'est pas de la prudence, c'est du vol de territoire à ciel ouvert. Le parking entier veut ta tête.",
+      "en": "Taking two spots 'to protect the paint' isn't caution, it's open-air territory theft. The whole lot wants your head."
+    }
+  },
+  {
+    "id": "raconter-fin-blague-puis-attendre",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Liker son propre message dans le groupe",
+      "en": "Liking your own message in the group chat"
+    },
+    "emoji": "❤️",
+    "debateStarter": {
+      "fr": "Mettre un like à son propre message, c'est pas de la confiance, c'est un aveu public qu'on s'auto-applaudit. Le groupe a vu le petit cœur. Le groupe juge.",
+      "en": "Liking your own message isn't confidence, it's a public confession that you applaud yourself. The group saw the little heart. The group judges."
+    }
+  },
+  {
+    "id": "prendre-photo-du-plat-froid",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Faire attendre toute la table que le plat soit photographié",
+      "en": "Making the whole table wait while you photograph the food"
+    },
+    "emoji": "📸",
+    "debateStarter": {
+      "fr": "Faire refroidir le plat de cinq personnes pour une photo que trois personnes verront, c'est pas de l'art, c'est de la séquestration de fourchettes. Coupable, non ?",
+      "en": "Letting five people's food go cold for a photo three people will see isn't art, it's holding the forks hostage. Guilty, no?"
+    }
+  },
+  {
+    "id": "garder-une-conversation-en-otage",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « non mais laisse tomber » puis bouder qu'on laisse tomber",
+      "en": "Saying 'no, just forget it' then sulking when people forget it"
+    },
+    "emoji": "🙄",
+    "debateStarter": {
+      "fr": "« Laisse tomber » puis faire la tête parce qu'on a laissé tomber, c'est pas de la pudeur, c'est un piège émotionnel à double fond. La salle reconnaît le procédé.",
+      "en": "'Just forget it' then sulking because people forgot it isn't being modest, it's a double-bottomed emotional trap. The room recognizes the move."
+    }
+  },
+  {
+    "id": "tousser-sans-couvrir-bouche",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Éternuer à pleine bouche sur le buffet partagé",
+      "en": "Sneezing open-mouthed over the shared buffet"
+    },
+    "emoji": "🤧",
+    "debateStarter": {
+      "fr": "Éternuer sans se couvrir au-dessus des petits fours, c'est pas un accident, c'est un crime contre l'apéro collectif. Tout le monde a vu, personne ne touchera plus aux toasts.",
+      "en": "Sneezing uncovered over the canapés isn't an accident, it's a crime against the shared snack table. Everyone saw, nobody's touching the toasts now."
+    }
+  },
+  {
+    "id": "annuler-au-dernier-moment",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Annuler 20 minutes avant en disant « je le sens pas trop là »",
+      "en": "Bailing 20 minutes before with 'not really feeling it tbh'"
+    },
+    "emoji": "🚪",
+    "debateStarter": {
+      "fr": "Annuler vingt minutes avant avec « je le sens pas là », c'est pas de l'écoute de soi, c'est une trahison à retardement. Quelqu'un ici l'a fait à quelqu'un d'autre ici.",
+      "en": "Bailing twenty minutes before with 'not feeling it' isn't self-care, it's a timed betrayal. Someone here did it to someone else here."
+    }
+  },
+  {
+    "id": "manger-bruit-bouche-ouverte",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Mâcher la bouche ouverte à côté de toi en silence par ailleurs",
+      "en": "Chewing with their mouth open right next to you, otherwise silent"
+    },
+    "emoji": "😬",
+    "debateStarter": {
+      "fr": "Mâcher bouche ouverte juste à côté, c'est pas un détail, c'est une nuisance sonore avec préméditation. Le dîner devient une scène de crime auditive.",
+      "en": "Chewing with their mouth open right next to you isn't a small thing, it's premeditated noise pollution. Dinner becomes an audio crime scene."
+    }
+  },
+  {
+    "id": "garder-la-zappette",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Confisquer la télécommande et zapper sans jamais s'arrêter",
+      "en": "Hoarding the remote and channel-surfing without ever stopping"
+    },
+    "emoji": "📺",
+    "debateStarter": {
+      "fr": "Garder la télécommande et zapper sans jamais poser sur rien, c'est pas regarder la télé, c'est de la tyrannie du canapé. Le reste de la pièce subit en silence.",
+      "en": "Hoarding the remote and surfing without ever landing on anything isn't watching TV, it's couch tyranny. The rest of the room suffers in silence."
+    }
+  },
+  {
+    "id": "demander-ou-tes-quand-on-est-en-retard",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Demander « t'es où ? » alors que c'est toi qui es en retard",
+      "en": "Texting 'where are you?' when you're the one who's late"
+    },
+    "emoji": "📍",
+    "debateStarter": {
+      "fr": "Envoyer « t'es où ? » en étant soi-même à dix minutes, c'est pas de l'organisation, c'est un retournement de culpabilité magistral. Y'a un expert dans la salle.",
+      "en": "Texting 'where are you?' while you're the one ten minutes out isn't coordination, it's a masterclass in guilt-flipping. There's an expert in the room."
+    }
+  },
+  {
+    "id": "reposter-story-pour-likes",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Supprimer une photo qui a pas eu assez de likes en une heure",
+      "en": "Deleting a post that didn't get enough likes within an hour"
+    },
+    "emoji": "💔",
+    "debateStarter": {
+      "fr": "Supprimer une photo parce qu'elle a fait quatorze likes en une heure, c'est pas de la pudeur, c'est un aveu sous serment qu'on compte. Quelqu'un ici l'a déjà fait.",
+      "en": "Deleting a post because it only got fourteen likes in an hour isn't modesty, it's a sworn confession that you're counting. Someone here has done it."
+    }
+  },
+  {
+    "id": "finir-les-restes-de-quelqu-un",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Manger les restes étiquetés au prénom de quelqu'un d'autre dans le frigo",
+      "en": "Eating the leftovers with someone else's name written on them"
+    },
+    "emoji": "🏷️",
+    "debateStarter": {
+      "fr": "Manger le tupperware marqué au prénom d'un autre, c'est pas une fringale, c'est une violation de propriété alimentaire. Le frigo a une scène de crime ce matin.",
+      "en": "Eating the labeled tupperware with someone else's name on it isn't a craving, it's a violation of food property. The fridge has a crime scene this morning."
+    }
+  },
+  {
+    "id": "monopoliser-conversation-soiree",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Ramener chaque histoire des autres à une histoire sur soi",
+      "en": "Turning every story someone tells into a story about yourself"
+    },
+    "emoji": "🎤",
+    "debateStarter": {
+      "fr": "Redébrancher chaque anecdote vers soi en deux secondes, c'est pas de la conversation, c'est un détournement de récit. Quelqu'un dans cette pièce le fait à chaque dîner.",
+      "en": "Rerouting every anecdote back to yourself within two seconds isn't conversation, it's story hijacking. Someone in this room does it at every dinner."
+    }
+  },
+  {
+    "id": "laisser-2-pourcent-batterie",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Emprunter ton chargeur et le garder « juste deux minutes » toute la soirée",
+      "en": "Borrowing your charger and keeping it 'just two minutes' all night"
+    },
+    "emoji": "🔋",
+    "debateStarter": {
+      "fr": "Emprunter ton chargeur pour « deux minutes » et le rendre à 3h du matin, c'est pas un emprunt, c'est une annexion. Ton téléphone à 4 % réclame justice.",
+      "en": "Borrowing your charger for 'two minutes' and returning it at 3am isn't a loan, it's an annexation. Your phone at 4% demands justice."
+    }
+  },
+  {
+    "id": "rentrer-chaussures-dans-maison",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Garder ses chaussures dans l'appart de quelqu'un qui les enlève",
+      "en": "Keeping your shoes on in the home of someone who takes theirs off"
+    },
+    "emoji": "👟",
+    "debateStarter": {
+      "fr": "Garder ses baskets dans un appart où tout le monde est en chaussettes, c'est pas un oubli, c'est un manque de respect qui laisse des traces. Au sens propre.",
+      "en": "Keeping your sneakers on in a home where everyone's in socks isn't forgetfulness, it's disrespect that leaves marks. Literally."
+    }
+  },
+  {
+    "id": "dire-je-te-rembourse-jamais",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « je te rembourse » et ne jamais reparler de l'argent",
+      "en": "Saying 'I'll pay you back' and never mentioning money again"
+    },
+    "emoji": "💸",
+    "debateStarter": {
+      "fr": "« Je te rembourse » suivi d'un silence de huit mois, c'est pas un oubli, c'est une dette effacée par la force du toupet. Quelqu'un ici doit de l'argent à quelqu'un ici.",
+      "en": "'I'll pay you back' followed by eight months of silence isn't forgetting, it's a debt erased by sheer nerve. Someone here owes someone else here money."
+    }
+  },
+  {
+    "id": "demander-un-resume-de-la-reunion",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Arriver en retard puis demander « bon, où on en est ? »",
+      "en": "Showing up late then asking 'so, what'd I miss?'"
+    },
+    "emoji": "🕰️",
+    "debateStarter": {
+      "fr": "Débarquer en retard et demander un résumé à toute la salle, c'est pas de l'intérêt, c'est faire payer son retard aux autres. Coupable de double peine.",
+      "en": "Rolling in late then asking the whole room to recap isn't engagement, it's making everyone else pay for your lateness. Guilty of double jeopardy."
+    }
+  },
+  {
+    "id": "garder-fenetre-onglets-ouverts",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Lire ton message, commencer à écrire, puis disparaître pendant deux heures",
+      "en": "Reading your message, starting to type, then vanishing for two hours"
+    },
+    "emoji": "✍️",
+    "debateStarter": {
+      "fr": "Voir les trois petits points apparaître puis plus rien pendant deux heures, c'est pas une pause, c'est de la torture psychologique horodatée. Quelqu'un ici en est l'auteur.",
+      "en": "Watching the three dots appear then nothing for two hours isn't a pause, it's timestamped psychological torture. Someone here is the author."
+    }
+  },
+  {
+    "id": "commander-le-plus-cher-quand-on-partage",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Commander le homard quand on a dit « on partage l'addition »",
+      "en": "Ordering the lobster after everyone agreed to split the bill"
+    },
+    "emoji": "🦞",
+    "debateStarter": {
+      "fr": "Prendre le plat le plus cher de la carte juste après « on partage », c'est pas un appétit, c'est une fraude à l'addition au grand jour. La table fait les comptes, et elle se souvient.",
+      "en": "Ordering the priciest thing on the menu right after 'let's just split it' isn't an appetite, it's open-table bill fraud. The table's doing the math, and it remembers."
+    }
+  },
+  {
+    "id": "faire-semblant-de-chercher-portefeuille",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Faire semblant de chercher son portefeuille jusqu'à ce qu'un autre paie",
+      "en": "Slow-reaching for your wallet until someone else just pays"
+    },
+    "emoji": "👛",
+    "debateStarter": {
+      "fr": "Fouiller lentement dans son sac jusqu'à ce qu'un autre dégaine la carte, c'est pas de la maladresse, c'est une stratégie rodée. Tout le monde a un suspect en tête.",
+      "en": "Slow-rummaging in your bag until someone else pulls out their card isn't clumsiness, it's a rehearsed strategy. Everyone has a suspect in mind."
+    }
+  },
+  {
+    "id": "voler-la-couette-la-nuit",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Voler toute la couette pendant la nuit et nier au réveil",
+      "en": "Stealing the entire duvet at night and denying it in the morning"
+    },
+    "emoji": "🛏️",
+    "debateStarter": {
+      "fr": "Rafler toute la couette dans son sommeil et jurer « moi ? jamais » au réveil, c'est pas inconscient, c'est un vol avec déni intégré. Le froid de 4h est ton accusateur.",
+      "en": "Rolling up in the whole duvet in your sleep then swearing 'me? never' at dawn isn't unconscious, it's theft with built-in denial. The 4am chill is your accuser."
+    }
+  },
+  {
+    "id": "lire-par-dessus-l-epaule",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Lire les messages des gens par-dessus leur épaule dans le métro",
+      "en": "Reading people's texts over their shoulder on the train"
+    },
+    "emoji": "🕵️",
+    "debateStarter": {
+      "fr": "Lire l'écran du voisin de métro sans gêne, c'est pas de la curiosité, c'est de l'espionnage de proximité. Quelqu'un ici le fait et fait très bien semblant de regarder ailleurs.",
+      "en": "Reading the screen of the person next to you on the train isn't curiosity, it's close-range espionage. Someone here does it and fakes looking away beautifully."
+    }
+  },
+  {
+    "id": "garder-la-musique-en-soiree",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Brancher son téléphone sur l'enceinte et refuser de lâcher la playlist",
+      "en": "Hijacking the speaker and refusing to give up the playlist"
+    },
+    "emoji": "🎧",
+    "debateStarter": {
+      "fr": "S'emparer de l'enceinte et couper chaque chanson au bout de quarante secondes, c'est pas un DJ, c'est un dictateur sonore. La soirée entière réclame un procès.",
+      "en": "Grabbing the speaker and skipping every song after forty seconds isn't being a DJ, it's being a sound dictator. The whole party demands a trial."
+    }
+  },
+  {
+    "id": "promettre-relire-et-jamais-relire",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Dire « envoie, je relis ce soir » et le lire trois semaines après",
+      "en": "Saying 'send it, I'll read it tonight' and opening it three weeks later"
+    },
+    "emoji": "📄",
+    "debateStarter": {
+      "fr": "« Je relis ce soir » suivi de trois semaines de silence radio, c'est pas un emploi du temps chargé, c'est une promesse jetée à la poubelle. La pièce jointe attend toujours.",
+      "en": "'I'll read it tonight' followed by three weeks of radio silence isn't a busy schedule, it's a promise thrown in the bin. The attachment is still waiting."
+    }
+  },
+  {
+    "id": "raconter-la-meme-histoire-deux-fois",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Raconter la même histoire à la même personne pour la troisième fois",
+      "en": "Telling the same person the same story for the third time"
+    },
+    "emoji": "🔁",
+    "debateStarter": {
+      "fr": "Resservir la même anecdote à quelqu'un qui l'a déjà entendue deux fois, c'est pas un trou de mémoire, c'est un abus de bonne volonté. Et il hoche la tête poliment, lui aussi accusé.",
+      "en": "Telling the same anecdote to someone who's heard it twice already isn't a memory slip, it's an abuse of goodwill. And they nod politely, also on trial."
+    }
+  },
+  {
+    "id": "dire-presque-arrive-depuis-chez-soi",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Répondre « j'arrive » alors qu'on est encore allongé dans le lit",
+      "en": "Replying 'on my way' while still lying in bed"
+    },
+    "emoji": "🛌",
+    "debateStarter": {
+      "fr": "« J'arrive » envoyé depuis sous la couette, c'est pas un planning optimiste, c'est un parjure tranquille. Quelqu'un ici l'a tapé ce matin même. Avoue.",
+      "en": "'On my way' sent from under the covers isn't optimistic planning, it's calm perjury. Someone here typed it this very morning. Confess."
+    }
+  },
+  {
+    "id": "garder-le-dernier-carre-chocolat",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Manger le dernier carré de chocolat de la tablette commune",
+      "en": "Eating the last square of the shared chocolate bar"
+    },
+    "emoji": "🍫",
+    "debateStarter": {
+      "fr": "Manger le dernier carré de la tablette qu'on disait « commune », c'est pas une gourmandise, c'est un vol à la dernière bouchée. La salle exige un nom.",
+      "en": "Eating the last square of the bar everyone called 'shared' isn't a treat, it's last-bite larceny. The room demands a name."
+    }
+  },
+  {
+    "id": "couper-quelqu-un-pour-dire-justement",
+    "optionA": {
+      "fr": "Coupable",
+      "en": "Guilty"
+    },
+    "optionB": {
+      "fr": "Innocent",
+      "en": "Innocent"
+    },
+    "prompt": {
+      "fr": "Couper quelqu'un en plein milieu pour dire « justement, moi… »",
+      "en": "Cutting someone off mid-sentence to say 'actually, I…'"
+    },
+    "emoji": "✋",
+    "debateStarter": {
+      "fr": "Couper une phrase en deux pour placer son « justement moi… », c'est pas de l'enthousiasme, c'est un vol de parole en réunion plénière. Quelqu'un ici récidive à chaque tour de table.",
+      "en": "Cutting a sentence in half to drop your 'actually, I…' isn't enthusiasm, it's grand theft conversation. Someone here reoffends every single round."
+    }
+  }
+] },
+};
+
+export const RED_GREEN_FLAG_PACK: ContentPack<OptionVoteContent> = {
+  id: 'red-green-flag-core',
+  version: 1,
+  data: { items: [
+  {
+    "id": "repond-vocal-de-cinq-minutes",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Répond à ton texto par un vocal de cinq minutes",
+      "en": "Replies to your text with a five-minute voice note"
+    },
+    "emoji": "🎙️",
+    "debateStarter": {
+      "fr": "Transformer un « tu fais quoi ce soir » en monologue de cinq minutes qu'il faut écouter au casque dans le métro, c'est pas de l'authenticité, c'est une prise d'otage audio. Quelqu'un ici en envoie. On le sait.",
+      "en": "Turning 'what are you up to tonight' into a five-minute monologue you have to listen to on headphones isn't being authentic, it's an audio hostage situation. Someone here sends these. We know."
+    }
+  },
+  {
+    "id": "garde-les-recus-pour-une-dispute",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Garde des captures d'écran pour les ressortir en dispute",
+      "en": "Keeps screenshots to bring up in a future argument"
+    },
+    "emoji": "📸",
+    "debateStarter": {
+      "fr": "Sortir une capture de mars pour gagner une dispute de novembre, c'est pas de la mémoire, c'est un dossier d'instruction. La personne classe ses preuves mieux qu'un cabinet d'avocats.",
+      "en": "Pulling up a March screenshot to win a November argument isn't a good memory, it's a case file. This person archives evidence better than a law firm."
+    }
+  },
+  {
+    "id": "ami-de-tous-les-serveurs",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Connaît le prénom de tous les serveurs du quartier",
+      "en": "Knows every waiter in the neighborhood by name"
+    },
+    "emoji": "🍽️",
+    "debateStarter": {
+      "fr": "Quelqu'un qui salue le serveur par son prénom et demande des nouvelles de sa fille, soit c'est la personne la plus chaleureuse de la ville, soit elle a besoin que tout inconnu l'aime en huit minutes. Y'a pas de troisième option.",
+      "en": "Someone who greets the waiter by name and asks about his daughter is either the warmest person in town or needs every stranger to love them within eight minutes. There is no third option."
+    }
+  },
+  {
+    "id": "texte-bonne-nuit-tous-les-soirs",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Envoie un « bonne nuit » tous les soirs sans rater un jour",
+      "en": "Sends a goodnight text every single night without fail"
+    },
+    "emoji": "🌙",
+    "debateStarter": {
+      "fr": "Un « bonne nuit » chaque soir, c'est mignon trois semaines, puis ça devient un pointage. Le jour où il manque, c'est l'enquête : t'es devenu une obligation administrative.",
+      "en": "A goodnight text every night is adorable for three weeks, then it becomes a clock-in. The night it's missing, it's an investigation: you've become an administrative duty."
+    }
+  },
+  {
+    "id": "parle-de-son-ex-au-premier-rendez-vous",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Parle de son ex au premier rendez-vous",
+      "en": "Talks about their ex on the first date"
+    },
+    "emoji": "👻",
+    "debateStarter": {
+      "fr": "Mentionner son ex avant les entrées, c'est pas de la transparence, c'est un siège encore occupé. Tu dînes à trois et t'as réservé pour deux.",
+      "en": "Bringing up the ex before the appetizers isn't transparency, it's a seat still taken. You booked for two and you're dining as three."
+    }
+  },
+  {
+    "id": "split-laddition-au-centime",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Calcule l'addition au centime près avec une appli",
+      "en": "Splits the bill to the exact cent with an app"
+    },
+    "emoji": "🧮",
+    "debateStarter": {
+      "fr": "Sortir l'appli pour réclamer 1,40 € parce que t'as pris un dessert et pas lui, c'est pas de l'équité, c'est une vérification de comptes. La générosité a un tableur maintenant.",
+      "en": "Pulling out the app to claim back $1.40 because you got dessert and they didn't isn't fairness, it's an audit. Generosity comes with a spreadsheet now."
+    }
+  },
+  {
+    "id": "repond-toujours-en-moins-de-deux-minutes",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Répond à tous tes messages en moins de deux minutes",
+      "en": "Answers every message in under two minutes"
+    },
+    "emoji": "⚡",
+    "debateStarter": {
+      "fr": "Une réponse en moins de deux minutes à toute heure, c'est soit l'attention parfaite, soit quelqu'un qui n'a strictement rien d'autre qui se passe dans sa vie. Le téléphone est dans la main, jamais posé.",
+      "en": "A reply in under two minutes at any hour is either perfect attention or someone with absolutely nothing else going on. The phone is in the hand, never on the table."
+    }
+  },
+  {
+    "id": "ne-laisse-jamais-son-telephone-traîner",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Retourne son téléphone face contre table dès que tu arrives",
+      "en": "Flips their phone face-down the second you walk in"
+    },
+    "emoji": "📵",
+    "debateStarter": {
+      "fr": "Retourner l'écran à la seconde où tu entres, c'est pas du respect de la conversation, c'est un réflexe. On ne cache pas un agenda, on cache une notification.",
+      "en": "Flipping the screen the second you walk in isn't respecting the conversation, it's a reflex. Nobody hides a calendar, they hide a notification."
+    }
+  },
+  {
+    "id": "garde-contact-avec-tous-ses-ex",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Reste ami avec absolument tous ses ex",
+      "en": "Stays friends with absolutely all their exes"
+    },
+    "emoji": "🤝",
+    "debateStarter": {
+      "fr": "Rester pote avec chaque ex, c'est soit une maturité émotionnelle rare, soit un refus pathologique de fermer la moindre porte. La personne ne range jamais ses cartons, elle les garde « au cas où ».",
+      "en": "Staying friends with every ex is either rare emotional maturity or a pathological refusal to close any door. This person never throws out the boxes, they keep them 'just in case'."
+    }
+  },
+  {
+    "id": "annule-toujours-a-la-derniere-minute",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Annule toujours une heure avant le plan",
+      "en": "Always cancels an hour before the plan"
+    },
+    "emoji": "🚪",
+    "debateStarter": {
+      "fr": "Quelqu'un qui se décommande systématiquement à 18h pour un plan à 19h, c'est pas « débordé », c'est quelqu'un qui n'a jamais eu l'intention de venir. Le « on se voit bientôt » est un mensonge à abonnement.",
+      "en": "Someone who systematically bails at 6pm on a 7pm plan isn't 'swamped', they never intended to come. Their 'let's catch up soon' is a subscription lie."
+    }
+  },
+  {
+    "id": "remercie-toujours-le-chauffeur-de-bus",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Remercie le chauffeur de bus en descendant",
+      "en": "Thanks the bus driver on the way out"
+    },
+    "emoji": "🚌",
+    "debateStarter": {
+      "fr": "Comment quelqu'un traite le chauffeur, le serveur et le livreur en dit plus long que trois ans de relation. C'est le seul test où personne ne triche, parce que personne ne sait qu'il est noté.",
+      "en": "How someone treats the bus driver, the waiter and the courier says more than three years of dating. It's the one test nobody games, because nobody knows they're being graded."
+    }
+  },
+  {
+    "id": "te-corrige-la-grammaire-en-public",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te corrige ta grammaire devant les autres",
+      "en": "Corrects your grammar in front of others"
+    },
+    "emoji": "✏️",
+    "debateStarter": {
+      "fr": "Reprendre ta phrase devant la table « pour t'aider », c'est pas de la pédagogie, c'est une démonstration. L'objectif n'a jamais été la grammaire, l'objectif c'était le public.",
+      "en": "Correcting your sentence at the table 'to help you' isn't teaching, it's a demonstration. The grammar was never the point. The audience was."
+    }
+  },
+  {
+    "id": "garde-une-brosse-a-dents-chez-toi-en-trois-semaines",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Laisse une brosse à dents chez toi après trois semaines",
+      "en": "Leaves a toothbrush at your place after three weeks"
+    },
+    "emoji": "🪥",
+    "debateStarter": {
+      "fr": "Une brosse à dents posée chez toi à la troisième semaine, c'est pas une attention, c'est une prise de territoire. La personne n'a rien demandé, elle a annexé. Et le shampoing arrive la semaine prochaine.",
+      "en": "A toothbrush parked at your place by week three isn't sweet, it's a land grab. They didn't ask, they annexed. The shampoo arrives next week."
+    }
+  },
+  {
+    "id": "ne-met-jamais-de-pourboire",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Ne laisse jamais un centime de pourboire",
+      "en": "Never leaves a single cent of tip"
+    },
+    "emoji": "💸",
+    "debateStarter": {
+      "fr": "Quelqu'un qui sort un discours sur « le principe » pour ne jamais laisser un centime, le principe c'est pas la justice, c'est la pingrerie avec un costume idéologique. Le serveur n'a pas voté pour ta théorie.",
+      "en": "Someone who gives a speech about 'the principle' to justify never tipping a cent — the principle isn't justice, it's cheapness in an ideological costume. The waiter didn't vote for your theory."
+    }
+  },
+  {
+    "id": "ramene-toujours-la-conversation-a-soi",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Ramène toujours la conversation à soi",
+      "en": "Always steers the conversation back to themselves"
+    },
+    "emoji": "🔁",
+    "debateStarter": {
+      "fr": "Tu racontes ton enterrement de grand-mère, et trente secondes plus tard on parle de SON weekend. C'est pas de la maladresse, c'est une orbite : tout doit graviter autour d'elle, même ton deuil.",
+      "en": "You start telling them about your grandmother's funeral and thirty seconds later you're hearing about THEIR weekend. It's not clumsiness, it's an orbit: everything must circle them, even your grief."
+    }
+  },
+  {
+    "id": "garde-toujours-une-place-pour-toi",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te garde toujours une place quand le groupe sort",
+      "en": "Always saves you a seat when the group goes out"
+    },
+    "emoji": "🪑",
+    "debateStarter": {
+      "fr": "Quelqu'un qui pense à te garder une place avant que tu arrives, ça vaut plus que dix « je pense à toi » par texto. L'attention silencieuse bat l'affection bruyante. La table le sait, mais personne le dit.",
+      "en": "Someone who saves you a seat before you even arrive is worth more than ten 'thinking of you' texts. Quiet attention beats loud affection. The table knows it but nobody says it."
+    }
+  },
+  {
+    "id": "te-rajoute-sur-tous-les-reseaux-le-meme-soir",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te suit sur tous les réseaux le soir même",
+      "en": "Follows you on every app the same night"
+    },
+    "emoji": "📲",
+    "debateStarter": {
+      "fr": "Te retrouver et te suivre sur quatre réseaux avant minuit le soir du premier date, c'est pas de l'enthousiasme, c'est un déploiement. La personne a ouvert un dossier sur toi pendant que tu rentrais.",
+      "en": "Finding and following you on four apps before midnight on date one isn't enthusiasm, it's a deployment. They opened a file on you while you were still on the bus home."
+    }
+  },
+  {
+    "id": "se-vante-de-ne-jamais-lire-de-livres",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Se vante de ne jamais lire de livres",
+      "en": "Brags about never reading books"
+    },
+    "emoji": "📚",
+    "debateStarter": {
+      "fr": "Dire « moi je lis jamais » comme si c'était un trait de personnalité, c'est pas de l'honnêteté, c'est une fierté à l'envers. Personne ne se vante de ce qui l'avantage.",
+      "en": "Saying 'I never read' like it's a personality trait isn't honesty, it's pride in reverse. Nobody brags about the thing that's actually helping them."
+    }
+  },
+  {
+    "id": "te-presente-a-ses-amis-en-deux-semaines",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te présente à ses amis au bout de deux semaines",
+      "en": "Introduces you to their friends within two weeks"
+    },
+    "emoji": "🎉",
+    "debateStarter": {
+      "fr": "Te jeter dans le groupe d'amis au bout de quinze jours, soit c'est quelqu'un qui assume vite, soit quelqu'un qui veut un avis du jury avant de décider lui-même. Tu passes un entretien, pas une soirée.",
+      "en": "Throwing you into the friend group after two weeks is either someone who commits fast or someone who needs the jury's verdict before deciding for themselves. You're in an interview, not at a party."
+    }
+  },
+  {
+    "id": "ne-supprime-jamais-une-conversation",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "N'a jamais supprimé une seule conversation de son téléphone",
+      "en": "Has never deleted a single conversation from their phone"
+    },
+    "emoji": "🗂️",
+    "debateStarter": {
+      "fr": "Garder chaque conversation depuis 2016, soit c'est de la nostalgie inoffensive, soit ça veut dire que rien n'est jamais vraiment fini pour cette personne. Les archives, c'est pas du souvenir, c'est des portes ouvertes.",
+      "en": "Keeping every conversation since 2016 is either harmless nostalgia or it means nothing is ever truly over for this person. Archives aren't memories, they're open doors."
+    }
+  },
+  {
+    "id": "fait-la-gueule-sans-jamais-dire-pourquoi",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Boude sans jamais dire pourquoi",
+      "en": "Goes silent and won't say why"
+    },
+    "emoji": "🤐",
+    "debateStarter": {
+      "fr": "Répondre « non non tout va bien » avec la voix d'un orage qui arrive, c'est pas de la pudeur, c'est une punition. On te fait deviner ta faute, et l'examen n'a pas de corrigé.",
+      "en": "Saying 'no, I'm fine' in the voice of an approaching storm isn't being private, it's a punishment. You're made to guess your crime, and the test has no answer key."
+    }
+  },
+  {
+    "id": "se-souvient-de-ta-commande-de-cafe",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Se souvient de ta commande de café exacte",
+      "en": "Remembers your exact coffee order"
+    },
+    "emoji": "☕",
+    "debateStarter": {
+      "fr": "Se rappeler ton café « sans sucre, lait d'avoine, pas trop chaud » sans que tu l'aies répété, c'est l'attention la plus rare qui existe. La grande romance, c'est pas les fleurs, c'est qu'on ait écouté une fois.",
+      "en": "Remembering your 'no sugar, oat milk, not too hot' without you repeating it is the rarest attention there is. Real romance isn't flowers, it's that somebody listened once."
+    }
+  },
+  {
+    "id": "te-parle-mal-quand-il-a-perdu-au-foot",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te parle mal quand son équipe a perdu",
+      "en": "Snaps at you when their team loses"
+    },
+    "emoji": "📺",
+    "debateStarter": {
+      "fr": "Devenir sec avec toi parce que onze inconnus ont perdu un match à la télé, c'est pas de la passion, c'est une humeur qu'on délègue à autrui. Tu paies une défaite que t'as pas jouée.",
+      "en": "Getting cold with you because eleven strangers lost a game on TV isn't passion, it's a mood outsourced onto whoever's nearest. You're paying for a defeat you never played in."
+    }
+  },
+  {
+    "id": "envoie-de-l-argent-a-sa-famille-tous-les-mois",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Envoie de l'argent à sa famille tous les mois sans en parler",
+      "en": "Quietly sends money to family every month"
+    },
+    "emoji": "💌",
+    "debateStarter": {
+      "fr": "Aider les siens chaque mois sans jamais le mentionner, c'est le vert le plus profond qui existe : la générosité qui ne cherche pas de témoin. Mais le découvrir par hasard fait plus d'effet que n'importe quel cadeau.",
+      "en": "Helping their family every month and never mentioning it is the deepest green there is: generosity that doesn't shop for an audience. Finding out by accident hits harder than any gift ever could."
+    }
+  },
+  {
+    "id": "ne-rit-jamais-de-ses-propres-erreurs",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "N'arrive jamais à rire de ses propres erreurs",
+      "en": "Can never laugh at their own mistakes"
+    },
+    "emoji": "🪞",
+    "debateStarter": {
+      "fr": "Quelqu'un qui ne supporte pas qu'on rie d'une de ses bourdes, même gentille, c'est pas de la fierté, c'est une fissure. On peut tout construire avec quelqu'un, sauf avec un ego qui ne plie jamais.",
+      "en": "Someone who can't take a gentle joke about one of their own blunders isn't proud, they're cracked. You can build anything with a person except an ego that never bends."
+    }
+  },
+  {
+    "id": "garde-le-meme-fond-d-ecran-de-vous-deux",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Met une photo de vous deux en fond d'écran après un mois",
+      "en": "Sets a photo of you two as their wallpaper after a month"
+    },
+    "emoji": "🖼️",
+    "debateStarter": {
+      "fr": "Mettre une photo de vous deux en fond d'écran au bout d'un mois, soit c'est adorablement assumé, soit c'est une bannière plantée trop tôt sur un territoire pas encore conquis. Le téléphone te déclare officiel avant toi.",
+      "en": "Making a photo of you two the lock screen after a month is either adorably all-in or a flag planted too early on land not yet won. The phone declares you official before you do."
+    }
+  },
+  {
+    "id": "parle-fort-au-cinema",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Commente le film à voix haute au cinéma",
+      "en": "Narrates the movie out loud in the cinema"
+    },
+    "emoji": "🍿",
+    "debateStarter": {
+      "fr": "Commenter chaque scène à voix haute dans une salle pleine, c'est pas du partage, c'est un manque total de conscience qu'il existe d'autres gens. La personne croit que le monde est son salon.",
+      "en": "Narrating every scene out loud in a packed theater isn't sharing, it's a total absence of the awareness that other people exist. This person thinks the world is their living room."
+    }
+  },
+  {
+    "id": "prend-des-nouvelles-de-ta-mere",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Demande des nouvelles de ta mère par son prénom",
+      "en": "Asks how your mom is doing, by name"
+    },
+    "emoji": "📞",
+    "debateStarter": {
+      "fr": "Demander « et comment va Sylvie ? » sans que tu aies parlé de ta mère depuis trois semaines, c'est de l'attention qui mémorise les détails secondaires de ta vie. Le vrai luxe, c'est que quelqu'un retienne les gens que t'aimes.",
+      "en": "Asking 'how's your mom doing?' by name when you haven't mentioned her in three weeks is attention that files away the side characters of your life. The real luxury is someone remembering the people you love."
+    }
+  },
+  {
+    "id": "te-fait-deviner-ce-qu-il-veut-manger",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Répond « je sais pas, comme tu veux » à chaque restaurant",
+      "en": "Says 'I don't know, whatever you want' at every restaurant"
+    },
+    "emoji": "🤷",
+    "debateStarter": {
+      "fr": "Refuser de jamais choisir le resto puis critiquer celui que t'as choisi, c'est pas de la souplesse, c'est de la décision externalisée avec droit de veto. Tu portes la charge mentale et lui garde le pouvoir.",
+      "en": "Refusing to ever pick the restaurant and then critiquing the one you picked isn't easygoing, it's outsourced decisions with veto power. You carry the mental load, they keep the authority."
+    }
+  },
+  {
+    "id": "te-defend-quand-tu-es-pas-la",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te défend quand tu n'es pas dans la pièce",
+      "en": "Defends you when you're not in the room"
+    },
+    "emoji": "🛡️",
+    "debateStarter": {
+      "fr": "Quelqu'un qui te défend quand tu n'es pas là pour le voir, c'est la seule loyauté qui compte vraiment. Le reste, c'est de la fidélité avec public. Y'a une personne ici qui le fait pour toi, et une autre qui ne l'a jamais fait.",
+      "en": "Someone who defends you when you're not there to see it is the only loyalty that actually counts. The rest is loyalty with an audience. One person here does it for you, and one never has."
+    }
+  },
+  {
+    "id": "like-des-photos-de-2019",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Like des photos de toi qui datent de 2019",
+      "en": "Likes your photos from 2019"
+    },
+    "emoji": "❤️",
+    "debateStarter": {
+      "fr": "Liker une photo de toi de 2019, c'est avouer un défilement archéologique à 1h du matin. Ce n'est pas un like, c'est une preuve déposée au dossier. Le pouce a parlé avant la bouche.",
+      "en": "Liking your photo from 2019 is confessing to a 1am archaeological scroll. That's not a like, it's evidence entered into the record. The thumb spoke before the mouth dared."
+    }
+  },
+  {
+    "id": "ne-dit-jamais-pardon",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "N'a jamais dit « pardon » de toute sa vie",
+      "en": "Has never once said 'I'm sorry'"
+    },
+    "emoji": "🙅",
+    "debateStarter": {
+      "fr": "Quelqu'un qui transforme chaque excuse en « ouais mais toi aussi », ce n'est pas une dispute qu'il refuse, c'est l'idée même d'avoir tort. On ne répare rien avec quelqu'un qui n'a jamais signé un seul aveu.",
+      "en": "Someone who turns every apology into 'yeah but you too' isn't refusing the argument, they're refusing the very idea of being wrong. You can't repair anything with a person who's never signed a single confession."
+    }
+  },
+  {
+    "id": "se-rappelle-de-ton-anniversaire-sans-rappel",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Se souvient de ton anniversaire sans rappel du téléphone",
+      "en": "Remembers your birthday with no phone reminder"
+    },
+    "emoji": "🎂",
+    "debateStarter": {
+      "fr": "Se rappeler de ton anniversaire sans notification, en 2026, c'est de la sorcellerie affective. Tout le monde dit « ah merde, c'était hier ? ». Une personne ici a appelé à 9h pile. Pas la même catégorie d'humain.",
+      "en": "Remembering your birthday with no notification, in 2026, is emotional witchcraft. Everyone says 'wait, was that yesterday?'. One person here called at 9am sharp. Not the same category of human."
+    }
+  },
+  {
+    "id": "raconte-tes-secrets-en-soiree-pour-faire-rire",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Raconte tes secrets en soirée pour faire rire la table",
+      "en": "Spills your secrets at parties to get a laugh"
+    },
+    "emoji": "🎤",
+    "debateStarter": {
+      "fr": "Balancer une de tes confidences à la table « parce que c'est trop drôle », c'est pas de la spontanéité, c'est un échange : ta honte contre trois rires. La personne dépense ton intimité comme monnaie.",
+      "en": "Dropping one of your secrets at the table 'because it's too funny' isn't being spontaneous, it's a trade: your shame for three laughs. This person spends your privacy like pocket change."
+    }
+  },
+  {
+    "id": "tutoie-tout-le-monde-immediatement",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Devient meilleur ami avec tes potes en une soirée",
+      "en": "Becomes best friends with your crew in one night"
+    },
+    "emoji": "🫂",
+    "debateStarter": {
+      "fr": "Repartir d'une première soirée avec le numéro de tous tes potes et un projet de week-end, soit c'est un don social rare, soit c'est quelqu'un qui ne fait aucune différence entre toi et un inconnu sympa. L'intensité n'est pas de l'intimité.",
+      "en": "Leaving the first night out with everyone's number and a weekend plan is either a rare social gift or someone who makes no distinction between you and a friendly stranger. Intensity isn't intimacy."
+    }
+  },
+  {
+    "id": "te-dit-quand-t-as-tort-en-prive",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te dit quand t'as tort, mais en privé",
+      "en": "Tells you when you're wrong, but in private"
+    },
+    "emoji": "🤫",
+    "debateStarter": {
+      "fr": "Quelqu'un qui te reprend en tête-à-tête au lieu de te griller devant le groupe, c'est la loyauté à son niveau le plus discret. Te dire la vérité sans te coûter la face, c'est rare. La plupart choisissent le public.",
+      "en": "Someone who corrects you one-on-one instead of roasting you in front of the group is loyalty at its quietest. Telling you the truth without costing you face is rare. Most people pick the audience."
+    }
+  },
+  {
+    "id": "verifie-tes-stories-pour-savoir-ou-tu-es",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Regarde tes stories pour savoir où tu es",
+      "en": "Watches your stories to figure out where you are"
+    },
+    "emoji": "🛰️",
+    "debateStarter": {
+      "fr": "Recouper tes stories pour reconstituer ta soirée et te le faire remarquer « mine de rien », c'est pas de la curiosité, c'est de la surveillance avec un sourire. La personne ne te suit pas, elle te piste.",
+      "en": "Cross-referencing your stories to reconstruct your night and then mentioning it 'casually' isn't curiosity, it's surveillance with a smile. This person doesn't follow you, they track you."
+    }
+  },
+  {
+    "id": "prepare-ton-cafe-avant-que-tu-te-leves",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te prépare ton café avant même que tu te lèves",
+      "en": "Makes your coffee before you're even up"
+    },
+    "emoji": "🫖",
+    "debateStarter": {
+      "fr": "Trouver le café déjà prêt sans l'avoir demandé, c'est pas un geste, c'est une langue : celle des gens qui aiment en faisant, pas en disant. Les grandes déclarations sont gratuites, ce mug-là coûte un réveil plus tôt.",
+      "en": "Finding the coffee already made without asking isn't a gesture, it's a language: the one spoken by people who love through doing, not saying. Big declarations are free. That mug cost an earlier alarm."
+    }
+  },
+  {
+    "id": "te-fait-payer-puis-rembourse-jamais",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "« Tu peux avancer ? » puis ne rembourse jamais",
+      "en": "'Can you spot me?' then never pays you back"
+    },
+    "emoji": "🧾",
+    "debateStarter": {
+      "fr": "Le « je te rends ça ce soir » qui devient « je te rends ça » qui devient le silence, c'est pas de l'oubli, c'est une méthode. La personne a fait le calcul que ton amitié coûte moins cher que vingt balles.",
+      "en": "The 'I'll get you tonight' that becomes 'I'll get you' that becomes silence isn't forgetfulness, it's a method. This person did the math that your friendship is cheaper than twenty bucks."
+    }
+  },
+  {
+    "id": "garde-ton-secret-meme-bourre",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Garde un secret que tu lui as confié, même bourré",
+      "en": "Keeps a secret you told them, even drunk"
+    },
+    "emoji": "🔒",
+    "debateStarter": {
+      "fr": "Confier un secret et le retrouver intact deux ans plus tard, alcool compris, c'est le vert le plus rare du jeu. La discrétion sous tise, c'est le seul test de loyauté qui ne se truque pas. Combien ici le passeraient ?",
+      "en": "Trusting someone with a secret and finding it intact two years later, drinks included, is the rarest green in the game. Discretion while wasted is the one loyalty test you can't fake. How many here would pass it?"
+    }
+  },
+  {
+    "id": "parle-en-mal-de-ses-autres-amis-devant-toi",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Critique ses autres amis dès qu'ils ont le dos tourné",
+      "en": "Trashes their other friends the second they leave"
+    },
+    "emoji": "🐍",
+    "debateStarter": {
+      "fr": "Démolir un pote à la seconde où il part aux toilettes, c'est pas de la complicité avec toi, c'est un aperçu. La personne qui parle des autres devant toi parle de toi devant les autres. Aucune exception.",
+      "en": "Tearing into a friend the second they go to the bathroom isn't bonding with you, it's a preview. Whoever trashes others to your face trashes you to theirs. No exceptions."
+    }
+  },
+  {
+    "id": "te-laisse-finir-tes-phrases",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te laisse finir tes phrases sans te couper",
+      "en": "Lets you finish your sentences without cutting in"
+    },
+    "emoji": "👂",
+    "debateStarter": {
+      "fr": "Quelqu'un qui te laisse aller au bout de ta pensée sans sauter dessus, en 2026, c'est presque un acte militant. La plupart attendent pas leur tour, ils attendent une ouverture. Celui-là écoute pour de vrai.",
+      "en": "Someone who lets you reach the end of a thought without pouncing on it is, in 2026, almost an act of resistance. Most people aren't waiting their turn, they're waiting for a gap. This one actually listens."
+    }
+  },
+  {
+    "id": "change-de-personnalite-selon-le-groupe",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Change complètement de personnalité selon le groupe",
+      "en": "Becomes a totally different person per friend group"
+    },
+    "emoji": "🎭",
+    "debateStarter": {
+      "fr": "S'adapter à chaque groupe, c'est de l'intelligence sociale ; devenir une personne entièrement différente selon qui regarde, c'est qu'il n'y a peut-être personne en dessous. Tu sors avec quatre versions et aucun original.",
+      "en": "Adapting to each group is social intelligence; becoming a completely different person depending on who's watching means there might be no one underneath. You're dating four versions and zero originals."
+    }
+  },
+  {
+    "id": "te-previent-quand-il-rentre-bien",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "T'envoie « bien rentré » sans que tu aies demandé",
+      "en": "Texts you 'home safe' without being asked"
+    },
+    "emoji": "🏠",
+    "debateStarter": {
+      "fr": "Le « bien rentré » spontané à 2h du matin, c'est pas une politesse, c'est quelqu'un qui sait que t'allais t'inquiéter et qui a décidé de t'épargner ça. Penser au confort de l'autre sans qu'on le réclame, c'est le diplôme.",
+      "en": "The unprompted 'home safe' at 2am isn't a courtesy, it's someone who knew you'd worry and decided to spare you that. Thinking of the other person's peace of mind before they ask for it is the whole diploma."
+    }
+  },
+  {
+    "id": "garde-rancune-pour-une-blague-de-2021",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Garde rancune pour une blague de 2021",
+      "en": "Still holds a grudge over a joke from 2021"
+    },
+    "emoji": "🗓️",
+    "debateStarter": {
+      "fr": "Ressortir une vanne de 2021 comme si c'était hier, c'est pas de la sensibilité, c'est une comptabilité. La personne tient un grand livre des offenses, et ton solde n'est jamais à zéro.",
+      "en": "Bringing up a joke from 2021 like it was yesterday isn't sensitivity, it's accounting. This person keeps a ledger of offenses, and your balance is never at zero."
+    }
+  },
+  {
+    "id": "te-textote-bonne-chance-le-jour-de-ton-entretien",
+    "optionA": {
+      "fr": "Red Flag",
+      "en": "Red Flag"
+    },
+    "optionB": {
+      "fr": "Green Flag",
+      "en": "Green Flag"
+    },
+    "prompt": {
+      "fr": "Te souhaite bonne chance le jour de ton entretien d'embauche",
+      "en": "Texts good luck the morning of your job interview"
+    },
+    "emoji": "🍀",
+    "debateStarter": {
+      "fr": "Se rappeler que c'est le jour de TON entretien et envoyer un mot à 8h, ça veut dire que cette personne range ta vie dans son agenda mental. Tenir le calendrier des autres, c'est la forme d'amour la plus sous-cotée.",
+      "en": "Remembering it's YOUR interview day and sending a note at 8am means this person files your life into their mental calendar. Keeping track of other people's dates is the most underrated form of love there is."
+    }
+  }
+] },
+};

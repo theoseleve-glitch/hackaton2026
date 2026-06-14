@@ -45,6 +45,26 @@ export const GAME_CATALOG: readonly GameCard[] = [
     video: { creator: 'Théo Delemazure', url: 'https://degaucheoudedroite.delemazure.fr/' },
   },
   {
+    id: 'courtroom',
+    name: { fr: 'Le Tribunal', en: 'The Courtroom' },
+    tagline: { fr: 'Coupable ou innocent ? Un crime du quotidien, la salle rend son verdict, puis on plaide.', en: 'Guilty or innocent? One everyday crime, the room delivers its verdict, then you argue your case.' },
+    emoji: '⚖️',
+    color: '#C9A24B',
+    badge: 'PLAY',
+    // Grounded credit: the social "mock trial" party format. Emoji card, credit links out.
+    video: { creator: 'Jubilee', url: 'https://www.youtube.com/@jubilee' },
+  },
+  {
+    id: 'red-green-flag',
+    name: { fr: 'Red Flag ou Green Flag ?', en: 'Red Flag or Green Flag?' },
+    tagline: { fr: 'Un comportement, deux camps : red flag ou green flag ? Vote, regarde la salle se déchirer, puis débats.', en: 'One behavior, two camps: red flag or green flag? Vote, watch the room split, then argue it out.' },
+    emoji: '🚩',
+    color: '#E5484D',
+    badge: 'PLAY',
+    // Grounded credit: the red-flag/green-flag social debate format. Emoji card, credit links out.
+    video: { creator: 'Cut', url: 'https://www.youtube.com/@cut' },
+  },
+  {
     id: 'tracer',
     name: { fr: 'Vote Éclair', en: 'Quick Vote' },
     tagline: { fr: 'Qui colle le mieux ? Tape pour voter.', en: 'Who fits? Tap to vote.' },

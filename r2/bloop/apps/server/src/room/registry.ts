@@ -17,9 +17,11 @@ import {
 } from '@bloop/game-perform-judge';
 import { createRanking, LE_CLASSEMENT_CONFIG, rankingActionSchema } from '@bloop/game-ranking';
 import {
+  COURTROOM_CONFIG,
   createOptionVote,
   GAUCHE_DROITE_CONFIG,
   optionVoteActionSchema,
+  RED_GREEN_FLAG_CONFIG,
   TU_PREFERES_CONFIG,
 } from '@bloop/game-option-vote';
 import { createRuleHunt, ruleHuntActionSchema, TROUVEZ_LA_REGLE_CONFIG } from '@bloop/game-rule-hunt';
@@ -68,6 +70,16 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createOptionVote('gauche-ou-droite', GAUCHE_DROITE_CONFIG),
     actionSchema: optionVoteActionSchema,
     contentRef: 'gauche-ou-droite-core',
+  }],
+  ['courtroom', {
+    module: createOptionVote('courtroom', COURTROOM_CONFIG),
+    actionSchema: optionVoteActionSchema,
+    contentRef: 'courtroom-core',
+  }],
+  ['red-green-flag', {
+    module: createOptionVote('red-green-flag', RED_GREEN_FLAG_CONFIG),
+    actionSchema: optionVoteActionSchema,
+    contentRef: 'red-green-flag-core',
   }],
   ['quizz-culture-ge', {
     module: createInputGuess('quizz-culture-ge', QUIZZ_CULTURE_GE_CONFIG),

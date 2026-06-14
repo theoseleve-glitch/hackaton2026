@@ -3,7 +3,7 @@ import type {
   Ballot, Cliffhanger, LText, OptionVoteView, PredictionReveal, RoundResult, StreakTag,
 } from '@bloop/game-option-vote';
 
-export const OPTION_VOTE_GAME_IDS = ['tu-preferes', 'gauche-ou-droite'] as const;
+export const OPTION_VOTE_GAME_IDS = ['tu-preferes', 'gauche-ou-droite', 'courtroom', 'red-green-flag'] as const;
 
 export function isOptionVoteGame(gameId: string | null): boolean {
   return gameId !== null && (OPTION_VOTE_GAME_IDS as readonly string[]).includes(gameId);

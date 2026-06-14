@@ -35,6 +35,40 @@ const gdItems = safeItems(gd).map((i) => ({
   debateStarter: i.debateStarter,
 }));
 
+// courtroom: same gauche-ou-droite shape (axis left/right -> optionA/optionB),
+// per-item prompt/emoji/debateStarter. spicyLevel-gated like its siblings.
+const cr = load('courtroom');
+const crAxis = cr.axis ?? {
+  left: { fr: 'Coupable', en: 'Guilty' },
+  right: { fr: 'Innocent', en: 'Innocent' },
+};
+const crItems = safeItems(cr).map((i) => ({
+  id: i.id,
+  optionA: crAxis.left,
+  optionB: crAxis.right,
+  prompt: i.text,
+  emoji: i.emoji,
+  debateStarter: i.debateStarter,
+}));
+
+// red-green-flag: same shape; this pack gates on `spicy` (0|1|2) not `spicyLevel`,
+// so filter spicy-0 explicitly (safeItems keys on spicyLevel which is absent here).
+const rg = load('red-green-flag');
+const rgAxis = rg.axis ?? {
+  left: { fr: 'Red Flag', en: 'Red Flag' },
+  right: { fr: 'Green Flag', en: 'Green Flag' },
+};
+const rgItems = rg.items
+  .filter((i) => (i.spicy ?? 0) === 0)
+  .map((i) => ({
+    id: i.id,
+    optionA: rgAxis.left,
+    optionB: rgAxis.right,
+    prompt: i.text,
+    emoji: i.emoji,
+    debateStarter: i.debateStarter,
+  }));
+
 const banner = `import type { ContentPack } from '@bloop/engine';
 import type { OptionVoteContent } from '@bloop/game-option-vote';
 
@@ -58,10 +92,22 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
   version: ${gd.version ?? 1},
   data: { items: ${JSON.stringify(gdItems, null, 2)} },
 };
+
+export const COURTROOM_PACK: ContentPack<OptionVoteContent> = {
+  id: '${cr.gameId}-core',
+  version: ${cr.version ?? 1},
+  data: { items: ${JSON.stringify(crItems, null, 2)} },
+};
+
+export const RED_GREEN_FLAG_PACK: ContentPack<OptionVoteContent> = {
+  id: '${rg.gameId}-core',
+  version: ${rg.version ?? 1},
+  data: { items: ${JSON.stringify(rgItems, null, 2)} },
+};
 `;
 
 writeFileSync(out, body);
-console.log(`option-vote-packs.ts regenerated — tu-preferes: ${tpItems.length} items, gauche-ou-droite: ${gdItems.length} items`);
+console.log(`option-vote-packs.ts regenerated — tu-preferes: ${tpItems.length} items, gauche-ou-droite: ${gdItems.length} items, courtroom: ${crItems.length} items, red-green-flag: ${rgItems.length} items`);
 
 // pires-potes: designation cards -> the tracer/VOTE module's prompts array.
 // Items use `spicy` (0|1|2) per the by-game spec; core pack = spicy 0 only.

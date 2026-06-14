@@ -2,7 +2,7 @@ import type { ContentPack } from '@bloop/engine';
 import { CINQUANTE_CINQUANTE_PACK, QUIZZ_CULTURE_GE_PACK } from './input-guess-packs.js';
 import { JEU_DU_THEME_PACK } from './last-standing-pack.js';
 import { LOUP_GAROU_PACK } from './night-day-pack.js';
-import { GAUCHE_DROITE_PACK, TU_PREFERES_PACK } from './option-vote-packs.js';
+import { COURTROOM_PACK, GAUCHE_DROITE_PACK, RED_GREEN_FLAG_PACK, TU_PREFERES_PACK } from './option-vote-packs.js';
 import {
   DEVINE_L_ACTION_PACK,
   DEVINE_L_OBJET_PACK,
@@ -29,6 +29,8 @@ export const ALL_PACKS: ContentPack<any>[] = [
   PIRES_POTES_PACK,
   TU_PREFERES_PACK,
   GAUCHE_DROITE_PACK,
+  COURTROOM_PACK,
+  RED_GREEN_FLAG_PACK,
   QUIZZ_CULTURE_GE_PACK,
   CINQUANTE_CINQUANTE_PACK,
   DOUBLE_JEU_PACK,

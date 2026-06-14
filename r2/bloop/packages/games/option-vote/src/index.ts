@@ -1,7 +1,9 @@
 export { createOptionVote } from './option-vote.js';
 export { optionVoteActionSchema } from './actions.js';
 export {
+  COURTROOM_CONFIG,
   GAUCHE_DROITE_CONFIG,
+  RED_GREEN_FLAG_CONFIG,
   TU_PREFERES_CONFIG,
   type Ballot,
   type Cliffhanger,

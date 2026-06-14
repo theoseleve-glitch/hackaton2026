@@ -1,0 +1,812 @@
+{
+    "gameId": "red-green-flag",
+    "version": 1,
+    "generatedAt": "2026-06-15",
+    "axis": {
+        "left": {
+            "fr": "Red Flag",
+            "en": "Red Flag"
+        },
+        "right": {
+            "fr": "Green Flag",
+            "en": "Green Flag"
+        }
+    },
+    "items": [
+        {
+            "id": "repond-vocal-de-cinq-minutes",
+            "text": {
+                "fr": "Répond à ton texto par un vocal de cinq minutes",
+                "en": "Replies to your text with a five-minute voice note"
+            },
+            "emoji": "🎙️",
+            "category": "comms",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Transformer un « tu fais quoi ce soir » en monologue de cinq minutes qu'il faut écouter au casque dans le métro, c'est pas de l'authenticité, c'est une prise d'otage audio. Quelqu'un ici en envoie. On le sait."
+                ,
+                "en": "Turning 'what are you up to tonight' into a five-minute monologue you have to listen to on headphones isn't being authentic, it's an audio hostage situation. Someone here sends these. We know."
+            }
+        },
+        {
+            "id": "garde-les-recus-pour-une-dispute",
+            "text": {
+                "fr": "Garde des captures d'écran pour les ressortir en dispute",
+                "en": "Keeps screenshots to bring up in a future argument"
+            },
+            "emoji": "📸",
+            "category": "conflict",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Sortir une capture de mars pour gagner une dispute de novembre, c'est pas de la mémoire, c'est un dossier d'instruction. La personne classe ses preuves mieux qu'un cabinet d'avocats."
+                ,
+                "en": "Pulling up a March screenshot to win a November argument isn't a good memory, it's a case file. This person archives evidence better than a law firm."
+            }
+        },
+        {
+            "id": "ami-de-tous-les-serveurs",
+            "text": {
+                "fr": "Connaît le prénom de tous les serveurs du quartier",
+                "en": "Knows every waiter in the neighborhood by name"
+            },
+            "emoji": "🍽️",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui salue le serveur par son prénom et demande des nouvelles de sa fille, soit c'est la personne la plus chaleureuse de la ville, soit elle a besoin que tout inconnu l'aime en huit minutes. Y'a pas de troisième option."
+                ,
+                "en": "Someone who greets the waiter by name and asks about his daughter is either the warmest person in town or needs every stranger to love them within eight minutes. There is no third option."
+            }
+        },
+        {
+            "id": "texte-bonne-nuit-tous-les-soirs",
+            "text": {
+                "fr": "Envoie un « bonne nuit » tous les soirs sans rater un jour",
+                "en": "Sends a goodnight text every single night without fail"
+            },
+            "emoji": "🌙",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Un « bonne nuit » chaque soir, c'est mignon trois semaines, puis ça devient un pointage. Le jour où il manque, c'est l'enquête : t'es devenu une obligation administrative."
+                ,
+                "en": "A goodnight text every night is adorable for three weeks, then it becomes a clock-in. The night it's missing, it's an investigation: you've become an administrative duty."
+            }
+        },
+        {
+            "id": "parle-de-son-ex-au-premier-rendez-vous",
+            "text": {
+                "fr": "Parle de son ex au premier rendez-vous",
+                "en": "Talks about their ex on the first date"
+            },
+            "emoji": "👻",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Mentionner son ex avant les entrées, c'est pas de la transparence, c'est un siège encore occupé. Tu dînes à trois et t'as réservé pour deux."
+                ,
+                "en": "Bringing up the ex before the appetizers isn't transparency, it's a seat still taken. You booked for two and you're dining as three."
+            }
+        },
+        {
+            "id": "split-laddition-au-centime",
+            "text": {
+                "fr": "Calcule l'addition au centime près avec une appli",
+                "en": "Splits the bill to the exact cent with an app"
+            },
+            "emoji": "🧮",
+            "category": "money",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Sortir l'appli pour réclamer 1,40 € parce que t'as pris un dessert et pas lui, c'est pas de l'équité, c'est une vérification de comptes. La générosité a un tableur maintenant."
+                ,
+                "en": "Pulling out the app to claim back $1.40 because you got dessert and they didn't isn't fairness, it's an audit. Generosity comes with a spreadsheet now."
+            }
+        },
+        {
+            "id": "repond-toujours-en-moins-de-deux-minutes",
+            "text": {
+                "fr": "Répond à tous tes messages en moins de deux minutes",
+                "en": "Answers every message in under two minutes"
+            },
+            "emoji": "⚡",
+            "category": "comms",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Une réponse en moins de deux minutes à toute heure, c'est soit l'attention parfaite, soit quelqu'un qui n'a strictement rien d'autre qui se passe dans sa vie. Le téléphone est dans la main, jamais posé."
+                ,
+                "en": "A reply in under two minutes at any hour is either perfect attention or someone with absolutely nothing else going on. The phone is in the hand, never on the table."
+            }
+        },
+        {
+            "id": "ne-laisse-jamais-son-telephone-traîner",
+            "text": {
+                "fr": "Retourne son téléphone face contre table dès que tu arrives",
+                "en": "Flips their phone face-down the second you walk in"
+            },
+            "emoji": "📵",
+            "category": "trust",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Retourner l'écran à la seconde où tu entres, c'est pas du respect de la conversation, c'est un réflexe. On ne cache pas un agenda, on cache une notification."
+                ,
+                "en": "Flipping the screen the second you walk in isn't respecting the conversation, it's a reflex. Nobody hides a calendar, they hide a notification."
+            }
+        },
+        {
+            "id": "garde-contact-avec-tous-ses-ex",
+            "text": {
+                "fr": "Reste ami avec absolument tous ses ex",
+                "en": "Stays friends with absolutely all their exes"
+            },
+            "emoji": "🤝",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Rester pote avec chaque ex, c'est soit une maturité émotionnelle rare, soit un refus pathologique de fermer la moindre porte. La personne ne range jamais ses cartons, elle les garde « au cas où »."
+                ,
+                "en": "Staying friends with every ex is either rare emotional maturity or a pathological refusal to close any door. This person never throws out the boxes, they keep them 'just in case'."
+            }
+        },
+        {
+            "id": "annule-toujours-a-la-derniere-minute",
+            "text": {
+                "fr": "Annule toujours une heure avant le plan",
+                "en": "Always cancels an hour before the plan"
+            },
+            "emoji": "🚪",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui se décommande systématiquement à 18h pour un plan à 19h, c'est pas « débordé », c'est quelqu'un qui n'a jamais eu l'intention de venir. Le « on se voit bientôt » est un mensonge à abonnement."
+                ,
+                "en": "Someone who systematically bails at 6pm on a 7pm plan isn't 'swamped', they never intended to come. Their 'let's catch up soon' is a subscription lie."
+            }
+        },
+        {
+            "id": "remercie-toujours-le-chauffeur-de-bus",
+            "text": {
+                "fr": "Remercie le chauffeur de bus en descendant",
+                "en": "Thanks the bus driver on the way out"
+            },
+            "emoji": "🚌",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Comment quelqu'un traite le chauffeur, le serveur et le livreur en dit plus long que trois ans de relation. C'est le seul test où personne ne triche, parce que personne ne sait qu'il est noté."
+                ,
+                "en": "How someone treats the bus driver, the waiter and the courier says more than three years of dating. It's the one test nobody games, because nobody knows they're being graded."
+            }
+        },
+        {
+            "id": "te-corrige-la-grammaire-en-public",
+            "text": {
+                "fr": "Te corrige ta grammaire devant les autres",
+                "en": "Corrects your grammar in front of others"
+            },
+            "emoji": "✏️",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Reprendre ta phrase devant la table « pour t'aider », c'est pas de la pédagogie, c'est une démonstration. L'objectif n'a jamais été la grammaire, l'objectif c'était le public."
+                ,
+                "en": "Correcting your sentence at the table 'to help you' isn't teaching, it's a demonstration. The grammar was never the point. The audience was."
+            }
+        },
+        {
+            "id": "garde-une-brosse-a-dents-chez-toi-en-trois-semaines",
+            "text": {
+                "fr": "Laisse une brosse à dents chez toi après trois semaines",
+                "en": "Leaves a toothbrush at your place after three weeks"
+            },
+            "emoji": "🪥",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Une brosse à dents posée chez toi à la troisième semaine, c'est pas une attention, c'est une prise de territoire. La personne n'a rien demandé, elle a annexé. Et le shampoing arrive la semaine prochaine."
+                ,
+                "en": "A toothbrush parked at your place by week three isn't sweet, it's a land grab. They didn't ask, they annexed. The shampoo arrives next week."
+            }
+        },
+        {
+            "id": "ne-met-jamais-de-pourboire",
+            "text": {
+                "fr": "Ne laisse jamais un centime de pourboire",
+                "en": "Never leaves a single cent of tip"
+            },
+            "emoji": "💸",
+            "category": "money",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui sort un discours sur « le principe » pour ne jamais laisser un centime, le principe c'est pas la justice, c'est la pingrerie avec un costume idéologique. Le serveur n'a pas voté pour ta théorie."
+                ,
+                "en": "Someone who gives a speech about 'the principle' to justify never tipping a cent — the principle isn't justice, it's cheapness in an ideological costume. The waiter didn't vote for your theory."
+            }
+        },
+        {
+            "id": "ramene-toujours-la-conversation-a-soi",
+            "text": {
+                "fr": "Ramène toujours la conversation à soi",
+                "en": "Always steers the conversation back to themselves"
+            },
+            "emoji": "🔁",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Tu racontes ton enterrement de grand-mère, et trente secondes plus tard on parle de SON weekend. C'est pas de la maladresse, c'est une orbite : tout doit graviter autour d'elle, même ton deuil."
+                ,
+                "en": "You start telling them about your grandmother's funeral and thirty seconds later you're hearing about THEIR weekend. It's not clumsiness, it's an orbit: everything must circle them, even your grief."
+            }
+        },
+        {
+            "id": "garde-toujours-une-place-pour-toi",
+            "text": {
+                "fr": "Te garde toujours une place quand le groupe sort",
+                "en": "Always saves you a seat when the group goes out"
+            },
+            "emoji": "🪑",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui pense à te garder une place avant que tu arrives, ça vaut plus que dix « je pense à toi » par texto. L'attention silencieuse bat l'affection bruyante. La table le sait, mais personne le dit."
+                ,
+                "en": "Someone who saves you a seat before you even arrive is worth more than ten 'thinking of you' texts. Quiet attention beats loud affection. The table knows it but nobody says it."
+            }
+        },
+        {
+            "id": "te-rajoute-sur-tous-les-reseaux-le-meme-soir",
+            "text": {
+                "fr": "Te suit sur tous les réseaux le soir même",
+                "en": "Follows you on every app the same night"
+            },
+            "emoji": "📲",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Te retrouver et te suivre sur quatre réseaux avant minuit le soir du premier date, c'est pas de l'enthousiasme, c'est un déploiement. La personne a ouvert un dossier sur toi pendant que tu rentrais."
+                ,
+                "en": "Finding and following you on four apps before midnight on date one isn't enthusiasm, it's a deployment. They opened a file on you while you were still on the bus home."
+            }
+        },
+        {
+            "id": "se-vante-de-ne-jamais-lire-de-livres",
+            "text": {
+                "fr": "Se vante de ne jamais lire de livres",
+                "en": "Brags about never reading books"
+            },
+            "emoji": "📚",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Dire « moi je lis jamais » comme si c'était un trait de personnalité, c'est pas de l'honnêteté, c'est une fierté à l'envers. Personne ne se vante de ce qui l'avantage."
+                ,
+                "en": "Saying 'I never read' like it's a personality trait isn't honesty, it's pride in reverse. Nobody brags about the thing that's actually helping them."
+            }
+        },
+        {
+            "id": "te-presente-a-ses-amis-en-deux-semaines",
+            "text": {
+                "fr": "Te présente à ses amis au bout de deux semaines",
+                "en": "Introduces you to their friends within two weeks"
+            },
+            "emoji": "🎉",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Te jeter dans le groupe d'amis au bout de quinze jours, soit c'est quelqu'un qui assume vite, soit quelqu'un qui veut un avis du jury avant de décider lui-même. Tu passes un entretien, pas une soirée."
+                ,
+                "en": "Throwing you into the friend group after two weeks is either someone who commits fast or someone who needs the jury's verdict before deciding for themselves. You're in an interview, not at a party."
+            }
+        },
+        {
+            "id": "ne-supprime-jamais-une-conversation",
+            "text": {
+                "fr": "N'a jamais supprimé une seule conversation de son téléphone",
+                "en": "Has never deleted a single conversation from their phone"
+            },
+            "emoji": "🗂️",
+            "category": "trust",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Garder chaque conversation depuis 2016, soit c'est de la nostalgie inoffensive, soit ça veut dire que rien n'est jamais vraiment fini pour cette personne. Les archives, c'est pas du souvenir, c'est des portes ouvertes."
+                ,
+                "en": "Keeping every conversation since 2016 is either harmless nostalgia or it means nothing is ever truly over for this person. Archives aren't memories, they're open doors."
+            }
+        },
+        {
+            "id": "fait-la-gueule-sans-jamais-dire-pourquoi",
+            "text": {
+                "fr": "Boude sans jamais dire pourquoi",
+                "en": "Goes silent and won't say why"
+            },
+            "emoji": "🤐",
+            "category": "conflict",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Répondre « non non tout va bien » avec la voix d'un orage qui arrive, c'est pas de la pudeur, c'est une punition. On te fait deviner ta faute, et l'examen n'a pas de corrigé."
+                ,
+                "en": "Saying 'no, I'm fine' in the voice of an approaching storm isn't being private, it's a punishment. You're made to guess your crime, and the test has no answer key."
+            }
+        },
+        {
+            "id": "se-souvient-de-ta-commande-de-cafe",
+            "text": {
+                "fr": "Se souvient de ta commande de café exacte",
+                "en": "Remembers your exact coffee order"
+            },
+            "emoji": "☕",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Se rappeler ton café « sans sucre, lait d'avoine, pas trop chaud » sans que tu l'aies répété, c'est l'attention la plus rare qui existe. La grande romance, c'est pas les fleurs, c'est qu'on ait écouté une fois."
+                ,
+                "en": "Remembering your 'no sugar, oat milk, not too hot' without you repeating it is the rarest attention there is. Real romance isn't flowers, it's that somebody listened once."
+            }
+        },
+        {
+            "id": "te-parle-mal-quand-il-a-perdu-au-foot",
+            "text": {
+                "fr": "Te parle mal quand son équipe a perdu",
+                "en": "Snaps at you when their team loses"
+            },
+            "emoji": "📺",
+            "category": "conflict",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Devenir sec avec toi parce que onze inconnus ont perdu un match à la télé, c'est pas de la passion, c'est une humeur qu'on délègue à autrui. Tu paies une défaite que t'as pas jouée."
+                ,
+                "en": "Getting cold with you because eleven strangers lost a game on TV isn't passion, it's a mood outsourced onto whoever's nearest. You're paying for a defeat you never played in."
+            }
+        },
+        {
+            "id": "envoie-de-l-argent-a-sa-famille-tous-les-mois",
+            "text": {
+                "fr": "Envoie de l'argent à sa famille tous les mois sans en parler",
+                "en": "Quietly sends money to family every month"
+            },
+            "emoji": "💌",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Aider les siens chaque mois sans jamais le mentionner, c'est le vert le plus profond qui existe : la générosité qui ne cherche pas de témoin. Mais le découvrir par hasard fait plus d'effet que n'importe quel cadeau."
+                ,
+                "en": "Helping their family every month and never mentioning it is the deepest green there is: generosity that doesn't shop for an audience. Finding out by accident hits harder than any gift ever could."
+            }
+        },
+        {
+            "id": "ne-rit-jamais-de-ses-propres-erreurs",
+            "text": {
+                "fr": "N'arrive jamais à rire de ses propres erreurs",
+                "en": "Can never laugh at their own mistakes"
+            },
+            "emoji": "🪞",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui ne supporte pas qu'on rie d'une de ses bourdes, même gentille, c'est pas de la fierté, c'est une fissure. On peut tout construire avec quelqu'un, sauf avec un ego qui ne plie jamais."
+                ,
+                "en": "Someone who can't take a gentle joke about one of their own blunders isn't proud, they're cracked. You can build anything with a person except an ego that never bends."
+            }
+        },
+        {
+            "id": "garde-le-meme-fond-d-ecran-de-vous-deux",
+            "text": {
+                "fr": "Met une photo de vous deux en fond d'écran après un mois",
+                "en": "Sets a photo of you two as their wallpaper after a month"
+            },
+            "emoji": "🖼️",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Mettre une photo de vous deux en fond d'écran au bout d'un mois, soit c'est adorablement assumé, soit c'est une bannière plantée trop tôt sur un territoire pas encore conquis. Le téléphone te déclare officiel avant toi."
+                ,
+                "en": "Making a photo of you two the lock screen after a month is either adorably all-in or a flag planted too early on land not yet won. The phone declares you official before you do."
+            }
+        },
+        {
+            "id": "parle-fort-au-cinema",
+            "text": {
+                "fr": "Commente le film à voix haute au cinéma",
+                "en": "Narrates the movie out loud in the cinema"
+            },
+            "emoji": "🍿",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Commenter chaque scène à voix haute dans une salle pleine, c'est pas du partage, c'est un manque total de conscience qu'il existe d'autres gens. La personne croit que le monde est son salon."
+                ,
+                "en": "Narrating every scene out loud in a packed theater isn't sharing, it's a total absence of the awareness that other people exist. This person thinks the world is their living room."
+            }
+        },
+        {
+            "id": "prend-des-nouvelles-de-ta-mere",
+            "text": {
+                "fr": "Demande des nouvelles de ta mère par son prénom",
+                "en": "Asks how your mom is doing, by name"
+            },
+            "emoji": "📞",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Demander « et comment va Sylvie ? » sans que tu aies parlé de ta mère depuis trois semaines, c'est de l'attention qui mémorise les détails secondaires de ta vie. Le vrai luxe, c'est que quelqu'un retienne les gens que t'aimes."
+                ,
+                "en": "Asking 'how's your mom doing?' by name when you haven't mentioned her in three weeks is attention that files away the side characters of your life. The real luxury is someone remembering the people you love."
+            }
+        },
+        {
+            "id": "te-fait-deviner-ce-qu-il-veut-manger",
+            "text": {
+                "fr": "Répond « je sais pas, comme tu veux » à chaque restaurant",
+                "en": "Says 'I don't know, whatever you want' at every restaurant"
+            },
+            "emoji": "🤷",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Refuser de jamais choisir le resto puis critiquer celui que t'as choisi, c'est pas de la souplesse, c'est de la décision externalisée avec droit de veto. Tu portes la charge mentale et lui garde le pouvoir."
+                ,
+                "en": "Refusing to ever pick the restaurant and then critiquing the one you picked isn't easygoing, it's outsourced decisions with veto power. You carry the mental load, they keep the authority."
+            }
+        },
+        {
+            "id": "te-defend-quand-tu-es-pas-la",
+            "text": {
+                "fr": "Te défend quand tu n'es pas dans la pièce",
+                "en": "Defends you when you're not in the room"
+            },
+            "emoji": "🛡️",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui te défend quand tu n'es pas là pour le voir, c'est la seule loyauté qui compte vraiment. Le reste, c'est de la fidélité avec public. Y'a une personne ici qui le fait pour toi, et une autre qui ne l'a jamais fait."
+                ,
+                "en": "Someone who defends you when you're not there to see it is the only loyalty that actually counts. The rest is loyalty with an audience. One person here does it for you, and one never has."
+            }
+        },
+        {
+            "id": "like-des-photos-de-2019",
+            "text": {
+                "fr": "Like des photos de toi qui datent de 2019",
+                "en": "Likes your photos from 2019"
+            },
+            "emoji": "❤️",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Liker une photo de toi de 2019, c'est avouer un défilement archéologique à 1h du matin. Ce n'est pas un like, c'est une preuve déposée au dossier. Le pouce a parlé avant la bouche."
+                ,
+                "en": "Liking your photo from 2019 is confessing to a 1am archaeological scroll. That's not a like, it's evidence entered into the record. The thumb spoke before the mouth dared."
+            }
+        },
+        {
+            "id": "ne-dit-jamais-pardon",
+            "text": {
+                "fr": "N'a jamais dit « pardon » de toute sa vie",
+                "en": "Has never once said 'I'm sorry'"
+            },
+            "emoji": "🙅",
+            "category": "conflict",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui transforme chaque excuse en « ouais mais toi aussi », ce n'est pas une dispute qu'il refuse, c'est l'idée même d'avoir tort. On ne répare rien avec quelqu'un qui n'a jamais signé un seul aveu."
+                ,
+                "en": "Someone who turns every apology into 'yeah but you too' isn't refusing the argument, they're refusing the very idea of being wrong. You can't repair anything with a person who's never signed a single confession."
+            }
+        },
+        {
+            "id": "se-rappelle-de-ton-anniversaire-sans-rappel",
+            "text": {
+                "fr": "Se souvient de ton anniversaire sans rappel du téléphone",
+                "en": "Remembers your birthday with no phone reminder"
+            },
+            "emoji": "🎂",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Se rappeler de ton anniversaire sans notification, en 2026, c'est de la sorcellerie affective. Tout le monde dit « ah merde, c'était hier ? ». Une personne ici a appelé à 9h pile. Pas la même catégorie d'humain."
+                ,
+                "en": "Remembering your birthday with no notification, in 2026, is emotional witchcraft. Everyone says 'wait, was that yesterday?'. One person here called at 9am sharp. Not the same category of human."
+            }
+        },
+        {
+            "id": "raconte-tes-secrets-en-soiree-pour-faire-rire",
+            "text": {
+                "fr": "Raconte tes secrets en soirée pour faire rire la table",
+                "en": "Spills your secrets at parties to get a laugh"
+            },
+            "emoji": "🎤",
+            "category": "trust",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Balancer une de tes confidences à la table « parce que c'est trop drôle », c'est pas de la spontanéité, c'est un échange : ta honte contre trois rires. La personne dépense ton intimité comme monnaie."
+                ,
+                "en": "Dropping one of your secrets at the table 'because it's too funny' isn't being spontaneous, it's a trade: your shame for three laughs. This person spends your privacy like pocket change."
+            }
+        },
+        {
+            "id": "tutoie-tout-le-monde-immediatement",
+            "text": {
+                "fr": "Devient meilleur ami avec tes potes en une soirée",
+                "en": "Becomes best friends with your crew in one night"
+            },
+            "emoji": "🫂",
+            "category": "social",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Repartir d'une première soirée avec le numéro de tous tes potes et un projet de week-end, soit c'est un don social rare, soit c'est quelqu'un qui ne fait aucune différence entre toi et un inconnu sympa. L'intensité n'est pas de l'intimité."
+                ,
+                "en": "Leaving the first night out with everyone's number and a weekend plan is either a rare social gift or someone who makes no distinction between you and a friendly stranger. Intensity isn't intimacy."
+            }
+        },
+        {
+            "id": "te-dit-quand-t-as-tort-en-prive",
+            "text": {
+                "fr": "Te dit quand t'as tort, mais en privé",
+                "en": "Tells you when you're wrong, but in private"
+            },
+            "emoji": "🤫",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui te reprend en tête-à-tête au lieu de te griller devant le groupe, c'est la loyauté à son niveau le plus discret. Te dire la vérité sans te coûter la face, c'est rare. La plupart choisissent le public."
+                ,
+                "en": "Someone who corrects you one-on-one instead of roasting you in front of the group is loyalty at its quietest. Telling you the truth without costing you face is rare. Most people pick the audience."
+            }
+        },
+        {
+            "id": "verifie-tes-stories-pour-savoir-ou-tu-es",
+            "text": {
+                "fr": "Regarde tes stories pour savoir où tu es",
+                "en": "Watches your stories to figure out where you are"
+            },
+            "emoji": "🛰️",
+            "category": "trust",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Recouper tes stories pour reconstituer ta soirée et te le faire remarquer « mine de rien », c'est pas de la curiosité, c'est de la surveillance avec un sourire. La personne ne te suit pas, elle te piste."
+                ,
+                "en": "Cross-referencing your stories to reconstruct your night and then mentioning it 'casually' isn't curiosity, it's surveillance with a smile. This person doesn't follow you, they track you."
+            }
+        },
+        {
+            "id": "prepare-ton-cafe-avant-que-tu-te-leves",
+            "text": {
+                "fr": "Te prépare ton café avant même que tu te lèves",
+                "en": "Makes your coffee before you're even up"
+            },
+            "emoji": "🫖",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Trouver le café déjà prêt sans l'avoir demandé, c'est pas un geste, c'est une langue : celle des gens qui aiment en faisant, pas en disant. Les grandes déclarations sont gratuites, ce mug-là coûte un réveil plus tôt."
+                ,
+                "en": "Finding the coffee already made without asking isn't a gesture, it's a language: the one spoken by people who love through doing, not saying. Big declarations are free. That mug cost an earlier alarm."
+            }
+        },
+        {
+            "id": "te-fait-payer-puis-rembourse-jamais",
+            "text": {
+                "fr": "« Tu peux avancer ? » puis ne rembourse jamais",
+                "en": "'Can you spot me?' then never pays you back"
+            },
+            "emoji": "🧾",
+            "category": "money",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Le « je te rends ça ce soir » qui devient « je te rends ça » qui devient le silence, c'est pas de l'oubli, c'est une méthode. La personne a fait le calcul que ton amitié coûte moins cher que vingt balles."
+                ,
+                "en": "The 'I'll get you tonight' that becomes 'I'll get you' that becomes silence isn't forgetfulness, it's a method. This person did the math that your friendship is cheaper than twenty bucks."
+            }
+        },
+        {
+            "id": "garde-ton-secret-meme-bourre",
+            "text": {
+                "fr": "Garde un secret que tu lui as confié, même bourré",
+                "en": "Keeps a secret you told them, even drunk"
+            },
+            "emoji": "🔒",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Confier un secret et le retrouver intact deux ans plus tard, alcool compris, c'est le vert le plus rare du jeu. La discrétion sous tise, c'est le seul test de loyauté qui ne se truque pas. Combien ici le passeraient ?"
+                ,
+                "en": "Trusting someone with a secret and finding it intact two years later, drinks included, is the rarest green in the game. Discretion while wasted is the one loyalty test you can't fake. How many here would pass it?"
+            }
+        },
+        {
+            "id": "parle-en-mal-de-ses-autres-amis-devant-toi",
+            "text": {
+                "fr": "Critique ses autres amis dès qu'ils ont le dos tourné",
+                "en": "Trashes their other friends the second they leave"
+            },
+            "emoji": "🐍",
+            "category": "trust",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Démolir un pote à la seconde où il part aux toilettes, c'est pas de la complicité avec toi, c'est un aperçu. La personne qui parle des autres devant toi parle de toi devant les autres. Aucune exception."
+                ,
+                "en": "Tearing into a friend the second they go to the bathroom isn't bonding with you, it's a preview. Whoever trashes others to your face trashes you to theirs. No exceptions."
+            }
+        },
+        {
+            "id": "te-laisse-finir-tes-phrases",
+            "text": {
+                "fr": "Te laisse finir tes phrases sans te couper",
+                "en": "Lets you finish your sentences without cutting in"
+            },
+            "emoji": "👂",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Quelqu'un qui te laisse aller au bout de ta pensée sans sauter dessus, en 2026, c'est presque un acte militant. La plupart attendent pas leur tour, ils attendent une ouverture. Celui-là écoute pour de vrai."
+                ,
+                "en": "Someone who lets you reach the end of a thought without pouncing on it is, in 2026, almost an act of resistance. Most people aren't waiting their turn, they're waiting for a gap. This one actually listens."
+            }
+        },
+        {
+            "id": "change-de-personnalite-selon-le-groupe",
+            "text": {
+                "fr": "Change complètement de personnalité selon le groupe",
+                "en": "Becomes a totally different person per friend group"
+            },
+            "emoji": "🎭",
+            "category": "character",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "S'adapter à chaque groupe, c'est de l'intelligence sociale ; devenir une personne entièrement différente selon qui regarde, c'est qu'il n'y a peut-être personne en dessous. Tu sors avec quatre versions et aucun original."
+                ,
+                "en": "Adapting to each group is social intelligence; becoming a completely different person depending on who's watching means there might be no one underneath. You're dating four versions and zero originals."
+            }
+        },
+        {
+            "id": "te-previent-quand-il-rentre-bien",
+            "text": {
+                "fr": "T'envoie « bien rentré » sans que tu aies demandé",
+                "en": "Texts you 'home safe' without being asked"
+            },
+            "emoji": "🏠",
+            "category": "dating",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Le « bien rentré » spontané à 2h du matin, c'est pas une politesse, c'est quelqu'un qui sait que t'allais t'inquiéter et qui a décidé de t'épargner ça. Penser au confort de l'autre sans qu'on le réclame, c'est le diplôme."
+                ,
+                "en": "The unprompted 'home safe' at 2am isn't a courtesy, it's someone who knew you'd worry and decided to spare you that. Thinking of the other person's peace of mind before they ask for it is the whole diploma."
+            }
+        },
+        {
+            "id": "garde-rancune-pour-une-blague-de-2021",
+            "text": {
+                "fr": "Garde rancune pour une blague de 2021",
+                "en": "Still holds a grudge over a joke from 2021"
+            },
+            "emoji": "🗓️",
+            "category": "conflict",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Ressortir une vanne de 2021 comme si c'était hier, c'est pas de la sensibilité, c'est une comptabilité. La personne tient un grand livre des offenses, et ton solde n'est jamais à zéro."
+                ,
+                "en": "Bringing up a joke from 2021 like it was yesterday isn't sensitivity, it's accounting. This person keeps a ledger of offenses, and your balance is never at zero."
+            }
+        },
+        {
+            "id": "te-textote-bonne-chance-le-jour-de-ton-entretien",
+            "text": {
+                "fr": "Te souhaite bonne chance le jour de ton entretien d'embauche",
+                "en": "Texts good luck the morning of your job interview"
+            },
+            "emoji": "🍀",
+            "category": "friendship",
+            "spicy": 0,
+            "debateStarter": {
+                "fr": "Se rappeler que c'est le jour de TON entretien et envoyer un mot à 8h, ça veut dire que cette personne range ta vie dans son agenda mental. Tenir le calendrier des autres, c'est la forme d'amour la plus sous-cotée."
+                ,
+                "en": "Remembering it's YOUR interview day and sending a note at 8am means this person files your life into their mental calendar. Keeping track of other people's dates is the most underrated form of love there is."
+            }
+        },
+        {
+            "id": "menace-de-rompre-a-chaque-dispute",
+            "text": {
+                "fr": "Menace de rompre à chaque dispute",
+                "en": "Threatens to break up during every argument"
+            },
+            "emoji": "🧨",
+            "category": "conflict",
+            "spicy": 1,
+            "debateStarter": {
+                "fr": "Brandir la rupture à chaque dispute sur la vaisselle, c'est pas de la franchise, c'est une prise d'otage : « cède ou je détruis tout ». La menace n'est jamais sérieuse, mais le rapport de force, lui, est permanent."
+                ,
+                "en": "Waving a breakup at every argument about the dishes isn't honesty, it's a hostage move: 'give in or I blow it all up'. The threat is never serious, but the power play is permanent."
+            }
+        },
+        {
+            "id": "te-stalk-le-vu-a-quelle-heure",
+            "text": {
+                "fr": "Surveille à quelle heure tu as lu son message",
+                "en": "Tracks exactly when you read their message"
+            },
+            "emoji": "🕵️",
+            "category": "trust",
+            "spicy": 1,
+            "debateStarter": {
+                "fr": "« T'as lu à 21h14 et répondu à 23h, t'as fait quoi entre ? », c'est pas de l'intérêt, c'est une garde à vue. La personne instruit ton silence comme un dossier. Quelqu'un ici a déjà fait ce calcul-là."
+                ,
+                "en": "'You read it at 9:14 and replied at 11, what were you doing in between?' isn't interest, it's an interrogation. This person investigates your silence like a case. Someone here has done exactly that math."
+            }
+        },
+        {
+            "id": "compare-ton-corps-a-ses-ex",
+            "text": {
+                "fr": "Te compare physiquement à ses ex",
+                "en": "Compares your body to their exes'"
+            },
+            "emoji": "📐",
+            "category": "dating",
+            "spicy": 1,
+            "debateStarter": {
+                "fr": "Glisser « mon ex faisait plus de sport » au détour d'une phrase, c'est pas de la maladresse, c'est un classement déguisé en compliment. La personne te note sur une grille où t'as jamais demandé à concourir."
+                ,
+                "en": "Slipping in 'my ex was more into the gym' as a throwaway line isn't clumsiness, it's a ranking dressed as a compliment. This person grades you on a scale you never asked to compete on."
+            }
+        },
+        {
+            "id": "envoie-des-photos-de-toi-au-groupe-sans-prevenir",
+            "text": {
+                "fr": "Balance vos photos intimes dans le groupe sans demander",
+                "en": "Forwards your private photos to the group chat unasked"
+            },
+            "emoji": "📤",
+            "category": "trust",
+            "spicy": 2,
+            "debateStarter": {
+                "fr": "Transférer une photo intime « juste aux potes », c'est pas un dérapage, c'est une trahison qui ne se rattrape jamais. La confiance, ça se brise une fois, et la capture, elle, ne se supprime jamais vraiment."
+                ,
+                "en": "Forwarding an intimate photo 'just to the boys' isn't a slip, it's a betrayal that never recovers. Trust breaks once, and the screenshot never truly deletes."
+            }
+        },
+        {
+            "id": "garde-son-profil-de-rencontre-actif",
+            "text": {
+                "fr": "Garde son profil de rencontre actif « juste pour les matchs »",
+                "en": "Keeps their dating profile active 'just for the matches'"
+            },
+            "emoji": "🔥",
+            "category": "dating",
+            "spicy": 2,
+            "debateStarter": {
+                "fr": "Garder l'appli ouverte « juste pour rigoler des matchs », c'est pas de l'humour, c'est une porte de sortie qu'on graisse au cas où. La personne ne triche pas encore, elle s'échauffe. Et quelqu'un ici l'a déjà fait."
+                ,
+                "en": "Keeping the app open 'just to laugh at the matches' isn't a joke, it's an exit door kept oiled just in case. This person isn't cheating yet, they're warming up. And someone here has done exactly that."
+            }
+        },
+        {
+            "id": "raconte-votre-vie-sexuelle-a-ses-potes",
+            "text": {
+                "fr": "Raconte votre vie sexuelle à ses potes en détail",
+                "en": "Tells their friends about your sex life in detail"
+            },
+            "emoji": "🛏️",
+            "category": "trust",
+            "spicy": 2,
+            "debateStarter": {
+                "fr": "Donner le compte-rendu détaillé de votre intimité au groupe, c'est pas de la complicité entre potes, c'est te déshabiller devant des gens qui n'ont rien demandé. Ce qui se passe à deux te concerne ; le diffuser, ça te trahit."
+                ,
+                "en": "Giving the group a play-by-play of your intimacy isn't bonding with the boys, it's undressing you in front of people who never asked. What happens between two people is yours; broadcasting it is treason."
+            }
+        },
+        {
+            "id": "te-supprime-des-photos-de-ses-reseaux-apres-une-dispute",
+            "text": {
+                "fr": "Efface toutes vos photos de ses réseaux après chaque dispute",
+                "en": "Wipes every photo of you two after each fight"
+            },
+            "emoji": "🧹",
+            "category": "conflict",
+            "spicy": 1,
+            "debateStarter": {
+                "fr": "Supprimer chaque photo de vous deux dès la première dispute, c'est pas de la colère, c'est une répétition générale de la rupture. La personne te raye du décor avant même qu'on ait fini de se parler."
+                ,
+                "en": "Deleting every photo of you two at the first argument isn't anger, it's a dress rehearsal for the breakup. This person erases you from the set before the conversation is even over."
+            }
+        }
+    ]
+}

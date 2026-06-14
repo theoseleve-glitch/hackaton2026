@@ -103,6 +103,35 @@ export const GAUCHE_DROITE_CONFIG: OptionVoteConfig = {
   predictionBonus: 0,
 };
 
+// Coupable ou Innocent ? — same majority-herd room-reading shape as gauche-ou-droite
+// (vote a side, the majority scores, debate the verdict). Identical timings: a
+// social verdict with a debate beat wants the same 15s vote / 8s reveal / 25s argue.
+export const COURTROOM_CONFIG: OptionVoteConfig = {
+  scoring: 'majority-herd',
+  totalRounds: 7,
+  chooseMs: 15_000,
+  revealMs: 8_000,
+  debateMs: 25_000,
+  debateSkipThreshold: 0.5,
+  pointsCorrect: 1,
+  // majority-herd: the herd vote IS the read — no prediction channel.
+  predictionBonus: 0,
+};
+
+// Red Flag ou Green Flag ? — same majority-herd room-reading shape; debate ON.
+// Same timings as its siblings (the dating-debate loop is identical in cadence).
+export const RED_GREEN_FLAG_CONFIG: OptionVoteConfig = {
+  scoring: 'majority-herd',
+  totalRounds: 7,
+  chooseMs: 15_000,
+  revealMs: 8_000,
+  debateMs: 25_000,
+  debateSkipThreshold: 0.5,
+  pointsCorrect: 1,
+  // majority-herd: the herd vote IS the read — no prediction channel.
+  predictionBonus: 0,
+};
+
 export type Option = 'A' | 'B';
 
 export type OptionVotePhase = 'choose' | 'reveal' | 'debate' | 'over';
