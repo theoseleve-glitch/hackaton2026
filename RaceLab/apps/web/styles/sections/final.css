@@ -1,0 +1,236 @@
+/* final.css — Task 15: closing CTA (#final) + site footer.
+   Animated properties: transform, opacity only. Tokens only; multi-layer
+   shadows. Deepest background (var(--bg-deep)) to bottom out the page. */
+
+/* ======================================================================== */
+/* #final — full-viewport closing CTA                                        */
+/* ======================================================================== */
+#final {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--bg-deep);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* a low ember of accent light rising from the lower-left, anchoring the CTA */
+#final::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  bottom: -30%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(255, 42, 42, 0.16), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+/* hairline at the very top to detach #final from #pricing above */
+#final::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 18%, var(--border) 82%, transparent);
+  pointer-events: none;
+}
+
+/* knockout echo of the hero — huge, dim, parallaxing behind the headline */
+.final__bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.final__knockout {
+  font-weight: 700;
+  font-size: clamp(7rem, 26vw, 24rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+  opacity: 0.035;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.final__inner {
+  position: relative;
+  z-index: 1;
+  /* asymmetric: anchored left, not a centered hero block */
+  max-width: 19ch;
+}
+
+.final__h {
+  font-size: var(--fs-display);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+/* split-text plumbing (matches hero): each .word clips its rising .inner */
+.final__h .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.04em; /* room for descenders while clipping */
+}
+.final__h .inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.final__sub {
+  margin-top: 1.4rem;
+  max-width: 32ch;
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+  color: var(--sub);
+}
+
+.final__cta {
+  margin-top: 2.6rem;
+  padding: 1.15rem 2.2rem;
+  font-size: 1.1rem;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 8px 22px rgba(255, 42, 42, 0.22),
+    0 22px 60px rgba(255, 42, 42, 0.18);
+}
+.final__cta-arrow {
+  transition: transform 0.4s var(--ease-out);
+}
+.final__cta:hover .final__cta-arrow {
+  transform: translateX(5px);
+}
+
+/* ======================================================================== */
+/* <footer>                                                                  */
+/* ======================================================================== */
+footer {
+  position: relative;
+  background: var(--bg-deep);
+  padding: clamp(3rem, 7vh, 5.5rem) 0 clamp(2rem, 4vh, 3rem);
+  border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem 3rem;
+  flex-wrap: wrap;
+}
+
+.footer__brandcol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 34ch;
+}
+
+/* brand wordmark echoes the nav lockup (accent square + word) */
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.62rem;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+.footer__mark {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 18px rgba(255, 42, 42, 0.5);
+  transform: rotate(45deg);
+  transition: transform 0.5s var(--ease-out);
+}
+.footer__brand:hover .footer__mark {
+  transform: rotate(135deg);
+}
+.footer__tagline {
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: var(--sub);
+  text-transform: uppercase;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.9rem;
+  padding-top: 0.4rem;
+}
+.footer__link {
+  position: relative;
+  font-size: 0.96rem;
+  color: var(--sub);
+  padding-bottom: 2px;
+  transition: color 0.3s var(--ease-out);
+}
+.footer__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease-out);
+}
+.footer__link:hover {
+  color: var(--text);
+}
+.footer__link:hover::after {
+  transform: scaleX(1);
+}
+
+.footer__base {
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.footer__copy {
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: var(--sub);
+  text-transform: uppercase;
+}
+
+/* ======================================================================== */
+/* mobile                                                                    */
+/* ======================================================================== */
+@media (max-width: 768px) {
+  #final {
+    min-height: 88vh;
+  }
+  .final__inner {
+    max-width: 100%;
+  }
+  .final__cta {
+    width: 100%;
+    justify-content: center;
+    padding: 1.1rem 1.6rem;
+  }
+  .final__knockout {
+    font-size: 38vw;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  .footer__links {
+    gap: 0.4rem 1.4rem;
+  }
+}

@@ -1,0 +1,264 @@
+/* nav.css — smart sticky nav + mobile full-screen overlay.
+   Animated properties: transform, opacity, backdrop-filter only. */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 8000;
+  will-change: transform;
+  transform: translateY(0);
+  transition: transform 0.55s var(--ease-out);
+}
+
+/* hide-on-scroll-down */
+nav.hidden {
+  transform: translateY(-100%);
+}
+
+.nav__bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: min(100% - var(--gutter) * 2, var(--maxw));
+  margin-inline: auto;
+  padding: 1.05rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* a frosted plate that fades in only once scrolled past 40px */
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg-deep) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out), border-color 0.45s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+nav.scrolled::before {
+  opacity: 1;
+  border-bottom-color: var(--border);
+}
+
+/* --- brand wordmark ------------------------------------------------------ */
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.62rem;
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+.nav__mark {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 0 18px rgba(255, 42, 42, 0.5);
+  transform: rotate(45deg);
+  transition: transform 0.5s var(--ease-out);
+}
+.nav__brand:hover .nav__mark {
+  transform: rotate(135deg);
+}
+
+/* --- desktop links ------------------------------------------------------- */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.nav__link {
+  position: relative;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.92rem;
+  color: var(--sub);
+  border-radius: 999px;
+  transition: color 0.3s var(--ease-out);
+}
+.nav__link span {
+  position: relative;
+  z-index: 1;
+}
+/* sliding underline accent */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.32rem;
+  height: 1.5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease-out);
+}
+.nav__link:hover {
+  color: var(--text);
+}
+.nav__link.active {
+  color: var(--text);
+}
+.nav__link:hover::after,
+.nav__link.active::after {
+  transform: scaleX(1);
+}
+
+/* --- primary CTA --------------------------------------------------------- */
+.nav__cta {
+  padding: 0.7rem 1.3rem;
+  font-size: 0.92rem;
+  will-change: transform;
+}
+
+/* --- hamburger (mobile only) -------------------------------------------- */
+.nav__burger {
+  display: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  z-index: 3;
+  transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
+}
+.nav__burger:hover {
+  border-color: var(--accent);
+}
+.nav__burger-line {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 1.6px;
+  background: var(--text);
+  border-radius: 2px;
+  transform: translate(-50%, -50%) translateY(var(--y, 0));
+  transition: transform 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.nav__burger-line:nth-child(1) {
+  --y: -4px;
+}
+.nav__burger-line:nth-child(2) {
+  --y: 4px;
+}
+nav.open .nav__burger-line:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+nav.open .nav__burger-line:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+nav.open .nav__burger {
+  border-color: var(--accent);
+}
+
+/* --- full-screen mobile overlay ----------------------------------------- */
+.nav__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: var(--bg-deep);
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: transform 0.6s var(--ease-out), opacity 0.4s var(--ease-out);
+  pointer-events: none;
+}
+/* a faint accent glow anchoring the corner */
+.nav__overlay::after {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(255, 42, 42, 0.16), transparent 62%);
+  pointer-events: none;
+}
+nav.open .nav__overlay {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav__overlay-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 6rem var(--gutter) 4rem;
+}
+.nav__big {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: clamp(2rem, 11vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+.nav__big-index {
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  transform: translateY(-0.35em);
+}
+.nav__big-label {
+  transition: transform 0.4s var(--ease-out), color 0.3s var(--ease-out);
+}
+.nav__big:active .nav__big-label,
+.nav__big:hover .nav__big-label {
+  transform: translateX(0.4rem);
+  color: var(--accent);
+}
+.nav__overlay-cta {
+  margin-top: 2rem;
+  align-self: flex-start;
+  padding: 1.05rem 1.9rem;
+  font-size: 1.05rem;
+}
+
+/* lock scroll while the overlay is open */
+body.nav-locked {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .nav__links,
+  .nav__cta {
+    display: none;
+  }
+  .nav__burger {
+    display: block;
+  }
+  .nav__bar {
+    padding: 0.85rem 0;
+  }
+}
+
+/* reduced-motion: overlay snaps, nav never hides, no underline slide. */
+@media (prefers-reduced-motion: reduce) {
+  nav,
+  .nav__overlay,
+  .nav__big-label,
+  .nav__link::after,
+  .nav__mark {
+    transition: none !important;
+  }
+  nav.hidden {
+    transform: translateY(0);
+  }
+}

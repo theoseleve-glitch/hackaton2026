@@ -1,0 +1,227 @@
+/* base.css — global design system: tokens, reset, type, grain, cursor, buttons. */
+
+:root {
+  /* red / white / black palette */
+  --bg: #0a0a0a;
+  --bg-deep: #000000;
+  --bg-soft: #141414;
+  --surface: #161616;
+  --surface-alt: #1f1f1f;
+  --border: #2a2a2a;
+  --text: #ffffff;
+  --sub: #a8a8a8;
+  --accent: #ff2a2a;
+  --accent-soft: #3a1010;
+  --good: #ff2a2a;
+  --warn: #ff2a2a;
+
+  --maxw: 1280px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+
+  /* fluid type */
+  --fs-eyebrow: 11px;
+  --fs-body: clamp(1rem, 0.95rem + 0.35vw, 1.18rem);
+  --fs-h3: clamp(1.15rem, 1rem + 0.8vw, 1.6rem);
+  --fs-h2: clamp(2rem, 1.2rem + 3.6vw, 4.5rem);
+  --fs-display: clamp(2.5rem, 9vw, 8.125rem);
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 40px rgba(0, 0, 0, 0.22);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis owns smoothing */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.6s var(--ease-out);
+}
+
+body[data-loading] {
+  overflow: hidden;
+}
+
+/* scroll-driven section background deepening (toggled by problem.js); the swap
+   rides the body background-color transition above, so it's a one-shot paint. */
+body.bg-deep {
+  background: var(--bg-deep);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+h3 {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+section {
+  position: relative;
+  padding: clamp(80px, 12vh, 168px) 0;
+}
+
+.container {
+  width: min(100% - var(--gutter) * 2, var(--maxw));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.mono {
+  font-family: "Space Mono", ui-monospace, monospace;
+}
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 600 1rem/1 "Space Grotesk", sans-serif;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
+}
+.btn--primary {
+  background: var(--accent);
+  color: #0e0f12;
+  box-shadow: var(--shadow);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(255, 42, 42, 0.35), 0 10px 30px rgba(255, 42, 42, 0.28);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* custom cursor (enabled by cursor.js via body[data-cursor=on]) */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  display: none;
+}
+body[data-cursor="on"] #cursor {
+  display: block;
+}
+body[data-cursor="on"] {
+  cursor: none;
+}
+@media (pointer: coarse) {
+  #cursor {
+    display: none !important;
+  }
+}
+
+/* a11y */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10001;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: #0e0f12;
+  border-radius: 8px;
+  transform: translateY(-200%);
+  transition: transform 0.2s;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* reduced motion: kill all motion, reveal everything */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  #cursor {
+    display: none !important;
+  }
+  body[data-cursor="on"] {
+    cursor: auto;
+  }
+}

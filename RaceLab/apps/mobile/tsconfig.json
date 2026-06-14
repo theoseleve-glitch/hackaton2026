@@ -2,5 +2,28 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true
-  }
+  },
+  // WS7 (social = V1.1 cut item) — the social UI is parked in-tree but kept OUT
+  // of the MVP build. It is NOT imported by App.tsx, so Metro never bundles it.
+  // Before it can re-enter the build, WS7 must: (1) add native deps
+  // react-native-svg, expo-camera, react-native-qrcode-svg, expo-clipboard,
+  // expo-sharing, expo-file-system, expo-linking; (2) extend the Account type
+  // with profile fields (handle, display_name, avatar_uri, home_track, classes);
+  // (3) narrow the discriminated SaveResult at ImportPreviewScreen call sites.
+  // Full wiring reference: branch origin/theo/racelab App.tsx.
+  "exclude": [
+    "node_modules",
+    "src/candidacystore.ts",
+    "src/followstore.ts",
+    "src/share.ts",
+    "src/socialnet.ts",
+    "src/components/ProfileCard.tsx",
+    "src/components/ProfileEditForm.tsx",
+    "src/components/QrScanner.tsx",
+    "src/components/ShareCard.tsx",
+    "src/components/ShareSheet.tsx",
+    "src/screens/ImportPreviewScreen.tsx",
+    "src/screens/OfficialTracksScreen.tsx",
+    "src/screens/SocialScreen.tsx"
+  ]
 }

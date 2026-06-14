@@ -38,6 +38,7 @@ jobs:
           - logbook
           - tracks
           - strategy
+          - social
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -78,3 +79,15 @@ jobs:
         run: npm install --no-audit --no-fund
       - working-directory: RaceLab/apps/mobile
         run: npx tsc --noEmit
+
+  web:
+    name: "web (marketing site)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - working-directory: RaceLab/apps/web
+        run: npm install --no-audit --no-fund
+      - working-directory: RaceLab/apps/web
+        run: npm test

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RaceLab — The Strava of RC racing</title>
+    <meta
+      name="description"
+      content="Log every run. Get one grounded change from an AI race engineer that knows your track, your weather, and whether its advice actually worked."
+    />
+    <meta name="theme-color" content="#0e0f12" />
+    <meta property="og:title" content="RaceLab — The Strava of RC racing" />
+    <meta property="og:description" content="An AI race engineer in your pit. Log runs, get one grounded change, get faster." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/og.png" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    />
+
+    <!-- styles: base + one partial per section/system (written by section modules' CSS) -->
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/sections/nav.css" />
+    <link rel="stylesheet" href="/styles/sections/preloader.css" />
+    <link rel="stylesheet" href="/styles/sections/hero.css" />
+    <link rel="stylesheet" href="/styles/sections/problem.css" />
+    <link rel="stylesheet" href="/styles/sections/tune.css" />
+    <link rel="stylesheet" href="/styles/sections/engineer.css" />
+    <link rel="stylesheet" href="/styles/sections/loop.css" />
+    <link rel="stylesheet" href="/styles/sections/features.css" />
+    <link rel="stylesheet" href="/styles/sections/proof.css" />
+    <link rel="stylesheet" href="/styles/sections/pricing.css" />
+    <link rel="stylesheet" href="/styles/sections/final.css" />
+
+    <!-- module resolution for ESM imports -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+          "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
+          "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js",
+          "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.mjs"
+        }
+      }
+    </script>
+
+    <noscript>
+      <style>
+        /* progressive enhancement: with JS off, ensure nothing is hidden */
+        [data-loading] { overflow: auto !important; }
+        #preloader { display: none !important; }
+      </style>
+    </noscript>
+  </head>
+
+  <body data-loading>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <!-- preloader: chassis silhouette draws + counter, then wipes up -->
+    <div id="preloader" aria-hidden="true">
+      <div class="preloader__inner">
+        <svg class="preloader__car" viewBox="0 0 240 110" fill="none" stroke="#ff2a2a" stroke-width="2">
+          <path d="M20 78 L52 78 M188 78 L220 78 M70 78 q50 -52 100 0" />
+          <path d="M40 78 q-4 -30 30 -34 l70 0 q34 4 30 34" />
+          <path d="M150 44 l34 -10 l2 14" />
+        </svg>
+        <div class="preloader__meta">
+          <span class="preloader__brand mono" data-brand>RaceLab</span>
+          <span class="preloader__count mono" data-count>000</span>
+        </div>
+      </div>
+    </div>
+
+    <nav aria-label="Primary"></nav>
+
+    <main id="main" tabindex="-1">
+      <section id="hero"></section>
+      <section id="problem"></section>
+      <section id="tune"></section>
+      <section id="engineer"></section>
+      <section id="loop"></section>
+      <section id="features"></section>
+      <section id="proof"></section>
+      <section id="pricing"></section>
+      <section id="final"></section>
+    </main>
+
+    <footer></footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
