@@ -4,6 +4,8 @@ import { sheetProfile, updateCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import { draftDiff, getVersion, kitVersionId, loadVersion, renameDraft } from "../../../../packages/sheets/src";
 import type { SheetsState } from "../../../../packages/sheets/src";
+import { buildSetupPayload } from "../../../../packages/social/src";
+import type { SharedPayload } from "../../../../packages/social/src";
 import { KB } from "../kb";
 import { loadCarSheets, useCarSheets } from "../store";
 import { colors, radius } from "../theme";
@@ -21,21 +23,25 @@ interface Props {
   /** when set (garage navigation), open this car directly */
   focusCarId?: string;
   onClearFocus?: () => void;
+  /** social slice: open the share sheet for a setup, or scan a QR to import */
+  onShareSetup: (p: SharedPayload) => void;
+  onScanImport: () => void;
 }
 
-export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus }: Props) {
+export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus, onShareSetup, onScanImport }: Props) {
   const [carId, setCarId] = useState<string | undefined>(focusCarId);
   useEffect(() => setCarId(focusCarId), [focusCarId]);
 
   const car = garage.cars.find((c) => c.id === carId);
 
   if (!car) {
-    return <CarPicker garage={garage} onPick={setCarId} />;
+    return <CarPicker garage={garage} onPick={setCarId} onScanImport={onScanImport} />;
   }
   return (
     <CarSheets
       car={car}
       updateGarage={updateGarage}
+      onShareSetup={onShareSetup}
       onBack={() => {
         setCarId(undefined);
         onClearFocus?.();
@@ -45,7 +51,7 @@ export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus }: 
 }
 
 /** Tab-bar entry point: every car, name + how many setups it holds. */
-function CarPicker({ garage, onPick }: { garage: GarageState; onPick: (id: string) => void }) {
+function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPick: (id: string) => void; onScanImport: () => void }) {
   const [counts, setCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
@@ -65,7 +71,12 @@ function CarPicker({ garage, onPick }: { garage: GarageState; onPick: (id: strin
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
-      <Text style={styles.h1}>Setup sheets</Text>
+      <View style={styles.pickerHead}>
+        <Text style={styles.h1}>Setup sheets</Text>
+        <Pressable style={styles.importBtn} onPress={onScanImport}>
+          <Text style={styles.importBtnText}>⤵ Import (scan)</Text>
+        </Pressable>
+      </View>
       {garage.cars.length === 0 && (
         <Text style={styles.empty}>Add a car in the Garage first — its kit sheet comes preloaded.</Text>
       )}
@@ -92,10 +103,12 @@ function CarPicker({ garage, onPick }: { garage: GarageState; onPick: (id: strin
 function CarSheets({
   car,
   updateGarage,
+  onShareSetup,
   onBack,
 }: {
   car: CarEntity;
   updateGarage: (fn: (prev: GarageState) => GarageState) => void;
+  onShareSetup: (p: SharedPayload) => void;
   onBack: () => void;
 }) {
   const { state, update } = useCarSheets(car.id, car.template_id);
@@ -135,8 +148,10 @@ function CarSheets({
       ) : (
         <SetupList
           state={state}
+          car={car}
           options={car.options}
           onChangeOptions={(text) => updateGarage((prev) => updateCar(prev, car.id, { options: text || undefined }))}
+          onShareSetup={onShareSetup}
           onOpenDraft={() => setMode("detail")}
           onOpenVersion={(id) => {
             update((prev) => loadVersion(prev, id));
@@ -151,17 +166,31 @@ function CarSheets({
 /** The landing list: working draft on top, then every saved version. */
 function SetupList({
   state,
+  car,
   options,
   onChangeOptions,
+  onShareSetup,
   onOpenDraft,
   onOpenVersion,
 }: {
   state: SheetsState;
+  car: CarEntity;
   options?: string;
   onChangeOptions: (text: string) => void;
+  onShareSetup: (p: SharedPayload) => void;
   onOpenDraft: () => void;
   onOpenVersion: (id: string) => void;
 }) {
+  const shareVersion = (v: SheetsState["versions"][number]) =>
+    onShareSetup(
+      buildSetupPayload(
+        {
+          setup: { name: v.name, template_id: v.template_id, values: v.values },
+          car: { brand: car.brand, model: car.model, category: car.category, scale: car.scale, power: car.power },
+        },
+        new Date().toISOString(),
+      ),
+    );
   const edits = draftDiff(state).length;
   const base = getVersion(state, state.draft_base_id);
   const versions = [...state.versions].reverse();
@@ -190,6 +219,9 @@ function SetupList({
             </View>
             <Text style={styles.verMeta}>{v.created_at.slice(0, 10)}{v.note ? ` · ${v.note}` : ""}</Text>
           </View>
+          <Pressable hitSlop={10} style={styles.shareBtn} onPress={() => shareVersion(v)}>
+            <Text style={styles.shareBtnText}>⤴</Text>
+          </Pressable>
           <Text style={styles.chev}>›</Text>
         </Pressable>
       ))}
@@ -214,6 +246,11 @@ function SetupList({
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   h1: { color: colors.text, fontSize: 28, fontWeight: "800", marginBottom: 16 },
+  pickerHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  importBtn: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingVertical: 6, paddingHorizontal: 12, marginBottom: 16 },
+  importBtnText: { color: colors.sub, fontSize: 13, fontWeight: "700" },
+  shareBtn: { paddingHorizontal: 8, paddingVertical: 4 },
+  shareBtnText: { color: colors.accent, fontSize: 18, fontWeight: "800" },
   empty: { color: colors.sub, fontSize: 13, lineHeight: 19 },
   carRow: {
     flexDirection: "row",

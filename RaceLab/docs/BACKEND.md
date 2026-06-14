@@ -139,6 +139,46 @@ store, backup and the share-link silently lose every photo.
 - **Not in V1.0:** public browse/search API, discovery feed, profiles, follows, comments,
   leaderboards → V1.1+ (see P3). Keep the `visibility` enum but only `unlisted` share is wired.
 
+### P1 — Official-track candidacy + admin console  *(D25 public library, **admin-curated**; designed-only)*
+The app's offline half ships now (submit → outbox + "Pending review" badge; stubbed Official
+Tracks browser). The hosted half below is **design**, not a V1.0 build. This is D25's "public
+library when sync ships" made concrete as an **admin-curated** library (2026-06-14). It stays
+inside D10 (it's a curated submit + a gated read, **not** a public browse/discovery API) and
+D11 (the candidate is a publish-time snapshot in the append-only outbox; approval is a one-way
+server→client reflection, never live replication). Social spec §6.
+
+- `POST /tracks/candidacy` → submit a **`TrackEntity` snapshot** (full envelope, photos as
+  media refs, **EXIF GPS stripped** per P0.5) as a candidate. **Idempotent / dedup'd** like
+  every outbox write (P1 backup) — a flaky reconnect must not double-submit. Returns the
+  candidacy id + `state: "candidate"`. Owner-scoped: the submitter is recorded but the
+  candidate is a frozen copy, decoupled from their still-editable local track.
+- **Candidacy state machine** mirrors `packages/social` `CandidacyState`:
+  `none → candidate → official | rejected`. `none` = ordinary private track; `candidate` =
+  submitted/under review; `official` = approved into the library; `rejected` = declined
+  (optional reason). **Past `candidate` is server-authoritative** — the client never
+  self-promotes; outcomes are reflected to the app on the next sync (reuse the backup read
+  path; no bidirectional track sync, D11).
+- **Curator review queue + admin console** (not a public surface): list pending candidates;
+  **dedup/merge by GPS proximity + name similarity** (the same physical track is submitted by
+  many drivers — propose likely duplicates, and let *approve-as-merge* fold a candidate's lap
+  records into an existing official venue rather than create a parallel entry, so there's one
+  canonical venue per real-world track); approve → `official`, reject → `rejected`. This human
+  gate is the **track-data analogue of the UGC moderation** comments will need in V1.1 (P3).
+- `GET /tracks/official?near={lat,lon}&surface=` → approved venues only (geo + surface
+  filter). Auth-free is acceptable here as a *curated, read-only* surface (still not the
+  arbitrary public browse API D10 defers); paginate; serve photos as media refs.
+- `GET /tracks/official/{id}/leaderboard?category=&conditions=` → aggregated `LapRecord`s +
+  run results across users, bucketed by **category + conditions**, **gated at n ≥ 8** per
+  bucket (social spec §5 anti-deanonymization — hide buckets below the threshold, don't show a
+  thin list). Read-only aggregate computed server-side; `driverStats()` already does the
+  per-driver client-side numbers. **No advice on the server (D18)** — a leaderboard is timing
+  data, not a recommendation.
+- **Moderation / takedown / tombstones:** a curator can **unpublish/takedown** an official
+  venue (bad data, dispute, abuse); deletes use **tombstones, not hard cascades** (P2 GDPR) so
+  merged lineage and other users' contributed records survive; on `DELETE /me`, anonymize the
+  submitter on official venues / leaderboard entries (P2) — the venue and its aggregate
+  outlive any one account. Contact info for takedown requests is published (Apple UGC, P3).
+
 ### P1 — PDF / PNG render pipeline  *(D12)*
 - Server-side render **job**: **fill, never redraw** — AcroForm field fill where the
   manufacturer blank has form fields (MP11: 51 text + 49 checkbox, verified), else
@@ -193,9 +233,13 @@ researched **practice-api** path works but is unsanctioned — handle with care.
 ### P3 — Social V1.1+  *(after launch; D10 phasing)*
 Profiles, follows, props, comments, public discovery, **leaderboards** by track + category
 (`driverStats()` already computes career/yearly/podiums/wins client-side; the server
-aggregates cross-user). **Hard requirements:** UGC moderation (Apple 1.2 — content filter +
-**report** + **block user** + admin takedown + published contact info), and **n ≥ 8** sample
-size on any publicly shown aggregate so small clubs aren't deanonymizable (social spec §5).
+aggregates cross-user). The per-venue leaderboard is specced with the official-track candidacy
+(P1 candidacy / social spec §6) since it hangs off an approved venue; the V1.1 work here adds
+the *driver-facing* discovery, profile and following surfaces around it. **Hard
+requirements:** UGC moderation (Apple 1.2 — content filter + **report** + **block user** +
+admin takedown + published contact info) — the curator review queue (P1 candidacy) is the same
+moderation gate applied to track data — and **n ≥ 8** sample size on any publicly shown
+aggregate so small clubs aren't deanonymizable (social spec §5).
 
 ### Cross-cutting — Observability
 Structured request logging with correlation ids, error tracking (Sentry), `/healthz`, and
@@ -334,6 +378,9 @@ envelope format versions in §1 are confirmed correct.)*
    prerequisite for any photo to survive backup.
 2. **P1 backup/restore (outbox)** — protects user data; per-user JSON blobs, trivial schema.
 3. **P1 share-link + fork + render (D12)** — the V1.0 "social" growth loop (no public API).
+   *(Official-track candidacy + admin console + leaderboard is designed alongside this but
+   is post-V1.0 — the app's offline submit/outbox half ships now; the hosted half lands with
+   the backend.)*
 4. **P2 content delivery** (signed bundles) → then wire `rc-setup-fields.json`.
 5. **P2 GDPR export/delete** (needed for store submission, D17) + **observability**.
 6. **P2 Speedhive** (when API access is sorted, D31) + **push**.

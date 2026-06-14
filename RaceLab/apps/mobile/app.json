@@ -3,6 +3,7 @@
     "name": "RaceLab",
     "slug": "racelab",
     "version": "0.1.0",
+    "scheme": "griplab",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -23,6 +24,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-sharing"
+    ]
   }
 }

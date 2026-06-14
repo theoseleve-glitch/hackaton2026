@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Linking from "expo-linking";
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetScreen } from "./src/screens/SheetScreen";
 import { TracksScreen } from "./src/screens/TracksScreen";
@@ -9,7 +10,11 @@ import { EngineerHubScreen } from "./src/screens/EngineerHubScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
+import { ImportPreviewScreen } from "./src/screens/ImportPreviewScreen";
+import { OfficialTracksScreen } from "./src/screens/OfficialTracksScreen";
 import { Overlay } from "./src/components/Overlay";
+import { ShareSheet } from "./src/components/ShareSheet";
+import { QrScanner } from "./src/components/QrScanner";
 import { TrialBanner } from "./src/components/TrialBanner";
 import { fetchRecentSessions } from "./src/speedhive";
 import type { SpeedhiveSession } from "./src/speedhive";
@@ -17,7 +22,10 @@ import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
 import { useTracks } from "./src/trackstore";
 import { useReports } from "./src/reportstore";
+import { useCandidacy } from "./src/candidacystore";
 import { trialDaysLeft, useAccount } from "./src/accountstore";
+import { linkToPayload } from "../../packages/social/src";
+import type { SharedPayload } from "../../packages/social/src";
 import { colors } from "./src/theme";
 
 type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer";
@@ -45,12 +53,26 @@ export default function App() {
     { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] } | undefined
   >();
   const [shChecked, setShChecked] = useState(false);
+  // social slice: share a payload, import/fork one, scan a QR, browse official tracks
+  const [shareTarget, setShareTarget] = useState<SharedPayload | null>(null);
+  const [importPayload, setImportPayload] = useState<SharedPayload | null>(null);
+  const [showScanner, setShowScanner] = useState(false);
+  const [showOfficial, setShowOfficial] = useState(false);
 
   const { garage, updateGarage } = useGarage();
   const { logbook, updateLogbook } = useLogbook();
   const { tracks, updateTracks } = useTracks();
   const { reports, addReport } = useReports();
+  const { candidacy, submit: submitCandidacy } = useCandidacy();
   const { account, setAccount, completeOnboarding } = useAccount();
+
+  // deep-link import: griplab://import?d=… (cold start + warm) opens the fork preview
+  const url = Linking.useURL();
+  useEffect(() => {
+    if (!url) return;
+    const res = linkToPayload(url);
+    if (res.ok) setImportPayload(res.payload);
+  }, [url]);
 
   useEffect(() => {
     if (!garage || !logbook || shChecked) return;
@@ -73,7 +95,7 @@ export default function App() {
     })();
   }, [garage, logbook, shChecked]);
 
-  if (!garage || !logbook || !tracks || !reports || !account) {
+  if (!garage || !logbook || !tracks || !reports || !account || !candidacy) {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
         <ActivityIndicator color={colors.accent} />
@@ -161,9 +183,19 @@ export default function App() {
                 updateGarage={updateGarage}
                 focusCarId={sheetFocusCarId}
                 onClearFocus={() => setSheetFocusCarId(undefined)}
+                onShareSetup={(p) => setShareTarget(p)}
+                onScanImport={() => setShowScanner(true)}
               />
             )}
-            {tab === "tracks" && <TracksScreen tracks={tracks} updateTracks={updateTracks} />}
+            {tab === "tracks" && (
+              <TracksScreen
+                tracks={tracks}
+                updateTracks={updateTracks}
+                candidacy={candidacy}
+                onSubmitOfficial={(trackId) => submitCandidacy(trackId)}
+                onOpenOfficial={() => setShowOfficial(true)}
+              />
+            )}
             {tab === "runs" && (
               <RunsScreen
                 key={`runs-${runsStartInForm}-${shPrefill?.created_at ?? ""}`}
@@ -180,6 +212,7 @@ export default function App() {
                   setTab("engineer");
                 }}
                 onCompare={(a, b) => setComparePair({ a, b })}
+                onShareRun={(p) => setShareTarget(p)}
               />
             )}
             {tab === "engineer" && (
@@ -202,6 +235,33 @@ export default function App() {
             onClose={() => setShowSettings(false)}
           />
         </Overlay>
+        <Overlay visible={importPayload !== null}>
+          {importPayload && (
+            <ImportPreviewScreen
+              payload={importPayload}
+              garage={garage}
+              updateGarage={updateGarage}
+              onClose={() => setImportPayload(null)}
+              onDone={(carId) => {
+                setImportPayload(null);
+                setSheetFocusCarId(carId);
+                setTab("sheet");
+              }}
+            />
+          )}
+        </Overlay>
+        <Overlay visible={showScanner}>
+          <QrScanner
+            onScanned={(p) => {
+              setShowScanner(false);
+              setImportPayload(p);
+            }}
+            onClose={() => setShowScanner(false)}
+          />
+        </Overlay>
+        <Overlay visible={showOfficial}>
+          <OfficialTracksScreen tracks={tracks} candidacy={candidacy} onClose={() => setShowOfficial(false)} />
+        </Overlay>
       </View>
 
       <View style={styles.tabbar}>
@@ -218,6 +278,10 @@ export default function App() {
               setComparePair(null);
               setShowSettings(false);
               setShPrefill(undefined);
+              setShareTarget(null);
+              setImportPayload(null);
+              setShowScanner(false);
+              setShowOfficial(false);
               setTab(t.id);
             }}
           >
@@ -226,6 +290,8 @@ export default function App() {
           </Pressable>
         ))}
       </View>
+
+      <ShareSheet payload={shareTarget} onClose={() => setShareTarget(null)} />
     </SafeAreaView>
   );
 }
