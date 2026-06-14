@@ -29,13 +29,30 @@ const isCards = (v: unknown, revealed: boolean): boolean =>
     return !revealed || (typeof o.crowdYesPct === 'number' && typeof o.distance === 'number');
   });
 
+const isStrArr = (v: unknown): v is string[] => Array.isArray(v) && v.every((x) => typeof x === 'string');
+
+// Reveal call-outs (closest-number): pile/closest/wildest are all id lists.
+const isClosestCallOuts = (v: unknown): boolean => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return isStrArr(o.pile) && isStrArr(o.closest) && isStrArr(o.wildest);
+};
+
+// Reveal call-outs (crowd-target): loneGenius/mostFooled are id lists.
+const isCrowdCallOuts = (v: unknown): boolean => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return isStrArr(o.loneGenius) && isStrArr(o.mostFooled);
+};
+
 const isClosestResult = (v: unknown): v is ClosestRoundResult => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
   return o.kind === 'closest-number' && typeof o.answer === 'number'
     && isRec(o.guesses, 'number') && Array.isArray(o.ranking)
     && isRec(o.pointsEarned, 'number') && Array.isArray(o.exact)
-    && typeof o.multiplier === 'number' && Array.isArray(o.busted);
+    && typeof o.multiplier === 'number' && Array.isArray(o.busted)
+    && isClosestCallOuts(o.callOuts);
 };
 
 const isCrowdResult = (v: unknown): v is CrowdRoundResult => {
@@ -44,7 +61,7 @@ const isCrowdResult = (v: unknown): v is CrowdRoundResult => {
   return o.kind === 'crowd-target' && typeof o.targetYesPct === 'number'
     && isRec(o.picks, 'number') && Array.isArray(o.winningCards)
     && Array.isArray(o.secondCards) && typeof o.bullseye === 'boolean'
-    && isRec(o.pointsEarned, 'number');
+    && isRec(o.pointsEarned, 'number') && isCrowdCallOuts(o.callOuts);
 };
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
@@ -59,6 +76,8 @@ export function asInputGuessView(v: unknown): InputGuessView | null {
   if (o.phase === 'guess') {
     if (!isRec(o.hasSubmitted, 'boolean')) return null;
     if (!(o.mySubmission === null || typeof o.mySubmission === 'number')) return null;
+    // Live submission ticker (identity + count only, NO values).
+    if (typeof o.submittedCount !== 'number' || !isStrArr(o.lockOrder)) return null;
     if (o.mode === 'closest-number') {
       return isLText(o.question) && typeof o.maxInputDigits === 'number' && typeof o.finalRound === 'boolean'
         ? (v as InputGuessView) : null;

@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import { emptyPlayerMap } from '@bloop/kit';
+import { emptyPlayerMap, redactSideBets } from '@bloop/kit';
 import type {
   DawnReport,
   LText,
@@ -60,6 +60,26 @@ function flags(players: readonly PlayerId[], acted: Record<PlayerId, unknown>): 
 }
 
 /**
+ * CC-1 Night Read tally — surfaced ONLY at `over`. For each player, how many of
+ * their per-round wolf-hunches correctly named an actual wolf (`roles[target]
+ * === 'wolf'`). Cosmetic: derived from the final roles (public at `over`); never
+ * folded into the placement `scores`.
+ */
+function nightReadAccuracy(state: NightDayState): Record<PlayerId, number> {
+  const acc = emptyPlayerMap<number>();
+  for (const p of state.players) acc[p] = 0;
+  for (const round of Object.keys(state.nightReads)) {
+    const buffer = state.nightReads[round as unknown as number];
+    if (buffer === undefined) continue;
+    for (const reader of Object.keys(buffer)) {
+      const target = buffer[reader];
+      if (target !== undefined && state.roles[target] === 'wolf') acc[reader] = (acc[reader] ?? 0) + 1;
+    }
+  }
+  return acc;
+}
+
+/**
  * Per-viewer projection (the platform's largest redaction surface — design
  * §2.17 redaction matrix). Own-only secrets are null for every other viewer
  * INCLUDING spectators and hostile ids ('__proto__'): myRole/myRoleCard
@@ -107,6 +127,13 @@ export function buildView(state: NightDayState, viewer: PlayerId): NightDayView 
       const amActor =
         iAmAlive &&
         (step === 'seer' ? myRole === 'seer' : step === 'wolves' ? myRole === 'wolf' : myRole === 'witch');
+      // CC-1 Night Read: OWNER-ONLY echo from the round's hidden buffer.
+      // redactSideBets gives a non-owner `own: null` (an own-property lookup, so a
+      // foreign or hostile id never recovers a value). We deliberately DROP the
+      // public `count` here — exposing it would let observers tell reads from acks
+      // in aggregate and break the decoy. The field is a uniform key for everyone
+      // (value owner-redacted), so the night view key set stays identical.
+      const readView = redactSideBets(state.nightReads[state.round] ?? emptyPlayerMap<PlayerId>(), viewer);
       return {
         phase: 'night',
         step,
@@ -117,6 +144,7 @@ export function buildView(state: NightDayState, viewer: PlayerId): NightDayView 
         wolfVotes: step === 'wolves' && myRole === 'wolf' && iAmAlive ? state.wolfVotes : null,
         pendingKill: step === 'witch' && myRole === 'witch' && iAmAlive ? state.pendingKill : null,
         witchState: myRole === 'witch' ? state.witchState : null,
+        myNightRead: readView.own,
       };
     }
     case 'dawn':
@@ -146,6 +174,7 @@ export function buildView(state: NightDayState, viewer: PlayerId): NightDayView 
         finalRoles: state.roles,
         winners: state.winners,
         endReason: state.endReason ?? 'maxRounds',
+        nightReadAccuracy: nightReadAccuracy(state),
       };
   }
 }

@@ -37,7 +37,7 @@ describe('init determinism', () => {
     const s = tod.init('s', PLAYERS, TOD_PACK);
     expect(s.phase).toBe('choose');
     expect(tod.phaseKey(s)).toBe('choose:0');
-    expect(tod.phaseDurationMs(s)).toBe(15_000);
+    expect(tod.phaseDurationMs(s)).toBe(9_000);
     expect(s.activePlayer).toBe(s.rotation[0]);
     expect([...s.rotation].sort()).toEqual([...PLAYERS].sort());
     for (const p of PLAYERS) {
@@ -68,7 +68,7 @@ describe('init determinism', () => {
     const s = drink.init('s', PLAYERS, DRINK_PACK);
     expect(s.phase).toBe('prompt');
     expect(drink.phaseKey(s)).toBe('prompt:0');
-    expect(drink.phaseDurationMs(s)).toBe(35_000);
+    expect(drink.phaseDurationMs(s)).toBe(30_000);
     expect(s.choice).toBe('truth');
     expect(s.prompt?.choice).toBe('truth');
     // highest allowed tier first (spicy before party)
@@ -85,7 +85,7 @@ describe('phase machine (action-driven happy path, truth-or-dare-2)', () => {
     const s1 = fold(tod, s0, [choose(active, 'dare')]);
     expect(s1.phase).toBe('prompt');
     expect(tod.phaseKey(s1)).toBe('prompt:0');
-    expect(tod.phaseDurationMs(s1)).toBe(45_000);
+    expect(tod.phaseDurationMs(s1)).toBe(38_000);
     expect(s1.prompt?.choice).toBe('dare');
     // fun deck plays its highest allowed tier (party) first
     expect(s1.prompt?.intensity).toBe('party');
@@ -93,12 +93,12 @@ describe('phase machine (action-driven happy path, truth-or-dare-2)', () => {
     const s2 = fold(tod, s1, [declare(active, 'done')]);
     expect(s2.phase).toBe('verdict');
     expect(tod.phaseKey(s2)).toBe('verdict:0');
-    expect(tod.phaseDurationMs(s2)).toBe(20_000);
+    expect(tod.phaseDurationMs(s2)).toBe(14_000);
 
     const s3 = fold(tod, s2, [vote(voters[0]!, 'done'), vote(voters[1]!, 'done')]);
     expect(s3.phase).toBe('score');
     expect(tod.phaseKey(s3)).toBe('score:0');
-    expect(tod.phaseDurationMs(s3)).toBe(6_000);
+    expect(tod.phaseDurationMs(s3)).toBe(8_500);
     expect(s3.lastResult?.verdict).toBe('done');
     expect(s3.lastResult?.pointsAwarded).toBe(15); // dare: 10 + 5
 
@@ -226,7 +226,7 @@ describe('config exactness (binding designs)', () => {
     expect(TRUTH_OR_DARE_2_CONFIG).toMatchObject({
       totalRounds: 3, passesPerPlayer: 2, allowedIntensities: ['soft', 'party'],
       verdictThreshold: 0.5, donePoints: 10, passPoints: 3, chickenedPoints: 0, dareBonus: 5,
-      chooseMs: 15_000, promptMs: 45_000, verdictMs: 20_000, scoreMs: 6_000,
+      chooseMs: 9_000, promptMs: 38_000, verdictMs: 14_000, scoreMs: 8_500,
       allowedChoices: ['truth', 'dare'], escapeMode: 'pass', deck: 'fun',
     });
   });
@@ -234,7 +234,7 @@ describe('config exactness (binding designs)', () => {
   it('truth-or-drink params match wave2 §2.8', () => {
     expect(TRUTH_OR_DRINK_CONFIG).toMatchObject({
       totalRounds: 2, allowedChoices: ['truth'], escapeMode: 'forfeit-draw',
-      allowedIntensities: ['party', 'spicy'], promptMs: 35_000, verdictMs: 15_000, scoreMs: 7_000,
+      allowedIntensities: ['party', 'spicy'], promptMs: 30_000, verdictMs: 12_000, scoreMs: 8_500,
       donePoints: 10, passPoints: 3, chickenedPoints: 0, dareBonus: 0, verdictThreshold: 0.5,
       deck: null,
     });

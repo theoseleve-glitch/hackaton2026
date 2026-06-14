@@ -68,6 +68,8 @@ export const witchAct = (witch: string, heal: boolean, poisonTarget: string | nu
   act(witch, { kind: 'witchAct', heal, poisonTarget }, at);
 export const vote = (voter: string, target: string, at = 0) => act(voter, { kind: 'vote', target }, at);
 export const nightAck = (p: string, at = 0) => act(p, { kind: 'nightAck' }, at);
+export const nightRead = (p: string, target: string, at = 0) =>
+  act(p, { kind: 'nightRead', target }, at);
 
 /** White-box role lookup — tests own the state type. */
 export function roleOf(state: NightDayState, role: Role): string {

@@ -26,7 +26,10 @@ describe('tracer.phaseKey', () => {
       keys.push(tracer.phaseKey(state));
     }
     expect(keys).toEqual([
-      'vote:0', 'reveal:0', 'vote:1', 'reveal:1', 'vote:2', 'reveal:2', 'over',
+      'vote:0', 'reveal:0:suspense', 'reveal:0:verdict',
+      'vote:1', 'reveal:1:suspense', 'reveal:1:verdict',
+      'vote:2', 'reveal:2:suspense', 'reveal:2:verdict',
+      'over',
     ]);
   });
 
@@ -48,7 +51,8 @@ describe('tracer.phaseKey', () => {
       seen.push(tracer.phaseKey(state));
     }
     for (const key of seen) {
-      expect(key).toMatch(/^[a-z]+(:\d+)?$/);
+      // bare 'over', 'phase:round', or 'reveal:round:suspense|verdict'
+      expect(key).toMatch(/^[a-z]+(:\d+)?(:(suspense|verdict))?$/);
       for (const p of players) expect(key).not.toContain(p);
     }
   });
@@ -58,6 +62,6 @@ describe('tracer.phaseKey', () => {
     state = tracer.reduce(state, { type: 'action', playerId: 'p1', action: { kind: 'vote', target: 'p2' }, at: 0 }).state;
     state = tracer.reduce(state, { type: 'action', playerId: 'p2', action: { kind: 'vote', target: 'p1' }, at: 1 }).state;
     state = tracer.reduce(state, { type: 'action', playerId: 'p3', action: { kind: 'vote', target: 'p1' }, at: 2 }).state;
-    expect(tracer.phaseKey(state)).toBe('reveal:0');
+    expect(tracer.phaseKey(state)).toBe('reveal:0:suspense'); // early-resolve lands on the suspense beat
   });
 });

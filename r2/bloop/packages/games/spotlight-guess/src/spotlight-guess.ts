@@ -1,6 +1,14 @@
 import type { GameModule } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { allActed, emptyPlayerMap, initPresence, setConnected } from '@bloop/kit';
+import {
+  allActed,
+  emptyPlayerMap,
+  emptySideBets,
+  initPresence,
+  placeSideBet,
+  redactSideBets,
+  setConnected,
+} from '@bloop/kit';
 import {
   advanceFromReveal,
   advanceFromScoreboard,
@@ -15,6 +23,7 @@ import {
 } from './resolve.js';
 import type {
   GuessEntry,
+  ReactToken,
   ReverseRound,
   ScaleItemView,
   ScaleRound,
@@ -100,6 +109,7 @@ export function createSpotlightGuess(
         reverseRounds,
         chosenAnswer: null,
         guesses: emptyPlayerMap<GuessEntry>(),
+        reacts: emptySideBets<ReactToken>(),
         voided: false,
         lastGained: emptyPlayerMap<number>(),
         scores,
@@ -122,7 +132,17 @@ export function createSpotlightGuess(
             && state.config.speakerCanEndTalk) {
             return { state: { ...state, phase: 'guess' }, effects: [] };
           }
-          if (action.kind === 'guess' && state.phase === 'guess' && playerId !== spot) {
+          // KEYSTONE (P0-A) — live-dial during talk: the SAME hidden guess action
+          // is also accepted in 'talk' so guessers set/adjust a first-impression
+          // dial while the spotlight performs ("he's losing me, dropping to a 3").
+          // Zero new secret — it writes the existing hidden `guesses` buffer at
+          // tier 0, exactly like a normal guess. Talk dials do NOT early-resolve
+          // (the performance must finish); only the 'guess' phase lets allActed
+          // resolve. Locked at talk-end simply by clearing nothing: the seed
+          // carries forward and stays overwritable (lockOnSubmit=false).
+          if (action.kind === 'guess'
+            && (state.phase === 'guess' || state.phase === 'talk')
+            && playerId !== spot) {
             if (!inDomain(currentDomain(state), action.value)) return { state, effects: [] };
             // lockOnSubmit=false in scale configs: overwrites allowed until resolve.
             if (state.config.lockOnSubmit && state.guesses[playerId] !== undefined) {
@@ -131,13 +151,28 @@ export function createSpotlightGuess(
             const guesses = Object.assign(emptyPlayerMap<GuessEntry>(), state.guesses,
               { [playerId]: { value: action.value, tier: 0 } });
             const next = { ...state, guesses };
-            if (allActed(expectedGuessers(next), guesses)) return resolveScale(next);
+            // Early-resolve ONLY in the guess phase — never short-circuit talk.
+            if (state.phase === 'guess' && allActed(expectedGuessers(next), guesses)) {
+              return resolveScale(next);
+            }
             return { state: next, effects: [] };
           }
           return { state, effects: [] };
         }
 
         // reverse-question
+        // KEYSTONE (P0-B-lite) — content-free react during the 'answer' beat:
+        // a non-spotlight connected player taps once to light their avatar up,
+        // killing the blank screen. It writes a SEPARATE hidden buffer (`reacts`)
+        // via the kit side-bet primitive — never the primary `guesses` buffer, so
+        // it can NEVER advance the primary early-resolve. placeSideBet returns
+        // null on any rejected tap (ineligible / already tapped) → SAME state ref.
+        if (action.kind === 'react' && state.phase === 'answer') {
+          const isEligible = playerId !== spot && state.connected[playerId] === true;
+          const reacts = placeSideBet<ReactToken>(state.reacts, playerId, 'ready', isEligible);
+          if (reacts === null) return { state, effects: [] };
+          return { state: { ...state, reacts }, effects: [] };
+        }
         if (action.kind === 'answer' && state.phase === 'answer' && playerId === spot) {
           const answers = state.reverseRounds[state.round]?.answers ?? [];
           if (!Number.isInteger(action.answerIndex)
@@ -236,10 +271,22 @@ export function createSpotlightGuess(
         const domain = currentDomain(state);
         // The secret target reaches ONLY the spotlight pre-reveal.
         const myTarget = isSpot ? state.targets[state.round] ?? null : null;
-        if (state.phase === 'target' || state.phase === 'talk') {
+        if (state.phase === 'target') {
           return {
-            ...base, mode: 'scale', phase: state.phase, domain, item,
+            ...base, mode: 'scale', phase: 'target', domain, item,
             canEndTalk: state.config.speakerCanEndTalk, myTarget,
+          };
+        }
+        if (state.phase === 'talk') {
+          // KEYSTONE (P0-A) — expose the same hidden-buffer aggregate + owner echo
+          // as the guess phase so live first-impression dials are legible without
+          // leaking any value: acted-booleans are public, the dial stays owner-only.
+          const hasGuessed = emptyPlayerMap<boolean>();
+          for (const p of state.players) hasGuessed[p] = state.guesses[p] !== undefined;
+          return {
+            ...base, mode: 'scale', phase: 'talk', domain, item,
+            canEndTalk: state.config.speakerCanEndTalk, myTarget,
+            hasGuessed, myGuess: state.guesses[viewer]?.value ?? null,
           };
         }
         if (state.phase === 'guess') {
@@ -271,10 +318,17 @@ export function createSpotlightGuess(
       if (state.phase === 'answer') {
         // Guessers/spectators see NOTHING of the item — no question, no
         // options, no candidates (options could triangulate later candidates).
+        // KEYSTONE (P0-B-lite) — the ONLY extra they see is the content-free
+        // react aggregate (count) + their own tap echo: redactSideBets gives a
+        // non-owner only the count (never another player's marker), the owner
+        // additionally sees their own. Zero leak — no value rides on a react.
+        const reactView = redactSideBets<ReactToken>(state.reacts, viewer);
         return {
           ...base, mode: 'reverse-question', phase: 'answer',
           question: isSpot ? rr?.candidates[rr.realIndex] ?? null : null,
           answers: isSpot ? rr?.answers ?? null : null,
+          reactCount: reactView.count,
+          myReact: reactView.own !== null,
         };
       }
       if (state.phase === 'guess') {

@@ -7,7 +7,7 @@ import {
   type SpotlightGuessState,
 } from '@bloop/game-spotlight-guess';
 import {
-  answer, deadline, guess, guessersOf, left, openVotes, ready, reverseContent, scaleContent,
+  answer, deadline, guess, guessersOf, left, openVotes, react, ready, reverseContent, scaleContent,
   spotOf, wheelContent,
 } from './fixtures.js';
 
@@ -75,12 +75,34 @@ describe('scale phase chain (jeu-de-la-note)', () => {
     expect(s3.phase).toBe('guess'); // one guesser still expected
     const s4 = note.reduce(s3, guess(g2!, 7)).state;
     expect(note.phaseKey(s4)).toBe('reveal:r0');
-    expect(note.phaseDurationMs(s4)).toBe(8_000);
+    expect(note.phaseDurationMs(s4)).toBe(9_000);
 
     const s5 = note.reduce(s4, deadline(1)).state;
     expect(note.phaseKey(s5)).toBe('target:r1');
     expect(spotOf(s5)).not.toBe(spot); // rotation moved the spotlight
     expect(s5.guesses).toEqual({}); // buffer cleared
+  });
+
+  it('KEYSTONE (P0-A) GUARD no-gate-early-resolve: ALL guessers live-dial in talk, the phase still does NOT resolve', () => {
+    const four = ['p1', 'p2', 'p3', 'p4'];
+    const s0 = note.init('s', four, scaleContent);
+    const talk = note.reduce(s0, ready(spotOf(s0))).state; // -> talk
+    expect(talk.phase).toBe('talk');
+    let s = talk;
+    // every connected guesser sets a first-impression dial during talk
+    for (const g of guessersOf(talk)) s = note.reduce(s, guess(g, 5)).state;
+    expect(s.phase).toBe('talk'); // the performance must finish — NO early-resolve in talk
+    expect(note.phaseKey(s)).toBe('talk:r0');
+    // the dials seeded the hidden buffer and carry forward into guess (overwritable)
+    for (const g of guessersOf(talk)) expect(s.guesses[g]).toEqual({ value: 5, tier: 0 });
+    // entering guess: NOW the already-seeded full set early-resolves on the next write
+    const guessPhase = note.reduce(s, deadline(1)).state;
+    expect(guessPhase.phase).toBe('guess');
+    expect(guessPhase.guesses).toEqual(s.guesses); // dials survived the talk->guess transition
+    // a single refining overwrite completes allActed and promotes to reveal
+    const [g1] = guessersOf(guessPhase);
+    const resolved = note.reduce(guessPhase, guess(g1!, 6)).state;
+    expect(resolved.phase).toBe('reveal');
   });
 
   it('every phase advances on deadline alone (passive room) and terminates at over', () => {
@@ -131,7 +153,7 @@ describe('reverse phase chain (devine-la-question)', () => {
     expect(dq.phaseKey(s3)).toBe('guess:r0:h2');
     const s4 = dq.reduce(s3, deadline(3)).state;
     expect(dq.phaseKey(s4)).toBe('reveal:r0');
-    expect(dq.phaseDurationMs(s4)).toBe(8_000);
+    expect(dq.phaseDurationMs(s4)).toBe(9_000);
     expect(s4.voided).toBe(false);
   });
 

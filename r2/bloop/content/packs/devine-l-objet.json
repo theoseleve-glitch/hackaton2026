@@ -109,7 +109,7 @@
     },
     {
       "id": "obj-easy-014",
-      "object": { "fr": "le livre que tu cites en soirée. T'en es à la page 12.", "en": "the book you quote at parties. you're on page 12." },
+      "object": { "fr": "le livre que tu cites en soirée pour paraître profond. Marque-page coincé à la page 12 depuis novembre.", "en": "the book you quote at parties to sound deep. bookmark stuck on page 12 since November." },
       "category": { "fr": "Zone de flemme", "en": "Rotting zone" },
       "difficulty": "easy",
       "tags": ["household", "inRoomLikely"],
@@ -485,7 +485,7 @@
     },
     {
       "id": "obj-med-021",
-      "object": { "fr": "le déboucheur à ventouse. Quelqu'un ici a une histoire.", "en": "the plunger. someone in this room has a story." },
+      "object": { "fr": "le déboucheur à ventouse acheté en urgence un dimanche, à pied, sous la pluie, après LA soirée", "en": "the plunger bought in a hurry on a Sunday, on foot, in the rain, the morning after THAT party" },
       "category": { "fr": "Hygiène douteuse", "en": "Hygiene, allegedly" },
       "difficulty": "medium",
       "tags": ["bathroom", "funny"],
@@ -597,7 +597,7 @@
     },
     {
       "id": "obj-med-035",
-      "object": { "fr": "la pile que quelqu'un ici a déjà testée sur la langue", "en": "the battery someone in this room has licked" },
+      "object": { "fr": "la pile testée sur la langue pour voir « si elle marche encore ». Spoiler : ça pique et tu sais toujours pas.", "en": "the battery tested on the tongue to see 'if it still works'. spoiler: it stings and you still don't know." },
       "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "medium",
       "tags": ["tech", "sneaky"],
@@ -637,7 +637,7 @@
     },
     {
       "id": "obj-med-040",
-      "object": { "fr": "l'arrosoir sorti pour une plante morte depuis trois semaines. C'est plus de l'arrosage, c'est des obsèques.", "en": "the watering can showing up three weeks after the plant died. that's not watering, that's a funeral." },
+      "object": { "fr": "le cadre « Live Laugh Love » offert par quelqu'un qui assistait pas vraiment à ta vie", "en": "the 'Live Laugh Love' sign from someone who wasn't really paying attention to your life" },
       "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "medium",
       "tags": ["decor", "funny"],
@@ -693,7 +693,7 @@
     },
     {
       "id": "obj-hard-003",
-      "object": { "fr": "la boule à neige de Prague qui déclenche l'anecdote de Prague. Tout le monde la connaît par cœur. Il la raconte quand même.", "en": "the snow globe that triggers the Barcelona story. again. everyone has heard it." },
+      "object": { "fr": "la boule à neige de Prague qui déclenche l'anecdote de Prague. Tout le monde la connaît par cœur. Il la raconte quand même, en entier.", "en": "the snow globe that triggers the Barcelona story. everyone here can recite it. he tells it anyway, all of it, with the voices." },
       "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor"],
@@ -765,7 +765,7 @@
     },
     {
       "id": "obj-hard-012",
-      "object": { "fr": "le cactus offert avec « lui au moins tu peux pas le tuer ». Il est mort.", "en": "the cactus gifted with 'even you can't kill this'. it's dead." },
+      "object": { "fr": "le cactus offert avec « lui au moins tu peux pas le tuer ». Il est mort. Le seul. De toute l'histoire connue de l'espèce.", "en": "the cactus gifted with 'even you can't kill this'. it's dead. the only one. in the recorded history of the species." },
       "category": { "fr": "Déco contestable", "en": "Questionable decor" },
       "difficulty": "hard",
       "tags": ["decor", "funny"],
@@ -1077,10 +1077,10 @@
     },
     {
       "id": "obj-hard-038",
-      "object": { "fr": "la plante carnivore nourrie plus régulièrement que tes amitiés", "en": "the Venus flytrap fed more consistently than the group chat" },
-      "category": { "fr": "Déco contestable", "en": "Questionable decor" },
+      "object": { "fr": "le tamagotchi nourri plus régulièrement que tes amitiés. Lui au moins t'as jamais laissé sur vu.", "en": "the Tamagotchi fed more consistently than the group chat. at least it never left you on read." },
+      "category": { "fr": "Tech qui trahit", "en": "Tech that betrays you" },
       "difficulty": "hard",
-      "tags": ["decor", "funny"],
+      "tags": ["tech", "funny"],
       "spicy": 0
     }
   ]

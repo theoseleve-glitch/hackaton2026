@@ -36,6 +36,15 @@ export interface RuleHuntConfig {
   briefingMs: number;
   /** The round's master free-play clock — banked across interrupts. */
   liveMs: number;
+  /**
+   * Heat-check cadence: max live time between forced spotlight micro-beats. The
+   * `live` deadline is armed at `min(liveRemainingMs, heatMs)`; on that deadline
+   * (with bank + quorum remaining) the round enters a `spotlight`, banking the
+   * live clock exactly like an accusation so no live time is ever lost.
+   */
+  heatMs: number;
+  /** Length of one forced spotlight micro-beat (name a follower; everyone flags/clean). */
+  spotlightMs: number;
   tribunalMs: number;
   guessMs: number;
   revealMs: number;
@@ -54,6 +63,8 @@ export const TROUVEZ_LA_REGLE_CONFIG: RuleHuntConfig = {
   totalRounds: 3,
   briefingMs: 20_000,
   liveMs: 180_000,
+  heatMs: 24_000,
+  spotlightMs: 10_000,
   tribunalMs: 25_000,
   guessMs: 20_000,
   revealMs: 12_000,
@@ -63,7 +74,19 @@ export const TROUVEZ_LA_REGLE_CONFIG: RuleHuntConfig = {
   accusationsPerPlayer: 1,
 };
 
-export type RuleHuntPhase = 'briefing' | 'live' | 'tribunal' | 'guess' | 'reveal' | 'over';
+export type RuleHuntPhase =
+  | 'briefing'
+  | 'live'
+  | 'spotlight'
+  | 'tribunal'
+  | 'guess'
+  | 'reveal'
+  | 'over';
+
+/** A follower's free, soft heat-check read (distinct from the costly accuse token). */
+export type FlagBet = 'flag' | 'clean';
+/** A detective's private heat-check bookmark — no elimination power, no clue leaked. */
+export type NoteBet = 'suspicious' | 'clear';
 
 export interface TribunalState {
   accused: PlayerId;
@@ -122,8 +145,26 @@ export interface RuleHuntState {
   segmentStartedAt: number;
   /** Increments on every live resume so phaseKey re-arms the shorter remainder. */
   liveSeg: number;
-  /** Makes every tribunal/guess instance phaseKey-unique within a round. */
+  /** Makes every tribunal/guess/spotlight instance phaseKey-unique within a round. */
   interruptSeq: number;
+  /**
+   * Forced heat-check micro-beat. Non-null only during the `spotlight` phase.
+   * `target` is seeded (createRng(`${seed}:spot:${round}:${seq}`)) so the same
+   * seed produces the same spotlight order across every replay. `flags` /
+   * `notes` are HIDDEN side-bet buffers (kit/sidebet): owner-only echo + public
+   * counts, never another player's value pre-resume.
+   */
+  spotlight: {
+    target: PlayerId;
+    /** Instance ordinal — the seq used to seed this pick and key the phase. */
+    seq: number;
+    /** HIDDEN — followers' free soft read. Owner-echo / aggregate-count only. */
+    flags: Record<PlayerId, FlagBet>;
+    /** HIDDEN — detectives' private bookmark. Owner-echo / aggregate-count only. */
+    notes: Record<PlayerId, NoteBet>;
+  } | null;
+  /** Count of completed spotlights this round — seeds the next pick, keys the phase. */
+  spotlightCount: number;
   accusationsLeft: Record<PlayerId, number>;
   teamGuessesLeft: number;
   /** PUBLIC: wrong picks, greyed in the grid. */
@@ -143,7 +184,11 @@ export type RuleHuntAction =
   | { kind: 'accuse'; target: PlayerId }
   | { kind: 'tribunalVote'; guilty: boolean }
   | { kind: 'openGuess' }
-  | { kind: 'pickCandidate'; index: number };
+  | { kind: 'pickCandidate'; index: number }
+  /** Heat-check: a non-spotlit follower's free soft read of the spotlit performer. */
+  | { kind: 'flagBreak'; flag: FlagBet }
+  /** Heat-check: a detective's private bookmark on the spotlit performer (no power). */
+  | { kind: 'noteSuspicious'; note: NoteBet };
 
 export type RuleHuntRole = 'detective' | 'follower' | null;
 
@@ -173,6 +218,19 @@ export interface RuleHuntViewBase {
 export type RuleHuntView =
   | (RuleHuntViewBase & { phase: 'briefing'; acked: Record<PlayerId, boolean> })
   | (RuleHuntViewBase & { phase: 'live' })
+  | (RuleHuntViewBase & {
+      phase: 'spotlight';
+      /** PUBLIC — the named performer (the whole table looks at them). */
+      target: PlayerId;
+      /** True for the spotlit follower only ("Toi. Maintenant."). */
+      iAmSpotlit: boolean;
+      /** Aggregate heat — how many flags/notes have landed (leaks no value, no voter). */
+      flagCount: number;
+      noteCount: number;
+      /** Owner echo only — my own flag/note this beat, or null. Never a foreign read. */
+      myFlag: FlagBet | null;
+      myNote: NoteBet | null;
+    })
   | (RuleHuntViewBase & {
       phase: 'tribunal';
       accused: PlayerId;

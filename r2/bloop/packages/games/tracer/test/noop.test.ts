@@ -36,8 +36,11 @@ describe('tracer rejects by reference (engine no-op contract, review I4)', () =>
   });
 
   it('a finished game absorbs everything by reference', () => {
-    let s = toReveal(); // reveal:0 -> vote:1 -> reveal:1 -> vote:2 -> reveal:2 -> over
-    for (let i = 0; i < 5; i++) s = tracer.reduce(s, { type: 'deadline', at: 2_000 + i }).state;
+    let s = toReveal(); // reveal:0:suspense
+    // two-beat reveal: each round is suspense -> verdict -> next, so reaching
+    // 'over' from reveal:0:suspense takes 8 deadline hops (3 rounds, the first
+    // already at suspense): verdict,vote1,suspense,verdict,vote2,suspense,verdict,over.
+    for (let i = 0; i < 8; i++) s = tracer.reduce(s, { type: 'deadline', at: 2_000 + i }).state;
     expect(s.phase).toBe('over');
     expect(tracer.reduce(s, { type: 'deadline', at: 9_000 }).state).toBe(s);
     expect(tracer.reduce(s, vote('p1', 'p2')).state).toBe(s);

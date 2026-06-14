@@ -110,7 +110,9 @@ export function asNightDayView(v: unknown): NightDayView | null {
         (typeof o.wolfVotes === 'object' && !Array.isArray(o.wolfVotes) &&
           Object.values(o.wolfVotes).every((x) => typeof x === 'string'))) &&
       (o.pendingKill === null || typeof o.pendingKill === 'string') &&
-      isWitchState(o.witchState ?? null)
+      isWitchState(o.witchState ?? null) &&
+      // CC-1 Night Read — owner-only echo of my own hunch this round (or null).
+      (o.myNightRead === null || o.myNightRead === undefined || typeof o.myNightRead === 'string')
       ? (v as NightDayView)
       : null;
   }
@@ -131,7 +133,9 @@ export function asNightDayView(v: unknown): NightDayView | null {
       o.finalRoles !== null &&
       Object.values(o.finalRoles).every(isRole) &&
       (o.winners === null || o.winners === 'village' || o.winners === 'wolves') &&
-      typeof o.endReason === 'string'
+      typeof o.endReason === 'string' &&
+      // CC-1 Night Read — per-player count of correct wolf-hunches (cosmetic).
+      (o.nightReadAccuracy === undefined || isRec(o.nightReadAccuracy, 'number'))
       ? (v as NightDayView)
       : null;
   }

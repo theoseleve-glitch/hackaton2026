@@ -15,8 +15,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "viennoiserie-croissant-painchoc",
     "theme": {
-      "fr": "Acheté pour six, mangé seul dans l'ascenseur",
-      "en": "pastry eaten over the sink"
+      "fr": "Six achetés pour le groupe. Quatre arrivés. Un coupable ici.",
+      "en": "bought six for the table. four arrived. one thief in this room."
     },
     "majority": {
       "fr": "Croissant",
@@ -45,8 +45,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "coffee-espresso-ristretto",
     "theme": {
-      "fr": "Carburant de partiels",
-      "en": "personality in a tiny cup"
+      "fr": "Quelqu'un ici en est à son quatrième et accuse les autres d'être lents",
+      "en": "someone here is on their fourth and calls everyone else slow"
     },
     "majority": {
       "fr": "Espresso",
@@ -60,8 +60,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "hotdrink-chocolat-chailatte",
     "theme": {
-      "fr": "Pour ceux qui trouvent le café « trop amer »",
-      "en": "a dessert pretending to be a coffee order"
+      "fr": "Quelqu'un ici a commandé ça en réunion. On juge déjà.",
+      "en": "someone here orders this unironically. the table decides who."
     },
     "majority": {
       "fr": "Chocolat chaud",
@@ -75,7 +75,7 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "fastfood-burger-hotdog",
     "theme": {
-      "fr": "Craquage de 2h du mat",
+      "fr": "Commandé à 2h14, mangé sur un capot",
       "en": "the 3am decision you'll deny"
     },
     "majority": {
@@ -90,8 +90,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "pizza-margherita-pepperoni",
     "theme": {
-      "fr": "Quatrième soirée pizza du mois",
-      "en": "the group order nobody agreed on"
+      "fr": "Huit parts, six personnes, un traître",
+      "en": "eight slices, six people. someone's lying."
     },
     "majority": {
       "fr": "Margherita",
@@ -105,8 +105,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "sushi-maki-california",
     "theme": {
-      "fr": "Commande à 60 balles pour impressionner",
-      "en": "the order when they're paying"
+      "fr": "Quelqu'un ici commande large quand c'est l'autre qui régale",
+      "en": "someone here orders big the second someone else is paying"
     },
     "majority": {
       "fr": "Maki",
@@ -165,8 +165,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "summerfruit-peche-nectarine",
     "theme": {
-      "fr": "Ça coule jusqu'au coude",
-      "en": "drips down to your elbow"
+      "fr": "Quelqu'un ici a croqué dedans et reposé le reste dans la corbeille",
+      "en": "someone in this room bit one and put the rest back"
     },
     "majority": {
       "fr": "Pêche",
@@ -210,8 +210,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "snack-bagel-donut",
     "theme": {
-      "fr": "Vu dans 1000 séries, mangé deux fois en vrai",
-      "en": "breakfast in every cop show"
+      "fr": "Le dernier du paquet. Quelqu'un ici l'a pris sans demander.",
+      "en": "the last one in the box. someone here took it without asking."
     },
     "majority": {
       "fr": "Bagel",
@@ -240,8 +240,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "apero-chips-popcorn",
     "theme": {
-      "fr": "Fini avant l'arrivée des invités",
-      "en": "empty bowl, zero confessions"
+      "fr": "Le bol vidé avant les invités. Quelqu'un ici niera jusqu'au bout.",
+      "en": "the bowl was empty before the guests came. someone here will deny it."
     },
     "majority": {
       "fr": "Chips",
@@ -300,8 +300,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "texmex-tacos-burrito",
     "theme": {
-      "fr": "Mangé penché en avant",
-      "en": "eaten leaning forward"
+      "fr": "Mangé penché à 45 degrés. T'en as quand même sur le jean.",
+      "en": "the 45-degree lean. the shirt lost anyway."
     },
     "majority": {
       "fr": "Tacos",
@@ -330,8 +330,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "gouter-crepe-gaufre",
     "theme": {
-      "fr": "Goûter qui brûle le palais",
-      "en": "the mouth-roof destroyer"
+      "fr": "Tu savais que c'était brûlant. T'as croqué quand même.",
+      "en": "you watched the steam come off it and bit anyway"
     },
     "majority": {
       "fr": "Crêpe",
@@ -345,8 +345,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "patisserie-macaron-meringue",
     "theme": {
-      "fr": "Cadeau de lèche-botte chic",
-      "en": "the suck-up's gift box"
+      "fr": "Offert à la belle-famille pour acheter la paix. Quelqu'un ici l'a déjà fait.",
+      "en": "the peace offering for the in-laws. someone here has bought their way in."
     },
     "majority": {
       "fr": "Macaron",
@@ -360,8 +360,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "matin-jus-smoothie",
     "theme": {
-      "fr": "Petit-déj d'influenceur fitness",
-      "en": "the 5am 'morning routine' video prop"
+      "fr": "Quelqu'un ici a posté sa « morning routine ». Personne y croit.",
+      "en": "someone here posted their 'morning routine'. nobody buys it."
     },
     "majority": {
       "fr": "Jus d'orange",
@@ -390,7 +390,7 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "sauce-ketchup-bbq",
     "theme": {
-      "fr": "La sauce qui vexe le chef",
+      "fr": "Demandée à voix basse. Le chef est sorti de la cuisine.",
       "en": "ask for it and the kitchen goes quiet"
     },
     "majority": {
@@ -420,8 +420,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "pique-moutarde-wasabi",
     "theme": {
-      "fr": "Le défi qui finit en larmes",
-      "en": "dare that ends in tears"
+      "fr": "Une cuillère entière parce que tes potes ont dit chiche",
+      "en": "a full spoon because someone said 'bet'"
     },
     "majority": {
       "fr": "Moutarde",
@@ -510,8 +510,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "chaine-mcdo-burgerking",
     "theme": {
-      "fr": "L'arrêt d'autoroute qui divise",
-      "en": "the road trip argument"
+      "fr": "Voté à 4 contre 1 sur l'aire d'autoroute. Le 1 boude encore.",
+      "en": "the vote was 4 to 1. the 1 still brings it up."
     },
     "majority": {
       "fr": "McDo",
@@ -525,8 +525,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "soda-coca-pepsi",
     "theme": {
-      "fr": "L'échange en douce du serveur",
-      "en": "the sneaky waiter swap"
+      "fr": "« On a que l'autre, ça vous va ? » Non.",
+      "en": "'is the other one okay?' it is never okay."
     },
     "majority": {
       "fr": "Coca",
@@ -540,8 +540,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "tartine-nutella-cacahuete",
     "theme": {
-      "fr": "Fini à la petite cuillère",
-      "en": "finished with a spoon, standing"
+      "fr": "Le pot vidé à la cuillère, debout, à 23h. Quelqu'un ici se reconnaît.",
+      "en": "the jar killed with a spoon at 11pm, standing up. someone here knows."
     },
     "majority": {
       "fr": "Nutella",
@@ -555,8 +555,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "dimanche-brunch-petitdej",
     "theme": {
-      "fr": "Lever à 13h légitimé",
-      "en": "1pm breakfast with branding"
+      "fr": "Réservé à 10h, quelqu'un ici arrive à 13h sans s'excuser",
+      "en": "booked for 10. someone here rolls in at 1 with no apology."
     },
     "majority": {
       "fr": "Brunch",
@@ -570,8 +570,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "sucrant-miel-erable",
     "theme": {
-      "fr": "Sucre à bonne réputation",
-      "en": "sugar with good PR"
+      "fr": "Le pot fini en douce. Personne avoue. Désignez.",
+      "en": "the jar that's mysteriously empty. nobody confesses. point."
     },
     "majority": {
       "fr": "Miel",
@@ -600,8 +600,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "sucre-painperdu-pancakes",
     "theme": {
-      "fr": "Petit-déj des excuses",
-      "en": "the apology breakfast"
+      "fr": "Le petit-déj qu'on prépare pour se faire pardonner. Quelqu'un ici a une dette.",
+      "en": "the breakfast you make to apologise. someone here owes one."
     },
     "majority": {
       "fr": "Pain perdu",
@@ -690,8 +690,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "match-stade-arena",
     "theme": {
-      "fr": "La bière à 12 balles que tu rachètes quand même",
-      "en": "£9 warm pints and you keep coming back"
+      "fr": "Le hot-dog à 12 balles que tu rachètes quand même",
+      "en": "£9 cold chips and you keep queueing"
     },
     "majority": {
       "fr": "Stade",
@@ -705,8 +705,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "nature-foret-jungle",
     "theme": {
-      "fr": "Zéro barre de réseau, panique montante",
-      "en": "zero bars and rising panic"
+      "fr": "Deux heures sans réseau et quelqu'un évoque déjà le cannibalisme",
+      "en": "no signal for two hours. cannibalism has been mentioned."
     },
     "majority": {
       "fr": "Forêt",
@@ -765,7 +765,7 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "trajet-velo-trottinette",
     "theme": {
-      "fr": "L'ennemi juré des piétons",
+      "fr": "Te frôle à 25 km/h sur le trottoir, zéro remords",
       "en": "the pavement's most wanted"
     },
     "majority": {
@@ -825,8 +825,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "livres-bibliotheque-librairie",
     "theme": {
-      "fr": "Là où tout le monde chuchote sans raison",
-      "en": "where everyone whispers for no reason"
+      "fr": "Personne t'a demandé de chuchoter. Tu chuchotes.",
+      "en": "nobody told you to whisper. you whisper anyway."
     },
     "majority": {
       "fr": "Bibliothèque",
@@ -945,8 +945,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "papiers-passeport-cni",
     "theme": {
-      "fr": "Introuvable la veille du départ",
-      "en": "vanishes the night before the flight"
+      "fr": "Retrouvé à 23h dans la veste « déjà fouillée trois fois »",
+      "en": "found at 11pm in the jacket you'd 'definitely checked'"
     },
     "majority": {
       "fr": "Passeport",
@@ -1005,8 +1005,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "detente-sauna-hammam",
     "theme": {
-      "fr": "Transpirer entre inconnus, exprès",
-      "en": "sweating with strangers, on purpose"
+      "fr": "Quelqu'un ici a tenu 40 secondes puis a parlé d'« hydratation »",
+      "en": "someone here lasted 40 seconds then claimed they 'had to hydrate'"
     },
     "majority": {
       "fr": "Sauna",
@@ -1020,8 +1020,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "mall-ascenseur-escalator",
     "theme": {
-      "fr": "La victoire quotidienne contre l’escalier",
-      "en": "your daily victory over the stairs"
+      "fr": "Deux minutes d'attente pour éviter douze marches",
+      "en": "you waited longer than the stairs would've taken"
     },
     "majority": {
       "fr": "Ascenseur",
@@ -1035,8 +1035,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "deplier-parapluie-parasol",
     "theme": {
-      "fr": "Première victime de la rafale",
-      "en": "the wind's first victim"
+      "fr": "Retourné par la première rafale, abandonné dans une poubelle",
+      "en": "inside out in eight seconds, binned at the next corner"
     },
     "majority": {
       "fr": "Parapluie",
@@ -1081,7 +1081,7 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
     "id": "invitation-anniv-cremaillere",
     "theme": {
       "fr": "L'invitation qui veut dire « ramène à boire »",
-      "en": "the invite that means 'bring a bottle'"
+      "en": "the invite that means 'bring your own everything'"
     },
     "majority": {
       "fr": "Anniversaire",
@@ -1110,8 +1110,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "saison-ete-printemps",
     "theme": {
-      "fr": "La saison des plans jamais honorés",
-      "en": "the season of plans that never happen"
+      "fr": "Quelqu'un ici a dit « je gère le Airbnb » et n'a jamais réservé",
+      "en": "someone here said 'i'll sort the trip' and booked nothing"
     },
     "majority": {
       "fr": "Été",
@@ -1125,8 +1125,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "meteo-orage-averse",
     "theme": {
-      "fr": "L'excuse parfaite pour tout annuler",
-      "en": "the perfect excuse to cancel"
+      "fr": "Le « on remet ? » part avant la première goutte",
+      "en": "the 'rain check?' text beats the first drop"
     },
     "majority": {
       "fr": "Orage",
@@ -1170,8 +1170,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "dehors-piquenique-barbecue",
     "theme": {
-      "fr": "Le repas où les guêpes s'incrustent",
-      "en": "lunch the wasps invited themselves to"
+      "fr": "Organisé par celui qui ramène que les gobelets",
+      "en": "hosted by the mate who brought napkins and nothing else"
     },
     "majority": {
       "fr": "Pique-nique",
@@ -1215,8 +1215,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "groupe-escape-laser",
     "theme": {
-      "fr": "Là où le groupe découvre qui panique",
-      "en": "where you find out who cracks under pressure"
+      "fr": "Soixante minutes pour découvrir qui hurle sur ses potes",
+      "en": "an hour of finding out who yells at their friends"
     },
     "majority": {
       "fr": "Escape game",
@@ -1260,8 +1260,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "movies-horror-thriller",
     "theme": {
-      "fr": "Regardé entre tes doigts",
-      "en": "watched from behind a cushion"
+      "fr": "« Même pas peur. » T'as dormi avec la lumière.",
+      "en": "'not even scary', said the person sleeping with the lamp on"
     },
     "majority": {
       "fr": "Film d'horreur",
@@ -1455,8 +1455,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "raquette-tennis-badminton",
     "theme": {
-      "fr": "La passion qui a duré 3 semaines",
-      "en": "the hobby that lasted three weeks"
+      "fr": "Quelqu'un ici a juré qu'il assurait. Le score dit l'inverse.",
+      "en": "someone here swore they were good at this. the score disagreed."
     },
     "majority": {
       "fr": "Tennis",
@@ -1470,8 +1470,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "zen-yoga-pilates",
     "theme": {
-      "fr": "Plus raconté que pratiqué",
-      "en": "talked about more than attended"
+      "fr": "Un abonnement payé, trois séances faites. On connaît le profil.",
+      "en": "the membership that's all direct debit, zero attendance. we know who."
     },
     "majority": {
       "fr": "Yoga",
@@ -1560,8 +1560,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "societe-monopoly-cluedo",
     "theme": {
-      "fr": "Révèle le tricheur de la famille",
-      "en": "exposes the family cheat"
+      "fr": "Quelqu'un triche depuis 2015. Aucune preuve, que des soupçons.",
+      "en": "someone's been cheating for years. zero convictions."
     },
     "majority": {
       "fr": "Monopoly",
@@ -1695,8 +1695,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "percu-batterie-bongos",
     "theme": {
-      "fr": "Le cauchemar officiel des voisins",
-      "en": "the neighbours' official nightmare"
+      "fr": "La raison pour laquelle le voisin tape au plafond avec un balai",
+      "en": "your downstairs neighbour's villain origin story"
     },
     "majority": {
       "fr": "Batterie",
@@ -1725,8 +1725,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "photo-selfie-portrait",
     "theme": {
-      "fr": "47 essais pour une seule publication",
-      "en": "47 attempts, one post"
+      "fr": "Quelqu'un ici a recadré le groupe pour mieux se mettre, avoue",
+      "en": "someone here cropped the group out to look better. admit it."
     },
     "majority": {
       "fr": "Selfie",
@@ -1785,8 +1785,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "hauteur-escalade-accrobranche",
     "theme": {
-      "fr": "Là où quelqu'un découvre son vertige",
-      "en": "where someone discovers their fear of heights"
+      "fr": "Quelqu'un ici a découvert son vertige à mi-hauteur, devant témoins",
+      "en": "where someone in this room froze halfway and called it 'a break'"
     },
     "majority": {
       "fr": "Escalade",
@@ -1815,8 +1815,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "contact-rugby-footus",
     "theme": {
-      "fr": "Personne ne connaît vraiment les règles",
-      "en": "nobody actually knows the rules"
+      "fr": "Tout le monde crie sur l'arbitre. Personne connaît les règles.",
+      "en": "everyone's screaming at the ref. nobody's read the rules."
     },
     "majority": {
       "fr": "Rugby",
@@ -1920,8 +1920,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "compagnie-chien-chat",
     "theme": {
-      "fr": "L'enfant préféré de la famille",
-      "en": "the favourite child"
+      "fr": "Le préféré de ta daronne. Toi, t'es deuxième.",
+      "en": "your mum's favourite child. you came third."
     },
     "majority": {
       "fr": "Chien",
@@ -2010,8 +2010,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "ferme-poule-canard",
     "theme": {
-      "fr": "Coursé par un gosse en colo",
-      "en": "chased by a toddler at the petting farm"
+      "fr": "T'a coursé une fois en colo. T'en trembles encore.",
+      "en": "chased you at a petting farm once. you still bring it up."
     },
     "majority": {
       "fr": "Poule",
@@ -2220,7 +2220,7 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "menage-aspirateur-balai",
     "theme": {
-      "fr": "Sorti uniquement quand un date vient dormir",
+      "fr": "Sorti vingt minutes avant l'arrivée d'un date",
       "en": "deployed twenty minutes before a date arrives"
     },
     "majority": {
@@ -2518,6 +2518,21 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
     }
   },
   {
+    "id": "cuisine-chef-patissier",
+    "theme": {
+      "fr": "La reconversion que quelqu'un ici annonce après deux émissions de cuisine",
+      "en": "the career pivot someone here announces after two cooking shows"
+    },
+    "majority": {
+      "fr": "Chef cuisinier",
+      "en": "Chef"
+    },
+    "impostor": {
+      "fr": "Pâtissier",
+      "en": "Pastry chef"
+    }
+  },
+  {
     "id": "tribunal-avocat-juge",
     "theme": {
       "fr": "Payé pour écouter des gens mentir",
@@ -2760,8 +2775,8 @@ export const DOUBLE_JEU_PACK: ContentPack<SecretRoleContent> = {
   {
     "id": "cartes-uno-huitamericain",
     "theme": {
-      "fr": "A brisé plus d’amitiés que la coloc",
-      "en": "ends friendships faster than a group holiday"
+      "fr": "Quelqu'un ici planque encore une carte dans sa manche. On t'a vu.",
+      "en": "someone here still hides a card up their sleeve. we saw that."
     },
     "majority": {
       "fr": "Uno",

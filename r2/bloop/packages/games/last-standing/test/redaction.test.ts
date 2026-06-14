@@ -103,12 +103,29 @@ describe('hidden-state redaction', () => {
     }
   });
 
-  it('no internal field name (deck, judgeVotes, usedLetters, seed, itemId) leaks into any view JSON', () => {
+  it("a juror's in-flight SIDE-BET is invisible to every other viewer (P0-1 non-actor invariance)", () => {
+    // p3 opens; p1/p2 bet during say. p1 diverges on its survives/chokes call.
+    const say = game.reduce(game.init(SEED, players, content), deadline()).state;
+    expect(say.phase).toBe('say');
+    const [b1] = players.filter((p) => p !== say.spotlight) as [string, string];
+    const sSurvives = game.reduce(say, act(b1, { kind: 'bet', value: 'survives' })).state;
+    const sChokes = game.reduce(say, act(b1, { kind: 'bet', value: 'chokes' })).state;
+    expect(game.phaseKey(sSurvives)).toBe(game.phaseKey(sChokes)); // both still mid-say
+    // the bettor sees their own echo differ…
+    expect(JSON.stringify(game.view(sSurvives, b1))).not.toBe(JSON.stringify(game.view(sChokes, b1)));
+    // …every other viewer (the spotlight, the other bettor, outsiders) is byte-identical
+    const nonActors = [...players.filter((p) => p !== b1), ...OUTSIDERS];
+    for (const viewer of nonActors) {
+      expect(game.view(sSurvives, viewer)).toEqual(game.view(sChokes, viewer));
+    }
+  });
+
+  it('no internal field name (deck, judgeVotes, spotBets, usedLetters, seed, itemId) leaks into any view JSON', () => {
     let s = game.init(SEED, players, content);
     for (let i = 0; i < 60; i++) {
       for (const viewer of [...players, ...OUTSIDERS]) {
         const json = JSON.stringify(game.view(s, viewer));
-        for (const key of ['"deck"', '"themeCursor"', '"judgeVotes"', '"usedLetters"', '"seed"', '"itemId"', '"difficulty"', '"letters"']) {
+        for (const key of ['"deck"', '"themeCursor"', '"judgeVotes"', '"spotBets"', '"usedLetters"', '"seed"', '"itemId"', '"difficulty"', '"letters"']) {
           expect(json).not.toContain(key);
         }
       }

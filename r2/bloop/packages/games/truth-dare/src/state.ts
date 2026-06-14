@@ -70,6 +70,13 @@ export interface TruthDareConfig {
   dareBonus: number;
   /** Fraction of cast votes needed for 'done' (>= compare: ties -> done). */
   verdictThreshold: number;
+  /**
+   * Locked (NOT host-tunable, so placement-XP comparability holds): points a
+   * spectator earns for a correct "call your shot" prediction (CC-1). Must stay
+   * small (<= active done 10/15) so the seat is still where the game is won, but
+   * non-zero so spectating has stakes. Defaults to 2.
+   */
+  spectatorPoints: number;
   /** @2: ['truth'] auto-resolves the choose phase (0 ms, straight to prompt). */
   allowedChoices: Choice[];
   /** @2: 'pass' = limited skip economy; 'forfeit-draw' = unlimited escape drawing a forfeit card from the dare deck. */
@@ -83,10 +90,10 @@ export interface TruthDareConfig {
 /** truth-or-dare-2 (FUN mainline config — wave2 §2.7). */
 export const TRUTH_OR_DARE_2_CONFIG: TruthDareConfig = {
   totalRounds: 3,
-  chooseMs: 15_000,
-  promptMs: 45_000,
-  verdictMs: 20_000,
-  scoreMs: 6_000,
+  chooseMs: 9_000,
+  promptMs: 38_000,
+  verdictMs: 14_000,
+  scoreMs: 8_500,
   passesPerPlayer: 2,
   allowedIntensities: ['soft', 'party'],
   donePoints: 10,
@@ -94,6 +101,7 @@ export const TRUTH_OR_DARE_2_CONFIG: TruthDareConfig = {
   chickenedPoints: 0,
   dareBonus: 5,
   verdictThreshold: 0.5,
+  spectatorPoints: 2,
   allowedChoices: ['truth', 'dare'],
   escapeMode: 'pass',
   deck: 'fun',
@@ -119,9 +127,9 @@ export const TRUTH_OR_DARE_LOVER_CONFIG: TruthDareConfig = {
 export const TRUTH_OR_DRINK_CONFIG: TruthDareConfig = {
   totalRounds: 2,
   chooseMs: 0, // auto-skipped: allowedChoices has one entry
-  promptMs: 35_000,
-  verdictMs: 15_000,
-  scoreMs: 7_000,
+  promptMs: 30_000,
+  verdictMs: 12_000,
+  scoreMs: 8_500,
   passesPerPlayer: 0, // ignored: escape is unlimited under forfeit-draw
   allowedIntensities: ['party', 'spicy'],
   donePoints: 10,
@@ -129,6 +137,7 @@ export const TRUTH_OR_DRINK_CONFIG: TruthDareConfig = {
   chickenedPoints: 0,
   dareBonus: 0,
   verdictThreshold: 0.5,
+  spectatorPoints: 2,
   allowedChoices: ['truth'],
   escapeMode: 'forfeit-draw',
   deck: null,
@@ -163,6 +172,13 @@ export interface TdResult {
   pointsAwarded: number;
   /** Drawn from the dare deck when the escape was taken under 'forfeit-draw'; null otherwise. */
   forfeitText: LText | null;
+  /**
+   * "Call your shot" outcome (CC-1) — COUNTS ONLY, no names (TK10 anti-griefing
+   * floor preserved). `correct`: spectators whose prediction matched the final
+   * verdict; `total`: spectators who predicted at all; `pointsEach`: the
+   * spectatorPoints each correct predictor was awarded.
+   */
+  spectatorTally: { correct: number; total: number; pointsEach: number };
 }
 
 export interface TruthDareState {
@@ -202,6 +218,17 @@ export interface TruthDareState {
   /** HIDDEN: per-voter verdict buffer; promoted to a public tally only at score. */
   verdicts: Record<PlayerId, Verdict>;
 
+  // --- call-your-shot predictions (CC-1) ---
+  /**
+   * HIDDEN: per-spectator "call your shot" prediction buffer (done|chickened),
+   * placed during `prompt` by non-active connected players. A SEPARATE buffer
+   * from `verdicts` — a prediction is NEVER an `acted` verdict entry and is
+   * never counted toward the verdict's `allActed` early-resolve. Resolved
+   * against the turn's FINAL public outcome at score; only owner-echo + an
+   * aggregate count ever surface (per-voter identity NEVER exposed, TK10).
+   */
+  predictions: Record<PlayerId, Verdict>;
+
   // --- persistent ---
   scores: Record<PlayerId, number>;
   passesLeft: Record<PlayerId, number>;
@@ -213,7 +240,9 @@ export type TruthDareAction =
   | { kind: 'declare'; result: Verdict }
   /** The escape button: pass (limited) or drink/forfeit (unlimited), per escapeMode. */
   | { kind: 'pass' }
-  | { kind: 'verdict'; vote: Verdict };
+  | { kind: 'verdict'; vote: Verdict }
+  /** CC-1 "call your shot": a non-active spectator's hidden done|chickened prediction, placed during `prompt`. */
+  | { kind: 'predict'; bet: Verdict };
 
 /** Scaffolding present in every non-over view (rotation rail + HUD). */
 export interface TdCommonView {
@@ -243,6 +272,12 @@ export type TruthDareView =
       promptText: LText;
       /** Viewer-specific: active AND the escape is available to them. */
       canPass: boolean;
+      /** CC-1 viewer-specific: non-active && connected && not-yet-predicted. */
+      youCanPredict: boolean;
+      /** CC-1 owner-only echo of the viewer's own prediction — never anyone else's. */
+      youPredicted: Verdict | null;
+      /** CC-1 aggregate: how many spectators have called their shot (count only, no names). */
+      predictionsIn: number;
     })
   | (TdCommonView & {
       phase: 'verdict';

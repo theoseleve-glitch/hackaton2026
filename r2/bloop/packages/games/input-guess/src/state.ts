@@ -138,6 +138,21 @@ export const CINQUANTE_CINQUANTE_CONFIG: CrowdTargetConfig = {
 /** Internal phase. phaseKey renders the collect phase as 'guess' (closest-number) or 'pick' (crowd-target). */
 export type InputGuessPhase = 'guess' | 'reveal' | 'over';
 
+/**
+ * Named reveal call-outs derived PURELY from already-public reveal data
+ * (guesses/answer/picks) via the kit epilogue helpers — NO new secret, no RNG,
+ * no clock. The client renders these as the "TOI t'as guessé ça ?!" beat.
+ * Each list is in stable ascending-playerId order; empty when nobody qualifies.
+ */
+export interface ClosestCallOuts {
+  /** « Pile ! » — exact-hit players (mirrors `exact`, surfaced for the call-out layer). */
+  pile: PlayerId[];
+  /** Closest guess(es) — the rank-0 winner(s) by |guess − answer| (ties all listed). */
+  closest: PlayerId[];
+  /** Biggest whiff — the answerer(s) with the MAX |guess − answer| (busted excluded). */
+  wildest: PlayerId[];
+}
+
 /** Promoted from the hidden buffer at resolve — public from reveal on. */
 export interface ClosestRoundResult {
   kind: 'closest-number';
@@ -155,6 +170,20 @@ export interface ClosestRoundResult {
   multiplier: number;
   /** bustIfOver only: players eliminated for over-bidding. */
   busted: PlayerId[];
+  /** Named call-outs derived from the public guesses/answer (reveal-only social fuel). */
+  callOuts: ClosestCallOuts;
+}
+
+/**
+ * Named reveal call-outs for crowd-target, derived PURELY from already-public
+ * reveal data (picks + winning/worst card indexes) — NO new secret. Stable
+ * ascending-playerId order; empty when nobody qualifies.
+ */
+export interface CrowdCallOuts {
+  /** Lone-genius — the SOLE picker of a winning (closest) card; empty if 0 or ≥2 pickers hit it. */
+  loneGenius: PlayerId[];
+  /** Most-fooled — picker(s) of the farthest-from-target card that anyone actually picked. */
+  mostFooled: PlayerId[];
 }
 
 export interface CrowdRoundResult {
@@ -170,6 +199,8 @@ export interface CrowdRoundResult {
   /** True when the winning distance ≤ bullseyeWindowPct. */
   bullseye: boolean;
   pointsEarned: Record<PlayerId, number>;
+  /** Named call-outs derived from the public picks/distances (reveal-only social fuel). */
+  callOuts: CrowdCallOuts;
 }
 
 export type InputGuessRoundResult = ClosestRoundResult | CrowdRoundResult;
@@ -192,6 +223,14 @@ export interface InputGuessState {
    * crowd-target: the picked card index (display order).
    */
   submissions: Record<PlayerId, number>;
+  /**
+   * PUBLIC append-only lock order for the live submission ticker: the players
+   * who have locked in this round, in the order they FIRST submitted. Carries
+   * NO value — only identity + order, already implied by the public
+   * `hasSubmitted` map. Reset (to []) at every new guess phase alongside
+   * `submissions`. Drives the "4/6 verrouillés… Léa first, you're last" beat.
+   */
+  submitOrder: PlayerId[];
   scores: Record<PlayerId, number>;
   lastResult: InputGuessRoundResult | null;
 }
@@ -240,6 +279,10 @@ export type InputGuessView =
       finalRound: boolean;
       hasSubmitted: Record<PlayerId, boolean>;
       mySubmission: number | null;
+      /** Live ticker: how many players have locked in (aggregate, no value). */
+      submittedCount: number;
+      /** Live ticker: who locked in, in first-submission order (identity only). */
+      lockOrder: PlayerId[];
     })
   | (RoundViewBase & {
       phase: 'guess';
@@ -250,6 +293,10 @@ export type InputGuessView =
       cards: CrowdCardPublic[];
       hasSubmitted: Record<PlayerId, boolean>;
       mySubmission: number | null;
+      /** Live ticker: how many players have locked in (aggregate, no value). */
+      submittedCount: number;
+      /** Live ticker: who locked in, in first-submission order (identity only). */
+      lockOrder: PlayerId[];
     })
   | (RoundViewBase & {
       phase: 'reveal';

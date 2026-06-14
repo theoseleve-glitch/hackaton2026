@@ -1,6 +1,6 @@
 import type { PlayerId } from '@bloop/engine';
 import { connectedPlayers, emptyPlayerMap } from '@bloop/kit';
-import { crew, currentItem, eligibleJudges, tapCount, tapGoal } from './helpers.js';
+import { crew, currentItem, eligibleJudges, reactionCounts, reactors, tapCount, tapGoal } from './helpers.js';
 import type {
   ConstraintCard,
   PerformJudgeState,
@@ -14,6 +14,7 @@ type S = PerformJudgeState;
 export const EMPTY_RESULT: TurnResult = {
   performer: '', partner: null, item: null, outcome: 'void',
   tally: null, stars: null, fast: false, points: {},
+  reactions: { fire: 0, laugh: 0, cringe: 0 },
 };
 
 /**
@@ -94,6 +95,15 @@ export function projectView(state: S, viewer: PlayerId): PerformJudgeView {
         })()
         : null,
       myDone: config.mode === 'rate' && state.taps[viewer] === true,
+      // CC-4 — PUBLIC aggregate counts to everyone; the viewer's own reaction is
+      // an owner-only echo (own-property check, never a prototype-walk that could
+      // surface a foreign player's reaction for an id like "__proto__").
+      reactionCounts: reactionCounts(state),
+      myReaction: Object.prototype.hasOwnProperty.call(state.reactions, viewer)
+        ? state.reactions[viewer]!
+        : null,
+      canReact: reactors(state).includes(viewer)
+        && !Object.prototype.hasOwnProperty.call(state.reactions, viewer),
       canClaimDone: config.mode === 'guided' && isPerformer,
       canGiveUp: config.mode === 'guided' && isPerformer,
       canPass: (config.mode === 'guided' || config.mode === 'credit')

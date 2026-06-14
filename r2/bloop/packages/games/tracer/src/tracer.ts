@@ -1,6 +1,6 @@
 import type { Effect, GameModule, PlayerId, ReduceResult } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { emptyPlayerMap } from '@bloop/kit';
+import { emptyPlayerMap, scoreDelta } from '@bloop/kit';
 import {
   DEFAULT_CONFIG,
   type TracerAction,
@@ -15,6 +15,18 @@ export interface TracerContent {
   prompts: TracerPrompt[];
 }
 
+/**
+ * Split the single `revealMs` budget into the two-beat reveal: a short held
+ * breath (suspense) then the slam (verdict). The suspense beat is capped at a
+ * quarter of the budget (≤ 1500 ms) so it reads as a breath, not a wait; the
+ * verdict gets the remainder. Pure & deterministic; suspense + verdict ===
+ * revealMs, so total reveal wall-time is byte-for-byte unchanged.
+ */
+function revealBeats(revealMs: number): { suspense: number; verdict: number } {
+  const suspense = Math.min(1_500, Math.floor(revealMs / 4));
+  return { suspense, verdict: revealMs - suspense };
+}
+
 function tallyVotes(state: TracerState): Record<PlayerId, number> {
   const counts = emptyPlayerMap<number>();
   for (const p of state.players) counts[p] = 0;
@@ -24,29 +36,72 @@ function tallyVotes(state: TracerState): Record<PlayerId, number> {
   return counts;
 }
 
-function resolveReveal(state: TracerState): ReduceResult<TracerState> {
+/**
+ * The room-designated player(s) for the round: everyone tied at the max tally,
+ * in roster order, when `max > 0`. Aggregate-derived from the public tally — it
+ * names WHO the room pointed at, never WHO voted. Empty on a zero-vote round.
+ * Deterministic (roster order, no RNG).
+ */
+function designatedTargets(state: TracerState): PlayerId[] {
   const counts = tallyVotes(state);
   const max = Math.max(0, ...Object.values(counts));
+  if (max <= 0) return [];
+  return state.players.filter((p) => counts[p] === max);
+}
+
+/**
+ * The post-round scoreboard: `+1` to every designated player. PURE — does not
+ * mutate `state.scores`; the caller decides whether/when to commit it. The
+ * deferred-scoring keystone (CC-3): `resolveReveal` computes this but holds it,
+ * `resolveVerdict` commits it, so the number visibly CLIMBS at the slam.
+ */
+function awardedScores(state: TracerState): Record<PlayerId, number> {
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores);
-  if (max > 0) {
-    for (const p of state.players) {
-      if (counts[p] === max) scores[p] = (scores[p] ?? 0) + 1;
-    }
+  for (const p of designatedTargets(state)) {
+    scores[p] = (scores[p] ?? 0) + 1;
   }
+  return scores;
+}
+
+/**
+ * Vote -> reveal SUSPENSE beat. Crucially does NOT score: scores stay frozen at
+ * their pre-round value so the climb lands at the verdict slam, not before it.
+ * The `round_revealed` analytic fires at the verdict beat (where the result is
+ * actually decided), not here.
+ */
+function resolveReveal(state: TracerState): ReduceResult<TracerState> {
+  return {
+    state: { ...state, phase: 'reveal', revealStep: 'suspense' },
+    effects: [],
+  };
+}
+
+/**
+ * Reveal SUSPENSE -> VERDICT slam. Commits the deferred `+1` (the score climbs
+ * NOW), names the designated player(s) via the view, and emits `round_revealed`.
+ */
+function resolveVerdict(state: TracerState): ReduceResult<TracerState> {
+  const scores = awardedScores(state);
   const effects: Effect[] = [
     { type: 'analytics', name: 'round_revealed', props: { round: state.round } },
   ];
-  return { state: { ...state, phase: 'reveal', scores }, effects };
+  return { state: { ...state, revealStep: 'verdict', scores }, effects };
 }
 
 function nextRound(state: TracerState): ReduceResult<TracerState> {
   const round = state.round + 1;
   if (round >= state.config.totalRounds) {
-    const over: TracerState = { ...state, phase: 'over' };
+    const over: TracerState = { ...state, phase: 'over', revealStep: null };
     return { state: over, effects: [{ type: 'gameOver', scores: { ...over.scores } }] };
   }
   return {
-    state: { ...state, round, phase: 'vote', votes: emptyPlayerMap<PlayerId>() },
+    state: {
+      ...state,
+      round,
+      phase: 'vote',
+      revealStep: null,
+      votes: emptyPlayerMap<PlayerId>(),
+    },
     effects: [],
   };
 }
@@ -82,6 +137,7 @@ export function createTracer(
         prompts: shuffled,
         round: 0,
         phase: 'vote',
+        revealStep: null,
         votes: emptyPlayerMap<PlayerId>(),
         scores,
       };
@@ -108,7 +164,11 @@ export function createTracer(
 
       if (event.type === 'deadline') {
         if (state.phase === 'vote') return resolveReveal(state);
-        if (state.phase === 'reveal') return nextRound(state);
+        if (state.phase === 'reveal') {
+          // Two-beat reveal: suspense hop -> verdict slam -> next round.
+          if (state.revealStep === 'suspense') return resolveVerdict(state);
+          return nextRound(state);
+        }
       }
 
       return { state, effects: [] };
@@ -131,12 +191,31 @@ export function createTracer(
         };
       }
       if (state.phase === 'reveal') {
+        const designated = designatedTargets(state);
+        const isVerdict = state.revealStep === 'verdict';
+        // SUSPENSE: scores frozen at pre-round value, nothing awarded yet (empty
+        // delta) so the client holds. VERDICT: state.scores already carries the
+        // climbed total; reconstruct the pre-round scores (post minus this
+        // round's +1 to each designated player) so kit scoreDelta animates the
+        // honest climb. Derived from PUBLIC scores only — never leaks ballots.
+        let delta: Record<PlayerId, number> = emptyPlayerMap<number>();
+        if (isVerdict) {
+          const before = emptyPlayerMap<number>();
+          const awarded = new Set(designated);
+          for (const p of state.players) {
+            before[p] = (state.scores[p] ?? 0) - (awarded.has(p) ? 1 : 0);
+          }
+          delta = scoreDelta(before, state.scores);
+        }
         return {
           phase: 'reveal',
           round: state.round,
           totalRounds: state.config.totalRounds,
           prompt,
           tally: tallyVotes(state),
+          revealStep: isVerdict ? 'verdict' : 'suspense',
+          delta,
+          designated,
           scores: state.scores,
         };
       }
@@ -145,12 +224,24 @@ export function createTracer(
 
     phaseDurationMs(state) {
       if (state.phase === 'vote') return state.config.voteMs;
-      if (state.phase === 'reveal') return state.config.revealMs;
+      if (state.phase === 'reveal') {
+        // Split the single reveal budget into a short held breath then the slam,
+        // preserving total reveal wall-time exactly (suspense + verdict ===
+        // revealMs). Deterministic, derived from config — no wall clock.
+        const { suspense, verdict } = revealBeats(state.config.revealMs);
+        return state.revealStep === 'verdict' ? verdict : suspense;
+      }
       return null;
     },
 
     phaseKey(state) {
-      return state.phase === 'over' ? 'over' : `${state.phase}:${state.round}`;
+      if (state.phase === 'over') return 'over';
+      if (state.phase === 'reveal') {
+        // The extra sub-step needs a distinct key so the deadline scheduler
+        // re-arms on suspense -> verdict (Risk #4: an extra deadline hop).
+        return `reveal:${state.round}:${state.revealStep ?? 'suspense'}`;
+      }
+      return `${state.phase}:${state.round}`;
     },
   };
 }

@@ -55,8 +55,15 @@ export function asSpotlightGuessView(v: unknown): SpotlightGuessView | null {
 
   if (o.mode === 'scale') {
     if (!isDomain(o.domain) || !isItem(o.item ?? null)) return null;
-    if (o.phase === 'target' || o.phase === 'talk') {
+    if (o.phase === 'target') {
       return typeof o.canEndTalk === 'boolean' && isNumOrNull(o.myTarget ?? null)
+        ? (v as SpotlightGuessView) : null;
+    }
+    // KEYSTONE (P0-A) live-dial — talk now also carries the hidden-buffer aggregate
+    // (hasGuessed) + the viewer's own dial echo (myGuess), like the guess phase.
+    if (o.phase === 'talk') {
+      return typeof o.canEndTalk === 'boolean' && isNumOrNull(o.myTarget ?? null)
+        && isRec(o.hasGuessed, 'boolean') && isNumOrNull(o.myGuess ?? null)
         ? (v as SpotlightGuessView) : null;
     }
     if (o.phase === 'guess') {
@@ -75,7 +82,9 @@ export function asSpotlightGuessView(v: unknown): SpotlightGuessView | null {
   if (o.phase === 'answer') {
     const qOk = o.question === null || o.question === undefined || isLText(o.question);
     const aOk = o.answers === null || o.answers === undefined || isLTextArray(o.answers);
-    return qOk && aOk ? (v as SpotlightGuessView) : null;
+    // KEYSTONE (P0-B-lite) react — content-free public aggregate (count) + owner echo.
+    const rOk = typeof o.reactCount === 'number' && typeof o.myReact === 'boolean';
+    return qOk && aOk && rOk ? (v as SpotlightGuessView) : null;
   }
   if (o.phase === 'guess') {
     return typeof o.hintTier === 'number' && typeof o.hintTiers === 'number'

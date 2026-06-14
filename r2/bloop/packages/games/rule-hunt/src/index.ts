@@ -3,7 +3,9 @@ export { ruleHuntActionSchema } from './actions.js';
 export { TROUVEZ_LA_REGLE_CONFIG } from './state.js';
 export type {
   DetectiveCount,
+  FlagBet,
   LText,
+  NoteBet,
   RoundOutcome,
   RuleCategory,
   RuleDifficulty,

@@ -140,9 +140,11 @@ the literals as below) and the fixture entry:
   }],
 ```
 
-Deadline-walk budget: from the fixture state the worst case is 18 steps to
+Deadline-walk budget: from the fixture state the walk is exactly 19 steps to
 `over` (4 beats finish match 0 — the buffered tie misses, verdict, discuss p1,
-all-abstain vote 2 — then 7 beats × 2 remaining matches), under the audit's 25.
+all-abstain vote 2 — then 1 beat into match 1 and 7 beats × 2 remaining
+matches), under the audit's 25. Verified against the real authored pack in
+`test/audit-fixture.test.ts` (same seed, same events, leakedSecrets included).
 
 Note the fixture events INCLUDE the two deadline events — `fold` applies them
 through `reduce`, and the module accepts them (state advances), so the

@@ -42,6 +42,13 @@ export interface LastStandingConfig {
   roundEndMs: number;
   validWordPoints: number;
   survivorPoints: number;
+  /**
+   * Side-bet reward (P0-1 keystone). Points a non-spotlight predictor earns for
+   * a CORRECT "survives | chokes" call on the spotlight, paid into the SEPARATE
+   * `betPoints` currency (never survivorPoints/validWordPoints). 0 disables the
+   * payout (the bet UI may still render; nobody scores).
+   */
+  betPointsConfig: number;
   /** Rejected iff rejectVotes/castVotes STRICTLY exceeds this; ties/zero → valid. */
   rejectThreshold: number;
   /** Hard cap: rotation.length × this = max turns per round (safety belt). */
@@ -55,15 +62,16 @@ export interface LastStandingConfig {
 /** The binding wave-2 design params (docs/designs/wave2-raw/by-game/jeu-du-theme.json). */
 export const JEU_DU_THEME_CONFIG: LastStandingConfig = {
   totalRounds: 3,
-  drawMs: 4_000,
+  drawMs: 2_500,
   sayMs: 8_000,
   sayDecayPerLapMs: 1_500,
   minSayMs: 3_000,
   judgeMs: 6_000,
-  resultMs: 2_000,
+  resultMs: 2_800,
   roundEndMs: 4_000,
   validWordPoints: 1,
   survivorPoints: 3,
+  betPointsConfig: 1,
   rejectThreshold: 0.5,
   maxTurnsPerRoundFactor: 6,
   difficultyCurve: 'ascending',
@@ -74,6 +82,14 @@ export const JEU_DU_THEME_CONFIG: LastStandingConfig = {
 export type LastStandingPhase = 'draw' | 'say' | 'judge' | 'result' | 'roundEnd' | 'over';
 
 export type JudgeVote = 'valid' | 'reject';
+
+/**
+ * P0-1 keystone — the spotlight side-bet token. A non-spotlight player secretly
+ * predicts whether the current word will SURVIVE the jury (`'survives'`) or
+ * CHOKE/fail (`'chokes'`). Resolved at the turn result against the public
+ * outcome: a turn that ends 'valid' = survives, anything else = chokes.
+ */
+export type SpotBet = 'survives' | 'chokes';
 
 export type TurnOutcome = 'valid' | 'rejected' | 'timeout' | 'gaveUp' | 'left';
 
@@ -120,9 +136,23 @@ export interface LastStandingState {
   usedLetters: Record<string, string[]>;
   /** HIDDEN: in-flight ballots — only tallies are ever published. */
   judgeVotes: Record<PlayerId, JudgeVote>;
+  /**
+   * HIDDEN (P0-1 keystone): in-flight spotlight side-bets for the current turn.
+   * A SEPARATE buffer from judgeVotes — it is NEVER counted toward the jury
+   * tally or the allActed early-resolve. Per-turn, reset at each enterTurn.
+   * Redacted exactly like judgeVotes: owner-echo + public count only, never a
+   * foreign player's call. Resolved into betPoints at toResult.
+   */
+  spotBets: Record<PlayerId, SpotBet>;
   lastTurn: TurnResult | null;
   roundWinners: PlayerId[];
   scores: Record<PlayerId, number>;
+  /**
+   * Side-bet currency (P0-1). DISTINCT from `scores` — correct survives/chokes
+   * predictions accrue here so eliminated players keep earning without ever
+   * touching word/survivor points or the survival/elimination logic.
+   */
+  betPoints: Record<PlayerId, number>;
   /** Validated-words count per player (end-screen superlative + participation). */
   wordsValidated: Record<PlayerId, number>;
 }
@@ -130,7 +160,8 @@ export interface LastStandingState {
 export type LastStandingAction =
   | { kind: 'wordSaid' }
   | { kind: 'giveUp' }
-  | { kind: 'judge'; vote: JudgeVote };
+  | { kind: 'judge'; vote: JudgeVote }
+  | { kind: 'bet'; value: SpotBet };
 
 /** Common scaffold for every in-game phase view. */
 export interface LastStandingViewBase {
@@ -146,13 +177,29 @@ export interface LastStandingViewBase {
   /** The decayed shot-clock duration for the current lap (UI hint). */
   sayMsThisLap: number;
   scores: Record<PlayerId, number>;
+  /**
+   * Side-bet currency (P0-1) — PUBLIC like `scores`. It only ever changes when a
+   * turn resolves (in toResult), so a live value can never leak an in-flight
+   * call: the per-player `spotBets` buffer stays hidden until then.
+   */
+  betPoints: Record<PlayerId, number>;
   wordsValidated: Record<PlayerId, number>;
   lastTurn: TurnResult | null;
 }
 
 export type LastStandingView =
   | (LastStandingViewBase & { phase: 'draw' })
-  | (LastStandingViewBase & { phase: 'say'; youAreSpotlight: boolean; canGiveUp: boolean })
+  | (LastStandingViewBase & {
+      phase: 'say';
+      youAreSpotlight: boolean;
+      canGiveUp: boolean;
+      /** P0-1: this viewer may place a survives/chokes call (non-spotlight, present, not-yet-bet). */
+      youCanBet: boolean;
+      /** Own side-bet echo ONLY — never anyone else's call. */
+      myBet: SpotBet | null;
+      /** Aggregate count of bets placed this turn (leaks no value). */
+      betsIn: number;
+    })
   | (LastStandingViewBase & {
       phase: 'judge';
       youCanVote: boolean;
@@ -168,4 +215,6 @@ export type LastStandingView =
       scores: Record<PlayerId, number>;
       rotation: PlayerId[];
       wordsValidated: Record<PlayerId, number>;
+      /** Side-bet currency (P0-1) — public end-screen tally of correct calls. */
+      betPoints: Record<PlayerId, number>;
     };

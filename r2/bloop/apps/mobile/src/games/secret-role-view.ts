@@ -55,8 +55,11 @@ export function asSecretRoleView(v: unknown): SecretRoleView | null {
       ? (v as SecretRoleView) : null;
   }
   if (o.phase === 'discuss') {
+    // CC-1 lean: owner-only echo (`myLean`) + a public count (`leanCount`).
     return typeof o.period === 'number' && isRec(o.ready, 'boolean')
       && typeof o.iAmReady === 'boolean' && isLastVote(o.lastVote ?? null)
+      && (o.myLean === null || typeof o.myLean === 'string')
+      && typeof o.leanCount === 'number'
       ? (v as SecretRoleView) : null;
   }
   if (o.phase === 'vote') {

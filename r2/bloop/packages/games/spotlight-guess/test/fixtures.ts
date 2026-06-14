@@ -130,6 +130,9 @@ export const answer = (playerId: string, answerIndex: number, at = 0): Ev =>
 export const guess = (playerId: string, value: number, at = 0): Ev =>
   ({ type: 'action', playerId, action: { kind: 'guess', value }, at });
 
+export const react = (playerId: string, at = 0): Ev =>
+  ({ type: 'action', playerId, action: { kind: 'react' }, at });
+
 export const deadline = (at = 0): Ev => ({ type: 'deadline', at });
 
 export const left = (playerId: string, at = 0): Ev => ({ type: 'playerLeft', playerId, at });

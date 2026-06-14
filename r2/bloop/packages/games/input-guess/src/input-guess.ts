@@ -7,6 +7,7 @@ import {
   gameOver,
   initPresence,
   setConnected,
+  statLeaders,
 } from '@bloop/kit';
 import type {
   ClosestNumberConfig,
@@ -30,11 +31,13 @@ const EMPTY_TEXT: LText = { fr: '', en: '' };
 const EMPTY_CLOSEST: ClosestRoundResult = {
   kind: 'closest-number', itemId: '', answer: 0, guesses: {}, ranking: [],
   pointsEarned: {}, exact: [], multiplier: 1, busted: [],
+  callOuts: { pile: [], closest: [], wildest: [] },
 };
 
 const EMPTY_CROWD: CrowdRoundResult = {
   kind: 'crowd-target', itemId: '', targetYesPct: 50, picks: {},
   winningCards: [], secondCards: [], bullseye: false, pointsEarned: {},
+  callOuts: { loneGenius: [], mostFooled: [] },
 };
 
 function numberItem(state: InputGuessState): NumberQuestionItem | null {
@@ -91,9 +94,26 @@ function resolveClosest(state: InputGuessState, config: ClosestNumberConfig): Re
   }
   for (const p of busted) pointsEarned[p] = 0;
 
+  // Call-outs — derived PURELY from the now-public guesses/answer (no secret).
+  // closest = the smallest-distance group; wildest = the largest. Both via the
+  // kit `statLeaders` fold over non-busted answerers' distances. statLeaders
+  // ignores values <= 0, so for "closest" we rank by (maxD + 1 − d): the
+  // smallest distance scores highest and an exact (d=0) hit stays eligible.
+  // Results inherit statLeaders' stable ascending-id order.
+  const maxD = ranked.length === 0 ? 0 : Math.max(...ranked.map((r) => r.d));
+  const dist = emptyPlayerMap<number>();
+  const closeness = emptyPlayerMap<number>();
+  for (const { p, d } of ranked) {
+    dist[p] = d;
+    closeness[p] = maxD + 1 - d;
+  }
+  const closest = ranked.length === 0 ? [] : statLeaders(closeness).players;
+  const wildest = ranked.length === 0 ? [] : statLeaders(dist).players;
+
   const lastResult: ClosestRoundResult = {
     kind: 'closest-number', itemId: item?.id ?? '', answer, guesses,
     ranking: ranked.map((r) => r.p), pointsEarned, exact, multiplier, busted,
+    callOuts: { pile: [...exact], closest, wildest },
   };
   return {
     state: { ...state, phase: 'reveal', scores, lastResult },
@@ -134,9 +154,26 @@ function resolveCrowd(state: InputGuessState, config: CrowdTargetConfig): Reduce
     scores[p] = (scores[p] ?? 0) + pts;
   }
 
+  // Call-outs — derived PURELY from the now-public picks + per-card distances.
+  // loneGenius: the SOLE picker of any winning (closest) card. mostFooled:
+  // picker(s) of the farthest-from-target card that anyone actually picked.
+  // Iterate state.players (stable roster order) and dedup; no RNG, no secret.
+  const pickers = state.players.filter((p) => picks[p] !== undefined);
+  const winnerPickers = pickers.filter((p) => winningCards.includes(picks[p]!));
+  const loneGenius = winnerPickers.length === 1 ? [winnerPickers[0]!] : [];
+  let worstPicked = -1;
+  for (const p of pickers) {
+    const d = ds[picks[p]!];
+    if (d !== undefined && d > worstPicked) worstPicked = d;
+  }
+  const mostFooled = worstPicked < 0
+    ? []
+    : pickers.filter((p) => ds[picks[p]!] === worstPicked);
+
   const lastResult: CrowdRoundResult = {
     kind: 'crowd-target', itemId: item?.id ?? '', targetYesPct: item?.targetYesPct ?? 50,
     picks, winningCards, secondCards, bullseye, pointsEarned,
+    callOuts: { loneGenius: [...loneGenius], mostFooled: [...mostFooled] },
   };
   return {
     state: { ...state, phase: 'reveal', scores, lastResult },
@@ -161,7 +198,10 @@ function endRound(state: InputGuessState): ReduceResult<InputGuessState> {
     return { state: over, effects: [...effects, gameOver(over.scores)] };
   }
   return {
-    state: { ...state, round, phase: 'guess', submissions: emptyPlayerMap<number>(), lastResult: null },
+    state: {
+      ...state, round, phase: 'guess',
+      submissions: emptyPlayerMap<number>(), submitOrder: [], lastResult: null,
+    },
     effects,
   };
 }
@@ -229,6 +269,7 @@ export function createInputGuess(
         round: 0,
         phase: totalRounds === 0 ? 'over' : 'guess',
         submissions: emptyPlayerMap<number>(),
+        submitOrder: [],
         scores,
         lastResult: null,
       };
@@ -244,7 +285,12 @@ export function createInputGuess(
         const value = validSubmission(state, action);
         if (value === null) return { state, effects: [] };
         const submissions = Object.assign(emptyPlayerMap<number>(), state.submissions, { [playerId]: value });
-        const next = { ...state, submissions };
+        // Append-only lock order for the live ticker: record a player the FIRST
+        // time they lock in (a changed guess does not re-append). Identity only.
+        const submitOrder = state.submissions[playerId] === undefined
+          ? [...state.submitOrder, playerId]
+          : state.submitOrder;
+        const next = { ...state, submissions, submitOrder };
         if (earlyAdvance(next.config) && allActed(connectedPlayers(next.players, next.connected), submissions)) {
           return resolve(next);
         }
@@ -283,6 +329,11 @@ export function createInputGuess(
         const hasSubmitted = emptyPlayerMap<boolean>();
         for (const p of state.players) hasSubmitted[p] = state.submissions[p] !== undefined;
         const mySubmission = state.submissions[viewer] ?? null;
+        // Live ticker — identity + count only, NO value. The lock order is
+        // already implied by the public `hasSubmitted` map; cloned so the view
+        // never aliases hidden state.
+        const submittedCount = state.submitOrder.length;
+        const lockOrder = [...state.submitOrder];
         if (state.config.mode === 'closest-number') {
           const q = numberItem(state);
           // answer + funFact stay OUT of the guess view — value secrets until reveal.
@@ -294,7 +345,7 @@ export function createInputGuess(
             scale: q?.scale ?? 'linear',
             maxInputDigits: state.config.maxInputDigits,
             finalRound: state.round === state.config.totalRounds - 1,
-            hasSubmitted, mySubmission,
+            hasSubmitted, mySubmission, submittedCount, lockOrder,
           };
         }
         const c = crowdItem(state);
@@ -305,7 +356,7 @@ export function createInputGuess(
           askKind: c?.askKind ?? 'didYou',
           targetYesPct: c?.targetYesPct ?? 50,
           cards: (c?.completions ?? []).map(({ id: cid, text }) => ({ id: cid, text })),
-          hasSubmitted, mySubmission,
+          hasSubmitted, mySubmission, submittedCount, lockOrder,
         };
       }
 

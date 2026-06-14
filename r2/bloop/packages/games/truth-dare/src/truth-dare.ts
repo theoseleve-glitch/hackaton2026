@@ -4,9 +4,13 @@ import {
   allActed,
   connectedPlayers,
   emptyPlayerMap,
+  emptySideBets,
   gameOver,
   initPresence,
   nextActiveSeat,
+  placeSideBet,
+  redactSideBets,
+  resolveSideBets,
   setConnected,
 } from '@bloop/kit';
 import type {
@@ -85,7 +89,28 @@ function resolveChoice(state: S, choice: Choice, effects: Effect[]): R {
   };
 }
 
-/** Resolve the turn into the score reveal. Scores only the active player; voters never score. */
+/**
+ * The binary truth a "call your shot" prediction is scored against: the active
+ * player COMPLETED ('done') iff the turn verdict is 'done'; a 'chickened' OR a
+ * 'passed'/escaped turn both mean they did NOT complete, so a 'chickened'
+ * prediction wins. (Predictions are done|chickened; the TurnVerdict adds the
+ * 'passed' escape, which folds into "did not complete".)
+ */
+function predictionOutcome(verdict: TurnVerdict): Verdict {
+  return verdict === 'done' ? 'done' : 'chickened';
+}
+
+/** A correct prediction pays spectatorPoints; a wrong one pays 0 (upside-only, never docks). */
+function spectatorPayout(points: number): (bet: Verdict, outcome: Verdict) => number {
+  return (bet, outcome) => (bet === outcome ? points : 0);
+}
+
+/**
+ * Resolve the turn into the score reveal. Scores the active player by `points`;
+ * voters never score for the VERDICT. SEPARATELY (CC-1), correct "call your
+ * shot" spectators each earn `spectatorPoints` against the FINAL public
+ * outcome — a public aggregate applied only here at the reveal, never mid-turn.
+ */
 function toScore(
   state: S,
   verdict: TurnVerdict,
@@ -98,6 +123,17 @@ function toScore(
   const scores = Object.assign(emptyPlayerMap<number>(), state.scores, {
     [state.activePlayer]: (state.scores[state.activePlayer] ?? 0) + points,
   });
+  // CC-1: resolve hidden predictions against the now-public outcome. Counts
+  // only — per-spectator identity is never surfaced (TK10 floor).
+  const specPoints = state.config.spectatorPoints;
+  const specOutcome = predictionOutcome(verdict);
+  const specDeltas = resolveSideBets(state.predictions, specOutcome, spectatorPayout(specPoints));
+  let specCorrect = 0;
+  for (const pid of Object.keys(specDeltas)) {
+    scores[pid] = (scores[pid] ?? 0) + specDeltas[pid]!;
+    specCorrect += 1;
+  }
+  const specTotal = Object.keys(state.predictions).length;
   const prompt = state.prompt!;
   return {
     state: {
@@ -115,6 +151,7 @@ function toScore(
         tally,
         pointsAwarded: points,
         forfeitText,
+        spectatorTally: { correct: specCorrect, total: specTotal, pointsEach: specPoints },
       },
     },
     effects,
@@ -193,6 +230,7 @@ function enterTurn(state: S, effects: Effect[]): R {
     prompt: null,
     outcome: null,
     verdicts: emptyPlayerMap<Verdict>(),
+    predictions: emptySideBets<Verdict>(),
   };
   // TRUTH_DARE@2 allowedChoices: a single allowed choice has no choose beat.
   if (next.config.allowedChoices.length === 1) {
@@ -264,6 +302,7 @@ export function createTruthDare(
         cursors,
         usedPromptIds: [],
         verdicts: emptyPlayerMap<Verdict>(),
+        predictions: emptySideBets<Verdict>(),
         scores,
         passesLeft,
         lastResult: null,
@@ -328,6 +367,20 @@ export function createTruthDare(
           return toScore(state, 'passed', { done: 0, chickened: 0 }, state.config.passPoints, null, [
             { type: 'analytics', name: 'pass_used', props: { left: left - 1 } },
           ], { passesLeft });
+        }
+
+        if (action.kind === 'predict' && state.phase === 'prompt') {
+          // CC-1 "call your shot": a hidden spectator prediction. SEPARATE from
+          // the primary `declare`/escape act — it NEVER gates the active
+          // player's claim and is never an `acted` verdict entry, so it cannot
+          // touch the verdict's `allActed` early-resolve. Reject-invalid (bad
+          // bet, the active player, a disconnected/duplicate bettor) returns the
+          // SAME state reference via NOOP.
+          if (action.bet !== 'done' && action.bet !== 'chickened') return NOOP(state);
+          const isEligible = playerId !== state.activePlayer && state.connected[playerId] === true;
+          const predictions = placeSideBet(state.predictions, playerId, action.bet, isEligible);
+          if (predictions === null) return NOOP(state); // ineligible / duplicate -> same ref
+          return { state: { ...state, predictions }, effects: [] };
         }
 
         if (action.kind === 'verdict' && state.phase === 'verdict') {
@@ -421,6 +474,10 @@ export function createTruthDare(
         const canPass =
           youAreActive &&
           (state.config.escapeMode === 'forfeit-draw' || (state.passesLeft[viewer] ?? 0) > 0);
+        // CC-1: owner-only echo + aggregate count, never another spectator's bet.
+        const pred = redactSideBets(state.predictions, viewer);
+        const youCanPredict =
+          !youAreActive && state.connected[viewer] === true && pred.own === null;
         return {
           phase: 'prompt',
           ...common,
@@ -429,6 +486,9 @@ export function createTruthDare(
           intensity: prompt.intensity,
           promptText: prompt.text,
           canPass,
+          youCanPredict,
+          youPredicted: pred.own,
+          predictionsIn: pred.count,
         };
       }
       if (state.phase === 'verdict') {

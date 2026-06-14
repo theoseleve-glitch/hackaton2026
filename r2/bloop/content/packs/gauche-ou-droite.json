@@ -278,8 +278,8 @@
       "category": "food",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Il a un pied de basilic et maintenant il est italien.",
-        "en": "He owns one basil plant and now he's Italian."
+        "fr": "Il a un pied de basilic, donc il corrige ta façon de cuire les pâtes. Le pesto maison rend autoritaire. Quelqu'un ici en est là.",
+        "en": "He owns one basil plant, so now he corrects how you boil pasta. Homemade pesto makes people bossy. Someone here is there."
       }
     },
     {
@@ -289,8 +289,8 @@
       "category": "food",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Ça imite la viande si bien que tout le monde est vexé.",
-        "en": "Imitates meat so well that everyone's offended."
+        "fr": "Arrêter la viande, puis acheter un truc qui saigne pour faire semblant. C'est une conviction ou un manque ? Tranchez.",
+        "en": "Quit meat, then buy something engineered to bleed and fake it. Is that a conviction or a craving? Decide."
       }
     },
     {
@@ -399,8 +399,8 @@
       "category": "food",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Il a un prénom et il mange avant toi.",
-        "en": "It has a name and it eats before you do."
+        "fr": "Il a confié son levain à un pote pendant les vacances comme on confie un enfant. Il a rappelé deux fois. C'est de la farine.",
+        "en": "He left his sourdough with a friend over the holidays like it was a child. He called twice to check on it. It's flour."
       }
     },
     {
@@ -410,8 +410,8 @@
       "category": "food",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Personne n'est au-dessus du menu à 5 €.",
-        "en": "Nobody is above the value menu."
+        "fr": "Y'a celui qui poste sa salade et celui qui commande un double cheese en cachette à 23h. Souvent le même. On le sait.",
+        "en": "There's the one who posts the salad and the one who orders a double cheese alone at 11pm. Usually the same person. We know."
       }
     },
     {
@@ -1125,8 +1125,8 @@
       "category": "tech",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Il fait tout, sauf justifier son prix.",
-        "en": "It does everything except justify the price."
+        "fr": "1 200 € pour suivre une recette qu'une appli te dictait gratuitement. Mais ose dire à sa propriétaire que c'est un caprice.",
+        "en": "$1,500 to follow a recipe an app read out for free. But try telling its owner to her face that it was a splurge."
       }
     },
     {
@@ -1136,8 +1136,8 @@
       "category": "tech",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Un four avec un ventilateur, et tout le monde a craqué.",
-        "en": "It's an oven with a fan and we all fell for it."
+        "fr": "Il l'a casée dans la conversation huit fois ce mois-ci. C'est un four avec un ventilateur. Quelqu'un ici fait pareil.",
+        "en": "He's worked it into conversation eight times this month. It's an oven with a fan. Someone here does the exact same thing."
       }
     },
     {
@@ -1268,8 +1268,8 @@
       "category": "tech",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Il a un prénom et il est coincé sous le canapé.",
-        "en": "It has a name and it's stuck under the couch."
+        "fr": "Il passe l'aspi à la main avant le passage du robot, pour pas qu'il galère. Qui bosse pour qui, dans cette maison ?",
+        "en": "He vacuums by hand before the robot runs, so it won't struggle. Genuinely ask who works for whom in that house."
       }
     },
     {
@@ -1444,8 +1444,8 @@
       "category": "culture",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "Plus tu fermes les yeux en écoutant, plus tu t'y connais.",
-        "en": "The harder you close your eyes, the more you know."
+        "fr": "Personne met du jazz pour l'écouter. On le met pour que les invités pensent qu'on lit le journal en entier.",
+        "en": "Nobody puts on jazz to listen. You put it on so guests assume you read the entire newspaper, front to back."
       }
     },
     {
@@ -1576,8 +1576,8 @@
       "category": "culture",
       "spicyLevel": 0,
       "debateStarter": {
-        "fr": "On regarde « pour rigoler » depuis quinze saisons.",
-        "en": "We watch 'ironically' — fifteen seasons in."
+        "fr": "« Je regarde pour rigoler » : quinze saisons, et tu connais les prénoms par cœur. Le second degré a une date de péremption.",
+        "en": "'I only watch ironically' — fifteen seasons deep and you know everyone's name. Irony has an expiry date and you're past it."
       }
     },
     {

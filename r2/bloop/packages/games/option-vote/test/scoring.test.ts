@@ -24,6 +24,9 @@ const gauche = createOptionVote('gauche-ou-droite', GAUCHE_DROITE_CONFIG);
 function ballot(playerId: string, pick: 'A' | 'B', predict?: 'A' | 'B', at = 0): GameEvent<OptionVoteAction> {
   return { type: 'action', playerId, action: { kind: 'ballot', pick, ...(predict !== undefined ? { predict } : {}) }, at };
 }
+function predict(playerId: string, option: 'A' | 'B', at = 0): GameEvent<OptionVoteAction> {
+  return { type: 'action', playerId, action: { kind: 'predict', option }, at };
+}
 
 describe('predict-majority scoring (Tu Préfères)', () => {
   it('scores correct majority predictions only — own pick never scores', () => {
@@ -52,14 +55,42 @@ describe('predict-majority scoring (Tu Préfères)', () => {
     expect(s4.lastResult?.awarded).toEqual([]);
   });
 
-  it('predictions are never exposed in any view — only picks and awarded', () => {
+  // REDACTION AUDIT (rewritten for the CC-1 keystone, product-approved Risk #1):
+  // the majority-PREDICTION side-bet is HIDDEN during choose (no other player's
+  // prediction leaks) and EXPOSED, by name, ONLY at reveal/over. The primary
+  // ballot/pick stays anonymous exactly as before.
+  it('AUDIT: a prediction is HIDDEN during choose then EXPOSED by name only at reveal', () => {
     const s0 = tuPreferes.init('s', ['p1', 'p2', 'p3'], content);
-    const s1 = tuPreferes.reduce(s0, ballot('p1', 'A', 'A')).state;
-    const s2 = tuPreferes.reduce(s1, ballot('p2', 'A', 'B')).state;
-    const s3 = tuPreferes.reduce(s2, ballot('p3', 'B', 'A')).state;
+    // p1 & p3 predict A, p2 predicts B; everyone also ballots (pick is separate).
+    const a1 = tuPreferes.reduce(s0, predict('p1', 'A')).state;
+    const a2 = tuPreferes.reduce(a1, predict('p2', 'B')).state;
+    const a3 = tuPreferes.reduce(a2, predict('p3', 'A')).state;
+    expect(a3.phase).toBe('choose'); // predictions never resolve the round
+
+    // CHOOSE-phase audit: a non-owner sees only an aggregate count + their OWN
+    // echo, never another player's prediction value.
+    const choose = tuPreferes.view(a3, 'p2');
+    if (choose.phase !== 'choose') throw new Error('expected choose view');
+    expect(choose.predictedCount).toBe(3);
+    expect(choose.myPrediction).toBe('B'); // own echo
+    // p2's view must not carry p1/p3's 'A' prediction anywhere identifiable:
+    // there is no per-player prediction map in the choose view at all.
+    expect('predictions' in choose).toBe(false);
+
+    // Resolve: ballots make A the majority (2 vs 1).
+    const b1 = tuPreferes.reduce(a3, ballot('p1', 'A', 'A')).state;
+    const b2 = tuPreferes.reduce(b1, ballot('p2', 'A', 'B')).state;
+    const s3 = tuPreferes.reduce(b2, ballot('p3', 'B', 'A')).state;
+    expect(s3.phase).toBe('reveal');
+
+    // REVEAL: the predictions are now PUBLIC, by name, for every viewer.
     for (const viewer of ['p1', 'p2', 'p3', 'spectator']) {
       const v = tuPreferes.view(s3, viewer);
-      expect(JSON.stringify(v)).not.toContain('"predict"');
+      if (v.phase !== 'reveal') throw new Error('expected reveal view');
+      const byPlayer = Object.fromEntries(v.result.predictions.map((p) => [p.playerId, p]));
+      expect(byPlayer['p1']).toEqual({ playerId: 'p1', predicted: 'A', correct: true });
+      expect(byPlayer['p2']).toEqual({ playerId: 'p2', predicted: 'B', correct: false });
+      expect(byPlayer['p3']).toEqual({ playerId: 'p3', predicted: 'A', correct: true });
     }
   });
 });

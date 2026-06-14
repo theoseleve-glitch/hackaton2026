@@ -7,8 +7,8 @@ import {
   type SpotlightGuessView,
 } from '@bloop/game-spotlight-guess';
 import {
-  answer, deadline, guess, guessersOf, left, ready, reverseContent, reverseItems, scaleContent,
-  spotOf,
+  answer, deadline, guess, guessersOf, left, react, ready, reverseContent, reverseItems,
+  scaleContent, spotOf,
 } from './fixtures.js';
 
 const players = ['p1', 'p2', 'p3'];
@@ -89,6 +89,88 @@ describe('scale — the guess buffer is hidden until reveal', () => {
     if (v.phase !== 'guess' || v.mode !== 'scale') throw new Error('expected guess view');
     expect(v.hasGuessed[g1!]).toBe(true);
     expect(v.myGuess).toBeNull();
+  });
+
+  // KEYSTONE (P0-A) — the SAME no-leak invariant must hold for live-dials placed
+  // during the talk phase (a new, earlier write into the existing hidden buffer).
+  it("GUARD no-leak: a talk-phase live-dial NEVER leaks to a non-owner; only the owner echoes it", () => {
+    const s0 = note.init('s', players, scaleContent);
+    const talk = note.reduce(s0, ready(spotOf(s0))).state; // target -> talk
+    expect(talk.phase).toBe('talk');
+    const [g1, g2] = guessersOf(talk);
+    const a = note.reduce(talk, guess(g1!, 2)).state; // live-dial during talk
+    const b = note.reduce(talk, guess(g1!, 9)).state; // a different hidden dial
+    expect(a.phase).toBe('talk'); // talk never short-circuits on a dial
+    expect(note.phaseKey(a)).toBe(note.phaseKey(b));
+    // owner echo differs between the two hidden values
+    expect(note.view(a, g1!)).not.toEqual(note.view(b, g1!));
+    // every NON-owner view is byte-identical regardless of the hidden dial value
+    for (const viewer of [spotOf(talk), g2!, ...OUTSIDERS]) {
+      expect(note.view(a, viewer)).toEqual(note.view(b, viewer));
+    }
+    // the dial value never serializes into a non-owner talk view
+    for (const viewer of [spotOf(talk), g2!, ...OUTSIDERS]) {
+      expect(json(note.view(a, viewer))).not.toContain('"value"');
+    }
+    // acted-booleans are public from talk on; the value stays owner-only
+    const vOther = note.view(a, g2!);
+    if (vOther.phase !== 'talk' || vOther.mode !== 'scale') throw new Error('expected talk view');
+    expect(vOther.hasGuessed[g1!]).toBe(true);
+    expect(vOther.myGuess).toBeNull();
+    const vOwner = note.view(a, g1!);
+    if (vOwner.phase !== 'talk' || vOwner.mode !== 'scale') throw new Error('expected talk view');
+    expect(vOwner.myGuess).toBe(2); // owner sees only their OWN dial
+  });
+});
+
+describe('reverse — KEYSTONE react-lite (P0-B-lite): content-free, zero-leak liveness tap', () => {
+  const s0 = dq.init('s', players, reverseContent);
+  const spot = spotOf(s0);
+  const item = reverseItems.find((i) => i.id === s0.reverseRounds[0]!.itemId)!;
+
+  it('GUARD no-leak: the react carries NO question/option/candidate/hint (zero triangulation)', () => {
+    const [g1, g2] = guessersOf(s0);
+    let a = dq.reduce(s0, react(g1!)).state; // g1 taps
+    a = dq.reduce(a, react(g2!)).state; // g2 taps too
+    expect(a.phase).toBe('answer'); // reacts never advance the spotlight-only beat
+    // NON-spotlight viewers (guessers + outsiders) see nothing of the item — the
+    // react beat adds only a content-free count, never the secret question text.
+    for (const viewer of [g1!, g2!, ...OUTSIDERS]) {
+      const v = dq.view(a, viewer);
+      if (v.phase !== 'answer' || v.mode !== 'reverse-question') throw new Error('expected answer view');
+      expect(v.reactCount).toBe(2); // public aggregate only
+      const blob = json(v);
+      expect(blob).not.toContain(item.question.fr);
+      expect(blob).not.toContain(item.question.en);
+      for (const ans of item.answers) expect(blob).not.toContain(ans.fr);
+      for (const d of item.decoys) expect(blob).not.toContain(d.fr);
+      for (const h of item.hints) expect(blob).not.toContain(h.fr);
+    }
+  });
+
+  it('GUARD no-leak: owner echoes its OWN tap; a non-owner view is INVARIANT under who-tapped', () => {
+    const [g1, g2] = guessersOf(s0);
+    const tappedG1 = dq.reduce(s0, react(g1!)).state; // only g1 tapped
+    // owner (g1) sees its own true echo
+    const vOwner = dq.view(tappedG1, g1!);
+    if (vOwner.phase !== 'answer' || vOwner.mode !== 'reverse-question') throw new Error('answer view');
+    expect(vOwner.myReact).toBe(true);
+    expect(vOwner.reactCount).toBe(1);
+
+    // Structural leak check: a NON-owner's view must be byte-identical whether g1
+    // tapped or g2 tapped — only the (equal) count is public, never WHO. Compare
+    // the view of a fixed third party (the spotlight) across the two who-tapped
+    // worlds; if it differs, the marker leaked identity.
+    const tappedG2 = dq.reduce(s0, react(g2!)).state; // only g2 tapped (same count = 1)
+    expect(dq.view(tappedG1, spot)).toEqual(dq.view(tappedG2, spot));
+    for (const outsider of OUTSIDERS) {
+      expect(dq.view(tappedG1, outsider)).toEqual(dq.view(tappedG2, outsider));
+    }
+    // and the non-owner echo is honest: a non-tapper sees myReact:false + the count
+    const vOther = dq.view(tappedG1, g2!);
+    if (vOther.phase !== 'answer' || vOther.mode !== 'reverse-question') throw new Error('answer view');
+    expect(vOther.myReact).toBe(false);
+    expect(vOther.reactCount).toBe(1);
   });
 });
 

@@ -88,3 +88,61 @@ export function toTribunal(state: RuleHuntState, at = 5_000): RuleHuntState {
   if (next.phase !== 'tribunal') throw new Error(`expected tribunal, got ${next.phase}`);
   return next;
 }
+
+/**
+ * Walk the deadline machine the way the real shell does: advance a monotonic
+ * clock by each phase's armed `phaseDurationMs` and fire one deadline per step.
+ * Returns the final state plus the ordered phaseKeys visited (the starting key
+ * first). This handles the heat-check `live -> spotlight -> live` hops without
+ * any test having to count them: a passive room drains its banked live clock in
+ * `heatMs` slices, staging a spotlight on each slice, until reveal.
+ */
+export function walkDeadlines(
+  state: RuleHuntState,
+  opts: { startAt?: number; maxSteps?: number; until?: (s: RuleHuntState) => boolean } = {},
+): { state: RuleHuntState; keys: string[]; clock: number } {
+  const { startAt = 0, maxSteps = 200, until = (s) => s.phase === 'over' } = opts;
+  let s = state;
+  let clock = startAt;
+  const keys: string[] = [game.phaseKey(s)];
+  for (let i = 0; i < maxSteps && !until(s); i++) {
+    const dur = game.phaseDurationMs(s);
+    if (dur === null) break; // untimed phase (over): nothing left to fire
+    clock += Math.max(1, dur);
+    const next = game.reduce(s, deadline(clock)).state;
+    if (next === s) break; // defensive: a phase that ignores its deadline
+    s = next;
+    keys.push(game.phaseKey(s));
+  }
+  return { state: s, keys, clock };
+}
+
+/** Drain a `live` state to its terminal reveal, stepping through every forced spotlight. */
+export function liveToReveal(state: RuleHuntState, startAt?: number): RuleHuntState {
+  if (state.phase !== 'live') throw new Error(`expected live, got ${state.phase}`);
+  const { state: out } = walkDeadlines(state, {
+    startAt: startAt ?? state.segmentStartedAt,
+    until: (s) => s.phase === 'reveal' || s.phase === 'over',
+  });
+  return out;
+}
+
+/** Heat-check actions: a follower's free soft read; a detective's private bookmark. */
+export const flagBreak = (playerId: string, flag: 'flag' | 'clean', at = 0): GameEvent<RuleHuntAction> =>
+  ({ type: 'action', playerId, action: { kind: 'flagBreak', flag }, at });
+export const noteSuspicious = (
+  playerId: string, note: 'suspicious' | 'clear', at = 0,
+): GameEvent<RuleHuntAction> =>
+  ({ type: 'action', playerId, action: { kind: 'noteSuspicious', note }, at });
+
+/**
+ * live -> spotlight: fire the first heat-check by exhausting one `heatMs` slice
+ * of the live clock. The named (seeded) performer is `state.spotlight.target`.
+ */
+export function toSpotlight(state: RuleHuntState): RuleHuntState {
+  if (state.phase !== 'live') throw new Error(`expected live, got ${state.phase}`);
+  const at = state.segmentStartedAt + game.phaseDurationMs(state)!;
+  const next = game.reduce(state, deadline(at)).state;
+  if (next.phase !== 'spotlight') throw new Error(`expected spotlight, got ${next.phase}`);
+  return next;
+}

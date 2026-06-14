@@ -59,12 +59,18 @@ describe('createTracer factory (module id + config injection)', () => {
 describe('pires-potes config (design §2.3 — binding params)', () => {
   const pp = createTracer('pires-potes', PIRES_POTES_CONFIG);
 
-  it('plays 7 rounds of 20s vote / 7s reveal', () => {
+  it('plays 7 rounds of 18s vote / 6s reveal (split 1.5s suspense + 4.5s verdict)', () => {
     const s = pp.init('seed', players, content);
-    expect(s.config).toEqual({ totalRounds: 7, voteMs: 20_000, revealMs: 7_000 });
-    expect(pp.phaseDurationMs(s)).toBe(20_000);
-    const reveal = pp.reduce(s, { type: 'deadline', at: 1 }).state;
-    expect(pp.phaseDurationMs(reveal)).toBe(7_000);
+    expect(s.config).toEqual({ totalRounds: 7, voteMs: 18_000, revealMs: 6_000 });
+    expect(pp.phaseDurationMs(s)).toBe(18_000);
+    const suspense = pp.reduce(s, { type: 'deadline', at: 1 }).state;
+    expect(suspense.revealStep).toBe('suspense');
+    expect(pp.phaseDurationMs(suspense)).toBe(1_500); // the held breath
+    const verdict = pp.reduce(suspense, { type: 'deadline', at: 2 }).state;
+    expect(verdict.revealStep).toBe('verdict');
+    expect(pp.phaseDurationMs(verdict)).toBe(4_500); // the slam
+    // total reveal wall-time preserved exactly: 1500 + 4500 === revealMs
+    expect(1_500 + 4_500).toBe(6_000);
   });
 
   it('caps totalRounds at the shuffled pool size', () => {
@@ -85,9 +91,9 @@ describe('pires-potes config (design §2.3 — binding params)', () => {
       s = pp.reduce(s, { type: 'deadline', at: deadlines }).state;
       deadlines += 1;
       keys.push(pp.phaseKey(s));
-      expect(deadlines).toBeLessThanOrEqual(14);
+      expect(deadlines).toBeLessThanOrEqual(21);
     }
-    expect(deadlines).toBe(14); // 7 rounds × (vote + reveal)
+    expect(deadlines).toBe(21); // 7 rounds × (vote + reveal:suspense + reveal:verdict)
     expect(pp.phaseDurationMs(s)).toBeNull(); // 'over' is untimed (terminal)
     expect(pp.phaseKey(s)).toBe('over');
     expect(new Set(keys).size).toBe(keys.length); // a NEW key for every new deadline
@@ -100,17 +106,23 @@ describe('pires-potes config (design §2.3 — binding params)', () => {
     s = pp.reduce(s, vote('p1', 'p2', 1)).state;
     s = pp.reduce(s, vote('p2', 'p1', 2)).state;
     expect(s.phase).toBe('vote'); // roster early-resolve still expects p3…
-    const { state: revealed } = pp.reduce(s, { type: 'deadline', at: 3 });
-    expect(revealed.phase).toBe('reveal'); // …but the deadline never waits for them
-    expect(revealed.scores).toEqual({ p1: 1, p2: 1, p3: 0 });
+    const { state: suspense } = pp.reduce(s, { type: 'deadline', at: 3 });
+    expect(suspense.phase).toBe('reveal'); // …but the deadline never waits for them
+    expect(suspense.scores).toEqual({ p1: 0, p2: 0, p3: 0 }); // deferred at suspense
+    const verdict = pp.reduce(suspense, { type: 'deadline', at: 4 }).state;
+    expect(verdict.scores).toEqual({ p1: 1, p2: 1, p3: 0 }); // climb lands at verdict
   });
 
   it('zero votes at the deadline: nobody scores, the round still advances', () => {
     const s0 = pp.init('seed', players, content);
     const { state: s1 } = pp.reduce(s0, { type: 'deadline', at: 0 });
     expect(s1.phase).toBe('reveal');
+    expect(s1.revealStep).toBe('suspense');
     expect(s1.scores).toEqual({ p1: 0, p2: 0, p3: 0 });
-    const { state: s2 } = pp.reduce(s1, { type: 'deadline', at: 1 });
+    const { state: verdict } = pp.reduce(s1, { type: 'deadline', at: 1 });
+    expect(verdict.revealStep).toBe('verdict');
+    expect(verdict.scores).toEqual({ p1: 0, p2: 0, p3: 0 }); // zero votes -> no award
+    const { state: s2 } = pp.reduce(verdict, { type: 'deadline', at: 2 });
     expect(s2.phase).toBe('vote');
     expect(s2.round).toBe(1);
   });
@@ -123,7 +135,9 @@ describe('pires-potes config (design §2.3 — binding params)', () => {
     s = pp.reduce(s, vote('p3', 'p1', 3)).state;
     s = pp.reduce(s, vote('p4', 'p1', 4)).state;
     expect(s.phase).toBe('reveal');
-    expect(s.scores).toEqual({ p1: 1, p2: 0, p3: 1, p4: 0 });
+    expect(s.scores).toEqual({ p1: 0, p2: 0, p3: 0, p4: 0 }); // deferred at suspense
+    const verdict = pp.reduce(s, { type: 'deadline', at: 5 }).state;
+    expect(verdict.scores).toEqual({ p1: 1, p2: 0, p3: 1, p4: 0 }); // tie shares crown at verdict
   });
 
   it('emits gameOver exactly once, with a CLONED scores map', () => {

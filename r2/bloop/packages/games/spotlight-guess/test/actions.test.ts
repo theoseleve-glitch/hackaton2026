@@ -6,7 +6,8 @@ import {
   spotlightGuessActionSchema,
 } from '@bloop/game-spotlight-guess';
 import {
-  answer, deadline, guess, guessersOf, openVotes, ready, reverseContent, scaleContent, spotOf,
+  answer, deadline, guess, guessersOf, left, openVotes, react, ready, reverseContent,
+  scaleContent, spotOf,
 } from './fixtures.js';
 
 const players = ['p1', 'p2', 'p3'];
@@ -56,11 +57,18 @@ describe('scale actions — acceptance and same-reference rejection', () => {
     expect(b.phase).toBe('guess');
   });
 
-  it('guess in the wrong phase is rejected', () => {
+  it('guess in the target phase is rejected; KEYSTONE: guess in talk is now a live-dial', () => {
     const s0 = note.init('s', players, scaleContent);
-    expect(note.reduce(s0, guess(guessersOf(s0)[0]!, 5)).state).toBe(s0); // target phase
+    expect(note.reduce(s0, guess(guessersOf(s0)[0]!, 5)).state).toBe(s0); // target phase: rejected
     const talk = note.reduce(s0, deadline(0)).state;
-    expect(note.reduce(talk, guess(guessersOf(talk)[0]!, 5)).state).toBe(talk); // talk phase
+    expect(talk.phase).toBe('talk');
+    // P0-A live-dial: a guesser may set a first-impression dial DURING talk; it
+    // writes the same hidden buffer at tier 0 and does NOT advance the phase.
+    const g1 = guessersOf(talk)[0]!;
+    const dialed = note.reduce(talk, guess(g1, 5)).state;
+    expect(dialed).not.toBe(talk);
+    expect(dialed.phase).toBe('talk'); // talk must finish — no early-resolve
+    expect(dialed.guesses[g1]).toEqual({ value: 5, tier: 0 });
   });
 
   it('answer actions are foreign to scale mode', () => {
@@ -138,6 +146,75 @@ describe('reverse actions — acceptance and same-reference rejection', () => {
   });
 });
 
+describe('KEYSTONE react-lite (P0-B-lite) — acceptance, same-reference rejection, no early-resolve', () => {
+  it('accepts a content-free react from a connected non-spotlight during answer; one tap per round', () => {
+    const s0 = dq.init('s', players, reverseContent);
+    const [g1] = guessersOf(s0);
+    const tapped = dq.reduce(s0, react(g1!)).state;
+    expect(tapped).not.toBe(s0);
+    expect(tapped.phase).toBe('answer'); // never advances the phase
+    expect(tapped.reacts[g1!]).toBe('ready');
+    // GUARD reject->same-ref: a re-tap over an existing marker is a no-op
+    expect(dq.reduce(tapped, react(g1!)).state).toBe(tapped);
+  });
+
+  it('GUARD reject->same-ref: spotlight, disconnected, wrong-phase, non-roster all return SAME ref', () => {
+    const s0 = dq.init('s', players, reverseContent);
+    const spot = spotOf(s0);
+    expect(dq.reduce(s0, react(spot)).state).toBe(s0); // the mystery player never reacts
+    expect(dq.reduce(s0, react('intruder')).state).toBe(s0); // non-roster
+    // disconnected guesser cannot react
+    const [g1, g2] = guessersOf(s0);
+    const gone = dq.reduce(s0, left(g1!)).state;
+    expect(dq.reduce(gone, react(g1!)).state).toBe(gone);
+    // wrong phase: once the answer is in, the beat is over — react rejected
+    const guessPhase = dq.reduce(s0, answer(spot, 0)).state;
+    expect(guessPhase.phase).toBe('guess');
+    expect(dq.reduce(guessPhase, react(g2!)).state).toBe(guessPhase);
+  });
+
+  it('GUARD no-gate-early-resolve: reacts NEVER advance the primary beat — only the answer does', () => {
+    const s0 = dq.init('s', players, reverseContent);
+    const spot = spotOf(s0);
+    // every connected guesser taps react: the phase MUST stay in answer (the
+    // react buffer is separate from the primary actor set — answer is spotlight-only)
+    let s = s0;
+    for (const g of guessersOf(s0)) s = dq.reduce(s, react(g)).state;
+    expect(s.phase).toBe('answer'); // all reacted, still waiting on the spotlight's answer
+    expect(s.reacts[guessersOf(s0)[0]!]).toBe('ready');
+    // the spotlight answering is what advances the beat — reacts gated nothing
+    const advanced = dq.reduce(s, answer(spot, 0)).state;
+    expect(advanced.phase).toBe('guess');
+  });
+
+  it('react is foreign to scale mode (no reverse answer beat there)', () => {
+    const s0 = note.init('s', players, scaleContent);
+    expect(note.reduce(s0, react(guessersOf(s0)[0]!)).state).toBe(s0);
+  });
+
+  it('the react buffer resets each round (fresh answer beat)', () => {
+    const s0 = dq.init('s', players, reverseContent);
+    const [g1, g2] = guessersOf(s0);
+    let s = dq.reduce(s0, react(g1!)).state;
+    expect(s.reacts[g1!]).toBe('ready');
+    // play the round to completion into the next answer beat
+    s = dq.reduce(s, answer(spotOf(s), 0)).state; // -> guess h0
+    for (let i = 0; i < 12 && s.phase !== 'answer'; i++) {
+      // advance via deadlines/guesses until the next round's answer phase
+      if (s.phase === 'guess') {
+        const next = dq.reduce(s, guess(guessersOf(s)[0]!, 0)).state;
+        s = next === s ? dq.reduce(s, deadline(i)).state : next;
+      } else {
+        s = dq.reduce(s, deadline(i)).state;
+      }
+    }
+    if (s.phase === 'answer') {
+      expect(s.round).toBe(1);
+      expect(s.reacts).toEqual({}); // fresh buffer for the new answer beat
+    }
+  });
+});
+
 describe('action wire schema (zod)', () => {
   it('accepts every legal payload shape', () => {
     expect(spotlightGuessActionSchema.safeParse({ kind: 'ready' }).success).toBe(true);
@@ -145,6 +222,7 @@ describe('action wire schema (zod)', () => {
     expect(spotlightGuessActionSchema.safeParse({ kind: 'answer', answerIndex: 0 }).success).toBe(true);
     expect(spotlightGuessActionSchema.safeParse({ kind: 'guess', value: 0 }).success).toBe(true);
     expect(spotlightGuessActionSchema.safeParse({ kind: 'guess', value: 100 }).success).toBe(true);
+    expect(spotlightGuessActionSchema.safeParse({ kind: 'react' }).success).toBe(true); // content-free
   });
 
   it('rejects malformed payloads before they reach the reducer', () => {

@@ -34,7 +34,7 @@ describe('roleReveal', () => {
     for (const p of P5) s = game.reduce(s, act(p, { kind: 'ackRole' })).state;
     expect(s.phase).toBe('nightSeer');
     expect(game.phaseKey(s)).toBe('night:r0:seer');
-    expect(game.phaseDurationMs(s)).toBe(25_000);
+    expect(game.phaseDurationMs(s)).toBe(20_000);
   });
 
   it('the deadline proceeds with unacked players anyway', () => {

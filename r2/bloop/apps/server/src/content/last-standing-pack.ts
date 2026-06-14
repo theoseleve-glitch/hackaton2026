@@ -305,8 +305,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-hiver-021",
     "theme": {
-      "fr": "Tu le portes quand il fait froid ou quand t'es en dép",
-      "en": "You wear it when it's freezing. Or emotionally cooked."
+      "fr": "Tu le portes quand il fait -2 ou quand t'es en dép et que tu sors les poubelles à 14h.",
+      "en": "You wear it when it's freezing, or when you're crashing out and taking the bins out at 2pm."
     },
     "letters": [
       "B",
@@ -387,8 +387,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-frigo-027",
     "theme": {
-      "fr": "Dans le frigo d'un mec qui vit seul depuis 3 ans",
-      "en": "In the fridge of a guy who's lived alone for 3 years"
+      "fr": "Dans ton frigo, là, maintenant. Trois trucs périmés et une vibe de hess. Cite-en un.",
+      "en": "In your fridge right now. Three expired things and pure hess energy. Name one."
     },
     "letters": [
       "L",
@@ -447,8 +447,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-corps-031",
     "theme": {
-      "fr": "Une partie du corps que t'as explosée contre un meuble à 3h du mat",
-      "en": "A body part you've smashed into furniture at 3 a.m."
+      "fr": "Une partie du corps que t'as explosée contre le coin du lit. On t'a entendu hurler.",
+      "en": "A body part you've sacrificed to the corner of the bed frame. We heard the scream."
     },
     "letters": [
       "C",
@@ -555,8 +555,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-chambre-038",
     "theme": {
-      "fr": "Y'a ça dans la chambre que t'as pas rangée depuis le bac",
-      "en": "It's in the bedroom you haven't deep-cleaned since 2022"
+      "fr": "Y'a ça dans ta chambre, sous la pile de linge « propre » que tu portes quand même.",
+      "en": "It's in your room, under the 'clean' pile you keep wearing anyway."
     },
     "letters": [
       "L",
@@ -1295,8 +1295,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-espace-087",
     "theme": {
-      "fr": "C'est dans l'espace. Plus atteignable pour toi que d'être propriétaire.",
-      "en": "It's in space. So is your landlord's conscience, presumably."
+      "fr": "C'est dans l'espace. Plus proche de toi que le jour où t'es proprio.",
+      "en": "It's in space. Still closer than you owning a flat."
     },
     "letters": [
       "S",
@@ -1310,8 +1310,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-magie-088",
     "theme": {
-      "fr": "Ça existe dans un monde magique. Pas dans ton 12 m².",
-      "en": "It exists in a magical world. Not in your damp flatshare."
+      "fr": "Ça existe dans un monde magique. Pas dans ton studio à 800 balles avec moisissure offerte.",
+      "en": "It exists in a magical realm. Not in your 800-quid studio with the free mould."
     },
     "letters": [
       "D",
@@ -1492,16 +1492,18 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-invisible-099",
     "theme": {
-      "fr": "C'est invisible mais ça existe. Comme tes efforts.",
-      "en": "It's invisible but real. Like your input on the group project."
+      "fr": "Un truc qu'on voit pas mais qui pue quand y'en a trop. Genre ton aura ce soir.",
+      "en": "You can't see it, but everyone smells it when there's too much. Like your vibe tonight."
     },
     "letters": [
       "G",
       "O",
-      "A",
+      "V",
+      "F",
       "S",
+      "A",
       "M",
-      "E"
+      "W"
     ],
     "difficulty": 3
   },
@@ -1539,8 +1541,8 @@ export const JEU_DU_THEME_PACK: ContentPack<LastStandingContent> = {
   {
     "id": "jdt-comprendre-102",
     "theme": {
-      "fr": "Tu fais semblant de comprendre ça depuis des années. Là aussi.",
-      "en": "You've nodded along about it for years. You're doing it now."
+      "fr": "Un truc que personne capte mais où tout le monde hoche la tête. La crypto, les impôts, ton couple.",
+      "en": "Nobody actually gets it but everyone nods along. Crypto, taxes, your relationship."
     },
     "letters": [
       "C",

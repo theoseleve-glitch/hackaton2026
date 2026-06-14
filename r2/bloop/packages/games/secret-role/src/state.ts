@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence } from '@bloop/kit';
+import type { Presence, SideBetBuffer } from '@bloop/kit';
 
 /** Bilingual UI string — the client picks a locale at render time. */
 export interface LText {
@@ -40,6 +40,13 @@ export interface SecretRoleScoring {
   impostorWinsBonus: number;
   /** Civilians' consolation when THE impostor disconnects mid-match (impostor gets 0). */
   impostorDisconnectCivilianConsolation: number;
+  /**
+   * CC-1 side-bet (the "lean") accuracy bonus: points awarded at finalReveal to
+   * any player whose hidden discuss-time lean named the actual impostor. Small,
+   * upside-only flavour (resolveSideBets clamps non-positive to 0); default 0
+   * keeps the side-bet inert and every legacy scoring assertion unchanged.
+   */
+  leanBonusCorrect: number;
 }
 
 /**
@@ -79,12 +86,12 @@ export const DOUBLE_JEU_CONFIG: SecretRoleConfig = {
   impostorWordMode: 'decoy',
   revealRoleToSelf: false,
   impostorGuessEnabled: false,
-  secretRevealMs: 12_000,
-  discussMs: 120_000,
-  discuss2Ms: 90_000,
+  secretRevealMs: 7_000,
+  discussMs: 75_000,
+  discuss2Ms: 50_000,
   voteMs: 25_000,
   verdictMs: 8_000,
-  finalRevealMs: 12_000,
+  finalRevealMs: 9_000,
   matchesPerSession: 3,
   scoring: {
     civilianCorrectBallotPerVote: 1,
@@ -93,6 +100,7 @@ export const DOUBLE_JEU_CONFIG: SecretRoleConfig = {
     impostorSurvivesVote1: 2,
     impostorWinsBonus: 3,
     impostorDisconnectCivilianConsolation: 1,
+    leanBonusCorrect: 1,
   },
 };
 
@@ -170,6 +178,17 @@ export interface SecretRoleState {
   ready: Record<PlayerId, true>;
   /** HIDDEN buffer: accuser -> accused for the current vote round. First vote locks. */
   votes: Record<PlayerId, PlayerId>;
+  /**
+   * HIDDEN side-bet buffer (CC-1 "lean"): bettor -> the player they secretly
+   * suspect is the impostor. Written during `discuss`, re-opened (cleared) at
+   * each discuss entry so a player re-leans with fresh info across the two
+   * periods, and resolved at `finalReveal` against the now-public impostor for a
+   * small accuracy bonus. OWNER-ONLY (`redactSideBets`, no revealAll pre-`over`):
+   * a non-owner sees only the aggregate count, never another player's suspect —
+   * so it can NEVER be inverted to out the impostor mid-match. It is a SEPARATE
+   * field from `votes`/`ready`, never counted toward `allActed`/early-resolve.
+   */
+  leans: SideBetBuffer<PlayerId>;
   /** Resolved vote records of the CURRENT match — public once resolved. */
   voteRecords: VoteRecord[];
   /** HIDDEN until finalReveal: this match's accrued points (correct ballots + impostor survival). */
@@ -183,7 +202,8 @@ export interface SecretRoleState {
 export type SecretRoleAction =
   | { kind: 'ack' }
   | { kind: 'ready' }
-  | { kind: 'vote'; target: PlayerId };
+  | { kind: 'vote'; target: PlayerId }
+  | { kind: 'lean'; target: PlayerId };
 
 interface SecretRoleViewBase {
   match: number;
@@ -208,6 +228,14 @@ export type SecretRoleView =
       iAmReady: boolean;
       /** Public record of the previous vote round of THIS match (null in period 0). */
       lastVote: VoteRecord | null;
+      /**
+       * The viewer's OWN secret lean (suspected impostor id) for this discuss
+       * period, or null if they have not leaned. Owner-only echo — a non-owner
+       * NEVER receives another player's lean.
+       */
+      myLean: PlayerId | null;
+      /** PUBLIC aggregate: how many players have placed a lean this period (a count, leaks no suspect). */
+      leanCount: number;
     })
   | (SecretRoleViewBase & {
       phase: 'vote';

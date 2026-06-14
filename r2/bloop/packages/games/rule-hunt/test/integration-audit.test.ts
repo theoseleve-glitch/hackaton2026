@@ -104,6 +104,59 @@ function fold(events: ReadonlyArray<GameEvent<unknown>>): unknown {
   return state;
 }
 
+// ---------------------------------------------------------------------------
+// Heat-check (spotlight) audit — declares the NEW hidden values: a follower's
+// free flagBreak read and a detective's private noteSuspicious bookmark. Both
+// are owner-only-echo / aggregate-count side-bets; neither value may reach a
+// non-owner, and neither can be inverted to recover the spotlit performance.
+// ---------------------------------------------------------------------------
+
+const rhFlag = (playerId: string, flag: 'flag' | 'clean', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'flagBreak', flag }, at });
+const rhNote = (playerId: string, note: 'suspicious' | 'clear', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'noteSuspicious', note }, at });
+
+/** Drive the audit roster to live, fire one heat deadline -> spotlight. */
+function foldToSpotlight(): { state: unknown; target: string; flagger: string; det: string } {
+  const ackEvents: GameEvent<unknown>[] = [
+    rhAck('p2', 1_000), rhAck('p3', 1_100), rhAck('p4', 1_200), rhAck('p5', 1_300),
+  ];
+  let s: unknown = module_.init(AUDIT.seed, [...AUDIT.players], TROUVEZ_LA_REGLE_PACK);
+  for (const e of [...ackEvents]) s = module_.reduce(s as never, e as never).state;
+  // p1 is the seeded round-0 detective; p2..p5 are followers.
+  const live = s as { phase: string; detectives: string[]; segmentStartedAt: number };
+  if (live.phase !== 'live') throw new Error(`expected live, got ${live.phase}`);
+  const dur = module_.phaseDurationMs(s as never)!;
+  s = module_.reduce(s as never, { type: 'deadline', at: live.segmentStartedAt + dur }).state;
+  const spot = s as { phase: string; detectives: string[]; spotlight: { target: string } | null };
+  if (spot.phase !== 'spotlight' || spot.spotlight === null) {
+    throw new Error(`expected spotlight, got ${spot.phase}`);
+  }
+  const target = spot.spotlight.target;
+  const det = spot.detectives[0]!;
+  const flagger = (['p2', 'p3', 'p4', 'p5'] as const).find((p) => p !== target)!;
+  return { state: s, target, flagger, det };
+}
+
+/** Same spotlight, two opposite hidden flag/note pairs — for non-owner invariance. */
+function spotlightPair(): { sA: unknown; sB: unknown; target: string; flagger: string; det: string } {
+  const open = foldToSpotlight();
+  const at = (open.state as { segmentStartedAt: number }).segmentStartedAt;
+  const apply = (flag: 'flag' | 'clean', note: 'suspicious' | 'clear'): unknown => {
+    let s = open.state;
+    s = module_.reduce(s as never, rhFlag(open.flagger, flag, at + 1) as never).state;
+    s = module_.reduce(s as never, rhNote(open.det, note, at + 2) as never).state;
+    return s;
+  };
+  return {
+    sA: apply('flag', 'suspicious'),
+    sB: apply('clean', 'clear'),
+    target: open.target,
+    flagger: open.flagger,
+    det: open.det,
+  };
+}
+
 describe('INTEGRATION.md fixtures pass the server redaction audit against the real pack', () => {
   it('the adapted core pack is non-degenerate (>= totalRounds items, full decoy sets)', () => {
     expect(TROUVEZ_LA_REGLE_PACK.data.items.length).toBeGreaterThanOrEqual(TROUVEZ_LA_REGLE_CONFIG.totalRounds);
@@ -145,11 +198,18 @@ describe('INTEGRATION.md fixtures pass the server redaction audit against the re
     expect(leakedSecrets(module_, sB as never, viewers, [...AUDIT.secrets(sB)])).toEqual([]);
   });
 
-  it('the deadline walk from the fixture state reaches an untimed phase within 25 steps', () => {
+  it('the deadline walk from the fixture state reaches an untimed phase', () => {
+    // Advance a monotonic clock by each phase's armed duration — the way the real
+    // shell arms deadlines — so the heat-check `live -> spotlight -> live` slices
+    // actually drain the banked clock (a fixed-tiny `at` would stall in spotlight).
     let s = sA;
+    let clock = 100_000;
     let steps = 0;
-    for (let i = 0; i < 25; i++) {
-      const next = module_.reduce(s as never, { type: 'deadline', at: 100_000 + i }).state;
+    for (let i = 0; i < 200; i++) {
+      const dur = module_.phaseDurationMs(s as never);
+      if (dur === null) break;
+      clock += Math.max(1, dur);
+      const next = module_.reduce(s as never, { type: 'deadline', at: clock }).state;
       if (next === s) break;
       s = next;
       steps += 1;
@@ -159,6 +219,58 @@ describe('INTEGRATION.md fixtures pass the server redaction audit against the re
       }
     }
     expect(module_.phaseDurationMs(s as never)).toBeNull();
-    expect(steps).toBeLessThanOrEqual(25);
+    expect(steps).toBeGreaterThan(0);
+  });
+});
+
+describe('heat-check hidden values pass the same redaction audit (new spotlight surface)', () => {
+  const { sA, sB, target, flagger, det } = spotlightPair();
+
+  it('fixture is live: a spotlight with a buffered flag (follower) and note (detective)', () => {
+    expect(module_.phaseKey(sA as never)).toBe('spotlight:r0:i1');
+    expect(module_.phaseKey(sB as never)).toBe(module_.phaseKey(sA as never));
+    // both actors see their OWN differing soft read
+    expect(JSON.stringify(module_.view(sA as never, flagger)))
+      .not.toBe(JSON.stringify(module_.view(sB as never, flagger)));
+    expect(JSON.stringify(module_.view(sA as never, det)))
+      .not.toBe(JSON.stringify(module_.view(sB as never, det)));
+  });
+
+  it("non-actors' views are INVARIANT under hidden flag/note changes (incl. the spotlit performer)", () => {
+    // The spotlit target and every non-bettor — including spectators — must not be
+    // able to tell `flag/suspicious` from `clean/clear`: the reads are owner-only.
+    const nonActors = [target, ...AUDIT.players.filter((p) => p !== flagger && p !== det && p !== target), ...OUTSIDERS];
+    for (const viewer of nonActors) {
+      expect(module_.view(sA as never, viewer)).toEqual(module_.view(sB as never, viewer));
+    }
+  });
+
+  it('the raw flag/note buffers and their values never serialize into any view', () => {
+    for (const state of [sA, sB]) {
+      for (const viewer of [...AUDIT.players, ...OUTSIDERS]) {
+        const str = JSON.stringify(module_.view(state as never, viewer));
+        expect(str).not.toContain('"flags"');
+        expect(str).not.toContain('"notes"');
+        // a non-owner viewer must never see a foreign read value
+        if (viewer !== flagger) expect(str).not.toContain('"myFlag":"flag"');
+        if (viewer !== det) expect(str).not.toContain('"myNote":"suspicious"');
+      }
+    }
+  });
+
+  it('declared value secrets (current decoys + future rules) still never appear at a spotlight', () => {
+    const viewers = [...AUDIT.players, ...OUTSIDERS];
+    expect(leakedSecrets(module_, sA as never, viewers, [...AUDIT.secrets(sA)])).toEqual([]);
+    expect(leakedSecrets(module_, sB as never, viewers, [...AUDIT.secrets(sB)])).toEqual([]);
+  });
+
+  it('the spotlight target and the aggregate counts ARE public (the heat read is legible)', () => {
+    const v = module_.view(sA as never, OUTSIDERS[0]);
+    if (v.phase !== 'spotlight') throw new Error('expected spotlight view');
+    expect(v.target).toBe(target);
+    expect(v.flagCount).toBe(1); // one follower flagged
+    expect(v.noteCount).toBe(1); // one detective noted
+    expect(v.myFlag).toBeNull(); // ...but the outsider sees no value
+    expect(v.myNote).toBeNull();
   });
 });

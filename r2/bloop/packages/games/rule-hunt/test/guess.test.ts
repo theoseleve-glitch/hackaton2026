@@ -76,7 +76,8 @@ describe('picking a candidate', () => {
     expect(r.usedCandidates).toEqual([wrong]);
     expect(r.liveSeg).toBe(1);
     expect(r.segmentStartedAt).toBe(35_000);
-    expect(game.phaseDurationMs(r)).toBe(150_000); // bank untouched by guess-phase time
+    expect(r.liveRemainingMs).toBe(150_000); // bank untouched by guess-phase time
+    expect(game.phaseDurationMs(r)).toBe(24_000); // resumed live is armed at the heat cadence
     expect(effects).toEqual([
       { type: 'analytics', name: 'guess_attempted', props: { round: 0, correct: false } },
     ]);

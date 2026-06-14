@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { createRuleHunt, TROUVEZ_LA_REGLE_CONFIG, type RuleHuntState } from '@bloop/game-rule-hunt';
-import { ack, cast, content, deadline, EIGHT, FIVE, followersOf, game, toLive } from './fixtures.js';
+import {
+  ack, cast, content, deadline, EIGHT, FIVE, followersOf, game, liveToReveal, toLive, walkDeadlines,
+} from './fixtures.js';
 
 describe('init determinism', () => {
   it('same seed -> identical state (items, detectives, grid); the grid embeds the round rule', () => {
@@ -69,7 +71,10 @@ describe('briefing', () => {
     expect(live.liveSeg).toBe(0);
     expect(effects).toEqual([]);
     expect(game.phaseKey(live)).toBe('live:r0:s0');
-    expect(game.phaseDurationMs(live)).toBe(180_000);
+    // The live segment is armed at the heat-check cadence (min of bank and heatMs),
+    // not the full 180s — the shell fires a forced spotlight every ~heatMs.
+    expect(game.phaseDurationMs(live)).toBe(24_000);
+    expect(live.liveRemainingMs).toBe(180_000); // the bank itself is still the full clock
   });
 
   it('rejects detective, duplicate, non-roster and disconnected acks (same reference)', () => {
@@ -92,31 +97,33 @@ describe('briefing', () => {
 });
 
 describe('deadline walk — a passive room always reaches over', () => {
-  it('rolls briefing -> live -> reveal per round, then over after totalRounds; over is untimed', () => {
-    let s = game.init('s', FIVE, content(3));
-    const keys: string[] = [];
-    keys.push(game.phaseKey(s));
-    for (let i = 0; i < 30 && s.phase !== 'over'; i++) {
-      const next = game.reduce(s, deadline(100_000 + i * 1_000)).state;
-      expect(next).not.toBe(s); // every timed phase must consume its deadline
-      s = next;
-      keys.push(game.phaseKey(s));
-    }
-    expect(keys).toEqual([
-      'briefing:r0', 'live:r0:s0', 'reveal:r0',
-      'briefing:r1', 'live:r1:s0', 'reveal:r1',
-      'briefing:r2', 'live:r2:s0', 'reveal:r2',
-      'over',
-    ]);
+  it('rolls briefing -> live/(forced spotlights) -> reveal per round, then over after totalRounds; over is untimed', () => {
+    const s0 = game.init('s', FIVE, content(3));
+    const { state: s, keys } = walkDeadlines(s0);
+    // Every timed phase consumed its deadline and the room reached over.
     expect(s.phase).toBe('over');
     expect(s.endReason).toBe('finished');
     expect(game.phaseDurationMs(s)).toBeNull();
+    expect(keys[keys.length - 1]).toBe('over');
+    // Structural skeleton: each round opens on a briefing and closes on a reveal,
+    // with the heat-check filling the middle (live segments interleaved with spotlights).
+    const rounds = keys.filter((k) => k.startsWith('briefing:'));
+    expect(rounds).toEqual(['briefing:r0', 'briefing:r1', 'briefing:r2']);
+    for (let r = 0; r < 3; r++) {
+      expect(keys).toContain(`reveal:r${r}`);
+      // the forced spotlight beat actually fires inside each round's live phase
+      expect(keys.some((k) => k.startsWith(`spotlight:r${r}:`))).toBe(true);
+      // a spotlight always sits BETWEEN two live segments — never replaces the reveal
+      const firstSpot = keys.indexOf(keys.find((k) => k.startsWith(`spotlight:r${r}:`))!);
+      expect(keys[firstSpot - 1]).toMatch(new RegExp(`^live:r${r}:`));
+      expect(keys[firstSpot + 1]).toMatch(new RegExp(`^live:r${r}:`));
+    }
   });
 
   it('reveal durations and keys follow the config', () => {
     let s = game.init('s', FIVE, content(3));
     s = game.reduce(s, deadline(0)).state; // -> live
-    s = game.reduce(s, deadline(1)).state; // -> reveal
+    s = liveToReveal(s);                    // drain live (through spotlights) -> reveal
     expect(s.phase).toBe('reveal');
     expect(game.phaseKey(s)).toBe('reveal:r0');
     expect(game.phaseDurationMs(s)).toBe(12_000);
@@ -125,9 +132,9 @@ describe('deadline walk — a passive room always reaches over', () => {
   it('rotates detectives between rounds (next id in the hidden order)', () => {
     let s = game.init('s', FIVE, content(3));
     const r0 = [...s.detectives];
-    s = game.reduce(s, deadline(0)).state;
-    s = game.reduce(s, deadline(1)).state;
-    s = game.reduce(s, deadline(2)).state; // reveal deadline -> round 1
+    s = game.reduce(s, deadline(0)).state; // -> live
+    s = liveToReveal(s);                    // drain live (through spotlights) -> reveal
+    s = game.reduce(s, deadline(400_000)).state; // reveal deadline -> round 1
     expect(s.round).toBe(1);
     expect(s.phase).toBe('briefing');
     expect(s.detectives).toEqual([s.detectiveOrder[1]]);
@@ -149,17 +156,15 @@ describe('deadline walk — a passive room always reaches over', () => {
     const scheduledNext = s.detectiveOrder[1]!;
     s = game.reduce(s, { type: 'playerLeft', playerId: scheduledNext, at: 0 }).state;
     s = game.reduce(s, deadline(1)).state; // -> live
-    s = game.reduce(s, deadline(2)).state; // -> reveal
-    s = game.reduce(s, deadline(3)).state; // -> round 1 briefing
+    s = liveToReveal(s);                    // drain live (through spotlights) -> reveal
+    s = game.reduce(s, deadline(400_000)).state; // -> round 1 briefing
     expect(s.round).toBe(1);
     expect(s.detectives).not.toContain(scheduledNext);
   });
 
   it('over absorbs every event with the same reference', () => {
-    let s: RuleHuntState = game.init('s', FIVE, content(1));
-    for (let i = 0; i < 10 && s.phase !== 'over'; i++) {
-      s = game.reduce(s, deadline(i)).state;
-    }
+    const s0: RuleHuntState = game.init('s', FIVE, content(1));
+    const s: RuleHuntState = walkDeadlines(s0).state;
     expect(s.phase).toBe('over');
     expect(game.phaseKey(s)).toBe('over');
     expect(game.reduce(s, deadline(99)).state).toBe(s);
@@ -177,11 +182,10 @@ describe('phaseKey discipline', () => {
   });
 
   it('keys never embed the rule text or the true index', () => {
-    let s = game.init('s', FIVE, content(3));
-    for (let i = 0; i < 12 && s.phase !== 'over'; i++) {
-      const key = game.phaseKey(s);
-      expect(key).toMatch(/^(briefing|live|tribunal|guess|reveal):r\d+(:[si]\d+)?$|^over$/);
-      s = game.reduce(s, deadline(i)).state;
+    const s0 = game.init('s', FIVE, content(3));
+    const { keys } = walkDeadlines(s0);
+    for (const key of keys) {
+      expect(key).toMatch(/^(briefing|live|spotlight|tribunal|guess|reveal):r\d+(:[si]\d+)?$|^over$/);
     }
   });
 

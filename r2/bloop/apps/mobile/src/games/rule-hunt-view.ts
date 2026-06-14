@@ -1,11 +1,18 @@
 // IMPORT FIREWALL: type-only — erased at compile time; rule-hunt server logic never enters the bundle.
 import type {
+  FlagBet,
   LText,
+  NoteBet,
   RoundOutcome,
   RuleHuntView,
   SeatView,
   TribunalResult,
 } from '@bloop/game-rule-hunt';
+
+// Re-export the heat-check bet TYPES (type-only) so the Play component can read the
+// spotlight view's myFlag/myNote echoes — and shape its flagBreak/noteSuspicious
+// actions — without reaching past the firewall into the game's runtime module.
+export type { FlagBet, NoteBet };
 
 export const RULE_HUNT_GAME_IDS = ['trouvez-la-regle'] as const;
 
@@ -68,6 +75,14 @@ export function asRuleHuntView(v: unknown): RuleHuntView | null {
   if (!baseOk(o)) return null;
   if (o.phase === 'briefing') return isRec(o.acked, 'boolean') ? (v as RuleHuntView) : null;
   if (o.phase === 'live') return v as RuleHuntView;
+  if (o.phase === 'spotlight') {
+    // Heat-check micro-beat: a public target + aggregate counts, owner-only reads.
+    return typeof o.target === 'string' && typeof o.iAmSpotlit === 'boolean'
+      && typeof o.flagCount === 'number' && typeof o.noteCount === 'number'
+      && (o.myFlag === null || o.myFlag === 'flag' || o.myFlag === 'clean')
+      && (o.myNote === null || o.myNote === 'suspicious' || o.myNote === 'clear')
+      ? (v as RuleHuntView) : null;
+  }
   if (o.phase === 'tribunal') {
     return typeof o.accused === 'string' && typeof o.accuser === 'string'
       && Array.isArray(o.voters) && o.voters.every((x) => typeof x === 'string')

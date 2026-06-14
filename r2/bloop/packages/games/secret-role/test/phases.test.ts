@@ -40,13 +40,13 @@ describe('phase chain — keys and durations (design §2.6 verbatim)', () => {
   it('walks secretReveal -> discuss p0 -> vote p0 -> verdict -> discuss p1 -> vote p1 -> finalReveal on deadlines', () => {
     let s = game.init('s', players, content);
     const expected: Array<[string, number]> = [
-      ['secretReveal:m0', 12_000],
-      ['discuss:m0:p0', 120_000],
+      ['secretReveal:m0', 7_000],
+      ['discuss:m0:p0', 75_000],
       ['vote:m0:p0', 25_000],
       ['verdict:m0:p0', 8_000],
-      ['discuss:m0:p1', 90_000],
+      ['discuss:m0:p1', 50_000],
       ['vote:m0:p1', 25_000],
-      ['finalReveal:m0', 12_000],
+      ['finalReveal:m0', 9_000],
     ];
     for (const [key, ms] of expected) {
       expect(game.phaseKey(s)).toBe(key);

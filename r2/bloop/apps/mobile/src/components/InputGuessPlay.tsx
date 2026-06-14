@@ -55,6 +55,103 @@ function SubmittedStrip({ hasSubmitted, players, lang }: {
   );
 }
 
+/**
+ * Live submission ticker — surfaces WHO has locked in this round, in the exact
+ * order they first submitted (identity + count only; NEVER the values). Derived
+ * purely from the view's public `lockOrder` / `submittedCount`. The first lock
+ * gets a 🔒 spotlight ("X verrouille en premier !"); the rest land as brand
+ * sticker chips. Empty until the first player commits.
+ */
+function SubmissionTicker({ lockOrder, submittedCount, total, players, lang }: {
+  lockOrder: readonly string[]; submittedCount: number; total: number;
+  players: readonly RoomPlayer[]; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const byId = new Map(players.map((p) => [p.id, p]));
+  const nick = (id: string) => (byId.get(id) ?? { id, ...UNKNOWN }).profile.nickname;
+  const first = lockOrder[0];
+  return (
+    <View style={{
+      backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.spacing.lg,
+      gap: tokens.spacing.sm, borderWidth: 2, borderColor: theme.border, ...tokens.elevation.e1,
+    }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <AppText role="overline" color="textSecondary">
+          {lang === 'fr' ? 'VERROUILLÉS EN DIRECT' : 'LOCKING IN LIVE'}
+        </AppText>
+        <AppText role="label" color="brand">{submittedCount}/{total}</AppText>
+      </View>
+      {submittedCount === 0 ? (
+        <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+          {lang === 'fr' ? 'Personne n’a encore verrouillé…' : 'Nobody has locked in yet…'}
+        </AppText>
+      ) : (
+        <>
+          {first !== undefined && (
+            <AppText role="caption" color="textSecondary">
+              {lang === 'fr' ? `🔒 ${nick(first)} verrouille en premier !` : `🔒 ${nick(first)} locked in first!`}
+            </AppText>
+          )}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm }}>
+            {lockOrder.map((id, i) => (
+              <View key={id} style={{
+                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs,
+                backgroundColor: i === 0 ? theme.brand : theme.surfaceAlt,
+                borderRadius: tokens.radii.pill, paddingHorizontal: tokens.spacing.md,
+                paddingVertical: tokens.spacing.xs, borderWidth: 2,
+                borderColor: i === 0 ? theme.stickerOutline : theme.border,
+                ...(i === 0 ? tokens.elevation.sticker : {}),
+              }}>
+                <Avatar name={nick(id)} size="sm" />
+                <AppText role="caption" color={i === 0 ? 'textOnBrand' : 'textPrimary'}>{nick(id)}</AppText>
+              </View>
+            ))}
+          </View>
+        </>
+      )}
+    </View>
+  );
+}
+
+/**
+ * Named reveal call-out band — the "TOI t'as guessé ça ?!" social beat. Renders
+ * each non-empty call-out (e.g. « Pile ! », closest, biggest whiff) as a tinted
+ * sticker row with the named player(s). Values stay in the ranked list above;
+ * this band is the headline only. Hidden entirely when no one qualifies.
+ */
+function CallOutBand({ rows, players, lang }: {
+  rows: readonly { key: string; icon: string; label: string; ids: readonly string[]; tone: 'win' | 'whiff' }[];
+  players: readonly RoomPlayer[]; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const byId = new Map(players.map((p) => [p.id, p]));
+  const nick = (id: string) => (byId.get(id) ?? { id, ...UNKNOWN }).profile.nickname;
+  const live = rows.filter((r) => r.ids.length > 0);
+  if (live.length === 0) return null;
+  const join = (ids: readonly string[]) => ids.map(nick).join(' & ');
+  return (
+    <View style={{ gap: tokens.spacing.sm }}>
+      <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+        {lang === 'fr' ? 'LES MOMENTS FORTS' : 'THE CALL-OUTS'}
+      </AppText>
+      {live.map((r) => (
+        <View key={r.key} style={{
+          flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md,
+          backgroundColor: theme.surface, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg,
+          borderWidth: 3, borderColor: r.tone === 'win' ? theme.xp : theme.truth,
+          ...tokens.elevation.sticker,
+        }}>
+          <AppText role="headline">{r.icon}</AppText>
+          <View style={{ flex: 1 }}>
+            <AppText role="label" color={r.tone === 'win' ? 'brand' : 'textSecondary'}>{r.label}</AppText>
+            <AppText role="bodyStrong">{join(r.ids)}</AppText>
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+}
+
 /** Big-button digits keypad — integers only, hard maxDigits clamp (design §2.4). */
 function Keypad({ draft, setDraft, maxDigits, onSubmit, lang }: {
   draft: string; setDraft: (s: string) => void; maxDigits: number; onSubmit: () => void; lang: Lang;
@@ -260,6 +357,10 @@ export function InputGuessPlay({ code }: { code: string }) {
                     </AppText>
                   </View>
                   <SubmittedStrip hasSubmitted={ig.hasSubmitted} players={state.players} lang={lang} />
+                  <SubmissionTicker
+                    lockOrder={ig.lockOrder} submittedCount={ig.submittedCount}
+                    total={state.players.length} players={state.players} lang={lang}
+                  />
                 </View>
               ) : (
                 <View style={{ gap: tokens.spacing.md }}>
@@ -279,6 +380,10 @@ export function InputGuessPlay({ code }: { code: string }) {
                     }}
                   />
                   <SubmittedStrip hasSubmitted={ig.hasSubmitted} players={state.players} lang={lang} />
+                  <SubmissionTicker
+                    lockOrder={ig.lockOrder} submittedCount={ig.submittedCount}
+                    total={state.players.length} players={state.players} lang={lang}
+                  />
                 </View>
               )}
             </View>
@@ -329,6 +434,10 @@ export function InputGuessPlay({ code }: { code: string }) {
                 );
               })}
               <SubmittedStrip hasSubmitted={ig.hasSubmitted} players={state.players} lang={lang} />
+              <SubmissionTicker
+                lockOrder={ig.lockOrder} submittedCount={ig.submittedCount}
+                total={state.players.length} players={state.players} lang={lang}
+              />
             </View>
           );
         })()}
@@ -351,6 +460,15 @@ export function InputGuessPlay({ code }: { code: string }) {
                 </AppText>
               )}
             </View>
+            <CallOutBand
+              players={state.players}
+              lang={lang}
+              rows={[
+                { key: 'pile', icon: '🎯', label: L('PILE !', 'NAILED IT!'), ids: ig.result.callOuts.pile, tone: 'win' },
+                { key: 'closest', icon: '🔮', label: L('AU PLUS PRÈS', 'CLOSEST CALL'), ids: ig.result.callOuts.closest, tone: 'win' },
+                { key: 'wildest', icon: '💨', label: L('LE PLUS GROS HORS-PISTE', 'BIGGEST WHIFF'), ids: ig.result.callOuts.wildest, tone: 'whiff' },
+              ]}
+            />
             <NumberReveal result={ig.result} isYear={ig.format === 'year'} players={state.players} lang={lang} />
             <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg }}>
               <AppText role="body" style={{ textAlign: 'center', fontStyle: 'italic' }}>
@@ -377,6 +495,14 @@ export function InputGuessPlay({ code }: { code: string }) {
                 </AppText>
               )}
             </View>
+            <CallOutBand
+              players={state.players}
+              lang={lang}
+              rows={[
+                { key: 'loneGenius', icon: '🧠', label: L('GÉNIE SOLITAIRE', 'LONE GENIUS'), ids: ig.result.callOuts.loneGenius, tone: 'win' },
+                { key: 'mostFooled', icon: '🤡', label: L('LE PLUS PIÉGÉ', 'MOST FOOLED'), ids: ig.result.callOuts.mostFooled, tone: 'whiff' },
+              ]}
+            />
             <CrowdReveal cards={ig.cards} result={ig.result} players={state.players} lang={lang} />
           </View>
         )}

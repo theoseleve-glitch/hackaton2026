@@ -43,12 +43,16 @@ const isResult = (v: unknown): v is TdResult => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
   const tally = o.tally as Record<string, unknown> | null;
+  // CC-1 "call your shot": public aggregate of the resolved predictions — counts only, never names.
+  const spec = o.spectatorTally as Record<string, unknown> | null;
   return typeof o.activePlayer === 'string' && isChoice(o.choice) && isTier(o.intensity)
     && isLText(o.promptText) && isTurnVerdict(o.verdict)
     && typeof tally === 'object' && tally !== null
     && typeof tally.done === 'number' && typeof tally.chickened === 'number'
     && typeof o.pointsAwarded === 'number'
-    && (o.forfeitText === null || isLText(o.forfeitText));
+    && (o.forfeitText === null || isLText(o.forfeitText))
+    && typeof spec === 'object' && spec !== null
+    && typeof spec.correct === 'number' && typeof spec.total === 'number' && typeof spec.pointsEach === 'number';
 };
 
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
@@ -66,7 +70,13 @@ export function asTruthDareView(v: unknown): TruthDareView | null {
       ? (v as TruthDareView) : null;
   }
   if (o.phase === 'prompt') {
-    return isPromptCard(o) && typeof o.canPass === 'boolean' ? (v as TruthDareView) : null;
+    // CC-1: validate the "call your shot" fields the component reads. `youPredicted`
+    // is the owner-only echo (Verdict|null); `predictionsIn` is the public count.
+    return isPromptCard(o) && typeof o.canPass === 'boolean'
+      && typeof o.youCanPredict === 'boolean'
+      && (o.youPredicted === null || isVerdict(o.youPredicted))
+      && typeof o.predictionsIn === 'number'
+      ? (v as TruthDareView) : null;
   }
   if (o.phase === 'verdict') {
     return isPromptCard(o) && isTurnVerdict(o.outcome)

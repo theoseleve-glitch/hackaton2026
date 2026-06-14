@@ -89,6 +89,10 @@ const sgGuess = (playerId: string, value: number, at: number): GameEvent<Spotlig
 const sgAnswer = (playerId: string, answerIndex: number, at: number): GameEvent<SpotlightGuessAction> =>
   ({ type: 'action', playerId, action: { kind: 'answer', answerIndex }, at });
 
+// KEYSTONE (P0-B-lite) — the content-free react tap used by the answer-beat audit.
+const sgReact = (playerId: string, at: number): GameEvent<SpotlightGuessAction> =>
+  ({ type: 'action', playerId, action: { kind: 'react' }, at });
+
 const sgDeadlines = (n: number): GameEvent<SpotlightGuessAction>[] =>
   Array.from({ length: n }, (_, i) => ({ type: 'deadline' as const, at: 1_000 + i }));
 
@@ -137,6 +141,41 @@ const AUDITS: ReadonlyArray<[string, RedactionAudit, SGModule, ContentPack<Spotl
     // VALUE secrets at this state: the current round's still-hidden hints and every
     // FUTURE round's real question text (realIndex itself is structural — covered
     // by the invariance check; candidate indexes are single digits, uncheckable)
+    secrets: (state) => {
+      const s = state as {
+        round: number;
+        hintTier: number;
+        reverseRounds: Array<{
+          realIndex: number;
+          candidates: Array<{ fr: string; en: string }>;
+          hints: Array<{ fr: string; en: string }>;
+        }>;
+      };
+      const out: Array<{ value: string }> = [];
+      const cur = s.reverseRounds[s.round];
+      for (const h of (cur?.hints ?? []).slice(s.hintTier)) out.push({ value: h.fr }, { value: h.en });
+      for (let r = s.round + 1; r < s.reverseRounds.length; r++) {
+        const rr = s.reverseRounds[r]!;
+        const q = rr.candidates[rr.realIndex];
+        if (q !== undefined) out.push({ value: q.fr }, { value: q.en });
+      }
+      return out;
+    },
+  }, createSpotlightGuess('devine-la-question', DEVINE_LA_QUESTION_CONFIG), DEVINE_LA_QUESTION_PACK],
+  // KEYSTONE (P0-B-lite) — the answer-beat react-lite. Both scripts stay in
+  // 'answer:r0' (a react NEVER advances the spotlight-only answer beat); they
+  // differ ONLY in WHICH guesser tapped the content-free 'ready' marker. The
+  // reacting guesser SEES its own echo (myReact:true); every NON-reactor view
+  // is invariant under who-tapped — the marker is hidden, only the count public.
+  // The declared value secrets are the same answer-phase hidden content (this
+  // round's still-hidden hints + every FUTURE round's real question text); the
+  // react marker carries NONE of them, proving zero triangulation.
+  ['devine-la-question (answer-beat react)', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed', // spotlight = p1; p2/p3 are eligible reactors
+    events: [sgReact('p2', 1_000)],
+    eventsAlt: [sgReact('p3', 1_000)],
+    actors: ['p2', 'p3'],
     secrets: (state) => {
       const s = state as {
         round: number;

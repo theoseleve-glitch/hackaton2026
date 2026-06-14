@@ -6,7 +6,7 @@
     {
       "id": "viennoiserie-croissant-painchoc",
       "mediaType": "text",
-      "theme": { "fr": "Acheté pour six, mangé seul dans l'ascenseur", "en": "you bought six for the team. four survived the trip." },
+      "theme": { "fr": "Six achetés pour le groupe. Quatre arrivés. Un coupable ici.", "en": "bought six for the table. four arrived. one thief in this room." },
       "majority": { "fr": "Croissant", "en": "Croissant" },
       "impostor": { "fr": "Pain au chocolat", "en": "Chocolate croissant" },
       "closeness": "medium",
@@ -24,7 +24,7 @@
     {
       "id": "coffee-espresso-ristretto",
       "mediaType": "text",
-      "theme": { "fr": "Quatre par jour, et tu te demandes pourquoi tu trembles", "en": "personality in a tiny cup" },
+      "theme": { "fr": "Quelqu'un ici en est à son quatrième et accuse les autres d'être lents", "en": "someone here is on their fourth and calls everyone else slow" },
       "majority": { "fr": "Espresso", "en": "Espresso" },
       "impostor": { "fr": "Ristretto", "en": "Ristretto" },
       "closeness": "hard",
@@ -33,7 +33,7 @@
     {
       "id": "hotdrink-chocolat-chailatte",
       "mediaType": "text",
-      "theme": { "fr": "Pour ceux qui trouvent le café « trop amer »", "en": "a dessert pretending to be a coffee order" },
+      "theme": { "fr": "Quelqu'un ici a commandé ça en réunion. On juge déjà.", "en": "someone here orders this unironically. the table decides who." },
       "majority": { "fr": "Chocolat chaud", "en": "Hot chocolate" },
       "impostor": { "fr": "Chai latte", "en": "Chai latte" },
       "closeness": "medium",
@@ -60,7 +60,7 @@
     {
       "id": "sushi-maki-california",
       "mediaType": "text",
-      "theme": { "fr": "Commande à 60 balles pour impressionner", "en": "the order when they're paying" },
+      "theme": { "fr": "Quelqu'un ici commande large quand c'est l'autre qui régale", "en": "someone here orders big the second someone else is paying" },
       "majority": { "fr": "Maki", "en": "Maki" },
       "impostor": { "fr": "California roll", "en": "California roll" },
       "closeness": "medium",
@@ -96,7 +96,7 @@
     {
       "id": "summerfruit-peche-nectarine",
       "mediaType": "text",
-      "theme": { "fr": "Mangée au-dessus de l'évier, le jus jusqu'au coude", "en": "eaten over the sink like a raccoon" },
+      "theme": { "fr": "Quelqu'un ici a croqué dedans et reposé le reste dans la corbeille", "en": "someone in this room bit one and put the rest back" },
       "majority": { "fr": "Pêche", "en": "Peach" },
       "impostor": { "fr": "Nectarine", "en": "Nectarine" },
       "closeness": "hard",
@@ -123,7 +123,7 @@
     {
       "id": "snack-bagel-donut",
       "mediaType": "text",
-      "theme": { "fr": "Vu dans 1000 séries, mangé deux fois en vrai", "en": "breakfast in every cop show" },
+      "theme": { "fr": "Le dernier du paquet. Quelqu'un ici l'a pris sans demander.", "en": "the last one in the box. someone here took it without asking." },
       "majority": { "fr": "Bagel", "en": "Bagel" },
       "impostor": { "fr": "Donut", "en": "Donut" },
       "closeness": "medium",
@@ -141,7 +141,7 @@
     {
       "id": "apero-chips-popcorn",
       "mediaType": "text",
-      "theme": { "fr": "Fini avant l'arrivée des invités", "en": "empty bowl, zero confessions" },
+      "theme": { "fr": "Le bol vidé avant les invités. Quelqu'un ici niera jusqu'au bout.", "en": "the bowl was empty before the guests came. someone here will deny it." },
       "majority": { "fr": "Chips", "en": "Potato chips" },
       "impostor": { "fr": "Popcorn", "en": "Popcorn" },
       "closeness": "medium",
@@ -204,7 +204,7 @@
     {
       "id": "patisserie-macaron-meringue",
       "mediaType": "text",
-      "theme": { "fr": "Cadeau de lèche-botte chic", "en": "the suck-up's gift box" },
+      "theme": { "fr": "Offert à la belle-famille pour acheter la paix. Quelqu'un ici l'a déjà fait.", "en": "the peace offering for the in-laws. someone here has bought their way in." },
       "majority": { "fr": "Macaron", "en": "Macaron" },
       "impostor": { "fr": "Meringue", "en": "Meringue" },
       "closeness": "medium",
@@ -213,7 +213,7 @@
     {
       "id": "matin-jus-smoothie",
       "mediaType": "text",
-      "theme": { "fr": "Petit-déj d'influenceur fitness", "en": "the 5am 'morning routine' video prop" },
+      "theme": { "fr": "Quelqu'un ici a posté sa « morning routine ». Personne y croit.", "en": "someone here posted their 'morning routine'. nobody buys it." },
       "majority": { "fr": "Jus d'orange", "en": "Orange juice" },
       "impostor": { "fr": "Smoothie", "en": "Smoothie" },
       "closeness": "medium",
@@ -321,7 +321,7 @@
     {
       "id": "tartine-nutella-cacahuete",
       "mediaType": "text",
-      "theme": { "fr": "Fini à la petite cuillère", "en": "finished with a spoon, standing" },
+      "theme": { "fr": "Le pot vidé à la cuillère, debout, à 23h. Quelqu'un ici se reconnaît.", "en": "the jar killed with a spoon at 11pm, standing up. someone here knows." },
       "majority": { "fr": "Nutella", "en": "Nutella" },
       "impostor": { "fr": "Beurre de cacahuète", "en": "Peanut butter" },
       "closeness": "medium",
@@ -330,7 +330,7 @@
     {
       "id": "dimanche-brunch-petitdej",
       "mediaType": "text",
-      "theme": { "fr": "Lever à 13h légitimé", "en": "1pm breakfast with branding" },
+      "theme": { "fr": "Réservé à 10h, quelqu'un ici arrive à 13h sans s'excuser", "en": "booked for 10. someone here rolls in at 1 with no apology." },
       "majority": { "fr": "Brunch", "en": "Brunch" },
       "impostor": { "fr": "Petit-déjeuner", "en": "Breakfast" },
       "closeness": "hard",
@@ -339,7 +339,7 @@
     {
       "id": "sucrant-miel-erable",
       "mediaType": "text",
-      "theme": { "fr": "Sucre à bonne réputation", "en": "sugar with good PR" },
+      "theme": { "fr": "Le pot fini en douce. Personne avoue. Désignez.", "en": "the jar that's mysteriously empty. nobody confesses. point." },
       "majority": { "fr": "Miel", "en": "Honey" },
       "impostor": { "fr": "Sirop d'érable", "en": "Maple syrup" },
       "closeness": "medium",
@@ -357,7 +357,7 @@
     {
       "id": "sucre-painperdu-pancakes",
       "mediaType": "text",
-      "theme": { "fr": "Petit-déj des excuses", "en": "the apology breakfast" },
+      "theme": { "fr": "Le petit-déj qu'on prépare pour se faire pardonner. Quelqu'un ici a une dette.", "en": "the breakfast you make to apologise. someone here owes one." },
       "majority": { "fr": "Pain perdu", "en": "French toast" },
       "impostor": { "fr": "Pancakes", "en": "Pancakes" },
       "closeness": "medium",
@@ -600,7 +600,7 @@
     {
       "id": "detente-sauna-hammam",
       "mediaType": "text",
-      "theme": { "fr": "Transpirer entre inconnus, exprès", "en": "sweating with strangers, on purpose" },
+      "theme": { "fr": "Quelqu'un ici a tenu 40 secondes puis a parlé d'« hydratation »", "en": "someone here lasted 40 seconds then claimed they 'had to hydrate'" },
       "majority": { "fr": "Sauna", "en": "Sauna" },
       "impostor": { "fr": "Hammam", "en": "Steam room" },
       "closeness": "hard",
@@ -663,7 +663,7 @@
     {
       "id": "saison-ete-printemps",
       "mediaType": "text",
-      "theme": { "fr": "La saison des plans jamais honorés", "en": "the season of group plans that die in the chat" },
+      "theme": { "fr": "Quelqu'un ici a dit « je gère le Airbnb » et n'a jamais réservé", "en": "someone here said 'i'll sort the trip' and booked nothing" },
       "majority": { "fr": "Été", "en": "Summer" },
       "impostor": { "fr": "Printemps", "en": "Spring" },
       "closeness": "medium",
@@ -870,7 +870,7 @@
     {
       "id": "raquette-tennis-badminton",
       "mediaType": "text",
-      "theme": { "fr": "La passion qui a duré 3 semaines", "en": "the hobby that lasted three weeks" },
+      "theme": { "fr": "Quelqu'un ici a juré qu'il assurait. Le score dit l'inverse.", "en": "someone here swore they were good at this. the score disagreed." },
       "majority": { "fr": "Tennis", "en": "Tennis" },
       "impostor": { "fr": "Badminton", "en": "Badminton" },
       "closeness": "medium",
@@ -879,7 +879,7 @@
     {
       "id": "zen-yoga-pilates",
       "mediaType": "text",
-      "theme": { "fr": "Plus raconté que pratiqué", "en": "talked about more than attended" },
+      "theme": { "fr": "Un abonnement payé, trois séances faites. On connaît le profil.", "en": "the membership that's all direct debit, zero attendance. we know who." },
       "majority": { "fr": "Yoga", "en": "Yoga" },
       "impostor": { "fr": "Pilates", "en": "Pilates" },
       "closeness": "hard",
@@ -1032,7 +1032,7 @@
     {
       "id": "photo-selfie-portrait",
       "mediaType": "text",
-      "theme": { "fr": "47 essais pour une seule publication", "en": "47 attempts, one post" },
+      "theme": { "fr": "Quelqu'un ici a recadré le groupe pour mieux se mettre, avoue", "en": "someone here cropped the group out to look better. admit it." },
       "majority": { "fr": "Selfie", "en": "Selfie" },
       "impostor": { "fr": "Portrait", "en": "Portrait" },
       "closeness": "medium",
@@ -1509,7 +1509,7 @@
     {
       "id": "cuisine-chef-patissier",
       "mediaType": "text",
-      "theme": { "fr": "Ta reconversion fantasmée après deux Top Chef", "en": "the career pivot you plan during MasterChef" },
+      "theme": { "fr": "La reconversion que quelqu'un ici annonce après deux émissions de cuisine", "en": "the career pivot someone here announces after two cooking shows" },
       "majority": { "fr": "Chef cuisinier", "en": "Chef" },
       "impostor": { "fr": "Pâtissier", "en": "Pastry chef" },
       "closeness": "hard",
@@ -1662,7 +1662,7 @@
     {
       "id": "cartes-uno-huitamericain",
       "mediaType": "text",
-      "theme": { "fr": "A brisé plus d’amitiés que la coloc", "en": "ends friendships faster than a group holiday" },
+      "theme": { "fr": "Quelqu'un ici planque encore une carte dans sa manche. On t'a vu.", "en": "someone here still hides a card up their sleeve. we saw that." },
       "majority": { "fr": "Uno", "en": "Uno" },
       "impostor": { "fr": "Huit américain", "en": "Crazy Eights" },
       "closeness": "hard",

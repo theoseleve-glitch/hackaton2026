@@ -6,6 +6,8 @@ import type { RoomPlayer } from '@bloop/protocol';
 import type {
   ConstraintCard,
   PerformJudgeOutcome,
+  Reaction,
+  ReactionCounts,
   SecretCard,
   TurnResult,
 } from '@bloop/game-perform-judge';
@@ -81,6 +83,100 @@ function Stamp({ outcome, lang }: { outcome: PerformJudgeOutcome; lang: Lang }) 
       <AppText role="displayL" style={{ textAlign: 'center', color: good ? '#FFFFFF' : undefined }}>
         {lang === 'fr' ? OUTCOME_FR[outcome] : OUTCOME_EN[outcome]}
       </AppText>
+    </View>
+  );
+}
+
+// CC-4 — fixed audience reaction set (enum-only, zero free text). Order is the
+// public bar order: hype → laugh → cringe.
+const REACTION_META: ReadonlyArray<{ key: Reaction; emoji: string; fr: string; en: string }> = [
+  { key: 'fire', emoji: '🔥', fr: 'Feu', en: 'Fire' },
+  { key: 'laugh', emoji: '😂', fr: 'Mdr', en: 'Laugh' },
+  { key: 'cringe', emoji: '😬', fr: 'Cringe', en: 'Cringe' },
+];
+
+/**
+ * Live audience reaction bar (perform phase). Every phone shows the PUBLIC
+ * per-emoji counts building in real time; eligible audience members (connected
+ * non-actors who haven't reacted) tap once to add theirs. Reactions NEVER
+ * resolve the turn — purely cosmetic hype. `mine` highlights the locked choice.
+ */
+function ReactionBar({
+  counts, mine, canReact, onReact, lang,
+}: {
+  counts: ReactionCounts;
+  mine: Reaction | null;
+  canReact: boolean;
+  onReact: (r: Reaction) => void;
+  lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const locked = mine !== null;
+  return (
+    <View style={{ gap: tokens.spacing.sm, alignItems: 'center' }}>
+      <AppText role="overline" color="textSecondary">
+        {locked
+          ? L('TA RÉACTION EST PARTIE', 'YOUR REACTION IS IN')
+          : canReact
+            ? L('RÉAGIS EN DIRECT', 'REACT LIVE')
+            : L('RÉACTIONS DU PUBLIC', 'CROWD REACTIONS')}
+      </AppText>
+      <View style={{ flexDirection: 'row', gap: tokens.spacing.sm, justifyContent: 'center' }}>
+        {REACTION_META.map((r) => {
+          const isMine = mine === r.key;
+          const tappable = canReact && !locked;
+          const count = counts[r.key];
+          return (
+            <Pressable
+              key={r.key}
+              disabled={!tappable}
+              onPress={() => onReact(r.key)}
+              accessibilityRole="button"
+              accessibilityState={{ disabled: !tappable, selected: isMine }}
+              accessibilityLabel={L(`${r.fr} — ${count}`, `${r.en} — ${count}`)}
+              style={{
+                flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs,
+                minHeight: 44, paddingHorizontal: tokens.spacing.md, paddingVertical: tokens.spacing.xs,
+                borderRadius: tokens.radii.pill,
+                backgroundColor: isMine ? theme.brand : theme.surface,
+                borderWidth: 2, borderColor: isMine ? theme.brand : theme.border,
+                opacity: tappable || isMine ? 1 : 0.85,
+                ...tokens.elevation.e1,
+              }}>
+              <AppText role="titleM">{r.emoji}</AppText>
+              <AppText role="bodyStrong" color={isMine ? 'textOnBrand' : 'textPrimary'}>{count}</AppText>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
+/** CC-4 reveal echo — the public reaction tally rides onto the result card. */
+function ReactionTally({ counts, lang }: { counts: ReactionCounts; lang: Lang }) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const total = counts.fire + counts.laugh + counts.cringe;
+  if (total === 0) return null;
+  return (
+    <View style={{ gap: tokens.spacing.xs, alignItems: 'center' }}>
+      <AppText role="overline" color="textSecondary">
+        {L(`LA SALLE A RÉAGI ${total}×`, `THE ROOM REACTED ${total}×`)}
+      </AppText>
+      <View style={{ flexDirection: 'row', gap: tokens.spacing.sm, justifyContent: 'center' }}>
+        {REACTION_META.map((r) => (
+          <View key={r.key} style={{
+            flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.xs,
+            paddingHorizontal: tokens.spacing.md, paddingVertical: tokens.spacing.xs,
+            borderRadius: tokens.radii.pill, backgroundColor: theme.surfaceAlt,
+          }}>
+            <AppText role="bodyStrong">{r.emoji}</AppText>
+            <AppText role="bodyStrong" color="textSecondary">{counts[r.key]}</AppText>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -305,6 +401,15 @@ export function PerformJudgePlay({ code }: { code: string }) {
                 {L(`Guidez ${spotName} — uniquement via le canal autorisé !`, `Guide ${spotName} — allowed channel only!`)}
               </AppText>
             )}
+            {/* CC-4 — audience live reactions: public counts to all; tap-to-react
+                for connected non-actors only. Never resolves the turn. */}
+            <ReactionBar
+              counts={pj.reactionCounts}
+              mine={pj.myReaction}
+              canReact={pj.canReact}
+              onReact={(reaction) => sendAction({ kind: 'react', reaction })}
+              lang={lang}
+            />
           </View>
         )}
 
@@ -414,6 +519,8 @@ export function PerformJudgePlay({ code }: { code: string }) {
                   {L('⚡ Bonus rapidité !', '⚡ Speed bonus!')}
                 </AppText>
               )}
+              {/* CC-4 — public audience reaction tally rides onto the reveal card. */}
+              <ReactionTally counts={result.reactions} lang={lang} />
               {Object.entries(result.points).length > 0 && (
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, justifyContent: 'center' }}>
                   {Object.entries(result.points).map(([id, pts]) => (

@@ -1,5 +1,15 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence } from '@bloop/kit';
+import type { Presence, SideBetBuffer } from '@bloop/kit';
+
+/**
+ * KEYSTONE (P0-B-lite) — devine react-lite token. A CONTENT-FREE liveness tap
+ * during the reverse 'answer' beat: a single value-less 'ready' marker. It is
+ * deliberately content-free so it can NEVER triangulate the hidden question
+ * (risk #2): no option, no candidate, no answer index ever rides on it. The
+ * marker lives in a hidden side-bet buffer (kit `sidebet`), exposed only as a
+ * public aggregate count + an owner-only echo — never another player's marker.
+ */
+export type ReactToken = 'ready';
 
 /** Bilingual UI string — the client picks a locale at render time. */
 export interface LText {
@@ -81,7 +91,7 @@ export interface SpotlightGuessConfig {
 export const JEU_DE_LA_NOTE_CONFIG: SpotlightGuessConfig = {
   mode: 'scale',
   totalRounds: 8,
-  revealMs: 8_000,
+  revealMs: 9_000,
   lockOnSubmit: false,
   domain: 'scale10',
   targetReadMs: 8_000,
@@ -103,7 +113,7 @@ export const JEU_DE_LA_NOTE_CONFIG: SpotlightGuessConfig = {
 export const DEVINE_LA_QUESTION_CONFIG: SpotlightGuessConfig = {
   mode: 'reverse-question',
   totalRounds: 6,
-  revealMs: 8_000,
+  revealMs: 9_000,
   lockOnSubmit: true,
   // scale-only knobs, inert in reverse mode:
   domain: 'scale10',
@@ -183,6 +193,13 @@ export interface SpotlightGuessState {
   chosenAnswer: number | null;
   /** HIDDEN buffer: never exposed pre-reveal beyond acted-booleans + owner echo. */
   guesses: Record<PlayerId, GuessEntry>;
+  /**
+   * KEYSTONE (P0-B-lite) — HIDDEN react buffer for the reverse 'answer' beat.
+   * Content-free 'ready' markers; exposed only as a public count + owner echo
+   * (kit `redactSideBets`). SEPARATE from `guesses` so it can never be counted
+   * toward the primary `allActed`/early-resolve, and never leaks the ballot.
+   */
+  reacts: SideBetBuffer<ReactToken>;
   /** True when the round was voided (spotlight left / never answered). */
   voided: boolean;
   /** Points gained in the last resolved round — public from reveal on. */
@@ -194,7 +211,9 @@ export type SpotlightGuessAction =
   | { kind: 'ready' }
   | { kind: 'openVotes' }
   | { kind: 'answer'; answerIndex: number }
-  | { kind: 'guess'; value: number };
+  | { kind: 'guess'; value: number }
+  /** KEYSTONE (P0-B-lite) — content-free liveness tap during reverse 'answer'. */
+  | { kind: 'react' };
 
 // ---------------------------------------------------------------------------
 // Views — every player-visible content string is bilingual {fr,en}.
@@ -218,12 +237,28 @@ interface ViewBase {
 export type SpotlightGuessView =
   | (ViewBase & {
       mode: 'scale';
-      phase: 'target' | 'talk';
+      phase: 'target';
       domain: ScaleDomain;
       item: ScaleItemView | null;
       canEndTalk: boolean;
       /** The secret — spotlight only; null for everyone else. */
       myTarget: number | null;
+    })
+  | (ViewBase & {
+      mode: 'scale';
+      phase: 'talk';
+      domain: ScaleDomain;
+      item: ScaleItemView | null;
+      canEndTalk: boolean;
+      /** The secret — spotlight only; null for everyone else. */
+      myTarget: number | null;
+      /**
+       * KEYSTONE (P0-A) live-dial — acted-booleans for the first-impression dial
+       * written into the SAME hidden guess buffer during talk (public aggregate).
+       */
+      hasGuessed: Record<PlayerId, boolean>;
+      /** Owner echo only — the viewer's own first-impression dial (null if none). */
+      myGuess: number | null;
     })
   | (ViewBase & {
       mode: 'scale';
@@ -253,6 +288,14 @@ export type SpotlightGuessView =
       /** Spotlight only; null for guessers/spectators (zero leak — no candidates either). */
       question: LText | null;
       answers: LText[] | null;
+      /**
+       * KEYSTONE (P0-B-lite) react-lite — public aggregate ONLY: how many guessers
+       * have tapped the content-free 'ready' marker (avatars light up). Carries no
+       * value, no per-player map, nothing that could triangulate the question.
+       */
+      reactCount: number;
+      /** Owner echo only — has THIS viewer tapped? (true/false, never anyone else's). */
+      myReact: boolean;
     })
   | (ViewBase & {
       mode: 'reverse-question';

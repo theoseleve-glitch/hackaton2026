@@ -1,6 +1,6 @@
 import type { PlayerId } from '@bloop/engine';
 import { connectedPlayers, nextActiveSeat } from '@bloop/kit';
-import type { PerformJudgeItem, PerformJudgeState } from './state.js';
+import { REACTIONS, type PerformJudgeItem, type PerformJudgeState, type ReactionCounts } from './state.js';
 
 type S = PerformJudgeState;
 
@@ -10,6 +10,27 @@ export function currentItem(state: S): PerformJudgeItem | null {
 
 export function crew(state: S): PlayerId[] {
   return state.partner === null ? [state.performer] : [state.performer, state.partner];
+}
+
+/**
+ * CC-4 — who may react during perform: every CONNECTED roster player who is NOT
+ * on stage (not in the performing crew). The audience. A reaction from anyone
+ * else is rejected. SEPARATE from the judge/tap eligibility sets — reactions
+ * are a non-scoring cosmetic channel and never feed a resolve.
+ */
+export function reactors(state: S): PlayerId[] {
+  const onStage = crew(state);
+  return connectedPlayers(state.players, state.connected).filter((p) => !onStage.includes(p));
+}
+
+/** CC-4 — public per-enum reaction counts (aggregate; leaks no ballot). */
+export function reactionCounts(state: S): ReactionCounts {
+  const counts: ReactionCounts = { fire: 0, laugh: 0, cringe: 0 };
+  for (const p of Object.keys(state.reactions)) {
+    const r = state.reactions[p];
+    if (r !== undefined && REACTIONS.includes(r)) counts[r] += 1;
+  }
+  return counts;
 }
 
 /** puppet: connected non-performers — the early-majority denominator E. */

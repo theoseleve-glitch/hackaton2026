@@ -26,7 +26,9 @@ describe('clock banking on interrupts', () => {
     expect(resumed.phase).toBe('live');
     expect(resumed.segmentStartedAt).toBe(86_300);
     expect(resumed.liveSeg).toBe(1);
-    expect(game.phaseDurationMs(resumed)).toBe(119_700);
+    expect(resumed.liveRemainingMs).toBe(119_700); // the bank survives the interrupt intact
+    // ...but the segment is armed at the heat-check cadence (min of bank and heatMs).
+    expect(game.phaseDurationMs(resumed)).toBe(24_000);
     expect(effects).toEqual([
       { type: 'analytics', name: 'tribunal_resolved', props: { round: 0, guilty: false } },
     ]);
@@ -46,7 +48,8 @@ describe('clock banking on interrupts', () => {
     const resumed2 = game.reduce(guess, deadline(116_300)).state;
     expect(resumed2.phase).toBe('live');
     expect(resumed2.liveSeg).toBe(2);
-    expect(game.phaseDurationMs(resumed2)).toBe(109_700);
+    expect(resumed2.liveRemainingMs).toBe(109_700); // bank intact across the chained interrupts
+    expect(game.phaseDurationMs(resumed2)).toBe(24_000); // armed at the heat cadence
   });
 
   it('the live deadline empties the bank and reveals timeUp', () => {

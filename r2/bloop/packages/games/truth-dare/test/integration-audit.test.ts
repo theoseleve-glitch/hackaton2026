@@ -92,6 +92,9 @@ const tdDeclare = (playerId: string, at: number): GameEvent<TruthDareAction> =>
 const tdVote = (playerId: string, vote: 'done' | 'chickened', at: number): GameEvent<TruthDareAction> =>
   ({ type: 'action', playerId, action: { kind: 'verdict', vote }, at });
 
+const tdPredict = (playerId: string, bet: 'done' | 'chickened', at: number): GameEvent<TruthDareAction> =>
+  ({ type: 'action', playerId, action: { kind: 'predict', bet }, at });
+
 /** The next-undrawn text of every deck is a VALUE secret until its draw. */
 const tdUndrawnTexts = (state: unknown): ReadonlyArray<{ value: string }> => {
   const s = state as {
@@ -125,20 +128,22 @@ const AUDITS: ReadonlyArray<[string, RedactionAudit, TdModule, ContentPack<Truth
     seed: 'audit-seed',
     // rotation under 'audit-seed' is [p3, p1, p2]. Park MID-VERDICT of turn 1
     // (turn 1, not 0, keeps the remaining deadline walk within the 25-step
-    // audit budget: 23 steps) with ONE of two expected votes buffered.
+    // audit budget: 23 steps) with ONE of two expected votes buffered. p3 also
+    // calls a CONSTANT hidden CC-1 prediction during turn-1 prompt (identical in
+    // both scripts) — it carries into the parked verdict and must never leak.
     events: [
       tdChoose('p3', 'truth', 1_000), tdDeclare('p3', 2_000),
       tdVote('p1', 'done', 3_000), tdVote('p2', 'done', 4_000), // turn 0 resolves
       { type: 'deadline', at: 5_000 }, // score:0 -> choose:1 (active p1)
-      tdChoose('p1', 'truth', 6_000), tdDeclare('p1', 7_000),
+      tdChoose('p1', 'truth', 6_000), tdPredict('p3', 'done', 6_500), tdDeclare('p1', 7_000),
       tdVote('p2', 'done', 8_000),
     ],
     eventsAlt: [
       tdChoose('p3', 'truth', 1_000), tdDeclare('p3', 2_000),
       tdVote('p1', 'done', 3_000), tdVote('p2', 'done', 4_000),
       { type: 'deadline', at: 5_000 },
-      tdChoose('p1', 'truth', 6_000), tdDeclare('p1', 7_000),
-      tdVote('p2', 'chickened', 8_000), // ONLY p2's hidden vote differs
+      tdChoose('p1', 'truth', 6_000), tdPredict('p3', 'done', 6_500), tdDeclare('p1', 7_000),
+      tdVote('p2', 'chickened', 8_000), // ONLY p2's hidden vote differs (p3's prediction is constant)
     ],
     actors: ['p2'],
     secrets: tdUndrawnTexts,

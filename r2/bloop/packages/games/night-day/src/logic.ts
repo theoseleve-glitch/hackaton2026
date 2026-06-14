@@ -50,6 +50,22 @@ export function stepMode(state: NightDayState, step: NightStep): 'run' | 'decoy'
   return state.config.revealRoleOnDeath ? 'skip' : 'decoy';
 }
 
+/**
+ * Is `playerId` the LIVING real actor of the CURRENT night sub-phase? Mirrors
+ * the view's `amActor`: seer step → the seer, wolves step → any wolf, witch
+ * step → the witch. Used to gate the CC-1 Night Read to non-actors only (the
+ * active role reads via their real action). Returns false outside a night
+ * sub-phase. Role-agnostic in shape so it never leaks which seat is the actor.
+ */
+export function isStepActor(state: NightDayState, playerId: PlayerId): boolean {
+  if (state.alive[playerId] !== true) return false;
+  const role = state.roles[playerId];
+  if (state.phase === 'nightSeer') return role === 'seer';
+  if (state.phase === 'nightWolves') return role === 'wolf';
+  if (state.phase === 'nightWitch') return role === 'witch';
+  return false;
+}
+
 /** Pure ordered win-check (runs at dawn and lynchReveal deadlines). */
 export function winCheck(
   state: NightDayState,

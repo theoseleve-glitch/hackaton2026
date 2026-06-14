@@ -87,6 +87,61 @@ function PromptCard({ choice, intensity, text, lang }: {
   );
 }
 
+/**
+ * CC-1 "Call your shot": non-active spectators bet Done or Chicken on the active
+ * player during the prompt. Owner-only echo of own bet + a public count — never
+ * per-voter identity. Once cast, the choice is locked (re-tap is a no-op server-side).
+ */
+function CallYourShot({ activeName, myBet, count, onBet, lang }: {
+  activeName: string; myBet: Verdict | null; count: number; onBet: (bet: Verdict) => void; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const locked = myBet !== null;
+  const BetChip = ({ bet, label, accent }: { bet: Verdict; label: string; accent: string }) => {
+    const picked = myBet === bet;
+    // After a bet, the un-picked side dims; before, both invite the tap.
+    const dim = locked && !picked;
+    return (
+      <Pressable
+        onPress={() => { if (!locked) onBet(bet); }}
+        disabled={locked}
+        accessibilityLabel={label}
+        style={{
+          flex: 1, backgroundColor: picked ? accent : theme.surface,
+          borderRadius: tokens.radii.xl, borderWidth: 3,
+          borderColor: picked ? theme.stickerOutline : theme.border,
+          paddingVertical: tokens.spacing.lg, paddingHorizontal: tokens.spacing.md,
+          alignItems: 'center', opacity: dim ? 0.5 : 1,
+          ...(picked ? tokens.elevation.e2 : tokens.elevation.e1),
+        }}>
+        <AppText role="titleM" style={{ textAlign: 'center', color: picked ? '#FFFFFF' : undefined }}>{label}</AppText>
+      </Pressable>
+    );
+  };
+  return (
+    <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding, gap: tokens.spacing.md, ...tokens.elevation.e1 }}>
+      <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+        {L('🎯 PARIE SUR LE COUP', '🎯 CALL YOUR SHOT')}
+      </AppText>
+      <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
+        {locked
+          ? L(`Pari verrouillé sur ${activeName} ✓`, `Bet locked on ${activeName} ✓`)
+          : L(`${activeName} va-t-il/elle le faire ?`, `Will ${activeName} pull it off?`)}
+      </AppText>
+      <View style={{ flexDirection: 'row', gap: tokens.spacing.sm }}>
+        <BetChip bet="done" label={L('Fait ✅', 'Done ✅')} accent={theme.success} />
+        <BetChip bet="chickened" label={L('Se dégonfle 🐔', 'Chickens 🐔')} accent={theme.danger} />
+      </View>
+      <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+        {count > 0
+          ? L(`${count} pari${count > 1 ? 's' : ''} placé${count > 1 ? 's' : ''} 🤫`, `${count} shot${count > 1 ? 's' : ''} called 🤫`)
+          : L('Sois le premier à parier !', 'Be the first to call it!')}
+      </AppText>
+    </View>
+  );
+}
+
 /** Score reveal: stamp + tally bar + points burst + forfeit card. */
 function ScoreCard({ result, stamp, nick, lang }: {
   result: TdResult; stamp: string; nick: (id: string) => string; lang: Lang;
@@ -116,6 +171,24 @@ function ScoreCard({ result, stamp, nick, lang }: {
       <AppText role="headline" color="xp" style={{ textAlign: 'center' }}>
         +{result.pointsAwarded} pts → {nick(result.activePlayer)}
       </AppText>
+      {result.spectatorTally.total > 0 && (
+        <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, gap: tokens.spacing.xs }}>
+          <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+            {L('🎯 PARIS SUR LE COUP', '🎯 CALLED SHOTS')}
+          </AppText>
+          <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
+            {L(
+              `${result.spectatorTally.correct}/${result.spectatorTally.total} ont vu juste`,
+              `${result.spectatorTally.correct}/${result.spectatorTally.total} called it right`,
+            )}
+          </AppText>
+          {result.spectatorTally.correct > 0 && (
+            <AppText role="caption" color="success" style={{ textAlign: 'center' }}>
+              {L(`+${result.spectatorTally.pointsEach} pts chacun·e 🎉`, `+${result.spectatorTally.pointsEach} pts each 🎉`)}
+            </AppText>
+          )}
+        </View>
+      )}
       {result.forfeitText !== null && (
         <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg }}>
           <AppText role="body" style={{ textAlign: 'center', fontStyle: 'italic' }}>
@@ -210,10 +283,22 @@ export function TruthDarePlay({ code }: { code: string }) {
                   onPress={() => sendAction({ kind: 'declare', result: 'chickened' })} />
               </>
             ) : (
-              <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
-                {L(`TOUS LES YEUX SUR ${nick(td.activePlayer).toUpperCase()} !`,
-                  `ALL EYES ON ${nick(td.activePlayer).toUpperCase()}!`)}
-              </AppText>
+              <>
+                <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+                  {L(`TOUS LES YEUX SUR ${nick(td.activePlayer).toUpperCase()} !`,
+                    `ALL EYES ON ${nick(td.activePlayer).toUpperCase()}!`)}
+                </AppText>
+                {/* CC-1: a non-active spectator can bet on the outcome, or just see the locked echo + count. */}
+                {(td.youCanPredict || td.youPredicted !== null) && (
+                  <CallYourShot
+                    activeName={nick(td.activePlayer)}
+                    myBet={td.youPredicted}
+                    count={td.predictionsIn}
+                    onBet={(bet) => sendAction({ kind: 'predict', bet })}
+                    lang={lang}
+                  />
+                )}
+              </>
             )}
           </View>
         )}

@@ -39,13 +39,25 @@ const isConstraint = (v: unknown): boolean => {
   return isLText(o.label) && isLText(o.rule);
 };
 
+/** CC-4 — public per-enum reaction tally { fire, laugh, cringe }. */
+const isReactionCounts = (v: unknown): boolean => {
+  if (typeof v !== 'object' || v === null) return false;
+  const o = v as Record<string, unknown>;
+  return typeof o.fire === 'number' && typeof o.laugh === 'number' && typeof o.cringe === 'number';
+};
+
+/** CC-4 — owner-only echo of the viewer's own reaction (or null). */
+const isReactionOrNull = (v: unknown): boolean =>
+  v === null || v === 'fire' || v === 'laugh' || v === 'cringe';
+
 const isResult = (v: unknown): v is TurnResult => {
   if (typeof v !== 'object' || v === null) return false;
   const o = v as Record<string, unknown>;
   return typeof o.performer === 'string'
     && typeof o.outcome === 'string'
     && typeof o.fast === 'boolean'
-    && typeof o.points === 'object' && o.points !== null;
+    && typeof o.points === 'object' && o.points !== null
+    && isReactionCounts(o.reactions);
 };
 
 function baseOk(o: Record<string, unknown>): boolean {
@@ -84,6 +96,7 @@ export function asPerformJudgeView(v: unknown): PerformJudgeView | null {
       && typeof o.canPass === 'boolean'
       && (o.claimTargets === null || (Array.isArray(o.claimTargets) && o.claimTargets.every((p) => typeof p === 'string')))
       && (o.crewDone === null || isRec(o.crewDone, 'boolean'))
+      && isReactionCounts(o.reactionCounts) && isReactionOrNull(o.myReaction) && typeof o.canReact === 'boolean'
       && isSecret(o.secret) && isConstraint(o.constraint) && isNullOrLText(o.categoryHint)
       ? (v as PerformJudgeView) : null;
   }

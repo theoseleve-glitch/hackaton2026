@@ -338,8 +338,8 @@ export const LOUP_GAROU_PACK: ContentPack<NightDayContent> = {
     "type": "narration",
     "slot": "dawn.noDeath",
     "text": {
-      "fr": "Personne n'est mort cette nuit. Ne confondez pas chance et pardon.",
-      "en": "Nobody died last night. Don't mistake luck for forgiveness."
+      "fr": "Personne n'est mort cette nuit. Les crocs étaient sortis. Ils sont rentrés bredouilles, et ils n'aiment pas ça.",
+      "en": "Nobody died last night. The fangs were out. They went back empty, and they do not take it well."
     }
   },
   {
@@ -347,8 +347,8 @@ export const LOUP_GAROU_PACK: ContentPack<NightDayContent> = {
     "type": "narration",
     "slot": "dawn.noDeath",
     "text": {
-      "fr": "Tout le monde répond à l'appel. Encadrez ce matin : il est en passe de devenir une pièce de collection.",
-      "en": "Everyone answers roll call. Frame this morning. It's about to become a collector's item."
+      "fr": "Personne ne manque à l'appel. Personne. Et pourtant, cette nuit, une main s'est levée et a choisi un nom. Le nom a survécu. La main est toujours là.",
+      "en": "Nobody's missing at roll call. Nobody. And yet, last night, a hand went up and chose a name. The name survived. The hand is still here."
     }
   },
   {
@@ -626,8 +626,8 @@ export const LOUP_GAROU_PACK: ContentPack<NightDayContent> = {
     "type": "narration",
     "slot": "lynch.villager",
     "text": {
-      "fr": "Le village vient d'abattre un des siens. {target} jouait pour vous. Stratégie audacieuse : gagner en s'éliminant soi-même. Les loups prennent des notes, admiratifs.",
-      "en": "The village just put down one of its own. {target} was playing for you. Bold strategy, winning by eliminating yourselves. The wolves are taking admiring notes."
+      "fr": "Le village vient d'abattre un des siens. {target} jouait pour vous. Cette nuit, les loups n'auront pas à se déranger. Vous avez fait leur quota.",
+      "en": "The village just put down one of its own. {target} was playing for you. Tonight, the wolves can stay home. You've filled their quota."
     }
   },
   {
@@ -1121,8 +1121,8 @@ export const LOUP_GAROU_PACK: ContentPack<NightDayContent> = {
     "type": "narration",
     "slot": "lynch.villager",
     "text": {
-      "fr": "Innocent. {target} le disait depuis le début. Retenez la leçon : ici, dire la vérité ne sauve personne. Demandez à la voyante.",
-      "en": "Innocent. {target} said so from the start. Learn the lesson: around here, telling the truth saves no one. Ask the seer."
+      "fr": "Innocent. {target} le disait depuis le début. Du début à la fin. À voix haute. Vous avez voté quand même.",
+      "en": "Innocent. {target} said so from the start. From start to finish. Out loud. You voted anyway."
     }
   },
   {

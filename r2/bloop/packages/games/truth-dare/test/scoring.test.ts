@@ -11,6 +11,7 @@ import {
   othersOf,
   pass,
   PLAYERS,
+  predict,
   TOD_PACK,
   tod,
   vote,
@@ -116,6 +117,91 @@ describe('EXACT scoring (wave2 §2.7 — active player only, voters never score)
     const { state, active, voters } = turnWithVotes('s', 'dare', ['done', 'done']);
     expect(state.scores[active]).toBe(15);
     for (const v of voters) expect(state.scores[v]).toBe(0);
+  });
+});
+
+describe('CC-1 spectator scoring (call your shot resolves at score)', () => {
+  const PLAYERS4 = ['p1', 'p2', 'p3', 'p4'];
+
+  it('correct predictors earn +2 each; wrong ones earn 0; the active player is unaffected', () => {
+    const m = createTruthDare('truth-or-dare-2', TRUTH_OR_DARE_2_CONFIG);
+    const s0 = m.init('s4', PLAYERS4, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2, v3] = othersOf(s0);
+    // v1+v2 call 'done', v3 calls 'chickened'; the room then verdicts DONE.
+    const sScore = fold(m, s0, [
+      choose(active, 'truth'),
+      predict(v1!, 'done'), predict(v2!, 'done'), predict(v3!, 'chickened'),
+      declare(active, 'done'),
+      vote(v1!, 'done'), vote(v2!, 'done'), vote(v3!, 'done'),
+    ]);
+    expect(sScore.phase).toBe('score');
+    expect(sScore.lastResult?.verdict).toBe('done');
+    expect(sScore.scores[active]).toBe(10); // active scoring unchanged by predictions
+    expect(sScore.scores[v1!]).toBe(2); // correct call
+    expect(sScore.scores[v2!]).toBe(2); // correct call
+    expect(sScore.scores[v3!]).toBe(0); // wrong call
+    // counts-only spectator tally — no names
+    expect(sScore.lastResult?.spectatorTally).toEqual({ correct: 2, total: 3, pointsEach: 2 });
+  });
+
+  it("a 'chickened' verdict rewards the spectators who called the bottle, not the believers", () => {
+    const m = createTruthDare('truth-or-dare-2', TRUTH_OR_DARE_2_CONFIG);
+    const s0 = m.init('s4', PLAYERS4, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2, v3] = othersOf(s0);
+    const sScore = fold(m, s0, [
+      choose(active, 'truth'),
+      predict(v1!, 'chickened'), predict(v2!, 'done'), predict(v3!, 'chickened'),
+      declare(active, 'done'),
+      vote(v1!, 'chickened'), vote(v2!, 'chickened'), vote(v3!, 'chickened'), // overturned -> chickened
+    ]);
+    expect(sScore.lastResult?.verdict).toBe('chickened');
+    expect(sScore.scores[active]).toBe(0);
+    expect(sScore.scores[v1!]).toBe(2); // called the bottle
+    expect(sScore.scores[v2!]).toBe(0); // believed, wrong
+    expect(sScore.scores[v3!]).toBe(2); // called the bottle
+    expect(sScore.lastResult?.spectatorTally).toEqual({ correct: 2, total: 3, pointsEach: 2 });
+  });
+
+  it("an escape ('passed') counts as 'did not complete': a 'chickened' prediction wins", () => {
+    const s0 = drink.init('s', PLAYERS, DRINK_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2] = othersOf(s0);
+    // v1 calls the escape (chickened), v2 believes (done); the active player drinks.
+    const sScore = fold(drink, s0, [
+      predict(v1!, 'chickened'), predict(v2!, 'done'),
+      pass(active),
+    ]);
+    expect(sScore.phase).toBe('score');
+    expect(sScore.lastResult?.verdict).toBe('passed');
+    expect(sScore.scores[active]).toBe(3); // the escape's own points, unchanged
+    expect(sScore.scores[v1!]).toBe(2); // called the dodge
+    expect(sScore.scores[v2!]).toBe(0); // believed, wrong
+    expect(sScore.lastResult?.spectatorTally).toEqual({ correct: 1, total: 2, pointsEach: 2 });
+  });
+
+  it('no predictions placed -> a zeroed spectator tally, no spectator ever moves', () => {
+    const { state, voters } = turnWithVotes('s', 'truth', ['done', 'done']);
+    expect(state.lastResult?.spectatorTally).toEqual({ correct: 0, total: 0, pointsEach: 2 });
+    for (const v of voters) expect(state.scores[v]).toBe(0);
+  });
+
+  it('a correct prediction on a deadline-timeout (chickened) turn still pays at score', () => {
+    const s0 = tod.init('s', PLAYERS, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2] = othersOf(s0);
+    // both call the bottle, then the active player times out (= chickened).
+    const sScore = fold(tod, s0, [
+      choose(active, 'dare'),
+      predict(v1!, 'chickened'), predict(v2!, 'chickened'),
+      deadline(1),
+    ]);
+    expect(sScore.phase).toBe('score');
+    expect(sScore.lastResult?.verdict).toBe('chickened');
+    expect(sScore.scores[v1!]).toBe(2);
+    expect(sScore.scores[v2!]).toBe(2);
+    expect(sScore.lastResult?.spectatorTally).toEqual({ correct: 2, total: 2, pointsEach: 2 });
   });
 });
 

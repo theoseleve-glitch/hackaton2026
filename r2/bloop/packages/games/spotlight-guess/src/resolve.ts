@@ -1,6 +1,8 @@
 import type { Effect, PlayerId, ReduceResult } from '@bloop/engine';
-import { connectedPlayers, emptyPlayerMap, gameOver, nextActiveSeat } from '@bloop/kit';
-import type { GuessEntry, ScaleDomain, SpotlightGuessState } from './state.js';
+import {
+  connectedPlayers, emptyPlayerMap, emptySideBets, gameOver, nextActiveSeat,
+} from '@bloop/kit';
+import type { GuessEntry, ReactToken, ScaleDomain, SpotlightGuessState } from './state.js';
 
 // ---------------------------------------------------------------------------
 // Pure helpers shared by the reducer, the views and the resolvers.
@@ -150,6 +152,8 @@ export function startNextRound(state: SpotlightGuessState): SpotlightGuessState 
     hintTier: 0,
     chosenAnswer: null,
     guesses: emptyPlayerMap<GuessEntry>(),
+    // KEYSTONE (P0-B-lite) — fresh react buffer for the next 'answer' beat.
+    reacts: emptySideBets<ReactToken>(),
     voided: false,
     lastGained: emptyPlayerMap<number>(),
   };

@@ -109,9 +109,9 @@ export const DEVINE_L_ACTION_CONFIG: PerformJudgeConfig = {
   minPlayers: 3,
   laps: 2,
   readyMs: 6_000,
-  performMs: 75_000,
-  judgeMs: 15_000,
-  revealMs: 7_000,
+  performMs: 55_000,
+  judgeMs: 12_000,
+  revealMs: 8_000,
   scoreboardMs: 0,
   scoreboardEvery: 0,
   promptChoices: 1,
@@ -140,7 +140,7 @@ export const DEVINE_L_OBJET_CONFIG: PerformJudgeConfig = {
   readyMs: 4_000,
   performMs: 45_000,
   judgeMs: 12_000,
-  revealMs: 6_000,
+  revealMs: 8_000,
   scoreboardMs: 0,
   scoreboardEvery: 0,
   promptChoices: 1,
@@ -169,7 +169,7 @@ export const MIME_INVERSE_CONFIG: PerformJudgeConfig = {
   readyMs: 0,
   performMs: 30_000,
   judgeMs: 10_000,
-  revealMs: 7_000,
+  revealMs: 8_000,
   scoreboardMs: 6_000,
   scoreboardEvery: 4,
   promptChoices: 1,
@@ -195,10 +195,10 @@ export const DOUBLE_LE_MOUVEMENT_CONFIG: PerformJudgeConfig = {
   crewSize: 2,
   minPlayers: 4,
   laps: 1,
-  readyMs: 15_000,
+  readyMs: 8_000,
   performMs: 30_000,
-  judgeMs: 15_000,
-  revealMs: 7_000,
+  judgeMs: 12_000,
+  revealMs: 8_000,
   scoreboardMs: 0,
   scoreboardEvery: 0,
   promptChoices: 2,
@@ -215,6 +215,22 @@ export const DOUBLE_LE_MOUVEMENT_CONFIG: PerformJudgeConfig = {
   earlyMajorityResolve: false,
   showCategoryToPerformer: false,
 };
+
+/**
+ * CC-4 — audience live-reaction enum (fixed, zero free text → zero moderation
+ * surface). NON-SCORING: a react never resolves/scores a turn, unlike a puppet
+ * `tap`. One react per audience member per turn (first locks); public per-enum
+ * counts; owner-only echo for "what did I react"; cleared at phase exit.
+ */
+export type Reaction = 'fire' | 'laugh' | 'cringe';
+export const REACTIONS: readonly Reaction[] = ['fire', 'laugh', 'cringe'];
+
+/** Public per-enum reaction tally — leaks no individual ballot. */
+export interface ReactionCounts {
+  fire: number;
+  laugh: number;
+  cringe: number;
+}
 
 export type PerformJudgePhase = 'ready' | 'perform' | 'judge' | 'reveal' | 'scoreboard' | 'over';
 
@@ -242,6 +258,11 @@ export interface TurnResult {
   fast: boolean;
   /** Points gained this turn (cloned plain record; only non-zero gains listed). */
   points: Record<PlayerId, number>;
+  /**
+   * CC-4 PUBLIC audience reaction tally accumulated during perform — rides into
+   * the reveal card ("the room reacted 11×"). Aggregate counts only; no ballot.
+   */
+  reactions: ReactionCounts;
 }
 
 export interface PerformJudgeState {
@@ -272,6 +293,13 @@ export interface PerformJudgeState {
   claim: { guesser: PlayerId; at: number } | null;
   /** puppet "Trouvé !" taps (count-only in views) / rate crew Done taps (public). */
   taps: Record<PlayerId, true>;
+  /**
+   * CC-4 HIDDEN per-audience-member reaction buffer (own-echo + public counts;
+   * never another player's value pre-reveal). NON-SCORING and a SEPARATE field
+   * from `taps`/`votes` so it can never gate the primary early-resolve. Cleared
+   * at every turn entry (advanceTurn) — fresh per perform beat.
+   */
+  reactions: Record<PlayerId, Reaction>;
   /** HIDDEN per-voter verdict/validate ballots — counts only until the reveal tally. */
   votes: Record<PlayerId, 'yes' | 'no'>;
   /** HIDDEN per-rater star ballots — aggregate only, individuals never published. */
@@ -292,6 +320,7 @@ export type PerformJudgeAction =
   | { kind: 'claimFound'; guesser: PlayerId }
   | { kind: 'done' }
   | { kind: 'tap' }
+  | { kind: 'react'; reaction: Reaction }
   | { kind: 'vote'; vote: 'yes' | 'no' }
   | { kind: 'rate'; stars: number };
 
@@ -352,6 +381,12 @@ export type PerformJudgeView =
       /** rate: crew Done flags (public booleans). */
       crewDone: Record<PlayerId, boolean> | null;
       myDone: boolean;
+      /** CC-4 PUBLIC per-enum audience reaction counts (no individual ballot). */
+      reactionCounts: ReactionCounts;
+      /** CC-4 owner-only echo: this viewer's own reaction, or null. */
+      myReaction: Reaction | null;
+      /** CC-4 may this viewer react now (connected non-actor, hasn't yet)? */
+      canReact: boolean;
       canClaimDone: boolean;
       canGiveUp: boolean;
       canPass: boolean;

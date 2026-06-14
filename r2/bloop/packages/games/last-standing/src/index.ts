@@ -14,6 +14,7 @@ export {
   type LastStandingView,
   type LastStandingViewBase,
   type LText,
+  type SpotBet,
   type TurnOutcome,
   type TurnResult,
 } from './state.js';

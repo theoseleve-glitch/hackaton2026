@@ -76,7 +76,7 @@ describe('phase chain, durations and phaseKey discipline', () => {
   it('walks draw -> say -> judge -> result -> say with per-TURN keys and exact durations', () => {
     const s0 = game.init('s', players, content);
     expect(game.phaseKey(s0)).toBe('draw:r0');
-    expect(game.phaseDurationMs(s0)).toBe(4_000);
+    expect(game.phaseDurationMs(s0)).toBe(2_500);
 
     const s1 = game.reduce(s0, deadline()).state;
     expect(s1.phase).toBe('say');
@@ -90,7 +90,7 @@ describe('phase chain, durations and phaseKey discipline', () => {
 
     const s3 = game.reduce(s2, deadline()).state; // zero votes -> valid
     expect(game.phaseKey(s3)).toBe('result:t1');
-    expect(game.phaseDurationMs(s3)).toBe(2_000);
+    expect(game.phaseDurationMs(s3)).toBe(2_800);
 
     const s4 = game.reduce(s3, deadline()).state;
     expect(s4.phase).toBe('say');

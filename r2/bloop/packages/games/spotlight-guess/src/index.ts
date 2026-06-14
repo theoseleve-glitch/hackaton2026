@@ -6,6 +6,7 @@ export {
   JEU_DE_LA_NOTE_CONFIG,
   type GuessEntry,
   type LText,
+  type ReactToken,
   type ReverseItem,
   type ReverseRound,
   type ScaleDomain,

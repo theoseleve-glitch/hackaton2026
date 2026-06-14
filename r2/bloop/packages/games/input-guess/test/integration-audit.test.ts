@@ -228,6 +228,30 @@ describe('redaction audit mirror — INTEGRATION.md fixtures vs the real packs',
         expect(leakedSecrets(module, sB, viewers, [...audit.secrets(sB)])).toEqual([]);
       });
 
+      // KEYSTONE — live submission ticker. The ticker is a NEW PUBLIC surface
+      // (submitOrder in state; submittedCount + lockOrder in the guess view) but
+      // it is NOT a new secret: it carries only identity + count, both already
+      // implied by the public `hasSubmitted` map. Declared here so the audit
+      // explicitly covers it. The actors submit p1 then p2 in BOTH scripts, so
+      // the lock order is identical regardless of the hidden values — proving
+      // the ticker reflects who/order, never the answer/pick value.
+      it('live ticker exposes identity + count only — never a hidden value', () => {
+        for (const viewer of [...audit.players, ...OUTSIDERS]) {
+          const view = module.view(sA, viewer);
+          if (view.phase !== 'guess') throw new Error('audit fixture must stall mid-guess');
+          // count = number of locked players (the two actors), order = their ids.
+          expect(view.submittedCount).toBe(audit.actors.length);
+          expect(view.lockOrder).toEqual([...audit.actors]);
+          // the lock order is value-invariant: same A vs B despite different hidden choices.
+          const viewB = module.view(sB, viewer);
+          if (viewB.phase !== 'guess') throw new Error('audit fixture must stall mid-guess');
+          expect(view.lockOrder).toEqual(viewB.lockOrder);
+          expect(view.submittedCount).toBe(viewB.submittedCount);
+        }
+        // and the declared value-secrets still never leak THROUGH the new fields.
+        expect(leakedSecrets(module, sA, [...audit.players, ...OUTSIDERS], [...audit.secrets(sA)])).toEqual([]);
+      });
+
       it('every later phase reached by deadlines keeps views serializable; deadlines stall only in untimed phases', () => {
         let s = sA;
         for (let i = 0; i < 25; i++) {

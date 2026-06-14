@@ -34,6 +34,10 @@ const vote = (playerId: string, target: string, at: number): GameEvent<unknown> 
 const ballot = (playerId: string, pick: 'A' | 'B', predict: 'A' | 'B' | null, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'ballot', pick, ...(predict !== null ? { predict } : {}) }, at });
 
+// CC-1 KEYSTONE — the hidden majority-prediction side-bet (predict-majority only).
+const predict = (playerId: string, option: 'A' | 'B', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'predict', option }, at });
+
 const igGuess = (playerId: string, value: number, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'guess', value }, at });
 
@@ -113,11 +117,21 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
   ['tu-preferes', {
     players: ['p1', 'p2', 'p3'],
     seed: 'audit-seed',
-    // mid-choose: two atomic {pick, predict} ballots buffered, p3 still expected
-    events: [ballot('p1', 'A', 'A', 1_000), ballot('p2', 'B', 'A', 2_000)],
-    eventsAlt: [ballot('p1', 'B', 'B', 1_000), ballot('p2', 'A', 'B', 2_000)],
+    // mid-choose: two atomic {pick, predict} ballots buffered AND two hidden
+    // CC-1 majority-PREDICTION side-bets placed, p3 still expected. The
+    // invariance check below proves a non-actor (p3 / outsiders) sees neither
+    // the buffered picks NOR the buffered predictions before the reveal.
+    events: [
+      ballot('p1', 'A', 'A', 1_000), predict('p1', 'A', 1_100),
+      ballot('p2', 'B', 'A', 2_000), predict('p2', 'A', 2_100),
+    ],
+    eventsAlt: [
+      ballot('p1', 'B', 'B', 1_000), predict('p1', 'B', 1_100),
+      ballot('p2', 'A', 'B', 2_000), predict('p2', 'B', 2_100),
+    ],
     actors: ['p1', 'p2'],
-    // ballots are structural ('A'/'B' legitimately appear in option labels) — invariance covers them
+    // picks AND predictions are structural ('A'/'B' legitimately appear in option
+    // labels) — the non-actor invariance check covers them.
     secrets: () => [],
   }],
   ['gauche-ou-droite', {
@@ -444,9 +458,17 @@ describe('redaction audit — every registry entry (review I5)', () => {
       });
 
       it('every later phase reached by deadlines keeps views serializable; deadlines stall only in untimed phases', () => {
+        // Advance a monotonic clock by each phase's ARMED duration — the way the
+        // real shell arms deadlines. A fixed-tiny `at` understates elapsed time
+        // and so cannot drain a banked clock (e.g. rule-hunt's heat-check
+        // `live -> spotlight -> live` slices), which would stall the walk.
         let s = sA;
-        for (let i = 0; i < 25; i++) {
-          const next = entry.module.reduce(s, { type: 'deadline', at: 100_000 + i }).state;
+        let clock = 100_000;
+        for (let i = 0; i < 100; i++) {
+          const dur = entry.module.phaseDurationMs(s);
+          if (dur === null) break; // untimed phase reached
+          clock += Math.max(1, dur);
+          const next = entry.module.reduce(s, { type: 'deadline', at: clock }).state;
           if (next === s) break; // absorbed (I4)
           s = next;
           for (const viewer of OUTSIDERS) {

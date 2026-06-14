@@ -4,7 +4,10 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
 import type { LText, SeatView } from '@bloop/game-rule-hunt';
-import { asRuleHuntView, deviceLang, pickL, type Lang } from '../games/rule-hunt-view';
+import {
+  asRuleHuntView, deviceLang, pickL,
+  type FlagBet, type Lang, type NoteBet,
+} from '../games/rule-hunt-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
 import { useTheme } from '../theme/useTheme';
@@ -63,6 +66,37 @@ function RuleCard({ rule, eliminated, lang }: { rule: LText; eliminated: boolean
       </AppText>
       <AppText role="titleM">{pickL(rule, lang)}</AppText>
     </View>
+  );
+}
+
+/** A pop chip used inside the heat-check (a soft-read toggle, or a locked echo). */
+function HeatChip({ label, tone, active, onPress, lang, srLabel }: {
+  label: string; tone: 'go' | 'stop'; active: boolean;
+  onPress: (() => void) | null; lang: Lang; srLabel: string;
+}) {
+  const { theme, tokens } = useTheme();
+  const fill = tone === 'go' ? theme.truth : theme.danger;
+  const locked = onPress === null;
+  return (
+    <Pressable
+      onPress={onPress ?? undefined} disabled={locked}
+      accessibilityLabel={srLabel}
+      accessibilityState={{ selected: active, disabled: locked }}
+      style={{
+        flex: 1, minHeight: 64, borderRadius: tokens.radii.lg, alignItems: 'center', justifyContent: 'center',
+        paddingHorizontal: tokens.spacing.md, borderWidth: 3,
+        borderColor: active ? fill : theme.border,
+        backgroundColor: active ? fill : theme.surface,
+        opacity: locked && !active ? 0.45 : 1,
+        ...(active ? tokens.elevation.sticker : tokens.elevation.e1),
+      }}>
+      <AppText role="bodyStrong" color={active ? 'textOnBrand' : 'textPrimary'} style={{ textAlign: 'center' }}>
+        {label}
+      </AppText>
+      <AppText role="caption" color={active ? 'textOnBrand' : 'textMuted'}>
+        {active ? (lang === 'fr' ? '✓ verrouillé' : '✓ locked') : (lang === 'fr' ? 'tape' : 'tap')}
+      </AppText>
+    </Pressable>
   );
 }
 
@@ -211,6 +245,118 @@ export function RuleHuntPlay({ code }: { code: string }) {
             )}
           </View>
         )}
+
+        {rv.phase === 'spotlight' && (() => {
+          // HEAT-CHECK micro-beat: one follower is named; the table gets a forced
+          // quick tap. Followers soft-flag (flag/clean), the detective bookmarks
+          // (suspicious/clear). Resolves back to live on its own short deadline.
+          const targetName = nick(rv.target);
+          // Eligibility mirrors the reducer: living, connected, NON-spotlit followers flag;
+          // detectives note; the spotlit target + eliminated followers only watch.
+          const iAmFlagger = iAmFollower && !rv.iAmEliminated && !rv.iAmSpotlit;
+          const iAmNoter = rv.myRole === 'detective';
+          const flagLocked: FlagBet | null = rv.myFlag;
+          const noteLocked: NoteBet | null = rv.myNote;
+          return (
+            <View style={{ gap: tokens.spacing.lg }}>
+              <View style={{
+                backgroundColor: theme.surface, borderRadius: tokens.radii.xl, padding: tokens.layout.cardPadding,
+                borderWidth: 3, borderColor: theme.xp, gap: tokens.spacing.sm, ...tokens.elevation.sticker,
+              }}>
+                <AppText role="overline" color="xp">{L('🔦 COUP DE PROJECTEUR', '🔦 HEAT CHECK')}</AppText>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.sm, paddingVertical: tokens.spacing.sm }}>
+                  <Avatar name={targetName} size="md" connected />
+                  <AppText role="titleL" style={{ textAlign: 'center' }}>
+                    {rv.iAmSpotlit
+                      ? L('Toi. Maintenant.', 'You. Right now.')
+                      : L(`${targetName} sous le feu`, `${targetName} in the spotlight`)}
+                  </AppText>
+                </View>
+                <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                  {L('Le chrono principal est en pause — ça repart tout de suite après.',
+                    'The main clock is paused — it resumes the instant this ends.')}
+                </AppText>
+              </View>
+
+              {rv.iAmSpotlit && (
+                <AppText role="label" color="xp" style={{ textAlign: 'center' }}>
+                  {L('TOUS LES YEUX SUR TOI — TIENS TON RÔLE, NE CRAQUE PAS.',
+                    'ALL EYES ON YOU — HOLD YOUR ROLE, DON’T CRACK.')}
+                </AppText>
+              )}
+
+              {iAmFlagger && (
+                <View style={{ gap: tokens.spacing.sm }}>
+                  <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+                    {L(`${targetName} respecte-t-il·elle la règle ?`, `Is ${targetName} obeying the rule?`)}
+                  </AppText>
+                  <View style={{ flexDirection: 'row', gap: tokens.spacing.md }}>
+                    <HeatChip
+                      label={L('🚩 Enfreint', '🚩 Broke it')} tone="stop" lang={lang}
+                      active={flagLocked === 'flag'}
+                      onPress={flagLocked === null ? () => sendAction({ kind: 'flagBreak', flag: 'flag' satisfies FlagBet }) : null}
+                      srLabel={L('Signaler une infraction', 'Flag a break')}
+                    />
+                    <HeatChip
+                      label={L('✅ Clean', '✅ Clean')} tone="go" lang={lang}
+                      active={flagLocked === 'clean'}
+                      onPress={flagLocked === null ? () => sendAction({ kind: 'flagBreak', flag: 'clean' satisfies FlagBet }) : null}
+                      srLabel={L('Marquer comme clean', 'Mark as clean')}
+                    />
+                  </View>
+                  {flagLocked !== null && (
+                    <AppText role="caption" color="success" style={{ textAlign: 'center' }}>
+                      {L('Lecture envoyée — gratuite, ce n’est pas un jeton d’accusation.',
+                        'Read sent — it’s free, not your accusation token.')}
+                    </AppText>
+                  )}
+                </View>
+              )}
+
+              {iAmNoter && (
+                <View style={{ gap: tokens.spacing.sm }}>
+                  <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+                    {L(`${targetName} t’a paru… ?`, `${targetName} looked…?`)}
+                  </AppText>
+                  <View style={{ flexDirection: 'row', gap: tokens.spacing.md }}>
+                    <HeatChip
+                      label={L('🔎 Suspect·e', '🔎 Suspicious')} tone="stop" lang={lang}
+                      active={noteLocked === 'suspicious'}
+                      onPress={noteLocked === null ? () => sendAction({ kind: 'noteSuspicious', note: 'suspicious' satisfies NoteBet }) : null}
+                      srLabel={L('Noter comme suspect', 'Note as suspicious')}
+                    />
+                    <HeatChip
+                      label={L('🆗 Clair', '🆗 Clear')} tone="go" lang={lang}
+                      active={noteLocked === 'clear'}
+                      onPress={noteLocked === null ? () => sendAction({ kind: 'noteSuspicious', note: 'clear' satisfies NoteBet }) : null}
+                      srLabel={L('Noter comme clair', 'Note as clear')}
+                    />
+                  </View>
+                  {noteLocked !== null && (
+                    <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                      {L('Carnet privé — personne ne voit ton choix, aucun pouvoir d’élimination.',
+                        'Private bookmark — nobody sees your pick, no elimination power.')}
+                    </AppText>
+                  )}
+                </View>
+              )}
+
+              {!rv.iAmSpotlit && !iAmFlagger && !iAmNoter && (
+                <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+                  {rv.iAmEliminated
+                    ? L('TU REGARDES — PLUS DE LECTURE POUR LES ÉLIMINÉ·ES.',
+                        'YOU SPECTATE — NO MORE READS FOR THE ELIMINATED.')
+                    : L('OBSERVE BIEN CE MOMENT…', 'WATCH THIS MOMENT CLOSELY…')}
+                </AppText>
+              )}
+
+              <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                {L(`🚩 ${rv.flagCount} signalement${rv.flagCount === 1 ? '' : 's'} · 🔎 ${rv.noteCount} note${rv.noteCount === 1 ? '' : 's'} détective`,
+                  `🚩 ${rv.flagCount} flag${rv.flagCount === 1 ? '' : 's'} · 🔎 ${rv.noteCount} detective note${rv.noteCount === 1 ? '' : 's'}`)}
+              </AppText>
+            </View>
+          );
+        })()}
 
         {rv.phase === 'tribunal' && (() => {
           const iAmVoter = me !== null && rv.voters.includes(me);

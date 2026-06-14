@@ -1,6 +1,15 @@
 import type { Effect, GameModule, PlayerId, ReduceResult } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { allActed, emptyPlayerMap, gameOver, initPresence, setConnected } from '@bloop/kit';
+import {
+  allActed,
+  emptyPlayerMap,
+  emptySideBets,
+  gameOver,
+  initPresence,
+  placeSideBet,
+  redactSideBets,
+  setConnected,
+} from '@bloop/kit';
 import {
   aliveConnectedFollowers,
   bank,
@@ -10,11 +19,14 @@ import {
   eligibleVoters,
   isDetectiveOf,
   pickDetectives,
+  pickSpotlight,
   resolveDetectiveCount,
   scoreRound,
 } from './round.js';
 import type {
+  FlagBet,
   LText,
+  NoteBet,
   RoundOutcome,
   RuleHuntAction,
   RuleHuntConfig,
@@ -54,6 +66,8 @@ function startRound(state: RuleHuntState, round: number): RuleHuntState {
     segmentStartedAt: 0,
     liveSeg: 0,
     interruptSeq: 0,
+    spotlight: null,
+    spotlightCount: 0,
     accusationsLeft,
     teamGuessesLeft: state.config.teamGuesses,
     usedCandidates: [],
@@ -123,6 +137,58 @@ function resumeLiveOrReveal(state: RuleHuntState, at: number, extra: Effect[]): 
   return {
     state: { ...state, phase: 'live', segmentStartedAt: at, liveSeg: state.liveSeg + 1, tribunal: null, guess: null },
     effects: extra,
+  };
+}
+
+/**
+ * Heat-check entry from a `live` deadline. Banks the live clock EXACTLY like an
+ * accusation (`bank` + `interruptSeq++`) so no live time is lost, then names a
+ * SEEDED follower and opens the two HIDDEN soft-read buffers. Never scores,
+ * never ends the round. The caller only reaches here with a non-empty bank and a
+ * spotlit-able follower, so the spotlight always has real time behind it.
+ */
+function enterSpotlight(state: RuleHuntState, at: number): ReduceResult<RuleHuntState> {
+  const seq = state.spotlightCount;
+  const target = pickSpotlight(state, state.round, seq);
+  if (target === null) {
+    // No eligible performer — let live exhaust normally rather than stage a beat.
+    return enterReveal({ ...state, liveRemainingMs: 0 }, 'timeUp', null, null, []);
+  }
+  return {
+    state: {
+      ...state,
+      phase: 'spotlight',
+      liveRemainingMs: bank(state, at),
+      interruptSeq: state.interruptSeq + 1,
+      spotlight: {
+        target,
+        seq,
+        flags: emptySideBets<FlagBet>(),
+        notes: emptySideBets<NoteBet>(),
+      },
+    },
+    effects: [{ type: 'analytics', name: 'spotlight_opened', props: { round: state.round, seq } }],
+  };
+}
+
+/**
+ * Heat-check exit: the forced micro-beat ALWAYS resumes live with the banked
+ * remainder (it never reveals/ends the round — the only elimination path is the
+ * tribunal). The soft reads are dropped (one stake per beat); `spotlightCount++`
+ * advances the seeded pick. Room collapse during the beat still ends the match.
+ */
+function resolveSpotlight(state: RuleHuntState, at: number): ReduceResult<RuleHuntState> {
+  if (collapsed(state)) return endGame(state, 'roomCollapsed');
+  return {
+    state: {
+      ...state,
+      phase: 'live',
+      segmentStartedAt: at,
+      liveSeg: state.liveSeg + 1,
+      spotlight: null,
+      spotlightCount: state.spotlightCount + 1,
+    },
+    effects: [],
   };
 }
 
@@ -219,6 +285,8 @@ export function createRuleHunt(
         segmentStartedAt: 0,
         liveSeg: 0,
         interruptSeq: 0,
+        spotlight: null,
+        spotlightCount: 0,
         accusationsLeft: emptyPlayerMap<number>(),
         teamGuessesLeft: config.teamGuesses,
         usedCandidates: [],
@@ -311,6 +379,30 @@ export function createRuleHunt(
           return resolveGuess(state, event.at, idx);
         }
 
+        // Heat-check soft reads. A side-bet, NEVER an `acted` entry: the spotlight
+        // ends only on its own deadline — these taps never gate an early resolve
+        // and never leak the spotlit follower's performance. `placeSideBet`
+        // returns null on any reject (ineligible / re-bet) => SAME state reference.
+        if (action.kind === 'flagBreak' && state.phase === 'spotlight' && state.spotlight !== null) {
+          if (isDet) return { state, effects: [] };
+          if (state.connected[playerId] !== true) return { state, effects: [] };
+          if (state.eliminated[playerId] === true) return { state, effects: [] };
+          if (playerId === state.spotlight.target) return { state, effects: [] }; // performer can't flag self
+          if (action.flag !== 'flag' && action.flag !== 'clean') return { state, effects: [] };
+          const flags = placeSideBet(state.spotlight.flags, playerId, action.flag, true);
+          if (flags === null) return { state, effects: [] };
+          return { state: { ...state, spotlight: { ...state.spotlight, flags } }, effects: [] };
+        }
+
+        if (action.kind === 'noteSuspicious' && state.phase === 'spotlight' && state.spotlight !== null) {
+          if (!isDet) return { state, effects: [] };
+          if (state.connected[playerId] !== true) return { state, effects: [] };
+          if (action.note !== 'suspicious' && action.note !== 'clear') return { state, effects: [] };
+          const notes = placeSideBet(state.spotlight.notes, playerId, action.note, true);
+          if (notes === null) return { state, effects: [] };
+          return { state: { ...state, spotlight: { ...state.spotlight, notes } }, effects: [] };
+        }
+
         return { state, effects: [] };
       }
 
@@ -318,8 +410,16 @@ export function createRuleHunt(
         if (state.phase === 'briefing') return enterLiveFromBriefing(state, event.at);
         if (state.phase === 'live') {
           if (collapsed(state)) return endGame(state, 'roomCollapsed');
+          const banked = bank(state, event.at);
+          // Heat-check cadence: a deadline with live time still in the bank AND a
+          // quorum to perform/flag stages a forced spotlight (banking like accuse);
+          // a deadline that truly exhausts the clock reveals timeUp as before.
+          if (banked > 0 && aliveConnectedFollowers(state).length >= 2) {
+            return enterSpotlight(state, event.at);
+          }
           return enterReveal({ ...state, liveRemainingMs: 0 }, 'timeUp', null, null, []);
         }
+        if (state.phase === 'spotlight') return resolveSpotlight(state, event.at);
         if (state.phase === 'tribunal') return resolveTribunal(state, event.at);
         if (state.phase === 'guess') return resolveGuess(state, event.at, null);
         if (state.phase === 'reveal') {
@@ -410,6 +510,23 @@ export function createRuleHunt(
           candidates: isRoster ? state.candidateTexts : null,
         };
       }
+      if (state.phase === 'spotlight' && state.spotlight !== null) {
+        // Owner-only echo + aggregate counts (kit/sidebet). A non-owner sees ONLY
+        // the counts, never another player's flag/note; the spotlit target and
+        // the totals are public, the per-player reads are not.
+        const flagView = redactSideBets(state.spotlight.flags, viewer);
+        const noteView = redactSideBets(state.spotlight.notes, viewer);
+        return {
+          phase: 'spotlight',
+          ...base,
+          target: state.spotlight.target,
+          iAmSpotlit: viewer === state.spotlight.target,
+          flagCount: flagView.count,
+          noteCount: noteView.count,
+          myFlag: flagView.own,
+          myNote: noteView.own,
+        };
+      }
       if (state.phase === 'reveal') {
         return { phase: 'reveal', ...base, outcome: state.lastOutcome ?? EMPTY_OUTCOME, candidates: state.candidateTexts };
       }
@@ -421,7 +538,12 @@ export function createRuleHunt(
 
     phaseDurationMs(state) {
       if (state.phase === 'briefing') return state.config.briefingMs;
-      if (state.phase === 'live') return state.liveRemainingMs;
+      // Heat-check cadence: the live segment is armed at the SHORTER of the banked
+      // remainder and the heat interval, so the shell fires a spotlight deadline
+      // every ~heatMs while time remains, and the final exhaustion deadline lands
+      // exactly on the bank's end (no 0ms spotlight).
+      if (state.phase === 'live') return Math.min(state.liveRemainingMs, state.config.heatMs);
+      if (state.phase === 'spotlight') return state.config.spotlightMs;
       if (state.phase === 'tribunal') return state.config.tribunalMs;
       if (state.phase === 'guess') return state.config.guessMs;
       if (state.phase === 'reveal') return state.config.revealMs;
@@ -431,6 +553,7 @@ export function createRuleHunt(
     phaseKey(state) {
       if (state.phase === 'over') return 'over';
       if (state.phase === 'live') return `live:r${state.round}:s${state.liveSeg}`;
+      if (state.phase === 'spotlight') return `spotlight:r${state.round}:i${state.interruptSeq}`;
       if (state.phase === 'tribunal') return `tribunal:r${state.round}:i${state.interruptSeq}`;
       if (state.phase === 'guess') return `guess:r${state.round}:i${state.interruptSeq}`;
       return `${state.phase}:r${state.round}`;

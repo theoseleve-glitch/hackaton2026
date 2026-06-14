@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest';
 import type { Effect } from '@bloop/engine';
 import type { RuleHuntState } from '@bloop/game-rule-hunt';
 import {
-  accuse, content, deadline, FIVE, followersOf, game, openGuess, pickCandidate, toLive, tribunalVote,
+  accuse, content, deadline, FIVE, followersOf, game, liveToReveal, openGuess, pickCandidate,
+  toLive, tribunalVote, walkDeadlines,
 } from './fixtures.js';
 
 /** toLive + convict followers[1] (f0/f2/f3 vote guilty). Returns the resumed live state. */
@@ -74,11 +75,12 @@ describe('scoring matrix', () => {
   it('scores accumulate across rounds within the match', () => {
     let s = game.init('s', FIVE, content(3));
     const detR0 = s.detectives[0]!;
-    // round 0: perfect timeUp via deadlines
+    // round 0: perfect timeUp — drain live (through every forced spotlight) to reveal
     s = game.reduce(s, deadline(0)).state; // -> live
-    s = game.reduce(s, deadline(1)).state; // -> reveal
+    s = liveToReveal(s);                    // -> reveal (timeUp, perfect: spotlights never convict)
+    expect(s.phase).toBe('reveal');
     expect(s.scores[detR0]).toBe(1);
-    s = game.reduce(s, deadline(2)).state; // -> round 1 briefing
+    s = game.reduce(s, deadline(400_000)).state; // reveal deadline -> round 1 briefing
     const detR1 = s.detectives[0]!;
     expect(detR1).not.toBe(detR0);
     // round 1: detective guesses correctly
@@ -94,14 +96,12 @@ describe('scoring matrix', () => {
 
 describe('gameOver effect', () => {
   function driveToOver(): { state: RuleHuntState; effects: Effect[] } {
-    let s = game.init('s', FIVE, content(1)); // 1 item caps totalRounds at 1
-    let effects: Effect[] = [];
-    for (let i = 0; i < 10 && s.phase !== 'over'; i++) {
-      const out = game.reduce(s, deadline(i * 1_000));
-      s = out.state;
-      effects = out.effects;
-    }
-    return { state: s, effects };
+    const s0 = game.init('s', FIVE, content(1)); // 1 item caps totalRounds at 1
+    // Drain to the reveal first (through every forced spotlight), then capture the
+    // gameOver effect on the final reveal-deadline step.
+    const { state: pre, clock } = walkDeadlines(s0, { until: (s) => s.phase === 'reveal' });
+    const out = game.reduce(pre, deadline(clock + 12_000)); // reveal -> over (last round)
+    return { state: out.state, effects: out.effects };
   }
 
   it('emits gameOver with the final scores at over, endReason finished', () => {

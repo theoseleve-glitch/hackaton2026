@@ -4,8 +4,12 @@ import {
   allActed,
   connectedPlayers,
   emptyPlayerMap,
+  emptySideBets,
   gameOver,
   initPresence,
+  placeSideBet,
+  redactSideBets,
+  resolveSideBets,
   setConnected,
   tally,
   type Presence,
@@ -63,8 +67,16 @@ function pickImpostor(order: readonly PlayerId[], connected: Presence): PlayerId
 }
 
 function enterDiscuss(state: SecretRoleState, period: number): ReduceResult<SecretRoleState> {
+  // Re-open the lean side-bet for this discuss period (one stake per period —
+  // clearing here is the "updatable across periods" mechanism, mirroring `ready`).
   return {
-    state: { ...state, phase: 'discuss', period, ready: emptyPlayerMap<true>() },
+    state: {
+      ...state,
+      phase: 'discuss',
+      period,
+      ready: emptyPlayerMap<true>(),
+      leans: emptySideBets<PlayerId>(),
+    },
     effects: [],
   };
 }
@@ -86,6 +98,16 @@ function endMatch(
 ): ReduceResult<SecretRoleState> {
   const item = state.items[state.match] ?? { id: '', theme: EMPTY_L, majority: EMPTY_L, impostor: EMPTY_L };
   const points = clonePoints(state.pendingPoints);
+  // CC-1 lean side-bet resolves now, against the (about-to-be-public) impostor:
+  // any player whose hidden discuss lean named the impostor earns a small bonus.
+  // resolveSideBets is upside-only (clamps non-positive), so a 0 bonus or a
+  // wrong/absent lean adds nothing — the side-bet never docks the primary score.
+  const leanBonus = resolveSideBets(
+    state.leans,
+    state.impostor,
+    (suspect, impostor) => (suspect === impostor ? state.config.scoring.leanBonusCorrect : 0),
+  );
+  for (const p of state.players) points[p] = (points[p] ?? 0) + (leanBonus[p] ?? 0);
   const scores = clonePoints(state.scores);
   for (const p of state.players) scores[p] = (scores[p] ?? 0) + (points[p] ?? 0);
   const result: MatchResult = {
@@ -195,6 +217,7 @@ function startMatch(state: SecretRoleState, match: number): SecretRoleState {
     acked: emptyPlayerMap<true>(),
     ready: emptyPlayerMap<true>(),
     votes: emptyPlayerMap<PlayerId>(),
+    leans: emptySideBets<PlayerId>(),
     voteRecords: [],
     pendingPoints: zeroPoints(state.players),
   };
@@ -248,6 +271,7 @@ export function createSecretRole(
         acked: emptyPlayerMap<true>(),
         ready: emptyPlayerMap<true>(),
         votes: emptyPlayerMap<PlayerId>(),
+        leans: emptySideBets<PlayerId>(),
         voteRecords: [],
         pendingPoints: zeroPoints(players),
         results: [],
@@ -280,6 +304,20 @@ export function createSecretRole(
             return enterVote(next);
           }
           return { state: next, effects: [] };
+        }
+
+        // CC-1 "lean": a hidden discuss-time side-bet on the suspected impostor.
+        // It is a SEPARATE buffer from `ready`/`votes` and is NEVER counted
+        // toward `allActed` — it can never gate the early-resolve (the room still
+        // advances only on all-`ready`). placeSideBet returns null on any reject
+        // (self-target, non-roster target, or a re-lean over this period's stake),
+        // which we map to the SAME state reference (no transition, no mutation).
+        if (action.kind === 'lean' && state.phase === 'discuss') {
+          const target = action.target;
+          const eligible = target !== playerId && state.players.includes(target);
+          const leans = placeSideBet(state.leans, playerId, target, eligible);
+          if (leans === null) return { state, effects: [] };
+          return { state: { ...state, leans }, effects: [] };
         }
 
         if (action.kind === 'vote' && state.phase === 'vote') {
@@ -352,9 +390,15 @@ export function createSecretRole(
       if (state.phase === 'discuss') {
         const ready = emptyPlayerMap<boolean>();
         for (const p of state.players) ready[p] = state.ready[p] === true;
+        // OWNER-ONLY lean echo + public count. No revealAll here (or anywhere
+        // pre-`over`): a non-owner never receives `bets`, only the aggregate
+        // count, so a lean can never be inverted to out the impostor mid-match.
+        const leanView = redactSideBets(state.leans, viewer);
         return {
           phase: 'discuss', ...base, period: state.period,
           ready, iAmReady: state.ready[viewer] === true, lastVote,
+          myLean: isPlayer ? leanView.own : null,
+          leanCount: leanView.count,
         };
       }
       if (state.phase === 'vote') {

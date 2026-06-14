@@ -18,6 +18,19 @@ export function promptText(prompt: TracerPrompt, lang: Lang): string {
 type LocalizePrompt<V> = V extends { prompt: TracerPrompt } ? Omit<V, 'prompt'> & { prompt: string } : V;
 export type TracerClientView = LocalizePrompt<TracerView>;
 
+/**
+ * The two-beat reveal slice of the client view (CC-3). Exposes the new
+ * server-driven fields TracerPlay reads: `revealStep` ('suspense' = held breath,
+ * scores frozen | 'verdict' = the slam), `designated` (WHO the room pointed at),
+ * and `delta` (the per-player +points that land on the verdict beat). These ride
+ * the module's TracerView through the firewall as TYPE only — never imported as
+ * runtime values. They are typed optional here so a legacy/zero-beat reveal view
+ * (no revealStep) still narrows and renders without crashing.
+ */
+export type TracerRevealView = Extract<TracerClientView, { phase: 'reveal' }>;
+/** 'suspense' = the held breath (scores frozen) | 'verdict' = the slam. */
+export type RevealStep = TracerRevealView['revealStep'];
+
 const isRec = (v: unknown, t: 'number' | 'boolean'): v is Record<string, never> =>
   typeof v === 'object' && v !== null && !Array.isArray(v) && Object.values(v).every((x) => typeof x === t);
 

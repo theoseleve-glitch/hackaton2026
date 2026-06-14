@@ -14,6 +14,7 @@ export const performJudgeActionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('claimFound'), guesser: z.string().min(1).max(128) }),
   z.object({ kind: z.literal('done') }),
   z.object({ kind: z.literal('tap') }),
+  z.object({ kind: z.literal('react'), reaction: z.enum(['fire', 'laugh', 'cringe']) }),
   z.object({ kind: z.literal('vote'), vote: z.enum(['yes', 'no']) }),
   z.object({ kind: z.literal('rate'), stars: z.number().int().min(1).max(5) }),
 ]);

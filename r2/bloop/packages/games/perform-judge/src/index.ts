@@ -20,6 +20,9 @@ export {
   type PerformJudgeState,
   type PerformJudgeView,
   type PromptVisibility,
+  type Reaction,
+  type ReactionCounts,
+  REACTIONS,
   type SecretCard,
   type TurnResult,
 } from './state.js';

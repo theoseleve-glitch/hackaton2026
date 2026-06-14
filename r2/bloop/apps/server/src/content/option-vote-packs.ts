@@ -26,122 +26,122 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-history-vs-gallery",
     "optionA": {
-      "fr": "Que tes potes lisent tout ton historique de recherche",
-      "en": "Your friends read your entire search history"
+      "fr": "Tes potes lisent ton historique de recherche à voix haute, ce soir",
+      "en": "Your friends read your search history out loud, tonight"
     },
     "optionB": {
-      "fr": "Que tes parents fassent défiler toute ta galerie photos",
-      "en": "Your parents scroll through your whole camera roll"
+      "fr": "Tes darons font défiler ta galerie, dossier captures d'écran inclus",
+      "en": "Your parents scroll your camera roll, screenshots folder included"
     }
   },
   {
-    "id": "wyr-animals-vs-languages",
+    "id": "wyr-other-group-chat",
     "optionA": {
-      "fr": "Pouvoir parler avec les animaux",
-      "en": "Be able to talk to animals"
+      "fr": "Lire tout ce que tes potes disent de toi dans l'autre groupe",
+      "en": "Read everything your friends say in the group chat without you"
     },
     "optionB": {
-      "fr": "Parler couramment toutes les langues du monde",
-      "en": "Speak every human language fluently"
+      "fr": "Qu'ils lisent tout ce que TOI t'as dit sur eux",
+      "en": "They read everything YOU'VE said about them"
     }
   },
   {
-    "id": "wyr-fly-low-vs-invisible-awkward",
+    "id": "wyr-seagull-slap-vs-pigeon-mugging",
     "optionA": {
-      "fr": "Voler, mais seulement à 30 cm du sol",
-      "en": "Fly, but only one foot off the ground"
+      "fr": "Une mouette te gifle une fois par semaine, jour aléatoire, témoins garantis",
+      "en": "A seagull slaps you once a week, random day, witnesses guaranteed"
     },
     "optionB": {
-      "fr": "Être invisible, mais seulement quand personne ne te regarde",
-      "en": "Be invisible, but only when nobody is looking"
+      "fr": "Un pigeon te rackette ton déjeuner tous les midis, mains comprises",
+      "en": "A pigeon mugs you for your lunch every noon, straight from your hands"
     }
   },
   {
     "id": "wyr-no-cheese-vs-no-bread",
     "optionA": {
-      "fr": "Ne plus jamais manger de fromage",
-      "en": "Never eat cheese again"
+      "fr": "Plus jamais de fromage, et c'est toi qui portes l'appareil à chaque raclette",
+      "en": "Never eat cheese again, but you still host every single pizza night"
     },
     "optionB": {
-      "fr": "Ne plus jamais manger de pain",
-      "en": "Never eat bread again"
+      "fr": "Plus jamais de pain, et tu regardes les autres saucer en silence",
+      "en": "Never eat bread again, and you watch the table mop the sauce without you"
     }
   },
   {
-    "id": "wyr-past-vs-future",
+    "id": "wyr-boss-reads-vs-parents-hear",
     "optionA": {
-      "fr": "Voyager 100 ans dans le passé",
-      "en": "Travel 100 years into the past"
+      "fr": "Ton boss lit tout ce que t'as écrit sur lui",
+      "en": "Your boss reads everything you've ever typed about them"
     },
     "optionB": {
-      "fr": "Voyager 100 ans dans le futur",
-      "en": "Travel 100 years into the future"
+      "fr": "Tes darons entendent tous les mensonges que tu leur as sortis",
+      "en": "Your parents hear every lie you've ever told them"
     }
   },
   {
     "id": "wyr-laugh-track-vs-narrator",
     "optionA": {
-      "fr": "Avoir des rires enregistrés à chacune de tes blagues",
-      "en": "Have a laugh track play after every joke you make"
+      "fr": "Des rires enregistrés après chaque truc que tu dis, surtout quand personne rigole",
+      "en": "A laugh track after everything you say, loudest when nobody else laughs"
     },
     "optionB": {
-      "fr": "Avoir une voix off qui commente tous tes échecs",
-      "en": "Have a narrator announce every one of your fails"
+      "fr": "Une voix off qui annonce tes plans foireux à voix haute : « et là, il croit que ça va marcher »",
+      "en": "A narrator calling your bad ideas out loud: 'and here he thinks this'll work'"
     }
   },
   {
-    "id": "wyr-cold-fries-vs-warm-soda",
+    "id": "wyr-floor-fry-vs-strangers-leftovers",
     "optionA": {
-      "fr": "Ne manger que des frites froides à vie",
-      "en": "Only eat cold fries for life"
+      "fr": "Manger la frite tombée par terre au McDo, devant toute la file",
+      "en": "Eat the fry that hit the McDonald's floor, full queue watching"
     },
     "optionB": {
-      "fr": "Ne boire que du soda tiède à vie",
-      "en": "Only drink lukewarm soda for life"
+      "fr": "Finir les restes d'une table d'inconnus, une fois par mois",
+      "en": "Finish a table of strangers' leftovers once a month"
     }
   },
   {
     "id": "wyr-text-aloud-vs-thoughts-status",
     "optionA": {
-      "fr": "Que ton téléphone lise tes messages à voix haute en public",
-      "en": "Your phone reads your texts out loud in public"
+      "fr": "Ton tel lit tes messages à voix haute dans le bus, prénoms inclus",
+      "en": "Your phone reads your texts out loud on the bus, names included"
     },
     "optionB": {
-      "fr": "Que tes pensées s'affichent en story pendant 10 min par jour",
-      "en": "Your thoughts post as a story for 10 minutes a day"
+      "fr": "Tes pensées partent en story 10 min par jour, sans préavis",
+      "en": "Your thoughts auto-post as a story 10 minutes a day, no warning"
     }
   },
   {
-    "id": "wyr-rewind-vs-pause",
+    "id": "wyr-worst-viral-vs-best-unproven",
     "optionA": {
-      "fr": "Pouvoir rembobiner ta journée une fois par semaine",
-      "en": "Be able to rewind your day once a week"
+      "fr": "Ton pire moment en soirée est filmé et devient viral",
+      "en": "Your worst party moment gets filmed and goes viral"
     },
     "optionB": {
-      "fr": "Pouvoir mettre le monde sur pause 10 minutes par jour",
-      "en": "Be able to pause the world 10 minutes a day"
+      "fr": "Ton meilleur moment de vie : zéro preuve, personne te croit",
+      "en": "The best thing you ever did: zero proof, nobody believes you"
     }
   },
   {
     "id": "wyr-crocs-wedding-vs-suit-beach",
     "optionA": {
-      "fr": "Porter des Crocs à tous les mariages",
-      "en": "Wear Crocs to every wedding"
+      "fr": "Des Crocs à tous les mariages, photos officielles comprises",
+      "en": "Crocs at every wedding, official photos included"
     },
     "optionB": {
-      "fr": "Porter un costume trois-pièces à la plage",
-      "en": "Wear a three-piece suit to the beach"
+      "fr": "Costard trois-pièces à la plage, 15 août compris",
+      "en": "A three-piece suit at the beach, heatwave included"
     }
   },
   {
     "id": "wyr-pineapple-pizza-forever",
     "optionA": {
-      "fr": "Manger de l'ananas sur toutes tes pizzas",
-      "en": "Have pineapple on every pizza you eat"
+      "fr": "De l'ananas sur toutes tes pizzas, et tu dois le défendre tout haut",
+      "en": "Pineapple on every pizza, and you defend it out loud each time"
     },
     "optionB": {
-      "fr": "Manger de la pizza froide uniquement",
-      "en": "Only ever eat pizza cold"
+      "fr": "Pizza uniquement froide, réchauffer est interdit",
+      "en": "Pizza served cold only, reheating is banned"
     }
   },
   {
@@ -158,67 +158,67 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-sing-vs-rhyme",
     "optionA": {
-      "fr": "Chanter tout ce que tu dis",
-      "en": "Sing everything you say"
+      "fr": "Chanter tout ce que tu dis, enterrements compris",
+      "en": "Sing everything you say, funerals included"
     },
     "optionB": {
-      "fr": "Parler uniquement en rimes",
-      "en": "Only speak in rhymes"
+      "fr": "Parler uniquement en rimes, entretiens d'embauche compris",
+      "en": "Speak only in rhyme, job interviews included"
     }
   },
   {
     "id": "wyr-ex-toast-vs-boss-karaoke",
     "optionA": {
-      "fr": "Faire un discours au mariage de ton ex",
-      "en": "Give a toast at your ex's wedding"
+      "fr": "Le discours au mariage de ton ex, placé à la table d'honneur",
+      "en": "Give the toast at your ex's wedding, seated at the head table"
     },
     "optionB": {
-      "fr": "Faire un karaoké en duo avec ton boss",
-      "en": "Sing a karaoke duet with your boss"
+      "fr": "Un slow en karaoké avec ton boss, lundi 9h, équipe au complet",
+      "en": "A slow-song karaoke duet with your boss, full team watching"
     }
   },
   {
-    "id": "wyr-mind-read-vs-future-10s",
+    "id": "wyr-hear-thoughts-vs-yours-leak",
     "optionA": {
-      "fr": "Lire dans les pensées, sans pouvoir éteindre",
-      "en": "Read minds, with no off switch"
+      "fr": "Entendre les pensées des gens, mais uniquement celles sur toi",
+      "en": "Hear people's thoughts, but only the ones about you"
     },
     "optionB": {
-      "fr": "Voir 10 secondes dans le futur, en permanence",
-      "en": "See 10 seconds into the future, permanently"
+      "fr": "Tout le monde entend les tiennes, une heure par jour, au hasard",
+      "en": "Everyone hears yours, one random hour a day"
     }
   },
   {
     "id": "wyr-ketchup-everything-vs-no-sauce",
     "optionA": {
-      "fr": "Mettre du ketchup sur absolument tout ce que tu manges",
-      "en": "Put ketchup on absolutely everything you eat"
+      "fr": "Du ketchup sur tout, y compris le plat de ta belle-mère, devant elle",
+      "en": "Ketchup on everything, your nan's Sunday roast included, at the table"
     },
     "optionB": {
-      "fr": "Ne plus jamais utiliser une seule sauce",
-      "en": "Never use any sauce ever again"
+      "fr": "Plus aucune sauce, et tu dois l'annoncer tout haut à chaque kebab",
+      "en": "No sauce ever again, and you announce 'dry for me, thanks' every time"
     }
   },
   {
     "id": "wyr-baby-hands-vs-giant-feet",
     "optionA": {
-      "fr": "Avoir des mains de bébé",
-      "en": "Have tiny baby hands"
+      "fr": "Des mains de bébé, et tu dois quand même faire tous les checks",
+      "en": "Tiny baby hands, and you still owe everyone a firm handshake"
     },
     "optionB": {
-      "fr": "Avoir des pieds taille 60",
-      "en": "Have size 20 feet"
+      "fr": "Des pieds taille 60, chaussures sur mesure à tes frais",
+      "en": "Size 20 feet, custom shoes at your own expense"
     }
   },
   {
     "id": "wyr-reply-all-vs-wrong-chat",
     "optionA": {
-      "fr": "Répondre à tous avec un ragot destiné à un seul collègue",
-      "en": "Hit reply-all on gossip meant for one coworker"
+      "fr": "Le ragot part en « répondre à tous », la cible en copie",
+      "en": "Your gossip goes reply-all, with the target cc'd"
     },
     "optionB": {
-      "fr": "Envoyer ta critique du groupe... dans le groupe",
-      "en": "Send your rant about the group chat... to the group chat"
+      "fr": "Ton pavé sur le groupe... envoyé dans le groupe",
+      "en": "Your rant about the group chat lands in the group chat"
     }
   },
   {
@@ -244,25 +244,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-only-breakfast-vs-only-dinner",
+    "id": "wyr-neighbor-menu-vs-group-votes",
     "optionA": {
-      "fr": "Ne manger que des petits-déjeuners",
-      "en": "Only eat breakfast foods"
+      "fr": "Manger pareil que ton voisin de gauche, à vie (regarde-le)",
+      "en": "Eat whatever the person on your left eats, for life (look at them)"
     },
     "optionB": {
-      "fr": "Ne manger que des plats du soir",
-      "en": "Only eat dinner foods"
+      "fr": "Ce groupe vote chacun de tes repas, à main levée",
+      "en": "This group votes on every meal you order, show of hands"
     }
   },
   {
     "id": "wyr-famous-broke-vs-rich-unknown",
     "optionA": {
-      "fr": "Être célèbre mais fauché",
-      "en": "Be famous but broke"
+      "fr": "Célèbre, mais à découvert le 10 du mois",
+      "en": "Famous, but your card declines at the till"
     },
     "optionB": {
-      "fr": "Être riche mais inconnu",
-      "en": "Be rich but unknown"
+      "fr": "Riche, mais personne te calcule, même pas en story",
+      "en": "Rich, but nobody ever remembers your name"
     }
   },
   {
@@ -279,45 +279,45 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-call-vs-voicemail",
     "optionA": {
-      "fr": "Devoir appeler pour la moindre question",
-      "en": "Have to make a real phone call for every tiny question"
+      "fr": "Appeler pour la moindre question, même « tu dors ? »",
+      "en": "A real phone call for every tiny question, even 'wyd'"
     },
     "optionB": {
-      "fr": "Recevoir uniquement des vocaux de 5 minutes",
-      "en": "Only receive 5-minute voice messages"
+      "fr": "Que des vocaux de 5 minutes, vitesse x2 interdite",
+      "en": "Only 5-minute voice notes, 2x speed banned"
     }
   },
   {
-    "id": "wyr-spicy-everything-vs-bland-everything",
+    "id": "wyr-spice-tears-pro-vs-kids-menu",
     "optionA": {
-      "fr": "Que tous tes plats soient ultra pimentés",
-      "en": "Have every meal be blisteringly spicy"
+      "fr": "Pleurer de piment à chaque repas pro, en jurant que ça va",
+      "en": "Cry from spice at every work lunch and insist you're fine"
     },
     "optionB": {
-      "fr": "Que tous tes plats soient totalement fades",
-      "en": "Have every meal be completely bland"
+      "fr": "Commander au menu enfant à vie, chaise haute selon l'humeur du serveur",
+      "en": "Order off the kids' menu for life, high chair at the waiter's discretion"
     }
   },
   {
     "id": "wyr-redo-exams-vs-redo-teeth",
     "optionA": {
-      "fr": "Repasser le bac tous les ans",
-      "en": "Retake your final school exams every year"
+      "fr": "Repasser le bac chaque année, résultats publiés dans le groupe",
+      "en": "Resit your school finals yearly, results posted in the group chat"
     },
     "optionB": {
-      "fr": "Aller chez le dentiste tous les mois",
-      "en": "Go to the dentist every month"
+      "fr": "Refaire ta 5e maintenant, un an complet, avec de vrais élèves de 5e",
+      "en": "Redo Year 8 right now, a full year, with actual Year 8s"
     }
   },
   {
     "id": "wyr-delete-photos-vs-delete-messages",
     "optionA": {
-      "fr": "Perdre toutes tes photos",
-      "en": "Lose all your photos"
+      "fr": "Perdre dix ans de photos, d'un coup",
+      "en": "Lose ten years of photos, all at once"
     },
     "optionB": {
-      "fr": "Perdre toutes tes conversations",
-      "en": "Lose all your chat histories"
+      "fr": "Perdre dix ans de conversations, preuves comprises",
+      "en": "Lose ten years of chats, receipts included"
     }
   },
   {
@@ -345,78 +345,78 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-no-coffee-vs-no-snacks",
     "optionA": {
-      "fr": "Ne plus jamais boire de café ni de thé",
-      "en": "Never drink coffee or tea again"
+      "fr": "Plus jamais de café ni de thé, les lundis existent toujours",
+      "en": "No coffee or tea ever again, Mondays still exist"
     },
     "optionB": {
-      "fr": "Ne plus jamais grignoter entre les repas",
-      "en": "Never snack between meals again"
+      "fr": "Plus jamais rien entre les repas, même pas en cuisinant",
+      "en": "No snacking ever again, not even while cooking"
     }
   },
   {
     "id": "wyr-always-late-vs-always-2h-early",
     "optionA": {
-      "fr": "Arriver toujours 20 minutes en retard",
-      "en": "Always arrive 20 minutes late"
+      "fr": "Arriver 40 minutes en retard partout, même à ton propre mariage",
+      "en": "Show up 40 minutes late everywhere, your own wedding included"
     },
     "optionB": {
-      "fr": "Arriver toujours 2 heures en avance",
-      "en": "Always arrive 2 hours early"
+      "fr": "Arriver 2 heures en avance partout, même chez des inconnus",
+      "en": "Show up 2 hours early everywhere, even at strangers' houses"
     }
   },
   {
     "id": "wyr-one-friend-forever-vs-new-monthly",
     "optionA": {
-      "fr": "Garder un seul meilleur ami à vie",
-      "en": "Keep one single best friend for life"
+      "fr": "Un seul pote à vie, choisi par un vote de ce groupe",
+      "en": "One friend for life, picked by a vote in this room"
     },
     "optionB": {
-      "fr": "Changer de groupe d'amis tous les ans",
-      "en": "Get a brand-new friend group every year"
+      "fr": "Nouveau groupe d'amis chaque année, zéro souvenir commun",
+      "en": "A new friend group every year, zero shared history"
     }
   },
   {
-    "id": "wyr-glitter-sneeze-vs-confetti-burp",
+    "id": "wyr-visible-spit-vs-eternal-crumb",
     "optionA": {
-      "fr": "Éternuer des paillettes",
-      "en": "Sneeze glitter"
+      "fr": "Postillonner visiblement à chaque phrase, et le voir atterrir",
+      "en": "Visibly spit when you talk, and watch where it lands, every time"
     },
     "optionB": {
-      "fr": "Roter des confettis",
-      "en": "Burp confetti"
+      "fr": "Une miette au coin de la bouche en permanence, personne te le dit",
+      "en": "A permanent crumb on your face that nobody ever points out"
     }
   },
   {
-    "id": "wyr-soup-fork-vs-steak-spoon",
+    "id": "wyr-lick-plate-vs-bite-strangers",
     "optionA": {
-      "fr": "Manger toutes tes soupes à la fourchette",
-      "en": "Eat all soup with a fork"
+      "fr": "Lécher ton assiette à chaque resto, premier rencard compris",
+      "en": "Lick your plate clean at every restaurant, first dates included"
     },
     "optionB": {
-      "fr": "Couper toute ta viande à la cuillère",
-      "en": "Cut all steak with a spoon"
+      "fr": "Piquer une bouchée dans l'assiette d'un inconnu, chaque semaine",
+      "en": "Take one bite off a stranger's plate, once a week"
     }
   },
   {
     "id": "wyr-wifi-vs-hot-water",
     "optionA": {
-      "fr": "Vivre sans wifi",
-      "en": "Live without wifi"
+      "fr": "Vivre sans wifi, et mendier le partage de connexion à tes potes",
+      "en": "Live without wifi, begging hotspot off your mates forever"
     },
     "optionB": {
-      "fr": "Vivre sans eau chaude",
-      "en": "Live without hot water"
+      "fr": "Vivre sans eau chaude, douches de janvier comprises",
+      "en": "Live without hot water, January showers included"
     }
   },
   {
     "id": "wyr-stranger-bless-vs-friend-roast",
     "optionA": {
-      "fr": "Que des inconnus applaudissent chacune de tes entrées",
-      "en": "Strangers applaud every room you enter"
+      "fr": "Des inconnus t'applaudissent partout, pharmacie et enterrements compris",
+      "en": "Strangers applaud you everywhere, pharmacy queues and funerals included"
     },
     "optionB": {
-      "fr": "Que tes potes notent tes tenues sur 10 chaque matin",
-      "en": "Your friends rate your outfit out of 10 every morning"
+      "fr": "Tes potes notent ta tenue sur 10 chaque matin, note envoyée à ta daronne",
+      "en": "Your friends rate your outfit daily, score texted to your mum"
     }
   },
   {
@@ -431,14 +431,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-dessert-first-vs-no-dessert",
+    "id": "wyr-doggy-bag-date-vs-bill-recount",
     "optionA": {
-      "fr": "Toujours manger le dessert en premier",
-      "en": "Always eat dessert first"
+      "fr": "Demander un doggy bag au premier rencard, et insister",
+      "en": "Ask to box up the leftovers on a first date, and insist"
     },
     "optionB": {
-      "fr": "Ne plus jamais manger de dessert",
-      "en": "Never eat dessert again"
+      "fr": "Recompter l'addition à voix haute devant tout le monde, à chaque sortie",
+      "en": "Recount the bill out loud in front of everyone, every single time"
     }
   },
   {
@@ -464,25 +464,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-teleport-naps-vs-no-sleep",
+    "id": "wyr-snore-leaked-vs-sleep-talk-truths",
     "optionA": {
-      "fr": "Te téléporter, mais ça t'endort 2 heures à l'arrivée",
-      "en": "Teleport anywhere, but arrive needing a 2-hour nap"
+      "fr": "Tes ronflements sont enregistrés et envoyés au groupe chaque matin",
+      "en": "Your snoring gets recorded and sent to the group chat every morning"
     },
     "optionB": {
-      "fr": "Ne plus jamais avoir besoin de dormir",
-      "en": "Never need to sleep again"
+      "fr": "Tu parles en dormant, et tu ne balances que des vrais secrets",
+      "en": "You talk in your sleep, and you only ever leak real secrets"
     }
   },
   {
-    "id": "wyr-tiny-elephant-vs-giant-hamster",
+    "id": "wyr-dog-snitch-vs-cat-paparazzi",
     "optionA": {
-      "fr": "Adopter un éléphant de la taille d'un chat",
-      "en": "Adopt a cat-sized elephant"
+      "fr": "Ton chien raconte à chaque invité tout ce qu'il a vu chez toi",
+      "en": "Your dog tells every guest everything it has seen you do"
     },
     "optionB": {
-      "fr": "Adopter un hamster de la taille d'un chien",
-      "en": "Adopt a dog-sized hamster"
+      "fr": "Ton chat poste des stories de toi à ton insu, compte public",
+      "en": "Your cat runs a public account of candid stories of you"
     }
   },
   {
@@ -510,12 +510,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-erase-bad-memory-vs-keep-all",
     "optionA": {
-      "fr": "Effacer ton pire souvenir",
-      "en": "Erase your worst memory"
+      "fr": "Effacer ta pire honte, mais tous les témoins s'en souviennent encore",
+      "en": "Erase your most shameful memory, but every witness keeps theirs"
     },
     "optionB": {
-      "fr": "Revivre ton meilleur souvenir une fois par an",
-      "en": "Relive your best memory once a year"
+      "fr": "La revivre une fois par an, à une date surprise",
+      "en": "Relive it once a year, date a surprise"
     }
   },
   {
@@ -565,23 +565,23 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-meow-end-sentence-vs-jazz-hands",
     "optionA": {
-      "fr": "Miauler à la fin de chaque phrase",
-      "en": "Meow at the end of every sentence"
+      "fr": "À chaque fois que tu balances un potin, la personne concernée reçoit une notif « on parle de toi »",
+      "en": "Every time you spill gossip, the person it's about gets a 'you're being talked about' notification"
     },
     "optionB": {
-      "fr": "Faire des jazz hands à chaque bonjour",
-      "en": "Do jazz hands every time you say hello"
+      "fr": "Ton tel vibre fort dans ta poche à chaque fois que tu mens, témoins compris",
+      "en": "Your phone buzzes loudly in your pocket every time you lie, witnesses included"
     }
   },
   {
-    "id": "wyr-everything-mild-vs-mystery-spice",
+    "id": "wyr-mum-orders-vs-served-last",
     "optionA": {
-      "fr": "Connaître à l'avance le goût de tout ce que tu manges",
-      "en": "Know exactly how everything tastes before eating it"
+      "fr": "Ta daronne commande pour toi au resto, à vie, sans te consulter",
+      "en": "Your mum orders for you at every restaurant, for life, no input"
     },
     "optionB": {
-      "fr": "Que chaque bouchée soit une surprise totale",
-      "en": "Have every bite be a total surprise"
+      "fr": "Tu manges uniquement ce que la table te laisse, toujours servi dernier",
+      "en": "You only eat what the table leaves you, always served last"
     }
   },
   {
@@ -596,14 +596,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-undo-button-vs-save-point",
+    "id": "wyr-cringe-supercut-vs-ex-debrief",
     "optionA": {
-      "fr": "Avoir un bouton 'annuler' pour ta dernière phrase",
-      "en": "Have an undo button for your last sentence"
+      "fr": "Revoir chaque année le best-of de tes « j'aurais dû me taire »",
+      "en": "Watch a yearly supercut of every time you should've stayed quiet"
     },
     "optionB": {
-      "fr": "Avoir un point de sauvegarde chaque matin",
-      "en": "Have a save point every morning"
+      "fr": "Entendre une fois ce que ton ex a vraiment dit de toi après la rupture",
+      "en": "Hear, once, what your ex actually said about you after the breakup"
     }
   },
   {
@@ -640,14 +640,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-read-minds-pets-vs-plants-talk",
+    "id": "wyr-mirror-reviews-vs-plants-scream",
     "optionA": {
-      "fr": "Entendre ce que pensent les chiens et les chats",
-      "en": "Hear what cats and dogs are thinking"
+      "fr": "Ton miroir commente ta tenue chaque matin, brutalement honnête",
+      "en": "Your mirror reviews your outfit every morning, brutally honest"
     },
     "optionB": {
-      "fr": "Entendre tes plantes te juger",
-      "en": "Hear your houseplants judging you"
+      "fr": "Tes plantes hurlent quand t'oublies de les arroser, même à 3h du mat",
+      "en": "Your plants scream when you forget to water them, 3 a.m. included"
     }
   },
   {
@@ -684,14 +684,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-money-past-vs-knowledge-future",
+    "id": "wyr-collect-debts-vs-pay-debts",
     "optionA": {
-      "fr": "Retourner en 2010 avec 1000 €",
-      "en": "Go back to 2010 with $1,000"
+      "fr": "Récupérer chaque euro qu'on te doit, en le réclamant en face, un par un",
+      "en": "Collect every pound you're owed by asking each person, face to face"
     },
     "optionB": {
-      "fr": "Recevoir aujourd'hui un journal daté de demain",
-      "en": "Get tomorrow's newspaper delivered today"
+      "fr": "Rembourser d'un coup tous les « tkt je te rends ça » de ta vie",
+      "en": "Pay back every 'I'll get you next time' you've ever said, at once"
     }
   },
   {
@@ -772,25 +772,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-perfect-pitch-vs-perfect-aim",
+    "id": "wyr-mention-count-vs-never-defended",
     "optionA": {
-      "fr": "Avoir l'oreille absolue",
-      "en": "Have perfect pitch"
+      "fr": "Savoir exactement combien de fois on a parlé de toi cette semaine",
+      "en": "Know exactly how many times you got mentioned this week"
     },
     "optionB": {
-      "fr": "Ne jamais rater un lancer (papier, fléchette, panier)",
-      "en": "Never miss a throw (paper, darts, hoops)"
+      "fr": "Savoir qui, dans ta vie, ne t'a jamais défendu en ton absence",
+      "en": "Know which of your people has never once defended you behind your back"
     }
   },
   {
     "id": "wyr-helium-laugh-vs-villain-laugh",
     "optionA": {
-      "fr": "Rire en voix d'hélium pour toujours",
-      "en": "Laugh in a helium voice forever"
+      "fr": "Tout le monde voit le surnom que t'as enregistré pour chaque personne de ce groupe",
+      "en": "Everyone sees the contact name you've saved each person in this room under"
     },
     "optionB": {
-      "fr": "Rire comme un méchant de dessin animé pour toujours",
-      "en": "Laugh like a cartoon villain forever"
+      "fr": "Tout le monde lit le dernier vocal que t'as envoyé sur quelqu'un d'ici",
+      "en": "Everyone hears the last voice note you sent about someone in this room"
     }
   },
   {
@@ -838,14 +838,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-onion-no-cry-vs-garlic-no-smell",
+    "id": "wyr-garlic-dates-vs-onion-tears",
     "optionA": {
-      "fr": "Couper des oignons sans jamais pleurer",
-      "en": "Chop onions without ever crying"
+      "fr": "Empester l'ail à chaque rencard, sans jamais le sentir toi-même",
+      "en": "Reek of garlic on every date, never able to smell it yourself"
     },
     "optionB": {
-      "fr": "Manger de l'ail sans jamais avoir mauvaise haleine",
-      "en": "Eat garlic without ever getting bad breath"
+      "fr": "Pleurer comme à un enterrement dès qu'un oignon entre dans la pièce",
+      "en": "Sob like it's a funeral whenever an onion enters the room"
     }
   },
   {
@@ -860,36 +860,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-skip-traffic-vs-skip-queues",
+    "id": "wyr-boss-cc-vs-mum-location",
     "optionA": {
-      "fr": "Ne plus jamais être dans les bouchons",
-      "en": "Never sit in traffic again"
+      "fr": "Ton boss en copie de tous tes messages perso pendant un mois",
+      "en": "Your boss cc'd on every personal text for a month"
     },
     "optionB": {
-      "fr": "Ne plus jamais faire la queue",
-      "en": "Never wait in line again"
+      "fr": "Ta daronne reçoit ta localisation en direct, à vie",
+      "en": "Your mum gets your live location, for life"
     }
   },
   {
-    "id": "wyr-pigeon-army-vs-seagull-respect",
+    "id": "wyr-monthly-goose-fight-vs-rat-roommate",
     "optionA": {
-      "fr": "Commander une armée de pigeons fidèles",
-      "en": "Command a loyal army of pigeons"
+      "fr": "Te battre contre une oie une fois par mois, lieu choisi par l'oie",
+      "en": "Fight one goose monthly, venue picked by the goose"
     },
     "optionB": {
-      "fr": "Être respecté par toutes les mouettes du monde",
-      "en": "Earn the respect of every seagull on Earth"
+      "fr": "Héberger un rat qui paie pas de loyer mais juge tes invités",
+      "en": "House a rat that pays no rent but judges your guests"
     }
   },
   {
-    "id": "wyr-free-restaurants-vs-free-flights",
+    "id": "wyr-silent-payer-vs-penny-splitter",
     "optionA": {
-      "fr": "Manger gratuitement dans tous les restaurants",
-      "en": "Eat free at every restaurant"
+      "fr": "Payer l'addition du groupe une fois par mois, interdit d'en parler",
+      "en": "Cover the whole table's bill monthly, never allowed to mention it"
     },
     "optionB": {
-      "fr": "Voyager gratuitement dans tous les avions",
-      "en": "Fly free on every plane"
+      "fr": "Faire payer chacun sa part exacte, au centime, à voix haute",
+      "en": "Split every bill to the exact penny, out loud, every time"
     }
   },
   {
@@ -917,12 +917,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-last-slice-fight-vs-share-dessert",
     "optionA": {
-      "fr": "Toujours laisser la dernière part aux autres",
-      "en": "Always give up the last slice"
+      "fr": "Laisser la dernière part, même quand c'est toi qui as payé la pizza",
+      "en": "Give up the last slice, even when you paid for the pizza"
     },
     "optionB": {
-      "fr": "Toujours devoir partager ton dessert",
-      "en": "Always have to share your dessert"
+      "fr": "La prendre, et assumer le regard de toute la table",
+      "en": "Take it, and live with the whole table's stare"
     }
   },
   {
@@ -948,14 +948,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-control-dreams-vs-no-nightmares",
+    "id": "wyr-dreams-narrated-vs-3am-thoughts-archived",
     "optionA": {
-      "fr": "Contrôler tes rêves, cauchemars inclus parfois",
-      "en": "Control your dreams, with the odd nightmare slipping in"
+      "fr": "Tes rêves sont racontés chaque matin à ta coloc, version intégrale",
+      "en": "Your dreams get narrated to your flatmate every morning, uncut"
     },
     "optionB": {
-      "fr": "Ne plus jamais faire de cauchemars, ni te souvenir des rêves",
-      "en": "Never have nightmares, but never remember dreams"
+      "fr": "Tes pensées de 3h du mat sont archivées, lisibles par tes potes",
+      "en": "Your 3 a.m. thoughts get archived, readable by your friends"
     }
   },
   {
@@ -981,14 +981,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-untangle-cables-vs-peel-stickers",
+    "id": "wyr-bus-alarm-vs-mum-calls-meetings",
     "optionA": {
-      "fr": "Démêler les écouteurs de toute la planète",
-      "en": "Untangle every pair of earbuds on Earth"
+      "fr": "Ton réveil sonne dans le bus à plein volume, sonnerie de 2009",
+      "en": "Your 2009 ringtone alarm goes off on the bus, full volume, daily"
     },
     "optionB": {
-      "fr": "Décoller proprement toutes les étiquettes du monde",
-      "en": "Peel every sticker in the world off cleanly"
+      "fr": "Ton tel sonne en réunion, c'est toujours ta daronne, tu dois répondre",
+      "en": "Your phone rings in every meeting, it's always your mum, you must answer"
     }
   },
   {
@@ -1003,36 +1003,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-taco-tuesday-vs-sunday-roast",
+    "id": "wyr-inlaws-sunday-vs-rate-mums-cooking",
     "optionA": {
-      "fr": "Un open bar de tacos chaque mardi à vie",
-      "en": "Free unlimited tacos every Tuesday for life"
+      "fr": "Cuisiner pour ta belle-famille chaque dimanche, critiques en direct",
+      "en": "Cook for your in-laws every Sunday, live reviews included"
     },
     "optionB": {
-      "fr": "Un grand repas de famille parfait chaque dimanche à vie",
-      "en": "A perfect family feast every Sunday for life"
+      "fr": "Noter la cuisine de ta daronne sur 10, devant elle, à chaque repas",
+      "en": "Rate your mum's cooking out of 10, to her face, every meal"
     }
   },
   {
     "id": "wyr-strength-noone-sees-vs-flight-everyone-films",
     "optionA": {
-      "fr": "Une force surhumaine que personne ne croit jamais",
-      "en": "Super strength that nobody ever believes"
+      "fr": "Tes potes peuvent annuler n'importe quel de tes plans d'un seul vote, sans te prévenir",
+      "en": "Your friends can cancel any plan of yours with one group vote, no warning"
     },
     "optionB": {
-      "fr": "Voler, mais uniquement quand on te filme",
-      "en": "Flight, but only while someone is filming you"
+      "fr": "Tu peux annuler les leurs, mais ils découvrent à chaque fois que c'était toi",
+      "en": "You can cancel theirs, but they find out it was you, every single time"
     }
   },
   {
-    "id": "wyr-five-min-anyone-vs-hour-hero",
+    "id": "wyr-eulogy-by-enemy-vs-by-mum",
     "optionA": {
-      "fr": "5 minutes au téléphone avec ton toi de 2040",
-      "en": "A 5-minute phone call with your 2040 self"
+      "fr": "Ton éloge funèbre écrit par ton pire ennemi",
+      "en": "Your eulogy written by your worst enemy"
     },
     "optionB": {
-      "fr": "Une heure de dîner avec ton idole",
-      "en": "A one-hour dinner with your hero"
+      "fr": "Ton éloge funèbre écrit par ta daronne, version 100 % honnête",
+      "en": "Your eulogy written by your mum, the fully honest version"
     }
   },
   {
@@ -1058,25 +1058,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-bottomless-fridge-vs-selfclean-kitchen",
+    "id": "wyr-fridge-cam-vs-delivery-receipts",
     "optionA": {
-      "fr": "Un frigo toujours plein mais jamais rangé",
-      "en": "A fridge that's always full but always a mess"
+      "fr": "Une caméra dans ton frigo, flux en direct dans le groupe",
+      "en": "A camera in your fridge, live feed in the group chat"
     },
     "optionB": {
-      "fr": "Une cuisine qui se nettoie seule mais un frigo vide le dimanche",
-      "en": "A self-cleaning kitchen with an empty fridge on Sundays"
+      "fr": "Ton historique livraison de l'année publié, montants compris",
+      "en": "Your year of delivery orders published, totals included"
     }
   },
   {
-    "id": "wyr-real-dino-vs-real-dragon-small",
+    "id": "wyr-turkey-chase-vs-goat-headbutt",
     "optionA": {
-      "fr": "Prouver que tu as vu un dinosaure, sans photo",
-      "en": "Prove you saw a dinosaur, with no photo"
+      "fr": "Te faire poursuivre par un dindon 10 minutes par semaine, en public",
+      "en": "Get chased by a turkey ten minutes a week, always in public"
     },
     "optionB": {
-      "fr": "Avoir un dragon de compagnie de 10 cm qui boude",
-      "en": "Own a 4-inch pet dragon that sulks"
+      "fr": "Recevoir un coup de boule de chèvre à chacun de tes retards",
+      "en": "Take a goat headbutt every time you show up late"
     }
   },
   {
@@ -1113,14 +1113,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-soup-forever-vs-sandwich-forever",
+    "id": "wyr-drain-slurp-vs-open-mouth-chew",
     "optionA": {
-      "fr": "Ne manger que des plats à la cuillère",
-      "en": "Only eat foods that need a spoon"
+      "fr": "Aspirer ta soupe comme un siphon, déjeuners pro compris",
+      "en": "Slurp every soup like a drain, client lunches included"
     },
     "optionB": {
-      "fr": "Ne manger que des plats qui se tiennent à la main",
-      "en": "Only eat foods you can hold in your hand"
+      "fr": "Mâcher la bouche ouverte à chaque repas de belle-famille",
+      "en": "Chew open-mouthed at every single in-law dinner"
     }
   },
   {
@@ -1168,14 +1168,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-button-skip-small-talk-vs-skip-ads",
+    "id": "wyr-hear-after-you-leave-vs-frozen-smiles",
     "optionA": {
-      "fr": "Un bouton pour zapper le small talk",
-      "en": "A button that skips small talk"
+      "fr": "Entendre les 30 secondes qui suivent chacun de tes départs",
+      "en": "Hear the first 30 seconds after you leave every room"
     },
     "optionB": {
-      "fr": "Un bouton pour zapper toutes les pubs",
-      "en": "A button that skips every ad"
+      "fr": "Ne jamais savoir, mais voir les sourires se figer quand tu reviens",
+      "en": "Never know, but watch the smiles freeze when you walk back in"
     }
   },
   {
@@ -1234,14 +1234,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-bottomless-brunch-vs-midnight-snacks",
+    "id": "wyr-forty-food-pics-vs-bon-appetit-strangers",
     "optionA": {
-      "fr": "Des brunchs illimités mais plus de dîners",
-      "en": "Unlimited brunch but no more dinners"
+      "fr": "Prendre 40 photos de chaque plat pendant que tes potes attendent",
+      "en": "Take 40 photos of every dish while your mates' food goes cold"
     },
     "optionB": {
-      "fr": "Des snacks de minuit sans conséquences mais plus de brunchs",
-      "en": "Consequence-free midnight snacks but no more brunch"
+      "fr": "Souhaiter bon appétit aux inconnus du resto, table par table",
+      "en": "Wish strangers 'enjoy your meal', table by table, every restaurant"
     }
   },
   {
@@ -1280,23 +1280,23 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-fancy-water-vs-flat-soda-menu",
     "optionA": {
-      "fr": "Payer l'eau au prix du champagne au resto",
-      "en": "Pay champagne prices for water at restaurants"
+      "fr": "Boire toute ta vie dans le verre que quelqu'un a déjà à moitié bu",
+      "en": "For life, only ever drink from a glass someone else already half-finished"
     },
     "optionB": {
-      "fr": "Que tous les sodas servis soient éventés",
-      "en": "Every soda you're served is flat"
+      "fr": "Que ton verre soit toujours servi tiède, eau de piscine garantie",
+      "en": "Your drink is always served lukewarm, pool-water vibe guaranteed"
     }
   },
   {
     "id": "wyr-tshirt-says-mood-vs-forehead-battery",
     "optionA": {
-      "fr": "Un t-shirt qui affiche ton humeur en temps réel",
-      "en": "A t-shirt that displays your live mood"
+      "fr": "Un t-shirt qui affiche en gros qui tu trouves chiant dans la pièce, en temps réel",
+      "en": "A t-shirt that displays, live and in bold, who in the room you find annoying"
     },
     "optionB": {
-      "fr": "Une jauge d'énergie sociale visible sur ton front",
-      "en": "A social battery gauge visible on your forehead"
+      "fr": "Une jauge sur ton front qui montre à quel point tu veux déjà rentrer",
+      "en": "A gauge on your forehead showing exactly how badly you already want to leave"
     }
   },
   {
@@ -1333,47 +1333,47 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-gravity-off-hour-vs-time-freeze-hour",
+    "id": "wyr-creaky-chair-vs-wrong-door",
     "optionA": {
-      "fr": "Désactiver la gravité chez toi 1h par jour",
-      "en": "Turn off gravity at home for 1 hour a day"
+      "fr": "Ta chaise craque très fort à chaque fois que tu t'assois, partout",
+      "en": "Every chair creaks violently when you sit down, everywhere, always"
     },
     "optionB": {
-      "fr": "Faire venir n'importe quel animal sauvage 1h par jour, calme",
-      "en": "Summon any wild animal, calm, for 1 hour a day"
+      "fr": "Te tromper de sens sur chaque porte, toujours avec un témoin",
+      "en": "Push every pull door, always with a witness, for life"
     }
   },
   {
-    "id": "wyr-beach-holiday-vs-mountain-holiday",
+    "id": "wyr-holidays-with-boss-vs-inlaws",
     "optionA": {
-      "fr": "Des vacances uniquement à la plage, pour toujours",
-      "en": "Beach holidays only, forever"
+      "fr": "Toutes tes vacances avec ton boss, qui « débranche jamais vraiment »",
+      "en": "Every holiday with your boss, who 'never fully switches off'"
     },
     "optionB": {
-      "fr": "Des vacances uniquement à la montagne, pour toujours",
-      "en": "Mountain holidays only, forever"
+      "fr": "Toutes tes vacances avec ta belle-famille, chambre mitoyenne",
+      "en": "Every holiday with the in-laws, room right next to theirs"
     }
   },
   {
     "id": "wyr-everything-too-big-vs-too-small",
     "optionA": {
-      "fr": "Que tous tes vêtements soient deux tailles trop grands",
-      "en": "All your clothes are two sizes too big"
+      "fr": "Que ton pantalon glisse d'un cran à chaque fois que tu te lèves devant du monde",
+      "en": "Your trousers slide down a notch every time you stand up in front of people"
     },
     "optionB": {
-      "fr": "Que toutes tes chaussures soient une demi-pointure trop petites",
-      "en": "All your shoes are half a size too small"
+      "fr": "Que tes chaussures couinent comme un canard à chaque pas dans le silence",
+      "en": "Your shoes squeak like a rubber duck with every step in a silent room"
     }
   },
   {
     "id": "wyr-eat-bug-protein-vs-lab-meat-only",
     "optionA": {
-      "fr": "Remplacer ta viande par des insectes gastronomiques",
-      "en": "Swap all meat for gourmet insects"
+      "fr": "Goûter, devant la table, le plat le plus chelou que quelqu'un d'ici a déjà commandé",
+      "en": "Taste, in front of the table, the weirdest thing anyone here has ever ordered"
     },
     "optionB": {
-      "fr": "Remplacer tous tes légumes par des versions en poudre",
-      "en": "Swap all vegetables for powdered versions"
+      "fr": "Quelqu'un d'ici compose ton assiette à l'aveugle, et tu dois tout finir",
+      "en": "Someone here builds your plate blind, and you have to finish all of it"
     }
   },
   {
@@ -1388,14 +1388,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-speak-baby-vs-speak-yoda",
+    "id": "wyr-baby-voice-boss-vs-stadium-library",
     "optionA": {
-      "fr": "Parler aux bébés et qu'ils te répondent",
-      "en": "Talk to babies and have them answer back"
+      "fr": "Parler à ton boss comme à un bébé, sans pouvoir t'arrêter",
+      "en": "Talk to your boss in full baby voice, physically unable to stop"
     },
     "optionB": {
-      "fr": "Parler comme Yoda dès que tu es fatigué",
-      "en": "Talk like Yoda whenever you're tired"
+      "fr": "Ta voix passe en mode stade de foot dans chaque bibliothèque",
+      "en": "Your voice switches to stadium volume in every library"
     }
   },
   {
@@ -1410,14 +1410,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-fries-or-friends-keep-warm",
+    "id": "wyr-fry-tax-victim-vs-caught-stealing",
     "optionA": {
-      "fr": "Que tes frites restent toujours chaudes",
-      "en": "Your fries always stay hot"
+      "fr": "Tout le monde a le droit de taxer tes frites, toi jamais",
+      "en": "Everyone gets to tax your fries, you can never tax back"
     },
     "optionB": {
-      "fr": "Que ta glace ne fonde jamais",
-      "en": "Your ice cream never melts"
+      "fr": "Te faire choper la main dans l'assiette d'un pote, à chaque fois",
+      "en": "Get caught red-handed every single time you steal a chip"
     }
   },
   {
@@ -1476,25 +1476,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-magnetic-hands-vs-velcro-body",
+    "id": "wyr-handshake-too-long-vs-wrong-hug",
     "optionA": {
-      "fr": "Avoir les mains légèrement aimantées",
-      "en": "Have slightly magnetic hands"
+      "fr": "Tenir chaque poignée de main 4 secondes de trop",
+      "en": "Hold every handshake four seconds too long"
     },
     "optionB": {
-      "fr": "Avoir le dos en velcro",
-      "en": "Have a velcro back"
+      "fr": "Partir en câlin quand l'autre tendait juste la main",
+      "en": "Go in for the hug when they offered a handshake, every time"
     }
   },
   {
-    "id": "wyr-pause-week-vs-double-weekend",
+    "id": "wyr-monday-mornings-vs-sunday-dread",
     "optionA": {
-      "fr": "Une semaine de vacances surprise par an, sans choisir la date",
-      "en": "A surprise week off yearly, date not your choice"
+      "fr": "Savoir exactement quel pote ici parle de toi dès que tu pars, mais jamais quoi",
+      "en": "Know exactly which friend here talks about you the second you leave, but never what they say"
     },
     "optionB": {
-      "fr": "Tous tes week-ends durent 2h de plus",
-      "en": "Every weekend lasts 2 extra hours"
+      "fr": "Savoir exactement QUOI, mais jamais QUI",
+      "en": "Know exactly WHAT they say, but never WHO"
     }
   },
   {
@@ -1566,34 +1566,34 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-pet-rock-famous-vs-you-famous-1day",
     "optionA": {
-      "fr": "Que ton animal devienne influenceur, pas toi",
-      "en": "Your pet becomes an influencer, not you"
+      "fr": "Ton pote le plus relou devient ton voisin de palier à vie, sonnette comprise",
+      "en": "Your most exhausting friend becomes your next-door neighbour for life, doorbell included"
     },
     "optionB": {
-      "fr": "Être mondialement célèbre pendant 24h, puis oublié",
-      "en": "Be world-famous for 24 hours, then forgotten"
+      "fr": "Ton pote préféré déménage à l'autre bout du monde, et tu le revois une fois tous les cinq ans",
+      "en": "Your favourite friend moves to the other side of the world, and you see them once every five years"
     }
   },
   {
     "id": "wyr-one-true-answer-vs-three-wishes-random",
     "optionA": {
-      "fr": "Une réponse vraie à n'importe quelle question",
-      "en": "One true answer to any question you ask"
+      "fr": "Poser UNE question à quelqu'un d'ici et obtenir la vraie réponse, devant tout le monde",
+      "en": "Ask ONE person here a question and get the true answer, in front of everyone"
     },
     "optionB": {
-      "fr": "Trois vœux interprétés par un génie de mauvaise foi",
-      "en": "Three wishes granted by a genie acting in bad faith"
+      "fr": "Quelqu'un d'ici te pose LA question que tu redoutes, et tu dois répondre vrai",
+      "en": "Someone here asks you the one question you dread, and you have to answer honestly"
     }
   },
   {
     "id": "wyr-everything-al-dente-vs-everything-overcooked",
     "optionA": {
-      "fr": "Que tout soit légèrement pas assez cuit",
-      "en": "Everything is slightly undercooked"
+      "fr": "C'est toujours toi qui choisis le resto, et c'est toujours de ta faute s'il est nul",
+      "en": "You always pick the restaurant, and it's always your fault when it's bad"
     },
     "optionB": {
-      "fr": "Que tout soit légèrement trop cuit",
-      "en": "Everything is slightly overcooked"
+      "fr": "Tu ne choisis jamais rien, et tu manges ce que le groupe décide, même quand c'est non",
+      "en": "You never pick anything, and you eat whatever the group decides, even when it's a no"
     }
   },
   {
@@ -1610,34 +1610,34 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-bubble-wrap-walk-vs-squeaky-shoes",
     "optionA": {
-      "fr": "Marcher sur du papier bulle invisible en permanence",
-      "en": "Walk on invisible bubble wrap at all times"
+      "fr": "Devoir dire tout haut le montant exact de ton compte à chaque addition partagée",
+      "en": "Announce your exact bank balance out loud at every split bill"
     },
     "optionB": {
-      "fr": "Avoir des chaussures qui couinent uniquement dans les silences",
-      "en": "Have shoes that squeak only during silences"
+      "fr": "Que tes potes décident à ta place quand tu paies ta tournée, et tu peux pas refuser",
+      "en": "Your friends decide when it's your round, and you can never say no"
     }
   },
   {
-    "id": "wyr-learn-instant-skill-yearly-vs-master-one",
+    "id": "wyr-succeed-unseen-vs-fail-spotlit",
     "optionA": {
-      "fr": "Apprendre une nouvelle compétence instantanément chaque année",
-      "en": "Instantly learn one new skill every year"
+      "fr": "Réussir uniquement les trucs dont tout le monde se fiche",
+      "en": "Only ever succeed at things nobody cares about"
     },
     "optionB": {
-      "fr": "Devenir le meilleur du monde dans UNE compétence au choix",
-      "en": "Become world's best at ONE skill of your choice"
+      "fr": "Rater uniquement devant les gens que tu veux impressionner",
+      "en": "Only ever fail in front of the people you want to impress"
     }
   },
   {
-    "id": "wyr-free-michelin-once-vs-kebab-weekly",
+    "id": "wyr-spilled-glass-fancy-vs-card-declined",
     "optionA": {
-      "fr": "Un restaurant 3 étoiles offert une fois par an",
-      "en": "One free 3-star Michelin dinner a year"
+      "fr": "Renverser ton verre à chaque resto un peu classe, nappe blanche garantie",
+      "en": "Knock your glass over at every nice restaurant, white tablecloth guaranteed"
     },
     "optionB": {
-      "fr": "Ton plat réconfort préféré offert chaque semaine",
-      "en": "Your favorite comfort meal free every week"
+      "fr": "Ta carte est refusée une fois par mois, toujours quand tu invites",
+      "en": "Your card declines once a month, always after you said 'my treat'"
     }
   },
   {
@@ -1652,25 +1652,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-grow-shrink-10cm-daily",
+    "id": "wyr-jeans-split-vs-sweat-patches",
     "optionA": {
-      "fr": "Mesurer 10 cm de plus chaque lundi, reset le dimanche",
-      "en": "Be 4 inches taller every Monday, reset by Sunday"
+      "fr": "Ton jean craque à chaque fois que tu t'accroupis en public",
+      "en": "Your jeans split every time you squat in public"
     },
     "optionB": {
-      "fr": "Changer de couleur de cheveux chaque matin, au hasard",
-      "en": "Wake up with a random hair color every morning"
+      "fr": "Des auréoles instantanées dès qu'une personne importante te parle",
+      "en": "Instant sweat patches whenever someone important talks to you"
     }
   },
   {
     "id": "wyr-rewatch-comfort-vs-always-new",
     "optionA": {
-      "fr": "Ne regarder que tes séries préférées en boucle",
-      "en": "Only rewatch your favorite shows forever"
+      "fr": "Tout le monde peut voir ta liste « écouté en boucle » du mois, titres honteux compris",
+      "en": "Everyone can see your most-played list of the month, guilty hits included"
     },
     "optionB": {
-      "fr": "Ne regarder que des nouveautés, jamais de re-visionnage",
-      "en": "Only watch new things, never rewatch anything"
+      "fr": "Tout le monde peut voir l'historique de ce que t'as regardé seul à 2h du mat",
+      "en": "Everyone can see the history of what you watched alone at 2 a.m."
     }
   },
   {
@@ -1709,12 +1709,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-see-red-flags-vs-see-green-flags",
     "optionA": {
-      "fr": "Voir les red flags de tout le monde instantanément",
-      "en": "Instantly see everyone's red flags"
+      "fr": "Voir les red flags de tous tes potes, interdit d'en parler",
+      "en": "See every friend's red flags, forbidden from ever saying a word"
     },
     "optionB": {
-      "fr": "Voir qui est digne de confiance instantanément",
-      "en": "Instantly see who is trustworthy"
+      "fr": "Que tout le monde voie les tiens, affichés au-dessus de ta tête",
+      "en": "Everyone sees yours, floating right above your head"
     }
   },
   {
@@ -1775,45 +1775,45 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-always-give-speech-vs-always-get-roasted",
     "optionA": {
-      "fr": "Faire le discours à chaque événement de famille",
-      "en": "Give the speech at every family event"
+      "fr": "À chaque repas de famille, ta daronne ressort ton pire moment d'ado devant tout le monde",
+      "en": "At every family dinner, your mum brings up your worst teenage moment in front of everyone"
     },
     "optionB": {
-      "fr": "Être gentiment chambré à chaque événement de famille",
-      "en": "Get lovingly roasted at every family event"
+      "fr": "À chaque repas, on te demande « alors, toujours célibataire ? » avant même le bonjour",
+      "en": "At every dinner, you get 'so, still single?' before you've even said hello"
     }
   },
   {
     "id": "wyr-snail-mail-only-vs-calls-only",
     "optionA": {
-      "fr": "Communiquer uniquement par lettres papier",
-      "en": "Communicate only by handwritten letters"
+      "fr": "Pour parler à quelqu'un, tu dois d'abord le battre au bras de fer",
+      "en": "To talk to anyone, you must first beat them at arm-wrestling"
     },
     "optionB": {
-      "fr": "Communiquer uniquement par appels vidéo",
-      "en": "Communicate only by video calls"
+      "fr": "Pour répondre, tu dois d'abord chanter ta phrase devant tout le monde",
+      "en": "To reply to anyone, you must first sing your sentence to the whole room"
     }
   },
   {
     "id": "wyr-museum-night-vs-zoo-night",
     "optionA": {
-      "fr": "Passer une nuit enfermé dans un musée",
-      "en": "Spend a night locked in a museum"
+      "fr": "Passer une nuit enfermé avec le pote du groupe qui parle le plus",
+      "en": "Spend a night locked in with the friend in this group who talks the most"
     },
     "optionB": {
-      "fr": "Passer une nuit enfermé dans un zoo",
-      "en": "Spend a night locked in a zoo"
+      "fr": "Passer une nuit enfermé avec celui qui ne dit jamais rien, et tu dois meubler",
+      "en": "Spend a night locked in with the one who never says a word, and you have to fill the silence"
     }
   },
   {
     "id": "wyr-warm-salad-vs-cold-soup",
     "optionA": {
-      "fr": "Toutes tes salades servies tièdes",
-      "en": "All your salads served warm"
+      "fr": "À chaque repas de groupe, c'est toi qui choisis qui s'assoit où, et tout le monde le saura",
+      "en": "At every group meal, you decide who sits where, and everyone knows it was you"
     },
     "optionB": {
-      "fr": "Toutes tes soupes servies froides",
-      "en": "All your soups served cold"
+      "fr": "Tu te retrouves toujours coincé à côté de la personne avec qui c'est le plus gênant ce soir-là",
+      "en": "You always end up seated next to whoever it's most awkward with that night"
     }
   },
   {
@@ -1830,23 +1830,23 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-personal-theme-song-vs-credits-roll",
     "optionA": {
-      "fr": "Un générique perso qui joue à tes arrivées",
-      "en": "Theme music plays whenever you arrive"
+      "fr": "À chaque fois que tu entres, une voix off balance ton dernier moment de honte",
+      "en": "Every time you walk in, a narrator announces your most recent embarrassing moment"
     },
     "optionB": {
-      "fr": "Un générique de fin qui défile à tes départs",
-      "en": "End credits roll whenever you leave"
+      "fr": "À chaque fois que tu pars, la pièce voit en gros pourquoi tu pars vraiment",
+      "en": "Every time you leave, the room sees in bold the real reason you're leaving"
     }
   },
   {
-    "id": "wyr-see-everyones-age-vs-everyones-mood",
+    "id": "wyr-who-muted-you-vs-who-judges-stories",
     "optionA": {
-      "fr": "Voir le niveau de batterie sociale des gens",
-      "en": "See everyone's social battery level"
+      "fr": "Voir exactement qui t'a mis en sourdine sur WhatsApp",
+      "en": "See exactly who has you muted"
     },
     "optionB": {
-      "fr": "Voir le niveau de faim des gens",
-      "en": "See everyone's hunger level"
+      "fr": "Voir qui regarde tes stories uniquement pour juger",
+      "en": "See who watches your stories purely to judge"
     }
   },
   {
@@ -1861,14 +1861,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-always-shotgun-vs-always-aux",
+    "id": "wyr-aux-criticised-vs-gps-blamed",
     "optionA": {
-      "fr": "Toujours avoir la place passager",
-      "en": "Always get shotgun"
+      "fr": "Gérer la musique de chaque trajet, et tout le monde critique tout",
+      "en": "Run the aux on every trip, every song openly criticised"
     },
     "optionB": {
-      "fr": "Toujours contrôler la musique du trajet",
-      "en": "Always control the road trip playlist"
+      "fr": "Faire le GPS, et chaque bouchon devient officiellement ta faute",
+      "en": "Be the navigator, every traffic jam officially your fault"
     }
   },
   {
@@ -1885,12 +1885,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-no-regret-vs-no-fear",
     "optionA": {
-      "fr": "Ne plus jamais ressentir de regret",
-      "en": "Never feel regret again"
+      "fr": "Ne plus jamais ressentir de regret, et refaire les mêmes erreurs en boucle",
+      "en": "Never feel regret again, and repeat the same mistakes forever"
     },
     "optionB": {
-      "fr": "Ne plus jamais ressentir de trac",
-      "en": "Never feel stage fright again"
+      "fr": "Te souvenir de chaque honte de ta vie, en HD, pour toujours",
+      "en": "Remember every shame of your life in HD detail, forever"
     }
   },
   {
@@ -1971,58 +1971,58 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-find-money-vs-find-time",
+    "id": "wyr-salary-in-bio-vs-know-friends-salaries",
     "optionA": {
-      "fr": "Trouver 20 € par terre chaque semaine",
-      "en": "Find a $20 bill on the ground every week"
+      "fr": "Ton salaire affiché dans ta bio, partout, à vie",
+      "en": "Your salary pinned in your bio, everywhere, for life"
     },
     "optionB": {
-      "fr": "Gagner une heure de sommeil magique chaque nuit",
-      "en": "Gain one magical extra hour of sleep nightly"
+      "fr": "Connaître le salaire de tous tes potes, interdit d'en parler",
+      "en": "Know all your friends' salaries, never allowed to bring it up"
     }
   },
   {
     "id": "wyr-only-buffets-vs-only-tasting-menus",
     "optionA": {
-      "fr": "Ne manger qu'en buffet à volonté",
-      "en": "Only ever eat at all-you-can-eat buffets"
+      "fr": "Ne manger qu'en buffet à volonté, et toujours repartir avec une assiette par poche",
+      "en": "Only ever eat at all-you-can-eat buffets, always leaving with a plate stashed per pocket"
     },
     "optionB": {
-      "fr": "Ne manger qu'en menu dégustation 12 services",
-      "en": "Only ever eat 12-course tasting menus"
+      "fr": "Ne manger qu'en menu dégustation, et toujours avoir encore faim en sortant",
+      "en": "Only ever eat at tasting menus, and always leave still hungry"
     }
   },
   {
     "id": "wyr-talk-elevator-vs-silent-roadtrip",
     "optionA": {
-      "fr": "Faire la conversation dans chaque ascenseur",
-      "en": "Make small talk in every elevator ride"
+      "fr": "Ton ex et toi tombez dans le même groupe d'amis, à vie, invitations communes garanties",
+      "en": "Your ex and you land in the same friend group, for life, shared invites guaranteed"
     },
     "optionB": {
-      "fr": "Faire 6h de route en silence total",
-      "en": "Take 6-hour road trips in total silence"
+      "fr": "Tu peux les éviter, mais le groupe choisit toujours son camp, et c'est jamais le tien",
+      "en": "You get to avoid them, but the group always picks a side, and it's never yours"
     }
   },
   {
     "id": "wyr-honk-when-stressed-vs-beep-reverse",
     "optionA": {
-      "fr": "Klaxonner comme une oie quand tu stresses",
-      "en": "Honk like a goose when stressed"
+      "fr": "Ton visage affiche un emoji géant de ce que tu ressens vraiment quand un pote raconte SON histoire pour la 4e fois",
+      "en": "Your face shows a giant emoji of what you actually feel when a friend tells THE same story for the 4th time"
     },
     "optionB": {
-      "fr": "Émettre un bip de recul quand tu marches en arrière",
-      "en": "Beep like a truck when walking backwards"
+      "fr": "Tu ne peux plus faire semblant de rigoler aux blagues pas drôles, ça se voit direct",
+      "en": "You can no longer fake-laugh at unfunny jokes, and it shows instantly"
     }
   },
   {
-    "id": "wyr-no-deadlines-vs-no-meetings",
+    "id": "wyr-cry-in-meetings-vs-boss-sees-searches",
     "optionA": {
-      "fr": "Plus jamais de deadlines",
-      "en": "No more deadlines ever"
+      "fr": "Pleurer une fois par mois en réunion, sans explication possible",
+      "en": "Cry once a month in a meeting, no explanation allowed"
     },
     "optionB": {
-      "fr": "Plus jamais de réunions",
-      "en": "No more meetings ever"
+      "fr": "Ton boss voit tes recherches « comment démissionner » en direct",
+      "en": "Your boss watches your 'how to quit' searches live"
     }
   },
   {
@@ -2048,25 +2048,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-trampoline-floor-vs-ballpit-car",
+    "id": "wyr-wave-at-honks-vs-miss-every-bus",
     "optionA": {
-      "fr": "Que le sol de ton salon soit un trampoline",
-      "en": "Your living room floor is a trampoline"
+      "fr": "Croire que chaque klaxon t'est destiné, et faire coucou",
+      "en": "Assume every honk is for you, and wave back"
     },
     "optionB": {
-      "fr": "Que ta voiture soit une piscine à balles",
-      "en": "Your car is a ball pit"
+      "fr": "Courir après chaque bus, le rater, arrêt complet témoin",
+      "en": "Sprint for every bus, miss it, full bus stop watching"
     }
   },
   {
-    "id": "wyr-read-1000-books-vs-visit-100-countries",
+    "id": "wyr-lines-stolen-vs-stories-told-better",
     "optionA": {
-      "fr": "Avoir lu les 1000 plus grands livres",
-      "en": "Have read the 1,000 greatest books"
+      "fr": "Tes meilleures punchlines toujours attribuées à quelqu'un d'autre",
+      "en": "Your best lines always credited to someone else"
     },
     "optionB": {
-      "fr": "Avoir visité 100 pays",
-      "en": "Have visited 100 countries"
+      "fr": "Tes pires anecdotes racontées par tes potes, mieux que par toi",
+      "en": "Your worst stories told by your mates, better than you tell them"
     }
   },
   {
@@ -2092,36 +2092,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-pockets-infinite-vs-never-lose",
+    "id": "wyr-phone-screendown-vs-keys-weekend",
     "optionA": {
-      "fr": "Des poches sans fond comme Mary Poppins",
-      "en": "Bottomless Mary Poppins pockets"
+      "fr": "Ton tel tombe écran contre le sol à chaque fois qu'on te le passe",
+      "en": "Your phone lands screen-down every single time it's handed to you"
     },
     "optionB": {
-      "fr": "Ne plus jamais rien perdre",
-      "en": "Never lose anything again"
+      "fr": "Tes clés disparaissent chaque vendredi 23h, retour lundi 8h",
+      "en": "Your keys vanish every Friday 11 p.m., reappear Monday 8 a.m."
     }
   },
   {
     "id": "wyr-perfect-sleep-4h-vs-normal-9h",
     "optionA": {
-      "fr": "Dormir 4h et être en pleine forme",
-      "en": "Sleep 4 hours and feel amazing"
+      "fr": "Être toujours le premier à craquer et à rentrer en soirée, et le groupe le sait",
+      "en": "Always be the first to tap out and go home on a night out, and the group knows it"
     },
     "optionB": {
-      "fr": "Dormir 9h de sommeil parfait obligatoire",
-      "en": "Need a mandatory 9 hours of perfect sleep"
+      "fr": "Tenir jusqu'au bout à chaque fois, mais être insupportable le lendemain pour tout le monde",
+      "en": "Always last till the end, but be unbearable to everyone the next day"
     }
   },
   {
-    "id": "wyr-mystery-jam-vs-mystery-cheese",
+    "id": "wyr-flatmate-eats-leftovers-vs-label-food",
     "optionA": {
-      "fr": "Goûter une confiture mystère chaque matin",
-      "en": "Taste a mystery jam every morning"
+      "fr": "Ta coloc finit tes restes et laisse l'emballage vide en évidence",
+      "en": "Your flatmate eats your leftovers and displays the empty box"
     },
     "optionB": {
-      "fr": "Goûter un fromage mystère chaque soir",
-      "en": "Taste a mystery cheese every night"
+      "fr": "Étiqueter ta bouffe à ton prénom, et être connu pour ça",
+      "en": "Label all your food with your name, and be known for it"
     }
   },
   {
@@ -2136,36 +2136,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-cloud-bed-vs-water-walk",
+    "id": "wyr-bed-crumbs-vs-warm-pillow",
     "optionA": {
-      "fr": "Dormir sur un nuage, mais il pleut parfois dedans",
-      "en": "Sleep on a cloud, but it sometimes rains inside"
+      "fr": "Ta coloc invite des gens chez toi sans demander, et tu les découvres au réveil",
+      "en": "Your flatmate has people over without asking, and you meet them when you wake up"
     },
     "optionB": {
-      "fr": "Marcher sur l'eau, mais seulement quand elle est glacée",
-      "en": "Walk on water, but only when it's freezing"
+      "fr": "Ta coloc raconte à tout le monde tes petites manies de la maison, en détail",
+      "en": "Your flatmate tells everyone your weird little house habits, in detail"
     }
   },
   {
-    "id": "wyr-speak-all-instruments-vs-all-sports",
+    "id": "wyr-lose-to-kids-vs-win-tryhard",
     "optionA": {
-      "fr": "Savoir jouer de tous les instruments",
-      "en": "Play every musical instrument"
+      "fr": "Perdre contre des enfants de 8 ans à tous les jeux, devant témoins",
+      "en": "Lose to 8-year-olds at every game, witnesses guaranteed"
     },
     "optionB": {
-      "fr": "Être bon dans tous les sports",
-      "en": "Be good at every sport"
+      "fr": "Gagner seulement quand on t'a vu t'entraîner en cachette",
+      "en": "Only win when everyone knows you secretly practised"
     }
   },
   {
-    "id": "wyr-guac-extra-free-vs-bread-unlimited",
+    "id": "wyr-wrong-order-silence-vs-send-back-always",
     "optionA": {
-      "fr": "Le supplément avocat toujours offert",
-      "en": "Extra guac is always free"
+      "fr": "Recevoir toujours le plat d'à côté, et le manger sans rien dire",
+      "en": "Always get the wrong order, and eat it in silence"
     },
     "optionB": {
-      "fr": "La corbeille de pain toujours rechargée",
-      "en": "The bread basket is always refilled"
+      "fr": "Renvoyer chaque plat en cuisine, et l'expliquer au serveur en face",
+      "en": "Send every dish back, and tell the waiter why, to their face"
     }
   },
   {
@@ -2202,157 +2202,157 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-eternal-leftovers-vs-no-leftovers",
+    "id": "wyr-dish-nobody-finishes-vs-chase-tupperware",
     "optionA": {
-      "fr": "Que tes restes soient meilleurs que le plat original",
-      "en": "Your leftovers always taste better than the original"
+      "fr": "Ton plat est toujours celui que personne ne finit aux soirées",
+      "en": "Your dish is always the one nobody finishes at potlucks"
     },
     "optionB": {
-      "fr": "Que tes plats soient parfaits mais sans jamais de restes",
-      "en": "Your meals are perfect but there are never leftovers"
+      "fr": "On te rend jamais tes tupperwares, et tu dois les réclamer un par un",
+      "en": "Your Tupperware never comes back, and you have to chase every lid"
     }
   },
   {
     "id": "wyr-host-podcast-noone-vs-guest-top-podcast",
     "optionA": {
-      "fr": "Animer un podcast que tu adores mais que personne n'écoute",
-      "en": "Host your own podcast that nobody listens to"
+      "fr": "À chaque soirée, c'est toi qu'on charrie en premier, mais t'es toujours invité",
+      "en": "At every party you're the first one roasted, but you're always invited"
     },
     "optionB": {
-      "fr": "Être invité une seule fois dans le plus gros podcast du monde",
-      "en": "Be a guest once on the world's biggest podcast"
+      "fr": "On te charrie jamais, mais on t'oublie une fois sur deux pour les sorties",
+      "en": "Nobody ever roasts you, but you get forgotten for half the plans"
     }
   },
   {
     "id": "wyr-knee-maracas-vs-teeth-castanets",
     "optionA": {
-      "fr": "Que tes genoux fassent des maracas à chaque pas",
-      "en": "Your knees rattle like maracas with every step"
+      "fr": "Devoir liker en public chaque story de ton ex, à vie, dans la seconde",
+      "en": "Be forced to publicly like every story your ex posts, for life, within seconds"
     },
     "optionB": {
-      "fr": "Que tes dents claquent en rythme flamenco quand tu as froid",
-      "en": "Your teeth clack out flamenco rhythms when you're cold"
+      "fr": "Ton ex voit chaque fois que t'as regardé son profil, compteur affiché",
+      "en": "Your ex sees every time you've checked their profile, with the count shown"
     }
   },
   {
-    "id": "wyr-cool-pillow-vs-instant-hot-shower",
+    "id": "wyr-shampoo-cold-water-vs-doorbell-shower",
     "optionA": {
-      "fr": "Que ton oreiller soit toujours du côté frais",
-      "en": "Your pillow is always the cool side"
+      "fr": "L'eau passe froide pile quand t'as du shampoing dans les yeux",
+      "en": "The water turns cold the second shampoo hits your eyes"
     },
     "optionB": {
-      "fr": "Que ta douche soit chaude dès la première seconde",
-      "en": "Your shower runs hot the second you turn it on"
+      "fr": "On sonne à ta porte à chaque fois que t'es sous la douche",
+      "en": "The doorbell rings every single time you shower"
     }
   },
   {
-    "id": "wyr-endless-gum-vs-loyal-pen",
+    "id": "wyr-mystery-gum-vs-exploding-pen",
     "optionA": {
-      "fr": "Un chewing-gum qui ne perd jamais son goût",
-      "en": "Gum that never loses its flavor"
+      "fr": "Un chewing-gum mystère sous chaque table que tu touches",
+      "en": "Mystery gum under every table you touch"
     },
     "optionB": {
-      "fr": "Un stylo qui ne meurt jamais et ne se fait jamais voler",
-      "en": "A pen that never dies and never gets stolen"
+      "fr": "Ton stylo explose dans ta poche les jours d'entretien",
+      "en": "Your pen explodes in your pocket on interview days"
     }
   },
   {
     "id": "wyr-lagging-shadow-vs-room-echo",
     "optionA": {
-      "fr": "Que ton ombre bouge avec 2 secondes de retard",
-      "en": "Your shadow moves on a 2-second delay"
+      "fr": "Une bulle au-dessus de ta tête affiche ta vraie pensée avec 2 secondes de retard",
+      "en": "A speech bubble over your head shows your real thought on a 2-second delay"
     },
     "optionB": {
-      "fr": "Que ta voix résonne légèrement dans chaque pièce",
-      "en": "Your voice slightly echoes in every room"
+      "fr": "Chaque mensonge poli que tu dis s'affiche en sous-titre sous ton menton",
+      "en": "Every polite lie you tell appears as a subtitle under your chin"
     }
   },
   {
-    "id": "wyr-lost-socks-return-vs-tupperware-lids-match",
+    "id": "wyr-wet-sock-step-vs-borrowed-charger",
     "optionA": {
-      "fr": "Retrouver toutes les chaussettes disparues de ta vie",
-      "en": "Every sock you ever lost comes back"
+      "fr": "Quelqu'un dans cette pièce te doit de l'argent et fait semblant d'avoir oublié, à vie",
+      "en": "Someone in this room owes you money and keeps pretending to forget, for life"
     },
     "optionB": {
-      "fr": "Que chaque tupperware retrouve son couvercle, à vie",
-      "en": "Every Tupperware matches its lid, forever"
+      "fr": "Ton chargeur est toujours « emprunté » par quelqu'un dans la pièce, jamais rendu",
+      "en": "Your charger is permanently 'borrowed' by someone in this room, never returned"
     }
   },
   {
-    "id": "wyr-mosquito-truce-vs-no-stubbed-toes",
+    "id": "wyr-immortal-mosquito-vs-monday-toe",
     "optionA": {
-      "fr": "Que les moustiques signent une trêve avec toi",
-      "en": "Mosquitoes declare a permanent truce with you"
+      "fr": "Un moustique intouchable dort dans ta chambre chaque nuit",
+      "en": "One untouchable mosquito sleeps in your room nightly"
     },
     "optionB": {
-      "fr": "Ne plus jamais te cogner le petit orteil",
-      "en": "Never stub your little toe again"
+      "fr": "Te cogner le petit orteil chaque lundi, meuble surprise",
+      "en": "Stub your little toe every Monday, furniture's choice"
     }
   },
   {
-    "id": "wyr-negotiate-wifi-vs-negotiate-traffic-lights",
+    "id": "wyr-wifi-clutch-death-vs-lying-battery",
     "optionA": {
-      "fr": "Pouvoir négocier avec ta box internet",
-      "en": "Be able to negotiate with your wifi router"
+      "fr": "Le wifi coupe pile au moment le plus important, à chaque fois",
+      "en": "The wifi dies at the exact crucial moment, every time"
     },
     "optionB": {
-      "fr": "Pouvoir négocier avec les feux rouges",
-      "en": "Be able to negotiate with traffic lights"
+      "fr": "Ta batterie ment : 40 % = mort subite possible, maintenant peut-être",
+      "en": "Your battery lies: 40% means sudden death, possibly right now"
     }
   },
   {
-    "id": "wyr-daily-levitation-vs-rps-immortal",
+    "id": "wyr-trip-cool-entrance-vs-voice-cracks",
     "optionA": {
-      "fr": "Léviter à 5 cm du sol, 5 secondes par jour",
-      "en": "Levitate two inches off the ground, 5 seconds a day"
+      "fr": "Trébucher à chaque entrée un peu stylée que tu tentes",
+      "en": "Trip on every cool entrance you attempt"
     },
     "optionB": {
-      "fr": "Ne plus jamais perdre à pierre-feuille-ciseaux",
-      "en": "Never lose rock-paper-scissors again"
+      "fr": "Ta voix déraille à chaque prise de parole importante",
+      "en": "Your voice cracks at every important moment you speak"
     }
   },
   {
-    "id": "wyr-cloud-sculptor-vs-stone-skipper",
+    "id": "wyr-gym-slow-clap-vs-dance-filmed",
     "optionA": {
-      "fr": "Sculpter les nuages par la pensée",
-      "en": "Sculpt clouds with your mind"
+      "fr": "Être applaudi ironiquement à chaque effort à la salle",
+      "en": "Get slow-clapped at the gym every single session"
     },
     "optionB": {
-      "fr": "Que tes ricochets fassent toujours 20 rebonds",
-      "en": "Every stone you skip bounces 20 times"
+      "fr": "Être filmé à ton insu dès que tu danses, vidéo envoyée au groupe",
+      "en": "Get secretly filmed whenever you dance, clip sent to the group chat"
     }
   },
   {
-    "id": "wyr-inflatable-furniture-vs-edible-cutlery",
+    "id": "wyr-ikea-in-public-vs-furniture-collapses",
     "optionA": {
-      "fr": "Que tous tes meubles soient gonflables",
-      "en": "All your furniture is inflatable"
+      "fr": "Monter tous tes meubles IKEA en public, notice en suédois uniquement",
+      "en": "Assemble all your IKEA furniture in public, Swedish-only manual"
     },
     "optionB": {
-      "fr": "Que tous tes couverts soient comestibles, et à finir",
-      "en": "All your cutlery is edible, and you must finish it"
+      "fr": "Un meuble s'effondre à chaque fois que tu reçois du monde",
+      "en": "One piece of furniture collapses every time you host"
     }
   },
   {
     "id": "wyr-sneeze-new-accent-vs-yawn-slow-motion",
     "optionA": {
-      "fr": "Changer d'accent pendant 10 minutes à chaque éternuement",
-      "en": "Each sneeze gives you a random accent for 10 minutes"
+      "fr": "Tu dois classer les gens d'ici du plus loyal au plus capable de te trahir pour 50 balles",
+      "en": "You must rank the people here from most loyal to most likely to sell you out for 50 bucks"
     },
     "optionB": {
-      "fr": "Parler au ralenti pendant 1 minute à chaque bâillement",
-      "en": "Each yawn makes you talk in slow motion for a minute"
+      "fr": "Eux te classent, toi t'as pas le droit de répondre, juste d'encaisser",
+      "en": "They rank you, and you're not allowed to respond, only to take it"
     }
   },
   {
-    "id": "wyr-parking-fairy-vs-full-bars",
+    "id": "wyr-parallel-park-terrace-vs-stall-green-light",
     "optionA": {
-      "fr": "Toujours trouver une place de parking juste devant",
-      "en": "Always find a parking spot right out front"
+      "fr": "Faire tous tes créneaux devant une terrasse pleine qui te note",
+      "en": "Parallel park in front of a packed café terrace that scores you"
     },
     "optionB": {
-      "fr": "Toujours capter du réseau, même au fond d'une cave",
-      "en": "Always have full signal bars, even in a basement"
+      "fr": "Caler à chaque feu vert, même klaxonneur derrière, à vie",
+      "en": "Stall at every green light, same guy honking behind you, for life"
     }
   },
   {
@@ -2367,36 +2367,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-float-when-laughing-vs-sparks-when-annoyed",
+    "id": "wyr-neon-blush-crush-vs-stomach-lull",
     "optionA": {
-      "fr": "Décoller de 3 cm quand tu ris trop fort",
-      "en": "Float an inch off the ground when you really laugh"
+      "fr": "Rougir fluo dès qu'on prononce le prénom de ton crush",
+      "en": "Glow neon red whenever your crush's name comes up"
     },
     "optionB": {
-      "fr": "Faire de petites étincelles quand tu t'agaces",
-      "en": "Shoot tiny harmless sparks when you're annoyed"
+      "fr": "Ton ventre gargouille pile dans chaque blanc de conversation",
+      "en": "Your stomach growls exactly in every conversation lull"
     }
   },
   {
-    "id": "wyr-stairs-are-slides-vs-sidewalks-are-walkways",
+    "id": "wyr-banana-peel-weekly-vs-cartoon-piano",
     "optionA": {
-      "fr": "Que tous les escaliers aient aussi un toboggan",
-      "en": "Every staircase comes with a slide"
+      "fr": "Glisser sur une vraie peau de banane une fois par semaine",
+      "en": "Slip on an actual banana peel once a week"
     },
     "optionB": {
-      "fr": "Que tous les trottoirs soient des tapis roulants",
-      "en": "Every sidewalk is a moving walkway"
+      "fr": "Un piano de cartoon frôle ta tête une fois par mois",
+      "en": "A cartoon piano near-misses your head once a month"
     }
   },
   {
     "id": "wyr-no-pasta-vs-no-rice",
     "optionA": {
-      "fr": "Ne plus jamais manger de pâtes",
-      "en": "Never eat pasta again"
+      "fr": "À chaque fois que tu cuisines pour des potes, un seul d'entre eux note le plat à voix haute, sans pitié",
+      "en": "Every time you cook for friends, one of them grades the dish out loud, no mercy"
     },
     "optionB": {
-      "fr": "Ne plus jamais manger de riz",
-      "en": "Never eat rice again"
+      "fr": "Tu dois goûter, devant tout le monde, le plat le plus raté du pote le plus susceptible",
+      "en": "You must taste, in front of everyone, the worst dish made by the friend who takes it most personally"
     }
   },
   {
@@ -2422,25 +2422,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-always-ripe-avocado-vs-perfect-banana",
+    "id": "wyr-mild-allergy-fave-vs-ex-runs-restaurant",
     "optionA": {
-      "fr": "Que tous tes avocats soient mûrs à point",
-      "en": "Every avocado you open is perfectly ripe"
+      "fr": "Devenir allergique à ton plat préféré, juste un peu, juste assez",
+      "en": "Go mildly allergic to your favourite food, just enough to suffer"
     },
     "optionB": {
-      "fr": "Que tes bananes soient toujours exactement comme tu aimes",
-      "en": "Every banana is exactly how you like it"
+      "fr": "Le seul resto ouvert près de chez toi est tenu par ton ex",
+      "en": "The only restaurant near your place is run by your ex"
     }
   },
   {
-    "id": "wyr-no-tongue-burns-vs-no-cheek-bites",
+    "id": "wyr-tongue-burn-always-vs-date-hiccups",
     "optionA": {
-      "fr": "Ne plus jamais te brûler la langue",
-      "en": "Never burn your tongue on hot food again"
+      "fr": "Te brûler la langue à chaque première bouchée, à vie",
+      "en": "Burn your tongue on every first bite, for life"
     },
     "optionB": {
-      "fr": "Ne plus jamais te mordre l'intérieur de la joue",
-      "en": "Never bite the inside of your cheek again"
+      "fr": "Avoir le hoquet à chaque rencard, du début à la fin",
+      "en": "Hiccup through every date, start to finish"
     }
   },
   {
@@ -2477,14 +2477,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-bbq-legend-vs-pastry-wizard",
+    "id": "wyr-bbq-judged-inlaw-vs-cake-collapses",
     "optionA": {
-      "fr": "Devenir une légende du barbecue",
-      "en": "Become a backyard barbecue legend"
+      "fr": "Rater la cuisson devant ton beau-père qui « voulait rien dire mais »",
+      "en": "Burn the barbecue while your father-in-law 'doesn't want to say anything'"
     },
     "optionB": {
-      "fr": "Devenir un magicien de la pâtisserie",
-      "en": "Become a pastry wizard"
+      "fr": "Ton gâteau s'effondre à chaque anniversaire, bougies déjà allumées",
+      "en": "Your cake collapses at every birthday, candles already lit"
     }
   },
   {
@@ -2510,36 +2510,36 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-calorie-free-day-vs-dessert-veggies",
+    "id": "wyr-plate-commented-vs-seconds-stared",
     "optionA": {
-      "fr": "Un jour par semaine où les calories n'existent pas",
-      "en": "One day a week where calories don't exist"
+      "fr": "Toute la table commente ce que tu manges, à chaque repas",
+      "en": "Everyone at the table comments on your plate, every meal"
     },
     "optionB": {
-      "fr": "Que les légumes aient le goût de ton dessert préféré",
-      "en": "Vegetables taste like your favorite dessert"
+      "fr": "Te resservir = la table entière se tait et te regarde",
+      "en": "Going for seconds makes the whole table go silent and stare"
     }
   },
   {
-    "id": "wyr-never-hangry-vs-never-food-coma",
+    "id": "wyr-vile-when-hungry-vs-sleep-after-lunch",
     "optionA": {
-      "fr": "Ne plus jamais être affamé et grognon",
-      "en": "Never get hangry again"
+      "fr": "Devenir odieux dès que t'as faim, et t'as toujours un peu faim",
+      "en": "Turn vile the second you're hungry, and you're always a bit hungry"
     },
     "optionB": {
-      "fr": "Ne plus jamais avoir de coup de barre après manger",
-      "en": "Never get a food coma again"
+      "fr": "T'endormir 10 minutes après chaque déjeuner, où que tu sois",
+      "en": "Fall asleep 10 minutes after every lunch, wherever you are"
     }
   },
   {
-    "id": "wyr-home-fries-master-vs-home-barista",
+    "id": "wyr-smoke-alarm-chef-vs-building-knows-menu",
     "optionA": {
-      "fr": "Réussir des frites de brasserie à la maison",
-      "en": "Make restaurant-grade fries at home"
+      "fr": "Déclencher l'alarme incendie à chaque cuisson, voisins témoins",
+      "en": "Set off the smoke alarm every time you cook, neighbours watching"
     },
     "optionB": {
-      "fr": "Réussir un café de barista à la maison",
-      "en": "Pull barista-grade coffee at home"
+      "fr": "Tout l'immeuble sait toujours ce que tu cuisines, et commente",
+      "en": "The whole building always knows what you're cooking, and comments"
     }
   },
   {
@@ -2589,12 +2589,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-everyone-knows-your-name-vs-you-know-everyones",
     "optionA": {
-      "fr": "Tout le monde connaît ton prénom, toi aucun",
-      "en": "Everyone knows your name, you know nobody's"
+      "fr": "Être systématiquement le dernier prévenu quand le groupe organise un truc, à vie",
+      "en": "Always be the last one told when the group plans something, for life"
     },
     "optionB": {
-      "fr": "Tu connais tout le monde, personne ne te reconnaît",
-      "en": "You know everyone, nobody remembers you"
+      "fr": "Être toujours prévenu en premier, mais c'est toujours toi qui dois tout organiser",
+      "en": "Always be told first, but you're always the one who has to organise it all"
     }
   },
   {
@@ -2633,23 +2633,23 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-smalltalk-champion-vs-deep-talk-only",
     "optionA": {
-      "fr": "Être champion du small talk, sans vraies conversations",
-      "en": "Master small talk but never have deep conversations"
+      "fr": "Devoir répéter en public la dernière chose que t'as dite sur le pote à ta gauche",
+      "en": "Have to repeat out loud the last thing you said about the friend on your left"
     },
     "optionB": {
-      "fr": "N'avoir que des discussions profondes, même avec le facteur",
-      "en": "Only have deep talks, even with the mail carrier"
+      "fr": "Le pote à ta droite répète en public la dernière chose qu'il a dite sur toi",
+      "en": "The friend on your right repeats out loud the last thing they said about you"
     }
   },
   {
     "id": "wyr-birthday-song-monthly-vs-flashmob-yearly",
     "optionA": {
-      "fr": "Les serveurs te chantent joyeux anniversaire chaque mois",
-      "en": "Waiters sing you happy birthday every month"
+      "fr": "Découvrir exactement qui a oublié ton anniv chaque année, et devoir leur sourire quand même",
+      "en": "Find out exactly who forgot your birthday each year, and have to smile at them anyway"
     },
     "optionB": {
-      "fr": "Un flashmob en ton honneur une fois par an, en public",
-      "en": "A public flash mob in your honor once a year"
+      "fr": "Ne jamais savoir, mais soupçonner toujours le pote à qui tu tiens le plus",
+      "en": "Never know, but always suspect the friend you care about most"
     }
   },
   {
@@ -2719,14 +2719,14 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-year-at-sea-vs-year-in-space",
+    "id": "wyr-year-locked-with-group-vs-year-without",
     "optionA": {
-      "fr": "Passer un an sur un voilier",
-      "en": "Spend a year on a sailboat"
+      "fr": "Un an enfermé en coloc avec tout ce groupe, sans sortir",
+      "en": "A year locked in a flatshare with everyone in this room"
     },
     "optionB": {
-      "fr": "Passer un an dans une station spatiale",
-      "en": "Spend a year on a space station"
+      "fr": "Un an sans aucun contact avec personne de ce groupe",
+      "en": "A year with zero contact with anyone in this room"
     }
   },
   {
@@ -2743,23 +2743,23 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-honesty-day-vs-invisibility-day",
     "optionA": {
-      "fr": "Un jour où tout le monde te répond en toute honnêteté",
-      "en": "One day where everyone answers you with total honesty"
+      "fr": "Pendant 24h, chaque pote te dit en face le vrai truc qu'il pense de toi — celui qu'il dit que dans l'autre groupe",
+      "en": "For 24h, every friend says to your face the one thing they really think — the version they only post in the group chat without you"
     },
     "optionB": {
-      "fr": "Un jour où tu es complètement invisible",
-      "en": "One day where you're completely invisible"
+      "fr": "Pendant 24h, t'entends en direct ce qu'ils disent de toi dès que tu quittes la pièce. Tout",
+      "en": "For 24h, you hear live what they say about you the second you leave the room. All of it"
     }
   },
   {
     "id": "wyr-new-country-every-2-years-vs-hometown-dream-house",
     "optionA": {
-      "fr": "Changer de pays tous les deux ans",
-      "en": "Move to a new country every two years"
+      "fr": "Refaire ta vie ailleurs tous les deux ans, en perdant à chaque fois un pote d'ici",
+      "en": "Restart your life somewhere new every two years, losing one friend from this room each time"
     },
     "optionB": {
-      "fr": "Rester dans ta ville natale, maison de rêve incluse",
-      "en": "Stay in your hometown, dream house included"
+      "fr": "Rester pile où tu es, mais regarder tous les autres partir sans toi",
+      "en": "Stay exactly where you are, but watch everyone else move on without you"
     }
   },
   {
@@ -2776,12 +2776,12 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-master-your-emotions-vs-read-everyone-elses",
     "optionA": {
-      "fr": "Contrôler parfaitement tes émotions",
-      "en": "Fully control your own emotions"
+      "fr": "Savoir précisément qui, dans cette pièce, t'inviterait pas à son mariage",
+      "en": "Know exactly who in this room wouldn't invite you to their wedding"
     },
     "optionB": {
-      "fr": "Lire parfaitement celles des autres",
-      "en": "Perfectly read everyone else's"
+      "fr": "Savoir qui t'inviterait juste pour le cadeau, et le voir te sourire ce soir",
+      "en": "Know who'd invite you only for the gift, then watch them smile at you tonight"
     }
   },
   {
@@ -2796,25 +2796,25 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
     }
   },
   {
-    "id": "wyr-secrets-of-history-vs-secrets-of-the-ocean",
+    "id": "wyr-doomed-friendship-vs-secret-leaker",
     "optionA": {
-      "fr": "Connaître tous les secrets de l'Histoire",
-      "en": "Learn every secret of human history"
+      "fr": "Savoir quelle amitié de ce groupe ne survivra pas aux 5 prochaines années",
+      "en": "Know which friendship in this room won't survive the next five years"
     },
     "optionB": {
-      "fr": "Connaître tous les secrets de l'océan",
-      "en": "Learn every secret of the ocean"
+      "fr": "Savoir qui ici répète tes secrets, mais sans aucune preuve",
+      "en": "Know who here leaks your secrets, with zero proof"
     }
   },
   {
-    "id": "wyr-infinite-patience-vs-infinite-courage",
+    "id": "wyr-apologize-when-right-vs-never-apologize",
     "optionA": {
-      "fr": "Une patience infinie",
-      "en": "Infinite patience"
+      "fr": "T'excuser même quand t'as raison, toute ta vie",
+      "en": "Apologise even when you're right, for life"
     },
     "optionB": {
-      "fr": "Un courage infini",
-      "en": "Infinite courage"
+      "fr": "Ne plus jamais pouvoir t'excuser, même quand t'as tort",
+      "en": "Never able to apologise again, even when you're wrong"
     }
   },
   {
@@ -2831,56 +2831,56 @@ export const TU_PREFERES_PACK: ContentPack<OptionVoteContent> = {
   {
     "id": "wyr-purpose-revealed-vs-purpose-chosen",
     "optionA": {
-      "fr": "Qu'on te révèle ta vocation, garantie juste",
-      "en": "Be told your true calling, guaranteed right"
+      "fr": "Apprendre exactement à quel rang tes potes te classent dans le groupe, sans pouvoir contester",
+      "en": "Find out exactly where your friends rank you in the group, no right to argue"
     },
     "optionB": {
-      "fr": "Chercher toute ta vie, mais choisir librement",
-      "en": "Keep searching forever, but choose freely"
+      "fr": "Ne jamais le savoir, mais sentir que t'es pas premier",
+      "en": "Never find out, but always feel you're not at the top"
     }
   },
   {
-    "id": "wyr-fails-forgotten-vs-wins-remembered",
+    "id": "wyr-fail-compilation-vs-wins-doubted",
     "optionA": {
-      "fr": "Que tout le monde oublie aussitôt tes échecs",
-      "en": "Everyone instantly forgets your fails"
+      "fr": "Une compil de tes pires moments existe, et tes potes l'ont vue",
+      "en": "A compilation of your worst moments exists, and your friends have seen it"
     },
     "optionB": {
-      "fr": "Que tout le monde retienne toujours tes réussites",
-      "en": "Everyone always remembers your wins"
+      "fr": "Personne ne croit jamais tes réussites, même preuves à l'appui",
+      "en": "Nobody ever believes your wins, even with receipts"
     }
   },
   {
-    "id": "wyr-genius-one-day-a-month-vs-ten-percent-smarter",
+    "id": "wyr-comeback-too-late-vs-never-heard",
     "optionA": {
-      "fr": "Être un génie un jour par mois",
-      "en": "Be a genius one day a month"
+      "fr": "Trouver la réponse parfaite... 4 heures après chaque débat",
+      "en": "Find the perfect comeback four hours after every argument"
     },
     "optionB": {
-      "fr": "Être 10 % plus malin tous les jours",
-      "en": "Be 10% smarter every single day"
+      "fr": "L'avoir tout de suite, mais personne ne te laisse jamais finir",
+      "en": "Have it instantly, but nobody ever lets you finish"
     }
   },
   {
-    "id": "wyr-four-day-week-vs-six-hour-days",
+    "id": "wyr-ex-desk-neighbour-vs-boss-best-friend",
     "optionA": {
-      "fr": "La semaine de quatre jours",
-      "en": "A four-day workweek"
+      "fr": "Ton ex devient ton collègue de bureau, poste en face du tien",
+      "en": "Your ex becomes your desk neighbour, facing you"
     },
     "optionB": {
-      "fr": "Des journées de six heures",
-      "en": "Six-hour workdays"
+      "fr": "Ton boss décide que vous êtes meilleurs potes, week-ends compris",
+      "en": "Your boss decides you're best friends now, weekends included"
     }
   },
   {
     "id": "wyr-one-dream-home-vs-five-city-flats",
     "optionA": {
-      "fr": "Une maison de rêve, mais tu ne déménages plus jamais",
-      "en": "One dream home, but you can never move"
+      "fr": "Tu héberges à vie le pote du groupe qui paie jamais sa part, et tu peux pas le virer",
+      "en": "You house, for life, the one friend who never pays their share, and you can't kick them out"
     },
     "optionB": {
-      "fr": "Des petits apparts dans cinq villes du monde",
-      "en": "Modest flats in five cities around the world"
+      "fr": "Tu paies la part de tout le monde à chaque sortie, et personne te le rend jamais",
+      "en": "You cover everyone's share on every outing, and nobody ever pays you back"
     }
   }
 ] },
@@ -2906,8 +2906,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧀",
     "debateStarter": {
-      "fr": "Un fromage qu'on partage entre potes… mais à 14 € la demi-meule.",
-      "en": "Cheese you share with the squad… at private-club prices."
+      "fr": "Un plat de partage où chacun surveille la machine et compte tes patates. Une copro, pas un dîner.",
+      "en": "A 'sharing' meal where everyone is privately auditing your potato intake."
     }
   },
   {
@@ -2926,8 +2926,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥐",
     "debateStarter": {
-      "fr": "Patrimoine du peuple ou petit plaisir de bourgeois ?",
-      "en": "Heritage of the people or a bougie little treat?"
+      "fr": "Le petit-déj du peuple est passé à 1,60 € pièce. Le peuple a perdu la garde du croissant.",
+      "en": "The people's breakfast, now $4.50 at the bakery. The people lost custody."
     }
   },
   {
@@ -2946,8 +2946,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥛",
     "debateStarter": {
-      "fr": "Sauver la planète, oui, mais à 6,50 € le café.",
-      "en": "Saving the planet, one $7 coffee at a time."
+      "fr": "6,50 € pour du jus d'avoine. L'écologie est devenue un abonnement premium.",
+      "en": "An oat-milk latte is a donation to your own self-image. The planet never sees the money."
     }
   },
   {
@@ -2966,8 +2966,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌯",
     "debateStarter": {
-      "fr": "Le grand égalisateur : tout le monde y finit, personne ne l'assume.",
-      "en": "The great equalizer: everyone ends up there, nobody admits it."
+      "fr": "Le seul resto où le banquier et l'étudiant mangent pareil. L'égalité existe : elle ferme à 5h.",
+      "en": "The only restaurant where everyone's equal — and it closes at 5am. Draw your own conclusions."
     }
   },
   {
@@ -2986,8 +2986,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫕",
     "debateStarter": {
-      "fr": "Un seul caquelon pour tout le monde… mais qui a payé le vin blanc ?",
-      "en": "One pot for the whole table… but somebody bought that wine."
+      "fr": "Tout le monde trempe, personne fait la vaisselle. Le partage a des limites très précises.",
+      "en": "Everyone dips, nobody washes the pot. The collective spirit ends exactly at the sink."
     }
   },
   {
@@ -3006,8 +3006,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥞",
     "debateStarter": {
-      "fr": "Manger des œufs à 14h, c'est la révolution ou la rente ?",
-      "en": "Eggs at 2pm: act of rebellion or trust-fund hobby?"
+      "fr": "Payer 29 € pour des œufs, c'est pas un repas, c'est un statut. Et vous le savez.",
+      "en": "Bottomless brunch is $40 eggs plus witnesses. You're not paying for food, you're paying for the audience."
     }
   },
   {
@@ -3026,8 +3026,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫧",
     "debateStarter": {
-      "fr": "C'est juste de l'eau qui a pris des grands airs.",
-      "en": "It's water that went to private school."
+      "fr": "Commander de la pétillante au resto : 4,50 € de bulles pour pas passer pour un pauvre.",
+      "en": "Sparkling water is tap water with a trust fund. Ordering it at dinner is a class announcement."
     }
   },
   {
@@ -3046,8 +3046,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧊",
     "debateStarter": {
-      "fr": "Des glaçons dans le vin : crime ou service public ?",
-      "en": "Ice in wine: a crime or a public service?"
+      "fr": "Des glaçons dans le vin : le sommelier pleure, la terrasse trinque. Choisis ton camp.",
+      "en": "Ice in wine. Sommeliers call it a crime; everyone having fun calls it Tuesday. Pick a side."
     }
   },
   {
@@ -3066,8 +3066,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍣",
     "debateStarter": {
-      "fr": "Du poisson cru qui arrive en scooter, le futur qu'on mérite.",
-      "en": "Raw fish on a moped — the future we deserve."
+      "fr": "38 € de riz froid en scooter un mardi soir. La flemme est devenue une classe sociale.",
+      "en": "Cold rice on a moped for $40 on a Tuesday. Laziness with disposable income is a social class."
     }
   },
   {
@@ -3086,8 +3086,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍖",
     "debateStarter": {
-      "fr": "Un homme, des pinces, et soudain il dirige tout le jardin.",
-      "en": "One man, one pair of tongs, and suddenly he runs the whole backyard."
+      "fr": "Un homme attrape une pince et devient un patron. Personne a signé pour ça, tout le monde obéit.",
+      "en": "One man picks up the tongs and becomes management. Nobody agreed to this. Everyone complies."
     }
   },
   {
@@ -3106,8 +3106,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥣",
     "debateStarter": {
-      "fr": "Mixer des pois chiches et se sentir artisan.",
-      "en": "Blend chickpeas once and call yourself an artisan."
+      "fr": "Mixer des pois chiches et exiger des compliments. C'est pas de la cuisine, c'est de l'ego à tartiner.",
+      "en": "Blending chickpeas and demanding praise. That's not cooking, that's ego at a dip consistency."
     }
   },
   {
@@ -3126,8 +3126,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥩",
     "debateStarter": {
-      "fr": "Vendue au poids, racontée pendant des années.",
-      "en": "Priced by the pound, bragged about for years."
+      "fr": "90 € de viande pour raconter le prix avant le goût. T'achètes pas une côte, t'achètes une anecdote.",
+      "en": "Nobody remembers how the $120 steak tasted. Everybody remembers what it cost. That's the dish."
     }
   },
   {
@@ -3146,8 +3146,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌾",
     "debateStarter": {
-      "fr": "Personne ne sait le prononcer, tout le monde a un avis.",
-      "en": "Nobody can pronounce it, everybody has an opinion."
+      "fr": "Une graine avec un attaché de presse. Le quinoa a un meilleur dossier que toi.",
+      "en": "Quinoa has better PR than you do. It's a seed with a publicist and a grudge."
     }
   },
   {
@@ -3166,8 +3166,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍇",
     "debateStarter": {
-      "fr": "Ça sent la grange et ça coûte un loyer.",
-      "en": "Smells like a barn, priced like rent."
+      "fr": "Ça sent l'écurie, ça coûte 28 €, et si tu tousses, c'est toi le problème.",
+      "en": "It smells like a barn, costs $40, and if you gag, somehow you're the one who's wrong."
     }
   },
   {
@@ -3186,8 +3186,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥚",
     "debateStarter": {
-      "fr": "Monter une mayo soi-même : patrimoine ou frime ?",
-      "en": "Whisking your own mayo: heritage or flex?"
+      "fr": "Personne monte sa mayo en silence. C'est jamais pour la mayo, c'est pour le pouvoir.",
+      "en": "Nobody whisks their own mayo quietly. It's never about the mayo, it's about dominance."
     }
   },
   {
@@ -3206,8 +3206,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "☕",
     "debateStarter": {
-      "fr": "Tout le rituel, zéro conséquence. Suspect.",
-      "en": "All the ritual, none of the consequences. Suspicious."
+      "fr": "Boire du déca, c'est faire semblant devant tout le monde. Et y'a des gens comme ça ici.",
+      "en": "Decaf is cosplay. All the ritual, none of the stakes — and someone in this room orders it proudly."
     }
   },
   {
@@ -3226,8 +3226,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫙",
     "debateStarter": {
-      "fr": "Du thé qui a fermenté et une communauté qui a suivi.",
-      "en": "Tea that fermented and built a following."
+      "fr": "Du thé pourri vendu comme un médicament. Et le pire : ses fans recrutent.",
+      "en": "Rotten tea with a recruitment program. No drink should come with a testimony."
     }
   },
   {
@@ -3246,8 +3246,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍢",
     "debateStarter": {
-      "fr": "Même le tofu s'est mis au barbecue.",
-      "en": "Even tofu hits the smoker now."
+      "fr": "Même le tofu essaie d'avoir le goût de la viande. Personne assume rien dans ce pays.",
+      "en": "Even the tofu is trying to taste like meat. Nobody in this economy commits to anything."
     }
   },
   {
@@ -3266,8 +3266,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍍",
     "debateStarter": {
-      "fr": "La seule question qui a déjà brisé des familles.",
-      "en": "The only question that has actually ended friendships."
+      "fr": "L'ananas sur la pizza a brisé plus de couples que l'infidélité. Et certains ici en commandent.",
+      "en": "Pineapple pizza has ended more relationships than cheating. Someone here still orders it."
     }
   },
   {
@@ -3286,8 +3286,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥖",
     "debateStarter": {
-      "fr": "Trois ingrédients, zéro débat… jusqu'à ce soir.",
-      "en": "Three ingredients, zero debate… until tonight."
+      "fr": "Trois ingrédients à 6,50 € en gare. Le sandwich du peuple est officiellement pris en otage.",
+      "en": "Four dollars, no receipt, total faith. The bodega sandwich runs entirely on trust."
     }
   },
   {
@@ -3306,8 +3306,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥗",
     "debateStarter": {
-      "fr": "Une salade qui contient plus de poulet que de salade.",
-      "en": "A salad with more chicken than salad."
+      "fr": "Commander une César pour « manger léger » : du poulet pané, du parmesan et du déni.",
+      "en": "Ordering a Caesar to 'eat light' — fried chicken, cheese, and denial in a bowl."
     }
   },
   {
@@ -3326,8 +3326,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥑",
     "debateStarter": {
-      "fr": "L'avocat a traversé un océan pour finir sous une photo.",
-      "en": "That avocado crossed an ocean to die for a photo."
+      "fr": "12 € la tartine, et on s'étonne que personne achète d'appart. Le coupable est sur la table.",
+      "en": "Fourteen-dollar toast is, allegedly, why you can't buy a house. Defend your brunch or your future."
     }
   },
   {
@@ -3346,8 +3346,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥓",
     "debateStarter": {
-      "fr": "Tranche épaisse ou fine : dis-moi comment tu coupes, je te dirai qui tu es.",
-      "en": "Thick slice or thin slice — tell me how you cut, I'll tell you who you are."
+      "fr": "La tranche fine, c'est de la radinerie déguisée en élégance. Coupe épais ou rends le couteau.",
+      "en": "You paid $60 for meat on a plank. The plank is doing most of the work."
     }
   },
   {
@@ -3366,8 +3366,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍺",
     "debateStarter": {
-      "fr": "Plus c'est amer, plus on t'explique pourquoi c'est bon.",
-      "en": "The more bitter it gets, the longer the explanation."
+      "fr": "Plus c'est imbuvable, plus on t'explique que t'as pas le palais. L'amertume comme fonds de commerce.",
+      "en": "The worse it tastes, the longer the lecture. IPA guys don't drink beer, they administer it."
     }
   },
   {
@@ -3386,8 +3386,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌿",
     "debateStarter": {
-      "fr": "Il a un pied de basilic et maintenant il est italien.",
-      "en": "He owns one basil plant and now he's Italian."
+      "fr": "Il a un pied de basilic, donc il corrige ta façon de cuire les pâtes. Le pesto maison rend autoritaire. Quelqu'un ici en est là.",
+      "en": "He owns one basil plant, so now he corrects how you boil pasta. Homemade pesto makes people bossy. Someone here is there."
     }
   },
   {
@@ -3406,8 +3406,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌱",
     "debateStarter": {
-      "fr": "Ça imite la viande si bien que tout le monde est vexé.",
-      "en": "Imitates meat so well that everyone's offended."
+      "fr": "Arrêter la viande, puis acheter un truc qui saigne pour faire semblant. C'est une conviction ou un manque ? Tranchez.",
+      "en": "Quit meat, then buy something engineered to bleed and fake it. Is that a conviction or a craving? Decide."
     }
   },
   {
@@ -3426,8 +3426,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👑",
     "debateStarter": {
-      "fr": "Le seul gâteau qui désigne un monarque à table.",
-      "en": "The only cake that crowns a monarch at the table."
+      "fr": "Tout le monde mâche au ralenti pour la fève. 30 ans et toujours prêts à trahir pour une couronne en carton.",
+      "en": "Grown adults slowing their chew to find a plastic baby. You'd sell your friends for a cardboard crown."
     }
   },
   {
@@ -3446,8 +3446,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍾",
     "debateStarter": {
-      "fr": "Des bulles officielles pour dire « on a réussi ».",
-      "en": "Official bubbles for announcing you've made it."
+      "fr": "Personne aime vraiment ça. On paie 40 balles pour le bruit du bouchon et le regard des autres.",
+      "en": "Nobody actually likes the taste. You're paying $60 for the popping sound and the witnesses."
     }
   },
   {
@@ -3466,8 +3466,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫗",
     "debateStarter": {
-      "fr": "Trois gouttes et l'addition double.",
-      "en": "Three drops and the bill doubles."
+      "fr": "Y'a même pas de truffe dedans, c'est de l'arôme de synthèse. Vous payez 12 € pour un parfum d'ambiance.",
+      "en": "There's no truffle in truffle oil. It's perfume. You tipped 20% on cologne fries."
     }
   },
   {
@@ -3486,8 +3486,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥔",
     "debateStarter": {
-      "fr": "De la crème, des patates, et soudain tout le monde est gentil.",
-      "en": "Cream, potatoes, and suddenly everyone's nice."
+      "fr": "Celui qui rajoute du gruyère dessus insulte le Dauphiné entier. Et il recommence chaque année, fièrement.",
+      "en": "Whoever takes the corner piece with all the crust knows exactly what they did. Name them."
     }
   },
   {
@@ -3506,8 +3506,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍗",
     "debateStarter": {
-      "fr": "La forme dinosaure rend-elle le repas plus noble ?",
-      "en": "Do dino shapes make the meal more dignified?"
+      "fr": "T'as 26 ans et tu tries encore tes nuggets par taille avant de manger. Assume-le devant tout le monde.",
+      "en": "Someone here orders a 20-piece 'to share' and shares four. The audit starts now."
     }
   },
   {
@@ -3526,8 +3526,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍚",
     "debateStarter": {
-      "fr": "Du riz, du saumon, et 16,90 € de mise en page.",
-      "en": "Rice, salmon, and $17 of plating."
+      "fr": "16,90 € pour du riz et trois lamelles d'avocat rangées en arc-en-ciel. T'as payé la photo, pas le plat.",
+      "en": "Rice in a rainbow for $17. You didn't buy lunch, you bought a backdrop."
     }
   },
   {
@@ -3546,8 +3546,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌮",
     "debateStarter": {
-      "fr": "Une sauce fromagère qui scelle le pacte social.",
-      "en": "Held together by cheese sauce and bad decisions."
+      "fr": "Trois viandes, une sauce fromagère, zéro témoin. Personne le commande fièrement, tout le monde le finit.",
+      "en": "Eaten alone in a parked car at 1am. Nobody's proud, nobody stops. That's the business model."
     }
   },
   {
@@ -3566,8 +3566,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍓",
     "debateStarter": {
-      "fr": "L'étiquette manuscrite vaut tous les labels bio.",
-      "en": "That handwritten label beats any organic sticker."
+      "fr": "Tout le monde jure que celle de SA mamie est la meilleure. Statistiquement, la moitié d'entre vous mentent.",
+      "en": "Everyone claims their grandma's jam clears store-bought. Statistically, half your grandmas were mid."
     }
   },
   {
@@ -3586,8 +3586,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍵",
     "debateStarter": {
-      "fr": "C'est vert, c'est photogénique, c'est 7 €.",
-      "en": "It's green, it's photogenic, it's $8."
+      "fr": "7 € pour un goût de gazon tondu, validé parce que c'est joli en story. Personne le boit les yeux fermés.",
+      "en": "It tastes like a mowed lawn and you know it. You're drinking $8 of aesthetic with oat milk on top."
     }
   },
   {
@@ -3606,8 +3606,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍞",
     "debateStarter": {
-      "fr": "Il a un prénom et il mange avant toi.",
-      "en": "It has a name and it eats before you do."
+      "fr": "Il a confié son levain à un pote pendant les vacances comme on confie un enfant. Il a rappelé deux fois. C'est de la farine.",
+      "en": "He left his sourdough with a friend over the holidays like it was a child. He called twice to check on it. It's flour."
     }
   },
   {
@@ -3626,8 +3626,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍔",
     "debateStarter": {
-      "fr": "Personne n'est au-dessus du menu à 5 €.",
-      "en": "Nobody is above the value menu."
+      "fr": "Y'a celui qui poste sa salade et celui qui commande un double cheese en cachette à 23h. Souvent le même. On le sait.",
+      "en": "There's the one who posts the salad and the one who orders a double cheese alone at 11pm. Usually the same person. We know."
     }
   },
   {
@@ -3646,8 +3646,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🦪",
     "debateStarter": {
-      "fr": "Avaler un truc vivant et appeler ça la fête.",
-      "en": "Swallowing something alive and calling it a party."
+      "fr": "Avaler un truc vivant à 36 € la douzaine et appeler ça la fête. Le standing rend fou.",
+      "en": "Swallowing something alive at $48 a dozen and calling it festive. Status does things to people."
     }
   },
   {
@@ -3666,8 +3666,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫘",
     "debateStarter": {
-      "fr": "On te raconte la ferme, l'altitude, la vie entière du grain.",
-      "en": "You get the farm, the altitude, the bean's whole memoir."
+      "fr": "Le barista te raconte l'altitude du grain pendant que ton café refroidit. Et t'oses pas dire que t'aimes pas.",
+      "en": "You nodded through the tasting notes and it still just tastes like coffee. Admit it out loud."
     }
   },
   {
@@ -3686,8 +3686,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚰",
     "debateStarter": {
-      "fr": "Gratuite, locale, et pourtant snobée en terrasse.",
-      "en": "Free, local, and still snubbed at dinner."
+      "fr": "Demander « une carafe » au resto, c'est pas de la radinerie, c'est de la résistance. Si, c'est de la radinerie.",
+      "en": "Ordering tap 'for the table' is either class warfare or being cheap. The table knows which one you are."
     }
   },
   {
@@ -3706,8 +3706,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧸",
     "debateStarter": {
-      "fr": "La coupe de glace avec le jouet, c'est un projet de vie.",
-      "en": "The sundae comes with a toy. That's a life plan."
+      "fr": "Commander le menu enfant à 30 ans, c'est pas régressif, c'est le seul menu encore au prix juste. Défends-toi.",
+      "en": "Ordering the kids' meal at 30 isn't a bit, it's the only honest pricing left in the building. Plus a toy."
     }
   },
   {
@@ -3726,8 +3726,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚲",
     "debateStarter": {
-      "fr": "Deux enfants, un chien, les courses : le SUV à pédales.",
-      "en": "Two kids, a dog, groceries: the pedal-powered SUV."
+      "fr": "Le SUV à pédales : même prix, même arrogance au feu rouge, mais avec la bonne conscience en option de série.",
+      "en": "Same price as a used car, same energy at the red light, but pedaling, so they get to feel superior too."
     }
   },
   {
@@ -3746,8 +3746,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚙",
     "debateStarter": {
-      "fr": "Un tank pour aller chercher le pain.",
-      "en": "A tank for a bakery run."
+      "fr": "Un tank pour aller chercher le pain. Le créneau dure 9 minutes et tout le quartier regarde.",
+      "en": "A tank for a bakery run. Takes up two spots, has seen zero terrain. The owner says it's 'for safety'."
     }
   },
   {
@@ -3766,8 +3766,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏡",
     "debateStarter": {
-      "fr": "Une maison qui sert surtout à dire « on monte ce week-end ».",
-      "en": "A house that exists so you can say 'we're going up this weekend'."
+      "fr": "Vide 340 jours par an, juste pour pouvoir dire « on monte ce week-end ». Une maison entière comme phrase.",
+      "en": "Empty 340 days a year so they can say 'we're going up this weekend'. A whole house as a flex sentence."
     }
   },
   {
@@ -3786,8 +3786,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚐",
     "debateStarter": {
-      "fr": "La liberté totale, garée sur le parking d'un supermarché.",
-      "en": "Total freedom, parked behind a grocery store."
+      "fr": "La liberté totale : 40 000 € pour dormir sur un parking de Super U et faire caca dans une boîte.",
+      "en": "Total freedom: $60k to sleep behind a grocery store and call your toilet 'composting'."
     }
   },
   {
@@ -3806,8 +3806,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⛺",
     "debateStarter": {
-      "fr": "Dormir par terre gratuitement, par conviction.",
-      "en": "Sleeping on the ground for free, on principle."
+      "fr": "Dormir par terre gratuitement et appeler ça des valeurs. T'as juste pas voulu payer le camping.",
+      "en": "Sleeping on the ground for free and calling it values. You just didn't want to pay for the campsite."
     }
   },
   {
@@ -3826,8 +3826,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏔️",
     "debateStarter": {
-      "fr": "Une semaine de fromage fondu à flanc de montagne.",
-      "en": "A week of melted cheese at altitude prices."
+      "fr": "1 500 € la semaine pour faire la queue en doudoune. Un embouteillage avec vue, réservé sur héritage.",
+      "en": "$2,000 to stand in a lift line wearing a costume. Skiing is traffic with a view, and you know it."
     }
   },
   {
@@ -3846,8 +3846,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍹",
     "debateStarter": {
-      "fr": "Une fois le bracelet au poignet, fini les décisions.",
-      "en": "Once the wristband goes on, decisions are over."
+      "fr": "Le bracelet au poignet, le cerveau à l'accueil. Des adultes font la queue à 6h55 pour des frites à volonté.",
+      "en": "Wristband on, brain checked at reception. Grown adults sprinting for the buffet at 6:55."
     }
   },
   {
@@ -3866,8 +3866,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛋️",
     "debateStarter": {
-      "fr": "Choix de vie ou choix de loyer ?",
-      "en": "Lifestyle choice or rent choice?"
+      "fr": "« J'adore la vie en communauté », dit-il en regardant les loyers. Personne le croit, tout le monde compatit.",
+      "en": "'I just love the social side,' says everyone who has seen the rent. Nobody believes you, roomie."
     }
   },
   {
@@ -3886,8 +3886,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥕",
     "debateStarter": {
-      "fr": "On y va pour les légumes, on y reste pour être vu.",
-      "en": "Come for the vegetables, stay to be seen."
+      "fr": "Panier en osier, tomates à 6 €, supériorité morale offerte. La moitié y va juste pour être vue.",
+      "en": "Wicker basket, $7 tomatoes, moral superiority included. Half of you go just to be perceived."
     }
   },
   {
@@ -3906,8 +3906,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📦",
     "debateStarter": {
-      "fr": "Faire ses courses sans croiser un humain : progrès ou fuite ?",
-      "en": "Groceries with zero human contact: progress or escape?"
+      "fr": "Faire ses courses sans croiser un humain, c'est pas du gain de temps, c'est un projet de société. Et il avance.",
+      "en": "Grocery pickup isn't saving time, it's rehearsing a life where you never see anyone. And it's working."
     }
   },
   {
@@ -3926,8 +3926,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧥",
     "debateStarter": {
-      "fr": "Le pull a déjà vécu trois vies et coûte plus cher que neuf.",
-      "en": "The sweater has lived three lives and costs more than new."
+      "fr": "Le pull a coûté 3 € neuf en 2009, 45 € en fripe « vintage ». Le recyclage est devenu un commerce de bourgeois.",
+      "en": "The sweater cost $3 new in 2009 and $45 'curated' today. Thrifting got gentrified and you funded it."
     }
   },
   {
@@ -3946,8 +3946,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧼",
     "debateStarter": {
-      "fr": "Payer pour ne pas repasser, le vrai luxe silencieux.",
-      "en": "Paying to never iron — the quietest luxury."
+      "fr": "8 € la chemise pour pas tenir un fer. C'est pas du luxe silencieux, c'est de la flemme externalisée.",
+      "en": "Paying a stranger to iron your shirts is outsourcing adulthood at $6 a shirt. Defend it."
     }
   },
   {
@@ -3966,8 +3966,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧘",
     "debateStarter": {
-      "fr": "La paix intérieure, mais uniquement avant le lever du soleil.",
-      "en": "Inner peace, but only before sunrise."
+      "fr": "La paix intérieure à 6h, racontée à tout l'open space dès 9h30. Le calme le plus bruyant du pays.",
+      "en": "Inner peace at 6am, announced to the entire office by 9:30. The loudest calm in the building."
     }
   },
   {
@@ -3986,8 +3986,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍄",
     "debateStarter": {
-      "fr": "Un panier, un secret de famille, zéro coordonnées GPS.",
-      "en": "A basket, a family secret, and zero GPS coordinates."
+      "fr": "Le coin à cèpes se transmet sous serment. Y'a des gens ici qui mentiraient à leur propre mère pour des champignons.",
+      "en": "The spot is a family secret under oath. Someone in this room would lie to their mother over mushrooms."
     }
   },
   {
@@ -4006,8 +4006,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍅",
     "debateStarter": {
-      "fr": "Six mois d'efforts pour trois tomates hors de prix.",
-      "en": "Six months of work for three wildly expensive tomatoes."
+      "fr": "Six mois d'arrosage pour trois tomates à 40 € pièce. Mais elles ont « un goût incomparable », paraît-il.",
+      "en": "Six months of watering for three $40 tomatoes. But sure, tell us again how they 'taste different'."
     }
   },
   {
@@ -4026,8 +4026,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "😴",
     "debateStarter": {
-      "fr": "Dormir en plein jour : résistance ou privilège ?",
-      "en": "Sleeping in broad daylight: resistance or privilege?"
+      "fr": "La sieste de 15h un dimanche : un art de vivre ou un aveu. Y'a pas de milieu, choisissez un camp.",
+      "en": "A 3pm Sunday nap is either self-care or surrender. There is no middle ground. Pick your side."
     }
   },
   {
@@ -4046,8 +4046,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧺",
     "debateStarter": {
-      "fr": "Le sèche-linge du peuple, breveté par le soleil.",
-      "en": "Solar-powered since forever."
+      "fr": "Le sèche-linge coûte, le fil est gratuit. Mais étendre ses draps à la vue des voisins, c'est de l'étalage de vertu.",
+      "en": "The dryer costs money, the line is free. But sheets drying in full view of the neighbors is a virtue billboard."
     }
   },
   {
@@ -4066,8 +4066,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪱",
     "debateStarter": {
-      "fr": "Des vers de terre en ville, adoptés par amour de la planète.",
-      "en": "City worms, adopted out of love for the planet."
+      "fr": "Des vers de terre adoptés par conviction. Tout l'immeuble sent l'engagement, surtout au mois d'août.",
+      "en": "Adopted worms on a third-floor balcony. The whole building smells your commitment in August."
     }
   },
   {
@@ -4086,8 +4086,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👔",
     "debateStarter": {
-      "fr": "Des plis parfaits pour des journées qui ne le sont pas.",
-      "en": "Perfect creases for a deeply imperfect day."
+      "fr": "Une chemise sans un pli un mardi, c'est soit un entretien, soit un procès. Personne repasse pour rien.",
+      "en": "A crease-free shirt on a Tuesday means a job interview or a court date. Nobody irons for fun."
     }
   },
   {
@@ -4106,8 +4106,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥿",
     "debateStarter": {
-      "fr": "Le confort absolu ou la fin de l'ambition ?",
-      "en": "Peak comfort or the end of ambition?"
+      "fr": "Acheter des chaussons, c'est renoncer officiellement à être surpris par la vie. Certains ici ont signé à 24 ans.",
+      "en": "Buying house slippers is formally announcing your wild years are over. Some of you signed at 24."
     }
   },
   {
@@ -4126,8 +4126,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💧",
     "debateStarter": {
-      "fr": "Elle a des stickers et une mission.",
-      "en": "It has stickers and a mission statement."
+      "fr": "Elle a un prénom, des stickers, et son propriétaire te recadre si tu bois pas tes 2 litres. Une secte.",
+      "en": "It costs $45, has a name, and its owner will check on YOUR water intake. Hydration is a pyramid scheme now."
     }
   },
   {
@@ -4146,8 +4146,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👜",
     "debateStarter": {
-      "fr": "Quarante sacs en tissu pour éviter un sac plastique.",
-      "en": "Forty cloth bags to avoid one plastic one."
+      "fr": "Quarante tote bags entassés pour sauver la planète d'un sac plastique. L'écologie a un tiroir de la honte.",
+      "en": "Forty totes hoarded to fight one plastic bag. The math has never mathed and you keep collecting them."
     }
   },
   {
@@ -4166,8 +4166,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👞",
     "debateStarter": {
-      "fr": "Des chaussures qui ont déjà un avis sur ta carrière.",
-      "en": "Shoes with opinions about your career."
+      "fr": "Des mocassins sans chaussettes, c'est pas une chaussure, c'est une candidature. Le poste : gendre.",
+      "en": "Loafers with no socks isn't a shoe, it's an application. The position: son-in-law."
     }
   },
   {
@@ -4186,8 +4186,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🦺",
     "debateStarter": {
-      "fr": "Les bras libres pour serrer des mains.",
-      "en": "Arms free for handshakes and deal-closing."
+      "fr": "Le vêtement officiel des gens qui disent « je reviens vers toi ». Les bras libres, l'âme en costard.",
+      "en": "The official uniform of men who say 'let's circle back'. The arms are free. The soul is in private equity."
     }
   },
   {
@@ -4206,8 +4206,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧢",
     "debateStarter": {
-      "fr": "Le chapeau qui passe du festival au jardinage sans transition.",
-      "en": "From festivals to gardening with zero transition."
+      "fr": "Le même bob coûte 8 € au marché et 90 € en boutique. La différence entre les deux, c'est toi.",
+      "en": "The same bucket hat is $6 at a beach stall and $90 at a boutique. The difference between them is you."
     }
   },
   {
@@ -4226,8 +4226,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌸",
     "debateStarter": {
-      "fr": "On te sent arriver avant de te voir : pouvoir ou nuisance ?",
-      "en": "People smell you before they see you: power or hazard?"
+      "fr": "Un « parfum signature », c'est juste trop de parfum porté avec confiance. L'ascenseur se souvient de toi.",
+      "en": "A 'signature scent' is just too much cologne worn with confidence. The elevator files a report."
     }
   },
   {
@@ -4246,8 +4246,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👕",
     "debateStarter": {
-      "fr": "Une ceinture, un polo, et soudain des responsabilités.",
-      "en": "A belt, a polo, and suddenly you own responsibilities."
+      "fr": "Polo rentré, ceinture tressée : il a 24 ans et il appelle déjà son banquier par son prénom.",
+      "en": "Tucked-in polo, braided belt: he's 24 and already on a first-name basis with his bank guy."
     }
   },
   {
@@ -4266,8 +4266,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🩴",
     "debateStarter": {
-      "fr": "Le confort a gagné, la mode a porté plainte.",
-      "en": "Comfort won; fashion filed a complaint."
+      "fr": "Les claquettes-chaussettes, c'est pas un abandon. C'est un homme en paix. Atteignez ce niveau avant de juger.",
+      "en": "Socks and slides isn't giving up. It's a man at peace. Reach that level before you judge him."
     }
   },
   {
@@ -4286,8 +4286,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐕",
     "debateStarter": {
-      "fr": "Tellement gentil qu'il en devient suspect.",
-      "en": "So friendly it's honestly suspicious."
+      "fr": "Adopter un golden, c'est acheter la personnalité « famille saine » en kit. Le chien fait tout le travail.",
+      "en": "A golden retriever is the 'wholesome family' starter pack in dog form. The dog does all the emotional labor."
     }
   },
   {
@@ -4306,8 +4306,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐈",
     "debateStarter": {
-      "fr": "Il ne sort jamais et juge ceux qui sortent.",
-      "en": "Never goes out, judges everyone who does."
+      "fr": "Il paie pas de loyer, mange à heure fixe, répond à rien. Et c'est toi qui l'appelles « mon bébé ».",
+      "en": "Pays no rent, gets meals on schedule, answers to nothing. And you're the one calling it 'my baby'."
     }
   },
   {
@@ -4326,8 +4326,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐔",
     "debateStarter": {
-      "fr": "Des œufs gratuits à 400 € le poulailler.",
-      "en": "Free eggs, $500 coop."
+      "fr": "400 € de poulailler pour 6 € d'œufs par an. C'est pas de l'autonomie, c'est un abonnement à la campagne.",
+      "en": "A $500 coop for $20 of eggs a year. That's not homesteading, that's a countryside subscription."
     }
   },
   {
@@ -4346,8 +4346,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔥",
     "debateStarter": {
-      "fr": "Appuyer sur un bouton, est-ce encore griller ?",
-      "en": "If you press a button, is it even grilling?"
+      "fr": "Le barbecue au gaz, c'est une cuisinière dehors. Dis ça à un homme au charbon et regarde-le vaciller.",
+      "en": "A gas grill is a stove outdoors. Say that to a charcoal man and watch his whole identity wobble."
     }
   },
   {
@@ -4366,8 +4366,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏊",
     "debateStarter": {
-      "fr": "Le bonheur, c'est 60 cm d'eau tiède sur la pelouse.",
-      "en": "Happiness is two feet of warm water on the lawn."
+      "fr": "60 cm d'eau tiède à 300 €, et objectivement plus de rires que la villa du cousin riche. Ça le rend fou.",
+      "en": "Two feet of warm water for $300, objectively more joy than your rich cousin's infinity pool. It haunts him."
     }
   },
   {
@@ -4386,8 +4386,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛁",
     "debateStarter": {
-      "fr": "De l'eau qui bout doucement avec des gens dedans.",
-      "en": "Gently boiling water with people in it."
+      "fr": "Le jacuzzi, c'est une soupe de gens. Plus il y a d'invités, plus le bouillon est riche. Bon appétit.",
+      "en": "A hot tub is people soup. The more guests, the richer the broth. Enjoy your soak."
     }
   },
   {
@@ -4406,8 +4406,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪵",
     "debateStarter": {
-      "fr": "Regarder du bois brûler : la télé d'avant.",
-      "en": "Watching wood burn: the original TV."
+      "fr": "La cheminée, c'est du chauffage de luxe déguisé en simplicité. La bûche coûte plus cher que le gaz.",
+      "en": "A wood fire is luxury heating cosplaying as simplicity. The logs cost more than your gas bill."
     }
   },
   {
@@ -4426,8 +4426,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪑",
     "debateStarter": {
-      "fr": "Vendre ses souvenirs 50 centimes et négocier quand même.",
-      "en": "Selling your memories for a quarter and still haggling."
+      "fr": "Négocier 20 centimes sur un objet à 50, c'est pas de l'économie, c'est un sport de combat. Et mamie est invaincue.",
+      "en": "Haggling a quarter off a fifty-cent mug isn't thrift, it's a combat sport. And grandma is undefeated."
     }
   },
   {
@@ -4446,8 +4446,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🗝️",
     "debateStarter": {
-      "fr": "Des bouteilles gardées pour une occasion qui ne vient jamais.",
-      "en": "Bottles saved for an occasion that never comes."
+      "fr": "La cave à vin, c'est de l'épargne qu'on boit en cas de rupture. La « grande occasion » vient jamais. Le chagrin, si.",
+      "en": "A wine cellar is a savings account you drink during a breakup. The 'special occasion' never comes. Heartbreak does."
     }
   },
   {
@@ -4466,8 +4466,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⏰",
     "debateStarter": {
-      "fr": "Se lever avant le soleil pour le raconter à midi.",
-      "en": "Up before the sun, talking about it by noon."
+      "fr": "Personne se lève à 5h en silence. C'est 10 % de discipline, 90 % de contenu LinkedIn.",
+      "en": "Nobody joins the 5am club quietly. It's 10% discipline, 90% LinkedIn content."
     }
   },
   {
@@ -4486,12 +4486,12 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧵",
     "debateStarter": {
-      "fr": "Froissés exprès, chers exprès.",
-      "en": "Wrinkled on purpose, expensive on purpose."
+      "fr": "Les draps en lin : 180 € pour avoir l'air de pas avoir fait d'effort. Le négligé est devenu un standing.",
+      "en": "Linen sheets: $200 to look like you didn't try. Effortless is a tax bracket now."
     }
   },
   {
-    "id": "machine-eau-gazeuse",
+    "id": "la-clim",
     "optionA": {
       "fr": "De gauche",
       "en": "Left-coded"
@@ -4501,13 +4501,13 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
       "en": "Right-coded"
     },
     "prompt": {
-      "fr": "La machine à eau pétillante",
-      "en": "A home soda maker"
+      "fr": "La clim",
+      "en": "Air conditioning"
     },
-    "emoji": "🥤",
+    "emoji": "❄️",
     "debateStarter": {
-      "fr": "Gazéifier soi-même, c'est l'artisanat du dimanche.",
-      "en": "Carbonating your own water: weekend craftsmanship."
+      "fr": "Y'a deux camps : ceux qui dorment clim à 19° et ceux qui appellent ça « tomber malade exprès ». Aucune paix possible.",
+      "en": "Two kinds of people: AC at 65 all night, and those who call that 'getting sick on purpose'. No peace is possible."
     }
   },
   {
@@ -4526,8 +4526,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚗",
     "debateStarter": {
-      "fr": "Sept places, zéro mystère.",
-      "en": "Seven seats, zero mystery."
+      "fr": "Le monospace, c'est l'aveu final : la fête est finie, le coffre est plein, le siège bébé a gagné.",
+      "en": "A minivan is the final confession: the party's over, the trunk is full, the car seat won."
     }
   },
   {
@@ -4546,8 +4546,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💳",
     "debateStarter": {
-      "fr": "30 € par mois pour la bonne conscience.",
-      "en": "$40 a month for a clear conscience."
+      "fr": "Quelqu'un ici paie 30 € par mois pour une salle vue deux fois. C'est plus un abonnement, c'est un don. Trouvez-le.",
+      "en": "Someone in this room pays $40 a month for a gym they saw twice. That's not a membership, it's charity. Find them."
     }
   },
   {
@@ -4566,8 +4566,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛻",
     "debateStarter": {
-      "fr": "Une benne immense qui n'a jamais rien transporté.",
-      "en": "A massive truck bed that has never hauled a thing."
+      "fr": "Un pick-up surélevé qui a transporté, en tout, une étagère IKEA. 35 000 € pour le fantasme, crédit compris.",
+      "en": "A lifted truck that has hauled exactly one IKEA shelf. Sixty grand for a personality, financing available."
     }
   },
   {
@@ -4606,8 +4606,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎧",
     "debateStarter": {
-      "fr": "Perdre un seul écouteur coûte désormais un demi-salaire.",
-      "en": "Losing one earbud now costs half a paycheck."
+      "fr": "230 € pour l'objet le plus perdable jamais conçu. C'est pas un accessoire, c'est un loyer pour tes oreilles.",
+      "en": "$250 for the most losable object ever designed. That's not an accessory, that's rent for your ears."
     }
   },
   {
@@ -4626,8 +4626,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪙",
     "debateStarter": {
-      "fr": "De l'argent invisible défendu très bruyamment.",
-      "en": "Invisible money defended very loudly."
+      "fr": "Demande-lui « ça sert à quoi, concrètement » et chronomètre le silence. La crypto, c'est une foi avec des graphiques.",
+      "en": "Ask him what it's actually for and time the silence. Crypto is a faith with charts."
     }
   },
   {
@@ -4666,8 +4666,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⚡",
     "debateStarter": {
-      "fr": "Pédaler, mais avec un astérisque.",
-      "en": "Cycling, with an asterisk."
+      "fr": "Doubler un cycliste en lycra dans la montée sans transpirer, c'est pas tricher, c'est gagner. Qu'il porte plainte.",
+      "en": "Passing a lycra cyclist uphill without sweating isn't cheating, it's winning. Let him file a complaint."
     }
   },
   {
@@ -4686,8 +4686,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏠",
     "debateStarter": {
-      "fr": "Parler à sa lampe pour ne pas se lever.",
-      "en": "Talking to a lamp so you don't have to stand."
+      "fr": "Dire « lumière » à sa lampe devant les invités et attendre l'applaudissement. La domotique est un spectacle triste.",
+      "en": "He says 'lights on' in front of guests and waits for applause. The smart home is a sad magic show."
     }
   },
   {
@@ -4706,8 +4706,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🖨️",
     "debateStarter": {
-      "fr": "Six heures d'impression pour un porte-clés.",
-      "en": "Six hours of printing for a keychain."
+      "fr": "Il a promis des pièces détachées, il imprime des figurines. Six heures de bruit pour 4 grammes de plastique.",
+      "en": "He promised replacement parts. He prints little dragons. Six hours of noise for four grams of plastic."
     }
   },
   {
@@ -4726,8 +4726,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🖥️",
     "debateStarter": {
-      "fr": "Deux écrans, mais toujours un seul cerveau.",
-      "en": "Two screens, still one brain."
+      "fr": "Le double écran : un pour travailler, un pour faire semblant. Tout le monde sait lequel est lequel.",
+      "en": "Two monitors: one for work, one for pretending. Everyone knows which is which."
     }
   },
   {
@@ -4746,8 +4746,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔔",
     "debateStarter": {
-      "fr": "Voir le livreur sans lui ouvrir : confort ou bunker ?",
-      "en": "Watching the courier without answering: comfort or bunker?"
+      "fr": "Regarder le livreur sonner sans ouvrir, c'est pas de la sécurité, c'est un mirador avec paillasson.",
+      "en": "Watching the courier ring while you hide isn't security, it's a guard tower with a welcome mat."
     }
   },
   {
@@ -4766,8 +4766,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛸",
     "debateStarter": {
-      "fr": "Trois minutes de plage filmées, deux heures de réglages.",
-      "en": "Three minutes of beach footage, two hours of setup."
+      "fr": "Il a ruiné le silence de la crique pour 12 secondes de plage vue du ciel que personne regardera. Bravo à lui.",
+      "en": "He ruined the whole beach's silence for 12 seconds of aerial footage nobody will watch. A round of applause."
     }
   },
   {
@@ -4786,8 +4786,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌙",
     "debateStarter": {
-      "fr": "Une préférence d'affichage devenue trait de caractère.",
-      "en": "A display setting that became a personality."
+      "fr": "Le mode sombre, c'est pas un réglage, c'est une personnalité. Et il te juge d'être resté en clair.",
+      "en": "Dark mode isn't a setting, it's a belief system. And yes, he judges your white screen."
     }
   },
   {
@@ -4806,8 +4806,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📃",
     "debateStarter": {
-      "fr": "Mille livres dans la poche, zéro étagère à montrer.",
-      "en": "A thousand books in your pocket, no shelf to show off."
+      "fr": "La liseuse a gagné sur tous les plans, mais « l'odeur du papier » tient le front. Un parfum contre la logique.",
+      "en": "The e-reader wins on every metric, but 'the smell of paper' holds the line. A fragrance versus logic."
     }
   },
   {
@@ -4826,8 +4826,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⌨️",
     "debateStarter": {
-      "fr": "Le bruit, c'est le but.",
-      "en": "The noise is the point."
+      "fr": "Un clavier à 180 € pour que tout l'open space entende chaque lettre. Le bruit, c'est pas un défaut, c'est l'annonce.",
+      "en": "$180 so the entire office hears every keystroke. The noise isn't a flaw, it's the announcement."
     }
   },
   {
@@ -4846,8 +4846,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🕶️",
     "debateStarter": {
-      "fr": "Être « ailleurs » sans quitter son canapé.",
-      "en": "Being 'somewhere else' without leaving the couch."
+      "fr": "Tout le monde dit que c'est « pour la sécurité ». Personne, dans l'histoire, a acheté un VPN pour la sécurité.",
+      "en": "Everyone says it's 'for privacy'. Nobody in recorded history has bought a VPN for privacy."
     }
   },
   {
@@ -4866,8 +4866,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔌",
     "debateStarter": {
-      "fr": "Silencieuse sur la route, bruyante en soirée.",
-      "en": "Silent on the road, loud at dinner parties."
+      "fr": "Il a fait 800 km, tu vas entendre parler des 3 bornes de recharge. La voiture est silencieuse, le propriétaire jamais.",
+      "en": "The car is silent. The owner is not. You will hear about the charging stops before you even ask."
     }
   },
   {
@@ -4886,8 +4886,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌈",
     "debateStarter": {
-      "fr": "Plus il y a de couleurs, plus c'est sérieux.",
-      "en": "The more colors it has, the more serious it is."
+      "fr": "2 500 € de PC qui s'allume comme une boîte de nuit pour relancer les mêmes trois jeux qu'en 2017.",
+      "en": "A $3,000 rig glowing like a nightclub to boot the same three games from 2017."
     }
   },
   {
@@ -4906,8 +4906,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤖",
     "debateStarter": {
-      "fr": "Le gazon parfait pendant que tu fais la sieste.",
-      "en": "A perfect lawn while you nap."
+      "fr": "Il regarde son robot tondre depuis la fenêtre, bras croisés, fier. Il a externalisé sa dernière raison de sortir.",
+      "en": "He watches the robot mow from the window, arms crossed, proud. He outsourced his last reason to go outside."
     }
   },
   {
@@ -4926,8 +4926,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍲",
     "debateStarter": {
-      "fr": "Il fait tout, sauf justifier son prix.",
-      "en": "It does everything except justify the price."
+      "fr": "1 200 € pour suivre une recette qu'une appli te dictait gratuitement. Mais ose dire à sa propriétaire que c'est un caprice.",
+      "en": "$1,500 to follow a recipe an app read out for free. But try telling its owner to her face that it was a splurge."
     }
   },
   {
@@ -4946,8 +4946,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍟",
     "debateStarter": {
-      "fr": "Un four avec un ventilateur, et tout le monde a craqué.",
-      "en": "It's an oven with a fan and we all fell for it."
+      "fr": "Il l'a casée dans la conversation huit fois ce mois-ci. C'est un four avec un ventilateur. Quelqu'un ici fait pareil.",
+      "en": "He's worked it into conversation eight times this month. It's an oven with a fan. Someone here does the exact same thing."
     }
   },
   {
@@ -4966,12 +4966,12 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⚙️",
     "debateStarter": {
-      "fr": "Changer ses vitesses soi-même, par principe.",
-      "en": "Shifting your own gears, on principle."
+      "fr": "La boîte manuelle, c'est pas de la conduite, c'est du patrimoine. Il cale au feu, mais il a des valeurs.",
+      "en": "Driving stick isn't transportation, it's heritage. He stalls at the light, but he has values."
     }
   },
   {
-    "id": "fax",
+    "id": "ecran-fissure",
     "optionA": {
       "fr": "De gauche",
       "en": "Left-coded"
@@ -4981,13 +4981,13 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
       "en": "Right-coded"
     },
     "prompt": {
-      "fr": "Avoir encore un fax",
-      "en": "Still owning a fax machine"
+      "fr": "L'écran fissuré depuis 8 mois",
+      "en": "A screen cracked for 8 months"
     },
-    "emoji": "📠",
+    "emoji": "📵",
     "debateStarter": {
-      "fr": "La machine a survécu à trois déménagements et deux époques.",
-      "en": "It survived three moves and two eras."
+      "fr": "L'écran fissuré, c'est pas de la négligence, c'est un train de vie. Il lit à travers la toile d'araignée et il vit bien.",
+      "en": "A cracked screen isn't neglect, it's a lifestyle. He reads his texts through a spiderweb and he's thriving."
     }
   },
   {
@@ -5006,8 +5006,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📒",
     "debateStarter": {
-      "fr": "Écrire ses rendez-vous à la main, comme un acte de foi.",
-      "en": "Writing appointments by hand, as an act of faith."
+      "fr": "L'agenda papier plante jamais, notifie jamais, a jamais vendu tes données. Les darons avaient raison, dites-le.",
+      "en": "The paper planner never crashes, never pings, never sold your data. The boomers were right. Say it out loud."
     }
   },
   {
@@ -5026,8 +5026,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📷",
     "debateStarter": {
-      "fr": "Payer pour découvrir ses photos trois semaines plus tard.",
-      "en": "Paying to see your photos three weeks later."
+      "fr": "18 € la pellicule, 3 semaines d'attente, 31 photos floues. Mais « y'a un grain ». Le grain coûte cher.",
+      "en": "$20 a roll, three weeks' wait, 31 blurry shots. But 'the grain', though. The grain is doing a lot of work."
     }
   },
   {
@@ -5046,12 +5046,12 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📽️",
     "debateStarter": {
-      "fr": "Sept enceintes pour regarder les trois mêmes séries.",
-      "en": "Seven speakers for the same three shows."
+      "fr": "Sept enceintes, un caisson de basse, des voisins en procédure. Tout ça pour s'endormir devant le même film.",
+      "en": "Seven speakers, one subwoofer, neighbors in litigation. All of it to fall asleep during the same movie."
     }
   },
   {
-    "id": "chargeur-sans-fil",
+    "id": "messages-ecrits-par-ia",
     "optionA": {
       "fr": "De gauche",
       "en": "Left-coded"
@@ -5061,13 +5061,13 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
       "en": "Right-coded"
     },
     "prompt": {
-      "fr": "Le chargeur sans fil",
-      "en": "A wireless charger"
+      "fr": "Faire écrire ses messages par l'IA",
+      "en": "AI-written texts"
     },
-    "emoji": "🔋",
+    "emoji": "📲",
     "debateStarter": {
-      "fr": "Poser son téléphone est devenu une technologie.",
-      "en": "Putting your phone down is now a technology."
+      "fr": "Quelqu'un ici t'a déjà envoyé des excuses écrites par une IA. Et t'as trouvé ça « très bien formulé ». Voilà.",
+      "en": "Someone in this room has sent you an AI-written apology. You said it was 'really well put'. Sit with that."
     }
   },
   {
@@ -5086,8 +5086,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔊",
     "debateStarter": {
-      "fr": "Partager sa musique avec des gens qui n'ont rien demandé.",
-      "en": "Sharing your playlist with people who never asked."
+      "fr": "L'enceinte au parc : un seul choisit, soixante subissent. La dictature s'est trouvée un format portable.",
+      "en": "One speaker, one DJ, sixty hostages. The park playlist is a dictatorship with a carry handle."
     }
   },
   {
@@ -5106,8 +5106,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧞",
     "debateStarter": {
-      "fr": "Une coloc qui écoute tout et contrôle la lumière.",
-      "en": "A roommate who hears everything and controls the lights."
+      "fr": "Elle écoute tout, note tout, et vous lui demandez la météo. Vous avez installé un témoin à charge dans la cuisine.",
+      "en": "It hears everything, logs everything — and you ask it for the weather. A prosecution witness in the kitchen."
     }
   },
   {
@@ -5126,8 +5126,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📱",
     "debateStarter": {
-      "fr": "Le silence à table a désormais un écran.",
-      "en": "Silence at the table now has a screen."
+      "fr": "La tablette au resto, c'est pas de la démission, c'est un cessez-le-feu. Rejugez quand vous aurez des enfants.",
+      "en": "The restaurant tablet isn't bad parenting, it's a ceasefire. Judge it again when you have kids."
     }
   },
   {
@@ -5146,8 +5146,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐒",
     "debateStarter": {
-      "fr": "Une image que tout le monde peut copier mais qu'un seul a payée.",
-      "en": "A picture anyone can copy but only one person paid for."
+      "fr": "Il en parle plus, et c'est le silence le plus cher de sa vie. Demandez-lui combien. Allez-y, demandez.",
+      "en": "He doesn't bring it up anymore, and that silence cost him five figures. Ask him how much. Go on, ask."
     }
   },
   {
@@ -5166,8 +5166,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌦️",
     "debateStarter": {
-      "fr": "Contester la météo nationale depuis son jardin.",
-      "en": "Disputing the official forecast from your backyard."
+      "fr": "Contester Météo-France avec 80 € de capteurs dans le jardin. Et le pire : parfois, il a raison.",
+      "en": "Disputing the official forecast with $80 of backyard sensors. And the worst part: sometimes he's right."
     }
   },
   {
@@ -5186,8 +5186,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧹",
     "debateStarter": {
-      "fr": "Il a un prénom et il est coincé sous le canapé.",
-      "en": "It has a name and it's stuck under the couch."
+      "fr": "Il passe l'aspi à la main avant le passage du robot, pour pas qu'il galère. Qui bosse pour qui, dans cette maison ?",
+      "en": "He vacuums by hand before the robot runs, so it won't struggle. Genuinely ask who works for whom in that house."
     }
   },
   {
@@ -5206,8 +5206,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎥",
     "debateStarter": {
-      "fr": "Filmer la route en permanence, juste au cas où.",
-      "en": "Recording the road 24/7, just in case."
+      "fr": "La dashcam, c'est avoir raison en 4K. Il attend l'accrochage comme d'autres attendent les soldes.",
+      "en": "A dashcam is being right in 4K. He's waiting for the fender-bender like it's a season finale."
     }
   },
   {
@@ -5226,8 +5226,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎪",
     "debateStarter": {
-      "fr": "Trois jours de boue au prix d'un hôtel quatre étoiles.",
-      "en": "Three days of mud at four-star prices."
+      "fr": "280 € pour dormir dans la boue et faire la queue aux toilettes. Et vous reprenez le billet chaque année. Diagnostic ?",
+      "en": "$400 to sleep in mud and queue for toilets — and you rebuy the ticket every single year. Diagnosis, please."
     }
   },
   {
@@ -5246,8 +5246,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎭",
     "debateStarter": {
-      "fr": "Trois heures de drame dans une langue qu'on ne parle pas.",
-      "en": "Three hours of drama in a language nobody speaks."
+      "fr": "Personne « adore » l'opéra. On adore dire qu'on y est allé. Trois heures de drame pour une story de 8 secondes.",
+      "en": "Nobody 'loves' the opera. You love having gone. Three hours of drama for an eight-second story."
     }
   },
   {
@@ -5266,8 +5266,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎤",
     "debateStarter": {
-      "fr": "L'égalité parfaite : tout le monde chante faux.",
-      "en": "True equality: everyone's off-key."
+      "fr": "Y'a deux genres de gens : ceux qui « détestent » le karaoké et ceux qui arrachent le micro à 23h40. Souvent les mêmes.",
+      "en": "Two kinds of people: those who 'hate' karaoke and those who seize the mic at 11:40. Frequently the same person."
     }
   },
   {
@@ -5286,8 +5286,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔪",
     "debateStarter": {
-      "fr": "Se détendre en écoutant des affaires non résolues.",
-      "en": "Relaxing to unsolved cases."
+      "fr": "S'endormir paisiblement au son d'un triple homicide. Et après, c'est le déca qui serait bizarre.",
+      "en": "Falling peacefully asleep to a triple homicide, then calling other people's hobbies weird."
     }
   },
   {
@@ -5306,8 +5306,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💼",
     "debateStarter": {
-      "fr": "Deux heures pour apprendre à se lever tôt.",
-      "en": "Two hours on how to wake up earlier."
+      "fr": "Trois heures d'un millionnaire qui explique la discipline à des gens en retard sur leur loyer. Et ça cartonne.",
+      "en": "Three hours of a millionaire explaining discipline to people behind on rent. And it sells."
     }
   },
   {
@@ -5326,8 +5326,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "♈",
     "debateStarter": {
-      "fr": "Tout s'explique, surtout les défauts des autres.",
-      "en": "Explains everything, especially other people's flaws."
+      "fr": "« Je juge pas, mais je peux pas dater un Scorpion. » L'astrologie, c'est du tri sélectif avec des paillettes.",
+      "en": "'I don't judge, I just can't date a Scorpio.' Astrology is a background check with glitter on it."
     }
   },
   {
@@ -5346,8 +5346,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔮",
     "debateStarter": {
-      "fr": "Les cartes savent, et elles balancent.",
-      "en": "The cards know, and they will tell."
+      "fr": "40 € pour qu'une inconnue confirme ce que t'avais déjà décidé. Le tarot, c'est un audit de complaisance.",
+      "en": "$60 for a stranger to confirm what you already decided. Tarot is a friendly audit."
     }
   },
   {
@@ -5366,8 +5366,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔐",
     "debateStarter": {
-      "fr": "Payer pour être enfermé avec ses collègues.",
-      "en": "Paying to be locked in with your coworkers."
+      "fr": "30 € pour découvrir en 60 minutes lequel de vos potes panique et lequel devient dictateur. Cher, mais précis.",
+      "en": "$35 to learn in 60 minutes which friend panics and which one becomes a dictator. Expensive, but accurate."
     }
   },
   {
@@ -5386,8 +5386,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🖼️",
     "debateStarter": {
-      "fr": "Regarder des tableaux en hochant la tête lentement.",
-      "en": "Nodding slowly at paintings."
+      "fr": "Le musée en date, c'est marcher lentement à côté de quelqu'un en simulant un avis sur 1872.",
+      "en": "A museum date is walking slowly next to someone while pretending to have opinions about 1872."
     }
   },
   {
@@ -5406,8 +5406,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤹",
     "debateStarter": {
-      "fr": "Dire « oui, et… » jusqu'à ce que quelqu'un rie.",
-      "en": "Saying 'yes, and…' until somebody laughs."
+      "fr": "Tout le monde a un pote qui fait de l'impro. Personne y est retourné deux fois. Les chiffres parlent.",
+      "en": "Everyone has a friend in improv. Nobody has gone to see them twice. The data speaks."
     }
   },
   {
@@ -5426,8 +5426,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "✏️",
     "debateStarter": {
-      "fr": "Le sport de combat des salles d'attente.",
-      "en": "The contact sport of waiting rooms."
+      "fr": "Finir les mots croisés au stylo, c'est de l'arrogance pure. La seule qu'on respecte encore.",
+      "en": "Doing the crossword in pen is pure arrogance — the last kind we still respect."
     }
   },
   {
@@ -5446,8 +5446,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎲",
     "debateStarter": {
-      "fr": "L'amitié, testée règle par règle.",
-      "en": "Friendship, stress-tested one rulebook at a time."
+      "fr": "« C'est qu'un jeu » : phrase prononcée uniquement par celui qui gagne. Le Monopoly a vu plus de ruptures qu'un notaire.",
+      "en": "'It's just a game' — said only by whoever is winning. Monopoly has witnessed more breakups than a divorce lawyer."
     }
   },
   {
@@ -5466,8 +5466,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📚",
     "debateStarter": {
-      "fr": "Un meurtre, du sable, et de la crème solaire sur les pages.",
-      "en": "A murder, some sand, sunscreen on the pages."
+      "fr": "Lire trois meurtres en maillot de bain, crème solaire sur les doigts, et appeler ça « déconnecter ».",
+      "en": "Reading three murders in a swimsuit with sunscreen on your fingers and calling it 'switching off'."
     }
   },
   {
@@ -5486,8 +5486,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📖",
     "debateStarter": {
-      "fr": "Un livre, huit avis, du fromage.",
-      "en": "One book, eight opinions, a cheese plate."
+      "fr": "Huit personnes, un livre, et la moitié a lu que le résumé dans la voiture. Le fromage couvre les trous.",
+      "en": "Eight people, one book, half of them read the summary in the car. The cheese plate covers the gaps."
     }
   },
   {
@@ -5506,8 +5506,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎷",
     "debateStarter": {
-      "fr": "Plus tu fermes les yeux en écoutant, plus tu t'y connais.",
-      "en": "The harder you close your eyes, the more you know."
+      "fr": "Personne met du jazz pour l'écouter. On le met pour que les invités pensent qu'on lit le journal en entier.",
+      "en": "Nobody puts on jazz to listen. You put it on so guests assume you read the entire newspaper, front to back."
     }
   },
   {
@@ -5526,8 +5526,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎛️",
     "debateStarter": {
-      "fr": "Le même boum-boum pendant six heures, et c'est un art.",
-      "en": "The same kick drum for six hours, and it's art."
+      "fr": "Six heures du même BPM dans un hangar, l'eau à 15 €. Et lundi, ils te parlent de « lâcher-prise ».",
+      "en": "Six hours of the same BPM in a warehouse, $8 water. On Monday they lecture you about 'letting go'."
     }
   },
   {
@@ -5546,8 +5546,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤠",
     "debateStarter": {
-      "fr": "Des chansons sur des camions qu'on n'a pas.",
-      "en": "Songs about trucks you don't own."
+      "fr": "La country en France : chanter des ranchs et des pick-up depuis un rond-point du Loiret.",
+      "en": "Songs about dirt roads and trucks, streamed from a leased sedan in a cul-de-sac."
     }
   },
   {
@@ -5566,8 +5566,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪗",
     "debateStarter": {
-      "fr": "L'instrument qui transforme toute rue en guinguette.",
-      "en": "The instrument that turns any street into a folk festival."
+      "fr": "L'accordéon rend tout sincère : même ta rupture sonnerait comme un bal du 14 juillet.",
+      "en": "The accordion makes everything sincere. Your breakup would sound like a village wedding."
     }
   },
   {
@@ -5586,8 +5586,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤘",
     "debateStarter": {
-      "fr": "Les gens les plus gentils écoutent la musique la plus fâchée.",
-      "en": "The nicest people listening to the angriest music."
+      "fr": "Il hurle des trucs sur la mort le samedi soir, il arrose ses tomates le dimanche. Le metal est un peuple paisible.",
+      "en": "Screams about death on Saturday night, waters his tomatoes on Sunday. Metalheads are the gentlest census group."
     }
   },
   {
@@ -5606,8 +5606,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎶",
     "debateStarter": {
-      "fr": "Chanter ensemble le jeudi soir, le bonheur en rangs.",
-      "en": "Singing in rows on a Thursday night."
+      "fr": "La chorale, c'est du karaoké qui a fait des études : même plaisir, plus de hiérarchie. Guerre froide aux sopranos.",
+      "en": "Choir is karaoke with a degree: same joy, more hierarchy. And a cold war in the soprano section."
     }
   },
   {
@@ -5626,8 +5626,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎙️",
     "debateStarter": {
-      "fr": "Une personne, un micro, et les problèmes de tout le monde.",
-      "en": "One person, one mic, everybody's problems."
+      "fr": "25 € pour écouter les problèmes d'un inconnu au micro pendant que les tiens attendent dans ta poche.",
+      "en": "$30 to hear a stranger's problems on a mic while yours sit in your pocket on silent."
     }
   },
   {
@@ -5646,8 +5646,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎄",
     "debateStarter": {
-      "fr": "Une citadine, un chalet, une leçon de vie : vendu.",
-      "en": "A big-city girl, a cabin, a life lesson: sold."
+      "fr": "On connaît la fin à la 4e minute et on reste. Le téléfilm de Noël, c'est le seul engagement que certains ici tiennent.",
+      "en": "You clock the ending by minute four and stay anyway. It's the only commitment some of you can hold."
     }
   },
   {
@@ -5666,8 +5666,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🦁",
     "debateStarter": {
-      "fr": "Pleurer devant un phoque à 21h, c'est de la culture.",
-      "en": "Crying over a seal at 9pm counts as culture."
+      "fr": "Pleurer devant un bébé phoque à 21h, puis manger du thon à 21h30. L'empathie a des horaires.",
+      "en": "Sobbing over a seal pup at 9pm, eating tuna by 9:30. Empathy keeps office hours."
     }
   },
   {
@@ -5686,8 +5686,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌵",
     "debateStarter": {
-      "fr": "Deux heures de regards avant la première phrase.",
-      "en": "Two hours of staring before the first line."
+      "fr": "Deux heures de regards plissés et trois phrases. Du cinéma pour ceux qui trouvent les dialogues bavards.",
+      "en": "Two hours of squinting and three lines of dialogue. Westerns are movies for people who find talking rude."
     }
   },
   {
@@ -5706,8 +5706,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚀",
     "debateStarter": {
-      "fr": "Imaginer le futur pour mieux râler sur le présent.",
-      "en": "Imagining the future to complain about the present."
+      "fr": "Il dit « c'est de l'anticipation » avec son ton de prof. Frère, y'a des lasers dedans.",
+      "en": "He calls it 'speculative fiction' in his professor voice. Brother, there are lasers in it."
     }
   },
   {
@@ -5726,8 +5726,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔨",
     "debateStarter": {
-      "fr": "Abattre un mur résout tout, apparemment.",
-      "en": "Apparently knocking down a wall fixes everything."
+      "fr": "Ils abattent une cloison et le couple se reparle. Quarante ans de thérapie remplacés par du placo.",
+      "en": "They knock down one wall and the marriage is saved. Forty years of therapy, replaced by drywall."
     }
   },
   {
@@ -5746,8 +5746,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌹",
     "debateStarter": {
-      "fr": "On regarde « pour rigoler » depuis quinze saisons.",
-      "en": "We watch 'ironically' — fifteen seasons in."
+      "fr": "« Je regarde pour rigoler » : quinze saisons, et tu connais les prénoms par cœur. Le second degré a une date de péremption.",
+      "en": "'I only watch ironically' — fifteen seasons deep and you know everyone's name. Irony has an expiry date and you're past it."
     }
   },
   {
@@ -5766,8 +5766,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎟️",
     "debateStarter": {
-      "fr": "Deux euros d'espoir, format poche.",
-      "en": "Two bucks of hope, pocket-sized."
+      "fr": "2 € d'espoir grattés devant le tabac avec la pièce du caddie. Personne gagne. Tout le monde y retourne.",
+      "en": "Two dollars of hope scratched with a parking-lot quarter. Nobody wins. Everybody comes back."
     }
   },
   {
@@ -5806,8 +5806,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪶",
     "debateStarter": {
-      "fr": "Dire les choses joliment au lieu de les dire vite.",
-      "en": "Saying things beautifully instead of quickly."
+      "fr": "Tout le monde respecte la poésie, personne en lit. C'est un monument : on visite pas, on défend.",
+      "en": "Everyone respects poetry, nobody reads it. It's a national monument: never visited, fiercely defended."
     }
   },
   {
@@ -5826,8 +5826,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏛️",
     "debateStarter": {
-      "fr": "Une langue morte qui ne sert qu'à briller aux dîners, des années après.",
-      "en": "A dead language that pays off only at dinner parties."
+      "fr": "Le latin au collège, c'était pas une option, c'était un tri social. Et vos darons le savaient très bien.",
+      "en": "Taking Latin was never a class, it was a social sorting hat. And your parents knew exactly what they were doing."
     }
   },
   {
@@ -5846,8 +5846,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏰",
     "debateStarter": {
-      "fr": "Manger du sanglier en tunique, et fièrement.",
-      "en": "Eating turkey legs in a tunic, proudly."
+      "fr": "12 € pour manger du sanglier en tunique à côté d'un comptable déguisé en forgeron. Et c'est magnifique.",
+      "en": "Twelve bucks to eat a turkey leg in a tunic next to an accountant cosplaying a blacksmith. Honestly? Majestic."
     }
   },
   {
@@ -5866,8 +5866,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💿",
     "debateStarter": {
-      "fr": "Le son est plus chaud, le prix aussi.",
-      "en": "The sound is warmer — so is the price."
+      "fr": "35 € le vinyle « pour le son », écouté une fois, exposé pour toujours. C'est pas de la musique, c'est du mobilier.",
+      "en": "$40 vinyl 'for the sound', played once, displayed forever. That's not music, that's furniture."
     }
   },
   {
@@ -5886,8 +5886,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧠",
     "debateStarter": {
-      "fr": "Le seul endroit où connaître les capitales rapporte.",
-      "en": "The only place where knowing capitals pays."
+      "fr": "Le quiz du bar transforme le pote discret en tyran : « CHUT, JE SAIS ». La culture générale rend violent.",
+      "en": "Pub trivia turns the quiet friend into a tyrant: 'SHUT UP, I KNOW THIS.' General knowledge is a violence."
     }
   },
   {
@@ -5906,8 +5906,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎨",
     "debateStarter": {
-      "fr": "Peindre des fruits que personne ne mangera.",
-      "en": "Painting fruit nobody will eat."
+      "fr": "Trois citrons flous, un compte Insta dédié, et une famille sommée de dire « c'est joli ».",
+      "en": "Three blurry lemons, a dedicated Instagram, and a family legally required to say 'lovely'."
     }
   },
   {
@@ -5926,8 +5926,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⛳",
     "debateStarter": {
-      "fr": "Quatre heures de marche pour taper dans un truc immobile.",
-      "en": "A four-hour walk to hit something that isn't moving."
+      "fr": "80 € le green fee pour marcher en pantalon beige. C'est pas un sport, c'est un comité de sélection.",
+      "en": "Four hours of khakis to lose to your boss on purpose. Not a sport, a performance review."
     }
   },
   {
@@ -5946,8 +5946,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎾",
     "debateStarter": {
-      "fr": "Le seul sport où l'on s'excuse de gagner le point au filet.",
-      "en": "The only sport where you apologize for winning the point."
+      "fr": "Tout le monde a « fait du tennis » petit. Personne sait servir. Où est passé l'argent des darons ?",
+      "en": "Everyone here 'played tennis growing up'. None of you can serve. Where did the lesson money go?"
     }
   },
   {
@@ -5966,8 +5966,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥎",
     "debateStarter": {
-      "fr": "Le tennis pour ceux qui veulent surtout discuter.",
-      "en": "Tennis for people who mostly want to chat."
+      "fr": "Personne joue au padel pour le sport. C'est du réseautage en short, et le perdant paie le terrain.",
+      "en": "Invented so people who hate running can still trash-talk. $150 paddle, four-second rallies."
     }
   },
   {
@@ -5986,8 +5986,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⚫",
     "debateStarter": {
-      "fr": "Un sport où l'apéro fait partie de l'équipement.",
-      "en": "A sport where drinks count as equipment."
+      "fr": "Sortir le mètre pour 2 millimètres, c'est pas de la rigueur, c'est une déclaration de guerre.",
+      "en": "A calm lawn game until someone pulls out a tape measure. Then it's a courtroom."
     }
   },
   {
@@ -6006,8 +6006,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐎",
     "debateStarter": {
-      "fr": "Un animal de 500 kilos et des bottes impeccables.",
-      "en": "A half-ton animal and impeccable boots."
+      "fr": "200 € par mois pour brosser un animal qui te tolère à peine. Et c'est lui qui fait tout le cardio.",
+      "en": "The horse does all the cardio. You pay $300 a month and still call yourself the athlete. Explain."
     }
   },
   {
@@ -6026,8 +6026,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏋️",
     "debateStarter": {
-      "fr": "On sait toujours qui en fait : la personne le dit.",
-      "en": "You always know — they always tell you."
+      "fr": "Il a placé « box », « WOD » et son chrono avant de demander ton prénom. C'est pas un sport, c'est une langue.",
+      "en": "He said his WOD time before he asked your name. CrossFit isn't a workout, it's a personality transplant."
     }
   },
   {
@@ -6046,8 +6046,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏃",
     "debateStarter": {
-      "fr": "Payer 90 € pour souffrir un dimanche entier.",
-      "en": "Paying $150 to suffer for an entire Sunday."
+      "fr": "42 km pour une médaille en alu et une photo de pieds détruits. Personne te l'a demandé. Surtout pas tes genoux.",
+      "en": "Nobody asked for your finish time. Not the group chat, not your knees, not the $180 entry fee."
     }
   },
   {
@@ -6066,8 +6066,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⛰️",
     "debateStarter": {
-      "fr": "Courir là où les chèvres hésitent.",
-      "en": "Running where goats hesitate."
+      "fr": "Courir 6 h dans la caillasse « pour se vider la tête ». À ce prix-là, une thérapie coûte moins cher.",
+      "en": "Six hours running up scree 'to clear my head'. Mate, therapy is cheaper than the shoes."
     }
   },
   {
@@ -6086,8 +6086,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⛵",
     "debateStarter": {
-      "fr": "Le vent est gratuit, tout le reste coûte un bras.",
-      "en": "The wind is free; everything else costs a fortune."
+      "fr": "Le seul sport où tu peux hériter de ton niveau. Le vent est gratuit, le ponton se transmet par notaire.",
+      "en": "The only sport you can inherit. The wind is free, the marina slip is generational wealth."
     }
   },
   {
@@ -6106,8 +6106,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎿",
     "debateStarter": {
-      "fr": "Le ski sans la descente, donc juste l'effort.",
-      "en": "Skiing minus the downhill, so just the suffering."
+      "fr": "Le ski des gens qui trouvent que la joie, ça se mérite. Tout l'effort, zéro descente.",
+      "en": "Skiing for people who think fun should be earned. All the cardio, none of the downhill."
     }
   },
   {
@@ -6126,8 +6126,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥾",
     "debateStarter": {
-      "fr": "Marcher longtemps pour un sandwich avec vue.",
-      "en": "Walking for hours to earn a sandwich with a view."
+      "fr": "« C'est encore 20 minutes » : le plus vieux mensonge de la rando. Quelqu'un ici le sort à chaque sortie.",
+      "en": "'It's 20 more minutes' — hiking's oldest lie. Someone in this room says it on every trail. Name them."
     }
   },
   {
@@ -6146,8 +6146,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧗",
     "debateStarter": {
-      "fr": "Des « problèmes » de préhension et un vocabulaire à part.",
-      "en": "Grip 'problems' and a whole new vocabulary."
+      "fr": "25 balles l'entrée pour regarder des gens torse nu commenter un mur. C'est un date déguisé en sport.",
+      "en": "$25 to watch shirtless people narrate a wall. The climbing gym is a dating app with chalk."
     }
   },
   {
@@ -6166,8 +6166,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎣",
     "debateStarter": {
-      "fr": "Des heures de silence vendues comme un loisir.",
-      "en": "Hours of silence, marketed as a hobby."
+      "fr": "Six heures de silence au bord de l'eau « pour les poissons ». Sa famille sait très bien ce qu'il fuit.",
+      "en": "Six hours of silence 'for the fish'. His family knows exactly what he's avoiding. It's not the fish."
     }
   },
   {
@@ -6186,8 +6186,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "⚽",
     "debateStarter": {
-      "fr": "Onze messages pour trouver un dixième joueur.",
-      "en": "Eleven texts to find a tenth player."
+      "fr": "Le même mec annule à 18 h 57 chaque jeudi. Tout le monde sait qui. Personne ose le virer du groupe.",
+      "en": "The same guy cancels at 5:57 every Thursday. Everyone knows who. Nobody removes him from the chat."
     }
   },
   {
@@ -6206,8 +6206,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏉",
     "debateStarter": {
-      "fr": "On se rentre dedans, puis on chante ensemble.",
-      "en": "Full-contact collisions, then group singing."
+      "fr": "80 minutes à se rentrer dedans, puis tout le monde chante. Le rugby a trouvé ce que la thérapie cherche encore.",
+      "en": "80 minutes of collisions, then group singing. Rugby figured out what therapy is still looking for."
     }
   },
   {
@@ -6226,8 +6226,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏎️",
     "debateStarter": {
-      "fr": "Des voitures qui tournent, des drames qui débordent.",
-      "en": "Cars going in circles, drama going everywhere."
+      "fr": "La moitié des fans a découvert la F1 sur Netflix. L'autre moitié leur pardonnera jamais. Choisis ton camp.",
+      "en": "Half the fans found F1 on Netflix. The other half will never forgive them. Pick your grid spot."
     }
   },
   {
@@ -6246,8 +6246,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎳",
     "debateStarter": {
-      "fr": "Des chaussures de location et de grandes ambitions.",
-      "en": "Rental shoes and big ambitions."
+      "fr": "« C'est pour rigoler » jusqu'au troisième strike d'affilée. Après, plus personne rigole.",
+      "en": "'It's just for fun' until someone strikes three in a row. Then the rental shoes get serious."
     }
   },
   {
@@ -6266,8 +6266,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎯",
     "debateStarter": {
-      "fr": "Le calcul mental le plus rapide du pays se fait au bar.",
-      "en": "The fastest mental math happens at the bar."
+      "fr": "Le mec qui « déteste les maths » calcule 501 moins 57 en une seconde aux fléchettes. L'école l'a perdu pour rien.",
+      "en": "The guy who 'hates math' does 501 minus 57 instantly at darts. School just never offered him stakes."
     }
   },
   {
@@ -6286,8 +6286,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎱",
     "debateStarter": {
-      "fr": "Tout le monde a une technique, personne n'a de niveau.",
-      "en": "Everyone has a technique, nobody has skill."
+      "fr": "Il frotte la craie, vise dix secondes, rate la blanche. Le rituel est parfait, le niveau viendra jamais.",
+      "en": "Chalks the cue, aims for ten seconds, misses everything. The ritual is flawless. The skill never came."
     }
   },
   {
@@ -6306,8 +6306,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💪",
     "debateStarter": {
-      "fr": "Soulever du lourd pour le reposer exactement au même endroit.",
-      "en": "Picking up heavy things and putting them right back."
+      "fr": "Il a raté ton anniversaire mais jamais un leg day. T'es classé deuxième, et c'est même pas serré.",
+      "en": "He missed your birthday but has never missed leg day. You rank second, and honestly it's not close."
     }
   },
   {
@@ -6326,8 +6326,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤸",
     "debateStarter": {
-      "fr": "Des mouvements minuscules, des courbatures majuscules.",
-      "en": "Tiny movements, capital-letter soreness."
+      "fr": "35 € la séance pour trembler sur un tapis en respirant. Le lendemain, t'as mal à des muscles sans nom.",
+      "en": "$40 to shake on a mat while breathing on command. Next day you're sore in muscles science hasn't named."
     }
   },
   {
@@ -6346,8 +6346,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚴",
     "debateStarter": {
-      "fr": "3 000 € de vélo pour un café en terrasse à 40 km.",
-      "en": "A $5,000 bike to get coffee 25 miles away."
+      "fr": "3 000 € de vélo, 200 € de lycra, rouler à trois de front sur la départementale. Et c'est TOI le problème ?",
+      "en": "A $5,000 bike, $300 of lycra, riding three abreast at 7am. And somehow the cars are the problem?"
     }
   },
   {
@@ -6366,8 +6366,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏓",
     "debateStarter": {
-      "fr": "Sport de garage, ego de stade.",
-      "en": "Garage sport, stadium ego."
+      "fr": "Personne s'énerve plus vite qu'un homme mené 9-2 au ping-pong par sa petite cousine.",
+      "en": "Nothing humbles a grown man faster than going down 9-2 to a 12-year-old cousin."
     }
   },
   {
@@ -6386,8 +6386,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥶",
     "debateStarter": {
-      "fr": "Souffrir volontairement à 7h pour le raconter à 9h.",
-      "en": "Voluntary 7am suffering, reported by 9am."
+      "fr": "Le bain froid soigne tout, paraît-il. Surtout le besoin d'avoir un truc à raconter en réunion.",
+      "en": "The cold plunge fixes everything, apparently. Mostly the fear of having nothing to say in meetings."
     }
   },
   {
@@ -6406,8 +6406,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏸",
     "debateStarter": {
-      "fr": "Le volant ne va jamais où l'orgueil l'envoie.",
-      "en": "The shuttle never lands where your ego aimed."
+      "fr": "Tout le monde se croit fort au badminton depuis une victoire au camping. Un club te plierait 21-0.",
+      "en": "Everyone thinks they're good because they won once on a beach. A club player would end you 21-0."
     }
   },
   {
@@ -6426,8 +6426,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥏",
     "debateStarter": {
-      "fr": "Un sport sans arbitre où tout le monde s'auto-arbitre fort.",
-      "en": "No refs, just very loud self-officiating."
+      "fr": "Un sport « sans arbitre » fondé sur la bonne foi. Résultat : quarante minutes de débat par match. L'ONU en short.",
+      "en": "A 'self-refereed' sport built on good faith. Result: forty minutes of debate per point. The UN in shorts."
     }
   },
   {
@@ -6446,8 +6446,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥊",
     "debateStarter": {
-      "fr": "Payer pour apprendre à se faire taper dessus proprement.",
-      "en": "Paying to get hit, but with technique."
+      "fr": "Trois mois de boxe et il marche autrement au supermarché. Personne a jamais attaqué le rayon pâtes.",
+      "en": "Three months of boxing and he walks differently at the store. Nobody has ever attacked the cereal aisle."
     }
   },
   {
@@ -6466,8 +6466,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏄",
     "debateStarter": {
-      "fr": "Debout sur l'eau, surtout pour la photo.",
-      "en": "Standing on water, mostly for the photo."
+      "fr": "Vingt minutes à genoux pour trois secondes debout. Mais sur la photo, c'est Hawaï.",
+      "en": "Twenty minutes on your knees for three seconds standing. The photo says Hawaii. The lake says no."
     }
   },
   {
@@ -6486,8 +6486,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🕐",
     "debateStarter": {
-      "fr": "Être ponctuel, c'est faire culpabiliser les retardataires.",
-      "en": "Being early is just making the late people feel it."
+      "fr": "Arriver 15 minutes en avance, c'est pas de la politesse, c'est une embuscade. L'hôte est en retard chez lui.",
+      "en": "Showing up 15 minutes early isn't polite, it's an ambush. The host now owes you an apology in their own home."
     }
   },
   {
@@ -6506,8 +6506,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👻",
     "debateStarter": {
-      "fr": "Le silence est une réponse, paraît-il.",
-      "en": "Silence is technically an answer."
+      "fr": "Le vu sans réponse, c'est pas un oubli, c'est un verdict. Et quelqu'un ici te l'a fait cette semaine.",
+      "en": "Left on read isn't forgetting, it's a verdict. And someone in this room did it to you this week."
     }
   },
   {
@@ -6526,8 +6526,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🗣️",
     "debateStarter": {
-      "fr": "Un podcast privé que personne n'a demandé.",
-      "en": "A private podcast nobody subscribed to."
+      "fr": "Un vocal de 4 minutes pour une info qui tient en un SMS. C'est pas un message, c'est une prise d'otage.",
+      "en": "A 4-minute voice note for one sentence of info. That's not a message, that's holding the floor hostage."
     }
   },
   {
@@ -6546,8 +6546,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧮",
     "debateStarter": {
-      "fr": "L'amitié s'arrête à 1,50 € près.",
-      "en": "Friendship, accurate to the penny."
+      "fr": "Il sort la calculette pour 1,30 €, mais « oublie » que t'as payé l'Uber. La précision est à sens unique.",
+      "en": "Splits to the cent, but 'forgets' the Uber you covered. The math only ever works in one direction."
     }
   },
   {
@@ -6566,8 +6566,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "😘",
     "debateStarter": {
-      "fr": "Deux ? Trois ? Quatre ? Personne n'a la règle.",
-      "en": "One? Two? Nobody knows the rule, everyone commits."
+      "fr": "Deux à Paris, trois dans le Sud, et personne prévient. La bise est le seul duel encore légal en France.",
+      "en": "One cheek? Two? A handshake mid-hug? Nobody declares their protocol and everyone commits. Casualties."
     }
   },
   {
@@ -6586,8 +6586,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "✈️",
     "debateStarter": {
-      "fr": "Féliciter le pilote d'avoir fait son métier.",
-      "en": "Congratulating the pilot for doing their job."
+      "fr": "Applaudir l'atterrissage, c'est avouer en public qu'on pensait mourir. Le pilote a juste fini sa journée.",
+      "en": "Clapping on landing is publicly admitting you thought you'd die. The pilot just finished a shift."
     }
   },
   {
@@ -6606,8 +6606,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚗",
     "debateStarter": {
-      "fr": "Partager les frais, la playlist et les silences.",
-      "en": "Splitting the gas, the playlist, and the silences."
+      "fr": "Toucher la clim sans demander, c'est une déclaration de guerre. La playlist, c'est carrément un putsch.",
+      "en": "Touching the AC without asking is a declaration of war. Touching the playlist is a coup."
     }
   },
   {
@@ -6626,8 +6626,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🗄️",
     "debateStarter": {
-      "fr": "Un sac rempli de sacs : l'assurance-vie nationale.",
-      "en": "A bag full of bags: the people's insurance policy."
+      "fr": "Le sac de sacs se transmet de daronne en daronne. Jette ce tiroir et t'es rayé de l'héritage.",
+      "en": "The bag of bags is inherited, mother to child. Throw that drawer out and you're out of the will."
     }
   },
   {
@@ -6646,8 +6646,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🏖️",
     "debateStarter": {
-      "fr": "Le transat est à tout le monde, donc à moi d'abord.",
-      "en": "The chair belongs to everyone, so me first."
+      "fr": "Poser sa serviette à 7 h et revenir à 11 h, c'est pas réserver, c'est annexer. Assume ton empire.",
+      "en": "Towel down at 7am, back at 11. That's not saving a chair, that's annexing territory. Own it."
     }
   },
   {
@@ -6666,8 +6666,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📮",
     "debateStarter": {
-      "fr": "Elle arrive après toi, mais c'est le geste.",
-      "en": "It arrives after you're home, but it's the thought."
+      "fr": "Elle arrive après toi, dit trois banalités, et mamie la garde dix ans. Tes SMS, eux, meurent dans la journée.",
+      "en": "Lands a week after you're home, says nothing, grandma keeps it a decade. Your texts die in a day."
     }
   },
   {
@@ -6686,8 +6686,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💵",
     "debateStarter": {
-      "fr": "Les billets pliés dans la poche : la banque, c'est moi.",
-      "en": "Folded bills in the pocket: I am the bank."
+      "fr": "Tout payer en espèces, c'est soit une philosophie, soit un truc à cacher. Y'a pas de troisième option.",
+      "en": "Paying cash for everything is either a philosophy or a cover-up. There is no third option."
     }
   },
   {
@@ -6706,8 +6706,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🖊️",
     "debateStarter": {
-      "fr": "Faire la queue derrière un chéquier, c'est voyager dans le temps.",
-      "en": "Standing behind someone with a checkbook is time travel."
+      "fr": "Le chèque en caisse : trente secondes de stylo, douze personnes qui vieillissent derrière. Une violence calme.",
+      "en": "Writing a check in the express lane while twelve people age behind you. Quiet, perfectly legal violence."
     }
   },
   {
@@ -6726,8 +6726,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💸",
     "debateStarter": {
-      "fr": "La générosité, ou juste la flemme de calculer ?",
-      "en": "Generosity, or just refusing to do the math?"
+      "fr": "Le gros pourboire posé bien en vue, c'est pas pour le serveur, c'est pour la table. La générosité a un public.",
+      "en": "Tipping 25% loudly isn't for the server, it's for the table. Generosity always checks who's watching."
     }
   },
   {
@@ -6746,8 +6746,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📊",
     "debateStarter": {
-      "fr": "Chaque café a sa ligne, chaque regret sa colonne.",
-      "en": "Every coffee gets a row, every regret a column."
+      "fr": "Son tableur sait que t'as craqué 9,90 € jeudi à 23 h. Il pardonne pas, il passe juste la case en rouge.",
+      "en": "The spreadsheet knows about Thursday's 11pm purchase. It doesn't forgive. It just turns the cell red."
     }
   },
   {
@@ -6766,8 +6766,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛏️",
     "debateStarter": {
-      "fr": "Discipline de samouraï ou peur du regard de sa mère ?",
-      "en": "Samurai discipline or fear of your mom finding out?"
+      "fr": "Faire son lit chaque matin « pour la discipline ». Frère, t'as plié une couette, t'as pas fondé un empire.",
+      "en": "Making your bed daily 'for discipline'. You folded a duvet. That Navy SEAL speech got you good."
     }
   },
   {
@@ -6786,8 +6786,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📝",
     "debateStarter": {
-      "fr": "Planifier son repos jusqu'à l'épuisement.",
-      "en": "Scheduling your rest until it's work."
+      "fr": "Une to-do du week-end avec « repos » écrit dessus. En tâche. Avec une case à cocher. T'es pas bien.",
+      "en": "A weekend to-do list with 'relax' written on it. As a task. With a checkbox. Seek help."
     }
   },
   {
@@ -6806,8 +6806,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🗓️",
     "debateStarter": {
-      "fr": "Le rendez-vous le plus pris et le moins honoré du pays.",
-      "en": "The most-made, least-kept plan in human history."
+      "fr": "« Faut qu'on se voie » : neuvième fois en deux ans. C'est plus une promesse, c'est une formule de politesse.",
+      "en": "'We should hang out soon' — ninth time in two years. At this point it's not a plan, it's a greeting."
     }
   },
   {
@@ -6826,8 +6826,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📯",
     "debateStarter": {
-      "fr": "Les réflexes les plus rapides du pays, gâchés en ville.",
-      "en": "The fastest reflexes in the country, wasted at a red light."
+      "fr": "Il klaxonne à la milliseconde où le feu passe au vert. Au boulot, par contre, il a « besoin de temps ».",
+      "en": "Honks the millisecond the light turns green. At work, though, he 'needs time to process'."
     }
   },
   {
@@ -6846,8 +6846,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛞",
     "debateStarter": {
-      "fr": "Elle démarre encore, donc on continue.",
-      "en": "It still starts, so it stays."
+      "fr": "20 ans, 280 000 km, un rétro scotché. Elle passe le contrôle technique par respect, et il l'enterrera dignement.",
+      "en": "Twenty years, 200k miles, one mirror held on with tape. It passes inspection out of respect at this point."
     }
   },
   {
@@ -6866,8 +6866,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🗺️",
     "debateStarter": {
-      "fr": "Pourquoi explorer quand le boulanger te connaît déjà ?",
-      "en": "Why explore when the waiter already knows your order?"
+      "fr": "Même camping, même semaine, même emplacement depuis 2009. C'est pas des vacances, c'est un abonnement.",
+      "en": "Same spot, same week, same table since 2009. That's not a vacation, that's a subscription with sand."
     }
   },
   {
@@ -6886,8 +6886,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📥",
     "debateStarter": {
-      "fr": "Une boîte mail vide, une âme en paix, dit-on.",
-      "en": "An empty inbox and, allegedly, inner peace."
+      "fr": "L'inbox zéro, c'est pas de l'organisation, c'est de la domination. Ces gens-là repassent aussi leurs draps.",
+      "en": "Inbox zero isn't organization, it's dominance. These people also iron their bedsheets."
     }
   },
   {
@@ -6906,8 +6906,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📧",
     "debateStarter": {
-      "fr": "Le chaos assumé comme mode d'organisation.",
-      "en": "Chaos, formally adopted as a system."
+      "fr": "14 000 non-lus et il dort très bien. C'est pas du chaos, c'est de la sélection naturelle : l'important rappelle.",
+      "en": "14,000 unread and sleeping fine. It's not chaos, it's natural selection: anything important calls back."
     }
   },
   {
@@ -6926,8 +6926,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🔁",
     "debateStarter": {
-      "fr": "Du coup, on en parle, ou du coup, non ?",
-      "en": "It's literally not literal, literally ever."
+      "fr": "Compte ses « du coup » sur une soirée : t'arrêteras à 40. Et maintenant tu l'entendras partout. Désolé.",
+      "en": "Count the 'literally's tonight — you'll quit at 40. And now you'll hear it in everyone. You're welcome."
     }
   },
   {
@@ -6946,8 +6946,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📴",
     "debateStarter": {
-      "fr": "Dormir débranché : principe ou croyance ?",
-      "en": "Sleeping unplugged: principle or superstition?"
+      "fr": "Couper le wifi la nuit « à cause des ondes ». Le micro-ondes, lui, dort tranquille à deux mètres.",
+      "en": "Cutting the wifi at night 'because of the waves'. The microwave sleeps soundly ten feet away."
     }
   },
   {
@@ -6966,8 +6966,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🎫",
     "debateStarter": {
-      "fr": "Le papier ne tombe jamais en panne de batterie.",
-      "en": "Paper never hits 1% battery."
+      "fr": "Il imprime le billet, le télécharge, ET fait une capture. C'est plus de la prudence, c'est un bunker.",
+      "en": "Prints it, downloads it, screenshots it. That's not a backup plan, that's a doomsday bunker."
     }
   },
   {
@@ -6986,8 +6986,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🫥",
     "debateStarter": {
-      "fr": "Venir avec sa bonne humeur, c'est cadeau ?",
-      "en": "'I brought the vibes' is not a covered dish."
+      "fr": "Arriver les mains vides, manger comme quatre, repartir avec un Tupperware. Y'en a un dans ce groupe. Trouvez-le.",
+      "en": "Shows up empty-handed, eats like royalty, leaves with a container. This group has one. Find them."
     }
   },
   {
@@ -7006,8 +7006,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🥡",
     "debateStarter": {
-      "fr": "Le vrai gagnant de la soirée part avec le gratin.",
-      "en": "The real winner leaves with the casserole."
+      "fr": "Celui qui repart avec le gratin a gagné la soirée. Celui qui rend le plat six mois après l'a perdue.",
+      "en": "Whoever leaves with the casserole won the night. Whoever returns the dish six months later lost it."
     }
   },
   {
@@ -7026,8 +7026,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "👍",
     "debateStarter": {
-      "fr": "Quelqu'un doit bien lancer le mouvement.",
-      "en": "Somebody has to get the ball rolling."
+      "fr": "Liker son propre post, c'est s'applaudir seul dans le noir. Et quelqu'un ici le fait. On a vérifié.",
+      "en": "Liking your own post is clapping for yourself in an empty room. Someone here does it. We checked."
     }
   },
   {
@@ -7046,8 +7046,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📈",
     "debateStarter": {
-      "fr": "Si la course n'est pas partagée, a-t-elle eu lieu ?",
-      "en": "If the run isn't posted, did it even happen?"
+      "fr": "Personne a demandé ton 5 km en 31 minutes. Surtout pas avec la carte. On sait tous où t'habites maintenant.",
+      "en": "Nobody asked for your 5k time. Especially not with the route map. We all know where you live now."
     }
   },
   {
@@ -7066,8 +7066,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💻",
     "debateStarter": {
-      "fr": "Le repos dominical, mais en pointillés.",
-      "en": "A day of rest, with footnotes."
+      "fr": "Répondre aux mails le dimanche soir « pour prendre de l'avance ». T'as rien pris, t'as donné ton dimanche.",
+      "en": "Sunday-night emails 'to get ahead'. You didn't get ahead. You donated a Sunday they won't remember."
     }
   },
   {
@@ -7086,8 +7086,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🍷",
     "debateStarter": {
-      "fr": "On agite, on hume, on déclare « il est souple ».",
-      "en": "Swirl, sniff, announce it's 'approachable'."
+      "fr": "Il fait tourner, hume, annonce « des notes de fruits rouges ». C'est écrit sur l'étiquette. Il l'a lue.",
+      "en": "Swirls, sniffs, announces 'notes of red fruit'. It says that on the label. He read the label."
     }
   },
   {
@@ -7106,8 +7106,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🤜",
     "debateStarter": {
-      "fr": "Dire bonjour ou gagner un bras de fer, il faut choisir.",
-      "en": "Greeting or arm-wrestling — pick one."
+      "fr": "La poignée qui broie, c'est pas de la confiance, c'est un aveu. Plus il serre fort, plus il doute.",
+      "en": "The bone-crusher handshake isn't confidence, it's a confession. The harder the grip, the deeper the doubt."
     }
   },
   {
@@ -7126,8 +7126,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📞",
     "debateStarter": {
-      "fr": "Un appel sans prévenir, c'est une perquisition surprise.",
-      "en": "An unannounced call is a wellness raid."
+      "fr": "Un appel sans SMS d'annonce, c'est une descente de police. T'as trois secondes pour décider si t'existes.",
+      "en": "A call with no warning text is a raid. You have three seconds to decide whether you exist."
     }
   },
   {
@@ -7146,8 +7146,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "💬",
     "debateStarter": {
-      "fr": "On entend très bien, on veut juste être sûr.",
-      "en": "We can hear fine. We just want receipts."
+      "fr": "Les sous-titres en français sur un film français. On entend très bien, on fait juste plus confiance à personne.",
+      "en": "Subtitles on, in your own language. We can hear. We just stopped taking anyone's word for it."
     }
   },
   {
@@ -7166,8 +7166,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📺",
     "debateStarter": {
-      "fr": "Protéger l'objet si bien qu'on n'en profite jamais.",
-      "en": "Protecting it so well you never enjoy it."
+      "fr": "Le plastique de la télécommande a survécu à trois déménagements. Personne a jamais touché l'objet neuf.",
+      "en": "The plastic wrap has outlived three moves and two TVs. Nobody alive has felt that remote's real buttons."
     }
   },
   {
@@ -7186,8 +7186,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚌",
     "debateStarter": {
-      "fr": "Politesse de base ou énergie de golden retriever ?",
-      "en": "Basic manners or golden-retriever energy?"
+      "fr": "Dire merci au chauffeur, c'est la base. Le crier depuis la porte arrière, c'est une campagne municipale.",
+      "en": "Thanking the driver is basic decency. Shouting it from the back door is running for office."
     }
   },
   {
@@ -7206,8 +7206,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🚪",
     "debateStarter": {
-      "fr": "Partir sans au revoir : un crime ou un service rendu ?",
-      "en": "Leaving without goodbyes: crime or public service?"
+      "fr": "Filer sans au revoir, c'est 45 minutes de bises économisées. Le vrai scandale, c'est ceux qui font le tour.",
+      "en": "The Irish exit saves 45 minutes of goodbyes. The real scandal is everyone still doing laps of hugs."
     }
   },
   {
@@ -7226,8 +7226,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🛒",
     "debateStarter": {
-      "fr": "Le test de civilisation à une pièce d'un euro.",
-      "en": "Civilization's one-quarter morality test."
+      "fr": "Ramener le caddie quand personne regarde : le seul test de moralité à 1 €. La moitié d'entre vous échoue.",
+      "en": "Returning the cart with nobody watching: a morality test that costs a quarter. Half of you fail it."
     }
   },
   {
@@ -7246,8 +7246,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🌡️",
     "debateStarter": {
-      "fr": "Un degré de plus et c'est le drame.",
-      "en": "One degree warmer and the household splits in two."
+      "fr": "19 ou 21 degrés : des couples solides se sont quittés pour moins que ça. Et y'a un radin du chauffage ici.",
+      "en": "68 or 72: solid couples have ended over less. And this group definitely contains a thermostat dictator."
     }
   },
   {
@@ -7266,8 +7266,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🐱",
     "debateStarter": {
-      "fr": "Jean-Michel le chat paie-t-il un loyer ?",
-      "en": "If the cat's name is Kevin, does he pay rent?"
+      "fr": "Le chat s'appelle Michel, dort sur ton oreiller et mange avant toi. C'est pas un animal, c'est un coloc à charge.",
+      "en": "The cat is named Kevin, sleeps on your pillow and eats first. That's not a pet, that's a freeloading roommate."
     }
   },
   {
@@ -7286,8 +7286,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🪫",
     "debateStarter": {
-      "fr": "Le frisson permanent, gratuitement.",
-      "en": "Free adrenaline, all day long."
+      "fr": "Vivre à 1 %, c'est pas de l'insouciance, c'est de l'irrespect pour ceux qui t'attendent quelque part.",
+      "en": "Living at 1% isn't carefree, it's disrespect for everyone currently waiting on you somewhere."
     }
   },
   {
@@ -7306,8 +7306,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "🧦",
     "debateStarter": {
-      "fr": "Réparer plutôt que jeter, ou refuser de lâcher 3 € ?",
-      "en": "Repair culture, or refusing to part with $3?"
+      "fr": "Recoudre une chaussette à 3 €, c'est pas de l'écologie, c'est un refus de dire adieu. Lâche la chaussette.",
+      "en": "Darning a $3 sock isn't sustainability, it's refusing to say goodbye. Let the sock go."
     }
   },
   {
@@ -7326,8 +7326,8 @@ export const GAUCHE_DROITE_PACK: ContentPack<OptionVoteContent> = {
     },
     "emoji": "📣",
     "debateStarter": {
-      "fr": "L'entraîneur ne t'entend pas, mais les voisins, oui.",
-      "en": "The coach can't hear you. The neighbors can."
+      "fr": "Il hurle des consignes tactiques à des millionnaires à 800 km. Eux jouent. Lui transpire sur le canapé.",
+      "en": "Screaming tactics at millionaires 500 miles away. They're playing. He's sweating on a couch."
     }
   }
 ] },

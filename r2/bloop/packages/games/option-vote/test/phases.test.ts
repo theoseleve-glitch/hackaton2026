@@ -42,7 +42,7 @@ describe('phase chain and timing', () => {
     expect(tuPreferes.phaseDurationMs(s0)).toBe(15_000);
     const s1 = tuPreferes.reduce(s0, { type: 'deadline', at: 0 }).state;
     expect(tuPreferes.phaseKey(s1)).toBe('reveal:r0');
-    expect(tuPreferes.phaseDurationMs(s1)).toBe(15_000);
+    expect(tuPreferes.phaseDurationMs(s1)).toBe(9_000);
     const s2 = tuPreferes.reduce(s1, { type: 'deadline', at: 1 }).state;
     expect(tuPreferes.phaseKey(s2)).toBe('choose:r1');
     expect(s2.ballots).toEqual({});
@@ -53,10 +53,10 @@ describe('phase chain and timing', () => {
     const s0 = gauche.init('s', players, content);
     const s1 = toReveal(s0);
     expect(gauche.phaseKey(s1)).toBe('reveal:r0');
-    expect(gauche.phaseDurationMs(s1)).toBe(7_000);
+    expect(gauche.phaseDurationMs(s1)).toBe(8_000);
     const s2 = gauche.reduce(s1, { type: 'deadline', at: 0 }).state;
     expect(gauche.phaseKey(s2)).toBe('debate:r0');
-    expect(gauche.phaseDurationMs(s2)).toBe(35_000);
+    expect(gauche.phaseDurationMs(s2)).toBe(25_000);
     const s3 = gauche.reduce(s2, { type: 'deadline', at: 1 }).state;
     expect(gauche.phaseKey(s3)).toBe('choose:r1');
   });

@@ -11,8 +11,8 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
   version: 1,
   data: { prompts: [
   {
-    "fr": "Qui commanderait pour toute la table, se tromperait sur TON plat, et te dirait que « c'est mieux comme ça » ?",
-    "en": "Who would order for the whole table, get YOUR order wrong, and tell you it's a you problem?"
+    "fr": "Qui commanderait pour toute la table sans demander, se tromperait sur TON plat, et conclurait que le problème c'est toi ?",
+    "en": "Who orders for the whole table uninvited, gets YOUR food wrong, and decides the real problem is your attitude?"
   },
   {
     "fr": "Qui envoie « j'arrive dans 5 min » en sortant à peine de la douche ? Sa dernière victime est dans la pièce.",
@@ -27,64 +27,64 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who would drop you 'basically there' — a 40-minute walk from yours — because the detour ruined their fuel stats?"
   },
   {
-    "fr": "Qui créerait le groupe « Vacances 2026 🔥 », encaisserait les acomptes de tout le monde, puis annulerait par vocal ?",
-    "en": "Who would start the 'TRIP 2026 🔥' chat, collect everyone's deposits, then cancel it all in one 40-second voice note?"
+    "fr": "Qui créerait le groupe « Vacances 2026 🔥 », encaisserait les acomptes, annulerait par vocal, et rendrait l'argent « bientôt » ?",
+    "en": "Who starts the 'TRIP 2026 🔥' chat, collects the deposits, cancels in a 40-second voice note, then goes quiet about refunds?"
   },
   {
-    "fr": "Qui annulerait ton anniversaire à 18h47 pour cause de « grosse fatigue », puis posterait une story à 23h ?",
-    "en": "Who would cancel your birthday at 6:47 p.m. citing 'exhaustion', then post a story from somewhere better at 11?"
+    "fr": "Qui annulerait ton anniv à 18h47 pour « grosse fatigue », puis apparaîtrait à 23h dans la story d'une meilleure soirée ?",
+    "en": "Who cancels your birthday at 6:47 p.m. citing 'exhaustion', then appears at 11 in someone else's story, visibly thriving?"
   },
   {
-    "fr": "Qui te doit 20 balles depuis 2023 mais vient de s'acheter des sneakers en édition limitée ?",
-    "en": "Who still owes you £20 from 2023 but just dropped £180 on limited-edition trainers?"
+    "fr": "Qui te doit 20 balles depuis 2023, vient de claquer 180 € en sneakers, et te fait l'unboxing à TOI en premier ?",
+    "en": "Who has owed you £20 since 2023, just dropped £180 on trainers, and sent YOU the unboxing video first?"
   },
   {
     "fr": "Qui spoilerait la fin de ta série, s'excuserait, puis spoilerait la saison suivante dans la même phrase ?",
-    "en": "Who would spoil your finale, apologize, then spoil the next season in the same sentence?"
+    "en": "Who would spoil your finale, apologise, then spoil the next season in the same sentence?"
   },
   {
     "fr": "Qui répondrait à ton « urgent, rappelle-moi » par un vocal de six minutes sur sa journée à lui ?",
     "en": "Who answers your 'urgent — call me' with a six-minute voice note about their own day?"
   },
   {
-    "fr": "Qui négocierait 50 centimes au marché, puis prendrait un Uber pour 600 mètres ?",
-    "en": "Who would haggle over 50 cents at a market, then order an Uber for a seven-minute walk?"
+    "fr": "Qui diviserait l'addition au centime près sur l'appli, mais oublierait les trois verres que tu lui as payés ?",
+    "en": "Who splits the bill to the exact penny on the app, but gets amnesia about the three drinks you bought them?"
   },
   {
-    "fr": "Qui ramènerait un inconnu du bus à TON dîner d'anniversaire, « il est sympa tu verras » ?",
-    "en": "Who would bring a stranger off the bus to YOUR birthday dinner — 'he's sound, I promise'?"
+    "fr": "Qui ramènerait un inconnu du bus à TON anniv — « tranquille, c'est un bon » — puis te le laisserait sur les bras toute la soirée ?",
+    "en": "Who brings a stranger off the bus to YOUR birthday dinner — 'he's sound, trust' — then leaves you stuck with him all night?"
   },
   {
-    "fr": "Qui volerait le micro à TON mariage et improviserait 80 % des paroles, avec un aplomb total ?",
-    "en": "Who would grab the mic at YOUR wedding and improvise 80% of the lyrics, confidently wrong?"
+    "fr": "Qui volerait le micro à TON mariage pour annoncer SES fiançailles, puis bouderait parce qu'on parle pas assez de lui ?",
+    "en": "Who grabs the mic at YOUR wedding to announce THEIR engagement, then sulks that the speeches aren't about them?"
   },
   {
     "fr": "Qui décalerait les vacances du groupe d'une semaine « parce que c'était moins cher », ton congé déjà posé ?",
     "en": "Who would move the group trip a full week 'because it was cheaper' after you'd already booked the time off?"
   },
   {
-    "fr": "Qui oublierait l'anniversaire de sa propre mère mais jamais un happy hour ?",
-    "en": "Who would forget their own mom's birthday but never a happy hour?"
+    "fr": "Qui oublierait l'anniversaire de sa propre daronne, mais jamais un happy hour à -50 % ?",
+    "en": "Who forgets their own mum's birthday but has never once missed a two-for-one happy hour?"
   },
   {
-    "fr": "Qui lancerait « c'est moi qui régale » puis disparaîtrait à l'arrivée de l'addition ?",
-    "en": "Who would announce 'this one's on me' and then vanish when the check lands?"
+    "fr": "Qui lancerait « c'est moi qui régale », puis développerait une urgence aux toilettes pile à l'arrivée de l'addition ?",
+    "en": "Who announces 'this one's on me', then develops an urgent phone call the exact second the bill lands?"
   },
   {
-    "fr": "Qui materait tes cartes au UNO et jouerait l'info sans le moindre remords ?",
-    "en": "Who peeks at your UNO hand and plays the intel with zero remorse, every single game night?"
+    "fr": "Qui materait tes cartes au UNO, gagnerait grâce à ça, puis te ferait la morale sur ta mauvaise foi ?",
+    "en": "Who peeks at your UNO hand, wins off the stolen intel, then lectures YOU about being a sore loser?"
   },
   {
     "fr": "Qui a zéro photo de toi en dix ans d'amitié, mais 300 du même coucher de soleil ?",
     "en": "Who has zero photos of you in ten years of friendship but 300 of the same sunset?"
   },
   {
-    "fr": "Qui raconterait TON anecdote en soirée comme si c'était la sienne... devant toi ?",
-    "en": "Who tells YOUR story at parties as their own, with you sitting right there?"
+    "fr": "Qui raconterait TON anecdote en soirée comme si c'était la sienne, devant toi, en ratant la chute ?",
+    "en": "Who tells YOUR story at parties as their own, with you sitting right there, and still butchers the ending?"
   },
   {
-    "fr": "Qui créerait le deuxième groupe sans toi... et t'y ajouterait par erreur ?",
-    "en": "Who would make the second group chat without you, then add you to it by mistake?"
+    "fr": "Qui créerait le deuxième groupe « sans les relous », te mettrait dedans par erreur, puis te dirait « bah t'es pas relou toi » ?",
+    "en": "Who starts the second group chat 'without the annoying ones', adds you by mistake, then goes 'no but you're not one of them'?"
   },
   {
     "fr": "Qui te ferait un croche-pied pendant la fuite zombie et garderait ton sac en souvenir ?",
@@ -95,12 +95,12 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who would impulse-adopt a husky, then have you dog-sitting it 'just for the weekend' since March?"
   },
   {
-    "fr": "Qui tricherait au Monopoly contre des enfants « pour leur apprendre la vie » ?",
-    "en": "Who would cheat at Monopoly against actual children 'to teach them about life'?"
+    "fr": "Qui tricherait au Monopoly contre des gosses de huit ans, raflerait leurs billets, et appellerait ça « une leçon de vie » ?",
+    "en": "Who cheats actual eight-year-olds at Monopoly, takes their money, and files it under 'life lessons'?"
   },
   {
-    "fr": "Qui couperait ta chanson à 30 secondes pour remettre la sienne... pour la deuxième fois ?",
-    "en": "Who skips your song 30 seconds in, then plays their own twice in a row, zero shame?"
+    "fr": "Qui couperait ta chanson à 30 secondes « parce que personne dansait », puis remettrait la sienne deux fois de suite ?",
+    "en": "Who skips your song 30 seconds in 'because nobody was dancing', then plays their own twice back to back?"
   },
   {
     "fr": "Qui te balancerait à ta propre daronne juste pour briller au repas de Noël ?",
@@ -115,16 +115,16 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who announces their digital detox in a story, then replies to every comment on that story?"
   },
   {
-    "fr": "Qui t'emprunterait 300 balles pour un robot de cuisine « investissement »... utilisé une fois ?",
-    "en": "Who would borrow £300 off you for an air-fryer 'investment' they have used exactly once?"
+    "fr": "Qui t'emprunterait 300 balles pour un robot « investissement », l'utiliserait une fois, puis essaierait de te le revendre ?",
+    "en": "Who borrows £300 off you for an air-fryer 'investment', uses it once, then tries to sell it back to you?"
   },
   {
     "fr": "Qui profiterait de son discours à TON mariage pour déclassifier les dossiers ?",
     "en": "Who would use their speech at YOUR wedding to declassify stories you buried for a reason?"
   },
   {
-    "fr": "Qui arriverait en retard à TON enterrement et viserait quand même le premier rang ?",
-    "en": "Who would show up late to YOUR funeral and still aim for a front-row seat?"
+    "fr": "Qui arriverait 40 minutes en retard à TON enterrement, un McFlurry à la main, et viserait quand même le premier rang ?",
+    "en": "Who shows up 40 minutes late to YOUR funeral, McFlurry in hand, and still beelines for the front row?"
   },
   {
     "fr": "Qui annulerait tes plans à cause de « Mercure rétrograde » mais irait à la soirée d'après ?",
@@ -143,56 +143,56 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who watches the next episode of YOUR show without you, then lies 'no, of course I'm waiting'?"
   },
   {
-    "fr": "Qui arriverait au déménagement pile quand le dernier carton entre dans le camion ?",
-    "en": "Who would arrive at moving day exactly when the last box hits the truck?"
+    "fr": "Qui arriverait au déménagement pile quand le dernier carton entre dans le camion, et réclamerait sa part de pizza ?",
+    "en": "Who arrives at moving day exactly as the last box hits the truck, then still claims a slice of the thank-you pizza?"
   },
   {
-    "fr": "Qui te vendrait sa formation crypto à toi, son propre pote, plein tarif ?",
-    "en": "Who would sell you, their actual friend, their crypto course at full price?"
+    "fr": "Qui te vendrait sa formation crypto plein tarif, à toi son pote, puis te relancerait par mail avec « hello frérot » ?",
+    "en": "Who sells you, their actual friend, their crypto course at full price — then chases the invoice twice?"
   },
   {
-    "fr": "Qui demanderait tout haut « c'est qui lui déjà ? » devant la personne concernée ?",
-    "en": "Who would loudly ask 'wait, who is that again?' with the person standing right there?"
+    "fr": "Qui demanderait « c'est qui lui déjà ? » devant quelqu'un qu'il a déjà vu quatre fois, dont une à SON propre anniv ?",
+    "en": "Who loudly asks 'sorry, who's this again?' about someone they've met four times — once at their OWN birthday?"
   },
   {
     "fr": "Qui jetterait TA bouffe du frigo commun en jurant qu'elle était « périmée » ?",
     "en": "Who bins YOUR food from the shared fridge swearing 'it was off'? It was not off."
   },
   {
-    "fr": "Qui s'endormirait en plein milieu de sa propre soirée ?",
-    "en": "Who would fall asleep in the middle of their own party?"
+    "fr": "Qui s'endormirait au milieu de sa propre soirée, puis t'en voudrait d'être parti « trop tôt » ?",
+    "en": "Who falls asleep in the middle of their own party, then holds a grudge because you left 'early'?"
   },
   {
-    "fr": "Qui répondrait « on verra » à ton invitation et viendrait que si rien de mieux ne tombe ?",
-    "en": "Who replies 'maybe' to your invite, then shows up only if nothing better lands by 8 p.m.?"
+    "fr": "Qui répondrait « on verra » à ton invit, attendrait mieux jusqu'à 20h, puis débarquerait quand y'a plus rien à manger ?",
+    "en": "Who replies 'maybe' to your invite, holds out for a better offer till 8, then strolls in once the food's gone?"
   },
   {
-    "fr": "Qui défendrait une théorie du complot sur les pigeons juste pour animer le dîner ?",
-    "en": "Who would defend a pigeon conspiracy theory just to liven up dinner?"
+    "fr": "Qui prendrait la défense de ton pire ennemi en plein dîner, « juste pour le débat », puis te reprocherait de mal le prendre ?",
+    "en": "Who defends your sworn enemy at dinner 'just to play devil's advocate', then decides you're the dramatic one?"
   },
   {
     "fr": "Qui oublierait son propre code de carte bleue pile quand c'est son tour de payer ?",
     "en": "Who would forget their own PIN right when it's finally their turn to pay?"
   },
   {
-    "fr": "Qui dirait « je connais un raccourci » et ajouterait quarante minutes au trajet ?",
-    "en": "Who would say 'I know a shortcut' and add forty minutes to the trip?"
+    "fr": "Qui dirait « je connais un raccourci », ajouterait quarante minutes, puis t'engueulerait de l'avoir écouté ?",
+    "en": "Who says 'I know a shortcut', adds forty minutes to the trip, then gets mad at YOU for trusting them?"
   },
   {
     "fr": "Qui te contredirait sur TON livre préféré en n'ayant vu que la bande-annonce du film ?",
     "en": "Who would argue with you about YOUR favourite book having only seen the film's trailer?"
   },
   {
-    "fr": "Qui réveillerait tout l'appart à 3h du matin pour un débat urgent sur les lasagnes ?",
-    "en": "Who would wake the whole flat at 3 a.m. for an urgent debate about lasagna?"
+    "fr": "Qui te réveillerait à 3h du mat pour un débat urgent sur les lasagnes, perdrait le débat, et te ferait la tête au réveil ?",
+    "en": "Who wakes you at 3 a.m. for an emergency lasagna debate, loses the debate, then doesn't speak to you at breakfast?"
   },
   {
     "fr": "Qui te ferait embaucher pour toucher la prime de cooptation, puis nierait te connaître ?",
     "en": "Who would refer you for the hiring bonus, then deny knowing you by week two?"
   },
   {
-    "fr": "Qui t'enverrait « joyeux anniv 🎂 » deux jours en retard, copié-collé de l'an dernier, même faute ?",
-    "en": "Who sends 'happy birthday!!' two days late, copy-pasted from last year — same typo included?"
+    "fr": "Qui t'enverrait « joyeu anniv 🎂 » deux jours en retard, copié-collé de l'an dernier, même faute ?",
+    "en": "Who sends 'happy birthdya!!' two days late, copy-pasted from last year — same typo included?"
   },
   {
     "fr": "Qui jurerait « j'ai pas faim », commanderait rien, puis mangerait 60 % de TES frites ?",
@@ -203,36 +203,36 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who brags about 'running a marathon' that was a walked 5K with a McDonald's stop in the middle?"
   },
   {
-    "fr": "Qui ferait répéter ton prénom trois fois puis t'appellerait « chef » toute la soirée ?",
-    "en": "Who would ask your name three times and then just call you 'chief' all night?"
+    "fr": "Qui connaît ton prénom depuis huit ans et te présente encore comme « le pote, là » ?",
+    "en": "Who has known your name for eight years and still introduces you as 'this is... my mate'?"
   },
   {
-    "fr": "Qui décréterait un deuil national d'une semaine pour la défaite de son équipe, interdiction de rire ?",
-    "en": "Who declares a national week of mourning when their team loses — laughter strictly forbidden?"
+    "fr": "Qui décréterait un deuil national d'une semaine après la défaite de son équipe, et te punirait d'avoir ri ?",
+    "en": "Who declares a national week of mourning when their team loses, then genuinely punishes you for laughing?"
   },
   {
     "fr": "Qui checkerait ses notifs pendant TON éloge funèbre... qu'il avait accepté d'écrire ?",
     "en": "Who would check their notifications during YOUR eulogy — the eulogy they volunteered to give?"
   },
   {
-    "fr": "Qui revendrait ton cadeau sur un site où tu peux littéralement voir l'annonce ?",
-    "en": "Who would resell your gift on a site where you can literally see the listing?"
+    "fr": "Qui revendrait ton cadeau sur un site où tu peux littéralement voir l'annonce, avec la mention « jamais servi » ?",
+    "en": "Who resells your gift where you can literally see the listing — marked 'never used, no offers'?"
   },
   {
-    "fr": "Qui affirmerait savoir skier jusqu'en haut du télésiège, et plus du tout après ?",
-    "en": "Who would claim they can ski right up until the top of the chairlift, and not an inch further?"
+    "fr": "Qui jurerait que « la rouge, ça passe », t'abandonnerait au premier virage, et te filmerait depuis le restau d'altitude ?",
+    "en": "Who swears 'the red run is fine', abandons you at the first bend, then films your descent from the mountain bar?"
   },
   {
     "fr": "Qui te ferait la leçon sur tes finances en étant lui-même à découvert depuis 2022 ?",
     "en": "Who lectures YOU about budgeting while their own account has been overdrawn since 2022?"
   },
   {
-    "fr": "Qui se lèverait à 6h en vacances pour réserver les transats... et se rendormirait dessus ?",
-    "en": "Who would wake at 6 a.m. on holiday to claim the sunbeds, then fall back asleep on them?"
+    "fr": "Qui se lèverait à 6h pour « réserver les transats du groupe », puis les céderait à des inconnus plus sympas avant ton réveil ?",
+    "en": "Who gets up at 6 a.m. to 'secure the group's sunbeds', then hands them to friendlier strangers before you're even awake?"
   },
   {
-    "fr": "Qui collerait un panneau « NE PAS TOUCHER » sur son yaourt dans le frigo commun ?",
-    "en": "Who would label their yogurt 'DO NOT TOUCH' in the shared fridge?"
+    "fr": "Qui collerait « NE PAS TOUCHER » sur son yaourt, tout en finissant TON fromage sans demander ?",
+    "en": "Who labels their yogurt 'DO NOT TOUCH' in the shared fridge while actively finishing YOUR cheese?"
   },
   {
     "fr": "Qui vendrait LA photo dossier du groupe pour 50 balles, sans négocier ?",
@@ -247,20 +247,20 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who posts the photo where they look unreal and the rest of you look like evidence?"
   },
   {
-    "fr": "Qui ressortirait ta pire anecdote de soirée à table devant tes parents ?",
-    "en": "Who would bring up your most embarrassing party story at dinner with your parents?"
+    "fr": "Qui ressortirait l'histoire du nouvel an 2023 devant ta mère, puis dirait « bah quoi, c'est drôle » ?",
+    "en": "Who brings up the New Year's 2023 incident in front of your mum, then goes 'what? it's funny'?"
   },
   {
-    "fr": "Qui débarquerait au camping avec un sèche-cheveux et trois rallonges ?",
-    "en": "Who would show up to a campsite with a hair dryer and three extension cords?"
+    "fr": "Qui ferait disjoncter tout le camping avec son sèche-cheveux, et t'enverrait TOI t'expliquer à l'accueil pendant qu'il finit son brushing ?",
+    "en": "Who blows the whole campsite's power with a hair dryer, then sends YOU to apologise at reception mid-blow-dry?"
   },
   {
-    "fr": "Qui dirait « fais-moi confiance » juste avant la pire décision du week-end ?",
-    "en": "Who says 'trust me' right before the weekend's worst decision?"
+    "fr": "Qui a déjà dit « fais-moi confiance », et c'est comme ça que le week-end a coûté 280 € par personne ?",
+    "en": "Who said 'trust me' once, and that's the origin story of the group's most expensive weekend?"
   },
   {
-    "fr": "Qui se ferait bannir d'un escape game pour avoir démonté un vrai mur ?",
-    "en": "Who would get banned from an escape room for dismantling an actual wall?"
+    "fr": "Qui démonterait un vrai mur à l'escape game, donnerait TON nom à l'accueil, puis débrieferait « vos erreurs » dans la voiture ?",
+    "en": "Who dismantles an actual wall in the escape room, gives YOUR name at the desk, then reviews the team's 'mistakes' in the car?"
   },
   {
     "fr": "Qui a 12 000 photos dans son tél mais « retrouverait pas » celle qui t'innocente ?",
@@ -275,400 +275,400 @@ export const PIRES_POTES_PACK: ContentPack<TracerContent> = {
     "en": "Who would rage-quit their job at noon and call the boss back by dinner?"
   },
   {
-    "fr": "Qui achèterait des places de concert sans vérifier ni la date ni la ville ?",
-    "en": "Who would buy concert tickets without checking the date or the city?"
+    "fr": "Qui achèterait les places de concert du groupe sans vérifier ni la date ni la ville, puis appellerait ça « une aventure » ?",
+    "en": "Who buys the whole group's concert tickets without checking the date or city, then rebrands it as 'an adventure'?"
   },
   {
-    "fr": "Qui enverrait le screenshot d'une conversation... à la personne concernée ?",
-    "en": "Who would send the screenshot of a convo straight to the person it's about?"
+    "fr": "Qui enverrait le screen de la conversation à la personne concernée, puis tenterait « c'était pas pour toi mdrr » ?",
+    "en": "Who sends the screenshot straight to the person it's about, then tries 'omg ignore that, wrong chat'?"
   },
   {
     "fr": "Qui réclamerait ses 2,30 € sur l'appli de remboursement à 7h du matin ?",
-    "en": "Who would fire off a 7 a.m. payment request for the $2.30 you owe them?"
+    "en": "Who would fire off a 7 a.m. payment request for the £2.30 you owe them?"
   },
   {
     "fr": "Qui tiendrait un registre détaillé des retards de tout le monde, sauf des siens ?",
     "en": "Who would keep a detailed log of everyone's lateness except their own?"
   },
   {
-    "fr": "Qui gagnerait au loto et le cacherait au groupe pendant six mois ?",
-    "en": "Who would win the lottery and hide it from the group for six months?"
+    "fr": "Qui gagnerait au loto, le cacherait au groupe six mois, et continuerait à te devoir 20 balles tout du long ?",
+    "en": "Who would win the lottery, hide it from the group for six months, and still owe you twenty quid the whole time?"
   },
   {
     "fr": "Qui essaierait de payer avec une photo de billet « parce que c'est pareil » ?",
     "en": "Who would try to pay with a photo of cash because 'it's basically the same thing'?"
   },
   {
-    "fr": "Qui commencerait le yoga lundi et deviendrait coach de vie mercredi ?",
-    "en": "Who would start yoga on Monday and become a life coach by Wednesday?"
+    "fr": "Qui commencerait le yoga lundi, deviendrait coach de vie mercredi, et te facturerait la première séance ?",
+    "en": "Who starts yoga on Monday, becomes a life coach by Wednesday, and invoices you for the first session?"
   },
   {
-    "fr": "Qui raterait la photo de groupe parce qu'il vérifiait son reflet dans une vitrine ?",
-    "en": "Who would miss the group photo because they were checking their reflection in a shop window?"
+    "fr": "Qui raterait la photo de groupe en checkant son reflet, puis exigerait qu'on la refasse pour lui ?",
+    "en": "Who misses the group photo checking their reflection, then demands a reshoot just for them?"
   },
   {
-    "fr": "Qui réglerait un débat au pierre-feuille-ciseaux puis contesterait le résultat ?",
-    "en": "Who would settle a debate with rock-paper-scissors and then contest the result?"
+    "fr": "Qui réglerait le débat au pierre-feuille-ciseaux, perdrait, puis exigerait « le meilleur des sept » jusqu'à la victoire ?",
+    "en": "Who settles the argument with rock-paper-scissors, loses, and demands best-of-seven until they win?"
   },
   {
-    "fr": "Qui prêterait TA veste à quelqu'un d'autre sans te demander ?",
-    "en": "Who would lend YOUR jacket to someone else without asking you?"
+    "fr": "Qui prêterait TA veste préférée à un inconnu de la soirée, puis te traiterait de matérialiste quand tu la réclames ?",
+    "en": "Who lends YOUR favourite jacket to a stranger at the party, then calls you dramatic for asking where it went?"
   },
   {
-    "fr": "Qui s'incrusterait à un mariage juste pour la pièce montée ?",
-    "en": "Who would crash a wedding purely for the cake?"
+    "fr": "Qui s'incrusterait au mariage d'inconnus pour la pièce montée, finirait sur la photo officielle, et serait invité au baptême ?",
+    "en": "Who crashes a stranger's wedding for the cake, ends up in the official photos, and gets invited to the christening?"
   },
   {
-    "fr": "Qui rendrait un covoiturage de six heures interminable avec son album de reprises a cappella ?",
-    "en": "Who would make a six-hour carpool feel eternal with their a cappella covers album?"
+    "fr": "Qui confisquerait l'aux dans TA voiture, mettrait 40 minutes de ses sons, puis couperait le tien au refrain « ça cassait l'ambiance » ?",
+    "en": "Who seizes the aux in YOUR car, runs 40 minutes of their own queue, then skips your one song mid-chorus 'because it was killing the vibe'?"
   },
   {
-    "fr": "Qui dirait « je gère l'itinéraire » puis demanderait « on est où, là ? » au bout d'une heure ?",
-    "en": "Who would claim 'I've got the route handled' and ask 'wait, where are we?' an hour in?"
+    "fr": "Qui te jurerait « le vol est à 14h », découvrirait au comptoir qu'il a décollé à 11h40, et lancerait « au pire, on visite l'aéroport » ?",
+    "en": "Who swears the flight's at 2 p.m., learns at the desk it left at 11:40, then pitches 'technically the airport IS the trip'?"
   },
   {
-    "fr": "Qui pleurerait devant un film d'action et accuserait « les oignons d'à côté » ?",
-    "en": "Who would cry during an action movie and blame 'the onions next door'?"
+    "fr": "Qui jurerait que « ça va très bien » avec la voix qui tremble, puis enverrait un pavé de quatorze paragraphes à 2h du matin ?",
+    "en": "Who insists 'I'm fine' with a shaking voice, then drops a fourteen-paragraph essay in the group chat at 2 a.m.?"
   },
   {
-    "fr": "Qui essaierait de caresser le cygne malgré le panneau et l'avis général ?",
-    "en": "Who would try to pet the swan despite the sign and everyone's advice?"
+    "fr": "Qui caresserait le cygne malgré le panneau, perdrait le combat, puis t'en voudrait d'avoir filmé au lieu d'aider ?",
+    "en": "Who pets the swan despite the sign, loses the fight, then blames YOU for filming instead of helping?"
   },
   {
-    "fr": "Qui mettrait « entrepreneur » dans sa bio après avoir vendu une étagère sur Vinted ?",
-    "en": "Who would put 'entrepreneur' in their bio after selling one shelf online?"
+    "fr": "Qui mettrait « CEO » dans sa bio après une étagère vendue sur Vinted, puis te relancerait deux fois pour liker la page pro ?",
+    "en": "Who puts 'founder & CEO' in the bio after selling one shelf, then chases you twice to like the business page?"
   },
   {
-    "fr": "Qui répondrait « moi » à voix haute à chaque question de ce jeu ?",
-    "en": "Who would answer 'me' out loud to every single question in this game?"
+    "fr": "Qui répondrait « bah moi évidemment » à chaque carte, puis se vexerait quand personne ne vote pour lui ?",
+    "en": "Who answers 'me, obviously' to every single card, then gets genuinely hurt when nobody votes for them?"
   },
   {
-    "fr": "Qui défierait un enfant de huit ans à Mario Kart et savourerait vraiment sa victoire ?",
-    "en": "Who would challenge an 8-year-old to Mario Kart and genuinely savor the win?"
+    "fr": "Qui jetterait sa manette au sol en perdant à Mario Kart, puis accuserait le petit cousin de 8 ans d'avoir « la bonne télé » ?",
+    "en": "Who slams the controller after losing at Mario Kart, then accuses the 8-year-old cousin of having 'the good half of the screen'?"
   },
   {
-    "fr": "Qui raconterait tellement sa vie au coiffeur qu'il repartirait avec une coupe non prévue ?",
-    "en": "Who would overshare at the hairdresser so long they'd leave with an unplanned haircut?"
+    "fr": "Qui raconterait TES problèmes de couple à son coiffeur, prénoms inclus, « parce qu'il donne des super conseils » ?",
+    "en": "Who briefs their barber on YOUR relationship drama, full names included, 'because he gives elite advice'?"
   },
   {
-    "fr": "Qui transformerait « je passe juste dire bonjour » en squat de cinq heures ?",
-    "en": "Who would turn 'just popping in to say hi' into a five-hour residency?"
+    "fr": "Qui transformerait « je passe juste dire bonjour » en squat de cinq heures, et finirait par noter le contenu de TON frigo ?",
+    "en": "Who turns 'just popping in to say hi' into a five-hour residency, then starts reviewing the contents of YOUR fridge?"
   },
   {
-    "fr": "Qui appellerait les pompiers pour une araignée « anormalement déterminée » ?",
-    "en": "Who would call emergency services over an 'unusually determined' spider?"
+    "fr": "Qui t'appellerait à 2h du mat pour une araignée « anormalement déterminée », puis te filmerait l'affronter depuis le couloir ?",
+    "en": "Who calls you at 2 a.m. about an 'unusually determined' spider, then films you fighting it from behind the door?"
   },
   {
-    "fr": "Qui corrigerait la grammaire du message d'excuses qu'on vient de lui envoyer ?",
-    "en": "Who would correct the grammar of an apology text sent to them?"
+    "fr": "Qui répondrait « *je *sache » au message d'excuses que tu viens de lui envoyer, puis attendrait quand même TES excuses ?",
+    "en": "Who replies '*you're' to the apology you just sent them, then still waits for YOU to say sorry first?"
   },
   {
-    "fr": "Qui se bloquerait le dos en faisant une démonstration de « comment bien porter » ?",
-    "en": "Who would throw out their back demonstrating 'proper lifting technique'?"
+    "fr": "Qui se bloquerait le dos en t'expliquant « comment bien porter », puis superviserait le reste de TON déménagement depuis le canapé ?",
+    "en": "Who throws their back out demonstrating 'proper lifting technique', then supervises the rest of YOUR move from the sofa?"
   },
   {
-    "fr": "Qui viendrait au mariage de son cousin en jogging « parce que c'est de la famille » ?",
-    "en": "Who would show up to their cousin's wedding in sweatpants because 'it's just family'?"
+    "fr": "Qui viendrait au mariage de son cousin en jogging-claquettes, puis déclencherait une guerre sur le plan de table ?",
+    "en": "Who turns up to their cousin's wedding in trackies and sliders, then starts a war over the seating plan?"
   },
   {
-    "fr": "Qui donnerait à son chien un surnom plus long que son vrai nom ?",
-    "en": "Who would give their dog a nickname longer than its actual name?"
+    "fr": "Qui classerait ouvertement le chien de la famille au-dessus de son propre frère, et défendrait le classement à table ?",
+    "en": "Who openly ranks the family dog above their actual brother and defends the ranking at dinner?"
   },
   {
-    "fr": "Qui ferait croire à sa grand-mère qu'il a « un poste important » impossible à expliquer ?",
-    "en": "Who would tell grandma they have 'a very important job' that they cannot explain?"
+    "fr": "Qui laisserait mamie croire qu'il est « dans la finance » alors qu'il revend des coques de téléphone sur Vinted ?",
+    "en": "Who lets grandma believe they're 'in finance' when the empire is reselling phone cases on Vinted?"
   },
   {
-    "fr": "Qui s'achèterait du matériel de pro pour un hobby commencé avant-hier ?",
-    "en": "Who would buy full professional gear for a hobby they started the day before yesterday?"
+    "fr": "Qui claquerait 800 balles en matos photo, se proposerait pour TON mariage, et livrerait neuf clichés flous du buffet ?",
+    "en": "Who drops £800 on camera gear, volunteers to shoot YOUR wedding, and delivers nine blurry photos of the buffet?"
   },
   {
-    "fr": "Qui se disputerait avec l'assistant vocal et lui ferait la tête ensuite ?",
-    "en": "Who would argue with the voice assistant and then give it the silent treatment?"
+    "fr": "Qui perdrait un débat contre l'assistant vocal et te prendrait à témoin : « non mais t'entends comment il me parle ? »",
+    "en": "Who loses an argument with the voice assistant, then pulls you in as a witness: 'no, see how it talks to me?'"
   },
   {
-    "fr": "Qui raterait le début du film parce que le choix des snacks est « une science » ?",
-    "en": "Who would miss the start of the movie because snack selection is 'a science'?"
+    "fr": "Qui débarquerait au ciné 40 minutes en retard, seau de popcorn au bras, et demanderait « j'ai raté quoi ? » pendant le twist ?",
+    "en": "Who arrives 40 minutes into the film, climbs over the whole row holding a full meal deal, and asks 'what did I miss?' during the twist?"
   },
   {
-    "fr": "Qui inscrirait toute la famille à un cours de zumba sans demander à personne ?",
-    "en": "Who would sign the whole family up for zumba without asking a single person?"
+    "fr": "Qui inscrirait toute la famille à une course caritative, posterait l'affiche en story, puis serait le seul à pas se pointer ?",
+    "en": "Who signs the whole family up for a charity 5K, posts the poster in their story, then is the only one who doesn't show?"
   },
   {
-    "fr": "Qui se vexerait de ne pas être invité à un truc qu'il aurait refusé de toute façon ?",
-    "en": "Who would be offended about not being invited to something they'd have refused anyway?"
+    "fr": "Qui se vexerait de pas être invité à un truc qu'il aurait refusé, et bouderait jusqu'à obtenir des excuses publiques dans le groupe ?",
+    "en": "Who gets offended about missing an invite they'd have declined anyway, then sulks until the group chat issues a formal apology?"
   },
   {
-    "fr": "Qui commenterait chaque scène du film comme un consultant sportif ?",
-    "en": "Who would provide live commentary on a movie like a sports analyst?"
+    "fr": "Qui imposerait LE film « tu vas adorer, fais-moi confiance », s'endormirait à la minute 12, et se réveillerait pile pour critiquer la fin ?",
+    "en": "Who forces THE film on everyone — 'trust me, you'll love it' — falls asleep at minute 12, and wakes up just in time to slate the ending?"
   },
   {
     "fr": "Qui prendrait le dernier mot d'une dispute... par SMS, deux jours après ?",
     "en": "Who would claim the last word in an argument... by text, two days later?"
   },
   {
-    "fr": "Qui s'autoproclamerait capitaine du pédalo et exigerait le titre toute la journée ?",
-    "en": "Who would self-appoint as pedal-boat captain and demand the title all day?"
+    "fr": "Qui s'autoproclamerait capitaine du pédalo, arrêterait de pédaler au bout de deux minutes, et te crierait le cap ?",
+    "en": "Who self-appoints as pedal-boat captain, stops pedalling after two minutes, then spends an hour shouting headings at you?"
   },
   {
-    "fr": "Qui ramènerait des cailloux « décoratifs » de chaque voyage jusqu'à saturation de l'étagère ?",
-    "en": "Who would bring home 'decorative' rocks from every trip until the shelf gives up?"
+    "fr": "Qui réserverait l'Airbnb « 8 couchages » avec un seul vrai lit, et se l'attribuerait avant même l'atterrissage ?",
+    "en": "Who books the 'sleeps 8' Airbnb with one actual bed and assigns it to themselves before the plane lands?"
   },
   {
-    "fr": "Qui dirait à un bébé « toi au moins tu me comprends » en pleine conversation ?",
-    "en": "Who would tell a baby 'you get me, you really do' mid-conversation?"
+    "fr": "Qui dirait à un bébé « toi au moins tu me comprends » pendant que TOI tu lui racontes une vraie galère ?",
+    "en": "Who tells a baby 'you're the only one who gets me' while YOU'RE mid-sentence about an actual crisis?"
   },
   {
-    "fr": "Qui réorganiserait le lave-vaisselle derrière toi en soupirant bien fort ?",
-    "en": "Who would re-load the dishwasher behind you while sighing loudly?"
+    "fr": "Qui vide et recharge le lave-vaisselle derrière toi avec des soupirs assez forts pour que toute la maison sache que tu as échoué ?",
+    "en": "Who silently re-loads the dishwasher behind you with sighs loud enough for the whole house to know you failed?"
   },
   {
-    "fr": "Qui prétendrait détester le karaoké puis refuserait de rendre le micro ?",
-    "en": "Who would claim to hate karaoke and then refuse to surrender the mic?"
+    "fr": "Qui prétendrait détester le karaoké, puis prendrait le micro en otage sur du Céline Dion jusqu'à la fermeture ?",
+    "en": "Who claims to hate karaoke, then holds the mic hostage through three Adele songs until closing time?"
   },
   {
-    "fr": "Qui commencerait chaque phrase par « alors moi, perso » même quand on ne demande rien ?",
-    "en": "Who starts every sentence with 'well, personally, I' even when nobody asked?"
+    "fr": "Qui couperait ton histoire avec « ah moi pareil sauf que », puis raconterait une version où il est le héros et toi le figurant ?",
+    "en": "Who interrupts your story with 'oh same, except', then tells a version where they're the hero and you're an extra?"
   },
   {
-    "fr": "Qui suivrait un tuto de huit minutes et improviserait quand même la moitié de la recette ?",
-    "en": "Who would watch an 8-minute recipe tutorial and still improvise half of it?"
+    "fr": "Qui « améliorerait » la recette de ta grand-mère devant toi, puis encaisserait les compliments à ta place ?",
+    "en": "Who 'fixes' your grandma's recipe right in front of you, then pockets the compliments on your behalf?"
   },
   {
     "fr": "Qui préparerait un PowerPoint pour convaincre le groupe d'une destination de vacances ?",
     "en": "Who would build a PowerPoint to pitch the group's next holiday destination?"
   },
   {
-    "fr": "Qui appellerait « investissement » l'achat d'une troisième paire de baskets identiques ?",
-    "en": "Who would call a third identical pair of sneakers 'an investment'?"
+    "fr": "Qui te ferait la morale sur ton café à 3 € le matin, depuis le siège de la voiture qu'il vient de financer sur 84 mois ?",
+    "en": "Who lectures you about your £3 morning coffee, from the driver's seat of the car they just financed over 84 months?"
   },
   {
-    "fr": "Qui poserait un jour de congé pour la sortie d'un jeu vidéo et le nierait au bureau ?",
-    "en": "Who would take a day off for a video game launch and deny it at the office?"
+    "fr": "Qui poserait sa journée pour la sortie d'un jeu pile le jour de TA soutenance, avec un « je pense fort à toi » ?",
+    "en": "Who books the day off for a game launch on the day of YOUR graduation, then sends 'there in spirit x'?"
   },
   {
-    "fr": "Qui chercherait son téléphone partout en s'éclairant avec la lampe... du téléphone ?",
-    "en": "Who would search the whole house for their phone using the phone's own flashlight?"
+    "fr": "Qui regarderait par-dessus ton épaule quand tu tapes ton code, « par réflexe », et le connaîtrait par cœur ?",
+    "en": "Who watches you type your passcode 'out of habit' and definitely has it memorised by now?"
   },
   {
-    "fr": "Qui se déclarerait « pas du tout compétiteur » puis retournerait le plateau de jeu ?",
-    "en": "Who would declare 'I'm not competitive at all' and then flip the game board?"
+    "fr": "Qui jurerait « c'est qu'un jeu, on s'amuse », puis arrêterait de parler à la table pendant 40 minutes après une défaite au Uno ?",
+    "en": "Who swears 'it's just a game, chill', then refuses to speak to the table for 40 minutes after losing at Uno?"
   },
   {
-    "fr": "Qui assisterait à une visio importante en chemise... et bas de pyjama ?",
-    "en": "Who would attend an important video call in a dress shirt... and pajama bottoms?"
+    "fr": "Qui se mettrait en arrêt maladie le jour de TON déménagement, puis posterait une story au lac à 15h ?",
+    "en": "Who calls in sick on the day of YOUR move, then posts a story from the beach at 3 p.m.?"
   },
   {
-    "fr": "Qui apprendrait trois mots d'italien et commanderait avec l'accent et les gestes ?",
-    "en": "Who would learn three words of Italian and order with the full accent and hand gestures?"
+    "fr": "Qui apprendrait trois mots d'italien, commanderait avec l'accent et les gestes, puis corrigerait TA prononciation ?",
+    "en": "Who learns three words of Italian, orders with the full accent and hand gestures, then corrects YOUR pronunciation?"
   },
   {
-    "fr": "Qui s'autoproclamerait témoin de mariage avant même qu'on le lui demande ?",
-    "en": "Who would appoint themselves wedding witness before anyone even asked?"
+    "fr": "Qui s'autoproclamerait témoin de TON mariage, organiserait l'enterrement de vie de garçon sans te demander, et inviterait SES potes ?",
+    "en": "Who appoints themselves your best man, plans your stag do without asking you, and fills the guest list with THEIR mates?"
   },
   {
-    "fr": "Qui se réinventerait en grand sportif chaque 1er janvier ?",
-    "en": "Who reinvents themselves as an elite athlete every January 1st?"
+    "fr": "Qui se réinventerait en marathonien chaque 1er janvier, puis te revendrait le vélo d'appart plein tarif en mars ?",
+    "en": "Who becomes an elite athlete every January 1st, then sells you the exercise bike at full price by March?"
   },
   {
-    "fr": "Qui ferait demi-tour sur l'autoroute des vacances pour vérifier la cafetière ?",
-    "en": "Who would U-turn the holiday road trip to double-check the coffee maker is off?"
+    "fr": "Qui ferait demi-tour à 100 bornes pour vérifier la cafetière, puis diviserait le péage du détour sur l'appli ?",
+    "en": "Who U-turns the road trip 60 miles in to check the coffee maker, then splits the detour's petrol on the app?"
   },
   {
-    "fr": "Qui présenterait ses plantes par leur prénom à chaque visite ?",
-    "en": "Who would introduce their plants by name to every guest?"
+    "fr": "Qui parlerait de transformer la maison de mamie en « concept rentable » avant la fin de l'enterrement ?",
+    "en": "Who starts pitching grandma's house as 'a real investment opportunity' before the wake is even over?"
   },
   {
-    "fr": "Qui s'investirait à fond dans les répétitions de la choré de mariage puis improviserait le jour J ?",
-    "en": "Who would commit hard to the wedding dance rehearsals and then freestyle on the day?"
+    "fr": "Qui sécherait toutes les répétitions de la choré, improviserait au centre le jour J, et volerait la vedette aux mariés ?",
+    "en": "Who skips every dance rehearsal, freestyles front and centre on the day, and upstages the actual couple?"
   },
   {
-    "fr": "Qui terminerait sa carrière sur un « répondre à tous » catastrophique ?",
-    "en": "Who would end their career with one catastrophic 'reply all'?"
+    "fr": "Qui terminerait sa carrière sur un « répondre à tous » contenant le surnom du DRH ?",
+    "en": "Who ends their career with one 'reply all' containing the nickname they use for HR?"
   },
   {
     "fr": "Qui te ferait goûter sa sauce « pas épicée du tout » qui arrache la gorge ?",
     "en": "Who would make you try their 'not spicy at all' sauce that melts your throat?"
   },
   {
-    "fr": "Qui raterait son arrêt de bus parce qu'il gagnait un débat imaginaire ?",
-    "en": "Who would miss their bus stop because they were busy winning an imaginary argument?"
+    "fr": "Qui rejouerait dans sa tête une dispute de 2021 sous la douche, gagnerait enfin, et sortirait avec la même tête que s'il l'avait perdue ?",
+    "en": "Who reruns a 2021 argument in the shower, finally wins it, and steps out looking exactly like they just lost it?"
   },
   {
-    "fr": "Qui réserverait « le resto parfait » qui s'avère fermé depuis 2019 ?",
-    "en": "Who would book 'the perfect restaurant' that turns out to have closed in 2019?"
+    "fr": "Qui te vendrait « le resto parfait, fais-moi confiance », fermé depuis 2019, puis t'accuserait d'avoir mal noté l'adresse ?",
+    "en": "Who hypes 'the perfect spot, trust me', walks you to a restaurant that shut in 2019, then blames YOUR map-reading?"
   },
   {
-    "fr": "Qui annoncerait « j'ai une anecdote de fou » puis oublierait la fin en plein milieu ?",
-    "en": "Who would announce 'I have the craziest story' and forget the ending halfway through?"
+    "fr": "Qui annoncerait « j'ai une anecdote de fou », exigerait le silence général, puis oublierait la fin au milieu ?",
+    "en": "Who announces 'okay this story is insane', demands full table silence, then forgets the ending halfway through?"
   },
   {
-    "fr": "Qui paierait un billet coupe-file et arriverait quand même en retard ?",
-    "en": "Who would pay for skip-the-line tickets and still show up late?"
+    "fr": "Qui paierait le billet coupe-file pour tout le monde, arriverait après que la file normale soit déjà rentrée, et exigerait quand même un merci ?",
+    "en": "Who buys skip-the-line tickets for everyone, turns up after the normal queue's already inside, and still expects a thank you?"
   },
   {
-    "fr": "Qui défendrait l'ananas sur la pizza jusqu'à y perdre des amitiés ?",
-    "en": "Who would defend pineapple on pizza to the point of losing friendships?"
+    "fr": "Qui ferait un scandale au serveur à propos de TON plat, que toi tu trouvais très bien ?",
+    "en": "Who files a full formal complaint with the waiter about YOUR dish — the one you were happily eating?"
   },
   {
-    "fr": "Qui promettrait d'arroser tes plantes et te rendrait un herbier ?",
-    "en": "Who would promise to water your plants and hand you back a dried-flower collection?"
+    "fr": "Qui garderait tes plantes deux semaines, te rendrait trois cadavres, et te dirait « franchement elles allaient déjà pas bien » ?",
+    "en": "Who plant-sits for two weeks, hands you back three corpses, and goes 'honestly they were already on their way out'?"
   },
   {
-    "fr": "Qui appellerait « rangement » le fait de déplacer le bazar dans une autre pièce ?",
-    "en": "Who calls it 'tidying up' when they just relocate the mess to another room?"
+    "fr": "Qui appellerait « ménage » le fait d'empiler TES affaires sur TON lit, puis fermerait la porte pour pas voir le résultat ?",
+    "en": "Who calls it 'tidying' when they pile YOUR stuff on YOUR bed, then close the door so the mess stops existing?"
   },
   {
-    "fr": "Qui jurerait de garder un secret et craquerait avant le dessert ?",
-    "en": "Who would swear to keep a secret and crack before dessert?"
+    "fr": "Qui a juré de garder ton secret, sachant que deux personnes dans cette pièce sont déjà au courant ? Faites le calcul.",
+    "en": "Who swore to keep your secret — and two people in this room already know it. Do the maths."
   },
   {
-    "fr": "Qui louerait une voiture de luxe pour un mariage et roulerait à 40 km/h par peur ?",
-    "en": "Who would rent a luxury car for a wedding and drive it at 25 mph out of pure fear?"
+    "fr": "Qui louerait une voiture de luxe pour le mariage, roulerait à 40 par peur, puis te facturerait la moitié de « l'expérience » ?",
+    "en": "Who rents a luxury car for the wedding, drives it at 20 mph in pure terror, then bills you half for 'the experience'?"
   },
   {
-    "fr": "Qui mettrait le groupe en sourdine six mois puis répondrait à un message de 2023 ?",
-    "en": "Who would mute the group chat for six months and then reply to a message from 2023?"
+    "fr": "Qui mettrait le groupe en sourdine six mois, raterait ton déménagement et tes 30 ans, puis répondrait « ah merde j'avais zappé » à un message de 2023 ?",
+    "en": "Who mutes the group for six months, ghosts your move and your 30th, then replies 'omg sorry just saw this' to a message from 2023?"
   },
   {
-    "fr": "Qui jouerait les sommeliers au supermarché devant le rayon à 4 € ?",
-    "en": "Who would do the full sommelier act over a $6 supermarket bottle?"
+    "fr": "Qui jouerait les sommeliers sur une bouteille à 4 €, ferait tourner le vin, fermerait les yeux, puis dirait « ouais... le terroir » ?",
+    "en": "Who does the full sommelier act on a £6 bottle — swirls it, closes their eyes, then nods 'yeah... you can really taste the terroir'?"
   },
   {
     "fr": "Qui finirait tout habillé dans la piscine en jurant que c'était calculé ?",
     "en": "Who would end up fully clothed in the pool swearing it was all part of the plan?"
   },
   {
-    "fr": "Qui ferait une conférence sur l'univers après avoir vu un seul documentaire ?",
-    "en": "Who would deliver a lecture on the universe after watching exactly one documentary?"
+    "fr": "Qui ferait une conférence sur l'univers après UN documentaire, puis te lâcherait « renseigne-toi » quand tu corriges ?",
+    "en": "Who lectures the table on the universe off one documentary, then tells YOU to 'do your research' when you correct them?"
   },
   {
-    "fr": "Qui plaquerait tout pour un tour du monde et reviendrait au bout de neuf jours ?",
-    "en": "Who would quit everything for a world tour and be back home in nine days?"
+    "fr": "Qui annoncerait son grand départ « sac à dos, zéro plan » en story, et reviendrait squatter ton canapé avant la fin du mois ?",
+    "en": "Who announces the big 'backpack, no plan, finding myself' departure in a story, and is back crashing on your sofa before the month's out?"
   },
   {
-    "fr": "Qui jurerait que le plat mystère du frigo est « encore bon » malgré l'odeur ?",
-    "en": "Who would insist the mystery dish in the fridge is 'still fine' despite the smell?"
+    "fr": "Qui goûterait TON dessert « juste pour vérifier », en engloutirait la moitié, et rendrait son verdict : « mouais » ?",
+    "en": "Who 'just tastes' your dessert, demolishes half of it, and delivers the verdict: 'it's mid'?"
   },
   {
-    "fr": "Qui ferait une croisière entière sans jamais quitter le buffet ?",
-    "en": "Who would do an entire cruise without ever leaving the buffet?"
+    "fr": "Qui ferait une croisière entière sans quitter le buffet, puis la raconterait comme un voyage culturel ?",
+    "en": "Who does an entire cruise without leaving the buffet, then recaps it as a cultural experience?"
   },
   {
-    "fr": "Qui demanderait le code wifi à tes parents avant de leur dire bonjour ?",
-    "en": "Who would ask your parents for the wifi password before saying hello?"
+    "fr": "Qui franchirait la porte de tes parents avec « bonjour, c'est quoi le wifi ? » dans la même phrase, puis se brancherait sur LEUR chargeur ?",
+    "en": "Who walks into your parents' place with 'hi, what's the wifi?' in a single breath, then plugs into THEIR good charger?"
   },
   {
-    "fr": "Qui raconterait un rêve pendant vingt minutes en répétant « et là, c'est bizarre » ?",
-    "en": "Who would recap a dream for twenty minutes with constant 'and THIS is where it gets weird'?"
+    "fr": "Qui te raconterait un rêve pendant vingt minutes, finirait par « bon en vrai j'ai oublié la fin », et t'en voudrait de pas avoir tenu en haleine ?",
+    "en": "Who narrates a dream at you for twenty minutes, ends on 'anyway I forget how it ended', and blames YOU for losing interest?"
   },
   {
-    "fr": "Qui prendrait un troisième dessert « pour accompagner » alors que tout le monde a fini ?",
-    "en": "Who would order a third dessert 'to keep the table company' after everyone else has finished?"
+    "fr": "Qui commanderait « juste un café », picorerait dans les trois assiettes autour, puis lâcherait « j'sais pas comment vous mangez autant » ?",
+    "en": "Who orders 'just a black coffee', grazes off all three plates around them, then goes 'I don't know how you lot eat so much'?"
   },
   {
     "fr": "Qui raterait sa station de métro à cause d'un débat en commentaires avec un inconnu ?",
-    "en": "Who would miss their subway stop over a comment-section battle with a total stranger?"
+    "en": "Who would miss their tube stop over a comment-section battle with a total stranger?"
   },
   {
-    "fr": "Qui prendrait un faux accent au téléphone pour annuler une réservation ?",
-    "en": "Who would fake an accent on the phone to cancel a reservation?"
+    "fr": "Qui te ferait appeler le resto à SA place pour annuler, prendrait un faux accent, puis raccrocherait en panique au premier « allô ? » ?",
+    "en": "Who makes YOU phone the restaurant to cancel for them, puts on a fake voice, then panic-hangs-up at the first 'hello?'?"
   },
   {
-    "fr": "Qui se créerait un deuxième compte pour liker ses propres publications ?",
-    "en": "Who would make a second account just to like their own posts?"
+    "fr": "Qui regarderait QUI a vu sa story, remarquerait que tu l'as zappée, et te le ressortirait trois semaines plus tard en pleine dispute ?",
+    "en": "Who checks exactly who watched their story, clocks that you skipped it, and brings it up three weeks later mid-argument?"
   },
   {
     "fr": "Qui arriverait à l'aéroport sans passeport mais avec trois tenues de rechange ?",
     "en": "Who would arrive at the airport with no passport but three backup outfits?"
   },
   {
-    "fr": "Qui s'improviserait guide touristique dans une ville où il n'a jamais mis les pieds ?",
-    "en": "Who would play tour guide in a city they have never set foot in?"
+    "fr": "Qui jouerait les guides locaux à Lisbonne avec un aplomb total, en te faisant passer trois fois devant la même place ?",
+    "en": "Who does the full local-guide act in Lisbon, fake backstory included, while walking you past the same square three times?"
   },
   {
     "fr": "Qui trahirait son équipe au loup-garou dès la première nuit, « juste pour voir » ?",
     "en": "Who would betray their own team in a deduction game on night one, 'just to see'?"
   },
   {
-    "fr": "Qui mettrait du ketchup sur un plat gastronomique sous le regard du chef ?",
-    "en": "Who would put ketchup on a gourmet dish while the chef is watching?"
+    "fr": "Qui mettrait du ketchup sur un plat gastronomique en regardant le chef droit dans les yeux ?",
+    "en": "Who puts ketchup on a tasting-menu dish while holding direct eye contact with the chef?"
   },
   {
     "fr": "Qui poserait « une dernière petite question » à 17h58 un vendredi ?",
     "en": "Who would raise 'one quick question' at 5:58 p.m. on a Friday?"
   },
   {
-    "fr": "Qui s'achèterait une guitare, apprendrait l'intro de « Wonderwall » et s'arrêterait là ?",
-    "en": "Who would buy a guitar, learn the intro to 'Wonderwall', and retire on the spot?"
+    "fr": "Qui s'achèterait une guitare, apprendrait l'intro de « Wonderwall », et te la rejouerait à chaque soirée depuis trois ans ?",
+    "en": "Who buys a guitar, learns the intro to 'Wonderwall', and has performed it at every party for three years straight?"
   },
   {
-    "fr": "Qui prendrait dix tickets de tombola et bouderait après avoir gagné un mug ?",
-    "en": "Who would buy ten raffle tickets and then sulk over winning a mug?"
+    "fr": "Qui gagnerait 100 balles sur le ticket à gratter acheté à deux, et trancherait : « techniquement, c'est moi qui ai gratté » ?",
+    "en": "Who wins £100 on the scratch card you bought together and rules 'technically, I did the scratching'?"
   },
   {
     "fr": "Qui viendrait dîner avec ses propres tupperwares « parce que les restes, c'est sacré » ?",
     "en": "Who would bring their own tupperware to a dinner party because 'leftovers are sacred'?"
   },
   {
-    "fr": "Qui réclamerait une minute de silence pour son téléphone tombé dans les toilettes ?",
-    "en": "Who would demand a moment of silence for their phone that fell in the toilet?"
+    "fr": "Qui ferait tomber son tel dans les toilettes, refuserait le riz, le ressortirait trois fois « pour voir », et porterait le deuil une semaine ?",
+    "en": "Who drops their phone in the toilet, refuses the rice trick, keeps fishing it back out 'to check', and then mourns it for a full week?"
   },
   {
-    "fr": "Qui se vanterait d'être « très nature » et paniquerait au premier moustique ?",
-    "en": "Who would brag about being 'so outdoorsy' and panic at the first mosquito?"
+    "fr": "Qui organiserait le trek « retour à l'essentiel », craquerait le premier soir, et prendrait l'unique chambre d'hôtel sans vote ?",
+    "en": "Who plans the 'back to basics' wilderness trip, folds on night one, and takes the only hotel room without a vote?"
   },
   {
-    "fr": "Qui glisserait « comme je dis toujours » avant une citation lue le matin même ?",
-    "en": "Who would say 'as I always say' before a quote they read that very morning?"
+    "fr": "Qui poste une citation en story avec « comme je dis toujours », alors qu'il l'a vue passer dans TA story il y a deux heures ?",
+    "en": "Who posts a quote captioned 'as I always say', having scrolled past it on YOUR story exactly two hours earlier?"
   },
   {
     "fr": "Qui s'inventerait une lessive urgente pour quitter une soirée à 21h47 ?",
     "en": "Who would invent an urgent load of laundry to leave a party at 9:47 p.m.?"
   },
   {
-    "fr": "Qui finirait la soirée avec le chat de l'hôte plutôt qu'avec les invités ?",
-    "en": "Who would end the party hanging out with the host's cat instead of the guests?"
+    "fr": "Qui disparaîtrait une heure en soirée, et tu le retrouverais dans la chambre, lumière éteinte, à murmurer au chat de l'hôte ?",
+    "en": "Who vanishes for an hour at a party, and you find them in the bedroom, lights off, whispering to the host's cat?"
   },
   {
     "fr": "Qui exigerait des couverts pour manger son kebab de 3h du matin ?",
     "en": "Who would demand a knife and fork for their 3 a.m. kebab?"
   },
   {
-    "fr": "Qui supprimerait une story à quatre vues parce que « les stats sont décevantes » ?",
-    "en": "Who would delete a story at four views because 'the numbers are disappointing'?"
+    "fr": "Qui supprimerait une photo de groupe parfaite parce qu'il « sortait pas bien », alors que c'était littéralement la seule où TOI tu étais réussi ?",
+    "en": "Who deletes a perfect group photo because they 'looked off in it', and it was literally the only one where YOU came out good?"
   },
   {
     "fr": "Qui repartirait de la soirée avec le pull de quelqu'un d'autre... pour la troisième fois ?",
     "en": "Who would leave the party wearing someone else's sweater... for the third time?"
   },
   {
-    "fr": "Qui zapperait chaque chanson au bout de trente secondes, même celle qu'il a demandée ?",
-    "en": "Who would skip every song thirty seconds in, including the one they requested?"
+    "fr": "Qui zapperait chaque son au bout de trente secondes, y compris celui qu'il vient de supplier qu'on mette ?",
+    "en": "Who skips every song thirty seconds in, including the one they just begged for?"
   },
   {
-    "fr": "Qui appellerait un parfait inconnu « mon frère » après dix minutes de conversation ?",
-    "en": "Who would call a total stranger 'my brother' after ten minutes of conversation?"
+    "fr": "Qui jurerait amitié éternelle à un inconnu aux toilettes d'une boîte, échangerait les numéros, puis bloquerait le mec au premier message le lendemain ?",
+    "en": "Who swears lifelong friendship to a stranger in a club bathroom, swaps numbers, then blocks them at the first text the next morning?"
   },
   {
-    "fr": "Qui transformerait le trajet retour en confessionnal pour le chauffeur ?",
-    "en": "Who would turn the ride home into a confession booth for the driver?"
+    "fr": "Qui raconterait sa rupture au chauffeur du retour, exigerait son avis, puis le noterait trois étoiles pour « manque d'empathie » ?",
+    "en": "Who trauma-dumps their breakup on the Uber driver, demands a verdict, then rates him three stars for 'lack of empathy'?"
   },
   {
-    "fr": "Qui découvrirait à l'atterrissage que l'hôtel est réservé pour le mois suivant ?",
-    "en": "Who would discover upon landing that the hotel booking is for next month?"
+    "fr": "Qui découvrirait à l'atterrissage que l'hôtel est réservé le mois suivant, et lancerait « au pire on dort à la plage » comme un vrai plan ?",
+    "en": "Who finds out on the runway the hotel's booked for next month, then pitches 'worst case we sleep on the beach' like an itinerary?"
   },
   {
-    "fr": "Qui ferait signer une décharge avant de prêter un stylo ?",
-    "en": "Who would make you sign a waiver before lending you a pen?"
+    "fr": "Qui te ferait signer une décharge pour un stylo, mais perdrait TA veste sans jamais en reparler ?",
+    "en": "Who makes you sign a waiver to borrow a pen, but loses YOUR jacket and simply never mentions it again?"
   },
   {
-    "fr": "Qui laisserait un avis à une étoile parce que « le serveur avait un regard » ?",
-    "en": "Who would leave a one-star review because 'the waiter gave me a look'?"
+    "fr": "Qui menacerait d'un avis une étoile à voix haute pour avoir un dessert offert, l'obtiendrait, puis mettrait l'avis quand même ?",
+    "en": "Who loudly threatens a one-star review to score a free dessert, gets the dessert, then posts the review anyway?"
   },
   {
-    "fr": "Qui arriverait au repas partagé avec un paquet de chips déjà entamé ?",
-    "en": "Who would show up to the potluck with an already-open bag of chips?"
+    "fr": "Qui arriverait au repas partagé avec un paquet de chips entamé, puis repartirait avec les restes des autres ?",
+    "en": "Who shows up to the potluck with an already-open bag of crisps, then leaves with everyone else's leftovers?"
   },
   {
     "fr": "Qui finirait ce jeu en exigeant une revanche immédiate « parce que c'était truqué » ?",

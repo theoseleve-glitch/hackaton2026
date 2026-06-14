@@ -1,6 +1,16 @@
 import type { Effect, GameModule, PlayerId, ReduceResult } from '@bloop/engine';
 import { createRng, shuffle } from '@bloop/engine';
-import { allActed, connectedPlayers, emptyPlayerMap, initPresence, setConnected } from '@bloop/kit';
+import {
+  allActed,
+  connectedPlayers,
+  emptyPlayerMap,
+  emptySideBets,
+  initPresence,
+  placeSideBet,
+  redactSideBets,
+  resolveSideBets,
+  setConnected,
+} from '@bloop/kit';
 import type {
   Ballot,
   Option,
@@ -9,10 +19,18 @@ import type {
   OptionVoteContent,
   OptionVoteState,
   OptionVoteView,
+  PredictionReveal,
   RoundResult,
 } from './state.js';
 
-const EMPTY_RESULT: RoundResult = { itemId: '', counts: { A: 0, B: 0 }, majority: null, picks: {}, awarded: [] };
+const EMPTY_RESULT: RoundResult = {
+  itemId: '', counts: { A: 0, B: 0 }, majority: null, picks: {}, awarded: [], predictions: [],
+};
+
+/** Whether the prediction side-bet channel is live for this config. */
+function predictionsEnabled(state: OptionVoteState): boolean {
+  return state.config.scoring === 'predict-majority' && state.config.predictionBonus > 0;
+}
 
 function skipQuorumMet(state: OptionVoteState): boolean {
   const connected = connectedPlayers(state.players, state.connected);
@@ -62,12 +80,41 @@ function resolveChoose(state: OptionVoteState): ReduceResult<OptionVoteState> {
     }
   }
 
+  // CC-1 KEYSTONE — resolve the hidden majority-PREDICTION side-bets against the
+  // PUBLIC majority. A correct prediction pays predictionBonus (upside-only,
+  // clamped >=0 by resolveSideBets) and lands its owner in `awarded`. The full
+  // predictions map is exposed here, BY NAME, for the first time. On a tie
+  // (majority null) nobody is correct, but every call is still shown for the dunk.
+  const predictions: PredictionReveal[] = [];
+  if (predictionsEnabled(state)) {
+    if (majority !== null) {
+      const bonus = resolveSideBets(
+        state.predictions,
+        majority,
+        (bet, outcome) => (bet === outcome ? state.config.predictionBonus : 0),
+      );
+      for (const p of state.players) {
+        if (bonus[p] !== undefined) {
+          scores[p] = (scores[p] ?? 0) + bonus[p]!;
+          if (!awarded.includes(p)) awarded.push(p);
+        }
+      }
+    }
+    // Build the public, named call-out list from the (now-revealed) buffer.
+    for (const p of state.players) {
+      const predicted = state.predictions[p];
+      if (predicted === undefined) continue;
+      predictions.push({ playerId: p, predicted, correct: majority !== null && predicted === majority });
+    }
+  }
+
   const lastResult: RoundResult = {
     itemId: state.items[state.round]?.id ?? '',
     counts: { A: a, B: b },
     majority,
     picks,
     awarded,
+    predictions,
   };
   return {
     state: { ...state, phase: 'reveal', scores, minorityCount, lastResult },
@@ -90,6 +137,7 @@ function endRound(state: OptionVoteState): ReduceResult<OptionVoteState> {
       round,
       phase: 'choose',
       ballots: emptyPlayerMap<Ballot>(),
+      predictions: emptySideBets<Option>(),
       skips: emptyPlayerMap<true>(),
       lastResult: null,
     },
@@ -138,6 +186,7 @@ export function createOptionVote(
         round: 0,
         phase: 'choose',
         ballots: emptyPlayerMap<Ballot>(),
+        predictions: emptySideBets<Option>(),
         skips: emptyPlayerMap<true>(),
         scores,
         minorityCount,
@@ -168,6 +217,22 @@ export function createOptionVote(
             return resolveChoose(next);
           }
           return { state: next, effects: [] };
+        }
+
+        // CC-1 KEYSTONE — place a hidden majority-prediction. SEPARATE buffer
+        // from `ballots`: this is NOT an `acted` entry, so it can NEVER gate the
+        // primary early-resolve and never leaks the primary pick. placeSideBet
+        // rejects (=> null) a duplicate / undefined stake; we map null to the
+        // SAME state reference. Wrong phase / wrong config / bad option also
+        // return the same reference (no transition).
+        if (action.kind === 'predict') {
+          if (state.phase !== 'choose') return { state, effects: [] };
+          if (!predictionsEnabled(state)) return { state, effects: [] };
+          if (action.option !== 'A' && action.option !== 'B') return { state, effects: [] };
+          const predictions = placeSideBet(state.predictions, playerId, action.option, true);
+          if (predictions === null) return { state, effects: [] };
+          // A prediction never resolves the round — only ballots can.
+          return { state: { ...state, predictions }, effects: [] };
         }
 
         if (action.kind === 'skip' && state.phase === 'debate') {
@@ -219,7 +284,19 @@ export function createOptionVote(
       if (state.phase === 'choose') {
         const hasSubmitted = emptyPlayerMap<boolean>();
         for (const p of state.players) hasSubmitted[p] = state.ballots[p] !== undefined;
-        return { phase: 'choose', ...base, item, hasSubmitted, myBallot: state.ballots[viewer] ?? null };
+        // CC-1 KEYSTONE — owner-only echo + aggregate count. redactSideBets
+        // (no revealAll) NEVER returns another player's stake pre-reveal.
+        const bet = redactSideBets(state.predictions, viewer);
+        const live = predictionsEnabled(state);
+        return {
+          phase: 'choose',
+          ...base,
+          item,
+          hasSubmitted,
+          myBallot: state.ballots[viewer] ?? null,
+          myPrediction: live ? bet.own : null,
+          predictedCount: live ? bet.count : 0,
+        };
       }
       if (state.phase === 'reveal') {
         return {
@@ -249,6 +326,8 @@ export function createOptionVote(
         scoring: state.config.scoring,
         scores: state.scores,
         minorityCount: state.minorityCount,
+        // CC-1 KEYSTONE — the final reveal's named predictions persist onto the podium.
+        lastPredictions: state.lastResult?.predictions ?? [],
       };
     },
 

@@ -81,10 +81,12 @@ export function NightDayPlay({ code }: { code: string }) {
   const [peeking, setPeeking] = useState(false);
   const [witchHeal, setWitchHeal] = useState(false);
   const [poisonArmed, setPoisonArmed] = useState(false);
+  // CC-1 Night Read: non-actors arm a secret wolf-hunch before tapping a seat.
+  const [readArmed, setReadArmed] = useState(false);
 
   // Reset the local witch drafts whenever the beat changes.
   const beatKey = nv === null ? '' : `${nv.phase}:${nv.phase === 'night' ? nv.step : ''}:${nv.round}`;
-  useEffect(() => { setWitchHeal(false); setPoisonArmed(false); }, [beatKey]);
+  useEffect(() => { setWitchHeal(false); setPoisonArmed(false); setReadArmed(false); }, [beatKey]);
 
   useEffect(() => {
     if (nv === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
@@ -199,7 +201,12 @@ export function NightDayPlay({ code }: { code: string }) {
             ? aliveSeats.filter((s) => !nv.wolfPack!.includes(s.id))
             : aliveSeats.filter((s) => s.id !== me);
           const onPick = (id: string) => {
-            if (!nv.amActor) { sendAction({ kind: 'nightAck' }); return; }
+            if (!nv.amActor) {
+              // CC-1: a non-actor who armed a Night Read secretly marks a wolf;
+              // otherwise the seat tap is the decoy sleep (no read).
+              sendAction(readArmed ? { kind: 'nightRead', target: id } : { kind: 'nightAck' });
+              return;
+            }
             if (nv.step === 'seer') { sendAction({ kind: 'seerPeek', target: id }); return; }
             if (nv.step === 'wolves') { sendAction({ kind: 'wolfVote', target: id }); return; }
             if (poisonArmed) { sendAction({ kind: 'witchAct', heal: witchHeal, poisonTarget: id }); return; }
@@ -220,9 +227,22 @@ export function NightDayPlay({ code }: { code: string }) {
               )}
 
               {nv.iAmAlive && nv.myActed && (
-                <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
-                  {L('ENDORMI ✓ — ON ATTEND LES AUTRES', 'ASLEEP ✓ — WAITING FOR THE OTHERS')}
-                </AppText>
+                <View style={{ gap: tokens.spacing.sm }}>
+                  <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+                    {L('ENDORMI ✓ — ON ATTEND LES AUTRES', 'ASLEEP ✓ — WAITING FOR THE OTHERS')}
+                  </AppText>
+                  {/* CC-1 Night Read — owner-only echo of who I secretly marked this round. */}
+                  {!nv.amActor && nv.myNightRead !== null && (
+                    <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.md }}>
+                      <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
+                        {L(`🔍 Ta lecture : ${nick(nv.myNightRead)} 🐺`, `🔍 Your read: ${nick(nv.myNightRead)} 🐺`)}
+                      </AppText>
+                      <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                        {L('Toi seul·e le sais. Justesse révélée à la fin.', 'Only you know. Accuracy revealed at the end.')}
+                      </AppText>
+                    </View>
+                  )}
+                </View>
               )}
 
               {nv.iAmAlive && !nv.myActed && (
@@ -232,8 +252,35 @@ export function NightDayPlay({ code }: { code: string }) {
                     {nv.amActor && nv.step === 'wolves' && L('CHOISIS LA VICTIME DE LA MEUTE', "PICK THE PACK'S VICTIM")}
                     {nv.amActor && nv.step === 'witch' && !poisonArmed && L('TES POTIONS, TES RÈGLES', 'YOUR POTIONS, YOUR RULES')}
                     {nv.amActor && nv.step === 'witch' && poisonArmed && L('TAPE QUI BOIRA LE POISON', 'TAP WHO DRINKS THE POISON')}
-                    {!nv.amActor && L('TAPE UN JOUEUR POUR DORMIR', 'TAP A PLAYER TO SLEEP')}
+                    {!nv.amActor && (readArmed
+                      ? L('TAPE LE LOUP QUE TU SOUPÇONNES 🐺', 'TAP THE WOLF YOU SUSPECT 🐺')
+                      : L('LECTURE DE NUIT — MARQUE UN LOUP ?', 'NIGHT READ — MARK A WOLF?'))}
                   </AppText>
+
+                  {/* CC-1 Night Read — living non-actors secretly mark a suspected wolf. */}
+                  {!nv.amActor && (
+                    <View style={{ gap: tokens.spacing.md }}>
+                      <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.lg, gap: 4 }}>
+                        <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
+                          {L('🔍 Lecture de nuit', '🔍 Night Read')}
+                        </AppText>
+                        <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                          {L('Marque en secret qui tu crois être un loup. Personne ne le voit — ta justesse est dévoilée à la fin.',
+                            'Secretly mark who you think is a wolf. Nobody sees it — your accuracy is revealed at the end.')}
+                        </AppText>
+                      </View>
+                      <SecondaryButton
+                        label={readArmed
+                          ? L('✕ Annuler — juste dormir', '✕ Cancel — just sleep')
+                          : L('🐺 Marquer un loup', '🐺 Mark a wolf')}
+                        onPress={() => setReadArmed(!readArmed)}
+                      />
+                      <PrimaryButton
+                        label={L('😴 Passer — aucune lecture', '😴 Skip — no read')}
+                        onPress={() => sendAction({ kind: 'nightAck' })}
+                      />
+                    </View>
+                  )}
 
                   {nv.amActor && nv.step === 'wolves' && nv.wolfVotes !== null && (
                     <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.lg, padding: tokens.spacing.md, gap: 4 }}>
@@ -283,7 +330,9 @@ export function NightDayPlay({ code }: { code: string }) {
                     </View>
                   )}
 
-                  {(nv.amActor && nv.step === 'witch' ? poisonArmed : true) && (
+                  {(nv.amActor
+                    ? (nv.step === 'witch' ? poisonArmed : true)
+                    : readArmed) && (
                     <View style={{ gap: tokens.spacing.md }}>{seatList(targets, onPick, false)}</View>
                   )}
                 </View>
@@ -466,6 +515,36 @@ export function NightDayPlay({ code }: { code: string }) {
                   {L(`👑 ${nick(ranked(nv.scores)[0]![0])} finit en tête`, `👑 ${nick(ranked(nv.scores)[0]![0])} tops the board`)}
                 </AppText>
               )}
+
+              {/* CC-1 Night Read reveal — cosmetic accuracy, never folded into placement scores. */}
+              {(() => {
+                const acc = nv.nightReadAccuracy ?? {};
+                const readers = ranked(acc).filter(([, n]) => n > 0);
+                if (readers.length === 0) return null;
+                return (
+                  <View style={{ gap: tokens.spacing.md }}>
+                    <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+                      {L('🔍 LECTURES DE NUIT — JUSTESSE', '🔍 NIGHT READS — ACCURACY')}
+                    </AppText>
+                    {readers.map(([id, n]) => (
+                      <View key={id} style={{
+                        flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
+                        borderRadius: tokens.radii.lg, padding: tokens.spacing.md, ...tokens.elevation.e1,
+                      }}>
+                        <Avatar name={nick(id)} size="sm" />
+                        <AppText role="bodyStrong" style={{ flex: 1 }}>{nick(id)}</AppText>
+                        <AppText role="headline" color="brand">
+                          {L(`${n} loup·s démasqué·s 🐺`, `${n} wolf${n > 1 ? 's' : ''} spotted 🐺`)}
+                        </AppText>
+                      </View>
+                    ))}
+                    <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                      {L(`🕵️ Meilleur flair : ${nick(readers[0]![0])}`, `🕵️ Sharpest read: ${nick(readers[0]![0])}`)}
+                    </AppText>
+                  </View>
+                );
+              })()}
+
               <PrimaryButton label={L('Retour au salon', 'Back to Lobby')} onPress={() => router.replace(`/room/${code}/lobby`)} />
             </View>
           );

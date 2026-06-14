@@ -19,11 +19,11 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "T'as déjà ignoré exprès un message de quelqu'un ici. C'était qui, et c'était quel message ?",
-        "en": "You've left someone in this room on read on purpose. Who was it, and what was the message?"
+        "fr": "Qui ici tu réveillerais à 3h pour un vrai problème — et qui te répondrait même pas le lendemain matin ? Deux noms. Ils sont dans la pièce.",
+        "en": "Who here would you wake at 3am with a real problem — and who wouldn't even text back by morning? Two names. They're in the room."
       },
       "minAge": 0,
-      "tags": ["talent", "funny"]
+      "tags": ["friendship", "funny"]
     },
     {
       "id": "totd-t-soft-003",
@@ -118,11 +118,11 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Combien y'a sur ton compte, là, tout de suite ? Pas le chiffre exact — la fourchette. La fourchette dit déjà tout.",
-        "en": "What's in your bank account right now? Not the exact number — the bracket. The bracket says everything."
+        "fr": "Quelqu'un ici t'a déjà rendu un service et t'as jamais renvoyé l'ascenseur. Désigne-le. Il s'en souvient, lui.",
+        "en": "Someone here did you a favour and you never paid it back. Point at them. They remember, by the way."
       },
       "minAge": 0,
-      "tags": ["music", "funny"]
+      "tags": ["friendship", "funny"]
     },
     {
       "id": "totd-t-soft-012",
@@ -228,11 +228,11 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "C'est quoi le nom du groupe WhatsApp familial, et le dernier message que t'y as laissé sans réponse ?",
-        "en": "What's your family group chat called, and what's the last message in there you left on read?"
+        "fr": "Le talent inutile dont t'es secrètement très fier. Prouve-le maintenant — sinon la pièce conclut que t'as menti.",
+        "en": "The useless talent you're secretly very proud of. Prove it right now — or the room rules that you made it up."
       },
       "minAge": 0,
-      "tags": ["hypothetical", "funny"]
+      "tags": ["talent", "funny"]
     },
     {
       "id": "totd-t-soft-022",
@@ -283,11 +283,11 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Quelle invitation t'as tuée avec une fausse excuse pour rester chez toi à rien faire ? L'hôte est peut-être ici.",
-        "en": "What invite did you kill with a fake excuse just to stay home doing nothing? The host might be in this room."
+        "fr": "Quelqu'un ici t'énerve avec UN truc précis qu'il fait tout le temps. Pas le nom — juste le truc. On devinera la cible en deux secondes.",
+        "en": "Someone here drives you mad with ONE specific thing they always do. Not the name — just the thing. We'll guess the target in two seconds."
       },
       "minAge": 0,
-      "tags": ["pets", "funny"]
+      "tags": ["friendship", "funny"]
     },
     {
       "id": "totd-t-soft-027",
@@ -349,8 +349,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "La dernière fois que t'as fait semblant d'être au téléphone pour éviter quelqu'un : qui, et tu parlais à qui — à personne ?",
-        "en": "Last time you faked a phone call to dodge someone: who were you dodging, and who were you 'talking' to — nobody?"
+        "fr": "Le compliment que tu balances en boucle à plein de monde, mot pour mot. Sors-le — quelqu'un ici l'a déjà reçu et croyait être l'unique.",
+        "en": "The compliment you recycle on everyone, word for word. Say it out loud — someone here has had it and thought they were the only one."
       },
       "minAge": 0,
       "tags": ["lies", "funny"]
@@ -371,8 +371,8 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Ton vrai record d'heures sur une seule appli en une journée. Juste le chiffre. Pas de contexte — le contexte t'enfonce.",
-        "en": "Your real record for hours spent on one app in a single day. Just the number. No context — context makes it worse."
+        "fr": "Quelqu'un ici raconte une histoire que t'as déjà entendue 50 fois. Tu fais quoi exactement de ta tête pour qu'il voie rien ? Montre. Il regarde.",
+        "en": "Someone here tells a story you've heard 50 times. What exactly does your face do so they don't notice? Show us. They're watching."
       },
       "minAge": 0,
       "tags": ["habits", "funny"]
@@ -415,11 +415,11 @@
       "choice": "truth",
       "intensity": "soft",
       "text": {
-        "fr": "Le truc le plus inutile que t'as acheté à 3h du matin. Prix exact, et il est où maintenant ?",
-        "en": "The most useless thing you've bought at 3 a.m. Exact price, and where is it now?"
+        "fr": "T'as un avis bien tranché sur le couple, l'ex ou le crush de quelqu'un ici, et tu l'as jamais dit en face. Lâche-le. Pas le nom — juste l'avis.",
+        "en": "You have a strong opinion about someone here's relationship, ex or crush that you've never said to their face. Drop it. No name — just the opinion."
       },
       "minAge": 0,
-      "tags": ["shopping", "weird"]
+      "tags": ["friendship", "funny"]
     },
     {
       "id": "totd-t-soft-039",
@@ -459,11 +459,11 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "Jusqu'à quelle année t'es descendu en stalkant le nouveau ou la nouvelle de ton ex ? Donne l'année. On saura si tu mens.",
-        "en": "How far back did you scroll on your ex's new partner? Give the year. We'll know if you're lying."
+        "fr": "T'as déjà fait semblant de pas avoir reçu une demande de virement de quelqu'un ici. C'était combien, et ça date de quand ? Il a son téléphone, lui.",
+        "en": "You've pretended not to see a money request from someone in this room. How much, and how long ago? They've got their phone right there."
       },
       "minAge": 18,
-      "tags": ["ex", "social-media"]
+      "tags": ["money", "petty"]
     },
     {
       "id": "totd-t-party-003",
@@ -503,11 +503,11 @@
       "choice": "truth",
       "intensity": "party",
       "text": {
-        "fr": "La pire excuse que t'as inventée pour quitter une soirée. Et fais pas le fier : t'en as déjà servi une à quelqu'un ici.",
-        "en": "Your worst fake excuse for leaving a party early. Don't look smug — you've used one on somebody in this room."
+        "fr": "Cite la personne ici dont tu lis chaque story dans la seconde — et à qui tu réponds jamais. Elle croit que tu l'as zappée. Détrompe-la.",
+        "en": "Name the person here whose every story you watch within seconds — and never reply to. They think you forgot them. Set the record straight."
       },
       "minAge": 18,
-      "tags": ["party", "lies"]
+      "tags": ["social-media", "petty"]
     },
     {
       "id": "totd-t-party-007",
@@ -1284,11 +1284,11 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Le 'je t'aime' au pire timing de l'histoire : en plein acte, à un enterrement, au premier date ? Raconte — et dis de quel côté t'étais.",
-        "en": "The worst-timed 'I love you' in history: mid-act, at a funeral, on a first date? Tell it — and say which side of it you were on."
+        "fr": "La chose que t'as faite au lit une seule fois, par curiosité, et plus jamais après. Pas besoin de tout dire — juste pourquoi 'plus jamais'.",
+        "en": "The thing you tried in bed exactly once, out of curiosity, and never again. You don't have to spell it out — just tell us why 'never again'."
       },
       "minAge": 18,
-      "tags": ["dating", "awkward"]
+      "tags": ["sex", "story"]
     },
     {
       "id": "totd-t-spicy-028",
@@ -1317,11 +1317,11 @@
       "choice": "truth",
       "intensity": "spicy",
       "text": {
-        "fr": "Quelqu'un dans cette pièce t'a déjà fait de l'effet. Oui ou non. Pas de prénom — ton regard fera le travail tout seul.",
-        "en": "Someone in this room has, at some point, done it for you. Yes or no. No names — your eye contact will do the rest."
+        "fr": "Le message le plus chaud de toute ta galerie de captures d'écran : tu l'as envoyé, ou reçu ? Lis la première ligne. Juste la première.",
+        "en": "The filthiest message in your entire screenshot folder: did you send it, or receive it? Read the first line. Just the first line."
       },
       "minAge": 18,
-      "tags": ["room", "crush"]
+      "tags": ["phone", "sex"]
     },
     {
       "id": "totd-t-spicy-031",

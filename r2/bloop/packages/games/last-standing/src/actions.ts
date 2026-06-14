@@ -9,4 +9,7 @@ export const lastStandingActionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('wordSaid') }),
   z.object({ kind: z.literal('giveUp') }),
   z.object({ kind: z.literal('judge'), vote: z.enum(['valid', 'reject']) }),
+  // P0-1 keystone — the spotlight survives/chokes side-bet. A binary enum only;
+  // it opens NO text surface (the spoken-only, zero-moderation invariant holds).
+  z.object({ kind: z.literal('bet'), value: z.enum(['survives', 'chokes']) }),
 ]);

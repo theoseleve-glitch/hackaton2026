@@ -86,7 +86,7 @@ describe('bilingual LText prompts (pires-potes)', () => {
       keys.push(pp.phaseKey(s));
     }
     for (const key of keys) {
-      expect(key).toMatch(/^[a-z]+(:\d+)?$/);
+      expect(key).toMatch(/^[a-z]+(:\d+)?(:(suspense|verdict))?$/);
       for (const c of cards) {
         expect(key).not.toContain(c.fr);
         expect(key).not.toContain(c.en);
@@ -150,5 +150,36 @@ describe('pires-potes redaction-audit rehearsal (server fixture shape)', () => {
     expect(pp.phaseDurationMs(s)).toBeNull();
     expect(pp.phaseKey(s)).toBe('over');
     expect(steps).toBeLessThan(25);
+  });
+
+  // AUDIT DECLARATION (two-beat reveal keystone, CC-3): the reveal now exposes
+  // `revealStep`, `delta`, and `designated`. These are NOT new secrets — they are
+  // aggregate-derived from the PUBLIC tally/scores. The ONLY hidden value remains
+  // `votes`. The two fixtures below reach the SAME aggregate verdict via DIFFERENT
+  // ballots, so every viewer's reveal view (incl. the new fields) must be invariant.
+  const sameAgg = [vote('p1', 'p3', 1_000), vote('p2', 'p3', 2_000), vote('p3', 'p1', 3_000)];
+  const sameAggAlt = [vote('p2', 'p3', 1_000), vote('p1', 'p3', 2_000), vote('p3', 'p1', 3_000)];
+  const toVerdict = (script: GameEvent<TracerAction>[]) => {
+    let s = fold(script); // -> reveal:suspense (all voted)
+    s = pp.reduce(s, { type: 'deadline', at: 4_000 }).state; // -> reveal:verdict
+    if (s.phase !== 'reveal') throw new Error('expected verdict reveal phase');
+    return s;
+  };
+
+  it('reveal beats add NO new hidden value: revealStep/delta/designated invariant across ballots, for every viewer', () => {
+    const vA = toVerdict(sameAgg);
+    const vB = toVerdict(sameAggAlt);
+    for (const viewer of [...players, 'viewer-not-in-roster', '__proto__']) {
+      const a = pp.view(vA, viewer);
+      const b = pp.view(vB, viewer);
+      expect(a).toEqual(b); // identical reveal view despite different hidden ballots
+      if (a.phase !== 'reveal') throw new Error('expected reveal view');
+      expect(a.revealStep).toBe('verdict');
+      expect(a.designated).toEqual(['p3']); // the room pointed at p3 in BOTH scripts
+      expect(a.delta).toEqual({ p3: 1 });
+      const json = JSON.stringify(a);
+      expect(json).not.toContain('"votes"'); // ballots never ride the reveal
+      expect(json).not.toContain('"myVote"');
+    }
   });
 });

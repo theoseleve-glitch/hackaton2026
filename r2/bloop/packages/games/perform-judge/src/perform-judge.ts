@@ -8,7 +8,17 @@ import {
   nextActiveSeat,
   setConnected,
 } from '@bloop/kit';
-import { commanders, crew, currentItem, eligibleJudges, pickPartner, tapCount, tapGoal } from './helpers.js';
+import {
+  commanders,
+  crew,
+  currentItem,
+  eligibleJudges,
+  pickPartner,
+  reactionCounts,
+  reactors,
+  tapCount,
+  tapGoal,
+} from './helpers.js';
 import { projectView } from './views.js';
 import type {
   PerformJudgeAction,
@@ -17,6 +27,7 @@ import type {
   PerformJudgeOutcome,
   PerformJudgeState,
   PerformJudgeView,
+  Reaction,
   TurnResult,
 } from './state.js';
 
@@ -46,6 +57,8 @@ function finishTurn(
     stars: starsAgg,
     fast,
     points,
+    // CC-4: snapshot the PUBLIC audience reaction counts into the reveal card.
+    reactions: reactionCounts(state),
   };
   return {
     state: { ...state, phase: 'reveal', scores, lastResult },
@@ -174,6 +187,7 @@ function advanceTurn(state: S, sinceScoreboard: number, at: number): Result {
     performStartedAt: phase === 'perform' ? at : null,
     claim: null,
     taps: emptyPlayerMap<true>(),
+    reactions: emptyPlayerMap<Reaction>(),
     votes: emptyPlayerMap<'yes' | 'no'>(),
     stars: emptyPlayerMap<number>(),
     sinceScoreboard,
@@ -207,6 +221,22 @@ function onAction(state: S, playerId: PlayerId, action: PerformJudgeAction, at: 
 
   if (state.phase === 'perform') {
     const isPerformer = playerId === state.performer;
+    // CC-4 — audience live-reaction (NON-SCORING). Accept a fixed-enum react
+    // from any connected non-actor; accumulate into the SEPARATE `reactions`
+    // buffer (first react per player locks). It NEVER resolves the turn and is
+    // checked before the mode-specific scoring actions so it can never flow
+    // into a resolve path. Reject-invalid => SAME state reference.
+    if (action.kind === 'react') {
+      if (action.reaction !== 'fire' && action.reaction !== 'laugh' && action.reaction !== 'cringe') {
+        return keep(state);
+      }
+      if (!reactors(state).includes(playerId)) return keep(state);
+      if (state.reactions[playerId] !== undefined) return keep(state); // first react locks
+      const reactions = Object.assign(emptyPlayerMap<Reaction>(), state.reactions, {
+        [playerId]: action.reaction,
+      });
+      return { state: { ...state, reactions }, effects: [] };
+    }
     if (config.mode === 'guided' && isPerformer) {
       if (action.kind === 'claimDone') return enterJudge(state);
       if (action.kind === 'giveUp') {
@@ -380,6 +410,7 @@ export function createPerformJudge(
         performStartedAt: null,
         claim: null,
         taps: emptyPlayerMap<true>(),
+        reactions: emptyPlayerMap<Reaction>(),
         votes: emptyPlayerMap<'yes' | 'no'>(),
         stars: emptyPlayerMap<number>(),
         passesLeft,

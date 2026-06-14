@@ -1455,12 +1455,12 @@ export const TROUVEZ_LA_REGLE_PACK: ContentPack<RuleHuntContent> = {
     ]
   },
   {
-    "id": "rh-voila",
+    "id": "rh-no-comment",
     "category": "verbal",
     "difficulty": "easy",
     "rule": {
-      "fr": "Termine chaque phrase par « voilà ». Voilà.",
-      "en": "End every sentence with \"you know\". You know."
+      "fr": "Réponds « no comment » à toute question d'un détective. Comme une star qui sort du commissariat.",
+      "en": "Answer every detective's question with \"no comment\". Like a celebrity leaving the police station."
     },
     "decoys": [
       {
@@ -2317,8 +2317,8 @@ export const TROUVEZ_LA_REGLE_PACK: ContentPack<RuleHuntContent> = {
     "category": "social",
     "difficulty": "easy",
     "rule": {
-      "fr": "Propose à boire à quiconque te pose une question. L'hospitalité qui achète le silence.",
-      "en": "Offer a drink to anyone who asks you a question. Hospitality that buys silence."
+      "fr": "Offre un truc à grignoter à quiconque te pose une question. Une chips, ça achète trois secondes de silence.",
+      "en": "Offer a snack to anyone who asks you a question. One crisp buys three seconds of silence."
     },
     "decoys": [
       {

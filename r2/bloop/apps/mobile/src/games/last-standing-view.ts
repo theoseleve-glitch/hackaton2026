@@ -1,5 +1,5 @@
 // IMPORT FIREWALL: type-only — erased at compile time; last-standing server logic never enters the bundle.
-import type { JudgeVote, LastStandingView, LText, TurnResult } from '@bloop/game-last-standing';
+import type { JudgeVote, LastStandingView, LText, SpotBet, TurnResult } from '@bloop/game-last-standing';
 
 export const LAST_STANDING_GAME_IDS = ['jeu-du-theme'] as const;
 
@@ -41,11 +41,15 @@ const isTurnResult = (v: unknown): v is TurnResult | null => {
 
 const isVote = (v: unknown): v is JudgeVote | null => v === null || v === 'valid' || v === 'reject';
 
+// P0-1: the spotlight survives/chokes side-bet token — own-echo only, never a foreign call.
+const isBet = (v: unknown): v is SpotBet | null => v === null || v === 'survives' || v === 'chokes';
+
 /** Runtime narrow of the opaque `view` payload — never crash a render on drift. */
 export function asLastStandingView(v: unknown): LastStandingView | null {
   if (typeof v !== 'object' || v === null) return null;
   const o = v as Record<string, unknown>;
   if (!isRec(o.scores, 'number') || !isStrArray(o.rotation) || !isRec(o.wordsValidated, 'number')) return null;
+  if (!isRec(o.betPoints, 'number')) return null; // P0-1: public side-bet currency, present in every base view
   if (o.phase === 'over') return v as LastStandingView;
   const baseOk = typeof o.round === 'number' && typeof o.totalRounds === 'number'
     && typeof o.turnSeq === 'number'
@@ -58,6 +62,8 @@ export function asLastStandingView(v: unknown): LastStandingView | null {
   if (o.phase === 'draw' || o.phase === 'result') return v as LastStandingView;
   if (o.phase === 'say') {
     return typeof o.youAreSpotlight === 'boolean' && typeof o.canGiveUp === 'boolean'
+      // P0-1: survives/chokes side-bet fields — owner-echo + count only.
+      && typeof o.youCanBet === 'boolean' && isBet(o.myBet ?? null) && typeof o.betsIn === 'number'
       ? (v as LastStandingView) : null;
   }
   if (o.phase === 'judge') {

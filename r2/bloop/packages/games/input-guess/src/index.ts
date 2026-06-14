@@ -7,8 +7,10 @@ export {
   QUIZZ_CULTURE_GE_CONFIG,
 } from './state.js';
 export type {
+  ClosestCallOuts,
   ClosestNumberConfig,
   ClosestRoundResult,
+  CrowdCallOuts,
   CrowdCardPublic,
   CrowdCardRevealed,
   CrowdCompletion,

@@ -10,4 +10,7 @@ export const secretRoleActionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('ack') }),
   z.object({ kind: z.literal('ready') }),
   z.object({ kind: z.literal('vote'), target: z.string().min(1).max(64) }),
+  // CC-1 hidden "lean": a discuss-time side-bet on the suspected impostor.
+  // Same opaque-id surface as `vote`; the reducer does roster/self/phase checks.
+  z.object({ kind: z.literal('lean'), target: z.string().min(1).max(64) }),
 ]);

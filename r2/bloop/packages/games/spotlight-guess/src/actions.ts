@@ -19,4 +19,6 @@ export const spotlightGuessActionSchema = z.discriminatedUnion('kind', [
     kind: z.literal('guess'),
     value: z.number().int().min(0).max(100),
   }),
+  // KEYSTONE (P0-B-lite) — content-free react: no value rides on it.
+  z.object({ kind: z.literal('react') }),
 ]);

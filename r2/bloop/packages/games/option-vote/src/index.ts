@@ -14,5 +14,6 @@ export {
   type OptionVoteScoring,
   type OptionVoteState,
   type OptionVoteView,
+  type PredictionReveal,
   type RoundResult,
 } from './state.js';

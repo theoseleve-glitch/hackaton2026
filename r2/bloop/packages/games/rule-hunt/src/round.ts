@@ -55,6 +55,25 @@ export function buildGrid(
   return { candidateTexts: grid.map((e) => e.text), trueCandidateIndex: grid.findIndex((e) => e.isRule) };
 }
 
+/**
+ * Seeded heat-check pick: name one alive, connected, non-detective follower for
+ * spotlight instance `seq`. The candidate set is roster-ordered (deterministic),
+ * and the index is drawn from `createRng(`${seed}:spot:${round}:${seq}`)` — the
+ * SAME `Math.floor(rng() * n)` draw the engine's `shuffle` uses — so the same
+ * seed yields the same spotlight order across every replay. Returns `null` when
+ * no follower is eligible (the caller never enters spotlight then).
+ */
+export function pickSpotlight(
+  state: RuleHuntState,
+  round: number,
+  seq: number,
+): PlayerId | null {
+  const pool = aliveConnectedFollowers(state);
+  if (pool.length === 0) return null;
+  const rng = createRng(`${state.seed}:spot:${round}:${seq}`);
+  return pool[Math.floor(rng() * pool.length)] ?? null;
+}
+
 export const isDetectiveOf = (state: RuleHuntState, id: PlayerId): boolean => state.detectives.includes(id);
 
 export function connectedFollowers(state: RuleHuntState): PlayerId[] {

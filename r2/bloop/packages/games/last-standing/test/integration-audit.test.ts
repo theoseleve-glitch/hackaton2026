@@ -69,6 +69,9 @@ const lsWord = (playerId: string, at: number): GameEvent<LastStandingAction> =>
 const lsJudge = (playerId: string, vote: 'valid' | 'reject', at: number): GameEvent<LastStandingAction> =>
   ({ type: 'action', playerId, action: { kind: 'judge', vote }, at });
 
+const lsBet = (playerId: string, value: 'survives' | 'chokes', at: number): GameEvent<LastStandingAction> =>
+  ({ type: 'action', playerId, action: { kind: 'bet', value }, at });
+
 interface RedactionAudit {
   players: readonly PlayerId[];
   seed: string;
@@ -83,12 +86,18 @@ interface RedactionAudit {
 const AUDIT: RedactionAudit = {
   players: ['p1', 'p2', 'p3'],
   seed: 'audit-seed',
-  // mid-judge turn 1: ONE ballot in flight (p1), p2 still expected — phase NOT advanced.
-  events: [lsDeadline(500), lsWord('p3', 1_000), lsJudge('p1', 'valid', 2_000)],
-  eventsAlt: [lsDeadline(500), lsWord('p3', 1_000), lsJudge('p1', 'reject', 2_000)],
+  // P0-1 hidden value under audit: the spotlight survives/chokes SIDE-BET. Under
+  // seed 'audit-seed' rotation is [p3,p1,p2] — p3 opens the say turn; p1 and p2
+  // are eligible bettors. The fixture lands mid-say turn 1 with p1's side-bet in
+  // flight (the only phase the bet can surface). p1's call differs between the
+  // two scripts; the non-actor invariance check proves the spotBets value never
+  // leaks to p2, the spotlight p3, or any outsider — only p1's own echo moves.
+  events: [lsDeadline(500), lsBet('p1', 'survives', 1_000)],
+  eventsAlt: [lsDeadline(500), lsBet('p1', 'chokes', 1_000)],
   actors: ['p1'],
-  // undrawn theme texts are the game's only VALUE secrets (votes are
-  // structural 'valid'/'reject' strings — the invariance check covers them)
+  // undrawn theme texts are the game's only VALUE secrets (side-bets are
+  // structural 'survives'/'chokes' strings that legitimately appear only in the
+  // owner echo — the non-actor invariance check covers them)
   secrets: (state) => {
     const s = state as { deck: Array<{ theme: { fr: string; en: string } }>; themeCursor: number };
     return s.deck.slice(s.themeCursor).flatMap((i) => [{ value: i.theme.fr }, { value: i.theme.en }]);
@@ -145,7 +154,7 @@ describe('redaction audit mirror — INTEGRATION.md fixture vs the real pack', (
 
   it('fixture is live: same phase both scripts, and at least one actor SEES its own differing choice', () => {
     expect(module_.phaseKey(sA)).toBe(module_.phaseKey(sB));
-    expect(module_.phaseKey(sA)).toBe('judge:t1');
+    expect(module_.phaseKey(sA)).toBe('say:t1');
     const anActorSees = AUDIT.actors.some(
       (a) => JSON.stringify(module_.view(sA, a)) !== JSON.stringify(module_.view(sB, a)));
     expect(anActorSees).toBe(true);

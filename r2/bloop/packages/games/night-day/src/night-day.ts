@@ -3,12 +3,15 @@ import { createRng, shuffle } from '@bloop/engine';
 import {
   allActed,
   emptyPlayerMap,
+  emptySideBets,
   gameOver,
   initPresence,
+  placeSideBet,
   setConnected,
   tally,
 } from '@bloop/kit';
-import { aliveConnected, alivePlayers, stepMode, winCheck, zeroScores } from './logic.js';
+import type { SideBetBuffer } from '@bloop/kit';
+import { aliveConnected, alivePlayers, isStepActor, stepMode, winCheck, zeroScores } from './logic.js';
 import type {
   EndReason,
   LText,
@@ -279,6 +282,7 @@ export function createNightDay(
         phase: 'roleReveal',
         ackRole: emptyPlayerMap<true>(),
         nightActed: emptyPlayerMap<true>(),
+        nightReads: emptyPlayerMap<SideBetBuffer<PlayerId>>(),
         wolfVotes: emptyPlayerMap<PlayerId>(),
         wolfVoteSeq: [],
         seerLog: [],
@@ -318,6 +322,31 @@ export function createNightDay(
           if (state.nightActed[playerId] === true) return { state, effects: [] };
 
           if (action.kind === 'nightAck') return actedAndMaybeEnd(state, playerId);
+
+          if (action.kind === 'nightRead') {
+            // CC-1 Night Read: a living NON-ACTOR's private wolf-hunch. It locks
+            // the seat byte-identically to nightAck (same actedAndMaybeEnd path)
+            // and stores the prediction in a strictly-more-hidden buffer. The
+            // active role of THIS sub-phase reads via their real action, not here.
+            const target = action.target;
+            if (target === playerId) return { state, effects: [] };
+            if (!state.players.includes(target) || state.alive[target] !== true) {
+              return { state, effects: [] };
+            }
+            if (isStepActor(state, playerId)) return { state, effects: [] };
+            const round = state.round;
+            const buffer = state.nightReads[round] ?? emptySideBets<PlayerId>();
+            // placeSideBet => null on a re-read this round (already locked => caught
+            // above by nightActed, but the buffer guard stays the structural backstop).
+            const placed = placeSideBet(buffer, playerId, target, true);
+            if (placed === null) return { state, effects: [] };
+            const nightReads = Object.assign(
+              emptyPlayerMap<SideBetBuffer<PlayerId>>(),
+              state.nightReads,
+              { [round]: placed },
+            );
+            return actedAndMaybeEnd({ ...state, nightReads }, playerId);
+          }
 
           if (action.kind === 'seerPeek' && state.phase === 'nightSeer') {
             if (state.roles[playerId] !== 'seer') return { state, effects: [] };

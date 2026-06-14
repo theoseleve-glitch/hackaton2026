@@ -230,19 +230,33 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
                   <PrimaryButton label={L('Ouvrir les votes', 'Open the votes')} onPress={() => sendAction({ kind: 'openVotes' })} />
                 )}
               </View>
+            ) : sg.phase === 'talk' ? (
+              // KEYSTONE (P0-A) — live first-impression dial during the 45s talk:
+              // guessers set/adjust their current numeric guess while the spotlight
+              // performs, overwritable until the timer locks it at talk-end.
+              <View style={{ gap: tokens.spacing.md }}>
+                <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.spacing.xl, alignItems: 'center', gap: tokens.spacing.sm }}>
+                  <Avatar name={spotName} size="md" />
+                  <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
+                    {L(`Écoute ${spotName} et cale ta note en direct !`, `Listen to ${spotName} and dial your score live!`)}
+                  </AppText>
+                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {sg.myGuess === null
+                      ? L('Pose une première impression — tu pourras la bouger.', 'Drop a first impression — you can still move it.')
+                      : L('Ajuste à volonté tant que le porteur parle.', 'Nudge it freely while the keeper talks.')}
+                  </AppText>
+                </View>
+                {sg.domain === 'scale10'
+                  ? <Scale10Pad my={sg.myGuess} onPick={(v) => sendAction({ kind: 'guess', value: v })} lang={lang} />
+                  : <WheelStepper draft={wheelDraft} setDraft={setWheelDraft} my={sg.myGuess} onSubmit={(v) => sendAction({ kind: 'guess', value: v })} lang={lang} />}
+                <ActedStrip acted={sg.hasGuessed} players={state.players} spotlightId={sg.spotlightId} lang={lang} />
+              </View>
             ) : (
               <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.spacing.xl, alignItems: 'center', gap: tokens.spacing.sm }}>
                 <Avatar name={spotName} size="md" />
                 <AppText role="bodyStrong" style={{ textAlign: 'center' }}>
-                  {sg.phase === 'target'
-                    ? L(`${spotName} reçoit son nombre secret…`, `${spotName} is getting their secret number…`)
-                    : L(`Écoute ${spotName} et jauge la note !`, `Listen to ${spotName} and gauge the score!`)}
+                  {L(`${spotName} reçoit son nombre secret…`, `${spotName} is getting their secret number…`)}
                 </AppText>
-                {sg.phase === 'talk' && (
-                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
-                    {L('Les votes s’ouvrent juste après.', 'The dials open right after.')}
-                  </AppText>
-                )}
               </View>
             )}
           </View>
@@ -354,13 +368,47 @@ export function SpotlightGuessPlay({ code }: { code: string }) {
               ))}
             </View>
           ) : (
-            <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.spacing.xl, alignItems: 'center', gap: tokens.spacing.sm }}>
+            <View style={{ backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.spacing.xl, alignItems: 'center', gap: tokens.spacing.md }}>
               <Avatar name={spotName} size="md" />
               <AppText role="titleM" style={{ textAlign: 'center' }}>
                 {L(`${spotName} répond à une question secrète…`, `${spotName} is answering a secret question…`)}
               </AppText>
               <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
                 {L('Vous ne verrez que sa réponse. À vous de retrouver la question !', 'You’ll only see the answer. Your job: find the question!')}
+              </AppText>
+              {/* KEYSTONE (P0-B-lite) — content-free react tap: a single value-less
+                  buzz so the blank wait isn't dead. Lights your avatar in the count. */}
+              {iAmSpot ? null : sg.myReact ? (
+                <View style={{
+                  flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm,
+                  backgroundColor: theme.surface, borderRadius: tokens.radii.pill,
+                  paddingVertical: tokens.spacing.md, paddingHorizontal: tokens.spacing.xl,
+                  borderWidth: 2, borderColor: theme.brand, ...tokens.elevation.e1,
+                }}>
+                  <Avatar name={player(state.playerId ?? '').profile.nickname} size="sm" />
+                  <AppText role="bodyStrong" color="brand">
+                    {L('⚡ Tu es chaud·e !', '⚡ You’re fired up!')}
+                  </AppText>
+                </View>
+              ) : (
+                <Pressable
+                  onPress={() => sendAction({ kind: 'react' })}
+                  accessibilityLabel={L('Montre que tu es prêt·e', "Show you're ready")}
+                  style={{
+                    flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm,
+                    backgroundColor: theme.brand, borderRadius: tokens.radii.pill,
+                    paddingVertical: tokens.spacing.md, paddingHorizontal: tokens.spacing.xxl,
+                    ...tokens.elevation.sticker,
+                  }}>
+                  <AppText role="headline" color="textOnBrand">
+                    {L('⚡ Je suis chaud·e !', '⚡ I’m fired up!')}
+                  </AppText>
+                </Pressable>
+              )}
+              <AppText role="overline" color="textSecondary">
+                {lang === 'fr'
+                  ? `${sg.reactCount} ${sg.reactCount === 1 ? 'JOUEUR·SE PRÊT·E' : 'PRÊT·E·S'}`
+                  : `${sg.reactCount} FIRED UP`}
               </AppText>
             </View>
           )

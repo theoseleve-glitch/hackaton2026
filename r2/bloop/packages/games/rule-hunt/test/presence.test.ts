@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Effect } from '@bloop/engine';
 import {
-  ack, accuse, content, deadline, FIVE, followersOf, game, left, openGuess, rejoined, toLive,
+  ack, accuse, content, deadline, FIVE, followersOf, game, left, liveToReveal, openGuess, rejoined, toLive,
 } from './fixtures.js';
 
 const FOUR = ['p1', 'p2', 'p3', 'p4'];
@@ -158,12 +158,12 @@ describe('room collapse (< 3 connected)', () => {
   it('reveal deadline with a collapsed room ends the match instead of starting the next round', () => {
     let s = game.init('s', FIVE, content(3));
     s = game.reduce(s, deadline(0)).state; // -> live
-    s = game.reduce(s, deadline(1)).state; // -> reveal
+    s = liveToReveal(s);                    // drain live (through spotlights) -> reveal
     expect(s.phase).toBe('reveal');
-    s = game.reduce(s, left('p1', 2)).state;
-    s = game.reduce(s, left('p2', 3)).state;
-    s = game.reduce(s, left('p3', 4)).state;
-    const over = game.reduce(s, deadline(12_001)).state;
+    s = game.reduce(s, left('p1', 200_001)).state;
+    s = game.reduce(s, left('p2', 200_002)).state;
+    s = game.reduce(s, left('p3', 200_003)).state;
+    const over = game.reduce(s, deadline(400_000)).state;
     expect(over.phase).toBe('over');
     expect(over.endReason).toBe('roomCollapsed');
   });

@@ -4,9 +4,13 @@ import {
   allActed,
   connectedPlayers,
   emptyPlayerMap,
+  emptySideBets,
   gameOver,
   initPresence,
   nextActiveSeat,
+  placeSideBet,
+  redactSideBets,
+  resolveSideBets,
   setConnected,
 } from '@bloop/kit';
 import type {
@@ -19,6 +23,7 @@ import type {
   LastStandingState,
   LastStandingView,
   LastStandingViewBase,
+  SpotBet,
   TurnOutcome,
   TurnResult,
 } from './state.js';
@@ -52,9 +57,27 @@ function eligibleJurors(state: LastStandingState): PlayerId[] {
 }
 
 /**
+ * P0-1 keystone — bettors for the current turn: PRESENT and NOT the spotlight.
+ * Deliberately a SUPERSET of the jury (eligibleJurors): an ELIMINATED player may
+ * always place a side-bet — it is the one channel they can still act in — even
+ * when deadPlayersJudge gates them out of the vote. The bettor predicate is
+ * independent of alive/elimination, so it can never feed back into survival.
+ */
+function eligibleBettors(state: LastStandingState): PlayerId[] {
+  if (state.spotlight === null) return [];
+  return state.players.filter((p) => p !== state.spotlight && state.connected[p] === true);
+}
+
+/**
  * Resolve the current turn into the result beat. Publishes outcome + tally
  * COUNTS only — the per-player judgeVotes mapping is never exposed, even
  * after resolution.
+ *
+ * This is the SINGLE turn-finalizer (every path — valid/rejected/timeout/
+ * gaveUp/left — routes here), so it is also where the P0-1 side-bets resolve:
+ * the spotlight "survives" iff outcome === 'valid', else "chokes". Correct
+ * callers earn betPointsConfig into the SEPARATE betPoints currency. This NEVER
+ * touches `alive`/`scores` and so can never affect survival.
  */
 function toResult(
   state: LastStandingState,
@@ -67,10 +90,32 @@ function toResult(
     ? Object.assign(emptyPlayerMap<boolean>(), state.alive, { [spotlight]: false })
     : state.alive;
   const lastTurn: TurnResult = { player: spotlight, outcome, tally };
+  const betPoints = resolveSpotBets(state, outcome);
   return {
-    state: { ...state, phase: 'result', alive, lastTurn },
+    state: { ...state, phase: 'result', alive, lastTurn, betPoints },
     effects: [{ type: 'analytics', name: 'turn_resolved', props: { outcome, turnSeq: state.turnSeq } }],
   };
+}
+
+/**
+ * Fold the placed side-bets into the betPoints currency given the resolved
+ * turn outcome. Pure: returns the SAME betPoints reference when nothing pays
+ * (empty buffer or 0 config), else a fresh null-proto map. Bets are upside-only
+ * (resolveSideBets clamps to >= 0) and never dock a score.
+ */
+function resolveSpotBets(state: LastStandingState, outcome: TurnOutcome): Record<PlayerId, number> {
+  if (state.config.betPointsConfig === 0) return state.betPoints;
+  const result: SpotBet = outcome === 'valid' ? 'survives' : 'chokes';
+  const deltas = resolveSideBets<SpotBet, SpotBet>(
+    state.spotBets,
+    result,
+    (bet, o) => (bet === o ? state.config.betPointsConfig : 0),
+  );
+  const winners = Object.keys(deltas);
+  if (winners.length === 0) return state.betPoints;
+  const betPoints = Object.assign(emptyPlayerMap<number>(), state.betPoints);
+  for (const p of winners) betPoints[p] = (betPoints[p] ?? 0) + deltas[p]!;
+  return betPoints;
 }
 
 /**
@@ -123,6 +168,7 @@ function enterTurn(state: LastStandingState): Result {
     turnSeq: state.turnSeq + 1,
     turnsThisRound: state.turnsThisRound + 1,
     judgeVotes: emptyPlayerMap<JudgeVote>(),
+    spotBets: emptySideBets<SpotBet>(),
   };
   if (state.connected[spotlight] !== true) {
     return toResult(base, 'left', { valid: 0, reject: 0 }, true);
@@ -182,6 +228,7 @@ function drawRound(state: LastStandingState, round: number): Result {
       lapInRound: 0,
       turnsThisRound: 0,
       judgeVotes: emptyPlayerMap<JudgeVote>(),
+      spotBets: emptySideBets<SpotBet>(),
       lastTurn: null,
       roundWinners: [],
     },
@@ -257,10 +304,12 @@ export function createLastStanding(
       const deck = buildDeck(seed, config, content.data.items);
       const totalRounds = Math.min(config.totalRounds, deck.length);
       const scores = emptyPlayerMap<number>();
+      const betPoints = emptyPlayerMap<number>();
       const wordsValidated = emptyPlayerMap<number>();
       const alive = emptyPlayerMap<boolean>();
       for (const p of players) {
         scores[p] = 0;
+        betPoints[p] = 0;
         wordsValidated[p] = 0;
         alive[p] = true;
       }
@@ -283,9 +332,11 @@ export function createLastStanding(
         themeCursor: 0,
         usedLetters: Object.create(null) as Record<string, string[]>,
         judgeVotes: emptyPlayerMap<JudgeVote>(),
+        spotBets: emptySideBets<SpotBet>(),
         lastTurn: null,
         roundWinners: [],
         scores,
+        betPoints,
         wordsValidated,
       };
       return drawRound(base, 0).state;
@@ -307,6 +358,20 @@ export function createLastStanding(
           if (state.phase !== 'say' || playerId !== state.spotlight) return noop(state);
           if (!state.config.allowGiveUp) return noop(state);
           return toResult(state, 'gaveUp', { valid: 0, reject: 0 }, true);
+        }
+
+        if (action.kind === 'bet') {
+          // P0-1 keystone. Only during 'say', never from the spotlight, never a
+          // re-bet. Eligibility (present, not the spotlight) is independent of
+          // alive — eliminated players bet too. A bet lives in the SEPARATE
+          // spotBets buffer and is NOT an 'acted' entry: it can never gate the
+          // primary early-resolve nor leak the spotlight's say/word.
+          if (state.phase !== 'say') return noop(state);
+          if (action.value !== 'survives' && action.value !== 'chokes') return noop(state); // re-guard
+          const eligible = eligibleBettors(state).includes(playerId);
+          const spotBets = placeSideBet<SpotBet>(state.spotBets, playerId, action.value, eligible);
+          if (spotBets === null) return noop(state); // ineligible / spotlight / re-bet => SAME ref
+          return { state: { ...state, spotBets }, effects: [] };
         }
 
         if (action.kind === 'judge') {
@@ -369,6 +434,7 @@ export function createLastStanding(
           scores: state.scores,
           rotation: state.rotation,
           wordsValidated: state.wordsValidated,
+          betPoints: state.betPoints,
         };
       }
       // Never expose: deck/themeCursor (upcoming themes), usedLetters, the
@@ -386,12 +452,25 @@ export function createLastStanding(
         lapInRound: state.lapInRound,
         sayMsThisLap: sayMsForLap(state.config, state.lapInRound),
         scores: state.scores,
+        betPoints: state.betPoints,
         wordsValidated: state.wordsValidated,
         lastTurn: state.lastTurn,
       };
       if (state.phase === 'say') {
         const youAreSpotlight = viewer === state.spotlight;
-        return { ...base, phase: 'say', youAreSpotlight, canGiveUp: youAreSpotlight && state.config.allowGiveUp };
+        // P0-1: redact the side-bets exactly like a ballot — owner-echo + count
+        // only; a non-owner never sees another player's survives/chokes call.
+        const myBet = redactSideBets<SpotBet>(state.spotBets, viewer);
+        return {
+          ...base,
+          phase: 'say',
+          youAreSpotlight,
+          canGiveUp: youAreSpotlight && state.config.allowGiveUp,
+          youCanBet:
+            !youAreSpotlight && myBet.own === null && eligibleBettors(state).includes(viewer),
+          myBet: myBet.own,
+          betsIn: myBet.count,
+        };
       }
       if (state.phase === 'judge') {
         const jurors = eligibleJurors(state);

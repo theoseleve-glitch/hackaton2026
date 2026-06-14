@@ -15,7 +15,9 @@ function fullGameScript(): GameEvent<TracerAction>[] {
     events.push({ type: 'action', playerId: 'p1', action: { kind: 'vote', target: 'p2' }, at: at++ });
     events.push({ type: 'action', playerId: 'p2', action: { kind: 'vote', target: 'p1' }, at: at++ });
     events.push({ type: 'action', playerId: 'p3', action: { kind: 'vote', target: 'p1' }, at: at++ });
-    // all voted -> reveal happened automatically; reveal deadline advances the round
+    // all voted -> reveal:suspense automatically; two-beat reveal needs two
+    // deadline hops to advance: suspense -> verdict (scores climb), verdict -> next.
+    events.push({ type: 'deadline', at: at++ });
     events.push({ type: 'deadline', at: at++ });
   }
   return events;

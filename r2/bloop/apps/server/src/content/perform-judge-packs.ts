@@ -23,7 +23,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -37,8 +37,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -52,23 +52,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
     "id": "gda-soft-004",
     "prompt": {
-      "fr": "Cours un 100 mètres au ralenti, fais-toi doubler par un gamin de neuf ans, et exige un contrôle antidopage. Pour le gamin.",
-      "en": "Run a slow-motion 100 meters, get overtaken by a nine-year-old, and demand a drug test. For the nine-year-old."
+      "fr": "Cours un 100 mètres au ralenti dramatique, fais-toi doubler par un gamin de neuf ans imaginaire, franchis la ligne en héros... bon dernier. Pointe le joueur le plus proche : c'est lui, le gamin.",
+      "en": "Run a dramatic slow-motion 100 meters, get overtaken by an imaginary nine-year-old, cross the line a hero — in dead last. Point at the nearest player: they're the nine-year-old."
     },
     "constraintLabel": {
       "fr": "MIME UNIQUEMENT",
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -83,7 +83,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -97,23 +97,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
     "id": "gda-soft-007",
     "prompt": {
-      "fr": "Sois une poule qui pond un œuf en soutenant le regard du joueur le plus proche. Du début à la fin du travail. Sans cligner.",
-      "en": "Be a hen laying an egg while holding eye contact with the nearest player. Through the entire labor. No blinking."
+      "fr": "Sois un pigeon de ville qui repère une frite par terre au milieu du cercle. Approche par bonds méfiants, fixe chaque joueur dans les yeux, et défends ta frite comme si c'était ton seul bien.",
+      "en": "Be a city pigeon that clocks one chip on the floor in the middle of the circle. Bob-walk toward it, eyeball every player, and defend that chip like it's your only asset."
     },
     "constraintLabel": {
       "fr": "MIME UNIQUEMENT",
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -127,8 +127,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -143,7 +143,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -157,8 +157,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -172,8 +172,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -187,8 +187,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -203,7 +203,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -217,8 +217,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -232,23 +232,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
     "id": "gda-soft-016",
     "prompt": {
-      "fr": "Sois un escargot qui traverse la pièce, qui voit arriver une chaussure, et qui accepte son destin à vitesse d'escargot.",
-      "en": "Be a snail crossing the room, spotting the incoming shoe, and accepting your fate at snail speed."
+      "fr": "Tu es le reflet de quelqu'un dans le miroir : copie tous ses gestes à la perfection, mais avec une demi-seconde de retard, de plus en plus à la ramasse. Choisis ta victime dans la pièce.",
+      "en": "You're someone's reflection in the mirror: copy their every move perfectly, but half a second behind and falling apart. Pick your victim in the room."
     },
     "constraintLabel": {
       "fr": "MIME UNIQUEMENT",
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -263,7 +263,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -277,8 +277,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -292,8 +292,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -307,8 +307,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -323,7 +323,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -337,8 +337,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -367,8 +367,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
@@ -382,30 +382,30 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
     "id": "gda-soft-026",
     "prompt": {
-      "fr": "Sois du pop-corn au micro-ondes : un pop, deux pops, l'apocalypse... puis le dernier grain têtu qui refuse d'éclater.",
-      "en": "Be microwave popcorn: one pop, two pops, full apocalypse, then that one stubborn kernel refusing to go."
+      "fr": "Sois le babyphone qui grésille à 3 h du mat' : un pleur timide, puis le hurlement intégral, pile quand les parents venaient enfin de se rendormir.",
+      "en": "Be the baby monitor crackling to life at 3 a.m.: one shy whimper, then the full-throttle scream, exactly as the parents had finally drifted back to sleep."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
     "id": "gda-soft-027",
     "prompt": {
-      "fr": "Sois un réveil de 6 h 30 qu'on snooze trois fois et qui revient à chaque fois un peu plus vénère. Meurs en plein bip, par dépit.",
-      "en": "Be a 6:30 a.m. alarm getting snoozed three times, coming back angrier each round, then dying mid-beep out of pure spite."
+      "fr": "Sois l'imprimante à qui on demande UNE page cinq minutes avant le rendu : le ronron d'espoir, le bourrage papier, le voyant rouge, et le bip de mort pile au pire moment.",
+      "en": "Be the printer asked for ONE page five minutes before the deadline: the hopeful hum, the paper jam, the red light, and the death-beep at the exact worst moment."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
@@ -427,38 +427,38 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
     "id": "gda-soft-029",
     "prompt": {
-      "fr": "Sois une machine à laver en essorage avec une basket oubliée dedans. Ça se termine en décollage.",
-      "en": "Be a washing machine hitting the spin cycle with a forgotten sneaker inside. It ends in liftoff."
+      "fr": "Sois la borne d'arcade qui avale ta pièce, fait semblant de démarrer, puis affiche GAME OVER sans avoir lancé la partie. Nargue le joueur d'en face avec ta petite musique de victoire.",
+      "en": "Be the arcade machine that swallows your coin, pretends it's booting up, then flashes GAME OVER without ever starting the game. Taunt the player opposite with your little victory jingle."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
     "id": "gda-soft-030",
     "prompt": {
-      "fr": "Sois un coucou suisse qui doit sonner midi : douze coucous au contrat, plus de souffle au huitième, mais un contrat c'est un contrat.",
-      "en": "Be a cuckoo clock striking noon: twelve cuckoos on the contract, fully gassed by number eight, finishing anyway. A deal is a deal."
+      "fr": "Sois l'ascenseur bloqué entre deux étages : le petit ding optimiste, le grésillement de l'interphone, et la voix enregistrée qui répète « un instant » pendant que la cabine, elle, lâche prise.",
+      "en": "Be the elevator stuck between two floors: the optimistic little ding, the crackle of the intercom, and the recorded voice repeating 'one moment please' while the cabin itself gives up."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
@@ -487,23 +487,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
     "id": "gda-soft-033",
     "prompt": {
-      "fr": "Sois une bouilloire qui chauffe en silence, encore en silence, toujours en silence... puis qui hurle comme si elle avait vu un truc.",
-      "en": "Be a kettle heating up in silence, still silence, more silence — then screaming like it just remembered something terrible."
+      "fr": "Sois le frigo qui s'allume sur le joueur le plus proche venu grignoter à 2 h du mat'. La lumière le prend en flag, le moteur soupire de déception, et la porte refuse de se refermer tant qu'il a pas avoué.",
+      "en": "Be the fridge whose light snaps on over the nearest player raiding it at 2 a.m. The bulb catches them red-handed, the motor sighs in disappointment, and the door refuses to shut until they confess."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
@@ -517,8 +517,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
@@ -533,7 +533,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
     }
   },
   {
@@ -547,8 +547,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
     }
   },
   {
@@ -562,8 +562,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
     }
   },
   {
@@ -577,8 +577,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+      "en": "3 words for the entire round. silence does the rest of the work. yours."
     }
   },
   {
@@ -593,7 +593,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
     }
   },
   {
@@ -607,8 +607,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
     }
   },
   {
@@ -622,23 +622,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
     }
   },
   {
     "id": "gda-soft-042",
     "prompt": {
-      "fr": "Serre la main de chaque joueur comme un politicien en campagne : sourire trop large, regard déjà sur le suivant. Oublie le prénom de celui que tu connais depuis dix ans.",
-      "en": "Shake every player's hand like a campaigning politician: smile too wide, eyes already on the next voter. Forget the name of the one you've known for ten years."
+      "fr": "Serre la main de chaque joueur comme un politicien en campagne : sourire trop large, regard déjà sur le suivant. Devant tout le monde, oublie le prénom de celui que tu connais depuis dix ans.",
+      "en": "Shake every player's hand like a campaigning politician: smile too wide, eyes already on the next voter. In front of everyone, blank on the name of the one you've known for ten years."
     },
     "constraintLabel": {
       "fr": "3 MOTS MAX",
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+      "en": "3 words for the entire round. silence does the rest of the work. yours."
     }
   },
   {
@@ -679,8 +679,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -698,16 +698,16 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "gda-soft-045",
     "prompt": {
-      "fr": "Applaudis-toi toi-même debout, puis salue bien bas trois fois, comme si la salle en redemandait. La salle n'en redemande pas.",
-      "en": "Give yourself a standing ovation, then take three deep bows like the crowd is begging for more. The crowd is not."
+      "fr": "Offre-toi une standing ovation, salue bien bas trois fois comme si la salle en redemandait, et désigne la seule personne qui a pas applaudi. La salle en redemande pas. Elle non plus.",
+      "en": "Give yourself a standing ovation, take three deep bows like the crowd is begging for more, and call out the one person who didn't clap. The crowd is not begging. Neither are they."
     },
     "constraintLabel": {
       "fr": "MOTS INTERDITS",
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -733,8 +733,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -787,8 +787,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -814,8 +814,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -841,8 +841,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -895,8 +895,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -937,23 +937,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
     }
   },
   {
     "id": "gda-soft-055",
     "prompt": {
-      "fr": "Tiens une arabesque de danse classique avec l'assurance de quelqu'un qui a regardé UNE vidéo. La jambe, elle, dit la vérité.",
-      "en": "Hold a ballet arabesque with the confidence of someone who watched exactly one tutorial. The leg is telling the truth."
+      "fr": "Fige-toi en plein milieu d'une chute en arrière, bras croisés, persuadé que quelqu'un va te rattraper. Personne dans cette pièce a signé pour ça. Tiens la confiance aveugle cinq secondes.",
+      "en": "Freeze mid backwards trust-fall, arms crossed, fully convinced someone will catch you. Nobody in this room agreed to that. Hold the blind faith for five seconds."
     },
     "constraintLabel": {
       "fr": "STATUES",
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
     }
   },
   {
@@ -967,8 +967,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
     }
   },
   {
@@ -997,23 +997,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
     }
   },
   {
     "id": "gda-soft-059",
     "prompt": {
-      "fr": "Prends la pose du Penseur de Rodin, l'air plongé dans une réflexion profonde. Tout le monde ici sait que tu penses à rien.",
-      "en": "Pose as Rodin's Thinker, looking lost in deep thought. Everyone in this room knows it's elevator music in there."
+      "fr": "Fige-toi dans la pose exacte de quelqu'un qui vient de réaliser qu'il a envoyé LE message dans le mauvais groupe. La main vers le téléphone, le visage qui se décompose. Tiens l'horreur pure.",
+      "en": "Freeze in the exact pose of someone who just realized they sent THE message to the wrong group chat. Hand reaching for the phone, face collapsing in real time. Hold the pure horror."
     },
     "constraintLabel": {
       "fr": "STATUES",
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
     }
   },
   {
@@ -1027,8 +1027,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
     }
   },
   {
@@ -1042,8 +1042,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -1057,8 +1057,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -1073,7 +1073,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -1103,7 +1103,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
     }
   },
   {
@@ -1132,8 +1132,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -1159,23 +1159,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
     "id": "gda-party-009",
     "prompt": {
-      "fr": "Sois une star de l'opéra : échauffement, vibrato, montée vers LA note... et la voix qui se brise devant tout le monde. Termine quand même.",
-      "en": "Be an opera star: warm-up, vibrato, the climb to THE note — then the crack heard around the world. Finish the aria anyway."
+      "fr": "Sois un karaoké du samedi soir qui s'attaque à LA note de la chanson : l'élan, l'inspiration héroïque, et le canard légendaire qui sort à la place. Termine le couplet comme si de rien n'était.",
+      "en": "Be a Saturday-night karaoke attempt going for THE big note: the wind-up, the heroic breath, then the legendary duck-noise that comes out instead. Finish the verse like nothing happened."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
@@ -1189,8 +1189,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -1216,8 +1216,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
     }
   },
   {
@@ -1231,8 +1231,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
@@ -1246,8 +1246,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -1261,8 +1261,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
     }
   },
   {
@@ -1303,8 +1303,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
@@ -1318,8 +1318,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -1333,8 +1333,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
     }
   },
   {
@@ -1348,8 +1348,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -1376,14 +1376,14 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
     "id": "gda-party-021",
     "prompt": {
-      "fr": "Sois un canard qui défend son bout de pain contre trois pigeons. Tu gagnes la baston. Tu perds le pain.",
-      "en": "Be a duck defending one piece of bread from three pigeons. You win the fight. You lose the bread."
+      "fr": "Sois la mouette qui a repéré la frite dans la main d'un touriste : le cri de guerre, le piqué, le vol plané avec le butin, et le retour triomphal pour narguer les autres mouettes.",
+      "en": "Be the seagull that has locked onto a chip in a tourist's hand: the war cry, the dive-bomb, the getaway glide with the loot, and the victory lap to taunt the other gulls."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
@@ -1405,8 +1405,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
     }
   },
   {
@@ -1420,8 +1420,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
     }
   },
   {
@@ -1435,8 +1435,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -1462,8 +1462,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -1477,8 +1477,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
@@ -1492,8 +1492,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+      "en": "3 words for the entire round. silence does the rest of the work. yours."
     }
   },
   {
@@ -1507,8 +1507,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -1534,8 +1534,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -1556,16 +1556,16 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "gda-party-031",
     "prompt": {
-      "fr": "Sois un GPS qui recalcule l'itinéraire pour la neuvième fois : les bips passent du calme pro au craquage total. La machine abandonne avant le conducteur.",
-      "en": "Be a GPS recalculating for the ninth time: the chimes go from corporate calm to full meltdown. The machine gives up before the driver does."
+      "fr": "Sois le micro-ondes du bureau qui réchauffe LE plat dont l'odeur prend toute la pièce en otage : le ronron, le bip de fin, et le silence accusateur de tous les collègues. Sors le plat fièrement.",
+      "en": "Be the office microwave reheating THE dish whose smell takes the whole room hostage: the hum, the finish-beep, and the accusing silence of every colleague. Take the dish out proudly."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
@@ -1606,8 +1606,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -1622,7 +1622,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
     }
   },
   {
@@ -1636,8 +1636,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
     }
   },
   {
@@ -1651,8 +1651,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -1679,7 +1679,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -1693,8 +1693,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
@@ -1708,8 +1708,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
     }
   },
   {
@@ -1723,8 +1723,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -1750,8 +1750,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -1765,8 +1765,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
     }
   },
   {
@@ -1795,8 +1795,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -1822,8 +1822,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -1837,8 +1837,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
     }
   },
   {
@@ -1852,8 +1852,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
     }
   },
   {
@@ -1886,16 +1886,16 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "gda-party-049",
     "prompt": {
-      "fr": "Sois la machine à expresso d'un café bondé : mousseur de lait hystérique, percolateur sous pression, et le sifflement final d'une machine qui en a trop vu.",
-      "en": "Be the espresso machine in a packed café: hysterical milk steamer, percolator under pressure, and the final hiss of a machine that has seen too much."
+      "fr": "Sois le distributeur qui fait avancer la barre chocolatée... jusqu'au bord... et la laisse coincée contre la vitre. Le joueur d'en face a payé. Toi tu jubiles. En bruitages.",
+      "en": "Be the vending machine inching the chocolate bar forward... to the very edge... and leaving it dangling against the glass. The player opposite paid for it. You're loving this. In sound effects only."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
@@ -1909,8 +1909,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -1924,8 +1924,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -1951,15 +1951,15 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots pour la manche entière. Le silence fait le reste du travail. Le tien.",
+      "en": "3 words for the entire round. silence does the rest of the work. yours."
     }
   },
   {
     "id": "gda-party-053",
     "prompt": {
-      "fr": "Fais un dab. En 2026. Tiens la pose assez longtemps pour sentir passer chacune des années depuis 2016. La pièce a le droit de te juger.",
-      "en": "Hit a dab. In 2026. Hold it long enough to feel every single year since 2016. The room is legally allowed to judge you."
+      "fr": "Fige-toi dans la pose de la photo de profil que t'as gardée trois ans de trop : menton baissé, sourcil travaillé, filtre imaginaire. La salle a le droit de la dater à l'année près.",
+      "en": "Freeze in the pose of the profile pic you kept three years too long: chin down, eyebrow working overtime, imaginary filter on. The room is allowed to date it to the exact year."
     },
     "constraintLabel": {
       "fr": "STATUES",
@@ -1981,8 +1981,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Interdiction de parler. Tu bruites, ou tu coules. La salle juge chaque son.",
+      "en": "no talking. you make the noise, or you drown. the room rates every sound you make."
     }
   },
   {
@@ -1996,8 +1996,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -2024,7 +2024,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "en": "no sounds, no words, no lip-sync. your body is all you have left. good luck."
     }
   },
   {
@@ -2039,7 +2039,7 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
     },
     "constraintRule": {
       "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "en": "3 spoken words each for the WHOLE round. waste them and watch it sink."
     }
   },
   {
@@ -2053,23 +2053,23 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Tu bouges plus. Tu changes de pose au clap, et seulement au clap. Tiens, ou tremble.",
+      "en": "you stop moving. new pose on the clap, only on the clap. hold it, or shake."
     }
   },
   {
     "id": "gda-party-059",
     "prompt": {
-      "fr": "Sois le ballon de baudruche qu'on lâche sans le nouer : décollage hystérique, zigzags, et la mort en petit bruit triste quelque part derrière le canapé.",
-      "en": "Be the balloon someone let go without tying: hysterical takeoff, zigzags, then the small sad death somewhere behind the couch."
+      "fr": "Sois le siège de théâtre qui lâche le pet de cuir le plus sonore de l'histoire pile dans le silence avant l'entracte. Toute la rangée se retourne. Refais le mouvement pour prouver que c'était le siège. C'était pas le siège.",
+      "en": "Be the theatre seat that releases the loudest leather-squeak in history right in the silence before intermission. The whole row turns. Re-do the move to prove it was the seat. It was not the seat."
     },
     "constraintLabel": {
       "fr": "BRUITAGES SEULEMENT",
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Bouche ouverte pour les bruitages, fermée pour les mots. Un mot et c'est fini.",
+      "en": "mouth open for sound effects, shut for actual words. one word and it's done."
     }
   },
   {
@@ -2083,8 +2083,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Parle, mime, hurle — sauf ces 3 mots. La salle attend juste que tu te plantes.",
+      "en": "talk, mime, scream — just not those 3 words. the room is only waiting for you to slip."
     },
     "forbidden": {
       "fr": [
@@ -2110,8 +2110,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Pas un bruit, pas un mot. Ta bouche est en grève. Le corps fait tout le sale boulot.",
+      "en": "not a sound, not a word. your mouth is on strike. the body does all the dirty work."
     }
   },
   {
@@ -2125,8 +2125,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Statue. Le clap te débloque, rien d'autre. Le premier qui cligne fort, la salle l'a vu.",
+      "en": "statue. the clap unfreezes you, nothing else. first one to blink hard, the room saw it."
     }
   },
   {
@@ -2182,8 +2182,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Muet total. Le premier qui chuchote a perdu, et il le sait déjà.",
+      "en": "fully muted. first one who whispers has lost, and they already know it."
     }
   },
   {
@@ -2197,8 +2197,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "3 mots. C'est tout ton budget. Au quatrième, la salle a le droit de t'achever.",
+      "en": "3 words. that is your whole budget. on word four, the room is allowed to finish you."
     }
   },
   {
@@ -2212,8 +2212,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FREEZE FRAMES"
     },
     "constraintRule": {
-      "fr": "Poses figées uniquement. Changement de pose quand l'acteur frappe dans ses mains. Pas avant.",
-      "en": "frozen poses only. you change pose when the performer claps. not before."
+      "fr": "Figé jusqu'au clap. Pas un muscle avant. Ta crampe parlera pour toi.",
+      "en": "frozen until the clap. not a muscle before. your cramp will speak for you."
     }
   },
   {
@@ -2227,8 +2227,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "SOUND EFFECTS ONLY"
     },
     "constraintRule": {
-      "fr": "Aucun mot. Que des bruitages. T'es un effet sonore avec des jambes maintenant.",
-      "en": "no words. noises only. you're a sound effect with legs now."
+      "fr": "Pas un seul mot. Que des bruits de bouche. Ta dignité reste au vestiaire.",
+      "en": "not one word. mouth-noises only. your dignity stays at the door."
     }
   },
   {
@@ -2242,8 +2242,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Tu peux tout dire, sauf les 3 mots affichés. Le premier qui craque offre la manche aux autres.",
+      "en": "say anything except the 3 words on screen. first to crack hands the round to everyone else."
     },
     "forbidden": {
       "fr": [
@@ -2269,8 +2269,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "MIME ONLY"
     },
     "constraintRule": {
-      "fr": "Zéro son, zéro mot, zéro lip-sync. T'as plus que ton corps. Bon courage.",
-      "en": "no sounds, no words, no lip-sync. your body is all you've got left. good luck."
+      "fr": "Que des gestes. Si on t'entend, c'est mort. Vas-y, fais-toi comprendre. Bonne chance.",
+      "en": "gestures only. if we hear you, it's over. go on, make yourself understood. good luck with that."
     }
   },
   {
@@ -2284,8 +2284,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "3 WORDS MAX"
     },
     "constraintRule": {
-      "fr": "3 mots chacun pour TOUTE la manche. Gaspillez-les et regardez-le couler.",
-      "en": "3 spoken words each for the WHOLE round. waste them and watch them drown."
+      "fr": "Trois mots max et pas un de plus. Choisis-les comme tes dernières volontés.",
+      "en": "three words max, not one more. pick them like they're your last will and testament."
     }
   },
   {
@@ -2299,8 +2299,8 @@ export const DEVINE_L_ACTION_PACK: ContentPack<PerformJudgeContent> = {
       "en": "FORBIDDEN WORDS"
     },
     "constraintRule": {
-      "fr": "Parlez librement, sauf les 3 mots interdits sur vos écrans. Un seul lâché, c'est terminé.",
-      "en": "talk all you want — except the 3 forbidden words on your screens. one slip ends everything."
+      "fr": "Cause autant que tu veux. Les 3 mots interdits sont des mines. Marche dessus, t'es mort.",
+      "en": "yap as much as you like. the 3 forbidden words are landmines. step on one, you're done."
     },
     "forbidden": {
       "fr": [
@@ -2468,8 +2468,8 @@ export const DEVINE_L_OBJET_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "obj-easy-014",
     "prompt": {
-      "fr": "le livre que tu cites en soirée. T'en es à la page 12.",
-      "en": "the book you quote at parties. you're on page 12."
+      "fr": "le livre que tu cites en soirée pour paraître profond. Marque-page coincé à la page 12 depuis novembre.",
+      "en": "the book you quote at parties to sound deep. bookmark stuck on page 12 since November."
     },
     "category": {
       "fr": "Zone de flemme",
@@ -2985,8 +2985,8 @@ export const DEVINE_L_OBJET_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "obj-med-021",
     "prompt": {
-      "fr": "le déboucheur à ventouse. Quelqu'un ici a une histoire.",
-      "en": "the plunger. someone in this room has a story."
+      "fr": "le déboucheur à ventouse acheté en urgence un dimanche, à pied, sous la pluie, après LA soirée",
+      "en": "the plunger bought in a hurry on a Sunday, on foot, in the rain, the morning after THAT party"
     },
     "category": {
       "fr": "Hygiène douteuse",
@@ -3139,8 +3139,8 @@ export const DEVINE_L_OBJET_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "obj-med-035",
     "prompt": {
-      "fr": "la pile que quelqu'un ici a déjà testée sur la langue",
-      "en": "the battery someone in this room has licked"
+      "fr": "la pile testée sur la langue pour voir « si elle marche encore ». Spoiler : ça pique et tu sais toujours pas.",
+      "en": "the battery tested on the tongue to see 'if it still works'. spoiler: it stings and you still don't know."
     },
     "category": {
       "fr": "Tech qui trahit",
@@ -3194,8 +3194,8 @@ export const DEVINE_L_OBJET_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "obj-med-040",
     "prompt": {
-      "fr": "l'arrosoir sorti pour une plante morte depuis trois semaines. C'est plus de l'arrosage, c'est des obsèques.",
-      "en": "the watering can showing up three weeks after the plant died. that's not watering, that's a funeral."
+      "fr": "le cadre « Live Laugh Love » offert par quelqu'un qui assistait pas vraiment à ta vie",
+      "en": "the 'Live Laugh Love' sign from someone who wasn't really paying attention to your life"
     },
     "category": {
       "fr": "Déco contestable",
@@ -3399,8 +3399,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-001",
     "prompt": {
-      "fr": "Laver une seule fourchette, la tienne, et reposer la vaisselle sale du coloc bien en évidence",
-      "en": "Washing exactly one fork, yours, and restacking your flatmate's dirty dishes as a monument"
+      "fr": "Laver UNE fourchette, la tienne, la ranger, et reconstruire la pile de vaisselle sale du coloc plus haute qu'avant",
+      "en": "Washing ONE fork, yours, putting it away, and rebuilding your flatmate's dirty-dish tower taller than you found it"
     },
     "category": {
       "fr": "Corvées",
@@ -3424,8 +3424,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-002",
     "prompt": {
-      "fr": "Repasser sa chemise à même la table cinq minutes avant l'entretien, et la cramer",
-      "en": "Ironing your shirt directly on the table five minutes before the interview, and scorching it"
+      "fr": "Repasser sa chemise à même la table cinq minutes avant l'entretien, la cramer en plein milieu, et décider de garder la veste fermée toute la journée",
+      "en": "Ironing your shirt flat on the table five minutes before the interview, scorching a hole dead-centre, and deciding to keep the jacket buttoned all day"
     },
     "category": {
       "fr": "Corvées",
@@ -3449,8 +3449,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-003",
     "prompt": {
-      "fr": "Trier le linge au test de l'odeur : sniffer chaque t-shirt et décider lequel est « encore mettable »",
-      "en": "Sorting laundry by smell test: sniffing every shirt to rule which one is still wearable"
+      "fr": "Trier le linge au flair : sniffer chaque t-shirt, écœuré, et reposer le pire dans le tas « propre »",
+      "en": "Sorting laundry by smell alone: sniffing each shirt, gagging, and tossing the worst one back on the clean pile"
     },
     "category": {
       "fr": "Corvées",
@@ -3524,8 +3524,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-006",
     "prompt": {
-      "fr": "Changer l'ampoule du plafond en équilibre sur une chaise à roulettes, trop fier pour demander de l'aide",
-      "en": "Changing the ceiling bulb balanced on a swivel chair, too proud to ask for help"
+      "fr": "Changer l'ampoule debout sur une chaise à roulettes qui part doucement toute seule pendant que tu visses",
+      "en": "Changing the ceiling bulb standing on a swivel chair that slowly rolls out from under you while you screw it in"
     },
     "category": {
       "fr": "Corvées",
@@ -3535,13 +3535,13 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
       "fr": [
         "ampoule",
         "chaise",
-        "équilibre",
+        "rouler",
         "visser"
       ],
       "en": [
         "bulb",
         "chair",
-        "balance",
+        "roll",
         "screw"
       ]
     }
@@ -3599,8 +3599,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-009",
     "prompt": {
-      "fr": "Enfiler une housse de couette, disparaître dedans, et accepter d'y vivre désormais",
-      "en": "Stuffing a duvet into its cover, vanishing inside, and accepting this as your home now"
+      "fr": "Sortir la poubelle qui fuit, la tenir à bout de bras, et semer une traînée jusqu'à la porte qu'il faudra nettoyer après",
+      "en": "Taking out the leaking bin bag, holding it at full arm's length, and laying a trail to the door you'll have to mop up after"
     },
     "category": {
       "fr": "Corvées",
@@ -3608,24 +3608,24 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
     },
     "forbidden": {
       "fr": [
-        "couette",
-        "housse",
-        "lit",
-        "secouer"
+        "poubelle",
+        "sac",
+        "fuir",
+        "porter"
       ],
       "en": [
-        "duvet",
-        "cover",
-        "bed",
-        "shake"
+        "bin",
+        "bag",
+        "leak",
+        "carry"
       ]
     }
   },
   {
     "id": "mi-act-010",
     "prompt": {
-      "fr": "Plier un drap-housse sous le regard de ta grand-mère qui a déjà soupiré deux fois",
-      "en": "Folding a fitted sheet while your nan watches in silence and judges every single move"
+      "fr": "Plier un drap-housse sous le regard de ta daronne, abandonner, le rouler en boule, et le ranger en planquant la boule au fond",
+      "en": "Folding a fitted sheet under your mum's stare, giving up, balling it up, and stuffing the ball to the back of the cupboard"
     },
     "category": {
       "fr": "Corvées",
@@ -3636,13 +3636,13 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
         "drap",
         "housse",
         "plier",
-        "élastique"
+        "boule"
       ],
       "en": [
         "fitted",
         "sheet",
         "fold",
-        "elastic"
+        "ball"
       ]
     }
   },
@@ -4347,8 +4347,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-039",
     "prompt": {
-      "fr": "Boxer contre son ombre, perdre aux points, et exiger la revanche",
-      "en": "Shadow-boxing, losing on points, and demanding a rematch from your own shadow"
+      "fr": "Boxer contre son ombre à fond, encaisser un crochet qu'on s'est mis tout seul, et tomber au tapis pour de vrai",
+      "en": "Shadow-boxing for real, walking into a hook you threw at yourself, and going down to the canvas genuinely hurt"
     },
     "category": {
       "fr": "Sport",
@@ -5797,8 +5797,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-097",
     "prompt": {
-      "fr": "Ouvrir millimètre par millimètre la bouteille qu'on a secouée, guetter le piège, et se la prendre au visage quand même",
-      "en": "Easing open the bottle somebody definitely shook, one millimetre at a time, and taking the blast to the face anyway"
+      "fr": "Ouvrir tout doucement la bouteille que quelqu'un a clairement secouée, la tenir à distance, viser un pote au cas où, et se la prendre en pleine face quand même",
+      "en": "Slowly cracking the bottle someone definitely shook, holding it away, aiming it at a mate just in case, and wearing the blast yourself anyway"
     },
     "category": {
       "fr": "Soirée",
@@ -5847,8 +5847,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-099",
     "prompt": {
-      "fr": "Scroller au lit bras tendu, lâcher le téléphone sur son nez, et vérifier l'écran avant de vérifier le nez",
-      "en": "Scrolling in bed at arm's length, dropping the phone square on your nose, and checking the screen for cracks before checking the nose"
+      "fr": "Brancher la clé USB, échouer, la retourner, échouer encore, la remettre dans le sens du départ, et là ça rentre",
+      "en": "Plugging in the USB stick, failing, flipping it, failing again, flipping it back to the first way, and now it goes in"
     },
     "category": {
       "fr": "Techno",
@@ -5856,16 +5856,16 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
     },
     "forbidden": {
       "fr": [
-        "téléphone",
-        "visage",
-        "lit",
-        "lâcher"
+        "USB",
+        "clé",
+        "brancher",
+        "retourner"
       ],
       "en": [
-        "phone",
-        "face",
-        "bed",
-        "drop"
+        "USB",
+        "stick",
+        "plug",
+        "flip"
       ]
     }
   },
@@ -6372,8 +6372,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-120",
     "prompt": {
-      "fr": "Attraper le paquet tout en haut de l'étagère sur la pointe des pieds, refuser l'aide de quelqu'un de plus grand, et faire tomber tout le rayon",
-      "en": "Tiptoeing for the packet on the top shelf, waving away help from a taller person, and bringing the entire shelf down"
+      "fr": "Attraper le paquet tout en haut du rayon sur la pointe des pieds, le frôler du bout des doigts, le faire basculer, et tout recevoir sur la tête",
+      "en": "Tiptoeing for the packet on the top supermarket shelf, brushing it with one fingertip, tipping it over, and wearing the whole shelf"
     },
     "category": {
       "fr": "Quotidien",
@@ -6822,8 +6822,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-138",
     "prompt": {
-      "fr": "Ratisser les feuilles en un tas parfait, voir une rafale tout redistribuer, et recommencer en fixant le ciel comme un ennemi personnel",
-      "en": "Raking the leaves into one perfect pile, watching a gust redistribute everything, and starting over while glaring at the sky like it's personal"
+      "fr": "Ratisser les feuilles en un tas parfait, poser le râteau deux secondes pour souffler, et voir le voisin d'à côté allumer son souffleur pile à ce moment-là",
+      "en": "Raking the leaves into one perfect pile, setting the rake down for a two-second breather, and watching next door fire up their leaf-blower at that exact moment"
     },
     "category": {
       "fr": "Nature",
@@ -6833,13 +6833,13 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
       "fr": [
         "feuilles",
         "râteau",
-        "vent",
+        "souffleur",
         "tas"
       ],
       "en": [
         "leaves",
         "rake",
-        "wind",
+        "blower",
         "pile"
       ]
     }
@@ -7172,8 +7172,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-152",
     "prompt": {
-      "fr": "Tricoter l'écharpe de Noël, la mesurer, constater quatre mètres, et la rebaptiser cadeau pour deux personnes",
-      "en": "Knitting the Christmas scarf, measuring it, clocking four metres, and rebranding it a two-person gift"
+      "fr": "Tricoter l'écharpe de Noël, lâcher une maille au mètre trois, regarder toute l'œuvre se détricoter d'un coup, et continuer comme si de rien n'était",
+      "en": "Knitting the Christmas scarf, dropping a stitch at metre three, watching the whole thing unravel in one go, and carrying on like nothing happened"
     },
     "category": {
       "fr": "Loisirs",
@@ -7347,8 +7347,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-159",
     "prompt": {
-      "fr": "Tirer le cordon de la tronçonneuse douze fois avec une rage croissante, et la voir démarrer du premier coup quand quelqu'un d'autre essaie",
-      "en": "Yanking the chainsaw cord twelve times with rising fury, then watching it start first pull the moment somebody else tries"
+      "fr": "Tirer le cordon de la tondeuse à gazon trente fois, suer toute sa dignité, et abandonner pile une seconde avant qu'elle parte enfin toute seule",
+      "en": "Yanking the lawnmower cord thirty times, sweating out every drop of dignity, and giving up exactly one second before it finally roars to life on its own"
     },
     "category": {
       "fr": "Corvées",
@@ -7356,13 +7356,13 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
     },
     "forbidden": {
       "fr": [
-        "tronçonneuse",
+        "tondeuse",
         "démarrer",
         "cordon",
         "moteur"
       ],
       "en": [
-        "chainsaw",
+        "lawnmower",
         "start",
         "cord",
         "engine"
@@ -7647,8 +7647,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-171",
     "prompt": {
-      "fr": "Entrer dans la pièce avec une mission, oublier laquelle, repartir, revenir aussitôt, et accuser la pièce",
-      "en": "Entering the room on a mission, losing the mission, leaving, coming straight back, and blaming the room"
+      "fr": "Entrer dans la pièce avec une mission précise, l'oublier net, fouiller partout pour la retrouver, et ressortir avec un objet totalement au hasard",
+      "en": "Entering the room on a clear mission, blanking completely, rummaging everywhere to jog the memory, and leaving with one totally random object"
     },
     "category": {
       "fr": "Quotidien",
@@ -7658,14 +7658,14 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
       "fr": [
         "oublier",
         "pièce",
-        "pourquoi",
-        "demi-tour"
+        "mission",
+        "chercher"
       ],
       "en": [
         "forget",
         "room",
-        "why",
-        "turn back"
+        "mission",
+        "search"
       ]
     }
   },
@@ -7922,8 +7922,8 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "mi-act-182",
     "prompt": {
-      "fr": "S'endormir au cinéma sur l'épaule d'un inconnu, se réveiller en sursaut au moment le plus silencieux, et applaudir au cas où",
-      "en": "Falling asleep at the cinema onto a stranger's shoulder, jolting awake at the quietest moment, and clapping just in case"
+      "fr": "Ouvrir le paquet de bonbons le plus bruyant du monde au cinéma, freiner chaque froissement, et le faire exploser pile sur la réplique culte",
+      "en": "Opening the loudest sweet wrapper on Earth at the cinema, easing every crinkle, and detonating it right on the film's biggest line"
     },
     "category": {
       "fr": "Loisirs",
@@ -7932,15 +7932,15 @@ export const MIME_INVERSE_PACK: ContentPack<PerformJudgeContent> = {
     "forbidden": {
       "fr": [
         "cinéma",
-        "dormir",
-        "sursaut",
-        "séance"
+        "bonbons",
+        "paquet",
+        "bruit"
       ],
       "en": [
-        "movies",
-        "doze",
-        "jolt",
-        "screen"
+        "cinema",
+        "sweets",
+        "wrapper",
+        "loud"
       ]
     }
   },
@@ -8004,12 +8004,12 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "dlm-001-robot-hiphop",
     "prompt": {
-      "fr": "Un robot qui apprend le hip-hop sur un tuto YouTube en 144p",
-      "en": "A robot learning hip-hop from a 144p YouTube tutorial that keeps buffering"
+      "fr": "Un robot qui apprend le hip-hop sur un tuto YouTube en 144p qui bufferise pile sur le move clé",
+      "en": "A robot learning hip-hop from a 144p YouTube tutorial that buffers right on the key move"
     },
     "hint": {
-      "fr": "Lag, freeze, reboot en plein move. Le salon a parié sur le crash. Donne-leur le bug du siècle.",
-      "en": "lag, freeze, blue-screen mid-move. the room bet on the crash. give them the full system failure"
+      "fr": "Lag, freeze, reboot en plein milieu d'un move. Le salon a déjà parié sur le crash. Déçois-les pas : offre-leur le bug du siècle, écran bleu compris.",
+      "en": "lag, freeze, full reboot mid-move. the room already bet on the crash. don't let them down: hand them the bug of the century, blue screen and all"
     }
   },
   {
@@ -8059,12 +8059,12 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
   {
     "id": "dlm-006-dog-reunion",
     "prompt": {
-      "fr": "Un chien qui retrouve son humain parti 4 minutes acheter le pain",
-      "en": "A dog reuniting with its human after a 4-minute trip to the bins"
+      "fr": "Un chien qui retrouve son humain parti 4 minutes sortir la poubelle",
+      "en": "A dog reuniting with its human after a 4-minute trip to take the bins out"
     },
     "hint": {
-      "fr": "Quatre minutes = quatre ans. Pleure, saute, tourne. Si personne chiale dans le salon, t'as raté ta vie de chien.",
-      "en": "four minutes = four years. cry, spin, collapse. if nobody in this room tears up, you failed the species"
+      "fr": "Quatre minutes = quatre ans de guerre. Pleure, saute, tourne, fais pipi de joie. Personne chiale dans le salon ? T'as déshonoré l'espèce.",
+      "en": "four minutes = four years at war. cry, spin, pee a little from joy. nobody in this room tears up? you disgraced the whole species"
     }
   },
   {
@@ -8552,14 +8552,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-051-cyclist-climb",
+    "id": "dlm-051-spin-class",
     "prompt": {
-      "fr": "Un coureur du Tour dans le dernier col, qui meurt à l'intérieur mais sourit pour le drone",
-      "en": "A Tour de France rider on the final climb, dying inside but smiling for the drone shot"
+      "fr": "Le cours de RPM où le coach hurle « ON LÂCHE RIEN » et toi t'as lâché à la minute deux",
+      "en": "The spin class where the coach screams 'LEAVE IT ALL ON THE BIKE' and you left it all at minute two"
     },
     "hint": {
-      "fr": "Danse sur les pédales, grimace d'apocalypse. Drone : sourire, attaque. Drone parti : le néant. Répète jusqu'au sommet.",
-      "en": "dance on the pedals, apocalypse grimace. drone up: smile, attack. drone gone: the void. loop it to the summit"
+      "fr": "Mets la résistance à zéro en douce, mime l'effort de ta vie, hoche la tête au coach comme un soldat. Il te regarde. Visse le bouton. Mens.",
+      "en": "secretly drop the resistance to zero, mime the effort of your life, nod at the coach like a soldier. he's watching. twist the dial. lie with your whole body"
     }
   },
   {
@@ -8596,14 +8596,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-055-pingpong-slowmo",
+    "id": "dlm-055-podium-anthem",
     "prompt": {
-      "fr": "Une finale de ping-pong rejouée intégralement au ralenti, sueur dramatique incluse",
-      "en": "A ping-pong final replayed entirely in slow motion, dramatic sweat included"
+      "fr": "Sur la plus haute marche du podium olympique quand l'hymne démarre — et tu connais pas un seul mot de ton propre hymne national",
+      "en": "On the top step of the Olympic podium when the anthem starts — and you don't know a single word of your own national anthem"
     },
     "hint": {
-      "fr": "Dix secondes par échange. Plongeon image par image, cri grave sans fin. T'es les DEUX joueurs ET la balle. Souffre.",
-      "en": "ten seconds per rally. frame-by-frame dive, one endless bass scream. you are BOTH players AND the ball. suffer"
+      "fr": "Main sur le cœur, larme officielle, bouche qui mime du vide, marmonne « na na naaa » avec conviction. La caméra zoome sur tes lèvres. Tout le pays regarde. Bluffe l'hymne entier.",
+      "en": "hand on heart, official tear, mouth miming pure nothing, mumble 'na na naaa' with total conviction. the camera zooms on your lips. the whole country is watching. bluff the entire anthem"
     }
   },
   {
@@ -8838,14 +8838,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-077-suitcase-sit",
+    "id": "dlm-077-self-checkout",
     "prompt": {
-      "fr": "Fermer une valise trop pleine en t'asseyant dessus de tout ton désespoir",
-      "en": "Closing an overstuffed suitcase by sitting on it with your full body weight and despair"
+      "fr": "La caisse automatique qui hurle « article non reconnu » devant la queue entière alors que t'as RIEN volé",
+      "en": "The self-checkout screaming 'unexpected item in the bagging area' to the entire queue when you stole NOTHING"
     },
     "hint": {
-      "fr": "Compression, rebonds, la fermeture avance dent par dent. Victoire ! Elle se rouvre dans ton dos. Elle t'a entendu fêter.",
-      "en": "compress, bounce, the zip gains one tooth at a time. victory! it reopens behind your back. it heard you celebrate"
+      "fr": "Scan confiant, bip, la machine t'accuse, tu lèves les mains comme innocent, l'employé arrive avec sa carte magique, la queue te juge. Re-scan. Re-accusation. T'es coupable de rien et de tout.",
+      "en": "confident scan, beep, the machine accuses you, hands up like you're innocent, the staff member arrives with the magic card, the queue judges. re-scan. re-accusation. guilty of nothing and everything"
     }
   },
   {
@@ -8893,14 +8893,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-082-western-draw",
+    "id": "dlm-082-villain-monologue",
     "prompt": {
-      "fr": "Duel de western à midi pile : le dégainage dure quarante-cinq secondes entières",
-      "en": "A high-noon western standoff where the draw takes a full forty-five seconds"
+      "fr": "Le méchant qui explique tout son plan au héros ligoté, et qui se rend compte en parlant que son plan est complètement pourri",
+      "en": "The villain monologuing his master plan to the tied-up hero, slowly realizing mid-speech that the plan is genuinely terrible"
     },
     "hint": {
-      "fr": "Regard plissé, vent imaginaire, doigts qui frémissent au-dessus du colt. Dégaine au ralenti. Rate. Midi attendra.",
-      "en": "squint, imaginary tumbleweed, fingers twitching over the holster. slow-motion draw. miss. noon can wait. it has to"
+      "fr": "Rire machiavélique, geste théâtral, « et c'est là que… » puis le doute qui s'installe, la voix qui faiblit. Le héros hausse un sourcil. Tu le sais. Il le sait. Finis le monologue quand même.",
+      "en": "evil cackle, theatrical hand sweep, 'and THAT is when…' then the doubt creeps in, the voice falters. the hero raises one eyebrow. you know. he knows. finish the monologue anyway"
     }
   },
   {
@@ -9179,14 +9179,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-108-headphones-sing",
+    "id": "dlm-108-typo-boss",
     "prompt": {
-      "fr": "Chanter à tue-tête avec ton casque, sans savoir que tout le bus profite du concert",
-      "en": "Singing your heart out in headphones, unaware the whole bus is getting a free concert"
+      "fr": "Réaliser au ralenti que le message « il me soûle ce gros relou » est parti dans le groupe AVEC le relou dedans",
+      "en": "Realizing in slow motion that the text 'omg he's SO annoying' went to the group chat that includes him"
     },
     "hint": {
-      "fr": "Yeux fermés, refrain habité, montée dans les aigus… retrait d'écouteur fatal. Le bus connaît ta playlist honteuse.",
-      "en": "eyes closed, soulful chorus, going for the high note… the fatal earbud removal. the bus knows your shameful playlist"
+      "fr": "Pouce satisfait, deux secondes de paix, le « livré » se transforme en « lu », sueur froide, supprime pour tout le monde TROP TARD. Les points de suspension de sa réponse arrivent. Meurs.",
+      "en": "satisfied thumb, two seconds of peace, 'delivered' flips to 'seen', cold sweat, delete-for-everyone TOO LATE. the three dots of his reply appear. perish"
     }
   },
   {
@@ -9201,14 +9201,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-110-disco-hip",
+    "id": "dlm-110-wedding-tiktok",
     "prompt": {
-      "fr": "Un danseur disco dont la hanche se bloque en plein geste Travolta, devant tout le monde",
-      "en": "A disco dancer whose hip locks mid Travolta point in front of everyone"
+      "fr": "Toute la famille qui galère sur la choré TikTok au mariage : la mariée connaît les pas, tonton invente les siens, mamie est à contretemps total",
+      "en": "The whole family fumbling the TikTok dance at the wedding: the bride nails it, the uncle freestyles his own version, grandma is two beats behind everyone"
     },
     "hint": {
-      "fr": "Doigt vers le ciel, CRAC sonore, finis le show avec une moitié du corps. Le disco s'arrête pas pour une hanche.",
-      "en": "finger to the sky, audible CRACK, finish the show with half a body. disco stops for no man's hip. point THROUGH the pain"
+      "fr": "Joue les trois générations d'un coup : la pro sûre d'elle, le tonton qui suit RIEN mais à fond, mamie un temps en retard sur tout. Quelqu'un dans cette pièce, c'est mamie. Désigne-le pas. Mais vous savez.",
+      "en": "play all three generations at once: the confident pro, the uncle following NOTHING but committing fully, grandma a full beat behind everything. someone in this room is grandma. don't point. but everyone knows"
     }
   },
   {
@@ -9245,14 +9245,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-114-dramatic-death",
+    "id": "dlm-114-jumpscare-actor",
     "prompt": {
-      "fr": "Une scène de mort dramatique qui dure quatre fois trop longtemps",
-      "en": "A dramatic death scene that goes on four times longer than necessary"
+      "fr": "L'acteur de film d'horreur qui doit avoir peur d'un monstre que les effets spéciaux ajouteront en post-prod (un balai sur fond vert)",
+      "en": "The horror actor who has to be terrified of a monster the effects team will add later (it's a mop on a green screen)"
     },
     "hint": {
-      "fr": "Touché ! Adieux, faux départ, re-adieux, testament oral, rappel. Meurs encore. Le public veut rentrer. Refuse-leur ça.",
-      "en": "hit! farewell, false ending, more farewells, spoken-word will, encore. die again. the audience wants to leave. refuse"
+      "fr": "Fixe le balai comme si c'était la fin du monde, recule en hurlant, trébuche, supplie le balai. Le réalisateur crie « PLUS PEUR ». Le balai bouge même pas. Donne ta vie.",
+      "en": "stare at the mop like it's the end of days, back away screaming, trip, beg the mop for your life. the director yells 'MORE SCARED'. the mop does not move. give it everything"
     }
   },
   {
@@ -9278,14 +9278,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-117-shampoo-ad",
+    "id": "dlm-117-perfume-ad",
     "prompt": {
-      "fr": "Tourner une pub de shampoing : ralenti, crinière au vent, regard caméra",
-      "en": "Starring in a shampoo commercial: slow motion, mane in the wind, eyes on camera"
+      "fr": "La pub de parfum incompréhensible : tu marches dans un couloir au ralenti et tu murmures un seul mot vide de sens",
+      "en": "The perfume ad nobody understands: you walk down a corridor in slow motion and whisper one word that means nothing"
     },
     "hint": {
-      "fr": "Mouvements de crinière exagérés, même sans crinière. SURTOUT sans crinière. Le vent existe que pour toi.",
-      "en": "exaggerated mane flips, even with no mane. ESPECIALLY with no mane. the wind exists only for you"
+      "fr": "Démarche d'apesanteur, regard de tueur, retourne-toi PILE pour la caméra, souffle le mot « Obsession ». Ça veut rien dire. C'est l'art. Vends-le à 12 euros les 5 ml.",
+      "en": "weightless walk, killer stare, turn for the camera at the EXACT right moment, breathe the word 'Obsession'. it means nothing. it's art. sell it at twelve euros for 5ml"
     }
   },
   {
@@ -9333,14 +9333,14 @@ export const DOUBLE_LE_MOUVEMENT_PACK: ContentPack<PerformJudgeContent> = {
     }
   },
   {
-    "id": "dlm-122-javelin-keep",
+    "id": "dlm-122-dodgeball-target",
     "prompt": {
-      "fr": "Un lanceur de javelot qui oublie de lâcher le javelot et part avec",
-      "en": "A javelin thrower who forgets to let go and just leaves with the javelin"
+      "fr": "Le dernier survivant au ballon prisonnier qui réalise que les six autres l'ont choisi, lui, comme cible commune",
+      "en": "The last one standing in dodgeball realizing all six others have silently agreed: you are the shared target now"
     },
     "hint": {
-      "fr": "Course d'élan énorme, rotation, décollage AVEC le javelot. Atterris loin. Le record est invalide. Toi aussi.",
-      "en": "massive run-up, rotation, takeoff WITH the javelin. land somewhere far. the record is void. so are you"
+      "fr": "Esquive, esquive, supplie du regard, esquive encore. Ils sourient tous. C'est personnel maintenant. Quelqu'un dans cette pièce serait CE type-là. Mime sa fin.",
+      "en": "dodge, dodge, beg with your eyes, dodge again. they're all smiling. it's personal now. someone in this room would absolutely be that target. mime their ending"
     }
   },
   {

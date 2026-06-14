@@ -43,6 +43,52 @@ function ProgressChips({ flags, players }: { flags: Record<string, boolean>; pla
   );
 }
 
+/**
+ * CC-1 "lean": secretly tap who you suspect is the impostor during discuss.
+ * Owner-only — your own lean shows a coral ring; everyone else only ever sees
+ * the public "X leaning" count, never WHO. Re-leanable across the period.
+ */
+function LeanPicker({ targets, myLean, players, onLean, lang }: {
+  targets: readonly string[]; myLean: string | null; players: readonly RoomPlayer[];
+  onLean: (id: string) => void; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const byId = new Map(players.map((p) => [p.id, p]));
+  const nick = (id: string) => (byId.get(id) ?? { id, ...UNKNOWN }).profile.nickname;
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  return (
+    <View style={{ gap: tokens.spacing.sm }}>
+      <AppText role="label" color="textSecondary" style={{ textAlign: 'center' }}>
+        {myLean === null
+          ? L('🤫 QUI SENS-TU COMME L’IMPOSTEUR ?', '🤫 WHO’S YOUR GUT PICK FOR IMPOSTOR?')
+          : L('TON SOUPÇON — SECRET, MODIFIABLE', 'YOUR HUNCH — SECRET, CHANGEABLE')}
+      </AppText>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: tokens.spacing.sm }}>
+        {targets.map((id) => {
+          const picked = myLean === id;
+          return (
+            <Pressable
+              key={id} onPress={() => onLean(id)}
+              accessibilityLabel={`${nick(id)}${picked ? (lang === 'fr' ? ', ton soupçon' : ', your hunch') : ''}`}
+              style={{
+                minHeight: tokens.layout.minTouchTarget, alignItems: 'center', gap: 4, width: 76,
+                paddingVertical: tokens.spacing.sm, borderRadius: tokens.radii.lg,
+                borderWidth: picked ? 3 : 0, borderColor: theme.brand,
+                backgroundColor: picked ? theme.surfaceAlt : 'transparent',
+                ...(picked ? tokens.elevation.sticker : {}),
+              }}>
+              <Avatar name={nick(id)} size="md" ring={picked ? 'you' : null} />
+              <AppText role="caption" color={picked ? 'brand' : 'textSecondary'} style={{ textAlign: 'center' }}>
+                {picked ? '👁 ' : ''}{nick(id)}
+              </AppText>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
 /** Public tally bars of a resolved vote round (counts only — ballots stay secret). */
 function TallyBars({ record, players, lang }: { record: VoteRecord; players: readonly RoomPlayer[]; lang: Lang }) {
   const { theme, tokens } = useTheme();
@@ -99,6 +145,7 @@ export function SecretRolePlay({ code }: { code: string }) {
   if (sv === null) return null;
 
   const left = secondsLeft(state.deadlineAt, now);
+  const me = state.playerId;
   const byId = new Map(state.players.map((p) => [p.id, p]));
   const player = (id: string): RoomPlayer => byId.get(id) ?? { id, ...UNKNOWN };
   const ranked = (scores: Record<string, number>) => Object.entries(scores).sort((a, b) => b[1] - a[1]);
@@ -182,6 +229,30 @@ export function SecretRolePlay({ code }: { code: string }) {
                 </AppText>
               </View>
             )}
+
+            {/* CC-1 lean: only seated players pick a secret hunch (spectators get none). */}
+            {me !== null && byId.has(me) && (
+              <View style={{
+                backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl,
+                padding: tokens.spacing.lg, gap: tokens.spacing.md,
+              }}>
+                <LeanPicker
+                  targets={state.players.map((p) => p.id).filter((id) => id !== me)}
+                  myLean={sv.myLean}
+                  players={state.players}
+                  onLean={(target) => sendAction({ kind: 'lean', target })}
+                  lang={lang}
+                />
+                <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                  {sv.myLean === null
+                    ? L(`👁 ${sv.leanCount} joueur${sv.leanCount > 1 ? 's' : ''} ont déjà un soupçon — personne ne voit qui tu vises.`,
+                      `👁 ${sv.leanCount} player${sv.leanCount === 1 ? '' : 's'} already leaning — nobody sees who you tap.`)
+                    : L(`👁 ${sv.leanCount} soupçon${sv.leanCount > 1 ? 's' : ''} en jeu — vise juste pour un bonus à la révélation.`,
+                      `👁 ${sv.leanCount} hunch${sv.leanCount === 1 ? '' : 'es'} in play — nail it for a reveal-time bonus.`)}
+                </AppText>
+              </View>
+            )}
+
             <ProgressChips flags={sv.ready} players={state.players} />
             <PrimaryButton
               label={sv.iAmReady

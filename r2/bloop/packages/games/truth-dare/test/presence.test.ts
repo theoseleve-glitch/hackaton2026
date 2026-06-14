@@ -9,6 +9,7 @@ import {
   left,
   othersOf,
   PLAYERS,
+  predict,
   rejoin,
   TOD_PACK,
   tod,
@@ -160,6 +161,31 @@ describe('rejoin semantics', () => {
     expect(Object.keys(s1.scores).sort()).toEqual([...PLAYERS].sort());
     expect(Object.keys(s1.passesLeft).sort()).toEqual([...PLAYERS].sort());
     expect(s1.rotation).toEqual(s0.rotation);
+  });
+});
+
+describe('CC-1 predictor presence (a bet never strands the room)', () => {
+  it('a predictor who leaves mid-prompt never blocks: the turn resolves and their correct bet still pays', () => {
+    const s0 = tod.init('s', PLAYERS, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1, v2] = othersOf(s0);
+    // v1 predicts 'done', then leaves; the turn still completes normally.
+    const sPrompt = fold(tod, s0, [choose(active, 'truth'), predict(v1!, 'done'), left(v1!)]);
+    expect(sPrompt.phase).toBe('prompt'); // a predictor leaving never advances the phase
+    const sScore = fold(tod, sPrompt, [declare(active, 'done'), vote(v2!, 'done')]);
+    expect(sScore.phase).toBe('score');
+    expect(sScore.lastResult?.verdict).toBe('done');
+    // the disconnected predictor keeps their score and is still paid for the correct call
+    expect(sScore.scores[v1!]).toBe(2);
+    expect(sScore.lastResult?.spectatorTally).toEqual({ correct: 1, total: 1, pointsEach: 2 });
+  });
+
+  it('a disconnected spectator cannot place a new prediction (ineligible -> same ref)', () => {
+    const s0 = tod.init('s', PLAYERS, TOD_PACK);
+    const active = s0.activePlayer;
+    const [v1] = othersOf(s0);
+    const sPrompt = fold(tod, s0, [choose(active, 'truth'), left(v1!)]);
+    expect(tod.reduce(sPrompt, predict(v1!, 'done')).state).toBe(sPrompt);
   });
 });
 

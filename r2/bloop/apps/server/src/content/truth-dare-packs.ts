@@ -115,8 +115,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "Ton historique de recherche s'affiche sur la TV du salon, là, tout de suite. Quelle recherche tu supplies d'effacer en premier ? Sois précis.",
-      "en": "Your search history hits the living-room TV right now. Which exact search are you begging to delete first? Be specific."
+      "fr": "Le surnom que tu donnes à quelqu'un de cette pièce dans ton tel. Lis le contact exact à voix haute. La personne concernée a le droit de répondre par le tien.",
+      "en": "The name someone in this room is saved as in your phone. Read the exact contact out loud. The person involved gets to fire back with yours."
     },
     "deck": "fun"
   },
@@ -753,8 +753,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Quelle est la pire phrase de drague que tu aies vraiment utilisée ? Ressors-la maintenant avec une sincérité totale.",
-      "en": "What's the worst pickup line you've actually used? Deliver it right now with total sincerity."
+      "fr": "Ta pire approche, celle qui a vraiment échoué. Ressors-la maintenant sur le joueur le plus gêné de la pièce, sincérité totale. Le groupe note les dégâts.",
+      "en": "Your worst-ever opener, the one that genuinely crashed. Run it now on the most easily embarrassed player here, full sincerity. The room scores the damage."
     },
     "deck": "fun"
   },
@@ -783,8 +783,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "As-tu déjà fouillé le profil du nouveau ou de la nouvelle de ton ex ? Jusqu'où es-tu remonté dans les photos ?",
-      "en": "Have you ever deep-dived your ex's new partner online? How far back in the photos did you scroll?"
+      "fr": "Le nouveau ou la nouvelle de ton ex : t'es remonté jusqu'à quelle année dans ses photos ? Donne l'année exacte. « J'ai pas regardé » est une réponse, mais personne ne la croira.",
+      "en": "Your ex's new partner: how far back in their photos did you actually scroll? Give the exact year. 'I never looked' is an answer, but nobody in here will buy it."
     },
     "deck": "fun"
   },
@@ -894,8 +894,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Qui ici a l'énergie la plus chaotique en soirée ? Donne une anecdote précise en guise de preuve.",
-      "en": "Who here has the most chaotic night-out energy? Provide one specific story as evidence."
+      "fr": "Qui ici finirait pieds nus, tel à 4 %, à supplier un kebab fermé de rouvrir ? Désigne, puis sors la preuve. La défense a 15 secondes.",
+      "en": "Who here ends the night barefoot, phone at 4%, begging a closed kebab shop to reopen? Point, then drop the evidence. The defence gets 15 seconds."
     },
     "deck": "fun"
   },
@@ -924,8 +924,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "C'est quoi ton toxic trait, d'après tes ex ou tes amis ? Cite-les mot pour mot.",
-      "en": "What's your toxic trait, according to your exes or your friends? Quote them word for word."
+      "fr": "Le reproche EXACT que ton ex t'a balancé en dernier, mot pour mot. Le groupe vote : c'était mérité, ou c'était toi le problème ?",
+      "en": "The EXACT line your ex threw at you last, word for word. The room votes: fair hit, or were you the problem?"
     },
     "deck": "fun"
   },
@@ -985,8 +985,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Quelle notification serait la plus catastrophique à voir s'afficher sur ton écran, là, devant tout le monde ?",
-      "en": "What notification would be the most catastrophic to pop up on your screen right now, in front of everyone?"
+      "fr": "Un nom s'affiche sur ton écran là, devant tout le monde, et t'es fini. Donne juste l'initiale. Le groupe a 20 secondes pour deviner le reste.",
+      "en": "One name lights up your screen right now, in front of everyone, and you're done. Give the initial only. The room gets 20 seconds to guess the rest."
     },
     "deck": "fun"
   },
@@ -1065,8 +1065,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "As-tu déjà entraîné ta technique de bisou sur ta main, un miroir ou un oreiller ? Assume l'époque et la méthode.",
-      "en": "Did you ever practice kissing on your hand, a mirror, or a pillow? Own the era and the method."
+      "fr": "Le message que t'as tapé, relu, supprimé, retapé, et jamais envoyé. À qui, et c'était quoi le dernier mot avant que tu te dégonfles ?",
+      "en": "The message you typed, reread, deleted, retyped, and never sent. To who, and what was the last word before you bottled it?"
     },
     "deck": "fun"
   },
@@ -1221,8 +1221,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Le groupe choisit une photo de ta galerie : c'est ton fond d'écran jusqu'à demain. Aucune négociation possible.",
-      "en": "The group picks a photo from your gallery: that's your wallpaper until tomorrow. No negotiation."
+      "fr": "Lis à voix haute le titre exact des trois dernières vidéos de ton historique YouTube. Aucun veto. Le groupe choisit ensuite laquelle tu dois nous résumer comme un docu Arte.",
+      "en": "Read out the exact titles of the last three videos in your YouTube history. No vetoes. The room then picks one for you to summarize like a serious documentary."
     },
     "deck": "fun",
     "props": true
@@ -1316,8 +1316,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Danse 30 secondes sans aucune musique pendant que tout le monde te regarde dans un silence total.",
-      "en": "Dance for 30 seconds with no music while everyone watches you in total silence."
+      "fr": "Le groupe te donne un thème musical (générique de pub, ascenseur, film d'horreur). Jusqu'à ton prochain tour, tu DOIS le fredonner à chaque fois que quelqu'un prononce ton prénom.",
+      "en": "The room hands you a theme tune (advert jingle, elevator muzak, horror score). Until your next turn, you MUST hum it every single time someone says your name."
     },
     "deck": "fun"
   },
@@ -1380,8 +1380,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Fais ton regard de braise le plus intense à chaque joueur, un par un, 5 secondes chacun, sans jamais rire.",
-      "en": "Give every player your most intense smolder, one by one, 5 seconds each, without ever laughing."
+      "fr": "Jusqu'à ton prochain tour, tu termines CHAQUE phrase par « …et c'est pour ça que je suis célibataire ». Même les phrases banales. Surtout les phrases banales.",
+      "en": "Until your next turn, you end EVERY sentence with '…and that's why I'm single'. Even the boring ones. Especially the boring ones."
     },
     "deck": "fun"
   },
@@ -1400,8 +1400,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Écris un message risqué à ton crush ou à ton dernier match, montre-le au groupe… puis décide en direct : envoyer ou supprimer. Le groupe commente.",
-      "en": "Type a risky text to your crush or your latest match, show the room… then decide live: send or delete. The room provides commentary."
+      "fr": "Ouvre ta dernière conversation avec un crush ou un match et lis ton tout dernier message à voix haute, avec le ton exact que t'avais en tête. Le groupe note le niveau de désespoir sur 10.",
+      "en": "Open your latest chat with a crush or a match and read your most recent message out loud, in the exact tone you sent it. The room scores the desperation out of 10."
     },
     "deck": "fun",
     "props": true
@@ -1562,8 +1562,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Quel petit mensonge du début (« j'adore courir », « je suis super ordonné ») n'as-tu jamais avoué ? C'est le moment.",
-      "en": "What early-days white lie ('I love hiking', 'I'm so tidy') have you never confessed? Now's the moment."
+      "fr": "Le mensonge du début que tu maintiens ENCORE aujourd'hui. Pas un que t'as avoué — un qui tient toujours. Avoue-le là, maintenant. Il/elle le découvre en direct.",
+      "en": "The early-days lie you're STILL running today. Not one you came clean about — one that's still live. Confess it right now. They're finding out as you speak."
     },
     "deck": "lover"
   },
@@ -1642,8 +1642,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Quel cliché de couple avais-tu juré de ne JAMAIS devenir… que vous incarnez totalement aujourd'hui ?",
-      "en": "Which couple cliché did you swear you'd NEVER become… that you two are now living completely?"
+      "fr": "Le truc de vieux couple que vous faites déjà — la même place au resto, le « on rentre à 23 h », le vocal de 4 minutes pour dire « ok ». Balance le plus pathétique. Il/elle a le droit d'en rajouter un.",
+      "en": "The old-married-couple thing you already do — the same seats at dinner, the 'home by 11', the 4-minute voice note that just says 'ok'. Drop the most tragic one. They get to add one back."
     },
     "deck": "lover"
   },
@@ -1743,8 +1743,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Parle à ton/ta partenaire dans une langue inventée pendant 30 secondes. Il ou elle traduit pour le groupe, avec assurance.",
-      "en": "Speak to your partner in an invented language for 30 seconds. They translate for the room — with total confidence."
+      "fr": "Rejoue la dernière fois que ton/ta partenaire t'a soûlé, sans dire un mot — uniquement le soupir, le regard, la posture. Le groupe devine le grief. Il/elle confirme ou plaide.",
+      "en": "Reenact the last time your partner got on your nerves, no words — just the sigh, the look, the posture. The room guesses the grievance. They confirm it or plead their case."
     },
     "deck": "lover"
   },
@@ -1843,8 +1843,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "party",
     "text": {
-      "fr": "Raconte votre premier rendez-vous comme un commentateur sportif : ralentis, statistiques et action décisive inclus.",
-      "en": "Narrate your first date like a sports commentator: slow-mo replays, stats, and the decisive play included."
+      "fr": "Raconte votre premier date version commentateur sportif — mais zoom sur LE moment gênant que ton/ta partenaire espérait enterrer. Ralenti et tout. Il/elle a le droit de demander la révision vidéo.",
+      "en": "Narrate your first date like a sports commentator — but zoom in on THE cringe moment your partner hoped was buried. Slow-mo and all. They may call for a video review."
     },
     "deck": "lover"
   },
@@ -2055,8 +2055,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "spicy",
     "text": {
-      "fr": "Quel est le « joker célébrité » officiel de ton/ta partenaire ? Et le tien ? Comparez vos niveaux de jalousie en direct.",
-      "en": "Who's your partner's official celebrity hall pass? And yours? Compare jealousy levels live."
+      "fr": "La dernière fois que vous l'avez fait : c'était quand, c'était où, et lequel de vous deux a lancé la manœuvre ? Tapez chacun le « quand » sur vos tels, révélez en même temps. L'écart parle.",
+      "en": "The last time you two did it: when, where, and which of you started it? Each type the 'when' on your phones, reveal together. The gap says plenty."
     },
     "deck": "lover"
   },
@@ -2227,8 +2227,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "spicy",
     "text": {
-      "fr": "Trace la mâchoire de ton/ta partenaire du bout du doigt en récitant ton mot de passe wifi avec ta voix la plus sensuelle.",
-      "en": "Trace your partner's jawline with one fingertip while reciting your wifi password in your most seductive voice."
+      "fr": "Murmure à ton/ta partenaire les trois mots qui le/la font céder à TOUS les coups. Le groupe ne les entendra jamais — il lira juste le visage qui s'effondre.",
+      "en": "Whisper to your partner the three words that get them every single time. The room never hears them — it just reads the face that folds."
     },
     "deck": "lover"
   },
@@ -2378,8 +2378,8 @@ export const TRUTH_OR_DARE_2_PACK: ContentPack<TruthDareContent> = {
     "choice": "dare",
     "intensity": "spicy",
     "text": {
-      "fr": "Rejoue en solo, pendant 20 secondes, votre façon de flirter après un verre de vin. Les deux rôles, l'un après l'autre.",
-      "en": "Perform, solo, 20 seconds of how you two flirt after a glass of wine. Both roles, one after the other."
+      "fr": "Pose une main sur ton/ta partenaire — TU choisis où, dans les limites du soutenable en public — et tiens 20 secondes sans rien dire. Le groupe lit le thermomètre. Lui/elle ne bronche pas.",
+      "en": "Put one hand on your partner — YOU pick where, within what survives in public — and hold it 20 seconds, saying nothing. The room reads the thermometer. They don't flinch."
     },
     "deck": "lover"
   },
@@ -2465,8 +2465,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "T'as déjà ignoré exprès un message de quelqu'un ici. C'était qui, et c'était quel message ?",
-      "en": "You've left someone in this room on read on purpose. Who was it, and what was the message?"
+      "fr": "Qui ici tu réveillerais à 3h pour un vrai problème — et qui te répondrait même pas le lendemain matin ? Deux noms. Ils sont dans la pièce.",
+      "en": "Who here would you wake at 3am with a real problem — and who wouldn't even text back by morning? Two names. They're in the room."
     }
   },
   {
@@ -2546,8 +2546,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "Combien y'a sur ton compte, là, tout de suite ? Pas le chiffre exact — la fourchette. La fourchette dit déjà tout.",
-      "en": "What's in your bank account right now? Not the exact number — the bracket. The bracket says everything."
+      "fr": "Quelqu'un ici t'a déjà rendu un service et t'as jamais renvoyé l'ascenseur. Désigne-le. Il s'en souvient, lui.",
+      "en": "Someone here did you a favour and you never paid it back. Point at them. They remember, by the way."
     }
   },
   {
@@ -2636,8 +2636,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "C'est quoi le nom du groupe WhatsApp familial, et le dernier message que t'y as laissé sans réponse ?",
-      "en": "What's your family group chat called, and what's the last message in there you left on read?"
+      "fr": "Le talent inutile dont t'es secrètement très fier. Prouve-le maintenant — sinon la pièce conclut que t'as menti.",
+      "en": "The useless talent you're secretly very proud of. Prove it right now — or the room rules that you made it up."
     }
   },
   {
@@ -2681,8 +2681,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "Quelle invitation t'as tuée avec une fausse excuse pour rester chez toi à rien faire ? L'hôte est peut-être ici.",
-      "en": "What invite did you kill with a fake excuse just to stay home doing nothing? The host might be in this room."
+      "fr": "Quelqu'un ici t'énerve avec UN truc précis qu'il fait tout le temps. Pas le nom — juste le truc. On devinera la cible en deux secondes.",
+      "en": "Someone here drives you mad with ONE specific thing they always do. Not the name — just the thing. We'll guess the target in two seconds."
     }
   },
   {
@@ -2735,8 +2735,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "La dernière fois que t'as fait semblant d'être au téléphone pour éviter quelqu'un : qui, et tu parlais à qui — à personne ?",
-      "en": "Last time you faked a phone call to dodge someone: who were you dodging, and who were you 'talking' to — nobody?"
+      "fr": "Le compliment que tu balances en boucle à plein de monde, mot pour mot. Sors-le — quelqu'un ici l'a déjà reçu et croyait être l'unique.",
+      "en": "The compliment you recycle on everyone, word for word. Say it out loud — someone here has had it and thought they were the only one."
     }
   },
   {
@@ -2753,8 +2753,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "Ton vrai record d'heures sur une seule appli en une journée. Juste le chiffre. Pas de contexte — le contexte t'enfonce.",
-      "en": "Your real record for hours spent on one app in a single day. Just the number. No context — context makes it worse."
+      "fr": "Quelqu'un ici raconte une histoire que t'as déjà entendue 50 fois. Tu fais quoi exactement de ta tête pour qu'il voie rien ? Montre. Il regarde.",
+      "en": "Someone here tells a story you've heard 50 times. What exactly does your face do so they don't notice? Show us. They're watching."
     }
   },
   {
@@ -2789,8 +2789,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "soft",
     "text": {
-      "fr": "Le truc le plus inutile que t'as acheté à 3h du matin. Prix exact, et il est où maintenant ?",
-      "en": "The most useless thing you've bought at 3 a.m. Exact price, and where is it now?"
+      "fr": "T'as un avis bien tranché sur le couple, l'ex ou le crush de quelqu'un ici, et tu l'as jamais dit en face. Lâche-le. Pas le nom — juste l'avis.",
+      "en": "You have a strong opinion about someone here's relationship, ex or crush that you've never said to their face. Drop it. No name — just the opinion."
     }
   },
   {
@@ -2825,8 +2825,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "Jusqu'à quelle année t'es descendu en stalkant le nouveau ou la nouvelle de ton ex ? Donne l'année. On saura si tu mens.",
-      "en": "How far back did you scroll on your ex's new partner? Give the year. We'll know if you're lying."
+      "fr": "T'as déjà fait semblant de pas avoir reçu une demande de virement de quelqu'un ici. C'était combien, et ça date de quand ? Il a son téléphone, lui.",
+      "en": "You've pretended not to see a money request from someone in this room. How much, and how long ago? They've got their phone right there."
     }
   },
   {
@@ -2861,8 +2861,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "party",
     "text": {
-      "fr": "La pire excuse que t'as inventée pour quitter une soirée. Et fais pas le fier : t'en as déjà servi une à quelqu'un ici.",
-      "en": "Your worst fake excuse for leaving a party early. Don't look smug — you've used one on somebody in this room."
+      "fr": "Cite la personne ici dont tu lis chaque story dans la seconde — et à qui tu réponds jamais. Elle croit que tu l'as zappée. Détrompe-la.",
+      "en": "Name the person here whose every story you watch within seconds — and never reply to. They think you forgot them. Set the record straight."
     }
   },
   {
@@ -3500,8 +3500,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "spicy",
     "text": {
-      "fr": "Le 'je t'aime' au pire timing de l'histoire : en plein acte, à un enterrement, au premier date ? Raconte — et dis de quel côté t'étais.",
-      "en": "The worst-timed 'I love you' in history: mid-act, at a funeral, on a first date? Tell it — and say which side of it you were on."
+      "fr": "La chose que t'as faite au lit une seule fois, par curiosité, et plus jamais après. Pas besoin de tout dire — juste pourquoi 'plus jamais'.",
+      "en": "The thing you tried in bed exactly once, out of curiosity, and never again. You don't have to spell it out — just tell us why 'never again'."
     }
   },
   {
@@ -3527,8 +3527,8 @@ export const TRUTH_OR_DRINK_PACK: ContentPack<TruthDareContent> = {
     "choice": "truth",
     "intensity": "spicy",
     "text": {
-      "fr": "Quelqu'un dans cette pièce t'a déjà fait de l'effet. Oui ou non. Pas de prénom — ton regard fera le travail tout seul.",
-      "en": "Someone in this room has, at some point, done it for you. Yes or no. No names — your eye contact will do the rest."
+      "fr": "Le message le plus chaud de toute ta galerie de captures d'écran : tu l'as envoyé, ou reçu ? Lis la première ligne. Juste la première.",
+      "en": "The filthiest message in your entire screenshot folder: did you send it, or receive it? Read the first line. Just the first line."
     }
   },
   {

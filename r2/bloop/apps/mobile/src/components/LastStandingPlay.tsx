@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
-import type { LastStandingView, TurnOutcome } from '@bloop/game-last-standing';
+import type { LastStandingView, SpotBet, TurnOutcome } from '@bloop/game-last-standing';
 import { asLastStandingView, deviceLang, pickL, type Lang } from '../games/last-standing-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
@@ -92,6 +92,27 @@ function JudgeButton({ label, color, onPress }: { label: string; color: string; 
   );
 }
 
+/**
+ * P0-1 — survives/chokes side-bet chip. Every NON-SPOTLIGHT player (alive OR
+ * eliminated) calls whether the spotlight nails the word; the choice is the one
+ * channel an eliminated player can still act in. Pop-shadowed rounded chip in
+ * the brand sticker style, matching JudgeButton.
+ */
+function BetButton({ label, color, onPress }: { label: string; color: string; onPress: () => void }) {
+  const { theme, tokens } = useTheme();
+  return (
+    <Pressable
+      onPress={onPress} accessibilityLabel={label}
+      style={{
+        flex: 1, backgroundColor: color, borderRadius: tokens.radii.xl, borderWidth: 3,
+        borderColor: theme.stickerOutline, paddingVertical: tokens.spacing.lg,
+        paddingHorizontal: tokens.spacing.md, alignItems: 'center', ...tokens.elevation.e2,
+      }}>
+      <AppText role="titleM" style={{ color: '#FFFFFF', textAlign: 'center' }}>{label}</AppText>
+    </Pressable>
+  );
+}
+
 export function LastStandingPlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendAction, leave } = useRoom();
@@ -99,6 +120,15 @@ export function LastStandingPlay({ code }: { code: string }) {
   const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
   const ls = asLastStandingView(state.view);
   const now = useNow(ls !== null && ls.phase !== 'over');
+
+  // P0-1: remember THIS viewer's survives/chokes call, keyed by turnSeq, so the
+  // result beat can echo "you nailed it / you whiffed" — myBet only lives in the
+  // 'say' view, so we stash it here while it is in hand. Cleared each new turn.
+  const [myBet, setMyBet] = useState<{ turnSeq: number; bet: SpotBet } | null>(null);
+  const placeBet = (turnSeq: number, bet: SpotBet) => {
+    setMyBet({ turnSeq, bet });
+    sendAction({ kind: 'bet', value: bet });
+  };
 
   useEffect(() => {
     if (ls === null) router.replace(`/room/${code}/lobby`); // no game running → back to the lobby
@@ -155,7 +185,7 @@ export function LastStandingPlay({ code }: { code: string }) {
             </View>
           )
           : (
-            <View style={{ gap: tokens.spacing.sm, alignItems: 'center' }}>
+            <View style={{ gap: tokens.spacing.md, alignItems: 'center' }}>
               {ls.spotlight !== null && <Avatar name={nick(ls.spotlight)} size="lg" ring="you" connected />}
               <AppText role="titleM" style={{ textAlign: 'center' }}>
                 {L(`${ls.spotlight !== null ? nick(ls.spotlight) : '???'} cherche un mot…`,
@@ -165,6 +195,62 @@ export function LastStandingPlay({ code }: { code: string }) {
                 {L(`Chrono de ${Math.round(ls.sayMsThisLap / 100) / 10}s — il rétrécit à chaque tour de table !`,
                   `${Math.round(ls.sayMsThisLap / 100) / 10}s clock — it shrinks every lap!`)}
               </AppText>
+
+              {/* P0-1 — survives/chokes side-bet. Open to EVERY non-spotlight
+                  player, alive or eliminated, so the dead keep playing. */}
+              <View style={{
+                width: '100%', gap: tokens.spacing.sm, marginTop: tokens.spacing.sm,
+                paddingTop: tokens.spacing.md, borderTopWidth: 2, borderColor: theme.border,
+                alignItems: 'center',
+              }}>
+                <AppText role="overline" color="textSecondary" style={{ textAlign: 'center' }}>
+                  {L('🎲 TON PRONO', '🎲 CALL YOUR SHOT')}
+                </AppText>
+                <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                  {state.playerId !== null && ls.alive[state.playerId] === false
+                    ? L('Éliminé·e mais toujours dans la partie : il ou elle nous sort un mot valide ?',
+                      'Out of the round but still in the game: do they land a valid word?')
+                    : L('Il ou elle nous sort un mot valide, ou il ou elle craque ?',
+                      'Do they land a valid word, or do they choke?')}
+                </AppText>
+                {ls.youCanBet
+                  ? (
+                    <View style={{ flexDirection: 'row', gap: tokens.spacing.md, width: '100%' }}>
+                      <BetButton
+                        label={L('🛟 PASSE', '🛟 SURVIVES')} color={theme.success}
+                        onPress={() => placeBet(ls.turnSeq, 'survives')} />
+                      <BetButton
+                        label={L('💀 CRAQUE', '💀 CHOKES')} color={theme.danger}
+                        onPress={() => placeBet(ls.turnSeq, 'chokes')} />
+                    </View>
+                  )
+                  : ls.myBet !== null
+                    ? (
+                      <View style={{
+                        backgroundColor: ls.myBet === 'survives' ? theme.success : theme.danger,
+                        borderRadius: tokens.radii.pill, borderWidth: 3, borderColor: theme.stickerOutline,
+                        paddingHorizontal: tokens.spacing.xl, paddingVertical: tokens.spacing.sm,
+                        ...tokens.elevation.e1,
+                      }}>
+                        <AppText role="label" style={{ color: '#FFFFFF', textAlign: 'center' }}>
+                          {ls.myBet === 'survives'
+                            ? L('Prono verrouillé : 🛟 PASSE', 'Bet locked: 🛟 SURVIVES')
+                            : L('Prono verrouillé : 💀 CRAQUE', 'Bet locked: 💀 CHOKES')}
+                        </AppText>
+                      </View>
+                    )
+                    : (
+                      <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                        {L('Les paris sont ouverts…', 'Bets are open…')}
+                      </AppText>
+                    )}
+                {ls.betsIn > 0 && (
+                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {L(`${ls.betsIn} prono${ls.betsIn > 1 ? 's' : ''} en jeu`,
+                      `${ls.betsIn} bet${ls.betsIn > 1 ? 's' : ''} on the table`)}
+                  </AppText>
+                )}
+              </View>
             </View>
           ))}
 
@@ -200,20 +286,49 @@ export function LastStandingPlay({ code }: { code: string }) {
         {ls.phase === 'result' && ls.lastTurn !== null && (() => {
           const stamp = STAMP[ls.lastTurn.outcome];
           const cast = ls.lastTurn.tally.valid + ls.lastTurn.tally.reject;
+          // P0-1: did this viewer's survives/chokes call land? A turn ending
+          // 'valid' = survives, anything else = chokes. Only show when we placed
+          // a bet THIS turn (stash keyed by turnSeq).
+          const mine = myBet !== null && myBet.turnSeq === ls.turnSeq ? myBet.bet : null;
+          const survived = ls.lastTurn.outcome === 'valid';
+          const betRight = mine !== null && ((mine === 'survives') === survived);
           return (
-            <View style={{
-              backgroundColor: stamp.ok ? theme.success : theme.danger, borderRadius: tokens.radii.xl,
-              padding: tokens.layout.cardPadding, alignItems: 'center', gap: tokens.spacing.sm,
-              borderWidth: 3, borderColor: theme.stickerOutline, ...tokens.elevation.e2,
-            }}>
-              <AppText role="titleM" style={{ color: '#FFFFFF', textAlign: 'center' }}>
-                {nick(ls.lastTurn.player)} — {lang === 'fr' ? stamp.fr : stamp.en}
-              </AppText>
-              {cast > 0 && (
-                <AppText role="caption" style={{ color: '#FFFFFF' }}>
-                  {L(`Jury : 👍 ${ls.lastTurn.tally.valid} · 👎 ${ls.lastTurn.tally.reject}`,
-                    `Jury: 👍 ${ls.lastTurn.tally.valid} · 👎 ${ls.lastTurn.tally.reject}`)}
+            <View style={{ gap: tokens.spacing.md }}>
+              <View style={{
+                backgroundColor: stamp.ok ? theme.success : theme.danger, borderRadius: tokens.radii.xl,
+                padding: tokens.layout.cardPadding, alignItems: 'center', gap: tokens.spacing.sm,
+                borderWidth: 3, borderColor: theme.stickerOutline, ...tokens.elevation.e2,
+              }}>
+                <AppText role="titleM" style={{ color: '#FFFFFF', textAlign: 'center' }}>
+                  {nick(ls.lastTurn.player)} — {lang === 'fr' ? stamp.fr : stamp.en}
                 </AppText>
+                {cast > 0 && (
+                  <AppText role="caption" style={{ color: '#FFFFFF' }}>
+                    {L(`Jury : 👍 ${ls.lastTurn.tally.valid} · 👎 ${ls.lastTurn.tally.reject}`,
+                      `Jury: 👍 ${ls.lastTurn.tally.valid} · 👎 ${ls.lastTurn.tally.reject}`)}
+                  </AppText>
+                )}
+              </View>
+
+              {/* P0-1 — your survives/chokes call resolved. */}
+              {mine !== null && (
+                <View style={{
+                  backgroundColor: theme.surface, borderRadius: tokens.radii.lg,
+                  padding: tokens.layout.cardPadding, alignItems: 'center', gap: 2,
+                  borderWidth: 2, borderColor: betRight ? theme.success : theme.border, ...tokens.elevation.e1,
+                }}>
+                  <AppText role="overline" color="textSecondary">{L('TON PRONO', 'YOUR CALL')}</AppText>
+                  <AppText role="titleM" color={betRight ? 'success' : 'danger'} style={{ textAlign: 'center' }}>
+                    {betRight
+                      ? L('🎯 Bien vu ! +1 pt de prono', '🎯 Nailed it! +1 prediction pt')
+                      : L('❌ Raté…', '❌ Missed it…')}
+                  </AppText>
+                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {mine === 'survives'
+                      ? L('Tu avais misé sur 🛟 PASSE', 'You bet 🛟 SURVIVES')
+                      : L('Tu avais misé sur 💀 CRAQUE', 'You bet 💀 CHOKES')}
+                  </AppText>
+                </View>
               )}
             </View>
           );

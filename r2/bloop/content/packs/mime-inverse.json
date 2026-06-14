@@ -5,7 +5,7 @@
   "items": [
     {
       "id": "mi-act-001",
-      "action": { "fr": "Laver une seule fourchette, la tienne, et reposer la vaisselle sale du coloc bien en évidence", "en": "Washing exactly one fork, yours, and restacking your flatmate's dirty dishes as a monument" },
+      "action": { "fr": "Laver UNE fourchette, la tienne, la ranger, et reconstruire la pile de vaisselle sale du coloc plus haute qu'avant", "en": "Washing ONE fork, yours, putting it away, and rebuilding your flatmate's dirty-dish tower taller than you found it" },
       "category": { "fr": "Corvées", "en": "Chores" },
       "forbidden": { "fr": ["vaisselle", "fourchette", "laver", "coloc"], "en": ["dishes", "fork", "wash", "flatmate"] },
       "difficulty": 1,
@@ -14,7 +14,7 @@
     },
     {
       "id": "mi-act-002",
-      "action": { "fr": "Repasser sa chemise à même la table cinq minutes avant l'entretien, et la cramer", "en": "Ironing your shirt directly on the table five minutes before the interview, and scorching it" },
+      "action": { "fr": "Repasser sa chemise à même la table cinq minutes avant l'entretien, la cramer en plein milieu, et décider de garder la veste fermée toute la journée", "en": "Ironing your shirt flat on the table five minutes before the interview, scorching a hole dead-centre, and deciding to keep the jacket buttoned all day" },
       "category": { "fr": "Corvées", "en": "Chores" },
       "forbidden": { "fr": ["fer", "repasser", "chemise", "cramer"], "en": ["iron", "shirt", "interview", "scorch"] },
       "difficulty": 1,
@@ -23,7 +23,7 @@
     },
     {
       "id": "mi-act-003",
-      "action": { "fr": "Trier le linge au test de l'odeur : sniffer chaque t-shirt et décider lequel est « encore mettable »", "en": "Sorting laundry by smell test: sniffing every shirt to rule which one is still wearable" },
+      "action": { "fr": "Trier le linge au flair : sniffer chaque t-shirt, écœuré, et reposer le pire dans le tas « propre »", "en": "Sorting laundry by smell alone: sniffing each shirt, gagging, and tossing the worst one back on the clean pile" },
       "category": { "fr": "Corvées", "en": "Chores" },
       "forbidden": { "fr": ["linge", "sniffer", "odeur", "t-shirt"], "en": ["laundry", "sniff", "smell", "shirt"] },
       "difficulty": 1,
@@ -50,9 +50,9 @@
     },
     {
       "id": "mi-act-006",
-      "action": { "fr": "Changer l'ampoule du plafond en équilibre sur une chaise à roulettes, trop fier pour demander de l'aide", "en": "Changing the ceiling bulb balanced on a swivel chair, too proud to ask for help" },
+      "action": { "fr": "Changer l'ampoule debout sur une chaise à roulettes qui part doucement toute seule pendant que tu visses", "en": "Changing the ceiling bulb standing on a swivel chair that slowly rolls out from under you while you screw it in" },
       "category": { "fr": "Corvées", "en": "Chores" },
-      "forbidden": { "fr": ["ampoule", "chaise", "équilibre", "visser"], "en": ["bulb", "chair", "balance", "screw"] },
+      "forbidden": { "fr": ["ampoule", "chaise", "rouler", "visser"], "en": ["bulb", "chair", "roll", "screw"] },
       "difficulty": 1,
       "spicyLevel": 0,
       "tags": ["household", "physical"]
@@ -77,18 +77,18 @@
     },
     {
       "id": "mi-act-009",
-      "action": { "fr": "Enfiler une housse de couette, disparaître dedans, et accepter d'y vivre désormais", "en": "Stuffing a duvet into its cover, vanishing inside, and accepting this as your home now" },
+      "action": { "fr": "Sortir la poubelle qui fuit, la tenir à bout de bras, et semer une traînée jusqu'à la porte qu'il faudra nettoyer après", "en": "Taking out the leaking bin bag, holding it at full arm's length, and laying a trail to the door you'll have to mop up after" },
       "category": { "fr": "Corvées", "en": "Chores" },
-      "forbidden": { "fr": ["couette", "housse", "lit", "secouer"], "en": ["duvet", "cover", "bed", "shake"] },
+      "forbidden": { "fr": ["poubelle", "sac", "fuir", "porter"], "en": ["bin", "bag", "leak", "carry"] },
       "difficulty": 2,
       "spicyLevel": 0,
       "tags": ["household", "funny"]
     },
     {
       "id": "mi-act-010",
-      "action": { "fr": "Plier un drap-housse sous le regard de ta grand-mère qui a déjà soupiré deux fois", "en": "Folding a fitted sheet while your nan watches in silence and judges every single move" },
+      "action": { "fr": "Plier un drap-housse sous le regard de ta daronne, abandonner, le rouler en boule, et le ranger en planquant la boule au fond", "en": "Folding a fitted sheet under your mum's stare, giving up, balling it up, and stuffing the ball to the back of the cupboard" },
       "category": { "fr": "Corvées", "en": "Chores" },
-      "forbidden": { "fr": ["drap", "housse", "plier", "élastique"], "en": ["fitted", "sheet", "fold", "elastic"] },
+      "forbidden": { "fr": ["drap", "housse", "plier", "boule"], "en": ["fitted", "sheet", "fold", "ball"] },
       "difficulty": 3,
       "spicyLevel": 0,
       "tags": ["household", "funny"]
@@ -347,7 +347,7 @@
     },
     {
       "id": "mi-act-039",
-      "action": { "fr": "Boxer contre son ombre, perdre aux points, et exiger la revanche", "en": "Shadow-boxing, losing on points, and demanding a rematch from your own shadow" },
+      "action": { "fr": "Boxer contre son ombre à fond, encaisser un crochet qu'on s'est mis tout seul, et tomber au tapis pour de vrai", "en": "Shadow-boxing for real, walking into a hook you threw at yourself, and going down to the canvas genuinely hurt" },
       "category": { "fr": "Sport", "en": "Sports" },
       "forbidden": { "fr": ["boxe", "ombre", "gants", "esquive"], "en": ["boxing", "shadow", "gloves", "dodge"] },
       "difficulty": 1,
@@ -869,7 +869,7 @@
     },
     {
       "id": "mi-act-097",
-      "action": { "fr": "Ouvrir millimètre par millimètre la bouteille qu'on a secouée, guetter le piège, et se la prendre au visage quand même", "en": "Easing open the bottle somebody definitely shook, one millimetre at a time, and taking the blast to the face anyway" },
+      "action": { "fr": "Ouvrir tout doucement la bouteille que quelqu'un a clairement secouée, la tenir à distance, viser un pote au cas où, et se la prendre en pleine face quand même", "en": "Slowly cracking the bottle someone definitely shook, holding it away, aiming it at a mate just in case, and wearing the blast yourself anyway" },
       "category": { "fr": "Soirée", "en": "Party" },
       "forbidden": { "fr": ["soda", "bouteille", "secouée", "mousse"], "en": ["soda", "bottle", "shaken", "fizz"] },
       "difficulty": 2,
@@ -887,9 +887,9 @@
     },
     {
       "id": "mi-act-099",
-      "action": { "fr": "Scroller au lit bras tendu, lâcher le téléphone sur son nez, et vérifier l'écran avant de vérifier le nez", "en": "Scrolling in bed at arm's length, dropping the phone square on your nose, and checking the screen for cracks before checking the nose" },
+      "action": { "fr": "Brancher la clé USB, échouer, la retourner, échouer encore, la remettre dans le sens du départ, et là ça rentre", "en": "Plugging in the USB stick, failing, flipping it, failing again, flipping it back to the first way, and now it goes in" },
       "category": { "fr": "Techno", "en": "Tech" },
-      "forbidden": { "fr": ["téléphone", "visage", "lit", "lâcher"], "en": ["phone", "face", "bed", "drop"] },
+      "forbidden": { "fr": ["USB", "clé", "brancher", "retourner"], "en": ["USB", "stick", "plug", "flip"] },
       "difficulty": 1,
       "spicyLevel": 0,
       "tags": ["tech", "funny"]
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "mi-act-120",
-      "action": { "fr": "Attraper le paquet tout en haut de l'étagère sur la pointe des pieds, refuser l'aide de quelqu'un de plus grand, et faire tomber tout le rayon", "en": "Tiptoeing for the packet on the top shelf, waving away help from a taller person, and bringing the entire shelf down" },
+      "action": { "fr": "Attraper le paquet tout en haut du rayon sur la pointe des pieds, le frôler du bout des doigts, le faire basculer, et tout recevoir sur la tête", "en": "Tiptoeing for the packet on the top supermarket shelf, brushing it with one fingertip, tipping it over, and wearing the whole shelf" },
       "category": { "fr": "Quotidien", "en": "Daily life" },
       "forbidden": { "fr": ["étagère", "attraper", "haut", "pointe des pieds"], "en": ["shelf", "reach", "top", "tiptoe"] },
       "difficulty": 1,
@@ -1238,9 +1238,9 @@
     },
     {
       "id": "mi-act-138",
-      "action": { "fr": "Ratisser les feuilles en un tas parfait, voir une rafale tout redistribuer, et recommencer en fixant le ciel comme un ennemi personnel", "en": "Raking the leaves into one perfect pile, watching a gust redistribute everything, and starting over while glaring at the sky like it's personal" },
+      "action": { "fr": "Ratisser les feuilles en un tas parfait, poser le râteau deux secondes pour souffler, et voir le voisin d'à côté allumer son souffleur pile à ce moment-là", "en": "Raking the leaves into one perfect pile, setting the rake down for a two-second breather, and watching next door fire up their leaf-blower at that exact moment" },
       "category": { "fr": "Nature", "en": "Outdoors" },
-      "forbidden": { "fr": ["feuilles", "râteau", "vent", "tas"], "en": ["leaves", "rake", "wind", "pile"] },
+      "forbidden": { "fr": ["feuilles", "râteau", "souffleur", "tas"], "en": ["leaves", "rake", "blower", "pile"] },
       "difficulty": 2,
       "spicyLevel": 0,
       "tags": ["outdoors", "funny"]
@@ -1364,7 +1364,7 @@
     },
     {
       "id": "mi-act-152",
-      "action": { "fr": "Tricoter l'écharpe de Noël, la mesurer, constater quatre mètres, et la rebaptiser cadeau pour deux personnes", "en": "Knitting the Christmas scarf, measuring it, clocking four metres, and rebranding it a two-person gift" },
+      "action": { "fr": "Tricoter l'écharpe de Noël, lâcher une maille au mètre trois, regarder toute l'œuvre se détricoter d'un coup, et continuer comme si de rien n'était", "en": "Knitting the Christmas scarf, dropping a stitch at metre three, watching the whole thing unravel in one go, and carrying on like nothing happened" },
       "category": { "fr": "Loisirs", "en": "Hobbies" },
       "forbidden": { "fr": ["tricoter", "aiguilles", "laine", "écharpe"], "en": ["knitting", "needles", "wool", "scarf"] },
       "difficulty": 1,
@@ -1427,9 +1427,9 @@
     },
     {
       "id": "mi-act-159",
-      "action": { "fr": "Tirer le cordon de la tronçonneuse douze fois avec une rage croissante, et la voir démarrer du premier coup quand quelqu'un d'autre essaie", "en": "Yanking the chainsaw cord twelve times with rising fury, then watching it start first pull the moment somebody else tries" },
+      "action": { "fr": "Tirer le cordon de la tondeuse à gazon trente fois, suer toute sa dignité, et abandonner pile une seconde avant qu'elle parte enfin toute seule", "en": "Yanking the lawnmower cord thirty times, sweating out every drop of dignity, and giving up exactly one second before it finally roars to life on its own" },
       "category": { "fr": "Corvées", "en": "Chores" },
-      "forbidden": { "fr": ["tronçonneuse", "démarrer", "cordon", "moteur"], "en": ["chainsaw", "start", "cord", "engine"] },
+      "forbidden": { "fr": ["tondeuse", "démarrer", "cordon", "moteur"], "en": ["lawnmower", "start", "cord", "engine"] },
       "difficulty": 2,
       "spicyLevel": 0,
       "tags": ["physical", "funny"]
@@ -1535,9 +1535,9 @@
     },
     {
       "id": "mi-act-171",
-      "action": { "fr": "Entrer dans la pièce avec une mission, oublier laquelle, repartir, revenir aussitôt, et accuser la pièce", "en": "Entering the room on a mission, losing the mission, leaving, coming straight back, and blaming the room" },
+      "action": { "fr": "Entrer dans la pièce avec une mission précise, l'oublier net, fouiller partout pour la retrouver, et ressortir avec un objet totalement au hasard", "en": "Entering the room on a clear mission, blanking completely, rummaging everywhere to jog the memory, and leaving with one totally random object" },
       "category": { "fr": "Quotidien", "en": "Daily life" },
-      "forbidden": { "fr": ["oublier", "pièce", "pourquoi", "demi-tour"], "en": ["forget", "room", "why", "turn back"] },
+      "forbidden": { "fr": ["oublier", "pièce", "mission", "chercher"], "en": ["forget", "room", "mission", "search"] },
       "difficulty": 3,
       "spicyLevel": 0,
       "tags": ["awkward", "funny"]
@@ -1634,9 +1634,9 @@
     },
     {
       "id": "mi-act-182",
-      "action": { "fr": "S'endormir au cinéma sur l'épaule d'un inconnu, se réveiller en sursaut au moment le plus silencieux, et applaudir au cas où", "en": "Falling asleep at the cinema onto a stranger's shoulder, jolting awake at the quietest moment, and clapping just in case" },
+      "action": { "fr": "Ouvrir le paquet de bonbons le plus bruyant du monde au cinéma, freiner chaque froissement, et le faire exploser pile sur la réplique culte", "en": "Opening the loudest sweet wrapper on Earth at the cinema, easing every crinkle, and detonating it right on the film's biggest line" },
       "category": { "fr": "Loisirs", "en": "Hobbies" },
-      "forbidden": { "fr": ["cinéma", "dormir", "sursaut", "séance"], "en": ["movies", "doze", "jolt", "screen"] },
+      "forbidden": { "fr": ["cinéma", "bonbons", "paquet", "bruit"], "en": ["cinema", "sweets", "wrapper", "loud"] },
       "difficulty": 2,
       "spicyLevel": 0,
       "tags": ["situational", "funny"]

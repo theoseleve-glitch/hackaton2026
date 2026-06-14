@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { leakedSecrets } from '@bloop/engine';
-import { ack, content, dl, game, players, roles, run, toVotePhase, vote } from './helpers.js';
+import { ack, content, dl, game, lean, players, roles, run, toVotePhase, vote } from './helpers.js';
 
 const OUTSIDERS = ['spectator', '__proto__'] as const;
 
@@ -128,6 +128,7 @@ describe('secretReveal redaction — the biggest surface of the wave', () => {
         const json = JSON.stringify(game.view(s, viewer));
         expect(json).not.toContain('"impostor"');
         expect(json).not.toContain('pendingPoints');
+        expect(json).not.toContain('"leans"'); // the lean buffer is hidden too
       }
       phases.push(s.phase);
       s = game.reduce(s, e).state;
@@ -138,7 +139,27 @@ describe('secretReveal redaction — the biggest surface of the wave', () => {
       const json = JSON.stringify(game.view(s, viewer));
       expect(json).not.toContain('"impostor"');
       expect(json).not.toContain('pendingPoints');
+      expect(json).not.toContain('"leans"');
     }
+  });
+
+  it('a POPULATED lean buffer in discuss leaks neither the buffer nor a foreign suspect', () => {
+    const s0 = run(game.init('s', players, content), [dl(1)]); // discuss p0
+    expect(s0.phase).toBe('discuss');
+    const { imp, civs } = roles(s0);
+    // every player leans (civilians correctly on the impostor; the impostor on a civ)
+    const s1 = run(s0, players.map((p) => (p === imp ? lean(p, civs[0]!) : lean(p, imp))));
+    expect(s1.leans[civs[0]!]).toBe(imp); // hidden state IS populated
+    for (const viewer of [...players, ...OUTSIDERS]) {
+      const json = JSON.stringify(game.view(s1, viewer));
+      expect(json).not.toContain('"leans"');
+    }
+    // each owner sees ONLY their own suspect; the impostor's identity (held in
+    // civilians' leans) never surfaces as a foreign value in a non-owner view.
+    const vImp = game.view(s1, imp);
+    if (vImp.phase !== 'discuss') throw new Error('expected discuss view');
+    expect(vImp.myLean).toBe(civs[0]!); // the impostor sees only their OWN lean
+    expect(vImp.leanCount).toBe(players.length);
   });
 });
 

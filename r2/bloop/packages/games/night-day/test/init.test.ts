@@ -92,7 +92,7 @@ describe('initial shape', () => {
     const s = game.init('s', P5, CONTENT);
     expect(s.phase).toBe('roleReveal');
     expect(game.phaseKey(s)).toBe('roleReveal');
-    expect(game.phaseDurationMs(s)).toBe(15_000);
+    expect(game.phaseDurationMs(s)).toBe(10_000);
     for (const p of P5) {
       expect(s.alive[p]).toBe(true);
       expect(s.connected[p]).toBe(true);

@@ -9,6 +9,7 @@ import {
   fold,
   othersOf,
   PLAYERS,
+  predict,
   TOD_PACK,
   tod,
   vote,
@@ -19,7 +20,7 @@ import {
 const OUTSIDERS = ['viewer-not-in-roster', '__proto__'] as const;
 
 /** State fields that must NEVER serialize into any view. */
-const HIDDEN_KEYS = ['"decks"', '"cursors"', '"itemsById"', '"usedPromptIds"', '"verdicts"', '"seed"'];
+const HIDDEN_KEYS = ['"decks"', '"cursors"', '"itemsById"', '"usedPromptIds"', '"verdicts"', '"predictions"', '"seed"'];
 
 /** Next-undrawn text of every deck — value secrets until their draw. */
 function undrawnTexts(s: TruthDareState): Array<{ value: string }> {
@@ -40,12 +41,22 @@ function midVerdict(v: Verdict): TruthDareState {
   return fold(tod, s0, [choose(active, 'truth'), declare(active, 'done'), vote(v1!, v)]);
 }
 
+/** Park mid-PROMPT with exactly ONE spectator's hidden prediction (CC-1) buffered. */
+function midPrompt(bet: Verdict): TruthDareState {
+  const s0 = tod.init('redact', PLAYERS, TOD_PACK);
+  const active = s0.activePlayer;
+  const [v1] = othersOf(s0);
+  return fold(tod, s0, [choose(active, 'truth'), predict(v1!, bet)]);
+}
+
 /** One representative state per phase, from one scripted match. */
 function statesPerPhase(): Record<'choose' | 'prompt' | 'verdict' | 'score' | 'over', TruthDareState> {
   const s0 = tod.init('phases', PLAYERS, TOD_PACK);
   const active = s0.activePlayer;
   const [v1, v2] = othersOf(s0);
-  const sPrompt = fold(tod, s0, [choose(active, 'dare')]);
+  // Populate the hidden predictions buffer so the HIDDEN_KEYS check on prompt /
+  // verdict / score exercises a NON-EMPTY buffer (the two spectators differ).
+  const sPrompt = fold(tod, s0, [choose(active, 'dare'), predict(v1!, 'done'), predict(v2!, 'chickened')]);
   const sVerdict = fold(tod, sPrompt, [declare(active, 'done'), vote(v1!, 'done')]);
   const sScore = fold(tod, sVerdict, [vote(v2!, 'chickened')]);
   const sOver = walkToOver(tod, sScore).state;
@@ -92,6 +103,58 @@ describe('hidden in-flight verdicts (structural invariance)', () => {
     expect(can(voter!)).toBe(false); // first vote locked
     expect(can(active)).toBe(false);
     for (const o of OUTSIDERS) expect(can(o)).toBe(false);
+  });
+});
+
+describe('CC-1 hidden call-your-shot predictions (structural invariance)', () => {
+  const sA = midPrompt('done');
+  const sB = midPrompt('chickened');
+  const active = sA.activePlayer;
+  const [predictor, other] = othersOf(sA);
+
+  it('the fixture is live: same phaseKey, and the predictor sees their own differing echo', () => {
+    expect(tod.phaseKey(sA)).toBe(tod.phaseKey(sB));
+    expect(tod.phaseKey(sA)).toBe('prompt:0');
+    expect(tod.view(sA, predictor!)).not.toEqual(tod.view(sB, predictor!));
+  });
+
+  it("GUARD a — non-owners' views are INVARIANT under the hidden prediction change", () => {
+    // The active player, the OTHER spectator, and hostile outsiders must not be
+    // able to tell a 'done' prediction from a 'chickened' one.
+    for (const viewer of [active, other!, ...OUTSIDERS]) {
+      expect(tod.view(sA, viewer)).toEqual(tod.view(sB, viewer));
+    }
+  });
+
+  it('GUARD a — a prediction value NEVER leaks into any non-owner view (engine leakedSecrets)', () => {
+    const viewers = [...PLAYERS, ...OUTSIDERS];
+    // the predictor's bet is an owner-scoped value secret
+    const secrets = [{ value: 'done', owner: predictor! }];
+    expect(leakedSecrets(tod, sA, viewers, secrets)).toEqual([]);
+  });
+
+  it('the predictor echo is youPredicted only — never anyone else’s bet; others see count only', () => {
+    const mine = tod.view(sA, predictor!);
+    if (mine.phase !== 'prompt') throw new Error('expected prompt view');
+    expect(mine.youPredicted).toBe('done');
+    expect(mine.youCanPredict).toBe(false); // first bet locked
+    for (const viewer of [active, other!, ...OUTSIDERS]) {
+      const v = tod.view(sA, viewer);
+      if (v.phase !== 'prompt') throw new Error('expected prompt view');
+      expect(v.youPredicted).toBeNull();
+      expect(v.predictionsIn).toBe(1); // count only, no names
+    }
+  });
+
+  it('youCanPredict: non-active connected spectators who have not bet; active and outsiders no', () => {
+    const can = (viewer: string) => {
+      const v = tod.view(sA, viewer);
+      return v.phase === 'prompt' ? v.youCanPredict : null;
+    };
+    expect(can(other!)).toBe(true); // not yet bet
+    expect(can(predictor!)).toBe(false); // first bet locked
+    expect(can(active)).toBe(false); // the active player can never predict
+    for (const o of OUTSIDERS) expect(can(o)).toBe(false); // non-roster
   });
 });
 

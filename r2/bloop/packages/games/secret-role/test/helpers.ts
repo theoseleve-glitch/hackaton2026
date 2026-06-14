@@ -26,6 +26,8 @@ export const ready = (playerId: string, at = 0): GameEvent<SecretRoleAction> =>
   ({ type: 'action', playerId, action: { kind: 'ready' }, at });
 export const vote = (playerId: string, target: string, at = 0): GameEvent<SecretRoleAction> =>
   ({ type: 'action', playerId, action: { kind: 'vote', target }, at });
+export const lean = (playerId: string, target: string, at = 0): GameEvent<SecretRoleAction> =>
+  ({ type: 'action', playerId, action: { kind: 'lean', target }, at });
 export const dl = (at = 0): GameEvent<SecretRoleAction> => ({ type: 'deadline', at });
 export const leftEv = (playerId: string, at = 0): GameEvent<SecretRoleAction> => ({ type: 'playerLeft', playerId, at });
 export const rejoinEv = (playerId: string, at = 0): GameEvent<SecretRoleAction> => ({ type: 'playerRejoined', playerId, at });

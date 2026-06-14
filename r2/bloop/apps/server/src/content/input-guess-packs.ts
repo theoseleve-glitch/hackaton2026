@@ -49,8 +49,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "first-sms-year",
     "question": {
-      "fr": "T'en envoies 200 par jour. Le tout premier SMS de l'histoire, c'était quelle année ? Sans toucher ton téléphone.",
-      "en": "You send 200 a day. What year was the very first text message in history sent? Phones stay down."
+      "fr": "T'en envoies 200 par jour, dont la moitié de « jsuis là dans 5 min » mensongers. Le tout premier SMS de l'Histoire : quelle année ? Le premier qui sort son tel a perdu.",
+      "en": "You send 200 a day and still leave half this room on read. The very first text in history: what year? First one to reach for a phone loses."
     },
     "answer": 1992,
     "unit": null,
@@ -75,8 +75,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "1 665 marches. Le public n'a droit qu'à l'escalier jusqu'au 2e étage — au-delà, même tes mollets disent merci à l'ascenseur.",
-      "en": "1,665 steps. Visitors are only allowed to climb to the 2nd floor — beyond that, even your calves thank the elevator."
+      "fr": "1 665 marches. Le public s'arrête au 2e, le reste c'est ascenseur. T'avais dit 400 ? Cheh, t'es essoufflé rien qu'en lisant.",
+      "en": "1,665 steps. The public stops at the 2nd floor, the rest is elevator only. You said 400? You're out of breath just reading this."
     }
   },
   {
@@ -93,8 +93,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "Jusqu'à 15 cm de plus en pleine canicule. La tour Eiffel fait littéralement une poussée de croissance chaque été.",
-      "en": "Up to 15 cm taller in a heatwave. The Eiffel Tower literally hits a growth spurt every summer."
+      "fr": "Jusqu'à 15 cm de plus en pleine canicule. La tour Eiffel a pris plus de centimètres cet été que toi en dix ans. Médite.",
+      "en": "Up to 15 cm taller in a heatwave. The Eiffel Tower grew more this summer than you did in a decade. Sit with that."
     }
   },
   {
@@ -111,8 +111,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "330 m depuis qu'une antenne radio a été ajoutée en 2022. Elle a passé 41 ans comme plus haute structure du monde.",
-      "en": "330 m since a radio antenna was added in 2022. It spent 41 years as the tallest structure on Earth."
+      "fr": "330 m depuis qu'on lui a collé une antenne en 2022. 41 ans plus haute structure du monde — soit 41 de plus que tout ce que t'as fini dans ta vie.",
+      "en": "330 m since they bolted on an antenna in 2022. It held the 'tallest on Earth' title for 41 years — 41 more than anything you've ever finished."
     }
   },
   {
@@ -144,15 +144,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "88 touches : 52 blanches, 36 noires. Standard depuis Steinway dans les années 1880 — avant, c'était freestyle.",
-      "en": "88 keys: 52 white, 36 black. Standardized by Steinway in the 1880s — before that, it was freestyle."
+      "fr": "88 touches, 52 blanches, 36 noires. Le pote qui a fait six ans de solfège connaissait pas non plus. Six ans pour ça.",
+      "en": "88 keys: 52 white, 36 black. The one who 'suffered six years of lessons' didn't know either. Six years, for that."
     }
   },
   {
     "id": "adult-human-bones",
     "question": {
-      "fr": "Nombre d'os dans un squelette d'adulte. T'en portes un en ce moment même. Zéro excuse.",
-      "en": "Bones in an adult human skeleton. You're literally wearing one right now. No excuses."
+      "fr": "Nombre d'os dans un squelette d'adulte. T'en portes un en ce moment même — te tromper, c'est techniquement de l'auto-diffamation.",
+      "en": "Bones in an adult human skeleton. You're wearing one right now — getting this wrong is technically self-slander."
     },
     "answer": 206,
     "unit": {
@@ -180,8 +180,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "Environ 300 ! Les os fusionnent en grandissant. Un bébé a littéralement plus d'os que toi. Humiliant.",
-      "en": "About 300! Bones fuse as you grow. A baby literally has more bones than you. Humbling."
+      "fr": "Environ 300. Les os fusionnent en grandissant. Un bébé a littéralement plus d'os que toi. Humiliant.",
+      "en": "About 300. Bones fuse as you grow. A baby literally has more bones than you. Humbling."
     }
   },
   {
@@ -277,8 +277,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "apollo-moon-walkers",
     "question": {
-      "fr": "Combien d'humains ont marché sur la Lune, en tout, dans toute l'Histoire ? Tes doigts peuvent suffire. Peut-être.",
-      "en": "How many humans have walked on the Moon, total, in all of history? Fingers might be enough. Might."
+      "fr": "Combien d'humains ont marché sur la Lune, en tout, dans toute l'Histoire ? Petit chiffre. Le plus loin du compte cite un marcheur qui s'appelle pas Armstrong. On t'écoute.",
+      "en": "How many humans have walked on the Moon, total, in all of history? Tiny number. Furthest guess has to name one who isn't Armstrong. We'll wait."
     },
     "answer": 12,
     "unit": {
@@ -321,7 +321,7 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1977. La même année que la sortie de Star Wars. La France exécutait encore au sabre laser médiéval pendant que Luke sortait le sien.",
+      "fr": "1977. La même année que la sortie de Star Wars. Pendant que Luke allumait son sabre laser, la France affûtait encore une lame du XVIIIe siècle.",
       "en": "1977 — the same year Star Wars hit theaters. France was still using an 18th-century blade while Luke was swinging a lightsaber."
     }
   },
@@ -341,18 +341,18 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "women-vote-switzerland-year",
+    "id": "mcdo-france-first-year",
     "question": {
-      "fr": "Et en Suisse, le droit de vote des femmes au niveau fédéral : quelle année ? Vise tard. Plus tard. Encore.",
-      "en": "And Switzerland — women voting at the federal level: what year? Guess late. Later. Keep going."
+      "fr": "Premier McDo de France : quelle année ? Celui qui commande toujours le même menu depuis l'adolescence répond en premier. On le regarde.",
+      "en": "First McDonald's in France: what year? The one who's ordered the exact same meal since they were 14 answers first. We're watching."
     },
-    "answer": 1971,
+    "answer": 1979,
     "unit": null,
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1971. On avait déjà marché sur la Lune avant que les Suissesses puissent voter. Le canton d'Appenzell a même résisté jusqu'en 1990.",
-      "en": "1971. We'd already walked on the Moon before Swiss women could vote. One canton, Appenzell, held out until 1990."
+      "fr": "1979, à Strasbourg — et la franchise a tellement merdé que McDo a tout racheté pour repartir de zéro en 1983. Bref : ton premier McFlurry était déjà un plan B.",
+      "en": "1979, in Strasbourg — and the franchisee fumbled it so badly that McDonald's bought the whole thing back to restart in 1983. Translation: your first Happy Meal was already a plan B."
     }
   },
   {
@@ -406,8 +406,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "mona-lisa-theft-year",
     "question": {
-      "fr": "Quelqu'un est sorti du Louvre avec la Joconde sous le bras. Histoire vraie. Quelle année ?",
-      "en": "Someone walked out of the Louvre with the Mona Lisa under his arm. True story. What year?"
+      "fr": "Un homme est sorti du Louvre avec la Joconde sous le bras, aussi serein que toi quand tu repars de soirée avec un chargeur qui t'appartient pas. Quelle année ?",
+      "en": "A man strolled out of the Louvre with the Mona Lisa under his arm, calm as you leaving a party with someone else's charger. What year?"
     },
     "answer": 1911,
     "unit": null,
@@ -487,8 +487,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "berlin-wall-stood-years",
     "question": {
-      "fr": "Le mur de Berlin est resté debout combien d'années ? Moins que tu crois. Ou plus. Voilà, le doute est installé.",
-      "en": "The Berlin Wall stood for how many years? Fewer than you think. Or more. There it is — the doubt."
+      "fr": "Le mur de Berlin est resté debout combien d'années ? Engage-toi sur un chiffre. À voix haute. Devant témoins.",
+      "en": "The Berlin Wall stood for how many years? Commit to a number. Out loud. In front of witnesses."
     },
     "answer": 28,
     "unit": {
@@ -559,8 +559,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "louis-xiv-reign-years",
     "question": {
-      "fr": "Le règne de Louis XIV, record d'Europe : combien d'années ? Pense long. Pense « il a usé cinq générations de courtisans ».",
-      "en": "Louis XIV's reign, the European record: how many years? Think long. Think 'he outlasted five generations of courtiers'."
+      "fr": "Le règne de Louis XIV, record d'Europe : combien d'années ? L'homme a enterré son fils, son petit-fils et la moitié de Versailles. Compte large.",
+      "en": "Louis XIV's reign, the European record: how many years? The man outlived his son, his grandson, and everyone who ever gossiped about him. Count accordingly."
     },
     "answer": 72,
     "unit": {
@@ -613,8 +613,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "great-pyramid-blocks",
     "question": {
-      "fr": "Nombre de blocs de pierre dans la grande pyramide de Gizeh, selon les égyptologues. Pense énorme. Multiplie. Recommence.",
-      "en": "Stone blocks in the Great Pyramid of Giza, per Egyptologists. Think huge. Multiply. Do it again."
+      "fr": "Nombre de blocs de pierre dans la grande pyramide de Gizeh, selon les égyptologues. Le plus loin du compte porte les courses de tout le groupe au prochain ravitaillement. Hommage.",
+      "en": "Stone blocks in the Great Pyramid of Giza, per Egyptologists. Furthest guess carries everyone's bags on the next supply run. Tribute."
     },
     "answer": 2300000,
     "unit": {
@@ -667,8 +667,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "statue-liberty-height",
     "question": {
-      "fr": "Statue de la Liberté : hauteur totale en mètres, socle et torche compris. C'est un cadeau de la France — techniquement, t'es censé savoir.",
-      "en": "Statue of Liberty: total height in meters, pedestal and torch included. France built it, you've memed it — someone here should know."
+      "fr": "Statue de la Liberté : hauteur totale en mètres, socle et torche compris. C'est NOUS qui l'avons offerte, et personne à cette table connaît le chiffre. Rendez-la.",
+      "en": "Statue of Liberty: total height in meters, pedestal to torch. France built it, shipped it, and reserves the right to take it back the second you lowball this."
     },
     "answer": 93,
     "unit": {
@@ -678,8 +678,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "93 m. Cadeau de la France, ossature interne signée Gustave Eiffel — l'homme avait visiblement un truc avec le métal.",
-      "en": "93 m. A gift from France, with an internal frame by Gustave Eiffel — the man clearly had a thing for metal."
+      "fr": "93 m. Cadeau de la France, ossature signée Gustave Eiffel. On l'a construite, offerte, expédiée — et toi t'as lowballé à 30. On la reprend.",
+      "en": "93 m. France built it, framed it with Gustave Eiffel's steelwork, and shipped it over. You guessed 30. We're taking it back."
     }
   },
   {
@@ -693,23 +693,23 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1886, par un pharmacien d'Atlanta qui le vendait comme médicament. La même année, on inaugurait la statue de la Liberté.",
-      "en": "1886, by an Atlanta pharmacist who sold it as medicine. The Statue of Liberty was dedicated that very same year."
+      "fr": "1886, par un pharmacien d'Atlanta qui le vendait comme médicament. La boisson la plus connue de la planète a démarré en pharmacie — et toi t'as dit « genre 1950 ? ». Tournée de Coca tiède pour le perdant.",
+      "en": "1886, by an Atlanta pharmacist who sold it as medicine. The most famous drink on Earth started at a pharmacy counter — and you guessed '1950ish?'. Warm flat cola for the loser."
     }
   },
   {
     "id": "paris-metro-year",
     "question": {
-      "fr": "Ouverture de la première ligne du métro de Paris : quelle année ? Toi qui insultes la ligne 13 tous les matins, prouve que tu la connais.",
-      "en": "Paris opened its first métro line in what year? You've trash-talked a metro system before — now show it some basic respect."
+      "fr": "Ouverture de la première ligne du métro de Paris : quelle année ? Tu insultes la ligne 13 tous les matins — connais au moins l'anniversaire de ta pire ennemie.",
+      "en": "Paris opened its first métro line in what year? You've sworn at public transport in three countries. Prove the hate is informed."
     },
     "answer": 1900,
     "unit": null,
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "Le 19 juillet 1900, pour l'Exposition universelle. Budapest avait déjà le sien depuis 1896 — Paris est arrivé fashionably late.",
-      "en": "July 19, 1900, for the World's Fair. Budapest had already had its metro since 1896 — Paris showed up fashionably late."
+      "fr": "Le 19 juillet 1900, pour l'Expo universelle. Budapest avait déjà le sien depuis 1896 — Paris est arrivé en retard, comme toi à chaque rendez-vous. Au moins le métro a une excuse.",
+      "en": "July 19, 1900, for the World's Fair. Budapest had its metro since 1896 — Paris showed up late, like you to every plan. At least the metro had an excuse."
     }
   },
   {
@@ -762,15 +762,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "38 km sous l'eau — la plus longue section sous-marine au monde. Les tunneliers français et anglais se sont rejoints à quelques centimètres près.",
-      "en": "38 km underwater — the longest undersea stretch of any tunnel on Earth. The French and British boring machines met just centimeters apart."
+      "fr": "38 km sous l'eau — la plus longue section sous-marine au monde. Les tunneliers français et anglais se sont rejoints à quelques centimètres près. Toi, tu rates un créneau avec une caméra de recul.",
+      "en": "38 km underwater — the longest undersea stretch of any tunnel on Earth. The French and British boring machines met just centimeters apart. You can't parallel park with a reversing camera."
     }
   },
   {
     "id": "trans-siberian-km",
     "question": {
-      "fr": "Moscou-Vladivostok en Transsibérien : combien de kilomètres ? Toi qui trouves que 40 minutes de covoiturage c'est « long ».",
-      "en": "Moscow to Vladivostok on the Trans-Siberian: how many kilometers? You, who calls a 40-minute coach ride 'a trek'."
+      "fr": "Moscou-Vladivostok en Transsibérien : combien de kilomètres ? Toi, t'as exigé une pause au bout de 45 minutes de covoiturage. Tout le monde s'en souvient.",
+      "en": "Moscow to Vladivostok on the Trans-Siberian: how many kilometers? You demanded a service-station stop 45 minutes into a road trip. Everyone remembers."
     },
     "answer": 9289,
     "unit": {
@@ -805,8 +805,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "golden-gate-length-m",
     "question": {
-      "fr": "Longueur totale du Golden Gate, en mètres. Tu l'as vu dans 200 films — il a plus de temps d'écran que toi.",
-      "en": "Total length of the Golden Gate Bridge, in meters. It's been in 200 movies — more screen time than your whole camera roll."
+      "fr": "Longueur totale du Golden Gate, en mètres. Il a plus de temps d'écran que toi, plus de fans que toi, et il fait que rester planté là. Venge-toi sur le chiffre.",
+      "en": "Total length of the Golden Gate Bridge, in meters. More screen time than you, more fans than you, and it just stands there. Nail the number out of spite."
     },
     "answer": 2737,
     "unit": {
@@ -816,8 +816,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "2 737 m, peints en « International Orange ». La couleur devait être provisoire — les habitants ont refusé qu'on y touche.",
-      "en": "2,737 m, painted 'International Orange'. The color was meant to be temporary — locals refused to let anyone change it."
+      "fr": "2 737 m, peints en « International Orange ». La couleur devait être provisoire — les habitants ont refusé qu'on y touche. Le « provisoire » le plus assumé de l'Histoire, avec ta déco.",
+      "en": "2,737 m, painted 'International Orange'. The color was meant to be temporary — locals refused to let anyone change it. The most committed 'temporary' in history, after your flat's furniture."
     }
   },
   {
@@ -918,8 +918,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1607. Le « Pont Neuf » est neuf depuis plus de quatre siècles. Le naming parisien, déjà à l'époque, était audacieux.",
-      "en": "1607. The 'New Bridge' has been new for over four centuries. Parisian naming was bold even back then."
+      "fr": "1607. Le « Pont Neuf » est neuf depuis 400 ans. Il a menti sur son nom plus longtemps que toi sur ton « jsuis là dans 5 min ».",
+      "en": "1607. The 'New Bridge' has been new for four centuries. It's been lying about its name longer than you've been lying about being 'five minutes away'."
     }
   },
   {
@@ -966,8 +966,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1903 — inventé pour vendre le journal L'Auto. Le plus grand événement sportif français est, à l'origine, un coup marketing.",
-      "en": "1903 — invented to sell the newspaper L'Auto. France's biggest sporting event started life as a marketing stunt."
+      "fr": "1903 — inventé pour vendre un journal. Le plus grand événement sportif français est une pub qui a trop bien marché. Et un daron a quand même répondu avant toi.",
+      "en": "1903 — invented to sell a newspaper. France's biggest sporting event is an ad that got out of hand. And someone's dad still answered before you did."
     }
   },
   {
@@ -1035,8 +1035,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "305 cm (10 pieds), inchangé depuis 1891 — c'était juste la hauteur de la rambarde du gymnase de l'inventeur. Le hasard fait les standards.",
-      "en": "305 cm (10 feet), unchanged since 1891 — it was simply the height of the gym balcony where the inventor hung a peach basket. Standards by accident."
+      "fr": "305 cm, inchangé depuis 1891 : juste la hauteur de la rambarde où l'inventeur a accroché un panier de pêches. Tout le basket mondial repose sur un coup de flemme. Et toi tu « touches presque l'arceau ». Bien sûr.",
+      "en": "305 cm, unchanged since 1891 — just the height of the balcony where the inventor nailed a peach basket. All of basketball rests on one lazy afternoon. And you 'can almost touch the rim'. Sure."
     }
   },
   {
@@ -1143,15 +1143,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "Un seul : « La Vigne rouge », 400 francs. Aujourd'hui, ses toiles partent à des dizaines de millions. Le timing, c'est tout.",
-      "en": "Just one: 'The Red Vineyard', for 400 francs. Today his canvases sell for tens of millions. Timing is everything."
+      "fr": "Un seul tableau vendu de sa vie. Aujourd'hui ses toiles partent à des dizaines de millions. Génie incompris de son vivant — comme tes blagues, sauf que lui c'était mérité.",
+      "en": "Exactly one painting sold while alive. Today his canvases go for tens of millions. A genius misunderstood in his time — like your jokes, except his actually deserved better."
     }
   },
   {
     "id": "mozart-symphonies",
     "question": {
-      "fr": "Mozart : combien de symphonies numérotées ? Le mec composait plus vite que toi tu réponds aux messages.",
-      "en": "Mozart: how many numbered symphonies? The man wrote them faster than you answer texts."
+      "fr": "Mozart : combien de symphonies numérotées ? Lui, il livrait des chefs-d'œuvre en avance. Toi, t'as demandé un délai pour un mail de trois lignes.",
+      "en": "Mozart: how many numbered symphonies? He delivered masterpieces ahead of schedule. You asked for an extension on a three-line email."
     },
     "answer": 41,
     "unit": {
@@ -1176,8 +1176,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1970. Le groupe n'a existé que 8 ans sous sa forme célèbre — moins longtemps que certaines de tes séries préférées.",
-      "en": "1970. The famous lineup lasted just 8 years — shorter than some of your favorite TV shows."
+      "fr": "1970. Le plus grand groupe de l'histoire a tenu 8 ans sous sa forme célèbre — plus court que la durée de vie de ta dernière relation… ou pas, justement. Aïe.",
+      "en": "1970. The biggest band in history lasted 8 years in its famous lineup — longer than your last relationship. Or shorter. Either way, ouch."
     }
   },
   {
@@ -1201,8 +1201,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "harry-potter-first-year",
     "question": {
-      "fr": "En quelle année le premier Harry Potter a-t-il été publié ?",
-      "en": "In what year was the first Harry Potter book published?"
+      "fr": "Année de publication du premier Harry Potter. Quelqu'un ici a refait le test des maisons jusqu'à avoir Serpentard — qu'il réponde en premier.",
+      "en": "The first Harry Potter book dropped in what year? Someone here retook the house quiz until it said Slytherin. They answer first."
     },
     "answer": 1997,
     "unit": null,
@@ -1216,8 +1216,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "anticonstitutionnellement-letters",
     "question": {
-      "fr": "Combien de lettres compte « anticonstitutionnellement », le plus long mot usuel du français ?",
-      "en": "How many letters are in 'anticonstitutionnellement', famously the longest everyday French word?"
+      "fr": "Nombre de lettres dans « anticonstitutionnellement ». Tout le monde le cite depuis le CE2, personne ne l'a jamais compté. Démasquez-vous.",
+      "en": "Letters in 'anticonstitutionnellement', France's favorite party-trick word. You've all quoted it. Not one of you has counted. Prove something."
     },
     "answer": 25,
     "unit": {
@@ -1234,8 +1234,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "khmer-alphabet-letters",
     "question": {
-      "fr": "L'alphabet khmer (Cambodge), le plus long du monde, compte combien de lettres ?",
-      "en": "The Khmer alphabet (Cambodia), the world's longest, has how many letters?"
+      "fr": "L'alphabet khmer, le plus long du monde : combien de lettres ? T'as lâché Duolingo au jour 8. La chouette s'en souvient. Nous aussi.",
+      "en": "The Khmer alphabet is the longest on Earth. How many letters? You quit Duolingo on day 8 of the streak. The owl remembers. So do we."
     },
     "answer": 74,
     "unit": {
@@ -1252,8 +1252,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "llanfair-letters",
     "question": {
-      "fr": "Le village gallois au nom le plus long d'Europe, Llanfairpwllgwyngyll… : combien de lettres dans son nom complet ?",
-      "en": "The Welsh village with Europe's longest place name, Llanfairpwllgwyngyll…: how many letters in the full name?"
+      "fr": "Llanfairpwllgwyngyll…, le village gallois au nom le plus long d'Europe : combien de lettres en tout ? Celui qui tente de le prononcer perd sa dignité, pas des points.",
+      "en": "Llanfairpwllgwyngyll…, Europe's longest place name: total letters? Attempt the pronunciation and you forfeit your dignity on the spot."
     },
     "answer": 58,
     "unit": {
@@ -1270,8 +1270,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "asterix-first-year",
     "question": {
-      "fr": "En quelle année Astérix est-il apparu pour la première fois ?",
-      "en": "In what year did Asterix first appear?"
+      "fr": "Première apparition d'Astérix : quelle année ? Y'a quarante albums chez tes grands-parents et t'es pas fichu de dater le premier.",
+      "en": "Asterix first appeared in what year? You've read the comics at your nan's and retained exactly nothing. Show us."
     },
     "answer": 1959,
     "unit": null,
@@ -1283,25 +1283,28 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "tintin-first-year",
+    "id": "smurfs-count-village",
     "question": {
-      "fr": "En quelle année Tintin est-il apparu pour la première fois ?",
-      "en": "In what year did Tintin first appear?"
+      "fr": "Dans le village des Schtroumpfs original, combien de Schtroumpfs vivent — Schtroumpfette comprise ? Petit chiffre. Quelqu'un ici va sortir « genre 200 » avec aplomb.",
+      "en": "In the original Smurf village, how many Smurfs live there — counting Smurfette? Small number. Someone here is about to confidently say 'like 200'."
     },
-    "answer": 1929,
-    "unit": null,
-    "format": "year",
+    "answer": 100,
+    "unit": {
+      "fr": "Schtroumpfs",
+      "en": "Smurfs"
+    },
+    "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "1929, dans Le Petit Vingtième. Presque 100 ans plus tard, sa coiffure n'a toujours pas bougé. Quel gel.",
-      "en": "1929, in Le Petit Vingtième. Almost a century later, that quiff hasn't moved a millimeter. Respect the gel."
+      "fr": "Une centaine, et UNE seule fille pour tout ce monde. Personne a jamais trouvé ça bizarre à l'époque — toi t'as dit 200, donc t'as pas non plus réfléchi.",
+      "en": "Around a hundred, and exactly ONE girl for the whole village. Nobody questioned the math back then — and you said 200, so clearly you didn't either."
     }
   },
   {
     "id": "lumiere-screening-year",
     "question": {
-      "fr": "En quelle année les frères Lumière ont-ils organisé la première séance publique payante de cinéma ?",
-      "en": "In what year did the Lumière brothers hold the first paid public film screening?"
+      "fr": "Première séance de cinéma payante de l'histoire, signée les frères Lumière : quelle année ? T'as un abo UGC illimité et aucune culture. Rattrape-toi.",
+      "en": "The Lumière brothers ran history's first paid film screening in what year? You pay for three streaming services and know zero film history. Fix it."
     },
     "answer": 1895,
     "unit": null,
@@ -1315,8 +1318,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "first-photo-person-year",
     "question": {
-      "fr": "En quelle année a été prise la première photographie montrant un être humain ?",
-      "en": "In what year was the first photograph showing a human being taken?"
+      "fr": "Première photo de l'histoire avec un humain dessus : quelle année ? Toi il te faut 47 essais pour un selfie. Lui, il a eu une seule prise.",
+      "en": "First photograph ever to capture a human being: what year? You need 40 attempts for one selfie. This man got a single take."
     },
     "answer": 1838,
     "unit": null,
@@ -1330,8 +1333,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "uno-cards-count",
     "question": {
-      "fr": "Combien de cartes compte un jeu de UNO classique ?",
-      "en": "How many cards are in a classic UNO deck?"
+      "fr": "Nombre de cartes dans un jeu de UNO classique. T'as détruit des amitiés avec ce jeu — t'as pas le droit de pas savoir.",
+      "en": "Cards in a classic UNO deck. You've ended friendships with this game. You don't get to not know."
     },
     "answer": 108,
     "unit": {
@@ -1348,8 +1351,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "jenga-blocks-count",
     "question": {
-      "fr": "Combien de blocs de bois compte une tour de Jenga complète ?",
-      "en": "How many wooden blocks make up a complete Jenga tower?"
+      "fr": "Nombre de blocs dans une tour de Jenga complète. Celui qui la fait toujours tomber répond en premier — qu'il serve enfin à quelque chose.",
+      "en": "Blocks in a full Jenga tower. The one who always knocks it over answers first — make yourself useful for once."
     },
     "answer": 54,
     "unit": {
@@ -1364,28 +1367,28 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "twister-circles-count",
+    "id": "monopoly-money-total",
     "question": {
-      "fr": "Combien de ronds de couleur y a-t-il sur un tapis de Twister ?",
-      "en": "How many colored circles are on a Twister mat?"
+      "fr": "Combien d'argent total dans la boîte d'un Monopoly classique, en dollars de jeu ? Le plus loin du compte est désigné banquier — et tout le monde sait ce que ça veut dire.",
+      "en": "How much total money comes in a classic Monopoly box, in game dollars? Furthest guess is appointed banker — and everyone knows what that means."
     },
-    "answer": 24,
+    "answer": 20580,
     "unit": {
-      "fr": "ronds",
-      "en": "circles"
+      "fr": "dollars de jeu",
+      "en": "game dollars"
     },
     "format": "plain",
-    "scale": "linear",
+    "scale": "log",
     "funFact": {
-      "fr": "24 ronds, 4 couleurs. À sa sortie en 1966, des concurrents l'ont accusé de vendre « du péché en boîte ». C'est juste du stretching collectif.",
-      "en": "24 circles, 4 colors. At launch in 1966, rivals accused it of selling 'sex in a box'. It's just group stretching with extra steps."
+      "fr": "20 580 $ par boîte. Statistiquement, la moitié finit sous la table et l'autre dans la poche du banquier. Y'a toujours un banquier louche. Tu sais c'est qui.",
+      "en": "20,580 dollars per box. Statistically, half ends up under the table and half in the banker's pocket. There's always a dodgy banker. You know exactly who it is."
     }
   },
   {
     "id": "pacman-perfect-score",
     "question": {
-      "fr": "Quel est le score PARFAIT à Pac-Man, le maximum atteignable sur la machine d'origine ?",
-      "en": "What is the PERFECT score in Pac-Man — the maximum possible on the original machine?"
+      "fr": "Le score PARFAIT à Pac-Man, le maximum sur la machine d'origine. C'est précis au point près. Vise, pleure, recommence.",
+      "en": "The PERFECT Pac-Man score — the absolute max on the original machine. It's exact to the point. Guess, weep, repeat."
     },
     "answer": 3333360,
     "unit": {
@@ -1402,8 +1405,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "rubiks-gods-number",
     "question": {
-      "fr": "N'importe quel Rubik's Cube mélangé peut être résolu en combien de mouvements maximum ?",
-      "en": "Any scrambled Rubik's Cube can be solved in at most how many moves?"
+      "fr": "N'importe quel Rubik's Cube mélangé se résout en combien de coups maximum ? Toi t'as fini une face en 2017 et t'en parles encore.",
+      "en": "Any scrambled Rubik's Cube can be solved in at most how many moves? You did one face in 2019 and still bring it up."
     },
     "answer": 20,
     "unit": {
@@ -1420,8 +1423,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "lego-brick-patent-year",
     "question": {
-      "fr": "En quelle année LEGO a-t-il breveté sa brique moderne à tenons ?",
-      "en": "In what year did LEGO patent its modern stud-and-tube brick?"
+      "fr": "Année du brevet de la brique LEGO moderne. Elle attaque des pieds nus à 3 h du matin depuis avant ta naissance. Connais la date de naissance de ton bourreau.",
+      "en": "The year LEGO patented the modern brick. It's been assaulting bare feet at 3 a.m. since before your parents met. Know your attacker."
     },
     "answer": 1958,
     "unit": null,
@@ -1435,8 +1438,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "lego-six-bricks-combos",
     "question": {
-      "fr": "De combien de façons différentes peut-on assembler six briques LEGO 2x4 de la même couleur ?",
-      "en": "In how many different ways can six 2x4 LEGO bricks of the same color be combined?"
+      "fr": "Six briques LEGO 2x4 : combien de façons de les assembler ? Le chiffre est une insulte au bon sens. Tente quand même.",
+      "en": "Six 2x4 LEGO bricks: how many ways to combine them? The answer is an insult to common sense. Guess anyway."
     },
     "answer": 915103765,
     "unit": {
@@ -1453,8 +1456,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "tetris-created-year",
     "question": {
-      "fr": "En quelle année Tetris a-t-il été créé ?",
-      "en": "In what year was Tetris created?"
+      "fr": "Année de création de Tetris. Plus vieux que tout le monde autour de cette table ? Plus jeune ? Tranchez, et fâchez-vous.",
+      "en": "The year Tetris was created. Older than everyone in this room? Younger? Pick a side, then start the fight."
     },
     "answer": 1984,
     "unit": null,
@@ -1468,8 +1471,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "pokemon-gen1-count",
     "question": {
-      "fr": "Combien de Pokémon comptait la toute première génération ?",
-      "en": "How many Pokémon were in the very first generation?"
+      "fr": "Nombre de Pokémon dans la toute première génération. Tu te plantes, tu rends tes cartes brillantes. Toutes.",
+      "en": "How many Pokémon in the very first generation? Someone here knew the entire PokéRap by heart. Time to pay for that."
     },
     "answer": 151,
     "unit": {
@@ -1486,8 +1489,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "chess-fastest-mate-moves",
     "question": {
-      "fr": "Aux échecs, en combien de coups minimum peut-on se faire mater ?",
-      "en": "In chess, what is the minimum number of moves in which you can be checkmated?"
+      "fr": "Aux échecs, on peut se faire mater en combien de coups minimum ? Quelqu'un ici se dit « plutôt bon » depuis Le Jeu de la dame. Vérifions.",
+      "en": "Minimum number of moves to get checkmated in chess. Someone here claims they're 'decent' off the back of one Netflix show. Let's verify."
     },
     "answer": 2,
     "unit": {
@@ -1504,8 +1507,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "a380-max-passengers",
     "question": {
-      "fr": "Combien de passagers maximum un Airbus A380 est-il certifié pour transporter ?",
-      "en": "What is the maximum number of passengers an Airbus A380 is certified to carry?"
+      "fr": "Un Airbus A380 est certifié pour combien de passagers maximum ? Pense à ton pire vol low-cost. Maintenant, multiplie la misère.",
+      "en": "An Airbus A380 is certified for how many passengers, max? Picture your worst budget flight. Now scale the misery up."
     },
     "answer": 853,
     "unit": {
@@ -1522,8 +1525,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "first-email-year",
     "question": {
-      "fr": "En quelle année le tout premier e-mail a-t-il été envoyé ?",
-      "en": "In what year was the very first email sent?"
+      "fr": "Le tout premier e-mail de l'histoire : quelle année ? T'en as 4 712 non lus — t'as une dette envers lui.",
+      "en": "The very first email in history: what year? You're sitting on 4,000 unread ones. You owe the original some respect."
     },
     "answer": 1971,
     "unit": null,
@@ -1535,40 +1538,43 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "first-website-year",
+    "id": "average-phone-pickups-day",
     "question": {
-      "fr": "En quelle année le premier site web de l'histoire a-t-il été mis en ligne ?",
-      "en": "In what year did the first website in history go online?"
+      "fr": "Combien de fois une personne déverrouille son téléphone par jour, en moyenne, selon les études ? Annonce ton chiffre, puis sois honnête, c'est pire chez toi.",
+      "en": "How many times does the average person unlock their phone per day, per the studies? Say your number, then be honest — yours is worse."
     },
-    "answer": 1991,
-    "unit": null,
-    "format": "year",
+    "answer": 96,
+    "unit": {
+      "fr": "fois",
+      "en": "times"
+    },
+    "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "1991, au CERN : info.cern.ch, une page qui explique ce qu'est le web. Elle est toujours en ligne — et charge plus vite que la plupart des sites actuels.",
-      "en": "1991, at CERN: info.cern.ch, a page explaining what the web is. It's still online — and loads faster than most modern sites."
+      "fr": "Environ 96 fois par jour, une toutes les 10 minutes éveillées. Et là tout de suite, quelqu'un à la table tient déjà son tel sans s'en rendre compte. Regardez.",
+      "en": "About 96 times a day — once every 10 waking minutes. And right now, someone at this table is already holding their phone without noticing. Look around."
     }
   },
   {
     "id": "google-founded-year",
     "question": {
-      "fr": "En quelle année Google a-t-il été fondé ?",
-      "en": "In what year was Google founded?"
+      "fr": "Année de fondation de Google. Interdit de la googler. Oui, on voit l'ironie. Non, repose ce téléphone.",
+      "en": "The year Google was founded. No, you can't google it. Yes, we see the irony. Put the phone down."
     },
     "answer": 1998,
     "unit": null,
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1998, dans un garage. Le nom vient d'une faute de frappe sur « googol » (un 1 suivi de 100 zéros). La plus grosse coquille de l'histoire.",
-      "en": "1998, in a garage. The name is a typo of 'googol' (a 1 followed by 100 zeros). The most profitable spelling mistake in history."
+      "fr": "1998, dans un garage. Le nom est une faute de frappe sur « googol ». T'as failli le googler pour tricher — il connaît déjà ta réponse, d'ailleurs.",
+      "en": "1998, in a garage. The name is a typo of 'googol'. You nearly googled the answer to cheat — and it already knows you did."
     }
   },
   {
     "id": "iphone-first-year",
     "question": {
-      "fr": "En quelle année le premier iPhone est-il sorti ?",
-      "en": "In what year was the first iPhone released?"
+      "fr": "Sortie du premier iPhone : quelle année ? T'as vendu un rein pour le dernier — montre un minimum de respect à l'ancêtre.",
+      "en": "The first iPhone launched in what year? You financed the latest one over 24 months. Show the ancestor some respect."
     },
     "answer": 2007,
     "unit": null,
@@ -1582,8 +1588,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "wikipedia-launch-year",
     "question": {
-      "fr": "En quelle année Wikipédia a-t-il été lancé ?",
-      "en": "In what year was Wikipedia launched?"
+      "fr": "Lancement de Wikipédia : quelle année ? Elle a porté tous tes exposés de collège. L'heure de rembourser a sonné.",
+      "en": "Wikipedia launched in what year? It carried every essay you ever 'wrote'. Time to settle the debt."
     },
     "answer": 2001,
     "unit": null,
@@ -1597,8 +1603,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "youtube-first-video-seconds",
     "question": {
-      "fr": "La toute première vidéo YouTube, « Me at the zoo » (2005), dure combien de secondes ?",
-      "en": "The very first YouTube video, 'Me at the zoo' (2005), is how many seconds long?"
+      "fr": "La toute première vidéo YouTube, « Me at the zoo » (2005) : combien de secondes ? Plus courte que les pubs que tu skip avec haine.",
+      "en": "The first YouTube video ever, 'Me at the zoo' (2005): how many seconds? Shorter than the ads you rage-skip."
     },
     "answer": 19,
     "unit": {
@@ -1615,8 +1621,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "first-emoji-count",
     "question": {
-      "fr": "Combien d'emojis comptait le tout premier jeu d'emojis, créé au Japon en 1999 ?",
-      "en": "How many emojis were in the very first emoji set, created in Japan in 1999?"
+      "fr": "Le tout premier set d'emojis (Japon, 1999) : combien d'emojis ? Toi qui réponds « 💀 » à tout, t'as un héritage à honorer.",
+      "en": "The very first emoji set (Japan, 1999): how many emojis? You answer everything with one skull. Honor your heritage."
     },
     "answer": 176,
     "unit": {
@@ -1633,23 +1639,23 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "qwerty-typewriter-year",
     "question": {
-      "fr": "Le clavier QWERTY date de la machine à écrire de quelle année ?",
-      "en": "The QWERTY keyboard layout dates back to the typewriter of what year?"
+      "fr": "Le clavier QWERTY — l'ancêtre de ton AZERTY — date de la machine à écrire de quelle année ? Rate l'année, et chaque faute de frappe de ta semaine devient officiellement un défaut de personnalité.",
+      "en": "The QWERTY layout dates back to a typewriter from what year? Miss the date and every typo you make this week is officially a character flaw."
     },
     "answer": 1873,
     "unit": null,
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1873. Disposition pensée pour éviter que les tiges métalliques se coincent. Ton clavier de 2026 est dimensionné pour un problème de mécanique du XIXe.",
-      "en": "1873. The layout was designed to stop metal typebars from jamming. Your 2026 keyboard is optimized for a 19th-century mechanical problem."
+      "fr": "1873. Disposition pensée pour éviter que les tiges métalliques se coincent. Ton clavier est encore dimensionné pour un problème de mécanique du XIXe.",
+      "en": "1873. The layout was designed to stop metal typebars from jamming. Your keyboard is still optimized for a 19th-century mechanical problem."
     }
   },
   {
     "id": "first-computer-bug-year",
     "question": {
-      "fr": "Le premier « bug » informatique documenté était un vrai insecte. En quelle année a-t-il été trouvé ?",
-      "en": "The first documented computer 'bug' was an actual insect. In what year was it found?"
+      "fr": "Le premier « bug » informatique documenté était un vrai insecte écrasé dans une machine. Quelle année ? Ceux qui bossent « dans la tech » n'ont pas le droit à l'erreur.",
+      "en": "The first documented computer 'bug' was an actual insect squashed in a machine. What year? Anyone here who 'works in tech' and misses this: career over."
     },
     "answer": 1947,
     "unit": null,
@@ -1663,8 +1669,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "eniac-weight-tonnes",
     "question": {
-      "fr": "Combien de tonnes pesait l'ENIAC, l'un des premiers ordinateurs (1946) ?",
-      "en": "How many tonnes did ENIAC, one of the first computers (1946), weigh?"
+      "fr": "L'ENIAC, l'un des premiers ordinateurs (1946) : combien de tonnes ? Toi tu râles parce que ton tel fait 200 grammes.",
+      "en": "ENIAC, one of the first computers (1946): how many tonnes? You complain that your phone is 200 grams."
     },
     "answer": 27,
     "unit": {
@@ -1681,8 +1687,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "mouse-demo-year",
     "question": {
-      "fr": "En quelle année la souris d'ordinateur a-t-elle été présentée au public pour la première fois ?",
-      "en": "In what year was the computer mouse first demonstrated to the public?"
+      "fr": "Première démo publique de la souris d'ordinateur : quelle année ? Indice : c'est pas l'année que tu vas dire. C'est pire.",
+      "en": "The computer mouse was first shown to the public in what year? Hint: it's not the year you're about to say. It's worse."
     },
     "answer": 1968,
     "unit": null,
@@ -1696,8 +1702,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "microwave-invented-year",
     "question": {
-      "fr": "En quelle année le four à micro-ondes a-t-il été inventé ?",
-      "en": "In what year was the microwave oven invented?"
+      "fr": "Invention du four à micro-ondes : quelle année ? Cette machine t'a nourri plus souvent que ta famille. Rate sa date et tu manges froid ce soir, par principe.",
+      "en": "The microwave oven was invented in what year? That machine has fed you more often than your own family. Miss the date and you eat cold pasta tonight, on principle."
     },
     "answer": 1945,
     "unit": null,
@@ -1711,8 +1717,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "velcro-patent-year",
     "question": {
-      "fr": "En quelle année le Velcro a-t-il été breveté ?",
-      "en": "In what year was Velcro patented?"
+      "fr": "Brevet du Velcro : quelle année ? T'as porté des baskets à scratch jusqu'à un âge que tes potes ici connaissent très bien. Qu'ils confirment pendant que tu réponds.",
+      "en": "Velcro was patented in what year? You wore velcro trainers until an age your friends here remember perfectly. They can confirm while you answer."
     },
     "answer": 1955,
     "unit": null,
@@ -1726,8 +1732,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "bubble-wrap-year",
     "question": {
-      "fr": "En quelle année le papier bulle a-t-il été inventé ?",
-      "en": "In what year was bubble wrap invented?"
+      "fr": "Invention du papier bulle : quelle année ? T'en as éclaté des heures sans jamais te demander d'où il venait. Ingrat.",
+      "en": "Bubble wrap was invented in what year? You've popped hours of it without once asking where it came from. Ungrateful."
     },
     "answer": 1957,
     "unit": null,
@@ -1741,8 +1747,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "wd40-attempt-number",
     "question": {
-      "fr": "Le WD-40 doit son nom au numéro de la tentative qui a enfin fonctionné. C'était la combientième ?",
-      "en": "WD-40 is named after the attempt that finally worked. Which attempt number was it?"
+      "fr": "Le WD-40 porte le numéro de la tentative qui a enfin marché. La combientième ? Si tu rates celle-là, c'est très, très grave.",
+      "en": "WD-40 is named after the attempt that finally worked. Which number? Miss this one and the table is allowed to never let it go."
     },
     "answer": 40,
     "unit": {
@@ -1759,8 +1765,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "traffic-light-first-year",
     "question": {
-      "fr": "En quelle année le premier feu de circulation du monde a-t-il été installé, à Londres ?",
-      "en": "In what year was the world's first traffic light installed, in London?"
+      "fr": "Premier feu de circulation du monde, installé à Londres : quelle année ? Vise avant l'automobile. Oui, AVANT. Débrouille-toi avec ça.",
+      "en": "The world's first traffic light, installed in London: what year? Aim before the car existed. Yes, BEFORE. Deal with that."
     },
     "answer": 1868,
     "unit": null,
@@ -1774,8 +1780,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "bicycle-invented-year",
     "question": {
-      "fr": "En quelle année le premier ancêtre du vélo, la draisienne, a-t-il été inventé ?",
-      "en": "In what year was the first ancestor of the bicycle, the draisine, invented?"
+      "fr": "La draisienne, ancêtre du vélo : inventée quelle année ? Le plus loin du compte rentre à pied. Métaphoriquement. Pour l'instant.",
+      "en": "The draisine, the bicycle's ancestor: invented in what year? Furthest guess walks home. Metaphorically. For now."
     },
     "answer": 1817,
     "unit": null,
@@ -1789,8 +1795,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "balloon-first-flight-year",
     "question": {
-      "fr": "En quelle année a eu lieu le premier vol humain en montgolfière ?",
-      "en": "In what year did the first human hot-air balloon flight take place?"
+      "fr": "Premier vol humain en montgolfière : quelle année ? Avant ou après la Révolution ? Engage-toi à voix haute, la table jugera.",
+      "en": "The first human hot-air balloon flight: what year? Before or after the French Revolution? Commit out loud, then suffer."
     },
     "answer": 1783,
     "unit": null,
@@ -1804,8 +1810,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "wright-first-flight-seconds",
     "question": {
-      "fr": "Le premier vol motorisé des frères Wright (1903) a duré combien de secondes ?",
-      "en": "How many seconds did the Wright brothers' first powered flight (1903) last?"
+      "fr": "Le premier vol motorisé des frères Wright (1903) : combien de SECONDES ? Spoiler : t'as posté des stories plus longues sur ton kebab.",
+      "en": "The Wright brothers' first powered flight (1903): how many SECONDS? You've posted longer stories about your lunch."
     },
     "answer": 12,
     "unit": {
@@ -1822,23 +1828,23 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "laika-orbit-year",
     "question": {
-      "fr": "En quelle année la chienne Laïka est-elle devenue le premier être vivant en orbite ?",
-      "en": "In what year did the dog Laika become the first living creature in orbit?"
+      "fr": "La chienne Laïka devient le premier être vivant en orbite : quelle année ? Avant Gagarine. Bien avant ce que tu t'apprêtes à dire.",
+      "en": "Laika the dog became the first living creature in orbit: what year? Before Gagarin. Probably before whatever you're about to say."
     },
     "answer": 1957,
     "unit": null,
     "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "1957, à bord de Spoutnik 2. Une chienne errante de Moscou est entrée dans l'Histoire avant tous les astronautes.",
-      "en": "1957, aboard Sputnik 2. A Moscow street dog made history before any astronaut did."
+      "fr": "1957, à bord de Spoutnik 2. Une chienne errante de Moscou est entrée dans l'Histoire avant tous les astronautes. Ton chien, lui, mange des chaussettes.",
+      "en": "1957, aboard Sputnik 2. A Moscow street dog made history before any astronaut did. Your dog eats socks."
     }
   },
   {
     "id": "tereshkova-year",
     "question": {
-      "fr": "En quelle année Valentina Terechkova est-elle devenue la première femme dans l'espace ?",
-      "en": "In what year did Valentina Tereshkova become the first woman in space?"
+      "fr": "Valentina Terechkova, première femme dans l'espace : quelle année ? Indice : plus tôt que ce que la table va dire. Nettement plus tôt.",
+      "en": "Valentina Tereshkova, first woman in space: what year? Hint: earlier than this table is about to guess. Embarrassingly earlier."
     },
     "answer": 1963,
     "unit": null,
@@ -1852,8 +1858,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "gagarin-flight-minutes",
     "question": {
-      "fr": "Le premier vol spatial de Youri Gagarine (1961) a duré combien de minutes ?",
-      "en": "How many minutes did Yuri Gagarin's first spaceflight (1961) last?"
+      "fr": "Le premier vol spatial de Gagarine (1961) a duré combien de MINUTES ? Moins que ta dernière « petite sieste ».",
+      "en": "Gagarin's first spaceflight (1961) lasted how many MINUTES? Less than your last 'quick nap'."
     },
     "answer": 108,
     "unit": {
@@ -1868,28 +1874,28 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "iss-altitude-km",
+    "id": "space-suit-cost-millions",
     "question": {
-      "fr": "À quelle altitude moyenne vole la Station spatiale internationale, en kilomètres ?",
-      "en": "At what average altitude does the International Space Station fly, in kilometers?"
+      "fr": "Une combinaison spatiale de la NASA coûte environ combien de MILLIONS de dollars ? Vise haut. C'est plus cher que tout ce que ta famille possède réunie.",
+      "en": "A NASA spacesuit costs roughly how many MILLION dollars? Aim high. It's worth more than everything your family owns combined."
     },
-    "answer": 400,
+    "answer": 15,
     "unit": {
-      "fr": "kilomètres",
-      "en": "kilometers"
+      "fr": "millions de dollars",
+      "en": "million dollars"
     },
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "400 km — la distance Paris-Lyon, mais à la verticale. L'espace est plus proche de chez toi que la mer pour beaucoup de gens.",
-      "en": "400 km — about the distance from Paris to Lyon, just straight up. Space is closer to your house than the seaside is for many people."
+      "fr": "Environ 15 millions de dollars la combinaison — et les modèles datent des années 70, increvables. Toi t'as flingué une paire d'AirPods dans une machine à laver. La comparaison est cruelle.",
+      "en": "Around 15 million dollars per suit — and the designs date back to the 1970s, basically indestructible. You destroyed a pair of AirPods in the washing machine. Brutal comparison."
     }
   },
   {
     "id": "iss-sunrises-per-day",
     "question": {
-      "fr": "Combien de levers de soleil les astronautes de l'ISS voient-ils par 24 heures ?",
-      "en": "How many sunrises do ISS astronauts see every 24 hours?"
+      "fr": "Les astronautes de l'ISS voient combien de levers de soleil par 24 heures ? Toi t'en as vu trois cette année, dont deux en rentrant de soirée.",
+      "en": "ISS astronauts watch how many sunrises every 24 hours? You've seen three this year, and two were on the walk home from a night out."
     },
     "answer": 16,
     "unit": {
@@ -1906,8 +1912,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "karman-line-km",
     "question": {
-      "fr": "À combien de kilomètres d'altitude commence officiellement l'espace (ligne de Kármán) ?",
-      "en": "At how many kilometers of altitude does space officially begin (the Kármán line)?"
+      "fr": "L'espace commence officiellement à combien de kilomètres d'altitude (ligne de Kármán) ? Si ta réponse commence par « genre mille », dis-le fort, qu'on en profite tous.",
+      "en": "Space officially begins at how many kilometers up (the Kármán line)? If your answer starts with 'like, a thousand?', say it loud so everyone benefits."
     },
     "answer": 100,
     "unit": {
@@ -1924,8 +1930,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "astronaut-height-gain-cm",
     "question": {
-      "fr": "De combien de centimètres un astronaute peut-il grandir lors d'un long séjour dans l'espace ?",
-      "en": "By how many centimeters can an astronaut grow during a long stay in space?"
+      "fr": "Un astronaute peut grandir de combien de centimètres pendant un long séjour en orbite ? Oui, l'espace distribue ce que ta génétique t'a refusé.",
+      "en": "How many centimeters can an astronaut grow on a long mission? Yes, space hands out what genetics denied you."
     },
     "answer": 5,
     "unit": {
@@ -1942,8 +1948,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "jupiter-day-hours",
     "question": {
-      "fr": "Combien d'heures dure une journée sur Jupiter, arrondi ?",
-      "en": "How many hours long is a day on Jupiter, rounded?"
+      "fr": "Une journée sur Jupiter dure combien d'heures, arrondi ? La plus grosse planète du système est aussi la plus rapide. Toi, il te faut 48 h ouvrées pour répondre à un vocal.",
+      "en": "A day on Jupiter lasts how many hours, rounded? Biggest planet in the system, fastest spin. You need two business days to answer a text."
     },
     "answer": 10,
     "unit": {
@@ -1960,8 +1966,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "olympus-mons-km",
     "question": {
-      "fr": "Quelle est la hauteur du volcan Olympus Mons sur Mars, le plus haut du système solaire, en kilomètres ?",
-      "en": "How tall is Olympus Mons on Mars, the tallest volcano in the solar system, in kilometers?"
+      "fr": "Olympus Mons, sur Mars, le plus haut volcan du système solaire : combien de kilomètres de haut ? Ton Everest chéri est un dos d'âne à côté.",
+      "en": "Olympus Mons on Mars, the tallest volcano in the solar system: how many kilometers high? Everest is a speed bump next to this thing."
     },
     "answer": 22,
     "unit": {
@@ -1978,8 +1984,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "neptune-orbit-years",
     "question": {
-      "fr": "Combien d'années terrestres faut-il à Neptune pour faire le tour du Soleil ?",
-      "en": "How many Earth years does Neptune take to orbit the Sun?"
+      "fr": "Neptune met combien d'années terrestres à faire le tour du Soleil ? Plus que toutes vos vies réunies autour de cette table ? Tranchez. À voix haute.",
+      "en": "Neptune takes how many Earth years to orbit the Sun? More than every lifespan at this table combined? Decide. Out loud."
     },
     "answer": 165,
     "unit": {
@@ -1996,8 +2002,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "pluto-planet-years",
     "question": {
-      "fr": "Pendant combien d'années Pluton a-t-elle eu le statut de planète ?",
-      "en": "For how many years did Pluto hold planet status?"
+      "fr": "Pluton a été une planète pendant combien d'années ? Quelqu'un ici n'a toujours pas digéré la rétrogradation. Qu'il réponde, ce sera thérapeutique.",
+      "en": "Pluto held planet status for how many years? Someone here is still not over the demotion. Let them answer. It's therapy."
     },
     "answer": 76,
     "unit": {
@@ -2014,8 +2020,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "earths-fit-in-sun",
     "question": {
-      "fr": "Combien de planètes Terre pourrait-on faire tenir dans le volume du Soleil ?",
-      "en": "How many planet Earths could fit inside the volume of the Sun?"
+      "fr": "Combien de planètes Terre tiennent dans le volume du Soleil ? Annonce ton chiffre avec assurance. L'humiliation sera proportionnelle.",
+      "en": "How many Earths fit inside the volume of the Sun? Say your number with confidence. The humiliation scales accordingly."
     },
     "answer": 1300000,
     "unit": {
@@ -2032,8 +2038,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "speed-light-kms",
     "question": {
-      "fr": "Quelle est la vitesse de la lumière, en kilomètres par seconde ?",
-      "en": "What is the speed of light, in kilometers per second?"
+      "fr": "Vitesse de la lumière, en kilomètres par seconde. Le seul chiffre que les profs ont vraiment essayé de te graver dans le crâne. Voyons ce qu'il en reste.",
+      "en": "Speed of light, in kilometers per second. The one number school genuinely tried to install in your head. Let's audit the damage."
     },
     "answer": 299792,
     "unit": {
@@ -2050,8 +2056,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "speed-sound-ms",
     "question": {
-      "fr": "Quelle est la vitesse du son dans l'air à 20 °C, en mètres par seconde ?",
-      "en": "What is the speed of sound in air at 20°C, in meters per second?"
+      "fr": "Vitesse du son dans l'air à 20 °C, en mètres par seconde. Le plus loin du compte se fait couper la parole toute la manche. Logique.",
+      "en": "Speed of sound in air at 20°C, in meters per second. Furthest guess gets talked over for the rest of the round. Fitting."
     },
     "answer": 343,
     "unit": {
@@ -2068,8 +2074,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "everest-boiling-celsius",
     "question": {
-      "fr": "À quelle température l'eau bout-elle au sommet de l'Everest, en degrés Celsius ?",
-      "en": "At what temperature does water boil at the summit of Everest, in degrees Celsius?"
+      "fr": "L'eau bout à combien de degrés Celsius au sommet de l'Everest ? Si tu dis 100, tu redescends du quiz par la face nord.",
+      "en": "Water boils at how many degrees Celsius on the summit of Everest? Say 100 and you descend this quiz via the north face."
     },
     "answer": 71,
     "unit": {
@@ -2086,8 +2092,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "air-nitrogen-percent",
     "question": {
-      "fr": "Quel pourcentage de l'air que tu respires est de l'azote ?",
-      "en": "What percentage of the air you breathe is nitrogen?"
+      "fr": "Quel pourcentage de l'air que tu respires, là, maintenant, est de l'azote ? Tu respires depuis ta naissance et t'as jamais lu la composition.",
+      "en": "What percentage of the air you're breathing right now is nitrogen? You've been breathing your whole life and never once read the label."
     },
     "answer": 78,
     "unit": {
@@ -2104,8 +2110,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "earth-surface-water-percent",
     "question": {
-      "fr": "Quel pourcentage de la surface de la Terre est couvert d'eau ?",
-      "en": "What percentage of Earth's surface is covered by water?"
+      "fr": "Quel pourcentage de la surface de la Terre est couvert d'eau ? Question la plus facile du paquet — donc la plus dangereuse à rater devant témoins.",
+      "en": "What percentage of Earth's surface is covered by water? Easiest question in the deck — which makes missing it in front of witnesses so much worse."
     },
     "answer": 71,
     "unit": {
@@ -2122,8 +2128,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "body-water-percent",
     "question": {
-      "fr": "Le corps d'un adulte est composé d'environ quel pourcentage d'eau ?",
-      "en": "Roughly what percentage of an adult human body is water?"
+      "fr": "Un corps adulte, c'est environ quel pourcentage d'eau ? Réponds, puis accepte enfin ce que t'es : une flaque organisée.",
+      "en": "An adult body is roughly what percentage water? Answer, then accept what you are: a puddle with opinions."
     },
     "answer": 60,
     "unit": {
@@ -2138,28 +2144,25 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "seconds-in-a-day",
+    "id": "pizza-margherita-year",
     "question": {
-      "fr": "Combien y a-t-il de secondes dans 24 heures ?",
-      "en": "How many seconds are there in 24 hours?"
+      "fr": "La pizza Margherita aurait été créée en l'honneur d'une reine d'Italie en quelle année ? Celui qui commande toujours la même depuis dix ans répond en premier. Sans surprise.",
+      "en": "The Margherita pizza was supposedly created to honor a queen of Italy in what year? The one who's ordered the same pizza for ten years answers first. Obviously."
     },
-    "answer": 86400,
-    "unit": {
-      "fr": "secondes",
-      "en": "seconds"
-    },
-    "format": "plain",
+    "answer": 1889,
+    "unit": null,
+    "format": "year",
     "scale": "linear",
     "funFact": {
-      "fr": "86 400 secondes. Tu viens d'en utiliser une vingtaine à compter dans ta tête. Aucun regret.",
-      "en": "86,400 seconds. You just spent about twenty of them doing mental math. No regrets."
+      "fr": "1889 selon la légende : tomate, mozza, basilic pour les couleurs du drapeau italien. La pizza la plus basique du monde est en fait un acte patriotique. Toi tu mets de l'ananas dessus, traître.",
+      "en": "1889, per the legend: tomato, mozzarella, basil for the Italian flag. The most basic pizza on Earth is secretly a patriotic statement. And you put pineapple on it, you traitor."
     }
   },
   {
     "id": "heartbeats-per-day",
     "question": {
-      "fr": "Un cœur qui bat à 70 pulsations par minute : combien de battements en 24 heures ?",
-      "en": "A heart beating at 70 bpm: how many beats in 24 hours?"
+      "fr": "Un cœur à 70 pulsations par minute : combien de battements en 24 heures ? Calcul mental, en public, sans filet. Régale-nous.",
+      "en": "A heart at 70 bpm: how many beats in 24 hours? Mental math, live, no safety net. Entertain us."
     },
     "answer": 100800,
     "unit": {
@@ -2176,8 +2179,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "brain-neurons-billions",
     "question": {
-      "fr": "Combien de MILLIARDS de neurones contient un cerveau humain ?",
-      "en": "How many BILLION neurons does a human brain contain?"
+      "fr": "Combien de MILLIARDS de neurones dans un cerveau humain ? Les tiens sont tous mobilisés là, et ça se voit.",
+      "en": "How many BILLION neurons in a human brain? Yours are all working on this right now, and it shows."
     },
     "answer": 86,
     "unit": {
@@ -2194,8 +2197,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "blood-vessels-km",
     "question": {
-      "fr": "Mis bout à bout, les vaisseaux sanguins d'un corps humain mesurent environ combien de kilomètres, selon l'estimation classique ?",
-      "en": "Laid end to end, the blood vessels in one human body measure roughly how many kilometers, per the classic estimate?"
+      "fr": "Mis bout à bout, tes vaisseaux sanguins font combien de kilomètres, selon l'estimation classique ? T'as ça DANS le corps, et tu rates quand même ta correspondance à Châtelet.",
+      "en": "Laid end to end, your blood vessels run how many kilometers, per the classic estimate? You contain that much infrastructure and still miss your stop."
     },
     "answer": 100000,
     "unit": {
@@ -2212,8 +2215,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "earth-circumference-km",
     "question": {
-      "fr": "Quelle est la circonférence de la Terre à l'équateur, en kilomètres ?",
-      "en": "What is Earth's circumference at the equator, in kilometers?"
+      "fr": "Circonférence de la Terre à l'équateur, en kilomètres. L'humanité connaît ce chiffre depuis les Grecs anciens. Toi, on va voir.",
+      "en": "Earth's circumference at the equator, in kilometers. Humanity has known this since the ancient Greeks. You, we're about to find out."
     },
     "answer": 40075,
     "unit": {
@@ -2230,8 +2233,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "equator-spin-kmh",
     "question": {
-      "fr": "À l'équateur, à quelle vitesse la rotation de la Terre te fait-elle tourner, en km/h ?",
-      "en": "At the equator, how fast does Earth's rotation spin you around, in km/h?"
+      "fr": "À l'équateur, la rotation de la Terre te fait tourner à combien de km/h ? T'es en excès de vitesse depuis ta naissance et t'as jamais payé l'amende.",
+      "en": "At the equator, Earth's spin moves you at how many km/h? You've been speeding since birth and never once got the ticket."
     },
     "answer": 1670,
     "unit": {
@@ -2248,8 +2251,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "coldest-temp-recorded",
     "question": {
-      "fr": "Température la plus froide jamais mesurée sur Terre (Antarctique, 1983) : combien de degrés SOUS zéro, arrondi ?",
-      "en": "Coldest temperature ever measured on Earth (Antarctica, 1983): how many degrees BELOW zero Celsius, rounded?"
+      "fr": "Record de froid sur Terre (Antarctique, 1983) : combien de degrés SOUS zéro, arrondi ? Toi qui sors la doudoune à 12 °C, devine en silence.",
+      "en": "Coldest temperature ever measured on Earth (Antarctica, 1983): how many degrees BELOW zero, rounded? You wear a puffer at 12°C. Hush and guess."
     },
     "answer": 89,
     "unit": {
@@ -2266,8 +2269,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "dead-sea-salinity",
     "question": {
-      "fr": "Quel est le taux de sel de la mer Morte, en pourcentage ?",
-      "en": "What is the salinity of the Dead Sea, as a percentage?"
+      "fr": "Taux de sel de la mer Morte, en pourcentage. Plus salée que toi quand tu perds à ce jeu. C'est dire.",
+      "en": "Salinity of the Dead Sea, as a percentage. Saltier than you when you lose this round. Which is saying something."
     },
     "answer": 34,
     "unit": {
@@ -2277,15 +2280,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "34 % de sel, presque dix fois l'océan. On y flotte sans effort, journal à la main — couler y est plus difficile que nager.",
-      "en": "34% salt, nearly ten times the ocean. You float effortlessly, newspaper in hand — sinking is harder than swimming."
+      "fr": "34 % de sel, presque dix fois l'océan. Tu flottes sans bouger, journal à la main — le seul endroit au monde où ta technique de nage catastrophique passe inaperçue.",
+      "en": "34% salt, nearly ten times the ocean. You float without lifting a finger — the only place on Earth where your tragic swimming technique goes unnoticed."
     }
   },
   {
     "id": "baikal-depth-m",
     "question": {
-      "fr": "Profondeur maximale du lac Baïkal, le lac le plus profond du monde, en mètres ?",
-      "en": "Maximum depth of Lake Baikal, the deepest lake on Earth, in meters?"
+      "fr": "Profondeur max du lac Baïkal, le plus profond du monde, en mètres. Plus profond que toutes tes conversations de 3 h du matin réunies.",
+      "en": "Max depth of Lake Baikal, the deepest lake on Earth, in meters. Deeper than every 3 a.m. conversation you've ever had. Combined."
     },
     "answer": 1642,
     "unit": {
@@ -2302,8 +2305,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "angel-falls-m",
     "question": {
-      "fr": "Hauteur du Salto Ángel (Venezuela), la plus haute chute d'eau du monde, en mètres ?",
-      "en": "Height of Angel Falls (Venezuela), the world's tallest waterfall, in meters?"
+      "fr": "Hauteur du Salto Ángel (Venezuela), la plus haute chute d'eau du monde, en mètres. Vise haut. Non, plus haut. Tu vises encore comme un timide.",
+      "en": "Height of Angel Falls (Venezuela), the world's tallest waterfall, in meters. Aim high. No, higher. You're still guessing like a coward."
     },
     "answer": 979,
     "unit": {
@@ -2320,8 +2323,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "great-barrier-reef-km",
     "question": {
-      "fr": "Sur combien de kilomètres s'étend la Grande Barrière de corail ?",
-      "en": "How many kilometers long is the Great Barrier Reef?"
+      "fr": "La Grande Barrière de corail s'étend sur combien de kilomètres ? Un être vivant plus long que la France. Digère, puis réponds.",
+      "en": "The Great Barrier Reef runs how many kilometers? A living thing longer than Great Britain. Process that, then answer."
     },
     "answer": 2300,
     "unit": {
@@ -2331,15 +2334,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "2 300 km — le plus grand être vivant structuré de la planète, visible depuis l'espace. Contrairement à la Grande Muraille. Pan.",
-      "en": "2,300 km — the largest living structure on the planet, visible from space. Unlike the Great Wall. Mic drop."
+      "fr": "2 300 km — le plus grand être vivant structuré de la planète, visible depuis l'espace. Elle, on la voit vraiment de là-haut. La Grande Muraille peut s'asseoir.",
+      "en": "2,300 km — the largest living structure on the planet, visible from space. Which is more than the Great Wall can say."
     }
   },
   {
     "id": "bamboo-growth-cm-day",
     "question": {
-      "fr": "Record de croissance du bambou en une seule journée : combien de centimètres ?",
-      "en": "Record bamboo growth in a single day: how many centimeters?"
+      "fr": "Record de pousse du bambou en UNE seule journée : combien de centimètres ? Pendant ce temps, ta plante verte meurt de soif depuis mardi.",
+      "en": "Record bamboo growth in ONE single day: how many centimeters? Meanwhile your houseplant has been dying of thirst since Tuesday."
     },
     "answer": 91,
     "unit": {
@@ -2356,8 +2359,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "hyperion-height-m",
     "question": {
-      "fr": "Hauteur d'Hyperion, le plus grand arbre vivant connu (un séquoia de Californie), en mètres ?",
-      "en": "Height of Hyperion, the tallest known living tree (a California redwood), in meters?"
+      "fr": "Hauteur d'Hyperion, le plus grand arbre vivant connu (un séquoia de Californie), en mètres. Son adresse est classée secrète. Sa taille, non. À toi.",
+      "en": "Height of Hyperion, the tallest known living tree (a California redwood), in meters. Its address is classified. Its height isn't. Go."
     },
     "answer": 116,
     "unit": {
@@ -2374,8 +2377,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "oldest-tree-years",
     "question": {
-      "fr": "Quel âge a Mathusalem, l'un des plus vieux arbres du monde, en années (environ) ?",
-      "en": "How old is Methuselah, one of the oldest trees on Earth, in years (roughly)?"
+      "fr": "Âge de Mathusalem, l'un des plus vieux arbres du monde, en années, environ. Lui n'a pas bougé depuis les pyramides. Toi tu changes d'avis en pleine réponse.",
+      "en": "Age of Methuselah, one of the oldest trees on Earth, in years, roughly. It hasn't moved since the pyramids. You'll change your answer twice before locking in."
     },
     "answer": 4850,
     "unit": {
@@ -2392,8 +2395,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "strawberry-seeds",
     "question": {
-      "fr": "Combien de graines compte une fraise moyenne ?",
-      "en": "How many seeds are on an average strawberry?"
+      "fr": "Combien de graines sur une fraise moyenne ? Quelqu'un va répondre au pif avec une confiance insupportable. Regardez-le bien.",
+      "en": "How many seeds on an average strawberry? Someone's about to answer with completely unearned confidence. Watch them closely."
     },
     "answer": 200,
     "unit": {
@@ -2410,8 +2413,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "champagne-bubbles-glass",
     "question": {
-      "fr": "Combien de bulles s'échappent d'une coupe de champagne, selon le calcul d'un physicien français ?",
-      "en": "How many bubbles escape from one glass of champagne, per a French physicist's calculation?"
+      "fr": "Combien de bulles s'échappent d'une coupe de champagne, selon un physicien français ? Oui, quelqu'un a compté. Non, c'était pas toi au Nouvel An.",
+      "en": "How many bubbles escape one glass of champagne, per a French physicist's count? Yes, someone counted. No, it wasn't you on New Year's Eve."
     },
     "answer": 1000000,
     "unit": {
@@ -2428,8 +2431,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "nutella-invented-year",
     "question": {
-      "fr": "En quelle année la pâte à tartiner Nutella a-t-elle été lancée ?",
-      "en": "In what year was Nutella launched?"
+      "fr": "Année de lancement du Nutella. Tu finis le pot à la cuillère dans le noir — assume au moins de connaître sa date de naissance.",
+      "en": "The year Nutella launched. You eat it from the jar with a spoon in the dark. The least you owe it is a birthday."
     },
     "answer": 1964,
     "unit": null,
@@ -2443,8 +2446,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "ostrich-egg-grams",
     "question": {
-      "fr": "Combien pèse un œuf d'autruche, en grammes ?",
-      "en": "How much does an ostrich egg weigh, in grams?"
+      "fr": "Poids d'un œuf d'autruche, en grammes. Un seul nourrit toute la coloc — le plus loin du compte fait la vaisselle de l'omelette imaginaire.",
+      "en": "Weight of one ostrich egg, in grams. One feeds the entire flat — furthest guess does the washing-up for the imaginary omelette."
     },
     "answer": 1400,
     "unit": {
@@ -2461,8 +2464,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "hummingbird-heart-bpm",
     "question": {
-      "fr": "Le cœur d'un colibri en vol peut atteindre combien de battements par minute ?",
-      "en": "A hummingbird's heart in flight can reach how many beats per minute?"
+      "fr": "Le cœur d'un colibri en vol monte à combien de battements par minute ? Toi t'appelles « cardio » le fait de courir après le bus.",
+      "en": "A hummingbird's heart in flight hits how many beats per minute? You call chasing the bus 'cardio'."
     },
     "answer": 1260,
     "unit": {
@@ -2479,8 +2482,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "blue-whale-heart-kg",
     "question": {
-      "fr": "Combien pèse le cœur d'une baleine bleue, en kilogrammes ?",
-      "en": "How much does a blue whale's heart weigh, in kilograms?"
+      "fr": "Poids du cœur d'une baleine bleue, en kilogrammes. Plus lourd que toi ? Moins ? Engage-toi publiquement.",
+      "en": "Weight of a blue whale's heart, in kilograms. Heavier than you? Lighter? Commit publicly."
     },
     "answer": 180,
     "unit": {
@@ -2497,8 +2500,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "bee-eyes-count",
     "question": {
-      "fr": "Combien d'yeux possède une abeille ?",
-      "en": "How many eyes does a honeybee have?"
+      "fr": "Combien d'yeux possède une abeille ? Si tu réponds « deux » avec assurance, la table a le droit de te le rappeler à vie.",
+      "en": "How many eyes does a honeybee have? Answer 'two' with your chest and the table gets to bring it up forever."
     },
     "answer": 5,
     "unit": {
@@ -2515,8 +2518,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "snail-teeth-count",
     "question": {
-      "fr": "Combien de dents possède un escargot de jardin, environ ?",
-      "en": "Roughly how many teeth does a garden snail have?"
+      "fr": "Combien de dents possède un escargot de jardin, environ ? Le chiffre va te fâcher. Réponds quand même.",
+      "en": "Roughly how many teeth does a garden snail have? The answer will upset you. Answer anyway."
     },
     "answer": 14000,
     "unit": {
@@ -2533,8 +2536,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "elephant-pregnancy-days",
     "question": {
-      "fr": "Combien de jours dure la grossesse d'une éléphante, environ ?",
-      "en": "Roughly how many days does an elephant pregnancy last?"
+      "fr": "Une grossesse d'éléphante dure combien de jours, environ ? Toi qui trouves que neuf mois c'est « énorme », accroche-toi.",
+      "en": "An elephant pregnancy lasts roughly how many days? You think nine months sounds rough. Brace yourself."
     },
     "answer": 660,
     "unit": {
@@ -2544,15 +2547,15 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "Environ 660 jours, soit 22 mois — la plus longue grossesse des mammifères terrestres. Respect éternel aux éléphantes.",
-      "en": "About 660 days — 22 months, the longest pregnancy of any land mammal. Eternal respect to elephant moms."
+      "fr": "Environ 660 jours, soit 22 mois — la plus longue grossesse des mammifères terrestres. Deux ans. Reparle-nous de ta semaine « interminable », vas-y.",
+      "en": "About 660 days — 22 months, the longest pregnancy of any land mammal. Two years. Tell us again about your 'endless' week."
     }
   },
   {
     "id": "peregrine-dive-kmh",
     "question": {
-      "fr": "Vitesse record du faucon pèlerin en piqué, l'animal le plus rapide du monde, en km/h ?",
-      "en": "Record dive speed of the peregrine falcon, the fastest animal on Earth, in km/h?"
+      "fr": "Vitesse record du faucon pèlerin en piqué, l'animal le plus rapide du monde, en km/h. Plus vite que tout ce que t'as jamais conduit. Légalement, en tout cas.",
+      "en": "Record dive speed of the peregrine falcon, the fastest animal alive, in km/h. Faster than anything you've ever driven. Legally, anyway."
     },
     "answer": 389,
     "unit": {
@@ -2569,8 +2572,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "arctic-tern-km-year",
     "question": {
-      "fr": "La sterne arctique migre chaque année sur environ combien de kilomètres ?",
-      "en": "The Arctic tern migrates roughly how many kilometers each year?"
+      "fr": "La sterne arctique migre chaque année sur environ combien de kilomètres ? D'un pôle à l'autre, sans escale, sans se plaindre. Toi, t'as annulé un resto parce que c'était « à 20 minutes ».",
+      "en": "The Arctic tern migrates roughly how many kilometers each year? Pole to pole, no complaints filed. You've cancelled plans that were a 15-minute walk away."
     },
     "answer": 70000,
     "unit": {
@@ -2585,28 +2588,28 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     }
   },
   {
-    "id": "cow-stomach-compartments",
+    "id": "sloth-poop-days",
     "question": {
-      "fr": "L'estomac d'une vache compte combien de compartiments ?",
-      "en": "How many compartments does a cow's stomach have?"
+      "fr": "Un paresseux ne fait ses besoins qu'une fois tous les combien de jours, environ ? Le plus loin du compte va aux toilettes en dernier toute la soirée. Solidarité.",
+      "en": "A sloth only relieves itself once every how many days, roughly? Furthest guess goes to the bathroom last for the rest of the night. Solidarity."
     },
-    "answer": 4,
+    "answer": 7,
     "unit": {
-      "fr": "compartiments",
-      "en": "compartments"
+      "fr": "jours",
+      "en": "days"
     },
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "4 compartiments pour digérer de l'herbe à plein temps. La vache a littéralement un système de tri sélectif intégré.",
-      "en": "Four compartments for full-time grass processing. Cows literally have a built-in recycling system."
+      "fr": "Une fois par semaine environ, en descendant exprès de son arbre — le moment le plus dangereux de sa vie. Il risque sa peau pour ça. Toi tu scrolles pendant 40 minutes.",
+      "en": "About once a week, climbing all the way down from its tree on purpose — the single most dangerous moment of its life. It risks death for this. You scroll for 40 minutes."
     }
   },
   {
     "id": "sharks-age-millions",
     "question": {
-      "fr": "Les requins existent depuis environ combien de MILLIONS d'années ?",
-      "en": "Sharks have existed for roughly how many MILLION years?"
+      "fr": "Les requins existent depuis combien de MILLIONS d'années, environ ? Indice : avant les arbres. Relis. Avant. Les. Arbres.",
+      "en": "Sharks have existed for roughly how many MILLION years? Hint: before trees. Read that again. Before. Trees."
     },
     "answer": 450,
     "unit": {
@@ -2623,8 +2626,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "cheetah-top-speed-kmh",
     "question": {
-      "fr": "Vitesse de pointe communément mesurée du guépard, en km/h ?",
-      "en": "Commonly measured top speed of a cheetah, in km/h?"
+      "fr": "Vitesse de pointe du guépard, en km/h. Le plus loin du compte court chercher les snacks. C'est thématique.",
+      "en": "Top speed of a cheetah, in km/h. Furthest guess does the snack run. It's thematic."
     },
     "answer": 112,
     "unit": {
@@ -2641,8 +2644,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "octopus-hearts-count",
     "question": {
-      "fr": "Combien de cœurs possède une pieuvre ?",
-      "en": "How many hearts does an octopus have?"
+      "fr": "Combien de cœurs possède une pieuvre ? Petit chiffre, grosse embrouille : la moitié de la table est sûre d'elle. À tort, forcément.",
+      "en": "How many hearts does an octopus have? Small number, big argument: half the table is certain. Half the table is wrong."
     },
     "answer": 3,
     "unit": {
@@ -2659,8 +2662,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "giraffe-neck-vertebrae",
     "question": {
-      "fr": "Combien de vertèbres compte le cou d'une girafe ?",
-      "en": "How many vertebrae are in a giraffe's neck?"
+      "fr": "Combien de vertèbres dans le cou d'une girafe ? C'est un piège. Tout le monde tombe dedans. Vas-y, tombe.",
+      "en": "How many vertebrae in a giraffe's neck? It's a trap. Everyone falls in. Go on, fall."
     },
     "answer": 7,
     "unit": {
@@ -2677,8 +2680,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
   {
     "id": "loire-length-km",
     "question": {
-      "fr": "Longueur de la Loire, le plus long fleuve de France, en kilomètres ?",
-      "en": "Length of the Loire, France's longest river, in kilometers?"
+      "fr": "Longueur de la Loire, le plus long fleuve de France, en kilomètres. T'as fait les châteaux en sortie scolaire — rentabilise enfin ce car.",
+      "en": "Length of the Loire, France's longest river, in kilometers. You did the châteaux on a school trip. Make that coach ride finally pay off."
     },
     "answer": 1006,
     "unit": {
@@ -2688,8 +2691,8 @@ export const QUIZZ_CULTURE_GE_PACK: ContentPack<InputGuessContent> = {
     "format": "plain",
     "scale": "linear",
     "funFact": {
-      "fr": "1 006 km, souvent décrit comme le dernier fleuve « sauvage » d'Europe occidentale : pas de grands barrages sur son cours. Une rebelle discrète.",
-      "en": "1,006 km, often called western Europe's last 'wild' river: no major dams along its course. A quiet rebel."
+      "fr": "1 006 km, le dernier fleuve « sauvage » d'Europe occidentale : aucun grand barrage. Plus indomptable que toi devant un buffet à volonté.",
+      "en": "1,006 km, western Europe's last 'wild' river: not a single major dam. More untamed than you at an all-you-can-eat buffet."
     }
   }
 ] },
@@ -2751,8 +2754,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…secrètement espéré qu'un pote se plante",
-          "en": "…secretly rooted for a friend to fail"
+          "fr": "…espéré qu'un pote rate son date juste pour le raconter",
+          "en": "…hoped a friend's date would flop, just so I'd get the story"
         },
         "crowdYesPct": 38
       }
@@ -2794,16 +2797,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…l'ananas n'a rien à faire sur une pizza",
-          "en": "…pineapple does not belong on pizza"
+          "fr": "…la personne qui 'déteste les embrouilles' est toujours au centre de l'embrouille",
+          "en": "…whoever 'hates drama' is always standing dead centre of it"
         },
         "crowdYesPct": 54
       },
       {
         "id": "e",
         "text": {
-          "fr": "…les chats sont meilleurs que les chiens",
-          "en": "…cats are better than dogs"
+          "fr": "…les couples qui postent le plus sont ceux qui vont le plus mal",
+          "en": "…the couples who post the most are doing the worst"
         },
         "crowdYesPct": 41
       },
@@ -2811,7 +2814,7 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
         "id": "f",
         "text": {
           "fr": "…les plateaux-repas d'avion, c'est de la gastronomie",
-          "en": "…plane food lowkey slaps"
+          "en": "…plane food slaps"
         },
         "crowdYesPct": 12
       }
@@ -2846,7 +2849,7 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
         "id": "c",
         "text": {
           "fr": "…réclamer ce soir les 12 € qu'on me doit, la personne se reconnaîtra",
-          "en": "…text the friend who owes me money the exact amount, tonight"
+          "en": "…say out loud the exact amount one friend here owes me, tonight"
         },
         "crowdYesPct": 45
       },
@@ -2869,8 +2872,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…supprimer mes réseaux ce soir, devant témoins",
-          "en": "…delete every social app tonight, witnesses present"
+          "fr": "…lire à voix haute le dernier message que j'ai envoyé à mon ex",
+          "en": "…read out loud the last text I ever sent my ex"
         },
         "crowdYesPct": 9
       }
@@ -2987,8 +2990,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…chaque repas de famille a une chaise qu'on évite",
-          "en": "…every family dinner has one seat nobody wants"
+          "fr": "…on a tous une liste mentale de potes qu'on invite jamais aux vrais plans",
+          "en": "…everyone here keeps a mental list of friends who never make the real guest list"
         },
         "crowdYesPct": 68
       }
@@ -3006,24 +3009,24 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…chanterais du Céline Dion en entier dans le métro, debout",
-          "en": "…perform all of Wonderwall on public transport, standing"
+          "fr": "…appellerais mon ex en haut-parleur pour 'prendre des nouvelles'",
+          "en": "…call my ex on speaker to 'see how they're doing'"
         },
         "crowdYesPct": 56
       },
       {
         "id": "b",
         "text": {
-          "fr": "…mangerais le piment 'interdit' du kebab du coin",
-          "en": "…eat the kebab shop's off-menu chili"
+          "fr": "…supprimerais le numéro de mon ex définitivement, devant témoins",
+          "en": "…delete my ex's number for good, witnesses present"
         },
         "crowdYesPct": 64
       },
       {
         "id": "c",
         "text": {
-          "fr": "…porterais chaussettes-claquettes à tous les plans pendant une semaine",
-          "en": "…wear socks and sliders to every plan for a week"
+          "fr": "…vendrais LA photo dossier de quelqu'un dans cette pièce, sans négocier",
+          "en": "…sell THE most incriminating photo of someone in this room, no haggling"
         },
         "crowdYesPct": 81
       },
@@ -3081,8 +3084,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…googlé 'burrata' sous la table",
-          "en": "…googled 'what is ceviche' under the table"
+          "fr": "…choisi mon plat au prix, en jouant l'hésitation gastronomique",
+          "en": "…picked my dish by price while faking a deep gourmet debate"
         },
         "crowdYesPct": 47
       },
@@ -3242,8 +3245,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…raté mon arrêt en rêvassant",
-          "en": "…missed my stop daydreaming"
+          "fr": "…changé de wagon pour esquiver une connaissance, en mode fugitif",
+          "en": "…switched carriages to dodge someone I know, full fugitive mode"
         },
         "crowdYesPct": 67
       },
@@ -3282,8 +3285,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…applaudi le chauffeur",
-          "en": "…clapped for the driver"
+          "fr": "…accéléré devant quelqu'un qui galérait avec une valise dans les escaliers",
+          "en": "…sped up past someone wrestling a suitcase up the stairs"
         },
         "crowdYesPct": 18
       }
@@ -3384,8 +3387,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…prendrais une mygale dans la main",
-          "en": "…hold a tarantula"
+          "fr": "…enverrais à mon ex le brouillon jamais envoyé, là, devant tout le monde",
+          "en": "…send my ex the unsent draft, right now, in front of everyone"
         },
         "crowdYesPct": 12
       },
@@ -3443,8 +3446,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…fait une sieste discrète",
-          "en": "…snuck in a nap"
+          "fr": "…répondu 'aucun souci de mon côté' alors que tout brûlait de mon côté",
+          "en": "…said 'no blockers on my end' while my end was actively on fire"
         },
         "crowdYesPct": 49
       },
@@ -3604,8 +3607,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "b",
         "text": {
-          "fr": "…échangerais mon téléphone contre à manger",
-          "en": "…trade my phone for food"
+          "fr": "…cacherais ma morsure au groupe jusqu'au tout dernier moment",
+          "en": "…hide my bite from the group until the very last second"
         },
         "crowdYesPct": 58
       },
@@ -3655,16 +3658,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…regardé l'heure et oublié l'heure aussitôt",
-          "en": "…checked the time and instantly forgot it"
+          "fr": "…déverrouillé mon tel sans aucune raison, juste pour vérifier qu'il m'aime encore",
+          "en": "…unlocked my phone for zero reason, just to check it still loves me"
         },
         "crowdYesPct": 89
       },
       {
         "id": "b",
         "text": {
-          "fr": "…rouvert une appli juste après l'avoir fermée",
-          "en": "…reopened an app I'd just closed, for no reason"
+          "fr": "…tapé mon code en cachant l'écran à des gens que je connais depuis dix ans",
+          "en": "…shielded my passcode from friends I've known for ten years, ATM style"
         },
         "crowdYesPct": 84
       },
@@ -3679,24 +3682,24 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…dit 's'il te plaît' à l'assistant vocal",
-          "en": "…said please to the voice assistant"
+          "fr": "…remonté quatre ans de photos d'un inconnu, le pouce en alerte maximale",
+          "en": "…scrolled four years deep into a stranger's profile, thumb on high alert"
         },
         "crowdYesPct": 54
       },
       {
         "id": "e",
         "text": {
-          "fr": "…scrollé 10 minutes sans rien lire",
-          "en": "…scrolled 10 minutes without reading a thing"
+          "fr": "…ouvert le tel pour répondre à UN message et perdu 40 minutes de ma vie",
+          "en": "…opened it to answer ONE text and lost 40 minutes of my life"
         },
         "crowdYesPct": 78
       },
       {
         "id": "f",
         "text": {
-          "fr": "…envoyé un message à la mauvaise personne",
-          "en": "…texted the wrong person"
+          "fr": "…envoyé un message à la mauvaise personne — une fois, à LA pire possible",
+          "en": "…texted the wrong person — once, THE worst possible person"
         },
         "crowdYesPct": 68
       }
@@ -3714,8 +3717,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…payé un abonnement de sport jamais utilisé",
-          "en": "…paid for a gym membership I never used"
+          "fr": "…dit 'la prochaine est pour moi' en m'assurant qu'il y ait jamais de prochaine",
+          "en": "…said 'next round's on me' and made sure there was never a next round"
         },
         "crowdYesPct": 36
       },
@@ -3738,8 +3741,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…fait un virement de moins de 1 €",
-          "en": "…sent a bank transfer under one dollar"
+          "fr": "…envoyé une demande de virement de 3 € avec un libellé passif-agressif",
+          "en": "…sent a $3 payment request with a passive-aggressive memo line"
         },
         "crowdYesPct": 23
       },
@@ -3848,8 +3851,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…versé une larme sur une chanson en public",
-          "en": "…teared up at a song in public"
+          "fr": "…pleuré sur une chanson dans le métro en fixant la vitre comme dans un clip",
+          "en": "…cried to a song on the bus, staring out the window like it was a music video"
         },
         "crowdYesPct": 42
       },
@@ -3864,16 +3867,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…fait semblant de connaître un groupe pour briller",
-          "en": "…pretended to know a band to look cool"
+          "fr": "…lâché 'leur premier album était mieux' sans avoir écouté aucun album",
+          "en": "…said 'their early stuff was better' having heard none of their stuff"
         },
         "crowdYesPct": 49
       },
       {
         "id": "f",
         "text": {
-          "fr": "…gardé une chanson honteuse en boucle secrète",
-          "en": "…kept a guilty-pleasure song on secret repeat"
+          "fr": "…bouclé une chanson rien que pour rester accroché à quelqu'un",
+          "en": "…looped a song to keep missing someone I shouldn't"
         },
         "crowdYesPct": 55
       }
@@ -3899,8 +3902,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "b",
         "text": {
-          "fr": "…creusé pour trouver un trésor",
-          "en": "…dug for buried treasure"
+          "fr": "…menti à mes parents en les fixant droit dans les yeux",
+          "en": "…lied to my parents while holding unbroken eye contact"
         },
         "crowdYesPct": 66
       },
@@ -3923,16 +3926,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…appuyé sur tous les boutons de l'ascenseur",
-          "en": "…pressed every elevator button"
+          "fr": "…cassé un truc et laissé mon frère ou ma sœur se faire gronder, sans un mot",
+          "en": "…broken something and watched my sibling take the blame, silently"
         },
         "crowdYesPct": 55
       },
       {
         "id": "f",
         "text": {
-          "fr": "…écrit une lettre à une star",
-          "en": "…written a fan letter to a celebrity"
+          "fr": "…piqué des pièces dans le porte-monnaie de ma daronne",
+          "en": "…skimmed coins out of my mum's purse like a tiny professional"
         },
         "crowdYesPct": 30
       }
@@ -3990,8 +3993,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…cassé une petite croûte à 3 h du matin dans le noir",
-          "en": "…had a 3 a.m. snack in the dark"
+          "fr": "…fini dans le noir les restes que quelqu'un 'gardait pour demain'",
+          "en": "…finished, in the dark, the leftovers someone was 'saving for tomorrow'"
         },
         "crowdYesPct": 65
       }
@@ -4159,16 +4162,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…annulé ma soirée pour dormir",
-          "en": "…cancelled plans just to sleep"
+          "fr": "…annulé un plan pour 'un imprévu' qui était mon lit",
+          "en": "…cancelled plans for 'something that came up' and the something was my bed"
         },
         "crowdYesPct": 58
       },
       {
         "id": "f",
         "text": {
-          "fr": "…dormi 14 heures d'affilée",
-          "en": "…slept 14 hours straight"
+          "fr": "…raté un truc important parce que je dormais, et inventé une meilleure excuse",
+          "en": "…slept through something that mattered and invented a better excuse"
         },
         "crowdYesPct": 39
       }
@@ -4261,8 +4264,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…reposé un article dans le mauvais rayon",
-          "en": "…put an item back on the totally wrong shelf"
+          "fr": "…abandonné un produit frais au rayon biscuits, en toute connaissance de cause",
+          "en": "…abandoned chilled goods in the biscuit aisle, fully aware of my crime"
         },
         "crowdYesPct": 69
       },
@@ -4285,8 +4288,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…fait la queue à une caisse fermée",
-          "en": "…queued at a closed checkout"
+          "fr": "…laissé le caddie en plein milieu du parking après un regard circulaire",
+          "en": "…left the trolley loose in the car park after one quick scan for witnesses"
         },
         "crowdYesPct": 41
       }
@@ -4395,8 +4398,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…applaudi au générique",
-          "en": "…clapped when the credits rolled"
+          "fr": "…tranché 'le livre est mieux' sans avoir ouvert le livre",
+          "en": "…declared 'the book is better' without having read the book"
         },
         "crowdYesPct": 44
       },
@@ -4481,8 +4484,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…parlerais avec un faux accent toute la soirée",
-          "en": "…use a fake accent all evening"
+          "fr": "…appellerais en haut-parleur la troisième personne de mes appels récents",
+          "en": "…speaker-call whoever is third in my recent calls"
         },
         "crowdYesPct": 62
       },
@@ -4513,8 +4516,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…irais au supermarché avec mes habits à l'envers",
-          "en": "…wear my clothes inside out to the store"
+          "fr": "…annoncerais mon total exact de livraison du mois, sans arrondir",
+          "en": "…announce my exact food-delivery spend this month, no rounding down"
         },
         "crowdYesPct": 66
       },
@@ -4540,8 +4543,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…pris 50 photos du même coucher de soleil",
-          "en": "…taken 50 photos of the same sunset"
+          "fr": "…dit 'faut profiter !' en rêvant de mon lit, de mon canapé et de ma routine",
+          "en": "…said 'we're making memories!' while fantasising about my own bed"
         },
         "crowdYesPct": 88
       },
@@ -4580,8 +4583,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…retrouvé du sable dans mes affaires des mois après",
-          "en": "…found beach sand in my stuff for months"
+          "fr": "…amélioré ces vacances d'un bon 30 % en les racontant au retour",
+          "en": "…upgraded that trip a clean 30% in the retelling"
         },
         "crowdYesPct": 81
       }
@@ -4623,8 +4626,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…salué quelqu'un qui ne me saluait pas du tout",
-          "en": "…waved at one who was not waving at me"
+          "fr": "…coupé le son chez moi pour mieux suivre leur dispute, en prenant parti",
+          "en": "…muted my own TV to follow their argument properly, picking a side"
         },
         "crowdYesPct": 35
       },
@@ -4648,60 +4651,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-games-035",
-    "targetYesPct": 50,
+    "targetYesPct": 55,
     "askKind": "didYou",
     "stem": {
-      "fr": "En jeu vidéo ou de société, j'ai déjà…",
-      "en": "Gaming or board games, I have…"
+      "fr": "En soirée jeux, je suis le pénible qui a déjà…",
+      "en": "On game night, I'm the menace who has…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…accusé la manette ou les dés",
-          "en": "…blamed the controller or the dice"
+          "fr": "…inventé une règle au milieu de la partie pour m'arranger",
+          "en": "…invented a rule mid-game purely to suit myself"
         },
-        "crowdYesPct": 72
+        "crowdYesPct": 49
       },
       {
         "id": "b",
         "text": {
-          "fr": "…fait durer une partie juste pour me venger",
-          "en": "…dragged a game out purely for revenge"
+          "fr": "…fait alliance avec quelqu'un puis trahi à la seconde près",
+          "en": "…allied with someone and betrayed them at the perfect second"
         },
-        "crowdYesPct": 48
+        "crowdYesPct": 57
       },
       {
         "id": "c",
         "text": {
-          "fr": "…rage-quit déguisé en 'pause pipi'",
-          "en": "…rage-quit disguised as a bathroom break"
-        },
-        "crowdYesPct": 41
-      },
-      {
-        "id": "d",
-        "text": {
-          "fr": "…triché à un jeu de société en famille",
-          "en": "…cheated at a family board game"
+          "fr": "…visé une seule personne toute la partie, par pure rancune",
+          "en": "…targeted one player all game, out of pure spite"
         },
         "crowdYesPct": 53
       },
       {
+        "id": "d",
+        "text": {
+          "fr": "…regardé en douce le jeu du voisin",
+          "en": "…sneaked a look at the next person's hand"
+        },
+        "crowdYesPct": 44
+      },
+      {
         "id": "e",
         "text": {
-          "fr": "…boudé après une défaite 'injuste'",
-          "en": "…sulked after an 'unfair' loss"
+          "fr": "…célébré une victoire un poil trop longtemps",
+          "en": "…celebrated a win a touch too long"
         },
-        "crowdYesPct": 65
+        "crowdYesPct": 61
       },
       {
         "id": "f",
         "text": {
-          "fr": "…menacé de renverser le plateau",
-          "en": "…threatened to flip the board"
+          "fr": "…fait gagner exprès quelqu'un juste pour qu'un autre perde",
+          "en": "…handed someone the win just so somebody else would lose"
         },
-        "crowdYesPct": 33
+        "crowdYesPct": 38
       }
     ]
   },
@@ -4710,8 +4713,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     "targetYesPct": 70,
     "askKind": "didYou",
     "stem": {
-      "fr": "Petit secret du quotidien : j'ai déjà…",
-      "en": "Tiny daily secret: I have…"
+      "fr": "Hygiène douteuse, zéro remords : j'ai déjà…",
+      "en": "Questionable hygiene, zero remorse: I have…"
     },
     "completions": [
       {
@@ -4825,60 +4828,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-weallhave-038",
-    "targetYesPct": 95,
-    "askKind": "didYou",
+    "targetYesPct": 85,
+    "askKind": "agree",
     "stem": {
-      "fr": "Allez, on l'a tous fait : j'ai déjà…",
-      "en": "Come on, we've all done it: I have…"
+      "fr": "On juge tous en secret, et précisément…",
+      "en": "We all secretly judge people, specifically…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…hoché la tête en pensant à tout autre chose",
-          "en": "…nodded along while thinking about something else"
+          "fr": "…ceux qui parlent mal aux serveurs : dossier clos",
+          "en": "…anyone rude to a waiter: case closed, instantly"
         },
-        "crowdYesPct": 96
+        "crowdYesPct": 88
       },
       {
         "id": "b",
         "text": {
-          "fr": "…oublié un prénom juste après les présentations",
-          "en": "…forgotten a name right after the introduction"
+          "fr": "…ceux qui répondent vocal de 3 minutes à un message d'un mot",
+          "en": "…people who send a 3-minute voice note to answer 'k'"
         },
-        "crowdYesPct": 92
+        "crowdYesPct": 79
       },
       {
         "id": "c",
         "text": {
-          "fr": "…relu mon propre message pour le savourer",
-          "en": "…reread my own text just to admire it"
+          "fr": "…le couple qui se dispute en public et nous prend à témoin",
+          "en": "…the couple who fight in public and try to recruit you"
         },
-        "crowdYesPct": 78
+        "crowdYesPct": 74
       },
       {
         "id": "d",
         "text": {
-          "fr": "…dit 'quoi ?' en ayant parfaitement entendu",
-          "en": "…said 'what?' after hearing perfectly fine"
+          "fr": "…celui qui raconte le même exploit à chaque soirée",
+          "en": "…the one who tells the same heroic story every party"
         },
-        "crowdYesPct": 89
+        "crowdYesPct": 71
       },
       {
         "id": "e",
         "text": {
-          "fr": "…rendu un coucou destiné à quelqu'un d'autre",
-          "en": "…waved back at someone waving at someone else"
+          "fr": "…le pote qui sort sa carte 'plus tard' à chaque addition",
+          "en": "…the friend whose card mysteriously fails at every bill"
         },
-        "crowdYesPct": 84
+        "crowdYesPct": 66
       },
       {
         "id": "f",
         "text": {
-          "fr": "…cherché le téléphone que j'avais dans la main",
-          "en": "…searched for the phone in my own hand"
+          "fr": "…au moins une personne ici, là, maintenant, en silence",
+          "en": "…at least one person in this room, right now, silently"
         },
-        "crowdYesPct": 72
+        "crowdYesPct": 58
       }
     ]
   },
@@ -4926,8 +4929,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…couru un bout d'un vrai marathon",
-          "en": "…run any part of an actual marathon"
+          "fr": "…simulé une blessure pour abandonner avec les honneurs",
+          "en": "…faked an injury to quit with my honour intact"
         },
         "crowdYesPct": 18
       },
@@ -4946,8 +4949,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     "targetYesPct": 75,
     "askKind": "agree",
     "stem": {
-      "fr": "Question bouffe…",
-      "en": "Food talk…"
+      "fr": "Procès alimentaire…",
+      "en": "Food crimes on trial…"
     },
     "completions": [
       {
@@ -5044,16 +5047,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…suivi la foule sans savoir où elle allait",
-          "en": "…followed the crowd with no idea where it went"
+          "fr": "…fait semblant de comprendre l'annonce en gare et engagé tout le groupe dessus",
+          "en": "…pretended to understand the announcement and committed the whole group to it"
         },
         "crowdYesPct": 47
       },
       {
         "id": "f",
         "text": {
-          "fr": "…raté un vol ou un train de peu",
-          "en": "…missed a flight or train by minutes"
+          "fr": "…affirmé connaître la ville et guidé tout le monde au pif",
+          "en": "…claimed I knew the city and navigated the whole group on pure vibes"
         },
         "crowdYesPct": 39
       }
@@ -5229,8 +5232,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…pris la pose devant le miroir",
-          "en": "…struck a pose in the mirror"
+          "fr": "…répété devant le miroir la phrase que j'allais sortir 'spontanément'",
+          "en": "…rehearsed in the mirror the line I planned to deliver 'spontaneously'"
         },
         "crowdYesPct": 61
       }
@@ -5264,8 +5267,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…bu mon café trop vite et regretté aussitôt",
-          "en": "…chugged coffee too fast and instantly regretted it"
+          "fr": "…fait le calcul honnête de si la douche était vraiment indispensable",
+          "en": "…done the honest maths on whether a shower was strictly necessary"
         },
         "crowdYesPct": 58
       },
@@ -5366,8 +5369,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…pleuré avant même les mariés",
-          "en": "…cried before the couple did"
+          "fr": "…donné deux ans au couple, mentalement, pendant la cérémonie",
+          "en": "…privately given the marriage two years, mid-vows"
         },
         "crowdYesPct": 38
       },
@@ -5592,58 +5595,58 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-newyear-051",
-    "targetYesPct": 20,
+    "targetYesPct": 35,
     "askKind": "didYou",
     "stem": {
-      "fr": "Côté bonnes résolutions, j'ai déjà…",
-      "en": "New Year's resolutions: I have…"
+      "fr": "En me jurant 'la nouvelle version de moi', j'ai déjà…",
+      "en": "Swearing this is 'the new me', I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…tenu une résolution toute l'année",
-          "en": "…kept one going the entire year"
-        },
-        "crowdYesPct": 12
-      },
-      {
-        "id": "b",
-        "text": {
-          "fr": "…pris la même résolution trois ans de suite",
-          "en": "…made the same resolution three years running"
+          "fr": "…repris la même résolution trois ans de suite, sans broncher",
+          "en": "…made the exact same resolution three years running, straight-faced"
         },
         "crowdYesPct": 48
       },
       {
+        "id": "b",
+        "text": {
+          "fr": "…acheté tout le matériel de sport, jamais touché",
+          "en": "…bought the full gym setup and never touched it"
+        },
+        "crowdYesPct": 42
+      },
+      {
         "id": "c",
         "text": {
-          "fr": "…abandonné avant la fin janvier",
-          "en": "…quit before January even ended"
+          "fr": "…tout abandonné avant le 3 janvier, record personnel",
+          "en": "…quit everything by January 3rd, a personal best"
         },
-        "crowdYesPct": 65
+        "crowdYesPct": 56
       },
       {
         "id": "d",
         "text": {
-          "fr": "…écrit ma liste quelque part puis perdu la liste",
-          "en": "…written them down and lost the list"
+          "fr": "…annoncé ma résolution fort pour que les autres me surveillent",
+          "en": "…announced my resolution loudly so others would police me"
         },
         "crowdYesPct": 31
       },
       {
         "id": "e",
         "text": {
-          "fr": "…pris une résolution à minuit, abandonnée le 2",
-          "en": "…made one at midnight and dropped it on the 2nd"
+          "fr": "…jugé un pote qui tenait la sienne, en silence",
+          "en": "…silently resented a friend who actually kept theirs"
         },
         "crowdYesPct": 26
       },
       {
         "id": "f",
         "text": {
-          "fr": "…imposé une résolution à quelqu'un d'autre",
-          "en": "…assigned a resolution to someone else"
+          "fr": "…imposé MA résolution à quelqu'un d'autre, sans son accord",
+          "en": "…assigned MY resolution to someone else, no consent given"
         },
         "crowdYesPct": 17
       }
@@ -5701,8 +5704,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…le thé est une boisson de gens patients",
-          "en": "…tea is a drink for patient people"
+          "fr": "…le café de la machine du bureau, c'est de l'eau punie",
+          "en": "…office drip coffee is just water being punished"
         },
         "crowdYesPct": 35
       }
@@ -6063,59 +6066,59 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-future-059",
+    "id": "cc-tenyears-059",
     "targetYesPct": 65,
     "askKind": "agree",
     "stem": {
-      "fr": "D'ici dix ans…",
-      "en": "Within ten years…"
+      "fr": "D'ici dix ans, dans ce groupe…",
+      "en": "Ten years from now, in this group…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…on parlera aux assistants IA comme à des potes",
-          "en": "…we'll talk to AI assistants like friends"
+          "fr": "…au moins deux personnes ici ne se parleront plus",
+          "en": "…at least two people here won't be on speaking terms"
         },
         "crowdYesPct": 58
       },
       {
         "id": "b",
         "text": {
-          "fr": "…les voitures se conduiront toutes seules en ville",
-          "en": "…cars will drive themselves around town"
+          "fr": "…quelqu'un aura épousé une personne que le groupe ne supporte pas",
+          "en": "…someone will have married a person this group cannot stand"
         },
         "crowdYesPct": 49
       },
       {
         "id": "c",
         "text": {
-          "fr": "…on paiera tout sans jamais toucher d'argent liquide",
-          "en": "…we'll pay for everything without touching cash"
+          "fr": "…on aura encore exactement le même débat qu'à chaque soirée",
+          "en": "…we'll still be having the exact same argument we have every party"
         },
         "crowdYesPct": 76
       },
       {
         "id": "d",
         "text": {
-          "fr": "…les écrans pliables seront partout",
-          "en": "…folding screens will be everywhere"
+          "fr": "…quelqu'un aura tout plaqué pour un projet très douteux",
+          "en": "…someone will have quit everything for a deeply questionable business idea"
         },
         "crowdYesPct": 41
       },
       {
         "id": "e",
         "text": {
-          "fr": "…on regrettera 'l'époque d'avant'",
-          "en": "…we'll be nostalgic for 'the before times'"
+          "fr": "…le groupe WhatsApp existera encore, sous respirateur",
+          "en": "…the group chat will still exist, on life support"
         },
         "crowdYesPct": 69
       },
       {
         "id": "f",
         "text": {
-          "fr": "…quelqu'un marchera sur Mars",
-          "en": "…someone will walk on Mars"
+          "fr": "…la personne qui jure 'jamais d'enfants' en aura trois",
+          "en": "…the 'never having kids' one will be on child number three"
         },
         "crowdYesPct": 35
       }
@@ -6240,59 +6243,59 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-plane-062",
+    "id": "cc-loyalty-062",
     "targetYesPct": 55,
     "askKind": "didYou",
     "stem": {
-      "fr": "En avion, j'ai déjà…",
-      "en": "On a plane, I have…"
+      "fr": "Niveau loyauté, j'ai déjà…",
+      "en": "Loyalty check: I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…applaudi à l'atterrissage",
-          "en": "…clapped on landing"
+          "fr": "…classé mes meilleurs potes à voix haute devant quelqu'un d'extérieur au groupe",
+          "en": "…ranked my closest friends out loud to someone outside the group"
         },
         "crowdYesPct": 42
       },
       {
         "id": "b",
         "text": {
-          "fr": "…regardé le film du voisin sans le son",
-          "en": "…watched my neighbor's movie with no sound"
+          "fr": "…laissé quelqu'un casser du sucre sur un pote, pour pas plomber l'ambiance",
+          "en": "…heard someone trash my friend and said nothing, to keep the night smooth"
         },
         "crowdYesPct": 58
       },
       {
         "id": "c",
         "text": {
-          "fr": "…gardé ma ceinture bien après le signal",
-          "en": "…kept my seatbelt on long after the sign"
+          "fr": "…montré une conversation privée 'juste pour avoir un avis neutre'",
+          "en": "…shared a private chat 'purely for a neutral opinion'"
         },
         "crowdYesPct": 65
       },
       {
         "id": "d",
         "text": {
-          "fr": "…mené une guerre silencieuse pour l'accoudoir",
-          "en": "…fought a silent armrest war"
+          "fr": "…donné raison aux deux camps d'une embrouille, séparément, le même soir",
+          "en": "…agreed with both sides of the same fight, separately, the same night"
         },
         "crowdYesPct": 61
       },
       {
         "id": "e",
         "text": {
-          "fr": "…suivi les consignes de sécurité par politesse",
-          "en": "…watched the safety demo out of politeness"
+          "fr": "…répété un secret en l'emballant dans une 'inquiétude sincère'",
+          "en": "…leaked a secret gift-wrapped as 'genuine concern'"
         },
         "crowdYesPct": 49
       },
       {
         "id": "f",
         "text": {
-          "fr": "…sursauté au moindre 'bing' de cabine",
-          "en": "…flinched at every cabin 'bing'"
+          "fr": "…lancé une vraie rumeur avec un 'askip' pour brouiller la source",
+          "en": "…launched a true rumor with 'apparently…' so it can't be traced back to me"
         },
         "crowdYesPct": 37
       }
@@ -6350,15 +6353,15 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…demandé le wifi avant de dire bonjour",
-          "en": "…asked for the wifi before saying hello"
+          "fr": "…fait l'inventaire de ce que je pouvais embarquer sans que ça se remarque",
+          "en": "…inventoried what I could take home without anyone noticing"
         },
         "crowdYesPct": 51
       }
     ]
   },
   {
-    "id": "cc-believe-064",
+    "id": "cc-paranoia-064",
     "targetYesPct": 35,
     "askKind": "agree",
     "stem": {
@@ -6369,48 +6372,48 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…les fantômes existent peut-être",
-          "en": "…ghosts might be real"
+          "fr": "…un de mes potes me trouve épuisant·e et me l'a jamais dit",
+          "en": "…one of my friends finds me exhausting and has never once said it"
         },
         "crowdYesPct": 39
       },
       {
         "id": "b",
         "text": {
-          "fr": "…on n'est pas seuls dans l'univers",
-          "en": "…we are not alone in the universe"
+          "fr": "…il existe un groupe WhatsApp sans moi où je suis un sujet récurrent",
+          "en": "…there's a group chat without me in it where I'm a recurring topic"
         },
         "crowdYesPct": 58
       },
       {
         "id": "c",
         "text": {
-          "fr": "…mon horoscope tombe parfois trop juste",
-          "en": "…my horoscope is sometimes too accurate"
+          "fr": "…quelqu'un dans cette pièce a eu un crush sur moi sans jamais l'avouer",
+          "en": "…someone in this room has had a crush on me and never said it"
         },
         "crowdYesPct": 31
       },
       {
         "id": "d",
         "text": {
-          "fr": "…toucher du bois, ça aide vraiment",
-          "en": "…knocking on wood actually helps"
+          "fr": "…on m'a déjà écarté d'un plan avec un mensonge coordonné",
+          "en": "…I've been cut from a plan with a coordinated cover story"
         },
         "crowdYesPct": 36
       },
       {
         "id": "e",
         "text": {
-          "fr": "…certains lieux portent la poisse",
-          "en": "…some places are genuinely jinxed"
+          "fr": "…mon prénom a déjà servi d'alibi ('j'étais chez…') sans que je sois au courant",
+          "en": "…my name has been used as an alibi ('I was at theirs') without my knowledge"
         },
         "crowdYesPct": 44
       },
       {
         "id": "f",
         "text": {
-          "fr": "…les objets disparaissent exprès",
-          "en": "…objects vanish on purpose"
+          "fr": "…je suis le pote 'à petites doses' de quelqu'un ici",
+          "en": "…I am somebody's 'small doses' friend, possibly in this room"
         },
         "crowdYesPct": 26
       }
@@ -6476,59 +6479,59 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-spider-066",
+    "id": "cc-petty-066",
     "targetYesPct": 50,
     "askKind": "didYou",
     "stem": {
-      "fr": "Face à une araignée, j'ai déjà…",
-      "en": "Faced with a spider, I have…"
+      "fr": "Par esprit de vengeance, j'ai déjà…",
+      "en": "Out of pure spite, I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…évacué la pièce en la lui laissant",
-          "en": "…evacuated and surrendered the room"
+          "fr": "…gardé un screenshot 'au cas où', comme munition pour une embrouille future",
+          "en": "…saved a screenshot 'just in case', ammunition for a future argument"
         },
         "crowdYesPct": 47
       },
       {
         "id": "b",
         "text": {
-          "fr": "…appelé quelqu'un de plus courageux",
-          "en": "…called in someone braver"
+          "fr": "…calqué mon temps de réponse sur le sien, heure pour heure",
+          "en": "…matched someone's reply time hour for hour, on principle"
         },
         "crowdYesPct": 53
       },
       {
         "id": "c",
         "text": {
-          "fr": "…perdu sa trace et donc le sommeil",
-          "en": "…lost track of it and therefore lost sleep"
+          "fr": "…répondu 'ok' tout sec en sachant exactement l'effet que ça fait",
+          "en": "…replied just 'k' knowing exactly what it does to a person"
         },
         "crowdYesPct": 58
       },
       {
         "id": "d",
         "text": {
-          "fr": "…fait le déménagement diplomatique au verre",
-          "en": "…done the diplomatic glass-and-paper relocation"
+          "fr": "…raconté une bonne nouvelle en m'assurant qu'elle arrive à UNE personne précise",
+          "en": "…shared good news making sure it reached ONE specific person"
         },
         "crowdYesPct": 62
       },
       {
         "id": "e",
         "text": {
-          "fr": "…crié plus fort que nécessaire",
-          "en": "…screamed louder than strictly necessary"
+          "fr": "…retiré quelqu'un de ma story 'amis proches' sans préavis",
+          "en": "…quietly removed someone from my close friends story, no notice given"
         },
         "crowdYesPct": 41
       },
       {
         "id": "f",
         "text": {
-          "fr": "…négocié à voix haute avec elle",
-          "en": "…negotiated with it out loud"
+          "fr": "…posté une story adressée à une seule personne, et elle a compris",
+          "en": "…posted a story aimed at exactly one person, and they knew"
         },
         "crowdYesPct": 29
       }
@@ -6653,66 +6656,66 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-paidtrip-069",
+    "id": "cc-grouptrip-069",
     "targetYesPct": 15,
     "askKind": "wouldYou",
     "stem": {
-      "fr": "Si on me payait le voyage, je…",
-      "en": "If the trip were fully paid, I'd…"
+      "fr": "En vacances de groupe, je serais cap de…",
+      "en": "On a group trip, I could honestly…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…partirais sur Mars sans billet retour",
-          "en": "…move to Mars one-way"
+          "fr": "…rentrer plus tôt sans prévenir, juste un mot sur la table",
+          "en": "…fly home early without a word, just a note on the table"
         },
         "crowdYesPct": 9
       },
       {
         "id": "b",
         "text": {
-          "fr": "…passerais six mois en Antarctique",
-          "en": "…spend six months in Antarctica"
+          "fr": "…annoncer le vrai budget de chacun au moment de l'addition",
+          "en": "…announce everyone's real budget out loud when the bill lands"
         },
         "crowdYesPct": 21
       },
       {
         "id": "c",
         "text": {
-          "fr": "…ferais le tour du monde sans avion",
-          "en": "…circle the globe with no planes"
+          "fr": "…disparaître une journée entière, localisation coupée",
+          "en": "…vanish for a full day with my location switched off"
         },
         "crowdYesPct": 33
       },
       {
         "id": "d",
         "text": {
-          "fr": "…vivrais un mois dans un monastère silencieux",
-          "en": "…live a month in a silent monastery"
+          "fr": "…embarquer pendant que le groupe se dispute encore à la sécurité",
+          "en": "…board the plane while the group is still arguing at security"
         },
         "crowdYesPct": 17
       },
       {
         "id": "e",
         "text": {
-          "fr": "…traverserais l'Atlantique en voilier",
-          "en": "…sail across the Atlantic"
+          "fr": "…imposer un tableur des dépenses dès le premier soir",
+          "en": "…enforce a shared expenses spreadsheet from night one"
         },
         "crowdYesPct": 26
       },
       {
         "id": "f",
         "text": {
-          "fr": "…dormirais une semaine dans une station spatiale",
-          "en": "…spend a week on a space station"
+          "fr": "…mentir sur le prix du logement pour forcer la réservation",
+          "en": "…lie about the rental price to force the booking through"
         },
         "crowdYesPct": 41
       }
     ]
   },
   {
-    "id": "cc-allagree-070",
+    "id": "cc-savagetruths-070",
     "targetYesPct": 90,
     "askKind": "agree",
     "stem": {
@@ -6723,16 +6726,16 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…un câlin de plus de 5 secondes, ça répare",
-          "en": "…a hug longer than five seconds fixes things"
+          "fr": "…'je te dis ça avec amour' annonce une exécution publique",
+          "en": "…'I'm saying this with love' is how every public execution starts"
         },
         "crowdYesPct": 86
       },
       {
         "id": "b",
         "text": {
-          "fr": "…entendre son prénom bien prononcé, ça fait plaisir",
-          "en": "…hearing your name said right feels good"
+          "fr": "…les trois petits points qui s'arrêtent, c'est de la torture psychologique",
+          "en": "…typing bubbles that stop are psychological warfare"
         },
         "crowdYesPct": 91
       },
@@ -6747,24 +6750,24 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…le silence après le départ des invités est délicieux",
-          "en": "…the silence after guests leave is delicious"
+          "fr": "…un 'appelle-moi' sans contexte enlève des années de vie",
+          "en": "…a 'call me' text with no context takes years off your life"
         },
         "crowdYesPct": 82
       },
       {
         "id": "e",
         "text": {
-          "fr": "…un compliment d'inconnu vaut double",
-          "en": "…a compliment from a stranger counts double"
+          "fr": "…les drames des autres groupes d'amis, c'est un service public",
+          "en": "…other friend groups' drama is free entertainment and we're grateful"
         },
         "crowdYesPct": 77
       },
       {
         "id": "f",
         "text": {
-          "fr": "…s'étirer le matin, c'est du luxe gratuit",
-          "en": "…a morning stretch is free luxury"
+          "fr": "…'il a pas changé', c'est rarement un compliment",
+          "en": "…'they haven't changed a bit' is almost never a compliment"
         },
         "crowdYesPct": 71
       }
@@ -6782,8 +6785,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…pris 30 selfies pour en garder un",
-          "en": "…taken 30 selfies to keep one"
+          "fr": "…bloqué une photo de groupe parfaite parce que MOI j'étais pas bien dessus",
+          "en": "…vetoed a perfect group photo because I personally looked bad in it"
         },
         "crowdYesPct": 66
       },
@@ -6798,8 +6801,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…fait refaire la photo de groupe rien que pour moi",
-          "en": "…asked to retake the group photo just for me"
+          "fr": "…zoomé sur la tête d'un pote pour l'envoyer dans une autre conversation",
+          "en": "…cropped a friend's face out of a photo to forward it to a different chat"
         },
         "crowdYesPct": 52
       },
@@ -6924,8 +6927,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "d",
         "text": {
-          "fr": "…annoncé mon étage à voix haute pour rien",
-          "en": "…announced my floor out loud for no reason"
+          "fr": "…regardé quelqu'un sprinter vers les portes sans appuyer sur rien",
+          "en": "…watched someone sprint for the doors and pressed absolutely nothing"
         },
         "crowdYesPct": 29
       },
@@ -6948,118 +6951,118 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-plants-074",
+    "id": "cc-accounts-074",
     "targetYesPct": 50,
     "askKind": "didYou",
     "stem": {
-      "fr": "Avec les plantes, j'ai déjà…",
-      "en": "Plant-wise, I have…"
+      "fr": "Niveau comptes partagés, j'ai déjà…",
+      "en": "Shared accounts: I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…tué un cactus, pourtant réputé immortel",
-          "en": "…killed a cactus, allegedly immortal"
+          "fr": "…gardé l'accès au compte streaming d'un ex, et je m'en sers encore",
+          "en": "…kept an ex's streaming login, and I still use it"
         },
         "crowdYesPct": 46
       },
       {
         "id": "b",
         "text": {
-          "fr": "…installé une plante en 'soins intensifs' à la fenêtre",
-          "en": "…moved a plant to the 'ICU' by the window"
+          "fr": "…changé le mot de passe du wifi pour punir tout le foyer",
+          "en": "…changed the wifi password to discipline my own household"
         },
         "crowdYesPct": 39
       },
       {
         "id": "c",
         "text": {
-          "fr": "…arrosé deux fois par culpabilité, noyade incluse",
-          "en": "…double-watered out of guilt, drowning included"
+          "fr": "…épluché l'historique du profil commun pour mener une enquête",
+          "en": "…audited the shared watch history to run a quiet investigation"
         },
         "crowdYesPct": 53
       },
       {
         "id": "d",
         "text": {
-          "fr": "…acheté une plante 'facile' morte en un mois",
-          "en": "…bought an 'easy' plant that died within a month"
+          "fr": "…joué le 'cousin' sur l'abonnement famille de quelqu'un que je connais à peine",
+          "en": "…been the fake 'family member' on a plan owned by someone I barely know"
         },
         "crowdYesPct": 58
       },
       {
         "id": "e",
         "text": {
-          "fr": "…gardé une plante morte 'au cas où'",
-          "en": "…kept a dead plant 'just in case'"
+          "fr": "…continué à payer un abonnement que tout le monde utilise sauf moi",
+          "en": "…kept paying for a subscription everyone uses except me"
         },
         "crowdYesPct": 33
       },
       {
         "id": "f",
         "text": {
-          "fr": "…baptisé une plante d'un prénom humain",
-          "en": "…given a plant a human name"
+          "fr": "…éjecté quelqu'un d'un compte sans préavis, comme un licenciement",
+          "en": "…removed someone from an account with zero notice, like a layoff"
         },
         "crowdYesPct": 27
       }
     ]
   },
   {
-    "id": "cc-commitment-075",
+    "id": "cc-frontal-075",
     "targetYesPct": 25,
     "askKind": "wouldYou",
     "stem": {
-      "fr": "Niveau engagement, je…",
-      "en": "Commitment-wise, I'd…"
+      "fr": "Cartes sur table, je serais cap de…",
+      "en": "Cards on the table, I could…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…me ferais tatouer sur un coup de tête",
-          "en": "…get a tattoo on impulse"
+          "fr": "…dire en face à un couple d'amis que ça tiendra pas l'hiver",
+          "en": "…tell a couple in this friend group, to their faces, that it won't survive the winter"
         },
         "crowdYesPct": 18
       },
       {
         "id": "b",
         "text": {
-          "fr": "…adopterais un animal cette année",
-          "en": "…adopt a pet this year"
+          "fr": "…avouer à un pote que le projet dont il parle depuis un an est pas bon",
+          "en": "…tell a friend the passion project they've pitched for a year just isn't good"
         },
         "crowdYesPct": 38
       },
       {
         "id": "c",
         "text": {
-          "fr": "…signerais pour vivre à l'étranger dès demain",
-          "en": "…sign up to move abroad starting tomorrow"
+          "fr": "…répondre 'non' à une invitation de mariage sans inventer d'excuse",
+          "en": "…RSVP 'no' to a wedding with zero invented excuse"
         },
         "crowdYesPct": 29
       },
       {
         "id": "d",
         "text": {
-          "fr": "…changerais complètement de coiffure ce soir",
-          "en": "…completely change my haircut tonight"
+          "fr": "…dire à mes darons lequel des deux est mon préféré",
+          "en": "…tell my parents which one of them is my favourite"
         },
         "crowdYesPct": 24
       },
       {
         "id": "e",
         "text": {
-          "fr": "…signerais 40 ans dans la même boîte",
-          "en": "…commit to 40 years at one company"
+          "fr": "…annoncer mon top 3 des personnes présentes, à voix haute, maintenant",
+          "en": "…announce my top 3 people in this room, out loud, right now"
         },
         "crowdYesPct": 11
       },
       {
         "id": "f",
         "text": {
-          "fr": "…planterais un arbre pour mes 80 ans",
-          "en": "…plant a tree for my 80th birthday"
+          "fr": "…avouer 'j'avais zappé ton anniv' au lieu de sortir l'excuse préparée",
+          "en": "…admit 'I forgot your birthday' instead of deploying the prepared excuse"
         },
         "crowdYesPct": 56
       }
@@ -7109,8 +7112,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…perdu le fil de qui sort avec qui",
-          "en": "…lost track of who's dating whom"
+          "fr": "…posé une question dont je savais déjà la réponse, pour tester sa version",
+          "en": "…asked something I already knew, just to test their version"
         },
         "crowdYesPct": 51
       },
@@ -7118,7 +7121,7 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
         "id": "f",
         "text": {
           "fr": "…lancé 'faut que je te raconte un truc' sans suite",
-          "en": "…opened with 'I have tea' and never delivered"
+          "en": "…texted 'omg I have news' and never delivered the news"
         },
         "crowdYesPct": 38
       }
@@ -7565,8 +7568,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "c",
         "text": {
-          "fr": "…dix minutes d'attente, c'est le maximum acceptable",
-          "en": "…ten minutes is the maximum acceptable wait"
+          "fr": "…laisser passer UNE personne 'pressée', c'est en adopter trois de plus",
+          "en": "…letting one 'sorry, in a rush' person cut signs you up for the next three"
         },
         "crowdYesPct": 52
       },
@@ -7834,60 +7837,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-luck-090",
-    "targetYesPct": 50,
+    "targetYesPct": 55,
     "askKind": "didYou",
     "stem": {
-      "fr": "Côté chance, j'ai déjà…",
-      "en": "Luck-wise, I have…"
+      "fr": "En mode personnage principal du monde, j'ai déjà…",
+      "en": "In full main-character mode, I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…trouvé un billet par terre",
-          "en": "…found cash on the ground"
+          "fr": "…fixé la vitre du bus comme si ma vie était un clip triste",
+          "en": "…stared out the bus window like my life was a sad music video"
         },
-        "crowdYesPct": 54
+        "crowdYesPct": 71
       },
       {
         "id": "b",
         "text": {
-          "fr": "…gagné un truc à une tombola",
-          "en": "…won something at a raffle"
+          "fr": "…cru qu'une chanson passait pile pour moi à cet instant",
+          "en": "…been sure a song was playing specifically for me right then"
         },
-        "crowdYesPct": 47
+        "crowdYesPct": 58
       },
       {
         "id": "c",
         "text": {
-          "fr": "…enchaîné les feux verts en étant en retard",
-          "en": "…hit every green light while running late"
+          "fr": "…imaginé le documentaire qu'on tournerait un jour sur ma vie",
+          "en": "…pictured the documentary they'll one day make about my life"
         },
-        "crowdYesPct": 61
+        "crowdYesPct": 47
       },
       {
         "id": "d",
         "text": {
-          "fr": "…gratté un ticket gagnant… de 2 €",
-          "en": "…scratched a winning ticket… worth two bucks"
+          "fr": "…rejoué une dispute dans ma tête, en gagnant brillamment",
+          "en": "…replayed an argument in my head and won it flawlessly"
         },
-        "crowdYesPct": 66
+        "crowdYesPct": 76
       },
       {
         "id": "e",
         "text": {
-          "fr": "…perdu à pile ou face cinq fois de suite",
-          "en": "…lost a coin toss five times straight"
+          "fr": "…cru être la personne la plus normale d'un groupe d'amis",
+          "en": "…assumed I was the most normal one in a friend group"
         },
-        "crowdYesPct": 28
+        "crowdYesPct": 53
       },
       {
         "id": "f",
         "text": {
-          "fr": "…touché du bois juste au cas où",
-          "en": "…knocked on wood just in case"
+          "fr": "…pensé secrètement être le pote préféré de tout le monde ici",
+          "en": "…secretly assumed I'm everyone's favourite friend in this room"
         },
-        "crowdYesPct": 73
+        "crowdYesPct": 38
       }
     ]
   },
@@ -8230,8 +8233,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "e",
         "text": {
-          "fr": "…les enfants posent les meilleures questions",
-          "en": "…kids ask the best questions"
+          "fr": "…un enfant de 4 ans peut t'achever en public avec une seule question",
+          "en": "…a four-year-old can publicly end you with one single question"
         },
         "crowdYesPct": 73
       },
@@ -8541,59 +8544,59 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-freenight-102",
+    "id": "cc-expose-102",
     "targetYesPct": 25,
     "askKind": "wouldYou",
     "stem": {
-      "fr": "Pour une nuit gratuite, je dormirais…",
-      "en": "For a free night, I'd sleep…"
+      "fr": "Pour une semaine de vacances gratuite, je laisserais ce groupe…",
+      "en": "For a free week's holiday, I'd let this group…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…dans un manoir réputé hanté",
-          "en": "…in a famously haunted manor"
+          "fr": "…lire mes dix derniers messages envoyés, sans aucun contexte",
+          "en": "…read my last ten sent texts, zero context provided"
         },
         "crowdYesPct": 36
       },
       {
         "id": "b",
         "text": {
-          "fr": "…dans une tente en pleine tempête",
-          "en": "…in a tent through a storm"
+          "fr": "…écouter trois de mes vocaux envoyés, tirés au sort",
+          "en": "…play three of my sent voice notes, drawn at random"
         },
         "crowdYesPct": 28
       },
       {
         "id": "c",
         "text": {
-          "fr": "…dans un musée après la fermeture",
-          "en": "…in a museum after closing"
+          "fr": "…regarder mon temps d'écran de la semaine, appli par appli",
+          "en": "…inspect my weekly screen time report, app by app"
         },
         "crowdYesPct": 52
       },
       {
         "id": "d",
         "text": {
-          "fr": "…dans un phare isolé sans réseau",
-          "en": "…in a remote lighthouse with no signal"
+          "fr": "…faire défiler mon dossier de captures d'écran",
+          "en": "…scroll my screenshots folder, the real archive"
         },
         "crowdYesPct": 44
       },
       {
         "id": "e",
         "text": {
-          "fr": "…dans un cimetière, près de l'entrée quand même",
-          "en": "…in a graveyard, near the gate though"
+          "fr": "…poster une story depuis mon compte, sans validation",
+          "en": "…post one story from my account, no approval step"
         },
         "crowdYesPct": 14
       },
       {
         "id": "f",
         "text": {
-          "fr": "…dans une grotte avec un guide à distance",
-          "en": "…in a cave with a remote guide"
+          "fr": "…lire mes brouillons : tout ce que j'ai écrit sans jamais l'envoyer",
+          "en": "…read my drafts: every text I wrote and never dared send"
         },
         "crowdYesPct": 21
       }
@@ -8619,8 +8622,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "b",
         "text": {
-          "fr": "…racheté deux fois le même vêtement exprès",
-          "en": "…bought the same item twice on purpose"
+          "fr": "…rendu un vêtement porté toute une soirée, étiquette remise en place",
+          "en": "…returned an outfit worn for one full night out, tag tucked back in"
         },
         "crowdYesPct": 44
       },
@@ -8660,60 +8663,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-smallwins-104",
-    "targetYesPct": 65,
+    "targetYesPct": 55,
     "askKind": "didYou",
     "stem": {
-      "fr": "Victoire du quotidien : j'ai déjà…",
-      "en": "Daily win: I have…"
+      "fr": "Je suis secrètement persuadé d'être meilleur que les autres pour…",
+      "en": "I'm secretly convinced I'm better than everyone at…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…rattrapé un objet qui tombait, en mode super-héros",
-          "en": "…caught a falling object like a superhero"
+          "fr": "…choisir le bon film, et je le fais savoir si je me trompe pas",
+          "en": "…picking the movie, and I make sure you know when I'm right"
         },
-        "crowdYesPct": 69
+        "crowdYesPct": 58
       },
       {
         "id": "b",
         "text": {
-          "fr": "…plié le drap-housse presque correctement",
-          "en": "…folded the fitted sheet almost correctly"
+          "fr": "…lire les gens, surtout ceux qui m'ont jamais demandé mon avis",
+          "en": "…reading people, especially the ones who never asked"
         },
-        "crowdYesPct": 33
+        "crowdYesPct": 52
       },
       {
         "id": "c",
         "text": {
-          "fr": "…deviné le code wifi du premier coup",
-          "en": "…guessed the wifi password first try"
+          "fr": "…donner des conseils que je n'applique absolument pas",
+          "en": "…giving advice I do not follow myself, even slightly"
         },
-        "crowdYesPct": 21
+        "crowdYesPct": 61
       },
       {
         "id": "d",
         "text": {
-          "fr": "…fini un baume à lèvres jusqu'au bout",
-          "en": "…finished a lip balm to the very end"
+          "fr": "…raconter une histoire, et je coupe ceux qui la racontent mal",
+          "en": "…telling a story, and I'll cut in when you tell it wrong"
         },
-        "crowdYesPct": 27
+        "crowdYesPct": 47
       },
       {
         "id": "e",
         "text": {
-          "fr": "…garé la voiture en un seul mouvement fluide",
-          "en": "…parked in one fluid motion"
+          "fr": "…rester calme dans une dispute, juste pour avoir l'air d'avoir raison",
+          "en": "…staying calm in a fight, purely to look like the right one"
         },
-        "crowdYesPct": 62
+        "crowdYesPct": 44
       },
       {
         "id": "f",
         "text": {
-          "fr": "…sorti la réplique parfaite au bon moment, pour une fois",
-          "en": "…landed the perfect comeback in real time, for once"
+          "fr": "…à peu près tout, et au moins une personne ici le sait déjà",
+          "en": "…basically everything, and at least one person here already knows it"
         },
-        "crowdYesPct": 56
+        "crowdYesPct": 39
       }
     ]
   },
@@ -8954,7 +8957,7 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-serious-109",
+    "id": "cc-realtalk-109",
     "targetYesPct": 95,
     "askKind": "agree",
     "stem": {
@@ -8965,48 +8968,48 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "a",
         "text": {
-          "fr": "…rire ensemble soude plus que n'importe quel discours",
-          "en": "…laughing together bonds more than any speech"
+          "fr": "…on a tous une anecdote qu'on améliore discrètement depuis des années",
+          "en": "…we all have one story we've been quietly upgrading for years"
         },
         "crowdYesPct": 92
       },
       {
         "id": "b",
         "text": {
-          "fr": "…un bon repas partagé arrange beaucoup de choses",
-          "en": "…a good shared meal fixes a lot"
+          "fr": "…tout le monde ici a déjà répété un secret juré-promis",
+          "en": "…everyone in this room has leaked a secret they swore to keep"
         },
         "crowdYesPct": 96
       },
       {
         "id": "c",
         "text": {
-          "fr": "…tout le monde a besoin d'entendre 'bien joué'",
-          "en": "…everyone needs to hear 'well done' sometimes"
+          "fr": "…on choisit qui appeler selon le verdict qu'on veut entendre",
+          "en": "…we pick which friend to call based on the verdict we want"
         },
         "crowdYesPct": 88
       },
       {
         "id": "d",
         "text": {
-          "fr": "…prendre des nouvelles, ça change tout",
-          "en": "…checking in costs nothing and changes everything"
+          "fr": "…'ça reste entre nous' a une durée de vie de 48 heures",
+          "en": "…'this stays between us' has a 48-hour shelf life"
         },
         "crowdYesPct": 84
       },
       {
         "id": "e",
         "text": {
-          "fr": "…dire merci au chauffeur met de bonne humeur",
-          "en": "…thanking the bus driver lifts your mood"
+          "fr": "…on écoute les problèmes des potes en chargeant notre propre histoire",
+          "en": "…we listen to friends' problems while reloading our own story"
         },
         "crowdYesPct": 79
       },
       {
         "id": "f",
         "text": {
-          "fr": "…chaque groupe d'amis a besoin d'un organisateur héroïque",
-          "en": "…every friend group needs one heroic planner"
+          "fr": "…si les conversations privées fuitaient, la soirée s'arrêterait là",
+          "en": "…if the side chats ever leaked, this party would end on the spot"
         },
         "crowdYesPct": 73
       }
@@ -9064,8 +9067,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…commencé un nouveau hobby imaginaire",
-          "en": "…started an imaginary new hobby"
+          "fr": "…rédigé mentalement la mise au point que j'enverrai jamais",
+          "en": "…mentally drafted the confrontation text I will never send"
         },
         "crowdYesPct": 41
       }
@@ -9073,60 +9076,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-organized-111",
-    "targetYesPct": 30,
+    "targetYesPct": 35,
     "askKind": "didYou",
     "stem": {
-      "fr": "Organisation extrême : j'ai déjà…",
-      "en": "Peak organization: I have…"
+      "fr": "En mode chef de groupe non élu, j'ai déjà…",
+      "en": "As the group's unelected leader, I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…planifié des vacances avec un tableur",
-          "en": "…planned a vacation with a spreadsheet"
+          "fr": "…créé le groupe WhatsApp du plan et nommé tout le monde dedans",
+          "en": "…made the trip group chat and added everyone without asking"
         },
-        "crowdYesPct": 26
+        "crowdYesPct": 58
       },
       {
         "id": "b",
         "text": {
-          "fr": "…classé mes applis par couleur",
-          "en": "…sorted my apps by color"
+          "fr": "…relancé les gens trois fois sur un Doodle qu'ils ouvriront jamais",
+          "en": "…chased people three times over a poll they will never open"
         },
-        "crowdYesPct": 33
+        "crowdYesPct": 51
       },
       {
         "id": "c",
         "text": {
-          "fr": "…minuté une soirée heure par heure",
-          "en": "…scheduled a night out hour by hour"
+          "fr": "…avancé l'argent pour tout le monde puis tenu une vraie comptabilité",
+          "en": "…fronted the cash for everyone and then kept actual receipts"
         },
-        "crowdYesPct": 21
+        "crowdYesPct": 47
       },
       {
         "id": "d",
         "text": {
-          "fr": "…plastifié ou affiché un planning à la maison",
-          "en": "…laminated or wall-posted a home schedule"
+          "fr": "…décidé du resto en faisant croire à un vote",
+          "en": "…picked the restaurant while faking a group vote"
         },
-        "crowdYesPct": 16
+        "crowdYesPct": 38
       },
       {
         "id": "e",
         "text": {
-          "fr": "…créé des sous-dossiers de sous-dossiers",
-          "en": "…made subfolders of subfolders"
+          "fr": "…annulé en secret l'idée d'un pote pour imposer la mienne",
+          "en": "…quietly killed a friend's idea to push my own"
         },
-        "crowdYesPct": 39
+        "crowdYesPct": 29
       },
       {
         "id": "f",
         "text": {
-          "fr": "…préparé ma tenue la veille comme à l'école",
-          "en": "…laid out tomorrow's outfit like a school kid"
+          "fr": "…gardé une liste mentale de qui n'a jamais rien organisé",
+          "en": "…kept a running mental list of who never plans anything"
         },
-        "crowdYesPct": 45
+        "crowdYesPct": 44
       }
     ]
   },
@@ -9135,57 +9138,57 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     "targetYesPct": 60,
     "askKind": "didYou",
     "stem": {
-      "fr": "Talent inutile : je sais…",
-      "en": "Useless talent: I can…"
+      "fr": "Talent caché que personne ne m'a demandé : je sais…",
+      "en": "Hidden talent nobody asked for: I can…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…imiter au moins un animal de façon convaincante",
-          "en": "…do at least one convincing animal impression"
-        },
-        "crowdYesPct": 56
-      },
-      {
-        "id": "b",
-        "text": {
-          "fr": "…réciter une pub entière de mon enfance",
-          "en": "…recite a full jingle from my childhood"
+          "fr": "…réciter par cœur une pub que j'ai vue une fois en 2009",
+          "en": "…recite an ad I saw once in 2009, word for word"
         },
         "crowdYesPct": 63
       },
       {
-        "id": "c",
+        "id": "b",
         "text": {
-          "fr": "…faire un bruit bizarre que peu de gens savent faire",
-          "en": "…make one weird sound most people can't"
+          "fr": "…savoir qui va se faire larguer avant le couple lui-même",
+          "en": "…call a breakup months before the couple sees it coming"
         },
         "crowdYesPct": 51
       },
       {
-        "id": "d",
+        "id": "c",
         "text": {
-          "fr": "…deviner l'heure à 15 minutes près sans montre",
-          "en": "…guess the time within 15 minutes, no watch"
+          "fr": "…retrouver le prénom d'un ex juste pour relancer un drama",
+          "en": "…dig up an ex's name purely to reignite old drama"
         },
         "crowdYesPct": 44
       },
       {
+        "id": "d",
+        "text": {
+          "fr": "…pleurer sur commande pour gagner une dispute",
+          "en": "…cry on command to win an argument"
+        },
+        "crowdYesPct": 33
+      },
+      {
         "id": "e",
         "text": {
-          "fr": "…chanter un générique de dessin animé par cœur",
-          "en": "…sing a cartoon theme from memory"
+          "fr": "…tenir une rancune intacte depuis le collège",
+          "en": "…keep a grudge perfectly fresh since middle school"
         },
-        "crowdYesPct": 70
+        "crowdYesPct": 47
       },
       {
         "id": "f",
         "text": {
-          "fr": "…plier un t-shirt en deux secondes",
-          "en": "…fold a t-shirt in two seconds"
+          "fr": "…deviner exactement qui, dans cette pièce, ment le mieux",
+          "en": "…name exactly who in this room lies the best"
         },
-        "crowdYesPct": 27
+        "crowdYesPct": 41
       }
     ]
   },
@@ -9241,8 +9244,8 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
       {
         "id": "f",
         "text": {
-          "fr": "…marché jusqu'au coin de rue et revenu, l'air détaché",
-          "en": "…strolled to the corner and back, casually"
+          "fr": "…préparé le reproche du retard, puis tout pardonné à l'arrivée",
+          "en": "…drafted the full guilt-trip speech, then dropped it the second they arrived"
         },
         "crowdYesPct": 58
       }
@@ -9544,59 +9547,59 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
     ]
   },
   {
-    "id": "cc-adrenaline-119",
+    "id": "cc-stagefright-119",
     "targetYesPct": 50,
     "askKind": "wouldYou",
     "stem": {
-      "fr": "Sous adrénaline, je…",
-      "en": "Chasing adrenaline, I'd…"
+      "fr": "Là, devant tout le monde, je serais cap de…",
+      "en": "Right now, in front of everyone, I could…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…ferais un saut à l'élastique",
-          "en": "…bungee jump"
+          "fr": "…montrer la dernière photo de ma galerie sans la vérifier avant",
+          "en": "…show the last photo in my camera roll without checking it first"
         },
         "crowdYesPct": 39
       },
       {
         "id": "b",
         "text": {
-          "fr": "…descendrais de vrais rapides en rafting",
-          "en": "…raft real whitewater"
+          "fr": "…chanter a cappella, maintenant, sans musique",
+          "en": "…sing a cappella, right now, no backing track"
         },
         "crowdYesPct": 56
       },
       {
         "id": "c",
         "text": {
-          "fr": "…ferais le parcours le plus haut de l'accrobranche",
-          "en": "…do the top course at a treetop park"
+          "fr": "…raconter ma pire honte, version intégrale non négociée",
+          "en": "…tell my most embarrassing story, the full uncut version"
         },
         "crowdYesPct": 71
       },
       {
         "id": "d",
         "text": {
-          "fr": "…piloterais un kart comme si c'était la F1",
-          "en": "…drive a go-kart like it's F1"
+          "fr": "…montrer mon vrai top artistes de l'année, celui qui me grille",
+          "en": "…reveal my actual most-played artists, the incriminating list"
         },
         "crowdYesPct": 76
       },
       {
         "id": "e",
         "text": {
-          "fr": "…caresserais une raie dans un bassin tactile",
-          "en": "…pet a stingray at a touch tank"
+          "fr": "…imiter quelqu'un de cette pièce jusqu'à ce qu'on devine qui",
+          "en": "…impersonate someone in this room until they guess who"
         },
         "crowdYesPct": 62
       },
       {
         "id": "f",
         "text": {
-          "fr": "…monterais dans le grand huit le plus violent du parc",
-          "en": "…ride the park's most violent coaster"
+          "fr": "…laisser la personne à ma droite raconter MA pire histoire à ma place",
+          "en": "…let the person on my right tell MY worst story for me"
         },
         "crowdYesPct": 49
       }
@@ -9663,60 +9666,60 @@ export const CINQUANTE_CINQUANTE_PACK: ContentPack<InputGuessContent> = {
   },
   {
     "id": "cc-quiz-121",
-    "targetYesPct": 35,
+    "targetYesPct": 45,
     "askKind": "didYou",
     "stem": {
-      "fr": "En quiz ou culture G, j'ai déjà…",
-      "en": "Quiz nights, I have…"
+      "fr": "Quand je perds à un jeu, j'ai déjà…",
+      "en": "When I lose a game, I have…"
     },
     "completions": [
       {
         "id": "a",
         "text": {
-          "fr": "…répondu une énorme bêtise avec assurance",
-          "en": "…confidently delivered total nonsense"
+          "fr": "…blâmé la règle, les dés, la manette, tout sauf moi",
+          "en": "…blamed the rules, the dice, the controller, anything but me"
         },
-        "crowdYesPct": 49
+        "crowdYesPct": 64
       },
       {
         "id": "b",
         "text": {
-          "fr": "…connu la réponse une seconde trop tard",
-          "en": "…known the answer one second too late"
+          "fr": "…rappelé une victoire d'il y a deux ans, en plein milieu",
+          "en": "…brought up a win from two years ago, mid-game"
         },
-        "crowdYesPct": 56
+        "crowdYesPct": 51
       },
       {
         "id": "c",
         "text": {
-          "fr": "…contesté la carte-réponse officielle",
-          "en": "…disputed the official answer card"
+          "fr": "…boudé assez fort pour que tout le monde le voie",
+          "en": "…sulked loud enough for the whole table to clock it"
         },
-        "crowdYesPct": 38
+        "crowdYesPct": 47
       },
       {
         "id": "d",
         "text": {
-          "fr": "…brillé sur une question de dessin animé",
-          "en": "…shone on a cartoon question"
+          "fr": "…exigé une revanche jusqu'à gagner, puis arrêté pile là",
+          "en": "…demanded rematches until I won, then stopped exactly there"
         },
-        "crowdYesPct": 44
+        "crowdYesPct": 53
       },
       {
         "id": "e",
         "text": {
-          "fr": "…accusé ma propre équipe",
-          "en": "…blamed my own team"
+          "fr": "…accusé quelqu'un ici de tricher sans la moindre preuve",
+          "en": "…accused someone in this room of cheating with zero proof"
         },
-        "crowdYesPct": 31
+        "crowdYesPct": 41
       },
       {
         "id": "f",
         "text": {
-          "fr": "…vraiment gagné quelque chose à un quiz de bar",
-          "en": "…actually won something at a real pub quiz"
+          "fr": "…menacé de renverser le plateau, et presque tenu parole",
+          "en": "…threatened to flip the board, and nearly meant it"
         },
-        "crowdYesPct": 24
+        "crowdYesPct": 33
       }
     ]
   },

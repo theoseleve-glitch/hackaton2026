@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { leakedSecrets, type GameEvent } from '@bloop/engine';
 import type { NightDayAction, NightDayState } from '@bloop/game-night-day';
-import { CONTENT, game } from './helpers.js';
+import { allOf, CONTENT, game, nightRead, roleOf, toNight } from './helpers.js';
 
 /**
  * Mirror of the EXACT fixture shipped in INTEGRATION.md for
@@ -37,6 +37,26 @@ const OUTSIDERS = ['viewer-not-in-roster', '__proto__'];
 function secrets(state: unknown) {
   const s = state as { players: string[]; roles: Record<string, string> };
   return s.players.map((p) => ({ value: `"${p}":"${s.roles[p]}"`, owner: p }));
+}
+
+/**
+ * REDACTION-AUDIT DECLARATION of the hidden values on this template. Each entry
+ * is `{ value, owner }`: the exact substring that would appear in a LEAKED view,
+ * owned by the only viewer permitted to see it. `leakedSecrets` then proves no
+ * other viewer's view contains it.
+ *
+ *   - `roles`     — own-only role assignment (the platform's core secret).
+ *   - `nightReads`— CC-1 "Night Read" hidden side-bet: each living non-actor's
+ *                   private wolf-hunch for the round. Strictly more hidden than
+ *                   wolfVotes (owner-only echo, public count, full reveal only at
+ *                   `over`). DECLARED here so its non-owner invariance is audited.
+ */
+function readSecrets(state: NightDayState) {
+  const buffer = state.nightReads[state.round] ?? {};
+  return Object.keys(buffer).map((reader) => ({
+    value: `"${reader}":"${(buffer as Record<string, string>)[reader]}"`,
+    owner: reader,
+  }));
 }
 
 function fold(events: ReadonlyArray<GameEvent<NightDayAction>>): NightDayState {
@@ -97,5 +117,38 @@ describe('INTEGRATION.md redaction-audit fixture (kept in lockstep)', () => {
     expect(s.phase).toBe('over');
     expect(s.endReason).toBe('roomCollapsed'); // 3 leaves -> alive∧connected < 3 at the dawn win-check
     expect(steps).toBeLessThanOrEqual(4); // wolves -> witch -> dawn -> over, then absorbed
+  });
+});
+
+describe('redaction-audit: CC-1 Night Read hidden value (declared + invariant)', () => {
+  // Full roster (nobody leaves) so multiple non-actors can place a read.
+  const base = toNight(game, game.init(SEED, [...PLAYERS], CONTENT));
+  const wolf = roleOf(base, 'wolf');
+  const seer = roleOf(base, 'seer');
+  const villagers = allOf(base, 'villager');
+
+  // nightSeer: two non-actor villagers read the wolf; the seer (actor) does not read.
+  const withReads = (() => {
+    let s = game.reduce(base, nightRead(villagers[0]!, wolf, 1)).state;
+    s = game.reduce(s, nightRead(villagers[1]!, seer, 2)).state; // a deliberately-wrong read
+    return s;
+  })();
+
+  it('the declaration is non-empty (the audit actually exercises the new secret)', () => {
+    expect(readSecrets(withReads).length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('declared night-read secrets never appear in any non-owner view', () => {
+    const viewers = [...PLAYERS, ...OUTSIDERS];
+    expect(leakedSecrets(game, withReads, viewers, readSecrets(withReads))).toEqual([]);
+  });
+
+  it('changing a hidden read leaves every non-owner view byte-identical', () => {
+    const alt = game.reduce(base, nightRead(villagers[0]!, seer, 1)).state; // owner reads someone else
+    const ref = game.reduce(base, nightRead(villagers[0]!, wolf, 1)).state;
+    expect(game.phaseKey(alt)).toBe(game.phaseKey(ref));
+    for (const viewer of [...PLAYERS.filter((p) => p !== villagers[0]), ...OUTSIDERS]) {
+      expect(game.view(alt, viewer)).toEqual(game.view(ref, viewer));
+    }
   });
 });

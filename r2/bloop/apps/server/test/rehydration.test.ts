@@ -26,7 +26,16 @@ describe('rehydration chaos (design §5.2 + review C1)', () => {
     if (reveal.view.phase !== 'reveal') throw new Error(`expected reveal, got ${reveal.view.phase}`);
     expect(reveal.view.tally[pb!]).toBe(2); // both PRE-eviction ballots were rebuilt from the log
     expect(reveal.view.tally[pa!]).toBe(1);
-    expect(reveal.view.scores[pb!]).toBe(1);
+    // two-beat reveal: the early-resolve lands on the suspense beat (score deferred);
+    // the +1 lands at the verdict beat, proving the rebuilt-from-log ballots scored correctly.
+    expect(reveal.view.revealStep).toBe('suspense');
+    expect(reveal.view.scores[pb!]).toBe(0);
+    await runInDurableObject(stub, (inst) => inst.sweep(reveal.deadlineAt! + 1));
+    const verdict = await expectTracerView(socks[0]!);
+    for (const s of [socks[1]!, socks[2]!]) await expectTracerView(s);
+    if (verdict.view.phase !== 'reveal') throw new Error('expected verdict reveal');
+    expect(verdict.view.revealStep).toBe('verdict');
+    expect(verdict.view.scores[pb!]).toBe(1);
   });
 
   it('rehydrated player-keyed maps are null-prototype (C1: state is rebuilt by game code, never JSON.parse)', async () => {

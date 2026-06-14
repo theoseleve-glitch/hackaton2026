@@ -1,5 +1,5 @@
 import type { PlayerId } from '@bloop/engine';
-import type { Presence } from '@bloop/kit';
+import type { Presence, SideBetBuffer } from '@bloop/kit';
 
 /** Bilingual UI string — the client picks a locale at render time. */
 export interface LText {
@@ -91,14 +91,14 @@ export const LOUP_GAROU_CONFIG: NightDayConfig = {
   lynchTieBreak: 'noLynch',
   witchSelfHeal: true,
   maxRounds: 10,
-  roleRevealMs: 15_000,
-  nightSeerMs: 25_000,
-  nightWolvesMs: 30_000,
-  nightWitchMs: 25_000,
-  dawnMs: 10_000,
+  roleRevealMs: 10_000,
+  nightSeerMs: 20_000,
+  nightWolvesMs: 28_000,
+  nightWitchMs: 18_000,
+  dawnMs: 12_000,
   debateMs: 90_000,
   voteMs: 30_000,
-  lynchRevealMs: 10_000,
+  lynchRevealMs: 9_000,
 };
 
 export type NightDayPhase =
@@ -162,6 +162,17 @@ export interface NightDayState {
   ackRole: Record<PlayerId, true>;
   /** Decoy-uniform acted booleans, reset at each night sub-phase entry. PUBLIC. */
   nightActed: Record<PlayerId, true>;
+  /**
+   * HIDDEN (CC-1 hidden side-bet) — "Night Read". Per ROUND, each living
+   * non-actor's private hunch about who is a wolf. The read locks the seat
+   * exactly like `nightAck` (same `nightActed` entry, same all-acted exit) but
+   * stores the predicted target in this strictly-more-hidden map. Owner-only
+   * echo + public count pre-`over`; the full map is revealed ONLY at `over`,
+   * where each correct read pays a small COSMETIC accuracy bonus (never folded
+   * into the 0–3 placement scale). Keyed by round so a fresh read opens each
+   * night; one read per player per round (re-read rejected => same reference).
+   */
+  nightReads: Record<number, SideBetBuffer<PlayerId>>;
   /** HIDDEN except living wolves during nightWolves. */
   wolfVotes: Record<PlayerId, PlayerId>;
   /** HIDDEN: first-vote order of targets — deterministic tie-break, no rng. */
@@ -190,6 +201,8 @@ export interface NightDayState {
 export type NightDayAction =
   | { kind: 'ackRole' }
   | { kind: 'nightAck' }
+  /** CC-1 Night Read: a living non-actor's private wolf-hunch. Locks the seat like nightAck. */
+  | { kind: 'nightRead'; target: PlayerId }
   | { kind: 'seerPeek'; target: PlayerId }
   | { kind: 'wolfVote'; target: PlayerId }
   | { kind: 'witchAct'; heal: boolean; poisonTarget: PlayerId | null }
@@ -242,6 +255,17 @@ export type NightDayView =
       pendingKill: PlayerId | null;
       /** Witch only (her own potion shelf — survives her death). */
       witchState: { healLeft: boolean; poisonLeft: boolean } | null;
+      /**
+       * CC-1 Night Read — OWNER-ONLY echo of the viewer's own read THIS round
+       * (the player they marked), or null if they have not read. A uniform key
+       * on EVERY night view (decoy parity); the VALUE is redacted owner-only so
+       * a non-owner can never recover another player's hunch. NO public count is
+       * exposed here: a per-round read count would let an observer distinguish a
+       * read from a sleep-tap in aggregate, breaking the decoy indistinguishability
+       * (the `acted` lock — identical for read and ack — is the only public signal).
+       * The full read map is disclosed only at `over` (see `nightReadAccuracy`).
+       */
+      myNightRead: PlayerId | null;
     } & NightDayBaseView)
   | ({ phase: 'dawn'; lastDawn: DawnReport } & NightDayBaseView)
   | ({
@@ -257,4 +281,11 @@ export type NightDayView =
       finalRoles: Record<PlayerId, Role>;
       winners: Winners | null;
       endReason: EndReason;
+      /**
+       * CC-1 Night Read reveal — surfaced ONLY at `over` (the reads are public
+       * alongside the final roles). Per player: how many of their nightly reads
+       * correctly clocked a wolf. Cosmetic only; the placement `scores` above
+       * are untouched by it.
+       */
+      nightReadAccuracy: Record<PlayerId, number>;
     } & NightDayBaseView);

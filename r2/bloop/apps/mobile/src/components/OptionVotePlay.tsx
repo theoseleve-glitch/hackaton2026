@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RoomPlayer } from '@bloop/protocol';
-import type { Option, OptionVoteItem, RoundResult } from '@bloop/game-option-vote';
+import type { Option, OptionVoteItem, PredictionReveal, RoundResult } from '@bloop/game-option-vote';
 import { asOptionVoteView, deviceLang, pickL, type Lang } from '../games/option-vote-view';
 import { secondsLeft } from '../games/tracer-view';
 import { useRoom } from '../net/context';
@@ -102,6 +102,122 @@ function Split({ result, item, players, lang }: {
   );
 }
 
+/**
+ * CC-1 "Devine la salle" — the hidden majority-PREDICTION side-bet, placed during
+ * choose (predict-majority only). Two coral-outlined chips; tapping sends the
+ * `predict` action. Shows the owner's own locked-in guess + a live "X/Y predicted"
+ * aggregate. Never leaks anyone else's call — only the count, until the reveal.
+ */
+function PredictRoom({ item, myPrediction, predictedCount, total, onPredict, lang }: {
+  item: OptionVoteItem | null; myPrediction: Option | null; predictedCount: number;
+  total: number; onPredict: (opt: Option) => void; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  return (
+    <View style={{
+      backgroundColor: theme.surfaceAlt, borderRadius: tokens.radii.xl, padding: tokens.spacing.lg,
+      gap: tokens.spacing.sm, borderWidth: 2, borderColor: theme.brand, ...tokens.elevation.e1,
+    }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <AppText role="label" color="brand">
+          {L('🔮 DEVINE LA SALLE', '🔮 READ THE ROOM')}
+        </AppText>
+        <AppText role="caption" color="textSecondary">
+          {L(`${predictedCount}/${total} ont deviné`, `${predictedCount}/${total} predicted`)}
+        </AppText>
+      </View>
+      <AppText role="caption" color="textSecondary">
+        {myPrediction === null
+          ? L('Quel camp la MAJORITÉ va-t-elle choisir ?', 'Which side will the MAJORITY pick?')
+          : L('Tu peux changer ton pari tant que la manche tourne.', 'Tweak your bet while the round is live.')}
+      </AppText>
+      <View style={{ flexDirection: 'row', gap: tokens.spacing.sm }}>
+        {(['A', 'B'] as const).map((opt) => {
+          const picked = myPrediction === opt;
+          const accent = opt === 'A' ? theme.truth : theme.dare;
+          const label = pickL(opt === 'A' ? item?.optionA : item?.optionB, lang);
+          return (
+            <Pressable
+              key={opt}
+              onPress={() => onPredict(opt)}
+              accessibilityLabel={`${L('Je parie sur', 'I bet on')} ${label}${picked ? L(', choisi', ', selected') : ''}`}
+              style={{
+                flex: 1, minHeight: 48, borderRadius: tokens.radii.lg, paddingHorizontal: tokens.spacing.md,
+                paddingVertical: tokens.spacing.sm, alignItems: 'center', justifyContent: 'center',
+                backgroundColor: picked ? accent : theme.surface,
+                borderWidth: 2, borderColor: picked ? theme.stickerOutline : theme.border,
+                ...tokens.elevation.e1,
+              }}>
+              <AppText role="label" color={picked ? 'textOnBrand' : 'textPrimary'} style={{ textAlign: 'center' }}>
+                {picked ? '✓ ' : ''}{label || (opt === 'A' ? 'A' : 'B')}
+              </AppText>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
+/**
+ * CC-1 reveal call-out — "tu connais pas tes potes". The now-public, by-name
+ * majority predictions: who read the room right (✓ success) vs wrong (✗ danger).
+ */
+function PredictionsReveal({ predictions, item, majority, players, lang }: {
+  predictions: readonly PredictionReveal[]; item: OptionVoteItem | null;
+  majority: Option | null; players: readonly RoomPlayer[]; lang: Lang;
+}) {
+  const { theme, tokens } = useTheme();
+  const L = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  if (predictions.length === 0) return null;
+  const byId = new Map(players.map((p) => [p.id, p]));
+  const nick = (id: string) => (byId.get(id) ?? { id, ...UNKNOWN }).profile.nickname;
+  const sideLabel = (opt: Option) => pickL(opt === 'A' ? item?.optionA : item?.optionB, lang) || opt;
+  const rightCount = predictions.filter((p) => p.correct).length;
+  return (
+    <View style={{ gap: tokens.spacing.sm }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <AppText role="overline" color="brand">
+          {L('🔮 QUI A LU LA SALLE', '🔮 WHO READ THE ROOM')}
+        </AppText>
+        <AppText role="caption" color="textSecondary">
+          {L(`${rightCount}/${predictions.length} ont vu juste`, `${rightCount}/${predictions.length} called it`)}
+        </AppText>
+      </View>
+      {predictions.map((p) => (
+        <View key={p.playerId} style={{
+          flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,
+          borderRadius: tokens.radii.lg, padding: tokens.spacing.md,
+          borderWidth: p.correct ? 2 : 0, borderColor: theme.success, ...tokens.elevation.e1,
+        }}>
+          <Avatar name={nick(p.playerId)} size="sm" />
+          <View style={{ flex: 1 }}>
+            <AppText role="bodyStrong">{nick(p.playerId)}</AppText>
+            <AppText role="caption" color="textSecondary">
+              {L(`pariait sur « ${sideLabel(p.predicted)} »`, `bet on “${sideLabel(p.predicted)}”`)}
+            </AppText>
+          </View>
+          <AppText role="label" color={p.correct ? 'success' : 'danger'}>
+            {p.correct ? L('✓ VU JUSTE', '✓ NAILED IT') : L('✗ RATÉ', '✗ MISSED')}
+          </AppText>
+        </View>
+      ))}
+      {majority === null && (
+        <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+          {L('Égalité : personne ne pouvait gagner son pari.', 'A tie — no bet could land.')}
+        </AppText>
+      )}
+      {rightCount === 0 && majority !== null && (
+        <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+          {L('Personne n’a vu juste… vous connaissez pas vos potes ! 😬',
+            'Nobody called it… you don’t know your friends! 😬')}
+        </AppText>
+      )}
+    </View>
+  );
+}
+
 export function OptionVotePlay({ code }: { code: string }) {
   const { theme, tokens } = useTheme();
   const { state, sendAction, leave } = useRoom();
@@ -128,6 +244,8 @@ export function OptionVotePlay({ code }: { code: string }) {
 
   const submitBallot = (chosen: Option, predict?: Option) =>
     sendAction({ kind: 'ballot', pick: chosen, ...(predict !== undefined ? { predict } : {}) });
+  // CC-1 — the hidden majority-prediction side-bet (separate from the ballot).
+  const sendPrediction = (opt: Option) => sendAction({ kind: 'predict', option: opt });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -187,6 +305,17 @@ export function OptionVotePlay({ code }: { code: string }) {
               {predicting && (
                 <SecondaryButton label={L('↩︎ Changer mon choix', '↩︎ Change my pick')} onPress={() => setPick(null)} />
               )}
+              {/* CC-1 — "Devine la salle" side-bet, predict-majority only (tu-preferes). */}
+              {ov.scoring === 'predict-majority' && (
+                <PredictRoom
+                  item={ov.item}
+                  myPrediction={ov.myPrediction}
+                  predictedCount={ov.predictedCount}
+                  total={state.players.length}
+                  onPredict={sendPrediction}
+                  lang={lang}
+                />
+              )}
             </View>
           );
         })()}
@@ -202,6 +331,14 @@ export function OptionVotePlay({ code }: { code: string }) {
               </AppText>
             )}
             <Split result={ov.result} item={ov.item} players={state.players} lang={lang} />
+            {/* CC-1 — public, by-name majority predictions: "tu connais pas tes potes". */}
+            <PredictionsReveal
+              predictions={ov.result.predictions}
+              item={ov.item}
+              majority={ov.result.majority}
+              players={state.players}
+              lang={lang}
+            />
             {ov.phase === 'debate' && (
               <View style={{ gap: tokens.spacing.md }}>
                 {ov.item?.debateStarter !== undefined && (
@@ -235,6 +372,16 @@ export function OptionVotePlay({ code }: { code: string }) {
                   {L("🔮 Oracle du groupe : ", '🔮 Oracle of the group: ')}{player(ranked(ov.scores)[0]![0]).profile.nickname}
                 </AppText>
               )}
+              {/* CC-1 — the final round's reads persist onto the podium. */}
+              {ov.scoring === 'predict-majority' && ov.lastPredictions.length > 0 && (() => {
+                const right = ov.lastPredictions.filter((p) => p.correct).length;
+                return (
+                  <AppText role="caption" color="textMuted" style={{ textAlign: 'center' }}>
+                    {L(`Dernière manche : ${right}/${ov.lastPredictions.length} ont lu la salle.`,
+                      `Last round: ${right}/${ov.lastPredictions.length} read the room.`)}
+                  </AppText>
+                );
+              })()}
               {ranked(ov.scores).map(([id, pts], i) => (
                 <View key={id} style={{
                   flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.md, backgroundColor: theme.surface,

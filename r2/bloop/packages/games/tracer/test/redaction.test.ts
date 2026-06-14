@@ -53,8 +53,9 @@ describe('tracer view redaction', () => {
   it('shows final scores when over', () => {
     let state = tracer.init('s', ['p1', 'p2'], content);
     for (let i = 0; i < 3; i++) {
-      state = tracer.reduce(state, { type: 'deadline', at: 0 }).state;
-      state = tracer.reduce(state, { type: 'deadline', at: 1 }).state;
+      state = tracer.reduce(state, { type: 'deadline', at: 0 }).state; // -> suspense
+      state = tracer.reduce(state, { type: 'deadline', at: 1 }).state; // -> verdict
+      state = tracer.reduce(state, { type: 'deadline', at: 2 }).state; // -> next/over
     }
     const v = tracer.view(state, 'p1');
     expect(v.phase).toBe('over');

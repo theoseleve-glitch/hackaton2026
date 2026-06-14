@@ -19,8 +19,8 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
       "en": "Describe the meal you'd cook for a date who deserves exactly this score."
     },
     "low": {
-      "fr": "Coquillettes nature, servies dans le tupperware",
-      "en": "Dry pasta, eaten over the sink"
+      "fr": "Coquillettes nature, mangées au-dessus de l'évier",
+      "en": "Cold pasta, eaten over the sink, one fork"
     },
     "high": {
       "fr": "Trois services, bougies, t'as déjà dit « nous »",
@@ -383,16 +383,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-tired-024",
     "kind": "scale10",
     "prompt": {
-      "fr": "Joue quelqu'un d'exactement aussi fatigué que cette note.",
-      "en": "Act out being exactly this tired."
+      "fr": "Joue ta façon de répondre dans le groupe, réactif exactement comme cette note.",
+      "en": "Act out how you reply in the group chat, exactly this responsive."
     },
     "low": {
-      "fr": "Huit heures de sommeil, ça se voit, on te déteste",
-      "en": "Eight full hours, glowing, everyone hates you"
+      "fr": "Vu lundi, répondu jamais",
+      "en": "Seen on Monday, replied never"
     },
     "high": {
-      "fr": "Tu t'endors debout, en pleine phrase",
-      "en": "Asleep standing up, mid-sentence"
+      "fr": "Tu réponds avant la fin de la notif, ça fait peur",
+      "en": "You reply before the notification even loads. It's unsettling."
     }
   },
   {
@@ -415,16 +415,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-awkward-026",
     "kind": "scale10",
     "prompt": {
-      "fr": "Joue une conversation d'ascenseur exactement aussi gênante que cette note.",
-      "en": "Act out elevator small talk that is exactly this awkward."
+      "fr": "Joue ta façon de quitter une soirée, discrète exactement comme cette note.",
+      "en": "Act out how you leave a party, exactly this smooth."
     },
     "low": {
-      "fr": "Fluide et charmante",
-      "en": "Smooth and charming"
+      "fr": "Tu fais le tour, un câlin chacun, t'es encore là 40 min après",
+      "en": "Full hug lap, then you're still there 40 minutes later"
     },
     "high": {
-      "fr": "Tu descends trois étages trop tôt",
-      "en": "You get off three floors early"
+      "fr": "Personne t'a vu partir. Personne sait si t'es venu.",
+      "en": "Nobody saw you leave. Nobody's sure you came."
     }
   },
   {
@@ -575,16 +575,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-sport-036",
     "kind": "scale10",
     "prompt": {
-      "fr": "Invente un sport exactement aussi épuisant que cette note.",
-      "en": "Invent a sport that is exactly this exhausting."
+      "fr": "Décris à quel point ton poker face tient, solide exactement comme cette note.",
+      "en": "Describe how well your poker face holds, exactly this solid."
     },
     "low": {
-      "fr": "Sieste synchronisée",
-      "en": "Synchronized napping"
+      "fr": "Ton visage balance avant que t'ouvres la bouche",
+      "en": "Your face snitches before you open your mouth"
     },
     "high": {
-      "fr": "Un triathlon, mais quelque chose te poursuit",
-      "en": "A triathlon where something is chasing you"
+      "fr": "Tu mens à la pièce, là, maintenant. Personne capte.",
+      "en": "You're lying to the room right now. Nobody can tell."
     }
   },
   {
@@ -1007,16 +1007,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-magic-063",
     "kind": "scale10",
     "prompt": {
-      "fr": "Décris un tour de magie exactement aussi impressionnant que cette note.",
-      "en": "Describe a magic trick that is exactly this impressive."
+      "fr": "Joue ta façon de faire semblant de te souvenir d'un prénom, crédible exactement comme cette note.",
+      "en": "Act out pretending to remember someone's name, exactly this convincing."
     },
     "low": {
-      "fr": "On voit la carte dépasser de la manche",
-      "en": "The card is visibly up his sleeve"
+      "fr": "« Heeey… toi ! » Tu pointes. C'est pire.",
+      "en": "'Heeey… you!' You point. It's worse."
     },
     "high": {
-      "fr": "Trois personnes sortent en se signant",
-      "en": "Three people leave and join a church"
+      "fr": "Prénom, nom, métier, le chien. Tu l'as jamais vu.",
+      "en": "First name, surname, job, the dog. You've never met them."
     }
   },
   {
@@ -1055,16 +1055,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-mime-066",
     "kind": "scale10",
     "prompt": {
-      "fr": "Mime un sportif en plein effort avec exactement ce niveau d'intensité.",
-      "en": "Mime an athlete mid-effort with exactly this much intensity."
+      "fr": "Imite la personne à ta gauche en train de raconter une histoire, fidèle exactement comme cette note.",
+      "en": "Impersonate the person on your left telling a story, exactly this accurate."
     },
     "low": {
-      "fr": "Échauffement de l'auriculaire",
-      "en": "Warming up one pinky"
+      "fr": "On dirait quelqu'un d'autre. Tu t'excuses.",
+      "en": "It's just someone else now. You apologise."
     },
     "high": {
-      "fr": "Finale olympique, ralenti, larmes",
-      "en": "Olympic final, slow-motion replay, tears"
+      "fr": "Tellement juste qu'elle arrête de parler pour toujours",
+      "en": "So accurate they go quiet for the rest of the night"
     }
   },
   {
@@ -1167,16 +1167,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-react-073",
     "kind": "scale10",
     "prompt": {
-      "fr": "Réagis à un cadeau surprise avec exactement ce niveau de joie.",
-      "en": "React to a surprise gift with exactly this much joy."
+      "fr": "Joue ta réaction quand un pote t'annonce qu'il se remet avec son ex, soutenant exactement comme cette note.",
+      "en": "Act out your reaction when a mate says they're getting back with their ex, exactly this supportive."
     },
     "low": {
-      "fr": "« Ah. Des chaussettes. »",
-      "en": "'Oh. Socks.'"
+      "fr": "« Trop bien. » Ton visage dit l'inverse.",
+      "en": "'Love that for you.' Your face files a complaint."
     },
     "high": {
-      "fr": "Tu hurles si fort que les voisins appellent la police",
-      "en": "You scream so loud next door calls 999"
+      "fr": "Tu mens si bien qu'il te croit. Toi aussi presque.",
+      "en": "You lie so well they believe you. You almost do too."
     }
   },
   {
@@ -1263,32 +1263,32 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-history-079",
     "kind": "scale10",
     "prompt": {
-      "fr": "Raconte un fait historique (vrai ou inventé) avec exactement ce niveau de crédibilité.",
-      "en": "Share a historical fact (real or invented) with exactly this believability score."
+      "fr": "Balance un fait sur quelqu'un de cette pièce qu'il préférerait oublier, vrai exactement comme cette note.",
+      "en": "Drop a fact about someone in this room they'd rather forget, exactly this true."
     },
     "low": {
-      "fr": "Napoléon avait un jetpack",
-      "en": "Napoleon had a jetpack"
+      "fr": "Inventé de toutes pièces. Il proteste un peu trop fort.",
+      "en": "Completely made up. They protest a bit too hard."
     },
     "high": {
-      "fr": "Sorti d'un manuel scolaire",
-      "en": "Straight out of a textbook"
+      "fr": "Deux témoins, une capture, zéro défense",
+      "en": "Two witnesses, one screenshot, no defence"
     }
   },
   {
     "id": "note-gps-080",
     "kind": "scale10",
     "prompt": {
-      "fr": "Joue un GPS qui guide avec exactement ce niveau de fiabilité.",
-      "en": "Play a GPS giving directions with exactly this much reliability."
+      "fr": "Joue la petite voix dans ta tête à 3h du matin, bienveillante exactement comme cette note.",
+      "en": "Play the voice in your head at 3 a.m., exactly this kind to you."
     },
     "low": {
-      "fr": "« Tournez… quelque part »",
-      "en": "'Turn… somewhere'"
+      "fr": "Elle ressort un truc gênant de 2017, mot pour mot",
+      "en": "It replays one cringe moment from 2017, word for word"
     },
     "high": {
-      "fr": "Connaît les radars avant la police",
-      "en": "Knows the speed traps before the police do"
+      "fr": "« T'as géré. Dors. » Tu la crois même pas.",
+      "en": "'You did great. Sleep.' You don't even believe it."
     }
   },
   {
@@ -1343,16 +1343,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-drama-084",
     "kind": "scale10",
     "prompt": {
-      "fr": "Joue une scène d'adieu dramatique avec exactement ce niveau de talent.",
-      "en": "Act out a dramatic farewell scene with exactly this much talent."
+      "fr": "Plaide ta défense pour la dernière fois que t'as merdé avec ce groupe, convaincant exactement comme cette note.",
+      "en": "Plead your defence for the last time you let this group down, exactly this convincing."
     },
     "low": {
-      "fr": "Téléfilm du dimanche après-midi",
-      "en": "Daytime soap filler"
+      "fr": "Tu plaides coupable avant la première question",
+      "en": "You plead guilty before the first question"
     },
     "high": {
-      "fr": "César de la plus belle larme",
-      "en": "Oscar for Best Single Tear"
+      "fr": "Le jury t'applaudit. Les faits, eux, t'accablent toujours.",
+      "en": "The jury claps. The facts still hate you."
     }
   },
   {
@@ -1487,16 +1487,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "roue-fame-003",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite quelque chose qui se situe exactement ici sur la roue.",
-      "en": "Name something that sits exactly here on the wheel."
+      "fr": "Cite un truc qu'on poste en story, situé exactement ici sur la roue.",
+      "en": "Name something you'd post to your story that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Même ta grand-mère connaît",
-      "en": "Even your nan knows it"
+      "fr": "Tu l'épingles, tu le gardes un an",
+      "en": "You pin it, keep it up for a year"
     },
     "high": {
-      "fr": "Trois comptes anonymes connaissent",
-      "en": "Three anonymous accounts know it"
+      "fr": "Supprimé en 4 minutes, trop tard, screen pris",
+      "en": "Deleted in four minutes, too late, screenshot taken"
     }
   },
   {
@@ -1551,16 +1551,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "roue-culture-007",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite quelque chose qui se trouve exactement ici sur la roue.",
-      "en": "Name something that sits exactly here on the wheel."
+      "fr": "Cite un truc populaire qui se trouve exactement ici sur la roue.",
+      "en": "Name a popular thing that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Totalement surcoté",
-      "en": "Totally overrated"
+      "fr": "Tout le monde fait semblant d'aimer",
+      "en": "Everyone pretends to love it"
     },
     "high": {
-      "fr": "Scandaleusement sous-coté",
-      "en": "Criminally underrated"
+      "fr": "Tu t'es engueulé pour le défendre, sobre",
+      "en": "You've started an argument defending it, sober"
     }
   },
   {
@@ -2079,16 +2079,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "roue-word-040",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite un mot qui se situe exactement ici sur la roue.",
-      "en": "Name a word that sits exactly here on the wheel."
+      "fr": "Cite un surnom de couple qui se situe exactement ici sur la roue.",
+      "en": "Name a pet name for a partner that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Magnifique à prononcer",
-      "en": "Gorgeous to say"
+      "fr": "Mignon, tu l'assumes en public",
+      "en": "Cute, you'd say it in public"
     },
     "high": {
-      "fr": "Les gens quittent la pièce quand tu le prononces",
-      "en": "People leave the room when you say it"
+      "fr": "Dit devant nous une fois. On a jamais oublié.",
+      "en": "Said it in front of us once. We never recovered."
     }
   },
   {
@@ -2143,16 +2143,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "roue-collect-044",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite un objet qui se situe exactement ici sur la roue.",
-      "en": "Name an object that sits exactly here on the wheel."
+      "fr": "Cite une idée de tatouage qui se situe exactement ici sur la roue.",
+      "en": "Name a tattoo idea that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Traîne au fond d'un tiroir",
-      "en": "Junk-drawer filler"
+      "fr": "Tu le montres à ta daronne, fière",
+      "en": "You show your mum, she's proud"
     },
     "high": {
-      "fr": "Vitrine, alarme, assurance dédiée",
-      "en": "Display case, alarm, its own insurance policy"
+      "fr": "Le prénom est déjà un ex",
+      "en": "The name is already an ex"
     }
   },
   {
@@ -2191,32 +2191,32 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "roue-icebreaker-047",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite une question brise-glace qui se situe exactement ici sur la roue.",
-      "en": "Name an icebreaker question that sits exactly here on the wheel."
+      "fr": "Cite un truc qu'on dit à un date, situé exactement ici sur la roue.",
+      "en": "Name something you'd say on a date that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Tout le monde se bat pour répondre",
-      "en": "Everyone fights to answer first"
+      "fr": "Deuxième date quasi réservé",
+      "en": "Second date basically booked"
     },
     "high": {
-      "fr": "Quelqu'un commande un Uber en silence",
-      "en": "Someone quietly books an Uber"
+      "fr": "Elle texte « viens me chercher » sous la table",
+      "en": "They text 'come get me' under the table"
     }
   },
   {
     "id": "roue-queue-048",
     "kind": "wheel100",
     "prompt": {
-      "fr": "Cite quelque chose qui se situe exactement ici sur la roue.",
-      "en": "Name something that sits exactly here on the wheel."
+      "fr": "Cite une raison de réveiller un pote à 4h du matin, située exactement ici sur la roue.",
+      "en": "Name a reason to wake a mate at 4 a.m. that sits exactly here on the wheel."
     },
     "low": {
-      "fr": "Tu campes devant la veille",
-      "en": "You'd camp out overnight"
+      "fr": "Il te remercie le lendemain",
+      "en": "They thank you the next day"
     },
     "high": {
-      "fr": "Même gratuit, tu passes",
-      "en": "Not even if it's free"
+      "fr": "Rayé du groupe, sans vote",
+      "en": "Removed from the group chat, no vote needed"
     }
   },
   {
@@ -2351,16 +2351,16 @@ export const JEU_DE_LA_NOTE_PACK: ContentPack<SpotlightGuessContent> = {
     "id": "note-meme-099",
     "kind": "scale10",
     "prompt": {
-      "fr": "Explique un mème à une grand-mère avec exactement ce niveau de clarté.",
-      "en": "Explain a meme to a grandma with exactly this much clarity."
+      "fr": "Explique pourquoi t'as liké une photo de 2019 à 3h du matin, crédible exactement comme cette note.",
+      "en": "Explain why you liked a photo from 2019 at 3 a.m., exactly this believable."
     },
     "low": {
-      "fr": "Elle s'inquiète pour toi",
-      "en": "She's worried about you now"
+      "fr": "« C'était une erreur, j'ai glissé. » Trois fois.",
+      "en": "'My thumb slipped.' Three times."
     },
     "high": {
-      "fr": "Elle le partage avant toi",
-      "en": "She shares it before you do"
+      "fr": "T'as un dossier, un mobile et zéro honte",
+      "en": "You've got a file, a motive and zero shame"
     }
   },
   {
@@ -2453,8 +2453,8 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
   {
     "id": "q_mirror",
     "question": {
-      "fr": "Combien de fois par jour tu te regardes dans le miroir ?",
-      "en": "How many times a day do you check yourself out in the mirror?"
+      "fr": "Combien de fois par jour tu te mates dans le miroir, en vrai ?",
+      "en": "How many times a day do you genuinely check yourself out in the mirror?"
     },
     "answers": [
       {
@@ -2472,25 +2472,25 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "Combien de fois t’as relu ton propre message en te trouvant très drôle ?",
+        "fr": "Combien de fois t’as relu ton propre message en te trouvant beaucoup trop drôle ?",
         "en": "How many times have you reread your own text and laughed at your own joke?"
       },
       {
-        "fr": "Combien de fois par jour tu regardes qui a vu ta story ?",
-        "en": "How many times a day do you check who viewed your story?"
+        "fr": "Combien de fois par jour tu rafraîchis qui a vu ta story ?",
+        "en": "How many times a day do you refresh who viewed your story?"
       },
       {
-        "fr": "Combien de fois ce soir t’as répété ta vanne dans ta tête avant de la sortir ?",
+        "fr": "Combien de fois ce soir t’as répété une vanne dans ta tête avant de la sortir ?",
         "en": "How many times tonight have you rehearsed a line in your head before saying it out loud?"
       },
       {
-        "fr": "Combien de fois ce mois-ci t’as stalké le profil de quelqu’un de cette pièce ?",
+        "fr": "Combien de fois ce mois-ci t’as stalké le profil de quelqu’un présent dans cette pièce ?",
         "en": "How many times this month have you stalked the profile of someone in this room?"
       }
     ],
     "hints": [
       {
-        "fr": "Salle de bain. Lumière qui te doit rien.",
+        "fr": "Salle de bain. Une lumière qui te doit rien.",
         "en": "Bathroom. Lighting that owes you nothing."
       },
       {
@@ -2500,59 +2500,10 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ]
   },
   {
-    "id": "q_lottery_call",
-    "question": {
-      "fr": "Qui tu appellerais en premier si tu gagnais au loto ?",
-      "en": "Who would you call first if you won the lottery?"
-    },
-    "answers": [
-      {
-        "fr": "Ma mère",
-        "en": "My mum"
-      },
-      {
-        "fr": "Mon meilleur pote",
-        "en": "My best friend"
-      },
-      {
-        "fr": "Personne, je disparais",
-        "en": "No one — I’d vanish"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Qui tu appellerais pour enterrer un corps avant le lever du jour ?",
-        "en": "Who would you call to help bury a body before sunrise?"
-      },
-      {
-        "fr": "Qui reçoit ton vocal de 11 minutes quand tu craques à 3 h du matin ?",
-        "en": "Who gets the 11-minute voice note when you fall apart at 3am?"
-      },
-      {
-        "fr": "Qui tu préviendrais en premier si tu devais quitter le pays cette nuit ?",
-        "en": "Who would you tell first if you had to leave the country tonight?"
-      },
-      {
-        "fr": "Qui te défendrait si tout le monde ici se retournait contre toi, là ?",
-        "en": "Who would take your side if everyone in this room turned on you right now?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Beaucoup de zéros, d’un seul coup.",
-        "en": "A stupid number of zeros, all at once."
-      },
-      {
-        "fr": "Ça commence au tabac. Ça finit avec des cousins inconnus qui veulent juste un petit prêt.",
-        "en": "Starts with a scratchcard. Ends with cousins you’ve never met asking for a small loan."
-      }
-    ]
-  },
-  {
     "id": "q_no_phone",
     "question": {
-      "fr": "Combien de temps tu tiendrais sans ton téléphone ?",
-      "en": "How long could you last without your phone?"
+      "fr": "Tu tiendrais combien de temps sans ton téléphone, honnêtement ?",
+      "en": "How long could you actually last without your phone?"
     },
     "answers": [
       {
@@ -2570,20 +2521,20 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "Combien de temps tu tiendrais en garde à vue avant de balancer tout le monde ici ?",
+        "fr": "Tu tiendrais combien de temps en garde à vue avant de balancer tout le monde ici ?",
         "en": "How long would you last in a police interview before naming everyone in this room?"
       },
       {
-        "fr": "Combien de temps tu tiendrais sans parler de toi ?",
+        "fr": "Tu tiendrais combien de temps sans parler de toi ?",
         "en": "How long could you go without talking about yourself?"
       },
       {
-        "fr": "Combien de temps tu tiendrais en coloc avec quelqu’un d’exactement comme toi ?",
+        "fr": "Tu tiendrais combien de temps en coloc avec quelqu’un d’exactement comme toi ?",
         "en": "How long would you survive living with someone exactly like you?"
       },
       {
-        "fr": "Combien de temps tu tiendrais si on projetait ton groupe WhatsApp sur ce mur ?",
-        "en": "How long would you last with the group chat projected on that wall?"
+        "fr": "Tu tiendrais combien de temps si on projetait ton groupe WhatsApp sur ce mur, là ?",
+        "en": "How long would you last with the group chat projected on that wall right now?"
       }
     ],
     "hints": [
@@ -2598,157 +2549,59 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ]
   },
   {
-    "id": "q_lies_week",
+    "id": "q_fries_mcflurry",
     "question": {
-      "fr": "T’as sorti combien de mensonges cette semaine, vrais chiffres ?",
-      "en": "How many lies have you told this week — real number?"
+      "fr": "Tremper ses frites dans le McFlurry : oui ou non ?",
+      "en": "Dipping chips in a McFlurry: yes or no?"
     },
     "answers": [
       {
-        "fr": "Zéro, promis juré",
-        "en": "Zero, I swear"
+        "fr": "Oui, et j’assume devant Dieu",
+        "en": "Yes, and I’ll die on this hill"
       },
       {
-        "fr": "Deux ou trois, des tout petits",
-        "en": "Two or three, tiny ones"
+        "fr": "Non, c’est un crime contre l’humanité",
+        "en": "No — it’s a crime against humanity"
       },
       {
-        "fr": "J’ai perdu le compte mardi",
-        "en": "I lost count by Tuesday"
+        "fr": "Ça dépend de mon humeur",
+        "en": "Depends on my mood"
       }
     ],
     "decoys": [
       {
-        "fr": "Combien de fois t’as envoyé « j’arrive » depuis ton canapé cette semaine ?",
-        "en": "How many times this week did you send 'omw' from your sofa?"
+        "fr": "Goûter un raisin au supermarché avant de payer : oui ou non ?",
+        "en": "Eating a grape in the supermarket before paying: yes or no?"
       },
       {
-        "fr": "Combien de « on se capte bientôt » t’as lâchés sans la moindre intention de capter qui que ce soit ?",
-        "en": "How many 'we should hang out soon's have you said with zero intention of hanging out?"
+        "fr": "Fouiller l’armoire à pharmacie quand t’es invité chez quelqu’un : oui ou non ?",
+        "en": "Snooping the bathroom cabinet at someone’s house: yes or no?"
       },
       {
-        "fr": "Combien de personnes t’as laissées en vu cette semaine ?",
-        "en": "How many people have you left on read this week?"
+        "fr": "Re-offrir un cadeau à la personne qui te l’avait offert : oui ou non ?",
+        "en": "Regifting a present back to the person who gave it to you: yes or no?"
       },
       {
-        "fr": "Combien d’excuses inventées t’as servies à quelqu’un de cette pièce ?",
-        "en": "How many invented excuses have you fed someone in this room?"
+        "fr": "Mater l’épisode suivant sans la personne avec qui t’as commencé la série : oui ou non ?",
+        "en": "Watching the next episode without the person you started the show with: yes or no?"
       }
     ],
     "hints": [
       {
-        "fr": "Ils étaient « tout petits », bien sûr.",
-        "en": "They were 'tiny ones', of course."
+        "fr": "Chaud, froid, sel, sucre. Un seul geste.",
+        "en": "Hot, cold, salt, sugar. One move."
       },
       {
-        "fr": "Ta réponse à cette question en sera probablement un de plus.",
-        "en": "Your answer to this question will probably be another one."
-      }
-    ]
-  },
-  {
-    "id": "q_open_tabs",
-    "question": {
-      "fr": "Combien d’onglets sont ouverts sur ton navigateur, là ?",
-      "en": "How many browser tabs do you have open right now?"
-    },
-    "answers": [
-      {
-        "fr": "Trois, je suis quelqu’un de sain",
-        "en": "Three — I’m a healthy person"
-      },
-      {
-        "fr": "Une bonne quinzaine",
-        "en": "Fifteen or so"
-      },
-      {
-        "fr": "Un nombre illégal",
-        "en": "An illegal number"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien d’abonnements tu payes encore pour des applis que t’as supprimées ?",
-        "en": "How many subscriptions are you still paying on apps you deleted months ago?"
-      },
-      {
-        "fr": "Combien de conversations t’as archivées juste pour éviter de répondre ?",
-        "en": "How many chats have you archived just to dodge replying?"
-      },
-      {
-        "fr": "Combien de gens t’as promis de rappeler depuis 2024 ?",
-        "en": "How many people have you been 'about to text back' since 2024?"
-      },
-      {
-        "fr": "Combien de screenshots de conversations privées dorment dans ta galerie, prêts à servir ?",
-        "en": "How many screenshots of private conversations are you keeping armed and ready?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Le chaos, aligné en haut d’un écran.",
-        "en": "The chaos lines up across the top of a screen."
-      },
-      {
-        "fr": "Chrome supplie. Tu réponds « plus tard ».",
-        "en": "Chrome is begging. You said ‘later’."
-      }
-    ]
-  },
-  {
-    "id": "q_zombie_movie",
-    "question": {
-      "fr": "Combien de temps tu survivrais dans un film de zombies ?",
-      "en": "How long would you survive in a zombie movie?"
-    },
-    "answers": [
-      {
-        "fr": "Dix minutes max",
-        "en": "Ten minutes, tops"
-      },
-      {
-        "fr": "Jusqu’à la moitié",
-        "en": "About halfway through"
-      },
-      {
-        "fr": "Jusqu’au bout, évidemment",
-        "en": "All the way, obviously"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de temps tu survivrais perdu en forêt avec 4 % de batterie ?",
-        "en": "How long would you survive lost in a forest on 4% battery?"
-      },
-      {
-        "fr": "Combien de temps tu tiendrais en cavale, toi qui postes ta position en story ?",
-        "en": "How long would you last on the run when you post your location to your story?"
-      },
-      {
-        "fr": "Combien de temps tu survivrais si tes potes répétaient tout ce que tu dis sur eux ?",
-        "en": "How long would you survive if your mates repeated everything you say about them?"
-      },
-      {
-        "fr": "Combien de temps tu tiendrais si ce groupe votait qui sacrifier en premier ?",
-        "en": "How long would you last if this group voted who to sacrifice first?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Ton cardio devient d’un coup une question de vie ou de mort.",
-        "en": "Your cardio just became a life-or-death subject."
-      },
-      {
-        "fr": "Vise la tête. Et te cache pas dans la cave.",
-        "en": "Aim for the head. And don’t hide in the basement."
+        "fr": "Ça se passe au drive et personne s’excuse.",
+        "en": "It happens at the drive-thru and nobody apologises."
       }
     ]
   },
   {
     "id": "q_shower_sing",
     "question": {
-      "fr": "Est-ce que tu chantes sous la douche ?",
-      "en": "Do you sing in the shower?"
+      "fr": "Tu chantes sous la douche, oui ou non ?",
+      "en": "Do you sing in the shower, yes or no?"
     },
     "answers": [
       {
@@ -2766,20 +2619,20 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "Est-ce que tu pisses sous la douche ?",
-        "en": "Do you pee in the shower?"
-      },
-      {
-        "fr": "Est-ce que tu pleures sous la douche, version clip triste ?",
-        "en": "Do you cry in the shower like it’s a music video?"
-      },
-      {
-        "fr": "Est-ce que tu rejoues tes vieilles embrouilles à voix haute pour enfin les gagner ?",
+        "fr": "Tu rejoues tes vieilles embrouilles à voix haute pour enfin les gagner, oui ou non ?",
         "en": "Do you re-run old arguments out loud so you finally win them?"
       },
       {
-        "fr": "Est-ce que tu répètes le discours pour l’enterrement imaginaire de tes ennemis ?",
+        "fr": "Tu pleures sous la douche en mode clip triste, oui ou non ?",
+        "en": "Do you cry in the shower like it’s a sad music video?"
+      },
+      {
+        "fr": "Tu répètes le discours pour l’enterrement imaginaire de tes ennemis, oui ou non ?",
         "en": "Do you rehearse the speech for your enemies’ imaginary funerals?"
+      },
+      {
+        "fr": "Tu refais en boucle une conversation que t’aurais dû gagner face à quelqu’un d’ici, oui ou non ?",
+        "en": "Do you keep replaying a comeback you should’ve landed on someone in this room?"
       }
     ],
     "hints": [
@@ -2794,10 +2647,157 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ]
   },
   {
+    "id": "q_lottery_call",
+    "question": {
+      "fr": "Tu appelles qui en premier si tu gagnes au loto ce soir ?",
+      "en": "Who do you call first if you win the lottery tonight?"
+    },
+    "answers": [
+      {
+        "fr": "Ma daronne",
+        "en": "My mum"
+      },
+      {
+        "fr": "Mon meilleur pote",
+        "en": "My best mate"
+      },
+      {
+        "fr": "Personne, je disparais",
+        "en": "No one — I vanish"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tu appelles qui pour enterrer un corps avant le lever du jour ?",
+        "en": "Who do you call to help bury a body before sunrise?"
+      },
+      {
+        "fr": "Qui reçoit ton vocal de 11 minutes quand tu craques à 3 h du mat ?",
+        "en": "Who gets the 11-minute voice note when you fall apart at 3am?"
+      },
+      {
+        "fr": "Tu préviens qui en premier si tu dois quitter le pays cette nuit ?",
+        "en": "Who do you tell first if you had to leave the country tonight?"
+      },
+      {
+        "fr": "Qui te défendrait si tout le monde ici se retournait contre toi, là, maintenant ?",
+        "en": "Who would take your side if everyone in this room turned on you right now?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Beaucoup de zéros, d’un seul coup.",
+        "en": "A stupid number of zeros, all at once."
+      },
+      {
+        "fr": "Ça commence au tabac. Ça finit avec des cousins inconnus qui veulent « juste un petit prêt ».",
+        "en": "Starts with a scratchcard. Ends with cousins you’ve never met asking for a small loan."
+      }
+    ]
+  },
+  {
+    "id": "q_zombie_movie",
+    "question": {
+      "fr": "Tu survis combien de temps dans un film de zombies ?",
+      "en": "How long do you survive in a zombie movie?"
+    },
+    "answers": [
+      {
+        "fr": "Dix minutes max",
+        "en": "Ten minutes, tops"
+      },
+      {
+        "fr": "Jusqu’à la moitié",
+        "en": "About halfway through"
+      },
+      {
+        "fr": "Jusqu’au bout, évidemment",
+        "en": "All the way, obviously"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tu survis combien de temps en cavale, toi qui postes ta position en story ?",
+        "en": "How long do you last on the run when you post your location to your story?"
+      },
+      {
+        "fr": "Tu survis combien de temps si tes potes répètent tout ce que tu dis sur eux ?",
+        "en": "How long do you survive if your mates repeat everything you say about them?"
+      },
+      {
+        "fr": "Tu tiens combien de temps si ce groupe vote qui balancer aux zombies en premier ?",
+        "en": "How long do you last if this group votes who to throw to the zombies first?"
+      },
+      {
+        "fr": "Tu survis combien de temps si on coupe le wifi et qu’il faut faire la conversation ?",
+        "en": "How long do you survive if the wifi dies and you have to make actual conversation?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Ton cardio devient d’un coup une question de vie ou de mort.",
+        "en": "Your cardio just became a life-or-death subject."
+      },
+      {
+        "fr": "Vise la tête. Et te planque pas dans la cave.",
+        "en": "Aim for the head. And don’t hide in the basement."
+      }
+    ]
+  },
+  {
+    "id": "q_screen_time",
+    "question": {
+      "fr": "C’est quoi ton temps d’écran quotidien, le vrai chiffre ?",
+      "en": "What’s your daily screen time — the real number?"
+    },
+    "answers": [
+      {
+        "fr": "Moins de 3 heures",
+        "en": "Under three hours"
+      },
+      {
+        "fr": "Entre 4 et 6 heures",
+        "en": "Four to six hours"
+      },
+      {
+        "fr": "Chiffre classé secret défense",
+        "en": "That number is classified"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Ton téléphone passe combien de temps aux toilettes avec toi, par jour ?",
+        "en": "How many hours a day is your phone in the bathroom with you?"
+      },
+      {
+        "fr": "T’as scrollé combien d’heures hier soir au lieu de dormir ?",
+        "en": "How many hours did you scroll last night instead of sleeping?"
+      },
+      {
+        "fr": "Tu passes combien d’heures par jour sur la vie de gens qui savent même pas que t’existes ?",
+        "en": "How many hours a day do you spend on people who don’t know you exist?"
+      },
+      {
+        "fr": "Tu passes combien de temps par semaine sur le profil de quelqu’un que t’es censé avoir oublié ?",
+        "en": "How many hours a week do you spend on the profile of someone you’re supposed to be over?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Ton tel tient les comptes. Il est pas fier de toi.",
+        "en": "Your phone keeps the receipts. It’s not proud of you."
+      },
+      {
+        "fr": "Le rapport tombe le dimanche. Tu le swipes sans le lire.",
+        "en": "The report drops every Sunday. You swipe it away unread."
+      }
+    ]
+  },
+  {
     "id": "q_birthday_planner",
     "question": {
-      "fr": "À qui tu confierais l’organisation de ton anniversaire ?",
-      "en": "Who would you trust to plan your birthday party?"
+      "fr": "Tu confierais l’organisation de ton anniv à qui dans cette pièce ?",
+      "en": "Who in this room would you trust to plan your birthday?"
     },
     "answers": [
       {
@@ -2815,20 +2815,20 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "À qui tu confierais ton téléphone déverrouillé pendant une heure ?",
-        "en": "Who would you hand your unlocked phone to for an hour?"
+        "fr": "Tu confierais ton téléphone déverrouillé pendant une heure à qui ici ?",
+        "en": "Who in this room would you hand your unlocked phone to for an hour?"
       },
       {
-        "fr": "À qui dans cette pièce tu confierais ton alibi pour la nuit du 14 ?",
-        "en": "Who in this room gets trusted with your alibi for the night of the 14th?"
+        "fr": "Qui dans cette pièce tu chargerais d’effacer ton historique si tu meurs demain ?",
+        "en": "Who in this room gets the job of clearing your search history if you die tomorrow?"
       },
       {
-        "fr": "À qui tu confierais la mission d’effacer ton historique si tu meurs demain ?",
-        "en": "Who’s in charge of clearing your search history if you die tomorrow?"
+        "fr": "À qui ici tu confierais ton alibi pour une nuit où t’as fait n’importe quoi ?",
+        "en": "Who in this room gets trusted with your alibi for a night you’d rather forget?"
       },
       {
-        "fr": "À qui tu confierais ton chat pendant un mois ?",
-        "en": "Who would you trust to keep your cat alive for a month?"
+        "fr": "Qui dans cette pièce tu laisserais seul une heure chez toi, sans stresser ?",
+        "en": "Who in this room could you leave alone in your flat for an hour without sweating?"
       }
     ],
     "hints": [
@@ -2839,6 +2839,104 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
       {
         "fr": "Rate ça et tu l’entendras à chaque bougie jusqu’à la fin.",
         "en": "Get it wrong and you’ll hear about it at every candle until the end."
+      }
+    ]
+  },
+  {
+    "id": "q_room_wild",
+    "question": {
+      "fr": "Qui dans cette pièce survivrait le plus longtemps dans la jungle ?",
+      "en": "Who in this room would survive longest in the jungle?"
+    },
+    "answers": [
+      {
+        "fr": "La personne la plus calme d’entre nous",
+        "en": "The calmest one here"
+      },
+      {
+        "fr": "La plus sportive",
+        "en": "The sporty one"
+      },
+      {
+        "fr": "Moi, évidemment",
+        "en": "Me, obviously"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Qui dans cette pièce vendrait tout le monde pour 50 balles, sans négocier ?",
+        "en": "Who in this room would sell everyone out for twenty quid, no negotiation?"
+      },
+      {
+        "fr": "Qui ici se barre en premier à la seconde où ça tourne mal ?",
+        "en": "Who’s first out the door the second it goes wrong?"
+      },
+      {
+        "fr": "Qui dans cette pièce mentirait le mieux à la police ?",
+        "en": "Who in this room would lie to the police most convincingly?"
+      },
+      {
+        "fr": "Qui ici gagnerait la baston générale si la lumière s’éteignait, là ?",
+        "en": "Who in this room wins the all-out brawl if the lights cut out right now?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Moustiques, boue, zéro réseau.",
+        "en": "Mosquitoes, mud, zero signal."
+      },
+      {
+        "fr": "Faudra manger des trucs qui bougent encore.",
+        "en": "You will be eating things that are still moving."
+      }
+    ]
+  },
+  {
+    "id": "q_karaoke_song",
+    "question": {
+      "fr": "Au karaoké, tu choisis quoi pour le moment de gloire absolu ?",
+      "en": "At karaoke, what do you pick for your moment of pure glory?"
+    },
+    "answers": [
+      {
+        "fr": "Un classique que toute la salle connaît",
+        "en": "A classic the whole room knows"
+      },
+      {
+        "fr": "Une ballade triste, à fond, les yeux fermés",
+        "en": "A sad ballad, full volume, eyes closed"
+      },
+      {
+        "fr": "Un truc impossible, juste pour le drame",
+        "en": "Something impossible, purely for the drama"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "Tu mets quoi pour faire croire à un date que t’as bon goût ?",
+        "en": "What do you put on to convince a date you’ve got taste?"
+      },
+      {
+        "fr": "Tu relances quoi exprès en boucle quand t’es en dép pour aggraver le truc ?",
+        "en": "What do you replay on purpose to make the sad even worse?"
+      },
+      {
+        "fr": "Tu connais quelle chanson par cœur sans aucune fierté à l’assumer ?",
+        "en": "What song do you know every word to with zero pride attached?"
+      },
+      {
+        "fr": "Tu choisirais quoi comme musique d’entrée si tu devais affronter quelqu’un d’ici sur un ring ?",
+        "en": "What’s your walk-out song if you had to face someone in this room in a ring?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Y’a un micro. Et un public qui pardonne rien.",
+        "en": "There’s a mic. And a crowd that forgives nothing."
+      },
+      {
+        "fr": "Les paroles défilent. Ta dignité aussi.",
+        "en": "The lyrics scroll by. So does your dignity."
       }
     ]
   },
@@ -2892,59 +2990,10 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ]
   },
   {
-    "id": "q_gps_rating",
-    "question": {
-      "fr": "Ton sens de l’orientation, c’est combien sur 10 ?",
-      "en": "Your sense of direction, out of 10?"
-    },
-    "answers": [
-      {
-        "fr": "Un petit 3",
-        "en": "A generous 3"
-      },
-      {
-        "fr": "6, ça dépend des jours",
-        "en": "A 6 — depends on the day"
-      },
-      {
-        "fr": "9, modestie incluse",
-        "en": "A 9, modesty included"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Ta gestion de ton argent la dernière semaine du mois, c’est combien sur 10 ?",
-        "en": "Your money management in the last week of the month, out of 10?"
-      },
-      {
-        "fr": "Ton honnêteté quand tu dis « j’écoute », c’est combien sur 10 ?",
-        "en": "Your honesty level when you say 'I’m listening', out of 10?"
-      },
-      {
-        "fr": "Ton objectivité quand tu racontes une embrouille où t’étais impliqué, sur 10 ?",
-        "en": "Your objectivity retelling an argument you were in, out of 10?"
-      },
-      {
-        "fr": "Ta sincérité quand tu dis « non mais ça te va trop bien », c’est combien sur 10 ?",
-        "en": "Your sincerity when you say 'no, it actually suits you', out of 10?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Le Nord, pour toi, c’est une opinion.",
-        "en": "North is an opinion to you."
-      },
-      {
-        "fr": "Sans GPS, tu refais trois fois le même rond-point.",
-        "en": "Without GPS you’d still be circling the same roundabout."
-      }
-    ]
-  },
-  {
     "id": "q_fire_grab",
     "question": {
-      "fr": "Tu sauves quoi en premier si ça prend feu chez toi (humains et animaux déjà dehors) ?",
-      "en": "What do you grab first if your place catches fire (humans and pets already safe)?"
+      "fr": "Ça prend feu chez toi (humains et animaux déjà dehors) : tu sauves quoi en premier ?",
+      "en": "Your place is on fire (humans and pets already safe): what do you grab first?"
     },
     "answers": [
       {
@@ -2956,26 +3005,26 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
         "en": "My laptop — my whole life is in there"
       },
       {
-        "fr": "Un truc sentimental et inutile",
-        "en": "Something sentimental and useless"
+        "fr": "Un truc sentimental et complètement inutile",
+        "en": "Something sentimental and completely useless"
       }
     ],
     "decoys": [
       {
-        "fr": "Tes parents débarquent dans 60 secondes : tu caches quoi en premier ?",
-        "en": "Your parents are 60 seconds away: what do you hide first?"
+        "fr": "Tes parents débarquent dans 60 secondes : tu fais disparaître quoi en premier ?",
+        "en": "Your parents are 60 seconds away: what disappears first?"
       },
       {
         "fr": "Tu pars en cavale cette nuit : tu prends quoi ?",
         "en": "You’re going on the run tonight: what comes with you?"
       },
       {
-        "fr": "Le groupe fouille ta chambre dans une minute : tu fais disparaître quoi ?",
-        "en": "This group searches your room in one minute: what disappears first?"
+        "fr": "Le groupe fouille ta chambre dans une minute : tu planques quoi en urgence ?",
+        "en": "This group searches your room in one minute: what do you panic-hide?"
       },
       {
-        "fr": "Tu glisses quoi dans un bunker pour un an ?",
-        "en": "What’s coming with you into a bunker for a year?"
+        "fr": "Ton ex te rend tes affaires demain : tu réclames quoi en premier ?",
+        "en": "Your ex hands your stuff back tomorrow: what do you ask for first?"
       }
     ],
     "hints": [
@@ -2984,8 +3033,57 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
         "en": "Something is literally burning."
       },
       {
-        "fr": "Les humains sont déjà dehors, c’est dans l’énoncé.",
+        "fr": "Les humains sont déjà dehors, c’est dans l’énoncé. Lis le brief.",
         "en": "The humans are already safe. Read the brief."
+      }
+    ]
+  },
+  {
+    "id": "q_unknown_number",
+    "question": {
+      "fr": "Un numéro inconnu t’appelle : tu fais quoi ?",
+      "en": "An unknown number calls you: what do you do?"
+    },
+    "answers": [
+      {
+        "fr": "Je réponds, je vis dangereusement",
+        "en": "I answer — I live dangerously"
+      },
+      {
+        "fr": "Je fixe l’écran jusqu’à ce que ça s’arrête",
+        "en": "I stare at the screen until it stops"
+      },
+      {
+        "fr": "Refus immédiat, sans pitié",
+        "en": "Instant decline, no mercy"
+      }
+    ],
+    "decoys": [
+      {
+        "fr": "La personne que t’évites depuis trois semaines t’appelle : tu fais quoi ?",
+        "en": "The person you’ve dodged for three weeks calls: what do you do?"
+      },
+      {
+        "fr": "Ton boss appelle alors que t’es « malade » : tu fais quoi ?",
+        "en": "Your boss calls while you’re 'off sick': what do you do?"
+      },
+      {
+        "fr": "Le proprio appelle et le loyer est « en route » : tu fais quoi ?",
+        "en": "The landlord calls and rent is 'on its way': what do you do?"
+      },
+      {
+        "fr": "Ton date d’hier soir te rappelle alors que t’avais déjà décidé de ghoster : tu fais quoi ?",
+        "en": "Last night’s date rings you back after you’d already decided to ghost: what do you do?"
+      }
+    ],
+    "hints": [
+      {
+        "fr": "Pas dans tes contacts. Donc une menace.",
+        "en": "Not in your contacts. Therefore a threat."
+      },
+      {
+        "fr": "Banque, robot, ou pire : un humain qui veut te parler de vive voix.",
+        "en": "Bank, robot, or worse: a human who wants to talk using their voice."
       }
     ]
   },
@@ -3011,20 +3109,20 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "C’était quand, la dernière fois que t’as appelé tes grands-parents sans avoir besoin d’un truc ?",
+        "fr": "C’était quand, la dernière fois que t’as appelé tes grands-parents sans rien avoir à demander ?",
         "en": "When did you last call your grandparents without needing something?"
-      },
-      {
-        "fr": "C’était quand, la dernière fois que t’as changé tes draps ?",
-        "en": "When did you last change your sheets?"
       },
       {
         "fr": "C’était quand, la dernière fois que t’as présenté des excuses en premier ?",
         "en": "When did you last apologise first?"
       },
       {
-        "fr": "C’était quand, la dernière fois que t’as remboursé sans qu’on te relance ?",
+        "fr": "C’était quand, la dernière fois que t’as remboursé quelqu’un sans qu’on te relance ?",
         "en": "When did you last pay someone back without being chased for it?"
+      },
+      {
+        "fr": "C’était quand, la dernière fois que t’as répondu du premier coup à quelqu’un de cette pièce ?",
+        "en": "When did you last reply on the first try to someone in this room?"
       }
     ],
     "hints": [
@@ -3039,206 +3137,59 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ]
   },
   {
-    "id": "q_room_wild",
+    "id": "q_alarm_count",
     "question": {
-      "fr": "Qui dans cette pièce survivrait le plus longtemps dans la jungle ?",
-      "en": "Who in this room would survive longest in the jungle?"
+      "fr": "Tu programmes combien d’alarmes pour réussir à te lever ?",
+      "en": "How many alarms do you set just to get yourself up?"
     },
     "answers": [
       {
-        "fr": "La personne la plus calme d’entre nous",
-        "en": "The calmest one here"
+        "fr": "Une seule, comme un adulte",
+        "en": "Just one, like an adult"
       },
       {
-        "fr": "La plus sportive",
-        "en": "The sporty one"
+        "fr": "Trois, bien espacées",
+        "en": "Three, carefully spaced"
       },
       {
-        "fr": "Moi, évidemment",
-        "en": "Me, obviously"
+        "fr": "Une symphonie entière",
+        "en": "An entire symphony"
       }
     ],
     "decoys": [
       {
-        "fr": "Qui dans cette pièce vendrait tout le monde pour 50 balles, sans négocier ?",
-        "en": "Who in this room would sell everyone out for twenty quid, no negotiation?"
+        "fr": "Il te faut combien de rappels avant de rendre l’argent que tu dois ?",
+        "en": "How many reminders does it take before you pay someone back?"
       },
       {
-        "fr": "Qui ici part en premier à la seconde où ça tourne mal ?",
-        "en": "Who’s first out the door the second it goes wrong?"
+        "fr": "Tu donnes combien de chances avant de rayer quelqu’un de ta vie ?",
+        "en": "How many chances do you give before cutting someone off?"
       },
       {
-        "fr": "Qui dans cette pièce mentirait le mieux à la police ?",
-        "en": "Who in this room would lie to the police most convincingly?"
+        "fr": "Tu ignores combien de messages de quelqu’un de cette pièce avant de répondre ?",
+        "en": "How many texts from someone in this room do you ignore before replying?"
       },
       {
-        "fr": "Qui ici gagne la baston générale si la lumière s’éteint ?",
-        "en": "Who wins the all-out brawl if the lights go out?"
+        "fr": "Tu rédiges combien d’excuses en brouillon avant d’annuler un plan à la dernière minute ?",
+        "en": "How many excuses do you draft before bailing on plans last-minute?"
       }
     ],
     "hints": [
       {
-        "fr": "Moustiques, boue, zéro réseau.",
-        "en": "Mosquitoes, mud, zero signal."
+        "fr": "Ça se joue très tôt. Tu perds presque chaque matin.",
+        "en": "It happens early. You lose most mornings."
       },
       {
-        "fr": "Faudra manger des trucs qui bougent encore.",
-        "en": "You will be eating things that are still moving."
-      }
-    ]
-  },
-  {
-    "id": "q_fries_mcflurry",
-    "question": {
-      "fr": "Tremper ses frites dans le McFlurry : oui ou non ?",
-      "en": "Dipping chips in a McFlurry: yes or no?"
-    },
-    "answers": [
-      {
-        "fr": "Oui, et j’assume",
-        "en": "Yes, and I stand by it"
-      },
-      {
-        "fr": "Non, c’est un crime",
-        "en": "No — it’s a crime"
-      },
-      {
-        "fr": "Ça dépend de mon humeur",
-        "en": "Depends on my mood"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Goûter le raisin au supermarché avant de payer : oui ou non ?",
-        "en": "Eating a grape in the supermarket before paying: yes or no?"
-      },
-      {
-        "fr": "Fouiller l’armoire à pharmacie quand t’es invité chez quelqu’un : oui ou non ?",
-        "en": "Snooping the bathroom cabinet at someone’s house: yes or no?"
-      },
-      {
-        "fr": "Re-offrir un cadeau à la personne qui te l’a offert : oui ou non ?",
-        "en": "Regifting a present back to the person who gave it to you: yes or no?"
-      },
-      {
-        "fr": "Regarder l’épisode suivant sans la personne avec qui t’as commencé la série : oui ou non ?",
-        "en": "Watching the next episode without the person you started the show with: yes or no?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Chaud, froid, sel, sucre. Un seul geste.",
-        "en": "Hot, cold, salt, sugar. One move."
-      },
-      {
-        "fr": "Ça se passe au drive et personne s’excuse.",
-        "en": "It happens at the drive-thru and nobody apologises."
-      }
-    ]
-  },
-  {
-    "id": "q_screen_time",
-    "question": {
-      "fr": "C’est quoi ton temps d’écran quotidien, honnêtement ?",
-      "en": "What’s your daily screen time, honestly?"
-    },
-    "answers": [
-      {
-        "fr": "Moins de 3 heures",
-        "en": "Under three hours"
-      },
-      {
-        "fr": "Entre 4 et 6 heures",
-        "en": "Four to six hours"
-      },
-      {
-        "fr": "Chiffre classé secret défense",
-        "en": "That number is classified"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de temps ton téléphone passe aux toilettes avec toi, par jour ?",
-        "en": "How many hours a day is your phone in the bathroom with you?"
-      },
-      {
-        "fr": "Combien d’heures t’as scrollé hier soir au lieu de dormir ?",
-        "en": "How many hours did you scroll last night instead of sleeping?"
-      },
-      {
-        "fr": "Combien d’heures par jour tu passes sur la vie de gens qui savent pas que t’existes ?",
-        "en": "How many hours a day do you spend on people who don’t know you exist?"
-      },
-      {
-        "fr": "Tu dors combien d’heures en vrai, pas le chiffre que tu donnes au médecin ?",
-        "en": "How many hours do you actually sleep — not the number you tell your doctor?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Ton tel tient les comptes. Il est pas fier de toi.",
-        "en": "Your phone keeps the receipts. It’s not proud of you."
-      },
-      {
-        "fr": "Le rapport tombe le dimanche. Tu le swipes sans le lire.",
-        "en": "The report drops every Sunday. You swipe it away unread."
-      }
-    ]
-  },
-  {
-    "id": "q_invisible_day",
-    "question": {
-      "fr": "Tu ferais quoi en premier si tu étais invisible pendant 24 h ?",
-      "en": "What’s the first thing you’d do if you were invisible for 24 hours?"
-    },
-    "answers": [
-      {
-        "fr": "Des trucs que je ne peux pas avouer ici",
-        "en": "Things I can’t admit here"
-      },
-      {
-        "fr": "Espionner les gens, clairement",
-        "en": "Spy on people, obviously"
-      },
-      {
-        "fr": "Juste dormir, en vrai",
-        "en": "Honestly? Just nap"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Tu ferais quoi si t’étais sûr de jamais te faire prendre ?",
-        "en": "What would you do if you knew you’d never get caught?"
-      },
-      {
-        "fr": "Tu ferais quoi avec le téléphone de ton meilleur pote pendant 24 h ?",
-        "en": "What would you do with your best mate’s phone for 24 hours?"
-      },
-      {
-        "fr": "Tu ferais quoi si tout le monde t’oubliait pendant une semaine ?",
-        "en": "What would you do if everyone forgot you existed for a week?"
-      },
-      {
-        "fr": "Tu ferais quoi, seul pendant une heure chez quelqu’un de cette pièce ?",
-        "en": "What would you do alone for an hour in the home of someone in this room?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Zéro témoin, zéro conséquence.",
-        "en": "Zero witnesses, zero consequences."
-      },
-      {
-        "fr": "Personne ne te verrait. Personne.",
-        "en": "No one would see you. No one."
+        "fr": "7 h 00. 7 h 10. 7 h 20. Et t’es quand même en retard.",
+        "en": "7:00. 7:10. 7:20. You’re still late."
       }
     ]
   },
   {
     "id": "q_3am_snack",
     "question": {
-      "fr": "C’est quoi ton snack de 3 h du matin ?",
-      "en": "What’s your 3am snack of choice?"
+      "fr": "C’est quoi ton snack de 3 h du matin, sans mentir ?",
+      "en": "What’s your 3am snack of choice — no lying?"
     },
     "answers": [
       {
@@ -3256,7 +3207,7 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
     ],
     "decoys": [
       {
-        "fr": "Tu manges quoi debout devant le frigo quand personne regarde ?",
+        "fr": "Tu manges quoi, debout devant le frigo, quand personne regarde ?",
         "en": "What do you eat standing at the fridge when no one’s watching?"
       },
       {
@@ -3280,251 +3231,6 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
       {
         "fr": "Le frigo t’éclaire comme un suspect en garde à vue.",
         "en": "The fridge lights you up like a suspect in an interrogation room."
-      }
-    ]
-  },
-  {
-    "id": "q_unknown_number",
-    "question": {
-      "fr": "Tu fais quoi quand un numéro inconnu t’appelle ?",
-      "en": "What do you do when an unknown number calls you?"
-    },
-    "answers": [
-      {
-        "fr": "Je réponds, je vis dangereusement",
-        "en": "I answer — I live dangerously"
-      },
-      {
-        "fr": "Je fixe l’écran jusqu’à ce que ça s’arrête",
-        "en": "I stare at the screen until it stops"
-      },
-      {
-        "fr": "Refus immédiat, sans pitié",
-        "en": "Instant decline, no mercy"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Tu fais quoi quand ta daronne appelle en pleine soirée ?",
-        "en": "What do you do when your mum calls mid-party?"
-      },
-      {
-        "fr": "Tu fais quoi quand la personne que t’évites depuis trois semaines t’appelle ?",
-        "en": "What do you do when the person you’ve dodged for three weeks calls?"
-      },
-      {
-        "fr": "Tu fais quoi quand ton boss appelle alors que t’es « malade » ?",
-        "en": "What do you do when your boss calls while you’re 'off sick'?"
-      },
-      {
-        "fr": "Tu fais quoi quand le proprio appelle et que le loyer est « en route » ?",
-        "en": "What do you do when the landlord calls and rent is 'on its way'?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Pas dans tes contacts. Donc une menace.",
-        "en": "Not in your contacts. Therefore a threat."
-      },
-      {
-        "fr": "Banque, robot, ou pire : un humain qui veut te parler de vive voix.",
-        "en": "Bank, robot, or worse: a human who wants to talk using their voice."
-      }
-    ]
-  },
-  {
-    "id": "q_santa_age",
-    "question": {
-      "fr": "À quel âge tu as arrêté de croire au Père Noël ?",
-      "en": "How old were you when you stopped believing in Santa?"
-    },
-    "answers": [
-      {
-        "fr": "Vers 5-6 ans",
-        "en": "Around five or six"
-      },
-      {
-        "fr": "Vers 8-9 ans",
-        "en": "Eight or nine"
-      },
-      {
-        "fr": "Bien trop tard, merci",
-        "en": "Way too late, thank you"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "À quel âge t’as fait ta dernière vraie crise en public ?",
-        "en": "How old were you at your last full public meltdown?"
-      },
-      {
-        "fr": "À quel âge t’as compris que tes parents improvisaient complètement ?",
-        "en": "How old were you when you realised your parents were winging it?"
-      },
-      {
-        "fr": "À quel âge t’as compris que t’étais pas l’enfant préféré ?",
-        "en": "How old were you when you worked out you weren’t the favourite child?"
-      },
-      {
-        "fr": "À quel âge t’as menti sur ton âge pour la dernière fois ?",
-        "en": "How old were you the last time you lied about your age?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Une enfance se termine dans cette question.",
-        "en": "A childhood ends inside this question."
-      },
-      {
-        "fr": "Le bonhomme en rouge avait la voix de ton oncle.",
-        "en": "The man in red had your uncle’s voice."
-      }
-    ]
-  },
-  {
-    "id": "q_plant_survival",
-    "question": {
-      "fr": "Combien de temps survit une plante chez toi ?",
-      "en": "How long does a houseplant survive at your place?"
-    },
-    "answers": [
-      {
-        "fr": "Des années, je suis très responsable",
-        "en": "Years — I’m very responsible"
-      },
-      {
-        "fr": "Quelques mois, avec de la chance",
-        "en": "A few months, with luck"
-      },
-      {
-        "fr": "Le temps du trajet retour",
-        "en": "About as long as the ride home"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de temps survit une tablette de chocolat chez toi ?",
-        "en": "How long does a chocolate bar survive at your place?"
-      },
-      {
-        "fr": "Combien de temps tiennent tes résolutions de janvier, précisément ?",
-        "en": "How long do your January resolutions last, precisely?"
-      },
-      {
-        "fr": "Combien de temps survit ta motivation quand un pote annonce « 4e étage sans ascenseur » ?",
-        "en": "How long does your enthusiasm survive once a mate says 'fourth floor, no lift'?"
-      },
-      {
-        "fr": "Combien de temps survit un secret une fois qu’il arrive dans ton oreille ?",
-        "en": "How long does a secret survive once it reaches your ear?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Ça demandait de l’eau. Juste de l’eau.",
-        "en": "It needed water. Just water."
-      },
-      {
-        "fr": "Même le cactus a préféré partir.",
-        "en": "Even the cactus chose death."
-      }
-    ]
-  },
-  {
-    "id": "q_alarm_count",
-    "question": {
-      "fr": "Combien d’alarmes tu programmes pour te lever le matin ?",
-      "en": "How many alarms do you set to get up in the morning?"
-    },
-    "answers": [
-      {
-        "fr": "Une seule, comme un adulte",
-        "en": "Just one, like an adult"
-      },
-      {
-        "fr": "Trois, bien espacées",
-        "en": "Three, carefully spaced"
-      },
-      {
-        "fr": "Une symphonie entière",
-        "en": "An entire symphony"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de rappels il faut avant que tu rendes l’argent ?",
-        "en": "How many reminders does it take before you pay someone back?"
-      },
-      {
-        "fr": "Combien d’excuses tu rédiges en brouillon avant d’annuler un plan ?",
-        "en": "How many excuses do you draft before cancelling plans?"
-      },
-      {
-        "fr": "Combien de chances tu donnes avant de rayer quelqu’un de ta vie ?",
-        "en": "How many chances do you give before cutting someone off?"
-      },
-      {
-        "fr": "Combien de messages de quelqu’un de cette pièce t’ignores avant de répondre ?",
-        "en": "How many texts from someone in this room do you ignore before replying?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Ça se joue très tôt. Tu perds presque chaque matin.",
-        "en": "It happens early. You lose most mornings."
-      },
-      {
-        "fr": "7 h 00. 7 h 10. 7 h 20. Et t’es quand même en retard.",
-        "en": "7:00. 7:10. 7:20. You’re still late."
-      }
-    ]
-  },
-  {
-    "id": "q_petty_theft",
-    "question": {
-      "fr": "C’est quoi le truc le plus minable que t’aies jamais volé ?",
-      "en": "What’s the most pathetic thing you’ve ever stolen?"
-    },
-    "answers": [
-      {
-        "fr": "Rien, je suis honnête, moi",
-        "en": "Nothing — I’m the honest one"
-      },
-      {
-        "fr": "Un truc dans un hôtel",
-        "en": "Something from a hotel"
-      },
-      {
-        "fr": "Je plaide le droit au silence",
-        "en": "No comment."
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "C’est quoi le truc le plus cher que t’aies cassé sans jamais le dire ?",
-        "en": "What’s the most expensive thing you’ve broken and never owned up to?"
-      },
-      {
-        "fr": "C’est quoi le truc le plus bizarre que t’aies ramené d’une soirée ?",
-        "en": "What’s the weirdest thing you’ve ever taken home from a party?"
-      },
-      {
-        "fr": "C’est quoi le truc que t’as « emprunté » à quelqu’un de cette pièce et jamais rendu ?",
-        "en": "What have you 'borrowed' off someone in this room and never returned?"
-      },
-      {
-        "fr": "C’est quoi le truc le plus discutable que t’aies sauvé d’une poubelle ?",
-        "en": "What’s the most questionable thing you’ve rescued from a bin?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Personne n’a porté plainte. Pour l’instant.",
-        "en": "No charges were filed. Yet."
-      },
-      {
-        "fr": "Ça n’en valait même pas la peine. C’est ça le pire.",
-        "en": "It wasn’t even worth it. That’s the worst part."
       }
     ]
   },
@@ -3554,11 +3260,11 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
         "en": "What’s your excuse when you cancel at 6:55 for 7 o’clock plans?"
       },
       {
-        "fr": "C’est quoi ton excuse pour ne pas prêter d’argent ?",
-        "en": "What’s your excuse for not lending money?"
+        "fr": "C’est quoi ton excuse pour jamais prêter d’argent ?",
+        "en": "What’s your excuse for never lending money?"
       },
       {
-        "fr": "C’est quoi l’excuse que t’as déjà servie à quelqu’un de cette pièce ?",
+        "fr": "C’est quoi l’excuse que t’as déjà servie à quelqu’un présent dans cette pièce ?",
         "en": "What’s the excuse you’ve already used on someone in this room?"
       },
       {
@@ -3574,349 +3280,6 @@ export const DEVINE_LA_QUESTION_PACK: ContentPack<SpotlightGuessContent> = {
       {
         "fr": "Tu vas arriver. Au dessert. Avec le sourire.",
         "en": "You’ll show up. At dessert. Smiling."
-      }
-    ]
-  },
-  {
-    "id": "q_message_reply",
-    "question": {
-      "fr": "Tu mets combien de temps à répondre à un message ?",
-      "en": "How long does it take you to reply to a text?"
-    },
-    "answers": [
-      {
-        "fr": "Moins d’une minute, toujours",
-        "en": "Under a minute, every time"
-      },
-      {
-        "fr": "Quelques heures, le temps de vivre",
-        "en": "A few hours — I have a life to live"
-      },
-      {
-        "fr": "Trois à cinq jours ouvrés",
-        "en": "Three to five business days"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Tu mets combien de temps à rendre l’argent qu’on te prête ?",
-        "en": "How long does it take you to pay back money you owe?"
-      },
-      {
-        "fr": "Tu mets combien de temps à t’excuser quand t’as tort ?",
-        "en": "How long does it take you to apologise when you’re wrong?"
-      },
-      {
-        "fr": "Tu mets combien de temps à répondre quand la question t’arrange pas ?",
-        "en": "How long does it take you to reply when the question doesn’t suit you?"
-      },
-      {
-        "fr": "Tu mets combien de temps à répondre à quelqu’un de cette pièce, précisément ?",
-        "en": "How long do texts from someone in this room wait, specifically?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Quelqu’un fixe son écran par ta faute, là, maintenant.",
-        "en": "Someone is staring at their screen because of you, right now."
-      },
-      {
-        "fr": "Vu à 14 h 32. Il est 23 h.",
-        "en": "Seen at 2:32pm. It’s eleven at night."
-      }
-    ]
-  },
-  {
-    "id": "q_towel_wash",
-    "question": {
-      "fr": "Tu laves ta serviette de bain au bout de combien de temps ?",
-      "en": "How long does your bath towel go between washes?"
-    },
-    "answers": [
-      {
-        "fr": "Quelques jours, je suis quelqu’un de sain",
-        "en": "A few days — I’m a functioning person"
-      },
-      {
-        "fr": "Une semaine, comme tout le monde",
-        "en": "A week, like everyone else"
-      },
-      {
-        "fr": "Le temps, c’est une construction",
-        "en": "Time is a construct"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Tu laves ton jean au bout de combien de temps ?",
-        "en": "How long does a pair of jeans go between washes?"
-      },
-      {
-        "fr": "Tu tiens une rancune pendant combien de temps ?",
-        "en": "How long do you hold a grudge?"
-      },
-      {
-        "fr": "Tu gardes les messages de ton ex pendant combien de temps ?",
-        "en": "How long do you keep your ex’s texts?"
-      },
-      {
-        "fr": "Tu gardes un screen compromettant sur un pote pendant combien de temps ?",
-        "en": "How long do you sit on an incriminating screenshot of a mate?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Coton, humidité, déni.",
-        "en": "Cotton, moisture, denial."
-      },
-      {
-        "fr": "Elle est accrochée derrière une porte et elle a tout vu.",
-        "en": "It hangs behind a door and it has seen things."
-      }
-    ]
-  },
-  {
-    "id": "q_battery_now",
-    "question": {
-      "fr": "Ton téléphone est à combien de batterie, là, tout de suite ?",
-      "en": "What’s your phone battery at, right now?"
-    },
-    "answers": [
-      {
-        "fr": "Au-dessus de 80 %, discipline",
-        "en": "Above 80% — discipline"
-      },
-      {
-        "fr": "Autour de 50 %, ça vit",
-        "en": "Around 50%, it’s fine"
-      },
-      {
-        "fr": "En mode survie, sous 15 %",
-        "en": "Survival mode, under 15%"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Il te reste quel pourcentage de ton salaire, sachant qu’on est le 15 ?",
-        "en": "What percent of your pay is left, given it’s the 15th?"
-      },
-      {
-        "fr": "Ta patience avec les gens de cette pièce, ce soir, elle est à combien ?",
-        "en": "Your patience with the people in this room, tonight — what’s it at?"
-      },
-      {
-        "fr": "T’as suivi quel pourcentage de cette conversation, honnêtement ?",
-        "en": "What percentage of this conversation have you actually followed?"
-      },
-      {
-        "fr": "Ton envie d’être ici, là, tout de suite, elle est à combien ?",
-        "en": "How much do you actually want to be here right now?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Une jauge précise, sur un objet précis.",
-        "en": "A specific gauge on a specific object."
-      },
-      {
-        "fr": "Le chargeur de quelqu’un d’autre est déjà dans ta poche.",
-        "en": "Someone else’s charger is already in your pocket."
-      }
-    ]
-  },
-  {
-    "id": "q_owe_money",
-    "question": {
-      "fr": "Là, tout de suite, tu dois de l’argent à combien de personnes ?",
-      "en": "Right now, how many people do you owe money to?"
-    },
-    "answers": [
-      {
-        "fr": "Zéro, je suis carré",
-        "en": "Zero — my books are clean"
-      },
-      {
-        "fr": "Une ou deux, c’est géré",
-        "en": "One or two, it’s handled"
-      },
-      {
-        "fr": "On va pas faire les comptes ce soir",
-        "en": "We are not doing the maths tonight"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de personnes ici te doivent des sous et font semblant d’avoir oublié ?",
-        "en": "How many people in this room owe you money and are pretending they forgot?"
-      },
-      {
-        "fr": "Combien de personnes connaissent ton code de téléphone ?",
-        "en": "How many people know your phone passcode?"
-      },
-      {
-        "fr": "Combien de personnes tu salues en soirée sans aucune idée de leur prénom ?",
-        "en": "How many people do you greet on a night out with zero idea of their name?"
-      },
-      {
-        "fr": "Combien de personnes t’as retirées des réseaux sans qu’elles s’en aperçoivent ?",
-        "en": "How many people have you quietly unfollowed who still haven’t noticed?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Des gens attendent. Poliment. Pour l’instant.",
-        "en": "People are waiting. Politely. For now."
-      },
-      {
-        "fr": "Chaque notif Lydia te fait un petit pic de stress. C’est lié.",
-        "en": "Every payment-app ping gives you a tiny spike of dread. It’s related."
-      }
-    ]
-  },
-  {
-    "id": "q_lost_keys",
-    "question": {
-      "fr": "Combien de fois par semaine tu cherches tes clés ?",
-      "en": "How many times a week do you hunt for your keys?"
-    },
-    "answers": [
-      {
-        "fr": "Jamais, chaque chose a sa place",
-        "en": "Never — everything has its place"
-      },
-      {
-        "fr": "Deux ou trois fois, classique",
-        "en": "Two or three times, standard"
-      },
-      {
-        "fr": "C’est mon cardio quotidien",
-        "en": "It’s my daily cardio"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Combien de fois par semaine tu cherches le téléphone que tu as dans la main ?",
-        "en": "How many times a week do you look for the phone that’s already in your hand?"
-      },
-      {
-        "fr": "Combien de fois par semaine tu ressors la même anecdote aux mêmes personnes ?",
-        "en": "How many times a week do you retell the same story to the same people?"
-      },
-      {
-        "fr": "Combien de fois par semaine tu vas voir le profil de ton ex ?",
-        "en": "How many times a week do you check your ex’s profile?"
-      },
-      {
-        "fr": "Combien de fois par semaine tu parles de quelqu’un de cette pièce dans son dos ?",
-        "en": "How many times a week do you talk about someone in this room behind their back?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Toujours à la seconde exacte où tu dois partir.",
-        "en": "Always at the exact second you need to leave."
-      },
-      {
-        "fr": "Le canapé les digère. La science a tranché.",
-        "en": "The sofa digests them. Science has ruled."
-      }
-    ]
-  },
-  {
-    "id": "q_spider_home",
-    "question": {
-      "fr": "Tu fais quoi quand tu croises une araignée chez toi ?",
-      "en": "What do you do when you find a spider in your home?"
-    },
-    "answers": [
-      {
-        "fr": "Je l’escorte dehors poliment",
-        "en": "I politely escort it outside"
-      },
-      {
-        "fr": "Pacte de non-agression immédiat",
-        "en": "Immediate non-aggression pact"
-      },
-      {
-        "fr": "Je déménage, c’est chez elle maintenant",
-        "en": "I move out — it lives there now"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "Tu fais quoi quand quelqu’un s’assoit à côté de toi dans un bus vide ?",
-        "en": "What do you do when a stranger sits next to you on an empty bus?"
-      },
-      {
-        "fr": "Tu fais quoi quand le pote relou de ton pote s’incruste à ta soirée ?",
-        "en": "What do you do when your mate’s annoying mate invites himself to your night?"
-      },
-      {
-        "fr": "Tu fais quoi quand deux de tes potes s’embrouillent devant toi ?",
-        "en": "What do you do when two of your mates start beefing in front of you?"
-      },
-      {
-        "fr": "Tu fais quoi quand ton ex débarque à la même soirée ?",
-        "en": "What do you do when your ex walks into the same party?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Huit pattes, zéro loyer.",
-        "en": "Eight legs. Pays no rent."
-      },
-      {
-        "fr": "Techniquement, elle était là avant toi.",
-        "en": "Technically it was there first."
-      }
-    ]
-  },
-  {
-    "id": "q_karaoke_song",
-    "question": {
-      "fr": "Tu choisis quoi comme chanson au karaoké ?",
-      "en": "What song do you go for at karaoke?"
-    },
-    "answers": [
-      {
-        "fr": "Un classique que tout le monde connaît",
-        "en": "A classic everyone knows"
-      },
-      {
-        "fr": "Une ballade triste, à fond",
-        "en": "A sad ballad, full volume"
-      },
-      {
-        "fr": "Un truc impossible, pour le drame",
-        "en": "Something impossible, for the drama"
-      }
-    ],
-    "decoys": [
-      {
-        "fr": "C’est quoi la chanson que tu mets pour faire croire que t’as bon goût ?",
-        "en": "What song do you play to fake good taste?"
-      },
-      {
-        "fr": "C’est quoi la chanson que tu relances exprès quand t’es en dép ?",
-        "en": "What’s the song you replay on purpose to make the sad worse?"
-      },
-      {
-        "fr": "C’est quoi la chanson que tu connais par cœur sans fierté ?",
-        "en": "What song do you know every word to, no pride attached?"
-      },
-      {
-        "fr": "Tu choisirais quoi comme musique d’entrée sur un ring ?",
-        "en": "What would your walk-out song be in a boxing ring?"
-      }
-    ],
-    "hints": [
-      {
-        "fr": "Y’a un micro. Et un public qui pardonne rien.",
-        "en": "There’s a mic. And a crowd that forgives nothing."
-      },
-      {
-        "fr": "Les paroles défilent. Ta dignité aussi.",
-        "en": "The lyrics scroll by. So does your dignity."
       }
     ]
   }

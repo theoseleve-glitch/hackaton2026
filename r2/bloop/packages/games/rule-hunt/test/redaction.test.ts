@@ -4,7 +4,8 @@ import { describe, expect, it } from 'vitest';
 import { leakedSecrets } from '@bloop/engine';
 import type { RuleHuntState, RuleHuntView } from '@bloop/game-rule-hunt';
 import {
-  accuse, content, deadline, FIVE, followersOf, game, openGuess, toLive, toTribunal, tribunalVote,
+  accuse, content, deadline, FIVE, flagBreak, followersOf, game, noteSuspicious, openGuess, toLive,
+  toSpotlight, toTribunal, tribunalVote, walkDeadlines,
 } from './fixtures.js';
 
 const OUTSIDERS = ['spectator-not-in-roster', '__proto__'] as const;
@@ -113,18 +114,28 @@ describe('invariant 2+4+5 — state-only fields never serialize into any view', 
     states.push(s);
     s = game.reduce(s, openGuess(s.detectives[0]!, 40_000)).state;
     states.push(s);
-    for (let i = 0; i < 25 && s.phase !== 'over'; i++) {
-      s = game.reduce(s, deadline(100_000 + i)).state;
-      states.push(s);
-    }
-    expect(s.phase).toBe('over');
-    for (const state of states) {
+    s = game.reduce(s, deadline(60_000)).state; // guess deadline -> resume live
+    // A heat-check spotlight with HIDDEN flag + note buffers populated.
+    let spot = toSpotlight(s);
+    const det = spot.detectives[0]!;
+    const flagger = followersOf(spot).find((f) => f !== spot.spotlight!.target && spot.eliminated[f] !== true)!;
+    spot = game.reduce(spot, flagBreak(flagger, 'flag', spot.segmentStartedAt + 1)).state;
+    spot = game.reduce(spot, noteSuspicious(det, 'suspicious', spot.segmentStartedAt + 2)).state;
+    states.push(spot);
+    // Drain the rest to over through every remaining forced spotlight.
+    const { state: end, keys } = walkDeadlines(spot, { startAt: 100_000 });
+    expect(end.phase).toBe('over');
+    expect(keys.some((k) => k.startsWith('spotlight:'))).toBe(true);
+    for (const state of [...states, end]) {
       for (const viewer of [...state.players, ...OUTSIDERS]) {
         const str = json(state, viewer);
         expect(str).not.toContain('trueCandidateIndex');
         expect(str).not.toContain('detectiveOrder');
         expect(str).not.toContain('"seed"');
         expect(str).not.toContain('"votes"');
+        // the hidden heat-check buffers never serialize into any view
+        expect(str).not.toContain('"flags"');
+        expect(str).not.toContain('"notes"');
       }
     }
   });
@@ -195,8 +206,7 @@ describe('reveal and over go public; every view stays JSON-serializable', () => 
   });
 
   it('unknown viewers get a safe, role-less projection at every phase of a deadline walk', () => {
-    let s = game.init('s', FIVE, content(3));
-    for (let i = 0; i < 30; i++) {
+    const checkOutsiders = (s: RuleHuntState): void => {
       for (const viewer of OUTSIDERS) {
         const v: RuleHuntView = game.view(s, viewer);
         expect(JSON.parse(JSON.stringify(v))).toEqual(v);
@@ -207,10 +217,23 @@ describe('reveal and over go public; every view stays JSON-serializable', () => 
       }
       // both outsider classes see the exact same projection
       expect(game.view(s, OUTSIDERS[0])).toEqual(game.view(s, OUTSIDERS[1]));
-      if (s.phase === 'over') break;
-      s = game.reduce(s, deadline(100_000 + i)).state;
+    };
+    let s = game.init('s', FIVE, content(3));
+    let clock = 100_000;
+    const phasesSeen = new Set<string>();
+    checkOutsiders(s);
+    phasesSeen.add(s.phase);
+    for (let i = 0; i < 200 && s.phase !== 'over'; i++) {
+      const dur = game.phaseDurationMs(s);
+      if (dur === null) break;
+      clock += Math.max(1, dur);
+      s = game.reduce(s, deadline(clock)).state;
+      checkOutsiders(s);
+      phasesSeen.add(s.phase);
     }
     expect(s.phase).toBe('over');
+    // the walk really visited the new forced-spotlight phase
+    expect(phasesSeen.has('spotlight')).toBe(true);
   });
 
   it('roster views are JSON-serializable at every phase, including tribunal and guess', () => {

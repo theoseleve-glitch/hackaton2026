@@ -6,12 +6,12 @@
     {
       "id": "dlm-001-robot-hiphop",
       "text": {
-        "fr": "Un robot qui apprend le hip-hop sur un tuto YouTube en 144p",
-        "en": "A robot learning hip-hop from a 144p YouTube tutorial that keeps buffering"
+        "fr": "Un robot qui apprend le hip-hop sur un tuto YouTube en 144p qui bufferise pile sur le move clé",
+        "en": "A robot learning hip-hop from a 144p YouTube tutorial that buffers right on the key move"
       },
       "hint": {
-        "fr": "Lag, freeze, reboot en plein move. Le salon a parié sur le crash. Donne-leur le bug du siècle.",
-        "en": "lag, freeze, blue-screen mid-move. the room bet on the crash. give them the full system failure"
+        "fr": "Lag, freeze, reboot en plein milieu d'un move. Le salon a déjà parié sur le crash. Déçois-les pas : offre-leur le bug du siècle, écran bleu compris.",
+        "en": "lag, freeze, full reboot mid-move. the room already bet on the crash. don't let them down: hand them the bug of the century, blue screen and all"
       },
       "category": "dance",
       "difficulty": 1,
@@ -86,12 +86,12 @@
     {
       "id": "dlm-006-dog-reunion",
       "text": {
-        "fr": "Un chien qui retrouve son humain parti 4 minutes acheter le pain",
-        "en": "A dog reuniting with its human after a 4-minute trip to the bins"
+        "fr": "Un chien qui retrouve son humain parti 4 minutes sortir la poubelle",
+        "en": "A dog reuniting with its human after a 4-minute trip to take the bins out"
       },
       "hint": {
-        "fr": "Quatre minutes = quatre ans. Pleure, saute, tourne. Si personne chiale dans le salon, t'as raté ta vie de chien.",
-        "en": "four minutes = four years. cry, spin, collapse. if nobody in this room tears up, you failed the species"
+        "fr": "Quatre minutes = quatre ans de guerre. Pleure, saute, tourne, fais pipi de joie. Personne chiale dans le salon ? T'as déshonoré l'espèce.",
+        "en": "four minutes = four years at war. cry, spin, pee a little from joy. nobody in this room tears up? you disgraced the whole species"
       },
       "category": "animals",
       "difficulty": 1,
@@ -558,10 +558,10 @@
         "en": "lift them, spin them, fight with them. you are losing an argument with thin air. in front of witnesses"
       },
       "category": "dance",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "dance", "mime", "absurd"]
+      "tags": ["funny", "dance", "mime", "absurd", "multi-role"]
     },
     {
       "id": "dlm-036-zumba-6am",
@@ -804,20 +804,20 @@
       "tags": ["funny", "sports", "party", "loud"]
     },
     {
-      "id": "dlm-051-cyclist-climb",
+      "id": "dlm-051-spin-class",
       "text": {
-        "fr": "Un coureur du Tour dans le dernier col, qui meurt à l'intérieur mais sourit pour le drone",
-        "en": "A Tour de France rider on the final climb, dying inside but smiling for the drone shot"
+        "fr": "Le cours de RPM où le coach hurle « ON LÂCHE RIEN » et toi t'as lâché à la minute deux",
+        "en": "The spin class where the coach screams 'LEAVE IT ALL ON THE BIKE' and you left it all at minute two"
       },
       "hint": {
-        "fr": "Danse sur les pédales, grimace d'apocalypse. Drone : sourire, attaque. Drone parti : le néant. Répète jusqu'au sommet.",
-        "en": "dance on the pedals, apocalypse grimace. drone up: smile, attack. drone gone: the void. loop it to the summit"
+        "fr": "Mets la résistance à zéro en douce, mime l'effort de ta vie, hoche la tête au coach comme un soldat. Il te regarde. Visse le bouton. Mens.",
+        "en": "secretly drop the resistance to zero, mime the effort of your life, nod at the coach like a soldier. he's watching. twist the dial. lie with your whole body"
       },
       "category": "sports",
       "difficulty": 2,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "sports", "pain", "mime"]
+      "tags": ["funny", "sports", "gym", "relatable"]
     },
     {
       "id": "dlm-052-diver-10m",
@@ -868,20 +868,20 @@
       "tags": ["funny", "sports", "fail", "zen"]
     },
     {
-      "id": "dlm-055-pingpong-slowmo",
+      "id": "dlm-055-podium-anthem",
       "text": {
-        "fr": "Une finale de ping-pong rejouée intégralement au ralenti, sueur dramatique incluse",
-        "en": "A ping-pong final replayed entirely in slow motion, dramatic sweat included"
+        "fr": "Sur la plus haute marche du podium olympique quand l'hymne démarre — et tu connais pas un seul mot de ton propre hymne national",
+        "en": "On the top step of the Olympic podium when the anthem starts — and you don't know a single word of your own national anthem"
       },
       "hint": {
-        "fr": "Dix secondes par échange. Plongeon image par image, cri grave sans fin. T'es les DEUX joueurs ET la balle. Souffre.",
-        "en": "ten seconds per rally. frame-by-frame dive, one endless bass scream. you are BOTH players AND the ball. suffer"
+        "fr": "Main sur le cœur, larme officielle, bouche qui mime du vide, marmonne « na na naaa » avec conviction. La caméra zoome sur tes lèvres. Tout le pays regarde. Bluffe l'hymne entier.",
+        "en": "hand on heart, official tear, mouth miming pure nothing, mumble 'na na naaa' with total conviction. the camera zooms on your lips. the whole country is watching. bluff the entire anthem"
       },
       "category": "sports",
-      "difficulty": 3,
+      "difficulty": 2,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "sports", "slowmo", "drama"]
+      "tags": ["funny", "sports", "drama"]
     },
     {
       "id": "dlm-056-chips-cinema",
@@ -1220,20 +1220,20 @@
       "tags": ["funny", "relatable", "diy", "sound-rich"]
     },
     {
-      "id": "dlm-077-suitcase-sit",
+      "id": "dlm-077-self-checkout",
       "text": {
-        "fr": "Fermer une valise trop pleine en t'asseyant dessus de tout ton désespoir",
-        "en": "Closing an overstuffed suitcase by sitting on it with your full body weight and despair"
+        "fr": "La caisse automatique qui hurle « article non reconnu » devant la queue entière alors que t'as RIEN volé",
+        "en": "The self-checkout screaming 'unexpected item in the bagging area' to the entire queue when you stole NOTHING"
       },
       "hint": {
-        "fr": "Compression, rebonds, la fermeture avance dent par dent. Victoire ! Elle se rouvre dans ton dos. Elle t'a entendu fêter.",
-        "en": "compress, bounce, the zip gains one tooth at a time. victory! it reopens behind your back. it heard you celebrate"
+        "fr": "Scan confiant, bip, la machine t'accuse, tu lèves les mains comme innocent, l'employé arrive avec sa carte magique, la queue te juge. Re-scan. Re-accusation. T'es coupable de rien et de tout.",
+        "en": "confident scan, beep, the machine accuses you, hands up like you're innocent, the staff member arrives with the magic card, the queue judges. re-scan. re-accusation. guilty of nothing and everything"
       },
       "category": "everyday",
       "difficulty": 1,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "relatable", "travel", "struggle"]
+      "tags": ["funny", "relatable", "struggle", "sound-rich"]
     },
     {
       "id": "dlm-078-smoke-detector",
@@ -1262,10 +1262,10 @@
         "en": "u-turn, u-turn of the u-turn, infinite roundabout. you trusted the machine over your own mother. you're in a field now"
       },
       "category": "everyday",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "relatable", "driving", "sound-rich"]
+      "tags": ["funny", "relatable", "driving", "sound-rich", "multi-role"]
     },
     {
       "id": "dlm-080-lightsaber-solo",
@@ -1278,7 +1278,7 @@
         "en": "switch sides every swing, the vwoom is mandatory, villain monologue. defeat yourself. mourn yourself. avenge yourself"
       },
       "category": "cinema",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
       "tags": ["funny", "cinema", "multi-role", "sound-rich"]
@@ -1300,20 +1300,20 @@
       "tags": ["funny", "cinema", "horror", "fail"]
     },
     {
-      "id": "dlm-082-western-draw",
+      "id": "dlm-082-villain-monologue",
       "text": {
-        "fr": "Duel de western à midi pile : le dégainage dure quarante-cinq secondes entières",
-        "en": "A high-noon western standoff where the draw takes a full forty-five seconds"
+        "fr": "Le méchant qui explique tout son plan au héros ligoté, et qui se rend compte en parlant que son plan est complètement pourri",
+        "en": "The villain monologuing his master plan to the tied-up hero, slowly realizing mid-speech that the plan is genuinely terrible"
       },
       "hint": {
-        "fr": "Regard plissé, vent imaginaire, doigts qui frémissent au-dessus du colt. Dégaine au ralenti. Rate. Midi attendra.",
-        "en": "squint, imaginary tumbleweed, fingers twitching over the holster. slow-motion draw. miss. noon can wait. it has to"
+        "fr": "Rire machiavélique, geste théâtral, « et c'est là que… » puis le doute qui s'installe, la voix qui faiblit. Le héros hausse un sourcil. Tu le sais. Il le sait. Finis le monologue quand même.",
+        "en": "evil cackle, theatrical hand sweep, 'and THAT is when…' then the doubt creeps in, the voice falters. the hero raises one eyebrow. you know. he knows. finish the monologue anyway"
       },
       "category": "cinema",
       "difficulty": 1,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "cinema", "slowmo", "drama"]
+      "tags": ["funny", "cinema", "drama"]
     },
     {
       "id": "dlm-083-spy-lasers",
@@ -1518,10 +1518,10 @@
         "en": "brass, strings, timpani, the conductor: all of it, alone. the trumpet solo will destroy you. accept your fate. begin"
       },
       "category": "cinema",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "cinema", "music", "classic"]
+      "tags": ["funny", "cinema", "music", "classic", "multi-role"]
     },
     {
       "id": "dlm-096-trip-jog",
@@ -1716,20 +1716,20 @@
       "tags": ["funny", "cringe", "relatable", "fail"]
     },
     {
-      "id": "dlm-108-headphones-sing",
+      "id": "dlm-108-typo-boss",
       "text": {
-        "fr": "Chanter à tue-tête avec ton casque, sans savoir que tout le bus profite du concert",
-        "en": "Singing your heart out in headphones, unaware the whole bus is getting a free concert"
+        "fr": "Réaliser au ralenti que le message « il me soûle ce gros relou » est parti dans le groupe AVEC le relou dedans",
+        "en": "Realizing in slow motion that the text 'omg he's SO annoying' went to the group chat that includes him"
       },
       "hint": {
-        "fr": "Yeux fermés, refrain habité, montée dans les aigus… retrait d'écouteur fatal. Le bus connaît ta playlist honteuse.",
-        "en": "eyes closed, soulful chorus, going for the high note… the fatal earbud removal. the bus knows your shameful playlist"
+        "fr": "Pouce satisfait, deux secondes de paix, le « livré » se transforme en « lu », sueur froide, supprime pour tout le monde TROP TARD. Les points de suspension de sa réponse arrivent. Meurs.",
+        "en": "satisfied thumb, two seconds of peace, 'delivered' flips to 'seen', cold sweat, delete-for-everyone TOO LATE. the three dots of his reply appear. perish"
       },
       "category": "cringe",
       "difficulty": 1,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "cringe", "music", "loud"]
+      "tags": ["funny", "cringe", "relatable"]
     },
     {
       "id": "dlm-109-uncle-dance",
@@ -1748,20 +1748,20 @@
       "tags": ["funny", "cringe", "wedding", "dance"]
     },
     {
-      "id": "dlm-110-disco-hip",
+      "id": "dlm-110-wedding-tiktok",
       "text": {
-        "fr": "Un danseur disco dont la hanche se bloque en plein geste Travolta, devant tout le monde",
-        "en": "A disco dancer whose hip locks mid Travolta point in front of everyone"
+        "fr": "Toute la famille qui galère sur la choré TikTok au mariage : la mariée connaît les pas, tonton invente les siens, mamie est à contretemps total",
+        "en": "The whole family fumbling the TikTok dance at the wedding: the bride nails it, the uncle freestyles his own version, grandma is two beats behind everyone"
       },
       "hint": {
-        "fr": "Doigt vers le ciel, CRAC sonore, finis le show avec une moitié du corps. Le disco s'arrête pas pour une hanche.",
-        "en": "finger to the sky, audible CRACK, finish the show with half a body. disco stops for no man's hip. point THROUGH the pain"
+        "fr": "Joue les trois générations d'un coup : la pro sûre d'elle, le tonton qui suit RIEN mais à fond, mamie un temps en retard sur tout. Quelqu'un dans cette pièce, c'est mamie. Désigne-le pas. Mais vous savez.",
+        "en": "play all three generations at once: the confident pro, the uncle following NOTHING but committing fully, grandma a full beat behind everything. someone in this room is grandma. don't point. but everyone knows"
       },
       "category": "dance",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "retro", "physical"]
+      "tags": ["funny", "dance", "wedding", "multi-role"]
     },
     {
       "id": "dlm-111-kpop-elevator",
@@ -1812,14 +1812,14 @@
       "tags": ["funny", "loud", "sport"]
     },
     {
-      "id": "dlm-114-dramatic-death",
+      "id": "dlm-114-jumpscare-actor",
       "text": {
-        "fr": "Une scène de mort dramatique qui dure quatre fois trop longtemps",
-        "en": "A dramatic death scene that goes on four times longer than necessary"
+        "fr": "L'acteur de film d'horreur qui doit avoir peur d'un monstre que les effets spéciaux ajouteront en post-prod (un balai sur fond vert)",
+        "en": "The horror actor who has to be terrified of a monster the effects team will add later (it's a mop on a green screen)"
       },
       "hint": {
-        "fr": "Touché ! Adieux, faux départ, re-adieux, testament oral, rappel. Meurs encore. Le public veut rentrer. Refuse-leur ça.",
-        "en": "hit! farewell, false ending, more farewells, spoken-word will, encore. die again. the audience wants to leave. refuse"
+        "fr": "Fixe le balai comme si c'était la fin du monde, recule en hurlant, trébuche, supplie le balai. Le réalisateur crie « PLUS PEUR ». Le balai bouge même pas. Donne ta vie.",
+        "en": "stare at the mop like it's the end of days, back away screaming, trip, beg the mop for your life. the director yells 'MORE SCARED'. the mop does not move. give it everything"
       },
       "category": "cinema",
       "difficulty": 1,
@@ -1860,14 +1860,14 @@
       "tags": ["funny", "epic", "parody"]
     },
     {
-      "id": "dlm-117-shampoo-ad",
+      "id": "dlm-117-perfume-ad",
       "text": {
-        "fr": "Tourner une pub de shampoing : ralenti, crinière au vent, regard caméra",
-        "en": "Starring in a shampoo commercial: slow motion, mane in the wind, eyes on camera"
+        "fr": "La pub de parfum incompréhensible : tu marches dans un couloir au ralenti et tu murmures un seul mot vide de sens",
+        "en": "The perfume ad nobody understands: you walk down a corridor in slow motion and whisper one word that means nothing"
       },
       "hint": {
-        "fr": "Mouvements de crinière exagérés, même sans crinière. SURTOUT sans crinière. Le vent existe que pour toi.",
-        "en": "exaggerated mane flips, even with no mane. ESPECIALLY with no mane. the wind exists only for you"
+        "fr": "Démarche d'apesanteur, regard de tueur, retourne-toi PILE pour la caméra, souffle le mot « Obsession ». Ça veut rien dire. C'est l'art. Vends-le à 12 euros les 5 ml.",
+        "en": "weightless walk, killer stare, turn for the camera at the EXACT right moment, breathe the word 'Obsession'. it means nothing. it's art. sell it at twelve euros for 5ml"
       },
       "category": "cinema",
       "difficulty": 1,
@@ -1940,14 +1940,14 @@
       "tags": ["funny", "awkward", "social"]
     },
     {
-      "id": "dlm-122-javelin-keep",
+      "id": "dlm-122-dodgeball-target",
       "text": {
-        "fr": "Un lanceur de javelot qui oublie de lâcher le javelot et part avec",
-        "en": "A javelin thrower who forgets to let go and just leaves with the javelin"
+        "fr": "Le dernier survivant au ballon prisonnier qui réalise que les six autres l'ont choisi, lui, comme cible commune",
+        "en": "The last one standing in dodgeball realizing all six others have silently agreed: you are the shared target now"
       },
       "hint": {
-        "fr": "Course d'élan énorme, rotation, décollage AVEC le javelot. Atterris loin. Le record est invalide. Toi aussi.",
-        "en": "massive run-up, rotation, takeoff WITH the javelin. land somewhere far. the record is void. so are you"
+        "fr": "Esquive, esquive, supplie du regard, esquive encore. Ils sourient tous. C'est personnel maintenant. Quelqu'un dans cette pièce serait CE type-là. Mime sa fin.",
+        "en": "dodge, dodge, beg with your eyes, dodge again. they're all smiling. it's personal now. someone in this room would absolutely be that target. mime their ending"
       },
       "category": "sports",
       "difficulty": 2,
@@ -1982,10 +1982,10 @@
         "en": "count the babies, bossy wing at the lorries, recount. ONE is missing. full panic. he was in front the entire time"
       },
       "category": "animals",
-      "difficulty": 2,
+      "difficulty": 3,
       "intensity": "safe",
       "props": false,
-      "tags": ["funny", "animals", "wholesome"]
+      "tags": ["funny", "animals", "wholesome", "multi-role"]
     },
     {
       "id": "dlm-125-hamster-wheel",

@@ -35,22 +35,29 @@ describe('tracer voting', () => {
     expect(tracer.reduce(s0, vote('p1', 'ghost')).state.votes).toEqual({});
   });
 
-  it('transitions to reveal when all players have voted, scoring the most-voted', () => {
+  it('transitions to reveal when all players have voted, scoring the most-voted at verdict', () => {
     const s0 = tracer.init('s', players, content);
     const s1 = tracer.reduce(s0, vote('p1', 'p3')).state;
     const s2 = tracer.reduce(s1, vote('p2', 'p3')).state;
     const { state: s3 } = tracer.reduce(s2, vote('p3', 'p1'));
     expect(s3.phase).toBe('reveal');
-    expect(s3.scores).toEqual({ p1: 0, p2: 0, p3: 1 });
+    expect(s3.revealStep).toBe('suspense');
+    expect(s3.scores).toEqual({ p1: 0, p2: 0, p3: 0 }); // DEFERRED at suspense
+    // verdict beat commits the climb
+    const s4 = tracer.reduce(s3, { type: 'deadline', at: 1 }).state;
+    expect(s4.revealStep).toBe('verdict');
+    expect(s4.scores).toEqual({ p1: 0, p2: 0, p3: 1 });
   });
 
-  it('awards a point to every player tied for most votes', () => {
+  it('awards a point to every player tied for most votes (at verdict)', () => {
     const two = ['p1', 'p2'];
     const s0 = tracer.init('s', two, content);
     const s1 = tracer.reduce(s0, vote('p1', 'p2')).state;
     const { state: s2 } = tracer.reduce(s1, vote('p2', 'p1'));
     expect(s2.phase).toBe('reveal');
-    expect(s2.scores).toEqual({ p1: 1, p2: 1 });
+    expect(s2.scores).toEqual({ p1: 0, p2: 0 }); // DEFERRED at suspense
+    const s3 = tracer.reduce(s2, { type: 'deadline', at: 1 }).state;
+    expect(s3.scores).toEqual({ p1: 1, p2: 1 });
   });
 
   it('ignores actions outside the vote phase', () => {
@@ -74,8 +81,10 @@ describe('tracer voting', () => {
     const s1 = tracer.reduce(s0, vote('__proto__', 'p2')).state;
     const { state: s2 } = tracer.reduce(s1, vote('p2', '__proto__'));
     expect(s2.phase).toBe('reveal');
-    expect(s2.scores['__proto__']).toBe(1);
-    expect(s2.scores['p2']).toBe(1);
+    // scoring deferred to verdict beat
+    const s3 = tracer.reduce(s2, { type: 'deadline', at: 1 }).state;
+    expect(s3.scores['__proto__']).toBe(1);
+    expect(s3.scores['p2']).toBe(1);
   });
 
   it('does not count an absent "__proto__" player as having voted', () => {

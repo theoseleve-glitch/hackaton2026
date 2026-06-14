@@ -55,19 +55,19 @@ describe('init', () => {
 });
 
 describe('phase durations match the binding designs exactly', () => {
-  it('guided: 6s ready / 75s act / 15s verdict / 7s score', () => {
+  it('guided: 6s ready / 55s act / 12s verdict / 8s reveal', () => {
     let s = guided.init('s', P3, makeContent());
     expect(guided.phaseDurationMs(s)).toBe(6_000);
     s = fold(guided, s, [deadline(0)]);
-    expect(guided.phaseDurationMs(s)).toBe(75_000);
+    expect(guided.phaseDurationMs(s)).toBe(55_000);
     s = fold(guided, s, [act(s.performer, { kind: 'claimDone' }, 1)]);
-    expect(guided.phaseDurationMs(s)).toBe(15_000);
+    expect(guided.phaseDurationMs(s)).toBe(12_000);
     s = fold(guided, s, [deadline(2)]);
     expect(s.phase).toBe('reveal');
-    expect(guided.phaseDurationMs(s)).toBe(7_000);
+    expect(guided.phaseDurationMs(s)).toBe(8_000);
   });
 
-  it('credit: 4s handoff / 45s mime / 12s validate / 6s reveal', () => {
+  it('credit: 4s handoff / 45s mime / 12s validate / 8s reveal', () => {
     let s = credit.init('s', P3, makeContent());
     expect(credit.phaseDurationMs(s)).toBe(4_000);
     s = fold(credit, s, [deadline(0)]);
@@ -77,10 +77,10 @@ describe('phase durations match the binding designs exactly', () => {
     expect(s.phase).toBe('judge');
     expect(credit.phaseDurationMs(s)).toBe(12_000);
     s = fold(credit, s, [deadline(2)]);
-    expect(credit.phaseDurationMs(s)).toBe(6_000);
+    expect(credit.phaseDurationMs(s)).toBe(8_000);
   });
 
-  it('puppet: 30s perform / 10s verdict / 7s reveal / 6s scoreboard', () => {
+  it('puppet: 30s perform / 10s verdict / 8s reveal / 6s scoreboard', () => {
     let s = puppet.init('s', P3, makeContent());
     expect(puppet.phaseDurationMs(s)).toBe(30_000);
     s = fold(puppet, s, [deadline(0)]);
@@ -88,19 +88,19 @@ describe('phase durations match the binding designs exactly', () => {
     expect(puppet.phaseDurationMs(s)).toBe(10_000);
     s = fold(puppet, s, [deadline(1)]);
     expect(s.phase).toBe('reveal');
-    expect(puppet.phaseDurationMs(s)).toBe(7_000);
+    expect(puppet.phaseDurationMs(s)).toBe(8_000);
   });
 
-  it('rate: 15s brief / 30s perform / 15s rate / 7s reveal', () => {
+  it('rate: 8s brief / 30s perform / 12s rate / 8s reveal', () => {
     let s = rateMod.init('s', P4, makeContent());
-    expect(rateMod.phaseDurationMs(s)).toBe(15_000);
+    expect(rateMod.phaseDurationMs(s)).toBe(8_000);
     s = fold(rateMod, s, [deadline(0)]);
     expect(rateMod.phaseDurationMs(s)).toBe(30_000);
     s = fold(rateMod, s, [deadline(1)]);
     expect(s.phase).toBe('judge');
-    expect(rateMod.phaseDurationMs(s)).toBe(15_000);
+    expect(rateMod.phaseDurationMs(s)).toBe(12_000);
     s = fold(rateMod, s, [deadline(2)]);
-    expect(rateMod.phaseDurationMs(s)).toBe(7_000);
+    expect(rateMod.phaseDurationMs(s)).toBe(8_000);
   });
 });
 

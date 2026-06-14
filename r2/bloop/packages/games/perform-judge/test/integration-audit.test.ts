@@ -179,6 +179,30 @@ const AUDITS: ReadonlyArray<[string, RedactionAudit, PJModule, ContentPack<Perfo
       return [...out, ...nextDeckSecrets(state)];
     },
   }, createPerformJudge('double-le-mouvement', DOUBLE_LE_MOUVEMENT_CONFIG), DOUBLE_LE_MOUVEMENT_PACK],
+  // CC-4 react channel — DECLARE the new hidden value (per-player reaction). Two
+  // audience members SWAP their reaction enum across scripts so the PUBLIC
+  // per-enum reactionCounts stay byte-identical ({fire:1, cringe:1}) while each
+  // reactor's OWNER echo (myReaction) flips. This proves the hidden linkage
+  // "who reacted with what" never reaches a non-owner: only the public aggregate
+  // is shared. Stays in perform:0 (credit's 45s mime, performer p2 hasn't
+  // claimed) so the react buffer is live and unredacted at audit time.
+  ['devine-l-objet-react', {
+    players: ['p1', 'p2', 'p3', 'p4'],
+    seed: 'audit-seed',
+    // performer p2; audience reactors p1/p3/p4. p1 + p3 react, swapping enums.
+    events: [
+      { type: 'deadline', at: 1_000 },
+      pjAct('p1', { kind: 'react', reaction: 'fire' }, 2_000),
+      pjAct('p3', { kind: 'react', reaction: 'cringe' }, 3_000),
+    ],
+    eventsAlt: [
+      { type: 'deadline', at: 1_000 },
+      pjAct('p1', { kind: 'react', reaction: 'cringe' }, 2_000),
+      pjAct('p3', { kind: 'react', reaction: 'fire' }, 3_000),
+    ],
+    actors: ['p1', 'p3'],
+    secrets: nextDeckSecrets,
+  }, createPerformJudge('devine-l-objet-react', DEVINE_L_OBJET_CONFIG), DEVINE_L_OBJET_PACK],
 ];
 
 // ---------------------------------------------------------------------------

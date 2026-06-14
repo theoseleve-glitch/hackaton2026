@@ -12,6 +12,11 @@ describe('ruleHuntActionSchema', () => {
     expect(ruleHuntActionSchema.safeParse({ kind: 'openGuess' }).success).toBe(true);
     expect(ruleHuntActionSchema.safeParse({ kind: 'pickCandidate', index: 0 }).success).toBe(true);
     expect(ruleHuntActionSchema.safeParse({ kind: 'pickCandidate', index: 9 }).success).toBe(true);
+    // heat-check soft reads
+    expect(ruleHuntActionSchema.safeParse({ kind: 'flagBreak', flag: 'flag' }).success).toBe(true);
+    expect(ruleHuntActionSchema.safeParse({ kind: 'flagBreak', flag: 'clean' }).success).toBe(true);
+    expect(ruleHuntActionSchema.safeParse({ kind: 'noteSuspicious', note: 'suspicious' }).success).toBe(true);
+    expect(ruleHuntActionSchema.safeParse({ kind: 'noteSuspicious', note: 'clear' }).success).toBe(true);
   });
 
   it('rejects malformed payloads at the boundary', () => {
@@ -29,5 +34,9 @@ describe('ruleHuntActionSchema', () => {
     expect(ruleHuntActionSchema.safeParse({ kind: 'pickCandidate', index: 10 }).success).toBe(false);
     expect(ruleHuntActionSchema.safeParse({ kind: 'pickCandidate', index: 1.5 }).success).toBe(false);
     expect(ruleHuntActionSchema.safeParse({ kind: 'pickCandidate', index: '3' }).success).toBe(false);
+    expect(ruleHuntActionSchema.safeParse({ kind: 'flagBreak' }).success).toBe(false); // no flag
+    expect(ruleHuntActionSchema.safeParse({ kind: 'flagBreak', flag: 'maybe' }).success).toBe(false);
+    expect(ruleHuntActionSchema.safeParse({ kind: 'noteSuspicious' }).success).toBe(false); // no note
+    expect(ruleHuntActionSchema.safeParse({ kind: 'noteSuspicious', note: true }).success).toBe(false);
   });
 });

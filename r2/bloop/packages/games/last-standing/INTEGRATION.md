@@ -100,6 +100,9 @@ const lsWord = (playerId: string, at: number): GameEvent<unknown> =>
 
 const lsJudge = (playerId: string, vote: 'valid' | 'reject', at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'judge', vote }, at });
+
+const lsBet = (playerId: string, value: 'survives' | 'chokes', at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'bet', value }, at });
 ```
 
 Fixture entry (inside the `AUDITS` map literal):
@@ -108,17 +111,20 @@ Fixture entry (inside the `AUDITS` map literal):
   ['jeu-du-theme', {
     players: ['p1', 'p2', 'p3'],
     seed: 'audit-seed',
+    // P0-1 hidden value under audit: the spotlight survives/chokes SIDE-BET.
     // Under seed 'audit-seed' the seeded rotation of [p1,p2,p3] is [p3,p1,p2]:
-    // p3 opens the first say turn; p1 and p2 are the jury. Fixture state =
-    // mid-judge turn 1 with ONE ballot in flight (p1), p2 still expected —
-    // phase NOT advanced (fold fails loud if any event is rejected).
-    events: [lsDeadline(500), lsWord('p3', 1_000), lsJudge('p1', 'valid', 2_000)],
-    eventsAlt: [lsDeadline(500), lsWord('p3', 1_000), lsJudge('p1', 'reject', 2_000)],
+    // p3 opens the first say turn; p1 and p2 are eligible bettors. Fixture state
+    // = mid-say turn 1 with p1's side-bet in flight (the only phase the bet can
+    // surface). p1's call differs between scripts; non-actor invariance proves
+    // the spotBets value never leaks to p2, the spotlight p3, or any outsider.
+    // (fold fails loud if any event is rejected.)
+    events: [lsDeadline(500), lsBet('p1', 'survives', 1_000)],
+    eventsAlt: [lsDeadline(500), lsBet('p1', 'chokes', 1_000)],
     actors: ['p1'],
-    // Undrawn theme texts are the game's only VALUE secrets. Individual votes
-    // are structural ('valid'/'reject' strings legitimately appear in the
-    // owner echo) — the non-actor invariance check covers them. Letters are
-    // single chars (substring auditing cannot apply).
+    // Undrawn theme texts are the game's only VALUE secrets. Side-bets are
+    // structural ('survives'/'chokes' strings legitimately appear in the owner
+    // echo) — the non-actor invariance check covers them. Letters are single
+    // chars (substring auditing cannot apply).
     secrets: (state) => {
       const s = state as { deck: Array<{ theme: { fr: string; en: string } }>; themeCursor: number };
       return s.deck.slice(s.themeCursor).flatMap((i) => [{ value: i.theme.fr }, { value: i.theme.en }]);
@@ -126,11 +132,10 @@ Fixture entry (inside the `AUDITS` map literal):
   }],
 ```
 
-Walk budget: from this fixture state a deadline-only walk reaches `over` in 19
-steps (≤ 25): judge resolves valid (1 cast, 0 reject), then every later say
-turn times out — 3 rounds of 3 players converge fast. The same fixture +
-machinery is mirrored green in
-`packages/games/last-standing/test/integration-audit.test.ts`.
+Walk budget: from this fixture state (`say:t1`, a side-bet in flight) a
+deadline-only walk reaches `over` well within 25 steps: each say turn times out,
+3 rounds of 3 players converge fast. The same fixture + machinery is mirrored
+green in `packages/games/last-standing/test/integration-audit.test.ts`.
 
 ---
 
