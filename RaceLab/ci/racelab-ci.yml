@@ -1,0 +1,80 @@
+# RaceLab CI — green gate (B11). TEMPLATE, not yet active.
+#
+# ACTIVATE: move this file to the REPO ROOT at .github/workflows/racelab-ci.yml
+# (GitHub only reads workflows from <repo-root>/.github/workflows). It is left
+# here under RaceLab/ci/ so it doesn't start running CI on the shared monorepo
+# (which also holds r2/ and SETUP_RC/) until William chooses to.
+#
+# What it does: on any push/PR touching RaceLab/**, run every package's test
+# suite + typecheck (the engine eval is part of `engine` npm test) and the app
+# typecheck. Red blocks the merge. Zero secrets — the whole tier is pure/offline
+# at test time (no DB, no network, no deploy).
+
+name: racelab-ci
+on:
+  push:
+    paths: ["RaceLab/**"]
+  pull_request:
+    paths: ["RaceLab/**"]
+
+jobs:
+  packages:
+    name: "pkg: ${{ matrix.pkg }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg:
+          - schema
+          - engine
+          - kb
+          - storage
+          - account
+          - weather
+          - speedhive
+          - sessions
+          - sheets
+          - garage
+          - logbook
+          - tracks
+          - strategy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: install
+        working-directory: RaceLab/packages/${{ matrix.pkg }}
+        run: npm install --no-audit --no-fund
+      - name: typecheck
+        working-directory: RaceLab/packages/${{ matrix.pkg }}
+        run: npm run typecheck --if-present
+      - name: test
+        working-directory: RaceLab/packages/${{ matrix.pkg }}
+        run: npm test
+
+  server:
+    name: "server (Tier B)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - working-directory: RaceLab/server
+        run: npm install --no-audit --no-fund
+      - working-directory: RaceLab/server
+        run: npm run typecheck
+      - working-directory: RaceLab/server
+        run: npm test
+
+  app-typecheck:
+    name: "app: tsc"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - working-directory: RaceLab/apps/mobile
+        run: npm install --no-audit --no-fund
+      - working-directory: RaceLab/apps/mobile
+        run: npx tsc --noEmit
