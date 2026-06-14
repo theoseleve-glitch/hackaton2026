@@ -363,7 +363,9 @@ function NewSetupPopup({
       base = initSheets(template, new Date().toISOString());
     }
     const renamed = renameDraft(base, name.trim() || "New setup");
-    const { state, saved } = saveVersion(renamed, new Date().toISOString());
+    const result = saveVersion(renamed, new Date().toISOString());
+    if (!result.ok) return; // bad clock — unreachable with a real Date; never persist a NaN-id version
+    const { state, saved } = result;
     const versionId = saved?.id ?? state.draft_base_id;
     await AsyncStorage.setItem(key, serialize(state)).catch(() => {});
     onCreated(versionId, saved?.name ?? (name.trim() || "New setup"));

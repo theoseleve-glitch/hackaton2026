@@ -177,7 +177,12 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
         <Pressable
           style={[styles.action, changes.length === 0 && styles.actionDisabled]}
           disabled={changes.length === 0}
-          onPress={() => update((prev) => saveVersion(prev, new Date().toISOString()).state)}
+          onPress={() =>
+            update((prev) => {
+              const r = saveVersion(prev, new Date().toISOString());
+              return r.ok ? r.state : prev; // bad clock unreachable with a real Date; no-op if it ever fires
+            })
+          }
         >
           <Text style={styles.actionText}>💾 Save version</Text>
         </Pressable>
