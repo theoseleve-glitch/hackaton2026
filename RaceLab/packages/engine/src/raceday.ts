@@ -167,8 +167,15 @@ export function planRaceDay(
   }
 
   // ── KB-grounded adjustments per predicted tag (race-day bar applies) ────────
-  const adjustments: PlannedAdjustment[] = [];
+  // Collect candidates across ALL predicted tags, then resolve same-setting
+  // collisions across conditions before emitting: identical direction → ONE
+  // merged change (never advise two steps of the same lever — e.g. cold+wet both
+  // want thinner oil); opposite directions → refuse the setting (grounded or
+  // silent: we do not silently pick a winner between two grounded conditions —
+  // e.g. hot wants front oil thicker, wet wants it thinner). Keeps the
+  // one-change-at-a-time contract honest when conditions overlap.
   const predictedTags = new Set(predicted.keys());
+  const candidatesBySetting = new Map<string, RuleCandidate[]>();
   for (const [tag, trigger] of predicted) {
     const candidates = data.rules
       .filter(
@@ -192,7 +199,29 @@ export function planRaceDay(
       });
       continue;
     }
-    for (const rule of candidates) adjustments.push(toAdjustment(rule, tag, trigger, input));
+    for (const rule of candidates) {
+      const list = candidatesBySetting.get(rule.setting) ?? [];
+      list.push({ rule, tag, trigger });
+      candidatesBySetting.set(rule.setting, list);
+    }
+  }
+
+  const adjustments: PlannedAdjustment[] = [];
+  for (const setting of [...candidatesBySetting.keys()].sort()) {
+    const group = candidatesBySetting.get(setting)!;
+    const directions = new Set(group.map((g) => g.rule.direction));
+    if (directions.size > 1) {
+      const detail = [...group]
+        .sort((a, b) => (a.tag < b.tag ? -1 : a.tag > b.tag ? 1 : 0))
+        .map((g) => `${g.tag} → ${humanize(g.rule.direction)}`)
+        .join(", ");
+      refusals.push({
+        aspect: setting,
+        message: `Conditions disagree on ${humanize(setting)} (${detail}) — no single grounded call (grounded or silent); your decision on the day.`,
+      });
+      continue;
+    }
+    adjustments.push(mergeAdjustment(group, input));
   }
 
   const assumptions = [
@@ -221,6 +250,12 @@ export function planRaceDay(
   };
 }
 
+interface RuleCandidate {
+  rule: KBRule;
+  tag: string;
+  trigger: string;
+}
+
 function toAdjustment(
   rule: KBRule,
   tag: string,
@@ -239,5 +274,29 @@ function toAdjustment(
     confidence: rule.confidence,
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,
+  };
+}
+
+/** Resolve a same-setting/same-direction group into ONE adjustment. A single
+ *  candidate passes through unchanged; multiple conditions that call for the
+ *  identical change are merged — the change is made ONCE, with the fastest-revert
+ *  rule leading and every contributing rule cited, so a cold+wet day surfaces one
+ *  "thinner oil" step (not two) without dropping either citation. */
+function mergeAdjustment(group: RuleCandidate[], input: RaceDayInput): PlannedAdjustment {
+  const seen = new Set<string>();
+  const uniq = group
+    .filter((g) => (seen.has(g.rule.id) ? false : (seen.add(g.rule.id), true)))
+    .sort(
+      (a, b) =>
+        a.rule.reversal_cost_minutes - b.rule.reversal_cost_minutes ||
+        (a.rule.id < b.rule.id ? -1 : a.rule.id > b.rule.id ? 1 : 0),
+    );
+  const tags = [...new Set(uniq.map((g) => g.tag))].sort();
+  const base = toAdjustment(uniq[0].rule, tags.join("+"), uniq.map((g) => g.trigger).join("; "), input);
+  if (uniq.length === 1) return base;
+  return {
+    ...base,
+    citations: uniq.map((g) => g.rule.id),
+    mechanism: `${base.mechanism} Reinforced by ${tags.join(" + ")} — each calls for the same change, so make it ONCE.`,
   };
 }

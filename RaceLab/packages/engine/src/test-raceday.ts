@@ -158,27 +158,92 @@ const baseInput: RaceDayInput = {
   }
 }
 
-// ── Practice-worse excludes a rule → explicit refusal, not a guess ───────────
+// ── Practice-worse excludes a rule. Wet now has 3 grounded rules (clutch-softer
+//    + thinner front/rear shock oil), so excluding ONE degrades gracefully;
+//    excluding ALL → explicit refusal, never a guess. ─────────────────────────
 {
-  const withAvoid = {
+  // (a) exclude only the clutch rule → the shock-oil rules still ground wet
+  const oneAvoided = {
     ...baseInput,
     practice: learningTuples(
       [],
       [oc(track, "clutch_spring", "softer 1.00 → 0.95", ["kb-clutch-springs-softer-009"], "worse", "2026-06-13T09:00:00.000Z")],
     ),
   };
-  const r = planRaceDay(withAvoid, data);
-  check("avoid-rated wet rule → plan still ok", r.ok);
-  if (r.ok) {
+  const r1 = planRaceDay(oneAvoided, data);
+  check("avoid-rated wet rule → plan still ok", r1.ok);
+  if (r1.ok) {
     check(
       "rule rated worse here is excluded from adjustments",
-      !r.plan.adjustments.some((a) => a.citations.includes("kb-clutch-springs-softer-009")),
+      !r1.plan.adjustments.some((a) => a.citations.includes("kb-clutch-springs-softer-009")),
     );
     check(
-      "exclusion leaves wet ungrounded → explicit refusal",
-      r.plan.refusals.some((x) => x.aspect === "wet" && x.message.includes("grounded or silent")),
-      JSON.stringify(r.plan.refusals),
+      "one excluded wet rule still leaves wet grounded (shock-oil) → adjustment, no refusal",
+      r1.plan.adjustments.some((a) => a.condition_tag.includes("wet")) &&
+        !r1.plan.refusals.some((x) => x.aspect === "wet"),
+      JSON.stringify({ tags: r1.plan.adjustments.map((a) => a.condition_tag), refusals: r1.plan.refusals }),
     );
+  }
+  // (b) exclude EVERY wet-amplified rule → wet ungrounded → explicit refusal
+  const allAvoided = {
+    ...baseInput,
+    practice: learningTuples(
+      [],
+      [
+        oc(track, "clutch_spring", "softer", ["kb-clutch-springs-softer-009"], "worse", "2026-06-13T09:00:00.000Z"),
+        oc(track, "front_shock_oil", "thinner", ["kb-weather-wet-front-shock-thinner-304"], "worse", "2026-06-13T09:10:00.000Z"),
+        oc(track, "rear_shock_oil", "thinner", ["kb-weather-wet-rear-shock-thinner-305"], "worse", "2026-06-13T09:20:00.000Z"),
+      ],
+    ),
+  };
+  const r2 = planRaceDay(allAvoided, data);
+  if (r2.ok) {
+    check(
+      "ALL wet rules excluded → wet ungrounded → explicit refusal (grounded or silent)",
+      r2.plan.refusals.some((x) => x.aspect === "wet" && x.message.includes("grounded or silent")),
+      JSON.stringify(r2.plan.refusals),
+    );
+  }
+}
+
+// ── Cross-condition resolution: same setting + same direction → ONE merged
+//    change (never two steps); opposite directions → refuse the setting. ──────
+{
+  // cold + wet both call for THINNER front shock oil → one merged adjustment
+  const COLD_WET = [
+    obs({ observed_at: "2026-06-14T09:00:00.000Z", source: "auto", air_temp_c: 8, precipitation_probability_pct: 70, wind_speed_kmh: 10 }),
+  ];
+  const r = planRaceDay({ ...baseInput, practice: [], forecast: COLD_WET }, data);
+  check("cold+wet → ok plan", r.ok);
+  if (r.ok) {
+    const front = r.plan.adjustments.filter((a) => a.setting === "front_shock_oil");
+    check("cold+wet: front shock oil appears EXACTLY ONCE (no double-thinning)", front.length === 1, JSON.stringify(front.map((a) => a.condition_tag)));
+    check(
+      "cold+wet: the merged change cites BOTH the cold and wet rules",
+      front.length === 1 &&
+        front[0].citations.includes("kb-weather-cold-front-shock-thinner-302") &&
+        front[0].citations.includes("kb-weather-wet-front-shock-thinner-304"),
+      JSON.stringify(front[0]?.citations),
+    );
+    check("cold+wet: condition_tag records both conditions", front[0]?.condition_tag === "cold+wet", front[0]?.condition_tag);
+    check("cold+wet: merged mechanism says make it once", /make it ONCE/i.test(front[0]?.mechanism ?? ""), front[0]?.mechanism);
+    check("cold+wet: no contradictory refusal on front shock oil", !r.plan.refusals.some((x) => x.aspect === "front_shock_oil"));
+  }
+
+  // hot + wet DISAGREE on front shock oil (hot→thicker, wet→thinner) → refuse it
+  const HOT_WET = [
+    obs({ observed_at: "2026-06-14T13:00:00.000Z", source: "auto", air_temp_c: 32, precipitation_probability_pct: 70, wind_speed_kmh: 10 }),
+  ];
+  const h = planRaceDay({ ...baseInput, practice: [], forecast: HOT_WET }, data);
+  check("hot+wet → ok plan", h.ok);
+  if (h.ok) {
+    check(
+      "hot+wet: opposite front-oil directions → explicit refusal (grounded or silent)",
+      h.plan.refusals.some((x) => x.aspect === "front_shock_oil" && /disagree/i.test(x.message) && x.message.includes("grounded or silent")),
+      JSON.stringify(h.plan.refusals),
+    );
+    check("hot+wet: NO front shock oil adjustment emitted (we never pick a silent winner)", !h.plan.adjustments.some((a) => a.setting === "front_shock_oil"));
+    check("hot+wet: the non-conflicting wet clutch change still surfaces", h.plan.adjustments.some((a) => a.setting === "clutch_spring"));
   }
 }
 
