@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors, radius } from "../theme";
 import { MP11, label } from "../kb";
@@ -84,6 +84,39 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
     [changes],
   );
 
+  // field pipeline — depends on the template + typology + which fields are
+  // starred, NOT on the draft values being typed, so memoise it: a keystroke
+  // no longer rebuilds the whole grouped section list (perf, hot edit surface)
+  const fields = useMemo(
+    () => {
+      const hidden = profile?.hidden_sections ?? [];
+      return (Object.entries(tpl.fields) as [string, FieldDef][]).filter(
+        ([id, f]) => f.type !== "alias" && f.type !== "derived" && !hidden.some((h) => id.includes(h)),
+      );
+    },
+    [tpl, profile],
+  );
+  const starredFields = useMemo(
+    () => fields.filter(([id]) => state.starred.includes(id)),
+    [fields, state.starred],
+  );
+  const grouped = useMemo(() => {
+    const used = new Set<string>(state.starred);
+    const g = SECTIONS.map((s) => ({
+      title: s.title,
+      fields: fields.filter(([id]) => {
+        if (used.has(id) || !s.match(id)) return false;
+        used.add(id);
+        return true;
+      }),
+    }));
+    g.push({ title: "Other", fields: fields.filter(([id]) => !used.has(id)) });
+    return g;
+  }, [fields, state.starred]);
+
+  const onChange = useCallback((id: string, value: string | number) => update((prev) => setValue(prev, id, value)), [update]);
+  const onStar = useCallback((id: string) => update((prev) => toggleStar(prev, id)), [update]);
+
   if (mode === "versions") {
     return (
       <VersionsView
@@ -124,32 +157,8 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
     );
   }
 
-  const hidden = profile?.hidden_sections ?? [];
-  const fields = (Object.entries(tpl.fields) as [string, FieldDef][]).filter(
-    ([id, f]) =>
-      f.type !== "alias" &&
-      f.type !== "derived" &&
-      !hidden.some((h) => id.includes(h)),
-  );
-
-  const starredFields = fields.filter(([id]) => state.starred.includes(id));
-  const used = new Set<string>(state.starred);
-  const grouped = SECTIONS.map((s) => ({
-    title: s.title,
-    fields: fields.filter(([id]) => {
-      if (used.has(id) || !s.match(id)) return false;
-      used.add(id);
-      return true;
-    }),
-  }));
-  grouped.push({ title: "Other", fields: fields.filter(([id]) => !used.has(id)) });
-
-  const onChange = (id: string, value: string | number) =>
-    update((prev) => setValue(prev, id, value));
-  const onStar = (id: string) => update((prev) => toggleStar(prev, id));
-
   return (
-    <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
+    <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 40 }} keyboardShouldPersistTaps="handled">
       <TextInput
         style={styles.nameInput}
         value={state.draft_name}
@@ -287,7 +296,7 @@ function VersionsView({
               style={[styles.smallBtn, pick === v.id && styles.smallBtnActive]}
               onPress={() => setPick(pick === v.id ? null : v.id)}
             >
-              <Text style={[styles.smallBtnText, pick === v.id && { color: "#fff" }]}>vs</Text>
+              <Text style={[styles.smallBtnText, pick === v.id && { color: colors.onAccent }]}>vs</Text>
             </Pressable>
           </Pressable>
         );
@@ -346,7 +355,7 @@ function fmt(v: string | number | undefined): string {
   return v === undefined ? "—" : String(v);
 }
 
-function Field({
+const Field = React.memo(function Field({
   id,
   field,
   displayLabel,
@@ -379,7 +388,12 @@ function Field({
           {showUnit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
           {changed ? <Text style={styles.was}>   was {fmt(was)}</Text> : null}
         </Text>
-        <Pressable onPress={() => onStar(id)} hitSlop={8}>
+        <Pressable
+          onPress={() => onStar(id)}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel={`${starred ? "Unstar" : "Star"} ${displayLabel}`}
+        >
           <Text style={[styles.star, starred && styles.starOn]}>{starred ? "★" : "☆"}</Text>
         </Pressable>
       </View>
@@ -411,11 +425,13 @@ function Field({
           placeholder="—"
           placeholderTextColor={colors.sub}
           onChangeText={(t) => onChange(id, t)}
+          keyboardType={field.type === "number" || field.type === "int" || field.unit !== undefined ? "decimal-pad" : "default"}
+          accessibilityLabel={displayLabel}
         />
       )}
     </View>
   );
-}
+});
 
 function Stepper({
   id,
@@ -434,14 +450,24 @@ function Stepper({
   const set = (v: number) => onChange(id, Math.round(Math.min(max, Math.max(min, v)) * 100) / 100);
   return (
     <View style={styles.stepper}>
-      <Pressable style={styles.stepBtn} onPress={() => set(current - step)}>
+      <Pressable
+        style={styles.stepBtn}
+        onPress={() => set(current - step)}
+        accessibilityRole="button"
+        accessibilityLabel={`decrease ${id.replace(/_/g, " ")}`}
+      >
         <Text style={styles.stepBtnText}>−</Text>
       </Pressable>
       <Text style={styles.stepValue}>
         {current}
         {field.unit ? <Text style={styles.unit}> {field.unit}</Text> : null}
       </Text>
-      <Pressable style={styles.stepBtn} onPress={() => set(current + step)}>
+      <Pressable
+        style={styles.stepBtn}
+        onPress={() => set(current + step)}
+        accessibilityRole="button"
+        accessibilityLabel={`increase ${id.replace(/_/g, " ")}`}
+      >
         <Text style={styles.stepBtnText}>＋</Text>
       </Pressable>
     </View>
@@ -471,7 +497,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardAlt,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     paddingVertical: 7,
     paddingHorizontal: 13,
   },
@@ -504,7 +530,7 @@ const styles = StyleSheet.create({
   chips: { flexDirection: "row", gap: 6 },
   chip: {
     backgroundColor: colors.cardAlt,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     borderWidth: 1,
     borderColor: colors.border,
     paddingVertical: 6,
@@ -519,8 +545,8 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colors.border,
-    width: 40,
-    height: 36,
+    width: 44,
+    height: 44,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -557,7 +583,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardAlt,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     paddingVertical: 5,
     paddingHorizontal: 11,
   },

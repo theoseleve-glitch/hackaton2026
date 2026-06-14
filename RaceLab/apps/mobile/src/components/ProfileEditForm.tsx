@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import type { Account, ExperienceLevel } from "../accountstore";
 import { LEVELS } from "../accountstore";
-import { ChipRow, LabeledInput, MultiChipRow, Section } from "./forms";
+import { ChipRow, KeyboardAwareForm, LabeledInput, MultiChipRow, Section } from "./forms";
 import { colors, radius } from "../theme";
 
 /**
@@ -76,7 +76,7 @@ export function ProfileEditForm({
         <View style={{ width: 60 }} />
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
+      <KeyboardAwareForm contentStyle={{ padding: 14, paddingBottom: 30 }}>
         <View style={styles.avatarRow}>
           <Pressable onPress={() => void pickAvatar()}>
             {avatar ? (
@@ -91,7 +91,7 @@ export function ProfileEditForm({
         </View>
 
         <Section title="Identity">
-          <LabeledInput label="Handle (@)" value={handle} onChangeText={setHandle} placeholder="theo" />
+          <LabeledInput label="Handle (@)" value={handle} onChangeText={setHandle} placeholder="theo" autoCapitalize="none" autoCorrect={false} />
           <Text style={styles.hint}>Your @handle attributes every setup you share.</Text>
           <LabeledInput label="Display name" value={displayName} onChangeText={setDisplayName} placeholder="optional" />
           <View style={styles.twoCol}>
@@ -112,10 +112,10 @@ export function ProfileEditForm({
           <MultiChipRow options={CLASS_OPTIONS} values={classes} onToggle={toggleClass} />
         </Section>
 
-        <Pressable style={styles.saveBtn} onPress={save}>
+        <Pressable style={styles.saveBtn} onPress={save} accessibilityRole="button" accessibilityLabel="Save profile">
           <Text style={styles.saveBtnText}>Save profile</Text>
         </Pressable>
-      </ScrollView>
+      </KeyboardAwareForm>
     </View>
   );
 }
@@ -141,5 +141,5 @@ const styles = StyleSheet.create({
   hint: { color: colors.sub, fontSize: 11, fontStyle: "italic", marginTop: -4, marginBottom: 4 },
   twoCol: { flexDirection: "row", gap: 8 },
   saveBtn: { backgroundColor: colors.accent, borderRadius: radius.md, paddingVertical: 14, alignItems: "center", marginTop: 10 },
-  saveBtnText: { color: "#fff", fontWeight: "800", fontSize: 15 },
+  saveBtnText: { color: colors.onAccent, fontWeight: "800", fontSize: 15 },
 });
