@@ -5,17 +5,21 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Haltes from "@/components/sections/Haltes";
 import Stats from "@/components/sections/Stats";
 import DownloadCTA from "@/components/sections/DownloadCTA";
+import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main id="contenu">
-      <Hero />
-      <Manifeste />
-      <SignatureMap />
-      <HowItWorks />
-      <Haltes />
-      <Stats />
-      <DownloadCTA />
-    </main>
+    <>
+      <main id="contenu">
+        <Hero />
+        <Manifeste />
+        <SignatureMap />
+        <HowItWorks />
+        <Haltes />
+        <Stats />
+        <DownloadCTA />
+      </main>
+      <Footer />
+    </>
   );
 }
