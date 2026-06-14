@@ -231,7 +231,8 @@ export default function HowItWorks() {
           gap: "clamp(20px, 3vw, 32px)",
           padding: "0 clamp(24px, 5vw, 80px) clamp(48px, 8vw, 96px)",
           // Width only expands to card-track width on desktop via the CSS below.
-          willChange: "transform",
+          // willChange is scoped to the desktop animated branch via CSS (.hiw-track)
+          // so mobile doesn't pay for an unused GPU layer.
         }}
         className="hiw-track"
       >
@@ -307,6 +308,7 @@ export default function HowItWorks() {
           .hiw-track {
             flex-direction: row;
             align-items: stretch;
+            will-change: transform;
             /* Total track width: 4 cards + gaps, no wrap */
             width: max-content;
             /* Enough vertical height for the pinned viewport */

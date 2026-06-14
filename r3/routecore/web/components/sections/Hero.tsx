@@ -277,7 +277,7 @@ export default function Hero() {
         }
         @media (min-width: 768px) {
           .hero-grid {
-            grid-template-columns: 1fr 1fr !important;
+            grid-template-columns: 1.15fr 0.85fr !important;
           }
         }
       `}</style>
