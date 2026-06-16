@@ -1,0 +1,383 @@
+[
+  {
+    "brand": "Xray",
+    "model": "X12",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Yearly-updated flagship 1/12 pan car. Alexander Hagberg won the IFMAR 1/12 Modified World Championship on the X12; the car is a perennial podium contender at IFMAR Worlds, ETS and US nationals (X12'24/'25/'26 iterations).",
+    "sources": [
+      "https://www.redrc.net/2024/09/xray-x12-25/",
+      "https://www.liverc.com/news/hagberg-and-evans-crowned-ifmar-112-world-champions/",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+    ],
+    "manual_url": "https://teamxray.com/downloads/21/x12_2025_manual_v01_low.pdf",
+    "setup_sheet_url": "https://www.setup-rc.com/en/setup/detail/727",
+    "notes": "Annual model designations (X12'15 through X12'26). X12'25 introduced an all-new one-piece chassis. Manuals/setup sheets archived on teamxray.com and petitrc.com."
+  },
+  {
+    "brand": "Awesomatix",
+    "model": "A12",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dominant modern 1/12 platform. Kemp Anderson was Top Qualifier and Max Machler won 1:12 Spec at the 2023 IFMAR Worlds on Awesomatix; Kemp Anderson won 1:12 Modified at the 2024 MonTech New York Grand Prix on an A12X.",
+    "sources": [
+      "https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/",
+      "https://events.redrc.net/tag/2024-montech-nygp-usa/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Variants include base A12, A12X and A12WC (the A12WC is the refined IFMAR Spec World Champion edition)."
+  },
+  {
+    "brand": "Awesomatix",
+    "model": "A12X",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Kemp Anderson won the AbsoluteHobbyz 1:12 Modified class at the 2024 MonTech New York Grand Prix on the A12X, with Max Machler (also Awesomatix) on the podium.",
+    "sources": [
+      "https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/",
+      "https://events.redrc.net/tag/2024-montech-nygp-usa/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Modified-focused evolution of the A12 line, sold alongside the A12WC Spec variant."
+  },
+  {
+    "brand": "Awesomatix",
+    "model": "A12WC",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Refined World Championship edition; described by Red RC as the IFMAR 1:12 Spec World Champion car (Max Machler took the 2023 IFMAR Worlds 1:12 Spec title on Awesomatix).",
+    "sources": [
+      "https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "WC = World Champion spec; released as a kit alongside the A12X in 2024."
+  },
+  {
+    "brand": "Roche",
+    "model": "Rapide P12",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "The Roche P12-2017 spec TQ'd the Halloween Classic and podiumed at IIC in the 2017/18 season; the P12 platform won the 2016 IFMAR 1/12 World Championship. Hayato Ishioka and Kazuki Yamashita raced Roche at the 2023 IFMAR Worlds.",
+    "sources": [
+      "https://www.liverc.com/news/new-roche-p12-2017-usa-spec-112-scale-pan-car-kit/",
+      "https://www.redrc.net/2015/02/roche-rapide-p12-112th-scale-pan-car/",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/reglages/roche/setuprapidep12/P12/",
+    "notes": "Iterations: Rapide P12 (2015), P12-2017 (USA Spec), P12 V2. Setup sheets archived on petitrc.com."
+  },
+  {
+    "brand": "Roche",
+    "model": "Rapide P12 Evo2",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current Roche 1/12 flagship; Roche remained a represented brand at the 2023 IFMAR 1/12 Worlds. Evo2 features an Ultra-Low-CG aluminium tub chassis and a redesigned centre-pivot roll-centre system.",
+    "sources": [
+      "https://www.redrc.net/2021/11/roche-rapide-p12-evo2-1-12th-pan-car/",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Latest evolution of the P12 line (2021)."
+  },
+  {
+    "brand": "CRC",
+    "model": "Gen-XL / 1/12 pan car",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "CRC (Calandra Racing Concepts) is a represented 1/12 manufacturer at IFMAR Worlds. Frank Calandra raced CRC in 1:12 Spec at the 2023 IFMAR Worlds; Hayato Ishioka finished 8th in Modified on a CRC at the 2020 Worlds.",
+    "sources": [
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/",
+      "https://en.wikipedia.org/wiki/2020_IFMAR_1:12_Electric_Track_World_Championships"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "CRC's 1/12 lineage includes the Gen-X / Carpet Knife families; exact current model designation not confirmed in sourced coverage, listed by brand presence."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Atom 2",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "British Championship-winning GT12/1-12 pan car lineage. Michal Orlowski won the open-class World Champion title on Schumacher per the 2023 IFMAR Worlds chassis-focus coverage.",
+    "sources": [
+      "https://www.redrc.net/2019/09/schumacher-atom-2-1-12th-gt12-pan-car/",
+      "https://www.amainhobbies.com/schumacher-atom-2-s2-1-12-gt12-competition-pan-car-kit-schk179/p1055346",
+      "https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Variants: Atom 2 (carbon) and Atom 2 S2 (fibreglass), both on a steel-alloy low-CG chassis. Strong in UK GT12 spec racing."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "C-12P",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "European 1/12 competition pan car with adjustable ride height (calibrated shims), wide wheelbase range and a big-bore centre shock. Marketed for high-bite competition use.",
+    "sources": [
+      "https://www.liverc.com/news/new-capricorn-c-12p-112-scale-pan-car-kit/",
+      "https://www.redrc.net/2017/08/capricorn-c-12p-112th-scale-pan-car-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Capricorn's first 1/12 pan car platform."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "P12-C",
+    "scale": "1/12",
+    "category": "onroad",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "USA-spec evolution with a stiffer aluminium chassis and aluminium rear lower pod plate over the standard carbon items, tuned for high-bite US track conditions.",
+    "sources": [
+      "https://www.redrc.net/2018/03/capricorn-p12-c-usa-version-pan-car-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "USA Version of the Capricorn 1/12 platform."
+  },
+  {
+    "brand": "Xray",
+    "model": "X1",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Premier 1/10 F1 chassis; the X1 issued repeated wins at ETS F1 races in Europe and is a leading EFRA/national F1 platform. Annual editions X1'21 through X1'25.",
+    "sources": [
+      "https://www.hobbytown.com/xray-x1-2024-luxury-1-10-f1-chassis-kit-xra370708/p1515195",
+      "https://www.redrc.net/2024/12/xray-x1-25-110-formula-1/"
+    ],
+    "manual_url": "https://teamxray.com/downloads/92/x1_2025_manual_v02_low.pdf",
+    "setup_sheet_url": null,
+    "notes": "Graphite rear-wing mount with high/low positions to meet the EFRA wing-height rule. 2024 manual: teamxray.com/downloads/90/x1_2024_manual_low.pdf."
+  },
+  {
+    "brand": "Roche",
+    "model": "Rapide F1 Evo2",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current Roche 1/10 F1 competition kit (aluminium chassis, USA-spec variant available); a frequent benchmark against the Xray X1 in F1 class racing.",
+    "sources": [
+      "https://www.redrc.net/2020/04/roche-rapide-f1-evo2-chassis-kit/",
+      "https://rocherc.com/index.php?product_id=924&route=product/product",
+      "https://www.bigsquidrc.com/roche-rapide-f1-evo2-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Part numbers 152016 (standard) and 152020 (USA Spec aluminium chassis)."
+  },
+  {
+    "brand": "Serpent",
+    "model": "F110 SF4",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Evolution of the F110 platform refined on IDFM, ETS, TiTC and CETC racing experience; an established EFRA-legal F1 competition chassis.",
+    "sources": [
+      "https://www.hobbytown.com/serpent-f110-sf4-1-10-competition-f1-chassis-kit-ser410067/p995579",
+      "https://www.rcformula1.com.au/index.php/international/18-f1-rc-manufacturers/serpent-f110"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Part SER410067. Predecessors include the F110 SF2 (SER410061), with setup sheets archived on petitrc.com."
+  },
+  {
+    "brand": "Serpent",
+    "model": "F110 SF2",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Earlier-generation F110 EP F1 platform, still raced and documented in European F1 series; setup data archived on petitrc.com.",
+    "sources": [
+      "https://www.serpent.com/xcart/ser410061.html",
+      "https://site.petitrc.com/reglages/serpent/setup/F110/F110SF2/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/reglages/serpent/setup/F110/F110SF2/",
+    "notes": "Part SER410061; recent-but-still-raced predecessor to the SF4."
+  },
+  {
+    "brand": "Tamiya",
+    "model": "F104 Pro II",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Long-running value F1 competition platform; widely used for national and club F1 racing. Reviewed and raced competitively as recently as 2024.",
+    "sources": [
+      "https://www.hobbytown.com/tamiya-f104-pro-ii-1-10-competition-f1-chassis-kit-w-body-tam58652/p705838",
+      "https://www.thercracer.com/2024/08/58652-tamiya-f104-pro-ii-review-and.html",
+      "https://tamiyabase.com/chassis/125-f104"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit TAM58652. The F104 family (and F104 v2) is the base for many aftermarket conversions (Exotek F1R2). The F105 is a related Tamiya F1 designation."
+  },
+  {
+    "brand": "Tamiya",
+    "model": "TRF101",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Tamiya Racing Factory high-end F1 kit based on the F104 Ver.II, developed with TRF team data; the TRF101W wide-tread variant targets high-speed foam-tyre circuits.",
+    "sources": [
+      "https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf101-chassis-kit/",
+      "https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf101w-chassis-kit/",
+      "https://site.petitrc.com/reglages/tamiya/setup/TRF101/TRF101_TheRCRacer_Review/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit 42252 (TRF101), 42279 (TRF101W wide-tread). Top-tier Tamiya F1 platform; succeeded by the TRF102."
+  },
+  {
+    "brand": "Tamiya",
+    "model": "TRF102",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Tamiya's top-end F1 kit succeeding the F104 v2 / TRF101 line in the TRF competition range.",
+    "sources": [
+      "https://www.redrc.net/2015/06/tamiya-trf102-110th-formula-chassis-kit/",
+      "https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf102-chassis-kit-2/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit 42289. Successor to the TRF101 in Tamiya's racing F1 lineup."
+  },
+  {
+    "brand": "Exotek",
+    "model": "F1 Ultra R5",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Purpose-built F1 chassis (not a converted 1/12) with a patent-pending floating rear-pod suspension for rubber-tyre F1 traction; a leading modern aftermarket/standalone F1 platform with a dedicated carpet (Carpet Works) variant.",
+    "sources": [
+      "https://www.amainhobbies.com/exotek-f1-ultra-r5-1-10-pro-race-formula-chassis-kit-exof1r5/p1554186",
+      "https://www.redrc.net/2024/03/exotek-f1ultra-r5-110-formula-kit/",
+      "https://www.redrc.net/2024/10/exotek-f1-ultra-r5cw-carpet-works-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Lineage: F1 Ultra (R4) → F1 Ultra R5 → R5CW Carpet Works. 72mm narrow chassis. Kits EXOF1R5 / EXOF1R5CW. Exotek also makes the F1R2 conversion for the Tamiya F103/F104."
+  },
+  {
+    "brand": "Exotek",
+    "model": "F1 Ultra R4",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Earlier ground-up Exotek F1 Ultra platform (with a Carpet Works conversion), recent-but-still-raced predecessor to the R5.",
+    "sources": [
+      "https://www.amainhobbies.com/exotek-f1-ultra-1-10-pro-race-formula-chassis-kit-exof1r4/p-qqqetqyqlczeqctz",
+      "https://www.redrc.net/2020/07/exotek-f1ultra-1-10th-formula-car-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kits EXOF1R4 / EXOF1R4CW (Carpet Works)."
+  },
+  {
+    "brand": "CRC",
+    "model": "WTF1 DS",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Calandra Racing Concepts F1 platform; the predecessor WTF1-FC16 was IIC, Snowbirds and US Indoor Champion. The WTF1 DS (2020) added revised geometry and front-end parts.",
+    "sources": [
+      "https://www.amainhobbies.com/crc-wtf1-ds-1-10-competition-f1-chassis-kit-cln1502/p1247363",
+      "https://www.amainhobbies.com/crc-wtf1fc16-1-10-competition-f1-chassis-kit-cln1501/p484761"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit CLN1502. Predecessor: WTF1-FC16 (CLN1501)."
+  },
+  {
+    "brand": "CRC",
+    "model": "WTF1-FC16",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "CRC F1 chassis described by the retailer as IIC, Snowbirds and US Indoor Champion; a proven US carpet/indoor F1 platform.",
+    "sources": [
+      "https://www.amainhobbies.com/crc-wtf1fc16-1-10-competition-f1-chassis-kit-cln1501/p484761",
+      "https://www.hobbytown.com/wtf1fc16-1-10-competition-f1-chassis-kit-by-crc-cln1501/p484761"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit CLN1501; recent-but-still-raced predecessor to the WTF1 DS."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YRF Formula 001W",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Yokomo's 1/10 F1 competition chassis designed by Naoto Kitagawa with championship intent; a Japanese-brand F1 platform present in competitive F1 racing.",
+    "sources": [
+      "https://www.amainhobbies.com/yokomo-yrf-formula-001w-1-10-competition-f1-chassis-kit-yokyrf-001w/p256065",
+      "https://en.banzaihobby.com/Products/yrf-001w-formula-001w-chassis-kit"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Kit YOKYRF-001W."
+  }
+]

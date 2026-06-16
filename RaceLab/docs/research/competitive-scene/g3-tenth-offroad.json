@@ -1,0 +1,1091 @@
+[
+  {
+    "brand": "Team Associated",
+    "model": "B6",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Part of the RC10B6 2WD dynasty that has taken 12+ IFMAR 2WD World titles across the RC10 line; introduced AE's dual carpet/dirt chassis concept.",
+    "sources": [
+      "https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B6/Team/"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6D/Team/90012_RC10B6D_manual.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B6 / B6D dirt variant. ASC90011."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B6.1",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Spencer Rivkin won the 2019 IFMAR 1/10 2WD Off-Road Worlds on the B6.1DL (Associated's 30th IFMAR title).",
+    "sources": [
+      "https://www.associatedelectrics.com/news/race_results/2298-spencer_rivkin_wins_team_associated_s_30th_i_f_m_a_r_world_championship/"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.1D/Team/manual-RC10B6.1D-90021.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B6.1 / B6.1D. ASC90020."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B6.2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Carpet/turf laydown evolution of the championship-winning B6 line; factory-team campaigned.",
+    "sources": [
+      "https://www.redrc.net/2020/01/team-associated-b6-2-b6-2d-team-kit-2wd-buggies/"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.2/Team/90023_B6.2_manual-9-15-20.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B6.2 / B6.2D. ASC90023."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B6.3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ROAR Nationals 17.5T 2WD Buggy class winner (M. Gonzales, B6.3D, 2021).",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10-b6.3-team-1-10-2wd-electric-buggy-kit-asc90029/p-qqqcqawqnc2zqctz"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.3/Team/B6.3-Manual-4-14-2021.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B6.3 / B6.3D. ASC90029."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B6.4",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current-era national-level carpet kit; multiple ROAR off-road Nationals titles in the B6.4 era.",
+    "sources": [
+      "https://60years.associatedelectrics.com/rc10b6-4-team-kit/"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/Team/B6.4-Manual-6-21-2023.pdf",
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/B6.4-Editable-Setup.pdf",
+    "notes": "2WD buggy. RC10B6.4 carpet. ASC90034."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B6.4D",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dirt sibling of the B6.4; ROAR dirt Nationals campaigned.",
+    "sources": [
+      "https://www.horizonhobby.com/product/1-10-rc10b6.4d-electric-2wd-buggy-team-kit/ASC90035.html"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4D/Team/B6.4D-Manual-6-21-2023.pdf",
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/B6.4-Editable-Setup.pdf",
+    "notes": "2WD buggy. Dirt variant of B6.4 (shares B6.4 editable setup). ASC90035."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B7",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Released Jan 2024 following Davide Ongaro's 2023 IFMAR 1/10 2WD World Championship campaign for Team Associated.",
+    "sources": [
+      "https://www.redrc.net/2024/01/team-associated-rc10b7-2wd-buggy/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B7/RC10B7-Editable-Setup-Sheet.pdf",
+    "notes": "2WD buggy. RC10B7 carpet. ASC90041."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B7D",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dirt variant of the 2023-Worlds-era B7 platform.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10b7d-team-1-10-2wd-electric-buggy-kit-asc90042/p1537092"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B7D dirt. ASC90042."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B7.1",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2026-season refresh of the title-winning B7 platform.",
+    "sources": [
+      "https://60years.associatedelectrics.com/rc10b7-1-team_kit/"
+    ],
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B7.1D/Team_Kit/90047_RC10B71D_Manual_1_22_2026.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. RC10B7.1 carpet / B7.1D dirt. ASC90046 / ASC90047 (manual linked is B7.1D)."
+  },
+  {
+    "brand": "TLR",
+    "model": "22 5.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Spencer Rivkin won the 2021 IFMAR 1/10 2WD Worlds on the 22 5.0; TLR is the reigning 2WD World Champion manufacturer of that cycle.",
+    "sources": [
+      "https://www.tlracing.com/product/1-10-22-5.0-2wd-buggy-dc-race-kit-dirt-clay/TLR03016.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://www.tlracing.com/on/demandware.store/Sites-tlr-us-Site/default/Page-ShowSetupSheets?pid=TLR03022",
+    "notes": "2WD buggy. Team Losi Racing. DC dirt/clay TLR03016, AC carpet TLR03017, SR spec TLR03018."
+  },
+  {
+    "brand": "TLR",
+    "model": "22X",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Newest-gen 2WD (May 2025), built on the title-winning 22 lineage.",
+    "sources": [
+      "https://www.redrc.net/2025/05/tlr-22x-110-2wd-race-buggy/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy (distinct from the 22X-4 which is 4WD). DC TLR-1233 / AC TLR-1234."
+  },
+  {
+    "brand": "TLR",
+    "model": "22 4.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Convertible mid-motor; legacy ROAR/EOS-era competitive kit.",
+    "sources": [
+      "https://www.tlracing.com/product/1-10-22-4.0-2wd-buggy-race-kit/TLR03013.html"
+    ],
+    "manual_url": "https://www.rcscrapyard.net/manuals/losi/losi-22-4-0-race-tlr03013-manual.htm",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Team Losi Racing. TLR03013 (SR variant TLR03014)."
+  },
+  {
+    "brand": "TLR",
+    "model": "22 3.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Multiple ROAR National titles (Dakotah Phend era, Modified 2WD).",
+    "sources": [
+      "https://www.amainhobbies.com/team-losi-racing-22-3.0-dirt-laydown-transmission-conversion-kit-tlr338005/p577171"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Team Losi Racing."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YZ-2 DTM3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "YZ-2 DTM lineage won the 2017 IFMAR 1/10 2WD Worlds (Ryan Maifield TQ + win; Yokomo 1-2 in qualifying).",
+    "sources": [
+      "https://www.rccaraction.com/yokomos-ryan-maifield-2017-ifmar-2wd-world-champ/"
+    ],
+    "manual_url": "https://www.manualslib.com/products/Yokomo-Yz-2-Dtm-3-1-12450627.html",
+    "setup_sheet_url": "https://site.petitrc.com/setup/yokomo/setupyz2/YZ2DTM3CAL3/",
+    "notes": "2WD buggy. Dirt-spec arm of the YZ-2 family. YZ-2 DTM 3.0 / 3.1. YOKB-YZ2DTM3."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YZ-2 CAL3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Carpet/astro arm of the 2017-World-Champion YZ-2 family; Lee Martin front-running EOS / Euro results.",
+    "sources": [
+      "https://www.amainhobbies.com/yokomo-yz2-ca-l3-edition-1-10-2wd-electric-buggy-kit-carpet-astro-yokb-yz2cal3/p978925"
+    ],
+    "manual_url": "https://www.manualslib.com/products/Yokomo-Yz-2-Ca-4131655.html",
+    "setup_sheet_url": "https://site.petitrc.com/setup/yokomo/setupyz2/YZ2DTM3CAL3/",
+    "notes": "2WD buggy. Carpet/astro spec. YZ-2 CAL3 / CAL3.1. YOKB-YZ2CAL3 / YOKB-YZ2CAL31."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB2 2023",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Front-running EOS / ROAR-level 2WD platform in the XB2 dynasty (multiple Euro and Junior World titles across the XB2 line).",
+    "sources": [
+      "https://teamxray.com/xb2/2023/en/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. XB2 carpet (XB2C) + dirt (XB2D) per year. 2023 edition. Manuals ship in-box; setup via HUDY book / Virtual Setup DB."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB2 2024",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Fully redesigned; EOS Season #8 2WD title (Bruno Coelho) and EOS R1 podiums (Coelho/Ronnefalk).",
+    "sources": [
+      "https://teamxray.com/xb2/2024/en/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. XB2C 2024 (carpet) + XB2D 2024 (dirt). Manuals in-box; setup via HUDY book / Virtual Setup DB."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB2 2025",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ROAR Nationals win cited on official product page; current-cycle 2WD competition kit.",
+    "sources": [
+      "https://teamxray.com/xb2/2025/en/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. XB2C 2025 (carpet) + XB2D 2025 (dirt). Manuals in-box; setup via HUDY book / Virtual Setup DB."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Ultima RB6",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Jared Tebo won the 2013 IFMAR 1/10 2WD Worlds on the RB6 (TQ + A1 + A2, Chico CA). RB6.6 is the high-grip update.",
+    "sources": [
+      "https://rc.kyosho.com/en/34301.html",
+      "https://www.liverc.com/news/jared-tebo-shares-his-ifmar-world-championship-winning-rb6-setup/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/setup/kyosho/setuprb6/RB6_JaredTebo_Chico2013092229/",
+    "notes": "2WD buggy. Kyosho Ultima RB6 / RB6.6. #34301 / #34302."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Ultima RB7",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition 2WD kit in the Worlds-winning Ultima RB lineage.",
+    "sources": [
+      "https://rc.kyosho.com/en/34303.html"
+    ],
+    "manual_url": "https://www.rcscrapyard.net/manuals/kyosho2/kyosho-ultima-rb7-34303-manual.htm",
+    "setup_sheet_url": "https://site.petitrc.com/setup/kyosho/setuprb7/",
+    "notes": "2WD buggy. Kyosho Ultima RB7. #34303."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Ultima RB7.5",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current top-tier (2025) of the Ultima RB Worlds-winning 2WD line.",
+    "sources": [
+      "https://kyoshoamerica.com/1-10-scale-radio-controlled-electric-powered-2wd-racing-buggy-ultima-rb7-5-34305.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Kyosho Ultima RB7.5. #34305. (RB7SS #34304 is the stock/17.5T spec sibling.)"
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Cougar KF2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "KF2 SE 'Low Grip Position' campaigned at IFMAR 2WD Worlds level.",
+    "sources": [
+      "https://www.racing-cars.com/1-10th-2wd-buggy/cougar-kf2/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/setup/schumacher/setupcougarkf/KF2/",
+    "notes": "2WD buggy. Schumacher Cougar KF2. SCHK155."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Cougar LD3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2023 IFMAR 1/10 2WD Worlds podium (Broc Champlin).",
+    "sources": [
+      "https://www.racing-cars.com/new-products-1/cougar-ld3m-mod-spec-kit-k208"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Schumacher Cougar LD3 (laydown). Sub-specs LD3M/LD3S/LD3D."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Cougar LD2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Laydown evolution of the Cougar competition 2WD line; EOS/BRCA-campaigned.",
+    "sources": [
+      "https://www.racing-cars.com/1-10th-2wd-buggy/cougar-ld2/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Schumacher Cougar LD2. SCHK190."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Cougar KR",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dirt/low-traction competition variant of the Cougar 2WD platform.",
+    "sources": [
+      "https://www.racing-cars.com/1-10th-2wd-buggy/cougar-kr/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Schumacher Cougar KR (dirt/low-traction). SCHK139."
+  },
+  {
+    "brand": "HB Racing",
+    "model": "D2 Evo",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current HB competition 2WD kit; evolution of the EFRA-European-Champion D219 works prototype.",
+    "sources": [
+      "https://hbracing.com/hb-racing-d2-evo-competition-1-10-2wd-electric-buggy-en/"
+    ],
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D2/instruction_manual.pdf",
+    "setup_sheet_url": "https://hbracing.com/team-driver-setting-sheets-en/",
+    "notes": "2WD buggy. HB Racing (HotBodies) D2 Evo. HBS204240."
+  },
+  {
+    "brand": "HB Racing",
+    "model": "D216",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "HB's competition 2WD off-road buggy predecessor in the D2 lineage.",
+    "sources": [
+      "https://hbracing.com/hb-racing-d216-1-10-2wd-off-road-buggy-en"
+    ],
+    "manual_url": "https://hbracing.com/downloads-en",
+    "setup_sheet_url": "https://hbracing.com/downloads-en",
+    "notes": "2WD buggy. HB Racing D216."
+  },
+  {
+    "brand": "Team Durango",
+    "model": "DEX210v3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Part of Durango's European-Championship-era competition 2WD platform.",
+    "sources": [
+      "https://www.redrc.net/2015/12/team-durango-dex210v3-2wd-buggy-kit/"
+    ],
+    "manual_url": "http://www.team-durango.com/pdf/manuals/TD102028/DEX210v2.pdf",
+    "setup_sheet_url": null,
+    "notes": "2WD buggy. Team Durango DEX210 line (DEX210 / v2 / v3 / F). Legacy/discontinued platform; manual linked is the v2."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B64",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "B44/B64 lineage; the predecessor B44 won IFMAR 1/10 4WD Worlds 2011 & 2013 (titles belong to the B44, with the B64 the direct successor).",
+    "sources": [
+      "https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B64/Team/",
+      "https://www.hobbytown.com/team-associated-rc10-b64-team-1-10-4wd-offroad-electric-buggy-kit-asc90014/p632735"
+    ],
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/Team/manual-B64-90014.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/B64-B64D-Editable-Setup-2017.pdf",
+    "notes": "4WD buggy. RC10B64. ASC90014."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B64D",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Clay/dirt variant of the B64 4WD lineage.",
+    "sources": [
+      "https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B64D/Team_Kit/",
+      "https://www.amainhobbies.com/team-associated-rc10-b64d-team-1-10-4wd-buggy-kit-combo-dirt-asc90015c/p696912"
+    ],
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64D/Team_Kit/manual-B64D-90015b.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/B64-B64D-Editable-Setup-2017.pdf",
+    "notes": "4WD buggy. RC10B64D dirt. ASC90015."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B74",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Raced at the 2019 IFMAR 4WD Worlds (Spencer Rivkin 10th; class won by XRAY). First of the B74 4WD shaft-drive platform.",
+    "sources": [
+      "https://www.liverc.com/news/team-associated-unveils-the-new-b74-110-4wd-buggy-kit/",
+      "https://en.wikipedia.org/wiki/2019_IFMAR_1:10_Electric_Off-Road_World_Championships"
+    ],
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74/Team_Kit/B74_Kit_Manual_11_21_2019.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74/B74-Editable-Setup-Sheet.pdf",
+    "notes": "4WD buggy. RC10B74. ASC90026."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B74.1",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Spencer Rivkin won the ROAR 4WD Modified National Championship 2022 on a B74.1D; Matthew Gonzales won 13.5T 4WD at 2021 ROAR Nats on a B74.1D.",
+    "sources": [
+      "https://www.horizonhobby.com/product/1-10-rc10b74.1-electric-team-4wd-buggy-kit/ASC90027.html",
+      "https://blog.jconcepts.net/2022/08/inside-look-spencer-rivkins-winning-b74-1d/"
+    ],
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.1/Team/B74.1C-Kit-Manual-10-2-2020.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.1/B74.1-Editable-Setup-Sheet-10-19-2020.pdf",
+    "notes": "4WD buggy. RC10B74.1 carpet / B74.1D dirt. ASC90027 / ASC90028."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "B74.2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current Factory Team 4WD weapon, continuation of the ROAR-Nationals-winning B74 line.",
+    "sources": [
+      "https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B74.2D/CE_Team/",
+      "https://www.liverc.com/news/new-team-associated-b742-4wd-buggy-kit/"
+    ],
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.2/CE_Team/90044_RC10B742C_CE_Kit_Manual_1_17_2025.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.2/B74.2-Editable-Setup-10-2020.pdf",
+    "notes": "4WD buggy. RC10B74.2 CE carpet / B74.2D CE dirt. ASC90044 / ASC90045. (B74D = B74.2D dirt.)"
+  },
+  {
+    "brand": "TLR",
+    "model": "22X-4",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ROAR Nationals-winning 4WD platform (TLR's own claim).",
+    "sources": [
+      "https://www.tlracing.com/product/1-10-22x-4-2.0-dc-4wd-buggy-race-kit/TLR-1264.html",
+      "https://www.horizonhobby.com/product/1-10-22x-4-4wd-buggy-race-kit/TLR03020.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Team Losi Racing 22X-4 (shaft-driven). TLR03020 / TLR-1264 (2.0)."
+  },
+  {
+    "brand": "TLR",
+    "model": "22X-4 Elite",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Evolution of the ROAR-Nationals-winning 22X-4 4WD platform.",
+    "sources": [
+      "https://www.tlracing.com/1-10th-rc-race-cars/tlr-22x-4-elite/",
+      "https://www.tlracing.com/product/1-10-22x-4-elite-4x4-buggy-race-kit/TLR03026.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://www.tlracing.com/on/demandware.store/Sites-tlr-us-Site/default/Page-ShowSetupSheets?pid=TLR03026",
+    "notes": "4WD buggy. Team Losi Racing 22X-4 Elite. TLR03026."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YZ-4 SF",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2017 IFMAR 1/10 4WD Electric Off-Road World Champion (Ryan Maifield).",
+    "sources": [
+      "https://www.redrc.net/2017/10/yokomo-yz-4-sf-4wd-buggy/",
+      "https://en.wikipedia.org/wiki/IFMAR_1:10_Electric_Off-Road_World_Championship"
+    ],
+    "manual_url": "https://www.manualslib.com/manual/2178239/Yokomo-Yz-4-Sf.html",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Yokomo YZ-4 SF. YOKB-YZ4SF."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YZ-4 SF2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Latest evolution of the Worlds-winning YZ-4 4WD platform.",
+    "sources": [
+      "https://www.redrc.net/2020/06/yokomo-yz-4sf2-1-10th-4wd-buggy-kit/",
+      "https://www.amainhobbies.com/yokomo-yz4-sf2-factory-1-10-electric-4wd-buggy-kit-yokb-yz4sf2/p1222635"
+    ],
+    "manual_url": "https://www.manualslib.com/manual/1899167/Yokomo-Yz-4-Sf-2.html",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Yokomo YZ-4 SF2. YOKB-YZ4SF2."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "YZ-4",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Original Yokomo 1/10 4WD competition platform that became the Worlds-winning YZ-4 SF lineage.",
+    "sources": [
+      "https://www.redrc.net/2015/10/yokomo-yz-4-110th-4wd-buggy-kit/",
+      "https://www.liverc.com/news/yokomo-yz-4-4wd-buggy-coming-soon/"
+    ],
+    "manual_url": "https://www.manualslib.com/manual/2191707/Yokomo-Yz-4.html",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Yokomo YZ-4."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB4 2023",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "XB4 platform has taken IFMAR 4WD Worlds (Bruno Coelho), Junior Worlds (Daniel Kobbevik), Ty Tessmann's first ROAR Nationals, and multiple European titles.",
+    "sources": [
+      "https://teamxray.com/xb4/2023/",
+      "https://www.amainhobbies.com/xray-xb423-1-10-electric-4wd-competition-buggy-kit-dirt-xra360013/p1477339"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. XB4 2023 (Dirt-spec only that year). XRA360013. Setup via HUDY book / gated XRAY Virtual Setup DB."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB4 2024",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current-cycle XB4 in the Worlds-winning XB4 dynasty; sold as Carpet (XB4C) + Dirt (XB4D).",
+    "sources": [
+      "https://teamxray.com/xb4/2024/",
+      "https://www.amainhobbies.com/xray-xb4c-2024-1-10-electric-4wd-competition-buggy-kit-carpet-xra360014/p1536604"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. XB4C 2024 (carpet, XRA360014) + XB4D 2024 (dirt, XRA360015)."
+  },
+  {
+    "brand": "Xray",
+    "model": "XB4 2025",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ROAR 2025: Dakotah Phend (Mod), Dustin Fox (Stock) on the XB4 platform.",
+    "sources": [
+      "https://teamxray.com/xb4/2025/",
+      "https://www.amainhobbies.com/xray-xb4c-2025-1-10-electric-4wd-competition-buggy-kit-carpet-xra360017/p1587965"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. XB4C 2025 (carpet, XRA360017) + XB4D 2025 (dirt, XRA360018)."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Lazer ZX6",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ZX6 platform had A-main finalists at the 2015 IFMAR 4WD Worlds; Kyosho's competition 4WD line.",
+    "sources": [
+      "https://rc.kyosho.com/en/30046.html",
+      "https://www.amainhobbies.com/kyosho-lazer-zx6-1-10-4wd-racing-buggy-kit-kyo30046b/p349369"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Kyosho Lazer ZX6 (ZX6.6 update #30047). #30046."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Lazer ZX7",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Successor competition 4WD in the Lazer ZX line.",
+    "sources": [
+      "https://rc.kyosho.com/en/30048.html",
+      "https://www.redrc.net/2018/09/kyosho-lazer-zx7-1-10th-4wd-buggy/"
+    ],
+    "manual_url": "http://www.kyosho.com/jpn/support/instructionmanual/buggy/pdf/30048_LAZER%20ZX7_IM.pdf",
+    "setup_sheet_url": "http://www.kyosho.com/jpn/support/instructionmanual/buggy/pdf/30048_LAZER%20ZX7_ex.pdf",
+    "notes": "4WD buggy. Kyosho Lazer ZX7. #30048."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "Lazer ZX7.5",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Latest (~2026) of the Lazer ZX 4WD competition line; no major title yet.",
+    "sources": [
+      "https://www.amainhobbies.com/kyosho-lazer-zx7.5-1-10-4wd-electric-offroad-buggy-kit-kyo34331/p1827782",
+      "https://www.redrc.net/2026/04/kyosho-lazer-7-5-110-4wd-buggy/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Kyosho Lazer ZX7.5. K.34331B."
+  },
+  {
+    "brand": "HB Racing",
+    "model": "D413",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "3rd in 4WD at the 2015 IFMAR Worlds (David Ronnefalk).",
+    "sources": [
+      "https://hbracing.com/hb-racing-d413-1-10-4wd-off-road-buggy-en",
+      "https://en.wikipedia.org/wiki/2015_IFMAR_1:10_Electric_Off-Road_World_Championships"
+    ],
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D413/instruction_manual.pdf",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. HB Racing (HotBodies) D413."
+  },
+  {
+    "brand": "HB Racing",
+    "model": "D418",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition 4WD link between the D413 and the current D4 Evo3.",
+    "sources": [
+      "https://hbracing.com/hb-racing-d418-1-10-4wd-off-road-buggy-en/",
+      "https://www.amainhobbies.com/hb-racing-d418-1-10-4wd-electric-offroad-buggy-kit-hbs204241/p735076"
+    ],
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D418/instruction_manual.pdf",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. HB Racing D418. HBS204241."
+  },
+  {
+    "brand": "HB Racing",
+    "model": "D4 Evo3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current HB factory 4WD car in the D4 competition lineage.",
+    "sources": [
+      "https://hbracing.com/hb-racing-d4-evo3-1-10-competition-electric-buggy-4wd-en/",
+      "https://www.redrc.net/2023/02/hb-racing-d4-evo3-110-4wd-buggy/"
+    ],
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D4evo3/instruction_manual.pdf",
+    "setup_sheet_url": "https://hbracing.com/var/files/drive/hbracingblog/D4evo3/base_setup.pdf",
+    "notes": "4WD buggy. HB Racing D4 Evo3. HB204820."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "CAT L1R",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "CAT L1 line: 3rd in 4WD at 2019 IFMAR Worlds (Michal Orlowski); EOS, BRCA Nationals and ROAR carpet Nationals wins; Orlowski 2x EOS Champion + EFRA European Champion 2023.",
+    "sources": [
+      "https://www.racing-cars.com/new-products/december-2022/cat-l1r-kit-k201",
+      "https://en.wikipedia.org/wiki/2019_IFMAR_1:10_Electric_Off-Road_World_Championships"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/setup/schumacher/setupcatl1/",
+    "notes": "4WD buggy. Schumacher CAT L1R (the brand's 1/10 4WD; Cougar is their 2WD). Kit K201."
+  },
+  {
+    "brand": "Team Durango",
+    "model": "DEX410 V5",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "DEX410 lineage: 2nd in 4WD at the 2011 IFMAR Worlds (Jorn Neumann).",
+    "sources": [
+      "https://www.amainhobbies.com/team-durango-dex410-v5-1-10-electric-4wd-offroad-buggy-kit-tdr102036/p-qeaktakqtzqxactz",
+      "https://en.wikipedia.org/wiki/2011_IFMAR_1:10_Electric_Off-Road_World_Championships"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://site.petitrc.com/setup/durango/SetupSheetsDurangoDEX410v5.html",
+    "notes": "4WD buggy. Team Durango DEX410 (V4 / V5). TDR102036. Legacy platform."
+  },
+  {
+    "brand": "Tekno",
+    "model": "EB410",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2018 ROAR Nats Stock 4WD 1st (Tyler Hooks); 2019 Reedy Race win (Jared Tebo).",
+    "sources": [
+      "https://www.teknorc.com/wp-content/uploads/2017/08/EB410instructions_REV2.pdf"
+    ],
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2017/08/EB410instructions_REV2.pdf",
+    "setup_sheet_url": "https://www.teknorc.com/wp-content/uploads/2017/08/P31_EB410instructions_SetUpSheet_Blank_Reader_Saveable.pdf",
+    "notes": "4WD buggy. Tekno RC EB410 (1/10 4WD; Tekno's other off-road kits are 1/8)."
+  },
+  {
+    "brand": "Tekno",
+    "model": "EB410.2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2019 competition update of the ROAR/Reedy-winning EB410 4WD platform.",
+    "sources": [
+      "https://www.teknorc.com/shop/tkr6502-eb410-2-1-10th-4wd-competition-electric-buggy-kit/",
+      "https://www.liverc.com/news/tekno-rc-unveils-the-new-eb4102-110-4wd-buggy/"
+    ],
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2019/10/EB410_2instructions.pdf",
+    "setup_sheet_url": null,
+    "notes": "4WD buggy. Tekno RC EB410.2. TKR6502."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "T6.1",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Mid-2010s AE stadium-truck-class platform (predecessor to T6.2/T6.4 in the championship-winning T6 lineage); ROAR Off-Road Nationals team truck.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10-t6.1-off-road-team-stadium-truck-kit-asc70002/p756668"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. RC10T6.1, based on the RC10B6.1 buggy. ASC70002."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "T6.2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competitive 2WD stadium truck; AE team car for ROAR Nationals stadium-truck campaigns prior to the T6.4.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10t6.2-off-road-team-stadium-truck-kit-asc70003/p1267243",
+      "https://www.horizonhobby.com/product/1-10-rc10t6.2-2wd-electric-team-stadium-truck-kit/ASC70003.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. RC10T6.2, based on the RC10B6.2. ASC70003."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "T6.4",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current AE flagship stadium truck; run by AE factory drivers at the ROAR 1/10 Off-Road Dirt Nationals (AE swept the 2025 ROAR Dirt Nats stadium-truck class on the T6.4 generation).",
+    "sources": [
+      "https://www.liverc.com/news/new-team-associated-rc10t64-stadium-truck-kit/",
+      "https://www.associatedelectrics.com/news/race_results/2841-team-associated-sweeps-roar-1-10-off-road-dirt-nationals/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. RC10T6.4 (= T6.4), based on the RC10B6.4 buggy. ASC70004."
+  },
+  {
+    "brand": "TLR",
+    "model": "22T 3.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition-proven 2WD stadium truck and a staple of US national/regional stadium-truck classes from 2017; the kit the 22T 4.0 was built to improve on.",
+    "sources": [
+      "https://www.amainhobbies.com/team-losi-racing-22t-3.0-1-10-2wd-electric-stadium-truck-kit-tlr03011/p604049",
+      "https://www.redrc.net/2017/01/tlr-22t-3-0-2wd-stadium-truck-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. Team Losi Racing 22T 3.0, mid-motor, based on the 22 3.0 buggy. TLR03011."
+  },
+  {
+    "brand": "TLR",
+    "model": "22T 4.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Laydown mid-motor evolution of the championship-proven 22T 3.0; TLR's competitive stadium truck for high-grip clay/carpet nationals before the 22X-T.",
+    "sources": [
+      "https://www.tlracing.com/product/team-losi-racing-1-10-22t-4.0-2wd-stadium-race-truck-kit/TLR03015.html",
+      "https://www.amainhobbies.com/team-losi-racing-22t-4.0-1-10-2wd-electric-stadium-truck-kit-tlr03015/p714999"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. Team Losi Racing 22T 4.0, laydown mid-motor. TLR03015."
+  },
+  {
+    "brand": "TLR",
+    "model": "22X-T",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Newest TLR competition stadium truck (~2025), based on the 22X buggy; manufacturer hosts factory pro-driver setup sheets (Brownhill/Eldred/Ellis), confirming factory-team competition use.",
+    "sources": [
+      "https://www.tlracing.com/product/team-losi-racing-1-10-22x-t-2wd-stadium-truck-race-kit/TLR-1053.html",
+      "https://www.redrc.net/2025/06/tlr-22x-t-2wd-stadium-truck/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD stadium truck. Team Losi Racing 22X-T, based on the 22X buggy. TLR-1053."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "SC6.1",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competitive 2WD short course truck based on the RC10T6.1 platform; AE team SC car.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10-sc6.1-off-road-1-10-short-course-team-truck-kit-asc70007/p-qtaxqzkqtcqxactz",
+      "https://60years.associatedelectrics.com/rc10sc6-1-team-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck. RC10SC6.1, shares the T6.1 platform. ASC70007."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "SC6.2",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition 2WD SC kit; AE SC team car in the SC6 championship lineage.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10sc6.2-off-road-1-10-2wd-short-course-team-truck-kit-asc70008/p1267242"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck. RC10SC6.2. ASC70008."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "SC6.4",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current AE flagship 2WD short course truck (13mm big-bore shocks, angled steering, longer CVAs); AE's competition SC entry, raced in the 2025 ROAR Dirt Nats SC class.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10sc6.4-1-10-off-road-electric-2wd-short-course-truck-team-kit-asc70009/p1489954",
+      "https://www.liverc.com/news/2025-roar-110th-dirt-road-nationals-results/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck. RC10SC6.4. ASC70009."
+  },
+  {
+    "brand": "Team Associated",
+    "model": "SC5M",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "AE's earlier mid-motor 2WD short course truck; competition SC kit preceding the SC6 line.",
+    "sources": [
+      "https://www.amainhobbies.com/team-associated-rc10-sc5m-team-1-10-electric-2wd-short-course-truck-kit-asc70006/p449170"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck (mid-motor). RC10SC5M. ASC70006."
+  },
+  {
+    "brand": "TLR",
+    "model": "22SCT 3.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "'The truck to beat in short course competition' (mid-motor, 3-gear trans); TLR's leading 2WD SC kit for US national SC classes from 2016.",
+    "sources": [
+      "https://www.amainhobbies.com/team-losi-racing-22sct-3.0-1-10-scale-2wd-electric-racing-short-course-kit-tlr03009/p568664",
+      "https://www.redrc.net/2016/11/tlr-22sct-3-0-2wd-short-course-truck-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck (mid-motor). Team Losi Racing 22SCT 3.0. TLR03009."
+  },
+  {
+    "brand": "TLR",
+    "model": "22SCT 2.0",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Evolution of the popular 22SCT; competitive 2WD SC kit of the mid-2010s with bellcrank steering and revised geometry.",
+    "sources": [
+      "https://www.redrc.net/2014/07/tlr-22sct-2-0-short-course-truck-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck. Team Losi Racing 22SCT 2.0. TLR03003."
+  },
+  {
+    "brand": "Pro-Line",
+    "model": "PRO-2 SC",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Pro-Line's flagship 2WD short course truck kit ('best all-around 2WD Short Course truck ever produced'); raced in SC classes.",
+    "sources": [
+      "https://www.prolineracing.com/kits/pro-2-sc-1-10-2wd-kit.asp",
+      "https://www.horizonhobby.com/product/pro-line-pro-2-performance-short-course-truck-kit/PRO400100.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "2WD short course truck. Pro-Line PRO-2 SC. PRO4001-00 / PRO400100."
+  },
+  {
+    "brand": "Tekno",
+    "model": "SCT410.3",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Tekno's competition 1/10 4WD short course truck; a leading 4WD SC racer with biggest-in-class 16mm-bore shocks.",
+    "sources": [
+      "https://www.amainhobbies.com/tekno-rc-sct410.3-competition-1-10-electric-4wd-short-course-truck-kit-tkr5507/p438712",
+      "https://www.horizonhobby.com/product/1-10-sct410.3-4wd-short-course-kit/TKR5507.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD short course truck (note: 4WD, unlike the 2WD SC trucks). Tekno RC SCT410.3, successor to SCT410 / SCT410.2. TKR5507."
+  },
+  {
+    "brand": "Team Durango",
+    "model": "DESC410R",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Durango's competition 1/10 4WD short course truck (alloy 'sandwich' chassis); a 4WD SC racer of the early/mid-2010s. The V2 added stronger A-arms and a new rear bulkhead.",
+    "sources": [
+      "https://www.bigsquidrc.com/team-durango-desc410r-v2-electric-4wd-short-course-truck-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "4WD short course truck (note: 4WD). Team Durango DESC410R / DESC410R V2. Legacy/discontinued; archival sources only."
+  }
+]

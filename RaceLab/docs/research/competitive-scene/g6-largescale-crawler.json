@@ -1,0 +1,295 @@
+[
+  {
+    "brand": "HPI Racing",
+    "model": "Baja 5B",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "First mass-produced 1/5 gas buggy to succeed in the US (2006); the platform that effectively created the large-scale off-road class and remains a fixture at large-scale fun/race events. Flux variant is the 8S brushless version.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/HPI_Baja_5B/5T",
+      "https://www.hpiracing.com/en/kit/107684",
+      "https://www.hpiracing.com/en/kit/160323"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Nominal 1/5 scale, RWD 2WD buggy. Sold as gas (23/26cc) kit/RTR or Flux 8S electric. The reference large-scale off-road platform."
+  },
+  {
+    "brand": "HPI Racing",
+    "model": "Baja 5T",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "1/5 truck variant of the Baja 5B (released 2008) with 26cc engine and truck body; widely run at large-scale off-road events alongside the 5B.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/HPI_Baja_5B/5T",
+      "https://www.rcsuperstore.com/hpi-baja-5b-5sc-5t-30-5cc-esp-modified-ported-chrome-engine-with-clutch-and-cy-carb/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Large-scale truck on the Baja 5 platform. Classed as off-road 'buggy' type per the schema (large-scale off-road)."
+  },
+  {
+    "brand": "HPI Racing",
+    "model": "Baja 5SC",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "1/5 large-scale short course truck on the Baja 5 platform; popular in large-scale SC bashing/club running.",
+    "sources": [
+      "https://www.hpiracing.com/en/kit/109964",
+      "https://www.competitionx.com/news-feed/review-hpi-baja-5sc/",
+      "https://www.rcsuperstore.com/hpi-baja-5sc-1-5-scale-rtr-gasoline-short-course-truck/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/5 gasoline short-course truck. SC-1 body. Off-road large-scale ('buggy' type per schema)."
+  },
+  {
+    "brand": "Losi",
+    "model": "5IVE-T 2.0",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Premier 1/5 4WD gas short-course race truck, ~3ft long with Zenoah G320 32cc engine; tire compound/tread optimized for racing. A staple of large-scale 4WD SC racing.",
+    "sources": [
+      "https://www.horizonhobby.com/product/1-5-5ive-t-2.0-v2-4x4-bnd-gas-short-course-truck/LOS05014V2.html",
+      "https://www.losi.com/product/1-5-5ive-t-2.0-v2-4x4-sct-gas-bnd-gray-blue-white/LOS05014V2T1.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/5 4WD gas short-course truck (Bind-N-Drive). Large-scale off-road racing ('buggy' type per schema). V2 is the current revision."
+  },
+  {
+    "brand": "Losi",
+    "model": "DBXL-E 2.0",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Leading 1/5 4WD brushless desert buggy; 8S, 50+ mph, the go-to large-scale electric off-road platform for bashers and large-scale enthusiasts.",
+    "sources": [
+      "https://www.losi.com/product/1-5-dbxl-e-2.0-4wd-desert-buggy-brushless-rtr-with-smart-fox-body/LOS05020T1.html",
+      "https://www.horizonhobby.com/product/1-5-dbxl-e-2.0-4wd-desert-buggy-brushless-rtr-with-smart/LOS05020.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/5 4WD brushless desert buggy. V2/Fox 8S variants current. Spektrum Firma 160A ESC + 780Kv motor."
+  },
+  {
+    "brand": "Losi",
+    "model": "DBXL 2.0",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Gas-powered 1/5 4WD desert buggy (Icon variant); large-scale off-road counterpart to the DBXL-E.",
+    "sources": [
+      "https://www.losi.com/product/losi-1-5-dbxl-2.0-icon-4x4-rtr-gas-desert-buggy-black-/LOS05008T1.html",
+      "https://www.losi.com/cars-and-trucks/by-size/large/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/5 4WD gas desert buggy. Gas sibling of the DBXL-E platform."
+  },
+  {
+    "brand": "FG Modellsport",
+    "model": "F1 Sportsline (1/5 Sedan)",
+    "scale": "1/5",
+    "category": "offroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "FG's 1/5 large-scale on-road sedan/touring platform (26cc, belt-drive, ~100 km/h); FG is the dominant European 1/5 large-scale on-road brand with an established competition heritage (Competition / Sportsline lines).",
+    "sources": [
+      "http://www.fg-modellsport.com/product/fg-modellsport-f-1-5-sportsline-2wd-rtr-clear-body-10000R",
+      "https://www.rcscrapyard.net/fg-sportsline.htm",
+      "https://www.rcscrapyard.net/fg-competition.htm"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/5 large-scale on-road sedan => 'touring' type per schema. 5mm alloy chassis, 26cc engine, 4 oil-pressure shocks. FG also produces a Competition Touring line."
+  },
+  {
+    "brand": "Axial",
+    "model": "SCX10 Pro",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Purpose-built comp-ready scale crawler kit ('lighter, lower, more adjustable'); has already won and placed at multiple events with designer Wyatt Mellon driving. A go-to comp/scale competition platform.",
+    "sources": [
+      "https://www.amainhobbies.com/axial-scx10-pro-1-10-4wd-scaler-rock-crawler-kit-axi03028/p1474738",
+      "https://www.axialadventure.com/product/1-10-scx10-pro-4x4-kit/AXI03028.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 4WD comp-style scale crawler builder kit (AXI03028). Carbon-rail comp builds common with Hobbywing/Reefs/SSD components."
+  },
+  {
+    "brand": "Axial",
+    "model": "UTB10 Capra 1.9 4WS",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless", "nitro"],
+    "notable_results": "Unlimited Trail Buggy with portal axles + 4-wheel steering; 45.37:1 final drive for max climbing. Widely cited as the platform to own for serious rock-crawling competition / technical comp driving.",
+    "sources": [
+      "https://www.amainhobbies.com/axial-utb10-capra-1.9-4ws-unlimited-trail-buggy-1-10-rtr-4wd-rock-crawler-axi-1543t1/p1625087",
+      "https://www.horizonhobby.com/product/1-10-utb10-capra-1.9-4ws-4x4-unlimited-trail-buggy-brushed-rtr/AXI-1543.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 UTB (Unlimited Trail Buggy) comp-trail crawler with portal axles + 4WS. RTR is brushed; comp builds run brushless. Crawler type."
+  },
+  {
+    "brand": "Element RC",
+    "model": "Enduro Comp Fox",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dedicated competition rock-crawler kit (Associated Electrics' Element brand): carbon-fiber flat-rail chassis, portal axles, Stealth X overdrive transmission with 60/40 forward weight bias. Built specifically for the hardcore comp-crawling scene.",
+    "sources": [
+      "https://www.amainhobbies.com/element-rc-enduro-comp-fox-competition-1-10-4wd-rock-crawler-kit-asc40129/p1580545",
+      "https://www.towerhobbies.com/product/enduro-comp-fox-competition-rock-crawler-kit/ASC40129.html",
+      "https://www.bigsquidrc.com/element-rc-1-10-enduro-comp-fox-competition-rock-crawler-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://portal.associatedelectrics.com/element/cars_and_trucks/Enduro/Enduro_Comp_Fox/manuals_setups/",
+    "notes": "1/10 4WD dedicated competition crawler kit (ASC40129 / EL40129). Carbon chassis, portal axles, Stealth X trans. Manuals/setups hub linked."
+  },
+  {
+    "brand": "Vanquish Products",
+    "model": "VS4-10 Phoenix Portal",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "First platform with Vanquish's VFD Twin transmission (selectable overdrive + 3-position dig) and F10 portal axles; high-end scale/comp competition crawler kit.",
+    "sources": [
+      "https://www.amainhobbies.com/vanquish-products-vs410-phoenix-portal-rock-crawler-kit-w-falken-wildpeak-mt-vps09007/p1368384",
+      "https://www.rcteam.com/en/products/vanquish-crawler-vs4-10-origin-classic-kit-vps09026a"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 scale-comp crawler kit. Phoenix (portal) and Origin (straight-axle) variants. VFD Twin trans with dig + overdrive."
+  },
+  {
+    "brand": "Vanquish Products",
+    "model": "VRD Stance",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition-grade RTR comp rock crawler: stamped-aluminum frame, F10 portal axles, VFD trans at chassis low-point with 6.5% overdrive, low-CG brass weighting and pinched comp Lexan body.",
+    "sources": [
+      "https://www.amainhobbies.com/vanquish-products-1-10-vrd-stance-portal-axle-4x4-rtr-1-10-comp-rock-crawler-vps09009c/p1632898",
+      "https://www.hobbytown.com/vanquish-products-vrd-stance-rtr-portal-axle-comp-rock-crawler-green-vps09009a/p1535717"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 comp rock crawler RTR (VPS09009 series). Portal axles, VFD trans, comp Stance body."
+  },
+  {
+    "brand": "Vanquish Products",
+    "model": "VRD Carbon",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Vanquish's dedicated 1/10 competition rock crawler kit (carbon-spec), one of the leading hardcore comp platforms in the current scene.",
+    "sources": [
+      "https://vanquishproducts.com/products/vrd-carbon-kit",
+      "https://www.whiterosehobbies.com/collections/vanquish-vps09015-vrd-carbon-1-10-competition-rock-crawler"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 competition rock crawler kit (VPS09015). Carbon chassis comp rig."
+  },
+  {
+    "brand": "Vanquish Products",
+    "model": "VRD Mullet",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Competition-proven 'mullet' configuration comp crawler kit (front F10 straight axle + rear F10 portal); Carbon Spec VFD trans, 34% total overdrive for comp climbing/steering balance.",
+    "sources": [
+      "https://www.amainhobbies.com/vanquish-products-vrd-mullet-1-10-competition-rock-crawler-kit-vps09014/p1666250",
+      "https://www.edsrc.com/products/vanquish-products-vrd-mullet-1-10-competition-rock-crawler-kit"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 competition rock crawler kit (VPS09014). Front straight / rear portal 'mullet' layout."
+  },
+  {
+    "brand": "SSD RC",
+    "model": "Trail King Pro Scale Chassis",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Performance-oriented scale/comp builder chassis used widely by scale enthusiasts and competition crawlers; Pro44 axles, full machined-steel drivetrain, 44.2:1 final drive.",
+    "sources": [
+      "https://www.amainhobbies.com/ssd-rc-trail-king-pro-scale-crawler-chassis-builders-kit-ssd00300/p947552",
+      "https://www.hobbytown.com/ssd-rc-trail-king-pro-scale-crawler-chassis-builders-kit-ssd00300/p947552"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 scale/comp builders chassis (SSD00300). SSD components are common on competition SCX10 Pro / scale comp builds."
+  },
+  {
+    "brand": "RC4WD",
+    "model": "Bully II MOA Competition",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Classic dual-motor MOA (motor-on-axle) competition crawler developed to meet U.S.R.C.C.A. competition rules; titanium links, carbon chassis, 2.2 comp beadlocks with X2SS compound tires. A long-standing benchmark of the dedicated comp-crawler class.",
+    "sources": [
+      "https://www.amainhobbies.com/rc4wd-bully-ii-moa-competition-crawler-kit-rc4zk0056/p513007",
+      "https://store.rc4wd.com/RC4WD-Bully-II-MOA-Competition-Crawler-Kit_p_5056.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10-ish 2.2 dual-motor MOA competition crawler kit (RC4ZK0056). Built to USRCCA comp rules. The archetypal 'comp crawler' (vs scale comp)."
+  },
+  {
+    "brand": "Redcat Racing",
+    "model": "Ascent Fusion LCG",
+    "scale": "1/10",
+    "category": "offroad",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "1/10 LCG competition RTR rock crawler; brushless, low-center-of-gravity comp-oriented platform aimed at the competitive rock-crawling class.",
+    "sources": [
+      "https://www.amainhobbies.com/redcat-ascent-fusion-lcg-1-10-4wd-rtr-brushless-scale-rock-crawler-black-rer31524/p1553495",
+      "https://fearlessrc.com/product/rer31793/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 4WD LCG brushless competition RTR crawler (RER31524). Lower-cost comp-class entry."
+  }
+]

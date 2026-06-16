@@ -8,7 +8,9 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "full",
     "template_file": "inferno-mp11.json",
     "provenance": "Full template extracted from the official MP11 editable setup sheet ver 1.00 and instruction manual 33028-T02 (kit No. 33028); typed params in chassis/1-8-nitro-buggy/kyosho/inferno_MP11/inferno-mp11.md."
@@ -22,9 +24,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: predecessor of the MP11 in the Kyosho Inferno competition line. No setup-sheet/manual PDFs extracted yet - no kit values recorded."
+    "provenance": "Public identity only: predecessor of the MP11 in the Kyosho Inferno competition line. No setup-sheet/manual PDFs extracted yet - no kit values recorded.",
+    "category_template": "1_8_offroad_nitro"
   },
   {
     "chassis_id": "sparko-f8",
@@ -35,9 +40,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: F8 nitro pro buggy, verified via sparkoracing.com 1/8 buggy catalog (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: F8 nitro pro buggy, verified via sparkoracing.com 1/8 buggy catalog (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_nitro"
   },
   {
     "chassis_id": "sparko-f8e",
@@ -48,9 +56,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "brushless",
-    "power_types": ["brushless"],
+    "power_types": [
+      "brushless"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: F8e Electric Pro Buggy Kit (brushless counterpart of the F8), verified via sparkoracing.com product page (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: F8e Electric Pro Buggy Kit (brushless counterpart of the F8), verified via sparkoracing.com product page (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_electric"
   },
   {
     "chassis_id": "mugen-mbx8r",
@@ -61,9 +72,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: MBX8R nitro competition buggy, existence confirmed via mugenseiki.com and the MBX8R ECO product copy (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: MBX8R nitro competition buggy, existence confirmed via mugenseiki.com and the MBX8R ECO product copy (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_nitro"
   },
   {
     "chassis_id": "mugen-mbx8r-eco",
@@ -74,9 +88,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "brushless",
-    "power_types": ["brushless"],
+    "power_types": [
+      "brushless"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: MBX8R ECO electric competition buggy, verified via mugenseiki.com spec page and Horizon Hobby listing MUGE2028 (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: MBX8R ECO electric competition buggy, verified via mugenseiki.com spec page and Horizon Hobby listing MUGE2028 (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_electric"
   },
   {
     "chassis_id": "sworkz-s35-4",
@@ -87,9 +104,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: S35-4 nitro pro buggy line (incl. later EVO spec), verified via sworkz.com catalog (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: S35-4 nitro pro buggy line (incl. later EVO spec), verified via sworkz.com catalog (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_nitro"
   },
   {
     "chassis_id": "sworkz-s35-4e",
@@ -100,9 +120,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "brushless",
-    "power_types": ["brushless"],
+    "power_types": [
+      "brushless"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: S35-4E brushless pro buggy (incl. later EVO spec SW910042), verified via sworkz.com product page (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: S35-4E brushless pro buggy (incl. later EVO spec SW910042), verified via sworkz.com product page (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_electric"
   },
   {
     "chassis_id": "xray-xb8",
@@ -113,9 +136,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: XB8 nitro competition platform (yearly spec releases), existence confirmed via XRAY/retailer XB8E platform copy (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: XB8 nitro competition platform (yearly spec releases), existence confirmed via XRAY/retailer XB8E platform copy (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_nitro"
   },
   {
     "chassis_id": "xray-xb8e",
@@ -126,9 +152,12 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "brushless",
-    "power_types": ["brushless"],
+    "power_types": [
+      "brushless"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: XB8E electric competition buggy (yearly specs, e.g. XRA350162 for 2025), verified via AMain Hobbies listings (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: XB8E electric competition buggy (yearly specs, e.g. XRA350162 for 2025), verified via AMain Hobbies listings (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_electric"
   },
   {
     "chassis_id": "agama-a319",
@@ -139,8 +168,3769 @@
     "scale": "1/8",
     "type": "buggy",
     "default_power_type": "nitro",
-    "power_types": ["nitro"],
+    "power_types": [
+      "nitro"
+    ],
     "template_status": "pending_pdf",
-    "provenance": "Public identity only: A319 nitro competition buggy, verified via AMain Hobbies AGMA319 listing and redrc.net coverage (2026-06). No PDFs extracted yet."
+    "provenance": "Public identity only: A319 nitro competition buggy, verified via AMain Hobbies AGMA319 listing and redrc.net coverage (2026-06). No PDFs extracted yet.",
+    "category_template": "1_8_offroad_nitro"
+  },
+  {
+    "chassis_id": "associated-rc8b4-1",
+    "template_id": "associated-rc8b4-1",
+    "brand": "Team Associated",
+    "model": "RC8B4.1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Davide Ongaro won the 2024 IFMAR 1:8 IC Off-Road World Championship driving the RC8B4.1; latest of Associated's championship buggy line. An RC8B4.1e electric variant also exists. | sources: https://www.amainhobbies.com/team-associated-rc8b4.1-team-1-8-4wd-offroad-nitro-buggy-kit-asc80949/p1535759 ; https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship ; https://www.liverc.com/news/davide-ongaro-crowned-2024-ifmar-world-champion/"
+  },
+  {
+    "chassis_id": "associated-rc8b4",
+    "template_id": "associated-rc8b4",
+    "brand": "Team Associated",
+    "model": "RC8B4",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Davide Ongaro won the 2022 IFMAR 1:8 IC Off-Road World Championship driving the RC8B4, becoming the first two-time IFMAR 1:8 World Champion. | sources: https://www.amainhobbies.com/team-associated-rc8b4-team-1-8-4wd-offroad-nitro-buggy-kit-asc80945/p1402930 ; https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship ; https://www.liverc.com/news/ongaro-2022-ifmar-18th-buggy-world-champion/"
+  },
+  {
+    "chassis_id": "associated-rc8b3-2",
+    "template_id": "associated-rc8b3-2",
+    "brand": "Team Associated",
+    "model": "RC8B3.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Evolution of the RC8B3.1 platform that won the 2018 IFMAR Worlds (Ongaro) and 2019 ROAR Nationals (Rivkin); widely raced in A-mains in the late 2010s. | sources: https://www.towerhobbies.com/product/18-rc8b3.2-nitro-team-4wd-buggy-kit/ASC80939.html ; https://bigbanghobbies.com/en/kits/associated-rc8b3-2-team-kit-1-8-nitro-buggy.html"
+  },
+  {
+    "chassis_id": "associated-rc8b3-1",
+    "template_id": "associated-rc8b3-1",
+    "brand": "Team Associated",
+    "model": "RC8B3.1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Davide Ongaro won the 2018 IFMAR 1:8 IC Off-Road World Championship in Perth on the RC8B3.1; Spencer Rivkin won the ROAR 1:8 Fuel Off-Road Nationals with it. | sources: https://www.associatedelectrics.com/news/race_results/2273-team-associated039s-spencer-rivkin-wins-roar-1-8-fuel-off-road-nationals-with-rc8b31/ ; https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp9-tki4",
+    "template_id": "kyosho-inferno-mp9-tki4",
+    "brand": "Kyosho",
+    "model": "Inferno MP9 TKI4",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "TQ in qualifying and 2nd place finish at the 2016 IFMAR 1:8 Off-Road Worlds in Las Vegas; one of the most successful and long-raced Infernos. | sources: https://www.horizonhobby.com/product/kyosho-1-8-inferno-mp9-tki4-v2-4x4-off-road-.25-nitro-buggy-rtr/KYO33021.html ; https://www.amainhobbies.com/kyosho-inferno-mp9-tki4-v2-readyset-1-8-nitro-buggy-kyo33021/p1266870"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp9-tki2",
+    "template_id": "kyosho-inferno-mp9-tki2",
+    "brand": "Kyosho",
+    "model": "Inferno MP9 TKI2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Cody King won the 2010 IFMAR 1:8 IC Off-Road World Championship driving the Kyosho Inferno MP9 TKI2. | sources: https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "mugen-mbx8",
+    "template_id": "mugen-mbx8",
+    "brand": "Mugen Seiki",
+    "model": "MBX8",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Mugen ran four MBX8s in the 60-minute final at the 2018 IFMAR Worlds with Ryan Maifield finishing on the podium; the Worlds Edition packages the team's 2018 Worlds option parts. | sources: https://www.amainhobbies.com/mugen-seiki-mbx8-worlds-edition-1-8-offroad-competition-nitro-buggy-kit-muge2025/p966209 ; https://www.mugenracing.com/e2025-mbx8-worlds-edition-1-8-nitro-buggy-kit/"
+  },
+  {
+    "chassis_id": "mugen-mbx7",
+    "template_id": "mugen-mbx7",
+    "brand": "Mugen Seiki",
+    "model": "MBX7",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Robert Batlle won the 2012 IFMAR 1:8 IC Off-Road World Championship driving the Mugen MBX-7. | sources: https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "tlr-8ight-x-elite",
+    "template_id": "tlr-8ight-x-elite",
+    "brand": "TLR",
+    "model": "8IGHT-X Elite",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Top-tier TLR competition nitro buggy building on the championship-winning 8IGHT heritage; raced at major US and international 1:8 events. | sources: https://www.tlracing.com/product/1-8-8ight-x-e-2.0-combo-4x4-nitro-electric-race-buggy-kit/TLR04012.html ; https://www.redrc.net/2020/01/tlr-8ight-x-elite-1-8th-nitro-buggy-race-kit/ ; https://www.bigsquidrc.com/tlr-8ight-x-elite-nitro-buggy-race-kit/"
+  },
+  {
+    "chassis_id": "tlr-8ight-x",
+    "template_id": "tlr-8ight-x",
+    "brand": "TLR",
+    "model": "8IGHT-X",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "TLR's mainline 1:8 nitro buggy of the late 2010s with updated suspension geometry and drivetrain; a regular A-main contender. | sources: https://www.tlracing.com/product/1-8-8ight-x-4wd-nitro-buggy-race-kit/TLR04007.html ; https://www.hobbymedia.net/9377/tlr-8ight-x-elite"
+  },
+  {
+    "chassis_id": "hb-d8-world-spec",
+    "template_id": "hb-d8-world-spec",
+    "brand": "HB Racing",
+    "model": "D8 World Spec",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Production version of the prototype HB team drivers ran at the 2022 IFMAR Worlds in Spain; delivers quicker lap times than the D819RS. | sources: https://hbracing.com/cars/off-road/nitro/d8-world-spec-1-8-competition-nitro-buggy-without-bodyshell-en/ ; https://www.hearnshobbies.com/products/hb-racing-d8-world-spec-1-8-competition-nitro-buggy-without-bodyshell"
+  },
+  {
+    "chassis_id": "hb-d819rs",
+    "template_id": "hb-d819rs",
+    "brand": "HB Racing",
+    "model": "D819RS",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Race-spec evolution of the World Champion D819 line; widely raced in A-mains in the late 2010s/early 2020s. | sources: https://hbracing.com/hb-racing-d819rs-1-8-world-champion-nitro-buggy-en/ ; https://hbracing.com/cars/off-road/nitro/d819rs-1-8-competition-nitro-buggy-en/"
+  },
+  {
+    "chassis_id": "hb-d819",
+    "template_id": "hb-d819",
+    "brand": "HB Racing",
+    "model": "D819",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Successor in HB's World Champion buggy line (following the Worlds-winning D815/D817), adding latest high-performance parts. | sources: https://hbracing.com/hb-racing-d819-1-8-world-champion-nitro-buggy-en/ ; https://www.hobbymedia.net/4056/hb-d819-18th-scale-competition-buggy"
+  },
+  {
+    "chassis_id": "hb-d817",
+    "template_id": "hb-d817",
+    "brand": "HB Racing",
+    "model": "D817",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "David Ronnefalk won the 2016 IFMAR Worlds in Las Vegas; back-to-back World titles for the D815 and D817. | sources: https://hbracing.com/hb-racing-d817-1-8-world-champion-nitro-buggy-en/ ; https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "hb-d812",
+    "template_id": "hb-d812",
+    "brand": "Hot Bodies",
+    "model": "D812",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Ty Tessmann won the 2014 IFMAR 1:8 IC Off-Road World Championship driving the Hot Bodies D812. | sources: https://en.wikipedia.org/wiki/IFMAR_1:8_IC_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "tekno-rc-nb48-2-2",
+    "template_id": "tekno-rc-nb48-2-2",
+    "brand": "Tekno RC",
+    "model": "NB48 2.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "ROAR National Championship-winning buggy in the hands of Ryan Maifield; podium in seven of the past ten major US 1:8 events. | sources: https://www.amainhobbies.com/tekno-rc-nb48-2.2-1-8-competition-offroad-nitro-buggy-kit-tkr9305/p1568309 ; https://blog.teknorc.com/2024/07/09/tekno-rc-unveils-the-nb48-2-2-a-game-changing-1-8th-scale-race-buggy/"
+  },
+  {
+    "chassis_id": "tekno-rc-nb48-2-1",
+    "template_id": "tekno-rc-nb48-2-1",
+    "brand": "Tekno RC",
+    "model": "NB48 2.1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Widely raced chassis that the NB48 2.2 builds on; strong rough-track A-main performer in US national events. | sources: https://www.amainhobbies.com/the-hottest-1-8-buggy-you-can-buy-right-now-nb48-2.2-tekno-rc/cp1527 ; https://www.teknorc.com/shop/tkr9305-nb48-2-2-1-8th-4wd-competition-nitro-buggy-kit/"
+  },
+  {
+    "chassis_id": "tekno-rc-nb48",
+    "template_id": "tekno-rc-nb48",
+    "brand": "Tekno RC",
+    "model": "NB48",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Original NB48 competition nitro buggy that established Tekno as a 1:8 off-road race contender in the US. | sources: https://www.amainhobbies.com/tekno-rc-nb48-1-8-competition-offroad-nitro-buggy-kit-tkr5300/p265132"
+  },
+  {
+    "chassis_id": "xray-xb8-2025",
+    "template_id": "xray-xb8-2025",
+    "brand": "Xray",
+    "model": "XB8 2025",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Latest evolution of the XB8 line that has won EFRA Euros (Bruno Coelho), ROAR Nationals (Ty Tessmann) and taken Worlds Vice-Champion. | sources: https://teamxray.com/xb8/2025/en/ ; https://www.eurorc.com/product/38114/xray-xb8-2025---luxurious-18-racing-nitro-buggy-kit"
+  },
+  {
+    "chassis_id": "xray-xb8-2024",
+    "template_id": "xray-xb8-2024",
+    "brand": "Xray",
+    "model": "XB8 2024",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Part of the XB8 platform that won the EFRA European Championship (Bruno Coelho), a ROAR National title (Ty Tessmann) and was Worlds Vice-Champion (Tessmann, 2018). | sources: https://teamxray.com/xb8/2024/en/ ; https://www.efra.ws/all-the-action-from-the-1-8th-nitro-buggy-european-championships/"
+  },
+  {
+    "chassis_id": "xray-xb8-2019",
+    "template_id": "xray-xb8-2019",
+    "brand": "Xray",
+    "model": "XB8 2019",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "XB8'19 spec from the platform that delivered XRAY's EFRA Euro title and ROAR National title and Worlds Vice-Champion (Ty Tessmann TQ, 2018). | sources: https://www.rccaraction.com/xray-xb819-4wd-nitro-buggy/ ; https://www.teamxray.com/teamxray/news/newsdesc.php?news_id=10531"
+  },
+  {
+    "chassis_id": "sworkz-s35-4-evo",
+    "template_id": "sworkz-s35-4-evo",
+    "brand": "SWORKz",
+    "model": "S35-4 EVO",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Factory-developed competition nitro buggy with hard-anodized lightened chassis and short-wheelbase design; SWORKz's current top 1:8 race platform tested by factory pilots. | sources: https://sworkz.com/gas-powered-cars/sworkz-s35-4-evo-1-8-pro-nitro-buggy-pro-kit ; https://beachrc.com/sworkz-s35-4e-evo-1-8-pro-brushless-buggy-kit/"
+  },
+  {
+    "chassis_id": "serpent-cobra-srx8-pro",
+    "template_id": "serpent-cobra-srx8-pro",
+    "brand": "Serpent",
+    "model": "Cobra SRX8 Pro",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_nitro",
+    "provenance": "Serpent's competition 1:8 nitro off-road buggy, based on the SRX8 Evo, with redesigned diffs and steering for long-main durability. | sources: https://www.redrc.net/2019/07/serpent-srx8-pro-1-8th-nitro-buggy/"
+  },
+  {
+    "chassis_id": "associated-rc8b3e",
+    "template_id": "associated-rc8b3e",
+    "brand": "Team Associated",
+    "model": "RC8B3e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Team Associated's first competition 1/8 e-buggy, derived from the RC8B3 nitro platform; widely raced in ROAR 1:8 e-buggy nationals and EOS electric off-road. | sources: https://www.liverc.com/news/team-associateds-new-rc8b3e-18-scale-electric-buggy-kit-gallery/ ; https://www.amainhobbies.com/team-associated-rc8-b3e-team-4wd-1-8-electric-buggy-kit-asc80916/p454465"
+  },
+  {
+    "chassis_id": "associated-rc8b3-1e",
+    "template_id": "associated-rc8b3-1e",
+    "brand": "Team Associated",
+    "model": "RC8B3.1e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Updated B3.1e built from RC8B3.1 nitro engineering; a regular A-main car at ROAR electric off-road nationals. | sources: https://www.associatedelectrics.com/news/latest_products/1952-new-rc8b31e-electric-team-kit/ ; https://www.amainhobbies.com/team-associated-rc8-b3.1e-team-1-8-4wd-offroad-electric-buggy-kit-asc80936/p635910"
+  },
+  {
+    "chassis_id": "associated-rc8b4e",
+    "template_id": "associated-rc8b4e",
+    "brand": "Team Associated",
+    "model": "RC8B4e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "4x4 electric buggy from the RC8B4 generation; campaigned in ROAR 1:8 e-buggy nationals and EOS electric off-road. | sources: https://www.horizonhobby.com/product/1-8-rc8b4e-4x4-electric-buggy-team-kit/ASC80946.html ; https://www.amainhobbies.com/team-associated-rc8b4e-1-8-4wd-offroad-electric-buggy-kit-asc80946/p1402931"
+  },
+  {
+    "chassis_id": "associated-rc8b4-1e",
+    "template_id": "associated-rc8b4-1e",
+    "brand": "Team Associated",
+    "model": "RC8B4.1e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Won the inaugural 2024 IFMAR 1:8 Electric Off-Road World Championship in Barcelos, Portugal (Marcus Kaerup). Offers front/rear weight-bias chassis options. | sources: https://www.hobbytown.com/team-associated-rc8b4.1e-team-1-8-4wd-offroad-electric-buggy-kit-asc80950/p1535760 ; https://events.redrc.net/tag/2025-ifmar-18-electric-offroad-worlds-portugal/"
+  },
+  {
+    "chassis_id": "tekno-rc-eb48-3",
+    "template_id": "tekno-rc-eb48-3",
+    "brand": "Tekno RC",
+    "model": "EB48.3",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Tekno's redesigned-geometry 1/8 e-buggy of its era; a long-running A-main competitor in ROAR electric off-road nationals and EOS (Bornhorst/Tebo). | sources: https://www.amainhobbies.com/tekno-rc-eb48.3-4wd-competition-1-8-electric-buggy-kit-tkr5005/p450417"
+  },
+  {
+    "chassis_id": "tekno-rc-eb48-4",
+    "template_id": "tekno-rc-eb48-4",
+    "brand": "Tekno RC",
+    "model": "EB48.4",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Easier-to-drive evolution with increased rear traction; campaigned at ROAR 1:8 electric nationals and EOS by Tekno factory drivers Joe Bornhorst and Jared Tebo. | sources: https://www.liverc.com/news/new-tekno-rc-eb484-18-scale-electric-buggy/ ; https://www.amainhobbies.com/tekno-rc-eb48.4-4wd-competition-1-8-electric-buggy-kit-tkr8000/p580646"
+  },
+  {
+    "chassis_id": "tekno-rc-eb48-2-0",
+    "template_id": "tekno-rc-eb48-2-0",
+    "brand": "Tekno RC",
+    "model": "EB48 2.0",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Major redesign (revised shock towers, Ackerman spindle plates, tall wing mount, stronger gearboxes); raced by Tekno team at ROAR electric off-road nationals and EOS. | sources: https://www.horizonhobby.com/product/1-8-eb48-2.0-4wd-competition-electric-buggy-kit/TKR9000.html ; https://www.amainhobbies.com/tekno-rc-eb48-2.0-4wd-competition-1-8-electric-buggy-kit-tkr9000/p1173378"
+  },
+  {
+    "chassis_id": "tekno-rc-eb48-2-1",
+    "template_id": "tekno-rc-eb48-2-1",
+    "brand": "Tekno RC",
+    "model": "EB48 2.1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "New rear arms/hubs with adjustable roll center and very long (112mm) arms; campaigned in ROAR 1:8 electric nationals and EOS by Tekno factory team. | sources: https://www.horizonhobby.com/product/1-8-eb48-2.1-4wd-competition-electric-buggy-kit/TKR9003.html ; https://blog.teknorc.com/2022/09/07/new-tekno-rc-eb48-2-1-1-8th-4wd-competition-electric-buggy-kit/"
+  },
+  {
+    "chassis_id": "tekno-rc-eb48-2-2",
+    "template_id": "tekno-rc-eb48-2-2",
+    "brand": "Tekno RC",
+    "model": "EB48 2.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Won the ROAR 2023 1:8 Electric Off-Road Nationals; eighth iteration of the EB48 series, run by Joe Bornhorst and Jared Tebo to frequent podiums. | sources: https://www.teknorc.com/shop/tkr9005-eb48-2-2-1-8th-4wd-competition-electric-buggy-kit/ ; https://www.redrc.net/2024/08/tekno-rc-eb48-2-2-18-electric-buggy/ ; https://www.amainhobbies.com/tekno-rc-eb48-2.2-4wd-competition-1-8-electric-buggy-kit-tkr9005/p1573353"
+  },
+  {
+    "chassis_id": "tlr-8ight-xe",
+    "template_id": "tlr-8ight-xe",
+    "brand": "TLR",
+    "model": "8IGHT-XE",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "TLR's first ground-up dedicated 1/8 4WD electric race buggy on the championship-winning 8IGHT lineage; raced by TLR drivers (Dakotah Phend, Barry Baker, Brian Kinney) with published kit/event setup sheets. | sources: https://www.horizonhobby.com/product/1-8-8ight-xe-4wd-electric-buggy-race-kit/TLR04008.html"
+  },
+  {
+    "chassis_id": "tlr-8ight-xe-elite",
+    "template_id": "tlr-8ight-xe-elite",
+    "brand": "TLR",
+    "model": "8IGHT-XE Elite",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Top-spec Elite variant (Sept 2020) of the 8IGHT-XE with updated suspension geometry and drivetrain; used by TLR's factory race team at ROAR 1:8 electric nationals and EOS. | sources: https://www.redrc.net/2020/08/tlr-8ight-xe-elite-electric-buggy-race-kit/ ; https://www.rccaraction.com/tlr-1-8-8ight-xe-elite-4wd-electric-buggy-race-kit/"
+  },
+  {
+    "chassis_id": "tlr-8ight-x-e-2-0",
+    "template_id": "tlr-8ight-x-e-2-0",
+    "brand": "TLR",
+    "model": "8IGHT-X/E 2.0",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless",
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Combo kit buildable as nitro (8IGHT-X) or electric (8IGHT-E); the electric build is raced in ROAR 1:8 e-buggy nationals and EOS. | sources: https://www.tlracing.com/product/1-8-8ight-x-e-2.0-combo-4x4-nitro-electric-race-buggy-kit/TLR04012.html ; https://www.amainhobbies.com/team-losi-racing-8ightx-e-2.0-combo-nitro-electric-1-8-4x4-offroad-buggy-kit-tlr04012/p1428789"
+  },
+  {
+    "chassis_id": "hb-e817",
+    "template_id": "hb-e817",
+    "brand": "HB Racing",
+    "model": "E817",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "setup_sheet_url": "https://site.petitrc.com/setup/hotbodies/setup819/",
+    "provenance": "Prototype took the 2016 EFRA 1/8 E-Buggy Euros title with David Ronnefalk. Based on the World Champion D815 V2 nitro platform. | sources: https://www.liverc.com/news/new-hb-racing-e817-18-scale-electric-buggy-kit/ ; https://www.amainhobbies.com/hb-racing-e817-1-8-offroad-electric-buggy-kit-hbs204035/p575541 ; https://hbracing.com/hb-racing-e817-electric-1-8-off-road-buggy-en/"
+  },
+  {
+    "chassis_id": "hb-e817-v2",
+    "template_id": "hb-e817-v2",
+    "brand": "HB Racing",
+    "model": "E817 V2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "setup_sheet_url": "https://site.petitrc.com/setup/hotbodies/setup819/",
+    "provenance": "2019 Dirt Nitro Challenge (DNC) E-Buggy champion; the platform whose improvements were carried into the E819. | sources: https://www.amainhobbies.com/hb-racing-e817-v2-1-8-4wd-electric-offroad-buggy-kit-hbs204271/p735075 ; https://hbracing.com/cars/off-road/electric/e817-v2-1-8-competition-electric-buggy/ ; https://www.redrc.net/2019/07/hb-racing-e819-1-8th-e-buggy-kit/"
+  },
+  {
+    "chassis_id": "hb-e819",
+    "template_id": "hb-e819",
+    "brand": "HB Racing",
+    "model": "E819",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "setup_sheet_url": "https://site.petitrc.com/setup/hotbodies/setup819/",
+    "provenance": "Evolution of the 2019 DNC E-Buggy champion E817 V2; longer wheelbase, new diffs. Widely raced at EOS/national level. | sources: https://www.redrc.net/2019/07/hb-racing-e819-1-8th-e-buggy-kit/ ; https://www.liverc.com/news/new-hb-racing-e819-buggy-announcement/ ; https://hbracing.com/e819-electric-off-road-buggy-en/"
+  },
+  {
+    "chassis_id": "hb-e819rs",
+    "template_id": "hb-e819rs",
+    "brand": "HB Racing",
+    "model": "E819RS",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://www.manualslib.com/manual/4076375/Hb-Racing-E819-Rs.html",
+    "setup_sheet_url": "https://site.petitrc.com/setup/hotbodies/setup819/",
+    "provenance": "Latest-spec E819 with team development features (V3 rear shock tower, adjustable wing/body-mount height); raced internationally at EOS and IFMAR-level events. | sources: https://www.amainhobbies.com/hb-racing-e819rs-1-8-4wd-electric-offroad-buggy-kit-hbs204645/p1266860 ; https://hbracing.com/e819rs-electric-off-road-buggy-en ; https://www.manualslib.com/manual/4076375/Hb-Racing-E819-Rs.html"
+  },
+  {
+    "chassis_id": "hb-e8-world-spec",
+    "template_id": "hb-e8-world-spec",
+    "brand": "HB Racing",
+    "model": "E8 World Spec",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://www.manualslib.com/manual/4051615/Hb-Racing-E8-World-Spec.html",
+    "provenance": "2023 flagship e-buggy derived from the D8 World Spec nitro platform; revised symmetrical suspension geometry for high-grip, high-speed tracks. Current HB EOS/Worlds-class entry. | sources: https://www.redrc.net/2023/07/hb-racing-e8-world-spec-18-ebuggy/ ; https://www.amainhobbies.com/hb-racing-e8-world-spec-1-8-4wd-electric-offroad-buggy-kit-hbs204855/p1518073 ; https://www.manualslib.com/manual/4051615/Hb-Racing-E8-World-Spec.html"
+  },
+  {
+    "chassis_id": "mugen-mbx8-eco",
+    "template_id": "mugen-mbx8-eco",
+    "brand": "Mugen Seiki",
+    "model": "MBX8 ECO",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "http://www.mugenseiki.co.jp/mugen/download/manual/manual_e2022.pdf",
+    "setup_sheet_url": "https://site.petitrc.com/setup/mugen/setupmbx8/",
+    "provenance": "Electric version of the championship-winning MBX8 nitro platform; HTD high-traction diffs standard. Platform used by Ryan Maifield for the 2021 ROAR 1/8 Electric Nationals win. Widely campaigned in ROAR/EOS e-buggy classes. | sources: https://www.liverc.com/news/new-mugen-seiki-mbx8-eco-18-scale-electric-buggy-kit/ ; https://www.rccaraction.com/mugen-mbx8-eco-18-electric-buggy/ ; https://www.mugenracing.com/e2022-mbx8-1-8-electric-buggy-kit/ ; https://www.amainhobbies.com/mugen-seiki-mbx8-eco-team-edition-1-8-offroad-electric-buggy-kit-muge2026/p977807"
+  },
+  {
+    "chassis_id": "xray-xb8e-2018",
+    "template_id": "xray-xb8e-2018",
+    "brand": "Xray",
+    "model": "XB8E 2018",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://www.manualslib.com/manual/789150/Xray-Xb8e.html",
+    "setup_sheet_url": "https://teamxray.com/xb8e/2018/en/",
+    "provenance": "2018-spec electric flagship on the multiple-time World Champion XB8 platform; race-proven by the XRAY factory team. Start of the modern annual XB8E line. | sources: https://www.redrc.net/2018/01/xray-xb8e-2018-1-8th-e-buggy-kit/ ; https://www.amainhobbies.com/xray-xb8e-2018-spec-luxury-1-8-electric-offroad-buggy-kit-xra350155/p745202 ; https://teamxray.com/xb8e/2018/en/"
+  },
+  {
+    "chassis_id": "xray-xb8e-2022",
+    "template_id": "xray-xb8e-2022",
+    "brand": "Xray",
+    "model": "XB8E 2022",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://teamxray.com/downloads/94/xb8e_2022_manual.pdf",
+    "setup_sheet_url": "https://teamxray.com/xb8e/2022/en/",
+    "provenance": "Won the European Championships with Jean-Pierrick Sartel; developed/endorsed by World Champion Ty Tessmann and EC-winning factory drivers (Bayer, Matias, Savoya). | sources: https://teamxray.com/xb8e/2022/en/ ; https://www.rcdriver.com/xray-xb8e-23-1-8-luxury-electric-off-road-buggy/ ; https://teamxray.com/downloads/94/xb8e_2022_manual.pdf"
+  },
+  {
+    "chassis_id": "xray-xb8e-2024",
+    "template_id": "xray-xb8e-2024",
+    "brand": "Xray",
+    "model": "XB8E 2024",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://teamxray.com/downloads/78/xb8e_2024_manual_v01_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/xb8e/2024/en/",
+    "provenance": "2024 competition edition of the XB8E annual line; the XB8 platform's first ROAR National Champion title (Ty Tessmann) plus continued EOS/European campaigning by the XRAY factory team. | sources: https://www.amainhobbies.com/xray-xb8e-2024-1-8-electric-4wd-off-road-competition-buggy-kit-xra350161/p1555694 ; https://www.redrc.net/2024/03/xray-xb8e24-18-electric-buggy/ ; https://teamxray.com/xb8e/2024/en/"
+  },
+  {
+    "chassis_id": "xray-xb8e-2025",
+    "template_id": "xray-xb8e-2025",
+    "brand": "Xray",
+    "model": "XB8E 2025",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://teamxray.com/downloads/55/xb8e_2025_manual_v01_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/xb8e/2025/en/",
+    "provenance": "2025 competition edition of the XB8E annual line; current-generation XRAY 1/8 e-buggy raced at EOS/IFMAR-level events. | sources: https://www.amainhobbies.com/xray-xb8e-2025-1-8-electric-4wd-off-road-competition-buggy-kit-xra350162/p1628690 ; https://teamxray.com/xb8e/2025/en/"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp9e-tki4",
+    "template_id": "kyosho-inferno-mp9e-tki4",
+    "brand": "Kyosho",
+    "model": "Inferno MP9e TKI4",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Electric version of the MP9 TKI4 competition platform (longer front arms, updated front shock stay, rear wing); inherits the nitro TKI4's pedigree (TQ + 2nd at the 2016 IFMAR 1/8 GP Off-Road Worlds, Las Vegas). | sources: https://rc.kyosho.com/en/30898.html ; https://www.liverc.com/news/kyoshos-new-mp9e-tki4-18-scale-electric-buggy-kit/ ; https://www.amainhobbies.com/kyosho-inferno-mp9e-tki4-1-8-electric-4wd-offroad-buggy-kit-kyo30898b/p578282"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp9e-evo",
+    "template_id": "kyosho-inferno-mp9e-evo",
+    "brand": "Kyosho",
+    "model": "Inferno MP9e Evo",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Brushless 4WD competition buggy with revised chassis layout and body for improved weight distribution; part of the Inferno race family. A later V2 Readyset (#34111) extends the same platform. | sources: https://rc.kyosho.com/en/34105.html ; https://www.amainhobbies.com/kyosho-inferno-mp9e-evo-1-8-electric-4wd-offroad-buggy-kit-kyo34105b/p781001 ; https://www.amainhobbies.com/kyosho-inferno-mp9e-evo-v2-readyset-1-8-4wd-brushless-electric-buggy-kyo34111/p1266871"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp10e",
+    "template_id": "kyosho-inferno-mp10e",
+    "brand": "Kyosho",
+    "model": "Inferno MP10e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Electric evolution of the MP10 competition platform (4S brushless, spread-battery layout) for the international 1/8 e-buggy class; built on the Inferno race lineage that holds multiple IFMAR 1/8 GP off-road world titles. | sources: https://rc.kyosho.com/en/34110.html ; https://www.amainhobbies.com/kyosho-inferno-mp10e-1-8-electric-4wd-offroad-buggy-kit-kyo34110/p1225102 ; https://www.horizonhobby.com/product/1-8-inferno-mp10e-4x4-off-road-electric-buggy-kit/KYO34110.html ; https://www.redrc.net/2020/06/kyosho-mp10e-1-8th-e-buggy-kit/"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp10e-tki2",
+    "template_id": "kyosho-inferno-mp10e-tki2",
+    "brand": "Kyosho",
+    "model": "Inferno MP10e TKI2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Competition-revised MP10e: smaller/lighter diffs to cut rotational mass plus shock springs developed for the 2022 1/8 GP Buggy World Championship and updated aero body. Carries the Inferno GP-racing pedigree into the electric class. | sources: https://kyoshoamerica.com/1-8-scale-rc-brushless-motor-powered-4wd-racing-buggy-inferno-mp10e-tki2-34116.html ; https://www.amainhobbies.com/kyosho-inferno-mp10e-tki2-1-8-electric-4wd-offroad-buggy-kit-kyo34116/p1469971 ; https://www.horizonhobby.com/product/1-8-inferno-mp10e-tki2-4x4-off-road-electric-buggy-kit/KYO34116.html"
+  },
+  {
+    "chassis_id": "sworkz-s35-3e",
+    "template_id": "sworkz-s35-3e",
+    "brand": "SWORKz",
+    "model": "S35-3E",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "http://sworkz.com/pdf/S35-3E_Manual.pdf",
+    "setup_sheet_url": "http://sworkz.com/pdf/S35-3E%20setup%20sheet_editable.pdf",
+    "provenance": "Electric counterpart of the S35-3 nitro buggy, developed from the success of the S35-2E; adopted the latest nitro buggy's rear suspension, front Ackermann and new center diff. Raced in 1/8 e-buggy competition. | sources: https://www.liverc.com/news/new-sworkz-s35-3-18-scale-nitro-buggy-and-s35-3e-18-scale-electric-buggy-kits-gallery/ ; https://www.bigsquidrc.com/sworkz-s35-3e-electric-buggy-kit/ ; https://www.manualslib.com/manual/1260524/Sworkz-S35-3e.html"
+  },
+  {
+    "chassis_id": "sworkz-s35-2e",
+    "template_id": "sworkz-s35-2e",
+    "brand": "SWORKz",
+    "model": "S35-2E",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "http://sworkz.com/pdf/S35-2E_Manual_Final.pdf",
+    "provenance": "Flagship 1/8 electric buggy at launch, with rear suspension and front Ackermann geometry from the S350 EVO II Limited nitro buggy and a new center transmission. Competed in club/national e-buggy racing. | sources: https://www.liverc.com/news/interesting-features-abound-in-new-sworkz-s35-2e-18-scale-electric-off-road-buggy-kit/ ; https://www.manualslib.com/manual/1181042/Sworkz-S35-2e-Series.html"
+  },
+  {
+    "chassis_id": "sworkz-s350-be1",
+    "template_id": "sworkz-s350-be1",
+    "brand": "SWORKz",
+    "model": "S350 BE1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://www.manualslib.com/manual/956870/Sworkz-S350-Be1.html",
+    "provenance": "SWORKz's first 1/8 E-Buggy race kit; as a prototype it reached the A-Main at the Nitro Challenge and AMS 3.0 and won 3 races. Later released as the S350 BE1 EVO and a USA Edition. | sources: https://www.competitionx.com/news-feed/s-work-s350-be-1-18-e-buggy/ ; https://www.bigsquidrc.com/sworkz-usa-edition-s350-be1-evo-pro-buggy-kit/ ; https://www.manualslib.com/manual/956870/Sworkz-S350-Be1.html"
+  },
+  {
+    "chassis_id": "serpent-cobra-srx8-e",
+    "template_id": "serpent-cobra-srx8-e",
+    "brand": "Serpent",
+    "model": "Cobra SRX8-E",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://images.amainhobbies.com/images/resources/SER600021/Manuals/1-SER600021_Serpent_SRX8-E_PRO_Electric_Buggy_Manual.pdf",
+    "provenance": "Electric version of the 2016 Cobra SRX8 nitro platform (designed by Billy Easton). Raced internationally on debut in 2017 — Easton at the Dirt Nitro Challenge, Joern Neumann and Shin Adachi at the Xiamen race in China. | sources: https://www.liverc.com/news/new-serpent-srx8-e-18-scale-electric-buggy-kit/ ; http://www.neobuggy.net/2017/02/23/serpent-cobra-srx8-e-coming-soon/ ; https://www.amainhobbies.com/serpent-srx8e-1-8-4wd-offroad-electric-buggy-kit-ser600018/p661822 ; https://www.competitionx.com/reviews/review-serpent-cobra-srx8e-18-scale-pro-race-e-buggy/"
+  },
+  {
+    "chassis_id": "serpent-cobra-811-be",
+    "template_id": "serpent-cobra-811-be",
+    "brand": "Serpent",
+    "model": "Cobra 811-Be",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Serpent's first 1/8 competition e-buggy (~2013), derived from the 811 Cobra nitro platform; offered as kit (SER600004) and Be-RTR. Campaigned by Serpent team drivers in European electric off-road events. | sources: https://www.amainhobbies.com/serpent-811be-cobra-1-8-off-road-competition-electric-buggy-kit-ser600004/p209740 ; http://www.rcsoup.com/2013/05/serpent-cobra-e-buggy-ready-to-race-18/"
+  },
+  {
+    "chassis_id": "agama-a215e",
+    "template_id": "agama-a215e",
+    "brand": "Agama",
+    "model": "A215E",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Dedicated (ground-up) 1/8 electric buggy announced Jan 2016, built around the proven A215 suspension geometry but designed for electric weight distribution and torque; per Agama 'tested and proven at big races throughout 2015.' | sources: https://www.liverc.com/news/agama-a215e-18-scale-electric-buggy-coming-soon/ ; https://www.bigsquidrc.com/agama-announces-a215e-buggy/ ; https://www.amainhobbies.com/agama-a215e-1-8-electric-buggy-kit-agma215e/p484250"
+  },
+  {
+    "chassis_id": "agama-a319e",
+    "template_id": "agama-a319e",
+    "brand": "Agama",
+    "model": "A319E",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Electric variant of the successful A319 nitro buggy (2020), using A319 suspension and most drivetrain components with a purpose-designed clamping motor mount; a higher-spec A319EP followed in 2021. EOS multi-champion Michal Orlowski ran the A319/A319EP under Nemo Racing. | sources: https://www.redrc.net/2020/04/agama-a319e-1-8th-scale-e-buggy-kit-coming-soon/ ; https://www.liverc.com/news/new-agama-a319p-and-a319ep-18th-scale-kits/ ; https://www.amainhobbies.com/agama-a319e-1-8-electric-buggy-kit-agma319e/p1175309"
+  },
+  {
+    "chassis_id": "agama-n1e",
+    "template_id": "agama-n1e",
+    "brand": "Agama",
+    "model": "N1e",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "provenance": "Electric version of the N1 nitro buggy (announced 2023). Lay-down-shock, ultra-low-CG competition design with RAD (Rapid Access Diff) gearbox and DBS (Double Bearing System). Current Agama/Nemo Racing e-buggy. | sources: https://www.bigsquidrc.com/teaser-agama-1-8-n1e-electric-race-buggy-kit/ ; https://nemoracing.com/en-us/products/agama-n1e-electric-competition-buggy-kit"
+  },
+  {
+    "chassis_id": "jq-the-ecar",
+    "template_id": "jq-the-ecar",
+    "brand": "JQ Products",
+    "model": "THE eCar",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_offroad_electric",
+    "manual_url": "https://stories.jqracing.com/wp-content/uploads/2015/10/THEeCar-Manual.pdf",
+    "setup_sheet_url": "https://stories.jqracing.com/wp-content/uploads/2015/11/JQ-THE-eCar-WE-SETUP-SHEET-2015-Editable-V1.0-blank.pdf",
+    "provenance": "JQ Products' first 1/8 electric buggy; per the official LiveRC release it took multiple podiums and wins at US Grassroots and JBRL events, a win at the Russian RedBull GP, and a win at the Rhein Main Warm Up in Germany. | sources: https://www.liverc.com/news/jq-products-officially-releases-theecar-18-electric-buggy/ ; https://www.amainhobbies.com/jqracing-the-ecar-1-8-electric-buggy-kit-jqp-jqe0577/p259950 ; https://www.bigsquidrc.com/jq-products-the-ecar-8th-scale-electric-buggy-kit/"
+  },
+  {
+    "chassis_id": "associated-rc8t3",
+    "template_id": "associated-rc8t3",
+    "brand": "Team Associated",
+    "model": "RC8T3",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Truggy counterpart of the championship-winning RC8B3 buggy platform; campaigned by the Team Associated factory team (Spencer Rivkin, Ryan Cavalieri) at major US events including the Dirt Nitro Challenge and ROAR 1/8 Fuel Off-Road Nationals. RC8T3e is the brushless e-truggy sibling. | sources: https://60years.associatedelectrics.com/rc8t3-nitro-team-kit/ ; http://www.competitionx.com/news-feed/team-associated-rc8t3-18-nitro-truggy-team-kit/"
+  },
+  {
+    "chassis_id": "associated-rc8t3-1",
+    "template_id": "associated-rc8t3-1",
+    "brand": "Team Associated",
+    "model": "RC8T3.1",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Mid-generation refresh (Feb 2018) with refined suspension framework for easier driving, more consistent lap times and increased durability; run by the AE off-road squad at ROAR and US national-level events. RC8T3.1e is the electric sibling. | sources: https://www.redrc.net/2018/02/team-associated-rc8t3-1-t3-1e-team-kits/ ; https://www.amainhobbies.com/team-associated-rc8-t3.1-team-1-8-4wd-offroad-nitro-truggy-kit-asc80937/p742112"
+  },
+  {
+    "chassis_id": "associated-rc8t3-2",
+    "template_id": "associated-rc8t3-2",
+    "brand": "Team Associated",
+    "model": "RC8T3.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Released Sept 2020 (ASC80943), applying lessons from the RC8B3.2 buggy: flex-adjustable lengthened narrow-pivot rear arms, 4-piece center bulkhead, IFMAR-approved rear wing. Raced by the AE factory team at US ROAR-level nitro off-road events. RC8T3.2e electric variant released alongside. | sources: https://www.redrc.net/2020/09/team-associated-rc8t3-2-truggy-team-kit/ ; https://www.horizonhobby.com/product/1-8-rc8t3.2-nitro-team-4wd-truggy-kit/ASC80943.html"
+  },
+  {
+    "chassis_id": "associated-rc8t4",
+    "template_id": "associated-rc8t4",
+    "brand": "Team Associated",
+    "model": "RC8T4",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC8T4/Team/RC8T4-T4e-Manual-9-2023.pdf",
+    "setup_sheet_url": "https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC8T4/Team/manuals_setups/",
+    "provenance": "Current-generation AE 1/8 nitro truggy (kit ASC80947) with reduced-kingpin-inclination front geometry for stability and a 3.5-deg inclined front pinion. Campaigned by the AE factory off-road team at ROAR Fuel Off-Road Nationals. Electric RC8T4e took the 2024 ROAR Electric Truck National Title (Spencer Rivkin). | sources: https://www.liverc.com/news/new-team-associated-rc8t4-nitro-truggy-kit/ ; https://www.horizonhobby.com/product/1-8-rc8t4-4x4-nitro-truggy-team-kit/ASC80947.html ; https://www.amainhobbies.com/team-associated-rc8t4-team-1-8-4wd-offroad-nitro-truggy-kit-asc80947/p1453190"
+  },
+  {
+    "chassis_id": "tekno-rc-nt48-3",
+    "template_id": "tekno-rc-nt48-3",
+    "brand": "Tekno RC",
+    "model": "NT48.3",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2015/08/NT48.3instructions.pdf",
+    "provenance": "Released Sept 2015 with a front-engine-only chassis, trailing steering spindles and CNC brake discs. Ryan Lutz took 2nd in Truggy at the 2015 ROAR 1/8th Fuel Off-Road Nationals on the NT48.3. ET48.3 is the electric truggy sibling. | sources: https://www.teknorc.com/shop/tkr5406-nt48-3-18th-competition-nitro-truggy-kit/ ; https://www.redrc.net/2015/09/tekno-nt48-3-18th-nitro-truggy-kit/ ; https://www.liverc.com/news/new-tekno-nt483-18-scale-nitro-truggy-kit/"
+  },
+  {
+    "chassis_id": "tekno-rc-nt48-2-0",
+    "template_id": "tekno-rc-nt48-2-0",
+    "brand": "Tekno RC",
+    "model": "NT48 2.0",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2021/11/NT482.0_instructions.pdf",
+    "provenance": "Released Nov 2021 (TKR9400); marketed as Tekno's fastest and most durable nitro truggy with quick-access diffs, very free suspension, twisted-caster front arms and a decoupled radio tray. ET48 2.0 (TKR9600) is the electric truggy sibling. | sources: https://www.teknorc.com/shop/tkr9400-nt48-2-0-4wd-nitro-1-8th-scale-competition-truggy-kit/ ; https://www.horizonhobby.com/product/1-8-nt48-2.0-4wd-nitro-competition-truggy-kit/TKR9400.html"
+  },
+  {
+    "chassis_id": "tekno-rc-nt48-2-2",
+    "template_id": "tekno-rc-nt48-2-2",
+    "brand": "Tekno RC",
+    "model": "NT48 2.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Released Feb 2025 (TKR9401) after 2+ years of US/Europe testing; secured back-to-back ROAR National Championships (Ryan Maifield) prior to public release. Latest NT48 generation. ET48 2.2 (TKR9605, Nov 2024) is the electric truggy sibling. | sources: https://www.teknorc.com/shop/tkr9401-nt48-2-2-1-8th-4wd-competition-nitro-truggy-kit/ ; https://www.redrc.net/2025/01/tekno-rc-nt48-2-2-nitro-truggy/ ; https://www.amainhobbies.com/tekno-rc-nt48-2.2-1-8-4wd-offroad-competition-nitro-truggy-kit-tkr9401/p1616461"
+  },
+  {
+    "chassis_id": "tlr-8ight-t-3-0",
+    "template_id": "tlr-8ight-t-3-0",
+    "brand": "TLR",
+    "model": "8IGHT-T 3.0",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "https://www.manualslib.com/manual/1030945/Tlr-8ight-T-E-3-0.html",
+    "setup_sheet_url": "https://www.tlracing.com/product/1-8-8ight-t-3.0-4wd-nitro-truggy-race-kit/TLR04001.html",
+    "provenance": "2014 ROAR Gas Off-Road Nationals (Thornhill Racing Circuit, TX): Dakotah Phend TQ'd and won the US National Truggy Championship on his 8IGHT-T 3.0, beating defending champ Ty Tessmann by ~0.3s; TLR was the best-represented brand with five 8IGHT-T 3.0s on the truggy grid. | sources: https://events.redrc.net/2014/06/phend-claims-first-nitro-title-in-thrilling-truggy-final/ ; https://www.tlracing.com/product/1-8-8ight-t-3.0-4wd-nitro-truggy-race-kit/TLR04001.html"
+  },
+  {
+    "chassis_id": "tlr-8ight-t-4-0",
+    "template_id": "tlr-8ight-t-4-0",
+    "brand": "TLR",
+    "model": "8IGHT-T 4.0",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "setup_sheet_url": "https://www.tlracing.com/product/1-8-8ight-t-4.0-4wd-nitro-truggy-race-kit/TLR04005.html",
+    "provenance": "Tanner Denney won Pro Nitro Truggy at the 2017 Psycho Nitro Blast on an 8IGHT-T 4.0. Platform contested ROAR Nationals and the Psycho Nitro Blast through the late 2010s with TLR drivers (Maifield, Phend, Denney) on team setup sheets. | sources: https://www.tlracing.com/product/1-8-8ight-t-4.0-4wd-nitro-truggy-race-kit/TLR04005.html ; https://www.horizonhobby.com/product/1-8-8ight-t-4.0-4wd-nitro-truggy-race-kit/TLR04005.html ; https://www.amainhobbies.com/team-losi-racing-8ightt-4.0-1-8-4wd-nitro-truggy-race-kit-tlr04005/p488735"
+  },
+  {
+    "chassis_id": "tlr-8ight-xt-xte",
+    "template_id": "tlr-8ight-xt-xte",
+    "brand": "TLR",
+    "model": "8IGHT-XT/XTE",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "setup_sheet_url": "https://www.tlracing.com/product/1-8-8ight-xt-xte-4x4-nitro-electric-truggy-race-kit/TLR04009.html",
+    "provenance": "Current TLR race truggy; a single kit builds either nitro (8IGHT-XT) or electric (8IGHT-XTE). Dakotah Phend won the 2022 ROAR 1/8 Off-Road Nationals Nitro Truggy title; Ryan Maifield won the 2023 ROAR Nitro Off-Road Nationals Truggy class; Phend/Fuller traded Pro Truggy wins at the 2023 and 2026 Psycho Nitro Blast on the platform. | sources: https://www.tlracing.com/product/1-8-8ight-xt-xte-4x4-nitro-electric-truggy-race-kit/TLR04009.html ; https://www.redrc.net/2020/08/tlr-8ight-xt-xte-nitro-electric-truggy-kit/ ; https://www.liverc.com/news/2022-roar-18th-scale-road-nationals-phend-crowned-c"
+  },
+  {
+    "chassis_id": "kyosho-inferno-st-rr-evo-2",
+    "template_id": "kyosho-inferno-st-rr-evo-2",
+    "brand": "Kyosho",
+    "model": "Inferno ST-RR Evo.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Kyosho's flagship competition truggy of the mid-2010s (released May 2015, kit 33004), built on the 8-time IFMAR World Championship Inferno chassis and sharing MP9 buggy drivetrain. Raced at EFRA Euros and ROAR-level 1/8 truggy class before the MP10T full model change. | sources: https://rc.kyosho.com/en/33004.html ; https://www.redrc.net/2015/05/kyosho-inferno-st-rr-evo-2-18th-nitro-truggy-kit/ ; https://www.amainhobbies.com/kyosho-inferno-strr-evo.2-competition-1-8-nitro-truggy-kit-kyo33004b/p448487"
+  },
+  {
+    "chassis_id": "kyosho-inferno-mp10t",
+    "template_id": "kyosho-inferno-mp10t",
+    "brand": "Kyosho",
+    "model": "Inferno MP10T",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Current-generation Kyosho competition truggy (kit 33017), a full model change from the ST-RR Evo.2, built on the IFMAR-winning MP10 buggy platform. Campaigned in modern 1/8 nitro truggy class events. MP10Te (kit 34115) is the brushless e-truggy variant. | sources: https://www.amainhobbies.com/kyosho-inferno-mp10t-competition-1-8-nitro-truggy-kit-kyo33017/p1001660 ; https://www.horizonhobby.com/product/1-8-inferno-mp10t-4wd-nitro-truggy-kit/KYO33017.html"
+  },
+  {
+    "chassis_id": "mugen-mbx7tr",
+    "template_id": "mugen-mbx7tr",
+    "brand": "Mugen Seiki",
+    "model": "MBX7TR",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Revised 'R' competition spec (MUGE2019) of the MBX-7T, part of Mugen's MBX-7 World Championship-era off-road lineup; campaigned in EFRA/ROAR-level 1/8 nitro truggy events. MBX7TR Eco (MUGE2020) is the electric variant. | sources: https://www.amainhobbies.com/mugen-seiki-mbx7tr-1-8-offroad-4wd-nitro-truggy-kit-muge2019/p475053 ; https://www.redrc.net/2015/11/mugen-mbx7tr-mbx7tr-eco-18th-truggy-kits/"
+  },
+  {
+    "chassis_id": "mugen-mbx8t",
+    "template_id": "mugen-mbx8t",
+    "brand": "Mugen Seiki",
+    "model": "MBX8T",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "http://www.mugenseiki.co.jp/mugen/download/manual/manual_e2023-e2024.pdf",
+    "setup_sheet_url": "http://www.mugenseiki.com/images/mbx8t/setup_sheet/mbx8t-setupsheet-e1901kit.pdf",
+    "provenance": "2021 ROAR Nitro Truggy National Champion. Built on the World-Championship MBX8 buggy platform with High Traction Differentials and a 3mm aluminium chassis; a dominant 1/8 nitro truggy of its era. MBX8T Eco (E2024) is the electric variant. | sources: https://www.amainhobbies.com/mugen-seiki-mbx8t-1-8-offroad-4wd-competition-nitro-truggy-kit-muge2023/p859634 ; https://www.horizonhobby.com/product/1-8-mbx8t-4wd-nitro-truggy-kit/MUGE2023.html ; https://www.redrc.net/2018/10/mugen-mbx8t-mbx8t-eco-1-8th-truggy-kits/"
+  },
+  {
+    "chassis_id": "mugen-mbx8tr",
+    "template_id": "mugen-mbx8tr",
+    "brand": "Mugen Seiki",
+    "model": "MBX8TR",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "http://www.mugenseiki.co.jp/mugen/download/manual/manual_e2029-e2030.pdf",
+    "provenance": "Latest-generation Mugen competition truggy (MUGE2029); geometry developed through 2022 race conditions leading to many major victories, building on the 2021-ROAR-champion MBX8T lineage. New 4-shoe clutch and High Traction Differentials. MBX8TR ECO (MUGE2030) is the electric variant. | sources: https://www.amainhobbies.com/mugen-seiki-mbx8tr-1-8-offroad-competition-nitro-truggy-kit-muge2029/p1481102 ; https://www.redrc.net/2023/03/mugen-seiki-mbx8tr-truggy/ ; https://www.liverc.com/news/new-mugen-seiki-mbx8tr-nitro-truggy-kit/"
+  },
+  {
+    "chassis_id": "hb-d8t-tessmann-edition",
+    "template_id": "hb-d8t-tessmann-edition",
+    "brand": "HB Racing",
+    "model": "D8T Tessmann Edition",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Replica of Ty Tessmann's championship truggy: 2012/2013 ROAR Nitro Truggy National Champion, 2012 and 2014 Dirt Nitro Challenge Pro Truggy Champion, 2014 ROAR Nationals Vice Champion, 2014 Pro-Line Dual Champion. | sources: https://hbracing.com/hb-racing-d8t-tessmann-edition-the-ultimate-racing-truggy-en/ ; https://www.liverc.com/news/dnc-inside-ty-tessmanns-pro-truck-winning-hb-d8t-tessmann-edition/ ; https://www.redrc.net/2014/07/hot-bodies-d8t-tessmann-edition-truggy-kit/"
+  },
+  {
+    "chassis_id": "hb-d817t",
+    "template_id": "hb-d817t",
+    "brand": "HB Racing",
+    "model": "D817T",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Carries race DNA from the IFMAR World Champion D817 buggy; D817/E817-spec gearboxes, sintered brakes, 7075 symmetrical chassis. HB Racing's pro-class 1/8 nitro truggy of the late 2010s, campaigned at ROAR/EFRA-level events before the D8T Evo3. E817T is the electric sibling. | sources: https://hbracing.com/cars/off-road/nitro/d817t-1-8-competition-nitro-truggy ; https://www.liverc.com/news/new-hb-racing-d817t-18-scale-nitro-truggy-unveiled/ ; https://www.amainhobbies.com/hb-racing-d817t-pro-1-8-4wd-offroad-nitro-truggy-combo-hbs204332/p705904"
+  },
+  {
+    "chassis_id": "hb-d8t-evo3",
+    "template_id": "hb-d8t-evo3",
+    "brand": "HB Racing",
+    "model": "D8T Evo3",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "HB Racing's current World-Champion-branded competition truggy; updates the D817T to D819RS-style drivetrain, suspension mounts and sway bars with a new lightweight aluminum chassis. Marketed and campaigned as a race-winning pro-class 1/8 nitro truggy. E8T Evo3 is the electric sibling. | sources: https://hbracing.com/hb-racing-d8t-evo3-1-8-world-champion-nitro-truggy-en/ ; https://www.amainhobbies.com/hb-racing-d8t-evo3-1-8-4wd-offroad-nitro-truggy-kit-hbs204575/p1290551"
+  },
+  {
+    "chassis_id": "xray-xt8-2",
+    "template_id": "xray-xt8-2",
+    "brand": "Xray",
+    "model": "XT8.2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "World Champion Ty Tessmann brought the ROAR National Champion title to the XT8 platform. The XT8.2 (kit XRA350204) is a mid-cycle '.2' revision with all-new front suspension geometry; many wins across classes. XT8E.2 (XRA350300) is the electric variant. | sources: https://teamxray.com/xt8/2/en/ ; https://www.amainhobbies.com/xray-xt8.2-1-8-4wd-nitro-truggy-kit-xra350204/p973624"
+  },
+  {
+    "chassis_id": "xray-xt8-2024",
+    "template_id": "xray-xt8-2024",
+    "brand": "Xray",
+    "model": "XT8 2024",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Latest XT8 generation (XT8'24/'25, kit XRA350206), designed with Martin Bayer, Ty Tessmann and Juraj Hudy; Tessmann carried the ROAR National Champion title on the XT8 platform. 4mm 7075-T6 chassis, 16mm big-bore shocks, quick-change diffs. XT8E'24 (350302) is the electric variant. | sources: https://teamxray.com/xt8/24/en/ ; https://www.redrc.net/2023/04/xray-xt8-24-truggy/ ; https://www.liverc.com/news/new-xray-xt8-18-scale-nitro-truggy-kit/ ; https://www.amainhobbies.com/xray-xt824-1-8-offroad-4wd-nitro-truggy-kit-xra350206/p1479766"
+  },
+  {
+    "chassis_id": "sworkz-s35-t2",
+    "template_id": "sworkz-s35-t2",
+    "brand": "SWORKz",
+    "model": "S35-T2",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "manual_url": "http://sworkz.com/pdf/S35-T2_manual.pdf",
+    "provenance": "Pure-racing successor to the S35-T (Jan 2021); SWORKz factory-team developed, widely raced in the 1/8 nitro truggy class. T7075 wide-layout chassis, new Truggy HET differentials, Speed Rhinoceros III body. S35-T2e (SW910040) is the brushless variant. | sources: https://sworkz.com/gas-powered-cars/sworkz-s35-t2-1-8-off-road-nitro-power-pro-truggy ; https://www.redrc.net/2021/01/sworkz-s35-t2-1-8-nitro-truggy/ ; https://www.liverc.com/news/new-sworkz-s35-t2-truggy-arm-inserts/"
+  },
+  {
+    "chassis_id": "serpent-cobra-811-truggy-te",
+    "template_id": "serpent-cobra-811-truggy-te",
+    "brand": "Serpent",
+    "model": "Cobra 811 Truggy TE",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Durability-focused update of the Serpent Cobra Truggy on the Cobra 811 buggy platform; new diff couplers with larger bearings and larger upright bearings. Designer Billy Easton took 3rd at the 2011 CRCRC race with a production-prototype Cobra Truggy. Cobra 811TE (SER600033) is the electric variant. | sources: https://www.rccaraction.com/serpent-cobra-811-te-18-nitro-truggy/ ; https://www.liverc.com/news/serpent-811-cobra-t-truggy/"
+  },
+  {
+    "chassis_id": "agama-a8t-evo",
+    "template_id": "agama-a8t-evo",
+    "brand": "Agama",
+    "model": "A8T EVO",
+    "category": "offroad",
+    "scale": "1/8",
+    "type": "truggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_truggy",
+    "provenance": "Jon Hazlewood won the Pro-Line International Race on the A8T's race debut; developed over 12 months as Agama's competition 1/8 truggy on the A8 buggy platform. An electric A8T E-Truggy variant also exists. | sources: https://www.amainhobbies.com/agama-a8t-evo-1-8-competition-truggy-kit-agma8t-evo/p249258 ; https://www.bigsquidrc.com/agama-a8t-nitro-8th-scale-truggy/"
+  },
+  {
+    "chassis_id": "xray-gtx8",
+    "template_id": "xray-gtx8",
+    "brand": "XRAY",
+    "model": "GTX8",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "manual_url": "https://teamxray.com/downloads/79/gtx8_instruction_manual_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/gtx8/2022/en/download/",
+    "provenance": "XRAY's flagship 1/8 GT platform; the GTX8 line (GTX8 / GTX8.2 / GTX8.22 / 2022) is a multi-season EFRA/IFMAR-level 1/8 GT contender and one of the most widely raced GT chassis. | sources: https://www.amainhobbies.com/xray-gtx8.2-1-8-gt-nitro-onroad-touring-car-kit-xra350501/p973626 ; https://www.rccaraction.com/xray-gtx8-18-nitro-road-car/ ; https://teamxray.com/gtx8/2022/en/download/"
+  },
+  {
+    "chassis_id": "xray-gtx8-2",
+    "template_id": "xray-gtx8-2",
+    "brand": "XRAY",
+    "model": "GTX8.2",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "manual_url": "https://teamxray.com/downloads/79/gtx8_instruction_manual_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/gtx8/2022/en/download/",
+    "provenance": "Evolution of the GTX8; current-generation XRAY 1/8 GT race kit raced at EFRA GT level. | sources: https://www.amainhobbies.com/xray-gtx8.2-1-8-gt-nitro-onroad-touring-car-kit-xra350501/p973626 ; https://www.amainhobbies.com/xray-gtx8-2022-1-8-gt-nitro-onroad-touring-car-kit-xra350503/p1316110"
+  },
+  {
+    "chassis_id": "mugen-mgt7",
+    "template_id": "mugen-mgt7",
+    "brand": "Mugen Seiki",
+    "model": "MGT7",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "manual_url": "https://www.mugenracing.com/mgt7-instruction-manual/",
+    "setup_sheet_url": "http://www.mugenseiki.com/images/mgt7/setup_sheet/mgt7-setupsheet-e1501kit.pdf",
+    "provenance": "Mugen's dedicated 1/8 GT car, derived from the MBX7 buggy and MRX5 2-speed; a mainstay 1/8 GT race kit. MGT7 ECO is the brushless GT variant. | sources: https://www.mugenracing.com/mgt7-1-8-nitro-on-road-gt-car/ ; https://www.amainhobbies.com/mugen-seiki-mgt7-1-8-gt-nitro-onroad-touring-car-kit-muge2017/p-qeawqsuqpb2xactz ; https://www.liverc.com/news/mugen-seikis-nitro-and-electric-mgt7-and-mgt7-eco-kits/"
+  },
+  {
+    "chassis_id": "capricorn-lab-gt2",
+    "template_id": "capricorn-lab-gt2",
+    "brand": "Capricorn",
+    "model": "LAB GT2",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "provenance": "Capricorn's dedicated 1/8 GT-class platform (LAB GT2), offered in GP (nitro) and EP (electric) versions; Capricorn is a top-tier 1/8 on-road brand (Toni Gruber). Class-specific Tesla 21 GT engine. | sources: https://www.redrc.net/2024/01/capricorn-lab-gt2-gp-2024-18-gt-images/ ; https://www.redrc.net/2025/02/capricorn-lab-gt2-ep-2025-18-gt-kit/ ; https://www.liverc.com/news/new-capricorn-rc-lab-gt2-18th-electric-gt-chassis/"
+  },
+  {
+    "chassis_id": "serpent-srx8-gt",
+    "template_id": "serpent-srx8-gt",
+    "brand": "Serpent",
+    "model": "SRX8 GT",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "provenance": "Serpent's 1/8 GT nitro sedan line (Cobra SRX8 GT -> SRX8 GT '23 -> SRX8 GT R 2025), developed with the Catanzani brothers; well-known GT race platform offered as kit and RTR. | sources: https://www.amainhobbies.com/serpent-srx8-gt-r-2025-1-8-nitro-onroad-sedan-kit-ser600072/p1663643 ; https://www.amainhobbies.com/serpent-cobra-srx8-gt-1-8-nitro-onroad-sedan-kit-ser600057/p976692 ; https://www.rccaraction.com/serpent-rtr-srx8-gt-4wd-1-8-road-nitro-car/"
+  },
+  {
+    "chassis_id": "sworkz-s35-gt2",
+    "template_id": "sworkz-s35-gt2",
+    "brand": "SWORKz",
+    "model": "S35-GT2",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "provenance": "SWORKz 1/8 GT line; SWORKz Factory driver Jorn Neumann won the GT World Championship with the original S35-GT (nitro). S35-GT2 / GT2.2 FTE are the current evolutions; S35-GT2e is the brushless variant. | sources: https://sworkz.com/gas-powered-cars/sworkz-s35-gt2-1-8-nitro-gt-pro-kit ; https://www.redrc.net/2020/12/sworkz-s35-gt2e-1-8-gt-brushless-racing-kit/ ; https://beachrc.com/sworkz-s35-gt2-1-8-pro-nitro-gt-kit/"
+  },
+  {
+    "chassis_id": "infinity-if18-3",
+    "template_id": "infinity-if18-3",
+    "brand": "Infinity",
+    "model": "IF18-3",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "provenance": "Infinity (Creation Model) 1/8 on-road platform: Dario Balestri won the 2023 IFMAR 1:8 Onroad World Championship on the IF18-3's debut, with 6 of 10 finalists on the chassis. IF18 won the 2017 Worlds. | sources: https://www.redrc.net/2023/12/infinity-if18-3-18-onroad-chassis/ ; https://www.bigsquidrc.com/infinity-if18-1-8-nitro-kit/ ; https://rcxx.shop/en-in/products/infinity-if18-3-gp-1-8-onroad-racing-chassis-kit-cm00013"
+  },
+  {
+    "chassis_id": "shepherd-velox-v8-2",
+    "template_id": "shepherd-velox-v8-2",
+    "brand": "Shepherd",
+    "model": "Velox V8.2",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "provenance": "Shepherd Micro Racing's 1/8 on-road line, based on the World- and European-Championship-winning Velox V8 'WC' platform; long-running competitive 1/8 nitro on-road chassis. Succeeded by the V8.3 (now under Zen Racing). | sources: https://www.redrc.net/2019/06/shepherd-velox-v8-2-1-8th-nitro-on-road-kit/ ; https://www.redrc.net/2024/11/shepherd-velox-v8-3-18-onroad-chassis/ ; https://www.bigsquidrc.com/shepherd-micro-racing-velox-v8-2-1-8-on-road-kit/"
+  },
+  {
+    "chassis_id": "serpent-viper-977-evo",
+    "template_id": "serpent-viper-977-evo",
+    "brand": "Serpent",
+    "model": "Viper 977 EVO",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "setup_sheet_url": "https://oldmain.serpent.com/product/903012/setups/",
+    "provenance": "Serpent's flagship 1/8 on-road (Track 200mm) platform; the Viper 977 / 977 EVO / 977 EVO 2 are long-running EFRA/IFMAR-level 1/8 nitro on-road race kits, including WC limited editions. | sources: https://www.amainhobbies.com/serpent-viper-977-evo-1-8-scale-on-road-kit-ser903015/p451180 ; https://www.liverc.com/news/serpents-new-viper-977-evo-2-18-scale-nitro-on-road-car/ ; https://www.amainhobbies.com/serpent-viper-977-wc-limited-edition-1-8-scale-on-road-kit-ser903013/p273396"
+  },
+  {
+    "chassis_id": "capricorn-lab-c803",
+    "template_id": "capricorn-lab-c803",
+    "brand": "Capricorn",
+    "model": "LAB C803",
+    "category": "onroad",
+    "scale": "1/8",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_8_gt",
+    "manual_url": "http://www.capricornrc.com/download/instruction-manual-lab-c-803-rel-1-0/",
+    "provenance": "Capricorn's top 1/8 on-road (Track 200mm) chassis; LAB C802 / C803 / C803 EVO / C804 R are championship-pedigree Italian race kits campaigned at EFRA/IFMAR level. C803EP is the electric version. | sources: https://capricornrc.com/en/home/3583-chassis-lab-c803-pro-version.html ; https://capricornrc.com/en/capricorn-car-kit/5887-lab-804-r.html ; https://www.liverc.com/news/new-capricorn-c803ep-electric-18-scale-on-road-kit/"
+  },
+  {
+    "chassis_id": "kyosho-v-one-r4-evo",
+    "template_id": "kyosho-v-one-r4-evo",
+    "brand": "Kyosho",
+    "model": "V-One R4 Evo",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Kyosho's flagship 1/10 200mm nitro touring line with IFMAR World Championship pedigree; V-One R4 Evo / Evo.2 / Evo.3 are current-gen race kits, plus the R4s Kyosho Cup edition. | sources: https://rc.kyosho.com/en/33204.html ; https://www.amainhobbies.com/kyosho-vone-r4-evo-1-10-nitro-touring-car-kit-kyo33204b/p474960 ; https://www.hobbytown.com/kyosho-vone-r4-evo.3-4wd-1-10-nitro-onroad-touring-car-kit-kyo33217/p1559397"
+  },
+  {
+    "chassis_id": "xray-nt1",
+    "template_id": "xray-nt1",
+    "brand": "XRAY",
+    "model": "NT1",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "manual_url": "https://www.manualslib.com/manual/1963103/Xray-Nt1.html",
+    "setup_sheet_url": "https://setup.teamxray.com/sheet/view?userSheetId=19453",
+    "provenance": "XRAY's 1/10 200mm nitro touring car (since 2007); multiple IFMAR World and EFRA European Championships plus hundreds of national titles. NT1 2018/2023/'24/'27 are the recent annual revisions. | sources: https://www.redrc.net/2018/02/xray-nt1-2018-1-10th-200mm-nitro-on-road-kit/ ; https://www.amainhobbies.com/xray-nt1-2023-1-10-luxury-nitro-touring-car-kit-xra330017/p1454561 ; https://teamxray.com/nt1/3/en/"
+  },
+  {
+    "chassis_id": "mugen-mtx7",
+    "template_id": "mugen-mtx7",
+    "brand": "Mugen Seiki",
+    "model": "MTX7",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "manual_url": "https://www.mugenracing.com/t2005-mtx7-1-10-nitro-touring-car-kit/",
+    "provenance": "Mugen's current 1/10 200mm nitro touring car (announced 2019), evolved from the championship MTX-6R; long-running JMRCA/EFRA-level touring platform. | sources: https://www.redrc.net/2019/10/mugen-mtx7-1-10th-200mm-nitro-on-road-kit/ ; https://www.amainhobbies.com/mugen-seiki-mtx7-1-10-scale-nitro-touring-car-kit-mugt2005/p1222193 ; https://www.liverc.com/news/new-mugen-seiki-racing-mtx7-nitro-touring-car/"
+  },
+  {
+    "chassis_id": "mugen-mtx-6r",
+    "template_id": "mugen-mtx-6r",
+    "brand": "Mugen Seiki",
+    "model": "MTX-6R",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Mugen's 1/10 200mm nitro touring car (2016), the championship-winning predecessor to the MTX7; widely raced at national/Euro level in its era. | sources: https://www.liverc.com/news/mugen-seikis-new-mtx-6r-200mm-nitro-touring-car-kit-gallery/ ; https://www.bigsquidrc.com/mugen-mtx-6r-110-nitro-touring-car/ ; https://www.amainhobbies.com/mugen-seiki-mtx6-1-10-scale-nitro-touring-car-kit-mugt2003/p410035"
+  },
+  {
+    "chassis_id": "infinity-if15-ii",
+    "template_id": "infinity-if15-ii",
+    "brand": "Infinity",
+    "model": "IF15-II",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Infinity (Creation Model) 1/10 200mm nitro touring car; the IF15 family took the 2022 IFMAR World Championship (nine prototypes in the A-main, TQ + Superpole + win) and multiple WC titles. IF15-II is the 2023 update. | sources: https://www.redrc.net/2023/06/infinity-if15-ii-110-200mm-nitro-touring-car/ ; https://www.redrc.net/2018/06/infinity-if15-1-10-200mm-nitro-on-road-kit%E2%80%A8/ ; https://www.bigsquidrc.com/infinity-1-10-if15-ii-nitro-touring-car-kit/"
+  },
+  {
+    "chassis_id": "serpent-natrix-748",
+    "template_id": "serpent-natrix-748",
+    "brand": "Serpent",
+    "model": "Natrix 748",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Serpent's 1/10 200mm 4WD nitro touring car (Natrix 748 / 748 WC), designed by Michael Salven; an established EFRA-era touring platform with V2 gear diffs. | sources: https://www.hobbytown.com/serpent-natrix-748-wc-200mm-1-10-4wd-nitro-touring-car-kit-ser804010/p661514"
+  },
+  {
+    "chassis_id": "shepherd-velox-v10",
+    "template_id": "shepherd-velox-v10",
+    "brand": "Shepherd",
+    "model": "Velox V10",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Shepherd Micro Racing's 1/10 200mm nitro touring car; the Velox V10 Pro / WC / Nineteen / AWS are long-running EFRA-level touring kits developed with top team drivers. | sources: https://www.redrc.net/2014/12/shepherd-velox-v10-pro-2015-200mm-nitro-on-road-kit/ ; https://www.liverc.com/news/new-shepherd-velox-v10-wc-110-scale-200mm-nitro-touring-car-kit/ ; https://www.redrc.net/2021/05/shepherd-velox-v10-aws-1-10th-chassis/"
+  },
+  {
+    "chassis_id": "capricorn-lab-c04",
+    "template_id": "capricorn-lab-c04",
+    "brand": "Capricorn",
+    "model": "LAB C04",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_nitro_onroad",
+    "provenance": "Capricorn's 1/10 200mm nitro touring platform (C04, evolution of C02/C03); the C04 line was also developed toward a 230mm GT configuration. Italian competition-grade touring chassis. | sources: https://www.redrc.net/2020/03/capricorn-release-new-c04-images/ ; https://www.redrc.net/2022/12/capricorn-110-230mm-nitro-platform/ ; https://www.redrc.net/2013/07/capricorn-lab-c02-black-edition-kit/"
+  },
+  {
+    "chassis_id": "associated-b6",
+    "template_id": "associated-b6",
+    "brand": "Team Associated",
+    "model": "B6",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6D/Team/90012_RC10B6D_manual.pdf",
+    "provenance": "Part of the RC10B6 2WD dynasty that has taken 12+ IFMAR 2WD World titles across the RC10 line; introduced AE's dual carpet/dirt chassis concept. | sources: https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B6/Team/"
+  },
+  {
+    "chassis_id": "associated-b6-1",
+    "template_id": "associated-b6-1",
+    "brand": "Team Associated",
+    "model": "B6.1",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.1D/Team/manual-RC10B6.1D-90021.pdf",
+    "provenance": "Spencer Rivkin won the 2019 IFMAR 1/10 2WD Off-Road Worlds on the B6.1DL (Associated's 30th IFMAR title). | sources: https://www.associatedelectrics.com/news/race_results/2298-spencer_rivkin_wins_team_associated_s_30th_i_f_m_a_r_world_championship/"
+  },
+  {
+    "chassis_id": "associated-b6-2",
+    "template_id": "associated-b6-2",
+    "brand": "Team Associated",
+    "model": "B6.2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.2/Team/90023_B6.2_manual-9-15-20.pdf",
+    "provenance": "Carpet/turf laydown evolution of the championship-winning B6 line; factory-team campaigned. | sources: https://www.redrc.net/2020/01/team-associated-b6-2-b6-2d-team-kit-2wd-buggies/"
+  },
+  {
+    "chassis_id": "associated-b6-3",
+    "template_id": "associated-b6-3",
+    "brand": "Team Associated",
+    "model": "B6.3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.3/Team/B6.3-Manual-4-14-2021.pdf",
+    "provenance": "ROAR Nationals 17.5T 2WD Buggy class winner (M. Gonzales, B6.3D, 2021). | sources: https://www.amainhobbies.com/team-associated-rc10-b6.3-team-1-10-2wd-electric-buggy-kit-asc90029/p-qqqcqawqnc2zqctz"
+  },
+  {
+    "chassis_id": "associated-b6-4",
+    "template_id": "associated-b6-4",
+    "brand": "Team Associated",
+    "model": "B6.4",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/Team/B6.4-Manual-6-21-2023.pdf",
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/B6.4-Editable-Setup.pdf",
+    "provenance": "Current-era national-level carpet kit; multiple ROAR off-road Nationals titles in the B6.4 era. | sources: https://60years.associatedelectrics.com/rc10b6-4-team-kit/"
+  },
+  {
+    "chassis_id": "associated-b6-4d",
+    "template_id": "associated-b6-4d",
+    "brand": "Team Associated",
+    "model": "B6.4D",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4D/Team/B6.4D-Manual-6-21-2023.pdf",
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B6.4/B6.4-Editable-Setup.pdf",
+    "provenance": "Dirt sibling of the B6.4; ROAR dirt Nationals campaigned. | sources: https://www.horizonhobby.com/product/1-10-rc10b6.4d-electric-2wd-buggy-team-kit/ASC90035.html"
+  },
+  {
+    "chassis_id": "associated-b7",
+    "template_id": "associated-b7",
+    "brand": "Team Associated",
+    "model": "B7",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "setup_sheet_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B7/RC10B7-Editable-Setup-Sheet.pdf",
+    "provenance": "Released Jan 2024 following Davide Ongaro's 2023 IFMAR 1/10 2WD World Championship campaign for Team Associated. | sources: https://www.redrc.net/2024/01/team-associated-rc10b7-2wd-buggy/"
+  },
+  {
+    "chassis_id": "associated-b7d",
+    "template_id": "associated-b7d",
+    "brand": "Team Associated",
+    "model": "B7D",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Dirt variant of the 2023-Worlds-era B7 platform. | sources: https://www.amainhobbies.com/team-associated-rc10b7d-team-1-10-2wd-electric-buggy-kit-asc90042/p1537092"
+  },
+  {
+    "chassis_id": "associated-b7-1",
+    "template_id": "associated-b7-1",
+    "brand": "Team Associated",
+    "model": "B7.1",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://img2.associatedelectrics.com/pdf/cars_and_trucks/RC10B7.1D/Team_Kit/90047_RC10B71D_Manual_1_22_2026.pdf",
+    "provenance": "2026-season refresh of the title-winning B7 platform. | sources: https://60years.associatedelectrics.com/rc10b7-1-team_kit/"
+  },
+  {
+    "chassis_id": "tlr-22-5-0",
+    "template_id": "tlr-22-5-0",
+    "brand": "TLR",
+    "model": "22 5.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "setup_sheet_url": "https://www.tlracing.com/on/demandware.store/Sites-tlr-us-Site/default/Page-ShowSetupSheets?pid=TLR03022",
+    "provenance": "Spencer Rivkin won the 2021 IFMAR 1/10 2WD Worlds on the 22 5.0; TLR is the reigning 2WD World Champion manufacturer of that cycle. | sources: https://www.tlracing.com/product/1-10-22-5.0-2wd-buggy-dc-race-kit-dirt-clay/TLR03016.html"
+  },
+  {
+    "chassis_id": "tlr-22x",
+    "template_id": "tlr-22x",
+    "brand": "TLR",
+    "model": "22X",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "Newest-gen 2WD (May 2025), built on the title-winning 22 lineage. | sources: https://www.redrc.net/2025/05/tlr-22x-110-2wd-race-buggy/"
+  },
+  {
+    "chassis_id": "tlr-22-4-0",
+    "template_id": "tlr-22-4-0",
+    "brand": "TLR",
+    "model": "22 4.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://www.rcscrapyard.net/manuals/losi/losi-22-4-0-race-tlr03013-manual.htm",
+    "provenance": "Convertible mid-motor; legacy ROAR/EOS-era competitive kit. | sources: https://www.tlracing.com/product/1-10-22-4.0-2wd-buggy-race-kit/TLR03013.html"
+  },
+  {
+    "chassis_id": "tlr-22-3-0",
+    "template_id": "tlr-22-3-0",
+    "brand": "TLR",
+    "model": "22 3.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Multiple ROAR National titles (Dakotah Phend era, Modified 2WD). | sources: https://www.amainhobbies.com/team-losi-racing-22-3.0-dirt-laydown-transmission-conversion-kit-tlr338005/p577171"
+  },
+  {
+    "chassis_id": "yokomo-yz-2-dtm3",
+    "template_id": "yokomo-yz-2-dtm3",
+    "brand": "Yokomo",
+    "model": "YZ-2 DTM3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://www.manualslib.com/products/Yokomo-Yz-2-Dtm-3-1-12450627.html",
+    "setup_sheet_url": "https://site.petitrc.com/setup/yokomo/setupyz2/YZ2DTM3CAL3/",
+    "provenance": "YZ-2 DTM lineage won the 2017 IFMAR 1/10 2WD Worlds (Ryan Maifield TQ + win; Yokomo 1-2 in qualifying). | sources: https://www.rccaraction.com/yokomos-ryan-maifield-2017-ifmar-2wd-world-champ/"
+  },
+  {
+    "chassis_id": "yokomo-yz-2-cal3",
+    "template_id": "yokomo-yz-2-cal3",
+    "brand": "Yokomo",
+    "model": "YZ-2 CAL3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://www.manualslib.com/products/Yokomo-Yz-2-Ca-4131655.html",
+    "setup_sheet_url": "https://site.petitrc.com/setup/yokomo/setupyz2/YZ2DTM3CAL3/",
+    "provenance": "Carpet/astro arm of the 2017-World-Champion YZ-2 family; Lee Martin front-running EOS / Euro results. | sources: https://www.amainhobbies.com/yokomo-yz2-ca-l3-edition-1-10-2wd-electric-buggy-kit-carpet-astro-yokb-yz2cal3/p978925"
+  },
+  {
+    "chassis_id": "xray-xb2-2023",
+    "template_id": "xray-xb2-2023",
+    "brand": "Xray",
+    "model": "XB2 2023",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Front-running EOS / ROAR-level 2WD platform in the XB2 dynasty (multiple Euro and Junior World titles across the XB2 line). | sources: https://teamxray.com/xb2/2023/en/"
+  },
+  {
+    "chassis_id": "xray-xb2-2024",
+    "template_id": "xray-xb2-2024",
+    "brand": "Xray",
+    "model": "XB2 2024",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Fully redesigned; EOS Season #8 2WD title (Bruno Coelho) and EOS R1 podiums (Coelho/Ronnefalk). | sources: https://teamxray.com/xb2/2024/en/"
+  },
+  {
+    "chassis_id": "xray-xb2-2025",
+    "template_id": "xray-xb2-2025",
+    "brand": "Xray",
+    "model": "XB2 2025",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "ROAR Nationals win cited on official product page; current-cycle 2WD competition kit. | sources: https://teamxray.com/xb2/2025/en/"
+  },
+  {
+    "chassis_id": "kyosho-ultima-rb6",
+    "template_id": "kyosho-ultima-rb6",
+    "brand": "Kyosho",
+    "model": "Ultima RB6",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "setup_sheet_url": "https://site.petitrc.com/setup/kyosho/setuprb6/RB6_JaredTebo_Chico2013092229/",
+    "provenance": "Jared Tebo won the 2013 IFMAR 1/10 2WD Worlds on the RB6 (TQ + A1 + A2, Chico CA). RB6.6 is the high-grip update. | sources: https://rc.kyosho.com/en/34301.html ; https://www.liverc.com/news/jared-tebo-shares-his-ifmar-world-championship-winning-rb6-setup/"
+  },
+  {
+    "chassis_id": "kyosho-ultima-rb7",
+    "template_id": "kyosho-ultima-rb7",
+    "brand": "Kyosho",
+    "model": "Ultima RB7",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://www.rcscrapyard.net/manuals/kyosho2/kyosho-ultima-rb7-34303-manual.htm",
+    "setup_sheet_url": "https://site.petitrc.com/setup/kyosho/setuprb7/",
+    "provenance": "Competition 2WD kit in the Worlds-winning Ultima RB lineage. | sources: https://rc.kyosho.com/en/34303.html"
+  },
+  {
+    "chassis_id": "kyosho-ultima-rb7-5",
+    "template_id": "kyosho-ultima-rb7-5",
+    "brand": "Kyosho",
+    "model": "Ultima RB7.5",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Current top-tier (2025) of the Ultima RB Worlds-winning 2WD line. | sources: https://kyoshoamerica.com/1-10-scale-radio-controlled-electric-powered-2wd-racing-buggy-ultima-rb7-5-34305.html"
+  },
+  {
+    "chassis_id": "schumacher-cougar-kf2",
+    "template_id": "schumacher-cougar-kf2",
+    "brand": "Schumacher",
+    "model": "Cougar KF2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "setup_sheet_url": "https://site.petitrc.com/setup/schumacher/setupcougarkf/KF2/",
+    "provenance": "KF2 SE 'Low Grip Position' campaigned at IFMAR 2WD Worlds level. | sources: https://www.racing-cars.com/1-10th-2wd-buggy/cougar-kf2/"
+  },
+  {
+    "chassis_id": "schumacher-cougar-ld3",
+    "template_id": "schumacher-cougar-ld3",
+    "brand": "Schumacher",
+    "model": "Cougar LD3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "2023 IFMAR 1/10 2WD Worlds podium (Broc Champlin). | sources: https://www.racing-cars.com/new-products-1/cougar-ld3m-mod-spec-kit-k208"
+  },
+  {
+    "chassis_id": "schumacher-cougar-ld2",
+    "template_id": "schumacher-cougar-ld2",
+    "brand": "Schumacher",
+    "model": "Cougar LD2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Laydown evolution of the Cougar competition 2WD line; EOS/BRCA-campaigned. | sources: https://www.racing-cars.com/1-10th-2wd-buggy/cougar-ld2/"
+  },
+  {
+    "chassis_id": "schumacher-cougar-kr",
+    "template_id": "schumacher-cougar-kr",
+    "brand": "Schumacher",
+    "model": "Cougar KR",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "provenance": "Dirt/low-traction competition variant of the Cougar 2WD platform. | sources: https://www.racing-cars.com/1-10th-2wd-buggy/cougar-kr/"
+  },
+  {
+    "chassis_id": "hb-d2-evo",
+    "template_id": "hb-d2-evo",
+    "brand": "HB Racing",
+    "model": "D2 Evo",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D2/instruction_manual.pdf",
+    "setup_sheet_url": "https://hbracing.com/team-driver-setting-sheets-en/",
+    "provenance": "Current HB competition 2WD kit; evolution of the EFRA-European-Champion D219 works prototype. | sources: https://hbracing.com/hb-racing-d2-evo-competition-1-10-2wd-electric-buggy-en/"
+  },
+  {
+    "chassis_id": "hb-d216",
+    "template_id": "hb-d216",
+    "brand": "HB Racing",
+    "model": "D216",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "https://hbracing.com/downloads-en",
+    "setup_sheet_url": "https://hbracing.com/downloads-en",
+    "provenance": "HB's competition 2WD off-road buggy predecessor in the D2 lineage. | sources: https://hbracing.com/hb-racing-d216-1-10-2wd-off-road-buggy-en"
+  },
+  {
+    "chassis_id": "durango-dex210v3",
+    "template_id": "durango-dex210v3",
+    "brand": "Team Durango",
+    "model": "DEX210v3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_2wd",
+    "manual_url": "http://www.team-durango.com/pdf/manuals/TD102028/DEX210v2.pdf",
+    "provenance": "Part of Durango's European-Championship-era competition 2WD platform. | sources: https://www.redrc.net/2015/12/team-durango-dex210v3-2wd-buggy-kit/"
+  },
+  {
+    "chassis_id": "associated-b64",
+    "template_id": "associated-b64",
+    "brand": "Team Associated",
+    "model": "B64",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/Team/manual-B64-90014.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/B64-B64D-Editable-Setup-2017.pdf",
+    "provenance": "B44/B64 lineage; the predecessor B44 won IFMAR 1/10 4WD Worlds 2011 & 2013 (titles belong to the B44, with the B64 the direct successor). | sources: https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B64/Team/ ; https://www.hobbytown.com/team-associated-rc10-b64-team-1-10-4wd-offroad-electric-buggy-kit-asc90014/p632735"
+  },
+  {
+    "chassis_id": "associated-b64d",
+    "template_id": "associated-b64d",
+    "brand": "Team Associated",
+    "model": "B64D",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64D/Team_Kit/manual-B64D-90015b.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B64/B64-B64D-Editable-Setup-2017.pdf",
+    "provenance": "Clay/dirt variant of the B64 4WD lineage. | sources: https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B64D/Team_Kit/ ; https://www.amainhobbies.com/team-associated-rc10-b64d-team-1-10-4wd-buggy-kit-combo-dirt-asc90015c/p696912"
+  },
+  {
+    "chassis_id": "associated-b74",
+    "template_id": "associated-b74",
+    "brand": "Team Associated",
+    "model": "B74",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74/Team_Kit/B74_Kit_Manual_11_21_2019.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74/B74-Editable-Setup-Sheet.pdf",
+    "provenance": "Raced at the 2019 IFMAR 4WD Worlds (Spencer Rivkin 10th; class won by XRAY). First of the B74 4WD shaft-drive platform. | sources: https://www.liverc.com/news/team-associated-unveils-the-new-b74-110-4wd-buggy-kit/ ; https://en.wikipedia.org/wiki/2019_IFMAR_1:10_Electric_Off-Road_World_Championships"
+  },
+  {
+    "chassis_id": "associated-b74-1",
+    "template_id": "associated-b74-1",
+    "brand": "Team Associated",
+    "model": "B74.1",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.1/Team/B74.1C-Kit-Manual-10-2-2020.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.1/B74.1-Editable-Setup-Sheet-10-19-2020.pdf",
+    "provenance": "Spencer Rivkin won the ROAR 4WD Modified National Championship 2022 on a B74.1D; Matthew Gonzales won 13.5T 4WD at 2021 ROAR Nats on a B74.1D. | sources: https://www.horizonhobby.com/product/1-10-rc10b74.1-electric-team-4wd-buggy-kit/ASC90027.html ; https://blog.jconcepts.net/2022/08/inside-look-spencer-rivkins-winning-b74-1d/"
+  },
+  {
+    "chassis_id": "associated-b74-2",
+    "template_id": "associated-b74-2",
+    "brand": "Team Associated",
+    "model": "B74.2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.2/CE_Team/90044_RC10B742C_CE_Kit_Manual_1_17_2025.pdf",
+    "setup_sheet_url": "https://img2c.associatedelectrics.com/pdf/cars_and_trucks/RC10B74.2/B74.2-Editable-Setup-10-2020.pdf",
+    "provenance": "Current Factory Team 4WD weapon, continuation of the ROAR-Nationals-winning B74 line. | sources: https://portal.associatedelectrics.com/teamassociated/cars_and_trucks/RC10B74.2D/CE_Team/ ; https://www.liverc.com/news/new-team-associated-b742-4wd-buggy-kit/"
+  },
+  {
+    "chassis_id": "tlr-22x-4",
+    "template_id": "tlr-22x-4",
+    "brand": "TLR",
+    "model": "22X-4",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "ROAR Nationals-winning 4WD platform (TLR's own claim). | sources: https://www.tlracing.com/product/1-10-22x-4-2.0-dc-4wd-buggy-race-kit/TLR-1264.html ; https://www.horizonhobby.com/product/1-10-22x-4-4wd-buggy-race-kit/TLR03020.html"
+  },
+  {
+    "chassis_id": "tlr-22x-4-elite",
+    "template_id": "tlr-22x-4-elite",
+    "brand": "TLR",
+    "model": "22X-4 Elite",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "setup_sheet_url": "https://www.tlracing.com/on/demandware.store/Sites-tlr-us-Site/default/Page-ShowSetupSheets?pid=TLR03026",
+    "provenance": "Evolution of the ROAR-Nationals-winning 22X-4 4WD platform. | sources: https://www.tlracing.com/1-10th-rc-race-cars/tlr-22x-4-elite/ ; https://www.tlracing.com/product/1-10-22x-4-elite-4x4-buggy-race-kit/TLR03026.html"
+  },
+  {
+    "chassis_id": "yokomo-yz-4-sf",
+    "template_id": "yokomo-yz-4-sf",
+    "brand": "Yokomo",
+    "model": "YZ-4 SF",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://www.manualslib.com/manual/2178239/Yokomo-Yz-4-Sf.html",
+    "provenance": "2017 IFMAR 1/10 4WD Electric Off-Road World Champion (Ryan Maifield). | sources: https://www.redrc.net/2017/10/yokomo-yz-4-sf-4wd-buggy/ ; https://en.wikipedia.org/wiki/IFMAR_1:10_Electric_Off-Road_World_Championship"
+  },
+  {
+    "chassis_id": "yokomo-yz-4-sf2",
+    "template_id": "yokomo-yz-4-sf2",
+    "brand": "Yokomo",
+    "model": "YZ-4 SF2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://www.manualslib.com/manual/1899167/Yokomo-Yz-4-Sf-2.html",
+    "provenance": "Latest evolution of the Worlds-winning YZ-4 4WD platform. | sources: https://www.redrc.net/2020/06/yokomo-yz-4sf2-1-10th-4wd-buggy-kit/ ; https://www.amainhobbies.com/yokomo-yz4-sf2-factory-1-10-electric-4wd-buggy-kit-yokb-yz4sf2/p1222635"
+  },
+  {
+    "chassis_id": "yokomo-yz-4",
+    "template_id": "yokomo-yz-4",
+    "brand": "Yokomo",
+    "model": "YZ-4",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://www.manualslib.com/manual/2191707/Yokomo-Yz-4.html",
+    "provenance": "Original Yokomo 1/10 4WD competition platform that became the Worlds-winning YZ-4 SF lineage. | sources: https://www.redrc.net/2015/10/yokomo-yz-4-110th-4wd-buggy-kit/ ; https://www.liverc.com/news/yokomo-yz-4-4wd-buggy-coming-soon/"
+  },
+  {
+    "chassis_id": "xray-xb4-2023",
+    "template_id": "xray-xb4-2023",
+    "brand": "Xray",
+    "model": "XB4 2023",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "XB4 platform has taken IFMAR 4WD Worlds (Bruno Coelho), Junior Worlds (Daniel Kobbevik), Ty Tessmann's first ROAR Nationals, and multiple European titles. | sources: https://teamxray.com/xb4/2023/ ; https://www.amainhobbies.com/xray-xb423-1-10-electric-4wd-competition-buggy-kit-dirt-xra360013/p1477339"
+  },
+  {
+    "chassis_id": "xray-xb4-2024",
+    "template_id": "xray-xb4-2024",
+    "brand": "Xray",
+    "model": "XB4 2024",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "Current-cycle XB4 in the Worlds-winning XB4 dynasty; sold as Carpet (XB4C) + Dirt (XB4D). | sources: https://teamxray.com/xb4/2024/ ; https://www.amainhobbies.com/xray-xb4c-2024-1-10-electric-4wd-competition-buggy-kit-carpet-xra360014/p1536604"
+  },
+  {
+    "chassis_id": "xray-xb4-2025",
+    "template_id": "xray-xb4-2025",
+    "brand": "Xray",
+    "model": "XB4 2025",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "ROAR 2025: Dakotah Phend (Mod), Dustin Fox (Stock) on the XB4 platform. | sources: https://teamxray.com/xb4/2025/ ; https://www.amainhobbies.com/xray-xb4c-2025-1-10-electric-4wd-competition-buggy-kit-carpet-xra360017/p1587965"
+  },
+  {
+    "chassis_id": "kyosho-lazer-zx6",
+    "template_id": "kyosho-lazer-zx6",
+    "brand": "Kyosho",
+    "model": "Lazer ZX6",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "ZX6 platform had A-main finalists at the 2015 IFMAR 4WD Worlds; Kyosho's competition 4WD line. | sources: https://rc.kyosho.com/en/30046.html ; https://www.amainhobbies.com/kyosho-lazer-zx6-1-10-4wd-racing-buggy-kit-kyo30046b/p349369"
+  },
+  {
+    "chassis_id": "kyosho-lazer-zx7",
+    "template_id": "kyosho-lazer-zx7",
+    "brand": "Kyosho",
+    "model": "Lazer ZX7",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "http://www.kyosho.com/jpn/support/instructionmanual/buggy/pdf/30048_LAZER%20ZX7_IM.pdf",
+    "setup_sheet_url": "http://www.kyosho.com/jpn/support/instructionmanual/buggy/pdf/30048_LAZER%20ZX7_ex.pdf",
+    "provenance": "Successor competition 4WD in the Lazer ZX line. | sources: https://rc.kyosho.com/en/30048.html ; https://www.redrc.net/2018/09/kyosho-lazer-zx7-1-10th-4wd-buggy/"
+  },
+  {
+    "chassis_id": "kyosho-lazer-zx7-5",
+    "template_id": "kyosho-lazer-zx7-5",
+    "brand": "Kyosho",
+    "model": "Lazer ZX7.5",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "provenance": "Latest (~2026) of the Lazer ZX 4WD competition line; no major title yet. | sources: https://www.amainhobbies.com/kyosho-lazer-zx7.5-1-10-4wd-electric-offroad-buggy-kit-kyo34331/p1827782 ; https://www.redrc.net/2026/04/kyosho-lazer-7-5-110-4wd-buggy/"
+  },
+  {
+    "chassis_id": "hb-d413",
+    "template_id": "hb-d413",
+    "brand": "HB Racing",
+    "model": "D413",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D413/instruction_manual.pdf",
+    "provenance": "3rd in 4WD at the 2015 IFMAR Worlds (David Ronnefalk). | sources: https://hbracing.com/hb-racing-d413-1-10-4wd-off-road-buggy-en ; https://en.wikipedia.org/wiki/2015_IFMAR_1:10_Electric_Off-Road_World_Championships"
+  },
+  {
+    "chassis_id": "hb-d418",
+    "template_id": "hb-d418",
+    "brand": "HB Racing",
+    "model": "D418",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D418/instruction_manual.pdf",
+    "provenance": "Competition 4WD link between the D413 and the current D4 Evo3. | sources: https://hbracing.com/hb-racing-d418-1-10-4wd-off-road-buggy-en/ ; https://www.amainhobbies.com/hb-racing-d418-1-10-4wd-electric-offroad-buggy-kit-hbs204241/p735076"
+  },
+  {
+    "chassis_id": "hb-d4-evo3",
+    "template_id": "hb-d4-evo3",
+    "brand": "HB Racing",
+    "model": "D4 Evo3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://hbracing.com/var/files/drive/hbracingblog/D4evo3/instruction_manual.pdf",
+    "setup_sheet_url": "https://hbracing.com/var/files/drive/hbracingblog/D4evo3/base_setup.pdf",
+    "provenance": "Current HB factory 4WD car in the D4 competition lineage. | sources: https://hbracing.com/hb-racing-d4-evo3-1-10-competition-electric-buggy-4wd-en/ ; https://www.redrc.net/2023/02/hb-racing-d4-evo3-110-4wd-buggy/"
+  },
+  {
+    "chassis_id": "schumacher-cat-l1r",
+    "template_id": "schumacher-cat-l1r",
+    "brand": "Schumacher",
+    "model": "CAT L1R",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "setup_sheet_url": "https://site.petitrc.com/setup/schumacher/setupcatl1/",
+    "provenance": "CAT L1 line: 3rd in 4WD at 2019 IFMAR Worlds (Michal Orlowski); EOS, BRCA Nationals and ROAR carpet Nationals wins; Orlowski 2x EOS Champion + EFRA European Champion 2023. | sources: https://www.racing-cars.com/new-products/december-2022/cat-l1r-kit-k201 ; https://en.wikipedia.org/wiki/2019_IFMAR_1:10_Electric_Off-Road_World_Championships"
+  },
+  {
+    "chassis_id": "durango-dex410-v5",
+    "template_id": "durango-dex410-v5",
+    "brand": "Team Durango",
+    "model": "DEX410 V5",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "setup_sheet_url": "https://site.petitrc.com/setup/durango/SetupSheetsDurangoDEX410v5.html",
+    "provenance": "DEX410 lineage: 2nd in 4WD at the 2011 IFMAR Worlds (Jorn Neumann). | sources: https://www.amainhobbies.com/team-durango-dex410-v5-1-10-electric-4wd-offroad-buggy-kit-tdr102036/p-qeaktakqtzqxactz ; https://en.wikipedia.org/wiki/2011_IFMAR_1:10_Electric_Off-Road_World_Championships"
+  },
+  {
+    "chassis_id": "tekno-eb410",
+    "template_id": "tekno-eb410",
+    "brand": "Tekno",
+    "model": "EB410",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2017/08/EB410instructions_REV2.pdf",
+    "setup_sheet_url": "https://www.teknorc.com/wp-content/uploads/2017/08/P31_EB410instructions_SetUpSheet_Blank_Reader_Saveable.pdf",
+    "provenance": "2018 ROAR Nats Stock 4WD 1st (Tyler Hooks); 2019 Reedy Race win (Jared Tebo). | sources: https://www.teknorc.com/wp-content/uploads/2017/08/EB410instructions_REV2.pdf"
+  },
+  {
+    "chassis_id": "tekno-eb410-2",
+    "template_id": "tekno-eb410-2",
+    "brand": "Tekno",
+    "model": "EB410.2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_offroad_4wd",
+    "manual_url": "https://www.teknorc.com/wp-content/uploads/2019/10/EB410_2instructions.pdf",
+    "provenance": "2019 competition update of the ROAR/Reedy-winning EB410 4WD platform. | sources: https://www.teknorc.com/shop/tkr6502-eb410-2-1-10th-4wd-competition-electric-buggy-kit/ ; https://www.liverc.com/news/tekno-rc-unveils-the-new-eb4102-110-4wd-buggy/"
+  },
+  {
+    "chassis_id": "associated-t6-1",
+    "template_id": "associated-t6-1",
+    "brand": "Team Associated",
+    "model": "T6.1",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Mid-2010s AE stadium-truck-class platform (predecessor to T6.2/T6.4 in the championship-winning T6 lineage); ROAR Off-Road Nationals team truck. | sources: https://www.amainhobbies.com/team-associated-rc10-t6.1-off-road-team-stadium-truck-kit-asc70002/p756668"
+  },
+  {
+    "chassis_id": "associated-t6-2",
+    "template_id": "associated-t6-2",
+    "brand": "Team Associated",
+    "model": "T6.2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Competitive 2WD stadium truck; AE team car for ROAR Nationals stadium-truck campaigns prior to the T6.4. | sources: https://www.amainhobbies.com/team-associated-rc10t6.2-off-road-team-stadium-truck-kit-asc70003/p1267243 ; https://www.horizonhobby.com/product/1-10-rc10t6.2-2wd-electric-team-stadium-truck-kit/ASC70003.html"
+  },
+  {
+    "chassis_id": "associated-t6-4",
+    "template_id": "associated-t6-4",
+    "brand": "Team Associated",
+    "model": "T6.4",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Current AE flagship stadium truck; run by AE factory drivers at the ROAR 1/10 Off-Road Dirt Nationals (AE swept the 2025 ROAR Dirt Nats stadium-truck class on the T6.4 generation). | sources: https://www.liverc.com/news/new-team-associated-rc10t64-stadium-truck-kit/ ; https://www.associatedelectrics.com/news/race_results/2841-team-associated-sweeps-roar-1-10-off-road-dirt-nationals/"
+  },
+  {
+    "chassis_id": "tlr-22t-3-0",
+    "template_id": "tlr-22t-3-0",
+    "brand": "TLR",
+    "model": "22T 3.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Competition-proven 2WD stadium truck and a staple of US national/regional stadium-truck classes from 2017; the kit the 22T 4.0 was built to improve on. | sources: https://www.amainhobbies.com/team-losi-racing-22t-3.0-1-10-2wd-electric-stadium-truck-kit-tlr03011/p604049 ; https://www.redrc.net/2017/01/tlr-22t-3-0-2wd-stadium-truck-kit/"
+  },
+  {
+    "chassis_id": "tlr-22t-4-0",
+    "template_id": "tlr-22t-4-0",
+    "brand": "TLR",
+    "model": "22T 4.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Laydown mid-motor evolution of the championship-proven 22T 3.0; TLR's competitive stadium truck for high-grip clay/carpet nationals before the 22X-T. | sources: https://www.tlracing.com/product/team-losi-racing-1-10-22t-4.0-2wd-stadium-race-truck-kit/TLR03015.html ; https://www.amainhobbies.com/team-losi-racing-22t-4.0-1-10-2wd-electric-stadium-truck-kit-tlr03015/p714999"
+  },
+  {
+    "chassis_id": "tlr-22x-t",
+    "template_id": "tlr-22x-t",
+    "brand": "TLR",
+    "model": "22X-T",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "stadium_truck",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "stadium_truck",
+    "provenance": "Newest TLR competition stadium truck (~2025), based on the 22X buggy; manufacturer hosts factory pro-driver setup sheets (Brownhill/Eldred/Ellis), confirming factory-team competition use. | sources: https://www.tlracing.com/product/team-losi-racing-1-10-22x-t-2wd-stadium-truck-race-kit/TLR-1053.html ; https://www.redrc.net/2025/06/tlr-22x-t-2wd-stadium-truck/"
+  },
+  {
+    "chassis_id": "associated-sc6-1",
+    "template_id": "associated-sc6-1",
+    "brand": "Team Associated",
+    "model": "SC6.1",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Competitive 2WD short course truck based on the RC10T6.1 platform; AE team SC car. | sources: https://www.amainhobbies.com/team-associated-rc10-sc6.1-off-road-1-10-short-course-team-truck-kit-asc70007/p-qtaxqzkqtcqxactz ; https://60years.associatedelectrics.com/rc10sc6-1-team-kit/"
+  },
+  {
+    "chassis_id": "associated-sc6-2",
+    "template_id": "associated-sc6-2",
+    "brand": "Team Associated",
+    "model": "SC6.2",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Competition 2WD SC kit; AE SC team car in the SC6 championship lineage. | sources: https://www.amainhobbies.com/team-associated-rc10sc6.2-off-road-1-10-2wd-short-course-team-truck-kit-asc70008/p1267242"
+  },
+  {
+    "chassis_id": "associated-sc6-4",
+    "template_id": "associated-sc6-4",
+    "brand": "Team Associated",
+    "model": "SC6.4",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Current AE flagship 2WD short course truck (13mm big-bore shocks, angled steering, longer CVAs); AE's competition SC entry, raced in the 2025 ROAR Dirt Nats SC class. | sources: https://www.amainhobbies.com/team-associated-rc10sc6.4-1-10-off-road-electric-2wd-short-course-truck-team-kit-asc70009/p1489954 ; https://www.liverc.com/news/2025-roar-110th-dirt-road-nationals-results/"
+  },
+  {
+    "chassis_id": "associated-sc5m",
+    "template_id": "associated-sc5m",
+    "brand": "Team Associated",
+    "model": "SC5M",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "AE's earlier mid-motor 2WD short course truck; competition SC kit preceding the SC6 line. | sources: https://www.amainhobbies.com/team-associated-rc10-sc5m-team-1-10-electric-2wd-short-course-truck-kit-asc70006/p449170"
+  },
+  {
+    "chassis_id": "tlr-22sct-3-0",
+    "template_id": "tlr-22sct-3-0",
+    "brand": "TLR",
+    "model": "22SCT 3.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "'The truck to beat in short course competition' (mid-motor, 3-gear trans); TLR's leading 2WD SC kit for US national SC classes from 2016. | sources: https://www.amainhobbies.com/team-losi-racing-22sct-3.0-1-10-scale-2wd-electric-racing-short-course-kit-tlr03009/p568664 ; https://www.redrc.net/2016/11/tlr-22sct-3-0-2wd-short-course-truck-kit/"
+  },
+  {
+    "chassis_id": "tlr-22sct-2-0",
+    "template_id": "tlr-22sct-2-0",
+    "brand": "TLR",
+    "model": "22SCT 2.0",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Evolution of the popular 22SCT; competitive 2WD SC kit of the mid-2010s with bellcrank steering and revised geometry. | sources: https://www.redrc.net/2014/07/tlr-22sct-2-0-short-course-truck-kit/"
+  },
+  {
+    "chassis_id": "proline-pro-2-sc",
+    "template_id": "proline-pro-2-sc",
+    "brand": "Pro-Line",
+    "model": "PRO-2 SC",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Pro-Line's flagship 2WD short course truck kit ('best all-around 2WD Short Course truck ever produced'); raced in SC classes. | sources: https://www.prolineracing.com/kits/pro-2-sc-1-10-2wd-kit.asp ; https://www.horizonhobby.com/product/pro-line-pro-2-performance-short-course-truck-kit/PRO400100.html"
+  },
+  {
+    "chassis_id": "tekno-sct410-3",
+    "template_id": "tekno-sct410-3",
+    "brand": "Tekno",
+    "model": "SCT410.3",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Tekno's competition 1/10 4WD short course truck; a leading 4WD SC racer with biggest-in-class 16mm-bore shocks. | sources: https://www.amainhobbies.com/tekno-rc-sct410.3-competition-1-10-electric-4wd-short-course-truck-kit-tkr5507/p438712 ; https://www.horizonhobby.com/product/1-10-sct410.3-4wd-short-course-kit/TKR5507.html"
+  },
+  {
+    "chassis_id": "durango-desc410r",
+    "template_id": "durango-desc410r",
+    "brand": "Team Durango",
+    "model": "DESC410R",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "short_course",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "short_course",
+    "provenance": "Durango's competition 1/10 4WD short course truck (alloy 'sandwich' chassis); a 4WD SC racer of the early/mid-2010s. The V2 added stronger A-arms and a new rear bulkhead. | sources: https://www.bigsquidrc.com/team-durango-desc410r-v2-electric-4wd-short-course-truck-kit/"
+  },
+  {
+    "chassis_id": "xray-t4",
+    "template_id": "xray-t4",
+    "brand": "Xray",
+    "model": "T4",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Long-running ETS Modified and Stock front-runner; Bruno Coelho (Modified) and Alexandre Duchet (Stock) ETS champions on the T4; ROAR podium platform (Chris Adams). Yearly model line (T4'17 through T4'21). | sources: https://www.liverc.com/news/coelho-and-duchet-won-ets-modified-and-stock-touring-titles/ ; https://www.teamxray.com/t4/ ; https://www.liverc.com/news/2024-roar-road-paved-nationals-results/"
+  },
+  {
+    "chassis_id": "xray-x4",
+    "template_id": "xray-x4",
+    "brand": "Xray",
+    "model": "X4",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Current Xray competition touring platform (X4'22 through X4'26); ETS and ROAR-level entry; Evan Huang ran Xray at the 2024 IFMAR 1:10 electric Worlds. | sources: https://www.amainhobbies.com/xray-x4-2026-1-10-electric-awd-onroad-touring-car-kit-carbon-fiber-chassis-xra300042/p1675009 ; https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "infinity-if14-2",
+    "template_id": "infinity-if14-2",
+    "brand": "Infinity",
+    "model": "IF14-2",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Developed for the 2022 IFMAR Worlds; three back-to-back Reedy Race of Champions wins, TITC victory and ETS race wins on the IF14-2 platform. | sources: https://www.liverc.com/news/first-look-at-the-new-infinity-if14-2-touring-car/ ; https://infinityrccars.com/products/infinity-if14-2-team-edition-1-10-ep-touring-chassis-kit"
+  },
+  {
+    "chassis_id": "infinity-if14-2-mid",
+    "template_id": "infinity-if14-2-mid",
+    "brand": "Infinity",
+    "model": "IF14-2 MID",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Mid-motor evolution developed through the 2023 JMRCA All Japan Championship and 2024 TITC; Jilles Groskamp won the 2024 IFMAR 1:10 Electric Touring Car World Championship on Infinity, with Teemu Leino top qualifier. | sources: https://www.redrc.net/2024/07/infinity-if14-2mid-110-electric-touring-car/ ; https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "infinity-if14",
+    "template_id": "infinity-if14",
+    "brand": "Infinity",
+    "model": "IF14",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Original IF14 EP touring platform; the IF15 prototype/IF-series lineage won the 2022 IFMAR 200mm Worlds (nitro) and underpins Infinity's electric program. | sources: http://www.creationmodel.net/infinity/index.php/products/if14-1-10-ep-touring-car ; https://events.redrc.net/2022/11/2022-ifmar-1-10th-200mm-worlds-winning-car/"
+  },
+  {
+    "chassis_id": "awesomatix-a800",
+    "template_id": "awesomatix-a800",
+    "brand": "Awesomatix",
+    "model": "A800",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Dominant ETS Stock and high-grip platform; Marc Rheinard's weapon (EFRA Euros 2024 win on the A800R, TITC podium). Sam Isaacs won the 2024 ROAR Paved Modified Nationals on Awesomatix. | sources: https://www.ets.racing/2023/11/18/under-the-hood-marc-rheinards-awesomatix-a800r/ ; https://www.liverc.com/news/2024-roar-road-paved-nationals-results/ ; https://www.asiatees.com/article?Awesomatix-A800-and-A800A-Electric-1%2F10-Touring-Cars=&id=2474"
+  },
+  {
+    "chassis_id": "yokomo-bd11",
+    "template_id": "yokomo-bd11",
+    "brand": "Yokomo",
+    "model": "BD11",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Tested at top European races; Ronald Voelker-era ETS Modified front-runner platform (BD9/BD10/BD11 lineage), multiple ETS round wins. | sources: https://www.amainhobbies.com/yokomo-bd11-1-10-4wd-electric-touring-car-kit-graphite-yokmrtc-bd11/p1408237 ; https://www.liverc.com/news/ronald-volker-wins-at-ets-opener-in-austria/"
+  },
+  {
+    "chassis_id": "yokomo-bd12",
+    "template_id": "yokomo-bd12",
+    "brand": "Yokomo",
+    "model": "BD12",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Current Yokomo competition platform succeeding the BD11; ETS/Worlds-level Modified entry with A.T.F. (Active Top Deck Flex) and lower CG. | sources: https://www.amainhobbies.com/yokomo-bd12-competition-1-10-4wd-electric-on-road-touring-car-kit-yokmsr-bd12/p1486963 ; https://www.rcmart.com/hobby-news/Yokomo-BD12-new-release"
+  },
+  {
+    "chassis_id": "capricorn-c04-ep",
+    "template_id": "capricorn-c04-ep",
+    "brand": "Capricorn",
+    "model": "C04 EP",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Electric version of Capricorn's EFRA 1:10 Nitro Euro Championship-winning C04 platform (2022/2023 Euros, Toni Gruber); Capricorn 2nd overall (Toni Gruber) at the 2024 IFMAR Worlds. | sources: https://www.redrc.net/2023/03/capricorn-c04-ep-touring-car/ ; https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "capricorn-lab-c04-w-c-2024",
+    "template_id": "capricorn-lab-c04-w-c-2024",
+    "brand": "Capricorn",
+    "model": "LAB C04 W.C. 2024",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "2024 World Championship-edition Capricorn touring kit; Toni Gruber finished 2nd overall at the 2024 IFMAR 1:10 Onroad Worlds on the Capricorn platform. | sources: https://www.redrc.net/2024/07/capricorn-lab-c04-w-c-2024-chassis-kit/ ; https://capricornrc.com/en/capricorn-car-kit/4661-lab-c04-110-.html"
+  },
+  {
+    "chassis_id": "serpent-medius-x20",
+    "template_id": "serpent-medius-x20",
+    "brand": "Serpent",
+    "model": "Medius X20",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Serpent's current 190mm competition EP touring platform (X20 '23/'24 editions); adjustable flex-bridge platform raced at club/national level. | sources: https://www.amainhobbies.com/serpent-medius-x20-2024-1-10-electric-touring-car-kit-graphite-chassis-ser400046/p1536423 ; https://www.redrc.net/2024/01/serpent-medius-x20-rtr-110-electric-touring-car/"
+  },
+  {
+    "chassis_id": "serpent-project-4x-evo",
+    "template_id": "serpent-project-4x-evo",
+    "brand": "Serpent",
+    "model": "Project 4X EVO",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Serpent's 4WD EP touring platform (Project 4X / 4X EVO / 4X PRO); recent-but-still-raced national/club competition kit. | sources: https://www.redrc.net/2018/03/serpent-project-4x-evo-1-10th-touring-car-kit/ ; https://www.serpent.com/xcart/cart.php?target=product&product_id=10650"
+  },
+  {
+    "chassis_id": "tamiya-trf421",
+    "template_id": "tamiya-trf421",
+    "brand": "Tamiya",
+    "model": "TRF421",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Tamiya's current TRF flagship competition touring car (2024 release); equal-length belts, shorter dampers, full tuning suite. National/club competition platform. | sources: https://www.amainhobbies.com/tamiya-trf421-4wd-touring-car-chassis-kit-tam42384/p1546219 ; https://www.rcmart.com/hobby-news/Tamiya-TRF421-RC-Touring-Car"
+  },
+  {
+    "chassis_id": "tamiya-trf420x",
+    "template_id": "tamiya-trf420x",
+    "brand": "Tamiya",
+    "model": "TRF420X",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Predecessor to the TRF421; Tamiya's recent-but-still-raced TRF competition touring platform. | sources: https://www.rcteam.com/en/products/tamiya-touring-trf421x-kit-42391 ; https://kentech.wordpress.com/2024/01/31/trf421-launch-technical-analysis/"
+  },
+  {
+    "chassis_id": "mugen-mtc2",
+    "template_id": "mugen-mtc2",
+    "brand": "Mugen",
+    "model": "MTC2",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Mugen's competition EP touring platform (MTC2 / MTC2-R); ETS/national-level entry, frequently benchmarked against the TRF421. | sources: https://kentech.wordpress.com/2024/01/31/trf421-launch-technical-analysis/ ; https://www.redrc.net/category/brand/mugen/"
+  },
+  {
+    "chassis_id": "arc-r12",
+    "template_id": "arc-r12",
+    "brand": "ARC",
+    "model": "R12",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "ARC's mid-motor EP touring platform (R12 / R12.1) built for traction and low CG; recent-but-still-raced competition kit. | sources: https://www.redrc.net/2020/05/arc-r12-mid-motor-touring-car-kit/ ; https://www.redrc.net/2021/10/arc-r12-1-touring-car-kit/"
+  },
+  {
+    "chassis_id": "arc-a11",
+    "template_id": "arc-a11",
+    "brand": "ARC",
+    "model": "A11",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "ARC's current front-motor EP touring platform (A10-23 then A11, 2023/2026); national/club competition kit. | sources: https://www.redrc.net/2026/01/arc-a11-110-electric-touring-car/ ; https://www.redrc.net/2023/04/arc-a10-23-110-ep-touring-car/"
+  },
+  {
+    "chassis_id": "schumacher-mi8",
+    "template_id": "schumacher-mi8",
+    "brand": "Schumacher",
+    "model": "Mi8",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Schumacher's EP competition touring platform (Mi8, with a High Grip Track conversion); recent-but-still-raced national/club kit succeeded by the Mi9. | sources: https://www.redrc.net/2023/05/schumacher-mi8-high-grip-track-conversion-kit/ ; https://www.ebay.de/itm/126471015655"
+  },
+  {
+    "chassis_id": "vbc-wildfire-d10",
+    "template_id": "vbc-wildfire-d10",
+    "brand": "VBC Racing",
+    "model": "WildFire D10",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "VBC's fully re-engineered competition touring platform (WildFire D07/D09/D10, ~80% new parts at D10); recent-but-still-raced club/national kit. | sources: https://www.redrc.net/2017/10/vbc-racing-wildfire-d10-touring-car/ ; https://www.amainhobbies.com/crc-vbc-racing-wildfire-1-10-touring-car-kit-clnd-05-vbc-0005/p233543"
+  },
+  {
+    "chassis_id": "destiny-rx-10sr-3-0",
+    "template_id": "destiny-rx-10sr-3-0",
+    "brand": "Destiny",
+    "model": "RX-10SR 3.0",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Destiny's competition EP touring platform (RX-10SR 2.0 / 3.0 / 3.0R); updated weight balance for steering and cornering; recent-but-still-raced kit. | sources: https://www.redrc.net/2022/07/destiny-rx-10sr-3-0-touring-car/ ; https://www.redrc.net/2023/06/destiny-rx-10sr-3-0r-touring-car/"
+  },
+  {
+    "chassis_id": "crc-gen-x-10-rt-world-gt-r",
+    "template_id": "crc-gen-x-10-rt-world-gt-r",
+    "brand": "CRC",
+    "model": "Gen-X 10 RT (World GT-R)",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Benchmark chassis for the US 1/10 World GT-R pan-car class (spec-tire, 17.5 blinky); a defining platform of the WGT-R class. | sources: https://www.hobbytown.com/crc-genx-10-rt-world-gtr-1-10-pan-car-kit-cln1810/p512408 ; https://www.raceplacerc.com/wgtr-class-rules"
+  },
+  {
+    "chassis_id": "excelerate-prodigy-wgt-r",
+    "template_id": "excelerate-prodigy-wgt-r",
+    "brand": "eXcelerate",
+    "model": "Prodigy WGT-R",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_10_touring_electric",
+    "provenance": "Current-production 1/10 World GT-R class pan car raced in the US spec WGT-R class. | sources: https://www.amainhobbies.com/excelerate-prodigy-wgtr-1-10-electric-onroad-pan-car-xce-0875/p1588359 ; https://www.raceplacerc.com/wgtr-class-rules"
+  },
+  {
+    "chassis_id": "xray-x12",
+    "template_id": "xray-x12",
+    "brand": "Xray",
+    "model": "X12",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "manual_url": "https://teamxray.com/downloads/21/x12_2025_manual_v01_low.pdf",
+    "setup_sheet_url": "https://www.setup-rc.com/en/setup/detail/727",
+    "provenance": "Yearly-updated flagship 1/12 pan car. Alexander Hagberg won the IFMAR 1/12 Modified World Championship on the X12; the car is a perennial podium contender at IFMAR Worlds, ETS and US nationals (X12'24/'25/'26 iterations). | sources: https://www.redrc.net/2024/09/xray-x12-25/ ; https://www.liverc.com/news/hagberg-and-evans-crowned-ifmar-112-world-champions/ ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "awesomatix-a12",
+    "template_id": "awesomatix-a12",
+    "brand": "Awesomatix",
+    "model": "A12",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "Dominant modern 1/12 platform. Kemp Anderson was Top Qualifier and Max Machler won 1:12 Spec at the 2023 IFMAR Worlds on Awesomatix; Kemp Anderson won 1:12 Modified at the 2024 MonTech New York Grand Prix on an A12X. | sources: https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/ ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/ ; https://events.redrc.net/tag/2024-montech-nygp-usa/"
+  },
+  {
+    "chassis_id": "awesomatix-a12x",
+    "template_id": "awesomatix-a12x",
+    "brand": "Awesomatix",
+    "model": "A12X",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "Kemp Anderson won the AbsoluteHobbyz 1:12 Modified class at the 2024 MonTech New York Grand Prix on the A12X, with Max Machler (also Awesomatix) on the podium. | sources: https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/ ; https://events.redrc.net/tag/2024-montech-nygp-usa/"
+  },
+  {
+    "chassis_id": "awesomatix-a12wc",
+    "template_id": "awesomatix-a12wc",
+    "brand": "Awesomatix",
+    "model": "A12WC",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "Refined World Championship edition; described by Red RC as the IFMAR 1:12 Spec World Champion car (Max Machler took the 2023 IFMAR Worlds 1:12 Spec title on Awesomatix). | sources: https://www.redrc.net/2024/07/awesomatix-a12x-a12wc-pan-car-kits/ ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "roche-rapide-p12",
+    "template_id": "roche-rapide-p12",
+    "brand": "Roche",
+    "model": "Rapide P12",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "setup_sheet_url": "https://site.petitrc.com/reglages/roche/setuprapidep12/P12/",
+    "provenance": "The Roche P12-2017 spec TQ'd the Halloween Classic and podiumed at IIC in the 2017/18 season; the P12 platform won the 2016 IFMAR 1/12 World Championship. Hayato Ishioka and Kazuki Yamashita raced Roche at the 2023 IFMAR Worlds. | sources: https://www.liverc.com/news/new-roche-p12-2017-usa-spec-112-scale-pan-car-kit/ ; https://www.redrc.net/2015/02/roche-rapide-p12-112th-scale-pan-car/ ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "roche-rapide-p12-evo2",
+    "template_id": "roche-rapide-p12-evo2",
+    "brand": "Roche",
+    "model": "Rapide P12 Evo2",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "Current Roche 1/12 flagship; Roche remained a represented brand at the 2023 IFMAR 1/12 Worlds. Evo2 features an Ultra-Low-CG aluminium tub chassis and a redesigned centre-pivot roll-centre system. | sources: https://www.redrc.net/2021/11/roche-rapide-p12-evo2-1-12th-pan-car/ ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "crc-gen-xl-1-12-pan-car",
+    "template_id": "crc-gen-xl-1-12-pan-car",
+    "brand": "CRC",
+    "model": "Gen-XL / 1/12 pan car",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "CRC (Calandra Racing Concepts) is a represented 1/12 manufacturer at IFMAR Worlds. Frank Calandra raced CRC in 1:12 Spec at the 2023 IFMAR Worlds; Hayato Ishioka finished 8th in Modified on a CRC at the 2020 Worlds. | sources: https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/ ; https://en.wikipedia.org/wiki/2020_IFMAR_1:12_Electric_Track_World_Championships"
+  },
+  {
+    "chassis_id": "schumacher-atom-2",
+    "template_id": "schumacher-atom-2",
+    "brand": "Schumacher",
+    "model": "Atom 2",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "British Championship-winning GT12/1-12 pan car lineage. Michal Orlowski won the open-class World Champion title on Schumacher per the 2023 IFMAR Worlds chassis-focus coverage. | sources: https://www.redrc.net/2019/09/schumacher-atom-2-1-12th-gt12-pan-car/ ; https://www.amainhobbies.com/schumacher-atom-2-s2-1-12-gt12-competition-pan-car-kit-schk179/p1055346 ; https://events.redrc.net/2023/12/23-112-world-championship-chassis-focus-index/"
+  },
+  {
+    "chassis_id": "capricorn-c-12p",
+    "template_id": "capricorn-c-12p",
+    "brand": "Capricorn",
+    "model": "C-12P",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "European 1/12 competition pan car with adjustable ride height (calibrated shims), wide wheelbase range and a big-bore centre shock. Marketed for high-bite competition use. | sources: https://www.liverc.com/news/new-capricorn-c-12p-112-scale-pan-car-kit/ ; https://www.redrc.net/2017/08/capricorn-c-12p-112th-scale-pan-car-kit/"
+  },
+  {
+    "chassis_id": "capricorn-p12-c",
+    "template_id": "capricorn-p12-c",
+    "brand": "Capricorn",
+    "model": "P12-C",
+    "category": "onroad",
+    "scale": "1/12",
+    "type": "pan",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "1_12_pan",
+    "provenance": "USA-spec evolution with a stiffer aluminium chassis and aluminium rear lower pod plate over the standard carbon items, tuned for high-bite US track conditions. | sources: https://www.redrc.net/2018/03/capricorn-p12-c-usa-version-pan-car-kit/"
+  },
+  {
+    "chassis_id": "xray-x1",
+    "template_id": "xray-x1",
+    "brand": "Xray",
+    "model": "X1",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "manual_url": "https://teamxray.com/downloads/92/x1_2025_manual_v02_low.pdf",
+    "provenance": "Premier 1/10 F1 chassis; the X1 issued repeated wins at ETS F1 races in Europe and is a leading EFRA/national F1 platform. Annual editions X1'21 through X1'25. | sources: https://www.hobbytown.com/xray-x1-2024-luxury-1-10-f1-chassis-kit-xra370708/p1515195 ; https://www.redrc.net/2024/12/xray-x1-25-110-formula-1/"
+  },
+  {
+    "chassis_id": "roche-rapide-f1-evo2",
+    "template_id": "roche-rapide-f1-evo2",
+    "brand": "Roche",
+    "model": "Rapide F1 Evo2",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Current Roche 1/10 F1 competition kit (aluminium chassis, USA-spec variant available); a frequent benchmark against the Xray X1 in F1 class racing. | sources: https://www.redrc.net/2020/04/roche-rapide-f1-evo2-chassis-kit/ ; https://rocherc.com/index.php?product_id=924&route=product/product ; https://www.bigsquidrc.com/roche-rapide-f1-evo2-kit/"
+  },
+  {
+    "chassis_id": "serpent-f110-sf4",
+    "template_id": "serpent-f110-sf4",
+    "brand": "Serpent",
+    "model": "F110 SF4",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Evolution of the F110 platform refined on IDFM, ETS, TiTC and CETC racing experience; an established EFRA-legal F1 competition chassis. | sources: https://www.hobbytown.com/serpent-f110-sf4-1-10-competition-f1-chassis-kit-ser410067/p995579 ; https://www.rcformula1.com.au/index.php/international/18-f1-rc-manufacturers/serpent-f110"
+  },
+  {
+    "chassis_id": "serpent-f110-sf2",
+    "template_id": "serpent-f110-sf2",
+    "brand": "Serpent",
+    "model": "F110 SF2",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "setup_sheet_url": "https://site.petitrc.com/reglages/serpent/setup/F110/F110SF2/",
+    "provenance": "Earlier-generation F110 EP F1 platform, still raced and documented in European F1 series; setup data archived on petitrc.com. | sources: https://www.serpent.com/xcart/ser410061.html ; https://site.petitrc.com/reglages/serpent/setup/F110/F110SF2/"
+  },
+  {
+    "chassis_id": "tamiya-f104-pro-ii",
+    "template_id": "tamiya-f104-pro-ii",
+    "brand": "Tamiya",
+    "model": "F104 Pro II",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Long-running value F1 competition platform; widely used for national and club F1 racing. Reviewed and raced competitively as recently as 2024. | sources: https://www.hobbytown.com/tamiya-f104-pro-ii-1-10-competition-f1-chassis-kit-w-body-tam58652/p705838 ; https://www.thercracer.com/2024/08/58652-tamiya-f104-pro-ii-review-and.html ; https://tamiyabase.com/chassis/125-f104"
+  },
+  {
+    "chassis_id": "tamiya-trf101",
+    "template_id": "tamiya-trf101",
+    "brand": "Tamiya",
+    "model": "TRF101",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Tamiya Racing Factory high-end F1 kit based on the F104 Ver.II, developed with TRF team data; the TRF101W wide-tread variant targets high-speed foam-tyre circuits. | sources: https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf101-chassis-kit/ ; https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf101w-chassis-kit/ ; https://site.petitrc.com/reglages/tamiya/setup/TRF101/TRF101_TheRCRacer_Review/"
+  },
+  {
+    "chassis_id": "tamiya-trf102",
+    "template_id": "tamiya-trf102",
+    "brand": "Tamiya",
+    "model": "TRF102",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Tamiya's top-end F1 kit succeeding the F104 v2 / TRF101 line in the TRF competition range. | sources: https://www.redrc.net/2015/06/tamiya-trf102-110th-formula-chassis-kit/ ; https://www.tamiyausa.com/shop/110-f-1gtindy-cars/rc-trf102-chassis-kit-2/"
+  },
+  {
+    "chassis_id": "exotek-f1-ultra-r5",
+    "template_id": "exotek-f1-ultra-r5",
+    "brand": "Exotek",
+    "model": "F1 Ultra R5",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Purpose-built F1 chassis (not a converted 1/12) with a patent-pending floating rear-pod suspension for rubber-tyre F1 traction; a leading modern aftermarket/standalone F1 platform with a dedicated carpet (Carpet Works) variant. | sources: https://www.amainhobbies.com/exotek-f1-ultra-r5-1-10-pro-race-formula-chassis-kit-exof1r5/p1554186 ; https://www.redrc.net/2024/03/exotek-f1ultra-r5-110-formula-kit/ ; https://www.redrc.net/2024/10/exotek-f1-ultra-r5cw-carpet-works-kit/"
+  },
+  {
+    "chassis_id": "exotek-f1-ultra-r4",
+    "template_id": "exotek-f1-ultra-r4",
+    "brand": "Exotek",
+    "model": "F1 Ultra R4",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Earlier ground-up Exotek F1 Ultra platform (with a Carpet Works conversion), recent-but-still-raced predecessor to the R5. | sources: https://www.amainhobbies.com/exotek-f1-ultra-1-10-pro-race-formula-chassis-kit-exof1r4/p-qqqetqyqlczeqctz ; https://www.redrc.net/2020/07/exotek-f1ultra-1-10th-formula-car-kit/"
+  },
+  {
+    "chassis_id": "crc-wtf1-ds",
+    "template_id": "crc-wtf1-ds",
+    "brand": "CRC",
+    "model": "WTF1 DS",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Calandra Racing Concepts F1 platform; the predecessor WTF1-FC16 was IIC, Snowbirds and US Indoor Champion. The WTF1 DS (2020) added revised geometry and front-end parts. | sources: https://www.amainhobbies.com/crc-wtf1-ds-1-10-competition-f1-chassis-kit-cln1502/p1247363 ; https://www.amainhobbies.com/crc-wtf1fc16-1-10-competition-f1-chassis-kit-cln1501/p484761"
+  },
+  {
+    "chassis_id": "crc-wtf1-fc16",
+    "template_id": "crc-wtf1-fc16",
+    "brand": "CRC",
+    "model": "WTF1-FC16",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "CRC F1 chassis described by the retailer as IIC, Snowbirds and US Indoor Champion; a proven US carpet/indoor F1 platform. | sources: https://www.amainhobbies.com/crc-wtf1fc16-1-10-competition-f1-chassis-kit-cln1501/p484761 ; https://www.hobbytown.com/wtf1fc16-1-10-competition-f1-chassis-kit-by-crc-cln1501/p484761"
+  },
+  {
+    "chassis_id": "yokomo-yrf-formula-001w",
+    "template_id": "yokomo-yrf-formula-001w",
+    "brand": "Yokomo",
+    "model": "YRF Formula 001W",
+    "category": "onroad",
+    "scale": "1/10",
+    "type": "f1",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "f1",
+    "provenance": "Yokomo's 1/10 F1 competition chassis designed by Naoto Kitagawa with championship intent; a Japanese-brand F1 platform present in competitive F1 racing. | sources: https://www.amainhobbies.com/yokomo-yrf-formula-001w-1-10-competition-f1-chassis-kit-yokyrf-001w/p256065 ; https://en.banzaihobby.com/Products/yrf-001w-formula-001w-chassis-kit"
+  },
+  {
+    "chassis_id": "hpi-baja-5b",
+    "template_id": "hpi-baja-5b",
+    "brand": "HPI Racing",
+    "model": "Baja 5B",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "First mass-produced 1/5 gas buggy to succeed in the US (2006); the platform that effectively created the large-scale off-road class and remains a fixture at large-scale fun/race events. Flux variant is the 8S brushless version. | sources: https://en.wikipedia.org/wiki/HPI_Baja_5B/5T ; https://www.hpiracing.com/en/kit/107684 ; https://www.hpiracing.com/en/kit/160323"
+  },
+  {
+    "chassis_id": "hpi-baja-5t",
+    "template_id": "hpi-baja-5t",
+    "brand": "HPI Racing",
+    "model": "Baja 5T",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro",
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "1/5 truck variant of the Baja 5B (released 2008) with 26cc engine and truck body; widely run at large-scale off-road events alongside the 5B. | sources: https://en.wikipedia.org/wiki/HPI_Baja_5B/5T ; https://www.rcsuperstore.com/hpi-baja-5b-5sc-5t-30-5cc-esp-modified-ported-chrome-engine-with-clutch-and-cy-carb/"
+  },
+  {
+    "chassis_id": "hpi-baja-5sc",
+    "template_id": "hpi-baja-5sc",
+    "brand": "HPI Racing",
+    "model": "Baja 5SC",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "1/5 large-scale short course truck on the Baja 5 platform; popular in large-scale SC bashing/club running. | sources: https://www.hpiracing.com/en/kit/109964 ; https://www.competitionx.com/news-feed/review-hpi-baja-5sc/ ; https://www.rcsuperstore.com/hpi-baja-5sc-1-5-scale-rtr-gasoline-short-course-truck/"
+  },
+  {
+    "chassis_id": "losi-5ive-t-2-0",
+    "template_id": "losi-5ive-t-2-0",
+    "brand": "Losi",
+    "model": "5IVE-T 2.0",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "Premier 1/5 4WD gas short-course race truck, ~3ft long with Zenoah G320 32cc engine; tire compound/tread optimized for racing. A staple of large-scale 4WD SC racing. | sources: https://www.horizonhobby.com/product/1-5-5ive-t-2.0-v2-4x4-bnd-gas-short-course-truck/LOS05014V2.html ; https://www.losi.com/product/1-5-5ive-t-2.0-v2-4x4-sct-gas-bnd-gray-blue-white/LOS05014V2T1.html"
+  },
+  {
+    "chassis_id": "losi-dbxl-e-2-0",
+    "template_id": "losi-dbxl-e-2-0",
+    "brand": "Losi",
+    "model": "DBXL-E 2.0",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "Leading 1/5 4WD brushless desert buggy; 8S, 50+ mph, the go-to large-scale electric off-road platform for bashers and large-scale enthusiasts. | sources: https://www.losi.com/product/1-5-dbxl-e-2.0-4wd-desert-buggy-brushless-rtr-with-smart-fox-body/LOS05020T1.html ; https://www.horizonhobby.com/product/1-5-dbxl-e-2.0-4wd-desert-buggy-brushless-rtr-with-smart/LOS05020.html"
+  },
+  {
+    "chassis_id": "losi-dbxl-2-0",
+    "template_id": "losi-dbxl-2-0",
+    "brand": "Losi",
+    "model": "DBXL 2.0",
+    "category": "offroad",
+    "scale": "1/5",
+    "type": "buggy",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "Gas-powered 1/5 4WD desert buggy (Icon variant); large-scale off-road counterpart to the DBXL-E. | sources: https://www.losi.com/product/losi-1-5-dbxl-2.0-icon-4x4-rtr-gas-desert-buggy-black-/LOS05008T1.html ; https://www.losi.com/cars-and-trucks/by-size/large/"
+  },
+  {
+    "chassis_id": "fg-f1-sportsline-1-5-sedan",
+    "template_id": "fg-f1-sportsline-1-5-sedan",
+    "brand": "FG Modellsport",
+    "model": "F1 Sportsline (1/5 Sedan)",
+    "category": "onroad",
+    "scale": "1/5",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": [
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "large_scale_1_5",
+    "provenance": "FG's 1/5 large-scale on-road sedan/touring platform (26cc, belt-drive, ~100 km/h); FG is the dominant European 1/5 large-scale on-road brand with an established competition heritage (Competition / Sportsline lines). | sources: http://www.fg-modellsport.com/product/fg-modellsport-f-1-5-sportsline-2wd-rtr-clear-body-10000R ; https://www.rcscrapyard.net/fg-sportsline.htm ; https://www.rcscrapyard.net/fg-competition.htm"
+  },
+  {
+    "chassis_id": "axial-scx10-pro",
+    "template_id": "axial-scx10-pro",
+    "brand": "Axial",
+    "model": "SCX10 Pro",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Purpose-built comp-ready scale crawler kit ('lighter, lower, more adjustable'); has already won and placed at multiple events with designer Wyatt Mellon driving. A go-to comp/scale competition platform. | sources: https://www.amainhobbies.com/axial-scx10-pro-1-10-4wd-scaler-rock-crawler-kit-axi03028/p1474738 ; https://www.axialadventure.com/product/1-10-scx10-pro-4x4-kit/AXI03028.html"
+  },
+  {
+    "chassis_id": "axial-utb10-capra-1-9-4ws",
+    "template_id": "axial-utb10-capra-1-9-4ws",
+    "brand": "Axial",
+    "model": "UTB10 Capra 1.9 4WS",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless",
+      "nitro"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Unlimited Trail Buggy with portal axles + 4-wheel steering; 45.37:1 final drive for max climbing. Widely cited as the platform to own for serious rock-crawling competition / technical comp driving. | sources: https://www.amainhobbies.com/axial-utb10-capra-1.9-4ws-unlimited-trail-buggy-1-10-rtr-4wd-rock-crawler-axi-1543t1/p1625087 ; https://www.horizonhobby.com/product/1-10-utb10-capra-1.9-4ws-4x4-unlimited-trail-buggy-brushed-rtr/AXI-1543.html"
+  },
+  {
+    "chassis_id": "element-enduro-comp-fox",
+    "template_id": "element-enduro-comp-fox",
+    "brand": "Element RC",
+    "model": "Enduro Comp Fox",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "setup_sheet_url": "https://portal.associatedelectrics.com/element/cars_and_trucks/Enduro/Enduro_Comp_Fox/manuals_setups/",
+    "provenance": "Dedicated competition rock-crawler kit (Associated Electrics' Element brand): carbon-fiber flat-rail chassis, portal axles, Stealth X overdrive transmission with 60/40 forward weight bias. Built specifically for the hardcore comp-crawling scene. | sources: https://www.amainhobbies.com/element-rc-enduro-comp-fox-competition-1-10-4wd-rock-crawler-kit-asc40129/p1580545 ; https://www.towerhobbies.com/product/enduro-comp-fox-competition-rock-crawler-kit/ASC40129.html ; https://www.bigsquidrc.com/element-rc-1-10-enduro-comp-fox-competition-rock-crawler-kit/"
+  },
+  {
+    "chassis_id": "vanquish-vs4-10-phoenix-portal",
+    "template_id": "vanquish-vs4-10-phoenix-portal",
+    "brand": "Vanquish Products",
+    "model": "VS4-10 Phoenix Portal",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "First platform with Vanquish's VFD Twin transmission (selectable overdrive + 3-position dig) and F10 portal axles; high-end scale/comp competition crawler kit. | sources: https://www.amainhobbies.com/vanquish-products-vs410-phoenix-portal-rock-crawler-kit-w-falken-wildpeak-mt-vps09007/p1368384 ; https://www.rcteam.com/en/products/vanquish-crawler-vs4-10-origin-classic-kit-vps09026a"
+  },
+  {
+    "chassis_id": "vanquish-vrd-stance",
+    "template_id": "vanquish-vrd-stance",
+    "brand": "Vanquish Products",
+    "model": "VRD Stance",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Competition-grade RTR comp rock crawler: stamped-aluminum frame, F10 portal axles, VFD trans at chassis low-point with 6.5% overdrive, low-CG brass weighting and pinched comp Lexan body. | sources: https://www.amainhobbies.com/vanquish-products-1-10-vrd-stance-portal-axle-4x4-rtr-1-10-comp-rock-crawler-vps09009c/p1632898 ; https://www.hobbytown.com/vanquish-products-vrd-stance-rtr-portal-axle-comp-rock-crawler-green-vps09009a/p1535717"
+  },
+  {
+    "chassis_id": "vanquish-vrd-carbon",
+    "template_id": "vanquish-vrd-carbon",
+    "brand": "Vanquish Products",
+    "model": "VRD Carbon",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Vanquish's dedicated 1/10 competition rock crawler kit (carbon-spec), one of the leading hardcore comp platforms in the current scene. | sources: https://vanquishproducts.com/products/vrd-carbon-kit ; https://www.whiterosehobbies.com/collections/vanquish-vps09015-vrd-carbon-1-10-competition-rock-crawler"
+  },
+  {
+    "chassis_id": "vanquish-vrd-mullet",
+    "template_id": "vanquish-vrd-mullet",
+    "brand": "Vanquish Products",
+    "model": "VRD Mullet",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Competition-proven 'mullet' configuration comp crawler kit (front F10 straight axle + rear F10 portal); Carbon Spec VFD trans, 34% total overdrive for comp climbing/steering balance. | sources: https://www.amainhobbies.com/vanquish-products-vrd-mullet-1-10-competition-rock-crawler-kit-vps09014/p1666250 ; https://www.edsrc.com/products/vanquish-products-vrd-mullet-1-10-competition-rock-crawler-kit"
+  },
+  {
+    "chassis_id": "ssd-rc-trail-king-pro-scale-chassis",
+    "template_id": "ssd-rc-trail-king-pro-scale-chassis",
+    "brand": "SSD RC",
+    "model": "Trail King Pro Scale Chassis",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Performance-oriented scale/comp builder chassis used widely by scale enthusiasts and competition crawlers; Pro44 axles, full machined-steel drivetrain, 44.2:1 final drive. | sources: https://www.amainhobbies.com/ssd-rc-trail-king-pro-scale-crawler-chassis-builders-kit-ssd00300/p947552 ; https://www.hobbytown.com/ssd-rc-trail-king-pro-scale-crawler-chassis-builders-kit-ssd00300/p947552"
+  },
+  {
+    "chassis_id": "rc4wd-bully-ii-moa-competition",
+    "template_id": "rc4wd-bully-ii-moa-competition",
+    "brand": "RC4WD",
+    "model": "Bully II MOA Competition",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "Classic dual-motor MOA (motor-on-axle) competition crawler developed to meet U.S.R.C.C.A. competition rules; titanium links, carbon chassis, 2.2 comp beadlocks with X2SS compound tires. A long-standing benchmark of the dedicated comp-crawler class. | sources: https://www.amainhobbies.com/rc4wd-bully-ii-moa-competition-crawler-kit-rc4zk0056/p513007 ; https://store.rc4wd.com/RC4WD-Bully-II-MOA-Competition-Crawler-Kit_p_5056.html"
+  },
+  {
+    "chassis_id": "redcat-ascent-fusion-lcg",
+    "template_id": "redcat-ascent-fusion-lcg",
+    "brand": "Redcat Racing",
+    "model": "Ascent Fusion LCG",
+    "category": "offroad",
+    "scale": "1/10",
+    "type": "crawler",
+    "default_power_type": "brushless",
+    "power_types": [
+      "brushless"
+    ],
+    "template_status": "pending_pdf",
+    "category_template": "crawler",
+    "provenance": "1/10 LCG competition RTR rock crawler; brushless, low-center-of-gravity comp-oriented platform aimed at the competitive rock-crawling class. | sources: https://www.amainhobbies.com/redcat-ascent-fusion-lcg-1-10-4wd-rtr-brushless-scale-rock-crawler-black-rer31524/p1553495 ; https://fearlessrc.com/product/rer31793/"
   }
 ]

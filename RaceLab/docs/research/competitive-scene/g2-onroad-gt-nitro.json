@@ -1,0 +1,323 @@
+[
+  {
+    "brand": "XRAY",
+    "model": "GTX8",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "XRAY's flagship 1/8 GT platform; the GTX8 line (GTX8 / GTX8.2 / GTX8.22 / 2022) is a multi-season EFRA/IFMAR-level 1/8 GT contender and one of the most widely raced GT chassis.",
+    "sources": [
+      "https://www.amainhobbies.com/xray-gtx8.2-1-8-gt-nitro-onroad-touring-car-kit-xra350501/p973626",
+      "https://www.rccaraction.com/xray-gtx8-18-nitro-road-car/",
+      "https://teamxray.com/gtx8/2022/en/download/"
+    ],
+    "manual_url": "https://teamxray.com/downloads/79/gtx8_instruction_manual_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/gtx8/2022/en/download/",
+    "notes": "1/8 GT (closed-body GT sedan), distinct from XRAY's 1/8 Track car (RX8). GTX8e is the brushless GT variant. Wide layout, 2-speed."
+  },
+  {
+    "brand": "XRAY",
+    "model": "GTX8.2",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "Evolution of the GTX8; current-generation XRAY 1/8 GT race kit raced at EFRA GT level.",
+    "sources": [
+      "https://www.amainhobbies.com/xray-gtx8.2-1-8-gt-nitro-onroad-touring-car-kit-xra350501/p973626",
+      "https://www.amainhobbies.com/xray-gtx8-2022-1-8-gt-nitro-onroad-touring-car-kit-xra350503/p1316110"
+    ],
+    "manual_url": "https://teamxray.com/downloads/79/gtx8_instruction_manual_low.pdf",
+    "setup_sheet_url": "https://teamxray.com/gtx8/2022/en/download/",
+    "notes": "Longer-wheelbase chassis with GT-specific geometry; suspension holders mounted directly to chassis. Listed as a separate model from the original GTX8."
+  },
+  {
+    "brand": "Mugen Seiki",
+    "model": "MGT7",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "Mugen's dedicated 1/8 GT car, derived from the MBX7 buggy and MRX5 2-speed; a mainstay 1/8 GT race kit. MGT7 ECO is the brushless GT variant.",
+    "sources": [
+      "https://www.mugenracing.com/mgt7-1-8-nitro-on-road-gt-car/",
+      "https://www.amainhobbies.com/mugen-seiki-mgt7-1-8-gt-nitro-onroad-touring-car-kit-muge2017/p-qeawqsuqpb2xactz",
+      "https://www.liverc.com/news/mugen-seikis-nitro-and-electric-mgt7-and-mgt7-eco-kits/"
+    ],
+    "manual_url": "https://www.mugenracing.com/mgt7-instruction-manual/",
+    "setup_sheet_url": "http://www.mugenseiki.com/images/mgt7/setup_sheet/mgt7-setupsheet-e1501kit.pdf",
+    "notes": "1/8 GT sedan, ~3600g, 2-speed with 3-shoe alloy clutch. 16mm shocks. MGT7 ECO = brushless. No MGT8 released as of mid-2026 (forum speculation only)."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "LAB GT2",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "Capricorn's dedicated 1/8 GT-class platform (LAB GT2), offered in GP (nitro) and EP (electric) versions; Capricorn is a top-tier 1/8 on-road brand (Toni Gruber). Class-specific Tesla 21 GT engine.",
+    "sources": [
+      "https://www.redrc.net/2024/01/capricorn-lab-gt2-gp-2024-18-gt-images/",
+      "https://www.redrc.net/2025/02/capricorn-lab-gt2-ep-2025-18-gt-kit/",
+      "https://www.liverc.com/news/new-capricorn-rc-lab-gt2-18th-electric-gt-chassis/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "GT-specific platform separate from Capricorn's 1/8 Track cars (LAB C802/C803/Quantum). GP = nitro, EP = brushless."
+  },
+  {
+    "brand": "Serpent",
+    "model": "SRX8 GT",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Serpent's 1/8 GT nitro sedan line (Cobra SRX8 GT -> SRX8 GT '23 -> SRX8 GT R 2025), developed with the Catanzani brothers; well-known GT race platform offered as kit and RTR.",
+    "sources": [
+      "https://www.amainhobbies.com/serpent-srx8-gt-r-2025-1-8-nitro-onroad-sedan-kit-ser600072/p1663643",
+      "https://www.amainhobbies.com/serpent-cobra-srx8-gt-1-8-nitro-onroad-sedan-kit-ser600057/p976692",
+      "https://www.rccaraction.com/serpent-rtr-srx8-gt-4wd-1-8-road-nitro-car/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/8 GT 4WD sedan, 3mm 7075-T6 chassis, 2-speed. SRX8 GT R is the latest in-line-drivetrain revision. Distinct from Serpent's 1/8 Track Viper 977 line."
+  },
+  {
+    "brand": "SWORKz",
+    "model": "S35-GT2",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "SWORKz 1/8 GT line; SWORKz Factory driver Jorn Neumann won the GT World Championship with the original S35-GT (nitro). S35-GT2 / GT2.2 FTE are the current evolutions; S35-GT2e is the brushless variant.",
+    "sources": [
+      "https://sworkz.com/gas-powered-cars/sworkz-s35-gt2-1-8-nitro-gt-pro-kit",
+      "https://www.redrc.net/2020/12/sworkz-s35-gt2e-1-8-gt-brushless-racing-kit/",
+      "https://beachrc.com/sworkz-s35-gt2-1-8-pro-nitro-gt-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Derived from the S35-4 1/8 nitro buggy platform; Ackermann steering from the buggy. GT2.2 FTE = Factory Team Edition. S35-GT2e = electric/brushless."
+  },
+  {
+    "brand": "Infinity",
+    "model": "IF18-3",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Infinity (Creation Model) 1/8 on-road platform: Dario Balestri won the 2023 IFMAR 1:8 Onroad World Championship on the IF18-3's debut, with 6 of 10 finalists on the chassis. IF18 won the 2017 Worlds.",
+    "sources": [
+      "https://www.redrc.net/2023/12/infinity-if18-3-18-onroad-chassis/",
+      "https://www.bigsquidrc.com/infinity-if18-1-8-nitro-kit/",
+      "https://rcxx.shop/en-in/products/infinity-if18-3-gp-1-8-onroad-racing-chassis-kit-cm00013"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Primarily campaigned as a 1/8 Track car (200mm open on-road) but routinely raced/marketed under the 1:8 on-road umbrella; included as a top 1/8 on-road nitro contender. IF18 and IF18-2 are the predecessors."
+  },
+  {
+    "brand": "Shepherd",
+    "model": "Velox V8.2",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Shepherd Micro Racing's 1/8 on-road line, based on the World- and European-Championship-winning Velox V8 'WC' platform; long-running competitive 1/8 nitro on-road chassis. Succeeded by the V8.3 (now under Zen Racing).",
+    "sources": [
+      "https://www.redrc.net/2019/06/shepherd-velox-v8-2-1-8th-nitro-on-road-kit/",
+      "https://www.redrc.net/2024/11/shepherd-velox-v8-3-18-onroad-chassis/",
+      "https://www.bigsquidrc.com/shepherd-micro-racing-velox-v8-2-1-8-on-road-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/8 on-road (Track-style 200mm); included as a long-standing competitive 1/8 nitro on-road chassis. Velox E8 is the electric sibling. Brand later acquired by Zen Racing."
+  },
+  {
+    "brand": "Serpent",
+    "model": "Viper 977 EVO",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Serpent's flagship 1/8 on-road (Track 200mm) platform; the Viper 977 / 977 EVO / 977 EVO 2 are long-running EFRA/IFMAR-level 1/8 nitro on-road race kits, including WC limited editions.",
+    "sources": [
+      "https://www.amainhobbies.com/serpent-viper-977-evo-1-8-scale-on-road-kit-ser903015/p451180",
+      "https://www.liverc.com/news/serpents-new-viper-977-evo-2-18-scale-nitro-on-road-car/",
+      "https://www.amainhobbies.com/serpent-viper-977-wc-limited-edition-1-8-scale-on-road-kit-ser903013/p273396"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": "https://oldmain.serpent.com/product/903012/setups/",
+    "notes": "1/8 Track on-road (open-body 200mm), not the GT-bodied SRX8 GT. Tagged type 'gt' per the 1/8 on-road classification used here. EVO 2 is the latest."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "LAB C803",
+    "scale": "1/8",
+    "category": "onroad",
+    "type": "gt",
+    "default_power_type": "nitro",
+    "power_types": ["nitro", "brushless"],
+    "notable_results": "Capricorn's top 1/8 on-road (Track 200mm) chassis; LAB C802 / C803 / C803 EVO / C804 R are championship-pedigree Italian race kits campaigned at EFRA/IFMAR level. C803EP is the electric version.",
+    "sources": [
+      "https://capricornrc.com/en/home/3583-chassis-lab-c803-pro-version.html",
+      "https://capricornrc.com/en/capricorn-car-kit/5887-lab-804-r.html",
+      "https://www.liverc.com/news/new-capricorn-c803ep-electric-18-scale-on-road-kit/"
+    ],
+    "manual_url": "http://www.capricornrc.com/download/instruction-manual-lab-c-803-rel-1-0/",
+    "setup_sheet_url": null,
+    "notes": "1/8 Track on-road; LAB C802 manual at capricornrc.com/download/instruction-manual-lab-c802/. C804 R is the current revision; Quantum is the newest concept. C803EP = electric."
+  },
+  {
+    "brand": "Kyosho",
+    "model": "V-One R4 Evo",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Kyosho's flagship 1/10 200mm nitro touring line with IFMAR World Championship pedigree; V-One R4 Evo / Evo.2 / Evo.3 are current-gen race kits, plus the R4s Kyosho Cup edition.",
+    "sources": [
+      "https://rc.kyosho.com/en/33204.html",
+      "https://www.amainhobbies.com/kyosho-vone-r4-evo-1-10-nitro-touring-car-kit-kyo33204b/p474960",
+      "https://www.hobbytown.com/kyosho-vone-r4-evo.3-4wd-1-10-nitro-onroad-touring-car-kit-kyo33217/p1559397"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "368mm length, 200mm width, 258mm wheelbase, ~1700g, 12-15 class engine. Evo.3 (33217) is the latest. Strong in JMRCA / Kyosho Cup."
+  },
+  {
+    "brand": "XRAY",
+    "model": "NT1",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "XRAY's 1/10 200mm nitro touring car (since 2007); multiple IFMAR World and EFRA European Championships plus hundreds of national titles. NT1 2018/2023/'24/'27 are the recent annual revisions.",
+    "sources": [
+      "https://www.redrc.net/2018/02/xray-nt1-2018-1-10th-200mm-nitro-on-road-kit/",
+      "https://www.amainhobbies.com/xray-nt1-2023-1-10-luxury-nitro-touring-car-kit-xra330017/p1454561",
+      "https://teamxray.com/nt1/3/en/"
+    ],
+    "manual_url": "https://www.manualslib.com/manual/1963103/Xray-Nt1.html",
+    "setup_sheet_url": "https://setup.teamxray.com/sheet/view?userSheetId=19453",
+    "notes": "7075-T6 alloy chassis, central-flex tuning. The benchmark 1/10 200mm nitro touring platform. Annual model-year revisions (NT1.3, NT1'24, NT1'27)."
+  },
+  {
+    "brand": "Mugen Seiki",
+    "model": "MTX7",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Mugen's current 1/10 200mm nitro touring car (announced 2019), evolved from the championship MTX-6R; long-running JMRCA/EFRA-level touring platform.",
+    "sources": [
+      "https://www.redrc.net/2019/10/mugen-mtx7-1-10th-200mm-nitro-on-road-kit/",
+      "https://www.amainhobbies.com/mugen-seiki-mtx7-1-10-scale-nitro-touring-car-kit-mugt2005/p1222193",
+      "https://www.liverc.com/news/new-mugen-seiki-racing-mtx7-nitro-touring-car/"
+    ],
+    "manual_url": "https://www.mugenracing.com/t2005-mtx7-1-10-nitro-touring-car-kit/",
+    "setup_sheet_url": null,
+    "notes": "LCG rear bulkhead, alloy servo saver, MRX6-style rear arm mounting. Predecessors: MTX-5, MTX-6, MTX-6R."
+  },
+  {
+    "brand": "Mugen Seiki",
+    "model": "MTX-6R",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Mugen's 1/10 200mm nitro touring car (2016), the championship-winning predecessor to the MTX7; widely raced at national/Euro level in its era.",
+    "sources": [
+      "https://www.liverc.com/news/mugen-seikis-new-mtx-6r-200mm-nitro-touring-car-kit-gallery/",
+      "https://www.bigsquidrc.com/mugen-mtx-6r-110-nitro-touring-car/",
+      "https://www.amainhobbies.com/mugen-seiki-mtx6-1-10-scale-nitro-touring-car-kit-mugt2003/p410035"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Recent-but-still-raced (~2016). Basis for the MTX7. MTX6 is the prior generation."
+  },
+  {
+    "brand": "Infinity",
+    "model": "IF15-II",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Infinity (Creation Model) 1/10 200mm nitro touring car; the IF15 family took the 2022 IFMAR World Championship (nine prototypes in the A-main, TQ + Superpole + win) and multiple WC titles. IF15-II is the 2023 update.",
+    "sources": [
+      "https://www.redrc.net/2023/06/infinity-if15-ii-110-200mm-nitro-touring-car/",
+      "https://www.redrc.net/2018/06/infinity-if15-1-10-200mm-nitro-on-road-kit%E2%80%A8/",
+      "https://www.bigsquidrc.com/infinity-1-10-if15-ii-nitro-touring-car-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Lowest-possible CG design; developed with the 1:8 Onroad WC team. IF15 (2018) is the original, IF15-II (CM00012) the current World Champion revision."
+  },
+  {
+    "brand": "Serpent",
+    "model": "Natrix 748",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Serpent's 1/10 200mm 4WD nitro touring car (Natrix 748 / 748 WC), designed by Michael Salven; an established EFRA-era touring platform with V2 gear diffs.",
+    "sources": [
+      "https://www.hobbytown.com/serpent-natrix-748-wc-200mm-1-10-4wd-nitro-touring-car-kit-ser804010/p661514"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Successor to the earlier Serpent 740/747 1/10 200mm touring line. WC = team/limited edition."
+  },
+  {
+    "brand": "Shepherd",
+    "model": "Velox V10",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Shepherd Micro Racing's 1/10 200mm nitro touring car; the Velox V10 Pro / WC / Nineteen / AWS are long-running EFRA-level touring kits developed with top team drivers.",
+    "sources": [
+      "https://www.redrc.net/2014/12/shepherd-velox-v10-pro-2015-200mm-nitro-on-road-kit/",
+      "https://www.liverc.com/news/new-shepherd-velox-v10-wc-110-scale-200mm-nitro-touring-car-kit/",
+      "https://www.redrc.net/2021/05/shepherd-velox-v10-aws-1-10th-chassis/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Multiple editions: Pro (2015), WC, Nineteen, AWS (Advanced Weight System). 7075-T6 chassis, 2-speed. Brand later acquired by Zen Racing."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "LAB C04",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "nitro",
+    "power_types": ["nitro"],
+    "notable_results": "Capricorn's 1/10 200mm nitro touring platform (C04, evolution of C02/C03); the C04 line was also developed toward a 230mm GT configuration. Italian competition-grade touring chassis.",
+    "sources": [
+      "https://www.redrc.net/2020/03/capricorn-release-new-c04-images/",
+      "https://www.redrc.net/2022/12/capricorn-110-230mm-nitro-platform/",
+      "https://www.redrc.net/2013/07/capricorn-lab-c02-black-edition-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Predecessors LAB C02 / C03. A 230mm large-scale nitro touring variant was also derived from this platform. C04 EP is the electric touring sibling."
+  }
+]

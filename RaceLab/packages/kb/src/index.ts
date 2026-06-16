@@ -52,6 +52,29 @@ export const FACET_TYPES = [
 export const TEMPLATE_STATUSES = ["full", "pending_pdf"] as const;
 export type TemplateStatus = (typeof TEMPLATE_STATUSES)[number];
 
+/** Ids of the kb category templates (chassis/categories/*.json). A registry
+ *  entry's optional `category_template` must name one of these — it is the
+ *  setup-page scaffold a non-`full` model resolves to. New category template =
+ *  one commit: the json + here + tests (same drift-is-a-build-error rule). */
+export const CATEGORY_TEMPLATES = [
+  "1_8_offroad_nitro",
+  "1_8_offroad_electric",
+  "1_8_truggy",
+  "1_8_gt",
+  "1_10_offroad_2wd",
+  "1_10_offroad_4wd",
+  "stadium_truck",
+  "short_course",
+  "1_10_touring_electric",
+  "1_10_nitro_onroad",
+  "1_12_pan",
+  "f1",
+  "large_scale_1_5",
+  "monster_truck",
+  "crawler",
+  "rally",
+] as const;
+
 // ── shapes ───────────────────────────────────────────────────────────────────
 
 /** A row of kb/chassis/registry.json: the frozen schema contract plus kb
@@ -64,6 +87,9 @@ export interface KbChassisRegistryEntry extends ChassisRegistryEntry {
    *  by `template_id`; when resolved, the path is relative to `kb/chassis/`
    *  (the registry's own directory). */
   template_file?: string;
+  /** Non-`full` entries: the category template that backs this model's setup
+   *  page (one of CATEGORY_TEMPLATES). */
+  category_template?: string;
   /** Where each identity fact was verified (grounding rule: no source → no entry). */
   provenance: string;
 }
@@ -159,6 +185,9 @@ export function parseChassisRegistry(
     const wantsFile = e.template_status === "full";
     if (wantsFile ? !nonEmptyStr(e.template_file) : e.template_file !== undefined) {
       return no(`[${i}].template_file`);
+    }
+    if (e.category_template !== undefined && !inEnum(CATEGORY_TEMPLATES, e.category_template)) {
+      return no(`[${i}].category_template`);
     }
     if (!nonEmptyStr(e.provenance)) return no(`[${i}].provenance`);
   }

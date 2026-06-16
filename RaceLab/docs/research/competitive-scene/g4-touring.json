@@ -1,0 +1,395 @@
+[
+  {
+    "brand": "Xray",
+    "model": "T4",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Long-running ETS Modified and Stock front-runner; Bruno Coelho (Modified) and Alexandre Duchet (Stock) ETS champions on the T4; ROAR podium platform (Chris Adams). Yearly model line (T4'17 through T4'21).",
+    "sources": [
+      "https://www.liverc.com/news/coelho-and-duchet-won-ets-modified-and-stock-touring-titles/",
+      "https://www.teamxray.com/t4/",
+      "https://www.liverc.com/news/2024-roar-road-paved-nationals-results/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Strong both Modified and Stock pedigree. Released as an annual platform (T4'17, '18, '19, '20, '21) before the X4 succeeded it."
+  },
+  {
+    "brand": "Xray",
+    "model": "X4",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current Xray competition touring platform (X4'22 through X4'26); ETS and ROAR-level entry; Evan Huang ran Xray at the 2024 IFMAR 1:10 electric Worlds.",
+    "sources": [
+      "https://www.amainhobbies.com/xray-x4-2026-1-10-electric-awd-onroad-touring-car-kit-carbon-fiber-chassis-xra300042/p1675009",
+      "https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Annual model (X4'22, '23, '24, '25, '26) and the direct successor to the T4. Both Modified and Stock pedigree."
+  },
+  {
+    "brand": "Infinity",
+    "model": "IF14-2",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Developed for the 2022 IFMAR Worlds; three back-to-back Reedy Race of Champions wins, TITC victory and ETS race wins on the IF14-2 platform.",
+    "sources": [
+      "https://www.liverc.com/news/first-look-at-the-new-infinity-if14-2-touring-car/",
+      "https://infinityrccars.com/products/infinity-if14-2-team-edition-1-10-ep-touring-chassis-kit"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Modified-pedigree flagship. The IF14 line is Infinity's top onroad EP platform."
+  },
+  {
+    "brand": "Infinity",
+    "model": "IF14-2 MID",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Mid-motor evolution developed through the 2023 JMRCA All Japan Championship and 2024 TITC; Jilles Groskamp won the 2024 IFMAR 1:10 Electric Touring Car World Championship on Infinity, with Teemu Leino top qualifier.",
+    "sources": [
+      "https://www.redrc.net/2024/07/infinity-if14-2mid-110-electric-touring-car/",
+      "https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive, mid-motor layout (spur near center of wheelbase, equalised front/rear belts). Modified-pedigree. Reigning electric Worlds winner brand (Groskamp 2024)."
+  },
+  {
+    "brand": "Infinity",
+    "model": "IF14",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Original IF14 EP touring platform; the IF15 prototype/IF-series lineage won the 2022 IFMAR 200mm Worlds (nitro) and underpins Infinity's electric program.",
+    "sources": [
+      "http://www.creationmodel.net/infinity/index.php/products/if14-1-10-ep-touring-car",
+      "https://events.redrc.net/2022/11/2022-ifmar-1-10th-200mm-worlds-winning-car/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Predecessor to the IF14-2; still raced. Modified pedigree."
+  },
+  {
+    "brand": "Awesomatix",
+    "model": "A800",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Dominant ETS Stock and high-grip platform; Marc Rheinard's weapon (EFRA Euros 2024 win on the A800R, TITC podium). Sam Isaacs won the 2024 ROAR Paved Modified Nationals on Awesomatix.",
+    "sources": [
+      "https://www.ets.racing/2023/11/18/under-the-hood-marc-rheinards-awesomatix-a800r/",
+      "https://www.liverc.com/news/2024-roar-road-paved-nationals-results/",
+      "https://www.asiatees.com/article?Awesomatix-A800-and-A800A-Electric-1%2F10-Touring-Cars=&id=2474"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Unique hybrid drivetrain combining belt and shaft benefits without torque-steer; lower-mounted dampers (no traditional shock tower) for very low CG. Variants A800, A800A, A800R, A800RR/RRA/RRC, A800MMX/MMXA. Strong Stock and high-grip pedigree."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "BD11",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Tested at top European races; Ronald Voelker-era ETS Modified front-runner platform (BD9/BD10/BD11 lineage), multiple ETS round wins.",
+    "sources": [
+      "https://www.amainhobbies.com/yokomo-bd11-1-10-4wd-electric-touring-car-kit-graphite-yokmrtc-bd11/p1408237",
+      "https://www.liverc.com/news/ronald-volker-wins-at-ets-opener-in-austria/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Yokomo's BD line is a flagship Modified-pedigree platform (Ronald Voelker). User-friendly competition kit."
+  },
+  {
+    "brand": "Yokomo",
+    "model": "BD12",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current Yokomo competition platform succeeding the BD11; ETS/Worlds-level Modified entry with A.T.F. (Active Top Deck Flex) and lower CG.",
+    "sources": [
+      "https://www.amainhobbies.com/yokomo-bd12-competition-1-10-4wd-electric-on-road-touring-car-kit-yokmsr-bd12/p1486963",
+      "https://www.rcmart.com/hobby-news/Yokomo-BD12-new-release"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Direct successor to the BD11. Split front/rear upper decks with A.T.F. flex control, shortened shocks. Modified pedigree."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "C04 EP",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Electric version of Capricorn's EFRA 1:10 Nitro Euro Championship-winning C04 platform (2022/2023 Euros, Toni Gruber); Capricorn 2nd overall (Toni Gruber) at the 2024 IFMAR Worlds.",
+    "sources": [
+      "https://www.redrc.net/2023/03/capricorn-c04-ep-touring-car/",
+      "https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). EP version of the nitro 200mm C04. Strong Modified/Euro pedigree."
+  },
+  {
+    "brand": "Capricorn",
+    "model": "LAB C04 W.C. 2024",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "2024 World Championship-edition Capricorn touring kit; Toni Gruber finished 2nd overall at the 2024 IFMAR 1:10 Onroad Worlds on the Capricorn platform.",
+    "sources": [
+      "https://www.redrc.net/2024/07/capricorn-lab-c04-w-c-2024-chassis-kit/",
+      "https://capricornrc.com/en/capricorn-car-kit/4661-lab-c04-110-.html"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). World Championship trim of the C04/LAB platform. Modified/Worlds pedigree (raced primarily 200mm nitro and EP onroad)."
+  },
+  {
+    "brand": "Serpent",
+    "model": "Medius X20",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Serpent's current 190mm competition EP touring platform (X20 '23/'24 editions); adjustable flex-bridge platform raced at club/national level.",
+    "sources": [
+      "https://www.amainhobbies.com/serpent-medius-x20-2024-1-10-electric-touring-car-kit-graphite-chassis-ser400046/p1536423",
+      "https://www.redrc.net/2024/01/serpent-medius-x20-rtr-110-electric-touring-car/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). 190mm competition kit with Graphite (low-grip) and Aluminum (high-grip) chassis options, split top deck, flex-bridge adjustment. Successor lineage to the Serpent Project 4X."
+  },
+  {
+    "brand": "Serpent",
+    "model": "Project 4X EVO",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Serpent's 4WD EP touring platform (Project 4X / 4X EVO / 4X PRO); recent-but-still-raced national/club competition kit.",
+    "sources": [
+      "https://www.redrc.net/2018/03/serpent-project-4x-evo-1-10th-touring-car-kit/",
+      "https://www.serpent.com/xcart/cart.php?target=product&product_id=10650"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Predecessor to the Medius X20. Modified-capable competition platform."
+  },
+  {
+    "brand": "Shepherd",
+    "model": "Velox V10",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Shepherd 200mm touring platform (V10 / V10 AWS / V10 WC, World Champion Daniele Ielasi development); 'Ferrari' Supanun Khwanyuen ran Shepherd at the 2024 IFMAR Worlds.",
+    "sources": [
+      "https://www.redrc.net/2021/05/shepherd-velox-v10-aws-1-10th-chassis/",
+      "https://events.redrc.net/2024/11/2024-110-onroad-world-c-ship-chassis-focus-index/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Primarily a 200mm nitro-pedigree platform also run in EP onroad; AWS = Advance Weight System. Worlds-level entry."
+  },
+  {
+    "brand": "Tamiya",
+    "model": "TRF421",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Tamiya's current TRF flagship competition touring car (2024 release); equal-length belts, shorter dampers, full tuning suite. National/club competition platform.",
+    "sources": [
+      "https://www.amainhobbies.com/tamiya-trf421-4wd-touring-car-chassis-kit-tam42384/p1546219",
+      "https://www.rcmart.com/hobby-news/Tamiya-TRF421-RC-Touring-Car"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD, double-deck carbon). Successor to the TRF420/TRF420X. JMRCA-pedigree platform; both Stock and Modified capable."
+  },
+  {
+    "brand": "Tamiya",
+    "model": "TRF420X",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Predecessor to the TRF421; Tamiya's recent-but-still-raced TRF competition touring platform.",
+    "sources": [
+      "https://www.rcteam.com/en/products/tamiya-touring-trf421x-kit-42391",
+      "https://kentech.wordpress.com/2024/01/31/trf421-launch-technical-analysis/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). The TRF421's rigid 'A' arms are 7mm longer than the TRF420X's. JMRCA/TRF-pedigree platform."
+  },
+  {
+    "brand": "Mugen",
+    "model": "MTC2",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Mugen's competition EP touring platform (MTC2 / MTC2-R); ETS/national-level entry, frequently benchmarked against the TRF421.",
+    "sources": [
+      "https://kentech.wordpress.com/2024/01/31/trf421-launch-technical-analysis/",
+      "https://www.redrc.net/category/brand/mugen/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). The MTC2-R is the racing/team trim. Modified-capable. (Source benchmarks it directly against the TRF421.)"
+  },
+  {
+    "brand": "ARC",
+    "model": "R12",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ARC's mid-motor EP touring platform (R12 / R12.1) built for traction and low CG; recent-but-still-raced competition kit.",
+    "sources": [
+      "https://www.redrc.net/2020/05/arc-r12-mid-motor-touring-car-kit/",
+      "https://www.redrc.net/2021/10/arc-r12-1-touring-car-kit/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD), mid-motor double-deck with mono-block motor-mount bulkhead. Modified-capable. A FWD variant (R12FF) also exists."
+  },
+  {
+    "brand": "ARC",
+    "model": "A11",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "ARC's current front-motor EP touring platform (A10-23 then A11, 2023/2026); national/club competition kit.",
+    "sources": [
+      "https://www.redrc.net/2026/01/arc-a11-110-electric-touring-car/",
+      "https://www.redrc.net/2023/04/arc-a10-23-110-ep-touring-car/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). Conventional front-motor layout (the A10/A11 line); the R12 is ARC's mid-motor alternative. Both Modified and Stock capable."
+  },
+  {
+    "brand": "Schumacher",
+    "model": "Mi8",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Schumacher's EP competition touring platform (Mi8, with a High Grip Track conversion); recent-but-still-raced national/club kit succeeded by the Mi9.",
+    "sources": [
+      "https://www.redrc.net/2023/05/schumacher-mi8-high-grip-track-conversion-kit/",
+      "https://www.ebay.de/itm/126471015655"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). High Grip Track conversion alters suspension geometry/shock mounts for more rotation on high-grip. Succeeded by the Mi9. Modified/Stock capable."
+  },
+  {
+    "brand": "VBC Racing",
+    "model": "WildFire D10",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "VBC's fully re-engineered competition touring platform (WildFire D07/D09/D10, ~80% new parts at D10); recent-but-still-raced club/national kit.",
+    "sources": [
+      "https://www.redrc.net/2017/10/vbc-racing-wildfire-d10-touring-car/",
+      "https://www.amainhobbies.com/crc-vbc-racing-wildfire-1-10-touring-car-kit-clnd-05-vbc-0005/p233543"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). The WildFire line is VBC's flagship touring platform. Modified/Stock capable."
+  },
+  {
+    "brand": "Destiny",
+    "model": "RX-10SR 3.0",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Destiny's competition EP touring platform (RX-10SR 2.0 / 3.0 / 3.0R); updated weight balance for steering and cornering; recent-but-still-raced kit.",
+    "sources": [
+      "https://www.redrc.net/2022/07/destiny-rx-10sr-3-0-touring-car/",
+      "https://www.redrc.net/2023/06/destiny-rx-10sr-3-0r-touring-car/"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt drive (dual-belt 4WD). RX-10SR line; 3.0R is the latest race trim. Stock/Modified capable club-and-national platform."
+  },
+  {
+    "brand": "CRC",
+    "model": "Gen-X 10 RT (World GT-R)",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Benchmark chassis for the US 1/10 World GT-R pan-car class (spec-tire, 17.5 blinky); a defining platform of the WGT-R class.",
+    "sources": [
+      "https://www.hobbytown.com/crc-genx-10-rt-world-gtr-1-10-pan-car-kit-cln1810/p512408",
+      "https://www.raceplacerc.com/wgtr-class-rules"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "Belt-driven 1/10 200mm PAN CAR (not a 4WD touring car) raced as its own World GT / GT-R class: spec RT-1 tires, 1S, 17.5 ROAR motor. Stock/spec pedigree."
+  },
+  {
+    "brand": "eXcelerate",
+    "model": "Prodigy WGT-R",
+    "scale": "1/10",
+    "category": "onroad",
+    "type": "touring",
+    "default_power_type": "brushless",
+    "power_types": ["brushless"],
+    "notable_results": "Current-production 1/10 World GT-R class pan car raced in the US spec WGT-R class.",
+    "sources": [
+      "https://www.amainhobbies.com/excelerate-prodigy-wgtr-1-10-electric-onroad-pan-car-xce-0875/p1588359",
+      "https://www.raceplacerc.com/wgtr-class-rules"
+    ],
+    "manual_url": null,
+    "setup_sheet_url": null,
+    "notes": "1/10 200mm PAN CAR for the World GT-R spec class (CRC RT-1 control tire, 1S, 17.5 blinky). Distinct from 4WD touring; spec/Stock pedigree."
+  }
+]

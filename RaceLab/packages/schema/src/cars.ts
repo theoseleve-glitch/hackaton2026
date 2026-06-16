@@ -23,10 +23,13 @@ export interface ChassisRegistryEntry {
   template_id: string; // engine ChassisTemplate.template_id
   brand: string;
   model: string;
-  category: string; // "buggy" | "truggy" | ...
-  scale: string; //    "1/8" | "1/10" | ...
-  type: string; //     "offroad-competition" | ...
+  category: string; // racing surface: "offroad" | "onroad"
+  scale: string; //    "1/8" | "1/10" | "1/12" | "1/5"
+  type: string; //     body/discipline: "buggy" | "truggy" | "touring" | "gt" | "pan" | "f1" | ...
   default_power_type: PowerType;
+  /** Setup-page fallback: id of a kb category template (chassis/categories/*.json)
+   *  used to render an editable sheet when no `full` per-model template exists. */
+  category_template?: string;
 }
 
 export interface CarClassLabels {

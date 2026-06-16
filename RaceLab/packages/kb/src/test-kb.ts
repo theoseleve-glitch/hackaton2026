@@ -48,14 +48,16 @@ const regRes = parseChassisRegistry(registryJson as unknown);
 if (!regRes.ok) fatal(`registry.json rejected: ${regRes.reason}`);
 const registry: readonly KbChassisRegistryEntry[] = regRes.value;
 check("registry.json is a bare array (NOT a template-shaped object)", Array.isArray(registryJson));
-check("registry has 11 entries", registry.length === 11, String(registry.length));
+check("registry has 237 entries (full competitive scene)", registry.length === 237, String(registry.length));
 check(
   "chassis_ids are unique",
   new Set(registry.map((e) => e.chassis_id)).size === registry.length,
 );
 check(
-  "every entry uses the canonical facet vocabulary (offroad / 1/8 / buggy)",
-  registry.every((e) => e.category === "offroad" && e.scale === "1/8" && e.type === "buggy"),
+  "the MP11 anchor entry keeps the canonical 1/8-buggy facets",
+  registry.some(
+    (e) => e.chassis_id === "kyosho-inferno-mp11" && e.category === "offroad" && e.scale === "1/8" && e.type === "buggy",
+  ),
 );
 check(
   "every entry's power_types contains its default_power_type",
@@ -63,7 +65,7 @@ check(
 );
 const full = registry.filter((e) => e.template_status === "full");
 const pending = registry.filter((e) => e.template_status === "pending_pdf");
-check("exactly 1 full entry + 10 pending_pdf", full.length === 1 && pending.length === 10);
+check("exactly 1 full entry (MP11); the rest are pending_pdf", full.length === 1 && pending.length === registry.length - 1);
 check("the full entry is the MP11", full[0]?.chassis_id === "kyosho-inferno-mp11");
 check("full entry carries template_file", full[0]?.template_file === "inferno-mp11.json");
 check(
@@ -71,6 +73,12 @@ check(
   pending.every((e) => e.template_file === undefined),
 );
 check("every entry has a provenance string (grounding rule)", registry.every((e) => e.provenance.trim() !== ""));
+check(
+  "every entry resolves to a setup page (full → template_file, else → category_template)",
+  registry.every((e) =>
+    e.template_status === "full" ? typeof e.template_file === "string" : typeof e.category_template === "string",
+  ),
+);
 
 // ═══ template join (the join node-kb.ts actually performs) ═══════════════════
 
@@ -94,9 +102,12 @@ const classRes = parseClassDecl(classJson as unknown);
 if (!classRes.ok) fatal(`1-8-tt-buggy.json rejected: ${classRes.reason}`);
 const decl: KbClassDecl = classRes.value;
 check("class_id is 1-8-tt-buggy", decl.class_id === "1-8-tt-buggy");
+const classSubset = registry.filter(
+  (e) => e.category === decl.category && e.scale === decl.scale && e.type === decl.type,
+);
 check(
-  "class facets match the registry facets",
-  registry.every((e) => e.category === decl.category && e.scale === decl.scale && e.type === decl.type),
+  "the class declaration governs a non-empty registry subset (its own facets)",
+  classSubset.length >= 1,
 );
 check("sections.common is byte-identical (order included) to schema COMMON_SECTIONS", sameList(decl.sections.common, COMMON_SECTIONS));
 check("sections.nitro is byte-identical to schema NITRO_SECTIONS", sameList(decl.sections.nitro, NITRO_SECTIONS));
@@ -144,7 +155,7 @@ console.log("\n— makeCar against the real registry —");
 {
   const okRes = makeCar({ name: "MP11 #1", chassis_id: "kyosho-inferno-mp11", power_type: "nitro" }, NOW, schemaRegistry);
   check("makeCar accepts a registered chassis", okRes.ok);
-  const badRes = makeCar({ name: "Ghost", chassis_id: "tlr-8ight-x", power_type: "nitro" }, NOW, schemaRegistry);
+  const badRes = makeCar({ name: "Ghost", chassis_id: "nonexistent-ghost-9000", power_type: "nitro" }, NOW, schemaRegistry);
   check("makeCar rejects an unregistered chassis", !badRes.ok && badRes.reason === "unknown_chassis");
   const customRes = makeCar({ name: "Mystery", chassis_id: CUSTOM_CHASSIS_ID, power_type: "brushless" }, NOW, schemaRegistry);
   check("makeCar accepts the custom escape hatch", customRes.ok);
