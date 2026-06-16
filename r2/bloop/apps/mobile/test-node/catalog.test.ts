@@ -28,8 +28,8 @@ describe('GAME_CATALOG (wave 2)', () => {
       'cinquante-cinquante', 'courtroom', 'devine-l-action', 'devine-l-objet', 'devine-la-question',
       'double-jeu', 'double-le-mouvement', 'gauche-ou-droite', 'jeu-de-la-note',
       'jeu-du-theme', 'le-classement', 'loup-garou', 'mime-inverse', 'pires-potes',
-      'quizz-culture-ge', 'red-green-flag', 'tracer', 'trouvez-la-regle', 'truth-or-dare-2', 'truth-or-drink',
-      'tu-preferes',
+      'qui-a-dit-ca', 'quizz-culture-ge', 'red-green-flag', 'tracer', 'trouvez-la-regle',
+      'truth-or-dare-2', 'truth-or-drink', 'tu-preferes',
     ].sort());
     expect(GAME_CATALOG.every((g) => g.badge === 'PLAY')).toBe(true);
   });

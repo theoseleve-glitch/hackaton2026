@@ -39,6 +39,7 @@ import {
   TRUTH_OR_DARE_2_CONFIG,
   TRUTH_OR_DRINK_CONFIG,
 } from '@bloop/game-truth-dare';
+import { createWhoSaidThat, whoSaidThatActionSchema } from '@bloop/game-who-said-that';
 import type { z } from 'zod';
 
 // The registry erases per-game generics; type safety is restored per game by
@@ -155,6 +156,11 @@ const REGISTRY = new Map<string, GameEntry>([
     module: createRanking('le-classement', LE_CLASSEMENT_CONFIG),
     actionSchema: rankingActionSchema,
     contentRef: 'le-classement-core',
+  }],
+  ['qui-a-dit-ca', {
+    module: createWhoSaidThat('qui-a-dit-ca'),
+    actionSchema: whoSaidThatActionSchema,
+    contentRef: 'qui-a-dit-ca-core',
   }],
 ]);
 

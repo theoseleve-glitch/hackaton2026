@@ -216,4 +216,14 @@ export const GAME_CATALOG: readonly GameCard[] = [
     badge: 'PLAY',
     video: { creator: 'Sidemen', url: 'https://www.youtube.com/watch?v=UVimmI3SooI', thumbnailUrl: 'https://i.ytimg.com/vi/UVimmI3SooI/hqdefault.jpg' },
   },
+  {
+    id: 'qui-a-dit-ca',
+    name: { fr: 'Qui a dit ça ?', en: 'Who Said That?' },
+    tagline: { fr: 'Avoue en secret, compte les coupables, démasque-les. Le fantôme qui passe inaperçu rafle la mise.', en: 'Confess in secret, count the guilty, unmask them. The ghost nobody catches takes it all.' },
+    emoji: '🤫',
+    color: '#5B7BFF',
+    badge: 'PLAY',
+    // Grounded credit: the "confessions / never have I ever" party format. Emoji card, credit links out.
+    video: { creator: 'Cut', url: 'https://www.youtube.com/@cut' },
+  },
 ] as const;

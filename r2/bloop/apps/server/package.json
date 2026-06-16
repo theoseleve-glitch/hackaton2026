@@ -22,6 +22,7 @@
     "@bloop/game-spotlight-guess": "workspace:*",
     "@bloop/game-tracer": "workspace:*",
     "@bloop/game-truth-dare": "workspace:*",
+    "@bloop/game-who-said-that": "workspace:*",
     "@bloop/kit": "workspace:*",
     "@bloop/protocol": "workspace:*",
     "hono": "^4.12.0",

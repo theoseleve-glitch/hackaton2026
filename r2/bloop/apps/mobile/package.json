@@ -40,6 +40,7 @@
     "@bloop/game-spotlight-guess": "workspace:*",
     "@bloop/game-tracer": "workspace:*",
     "@bloop/game-truth-dare": "workspace:*",
+    "@bloop/game-who-said-that": "workspace:*",
     "@types/react": "~19.2.2",
     "typescript": "~5.9.2",
     "vitest": "3.2.0"

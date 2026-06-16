@@ -1,0 +1,412 @@
+{
+  "gameId": "qui-a-dit-ca",
+  "version": 1,
+  "generatedAt": "2026-06-16",
+  "items": [
+    {
+      "id": "qadc-ghost-001",
+      "text": {
+        "fr": "J'ai déjà ghosté quelqu'un et menti sur la raison.",
+        "en": "I've ghosted someone and lied about why."
+      },
+      "spicy": 0,
+      "tags": ["dating", "confession"]
+    },
+    {
+      "id": "qadc-screenshot-002",
+      "text": {
+        "fr": "J'ai screené un message d'un pote pour le balancer dans un AUTRE groupe.",
+        "en": "I've screenshotted a friend's text to forward it into a different group chat."
+      },
+      "spicy": 0,
+      "tags": ["social", "betrayal"]
+    },
+    {
+      "id": "qadc-late-003",
+      "text": {
+        "fr": "J'ai déjà envoyé « jsuis là dans 5 min » alors que j'étais encore sous la douche.",
+        "en": "I've sent 'omw, 5 mins' while still in the shower."
+      },
+      "spicy": 0,
+      "tags": ["social", "lying"]
+    },
+    {
+      "id": "qadc-stalk-004",
+      "text": {
+        "fr": "J'ai stalké le nouveau date de mon ex jusqu'à une photo de 2019.",
+        "en": "I've scrolled my ex's new situationship all the way back to a 2019 photo."
+      },
+      "spicy": 0,
+      "tags": ["dating", "petty"]
+    },
+    {
+      "id": "qadc-fakesick-005",
+      "text": {
+        "fr": "J'ai inventé une gastro pour sécher un truc auquel j'avais juste la flemme d'aller.",
+        "en": "I've faked a stomach bug to skip something I just couldn't be bothered to attend."
+      },
+      "spicy": 0,
+      "tags": ["lying", "work"]
+    },
+    {
+      "id": "qadc-readreceipt-006",
+      "text": {
+        "fr": "J'ai lu un message, j'ai décidé de l'ignorer, et j'ai répondu « ah désolé je vois que maintenant » le lendemain.",
+        "en": "I've read a text, decided to ignore it, then replied 'omg sorry just seeing this' a day later."
+      },
+      "spicy": 0,
+      "tags": ["social", "lying"]
+    },
+    {
+      "id": "qadc-eavesdrop-007",
+      "text": {
+        "fr": "J'ai écouté toute une conversation des voisins de table en faisant semblant de scroller mon tel.",
+        "en": "I've listened to an entire conversation at the next table while pretending to scroll my phone."
+      },
+      "spicy": 0,
+      "tags": ["petty", "social"]
+    },
+    {
+      "id": "qadc-cabinet-008",
+      "text": {
+        "fr": "J'ai fouillé l'armoire à pharmacie chez quelqu'un que je connaissais à peine.",
+        "en": "I've snooped through the bathroom cabinet at someone's place I barely knew."
+      },
+      "spicy": 0,
+      "tags": ["petty", "confession"]
+    },
+    {
+      "id": "qadc-stolenstory-009",
+      "text": {
+        "fr": "J'ai raconté l'anecdote d'un pote comme si elle m'était arrivée à moi.",
+        "en": "I've retold a friend's story as if it happened to me."
+      },
+      "spicy": 0,
+      "tags": ["social", "lying"]
+    },
+    {
+      "id": "qadc-pretendseen-010",
+      "text": {
+        "fr": "J'ai fait semblant d'avoir vu un film ou une série pour pas casser l'ambiance.",
+        "en": "I've pretended to have seen a movie or show just to not kill the vibe."
+      },
+      "spicy": 0,
+      "tags": ["lying", "social"]
+    },
+    {
+      "id": "qadc-flopdate-011",
+      "text": {
+        "fr": "J'ai déjà espéré qu'un date d'un pote foire, juste pour avoir le récit.",
+        "en": "I've secretly hoped a friend's date would flop, just so I'd get the story."
+      },
+      "spicy": 0,
+      "tags": ["social", "petty"]
+    },
+    {
+      "id": "qadc-fakelaugh-012",
+      "text": {
+        "fr": "J'ai ri à une blague que j'ai pas comprise pour pas avoir l'air largué.",
+        "en": "I've laughed at a joke I didn't get so I wouldn't look lost."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-cancelplans-013",
+      "text": {
+        "fr": "J'ai annulé un plan à la dernière minute juste pour rester sous le plaid.",
+        "en": "I've bailed on plans last-minute just to stay under the blanket."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-borrowednever-014",
+      "text": {
+        "fr": "J'ai un truc emprunté à quelqu'un dans cette pièce que je compte jamais rendre.",
+        "en": "I'm holding something I borrowed from someone in this room that I never plan to give back."
+      },
+      "spicy": 0,
+      "tags": ["room", "petty"]
+    },
+    {
+      "id": "qadc-textwrong-015",
+      "text": {
+        "fr": "J'ai envoyé un message qui parlait de quelqu'un… à cette même personne.",
+        "en": "I've sent a text about someone… to that exact someone."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-fakebusy-016",
+      "text": {
+        "fr": "J'ai prétendu être débordé alors que j'étais allongé à fixer le plafond.",
+        "en": "I've claimed I was slammed with work while lying flat staring at the ceiling."
+      },
+      "spicy": 0,
+      "tags": ["lying", "work"]
+    },
+    {
+      "id": "qadc-petname-017",
+      "text": {
+        "fr": "J'ai oublié le prénom de quelqu'un en pleine conversation et j'ai bluffé jusqu'au bout.",
+        "en": "I've forgotten someone's name mid-conversation and bluffed it all the way through."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-creditothers-018",
+      "text": {
+        "fr": "J'ai pris le crédit d'une idée qui venait clairement de quelqu'un d'autre.",
+        "en": "I've taken credit for an idea that very clearly came from someone else."
+      },
+      "spicy": 0,
+      "tags": ["work", "betrayal"]
+    },
+    {
+      "id": "qadc-fakeagree-019",
+      "text": {
+        "fr": "J'ai dit « ouais carrément » à un truc auquel je comprenais rien.",
+        "en": "I've said 'yeah totally' to something I understood absolutely none of."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-trackorder-020",
+      "text": {
+        "fr": "J'ai checké le suivi d'une commande genre quinze fois dans la même journée.",
+        "en": "I've refreshed an order tracker about fifteen times in a single day."
+      },
+      "spicy": 0,
+      "tags": ["confession", "funny"]
+    },
+    {
+      "id": "qadc-jealous-021",
+      "text": {
+        "fr": "J'ai été secrètement vénère qu'un pote réussisse mieux que moi.",
+        "en": "I've been quietly salty that a friend was doing better than me."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-unfollow-022",
+      "text": {
+        "fr": "J'ai unfollow quelqu'un puis refollow pour pas que ça se voie.",
+        "en": "I've unfollowed someone then refollowed so it wouldn't show."
+      },
+      "spicy": 0,
+      "tags": ["social", "petty"]
+    },
+    {
+      "id": "qadc-blametech-023",
+      "text": {
+        "fr": "J'ai accusé « le réseau » alors que j'avais juste pas envie de répondre.",
+        "en": "I've blamed 'bad signal' when I just didn't feel like replying."
+      },
+      "spicy": 0,
+      "tags": ["lying", "social"]
+    },
+    {
+      "id": "qadc-leftonread-024",
+      "text": {
+        "fr": "J'ai laissé quelqu'un en vu pendant trois jours puis j'ai liké sa story.",
+        "en": "I've left someone on read for three days then liked their story."
+      },
+      "spicy": 0,
+      "tags": ["social", "petty"]
+    },
+    {
+      "id": "qadc-sinkfood-025",
+      "text": {
+        "fr": "J'ai mangé un truc debout au-dessus de l'évier, seul, et j'assume rien.",
+        "en": "I've eaten something standing alone over the sink and I'm taking that to the grave."
+      },
+      "spicy": 0,
+      "tags": ["food", "confession"]
+    },
+    {
+      "id": "qadc-returnworn-026",
+      "text": {
+        "fr": "J'ai porté un vêtement une fois puis je l'ai rendu en magasin comme neuf.",
+        "en": "I've worn an outfit once then returned it to the shop as 'unworn'."
+      },
+      "spicy": 0,
+      "tags": ["petty", "confession"]
+    },
+    {
+      "id": "qadc-fakeplans-027",
+      "text": {
+        "fr": "J'ai inventé un autre plan pour avoir une excuse de partir tôt.",
+        "en": "I've invented a fake second plan just to have an excuse to leave early."
+      },
+      "spicy": 0,
+      "tags": ["lying", "social"]
+    },
+    {
+      "id": "qadc-snooze-028",
+      "text": {
+        "fr": "J'ai juré que j'étais déjà debout en répondant les yeux à moitié fermés.",
+        "en": "I've sworn I was already up while answering with my eyes half shut."
+      },
+      "spicy": 0,
+      "tags": ["lying", "funny"]
+    },
+    {
+      "id": "qadc-overheardgossip-029",
+      "text": {
+        "fr": "J'ai relancé un ragot que je savais même pas vrai juste parce que c'était trop bon.",
+        "en": "I've passed along gossip I wasn't even sure was true just because it was too good."
+      },
+      "spicy": 0,
+      "tags": ["social", "betrayal"]
+    },
+    {
+      "id": "qadc-mutegroup-030",
+      "text": {
+        "fr": "J'ai mis un groupe entier en silencieux et fait semblant de pas avoir vu les 47 messages.",
+        "en": "I've muted an entire group chat and pretended not to see the 47 messages."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-fakebirthday-031",
+      "text": {
+        "fr": "J'ai souhaité un anniversaire uniquement parce que la notif me l'a rappelé.",
+        "en": "I've wished someone happy birthday purely because the notification reminded me."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-prepost-032",
+      "text": {
+        "fr": "J'ai supprimé une publi parce qu'elle prenait pas assez de likes.",
+        "en": "I've deleted a post because it wasn't getting enough likes."
+      },
+      "spicy": 0,
+      "tags": ["social", "confession"]
+    },
+    {
+      "id": "qadc-friendcrush-033",
+      "text": {
+        "fr": "J'ai déjà eu un crush sur le date d'un pote et j'ai rien dit.",
+        "en": "I've had a crush on a friend's date and said absolutely nothing."
+      },
+      "spicy": 0,
+      "tags": ["dating", "confession"]
+    },
+    {
+      "id": "qadc-pretendwork-034",
+      "text": {
+        "fr": "J'ai gardé un onglet boulot ouvert juste pour pouvoir alt-tab si quelqu'un passe.",
+        "en": "I've kept a work tab open purely to alt-tab to it if someone walks by."
+      },
+      "spicy": 0,
+      "tags": ["work", "confession"]
+    },
+    {
+      "id": "qadc-sellgroupphoto-035",
+      "text": {
+        "fr": "Je vendrais LA photo dossier du groupe pour 50 balles, sans négocier.",
+        "en": "I'd sell THE cursed group photo for fifty bucks, no negotiation."
+      },
+      "spicy": 0,
+      "tags": ["room", "betrayal"]
+    },
+    {
+      "id": "qadc-cryadvert-036",
+      "text": {
+        "fr": "J'ai pleuré devant une pub et j'ai dit à personne.",
+        "en": "I've cried at an advert and told no one."
+      },
+      "spicy": 0,
+      "tags": ["confession", "funny"]
+    },
+    {
+      "id": "qadc-pettyrevenge-037",
+      "text": {
+        "fr": "J'ai pris une micro-vengeance que la personne a jamais remarquée.",
+        "en": "I've taken a tiny revenge the person never even noticed."
+      },
+      "spicy": 0,
+      "tags": ["petty", "confession"]
+    },
+    {
+      "id": "qadc-pretendcall-038",
+      "text": {
+        "fr": "J'ai fait semblant d'être au téléphone pour éviter quelqu'un dans la rue.",
+        "en": "I've faked being on a call to dodge someone in the street."
+      },
+      "spicy": 0,
+      "tags": ["social", "petty"]
+    },
+    {
+      "id": "qadc-finishedfood-039",
+      "text": {
+        "fr": "J'ai fini un truc dans le frigo de la coloc en sachant très bien que c'était pas à moi.",
+        "en": "I've finished something in the shared fridge knowing full well it wasn't mine."
+      },
+      "spicy": 0,
+      "tags": ["petty", "food"]
+    },
+    {
+      "id": "qadc-snoozealarm-040",
+      "text": {
+        "fr": "J'ai déjà fait croire à un retard de train ou de bus qui existait pas.",
+        "en": "I've blamed a delayed train or bus that never actually happened."
+      },
+      "spicy": 0,
+      "tags": ["lying", "work"]
+    },
+    {
+      "id": "qadc-cringepast-041",
+      "text": {
+        "fr": "J'ai un compte ou un pseudo d'ado que je supplie qu'on déterre jamais.",
+        "en": "I have a teenage account or username I am praying never resurfaces."
+      },
+      "spicy": 0,
+      "tags": ["confession", "funny"]
+    },
+    {
+      "id": "qadc-skipqueue-042",
+      "text": {
+        "fr": "J'ai grillé une file en faisant comme si je rejoignais des potes devant.",
+        "en": "I've skipped a queue by acting like I was joining friends at the front."
+      },
+      "spicy": 0,
+      "tags": ["petty", "confession"]
+    },
+    {
+      "id": "qadc-friendsecret-043",
+      "text": {
+        "fr": "J'ai balancé un secret d'un pote à un autre pote dans la même soirée.",
+        "en": "I've spilled one friend's secret to another friend in the same evening."
+      },
+      "spicy": 0,
+      "tags": ["betrayal", "social"]
+    },
+    {
+      "id": "qadc-roomwhisper-044",
+      "text": {
+        "fr": "J'ai déjà chuchoté un truc sur quelqu'un qui était dans la même pièce.",
+        "en": "I've whispered something about someone who was in the same room."
+      },
+      "spicy": 0,
+      "tags": ["room", "betrayal"]
+    },
+    {
+      "id": "qadc-rehearse-045",
+      "text": {
+        "fr": "J'ai répété tout seul une réponse « spontanée » avant un message ou un appel.",
+        "en": "I've rehearsed a 'spontaneous' reply out loud before a text or a call."
+      },
+      "spicy": 0,
+      "tags": ["confession", "funny"]
+    }
+  ]
+}

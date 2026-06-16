@@ -14,6 +14,7 @@ import { RuleHuntPlay } from '../../../src/components/RuleHuntPlay';
 import { SecretRolePlay } from '../../../src/components/SecretRolePlay';
 import { SpotlightGuessPlay } from '../../../src/components/SpotlightGuessPlay';
 import { TruthDarePlay } from '../../../src/components/TruthDarePlay';
+import { WhoSaidThatPlay } from '../../../src/components/WhoSaidThatPlay';
 import { Avatar, VoteCard } from '../../../src/components/players';
 import { AppText, PrimaryButton, SecondaryButton } from '../../../src/components/ui';
 import { isInputGuessGame } from '../../../src/games/input-guess-view';
@@ -26,6 +27,7 @@ import { isRuleHuntGame } from '../../../src/games/rule-hunt-view';
 import { isSecretRoleGame } from '../../../src/games/secret-role-view';
 import { isSpotlightGuessGame } from '../../../src/games/spotlight-guess-view';
 import { isTruthDareGame } from '../../../src/games/truth-dare-view';
+import { isWhoSaidThatGame } from '../../../src/games/who-said-that-view';
 import { asTracerView, deviceLang, promptText, secondsLeft, type Lang, type TracerEpilogue, type TracerOverView, type TracerRevealView } from '../../../src/games/tracer-view';
 import {
   EpilogueCard,
@@ -65,6 +67,7 @@ export default function Play() {
   if (isNightDayGame(state.viewGameId)) return <NightDayPlay code={code ?? ''} />;
   if (isPerformJudgeGame(state.viewGameId)) return <PerformJudgePlay code={code ?? ''} />;
   if (isRankingGame(state.viewGameId)) return <RankingPlay code={code ?? ''} />;
+  if (isWhoSaidThatGame(state.viewGameId)) return <WhoSaidThatPlay code={code ?? ''} />;
   return <TracerPlay code={code ?? ''} />;
 }
 

@@ -88,6 +88,11 @@ const rhVote = (playerId: string, guilty: boolean, at: number): GameEvent<unknow
 const rankBallot = (playerId: string, order: string[], at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action: { kind: 'rank', order }, at });
 
+const wstConfess = (playerId: string, value: boolean, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'confess', value }, at });
+const wstAccuse = (playerId: string, target: string, at: number): GameEvent<unknown> =>
+  ({ type: 'action', playerId, action: { kind: 'accuse', target }, at });
+
 const pjAct = (playerId: string, action: unknown, at: number): GameEvent<unknown> =>
   ({ type: 'action', playerId, action, at });
 const pjVote = (playerId: string, vote: 'yes' | 'no', at: number): GameEvent<unknown> =>
@@ -423,6 +428,36 @@ const AUDITS: ReadonlyMap<string, RedactionAudit> = new Map([
       }
       return [...out, ...pjDeckSecrets(state)];
     },
+  }],
+  ['qui-a-dit-ca', {
+    players: ['p1', 'p2', 'p3', 'p4'],  // module minPlayers is 4
+    seed: 'audit-seed',
+    // Round 0 confess resolves (all four secretly confess MOI/PAS-MOI), then we
+    // sit MID-ATTRIBUTE: two secret accusations are buffered (p3/p4 still
+    // expected — phase stays `attribute`). BOTH hidden buffers are value-secrets
+    // here: the confessor IDENTITIES behind the frozen count, AND the buffered
+    // accusation targets. The two scripts vary WHICH players confessed MOI and
+    // WHO each accuser pointed at, but keep the confessor COUNT (the only public
+    // clue) at 2 and the same hasAccused booleans — so the attribute view a
+    // non-actor sees is byte-identical across scripts. The actors (p1,p2) each
+    // see their own differing myAccusation echo, proving the fixture is live.
+    events: [
+      wstConfess('p1', true, 1_000), wstConfess('p2', true, 1_100),
+      wstConfess('p3', false, 1_200), wstConfess('p4', false, 1_300),
+      wstAccuse('p1', 'p2', 2_000), wstAccuse('p2', 'p1', 2_100),
+    ],
+    eventsAlt: [
+      wstConfess('p1', false, 1_000), wstConfess('p2', false, 1_100),
+      wstConfess('p3', true, 1_200), wstConfess('p4', true, 1_300),
+      wstAccuse('p1', 'p3', 2_000), wstAccuse('p2', 'p4', 2_100),
+    ],
+    actors: ['p1', 'p2'],
+    // Confession values (booleans MOI/PAS-MOI) AND accusation targets (player
+    // ids) are STRUCTURAL — true/false and every roster id legitimately appear
+    // in the attribute view (hasAccused booleans, scores keys), so substring
+    // auditing cannot apply. The non-actor invariance check above covers both,
+    // exactly as it does for tracer's and the option-vote games' ballots.
+    secrets: () => [],
   }],
   ['le-classement', {
     players: ['p1', 'p2', 'p3'],

@@ -16,6 +16,7 @@ import { DOUBLE_JEU_PACK } from './secret-role-pack.js';
 import { DEVINE_LA_QUESTION_PACK, JEU_DE_LA_NOTE_PACK } from './spotlight-guess-packs.js';
 import { TRACER_PACK } from './tracer-pack.js';
 import { TRUTH_OR_DARE_2_PACK, TRUTH_OR_DRINK_PACK } from './truth-dare-packs.js';
+import { QUI_A_DIT_CA_PACK } from './who-said-that-pack.js';
 
 /**
  * R2 content SEED module. This file imports EVERY content pack — it is the one
@@ -46,6 +47,7 @@ export const ALL_PACKS: ContentPack<any>[] = [
   MIME_INVERSE_PACK,
   DOUBLE_LE_MOUVEMENT_PACK,
   LE_CLASSEMENT_PACK,
+  QUI_A_DIT_CA_PACK,
 ];
 
 /** Resolve a pack by its R2 key (= contentRef = pack.id). Used by node tests that need the live pack object. */
