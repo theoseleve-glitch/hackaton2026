@@ -135,3 +135,28 @@ if (errors.length > 0) {
   process.exit(1);
 }
 console.log("✓ all drafts pass schema + taxonomy + capability + contradiction + citation gates");
+
+// ── promotion-readiness (advisory, never fails a DRAFT) ──────────────────────
+// A rule is promotion-ready only with a real page-citable source and no TBD
+// placeholder. Web-tier sources (page_cited_quality:false in sources.json) can
+// corroborate but never be the SOLE cite under D18. This is what William signs
+// off before a draft moves to kb/rules/<family>.yaml (live).
+const PAGE_CITED = ["HUDY", "XRAY", "Cheat Sheet", "TLR", "Losi", "Mugen", "Stevens", "Kyosho", "petitrc"];
+const readiness: Record<string, { ready: number; needs: number }> = {};
+for (const file of readdirSync(draftsDir).filter((f) => f.endsWith(".yaml") && !f.startsWith("_")).sort()) {
+  const docs = parse(readFileSync(join(draftsDir, file), "utf8")) as unknown[];
+  const r = { ready: 0, needs: 0 };
+  for (const doc of docs ?? []) {
+    const p = RuleSchema.safeParse(doc);
+    if (!p.success) continue;
+    const srcs = p.data.sources;
+    const hasPageCite = srcs.some((s) => PAGE_CITED.some((a) => s.includes(a)) && !/tbd/i.test(s));
+    if (hasPageCite) r.ready++; else r.needs++;
+  }
+  readiness[file] = r;
+}
+console.log("\npromotion readiness (advisory — drafts may stay unready):");
+for (const [f, r] of Object.entries(readiness)) {
+  const flag = r.needs === 0 ? "✓ ready" : `⚠ ${r.needs} rule(s) need a real page cite (TBD/web-only)`;
+  console.log(`  ${f}: ${r.ready}/${r.ready + r.needs} promotion-ready — ${flag}`);
+}
