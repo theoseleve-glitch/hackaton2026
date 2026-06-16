@@ -1,0 +1,12 @@
+{
+  "name": "MODEL: a pending_pdf 1/8 nitro buggy (no per-model sheet) resolves to its category template and still gets grounded 1/8 advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["front_sway_bar", "rear_diff_oil", "front_spring", "front_camber", "front_track_width", "front_roll_center", "front_shock_oil", "ride_height_rake"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp10",
+    "setup": { "front_diff_oil": 8000, "center_diff_oil": 5000, "rear_diff_oil": 3000, "front_sway_bar": 2.3, "rear_sway_bar": 2.8, "rear_toe": 3, "front_camber": -1, "rear_camber": -2, "front_shock_oil": 450, "rear_shock_oil": 400 },
+    "track": { "name": "MRT Club Track", "surface": "clay", "grip": "green", "conditions": ["low_grip", "dusty"] },
+    "weather": { "air_temp_c": 14, "rain_risk_pct": 0 },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }], "text": "car pushes through the middle of every flat corner, front just washes" },
+    "mode": "practice"
+  }
+}

@@ -1,4 +1,4 @@
-import { type KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { parseFeedback } from "./nlu";
 import { proposePlan } from "./plan";
 import { engineScopeViolation } from "./guard";
@@ -58,7 +58,7 @@ export class RaceEngineerChat {
     this.hooks = hooks;
     // Never throw on an unknown chassis — proposePlan refuses in-band, and the
     // greeting degrades to a refusal line below.
-    this.template = data.templates[bundle.chassis_template_id];
+    this.template = resolveTemplate(data, bundle.chassis_template_id);
   }
 
   greeting(): string[] {

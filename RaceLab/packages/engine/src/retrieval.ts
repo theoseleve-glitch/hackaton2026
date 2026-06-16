@@ -10,6 +10,22 @@ export interface ScoredRule {
 
 const MAX_RULES = 8;
 
+/** Does this model physically expose the part a rule changes? A setting is
+ *  exposed iff it's a concrete field on the template, OR an alias/derived whose
+ *  `of` targets are all present concrete fields. Pure membership test (no merge
+ *  order, deterministic). This is the model-capability gate: a rule whose part
+ *  the car doesn't have is never offered — "reset his mind per model" (D48). */
+export function templateExposes(template: ChassisTemplate, setting: string): boolean {
+  const fields = template.fields;
+  const field = fields[setting];
+  if (!field) return false;
+  if (field.type === "alias" || field.type === "derived") {
+    const of = Array.isArray(field.of) ? field.of : [];
+    return of.length > 0 && of.every((t) => fields[t] !== undefined);
+  }
+  return true;
+}
+
 /**
  * Deterministic retrieval — a pure function over the KB (D13: no vector store).
  * Scoring: exact (symptom, phase) match > symptom-only match; track conditions
@@ -34,6 +50,18 @@ export function retrieve(
   for (const rule of rules) {
     // chassis scope filter: rule scope must intersect template scope
     if (!rule.scope.some((s) => template.scope.includes(s))) continue;
+
+    // model-capability gate: never recommend a part the car doesn't expose
+    if (!templateExposes(template, rule.setting)) continue;
+
+    // hard surface/condition exclusion: a rule that is WRONG here is dropped,
+    // not merely de-weighted (forbidden_on, not reduced_on)
+    if (rule.forbidden_on?.some((c) => trackConditions.has(c))) continue;
+
+    // power-legality gate: a rule restricted to certain power sub-classes fires
+    // only when one of them is the active run power tag (e.g. boost/turbo timing
+    // only in modified_power — never recommend an illegal mod to a spec entrant)
+    if (rule.legal_in_power && !rule.legal_in_power.some((p) => trackConditions.has(p))) continue;
 
     // a rule that worsens a symptom the driver already reports is never offered
     if (rule.counter_indications.some((ci) => presentSymptoms.has(ci))) continue;

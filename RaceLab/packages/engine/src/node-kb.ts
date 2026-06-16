@@ -29,6 +29,8 @@ const RuleSchema = z.object({
   confidence: z.enum(["high", "medium", "low"]),
   sources: z.array(z.string()).min(1),
   scope: z.array(z.string()).min(1),
+  forbidden_on: z.array(z.string()).optional(),
+  legal_in_power: z.array(z.string()).optional(),
 });
 
 // kb/chassis/registry.json — schema/cars.ts ChassisRegistryEntry is the contract
@@ -58,10 +60,16 @@ const ClassDefSchema = z.object({ class_id: z.string().min(1) }).passthrough();
 const ClassFileSchema = z.union([ClassDefSchema, z.array(ClassDefSchema)]);
 
 export function loadKBData(): KBData {
+  // Live rules are the top-level kb/rules/*.yaml. Drafts pending source
+  // verification live in kb/rules/drafts/ and are DELIBERATELY excluded from the
+  // bundle (D18: the live engine never ships an unverified rule). readdirSync is
+  // non-recursive and we take only .yaml files, so the drafts/ subdir is skipped;
+  // test-bundle-fresh asserts a rule dropped in drafts/ never reaches the bundle.
   const rulesDir = join(KB_DIR, "rules");
   const rules: KBRule[] = [];
-  for (const file of readdirSync(rulesDir).filter((f) => f.endsWith(".yaml"))) {
-    const docs = parse(readFileSync(join(rulesDir, file), "utf8")) as unknown[];
+  for (const file of readdirSync(rulesDir, { withFileTypes: true })) {
+    if (!file.isFile() || !file.name.endsWith(".yaml")) continue;
+    const docs = parse(readFileSync(join(rulesDir, file.name), "utf8")) as unknown[];
     for (const doc of docs) rules.push(RuleSchema.parse(doc) as KBRule);
   }
 
@@ -78,6 +86,23 @@ export function loadKBData(): KBData {
   )) {
     const template = JSON.parse(readFileSync(join(chassisDir, file), "utf8")) as ChassisTemplate;
     templates[template.template_id] = template;
+  }
+
+  // kb/chassis/categories/*.json — the per-category setup-page scaffolds a
+  // pending_pdf model resolves to. Loaded into a SEPARATE map so they never
+  // masquerade as real per-model templates (proposePlan etc. only see `templates`).
+  const categoryTemplates: Record<string, ChassisTemplate> = {};
+  const categoriesDir = join(chassisDir, "categories");
+  if (existsSync(categoriesDir)) {
+    for (const file of readdirSync(categoriesDir)
+      .filter((f) => f.endsWith(".json"))
+      .sort()) {
+      const t = JSON.parse(readFileSync(join(categoriesDir, file), "utf8")) as ChassisTemplate;
+      if (categoryTemplates[t.template_id]) {
+        throw new Error(`KB categories: duplicate template_id '${t.template_id}' (${file})`);
+      }
+      categoryTemplates[t.template_id] = t;
+    }
   }
 
   // kb/chassis/registry.json — OPTIONAL (lands in parallel); validated when present
@@ -111,6 +136,7 @@ export function loadKBData(): KBData {
     templates,
     ...(registry !== undefined ? { registry } : {}),
     ...(classes !== undefined ? { classes } : {}),
+    ...(Object.keys(categoryTemplates).length > 0 ? { categoryTemplates } : {}),
   };
   assertValidKBData(data);
   return data;

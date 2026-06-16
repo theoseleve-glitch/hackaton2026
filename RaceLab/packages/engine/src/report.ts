@@ -1,4 +1,4 @@
-import { type KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { drivingTips } from "./driving-tips";
 import {
   DO_NOTHING_MESSAGE,
@@ -49,7 +49,7 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
   // 0. Unknown chassis → refuse in-band (never throw on the data path). The
   //    registry carries pending_pdf chassis, so the app can ask about one not
   //    yet extracted; that must be a clean refusal, not a crash at the border.
-  const template = data.templates[bundle.chassis_template_id];
+  const template = resolveTemplate(data, bundle.chassis_template_id);
   if (!template) {
     return {
       kind: "refusal",

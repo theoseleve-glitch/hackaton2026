@@ -23,6 +23,14 @@ export interface KBRule {
   confidence: Confidence;
   sources: string[];
   scope: string[];
+  /** Hard exclusion: if the run's conditions intersect this, the rule is DROPPED
+   *  (not merely de-weighted like reduced_on) — for advice that is wrong, not just
+   *  weaker, on a surface/condition (e.g. add-sway-bar on loose dirt). */
+  forbidden_on?: string[];
+  /** Hard exclusion by power sub-class legality: the rule fires only when the
+   *  run's power tag is in this list (e.g. motor boost/turbo timing only in
+   *  `modified_power`, never `stock_blinky`). Omitted = legal in all. */
+  legal_in_power?: string[];
 }
 
 export interface Taxonomy {
@@ -30,6 +38,8 @@ export interface Taxonomy {
   phases: { id: string }[];
   evolution: { id: string }[];
   conditions: string[];
+  /** Class-scope vocabulary; rule.scope + template.scope must draw from this. */
+  scopes?: string[];
   engine_scope_refusal: { keywords: string[]; refusal: string };
 }
 

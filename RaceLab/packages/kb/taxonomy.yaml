@@ -48,6 +48,44 @@ conditions:
   - big_jumps
   - hot
   - cold
+  # surface (world map §3a) — compose with the grip tags above
+  - clay
+  - loose_dirt
+  - astroturf
+  - carpet
+  - asphalt
+  - indoor
+  - outdoor
+  # power sub-class (world map §3b) — gates motor-tuning + spec legality
+  - stock_blinky
+  - modified_power
+  - spec_locked
+  - nitro_power
+  - gas_power
+
+# Class-scope vocabulary: rule.scope and template.scope are matched by exact
+# string intersection (retrieval.ts), so a tag not in this list silently never
+# fires. The validator (data.ts validateScopes) enforces every rule/template
+# scope tag is drawn from here — a typo or a stray dialect is a build error.
+scopes:
+  - 1-8-offroad
+  - 1-8-nitro-offroad
+  - 1-8-e-offroad
+  - 1-8-truggy
+  - 1-8-gt
+  - 1-10-offroad
+  - 1-10-2wd-offroad
+  - 1-10-4wd-offroad
+  - 1-10-stadium
+  - 1-10-shortcourse
+  - 1-10-touring
+  - 1-10-nitro-onroad
+  - 1-12-pan
+  - 1-10-f1
+  - large-scale
+  - monster-truck
+  - crawler
+  - rally
 
 # Engine-scope tags: any request matching these MUST get the canned refusal (D13)
 engine_scope_refusal:

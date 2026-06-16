@@ -1,0 +1,17 @@
+# Canary: this rule MUST NEVER appear in bundle.json. test-modelgating asserts it.
+# If it ever bundles, the draft-staging exclusion broke and unverified rules can ship.
+- id: kb-draft-sentinel-000
+  setting: front_shock_oil
+  direction: increase
+  effects:
+    - { axis: test, change: more }
+  addresses: []
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "draft sentinel — must never be bundled"
+  reversal_cost_minutes: 5
+  confidence: low
+  sources: ["DRAFT — unverified, must not ship"]
+  scope: [1-8-offroad]

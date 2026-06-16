@@ -1,4 +1,4 @@
-import { type KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { retrieve } from "./retrieval";
 import {
   DO_NOTHING_MESSAGE,
@@ -20,7 +20,7 @@ export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
   // 0. Unknown chassis → refuse in-band (never throw on the data path), matching
   //    proposePlan/planRaceDay. The registry carries pending_pdf chassis, so the
   //    app can legitimately ask about one not yet extracted.
-  const template = data.templates[bundle.chassis_template_id];
+  const template = resolveTemplate(data, bundle.chassis_template_id);
   if (!template) {
     return {
       kind: "refusal",

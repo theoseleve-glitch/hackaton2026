@@ -4,71 +4,405 @@
   "brand": "generic",
   "model": "Large Scale 1/5 & 1/6 Offroad (gas or electric)",
   "category": "large_scale_1_5",
-  "scope": ["1/5_offroad_gas", "1/5_offroad_electric", "1/6_offroad"],
+  "scope": [
+    "large-scale"
+  ],
   "source": "rc-setup-fields.json (+ the cited setup sheets: Losi 5IVE-T manual setup sheet)",
   "template_status": "category_draft",
   "fields": {
-    "front_diff_oil": { "type": "number", "unit": "cst", "range": [1000, 1000000], "step": 500 },
-    "center_diff_oil": { "type": "number", "unit": "cst", "range": [1000, 1000000], "step": 500 },
-    "rear_diff_oil": { "type": "number", "unit": "cst", "range": [1000, 1000000], "step": 500 },
-    "front_shock_oil": { "type": "number", "unit": "cst", "range": [100, 5000], "step": 25 },
-    "rear_shock_oil": { "type": "number", "unit": "cst", "range": [100, 5000], "step": 25 },
-    "front_spring": { "type": "text", "label": "Shock spring front" },
-    "rear_spring": { "type": "text", "label": "Shock spring rear" },
-    "front_shock_piston": { "type": "text", "label": "Piston front" },
-    "rear_shock_piston": { "type": "text", "label": "Piston rear" },
-    "shock_pistons": { "type": "alias", "of": ["front_shock_piston", "rear_shock_piston"] },
-    "shock_position_front": { "type": "text", "label": "Shock position front (tower / arm)" },
-    "shock_position_rear": { "type": "text", "label": "Shock position rear (tower / arm)" },
-    "shock_length_front": { "type": "number", "unit": "mm", "range": [100, 220], "step": 1 },
-    "shock_length_rear": { "type": "number", "unit": "mm", "range": [100, 220], "step": 1 },
-    "front_ride_height": { "type": "number", "unit": "mm", "range": [25, 100], "step": 1 },
-    "rear_ride_height": { "type": "number", "unit": "mm", "range": [25, 100], "step": 1 },
-    "ride_height": { "type": "alias", "of": ["front_ride_height", "rear_ride_height"] },
-    "ride_height_rake": { "type": "derived", "of": ["front_ride_height", "rear_ride_height"] },
-    "front_downstop": { "type": "number", "unit": "mm", "label": "Droop / downtravel front", "range": [0, 80], "step": 1, "note": "pilot vocabulary: drop/droop" },
-    "rear_downstop": { "type": "number", "unit": "mm", "label": "Droop / downtravel rear", "range": [0, 80], "step": 1, "note": "pilot vocabulary: drop/droop" },
-    "front_camber": { "type": "number", "unit": "deg", "range": [-1, 6], "step": 0.25 },
-    "rear_camber": { "type": "number", "unit": "deg", "range": [-1, 6], "step": 0.25 },
-    "front_toe": { "type": "number", "unit": "deg", "label": "Toe front (- out / + in)", "range": [-4, 4], "step": 0.25 },
-    "rear_toe": { "type": "number", "unit": "deg", "range": [0, 5], "step": 0.25 },
-    "caster": { "type": "number", "unit": "deg", "range": [0, 30], "step": 0.5 },
-    "rear_anti_squat": { "type": "number", "unit": "deg", "range": [-1, 5], "step": 0.25 },
-    "front_roll_center": { "type": "text", "label": "Roll center / camber link front" },
-    "rear_roll_center": { "type": "text", "label": "Roll center / camber link rear" },
-    "bump_steer": { "type": "text" },
-    "front_sway_bar": { "type": "number", "unit": "mm", "range": [3, 10], "step": 0.5 },
-    "rear_sway_bar": { "type": "number", "unit": "mm", "range": [3, 10], "step": 0.5 },
-    "wing": { "type": "text", "label": "Wing / spoiler" },
-    "spur_gear": { "type": "number", "unit": "T", "range": [40, 80], "step": 1 },
-    "pinion_gear": { "type": "number", "unit": "T", "label": "Pinion / clutch pinion", "range": [12, 30], "step": 1 },
-    "brake_setup": { "type": "text", "label": "Brake setup / bias" },
-    "tire_brand": { "type": "text" },
-    "tire_model": { "type": "text" },
-    "tire_tread": { "type": "text", "label": "Tread / profile" },
-    "tire_compound": { "type": "text", "label": "Compound / hardness" },
-    "tire_insert": { "type": "text", "label": "Insert / foam" },
-    "wheel": { "type": "text" },
-    "power_type": { "type": "enum", "options": ["gas_2stroke", "electric"] },
-    "engine": { "type": "text", "label": "Engine (gas, brand / model)" },
-    "engine_cc": { "type": "number", "unit": "cc", "label": "Engine displacement (gas)", "range": [20, 46], "step": 0.5 },
-    "carb": { "type": "text", "label": "Carburetor (gas, e.g. Walbro)" },
-    "needle_high": { "type": "text", "label": "High needle (gas, turns)" },
-    "needle_low": { "type": "text", "label": "Low needle (gas, turns)" },
-    "air_filter": { "type": "text", "label": "Air filter (gas)" },
-    "exhaust_pipe": { "type": "text", "label": "Exhaust / tuned pipe (gas)" },
-    "clutch_shoes": { "type": "text", "label": "Clutch shoes (gas)" },
-    "clutch_springs": { "type": "text", "label": "Clutch springs (gas)" },
-    "fuel_mix_ratio": { "type": "number", "unit": "ratio", "label": "Fuel:oil mix ratio (gas, x:1)", "range": [20, 50], "step": 1 },
-    "motor": { "type": "text", "label": "Motor (electric)" },
-    "motor_kv": { "type": "number", "unit": "kv", "label": "Motor KV (electric)", "range": [400, 2000], "step": 10 },
-    "esc": { "type": "text", "label": "ESC (electric)" },
-    "battery_cells": { "type": "enum", "label": "Battery cells (electric)", "options": ["4S", "6S", "8S", "12S"] },
-    "battery_capacity": { "type": "number", "unit": "mAh", "label": "Battery capacity (electric)", "range": [2000, 20000], "step": 100 },
-    "steering_servo": { "type": "text" },
-    "body": { "type": "text" },
-    "chassis_protection": { "type": "text", "label": "Skid plates / guards" },
-    "chassis_weights": { "type": "text", "label": "Added weights / position" },
-    "notes": { "type": "text" }
+    "front_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        1000,
+        1000000
+      ],
+      "step": 500
+    },
+    "center_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        1000,
+        1000000
+      ],
+      "step": 500
+    },
+    "rear_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        1000,
+        1000000
+      ],
+      "step": 500
+    },
+    "front_shock_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        100,
+        5000
+      ],
+      "step": 25
+    },
+    "rear_shock_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        100,
+        5000
+      ],
+      "step": 25
+    },
+    "front_spring": {
+      "type": "text",
+      "label": "Shock spring front"
+    },
+    "rear_spring": {
+      "type": "text",
+      "label": "Shock spring rear"
+    },
+    "front_shock_piston": {
+      "type": "text",
+      "label": "Piston front"
+    },
+    "rear_shock_piston": {
+      "type": "text",
+      "label": "Piston rear"
+    },
+    "shock_pistons": {
+      "type": "alias",
+      "of": [
+        "front_shock_piston",
+        "rear_shock_piston"
+      ]
+    },
+    "shock_position_front": {
+      "type": "text",
+      "label": "Shock position front (tower / arm)"
+    },
+    "shock_position_rear": {
+      "type": "text",
+      "label": "Shock position rear (tower / arm)"
+    },
+    "shock_length_front": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        100,
+        220
+      ],
+      "step": 1
+    },
+    "shock_length_rear": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        100,
+        220
+      ],
+      "step": 1
+    },
+    "front_ride_height": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        25,
+        100
+      ],
+      "step": 1
+    },
+    "rear_ride_height": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        25,
+        100
+      ],
+      "step": 1
+    },
+    "ride_height": {
+      "type": "alias",
+      "of": [
+        "front_ride_height",
+        "rear_ride_height"
+      ]
+    },
+    "ride_height_rake": {
+      "type": "derived",
+      "of": [
+        "front_ride_height",
+        "rear_ride_height"
+      ]
+    },
+    "front_downstop": {
+      "type": "number",
+      "unit": "mm",
+      "label": "Droop / downtravel front",
+      "range": [
+        0,
+        80
+      ],
+      "step": 1,
+      "note": "pilot vocabulary: drop/droop"
+    },
+    "rear_downstop": {
+      "type": "number",
+      "unit": "mm",
+      "label": "Droop / downtravel rear",
+      "range": [
+        0,
+        80
+      ],
+      "step": 1,
+      "note": "pilot vocabulary: drop/droop"
+    },
+    "front_camber": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        6
+      ],
+      "step": 0.25
+    },
+    "rear_camber": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        6
+      ],
+      "step": 0.25
+    },
+    "front_toe": {
+      "type": "number",
+      "unit": "deg",
+      "label": "Toe front (- out / + in)",
+      "range": [
+        -4,
+        4
+      ],
+      "step": 0.25
+    },
+    "rear_toe": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        0,
+        5
+      ],
+      "step": 0.25
+    },
+    "caster": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        0,
+        30
+      ],
+      "step": 0.5
+    },
+    "rear_anti_squat": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        5
+      ],
+      "step": 0.25
+    },
+    "front_roll_center": {
+      "type": "text",
+      "label": "Roll center / camber link front"
+    },
+    "rear_roll_center": {
+      "type": "text",
+      "label": "Roll center / camber link rear"
+    },
+    "bump_steer": {
+      "type": "text"
+    },
+    "front_sway_bar": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        3,
+        10
+      ],
+      "step": 0.5
+    },
+    "rear_sway_bar": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        3,
+        10
+      ],
+      "step": 0.5
+    },
+    "wing": {
+      "type": "text",
+      "label": "Wing / spoiler"
+    },
+    "spur_gear": {
+      "type": "number",
+      "unit": "T",
+      "range": [
+        40,
+        80
+      ],
+      "step": 1
+    },
+    "pinion_gear": {
+      "type": "number",
+      "unit": "T",
+      "label": "Pinion / clutch pinion",
+      "range": [
+        12,
+        30
+      ],
+      "step": 1
+    },
+    "brake_setup": {
+      "type": "text",
+      "label": "Brake setup / bias"
+    },
+    "tire_brand": {
+      "type": "text"
+    },
+    "tire_model": {
+      "type": "text"
+    },
+    "tire_tread": {
+      "type": "text",
+      "label": "Tread / profile"
+    },
+    "tire_compound": {
+      "type": "text",
+      "label": "Compound / hardness"
+    },
+    "tire_insert": {
+      "type": "text",
+      "label": "Insert / foam"
+    },
+    "wheel": {
+      "type": "text"
+    },
+    "power_type": {
+      "type": "enum",
+      "options": [
+        "gas_2stroke",
+        "electric"
+      ]
+    },
+    "engine": {
+      "type": "text",
+      "label": "Engine (gas, brand / model)"
+    },
+    "engine_cc": {
+      "type": "number",
+      "unit": "cc",
+      "label": "Engine displacement (gas)",
+      "range": [
+        20,
+        46
+      ],
+      "step": 0.5
+    },
+    "carb": {
+      "type": "text",
+      "label": "Carburetor (gas, e.g. Walbro)"
+    },
+    "needle_high": {
+      "type": "text",
+      "label": "High needle (gas, turns)"
+    },
+    "needle_low": {
+      "type": "text",
+      "label": "Low needle (gas, turns)"
+    },
+    "air_filter": {
+      "type": "text",
+      "label": "Air filter (gas)"
+    },
+    "exhaust_pipe": {
+      "type": "text",
+      "label": "Exhaust / tuned pipe (gas)"
+    },
+    "clutch_shoes": {
+      "type": "text",
+      "label": "Clutch shoes (gas)"
+    },
+    "clutch_springs": {
+      "type": "text",
+      "label": "Clutch springs (gas)"
+    },
+    "fuel_mix_ratio": {
+      "type": "number",
+      "unit": "ratio",
+      "label": "Fuel:oil mix ratio (gas, x:1)",
+      "range": [
+        20,
+        50
+      ],
+      "step": 1
+    },
+    "motor": {
+      "type": "text",
+      "label": "Motor (electric)"
+    },
+    "motor_kv": {
+      "type": "number",
+      "unit": "kv",
+      "label": "Motor KV (electric)",
+      "range": [
+        400,
+        2000
+      ],
+      "step": 10
+    },
+    "esc": {
+      "type": "text",
+      "label": "ESC (electric)"
+    },
+    "battery_cells": {
+      "type": "enum",
+      "label": "Battery cells (electric)",
+      "options": [
+        "4S",
+        "6S",
+        "8S",
+        "12S"
+      ]
+    },
+    "battery_capacity": {
+      "type": "number",
+      "unit": "mAh",
+      "label": "Battery capacity (electric)",
+      "range": [
+        2000,
+        20000
+      ],
+      "step": 100
+    },
+    "steering_servo": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "chassis_protection": {
+      "type": "text",
+      "label": "Skid plates / guards"
+    },
+    "chassis_weights": {
+      "type": "text",
+      "label": "Added weights / position"
+    },
+    "notes": {
+      "type": "text"
+    }
   }
 }

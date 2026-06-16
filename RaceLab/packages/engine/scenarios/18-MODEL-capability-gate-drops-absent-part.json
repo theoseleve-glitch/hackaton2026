@@ -1,0 +1,11 @@
+{
+  "name": "MODEL: same nosedive complaint refuses on a pending buggy whose category template has no wing — never recommend a part the car doesn't expose (capability gate)",
+  "expect": { "kind": "refusal" },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp10",
+    "setup": { "front_diff_oil": 8000, "rear_diff_oil": 3000, "front_shock_oil": 450, "rear_shock_oil": 400 },
+    "track": { "name": "Outdoor GP Track", "surface": "clay", "grip": "medium", "conditions": ["big_jumps", "fast_open"] },
+    "feedback": { "tags": [{ "symptom": "nosedive_jumps", "phase": "jumps" }], "text": "car noses down hard off the double, landing on the front wheels" },
+    "mode": "practice"
+  }
+}
