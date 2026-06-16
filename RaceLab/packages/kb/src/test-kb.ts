@@ -192,7 +192,7 @@ rejects(
   [entry({ type: "offroad-competition" })],
   "invalid:[0].type",
 );
-rejects("unknown scale rejected", [entry({ scale: "1/10" })], "invalid:[0].scale");
+rejects("unknown scale rejected", [entry({ scale: "1/16" })], "invalid:[0].scale");
 rejects("template_status outside the enum rejected", [entry({ template_status: "wip" })], "invalid:[0].template_status");
 rejects(
   "full entry without template_file rejected",
@@ -221,7 +221,7 @@ function declRejects(label: string, value: unknown, reason: string): void {
   check(label, !r.ok && r.reason === reason, r.ok ? "accepted" : r.reason);
 }
 declRejects("garbage rejected (no throw)", 42, "not_an_object");
-declRejects("off-vocab category rejected", declFix({ category: "onroad" }), "invalid:category");
+declRejects("off-vocab category rejected", declFix({ category: "spaceship" }), "invalid:category");
 declRejects(
   "unknown section id rejected",
   declFix({ sections: { common: ["front_suspension", "flux_capacitor"], nitro: [], brushless: [] } }),

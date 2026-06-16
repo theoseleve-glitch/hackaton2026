@@ -30,10 +30,24 @@ import {
 
 // ── canonical class-facet vocabulary (kb owns the VALUES) ────────────────────
 
-/** New classes extend these arrays — one commit: class json + here + tests. */
-export const FACET_CATEGORIES = ["offroad"] as const;
-export const FACET_SCALES = ["1/8"] as const;
-export const FACET_TYPES = ["buggy"] as const;
+/** New classes extend these arrays — one commit: class json + here + tests.
+ *  Widened (2026-06-16) from the 1/8-buggy seed to the full competitive scene:
+ *  category = racing surface; type = body/discipline; scale = nominal class. */
+export const FACET_CATEGORIES = ["offroad", "onroad"] as const;
+export const FACET_SCALES = ["1/8", "1/10", "1/12", "1/5"] as const;
+export const FACET_TYPES = [
+  "buggy",
+  "truggy",
+  "short_course",
+  "stadium_truck",
+  "monster_truck",
+  "gt",
+  "touring",
+  "pan",
+  "f1",
+  "crawler",
+  "rally",
+] as const;
 
 export const TEMPLATE_STATUSES = ["full", "pending_pdf"] as const;
 export type TemplateStatus = (typeof TEMPLATE_STATUSES)[number];
