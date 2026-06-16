@@ -1,10 +1,11 @@
 import React from "react";
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
 import { driverStats } from "../../../../packages/logbook/src";
 import type { DriverStats, LogbookState } from "../../../../packages/logbook/src";
 import { LANGS, LEVELS, PRICING, trialDaysLeft, UNITS } from "../accountstore";
 import type { Account, ExperienceLevel, Lang, Units } from "../accountstore";
-import { ChipRow, LabeledInput, Section } from "../components/forms";
+import { ChipRow, KeyboardAwareForm, LabeledInput, Section } from "../components/forms";
+import { ProgressCard } from "../components/ProgressCard";
 import { colors, radius } from "../theme";
 
 /**
@@ -47,10 +48,10 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
         <View style={{ width: 50 }} />
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 40 }}>
+      <KeyboardAwareForm contentStyle={{ padding: 14, paddingBottom: 40 }}>
         <Section title="Driver profile">
           <View style={styles.card}>
-            <Text style={styles.driverName}>{account.email?.split("@")[0] ?? "Driver"}</Text>
+            <Text style={styles.driverName}>{account.handle ? `@${account.handle}` : account.email?.split("@")[0] ?? "Driver"}</Text>
             <Text style={styles.driverMeta}>
               {[account.country, account.age !== undefined ? `${account.age} yo` : undefined, account.level ? LEVEL_LABELS[account.level] : undefined]
                 .filter(Boolean)
@@ -66,6 +67,8 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
               </Text>
             )}
           </View>
+
+          <ProgressCard logbook={logbook} />
 
           <Text style={styles.fieldLabel}>Experience level</Text>
           <ChipRow
@@ -104,6 +107,9 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
             value={account.email ?? ""}
             onChangeText={(t) => setAccount({ email: t || undefined })}
             placeholder="you@example.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
           />
           <View style={[styles.card, daysLeft <= 3 && styles.cardWarn]}>
             <Text style={styles.billingLine}>
@@ -160,7 +166,7 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
           <Text style={styles.bodyText}>RaceLab 0.1.0 · made for the pit lane 🏁</Text>
           <Text style={styles.hint}>Every recommendation cites its source — grounded or silent.</Text>
         </Section>
-      </ScrollView>
+      </KeyboardAwareForm>
     </View>
   );
 }
@@ -183,7 +189,7 @@ function StatsRow({ title, stats }: { title: string; stats: DriverStats }) {
 function StatCell({ value, label, highlight }: { value: number; label: string; highlight?: boolean }) {
   return (
     <View style={styles.statCell}>
-      <Text style={[styles.statValue, highlight && { color: "#FFD700" }]}>{value}</Text>
+      <Text style={[styles.statValue, highlight && { color: colors.gold }]}>{value}</Text>
       <Text style={styles.statLabel}>{label}</Text>
     </View>
   );

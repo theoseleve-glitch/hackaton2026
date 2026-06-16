@@ -3,7 +3,7 @@ import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View
 import type Svg from "react-native-svg";
 import type { GarageState } from "../../../../packages/garage/src";
 import { driverStats } from "../../../../packages/logbook/src";
-import type { LogbookState } from "../../../../packages/logbook/src";
+import type { DriverStats, LogbookState } from "../../../../packages/logbook/src";
 import type { DriverProfile, FeedItem, FollowData, SharedPayload } from "../../../../packages/social/src";
 import { isFollowing } from "../../../../packages/social/src";
 import { fetchDiscover, fetchFeed } from "../socialnet";
@@ -12,6 +12,7 @@ import { sharePng } from "../share";
 import { Overlay } from "../components/Overlay";
 import { ProfileCard } from "../components/ProfileCard";
 import { ProfileEditForm } from "../components/ProfileEditForm";
+import { ProgressCard } from "../components/ProgressCard";
 import { colors, radius } from "../theme";
 
 /**
@@ -44,7 +45,9 @@ export function SocialScreen({ account, setAccount, garage, logbook, follows, on
 
   useEffect(() => {
     let cancelled = false;
-    void fetchFeed(follows.handles).then((f) => !cancelled && setFeed(f));
+    fetchFeed(follows.handles)
+      .then((f) => !cancelled && setFeed(f))
+      .catch(() => !cancelled && setFeed([]));
     return () => {
       cancelled = true;
     };
@@ -52,7 +55,9 @@ export function SocialScreen({ account, setAccount, garage, logbook, follows, on
 
   useEffect(() => {
     let cancelled = false;
-    void fetchDiscover().then((d) => !cancelled && setDiscover(d));
+    fetchDiscover()
+      .then((d) => !cancelled && setDiscover(d))
+      .catch(() => !cancelled && setDiscover([]));
     return () => {
       cancelled = true;
     };
@@ -89,13 +94,21 @@ export function SocialScreen({ account, setAccount, garage, logbook, follows, on
   return (
     <View style={styles.root}>
       <View style={styles.segBar}>
-        {(["feed", "discover", "you"] as Segment[]).map((s) => (
-          <Pressable key={s} style={[styles.seg, seg === s && styles.segOn]} onPress={() => setSeg(s)}>
-            <Text style={[styles.segText, seg === s && styles.segTextOn]}>
-              {s === "feed" ? "Feed" : s === "discover" ? "Discover" : "You"}
-            </Text>
-          </Pressable>
-        ))}
+        {(["feed", "discover", "you"] as Segment[]).map((s) => {
+          const label = s === "feed" ? "Feed" : s === "discover" ? "Discover" : "You";
+          return (
+            <Pressable
+              key={s}
+              style={[styles.seg, seg === s && styles.segOn]}
+              onPress={() => setSeg(s)}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: seg === s }}
+              accessibilityLabel={label}
+            >
+              <Text style={[styles.segText, seg === s && styles.segTextOn]}>{label}</Text>
+            </Pressable>
+          );
+        })}
       </View>
 
       {seg === "feed" && (
@@ -108,6 +121,8 @@ export function SocialScreen({ account, setAccount, garage, logbook, follows, on
         <YouView
           account={account}
           profile={myProfile}
+          career={career}
+          logbook={logbook}
           garage={garage}
           busyCard={busyCard}
           onShareCard={shareMyCard}
@@ -149,7 +164,7 @@ function FollowBtn({ handle, follows, onFollow, onUnfollow }: { handle: string; 
 }
 
 function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedItem[] | null; follows: FollowData; onFollow: (h: string) => void; onUnfollow: (h: string) => void; onFork: (p: SharedPayload) => void }) {
-  if (!feed) return <Centered><ActivityIndicator color={colors.accent} /></Centered>;
+  if (!feed) return <Centered><ActivityIndicator color={colors.accent} size="large" /></Centered>;
   if (feed.length === 0)
     return (
       <Centered>
@@ -202,7 +217,14 @@ function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedI
 }
 
 function DiscoverView({ discover, follows, onFollow, onUnfollow }: { discover: DriverProfile[] | null; follows: FollowData; onFollow: (h: string) => void; onUnfollow: (h: string) => void }) {
-  if (!discover) return <Centered><ActivityIndicator color={colors.accent} /></Centered>;
+  if (!discover) return <Centered><ActivityIndicator color={colors.accent} size="large" /></Centered>;
+  if (discover.length === 0)
+    return (
+      <Centered>
+        <Text style={styles.emptyTitle}>No drivers to show yet</Text>
+        <Text style={styles.emptyText}>When the community is live, fast drivers to follow will appear here.</Text>
+      </Centered>
+    );
   return (
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       <Text style={styles.discoverHint}>Fast drivers to follow — their setups are what you search for.</Text>
@@ -230,8 +252,9 @@ function DiscoverView({ discover, follows, onFollow, onUnfollow }: { discover: D
   );
 }
 
-function YouView({ account, profile, garage, busyCard, onShareCard, onEdit }: { account: Account; profile: DriverProfile; garage: GarageState; busyCard: boolean; onShareCard: () => void; onEdit: () => void }) {
+function YouView({ account, profile, career, logbook, garage, busyCard, onShareCard, onEdit }: { account: Account; profile: DriverProfile; career: DriverStats; logbook: LogbookState; garage: GarageState; busyCard: boolean; onShareCard: () => void; onEdit: () => void }) {
   const noHandle = !account.handle;
+  const pct = (v?: number) => (v === undefined ? "—" : `${Math.round(v * 100)}%`);
   return (
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       {noHandle && (
@@ -265,9 +288,19 @@ function YouView({ account, profile, garage, busyCard, onShareCard, onEdit }: { 
         <Stat value={profile.career?.races ?? 0} label="races" />
         <Stat value={profile.career?.runs ?? 0} label="runs" />
       </View>
+      {career.races > 0 && (
+        <View style={styles.rateRow}>
+          <Text style={styles.rateText}>🏆 {pct(career.podium_rate)} podium rate</Text>
+          <Text style={styles.rateText}>🥇 {pct(career.win_rate)} win rate</Text>
+          <Text style={styles.rateText}>🗺 {career.tracks} {career.tracks === 1 ? "track" : "tracks"}</Text>
+        </View>
+      )}
       {profile.career?.best_lap_s !== undefined && (
         <Text style={styles.bestLap}>⏱ best ever {profile.career.best_lap_s.toFixed(2)}s{profile.career.best_lap_track ? ` @ ${profile.career.best_lap_track}` : ""}</Text>
       )}
+
+      <ProgressCard logbook={logbook} />
+
 
       <Text style={styles.section}>Garage · {garage.cars.length}</Text>
       <View style={styles.classRow}>
@@ -290,7 +323,7 @@ function YouView({ account, profile, garage, busyCard, onShareCard, onEdit }: { 
 function Stat({ value, label, gold }: { value: number; label: string; gold?: boolean }) {
   return (
     <View style={styles.stat}>
-      <Text style={[styles.statValue, gold && value > 0 && { color: "#FFD700" }]}>{value}</Text>
+      <Text style={[styles.statValue, gold && value > 0 && { color: colors.gold }]}>{value}</Text>
       <Text style={styles.statLabel}>{label}</Text>
     </View>
   );
@@ -303,7 +336,7 @@ function Centered({ children }: { children: React.ReactNode }) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   segBar: { flexDirection: "row", gap: 6, padding: 12, borderBottomWidth: 1, borderBottomColor: colors.border },
-  seg: { flex: 1, alignItems: "center", paddingVertical: 9, borderRadius: 999, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border },
+  seg: { flex: 1, alignItems: "center", paddingVertical: 9, borderRadius: radius.pill, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border },
   segOn: { backgroundColor: colors.accentSoft, borderColor: colors.accent },
   segText: { color: colors.sub, fontSize: 13, fontWeight: "700" },
   segTextOn: { color: colors.accent },
@@ -321,25 +354,27 @@ const styles = StyleSheet.create({
   feedText: { color: colors.sub, fontSize: 13, fontStyle: "italic", marginTop: 6 },
   forkBtn: { marginTop: 10, borderWidth: 1, borderColor: colors.accent, borderRadius: radius.md, paddingVertical: 9, alignItems: "center" },
   forkText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
-  followBtn: { backgroundColor: colors.accent, borderRadius: 999, paddingVertical: 6, paddingHorizontal: 12 },
+  followBtn: { backgroundColor: colors.accent, borderRadius: radius.pill, paddingVertical: 6, paddingHorizontal: 12 },
   followingBtn: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border },
-  followText: { color: "#fff", fontWeight: "800", fontSize: 12 },
+  followText: { color: colors.onAccent, fontWeight: "800", fontSize: 12 },
   followingText: { color: colors.sub },
   discoverHint: { color: colors.sub, fontSize: 12, fontStyle: "italic", marginBottom: 10 },
   profileHead: { flexDirection: "row", alignItems: "center", marginBottom: 12 },
   profileHandle: { color: colors.text, fontSize: 20, fontWeight: "900" },
   profileName: { color: colors.text, fontSize: 14, marginTop: 1 },
   classRow: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginBottom: 6 },
-  classChip: { color: colors.accent, fontSize: 11, fontWeight: "700", borderWidth: 1, borderColor: colors.accent, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3, overflow: "hidden" },
-  garageChip: { color: colors.text, fontSize: 12, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, overflow: "hidden" },
+  classChip: { color: colors.accent, fontSize: 11, fontWeight: "700", borderWidth: 1, borderColor: colors.accent, borderRadius: radius.pill, paddingHorizontal: 8, paddingVertical: 3, overflow: "hidden" },
+  garageChip: { color: colors.text, fontSize: 12, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: radius.pill, paddingHorizontal: 10, paddingVertical: 4, overflow: "hidden" },
   section: { color: colors.sub, fontSize: 11, fontWeight: "800", textTransform: "uppercase", letterSpacing: 1, marginTop: 14, marginBottom: 8 },
   palmares: { flexDirection: "row" },
   stat: { flex: 1, alignItems: "center" },
   statValue: { color: colors.text, fontSize: 22, fontWeight: "900" },
   statLabel: { color: colors.sub, fontSize: 10, marginTop: 2 },
+  rateRow: { flexDirection: "row", flexWrap: "wrap", gap: 12, marginTop: 12 },
+  rateText: { color: colors.sub, fontSize: 12, fontWeight: "700" },
   bestLap: { color: colors.good, fontSize: 12, fontWeight: "700", marginTop: 10 },
   cardBtn: { backgroundColor: colors.accent, borderRadius: radius.md, paddingVertical: 13, alignItems: "center", marginTop: 16 },
-  cardBtnText: { color: "#fff", fontWeight: "800", fontSize: 14 },
+  cardBtnText: { color: colors.onAccent, fontWeight: "800", fontSize: 14 },
   ghostBtn: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, marginTop: 8 },
   ghostBtnText: { color: colors.text, fontWeight: "700", fontSize: 14 },
   offscreen: { position: "absolute", left: -10000, top: 0, width: 1080, height: 1350 },

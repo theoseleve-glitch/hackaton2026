@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { addCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import {
   addRun,
+  checkRecords,
   groupBySetup,
   lastRun,
   rateRun,
@@ -19,6 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NewCarForm } from "../components/NewCarForm";
 import { Overlay } from "../components/Overlay";
 import { PodiumSplash } from "../components/PodiumSplash";
+import type { Celebration } from "../components/PodiumSplash";
 import { RunFormV2 } from "../components/RunFormV2";
 import { TrackForm } from "../components/TrackForm";
 import { sheetsKeyForCar } from "../garagestore";
@@ -67,7 +69,8 @@ export function RunsScreen(props: Props) {
   const [popup, setPopup] = useState<Popup>(null);
   const [sortKey, setSortKey] = useState<RunSortKey | "setup">("date");
   const [selected, setSelected] = useState<string[]>([]);
-  const [podium, setPodium] = useState<number | null>(null);
+  // a saved run can earn a moment: podium position, or a new personal/track best
+  const [celebration, setCelebration] = useState<{ position?: number; record?: Celebration } | null>(null);
 
   // — selection for the form (parent-owned, popup creations update it)
   const last = lastRun(logbook);
@@ -99,6 +102,7 @@ export function RunsScreen(props: Props) {
   }, [sel.car_id, inForm]);
 
   const saveRun = (run: Omit<RunEntry, "id">) => {
+    // persist against the authoritative previous state (never-lose discipline)
     updateLogbook((prev) => addRun(prev, run, run.created_at).state);
     // auto-maintain the track's lap records (D25)
     const car = garage.cars.find((c) => c.id === run.car_id);
@@ -115,10 +119,27 @@ export function RunsScreen(props: Props) {
       );
     }
     setInForm(false);
-    // bragging rights: competitive top-3 gets its moment (item from Théo's test pass)
+
+    // celebration decision (display-only): replay the add on the current log to
+    // see which records this run set, then pick the single best moment to show.
+    const preview = addRun(logbook, run, run.created_at);
+    const rec = checkRecords(preview.state, preview.run);
+    const lap = run.result?.best_lap_s;
     const p = run.result?.position;
     if (run.type !== "practice" && p !== undefined && p >= 1 && p <= 3) {
-      setPodium(p);
+      setCelebration({ position: p }); // a podium outranks a lap record
+    } else if (rec.careerBestLap && lap !== undefined) {
+      setCelebration({
+        record: { icon: "⏱", line: "PERSONAL BEST", tone: colors.gold, sub: `${lap.toFixed(2)}s — your fastest lap yet` },
+      });
+    } else if (rec.trackBestLap && lap !== undefined) {
+      setCelebration({
+        record: { icon: "📍", line: "TRACK BEST", tone: colors.good, sub: `${lap.toFixed(2)}s at ${run.track.name}` },
+      });
+    } else if (rec.firstWin) {
+      setCelebration({ record: { icon: "🥇", line: "FIRST WIN", tone: colors.gold, sub: "the first of many" } });
+    } else if (rec.firstPodium) {
+      setCelebration({ record: { icon: "🏆", line: "FIRST PODIUM", tone: colors.gold, sub: "on the box" } });
     }
   };
 
@@ -188,16 +209,22 @@ export function RunsScreen(props: Props) {
   }
 
   // ——— recap mode ———
-  const sorted: RunEntry[] =
-    sortKey === "setup"
-      ? groupBySetup(logbook.runs).flatMap((g) => g.runs)
-      : sortRuns(logbook.runs, sortKey);
-  const groups = sortKey === "setup" ? groupBySetup(logbook.runs) : null;
+  const groups = useMemo(
+    () => (sortKey === "setup" ? groupBySetup(logbook.runs) : null),
+    [sortKey, logbook.runs],
+  );
+  const sorted: RunEntry[] = useMemo(
+    () => (groups ? groups.flatMap((g) => g.runs) : sortRuns(logbook.runs, sortKey as RunSortKey)),
+    [groups, logbook.runs, sortKey],
+  );
 
-  const toggleSelect = (id: string) =>
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev.slice(-1), id],
-    );
+  const toggleSelect = useCallback(
+    (id: string) =>
+      setSelected((prev) =>
+        prev.includes(id) ? prev.filter((x) => x !== id) : [...prev.slice(-1), id],
+      ),
+    [],
+  );
   const selectedRuns = selected
     .map((id) => logbook.runs.find((r) => r.id === id))
     .filter(Boolean) as RunEntry[];
@@ -242,12 +269,19 @@ export function RunsScreen(props: Props) {
 
   return (
     <View style={styles.root}>
-      {podium !== null && <PodiumSplash position={podium} onDone={() => setPodium(null)} />}
+      {celebration !== null && (
+        <PodiumSplash position={celebration.position} record={celebration.record} onDone={() => setCelebration(null)} />
+      )}
       <View style={styles.header}>
         <Text style={styles.title}>
           Run log <Text style={styles.count}>· {logbook.runs.length}</Text>
         </Text>
-        <Pressable style={styles.logBtn} onPress={() => setInForm(true)}>
+        <Pressable
+          style={styles.logBtn}
+          onPress={() => setInForm(true)}
+          accessibilityRole="button"
+          accessibilityLabel="Log run"
+        >
           <Text style={styles.logBtnText}>+ Log run</Text>
         </Pressable>
       </View>
@@ -271,22 +305,35 @@ export function RunsScreen(props: Props) {
             Log your first run — car, track, conditions, how it felt. Every run makes the engineer
             smarter about YOUR car on YOUR tracks.
           </Text>
+          <Pressable
+            style={styles.emptyCta}
+            onPress={() => setInForm(true)}
+            accessibilityRole="button"
+            accessibilityLabel="Log your first run"
+          >
+            <Text style={styles.emptyCtaText}>＋ Log your first run</Text>
+          </Pressable>
         </View>
-      ) : (
+      ) : groups ? (
         <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 90 }}>
-          {groups
-            ? groups.map((g) => (
-                <View key={g.setup_version_id}>
-                  <Text style={styles.groupHeader}>⚙ {g.setup_name}</Text>
-                  {g.runs.map((run) => (
-                    <SlimRunCard key={run.id} run={run} selected={selected.includes(run.id)} onPress={() => toggleSelect(run.id)} />
-                  ))}
-                </View>
-              ))
-            : sorted.map((run) => (
-                <SlimRunCard key={run.id} run={run} selected={selected.includes(run.id)} onPress={() => toggleSelect(run.id)} />
+          {groups.map((g) => (
+            <View key={g.setup_version_id}>
+              <Text style={styles.groupHeader}>⚙ {g.setup_name}</Text>
+              {g.runs.map((run) => (
+                <SlimRunCard key={run.id} run={run} selected={selected.includes(run.id)} onPress={toggleSelect} />
               ))}
+            </View>
+          ))}
         </ScrollView>
+      ) : (
+        <FlatList
+          data={sorted}
+          keyExtractor={(r) => r.id}
+          renderItem={({ item }) => (
+            <SlimRunCard run={item} selected={selected.includes(item.id)} onPress={toggleSelect} />
+          )}
+          contentContainerStyle={{ padding: 14, paddingBottom: 90 }}
+        />
       )}
 
       {selectedRuns.length > 0 && (
@@ -330,9 +377,23 @@ export function RunsScreen(props: Props) {
 }
 
 /** One run, one glance: when · where · how fast · how it felt. */
-function SlimRunCard({ run, selected, onPress }: { run: RunEntry; selected: boolean; onPress: () => void }) {
+const SlimRunCard = React.memo(function SlimRunCard({
+  run,
+  selected,
+  onPress,
+}: {
+  run: RunEntry;
+  selected: boolean;
+  onPress: (id: string) => void;
+}) {
   return (
-    <Pressable style={[styles.slim, selected && styles.slimSelected]} onPress={onPress}>
+    <Pressable
+      style={[styles.slim, selected && styles.slimSelected]}
+      onPress={() => onPress(run.id)}
+      accessibilityRole="button"
+      accessibilityState={{ selected }}
+      accessibilityLabel={`Run at ${run.track.name}, ${run.created_at.slice(5, 10)}`}
+    >
       <View style={styles.slimLeft}>
         <Text style={styles.slimDate}>{run.created_at.slice(5, 10)}</Text>
         <Text style={styles.slimType}>{run.type.slice(0, 4).toUpperCase()}</Text>
@@ -360,7 +421,7 @@ function SlimRunCard({ run, selected, onPress }: { run: RunEntry; selected: bool
       </View>
     </Pressable>
   );
-}
+});
 
 /** red → green → violet, same stops as the FeelingSlider */
 function feelingColor(v: number): string {
@@ -412,7 +473,12 @@ function NewSetupPopup({
     if (!result.ok) return; // bad clock — unreachable with a real Date; never persist a NaN-id version
     const { state, saved } = result;
     const versionId = saved?.id ?? state.draft_base_id;
-    await AsyncStorage.setItem(key, serialize(state)).catch(() => {});
+    try {
+      await AsyncStorage.setItem(key, serialize(state));
+    } catch {
+      setError("Could not save this setup — storage may be full.");
+      return;
+    }
     onCreated(versionId, saved?.name ?? (name.trim() || "New setup"));
   };
 
@@ -466,8 +532,8 @@ const styles = StyleSheet.create({
   },
   title: { color: colors.text, fontSize: 16, fontWeight: "800" },
   count: { color: colors.sub, fontWeight: "400" },
-  logBtn: { backgroundColor: colors.accent, borderRadius: 999, paddingVertical: 7, paddingHorizontal: 14 },
-  logBtnText: { color: "#fff", fontWeight: "800", fontSize: 13 },
+  logBtn: { backgroundColor: colors.accent, borderRadius: radius.pill, paddingVertical: 7, paddingHorizontal: 14 },
+  logBtnText: { color: colors.onAccent, fontWeight: "800", fontSize: 13 },
   sortRow: {
     flexDirection: "row",
     gap: 6,
@@ -490,6 +556,8 @@ const styles = StyleSheet.create({
   empty: { flex: 1, alignItems: "center", justifyContent: "center", padding: 30 },
   emptyTitle: { color: colors.text, fontSize: 17, fontWeight: "800", marginBottom: 8 },
   emptyText: { color: colors.sub, fontSize: 13, textAlign: "center", lineHeight: 19 },
+  emptyCta: { marginTop: 18, backgroundColor: colors.accent, borderRadius: radius.pill, paddingVertical: 11, paddingHorizontal: 20 },
+  emptyCtaText: { color: colors.onAccent, fontWeight: "800", fontSize: 14 },
   groupHeader: { color: colors.accent, fontSize: 12, fontWeight: "800", marginTop: 10, marginBottom: 6 },
   slim: {
     flexDirection: "row",
@@ -551,10 +619,10 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 14,
   },
-  floatBtnText: { color: "#fff", fontWeight: "800", fontSize: 13, textAlign: "center" },
+  floatBtnText: { color: colors.onAccent, fontWeight: "800", fontSize: 13, textAlign: "center" },
   floatClose: { marginLeft: "auto", padding: 6 },
   floatCloseText: { color: colors.sub, fontSize: 14 },
-  popupWrap: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", alignItems: "center", justifyContent: "center", padding: 24 },
+  popupWrap: { flex: 1, backgroundColor: colors.scrim, alignItems: "center", justifyContent: "center", padding: 24 },
   popup: {
     backgroundColor: colors.card,
     borderWidth: 1,
@@ -578,7 +646,7 @@ const styles = StyleSheet.create({
   popupError: { color: colors.warn, fontSize: 12, marginTop: 8 },
   popupBtn: { flex: 1, borderRadius: radius.md, paddingVertical: 10, alignItems: "center" },
   popupPrimary: { backgroundColor: colors.accent },
-  popupPrimaryText: { color: "#fff", fontWeight: "800" },
+  popupPrimaryText: { color: colors.onAccent, fontWeight: "800" },
   popupGhost: { backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border },
   popupGhostText: { color: colors.text, fontWeight: "600" },
 });

@@ -1,7 +1,7 @@
 import type { SetupValues } from "../../sheets/src/sheets";
 import { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 import { compareRuns } from "./compare";
-import { carStatus, driverStats, seasonStats } from "./insights";
+import { carStatus, driverStats, seasonStats, checkRecords, computeAchievements, nextMilestone } from "./insights";
 import { bestAutonomy } from "./autonomy";
 import { lapStats } from "./laps";
 import { groupBySetup, sortRuns } from "./sort";
@@ -324,6 +324,54 @@ check(
   check("bestAutonomy: unknown track → undefined (never cross-track)", bestAutonomy(runs, { track_name: "Nowhere" }) === undefined);
   check("bestAutonomy: no track in opts → undefined (never cross-track)", bestAutonomy(runs, { grip: "green" }) === undefined);
   check("bestAutonomy: no data at all → undefined", bestAutonomy([], { track_id: "track-mrt" }) === undefined);
+}
+
+// — records (the PB-celebration source): a beat needs a prior to beat
+{
+  let r = initLogbook();
+  const r1 = addRun(r, runFixture({ result: { best_lap_s: 34.0 } }), T0);
+  r = r1.state;
+  check("checkRecords: first lap ever is not a career best (nothing to beat)", checkRecords(r, r1.run).careerBestLap === false);
+  const r2 = addRun(r, runFixture({ created_at: T1, result: { best_lap_s: 33.5 } }), T1);
+  r = r2.state;
+  check("checkRecords: faster lap beats the prior → career + track best", (() => { const rec = checkRecords(r, r2.run); return rec.careerBestLap && rec.trackBestLap; })());
+  const r3 = addRun(r, runFixture({ created_at: T2, result: { best_lap_s: 36.0 } }), T2);
+  r = r3.state;
+  check("checkRecords: slower lap sets no lap record", (() => { const rec = checkRecords(r, r3.run); return !rec.careerBestLap && !rec.trackBestLap; })());
+
+  let c = initLogbook();
+  const c1 = addRun(c, runFixture({ type: "main", result: { position: 2 } }), T0);
+  c = c1.state;
+  check("checkRecords: first competitive top-3 → firstPodium, not firstWin", (() => { const rec = checkRecords(c, c1.run); return rec.firstPodium && !rec.firstWin; })());
+  const c2 = addRun(c, runFixture({ created_at: T1, type: "main", result: { position: 1 } }), T1);
+  c = c2.state;
+  check("checkRecords: first win flagged; podium already happened", (() => { const rec = checkRecords(c, c2.run); return rec.firstWin && !rec.firstPodium; })());
+}
+
+// — achievements: deterministic, recomputed from the log, with live progress
+{
+  const empty = computeAchievements(initLogbook());
+  check("achievements: empty log earns nothing, progress 0", empty.every((a) => !a.earned) && empty[0].progress === 0);
+  let g = initLogbook();
+  g = addRun(g, runFixture(), T0).state;
+  const ach = computeAchievements(g);
+  check("achievements: First Run earned at 1 run", ach.find((a) => a.id === "first-run")!.earned === true);
+  check("achievements: Regular shows live progress 1/10", (() => { const a = ach.find((x) => x.id === "regular")!; return !a.earned && a.hint === "1 / 10 runs"; })());
+}
+
+// — milestones
+check("nextMilestone: 12 → next 25, prev 10", (() => { const m = nextMilestone(12); return m?.next === 25 && m.prev === 10 && Math.abs(m.progress - 2 / 15) < 1e-9; })());
+check("nextMilestone: 0 → next 1, prev 0", (() => { const m = nextMilestone(0); return m?.next === 1 && m.prev === 0; })());
+check("nextMilestone: past the top step → null", nextMilestone(2000) === null);
+
+// — driver rates (brag stats)
+{
+  let p = initLogbook();
+  p = addRun(p, runFixture({ type: "main", result: { position: 1 } }), T0).state;
+  p = addRun(p, runFixture({ created_at: T1, type: "main", result: { position: 5 } }), T1).state;
+  const d = driverStats(p);
+  check("driverStats: podium_rate + win_rate over placed races", d.podium_rate === 0.5 && d.win_rate === 0.5);
+  check("driverStats: rates undefined with no placed races", driverStats(initLogbook()).podium_rate === undefined);
 }
 
 if (failures > 0) {

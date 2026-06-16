@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { ActivityIndicator, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Linking from "expo-linking";
 import { GarageScreen } from "./src/screens/GarageScreen";
@@ -71,8 +71,26 @@ export default function App() {
   const { account, setAccount, completeOnboarding } = useAccount();
 
   // every shared payload is attributed to your @handle (provenance, D32+)
-  const withAuthor = (p: SharedPayload): SharedPayload =>
-    account?.handle ? { ...p, author: { handle: account.handle } } : p;
+  const withAuthor = useCallback(
+    (p: SharedPayload): SharedPayload =>
+      account?.handle ? { ...p, author: { handle: account.handle } } : p,
+    [account?.handle],
+  );
+
+  // direct tab entry resets every cross-tab intent (compare/settings/scanner
+  // close, no stale Speedhive prefill, engineer doesn't re-fire a report)
+  const selectTab = useCallback((id: Tab) => {
+    setRunsStartInForm(false);
+    setEngineerRunId(undefined);
+    setComparePair(null);
+    setShowSettings(false);
+    setShPrefill(undefined);
+    setShareTarget(null);
+    setImportPayload(null);
+    setShowScanner(false);
+    setShowOfficial(false);
+    setTab(id);
+  }, []);
 
   // deep-link import: griplab://import?d=… (cold start + warm) opens the fork preview
   const url = Linking.useURL();
@@ -106,10 +124,13 @@ export default function App() {
   if (!garage || !logbook || !tracks || !reports || !account || !candidacy || !follows) {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
-        <ActivityIndicator color={colors.accent} />
+        <ActivityIndicator color={colors.accent} size="large" />
+        <Text style={styles.loadingLabel}>Loading your garage…</Text>
       </SafeAreaView>
     );
   }
+
+  const daysLeft = trialDaysLeft(account, new Date().toISOString());
 
   if (!account.onboarded) {
     return (
@@ -128,15 +149,26 @@ export default function App() {
           Race<Text style={{ color: colors.accent }}>Lab</Text>
         </Text>
         <View style={styles.headerRight}>
-          <Pressable onPress={() => setTab("social")} hitSlop={8} style={styles.avatarDisc}>
+          <Pressable
+            onPress={() => setTab("social")}
+            hitSlop={10}
+            style={styles.avatarDisc}
+            accessibilityRole="button"
+            accessibilityLabel="Your profile"
+          >
             <Text style={styles.avatarInitial}>{(account.handle ?? account.email ?? "?").charAt(0).toUpperCase()}</Text>
           </Pressable>
-          <Pressable onPress={() => setShowSettings(true)} hitSlop={10}>
+          <Pressable
+            onPress={() => setShowSettings(true)}
+            hitSlop={14}
+            accessibilityRole="button"
+            accessibilityLabel="Settings"
+          >
             <Text style={styles.gear}>⚙️</Text>
           </Pressable>
         </View>
       </View>
-      <TrialBanner daysLeft={trialDaysLeft(account, new Date().toISOString())} />
+      <TrialBanner daysLeft={daysLeft} />
       {pendingRun !== null && (
         <Pressable
           style={styles.shBanner}
@@ -287,30 +319,23 @@ export default function App() {
       </View>
 
       <View style={styles.tabbar}>
-        {TABS.map((t) => (
-          <Pressable
-            key={t.id}
-            style={styles.tab}
-            onPress={() => {
-              // direct tab entry resets cross-tab intents: runs lands on the
-              // list, engineer doesn't re-trigger a report, compare and
-              // settings close, a pending Speedhive prefill is dropped
-              setRunsStartInForm(false);
-              setEngineerRunId(undefined);
-              setComparePair(null);
-              setShowSettings(false);
-              setShPrefill(undefined);
-              setShareTarget(null);
-              setImportPayload(null);
-              setShowScanner(false);
-              setShowOfficial(false);
-              setTab(t.id);
-            }}
-          >
-            <Text style={[styles.tabIcon, tab === t.id && styles.tabActive]}>{t.icon}</Text>
-            <Text style={[styles.tabLabel, tab === t.id && styles.tabActive]}>{t.label}</Text>
-          </Pressable>
-        ))}
+        {TABS.map((t) => {
+          const active = tab === t.id;
+          return (
+            <Pressable
+              key={t.id}
+              style={styles.tab}
+              onPress={() => selectTab(t.id)}
+              accessibilityRole="tab"
+              accessibilityLabel={t.label}
+              accessibilityState={{ selected: active }}
+            >
+              {active && <View style={styles.tabIndicator} />}
+              <Text style={[styles.tabIcon, active && styles.tabActive]}>{t.icon}</Text>
+              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{t.label}</Text>
+            </Pressable>
+          );
+        })}
       </View>
 
       <ShareSheet payload={shareTarget} onClose={() => setShareTarget(null)} />
@@ -319,7 +344,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.bg },
+  // SafeAreaView (from react-native) is a no-op for the top inset on Android,
+  // so the header rode under the status bar there — pad by its height on Android
+  // (iOS keeps SafeAreaView's own inset; currentHeight is undefined there → 0).
+  root: { flex: 1, backgroundColor: colors.bg, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 },
   header: {
     flexDirection: "row",
     alignItems: "baseline",
@@ -356,7 +384,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
   },
   tab: { flex: 1, alignItems: "center", paddingVertical: 10 },
+  tabIndicator: {
+    position: "absolute",
+    top: 0,
+    width: 28,
+    height: 2,
+    borderRadius: 2,
+    backgroundColor: colors.accent,
+  },
   tabIcon: { fontSize: 18, opacity: 0.6 },
   tabLabel: { color: colors.sub, fontSize: 11, marginTop: 2 },
+  tabLabelActive: { color: colors.accent, fontWeight: "800" },
   tabActive: { color: colors.accent, opacity: 1 },
+  loadingLabel: { color: colors.sub, fontSize: 13, marginTop: 12 },
 });

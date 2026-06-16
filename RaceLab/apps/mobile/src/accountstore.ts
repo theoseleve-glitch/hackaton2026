@@ -53,6 +53,13 @@ function asLevel(value: unknown): ExperienceLevel | undefined {
   return LEVELS.includes(value as ExperienceLevel) ? (value as ExperienceLevel) : undefined;
 }
 
+/** Normalise a typed handle to a stored one: no leading @, lowercase, only
+ *  word chars, capped — empty becomes undefined. */
+export function cleanHandle(raw: string): string | undefined {
+  const h = raw.trim().replace(/^@+/, "").toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 20);
+  return h || undefined;
+}
+
 function asPrefs(value: unknown): Prefs | undefined {
   if (typeof value !== "object" || value === null) return undefined;
   const o = value as Record<string, unknown>;
@@ -101,7 +108,7 @@ export function useAccount(): {
   account: Account | null;
   setAccount: (patch: Partial<Account>) => void;
   completeOnboarding: (
-    profile: { email?: string; age?: number; country?: string; level?: string },
+    profile: { email?: string; age?: number; country?: string; level?: string; handle?: string },
     nowIso: string,
   ) => void;
 } {
@@ -144,15 +151,17 @@ export function useAccount(): {
 
   const completeOnboarding = useCallback(
     (
-      profile: { email?: string; age?: number; country?: string; level?: string },
+      profile: { email?: string; age?: number; country?: string; level?: string; handle?: string },
       nowIso: string,
     ) => {
+      const handle = profile.handle !== undefined ? cleanHandle(profile.handle) : undefined;
       setAccountState((prev) => ({
         ...(prev ?? DEFAULT_ACCOUNT),
         ...(profile.email !== undefined ? { email: profile.email } : {}),
         ...(profile.age !== undefined ? { age: profile.age } : {}),
         ...(profile.country !== undefined ? { country: profile.country } : {}),
         ...(asLevel(profile.level) !== undefined ? { level: asLevel(profile.level) } : {}),
+        ...(handle !== undefined ? { handle } : {}),
         onboarded: true,
         trial_started_at: nowIso,
       }));

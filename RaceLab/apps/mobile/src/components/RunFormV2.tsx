@@ -205,8 +205,14 @@ export function RunFormV2(props: RunFormV2Props) {
     if (!track || fetching) return;
     setFetching(true);
     setWxMiss(false);
-    const fill = await props.fetchWeather(track, new Date().toISOString());
-    setFetching(false);
+    let fill: WeatherFill | null = null;
+    try {
+      fill = (await props.fetchWeather(track, new Date().toISOString())) as WeatherFill | null;
+    } catch {
+      fill = null; // offline / API error → manual entry, never a stuck spinner
+    } finally {
+      setFetching(false);
+    }
     if (!fill) {
       setWxMiss(true);
       return;
@@ -229,6 +235,9 @@ export function RunFormV2(props: RunFormV2Props) {
     setWx((prev) => ({ ...prev, [key]: { text, auto: false, touched: true } }));
 
   const derived = lapsList.length > 0 ? lapStats(lapsList) : null;
+  const dateValid = Number.isFinite(
+    new Date(`${dateStr}T${timeStr.length === 5 ? timeStr : "12:00"}:00`).getTime(),
+  );
 
   const canSave = !!(car && track && setup);
 
@@ -327,10 +336,23 @@ export function RunFormV2(props: RunFormV2Props) {
       <Section title="When">
         <View style={{ flexDirection: "row", gap: 8 }}>
           <View style={{ flex: 3 }}>
-            <LabeledInput label="Date" value={dateStr} onChangeText={setDateStr} placeholder="2026-06-12" />
+            <LabeledInput
+              label="Date"
+              value={dateStr}
+              onChangeText={setDateStr}
+              placeholder="2026-06-12"
+              keyboardType="numbers-and-punctuation"
+              error={!dateValid ? "use YYYY-MM-DD" : undefined}
+            />
           </View>
           <View style={{ flex: 2 }}>
-            <LabeledInput label="Time" value={timeStr} onChangeText={setTimeStr} placeholder="14:30" />
+            <LabeledInput
+              label="Time"
+              value={timeStr}
+              onChangeText={setTimeStr}
+              placeholder="14:30"
+              keyboardType="numbers-and-punctuation"
+            />
           </View>
         </View>
       </Section>
