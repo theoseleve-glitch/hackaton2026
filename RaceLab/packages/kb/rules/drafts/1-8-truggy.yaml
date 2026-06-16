@@ -1,0 +1,1115 @@
+# 1/8 nitro/electric TRUGGY — DRAFT tuning rules
+#
+# STATUS: DRAFT. Not auto-shipped. Pending human citation sign-off before
+#   promotion out of rules/drafts/ into the live KB. Schema-validated against the
+#   live rule format (packages/kb/rules/geometry.yaml) and the category template
+#   (packages/kb/chassis/categories/1_8_truggy.json — every `setting:` here is a
+#   real key in that template's `fields`, so the engine capability gate passes).
+#
+# GROUNDING (D18 — grounded or silent). Truggy rides on the 1/8 off-road platform
+#   authority. Every rule is anchored to a REAL page-citable backbone source that
+#   the author downloaded and read VERBATIM via pdftotext (not a model guess):
+#     - Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf, Adam Drake / Mugen
+#       Seiki Racing), 8 pages, downloaded from mugenracing.com and text-extracted
+#       2026-06-16. Explicitly covers 1/8 off-road buggy AND truggy. PAGE-CITED.
+#     - Team Associated RC Cheat Sheets (RC_CheatSheets.pdf, petitrc mirror), the
+#       cross-category effect-of-change chart; off-road pages downloaded + extracted
+#       2026-06-16 with their printed "Page |N" footers read directly. PAGE-CITED.
+#   CompetitionX appears ONLY as corroboration, NEVER as a sole cite.
+#
+# TRUGGY PHYSICS: a truggy is a taller / heavier / wider buggy on the SAME 1/8
+#   off-road platform. Higher CG + more mass => stability is the dominant concern.
+#   Rules below LEAN ON the stability levers — anti-squat, sway bars, shock
+#   oil/position, ride height, springs, wheelbase, track width — and the magnitude
+#   guidance reflects that big-tyre / high-CG sensitivity (one step at a time,
+#   stability-biased starting points).
+#
+# scope on every rule: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: DIFFERENTIALS
+#   Mugen MSR p.2-3 — front/center/rear diff fluid effect-of-change.
+# ============================================================================
+
+- id: kb-tt-diff-front-thicker-001
+  setting: front_diff_oil
+  direction: increase   # thicker front diff fluid
+  effects:
+    - { axis: on_power_steering, change: more }
+    - { axis: off_power_steering, change: smoother }
+    - { axis: rear_grip_on_throttle, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: twitchy, phase: off_power }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thicker front diff = smoother off-power steering + more on-power steering; too thick makes the rear loose on throttle. On the heavier truggy go conservative — it amplifies the loose-on-throttle side effect."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2 — Front diff fluid"
+  scope: [1-8-truggy]
+
+- id: kb-tt-diff-front-thinner-002
+  setting: front_diff_oil
+  direction: decrease   # thinner front diff fluid
+  effects:
+    - { axis: off_power_steering, change: more }
+    - { axis: on_power_steering, change: less }
+  addresses:
+    - { symptom: understeer, phase: off_power }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [high_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thinner front diff increases off-power steering and decreases on-power steering; too light makes the car twitchy and hard to drive — a real risk on the high-CG truggy."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2 — Front diff fluid"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.19 — Diff Fluid, Front Diff, off-road (corroboration)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-diff-center-thicker-003
+  setting: center_diff_oil
+  direction: increase   # thicker center diff fluid
+  effects:
+    - { axis: acceleration, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: off_power_steering, change: smoother }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, fast_open]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thicker center diff = more acceleration, more on-power steering, smoother off-power steering. Heavier center fluid also calms the heavier truggy's on-throttle behaviour."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2-3 — Center diff fluid"
+  scope: [1-8-truggy]
+
+- id: kb-tt-diff-center-thinner-004
+  setting: center_diff_oil
+  direction: decrease   # thinner center diff fluid
+  effects:
+    - { axis: on_power_traction, change: more }
+    - { axis: acceleration, change: less }
+    - { axis: off_power_steering, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: understeer, phase: off_power }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thinner center diff increases on-power traction but decreases acceleration and increases off-power steering. Good for finding bite on a slick, bumpy truggy track."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2 — Center diff fluid"
+  scope: [1-8-truggy]
+
+- id: kb-tt-diff-rear-thicker-005
+  setting: rear_diff_oil
+  direction: increase   # thicker rear diff fluid
+  effects:
+    - { axis: mid_corner_steering, change: smoother }
+    - { axis: rear_traction_on_power, change: more }
+    - { axis: off_power_steering, change: more_slight }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: oversteer, phase: mid_corner }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thicker rear diff = slightly more off-power steering, smoother mid-corner steering, more rear traction on throttle. A stability-friendly first move for a truggy that's loose on power."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Rear diff fluid"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.21 — Diff Fluid, Rear Diff, off-road (corroboration)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-diff-rear-thinner-006
+  setting: rear_diff_oil
+  direction: decrease   # thinner rear diff fluid
+  effects:
+    - { axis: mid_corner_rotation, change: more }
+    - { axis: rear_grip_on_throttle, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [technical_tight, high_grip]
+    reduced_on: [low_grip]
+  counter_indications: [oversteer, no_forward_bite]
+  magnitude_guidance: "One viscosity step at a time. Mugen: thinner rear diff gives more mid-corner rotation and makes the rear looser on throttle. Use sparingly on a truggy — it trades away the stability the heavy chassis wants."
+  reversal_cost_minutes: 30
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Rear diff fluid"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: SHOCK OIL  (STABILITY LEVER + temperature compensation)
+#   Mugen MSR p.3 — shock oil effect + explicit hot/cold guidance.
+# ============================================================================
+
+- id: kb-tt-shockoil-front-thicker-007
+  setting: front_shock_oil
+  direction: increase   # thicker / heavier front oil
+  effects:
+    - { axis: overall_traction, change: less }
+    - { axis: direction_change_response, change: less }
+    - { axis: high_bite_drivability, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: traction_roll, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth, hot]
+    reduced_on: [bumpy, cold]
+  counter_indications: [understeer, poor_bump_handling]
+  magnitude_guidance: "One oil step (~25-50 cSt) at a time. Mugen: thicker oil = less overall traction, less responsive on direction changes, but EASIER to drive on high-bite/smooth tracks — exactly what a nervous high-CG truggy needs. Go thicker when it gets hot."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Shock oil"
+  scope: [1-8-truggy]
+
+- id: kb-tt-shockoil-front-thinner-008
+  setting: front_shock_oil
+  direction: decrease   # thinner / lighter front oil
+  effects:
+    - { axis: overall_traction, change: more }
+    - { axis: bump_handling, change: better }
+    - { axis: responsiveness, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [bumpy, low_grip, cold]
+    reduced_on: [high_grip, smooth, hot]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One oil step (~25-50 cSt) at a time. Mugen: lighter shock oil increases traction and is better in the bumps, more responsive. Mugen: when it gets cold outside, go lighter. Watch for added nervousness on the tall truggy."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Shock oil"
+  scope: [1-8-truggy]
+
+- id: kb-tt-shockoil-rear-thicker-009
+  setting: rear_shock_oil
+  direction: increase   # thicker / heavier rear oil
+  effects:
+    - { axis: chassis_roll_on_power, change: less }
+    - { axis: overall_traction, change: less }
+    - { axis: high_bite_drivability, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, smooth, hot]
+    reduced_on: [bumpy, cold]
+  counter_indications: [no_forward_bite, poor_bump_handling]
+  magnitude_guidance: "One oil step (~25-50 cSt) at a time. Mugen: thicker oil is easier to drive on high-bite/smooth tracks; go thicker when hot. On the heavy truggy thicker rear oil flattens the chassis and resists the traction-roll its high CG invites."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Shock oil"
+  scope: [1-8-truggy]
+
+- id: kb-tt-shockoil-rear-thinner-010
+  setting: rear_shock_oil
+  direction: decrease   # thinner / lighter rear oil
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: bump_handling, change: better }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip, cold]
+    reduced_on: [high_grip, smooth, hot]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One oil step (~25-50 cSt) at a time. Mugen: lighter oil = more overall traction, better in bumps. Mugen: when cold, go lighter. Helps a truggy find forward bite on a rough, low-grip surface."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3 — Shock oil"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: SPRINGS  (STABILITY LEVER)
+#   Mugen MSR p.3-4 — front/rear spring rate + grip-dependent guidance.
+# ============================================================================
+
+- id: kb-tt-spring-front-stiffer-011
+  setting: front_spring
+  direction: stiffer
+  effects:
+    - { axis: front_support, change: more }
+    - { axis: steering, change: less }
+    - { axis: corner_speed_high_grip, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One spring rate at a time, matched left/right. Mugen: stiffer front springs support the front better and reduce steering; on high-grip tracks stiffer front+rear gives more corner speed and stability — the heavy truggy benefits from the extra support."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3-4 — Springs"
+  scope: [1-8-truggy]
+
+- id: kb-tt-spring-front-softer-012
+  setting: front_spring
+  direction: softer
+  effects:
+    - { axis: chassis_roll, change: more }
+    - { axis: steering, change: more }
+    - { axis: overall_grip, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One spring rate at a time, matched left/right. Mugen: softer front springs roll more and increase steering; on low-grip tracks softer springs front and rear increase overall grip and improve bump handling. On a truggy, too soft invites traction roll — step gently."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3-4 — Springs"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.41 — Shock Springs (corroboration: softer gives more traction, best for small bumps)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-spring-rear-stiffer-013
+  setting: rear_spring
+  direction: stiffer
+  effects:
+    - { axis: rear_support, change: more }
+    - { axis: rear_traction_on_exit, change: less }
+    - { axis: stability_high_grip, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: corner_exit }
+    - { symptom: twitchy, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One spring rate at a time, matched left/right. Mugen: stiffer rear springs add support but decrease rear traction on corner exit; on high-grip tracks they add stability. Useful to settle a truggy that hooks and rolls on a high-bite exit."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3-4 — Springs"
+  scope: [1-8-truggy]
+
+- id: kb-tt-spring-rear-softer-014
+  setting: rear_spring
+  direction: softer
+  effects:
+    - { axis: initial_grip, change: more }
+    - { axis: forward_traction, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "One spring rate at a time, matched left/right. Mugen: softer rear springs give more initial grip and forward traction; on low-grip tracks softer front+rear increases overall grip. On the heavy truggy too soft will roll — pair with adequate ride height."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.3-4 — Springs"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.41 — Shock Springs (corroboration: softer is great on rear for off-road, gives more traction)"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: PISTONS
+#   Mugen MSR p.4 — pack vs hole count.
+# ============================================================================
+
+- id: kb-tt-piston-morepack-015
+  setting: front_shock_piston
+  direction: more_pack   # smaller / fewer holes
+  effects:
+    - { axis: weight_transfer_speed, change: slower }
+    - { axis: responsiveness, change: less }
+    - { axis: big_jump_landing, change: better }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: twitchy, phase: jumps }
+  conditions:
+    amplified_on: [big_jumps, smooth]
+    reduced_on: [bumpy, rough]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "Change one piston step (hole count/size), front pair matched, and re-tune oil. Mugen: more pack / smaller holes need lighter oil, give slower weight transfer, less responsiveness, and land large jumps better — valuable for a heavy truggy off big jumps."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Pistons"
+  scope: [1-8-truggy]
+
+- id: kb-tt-piston-lesspack-016
+  setting: rear_shock_piston
+  direction: less_pack   # larger / more holes
+  effects:
+    - { axis: weight_transfer, change: more }
+    - { axis: traction, change: more }
+    - { axis: bump_absorption, change: better }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip]
+    reduced_on: [big_jumps, smooth]
+  counter_indications: [bottoming]
+  magnitude_guidance: "Change one piston step, rear pair matched, and re-tune oil. Mugen: less pack / larger holes need heavier oil, give more weight transfer, more traction, more responsiveness, and absorb bumps better. Helps a truggy hook up on a rough, low-grip surface."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Pistons"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: SHOCK POSITION  (STABILITY LEVER)
+#   Mugen MSR p.4 — shock location on tower / arm.
+# ============================================================================
+
+- id: kb-tt-shockpos-tower-out-017
+  setting: shock_position_front
+  direction: out   # outboard hole on the tower (more upright)
+  effects:
+    - { axis: responsiveness, change: more }
+    - { axis: jumping, change: better }
+    - { axis: technical_track_handling, change: better }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+    - { symptom: nosedive_jumps, phase: jumps }
+  conditions:
+    amplified_on: [technical_tight, smooth]
+    reduced_on: [bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One hole at a time, both sides. Mugen: moving the shocks OUT on the tower makes the car more responsive, jumps better, and is better on technical tracks. On a truggy use the responsiveness deliberately — it can sharpen an already-tall chassis."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Shock location"
+  scope: [1-8-truggy]
+
+- id: kb-tt-shockpos-tower-in-018
+  setting: shock_position_rear
+  direction: in   # inboard hole on the tower (more laid down)
+  effects:
+    - { axis: initial_damping, change: softer }
+    - { axis: responsiveness, change: less }
+    - { axis: forgiveness, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One hole at a time, both sides. Mugen: moving the shocks IN on the tower gives softer initial damping, less responsiveness, and is more forgiving — a good calming move for a nervous truggy on a rough track."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Shock location"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: RIDE HEIGHT  (STABILITY LEVER — critical on a high-CG truggy)
+#   Mugen MSR p.8 (front 1-2mm lower than rear) + AE Cheat Sheets p.29-30.
+# ============================================================================
+
+- id: kb-tt-rideheight-lower-019
+  setting: front_ride_height
+  direction: decrease
+  effects:
+    - { axis: overall_stability, change: more }
+    - { axis: chassis_roll, change: less }
+    - { axis: cornering_push, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, blue_groove]
+    reduced_on: [bumpy, rough, big_jumps]
+  counter_indications: [bottoming, understeer]
+  magnitude_guidance: "0.5-1mm at a time via shock collar/preload. AE: lower front ride height creates more push and less chance of flipping in corners. Lowering CG is the single most effective anti-traction-roll lever on a tall truggy — but don't go so low it bottoms."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.29 — Ride Height, front"
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.8 — Ride Height"
+  scope: [1-8-truggy]
+
+- id: kb-tt-rideheight-higher-020
+  setting: rear_ride_height
+  direction: increase
+  effects:
+    - { axis: bottoming_resistance, change: more }
+    - { axis: loose_terrain_acceleration, change: better }
+    - { axis: jump_lift, change: better }
+    - { axis: overall_stability, change: less }
+  addresses:
+    - { symptom: bottoming, phase: rough_section }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [bumpy, rough, big_jumps, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "0.5-1mm at a time via shock collar/preload. AE: higher rear ride height gives better acceleration in loose terrain and better lift off jumps. Mugen baseline: run the front 1-2mm LOWER than the rear. Raising the heavy truggy's CG hurts stability — use only to clear rough ground/jumps."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.30 — Ride Height, rear"
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.8 — Ride Height"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: DOWNSTOP / REBOUND (TRAVEL)
+#   Mugen MSR p.5-6 — rebound stop / travel.
+# ============================================================================
+
+- id: kb-tt-downstop-front-more-travel-021
+  setting: front_downstop
+  direction: decrease   # arm lower / MORE droop travel
+  effects:
+    - { axis: on_power_steering, change: more }
+    - { axis: rough_track_drivability, change: better }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "1mm of travel at a time, measured on the car (Mugen: top-mount centre to bottom-screw centre), identical left/right. Mugen: more front travel increases on-power steering; more travel front and rear lands better and is easier to drive on rough tracks. Too much can traction-roll on bumpy/rutted mid-corners — a real truggy risk."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5-6 — Rebound stop (travel)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-downstop-rear-less-travel-022
+  setting: rear_downstop
+  direction: increase   # arm higher / LESS droop travel
+  effects:
+    - { axis: off_power_steering, change: less }
+    - { axis: traction_roll_resistance, change: more }
+    - { axis: small_bump_grip, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: oversteer, phase: off_power }
+  conditions:
+    amplified_on: [bumpy, high_grip]
+    reduced_on: [smooth]
+  counter_indications: [understeer, poor_bump_handling]
+  magnitude_guidance: "1mm of travel at a time, identical left/right. Mugen: more rear travel increases off-power steering; too much travel causes traction roll on bumpy/rutted mid-corners, and less travel slides over small bumps. Reducing rear travel calms a truggy that traction-rolls into ruts."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5-6 — Rebound stop (travel)"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: SWAY BARS  (PRIMARY STABILITY LEVER for a tall truggy)
+#   Mugen MSR p.6 + AE Cheat Sheets p.7.
+# ============================================================================
+
+- id: kb-tt-swaybar-front-thicker-023
+  setting: front_sway_bar
+  direction: increase   # thicker front bar
+  effects:
+    - { axis: off_power_steering, change: less }
+    - { axis: on_power_steering, change: more }
+    - { axis: corner_entry_smoothness, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One bar size (~0.1mm wire) at a time. Mugen: thicker front sway bar decreases off-power steering, smooths steering entering the turn, and increases on-power steering; thicker bars are more stable on high-speed/high-traction tracks. A core lever to tame the heavy truggy's chassis roll."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Sway Bars"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.7 — Anti-roll Bars, Sway Bars (corroboration: thicker bars for high-traction, more responsive + more stable)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-swaybar-front-thinner-024
+  setting: front_sway_bar
+  direction: decrease   # thinner front bar
+  effects:
+    - { axis: off_power_steering, change: more }
+    - { axis: on_power_steering, change: less }
+    - { axis: low_grip_compliance, change: more }
+  addresses:
+    - { symptom: understeer, phase: off_power }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One bar size (~0.1mm wire) at a time. Mugen: thinner front sway bar increases off-power steering and reduces on-power steering. AE: softer/thinner bars suit low and medium bite. Frees up a pushing truggy on a low-grip track without going to a soft spring."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Sway Bars"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.7 — Anti-roll Bars, Sway Bars (corroboration: softer/thinner bars for low and medium bite)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-swaybar-rear-thicker-025
+  setting: rear_sway_bar
+  direction: increase   # thicker rear bar
+  effects:
+    - { axis: mid_corner_stability, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: rear_traction, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One bar size (~0.1mm wire) at a time. Mugen: thicker rear sway bar increases stability in the middle of the turn and increases on-power steering; thicker bars are more stable on high-speed/high-traction tracks. The first reach-for lever against truggy mid-corner traction roll."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Sway Bars"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.7 — Anti-roll Bars, Sway Bars (corroboration: thicker bars minimize chassis roll, more stable)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-swaybar-rear-thinner-026
+  setting: rear_sway_bar
+  direction: decrease   # thinner rear bar
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: on_power_steering, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One bar size (~0.1mm wire) at a time. Mugen: thinner rear sway bar increases rear traction and decreases on-power steering. Recovers forward bite for a truggy struggling for drive on a slick surface — at the cost of some mid-corner stability."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Sway Bars"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: CAMBER
+#   Mugen MSR p.6 — front/rear camber.
+# ============================================================================
+
+- id: kb-tt-camber-front-more-negative-027
+  setting: front_camber
+  direction: decrease   # more negative
+  effects:
+    - { axis: steering, change: less }
+    - { axis: bump_smoothness, change: more }
+  addresses:
+    - { symptom: twitchy, phase: corner_entry }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "0.25-0.5 deg at a time, matched left/right; tyres should still wear flat. Mugen: more negative front camber has less steering and is smoother in bumps. A mild calming move for a darty truggy on a rough section."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Camber"
+  scope: [1-8-truggy]
+
+- id: kb-tt-camber-front-less-negative-028
+  setting: front_camber
+  direction: increase   # less negative (toward 0)
+  effects:
+    - { axis: steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.25-0.5 deg at a time, matched left/right. Mugen: less negative front camber has more steering. Small, low-cost steering gain for a pushing truggy."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Camber"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.12 — Camber, front (corroboration)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-camber-rear-more-negative-029
+  setting: rear_camber
+  direction: decrease   # more negative
+  effects:
+    - { axis: forward_traction, change: less }
+    - { axis: on_power_steering, change: more }
+    - { axis: bump_handling, change: better }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [high_grip, bumpy]
+    reduced_on: [low_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "0.25-0.5 deg at a time, matched left/right. Mugen: more negative rear camber has less forward traction, more on-power steering, and is better in bumps. Helps a truggy that traction-rolls on a high-bite mid-corner; watch the forward-bite trade-off."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Camber"
+  scope: [1-8-truggy]
+
+- id: kb-tt-camber-rear-less-negative-030
+  setting: rear_camber
+  direction: increase   # less negative (toward 0)
+  effects:
+    - { axis: forward_traction, change: more }
+    - { axis: traction_roll_risk, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, blue_groove]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "0.25-0.5 deg at a time, matched left/right. Mugen: less negative rear camber gives more forward traction but CAN cause the vehicle to traction roll — a sharp warning on a high-CG truggy. Don't chase bite this way on high grip."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.6 — Camber"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: TRACK WIDTH  (STABILITY LEVER)
+#   Mugen MSR p.7 — wheel hubs / track width.
+# ============================================================================
+
+- id: kb-tt-trackwidth-wider-031
+  setting: rear_track_width
+  direction: increase   # +1/+2mm hubs, wider
+  effects:
+    - { axis: stability, change: more }
+    - { axis: initial_grip, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip, dusty]
+  counter_indications: []
+  magnitude_guidance: "One hub offset step (+1 or +2mm) per side at a time, symmetric. Mugen: +1/+2mm hubs have slightly less initial grip but increase stability on higher-grip tracks. Widening the heavy truggy's stance is a strong anti-roll lever on high bite."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Track width"
+  scope: [1-8-truggy]
+
+- id: kb-tt-trackwidth-narrower-032
+  setting: rear_track_width
+  direction: decrease   # standard hubs, narrower
+  effects:
+    - { axis: initial_grip, change: more }
+    - { axis: stability, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [low_grip, dusty]
+    reduced_on: [high_grip]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One hub offset step per side at a time, symmetric. Mugen: standard wheel hubs work best on low-grip and dusty conditions (more initial grip). Narrowing recovers grip on a slick, dusty truggy track but gives up stability — step carefully on the tall chassis."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Track width"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: WHEELBASE  (STABILITY LEVER)
+#   Mugen MSR p.7 — wheelbase spacers.
+# ============================================================================
+
+- id: kb-tt-wheelbase-longer-033
+  setting: wheelbase
+  direction: increase   # spacers in front of the hubs
+  effects:
+    - { axis: stability, change: more }
+    - { axis: bump_handling, change: better }
+    - { axis: on_power_steering, change: more }
+    - { axis: off_power_steering, change: less }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [fast_open, bumpy]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "Move one shim at a time, both sides. Mugen: longer wheelbase decreases off-power steering but is MORE STABLE, better in bumps, and has more on-power steering. The classic settle-the-truggy move for a fast, rough, open track."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Wheel Base"
+  scope: [1-8-truggy]
+
+- id: kb-tt-wheelbase-shorter-034
+  setting: wheelbase
+  direction: decrease   # spacers behind the hubs
+  effects:
+    - { axis: on_power_traction, change: more }
+    - { axis: off_power_steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: off_power }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [technical_tight, low_grip]
+    reduced_on: [fast_open, bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "Move one shim at a time, both sides. Mugen: shorter wheelbase increases on-power traction and off-power steering, and is better on tight or slick tracks. Sharpens a sluggish truggy on a tight course — but costs the stability the long base provides."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Wheel Base"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: ANTI-SQUAT  (STABILITY LEVER)
+#   Mugen MSR p.7 + AE Cheat Sheets p.8.
+# ============================================================================
+
+- id: kb-tt-antisquat-more-035
+  setting: rear_anti_squat
+  direction: increase
+  effects:
+    - { axis: on_power_support, change: more }
+    - { axis: forward_traction, change: more }
+    - { axis: jump_lift, change: better }
+    - { axis: side_traction, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One shim/holder step at a time, both sides. Mugen: more anti-squat gives more on-power support, more forward traction, and jumps better. AE: more anti-squat = less side traction, more rear lift in jumps. Strong on-power stability lever for the heavy truggy on smooth high grip."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Anti squat"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.8 — Anti-squat, off-road (corroboration)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-antisquat-less-036
+  setting: rear_anti_squat
+  direction: decrease   # flatter rear arms
+  effects:
+    - { axis: off_power_steering, change: less }
+    - { axis: on_power_support, change: less }
+    - { axis: side_traction, change: more }
+    - { axis: bump_traction, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: traction_roll, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One shim/holder step at a time, both sides. Mugen: less anti-squat = less off-power steering and less on-power support. AE: less anti-squat = more side traction in corners, more rear traction for slick or bumpy surfaces. Helps a truggy that loses the rear over bumps."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Anti squat"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.8 — Anti-squat, off-road (corroboration)"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: KICK-UP
+#   Mugen MSR p.5 + AE Cheat Sheets p.27.
+# ============================================================================
+
+- id: kb-tt-kickup-more-037
+  setting: front_kickup
+  direction: increase
+  effects:
+    - { axis: corner_entry_steering, change: more }
+    - { axis: forward_traction, change: more }
+    - { axis: bump_handling, change: better }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One bushing/insert step, both sides. Mugen: more kick gives more steering entering the turn, more forward traction, and is better in bumps. AE: more kickup turns into the corner more, standard for most situations. A forgiving setting for a truggy on rough, low-grip ground."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5 — Lower front arm position (kick)"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.27 — Kickup (corroboration)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-kickup-less-038
+  setting: front_kickup
+  direction: decrease
+  effects:
+    - { axis: off_power_steering, change: less }
+    - { axis: on_power_steering, change: more }
+    - { axis: weight_transfer_to_front, change: faster }
+    - { axis: bump_forgiveness, change: less }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_exit }
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [bumpy, rough]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "One bushing/insert step, both sides. Mugen: less kick decreases off-power steering and increases on-power steering, but is less forgiving in bumps. AE: less kickup = better turn-in through a corner, fast weight transfer to the front, best for high-traction tracks. Use on a smooth high-bite truggy track only."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5 — Lower front arm position (kick)"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.27 — Kickup (corroboration)"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: ROLL CENTRE  (front lower-arm / camber-link positions)
+#   Mugen MSR p.5 (front roll centre via lower arm) + p.7 (rear camber link).
+# ============================================================================
+
+- id: kb-tt-rollcenter-front-lower-039
+  setting: front_roll_center
+  direction: lower
+  effects:
+    - { axis: overall_grip, change: more }
+    - { axis: steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, blue_groove]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One arm/link position at a time; re-check camber after. Mugen: a lower front roll centre has more overall grip and steering. Wakes up a pushing truggy on low grip — but a lower roll centre on high bite can over-rotate the tall chassis."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5 — Lower front arm position (roll centre)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-rollcenter-front-higher-040
+  setting: front_roll_center
+  direction: higher
+  effects:
+    - { axis: front_support, change: more }
+    - { axis: steering, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: corner_entry }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, blue_groove]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One arm/link position at a time; re-check camber after. Mugen: a higher front roll centre has more support and less overall steering. A stability lever for a truggy that traction-rolls or is too darty into high-bite corners."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.5 — Lower front arm position (roll centre)"
+  scope: [1-8-truggy]
+
+- id: kb-tt-rollcenter-rear-link-longer-041
+  setting: rear_roll_center
+  direction: longer_link   # longer rear camber link => less roll, more stable
+  effects:
+    - { axis: chassis_roll, change: less }
+    - { axis: stability, change: more }
+    - { axis: rear_traction, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One link/hole position at a time; re-check rear camber after. Mugen: a longer rear camber link gives less roll and improves stability and traction. A direct anti-roll lever for the high-CG truggy on high bite."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Rear Camber Links"
+  scope: [1-8-truggy]
+
+- id: kb-tt-rollcenter-rear-link-shorter-042
+  setting: rear_roll_center
+  direction: shorter_link   # shorter rear camber link => more roll, more steering
+  effects:
+    - { axis: chassis_roll, change: more }
+    - { axis: steering, change: more }
+    - { axis: bump_handling, change: better }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One link/hole position at a time; re-check rear camber after. Mugen: a shorter rear camber link gives more roll, increases steering, and handles bumps better. Frees up a pushing truggy on a rough low-grip track — but more roll is risky on the tall chassis at high bite."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.7 — Rear Camber Links"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: ACKERMANN
+#   Mugen MSR p.4 — ackerman position.
+# ============================================================================
+
+- id: kb-tt-ackermann-forward-043
+  setting: ackermann
+  direction: forward
+  effects:
+    - { axis: initial_response, change: more }
+    - { axis: corner_exit_feel, change: smoother }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One hole at a time; re-check front toe after. Mugen: ackerman forward is more responsive initially and then smoother on corner exit. Adds turn-in for a lazy truggy on a tight course."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Ackerman"
+  scope: [1-8-truggy]
+
+- id: kb-tt-ackermann-rearward-044
+  setting: ackermann
+  direction: rearward
+  effects:
+    - { axis: off_power_steering, change: smoother }
+    - { axis: on_power_steering, change: more }
+  addresses:
+    - { symptom: twitchy, phase: corner_entry }
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [fast_open, high_grip]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One hole at a time; re-check front toe after. Mugen: ackerman back has smoother off-power steering and increases on-power steering. Calms an over-darty truggy on a fast, high-grip layout."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.4 — Ackerman"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: BRAKE BIAS
+#   Mugen MSR p.2 — brake bias.
+# ============================================================================
+
+- id: kb-tt-brakebias-front-more-045
+  setting: brake_bias_front
+  direction: increase   # more front brake
+  effects:
+    - { axis: braking_stability, change: more }
+    - { axis: corner_entry_rotation, change: less }
+  addresses:
+    - { symptom: unstable_braking, phase: braking }
+    - { symptom: oversteer, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, loose_dirt]
+    reduced_on: [high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "Small bias steps from a 50/50 baseline (Mugen). Mugen: if the vehicle is too aggressive under braking, increase front brake (or decrease rear). More front brake settles a heavy truggy that swaps or over-rotates on entry."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2 — Brake bias"
+  scope: [1-8-truggy]
+
+- id: kb-tt-brakebias-front-less-046
+  setting: brake_bias_front
+  direction: decrease   # less front brake / more rear
+  effects:
+    - { axis: corner_entry_rotation, change: more }
+    - { axis: braking_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: braking }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, technical_tight]
+    reduced_on: [loose_dirt, bumpy]
+  counter_indications: [unstable_braking, oversteer]
+  magnitude_guidance: "Small bias steps from a 50/50 baseline (Mugen). Mugen: if the vehicle feels too lazy entering the turn and you want more rotation, decrease front brake or increase rear brake strength. Use sparingly on a truggy — too much rear brake makes the tall chassis unstable on entry."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Mugen MSR Off-Road Tuning Guide (MSR tuning guide.pdf) p.2 — Brake bias"
+  scope: [1-8-truggy]
+
+# ============================================================================
+# FAMILY: AERO / WING
+#   AE Cheat Sheets p.52 — wing angle.
+# ============================================================================
+
+- id: kb-tt-wing-steeper-047
+  setting: wing
+  direction: steeper   # steeper wing angle
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: high_speed_stability, change: more }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open, high_grip]
+    reduced_on: [technical_tight]
+  counter_indications: [understeer]
+  magnitude_guidance: "One wing-shim step at a time. AE: a steeper wing angle gives more rear traction. A bolt-on stability lever for a loose, fast truggy — the bigger truggy wing makes this especially effective at speed."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.52 — Wing"
+  scope: [1-8-truggy]
+
+- id: kb-tt-wing-flatter-048
+  setting: wing
+  direction: flatter   # more horizontal wing angle
+  effects:
+    - { axis: rear_traction, change: less }
+    - { axis: top_speed, change: more }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: [high_grip, technical_tight]
+  counter_indications: [oversteer, twitchy, unstable_braking]
+  magnitude_guidance: "One wing-shim step at a time. AE: a more horizontal wing is standard traction (less rear downforce) and frees the rear. Use only if a truggy is glued at the rear and pushing — flattening costs the stability the tall chassis usually wants."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.52 — Wing"
+  scope: [1-8-truggy]

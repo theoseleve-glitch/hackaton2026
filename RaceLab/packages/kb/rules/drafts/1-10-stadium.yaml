@@ -1,0 +1,797 @@
+# 1/10 2WD STADIUM TRUCK — DRAFT tuning rules
+#
+# STATUS: DRAFT. Not auto-shipped. Pending human citation sign-off before promotion
+#   out of rules/drafts/ into the live KB. Schema-validated against the live rule
+#   format (packages/kb/rules/geometry.yaml) and the category template
+#   (packages/kb/chassis/categories/stadium_truck.json — every `setting:` here is a
+#   real key in that template's `fields`, so the engine capability gate passes).
+#
+# GROUNDING (D18 — grounded or silent). Every rule cites a REAL, page-citable source.
+#   PRIMARY backbone: Team Associated "RC Cheat Sheets" (legacy PDF mirror
+#   site.petitrc.com/reglages/RC_CheatSheets.pdf — downloaded 2026-06-16, 2.1MB,
+#   machine-text-extracted with pdftotext). Page numbers below are the REAL "Page |N"
+#   markers from that extraction — NO [TBD]. The cheat sheet is the broadest single
+#   cross-category effect-of-change chart and explicitly answers it on the B4/T4/SC10
+#   2WD off-road family — i.e. Associated's own stadium-truck (T-series) lineage —
+#   so it is the natural authority for this class (sources.json: AE Cheat Sheets,
+#   page_cited_quality:true; grounding_assessment lists stadium truck under AE Cheat
+#   Sheets coverage).
+#   CORROBORATION only (web, mutable — NEVER a sole cite, per D18):
+#   "CompetitionX RC Tuning Guide — <topic> (corroboration)". Every CompetitionX cite
+#   is paired with the page-cited AE backbone, never standing alone.
+#
+# STADIUM-TRUCK PHYSICS: a 2WD buggy-derived chassis carrying BIG tyres + a tall body
+#   → HIGH centre of gravity. Rear-drive only (front has no drive). The high CG makes
+#   traction-roll, rear stability and wheelspin/forward-bite the dominant problems, so
+#   this file leans on anti-squat (p.8), rear toe/roll-centre, tyre choice (p.45-47),
+#   slipper (p.43), wing (p.52) and ride-height/CG (p.29-30). Surface flips several
+#   changes — high-bite changes carry forbidden_on:[loose_dirt] where they hurt on loose
+#   dirt. Power class gates motor/gearing legality (none of the chassis rules here are
+#   power-gated; they hold for stock_blinky and modified_power alike).
+#
+# scope on every rule: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: ANTI-SQUAT  (AE Cheat Sheets p.8, "Anti-squat, off-road")
+#   The headline stadium-truck lever: tames a tall-CG rear-drive truck's forward bite
+#   vs. side bite. p.8 verbatim: "less anti-squat → more side traction in corners,
+#   more rear traction for slick or bumpy surfaces; more anti-squat → less side
+#   traction in corners, more rear lift in jumps."
+# ============================================================================
+
+- id: kb-st-antisquat-more-001
+  setting: rear_anti_squat
+  direction: increase
+  effects:
+    - { axis: rear_squat_on_power, change: less }
+    - { axis: forward_bite_on_acceleration, change: more }
+    - { axis: side_traction_in_corners, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, rough, loose_dirt]
+  counter_indications: [traction_roll, oversteer]
+  magnitude_guidance: "Shim the front of the rear arm mounts up ~1 deg at a time (AE p.8: shims under the front of the rear arm mounts). More anti-squat plants the rear for drive off the corner; on a tall stadium truck too much costs side bite and can trip a traction-roll on a high-grip corner."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.8 'Anti-squat, off-road' — more anti-squat: less side traction in corners, more rear lift in jumps"
+    - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: more anti-squat adds forward traction on acceleration, reduces it off-power)"
+  scope: [1-10-stadium]
+
+- id: kb-st-antisquat-less-002
+  setting: rear_anti_squat
+  direction: decrease   # flatter rear arms (toward 0 deg)
+  effects:
+    - { axis: side_traction_in_corners, change: more }
+    - { axis: rear_traction_slick_bumpy, change: more }
+    - { axis: bumpy_acceleration, change: smoother }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: on_power }
+    - { symptom: no_forward_bite, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "Remove a shim from the front of the rear arm mounts, ~1 deg flatter at a time (AE p.8). Flatter arms give more side traction and smoother drive over slick/bumpy ground — the safer direction on a high-CG truck that wants to roll; too flat loses forward bite on smooth high-grip."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.8 'Anti-squat, off-road' — less anti-squat: more side traction in corners, more rear traction for slick or bumpy surfaces"
+    - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: less anti-squat frees off-power rear traction and smooths bumpy acceleration)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: CASTER  (AE Cheat Sheets p.16, "Caster, front")
+#   p.16 verbatim: "less caster → less steering entering corners, more steering exiting
+#   corners; more caster → more steering entering corners, less steering exiting."
+# ============================================================================
+
+- id: kb-st-caster-more-003
+  setting: caster
+  direction: increase   # more inclined kingpin
+  effects:
+    - { axis: steering_entering_corner, change: more }
+    - { axis: steering_exiting_corner, change: less }
+    - { axis: high_speed_stability, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [understeer]   # hurts on-power/exit steering
+  magnitude_guidance: "One caster-block step at a time (typically ~2 deg). More caster steadies a twitchy truck at speed and adds turn-in; it trades away on-power exit steering."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' — more caster: more steering entering corners, less steering exiting corners"
+    - "CompetitionX RC Tuning Guide — Caster (corroboration: more caster adds on-power and high-speed stability, less initial/low-speed steering)"
+  scope: [1-10-stadium]
+
+- id: kb-st-caster-less-004
+  setting: caster
+  direction: decrease   # more vertical kingpin
+  effects:
+    - { axis: steering_exiting_corner, change: more }
+    - { axis: steering_entering_corner, change: less }
+    - { axis: high_speed_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One caster-block step at a time (~2 deg). Less caster frees up on-power exit steering; it costs high-speed stability — risky on a tall truck on a fast track."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' — less caster: less steering entering corners, more steering exiting corners"
+    - "CompetitionX RC Tuning Guide — Caster (corroboration: less caster adds off-power/initial steering, reduces straight-line stability)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: FRONT TOE  (AE Cheat Sheets p.49, "Toe-in, toe-out, front")
+#   p.49 verbatim: "0 deg toe standard for all conditions; toe-out → quicker corner
+#   turn-in, unstable in bumps and slippery."
+# ============================================================================
+
+- id: kb-st-toe-front-out-005
+  setting: front_toe
+  direction: decrease   # toward toe-out
+  effects:
+    - { axis: corner_turn_in, change: quicker }
+    - { axis: bump_stability, change: less }
+    - { axis: slippery_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [twitchy, poor_bump_handling]
+  magnitude_guidance: "0.5 deg at a time, both steering rods equally (AE p.49 calls 1 deg toe-out a typical setting). Adds quicker turn-in; AE warns it is unstable in bumps and slippery — back off on a rough/low-grip stadium track."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.49 'Toe-in, toe-out, front' — toe-out: quicker corner turn-in, unstable in bumps and slippery"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: front toe-out sharpens corner entry / turn-in)"
+  scope: [1-10-stadium]
+
+- id: kb-st-toe-front-in-006
+  setting: front_toe
+  direction: increase   # toward 0 / toe-in
+  effects:
+    - { axis: bump_stability, change: more }
+    - { axis: slippery_stability, change: more }
+    - { axis: corner_turn_in, change: calmer }
+  addresses:
+    - { symptom: twitchy }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [sluggish_steering, understeer]
+  magnitude_guidance: "0.5 deg at a time toward 0 deg toe (AE p.49: 0 deg is the standard, stable-in-all-conditions setting). Calms a darty front and steadies the truck over bumps and on slippery ground at the cost of some turn-in bite."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.49 'Toe-in, toe-out, front' — 0 deg toe standard for all conditions; toe-out unstable in bumps and slippery"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: reducing toe-out toward zero calms steering and adds entry stability)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: CAMBER  (AE Cheat Sheets p.12 front, p.15 rear)
+#   p.12: "less (0 deg) front camber → more straight-line acceleration; more (2 deg)
+#   → more high-speed traction through turns." p.15 rear mirrors it.
+# ============================================================================
+
+- id: kb-st-camber-front-more-neg-007
+  setting: front_camber
+  direction: decrease   # more negative camber
+  effects:
+    - { axis: high_speed_cornering_traction, change: more }
+    - { axis: straight_line_acceleration, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: understeer, phase: high_speed }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.5 deg more negative at a time (AE p.12 cites ~2 deg as the high-traction-through-turns setting). Re-check front toe after — they interact. Loads the outer front tyre for more grip through fast corners."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.12 'Camber, front' — more (2 deg) camber: more high-speed traction through turns"
+    - "CompetitionX RC Tuning Guide — Camber (corroboration: more negative front camber raises peak cornering grip, costs straight-line patch)"
+  scope: [1-10-stadium]
+
+- id: kb-st-camber-rear-more-neg-008
+  setting: rear_camber
+  direction: decrease   # more negative rear camber
+  effects:
+    - { axis: high_speed_cornering_traction, change: more }
+    - { axis: straight_line_acceleration, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "0.5 deg more negative at a time (AE p.15: more negative rear camber → more high-speed traction through corners). Helps a tall truck hold the rear through a high-grip corner; too much costs forward bite off the corner."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.15 'Camber, rear' — less (-2 deg): more high-speed traction through corners"
+    - "CompetitionX RC Tuning Guide — Camber (corroboration: more negative rear camber adds cornering grip, costs straight-line/forward drive)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: RIDE HEIGHT  (AE Cheat Sheets p.29 front, p.30 rear)
+#   The CG lever for a tall stadium truck. p.29: front lower → more push; higher → more
+#   steering + better traction on bumpy tracks. p.30: rear lower → less rear sliding in
+#   corners; higher → better acceleration in loose terrain + better lift off jumps.
+# ============================================================================
+
+- id: kb-st-rideheight-front-lower-009
+  setting: front_ride_height
+  direction: decrease
+  effects:
+    - { axis: front_steering, change: less }
+    - { axis: high_speed_stability, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, rough]
+  counter_indications: [understeer, bottoming]
+  magnitude_guidance: "1mm at a time via the threaded shock collar (AE p.29). Lower front drops CG for a steadier, less roll-prone truck on smooth high grip; AE notes lower front 'creates more push', so expect a touch less steering and watch for bottoming."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.29 'Ride Height, front' — lower creates more push; higher creates more steering / better traction on bumpy tracks"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: lower ride height lowers CG for more stability, less bump clearance)"
+  scope: [1-10-stadium]
+
+- id: kb-st-rideheight-front-higher-010
+  setting: front_ride_height
+  direction: increase
+  effects:
+    - { axis: front_steering, change: more }
+    - { axis: bump_traction, change: more }
+    - { axis: high_speed_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "1mm at a time via the threaded shock collar (AE p.29). Higher front adds steering and clears bumps; on a tall truck it raises CG and can promote traction-roll on high grip — go back down when the track hooks up."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.29 'Ride Height, front' — higher creates more steering, more chassis roll and better traction on bumpy tracks"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: raising ride height clears rough ground at the cost of stability)"
+  scope: [1-10-stadium]
+
+- id: kb-st-rideheight-rear-lower-011
+  setting: rear_ride_height
+  direction: decrease
+  effects:
+    - { axis: rear_sliding_in_corners, change: less }
+    - { axis: jump_lift, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, loose_dirt]
+  counter_indications: [no_forward_bite, nosedive_jumps]
+  magnitude_guidance: "1mm at a time via the threaded shock collar (AE p.30: lower rear → less rear-end sliding in corners). Lowers rear CG to settle a loose/rolling truck on high grip; too low costs forward bite in loose terrain and lift off jumps."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.30 'Ride Height, rear' — lower: less rear-end sliding in corners"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: lower rear ride height adds rear stability and lowers CG)"
+  scope: [1-10-stadium]
+
+- id: kb-st-rideheight-rear-higher-012
+  setting: rear_ride_height
+  direction: increase
+  effects:
+    - { axis: acceleration_in_loose_terrain, change: more }
+    - { axis: jump_lift, change: more }
+    - { axis: rear_stability, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: nosedive_jumps, phase: jumps }
+  conditions:
+    amplified_on: [loose_dirt, bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll, oversteer]
+  magnitude_guidance: "1mm at a time via the threaded shock collar (AE p.30: higher rear → better acceleration in loose terrain, better lift off jumps). Helps forward bite on loose ground and squares up jumps; raises rear CG, so back off if the truck starts to roll."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.30 'Ride Height, rear' — higher: better acceleration in loose terrain, better lift off jumps"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: higher rear adds rear weight transfer and forward bite, clears rough sections)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: SHOCKS — OIL & PISTONS  (AE Cheat Sheets p.39 fluid, p.40 pistons)
+#   p.39: thinner → faster rebound for many small bumps; thicker → less bottoming out.
+#   p.40: smaller holes → more damping/pack, better jump lifts & landings, smoother
+#   tracks; larger holes → less damping, for small bumps.
+# ============================================================================
+
+- id: kb-st-shockoil-rear-thicker-013
+  setting: rear_shock_oil
+  direction: increase   # thicker / heavier
+  effects:
+    - { axis: bottoming_resistance, change: more }
+    - { axis: rebound_speed, change: slower }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough, low_grip]
+  counter_indications: [no_forward_bite, poor_bump_handling]
+  magnitude_guidance: "One oil step (~50-100 cSt / ~2.5wt) at a time (AE p.39: thicker = less bottoming out). Holds a tall truck flatter on power and on big landings; too thick kills forward bite over chop."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.39 'Shock Fluid' — thicker/heavier (higher viscosity): less bottoming out"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier oil better for smooth tracks, reduces bottoming, less responsive)"
+  scope: [1-10-stadium]
+
+- id: kb-st-shockoil-rear-thinner-014
+  setting: rear_shock_oil
+  direction: decrease   # thinner / lighter
+  effects:
+    - { axis: rebound_speed, change: faster }
+    - { axis: rear_compliance_over_bumps, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: bouncy, phase: rough_section }
+    - { symptom: no_forward_bite, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip, loose_dirt]
+    reduced_on: [smooth, high_grip, big_jumps]
+  counter_indications: [oversteer, bottoming]
+  magnitude_guidance: "One oil step (~50-100 cSt) thinner at a time (AE p.39: thinner = faster rebound for many small bumps). Frees the rear to recover over washboard for forward bite; too thin lets the rear wallow and bottom."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.39 'Shock Fluid' — thinner/lighter (lower viscosity): faster rebound for many small bumps"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter oil more responsive, better for bumpy conditions)"
+  scope: [1-10-stadium]
+
+- id: kb-st-shockoil-front-thicker-015
+  setting: front_shock_oil
+  direction: increase
+  effects:
+    - { axis: front_bottoming_resistance, change: more }
+    - { axis: initial_steering_reaction, change: slower }
+  addresses:
+    - { symptom: nosedive_jumps, phase: jumps }
+    - { symptom: twitchy, phase: braking }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough]
+  counter_indications: [sluggish_steering, understeer]
+  magnitude_guidance: "One oil step (~50-100 cSt) at a time (AE p.39: thicker = less bottoming). Slows the front to calm dive into jumps and braking twitch; too thick makes the front skate over bumps and steering go lazy."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.39 'Shock Fluid' — thicker/heavier: less bottoming out"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier front oil slows dive and steering, better on smooth tracks)"
+  scope: [1-10-stadium]
+
+- id: kb-st-shockoil-front-thinner-016
+  setting: front_shock_oil
+  direction: decrease
+  effects:
+    - { axis: front_compliance_over_bumps, change: more }
+    - { axis: initial_steering_reaction, change: faster }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip]
+    reduced_on: [smooth, high_grip, big_jumps]
+  counter_indications: [twitchy, nosedive_jumps]
+  magnitude_guidance: "One oil step (~50-100 cSt) thinner at a time (AE p.39: thinner = faster rebound over small bumps). Frees the front to follow rough ground and react quicker on turn-in; too thin lets the front dive on braking and off jumps."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.39 'Shock Fluid' — thinner/lighter: faster rebound for many small bumps"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter front oil more responsive, better over bumps)"
+  scope: [1-10-stadium]
+
+- id: kb-st-piston-rear-smaller-holes-017
+  setting: rear_shock_piston
+  direction: decrease   # smaller / fewer holes — more pack
+  effects:
+    - { axis: rear_damping_pack, change: more }
+    - { axis: jump_landing_hold_up, change: more }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: bouncy, phase: jumps }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough]
+  counter_indications: [poor_bump_handling, no_forward_bite]
+  magnitude_guidance: "One piston step (smaller/fewer holes) at a time (AE p.40: smaller holes = more damping/pack, better jump lifts & landings, for smoother tracks). Adds pack so the rear holds up on landings; too tight and it deflects over chop. AE p.40: one hole smaller ~= +5wt oil."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.40 'Shock Pistons' — smaller holes: more damping/pack, improve jump lifts and landings, for smoother tracks"
+    - "CompetitionX RC Tuning Guide — Shock Pistons (corroboration: fewer/smaller holes add pack/high-speed damping for jumps and smooth tracks)"
+  scope: [1-10-stadium]
+
+- id: kb-st-piston-rear-larger-holes-018
+  setting: rear_shock_piston
+  direction: increase   # larger / more holes — freer
+  effects:
+    - { axis: rear_damping_pack, change: less }
+    - { axis: rear_compliance_over_bumps, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: no_forward_bite, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [bottoming]
+  magnitude_guidance: "One piston step (larger/more holes) at a time (AE p.40: larger holes = less damping, for small bumps). Frees the rear over bumps for forward bite; pair with the right oil — pistons set the high/low-speed split, oil sets overall rate."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.40 'Shock Pistons' — larger holes: less damping, for small bumps"
+    - "CompetitionX RC Tuning Guide — Shock Pistons (corroboration: more/larger holes free damping for bumps and low-speed compliance)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: SPRINGS  (AE Cheat Sheets p.41, "Shock Springs")
+#   p.41 verbatim: softer/lighter tension "great on rear for off-road, gives more
+#   traction, best for small bumps"; stiffer/heavier "creates less traction, lifts
+#   higher off jumps, better suspension response."
+# ============================================================================
+
+- id: kb-st-rearspring-softer-019
+  setting: rear_spring
+  direction: decrease   # softer rear spring
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: small_bump_compliance, change: more }
+    - { axis: rear_roll, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll, bottoming]
+  magnitude_guidance: "One spring rate softer at a time (AE p.41: softer is great on the rear off-road, gives more traction, best for small bumps). Adds forward bite and bump grip; on a high-CG truck too soft lets the rear roll over on grip."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.41 'Shock Springs' — softer/lighter tension: great on rear for off-road, gives more traction, best for small bumps"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: softer rear springs add forward bite and rough-track traction)"
+  scope: [1-10-stadium]
+
+- id: kb-st-rearspring-stiffer-020
+  setting: rear_spring
+  direction: increase   # stiffer rear spring
+  effects:
+    - { axis: rear_traction, change: less }
+    - { axis: suspension_response, change: more }
+    - { axis: jump_lift, change: more }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: bottoming, phase: jumps }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough, low_grip]
+  counter_indications: [no_forward_bite, poor_bump_handling]
+  forbidden_on: [loose_dirt]
+  magnitude_guidance: "One spring rate stiffer at a time (AE p.41: stiffer creates less traction, lifts higher off jumps, better suspension response). Stiffens a rolling truck and stops squat/bottoming on high grip; AE says it costs traction, so don't stiffen on loose dirt where you need every bit of bite."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.41 'Shock Springs' — stiffer/heavier tension: creates less traction, lifts higher off jumps, better suspension response"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: stiffer rear springs reduce squat and roll, cost mechanical traction)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: ROLL CENTRE  (AE Cheat Sheets p.31-34, "Roll Centre")
+#   p.31/p.34 verbatim: lower roll centre (more washers under the ballstud) "leans more
+#   when cornering... for high-traction tracks"; raising roll centre (fewer washers)
+#   "for low-traction tracks." p.34: lower = softer in roll, less responsive, more
+#   forgiving; higher = more responsive. Set via inner camber-link ballstud height.
+# ============================================================================
+
+- id: kb-st-rollcenter-rear-lower-021
+  setting: rear_roll_center
+  direction: lower   # more washers under the rear inner ballstud
+  effects:
+    - { axis: rear_roll, change: more }
+    - { axis: responsiveness, change: less }
+    - { axis: forgiveness, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: twitchy, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "Add washers under the rear inner ballstud, one at a time (AE p.31/p.34). A lower rear roll centre lets the rear lean and load the tyre on high grip for drive and a more forgiving feel; re-check rear camber after."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.31 & p.34 'Roll Centre' — lower roll centre (more washers under ballstud): leans more when cornering, for high-traction tracks; lower = more forgiving, less reactive"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: lower rear roll centre adds roll for smoother, higher-peak rear grip)"
+  scope: [1-10-stadium]
+
+- id: kb-st-rollcenter-rear-higher-022
+  setting: rear_roll_center
+  direction: higher   # fewer washers under the rear inner ballstud
+  effects:
+    - { axis: rear_roll, change: less }
+    - { axis: responsiveness, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: traction_roll, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip]
+  counter_indications: [oversteer]
+  magnitude_guidance: "Remove a washer from under the rear inner ballstud, one at a time (AE p.31/p.34: higher roll centre for low-traction tracks, more reactive). Cuts rear roll for quicker response and reins in roll-over on low grip; on high grip it can make the rear feel abrupt."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.31 & p.34 'Roll Centre' — raising roll centre (fewer washers under ballstud): for low-traction tracks; higher = more reactive"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: higher rear roll centre reduces roll for sharper, less progressive rear grip)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: WHEELBASE  (AE Cheat Sheets p.17 'Chassis Length' + p.51 'Wheelbase')
+#   p.17: shorter → more steering, quicker response, quicker left-right; longer → more
+#   stability in high-speed corners, more rear traction, slower turn-in, better on rough,
+#   better jumping. p.51: shorter → more rear traction; longer → slightly more steering,
+#   better stability.
+# ============================================================================
+
+- id: kb-st-wheelbase-longer-023
+  setting: wheelbase
+  direction: increase
+  effects:
+    - { axis: high_speed_stability, change: more }
+    - { axis: rough_track_handling, change: better }
+    - { axis: jumping, change: better }
+    - { axis: turn_in_speed, change: slower }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: nosedive_jumps, phase: jumps }
+  conditions:
+    amplified_on: [fast_open, bumpy, rough]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "Move one rear-hub shim at a time, both sides (AE p.17). Longer wheelbase steadies a tall truck at speed, smooths the rough and squares up jumps at the cost of turn-in snap — the go-to for a fast bumpy stadium layout."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.17 'Chassis Length' — longer: more stability in high-speed corners, more rear traction, better on rough tracks, better jumping"
+    - "CompetitionX RC Tuning Guide — Wheelbase (corroboration: longer wheelbase adds high-speed and jumping stability, smooths the car)"
+  scope: [1-10-stadium]
+
+- id: kb-st-wheelbase-shorter-024
+  setting: wheelbase
+  direction: decrease
+  effects:
+    - { axis: steering_response, change: quicker }
+    - { axis: rear_traction, change: more }
+    - { axis: high_speed_stability, change: less }
+  addresses:
+    - { symptom: sluggish_steering }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open, bumpy]
+  counter_indications: [twitchy]
+  magnitude_guidance: "Move one rear-hub shim at a time, both sides (AE p.51: shorter shifts weight back for more rear traction; p.17: more steering, quicker left-right). Wakes up a lazy truck on a tight track; gives up high-speed stability."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.17 'Chassis Length' (shorter: more steering, quicker response) & p.51 'Wheelbase' (shorter: more rear traction, weight shifted back)"
+    - "CompetitionX RC Tuning Guide — Wheelbase (corroboration: shorter wheelbase increases agility and rotation)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: SLIPPER CLUTCH  (AE Cheat Sheets p.43)
+#   p.43 verbatim: tighter "for high bite tracks, more instant acceleration, smoother
+#   corner entry"; looser "for tracks with low traction, more traction exiting corner."
+#   On a 2WD truck the slipper is a primary forward-bite / wheelspin lever.
+# ============================================================================
+
+- id: kb-st-slipper-looser-025
+  setting: slipper_setting
+  direction: decrease   # looser slipper
+  effects:
+    - { axis: power_cushion, change: more }
+    - { axis: exit_traction, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: []
+  magnitude_guidance: "Loosen the slipper nut a small fraction of a turn at a time (AE p.43: looser for low-traction tracks, more traction exiting the corner). Slipping the spur cushions the power hit so a tall rear-drive truck hooks up instead of spinning; too loose and it feels soft and slow."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.43 'Slipper Clutch' — looser: for tracks with low traction, more traction exiting corner"
+    - "CompetitionX RC Tuning Guide — Slipper (corroboration: looser slipper cushions power for traction on low grip and protects the drivetrain)"
+  scope: [1-10-stadium]
+
+- id: kb-st-slipper-tighter-026
+  setting: slipper_setting
+  direction: increase   # tighter slipper
+  effects:
+    - { axis: drive_directness, change: more }
+    - { axis: instant_acceleration, change: more }
+    - { axis: corner_entry, change: smoother }
+  addresses:
+    - { symptom: sluggish_steering, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [no_forward_bite]   # too tight on low grip lights up the rears
+  forbidden_on: [loose_dirt]
+  magnitude_guidance: "Tighten the slipper nut a small fraction of a turn at a time (AE p.43: tighter for high-bite tracks, more instant acceleration, smoother corner entry). Direct drive helps on grip; on loose dirt a tight slipper just spins the rears, so don't tighten there."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.43 'Slipper Clutch' — tighter: for high bite tracks, more instant acceleration, smoother corner entry"
+    - "CompetitionX RC Tuning Guide — Slipper (corroboration: tighter slipper gives more direct drive and acceleration on high bite)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: WING  (AE Cheat Sheets p.52)
+#   p.52 verbatim: steeper angle "more rear traction"; more horizontal "standard
+#   traction." A stadium truck runs a cab/wing — high-speed rear stability lever.
+# ============================================================================
+
+- id: kb-st-wing-steeper-027
+  setting: wing
+  direction: increase   # steeper wing angle / more rear downforce
+  effects:
+    - { axis: rear_downforce, change: more }
+    - { axis: high_speed_rear_stability, change: more }
+  addresses:
+    - { symptom: oversteer, phase: high_speed }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [fast_open, high_grip]
+    reduced_on: [technical_tight]
+  counter_indications: [understeer]
+  magnitude_guidance: "Steepen the wing one shim/step at a time (AE p.52: steeper angle = more rear traction). Adds rear downforce to steady a loose/twitchy truck down a fast straight; on a tight track it just adds drag."
+  reversal_cost_minutes: 5
+  confidence: medium
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.52 'Wing' — steeper angle: more rear traction"
+    - "CompetitionX RC Tuning Guide — Wing (corroboration: more wing angle adds rear downforce and high-speed stability, adds drag)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: TYRES  (AE Cheat Sheets p.45 compound, p.47 profile)
+#   p.45 verbatim: softer compound "for smoother surfaces, for higher temperatures";
+#   harder compound "for bumpier surfaces, for grass, for wet conditions." Big-tyre,
+#   high-CG truck: tyre is the #1 grip and roll lever.
+# ============================================================================
+
+- id: kb-st-tire-rear-softer-028
+  setting: tire_rear_compound
+  direction: decrease   # softer compound
+  effects:
+    - { axis: rear_grip, change: more }
+    - { axis: heat_and_wear, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [smooth, low_grip, cold]
+    reduced_on: [hot, rough]
+  counter_indications: [traction_roll]
+  forbidden_on: [wet]
+  magnitude_guidance: "Step one compound softer (AE p.45: softer for smoother surfaces and higher track temperatures). Softer rears claw back forward bite on a low-grip/smooth surface; on a hooked-up high-CG truck more grip can promote traction-roll, and AE calls for harder rubber in the wet."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.45 'Tyre Compound' — softer compound for smoother surfaces, for higher temperatures"
+    - "CompetitionX RC Tuning Guide — Tires (corroboration: softer compound adds grip on low-bite/cold surfaces, wears and heats faster)"
+  scope: [1-10-stadium]
+
+- id: kb-st-tire-rear-harder-029
+  setting: tire_rear_compound
+  direction: increase   # harder compound
+  effects:
+    - { axis: rear_grip_on_high_bite, change: more_controlled }
+    - { axis: heat_and_wear, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: hard_to_drive }
+  conditions:
+    amplified_on: [hot, rough, wet, high_grip]
+    reduced_on: [cold, smooth]
+  counter_indications: [no_forward_bite]
+  forbidden_on: [loose_dirt]
+  magnitude_guidance: "Step one compound harder (AE p.45: harder for bumpier surfaces, grass and wet conditions). A harder rear keeps a tall truck from over-gripping into a traction-roll and survives heat/abrasion; too hard on loose dirt loses drive entirely."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.45 'Tyre Compound' — harder compound for bumpier surfaces, for grass, for wet conditions"
+    - "CompetitionX RC Tuning Guide — Tires (corroboration: harder compound suits high-bite/abrasive/hot tracks and lasts longer)"
+  scope: [1-10-stadium]
+
+# ============================================================================
+# FAMILY: WEIGHT / CG  (AE Cheat Sheets p.50 weights, p.58 battery placement)
+#   p.50: rear weight → less steering, more rear traction, more stable under accel &
+#   braking; front weight → more steering while accelerating, slower direction change.
+#   p.58 battery placement mirrors it: rearward → more rear traction, forward → more
+#   steering. The CG/balance lever on a high-CG truck.
+# ============================================================================
+
+- id: kb-st-battery-rearward-030
+  setting: battery_position
+  direction: rearward
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: front_steering, change: less }
+    - { axis: stability_under_accel_braking, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: unstable_braking, phase: braking }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "Move the battery one mounting step rearward (AE p.58: rearward = more rear traction, less steering; p.50 mirrors for added weight). Plants a loose/wheel-spinning rear and steadies braking; costs front steering — re-check ride height after, per AE p.29/p.30."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.58 'Battery Placement' — rearward: less steering, more rear traction; p.50 'Weight Distribution': rear weight = more rear traction, more stable under acceleration and braking"
+    - "CompetitionX RC Tuning Guide — Weight/Battery Position (corroboration: rearward bias adds forward bite and reduces steering)"
+  scope: [1-10-stadium]
+
+- id: kb-st-battery-forward-031
+  setting: battery_position
+  direction: forward
+  effects:
+    - { axis: front_steering, change: more }
+    - { axis: rear_traction, change: less }
+    - { axis: direction_change, change: slower }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [no_forward_bite, traction_roll]
+  magnitude_guidance: "Move the battery one mounting step forward (AE p.58: forward = more steering, less rear traction; p.50: front weight = more steering while accelerating). Cures an on-power push; on a tall truck a forward bias can lighten the rear into wheelspin — re-check ride height after."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.58 'Battery Placement' — forward: more steering, less rear traction; p.50 'Weight Distribution': front weight = more steering while accelerating, changes direction slower"
+    - "CompetitionX RC Tuning Guide — Weight/Battery Position (corroboration: forward bias adds steering, reduces rear traction)"
+  scope: [1-10-stadium]

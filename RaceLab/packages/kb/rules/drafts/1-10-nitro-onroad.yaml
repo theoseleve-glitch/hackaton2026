@@ -1,0 +1,713 @@
+# 1/10 200mm NITRO ON-ROAD TOURING SEDAN — tuning rules (DRAFT, NOT bundled, pending William's citation sign-off)
+#
+# Scope: [1-10-nitro-onroad]. On-road only (asphalt / carpet). The clutch, needles, glow plug, 2-speed
+# and any engine/fuel tuning are OUT OF SCOPE (D13) — no rule here touches them; those settings exist on
+# the template but the engineer refuses on them via taxonomy.yaml engine_scope_refusal.
+#
+# GROUNDING — every rule cites a source read verbatim with pdftotext during authoring:
+#   * "HUDY Set-Up Book" = the HUDY ALL-IN-ONE SET-UP SOLUTION, SET-UP THEORY chapter (printed in-PDF
+#     pages 28-46), the on-road geometry/shocks/roll-centre theory. Source file:
+#     site.petitrc.com/Tech/Handbooks/HudySetupBook.pdf — flagged "STRONGEST for ON-ROAD/touring" in
+#     docs/research/world-map/sources.json. Page numbers below are the printed page numbers of that chapter.
+#   * "XRAY NT1 Set-Up Book" = the XRAY NT1 1/10 NITRO ON-ROAD set-up book SET-UP THEORY chapter
+#     (teamxray.com/.../nt1_2013_setupbook.pdf) — the dedicated NITRO ON-ROAD reference; in-PDF page
+#     numbers used as printed. Used as the primary cite where it is the more class-exact source and as
+#     an independent cross-check elsewhere.
+#   * "AE RC Cheat Sheets" = Team Associated RC Cheat Sheets, on-road entries, page-cited
+#     (site.petitrc.com/reglages/RC_CheatSheets.pdf) — primary cite for tyres (HUDY/NT1 do not cover
+#     tyre compound/additive/insert), cross-check elsewhere.
+#
+# Every direction/effect was read from one of those documents; nothing here is invented.
+# `setting:` ids are all keys in kb/chassis/categories/1_10_nitro_onroad.json (capability gate).
+# Symptom/phase/condition tags are all drawn from kb/taxonomy.yaml (no invented tags).
+#
+# CONTRADICTION DISCIPLINE: no two rules give opposing `direction` on the same `setting` for the same
+# `symptom` unless their `conditions` are disjoint. The roll-centre pair (asphalt/low-grip vs carpet/
+# high-grip) is the canonical HUDY p.31 disjointness — front RC lower is recommended for asphalt &
+# low-medium traction, higher for carpet & high traction.
+
+# =====================================================================================================
+# FAMILY 1 — SHOCKS (oil)   HUDY Set-Up Book p.40 §2.5 ; XRAY NT1 Set-Up Book p.10-11
+# =====================================================================================================
+
+- id: kb-no-shock-front-thinner-501
+  setting: front_shock_oil
+  direction: decrease          # thinner front oil — faster shock action, more traction over bumps
+  effects:
+    - { axis: front_shock_action, change: faster }
+    - { axis: front_weight_transfer, change: faster }
+    - { axis: bump_compliance, change: more }
+    - { axis: chicane_settledness, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip, asphalt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One oil step (~25-50 cSt) at a time, both front shocks identical. HUDY: thinner oil gives faster shock action that keeps the tyre in contact with the surface for more traction, but the car is more easily unsettled by sharp direction changes (chicanes)."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thinner oil)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping — Shock Oil)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-shock-front-thicker-502
+  setting: front_shock_oil
+  direction: increase          # thicker front oil — slower shock action, more high-speed calm
+  effects:
+    - { axis: front_shock_action, change: slower }
+    - { axis: high_speed_stability, change: more }
+    - { axis: chicane_settledness, change: more }
+    - { axis: low_speed_twitch, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, carpet]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [sluggish_steering, understeer]
+  magnitude_guidance: "One oil step at a time, both front shocks identical. HUDY: thicker oil makes the car more stable at high speed but more twitchy at slow speed, and less likely to be unsettled by sharp direction changes such as chicanes."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thicker oil)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping — Shock Oil)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-shock-rear-thinner-503
+  setting: rear_shock_oil
+  direction: decrease          # thinner rear oil — faster rear shock action, more forward traction
+  effects:
+    - { axis: rear_shock_action, change: faster }
+    - { axis: rear_traction, change: more }
+    - { axis: bump_compliance, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip, asphalt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: faster (softer) shock action keeps the tyre in contact with the surface, which produces the most grip (front & rear)."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thinner oil / soft damping = most grip)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-shock-rear-thicker-504
+  setting: rear_shock_oil
+  direction: increase          # thicker rear oil — flatter on power, calmer at speed, less grip
+  effects:
+    - { axis: rear_shock_action, change: slower }
+    - { axis: high_speed_stability, change: more }
+    - { axis: rear_grip, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, carpet]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: thicker oil slows weight transfer and makes the car more stable at high speed; hard damping gives higher cornering speed but breaks traction more easily."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thicker oil / hard damping)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 2 — RIDE HEIGHT   HUDY Set-Up Book p.36 §2.3 ; XRAY NT1 Set-Up Book p.15
+# =====================================================================================================
+
+- id: kb-no-rideheight-lower-505
+  setting: ride_height
+  direction: decrease          # lower car — faster reaction, more overall grip, better on smooth
+  effects:
+    - { axis: reaction_speed, change: faster }
+    - { axis: overall_grip, change: more }
+    - { axis: high_speed_stability, change: more }
+  addresses:
+    - { symptom: sluggish_steering }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, asphalt]
+    reduced_on: [bumpy]
+  counter_indications: [bottoming]
+  magnitude_guidance: "0.5mm at a time via shock preload collars ONLY (HUDY: never via downstop screws), front and rear equally unless deliberately setting rake. HUDY: lowering the car gives faster reaction and more overall grip, and is better on smooth tracks."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Decreasing ride height)", "XRAY NT1 Set-Up Book p.15 (Ride Height)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rideheight-higher-506
+  setting: ride_height
+  direction: increase          # raise car — slower reaction, more roll, less grip, better on bumpy
+  effects:
+    - { axis: reaction_speed, change: slower }
+    - { axis: chassis_roll, change: more }
+    - { axis: overall_grip, change: less }
+    - { axis: bump_handling, change: better }
+  addresses:
+    - { symptom: bottoming, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.5mm at a time via shock preload collars ONLY. HUDY: raising the car slows reaction, increases chassis roll and decreases overall grip, but is better on bumpy tracks and gives more clearance to avoid bottoming."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Increasing ride height)", "XRAY NT1 Set-Up Book p.15 (Ride Height)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rideheight-rake-forward-507
+  setting: ride_height_rake
+  direction: front_lower_than_rear   # rake nose-down (front lower by ~0.5mm) — more steering into corner
+  effects:
+    - { axis: steering_into_corner, change: more }
+    - { axis: corner_stability, change: more }
+    - { axis: on_power_oversteer, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: []
+  counter_indications: [oversteer]
+  magnitude_guidance: "Set the front ~0.5mm lower than the rear, via preload. HUDY: 'front lower than rear by 0.5mm' increases steering into the corner and stability in corners, but increases on-power oversteer."
+  reversal_cost_minutes: 5
+  confidence: medium
+  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Front lower than rear by 0.5mm)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 3 — ROLL CENTRE   HUDY Set-Up Book p.31 §2.1 ; XRAY NT1 Set-Up Book p.29
+# NOTE the asphalt/carpet disjointness: front RC LOWER is recommended for ASPHALT + low-medium traction;
+# front RC HIGHER is recommended for CARPET + high traction. The two opposing-direction rules on
+# front_roll_center for understeer are therefore SAFE — their conditions are disjoint.
+# =====================================================================================================
+
+- id: kb-no-rollcenter-front-lower-508
+  setting: front_roll_center
+  direction: lower             # lower front RC — more forward traction & steering response (asphalt/low grip)
+  effects:
+    - { axis: forward_traction, change: more }
+    - { axis: on_throttle_steering, change: more }
+    - { axis: steering_response, change: more }
+    - { axis: chassis_roll, change: more }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [asphalt, low_grip]
+    reduced_on: [carpet, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "One camber-link / pivot step at a time, identical left/right, then re-check camber and ride height (HUDY: roll-centre changes impact downstops, camber and ride height). HUDY: a lower front roll centre improves forward traction and steering response and is recommended for asphalt tracks and low-medium traction."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Front Roll Center — Lower)", "XRAY NT1 Set-Up Book p.29 (Front Roll Center — Lower)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rollcenter-front-higher-509
+  setting: front_roll_center
+  direction: higher            # higher front RC — easier/less responsive, anti-traction-roll (carpet/high grip)
+  effects:
+    - { axis: forward_traction, change: less }
+    - { axis: responsiveness, change: less }
+    - { axis: chassis_roll, change: less }
+    - { axis: traction_roll_resistance, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [carpet, high_grip]
+    reduced_on: [asphalt, low_grip]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One camber-link / pivot step at a time, identical left/right; re-check camber after. HUDY: a higher front roll centre is easier to drive and less responsive, recommended for carpet or high-traction tracks, and (NT1) used in high-grip conditions to avoid traction rolling."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Front Roll Center — Higher)", "XRAY NT1 Set-Up Book p.29 (Front Roll Center — Higher / avoid traction rolling)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rollcenter-rear-lower-510
+  setting: rear_roll_center
+  direction: lower             # lower rear RC — improves traction, more on-power push (low grip)
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: on_power_push, change: more }
+    - { axis: cornering_speed, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, asphalt]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [understeer]
+  magnitude_guidance: "One camber-link step at a time, identical left/right; re-check rear camber after. HUDY: a lower rear roll centre improves traction and increases on-power push, recommended for low-traction tracks."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Rear Roll Center — Lower)", "XRAY NT1 Set-Up Book p.29 (Rear Roll Center)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rollcenter-rear-higher-511
+  setting: rear_roll_center
+  direction: higher            # higher rear RC — improves rotation & on-power steering (high grip)
+  effects:
+    - { axis: rotation, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: rear_grip, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip, asphalt]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One camber-link step at a time, identical left/right; re-check rear camber after. HUDY: a higher rear roll centre improves rotation and increases on-power steering, recommended for high-traction tracks."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Rear Roll Center — Higher)", "XRAY NT1 Set-Up Book p.29 (Rear Roll Center)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 4 — CAMBER   HUDY Set-Up Book p.41 §2.7 ; AE RC Cheat Sheets p.12/p.15
+# =====================================================================================================
+
+- id: kb-no-camber-front-more-negative-512
+  setting: front_camber
+  direction: decrease          # more negative front camber — more cornering grip
+  effects:
+    - { axis: front_cornering_grip, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "0.5° at a time. HUDY: more negative (inward) camber increases grip because the side-traction of the wheel increases; adjust front camber so the front tyres wear flat. Note (HUDY p.42): higher caster needs little/no camber, lower caster needs more — re-check after a caster change."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Set-Up Book p.41 §2.7 (Camber)", "AE RC Cheat Sheets p.12 (Camber, front — more = more high-speed traction through turns)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-camber-rear-less-negative-513
+  setting: rear_camber
+  direction: increase          # less negative rear camber (toward 0) — more straight-line drive, less rear grip
+  effects:
+    - { axis: straight_line_acceleration, change: more }
+    - { axis: rear_cornering_grip, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [oversteer]
+  magnitude_guidance: "0.5° at a time. AE Cheat Sheets: less rear camber (toward 0°) gives more straight-line acceleration; HUDY: more negative camber increases grip, so reducing it trades some rear grip for drive — adjust rear camber so the tyres wear slightly conical to the inside (HUDY p.41)."
+  reversal_cost_minutes: 5
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.15 (Camber, rear — less = more straight-line acceleration)", "HUDY Set-Up Book p.41 §2.7 (Camber — more negative = more grip)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 5 — CASTER   HUDY Set-Up Book p.42 §2.8 ; XRAY NT1 Set-Up Book p.16 ; AE RC Cheat Sheets p.16
+# =====================================================================================================
+
+- id: kb-no-caster-less-514
+  setting: caster
+  direction: decrease          # less caster (more vertical) — more entry steering, less straight-line stability
+  effects:
+    - { axis: off_power_entry_steering, change: more }
+    - { axis: straight_line_stability, change: less }
+    - { axis: on_power_mid_exit_steering, change: less }
+    - { axis: suspension_efficiency, change: more }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: off_power }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One caster step at a time, identical left/right. HUDY: less caster (more vertical) increases off-power steering at corner entry and suspension efficiency but decreases straight-line stability and on-power mid/exit steering. HUDY recommends a shallower (more inclined) caster on smooth high-grip and a steeper (more vertical) angle on slippery/rough — so reduce caster cautiously on rough surfaces."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Set-Up Book p.42 §2.8 (Effects of Caster — Less caster)", "XRAY NT1 Set-Up Book p.16 (Effects of Caster)", "AE RC Cheat Sheets p.16 (Caster, front — less = more steering entering corners)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-caster-more-515
+  setting: caster
+  direction: increase          # more caster (more inclined) — more straight-line/bump stability, less entry steering
+  effects:
+    - { axis: straight_line_stability, change: more }
+    - { axis: off_power_entry_steering, change: less }
+    - { axis: on_power_mid_exit_steering, change: more }
+    - { axis: bump_stability, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One caster step at a time, identical left/right. HUDY: more caster (more inclined) increases straight-line stability and on-power steering out of the corner and is more stable in bumpy conditions, but decreases off-power steering at corner entry."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Set-Up Book p.42 §2.8 (Effects of Caster — More caster)", "XRAY NT1 Set-Up Book p.16 (Effects of Caster)", "AE RC Cheat Sheets p.16 (Caster, front — more = more steering entering / less exiting)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 6 — TOE   HUDY Set-Up Book p.44 §2.9 ; XRAY NT1 Set-Up Book p.17
+# =====================================================================================================
+
+- id: kb-no-toe-front-less-516
+  setting: front_toe
+  direction: decrease          # less toe-in / toward toe-out — more entry steering, less stable on power
+  effects:
+    - { axis: corner_entry_steering, change: more }
+    - { axis: steering_response, change: faster }
+    - { axis: acceleration_stability, change: less }
+    - { axis: ease_of_driving, change: harder }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [twitchy, hard_to_drive]
+  magnitude_guidance: "0.5° at a time, both steering rods equally. HUDY: less front toe-in (toward toe-out) decreases understeer, increases steering at corner entry and steering response, but is less stable under acceleration and makes the car harder to drive. Front wheels should be neutral or toe-out — never rear toe-out."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Front, decreasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-toe-front-more-517
+  setting: front_toe
+  direction: increase          # more front toe-in — more on-power and straight-line stability
+  effects:
+    - { axis: on_power_stability, change: more }
+    - { axis: straight_line_stability, change: more }
+    - { axis: ease_of_driving, change: easier }
+  addresses:
+    - { symptom: twitchy }
+    - { symptom: hard_to_drive }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5° at a time, both steering rods equally. HUDY: more front toe-in is more stable on-power and on the straight (at the expense of some traction/turn-in). Keep the front at neutral or toe-out for steering; only add toe-in to calm a nervous car."
+  reversal_cost_minutes: 5
+  confidence: medium
+  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Front, increasing = more stable on-power & straight)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-toe-rear-more-518
+  setting: rear_toe
+  direction: increase          # more rear toe-in — more traction & stability, more push, less cornering speed
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: stability, change: more }
+    - { axis: understeer, change: more }
+    - { axis: cornering_speed, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: unstable_braking, phase: braking }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: []
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5° at a time. HUDY: more rear toe-in increases traction and stability and adds push at the cost of cornering speed. Rear wheels must ALWAYS have toe-in, never toe-out."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Rear, increasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe — Rear)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-toe-rear-less-519
+  setting: rear_toe
+  direction: decrease          # less rear toe-in (never below 0) — more rotation & cornering speed, less traction
+  effects:
+    - { axis: cornering_speed, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: rotation, change: more }
+    - { axis: rear_traction, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip]
+  counter_indications: [oversteer, unstable_braking]
+  magnitude_guidance: "0.5° at a time; NEVER go below 0° (no rear toe-out). HUDY: less rear toe-in gives more cornering speed, more on-power steering and better rotation, but less traction and less stability."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Rear, decreasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe — Rear)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 7 — TRACK-WIDTH   HUDY Set-Up Book p.41 §2.6
+# =====================================================================================================
+
+- id: kb-no-trackwidth-front-wider-520
+  setting: front_track_width
+  direction: increase          # wider front — less front traction & response, anti-traction-roll
+  effects:
+    - { axis: front_traction, change: less }
+    - { axis: steering_response, change: slower }
+    - { axis: traction_roll_resistance, change: more }
+    - { axis: ease_of_driving, change: easier }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "Add a thin shim per side at a time, symmetric left/right. HUDY: a wider front track decreases front traction and steering response, is easier to drive, reduces traction rolling, and is recommended for high-traction tracks."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Front, Wider)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-trackwidth-front-narrower-521
+  setting: front_track_width
+  direction: decrease          # narrower front — more front traction & response
+  effects:
+    - { axis: front_traction, change: more }
+    - { axis: steering_response, change: faster }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "Remove a thin shim per side at a time, symmetric left/right. HUDY: a narrower front track increases front traction and steering response and is recommended for low-medium traction tracks."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Front, Narrower)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-trackwidth-rear-wider-522
+  setting: rear_track_width
+  direction: increase          # wider rear — more stability, less rotation, more on-power push
+  effects:
+    - { axis: stability, change: more }
+    - { axis: rotation, change: less }
+    - { axis: on_power_push, change: more }
+    - { axis: traction_roll_resistance, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "Add a thin shim per side at a time, symmetric left/right. HUDY: a wider rear track is more stable, easier to drive, gives less rotation and more on-power push, and is recommended for high-traction tracks."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Rear, Wider)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-trackwidth-rear-narrower-523
+  setting: rear_track_width
+  direction: decrease          # narrower rear — more rotation & cornering speed, less stable
+  effects:
+    - { axis: rotation, change: more }
+    - { axis: cornering_speed, change: more }
+    - { axis: stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: understeer, phase: on_power }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [oversteer]
+  magnitude_guidance: "Remove a thin shim per side at a time, symmetric left/right. HUDY: a narrower rear track is less stable, gives better rotation and increases cornering speed, and is recommended for low-medium traction tracks."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Rear, Narrower)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 8 — ANTI-ROLL BARS   XRAY NT1 Set-Up Book p.19 ; HUDY Set-Up Book p.40 (damping ↔ roll)
+# =====================================================================================================
+
+- id: kb-no-frontbar-stiffer-524
+  setting: front_sway_bar
+  direction: increase          # stiffer front bar — less front grip, more off-power entry steering balance
+  effects:
+    - { axis: chassis_roll, change: less }
+    - { axis: front_grip, change: less }
+    - { axis: rear_grip, change: more }
+    - { axis: off_power_entry_steering, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One wire size (or one blade-angle step) at a time, both sides equal. NT1: a stiffer FRONT anti-roll bar decreases chassis roll, decreases front grip (increases rear grip), increases off-power steering at corner entry and quickens steering response — use a stiffer front bar to settle entry oversteer on a high-grip surface."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["XRAY NT1 Set-Up Book p.19 (Front Anti-Roll Bar — Stiffer)", "HUDY Set-Up Book p.40 §2.5 (less chassis roll = higher cornering speed / less grip)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-frontbar-softer-525
+  setting: front_sway_bar
+  direction: decrease          # softer front bar — more front grip, less off-power entry steering
+  effects:
+    - { axis: chassis_roll, change: more }
+    - { axis: front_grip, change: more }
+    - { axis: rear_grip, change: less }
+    - { axis: off_power_entry_steering, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [oversteer, traction_roll]
+  magnitude_guidance: "One wire size (or one blade-angle step) softer at a time, both sides equal. NT1: a softer FRONT anti-roll bar increases chassis roll, increases front grip (decreases rear grip) and slows steering response — soften the front bar to add front grip on a low-grip surface."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["XRAY NT1 Set-Up Book p.19 (Front Anti-Roll Bar — Softer)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rearbar-stiffer-526
+  setting: rear_sway_bar
+  direction: increase          # stiffer rear bar — less rear grip, more on-power steering/rotation
+  effects:
+    - { axis: chassis_roll, change: less }
+    - { axis: rear_grip, change: less }
+    - { axis: front_grip, change: more }
+    - { axis: on_power_steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip]
+  counter_indications: [oversteer, no_forward_bite]
+  magnitude_guidance: "One wire size stiffer at a time, both sides equal. NT1: a stiffer REAR anti-roll bar decreases chassis roll, decreases rear grip (increases front grip), increases on-power steering and quickens steering response in high-speed chicanes — stiffen the rear bar to cure on-power push on a high-grip surface."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["XRAY NT1 Set-Up Book p.19 (Rear Anti-Roll Bar — Stiffer)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-rearbar-softer-527
+  setting: rear_sway_bar
+  direction: decrease          # softer rear bar — more rear grip / forward bite, less on-power steering
+  effects:
+    - { axis: chassis_roll, change: more }
+    - { axis: rear_grip, change: more }
+    - { axis: on_power_steering, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [understeer]
+  magnitude_guidance: "One wire size softer at a time, both sides equal. NT1: a softer REAR anti-roll bar increases chassis roll and rear grip and decreases on-power steering — soften the rear bar to add rear traction / forward bite on a low-grip surface."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources: ["XRAY NT1 Set-Up Book p.19-20 (Rear Anti-Roll Bar — Softer)"]
+  scope: [1-10-nitro-onroad]
+
+# =====================================================================================================
+# FAMILY 9 — TYRES (compound / additive / insert)   AE RC Cheat Sheets p.45/p.46/p.48
+# HUDY/NT1 do not cover tyre compound/additive — AE RC Cheat Sheets is the page-cited primary here.
+# =====================================================================================================
+
+- id: kb-no-tyre-compound-softer-528
+  setting: tire_compound
+  direction: softer            # softer compound — for smoother surfaces / higher track temps
+  effects:
+    - { axis: mechanical_grip, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [smooth, hot]
+    reduced_on: [bumpy, cold]
+  counter_indications: []
+  forbidden_on: [wet]
+  magnitude_guidance: "Step ONE compound softer and re-evaluate. AE Cheat Sheets: a softer compound is for smoother surfaces and higher temperatures. Verify the compound is legal for your class. (AE lists harder for wet/grass — do not pick softer in the wet.)"
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.45 (Tyre Compound — softer for smoother surfaces / higher temperatures)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-tyre-compound-harder-529
+  setting: tire_compound
+  direction: harder            # harder compound — for bumpier surfaces / wet
+  effects:
+    - { axis: mechanical_grip, change: less }
+    - { axis: durability, change: more }
+  addresses:
+    - { symptom: twitchy }
+  conditions:
+    amplified_on: [bumpy, wet]
+    reduced_on: [smooth, hot]
+  counter_indications: [understeer]
+  magnitude_guidance: "Step ONE compound harder and re-evaluate. AE Cheat Sheets: a harder compound is for bumpier surfaces, for grass and for wet conditions. Verify the compound is legal for your class."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.45 (Tyre Compound — harder for bumpier surfaces / wet conditions)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-tyre-additive-on-530
+  setting: tire_additive
+  direction: apply             # apply additive/sauce on prepared (rubber) surfaces
+  effects:
+    - { axis: mechanical_grip, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [dusty]
+  counter_indications: []
+  forbidden_on: [dusty]
+  magnitude_guidance: "Apply tyre sauce/additive on PREPARED surfaces for rubber tyres, per AE; do NOT use additive when the surface is dusty or dirty (it picks up grit and kills grip). Respect class additive rules and timing — many classes regulate or ban additive."
+  reversal_cost_minutes: 5
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.48 (Tyre Sauce / Tyre Additive — add sauce for prepared surfaces / for rubber tyres; no sauce when surface is dusty or dirty)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-tyre-insert-firmer-531
+  setting: tire_insert
+  direction: firmer            # firmer insert — better cornering, less rolling resistance, less raw traction
+  effects:
+    - { axis: cornering_support, change: more }
+    - { axis: rolling_resistance, change: less }
+    - { axis: raw_traction, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip]
+  counter_indications: [bouncy, understeer]
+  magnitude_guidance: "Step to a firmer insert and re-evaluate. AE Cheat Sheets: a harder (firmer) insert gives less rolling resistance and better cornering, but too firm an insert makes the car bounce and lose traction."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.46 (Tyre Inserts, foam — harder = less rolling resistance / better cornering; too firm bounces)"]
+  scope: [1-10-nitro-onroad]
+
+- id: kb-no-tyre-insert-softer-532
+  setting: tire_insert
+  direction: softer            # softer insert — more traction, more drag
+  effects:
+    - { axis: raw_traction, change: more }
+    - { axis: rolling_resistance, change: more }
+    - { axis: cornering_support, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [low_grip]
+    reduced_on: [high_grip, carpet]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "Step to a softer insert and re-evaluate. AE Cheat Sheets: a softer insert gives more traction but more drag; too light a foam makes the car wander and feel unstable."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources: ["AE RC Cheat Sheets p.46 (Tyre Inserts, foam — softer = more traction / more drag)"]
+  scope: [1-10-nitro-onroad]
