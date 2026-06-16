@@ -1,0 +1,190 @@
+{
+  "_meta": {
+    "title": "RaceLab grounding world-map: authoritative, citable RC tuning references by category",
+    "purpose": "Map where the deterministic, grounded race-engineer chatbot CAN cite a real source per RC category, and where it must stay silent. Every source below was verified to exist (real published title or live/resolving URL) as of the research date. No fabricated sources.",
+    "researched_on": "2026-06-16",
+    "verification_note": "URLs marked verified either returned content or downloaded a real binary of plausible size during research. Some manufacturer/petitrc PDFs are real files but not machine-text-extractable (scanned/compressed); their existence is confirmed by successful download, not page-by-page text read. page_cited_quality=true means it is a real book or fixed-layout PDF you can cite a stable page number from."
+  },
+  "sources": [
+    {
+      "title": "HUDY Set-Up Book / HUDY RC Setup Guide (on-road + the older cross-discipline setup book)",
+      "author_or_publisher": "HUDY / Martin Hudy",
+      "format": "pdf",
+      "url": "https://site.petitrc.com/Tech/Handbooks/HudySetupBook.pdf",
+      "categories_covered": ["1/10 electric touring", "1/8 GT & 1/10 nitro on-road", "1/12 pan", "1/10 F1"],
+      "settings_covered": ["ride height", "droop", "camber", "caster", "toe", "shocks", "springs", "anti-roll bars", "geometry", "gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "The cross-category gold standard RaceLab already leans on for the HUDY-sourced 68-rule KB. The widely circulated 'HUDY Setup Book' / on-road setup guide is fixed-layout and page-citable. STRONGEST for ON-ROAD/touring. NOTE: it is primarily on-road tuning theory; the off-road grounding RaceLab currently uses comes from HUDY's separate off-road setup-system material. Same PDF also hosted at rchotwheels.nl and hudy.net (file_id 2362). Verify which exact edition the KB cites before extending."
+    },
+    {
+      "title": "HUDY On Road Setup Guide (official HUDY download)",
+      "author_or_publisher": "HUDY",
+      "format": "pdf",
+      "url": "https://www.hudy.net/xhudy/showfile.php?file_id=1470",
+      "categories_covered": ["1/10 electric touring", "1/8 GT & 1/10 nitro on-road"],
+      "settings_covered": ["ride height", "droop", "camber", "caster", "toe", "shocks", "springs", "anti-roll bars", "roll centre", "gearing"],
+      "page_cited_quality": true,
+      "notes": "Official HUDY-hosted PDF (~2.2MB, downloaded OK). On-road focused; explains the effect of each adjustment on handling. Free, redistributable as a track-side reference."
+    },
+    {
+      "title": "Essential Off-road RC Racer's Guide",
+      "author_or_publisher": "Dave B Stevens (ISBN 978-0648581147)",
+      "format": "book",
+      "url": "https://www.davebstevens.com/off-road",
+      "categories_covered": ["1/8 off-road buggy nitro+electric", "1/10 2WD & 4WD off-road", "stadium truck", "short course", "1/8 truggy"],
+      "settings_covered": ["camber", "caster", "toe", "ackermann", "kick-up", "anti-squat", "ride height", "droop", "shocks", "springs", "pistons", "shock oil", "sway bars", "diffs", "wings/aero", "tyres", "gearing"],
+      "page_cited_quality": true,
+      "notes": "330-page full-colour book; 96 pages on every setting A-Z (what it does, how it works, effect, advice) + 28 pages on tyres + jumping. Written with IFMAR World Champs Bruno Coelho & Billy Easton. The single best off-road grounding reference if William acquires it. Page-citable (print + eBook). HIGH PRIORITY ACQUISITION for off-road rule expansion."
+    },
+    {
+      "title": "Essential Touring Car RC Racer's Guide",
+      "author_or_publisher": "Dave B Stevens (ISBN 978-0648581123)",
+      "format": "book",
+      "url": "https://www.davebstevens.com/touring-car",
+      "categories_covered": ["1/10 electric touring"],
+      "settings_covered": ["camber", "caster", "toe", "ride height", "droop", "shocks", "springs", "shock oil", "anti-roll bars", "roll centre", "diffs", "ackermann", "tyres", "gearing"],
+      "page_cited_quality": true,
+      "notes": "264-page book, written with IFMAR Touring World Champs Marc Rheinard & Ronald Volker. Advice for every setup option + troubleshooting + quick-reference. Page-citable. Best dedicated touring grounding."
+    },
+    {
+      "title": "Essential 1/12th & F1 RC Racer's Guide",
+      "author_or_publisher": "Dave B Stevens",
+      "format": "book",
+      "url": "https://www.davebstevens.com/essential-12th-f1-rc-racers-guide",
+      "categories_covered": ["1/12 pan", "1/10 F1"],
+      "settings_covered": ["ride height", "camber", "caster", "track width", "roll centre", "tweak", "springs", "side springs", "tyres", "front end geometry", "rear pod"],
+      "page_cited_quality": true,
+      "notes": "153-page book, contributors David Spashett (3x 1/12 World Champ) & Jan Ratheisky (2018 F1 World Champ). 60+ pages on every setting A-Z. The ONLY strong, page-citable dedicated reference found for 1/12 pan and 1/10 F1 — these categories are otherwise forum-only. HIGH PRIORITY if RaceLab wants pan/F1 coverage."
+    },
+    {
+      "title": "TLR 8IGHT-X Elite Tuning Guide (and per-vehicle TLR tuning guides)",
+      "author_or_publisher": "Team Losi Racing / Horizon Hobby",
+      "format": "pdf",
+      "url": "https://www.tlracing.com/vehicle-support/",
+      "categories_covered": ["1/8 off-road buggy nitro+electric", "1/10 2WD & 4WD off-road", "1/8 truggy"],
+      "settings_covered": ["shocks", "shock oil", "pistons", "springs", "diffs", "diff fluid", "geometry (camber/caster/toe)", "kick-up", "anti-squat", "ride height", "sway bars", "tyres", "wing/aero"],
+      "page_cited_quality": true,
+      "notes": "Official TLR tuning guide exists for the 8IGHT-X Elite (and others); describes the handling effect of each option (e.g. CVA vs universals, surface-specific). Fixed-layout, page-citable. Per-vehicle so coverage is model-specific. Free downloads at tlracing.com/vehicle-support. Good off-road manufacturer cross-check for HUDY/Stevens rules."
+    },
+    {
+      "title": "Team Associated RC Cheat Sheets / Vehicle Tuning Guides (A-Team Apps)",
+      "author_or_publisher": "Team Associated / Associated Electrics",
+      "format": "pdf",
+      "url": "https://apps.associatedelectrics.com/ateamapps/index.html",
+      "categories_covered": ["1/10 2WD & 4WD off-road", "stadium truck", "short course", "1/8 off-road buggy nitro+electric", "1/10 electric touring", "1/8 GT & 1/10 nitro on-road", "1/12 pan"],
+      "settings_covered": ["shocks", "shock oil", "springs", "pistons", "diffs", "weight bias", "camber", "caster", "toe", "ackermann", "ride height", "droop", "sway bars", "gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "The 'RC Cheat Sheets' (originally a 29-page / later 90+ cheat-sheet PDF) explicitly answer 'how will a longer/shorter, higher/lower, thicker/thinner adjustment change the handling' across onroad, offroad, oval, pan, electric AND nitro — broadest single cross-category effect chart found. Now migrated to the free A-Team Apps mobile/web tool; the legacy PDF (RC_CheatSheets.pdf) is mirrored on petitrc. Also model-specific pill/weight-bias charts (B6, B64, RC8B3.1) at the same portal."
+    },
+    {
+      "title": "Team Associated RC Cheat Sheets (legacy PDF mirror)",
+      "author_or_publisher": "Team Associated (mirrored on petitrc)",
+      "format": "pdf",
+      "url": "https://site.petitrc.com/reglages/RC_CheatSheets.pdf",
+      "categories_covered": ["1/10 2WD & 4WD off-road", "stadium truck", "short course", "1/8 off-road buggy nitro+electric", "1/10 electric touring", "1/8 GT & 1/10 nitro on-road", "1/12 pan"],
+      "settings_covered": ["shocks", "shock oil", "springs", "pistons", "diffs", "camber", "caster", "toe", "ride height", "sway bars", "gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "Real, downloadable 2.1MB PDF (confirmed). Stable page-citable layout of the Associated cheat sheets. Convenient because it is a fixed file rather than the app. Same content family as the A-Team Apps entry above."
+    },
+    {
+      "title": "XRAY Set-Up Books (NT1, T1R, and per-model X4/T4 setup books)",
+      "author_or_publisher": "XRAY / Team XRAY",
+      "format": "pdf",
+      "url": "https://www.teamxray.com/nt1/2014/download/files/nt1_2013_setupbook.pdf",
+      "categories_covered": ["1/10 electric touring", "1/8 GT & 1/10 nitro on-road"],
+      "settings_covered": ["camber", "caster", "toe", "ride height", "droop", "shocks", "springs", "anti-roll bars", "roll centre", "diffs", "ackermann", "engine mount/flex", "rollout/gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "Official XRAY set-up books are detailed, fixed-layout PDFs that explain the effect of each setting change (e.g. horizontal mount improves direction change). NT1 = 1/10 nitro on-road; T-series = electric touring. Page-citable. Strong on-road cross-check. (XRAY is on-road/touring + some off-road kits, but the rich setup books are on-road.)"
+    },
+    {
+      "title": "Mugen MSR Off-Road Tuning Guide",
+      "author_or_publisher": "Mugen Seiki Racing (Adam Drake)",
+      "format": "pdf",
+      "url": "https://www.mugenracing.com/content/tuning%20guide/MSR%20tuning%20guide.pdf",
+      "categories_covered": ["1/8 off-road buggy nitro+electric", "1/8 truggy"],
+      "settings_covered": ["shocks", "shock oil", "pistons", "springs", "diffs", "roll centre", "arm positions", "kick-up", "anti-squat", "ride height", "camber", "caster", "tyres", "wing/aero"],
+      "page_cited_quality": true,
+      "notes": "Official Mugen-hosted PDF (~204KB, downloaded OK). Off-road tuning guide describing how roll-centre/arm/kick changes affect steering, grip and traction. Page-citable. Good 1/8 off-road manufacturer cross-check alongside TLR and HUDY."
+    },
+    {
+      "title": "Mugen MTX-4 Touring Car Setup Guide (interactive handling matrix)",
+      "author_or_publisher": "Mugen / hosted on RCTech",
+      "format": "pdf",
+      "url": "https://www.rctech.net/forum/attachments/nitro-road/102585d1133246973-mugen-mtx-4-touringcarsetupguide.pdf",
+      "categories_covered": ["1/8 GT & 1/10 nitro on-road", "1/10 electric touring"],
+      "settings_covered": ["camber", "caster", "toe", "ride height", "springs", "shocks", "sway bars", "diffs", "roll centre"],
+      "page_cited_quality": true,
+      "notes": "Classic 'R/C Car Handling — Touring Car Setup Guide' interactive matrix mapping each change to a handling effect. Hosted as an RCTech attachment (403 on direct bot fetch but real file). Useful as corroboration, not a primary citation source given the unofficial host."
+    },
+    {
+      "title": "CompetitionX RC Suspension Tuning Guide",
+      "author_or_publisher": "CompetitionX.com",
+      "format": "web",
+      "url": "https://www.competitionx.com/rc-tuning-guide/",
+      "categories_covered": ["1/10 2WD & 4WD off-road", "stadium truck", "short course", "1/8 off-road buggy nitro+electric", "1/10 electric touring", "1/8 GT & 1/10 nitro on-road"],
+      "settings_covered": ["camber", "camber gain", "caster", "toe", "active toe", "shocks", "shock rebound", "springs", "oil", "pistons", "preload", "limiters", "ride height", "anti-roll bars", "diffs", "diff height", "diff fluid", "ackermann", "anti-squat"],
+      "page_cited_quality": false,
+      "notes": "Excellent structured WEB reference covering nearly every setting family with effect-on-handling explanations, explicitly framed as applying to 'most cars'. NOT page-citable (web article, mutable). Use as corroboration / NLU coverage map, never as the sole grounding citation under the D18 'grounded or silent' rule."
+    },
+    {
+      "title": "petitrc Tech Handbooks (Hudy Setup Book, Murfdogg Chassis Tuning 101, TC3 Tuning Guide, manufacturer setup archives)",
+      "author_or_publisher": "petitrc.com (curated mirror)",
+      "format": "pdf",
+      "url": "https://site.petitrc.com/Tech/Handbooks/",
+      "categories_covered": ["1/10 2WD & 4WD off-road", "1/10 electric touring", "1/8 GT & 1/10 nitro on-road", "stadium truck", "oval/dirt-oval"],
+      "settings_covered": ["camber", "caster", "toe", "shocks", "shock oil", "springs", "ride height", "diffs", "sway bars", "weight bias", "gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "petitrc mirrors fixed-layout, page-citable PDFs: HudySetupBook.pdf, Murfdogg's 21-page 'Chassis Tuning 101' (dirt oval), the Associated TC3 Tuning Guide, and a deep per-manufacturer setup-sheet archive. Stable host. Good citation source AND a chassis-spec extraction feeder (matches RaceLab's extraction-pipeline method)."
+    },
+    {
+      "title": "Manual setup-effect tables (per-kit manuals: TLR, Associated, XRAY, Mugen, Yokomo, Serpent, Schumacher, Kyosho)",
+      "author_or_publisher": "Various manufacturers",
+      "format": "manual_table",
+      "url": null,
+      "categories_covered": ["1/8 off-road buggy nitro+electric", "1/8 truggy", "1/10 2WD & 4WD off-road", "stadium truck", "short course", "1/10 electric touring", "1/8 GT & 1/10 nitro on-road", "1/5 large scale"],
+      "settings_covered": ["shocks", "shock oil", "springs", "diffs", "camber", "caster", "toe", "ride height", "anti-squat", "kick-up", "sway bars", "gearing", "tyres"],
+      "page_cited_quality": true,
+      "notes": "Most competition kit manuals include a 'tuning' / 'effect of adjustments' page (e.g. TLR 8IGHT 2.0, RC10B6.4, Schumacher CAT PB Dirt/Mod Spec). Page-citable per model but coverage is per-kit and scattered. These are the natural per-chassis grounding source as RaceLab extends its chassis registry — fold them in via the existing extraction pipeline. Kyosho MP-series manuals already feed the current 1/8 KB."
+    },
+    {
+      "title": "Traxxas Slash Spec Racing Setup Guide",
+      "author_or_publisher": "Traxxas",
+      "format": "web",
+      "url": "https://traxxas.com/articles/Slash-Spec-Racing-Setup-Guide",
+      "categories_covered": ["short course"],
+      "settings_covered": ["shocks", "shock oil", "preload", "camber", "toe", "roll centre", "diffs", "diff fluid", "gearing"],
+      "page_cited_quality": false,
+      "notes": "Official Traxxas guide for the Slash short-course truck with concrete effect-of-change guidance (e.g. 50wt front / 60wt rear, toe-in for stability, 100K diff oil for loose tracks). Web article (also mirrored as a PDF on scribd). The most authoritative dedicated SHORT-COURSE source found, though brand-specific. Pair with Dave B Stevens off-road book for general SC theory."
+    },
+    {
+      "title": "RCTech.net & RCCrawler forum setup-theory threads + RC Garage / wiki tools",
+      "author_or_publisher": "Community (RCTech, RCCrawler, RC Garage)",
+      "format": "web",
+      "url": "https://www.rctech.net/forum/",
+      "categories_covered": ["1/10 2WD & 4WD off-road", "1/12 pan", "1/10 F1", "crawler", "1/5 large scale"],
+      "settings_covered": ["shocks", "springs", "geometry", "diffs", "links", "weight/CG", "tyres"],
+      "page_cited_quality": false,
+      "notes": "Reputable community theory (e.g. 'Understanding Tuning', 'Understanding F1 Tuning', RCCrawler suspension-setup threads). NOT citable under D18 (mutable, anonymous, no page). Useful ONLY as a coverage/gap map and NLU vocabulary source — the engineer must refuse rather than cite these. This is effectively the floor for crawler and 1/5 large scale, which is why those categories are thinly sourced."
+    }
+  ],
+  "grounding_assessment": {
+    "well_sourced_categories": [
+      "1/8 off-road buggy nitro+electric (HUDY off-road material already in KB + TLR 8IGHT-X guide + Mugen MSR guide + Dave B Stevens off-road book + Kyosho MP manuals)",
+      "1/10 2WD & 4WD off-road (Dave B Stevens off-road book + Associated cheat sheets/pill charts + CompetitionX + per-kit manuals)",
+      "1/10 electric touring (HUDY setup books + XRAY set-up books + Dave B Stevens touring book + Mugen MTX matrix)",
+      "1/8 GT & 1/10 nitro on-road (HUDY + XRAY NT1 + Mugen MTX touring guide)"
+    ],
+    "moderately_sourced_categories": [
+      "1/8 truggy (rides on 1/8 buggy sources — TLR/Mugen/Associated truggy variants — but no truggy-specific authority)",
+      "stadium truck (Associated cheat sheets + Dave B Stevens off-road book cover it, but no dedicated stadium-truck reference)",
+      "short course (Traxxas Slash Spec guide is brand-specific + Dave B Stevens off-road book; usable but narrow)",
+      "1/12 pan (only Dave B Stevens 1/12&F1 book — strong but single-source; needs acquisition)",
+      "1/10 F1 (only Dave B Stevens 1/12&F1 book — same single-source situation)"
+    ],
+    "thinly_sourced_categories": [
+      "1/5 large scale (forum + manufacturer manuals only; no page-citable tuning theory found — engineer should refuse most large-scale-specific tuning)",
+      "crawler (comp crawler/scaler setup is forum-driven, philosophy differs fundamentally from racing; CompetitionX touches suspension but no citable crawler authority — engineer should refuse)"
+    ],
+    "recommendation": "RaceLab can confidently ground rules NOW for 1/8 off-road buggy (already does), 1/10 2WD/4WD off-road, 1/10 electric touring, and nitro on-road — all have multiple real, page-citable references (HUDY, XRAY, TLR, Mugen, Associated cheat sheets, plus the Dave B Stevens off-road and touring books). To extend safely, William should acquire two Dave B Stevens books — the 'Essential Off-road RC Racer's Guide' (unlocks deep off-road + stadium truck + short course) and the 'Essential 1/12th & F1 RC Racer's Guide' (the ONLY strong source for pan and F1). For 1/5 large scale and crawler there is no page-citable tuning authority, so under D18 the engineer must stay silent / refuse on category-specific tuning until a real reference is acquired — do NOT bootstrap rules from forums."
+  }
+}

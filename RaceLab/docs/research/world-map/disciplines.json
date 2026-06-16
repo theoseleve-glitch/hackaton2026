@@ -1,0 +1,477 @@
+{
+  "_meta": {
+    "title": "RaceLab World Map of Competitive RC Racing — master taxonomy",
+    "generated": "2026-06-16",
+    "purpose": "Enumerate the full competitive RC racing taxonomy worldwide (chassis class x surface x power sub-class) and flag what RaceLab under-covers. in_racelab_coverage is judged against RaceLab's stated class-groups, NOT against extracted setup templates (only the Kyosho Inferno MP11 has a full template today; everything else is registry/category-stub).",
+    "coverage_note": "RaceLab's chassis registry/category stubs cover ~16 categories. A class flagged in_racelab_coverage=true means RaceLab acknowledges the class-group; it does NOT mean a tuned KB/template exists. The setup-axis gaps (surface + power sub-class) are the bigger advice risk than the chassis-class gaps.",
+    "governing_body_glossary": {
+      "IFMAR": "International Federation of Model Auto Racing — world championships",
+      "ROAR": "Remotely Operated Auto Racing — North American sanctioning body",
+      "EFRA": "European Federation of Radio Operated Model Automobiles",
+      "BRCA": "British Radio Car Association",
+      "JMRCA": "Japan Model Radio Control Association / Car",
+      "FEMCA": "Federation of Asia/Oceania",
+      "ETS": "Euro Touring Series (LRP/private series, on-road touring)",
+      "EOS": "Euro Offroad Series (private indoor carpet/astro offroad series)",
+      "USVTA": "United States Vintage Trans-Am (spec vintage touring series)",
+      "WGTR": "World GT-R rules (GT12 / WGT pan-car spec community)"
+    }
+  },
+  "disciplines": [
+    {
+      "name": "1/8 nitro off-road buggy",
+      "scale": "1/8",
+      "surface": ["high-bite clay", "hard-packed/blue-groove", "loamy dirt", "astroturf", "indoor clay"],
+      "power": ["nitro (.21 pull-start race engine)"],
+      "governing_bodies": ["IFMAR", "ROAR", "EFRA", "JMRCA"],
+      "setup_relevance": "The flagship outdoor class: long jumps and rough terrain make shock oil/piston, ride height, droop, diff oils (3-way) and tyre compound-vs-surface the dominant levers; engine clutch/needle tuning is a whole second domain. Setup swings hard with track moisture and time-of-day grip change.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.efra.ws/category/section-news/ignition-track/1-8-ic-track/", "https://www.redrc.net/2024/01/2025-ifmar-world-championship-calendar/"],
+      "notes": "RaceLab's deepest area — only fully-templated chassis (Kyosho Inferno MP11) lives here."
+    },
+    {
+      "name": "1/8 electric buggy (e-buggy)",
+      "scale": "1/8",
+      "surface": ["high-bite clay", "hard-packed", "loamy dirt", "astroturf"],
+      "power": ["brushless modified (no fixed turn cap, typ. 4-pole 2000-2100Kv on 4S)"],
+      "governing_bodies": ["IFMAR", "ROAR", "EFRA"],
+      "setup_relevance": "Same chassis family as nitro 1/8 buggy but battery weight bias (lower/centred) and instant electric torque shift CG, diff and traction-roll tuning; no clutch/needle, so the tuning surface is purely chassis+drivetrain+tyre.",
+      "in_racelab_coverage": true,
+      "sources": ["https://events.redrc.net/tag/2025-ifmar-18-electric-offroad-worlds-portugal/"],
+      "notes": "IFMAR added the inaugural 1/8 e-buggy World Championship for the 2025/26 cycle — a fast-growing class."
+    },
+    {
+      "name": "1/8 nitro truggy",
+      "scale": "1/8",
+      "surface": ["high-bite clay", "hard-packed", "loamy dirt"],
+      "power": ["nitro (.21/.28 truggy engine)"],
+      "governing_bodies": ["ROAR", "EFRA"],
+      "setup_relevance": "Taller, heavier, wider than 1/8 buggy on the same platform; big tyres and high CG make anti-squat, sway bars and shock position the key stability levers. Less an IFMAR-title class, more a regional/national staple.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": ""
+    },
+    {
+      "name": "1/8 electric truggy (e-truggy)",
+      "scale": "1/8",
+      "surface": ["clay", "hard-packed", "dirt"],
+      "power": ["brushless modified (4-pole, 4S)"],
+      "governing_bodies": ["ROAR (regional)"],
+      "setup_relevance": "Electric counterpart of nitro truggy; heavy battery + tall body amplifies traction roll, so sway-bar and droop tuning dominate. A real raced class at US club/regional level but absent from RaceLab.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amainhobbies.com/1-8-scale-electric-kits-cars-trucks/c7620"],
+      "notes": "FORGOTTEN: RaceLab lists nitro truggy + e-buggy but not e-truggy. Cheap to add — it reuses truggy chassis + e-buggy power vocabulary."
+    },
+    {
+      "name": "1/8 IC GT (on-road GT)",
+      "scale": "1/8",
+      "surface": ["asphalt", "high-grip rubber-laid track"],
+      "power": ["nitro (.21 on-road)", "electric (eGT, new IFMAR title)"],
+      "governing_bodies": ["IFMAR", "EFRA"],
+      "setup_relevance": "Heavy GT-bodied on-road car: aero/downforce, foam-vs-rubber tyre choice, camber/toe and high-speed stability dominate; near-zero suspension travel vs off-road. eGT now an IFMAR World Championship class (inaugural 2025, Peru).",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.redrc.net/2024/01/2025-ifmar-world-championship-calendar/", "https://www.efra.ws/category/section-news/ignition-track/1-8-ic-track/"],
+      "notes": "RaceLab covers the nitro/IC GT; the new electric eGT sub-variant should be flagged explicitly."
+    },
+    {
+      "name": "1/10 200mm nitro on-road touring",
+      "scale": "1/10",
+      "surface": ["asphalt", "rubber-laid high-grip"],
+      "power": ["nitro (.12 on-road)"],
+      "governing_bodies": ["IFMAR", "EFRA", "JMRCA"],
+      "setup_relevance": "200mm-bodied nitro sedan: tyre additive/compound, ride height, roll centre and clutch/needle. IFMAR 1/10 Nitro Touring World Championship class (2025 Costa Rica).",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.redrc.net/2024/01/2025-ifmar-world-championship-calendar/"],
+      "notes": ""
+    },
+    {
+      "name": "1/10 electric touring car (TC) — modified",
+      "scale": "1/10",
+      "surface": ["carpet", "asphalt", "rubber-laid"],
+      "power": ["brushless modified (typ. 6.5T-8.5T, boosted ESC)"],
+      "governing_bodies": ["IFMAR", "EFRA", "ETS", "ROAR"],
+      "setup_relevance": "The blue-riband on-road class: shimmed droop, roll centres, ARBs, diff/spool, camber/toe and tyre additive on glue-grip surfaces. Boosted/timing ESCs add motor-tuning as a lever. IFMAR ETC World Championship (2025 California).",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.redrc.net/2024/01/2025-ifmar-world-championship-calendar/"],
+      "notes": "RaceLab says 'touring (modified + stock)'. Carpet vs asphalt is a major un-modeled surface split inside this one class."
+    },
+    {
+      "name": "1/10 electric touring car (TC) — stock / spec (17.5T blinky)",
+      "scale": "1/10",
+      "surface": ["carpet", "asphalt", "rubber-laid"],
+      "power": ["brushless spec 17.5T blinky (non-timing ESC)", "13.5T blinky regional"],
+      "governing_bodies": ["ROAR", "EFRA", "ETS", "USVTA-adjacent"],
+      "setup_relevance": "Same chassis as modified TC but locked 17.5T blinky power flattens the powerband, so corner-speed/rotation and tyre management drive the setup far more than power delivery; gearing and rollout become a precise lever.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.amaintracks.com/race-classes/", "https://www.rctech.net/forum/radio-electronics/934180-why-17-5t-motors-used-stock-racing.html"],
+      "notes": "RaceLab acknowledges stock TC but the stock-vs-mod setup DIVERGENCE (power-down vs corner-speed) is the kind of thing advice must respect; verify it is modeled, not just labeled."
+    },
+    {
+      "name": "1/12 electric pan car (modified + stock)",
+      "scale": "1/12",
+      "surface": ["carpet", "indoor asphalt"],
+      "power": ["brushless modified", "brushless stock 13.5T/17.5T blinky"],
+      "governing_bodies": ["IFMAR", "EFRA", "ROAR"],
+      "setup_relevance": "Ultra-low single-cell pan car: side-spring/tube tuning, front end (kingpin/coil), ride height in tenths of a mm, and foam tyre diameter/compound. Tiny changes = big swings. IFMAR 1/12 Worlds (2025 China).",
+      "in_racelab_coverage": true,
+      "sources": ["https://en.wikipedia.org/wiki/IFMAR_1:12_Electric_Track_World_Championship", "https://www.associatedelectrics.com/news/latest_products/2993-new-the-rc12l-1-12-scale-competition-on-road-kit/"],
+      "notes": "Stock vs modified 1/12 are distinct race classes; flag both."
+    },
+    {
+      "name": "1/10 World GT / GT12 (WGT pan car)",
+      "scale": "1/10 - 1/12",
+      "surface": ["carpet", "asphalt"],
+      "power": ["brushless spec (GT12 21.5T-style, WGT spec)"],
+      "governing_bodies": ["BRCA", "EFRA (regional)", "WGTR community rules"],
+      "setup_relevance": "GT-bodied pan car (GT12 ~750g min, WGT ~1025g/200mm class): a separate body/aero and weight package from 1/12 track pan cars, with its own spring/ride-height window. Hugely popular UK/EU club racing.",
+      "in_racelab_coverage": false,
+      "sources": ["https://seattlercracers.com/specsrules/", "https://www.rctech.net/forum/electric-road/1123683-wgtr-2025-2026-a.html"],
+      "notes": "FORGOTTEN: distinct from RaceLab's '1/12 electric pan'. GT12 and World GT are big grassroots pan classes with their own bodies, weights and setup windows."
+    },
+    {
+      "name": "1/10 Formula 1 (F1 pan car)",
+      "scale": "1/10",
+      "surface": ["carpet", "asphalt"],
+      "power": ["brushless spec 21.5T blinky", "modified (regional)"],
+      "governing_bodies": ["EFRA", "ROAR", "JMRCA"],
+      "setup_relevance": "Open-wheel narrow-front pan car: front kingpin/caster, rear pod tuning, ride height and a narrow rubber-tyre window; extremely sensitive to track grip and tweak. 21.5T is the common spec.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.amaintracks.com/race-classes/"],
+      "notes": ""
+    },
+    {
+      "name": "1/10 2WD electric off-road buggy",
+      "scale": "1/10",
+      "surface": ["loamy dirt", "high-bite clay", "astroturf", "carpet", "blue-groove"],
+      "power": ["brushless modified", "brushless stock 17.5T blinky"],
+      "governing_bodies": ["IFMAR", "ROAR", "EFRA", "EOS"],
+      "setup_relevance": "The premier 1/10 off-road class: rear-drive means weight transfer, slipper, gull-wing/laydown trans, and tyre-vs-surface dominate; setup is radically different on loose dirt vs grippy astro/carpet. Both 2WD Worlds (2025 Australia) and stock/mod splits.",
+      "in_racelab_coverage": true,
+      "sources": ["https://en.wikipedia.org/wiki/2015_IFMAR_1:10_Electric_Off-Road_World_Championship_%E2%80%93_2WD", "https://www.eurorc.com/page/158/indoor-tire-recommendations-110-off-road"],
+      "notes": "Surface axis (dirt vs clay vs carpet/astro) is THE differentiator here and is the most setup-relevant gap to model."
+    },
+    {
+      "name": "1/10 4WD electric off-road buggy",
+      "scale": "1/10",
+      "surface": ["loamy dirt", "high-bite clay", "astroturf", "carpet", "blue-groove"],
+      "power": ["brushless modified", "brushless stock 17.5T blinky"],
+      "governing_bodies": ["IFMAR", "ROAR", "EFRA", "EOS"],
+      "setup_relevance": "4WD adds front/centre/rear diff tuning and a more planted-but-push-prone balance; sway bars and diff oils are key. Stock vs modified and dirt vs astro both swing setup. Worlds run alongside 2WD.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.redrc.net/2024/01/2025-ifmar-world-championship-calendar/"],
+      "notes": ""
+    },
+    {
+      "name": "1/10 stadium truck (2WD)",
+      "scale": "1/10",
+      "surface": ["dirt", "clay", "astroturf"],
+      "power": ["brushless modified", "brushless stock 17.5T blinky"],
+      "governing_bodies": ["ROAR", "EFRA (regional)"],
+      "setup_relevance": "2WD truck on buggy-derived chassis with big tyres/high CG: anti-squat, rear toe and tyre choice control wheelspin and stability. Strong US class, weaker in EU.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.amaintracks.com/race-classes/"],
+      "notes": ""
+    },
+    {
+      "name": "1/10 short course truck (2WD/4WD)",
+      "scale": "1/10",
+      "surface": ["dirt", "clay", "astroturf"],
+      "power": ["brushless spec 17.5T blinky (SC10/SCT spec)", "modified"],
+      "governing_bodies": ["ROAR"],
+      "setup_relevance": "Heavy SCORE-style body, lots of body roll and contact; sway bars, shock geometry and tyre wear dominate. Distinct 2WD and 4WD short course classes exist.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.amaintracks.com/race-classes/", "https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "RaceLab lists 'short course truck' generically — verify 2WD vs 4WD SCT are both representable; 4WD SCT is a separate setup problem."
+    },
+    {
+      "name": "1/5 large scale (1/5 & 1/6)",
+      "scale": "1/5 - 1/6",
+      "surface": ["asphalt (on-road LS)", "hard-packed dirt (off-road LS)"],
+      "power": ["gas (23-30cc 2-stroke)", "electric (large brushless)"],
+      "governing_bodies": ["EFRA (Large Scale section)", "FG/national LS series"],
+      "setup_relevance": "Heavy gas cars (FG/Smartech-style): real-car-like geometry, big shocks, brake balance and engine/clutch tuning. On-road LS and off-road LS are separate; 1/6 scale trucks sit adjacent.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.efra.ws/", "https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "RaceLab says '1/5 large scale'; 1/6 scale and the on-road-vs-off-road LS split are adjacent and under-specified."
+    },
+    {
+      "name": "Competition rock crawler (comp crawler)",
+      "scale": "1/10 (2.2 / 1.9 comp)",
+      "surface": ["rock", "boulder gates", "indoor comp course"],
+      "power": ["brushless/brushed low-Kv high-torque"],
+      "governing_bodies": ["USRCCA", "regional crawl series"],
+      "setup_relevance": "Not speed racing — a points/gate discipline: CG height, link geometry, droop, tyre foam compound and weight placement for grip and balance on vertical terrain. Totally different 'setup' vocabulary from racing classes.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "Distinct from scale/trail crawling (bashing). RaceLab covers comp crawler."
+    },
+    {
+      "name": "Monster truck racing/freestyle (Solid Axle Monster Truck, SAMT)",
+      "scale": "1/10 - 1/8",
+      "surface": ["dirt", "indoor arena", "ramps"],
+      "power": ["brushless"],
+      "governing_bodies": ["club/regional SAMT series"],
+      "setup_relevance": "Solid-axle leaf/link trucks for racing + freestyle: shock/spring for big landings, steering and CG. RaceLab has a monster_truck category stub. Niche racing, large basher overlap.",
+      "in_racelab_coverage": true,
+      "sources": ["https://www.amainhobbies.com/dirt-oval-1-10-scale-electric-kits-cars-trucks/c7613"],
+      "notes": "RaceLab has a monster_truck category stub; competitive SAMT racing is small but real."
+    },
+    {
+      "name": "Dirt oval — Sprint car (410/360 wing sprint)",
+      "scale": "1/10",
+      "surface": ["clay/dirt oval (high-bite to dry-slick, changes through a session)"],
+      "power": ["brushless spec (17.5T common)", "brushless modified"],
+      "governing_bodies": ["regional dirt-oval series", "ROAR (oval program)"],
+      "setup_relevance": "Buggy-converted left-turn-only car with big rear wing and offset/stagger: left-side weight bias, rear stagger, tyre stagger and wing angle are the dominant levers — a setup language RaceLab does not speak at all.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amaintracks.com/dirt-oval-rules/", "https://www.rctech.net/forum/dirt-oval/1106989-sprint-car.html"],
+      "notes": "FORGOTTEN (whole sub-domain): oval cars use weight-bias/stagger/wedge setup that has no analog in RaceLab's symmetric-track classes."
+    },
+    {
+      "name": "Dirt oval — Late Model",
+      "scale": "1/10",
+      "surface": ["clay/dirt oval"],
+      "power": ["brushless spec/mod"],
+      "governing_bodies": ["regional dirt-oval series"],
+      "setup_relevance": "Wide late-model body on buggy-derived chassis; more aero/sail-panel side-bite than sprint, with the same left-weight/stagger/wedge tuning. Faster than modifieds.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amaintracks.com/dirt-oval-rules/", "https://en.wikipedia.org/wiki/Late_model"],
+      "notes": "FORGOTTEN: distinct oval body/aero class."
+    },
+    {
+      "name": "Dirt oval — Modified (Midwest Mod / East-coast Mod / Dirt-Mod)",
+      "scale": "1/10",
+      "surface": ["clay/dirt oval"],
+      "power": ["brushless spec (13.5T/17.5T)"],
+      "governing_bodies": ["regional dirt-oval series"],
+      "setup_relevance": "Open-wheel/open-cockpit oval modified; lighter than late model, very stagger- and wedge-sensitive. Several regional sub-flavors (MWM vs ECM) with different body rules.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amaintracks.com/dirt-oval-rules/"],
+      "notes": "FORGOTTEN."
+    },
+    {
+      "name": "Dirt oval — Midget / EDM / Legends / Street Stock (Mudboss)",
+      "scale": "1/10",
+      "surface": ["clay/dirt oval"],
+      "power": ["brushless spec (BL2 / 13.5T Mudboss, 17.5T)"],
+      "governing_bodies": ["regional dirt-oval series"],
+      "setup_relevance": "Entry/spec oval classes — notably the SCT-based Mudboss (spec short-course-on-oval) which is one of the most popular grassroots oval classes; spec tyre + spec motor + weight rules make chassis tweak/wedge the only real lever.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amaintracks.com/dirt-oval-rules/", "https://motoramaevents.com/rc-dirt-oval-comp"],
+      "notes": "FORGOTTEN: Mudboss especially is a massive spec oval class RaceLab ignores."
+    },
+    {
+      "name": "Paved / carpet oval (asphalt oval, legends-on-asphalt)",
+      "scale": "1/10",
+      "surface": ["asphalt oval", "carpet oval", "blue-groove paved"],
+      "power": ["brushless spec/mod"],
+      "governing_bodies": ["regional oval series"],
+      "setup_relevance": "On-road pan/touring car on a banked or flat left-turn oval: extreme left-side weight bias, tyre stagger, sway-bar and ride-height for the corners only. Different from dirt oval (grip is consistent, banking matters).",
+      "in_racelab_coverage": false,
+      "sources": ["https://997rcraceway.com/pages/oval-racing-rules", "https://www.thompsonvalleyrc.com/classes"],
+      "notes": "FORGOTTEN: the on-road oval branch (banking + stagger) is its own setup discipline."
+    },
+    {
+      "name": "M-chassis / mini touring (1/10 mini)",
+      "scale": "1/10 (short wheelbase)",
+      "surface": ["carpet", "asphalt"],
+      "power": ["brushless spec (typ. 21.5T/25.5T)"],
+      "governing_bodies": ["EFRA (Mini)", "regional/club"],
+      "setup_relevance": "Short-wheelbase narrow mini hatch (e.g. Mini Cooper bodies): high CG and narrow track make weight, droop and a small spec-tyre window the levers; very popular budget club class in EU/Asia.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.efra.ws/", "https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "FORGOTTEN: a big grassroots class, distinct geometry from full TC."
+    },
+    {
+      "name": "Vintage / classic touring (USVTA Trans-Am, vintage off-road)",
+      "scale": "1/10",
+      "surface": ["carpet", "asphalt", "dirt (vintage offroad)"],
+      "power": ["brushless spec 25.5T/21.5T blinky (USVTA)"],
+      "governing_bodies": ["USVTA", "regional vintage series"],
+      "setup_relevance": "Spec foam-tyre + spec body + spec motor vintage classes: with everything locked, weight, ride height and shock/spring are the only levers. Hugely popular spec entry class in the US.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "FORGOTTEN: USVTA is one of the largest spec on-road communities in North America."
+    },
+    {
+      "name": "RWD competitive drift (1/10)",
+      "scale": "1/10",
+      "surface": ["smooth indoor (PVC/painted/polished)", "carpet"],
+      "power": ["brushless (gyro-assisted, counter-steer)"],
+      "governing_bodies": ["D1-10 / regional drift judged series"],
+      "setup_relevance": "Judged (not raced) discipline: counter-steer geometry, Ackermann, gyro gain, motor/tyre for controllable slip, weight transfer. Setup vocabulary (steering throw, gyro, CS angle) is alien to racing classes.",
+      "in_racelab_coverage": false,
+      "sources": ["https://supergdrift.com/products/dkmk-mk3-rwd-1-24-drift-chassis-kit", "https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "FORGOTTEN: large and growing scene; judged, not timed — different advice model."
+    },
+    {
+      "name": "Mini-Z / 1/27-1/28 / 1/24 (small-scale touring, GT, F1)",
+      "scale": "1/28 - 1/24",
+      "surface": ["carpet", "smooth indoor", "polished tile"],
+      "power": ["brushed/brushless micro"],
+      "governing_bodies": ["Kyosho Mini-Z Cup", "regional small-scale series"],
+      "setup_relevance": "Tiny chassis: motor pinion/rollout, tyre compound/diameter, front spring, ride height and tweak on smooth surfaces; massive in Japan/Asia. Separate RWD drift sub-scene at 1/24/1/28.",
+      "in_racelab_coverage": false,
+      "sources": ["https://rc.kyosho.com/en/miniz_sp_en", "https://www.rcmart.com/hobby-news/BM-Racing-BMRX-Pro-RC-Drift-Kit-1-24"],
+      "notes": "FORGOTTEN: huge Asian/club scene across racing AND drift at micro scale."
+    },
+    {
+      "name": "1/10 rally (rally-block tyre touring)",
+      "scale": "1/10",
+      "surface": ["loose gravel/dirt", "mixed-surface rallycross"],
+      "power": ["brushless spec/mod"],
+      "governing_bodies": ["regional rally/rallycross series"],
+      "setup_relevance": "Touring chassis with rally-block tyres and raised ride height on loose surface: tyre and ride-height/suspension travel dominate; a mixed-grip surface case touring setup tools don't cover.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "FORGOTTEN: loose-surface on-road-derived class."
+    },
+    {
+      "name": "1/8 rallycross / rally game",
+      "scale": "1/8",
+      "surface": ["mixed dirt + tarmac", "jumps"],
+      "power": ["nitro", "brushless"],
+      "governing_bodies": ["club/regional"],
+      "setup_relevance": "1/8 buggy/RG platform on mixed rally terrain; suspension travel and tyre for jumps + loose grip. Niche, mostly basher-adjacent but raced regionally.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.amainhobbies.com/1-8-scale-electric-kits-cars-trucks/c7620"],
+      "notes": "Under-covered niche; partly basher overlap."
+    },
+    {
+      "name": "1/7 desert / trophy truck (UDR, Felony, Mojave) racing",
+      "scale": "1/7",
+      "surface": ["desert/open dirt", "bash tracks"],
+      "power": ["brushless (6S+)"],
+      "governing_bodies": ["mostly none — bash + informal racing"],
+      "setup_relevance": "Heavy long-travel 4WD desert trucks (Traxxas UDR, Arrma Mojave/Felony): shock/spring for big-G landings and high-speed stability. Mostly BASHING with informal speed-run/desert racing — not a sanctioned race class.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.hobbytown.com/traxxas-unlimited-desert-racer-udr-6s-rtr-4wd-race-truck-fox-tra85086-4-fox/p1142519", "https://www.ebay.com/p/10042867845"],
+      "notes": "MOSTLY BASHING, not sanctioned racing — include only as adjacent/aspirational, do NOT treat as a competition class."
+    },
+    {
+      "name": "Basher-derived spec classes (Slash spec, AE Reflex/Granite spec, RTR-spec)",
+      "scale": "1/10",
+      "surface": ["dirt", "clay", "small tracks"],
+      "power": ["brushless spec (locked RTR motor/ESC)"],
+      "governing_bodies": ["club spec series"],
+      "setup_relevance": "Entry classes built around a locked RTR platform (e.g. spec Slash short-course): everything but tyres/shock-oil frozen, so advice is intentionally narrow. The bridge between bashing and real racing.",
+      "in_racelab_coverage": false,
+      "sources": ["https://www.rcdriver.com/racing-classes-explained/"],
+      "notes": "Under-covered: the on-ramp class many real racers start in; spec rules sharply constrain valid advice."
+    }
+  ],
+  "setup_axes": {
+    "surfaces": [
+      {
+        "name": "High-bite clay (groomed/sugared)",
+        "grip_level": "very high (off-road)",
+        "setup_implications": "Traction-roll risk: stiffer shock oil/thicker, taller ride height, wider track, softer-edge tyres; sway bars to control roll. Grip rises as the track grooms in and falls when it dries."
+      },
+      {
+        "name": "Hard-packed / blue-groove (dry-slick)",
+        "grip_level": "low-medium, inconsistent",
+        "setup_implications": "Mechanical grip hunting: softer springs/oil, more side-bite tyres, lower ride height; small line/throttle changes matter more than chassis. A single track moves from clay-grip to blue-groove during the day."
+      },
+      {
+        "name": "Loamy / loose dirt (outdoor)",
+        "grip_level": "low",
+        "setup_implications": "Maximize forward bite: softer setup, more aggressive/taller tyre pins, more droop; rutted late-race needs ride-height/anti-squat for jumps out of ruts."
+      },
+      {
+        "name": "Astroturf (indoor artificial turf / EOS carpet)",
+        "grip_level": "high, very consistent",
+        "setup_implications": "Glue-grip on tyres, stiffer chassis, anti-roll bars, kit 'high-grip' baseline; traction roll is the enemy. Totally different tyre inserts/compounds than dirt."
+      },
+      {
+        "name": "Carpet (off-road and on-road)",
+        "grip_level": "very high, consistent",
+        "setup_implications": "Stiffest setups, low ride height, ARBs, foam/glued tyres on-road; rollout/gearing precise. Off-road carpet (EOS) needs its own tyre kit and is unforgiving of CG height."
+      },
+      {
+        "name": "Asphalt / rubber-laid (on-road)",
+        "grip_level": "high (rises as rubber is laid down through the weekend)",
+        "setup_implications": "Tyre additive/compound, ride height, camber/toe, roll centres; grip evolves with track temp and rubber line. Foam vs rubber tyre choice is class-dependent."
+      },
+      {
+        "name": "Banked / flat oval (paved or carpet)",
+        "grip_level": "high",
+        "setup_implications": "Left-only loading: left-side weight bias, tyre stagger, asymmetric ride height/sway-bar, wedge/cross-weight — an asymmetric setup paradigm RaceLab's symmetric tools don't express."
+      },
+      {
+        "name": "Dirt/clay oval (left-turn)",
+        "grip_level": "varies (tacky to dry-slick across a session)",
+        "setup_implications": "Rear/tyre stagger, left-weight bias, wedge, sail-panel/wing angle; the track 'takes rubber/moisture' and changes line, so mid-event re-tuning is the norm."
+      },
+      {
+        "name": "Indoor vs outdoor (lighting, temp, dust, wind)",
+        "grip_level": "modifier on all of the above",
+        "setup_implications": "Indoor = stable temp/grip, dust control; outdoor = sun-baked grip swings, wind on light pan cars, moisture/dew at dawn/dusk. The SAME class needs different setups indoor vs out."
+      },
+      {
+        "name": "Loose gravel / mixed-surface (rally, rallycross)",
+        "grip_level": "low and variable",
+        "setup_implications": "Raised ride height, long travel, rally-block tyres, robust diffs; setup must survive surface transitions within one lap."
+      },
+      {
+        "name": "Smooth indoor (drift) / polished tile (Mini-Z)",
+        "grip_level": "deliberately low (drift) or controlled (micro)",
+        "setup_implications": "Drift: low-grip rear tyres, gyro gain, counter-steer angle. Mini-Z racing: tyre compound/diameter and tweak on glass-smooth grip — neither maps to RaceLab's classes."
+      }
+    ],
+    "power_subclasses": [
+      {
+        "name": "Stock / spec brushless — 17.5T blinky",
+        "applies_to": "1/10 2WD/4WD buggy, stadium truck, SCT, touring car (US stock), some F1",
+        "setup_implications": "Flat, low powerband: setup chases corner speed and rotation, precise gearing/rollout, and tyre management — NOT power-down. Blinky (non-timing) ESC forbids boost, so motor timing is not a lever."
+      },
+      {
+        "name": "Stock / spec brushless — 21.5T / 25.5T blinky",
+        "applies_to": "1/10 F1 (21.5T), 1/12 stock, M-chassis, USVTA vintage (25.5T)",
+        "setup_implications": "Even lower power: minimize drag, optimize rollout, light/efficient drivetrain; chassis tweak and tyre are nearly the whole game."
+      },
+      {
+        "name": "Stock / spec brushless — 13.5T",
+        "applies_to": "1/10 TC stock (EU/ETS), some oval/SCT spec, Mudboss (13.5)",
+        "setup_implications": "More power than 17.5 but still capped/blinky in many rules: gearing and traction-on-throttle balance; setup must avoid wheelspin out of slow corners."
+      },
+      {
+        "name": "Modified brushless (boosted/timing ESC)",
+        "applies_to": "1/10 TC mod, 1/10 off-road mod, 1/12 mod, 1/8 e-buggy/e-truggy",
+        "setup_implications": "Open turn (4.5T-8.5T) + boost/turbo timing adds MOTOR tuning (timing/boost curve, rotor, gearing/temp) as a real setup lever alongside chassis; power-down and traction management dominate."
+      },
+      {
+        "name": "Nitro (.12/.21/.28 glow)",
+        "applies_to": "1/10 nitro TC, 1/8 buggy/truggy/GT, 1/8 on-road",
+        "setup_implications": "Adds engine/clutch/needle/pipe/fuel tuning as a parallel domain to chassis — but D13: RaceLab REFUSES engine/nitro tuning advice, so only the clutch-as-chassis-coupling and fuel-load weight effects are in scope."
+      },
+      {
+        "name": "Gas (23-30cc 2-stroke, large scale)",
+        "applies_to": "1/5 - 1/6 large scale",
+        "setup_implications": "Heavy engine + big brakes: brake balance, clutch engagement, and mass management dominate; falls under the same engine-tuning refusal boundary."
+      },
+      {
+        "name": "RTR-locked spec power",
+        "applies_to": "basher-derived spec classes, Mudboss, spec Slash",
+        "setup_implications": "Motor/ESC frozen by rule: advice must stay inside the tiny legal window (tyres, shock oil, ride height) — over-recommending illegal mods is the failure mode."
+      }
+    ]
+  },
+  "forgotten_or_undercovered": [
+    "DIRT/CLAY OVAL is an entire missing sub-domain (sprint car, late model, dirt-mod, midget/EDM, legends, Mudboss): asymmetric left-weight-bias + tyre/rear stagger + wedge setup has zero analog in RaceLab's symmetric-track classes — biggest single gap.",
+    "PAVED/CARPET OVAL (banked + stagger + cross-weight) is a second asymmetric setup paradigm RaceLab can't express at all.",
+    "1/8 e-truggy is absent even though RaceLab already has nitro truggy + e-buggy vocabulary to compose it from — cheapest gap to close.",
+    "1/10 4WD short course (4WD SCT) vs 2WD SCT — RaceLab lists 'short course truck' generically; 4WD SCT is a separate setup problem (centre diff, more push).",
+    "1/10 World GT / GT12 (WGT pan) is conflated-away under '1/12 electric pan' — different body, weight (750g/1025g) and ride-height window; huge UK/EU grassroots class.",
+    "M-chassis / mini touring — large budget club class with short-wheelbase high-CG geometry distinct from full TC.",
+    "Vintage/spec on-road (USVTA Trans-Am, 25.5T spec) — one of the biggest North-American spec communities; locked rules sharply constrain legal advice.",
+    "RWD competitive drift — judged (not timed) discipline with counter-steer/gyro/Ackermann setup language entirely foreign to RaceLab; growing fast.",
+    "Mini-Z / 1/24 / 1/28 micro racing AND micro drift — massive Asian/club scene at a scale RaceLab doesn't touch.",
+    "1/10 rally + 1/8 rallycross (loose/mixed surface, rally-block tyres, raised ride height) — loose-grip on-road-derived setups unmodeled.",
+    "SURFACE AXIS is the highest-leverage gap WITHIN classes RaceLab already 'covers': the same 1/10 buggy needs radically different setups on loamy dirt vs high-bite clay vs astroturf vs carpet, and the same touring car differs on asphalt vs carpet. Advice that ignores surface is wrong even for covered chassis.",
+    "POWER SUB-CLASS AXIS (stock/blinky 17.5T/21.5T/25.5T vs modified/boosted vs RTR-locked spec): stock setup chases corner-speed and rollout while modified setup chases power-down and adds motor-timing as a lever — same chassis, divergent advice. RaceLab labels 'stock + modified' for touring but must enforce this divergence (and the legal-window limits of spec classes) across ALL classes.",
+    "INDOOR vs OUTDOOR and time-of-day grip change (dew/sun-bake/track rubbering-in) is a cross-cutting modifier the advisor should reason about for every class, not just weather temp.",
+    "eGT (electric 1/8 GT) — new IFMAR title; RaceLab covers nitro IC GT but should flag the electric variant explicitly.",
+    "Basher-derived spec classes (spec Slash, RTR-spec) are the on-ramp many real racers start in; under-covered, and demand advice constrained to a frozen platform.",
+    "1/7 desert (UDR/Felony/Mojave) and 1/6 trucks are MOSTLY BASHING, not sanctioned racing — correctly low priority, but worth an explicit 'not a race class' note so they aren't mistaken for a coverage gap."
+  ]
+}
