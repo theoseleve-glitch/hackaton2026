@@ -641,8 +641,7 @@
   effects:
     - { axis: mechanical_grip, change: less }
     - { axis: durability, change: more }
-  addresses:
-    - { symptom: twitchy }
+  addresses: []   # surface-driven choice (wet/bumpy/grass per AE p.45), NOT a complaint fix — won't fire on a symptom (grounded-or-silent); kept for William's review
   conditions:
     amplified_on: [bumpy, wet]
     reduced_on: [smooth, hot]

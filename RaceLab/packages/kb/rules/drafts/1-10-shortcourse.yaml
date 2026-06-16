@@ -448,41 +448,45 @@
   setting: caster
   direction: increase   # more caster — more laid back
   effects:
-    - { axis: on_power_steering_exit, change: less }
-    - { axis: off_power_steering_entry, change: more }
     - { axis: straight_line_stability, change: more }
+    - { axis: on_power_steering_exit, change: more }
+    - { axis: bump_stability, change: more }
+    - { axis: off_power_steering_entry, change: less }
   addresses:
-    - { symptom: sluggish_steering, phase: corner_entry }
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: oversteer, phase: corner_entry }
   conditions:
     amplified_on: [smooth, high_grip]
     reduced_on: [bumpy, rough, low_grip]
-  counter_indications: [twitchy]
-  magnitude_guidance: "One caster step at a time. Per the Cheat Sheets, more caster on the SC10 adds steering ENTERING corners (off-power turn-in) and straight stability, at the cost of on-power/exit steering. (Note SC10/Slash kingpin caster is set by the caster blocks.)"
+  counter_indications: [sluggish_steering, understeer]
+  magnitude_guidance: "One caster step at a time. More caster steadies the heavy SC body on the straight and adds on-power exit drive and bump stability; it trades away off-power entry turn-in. (SC10/Slash kingpin caster is set by the caster blocks.)"
   reversal_cost_minutes: 15
   confidence: medium
   sources:
-    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (more caster = more steering entering corners, less steering exiting corners; SC10 short-course truck pictured)"
+    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration: SC10 short-course truck pictured)"
   scope: [1-10-shortcourse]
 
 - id: kb-sc-caster-less-020
   setting: caster
   direction: decrease   # less caster — more upright
   effects:
-    - { axis: on_power_steering_exit, change: more }
-    - { axis: off_power_steering_entry, change: less }
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: initial_turn_in, change: more }
     - { axis: straight_line_stability, change: less }
   addresses:
-    - { symptom: understeer, phase: corner_exit }
-    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
   conditions:
     amplified_on: [smooth, high_grip]
     reduced_on: [bumpy, rough, low_grip]
   counter_indications: [twitchy]
-  magnitude_guidance: "One caster step at a time. Per the Cheat Sheets, less caster on the SC10 frees steering EXITING corners on power at the cost of entry steering and straight-line/bump stability — avoid on rough/loose tracks."
+  magnitude_guidance: "One caster step at a time. Less caster sharpens off-power turn-in ENTERING corners; it costs straight-line and bump stability — avoid on rough/loose tracks where the tall SC body needs the stability."
   reversal_cost_minutes: 15
   confidence: medium
   sources:
-    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (less caster = less steering entering corners, more steering exiting corners; SC10 short-course truck pictured)"
+    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration: SC10 short-course truck pictured)"
   scope: [1-10-shortcourse]
 
 - id: kb-sc-fronttoe-out-021

@@ -45,10 +45,11 @@ const SOURCE_ANCHORS = [
 const OPPOSITE: Record<string, string> = {
   increase: "decrease", decrease: "increase",
   stiffer: "softer", softer: "stiffer",
+  harder: "softer", // tyre compound (softer↔stiffer is springs; the symmetric check below covers softer↔harder)
   more: "less", less: "more",
   thicker: "thinner", thinner: "thicker",
   higher: "lower", lower: "higher",
-  raise: "lower", lower_: "raise",
+  raise: "lower",
 };
 
 function overlap(a: string[], b: string[]): boolean {
@@ -58,6 +59,7 @@ function overlap(a: string[], b: string[]): boolean {
 
 const errors: string[] = [];
 const seenIds = new Set<string>();
+const allRules: KBRule[] = [];
 let ruleCount = 0;
 let fileCount = 0;
 
@@ -84,6 +86,7 @@ for (const file of readdirSync(draftsDir).filter((f) => f.endsWith(".yaml") && !
     }
     const r = parsed.data as KBRule;
     fileRules.push(r);
+    allRules.push(r);
     ruleCount++;
     if (seenIds.has(r.id)) errors.push(`${file}: duplicate id ${r.id}`);
     seenIds.add(r.id);
@@ -116,15 +119,37 @@ for (const file of readdirSync(draftsDir).filter((f) => f.endsWith(".yaml") && !
     for (let j = i + 1; j < fileRules.length; j++) {
       const a = fileRules[i], b = fileRules[j];
       if (a.setting !== b.setting) continue;
-      if (OPPOSITE[a.direction] !== b.direction) continue;
+      if (OPPOSITE[a.direction] !== b.direction && OPPOSITE[b.direction] !== a.direction) continue;
       const sharedSymptom = a.addresses.some((x) => b.addresses.some((y) => x.symptom === y.symptom));
       if (!sharedSymptom) continue;
-      const condsA = [...a.conditions.amplified_on, ...(a.forbidden_on ?? [])];
-      const condsB = [...b.conditions.amplified_on, ...(b.forbidden_on ?? [])];
-      if (overlap(condsA, condsB)) {
-        errors.push(`${file}: contradiction — ${a.id} (${a.direction}) vs ${b.id} (${b.direction}) on '${a.setting}' for a shared symptom with overlapping conditions`);
+      // Compare only WHERE EACH RULE IS BOOSTED (amplified_on). forbidden_on marks
+      // where a rule is EXCLUDED, so it can't create a contradiction — and rules with
+      // disjoint amplified sets (one for cold/low-grip, one for hot/high-grip) are
+      // complementary, not contradictory.
+      if (overlap(a.conditions.amplified_on, b.conditions.amplified_on)) {
+        errors.push(`${file}: contradiction — ${a.id} (${a.direction}) vs ${b.id} (${b.direction}) on '${a.setting}' for a shared symptom with overlapping amplified conditions`);
       }
     }
+  }
+}
+
+// caster-convention guard (D49 C1): KB-wide, all caster rules must follow the HUDY
+// p.42 convention — MORE caster REDUCES off-power entry turn-in (so it may not be
+// sold as a corner-entry understeer fix), LESS caster REDUCES on-power exit drive.
+// This is the cross-file check the per-file contradiction pass structurally can't do.
+for (const r of allRules) {
+  if (r.setting !== "caster") continue;
+  const fixesEntryTurn = r.addresses.some(
+    (a) => (a.symptom === "understeer" || a.symptom === "sluggish_steering") && a.phase === "corner_entry",
+  );
+  const fixesExitDrive = r.addresses.some(
+    (a) => a.symptom === "understeer" && (a.phase === "corner_exit" || a.phase === "on_power"),
+  );
+  if (r.direction === "increase" && fixesEntryTurn) {
+    errors.push(`${r.id}: MORE caster cannot address corner-entry understeer/sluggish (HUDY p.42 — more caster REDUCES off-power turn-in)`);
+  }
+  if (r.direction === "decrease" && fixesExitDrive) {
+    errors.push(`${r.id}: LESS caster cannot address corner-exit/on-power understeer (HUDY p.42 — less caster REDUCES on-power exit drive)`);
   }
 }
 

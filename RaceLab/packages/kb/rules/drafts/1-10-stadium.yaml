@@ -92,46 +92,48 @@
 
 - id: kb-st-caster-more-003
   setting: caster
-  direction: increase   # more inclined kingpin
+  direction: increase   # more inclined kingpin — laid back
   effects:
-    - { axis: steering_entering_corner, change: more }
-    - { axis: steering_exiting_corner, change: less }
-    - { axis: high_speed_stability, change: more }
+    - { axis: straight_line_stability, change: more }
+    - { axis: on_power_steering_exit, change: more }
+    - { axis: bump_stability, change: more }
+    - { axis: off_power_steering_entry, change: less }
   addresses:
-    - { symptom: understeer, phase: corner_entry }
     - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: oversteer, phase: corner_entry }
   conditions:
     amplified_on: [bumpy, low_grip]
     reduced_on: [smooth, high_grip]
-  counter_indications: [understeer]   # hurts on-power/exit steering
-  magnitude_guidance: "One caster-block step at a time (typically ~2 deg). More caster steadies a twitchy truck at speed and adds turn-in; it trades away on-power exit steering."
+  counter_indications: [sluggish_steering, understeer]   # more caster REDUCES off-power turn-in
+  magnitude_guidance: "One caster-block step at a time (~2 deg). More caster steadies a twitchy truck on the straight, adds on-power exit drive and bump stability; it trades away off-power turn-in, so back off if the truck already pushes on entry."
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' — more caster: more steering entering corners, less steering exiting corners"
-    - "CompetitionX RC Tuning Guide — Caster (corroboration: more caster adds on-power and high-speed stability, less initial/low-speed steering)"
+    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy)"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' (corroboration: more caster adds straight-line stability and on-power/exit drive steering)"
   scope: [1-10-stadium]
 
 - id: kb-st-caster-less-004
   setting: caster
   direction: decrease   # more vertical kingpin
   effects:
-    - { axis: steering_exiting_corner, change: more }
-    - { axis: steering_entering_corner, change: less }
-    - { axis: high_speed_stability, change: less }
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: initial_turn_in, change: more }
+    - { axis: straight_line_stability, change: less }
   addresses:
-    - { symptom: understeer, phase: corner_exit }
-    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
   conditions:
     amplified_on: [smooth, high_grip]
     reduced_on: [bumpy, low_grip]
   counter_indications: [twitchy]
-  magnitude_guidance: "One caster-block step at a time (~2 deg). Less caster frees up on-power exit steering; it costs high-speed stability — risky on a tall truck on a fast track."
+  magnitude_guidance: "One caster-block step at a time (~2 deg). Less caster sharpens off-power turn-in for tight smooth tracks; it costs straight-line and bump stability — risky on a tall truck on a fast/rough track."
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' — less caster: less steering entering corners, more steering exiting corners"
-    - "CompetitionX RC Tuning Guide — Caster (corroboration: less caster adds off-power/initial steering, reduces straight-line stability)"
+    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
+    - "Team Associated RC Cheat Sheets (RC_CheatSheets.pdf) p.16 'Caster, front' (corroboration: less caster adds off-power/initial turn-in, reduces straight-line stability)"
   scope: [1-10-stadium]
 
 # ============================================================================

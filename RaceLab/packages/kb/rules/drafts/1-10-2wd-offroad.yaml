@@ -52,7 +52,7 @@
     - "AE RC Cheat Sheets p.39 (Shock Fluid — thicker/heavier oil: less bottoming out; off-road)"
     - "Traxxas Slash Spec Racing Setup Guide (rear 60wt: ample pack for jump landings, keeps chassis roll to a minimum)"
     - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier oil better for smooth tracks, decreases responsiveness)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-shockoil-rear-thinner-002
   setting: rear_shock_oil
@@ -75,7 +75,7 @@
   sources:
     - "AE RC Cheat Sheets p.39 (Shock Fluid — thinner/lighter oil: faster rebound for many small bumps; off-road)"
     - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter oil more responsive, better for bumpy conditions, allows more chassis roll)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-shockoil-front-thicker-003
   setting: front_shock_oil
@@ -98,7 +98,7 @@
     - "AE RC Cheat Sheets p.39 (Shock Fluid — thicker/heavier oil: less bottoming out; off-road)"
     - "Traxxas Slash Spec Racing Setup Guide (front lighter than rear to balance the lighter front end; thicker oil keeps chassis from bottoming harshly)"
     - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier oil seems sluggish, better for smooth tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-shockoil-front-thinner-004
   setting: front_shock_oil
@@ -120,7 +120,7 @@
   sources:
     - "AE RC Cheat Sheets p.39 (Shock Fluid — thinner/lighter oil: faster rebound for many small bumps; off-road)"
     - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter oil more responsive, better for bumpy conditions)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-piston-rear-more-holes-005
   setting: rear_shock_piston
@@ -142,7 +142,7 @@
   sources:
     - "AE RC Cheat Sheets p.40 (Shock Pistons — larger holes: less damping, for small bumps; off-road)"
     - "CompetitionX RC Tuning Guide — Shock Oil/Pistons (corroboration: more/larger holes pass oil quicker = more responsive damping; rougher track = more holes)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-piston-rear-fewer-holes-006
   setting: rear_shock_piston
@@ -164,7 +164,7 @@
   sources:
     - "AE RC Cheat Sheets p.40 (Shock Pistons — smaller holes: more damping/more pack, improve jump lifts and landings for smoother tracks; off-road)"
     - "CompetitionX RC Tuning Guide — Shock Oil/Pistons (corroboration: fewer/smaller holes pass oil slower; smoother track = fewer holes)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: SPRINGS
@@ -192,7 +192,7 @@
     - "AE RC Cheat Sheets p.41 (Shock Springs — softer/lighter tension: great on rear for off-road, gives more traction, best for small bumps)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (springs) [section TBD]"
     - "CompetitionX RC Tuning Guide — Shock Springs (corroboration: softer end gains grip)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearspring-stiffer-008
   setting: rear_spring
@@ -215,7 +215,7 @@
     - "AE RC Cheat Sheets p.41 (Shock Springs — stiffer/heavier tension: creates less traction, lifts higher off jumps, better suspension response)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (springs) [section TBD]"
     - "CompetitionX RC Tuning Guide — Shock Springs (corroboration: stiffer end loses grip / reduces roll)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontspring-softer-009
   setting: front_spring
@@ -238,7 +238,7 @@
     - "AE RC Cheat Sheets p.41 (Shock Springs — softer/lighter tension: gives more traction, best for small bumps; controls how the car corners)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (springs) [section TBD]"
     - "CompetitionX RC Tuning Guide — Shock Springs (corroboration: heavier springs normally run front than rear; softer end gains grip)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontspring-stiffer-010
   setting: front_spring
@@ -261,7 +261,7 @@
     - "AE RC Cheat Sheets p.41 (Shock Springs — stiffer/heavier tension: creates less traction, better suspension response, reduces chassis roll)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (springs) [section TBD]"
     - "CompetitionX RC Tuning Guide — Shock Springs (corroboration: stiffer end reduces roll, loses grip)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: GEOMETRY — camber / caster / toe
@@ -286,7 +286,7 @@
     - "AE RC Cheat Sheets p.12 (Camber, front — more negative (2 deg.): more high-speed traction through turns; less: more straight-line acceleration)"
     - "Traxxas Slash Spec Racing Setup Guide (front -2.0deg gives a good contact patch through the corner)"
     - "CompetitionX RC Tuning Guide — Camber (corroboration: more front camber = more aggressive steering, more high-speed cornering traction, less stable on the straight)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearcamber-more-neg-012
   setting: rear_camber
@@ -309,7 +309,7 @@
     - "AE RC Cheat Sheets p.15 (Camber, rear — more negative (-2 deg.): more high-speed traction through corners; more positive removes straight-line acceleration)"
     - "Traxxas Slash Spec Racing Setup Guide (rear -2.5deg, set by how much rear traction the track needs)"
     - "CompetitionX RC Tuning Guide — Camber (corroboration: more rear camber = more high-speed cornering traction, less forward traction, less stable on the straight)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearcamber-less-neg-013
   setting: rear_camber
@@ -331,7 +331,7 @@
   sources:
     - "AE RC Cheat Sheets p.15 (Camber, rear — less negative / toward zero: more straight-line acceleration; tyre stands vertical)"
     - "CompetitionX RC Tuning Guide — Camber (corroboration: less rear camber = more straight-line acceleration, less traction in the corners)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-caster-more-014
   setting: caster
@@ -355,7 +355,7 @@
   sources:
     - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster angle: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy track conditions)"
     - "CompetitionX RC Tuning Guide — Caster (corroboration: more caster = more on-power steering exiting, more stable on straights and through bumps, easier to drive; kick-up adds to total caster in 2WD)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-caster-less-015
   setting: caster
@@ -377,7 +377,7 @@
   sources:
     - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
     - "CompetitionX RC Tuning Guide — Caster (corroboration: less caster = quicker steering, more off-power steering entering, less stable on straights and through bumps)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-fronttoe-out-016
   setting: front_toe
@@ -400,7 +400,7 @@
     - "AE RC Cheat Sheets p.49 (Toe-in, toe-out, front — toe-out: quicker corner turn-in; unstable in bumps and slippery on the straightaway)"
     - "Traxxas Slash Spec Racing Setup Guide (toe-out increases instant steering response; base 1.0deg toe-out per side)"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: toe-out = more off-power steering, more initial turn-in)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-fronttoe-in-017
   setting: front_toe
@@ -423,7 +423,7 @@
     - "AE RC Cheat Sheets p.49 (Toe-in, toe-out, front — toe-out is unstable in bumps and on the straightaway, so toe-in / less toe-out is the more stable / straight-line setting); HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, front — increasing toe-in: more stable on-power and on straight)"
     - "Traxxas Slash Spec Racing Setup Guide (toe-in = better straight-line stability and more steering through and out of a corner)"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: front toe-in = more on-power steering)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-reartoe-more-018
   setting: rear_toe
@@ -448,7 +448,7 @@
     - "HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, rear toe — increasing (more toe-in): increases traction, more stable, more push, less cornering speed)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (rear toe) [section TBD]"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: more rear toe-in = more forward traction, slower acceleration, less rotation; best for low-traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-reartoe-less-019
   setting: rear_toe
@@ -470,7 +470,7 @@
   sources:
     - "HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, rear toe — decreasing (less toe-in): less traction, more cornering speed, more on-power steering, better rotation)"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: less rear toe-in = more high-speed stability, faster acceleration, more rotation; for high-traction surfaces)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: RIDE HEIGHT / DROOP (downstops)
@@ -496,7 +496,7 @@
   sources:
     - "AE RC Cheat Sheets p.29 (Ride Height, front — lower: less chance of flipping in corners / on carpet; HUDY Set-Up Handbook p.36: decreasing ride height = faster reaction, better on smooth tracks)"
     - "CompetitionX RC Tuning Guide — Ride Height (corroboration: lower = less chassis roll, more responsive, worse for bumps/jumps)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rideheight-higher-021
   setting: ride_height
@@ -519,7 +519,7 @@
   sources:
     - "AE RC Cheat Sheets p.30 (Ride Height, rear — higher: better acceleration in loose terrain, better lift off jumps) + p.29 (Ride Height, front — higher: more chassis roll and better traction on bumpy tracks)"
     - "CompetitionX RC Tuning Guide — Ride Height (corroboration: higher = more chassis roll, less responsive, better in bumps and jumps)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontdroop-more-022
   setting: front_downstop
@@ -542,7 +542,7 @@
   sources:
     - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Front Droop — more front droop (lower front downstop value): increases rearward weight transfer on-throttle, more responsive/less stable, better on bumpy tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: more front droop = more weight transfer to rear accelerating, more on-power steering, less aggressive steering, less stable at high speed)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontdroop-less-023
   setting: front_downstop
@@ -566,7 +566,7 @@
   sources:
     - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Front Droop — less front droop (higher front downstop value): less rearward weight transfer, less responsive/more stable, better on smooth tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: less front droop = more aggressive steering, less traction rolling, more stable at high speeds, less on-power steering)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-reardroop-more-024
   setting: rear_downstop
@@ -588,7 +588,7 @@
   sources:
     - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Rear Droop — more rear droop (lower rear downstop value): increases forward weight transfer under braking, more responsive/less stable under braking, better on bumpy tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: more rear droop = more stable over bumps, more weight transfer to front under braking, less stable under braking)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-reardroop-less-025
   setting: rear_downstop
@@ -610,7 +610,7 @@
   sources:
     - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Rear Droop — less rear droop (higher rear downstop value): decreases forward weight transfer, more stable under braking, better on smooth tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: less rear droop = more stable under braking, less stable over bumps)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: ANTI-SQUAT / KICK-UP
@@ -638,7 +638,7 @@
     - "AE RC Cheat Sheets p.8 (Anti-squat, off-road — more anti-squat: less side traction in corners, more rear lift in jumps)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (anti-squat) [section TBD]"
     - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: more anti-squat = more forward traction, less squat on accel, reduces on-power steering, increases rear wheel lift on jumps)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-antisquat-less-027
   setting: rear_anti_squat
@@ -663,7 +663,7 @@
     - "AE RC Cheat Sheets p.8 (Anti-squat, off-road — less anti-squat: more side traction in corners, more rear traction for slick or bumpy surfaces)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (anti-squat) [section TBD]"
     - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: less anti-squat = more on-power steering, more side traction, more rear traction for slick or bumpy surfaces)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # (kick-up rule below uses caster as the engine-canonical setting, since the
 #  2WD category template carries `caster` but no separate kick_up field, and on a
@@ -694,7 +694,7 @@
   sources:
     - "AE RC Cheat Sheets p.7 (Anti-roll Bars, Sway Bars — stiffer/thicker bars for high-traction tracks: minimize chassis roll, more responsive in cornering)"
     - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thicker rear bar = more on-power steering, less chassis roll, more responsive, for high-traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearbar-softer-029
   setting: rear_sway_bar
@@ -716,7 +716,7 @@
   sources:
     - "AE RC Cheat Sheets p.7 (Anti-roll Bars, Sway Bars — softer/thinner bars for low and medium bite tracks: more chassis roll, less responsive)"
     - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thinner rear bar = more chassis roll, less responsive, for low-medium traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontbar-stiffer-030
   setting: front_sway_bar
@@ -739,7 +739,7 @@
   sources:
     - "AE RC Cheat Sheets p.7 (Anti-roll Bars, Sway Bars — stiffer/thicker bars for high-traction tracks minimize chassis roll; a thicker front bar reduces oversteer per the same page)"
     - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thicker front bar = more off-power steering, less chassis roll, more responsive, for high-traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-frontbar-softer-031
   setting: front_sway_bar
@@ -761,7 +761,7 @@
   sources:
     - "AE RC Cheat Sheets p.7 (Anti-roll Bars, Sway Bars — softer/thinner bars for low and medium bite tracks: more chassis roll/front grip, less responsive)"
     - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thinner front bar = more chassis roll, less responsive, for low-medium traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: DIFF / SLIPPER
@@ -788,7 +788,7 @@
   sources:
     - "AE RC Cheat Sheets p.21 (Diff Fluid, Rear Diff, off-road — thicker/heavier (tighter-coupling analog): less grip but more stability on power, for high-traction conditions)"
     - "CompetitionX RC Tuning Guide — Differential (corroboration: tighter diff = more instant throttle response and greater acceleration; looser diff for low-traction tracks)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-balldiff-looser-033
   setting: ball_diff_setting
@@ -809,7 +809,7 @@
   sources:
     - "AE RC Cheat Sheets p.21 (Diff Fluid, Rear Diff, off-road — thinner/lighter (looser-coupling analog): more grip but less stability on power, for low-traction conditions)"
     - "CompetitionX RC Tuning Guide — Differential (corroboration: looser diff for low-traction tracks; tighter = more instant response)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-slipper-looser-034
   setting: slipper_setting
@@ -832,7 +832,7 @@
   sources:
     - "AE RC Cheat Sheets p.43 (Slipper Clutch — looser for tracks with low traction: more traction exiting corner)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (slipper clutch) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-slipper-tighter-035
   setting: slipper_setting
@@ -854,7 +854,7 @@
   sources:
     - "AE RC Cheat Sheets p.43 (Slipper Clutch — tighter for high-bite tracks: more instant acceleration, smoother corner entry)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (slipper clutch) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: TYRES / INSERTS
@@ -881,7 +881,7 @@
   sources:
     - "AE RC Cheat Sheets p.45 (Tyre Compound — softer compound for smoother surfaces; selecting a softer compound to find grip)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (28 pages on tyres) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-reartire-harder-037
   setting: tire_rear_compound
@@ -903,7 +903,7 @@
   sources:
     - "AE RC Cheat Sheets p.45 (Tyre Compound — harder compound for bumpier surfaces, for grass and higher-wear conditions; stays consistent where a soft tyre would grease over)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (28 pages on tyres) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearinsert-firmer-038
   setting: tire_rear_insert
@@ -925,7 +925,7 @@
   sources:
     - "AE RC Cheat Sheets p.46 (Tyre Inserts, foam — harder insert: less rolling resistance, better cornering; too firm causes bounce / loss of traction)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (tyres / inserts) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-rearinsert-softer-039
   setting: tire_rear_insert
@@ -948,7 +948,7 @@
   sources:
     - "AE RC Cheat Sheets p.46 (Tyre Inserts, foam — softer insert: more traction, more drag; lets the tyre conform to the surface)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (tyres / inserts) [section TBD]"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 # ============================================================================
 # FAMILY: GEARING (power-class gated)
@@ -974,7 +974,7 @@
   sources:
     - "AE RC Cheat Sheets p.28 (Pinion Gear — more teeth: more top speed, less run time, gear ratio goes up)"
     - "CompetitionX RC Tuning Guide — gearing (corroboration: more pinion = more top speed, less acceleration, more heat)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
 
 - id: kb-2wd-gear-shorter-041
   setting: pinion_teeth
@@ -996,4 +996,4 @@
   sources:
     - "AE RC Cheat Sheets p.28 (Pinion Gear — fewer teeth: more acceleration, more run time, gear ratio goes down)"
     - "CompetitionX RC Tuning Guide — gearing (corroboration: fewer pinion teeth = more acceleration, less top speed, cooler)"
-  scope: [1-10-offroad, 1-10-2wd-offroad]
+  scope: [1-10-2wd-offroad]
