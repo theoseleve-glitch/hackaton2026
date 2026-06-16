@@ -129,6 +129,7 @@ export {
   learningTuples,
   renderConditions,
   conditionsToTags,
+  surfaceToTags,
   toEngineHistory,
   LAP_SOURCES,
 } from "./runs";

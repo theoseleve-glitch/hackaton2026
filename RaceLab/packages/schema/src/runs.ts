@@ -692,6 +692,29 @@ export function conditionsToTags(c: RunConditions): readonly string[] {
   return Object.freeze(tags);
 }
 
+/** Maps a track SURFACE id (the app's `rcdata.json` surfaces, e.g. "loose_dirt_loam",
+ *  "astroturf", "carpet_onroad", "asphalt_high_grip", "blue_groove") onto the engine's
+ *  surface-FAMILY condition tags (taxonomy.yaml: clay/loose_dirt/astroturf/carpet/
+ *  asphalt/blue_groove/wet). This is the reconciliation conditionsToTags can't do:
+ *  conditionsToTags derives grip/bumps/temp from RunConditions; surfaceToTags derives
+ *  the surface TYPE from the picked surface, so a rule's `amplified_on:[astroturf]` /
+ *  `forbidden_on:[loose_dirt]` actually fires. Caller unions both into track.conditions.
+ *  Grip LEVEL stays with conditionsToTags (the surface says the type, the grip field
+ *  says the level) — surfaceToTags never emits grip tags, only the family (+ wet for
+ *  genuinely-wet surfaces). Unknown/edge surfaces map to [] (grip carries them). */
+export function surfaceToTags(surface: string): readonly string[] {
+  const s = surface.toLowerCase();
+  const tags: string[] = [];
+  if (/clay/.test(s)) tags.push("clay");
+  if (/blue_groove/.test(s)) tags.push("blue_groove");
+  if (/(loose|loam|sugar_dirt|sand|gravel|granite|fire_road|rally_mix)/.test(s)) tags.push("loose_dirt");
+  if (/(astro|hockey_turf)/.test(s)) tags.push("astroturf");
+  if (/carpet/.test(s)) tags.push("carpet");
+  if (/(asphalt|tarmac|concrete|parking)/.test(s)) tags.push("asphalt");
+  if (/(mud|water_crossing|wet_drift|snow|ice)/.test(s)) tags.push("wet");
+  return Object.freeze([...new Set(tags)]);
+}
+
 /** Render change-bearing tuples into the engine's history shape. Bare run
  *  ratings are EXCLUDED (history rows describe a change tried). `limit` keeps
  *  the most recent N.

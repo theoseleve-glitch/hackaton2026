@@ -1,6 +1,10 @@
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { retrieve, templateExposes } from "./retrieval";
 import { resolveTemplate, type KBData } from "./data";
 import { loadKBData } from "./node-kb";
+import { surfaceToTags } from "../../schema/src/runs";
 import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
 
 // Unit tests for the model-aware gating (D48): capability filter, forbidden_on,
@@ -125,6 +129,36 @@ check(
   live.rules.length >= 60,
   `got ${live.rules.length}`,
 );
+
+// ── surface reconciliation (D51): Théo's 67 app surfaces → engine condition tags ──
+// Every tag surfaceToTags emits must be a real taxonomy condition (so a rule's
+// amplified_on/forbidden_on actually fires), and the Tier-A racing surfaces must
+// resolve their family. Reads the app's rcdata.json so it catches drift on either
+// side (Théo adds a surface, or the taxonomy tag set changes).
+const taxConds = new Set(live.taxonomy.conditions);
+const rcPath = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "apps", "mobile", "src", "rcdata.json");
+const surfaces = (JSON.parse(readFileSync(rcPath, "utf8")).surfaces as { id: string }[]) ?? [];
+const invalid: string[] = [];
+let familyHits = 0;
+for (const sf of surfaces) {
+  const tags = surfaceToTags(sf.id);
+  if (tags.length > 0) familyHits++;
+  for (const t of tags) if (!taxConds.has(t)) invalid.push(`${sf.id}→${t}`);
+}
+check("every surface→tag output is a valid taxonomy condition", invalid.length === 0, invalid.join(", "));
+check(
+  "Tier-A racing surfaces resolve their family tag",
+  surfaceToTags("loose_dirt_loam").includes("loose_dirt") &&
+    surfaceToTags("astroturf").includes("astroturf") &&
+    surfaceToTags("carpet_onroad").includes("carpet") &&
+    surfaceToTags("asphalt_high_grip").includes("asphalt") &&
+    surfaceToTags("blue_groove").includes("blue_groove"),
+);
+check(
+  "watered/tacky clay is grippy clay, not rain-wet (no false 'wet' tag)",
+  surfaceToTags("watered_tacky_clay").includes("clay") && !surfaceToTags("watered_tacky_clay").includes("wet"),
+);
+console.log(`surface reconciliation: ${familyHits}/${surfaces.length} of Théo's surfaces map to a family tag; all emitted tags valid`);
 
 console.log(`\n${failed === 0 ? "All" : failed + " FAILED —"} model-gating checks`);
 if (failed > 0) process.exit(1);
