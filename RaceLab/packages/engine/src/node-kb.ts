@@ -13,7 +13,7 @@ import type { ChassisTemplate, KBRule, Taxonomy } from "./types";
 
 const KB_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "kb");
 
-const RuleSchema = z.object({
+export const RuleSchema = z.object({
   id: z.string().regex(/^kb-[a-z0-9-]+$/),
   setting: z.string(),
   direction: z.string(),

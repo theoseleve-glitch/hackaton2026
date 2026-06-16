@@ -10,6 +10,7 @@
     "cli": "tsx src/cli.ts",
     "eval": "tsx src/eval.ts",
     "bundle": "tsx src/bundle-kb.ts",
+    "validate-drafts": "tsx src/validate-drafts.ts",
     "test": "tsx src/test-nlu.ts && tsx src/test-chat.ts && tsx src/test-report.ts && tsx src/test-reports.ts && tsx src/test-plan.ts && tsx src/test-planner.ts && tsx src/test-raceday.ts && tsx src/test-modelgating.ts && tsx src/test-bundle-fresh.ts && tsx src/eval.ts",
     "typecheck": "tsc --noEmit"
   },
