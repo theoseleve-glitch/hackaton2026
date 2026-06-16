@@ -175,7 +175,10 @@ for (const file of readdirSync(draftsDir).filter((f) => f.endsWith(".yaml") && !
     const p = RuleSchema.safeParse(doc);
     if (!p.success) continue;
     const srcs = p.data.sources;
-    const hasPageCite = srcs.some((s) => PAGE_CITED.some((a) => s.includes(a)) && !/tbd/i.test(s));
+    const hasPageCite = srcs.some((s) => {
+      const sl = s.toLowerCase();
+      return PAGE_CITED.some((a) => sl.includes(a.toLowerCase())) && !/tbd/i.test(s);
+    });
     if (hasPageCite) r.ready++; else r.needs++;
   }
   readiness[file] = r;

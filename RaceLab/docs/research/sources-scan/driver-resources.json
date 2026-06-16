@@ -1,0 +1,334 @@
+[
+  {
+    "name": "Ryan Maifield",
+    "disciplines": ["off-road", "1/10 electric 2WD/4WD off-road buggy", "1/8 nitro buggy", "1/8 nitro truggy"],
+    "palmares": "Multi-time ROAR National Champion; multiple IFMAR Worlds podiums (2WD/4WD); ex-Team Associated, now Tekno RC factory driver",
+    "resources": [
+      {"type": "youtube", "url": "https://www.youtube.com/@RyanMaifieldMomentum"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=tT8uoIoO1So"},
+      {"type": "team_setup_page", "url": "https://www.associatedelectrics.com/news/announcements/488-Team_Associated's_Ryan_Maifield_Reedy_Race_B4.1_Setup_Posted"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Official 'Ryan Maifield Momentum' YouTube channel plus a 'Pro Pit Tip' explainer (indoor 2WD setup). Historic event setup sheets via Team Associated; current Tekno buggy/truggy setups circulate via the Tekno community. Content is video + changing event sheets, not a fixed guide."
+  },
+  {
+    "name": "Ty Tessmann",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/8 nitro truggy", "1/10 electric 2WD/4WD off-road"],
+    "palmares": "2014 IFMAR 1/8 Nitro Buggy World Champion; multiple ROAR titles; ex-HB Racing, now Xray factory driver",
+    "resources": [
+      {"type": "website", "url": "https://tytessmann.com/"},
+      {"type": "team_setup_page", "url": "https://tytessmann.com/setupsheets/"},
+      {"type": "team_setup_page", "url": "https://hbracing.com/team-driver-setting-sheets-en/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Personal site hosts a large organized downloadable setup-sheet archive (XB8, XB8E, XB4, XB2, older HB D815) tied to specific events. A changing event-sheet archive (latest visible ~2021), not a fixed published guide."
+  },
+  {
+    "name": "Spencer Rivkin",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/10 electric 2WD/4WD off-road buggy"],
+    "palmares": "2016 ROAR 1/8 Nitro Off-Road National Champion; 2019 IFMAR 1/10 Electric Off-Road Worlds competitor; Team Associated factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets.php?driver=0000000019"},
+      {"type": "team_setup_page", "url": "https://www.reedyrace.com/ae/spotlight/pages/RC10B6D_Spencer_Rivkin_TacomaRC/index.html"},
+      {"type": "team_setup_page", "url": "https://www.reedyrace.com/ae/spotlight/pages/RC8B3_Spencer_Rivkin/index.html"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Team Associated 'Reedy Race Spotlight' pages narrate his winning B6D and RC8B3 setups with rationale (actionable). Downloadable event sheets via CML Distribution. Event-specific changing pages, not a fixed guide."
+  },
+  {
+    "name": "Davide Ongaro",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/8 nitro truggy"],
+    "palmares": "Multi-time IFMAR 1/8 IC Off-Road World Champion; Team Associated factory driver (RC8B4.1 'Ongaro Edition' signature kit)",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets.php?driver=0000000019"},
+      {"type": "website", "url": "https://nitrohobbies.com/asc80953/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Signature RC8B4.1 'Ongaro Edition' kit ships spec'd to his championship setup (kit base sheet is the closest to a fixed reference). Event sheets appear via CML Distribution. Relies on manufacturer/distributor hosting rather than a personal hub."
+  },
+  {
+    "name": "Jared Tebo",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/8 nitro truggy", "1/10 electric 2WD/4WD off-road buggy", "1/8 electric buggy"],
+    "palmares": "Multi-time IFMAR World Champion and ROAR National Champion; long-time Kyosho factory driver",
+    "resources": [
+      {"type": "website", "url": "https://jtprc.com/18-setups/"},
+      {"type": "team_setup_page", "url": "https://www.liverc.com/news/kyosho-america-pro-driver-setups/"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=fdb7XBZyyNo"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Personal site 'JTP RC' hosts downloadable PDF setup sheets across Kyosho/Tekno platforms (EB48, NB48, NT48, MP9/MP9e, STRR) — last refreshed ~2022. Kyosho America publishes his event setups via LiveRC. Changing event sheets + video, not a fixed guide."
+  },
+  {
+    "name": "Cody King",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/8 nitro truggy"],
+    "palmares": "2010 IFMAR 1/8 Nitro Off-Road World Champion; Kyosho / Byron's factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://support.hobbywingdirect.com/hc/en-us/articles/9680918666899-Offroad-Team-Driver-Setup-Sheets"},
+      {"type": "blog", "url": "http://www.neobuggy.net/2013/06/15/under-the-hood-cody-king/"},
+      {"type": "blog", "url": "https://www.rccaraction.com/interview-kyosho-and-byrons-factory-driver-cody-king-chats-race-watch-2/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Weakest verification. No dedicated driver setup-sheet hub. Generic Hobbywing off-road team-sheet page plus third-party 'Under the Hood' (NeoBuggy) and RC Car Action interviews — editorial insight, not his own published setups."
+  },
+  {
+    "name": "Ryan Cavalieri",
+    "disciplines": ["off-road", "1/10 electric 2WD/4WD off-road buggy", "1/10 short course truck", "1/8 nitro buggy"],
+    "palmares": "Multi-time IFMAR 1/10 Electric Off-Road World Champion; multiple ROAR titles; Team Associated factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets.php?driver=0000000076"},
+      {"type": "team_setup_page", "url": "https://www.reedyrace.com/ae/spotlight/pages/RC10B6_Ryan_Cavalieri_EOS/index.html"},
+      {"type": "team_setup_page", "url": "https://www.reedyrace.com/ae/spotlight/pages/RC10SC5M_Cavalieri/index.html"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Dedicated CML Distribution driver page (#76) with many downloadable event setup sheets (C4.1, B44 series, RC8.2, B6), plus Reedy Race Spotlight pages narrating winning B6 and SC5M setups. Changing event sheets / editorial spotlights, not a fixed guide."
+  },
+  {
+    "name": "Dakotah Phend",
+    "disciplines": ["off-road", "1/10 electric 2WD/4WD off-road buggy", "1/10 electric stadium truck"],
+    "palmares": "ROAR National Champion (2WD/4WD); IFMAR Worlds competitor; TLR / Team Losi Racing factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.tlracing.com/on/demandware.store/Sites-tlr-us-Site/default/Page-ShowSetupSheets"},
+      {"type": "team_setup_page", "url": "http://www.tlracing.com/ProdInfo/Files/TLR03020-Setup-Sheet-Dakotah-Phend-Desert-Classic-Hobby-Action-03-2020.pdf"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/setup/losi/setup225.0/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "TLR official setup-sheet repository hosts his event sheets (e.g. directly-linked Desert Classic 22 5.0 PDF, JC Fall Nats, Florida Carpet Champs). PetitRC mirrors Losi 22 4.0/5.0 sheets. Event-specific downloadable sheets, not a fixed guide."
+  },
+  {
+    "name": "Lee Martin",
+    "disciplines": ["off-road", "1/10 electric off-road (2WD/4WD buggy)"],
+    "palmares": "4x EFRA European Champion; 2013 IFMAR Vice World Champion; longtime Schumacher 1/10 off-road factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.racing-cars.com/technical-information-cat-l1r"},
+      {"type": "team_setup_page", "url": "https://www.racing-cars.com/technical-information-cougar-ld3"},
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets.php?driver=0000000062"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Event-specific, surface-specific (astro/carpet/dry) downloadable setup sheets for Schumacher CAT L1R and Cougar LD3 on Schumacher's official technical-information pages and CML Distribution. Data-only sheets, no prose tuning theory; not a fixed guide."
+  },
+  {
+    "name": "Neil Cragg",
+    "disciplines": ["off-road", "1/10 electric off-road (2WD/4WD buggy)"],
+    "palmares": "2005 IFMAR 1/10 Electric Off-Road 2WD World Champion (RC10B4); multiple UK/European podiums; longtime Team Associated factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets.php?driver=0000000022"},
+      {"type": "blog", "url": "https://events.redrc.net/2015/07/chassis-focus-neil-cragg/"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/setup/associated/setupb6/B6_NeilCragg_Daun2018012628/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Downloadable Team Associated (B6/RC10B7/RC8B4.1) event setup sheets via CML Distribution and PetitRC. RedRC 'Chassis Focus' interview details chassis/component choices but is editorial. Sheets are data-only."
+  },
+  {
+    "name": "David Ronnefalk",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/10 electric off-road"],
+    "palmares": "IFMAR 1/8 Nitro Buggy World Champion; HB Racing factory driver",
+    "resources": [
+      {"type": "website", "url": "https://davidronnefalk.com/"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=pG8c_9n2R9A"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=07q7T6UXK5E"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=pZJsfmCU1K0"},
+      {"type": "team_setup_page", "url": "https://hbracing.com/team-driver-setting-sheets-en/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Strongest video tuning educator of the off-road group. 'Pro Tips by David Ronnefalk' YouTube series: steering plates to tune handling, shock build, brake assembly, turnbuckles, .8 mod gears, D819 setup walkthrough. Personal site aggregates his channels; HB Racing hosts his editable team sheets. Video/sheets, not a fixed guide."
+  },
+  {
+    "name": "Bruno Coelho",
+    "disciplines": ["off-road", "on-road", "1/10 electric off-road (4WD buggy)", "1/10 electric touring car"],
+    "palmares": "2019 IFMAR 1/10 Electric Off-Road 4WD World Champion; multiple IFMAR Touring World titles; XRAY factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://setup.teamxray.com/sheet/team"},
+      {"type": "blog", "url": "https://www.efra.ws/xrays-bruno-coelho-top-setup-tips/"},
+      {"type": "team_setup_page", "url": "https://www.liverc.com/news/bruno-coelhos-worlds-winning-xb4-2016-setup-sheet/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Competes at the top in BOTH off-road and touring. XRAY runs an official searchable setup portal (setup.teamxray.com) hosting his XB4 buggy and touring sheets. World-winning XB4 sheets published via LiveRC. EFRA hosts a 'Top Setup Tips' prose article under his name. Sheets are data-only; no fixed book."
+  },
+  {
+    "name": "Michal Orlowski",
+    "disciplines": ["off-road", "on-road", "1/10 electric off-road", "1/12 & GT12 on-road", "touring car"],
+    "palmares": "4x EOS Champion; 2x EFRA European Champion; multiple IFMAR Worlds medalist; 2017 BRCA GT12 World Champion; Schumacher factory driver",
+    "resources": [
+      {"type": "website", "url": "http://morlowski.pl/"},
+      {"type": "team_setup_page", "url": "https://www.facebook.com/SchumacherRC/posts/michal-orlowski-s-set-up-sheet-from-the-weekends-ets-euro-touring-series-is-now-/10157980601251433/"},
+      {"type": "blog", "url": "https://eos.redrc.net/page/32/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Schumacher driver. Personal site morlowski.pl is a social aggregator + racing-philosophy hub (8 principles), no setup sheets hosted there. Actual setup sheets released through Schumacher channels (ETS sheets on Facebook) and EOS 'Chassis Focus'. Tuning content is scattered, not centralized or fixed."
+  },
+  {
+    "name": "Robert Batlle",
+    "disciplines": ["off-road", "1/8 nitro buggy", "1/8 e-buggy"],
+    "palmares": "IFMAR 1/8 Nitro Buggy World Champion (MBX7, Argentina); multiple European titles; Mugen Seiki factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.mugenracing.com/setup-sheets/"},
+      {"type": "team_setup_page", "url": "https://www.liverc.com/news/mugen-seiki-releases-robert-batlles-worlds-winning-mbx7-setup/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Mugen's US distributor (mugenracing.com/setup-sheets) hosts downloadable Robert Batlle sheets (MBX8, Silverstate MBX-7R, MBX-7R Eco). Worlds-winning MBX7 setup via LiveRC. Data-only 1/8 nitro/e-buggy sheets; no fixed guide."
+  },
+  {
+    "name": "Juho Levanen",
+    "disciplines": ["off-road", "on-road", "1/10 electric off-road", "1/12 on-road", "touring car"],
+    "palmares": "Multiple European Champion; IFMAR Vice World Champion (1/12); Team Associated factory driver",
+    "resources": [
+      {"type": "blog", "url": "https://www.rccaraction.com/team-associateds-juho-levanen-victorious-at-polish-ets/"},
+      {"type": "team_setup_page", "url": "https://www.cmldistribution.co.uk/setup-sheets"}
+    ],
+    "has_actionable_tuning_tips": false,
+    "citable": false,
+    "notes": "Weakest verification. Confirmed Team Associated factory driver via RC Car Action editorial, but no driver-specific published setup sheet, personal site, or YouTube tuning channel attributable to him was found. CML Distribution hosts Associated team sheets generally but no Levanen-attributed sheet confirmed."
+  },
+  {
+    "name": "Ronald Volker",
+    "disciplines": ["on-road", "1/10 electric touring car (modified)"],
+    "palmares": "IFMAR ISTC Touring Car World Champion; 9x EFRA European Champion; multiple ETS titles; Yokomo factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://teamyokomo.com/download/"},
+      {"type": "book", "url": "https://www.davebstevens.com/touring-car"},
+      {"type": "blog", "url": "https://ets.redrc.net/2018/04/chassis-focus-ronald-volker-10/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": true,
+    "notes": "Yokomo's official download page (current) hosts his event setup sheets (ETS BD9/BD8). Named contributing World Champion in the published 264-page 'Essential Touring Car RC Racer's Guide' (Dave B Stevens) — a FIXED citable guide. ETS 'Chassis Focus' documents his car config."
+  },
+  {
+    "name": "Marc Rheinard",
+    "disciplines": ["on-road", "1/10 electric touring car (modified)", "1/12 pan car"],
+    "palmares": "3x IFMAR ISTC Touring Car World Champion; 2020 IFMAR 1/12 World Champion; multiple ETS titles; founder of MR33",
+    "resources": [
+      {"type": "book", "url": "https://www.davebstevens.com/touring-car"},
+      {"type": "team_setup_page", "url": "https://www.tonisport.de/en/mr33/"},
+      {"type": "blog", "url": "https://www.ets.racing/2020/04/08/interview-with-marc-rheinard-team-tonisport-awesomatix-from-germany/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": true,
+    "notes": "Lead contributing World Champion in the published 'Essential Touring Car RC Racer's Guide' (FIXED, citable). Founder of MR33 (setup tools/additives) via ToniSport. No dedicated tuning-explainer YouTube of his own verified; YouTube hits are third-party interviews."
+  },
+  {
+    "name": "Alexander Hagberg",
+    "disciplines": ["on-road", "1/10 electric touring car (modified)"],
+    "palmares": "2x IFMAR World Champion; 8x EFRA European Champion; XRAY factory driver",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.teamxray.com/teamxray/news/newsdesc.php?news_id=3871&kategoria=3871&catName=Alexander+Hagberg+Set-up+App"},
+      {"type": "blog", "url": "http://quantumracing-rc.blogspot.com/2012/05/alexander-hagberg-setup-sheet-for-xray.html"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "XRAY factory driver with downloadable named setup sheets (e.g. X4 asphalt setup). XRAY released an 'Alexander Hagberg Set-up App'. Runs driver clinics on tire prep and car setup with Jan Ratheisky. Setup sheets are per-event/per-car and updated, not a single fixed publication."
+  },
+  {
+    "name": "Yannic Prümper",
+    "disciplines": ["on-road", "1/10 electric touring car (modified)"],
+    "palmares": "Multiple Worlds A-mains, Euros podiums, ETS Modified wins/podiums; German touring ace; RC MAKER / SP1 driver from 2025",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.ets.racing/2025/01/03/rc-maker-signs-prumper/"},
+      {"type": "blog", "url": "https://www.facebook.com/profile.php?id=100055296225525"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Maintains an official 'Yannic Prümper RC' Facebook page posting races, news and setups. Formerly Infinity IF14, now RC MAKER / SP1. Setups appear via team/aggregator channels. No fixed published book; content is rolling social/setup-sheet posts."
+  },
+  {
+    "name": "Naoto Matsukura",
+    "disciplines": ["on-road", "1/10 electric touring car (modified)"],
+    "palmares": "5x IFMAR World Championship titles (Touring Car & related), 5x TQ; ex-Yokomo, Tamiya TRF",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.liverc.com/news/worlds-inside-defending-champion-naoto-matsukuras-worlds-touring-car/"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/reglages/tamiya/setuptrf421/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "World-car teardown/setup features on LiveRC ('Inside ... Worlds touring car'). Setups appear within manufacturer/aggregator repositories (Yokomo BD7-era; Tamiya TRF421 via petitrc). No verified personal site/YouTube/fixed guide of his own. Content is car-spec breakdowns and event sheets."
+  },
+  {
+    "name": "Akio Sobue",
+    "disciplines": ["on-road", "1/12 pan car", "1/10 electric touring car"],
+    "palmares": "Japanese ace; multiple 1/12 Worlds podiums (2x 2nd) and a TQ run; CRC, later AXON / T-Work's / Infinity",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.rc-tworks.com/blogs/news/team-t-works-driver-akio-sobue"},
+      {"type": "team_setup_page", "url": "https://www.liverc.com/news/worlds-inside-akio-sobues-112th-scale-worlds-car/"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/reglages/creationmodel/SetupSheetIF14II/IF14II_AkioSobue_TITC2020022123/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Team driver pages (T-Work's) and a LiveRC 'Inside his 1/12 Worlds car' teardown document his setups; Infinity IF14-II TITC 2020 setup sheet on petitrc. Event setup sheets + car breakdowns; no fixed published guide of his own verified."
+  },
+  {
+    "name": "Jan Ratheisky",
+    "disciplines": ["on-road", "1/10 F1", "1/12 pan car"],
+    "palmares": "IFMAR F1 World Champion (2018, Xray X1)",
+    "resources": [
+      {"type": "book", "url": "https://www.davebstevens.com/essential-12th-f1-rc-racers-guide"},
+      {"type": "book", "url": "https://www.amazon.com/Essential-12th-F1-Racers-Guide/dp/0648581136"},
+      {"type": "team_setup_page", "url": "https://teamxray.com/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": true,
+    "notes": "Contributing world-champion expert to Dave B. Stevens' fixed published book 'Essential 1/12th & F1 RC Racer's Guide' (ISBN 9780648581130), containing step-by-step F1/pan-car setup techniques. No verified personal site/blog/YouTube of his own."
+  },
+  {
+    "name": "David Spashett",
+    "disciplines": ["on-road", "1/12 pan car"],
+    "palmares": "Multiple-time 1/12th IFMAR World Champion (won all three classes at the 1998 On-Road Worlds, England)",
+    "resources": [
+      {"type": "book", "url": "https://www.davebstevens.com/essential-12th-f1-rc-racers-guide"},
+      {"type": "youtube", "url": "https://www.youtube.com/watch?v=2OMLoSr4vHk"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": true,
+    "notes": "Contributing world-champion expert to the fixed published book 'Essential 1/12th & F1 RC Racer's Guide' (1/12 pan-car setup techniques). Also appears in a 'David Spashett Chassis Workshop' YouTube video (RC RACE CAR GP channel) — a one-off explainer, not his own channel."
+  },
+  {
+    "name": "Andy Moore",
+    "disciplines": ["on-road", "1/10 electric touring car"],
+    "palmares": "IFMAR Electric Touring Car World Champion (2006/2007); multiple ETS/UK titles; HPI, then HB Racing",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://www.hpiracing.com/en/article/view/2004080301"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/Tech/HB_AM-WCPreparation/"},
+      {"type": "blog", "url": "https://events.redrc.net/2013/10/chassis-focus-andy-moore/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Downloadable winning HPI Pro 4 setup sheet hosted by HPI; a detailed Hot Bodies World Championship preparation write-up (parts/build prep) on petitrc; ETS/RedRC 'Chassis Focus' interviews. Real published content but not a fixed citable guide."
+  },
+  {
+    "name": "Olly Jefferies",
+    "disciplines": ["on-road", "1/10 electric touring car", "1/12 pan car / LMP12"],
+    "palmares": "11x British Champion; BRCA Modified TC + BRCA Stock 1/12th titles; multiple ETS & IFMAR A-finalist; Xray, then Schumacher",
+    "resources": [
+      {"type": "team_setup_page", "url": "http://site.petitrc.com/reglages/asso/setups/rc10tc6/TC6_BuildTips/"},
+      {"type": "blog", "url": "https://www.redrc.net/2015/09/alex-hagberg-olly-jefferies-exclusive-interview/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "Verified 'Team Associated TC6 — Olly Jefferies Build Tips' (detailed touring-car build/setup tips on petitrc), plus technical R&D interviews on RedRC. CORRECTION: the 'Invisible Speed RC' YouTube channel often associated with him is actually Joseph Quagraine (JQ), NOT Olly Jefferies — no dedicated personal YouTube channel under his own name verified."
+  },
+  {
+    "name": "Christopher Krapp",
+    "disciplines": ["on-road", "1/10 electric touring car"],
+    "palmares": "Tamiya World Champion (2007); multi-time IFMAR TC Worlds A-finalist; ETS wins/TQs; Kyosho, Tamiya/TRF, then Yokomo factory driver & EU team manager",
+    "resources": [
+      {"type": "team_setup_page", "url": "https://teamyokomo.com/download/"},
+      {"type": "team_setup_page", "url": "https://site.petitrc.com/reglages/yokomo/setupms2.0/"},
+      {"type": "blog", "url": "https://www.ets.racing/2026/03/21/under-the-hood-christopher-krapps-yokomo-ms2-0/"}
+    ],
+    "has_actionable_tuning_tips": true,
+    "citable": false,
+    "notes": "As Yokomo factory driver/EU team manager, his event setup sheets are on the official Yokomo download page and mirrored in petitrc's per-model archives (BD11/MS2.0). ETS 'Under the Hood' and RedRC 'Chassis Focus' give car-specific tuning detail. Downloadable sheets but not a fixed citable book."
+  }
+]

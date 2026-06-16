@@ -11,7 +11,7 @@
 #     - PAGE-CITABLE backbone (real fixed-layout file/book with the exact page filled in).
 #       Every rule now carries at least one TBD-free page cite, extracted via pdftotext
 #       (2026-06-16): "AE RC Cheat Sheets p.NN (<topic>)" from RC_CheatSheets.pdf, and
-#       "HUDY Set-Up Handbook p.NN (Effects of <topic> Adjustment)" from HudySetupBook.pdf
+#       "Hudy Setup Tips p.NN (<section> — <effect as the book states it>)" from the off-road
 #       for the cause->effect axes the AE sheet does not cover off-road (caster, rear toe,
 #       front/rear droop). The Stevens book is print/eBook so its lines stay "[section TBD]"
 #       SECONDARY corroborations — never the sole cite. The "Traxxas Slash Spec Racing Setup
@@ -353,7 +353,8 @@
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster angle: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy track conditions)"
+    # REVIEW: book (Caster, Effects of Caster Adjustment p.18) lists ONLY straight-line stability + off-power entry steering + bump stability for more caster. It does NOT state "on-power steering in mid-corner and corner exit" (on_power_steering_exit effect axis). Over-claim trimmed from the cite; verify the axis against another source or drop it.
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — more caster angle (more inclined): increases straight-line stability, decreases off-power steering at corner entry, makes the car more stable through bumpy track conditions)"
     - "CompetitionX RC Tuning Guide — Caster (corroboration: more caster = more on-power steering exiting, more stable on straights and through bumps, easier to drive; kick-up adds to total caster in 2WD)"
   scope: [1-10-2wd-offroad]
 
@@ -375,7 +376,8 @@
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
+    # REVIEW: book (Caster, Effects of Caster Adjustment p.18) states for less caster ONLY: decreases straight-line stability, increases off-power steering at corner entry, increases suspension efficiency. It does NOT state "decreases on-power steering in mid-corner and corner exit". That trimmed clause was symmetric to the more-caster over-claim above.
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, increases suspension efficiency)"
     - "CompetitionX RC Tuning Guide — Caster (corroboration: less caster = quicker steering, more off-power steering entering, less stable on straights and through bumps)"
   scope: [1-10-2wd-offroad]
 
@@ -420,7 +422,8 @@
   reversal_cost_minutes: 4
   confidence: medium
   sources:
-    - "AE RC Cheat Sheets p.49 (Toe-in, toe-out, front — toe-out is unstable in bumps and on the straightaway, so toe-in / less toe-out is the more stable / straight-line setting); HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, front — increasing toe-in: more stable on-power and on straight)"
+    # REVIEW: book front-toe table (Toe, Effects of Toe Adjustment p.20) is sparse: increasing toe-in only states "Makes car easier to drive"; "more stable on-power and on straight" is inferred from the decreasing-toe-in row ("Less stable under acceleration") + the section intro ("Toe is used to stabilize the car"). The AE primary cite carries the straight-line stability claim; the HUDY clause is corroboration only.
+    - "AE RC Cheat Sheets p.49 (Toe-in, toe-out, front — toe-out is unstable in bumps and on the straightaway, so toe-in / less toe-out is the more stable / straight-line setting); Hudy Setup Tips p.20 (Toe, Effects of Toe Adjustment, front — increasing toe-in: makes car easier to drive; decreasing toe-in: less stable under acceleration)"
     - "Traxxas Slash Spec Racing Setup Guide (toe-in = better straight-line stability and more steering through and out of a corner)"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: front toe-in = more on-power steering)"
   scope: [1-10-2wd-offroad]
@@ -445,7 +448,7 @@
   reversal_cost_minutes: 8
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, rear toe — increasing (more toe-in): increases traction, more stable, more push, less cornering speed)"
+    - "Hudy Setup Tips p.20 (Toe, Effects of Toe Adjustment, rear toe — increasing (more toe-in): more stable exiting on-power at corner exit and braking, less chance of losing rear traction, increases understeer, decreases top speed)"
     - "Dave B Stevens — Essential Off-road RC Racer's Guide (rear toe) [section TBD]"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: more rear toe-in = more forward traction, slower acceleration, less rotation; best for low-traction tracks)"
   scope: [1-10-2wd-offroad]
@@ -468,7 +471,8 @@
   reversal_cost_minutes: 8
   confidence: medium
   sources:
-    - "HUDY Set-Up Handbook p.44 (Effects of Toe Adjustment, rear toe — decreasing (less toe-in): less traction, more cornering speed, more on-power steering, better rotation)"
+    # REVIEW: book rear-toe table (Toe, Effects of Toe Adjustment p.20) for decreasing toe-in states ONLY: less stable at on-power corner exit and braking, more chance of losing rear traction, increases top speed. It does NOT state "more on-power steering" or "better rotation" (rotation axis) — those map to the rule's rotation: more / on_power_stability: less effects but are not in the book. CompetitionX corroborates "more rotation"; verify or lean on CompetitionX for that axis.
+    - "Hudy Setup Tips p.20 (Toe, Effects of Toe Adjustment, rear toe — decreasing (less toe-in): less stable at on-power corner exit and braking, more chance of losing rear traction, increases top speed)"
     - "CompetitionX RC Tuning Guide — Toe (corroboration: less rear toe-in = more high-speed stability, faster acceleration, more rotation; for high-traction surfaces)"
   scope: [1-10-2wd-offroad]
 
@@ -494,7 +498,8 @@
   reversal_cost_minutes: 5
   confidence: high
   sources:
-    - "AE RC Cheat Sheets p.29 (Ride Height, front — lower: less chance of flipping in corners / on carpet; HUDY Set-Up Handbook p.36: decreasing ride height = faster reaction, better on smooth tracks)"
+    # REVIEW: book ride-height table (Ride Height, Effects of Ride Height Adjustment p.12) states only "Decreasing ride height -> Increases overall stability". It does NOT say decreasing = "faster reaction" (responsiveness: more) and it attributes "Better on smooth tracks" to INCREASING ride height, not decreasing. The responsiveness/smooth-track mapping rests on the AE primary + CompetitionX corroboration, not on this book.
+    - "AE RC Cheat Sheets p.29 (Ride Height, front — lower: less chance of flipping in corners / on carpet; Hudy Setup Tips p.12 (Ride Height, Effects of Ride Height Adjustment): decreasing ride height = increases overall stability)"
     - "CompetitionX RC Tuning Guide — Ride Height (corroboration: lower = less chassis roll, more responsive, worse for bumps/jumps)"
   scope: [1-10-2wd-offroad]
 
@@ -540,7 +545,8 @@
   reversal_cost_minutes: 6
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Front Droop — more front droop (lower front downstop value): increases rearward weight transfer on-throttle, more responsive/less stable, better on bumpy tracks)"
+    # REVIEW: book uses "downstop value" (more droop = LOWER downstop value). For front, lower value/more droop (Downstops, Effects of Downstop Adjustment p.10) the book lists: increases upward chassis travel on-throttle, more rearward weight transfer, increases rear traction on corner exit, better on bumpy tracks. The book does NOT call more droop "more responsive" — it assigns "more responsive in direction change" to the HIGHER downstop value / LESS droop. Cite corrected to book wording; the rule's initial_steering: less / high_speed_stability: less still hold but "more responsive" is the book's opposite-setting trait.
+    - "Hudy Setup Tips p.10 (Downstops, Effects of Downstop Adjustment, Front Downstops — lower downstop value / more front droop: increases upward chassis travel on-throttle, more rearward weight transfer, increases rear traction on corner exit, better on bumpy tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: more front droop = more weight transfer to rear accelerating, more on-power steering, less aggressive steering, less stable at high speed)"
   scope: [1-10-2wd-offroad]
 
@@ -564,7 +570,8 @@
   reversal_cost_minutes: 6
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Front Droop — less front droop (higher front downstop value): less rearward weight transfer, less responsive/more stable, better on smooth tracks)"
+    # NOTE: book wording was BACKWARDS in the old cite. For front, higher downstop value / LESS droop (Downstops, Effects of Downstop Adjustment p.10) the book lists: decreases front chassis upward travel on-throttle, less rearward weight transfer, better on smooth tracks, MORE on-power steering, MORE responsive in direction change. So less droop = more responsive (book), which matches this rule's initial_steering: more / high_speed_stability: more. (The old "less responsive" descriptor was the error, now fixed.)
+    - "Hudy Setup Tips p.10 (Downstops, Effects of Downstop Adjustment, Front Downstops — higher downstop value / less front droop: decreases front chassis upward travel on-throttle, less rearward weight transfer, better on smooth tracks, more on-power steering, more responsive in direction change)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: less front droop = more aggressive steering, less traction rolling, more stable at high speeds, less on-power steering)"
   scope: [1-10-2wd-offroad]
 
@@ -586,7 +593,7 @@
   reversal_cost_minutes: 6
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Rear Droop — more rear droop (lower rear downstop value): increases forward weight transfer under braking, more responsive/less stable under braking, better on bumpy tracks)"
+    - "Hudy Setup Tips p.10 (Downstops, Effects of Downstop Adjustment, Rear Downstops — lower downstop value / more rear droop: increases rear chassis upward travel off-throttle or under braking, less stable under braking, increases steering on corner entry, more turn-in, better on bumpy tracks)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: more rear droop = more stable over bumps, more weight transfer to front under braking, less stable under braking)"
   scope: [1-10-2wd-offroad]
 
@@ -608,7 +615,7 @@
   reversal_cost_minutes: 6
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.37 (Effects of Droop Adjustment, Rear Droop — less rear droop (higher rear downstop value): decreases forward weight transfer, more stable under braking, better on smooth tracks)"
+    - "Hudy Setup Tips p.10 (Downstops, Effects of Downstop Adjustment, Rear Downstops — higher downstop value / less rear droop: decreases rear chassis upward travel off-throttle or under braking, less forward weight transfer, better on smooth tracks; lower value is the one the book calls less stable under braking, so less droop = more braking stability)"
     - "CompetitionX RC Tuning Guide — Droop (corroboration: less rear droop = more stable under braking, less stable over bumps)"
   scope: [1-10-2wd-offroad]
 

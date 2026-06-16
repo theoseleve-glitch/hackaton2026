@@ -1,0 +1,192 @@
+[
+  {
+    "name": "XRAY NT1 Set-Up Book (Martin Hudy, XRAY R&D)",
+    "type": "manufacturer_setup_book",
+    "url": "https://www.teamxray.com/nt1/2015/download/files/nt1-set-up-book.pdf",
+    "categories_covered": ["1/10 200mm nitro on-road"],
+    "page_citable": true,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "VERIFIED RESOLVES (2.2MB valid PDF). This is the ON-ROAD analogue of the off-road HUDY book: same XRAY one-topic-per-page set-up-book format authored by Martin Hudy, explaining the EFFECT of each adjustment (weight transfer, roll centers, droop, camber, ride height, springs, anti-roll bars) specifically for a 1/10 200mm nitro touring car. Page-citable. Strongest free, authoritative on-road grounding source found. Older 2013 edition also free at https://www.teamxray.com/nt1/2014/download/files/nt1_2013_setupbook.pdf"
+  },
+  {
+    "name": "XRAY X4 Instruction Manual (current electric touring)",
+    "type": "manufacturer_setup_book",
+    "url": "https://teamxray.com/downloads/22/x4_2024_manual_v01_low.pdf",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "Official current X4 manual on teamxray.com download tab. XRAY manuals embed tuning/effect notes alongside assembly. For pure effect explanations the NT1 set-up book is cleaner; the X4 manual is the citable electric-touring companion. Older free editions: x4_2023 (https://teamxray.com/downloads/74/x4f_2023_manual_low.pdf), x4_2022 (https://teamxray.com/downloads/83/x4_2022_manual_low.pdf). T4 line download hub: https://teamxray.com/t4/2020/en/download/"
+  },
+  {
+    "name": "Essential Touring Car RC Racer's Guide (Dave B Stevens, w/ Rheinard & Volker)",
+    "type": "tuning_guide_book",
+    "url": "https://www.davebstevens.com/touring-car",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": true,
+    "access": "paid",
+    "notes": "264-page book; 70+ pages 'advice for every car setting A-Z: what they do, how they work, effects'. Co-developed with IFMAR World Champions Marc Rheinard (3x) and Ronald Volker. Fixed-layout print + eBook = page-citable. The single best STRUCTURED on-road tuning bible for touring. Paid (must buy a copy to cite). Electric touring focus; many principles transfer to GT/nitro on-road. Buy: https://store.rcformula1.com.au/product/book-essential-touring-car-rc-racers-guide/"
+  },
+  {
+    "name": "Essential 1/12th & F1 RC Racer's Guide (Dave B Stevens, w/ Spashett & Ratheisky)",
+    "type": "tuning_guide_book",
+    "url": "https://www.davebstevens.com/essential-12th-f1-rc-racers-guide",
+    "categories_covered": ["1/12 pan", "1/10 F1"],
+    "page_citable": true,
+    "explains_effects": true,
+    "access": "paid",
+    "notes": "Companion bible for the two thinnest-documented categories. 60+ pages 'advice for every setting A-Z: what they do, how they work, effects'. Co-developed with 3x IFMAR 1/12 World Champion David Spashett and F1 IFMAR World Champion Jan Ratheisky. Fixed-layout = page-citable. The only authoritative structured grounding for pan + F1 we found. Paid. Buy: https://store.rcformula1.com.au/product/essential-1-12th-f1-rc-racers-guide/"
+  },
+  {
+    "name": "Mugen MGT7 1/8 GT Nitro On-Road Manual + Setup Sheet",
+    "type": "manufacturer_setup_book",
+    "url": "https://www.manualslib.com/manual/1627989/Mugen-Seiki-Supertouring-Mgt-7-Gt-Nitro.html",
+    "categories_covered": ["1/8 GT on-road"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Official 1/8 GT nitro on-road manual + standard setup sheet. Primarily assembly + a blank/standard setup sheet; limited effect explanation (mostly numbers, not 'what each change does'). Useful for kit-default ride heights/oils/springs to seed a GT baseline, but NOT a strong effects source. Official spec hub: http://www.mugenseiki.com/spec-mgt7_e.htm (lists Setup Sheet 291KB + Manual). For the MTX7 touring-nitro variant: http://www.mugenseiki.com/spec-mtx7_e.htm"
+  },
+  {
+    "name": "Awesomatix A800 series Manuals + Setup Sheets (official USA downloads)",
+    "type": "manufacturer_setup_book",
+    "url": "http://www.awesomatixusa.com/p/downloads.html",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "VERIFIED RESOLVES. Official free manuals + editable setup sheets for A800/A800X/MMX/MMCX. Build manuals + setup sheets, NOT effect-explainers. Awesomatix is the benchmark touring platform so kit defaults are valuable baselines, but for 'effect of each change' pair with the Stevens book or NT1. Crash-course tuning corroboration (unofficial, web): https://site.petitrc.com/reglages/awesomatix/A800CrashCourseGuide0.1.pdf"
+  },
+  {
+    "name": "Tamiya TRF series manuals (TRF420/421 touring)",
+    "type": "manufacturer_setup_book",
+    "url": "https://www.thercracer.com/p/manuals.html",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "TRF420/421 manuals + setup sheets via The RC Racer hub and ManualsLib. Assembly + setup-sheet oriented, light on effect theory. Good for Tamiya-specific kit defaults. Per-model PDFs on ManualsLib (e.g. TRF420 entry from thercracer 42345 post)."
+  },
+  {
+    "name": "Yokomo BD11 / BD12 Touring Manuals (official)",
+    "type": "manufacturer_setup_book",
+    "url": "https://teamyokomo.com/downloadfiles/!02!MANUAL/!05!ON-ROAD_KIT/BD11_Manual.pdf",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Official Yokomo on-road kit manual PDFs (direct from teamyokomo.com). BD12 via ManualsLib: https://www.manualslib.com/manual/3058031/Yokomo-Master-Speed-Bd12.html . Build + setup sheet; minimal effect explanation. Yokomo BD is a top carpet/asphalt touring platform - good baseline source. PetitRC mirror w/ surface-specific setups: https://site.petitrc.com/reglages/yokomo/setupbd11/"
+  },
+  {
+    "name": "Mugen MTC2/R Touring Manual + Setup Sheets",
+    "type": "manufacturer_setup_book",
+    "url": "https://site.petitrc.com/reglages/mugen/setupmtc2/MTC2_Manual.pdf",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Mugen MTC2 touring manual + blank/base setup sheets + asphalt/carpet reference setups, aggregated by PetitRC. Editable blank sheet from Mugen: http://www.mugenseiki.com/images/mtc2/setup_sheet/mtc2-setupsheet-editable-2001blank.pdf . Assembly + sheets, not effect theory."
+  },
+  {
+    "name": "Infinity IF14 / IF15 Touring Manuals + Setup Sheets",
+    "type": "manufacturer_setup_book",
+    "url": "https://site.petitrc.com/reglages/creationmodel/SetupSheetIF14/",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Creation Model Infinity IF14/IF15 manuals + setup sheets (PetitRC aggregation; official site creationmodel.net). IF14Speciale official manual PDF: https://spec1ale.creationmodel.net/wp-content/uploads/INFINITY-IF14Speciale-instruction-manual.pdf . Build + sheets; baseline source only."
+  },
+  {
+    "name": "Capricorn LAB C03 / C04 Touring Manuals (official)",
+    "type": "manufacturer_setup_book",
+    "url": "http://www.capricornrc.com/download/lab-c03-manual-rel-1-3/",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Official Capricorn download portal for LAB touring manuals (C03 rel 1.3, C803). ManualsLib mirror: https://www.manualslib.com/manual/1138049/Capricorn-Lab-C03.html . Build + setup sheets; Capricorn also makes the LAB P12 1/12 pan (manual via RCScrapyard). Baseline source."
+  },
+  {
+    "name": "Schumacher Atom / Eclipse Touring & Pan Manuals",
+    "type": "manufacturer_setup_book",
+    "url": "https://www.manualslib.com/manual/1124298/Schumacher-Racing-Atom.html",
+    "categories_covered": ["1/10 electric touring car", "1/12 pan"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Schumacher Racing on-road manuals (Atom touring; Eclipse is their 1/12 pan line). Build/setup-sheet oriented. Schumacher historically publishes good tuning notes inside some manuals - worth a per-page read for pan-car content. Baseline source."
+  },
+  {
+    "name": "Serpent Viper 977 1/8 On-Road Manual + Reference Guide",
+    "type": "manufacturer_setup_book",
+    "url": "http://www.asukacreate.com/Manual/977e_EVO2.pdf",
+    "categories_covered": ["1/8 GT on-road"],
+    "page_citable": true,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Serpent Viper 977 is 1/8 nitro on-road (NOT 1/10 200mm - correct the brief). Manual incl. a 'Reference Guide' section with fine-tuning notes. ManualsLib mirrors: https://www.manualslib.com/manual/1321743/Serpent-Viper-977-Evo-2.html . Closest official 1/8 on-road effects-adjacent source after Mugen GT. Build + reference; partial effect notes."
+  },
+  {
+    "name": "CRC (Calandra Racing) Gen-X 1/12 Pan Car Manual + Tuning Guide",
+    "type": "manufacturer_setup_book",
+    "url": "https://www.teamcrc.com/crc/downloads/manuals/gen-x_manual_web.pdf",
+    "categories_covered": ["1/12 pan"],
+    "page_citable": true,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "CRC is the dominant US 1/12 pan-car brand; their manuals historically include a dedicated 'Tuning Guide' explaining side-spring / tube / ride-height / front-end effects for pan cars (couldn't auto-parse the 10MB+ PDF but title appeared as 'Tuning Guide' in search). VERIFY the tuning section by opening it. Best FREE pan-car effects candidate; pair with the Stevens 1/12 book."
+  },
+  {
+    "name": "RC Maker - Awesomatix/touring Build & Tuning Tutorials",
+    "type": "web_guide",
+    "url": "https://www.rcmaker.com.au/pages/support",
+    "categories_covered": ["1/10 electric touring car"],
+    "page_citable": false,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "RC Maker (Michael Salven / pro-level) tutorials on diff tuning, anti-roll bars, ARS, rear wheelbase, damper assembly - genuinely effect-focused. WEB = corroboration only, not page-citable (D18 web ban on advice path). Use to cross-check a rule, never as the sole cited source."
+  },
+  {
+    "name": "CompetitionX RC Tuning Guide (suspension/anti-roll bar/quick setup)",
+    "type": "web_guide",
+    "url": "https://www.competitionx.com/rc-tuning-guide/",
+    "categories_covered": ["1/10 electric touring car", "1/8 GT on-road"],
+    "page_citable": false,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "Broad effect-explaining tuning articles (anti-roll bar, camber, toe, quick setup matrix). General RC, not on-road-specific or page-fixed. Corroboration only under D18; web cannot be the cited source."
+  },
+  {
+    "name": "RC Formula1 - 'Setup Explained' free article (rc-setup.com reprint)",
+    "type": "web_guide",
+    "url": "https://rcformula1.com.au/index.php/articles/10/46-setup-explained",
+    "categories_covered": ["1/10 F1"],
+    "page_citable": false,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "VERIFIED RESOLVES. Free F1 setup article: camber, toe, spring rate, travel, damping with stated effects (e.g. 'increased front toe-in = more straight-line stability, slower turn-in'). Explicitly free to distribute. NOT comprehensive (no droop/ride-height) and web = corroboration only. Good free F1 sanity-check while the Stevens F1 book is the citable source."
+  },
+  {
+    "name": "PetitRC (Pétrip) On-Road Setup Sheet Archive",
+    "type": "setup_sheet_db",
+    "url": "https://site.petitrc.com/reglages/",
+    "categories_covered": ["1/10 electric touring car", "1/8 GT on-road", "1/10 200mm nitro on-road", "1/12 pan", "1/10 F1"],
+    "page_citable": false,
+    "explains_effects": false,
+    "access": "free",
+    "notes": "Massive free aggregation of official manuals, blank/base setup sheets, and pro race setups per chassis and surface (asphalt/carpet). DATA SOURCE, not a theory/effects source. Excellent for kit-default + pro baseline numbers to seed registry chassis entries. Not page-citable as a tuning rationale."
+  },
+  {
+    "name": "So Dialed - Pan Car & F1 / Touring Setup Database",
+    "type": "setup_sheet_db",
+    "url": "https://www.sodialed.com/rc-setup-guides",
+    "categories_covered": ["1/10 electric touring car", "1/8 GT on-road", "1/12 pan", "1/10 F1"],
+    "page_citable": false,
+    "explains_effects": true,
+    "access": "free",
+    "notes": "The competitor referenced in CLAUDE.md. Hosts factory manuals, setup sheets, and per-setting effect explainer pages (anti-roll bar, etc) across pan/F1/touring/GT. Useful competitive corroboration + a map of which chassis/classes matter. Web = not citable for D18 advice path."
+  }
+]

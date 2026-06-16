@@ -463,7 +463,8 @@
   reversal_cost_minutes: 15
   confidence: medium
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy)"
+    # REVIEW: book (Caster, Effects of Caster Adjustment p.18) lists ONLY straight-line stability + off-power entry steering + bump stability for more caster. It does NOT state "on-power steering in mid-corner and corner exit" (on_power_steering_exit effect axis). Over-claim trimmed; that axis rests on the AE corroboration, not the book.
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — more caster angle (more inclined): increases straight-line stability, decreases off-power steering at corner entry, makes the car more stable through bumpy track conditions)"
     - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration: SC10 short-course truck pictured)"
   scope: [1-10-shortcourse]
 
@@ -485,7 +486,7 @@
   reversal_cost_minutes: 15
   confidence: medium
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, increases suspension efficiency)"
     - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration: SC10 short-course truck pictured)"
   scope: [1-10-shortcourse]
 

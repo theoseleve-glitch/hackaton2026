@@ -502,7 +502,8 @@
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — more caster: increases straight-line stability, decreases off-power steering at corner entry, increases on-power steering in mid-corner and corner exit, more stable in bumpy)"
+    # REVIEW: book (Caster, Effects of Caster Adjustment p.18) lists ONLY straight-line stability + off-power entry steering + bump stability for more caster. It does NOT state "on-power steering in mid-corner and corner exit" (on_power_steering_exit effect axis). Over-claim trimmed; that axis rests on the petitrc/AE corroborations, not the book.
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — more caster angle (more inclined): increases straight-line stability, decreases off-power steering at corner entry, makes the car more stable through bumpy track conditions)"
     - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Caster (corroboration: more caster aids stability and handling in bumpy sections)"
     - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration on stability)"
   scope: [1-10-4wd-offroad]
@@ -525,7 +526,7 @@
   reversal_cost_minutes: 15
   confidence: high
   sources:
-    - "HUDY Set-Up Handbook p.42 (Effects of Caster Adjustment — less caster (more vertical): decreases straight-line stability, increases off-power steering at corner entry, decreases on-power steering in mid-corner and corner exit)"
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, increases suspension efficiency)"
     - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Caster (corroboration: less caster increases steering drastically, the car turns tighter and faster)"
     - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration)"
   scope: [1-10-4wd-offroad]

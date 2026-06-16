@@ -1,0 +1,157 @@
+[
+  {
+    "name": "XRAY Virtual Set-up Sheet Database",
+    "url": "https://setup.teamxray.com/",
+    "kind": "manufacturer_db",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups", "per_track"],
+    "categories": ["onroad_touring", "onroad_pan_1_12", "onroad_formula", "offroad_buggy_1_10", "offroad_buggy_1_8", "offroad_truggy", "rally_GT", "nitro_onroad_NT1"],
+    "format": "online tool (browse/edit/store) + PDF download per setup",
+    "access": "free",
+    "volume": "~19,547 setups (verified on homepage); largest single-manufacturer race-setup DB online",
+    "notes": "GOLD for per-track validation. Real factory-driver + event setups tagged by event/track/country (Hudy Series, ETS, national champs). Browsing visible without login; some upload/personal features need a (free) Team XRAY account. Covers XB8/XB4/X4/X12/NT1/RX8/GT across 2012-2026 model years. Sister blank-sheet PDFs also linked from teamxray.com per-model pages."
+  },
+  {
+    "name": "petitRC Setup Sheet Database (site.petitrc.com)",
+    "url": "https://site.petitrc.com/",
+    "kind": "community_archive",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups", "per_track"],
+    "categories": ["onroad_touring", "onroad_pan_1_12", "onroad_formula", "offroad_buggy_1_10", "offroad_buggy_1_8", "offroad_truck_SC", "oval", "drift", "drag", "moto"],
+    "format": "per-model HTML pages linking PDF/image setup sheets + manuals + diagrams",
+    "access": "free",
+    "volume": "Very large: 100+ manufacturers, hundreds of models; per model typically blank sheet + base/kit sheet + several race sheets + manual + tips. Also 30+ ESC setup sheets.",
+    "notes": "Single richest cross-manufacturer archive. Structured /setup/<brand>/<model>/ URL scheme makes it crawlable for batch extraction. Covers Associated, Tamiya, Kyosho, TLR/Losi, Schumacher, Serpent, XRAY, Yokomo, Mugen, ARC, RC Maker, Awesomatix, etc. Community-curated (submit via arn0 [at] petitrc.com). Mix of blank + base + driver/event sheets per model. Confirmed live."
+  },
+  {
+    "name": "So Dialed - RC Setup App, Setups DB & Manufacturer Sheet export",
+    "url": "https://www.sodialed.com/setups",
+    "kind": "community_archive",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups", "per_track", "effect_tables"],
+    "categories": ["offroad", "onroad", "oval", "drift", "drag"],
+    "scale_range": "1/5 to 1/28",
+    "format": "web app + mobile app; exports to original manufacturer PDF setup sheet for supported cars",
+    "access": "free + paid (app tiers)",
+    "volume": "698 models across 74 manufacturers (their stated coverage); user-shared setups searchable by track/conditions",
+    "notes": "This is the DIRECT competitor (RaceLab aims to beat it). Useful as a coverage/UX benchmark and a source of community per-track setups. Notably maps several cars to their official manufacturer PDF layout (Associated B6.4/D, B74.2/D, RC8 B4/E, XRAY X4'22, TLR 8IGHT-X/E 2.0, Tekno NB/EB48 2.1) - good reference for pdf-map field layouts. Also has setup GUIDES / reference sheets at /rc-setup-guides (effect-table-style tuning explanations)."
+  },
+  {
+    "name": "Team Associated A-Team Apps (RC Cheat Sheets + tuning tools)",
+    "url": "https://apps.associatedelectrics.com/ateamapps/index.html",
+    "kind": "manufacturer_db",
+    "contains": ["kit_defaults", "effect_tables"],
+    "categories": ["offroad", "onroad", "oval", "electric", "nitro"],
+    "format": "web-based PDFs + iOS/Android app (RC Cheat Sheets V2)",
+    "access": "free",
+    "volume": "100+ cheat sheets, multiple calculators/charts",
+    "notes": "STRONGEST grounding source for EFFECT TABLES (cause->effect tuning logic that maps to RaceLab KB rules). Contains: RC Cheat Sheets (handling/symptom->fix guidance for offroad+onroad+oval, brand-agnostic), RC Glossary, spring-rate charts, shock/piston/anti-roll-bar fitment, runtime + final-drive + pit-stop calculators, beginner-mistakes guide. Brand-agnostic tuning theory = directly citable. NOT per-track race setups (those moved to news posts/LiveRC)."
+  },
+  {
+    "name": "Team Associated / Reedy event & ROAR Nationals winning setups",
+    "url": "https://www.liverc.com/news/team-associated-releases-roar-nationals-setup-sheets/",
+    "kind": "event_setups",
+    "contains": ["race_setups", "per_track"],
+    "categories": ["offroad_buggy", "offroad_truck_SC", "onroad_touring"],
+    "format": "PDF setup sheets announced via LiveRC / AE news / Reedy Power / Reedy Race spotlight pages",
+    "access": "free",
+    "volume": "Per-event drops (e.g. all 9 winning ROAR Nats setups; Reedy Race champion sheets year by year)",
+    "notes": "Champion-exact sheets for a known track+date+condition (Cavalieri, Pannone, etc.) - GOLD for validating rule DIRECTION. The old www.teamassociated.com/setupsheets path now 404s/redirects; current access is via reedyrace.com spotlight pages, reedypower Facebook posts, and LiveRC news. Pair with the event report for track/weather context."
+  },
+  {
+    "name": "Team Losi Racing (TLR) Vehicle Support - Setup Sheets",
+    "url": "https://www.tlracing.com/vehicle-support/",
+    "kind": "manufacturer_db",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups", "per_track"],
+    "categories": ["offroad_buggy_1_10_2wd", "offroad_buggy_1_10_4wd", "offroad_buggy_1_8", "offroad_truggy_1_8"],
+    "format": "per-vehicle PDF set-up sheets + manuals + exploded views (Horizon/Demandware CDN)",
+    "access": "free",
+    "volume": "All current + legacy TLR vehicles; per vehicle a baseline sheet plus driver/track sheets",
+    "notes": "Official baseline (kit) setups per vehicle; some models also carry team-driver per-track sheets. Clean per-vehicle download pages (Page-ShowSetupSheets?pid=...). Good for KIT-DEFAULT extraction of the 1/8 8IGHT-X/E 2.0 and 22-series. Free, no login."
+  },
+  {
+    "name": "Mugen Seiki Setup Sheet Database / Setting Sheet Archives",
+    "url": "https://www.mugenseiki.com/setting_sheet_archives-e.htm",
+    "kind": "manufacturer_db",
+    "contains": ["kit_defaults", "race_setups", "per_track"],
+    "categories": ["offroad_buggy_1_8", "offroad_truggy_1_8", "offroad_buggy_eco_electric"],
+    "format": "PDF setup sheets per model (kit sheet + team-driver/event sheets)",
+    "access": "free",
+    "volume": "Per-model kit sheet + a database of driver sheets (Adam Drake, Robert Batlle, Maifield, Stringer, Pettit) incl. IFMAR Worlds (Perth) setups",
+    "notes": "Strong for 1/8 nitro/e-buggy. Kit sheet URL pattern e.g. mugenseiki.com/images/mbx8r/setup_sheet/...kit.pdf. Worlds/championship driver sheets = good direction-validation for 1/8 offroad. NOTE: the .com host had a TLS cert warning on fetch (still reachable in browser); mugenracing.com (US distributor) mirrors many MBX7/MBX8 driver sheets. petitRC also mirrors MBX8 sheets."
+  },
+  {
+    "name": "Awesomatix Setups (official DB) + Awesomatix USA downloads",
+    "url": "https://setup.awesomatix.net/",
+    "kind": "manufacturer_db",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups", "per_track"],
+    "categories": ["onroad_touring_1_10", "onroad_pan_1_12", "onroad_fwd_1_10"],
+    "format": "online DB (browse/compare/download) + blank sheet PDFs; USA mirror organized by car/month on Google Drive",
+    "access": "free",
+    "volume": "Factory + top-driver proven setups across TC/12th/FWD; USA mirror organized by model and by month",
+    "notes": "High-end onroad only, but explicitly 'browse, compare & download proven setups from factory and top-level drivers' - exactly the per-track race-setup shape. awesomatixusa.com/p/setup-sheets.html mirrors by model/month. Good clean target for onroad TC extraction + validation."
+  },
+  {
+    "name": "PS93 Setup Sheets archive (ps93.ch)",
+    "url": "http://www.ps93.ch/setup/main-setup.htm",
+    "kind": "community_archive",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups"],
+    "categories": ["onroad_touring", "onroad_pan", "offroad_buggy"],
+    "format": "per-manufacturer HTML index linking PDF setup sheets",
+    "access": "free",
+    "volume": "Multi-manufacturer collection (smaller than petitRC but a useful cross-check/backfill)",
+    "notes": "Secondary community archive; overlaps petitRC but sometimes has sheets the others lack. Good redundancy source. Confirmed in search; older-style static site."
+  },
+  {
+    "name": "Tamiya Official R/C Manual & Setup Download page",
+    "url": "https://www.tamiya.com/english/rc/manuals.htm",
+    "kind": "manufacturer_db",
+    "contains": ["kit_defaults", "blank_sheets"],
+    "categories": ["onroad_touring_TT01_TT02_TA_TRF", "offroad_buggy", "buggy_classic"],
+    "format": "PDF instruction manuals (with baseline setup specs); some TRF models ship dedicated setup sheets",
+    "access": "free",
+    "volume": "Large manual library; dedicated competition setup sheets mainly for TRF race line",
+    "notes": "Tamiya bundles baseline setup into the assembly manual rather than standalone race sheets (except TRF). Use for kit-default extraction of mainstream Tamiya chassis. TamiyaBase.com and petitRC supplement with community sheets. Lower race-setup value than the dedicated DBs above."
+  },
+  {
+    "name": "Yokomo setup sheets (via petitRC per-model pages)",
+    "url": "https://site.petitrc.com/setup/yokomo/",
+    "kind": "community_archive",
+    "contains": ["blank_sheets", "kit_defaults", "race_setups"],
+    "categories": ["onroad_touring_BD", "onroad_pan_BD12", "drift_YD2_MS", "fwd_BDFWD"],
+    "format": "per-model HTML pages with blank + base setup sheet PDFs + manuals",
+    "access": "free",
+    "volume": "Many Yokomo models (BD8-BD12, YD2/YD2TC, MS1.0/2.0, BDFWD, SOx)",
+    "notes": "Yokomo's own site is sparse for English setup downloads; petitRC is the practical aggregator. Strong for drift + onroad touring kit defaults. Confirmed live per-model pages."
+  },
+  {
+    "name": "Muchmore Racing - driver setup sheet support archive",
+    "url": "http://www.muchmoreracing.net/support.php",
+    "kind": "event_setups",
+    "contains": ["race_setups", "per_track"],
+    "categories": ["onroad_touring", "offroad_buggy"],
+    "format": "PDF driver/event setup sheets (e.g. Cavalieri 2019 Reedy Race TC championship sheet)",
+    "access": "free",
+    "volume": "Selection of sponsored-driver championship sheets",
+    "notes": "Component sponsor that publishes its drivers' actual championship setup sheets (track + event dated). Niche but high-quality for direction-validation. Confirmed via search hit on Cavalieri Reedy Race sheet."
+  },
+  {
+    "name": "RC Tech Forums - setup-sheet & starting-setup threads",
+    "url": "https://www.rctech.net/forum/nitro-off-road-130/",
+    "kind": "community_archive",
+    "contains": ["race_setups", "per_track", "effect_tables"],
+    "categories": ["offroad_buggy_1_8", "offroad_buggy_1_10", "onroad_touring", "nitro_onroad"],
+    "format": "forum threads with attached setup-sheet images/PDFs + tuning discussion",
+    "access": "free (login to post/attach)",
+    "volume": "Very large but UNSTRUCTURED - decades of threads (e.g. 'Universal Starting Setup - How to', race-winner sheets shared in event threads)",
+    "notes": "Huge raw corpus of race-winner sheets (e.g. Japanese MP9 winner sheets) + symptom/cause tuning discussion. Hard to extract (free text, image attachments, no schema) - use selectively for validation, NOT as a primary structured feed. Pair with neobuggy/LiveRC event coverage for track context."
+  },
+  {
+    "name": "LiveRC / NeoBuggy / RedRC - event coverage + driver setup posts",
+    "url": "https://www.liverc.com/",
+    "kind": "event_setups",
+    "contains": ["race_setups", "per_track"],
+    "categories": ["offroad_buggy_1_8", "offroad_buggy_1_10", "onroad_touring"],
+    "format": "news articles / 'inside the winning cars' posts linking PDF setup sheets",
+    "access": "free",
+    "volume": "Ongoing per-event drops at major races (Worlds, ROAR Nats, NEO, Reedy Race, ETS)",
+    "notes": "The press tier that ANNOUNCES manufacturer/driver setup drops (incl. AE's ROAR Nats sheets, XRAY virtual-sheet launches, Mugen DB updates). neobuggy.net/redrc.net = same role for offroad/onroad respectively, and ets.racing for European touring. Best used as a discovery feed pointing to the actual sheets hosted on manufacturer DBs. Track + condition context lives in the article."
+  }
+]
