@@ -43,6 +43,7 @@ class Poi {
     this.region,
     this.country = 'FR',
     this.phone,
+    this.email,
     this.websiteUrl,
     this.imageUrl,
     this.openingHours,
@@ -53,6 +54,32 @@ class Poi {
     this.createdAt,
     this.updatedAt,
   });
+
+  /// Décode une halte du carnet embarqué (assets/data/haltes.json, schéma
+  /// compact OSM/ODbL). Clés : id, name, cat, lat, lng, addr?, city?, phone?,
+  /// web?, email?, hours?, desc?, tags?.
+  factory Poi.fromJson(Map<String, dynamic> json) => Poi(
+        id: json['id'] as String,
+        name: json['name'] as String,
+        categoryId: (json['category_id'] as String?) ?? '',
+        categorySlug: (json['cat'] ?? json['category_slug']) as String?,
+        latitude: (json['lat'] as num).toDouble(),
+        longitude: (json['lng'] as num).toDouble(),
+        description: json['desc'] as String?,
+        address: json['addr'] as String?,
+        city: json['city'] as String?,
+        region: json['region'] as String?,
+        phone: json['phone'] as String?,
+        email: json['email'] as String?,
+        websiteUrl: (json['web'] ?? json['website_url']) as String?,
+        imageUrl: json['image_url'] as String?,
+        openingHours: json['hours'] is String
+            ? {'raw': json['hours'] as String}
+            : json['hours'] as Map<String, dynamic>?,
+        tags: (json['tags'] as List?)?.cast<String>() ?? const [],
+        source: (json['source'] as String?) ?? 'osm',
+        isVerified: (json['is_verified'] as bool?) ?? true,
+      );
 
   final String id;
   final String name;
@@ -72,6 +99,7 @@ class Poi {
   final String? region;
   final String country;
   final String? phone;
+  final String? email;
   final String? websiteUrl;
   final String? imageUrl;
   final Map<String, dynamic>? openingHours;

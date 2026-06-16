@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:math' as math;
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/errors/app_exception.dart';
+import '../../../core/logging/app_logger.dart';
 import '../../../shared/models/models.dart';
 import '../../routing/domain/detour_planner.dart';
 import '../domain/poi_repository.dart';
@@ -128,7 +131,39 @@ class SupabasePoiRepository implements PoiRepository {
 class MockPoiRepository implements PoiRepository {
   static const List<PoiCategory> categories = mockPoiCategories;
 
-  static const List<Poi> pois = mockPoiDataset;
+  static const _log = AppLogger('poi-repo');
+  static const String _haltesAsset = 'assets/data/haltes.json';
+
+  /// Carnet complet (chargé une seule fois) = haltes RÉELLES embarquées
+  /// (assets/data/haltes.json, OSM/ODbL, ~10k+) FUSIONNÉES avec le jeu
+  /// éditorial curé [mockPoiDataset]. Repli sur le seul jeu curé si l'asset
+  /// est absent (non encore généré) ou illisible.
+  static Future<List<Poi>>? _loading;
+  static Future<List<Poi>> _loadPois() => _loading ??= _buildPois();
+
+  static Future<List<Poi>> _buildPois() async {
+    final merged = <Poi>[...mockPoiDataset];
+    final seenIds = {for (final p in mockPoiDataset) p.id};
+    String spotKey(Poi p) =>
+        '${p.categorySlug ?? p.categoryId}:${p.latitude.toStringAsFixed(4)}'
+        ':${p.longitude.toStringAsFixed(4)}';
+    final seenSpots = {for (final p in mockPoiDataset) spotKey(p)};
+    try {
+      final raw = await rootBundle.loadString(_haltesAsset);
+      final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+      for (final j in list) {
+        final poi = Poi.fromJson(j);
+        if (!seenIds.add(poi.id)) continue;
+        if (!seenSpots.add(spotKey(poi))) continue;
+        merged.add(poi);
+      }
+      _log.info('carnet: ${merged.length} haltes '
+          '(${list.length} OSM + ${mockPoiDataset.length} curées, dédupliquées)');
+    } catch (e) {
+      _log.warn('haltes.json indisponible, jeu curé seul (${merged.length}): $e');
+    }
+    return merged;
+  }
 
   @override
   Future<List<PoiCategory>> getCategories({ProductContext? context}) async =>
@@ -142,6 +177,7 @@ class MockPoiRepository implements PoiRepository {
 
   @override
   Future<Poi?> getPoi(String id) async {
+    final pois = await _loadPois();
     for (final p in pois) {
       if (p.id == id) return p;
     }
@@ -152,7 +188,7 @@ class MockPoiRepository implements PoiRepository {
   Future<List<Poi>> nearbyPois(GeoPoint center,
       {double radiusMeters = AppConstants.defaultPoiSearchRadiusMeters,
       List<String>? categorySlugs}) async {
-    await Future<void>.delayed(const Duration(milliseconds: 250));
+    final pois = await _loadPois();
     return pois
         .where((p) => center.distanceTo(p.point) <= radiusMeters)
         .where((p) => _matchesCategory(p, categorySlugs))
@@ -165,10 +201,34 @@ class MockPoiRepository implements PoiRepository {
       {double corridorMeters = AppConstants.defaultRouteCorridorMeters,
       List<String>? categorySlugs,
       List<GeoPoint>? routePolyline}) async {
-    await Future<void>.delayed(const Duration(milliseconds: 250));
+    final pois = await _loadPois();
     final hasPolyline = routePolyline != null && routePolyline.length >= 2;
+    // Pré-filtre bbox (rapide) : sur 10k+ haltes, on écarte d'emblée celles
+    // hors de l'emprise du trajet élargie du corridor, avant le calcul
+    // point→polyligne (coûteux). ~corridor en degrés (1° lat ≈ 111 km).
+    final pts = hasPolyline ? routePolyline : [origin, destination];
+    final marginDeg = corridorMeters / 111000 + 0.02;
+    var minLat = 90.0, maxLat = -90.0, minLng = 180.0, maxLng = -180.0;
+    for (final p in pts) {
+      if (p.latitude < minLat) minLat = p.latitude;
+      if (p.latitude > maxLat) maxLat = p.latitude;
+      if (p.longitude < minLng) minLng = p.longitude;
+      if (p.longitude > maxLng) maxLng = p.longitude;
+    }
+    minLat -= marginDeg;
+    maxLat += marginDeg;
+    minLng -= marginDeg;
+    maxLng += marginDeg;
+
     final result = <PoiAlongRoute>[];
-    for (final p in pois.where((p) => _matchesCategory(p, categorySlugs))) {
+    for (final p in pois) {
+      if (p.latitude < minLat ||
+          p.latitude > maxLat ||
+          p.longitude < minLng ||
+          p.longitude > maxLng) {
+        continue; // hors emprise -> ignoré sans calcul coûteux
+      }
+      if (!_matchesCategory(p, categorySlugs)) continue;
       final d = hasPolyline
           ? DetourPlanner.distanceToPolyline(p.point, routePolyline)
           : _distanceToSegment(p.point, origin, destination);

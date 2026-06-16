@@ -1,0 +1,4 @@
+
+# Cache d_extraction des haltes (Overpass) — ne pas committer
+scripts/.haltes_cache/
+scripts/.france_metropole.geojson

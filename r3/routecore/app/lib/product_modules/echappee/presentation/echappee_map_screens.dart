@@ -3,10 +3,12 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/providers.dart';
 import '../../../features/analytics/domain/analytics_repository.dart'
     show AnalyticsEvents;
+import '../../../features/poi/domain/opening_hours.dart';
 import '../../../features/routing/presentation/route_planner_controller.dart';
 import '../../../shared/models/models.dart';
 import '../design_system/design_system.dart';

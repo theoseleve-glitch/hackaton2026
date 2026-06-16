@@ -54,6 +54,12 @@ class _PoiDetailBody extends ConsumerWidget {
     final style = _styleFor(poi.categorySlug);
     final description = poi.description;
     final city = poi.city;
+    // Statut d'ouverture RÉEL (parseur OSM) — honnêteté : pas de chip si on ne
+    // sait pas (horaires absents ou non interprétables).
+    final hoursRaw = poi.openingHours?['raw'] as String?;
+    final openNow = hoursRaw == null
+        ? null
+        : OpeningHours.tryParse(hoursRaw)?.isOpenAt(DateTime.now());
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -99,12 +105,17 @@ class _PoiDetailBody extends ConsumerWidget {
                     style: EchappeeTypography.caption
                         .copyWith(color: style.color),
                   ),
-                  const Text(' · ', style: EchappeeTypography.caption),
-                  Text(
-                    'Ouvert',
-                    style: EchappeeTypography.caption
-                        .copyWith(color: EchappeeColors.statusOpen),
-                  ),
+                  if (openNow != null) ...[
+                    const Text(' · ', style: EchappeeTypography.caption),
+                    Text(
+                      openNow ? 'Ouvert' : 'Fermé',
+                      style: EchappeeTypography.caption.copyWith(
+                        color: openNow
+                            ? EchappeeColors.statusOpen
+                            : EchappeeColors.textSecondary,
+                      ),
+                    ),
+                  ],
                 ],
               ),
               if (poi.isSponsored) ...[
@@ -138,7 +149,7 @@ class _PoiDetailBody extends ConsumerWidget {
                 const SizedBox(height: EchappeeSpacing.s20),
                 Text(description, style: EchappeeTypography.bodyLarge),
               ],
-              if (city != null) ...[
+              if (city != null && poi.address == null) ...[
                 const SizedBox(height: EchappeeSpacing.s12),
                 Row(
                   children: [
@@ -149,6 +160,7 @@ class _PoiDetailBody extends ConsumerWidget {
                   ],
                 ),
               ],
+              _PracticalInfo(poi: poi, openNow: openNow),
               const SizedBox(height: EchappeeSpacing.s32),
               EchappeeButton(
                 label: 'Ajouter à ma route',
@@ -195,4 +207,170 @@ class _PoiDetailBody extends ConsumerWidget {
           .showSnackBar(SnackBar(content: Text(message)));
     }
   }
+}
+
+/// Section « Infos pratiques » : adresse, horaires (avec statut), téléphone,
+/// site et e-mail cliquables, et labels (bio, accessible…). N'affiche que ce
+/// qui existe — honnêteté sur la couverture variable des données OSM.
+class _PracticalInfo extends StatelessWidget {
+  const _PracticalInfo({required this.poi, required this.openNow});
+
+  final Poi poi;
+  final bool? openNow;
+
+  @override
+  Widget build(BuildContext context) {
+    final raw = poi.openingHours?['raw'] as String?;
+    final rows = <Widget>[
+      if (poi.address != null)
+        _InfoRow(icon: Icons.place_outlined, text: poi.address!),
+      if (raw != null)
+        _InfoRow(
+          icon: Icons.schedule_outlined,
+          text: raw,
+          trailing: openNow == null
+              ? null
+              : Text(
+                  openNow! ? 'Ouvert' : 'Fermé',
+                  style: EchappeeTypography.caption.copyWith(
+                    color: openNow!
+                        ? EchappeeColors.statusOpen
+                        : EchappeeColors.textSecondary,
+                  ),
+                ),
+        ),
+      if (poi.phone != null)
+        _InfoRow(
+          icon: Icons.call_outlined,
+          text: poi.phone!,
+          onTap: () => _launchExternal('tel:${poi.phone}'),
+        ),
+      if (poi.websiteUrl != null)
+        _InfoRow(
+          icon: Icons.language_outlined,
+          text: _prettyUrl(poi.websiteUrl!),
+          onTap: () => _launchExternal(poi.websiteUrl!),
+        ),
+      if (poi.email != null)
+        _InfoRow(
+          icon: Icons.mail_outline,
+          text: poi.email!,
+          onTap: () => _launchExternal('mailto:${poi.email}'),
+        ),
+    ];
+    final labels = [for (final t in poi.tags) _labelText(t)];
+    if (rows.isEmpty && labels.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: EchappeeSpacing.s20),
+        const EchappeeEyebrow('Infos pratiques'),
+        const SizedBox(height: EchappeeSpacing.s8),
+        ...rows,
+        if (labels.isNotEmpty) ...[
+          const SizedBox(height: EchappeeSpacing.s8),
+          Wrap(
+            spacing: EchappeeSpacing.s8,
+            runSpacing: EchappeeSpacing.s8,
+            children: [for (final l in labels) _LabelChip(label: l)],
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  const _InfoRow(
+      {required this.icon, required this.text, this.onTap, this.trailing});
+
+  final IconData icon;
+  final String text;
+  final VoidCallback? onTap;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    final link = onTap != null;
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: EchappeeSpacing.s8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon,
+                size: 18,
+                color: link
+                    ? EchappeeColors.primary
+                    : EchappeeColors.textSecondary),
+            const SizedBox(width: EchappeeSpacing.s12),
+            Expanded(
+              child: Text(
+                text,
+                style: EchappeeTypography.body.copyWith(
+                  color: link ? EchappeeColors.primary : null,
+                  decoration: link ? TextDecoration.underline : null,
+                ),
+              ),
+            ),
+            if (trailing != null) ...[
+              const SizedBox(width: EchappeeSpacing.s8),
+              trailing!,
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LabelChip extends StatelessWidget {
+  const _LabelChip({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          horizontal: EchappeeSpacing.s12, vertical: EchappeeSpacing.s4),
+      decoration: const BoxDecoration(
+        color: EchappeeColors.accentTint,
+        borderRadius: EchappeeRadius.fullAll,
+      ),
+      child: Text(label,
+          style: EchappeeTypography.caption
+              .copyWith(fontWeight: FontWeight.w600)),
+    );
+  }
+}
+
+Future<void> _launchExternal(String url) async {
+  final uri = Uri.tryParse(url);
+  if (uri == null) return;
+  try {
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  } catch (_) {/* lien invalide / pas d'app — silencieux */}
+}
+
+String _prettyUrl(String url) => url
+    .replaceFirst(RegExp(r'^https?://'), '')
+    .replaceFirst(RegExp(r'/$'), '');
+
+/// Tag OSM brut -> libellé lisible (bio, accessible, cuisine…).
+String _labelText(String tag) {
+  if (tag.startsWith('cuisine:')) {
+    final c = tag.substring(8);
+    return 'Cuisine ${c[0].toUpperCase()}${c.substring(1)}';
+  }
+  const map = {
+    'bio': 'Bio',
+    'accessible': 'Accessible',
+    'automate': 'Automate 24/7',
+    'produits-frais': 'Produits frais',
+  };
+  return map[tag] ?? '${tag[0].toUpperCase()}${tag.substring(1)}';
 }
