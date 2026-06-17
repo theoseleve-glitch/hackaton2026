@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 2WD buggy: mid-corner understeer on loose dirt → grounded category advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["front_spring", "front_shock_oil", "front_camber", "front_sway_bar", "ride_height", "front_roll_center", "rear_toe", "front_toe"] },
+  "bundle": {
+    "chassis_template_id": "associated-b6",
+    "setup": {},
+    "track": { "name": "Loose Outdoor Clay", "surface": "clay", "grip": "medium", "conditions": ["loose_dirt", "bumpy"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }], "text": "the 2wd buggy pushes through the middle of the corner on loose dirt" },
+    "mode": "practice"
+  }
+}

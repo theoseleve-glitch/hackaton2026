@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 4WD buggy: mid-corner understeer → grounded 4WD advice (diffs available)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["front_spring", "front_diff_oil", "center_diff_oil", "front_shock_oil", "front_camber", "front_sway_bar", "ride_height", "front_roll_center"] },
+  "bundle": {
+    "chassis_template_id": "tlr-22x",
+    "setup": {},
+    "track": { "name": "Indoor Clay", "surface": "clay", "grip": "medium", "conditions": ["loose_dirt", "bumpy"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }], "text": "4wd buggy won't rotate mid-corner" },
+    "mode": "practice"
+  }
+}

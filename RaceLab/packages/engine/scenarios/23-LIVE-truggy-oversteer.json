@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/8 truggy: power-on oversteer → grounded advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["brake_bias_front", "rear_toe", "rear_diff_oil", "center_diff_oil", "rear_shock_oil", "rear_camber", "rear_anti_squat", "ride_height"] },
+  "bundle": {
+    "chassis_template_id": "associated-rc8t3",
+    "setup": {},
+    "track": { "name": "Outdoor GP", "surface": "clay", "grip": "medium", "conditions": ["loose_dirt"] },
+    "feedback": { "tags": [{ "symptom": "oversteer", "phase": "corner_exit" }], "text": "truggy steps out on power exit" },
+    "mode": "practice"
+  }
+}
