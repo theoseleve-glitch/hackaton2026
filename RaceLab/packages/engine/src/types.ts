@@ -60,15 +60,37 @@ export interface FeedbackTag {
   evolution?: string;
 }
 
+/** One row of past-change history — the learning loop's READ half (docs/04 §6).
+ *  The required fields match schema `ContextHistoryEntry` exactly; `citations`
+ *  and `track_id` are ADDITIVE enrichments (schema `historyFromTuples` on the
+ *  engine side emits them) that unlock per-rule re-ranking:
+ *  - `citations`: KB rule ids the change cited — rows without them never
+ *    influence ranking (no rule id, no attribution, no effect).
+ *  - `track_id`: rows WITHOUT one are treated as already filtered to the
+ *    current track by the caller (legacy behavior); rows WITH one only count
+ *    when the bundle's track has a matching `track_id`. */
+export interface HistoryEntry {
+  change: string;
+  conditions: string;
+  outcome: "better" | "same" | "worse";
+  citations?: readonly string[];
+  track_id?: string;
+}
+
 export interface ContextBundle {
   chassis_template_id: string;
   setup: Record<string, string | number>;
+  /** Saved version the setup values came from — stamped onto recommendations
+   *  at TRIAL time so outcomes attribute to the right baseline. */
+  setup_version_id?: string;
   track: {
+    /** Schema TrackId when known — enables track-isolated history re-ranking. */
+    track_id?: string;
     name: string;
     surface: string;
     grip: "green" | "medium" | "high" | "blue_groove";
     conditions: string[]; // taxonomy condition tags, e.g. ["low_grip","dusty","bumpy"]
-    evolution?: "improving" | "stable" | "degrading"; // grip trend over the day
+    evolution?: "improving" | "stable" | "degrading"; // grip trend over the day (Theo: report + driving-tips)
   };
   weather?: {
     air_temp_c?: number;
@@ -76,13 +98,14 @@ export interface ContextBundle {
     wind_kmh?: number;
     rain_risk_pct?: number;
   };
+  /** Tyre state — Theo additive: feeds report.ts context + driving-tips.ts. */
   tyres?: {
     wear?: "new" | "light" | "medium" | "worn";
     run_count?: number;
   };
   feedback: { tags: FeedbackTag[]; text?: string };
   mode: "practice" | "race_day";
-  history?: { change: string; conditions: string; outcome: "better" | "same" | "worse" }[];
+  history?: HistoryEntry[];
   question?: string;
 }
 
@@ -95,6 +118,9 @@ export interface RecommendationOption {
   citations: string[];
   revert: string;
   if_it_does_not_help: string;
+  /** Deterministic one-liner when this rule has rated history at this track
+   *  ("Rated worse here last time — …"). Absent when there is no history. */
+  history_note?: string;
 }
 
 export interface Recommendation {

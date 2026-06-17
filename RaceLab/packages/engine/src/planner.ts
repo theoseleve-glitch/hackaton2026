@@ -1,170 +1,243 @@
 import type { KBData } from "./data";
-import { drivingTips } from "./driving-tips";
-import { buildReport, type EngineerReport } from "./report";
-import type { ContextBundle } from "./types";
+import { raceDayFilter } from "./guard";
+import { humanize } from "./offline";
+import type { Confidence, KBRule } from "./types";
+import type { LearningTuple } from "../../schema/src/runs";
+import { RAIN_RISK_THRESHOLD_PCT, deriveSky } from "../../schema/src/weather";
+import type { WeatherObservation } from "../../schema/src/weather";
+import type { TrackSnapshot } from "../../schema/src/tracks";
 
 /**
- * Layer 5 — the race plan (D30). The night-before briefing: project the
- * selected practice runs onto the race window's forecast, run the same
- * deterministic engineer pipeline forced into race_day mode (D18: no API,
- * no I/O, no clock), and state plainly what shifted, how to drive it, and
- * what is still unresolved. Pure function of its arguments.
+ * Race-day planner — aggregate practice outcomes + a weather forecast into
+ * KB-grounded predicted adjustments. Deterministic, offline, zero I/O (D18):
+ * the forecast is DATA passed in (the app's weather adapter fetched it
+ * earlier); nothing here touches the network or the clock.
+ *
+ * Grounded or silent: every adjustment cites a KB rule that is amplified on
+ * the predicted condition tag AND clears the race-day bar (high confidence +
+ * fast revert). Aspects the KB cannot ground (wind, or a tag no rule covers)
+ * become EXPLICIT refusals, never guesses. Engine/nitro tuning is out of
+ * scope by construction (D13) — only chassis rules exist in the KB.
  */
 
-/** One selected run, as the caller summarises it from the logbook. */
-export interface SelectedRunSummary {
-  date: string;
-  track_name: string;
-  grip: string;
-  surface: string;
-  air_temp_c?: number;
-  best_lap_s?: number;
-  avg_lap_s?: number;
-  symptoms: string[];
-  outcome?: "better" | "same" | "worse";
+// Forecast → taxonomy-tag thresholds. hot/cold mirror schema conditionsToTags
+// (air >= 30C → hot, air <= 10C → cold); rain risk mirrors schema deriveSky.
+export const PLANNER_HOT_AIR_C = 30;
+export const PLANNER_COLD_AIR_C = 10;
+/** Above this, wind is reported — but the taxonomy has no wind tag, so it is
+ *  always an explicit refusal aspect, never an adjustment. */
+export const PLANNER_WIND_ASPECT_KMH = 25;
+const MAX_ADJUSTMENTS_PER_TAG = 2;
+
+export interface PlannedAdjustment {
+  /** What in the forecast triggers this, e.g. "rain risk 70% at 2026-06-13T14:00Z". */
+  trigger: string;
+  /** The taxonomy condition tag the rule is amplified on. */
+  condition_tag: string;
+  setting: string;
+  change: string;
+  mechanism: string;
+  confidence: Confidence;
+  citations: string[];
+  revert: string;
 }
 
-export interface RaceWindow {
-  start_iso: string;
-  length_s: number;
-  type: "sprint" | "endurance";
+export interface PlannerRefusal {
+  /** The ungrounded aspect, e.g. "wind", "cold". */
+  aspect: string;
+  message: string;
 }
 
-export interface Forecast {
-  air_temp_c?: number;
-  humidity_pct?: number;
-  wind_kmh?: number;
-  rain_risk_pct?: number;
+export interface RaceDayPlan {
+  kind: "race_day_plan";
+  source: "offline_deterministic";
+  track: { name: string; surface: string };
+  /** Deterministic echo of what the forecast predicts, tag by tag. */
+  forecast_read: string[];
+  /** Aggregated practice outcomes at this track (keep / avoid / neutral). */
+  practice_read: string[];
+  adjustments: PlannedAdjustment[];
+  refusals: PlannerRefusal[];
+  /** Input echo — explainable, never feels like magic (docs/04 §10 spirit). */
+  assumptions: string[];
 }
 
-export interface RacePlan {
-  report: EngineerReport;
-  conditions_shift: string[];
-  technique_tips: string[];
-  readiness: string[];
-  race_avg_lap_s?: number;
+export interface RaceDayInput {
+  practice: readonly LearningTuple[];
+  forecast: readonly WeatherObservation[];
+  track: TrackSnapshot;
+  /** Needed for chassis-scope filtering of KB rules. */
+  chassis_template_id: string;
+  current_setup?: Record<string, string | number>;
 }
 
-/** Forecast thresholds that add taxonomy condition tags to the bundle. */
-const HOT_FROM_C = 30;
-const COLD_TO_C = 10;
-const WET_FROM_PCT = 50;
+export type RaceDayRejectReason = "unknown_template";
 
-/** Planning requires at least one selected run (product rule) — throws otherwise. */
-export function buildRacePlan(
-  bundle: ContextBundle,
-  runs: SelectedRunSummary[],
-  race: RaceWindow,
-  forecast: Forecast | undefined,
+export function planRaceDay(
+  input: RaceDayInput,
   data: KBData,
-): RacePlan {
-  if (runs.length === 0) {
-    throw new Error(
-      "Race planning needs at least one selected run — log a practice run and select it first.",
-    );
-  }
-  void race; // part of the planner contract; no race-window-specific rule yet
+): { ok: true; plan: RaceDayPlan } | { ok: false; reason: RaceDayRejectReason } {
+  const template = data.templates[input.chassis_template_id];
+  if (!template) return { ok: false, reason: "unknown_template" };
 
-  const shifted = applyForecast(bundle, forecast);
-  const sorted = [...runs].sort((a, b) => a.date.localeCompare(b.date));
-  const avgLaps = runs
-    .map((r) => r.avg_lap_s)
-    .filter((v): v is number => v !== undefined);
+  const refusals: PlannerRefusal[] = [];
+  const forecast = [...input.forecast].sort((a, b) =>
+    a.observed_at < b.observed_at ? -1 : a.observed_at > b.observed_at ? 1 : 0,
+  );
 
-  return {
-    report: buildReport(shifted, data),
-    conditions_shift: conditionsShift(runs, forecast),
-    technique_tips: drivingTips(shifted),
-    readiness: readinessFacts(sorted),
-    race_avg_lap_s: avgLaps.length > 0 ? Math.min(...avgLaps) : undefined,
-  };
-}
-
-/** New bundle (never mutates the input): forecast merged onto weather,
- *  threshold condition tags added without duplicates, mode forced to race_day. */
-function applyForecast(bundle: ContextBundle, forecast: Forecast | undefined): ContextBundle {
-  const added: string[] = [];
-  if (forecast?.air_temp_c !== undefined && forecast.air_temp_c >= HOT_FROM_C) added.push("hot");
-  if (forecast?.air_temp_c !== undefined && forecast.air_temp_c <= COLD_TO_C) added.push("cold");
-  if (forecast?.rain_risk_pct !== undefined && forecast.rain_risk_pct >= WET_FROM_PCT) {
-    added.push("wet");
-  }
-  return {
-    ...bundle,
-    track: {
-      ...bundle.track,
-      conditions: [
-        ...bundle.track.conditions,
-        ...added.filter((c) => !bundle.track.conditions.includes(c)),
-      ],
-    },
-    weather: forecast ? { ...bundle.weather, ...forecast } : bundle.weather,
-    mode: "race_day",
-  };
-}
-
-/** Human lines: what the race window changes vs the SELECTED practice data.
- *  Temperature compares against the average air_temp_c of runs that have one;
- *  a missing-temp side (runs or forecast) always yields an explicit line. */
-function conditionsShift(runs: SelectedRunSummary[], forecast: Forecast | undefined): string[] {
-  const lines: string[] = [];
-  const temps = runs.map((r) => r.air_temp_c).filter((v): v is number => v !== undefined);
-
-  if (temps.length === 0) {
-    lines.push("No air temperature on your selected runs — temperature shift unknown.");
-  } else if (forecast?.air_temp_c === undefined) {
-    lines.push("No forecast temperature — temperature shift unknown.");
-  } else {
-    const practiceAvg = temps.reduce((sum, t) => sum + t, 0) / temps.length;
-    const delta = Math.round(forecast.air_temp_c - practiceAvg);
-    lines.push(
-      delta === 0
-        ? `Race window at the same temperature as your practice data (~${Math.round(practiceAvg)}°C).`
-        : `Race window ~${Math.abs(delta)}°C ${delta > 0 ? "hotter" : "colder"} than your practice data (${forecast.air_temp_c}°C vs ~${Math.round(practiceAvg)}°C).`,
-    );
-  }
-
-  if (forecast?.rain_risk_pct !== undefined && forecast.rain_risk_pct >= WET_FROM_PCT) {
-    lines.push(`Rain risk ${forecast.rain_risk_pct}% — your selected runs are all dry.`);
-  }
-  return lines;
-}
-
-/** Facts from the selected runs (chronologically sorted): unresolved symptoms
- *  (no later run rated better), the best average lap and where it came from,
- *  and a coverage line. */
-function readinessFacts(sorted: SelectedRunSummary[]): string[] {
-  const lines: string[] = [];
-
-  const unresolved: string[] = [];
-  sorted.forEach((run, i) => {
-    if (sorted.slice(i + 1).some((r) => r.outcome === "better")) return;
-    for (const s of run.symptoms) if (!unresolved.includes(s)) unresolved.push(s);
-  });
-  for (const s of unresolved) {
-    lines.push(`Unresolved: ${humanize(s)} — no later selected run was rated better.`);
-  }
-
-  let best: SelectedRunSummary | undefined;
-  let bestAvg = Number.POSITIVE_INFINITY;
-  for (const r of sorted) {
-    if (r.avg_lap_s !== undefined && r.avg_lap_s < bestAvg) {
-      bestAvg = r.avg_lap_s;
-      best = r;
+  // ── Forecast → predicted taxonomy tags (first trigger wins, deterministic) ──
+  const predicted = new Map<string, string>(); // tag → trigger
+  let windFlagged = false;
+  for (const obs of forecast) {
+    const sky = obs.sky ?? deriveSky(obs);
+    if (sky === "raining") {
+      if (!predicted.has("wet")) predicted.set("wet", `rain at ${obs.observed_at}`);
+    } else if (sky === "rain_risk") {
+      const pct =
+        obs.precipitation_probability_pct !== undefined
+          ? `${obs.precipitation_probability_pct}%`
+          : `>=${RAIN_RISK_THRESHOLD_PCT}%`;
+      if (!predicted.has("wet")) predicted.set("wet", `rain risk ${pct} at ${obs.observed_at}`);
+    }
+    if (obs.air_temp_c !== undefined && obs.air_temp_c >= PLANNER_HOT_AIR_C && !predicted.has("hot")) {
+      predicted.set("hot", `air ${obs.air_temp_c}C at ${obs.observed_at}`);
+    }
+    if (obs.air_temp_c !== undefined && obs.air_temp_c <= PLANNER_COLD_AIR_C && !predicted.has("cold")) {
+      predicted.set("cold", `air ${obs.air_temp_c}C at ${obs.observed_at}`);
+    }
+    if (
+      obs.wind_speed_kmh !== undefined &&
+      obs.wind_speed_kmh >= PLANNER_WIND_ASPECT_KMH &&
+      !windFlagged
+    ) {
+      windFlagged = true;
+      refusals.push({
+        aspect: "wind",
+        message: `Forecast wind ${obs.wind_speed_kmh} km/h at ${obs.observed_at}: the KB has no wind condition tag — no recommendation (grounded or silent).`,
+      });
     }
   }
-  if (best) {
-    lines.push(`Best average lap: ${bestAvg}s — ${best.track_name}, ${best.date}.`);
+
+  const forecast_read: string[] = [];
+  for (const [tag, trigger] of predicted) forecast_read.push(`${tag} expected — ${trigger}`);
+  if (forecast_read.length === 0) {
+    forecast_read.push(
+      forecast.length === 0
+        ? "no forecast provided — plan grounded on practice + KB only"
+        : "forecast shows no condition change the KB reasons about",
+    );
   }
 
-  const grips: string[] = [];
-  for (const r of sorted) if (!grips.includes(r.grip)) grips.push(r.grip);
-  lines.push(
-    `${sorted.length} run${sorted.length === 1 ? "" : "s"} considered, grips: ${grips.join(", ")}.`,
-  );
-  return lines;
+  // ── Practice aggregation (this track only — outcomes never bleed across) ────
+  const practice_read: string[] = [];
+  const avoidRuleIds = new Set<string>();
+  const atTrack = [...input.practice]
+    .filter((t) => t.track.track_id === input.track.track_id)
+    .sort((a, b) => (a.at < b.at ? -1 : a.at > b.at ? 1 : 0));
+  const bySetting = new Map<string, LearningTuple>(); // latest verdict per (setting, change)
+  let bareBetter = 0;
+  let bareSame = 0;
+  let bareWorse = 0;
+  for (const t of atTrack) {
+    if (t.change !== undefined) {
+      bySetting.set(`${t.change.setting}|${t.change.change}`, t);
+    } else if (t.outcome === "better") bareBetter++;
+    else if (t.outcome === "same") bareSame++;
+    else bareWorse++;
+  }
+  for (const t of bySetting.values()) {
+    const c = t.change!;
+    const cite = c.citations.join(", ");
+    if (t.outcome === "better") {
+      practice_read.push(`keep: ${c.setting} — ${c.change} (rated better; ${cite})`);
+    } else if (t.outcome === "worse") {
+      practice_read.push(`avoid: ${c.setting} — ${c.change} (rated worse; ${cite})`);
+      for (const id of c.citations) avoidRuleIds.add(id);
+    } else {
+      practice_read.push(`neutral: ${c.setting} — ${c.change} (rated same; ${cite})`);
+    }
+  }
+  if (bareBetter + bareSame + bareWorse > 0) {
+    practice_read.push(
+      `runs rated vs previous: ${bareBetter} better / ${bareSame} same / ${bareWorse} worse`,
+    );
+  }
+  if (practice_read.length === 0) {
+    practice_read.push("no practice history at this track — plan grounded on forecast + KB only");
+  }
+
+  // ── KB-grounded adjustments per predicted tag (race-day bar applies) ────────
+  const adjustments: PlannedAdjustment[] = [];
+  const predictedTags = new Set(predicted.keys());
+  for (const [tag, trigger] of predicted) {
+    const candidates = data.rules
+      .filter(
+        (r) =>
+          r.scope.some((s) => template.scope.includes(s)) &&
+          r.conditions.amplified_on.includes(tag) &&
+          raceDayFilter(r).allowed &&
+          !r.conditions.reduced_on.some((c) => predictedTags.has(c)) &&
+          !avoidRuleIds.has(r.id),
+      )
+      .sort(
+        (a, b) =>
+          a.reversal_cost_minutes - b.reversal_cost_minutes ||
+          (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+      )
+      .slice(0, MAX_ADJUSTMENTS_PER_TAG);
+    if (candidates.length === 0) {
+      refusals.push({
+        aspect: tag,
+        message: `No KB rule covers '${tag}' on ${input.track.surface} for this chassis — no recommendation (grounded or silent).`,
+      });
+      continue;
+    }
+    for (const rule of candidates) adjustments.push(toAdjustment(rule, tag, trigger, input));
+  }
+
+  const assumptions = [
+    `track: ${input.track.name} (${input.track.surface}${input.track.indoor ? ", indoor" : ""})`,
+    `chassis template: ${input.chassis_template_id}`,
+    forecast.length > 0
+      ? `forecast window: ${forecast[0].observed_at} → ${forecast[forecast.length - 1].observed_at} (${forecast.length} observation(s))`
+      : "forecast window: none",
+    `practice datapoints at this track: ${atTrack.length}`,
+    `thresholds: rain risk >= ${RAIN_RISK_THRESHOLD_PCT}%, hot >= ${PLANNER_HOT_AIR_C}C, cold <= ${PLANNER_COLD_AIR_C}C, wind aspect >= ${PLANNER_WIND_ASPECT_KMH} km/h`,
+    `race-day bar: high confidence + reversal <= 15 min; max ${MAX_ADJUSTMENTS_PER_TAG} adjustment(s) per condition`,
+  ];
+
+  return {
+    ok: true,
+    plan: {
+      kind: "race_day_plan",
+      source: "offline_deterministic",
+      track: { name: input.track.name, surface: input.track.surface },
+      forecast_read,
+      practice_read,
+      adjustments,
+      refusals,
+      assumptions,
+    },
+  };
 }
 
-function humanize(id: string): string {
-  return id.replace(/_/g, " ");
+function toAdjustment(
+  rule: KBRule,
+  tag: string,
+  trigger: string,
+  input: RaceDayInput,
+): PlannedAdjustment {
+  const current = input.current_setup?.[rule.setting];
+  const currentTxt = current !== undefined ? ` (currently ${current})` : "";
+  const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
+  return {
+    trigger,
+    condition_tag: tag,
+    setting: rule.setting,
+    change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}`,
+    mechanism: `Per ${rule.sources[0]}: ${effects}.`,
+    confidence: rule.confidence,
+    citations: [rule.id],
+    revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,
+  };
 }
