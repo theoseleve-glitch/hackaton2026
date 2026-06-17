@@ -32,6 +32,7 @@ import { trialDaysLeft, useAccount } from "./src/accountstore";
 import { linkToPayload } from "../../packages/social/src";
 import type { SharedPayload } from "../../packages/social/src";
 import { colors } from "./src/theme";
+import { RepoProvider } from "./src/storage/RepoProvider";
 
 type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer" | "social";
 
@@ -44,7 +45,7 @@ const TABS: { id: Tab; label: Phrase; icon: string }[] = [
   { id: "social", label: { en: "Social", fr: "Social" }, icon: "👥" },
 ];
 
-export default function App() {
+function AppInner() {
   const [tab, setTab] = useState<Tab>("garage");
   // cross-tab intents: garage → sheet (focus a car), runs → engineer (report
   // for a run), runs → compare (overlay, not a tab — D28 made Compare a verb)
@@ -345,6 +346,19 @@ export default function App() {
 
       <ShareSheet payload={shareTarget} onClose={() => setShareTarget(null)} />
     </SafeAreaView>
+  );
+}
+
+// Phase 2A (ADDITIVE): mount RepoProvider so the one-time, non-destructive
+// legacy migration runs at boot and the repos context is available for the
+// Phase 2B hook rewrite. The render is intentionally NOT gated on
+// useReposReady() — AppInner keeps owning the UI through the legacy stores, so
+// the app renders and behaves exactly as before.
+export default function App() {
+  return (
+    <RepoProvider>
+      <AppInner />
+    </RepoProvider>
   );
 }
 
