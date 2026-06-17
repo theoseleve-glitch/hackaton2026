@@ -1,7 +1,6 @@
-# 1/10 SHORT COURSE TRUCK (2WD & 4WD) — DRAFT tuning rules
+# 1/10 SHORT COURSE TRUCK (2WD & 4WD) — tuning rules
 #
-# STATUS: DRAFT. Not auto-shipped / not bundled. Pending human citation sign-off
-#   before promotion out of rules/drafts/ into the live KB. Schema-validated against
+# STATUS: LIVE (bundled — promoted out of drafts/ 2026-06-17, D54). Schema-validated against
 #   the live rule format (packages/kb/rules/geometry.yaml) and the category template
 #   (packages/kb/chassis/categories/short_course.json — every `setting:` here is a real
 #   key in that template's `fields`, so the engine capability gate passes).
