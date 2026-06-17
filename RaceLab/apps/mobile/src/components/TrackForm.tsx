@@ -16,6 +16,7 @@ import type { CandidacyState } from "../../../../packages/social/src";
 import { surfacesByDiscipline } from "../rcdata";
 import { colors, radius } from "../theme";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
+import { useT } from "../i18n";
 
 /**
  * Track identity sheet (D25). Creatable trackside in seconds — name + surface
@@ -62,6 +63,7 @@ interface RecordRow {
 }
 
 export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, onSave, onCancel, onDelete }: Props) {
+  const t = useT();
   const [name, setName] = useState(initial?.name ?? "");
   const [surfaces, setSurfaces] = useState<string[]>(
     initial?.surfaces ?? (initial?.surface !== undefined ? [initial.surface] : []),
@@ -131,7 +133,7 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
     const latN = num(lat);
     const lonN = num(lon);
     onSave({
-      name: name.trim() || "My track",
+      name: name.trim() || t({ en: "My track", fr: "Ma piste" }),
       surface: surfaces[0] ?? "clay", // primary — the engine reads this one
       surfaces: surfaces.length > 0 ? surfaces : undefined,
       indoor,
@@ -169,40 +171,49 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-      <Text style={styles.title}>{initial ? "Edit track" : "New track"}</Text>
+      <Text style={styles.title}>{initial ? t({ en: "Edit track", fr: "Modifier la piste" }) : t({ en: "New track", fr: "Nouvelle piste" })}</Text>
 
-      <Section title="Track">
-        <LabeledInput label="Track name" value={name} onChangeText={setName} placeholder="e.g. MRT outdoor" />
-        <Text style={styles.hint}>Surfaces — tap all that apply (first = main)</Text>
+      <Section title={t({ en: "Track", fr: "Piste" })}>
+        <LabeledInput label={t({ en: "Track name", fr: "Nom de la piste" })} value={name} onChangeText={setName} placeholder={t({ en: "e.g. MRT outdoor", fr: "ex. MRT extérieur" })} />
+        <Text style={styles.hint}>{t({ en: "Surfaces — tap all that apply (first = main)", fr: "Surfaces — touche toutes celles qui s’appliquent (la première = principale)" })}</Text>
         <MultiChipRow
           options={SURFACE_IDS}
           values={surfaces}
           onToggle={(s) => setSurfaces((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))}
           labelFor={(s) => SURFACE_LABEL.get(s) ?? s}
         />
-        <Text style={styles.hint}>Indoor / outdoor</Text>
+        <Text style={styles.hint}>{t({ en: "Indoor / outdoor", fr: "Intérieur / extérieur" })}</Text>
         <ChipRow
           options={["outdoor", "indoor"] as const}
           value={indoor ? "indoor" : "outdoor"}
           onSelect={(v) => setIndoor(v === "indoor")}
+          labelFor={(v) => (v === "indoor" ? t({ en: "indoor", fr: "intérieur" }) : t({ en: "outdoor", fr: "extérieur" }))}
         />
-        <Text style={styles.hint}>Visibility</Text>
-        <ChipRow options={VISIBILITIES} value={visibility} onSelect={setVisibility} />
-        <Text style={styles.visHint}>public tracks join the shared library once sync ships</Text>
+        <Text style={styles.hint}>{t({ en: "Visibility", fr: "Visibilité" })}</Text>
+        <ChipRow
+          options={VISIBILITIES}
+          value={visibility}
+          onSelect={setVisibility}
+          labelFor={(v) => (v === "public" ? t({ en: "public", fr: "publique" }) : t({ en: "private", fr: "privée" }))}
+        />
+        <Text style={styles.visHint}>{t({ en: "public tracks join the shared library once sync ships", fr: "les pistes publiques rejoindront la bibliothèque partagée dès la sortie de la synchro" })}</Text>
       </Section>
 
-      <Section title="Quick traits — tap what describes this track">
+      <Section title={t({ en: "Quick traits — tap what describes this track", fr: "Caractéristiques rapides — touche ce qui décrit cette piste" })}>
         <MultiChipRow options={TRACK_TRAITS} values={traits} onToggle={toggleTrait} />
       </Section>
 
-      <LabeledInput label="Notes" value={notes} onChangeText={setNotes} placeholder='e.g. "second lane blows out by Sunday"' />
+      <LabeledInput label={t({ en: "Notes", fr: "Notes" })} value={notes} onChangeText={setNotes} placeholder={t({ en: 'e.g. "second lane blows out by Sunday"', fr: 'ex. « la deuxième ligne se dégrade d’ici dimanche »' })} />
 
       <FoldHeader
-        title="Corner by corner (optional)"
+        title={t({ en: "Corner by corner (optional)", fr: "Virage par virage (optionnel)" })}
         sub={
           corners.length > 0
-            ? `${corners.length} corner${corners.length > 1 ? "s" : ""} mapped`
-            : "map the layout when you have a minute"
+            ? t({
+                en: `${corners.length} corner${corners.length > 1 ? "s" : ""} mapped`,
+                fr: `${corners.length} virage${corners.length > 1 ? "s" : ""} tracé${corners.length > 1 ? "s" : ""}`,
+              })
+            : t({ en: "map the layout when you have a minute", fr: "trace le tracé quand tu as une minute" })
         }
         open={showCorners}
         onPress={() => setShowCorners((v) => !v)}
@@ -217,8 +228,13 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
                 <View style={{ flex: 1 }}>
                   <Text style={styles.cornerMain}>
                     {c.name ? `${c.name} · ` : ""}
-                    {(c.shape ?? "corner").replace(/_/g, " ")}
-                    {c.features.length > 0 ? ` · ${c.features.length} feature${c.features.length > 1 ? "s" : ""}` : ""}
+                    {(c.shape ?? t({ en: "corner", fr: "virage" })).replace(/_/g, " ")}
+                    {c.features.length > 0
+                      ? t({
+                          en: ` · ${c.features.length} feature${c.features.length > 1 ? "s" : ""}`,
+                          fr: ` · ${c.features.length} caractéristique${c.features.length > 1 ? "s" : ""}`,
+                        })
+                      : ""}
                   </Text>
                   {!!c.note && (
                     <Text style={styles.cornerNote} numberOfLines={1}>
@@ -240,16 +256,16 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
               style={styles.addRowBtn}
               onPress={() => setCornerDraft({ index: null, name: "", direction: "left", features: [], surface: "", note: "" })}
             >
-              <Text style={styles.addRowText}>+ add corner</Text>
+              <Text style={styles.addRowText}>{t({ en: "+ add corner", fr: "+ ajouter un virage" })}</Text>
             </Pressable>
           )}
         </View>
       )}
 
-      <FoldHeader title="More details" sub="location · photos · lap records" open={showMore} onPress={() => setShowMore((v) => !v)} />
+      <FoldHeader title={t({ en: "More details", fr: "Plus de détails" })} sub={t({ en: "location · photos · lap records", fr: "localisation · photos · records au tour" })} open={showMore} onPress={() => setShowMore((v) => !v)} />
       {showMore && (
         <View style={styles.foldBody}>
-          <Text style={styles.hint}>GPS — lets the run log pull weather automatically</Text>
+          <Text style={styles.hint}>{t({ en: "GPS — lets the run log pull weather automatically", fr: "GPS — permet à la session de récupérer la météo automatiquement" })}</Text>
           <Pressable
             style={styles.locateBtn}
             disabled={locating}
@@ -260,14 +276,14 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
                 try {
                   const perm = await Location.requestForegroundPermissionsAsync();
                   if (!perm.granted) {
-                    setLocError("Location permission denied — you can still type coordinates below.");
+                    setLocError(t({ en: "Location permission denied — you can still type coordinates below.", fr: "Autorisation de localisation refusée — tu peux quand même saisir les coordonnées ci-dessous." }));
                     return;
                   }
                   const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
                   setLat(pos.coords.latitude.toFixed(5));
                   setLon(pos.coords.longitude.toFixed(5));
                 } catch {
-                  setLocError("Could not get a fix — move outdoors or type coordinates below.");
+                  setLocError(t({ en: "Could not get a fix — move outdoors or type coordinates below.", fr: "Impossible d’obtenir un point — sors à l’extérieur ou saisis les coordonnées ci-dessous." }));
                 } finally {
                   setLocating(false);
                 }
@@ -278,14 +294,16 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
               <ActivityIndicator color={colors.accent} size="small" />
             ) : (
               <Text style={styles.locateText}>
-                {lat && lon ? "📍 Update to my current location" : "📍 Use my current location"}
+                {lat && lon
+                  ? t({ en: "📍 Update to my current location", fr: "📍 Mettre à jour vers ma position actuelle" })
+                  : t({ en: "📍 Use my current location", fr: "📍 Utiliser ma position actuelle" })}
               </Text>
             )}
           </Pressable>
           {locError && <Text style={styles.locError}>{locError}</Text>}
-          {lat !== "" && lon !== "" && <Text style={styles.locSet}>Pinned at {lat}, {lon}</Text>}
+          {lat !== "" && lon !== "" && <Text style={styles.locSet}>{t({ en: `Pinned at ${lat}, ${lon}`, fr: `Épinglé à ${lat}, ${lon}` })}</Text>}
 
-          <Text style={styles.hint}>Photos</Text>
+          <Text style={styles.hint}>{t({ en: "Photos", fr: "Photos" })}</Text>
           <View style={styles.photoRow}>
             {photoUris.map((uri, i) => (
               <View key={`${uri}-${i}`} style={styles.thumbWrap}>
@@ -300,29 +318,29 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
             </Pressable>
           </View>
 
-          <Text style={styles.hint}>Lap records — auto-updated from your run results, editable here</Text>
+          <Text style={styles.hint}>{t({ en: "Lap records — auto-updated from your run results, editable here", fr: "Records au tour — mis à jour automatiquement depuis tes résultats de session, modifiables ici" })}</Text>
           {records.map((r, i) => (
             <View key={i} style={styles.recordRow}>
               <View style={styles.recordHead}>
-                <Text style={styles.recordIndex}>record {i + 1}</Text>
+                <Text style={styles.recordIndex}>{t({ en: `record ${i + 1}`, fr: `record ${i + 1}` })}</Text>
                 <Pressable hitSlop={8} onPress={() => setRecords((prev) => prev.filter((_, j) => j !== i))}>
-                  <Text style={styles.recordRemove}>✕ remove</Text>
+                  <Text style={styles.recordRemove}>{t({ en: "✕ remove", fr: "✕ supprimer" })}</Text>
                 </Pressable>
               </View>
               <View style={styles.twoCol}>
                 <View style={{ flex: 2 }}>
-                  <LabeledInput label="Category" value={r.category} onChangeText={(t) => patchRecord(i, { category: t })} placeholder='e.g. "1/8 nitro buggy"' />
+                  <LabeledInput label={t({ en: "Category", fr: "Catégorie" })} value={r.category} onChangeText={(v) => patchRecord(i, { category: v })} placeholder={t({ en: 'e.g. "1/8 nitro buggy"', fr: 'ex. « buggy nitro 1/8 »' })} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <LabeledInput label="Lap (s)" value={r.lap_s} onChangeText={(t) => patchRecord(i, { lap_s: t })} keyboardType="decimal-pad" placeholder="31.2" />
+                  <LabeledInput label={t({ en: "Lap (s)", fr: "Tour (s)" })} value={r.lap_s} onChangeText={(v) => patchRecord(i, { lap_s: v })} keyboardType="decimal-pad" placeholder="31.2" />
                 </View>
               </View>
               <View style={styles.twoCol}>
                 <View style={{ flex: 1 }}>
-                  <LabeledInput label="Conditions" value={r.conditions} onChangeText={(t) => patchRecord(i, { conditions: t })} placeholder="optional" />
+                  <LabeledInput label={t({ en: "Conditions", fr: "Conditions" })} value={r.conditions} onChangeText={(v) => patchRecord(i, { conditions: v })} placeholder={t({ en: "optional", fr: "optionnel" })} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <LabeledInput label="Holder" value={r.holder} onChangeText={(t) => patchRecord(i, { holder: t })} placeholder="optional" />
+                  <LabeledInput label={t({ en: "Holder", fr: "Détenteur" })} value={r.holder} onChangeText={(v) => patchRecord(i, { holder: v })} placeholder={t({ en: "optional", fr: "optionnel" })} />
                 </View>
               </View>
             </View>
@@ -331,17 +349,17 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
             style={styles.addRowBtn}
             onPress={() => setRecords((prev) => [...prev, { category: "", conditions: "", lap_s: "", holder: "" }])}
           >
-            <Text style={styles.addRowText}>+ add record</Text>
+            <Text style={styles.addRowText}>{t({ en: "+ add record", fr: "+ ajouter un record" })}</Text>
           </Pressable>
         </View>
       )}
 
       <View style={styles.actions}>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
-          <Text style={styles.btnGhostText}>Cancel</Text>
+          <Text style={styles.btnGhostText}>{t({ en: "Cancel", fr: "Annuler" })}</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnPrimary]} onPress={save}>
-          <Text style={styles.btnPrimaryText}>{initial ? "Save track" : "Add track"}</Text>
+          <Text style={styles.btnPrimaryText}>{initial ? t({ en: "Save track", fr: "Enregistrer la piste" }) : t({ en: "Add track", fr: "Ajouter la piste" })}</Text>
         </Pressable>
       </View>
 
@@ -353,15 +371,15 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
         >
           <Text style={styles.officialBtnText}>
             {candidacyState === "official"
-              ? "🏁 Official track ✓"
+              ? t({ en: "🏁 Official track ✓", fr: "🏁 Piste officielle ✓" })
               : candidacyState === "candidate"
-                ? "⏳ Pending review"
+                ? t({ en: "⏳ Pending review", fr: "⏳ En attente de validation" })
                 : candidacyState === "rejected"
-                  ? "Submit again as official"
-                  : "🏁 Submit as official track"}
+                  ? t({ en: "Submit again as official", fr: "Soumettre à nouveau comme officielle" })
+                  : t({ en: "🏁 Submit as official track", fr: "🏁 Soumettre comme piste officielle" })}
           </Text>
           {candidacyState === "none" && (
-            <Text style={styles.officialBtnHint}>Curators vet it into the shared library + leaderboard</Text>
+            <Text style={styles.officialBtnHint}>{t({ en: "Curators vet it into the shared library + leaderboard", fr: "Les curateurs la valident pour la bibliothèque partagée + le classement" })}</Text>
           )}
         </Pressable>
       )}
@@ -370,7 +388,10 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
         <View style={styles.deleteZone}>
           {deleteArmed && (
             <Text style={styles.deleteWarn}>
-              This permanently removes the track and its records — runs that referenced it keep their own copy of its name.
+              {t({
+                en: "This permanently removes the track and its records — runs that referenced it keep their own copy of its name.",
+                fr: "Ceci supprime définitivement la piste et ses records — les sessions qui la référençaient gardent leur propre copie de son nom.",
+              })}
             </Text>
           )}
           <Pressable
@@ -378,7 +399,7 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
             onPress={() => (deleteArmed ? onDelete() : setDeleteArmed(true))}
           >
             <Text style={[styles.deleteText, deleteArmed && styles.deleteTextArmed]}>
-              {deleteArmed ? "Tap again to delete track" : "Delete track"}
+              {deleteArmed ? t({ en: "Tap again to delete track", fr: "Touche à nouveau pour supprimer la piste" }) : t({ en: "Delete track", fr: "Supprimer la piste" })}
             </Text>
           </Pressable>
         </View>
@@ -412,6 +433,7 @@ function CornerEditor({
   onSave: () => void;
   onRemove: () => void;
 }) {
+  const t = useT();
   const toggleFeature = (f: CornerFeature) =>
     onChange({
       ...draft,
@@ -421,7 +443,7 @@ function CornerEditor({
     <View style={styles.cornerEditor}>
       <View style={{ flexDirection: "row", gap: 10, alignItems: "flex-end" }}>
         <View>
-          <Text style={styles.hint}>Direction</Text>
+          <Text style={styles.hint}>{t({ en: "Direction", fr: "Direction" })}</Text>
           <ChipRow
             options={DIRECTIONS}
             value={draft.direction}
@@ -431,36 +453,36 @@ function CornerEditor({
         </View>
         <View style={{ flex: 1 }}>
           <LabeledInput
-            label="Corner name"
+            label={t({ en: "Corner name", fr: "Nom du virage" })}
             value={draft.name}
-            onChangeText={(t) => onChange({ ...draft, name: t })}
-            placeholder='e.g. "le triple"'
+            onChangeText={(v) => onChange({ ...draft, name: v })}
+            placeholder={t({ en: 'e.g. "le triple"', fr: 'ex. « le triple »' })}
           />
         </View>
       </View>
-      <Text style={styles.hint}>Shape</Text>
+      <Text style={styles.hint}>{t({ en: "Shape", fr: "Forme" })}</Text>
       <ChipRow options={SHAPES} value={draft.shape} onSelect={(s) => onChange({ ...draft, shape: draft.shape === s ? undefined : s })} />
-      <Text style={styles.hint}>Features</Text>
+      <Text style={styles.hint}>{t({ en: "Features", fr: "Caractéristiques" })}</Text>
       <MultiChipRow options={CORNER_FEATURES} values={draft.features} onToggle={toggleFeature} />
       <View style={{ height: 8 }} />
       <LabeledInput
-        label="Surface override"
+        label={t({ en: "Surface override", fr: "Surface spécifique" })}
         value={draft.surface}
-        onChangeText={(t) => onChange({ ...draft, surface: t })}
-        placeholder="only if different from the track"
+        onChangeText={(v) => onChange({ ...draft, surface: v })}
+        placeholder={t({ en: "only if different from the track", fr: "seulement si différente de la piste" })}
       />
       <LabeledInput
-        label="Note"
+        label={t({ en: "Note", fr: "Note" })}
         value={draft.note}
-        onChangeText={(t) => onChange({ ...draft, note: t })}
-        placeholder='e.g. "inside kerb launches the car"'
+        onChangeText={(v) => onChange({ ...draft, note: v })}
+        placeholder={t({ en: 'e.g. "inside kerb launches the car"', fr: 'ex. « le vibreur intérieur fait sauter la voiture »' })}
       />
       <View style={styles.cornerEditorBtns}>
         <Pressable style={[styles.smallBtn, styles.smallGhost]} onPress={onRemove}>
-          <Text style={styles.smallWarnText}>{draft.index === null ? "discard" : "remove"}</Text>
+          <Text style={styles.smallWarnText}>{draft.index === null ? t({ en: "discard", fr: "abandonner" }) : t({ en: "remove", fr: "supprimer" })}</Text>
         </Pressable>
         <Pressable style={[styles.smallBtn, styles.smallPrimary]} onPress={onSave}>
-          <Text style={styles.smallPrimaryText}>Save corner</Text>
+          <Text style={styles.smallPrimaryText}>{t({ en: "Save corner", fr: "Enregistrer le virage" })}</Text>
         </Pressable>
       </View>
     </View>

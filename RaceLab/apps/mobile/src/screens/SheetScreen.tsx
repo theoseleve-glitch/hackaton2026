@@ -7,6 +7,7 @@ import type { SheetsState } from "../../../../packages/sheets/src";
 import { buildSetupPayload } from "../../../../packages/social/src";
 import type { SharedPayload } from "../../../../packages/social/src";
 import { KB } from "../kb";
+import { useT } from "../i18n";
 import { loadCarSheets, useCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { SheetEditorScreen } from "./SheetEditorScreen";
@@ -52,6 +53,7 @@ export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus, on
 
 /** Tab-bar entry point: every car, name + how many setups it holds. */
 function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPick: (id: string) => void; onScanImport: () => void }) {
+  const t = useT();
   const [counts, setCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
@@ -72,13 +74,13 @@ function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPi
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
       <View style={styles.pickerHead}>
-        <Text style={styles.h1}>Setup sheets</Text>
+        <Text style={styles.h1}>{t({ en: "Setup sheets", fr: "Fiches de réglages" })}</Text>
         <Pressable style={styles.importBtn} onPress={onScanImport}>
-          <Text style={styles.importBtnText}>⤵ Import (scan)</Text>
+          <Text style={styles.importBtnText}>{t({ en: "⤵ Import (scan)", fr: "⤵ Importer (scanner)" })}</Text>
         </Pressable>
       </View>
       {garage.cars.length === 0 && (
-        <Text style={styles.empty}>Add a car in the Garage first — its kit sheet comes preloaded.</Text>
+        <Text style={styles.empty}>{t({ en: "Add a car in the Garage first — its kit sheet comes preloaded.", fr: "Ajoute d'abord une voiture dans le garage — sa fiche kit est préchargée." })}</Text>
       )}
       {garage.cars.map((car) => (
         <Pressable key={car.id} style={styles.carRow} onPress={() => onPick(car.id)}>
@@ -86,7 +88,7 @@ function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPi
             <Text style={styles.carName}>{car.name}</Text>
             <Text style={styles.carMeta}>
               {counts[car.id] !== undefined
-                ? `${counts[car.id]} setup${counts[car.id] === 1 ? "" : "s"}`
+                ? t({ en: `${counts[car.id]} setup${counts[car.id] === 1 ? "" : "s"}`, fr: `${counts[car.id]} réglage${counts[car.id] === 1 ? "" : "s"}` })
                 : "…"}
             </Text>
           </View>
@@ -111,6 +113,7 @@ function CarSheets({
   onShareSetup: (p: SharedPayload) => void;
   onBack: () => void;
 }) {
+  const t = useT();
   const { state, update } = useCarSheets(car.id, car.template_id);
   const profile = sheetProfile(car);
   const template = KB.templates[car.template_id] ?? KB.templates["generic-offroad"];
@@ -126,7 +129,7 @@ function CarSheets({
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={() => (mode === "detail" ? setMode("list") : onBack())} hitSlop={10}>
-          <Text style={styles.back}>{mode === "detail" ? "‹ Setups" : `‹ ${car.name}`}</Text>
+          <Text style={styles.back}>{mode === "detail" ? t({ en: "‹ Setups", fr: "‹ Réglages" }) : `‹ ${car.name}`}</Text>
         </Pressable>
         <View style={styles.badges}>
           {profile.badges.map((b) => (
@@ -136,12 +139,12 @@ function CarSheets({
           ))}
         </View>
         <Pressable style={styles.newBtn} onPress={newSetup}>
-          <Text style={styles.newBtnText}>＋ New setup</Text>
+          <Text style={styles.newBtnText}>{t({ en: "＋ New setup", fr: "＋ Nouveau réglage" })}</Text>
         </Pressable>
       </View>
       {!state ? (
         <View style={{ padding: 20 }}>
-          <Text style={styles.empty}>Loading sheets…</Text>
+          <Text style={styles.empty}>{t({ en: "Loading sheets…", fr: "Chargement des fiches…" })}</Text>
         </View>
       ) : mode === "detail" ? (
         <SheetEditorScreen state={state} update={update} template={template} profile={profile} options={car.options} />
@@ -181,6 +184,7 @@ function SetupList({
   onOpenDraft: () => void;
   onOpenVersion: (id: string) => void;
 }) {
+  const t = useT();
   const shareVersion = (v: SheetsState["versions"][number]) =>
     onShareSetup(
       buildSetupPayload(
@@ -199,17 +203,17 @@ function SetupList({
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       <Pressable style={styles.draftRow} onPress={onOpenDraft}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.draftLabel}>WORKING DRAFT</Text>
+          <Text style={styles.draftLabel}>{t({ en: "WORKING DRAFT", fr: "BROUILLON EN COURS" })}</Text>
           <Text style={styles.verName}>{state.draft_name}</Text>
           <Text style={styles.verMeta}>
-            based on {base?.name ?? "kit"}
-            {edits > 0 ? ` · ${edits} unsaved change${edits > 1 ? "s" : ""}` : " · untouched"}
+            {t({ en: "based on", fr: "basé sur" })} {base?.name ?? t({ en: "kit", fr: "kit" })}
+            {edits > 0 ? t({ en: ` · ${edits} unsaved change${edits > 1 ? "s" : ""}`, fr: ` · ${edits} modification${edits > 1 ? "s" : ""} non enregistrée${edits > 1 ? "s" : ""}` }) : t({ en: " · untouched", fr: " · intact" })}
           </Text>
         </View>
         <Text style={styles.chev}>›</Text>
       </Pressable>
 
-      <Text style={styles.listSection}>Saved setups · {versions.length}</Text>
+      <Text style={styles.listSection}>{t({ en: `Saved setups · ${versions.length}`, fr: `Réglages enregistrés · ${versions.length}` })}</Text>
       {versions.map((v) => (
         <Pressable key={v.id} style={styles.verRow} onPress={() => onOpenVersion(v.id)}>
           <View style={{ flex: 1 }}>
@@ -225,19 +229,21 @@ function SetupList({
           <Text style={styles.chev}>›</Text>
         </Pressable>
       ))}
-      <Text style={styles.listSection}>Options installed</Text>
+      <Text style={styles.listSection}>{t({ en: "Options installed", fr: "Options installées" })}</Text>
       <TextInput
         style={styles.optionsInput}
         defaultValue={options ?? ""}
         onEndEditing={(e) => onChangeOptions(e.nativeEvent.text.trim())}
-        placeholder="e.g. alu servo horn, HD diff cups"
+        placeholder={t({ en: "e.g. alu servo horn, HD diff cups", fr: "ex. palonnier servo alu, noix de diff HD" })}
         placeholderTextColor={colors.sub}
         multiline
       />
 
       <Text style={styles.listHint}>
-        Tap a setup to read or edit it — saving always creates a new version, the original stays
-        untouched. Compare and lineage live inside the detail view.
+        {t({
+          en: "Tap a setup to read or edit it — saving always creates a new version, the original stays untouched. Compare and lineage live inside the detail view.",
+          fr: "Touche un réglage pour le lire ou le modifier — enregistrer crée toujours une nouvelle version, l'original reste intact. La comparaison et l'historique se trouvent dans la vue détaillée.",
+        })}
       </Text>
     </ScrollView>
   );

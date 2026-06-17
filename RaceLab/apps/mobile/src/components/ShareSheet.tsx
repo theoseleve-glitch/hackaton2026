@@ -6,6 +6,7 @@ import type { SharedPayload } from "../../../../packages/social/src";
 import { payloadToLink } from "../../../../packages/social/src";
 import { copyLink, shareFile, shareLink, sharePng } from "../share";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 import { ShareCard } from "./ShareCard";
 
 /**
@@ -18,6 +19,7 @@ import { ShareCard } from "./ShareCard";
 const QR_MAX = 2200; // chars — practical QR ceiling at ECC level M
 
 export function ShareSheet({ payload, onClose }: { payload: SharedPayload | null; onClose: () => void }) {
+  const t = useT();
   const [mode, setMode] = useState<"menu" | "qr">("menu");
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -43,43 +45,43 @@ export function ShareSheet({ payload, onClose }: { payload: SharedPayload | null
         <View style={styles.handle} />
         {mode === "qr" ? (
           <View style={styles.qrBox}>
-            <Text style={styles.title}>Scan to import</Text>
+            <Text style={styles.title}>{t({ en: "Scan to import", fr: "Scanner pour importer" })}</Text>
             {qrTooBig ? (
-              <Text style={styles.warn}>This setup is too big for a QR — use Link or File instead.</Text>
+              <Text style={styles.warn}>{t({ en: "This setup is too big for a QR — use Link or File instead.", fr: "Ce réglage est trop lourd pour un QR — passe par Lien ou Fichier." })}</Text>
             ) : (
               <View style={styles.qrFrame}>
                 <QRCode value={link} size={240} backgroundColor="#ffffff" color="#000000" ecl="M" />
               </View>
             )}
-            <Text style={styles.sub}>Another racer scans it from Tracks → import (no signal needed).</Text>
+            <Text style={styles.sub}>{t({ en: "Another racer scans it from Tracks → import (no signal needed).", fr: "Un autre pilote le scanne depuis Pistes → importer (aucun réseau nécessaire)." })}</Text>
             <Pressable style={[styles.btn, styles.ghost]} onPress={() => setMode("menu")}>
-              <Text style={styles.ghostText}>‹ Back</Text>
+              <Text style={styles.ghostText}>{t({ en: "‹ Back", fr: "‹ Retour" })}</Text>
             </Pressable>
           </View>
         ) : (
           <>
-            <Text style={styles.title}>Share setup</Text>
+            <Text style={styles.title}>{t({ en: "Share setup", fr: "Partager le réglage" })}</Text>
             <Text style={styles.sub}>
               {payload.car.brand} {payload.car.model} · {payload.setup.name}
             </Text>
-            <Row icon="🔗" label="Share link" hint="WhatsApp, Messages…" onPress={() => void shareLink(payload)} />
+            <Row icon="🔗" label={t({ en: "Share link", fr: "Partager le lien" })} hint={t({ en: "WhatsApp, Messages…", fr: "WhatsApp, Messages…" })} onPress={() => void shareLink(payload)} />
             <Row
               icon="📋"
-              label={copied ? "Copied!" : "Copy link"}
-              hint="paste anywhere"
+              label={copied ? t({ en: "Copied!", fr: "Copié !" }) : t({ en: "Copy link", fr: "Copier le lien" })}
+              hint={t({ en: "paste anywhere", fr: "à coller n’importe où" })}
               onPress={() => void copyLink(payload).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); })}
             />
-            <Row icon="🔲" label="Show QR" hint="trackside, zero signal" onPress={() => setMode("qr")} />
-            <Row icon="📄" label="Export file" hint=".griplab — AirDrop, Drive" onPress={() => void shareFile(payload)} />
+            <Row icon="🔲" label={t({ en: "Show QR", fr: "Afficher le QR" })} hint={t({ en: "trackside, zero signal", fr: "au bord de piste, sans réseau" })} onPress={() => setMode("qr")} />
+            <Row icon="📄" label={t({ en: "Export file", fr: "Exporter le fichier" })} hint={t({ en: ".griplab — AirDrop, Drive", fr: ".griplab — AirDrop, Drive" })} onPress={() => void shareFile(payload)} />
             <Row
               icon="🖼"
-              label={busy ? "Rendering…" : "Share card"}
-              hint="post your session"
+              label={busy ? t({ en: "Rendering…", fr: "Génération…" }) : t({ en: "Share card", fr: "Partager la carte" })}
+              hint={t({ en: "post your session", fr: "publie ta session" })}
               onPress={captureCard}
               busy={busy}
             />
             <Pressable style={[styles.btn, styles.ghost]} onPress={onClose}>
-              <Text style={styles.ghostText}>Close</Text>
+              <Text style={styles.ghostText}>{t({ en: "Close", fr: "Fermer" })}</Text>
             </Pressable>
           </>
         )}

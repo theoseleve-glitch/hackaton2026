@@ -15,6 +15,7 @@ import { bundleFromRun, lastRun } from "../../../../packages/logbook/src";
 import type { LogbookState } from "../../../../packages/logbook/src";
 import { KB, MP11_ID } from "../kb";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 interface Message {
   role: "you" | "engineer";
@@ -30,6 +31,7 @@ interface Props {
 }
 
 export function EngineerScreen({ setup, logbook }: Props) {
+  const t = useT();
   const last = logbook ? lastRun(logbook) : undefined;
   const [grip, setGrip] = useState<Grip>(last?.conditions.grip ?? "medium");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -74,7 +76,7 @@ export function EngineerScreen({ setup, logbook }: Props) {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <View style={styles.gripRow}>
-        <Text style={styles.gripLabel}>Track grip</Text>
+        <Text style={styles.gripLabel}>{t({ en: "Track grip", fr: "Grip piste" })}</Text>
         {GRIPS.map((g) => (
           <Pressable
             key={g}
@@ -89,8 +91,11 @@ export function EngineerScreen({ setup, logbook }: Props) {
       </View>
       {fromLastRun && last && (
         <Text style={styles.contextLine}>
-          📒 context from your last run: {last.track.name} · {last.track.surface}
-          {last.tyres?.wear ? ` · ${last.tyres.wear} tyres` : ""}
+          {t({ en: "📒 context from your last run:", fr: "📒 contexte de ta dernière session :" })}{" "}
+          {last.track.name} · {last.track.surface}
+          {last.tyres?.wear
+            ? t({ en: ` · ${last.tyres.wear} tyres`, fr: ` · pneus ${last.tyres.wear}` })
+            : ""}
         </Text>
       )}
 
@@ -105,11 +110,17 @@ export function EngineerScreen({ setup, logbook }: Props) {
       <View style={styles.quickRow}>
         {["better", "same", "worse"].map((q) => (
           <Pressable key={q} style={styles.quick} onPress={() => send(q)}>
-            <Text style={styles.quickText}>{q}</Text>
+            <Text style={styles.quickText}>
+              {q === "better"
+                ? t({ en: "better", fr: "mieux" })
+                : q === "same"
+                  ? t({ en: "same", fr: "pareil" })
+                  : t({ en: "worse", fr: "pire" })}
+            </Text>
           </Pressable>
         ))}
         <Pressable style={styles.quick} onPress={() => send("race day")}>
-          <Text style={styles.quickText}>race day</Text>
+          <Text style={styles.quickText}>{t({ en: "race day", fr: "jour de course" })}</Text>
         </Pressable>
       </View>
 
@@ -118,7 +129,7 @@ export function EngineerScreen({ setup, logbook }: Props) {
           style={styles.input}
           value={input}
           onChangeText={setInput}
-          placeholder='e.g. "it pushes mid-corner"'
+          placeholder={t({ en: 'e.g. "it pushes mid-corner"', fr: 'ex. « ça sous-vire en milieu de virage »' })}
           placeholderTextColor={colors.sub}
           onSubmitEditing={() => send(input)}
           returnKeyType="send"

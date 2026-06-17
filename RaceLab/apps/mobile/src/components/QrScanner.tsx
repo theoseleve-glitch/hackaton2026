@@ -4,6 +4,7 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import type { SharedPayload } from "../../../../packages/social/src";
 import { linkToPayload } from "../../../../packages/social/src";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Trackside QR import (Expo Go camera). Scans a griplab://import?d=… code, parses
@@ -11,6 +12,7 @@ import { colors, radius } from "../theme";
  * zero signal — two phones in the pits.
  */
 export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload) => void; onClose: () => void }) {
+  const t = useT();
   const [permission, requestPermission] = useCameraPermissions();
   const [error, setError] = useState<string | null>(null);
   const handled = useRef(false);
@@ -22,7 +24,7 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
       handled.current = true;
       onScanned(res.payload);
     } else {
-      setError("That QR isn't a RaceLab setup.");
+      setError(t({ en: "That QR isn't a RaceLab setup.", fr: "Ce QR n'est pas un réglage RaceLab." }));
     }
   };
 
@@ -30,21 +32,21 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={onClose} hitSlop={10}>
-          <Text style={styles.back}>‹ Cancel</Text>
+          <Text style={styles.back}>{t({ en: "‹ Cancel", fr: "‹ Annuler" })}</Text>
         </Pressable>
-        <Text style={styles.title}>Scan a setup</Text>
+        <Text style={styles.title}>{t({ en: "Scan a setup", fr: "Scanner un réglage" })}</Text>
         <View style={{ width: 60 }} />
       </View>
 
       {!permission ? (
         <View style={styles.center}>
-          <Text style={styles.msg}>Checking camera…</Text>
+          <Text style={styles.msg}>{t({ en: "Checking camera…", fr: "Vérification de la caméra…" })}</Text>
         </View>
       ) : !permission.granted ? (
         <View style={styles.center}>
-          <Text style={styles.msg}>RaceLab needs the camera to scan a setup QR.</Text>
+          <Text style={styles.msg}>{t({ en: "RaceLab needs the camera to scan a setup QR.", fr: "RaceLab a besoin de la caméra pour scanner un QR de réglage." })}</Text>
           <Pressable style={styles.btn} onPress={() => void requestPermission()}>
-            <Text style={styles.btnText}>Allow camera</Text>
+            <Text style={styles.btnText}>{t({ en: "Allow camera", fr: "Autoriser la caméra" })}</Text>
           </Pressable>
         </View>
       ) : (
@@ -56,7 +58,7 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
             onBarcodeScanned={onBarcode}
           />
           <View style={styles.reticle} pointerEvents="none" />
-          <Text style={styles.hint}>{error ?? "Point at the other racer's RaceLab QR"}</Text>
+          <Text style={styles.hint}>{error ?? t({ en: "Point at the other racer's RaceLab QR", fr: "Vise le QR RaceLab de l'autre pilote" })}</Text>
         </View>
       )}
     </View>

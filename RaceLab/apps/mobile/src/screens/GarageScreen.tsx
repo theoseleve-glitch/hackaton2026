@@ -11,6 +11,7 @@ import type { CarStatus, LogbookState } from "../../../../packages/logbook/src";
 import { NewCarForm } from "../components/NewCarForm";
 import { sheetsKeyForCar } from "../garagestore";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * The garage is a pit wall (D22) — now multi-car (D26). Every car card
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLogRun }: Props) {
+  const t = useT();
   const [modal, setModal] = useState<null | "new" | { edit: CarEntity }>(null);
   const stats = seasonStats(logbook);
 
@@ -34,26 +36,28 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
     <View style={{ flex: 1 }}>
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
-        <Text style={styles.h1}>Garage</Text>
+        <Text style={styles.h1}>{t({ en: "Garage", fr: "Garage" })}</Text>
         <Pressable style={styles.addBtn} onPress={() => setModal("new")}>
-          <Text style={styles.addBtnText}>＋ Add car</Text>
+          <Text style={styles.addBtnText}>{t({ en: "＋ Add car", fr: "＋ Ajouter une voiture" })}</Text>
         </Pressable>
       </View>
 
       {garage.cars.length === 0 && (
         <View style={styles.card}>
-          <Text style={styles.emptyTitle}>No car yet</Text>
+          <Text style={styles.emptyTitle}>{t({ en: "No car yet", fr: "Aucune voiture pour l’instant" })}</Text>
           <Text style={styles.meta}>
-            Add your first car — its typology (nitro/EP, scale, brand) customizes the setup sheet
-            labels, and its kit baseline comes preloaded when we have the chassis template.
+            {t({
+              en: "Add your first car — its typology (nitro/EP, scale, brand) customizes the setup sheet labels, and its kit baseline comes preloaded when we have the chassis template.",
+              fr: "Ajoute ta première voiture — sa typologie (nitro/EP, échelle, marque) personnalise les libellés de la fiche de réglages, et sa base kit est préchargée quand on a le gabarit du châssis.",
+            })}
           </Text>
           <Pressable
             style={[styles.btn, styles.btnPrimary, styles.emptyCta]}
             onPress={() => setModal("new")}
             accessibilityRole="button"
-            accessibilityLabel="Add your first car"
+            accessibilityLabel={t({ en: "Add your first car", fr: "Ajouter ta première voiture" })}
           >
-            <Text style={styles.btnPrimaryText}>＋ Add your first car</Text>
+            <Text style={styles.btnPrimaryText}>{t({ en: "＋ Add your first car", fr: "＋ Ajouter ta première voiture" })}</Text>
           </Pressable>
         </View>
       )}
@@ -71,11 +75,11 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
 
       {stats.runs > 0 && (
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Season</Text>
+          <Text style={styles.cardTitle}>{t({ en: "Season", fr: "Saison" })}</Text>
           <View style={styles.odometer}>
-            <Stat value={String(stats.runs)} label={`run${stats.runs > 1 ? "s" : ""}`} />
-            <Stat value={String(stats.tracks)} label={`track${stats.tracks > 1 ? "s" : ""}`} />
-            <Stat value={stats.better_streak > 0 ? `${stats.better_streak}🔥` : "0"} label="better streak" />
+            <Stat value={String(stats.runs)} label={t({ en: `run${stats.runs > 1 ? "s" : ""}`, fr: `session${stats.runs > 1 ? "s" : ""}` })} />
+            <Stat value={String(stats.tracks)} label={t({ en: `track${stats.tracks > 1 ? "s" : ""}`, fr: `piste${stats.tracks > 1 ? "s" : ""}` })} />
+            <Stat value={stats.better_streak > 0 ? `${stats.better_streak}🔥` : "0"} label={t({ en: "better streak", fr: "série de mieux" })} />
           </View>
         </View>
       )}
@@ -124,6 +128,7 @@ const CarCard = React.memo(function CarCard({
   onOpenSheet: () => void;
   onLogRun: () => void;
 }) {
+  const t = useT();
   // this car's runs only (legacy runs without car_id belong to the legacy car)
   const status = useMemo(
     () =>
@@ -161,10 +166,10 @@ const CarCard = React.memo(function CarCard({
 
       <View style={styles.row}>
         <Pressable style={[styles.btn, styles.btnPrimary]} onPress={onLogRun}>
-          <Text style={styles.btnPrimaryText}>🏁 Log run</Text>
+          <Text style={styles.btnPrimaryText}>{t({ en: "🏁 Log run", fr: "🏁 Enregistrer une session" })}</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onOpenSheet}>
-          <Text style={styles.btnGhostText}>Setup sheet</Text>
+          <Text style={styles.btnGhostText}>{t({ en: "Setup sheet", fr: "Fiche de réglages" })}</Text>
         </Pressable>
       </View>
     </View>
@@ -172,22 +177,26 @@ const CarCard = React.memo(function CarCard({
 });
 
 function MoodLine({ status }: { status: CarStatus }) {
+  const t = useT();
   const txt = (() => {
     switch (status.kind) {
       case "fresh":
-        return { icon: "🔧", text: "Fresh build — log a run and I'll start learning this car.", tone: colors.sub };
+        return { icon: "🔧", text: t({ en: "Fresh build — log a run and I'll start learning this car.", fr: "Montage neuf — enregistre une session et je commence à apprendre cette voiture." }), tone: colors.sub };
       case "dialed":
-        return { icon: "✅", text: `Dialed — last change rated better @ ${status.track}.`, tone: colors.good };
+        return { icon: "✅", text: t({ en: `Dialed — last change rated better @ ${status.track}.`, fr: `Au point — dernier changement noté meilleur @ ${status.track}.` }), tone: colors.good };
       case "regressed":
-        return { icon: "↩️", text: `Last change rated worse @ ${status.track} — revert candidate on the sheet.`, tone: colors.warn };
+        return { icon: "↩️", text: t({ en: `Last change rated worse @ ${status.track} — revert candidate on the sheet.`, fr: `Dernier changement noté pire @ ${status.track} — à annuler sur la fiche.` }), tone: colors.warn };
       case "fighting":
         return {
           icon: "⚠️",
-          text: `Fighting ${status.symptom.replace(/_/g, " ")} since ${status.date.slice(5, 10)} @ ${status.track}.`,
+          text: t({
+            en: `Fighting ${status.symptom.replace(/_/g, " ")} since ${status.date.slice(5, 10)} @ ${status.track}.`,
+            fr: `Tu luttes contre ${status.symptom.replace(/_/g, " ")} depuis ${status.date.slice(5, 10)} @ ${status.track}.`,
+          }),
           tone: colors.warn,
         };
       case "ran":
-        return { icon: "🏁", text: `Last ran ${status.date.slice(5, 10)} @ ${status.track}. No complaints logged.`, tone: colors.sub };
+        return { icon: "🏁", text: t({ en: `Last ran ${status.date.slice(5, 10)} @ ${status.track}. No complaints logged.`, fr: `Dernière sortie ${status.date.slice(5, 10)} @ ${status.track}. Aucun souci signalé.` }), tone: colors.sub };
     }
   })();
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, Easing, StyleSheet, Text, View } from "react-native";
 import { colors } from "../theme";
+import { useT, type Phrase } from "../i18n";
 
 /**
  * Celebration splash (driver feedback pass): a competitive run saved with
@@ -17,10 +18,13 @@ export interface Celebration {
   sub?: string;
 }
 
-const MEDAL: Record<number, Celebration> = {
-  1: { icon: "🏆", line: "WINNER — P1", tone: colors.gold },
-  2: { icon: "🥈", line: "PODIUM — P2", tone: "#C7CCD1" },
-  3: { icon: "🥉", line: "PODIUM — P3", tone: "#D08A4E" },
+// Podium medals: `line` is a Phrase translated at render time (this map lives
+// at module scope, so it can't call the reactive translator hook itself).
+type Medal = { icon: string; line: Phrase; tone: string };
+const MEDAL: Record<number, Medal> = {
+  1: { icon: "🏆", line: { en: "WINNER — P1", fr: "VAINQUEUR — P1" }, tone: colors.gold },
+  2: { icon: "🥈", line: { en: "PODIUM — P2", fr: "PODIUM — P2" }, tone: "#C7CCD1" },
+  3: { icon: "🥉", line: { en: "PODIUM — P3", fr: "PODIUM — P3" }, tone: "#D08A4E" },
 };
 
 const CONFETTI_COLORS = [colors.accent, colors.gold, colors.good, "#9D6BFF", "#4DA6FF"];
@@ -64,10 +68,17 @@ export function PodiumSplash({
   record?: Celebration;
   onDone: () => void;
 }) {
+  const t = useT();
   const scale = useRef(new Animated.Value(0)).current;
   const fade = useRef(new Animated.Value(0)).current;
   const confetti = useRef(new Animated.Value(0)).current;
-  const medal = record ?? MEDAL[position ?? 3] ?? MEDAL[3];
+  const podium = MEDAL[position ?? 3] ?? MEDAL[3];
+  // A custom `record` (already-translated strings from the caller) wins over the
+  // default podium medal, whose line is a Phrase we translate here.
+  const icon = record?.icon ?? podium.icon;
+  const line = record?.line ?? t(podium.line);
+  const tone = record?.tone ?? podium.tone;
+  const sub = record?.sub ?? t({ en: "logged to your record", fr: "ajouté à ton palmarès" });
 
   useEffect(() => {
     Animated.parallel([
@@ -93,9 +104,9 @@ export function PodiumSplash({
         <ConfettiDot key={i} index={i} progress={confetti} />
       ))}
       <Animated.View style={[styles.card, { transform: [{ scale }] }]}>
-        <Text style={styles.icon}>{medal.icon}</Text>
-        <Text style={[styles.line, { color: medal.tone }]}>{medal.line}</Text>
-        <Text style={styles.sub}>{medal.sub ?? "logged to your record"}</Text>
+        <Text style={styles.icon}>{icon}</Text>
+        <Text style={[styles.line, { color: tone }]}>{line}</Text>
+        <Text style={styles.sub}>{sub}</Text>
       </Animated.View>
     </Animated.View>
   );

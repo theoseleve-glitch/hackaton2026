@@ -14,6 +14,7 @@ import { ProfileCard } from "../components/ProfileCard";
 import { ProfileEditForm } from "../components/ProfileEditForm";
 import { ProgressCard } from "../components/ProgressCard";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Social home (D32+): Feed · Discover · You. Feed and Discover are a deterministic
@@ -36,6 +37,7 @@ interface Props {
 }
 
 export function SocialScreen({ account, setAccount, garage, logbook, follows, onFollow, onUnfollow, onFork }: Props) {
+  const t = useT();
   const [seg, setSeg] = useState<Segment>("feed");
   const [feed, setFeed] = useState<FeedItem[] | null>(null);
   const [discover, setDiscover] = useState<DriverProfile[] | null>(null);
@@ -95,7 +97,7 @@ export function SocialScreen({ account, setAccount, garage, logbook, follows, on
     <View style={styles.root}>
       <View style={styles.segBar}>
         {(["feed", "discover", "you"] as Segment[]).map((s) => {
-          const label = s === "feed" ? "Feed" : s === "discover" ? "Discover" : "You";
+          const label = s === "feed" ? t({ en: "Feed", fr: "Fil" }) : s === "discover" ? t({ en: "Discover", fr: "Découvrir" }) : t({ en: "You", fr: "Toi" });
           return (
             <Pressable
               key={s}
@@ -152,24 +154,26 @@ function Avatar({ uri, handle, size = 40 }: { uri?: string; handle: string; size
 }
 
 function FollowBtn({ handle, follows, onFollow, onUnfollow }: { handle: string; follows: FollowData; onFollow: (h: string) => void; onUnfollow: (h: string) => void }) {
+  const t = useT();
   const following = isFollowing(follows, handle);
   return (
     <Pressable
       style={[styles.followBtn, following && styles.followingBtn]}
       onPress={() => (following ? onUnfollow(handle) : onFollow(handle))}
     >
-      <Text style={[styles.followText, following && styles.followingText]}>{following ? "Following" : "+ Follow"}</Text>
+      <Text style={[styles.followText, following && styles.followingText]}>{following ? t({ en: "Following", fr: "Suivi" }) : t({ en: "+ Follow", fr: "+ Suivre" })}</Text>
     </Pressable>
   );
 }
 
 function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedItem[] | null; follows: FollowData; onFollow: (h: string) => void; onUnfollow: (h: string) => void; onFork: (p: SharedPayload) => void }) {
+  const t = useT();
   if (!feed) return <Centered><ActivityIndicator color={colors.accent} size="large" /></Centered>;
   if (feed.length === 0)
     return (
       <Centered>
-        <Text style={styles.emptyTitle}>Your feed is quiet</Text>
-        <Text style={styles.emptyText}>Follow some drivers in Discover — their shared setups and results show up here.</Text>
+        <Text style={styles.emptyTitle}>{t({ en: "Your feed is quiet", fr: "Ton fil est calme" })}</Text>
+        <Text style={styles.emptyText}>{t({ en: "Follow some drivers in Discover — their shared setups and results show up here.", fr: "Suis des pilotes dans Découvrir — leurs réglages partagés et leurs résultats apparaissent ici." })}</Text>
       </Centered>
     );
   return (
@@ -187,14 +191,14 @@ function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedI
 
           {item.kind === "shared_setup" && item.payload ? (
             <>
-              <Text style={styles.feedLine}>🔧 shared a setup — {item.payload.setup.name}</Text>
+              <Text style={styles.feedLine}>{t({ en: `🔧 shared a setup — ${item.payload.setup.name}`, fr: `🔧 a partagé un réglage — ${item.payload.setup.name}` })}</Text>
               <Text style={styles.feedMeta}>
                 {item.payload.car.brand} {item.payload.car.model}
                 {item.payload.context?.track_name ? ` · ${item.payload.context.track_name}` : ""}
               </Text>
               {item.text ? <Text style={styles.feedText}>“{item.text}”</Text> : null}
               <Pressable style={styles.forkBtn} onPress={() => onFork(item.payload!)}>
-                <Text style={styles.forkText}>⑂ Fork into my garage</Text>
+                <Text style={styles.forkText}>{t({ en: "⑂ Fork into my garage", fr: "⑂ Copier dans mon garage" })}</Text>
               </Pressable>
             </>
           ) : item.result ? (
@@ -205,7 +209,7 @@ function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedI
               </Text>
               <Text style={styles.feedMeta}>
                 {item.result.car ?? ""}
-                {item.result.best_lap_s !== undefined ? ` · best ${item.result.best_lap_s.toFixed(2)}s` : ""}
+                {item.result.best_lap_s !== undefined ? t({ en: ` · best ${item.result.best_lap_s.toFixed(2)}s`, fr: ` · meilleur ${item.result.best_lap_s.toFixed(2)}s` }) : ""}
               </Text>
               {item.text ? <Text style={styles.feedText}>“{item.text}”</Text> : null}
             </>
@@ -217,17 +221,18 @@ function FeedView({ feed, follows, onFollow, onUnfollow, onFork }: { feed: FeedI
 }
 
 function DiscoverView({ discover, follows, onFollow, onUnfollow }: { discover: DriverProfile[] | null; follows: FollowData; onFollow: (h: string) => void; onUnfollow: (h: string) => void }) {
+  const t = useT();
   if (!discover) return <Centered><ActivityIndicator color={colors.accent} size="large" /></Centered>;
   if (discover.length === 0)
     return (
       <Centered>
-        <Text style={styles.emptyTitle}>No drivers to show yet</Text>
-        <Text style={styles.emptyText}>When the community is live, fast drivers to follow will appear here.</Text>
+        <Text style={styles.emptyTitle}>{t({ en: "No drivers to show yet", fr: "Aucun pilote à afficher pour l’instant" })}</Text>
+        <Text style={styles.emptyText}>{t({ en: "When the community is live, fast drivers to follow will appear here.", fr: "Quand la communauté sera active, des pilotes rapides à suivre apparaîtront ici." })}</Text>
       </Centered>
     );
   return (
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-      <Text style={styles.discoverHint}>Fast drivers to follow — their setups are what you search for.</Text>
+      <Text style={styles.discoverHint}>{t({ en: "Fast drivers to follow — their setups are what you search for.", fr: "Des pilotes rapides à suivre — leurs réglages, c’est ce que tu recherches." })}</Text>
       {discover.map((d) => (
         <View key={d.handle} style={styles.card}>
           <View style={styles.cardHead}>
@@ -235,15 +240,15 @@ function DiscoverView({ discover, follows, onFollow, onUnfollow }: { discover: D
             <View style={{ flex: 1, marginLeft: 10 }}>
               <Text style={styles.handle}>@{d.handle}</Text>
               <Text style={styles.when}>
-                {[d.level, d.country, d.home_track].filter(Boolean).join(" · ") || "racer"}
+                {[d.level, d.country, d.home_track].filter(Boolean).join(" · ") || t({ en: "racer", fr: "pilote" })}
               </Text>
             </View>
             <FollowBtn handle={d.handle} follows={follows} onFollow={onFollow} onUnfollow={onUnfollow} />
           </View>
           {d.career ? (
             <Text style={styles.feedMeta}>
-              🏆 {d.career.wins} wins · {d.career.podiums} podiums · {d.career.races} races
-              {d.career.best_lap_s !== undefined ? ` · best ${d.career.best_lap_s.toFixed(2)}s` : ""}
+              {t({ en: `🏆 ${d.career.wins} wins · ${d.career.podiums} podiums · ${d.career.races} races`, fr: `🏆 ${d.career.wins} victoires · ${d.career.podiums} podiums · ${d.career.races} courses` })}
+              {d.career.best_lap_s !== undefined ? t({ en: ` · best ${d.career.best_lap_s.toFixed(2)}s`, fr: ` · meilleur ${d.career.best_lap_s.toFixed(2)}s` }) : ""}
             </Text>
           ) : null}
         </View>
@@ -253,14 +258,15 @@ function DiscoverView({ discover, follows, onFollow, onUnfollow }: { discover: D
 }
 
 function YouView({ account, profile, career, logbook, garage, busyCard, onShareCard, onEdit }: { account: Account; profile: DriverProfile; career: DriverStats; logbook: LogbookState; garage: GarageState; busyCard: boolean; onShareCard: () => void; onEdit: () => void }) {
+  const t = useT();
   const noHandle = !account.handle;
   const pct = (v?: number) => (v === undefined ? "—" : `${Math.round(v * 100)}%`);
   return (
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       {noHandle && (
         <View style={[styles.card, { borderColor: colors.accent }]}>
-          <Text style={styles.emptyTitle}>Set up your driver profile</Text>
-          <Text style={styles.emptyText}>Pick a @handle so your shared setups are attributed to you.</Text>
+          <Text style={styles.emptyTitle}>{t({ en: "Set up your driver profile", fr: "Configure ton profil de pilote" })}</Text>
+          <Text style={styles.emptyText}>{t({ en: "Pick a @handle so your shared setups are attributed to you.", fr: "Choisis un @pseudo pour que tes réglages partagés te soient attribués." })}</Text>
         </View>
       )}
 
@@ -281,22 +287,22 @@ function YouView({ account, profile, career, logbook, garage, busyCard, onShareC
         </View>
       )}
 
-      <Text style={styles.section}>Palmarès</Text>
+      <Text style={styles.section}>{t({ en: "Palmarès", fr: "Palmarès" })}</Text>
       <View style={styles.palmares}>
-        <Stat value={profile.career?.wins ?? 0} label="wins" gold />
-        <Stat value={profile.career?.podiums ?? 0} label="podiums" gold />
-        <Stat value={profile.career?.races ?? 0} label="races" />
-        <Stat value={profile.career?.runs ?? 0} label="runs" />
+        <Stat value={profile.career?.wins ?? 0} label={t({ en: "wins", fr: "victoires" })} gold />
+        <Stat value={profile.career?.podiums ?? 0} label={t({ en: "podiums", fr: "podiums" })} gold />
+        <Stat value={profile.career?.races ?? 0} label={t({ en: "races", fr: "courses" })} />
+        <Stat value={profile.career?.runs ?? 0} label={t({ en: "runs", fr: "sessions" })} />
       </View>
       {career.races > 0 && (
         <View style={styles.rateRow}>
-          <Text style={styles.rateText}>🏆 {pct(career.podium_rate)} podium rate</Text>
-          <Text style={styles.rateText}>🥇 {pct(career.win_rate)} win rate</Text>
-          <Text style={styles.rateText}>🗺 {career.tracks} {career.tracks === 1 ? "track" : "tracks"}</Text>
+          <Text style={styles.rateText}>{t({ en: `🏆 ${pct(career.podium_rate)} podium rate`, fr: `🏆 ${pct(career.podium_rate)} taux de podium` })}</Text>
+          <Text style={styles.rateText}>{t({ en: `🥇 ${pct(career.win_rate)} win rate`, fr: `🥇 ${pct(career.win_rate)} taux de victoire` })}</Text>
+          <Text style={styles.rateText}>{t({ en: `🗺 ${career.tracks} ${career.tracks === 1 ? "track" : "tracks"}`, fr: `🗺 ${career.tracks} ${career.tracks === 1 ? "piste" : "pistes"}` })}</Text>
         </View>
       )}
       {profile.career?.best_lap_s !== undefined && (
-        <Text style={styles.bestLap}>⏱ best ever {profile.career.best_lap_s.toFixed(2)}s{profile.career.best_lap_track ? ` @ ${profile.career.best_lap_track}` : ""}</Text>
+        <Text style={styles.bestLap}>{t({ en: `⏱ best ever ${profile.career.best_lap_s.toFixed(2)}s${profile.career.best_lap_track ? ` @ ${profile.career.best_lap_track}` : ""}`, fr: `⏱ meilleur de tous les temps ${profile.career.best_lap_s.toFixed(2)}s${profile.career.best_lap_track ? ` @ ${profile.career.best_lap_track}` : ""}` })}</Text>
       )}
 
       <ProgressCard logbook={logbook} />
@@ -307,14 +313,14 @@ function YouView({ account, profile, career, logbook, garage, busyCard, onShareC
         {garage.cars.map((c) => (
           <Text key={c.id} style={styles.garageChip}>{c.name}</Text>
         ))}
-        {garage.cars.length === 0 && <Text style={styles.emptyText}>No cars yet.</Text>}
+        {garage.cars.length === 0 && <Text style={styles.emptyText}>{t({ en: "No cars yet.", fr: "Aucune voiture pour l’instant." })}</Text>}
       </View>
 
       <Pressable style={styles.cardBtn} onPress={onShareCard} disabled={busyCard}>
-        <Text style={styles.cardBtnText}>{busyCard ? "Rendering…" : "⤴ Share my card"}</Text>
+        <Text style={styles.cardBtnText}>{busyCard ? t({ en: "Rendering…", fr: "Rendu…" }) : t({ en: "⤴ Share my card", fr: "⤴ Partager ma carte" })}</Text>
       </Pressable>
       <Pressable style={[styles.cardBtn, styles.ghostBtn]} onPress={onEdit}>
-        <Text style={styles.ghostBtnText}>Edit profile</Text>
+        <Text style={styles.ghostBtnText}>{t({ en: "Edit profile", fr: "Modifier le profil" })}</Text>
       </Pressable>
     </ScrollView>
   );

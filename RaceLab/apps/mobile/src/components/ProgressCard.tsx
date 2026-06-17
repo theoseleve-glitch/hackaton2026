@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { computeAchievements, driverStats, nextMilestone } from "../../../../packages/logbook/src";
 import type { LogbookState } from "../../../../packages/logbook/src";
 import { colors, radius, spacing } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Trophies + next-milestone card (retention layer). Everything here is a pure
@@ -20,6 +21,7 @@ function Bar({ progress }: { progress: number }) {
 }
 
 export function ProgressCard({ logbook }: { logbook: LogbookState }) {
+  const t = useT();
   if (logbook.runs.length === 0) return null;
 
   const ach = computeAchievements(logbook);
@@ -34,24 +36,24 @@ export function ProgressCard({ logbook }: { logbook: LogbookState }) {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>Trophies</Text>
+      <Text style={styles.cardTitle}>{t({ en: "Trophies", fr: "Trophées" })}</Text>
 
       {earned.length > 0 ? (
         <View style={styles.medals}>
           {earned.map((a) => (
-            <View key={a.id} style={styles.medal} accessibilityLabel={`${a.label}, earned`}>
+            <View key={a.id} style={styles.medal} accessibilityLabel={t({ en: `${a.label}, earned`, fr: `${a.label}, débloqué` })}>
               <Text style={styles.medalIcon}>{a.icon}</Text>
               <Text style={styles.medalLabel}>{a.label}</Text>
             </View>
           ))}
         </View>
       ) : (
-        <Text style={styles.empty}>Your first trophy is one run away.</Text>
+        <Text style={styles.empty}>{t({ en: "Your first trophy is one run away.", fr: "Ton premier trophée n’est qu’à une session." })}</Text>
       )}
 
       {next.length > 0 && (
         <View style={styles.goals}>
-          <Text style={styles.goalsTitle}>Next up</Text>
+          <Text style={styles.goalsTitle}>{t({ en: "Next up", fr: "À suivre" })}</Text>
           {next.map((a) => (
             <View key={a.id} style={styles.goal}>
               <View style={styles.goalRow}>
@@ -68,7 +70,10 @@ export function ProgressCard({ logbook }: { logbook: LogbookState }) {
 
       {ms && (
         <Text style={styles.milestone}>
-          {ms.next - d.runs} more {ms.next - d.runs === 1 ? "run" : "runs"} to your {ms.next}-run milestone
+          {t({
+            en: `${ms.next - d.runs} more ${ms.next - d.runs === 1 ? "run" : "runs"} to your ${ms.next}-run milestone`,
+            fr: `Encore ${ms.next - d.runs} session${ms.next - d.runs === 1 ? "" : "s"} pour atteindre ton palier de ${ms.next} sessions`,
+          })}
         </Text>
       )}
     </View>

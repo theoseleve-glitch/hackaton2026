@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { lapStats } from "../../../../packages/logbook/src";
+import { useT } from "../i18n";
 import { colors, radius } from "../theme";
 import { num } from "./forms";
 
@@ -17,6 +18,7 @@ export function LapListInput({
   laps: number[];
   onChange: (laps: number[]) => void;
 }) {
+  const t = useT();
   const [text, setText] = useState("");
 
   const add = () => {
@@ -36,7 +38,7 @@ export function LapListInput({
           value={text}
           onChangeText={setText}
           keyboardType="decimal-pad"
-          placeholder="lap time (s)"
+          placeholder={t({ en: "lap time (s)", fr: "temps au tour (s)" })}
           placeholderTextColor={colors.sub}
           onSubmitEditing={add}
           blurOnSubmit={false}
@@ -60,7 +62,10 @@ export function LapListInput({
       )}
       {stats && (
         <Text style={styles.derived}>
-          best {stats.best.toFixed(2)} · avg {stats.avg.toFixed(2)} from {laps.length} laps
+          {t({
+            en: `best ${stats.best.toFixed(2)} · avg ${stats.avg.toFixed(2)} from ${laps.length} laps`,
+            fr: `meilleur tour ${stats.best.toFixed(2)} · moy ${stats.avg.toFixed(2)} sur ${laps.length} tours`,
+          })}
         </Text>
       )}
     </View>

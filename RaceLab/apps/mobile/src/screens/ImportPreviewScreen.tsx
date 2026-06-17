@@ -21,6 +21,7 @@ import { KB, label } from "../kb";
 import { sheetsKeyForCar } from "../garagestore";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Import = fork (spec §1.2). A received SharedPayload becomes a new setup version
@@ -41,6 +42,7 @@ export function ImportPreviewScreen({
   onClose: () => void;
   onDone: (carId: string) => void;
 }) {
+  const t = useT();
   const matches = garage.cars.filter((c) => c.template_id === payload.setup.template_id);
   const [targetId, setTargetId] = useState<string | undefined>(matches[0]?.id);
   const [diff, setDiff] = useState<ChangedField[]>([]);
@@ -106,7 +108,7 @@ export function ImportPreviewScreen({
       for (const [field, value] of Object.entries(payload.setup.values)) {
         state = setValue(state, field, value);
       }
-      state = renameDraft(state, payload.setup.name || "Imported setup");
+      state = renameDraft(state, payload.setup.name || t({ en: "Imported setup", fr: "Réglage importé" }));
       const saved = saveVersion(state, new Date().toISOString());
       const note = forkProvenanceLine(payload);
       const withNote = saved.saved
@@ -116,7 +118,12 @@ export function ImportPreviewScreen({
       setDone(true);
       setTimeout(() => onDone(carId!), 700);
     } catch {
-      setError("Couldn't save the fork — storage may be full. Nothing was changed.");
+      setError(
+        t({
+          en: "Couldn't save the fork — storage may be full. Nothing was changed.",
+          fr: "Impossible d'enregistrer le fork — le stockage est peut-être plein. Rien n'a été modifié.",
+        }),
+      );
     } finally {
       setBusy(false);
     }
@@ -126,9 +133,9 @@ export function ImportPreviewScreen({
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={onClose} hitSlop={10}>
-          <Text style={styles.back}>‹ Cancel</Text>
+          <Text style={styles.back}>{t({ en: "‹ Cancel", fr: "‹ Annuler" })}</Text>
         </Pressable>
-        <Text style={styles.title}>Import setup</Text>
+        <Text style={styles.title}>{t({ en: "Import setup", fr: "Importer un réglage" })}</Text>
         <View style={{ width: 60 }} />
       </View>
 
@@ -145,7 +152,7 @@ export function ImportPreviewScreen({
             <Text style={styles.ctx}>
               🗺 {payload.context.track_name}
               {payload.context.surface ? ` · ${payload.context.surface}` : ""}
-              {payload.context.grip ? ` · ${payload.context.grip} grip` : ""}
+              {payload.context.grip ? t({ en: ` · ${payload.context.grip} grip`, fr: ` · grip ${payload.context.grip}` }) : ""}
             </Text>
           ) : null}
           {payload.context?.result?.position !== undefined ? (
@@ -155,10 +162,12 @@ export function ImportPreviewScreen({
             </Text>
           ) : null}
           {payload.comment ? <Text style={styles.comment}>“{payload.comment}”</Text> : null}
-          {payload.author?.handle ? <Text style={styles.author}>shared by @{payload.author.handle}</Text> : null}
+          {payload.author?.handle ? (
+            <Text style={styles.author}>{t({ en: `shared by @${payload.author.handle}`, fr: `partagé par @${payload.author.handle}` })}</Text>
+          ) : null}
         </View>
 
-        <Text style={styles.section}>Fork onto</Text>
+        <Text style={styles.section}>{t({ en: "Fork onto", fr: "Forker sur" })}</Text>
         {matches.length > 0 ? (
           <View style={styles.chips}>
             {matches.map((c) => (
@@ -171,17 +180,22 @@ export function ImportPreviewScreen({
               </Pressable>
             ))}
             <Pressable style={[styles.chip, !targetId && styles.chipOn]} onPress={() => setTargetId(undefined)}>
-              <Text style={[styles.chipText, !targetId && styles.chipTextOn]}>+ new car</Text>
+              <Text style={[styles.chipText, !targetId && styles.chipTextOn]}>{t({ en: "+ new car", fr: "+ nouvelle voiture" })}</Text>
             </Pressable>
           </View>
         ) : (
           <Text style={styles.hint}>
-            You don't own a {payload.car.brand} {payload.car.model} — importing will add it to your garage.
+            {t({
+              en: `You don't own a ${payload.car.brand} ${payload.car.model} — importing will add it to your garage.`,
+              fr: `Tu n'as pas de ${payload.car.brand} ${payload.car.model} — l'import l'ajoutera à ton garage.`,
+            })}
           </Text>
         )}
 
         <Text style={styles.section}>
-          {targetId ? `Changes vs that car's draft · ${diff.length}` : `Setup values · ${Object.keys(payload.setup.values).length}`}
+          {targetId
+            ? t({ en: `Changes vs that car's draft · ${diff.length}`, fr: `Changements vs le brouillon de cette voiture · ${diff.length}` })
+            : t({ en: `Setup values · ${Object.keys(payload.setup.values).length}`, fr: `Valeurs du réglage · ${Object.keys(payload.setup.values).length}` })}
         </Text>
         <View style={styles.card}>
           {(targetId ? diff : Object.entries(payload.setup.values).map(([field, to]) => ({ field, from: undefined, to }))).map(
@@ -195,7 +209,9 @@ export function ImportPreviewScreen({
               </View>
             ),
           )}
-          {targetId && diff.length === 0 ? <Text style={styles.hint}>Identical to your current draft.</Text> : null}
+          {targetId && diff.length === 0 ? (
+            <Text style={styles.hint}>{t({ en: "Identical to your current draft.", fr: "Identique à ton brouillon actuel." })}</Text>
+          ) : null}
         </View>
       </ScrollView>
 
@@ -206,10 +222,20 @@ export function ImportPreviewScreen({
           onPress={() => void fork()}
           disabled={busy || done}
           accessibilityRole="button"
-          accessibilityLabel={targetId ? "Fork onto this car" : "Add car and fork"}
+          accessibilityLabel={
+            targetId
+              ? t({ en: "Fork onto this car", fr: "Forker sur cette voiture" })
+              : t({ en: "Add car and fork", fr: "Ajouter la voiture et forker" })
+          }
         >
           <Text style={styles.primaryText}>
-            {done ? "✓ Forked to your garage" : busy ? "Forking…" : targetId ? "Fork onto this car" : "Add car & fork"}
+            {done
+              ? t({ en: "✓ Forked to your garage", fr: "✓ Forké dans ton garage" })
+              : busy
+                ? t({ en: "Forking…", fr: "Fork en cours…" })
+                : targetId
+                  ? t({ en: "Fork onto this car", fr: "Forker sur cette voiture" })
+                  : t({ en: "Add car & fork", fr: "Ajouter la voiture et forker" })}
           </Text>
         </Pressable>
       </View>

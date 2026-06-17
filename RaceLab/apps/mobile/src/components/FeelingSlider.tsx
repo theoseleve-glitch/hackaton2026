@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../theme";
+import { useT } from "../i18n";
 import { ChipRow } from "./forms";
 
 /**
@@ -22,11 +23,11 @@ export function feelingColor(value: number): string {
     .join("")}`;
 }
 
-function feelingLabel(v: number): string {
-  if (v < 35) return "fighting it";
-  if (v <= 65) return "ok";
-  if (v <= 85) return "confident";
-  return "in the zone";
+function feelingLabel(v: number, t: ReturnType<typeof useT>): string {
+  if (v < 35) return t({ en: "fighting it", fr: "je me bats avec" });
+  if (v <= 65) return t({ en: "ok", fr: "ça va" });
+  if (v <= 85) return t({ en: "confident", fr: "en confiance" });
+  return t({ en: "in the zone", fr: "dans le coup" });
 }
 
 export function FeelingSlider({
@@ -36,6 +37,7 @@ export function FeelingSlider({
   value: number;
   onChange: (v: number) => void;
 }) {
+  const t = useT();
   const selected = Math.round((Math.max(0, Math.min(100, value)) / 100) * (SEGMENTS - 1));
   return (
     <View>
@@ -58,7 +60,7 @@ export function FeelingSlider({
         })}
       </View>
       <Text style={[styles.label, { color: feelingColor(value) }]}>
-        {feelingLabel(value)} · {Math.round(value)}
+        {feelingLabel(value, t)} · {Math.round(value)}
       </Text>
     </View>
   );
@@ -93,6 +95,7 @@ export function FatigueRow({
   value?: number;
   onChange: (v: number) => void;
 }) {
+  const t = useT();
   return (
     <View>
       <View style={styles.fatigueRow}>
@@ -107,8 +110,8 @@ export function FatigueRow({
         ))}
       </View>
       <View style={styles.fatigueCaption}>
-        <Text style={styles.fatigueCaptionText}>fresh</Text>
-        <Text style={styles.fatigueCaptionText}>cooked</Text>
+        <Text style={styles.fatigueCaptionText}>{t({ en: "fresh", fr: "frais" })}</Text>
+        <Text style={styles.fatigueCaptionText}>{t({ en: "cooked", fr: "cuit" })}</Text>
       </View>
     </View>
   );

@@ -5,6 +5,7 @@ import type { Account, ExperienceLevel } from "../accountstore";
 import { LEVELS } from "../accountstore";
 import { ChipRow, KeyboardAwareForm, LabeledInput, MultiChipRow, Section } from "./forms";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Edit your driver identity (D32+): handle, display name, avatar, home track,
@@ -38,6 +39,7 @@ export function ProfileEditForm({
   setAccount: (patch: Partial<Account>) => void;
   onClose: () => void;
 }) {
+  const t = useT();
   const [handle, setHandle] = useState(account.handle ?? "");
   const [displayName, setDisplayName] = useState(account.display_name ?? "");
   const [avatar, setAvatar] = useState(account.avatar_uri);
@@ -70,9 +72,9 @@ export function ProfileEditForm({
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={onClose} hitSlop={10}>
-          <Text style={styles.back}>‹ Cancel</Text>
+          <Text style={styles.back}>{t({ en: "‹ Cancel", fr: "‹ Annuler" })}</Text>
         </Pressable>
-        <Text style={styles.title}>Edit profile</Text>
+        <Text style={styles.title}>{t({ en: "Edit profile", fr: "Modifier le profil" })}</Text>
         <View style={{ width: 60 }} />
       </View>
 
@@ -86,34 +88,34 @@ export function ProfileEditForm({
                 <Text style={styles.avatarInitial}>{(handle || "?").charAt(0).toUpperCase()}</Text>
               </View>
             )}
-            <Text style={styles.avatarEdit}>change photo</Text>
+            <Text style={styles.avatarEdit}>{t({ en: "change photo", fr: "changer la photo" })}</Text>
           </Pressable>
         </View>
 
-        <Section title="Identity">
-          <LabeledInput label="Handle (@)" value={handle} onChangeText={setHandle} placeholder="theo" autoCapitalize="none" autoCorrect={false} />
-          <Text style={styles.hint}>Your @handle attributes every setup you share.</Text>
-          <LabeledInput label="Display name" value={displayName} onChangeText={setDisplayName} placeholder="optional" />
+        <Section title={t({ en: "Identity", fr: "Identité" })}>
+          <LabeledInput label={t({ en: "Handle (@)", fr: "Pseudo (@)" })} value={handle} onChangeText={setHandle} placeholder="theo" autoCapitalize="none" autoCorrect={false} />
+          <Text style={styles.hint}>{t({ en: "Your @handle attributes every setup you share.", fr: "Ton @pseudo signe chaque réglage que tu partages." })}</Text>
+          <LabeledInput label={t({ en: "Display name", fr: "Nom affiché" })} value={displayName} onChangeText={setDisplayName} placeholder={t({ en: "optional", fr: "facultatif" })} />
           <View style={styles.twoCol}>
             <View style={{ flex: 1 }}>
-              <LabeledInput label="Country" value={country} onChangeText={setCountry} placeholder="FR" />
+              <LabeledInput label={t({ en: "Country", fr: "Pays" })} value={country} onChangeText={setCountry} placeholder="FR" />
             </View>
             <View style={{ flex: 2 }}>
-              <LabeledInput label="Home track" value={homeTrack} onChangeText={setHomeTrack} placeholder="MRT outdoor" />
+              <LabeledInput label={t({ en: "Home track", fr: "Piste habituelle" })} value={homeTrack} onChangeText={setHomeTrack} placeholder="MRT outdoor" />
             </View>
           </View>
         </Section>
 
-        <Section title="Level">
+        <Section title={t({ en: "Level", fr: "Niveau" })}>
           <ChipRow options={LEVELS} value={level} onSelect={(v) => setLevel(level === v ? undefined : v)} />
         </Section>
 
-        <Section title="Classes raced">
+        <Section title={t({ en: "Classes raced", fr: "Catégories courues" })}>
           <MultiChipRow options={CLASS_OPTIONS} values={classes} onToggle={toggleClass} />
         </Section>
 
-        <Pressable style={styles.saveBtn} onPress={save} accessibilityRole="button" accessibilityLabel="Save profile">
-          <Text style={styles.saveBtnText}>Save profile</Text>
+        <Pressable style={styles.saveBtn} onPress={save} accessibilityRole="button" accessibilityLabel={t({ en: "Save profile", fr: "Enregistrer le profil" })}>
+          <Text style={styles.saveBtnText}>{t({ en: "Save profile", fr: "Enregistrer le profil" })}</Text>
         </Pressable>
       </KeyboardAwareForm>
     </View>

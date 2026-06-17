@@ -7,6 +7,7 @@ import type { CandidacyData, CandidacyState } from "../../../../packages/social/
 import { Overlay } from "../components/Overlay";
 import { TrackForm } from "../components/TrackForm";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Tracks library (D25). Each card is a venue the engineer knows: surface,
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial, onOpenOfficial }: Props) {
+  const t = useT();
   const [modal, setModal] = useState<null | "new" | { edit: TrackEntity }>(null);
   const editing = modal !== null && modal !== "new" ? modal.edit : undefined;
   const editingState: CandidacyState = editing ? getCandidacy(candidacy, editing.id)?.state ?? "none" : "none";
@@ -32,25 +34,26 @@ export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
         <Text style={styles.h1}>
-          Tracks <Text style={styles.count}>· {tracks.tracks.length}</Text>
+          {t({ en: "Tracks", fr: "Pistes" })} <Text style={styles.count}>· {tracks.tracks.length}</Text>
         </Text>
         <View style={{ flexDirection: "row", gap: 8 }}>
           <Pressable style={styles.addBtn} onPress={onOpenOfficial}>
-            <Text style={styles.addBtnText}>🏁 Official</Text>
+            <Text style={styles.addBtnText}>{t({ en: "🏁 Official", fr: "🏁 Officiel" })}</Text>
           </Pressable>
           <Pressable style={styles.addBtn} onPress={() => setModal("new")}>
-            <Text style={styles.addBtnText}>＋ Add track</Text>
+            <Text style={styles.addBtnText}>{t({ en: "＋ Add track", fr: "＋ Ajouter une piste" })}</Text>
           </Pressable>
         </View>
       </View>
 
       {tracks.tracks.length === 0 && (
         <View style={styles.card}>
-          <Text style={styles.emptyTitle}>No tracks yet</Text>
+          <Text style={styles.emptyTitle}>{t({ en: "No tracks yet", fr: "Aucune piste pour l'instant" })}</Text>
           <Text style={styles.meta}>
-            Add the places you race — the engineer reads your track's character: bumps, kerbs,
-            banking all change the right setup. A name and a surface is enough to start; map
-            corners later.
+            {t({
+              en: "Add the places you race — the engineer reads your track's character: bumps, kerbs, banking all change the right setup. A name and a surface is enough to start; map corners later.",
+              fr: "Ajoute les endroits où tu roules — l'ingénieur lit le caractère de ta piste : bosses, vibreurs, dévers, tout change le bon réglage. Un nom et une surface suffisent pour commencer ; tu cartographieras les virages plus tard.",
+            })}
           </Text>
         </View>
       )}
@@ -104,6 +107,7 @@ function bestRecord(track: TrackEntity): LapRecord | undefined {
 }
 
 function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidacy: CandidacyState; onPress: () => void }) {
+  const t = useT();
   const best = bestRecord(track);
   const shown = track.traits.slice(0, 4);
   const extra = track.traits.length - shown.length;
@@ -114,12 +118,12 @@ function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidac
         <Text style={styles.name} numberOfLines={1}>
           {track.name}
         </Text>
-        {candidacy === "official" && <Text style={styles.officialBadge}>🏁 OFFICIAL</Text>}
-        {candidacy === "candidate" && <Text style={styles.pendingBadge}>⏳ PENDING</Text>}
-        {candidacy === "none" && track.visibility === "public" && <Text style={styles.publicBadge}>PUBLIC</Text>}
+        {candidacy === "official" && <Text style={styles.officialBadge}>{t({ en: "🏁 OFFICIAL", fr: "🏁 OFFICIEL" })}</Text>}
+        {candidacy === "candidate" && <Text style={styles.pendingBadge}>{t({ en: "⏳ PENDING", fr: "⏳ EN ATTENTE" })}</Text>}
+        {candidacy === "none" && track.visibility === "public" && <Text style={styles.publicBadge}>{t({ en: "PUBLIC", fr: "PUBLIC" })}</Text>}
       </View>
       <Text style={styles.meta}>
-        {track.surface} · {track.indoor ? "indoor" : "outdoor"}
+        {track.surface} · {track.indoor ? t({ en: "indoor", fr: "intérieur" }) : t({ en: "outdoor", fr: "extérieur" })}
       </Text>
 
       {track.traits.length > 0 && (
@@ -135,12 +139,15 @@ function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidac
 
       {track.corners.length > 0 && (
         <Text style={styles.fact}>
-          {track.corners.length} corner{track.corners.length > 1 ? "s" : ""} mapped
+          {t({
+            en: `${track.corners.length} corner${track.corners.length > 1 ? "s" : ""} mapped`,
+            fr: `${track.corners.length} virage${track.corners.length > 1 ? "s" : ""} cartographié${track.corners.length > 1 ? "s" : ""}`,
+          })}
         </Text>
       )}
       {best && (
         <Text style={styles.fact}>
-          ⏱ best {best.lap_s.toFixed(2)}s · {best.category}
+          {t({ en: "⏱ best", fr: "⏱ meilleur" })} {best.lap_s.toFixed(2)}s · {best.category}
           {best.conditions ? ` (${best.conditions})` : ""}
         </Text>
       )}

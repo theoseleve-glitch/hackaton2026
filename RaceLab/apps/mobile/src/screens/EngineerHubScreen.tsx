@@ -20,6 +20,7 @@ import { loadCarSheets } from "../store";
 import { sharePng } from "../share";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
+import { useT } from "../i18n";
 
 /**
  * Engineer hub (D28): report-first. You see past reports, you generate a new
@@ -54,6 +55,7 @@ function parseRaceWindow(label: string): { race_length_s?: number; race_type?: "
 }
 
 export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport, requestRunId }: Props) {
+  const t = useT();
   const [view, setView] = useState<ViewState>({ k: "list" });
   const [busy, setBusy] = useState(false);
   // share the engineer report as a PNG poster (off-screen SVG → toDataURL)
@@ -205,7 +207,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     return (
       <View style={[styles.root, styles.center]}>
         <ActivityIndicator color={colors.accent} />
-        <Text style={styles.busyText}>Engineer is reading your log…</Text>
+        <Text style={styles.busyText}>{t({ en: "Engineer is reading your log…", fr: "L'ingénieur lit ton carnet…" })}</Text>
       </View>
     );
   }
@@ -213,12 +215,12 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   if (view.k === "new_report") {
     return (
       <View style={styles.root}>
-        <Header title="New report — pick the run to analyse" onBack={() => setView({ k: "list" })} />
+        <Header title={t({ en: "New report — pick the run to analyse", fr: "Nouveau rapport — choisis la session à analyser" })} onBack={() => setView({ k: "list" })} />
         <RunPicker
           logbook={logbook}
           multi={false}
           askNotes
-          cta="Generate report"
+          cta={t({ en: "Generate report", fr: "Générer le rapport" })}
           onDone={(runs, { notes }) => void generateReport(runs[0], notes)}
         />
       </View>
@@ -228,13 +230,13 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   if (view.k === "plan_form") {
     return (
       <View style={styles.root}>
-        <Header title="Race planner — track, then training runs" onBack={() => setView({ k: "list" })} />
+        <Header title={t({ en: "Race planner — track, then training runs", fr: "Préparateur de course — piste, puis sessions d'entraînement" })} onBack={() => setView({ k: "list" })} />
         <RunPicker
           logbook={logbook}
           multi
           trackFirst
           askRace
-          cta="Build race plan"
+          cta={t({ en: "Build race plan", fr: "Construire le plan de course" })}
           onDone={(runs, { race }) => void generatePlan(runs, race!.startIso, race!.lengthMin, race!.type)}
         />
       </View>
@@ -244,13 +246,13 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   if (view.k === "strategy_pick") {
     return (
       <View style={styles.root}>
-        <Header title="Pit strategy — track, then practice runs" onBack={() => setView({ k: "list" })} />
+        <Header title={t({ en: "Pit strategy — track, then practice runs", fr: "Stratégie d'arrêts — piste, puis sessions d'essais" })} onBack={() => setView({ k: "list" })} />
         <RunPicker
           logbook={logbook}
           multi
           trackFirst
           allowEmpty
-          cta="Set up the strategy"
+          cta={t({ en: "Set up the strategy", fr: "Configurer la stratégie" })}
           onSkip={() => setView({ k: "strategy_form", prefill: {}, runIds: [] })}
           onDone={(runs, { track }) =>
             setView({ k: "strategy_form", prefill: buildStrategyPrefill(runs, track), runIds: runs.map((r) => r.id) })
@@ -264,7 +266,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     const backTo = () => setView(view.from ? { k: "view", saved: view.from } : { k: "list" });
     return (
       <View style={styles.root}>
-        <Header title="Race strategy" onBack={backTo} />
+        <Header title={t({ en: "Race strategy", fr: "Stratégie de course" })} onBack={backTo} />
         <StrategyForm
           prefill={view.prefill}
           onCancel={backTo}
@@ -272,7 +274,10 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
             addReport({
               kind: "strategy",
               run_ids: view.runIds,
-              run_label: `strategy · ${plan.stops === 0 ? "no stops" : `box ${plan.stops}× · every ${fmtTime(plan.stint_max_s)}`}`,
+              run_label: t({
+                en: `strategy · ${plan.stops === 0 ? "no stops" : `box ${plan.stops}× · every ${fmtTime(plan.stint_max_s)}`}`,
+                fr: `stratégie · ${plan.stops === 0 ? "aucun arrêt" : `arrêt ${plan.stops}× · toutes les ${fmtTime(plan.stint_max_s)}`}`,
+              }),
               strategy: plan,
             });
             setView({ k: "strategy_view", plan, options, inputs });
@@ -285,7 +290,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   if (view.k === "strategy_view") {
     return (
       <View style={styles.root}>
-        <Header title="Pit strategy" onBack={() => setView({ k: "list" })} />
+        <Header title={t({ en: "Pit strategy", fr: "Stratégie d'arrêts" })} onBack={() => setView({ k: "list" })} />
         <PitPlanView plan={view.plan} options={view.options} inputs={view.inputs} />
       </View>
     );
@@ -295,7 +300,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     const s = view.saved;
     return (
       <View style={styles.root}>
-        <Header title={s.kind === "race_plan" ? "Race plan" : "Engineer report"} onBack={() => setView({ k: "list" })} />
+        <Header title={s.kind === "race_plan" ? t({ en: "Race plan", fr: "Plan de course" }) : t({ en: "Engineer report", fr: "Rapport d'ingénieur" })} onBack={() => setView({ k: "list" })} />
         {s.kind === "race_plan" && s.plan ? (
           <RacePlanView plan={s.plan} onStrategy={() => openStrategyFromPlan(s)} />
         ) : s.report ? (
@@ -303,8 +308,10 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
             {s.report.kind !== "report" && (
               <View style={styles.askMore}>
                 <Text style={styles.askMoreText}>
-                  The engineer couldn't ground a recommendation on this run. Add more detail to its
-                  feedback — symptoms, where on track, when it happens — then generate again.
+                  {t({
+                    en: "The engineer couldn't ground a recommendation on this run. Add more detail to its feedback — symptoms, where on track, when it happens — then generate again.",
+                    fr: "L'ingénieur n'a pas pu fonder de recommandation sur cette session. Ajoute du détail à ton ressenti — symptômes, où sur la piste, quand ça arrive — puis regénère.",
+                  })}
                 </Text>
               </View>
             )}
@@ -316,9 +323,9 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
                   onPress={shareReport}
                   disabled={sharingReport}
                   accessibilityRole="button"
-                  accessibilityLabel="Share report"
+                  accessibilityLabel={t({ en: "Share report", fr: "Partager le rapport" })}
                 >
-                  <Text style={styles.shareBtnText}>{sharingReport ? "Rendering…" : "⤴ Share report"}</Text>
+                  <Text style={styles.shareBtnText}>{sharingReport ? t({ en: "Rendering…", fr: "Génération…" }) : t({ en: "⤴ Share report", fr: "⤴ Partager le rapport" })}</Text>
                 </Pressable>
               </View>
             )}
@@ -339,47 +346,62 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Text style={styles.h1}>Engineer</Text>
+        <Text style={styles.h1}>{t({ en: "Engineer", fr: "Ingénieur" })}</Text>
       </View>
 
       <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
         <FeatureCard
           icon="🔧"
-          title="Setup engineer"
-          desc="Pick a run — I read the setup, conditions, tyres and your feedback, then propose up to 3 grounded changes."
+          title={t({ en: "Setup engineer", fr: "Ingénieur réglages" })}
+          desc={t({
+            en: "Pick a run — I read the setup, conditions, tyres and your feedback, then propose up to 3 grounded changes.",
+            fr: "Choisis une session — je lis le réglage, les conditions, les pneus et ton ressenti, puis je propose jusqu'à 3 changements fondés.",
+          })}
           onPress={() => setView({ k: "new_report" })}
         />
         <FeatureCard
           icon="🏆"
-          title="Race planner"
-          desc="Pick your race track, compound your training runs there with the race-day forecast into a final-hours plan."
+          title={t({ en: "Race planner", fr: "Préparateur de course" })}
+          desc={t({
+            en: "Pick your race track, compound your training runs there with the race-day forecast into a final-hours plan.",
+            fr: "Choisis ta piste de course, combine tes sessions d'entraînement avec les prévisions du jour de course en un plan des dernières heures.",
+          })}
           onPress={() => setView({ k: "plan_form" })}
         />
         <FeatureCard
           icon="⛽"
-          title="Pit strategy"
-          desc="When to box and why — your logged autonomy tests and lap times prefill the numbers."
+          title={t({ en: "Pit strategy", fr: "Stratégie d'arrêts" })}
+          desc={t({
+            en: "When to box and why — your logged autonomy tests and lap times prefill the numbers.",
+            fr: "Quand t'arrêter et pourquoi — tes essais d'autonomie enregistrés et tes temps au tour préremplissent les chiffres.",
+          })}
           onPress={() =>
             setView(logbook.runs.length > 0 ? { k: "strategy_pick" } : { k: "strategy_form", prefill: {}, runIds: [] })
           }
         />
 
-        <Text style={styles.sectionTitle}>Past reports</Text>
+        <Text style={styles.sectionTitle}>{t({ en: "Past reports", fr: "Rapports précédents" })}</Text>
         {ordered.length === 0 ? (
           <Text style={styles.emptyText}>
-            Nothing yet. Every report, race plan and strategy you generate lands here — ask, test,
-            come back with more data. That loop is the whole job.
+            {t({
+              en: "Nothing yet. Every report, race plan and strategy you generate lands here — ask, test, come back with more data. That loop is the whole job.",
+              fr: "Rien pour l'instant. Chaque rapport, plan de course et stratégie que tu génères atterrit ici — demande, teste, reviens avec plus de données. Cette boucle, c'est tout le métier.",
+            })}
           </Text>
         ) : (
           ordered.map((r) => (
             <Pressable key={r.id} style={styles.card} onPress={() => setView({ k: "view", saved: r })}>
               <Text style={styles.cardKind}>
-                {r.kind === "race_plan" ? "🏆 RACE PLAN" : r.kind === "strategy" ? "⛽ STRATEGY" : "🔧 REPORT"}
+                {r.kind === "race_plan"
+                  ? t({ en: "🏆 RACE PLAN", fr: "🏆 PLAN DE COURSE" })
+                  : r.kind === "strategy"
+                    ? t({ en: "⛽ STRATEGY", fr: "⛽ STRATÉGIE" })
+                    : t({ en: "🔧 REPORT", fr: "🔧 RAPPORT" })}
               </Text>
               <Text style={styles.cardLabel}>{r.run_label}</Text>
               <Text style={styles.cardMeta}>
                 {r.created_at.slice(5, 16).replace("T", " ")}
-                {r.report ? ` · ${r.report.kind === "report" ? `confidence ${r.report.confidence}` : r.report.kind}` : ""}
+                {r.report ? ` · ${r.report.kind === "report" ? t({ en: `confidence ${r.report.confidence}`, fr: `confiance ${r.report.confidence}` }) : r.report.kind}` : ""}
               </Text>
             </Pressable>
           ))
@@ -413,10 +435,11 @@ function FeatureCard({
 }
 
 function Header({ title, onBack }: { title: string; onBack: () => void }) {
+  const t = useT();
   return (
     <View style={styles.headerBar}>
       <Pressable onPress={onBack} hitSlop={10}>
-        <Text style={styles.back}>‹ back</Text>
+        <Text style={styles.back}>{t({ en: "‹ back", fr: "‹ retour" })}</Text>
       </Pressable>
       <Text style={styles.headerTitle} numberOfLines={1}>
         {title}

@@ -1,10 +1,12 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /** Slim trial-status banner. Hidden while the trial is comfortably long
  *  (>10 days), urgent styling for the last 3 days. */
 export function TrialBanner({ daysLeft, onPress }: { daysLeft: number; onPress?: () => void }) {
+  const t = useT();
   if (daysLeft > 10) return null;
   const urgent = daysLeft <= 3;
   return (
@@ -14,7 +16,10 @@ export function TrialBanner({ daysLeft, onPress }: { daysLeft: number; onPress?:
       disabled={!onPress}
     >
       <Text style={[styles.text, urgent && styles.textUrgent]}>
-        Trial · {daysLeft} {daysLeft === 1 ? "day" : "days"} left · subscribe on racelab.app
+        {t({
+          en: `Trial · ${daysLeft} ${daysLeft === 1 ? "day" : "days"} left · subscribe on racelab.app`,
+          fr: `Essai · ${daysLeft} ${daysLeft === 1 ? "jour" : "jours"} restant${daysLeft === 1 ? "" : "s"} · abonne-toi sur racelab.app`,
+        })}
       </Text>
     </Pressable>
   );

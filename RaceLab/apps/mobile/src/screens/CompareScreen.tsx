@@ -7,6 +7,7 @@ import type { ChangedField } from "../../../../packages/sheets/src";
 import { label } from "../kb";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 
 /**
  * Layer 2 — comparison of two runs picked from the run log: what changed
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export function CompareScreen({ logbook, aId, bId, onClose }: Props) {
+  const t = useT();
   const [comparison, setComparison] = useState<RunComparison | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -56,9 +58,9 @@ export function CompareScreen({ logbook, aId, bId, onClose }: Props) {
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={onClose} hitSlop={10}>
-          <Text style={styles.back}>‹ runs</Text>
+          <Text style={styles.back}>{t({ en: "‹ runs", fr: "‹ sessions" })}</Text>
         </Pressable>
-        <Text style={styles.title}>Compare</Text>
+        <Text style={styles.title}>{t({ en: "Compare", fr: "Comparer" })}</Text>
       </View>
 
       {loading ? (
@@ -67,18 +69,18 @@ export function CompareScreen({ logbook, aId, bId, onClose }: Props) {
         </View>
       ) : !comparison ? (
         <View style={styles.center}>
-          <Text style={styles.emptyText}>Could not find those runs.</Text>
+          <Text style={styles.emptyText}>{t({ en: "Could not find those runs.", fr: "Impossible de retrouver ces sessions." })}</Text>
         </View>
       ) : (
         <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
           <View style={styles.pair}>
-            <RunHalf title="A (earlier)" run={comparison.a} />
-            <Text style={styles.vs}>vs</Text>
-            <RunHalf title="B (later)" run={comparison.b} />
+            <RunHalf title={t({ en: "A (earlier)", fr: "A (avant)" })} run={comparison.a} />
+            <Text style={styles.vs}>{t({ en: "vs", fr: "vs" })}</Text>
+            <RunHalf title={t({ en: "B (later)", fr: "B (après)" })} run={comparison.b} />
           </View>
 
           <View style={[styles.card, { borderColor: colors.accent }]}>
-            <Text style={styles.cardTitle}>Verdict</Text>
+            <Text style={styles.cardTitle}>{t({ en: "Verdict", fr: "Verdict" })}</Text>
             {comparison.summary.map((line, i) => (
               <Text key={i} style={styles.line}>
                 · {line}
@@ -87,12 +89,21 @@ export function CompareScreen({ logbook, aId, bId, onClose }: Props) {
           </View>
 
           {comparison.setup_changes !== undefined && comparison.setup_changes.length > 0 && (
-            <DiffTable title={`Setup changes (${comparison.setup_changes.length})`} changes={comparison.setup_changes} accent />
+            <DiffTable
+              title={t({
+                en: `Setup changes (${comparison.setup_changes.length})`,
+                fr: `Changements de réglages (${comparison.setup_changes.length})`,
+              })}
+              changes={comparison.setup_changes}
+              accent
+            />
           )}
           {comparison.condition_changes.length > 0 && (
-            <DiffTable title="Condition drift" changes={comparison.condition_changes} />
+            <DiffTable title={t({ en: "Condition drift", fr: "Dérive des conditions" })} changes={comparison.condition_changes} />
           )}
-          {comparison.tyre_changes.length > 0 && <DiffTable title="Tyre changes" changes={comparison.tyre_changes} />}
+          {comparison.tyre_changes.length > 0 && (
+            <DiffTable title={t({ en: "Tyre changes", fr: "Changements de pneus" })} changes={comparison.tyre_changes} />
+          )}
         </ScrollView>
       )}
     </View>
@@ -100,6 +111,7 @@ export function CompareScreen({ logbook, aId, bId, onClose }: Props) {
 }
 
 function RunHalf({ title, run }: { title: string; run: RunComparison["a"] }) {
+  const t = useT();
   return (
     <View style={styles.half}>
       <Text style={styles.halfTitle}>{title}</Text>
@@ -108,7 +120,9 @@ function RunHalf({ title, run }: { title: string; run: RunComparison["a"] }) {
         {run.track.name} · {run.conditions.grip.replace("_", " ")}
       </Text>
       <Text style={styles.halfLap}>
-        {run.result?.best_lap_s !== undefined ? `${run.result.best_lap_s.toFixed(2)}s` : "no laps"}
+        {run.result?.best_lap_s !== undefined
+          ? `${run.result.best_lap_s.toFixed(2)}s`
+          : t({ en: "no laps", fr: "aucun tour" })}
       </Text>
     </View>
   );

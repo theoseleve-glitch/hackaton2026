@@ -12,6 +12,7 @@ import type {
   TyreWear,
 } from "../../../../packages/logbook/src";
 import { KB, MP11_ID } from "../kb";
+import { useT } from "../i18n";
 import { colors, radius } from "../theme";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 
@@ -42,6 +43,7 @@ interface Props {
 }
 
 export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCancel }: Props) {
+  const t = useT();
   const [type, setType] = useState<RunType>("practice");
   const [trackName, setTrackName] = useState(defaultTrack?.name ?? "");
   const [surface, setSurface] = useState<string>(defaultTrack?.surface ?? "clay");
@@ -120,16 +122,16 @@ export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCan
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       <View style={styles.setupBanner}>
-        <Text style={styles.setupBannerLabel}>Setup on the car</Text>
+        <Text style={styles.setupBannerLabel}>{t({ en: "Setup on the car", fr: "Réglage sur la voiture" })}</Text>
         <Text style={styles.setupBannerName}>{setupName}</Text>
       </View>
 
-      <Section title="Run">
+      <Section title={t({ en: "Run", fr: "Session" })}>
         <ChipRow options={RUN_TYPES} value={type} onSelect={setType} />
       </Section>
 
-      <Section title="Track">
-        <LabeledInput label="Track name" value={trackName} onChangeText={setTrackName} placeholder="e.g. MRT" />
+      <Section title={t({ en: "Track", fr: "Piste" })}>
+        <LabeledInput label={t({ en: "Track name", fr: "Nom de la piste" })} value={trackName} onChangeText={setTrackName} placeholder={t({ en: "e.g. MRT", fr: "ex. MRT" })} />
         <ChipRow options={SURFACES} value={surface as (typeof SURFACES)[number]} onSelect={setSurface} />
         <View style={{ height: 6 }} />
         <ChipRow
@@ -139,59 +141,59 @@ export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCan
         />
       </Section>
 
-      <Section title="Conditions">
-        <Text style={styles.hint}>Grip</Text>
+      <Section title={t({ en: "Conditions", fr: "Conditions" })}>
+        <Text style={styles.hint}>{t({ en: "Grip", fr: "Grip" })}</Text>
         <ChipRow options={GRIPS} value={grip} onSelect={setGrip} />
-        <Text style={styles.hint}>Bumpiness</Text>
+        <Text style={styles.hint}>{t({ en: "Bumpiness", fr: "Bosses" })}</Text>
         <ChipRow options={BUMPINESS} value={bumpiness} onSelect={(b) => setBumpiness(bumpiness === b ? undefined : b)} />
-        <Text style={styles.hint}>Sky · dust · evolution</Text>
+        <Text style={styles.hint}>{t({ en: "Sky · dust · evolution", fr: "Ciel · poussière · évolution" })}</Text>
         <ChipRow options={SKIES} value={sky} onSelect={(s) => setSky(sky === s ? undefined : s)} />
         <View style={{ height: 6 }} />
         <MultiChipRow options={["dusty"] as const} values={dusty ? ["dusty"] : []} onToggle={() => setDusty(!dusty)} />
         <View style={{ height: 6 }} />
         <ChipRow options={EVOLUTIONS} value={evolution} onSelect={(e) => setEvolution(evolution === e ? undefined : e)} />
         <View style={{ height: 8 }} />
-        <LabeledInput label="Air temp (°C)" value={airTemp} onChangeText={setAirTemp} keyboardType="numeric" placeholder="optional" />
+        <LabeledInput label={t({ en: "Air temp (°C)", fr: "Température air (°C)" })} value={airTemp} onChangeText={setAirTemp} keyboardType="numeric" placeholder={t({ en: "optional", fr: "facultatif" })} />
       </Section>
 
-      <Section title="Tyres">
-        <LabeledInput label="Compound" value={compound} onChangeText={setCompound} placeholder="e.g. soft pin" />
+      <Section title={t({ en: "Tyres", fr: "Pneus" })}>
+        <LabeledInput label={t({ en: "Compound", fr: "Gomme" })} value={compound} onChangeText={setCompound} placeholder={t({ en: "e.g. soft pin", fr: "ex. soft pin" })} />
         <ChipRow options={WEARS} value={wear} onSelect={(w) => setWear(wear === w ? undefined : w)} />
         <View style={{ height: 8 }} />
-        <LabeledInput label="Runs on this set" value={tyreRuns} onChangeText={setTyreRuns} keyboardType="numeric" placeholder="optional" />
+        <LabeledInput label={t({ en: "Runs on this set", fr: "Sessions sur ce train" })} value={tyreRuns} onChangeText={setTyreRuns} keyboardType="numeric" placeholder={t({ en: "optional", fr: "facultatif" })} />
       </Section>
 
-      <Section title="Result">
-        <LabeledInput label="Best lap (s)" value={bestLap} onChangeText={setBestLap} keyboardType="decimal-pad" placeholder="e.g. 34.2" />
-        <LabeledInput label="Average lap (s)" value={avgLap} onChangeText={setAvgLap} keyboardType="decimal-pad" placeholder="optional" />
-        <Text style={styles.hint}>Driver confidence (1 = fighting it, 5 = on rails)</Text>
+      <Section title={t({ en: "Result", fr: "Résultat" })}>
+        <LabeledInput label={t({ en: "Best lap (s)", fr: "Meilleur tour (s)" })} value={bestLap} onChangeText={setBestLap} keyboardType="decimal-pad" placeholder={t({ en: "e.g. 34.2", fr: "ex. 34.2" })} />
+        <LabeledInput label={t({ en: "Average lap (s)", fr: "Tour moyen (s)" })} value={avgLap} onChangeText={setAvgLap} keyboardType="decimal-pad" placeholder={t({ en: "optional", fr: "facultatif" })} />
+        <Text style={styles.hint}>{t({ en: "Driver confidence (1 = fighting it, 5 = on rails)", fr: "Confiance pilote (1 = je me bats avec, 5 = sur des rails)" })}</Text>
         <ChipRow options={CONFIDENCES} value={confidence} onSelect={(c) => setConfidence(confidence === c ? undefined : c)} />
       </Section>
 
-      <Section title="How did the car feel?">
+      <Section title={t({ en: "How did the car feel?", fr: "Comment la voiture s'est comportée ?" })}>
         <MultiChipRow options={SYMPTOMS} values={symptoms} onToggle={toggleSymptom} />
         {symptoms.length > 0 && (
           <>
-            <Text style={styles.hint}>Where? (optional)</Text>
+            <Text style={styles.hint}>{t({ en: "Where? (optional)", fr: "Où ? (facultatif)" })}</Text>
             <ChipRow options={PHASES} value={phase} onSelect={(p) => setPhase(phase === p ? undefined : p)} />
           </>
         )}
         <View style={{ height: 8 }} />
         <LabeledInput
-          label="Note"
+          label={t({ en: "Note", fr: "Note" })}
           value={note}
           onChangeText={onNoteChange}
-          placeholder='e.g. "pushes once tyres heat up"'
+          placeholder={t({ en: 'e.g. "pushes once tyres heat up"', fr: 'ex. « ça pousse une fois les pneus chauds »' })}
         />
-        {autoTagged && <Text style={styles.autoTag}>🏷 auto-tagged from your note — tap a chip to correct me</Text>}
+        {autoTagged && <Text style={styles.autoTag}>{t({ en: "🏷 auto-tagged from your note — tap a chip to correct me", fr: "🏷 tagué auto depuis ta note — touche un chip pour me corriger" })}</Text>}
       </Section>
 
       <View style={styles.actions}>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
-          <Text style={styles.btnGhostText}>Cancel</Text>
+          <Text style={styles.btnGhostText}>{t({ en: "Cancel", fr: "Annuler" })}</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnPrimary]} onPress={save}>
-          <Text style={styles.btnPrimaryText}>Save run</Text>
+          <Text style={styles.btnPrimaryText}>{t({ en: "Save run", fr: "Enregistrer la session" })}</Text>
         </Pressable>
       </View>
     </ScrollView>

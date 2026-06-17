@@ -28,6 +28,7 @@ import { KB } from "../kb";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
+import { useT } from "../i18n";
 
 /**
  * Run log v2 (D27): slim sortable recap; selection drives a floating action
@@ -64,6 +65,7 @@ interface Props {
 type Popup = null | "car" | "track" | "setup";
 
 export function RunsScreen(props: Props) {
+  const t = useT();
   const { logbook, updateLogbook, garage, updateGarage, tracks, updateTracks } = props;
   const [inForm, setInForm] = useState(props.startInForm ?? false);
   const [popup, setPopup] = useState<Popup>(null);
@@ -130,16 +132,40 @@ export function RunsScreen(props: Props) {
       setCelebration({ position: p }); // a podium outranks a lap record
     } else if (rec.careerBestLap && lap !== undefined) {
       setCelebration({
-        record: { icon: "⏱", line: "PERSONAL BEST", tone: colors.gold, sub: `${lap.toFixed(2)}s — your fastest lap yet` },
+        record: {
+          icon: "⏱",
+          line: t({ en: "PERSONAL BEST", fr: "RECORD PERSO" }),
+          tone: colors.gold,
+          sub: t({ en: `${lap.toFixed(2)}s — your fastest lap yet`, fr: `${lap.toFixed(2)}s — ton tour le plus rapide à ce jour` }),
+        },
       });
     } else if (rec.trackBestLap && lap !== undefined) {
       setCelebration({
-        record: { icon: "📍", line: "TRACK BEST", tone: colors.good, sub: `${lap.toFixed(2)}s at ${run.track.name}` },
+        record: {
+          icon: "📍",
+          line: t({ en: "TRACK BEST", fr: "RECORD PISTE" }),
+          tone: colors.good,
+          sub: t({ en: `${lap.toFixed(2)}s at ${run.track.name}`, fr: `${lap.toFixed(2)}s à ${run.track.name}` }),
+        },
       });
     } else if (rec.firstWin) {
-      setCelebration({ record: { icon: "🥇", line: "FIRST WIN", tone: colors.gold, sub: "the first of many" } });
+      setCelebration({
+        record: {
+          icon: "🥇",
+          line: t({ en: "FIRST WIN", fr: "PREMIÈRE VICTOIRE" }),
+          tone: colors.gold,
+          sub: t({ en: "the first of many", fr: "la première d'une longue série" }),
+        },
+      });
     } else if (rec.firstPodium) {
-      setCelebration({ record: { icon: "🏆", line: "FIRST PODIUM", tone: colors.gold, sub: "on the box" } });
+      setCelebration({
+        record: {
+          icon: "🏆",
+          line: t({ en: "FIRST PODIUM", fr: "PREMIER PODIUM" }),
+          tone: colors.gold,
+          sub: t({ en: "on the box", fr: "sur la boîte" }),
+        },
+      });
     }
   };
 
@@ -241,7 +267,7 @@ export function RunsScreen(props: Props) {
     props.onShareRun(
       buildSetupPayload(
         {
-          setup: { name: run.setup_name || "Race setup", template_id: run.car_template_id, values },
+          setup: { name: run.setup_name || t({ en: "Race setup", fr: "Réglage course" }), template_id: run.car_template_id, values },
           car: {
             brand: car?.brand ?? "RC",
             model: car?.model ?? run.track.name,
@@ -274,15 +300,15 @@ export function RunsScreen(props: Props) {
       )}
       <View style={styles.header}>
         <Text style={styles.title}>
-          Run log <Text style={styles.count}>· {logbook.runs.length}</Text>
+          {t({ en: "Run log", fr: "Journal de sessions" })} <Text style={styles.count}>· {logbook.runs.length}</Text>
         </Text>
         <Pressable
           style={styles.logBtn}
           onPress={() => setInForm(true)}
           accessibilityRole="button"
-          accessibilityLabel="Log run"
+          accessibilityLabel={t({ en: "Log run", fr: "Enregistrer une session" })}
         >
-          <Text style={styles.logBtnText}>+ Log run</Text>
+          <Text style={styles.logBtnText}>{t({ en: "+ Log run", fr: "+ Enregistrer" })}</Text>
         </Pressable>
       </View>
 
@@ -293,25 +319,37 @@ export function RunsScreen(props: Props) {
             style={[styles.sortChip, sortKey === s.key && styles.sortChipOn]}
             onPress={() => setSortKey(s.key)}
           >
-            <Text style={[styles.sortText, sortKey === s.key && styles.sortTextOn]}>{s.label}</Text>
+            <Text style={[styles.sortText, sortKey === s.key && styles.sortTextOn]}>
+              {s.key === "date"
+                ? t({ en: "date", fr: "date" })
+                : s.key === "best_lap"
+                  ? t({ en: "best", fr: "meilleur" })
+                  : s.key === "avg_lap"
+                    ? t({ en: "avg", fr: "moyen" })
+                    : s.key === "feeling"
+                      ? t({ en: "feeling", fr: "ressenti" })
+                      : t({ en: "by setup", fr: "par réglage" })}
+            </Text>
           </Pressable>
         ))}
       </View>
 
       {logbook.runs.length === 0 ? (
         <View style={styles.empty}>
-          <Text style={styles.emptyTitle}>No runs yet</Text>
+          <Text style={styles.emptyTitle}>{t({ en: "No runs yet", fr: "Aucune session pour l'instant" })}</Text>
           <Text style={styles.emptyText}>
-            Log your first run — car, track, conditions, how it felt. Every run makes the engineer
-            smarter about YOUR car on YOUR tracks.
+            {t({
+              en: "Log your first run — car, track, conditions, how it felt. Every run makes the engineer smarter about YOUR car on YOUR tracks.",
+              fr: "Enregistre ta première session — voiture, piste, conditions, ton ressenti. Chaque session rend l'ingénieur plus pertinent sur TA voiture et TES pistes.",
+            })}
           </Text>
           <Pressable
             style={styles.emptyCta}
             onPress={() => setInForm(true)}
             accessibilityRole="button"
-            accessibilityLabel="Log your first run"
+            accessibilityLabel={t({ en: "Log your first run", fr: "Enregistrer ta première session" })}
           >
-            <Text style={styles.emptyCtaText}>＋ Log your first run</Text>
+            <Text style={styles.emptyCtaText}>{t({ en: "＋ Log your first run", fr: "＋ Enregistrer ta première session" })}</Text>
           </Pressable>
         </View>
       ) : groups ? (
@@ -347,15 +385,21 @@ export function RunsScreen(props: Props) {
                     style={[styles.rate, selectedRuns[0].outcome === o && styles.rateOn]}
                     onPress={() => updateLogbook((prev) => rateRun(prev, selectedRuns[0].id, o))}
                   >
-                    <Text style={[styles.rateText, selectedRuns[0].outcome === o && styles.rateTextOn]}>{o}</Text>
+                    <Text style={[styles.rateText, selectedRuns[0].outcome === o && styles.rateTextOn]}>
+                      {o === "better"
+                        ? t({ en: "better", fr: "mieux" })
+                        : o === "worse"
+                          ? t({ en: "worse", fr: "moins bien" })
+                          : t({ en: "same", fr: "pareil" })}
+                    </Text>
                   </Pressable>
                 ))}
               </View>
               <Pressable style={styles.floatBtn} onPress={() => props.onEngineer(selectedRuns[0].id)}>
-                <Text style={styles.floatBtnText}>🔧 Engineer</Text>
+                <Text style={styles.floatBtnText}>{t({ en: "🔧 Engineer", fr: "🔧 Ingénieur" })}</Text>
               </Pressable>
               <Pressable style={styles.floatBtn} onPress={() => void shareRun(selectedRuns[0])}>
-                <Text style={styles.floatBtnText}>⤴ Share</Text>
+                <Text style={styles.floatBtnText}>{t({ en: "⤴ Share", fr: "⤴ Partager" })}</Text>
               </Pressable>
             </>
           )}
@@ -364,7 +408,7 @@ export function RunsScreen(props: Props) {
               style={[styles.floatBtn, { flex: 1 }]}
               onPress={() => props.onCompare(selectedRuns[0].id, selectedRuns[1].id)}
             >
-              <Text style={styles.floatBtnText}>⚖ Compare these two runs</Text>
+              <Text style={styles.floatBtnText}>{t({ en: "⚖ Compare these two runs", fr: "⚖ Comparer ces deux sessions" })}</Text>
             </Pressable>
           )}
           <Pressable style={styles.floatClose} onPress={() => setSelected([])}>
@@ -386,13 +430,17 @@ const SlimRunCard = React.memo(function SlimRunCard({
   selected: boolean;
   onPress: (id: string) => void;
 }) {
+  const t = useT();
   return (
     <Pressable
       style={[styles.slim, selected && styles.slimSelected]}
       onPress={() => onPress(run.id)}
       accessibilityRole="button"
       accessibilityState={{ selected }}
-      accessibilityLabel={`Run at ${run.track.name}, ${run.created_at.slice(5, 10)}`}
+      accessibilityLabel={t({
+        en: `Run at ${run.track.name}, ${run.created_at.slice(5, 10)}`,
+        fr: `Session à ${run.track.name}, ${run.created_at.slice(5, 10)}`,
+      })}
     >
       <View style={styles.slimLeft}>
         <Text style={styles.slimDate}>{run.created_at.slice(5, 10)}</Text>
@@ -448,6 +496,7 @@ function NewSetupPopup({
   onClose: () => void;
   onCreated: (versionId: string, name: string) => void;
 }) {
+  const t = useT();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -459,7 +508,7 @@ function NewSetupPopup({
     if (raw) {
       const parsed = deserialize(raw, JSON.parse(raw).state.template_id);
       if (!parsed.ok) {
-        setError("Could not read this car's sheets.");
+        setError(t({ en: "Could not read this car's sheets.", fr: "Impossible de lire les fiches de cette voiture." }));
         return;
       }
       base = parsed.state;
@@ -468,37 +517,41 @@ function NewSetupPopup({
       const template = KB.templates[templateId ?? ""] ?? KB.templates["generic-offroad"];
       base = initSheets(template, new Date().toISOString());
     }
-    const renamed = renameDraft(base, name.trim() || "New setup");
+    const fallbackName = t({ en: "New setup", fr: "Nouveau réglage" });
+    const renamed = renameDraft(base, name.trim() || fallbackName);
     const { state, saved } = saveVersion(renamed, new Date().toISOString());
     const versionId = saved?.id ?? state.draft_base_id;
     try {
       await AsyncStorage.setItem(key, serialize(state));
     } catch {
-      setError("Could not save this setup — storage may be full.");
+      setError(t({ en: "Could not save this setup — storage may be full.", fr: "Impossible d'enregistrer ce réglage — le stockage est peut-être plein." }));
       return;
     }
-    onCreated(versionId, saved?.name ?? (name.trim() || "New setup"));
+    onCreated(versionId, saved?.name ?? (name.trim() || fallbackName));
   };
 
   return (
     <View style={styles.popupWrap}>
       <View style={styles.popup}>
-        <Text style={styles.popupTitle}>New setup</Text>
+        <Text style={styles.popupTitle}>{t({ en: "New setup", fr: "Nouveau réglage" })}</Text>
         <Text style={styles.popupHint}>
-          Snapshots the car's current draft sheet as a named version (edit details in the Sheet tab).
+          {t({
+            en: "Snapshots the car's current draft sheet as a named version (edit details in the Sheet tab).",
+            fr: "Capture la fiche de réglages en cours de la voiture comme version nommée (modifie les détails dans l'onglet Réglages).",
+          })}
         </Text>
         <View style={styles.popupInputRow}>
           <Pressable style={{ flex: 1 }}>
-            <TextInputBox value={name} onChangeText={setName} placeholder='e.g. "Sunday quali"' />
+            <TextInputBox value={name} onChangeText={setName} placeholder={t({ en: 'e.g. "Sunday quali"', fr: 'ex. "Quali du dimanche"' })} />
           </Pressable>
         </View>
         {error && <Text style={styles.popupError}>{error}</Text>}
         <View style={{ flexDirection: "row", gap: 8, marginTop: 10 }}>
           <Pressable style={[styles.popupBtn, styles.popupGhost]} onPress={onClose}>
-            <Text style={styles.popupGhostText}>Cancel</Text>
+            <Text style={styles.popupGhostText}>{t({ en: "Cancel", fr: "Annuler" })}</Text>
           </Pressable>
           <Pressable style={[styles.popupBtn, styles.popupPrimary]} onPress={() => void create()}>
-            <Text style={styles.popupPrimaryText}>Create</Text>
+            <Text style={styles.popupPrimaryText}>{t({ en: "Create", fr: "Créer" })}</Text>
           </Pressable>
         </View>
       </View>

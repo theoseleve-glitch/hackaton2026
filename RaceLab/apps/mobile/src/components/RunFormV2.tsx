@@ -15,6 +15,7 @@ import { AutofillInput } from "./AutofillInput";
 import { FeelingSlider } from "./FeelingSlider";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 import { LapListInput } from "./LapListInput";
+import { useT } from "../i18n";
 
 /**
  * Run Form v2 (D27) — THE core data-capture surface. Controlled selectors:
@@ -58,6 +59,14 @@ const WX_FIELDS = [
   { key: "sun_pct", label: "Sun (%)" },
 ] as const;
 type WxKey = (typeof WX_FIELDS)[number]["key"];
+// — French labels for the weather fields (mirrors WX_FIELDS keys) —
+const WX_LABELS_FR: Record<WxKey, string> = {
+  air_temp_c: "Temp. air (°C)",
+  humidity_pct: "Humidité (%)",
+  wind_kmh: "Vent (km/h)",
+  pressure_hpa: "Pression (hPa)",
+  sun_pct: "Soleil (%)",
+};
 type WxField = { text: string; auto: boolean; touched: boolean };
 const emptyWx = (): Record<WxKey, WxField> =>
   Object.fromEntries(
@@ -145,6 +154,7 @@ function parseTimeS(text: string): number | undefined {
 }
 
 export function RunFormV2(props: RunFormV2Props) {
+  const t = useT();
   const { cars, tracks, setupsForCar, selection } = props;
   const car = cars.find((c) => c.id === selection.car_id);
   const track = tracks.find((t) => t.id === selection.track_id);
@@ -299,55 +309,55 @@ export function RunFormV2(props: RunFormV2Props) {
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-      <Section title="Car">
+      <Section title={t({ en: "Car", fr: "Voiture" })}>
         <PickRow
           items={cars.map((c) => ({ id: c.id, label: c.name }))}
           selectedId={selection.car_id}
           onSelect={props.onSelectCar}
-          newLabel="new car"
+          newLabel={t({ en: "new car", fr: "nouvelle voiture" })}
           onNew={props.onRequestNewCar}
         />
       </Section>
 
-      <Section title="Track">
+      <Section title={t({ en: "Track", fr: "Piste" })}>
         <PickRow
           items={tracks.map((t) => ({ id: t.id, label: t.name }))}
           selectedId={selection.track_id}
           onSelect={props.onSelectTrack}
-          newLabel="new track"
+          newLabel={t({ en: "new track", fr: "nouvelle piste" })}
           onNew={props.onRequestNewTrack}
         />
       </Section>
 
-      <Section title="Setup on the car">
+      <Section title={t({ en: "Setup on the car", fr: "Réglage sur la voiture" })}>
         {car ? (
           <PickRow
             items={setups.map((s) => ({ id: s.id, label: s.name }))}
             selectedId={selection.setup_version_id}
             onSelect={props.onSelectSetup}
-            newLabel="new setup"
+            newLabel={t({ en: "new setup", fr: "nouveau réglage" })}
             onNew={props.onRequestNewSetup}
           />
         ) : (
-          <Text style={styles.hint}>pick a car first</Text>
+          <Text style={styles.hint}>{t({ en: "pick a car first", fr: "choisis d’abord une voiture" })}</Text>
         )}
       </Section>
 
-      <Section title="When">
+      <Section title={t({ en: "When", fr: "Quand" })}>
         <View style={{ flexDirection: "row", gap: 8 }}>
           <View style={{ flex: 3 }}>
             <LabeledInput
-              label="Date"
+              label={t({ en: "Date", fr: "Date" })}
               value={dateStr}
               onChangeText={setDateStr}
               placeholder="2026-06-12"
               keyboardType="numbers-and-punctuation"
-              error={!dateValid ? "use YYYY-MM-DD" : undefined}
+              error={!dateValid ? t({ en: "use YYYY-MM-DD", fr: "format AAAA-MM-JJ" }) : undefined}
             />
           </View>
           <View style={{ flex: 2 }}>
             <LabeledInput
-              label="Time"
+              label={t({ en: "Time", fr: "Heure" })}
               value={timeStr}
               onChangeText={setTimeStr}
               placeholder="14:30"
@@ -357,62 +367,62 @@ export function RunFormV2(props: RunFormV2Props) {
         </View>
       </Section>
 
-      <Section title="Session">
+      <Section title={t({ en: "Session", fr: "Session" })}>
         <ChipRow options={RUN_TYPES} value={type} onSelect={setType} />
         <LabeledInput
-          label="Session length (min)"
+          label={t({ en: "Session length (min)", fr: "Durée de la session (min)" })}
           value={duration}
           onChangeText={setDuration}
           keyboardType="numeric"
-          placeholder="e.g. 10"
+          placeholder={t({ en: "e.g. 10", fr: "ex. 10" })}
         />
         {type !== "practice" && (
           <View style={{ marginTop: 10 }}>
             <View style={{ flexDirection: "row", gap: 8 }}>
               <View style={{ flex: 1 }}>
-                <LabeledInput label="Finished P" value={position} onChangeText={setPosition} keyboardType="numeric" placeholder="e.g. 2" />
+                <LabeledInput label={t({ en: "Finished P", fr: "Place finale" })} value={position} onChangeText={setPosition} keyboardType="numeric" placeholder={t({ en: "e.g. 2", fr: "ex. 2" })} />
               </View>
               <View style={{ flex: 1 }}>
-                <LabeledInput label="Field size" value={entrants} onChangeText={setEntrants} keyboardType="numeric" placeholder="e.g. 12" />
+                <LabeledInput label={t({ en: "Field size", fr: "Nb de partants" })} value={entrants} onChangeText={setEntrants} keyboardType="numeric" placeholder={t({ en: "e.g. 12", fr: "ex. 12" })} />
               </View>
             </View>
             <Text style={{ color: colors.sub, fontSize: 11, marginTop: 4, fontStyle: "italic" }}>
-              your result feeds career stats — podiums get their moment 🏆
+              {t({ en: "your result feeds career stats — podiums get their moment 🏆", fr: "ton résultat alimente tes stats de carrière — les podiums ont leur moment 🏆" })}
             </Text>
           </View>
         )}
       </Section>
 
-      <Section title="Conditions">
+      <Section title={t({ en: "Conditions", fr: "Conditions" })}>
         {track?.gps ? (
           <Pressable style={styles.wxBtn} onPress={() => void doFetchWeather()}>
             {fetching ? (
               <ActivityIndicator size="small" color={colors.accent} />
             ) : (
-              <Text style={styles.wxBtnText}>＋ Add weather</Text>
+              <Text style={styles.wxBtnText}>{t({ en: "＋ Add weather", fr: "＋ Ajouter la météo" })}</Text>
             )}
           </Pressable>
         ) : (
-          <Text style={styles.hint}>add GPS to the track for auto-weather</Text>
+          <Text style={styles.hint}>{t({ en: "add GPS to the track for auto-weather", fr: "ajoute le GPS à la piste pour la météo auto" })}</Text>
         )}
-        {wxMiss && <Text style={styles.wxMiss}>no weather data — fill in manually</Text>}
+        {wxMiss && <Text style={styles.wxMiss}>{t({ en: "no weather data — fill in manually", fr: "pas de données météo — saisis-les à la main" })}</Text>}
         <View style={styles.wxGrid}>
           {WX_FIELDS.map((f) => (
             <View key={f.key} style={styles.wxCell}>
               <WxFieldView
-                label={f.label}
+                label={t({ en: f.label, fr: WX_LABELS_FR[f.key] })}
                 field={wx[f.key]}
                 onTouch={() => touchWx(f.key)}
-                onChangeText={(t) => editWx(f.key, t)}
+                onChangeText={(txt) => editWx(f.key, txt)}
               />
             </View>
           ))}
         </View>
-        <Text style={styles.hint}>Grip</Text>
+        <Text style={styles.hint}>{t({ en: "Grip", fr: "Grip" })}</Text>
         <ChipRow options={GRIPS} value={grip} onSelect={setGrip} />
-        <Text style={styles.hint}>Bumpiness</Text>
+        <Text style={styles.hint}>{t({ en: "Bumpiness", fr: "Bosses" })}</Text>
         <ChipRow options={BUMPINESS} value={bumpiness} onSelect={(b) => setBumpiness(bumpiness === b ? undefined : b)} />
-        <Text style={styles.hint}>Sky · dust · evolution</Text>
+        <Text style={styles.hint}>{t({ en: "Sky · dust · evolution", fr: "Ciel · poussière · évolution" })}</Text>
         <ChipRow options={SKIES} value={sky} onSelect={(s) => setSky(sky === s ? undefined : s)} />
         <View style={{ height: 6 }} />
         <MultiChipRow options={["dusty"] as const} values={dusty ? ["dusty"] : []} onToggle={() => setDusty(!dusty)} />
@@ -420,19 +430,19 @@ export function RunFormV2(props: RunFormV2Props) {
         <ChipRow options={EVOLUTIONS} value={evolution} onSelect={(e) => setEvolution(evolution === e ? undefined : e)} />
       </Section>
 
-      <Section title="Laps">
-        <LabeledInput label="Best lap (s)" value={bestLap} onChangeText={setBestLap} keyboardType="decimal-pad" placeholder="e.g. 34.2" />
-        <LabeledInput label="Average lap (s)" value={avgLap} onChangeText={setAvgLap} keyboardType="decimal-pad" placeholder="optional" />
+      <Section title={t({ en: "Laps", fr: "Tours" })}>
+        <LabeledInput label={t({ en: "Best lap (s)", fr: "Meilleur tour (s)" })} value={bestLap} onChangeText={setBestLap} keyboardType="decimal-pad" placeholder={t({ en: "e.g. 34.2", fr: "ex. 34.2" })} />
+        <LabeledInput label={t({ en: "Average lap (s)", fr: "Tour moyen (s)" })} value={avgLap} onChangeText={setAvgLap} keyboardType="decimal-pad" placeholder={t({ en: "optional", fr: "optionnel" })} />
         <LapListInput laps={lapsList} onChange={setLapsList} />
         {derived && (
           <Text style={styles.derivedNote}>
-            derived: best {derived.best.toFixed(2)} · avg {derived.avg.toFixed(2)} — manual entry overrides
+            {t({ en: `derived: best ${derived.best.toFixed(2)} · avg ${derived.avg.toFixed(2)} — manual entry overrides`, fr: `calculé : meilleur ${derived.best.toFixed(2)} · moyen ${derived.avg.toFixed(2)} — la saisie manuelle prime` })}
           </Text>
         )}
       </Section>
 
       <View style={styles.feedbackCard}>
-        <Text style={styles.feedbackTitle}>Feedback — what did the car do?</Text>
+        <Text style={styles.feedbackTitle}>{t({ en: "Feedback — what did the car do?", fr: "Ressenti — qu’a fait la voiture ?" })}</Text>
         <TextInput
           style={styles.noteInput}
           value={note}
@@ -440,57 +450,57 @@ export function RunFormV2(props: RunFormV2Props) {
           multiline
           numberOfLines={5}
           textAlignVertical="top"
-          placeholder='Tell it like it happened — "bottoming out of the sweeper, rear gives up as tyres heat, had to baby it into the chicane"'
+          placeholder={t({ en: 'Tell it like it happened — "bottoming out of the sweeper, rear gives up as tyres heat, had to baby it into the chicane"', fr: 'Raconte comme ça s’est passé — « ça talonne en sortie du grand virage, l’arrière lâche quand les pneus chauffent, obligé de lever pour la chicane »' })}
           placeholderTextColor={colors.sub}
         />
-        {autoTagged && <Text style={styles.autoTag}>🏷 auto-tagged from your note — tap a chip to correct me</Text>}
-        <Text style={styles.hint}>Symptoms</Text>
+        {autoTagged && <Text style={styles.autoTag}>{t({ en: "🏷 auto-tagged from your note — tap a chip to correct me", fr: "🏷 tags auto depuis ta note — touche une puce pour me corriger" })}</Text>}
+        <Text style={styles.hint}>{t({ en: "Symptoms", fr: "Symptômes" })}</Text>
         <MultiChipRow options={SYMPTOMS} values={symptoms} onToggle={toggleSymptom} />
         {symptoms.length > 0 && (
           <>
-            <Text style={styles.hint}>Where? (optional)</Text>
+            <Text style={styles.hint}>{t({ en: "Where? (optional)", fr: "Où ? (optionnel)" })}</Text>
             <ChipRow options={PHASES} value={phase} onSelect={(p) => setPhase(phase === p ? undefined : p)} />
           </>
         )}
         {track && track.corners.length > 0 && (
           <>
-            <Text style={styles.hint}>Notes by corner</Text>
+            <Text style={styles.hint}>{t({ en: "Notes by corner", fr: "Notes par virage" })}</Text>
             {track.corners.map((c) => (
               <AutofillInput
                 key={c.n}
                 label={cornerLabel(c)}
                 value={cornerNotes[c.n] ?? ""}
-                onChangeText={(t) => setCornerNotes((prev) => ({ ...prev, [c.n]: t }))}
+                onChangeText={(txt) => setCornerNotes((prev) => ({ ...prev, [c.n]: txt }))}
                 pool={CORNER_NOTE_LEXICON}
-                placeholder="anything happen here?"
+                placeholder={t({ en: "anything happen here?", fr: "il s’est passé quelque chose ici ?" })}
               />
             ))}
           </>
         )}
       </View>
 
-      <Section title="Feeling">
+      <Section title={t({ en: "Feeling", fr: "Ressenti" })}>
         <FeelingSlider value={feeling} onChange={(v) => { setFeeling(v); setFeelingSet(true); }} />
       </Section>
 
       {car?.power === "nitro" && (
-        <Section title="Autonomy">
+        <Section title={t({ en: "Autonomy", fr: "Autonomie" })}>
           <Pressable style={styles.autonomyBtn} onPress={() => setShowAutonomy((v) => !v)}>
             <Text style={styles.autonomyBtnText}>
-              {showAutonomy ? "▾" : "▸"} Autonomy test — ran the tank dry?
+              {showAutonomy ? "▾" : "▸"} {t({ en: "Autonomy test — ran the tank dry?", fr: "Test d’autonomie — réservoir à sec ?" })}
             </Text>
           </Pressable>
           {showAutonomy && (
             <View style={{ marginTop: 8 }}>
               <View style={{ flexDirection: "row", gap: 8 }}>
                 <View style={{ flex: 1 }}>
-                  <LabeledInput label="Time of the run" value={autoTime} onChangeText={setAutoTime} placeholder="7:10 or 430" />
+                  <LabeledInput label={t({ en: "Time of the run", fr: "Durée du run" })} value={autoTime} onChangeText={setAutoTime} placeholder={t({ en: "7:10 or 430", fr: "7:10 ou 430" })} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <LabeledInput label="Laps in the run" value={autoLaps} onChangeText={setAutoLaps} keyboardType="numeric" placeholder="e.g. 12" />
+                  <LabeledInput label={t({ en: "Laps in the run", fr: "Tours du run" })} value={autoLaps} onChangeText={setAutoLaps} keyboardType="numeric" placeholder={t({ en: "e.g. 12", fr: "ex. 12" })} />
                 </View>
               </View>
-              <Text style={styles.derivedNote}>feeds the pit strategy — a measured fact beats any tank estimate</Text>
+              <Text style={styles.derivedNote}>{t({ en: "feeds the pit strategy — a measured fact beats any tank estimate", fr: "alimente la stratégie aux stands — une mesure réelle vaut mieux qu’une estimation de réservoir" })}</Text>
             </View>
           )}
         </Section>
@@ -498,13 +508,13 @@ export function RunFormV2(props: RunFormV2Props) {
 
       <View style={styles.actions}>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={props.onCancel}>
-          <Text style={styles.btnGhostText}>Cancel</Text>
+          <Text style={styles.btnGhostText}>{t({ en: "Cancel", fr: "Annuler" })}</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnPrimary, !canSave && styles.btnDisabled]} onPress={save}>
-          <Text style={styles.btnPrimaryText}>Save run</Text>
+          <Text style={styles.btnPrimaryText}>{t({ en: "Save run", fr: "Enregistrer la session" })}</Text>
         </Pressable>
       </View>
-      {!canSave && <Text style={styles.saveHint}>pick a car, a track and a setup to save</Text>}
+      {!canSave && <Text style={styles.saveHint}>{t({ en: "pick a car, a track and a setup to save", fr: "choisis une voiture, une piste et un réglage pour enregistrer" })}</Text>}
     </ScrollView>
   );
 }

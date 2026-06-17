@@ -23,18 +23,21 @@ interface Props {
   onClose: () => void;
 }
 
-const LEVEL_LABELS: Record<ExperienceLevel, string> = {
-  beginner: "beginner",
-  club: "club racer",
-  regional: "regional",
-  pro: "pro",
-};
 const LANG_LABELS: Record<Lang, string> = { en: "English", fr: "Français" };
-const UNIT_LABELS: Record<Units, string> = { metric: "metric (°C · m)", imperial: "imperial (°F · ft)" };
 
 export function SettingsScreen({ account, setAccount, logbook, onClose }: Props) {
   const t = useT();
   const lang = useLang();
+  const LEVEL_LABELS_L: Record<ExperienceLevel, string> = {
+    beginner: t({ en: "beginner", fr: "débutant" }),
+    club: t({ en: "club racer", fr: "pilote club" }),
+    regional: t({ en: "regional", fr: "régional" }),
+    pro: t({ en: "pro", fr: "pro" }),
+  };
+  const UNIT_LABELS_L: Record<Units, string> = {
+    metric: t({ en: "metric (°C · m)", fr: "métrique (°C · m)" }),
+    imperial: t({ en: "imperial (°F · ft)", fr: "impérial (°F · ft)" }),
+  };
   const nowIso = new Date().toISOString();
   const year = nowIso.slice(0, 4);
   const yearStats = driverStats(logbook, year);
@@ -45,27 +48,27 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
     <View style={styles.root}>
       <View style={styles.header}>
         <Pressable onPress={onClose} hitSlop={10}>
-          <Text style={styles.back}>‹ Close</Text>
+          <Text style={styles.back}>{t({ en: "‹ Close", fr: "‹ Fermer" })}</Text>
         </Pressable>
-        <Text style={styles.h1}>Settings</Text>
+        <Text style={styles.h1}>{t({ en: "Settings", fr: "Paramètres" })}</Text>
         <View style={{ width: 50 }} />
       </View>
 
       <KeyboardAwareForm contentStyle={{ padding: 14, paddingBottom: 40 }}>
-        <Section title="Driver profile">
+        <Section title={t({ en: "Driver profile", fr: "Profil pilote" })}>
           <View style={styles.card}>
-            <Text style={styles.driverName}>{account.handle ? `@${account.handle}` : account.email?.split("@")[0] ?? "Driver"}</Text>
+            <Text style={styles.driverName}>{account.handle ? `@${account.handle}` : account.email?.split("@")[0] ?? t({ en: "Driver", fr: "Pilote" })}</Text>
             <Text style={styles.driverMeta}>
-              {[account.country, account.age !== undefined ? `${account.age} yo` : undefined, account.level ? LEVEL_LABELS[account.level] : undefined]
+              {[account.country, account.age !== undefined ? `${account.age} ${t({ en: "yo", fr: "ans" })}` : undefined, account.level ? LEVEL_LABELS_L[account.level] : undefined]
                 .filter(Boolean)
-                .join(" · ") || "complete your profile below"}
+                .join(" · ") || t({ en: "complete your profile below", fr: "complète ton profil ci-dessous" })}
             </Text>
 
-            <StatsRow title={`This year · ${year}`} stats={yearStats} />
-            <StatsRow title="Career" stats={careerStats} />
+            <StatsRow title={t({ en: `This year · ${year}`, fr: `Cette année · ${year}` })} stats={yearStats} />
+            <StatsRow title={t({ en: "Career", fr: "Carrière" })} stats={careerStats} />
             {careerStats.best_lap_s !== undefined && (
               <Text style={styles.bestLap}>
-                ⏱ fastest ever {careerStats.best_lap_s.toFixed(2)}s
+                {t({ en: `⏱ fastest ever ${careerStats.best_lap_s.toFixed(2)}s`, fr: `⏱ meilleur tour absolu ${careerStats.best_lap_s.toFixed(2)}s` })}
                 {careerStats.best_lap_track ? ` @ ${careerStats.best_lap_track}` : ""}
               </Text>
             )}
@@ -73,25 +76,25 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
 
           <ProgressCard logbook={logbook} />
 
-          <Text style={styles.fieldLabel}>Experience level</Text>
+          <Text style={styles.fieldLabel}>{t({ en: "Experience level", fr: "Niveau d’expérience" })}</Text>
           <ChipRow
             options={LEVELS}
             value={account.level}
             onSelect={(v) => setAccount({ level: v })}
-            labelFor={(v) => LEVEL_LABELS[v]}
+            labelFor={(v) => LEVEL_LABELS_L[v]}
           />
           <View style={styles.twoCol}>
             <View style={{ flex: 1 }}>
               <LabeledInput
-                label="Country"
+                label={t({ en: "Country", fr: "Pays" })}
                 value={account.country ?? ""}
                 onChangeText={(t) => setAccount({ country: t || undefined })}
-                placeholder="e.g. CH"
+                placeholder={t({ en: "e.g. CH", fr: "ex. CH" })}
               />
             </View>
             <View style={{ flex: 1 }}>
               <LabeledInput
-                label="Age"
+                label={t({ en: "Age", fr: "Âge" })}
                 value={account.age !== undefined ? String(account.age) : ""}
                 onChangeText={(t) => {
                   const n = Number(t);
@@ -104,9 +107,9 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
           </View>
         </Section>
 
-        <Section title="Account & billing">
+        <Section title={t({ en: "Account & billing", fr: "Compte & facturation" })}>
           <LabeledInput
-            label="Email"
+            label={t({ en: "Email", fr: "E-mail" })}
             value={account.email ?? ""}
             onChangeText={(t) => setAccount({ email: t || undefined })}
             placeholder="you@example.com"
@@ -117,14 +120,16 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
           <View style={[styles.card, daysLeft <= 3 && styles.cardWarn]}>
             <Text style={styles.billingLine}>
               {account.trial_started_at === undefined
-                ? `Your ${PRICING.trial_days}-day free trial hasn't started.`
+                ? t({ en: `Your ${PRICING.trial_days}-day free trial hasn't started.`, fr: `Ton essai gratuit de ${PRICING.trial_days} jours n’a pas commencé.` })
                 : daysLeft > 0
-                  ? `Trial — ${daysLeft} day${daysLeft > 1 ? "s" : ""} left.`
-                  : "Trial over — subscribe to keep the engineer working."}
+                  ? t({ en: `Trial — ${daysLeft} day${daysLeft > 1 ? "s" : ""} left.`, fr: `Essai — ${daysLeft} jour${daysLeft > 1 ? "s" : ""} restant${daysLeft > 1 ? "s" : ""}.` })
+                  : t({ en: "Trial over — subscribe to keep the engineer working.", fr: "Essai terminé — abonne-toi pour garder l’ingénieur au travail." })}
             </Text>
             <Text style={styles.billingMeta}>
-              {PRICING.monthly_eur}€/month or {PRICING.annual_eur}€/year. Subscriptions live on the
-              website — web billing skips app-store fees, so the same plan costs less there.
+              {t({
+                en: `${PRICING.monthly_eur}€/month or ${PRICING.annual_eur}€/year. Subscriptions live on the website — web billing skips app-store fees, so the same plan costs less there.`,
+                fr: `${PRICING.monthly_eur}€/mois ou ${PRICING.annual_eur}€/an. Les abonnements se gèrent sur le site — la facturation web évite les frais des stores, donc le même forfait y coûte moins cher.`,
+              })}
             </Text>
             <Pressable
               style={styles.webBtn}
@@ -132,7 +137,7 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
                 Linking.openURL("https://racelab.app").catch(() => {});
               }}
             >
-              <Text style={styles.webBtnText}>Manage subscription on racelab.app ↗</Text>
+              <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelab.app ↗", fr: "Gérer l’abonnement sur racelab.app ↗" })}</Text>
             </Pressable>
           </View>
         </Section>
@@ -148,29 +153,34 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
             }}
             labelFor={(v) => LANG_LABELS[v]}
           />
-          <Text style={styles.fieldLabel}>Units</Text>
+          <Text style={styles.fieldLabel}>{t({ en: "Units", fr: "Unités" })}</Text>
           <ChipRow
             options={UNITS}
             value={account.prefs?.units ?? "metric"}
             onSelect={(v) => setAccount({ prefs: { ...account.prefs, units: v } })}
-            labelFor={(v) => UNIT_LABELS[v]}
+            labelFor={(v) => UNIT_LABELS_L[v]}
           />
           <Text style={styles.hint}>
-            Stored with your profile — translations and unit conversion roll out screen by screen.
+            {t({
+              en: "Stored with your profile — translations and unit conversion roll out screen by screen.",
+              fr: "Enregistré avec ton profil — les traductions et la conversion d’unités se déploient écran par écran.",
+            })}
           </Text>
         </Section>
 
-        <Section title="Data & privacy">
+        <Section title={t({ en: "Data & privacy", fr: "Données & confidentialité" })}>
           <Text style={styles.bodyText}>
-            Everything — runs, setups, tracks, reports — lives on this device. The race engineer is
-            100% deterministic and on-device: no API call, no model, no account needed at the track.
+            {t({
+              en: "Everything — runs, setups, tracks, reports — lives on this device. The race engineer is 100% deterministic and on-device: no API call, no model, no account needed at the track.",
+              fr: "Tout — sessions, réglages, pistes, rapports — reste sur cet appareil. L’ingénieur de course est 100% déterministe et embarqué : aucun appel API, aucun modèle, aucun compte requis à la piste.",
+            })}
           </Text>
-          <Text style={styles.hint}>Cloud backup and the public track library ship with accounts.</Text>
+          <Text style={styles.hint}>{t({ en: "Cloud backup and the public track library ship with accounts.", fr: "La sauvegarde cloud et la bibliothèque de pistes publique arrivent avec les comptes." })}</Text>
         </Section>
 
-        <Section title="About">
-          <Text style={styles.bodyText}>RaceLab 0.1.0 · made for the pit lane 🏁</Text>
-          <Text style={styles.hint}>Every recommendation cites its source — grounded or silent.</Text>
+        <Section title={t({ en: "About", fr: "À propos" })}>
+          <Text style={styles.bodyText}>{t({ en: "RaceLab 0.1.0 · made for the pit lane 🏁", fr: "RaceLab 0.1.0 · fait pour la voie des stands 🏁" })}</Text>
+          <Text style={styles.hint}>{t({ en: "Every recommendation cites its source — grounded or silent.", fr: "Chaque recommandation cite sa source — fondée ou silencieuse." })}</Text>
         </Section>
       </KeyboardAwareForm>
     </View>
@@ -178,15 +188,16 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
 }
 
 function StatsRow({ title, stats }: { title: string; stats: DriverStats }) {
+  const t = useT();
   return (
     <View style={styles.statsBlock}>
       <Text style={styles.statsTitle}>{title}</Text>
       <View style={styles.statsRow}>
-        <StatCell value={stats.runs} label="runs" />
-        <StatCell value={stats.tracks} label="tracks" />
-        <StatCell value={stats.races} label="races" />
-        <StatCell value={stats.podiums} label="podiums" highlight={stats.podiums > 0} />
-        <StatCell value={stats.wins} label="wins" highlight={stats.wins > 0} />
+        <StatCell value={stats.runs} label={t({ en: "runs", fr: "sessions" })} />
+        <StatCell value={stats.tracks} label={t({ en: "tracks", fr: "pistes" })} />
+        <StatCell value={stats.races} label={t({ en: "races", fr: "courses" })} />
+        <StatCell value={stats.podiums} label={t({ en: "podiums", fr: "podiums" })} highlight={stats.podiums > 0} />
+        <StatCell value={stats.wins} label={t({ en: "wins", fr: "victoires" })} highlight={stats.wins > 0} />
       </View>
     </View>
   );

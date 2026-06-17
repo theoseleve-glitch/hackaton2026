@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import type { RacePlan } from "../../../../packages/engine/src/planner";
+import { useT } from "../i18n";
 import { colors, radius } from "../theme";
 import { confidenceColor, Fold, RunReportCard, Tile } from "./RunReportCard";
 
@@ -13,6 +14,7 @@ import { confidenceColor, Fold, RunReportCard, Tile } from "./RunReportCard";
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s) % 60).padStart(2, "0")}`;
 
 export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy: () => void }) {
+  const t = useT();
   const r = plan.report;
 
   return (
@@ -22,31 +24,47 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
       {r.kind === "report" && r.primary ? (
         <View style={styles.verdictCard}>
           <Text style={styles.kicker}>
-            RACE-DAY CALL · {r.primary.setting.replace(/_/g, " ").toUpperCase()}
+            {t({ en: "RACE-DAY CALL", fr: "CONSIGNE DU JOUR DE COURSE" })} ·{" "}
+            {r.primary.setting.replace(/_/g, " ").toUpperCase()}
           </Text>
           <Text style={styles.verdict}>{r.primary.change}</Text>
           <Text style={styles.mech}>{r.primary.mechanism}</Text>
         </View>
       ) : (
         <View style={[styles.verdictCard, { borderColor: colors.good }]}>
-          <Text style={styles.kicker}>RACE-DAY CALL</Text>
+          <Text style={styles.kicker}>{t({ en: "RACE-DAY CALL", fr: "CONSIGNE DU JOUR DE COURSE" })}</Text>
           <Text style={[styles.verdictSmall, { color: colors.good }]}>
-            Car is ready — the forecast doesn't change your setup.
+            {t({
+              en: "Car is ready — the forecast doesn't change your setup.",
+              fr: "La voiture est prête — les prévisions ne changent pas ton réglage.",
+            })}
           </Text>
         </View>
       )}
 
       <View style={styles.tiles}>
-        <Tile value={plan.race_avg_lap_s !== undefined ? fmt(plan.race_avg_lap_s) : "—"} label="race pace" />
-        <Tile value={r.confidence.toUpperCase()} label="confidence" tone={confidenceColor(r.confidence)} />
-        <Tile value={String(plan.technique_tips.length)} label="drive tips" />
+        <Tile
+          value={plan.race_avg_lap_s !== undefined ? fmt(plan.race_avg_lap_s) : "—"}
+          label={t({ en: "race pace", fr: "rythme course" })}
+        />
+        <Tile
+          value={r.confidence.toUpperCase()}
+          label={t({ en: "confidence", fr: "confiance" })}
+          tone={confidenceColor(r.confidence)}
+        />
+        <Tile value={String(plan.technique_tips.length)} label={t({ en: "drive tips", fr: "conseils pilotage" })} />
       </View>
 
       <Pressable style={styles.strategyBtn} onPress={onStrategy}>
-        <Text style={styles.strategyBtnText}>⛽ Race strategy — when to box →</Text>
+        <Text style={styles.strategyBtnText}>
+          {t({ en: "⛽ Race strategy — when to box →", fr: "⛽ Stratégie de course — quand passer au stand →" })}
+        </Text>
       </Pressable>
 
-      <Fold title="Conditions shift vs your practice" badge={String(plan.conditions_shift.length)}>
+      <Fold
+        title={t({ en: "Conditions shift vs your practice", fr: "Évolution des conditions vs tes essais" })}
+        badge={String(plan.conditions_shift.length)}
+      >
         {plan.conditions_shift.map((l, i) => (
           <Text key={i} style={styles.line}>
             🌡 {l}
@@ -54,7 +72,10 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
         ))}
       </Fold>
 
-      <Fold title="Readiness — what your runs say" badge={String(plan.readiness.length)}>
+      <Fold
+        title={t({ en: "Readiness — what your runs say", fr: "Préparation — ce que disent tes sessions" })}
+        badge={String(plan.readiness.length)}
+      >
         {plan.readiness.map((l, i) => (
           <Text key={i} style={styles.line}>
             🏁 {l}
@@ -63,7 +84,10 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
       </Fold>
 
       {plan.technique_tips.length > 0 && (
-        <Fold title="Driving adaptation for race day" badge={String(plan.technique_tips.length)}>
+        <Fold
+          title={t({ en: "Driving adaptation for race day", fr: "Adaptation du pilotage pour le jour de course" })}
+          badge={String(plan.technique_tips.length)}
+        >
           {plan.technique_tips.map((l, i) => (
             <Text key={i} style={styles.line}>
               🎮 {l}
@@ -72,7 +96,7 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
         </Fold>
       )}
 
-      <Fold title="Full engineer report (under forecast)">
+      <Fold title={t({ en: "Full engineer report (under forecast)", fr: "Rapport complet de l’ingénieur (selon prévisions)" })}>
         <RunReportCard report={r} />
       </Fold>
     </ScrollView>

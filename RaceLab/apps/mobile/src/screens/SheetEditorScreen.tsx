@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { colors, radius } from "../theme";
 import { MP11, label } from "../kb";
+import { useT } from "../i18n";
 import type { ChassisTemplate } from "../../../../packages/engine/src";
 import type { SheetProfile } from "../../../../packages/garage/src";
 import {
@@ -71,12 +72,26 @@ interface FieldDef {
 }
 
 export function SheetEditorScreen({ state, update, template, profile, options }: Props) {
+  const t = useT();
   const tpl = template ?? MP11;
   // precedence: typology override > KB field label (e.g. "Drop front (mm)") > title-cased id
   const labelFor = (id: string): string =>
     profile?.label_overrides[id] ??
     (tpl.fields[id] as FieldDef | undefined)?.label ??
     label(id);
+  // section headers are defined in English at module scope (SECTIONS); translate at render
+  const sectionTitle = (title: string): string => {
+    switch (title) {
+      case "Differentials": return t({ en: "Differentials", fr: "Différentiels" });
+      case "Shocks & springs": return t({ en: "Shocks & springs", fr: "Amortisseurs & ressorts" });
+      case "Geometry": return t({ en: "Geometry", fr: "Géométrie" });
+      case "Tires": return t({ en: "Tires", fr: "Pneus" });
+      case "Bars & wing": return t({ en: "Bars & wing", fr: "Barres & aileron" });
+      case "Drivetrain": return t({ en: "Drivetrain", fr: "Transmission" });
+      case "Other": return t({ en: "Other", fr: "Autres" });
+      default: return title;
+    }
+  };
   const [mode, setMode] = useState<Mode>("editor");
   const changes = useMemo(() => draftDiff(state), [state]);
   const changedMap = useMemo(
@@ -133,9 +148,9 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
   if (mode === "kit") {
     return (
       <DiffView
-        title="Draft vs kit setup"
+        title={t({ en: "Draft vs kit setup", fr: "Brouillon vs réglage kit" })}
         changes={diffVsKit(state)}
-        fromLabel="kit"
+        fromLabel={t({ en: "kit", fr: "kit" })}
         toLabel={state.draft_name}
         labelFor={labelFor}
         onBack={() => setMode("editor")}
@@ -147,7 +162,7 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
     const b = state.versions.find((v) => v.id === mode.compare.b);
     return (
       <DiffView
-        title="Compare versions"
+        title={t({ en: "Compare versions", fr: "Comparer les versions" })}
         changes={diffVersions(state, mode.compare.a, mode.compare.b)}
         fromLabel={a?.name ?? "?"}
         toLabel={b?.name ?? "?"}
@@ -162,22 +177,22 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
       <TextInput
         style={styles.nameInput}
         value={state.draft_name}
-        onChangeText={(t) => update((prev) => renameDraft(prev, t))}
-        placeholder="Setup name"
+        onChangeText={(text) => update((prev) => renameDraft(prev, text))}
+        placeholder={t({ en: "Setup name", fr: "Nom du réglage" })}
         placeholderTextColor={colors.sub}
       />
       <Text style={styles.baseInfo}>
-        based on “{state.versions.find((v) => v.id === state.draft_base_id)?.name ?? "?"}”
+        {t({ en: "based on", fr: "d’après" })} “{state.versions.find((v) => v.id === state.draft_base_id)?.name ?? "?"}”
         {changes.length > 0 ? (
-          <Text style={{ color: colors.accent }}>  ·  {changes.length} change{changes.length > 1 ? "s" : ""}</Text>
+          <Text style={{ color: colors.accent }}>  ·  {t({ en: `${changes.length} change${changes.length > 1 ? "s" : ""}`, fr: `${changes.length} modif${changes.length > 1 ? "s" : ""}` })}</Text>
         ) : (
-          "  ·  no changes"
+          t({ en: "  ·  no changes", fr: "  ·  aucune modif" })
         )}
       </Text>
 
       {options !== undefined && options.trim().length > 0 && (
         <View style={styles.optionsBlock}>
-          <Text style={styles.optionsTitle}>Options installed</Text>
+          <Text style={styles.optionsTitle}>{t({ en: "Options installed", fr: "Options installées" })}</Text>
           <Text style={styles.optionsText}>{options}</Text>
         </View>
       )}
@@ -188,19 +203,19 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
           disabled={changes.length === 0}
           onPress={() => update((prev) => saveVersion(prev, new Date().toISOString()).state)}
         >
-          <Text style={styles.actionText}>💾 Save version</Text>
+          <Text style={styles.actionText}>{t({ en: "💾 Save version", fr: "💾 Enregistrer la version" })}</Text>
         </Pressable>
         <Pressable style={styles.action} onPress={() => setMode("versions")}>
-          <Text style={styles.actionText}>🗂 Versions ({state.versions.length})</Text>
+          <Text style={styles.actionText}>{t({ en: `🗂 Versions (${state.versions.length})`, fr: `🗂 Versions (${state.versions.length})` })}</Text>
         </Pressable>
         <Pressable style={styles.action} onPress={() => setMode("kit")}>
-          <Text style={styles.actionText}>vs kit</Text>
+          <Text style={styles.actionText}>{t({ en: "vs kit", fr: "vs kit" })}</Text>
         </Pressable>
       </View>
 
       {starredFields.length > 0 && (
         <View>
-          <Text style={styles.section}>★ Starred</Text>
+          <Text style={styles.section}>{t({ en: "★ Starred", fr: "★ Favoris" })}</Text>
           {starredFields.map(([id, field]) => (
             <Field
               key={id}
@@ -222,7 +237,7 @@ export function SheetEditorScreen({ state, update, template, profile, options }:
         (section) =>
           section.fields.length > 0 && (
             <View key={section.title}>
-              <Text style={styles.section}>{section.title}</Text>
+              <Text style={styles.section}>{sectionTitle(section.title)}</Text>
               {section.fields.map(([id, field]) => (
                 <Field
                   key={id}
@@ -255,13 +270,16 @@ function VersionsView({
   onLoad: (id: string) => void;
   onCompare: (a: string, b: string) => void;
 }) {
+  const t = useT();
   const [pick, setPick] = useState<string | null>(null);
   const ordered = [...state.versions].reverse();
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
-      <BackBar title="Versions" onBack={onBack} />
+      <BackBar title={t({ en: "Versions", fr: "Versions" })} onBack={onBack} />
       <Text style={styles.hint}>
-        {pick ? "Now tap the version to compare it against." : "Tap “vs” on a version, then tap another, to compare. Load branches your draft from that version."}
+        {pick
+          ? t({ en: "Now tap the version to compare it against.", fr: "Touche maintenant la version à comparer." })
+          : t({ en: "Tap “vs” on a version, then tap another, to compare. Load branches your draft from that version.", fr: "Touche « vs » sur une version, puis une autre, pour comparer. « charger » fait repartir ton brouillon de cette version." })}
       </Text>
       {ordered.map((v) => {
         const parent = state.versions.find((p) => p.id === v.parent_id);
@@ -282,21 +300,23 @@ function VersionsView({
               <Text style={styles.versionName}>
                 {v.locked ? "🔒 " : ""}
                 {v.name}
-                {isBase ? <Text style={{ color: colors.accent }}>  · draft base</Text> : null}
+                {isBase ? <Text style={{ color: colors.accent }}>  · {t({ en: "draft base", fr: "base du brouillon" })}</Text> : null}
               </Text>
               <Text style={styles.versionMeta}>
                 {new Date(v.created_at).toLocaleString()}
-                {parent ? `  ·  +${nChanges} vs “${parent.name}”` : "  ·  baseline"}
+                {parent
+                  ? t({ en: `  ·  +${nChanges} vs “${parent.name}”`, fr: `  ·  +${nChanges} vs « ${parent.name} »` })
+                  : t({ en: "  ·  baseline", fr: "  ·  référence" })}
               </Text>
             </View>
             <Pressable style={styles.smallBtn} onPress={() => onLoad(v.id)}>
-              <Text style={styles.smallBtnText}>load</Text>
+              <Text style={styles.smallBtnText}>{t({ en: "load", fr: "charger" })}</Text>
             </Pressable>
             <Pressable
               style={[styles.smallBtn, pick === v.id && styles.smallBtnActive]}
               onPress={() => setPick(pick === v.id ? null : v.id)}
             >
-              <Text style={[styles.smallBtnText, pick === v.id && { color: colors.onAccent }]}>vs</Text>
+              <Text style={[styles.smallBtnText, pick === v.id && { color: colors.onAccent }]}>{t({ en: "vs", fr: "vs" })}</Text>
             </Pressable>
           </Pressable>
         );
@@ -320,13 +340,14 @@ function DiffView({
   labelFor?: (id: string) => string;
   onBack: () => void;
 }) {
+  const t = useT();
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
       <BackBar title={title} onBack={onBack} />
       <Text style={styles.hint}>
-        “{fromLabel}” → “{toLabel}” · {changes.length} difference{changes.length === 1 ? "" : "s"}
+        “{fromLabel}” → “{toLabel}” · {t({ en: `${changes.length} difference${changes.length === 1 ? "" : "s"}`, fr: `${changes.length} différence${changes.length === 1 ? "" : "s"}` })}
       </Text>
-      {changes.length === 0 && <Text style={styles.versionMeta}>Identical setups.</Text>}
+      {changes.length === 0 && <Text style={styles.versionMeta}>{t({ en: "Identical setups.", fr: "Réglages identiques." })}</Text>}
       {changes.map((c) => (
         <View key={c.field} style={styles.diffRow}>
           <Text style={styles.diffField}>{labelFor(c.field)}</Text>
@@ -341,10 +362,11 @@ function DiffView({
 }
 
 function BackBar({ title, onBack }: { title: string; onBack: () => void }) {
+  const t = useT();
   return (
     <View style={styles.backBar}>
       <Pressable onPress={onBack} hitSlop={10}>
-        <Text style={styles.backText}>‹ back</Text>
+        <Text style={styles.backText}>{t({ en: "‹ back", fr: "‹ retour" })}</Text>
       </Pressable>
       <Text style={styles.backTitle}>{title}</Text>
     </View>
@@ -376,6 +398,7 @@ const Field = React.memo(function Field({
   onChange: (id: string, value: string | number) => void;
   onStar: (id: string) => void;
 }) {
+  const t = useT();
   // don't repeat the unit when the label already carries it, e.g. "Drop front (mm)"
   const showUnit =
     field.unit !== undefined &&
@@ -386,13 +409,13 @@ const Field = React.memo(function Field({
         <Text style={styles.label}>
           {displayLabel}
           {showUnit ? <Text style={styles.unit}>  {field.unit}</Text> : null}
-          {changed ? <Text style={styles.was}>   was {fmt(was)}</Text> : null}
+          {changed ? <Text style={styles.was}>{t({ en: `   was ${fmt(was)}`, fr: `   avant ${fmt(was)}` })}</Text> : null}
         </Text>
         <Pressable
           onPress={() => onStar(id)}
           hitSlop={12}
           accessibilityRole="button"
-          accessibilityLabel={`${starred ? "Unstar" : "Star"} ${displayLabel}`}
+          accessibilityLabel={starred ? t({ en: `Unstar ${displayLabel}`, fr: `Retirer ${displayLabel} des favoris` }) : t({ en: `Star ${displayLabel}`, fr: `Ajouter ${displayLabel} aux favoris` })}
         >
           <Text style={[styles.star, starred && styles.starOn]}>{starred ? "★" : "☆"}</Text>
         </Pressable>
@@ -424,7 +447,7 @@ const Field = React.memo(function Field({
           value={value === undefined ? "" : String(value)}
           placeholder="—"
           placeholderTextColor={colors.sub}
-          onChangeText={(t) => onChange(id, t)}
+          onChangeText={(text) => onChange(id, text)}
           keyboardType={field.type === "number" || field.type === "int" || field.unit !== undefined ? "decimal-pad" : "default"}
           accessibilityLabel={displayLabel}
         />
@@ -444,6 +467,7 @@ function Stepper({
   value: string | number | undefined;
   onChange: (id: string, value: number) => void;
 }) {
+  const t = useT();
   const [min, max] = field.range!;
   const step = field.step ?? 1;
   const current = typeof value === "number" ? value : Number(value ?? min) || min;
@@ -454,7 +478,7 @@ function Stepper({
         style={styles.stepBtn}
         onPress={() => set(current - step)}
         accessibilityRole="button"
-        accessibilityLabel={`decrease ${id.replace(/_/g, " ")}`}
+        accessibilityLabel={t({ en: `decrease ${id.replace(/_/g, " ")}`, fr: `diminuer ${id.replace(/_/g, " ")}` })}
       >
         <Text style={styles.stepBtnText}>−</Text>
       </Pressable>
@@ -466,7 +490,7 @@ function Stepper({
         style={styles.stepBtn}
         onPress={() => set(current + step)}
         accessibilityRole="button"
-        accessibilityLabel={`increase ${id.replace(/_/g, " ")}`}
+        accessibilityLabel={t({ en: `increase ${id.replace(/_/g, " ")}`, fr: `augmenter ${id.replace(/_/g, " ")}` })}
       >
         <Text style={styles.stepBtnText}>＋</Text>
       </Pressable>

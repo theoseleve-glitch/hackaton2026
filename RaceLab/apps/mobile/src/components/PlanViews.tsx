@@ -4,6 +4,7 @@ import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
 import { computePitPlan, stretchOptions } from "../../../../packages/strategy/src";
 import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
 import { colors, radius } from "../theme";
+import { useT } from "../i18n";
 import { ChipRow, LabeledInput, Section, num } from "./forms";
 
 /**
@@ -75,6 +76,7 @@ interface RunPickerProps {
 
 /** Run selection (single or multi), track-first when asked, + optional race window. */
 export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, allowEmpty, onSkip, onDone }: RunPickerProps) {
+  const t = useT();
   const [trackKey, setTrackKey] = useState<string | undefined>();
   const [selected, setSelected] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
@@ -112,19 +114,27 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
-      {logbook.runs.length === 0 && <Text style={styles.empty}>Log a run first — the engineer works from your log.</Text>}
+      {logbook.runs.length === 0 && (
+        <Text style={styles.empty}>
+          {t({ en: "Log a run first — the engineer works from your log.", fr: "Enregistre d’abord une session — l’ingénieur travaille à partir de ton carnet." })}
+        </Text>
+      )}
       {trackFirst && trackChoices.length > 0 && (
-        <Section title="Track — where is the race?">
+        <Section title={t({ en: "Track — where is the race?", fr: "Piste — où se court la course ?" })}>
           <ChipRow
-            options={trackChoices.map((t) => t.key)}
+            options={trackChoices.map((tc) => tc.key)}
             value={trackKey}
             onSelect={pickTrack}
-            labelFor={(k) => trackChoices.find((t) => t.key === k)?.label ?? k}
+            labelFor={(k) => trackChoices.find((tc) => tc.key === k)?.label ?? k}
           />
         </Section>
       )}
       {trackFirst && track === undefined ? (
-        trackChoices.length > 0 && <Text style={styles.empty}>Pick the track first — only runs you logged there count.</Text>
+        trackChoices.length > 0 && (
+          <Text style={styles.empty}>
+            {t({ en: "Pick the track first — only runs you logged there count.", fr: "Choisis d’abord la piste — seules les sessions que tu y as enregistrées comptent." })}
+          </Text>
+        )
       ) : (
         visible.map((r) => {
           const on = selected.includes(r.id);
@@ -132,8 +142,8 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
           const tankLabel =
             tank !== undefined
               ? tank.time_s !== undefined
-                ? ` · ⛽ tank ${fmtTime(tank.time_s)}`
-                : " · ⛽ autonomy test"
+                ? ` · ⛽ ${t({ en: "tank", fr: "réservoir" })} ${fmtTime(tank.time_s)}`
+                : ` · ⛽ ${t({ en: "autonomy test", fr: "test d’autonomie" })}`
               : "";
           return (
             <Pressable key={r.id} style={[styles.runCard, on && { borderColor: colors.accent }]} onPress={() => toggle(r.id)}>
@@ -142,11 +152,11 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
                 {r.track.name} · {r.type} · {r.created_at.slice(5, 16).replace("T", " ")}
               </Text>
               <Text style={styles.runMeta}>
-                {r.conditions.grip.replace("_", " ")} grip
-                {r.result?.best_lap_s !== undefined ? ` · best ${r.result.best_lap_s.toFixed(2)}s` : ""}
-                {r.result?.laps_list !== undefined ? ` · ${r.result.laps_list.length} laps logged` : ""}
+                {r.conditions.grip.replace("_", " ")} {t({ en: "grip", fr: "grip" })}
+                {r.result?.best_lap_s !== undefined ? ` · ${t({ en: "best", fr: "meilleur" })} ${r.result.best_lap_s.toFixed(2)}s` : ""}
+                {r.result?.laps_list !== undefined ? ` · ${r.result.laps_list.length} ${t({ en: "laps logged", fr: "tours enregistrés" })}` : ""}
                 {tankLabel}
-                {r.feedback.tags.length > 0 ? ` · ${r.feedback.tags.map((t) => t.symptom.replace(/_/g, " ")).join(", ")}` : ""}
+                {r.feedback.tags.length > 0 ? ` · ${r.feedback.tags.map((tag) => tag.symptom.replace(/_/g, " ")).join(", ")}` : ""}
               </Text>
             </Pressable>
           );
@@ -154,18 +164,18 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
       )}
 
       {askRace && (
-        <Section title="Race window">
+        <Section title={t({ en: "Race window", fr: "Fenêtre de course" })}>
           <View style={{ flexDirection: "row", gap: 8 }}>
             <View style={{ flex: 1 }}>
-              <LabeledInput label="Race day (YYYY-MM-DD)" value={date} onChangeText={setDate} placeholder="2026-06-14" />
+              <LabeledInput label={t({ en: "Race day (YYYY-MM-DD)", fr: "Jour de course (AAAA-MM-JJ)" })} value={date} onChangeText={setDate} placeholder="2026-06-14" />
             </View>
             <View style={{ width: 96 }}>
-              <LabeledInput label="Start" value={time} onChangeText={setTime} placeholder="14:00" />
+              <LabeledInput label={t({ en: "Start", fr: "Départ" })} value={time} onChangeText={setTime} placeholder="14:00" />
             </View>
           </View>
           <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
             <View style={{ width: 96 }}>
-              <LabeledInput label="Length (min)" value={lengthMin} onChangeText={setLengthMin} keyboardType="numeric" />
+              <LabeledInput label={t({ en: "Length (min)", fr: "Durée (min)" })} value={lengthMin} onChangeText={setLengthMin} keyboardType="numeric" />
             </View>
             <View style={{ flex: 1, marginTop: 8 }}>
               <ChipRow options={["sprint", "endurance"] as const} value={type} onSelect={setType} />
@@ -175,13 +185,13 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
       )}
 
       {askNotes && (
-        <Section title="Notes for the engineer (optional)">
+        <Section title={t({ en: "Notes for the engineer (optional)", fr: "Notes pour l’ingénieur (facultatif)" })}>
           <TextInput
             style={styles.notes}
             value={notes}
             onChangeText={setNotes}
             multiline
-            placeholder='e.g. "mostly in the long sweeper, worse with the second tank"'
+            placeholder={t({ en: 'e.g. "mostly in the long sweeper, worse with the second tank"', fr: 'ex. « surtout dans la grande courbe, pire avec le deuxième réservoir »' })}
             placeholderTextColor={colors.sub}
           />
         </Section>
@@ -192,7 +202,7 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
       </Pressable>
       {onSkip && (
         <Pressable onPress={onSkip} hitSlop={8}>
-          <Text style={styles.skip}>or enter everything manually →</Text>
+          <Text style={styles.skip}>{t({ en: "or enter everything manually →", fr: "ou saisis tout manuellement →" })}</Text>
         </Pressable>
       )}
     </ScrollView>
@@ -223,6 +233,7 @@ const MARGINS = ["none", "1 lap", "2 laps", "30s"] as const;
 type MarginChoice = (typeof MARGINS)[number];
 
 export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps) {
+  const t = useT();
   const [lengthMin, setLengthMin] = useState(
     prefill.race_length_s !== undefined ? String(Math.round(prefill.race_length_s / 60)) : "30",
   );
@@ -241,7 +252,7 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
     const avg = num(avgLap) ?? 0;
     const autonomyS = parseTimeS(autonomy.text);
     if (autonomyS === undefined || autonomyS <= 0) {
-      setError("Autonomy is the one fuel number I need — time a full tank and enter it (mm:ss or seconds).");
+      setError(t({ en: "Autonomy is the one fuel number I need — time a full tank and enter it (mm:ss or seconds).", fr: "L’autonomie est le seul chiffre carburant dont j’ai besoin — chronomètre un plein et saisis-le (mm:ss ou secondes)." }));
       return;
     }
     const marginS = margin === "none" ? 0 : margin === "30s" ? 30 : margin === "1 lap" ? avg : avg * 2;
@@ -265,61 +276,61 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       {prefill.race_length_s !== undefined && (
-        <Text style={styles.prefillHint}>Prefilled from your race plan — everything stays editable.</Text>
+        <Text style={styles.prefillHint}>{t({ en: "Prefilled from your race plan — everything stays editable.", fr: "Prérempli depuis ton plan de course — tout reste modifiable." })}</Text>
       )}
-      <Section title="Race">
-        <LabeledInput label="Race length (minutes)" value={lengthMin} onChangeText={setLengthMin} keyboardType="numeric" />
+      <Section title={t({ en: "Race", fr: "Course" })}>
+        <LabeledInput label={t({ en: "Race length (minutes)", fr: "Durée de course (minutes)" })} value={lengthMin} onChangeText={setLengthMin} keyboardType="numeric" />
         <ChipRow options={["sprint", "endurance"] as const} value={type} onSelect={setType} />
       </Section>
-      <Section title="Pace">
+      <Section title={t({ en: "Pace", fr: "Rythme" })}>
         <LabeledInput
-          label="Average lap (s) — your race pace"
+          label={t({ en: "Average lap (s) — your race pace", fr: "Tour moyen (s) — ton rythme de course" })}
           value={avgLap}
           onChangeText={setAvgLap}
           keyboardType="decimal-pad"
-          placeholder="e.g. 34.5"
+          placeholder={t({ en: "e.g. 34.5", fr: "ex. 34.5" })}
         />
       </Section>
-      <Section title="Fuel — one number: how long does a full tank last?">
+      <Section title={t({ en: "Fuel — one number: how long does a full tank last?", fr: "Carburant — un seul chiffre : combien de temps dure un plein ?" })}>
         {autonomy.auto && prefill.autonomy ? (
           <Pressable style={styles.autoField} onPress={() => setAutonomy((a) => ({ ...a, auto: false }))}>
-            <Text style={styles.autoLabel}>Autonomy — full tank lasts</Text>
+            <Text style={styles.autoLabel}>{t({ en: "Autonomy — full tank lasts", fr: "Autonomie — un plein dure" })}</Text>
             <View style={styles.autoRow}>
               <Text style={styles.autoValue}>{autonomy.text}</Text>
               <Text style={styles.autoTag}>
                 {prefill.autonomy.date
-                  ? `from your autonomy test on ${prefill.autonomy.date}`
-                  : "from your autonomy test"}{" "}
-                — tap to override
+                  ? t({ en: `from your autonomy test on ${prefill.autonomy.date}`, fr: `d’après ton test d’autonomie du ${prefill.autonomy.date}` })
+                  : t({ en: "from your autonomy test", fr: "d’après ton test d’autonomie" })}{" "}
+                {t({ en: "— tap to override", fr: "— touche pour modifier" })}
               </Text>
             </View>
           </Pressable>
         ) : (
           <LabeledInput
-            label="Autonomy — time to burn a full tank (mm:ss or seconds)"
+            label={t({ en: "Autonomy — time to burn a full tank (mm:ss or seconds)", fr: "Autonomie — temps pour vider un plein (mm:ss ou secondes)" })}
             value={autonomy.text}
-            onChangeText={(t) => setAutonomy({ text: t, auto: false })}
-            placeholder="e.g. 6:30"
+            onChangeText={(text) => setAutonomy({ text, auto: false })}
+            placeholder={t({ en: "e.g. 6:30", fr: "ex. 6:30" })}
           />
         )}
       </Section>
-      <Section title="Pit">
-        <LabeledInput label="Time lost per pit stop (s)" value={pitLoss} onChangeText={setPitLoss} keyboardType="numeric" />
-        <Text style={styles.hint}>Safety margin — fuel kept in reserve</Text>
+      <Section title={t({ en: "Pit", fr: "Stand" })}>
+        <LabeledInput label={t({ en: "Time lost per pit stop (s)", fr: "Temps perdu par arrêt au stand (s)" })} value={pitLoss} onChangeText={setPitLoss} keyboardType="numeric" />
+        <Text style={styles.hint}>{t({ en: "Safety margin — fuel kept in reserve", fr: "Marge de sécurité — carburant gardé en réserve" })}</Text>
         <ChipRow options={MARGINS} value={margin} onSelect={setMargin} />
       </Section>
       {prefill.lap_times !== undefined && prefill.lap_times.length >= 8 && (
         <Text style={styles.hint}>
-          ✓ {prefill.lap_times.length} logged laps from your runs — tyre-cliff detection active (endurance).
+          {t({ en: `✓ ${prefill.lap_times.length} logged laps from your runs — tyre-cliff detection active (endurance).`, fr: `✓ ${prefill.lap_times.length} tours enregistrés depuis tes sessions — détection de la chute de grip des pneus active (endurance).` })}
         </Text>
       )}
       {error && <Text style={styles.error}>{error}</Text>}
       <View style={styles.actions}>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
-          <Text style={styles.btnGhostText}>Back</Text>
+          <Text style={styles.btnGhostText}>{t({ en: "Back", fr: "Retour" })}</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnPrimary]} onPress={compute}>
-          <Text style={styles.btnPrimaryText}>Compute strategy</Text>
+          <Text style={styles.btnPrimaryText}>{t({ en: "Compute strategy", fr: "Calculer la stratégie" })}</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -329,6 +340,7 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
 // ——— pit plan (the verdict, in time) ———
 
 export function PitPlanView({ plan, options, inputs }: { plan: PitPlan; options: PitPlan[]; inputs?: StrategyInputs }) {
+  const t = useT();
   // pit_at_s maps 1:1, in order, onto the stints flagged pit_after
   let pitIdx = 0;
   const pitLabels = plan.stints.map((s) => (s.pit_after ? plan.pit_at_s[pitIdx++] : undefined));
@@ -337,8 +349,11 @@ export function PitPlanView({ plan, options, inputs }: { plan: PitPlan; options:
       <View style={[styles.block, { borderColor: colors.accent }]}>
         <Text style={styles.verdict}>
           {plan.stops === 0
-            ? "No stops — the tank covers the race"
-            : `Box ${plan.stops} time${plan.stops === 1 ? "" : "s"} — every ~${fmtTime(plan.stint_max_s)}`}
+            ? t({ en: "No stops — the tank covers the race", fr: "Aucun arrêt — le plein couvre la course" })
+            : t({
+                en: `Box ${plan.stops} time${plan.stops === 1 ? "" : "s"} — every ~${fmtTime(plan.stint_max_s)}`,
+                fr: `Au stand ${plan.stops} fois — tous les ~${fmtTime(plan.stint_max_s)}`,
+              })}
         </Text>
 
         <View style={styles.tlBar}>
@@ -367,13 +382,15 @@ export function PitPlanView({ plan, options, inputs }: { plan: PitPlan; options:
         {plan.pit_driver === "tyre_cliff" && plan.cliff_lap !== undefined && (
           <View style={styles.cliff}>
             <Text style={styles.cliffText}>
-              ⚠️ Your tyres fall off a cliff around lap {plan.cliff_lap} — the tyres, not the fuel, decide when
-              you box. Stints are cut short to stay ahead of it.
+              {t({
+                en: `⚠️ Your tyres fall off a cliff around lap ${plan.cliff_lap} — the tyres, not the fuel, decide when you box. Stints are cut short to stay ahead of it.`,
+                fr: `⚠️ Tes pneus chutent brutalement vers le tour ${plan.cliff_lap} — ce sont les pneus, pas le carburant, qui décident quand tu passes au stand. Les relais sont raccourcis pour garder de l’avance.`,
+              })}
             </Text>
           </View>
         )}
 
-        <Text style={styles.notesTitle}>Why this plan</Text>
+        <Text style={styles.notesTitle}>{t({ en: "Why this plan", fr: "Pourquoi ce plan" })}</Text>
         {plan.notes.map((l, i) => (
           <View key={i} style={styles.noteRow}>
             <Text style={styles.noteIcon}>▸</Text>
@@ -382,16 +399,20 @@ export function PitPlanView({ plan, options, inputs }: { plan: PitPlan; options:
         ))}
       </View>
 
-      {options.length > 0 && <Text style={styles.optionsHeader}>If you want fewer stops</Text>}
+      {options.length > 0 && <Text style={styles.optionsHeader}>{t({ en: "If you want fewer stops", fr: "Si tu veux moins d’arrêts" })}</Text>}
       {options.map((o, i) => {
         const fewer = plan.stops - o.stops;
         const marginLeft = inputs !== undefined ? Math.max(0, inputs.autonomy_s - o.stint_max_s) : undefined;
         return (
           <View key={i} style={styles.optionCard}>
             <Text style={styles.optionTitle}>
-              {fewer === 1 ? "1 less stop" : fewer > 1 ? `${fewer} fewer stops` : "Alternative"} — stint{" "}
-              {fmtTime(o.stint_max_s)}
-              {marginLeft !== undefined ? `, ${fmtTime(marginLeft)} fuel margin left` : ""}
+              {fewer === 1
+                ? t({ en: "1 less stop", fr: "1 arrêt de moins" })
+                : fewer > 1
+                  ? t({ en: `${fewer} fewer stops`, fr: `${fewer} arrêts de moins` })
+                  : t({ en: "Alternative", fr: "Alternative" })}{" "}
+              — {t({ en: "stint", fr: "relais" })} {fmtTime(o.stint_max_s)}
+              {marginLeft !== undefined ? t({ en: `, ${fmtTime(marginLeft)} fuel margin left`, fr: `, ${fmtTime(marginLeft)} de marge carburant restante` }) : ""}
             </Text>
             {o.notes.map((l, j) => (
               <Text key={j} style={styles.optionNote}>

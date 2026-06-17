@@ -4,6 +4,7 @@ import type { CarEntity, PowerType } from "../../../../packages/garage/src";
 import { KB } from "../kb";
 import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
 import { colors } from "../theme";
+import { useT } from "../i18n";
 import { AutofillInput } from "./AutofillInput";
 import { ChipRow, FormActions, KeyboardAwareForm, LabeledInput, Section, num } from "./forms";
 
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
+  const t = useT();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [name, setName] = useState(initial?.name ?? "");
   const [brand, setBrand] = useState(initial?.brand ?? "");
@@ -52,7 +54,7 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   const save = () => {
     if (!brand.trim() && !model.trim() && !name.trim()) return;
     onSave({
-      name: name.trim() || `${brand.trim()} ${model.trim()}`.trim() || "My car",
+      name: name.trim() || `${brand.trim()} ${model.trim()}`.trim() || t({ en: "My car", fr: "Ma voiture" }),
       template_id: initial?.template_id ?? templateFor(),
       brand: brand.trim() || "—",
       model: model.trim() || "—",
@@ -75,53 +77,53 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   return (
     <View style={styles.root}>
       <KeyboardAwareForm contentStyle={{ padding: 14, paddingBottom: 30 }}>
-      <Text style={styles.title}>{initial ? "Edit car" : "New car"}</Text>
+      <Text style={styles.title}>{initial ? t({ en: "Edit car", fr: "Modifier la voiture" }) : t({ en: "New car", fr: "Nouvelle voiture" })}</Text>
 
-      <Section title="Identity">
-        <LabeledInput label="Car name" value={name} onChangeText={setName} placeholder='e.g. "race MP11"' />
-        <AutofillInput label="Brand" value={brand} onChangeText={setBrand} pool={CAR_BRANDS} placeholder="Kyosho, Tekno, Associated…" />
-        <AutofillInput label="Model" value={model} onChangeText={setModel} pool={() => modelsForBrand(brand)} placeholder="Inferno MP11, NB48 2.2…" />
+      <Section title={t({ en: "Identity", fr: "Identité" })}>
+        <LabeledInput label={t({ en: "Car name", fr: "Nom de la voiture" })} value={name} onChangeText={setName} placeholder={t({ en: 'e.g. "race MP11"', fr: 'ex. « MP11 course »' })} />
+        <AutofillInput label={t({ en: "Brand", fr: "Marque" })} value={brand} onChangeText={setBrand} pool={CAR_BRANDS} placeholder="Kyosho, Tekno, Associated…" />
+        <AutofillInput label={t({ en: "Model", fr: "Modèle" })} value={model} onChangeText={setModel} pool={() => modelsForBrand(brand)} placeholder="Inferno MP11, NB48 2.2…" />
       </Section>
 
-      <Section title="Typology — drives the sheet labels">
-        <Text style={styles.hint}>Category</Text>
+      <Section title={t({ en: "Typology — drives the sheet labels", fr: "Typologie — définit les libellés de la fiche" })}>
+        <Text style={styles.hint}>{t({ en: "Category", fr: "Catégorie" })}</Text>
         <ChipRow options={CATEGORIES} value={category as (typeof CATEGORIES)[number]} onSelect={setCategory} />
-        <Text style={styles.hint}>Scale</Text>
+        <Text style={styles.hint}>{t({ en: "Scale", fr: "Échelle" })}</Text>
         <ChipRow options={SCALES} value={scale as (typeof SCALES)[number]} onSelect={setScale} />
-        <Text style={styles.hint}>Drivetrain</Text>
+        <Text style={styles.hint}>{t({ en: "Drivetrain", fr: "Transmission" })}</Text>
         <ChipRow options={DRIVETRAINS} value={drivetrain} onSelect={(d) => setDrivetrain(drivetrain === d ? undefined : d)} />
-        <Text style={styles.hint}>Power</Text>
+        <Text style={styles.hint}>{t({ en: "Power", fr: "Motorisation" })}</Text>
         <ChipRow options={POWERS} value={power} onSelect={setPower} />
       </Section>
 
       {power === "nitro" ? (
-        <Section title="Engine">
-          <AutofillInput label="Engine" value={engine} onChangeText={setEngine} pool={ENGINES} placeholder="e.g. OS Speed B21" />
-          <LabeledInput label="Fuel tank (cL) — feeds race strategy" value={tank} onChangeText={setTank} keyboardType="decimal-pad" placeholder="e.g. 12.5" />
+        <Section title={t({ en: "Engine", fr: "Moteur" })}>
+          <AutofillInput label={t({ en: "Engine", fr: "Moteur" })} value={engine} onChangeText={setEngine} pool={ENGINES} placeholder={t({ en: "e.g. OS Speed B21", fr: "ex. OS Speed B21" })} />
+          <LabeledInput label={t({ en: "Fuel tank (cL) — feeds race strategy", fr: "Réservoir (cL) — alimente la stratégie de course" })} value={tank} onChangeText={setTank} keyboardType="decimal-pad" placeholder={t({ en: "e.g. 12.5", fr: "ex. 12.5" })} />
         </Section>
       ) : (
-        <Section title="Electronics">
-          <AutofillInput label="Motor" value={motor} onChangeText={setMotor} pool={ELECTRIC} placeholder="e.g. Hobbywing 2050kV" />
-          <AutofillInput label="ESC" value={esc} onChangeText={setEsc} pool={ELECTRIC} placeholder="" />
-          <LabeledInput label="Battery" value={battery} onChangeText={setBattery} placeholder="e.g. 4S 6500" />
+        <Section title={t({ en: "Electronics", fr: "Électronique" })}>
+          <AutofillInput label={t({ en: "Motor", fr: "Moteur" })} value={motor} onChangeText={setMotor} pool={ELECTRIC} placeholder={t({ en: "e.g. Hobbywing 2050kV", fr: "ex. Hobbywing 2050kV" })} />
+          <AutofillInput label={t({ en: "ESC", fr: "ESC" })} value={esc} onChangeText={setEsc} pool={ELECTRIC} placeholder="" />
+          <LabeledInput label={t({ en: "Battery", fr: "Batterie" })} value={battery} onChangeText={setBattery} placeholder={t({ en: "e.g. 4S 6500", fr: "ex. 4S 6500" })} />
         </Section>
       )}
 
-      <Section title="Timing">
-        <LabeledInput label="Transponder # (Speedhive)" value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder="link once — laps import on app open" />
+      <Section title={t({ en: "Timing", fr: "Chronométrage" })}>
+        <LabeledInput label={t({ en: "Transponder # (Speedhive)", fr: "N° de transpondeur (Speedhive)" })} value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder={t({ en: "link once — laps import on app open", fr: "à lier une fois — les tours s'importent à l'ouverture de l'app" })} />
       </Section>
 
-      <FormActions onCancel={onCancel} onSave={save} saveLabel={initial ? "Save" : "Add to garage"} />
+      <FormActions onCancel={onCancel} onSave={save} saveLabel={initial ? t({ en: "Save", fr: "Enregistrer" }) : t({ en: "Add to garage", fr: "Ajouter au garage" })} />
 
       {initial && onDelete && (
         <Pressable
           style={styles.deleteBtn}
           onPress={() => (confirmDelete ? onDelete() : setConfirmDelete(true))}
           accessibilityRole="button"
-          accessibilityLabel={confirmDelete ? "Confirm delete car" : "Delete car"}
+          accessibilityLabel={confirmDelete ? t({ en: "Confirm delete car", fr: "Confirmer la suppression de la voiture" }) : t({ en: "Delete car", fr: "Supprimer la voiture" })}
         >
           <Text style={styles.deleteText}>
-            {confirmDelete ? "Tap again to delete this car" : "Delete car"}
+            {confirmDelete ? t({ en: "Tap again to delete this car", fr: "Touche à nouveau pour supprimer cette voiture" }) : t({ en: "Delete car", fr: "Supprimer la voiture" })}
           </Text>
         </Pressable>
       )}
