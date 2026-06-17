@@ -12,4 +12,18 @@ config.resolver.nodeModulesPaths = [
   path.join(workspaceRoot, "node_modules"),
 ];
 
+// Path alias: @racelab/<pkg> → ../../packages/<pkg>/src
+const _defaultResolveRequest = config.resolver.resolveRequest;
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (moduleName.startsWith("@racelab/")) {
+    const pkgName = moduleName.slice("@racelab/".length);
+    const resolved = path.join(workspaceRoot, "packages", pkgName, "src");
+    return { filePath: resolved + "/index.ts", type: "sourceFile" };
+  }
+  if (_defaultResolveRequest) {
+    return _defaultResolveRequest(context, moduleName, platform);
+  }
+  return context.resolveRequest(context, moduleName, platform);
+};
+
 module.exports = config;
