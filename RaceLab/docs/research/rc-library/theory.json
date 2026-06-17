@@ -1,0 +1,311 @@
+[
+  {
+    "title": "The Science of Setup (Bob Wright) — full 9-episode series index",
+    "source": "PetitRC (Bob Wright / RC Crew Chief)",
+    "url": "https://site.petitrc.com/Tech/Handbooks/BobWright_ScienceOfSetup/",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "setup physics & terminology",
+      "suspension properties",
+      "weight transfer balance",
+      "overall suspension stiffness",
+      "camber & camber gain",
+      "roll center & camber gain relationship",
+      "steering Ackermann",
+      "shocks (two parts)",
+      "roll moment / roll stiffness"
+    ],
+    "depth": "deep",
+    "rc_specific": true,
+    "notes": "The single best RC-specific mechanism-explaining curriculum found. Nine sequential episodes that build from physics first principles (roll moment, weight transfer, roll stiffness) to specific adjustments, illustrated with RC Crew Chief (RC3) software graphics. This is the backbone reference for the 'why X causes Y' layer. Index page live; individual episodes also mirrored on LiveRC, thercracer.com and sodialed.com."
+  },
+  {
+    "title": "Geometric & Elastic Weight Transfer and the Roll Centre",
+    "source": "Wavey Dynamics (Jahee Campbell-Brennan)",
+    "url": "https://www.waveydynamics.com/post/weight-transfer-rc",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "total lateral transfer fixed by CoM height, track width, lateral accel",
+      "geometric weight transfer via roll-center moment arm (zero deflection)",
+      "elastic weight transfer via CoM-to-roll-center separation",
+      "tire load sensitivity (mu falls as load rises)",
+      "three roll-center-height scenarios and jacking forces",
+      "roll-center vs roll-stiffness as the two control levers"
+    ],
+    "depth": "engineering",
+    "rc_specific": false,
+    "notes": "Best mechanism explainer for WHY roll center matters. Cleanly separates the two components of lateral transfer (geometric = instant via links, elastic = via spring/ARB deflection) and ties them to tire load sensitivity — the core reason equal tire loading = more total grip. Principles transfer directly to RC. Page verified live (2021)."
+  },
+  {
+    "title": "Weight Transfer: how it works and how to use it in setup",
+    "source": "Racing Car Dynamics (Rodrigo Santos)",
+    "url": "https://racingcardynamics.com/weight-transfer/",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "lateral transfer equation dW = (W*Ay*h)/t",
+      "three transfer components: unsprung, kinematic/roll-center, elastic/roll-angle",
+      "roll-stiffness ratio (front:total) sets each axle's elastic share",
+      "front/rear balance tuning via ARB and springs",
+      "oversteer/understeer correction logic"
+    ],
+    "depth": "engineering",
+    "rc_specific": false,
+    "notes": "Rigorous derivation with the governing equation and the decomposition into unsprung/kinematic/elastic components. Directly supplies the rule the engine needs: stiffening one end's roll resistance pulls MORE load transfer onto that end and REDUCES its relative grip. Verified live."
+  },
+  {
+    "title": "CompetitionX RC Suspension Tuning Guide (modular, ~60 parameters)",
+    "source": "CompetitionX",
+    "url": "https://www.competitionx.com/rc-tuning-guide/",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "per-parameter handling effects: camber, caster, toe, Ackermann",
+      "anti-squat, anti-dive, kick-up, roll center, camber gain, bump steer",
+      "shock oil, pistons, springs, rebound, limiters, droop, preload",
+      "diff height, diff fluid, slipper, gear ratio",
+      "track width, wheelbase, ride height, wedge, battery/weight position"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "The most COMPLETE RC-specific parameter map. Index is a directory; each linked sub-page states the handling effect (more/less of X -> Y) for one parameter at a time. Ideal as the KB's RC-specific cross-check that every tunable has a documented direction-of-effect. Covers nearly every field in rc-setup-fields.json. Verified live (dated 2026)."
+  },
+  {
+    "title": "Tire load sensitivity",
+    "source": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Tire_load_sensitivity",
+    "domain": "tyres & grip",
+    "key_concepts": [
+      "coefficient of friction decreases as vertical load increases",
+      "max force proportional to load^0.7-0.9 (not linear)",
+      "diminishing grip per unit load on the heavily-loaded outside tire",
+      "this is WHY minimizing weight transfer raises total axle grip",
+      "slip angle at peak force rises with load"
+    ],
+    "depth": "engineering",
+    "rc_specific": false,
+    "notes": "The foundational physics that justifies most weight-transfer-reduction setup logic. Without this the engine can't explain why softer springs / lower CG / less transfer = more grip. Short, citable, authoritative. Verified live (updated 2025)."
+  },
+  {
+    "title": "Pneumatic trail",
+    "source": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Pneumatic_trail",
+    "domain": "tyres & grip",
+    "key_concepts": [
+      "contact-patch force acts behind geometric center",
+      "self-aligning torque generation",
+      "trail maximal near zero slip, decreases as slip angle rises",
+      "trail increases with vertical load",
+      "limit-detection: trail collapses before peak grip"
+    ],
+    "depth": "engineering",
+    "rc_specific": false,
+    "notes": "Explains self-aligning torque and the steering-feel/limit mechanism. Less directly actionable for RC than load sensitivity but underpins caster/trail and on-limit understeer feel. Verified live."
+  },
+  {
+    "title": "The Science of Setup Ep 6 — Roll Center and Camber Gain relationship",
+    "source": "The RC Racer (Bob Wright series mirror)",
+    "url": "https://www.thercracer.com/2017/02/the-science-of-setup-part-6-roll-centre.html",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "roll center as point body rotates about under lateral force",
+      "roll-center-to-CG distance drives roll tendency",
+      "lowering RC reduces camber gain (link geometry coupling)",
+      "lower-arm angle = biggest RC lever; upper-link angle = camber gain",
+      "RC location moves continuously with suspension travel"
+    ],
+    "depth": "deep",
+    "rc_specific": true,
+    "notes": "RC-specific deep dive on the coupling between roll center height and camber gain — a subtlety the engine should encode (you can't move one without the other). Companion to the Wavey Dynamics geometric/elastic split. Verified live."
+  },
+  {
+    "title": "So Dialed — Roll Center setup & tuning guide",
+    "source": "So Dialed (RC settings reference)",
+    "url": "https://www.sodialed.com/rc-settings/roll-center",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "lower RC = chassis rolls easier = more weight to outside = more grip (low-bite tracks)",
+      "higher RC = resists roll = more stable (high-grip smooth tracks)",
+      "upper-link-to-lower-arm angle as primary RC adjuster",
+      "lower-arm height as secondary RC adjuster",
+      "front vs rear RC for steering/rear balance"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Direct RC-track-condition mapping of roll center to grip outcome. Pairs the engineering theory with the practical 'low-grip -> lower RC' direction the advisor must output. Part of So Dialed's per-setting reference series (caster, camber, toe, bump steer, Ackermann, droop each have a sibling page). Verified live."
+  },
+  {
+    "title": "RC shock building & damping theory — bladder vs emulsion, pack, rebound",
+    "source": "State of Speed / RC Talk / EuroRC (consolidated damping theory)",
+    "url": "https://stateofspeed.com/2018/12/01/shocking-results-the-shock-absorber-theory/",
+    "domain": "shocks & damping",
+    "key_concepts": [
+      "oil flows through piston holes -> velocity-dependent resisting force",
+      "oil viscosity x hole size/count = damping rate",
+      "pack: high-speed events feel stiffer with small holes (velocity squared)",
+      "rebound = extension damping; affects how fast car returns to ride height",
+      "bladder/vented build vs emulsion build (volume compensation)"
+    ],
+    "depth": "intermediate",
+    "rc_specific": false,
+    "notes": "Damping first principles (force proportional to piston velocity). For RC-specific build detail (bladder vs emulsion mechanics, pack), see EuroRC shock-oil guide https://www.eurorc.com/page/107/info-basic-shock-oil-setup and the Tekno suspension-adjustments PDF. NOTE: the State of Speed link is general-automotive damping theory; RC build specifics live on the EuroRC/Tekno pages."
+  },
+  {
+    "title": "RC Shock Oil Guide — viscosity, pistons, pack & rebound baselines",
+    "source": "EuroRC",
+    "url": "https://www.eurorc.com/page/107/info-basic-shock-oil-setup",
+    "domain": "shocks & damping",
+    "key_concepts": [
+      "silicone oil weight (cSt/Wt) controls compression & rebound speed",
+      "thicker oil = stability/precision, thinner = mechanical grip/response",
+      "piston hole count/diameter trade with oil weight",
+      "pack pronounced with small holes at high piston speed",
+      "class baseline oil charts"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "RC-specific bridge between damping theory and actual oil/piston choices, with baseline charts by class. Good for grounding the advisor's shock-oil recommendations. Verified live."
+  },
+  {
+    "title": "RC Differential Oil Tuning — diff action and corner behavior",
+    "source": "EuroRC / RCGuided (consolidated diff theory)",
+    "url": "https://www.eurorc.com/page/149/rc-diff-oil-guide-choose-the-right-weight-for-better-performance",
+    "domain": "differentials & drivetrain",
+    "key_concepts": [
+      "diff oil viscosity (cSt/Wt) sets how freely wheels turn at different speeds",
+      "thin oil = free diff = easy turn-in; thick = locking = stability/on-power drive",
+      "front diff -> corner entry/steering; center -> accel/power split; rear -> corner exit/traction",
+      "thicker = more on-power steering & braking stability but pushes on entry",
+      "thinner = more off-power (entry) steering"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Clear cause-effect map for gear-diff oil across front/center/rear and on-power vs off-power corner phases — exactly the mechanism the engine needs to reason about diff changes. Companion RCGuided simplified version: https://rcguided.com/rc-diff-oil-tuning-simplified/. Verified live."
+  },
+  {
+    "title": "RC Tyre Compounds & Foam Inserts — grip mechanism",
+    "source": "Hearns Hobbies (compound + insert physics)",
+    "url": "https://www.hearnshobbies.com/blogs/radio-control/rc-tyre-compounds-a-guide-to-grip-speed-control",
+    "domain": "tyres & grip",
+    "key_concepts": [
+      "softer compound molds into surface micro-imperfections = more grip",
+      "compound matched to surface AND temperature (overheat -> greasy -> traction roll)",
+      "tread pattern self-cleans / defines loose-vs-hard-surface grip",
+      "foam insert controls tire deformation into a predictable contact patch",
+      "contact patch + pressure spread the load"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "RC-specific tyre grip mechanism (compound deformation + insert-controlled contact patch + temperature window). Pairs with the Wikipedia load-sensitivity article for the underlying physics. Companion insert deep-dive: https://www.hearnshobbies.com/blogs/radio-control/rc-off-road-foam-inserts-the-hidden-performance-game-changer. Verified live."
+  },
+  {
+    "title": "So Dialed — Caster setup & tuning guide",
+    "source": "So Dialed",
+    "url": "https://www.sodialed.com/rc-settings/caster",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "caster = kingpin angle from vertical viewed from the side",
+      "total caster = chassis kick-up + hub-carrier caster",
+      "more caster = straight-line & high-speed stability, less initial turn-in",
+      "camber-on-steer coupling from caster",
+      "adjusted via bulkhead / upper mounts / hub carrier"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "RC-specific caster mechanism including the kick-up + hub additive relationship that the engine must model. Sibling pages exist for bump steer, Ackermann, droop. Verified live."
+  },
+  {
+    "title": "So Dialed — Bump Steer setup & tuning guide",
+    "source": "So Dialed",
+    "url": "https://www.sodialed.com/rc-settings/bump-steer",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "bump steer = toe change as suspension compresses/rebounds",
+      "tie-rod arc mismatch vs suspension arc is the cause",
+      "unpredictable mid-corner steering when present",
+      "tuned via inner/outer tie-rod height (shims)",
+      "interacts with Ackermann, toe, caster, roll center"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Explains the geometric CAUSE of bump steer (tie-rod arc not matching the suspension arc) rather than just the symptom — the mechanism the engine needs. Verified live."
+  },
+  {
+    "title": "So Dialed — Droop & Downstop setup & tuning guide",
+    "source": "So Dialed",
+    "url": "https://www.sodialed.com/rc-settings/droop",
+    "domain": "shocks & damping",
+    "key_concepts": [
+      "droop = chassis travel from static to fully extended; downstop = arm down-travel limit",
+      "front-to-rear weight transfer control under brake/accel",
+      "more rear droop -> more weight forward off-throttle -> more steering",
+      "less front droop -> better high-speed steering on power",
+      "too much droop = braking instability; too little = stiff, low mechanical grip"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Distinguishes droop from downstop (commonly confused) and explains the longitudinal weight-transfer mechanism each controls. Directly actionable for the advisor's off-throttle understeer / braking-stability reasoning. Verified live."
+  },
+  {
+    "title": "CompetitionX — Anti-Squat suspension tuning",
+    "source": "CompetitionX",
+    "url": "https://www.competitionx.com/rc-tuning-guide/rc-suspension-tuning-guide-anti-squat/",
+    "domain": "suspension geometry & weight transfer",
+    "key_concepts": [
+      "anti-squat = rear inner hinge-pin angle (front mount higher)",
+      "resists rear suspension squat under acceleration",
+      "more anti-squat -> more forward traction, less side traction, less on-power steering",
+      "less anti-squat -> more on-power steering and side grip",
+      "off-road launch/jump behavior coupling"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Single-parameter mechanism page (geometry -> acceleration behavior). Representative of the CompetitionX per-parameter set; useful as the anti-squat ground truth. Verified live."
+  },
+  {
+    "title": "Anti-roll bars — how they tune handling balance",
+    "source": "Wikipedia / Suspension Secrets (roll-stiffness distribution)",
+    "url": "https://en.wikipedia.org/wiki/Anti-roll_bar",
+    "domain": "springs & roll stiffness",
+    "key_concepts": [
+      "ARB adds roll stiffness without raising vertical/ride spring rate",
+      "front:rear roll-stiffness ratio sets understeer/oversteer balance",
+      "stiffer front ARB -> more front load transfer -> more front slip -> understeer",
+      "decouples body roll control from ride compliance",
+      "complements but does not replace springs"
+    ],
+    "depth": "deep",
+    "rc_specific": false,
+    "notes": "The roll-stiffness-distribution mechanism: shifting the front/rear roll-stiffness ratio shifts grip balance because the stiffer end eats more of its share of load transfer (and loses relative grip via load sensitivity). Core to the engine's balance logic. Deeper engineering version: https://suspensionsecrets.co.uk/anti-roll-bars-2/. Verified live."
+  },
+  {
+    "title": "RC aerodynamics — wing downforce, body shell, chassis flex",
+    "source": "So Dialed (Max Mort, off-road aero) + Fastest RC blog (high-speed aero)",
+    "url": "https://www.sodialed.com/rc-setup-tips/aerodynamics-for-off-road-rc-cars-with-max-mort",
+    "domain": "aero & chassis flex",
+    "key_concepts": [
+      "downforce scales with speed squared (so does drag)",
+      "wing angle of attack trades grip vs straight-line speed",
+      "high-grip track -> flatter wing (less drag); low-grip -> steeper wing",
+      "body shell shape and ground-effect sealing",
+      "chassis flex: allow side-to-side twist, limit front-to-back flex (center brace)"
+    ],
+    "depth": "intermediate",
+    "rc_specific": true,
+    "notes": "Weakest-covered domain. This So Dialed/Max Mort piece is the most credible RC-specific aero source; general high-speed RC aero theory at http://fastestrc.blogspot.com/2007/08/aerodynamics-for-high-speed-rc-cars.html. Chassis-flex tuning principle (twist-yes, longitudinal-no) from RCGuided https://rcguided.com/chassis-tricks-for-more-grip/. See knowledge-gap note in summary."
+  },
+  {
+    "title": "Tire grip — slip angle, friction circle, cornering force",
+    "source": "ScienceDirect (Cornering Force overview) / Wikipedia",
+    "url": "https://www.sciencedirect.com/topics/engineering/cornering-force",
+    "domain": "tyres & grip",
+    "key_concepts": [
+      "lateral force builds with slip angle to a peak (6-10 deg road, ~3 deg race)",
+      "friction circle: combined lateral+longitudinal force capped by mu*Fz",
+      "slip-angle peak rises with vertical load",
+      "trade-off between braking/accel and cornering grip at the limit",
+      "links slip-angle physics to load sensitivity"
+    ],
+    "depth": "engineering",
+    "rc_specific": false,
+    "notes": "Engineering reference for slip-angle/friction-circle — the physics behind why you cannot brake and corner at 100% simultaneously, and why each axle has a peak slip angle. Transfers fully to RC. Verified live."
+  }
+]
