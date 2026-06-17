@@ -173,14 +173,35 @@ function isFiniteNumber(v: unknown): v is number {
   return typeof v === "number" && Number.isFinite(v);
 }
 
+/** Default per-request ceiling so a hung MYLAPS host (the practice-api is
+ *  unofficial + demonstrably flaky) can't block the caller indefinitely — it
+ *  bounds to network_error, the same NORMAL-trackside outcome as offline. */
+export const DEFAULT_SPEEDHIVE_TIMEOUT_MS = 10_000;
+
+/** Race a promise against a clearable timer (timer cleared in finally so a fast
+ *  response never leaves a dangling timeout). A late GET is harmlessly discarded. */
+async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`request timed out after ${ms}ms`)), ms);
+  });
+  try {
+    return await Promise.race([p, timeout]);
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
 /** Factory (call without `new`). All I/O injected; the returned object holds
  *  no state beyond its constructor arguments. */
 export function HttpSpeedhiveClient(
   fetchFn: FetchLike,
   tokenStore: TokenStore,
   baseUrls?: Partial<SpeedhiveBaseUrls>,
+  opts?: { timeoutMs?: number },
 ): SpeedhiveApi {
   const bases: SpeedhiveBaseUrls = { ...DEFAULT_BASE_URLS, ...(baseUrls ?? {}) };
+  const timeoutMs = opts?.timeoutMs ?? DEFAULT_SPEEDHIVE_TIMEOUT_MS;
   const seg = (v: number | string): string => encodeURIComponent(String(v));
 
   /** One GET. `authed` scopes the bearer: ONLY practice-api requests carry
@@ -196,7 +217,7 @@ export function HttpSpeedhiveClient(
 
     let res: HttpResponseLike;
     try {
-      res = await fetchFn(url, { method: "GET", headers });
+      res = await withTimeout(fetchFn(url, { method: "GET", headers }), timeoutMs);
     } catch (e) {
       return { ok: false, reason: "network_error", detail: String(e) };
     }

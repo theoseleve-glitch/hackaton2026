@@ -184,6 +184,10 @@ console.log("\n— client: fetch wrappers —");
   check("unparseable json → bad_payload", !gj.ok && gj.reason === "bad_payload");
   const shape = await fetchOpenMeteo((async () => ({ ok: true, status: 200, json: async () => ({ nope: 1 }) })) as FetchLike, "http://x");
   check("wrong shape → bad_payload", !shape.ok && shape.reason === "bad_payload");
+  // P2: a hung upstream must bound to network_error, not block the caller forever.
+  const hangingFetch: FetchLike = () => new Promise(() => {});
+  const to = await fetchOpenMeteo(hangingFetch, "http://x", 20);
+  check("hung upstream → network_error within the timeout (no indefinite block)", !to.ok && to.reason === "network_error" && to.detail.includes("timed out"));
   const { fn: afn } = countingFetch(archiveFixtureJson);
   const aok = await fetchArchive(afn, GPS, { start_date: "2026-06-01", end_date: "2026-06-01" });
   check("fetchArchive happy path", aok.ok && aok.data.hourly.time.length === 24);

@@ -198,10 +198,34 @@ export type FetchFailure =
 export type FetchWeatherResult = { ok: true; data: OpenMeteoResponse } | ({ ok: false } & FetchFailure);
 
 /** Shared GET → validate pipeline for both endpoints. */
-export async function fetchOpenMeteo(fetchFn: FetchLike, url: string): Promise<FetchWeatherResult> {
+/** Default per-request ceiling. A hung upstream (Open-Meteo stall, captive-portal
+ *  black hole) must not block the caller indefinitely — it bounds to network_error,
+ *  which the result type already documents as the NORMAL-trackside outcome. */
+export const DEFAULT_WEATHER_TIMEOUT_MS = 10_000;
+
+/** Race a promise against a clearable timer. Clears the timer in finally so a
+ *  fast success never leaves a dangling timeout keeping the runtime alive. The
+ *  underlying GET may still settle late and is harmlessly discarded (idempotent). */
+async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`request timed out after ${ms}ms`)), ms);
+  });
+  try {
+    return await Promise.race([p, timeout]);
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
+export async function fetchOpenMeteo(
+  fetchFn: FetchLike,
+  url: string,
+  timeoutMs: number = DEFAULT_WEATHER_TIMEOUT_MS,
+): Promise<FetchWeatherResult> {
   let res: FetchResponseLike;
   try {
-    res = await fetchFn(url);
+    res = await withTimeout(fetchFn(url), timeoutMs);
   } catch (e) {
     return { ok: false, reason: "network_error", detail: e instanceof Error ? e.message : String(e) };
   }

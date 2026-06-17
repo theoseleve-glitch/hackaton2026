@@ -891,6 +891,15 @@ console.log("— end-to-end —");
   }
 }
 
+console.log("— request timeout —");
+{
+  // P2: a hung MYLAPS host must bound to network_error, not block the caller forever.
+  const hangingFetch: FetchLike = () => new Promise(() => {});
+  const api = HttpSpeedhiveClient(hangingFetch, memTokens("tok-to"), undefined, { timeoutMs: 20 });
+  const r = await api.getEvent(1);
+  check("hung upstream → network_error within the timeout (no indefinite block)", !r.ok && r.reason === "network_error");
+}
+
 // ── verdict ──────────────────────────────────────────────────────────────────
 
 if (failures > 0) {
