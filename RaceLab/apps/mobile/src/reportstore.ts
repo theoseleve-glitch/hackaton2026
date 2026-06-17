@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import type { EngineerReport } from "../../../packages/engine/src";
-import type { RacePlan } from "../../../packages/engine/src/planner";
+import type { EngineerReport, RacePlan } from "../../../packages/engine/src";
 import type { PitPlan } from "../../../packages/strategy/src";
 
 /**

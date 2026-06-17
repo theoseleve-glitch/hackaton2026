@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import type { RacePlan } from "../../../../packages/engine/src/planner";
+import type { RacePlan } from "../../../../packages/engine/src";
 import { useT } from "../i18n";
 import { colors, radius } from "../theme";
 import { confidenceColor, Fold, RunReportCard, Tile } from "./RunReportCard";

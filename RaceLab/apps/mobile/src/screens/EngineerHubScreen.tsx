@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import type Svg from "react-native-svg";
-import { buildReport } from "../../../../packages/engine/src";
-import { buildRacePlan } from "../../../../packages/engine/src/planner";
-import type { SelectedRunSummary } from "../../../../packages/engine/src/planner";
+import { buildReport, buildRacePlan } from "../../../../packages/engine/src";
+import type { SelectedRunSummary } from "../../../../packages/engine/src";
 import type { GarageState } from "../../../../packages/garage/src";
 import { bestAutonomy, bundleFromRun } from "../../../../packages/logbook/src";
 import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
