@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- RaceLab primary mark — "R" plate badge. Source of truth (see docs/superpowers/specs/2026-06-17-racelab-brand-identity-design.md).
+     Letter is Chakra Petch Bold; production PNGs are rasterized from this geometry with the embedded font.
+     Carbon #0B0C0E · Steel #5B626C · Ink #ECEFF2 · Race Red #E10600 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <style>@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&amp;display=swap");</style>
+  <rect x="96" y="96" width="832" height="832" rx="180" fill="#0B0C0E" stroke="#5B626C" stroke-width="12"/>
+  <rect x="116" y="116" width="792" height="792" rx="160" fill="none" stroke="#23272e" stroke-width="4"/>
+  <text x="512" y="722" font-family="Chakra Petch, sans-serif" font-weight="700" font-size="600" text-anchor="middle" fill="#ECEFF2">R</text>
+  <rect x="738" y="176" width="110" height="110" rx="26" fill="#E10600"/>
+</svg>

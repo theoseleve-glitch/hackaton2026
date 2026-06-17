@@ -1,21 +1,23 @@
-/** Dark pit-lane palette (DEV_PLAN design direction). */
+/** RaceLab premium-motorsport palette (brand v1 — flat, no chrome). See docs/superpowers/specs/2026-06-17-racelab-brand-identity-design.md */
 export const colors = {
-  bg: "#0E0F12",
-  card: "#1A1C21",
-  cardAlt: "#22252C",
-  border: "#2E323B",
-  text: "#ECEDEE",
-  sub: "#9BA1A6",
-  accent: "#FF5A26",
-  accentSoft: "#3A2218",
+  bg: "#0B0C0E",
+  card: "#16181C",
+  cardAlt: "#20242B",
+  border: "#2A2E35",
+  text: "#ECEFF2",
+  sub: "#8A9099",
+  accent: "#E10600",
+  accentSoft: "#2A0B0A",
   good: "#3DDC84",
   warn: "#FFB02E",
+  /** brand steel — logo plate outline, machined hairlines, prominent dividers */
+  steel: "#5B626C",
   /** label color that sits on top of an accent/coloured fill */
   onAccent: "#FFFFFF",
   /** medal / best-lap / "official" highlight */
   gold: "#FFD700",
   /** one consistent modal dim — use everywhere a sheet/overlay darkens the app */
-  scrim: "rgba(14,15,18,0.85)",
+  scrim: "rgba(11,12,14,0.85)",
   /** literal-contrast pair (QR codes, share-card text on light) */
   white: "#FFFFFF",
   black: "#000000",
