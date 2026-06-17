@@ -1,4 +1,5 @@
 import { type KBData, resolveTemplate } from "./data";
+import { templateExposes } from "./retrieval";
 import { raceDayFilter } from "./guard";
 import { humanize } from "./offline";
 import type { Confidence, KBRule } from "./types";
@@ -181,6 +182,7 @@ export function planRaceDay(
       .filter(
         (r) =>
           r.scope.some((s) => template.scope.includes(s)) &&
+          templateExposes(template, r.setting) &&
           r.conditions.amplified_on.includes(tag) &&
           raceDayFilter(r).allowed &&
           !r.conditions.reduced_on.some((c) => predictedTags.has(c)) &&
@@ -270,7 +272,7 @@ function toAdjustment(
     condition_tag: tag,
     setting: rule.setting,
     change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}`,
-    mechanism: `Per ${rule.sources[0]}: ${effects}.`,
+    mechanism: `Per ${rule.sources[0] ?? "the KB"}: ${effects}.`,
     confidence: rule.confidence,
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,

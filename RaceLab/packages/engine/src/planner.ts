@@ -136,13 +136,22 @@ function conditionsShift(runs: SelectedRunSummary[], forecast: Forecast | undefi
 function readinessFacts(sorted: SelectedRunSummary[]): string[] {
   const lines: string[] = [];
 
+  // A symptom is resolved only if a LATER run that was rated "better" no longer
+  // reports it. The old check cleared EVERY symptom of a run as soon as ANY later
+  // run was "better" — even a better run that still carried that exact symptom —
+  // so a persistent push silently dropped off the readiness list (P1-E3).
   const unresolved: string[] = [];
   sorted.forEach((run, i) => {
-    if (sorted.slice(i + 1).some((r) => r.outcome === "better")) return;
-    for (const s of run.symptoms) if (!unresolved.includes(s)) unresolved.push(s);
+    for (const s of run.symptoms) {
+      if (unresolved.includes(s)) continue;
+      const resolvedLater = sorted
+        .slice(i + 1)
+        .some((r) => r.outcome === "better" && !r.symptoms.includes(s));
+      if (!resolvedLater) unresolved.push(s);
+    }
   });
   for (const s of unresolved) {
-    lines.push(`Unresolved: ${humanize(s)} — no later selected run was rated better.`);
+    lines.push(`Unresolved: ${humanize(s)} — no later run rated better resolved it.`);
   }
 
   let best: SelectedRunSummary | undefined;

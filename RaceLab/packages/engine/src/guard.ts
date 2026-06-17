@@ -1,5 +1,4 @@
 import type {
-  ChassisTemplate,
   ContextBundle,
   KBRule,
   RecommendationOption,
@@ -24,23 +23,6 @@ export function engineScopeViolation(bundle: ContextBundle, taxonomy: Taxonomy):
 /** The LLM cannot cite a rule that wasn't retrieved (docs/04 §4). */
 export function invalidCitations(option: RecommendationOption, retrievedIds: Set<string>): string[] {
   return option.citations.filter((c) => !retrievedIds.has(c));
-}
-
-/**
- * The chassis template IS the bounds database (D13): the recommended setting
- * must exist on this chassis. Alias/derived fields resolve to their members.
- */
-export function settingUnknownToTemplate(setting: string, template: ChassisTemplate): boolean {
-  if (template.fields[setting]) return false;
-  // settings expressed at class level that map onto template fields
-  const classLevel = new Set([
-    "ride_height",
-    "ride_height_rake",
-    "shock_pistons",
-    "shock_mounting_inclination",
-    "gearing",
-  ]);
-  return !classLevel.has(setting);
 }
 
 export interface RaceDayVerdict {

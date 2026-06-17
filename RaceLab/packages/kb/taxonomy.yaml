@@ -100,8 +100,13 @@ engine_scope_refusal:
     - plug temperature
     - flameout
     - flame out
-    - lean
-    - rich
+    - running lean
+    - lean it out
+    - too lean
+    - lean the needle
+    - too rich
+    - rich mixture
+    - richen
     - engine temp
     - break-in
     - break in
