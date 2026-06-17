@@ -38,6 +38,7 @@ jobs:
           - logbook
           - tracks
           - strategy
+          - social
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

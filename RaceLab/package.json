@@ -1,0 +1,12 @@
+{
+  "name": "racelab-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RaceLab — root runner so 'all green' is ONE reproducible command (P0-3). Each package keeps its own node_modules + test script; this just chains them in dependency order. CI (ci/racelab-ci.yml) and humans run the same thing.",
+  "scripts": {
+    "test-all": "npm --prefix packages/schema test && npm --prefix packages/engine test && npm --prefix packages/kb test && npm --prefix packages/storage test && npm --prefix packages/account test && npm --prefix packages/weather test && npm --prefix packages/speedhive test && npm --prefix packages/sessions test && npm --prefix packages/logbook test && npm --prefix packages/sheets test && npm --prefix packages/garage test && npm --prefix packages/tracks test && npm --prefix packages/strategy test && npm --prefix packages/social test && npm --prefix server test",
+    "typecheck-all": "npm --prefix packages/schema run typecheck && npm --prefix packages/engine run typecheck && npm --prefix server run typecheck && npm --prefix apps/mobile exec tsc -- --noEmit",
+    "validate": "npm --prefix packages/engine run validate-live",
+    "bundle": "npm --prefix packages/engine run bundle"
+  }
+}
