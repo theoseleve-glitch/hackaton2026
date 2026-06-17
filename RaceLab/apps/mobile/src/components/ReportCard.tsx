@@ -118,7 +118,7 @@ export const ReportCard = React.forwardRef<Svg, { report: EngineerReport; subtit
         {/* watermark + CTA */}
         <Circle cx={88} cy={H - 64} r={16} fill={colors.accent} />
         <SvgText x={120} y={H - 52} fill={colors.text} fontSize={36} fontWeight="800">
-          GripLab
+          RaceLab
         </SvgText>
         <SvgText x={W - 64} y={H - 52} fill={colors.sub} fontSize={30} textAnchor="end">
           your AI race engineer · griplab.app

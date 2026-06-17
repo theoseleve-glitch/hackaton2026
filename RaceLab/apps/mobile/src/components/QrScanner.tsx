@@ -22,7 +22,7 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
       handled.current = true;
       onScanned(res.payload);
     } else {
-      setError("That QR isn't a GripLab setup.");
+      setError("That QR isn't a RaceLab setup.");
     }
   };
 
@@ -42,7 +42,7 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
         </View>
       ) : !permission.granted ? (
         <View style={styles.center}>
-          <Text style={styles.msg}>GripLab needs the camera to scan a setup QR.</Text>
+          <Text style={styles.msg}>RaceLab needs the camera to scan a setup QR.</Text>
           <Pressable style={styles.btn} onPress={() => void requestPermission()}>
             <Text style={styles.btnText}>Allow camera</Text>
           </Pressable>
@@ -56,7 +56,7 @@ export function QrScanner({ onScanned, onClose }: { onScanned: (p: SharedPayload
             onBarcodeScanned={onBarcode}
           />
           <View style={styles.reticle} pointerEvents="none" />
-          <Text style={styles.hint}>{error ?? "Point at the other racer's GripLab QR"}</Text>
+          <Text style={styles.hint}>{error ?? "Point at the other racer's RaceLab QR"}</Text>
         </View>
       )}
     </View>

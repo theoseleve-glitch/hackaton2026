@@ -1,5 +1,5 @@
 // config.js — single source of truth. Swap BRAND in one place.
-export const BRAND = "RaceLab"; // placeholder; public sign-off pending (candidate: GripLab)
+export const BRAND = "RaceLab"; // public name (GripLab was a placeholder, dropped 2026-06-17)
 export const LINKS = {
   trial: "https://griplab.app",
   account: "https://griplab.app",

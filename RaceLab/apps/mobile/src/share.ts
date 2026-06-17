@@ -21,7 +21,7 @@ function safeName(name: string): string {
 export async function shareLink(p: SharedPayload): Promise<void> {
   const link = payloadToLink(p);
   await Share.share({
-    message: `My ${p.car.brand} ${p.car.model} setup "${p.setup.name}" on GripLab 🏁\n${link}`,
+    message: `My ${p.car.brand} ${p.car.model} setup "${p.setup.name}" on RaceLab 🏁\n${link}`,
   });
 }
 
