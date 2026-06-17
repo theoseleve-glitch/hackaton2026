@@ -250,6 +250,16 @@ export async function openRepos(
 
   const box = { state: outboxState };
 
+  // Serialize every mutation through a tail promise. mutate() reads box.state to
+  // mint a seq, awaits commit, THEN advances box.state — so two un-awaited writes
+  // (e.g. Promise.all([put(a), put(b)]) from app code) would otherwise both read
+  // the same state, mint the SAME seq, collide on commit, and — because box.state
+  // never advanced on the failure — permanently wedge ALL writes for the session.
+  // Chaining each mutate onto the prior makes read→commit→advance one critical
+  // section, so concurrent calls queue instead of colliding. The chain swallows
+  // outcomes so one mutation's result never poisons the next.
+  let writeChain: Promise<unknown> = Promise.resolve();
+
   // ── shared read/write plumbing ─────────────────────────────────────────────
 
   async function readOne<T>(
@@ -302,8 +312,27 @@ export async function openRepos(
   }
 
   /** One mutation = outbox append + doc op in one commit. On failure the
-   *  in-memory outbox state does NOT advance (entry id/seq are reusable). */
-  async function mutate(
+   *  in-memory outbox state does NOT advance (entry id/seq are reusable).
+   *  Serialized via writeChain so concurrent callers queue (see box decl). */
+  function mutate(
+    domain: OutboxDomain,
+    op: OutboxOp,
+    payload: object,
+    docOp:
+      | { type: "put"; collection: string; id: string; doc: object }
+      | { type: "remove"; collection: string; id: string },
+    now: IsoDateTime,
+  ): Promise<MutResult> {
+    const result = writeChain.then(() => doMutate(domain, op, payload, docOp, now));
+    // keep the chain alive regardless of this mutation's outcome
+    writeChain = result.then(
+      () => undefined,
+      () => undefined,
+    );
+    return result;
+  }
+
+  async function doMutate(
     domain: OutboxDomain,
     op: OutboxOp,
     payload: object,

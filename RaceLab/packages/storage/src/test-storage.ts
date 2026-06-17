@@ -488,6 +488,18 @@ async function main(): Promise<void> {
     check("repos: entriesAfter cursor", repos.outbox.entriesAfter(7).length === MUTATIONS - 7);
   }
   {
+    // Regression (storage single-writer, audit HIGH): two UN-AWAITED concurrent
+    // mutations must queue, not collide a seq and permanently wedge the store.
+    const cmem = memoryStorage();
+    const crepos = await freshRepos(cmem);
+    const [ra, rb] = await Promise.all([crepos.cars.put(CAR, T0), crepos.tracks.put(TRACK, T1)]);
+    check("repos: concurrent un-awaited puts BOTH succeed (no seq-collision wedge)", ra.ok && rb.ok, `${js(ra)} / ${js(rb)}`);
+    const cseqs = crepos.outbox.entriesAfter(0).map((e) => e.seq);
+    check("repos: concurrent puts minted distinct seqs [1,2]", cseqs.length === 2 && cseqs[0] === 1 && cseqs[1] === 2, js(cseqs));
+    const rc = await crepos.runs.put(RUN, T2);
+    check("repos: store NOT wedged after concurrent storm (next write ok)", rc.ok, rc.ok ? "" : rc.reason);
+  }
+  {
     const bad = await repos.cars.put({ id: "car-zzz" } as never, T2);
     const after = repos.outbox.entriesAfter(0).length;
     check("repos: parse-on-write rejects garbage, journals nothing", !bad.ok && after === MUTATIONS);
