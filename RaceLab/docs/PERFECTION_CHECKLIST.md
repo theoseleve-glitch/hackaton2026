@@ -1,5 +1,8 @@
 # RaceLab — Perfection Checklist (Backend + Setup Engineer)
 
+> **⚡ STATUS (2026-06-17, D57): the in-zone P0/P1s below are DONE** — see the D57 decision row. Executed: P0-1 (resolveTemplate), P0-2 (4 rules quarantined), P0-3/P0-4 (validate-live gate + root runner), P1-E1/E2/E3, P1-B1/B2/B3/B5/B6/B7/B8 (server hardening, 24/24), P1-D* (docs de-lied). **Resolved-as-non-issue:** P1-K3 (D53 — blogs are acceptable internal grounding). **Still open (human/Théo):** CI activation (move `ci/` to the shared repo-root `.github/`, William's call) · the 4 quarantined rules' true direction + D29 price (William) · app model-picker + `surfaceToTags`/`powerTypeToTags` union + EdDSA client-verify (Théo, §0.2 + `PIT_BOARD.md`) · backend wire-or-cut (§0.1) · most P2/P3 polish. The §2–§5 items below are the original audit text, kept for reference.
+
+
 *Produced 2026-06-17 by a 13-subsystem adversarial audit (each unit audited + re-verified by a skeptical second reviewer + two completeness-critic passes; ~90 raw findings, deduplicated here). Every critical/high was evidence-backed at file:line; the headline `resolveTemplate` bug was additionally hand-verified by William's Claude. Full raw findings: the three workflow outputs under `tasks/wyxun31n0|w8w3183ab|wz0ilqce0.output`.*
 
 > **Scope of "perfect":** correct · grounded (D18) · secure · tested · CI-gated · docs that don't lie. Items are tagged **P0** (ship-blocking / invariant-violating), **P1** (high), **P2** (medium), **P3** (polish), with effort **S/M/L** and the owning area.
