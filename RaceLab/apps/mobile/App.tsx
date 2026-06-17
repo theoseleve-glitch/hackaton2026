@@ -16,6 +16,7 @@ import { Overlay } from "./src/components/Overlay";
 import { ShareSheet } from "./src/components/ShareSheet";
 import { QrScanner } from "./src/components/QrScanner";
 import { TrialBanner } from "./src/components/TrialBanner";
+import { BrandLockup } from "./src/components/BrandMark";
 import { fetchRecentSessions } from "./src/speedhive";
 import type { SpeedhiveSession } from "./src/speedhive";
 import { useGarage } from "./src/garagestore";
@@ -145,9 +146,7 @@ export default function App() {
     <SafeAreaView style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
       <View style={styles.header}>
-        <Text style={styles.logo}>
-          Race<Text style={{ color: colors.accent }}>Lab</Text>
-        </Text>
+        <BrandLockup size={30} fontSize={20} />
         <View style={styles.headerRight}>
           <Pressable
             onPress={() => setTab("social")}

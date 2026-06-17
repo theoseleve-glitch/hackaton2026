@@ -1,5 +1,6 @@
 import React from "react";
-import Svg, { Circle, Rect, Text as SvgText } from "react-native-svg";
+import Svg, { Rect, Text as SvgText } from "react-native-svg";
+import { BrandBadgeGlyph } from "./BrandMark";
 import type { EngineerReport } from "../../../../packages/engine/src";
 import { colors } from "../theme";
 
@@ -116,8 +117,8 @@ export const ReportCard = React.forwardRef<Svg, { report: EngineerReport; subtit
         ) : null}
 
         {/* watermark + CTA */}
-        <Circle cx={88} cy={H - 64} r={16} fill={colors.accent} />
-        <SvgText x={120} y={H - 52} fill={colors.text} fontSize={36} fontWeight="800">
+        <BrandBadgeGlyph x={56} y={H - 92} size={56} />
+        <SvgText x={124} y={H - 52} fill={colors.text} fontSize={36} fontWeight="800">
           RaceLab
         </SvgText>
         <SvgText x={W - 64} y={H - 52} fill={colors.sub} fontSize={30} textAnchor="end">

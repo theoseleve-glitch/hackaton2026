@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { PRICING } from "../accountstore";
 import type { ExperienceLevel } from "../accountstore";
 import { ChipRow, KeyboardAwareForm, LabeledInput, Section, num } from "../components/forms";
+import { BrandMark } from "../components/BrandMark";
 import { colors, radius } from "../theme";
 
 /**
@@ -52,7 +53,9 @@ export function OnboardingScreen({ onDone }: Props) {
       <KeyboardAwareForm contentStyle={styles.content}>
         {step === 1 ? (
           <>
-            <Text style={styles.kicker}>RaceLab</Text>
+            <View style={styles.brandRow}>
+              <BrandMark size={64} />
+            </View>
             <Text style={styles.title}>Welcome to RaceLab</Text>
             <Text style={styles.pitch}>
               Your setups, your runs, your race engineer — works offline at the track. Log every
@@ -149,6 +152,7 @@ export function OnboardingScreen({ onDone }: Props) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   content: { flexGrow: 1, justifyContent: "center", padding: 24, paddingVertical: 48 },
+  brandRow: { marginBottom: 16 },
   kicker: {
     color: colors.accent,
     fontSize: 12,
