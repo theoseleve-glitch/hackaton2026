@@ -137,7 +137,7 @@ export const ProfileCard = React.forwardRef<Svg, { profile: DriverProfile }>(({ 
         RaceLab
       </SvgText>
       <SvgText x={W - 64} y={H - 52} fill={colors.sub} fontSize={30} textAnchor="end">
-        griplab.app
+        racelab.app
       </SvgText>
     </Svg>
   );

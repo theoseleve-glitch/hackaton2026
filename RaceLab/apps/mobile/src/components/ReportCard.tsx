@@ -121,7 +121,7 @@ export const ReportCard = React.forwardRef<Svg, { report: EngineerReport; subtit
           RaceLab
         </SvgText>
         <SvgText x={W - 64} y={H - 52} fill={colors.sub} fontSize={30} textAnchor="end">
-          your AI race engineer · griplab.app
+          your AI race engineer · racelab.app
         </SvgText>
       </Svg>
     );

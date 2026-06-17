@@ -1,8 +1,8 @@
 // config.js — single source of truth. Swap BRAND in one place.
 export const BRAND = "RaceLab"; // public name (GripLab was a placeholder, dropped 2026-06-17)
 export const LINKS = {
-  trial: "https://griplab.app",
-  account: "https://griplab.app",
+  trial: "https://racelab.app",
+  account: "https://racelab.app",
 };
 export const NAV = [
   { label: "How it works", href: "#tune" },
@@ -116,7 +116,7 @@ export const FOOTER = {
   links: [
     { label: "How it works", href: "#tune" },
     { label: "Pricing", href: "#pricing" },
-    { label: "griplab.app", href: LINKS.trial },
+    { label: "racelab.app", href: LINKS.trial },
   ],
   legal: "Pre-launch.",
 };

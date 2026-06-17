@@ -6,9 +6,9 @@ test("BRAND is a non-empty string", () => {
   assert.equal(typeof C.BRAND, "string");
   assert.ok(C.BRAND.length > 0);
 });
-test("every CTA points at griplab.app", () => {
+test("every CTA points at racelab.app", () => {
   const hrefs = [C.HERO.ctaPrimary.href, C.PRICING.cta.href, C.FINAL.cta.href];
-  for (const h of hrefs) assert.match(h, /griplab\.app/);
+  for (const h of hrefs) assert.match(h, /racelab\.app/);
 });
 test("pricing has monthly 9.99 and annual 99.99", () => {
   assert.ok(C.PRICING.plans.some((p) => p.price.includes("9.99") && p.per.includes("month")));

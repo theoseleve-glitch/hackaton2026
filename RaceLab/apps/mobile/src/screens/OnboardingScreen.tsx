@@ -73,7 +73,7 @@ export function OnboardingScreen({ onDone }: Props) {
             <View style={styles.webCard}>
               <Text style={styles.webCardTitle}>Cheaper on the web</Text>
               <Text style={styles.webCardText}>
-                Create your account on the website — griplab.app. Web subscriptions skip store
+                Create your account on the website — racelab.app. Web subscriptions skip store
                 fees, so the same plan costs less there.
               </Text>
             </View>

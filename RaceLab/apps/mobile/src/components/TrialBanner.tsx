@@ -14,7 +14,7 @@ export function TrialBanner({ daysLeft, onPress }: { daysLeft: number; onPress?:
       disabled={!onPress}
     >
       <Text style={[styles.text, urgent && styles.textUrgent]}>
-        Trial · {daysLeft} {daysLeft === 1 ? "day" : "days"} left · subscribe on griplab.app
+        Trial · {daysLeft} {daysLeft === 1 ? "day" : "days"} left · subscribe on racelab.app
       </Text>
     </Pressable>
   );
