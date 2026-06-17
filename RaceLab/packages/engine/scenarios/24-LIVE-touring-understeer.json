@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 touring (electric): mid-corner understeer on high-grip carpet → grounded category advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["rear_roll_center", "front_roll_center", "rear_sway_bar", "front_sway_bar", "rear_shock_oil", "front_camber", "rear_toe", "rear_spring", "ride_height"] },
+  "bundle": {
+    "chassis_template_id": "xray-t4",
+    "setup": {},
+    "track": { "name": "Indoor Carpet", "surface": "carpet", "grip": "high", "conditions": ["carpet"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "mid_corner" }], "text": "the touring car pushes wide through the middle of the corner on high-grip carpet" },
+    "mode": "practice"
+  }
+}

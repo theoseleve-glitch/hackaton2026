@@ -48,7 +48,8 @@
   magnitude_guidance: "One oil step (~25-50 cSt) at a time, both front shocks identical. HUDY: thinner oil gives faster shock action that keeps the tyre in contact with the surface for more traction, but the car is more easily unsettled by sharp direction changes (chicanes)."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thinner oil)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping — Shock Oil)"]
+  # REVIEW: NT1 p.10 frames thinner FRONT damping as "softer damping = slower steering response, decreases initial steering at corner entry, increases oversteer at corner exit/under acceleration" — it does NOT state a direct "fixes mid-corner understeer" effect; the understeer-fix here is inferred from the resulting rear rotation. Bump/traction-contact claim is HUDY-style, not in NT1; NT1 ties thinner front oil to corner-exit oversteer, not bump traction.
+  sources: ["XRAY NT1 Set-Up Book p.10 (Effects of Shock Damping — Front, softer damping / thinner oil)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-shock-front-thicker-502
@@ -68,7 +69,8 @@
   magnitude_guidance: "One oil step at a time, both front shocks identical. HUDY: thicker oil makes the car more stable at high speed but more twitchy at slow speed, and less likely to be unsettled by sharp direction changes such as chicanes."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thicker oil)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping — Shock Oil)"]
+  # REVIEW: NT1 p.10 (Front harder damping / thicker oil): "faster steering response, increases initial steering at corner entry, increases understeer at corner exit/under acceleration." NT1 does NOT explicitly say thicker front oil cures high-speed twitchiness — that high-speed-stability framing is HUDY-style; supported direction-wise (harder damping = more direct/less reactive) but the exact "twitchy@high_speed" address is an inference.
+  sources: ["XRAY NT1 Set-Up Book p.10 (Effects of Shock Damping — Front, harder damping / thicker oil)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-shock-rear-thinner-503
@@ -88,7 +90,8 @@
   magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: faster (softer) shock action keeps the tyre in contact with the surface, which produces the most grip (front & rear)."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thinner oil / soft damping = most grip)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping)"]
+  # REVIEW: PARTIAL SUPPORT. NT1 p.11 says softer rear damping (thinner oil) "increases rear grip under BRAKING" but "DECREASES rear grip at corner exit/under acceleration" — the OPPOSITE of this rule's corner-exit forward-bite claim. NT1 supports thinner rear oil only for braking-phase grip; the "more rear traction / forward bite on corner_exit / on-power" address is NOT supported by NT1 (it is the HUDY 'soft damping = most grip' generalization). Keep for William's review.
+  sources: ["XRAY NT1 Set-Up Book p.11 (Effects of Shock Damping — Rear, softer damping / thinner oil)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-shock-rear-thicker-504
@@ -108,7 +111,7 @@
   magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: thicker oil slows weight transfer and makes the car more stable at high speed; hard damping gives higher cornering speed but breaks traction more easily."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY Set-Up Book p.40 §2.5 (Shock Oil — Thicker oil / hard damping)", "XRAY NT1 Set-Up Book p.10-11 (Shock Damping)"]
+  sources: ["XRAY NT1 Set-Up Book p.11 (Effects of Shock Damping — Rear, harder damping / thicker oil: decreases rear grip at corner exit/under acceleration)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -132,7 +135,7 @@
   magnitude_guidance: "0.5mm at a time via shock preload collars ONLY (HUDY: never via downstop screws), front and rear equally unless deliberately setting rake. HUDY: lowering the car gives faster reaction and more overall grip, and is better on smooth tracks."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Decreasing ride height)", "XRAY NT1 Set-Up Book p.15 (Ride Height)"]
+  sources: ["XRAY NT1 Set-Up Book p.13 (Effects of Ride Height Adjustment — Decreasing ride height: increases overall grip, better on smooth tracks)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rideheight-higher-506
@@ -153,7 +156,8 @@
   magnitude_guidance: "0.5mm at a time via shock preload collars ONLY. HUDY: raising the car slows reaction, increases chassis roll and decreases overall grip, but is better on bumpy tracks and gives more clearance to avoid bottoming."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Increasing ride height)", "XRAY NT1 Set-Up Book p.15 (Ride Height)"]
+  # REVIEW: NT1 p.13 confirms "Increasing ride height: decreases overall grip, better on bumpy tracks (prevents bottoming)" — supported. NT1 does NOT explicitly state "slower reaction" or "more chassis roll" for higher ride height (those are HUDY-style additions); the two effects NT1 names are grip-down and bump/bottoming.
+  sources: ["XRAY NT1 Set-Up Book p.13 (Effects of Ride Height Adjustment — Increasing ride height: decreases overall grip, better on bumpy tracks, prevents bottoming)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rideheight-rake-forward-507
@@ -173,7 +177,8 @@
   magnitude_guidance: "Set the front ~0.5mm lower than the rear, via preload. HUDY: 'front lower than rear by 0.5mm' increases steering into the corner and stability in corners, but increases on-power oversteer."
   reversal_cost_minutes: 5
   confidence: medium
-  sources: ["HUDY Set-Up Book p.36 §2.3 (Effects of Ride Height — Front lower than rear by 0.5mm)"]
+  # REVIEW: WEAK GROUNDING / FLAG FOR WILLIAM. The XRAY NT1 Set-Up Book ride-height section (p.13) gives only overall lower/higher ride-height effects and has NO explicit front-lower-than-rear (rake) effects table; AE Cheat Sheets has separate front/rear ride-height pages (p.29-30) but likewise NO rake-effect statement of this form. This rule's specific claims (more steering into corner, more in-corner stability, more on-power oversteer) were the discredited HUDY-off-road cite and are NOT verbatim-supported by any on-road source obtained. Cite anchors to NT1's ride-height page so provenance points at the right book/topic, but the rake-specific effects remain UNVERIFIED — William should either source a touring rake reference or drop the rule.
+  sources: ["XRAY NT1 Set-Up Book p.13 (Ride Height — section covers ride-height effects; rake/front-lower-than-rear specifics NOT stated, see REVIEW)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -201,7 +206,8 @@
   magnitude_guidance: "One camber-link / pivot step at a time, identical left/right, then re-check camber and ride height (HUDY: roll-centre changes impact downstops, camber and ride height). HUDY: a lower front roll centre improves forward traction and steering response and is recommended for asphalt tracks and low-medium traction."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Front Roll Center — Lower)", "XRAY NT1 Set-Up Book p.29 (Front Roll Center — Lower)"]
+  # REVIEW: NT1 p.29 Front RC LOWER: "increases on-throttle steering; DECREASES responsiveness; decreases front weight transfer but INCREASES grip; increases chassis roll; better on SMOOTH HIGH-TRACTION tracks with long fast corners." Supported: more on-throttle steering, more grip, more chassis roll. CONFLICTS: this rule's effect {steering_response: more} contradicts NT1 ("decreases responsiveness"); and NT1 recommends lower front RC for smooth high-traction, NOT this rule's amplified_on [asphalt, low_grip]. The asphalt/low-grip framing was the HUDY claim. Keep for William's review.
+  sources: ["XRAY NT1 Set-Up Book p.29 (Effects of Roll Center Adjustment — Front Roll Center, Lower)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rollcenter-front-higher-509
@@ -222,7 +228,8 @@
   magnitude_guidance: "One camber-link / pivot step at a time, identical left/right; re-check camber after. HUDY: a higher front roll centre is easier to drive and less responsive, recommended for carpet or high-traction tracks, and (NT1) used in high-grip conditions to avoid traction rolling."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Front Roll Center — Higher)", "XRAY NT1 Set-Up Book p.29 (Front Roll Center — Higher / avoid traction rolling)"]
+  # REVIEW: NT1 p.29 Front RC HIGHER: "decreases on-throttle steering; INCREASES responsiveness; increases front weight transfer but DECREASES grip; decreases chassis roll; use in high-grip to avoid traction rolling; better on chicane/quick-direction-change tracks." Supported: less forward grip, less chassis roll, traction-roll resistance, carpet/high-grip amplification. CONFLICT: this rule's effect {responsiveness: less} contradicts NT1 ("increases responsiveness"). Keep for William's review.
+  sources: ["XRAY NT1 Set-Up Book p.29 (Effects of Roll Center Adjustment — Front Roll Center, Higher)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rollcenter-rear-lower-510
@@ -242,7 +249,7 @@
   magnitude_guidance: "One camber-link step at a time, identical left/right; re-check rear camber after. HUDY: a lower rear roll centre improves traction and increases on-power push, recommended for low-traction tracks."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Rear Roll Center — Lower)", "XRAY NT1 Set-Up Book p.29 (Rear Roll Center)"]
+  sources: ["XRAY NT1 Set-Up Book p.30 (Effects of Roll Center Adjustment — Rear Roll Center, Lower: increases on-throttle/rear grip, better on low-traction tracks)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rollcenter-rear-higher-511
@@ -262,7 +269,8 @@
   magnitude_guidance: "One camber-link step at a time, identical left/right; re-check rear camber after. HUDY: a higher rear roll centre improves rotation and increases on-power steering, recommended for high-traction tracks."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.31 §2.1 (Effects of Rear Roll Center — Higher)", "XRAY NT1 Set-Up Book p.29 (Rear Roll Center)"]
+  # REVIEW: CONFLICT. NT1 p.30 Rear RC HIGHER reads: "DECREASES on-throttle steering; increases front weight transfer but decreases grip; increases responsiveness; decreases chassis roll; use in high-grip to avoid traction rolling; better on chicane tracks." This DIRECTLY CONTRADICTS this rule's claim that a higher rear RC gives MORE on-power steering and rotation. Per NT1, a higher rear RC reduces on-throttle steering. Only the {rear_grip: less} effect and high_grip/carpet condition match NT1. Flag for William — the on-power-steering direction may be inverted for the nitro on-road class.
+  sources: ["XRAY NT1 Set-Up Book p.30 (Effects of Roll Center Adjustment — Rear Roll Center, Higher)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -284,7 +292,7 @@
   magnitude_guidance: "0.5° at a time. HUDY: more negative (inward) camber increases grip because the side-traction of the wheel increases; adjust front camber so the front tyres wear flat. Note (HUDY p.42): higher caster needs little/no camber, lower caster needs more — re-check after a caster change."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY Set-Up Book p.41 §2.7 (Camber)", "AE RC Cheat Sheets p.12 (Camber, front — more = more high-speed traction through turns)"]
+  sources: ["XRAY NT1 Set-Up Book p.14 (Camber — more negative/inward camber increases grip as side-traction increases; higher caster needs less camber)", "AE RC Cheat Sheets p.12 (Camber, front — more = more high-speed traction through turns)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-camber-rear-less-negative-513
@@ -302,7 +310,7 @@
   magnitude_guidance: "0.5° at a time. AE Cheat Sheets: less rear camber (toward 0°) gives more straight-line acceleration; HUDY: more negative camber increases grip, so reducing it trades some rear grip for drive — adjust rear camber so the tyres wear slightly conical to the inside (HUDY p.41)."
   reversal_cost_minutes: 5
   confidence: medium
-  sources: ["AE RC Cheat Sheets p.15 (Camber, rear — less = more straight-line acceleration)", "HUDY Set-Up Book p.41 §2.7 (Camber — more negative = more grip)"]
+  sources: ["AE RC Cheat Sheets p.15 (Camber, rear — less = more straight-line acceleration)", "XRAY NT1 Set-Up Book p.14 (Camber — more negative = more grip via side-traction; rear camber set so rear tyres wear slightly conical inside)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -327,7 +335,8 @@
   magnitude_guidance: "One caster step at a time, identical left/right. HUDY: less caster (more vertical) increases off-power steering at corner entry and suspension efficiency but decreases straight-line stability and on-power mid/exit steering. HUDY recommends a shallower (more inclined) caster on smooth high-grip and a steeper (more vertical) angle on slippery/rough — so reduce caster cautiously on rough surfaces."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY Set-Up Book p.42 §2.8 (Effects of Caster — Less caster)", "XRAY NT1 Set-Up Book p.16 (Effects of Caster)", "AE RC Cheat Sheets p.16 (Caster, front — less = more steering entering corners)"]
+  # REVIEW: This rule (less caster -> more corner-ENTRY steering) follows NT1 p.16. The AE p.16 cite text is corrected below to AE's ACTUAL wording, which is the OPPOSITE of NT1 ("less caster = LESS steering entering, MORE exiting"). Sources disagree on caster direction; rule sides with NT1. Flag for William.
+  sources: ["XRAY NT1 Set-Up Book p.16 (Effects of Caster Adjustment — Less caster/more vertical: decreases straight-line stability, increases steering at corner entry, decreases steering at mid-corner/exit)", "AE RC Cheat Sheets p.16 (Caster, front — AE states less caster = less steering entering / more exiting; conflicts with NT1)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-caster-more-515
@@ -349,7 +358,8 @@
   magnitude_guidance: "One caster step at a time, identical left/right. HUDY: more caster (more inclined) increases straight-line stability and on-power steering out of the corner and is more stable in bumpy conditions, but decreases off-power steering at corner entry."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY Set-Up Book p.42 §2.8 (Effects of Caster — More caster)", "XRAY NT1 Set-Up Book p.16 (Effects of Caster)", "AE RC Cheat Sheets p.16 (Caster, front — more = more steering entering / less exiting)"]
+  # REVIEW: NT1 p.16 confirms more caster: "increases straight-line stability, DECREASES steering at corner entry, INCREASES steering at mid-corner/exit" — this rule follows NT1's direction. SOURCE DISAGREEMENT: AE Cheat Sheets p.16 states the OPPOSITE ("more caster = MORE steering entering corners, LESS exiting"). The two sources genuinely conflict on caster (a known RC geometry-dependent ambiguity); this rule sides with NT1. NT1 does NOT state a "more stable in bumps" effect (the bump_stability effect + bumpy amplification is the HUDY-style add, plausible but unsupported). Keep NT1-aligned cite; flag the AE conflict for William.
+  sources: ["XRAY NT1 Set-Up Book p.16 (Effects of Caster Adjustment — More caster/more inclined: increases straight-line stability, decreases steering at corner entry, increases steering at mid-corner/exit)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -374,7 +384,8 @@
   magnitude_guidance: "0.5° at a time, both steering rods equally. HUDY: less front toe-in (toward toe-out) decreases understeer, increases steering at corner entry and steering response, but is less stable under acceleration and makes the car harder to drive. Front wheels should be neutral or toe-out — never rear toe-out."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Front, decreasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe)"]
+  # REVIEW: NT1 p.17 (Effects of Toe) supports the core direction — less front toe-in / toward toe-out "decreases understeer, increases steering at corner entry." NT1's published table is column-scrambled in extraction so the stability/ease wording can't be cleanly attributed; this rule's "less stable under acceleration / harder to drive" matches the conventional XRAY framing (front toe-out = sharper but nervier). Direction supported; secondary effects are conventional, not verbatim-verified.
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Front toe Decreased / toward toe-out: decreases understeer, increases corner-entry steering)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-toe-front-more-517
@@ -394,7 +405,7 @@
   magnitude_guidance: "0.5° at a time, both steering rods equally. HUDY: more front toe-in is more stable on-power and on the straight (at the expense of some traction/turn-in). Keep the front at neutral or toe-out for steering; only add toe-in to calm a nervous car."
   reversal_cost_minutes: 5
   confidence: medium
-  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Front, increasing = more stable on-power & straight)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe)"]
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Front toe Increased/more toe-in: increases understeer/stability; toe used to stabilize the car at the expense of traction)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-toe-rear-more-518
@@ -416,7 +427,7 @@
   magnitude_guidance: "0.5° at a time. HUDY: more rear toe-in increases traction and stability and adds push at the cost of cornering speed. Rear wheels must ALWAYS have toe-in, never toe-out."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Rear, increasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe — Rear)"]
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Rear toe Increased/more toe-in: increases understeer, increases on-power stability at corner exit and braking at entry, less chance of losing rear traction, increases straight-line stability; rear must always be toe-in)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-toe-rear-less-519
@@ -437,7 +448,8 @@
   magnitude_guidance: "0.5° at a time; NEVER go below 0° (no rear toe-out). HUDY: less rear toe-in gives more cornering speed, more on-power steering and better rotation, but less traction and less stability."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY Set-Up Book p.44 §2.9 (Effects of Toe — Rear, decreasing)", "XRAY NT1 Set-Up Book p.17 (Effects of Toe — Rear)"]
+  # REVIEW: NT1 p.17 rear toe Decreased/less toe-in: "decreases on-power stability at corner exit and braking; more chance of losing rear traction" — supports this rule's less-traction/less-stability direction and the rotation/steering gain (toe-in stabilizes at the expense of traction, so removing it frees rotation). NT1 does NOT explicitly use the words "more cornering speed / more on-power steering"; those are the conventional corollary of reduced rear toe-in, not verbatim NT1.
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Rear toe Decreased/less toe-in: decreases on-power stability at corner exit and braking, more chance of losing rear traction; never reach toe-out at rear)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -462,7 +474,7 @@
   magnitude_guidance: "Add a thin shim per side at a time, symmetric left/right. HUDY: a wider front track decreases front traction and steering response, is easier to drive, reduces traction rolling, and is recommended for high-traction tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Front, Wider)"]
+  sources: ["XRAY NT1 Set-Up Book p.12 (Effects of Track-width Adjustment — Front Wider: decreases front grip, increases understeer, slower steering response, use to avoid traction rolling)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-trackwidth-front-narrower-521
@@ -481,7 +493,7 @@
   magnitude_guidance: "Remove a thin shim per side at a time, symmetric left/right. HUDY: a narrower front track increases front traction and steering response and is recommended for low-medium traction tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Front, Narrower)"]
+  sources: ["XRAY NT1 Set-Up Book p.12 (Effects of Track-width Adjustment — Front Narrower: increases front grip, decreases understeer, faster steering response)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-trackwidth-rear-wider-522
@@ -502,7 +514,8 @@
   magnitude_guidance: "Add a thin shim per side at a time, symmetric left/right. HUDY: a wider rear track is more stable, easier to drive, gives less rotation and more on-power push, and is recommended for high-traction tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Rear, Wider)"]
+  # REVIEW: NT1 p.12 rear WIDER effects are stated as "increases grip at corner exit, increases high-speed understeer, increases front grip in hairpin turns." This supports more stability / less rotation (more understeer) and the high-grip/carpet conditioning, but NT1 does NOT use the words "on-power push" or "traction-roll resistance" for rear-wider (NT1 actually pairs avoid-traction-rolling with rear NARROWER and with front WIDER). Direction supported; the traction_roll address may belong to a different track-width move per NT1 — flag for William.
+  sources: ["XRAY NT1 Set-Up Book p.12 (Effects of Track-width Adjustment — Rear Wider: increases grip at corner exit, increases high-speed understeer, increases front grip in hairpins)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-trackwidth-rear-narrower-523
@@ -522,7 +535,8 @@
   magnitude_guidance: "Remove a thin shim per side at a time, symmetric left/right. HUDY: a narrower rear track is less stable, gives better rotation and increases cornering speed, and is recommended for low-medium traction tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY Set-Up Book p.41 §2.6 (Effects of Track-Width — Rear, Narrower)"]
+  # REVIEW: NT1 p.12 rear NARROWER reads: "increases rear grip at corner entry, increases high-speed on-throttle steering, use to avoid traction rolling." This PARTLY CONFLICTS with this rule, which frames rear-narrower as LESS stable / more rotation / more cornering speed for LOW-grip tracks. Per NT1 a narrower rear actually ADDS rear entry grip and is a traction-roll remedy (a high-grip move). The "more rotation / more cornering speed" gist is defensible but the stability-down + low_grip amplification is the HUDY framing, not NT1. Flag for William.
+  sources: ["XRAY NT1 Set-Up Book p.12 (Effects of Track-width Adjustment — Rear Narrower: increases rear grip at corner entry, increases high-speed on-throttle steering, use to avoid traction rolling)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================
@@ -547,7 +561,8 @@
   magnitude_guidance: "One wire size (or one blade-angle step) at a time, both sides equal. NT1: a stiffer FRONT anti-roll bar decreases chassis roll, decreases front grip (increases rear grip), increases off-power steering at corner entry and quickens steering response — use a stiffer front bar to settle entry oversteer on a high-grip surface."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["XRAY NT1 Set-Up Book p.19 (Front Anti-Roll Bar — Stiffer)", "HUDY Set-Up Book p.40 §2.5 (less chassis roll = higher cornering speed / less grip)"]
+  # REVIEW: Effects block matches NT1 p.18 verbatim (stiffer front bar: less roll, less front grip / more rear grip, MORE off-power steering at corner entry, quicker response). NOTE for William: NT1 has stiffer front bar INCREASING off-power entry steering, so addressing "oversteer@corner_entry" with a stiffer front bar is counter-intuitive on NT1's own table (more entry steering would tend to add, not cure, entry oversteer); the traction_roll address (less roll) is well supported. Address may warrant review; cite is correct.
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Front bar Stiffer: decreases chassis roll, decreases front grip/increases rear grip, increases off-power steering at corner entry, quicker steering response)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-frontbar-softer-525
@@ -567,7 +582,7 @@
   magnitude_guidance: "One wire size (or one blade-angle step) softer at a time, both sides equal. NT1: a softer FRONT anti-roll bar increases chassis roll, increases front grip (decreases rear grip) and slows steering response — soften the front bar to add front grip on a low-grip surface."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["XRAY NT1 Set-Up Book p.19 (Front Anti-Roll Bar — Softer)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Front bar Softer: increases chassis roll, increases front grip/decreases rear grip, decreases off-power steering at corner entry, slower steering response)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rearbar-stiffer-526
@@ -588,7 +603,7 @@
   magnitude_guidance: "One wire size stiffer at a time, both sides equal. NT1: a stiffer REAR anti-roll bar decreases chassis roll, decreases rear grip (increases front grip), increases on-power steering and quickens steering response in high-speed chicanes — stiffen the rear bar to cure on-power push on a high-grip surface."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["XRAY NT1 Set-Up Book p.19 (Rear Anti-Roll Bar — Stiffer)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Rear bar Stiffer: decreases chassis roll, decreases rear grip/increases front grip, increases on-power steering, quicker response in high-speed chicanes)"]
   scope: [1-10-nitro-onroad]
 
 - id: kb-no-rearbar-softer-527
@@ -608,7 +623,7 @@
   magnitude_guidance: "One wire size softer at a time, both sides equal. NT1: a softer REAR anti-roll bar increases chassis roll and rear grip and decreases on-power steering — soften the rear bar to add rear traction / forward bite on a low-grip surface."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["XRAY NT1 Set-Up Book p.19-20 (Rear Anti-Roll Bar — Softer)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Rear bar Softer: increases chassis roll, increases rear grip/decreases front grip, decreases on-power steering)"]
   scope: [1-10-nitro-onroad]
 
 # =====================================================================================================

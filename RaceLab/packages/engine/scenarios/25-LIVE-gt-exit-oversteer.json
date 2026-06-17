@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/8 GT: corner-exit oversteer on high-grip asphalt → grounded category advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["rear_diff_oil", "center_diff_oil", "rear_shock_oil", "rear_spring", "rear_sway_bar", "rear_camber", "rear_toe", "rear_roll_center", "ride_height"] },
+  "bundle": {
+    "chassis_template_id": "xray-gtx8",
+    "setup": {},
+    "track": { "name": "High-Grip Asphalt", "surface": "asphalt", "grip": "high", "conditions": ["asphalt"] },
+    "feedback": { "tags": [{ "symptom": "oversteer", "phase": "corner_exit" }], "text": "the GT car steps out on power exiting the corner on grippy asphalt" },
+    "mode": "practice"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 nitro on-road: corner-entry understeer on medium-grip asphalt → grounded category advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["caster", "front_camber", "front_toe", "front_shock_oil", "front_spring", "front_roll_center", "front_sway_bar", "ride_height", "rear_toe"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-v-one-r4-evo",
+    "setup": {},
+    "track": { "name": "Medium-Grip Asphalt", "surface": "asphalt", "grip": "medium", "conditions": ["asphalt"] },
+    "feedback": { "tags": [{ "symptom": "understeer", "phase": "corner_entry" }], "text": "the nitro touring car won't turn in on entry on medium-grip asphalt" },
+    "mode": "practice"
+  }
+}

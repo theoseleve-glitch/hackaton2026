@@ -41,7 +41,8 @@
   magnitude_guidance: "One oil step (~50-100 cSt / 5wt) at a time, both front shocks identical. HUDY: thinner oil keeps the tyre in contact for more traction but the car becomes more easily unsettled in sharp direction changes (chicanes)."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.39-40 §2.5 (Shock Oil — Thinner oil)"]
+  # REVIEW: NT1 p.10 (Front softer damping/thinner oil): "slower steering response, decreases initial steering at corner entry, increases oversteer at corner exit/under acceleration." Supports faster suspension reaction; NT1's explicit named effect is corner-exit oversteer, not the bump-grip/tyre-contact wording (HUDY-style). The understeer@mid_corner address is inferred from resulting rotation. NT1 is nitro-touring (same Hudy-family chassis theory) used as the on-road stand-in for this electric touring class.
+  sources: ["XRAY NT1 Set-Up Book p.10 (Effects of Shock Damping Adjustment — Front, softer damping / thinner oil)"]
   scope: [1-10-touring]
 
 - id: kb-tc-shock-front-thicker-402
@@ -62,7 +63,7 @@
   magnitude_guidance: "One oil step at a time, both front shocks identical. HUDY: thicker oil makes the car more stable at high speed but more twitchy at slow speed, and less likely to be unsettled by sharp direction changes."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.39-40 §2.5 (Shock Oil — Thicker oil)"]
+  sources: ["XRAY NT1 Set-Up Book p.10 (Effects of Shock Damping Adjustment — Front, harder damping / thicker oil: faster steering response, increases initial steering at corner entry, increases understeer at corner exit/under acceleration)"]
   scope: [1-10-touring]
 
 - id: kb-tc-shock-rear-thinner-403
@@ -82,7 +83,8 @@
   magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: faster shock action keeps the tyre in contact with the surface, giving more traction."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.39-40 §2.5 (Shock Oil / soft damping = most grip)"]
+  # REVIEW: PARTIAL SUPPORT. NT1 p.11 says softer rear damping (thinner oil) "increases rear grip under BRAKING" but "DECREASES rear grip at corner exit/under acceleration" — the OPPOSITE of this rule's corner-exit forward-bite claim. NT1 supports thinner rear oil for braking-phase grip only; the more-rear-traction-at-exit address is the HUDY 'soft damping = most grip' generalization. Keep for William's review.
+  sources: ["XRAY NT1 Set-Up Book p.11 (Effects of Shock Damping Adjustment — Rear, softer damping / thinner oil)"]
   scope: [1-10-touring]
 
 - id: kb-tc-shock-rear-thicker-404
@@ -102,7 +104,7 @@
   magnitude_guidance: "One oil step at a time. HUDY: hard damping breaks traction more easily but reduces chassis roll and raises cornering speed."
   reversal_cost_minutes: 15
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.40 §2.5 (Hard damping)"]
+  sources: ["XRAY NT1 Set-Up Book p.11 (Effects of Shock Damping Adjustment — Rear, harder damping / thicker oil: decreases rear grip at corner exit/under acceleration, increases rear grip under braking)"]
   scope: [1-10-touring]
 
 - id: kb-tc-pistons-fewer-holes-405
@@ -121,7 +123,7 @@
   magnitude_guidance: "One hole-size step — never piston AND oil at the same time. HUDY: fewer/smaller holes = harder damping, reacts like thicker shock oil, slower shock movement."
   reversal_cost_minutes: 20
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.40 §2.5 (Damping and Shock Pistons)"]
+  sources: ["XRAY NT1 Set-Up Book p.10 (Shock Damping — Shock Pistons: fewer/less holes = harder damping; the damping table pairs 'Less holes' with thicker oil for harder damping — faster steering response, more initial corner-entry steering, more corner-exit understeer)"]
   scope: [1-10-touring]
 
 - id: kb-tc-pistons-more-holes-406
@@ -141,7 +143,7 @@
   magnitude_guidance: "One hole-size step — never piston AND oil at the same time. HUDY: more/bigger holes = softer damping, reacts like thinner shock oil, faster shock movement, more grip."
   reversal_cost_minutes: 20
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.40 §2.5 (Damping and Shock Pistons)"]
+  sources: ["XRAY NT1 Set-Up Book p.10 (Shock Damping — Shock Pistons: more/larger holes = softer damping; the damping table pairs 'More holes' with thinner oil for softer damping — slower steering response, less initial corner-entry steering, more corner-exit oversteer / more grip)"]
   scope: [1-10-touring]
 
 # =====================================================================================================
@@ -166,7 +168,7 @@
   magnitude_guidance: "One spring step softer, both fronts identical. HUDY: softer front decreases steering response (smoother), increases mid-corner steering, gives more overall grip; too soft feels sluggish with excessive roll."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.38 §2.5 (Softer front springs / Softer springs)"]
+  sources: ["XRAY NT1 Set-Up Book p.8 (Effects of Spring Rate Selection — Softer front springs: more steering mid-corner and at corner exit; Softer springs: more traction in low grip, more chassis roll, better on bumpy/open tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-spring-front-stiffer-412
@@ -187,7 +189,7 @@
   magnitude_guidance: "One spring step stiffer, both fronts identical. HUDY: stiffer front increases steering response and in-corner steering, decreases mid-corner steering; suited to tight high-traction tracks that aren't too bumpy."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.38 §2.5 (Stiffer front springs / Stiffer springs)"]
+  sources: ["XRAY NT1 Set-Up Book p.8 (Effects of Spring Rate Selection — Stiffer front springs: increases mid-corner and corner-exit understeer / decreases mid-corner steering, increases responsiveness but more nervous, increases steering under braking; Stiffer springs: lose a little steering, reduce chassis roll, suited to tight high-traction not-too-bumpy tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-spring-rear-softer-413
@@ -208,7 +210,8 @@
   magnitude_guidance: "One spring step softer, both rears identical. HUDY: softer rear increases off-power steering and mid-corner steering, improves initial acceleration and is smoother under braking, with more overall grip."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.38 §2.5 (Softer rear springs)"]
+  # REVIEW: NT1 p.8 Softer REAR springs: "more rear side traction mid-corner, through bumpy sections, and while accelerating (forward traction)" — strongly supports the forward-bite / initial-acceleration / more-rear-grip address. NT1 does not explicitly name "more off-power steering" or "smoother braking" (HUDY-style adds); the forward-traction direction is well grounded.
+  sources: ["XRAY NT1 Set-Up Book p.8 (Effects of Spring Rate Selection — Softer rear springs: more rear side traction mid-corner, through bumps, and while accelerating / forward traction)"]
   scope: [1-10-touring]
 
 - id: kb-tc-spring-rear-stiffer-414
@@ -229,7 +232,8 @@
   magnitude_guidance: "One spring step stiffer, both rears identical. HUDY: stiffer rear increases on-power steering and top speed, decreases mid-corner steering and overall grip."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.38 §2.5 (Stiffer rear springs)"]
+  # REVIEW: NT1 p.8 Stiffer REAR springs: "less rear traction but more steering mid-corner and at corner exit, especially in long high-speed corners" — supports the less-overall-grip + more on-power/exit-steering direction. NT1 does NOT mention "more top speed" (that effect is HUDY-style / unverified). On-power-steering gain is supported via NT1's mid-corner/exit steering increase.
+  sources: ["XRAY NT1 Set-Up Book p.8 (Effects of Spring Rate Selection — Stiffer rear springs: less rear traction but more steering mid-corner and at corner exit)"]
   scope: [1-10-touring]
 
 # =====================================================================================================
@@ -255,7 +259,8 @@
   magnitude_guidance: "One wire step (~0.1mm). HUDY: front bar mainly affects off-power steering at corner entry — stiffer reduces front roll/traction, increases rear traction, reduces off-power entry steering (increases understeer)."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.47 §2.14 (Front Anti-Roll Bar — Stiffer)", "AE RC Cheat Sheets p.6 (Anti-dive/bars: oversteer -> thicker front bar)"]
+  # REVIEW: Effects block matches NT1 p.18 (stiffer front bar: less roll, less front grip / more rear grip, MORE off-power entry steering, quicker response). NT1 has stiffer front bar INCREASING off-power entry steering, so the {off-power entry steering} address is more nuanced than 'cures entry oversteer'; the traction-roll / less-front-roll address is well supported. The AE p.6 cite (Anti-dive page) genuinely contains 'oversteer -> thicker front bar', so it is valid and kept.
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Front bar Stiffer: decreases chassis roll, decreases front grip/increases rear grip, increases off-power steering at corner entry, quicker steering response)", "AE RC Cheat Sheets p.6 (Anti-dive page — if oversteering, add/thicken the front anti-roll bar)"]
   scope: [1-10-touring]
 
 - id: kb-tc-swaybar-front-softer-422
@@ -276,7 +281,7 @@
   magnitude_guidance: "One wire step (~0.1mm). HUDY: softer front bar increases front roll and traction, decreases rear traction, increases off-power steering (may cause oversteer)."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.47 §2.14 (Front Anti-Roll Bar — Softer)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Front bar Softer: increases chassis roll, increases front grip/decreases rear grip, decreases off-power steering at corner entry, slower steering response)"]
   scope: [1-10-touring]
 
 - id: kb-tc-swaybar-rear-stiffer-423
@@ -298,7 +303,7 @@
   magnitude_guidance: "One wire step (~0.1mm). HUDY: rear bar mainly affects on-power steering and mid/exit stability — stiffer reduces rear roll/traction, increases on-power steering (may cause oversteer), quicker response in high-speed chicanes."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.47 §2.14 (Rear Anti-Roll Bar — Stiffer)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Rear bar Stiffer: decreases chassis roll, decreases rear grip/increases front grip, increases on-power steering, quicker response in high-speed chicanes)"]
   scope: [1-10-touring]
 
 - id: kb-tc-swaybar-rear-softer-424
@@ -320,7 +325,7 @@
   magnitude_guidance: "One wire step (~0.1mm). HUDY: softer rear bar increases rear roll and traction, decreases front traction, decreases on-power steering (increases understeer)."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.47 §2.14 (Rear Anti-Roll Bar — Softer)", "AE RC Cheat Sheets p.6 (understeer -> thicker rear bar)"]
+  sources: ["XRAY NT1 Set-Up Book p.18 (Effects of Anti-roll Bar Adjustment — Rear bar Softer: increases chassis roll, increases rear grip/decreases front grip, decreases on-power steering)", "AE RC Cheat Sheets p.6 (Anti-dive page — if understeering, add/thicken the rear anti-roll bar)"]
   scope: [1-10-touring]
 
 # =====================================================================================================
@@ -341,7 +346,7 @@
   magnitude_guidance: "0.5deg at a time. HUDY: more negative (inward) camber increases grip via side-traction; set so the front tyres wear flat. Lower caster needs more camber, higher caster needs little/none — re-check after a caster change."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.41 §2.7 (Camber)", "AE RC Cheat Sheets p.12 (Camber front -2deg = more high-speed traction)"]
+  sources: ["XRAY NT1 Set-Up Book p.14 (Camber — more negative/inward camber increases grip as side-traction increases; set front camber so front tyres wear flat; higher caster needs less camber)", "AE RC Cheat Sheets p.12 (Camber front -2deg = more high-speed traction)"]
   scope: [1-10-touring]
 
 - id: kb-tc-camber-rear-more-negative-432
@@ -358,7 +363,7 @@
   magnitude_guidance: "0.5deg at a time. HUDY: more negative rear camber increases rear cornering grip; set rear camber so tyres wear slightly conical to the inside. AE: too much rear camber removes straight-line acceleration."
   reversal_cost_minutes: 5
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.41 §2.7 (Camber)", "AE RC Cheat Sheets p.15 (Camber rear -2deg = more cornering traction)"]
+  sources: ["XRAY NT1 Set-Up Book p.14 (Camber — more negative camber increases grip via side-traction; set rear camber so rear tyres wear slightly conical to the inside)", "AE RC Cheat Sheets p.15 (Camber rear -2deg = more cornering traction)"]
   scope: [1-10-touring]
 
 - id: kb-tc-caster-more-441
@@ -380,7 +385,8 @@
   magnitude_guidance: "One caster step (e.g. 1deg). HUDY: more caster (more inclined) increases straight-line stability and on-power steering in mid-corner/exit, decreases off-power entry steering, more stable on bumpy tracks. Use steeper caster on slippery/rough surfaces."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.42 §2.8 (Effects of Caster — More caster angle)"]
+  # REVIEW: NT1 p.16 supports more caster: "increases straight-line stability, DECREASES steering at corner entry, INCREASES steering at mid-corner/exit" — matches direction + KB caster convention. NT1 does not name a "more stable on bumpy" effect (bumpy_stability + bumpy amplification are HUDY-style, plausible but unverified). AE Cheat Sheets p.16 states the OPPOSITE caster direction; rule sides with NT1.
+  sources: ["XRAY NT1 Set-Up Book p.16 (Effects of Caster Adjustment — More caster/more inclined: increases straight-line stability, decreases steering at corner entry, increases steering at mid-corner and corner exit)"]
   scope: [1-10-touring]
 
 - id: kb-tc-caster-less-442
@@ -401,7 +407,7 @@
   magnitude_guidance: "One caster step (e.g. 1deg). HUDY: less caster (more vertical) decreases straight-line stability, increases off-power steering at corner entry and suspension efficiency, decreases on-power steering in mid-corner/exit. Use shallower caster on smooth high-grip surfaces."
   reversal_cost_minutes: 10
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.42 §2.8 (Effects of Caster — Less caster angle)"]
+  sources: ["XRAY NT1 Set-Up Book p.16 (Effects of Caster Adjustment — Less caster/more vertical: decreases straight-line stability, increases steering at corner entry, decreases steering at mid-corner and corner exit)"]
   scope: [1-10-touring]
 
 - id: kb-tc-toe-front-out-451
@@ -422,7 +428,7 @@
   magnitude_guidance: "0.5deg at a time, both steering rods equally. HUDY: less front toe-in (toward toe-out) decreases understeer, increases corner-entry steering and response, but is less stable under acceleration and harder to drive. Front should be neutral or toe-out, NEVER toe-in beyond stability needs."
   reversal_cost_minutes: 4
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.44 §2.9 (Effects of Toe — Front toe Decreasing)"]
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Front toe Decreased / toward toe-out: decreases understeer, increases steering at corner entry; toe stabilizes the car at the expense of traction)"]
   scope: [1-10-touring]
 
 - id: kb-tc-toe-front-in-452
@@ -442,7 +448,7 @@
   magnitude_guidance: "0.5deg at a time. HUDY: more front toe-in is more stable on-power and on the straight. AE warns front toe-out is unstable in bumps and slippery straightaways, so add toe-in (toward neutral) to calm a darty car."
   reversal_cost_minutes: 4
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.44 §2.9 (Effects of Toe — Front toe Increasing)", "AE RC Cheat Sheets p.49 (toe-out unstable in bumps)"]
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Front toe Increased / more toe-in: increases understeer and stability; toe used to stabilize the car at the expense of traction)", "AE RC Cheat Sheets p.49 (toe-out unstable in bumps)"]
   scope: [1-10-touring]
 
 - id: kb-tc-toe-rear-more-453
@@ -464,7 +470,7 @@
   magnitude_guidance: "0.5deg at a time, both sides equally. HUDY: more rear toe-in increases traction and stability but adds push and reduces cornering speed. Rear should ALWAYS have toe-in, never toe-out."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.44 §2.9 (Effects of Toe — Rear toe Increasing)"]
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Rear toe Increased / more toe-in: increases understeer, increases on-power stability at corner exit and braking at entry, less chance of losing rear traction, increases straight-line stability; rear must always be toe-in)"]
   scope: [1-10-touring]
 
 - id: kb-tc-toe-rear-less-454
@@ -485,7 +491,8 @@
   magnitude_guidance: "0.5deg at a time; never reach zero or toe-out at the rear. HUDY: less rear toe-in decreases traction, increases cornering speed, on-power steering and rotation."
   reversal_cost_minutes: 8
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.44 §2.9 (Effects of Toe — Rear toe Decreasing)"]
+  # REVIEW: NT1 p.17 rear toe Decreased / less toe-in: "decreases on-power stability at corner exit and braking; more chance of losing rear traction" — supports the less-traction direction and the rotation/steering gain. NT1 does not use the words "more cornering speed / more on-power steering"; those are the conventional corollary of reduced rear toe-in, not verbatim NT1.
+  sources: ["XRAY NT1 Set-Up Book p.17 (Effects of Toe Adjustment — Rear toe Decreased / less toe-in: decreases on-power stability at corner exit and braking, more chance of losing rear traction; never toe-out at rear)"]
   scope: [1-10-touring]
 
 # =====================================================================================================
@@ -509,7 +516,7 @@
   magnitude_guidance: "0.5mm at a time via preload collars ONLY (HUDY). Lower = faster reaction, more overall grip, better on smooth tracks; too low loses suspension travel and bottoms."
   reversal_cost_minutes: 4
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.36 §2.3 (Effects of Ride Height — Decreasing)"]
+  sources: ["XRAY NT1 Set-Up Book p.13 (Effects of Ride Height Adjustment — Decreasing ride height/lowering the car: increases overall grip, better on smooth tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-rideheight-higher-462
@@ -530,7 +537,8 @@
   magnitude_guidance: "0.5mm at a time via preload collars. HUDY: raising the car gives slower reaction, more chassis roll, less overall grip BUT increased steering into the corner, more in-corner stability and increased on-power oversteer — better on bumpy tracks."
   reversal_cost_minutes: 4
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.36 §2.3 (Effects of Ride Height — Increasing)"]
+  # REVIEW: NT1 p.13 confirms "Increasing ride height: decreases overall grip, better on bumpy tracks (prevents bottoming)." NT1 does NOT explicitly state "slower reaction", "more chassis roll" or "more corner-entry steering / in-corner stability / on-power oversteer" for higher ride height (those richer effects are HUDY-style adds); NT1's named effects are grip-down and bump/bottoming. Direction supported; secondary effects unverified vs NT1.
+  sources: ["XRAY NT1 Set-Up Book p.13 (Effects of Ride Height Adjustment — Increasing ride height/raising the car: decreases overall grip, better on bumpy tracks, prevents bottoming)"]
   scope: [1-10-touring]
 
 - id: kb-tc-droop-front-more-463
@@ -550,7 +558,7 @@
   magnitude_guidance: "Adjust downstops in small steps, identical left/right. HUDY: more front droop (lower downstop value) increases upward chassis travel on-throttle and rearward weight transfer — more responsive, less stable, better on bumpy tracks. (HUDY measures droop via downstops: lower downstop value = more droop.)"
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.37 §2.4 (Effects of Droop — More front droop)"]
+  sources: ["XRAY NT1 Set-Up Book p.6 (Effects of Downstop Adjustment — Lower front downstop value / more front droop: increases on-throttle chassis travel, decreases initial on-throttle understeer, better on bumpy tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-droop-front-less-464
@@ -570,7 +578,7 @@
   magnitude_guidance: "Adjust downstops in small steps, identical left/right. HUDY: less front droop (higher downstop value) reduces rearward weight transfer — less responsive, more stable, better on smooth tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.37 §2.4 (Effects of Droop — Less front droop)"]
+  sources: ["XRAY NT1 Set-Up Book p.6 (Effects of Downstop Adjustment — Higher front downstop value / less front droop: decreases on-throttle chassis travel, increases high-speed steering, increases initial on-throttle understeer, better on smooth tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-droop-rear-more-465
@@ -590,7 +598,7 @@
   magnitude_guidance: "Adjust downstops in small steps, identical left/right. HUDY: more rear droop (lower downstop value) increases rear chassis upward travel off-throttle/braking and forward weight transfer — more responsive, less stable, better on bumpy tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.37 §2.4 (Effects of Droop — More rear droop)"]
+  sources: ["XRAY NT1 Set-Up Book p.6 (Effects of Downstop Adjustment — Lower rear downstop value / more rear droop: increases rear chassis upward travel off-throttle and under braking, increases steering in slow corners, better on bumpy tracks)"]
   scope: [1-10-touring]
 
 - id: kb-tc-droop-rear-less-466
@@ -610,7 +618,7 @@
   magnitude_guidance: "Adjust downstops in small steps, identical left/right. HUDY: less rear droop (higher downstop value) decreases forward weight transfer — more stable under braking, better on smooth tracks."
   reversal_cost_minutes: 6
   confidence: high
-  sources: ["HUDY 1/10 Touring Set-Up Book p.37 §2.4 (Effects of Droop — Less rear droop)"]
+  sources: ["XRAY NT1 Set-Up Book p.6 (Effects of Downstop Adjustment — Higher rear downstop value / less rear droop: decreases rear chassis upward travel under braking, increases stability under braking, better on smooth tracks)"]
   scope: [1-10-touring]
 
 # =====================================================================================================
