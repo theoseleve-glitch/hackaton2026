@@ -665,19 +665,43 @@ async function main(): Promise<void> {
     }
   }
   {
-    // batch path: a failing batch applies nothing
+    // batch path: a failing batch applies nothing. Tested at the ADAPTER directly
+    // (storage.commit) — going through repos.put would let the repos seq-desync
+    // self-heal recover the forced collision, which is correct but tests a
+    // different layer. Atomicity is an adapter guarantee, so assert it there.
     const engine = new FakeSqlEngine();
     const opened = await openSqliteStorage(batchExecutor(engine));
     if (!opened.ok) fatal("batch kill open");
-    const r = await freshRepos(opened.storage);
-    await r.cars.put(CAR, T0);
-    engine.log.set(2, "occupied"); // force the next appendLog (seq 2) to violate UNIQUE inside the batch
-    const res = await r.cars.put(CAR2, T1);
-    const visible = await opened.storage.docs.get("cars", CAR2.id);
+    const s = opened.storage;
+    await s.log.append(obEntry(1, T0)); // seq 1 persisted
+    engine.log.set(2, "occupied"); // force the next seq-2 append to violate UNIQUE inside the batch
+    const res = await s.commit([{ type: "put", collection: "cars", id: CAR2.id, doc: CAR2 }], obEntry(2, T1));
+    const visible = await s.docs.get("cars", CAR2.id);
     check(
       "sqlite batch: failing batch is all-or-nothing (doc not visible)",
-      !res.ok && visible.ok && visible.doc === null,
+      !res.ok && res.reason === "duplicate_seq" && visible.ok && visible.doc === null,
     );
+  }
+  {
+    // Regression (storage seq_desync self-heal, audit P2): a commit the driver
+    // PERSISTED but reported failed leaves box.state.next_seq behind the persisted
+    // high-water — the next mutation mints a colliding seq. mutate() must re-derive
+    // next_seq from log.lastSeq() and retry, NOT wedge writes for the session.
+    const engine = new FakeSqlEngine();
+    const opened = await openSqliteStorage(batchExecutor(engine));
+    if (!opened.ok) fatal("self-heal open");
+    const r = await freshRepos(opened.storage);
+    await r.cars.put(CAR, T0); // seq 1 (box.state.next_seq now 2)
+    engine.log.set(2, "occupied"); // persisted log now holds seq 2; box still thinks 2 is free
+    const healed = await r.cars.put(CAR2, T1); // mints 2 → collision → self-heal → retry at seq 3
+    const visible = await opened.storage.docs.get("cars", CAR2.id);
+    check(
+      "repos: seq_desync self-heals (re-derives next_seq, retry succeeds, not wedged)",
+      healed.ok && visible.ok && visible.doc !== null,
+      healed.ok ? "" : healed.reason,
+    );
+    const after = await r.cars.put(CAR, T2); // store still writable after the heal
+    check("repos: store writable after self-heal", after.ok, after.ok ? "" : after.reason);
   }
 
   // ═══ 6. KILL-MID-WRITE: kv write-then-swap ═════════════════════════════════

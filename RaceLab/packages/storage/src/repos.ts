@@ -349,9 +349,37 @@ export async function openRepos(
     const ob = appendOutbox(box.state, { domain, op, payload }, now, rand);
     if (!ob.ok) return { ok: false, reason: `outbox_${ob.reason}` };
     const res = await storage.commit([docOp], ob.entry);
-    if (!res.ok) return { ok: false, reason: res.reason };
-    box.state = ob.state;
-    return { ok: true };
+    if (res.ok) {
+      box.state = ob.state;
+      return { ok: true };
+    }
+    // In-session self-heal of a seq desync (P2): a duplicate_seq means the persisted
+    // log ALREADY holds box.state.next_seq — e.g. a commit the driver persisted but
+    // reported failed, so box.state never advanced. Without recovery that same seq
+    // re-fails on EVERY future mutation and wedges writes until the app reopens
+    // (which recomputes next_seq from disk). Re-derive next_seq from the persisted
+    // high-water mark and retry ONCE. Concurrency can no longer cause this (mutations
+    // are serialized, D58), so a single re-derive suffices; a still-failing retry is
+    // a genuine desync surfaced as a distinct, non-retryable seq_desync.
+    if (res.reason === "duplicate_seq") {
+      const hw = await storage.log.lastSeq();
+      if (hw.ok && hw.seq >= box.state.next_seq) {
+        const healed = parseOutboxState({ entries: box.state.entries, next_seq: hw.seq + 1 });
+        if (healed.ok) {
+          box.state = healed.value;
+          const retry = appendOutbox(box.state, { domain, op, payload }, now, rand);
+          if (!retry.ok) return { ok: false, reason: `outbox_${retry.reason}` };
+          const res2 = await storage.commit([docOp], retry.entry);
+          if (res2.ok) {
+            box.state = retry.state;
+            return { ok: true };
+          }
+          return { ok: false, reason: res2.reason === "duplicate_seq" ? "seq_desync" : res2.reason };
+        }
+      }
+      return { ok: false, reason: "seq_desync" };
+    }
+    return { ok: false, reason: res.reason };
   }
 
   /** create vs update: presence (even unreadable presence) means update. */
