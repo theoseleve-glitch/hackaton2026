@@ -4,6 +4,7 @@ import { driverStats } from "../../../../packages/logbook/src";
 import type { DriverStats, LogbookState } from "../../../../packages/logbook/src";
 import { LANGS, LEVELS, PRICING, trialDaysLeft, UNITS } from "../accountstore";
 import type { Account, ExperienceLevel, Lang, Units } from "../accountstore";
+import { setLang, useLang, useT } from "../i18n";
 import { ChipRow, KeyboardAwareForm, LabeledInput, Section } from "../components/forms";
 import { ProgressCard } from "../components/ProgressCard";
 import { colors, radius } from "../theme";
@@ -32,6 +33,8 @@ const LANG_LABELS: Record<Lang, string> = { en: "English", fr: "Français" };
 const UNIT_LABELS: Record<Units, string> = { metric: "metric (°C · m)", imperial: "imperial (°F · ft)" };
 
 export function SettingsScreen({ account, setAccount, logbook, onClose }: Props) {
+  const t = useT();
+  const lang = useLang();
   const nowIso = new Date().toISOString();
   const year = nowIso.slice(0, 4);
   const yearStats = driverStats(logbook, year);
@@ -134,12 +137,15 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
           </View>
         </Section>
 
-        <Section title="Preferences">
-          <Text style={styles.fieldLabel}>Language</Text>
+        <Section title={t({ en: "Preferences", fr: "Préférences" })}>
+          <Text style={styles.fieldLabel}>{t({ en: "Language", fr: "Langue" })}</Text>
           <ChipRow
             options={LANGS}
-            value={account.prefs?.lang ?? "en"}
-            onSelect={(v) => setAccount({ prefs: { ...account.prefs, lang: v } })}
+            value={lang}
+            onSelect={(v) => {
+              setLang(v);
+              setAccount({ prefs: { ...account.prefs, lang: v } });
+            }}
             labelFor={(v) => LANG_LABELS[v]}
           />
           <Text style={styles.fieldLabel}>Units</Text>

@@ -17,6 +17,8 @@ import { ShareSheet } from "./src/components/ShareSheet";
 import { QrScanner } from "./src/components/QrScanner";
 import { TrialBanner } from "./src/components/TrialBanner";
 import { BrandLockup } from "./src/components/BrandMark";
+import { initLang, useT } from "./src/i18n";
+import type { Phrase } from "./src/i18n";
 import { fetchRecentSessions } from "./src/speedhive";
 import type { SpeedhiveSession } from "./src/speedhive";
 import { useGarage } from "./src/garagestore";
@@ -33,13 +35,13 @@ import { colors } from "./src/theme";
 
 type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer" | "social";
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: "garage", label: "Garage", icon: "🏠" },
-  { id: "sheet", label: "Sheet", icon: "📋" },
-  { id: "tracks", label: "Tracks", icon: "🗺️" },
-  { id: "runs", label: "Runs", icon: "🏁" },
-  { id: "engineer", label: "Engineer", icon: "🔧" },
-  { id: "social", label: "Social", icon: "👥" },
+const TABS: { id: Tab; label: Phrase; icon: string }[] = [
+  { id: "garage", label: { en: "Garage", fr: "Garage" }, icon: "🏠" },
+  { id: "sheet", label: { en: "Sheet", fr: "Réglages" }, icon: "📋" },
+  { id: "tracks", label: { en: "Tracks", fr: "Pistes" }, icon: "🗺️" },
+  { id: "runs", label: { en: "Runs", fr: "Sessions" }, icon: "🏁" },
+  { id: "engineer", label: { en: "Engineer", fr: "Ingénieur" }, icon: "🔧" },
+  { id: "social", label: { en: "Social", fr: "Social" }, icon: "👥" },
 ];
 
 export default function App() {
@@ -95,6 +97,10 @@ export default function App() {
 
   // deep-link import: griplab://import?d=… (cold start + warm) opens the fork preview
   const url = Linking.useURL();
+  const txt = useT();
+  useEffect(() => {
+    initLang();
+  }, []);
   useEffect(() => {
     if (!url) return;
     const res = linkToPayload(url);
@@ -126,7 +132,7 @@ export default function App() {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
         <ActivityIndicator color={colors.accent} size="large" />
-        <Text style={styles.loadingLabel}>Loading your garage…</Text>
+        <Text style={styles.loadingLabel}>{txt({ en: "Loading your garage…", fr: "Chargement de ton garage…" })}</Text>
       </SafeAreaView>
     );
   }
@@ -326,12 +332,12 @@ export default function App() {
               style={styles.tab}
               onPress={() => selectTab(t.id)}
               accessibilityRole="tab"
-              accessibilityLabel={t.label}
+              accessibilityLabel={txt(t.label)}
               accessibilityState={{ selected: active }}
             >
               {active && <View style={styles.tabIndicator} />}
               <Text style={[styles.tabIcon, active && styles.tabActive]}>{t.icon}</Text>
-              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{t.label}</Text>
+              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{txt(t.label)}</Text>
             </Pressable>
           );
         })}
