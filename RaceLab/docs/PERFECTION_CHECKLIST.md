@@ -4,6 +4,7 @@
 >
 > **Continuum loop — D58 (2026-06-17):** storage **single-writer wedge** (audit HIGH) fixed — `Repos` mutations now serialize through a write-chain so two concurrent un-awaited writes can't collide a seq and permanently brick the offline store; regression added (parallel puts → distinct seqs, store survives). storage 144/144.
 > **Continuum loop — D59 (2026-06-17):** storage **sqlite `commit()` duplicate-seq divergence** (P2) fixed — `commit()` (the path `mutate()` uses) now disambiguates a seq collision to `duplicate_seq` instead of a generic `driver_error`, matching `append()`/memory/kv; uniformity test extended to `commit()` across all adapters. storage 148/148. *(Remaining storage P2: the in-session `seq_desync` self-heal — own iteration, lower priority now D58 removed the main trigger.)*
+> **Continuum loop — D60 (2026-06-17):** **weather + speedhive request timeouts** (P2) — every network request is now bounded by a clearable `Promise.race` timeout (default 10s) so a hung upstream returns `network_error` instead of blocking the caller forever; tests assert a never-settling fetch is bounded. weather + speedhive green.
 
 
 *Produced 2026-06-17 by a 13-subsystem adversarial audit (each unit audited + re-verified by a skeptical second reviewer + two completeness-critic passes; ~90 raw findings, deduplicated here). Every critical/high was evidence-backed at file:line; the headline `resolveTemplate` bug was additionally hand-verified by William's Claude. Full raw findings: the three workflow outputs under `tasks/wyxun31n0|w8w3183ab|wz0ilqce0.output`.*
