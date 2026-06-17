@@ -526,7 +526,7 @@ console.log("\n— bridge —");
 {
   const ctx = {
     track_id: track2.id,
-    session_id: "ss-legacy0001" as const,
+    session_id: makeId("ss", Date.parse(T0)),
     car_id: car.id,
     car_name: car.name,
     car_template_id: "kyosho-inferno-mp11",
@@ -784,7 +784,11 @@ console.log("\n— parse —");
   check("parseRunEntry: round-trips a real stored run, frozen", pr.ok && pr.value.id === run1.id && pr.value.track.turns?.length === 3 && Object.isFrozen(pr.value) && Object.isFrozen(pr.value.conditions));
   check("parseRunEntry: catches the NaN→null corruption signature", (() => { const j = json(run1) as { conditions: { air_temp_c: unknown } }; j.conditions.air_temp_c = null; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:conditions.air_temp_c"; })());
   check("parseRunEntry: rejects a foreign-prefix id", (() => { const j = json(run1) as { id: string }; j.id = track2.id; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:id"; })());
-  check("parseRunEntry: rejects an enum lie (surface 'dirt')", (() => { const j = json(run1) as { track: { surface: string } }; j.track.surface = "dirt"; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:track.surface"; })());
+  // P1-B8: surface is a free non-empty string (the app's 58 rcdata ids — clay_groomed,
+  // decomposed_granite, …), NOT the 6-value legacy enum. parse accepts any real id and
+  // rejects only a non-string / empty surface.
+  check("parseRunEntry: accepts a real rcdata surface id (clay_groomed)", (() => { const j = json(run1) as { track: { surface: string } }; j.track.surface = "clay_groomed"; return parseRunEntry(j).ok; })());
+  check("parseRunEntry: rejects an empty/non-string surface", (() => { const j = json(run1) as { track: { surface: unknown } }; j.track.surface = ""; const a = parseRunEntry(j); j.track.surface = 42; const b = parseRunEntry(j); return !a.ok && a.reason === "invalid:track.surface" && !b.ok && b.reason === "invalid:track.surface"; })());
   check("parseRunEntry: rejects a corrupted lap time", (() => { const j = json(run1) as { timing: { laps: { t_s: unknown }[] } }; j.timing.laps[1].t_s = null; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:timing.laps[1].t_s"; })());
   check("parseRunEntry: tolerates unknown extra keys (forward compat)", (() => { const j = json(run1) as Record<string, unknown>; j.future_field = "newer build"; return parseRunEntry(j).ok; })());
 

@@ -8,7 +8,7 @@ import { proposePlan } from "./plan";
 import { recommend } from "./engineer";
 import { planRaceDay } from "./raceday";
 import { makeId } from "../../schema/src/ids";
-import { surfaceToTags } from "../../schema/src/runs";
+import { surfaceToTags, powerTypeToTags } from "../../schema/src/runs";
 import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
 
 // Unit tests for the model-aware gating (D48): capability filter, forbidden_on,
@@ -102,6 +102,15 @@ check(
 check(
   "legal_in_power allows the rule when the run power matches",
   retrieve([baseRule({ legal_in_power: ["modified_power"] })], bundle(["modified_power"]), tConcrete).length === 1,
+);
+// P1-E1: powerTypeToTags is the missing producer — without it no power tag ever
+// reaches track.conditions and every legal_in_power rule is silently dropped.
+check("powerTypeToTags: nitro → nitro_power", powerTypeToTags("nitro").includes("nitro_power"));
+check("powerTypeToTags: brushless defaults to stock_blinky", powerTypeToTags("brushless").includes("stock_blinky"));
+check(
+  "power gate END-TO-END: a [stock_blinky,modified_power] rule fires for a brushless-tagged bundle, not a nitro one",
+  retrieve([baseRule({ legal_in_power: ["stock_blinky", "modified_power"] })], bundle([...powerTypeToTags("brushless")]), tConcrete).length === 1 &&
+    retrieve([baseRule({ legal_in_power: ["stock_blinky", "modified_power"] })], bundle([...powerTypeToTags("nitro")]), tConcrete).length === 0,
 );
 
 // ── resolveTemplate: full / pending→category / unknown ───────────────────────

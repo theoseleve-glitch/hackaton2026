@@ -32,6 +32,7 @@ import type {
   Grip,
   IsoDateTime,
   Outcome,
+  PowerType,
   Rating1to5,
   Rating1to10,
   RunType,
@@ -688,7 +689,12 @@ export function conditionsToTags(c: RunConditions): readonly string[] {
     (c.air_temp_c !== undefined && c.air_temp_c >= 30) ||
     (c.track_temp_c !== undefined && c.track_temp_c >= 40);
   if (hot) tags.push("hot");
-  if (c.air_temp_c !== undefined && c.air_temp_c <= 10) tags.push("cold");
+  // Cold is symmetric with hot: a frigid track (IR gun, no air reading — e.g. an
+  // indoor refrigerated or winter outdoor circuit) is cold even without air_temp.
+  const cold =
+    (c.air_temp_c !== undefined && c.air_temp_c <= 10) ||
+    (c.track_temp_c !== undefined && c.track_temp_c <= 10);
+  if (cold) tags.push("cold");
   return Object.freeze(tags);
 }
 
@@ -707,12 +713,29 @@ export function surfaceToTags(surface: string): readonly string[] {
   const tags: string[] = [];
   if (/clay/.test(s)) tags.push("clay");
   if (/blue_groove/.test(s)) tags.push("blue_groove");
-  if (/(loose|loam|sugar_dirt|sand|gravel|granite|fire_road|rally_mix)/.test(s)) tags.push("loose_dirt");
+  // NB: decomposed_granite + fire_road are hard-packed/high-grip dirt, NOT loose —
+  // they intentionally fall through to [] so the grip field (not a loose_dirt tag)
+  // carries them, rather than firing loose-surface rules that would mislead.
+  if (/(loose|loam|sugar_dirt|sand|gravel|rally_mix)/.test(s)) tags.push("loose_dirt");
   if (/(astro|hockey_turf)/.test(s)) tags.push("astroturf");
   if (/carpet/.test(s)) tags.push("carpet");
   if (/(asphalt|tarmac|concrete|parking)/.test(s)) tags.push("asphalt");
   if (/(mud|water_crossing|wet_drift|snow|ice)/.test(s)) tags.push("wet");
   return Object.freeze([...new Set(tags)]);
+}
+
+/** Maps a car's PowerType onto the engine's power sub-class condition tags
+ *  (taxonomy.yaml: stock_blinky / modified_power / nitro_power) that the KB's
+ *  `legal_in_power` gate keys off (e.g. the 2WD/4WD gearing rules are legal in
+ *  stock_blinky OR modified_power). Without this, no producer ever emits a power
+ *  tag into track.conditions, so the gate's `some(...)` is always false and every
+ *  power-gated rule is silently dropped (P1-E1). nitro → nitro_power; brushless
+ *  DEFAULTS to stock_blinky — the D13-safe choice so a modified-only rule
+ *  (boost/turbo timing) never auto-fires for a car whose spec/mod class is unknown.
+ *  The app injects "modified_power" instead when the entrant declares a mod class.
+ *  Caller unions this into track.conditions alongside conditionsToTags/surfaceToTags. */
+export function powerTypeToTags(power: PowerType): readonly string[] {
+  return power === "nitro" ? Object.freeze(["nitro_power"]) : Object.freeze(["stock_blinky"]);
 }
 
 /** Render change-bearing tuples into the engine's history shape. Bare run

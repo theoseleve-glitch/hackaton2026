@@ -22,8 +22,16 @@ export type Confidence = "high" | "medium" | "low";
 
 // ── Theo's vocabulary, verbatim ──────────────────────────────────────────────
 
+// SURFACES is the original 6-value legacy/seed vocab (kept for the bridge's
+// legacy-narrowing). It is NOT the validation set: the app's real surface ids
+// live in apps/mobile/src/rcdata.json (58 ids — clay_groomed, astroturf,
+// asphalt_high_grip, decomposed_granite, …), so `Surface` is a free string and
+// parse.ts validates surface as a non-empty string. Widening from the union was
+// the P1-B8 fix — a narrow union would reject every real rcdata surface on load,
+// silently losing all non-"grass" track/run history the moment storage is wired.
+// Surface meaning → engine condition tags is reconciled by surfaceToTags (runs.ts).
 export const SURFACES = ["clay", "hard-packed", "loam", "astro", "carpet", "grass"] as const;
-export type Surface = (typeof SURFACES)[number];
+export type Surface = string;
 
 export const GRIPS = ["green", "medium", "high", "blue_groove"] as const;
 export type Grip = (typeof GRIPS)[number];

@@ -130,6 +130,7 @@ export {
   renderConditions,
   conditionsToTags,
   surfaceToTags,
+  powerTypeToTags,
   toEngineHistory,
   LAP_SOURCES,
 } from "./runs";

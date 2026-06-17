@@ -100,7 +100,7 @@ function turnsBad(v: unknown, path: string): string | null {
     if (!inEnum(CORNER_TYPES, t.corner_type)) return `${path}[${i}].corner_type`;
     if (!opt(t.bumps, (x) => inEnum(BUMPINESS_LEVELS, x))) return `${path}[${i}].bumps`;
     if (!opt(t.banking, (x) => inEnum(BANKINGS, x))) return `${path}[${i}].banking`;
-    if (!opt(t.surface_override, (x) => inEnum(SURFACES, x))) return `${path}[${i}].surface_override`;
+    if (!opt(t.surface_override, nonEmptyStr)) return `${path}[${i}].surface_override`;
     if (!opt(t.notes, str)) return `${path}[${i}].notes`;
   }
   if (turnsReject(v as readonly TrackTurn[]) !== null) return `${path}.n`;
@@ -111,7 +111,7 @@ function snapshotBad(v: unknown, path: string): string | null {
   if (!isRecord(v)) return path;
   if (!idOk("trk", v.track_id)) return `${path}.track_id`;
   if (!nonEmptyStr(v.name)) return `${path}.name`;
-  if (!inEnum(SURFACES, v.surface)) return `${path}.surface`;
+  if (!nonEmptyStr(v.surface)) return `${path}.surface`;
   if (!bool(v.indoor)) return `${path}.indoor`;
   if (!opt(v.layout, str)) return `${path}.layout`;
   if (v.turns !== undefined) {
@@ -179,7 +179,7 @@ export function parseTrack(value: unknown): ParseResult<Track> {
   if (!deepNumbersFinite(value)) return { ok: false, reason: "non_finite_numeric" };
   if (!idOk("trk", value.id)) return no("id");
   if (!nonEmptyStr(value.name)) return no("name");
-  if (!inEnum(SURFACES, value.surface)) return no("surface");
+  if (!nonEmptyStr(value.surface)) return no("surface");
   if (!bool(value.indoor)) return no("indoor");
   if (!bool(value.is_public)) return no("is_public");
   if (value.gps !== undefined) {
