@@ -148,6 +148,7 @@ export async function stripeWebhook(
       status: mapped.status,
       current_period_end: mapped.current_period_end,
       event_created: event.created,
+      received_at: server_time, // updated_at = server receipt time, not the event epoch
     });
 
     // ── 6) record the event so a redelivery short-circuits at step 2 ──────────

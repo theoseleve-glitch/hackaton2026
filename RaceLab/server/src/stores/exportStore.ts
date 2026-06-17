@@ -70,14 +70,17 @@ export function makeSqlExportStore(query: QueryFn): ExportStore {
   };
 }
 
-/** Server-generated, unguessable job id ("exp-..."). crypto.randomUUID is in
- *  Node 18+ / the edge runtime; no committed dependency. */
+/** Server-generated, UNGUESSABLE job id ("exp-..."). REQUIRES crypto.randomUUID
+ *  (Node 18+ / the edge runtime) — and FAILS LOUDLY if it is absent rather than
+ *  falling back to Date.now()+Math.random() (audit MED): a guessable job id is an
+ *  IDOR lever (a job_id is the only thing besides the owner predicate gating an
+ *  export archive's signed url). A throw here surfaces as the route's 500 instead
+ *  of silently minting predictable ids. */
 function genJobId(): string {
-  const uuid =
-    typeof globalThis.crypto?.randomUUID === "function"
-      ? globalThis.crypto.randomUUID()
-      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
-  return `exp-${uuid}`;
+  if (typeof globalThis.crypto?.randomUUID !== "function") {
+    throw new Error("export_job_id_unavailable: crypto.randomUUID is required (no guessable fallback)");
+  }
+  return `exp-${globalThis.crypto.randomUUID()}`;
 }
 
 // ── schema (mirrors db/schema.sql style; applied alongside it) ────────────────

@@ -83,6 +83,9 @@ class FakeDb implements Db {
     this.backups.delete(user_id);
     if (!this.deletions.has(user_id)) this.deletions.set(user_id, requested_at_iso); // first wins
   }
+  async isTombstoned(user_id: string): Promise<boolean> {
+    return this.deletions.has(user_id);
+  }
 }
 
 // ── fixtures ──────────────────────────────────────────────────────────────────
@@ -176,6 +179,12 @@ console.log("— routing + auth —");
 
 console.log("\n— trial first-seen —");
 {
+  // Fresh DB: the routing section above DELETEs user_A (trailing-slash test),
+  // which now writes a deletions tombstone — and a tombstoned id is refused a
+  // second trial (audit HIGH). These tests exercise the first-seen logic on a
+  // clean slate, so they get their own untombstoned FakeDb.
+  const tdb = new FakeDb();
+  const handle = makeHandler(app({ db: tdb, verifier, now: () => nowIso }));
   const claim1 = day(-3); // device 1 started its trial offline 3 days ago
   const r1 = await handle(req("POST", "/api/trial/start", { token: "tok-A", body: { trial_started_at: claim1 } }));
   check("trial: first claim recorded verbatim", r1.status === 200 && r1.json.trial_started_at === claim1 && r1.json.ok === true);
@@ -197,6 +206,22 @@ console.log("\n— trial first-seen —");
   check("trial: garbage timestamp -> 400", rBad.status === 400 && rBad.json.error === "invalid_trial_started_at");
   const rBadBody = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: [1, 2] }));
   check("trial: array body -> 400", rBadBody.status === 400 && rBadBody.json.error === "bad_request");
+
+  // ── tombstone blocks a SECOND trial (audit HIGH regression) ──
+  const dbTomb = new FakeDb();
+  const hTomb = makeHandler(app({ db: dbTomb, verifier, now: () => NOW }));
+  const tFirst = await hTomb(req("POST", "/api/trial/start", { token: "tok-A" }));
+  check("trial: first start (no tombstone) -> 200", tFirst.status === 200 && tFirst.json.ok === true);
+  // user deletes their account -> a deletions tombstone is written and survives the wipe
+  await hTomb(req("DELETE", "/api/account", { token: "tok-A" }));
+  check("trial: tombstone exists after deletion", dbTomb.deletions.has("user_A"));
+  // a re-claim of the SAME id must NOT get a fresh trial
+  const tRetry = await hTomb(req("POST", "/api/trial/start", { token: "tok-A" }));
+  check("trial: tombstoned id is REFUSED a second trial -> 409", tRetry.status === 409 && tRetry.json.error === "trial_unavailable_deleted");
+  check("trial: refused retrial did NOT re-create the user row", !dbTomb.users.has("user_A"));
+  // a genuinely different id (fresh Clerk account) is unaffected
+  const tOther = await hTomb(req("POST", "/api/trial/start", { token: "tok-B" }));
+  check("trial: a different (un-tombstoned) id still gets its trial", tOther.status === 200 && tOther.json.ok === true);
 }
 
 // ═══ subscription status ═════════════════════════════════════════════════════
@@ -212,7 +237,11 @@ console.log("\n— subscription status —");
 
   db.subs.set("user_A", { status: "canceled", expires_at: day(10) });
   const rCanceled = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
-  check("subscription: canceled but paid-through -> still active", rCanceled.json.status === "active");
+  // RECONCILED with /api/entitlement (audit MED): a stored 'canceled' is NEVER
+  // active here, even with a future expires_at — Stripe only stores 'canceled'
+  // once the period has ended (subscription.deleted). Matches the entitlement
+  // token's status==='active'-only PRO grant; the two endpoints no longer diverge.
+  check("subscription: canceled raw status -> expired (reconciled with entitlement)", rCanceled.json.status === "expired");
 
   db.subs.set("user_A", { status: "active", expires_at: day(-1) });
   const rExpired = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
@@ -263,6 +292,26 @@ console.log("\n— backup push —");
 
   const rNewDomain = await handle(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [entry("ob-10", "future_domain")] } }));
   check("push: unknown domain accepted (forward compat, server stores not vouches)", rNewDomain.status === 200 && rNewDomain.json.inserted === 1);
+
+  // IDOR (audit MED/LOW): the idempotency key is (user_id, entry_id). A user
+  // pushing an entry_id another user already has must INSERT under their own row
+  // (not be skipped as a dup) and must NEVER touch the other's row — entry_id is
+  // scoped per owner. Isolated DB so it doesn't perturb the restore counts below.
+  {
+    const idorDb = new FakeDb();
+    const hIdor = makeHandler(app({ db: idorDb, verifier, now: () => NOW }));
+    await hIdor(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [entry("ob-1")] } }));
+    const rCross = await hIdor(req("POST", "/api/backup/push", { token: "tok-B", body: { entries: [entry("ob-1")] } }));
+    check("push: cross-user same entry_id inserts under the OTHER user (per-owner idempotency, no IDOR)", rCross.status === 200 && rCross.json.inserted === 1 && rCross.json.skipped === 0);
+    check("push: A's ob-1 row is untouched by B's push", idorDb.backups.get("user_A")?.has("ob-1") === true && idorDb.backups.get("user_B")?.has("ob-1") === true);
+  }
+
+  // empty-batch still materializes the user row (so a later non-empty push can't
+  // FK-fail). A brand-new user whose FIRST contact is an empty push must exist.
+  const freshDb = new FakeDb();
+  const hFresh = makeHandler(app({ db: freshDb, verifier, now: () => NOW }));
+  const rEmptyFirst = await hFresh(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [] } }));
+  check("push: empty batch from a new user STILL creates the user row (no later FK-fail)", rEmptyFirst.status === 200 && freshDb.users.has("user_A"));
 }
 
 // ═══ backup restore: pagination + per-user isolation ═════════════════════════
@@ -332,6 +381,28 @@ console.log("\n— account delete —");
   nowIso = NOW;
 
   check("delete: user B untouched by A's deletion", db.backups.get("user_B")?.size === 2 && db.users.has("user_B"));
+
+  // ── Clerk identity deletion (Apple 5.1.1(v), audit MED) ──
+  {
+    // no Clerk deleter wired -> identity step skipped (data still wiped)
+    const dbNoCk = new FakeDb();
+    const hNoCk = makeHandler(app({ db: dbNoCk, verifier, now: () => NOW }));
+    const rSkip = await hNoCk(req("DELETE", "/api/account", { token: "tok-A" }));
+    check("delete: no Clerk deleter -> clerk_identity 'skipped', data still wiped", rSkip.status === 200 && rSkip.json.clerk_identity === "skipped" && !dbNoCk.users.has("user_A"));
+
+    // Clerk deleter wired + succeeds -> identity deleted with the verified id
+    const dbCk = new FakeDb();
+    let deletedId: string | null = null;
+    const ckApp = { ...ctx, db: dbCk, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false }, deleteClerkIdentity: { deleteIdentity: async (id: string) => { deletedId = id; } } } as unknown as AppCtx;
+    const rOk = await makeHandler(ckApp)(req("DELETE", "/api/account", { token: "tok-A" }));
+    check("delete: Clerk deleter wired -> clerk_identity 'deleted' with the VERIFIED id", rOk.json.clerk_identity === "deleted" && deletedId === "user_A");
+
+    // Clerk deleter THROWS -> reported 'failed', but the request still 200s (data gone, tombstone set)
+    const dbCkF = new FakeDb();
+    const ckFApp = { ...ctx, db: dbCkF, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false }, deleteClerkIdentity: { deleteIdentity: async () => { throw new Error("clerk 500"); } } } as unknown as AppCtx;
+    const rFail = await makeHandler(ckFApp)(req("DELETE", "/api/account", { token: "tok-A" }));
+    check("delete: Clerk failure -> clerk_identity 'failed' but 200 (data already erased, tombstone set)", rFail.status === 200 && rFail.json.clerk_identity === "failed" && !dbCkF.users.has("user_A") && dbCkF.deletions.has("user_A"));
+  }
 }
 
 // ═══ vercel glue (request conversion, no runtime) ════════════════════════════
@@ -367,6 +438,7 @@ console.log("\n— module route wiring —");
     ["POST", "/api/webhooks/stripe"],
     ["GET", "/api/entitlement"],
     ["POST", "/api/media/upload-url"],
+    ["POST", "/api/media/confirm"],
     ["GET", "/api/backup/blob"],
     ["PUT", "/api/backup/blob"],
     ["POST", "/api/share/publish"],
@@ -379,6 +451,7 @@ console.log("\n— module route wiring —");
     ["POST", "/api/push/token"],
     ["DELETE", "/api/push/token"],
     ["GET", "/api/healthz"],
+    ["POST", "/api/cron/workers"],
   ];
   for (const [method, path] of WIRED) {
     const r = await handle(req(method, path, { token: "tok-A" }));
@@ -395,16 +468,91 @@ console.log("\n— module route wiring —");
   check("healthz: 200 ok, db up, seams are booleans, no secrets", hz.status === 200 && hz.json.ok === true && hz.json.db === "up" && typeof hz.json.seams === "object" && typeof (hz.json.seams as Record<string, unknown>).stripe === "boolean");
 }
 
+// ═══ rate limiting (IP dimension, only when a store is wired) ════════════════
+// The router enforces RATE_POLICY on auth-free + auth-sensitive surfaces ONLY
+// when ctx.rateStore is present (absent everywhere above -> never enforced, so
+// the rest of the suite is untouched). Fixed-window over an in-memory counter.
+console.log("\n— rate limiting —");
+{
+  // minimal atomic counter fake (mirrors Redis INCR + PEXPIRE-NX); the router
+  // drives `now` off ctx.now(), so we just need monotonic per-key counts here.
+  const map = new Map<string, { count: number; reset_at_ms: number }>();
+  const rateStore = {
+    async incr(key: string, window_ms: number) {
+      const nowMs = Date.parse(nowIso);
+      const cur = map.get(key);
+      if (cur === undefined || nowMs >= cur.reset_at_ms) {
+        const fresh = { count: 1, reset_at_ms: nowMs + window_ms };
+        map.set(key, fresh);
+        return { ...fresh };
+      }
+      cur.count += 1;
+      return { count: cur.count, reset_at_ms: cur.reset_at_ms };
+    },
+  };
+  const rlApp = { ...ctx, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false }, rateStore } as unknown as AppCtx;
+  const rlHandle = makeHandler(rlApp);
+  const ipReq = (ip: string): HttpRequest => ({ method: "GET", path: "/api/entitlement", headers: { authorization: "Bearer tok-A" }, query: {}, body: undefined, ip });
+
+  // entitlement policy is 60/min; the 61st from one IP trips 429.
+  let last: HttpResponse = { status: 0, json: {} };
+  for (let i = 0; i < 60; i++) last = await rlHandle(ipReq("1.1.1.1"));
+  check("rate: first 60 from one IP are NOT 429", last.status !== 429);
+  const over = await rlHandle(ipReq("1.1.1.1"));
+  check("rate: 61st from the same IP -> 429 rate_limited", over.status === 429 && over.json.error === "rate_limited");
+  check("rate: 429 carries a positive retry_after_ms", typeof over.json.retry_after_ms === "number" && (over.json.retry_after_ms as number) > 0);
+  // a DIFFERENT IP has its own fresh bucket (per-IP isolation).
+  const otherIp = await rlHandle(ipReq("2.2.2.2"));
+  check("rate: a different IP has its own budget (not 429)", otherIp.status !== 429);
+  // an UN-wired ctx (no rateStore) never rate-limits — the default everywhere.
+  let none: HttpResponse = { status: 0, json: {} };
+  for (let i = 0; i < 100; i++) none = await handle(req("GET", "/api/entitlement", { token: "tok-A" }));
+  check("rate: with no rateStore wired, the limiter is OFF (never 429)", none.status !== 429);
+}
+
+// ═══ vercel glue: client IP threaded from x-forwarded-for ═════════════════════
+console.log("\n— vercel client-ip —");
+{
+  const withXff = toHttpRequest({ method: "GET", url: "/api/entitlement", headers: { "x-forwarded-for": "203.0.113.9, 10.0.0.1" } });
+  check("ip: first x-forwarded-for hop is the client ip", withXff.ip === "203.0.113.9");
+  const withReal = toHttpRequest({ method: "GET", url: "/api/entitlement", headers: { "x-real-ip": "198.51.100.7" } });
+  check("ip: x-real-ip fallback when no x-forwarded-for", withReal.ip === "198.51.100.7");
+  const noIp = toHttpRequest({ method: "GET", url: "/api/entitlement", headers: {} });
+  check("ip: absent when no proxy header (router falls back internally)", noIp.ip === undefined);
+}
+
 // ═══ deploy reachability — every route has a Vercel function file (must-fix #2) ═
 console.log("\n— api function coverage —");
 {
   const API_FILES = [
     "api/account.ts", "api/subscription/status.ts", "api/trial/start.ts", "api/backup/push.ts", "api/backup/restore.ts",
-    "api/webhooks/stripe.ts", "api/entitlement.ts", "api/media/upload-url.ts", "api/backup/blob.ts",
+    "api/webhooks/stripe.ts", "api/entitlement.ts", "api/media/upload-url.ts", "api/media/confirm.ts", "api/backup/blob.ts",
     "api/share/publish.ts", "api/share/get.ts", "api/share/import.ts", "api/content/rcdata.ts", "api/content/kb.ts",
-    "api/me/export.ts", "api/push/token.ts", "api/healthz.ts",
+    "api/me/export.ts", "api/push/token.ts", "api/healthz.ts", "api/cron/workers.ts",
   ];
   for (const f of API_FILES) check(`api: ${f} exists (route reachable on Vercel)`, existsSync(f));
+}
+
+// ═══ cron worker entry — secret-gated, fail-closed when unconfigured ═════════
+console.log("\n— cron worker entry —");
+{
+  // no secret wired -> fail closed even with a header present
+  const noSecretApp = { ...ctx, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false } } as unknown as AppCtx;
+  const noSecret = makeHandler(noSecretApp);
+  const rClosed = await noSecret({ method: "POST", path: "/api/cron/workers", headers: { "x-cron-secret": "anything" }, query: {}, body: undefined });
+  check("cron: fail-closed (no CRON_SECRET configured) -> 401", rClosed.status === 401);
+
+  let ran = 0;
+  const cronApp = { ...ctx, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false }, cronSecret: "s3cret", cronRunJobs: async () => { ran++; return { ok: true, ran: ["fake.worker"] }; } } as unknown as AppCtx;
+  const cron = makeHandler(cronApp);
+  const rNoHdr = await cron({ method: "POST", path: "/api/cron/workers", headers: {}, query: {}, body: undefined });
+  check("cron: missing secret -> 401, workers NOT run", rNoHdr.status === 401 && ran === 0);
+  const rWrong = await cron({ method: "POST", path: "/api/cron/workers", headers: { "x-cron-secret": "nope" }, query: {}, body: undefined });
+  check("cron: wrong secret -> 401, workers NOT run", rWrong.status === 401 && ran === 0);
+  const rOk = await cron({ method: "POST", path: "/api/cron/workers", headers: { "x-cron-secret": "s3cret" }, query: {}, body: undefined });
+  check("cron: correct x-cron-secret -> 200, workers ran", rOk.status === 200 && rOk.json.ok === true && ran === 1 && Array.isArray(rOk.json.ran));
+  const rBearer = await cron({ method: "POST", path: "/api/cron/workers", headers: { authorization: "Bearer s3cret" }, query: {}, body: undefined });
+  check("cron: Vercel-native Authorization: Bearer <secret> -> 200", rBearer.status === 200 && ran === 2);
 }
 
 // ═══ GDPR deletion targets the LIVE tables (must-fix #3) ═════════════════════

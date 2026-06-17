@@ -340,6 +340,45 @@ console.log("\n— runExportJob writer wiring —");
     check("run: writer failure did NOT throw", threw === false);
     check("run: writer failure -> ok:false", r !== undefined && r.ok === false);
   }
+
+  // signed-url validation (audit MED: caller-supplied url, no expiry/domain check)
+  {
+    const seed = () => {
+      const { deps, blobs, outbox, media, billing } = freshReaders();
+      blobs.set(A, A_DOMAINS); outbox.set(A, A_OUTBOX); media.set(A, A_MEDIA); billing.set(A, A_BILLING);
+      return { deps };
+    };
+    // non-https -> rejected, job NOT readied
+    {
+      const { deps } = seed();
+      const writer = new FakeJobWriter();
+      const r = await runExportJob(A, "job-url-1", "http://evil.example/a.zip", deps, writer);
+      check("url: non-https rejected -> ok:false", r.ok === false && r.ok === false && r.reason === "signed_url_not_https");
+      check("url: non-https url is NOT persisted", !writer.readied.has("job-url-1"));
+    }
+    // unparseable -> rejected
+    {
+      const { deps } = seed();
+      const writer = new FakeJobWriter();
+      const r = await runExportJob(A, "job-url-2", "not a url", deps, writer);
+      check("url: unparseable rejected", r.ok === false && r.ok === false && r.reason === "signed_url_unparseable" && !writer.readied.has("job-url-2"));
+    }
+    // off-domain (host allow-list given) -> rejected
+    {
+      const { deps } = seed();
+      const writer = new FakeJobWriter();
+      const r = await runExportJob(A, "job-url-3", "https://attacker.test/a.zip", deps, writer, ["blob.example"]);
+      check("url: host not on the allow-list rejected", r.ok === false && r.ok === false && r.reason === "signed_url_host_not_allowed" && !writer.readied.has("job-url-3"));
+    }
+    // on-domain https -> accepted + persisted
+    {
+      const { deps } = seed();
+      const writer = new FakeJobWriter();
+      const good = "https://cdn.blob.example/exp/user_A/archive.zip?sig=ok";
+      const r = await runExportJob(A, "job-url-4", good, deps, writer, ["blob.example"]);
+      check("url: https on an allowed host accepted + persisted", r.ok === true && writer.readied.get("job-url-4")?.url === good);
+    }
+  }
 }
 
 // ═══ verdict ═══════════════════════════════════════════════════════════════════

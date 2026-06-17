@@ -34,6 +34,7 @@ interface MediaRow {
   user_id: string;
   mime: string;
   bytes: number;
+  confirmed: boolean;
   created_at: string;
 }
 
@@ -54,7 +55,15 @@ class FakeMediaStore implements MediaStore {
   ): Promise<boolean> {
     if (this.rows.has(mediaId)) return false; // ON CONFLICT DO NOTHING -> no insert
     if (this.usedSync(userId) + bytes > quotaBytes) return false; // WHERE … <= quota fails
-    this.rows.set(mediaId, { media_id: mediaId, user_id: userId, mime, bytes, created_at: atIso });
+    this.rows.set(mediaId, { media_id: mediaId, user_id: userId, mime, bytes, confirmed: false, created_at: atIso });
+    return true;
+  }
+
+  /** Mirrors the SQL owner-scoped flip: only a matching unconfirmed row flips. */
+  async confirm(userId: string, mediaId: string): Promise<boolean> {
+    const r = this.rows.get(mediaId);
+    if (r === undefined || r.user_id !== userId || r.confirmed) return false;
+    r.confirmed = true;
     return true;
   }
 

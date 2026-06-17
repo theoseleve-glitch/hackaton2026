@@ -94,6 +94,31 @@ console.log("— tryRecord: atomic conditional INSERT —");
   check("tryRecord: zero rows -> false (quota exceeded or duplicate, no overshoot)", out === false);
 }
 
+// ═══ confirm: owner-scoped, idempotent flip (quota-overstatement fix) ════════
+console.log("\n— confirm: owner-scoped idempotent flip —");
+{
+  const { calls, query } = recorder(() => ({ rows: [{ media_id: "m-c" }] }));
+  const flipped = await makeSqlMediaStore(query).confirm("user_A", "m-c");
+  const sql = norm(calls[0].sql);
+  const params = calls[0].params as readonly unknown[];
+  check("confirm: issues EXACTLY ONE query", calls.length === 1, `${calls.length} calls`);
+  check("confirm: UPDATE media SET confirmed = true", /\bupdate\s+media\s+set\s+confirmed\s*=\s*true\b/i.test(sql), sql);
+  check(
+    "confirm: owner-scoped on BOTH user_id=$1 AND media_id=$2 (no IDOR)",
+    /where\s+user_id\s*=\s*\$1\s+and\s+media_id\s*=\s*\$2/i.test(sql),
+    sql,
+  );
+  check("confirm: idempotent guard (confirmed IS DISTINCT FROM true)", /confirmed\s+is\s+distinct\s+from\s+true/i.test(sql), sql);
+  check("confirm: RETURNING media_id (row presence = flipped)", /returning\s+media_id/i.test(sql), sql);
+  check("confirm: params [userId, mediaId]", params[0] === "user_A" && params[1] === "m-c", JSON.stringify(params));
+  check("confirm: returns true when a row was flipped", flipped === true);
+}
+{
+  const { query } = recorder(() => ({ rows: [] }));
+  const out = await makeSqlMediaStore(query).confirm("user_A", "missing");
+  check("confirm: zero rows -> false (foreign/unknown id or already confirmed)", out === false);
+}
+
 // ── owner-scoping: the gate's SUM is scoped to $2 (the userId), never global ──
 {
   const { calls, query } = recorder(() => ({ rows: [{ media_id: "m-3" }] }));

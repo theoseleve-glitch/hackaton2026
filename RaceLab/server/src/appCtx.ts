@@ -22,6 +22,9 @@ import type { ManifestSigner, ContentStore } from "./stores/contentStore";
 import type { ExportStore } from "./stores/exportStore";
 import type { PushStore } from "./stores/pushStore";
 import type { HealthSeams } from "./handlers/health";
+import type { ClerkIdentityDeleter } from "./handlers/accountDelete";
+import type { RateStore, RateLogger } from "./rateLimit";
+import type { Metrics } from "./metrics";
 
 export interface AppCtx extends ServerCtx {
   // P0 — Stripe webhook (D29 web Stripe, no IAP) + offline entitlement token
@@ -45,4 +48,19 @@ export interface AppCtx extends ServerCtx {
   // ops — /healthz: a db liveness ping + per-seam configured booleans (no secrets)
   healthPing: () => Promise<boolean>;
   healthSeams: HealthSeams;
+  // cross-cutting — rate limiter + metrics sink. Both OPTIONAL: absent =
+  // disabled (no limiter, no-op metrics) so tests and an unconfigured deploy
+  // never break. When `rateStore` is present the router enforces the per-route
+  // policy (RATE_POLICY in handler.ts) on the auth-free + auth-sensitive surfaces.
+  rateStore?: RateStore;
+  rateLog?: RateLogger;
+  metrics?: Metrics;
+  // cron — the scheduled worker fan-out (exportAssembler / pushReceipts /
+  // mediaMaintenance). cronSecret gates POST /api/cron/workers (fail-closed when
+  // absent); cronRunJobs is the injected fan-out (deploy wires the real workers).
+  cronSecret?: string;
+  cronRunJobs?: () => Promise<import("./handlers/cron").CronRunSummary>;
+  // account deletion — OPTIONAL Clerk identity deleter (Apple 5.1.1(v)). Absent =>
+  // the identity step is skipped (DELETE /api/account still wipes RaceLab's data).
+  deleteClerkIdentity?: ClerkIdentityDeleter;
 }

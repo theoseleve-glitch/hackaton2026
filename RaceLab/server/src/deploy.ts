@@ -10,11 +10,17 @@
  *        DATABASE_URL            — Neon connection string (required — core tier)
  *        CLERK_JWKS_URL          — https://<clerk-frontend-api>/.well-known/jwks.json (required)
  *        CLERK_ISSUER            — https://<clerk-frontend-api>            (recommended)
+ *        CLERK_SECRET_KEY        — Clerk backend API key; DELETE /api/account deletes the
+ *                                  IDENTITY too (Apple 5.1.1(v)). Absent → identity step skipped.
  *        ENTITLEMENT_SIGNING_KEY — Ed25519 PKCS8 PEM; the PUBLIC half is PINNED in the app
  *                                  (EdDSA, asymmetric — an HMAC key would let any holder mint Pro)
  *        STRIPE_WEBHOOK_SECRET   — Stripe CLI/dashboard signing secret (whsec_…)
  *        BLOB_*                  — S3/Supabase Storage creds for presigned media PUTs
  *        RENDER_URL              — internal PDF/PNG render service (D12 fill-never-redraw)
+ *        UPSTASH_REDIS_REST_URL  — rate-limit counter store (optional; absent → limiter OFF)
+ *        UPSTASH_REDIS_REST_TOKEN
+ *        CRON_SECRET             — gates POST /api/cron/workers (optional; absent → route fail-closed 401)
+ *        UNCONFIRMED_PRESIGN_TTL_MS — abandoned-presign reclaim window (default 24h)
  *  3. Apply db/schema.sql to Neon (covers every *_SCHEMA_SQL).
  *  4. RAW BODY: the /api/webhooks/stripe function MUST pass the unparsed body
  *     string (Stripe signs exact bytes) — see api/webhooks/stripe.ts (bodyParser off).
@@ -44,6 +50,12 @@ import { makeSqlContentStore } from "./stores/contentStore";
 import type { ManifestSigner } from "./stores/contentStore";
 import { makeSqlExportStore } from "./stores/exportStore";
 import { makeSqlPushStore } from "./stores/pushStore";
+import type { RateStore, RateLogger } from "./rateLimit";
+import { makeConsoleMetrics } from "./metrics";
+import { logLine } from "./log";
+import { presignSweep } from "./workers/mediaMaintenance";
+import type { PresignRow } from "./workers/mediaMaintenance";
+import type { CronRunSummary } from "./handlers/cron";
 
 export async function getDeployCtx(
   env: Record<string, string | undefined> = process.env,
@@ -68,6 +80,27 @@ export async function getDeployCtx(
     return out as { rows: Record<string, unknown>[] };
   };
   const db = makeSqlDb(query);
+
+  // ── Clerk identity deletion (Apple 5.1.1(v)). DELETE /api/account calls this
+  //    after wiping our data to remove the IDENTITY too. Wired iff CLERK_SECRET_KEY
+  //    is set; absent => the handler reports clerk_identity:"skipped" and only our
+  //    data is erased. Uses Clerk's backend REST API (no SDK committed). ────────
+  const clerkSecret = env.CLERK_SECRET_KEY;
+  const deleteClerkIdentity = clerkSecret !== undefined && clerkSecret !== ""
+    ? {
+        deleteIdentity: async (userId: string): Promise<void> => {
+          const res = await fetch(`https://api.clerk.com/v1/users/${encodeURIComponent(userId)}`, {
+            method: "DELETE",
+            headers: { authorization: `Bearer ${clerkSecret}` },
+          });
+          // 404 = already gone (idempotent); anything else non-2xx is a failure
+          // the handler surfaces as clerk_identity:"failed" (best-effort, not fatal).
+          if (!res.ok && res.status !== 404) {
+            throw new Error(`clerk_delete_failed: ${res.status}`);
+          }
+        },
+      }
+    : undefined;
 
   // ── Clerk bearer verification (JWKS) ───────────────────────────────────────
   const joseSpec = "jose" as string;
@@ -165,6 +198,79 @@ export async function getDeployCtx(
   const newMediaId = (): string =>
     "m_" + (globalThis.crypto?.randomUUID?.() ?? "").replace(/-/g, "");
 
+  // ── rate limiter (Upstash REST INCR + PEXPIRE-NX). Unconfigured → absent →
+  //    the router never rate-limits (graceful: the auth-free surfaces still work,
+  //    just uncapped until UPSTASH_* is set). Atomic single op per the seam. ──
+  const upstashUrl = env.UPSTASH_REDIS_REST_URL;
+  const upstashTok = env.UPSTASH_REDIS_REST_TOKEN;
+  let rateStore: RateStore | undefined;
+  if (upstashUrl !== undefined && upstashUrl !== "" && upstashTok !== undefined && upstashTok !== "") {
+    const base = upstashUrl.replace(/\/+$/, "");
+    rateStore = {
+      async incr(key, window_ms) {
+        // INCR then set TTL on the FIRST hit only (PEXPIRE … NX). Two round-trips
+        // via the REST pipeline; PTTL gives the reset instant. The limiter treats
+        // a bad reply / throw as an outage and fails open, so a transient blip is
+        // safe.
+        const headers = { authorization: `Bearer ${upstashTok}` };
+        const pipe = await fetch(`${base}/pipeline`, {
+          method: "POST",
+          headers: { ...headers, "content-type": "application/json" },
+          body: JSON.stringify([
+            ["INCR", key],
+            ["PEXPIRE", key, String(window_ms), "NX"],
+            ["PTTL", key],
+          ]),
+        });
+        const out = (await pipe.json()) as Array<{ result?: number }>;
+        const count = Number(out[0]?.result);
+        const pttl = Number(out[2]?.result);
+        const reset_at_ms = Date.now() + (Number.isFinite(pttl) && pttl > 0 ? pttl : window_ms);
+        return { count, reset_at_ms };
+      },
+    };
+  }
+  const rateLog: RateLogger = { warn: (f) => logLine({ level: "warn", ...f }) };
+  // metrics: a structured-stderr sink so the alert catalog (METRIC.*) actually
+  // fires. Same stream as logLine; no-op only when a deploy explicitly opts out.
+  const metrics = makeConsoleMetrics();
+
+  // ── cron worker fan-out (POST /api/cron/workers, x-cron-secret gated) ──────
+  // The audit found the workers had no scheduled entry. This wires the one that
+  // is fully expressible over the committed query fn — mediaMaintenance's
+  // abandoned-presign sweep (reclaims unconfirmed, aged-out media rows so they
+  // stop overstating quota). The exportAssembler + pushReceipts fan-outs need a
+  // job queue + the Expo SDK and are deploy follow-ups (their reader seams are
+  // already pure + tested in src/workers/*); they are listed in `ran` only once
+  // wired. Configure UNCONFIRMED_PRESIGN_TTL_MS to tune the reclaim window.
+  const cronSecret = env.CRON_SECRET;
+  const presignTtlMs = Number(env.UNCONFIRMED_PRESIGN_TTL_MS ?? "") || 24 * 60 * 60_000;
+  const cronRunJobs = async (): Promise<CronRunSummary> => {
+    const ran: string[] = [];
+    let swept = 0;
+    try {
+      const { rows } = await query(
+        `SELECT media_id AS id, created_at, confirmed FROM media WHERE confirmed = false`,
+      );
+      const presignRows: PresignRow[] = rows.map((r) => ({
+        id: String(r.id),
+        created_at: typeof r.created_at === "string" ? r.created_at : new Date(r.created_at as string | number | Date).toISOString(),
+        confirmed: Boolean(r.confirmed),
+      }));
+      const ids = presignSweep(presignRows, new Date().toISOString(), presignTtlMs);
+      for (const id of ids) {
+        // delete only UNCONFIRMED rows (belt-and-suspenders against a race that
+        // confirmed the row after the SELECT) — frees the reserved quota.
+        await query(`DELETE FROM media WHERE media_id = $1 AND confirmed = false`, [id]);
+        swept++;
+      }
+      ran.push("mediaMaintenance.presignSweep");
+    } catch (e) {
+      logLine({ level: "error", msg: "cron_media_sweep_failed", err_msg: e instanceof Error ? e.message : String(e) });
+    }
+    return { ok: true, ran, media_presigns_swept: swept };
+  };
+
   return {
     db,
     verifier,
@@ -198,5 +304,11 @@ export async function getDeployCtx(
       blob: blobBase !== undefined && blobBase !== "",
       render: renderUrl !== undefined && renderUrl !== "",
     },
+    ...(rateStore !== undefined ? { rateStore } : {}),
+    rateLog,
+    metrics,
+    ...(cronSecret !== undefined && cronSecret !== "" ? { cronSecret } : {}),
+    cronRunJobs,
+    ...(deleteClerkIdentity !== undefined ? { deleteClerkIdentity } : {}),
   };
 }

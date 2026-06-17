@@ -4,5 +4,11 @@
     "api/**/*.ts": {
       "maxDuration": 10
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/workers",
+      "schedule": "0 * * * *"
+    }
+  ]
 }

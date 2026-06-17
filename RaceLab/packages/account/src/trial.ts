@@ -201,6 +201,24 @@ export class TrialService {
     let account = loaded.account;
     const recovered = loaded.recovered;
 
+    // Tombstone gate (audit HIGH): if a local account-deletion is still queued
+    // (deleteAccount wrote a pendingDeletion the server wipe hasn't drained yet),
+    // do NOT start a fresh trial on the same device — that would hand a deleted
+    // account a second free trial. Defense-in-depth: the server's /trial/start
+    // ALSO refuses a tombstoned id (409); this is the offline-first mirror so the
+    // local trial never even starts. Best-effort: a store read failure here is
+    // ignored (the server gate still backstops it) rather than blocking.
+    if (account.trial_started_at === undefined && (await this.hasPendingDeletion())) {
+      return {
+        ok: true,
+        account,
+        status: effectiveSubscriptionStatus(account, nowIso),
+        started: false,
+        sync: "not_needed",
+        ...(recovered !== undefined ? { recovered } : {}),
+      };
+    }
+
     const statusBefore = effectiveSubscriptionStatus(account, nowIso);
     if (statusBefore === "active" || statusBefore === "grace") {
       return {
@@ -238,6 +256,18 @@ export class TrialService {
       sync: synced.sync,
       ...(recovered !== undefined ? { recovered } : {}),
     };
+  }
+
+  /** True iff a local account-deletion is still queued (deletion.ts wrote a
+   *  PendingDeletion the server wipe hasn't drained). Best-effort: a store read
+   *  failure resolves to false (the server's /trial/start tombstone gate is the
+   *  durable backstop), never throws, never blocks the caller. */
+  private async hasPendingDeletion(): Promise<boolean> {
+    try {
+      return (await this.deps.store.getItem(STORAGE_KEYS.pendingDeletion)) !== null;
+    } catch {
+      return false;
+    }
   }
 
   /** Best-effort POST /api/trial/start + first-seen reconcile. Never throws. */

@@ -61,6 +61,10 @@ export interface Db {
   /** Wipes users + subscriptions + backup_entries, writes the deletions
    *  tombstone (first requested_at wins). Idempotent. */
   deleteUserData(user_id: string, requested_at_iso: string): Promise<void>;
+  /** True iff a deletions tombstone exists for this user_id (GDPR Art.17 record
+   *  that a deletion was requested + honored). Used to REFUSE a second trial for
+   *  a re-claimed id — the deletions row survives the user wipe on purpose. */
+  isTombstoned(user_id: string): Promise<boolean>;
 }
 
 export function makeSqlDb(query: QueryFn): Db {
@@ -160,6 +164,14 @@ export function makeSqlDb(query: QueryFn): Db {
          ON CONFLICT (user_id) DO NOTHING`,
         [user_id, requested_at_iso],
       );
+    },
+
+    async isTombstoned(user_id) {
+      const { rows } = await query(
+        `SELECT 1 FROM deletions WHERE user_id = $1`,
+        [user_id],
+      );
+      return rows.length > 0;
     },
   };
 }

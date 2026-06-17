@@ -75,10 +75,16 @@ export async function backupPush(ctx: ServerCtx, req: HttpRequest): Promise<Http
     });
   }
 
+  // ensureUser BEFORE the empty-batch short-circuit (audit MED/LOW): an empty push
+  // must still materialize the user row. Otherwise a client whose first contact is
+  // an empty batch returns ok, the row never gets created, and the NEXT non-empty
+  // push FK-fails on insertBackupEntries (backup_entries.user_id -> users.id). The
+  // upsert is a cheap no-op once the row exists.
+  await ctx.db.ensureUser(auth.user_id, server_time);
+
   if (parsed.length === 0) {
     return { status: 200, json: { ok: true, inserted: 0, skipped: 0, server_time } };
   }
-  await ctx.db.ensureUser(auth.user_id, server_time);
   const { inserted, skipped } = await ctx.db.insertBackupEntries(auth.user_id, parsed, server_time);
   return { status: 200, json: { ok: true, inserted, skipped, server_time } };
 }

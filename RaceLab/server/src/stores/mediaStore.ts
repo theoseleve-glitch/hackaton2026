@@ -51,6 +51,13 @@ export interface MediaStore {
     quotaBytes: number,
     atIso: string,
   ): Promise<boolean>;
+  /** Mark the user's reserved row `confirmed` once the client's PUT is verified.
+   *  Owner-scoped (keyed on user_id AND media_id, so one user can never confirm
+   *  another's reservation). Returns true when a matching unconfirmed row was
+   *  flipped, false when there was nothing to confirm (unknown/foreign id, or it
+   *  was already confirmed — idempotent). A row stays UNconfirmed (and is
+   *  therefore swept by the presign cron) until this lands. */
+  confirm(userId: string, mediaId: string): Promise<boolean>;
 }
 
 export function makeSqlMediaStore(query: QueryFn): MediaStore {
@@ -70,6 +77,19 @@ export function makeSqlMediaStore(query: QueryFn): MediaStore {
       );
       return rows.length > 0;
     },
+
+    async confirm(userId, mediaId) {
+      // Owner-scoped flip: both user_id AND media_id in the predicate so a foreign
+      // media_id matches zero rows (no IDOR). DISTINCT FROM true makes it
+      // idempotent — re-confirming an already-confirmed row is a no-op (0 rows).
+      const { rows } = await query(
+        `UPDATE media SET confirmed = true
+         WHERE user_id = $1 AND media_id = $2 AND confirmed IS DISTINCT FROM true
+         RETURNING media_id`,
+        [userId, mediaId],
+      );
+      return rows.length > 0;
+    },
   };
 }
 
@@ -85,6 +105,7 @@ export const MEDIA_SCHEMA_SQL = `CREATE TABLE IF NOT EXISTS media (
   user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   mime       TEXT NOT NULL,                             -- allowlisted at upload time
   bytes      BIGINT NOT NULL,                           -- declared upload size (quota accounting)
+  confirmed  BOOLEAN NOT NULL DEFAULT false,            -- true once the upload PUT is verified (else swept)
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS media_user ON media (user_id);`;

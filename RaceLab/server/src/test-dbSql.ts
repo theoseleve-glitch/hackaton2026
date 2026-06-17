@@ -105,5 +105,17 @@ console.log("— db SQL contract (owner-scoping + tables + isoOf) —");
   check("deleteUserData: tombstones via INSERT INTO deletions", /INSERT INTO deletions/.test(sql));
 }
 
+// isTombstoned — reads the surviving deletions tombstone (re-trial gate)
+{
+  const rec = recorder([{ "?column?": 1 }]); // a present row
+  const yes = await makeSqlDb(rec.fn).isTombstoned("user_A");
+  check("isTombstoned: SELECT FROM deletions WHERE user_id = $1", /select\s+1\s+from\s+deletions\s+where\s+user_id\s*=\s*\$1/i.test(rec.last().sql), rec.last().sql);
+  check("isTombstoned: params bind user_id", rec.last().params[0] === "user_A");
+  check("isTombstoned: row present -> true", yes === true);
+  const recNone = recorder([]); // no row
+  const no = await makeSqlDb(recNone.fn).isTombstoned("user_A");
+  check("isTombstoned: no row -> false", no === false);
+}
+
 console.log(failures === 0 ? "\nDB-SQL: all checks passed" : `\nDB-SQL: ${failures} failures`);
 if (failures > 0) process.exitCode = 1;

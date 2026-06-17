@@ -108,14 +108,21 @@ console.log("\n— getEventCreated: watermark read —");
 console.log("\n— upsertSubscription: watermark guard —");
 {
   const { calls, query } = recorder(() => ({ rows: [] }));
+  const RECEIPT = "2026-06-14T09:30:00.000Z";
   const upsert: StripeSubscriptionUpsert = {
     status: "active",
     current_period_end: "2026-07-13T00:00:00.000Z",
     event_created: 1_700_000_000,
+    received_at: RECEIPT,
   };
   await makeSqlStripeWebhookStore(query).upsertSubscription("user_A", upsert);
-  const sql = norm(calls[0].sql);
-  const params = calls[0].params as readonly unknown[];
+  // upsert now issues TWO statements: ensure the users row (FK safety), then the
+  // subscription upsert. Pin both, but read the assertions off the subscription one.
+  check("upsert: FK-safety — ensures the users row first (INSERT INTO users ON CONFLICT DO NOTHING)", calls.some((c) => /insert\s+into\s+users\b/i.test(norm(c.sql)) && /on\s+conflict\s*\(\s*id\s*\)\s+do\s+nothing/i.test(norm(c.sql))));
+  const subCall = calls.find((c) => /insert\s+into\s+stripe_subscriptions/i.test(c.sql));
+  if (subCall === undefined) throw new Error("no stripe_subscriptions upsert issued");
+  const sql = norm(subCall.sql);
+  const params = subCall.params as readonly unknown[];
 
   check("upsert: targets stripe_subscriptions (D29 subscription truth)", /insert\s+into\s+stripe_subscriptions/i.test(sql), sql);
   check(
@@ -160,24 +167,28 @@ console.log("\n— upsertSubscription: watermark guard —");
     String(params[2]),
   );
   check(
-    "upsert: param[3] event_created is the unix-second watermark; param[4] derived updated_at = ISO of (created*1000)",
-    params[3] === 1_700_000_000 && params[4] === new Date(1_700_000_000 * 1000).toISOString(),
+    "upsert: param[3] event_created is the unix-second watermark; param[4] updated_at = server RECEIPT time (NOT the event epoch)",
+    params[3] === 1_700_000_000 && params[4] === RECEIPT && params[4] !== new Date(1_700_000_000 * 1000).toISOString(),
     JSON.stringify([params[3], params[4]]),
   );
   check("upsert: owner param[0] = userId, param[1] = status", params[0] === "user_A" && params[1] === "active");
 }
 
-// ── upsert: null event_created -> updated_at param is null (no NaN date) ──────
+// ── upsert: updated_at is the server receipt time, independent of event_created ─
 {
   const { calls, query } = recorder(() => ({ rows: [] }));
+  const RECEIPT = "2026-06-14T10:00:00.000Z";
   const upsert = {
     status: "expired" as const,
     current_period_end: null,
     event_created: null as unknown as number,
+    received_at: RECEIPT,
   };
   await makeSqlStripeWebhookStore(query).upsertSubscription("user_A", upsert);
-  const params = calls[0].params as readonly unknown[];
-  check("upsert: null event_created -> derived updated_at param is null (not 'Invalid Date')", params[4] === null, String(params[4]));
+  const subCall = calls.find((c) => /insert\s+into\s+stripe_subscriptions/i.test(c.sql));
+  if (subCall === undefined) throw new Error("no stripe_subscriptions upsert issued");
+  const params = subCall.params as readonly unknown[];
+  check("upsert: updated_at param = received_at even when event_created is null (no 'Invalid Date')", params[4] === RECEIPT, String(params[4]));
   check("upsert: null current_period_end passed through as null", params[2] === null);
 }
 

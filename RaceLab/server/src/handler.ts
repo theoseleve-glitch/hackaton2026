@@ -25,10 +25,35 @@ import { sharePublish, shareGet, shareImport } from "./handlers/share";
 import { content } from "./handlers/content";
 import { dataExportCreate, dataExportStatus } from "./handlers/dataExport";
 import { registerPushToken, unregisterPushToken } from "./handlers/pushToken";
+import { mediaConfirm } from "./handlers/mediaConfirm";
+import { cronWorkers } from "./handlers/cron";
 import { health } from "./handlers/health";
 import { logLine, errFields } from "./log";
+import { rateLimit, compositeKey } from "./rateLimit";
+import { emitHttp5xx } from "./metrics";
 
 type HandlerFn = (ctx: AppCtx, req: HttpRequest) => Promise<HttpResponse>;
+
+/** Per-route fixed-window rate-limit policy (IP dimension). ONLY enforced when
+ *  ctx.rateStore is wired (absent in tests / an unconfigured deploy). Keyed by
+ *  "<METHOD> <path>". The auth-free + auth-sensitive surfaces the audit called
+ *  out are covered: the Stripe webhook (forged-signature spray), the EdDSA
+ *  entitlement/signing endpoint (token-mint abuse), and the backup restore read
+ *  (whole-journal scrape). The limiter FAILS OPEN on a store outage (rateLimit's
+ *  default) so a counter blip never locks legitimate callers out. */
+interface RatePolicy {
+  surface: string;
+  limit: number;
+  window_ms: number;
+}
+const MIN = 60_000;
+const RATE_POLICY: Record<string, RatePolicy> = {
+  "POST /api/webhooks/stripe": { surface: "stripe_webhook", limit: 120, window_ms: MIN },
+  "GET /api/entitlement": { surface: "entitlement", limit: 60, window_ms: MIN },
+  "POST /api/me/export": { surface: "export_create", limit: 10, window_ms: MIN },
+  "GET /api/backup/restore": { surface: "backup_restore", limit: 60, window_ms: MIN },
+  "POST /api/trial/start": { surface: "trial_start", limit: 30, window_ms: MIN },
+};
 
 const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {
   // ── pre-existing (B5/B6) — take the base ServerCtx (AppCtx extends it) ──────
@@ -46,9 +71,12 @@ const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {
     GET: (c, r) => entitlement({ now: c.now, verifier: c.verifier, sign: c.entitlementSign, store: c.entitlementStore }, r),
   },
 
-  // ── P0.5 — media upload-url ────────────────────────────────────────────────
+  // ── P0.5 — media upload-url + confirm ──────────────────────────────────────
   "/api/media/upload-url": {
     POST: (c, r) => uploadUrl({ verifier: c.verifier, now: c.now, blobs: c.blobStore, store: c.mediaStore, newMediaId: c.newMediaId }, r),
+  },
+  "/api/media/confirm": {
+    POST: (c, r) => mediaConfirm({ verifier: c.verifier, now: c.now, store: c.mediaStore }, r),
   },
 
   // ── P1 — backup domain-blobs (D11) ─────────────────────────────────────────
@@ -92,6 +120,19 @@ const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {
   "/api/healthz": {
     GET: (c) => health({ now: c.now, ping: c.healthPing, seams: c.healthSeams }),
   },
+
+  // ── cron — scheduled worker fan-out (secret-gated; fail-closed when absent) ─
+  "/api/cron/workers": {
+    POST: (c, r) =>
+      cronWorkers(
+        {
+          now: c.now,
+          cronSecret: c.cronSecret,
+          runJobs: c.cronRunJobs ?? (async () => ({ ok: true, ran: [] })),
+        },
+        r,
+      ),
+  },
 };
 
 export function makeHandler(ctx: AppCtx): (req: HttpRequest) => Promise<HttpResponse> {
@@ -104,16 +145,44 @@ export function makeHandler(ctx: AppCtx): (req: HttpRequest) => Promise<HttpResp
     const stamp = (r: HttpResponse): HttpResponse => ({ status: r.status, json: { server_time: ctx.now(), ...r.json } });
     const methods = ROUTES[path];
     if (methods === undefined) return stamp({ status: 404, json: { error: "not_found" } });
-    const fn = methods[req.method.toUpperCase()];
+    const method = req.method.toUpperCase();
+    const fn = methods[method];
     if (fn === undefined) {
       return stamp({ status: 405, json: { error: "method_not_allowed", allow: Object.keys(methods) } });
     }
+
+    // ── rate limit (IP dimension) — only when a store is wired ────────────────
+    // Layered under the handlers' own auth: this caps abuse on the auth-free and
+    // auth-sensitive surfaces BEFORE the handler runs (a forged-signature spray
+    // never reaches signature verification; a token-mint storm is throttled). The
+    // limiter fails open on a store outage, so a counter blip can't lock anyone
+    // out. Keyed on the client IP; an absent IP collapses to a stable placeholder
+    // so the limiter still namespaces the bucket per route.
+    if (ctx.rateStore !== undefined) {
+      const policy = RATE_POLICY[`${method} ${path}`];
+      if (policy !== undefined) {
+        const ip = req.ip !== undefined && req.ip !== "" ? req.ip : "unknown";
+        const key = compositeKey(policy.surface, ["ip", ip]);
+        const rl = await rateLimit(
+          { store: ctx.rateStore, now: () => Date.parse(ctx.now()), log: ctx.rateLog },
+          { key, limit: policy.limit, window_ms: policy.window_ms },
+        );
+        if (!rl.ok && rl.reason === "rate_limited") {
+          return stamp({ status: 429, json: { error: "rate_limited", retry_after_ms: rl.retry_after_ms } });
+        }
+        if (!rl.ok && rl.reason === "store_unavailable") {
+          return stamp({ status: 429, json: { error: "rate_limited", retry_after_ms: rl.retry_after_ms } });
+        }
+      }
+    }
+
     try {
       return stamp(await fn(ctx, req));
     } catch (e) {
       // The client gets an opaque reason (no stack leak); the server gets the
       // only diagnostic trail. Never log bodies/tokens/PII (see log.ts).
       logLine({ level: "error", msg: "handler_threw", route: path, request_id: reqId, status: 500, ...errFields(e) });
+      if (ctx.metrics !== undefined) emitHttp5xx(ctx.metrics, path, 500);
       return stamp({ status: 500, json: { error: "internal_error" } });
     }
   };

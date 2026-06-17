@@ -20,6 +20,15 @@ export async function trialStart(ctx: ServerCtx, req: HttpRequest): Promise<Http
   if (!auth.ok) return auth.response;
   const server_time = ctx.now();
 
+  // Tombstone gate (audit HIGH): a deletions row survives the user wipe (GDPR
+  // Art.17 record). If THIS id was deleted, it has already had its one free trial
+  // — refuse a second one (409) rather than re-create the user + restart the
+  // 15-day clock. (A genuinely new Clerk account gets a fresh id and is untouched
+  // by this; only a re-claim of the same deleted id is blocked.)
+  if (await ctx.db.isTombstoned(auth.user_id)) {
+    return { status: 409, json: { error: "trial_unavailable_deleted", server_time } };
+  }
+
   let claimed = server_time;
   const body = req.body;
   if (body !== undefined && body !== null) {

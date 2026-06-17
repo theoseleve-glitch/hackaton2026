@@ -211,15 +211,21 @@ export async function processReceipts(
     retry.push({ ticketId: r.id, error: code });
   }
 
-  // Prune each dead token exactly once. A prune failure aborts with a typed
-  // result (the caller retries the sweep) — but we never throw across the boundary.
+  // Prune each dead token exactly once. COLLECT-AND-CONTINUE (audit MED): one
+  // failing prune must NOT discard the whole batch — the other dead tokens still
+  // get cleaned, and the failed ones are surfaced (so the caller can retry just
+  // those) instead of losing every success this sweep. Never throws across the
+  // boundary.
   let pruned = 0;
   for (const token of tokensToPrune) {
     try {
       await deps.pruner.unregisterByToken(token);
       pruned++;
     } catch {
-      return { ok: false, reason: "prune_failed" };
+      // Don't bail the batch; record this one token for a later retry and keep
+      // pruning the rest. The token (a dead-device push token) is low-sensitivity
+      // routing data, surfaced here so the caller knows what to re-sweep.
+      skipped.push({ ticketId: `token:${token}`, reason: "prune_failed" });
     }
   }
 

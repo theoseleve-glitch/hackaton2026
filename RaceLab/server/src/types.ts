@@ -15,6 +15,10 @@ export interface HttpRequest {
   headers: Record<string, string | string[] | undefined>;
   query: Record<string, string | string[] | undefined>;
   body: unknown;
+  /** Best-effort client IP (the first x-forwarded-for hop at the edge), the IP
+   *  dimension of the rate limiter. Absent when no proxy populated it — the
+   *  router falls back to a stable placeholder so the limiter never crashes. */
+  ip?: string;
 }
 
 export interface HttpResponse {

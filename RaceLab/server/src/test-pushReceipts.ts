@@ -62,9 +62,12 @@ class FakeFetcher implements ExpoReceiptFetcher {
 /** Pruner that records every token it was asked to unregister. Optionally throws. */
 class FakePruner implements PushPruner {
   unregistered: string[] = [];
-  constructor(private throwOnPrune = false) {}
+  /** `failTokens` (optional) throws only for those tokens; otherwise throwOnPrune
+   *  throws for ALL. With both, only the listed tokens fail (collect-and-continue). */
+  constructor(private throwOnPrune = false, private failTokens?: ReadonlySet<string>) {}
   async unregisterByToken(token: string): Promise<void> {
-    if (this.throwOnPrune) throw new Error("db down");
+    const shouldFail = this.failTokens !== undefined ? this.failTokens.has(token) : this.throwOnPrune;
+    if (shouldFail) throw new Error("db down");
     this.unregistered.push(token);
   }
 }
@@ -217,19 +220,24 @@ console.log("\n— processReceipts: empty batch —");
 
 // ═══ processReceipts: never throws even if the pruner throws ═════════════════════
 
-console.log("\n— processReceipts: pruner throws -> typed result, not a throw —");
+console.log("\n— processReceipts: pruner throws -> collect-and-continue, not a throw —");
 {
-  const fetcher = new FakeFetcher([dnr("t1", "DEAD")]);
-  const pruner = new FakePruner(/* throwOnPrune */ true);
+  // COLLECT-AND-CONTINUE (audit MED): a single failing prune must NOT discard the
+  // whole batch. With two dead tokens where one prune throws, the other still
+  // gets pruned and the failed one is surfaced in `skipped` (reason prune_failed).
+  const fetcher = new FakeFetcher([dnr("t1", "DEAD-A"), dnr("t2", "DEAD-B")]);
+  const pruner = new FakePruner(/* throwOnPrune */ true, /* failTokens */ new Set(["DEAD-A"]));
   let threw = false;
   let res;
   try {
-    res = await processReceipts(["t1"], { fetcher, pruner });
+    res = await processReceipts(["t1", "t2"], { fetcher, pruner });
   } catch {
     threw = true;
   }
   check("prune-fail: did NOT throw across the boundary", threw === false);
-  check("prune-fail: typed result prune_failed", res !== undefined && res.ok === false && res.reason === "prune_failed");
+  check("prune-fail: batch NOT discarded — result is ok:true", res !== undefined && res.ok === true);
+  check("prune-fail: the healthy token was still pruned (1)", res !== undefined && res.ok === true && res.pruned === 1);
+  check("prune-fail: the failing token surfaced in skipped (reason prune_failed)", res !== undefined && res.ok === true && res.skipped.some((s) => s.reason === "prune_failed"));
 }
 
 // ═══ processReceipts: malformed receipt is skipped, not fatal ════════════════════

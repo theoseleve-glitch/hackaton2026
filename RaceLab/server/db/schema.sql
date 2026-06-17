@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS processed_stripe_events (
   processed_at TIMESTAMPTZ NOT NULL
 );
 CREATE TABLE IF NOT EXISTS stripe_subscriptions (
-  user_id            TEXT PRIMARY KEY,                     -- Clerk user id ("user_...")
+  user_id            TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, -- Clerk user id ("user_...")
   status             TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
   current_period_end TIMESTAMPTZ,                          -- paid-through; null = no expiry asserted
   event_created      BIGINT NOT NULL,                      -- unix s of last applied event (out-of-order watermark)
@@ -63,11 +63,15 @@ CREATE TABLE IF NOT EXISTS stripe_subscriptions (
 );
 
 -- media (P0.5): upload-url quota ledger; blob bytes live in object storage.
+-- `confirmed` flips true once the client's PUT is verified (POST /api/media/confirm);
+-- an UNconfirmed row whose presign aged out is reclaimed by the presignSweep cron
+-- (workers/mediaMaintenance) so abandoned reservations stop overstating the quota.
 CREATE TABLE IF NOT EXISTS media (
   media_id   TEXT PRIMARY KEY,                             -- server-generated, embedded in the blob key
   user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   mime       TEXT NOT NULL,                                -- allowlisted at upload time
   bytes      BIGINT NOT NULL,                              -- declared upload size (quota accounting)
+  confirmed  BOOLEAN NOT NULL DEFAULT false,               -- true once the upload PUT is verified (else swept)
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS media_user ON media (user_id);
@@ -86,7 +90,7 @@ CREATE TABLE IF NOT EXISTS backup_blobs (
 -- snapshot; auth-free token GET; fork lineage ledger.
 CREATE TABLE IF NOT EXISTS share_snapshots (
   token         TEXT PRIMARY KEY,                          -- unguessable capability ("s_...")
-  owner_user_id TEXT NOT NULL,                             -- internal lineage; NEVER exposed by the auth-free GET
+  owner_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, -- internal lineage; NEVER exposed by the auth-free GET
   kind          TEXT NOT NULL CHECK (kind IN ('track', 'setup')),
   payload       JSONB NOT NULL,                            -- publishable fields only (server-scrubbed)
   artifacts     JSONB NOT NULL DEFAULT '{}'::jsonb,        -- { png_url?, pdf_url? } (D12)
@@ -95,7 +99,7 @@ CREATE TABLE IF NOT EXISTS share_snapshots (
 );
 CREATE TABLE IF NOT EXISTS share_imports (
   token      TEXT NOT NULL,
-  user_id    TEXT NOT NULL,
+  user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   created_at TIMESTAMPTZ NOT NULL,
   PRIMARY KEY (token, user_id)
 );

@@ -137,6 +137,23 @@ console.log("\n— trial lifecycle —");
   check("ensureTrialState: after expiry stays expired, never a second trial", r3.ok && !r3.started && r3.status === "expired");
 }
 
+// ═══ tombstone blocks a re-trial on the same device (audit HIGH) ═════════════
+console.log("\n— tombstone blocks re-trial —");
+{
+  // A pending account-deletion (deleteAccount queued one, server wipe not yet
+  // drained) must NOT let ensureTrialState start a fresh local trial.
+  const kv = new MemKV();
+  await kv.setItem(STORAGE_KEYS.pendingDeletion, JSON.stringify({ user_id: "user_X", requested_at: T0, attempts: 1 }));
+  const deps: TrialDeps = { store: kv, fetchFn: null, now: () => T0, tokens: ANONYMOUS_TOKENS };
+  const r = await new TrialService(deps).ensureTrialState();
+  check("tombstone: ensureTrialState does NOT start a trial while a deletion is pending", r.ok && !r.started && r.ok && r.account.trial_started_at === undefined);
+
+  // Once the tombstone is gone (deletion drained / fresh account), trial starts.
+  await kv.removeItem(STORAGE_KEYS.pendingDeletion);
+  const r2 = await new TrialService(deps).ensureTrialState();
+  check("tombstone: with no pending deletion the trial starts normally", r2.ok && r2.started && r2.status === "trial");
+}
+
 // ═══ trial server sync (record / reconcile / first-seen) ═════════════════════
 
 console.log("\n— trial server sync —");

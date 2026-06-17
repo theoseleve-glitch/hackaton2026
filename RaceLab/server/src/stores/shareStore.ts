@@ -103,6 +103,14 @@ function randomBytes(n: number): Uint8Array {
 export function makeSqlShareStore(query: QueryFn): ShareStore {
   return {
     async create(ownerUserId, kind, payload, artifacts, atIso) {
+      // FK safety: share_snapshots.owner_user_id now REFERENCES users(id) (so a
+      // user wipe cascades their published shares). Materialize the user row
+      // first (idempotent) — a publish could be a user's first server write.
+      await query(
+        `INSERT INTO users (id, created_at) VALUES ($1, $2::timestamptz)
+         ON CONFLICT (id) DO NOTHING`,
+        [ownerUserId, atIso],
+      );
       // retry on the (astronomically unlikely) token PK collision
       for (let attempt = 0; attempt < 5; attempt++) {
         const token = newShareToken();
@@ -138,6 +146,13 @@ export function makeSqlShareStore(query: QueryFn): ShareStore {
     },
 
     async recordImport(token, intoUserId, atIso) {
+      // FK safety: share_imports.user_id now REFERENCES users(id). Ensure the
+      // importer's row exists first (idempotent) so the import never FK-fails.
+      await query(
+        `INSERT INTO users (id, created_at) VALUES ($1, $2::timestamptz)
+         ON CONFLICT (id) DO NOTHING`,
+        [intoUserId, atIso],
+      );
       await query(
         `INSERT INTO share_imports (token, user_id, created_at)
          VALUES ($1, $2, $3::timestamptz)

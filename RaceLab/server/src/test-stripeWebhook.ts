@@ -379,10 +379,10 @@ console.log("\n— equal-second downgrade (terminal tiebreaker) —");
   // a same-second NON-terminal upsert is rejected by the FakeStore guard, but a
   // same-second 'canceled' is accepted (terminal tiebreaker).
   const fs = new FakeStore();
-  await fs.upsertSubscription("u", { status: "active", current_period_end: periodEndIso, event_created: T0 + 100 });
-  await fs.upsertSubscription("u", { status: "active", current_period_end: null, event_created: T0 + 100 });
+  await fs.upsertSubscription("u", { status: "active", current_period_end: periodEndIso, event_created: T0 + 100, received_at: NOW });
+  await fs.upsertSubscription("u", { status: "active", current_period_end: null, event_created: T0 + 100, received_at: NOW });
   check("eqsec D: store rejects same-second non-terminal upsert (strict >)", (await fs.getEventCreated("u")) === T0 + 100 && fs.subs.get("u")?.current_period_end === periodEndIso);
-  await fs.upsertSubscription("u", { status: "canceled", current_period_end: null, event_created: T0 + 100 });
+  await fs.upsertSubscription("u", { status: "canceled", current_period_end: null, event_created: T0 + 100, received_at: NOW });
   check("eqsec D: store accepts same-second 'canceled' (terminal tiebreaker)", fs.subs.get("u")?.status === "canceled");
 }
 

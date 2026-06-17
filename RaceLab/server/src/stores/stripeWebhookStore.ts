@@ -75,6 +75,10 @@ export interface StripeSubscriptionUpsert {
   status: StripeSubStatus;
   current_period_end: string | null; // ISO, or null = no expiry asserted
   event_created: number; // unix seconds — the out-of-order watermark
+  /** Server RECEIPT time (ctx.now() ISO) — what updated_at is set to. NOT the
+   *  Stripe event epoch: a delayed redelivery would otherwise stamp updated_at
+   *  in the past and a freshness/"updated_at-receipt" check would mis-fire. */
+  received_at: string;
 }
 
 export interface StripeWebhookStore {
@@ -121,6 +125,18 @@ export function makeSqlStripeWebhookStore(query: QueryFn): StripeWebhookStore {
     },
 
     async upsertSubscription(userId, s) {
+      // FK SAFETY: stripe_subscriptions.user_id now REFERENCES users(id) (so a
+      // user wipe cascades the billing row). A checkout can complete BEFORE the
+      // user ever hit /trial/start (which is the only other ensureUser caller),
+      // so the users row may not exist yet — materialize it first (idempotent
+      // no-op when present) or the subscription upsert would FK-fail and Stripe
+      // would retry forever. updated_at-as-created_at is fine for a row Stripe
+      // is introducing.
+      await query(
+        `INSERT INTO users (id, created_at) VALUES ($1, $2::timestamptz)
+         ON CONFLICT (id) DO NOTHING`,
+        [userId, s.received_at],
+      );
       // ON CONFLICT updates in place; the event_created guard is enforced by
       // the handler (it only calls this for a strictly newer event), but the
       // WHERE on the update is a belt-and-suspenders against a racing replay.
@@ -156,7 +172,9 @@ export function makeSqlStripeWebhookStore(query: QueryFn): StripeWebhookStore {
           s.status,
           s.current_period_end,
           s.event_created,
-          s.event_created !== null ? new Date(s.event_created * 1000).toISOString() : null,
+          // updated_at = server RECEIPT time, NOT the Stripe event epoch (a stale
+          // redelivery must not stamp updated_at in the past).
+          s.received_at,
         ],
       );
     },

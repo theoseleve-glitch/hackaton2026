@@ -190,9 +190,22 @@ export async function runExportJob(
   signedUrl: string,
   deps: ExportReaders,
   writer: ExportJobWriter,
+  /** Optional allow-list of host suffixes the signed url MUST belong to (e.g.
+   *  ["blob.vercel-storage.com", "s3.amazonaws.com"]). When provided, a url whose
+   *  host doesn't match is rejected BEFORE it is written — so a caller can't park
+   *  a phishing/exfil link on the user's export. Omit to skip the host check
+   *  (the scheme + parseability check below always runs). */
+  allowedHostSuffixes?: readonly string[],
 ): Promise<AssembleResult> {
   const result = await assembleExport(userId, deps);
   if (!result.ok) return result;
+
+  // Validate the signed url BEFORE persisting it (audit MED: "caller-supplied
+  // with no expiry/domain check"). It is surfaced to the user as a download link,
+  // so a malformed / non-https / off-domain url must never be stored.
+  const urlError = validateSignedUrl(signedUrl, allowedHostSuffixes);
+  if (urlError !== null) return { ok: false, reason: urlError };
+
   try {
     await writer.markReady(userId, jobId, signedUrl);
   } catch (err) {
@@ -200,4 +213,28 @@ export async function runExportJob(
     return { ok: false, reason };
   }
   return result;
+}
+
+/** Returns null when `url` is an acceptable signed archive location, else a
+ *  machine-readable reason. Requires a parseable HTTPS url; when
+ *  `allowedHostSuffixes` is given the host must end with one of them. Never
+ *  throws. */
+function validateSignedUrl(url: string, allowedHostSuffixes?: readonly string[]): string | null {
+  if (typeof url !== "string" || url === "") return "signed_url_empty";
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return "signed_url_unparseable";
+  }
+  if (parsed.protocol !== "https:") return "signed_url_not_https";
+  if (allowedHostSuffixes !== undefined && allowedHostSuffixes.length > 0) {
+    const host = parsed.hostname.toLowerCase();
+    const ok = allowedHostSuffixes.some((suf) => {
+      const s = suf.toLowerCase();
+      return host === s || host.endsWith(`.${s}`);
+    });
+    if (!ok) return "signed_url_host_not_allowed";
+  }
+  return null;
 }

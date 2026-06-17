@@ -122,7 +122,7 @@ console.log("\n— status: none —");
   const c = decode(r.json.token as string);
   check("none: token sub = verified user, status=none, plan=null", c.sub === "user_A" && c.status === "none" && c.plan === null);
   check("none: token current_period_end=null, trial_ends_at=null", c.current_period_end === null && c.trial_ends_at === null);
-  check("none: token iat/exp set, exp = iat + 86400", typeof c.iat === "number" && c.exp === (c.iat as number) + 86_400);
+  check("none: token iat/exp set, exp = iat + 6h TTL", typeof c.iat === "number" && c.exp === (c.iat as number) + 6 * 60 * 60);
 }
 
 // ═══ status: trial ═══════════════════════════════════════════════════════════
@@ -141,10 +141,17 @@ console.log("\n— status: trial —");
   const c = decode(r.json.token as string);
   check("trial: token status=trial, plan=null, trial_ends_at set", c.status === "trial" && c.plan === null && c.trial_ends_at === expectedEnds);
 
-  // boundary: now === trial_ends_at -> NOT trial (strict <)
+  // boundary: now === trial_ends_at -> STILL trial (INCLUSIVE, audit MED).
+  // Reconciled with schema effectiveSubscriptionStatus ("now <= trial_ends_at ->
+  // trial") — the server no longer demotes one tick early at the exact instant.
   store.trials.set("user_A", day(-TRIAL_DAYS));
   const rEdge = await entitlement(ctx, req({ token: "tok-A" }));
-  check("trial: exact expiry instant -> NOT trial (none, no sub)", rEdge.json.status === "none");
+  check("trial: exact trial_ends_at instant -> STILL trial (inclusive, matches client)", rEdge.json.status === "trial");
+
+  // 1ms PAST the boundary -> no longer trial (none, no sub)
+  store.trials.set("user_A", new Date(NOW_MS - TRIAL_DAYS * DAY - 1).toISOString());
+  const rPast = await entitlement(ctx, req({ token: "tok-A" }));
+  check("trial: 1ms past trial_ends_at -> NOT trial (none, no sub)", rPast.json.status === "none");
 
   // just before boundary -> still trial
   store.trials.set("user_A", new Date(NOW_MS - TRIAL_DAYS * DAY + 1000).toISOString());
@@ -380,20 +387,20 @@ console.log("\n— SQL reader: table/column —");
 // ═══ BUILD-NOW #7: exp capped to current_period_end (no over-grant) ══════════
 //
 // The offline token must never outlive the paid period. When cpe is sooner than
-// nowUnix + TOKEN_TTL_S (24h), exp is clamped to floor(cpe/1000). When cpe is
+// nowUnix + TOKEN_TTL_S (6h), exp is clamped to floor(cpe/1000). When cpe is
 // far out or absent (lifetime/trial/none), exp is the full TTL window. This must
 // hold for EVERY status — a near-future cpe caps the grant regardless of client
 // behavior.
 
 console.log("\n— exp cap (over-grant) —");
 {
-  const TTL = 86_400; // mirrors TOKEN_TTL_S
+  const TTL = 6 * 60 * 60; // mirrors TOKEN_TTL_S (6h — the revocation-latency bound)
   const nowUnix = Math.floor(NOW_MS / 1000);
 
   // cpe sooner than the TTL window (active, period_end in 1h) -> exp == cpe_unix
   store.subs.clear();
   store.trials.clear();
-  const soon = new Date(NOW_MS + 3600_000).toISOString(); // +1h, < 24h TTL
+  const soon = new Date(NOW_MS + 3600_000).toISOString(); // +1h, < 6h TTL
   store.subs.set("user_A", { status: "active", current_period_end: soon });
   const rSoon = await entitlement(ctx, req({ token: "tok-A" }));
   const cSoon = decode(rSoon.json.token as string);

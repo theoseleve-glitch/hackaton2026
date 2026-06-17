@@ -119,11 +119,32 @@ export function toHttpRequest(req: NodeLikeRequest, requestId?: string): HttpReq
   }
   // thread the correlation id into the headers so the router can log it
   const headers = requestId !== undefined ? { ...req.headers, "x-request-id": requestId } : req.headers;
+  const ip = clientIp(req.headers);
   return {
     method: (req.method ?? "GET").toUpperCase(),
     path: url.pathname,
     headers,
     query,
+    ...(ip !== undefined ? { ip } : {}),
     body,
   };
+}
+
+/** Best-effort client IP for the rate limiter's IP dimension. Vercel sets
+ *  x-forwarded-for (comma-separated, the CLIENT is the first hop) and the
+ *  single-valued x-real-ip; we take the first x-forwarded-for entry, falling
+ *  back to x-real-ip. Untrusted (a client can forge the header), but the IP
+ *  bucket is only a coarse abuse cap layered under the per-account bucket, and
+ *  the limiter fails open on a bad key — so a spoofed value never breaks auth. */
+function clientIp(headers: Record<string, string | string[] | undefined>): string | undefined {
+  const xff = headers["x-forwarded-for"] ?? headers["X-Forwarded-For"];
+  const xffStr = Array.isArray(xff) ? xff[0] : xff;
+  if (typeof xffStr === "string" && xffStr.trim() !== "") {
+    const first = xffStr.split(",")[0]?.trim();
+    if (first !== undefined && first !== "") return first;
+  }
+  const xri = headers["x-real-ip"] ?? headers["X-Real-IP"];
+  const xriStr = Array.isArray(xri) ? xri[0] : xri;
+  if (typeof xriStr === "string" && xriStr.trim() !== "") return xriStr.trim();
+  return undefined;
 }

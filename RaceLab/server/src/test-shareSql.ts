@@ -50,7 +50,12 @@ console.log("— create —");
   );
   const store = makeSqlShareStore(query);
   const res = await store.create("owner_1", "setup", { wing: 3 }, { png_url: "u" }, "2026-06-13T12:00:00.000Z");
-  const sql = calls[0].sql;
+  // create now ALSO ensures the users row first (FK safety). Pin that, then read
+  // the column/param assertions off the share_snapshots insert specifically.
+  check("create: FK-safety — ensures the users row first (INSERT INTO users ON CONFLICT DO NOTHING)", calls.some((c) => /insert\s+into\s+users\b/i.test(c.sql) && /on\s+conflict\s*\(\s*id\s*\)\s+do\s+nothing/i.test(c.sql)));
+  const snap = calls.find((c) => /insert\s+into\s+share_snapshots/i.test(c.sql));
+  if (snap === undefined) throw new Error("no share_snapshots insert issued");
+  const sql = snap.sql;
 
   check("create: targets share_snapshots", /\binsert\s+into\s+share_snapshots\b/i.test(sql), sql);
   check(
@@ -67,28 +72,28 @@ console.log("— create —");
   check("create: RETURNING token", /\breturning\s+token\b/i.test(sql), sql);
   check(
     "create: minted token is the unguessable capability (s_ prefix, 100-bit)",
-    /^s_[a-z2-7]{20}$/.test(String(calls[0].params?.[0])),
-    String(calls[0].params?.[0]),
+    /^s_[a-z2-7]{20}$/.test(String(snap.params?.[0])),
+    String(snap.params?.[0]),
   );
   check(
     "create: param[1] is owner_user_id (publisher lineage, internal)",
-    Array.isArray(calls[0].params) && calls[0].params[1] === "owner_1",
-    JSON.stringify(calls[0].params),
+    Array.isArray(snap.params) && snap.params[1] === "owner_1",
+    JSON.stringify(snap.params),
   );
   check(
     "create: param[2] is kind",
-    Array.isArray(calls[0].params) && calls[0].params[2] === "setup",
-    String(calls[0].params?.[2]),
+    Array.isArray(snap.params) && snap.params[2] === "setup",
+    String(snap.params?.[2]),
   );
   check(
     "create: payload JSON.stringified (param[3])",
-    Array.isArray(calls[0].params) && calls[0].params[3] === JSON.stringify({ wing: 3 }),
-    String(calls[0].params?.[3]),
+    Array.isArray(snap.params) && snap.params[3] === JSON.stringify({ wing: 3 }),
+    String(snap.params?.[3]),
   );
   check(
     "create: artifacts JSON.stringified (param[4])",
-    Array.isArray(calls[0].params) && calls[0].params[4] === JSON.stringify({ png_url: "u" }),
-    String(calls[0].params?.[4]),
+    Array.isArray(snap.params) && snap.params[4] === JSON.stringify({ png_url: "u" }),
+    String(snap.params?.[4]),
   );
   check("create: returns the persisted token", res.token === "s_abc");
 }
@@ -155,7 +160,11 @@ console.log("\n— recordImport —");
 {
   const { query, calls } = recorder(() => []);
   await makeSqlShareStore(query).recordImport("s_abc", "user_2", "2026-06-13T12:00:00.000Z");
-  const sql = calls[0].sql;
+  // recordImport now ensures the importer's users row first (FK safety).
+  check("recordImport: FK-safety — ensures the users row first", calls.some((c) => /insert\s+into\s+users\b/i.test(c.sql) && /on\s+conflict\s*\(\s*id\s*\)\s+do\s+nothing/i.test(c.sql)));
+  const imp = calls.find((c) => /insert\s+into\s+share_imports/i.test(c.sql));
+  if (imp === undefined) throw new Error("no share_imports insert issued");
+  const sql = imp.sql;
 
   check("recordImport: targets share_imports", /\binsert\s+into\s+share_imports\b/i.test(sql), sql);
   check(
@@ -170,11 +179,11 @@ console.log("\n— recordImport —");
   );
   check(
     "recordImport: params bind [token, user_id, atIso] in order",
-    Array.isArray(calls[0].params) &&
-      calls[0].params[0] === "s_abc" &&
-      calls[0].params[1] === "user_2" &&
-      calls[0].params[2] === "2026-06-13T12:00:00.000Z",
-    JSON.stringify(calls[0].params),
+    Array.isArray(imp.params) &&
+      imp.params[0] === "s_abc" &&
+      imp.params[1] === "user_2" &&
+      imp.params[2] === "2026-06-13T12:00:00.000Z",
+    JSON.stringify(imp.params),
   );
 }
 

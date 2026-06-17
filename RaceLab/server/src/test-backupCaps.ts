@@ -68,6 +68,9 @@ class FakeDb implements Db {
   async deleteUserData(): Promise<void> {
     /* not used */
   }
+  async isTombstoned(): Promise<boolean> {
+    return false; // not used on the backup-caps path
+  }
   /** Total stored rows for a user — to prove a rejected batch touched nothing. */
   count(user_id: string): number {
     return this.backups.get(user_id)?.size ?? 0;

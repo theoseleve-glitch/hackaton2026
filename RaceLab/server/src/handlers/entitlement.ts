@@ -33,13 +33,18 @@ import type { EntitlementReader, JwtSigner } from "../stores/entitlementStore";
 import { TRIAL_DAYS } from "../stores/entitlementStore";
 
 const DAY_MS = 86_400_000;
-// 24h — short enough to re-check, long enough for a race weekend offline.
-// ACCEPTED TRADEOFF: because the signed token is valid offline for up to 24h,
-// a subscription that lapses (or is canceled via the Stripe webhook) keeps PRO
-// for at most 24h after the change until the app re-fetches and re-mints. We
-// accept this bounded over-grant; PRO is a paid convenience, not a security
-// boundary, and the advice path is always free + on-device (D18/D20) anyway.
-const TOKEN_TTL_S = 86_400;
+// 6h (was 24h) — the offline-validity / revocation-latency knob (audit HIGH:
+// "a canceled sub keeps PRO"). The signed token is verified OFFLINE against a
+// pinned public key, so a cancel/lapse recorded by the Stripe webhook only
+// takes effect once the app re-fetches and re-mints — i.e. after at most one
+// TTL. 24h let a canceled sub keep PRO for a full day; 6h bounds that to a
+// single session while still surviving a typical offline race heat (the app
+// re-fetches on the next foreground with network). PRO is a paid convenience,
+// not a security boundary, and the advice path is always free + on-device
+// (D18/D20); shortening TTL is the revocation mechanism — no server-side token
+// blocklist is needed because the token is short-lived and re-minted from the
+// live stripe_subscriptions row every fetch.
+const TOKEN_TTL_S = 6 * 60 * 60;
 
 /** Minimal seams this handler consumes (zero committed runtime deps). */
 export interface EntitlementCtx {
@@ -88,7 +93,13 @@ export async function entitlement(ctx: EntitlementCtx, req: HttpRequest): Promis
     (cpeMs === null || cpeMs > nowMs)
   ) {
     status = "active";
-  } else if (trial_ends_at !== null && nowMs < Date.parse(trial_ends_at)) {
+  } else if (trial_ends_at !== null && nowMs <= Date.parse(trial_ends_at)) {
+    // INCLUSIVE boundary (audit MED, was strict `<`): matches schema's
+    // effectiveSubscriptionStatus ("now <= trial_ends_at -> trial") and
+    // checkEntitlement. With `<` the server demoted the user one tick early at the
+    // exact trial_ends_at instant while the client still showed "trial" — an
+    // off-by-one disagreement at the boundary. The 15-day window is inclusive of
+    // its end instant on BOTH sides now.
     status = "trial";
   } else if (sub !== null) {
     status = "expired"; // a row exists (was paid) but neither active nor in trial
