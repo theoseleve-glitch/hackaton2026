@@ -50,10 +50,13 @@ magnitude_guidance: "one step (≈2000 cSt) at a time on race day"
 reversal_cost_minutes: 12      # front diff out on an MP11
 confidence: high               # high = physics+consensus, medium = common practice, low = anecdotal
 sources: ["Kyosho MP11 manual p.34", "Tekno tuning guide §diffs"]
-scope: [1/8_offroad]           # some rules are class- or even chassis-specific
+scope: [1-8-offroad]           # canonical hyphen dialect from taxonomy.scopes — a
+                               # tag NOT in taxonomy.scopes is a build error (the old
+                               # slash form "1/8_offroad" would have silently matched
+                               # zero models); class- or even chassis-specific
 ```
 
-Targets: **~80 rules** for V1, 1/8 offroad first (D14): diffs, shock oil/pistons/springs, sway bars, camber/toe/droop/ride height, ackermann, tires by surface, wing, gearing, weight distribution. **Engine/needle rules are explicitly excluded in V1** (D13) — those questions get a canned refusal until a per-engine safe-range database exists. Every rule reviewed by William before it can be cited. The KB is versioned in-repo (`packages/kb`) — rules are data, PRs are reviews — **and ships inside the app bundle** for the offline path.
+Coverage (as of the D50 grounded-rules build): **417 LIVE rules** in `kb/bundle.json` across the competitive classes — 1/8 offroad first (D14), now also 1/10 2WD/4WD, short course, truggy, GT, stadium, touring and nitro on-road — covering diffs, shock oil/pistons/springs, sway bars, camber/toe/droop/ride height, ackermann, tires by surface, wing, gearing, weight distribution. (The original V1 target was ~80; the grounded Tier-A authoring pass overshot it.) **Engine/needle rules are explicitly excluded in V1** (D13) — those questions get a canned refusal until a per-engine safe-range database exists. Every rule reviewed by William before it can be cited. The KB is versioned in-repo (`packages/kb`) — rules are data, PRs are reviews — **and ships inside the app bundle** for the offline path.
 
 ## 4. Pipeline (Théo owns)
 
@@ -145,8 +148,8 @@ Used three ways: (1) injected into future prompts for this driver/track — *"la
 
 **§6 — learning loop READ half is implemented.** `ContextBundle.history` rows (engine `HistoryEntry` = schema `ContextHistoryEntry` + optional `citations`/`track_id`) re-rank retrieval: match by KB rule id in citations; same-track only (unattributable rows ignored); net worse → demoted one tier below clean rules; net better → promoted one tier; mixed → neutral with tally note. GROUNDED-FIRST CAP: history runs after symptom/condition/scope filters, can never promote a rule the KB does not ground, influence bounded to +/-1 tier. Cards surface it via a deterministic `history_note`. Populate via engine `historyFromTuples(learningTuples(runs, outcomes), { track_id, limit })` — NOT schema `toEngineHistory` (drops citations/track_id; works but inert).
 
-**NEW — run analysis.** `analyzeRuns(runs, data, {outcomes})` → deterministic `EngineerReport` (summary / conditions / pace via lapStats / tyre cliff via detectTyreCliff / setup-change timeline / recommended next plan). Every line cited or explicitly an observation/refusal; JSON-clean; persistence is storage's job.
+**NEW — run analysis.** `analyzeRuns(runs, data, {outcomes})` → deterministic `RunAnalysisReport` (B0 rename, to disambiguate from `report.ts`'s app-facing single-run `EngineerReport`): sections summary / conditions / pace via lapStats / tyre cliff via detectTyreCliff / setup-change timeline / recommended next plan. Every line cited or explicitly an observation/refusal; JSON-clean; persistence is storage's job.
 
 **NEW — race-day planner (D29).** `planRaceDay({practice, forecast, track, chassis_template_id, current_setup?}, data)` maps forecast to taxonomy tags (rain/rain_risk>=30% → wet; air>=30C → hot; air<=10C → cold), proposes only race-day-safe amplified-on rules (max 2 per tag, cheapest-revert first), excludes rules rated worse at this track in practice, and emits EXPLICIT refusals for ungrounded aspects (no hot/cold KB rules yet; wind has no taxonomy tag). Deterministic, offline, zero I/O.
 
-**§8 — eval set is now 13 scenarios** (was 10): + history-demotion, history-promotion, history-track-isolation; harness gained `primary_cites` / `primary_cites_not` expectations.
+**§8 — eval set has grown to 26 scenario files** (`packages/engine/scenarios/*.json`, run by `eval.ts`; **23 currently asserted green** after the D50 LIVE-rule promotion). Beyond the original symptom cases it now covers: history-demotion / -promotion / -track-isolation, an understeer-vs-oversteer conflict, model gating (`pending` model gets category-template advice, capability gate drops an absent part, unknown-chassis refusal), and per-class LIVE coverage (2WD/4WD/stadium/short-course/truggy/touring/GT/nitro-on-road). Traps: engine-needle, glow-plug, `leans`-not-engine-scope. Harness expectations include `primary_cites` / `primary_cites_not`.

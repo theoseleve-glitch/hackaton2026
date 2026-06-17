@@ -11,12 +11,12 @@ Tasks are `B0…B11`. ⛔ = blocks what follows · 🎯 = V1.0 critical path · 
 > **Status after the 2026-06-12 ultracode session (D26–D31):**
 > ✅ **Pre-B1 keystone**: `packages/schema` (unified domain contract, 203+ tests, absorbs Théo's logbook vocab verbatim + bridge lifts → B0 becomes mechanical).
 > ✅ **B1**: `CONTRACTS.md` at repo root (all package surfaces + stability promises) — Théo's review/sign-off pending.
-> ✅ **B2**: `packages/storage` (137 tests — repos, same-transaction outbox, quarantine, idempotent legacy migration; expo-sqlite glue needs one device smoke test).
+> ✅ **B2**: `packages/storage` (137 tests — repos, same-transaction outbox, quarantine, idempotent legacy migration; expo-sqlite glue needs one device smoke test). ⚠ **Built as a package, NOT yet wired into `apps/mobile`** — the app still persists to AsyncStorage via the app-tier packages; rewiring it onto `storage` + `schema/bridge.ts` is a pending task (Théo's zone). See `docs/BACKEND_STATUS.md`.
 > ✅ **B3**: `packages/weather` (129 tests — Open-Meteo forecast+archive, no key, stale-if-offline cache, backfill; ⚠ free tier is non-commercial → William licensing call before launch).
 > ✅ **B4+**: engine overhaul (history read-half with track-isolated ±1-tier re-ranking, `proposePlan` ≤3 ranked cited changes, `analyzeRuns` reports, `planRaceDay`; 13/13 eval scenarios).
 > ✅ **B5/B6 (code-ready, NOT deployed)**: `packages/account` + `server/` (135 tests — 15-day trial, external web subscribe, deletion+tombstone, backup push/restore handlers; blocked on Vercel/Clerk/Neon accounts = William).
 > ✅ **B9**: `packages/speedhive` (130 checks — verified public endpoints + lapchart, quarantined unverified paths, politePoll; practice API shapes from William's intercept, paths unverified).
-> ✅ **B10 (class slice)**: `kb/chassis/registry.json` (11 entries) + `kb/classes/1-8-tt-buggy.json` + `packages/kb` validators (93 checks); chassis #2+ PDF extractions still pending (needs PDFs).
+> ✅ **B10 (class slice)**: `kb/chassis/registry.json` (11 entries at this 2026-06-12 snapshot; **since grown to 237, D47**) + `kb/classes/1-8-tt-buggy.json` + `packages/kb` validators (93 checks); chassis #2+ PDF extractions still pending (needs PDFs).
 > ⏭ **B0** unification merge (now mechanical via `schema/src/bridge.ts`), **B7/B8/B11** unstarted.
 
 | # | Task | Tier | Pri | Depends | Definition of done |

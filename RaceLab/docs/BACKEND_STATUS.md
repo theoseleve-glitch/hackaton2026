@@ -1,9 +1,21 @@
 # RaceLab — Backend Status (William's answer to `docs/BACKEND.md`)
 
+> ⚠️ **READ FIRST — the backend tier is BUILT + TESTED but NOT YET WIRED to the app.**
+> `packages/schema`, `packages/storage` and `server/` exist as fully-tested packages, but
+> **`apps/mobile` imports ZERO of them.** The shipping app still runs on the app-tier
+> packages (`garage` / `logbook` / `tracks` / `sheets` / `sessions` / `social` / `strategy`)
+> persisting to **AsyncStorage JSON blobs** — exactly as `BACKEND.md §1` describes ("100%
+> local"). The schema/storage tier is the *intended* future data layer, not the live one.
+> Wiring the app onto it — lifting the AsyncStorage blobs through `schema/src/bridge.ts`
+> (`liftTheoRunEntry` etc.) into the storage repos — is a **pending task in Théo's zone**,
+> not done. Nothing in this file is on the device today.
+>
+> Two separate "not yet" facts, don't conflate them: **(a)** the Tier-B *server* is code-ready
+> but **NOT DEPLOYED** (gated on accounts/keys/money — yours, D17/D29); **(b)** the Tier-A
+> *schema/storage* packages are code-ready but **NOT WIRED into `apps/mobile`** (app-rewire task).
+>
 > Maps every task in Théo's `BACKEND.md` to its real state on `racelab`
-> (2026-06-13). The whole Tier-B server is **code-ready and tested, NOT
-> deployed** — deploy is gated on accounts/keys/money, which are yours (D17/D29).
-> Companion to `BACKEND.md` (the spec) and `CONTRACTS.md` (the frozen surfaces).
+> (2026-06-13). Companion to `BACKEND.md` (the spec) and `CONTRACTS.md` (the frozen surfaces).
 
 **Legend:** ✅ built + tested (code-ready) · 🟡 partial (seam built, real impl or worker deferred) · 🔒 blocked on William (account / key / spend / sign-off) · ⬜ not started (later phase)
 

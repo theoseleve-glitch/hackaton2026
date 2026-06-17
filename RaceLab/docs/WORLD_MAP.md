@@ -31,8 +31,11 @@ existing weather condition tags (hot/cold/wet) — first-class modifiers, not se
 
 ## 2. Coverage today — the registry
 
-**237 models** across **14 category-template setup pages** (1 fully-extracted: Kyosho Inferno MP11; the rest
-`pending_pdf`, each resolving to a working editable sheet via its `category_template`):
+**237 models** resolving over **16 category-template setup pages** in `kb/bundle.json` (1 model is
+fully-extracted: Kyosho Inferno MP11; the rest are `pending_pdf`, each resolving to a working editable
+sheet via its `category_template`). 14 of the 16 templates currently back at least one registered model;
+**`monster_truck` and `rally` ship as templates but have no models assigned yet** (0 each — they exist so a
+future entry resolves immediately):
 
 | Setup-page template | Models | | Setup-page template | Models |
 |---|---|---|---|---|
@@ -43,6 +46,7 @@ existing weather condition tags (hot/cold/wet) — first-class modifiers, not se
 | `1_8_truggy` | 23 | | `1_10_nitro_onroad` | 8 |
 | `1_10_touring_electric` | 22 | | `large_scale_1_5` | 7 |
 | `f1` | 12 | | `stadium_truck` | 6 |
+| `monster_truck` | 0 | | `rally` | 0 |
 
 Brands span the full competitive field: Team Associated, Kyosho, TLR, HB Racing, Mugen Seiki, Tekno, XRAY,
 SWORKz, Yokomo, Schumacher, Serpent, Awesomatix, Infinity, Capricorn, Shepherd, Tamiya, Roche, Agama,

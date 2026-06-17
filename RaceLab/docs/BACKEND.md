@@ -88,8 +88,8 @@ Entitlement gates **Pro** (unlimited cars/setups, history, analytics) — **neve
 
 - **Stripe Checkout on the web** (D29). No StoreKit/Play Billing.
 - Pricing (**D29**, ⚠ pending William): `9.99 €/mo`, `99.99 €/yr`, **15-day trial**.
-- `GET /entitlement` → `{ status: "trial"|"active"|"expired"|"none", trial_ends_at?, plan?, current_period_end? }`.
-- **Webhook `/webhooks/stripe`:** verify the `Stripe-Signature`; **idempotent** on
+- `GET /api/entitlement` → `{ status: "trial"|"active"|"expired"|"none", plan?, current_period_end?, trial_ends_at?, token, server_time }` (`token` = the signed offline EdDSA grant below; `server_time` is on every response). *(As built — `server/src/handlers/entitlement.ts` + router `/api/entitlement`.)*
+- **Webhook `/api/webhooks/stripe`:** verify the `Stripe-Signature`; **idempotent** on
   `event.id` (Stripe redelivers); handle **out-of-order** events by comparing the stored
   subscription timestamp (never downgrade on a stale event); consume
   `checkout.session.completed`, `customer.subscription.created/updated/deleted`,
@@ -120,8 +120,12 @@ store, backup and the share-link silently lose every photo.
 - **Append-only outbox** the app flushes when online; **restore on fresh install** is the
   read path. Last-write-wins per `(user, domain)` blob with a server `updated_at` + a
   **`409 server-newer`** for the rare two-device case.
-- `GET /backup/{domain}` / `PUT /backup/{domain}` carrying the **`{format, state}` envelope
-  verbatim** (`domain` ∈ garage|tracks|logbook|reports|account, plus `sheets/{carId}`).
+- `GET /api/backup/blob?domain=<domain>` / `PUT /api/backup/blob?domain=<domain>` carrying the
+  **`{format, state}` envelope verbatim** — **`domain` is a query param, not a path segment**
+  (`domain` ∈ garage|tracks|logbook|reports|account, plus `sheets:{carId}`). *(As built —
+  `server/src/handlers/backupBlob.ts`: GET → `{domain, format, state, updated_at, server_time}`,
+  PUT → `{domain, updated_at, server_time}` with a `409 server_newer` optimistic-concurrency
+  conflict.)*
 - **Idempotent / dedup'd** writes (a flaky reconnect must not double-apply outbox items).
 - **Owner-scoped (RLS):** every backup/account/media/entitlement resource is strictly
   scoped to the token's user; validate `{carId}` belongs to the caller (avoid IDOR). The
@@ -224,7 +228,7 @@ researched **practice-api** path works but is unsanctioned — handle with care.
   confirmation.**
 
 ### P2 — Push notifications
-- `POST /push/token` + `DELETE /push/token` tied to a **device id** (many per user); process
+- `POST /api/push/token` + `DELETE /api/push/token` tied to a **device id** (many per user); process
   Expo **receipts** and prune `DeviceNotRegistered`; gate each trigger on a **per-user
   preference + marketing consent** (the trial-ending nudge is marketing — GDPR); quiet-hours
   / dedup. Constrain types to: Speedhive new-run, trial-ending, and the 2 social types in
