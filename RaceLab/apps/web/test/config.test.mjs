@@ -11,11 +11,11 @@ test("every CTA points at racelab.app", () => {
   for (const h of hrefs) assert.match(h, /racelab\.app/);
 });
 test("pricing has monthly 9.99 and annual 99.99", () => {
-  assert.ok(C.PRICING.plans.some((p) => p.price.includes("9.99") && p.per.includes("month")));
-  assert.ok(C.PRICING.plans.some((p) => p.price.includes("99.99") && p.per.includes("year")));
+  assert.ok(C.PRICING.plans.some((p) => p.price.includes("9,99") && p.per.includes("mois")));
+  assert.ok(C.PRICING.plans.some((p) => p.price.includes("99,99") && p.per.includes("an")));
 });
 test("the loop has exactly 5 stations in order", () => {
-  assert.deepEqual(C.LOOP.stations.map((s) => s.n), ["Race", "Log", "Engineer", "Result", "Share"]);
+  assert.deepEqual(C.LOOP.stations.map((s) => s.n), ["Course", "Journal", "Ingénieur", "Résultat", "Partage"]);
 });
 test("engineer report has all 8 parts", () => {
   assert.equal(C.ENGINEER.report.length, 8);
