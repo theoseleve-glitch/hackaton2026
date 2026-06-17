@@ -283,6 +283,32 @@ check("report JSON-serializes cleanly (round-trip is identical)", deepEqual(roun
   );
 }
 {
+  // P0-1 regression: a pending_pdf model (resolves via category template) must
+  // GROUND a next-plan, not refuse. analyzeRuns previously did a direct
+  // data.templates[id] lookup (reports.ts:278) and refused on all 236 pending
+  // models — the same bug fixed in plan.ts/raceday.ts.
+  const pending = mustRun(
+    makeRun(
+      {
+        ...base,
+        car_template_id: "xray-t4",
+        type: "practice",
+        conditions: { grip: "high" },
+        feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] },
+      },
+      T0,
+      rand,
+    ),
+  );
+  const r = analyzeRuns([pending], data);
+  const line = r.sections.find((s) => s.id === "next_plan")!.lines[0];
+  check(
+    "pending_pdf chassis (category fallback) → grounded next-plan, not a refusal",
+    line.kind !== "refusal",
+    `got kind=${line.kind}`,
+  );
+}
+{
   const noFeedback = mustRun(
     makeRun(
       { ...base, type: "practice", conditions: { grip: "green" }, feedback: { tags: [] } },

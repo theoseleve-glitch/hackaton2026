@@ -1,4 +1,4 @@
-import type { KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { retrieve, type ScoredRule } from "./retrieval";
 import {
   DO_NOTHING_MESSAGE,
@@ -56,7 +56,7 @@ export function proposePlan(
 
   // 0. Unknown chassis template is an in-band refusal — never a throw across
   //    the package boundary.
-  const template = data.templates[bundle.chassis_template_id];
+  const template = resolveTemplate(data, bundle.chassis_template_id);
   if (!template) {
     return {
       kind: "refusal",

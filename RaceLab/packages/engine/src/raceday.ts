@@ -1,4 +1,4 @@
-import type { KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { raceDayFilter } from "./guard";
 import { humanize } from "./offline";
 import type { Confidence, KBRule } from "./types";
@@ -77,7 +77,7 @@ export function planRaceDay(
   input: RaceDayInput,
   data: KBData,
 ): { ok: true; plan: RaceDayPlan } | { ok: false; reason: RaceDayRejectReason } {
-  const template = data.templates[input.chassis_template_id];
+  const template = resolveTemplate(data, input.chassis_template_id);
   if (!template) return { ok: false, reason: "unknown_template" };
 
   const refusals: PlannerRefusal[] = [];

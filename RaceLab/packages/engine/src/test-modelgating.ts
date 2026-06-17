@@ -4,6 +4,10 @@ import { fileURLToPath } from "node:url";
 import { retrieve, templateExposes } from "./retrieval";
 import { resolveTemplate, type KBData } from "./data";
 import { loadKBData } from "./node-kb";
+import { proposePlan } from "./plan";
+import { recommend } from "./engineer";
+import { planRaceDay } from "./raceday";
+import { makeId } from "../../schema/src/ids";
 import { surfaceToTags } from "../../schema/src/runs";
 import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
 
@@ -159,6 +163,53 @@ check(
   surfaceToTags("watered_tacky_clay").includes("clay") && !surfaceToTags("watered_tacky_clay").includes("wet"),
 );
 console.log(`surface reconciliation: ${familyHits}/${surfaces.length} of Théo's surfaces map to a family tag; all emitted tags valid`);
+
+// ── P0-1 regression: pending_pdf models get GROUNDED advice, not a refusal ────
+// The chatbot greets "ready" then (pre-fix) refused on 236/237 models because
+// proposePlan/planRaceDay/analyzeRuns looked the template up DIRECTLY instead of
+// via resolveTemplate (the D49 category fallback). recommend() always used the
+// fallback; the three siblings did not. This drives a REAL pending registry model
+// (xray-t4 → 1_10_touring_electric, a category with live rules) through the two
+// ContextBundle entry points and asserts a recommendation, never a refusal.
+// planRaceDay + analyzeRuns carry the same regression in test-raceday/test-reports.
+const pendingId = "xray-t4";
+const pendingEntry = live.registry?.find((e) => e.chassis_id === pendingId) as
+  | { template_status?: string }
+  | undefined;
+check(
+  "sanity: chosen regression model is genuinely pending_pdf (category-fallback path)",
+  pendingEntry?.template_status === "pending_pdf",
+  `status=${pendingEntry?.template_status}`,
+);
+const pendingBundle: ContextBundle = {
+  chassis_template_id: pendingId,
+  setup: {},
+  track: { name: "Indoor Carpet", surface: "carpet", grip: "high", conditions: ["carpet"] },
+  feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] },
+  mode: "practice",
+};
+check(
+  "proposePlan grounds a pending_pdf model (was: refused 236/237) ",
+  proposePlan(pendingBundle, live).kind !== "refusal",
+);
+check(
+  "recommend grounds the same pending_pdf model (parity check)",
+  recommend(pendingBundle, live).kind === "recommendation",
+);
+const raceDayPending = planRaceDay(
+  {
+    practice: [],
+    forecast: [],
+    track: { track_id: makeId("trk", 0, () => 0), name: "Carpet", surface: "carpet", indoor: true },
+    chassis_template_id: pendingId,
+  },
+  live,
+);
+check(
+  "planRaceDay resolves a pending_pdf model (not unknown_template)",
+  raceDayPending.ok === true,
+  raceDayPending.ok ? "" : `reason=${raceDayPending.reason}`,
+);
 
 console.log(`\n${failed === 0 ? "All" : failed + " FAILED —"} model-gating checks`);
 if (failed > 0) process.exit(1);

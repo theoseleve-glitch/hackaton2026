@@ -1,4 +1,4 @@
-import type { KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { proposePlan } from "./plan";
 import { historyFromTuples } from "./history";
 import type { ContextBundle } from "./types";
@@ -275,7 +275,7 @@ function nextPlanSection(
   if (runs.length === 0) return refusal("No runs — nothing to ground a plan on.");
 
   const latest = runs[runs.length - 1];
-  if (!data.templates[latest.car_template_id]) {
+  if (!resolveTemplate(data, latest.car_template_id)) {
     return refusal(
       `Chassis template '${latest.car_template_id}' is not in the KB — no grounded plan (grounded or silent).`,
     );
