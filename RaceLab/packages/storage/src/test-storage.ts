@@ -345,6 +345,10 @@ async function adapterRoundTrip(name: string, storage: StorageAdapter): Promise<
   // not a generic driver_error from one backend and duplicate_seq from another.
   check(`${name}: log.append duplicate seq rejected`, !dup.ok);
   check(`${name}: duplicate seq reason is duplicate_seq (uniform across adapters)`, !dup.ok && dup.reason === "duplicate_seq", !dup.ok ? dup.reason : "ok");
+  // commit() is the path mutate() actually uses — its duplicate-seq reason must be
+  // uniform too (sqlite previously reported a generic driver_error here).
+  const dupC = await storage.commit([{ type: "put", collection: "cars", id: CAR2.id, doc: CAR2 }], obEntry(2, T2));
+  check(`${name}: commit() duplicate seq reason is duplicate_seq (uniform)`, !dupC.ok && dupC.reason === "duplicate_seq", !dupC.ok ? dupC.reason : "ok");
   const read = await storage.log.readFrom(1);
   check(
     `${name}: log.readFrom cursor`,

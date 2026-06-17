@@ -236,7 +236,22 @@ export async function openSqliteStorage(
         stmts.push({ sql: SQL.appendLog, params: [entry.seq, j.json] });
         stmts.push({ sql: SQL.setMeta, params: [LAST_SEQ_KEY, String(entry.seq)] });
       }
-      return transact(stmts);
+      const r = await transact(stmts);
+      // Match log.append()/memory/kv: a seq PRIMARY KEY collision is a DUPLICATE,
+      // not a generic fault. commit() is the path mutate() actually calls, so
+      // without this it reported a recoverable seq desync as an indistinguishable-
+      // from-transient driver_error, breaking the cross-adapter contract (and any
+      // caller's retry-on-driver_error would loop forever). Disambiguate ONLY on
+      // the failure path (no hot-path read); a real fault leaves the seq absent.
+      if (entry !== undefined && !r.ok && r.reason === "driver_error") {
+        try {
+          const { rows } = await executor.execute(SQL.seqExists, [entry.seq]);
+          if (rows.length > 0) return { ok: false, reason: "duplicate_seq" };
+        } catch {
+          // fall through to the original driver_error
+        }
+      }
+      return r;
     },
   };
   return { ok: true, storage };
