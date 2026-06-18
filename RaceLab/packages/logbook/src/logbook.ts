@@ -1,24 +1,19 @@
 import type { LogbookState, Outcome, RunConditions, RunEntry } from "./types";
 
 /**
- * State operations — same contract as packages/sheets: every operation
- * returns a new state, safe for React reducers. Runs are editable (results
- * and feedback arrive after the run), unlike setup versions which are
- * immutable facts.
+ * In-memory run-log state ops over the schema `RunEntry`. Ids are minted
+ * upstream by schema `makeRun` (the form/repo seam) — `addRun` appends an
+ * already-formed RunEntry. Runs are editable (results and feedback arrive after
+ * the run); the app's `useLogbook` backs the state with the runs repo.
  */
 
 export function initLogbook(): LogbookState {
   return { runs: [] };
 }
 
-/** Append a run. The caller provides everything except id. */
-export function addRun(
-  state: LogbookState,
-  run: Omit<RunEntry, "id">,
-  now: string,
-): { state: LogbookState; run: RunEntry } {
-  const entry: RunEntry = { ...run, id: nextId(now) };
-  return { state: { runs: [...state.runs, entry] }, run: entry };
+/** Append an already-minted RunEntry (id from schema makeRun). */
+export function addRun(state: LogbookState, run: RunEntry): { state: LogbookState; run: RunEntry } {
+  return { state: { runs: [...state.runs, run] }, run };
 }
 
 /** Patch a run in place (results/feedback/outcome arrive after the run).
@@ -29,7 +24,9 @@ export function updateRun(
   patch: Partial<Omit<RunEntry, "id" | "created_at">>,
 ): LogbookState {
   if (!state.runs.some((r) => r.id === id)) return state;
-  return { runs: state.runs.map((r) => (r.id === id ? { ...r, ...patch, id: r.id, created_at: r.created_at } : r)) };
+  return {
+    runs: state.runs.map((r) => (r.id === id ? { ...r, ...patch, id: r.id, created_at: r.created_at } : r)),
+  };
 }
 
 export function deleteRun(state: LogbookState, id: string): LogbookState {
@@ -72,9 +69,4 @@ export function similarRuns(
     .filter((r) => (opts?.surface ? r.track.surface === opts.surface : true))
     .filter((r) => (opts?.track_name ? r.track.name === opts.track_name : true))
     .reverse();
-}
-
-function nextId(now: string): string {
-  const rand = Math.random().toString(36).slice(2, 10);
-  return `run-${Date.parse(now).toString(36)}-${rand}`;
 }

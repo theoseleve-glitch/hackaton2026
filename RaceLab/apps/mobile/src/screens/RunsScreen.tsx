@@ -1,19 +1,23 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { addCar } from "../../../../packages/garage/src";
-import type { CarEntity, GarageState } from "../../../../packages/garage/src";
+import { addCar, carLabels, powerLabel } from "../../../../packages/garage/src";
+import type { Car, GarageState } from "../../../../packages/garage/src";
 import {
   addRun,
   checkRecords,
   groupBySetup,
   lastRun,
   rateRun,
+  runBestLap,
+  runEntrants,
+  runFeeling,
+  runPosition,
   sortRuns,
 } from "../../../../packages/logbook/src";
 import type { LogbookState, Outcome, RunEntry, RunSortKey } from "../../../../packages/logbook/src";
 import { deserialize, initSheets, renameDraft, saveVersion, serialize } from "../../../../packages/sheets/src";
 import { addTrack, getTrack, upsertRecord } from "../../../../packages/tracks/src";
-import type { TrackEntity, TracksState } from "../../../../packages/tracks/src";
+import type { Track, TrackRecord, TracksState } from "../../../../packages/tracks/src";
 import { buildSetupPayload } from "../../../../packages/social/src";
 import type { SharedPayload } from "../../../../packages/social/src";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -103,31 +107,33 @@ export function RunsScreen(props: Props) {
     };
   }, [sel.car_id, inForm]);
 
-  const saveRun = (run: Omit<RunEntry, "id">) => {
+  const saveRun = (run: RunEntry) => {
     // persist against the authoritative previous state (never-lose discipline)
-    updateLogbook((prev) => addRun(prev, run, run.created_at).state);
+    updateLogbook((prev) => addRun(prev, run).state);
     // auto-maintain the track's lap records (D25)
     const car = garage.cars.find((c) => c.id === run.car_id);
-    if (run.track_id && run.result?.best_lap_s !== undefined && car) {
-      const category = `${car.scale} ${car.power} ${car.category}`.replace(/_/g, " ");
-      updateTracks((prev) =>
-        upsertRecord(prev, run.track_id!, {
-          category,
-          conditions: run.conditions.grip,
-          lap_s: run.result!.best_lap_s!,
-          holder: "me",
-          date: run.created_at.slice(0, 10),
-        }),
-      );
+    const best = runBestLap(run);
+    if (run.track_id && best !== undefined && car) {
+      const labels = carLabels(car);
+      const category = `${labels.scale} ${powerLabel(car)} ${labels.category}`.replace(/_/g, " ");
+      const record: TrackRecord = {
+        class: category,
+        best_lap_s: best,
+        conditions: run.conditions.grip,
+        holder: "me",
+        date: run.created_at.slice(0, 10),
+        source: "manual",
+      };
+      updateTracks((prev) => upsertRecord(prev, run.track_id, record));
     }
     setInForm(false);
 
     // celebration decision (display-only): replay the add on the current log to
     // see which records this run set, then pick the single best moment to show.
-    const preview = addRun(logbook, run, run.created_at);
+    const preview = addRun(logbook, run);
     const rec = checkRecords(preview.state, preview.run);
-    const lap = run.result?.best_lap_s;
-    const p = run.result?.position;
+    const lap = best;
+    const p = runPosition(run);
     if (run.type !== "practice" && p !== undefined && p >= 1 && p <= 3) {
       setCelebration({ position: p }); // a podium outranks a lap record
     } else if (rec.careerBestLap && lap !== undefined) {
@@ -184,7 +190,7 @@ export function RunsScreen(props: Props) {
           onRequestNewCar={() => setPopup("car")}
           onRequestNewTrack={() => setPopup("track")}
           onRequestNewSetup={() => setPopup("setup")}
-          fetchWeather={(track: TrackEntity, whenIso: string) =>
+          fetchWeather={(track: Track, whenIso: string) =>
             track.gps ? fetchWeather(track.gps.lat, track.gps.lon, whenIso) : Promise.resolve(null)
           }
           initial={props.speedhivePrefill}
@@ -197,7 +203,7 @@ export function RunsScreen(props: Props) {
             onCancel={() => setPopup(null)}
             onSave={(car) => {
               updateGarage((prev) => {
-                const { state, car: created } = addCar(prev, { ...car, created_at: new Date().toISOString() } as Omit<CarEntity, "id">, new Date().toISOString());
+                const { state, car: created } = addCar(prev, car);
                 setSel((p) => ({ ...p, car_id: created.id, setup_version_id: undefined }));
                 return state;
               });
@@ -210,7 +216,7 @@ export function RunsScreen(props: Props) {
             onCancel={() => setPopup(null)}
             onSave={(track) => {
               updateTracks((prev) => {
-                const { state, track: created } = addTrack(prev, track as Omit<TrackEntity, "id">, new Date().toISOString());
+                const { state, track: created } = addTrack(prev, track);
                 setSel((p) => ({ ...p, track_id: created.id }));
                 return state;
               });
@@ -264,16 +270,17 @@ export function RunsScreen(props: Props) {
       const sheets = await loadCarSheets(run.car_id);
       values = sheets?.versions.find((v) => v.id === run.setup_version_id)?.values ?? sheets?.draft ?? {};
     }
+    const labels = car ? carLabels(car) : undefined;
     props.onShareRun(
       buildSetupPayload(
         {
           setup: { name: run.setup_name || t({ en: "Race setup", fr: "Réglage course" }), template_id: run.car_template_id, values },
           car: {
-            brand: car?.brand ?? "RC",
-            model: car?.model ?? run.track.name,
-            category: car?.category ?? "buggy",
-            scale: car?.scale ?? "1/8",
-            power: car?.power ?? "nitro",
+            brand: labels?.brand || "RC",
+            model: labels?.model || run.track.name,
+            category: labels?.category || "buggy",
+            scale: labels?.scale || "1/8",
+            power: car ? powerLabel(car) : "nitro",
           },
           context: {
             track_name: run.track.name,
@@ -283,9 +290,9 @@ export function RunsScreen(props: Props) {
             weather: {
               air_temp_c: run.conditions.air_temp_c,
               humidity_pct: run.conditions.humidity_pct,
-              wind_kmh: run.conditions.wind_kmh,
+              wind_kmh: run.weather?.wind_speed_kmh,
             },
-            result: { position: run.result?.position, entrants: run.result?.entrants, best_lap_s: run.result?.best_lap_s },
+            result: { position: runPosition(run), entrants: runEntrants(run), best_lap_s: runBestLap(run) },
           },
         },
         new Date().toISOString(),
@@ -456,10 +463,10 @@ const SlimRunCard = React.memo(function SlimRunCard({
       </View>
       <View style={styles.slimRight}>
         <Text style={styles.slimLap}>
-          {run.result?.best_lap_s !== undefined ? `${run.result.best_lap_s.toFixed(2)}s` : "—"}
+          {runBestLap(run) !== undefined ? `${runBestLap(run)!.toFixed(2)}s` : "—"}
         </Text>
         <View style={styles.slimMeta}>
-          {run.feeling !== undefined && <View style={[styles.dot, { backgroundColor: feelingColor(run.feeling) }]} />}
+          {runFeeling(run) !== undefined && <View style={[styles.dot, { backgroundColor: feelingColor((runFeeling(run) ?? 0) * 10) }]} />}
           {run.outcome && (
             <Text style={styles.outcomeIcon}>
               {run.outcome === "better" ? "↑" : run.outcome === "worse" ? "↓" : "="}

@@ -4,10 +4,12 @@ import type Svg from "react-native-svg";
 import { buildReport, buildRacePlan } from "../../../../packages/engine/src";
 import type { SelectedRunSummary } from "../../../../packages/engine/src";
 import type { GarageState } from "../../../../packages/garage/src";
-import { bestAutonomy, bundleFromRun } from "../../../../packages/logbook/src";
-import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
-import { getTrack } from "../../../../packages/tracks/src";
+import { bestAutonomy, bundleFromRun, learningTuples, runAvgLap, runBestLap, runLapsList } from "../../../../packages/logbook/src";
+import type { LearningTuple, LogbookState, OutcomeRecord, RunEntry } from "../../../../packages/logbook/src";
+import { getTrack, snapshotTrack } from "../../../../packages/tracks/src";
 import type { TracksState } from "../../../../packages/tracks/src";
+import { makeWeatherObservation } from "../../../../packages/schema/src";
+import type { WeatherObservation } from "../../../../packages/schema/src";
 import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
 import { fmtTime, PitPlanView, RacePlanView, RunPicker, StrategyForm } from "../components/PlanViews";
 import type { StrategyPrefill, TrackChoice } from "../components/PlanViews";
@@ -51,6 +53,47 @@ type ViewState =
 function parseRaceWindow(label: string): { race_length_s?: number; race_type?: "sprint" | "endurance" } {
   const m = label.match(/(\d+)\s*min\s+(sprint|endurance)/);
   return m ? { race_length_s: Number(m[1]) * 60, race_type: m[2] as "sprint" | "endurance" } : {};
+}
+
+/**
+ * ★ Phase 2B unlock — the deferred engine william inputs. Now that runs are
+ * schema RunEntry/OutcomeRecord, compose the schema-shaped inputs William's
+ * race-day planner consumes:
+ *  - `practice`: LearningTuples from the selected runs' self-ratings. (Advised-
+ *    change OutcomeRecords are not persisted in-app yet — no outcome store —
+ *    so [] there; rated runs still yield run-rating tuples. Deferred: wire an
+ *    outcomes repo so advised-change attribution feeds this too.)
+ *  - `forecastObs`: a one-element WeatherObservation[] built from the theo
+ *    forecast at race start (offset-carrying ISO so makeWeatherObservation
+ *    accepts it). Empty when there is no forecast.
+ *  - `track`: the latest selected run's frozen TrackSnapshot.
+ */
+function buildWilliamInputs(
+  runs: readonly RunEntry[],
+  latest: RunEntry,
+  startIso: string,
+  forecast: { air_temp_c?: number; humidity_pct?: number; wind_kmh?: number; pressure_hpa?: number; rain_risk_pct?: number } | undefined,
+): { practice: readonly LearningTuple[]; forecastObs: readonly WeatherObservation[]; track: ReturnType<typeof snapshotTrack> } | undefined {
+  const outcomes: OutcomeRecord[] = []; // no in-app outcomes store yet (deferred)
+  const practice = learningTuples([...runs], outcomes);
+
+  const forecastObs: WeatherObservation[] = [];
+  if (forecast !== undefined) {
+    const w = makeWeatherObservation({
+      source: "auto",
+      observed_at: startIso,
+      ...(forecast.air_temp_c !== undefined ? { air_temp_c: forecast.air_temp_c } : {}),
+      ...(forecast.humidity_pct !== undefined ? { humidity_pct: forecast.humidity_pct } : {}),
+      ...(forecast.wind_kmh !== undefined ? { wind_speed_kmh: forecast.wind_kmh } : {}),
+      ...(forecast.pressure_hpa !== undefined ? { pressure_hpa: forecast.pressure_hpa } : {}),
+      ...(forecast.rain_risk_pct !== undefined ? { precipitation_probability_pct: forecast.rain_risk_pct } : {}),
+    });
+    if (w.ok) forecastObs.push(w.observation);
+  }
+
+  // latest.track is already a frozen TrackSnapshot; re-snapshot is a cheap
+  // detached copy that satisfies the planner's TrackSnapshot input.
+  return { practice, forecastObs, track: { ...latest.track } };
 }
 
 export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport, requestRunId }: Props) {
@@ -130,8 +173,8 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
         grip: r.conditions.grip,
         surface: r.track.surface,
         air_temp_c: r.conditions.air_temp_c,
-        best_lap_s: r.result?.best_lap_s,
-        avg_lap_s: r.result?.avg_lap_s,
+        best_lap_s: runBestLap(r),
+        avg_lap_s: runAvgLap(r),
         symptoms: r.feedback.tags.map((t) => t.symptom),
         outcome: r.outcome,
       }));
@@ -141,7 +184,22 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
       if (track?.gps) {
         forecast = (await fetchWeather(track.gps.lat, track.gps.lon, startIso)) ?? undefined;
       }
-      const plan = buildRacePlan(bundle, summaries, { start_iso: startIso, length_s: lengthMin * 60, type }, forecast, KB);
+
+      // ★ UNLOCK (Phase 2B): now that runs are schema RunEntry, compose the
+      // deferred engine william inputs — practice learning tuples from rated
+      // runs (outcomes store not wired in-app yet, so [] for advised changes —
+      // see deferred note), a one-element forecast WeatherObservation built from
+      // the theo forecast, and the latest run's frozen TrackSnapshot.
+      const william = buildWilliamInputs(runs, latest, startIso, forecast);
+
+      const plan = buildRacePlan(
+        bundle,
+        summaries,
+        { start_iso: startIso, length_s: lengthMin * 60, type },
+        forecast,
+        KB,
+        william,
+      );
       const saved: Omit<SavedReport, "id" | "created_at"> = {
         kind: "race_plan",
         run_ids: runs.map((r) => r.id),
@@ -167,10 +225,10 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     const latest: RunEntry | undefined = sorted[sorted.length - 1];
     let lapTimes: number[] | undefined;
     for (const r of sorted) {
-      const l = r.result?.laps_list;
-      if (l !== undefined && l.length > (lapTimes?.length ?? 0)) lapTimes = l;
+      const l = runLapsList(r);
+      if (l !== undefined && l.length > (lapTimes?.length ?? 0)) lapTimes = [...l];
     }
-    const avgs = sorted.map((r) => r.result?.avg_lap_s).filter((v): v is number => v !== undefined);
+    const avgs = sorted.map((r) => runAvgLap(r)).filter((v): v is number => v !== undefined);
     const trackId = track?.track_id ?? latest?.track_id;
     const trackName = track?.label ?? latest?.track.name;
     let autonomy: StrategyPrefill["autonomy"];

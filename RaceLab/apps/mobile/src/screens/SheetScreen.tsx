@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { sheetProfile, updateCar } from "../../../../packages/garage/src";
+import { carLabels, powerLabel, sheetProfile } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import { draftDiff, getVersion, kitVersionId, loadVersion, renameDraft } from "../../../../packages/sheets/src";
 import type { SheetsState } from "../../../../packages/sheets/src";
@@ -114,9 +114,10 @@ function CarSheets({
   onBack: () => void;
 }) {
   const t = useT();
-  const { state, update } = useCarSheets(car.id, car.template_id);
+  const templateId = car.template_id ?? car.chassis_id;
+  const { state, update } = useCarSheets(car.id, templateId);
   const profile = sheetProfile(car);
-  const template = KB.templates[car.template_id] ?? KB.templates["generic-offroad"];
+  const template = KB.templates[templateId] ?? KB.templates["generic-offroad"];
   const [mode, setMode] = useState<"list" | "detail">("list");
 
   const newSetup = () => {
@@ -147,13 +148,15 @@ function CarSheets({
           <Text style={styles.empty}>{t({ en: "Loading sheets…", fr: "Chargement des fiches…" })}</Text>
         </View>
       ) : mode === "detail" ? (
-        <SheetEditorScreen state={state} update={update} template={template} profile={profile} options={car.options} />
+        // car.options removed in schema cutover (setup-sheet concern, B1a OUT-OF-SCOPE); options editing deferred
+        <SheetEditorScreen state={state} update={update} template={template} profile={profile} options={undefined} />
       ) : (
         <SetupList
           state={state}
           car={car}
-          options={car.options}
-          onChangeOptions={(text) => updateGarage((prev) => updateCar(prev, car.id, { options: text || undefined }))}
+          // car.options removed in schema cutover (setup-sheet concern, B1a OUT-OF-SCOPE); options editing deferred
+          options={undefined}
+          onChangeOptions={() => {}}
           onShareSetup={onShareSetup}
           onOpenDraft={() => setMode("detail")}
           onOpenVersion={(id) => {
@@ -185,16 +188,18 @@ function SetupList({
   onOpenVersion: (id: string) => void;
 }) {
   const t = useT();
-  const shareVersion = (v: SheetsState["versions"][number]) =>
+  const shareVersion = (v: SheetsState["versions"][number]) => {
+    const labels = carLabels(car);
     onShareSetup(
       buildSetupPayload(
         {
           setup: { name: v.name, template_id: v.template_id, values: v.values },
-          car: { brand: car.brand, model: car.model, category: car.category, scale: car.scale, power: car.power },
+          car: { brand: labels.brand, model: labels.model, category: labels.category, scale: labels.scale, power: powerLabel(car) },
         },
         new Date().toISOString(),
       ),
     );
+  };
   const edits = draftDiff(state).length;
   const base = getVersion(state, state.draft_base_id);
   const versions = [...state.versions].reverse();

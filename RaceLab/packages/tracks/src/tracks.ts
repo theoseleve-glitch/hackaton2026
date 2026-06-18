@@ -1,30 +1,27 @@
-import type { LapRecord, TrackEntity, TracksState } from "./types";
+import type { Track, TrackRecord } from "../../schema/src/index";
+import type { TracksState } from "./types";
 
 /**
- * State operations — same contract as packages/sheets and packages/logbook:
- * every operation returns a new state, safe for React reducers. Unknown ids
- * are refused (state returned unchanged, SAME reference).
+ * In-memory tracks state ops over the schema `Track`. Ids are minted upstream
+ * by schema `makeTrack` (the form/repo seam). These pure ops keep the
+ * React-reducer "return a new state" contract; the app's `useTracks` backs the
+ * state with the tracks repo.
  */
 
 export function initTracks(): TracksState {
   return { tracks: [] };
 }
 
-/** Append a track. The caller provides everything except id. */
-export function addTrack(
-  state: TracksState,
-  track: Omit<TrackEntity, "id">,
-  now: string,
-): { state: TracksState; track: TrackEntity } {
-  const entity: TrackEntity = { ...track, id: nextId(now) };
-  return { state: { tracks: [...state.tracks, entity] }, track: entity };
+/** Append an already-minted Track (id from schema makeTrack). */
+export function addTrack(state: TracksState, track: Track): { state: TracksState; track: Track } {
+  return { state: { tracks: [...state.tracks, track] }, track };
 }
 
 /** Patch a track in place. id/created_at are immutable; unknown ids are a no-op. */
 export function updateTrack(
   state: TracksState,
   id: string,
-  patch: Partial<Omit<TrackEntity, "id" | "created_at">>,
+  patch: Partial<Omit<Track, "id" | "created_at">>,
 ): TracksState {
   if (!state.tracks.some((t) => t.id === id)) return state;
   return {
@@ -39,32 +36,27 @@ export function deleteTrack(state: TracksState, id: string): TracksState {
   return tracks.length === state.tracks.length ? state : { tracks };
 }
 
-export function getTrack(state: TracksState, id: string): TrackEntity | undefined {
+export function getTrack(state: TracksState, id: string): Track | undefined {
   return state.tracks.find((t) => t.id === id);
 }
 
 /**
- * Auto-update a track record from a run result. Records are keyed by
- * category+conditions: absent key → record added; existing key → replaced
- * ONLY if the new lap is strictly faster (lower lap_s), else no-op (same
- * reference). Unknown track ids are a no-op.
+ * Auto-update a track record (schema TrackRecord) from a run result. Records
+ * are keyed by class+conditions: absent key → record added; existing key →
+ * replaced ONLY if the new lap is strictly faster (lower best_lap_s), else
+ * no-op (same reference). Unknown track ids are a no-op.
  */
-export function upsertRecord(state: TracksState, trackId: string, record: LapRecord): TracksState {
+export function upsertRecord(state: TracksState, trackId: string, record: TrackRecord): TracksState {
   const track = getTrack(state, trackId);
   if (!track) return state;
   const i = track.records.findIndex(
-    (r) => r.category === record.category && r.conditions === record.conditions,
+    (r) => r.class === record.class && r.conditions === record.conditions,
   );
   if (i === -1) {
     return updateTrack(state, trackId, { records: [...track.records, record] });
   }
-  if (record.lap_s >= track.records[i].lap_s) return state;
+  if (record.best_lap_s >= track.records[i].best_lap_s) return state;
   return updateTrack(state, trackId, {
     records: track.records.map((r, j) => (j === i ? record : r)),
   });
-}
-
-function nextId(now: string): string {
-  const rand = Math.random().toString(36).slice(2, 10);
-  return `track-${Date.parse(now).toString(36)}-${rand}`;
 }

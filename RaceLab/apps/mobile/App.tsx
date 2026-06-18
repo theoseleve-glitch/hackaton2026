@@ -32,7 +32,7 @@ import { trialDaysLeft, useAccount } from "./src/accountstore";
 import { linkToPayload } from "../../packages/social/src";
 import type { SharedPayload } from "../../packages/social/src";
 import { colors } from "./src/theme";
-import { RepoProvider } from "./src/storage/RepoProvider";
+import { RepoProvider, useReposReady } from "./src/storage/RepoProvider";
 
 type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer" | "social";
 
@@ -111,7 +111,7 @@ function AppInner() {
   useEffect(() => {
     if (!garage || !logbook || shChecked) return;
     setShChecked(true);
-    const transponder = garage.cars.map((c) => c.transponder).find(Boolean);
+    const transponder = garage.cars.map((c) => c.transponder_id).find(Boolean);
     if (!transponder) return;
     void (async () => {
       try {
@@ -349,15 +349,26 @@ function AppInner() {
   );
 }
 
-// Phase 2A (ADDITIVE): mount RepoProvider so the one-time, non-destructive
-// legacy migration runs at boot and the repos context is available for the
-// Phase 2B hook rewrite. The render is intentionally NOT gated on
-// useReposReady() — AppInner keeps owning the UI through the legacy stores, so
-// the app renders and behaves exactly as before.
+// Phase 2B (CUTOVER): the store hooks read William's repos via useRepos(), which
+// throws until the RepoProvider is ready. Gate AppInner on useReposReady() so the
+// repos (and the one-time, non-destructive legacy migration) are open before any
+// hook mounts — the existing splash shows until then.
+function AppGate() {
+  const ready = useReposReady();
+  if (!ready) {
+    return (
+      <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
+        <ActivityIndicator color={colors.accent} size="large" />
+      </SafeAreaView>
+    );
+  }
+  return <AppInner />;
+}
+
 export default function App() {
   return (
     <RepoProvider>
-      <AppInner />
+      <AppGate />
     </RepoProvider>
   );
 }

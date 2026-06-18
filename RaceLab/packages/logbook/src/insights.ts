@@ -1,10 +1,15 @@
 import { lastRun } from "./logbook";
+import { runBestLap, runEntrants, runPosition } from "./types";
 import type { LogbookState, RunEntry } from "./types";
 
 /**
  * Garage-facing derivations (D22): the log animates the garage. All pure —
- * the app renders the words, these return the facts.
+ * the app renders the words, these return the facts. Reads timing through the
+ * `runBestLap`/`runPosition` accessors (schema `effectiveTiming`), so the
+ * laps-branch and the manual-summary branch are both handled.
  */
+
+void runEntrants; // re-exported via types; kept importable for symmetry
 
 /** The car's "mood" — what a race engineer would say opening the box. */
 export type CarStatus =
@@ -61,17 +66,21 @@ export interface DriverStats {
 export function driverStats(state: LogbookState, year?: string): DriverStats {
   const runs = year === undefined ? state.runs : state.runs.filter((r) => r.created_at.startsWith(year));
   const competitive = runs.filter((r) => r.type === "qualifier" || r.type === "main");
-  const placed = competitive.filter((r) => r.result?.position !== undefined);
+  const placed = competitive.filter((r) => runPosition(r) !== undefined);
 
   let best: RunEntry | undefined;
+  let bestLap: number | undefined;
   for (const r of runs) {
-    const lap = r.result?.best_lap_s;
+    const lap = runBestLap(r);
     if (lap === undefined) continue;
-    if (!best || lap < best.result!.best_lap_s!) best = r;
+    if (bestLap === undefined || lap < bestLap) {
+      best = r;
+      bestLap = lap;
+    }
   }
 
-  const podiums = placed.filter((r) => r.result!.position! <= 3).length;
-  const wins = placed.filter((r) => r.result!.position! === 1).length;
+  const podiums = placed.filter((r) => runPosition(r)! <= 3).length;
+  const wins = placed.filter((r) => runPosition(r)! === 1).length;
 
   return {
     runs: runs.length,
@@ -79,7 +88,7 @@ export function driverStats(state: LogbookState, year?: string): DriverStats {
     races: competitive.length,
     podiums,
     wins,
-    best_lap_s: best?.result?.best_lap_s,
+    best_lap_s: bestLap,
     best_lap_track: best?.track.name,
     podium_rate: placed.length ? podiums / placed.length : undefined,
     win_rate: placed.length ? wins / placed.length : undefined,
@@ -104,13 +113,13 @@ export interface RunRecords {
  *  (nothing to beat), so a record requires at least one prior comparable lap. */
 export function checkRecords(state: LogbookState, run: RunEntry): RunRecords {
   const others = state.runs.filter((r) => r.id !== run.id);
-  const lap = run.result?.best_lap_s;
+  const lap = runBestLap(run);
 
   let careerBestLap = false;
   let trackBestLap = false;
   if (lap !== undefined) {
     const prior = (rs: RunEntry[]) =>
-      rs.map((r) => r.result?.best_lap_s).filter((l): l is number => l !== undefined);
+      rs.map((r) => runBestLap(r)).filter((l): l is number => l !== undefined);
     const careerPrior = prior(others);
     careerBestLap = careerPrior.length > 0 && careerPrior.every((l) => lap < l);
     const trackPrior = prior(others.filter((r) => r.track.name === run.track.name));
@@ -118,14 +127,14 @@ export function checkRecords(state: LogbookState, run: RunEntry): RunRecords {
   }
 
   const isCompetitive = run.type === "qualifier" || run.type === "main";
-  const pos = run.result?.position;
+  const pos = runPosition(run);
   const otherPlaced = others.filter(
-    (r) => (r.type === "qualifier" || r.type === "main") && r.result?.position !== undefined,
+    (r) => (r.type === "qualifier" || r.type === "main") && runPosition(r) !== undefined,
   );
   const firstPodium =
-    isCompetitive && pos !== undefined && pos <= 3 && !otherPlaced.some((r) => r.result!.position! <= 3);
+    isCompetitive && pos !== undefined && pos <= 3 && !otherPlaced.some((r) => runPosition(r)! <= 3);
   const firstWin =
-    isCompetitive && pos === 1 && !otherPlaced.some((r) => r.result!.position! === 1);
+    isCompetitive && pos === 1 && !otherPlaced.some((r) => runPosition(r)! === 1);
 
   return { careerBestLap, trackBestLap, firstPodium, firstWin };
 }
@@ -188,10 +197,14 @@ export function seasonStats(state: LogbookState): SeasonStats {
   const tracks = new Set(runs.map((r) => r.track.name)).size;
 
   let best: RunEntry | undefined;
+  let bestLap: number | undefined;
   for (const r of runs) {
-    const lap = r.result?.best_lap_s;
+    const lap = runBestLap(r);
     if (lap === undefined) continue;
-    if (!best || lap < best.result!.best_lap_s!) best = r;
+    if (bestLap === undefined || lap < bestLap) {
+      best = r;
+      bestLap = lap;
+    }
   }
 
   // streak: walk back from the newest RATED run; unrated runs don't break it
@@ -206,7 +219,7 @@ export function seasonStats(state: LogbookState): SeasonStats {
   return {
     runs: runs.length,
     tracks,
-    best_lap_s: best?.result?.best_lap_s,
+    best_lap_s: bestLap,
     best_lap_setup: best?.setup_name,
     best_lap_track: best?.track.name,
     better_streak,

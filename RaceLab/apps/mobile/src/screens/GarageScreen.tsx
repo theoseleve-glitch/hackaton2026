@@ -3,7 +3,7 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Overlay } from "../components/Overlay";
 import { ProgressCard } from "../components/ProgressCard";
-import { carSubtitle, sheetProfile, updateCar } from "../../../../packages/garage/src";
+import { carLabels, carSubtitle, sheetProfile, updateCar } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import { addCar, deleteCar } from "../../../../packages/garage/src";
 import { carStatus, seasonStats } from "../../../../packages/logbook/src";
@@ -95,7 +95,7 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
             if (modal !== null && modal !== "new") {
               updateGarage((prev) => updateCar(prev, modal.edit.id, car));
             } else {
-              updateGarage((prev) => addCar(prev, { ...car, created_at: new Date().toISOString() } as Omit<CarEntity, "id">, new Date().toISOString()).state);
+              updateGarage((prev) => addCar(prev, car).state);
             }
             setModal(null);
           }}
@@ -146,7 +146,7 @@ const CarCard = React.memo(function CarCard({
       {car.photo_uri && <Image source={{ uri: car.photo_uri }} style={styles.photo} />}
       <View style={styles.carHead}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.brand}>{car.brand.toUpperCase()}</Text>
+          <Text style={styles.brand}>{carLabels(car).brand.toUpperCase()}</Text>
           <Text style={styles.model}>{car.name}</Text>
           <Text style={styles.meta}>{carSubtitle(car)}</Text>
         </View>

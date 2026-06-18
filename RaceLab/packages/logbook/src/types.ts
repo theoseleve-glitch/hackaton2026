@@ -1,116 +1,111 @@
-import type { FeedbackTag } from "../../engine/src/types";
-
 /**
- * Layer 1 — the Run Log (the base product, D22). A run connects:
- *   setup version + track + conditions + tyres + result + driver feedback
- * That connection is what makes every other layer (comparison, engineer
- * report, learning loop) possible. Almost every field is optional — trackside
- * logging must survive "10 minutes before your heat" — but what IS captured
- * is structured so the deterministic engine can reason over it.
+ * Layer 1 — the Run Log, now backed by the canonical schema `RunEntry`
+ * (packages/schema). The logbook no longer owns a parallel RunEntry shape:
+ * `RunEntry` IS the schema RunEntry, and `LogbookState` is `{ runs: RunEntry[] }`.
+ *
+ * The schema moved timing under a discriminated `RunTiming` union (read via
+ * `effectiveTiming(run)`), driver feel under `RunEntry.driver`
+ * (feeling_1to10 / fatigue_1to5 / confidence_1to5), the autonomy test up to the
+ * run level (`RunEntry.autonomy_test`), and per-corner notes onto
+ * `RunFeedback.turns`. The accessors below are the ONE place that knows those
+ * field names, so insights/screens read through them instead of re-deriving.
  */
 
-export type Grip = "green" | "medium" | "high" | "blue_groove";
-export type Bumpiness = "smooth" | "medium" | "rough";
-export type TrackEvolution = "improving" | "stable" | "degrading";
-export type Sky = "sunny" | "cloudy" | "rain_risk" | "raining";
-export type TyreWear = "new" | "light" | "medium" | "worn";
-export type RunType = "practice" | "qualifier" | "main";
-export type Outcome = "better" | "same" | "worse";
-export type Traffic = "clear" | "some" | "heavy";
+import type {
+  Bumpiness,
+  DriverState,
+  FeedbackTag,
+  Grip,
+  Outcome,
+  RunConditions,
+  RunEntry,
+  RunFeedback,
+  RunResult,
+  RunType,
+  Sky,
+  TimingStats,
+  TrackEvolution,
+  TrackSnapshot,
+  Traffic,
+  TyreSet,
+  TyreWear,
+} from "../../schema/src/index";
+import { effectiveTiming } from "../../schema/src/index";
 
-export interface TrackInfo {
-  name: string;
-  surface: string; // clay / hard-packed / loam / astro / carpet / grass
-  indoor: boolean;
-  layout?: string;
-}
+export type {
+  Bumpiness,
+  DriverState,
+  FeedbackTag,
+  Grip,
+  Outcome,
+  RunConditions,
+  RunEntry,
+  RunFeedback,
+  RunResult,
+  RunType,
+  Sky,
+  TimingStats,
+  TrackSnapshot,
+  TrackEvolution,
+  Traffic,
+  TyreSet,
+  TyreWear,
+};
 
-export interface RunConditions {
-  grip: Grip;
-  bumpiness?: Bumpiness;
-  dusty?: boolean;
-  sky?: Sky;
-  evolution?: TrackEvolution;
-  air_temp_c?: number;
-  track_temp_c?: number;
-  humidity_pct?: number;
-  wind_kmh?: number;
-  pressure_hpa?: number;
-  /** 0–100 sunshine */
-  sun_pct?: number;
-}
-
-export interface TyreSet {
-  brand?: string;
-  compound?: string;
-  insert?: string;
-  sauce?: string;
-  wear?: TyreWear;
-  run_count?: number;
-}
-
-export interface RunResult {
-  best_lap_s?: number;
-  avg_lap_s?: number;
-  /** 0–100; lap-to-lap consistency. Manual in V1 (timing import is exploratory). */
-  consistency_pct?: number;
-  laps?: number;
-  /** finishing position in a competitive session (1 = win) */
-  position?: number;
-  /** field size the position was scored against ("P2 of 12") */
-  entrants?: number;
-  mistakes?: number;
-  /** 1 (fighting the car) … 5 (could drive it all day) */
-  driver_confidence?: number;
-  traffic?: Traffic;
-  tyre_state_after?: string;
-  /** individual lap times (seconds), driving order. Stats come from lapStats
-   *  ON DEMAND — never auto-written into best_lap_s/avg_lap_s (user wins). */
-  laps_list?: number[];
-  fuel_used_cc?: number;
-  /** run-until-dry test: seconds to burn a full tank at this pace, and laps
-   *  achieved. This is THE source for race-strategy autonomy (a measured
-   *  fact beats any tank-size estimate). */
-  autonomy_test?: { time_s?: number; laps?: number };
-}
-
-export interface RunFeedback {
-  tags: FeedbackTag[]; // taxonomy-validated (symptom, phase?, evolution?)
-  text?: string;
-  /** per-corner observations; corner numbered from the track map */
-  corner_notes?: { corner: number; note: string }[];
-}
-
-export interface RunEntry {
-  id: string;
-  created_at: string; // ISO
-  type: RunType;
-  /** chassis template of the car driven (garage is single-car MP11 today) */
-  car_template_id: string;
-  /** the EXACT setup version on the car — references sheets SetupVersion.id */
-  setup_version_id: string;
-  /** denormalized label so the log renders without resolving the sheet */
-  setup_name: string;
-  track: TrackInfo;
-  conditions: RunConditions;
-  tyres?: TyreSet;
-  result?: RunResult;
-  feedback: RunFeedback;
-  note?: string;
-  /** learning loop: how did this run feel vs the previous one (after a change)? */
-  outcome?: Outcome;
-  /** garage car instance (multi-car future); car_template_id stays authoritative for the engine */
-  car_id?: string;
-  /** stable track reference (track DB future); track.name stays the display source */
-  track_id?: string;
-  /** 0–100 driver-feel slider */
-  feeling?: number;
-  /** 1 (fresh) … 5 (exhausted) */
-  fatigue?: number;
-  /** session length the pilot ran, minutes */
-  duration_min?: number;
-}
+/** A logged run's TrackInfo is the schema TrackSnapshot (name/surface/indoor/…). */
+export type TrackInfo = TrackSnapshot;
 
 export interface LogbookState {
   runs: RunEntry[]; // chronological, oldest first
+}
+
+// ── timing accessors (the cascade's single source of truth) ─────────────────
+
+/** Best lap (s) — laps-branch is derived via lapStats, summary echoes its field. */
+export function runBestLap(run: RunEntry): number | undefined {
+  return effectiveTiming(run)?.best_lap_s;
+}
+export function runAvgLap(run: RunEntry): number | undefined {
+  return effectiveTiming(run)?.avg_lap_s;
+}
+export function runConsistency(run: RunEntry): number | undefined {
+  return effectiveTiming(run)?.consistency_pct;
+}
+export function runLapCount(run: RunEntry): number | undefined {
+  return effectiveTiming(run)?.lap_count;
+}
+
+/** Position/entrants/mistakes/traffic live on the SUMMARY branch's RunResult
+ *  (non-timing facts a manual summary carries). */
+export function runResultFacts(run: RunEntry): RunResult | undefined {
+  if (run.timing === undefined) return undefined;
+  return run.timing.kind === "summary" ? run.timing.result : run.timing.result;
+}
+export function runPosition(run: RunEntry): number | undefined {
+  return runResultFacts(run)?.position;
+}
+export function runEntrants(run: RunEntry): number | undefined {
+  return runResultFacts(run)?.entrants;
+}
+/** Summary-branch raw lap list (theo's laps_list — preserved on round-trip). */
+export function runLapsList(run: RunEntry): readonly number[] | undefined {
+  if (run.timing?.kind === "summary") return run.timing.result.laps_list;
+  if (run.timing?.kind === "laps") return run.timing.laps.map((l) => l.t_s);
+  return undefined;
+}
+
+/** Run-level autonomy test (schema moved it off `result`). */
+export function runAutonomy(run: RunEntry): { time_s?: number; laps?: number } | undefined {
+  return run.autonomy_test;
+}
+
+/** Driver feel (0–100 slider is stored as Rating1to10 on driver.feeling_1to10). */
+export function runFeeling(run: RunEntry): number | undefined {
+  return run.driver?.feeling_1to10;
+}
+export function runFatigue(run: RunEntry): number | undefined {
+  return run.driver?.fatigue_1to5;
+}
+export function runConfidence(run: RunEntry): number | undefined {
+  return run.driver?.confidence_1to5;
 }

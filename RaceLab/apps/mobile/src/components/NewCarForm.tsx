@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import type { CarEntity, PowerType } from "../../../../packages/garage/src";
+import { CUSTOM_CHASSIS_ID, carLabels, makeCar, powerFromUi, powerLabel } from "../../../../packages/garage/src";
+import type { Car, PowerType } from "../../../../packages/garage/src";
 import { KB } from "../kb";
 import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
 import { colors } from "../theme";
@@ -9,9 +10,11 @@ import { AutofillInput } from "./AutofillInput";
 import { ChipRow, FormActions, KeyboardAwareForm, LabeledInput, Section, num } from "./forms";
 
 /**
- * Car identity sheet (D26). The typology answers here drive the custom sheet
- * labels (nitro vs EP sections, brand badges) — precision matters more than
- * speed for this one, it's filled once per car.
+ * Car identity sheet (D26). Mints a schema `Car` via `makeCar`: identity facts
+ * (brand/model/category/scale) land on `Car.custom` (the app ships no chassis
+ * registry, so every car is CUSTOM_CHASSIS_ID), power maps via `powerFromUi`,
+ * and the engine/electronics fields stay setup-sheet concerns (B1a: not Car
+ * identity facts) — they are kept in the UI but not stored on the Car.
  */
 
 const CATEGORIES = ["buggy", "truggy", "stadium_truck", "sc", "onroad"] as const;
@@ -20,28 +23,30 @@ const DRIVETRAINS = ["4wd", "2wd"] as const;
 const POWERS: PowerType[] = ["nitro", "electric"];
 
 interface Props {
-  initial?: CarEntity;
-  onSave: (car: Omit<CarEntity, "id" | "created_at">) => void;
+  initial?: Car;
+  onSave: (car: Car) => void;
   onCancel: () => void;
   onDelete?: () => void;
 }
 
 export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   const t = useT();
+  const initLabels = initial ? carLabels(initial) : undefined;
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [name, setName] = useState(initial?.name ?? "");
-  const [brand, setBrand] = useState(initial?.brand ?? "");
-  const [model, setModel] = useState(initial?.model ?? "");
-  const [category, setCategory] = useState<string>(initial?.category ?? "buggy");
-  const [scale, setScale] = useState<string>(initial?.scale ?? "1/8");
+  const [brand, setBrand] = useState(initLabels?.brand ?? "");
+  const [model, setModel] = useState(initLabels?.model ?? "");
+  const [category, setCategory] = useState<string>(initLabels?.category || "buggy");
+  const [scale, setScale] = useState<string>(initLabels?.scale || "1/8");
   const [drivetrain, setDrivetrain] = useState<"4wd" | "2wd" | undefined>(initial?.drivetrain);
-  const [power, setPower] = useState<PowerType>(initial?.power ?? "nitro");
-  const [engine, setEngine] = useState(initial?.engine ?? "");
-  const [motor, setMotor] = useState(initial?.motor ?? "");
-  const [esc, setEsc] = useState(initial?.esc ?? "");
-  const [battery, setBattery] = useState(initial?.battery ?? "");
-  const [tank, setTank] = useState(initial?.fuel_tank_cl !== undefined ? String(initial.fuel_tank_cl) : "");
-  const [transponder, setTransponder] = useState(initial?.transponder ?? "");
+  const [power, setPower] = useState<PowerType>(initial ? powerLabel(initial) : "nitro");
+  const [engine, setEngine] = useState("");
+  const [motor, setMotor] = useState("");
+  const [esc, setEsc] = useState("");
+  const [battery, setBattery] = useState("");
+  const [tank, setTank] = useState(initial?.fuel_tank_cc !== undefined ? String(initial.fuel_tank_cc) : "");
+  const [transponder, setTransponder] = useState(initial?.transponder_id ?? "");
+  const [error, setError] = useState<string | null>(null);
 
   // template: exact chassis template when we have one for this brand+model,
   // generic-offroad otherwise (real templates land with KB releases)
@@ -53,25 +58,38 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
 
   const save = () => {
     if (!brand.trim() && !model.trim() && !name.trim()) return;
-    onSave({
-      name: name.trim() || `${brand.trim()} ${model.trim()}`.trim() || t({ en: "My car", fr: "Ma voiture" }),
-      template_id: initial?.template_id ?? templateFor(),
-      brand: brand.trim() || "—",
-      model: model.trim() || "—",
-      category,
-      scale,
-      drivetrain,
-      power,
-      engine: power === "nitro" ? engine.trim() || undefined : undefined,
-      motor: power === "electric" ? motor.trim() || undefined : undefined,
-      esc: power === "electric" ? esc.trim() || undefined : undefined,
-      battery: power === "electric" ? battery.trim() || undefined : undefined,
-      fuel_tank_cl: power === "nitro" ? num(tank) : undefined,
-      transponder: transponder.trim() || undefined,
-      options: initial?.options, // edited from the setup sheet now
-      photo_uri: initial?.photo_uri,
-      notes: initial?.notes,
-    });
+    const carName = name.trim() || `${brand.trim()} ${model.trim()}`.trim() || t({ en: "My car", fr: "Ma voiture" });
+    const res = makeCar(
+      {
+        name: carName,
+        chassis_id: CUSTOM_CHASSIS_ID,
+        power_type: powerFromUi(power),
+        template_id: initial?.template_id ?? templateFor(),
+        ...(drivetrain !== undefined ? { drivetrain } : {}),
+        ...(power === "nitro" ? { fuel_tank_cc: num(tank) } : {}),
+        ...(transponder.trim() !== "" ? { transponder_id: transponder.trim() } : {}),
+        custom: {
+          brand: brand.trim() || "—",
+          model: model.trim() || "—",
+          category,
+          scale,
+        },
+        ...(initial?.photo_uri !== undefined ? { photo_uri: initial.photo_uri } : {}),
+        ...(initial?.notes !== undefined ? { notes: initial.notes } : {}),
+      },
+      // an edit keeps its created_at via the minted id being the same is not
+      // possible (makeCar mints a fresh id) — but edits go through updateCar in
+      // the screen, which preserves id/created_at; here we mint with the
+      // original created_at when editing so the id derives consistently.
+      initial?.created_at ?? new Date().toISOString(),
+    );
+    if (!res.ok) {
+      setError(t({ en: "Could not save this car.", fr: "Impossible d'enregistrer cette voiture." }));
+      return;
+    }
+    // When editing, keep the original id (updateCar matches on it).
+    const car: Car = initial ? { ...res.car, id: initial.id, created_at: initial.created_at } : res.car;
+    onSave(car);
   };
 
   return (
@@ -99,7 +117,7 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
       {power === "nitro" ? (
         <Section title={t({ en: "Engine", fr: "Moteur" })}>
           <AutofillInput label={t({ en: "Engine", fr: "Moteur" })} value={engine} onChangeText={setEngine} pool={ENGINES} placeholder={t({ en: "e.g. OS Speed B21", fr: "ex. OS Speed B21" })} />
-          <LabeledInput label={t({ en: "Fuel tank (cL) — feeds race strategy", fr: "Réservoir (cL) — alimente la stratégie de course" })} value={tank} onChangeText={setTank} keyboardType="decimal-pad" placeholder={t({ en: "e.g. 12.5", fr: "ex. 12.5" })} />
+          <LabeledInput label={t({ en: "Fuel tank (cc) — feeds race strategy", fr: "Réservoir (cc) — alimente la stratégie de course" })} value={tank} onChangeText={setTank} keyboardType="decimal-pad" placeholder={t({ en: "e.g. 125", fr: "ex. 125" })} />
         </Section>
       ) : (
         <Section title={t({ en: "Electronics", fr: "Électronique" })}>
@@ -112,6 +130,8 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
       <Section title={t({ en: "Timing", fr: "Chronométrage" })}>
         <LabeledInput label={t({ en: "Transponder # (Speedhive)", fr: "N° de transpondeur (Speedhive)" })} value={transponder} onChangeText={setTransponder} keyboardType="numeric" placeholder={t({ en: "link once — laps import on app open", fr: "à lier une fois — les tours s'importent à l'ouverture de l'app" })} />
       </Section>
+
+      {error && <Text style={styles.errorText}>{error}</Text>}
 
       <FormActions onCancel={onCancel} onSave={save} saveLabel={initial ? t({ en: "Save", fr: "Enregistrer" }) : t({ en: "Add to garage", fr: "Ajouter au garage" })} />
 
@@ -136,6 +156,7 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   title: { color: colors.text, fontSize: 20, fontWeight: "800", marginBottom: 14 },
   hint: { color: colors.sub, fontSize: 12, marginTop: 8, marginBottom: 4 },
+  errorText: { color: colors.warn, fontSize: 13, marginTop: 8 },
   deleteBtn: { marginTop: 18, alignItems: "center", paddingVertical: 12 },
   deleteText: { color: colors.warn, fontSize: 14, fontWeight: "700" },
 });

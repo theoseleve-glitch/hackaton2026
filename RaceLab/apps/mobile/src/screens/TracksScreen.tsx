@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { addTrack, deleteTrack, updateTrack } from "../../../../packages/tracks/src";
-import type { LapRecord, TrackEntity, TracksState } from "../../../../packages/tracks/src";
+import { addTrack, cornersOf, deleteTrack, updateTrack } from "../../../../packages/tracks/src";
+import type { Track, TrackRecord, TracksState } from "../../../../packages/tracks/src";
 import { getCandidacy } from "../../../../packages/social/src";
 import type { CandidacyData, CandidacyState } from "../../../../packages/social/src";
 import { Overlay } from "../components/Overlay";
@@ -25,7 +25,7 @@ interface Props {
 
 export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial, onOpenOfficial }: Props) {
   const t = useT();
-  const [modal, setModal] = useState<null | "new" | { edit: TrackEntity }>(null);
+  const [modal, setModal] = useState<null | "new" | { edit: Track }>(null);
   const editing = modal !== null && modal !== "new" ? modal.edit : undefined;
   const editingState: CandidacyState = editing ? getCandidacy(candidacy, editing.id)?.state ?? "none" : "none";
 
@@ -79,7 +79,7 @@ export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial
               if (editing) {
                 updateTracks((prev) => updateTrack(prev, editing.id, track));
               } else {
-                updateTracks((prev) => addTrack(prev, track, new Date().toISOString()).state);
+                updateTracks((prev) => addTrack(prev, track).state);
               }
               setModal(null);
             }}
@@ -98,19 +98,21 @@ export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial
   );
 }
 
-/** Fastest lap ever set at this track, across all categories/conditions. */
-function bestRecord(track: TrackEntity): LapRecord | undefined {
-  return track.records.reduce<LapRecord | undefined>(
-    (best, r) => (best === undefined || r.lap_s < best.lap_s ? r : best),
+/** Fastest lap ever set at this track, across all classes/conditions. */
+function bestRecord(track: Track): TrackRecord | undefined {
+  return track.records.reduce<TrackRecord | undefined>(
+    (best, r) => (best === undefined || r.best_lap_s < best.best_lap_s ? r : best),
     undefined,
   );
 }
 
-function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidacy: CandidacyState; onPress: () => void }) {
+function TrackCard({ track, candidacy, onPress }: { track: Track; candidacy: CandidacyState; onPress: () => void }) {
   const t = useT();
   const best = bestRecord(track);
-  const shown = track.traits.slice(0, 4);
-  const extra = track.traits.length - shown.length;
+  const corners = cornersOf(track);
+  const traits = track.traits ?? [];
+  const shown = traits.slice(0, 4);
+  const extra = traits.length - shown.length;
 
   return (
     <Pressable style={styles.card} onPress={onPress}>
@@ -120,13 +122,13 @@ function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidac
         </Text>
         {candidacy === "official" && <Text style={styles.officialBadge}>{t({ en: "🏁 OFFICIAL", fr: "🏁 OFFICIEL" })}</Text>}
         {candidacy === "candidate" && <Text style={styles.pendingBadge}>{t({ en: "⏳ PENDING", fr: "⏳ EN ATTENTE" })}</Text>}
-        {candidacy === "none" && track.visibility === "public" && <Text style={styles.publicBadge}>{t({ en: "PUBLIC", fr: "PUBLIC" })}</Text>}
+        {candidacy === "none" && track.is_public && <Text style={styles.publicBadge}>{t({ en: "PUBLIC", fr: "PUBLIC" })}</Text>}
       </View>
       <Text style={styles.meta}>
         {track.surface} · {track.indoor ? t({ en: "indoor", fr: "intérieur" }) : t({ en: "outdoor", fr: "extérieur" })}
       </Text>
 
-      {track.traits.length > 0 && (
+      {traits.length > 0 && (
         <View style={styles.traitRow}>
           {shown.map((t) => (
             <Text key={t} style={styles.trait}>
@@ -137,17 +139,17 @@ function TrackCard({ track, candidacy, onPress }: { track: TrackEntity; candidac
         </View>
       )}
 
-      {track.corners.length > 0 && (
+      {corners.length > 0 && (
         <Text style={styles.fact}>
           {t({
-            en: `${track.corners.length} corner${track.corners.length > 1 ? "s" : ""} mapped`,
-            fr: `${track.corners.length} virage${track.corners.length > 1 ? "s" : ""} cartographié${track.corners.length > 1 ? "s" : ""}`,
+            en: `${corners.length} corner${corners.length > 1 ? "s" : ""} mapped`,
+            fr: `${corners.length} virage${corners.length > 1 ? "s" : ""} cartographié${corners.length > 1 ? "s" : ""}`,
           })}
         </Text>
       )}
       {best && (
         <Text style={styles.fact}>
-          {t({ en: "⏱ best", fr: "⏱ meilleur" })} {best.lap_s.toFixed(2)}s · {best.category}
+          {t({ en: "⏱ best", fr: "⏱ meilleur" })} {best.best_lap_s.toFixed(2)}s · {best.class}
           {best.conditions ? ` (${best.conditions})` : ""}
         </Text>
       )}

@@ -1,8 +1,8 @@
-/** RaceLab tracks — public API (D25). Tracks as first-class entities:
- *  corners + traits + auto-updating lap records, plus the deterministic
- *  bridge from track facts to the engine taxonomy condition vocabulary.
- *  Pure data + pure functions: no fs, no network, no node built-ins —
- *  bundles into the app unchanged. */
+/** RaceLab tracks — public API (D25), now schema-backed. Tracks as first-class
+ *  entities over the canonical schema `Track`: corners (⇄ Track.turns), traits,
+ *  auto-updating lap records (TrackRecord), plus the deterministic bridge from
+ *  track facts to the engine taxonomy condition vocabulary. Pure data + pure
+ *  functions: no fs, no network, no node built-ins. */
 export {
   initTracks,
   addTrack,
@@ -11,7 +11,14 @@ export {
   getTrack,
   upsertRecord,
 } from "./tracks";
-export { trackConditionTags, trackCharacterNotes } from "./conditions";
+export {
+  trackConditionTags,
+  trackCharacterNotes,
+  cornersOf,
+  cornerFromTurn,
+  turnFromCorner,
+  toSchemaSurface,
+} from "./conditions";
 export {
   serializeTracks,
   deserializeTracks,
@@ -30,3 +37,6 @@ export type {
   TrackTrait,
   TrackVisibility,
 } from "./types";
+// Re-export the schema Track + maker so consumers have one import site.
+export type { Track, TrackRecord, TrackTurn, MakeTrackInput, TrackSnapshot } from "../../schema/src/index";
+export { makeTrack, snapshotTrack, addTrackRecord, bestRecord } from "../../schema/src/index";

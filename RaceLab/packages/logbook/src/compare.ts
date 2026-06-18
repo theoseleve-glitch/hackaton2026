@@ -1,13 +1,15 @@
 import { diffValues } from "../../sheets/src/diff";
 import type { ChangedField } from "../../sheets/src/diff";
 import type { SetupValues } from "../../sheets/src/sheets";
+import { runAvgLap, runBestLap, runConfidence, runConsistency } from "./types";
 import type { RunEntry } from "./types";
 
 /**
  * Layer 2 — run comparison. Answers, deterministically:
  * "what changed?", "what got faster?", "what got easier to drive?".
  * Setup values are resolved by the caller (they live in SheetsState) so this
- * package stays free of storage concerns.
+ * package stays free of storage concerns. Timing/feel read through the schema
+ * accessors (effectiveTiming / driver.confidence_1to5).
  */
 
 export type ResolveSetup = (versionId: string) => SetupValues | undefined;
@@ -38,10 +40,10 @@ export function compareRuns(a: RunEntry, b: RunEntry, resolveSetup: ResolveSetup
   const condition_changes = diffRecords(flattenConditions(a), flattenConditions(b));
   const tyre_changes = diffRecords(flattenTyres(a), flattenTyres(b));
 
-  const best_lap_delta_s = delta(a.result?.best_lap_s, b.result?.best_lap_s);
-  const avg_lap_delta_s = delta(a.result?.avg_lap_s, b.result?.avg_lap_s);
-  const consistency_delta_pct = delta(a.result?.consistency_pct, b.result?.consistency_pct);
-  const confidence_delta = delta(a.result?.driver_confidence, b.result?.driver_confidence);
+  const best_lap_delta_s = delta(runBestLap(a), runBestLap(b));
+  const avg_lap_delta_s = delta(runAvgLap(a), runAvgLap(b));
+  const consistency_delta_pct = delta(runConsistency(a), runConsistency(b));
+  const confidence_delta = delta(runConfidence(a), runConfidence(b));
 
   const faster = verdict(best_lap_delta_s ?? avg_lap_delta_s, "lower_wins");
   const easier = verdict(confidence_delta ?? consistency_delta_pct, "higher_wins");

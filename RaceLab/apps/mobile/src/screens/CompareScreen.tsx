@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { compareRuns } from "../../../../packages/logbook/src";
+import { compareRuns, runBestLap } from "../../../../packages/logbook/src";
 import type { LogbookState, RunComparison } from "../../../../packages/logbook/src";
 import type { SetupValues } from "../../../../packages/sheets/src";
 import type { ChangedField } from "../../../../packages/sheets/src";
@@ -120,8 +120,8 @@ function RunHalf({ title, run }: { title: string; run: RunComparison["a"] }) {
         {run.track.name} · {run.conditions.grip.replace("_", " ")}
       </Text>
       <Text style={styles.halfLap}>
-        {run.result?.best_lap_s !== undefined
-          ? `${run.result.best_lap_s.toFixed(2)}s`
+        {runBestLap(run) !== undefined
+          ? `${runBestLap(run)!.toFixed(2)}s`
           : t({ en: "no laps", fr: "aucun tour" })}
       </Text>
     </View>

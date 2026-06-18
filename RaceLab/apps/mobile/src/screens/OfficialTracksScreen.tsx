@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import type { TracksState } from "../../../../packages/tracks/src";
+import type { Track, TracksState } from "../../../../packages/tracks/src";
 import type { CandidacyData } from "../../../../packages/social/src";
 import { colors, radius } from "../theme";
 import { useT } from "../i18n";
@@ -25,7 +25,7 @@ export function OfficialTracksScreen({
   onClose: () => void;
 }) {
   const t = useT();
-  const byId = new Map(tracks.tracks.map((tr) => [tr.id, tr]));
+  const byId = new Map<string, Track>(tracks.tracks.map((tr) => [tr.id, tr]));
   const candidates = candidacy.items.filter((i) => i.state === "candidate");
   const official = candidacy.items.filter((i) => i.state === "official");
 
@@ -101,10 +101,10 @@ export function OfficialTracksScreen({
                   records.slice(0, 5).map((r, i) => (
                     <View key={i} style={styles.lbRow}>
                       <Text style={styles.lbCat}>
-                        {r.category}
+                        {r.class}
                         {r.conditions ? ` · ${r.conditions}` : ""}
                       </Text>
-                      <Text style={styles.lbLap}>{r.lap_s.toFixed(2)}s</Text>
+                      <Text style={styles.lbLap}>{r.best_lap_s.toFixed(2)}s</Text>
                     </View>
                   ))
                 ) : (

@@ -1,10 +1,29 @@
 /**
- * D25 — tracks as first-class entities. A track is the stable half of every
- * run's context: corners and traits are facts about the venue, records are
- * the best laps ever set there (auto-updated from run results). Almost every
- * field is optional — a track must be creatable trackside in seconds — but
- * what IS captured is structured so the engine can reason over it.
+ * D25 — tracks as first-class entities, now backed by the canonical schema
+ * `Track` (packages/schema). `TrackEntity` IS the schema `Track`; `TracksState`
+ * is `{ tracks: Track[] }`. `LapRecord` IS the schema `TrackRecord`.
+ *
+ * Mapping from theo's pre-schema shape (documented in 2026-06-18-schema-
+ * extension-B1a.md), applied at the form/op seam:
+ *  - `corners: CornerSpec[]`  → `Track.turns` (direction left/right → L/R,
+ *    shape → corner_type, features[] → bumps/banking/surface_override).
+ *    The reverse view for the form is `cornersOf(track)` (conditions.ts).
+ *  - `visibility "private"|"public"` → `Track.is_public` (public → true).
+ *  - `traits: string[]` → `Track.traits` (free strings — schema does not couple
+ *    to theo's closed TRACK_TRAITS list).
+ *  - `surface` (rich app id) → `Track.surface` narrowed to the schema Surface
+ *    union via `toSchemaSurface()` (see conditions.ts). DEFERRED (William): a
+ *    track-level multi-surface list; the rich pick collapses to one Surface.
  */
+
+import type { Surface, TrackRecord as SchemaTrackRecord, Track } from "../../schema/src/index";
+
+/** The track entity IS the schema Track. */
+export type TrackEntity = Track;
+
+/** A lap record IS the schema TrackRecord ({ class, best_lap_s, holder?, date?,
+ *  source, conditions? }). */
+export type LapRecord = SchemaTrackRecord;
 
 export type TrackVisibility = "private" | "public";
 
@@ -25,6 +44,8 @@ export const CORNER_FEATURES = [
 ] as const;
 export type CornerFeature = (typeof CORNER_FEATURES)[number];
 
+/** Theo's open trait list — kept for the form's chip palette. Stored as free
+ *  strings on `Track.traits` (schema does not enforce this list). */
 export const TRACK_TRAITS = [
   "bumpy",
   "smooth",
@@ -40,6 +61,8 @@ export const TRACK_TRAITS = [
 ] as const;
 export type TrackTrait = (typeof TRACK_TRAITS)[number];
 
+/** Theo's corner view — the form authors corners in this shape; the op layer
+ *  maps it to/from `Track.turns`. */
 export interface CornerSpec {
   /** corner number on the track map, 1-based */
   n: number;
@@ -48,44 +71,14 @@ export interface CornerSpec {
   direction: CornerDirection;
   shape?: CornerShape;
   features: CornerFeature[];
-  /** overrides the track surface for this corner (mixed-surface tracks) */
+  /** overrides the track surface for this corner (mixed-surface tracks);
+   *  narrowed to a schema Surface on the way into Track.turns.surface_override */
   surface?: string;
   note?: string;
 }
 
-export interface LapRecord {
-  /** car category the record belongs to (e.g. "1/8 nitro buggy") */
-  category: string;
-  /** free-form qualifier ("dry", "wet evening"); records are keyed by category+conditions */
-  conditions?: string;
-  lap_s: number;
-  holder?: string;
-  date?: string; // ISO
-}
-
-export interface TrackEntity {
-  id: string;
-  name: string;
-  surface: string; // clay / hard-packed / loam / astro / carpet / grass
-  /**
-   * All surfaces present on a multi-surface track. CONTRACT: `surface` STAYS
-   * the primary surface (and should equal surfaces[0]) — the engine reads
-   * `surface` only; `surfaces` is descriptive context on top of it.
-   */
-  surfaces?: string[];
-  indoor: boolean;
-  visibility: TrackVisibility;
-  gps?: { lat: number; lon: number };
-  length_m?: number;
-  width_m?: number;
-  traits: TrackTrait[];
-  corners: CornerSpec[];
-  notes?: string;
-  photo_uris?: string[];
-  records: LapRecord[];
-  created_at: string; // ISO
-}
-
 export interface TracksState {
-  tracks: TrackEntity[]; // chronological, oldest first
+  tracks: Track[]; // chronological, oldest first
 }
+
+export type { Surface };

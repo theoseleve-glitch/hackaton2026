@@ -1,59 +1,72 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import {
-  deserializeLogbook,
-  initLogbook,
-  serializeLogbook,
-} from "../../../packages/logbook/src";
-import type { LogbookState } from "../../../packages/logbook/src";
-
-const STORAGE_KEY = "racelab:logbook";
+import { initLogbook } from "../../../packages/logbook/src";
+import type { LogbookState, RunEntry } from "../../../packages/logbook/src";
+import { useRepos } from "./storage/RepoProvider";
 
 /**
- * Logbook state with AsyncStorage persistence — same contract and same
- * never-wipe-history discipline as src/store.ts (sheets): unreadable blobs
- * are stashed under a :backup key before starting fresh.
+ * Logbook state, now backed by William's storage repos (Phase 2B). Seeds from
+ * `repos.runs.getAll()` and, on every `updateLogbook(fn)`, diffs the returned
+ * runs against the previous snapshot and issues `repos.runs.put` /
+ * `repos.runs.remove` for exactly what changed. Element shape is the schema
+ * `RunEntry`; the return signature is unchanged.
+ *
+ * Never-wipe: reads route through the repo's parse-on-read + quarantine.
  */
 export function useLogbook(): {
   logbook: LogbookState | null;
   updateLogbook: (fn: (prev: LogbookState) => LogbookState) => void;
 } {
+  const repos = useRepos();
   const [logbook, setLogbook] = useState<LogbookState | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    AsyncStorage.getItem(STORAGE_KEY)
-      .then(async (raw) => {
-        if (cancelled) return;
-        if (raw) {
-          const result = deserializeLogbook(raw);
-          if (result.ok) {
-            setLogbook(result.state);
-            return;
-          }
-          await AsyncStorage.setItem(`${STORAGE_KEY}:backup:${result.reason}`, raw).catch(() => {});
-        }
-        setLogbook(initLogbook());
-      })
-      .catch(() => {
-        if (!cancelled) setLogbook(initLogbook());
-      });
+    void (async () => {
+      const res = await repos.runs.getAll();
+      if (cancelled) return;
+      setLogbook({ runs: res.ok ? [...res.values].sort(byCreated) : [] });
+    })();
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [repos]);
 
-  useEffect(() => {
-    if (logbook) {
-      AsyncStorage.setItem(STORAGE_KEY, serializeLogbook(logbook)).catch(() => {
-        // storage full/unavailable: keep running in-memory rather than crash
+  const updateLogbook = useCallback(
+    (fn: (prev: LogbookState) => LogbookState) => {
+      setLogbook((prev) => {
+        if (!prev) return prev;
+        const next = fn(prev);
+        void persistDiff(repos, prev.runs, next.runs);
+        return next;
       });
-    }
-  }, [logbook]);
-
-  const updateLogbook = useCallback((fn: (prev: LogbookState) => LogbookState) => {
-    setLogbook((prev) => (prev ? fn(prev) : prev));
-  }, []);
+    },
+    [repos],
+  );
 
   return { logbook, updateLogbook };
 }
+
+function byCreated(a: RunEntry, b: RunEntry): number {
+  return a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : 0;
+}
+
+async function persistDiff(
+  repos: ReturnType<typeof useRepos>,
+  prev: readonly RunEntry[],
+  next: readonly RunEntry[],
+): Promise<void> {
+  const now = new Date().toISOString();
+  const prevById = new Map(prev.map((r) => [r.id, r]));
+  const nextById = new Map(next.map((r) => [r.id, r]));
+  for (const run of next) {
+    const before = prevById.get(run.id);
+    if (before === undefined || JSON.stringify(before) !== JSON.stringify(run)) {
+      await repos.runs.put(run, now);
+    }
+  }
+  for (const run of prev) {
+    if (!nextById.has(run.id)) await repos.runs.remove(run.id, now);
+  }
+}
+
+export { initLogbook };

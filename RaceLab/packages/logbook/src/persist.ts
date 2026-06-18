@@ -1,10 +1,17 @@
 import type { LogbookState, RunEntry } from "./types";
 
-/** Versioned serialization for AsyncStorage — same discipline as
- *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
- *  so callers can stash unreadable blobs instead of wiping a season's log. */
+/**
+ * Versioned serialization for the in-memory logbook. After the schema cutover
+ * the app persists runs through the storage repos (parse-on-read + quarantine);
+ * this serializer is the legacy/in-memory path only. Never-wipe: a format bump
+ * must NEVER read as corruption.
+ *
+ * Format 3 = schema RunEntry (session_id/car_id/track_id, timing union, driver
+ * state). Formats 1–2 were the pre-schema RunEntry shape; the storage migrate
+ * path owns reading those now, so this validator only accepts v3.
+ */
 
-export const LOGBOOK_FORMAT_VERSION = 2;
+export const LOGBOOK_FORMAT_VERSION = 3;
 
 interface Envelope {
   format: number;
@@ -30,14 +37,9 @@ export function deserializeLogbook(raw: string): DeserializeLogbookResult {
     return { ok: false, reason: "corrupt" };
   }
 
-  // Migration switch — every future format bump adds an upgrade case here.
   let state: LogbookState;
   switch (env.format) {
-    case 1:
-      // v1 → v2 (D27) only ADDED optional fields: a v1 state IS a v2 state.
-      state = env.state;
-      break;
-    case 2:
+    case 3:
       state = env.state;
       break;
     default:
@@ -59,9 +61,12 @@ function isValidRun(r: RunEntry): boolean {
     typeof r.id === "string" &&
     typeof r.created_at === "string" &&
     typeof r.type === "string" &&
+    typeof r.session_id === "string" &&
+    typeof r.car_id === "string" &&
     typeof r.car_template_id === "string" &&
     typeof r.setup_version_id === "string" &&
     typeof r.setup_name === "string" &&
+    typeof r.track_id === "string" &&
     typeof r.track === "object" &&
     r.track !== null &&
     typeof r.track.name === "string" &&

@@ -1,11 +1,12 @@
+import { runAutonomy } from "./types";
 import type { RunEntry } from "./types";
 
 /**
- * Race-strategy autonomy from logged run-until-dry tests (v3). A PRACTICE
- * run carrying result.autonomy_test.time_s is a MEASURED "seconds a full
- * tank lasts"; bestAutonomy picks the most trustworthy one for a venue.
- * Pure function — runs are taken in logbook order (oldest first), so the
- * last match is the most recent.
+ * Race-strategy autonomy from logged run-until-dry tests (v3). A PRACTICE run
+ * carrying a run-level autonomy_test.time_s is a MEASURED "seconds a full tank
+ * lasts"; bestAutonomy picks the most trustworthy one for a venue. Pure
+ * function — runs are taken in logbook order (oldest first), so the last match
+ * is the most recent. (Schema moved autonomy_test to the run level.)
  */
 
 export interface BestAutonomyOpts {
@@ -16,27 +17,23 @@ export interface BestAutonomyOpts {
 
 /**
  * Most recent PRACTICE run with a measured autonomy_test.time_s at the SAME
- * track — matched by track_id when given (or by track name). Preference
- * order: same track AND same conditions.grip first, then same track any
- * grip, then undefined. NEVER cross-track: autonomy measured at another
- * venue is not a number to race on.
+ * track — matched by track_id when given (or by track name). Preference order:
+ * same track AND same conditions.grip first, then same track any grip, then
+ * undefined. NEVER cross-track.
  */
 export function bestAutonomy(
   runs: RunEntry[],
   opts: { track_id?: string; track_name?: string; grip?: string },
 ): { time_s: number; from_run_id: string } | undefined {
   const candidates = runs.filter(
-    (r) =>
-      r.type === "practice" &&
-      typeof r.result?.autonomy_test?.time_s === "number" &&
-      sameTrack(r, opts),
+    (r) => r.type === "practice" && typeof runAutonomy(r)?.time_s === "number" && sameTrack(r, opts),
   );
   const newest = (list: RunEntry[]): RunEntry | undefined => list[list.length - 1];
   const chosen =
     (opts.grip !== undefined
       ? newest(candidates.filter((r) => r.conditions.grip === opts.grip))
       : undefined) ?? newest(candidates);
-  const time_s = chosen?.result?.autonomy_test?.time_s;
+  const time_s = chosen !== undefined ? runAutonomy(chosen)?.time_s : undefined;
   return chosen !== undefined && time_s !== undefined
     ? { time_s, from_run_id: chosen.id }
     : undefined;

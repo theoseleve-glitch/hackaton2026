@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
-import { CORNER_FEATURES, TRACK_TRAITS } from "../../../../packages/tracks/src";
+import {
+  CORNER_FEATURES,
+  TRACK_TRAITS,
+  cornersOf,
+  makeTrack,
+  toSchemaSurface,
+  turnFromCorner,
+} from "../../../../packages/tracks/src";
 import type {
   CornerDirection,
   CornerFeature,
   CornerShape,
   CornerSpec,
-  TrackEntity,
-  TrackTrait,
+  Track,
+  TrackRecord,
   TrackVisibility,
 } from "../../../../packages/tracks/src";
 import type { CandidacyState } from "../../../../packages/social/src";
@@ -19,13 +26,14 @@ import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 import { useT } from "../i18n";
 
 /**
- * Track identity sheet (D25). Creatable trackside in seconds — name + surface
- * + a few trait chips is already a useful track. Corner mapping and records
- * live in collapsed sections for the evening you walk the layout properly.
- * Used both as the full editor (Tracks tab) and as a popup from the run flow.
+ * Track identity sheet (D25). Mints a schema `Track` via `makeTrack`. theo's
+ * corners author in CornerSpec then map to `Track.turns` (turnFromCorner);
+ * visibility maps to `is_public`; the rich surface pick narrows to a schema
+ * Surface via `toSchemaSurface` (the primary; the rich sub-classification
+ * collapses — DEFERRED to William). Records are schema TrackRecord
+ * ({ class, best_lap_s, conditions?, holder?, source }).
  */
 
-// the complete researched surface list (offroad first), ids as values
 const SURFACE_OPTIONS = surfacesByDiscipline();
 const SURFACE_IDS = SURFACE_OPTIONS.map((s) => s.id);
 const SURFACE_LABEL = new Map(SURFACE_OPTIONS.map((s) => [s.id, s.label]));
@@ -34,17 +42,16 @@ const DIRECTIONS: CornerDirection[] = ["left", "right"];
 const VISIBILITIES: TrackVisibility[] = ["private", "public"];
 
 interface Props {
-  initial?: TrackEntity;
+  initial?: Track;
   /** official-track candidacy (only when editing an existing track) */
   candidacyState?: CandidacyState;
   onSubmitOfficial?: () => void;
-  onSave: (track: Omit<TrackEntity, "id">) => void;
+  onSave: (track: Track) => void;
   onCancel: () => void;
   onDelete?: () => void;
 }
 
 interface CornerDraft {
-  /** index into corners, or null when adding a new corner */
   index: number | null;
   name: string;
   direction: CornerDirection;
@@ -59,30 +66,29 @@ interface RecordRow {
   conditions: string;
   lap_s: string;
   holder: string;
-  date?: string; // preserved across edits, never typed by hand
+  date?: string;
 }
 
 export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, onSave, onCancel, onDelete }: Props) {
   const t = useT();
   const [name, setName] = useState(initial?.name ?? "");
-  const [surfaces, setSurfaces] = useState<string[]>(
-    initial?.surfaces ?? (initial?.surface !== undefined ? [initial.surface] : []),
-  );
+  // surfaces: the rich app pick; primary (first) narrows to the schema Surface
+  const [surfaces, setSurfaces] = useState<string[]>(initial?.surface !== undefined ? [initial.surface] : []);
   const [indoor, setIndoor] = useState(initial?.indoor ?? false);
-  const [visibility, setVisibility] = useState<TrackVisibility>(initial?.visibility ?? "private");
-  const [traits, setTraits] = useState<TrackTrait[]>(initial?.traits ?? []);
+  const [visibility, setVisibility] = useState<TrackVisibility>(initial?.is_public ? "public" : "private");
+  const [traits, setTraits] = useState<string[]>([...(initial?.traits ?? [])]);
   const [notes, setNotes] = useState(initial?.notes ?? "");
-  const [corners, setCorners] = useState<CornerSpec[]>(initial?.corners ?? []);
+  const [corners, setCorners] = useState<CornerSpec[]>(initial ? cornersOf(initial) : []);
   const [lat, setLat] = useState(initial?.gps !== undefined ? String(initial.gps.lat) : "");
   const [lon, setLon] = useState(initial?.gps !== undefined ? String(initial.gps.lon) : "");
   const [locating, setLocating] = useState(false);
   const [locError, setLocError] = useState<string | null>(null);
-  const [photoUris, setPhotoUris] = useState<string[]>(initial?.photo_uris ?? []);
+  const [photoUris, setPhotoUris] = useState<string[]>([...(initial?.photos ?? [])]);
   const [records, setRecords] = useState<RecordRow[]>(
     (initial?.records ?? []).map((r) => ({
-      category: r.category,
+      category: r.class,
       conditions: r.conditions ?? "",
-      lap_s: String(r.lap_s),
+      lap_s: String(r.best_lap_s),
       holder: r.holder ?? "",
       date: r.date,
     })),
@@ -91,11 +97,11 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
   const [showMore, setShowMore] = useState(false);
   const [cornerDraft, setCornerDraft] = useState<CornerDraft | null>(null);
   const [deleteArmed, setDeleteArmed] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const toggleTrait = (t: TrackTrait) =>
-    setTraits((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+  const toggleTrait = (tr: string) =>
+    setTraits((prev) => (prev.includes(tr) ? prev.filter((x) => x !== tr) : [...prev, tr]));
 
-  // same idiom as the garage photo picker
   const pickPhoto = async () => {
     const res = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], quality: 0.7 });
     const asset = res.canceled ? undefined : res.assets[0];
@@ -124,7 +130,6 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
   const removeCorner = () => {
     if (!cornerDraft) return;
     const at = cornerDraft.index;
-    // renumber so corner numbers stay 1..n after a removal
     if (at !== null) setCorners((prev) => prev.filter((_, i) => i !== at).map((c, i) => ({ ...c, n: i + 1 })));
     setCornerDraft(null);
   };
@@ -132,30 +137,37 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
   const save = () => {
     const latN = num(lat);
     const lonN = num(lon);
-    onSave({
-      name: name.trim() || t({ en: "My track", fr: "Ma piste" }),
-      surface: surfaces[0] ?? "clay", // primary — the engine reads this one
-      surfaces: surfaces.length > 0 ? surfaces : undefined,
-      indoor,
-      visibility,
-      gps: latN !== undefined && lonN !== undefined ? { lat: latN, lon: lonN } : undefined,
-      length_m: initial?.length_m,
-      width_m: initial?.width_m,
-      traits,
-      corners,
-      notes: notes.trim() || undefined,
-      photo_uris: photoUris.length > 0 ? photoUris : undefined,
-      records: records
-        .filter((r) => r.category.trim() !== "" && num(r.lap_s) !== undefined)
-        .map((r) => ({
-          category: r.category.trim(),
-          conditions: r.conditions.trim() || undefined,
-          lap_s: num(r.lap_s)!,
-          holder: r.holder.trim() || undefined,
-          date: r.date,
-        })),
-      created_at: initial?.created_at ?? new Date().toISOString(),
-    });
+    const recs: TrackRecord[] = records
+      .filter((r) => r.category.trim() !== "" && num(r.lap_s) !== undefined)
+      .map((r) => ({
+        class: r.category.trim(),
+        best_lap_s: num(r.lap_s)!,
+        source: "manual" as const,
+        ...(r.conditions.trim() !== "" ? { conditions: r.conditions.trim() } : {}),
+        ...(r.holder.trim() !== "" ? { holder: r.holder.trim() } : {}),
+        ...(r.date !== undefined ? { date: r.date } : {}),
+      }));
+    const res = makeTrack(
+      {
+        name: name.trim() || t({ en: "My track", fr: "Ma piste" }),
+        surface: toSchemaSurface(surfaces[0]),
+        indoor,
+        is_public: visibility === "public",
+        ...(latN !== undefined && lonN !== undefined ? { gps: { lat: latN, lon: lonN } } : {}),
+        ...(traits.length > 0 ? { traits } : {}),
+        ...(corners.length > 0 ? { turns: corners.map(turnFromCorner) } : {}),
+        records: recs,
+        ...(photoUris.length > 0 ? { photos: photoUris } : {}),
+        ...(notes.trim() !== "" ? { notes: notes.trim() } : {}),
+      },
+      initial?.created_at ?? new Date().toISOString(),
+    );
+    if (!res.ok) {
+      setError(t({ en: "Could not save this track.", fr: "Impossible d'enregistrer cette piste." }));
+      return;
+    }
+    const track: Track = initial ? { ...res.track, id: initial.id, created_at: initial.created_at } : res.track;
+    onSave(track);
   };
 
   const editCorner = (c: CornerSpec, i: number) =>
@@ -354,6 +366,8 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
         </View>
       )}
 
+      {error && <Text style={styles.locError}>{error}</Text>}
+
       <View style={styles.actions}>
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
           <Text style={styles.btnGhostText}>{t({ en: "Cancel", fr: "Annuler" })}</Text>
@@ -408,7 +422,6 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
   );
 }
 
-/** Collapsed-section header: tap to fold/unfold. */
 function FoldHeader({ title, sub, open, onPress }: { title: string; sub?: string; open: boolean; onPress: () => void }) {
   return (
     <Pressable style={styles.fold} onPress={onPress}>
@@ -421,7 +434,6 @@ function FoldHeader({ title, sub, open, onPress }: { title: string; sub?: string
   );
 }
 
-/** Inline corner editor — chips first, keyboards only for overrides. */
 function CornerEditor({
   draft,
   onChange,

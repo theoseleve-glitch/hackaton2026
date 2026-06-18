@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import type { LogbookState, RunEntry } from "../../../../packages/logbook/src";
+import { runAutonomy, runBestLap, runLapsList } from "../../../../packages/logbook/src";
 import { computePitPlan, stretchOptions } from "../../../../packages/strategy/src";
 import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
 import { colors, radius } from "../theme";
@@ -138,7 +139,7 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
       ) : (
         visible.map((r) => {
           const on = selected.includes(r.id);
-          const tank = r.result?.autonomy_test;
+          const tank = runAutonomy(r);
           const tankLabel =
             tank !== undefined
               ? tank.time_s !== undefined
@@ -153,8 +154,8 @@ export function RunPicker({ logbook, multi, cta, askRace, askNotes, trackFirst, 
               </Text>
               <Text style={styles.runMeta}>
                 {r.conditions.grip.replace("_", " ")} {t({ en: "grip", fr: "grip" })}
-                {r.result?.best_lap_s !== undefined ? ` · ${t({ en: "best", fr: "meilleur" })} ${r.result.best_lap_s.toFixed(2)}s` : ""}
-                {r.result?.laps_list !== undefined ? ` · ${r.result.laps_list.length} ${t({ en: "laps logged", fr: "tours enregistrés" })}` : ""}
+                {runBestLap(r) !== undefined ? ` · ${t({ en: "best", fr: "meilleur" })} ${runBestLap(r)!.toFixed(2)}s` : ""}
+                {runLapsList(r) !== undefined ? ` · ${runLapsList(r)!.length} ${t({ en: "laps logged", fr: "tours enregistrés" })}` : ""}
                 {tankLabel}
                 {r.feedback.tags.length > 0 ? ` · ${r.feedback.tags.map((tag) => tag.symptom.replace(/_/g, " ")).join(", ")}` : ""}
               </Text>

@@ -5,7 +5,9 @@ import type { LogbookState, RunEntry } from "./types";
 /**
  * The bridge from a logged run to the engine: every engineer request is built
  * FROM the log (D22) — the user never retypes context the log already has.
- * Pure mapping; taxonomy condition tags are derived deterministically.
+ * Pure mapping; taxonomy condition tags are derived deterministically. Wind now
+ * reads off the frozen schema weather observation (run.weather.wind_speed_kmh),
+ * not conditions.
  */
 
 /** Derive taxonomy condition tags (packages/kb/taxonomy.yaml vocabulary). */
@@ -61,10 +63,12 @@ export function bundleFromRun(
   opts?: { mode?: ContextBundle["mode"]; question?: string },
 ): ContextBundle {
   const c = run.conditions;
+  const wind = run.weather?.wind_speed_kmh;
   return {
     chassis_template_id: run.car_template_id,
     setup: { ...setup },
     track: {
+      track_id: run.track_id,
       name: run.track.name,
       surface: run.track.surface,
       grip: c.grip,
@@ -74,11 +78,11 @@ export function bundleFromRun(
     weather: {
       air_temp_c: c.air_temp_c,
       humidity_pct: c.humidity_pct,
-      wind_kmh: c.wind_kmh,
+      wind_kmh: wind,
       rain_risk_pct: c.sky === "rain_risk" ? 50 : c.sky === "raining" ? 100 : undefined,
     },
     tyres: run.tyres ? { wear: run.tyres.wear, run_count: run.tyres.run_count } : undefined,
-    feedback: { tags: run.feedback.tags, text: run.feedback.text },
+    feedback: { tags: run.feedback.tags.map((t) => ({ ...t })), text: run.feedback.text },
     mode: opts?.mode ?? (run.type === "practice" ? "practice" : "race_day"),
     history: historyFromRuns(state, run),
     question: opts?.question,

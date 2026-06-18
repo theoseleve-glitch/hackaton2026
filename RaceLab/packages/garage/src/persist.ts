@@ -1,10 +1,19 @@
-import type { CarEntity, GarageState } from "./types";
+import type { Car } from "../../schema/src/cars";
+import type { GarageState } from "./types";
 
-/** Versioned serialization for AsyncStorage — same discipline as
- *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
- *  so callers can stash unreadable blobs instead of wiping a user's garage. */
+/**
+ * Versioned serialization for the in-memory garage state. After the schema
+ * cutover the app persists cars through the storage repos (parse-on-read +
+ * quarantine), so this serializer is the legacy/in-memory path only — kept for
+ * any code still round-tripping a GarageState blob. Format bumps must NEVER
+ * read as corruption (never-wipe): unreadable blobs are stashed, not lost.
+ *
+ * Format 3 = schema-Car garage (chassis_id / power_type). Formats 1–2 were the
+ * pre-schema CarEntity shape; they are now read by the storage migrate path
+ * (packages/storage/migrate), not here, so this validator only accepts v3.
+ */
 
-export const GARAGE_FORMAT_VERSION = 2;
+export const GARAGE_FORMAT_VERSION = 3;
 
 interface Envelope {
   format: number;
@@ -30,20 +39,9 @@ export function deserializeGarage(raw: string): DeserializeGarageResult {
     return { ok: false, reason: "corrupt" };
   }
 
-  // Migration switch — every future format bump adds an upgrade case here.
   let state: GarageState;
   switch (env.format) {
-    case 1: {
-      // v1 → v2 moved the tank to the pilot's unit: fuel_tank_cc (cc)
-      // becomes fuel_tank_cl (cL = cc / 10, 1 decimal); cc is dropped.
-      const v1 = env.state;
-      if (typeof v1 !== "object" || v1 === null || !Array.isArray(v1.cars)) {
-        return { ok: false, reason: "corrupt" };
-      }
-      state = { cars: v1.cars.map(migrateCarV1) };
-      break;
-    }
-    case 2:
+    case 3:
       state = env.state;
       break;
     default:
@@ -54,34 +52,18 @@ export function deserializeGarage(raw: string): DeserializeGarageResult {
   return { ok: true, state };
 }
 
-/** v1 → v2: a car with fuel_tank_cc and no fuel_tank_cl gets
- *  fuel_tank_cl = cc / 10 (rounded to 1 decimal); fuel_tank_cc is removed
- *  from the migrated object. Malformed entries pass through untouched so
- *  the shape validation below reports them as corrupt. */
-function migrateCarV1(c: CarEntity): CarEntity {
-  if (typeof c !== "object" || c === null || typeof c.fuel_tank_cc !== "number") return c;
-  const { fuel_tank_cc, ...rest } = c;
-  const fuel_tank_cl =
-    typeof c.fuel_tank_cl === "number" ? c.fuel_tank_cl : Math.round(fuel_tank_cc) / 10;
-  return { ...rest, fuel_tank_cl };
-}
-
 function isValidState(s: GarageState): boolean {
   return typeof s === "object" && s !== null && Array.isArray(s.cars) && s.cars.every(isValidCar);
 }
 
-function isValidCar(c: CarEntity): boolean {
+function isValidCar(c: Car): boolean {
   return (
     typeof c === "object" &&
     c !== null &&
     typeof c.id === "string" &&
     typeof c.name === "string" &&
-    typeof c.template_id === "string" &&
-    typeof c.brand === "string" &&
-    typeof c.model === "string" &&
-    typeof c.category === "string" &&
-    typeof c.scale === "string" &&
-    (c.power === "nitro" || c.power === "electric") &&
+    typeof c.chassis_id === "string" &&
+    (c.power_type === "nitro" || c.power_type === "brushless") &&
     typeof c.created_at === "string"
   );
 }

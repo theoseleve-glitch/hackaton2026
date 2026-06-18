@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addCar } from "../../../../packages/garage/src";
+import { addCar, makeCar, CUSTOM_CHASSIS_ID, powerFromUi } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import {
   deserialize,
@@ -69,23 +69,27 @@ export function ImportPreviewScreen({
     try {
       let carId = targetId;
       if (!carId) {
-        // create a car from the snapshot typology, then fork onto it
+        // create a car from the snapshot typology, then fork onto it. Mint a
+        // schema Car (identity facts under `custom`, power via powerFromUi).
+        const made = makeCar(
+          {
+            name: `${payload.car.brand} ${payload.car.model}`.trim(),
+            chassis_id: CUSTOM_CHASSIS_ID,
+            power_type: powerFromUi(payload.car.power as "nitro" | "electric"),
+            template_id: payload.setup.template_id,
+            custom: {
+              brand: payload.car.brand,
+              model: payload.car.model,
+              category: payload.car.category,
+              scale: payload.car.scale,
+            },
+          },
+          new Date().toISOString(),
+        );
+        if (!made.ok) throw new Error(`makeCar rejected: ${made.reason}`);
         const created = await new Promise<CarEntity>((resolve) => {
           updateGarage((prev) => {
-            const { state, car } = addCar(
-              prev,
-              {
-                name: `${payload.car.brand} ${payload.car.model}`.trim(),
-                template_id: payload.setup.template_id,
-                brand: payload.car.brand,
-                model: payload.car.model,
-                category: payload.car.category,
-                scale: payload.car.scale,
-                power: payload.car.power,
-                created_at: new Date().toISOString(),
-              } as Omit<CarEntity, "id">,
-              new Date().toISOString(),
-            );
+            const { state, car } = addCar(prev, made.car);
             resolve(car);
             return state;
           });

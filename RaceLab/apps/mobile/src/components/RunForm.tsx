@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { parseFeedback } from "../../../../packages/engine/src";
 import type { FeedbackTag } from "../../../../packages/engine/src";
+import { makeRun } from "../../../../packages/logbook/src";
 import type {
   Bumpiness,
   Grip,
+  MakeRunInput,
   RunEntry,
   RunType,
   Sky,
@@ -38,7 +40,7 @@ interface Props {
   setupVersionId: string;
   setupName: string;
   defaultTrack?: { name: string; surface: string; indoor: boolean };
-  onSave: (run: Omit<RunEntry, "id">) => void;
+  onSave: (run: RunEntry) => void;
   onCancel: () => void;
 }
 
@@ -87,36 +89,67 @@ export function RunForm({ setupVersionId, setupName, defaultTrack, onSave, onCan
 
   const save = () => {
     const tags: FeedbackTag[] = symptoms.map((symptom) => (phase ? { symptom, phase } : { symptom }));
-    onSave({
-      created_at: new Date().toISOString(),
+    const now = new Date().toISOString();
+    const isoDate = now.slice(0, 10);
+
+    // legacy single-setup form: no car selection — synthesize the linkage ids
+    // (branded literals cast via MakeRunInput's own field types).
+    const session_id = ("ss-day-" + isoDate.replace(/-/g, "")) as MakeRunInput["session_id"];
+    const car_id = "car-legacy-mp11" as MakeRunInput["car_id"];
+    const track_id = "trk-legacy" as MakeRunInput["track"]["track_id"];
+
+    const hasResult = bestLap.trim() !== "" || avgLap.trim() !== "" || confidence !== undefined;
+
+    const input: MakeRunInput = {
       type,
+      session_id,
+      car_id,
       car_template_id: MP11_ID,
       setup_version_id: setupVersionId,
       setup_name: setupName,
-      track: { name: trackName.trim() || "My track", surface, indoor },
+      track: {
+        track_id,
+        name: trackName.trim() || "My track",
+        // SURFACES is the closed list of schema surfaces, so this is a valid Surface.
+        surface: surface as MakeRunInput["track"]["surface"],
+        indoor,
+      },
       conditions: {
         grip,
-        bumpiness,
-        dusty: dusty || undefined,
-        sky,
-        evolution,
-        air_temp_c: num(airTemp),
+        ...(bumpiness !== undefined ? { bumpiness } : {}),
+        ...(dusty ? { dusty: true } : {}),
+        ...(sky !== undefined ? { sky } : {}),
+        ...(evolution !== undefined ? { evolution } : {}),
+        ...(num(airTemp) !== undefined ? { air_temp_c: num(airTemp) } : {}),
       },
-      tyres:
-        compound.trim() || wear || tyreRuns.trim()
-          ? { compound: compound.trim() || undefined, wear, run_count: num(tyreRuns) }
-          : undefined,
-      result:
-        bestLap.trim() || avgLap.trim() || confidence
-          ? {
-              best_lap_s: num(bestLap),
-              avg_lap_s: num(avgLap),
-              driver_confidence: confidence ? Number(confidence) : undefined,
-            }
-          : undefined,
-      feedback: { tags, text: note.trim() || undefined },
-      note: note.trim() || undefined,
-    });
+      ...(compound.trim() !== "" || wear !== undefined || tyreRuns.trim() !== ""
+        ? {
+            tyres: {
+              ...(compound.trim() !== "" ? { compound: compound.trim() } : {}),
+              ...(wear !== undefined ? { wear } : {}),
+              ...(num(tyreRuns) !== undefined ? { run_count: num(tyreRuns) } : {}),
+            },
+          }
+        : {}),
+      ...(hasResult
+        ? {
+            timing: {
+              kind: "summary" as const,
+              // makeRun normalizes driver_confidence into driver.confidence_1to5.
+              result: {
+                ...(num(bestLap) !== undefined ? { best_lap_s: num(bestLap) } : {}),
+                ...(num(avgLap) !== undefined ? { avg_lap_s: num(avgLap) } : {}),
+                ...(confidence !== undefined ? { driver_confidence: Number(confidence) } : {}),
+              },
+            },
+          }
+        : {}),
+      feedback: { tags, ...(note.trim() !== "" ? { text: note.trim() } : {}) },
+      ...(note.trim() !== "" ? { note: note.trim() } : {}),
+    };
+
+    const r = makeRun(input, now);
+    if (r.ok) onSave(r.run);
   };
 
   return (

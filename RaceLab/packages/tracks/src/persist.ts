@@ -1,10 +1,18 @@
-import type { TrackEntity, TracksState } from "./types";
+import type { Track } from "../../schema/src/index";
+import type { TracksState } from "./types";
 
-/** Versioned serialization for AsyncStorage — same discipline as
- *  packages/sheets/persist.ts: a format bump must NEVER read as corruption,
- *  so callers can stash unreadable blobs instead of wiping a track library. */
+/**
+ * Versioned serialization for the in-memory tracks state. After the schema
+ * cutover the app persists tracks through the storage repos (parse-on-read +
+ * quarantine); this serializer is the legacy/in-memory path only. Never-wipe:
+ * a format bump must NEVER read as corruption.
+ *
+ * Format 3 = schema-Track library (surface ∈ schema Surface, is_public, turns,
+ * TrackRecord). Formats 1–2 were the pre-schema TrackEntity shape; the storage
+ * migrate path owns reading them now, so this validator only accepts v3.
+ */
 
-export const TRACKS_FORMAT_VERSION = 2;
+export const TRACKS_FORMAT_VERSION = 3;
 
 interface Envelope {
   format: number;
@@ -30,20 +38,9 @@ export function deserializeTracks(raw: string): DeserializeTracksResult {
     return { ok: false, reason: "corrupt" };
   }
 
-  // Migration switch — every future format bump adds an upgrade case here.
   let state: TracksState;
   switch (env.format) {
-    case 1: {
-      // v1 → v2 added `surfaces` (multi-surface tracks): a v1 track gets
-      // surfaces defaulted to [surface], keeping `surface` the primary.
-      const v1 = env.state;
-      if (typeof v1 !== "object" || v1 === null || !Array.isArray(v1.tracks)) {
-        return { ok: false, reason: "corrupt" };
-      }
-      state = { tracks: v1.tracks.map(migrateTrackV1) };
-      break;
-    }
-    case 2:
+    case 3:
       state = env.state;
       break;
     default:
@@ -54,37 +51,23 @@ export function deserializeTracks(raw: string): DeserializeTracksResult {
   return { ok: true, state };
 }
 
-/** v1 → v2: default surfaces to [surface]. Malformed entries pass through
- *  untouched so the shape validation below reports them as corrupt. */
-function migrateTrackV1(t: TrackEntity): TrackEntity {
-  if (typeof t !== "object" || t === null || t.surfaces !== undefined) return t;
-  return { ...t, surfaces: [t.surface] };
-}
-
 function isValidState(s: TracksState): boolean {
   return typeof s === "object" && s !== null && Array.isArray(s.tracks) && s.tracks.every(isValidTrack);
 }
 
-function isValidTrack(t: TrackEntity): boolean {
+function isValidTrack(t: Track): boolean {
   return (
     typeof t === "object" &&
     t !== null &&
     typeof t.id === "string" &&
     typeof t.name === "string" &&
     typeof t.surface === "string" &&
-    (t.surfaces === undefined ||
-      (Array.isArray(t.surfaces) && t.surfaces.every((x) => typeof x === "string"))) &&
     typeof t.indoor === "boolean" &&
-    typeof t.visibility === "string" &&
-    Array.isArray(t.traits) &&
-    Array.isArray(t.corners) &&
-    t.corners.every(
-      (c) => typeof c === "object" && c !== null && typeof c.n === "number" && Array.isArray(c.features),
-    ) &&
+    typeof t.is_public === "boolean" &&
     Array.isArray(t.records) &&
     t.records.every(
       (r) =>
-        typeof r === "object" && r !== null && typeof r.category === "string" && typeof r.lap_s === "number",
+        typeof r === "object" && r !== null && typeof r.class === "string" && typeof r.best_lap_s === "number",
     ) &&
     typeof t.created_at === "string"
   );

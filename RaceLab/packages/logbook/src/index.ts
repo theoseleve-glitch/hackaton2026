@@ -1,7 +1,7 @@
-/** RaceLab logbook — public API (D22). Layer 1 (run log) + Layer 2 (run
- *  comparison) + the bridge that turns a logged run into an engine context
- *  bundle. Pure data + pure functions: no fs, no network, no node built-ins —
- *  bundles into the app unchanged. */
+/** RaceLab logbook — public API (D22), now schema-backed. Layer 1 (run log) +
+ *  Layer 2 (run comparison) + the bridge that turns a logged run into an engine
+ *  context bundle, all over the canonical schema `RunEntry`. Pure data + pure
+ *  functions: no fs, no network, no node built-ins. */
 export {
   initLogbook,
   addRun,
@@ -36,8 +36,24 @@ export {
   LOGBOOK_FORMAT_VERSION,
 } from "./persist";
 export type { DeserializeLogbookResult } from "./persist";
+// Schema-shape accessors — the ONE place that knows the schema field names.
+export {
+  runBestLap,
+  runAvgLap,
+  runConsistency,
+  runLapCount,
+  runResultFacts,
+  runPosition,
+  runEntrants,
+  runLapsList,
+  runAutonomy,
+  runFeeling,
+  runFatigue,
+  runConfidence,
+} from "./types";
 export type {
   Bumpiness,
+  DriverState,
   Grip,
   LogbookState,
   Outcome,
@@ -47,9 +63,23 @@ export type {
   RunResult,
   RunType,
   Sky,
+  TimingStats,
   TrackEvolution,
   TrackInfo,
+  TrackSnapshot,
   Traffic,
   TyreSet,
   TyreWear,
+  FeedbackTag,
 } from "./types";
+// Re-export the schema RunEntry maker + timing accessor so consumers have one
+// import site for minting and reading runs.
+export {
+  makeRun,
+  effectiveTiming,
+  learningTuples,
+  makeOutcomeRecord,
+  toEngineHistory,
+  conditionsToTags,
+} from "../../schema/src/index";
+export type { MakeRunInput, RunTiming, RunTimingInput, OutcomeRecord, LearningTuple } from "../../schema/src/index";

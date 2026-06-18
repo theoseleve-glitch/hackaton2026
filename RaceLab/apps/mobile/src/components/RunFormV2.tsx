@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { parseFeedback } from "../../../../packages/engine/src";
 import type { FeedbackTag } from "../../../../packages/engine/src";
-import type { CarEntity } from "../../../../packages/garage/src";
-import { lapStats } from "../../../../packages/logbook/src";
+import { powerLabel } from "../../../../packages/garage/src";
+import type { Car } from "../../../../packages/garage/src";
+import { lapStats, makeRun } from "../../../../packages/logbook/src";
 // prettier-ignore
-import type { Bumpiness, Grip, RunEntry, RunResult, RunType, Sky, TrackEvolution } from "../../../../packages/logbook/src";
-import type { CornerSpec, TrackEntity } from "../../../../packages/tracks/src";
+import type { Bumpiness, Grip, MakeRunInput, RunEntry, RunResult, RunType, Sky, TrackEvolution } from "../../../../packages/logbook/src";
+import { cornersOf, snapshotTrack } from "../../../../packages/tracks/src";
+import type { CornerSpec, Track } from "../../../../packages/tracks/src";
 import { KB } from "../kb";
 import { colors, radius } from "../theme";
 import type { WeatherFill } from "../weather";
@@ -33,8 +35,8 @@ const SYMPTOMS = KB.taxonomy.symptoms.map((s) => s.id);
 const PHASES = KB.taxonomy.phases.map((p) => p.id);
 
 export interface RunFormV2Props {
-  cars: CarEntity[];
-  tracks: TrackEntity[];
+  cars: Car[];
+  tracks: Track[];
   setupsForCar: (carId: string) => { id: string; name: string }[];
   selection: { car_id?: string; track_id?: string; setup_version_id?: string };
   onSelectCar: (id: string) => void;
@@ -43,10 +45,10 @@ export interface RunFormV2Props {
   onRequestNewCar: () => void;
   onRequestNewTrack: () => void;
   onRequestNewSetup: () => void;
-  fetchWeather: (track: TrackEntity, whenIso: string) => Promise<WeatherFill | null>;
+  fetchWeather: (track: Track, whenIso: string) => Promise<WeatherFill | null>;
   /** prefill (Speedhive import: a detected session opens the form ready) */
   initial?: { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] };
-  onSave: (run: Omit<RunEntry, "id">) => void;
+  onSave: (run: RunEntry) => void;
   onCancel: () => void;
 }
 
@@ -153,11 +155,25 @@ function parseTimeS(text: string): number | undefined {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
+/** 0–100 feeling slider → schema feeling_1to10 (makeRun clamps to [1,10]). */
+function to1to10(v: number): number {
+  return Math.max(1, Math.min(10, Math.round(v / 10)));
+}
+
+/** Synthesize a stable SessionId per calendar day (spec §B2: one session per
+ *  run/day). A schema SessionId is "ss-…"-shaped; same-day runs share it so
+ *  lifted/fresh history joins on the session. */
+function sessionIdFor(iso: string): MakeRunInput["session_id"] {
+  const day = iso.slice(0, 10).replace(/-/g, "");
+  return `ss-day-${day}` as MakeRunInput["session_id"];
+}
+
 export function RunFormV2(props: RunFormV2Props) {
   const t = useT();
   const { cars, tracks, setupsForCar, selection } = props;
   const car = cars.find((c) => c.id === selection.car_id);
   const track = tracks.find((t) => t.id === selection.track_id);
+  const trackCorners: CornerSpec[] = track ? cornersOf(track) : [];
   const setups = selection.car_id ? setupsForCar(selection.car_id) : [];
   const setup = setups.find((s) => s.id === selection.setup_version_id);
 
@@ -191,6 +207,7 @@ export function RunFormV2(props: RunFormV2Props) {
   const [showAutonomy, setShowAutonomy] = useState(false);
   const [autoTime, setAutoTime] = useState("");
   const [autoLaps, setAutoLaps] = useState("");
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const toggleSymptom = (s: string) =>
     setSymptoms((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
@@ -254,57 +271,76 @@ export function RunFormV2(props: RunFormV2Props) {
   const save = () => {
     if (!car || !track || !setup) return;
     const tags: FeedbackTag[] = symptoms.map((symptom) => (phase ? { symptom, phase } : { symptom }));
-    const corner_notes = track.corners
-      .map((c) => ({ corner: c.n, note: (cornerNotes[c.n] ?? "").trim() }))
-      .filter((c) => c.note.length > 0);
+    // per-corner notes → schema RunFeedback.turns (text per corner number)
+    const turns = trackCorners
+      .map((c) => ({ turn_n: c.n, text: (cornerNotes[c.n] ?? "").trim() }))
+      .filter((tn) => tn.text.length > 0)
+      .map((tn) => ({ turn_n: tn.turn_n, text: tn.text }));
     const autonomyTime = parseTimeS(autoTime);
     const autonomyLaps = num(autoLaps);
+    const autonomy =
+      autonomyTime !== undefined || autonomyLaps !== undefined
+        ? { ...(autonomyTime !== undefined ? { time_s: autonomyTime } : {}), ...(autonomyLaps !== undefined ? { laps: autonomyLaps } : {}) }
+        : undefined;
+
+    // summary-branch result (theo's RunResult vocab; laps_list preserved)
     const result: RunResult = {
-      best_lap_s: num(bestLap),
-      avg_lap_s: num(avgLap),
-      laps: lapsList.length > 0 ? lapsList.length : undefined,
-      laps_list: lapsList.length > 0 ? lapsList : undefined,
-      autonomy_test:
-        autonomyTime !== undefined || autonomyLaps !== undefined
-          ? { time_s: autonomyTime, laps: autonomyLaps }
-          : undefined,
-      position: type !== "practice" ? num(position) : undefined,
-      entrants: type !== "practice" ? num(entrants) : undefined,
+      ...(num(bestLap) !== undefined ? { best_lap_s: num(bestLap) } : {}),
+      ...(num(avgLap) !== undefined ? { avg_lap_s: num(avgLap) } : {}),
+      ...(lapsList.length > 0 ? { laps: lapsList.length, laps_list: lapsList } : {}),
+      ...(type !== "practice" && num(position) !== undefined ? { position: num(position) } : {}),
+      ...(type !== "practice" && num(entrants) !== undefined ? { entrants: num(entrants) } : {}),
     };
-    const hasResult = Object.values(result).some((v) => v !== undefined);
+    const hasResult = Object.keys(result).length > 0;
+
     // the pilot's date+time wins; falls back to "now" if unparseable
-    const when = new Date(`${dateStr}T${timeStr.length === 5 ? timeStr : "12:00"}:00`);
-    props.onSave({
-      created_at: Number.isFinite(when.getTime()) ? when.toISOString() : new Date().toISOString(),
+    const whenDate = new Date(`${dateStr}T${timeStr.length === 5 ? timeStr : "12:00"}:00`);
+    const when = Number.isFinite(whenDate.getTime()) ? whenDate.toISOString() : new Date().toISOString();
+
+    // wind/pressure land on the frozen schema weather observation (not conditions)
+    const wind = num(wx.wind_kmh.text);
+    const pressure = num(wx.pressure_hpa.text);
+    const weather =
+      wind !== undefined || pressure !== undefined
+        ? { source: "manual" as const, observed_at: when, ...(wind !== undefined ? { wind_speed_kmh: wind } : {}), ...(pressure !== undefined ? { pressure_hpa: pressure } : {}) }
+        : undefined;
+
+    const input: MakeRunInput = {
       type,
-      car_template_id: car.template_id,
+      session_id: sessionIdFor(when),
       car_id: car.id,
+      car_name: car.name,
+      car_template_id: car.template_id ?? car.chassis_id,
       setup_version_id: setup.id,
       setup_name: setup.name,
-      track_id: track.id,
-      track: { name: track.name, surface: track.surface, indoor: track.indoor },
+      track: snapshotTrack(track),
       conditions: {
         grip,
-        bumpiness,
-        dusty: dusty || undefined,
-        sky,
-        evolution,
-        air_temp_c: num(wx.air_temp_c.text),
-        humidity_pct: num(wx.humidity_pct.text),
-        wind_kmh: num(wx.wind_kmh.text),
-        pressure_hpa: num(wx.pressure_hpa.text),
-        sun_pct: num(wx.sun_pct.text),
+        ...(bumpiness !== undefined ? { bumpiness } : {}),
+        ...(dusty ? { dusty: true } : {}),
+        ...(sky !== undefined ? { sky } : {}),
+        ...(evolution !== undefined ? { evolution } : {}),
+        ...(num(wx.air_temp_c.text) !== undefined ? { air_temp_c: num(wx.air_temp_c.text) } : {}),
+        ...(num(wx.humidity_pct.text) !== undefined ? { humidity_pct: num(wx.humidity_pct.text) } : {}),
       },
-      result: hasResult ? result : undefined,
+      ...(weather !== undefined ? { weather } : {}),
+      ...(hasResult ? { timing: { kind: "summary", result } } : {}),
+      ...(autonomy !== undefined ? { autonomy_test: autonomy } : {}),
+      ...(num(duration) !== undefined ? { duration_min: num(duration) } : {}),
       feedback: {
         tags,
-        text: note.trim() || undefined,
-        corner_notes: corner_notes.length > 0 ? corner_notes : undefined,
+        ...(note.trim() !== "" ? { text: note.trim() } : {}),
+        ...(turns.length > 0 ? { turns } : {}),
       },
-      note: note.trim() || undefined,
-      feeling: feelingSet ? feeling : undefined,
-      duration_min: num(duration),
-    });
+      ...(feelingSet ? { driver: { feeling_1to10: to1to10(feeling) } } : {}),
+      ...(note.trim() !== "" ? { note: note.trim() } : {}),
+    };
+    const res = makeRun(input, when);
+    if (!res.ok) {
+      setSaveError(res.reason);
+      return;
+    }
+    props.onSave(res.run);
   };
 
   return (
@@ -462,10 +498,10 @@ export function RunFormV2(props: RunFormV2Props) {
             <ChipRow options={PHASES} value={phase} onSelect={(p) => setPhase(phase === p ? undefined : p)} />
           </>
         )}
-        {track && track.corners.length > 0 && (
+        {trackCorners.length > 0 && (
           <>
             <Text style={styles.hint}>{t({ en: "Notes by corner", fr: "Notes par virage" })}</Text>
-            {track.corners.map((c) => (
+            {trackCorners.map((c) => (
               <AutofillInput
                 key={c.n}
                 label={cornerLabel(c)}
@@ -483,7 +519,7 @@ export function RunFormV2(props: RunFormV2Props) {
         <FeelingSlider value={feeling} onChange={(v) => { setFeeling(v); setFeelingSet(true); }} />
       </Section>
 
-      {car?.power === "nitro" && (
+      {car !== undefined && powerLabel(car) === "nitro" && (
         <Section title={t({ en: "Autonomy", fr: "Autonomie" })}>
           <Pressable style={styles.autonomyBtn} onPress={() => setShowAutonomy((v) => !v)}>
             <Text style={styles.autonomyBtnText}>
@@ -515,6 +551,7 @@ export function RunFormV2(props: RunFormV2Props) {
         </Pressable>
       </View>
       {!canSave && <Text style={styles.saveHint}>{t({ en: "pick a car, a track and a setup to save", fr: "choisis une voiture, une piste et un réglage pour enregistrer" })}</Text>}
+      {saveError !== null && <Text style={[styles.saveHint, { color: colors.warn }]}>{t({ en: "Could not save this run — check the numbers entered.", fr: "Impossible d'enregistrer cette session — vérifie les valeurs saisies." })}</Text>}
     </ScrollView>
   );
 }

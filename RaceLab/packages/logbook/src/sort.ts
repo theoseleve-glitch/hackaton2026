@@ -1,9 +1,11 @@
+import { runAvgLap, runBestLap, runFeeling } from "./types";
 import type { RunEntry } from "./types";
 
 /**
  * Log-view orderings (D27). All pure and stable (ties keep input order; the
  * input array is never mutated). Runs MISSING the sort key go LAST regardless
  * of direction — a run without a lap time must never render as the fastest.
+ * Timing/feel read through the schema accessors.
  */
 
 export type RunSortKey = "date" | "best_lap" | "avg_lap" | "feeling";
@@ -61,11 +63,11 @@ function keyValue(r: RunEntry, key: RunSortKey): number | undefined {
       return Number.isNaN(t) ? undefined : t;
     }
     case "best_lap":
-      return r.result?.best_lap_s;
+      return runBestLap(r);
     case "avg_lap":
-      return r.result?.avg_lap_s;
+      return runAvgLap(r);
     case "feeling":
-      return r.feeling;
+      return runFeeling(r);
   }
 }
 
