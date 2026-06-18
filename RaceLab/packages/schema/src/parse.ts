@@ -168,6 +168,17 @@ export function parseCar(value: unknown): ParseResult<Car> {
   if (!nonEmptyStr(value.chassis_id)) return no("chassis_id");
   if (!inEnum(POWER_TYPES, value.power_type)) return no("power_type");
   if (!opt(value.transponder_id, str)) return no("transponder_id");
+  // theo product fields (Phase 2B-B1a) — validated if present, absent is fine.
+  if (!opt(value.template_id, str)) return no("template_id");
+  if (!opt(value.drivetrain, (x) => x === "4wd" || x === "2wd")) return no("drivetrain");
+  if (!opt(value.fuel_tank_cc, (x) => isFiniteNum(x) && (x as number) > 0)) return no("fuel_tank_cc");
+  if (value.custom !== undefined) {
+    const c = value.custom;
+    if (!isRecord(c)) return no("custom");
+    for (const f of ["brand", "model", "category", "scale"] as const) {
+      if (!opt(c[f], str)) return no(`custom.${f}`);
+    }
+  }
   if (!opt(value.photo_uri, str)) return no("photo_uri");
   if (!opt(value.notes, str)) return no("notes");
   if (!isoDateTime(value.created_at)) return no("created_at");
@@ -192,6 +203,10 @@ export function parseTrack(value: unknown): ParseResult<Track> {
     const bad = turnsBad(value.turns, "turns");
     if (bad !== null) return no(bad);
   }
+  // theo product field (Phase 2B-B1a) — free-string trait tags, validated if present.
+  if (value.traits !== undefined && !(Array.isArray(value.traits) && value.traits.every(str))) {
+    return no("traits");
+  }
   if (!Array.isArray(value.records)) return no("records");
   for (let i = 0; i < value.records.length; i++) {
     const r: unknown = value.records[i];
@@ -201,6 +216,8 @@ export function parseTrack(value: unknown): ParseResult<Track> {
     if (!inEnum(TRACK_RECORD_SOURCES, r.source)) return no(`records[${i}].source`);
     if (!opt(r.holder, str)) return no(`records[${i}].holder`);
     if (!opt(r.date, str)) return no(`records[${i}].date`);
+    // theo product field (Phase 2B-B1a) — conditions qualifier, validated if present.
+    if (!opt(r.conditions, str)) return no(`records[${i}].conditions`);
   }
   if (value.photos !== undefined && !(Array.isArray(value.photos) && value.photos.every(str))) {
     return no("photos");
@@ -277,9 +294,20 @@ export function parseRunEntry(value: unknown): ParseResult<RunEntry> {
       }
       if (!opt(r.laps, (x) => intGte(x, 1))) return no("timing.result.laps");
       if (!opt(r.position, (x) => intGte(x, 1))) return no("timing.result.position");
+      // theo product field (Phase 2B-B1a): field size, integer >= 1.
+      if (!opt(r.entrants, (x) => intGte(x, 1))) return no("timing.result.entrants");
       if (!opt(r.mistakes, (x) => intGte(x, 0))) return no("timing.result.mistakes");
       if (!opt(r.traffic, (x) => inEnum(TRAFFIC_LEVELS, x))) return no("timing.result.traffic");
       if (!opt(r.tyre_state_after, (x) => inEnum(TYRE_WEARS, x))) return no("timing.result.tyre_state_after");
+      // theo product field (Phase 2B-B1a): raw summary-branch lap list, each finite + > 0.
+      if (r.laps_list !== undefined) {
+        if (!Array.isArray(r.laps_list)) return no("timing.result.laps_list");
+        for (let j = 0; j < r.laps_list.length; j++) {
+          if (!isFiniteNum(r.laps_list[j]) || (r.laps_list[j] as number) <= 0) {
+            return no(`timing.result.laps_list[${j}]`);
+          }
+        }
+      }
     } else if (t.kind === "laps") {
       if (!Array.isArray(t.laps) || t.laps.length === 0) return no("timing.laps");
       let prev = 0;
@@ -298,6 +326,14 @@ export function parseRunEntry(value: unknown): ParseResult<RunEntry> {
       return no("timing.kind");
     }
   }
+  // theo product fields (Phase 2B-B1a) — run-level autonomy test + duration.
+  if (value.autonomy_test !== undefined) {
+    const a = value.autonomy_test;
+    if (!isRecord(a)) return no("autonomy_test");
+    if (!opt(a.time_s, (x) => isFiniteNum(x) && (x as number) >= 0)) return no("autonomy_test.time_s");
+    if (!opt(a.laps, (x) => intGte(x, 0))) return no("autonomy_test.laps");
+  }
+  if (!opt(value.duration_min, (x) => isFiniteNum(x) && (x as number) >= 0)) return no("duration_min");
   if (!isRecord(value.feedback)) return no("feedback");
   {
     const bad = feedbackTagsBad(value.feedback.tags, "feedback.tags");

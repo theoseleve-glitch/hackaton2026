@@ -82,18 +82,37 @@ export interface RunResult {
   consistency_pct?: number; // [0, 100]
   laps?: number; // integer > 0
   position?: number; // integer >= 1
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Field size the position was scored against ("P2 of 12"). integer >= 1. */
+  entrants?: number;
   mistakes?: number; // integer >= 0
   /** @deprecated single home for confidence is DriverState.confidence_1to5;
    *  makeRun normalizes this field into it and never stores it here. */
   driver_confidence?: Rating1to5;
   traffic?: Traffic;
   tyre_state_after?: TyreWear;
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Raw lap times (s, driving order) on the summary branch — when a true
+   *  LapSeries exists the timing union's kind:"laps" branch is preferred and
+   *  stats stay DERIVED; this preserves theo's summary-side lap list on
+   *  round-trip. Each entry must be finite and > 0. */
+  laps_list?: readonly number[];
 }
 
-/** The non-derivable subset, allowed alongside a laps array. */
+/** theo product field (Phase 2B-B1a); pending William ratification.
+ *  Run-until-dry test: seconds to burn a full tank at race pace, and laps
+ *  achieved — THE measured source for race-strategy autonomy. */
+export interface AutonomyTest {
+  time_s?: number; // finite, >= 0
+  laps?: number; // integer >= 0
+}
+
+/** The non-derivable subset, allowed alongside a laps array. laps_list is
+ *  excluded — when a real lap array exists it is the source of truth, not a
+ *  duplicate manual list. */
 export type NonTimingResult = Omit<
   RunResult,
-  "best_lap_s" | "avg_lap_s" | "consistency_pct" | "laps" | "driver_confidence"
+  "best_lap_s" | "avg_lap_s" | "consistency_pct" | "laps" | "driver_confidence" | "laps_list"
 >;
 
 // ── Laps / Speedhive ─────────────────────────────────────────────────────────
@@ -311,6 +330,12 @@ export interface RunEntry {
   tyres?: TyreSet;
   fuel?: FuelLog;
   timing?: RunTiming;
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Run-level autonomy test (not timing-level): feeds race strategy. */
+  autonomy_test?: AutonomyTest;
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Session length the pilot ran, minutes. finite, >= 0. */
+  duration_min?: number;
   feedback: RunFeedback;
   driver?: DriverState;
   /** Driver's quick rating of THIS RUN vs the previous one. Advised-change
@@ -366,6 +391,10 @@ export interface MakeRunInput {
   tyres?: TyreSet;
   fuel?: FuelLog;
   timing?: RunTimingInput;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  autonomy_test?: AutonomyTest;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  duration_min?: number;
   feedback: RunFeedback;
   driver?: DriverStateInput;
   outcome?: Outcome;
@@ -412,6 +441,24 @@ export function makeRun(
   if (input.fuel !== undefined) {
     const bad = fuelReject(input.fuel);
     if (bad !== null) return { ok: false, reason: bad };
+  }
+
+  // theo product fields (Phase 2B-B1a): run-level autonomy test + session
+  // length. Same never-wipe bar — NaN/Infinity reject, signs/integers guard.
+  if (input.autonomy_test !== undefined) {
+    const a = input.autonomy_test;
+    if (a.time_s !== undefined) {
+      if (!isFiniteNum(a.time_s)) return { ok: false, reason: "non_finite_numeric" };
+      if (a.time_s < 0) return { ok: false, reason: "out_of_range" };
+    }
+    if (a.laps !== undefined) {
+      if (!isFiniteNum(a.laps)) return { ok: false, reason: "non_finite_numeric" };
+      if (!Number.isInteger(a.laps) || a.laps < 0) return { ok: false, reason: "out_of_range" };
+    }
+  }
+  if (input.duration_min !== undefined) {
+    if (!isFiniteNum(input.duration_min)) return { ok: false, reason: "non_finite_numeric" };
+    if (input.duration_min < 0) return { ok: false, reason: "out_of_range" };
   }
 
   // Weather goes through THE one weather constructor — one validity envelope
@@ -512,6 +559,8 @@ export function makeRun(
     ...(input.tyres !== undefined ? { tyres: { ...input.tyres } } : {}),
     ...(input.fuel !== undefined ? { fuel: { ...input.fuel } } : {}),
     ...(timing !== undefined ? { timing } : {}),
+    ...(input.autonomy_test !== undefined ? { autonomy_test: { ...input.autonomy_test } } : {}),
+    ...(input.duration_min !== undefined ? { duration_min: input.duration_min } : {}),
     feedback: copyFeedback(input.feedback),
     ...(driver !== undefined ? { driver } : {}),
     ...(input.outcome !== undefined ? { outcome: input.outcome } : {}),
@@ -755,6 +804,11 @@ function nonTimingReject(r: NonTimingResult): RunRejectReason | null {
     if (!isFiniteNum(r.position)) return "non_finite_numeric";
     if (!Number.isInteger(r.position) || r.position < 1) return "out_of_range";
   }
+  // theo product field (Phase 2B-B1a): field size — integer >= 1.
+  if (r.entrants !== undefined) {
+    if (!isFiniteNum(r.entrants)) return "non_finite_numeric";
+    if (!Number.isInteger(r.entrants) || r.entrants < 1) return "out_of_range";
+  }
   if (r.mistakes !== undefined) {
     if (!isFiniteNum(r.mistakes)) return "non_finite_numeric";
     if (!Number.isInteger(r.mistakes) || r.mistakes < 0) return "out_of_range";
@@ -777,6 +831,14 @@ function summaryResultReject(
     if (!isFiniteNum(r.laps)) return "non_finite_numeric";
     if (!Number.isInteger(r.laps) || r.laps <= 0) return "out_of_range";
   }
+  // theo product field (Phase 2B-B1a): every raw lap time must be finite + > 0.
+  if (r.laps_list !== undefined) {
+    if (!Array.isArray(r.laps_list)) return "out_of_range";
+    for (const t of r.laps_list) {
+      if (!isFiniteNum(t)) return "non_finite_numeric";
+      if (t <= 0) return "out_of_range";
+    }
+  }
   return nonTimingReject(r);
 }
 
@@ -791,7 +853,10 @@ function copyNonTiming(
     ...(keepTiming && r.avg_lap_s !== undefined ? { avg_lap_s: r.avg_lap_s } : {}),
     ...(keepTiming && r.consistency_pct !== undefined ? { consistency_pct: r.consistency_pct } : {}),
     ...(keepTiming && r.laps !== undefined ? { laps: r.laps } : {}),
+    // laps_list is a summary-branch (keepTiming) raw list; a real LapSeries wins on the laps branch.
+    ...(keepTiming && r.laps_list !== undefined ? { laps_list: [...r.laps_list] } : {}),
     ...(r.position !== undefined ? { position: r.position } : {}),
+    ...(r.entrants !== undefined ? { entrants: r.entrants } : {}),
     ...(r.mistakes !== undefined ? { mistakes: r.mistakes } : {}),
     ...(r.traffic !== undefined ? { traffic: r.traffic } : {}),
     ...(r.tyre_state_after !== undefined ? { tyre_state_after: r.tyre_state_after } : {}),

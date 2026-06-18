@@ -768,6 +768,91 @@ console.log("\n— parse —");
   check("parse: not_an_object on scalar garbage", (() => { const a = parseRunEntry("nope"); const b = parseTrack(42); return !a.ok && a.reason === "not_an_object" && !b.ok && b.reason === "not_an_object"; })());
 }
 
+// ═══ theo product fields (Phase 2B-B1a) — optional, backward-compatible ═══════
+// Each new optional field must (a) round-trip make → JSON → parse, and (b) be
+// absent-tolerant: William's existing data (which omits it) still validates.
+
+console.log("\n— theo product fields (B1a) —");
+{
+  const json = (v: unknown): unknown => JSON.parse(JSON.stringify(v));
+
+  // ── Car: template_id, drivetrain, fuel_tank_cc, custom overrides ──────────
+  const customCarRes = makeCar(
+    {
+      name: "Mugen MBX8 (legacy)",
+      chassis_id: CUSTOM_CHASSIS_ID,
+      power_type: "nitro",
+      template_id: "generic-offroad",
+      drivetrain: "4wd",
+      fuel_tank_cc: 125,
+      custom: { brand: "Mugen", model: "MBX8", category: "buggy", scale: "1/8" },
+    },
+    T0,
+    REGISTRY,
+  );
+  if (!customCarRes.ok) fatal(`makeCar with theo fields rejected: ${customCarRes.reason}`);
+  const customCar = customCarRes.car;
+  check("Car B1a: theo fields stored verbatim", customCar.template_id === "generic-offroad" && customCar.drivetrain === "4wd" && customCar.fuel_tank_cc === 125 && customCar.custom?.brand === "Mugen" && customCar.custom?.scale === "1/8");
+  check("Car B1a: custom overrides bag is frozen + detached", Object.isFrozen(customCar.custom) && customCar.custom !== undefined);
+  const pCustomCar = parseCar(json(customCar));
+  check("Car B1a: round-trips through parseCar", pCustomCar.ok && pCustomCar.value.template_id === "generic-offroad" && pCustomCar.value.drivetrain === "4wd" && pCustomCar.value.fuel_tank_cc === 125 && pCustomCar.value.custom?.model === "MBX8");
+  check("Car B1a: BACKWARD-COMPAT — a car WITHOUT the new fields still parses", parseCar(json(car)).ok && car.template_id === undefined && car.fuel_tank_cc === undefined && car.custom === undefined);
+  check("Car B1a: makeCar rejects NaN fuel_tank_cc (never-wipe)", (() => { const r = makeCar({ name: "x", chassis_id: CUSTOM_CHASSIS_ID, power_type: "nitro", fuel_tank_cc: NaN }, T0); return !r.ok && r.reason === "non_finite_numeric"; })());
+  check("Car B1a: makeCar rejects fuel_tank_cc <= 0", (() => { const r = makeCar({ name: "x", chassis_id: CUSTOM_CHASSIS_ID, power_type: "nitro", fuel_tank_cc: 0 }, T0); return !r.ok && r.reason === "out_of_range"; })());
+  check("Car B1a: parseCar rejects a bad drivetrain enum", (() => { const j = json(customCar) as { drivetrain: string }; j.drivetrain = "6wd"; const r = parseCar(j); return !r.ok && r.reason === "invalid:drivetrain"; })());
+  check("Car B1a: parseCar rejects a non-positive fuel_tank_cc on load", (() => { const j = json(customCar) as { fuel_tank_cc: number }; j.fuel_tank_cc = -5; const r = parseCar(j); return !r.ok && r.reason === "invalid:fuel_tank_cc"; })());
+
+  // ── Track: traits + record conditions qualifier ──────────────────────────
+  const traitTrackRes = makeTrack(
+    {
+      name: "Trait Park",
+      surface: "clay",
+      indoor: false,
+      is_public: true,
+      traits: ["bumpy", "big_jumps", "technical_tight"],
+      records: [{ class: "1/8 nitro buggy", best_lap_s: 30.5, source: "manual", conditions: "wet evening" }],
+    },
+    T0,
+  );
+  if (!traitTrackRes.ok) fatal(`makeTrack with theo fields rejected: ${traitTrackRes.reason}`);
+  const traitTrack = traitTrackRes.track;
+  check("Track B1a: traits stored + frozen", traitTrack.traits?.length === 3 && traitTrack.traits[1] === "big_jumps" && Object.isFrozen(traitTrack.traits));
+  check("Track B1a: record conditions qualifier preserved", traitTrack.records[0].conditions === "wet evening");
+  const pTraitTrack = parseTrack(json(traitTrack));
+  check("Track B1a: round-trips through parseTrack", pTraitTrack.ok && pTraitTrack.value.traits?.[0] === "bumpy" && pTraitTrack.value.records[0].conditions === "wet evening");
+  check("Track B1a: BACKWARD-COMPAT — a track WITHOUT traits still parses", parseTrack(json(track2)).ok && track2.traits === undefined && track2.records[0].conditions === undefined);
+  check("Track B1a: parseTrack rejects non-string traits", (() => { const j = json(traitTrack) as { traits: unknown[] }; j.traits = ["bumpy", 7]; const r = parseTrack(j); return !r.ok && r.reason === "invalid:traits"; })());
+
+  // ── Run: entrants + laps_list (summary), autonomy_test + duration_min (run) ─
+  const theoRunRes = makeRun(
+    {
+      ...RUN_BASE,
+      timing: { kind: "summary", result: { best_lap_s: 30.1, laps: 10, position: 2, entrants: 12, laps_list: [30.5, 30.1, 30.4, 30.2] } },
+      autonomy_test: { time_s: 540, laps: 15 },
+      duration_min: 8,
+    },
+    T2,
+  );
+  if (!theoRunRes.ok) fatal(`makeRun with theo fields rejected: ${theoRunRes.reason}`);
+  const theoRun = theoRunRes.run;
+  {
+    const t = theoRun.timing;
+    const result = t?.kind === "summary" ? t.result : null;
+    check("Run B1a: entrants + laps_list stored on summary result", result !== null && result.entrants === 12 && result.laps_list?.length === 4 && result.laps_list[0] === 30.5);
+    check("Run B1a: autonomy_test + duration_min stored at run level", theoRun.autonomy_test?.time_s === 540 && theoRun.autonomy_test?.laps === 15 && theoRun.duration_min === 8);
+    check("Run B1a: deep-frozen (laps_list + autonomy_test)", Object.isFrozen(result?.laps_list) && Object.isFrozen(theoRun.autonomy_test));
+  }
+  const pTheoRun = parseRunEntry(json(theoRun));
+  check("Run B1a: round-trips through parseRunEntry", (() => { if (!pTheoRun.ok) return false; const t = pTheoRun.value.timing; const r = t?.kind === "summary" ? t.result : null; return r?.entrants === 12 && r?.laps_list?.[3] === 30.2 && pTheoRun.value.autonomy_test?.laps === 15 && pTheoRun.value.duration_min === 8; })());
+  check("Run B1a: BACKWARD-COMPAT — a run WITHOUT the new fields still parses", parseRunEntry(json(run1)).ok && run1.autonomy_test === undefined && run1.duration_min === undefined);
+  check("Run B1a: makeRun rejects entrants 0 (out_of_range)", (() => { const r = makeRun({ ...RUN_BASE, timing: { kind: "summary", result: { entrants: 0 } } }, T2); return !r.ok && r.reason === "out_of_range"; })());
+  check("Run B1a: makeRun rejects a zero lap in laps_list", (() => { const r = makeRun({ ...RUN_BASE, timing: { kind: "summary", result: { laps_list: [30, 0, 31] } } }, T2); return !r.ok && r.reason === "out_of_range"; })());
+  check("Run B1a: makeRun rejects NaN autonomy time (never-wipe)", (() => { const r = makeRun({ ...RUN_BASE, autonomy_test: { time_s: NaN } }, T2); return !r.ok && r.reason === "non_finite_numeric"; })());
+  check("Run B1a: makeRun rejects negative duration_min", (() => { const r = makeRun({ ...RUN_BASE, duration_min: -1 }, T2); return !r.ok && r.reason === "out_of_range"; })());
+  check("Run B1a: parseRunEntry rejects a corrupted laps_list entry on load", (() => { const j = json(theoRun) as { timing: { result: { laps_list: unknown[] } } }; j.timing.result.laps_list[1] = null; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:timing.result.laps_list[1]"; })());
+  check("Run B1a: parseRunEntry rejects entrants < 1 on load", (() => { const j = json(theoRun) as { timing: { result: { entrants: number } } }; j.timing.result.entrants = 0; const r = parseRunEntry(j); return !r.ok && r.reason === "invalid:timing.result.entrants"; })());
+}
+
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 
 console.log(failures === 0 ? "\nSCHEMA: all checks passed" : `\nSCHEMA: ${failures} failures`);

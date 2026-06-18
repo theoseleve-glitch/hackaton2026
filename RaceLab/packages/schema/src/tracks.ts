@@ -50,6 +50,10 @@ export interface TrackRecord {
   holder?: string;
   date?: IsoDate;
   source: TrackRecordSource;
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Free-form conditions qualifier ("dry", "wet evening") — records are
+   *  keyed by class+conditions in theo's model. */
+  conditions?: string;
 }
 
 export interface Gps {
@@ -66,6 +70,10 @@ export interface Track {
   is_public: boolean; // sharing flag ("Strava of RC"); publishing itself is a sync concern
   layout?: string; // layout/revision label — bump it when the club rebuilds
   turns?: readonly TrackTurn[];
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Venue trait tags (e.g. "bumpy", "big_jumps", "technical_tight"). Free
+   *  strings here — schema does not couple to theo's TRACK_TRAITS closed list. */
+  traits?: readonly string[];
   records: readonly TrackRecord[]; // APPEND-ONLY; the current best is computed, never marked
   photos?: readonly string[]; // local URIs (offline-first)
   notes?: string;
@@ -92,6 +100,8 @@ export interface MakeTrackInput {
   gps?: Gps;
   layout?: string;
   turns?: readonly TrackTurn[];
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  traits?: readonly string[];
   records?: readonly TrackRecord[];
   photos?: readonly string[];
   notes?: string;
@@ -157,6 +167,7 @@ export function makeTrack(
     is_public: input.is_public,
     ...(input.layout !== undefined ? { layout: input.layout } : {}),
     ...(input.turns !== undefined ? { turns: input.turns.map((t) => ({ ...t })) } : {}),
+    ...(input.traits !== undefined ? { traits: [...input.traits] } : {}),
     records: (input.records ?? []).map((r) => ({ ...r })),
     ...(input.photos !== undefined ? { photos: [...input.photos] } : {}),
     ...(input.notes !== undefined ? { notes: input.notes } : {}),

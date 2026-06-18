@@ -13,7 +13,7 @@
  */
 
 import type { IsoDateTime, PowerType } from "./vocab";
-import { deepFreeze } from "./vocab";
+import { deepFreeze, isFiniteNum } from "./vocab";
 import type { CarId } from "./ids";
 import { isoToMs, makeId } from "./ids";
 
@@ -35,12 +35,35 @@ export interface CarClassLabels {
   type: string;
 }
 
+/** Free-form identity overrides for a custom/legacy chassis (one whose
+ *  chassis_id is CUSTOM_CHASSIS_ID or otherwise not in the registry, so
+ *  classLabels returns null). Registry-known chassis must NOT set these —
+ *  the registry is the single source of truth for brand/model/category/scale. */
+export interface CarCustomChassis {
+  brand?: string;
+  model?: string;
+  category?: string; // "buggy" | "truggy" | ...
+  scale?: string; //    "1/8" | "1/10" | ...
+}
+
 export interface Car {
   id: CarId;
   name: string;
   chassis_id: string; // key into the kb chassis registry
   power_type: PowerType;
   transponder_id?: string; // MyLaps/Speedhive transponder number
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Engine ChassisTemplate id when a custom/legacy car carries its own
+   *  template (registry-known cars resolve this via the registry instead). */
+  template_id?: string;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  drivetrain?: "4wd" | "2wd";
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Fuel tank capacity in cc (matches FuelLog.tank_cc unit); nitro only. */
+  fuel_tank_cc?: number;
+  /** theo product field (Phase 2B-B1a); pending William ratification.
+   *  Identity overrides for a custom/legacy chassis the registry can't label. */
+  custom?: CarCustomChassis;
   photo_uri?: string; // local URI (offline-first)
   notes?: string;
   created_at: IsoDateTime;
@@ -51,11 +74,19 @@ export interface MakeCarInput {
   chassis_id: string;
   power_type: PowerType;
   transponder_id?: string;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  template_id?: string;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  drivetrain?: "4wd" | "2wd";
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  fuel_tank_cc?: number;
+  /** theo product field (Phase 2B-B1a); pending William ratification. */
+  custom?: CarCustomChassis;
   photo_uri?: string;
   notes?: string;
 }
 
-export type CarRejectReason = "empty_name" | "unknown_chassis";
+export type CarRejectReason = "empty_name" | "unknown_chassis" | "non_finite_numeric" | "out_of_range";
 
 /** Reserved chassis_id that bypasses the registry check: the escape hatch for
  *  drivers whose chassis isn't extracted yet (Mugen/Associated/TLR ten minutes
@@ -81,12 +112,22 @@ export function makeCar(
   ) {
     return { ok: false, reason: "unknown_chassis" };
   }
+  // fuel_tank_cc clears the same never-wipe bar as every other numeric: a
+  // NaN/Infinity (a JSON null survives deserialize) must reject, never freeze in.
+  if (input.fuel_tank_cc !== undefined) {
+    if (!isFiniteNum(input.fuel_tank_cc)) return { ok: false, reason: "non_finite_numeric" };
+    if (input.fuel_tank_cc <= 0) return { ok: false, reason: "out_of_range" };
+  }
   const car: Car = deepFreeze({
     id: makeId("car", isoToMs(now), rand),
     name,
     chassis_id: input.chassis_id,
     power_type: input.power_type,
     ...(input.transponder_id !== undefined ? { transponder_id: input.transponder_id } : {}),
+    ...(input.template_id !== undefined ? { template_id: input.template_id } : {}),
+    ...(input.drivetrain !== undefined ? { drivetrain: input.drivetrain } : {}),
+    ...(input.fuel_tank_cc !== undefined ? { fuel_tank_cc: input.fuel_tank_cc } : {}),
+    ...(input.custom !== undefined ? { custom: { ...input.custom } } : {}),
     ...(input.photo_uri !== undefined ? { photo_uri: input.photo_uri } : {}),
     ...(input.notes !== undefined ? { notes: input.notes } : {}),
     created_at: now,
