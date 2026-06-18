@@ -25,6 +25,8 @@ const RuleSchema = z.object({
   }),
   counter_indications: z.array(z.string()).default([]),
   magnitude_guidance: z.string(),
+  // M1-M3: optional hard-safety caveat surfaced verbatim into rendered advice.
+  danger: z.string().optional(),
   reversal_cost_minutes: z.number().positive(),
   confidence: z.enum(["high", "medium", "low"]),
   sources: z.array(z.string()).min(1),

@@ -283,5 +283,7 @@ function nextPlanSection(
 }
 
 function fmt(v: number | undefined): string {
-  return v === undefined ? "?" : String(v);
+  // M5: a non-finite stat (NaN/Infinity, e.g. avg of an empty/garbage lap set)
+  // must never render as "NaN"/"Infinity"; show "?" instead.
+  return v === undefined || !Number.isFinite(v) ? "?" : String(v);
 }

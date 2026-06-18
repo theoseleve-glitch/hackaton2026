@@ -56,7 +56,10 @@
     amplified_on: [rough, bumpy, low_grip]
     reduced_on: []
   counter_indications: []
-  magnitude_guidance: "One step (e.g. 7000 → 5000 cSt). Front wheels unload more during acceleration; with a high-power engine very thin center oil can overheat ('cook')."
+  magnitude_guidance: "One step at a time (e.g. 7000 → 5000 cSt) and re-test. Front wheels unload more during acceleration."
+  # M2 — overheat/mechanical-failure gate elevated from prose. PROVISIONAL bounds
+  # (floor + temp ceiling) pending William/domain ratification.
+  danger: "Thin centre-diff oil can overheat and seize the diff on a high-power engine — losing drive at speed. On high-power engines do NOT thin the centre diff below ~3000 cSt, and check the diff is not running hot (warm is fine, too-hot-to-touch is not) after each run. Low/mid-power engines have more margin but still re-test."
   reversal_cost_minutes: 10
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]

@@ -89,9 +89,11 @@ export function buildRacePlan(
   // Theo half (unchanged): forecast-shifted flat report + technique tips + readiness
   const shifted = applyForecast(bundle, forecast);
   const sorted = [...runs].sort((a, b) => a.date.localeCompare(b.date));
+  // M5: only finite averages feed race_avg_lap_s — a non-finite value would
+  // poison Math.min and leak NaN/Infinity into the user-facing plan.
   const avgLaps = runs
     .map((r) => r.avg_lap_s)
-    .filter((v): v is number => v !== undefined);
+    .filter((v): v is number => v !== undefined && Number.isFinite(v));
 
   // William half (NEW, optional): grounded forecast adjustments + explicit refusals
   let adjustments: PlannedAdjustment[] | undefined;

@@ -4,9 +4,11 @@ import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
+  optionIsEmittable,
   raceDayFilter,
+  sanitizeBundle,
 } from "./guard";
-import { conditionsEcho, humanize, ruleToOption } from "./offline";
+import { conditionsEcho, filterToTemplate, humanize, ruleToOption } from "./offline";
 import { historyNote } from "./history";
 import type { ContextBundle, RecommendationOption } from "./types";
 
@@ -47,10 +49,12 @@ export interface ProposePlanOptions {
 }
 
 export function proposePlan(
-  bundle: ContextBundle,
+  rawBundle: ContextBundle,
   data: KBData,
   opts?: ProposePlanOptions,
 ): RecommendationPlan {
+  // M5: strip non-finite numerics at the boundary before anything is rendered.
+  const bundle = sanitizeBundle(rawBundle);
   const echo = conditionsEcho(bundle);
   const source = "offline_deterministic" as const;
 
@@ -75,6 +79,10 @@ export function proposePlan(
 
   // 2. Deterministic retrieval (history re-ranking happens inside)
   let scored = retrieve(data.rules, bundle, template);
+  const retrievedIds = new Set(scored.map(({ rule }) => rule.id));
+
+  // 2b. M6b: drop rules whose setting isn't on this template (grounded-or-silent).
+  scored = filterToTemplate(scored, template);
 
   // 3. Race-day mode: filter the candidate pool BEFORE ranking the plan
   if (bundle.mode === "race_day") {
@@ -95,20 +103,39 @@ export function proposePlan(
     };
   }
 
-  // 4. Ranked plan: distinct settings (one lever per change), capped
+  // 4. Ranked plan: distinct settings (one lever per change), capped. Each
+  //    change passes the fail-closed emittable gate (grounded + on-template +
+  //    finite) or is dropped — never emit unmappable/ungrounded advice.
   const max = Math.max(1, Math.min(opts?.max_changes ?? MAX_PLAN_CHANGES, MAX_PLAN_CHANGES));
   const seenSettings = new Set<string>();
   const changes: PlannedChange[] = [];
   for (const entry of scored) {
     if (seenSettings.has(entry.rule.setting)) continue;
+    const option = ruleToOption(entry.rule, bundle, entry.history);
+    if (!optionIsEmittable(option, template, retrievedIds)) continue;
     seenSettings.add(entry.rule.setting);
     const position = changes.length + 1;
     changes.push({
       position,
-      option: ruleToOption(entry.rule, bundle, entry.history),
+      option,
       rationale: rationaleFor(position, entry, bundle),
     });
     if (changes.length === max) break;
+  }
+
+  // Nothing survived the gate → honest refusal/do-nothing, never a guess.
+  if (changes.length === 0) {
+    const message =
+      bundle.mode === "race_day"
+        ? DO_NOTHING_MESSAGE
+        : `${OUT_OF_KB_MESSAGE} Closest area to investigate: tires/inserts for this surface — the most common cause when no chassis rule matches.`;
+    return {
+      kind: bundle.mode === "race_day" ? "do_nothing" : "refusal",
+      source,
+      changes: [],
+      message,
+      conditions_echo: echo,
+    };
   }
 
   return { kind: "plan", source, changes, conditions_echo: echo };

@@ -19,6 +19,9 @@ export interface KBRule {
   conditions: { amplified_on: string[]; reduced_on: string[] };
   counter_indications: string[];
   magnitude_guidance: string;
+  /** Hard safety limit / physical-harm caveat for this change, surfaced verbatim
+   *  into the rendered advice (M1-M3). Present only on physical-risk rules. */
+  danger?: string;
   reversal_cost_minutes: number;
   confidence: Confidence;
   sources: string[];

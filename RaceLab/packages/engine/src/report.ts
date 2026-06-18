@@ -1,12 +1,15 @@
-import { getTemplate, type KBData } from "./data";
+import type { KBData } from "./data";
 import { drivingTips } from "./driving-tips";
 import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
+  isFiniteNumber,
+  optionIsEmittable,
   raceDayFilter,
+  sanitizeBundle,
 } from "./guard";
-import { conditionsEcho, ruleToOption } from "./offline";
+import { conditionsEcho, filterToTemplate, ruleToOption } from "./offline";
 import { retrieve } from "./retrieval";
 import type { Confidence, ContextBundle, KBRule, RecommendationOption } from "./types";
 
@@ -41,10 +44,27 @@ export interface EngineerReport {
   message?: string;
 }
 
-export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport {
-  const template = getTemplate(data, bundle.chassis_template_id);
+export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerReport {
+  // M5: strip non-finite numerics at the boundary before anything is rendered.
+  const bundle = sanitizeBundle(rawBundle);
   const echo = conditionsEcho(bundle);
   const diagnosis = buildDiagnosis(bundle);
+
+  // M4: unknown chassis template is an in-band refusal — NEVER a throw across
+  // the package boundary (mirrors proposePlan()).
+  const template = data.templates[bundle.chassis_template_id];
+  if (!template) {
+    return {
+      kind: "refusal",
+      conditions_echo: echo,
+      diagnosis,
+      do_not_touch: [],
+      driving_tips: drivingTips(bundle),
+      confidence: "none",
+      rationale: "The chassis template is not in the verified knowledge base.",
+      message: `Chassis template '${bundle.chassis_template_id}' is not in the KB — no grounded report.`,
+    };
+  }
 
   // 1. Engine-scope refusal (D13) — before anything else
   const refusal = engineScopeViolation(bundle, data.taxonomy);
@@ -63,6 +83,9 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
 
   // 2. Deterministic retrieval + race-day filter (same pipeline as recommend())
   let scored = retrieve(data.rules, bundle, template);
+  const retrievedIds = new Set(scored.map(({ rule }) => rule.id));
+  // 2b. M6b: drop rules whose setting isn't on this template (grounded-or-silent).
+  scored = filterToTemplate(scored, template);
   if (bundle.mode === "race_day") {
     scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
   }
@@ -87,21 +110,47 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
 
   // 3. Distinct-setting ranking: primary, secondary, and the levers we
   //    deliberately do NOT touch yet (ranked lower for these conditions).
-  const distinct: KBRule[] = [];
+  //    Each rule becomes an option only if it passes the fail-closed emittable
+  //    gate (grounded + on-template + finite); otherwise it is dropped so no
+  //    unmappable/ungrounded advice is ever rendered.
+  const distinct: { rule: KBRule; option: RecommendationOption }[] = [];
   const seen = new Set<string>();
   for (const { rule } of scored) {
     if (seen.has(rule.setting)) continue;
+    const option = ruleToOption(rule, bundle);
+    if (!optionIsEmittable(option, template, retrievedIds)) continue;
     seen.add(rule.setting);
-    distinct.push(rule);
+    distinct.push({ rule, option });
     if (distinct.length === 4) break;
   }
-  const [primaryRule, secondaryRule, ...parked] = distinct;
-  const primary = ruleToOption(primaryRule, bundle);
-  const secondary = secondaryRule ? ruleToOption(secondaryRule, bundle) : undefined;
+
+  // Nothing survived the gate → honest refusal/do-nothing, never a guess.
+  if (distinct.length === 0) {
+    const raceDay = bundle.mode === "race_day";
+    return {
+      kind: raceDay ? "do_nothing" : "refusal",
+      conditions_echo: echo,
+      diagnosis,
+      do_not_touch: raceDay ? ["Everything — protect the result."] : [],
+      driving_tips: drivingTips(bundle),
+      confidence: "none",
+      rationale: raceDay
+        ? "No rule clears the race-day bar (high confidence + fast revert) for this symptom."
+        : "No verified KB rule addresses this symptom in these conditions.",
+      message: raceDay
+        ? DO_NOTHING_MESSAGE
+        : `${OUT_OF_KB_MESSAGE} Closest area to investigate: tires/inserts for this surface — the most common cause when no chassis rule matches.`,
+    };
+  }
+
+  const [primaryEntry, secondaryEntry, ...parked] = distinct;
+  const primaryRule = primaryEntry.rule;
+  const primary = primaryEntry.option;
+  const secondary = secondaryEntry?.option;
 
   const do_not_touch = [
     ...parked.map(
-      (r) => `${humanize(r.setting)} — relevant but ranked lower for these conditions; only after testing the primary.`,
+      ({ rule }) => `${humanize(rule.setting)} — relevant but ranked lower for these conditions; only after testing the primary.`,
     ),
     "Everything else — one change at a time, or you won't know what worked.",
   ];
@@ -137,7 +186,9 @@ function buildDiagnosis(bundle: ContextBundle): string {
   const ctx: string[] = [`${bundle.track.grip.replace("_", " ")} grip ${bundle.track.surface}`];
   if (bundle.track.evolution && bundle.track.evolution !== "stable") ctx.push(`track ${bundle.track.evolution}`);
   if (bundle.tyres?.wear && bundle.tyres.wear !== "new") ctx.push(`${bundle.tyres.wear} tyres`);
-  if (bundle.weather?.air_temp_c !== undefined) ctx.push(`${bundle.weather.air_temp_c}°C`);
+  // M5: only echo a finite temperature (sanitizeBundle already dropped non-finite
+  // values; this is the belt-and-braces guard at the format site).
+  if (isFiniteNumber(bundle.weather?.air_temp_c)) ctx.push(`${bundle.weather!.air_temp_c}°C`);
   parts.push(`Context: ${ctx.join(", ")}.`);
   return parts.join(" ");
 }
@@ -145,7 +196,9 @@ function buildDiagnosis(bundle: ContextBundle): string {
 /** 5. Expected behavior — the primary rule's effects, in plain words. */
 function expectedBehavior(rule: KBRule): string {
   const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
-  return `After the change: ${effects}. ${rule.magnitude_guidance}`;
+  // M1-M3: surface the hard safety caveat in the expected-behavior section too.
+  const danger = rule.danger ? ` ⚠️ SAFETY: ${rule.danger}` : "";
+  return `After the change: ${effects}. ${rule.magnitude_guidance}${danger}`;
 }
 
 /** 8. Why — citations + condition match + the driver's own history. */
