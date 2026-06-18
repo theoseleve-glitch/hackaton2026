@@ -62,8 +62,10 @@ interface Props {
   onEngineer: (runId: string) => void;
   /** open the comparison for two selected runs */
   onCompare: (aId: string, bId: string) => void;
-  /** share a run (setup + conditions + result) as a card/link */
-  onShareRun: (p: SharedPayload) => void;
+  /** share a run (setup + conditions + result) as a card/link.
+   *  HIDDEN FOR LAUNCH — App.tsx no longer passes this, so the ⤴ Share button
+   *  below never renders; kept optional so the code stays on disk. */
+  onShareRun?: (p: SharedPayload) => void;
 }
 
 type Popup = null | "car" | "track" | "setup";
@@ -264,6 +266,7 @@ export function RunsScreen(props: Props) {
   // share a run: pull its setup values from the car's sheets, add the run's
   // context (track / conditions / result), open the share sheet
   const shareRun = async (run: RunEntry) => {
+    if (!props.onShareRun) return;
     const car = garage.cars.find((c) => c.id === run.car_id);
     let values: Record<string, string | number> = {};
     if (run.car_id) {
@@ -405,9 +408,11 @@ export function RunsScreen(props: Props) {
               <Pressable style={styles.floatBtn} onPress={() => props.onEngineer(selectedRuns[0].id)}>
                 <Text style={styles.floatBtnText}>{t({ en: "🔧 Engineer", fr: "🔧 Ingénieur" })}</Text>
               </Pressable>
-              <Pressable style={styles.floatBtn} onPress={() => void shareRun(selectedRuns[0])}>
-                <Text style={styles.floatBtnText}>{t({ en: "⤴ Share", fr: "⤴ Partager" })}</Text>
-              </Pressable>
+              {props.onShareRun && (
+                <Pressable style={styles.floatBtn} onPress={() => void shareRun(selectedRuns[0])}>
+                  <Text style={styles.floatBtnText}>{t({ en: "⤴ Share", fr: "⤴ Partager" })}</Text>
+                </Pressable>
+              )}
             </>
           )}
           {selectedRuns.length === 2 && (

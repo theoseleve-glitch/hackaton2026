@@ -24,9 +24,10 @@ interface Props {
   /** when set (garage navigation), open this car directly */
   focusCarId?: string;
   onClearFocus?: () => void;
-  /** social slice: open the share sheet for a setup, or scan a QR to import */
-  onShareSetup: (p: SharedPayload) => void;
-  onScanImport: () => void;
+  /** social slice (HIDDEN FOR LAUNCH — App.tsx no longer passes these, so the
+   *  share/import buttons below never render; kept optional so the code stays). */
+  onShareSetup?: (p: SharedPayload) => void;
+  onScanImport?: () => void;
 }
 
 export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus, onShareSetup, onScanImport }: Props) {
@@ -52,7 +53,7 @@ export function SheetScreen({ garage, updateGarage, focusCarId, onClearFocus, on
 }
 
 /** Tab-bar entry point: every car, name + how many setups it holds. */
-function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPick: (id: string) => void; onScanImport: () => void }) {
+function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPick: (id: string) => void; onScanImport?: () => void }) {
   const t = useT();
   const [counts, setCounts] = useState<Record<string, number>>({});
 
@@ -75,9 +76,11 @@ function CarPicker({ garage, onPick, onScanImport }: { garage: GarageState; onPi
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16 }}>
       <View style={styles.pickerHead}>
         <Text style={styles.h1}>{t({ en: "Setup sheets", fr: "Fiches de réglages" })}</Text>
-        <Pressable style={styles.importBtn} onPress={onScanImport}>
-          <Text style={styles.importBtnText}>{t({ en: "⤵ Import (scan)", fr: "⤵ Importer (scanner)" })}</Text>
-        </Pressable>
+        {onScanImport && (
+          <Pressable style={styles.importBtn} onPress={onScanImport}>
+            <Text style={styles.importBtnText}>{t({ en: "⤵ Import (scan)", fr: "⤵ Importer (scanner)" })}</Text>
+          </Pressable>
+        )}
       </View>
       {garage.cars.length === 0 && (
         <Text style={styles.empty}>{t({ en: "Add a car in the Garage first — its kit sheet comes preloaded.", fr: "Ajoute d'abord une voiture dans le garage — sa fiche kit est préchargée." })}</Text>
@@ -110,7 +113,7 @@ function CarSheets({
 }: {
   car: CarEntity;
   updateGarage: (fn: (prev: GarageState) => GarageState) => void;
-  onShareSetup: (p: SharedPayload) => void;
+  onShareSetup?: (p: SharedPayload) => void;
   onBack: () => void;
 }) {
   const t = useT();
@@ -183,12 +186,13 @@ function SetupList({
   car: CarEntity;
   options?: string;
   onChangeOptions: (text: string) => void;
-  onShareSetup: (p: SharedPayload) => void;
+  onShareSetup?: (p: SharedPayload) => void;
   onOpenDraft: () => void;
   onOpenVersion: (id: string) => void;
 }) {
   const t = useT();
   const shareVersion = (v: SheetsState["versions"][number]) => {
+    if (!onShareSetup) return;
     const labels = carLabels(car);
     onShareSetup(
       buildSetupPayload(
@@ -228,9 +232,11 @@ function SetupList({
             </View>
             <Text style={styles.verMeta}>{v.created_at.slice(0, 10)}{v.note ? ` · ${v.note}` : ""}</Text>
           </View>
-          <Pressable hitSlop={10} style={styles.shareBtn} onPress={() => shareVersion(v)}>
-            <Text style={styles.shareBtnText}>⤴</Text>
-          </Pressable>
+          {onShareSetup && (
+            <Pressable hitSlop={10} style={styles.shareBtn} onPress={() => shareVersion(v)}>
+              <Text style={styles.shareBtnText}>⤴</Text>
+            </Pressable>
+          )}
           <Text style={styles.chev}>›</Text>
         </Pressable>
       ))}

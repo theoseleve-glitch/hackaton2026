@@ -18,12 +18,15 @@ import { useT } from "../i18n";
 interface Props {
   tracks: TracksState;
   updateTracks: (fn: (prev: TracksState) => TracksState) => void;
-  candidacy: CandidacyData;
-  onSubmitOfficial: (trackId: string) => void;
-  onOpenOfficial: () => void;
+  /** social slice (HIDDEN FOR LAUNCH — App.tsx no longer passes these, so the
+   *  official-track button/badges never appear; kept optional so the code stays
+   *  on disk). candidacy defaults to empty → every track reads as "none". */
+  candidacy?: CandidacyData;
+  onSubmitOfficial?: (trackId: string) => void;
+  onOpenOfficial?: () => void;
 }
 
-export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial, onOpenOfficial }: Props) {
+export function TracksScreen({ tracks, updateTracks, candidacy = { items: [] }, onSubmitOfficial, onOpenOfficial }: Props) {
   const t = useT();
   const [modal, setModal] = useState<null | "new" | { edit: Track }>(null);
   const editing = modal !== null && modal !== "new" ? modal.edit : undefined;
@@ -37,9 +40,11 @@ export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial
           {t({ en: "Tracks", fr: "Pistes" })} <Text style={styles.count}>· {tracks.tracks.length}</Text>
         </Text>
         <View style={{ flexDirection: "row", gap: 8 }}>
-          <Pressable style={styles.addBtn} onPress={onOpenOfficial}>
-            <Text style={styles.addBtnText}>{t({ en: "🏁 Official", fr: "🏁 Officiel" })}</Text>
-          </Pressable>
+          {onOpenOfficial && (
+            <Pressable style={styles.addBtn} onPress={onOpenOfficial}>
+              <Text style={styles.addBtnText}>{t({ en: "🏁 Official", fr: "🏁 Officiel" })}</Text>
+            </Pressable>
+          )}
           <Pressable style={styles.addBtn} onPress={() => setModal("new")}>
             <Text style={styles.addBtnText}>{t({ en: "＋ Add track", fr: "＋ Ajouter une piste" })}</Text>
           </Pressable>
@@ -73,7 +78,7 @@ export function TracksScreen({ tracks, updateTracks, candidacy, onSubmitOfficial
           <TrackForm
             initial={editing}
             candidacyState={editingState}
-            onSubmitOfficial={editing ? () => onSubmitOfficial(editing.id) : undefined}
+            onSubmitOfficial={editing && onSubmitOfficial ? () => onSubmitOfficial(editing.id) : undefined}
             onCancel={() => setModal(null)}
             onSave={(track) => {
               if (editing) {

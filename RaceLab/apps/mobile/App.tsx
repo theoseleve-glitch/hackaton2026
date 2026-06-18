@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, Platform, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Linking from "expo-linking";
 import { GarageScreen } from "./src/screens/GarageScreen";
 import { SheetScreen } from "./src/screens/SheetScreen";
 import { TracksScreen } from "./src/screens/TracksScreen";
@@ -10,11 +9,7 @@ import { EngineerHubScreen } from "./src/screens/EngineerHubScreen";
 import { CompareScreen } from "./src/screens/CompareScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
-import { ImportPreviewScreen } from "./src/screens/ImportPreviewScreen";
-import { OfficialTracksScreen } from "./src/screens/OfficialTracksScreen";
 import { Overlay } from "./src/components/Overlay";
-import { ShareSheet } from "./src/components/ShareSheet";
-import { QrScanner } from "./src/components/QrScanner";
 import { TrialBanner } from "./src/components/TrialBanner";
 import { BrandLockup } from "./src/components/BrandMark";
 import { initLang, useT } from "./src/i18n";
@@ -25,16 +20,18 @@ import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
 import { useTracks } from "./src/trackstore";
 import { useReports } from "./src/reportstore";
-import { useCandidacy } from "./src/candidacystore";
-import { useFollows } from "./src/followstore";
-import { SocialScreen } from "./src/screens/SocialScreen";
 import { trialDaysLeft, useAccount } from "./src/accountstore";
-import { linkToPayload } from "../../packages/social/src";
-import type { SharedPayload } from "../../packages/social/src";
 import { colors } from "./src/theme";
 import { RepoProvider, useReposReady } from "./src/storage/RepoProvider";
 
-type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer" | "social";
+// SOCIAL HIDDEN FOR LAUNCH: every social entry point (the Social tab, share
+// sheet, QR scan, deep-link import/fork, official-tracks browser) is unwired
+// from the running UI below. The source files (SocialScreen, ShareSheet,
+// QrScanner, ImportPreviewScreen, OfficialTracksScreen, packages/social,
+// candidacystore/followstore) all remain on disk, unreferenced, to be
+// re-wired post-launch.
+
+type Tab = "garage" | "sheet" | "tracks" | "runs" | "engineer";
 
 const TABS: { id: Tab; label: Phrase; icon: string }[] = [
   { id: "garage", label: { en: "Garage", fr: "Garage" }, icon: "🏠" },
@@ -42,7 +39,6 @@ const TABS: { id: Tab; label: Phrase; icon: string }[] = [
   { id: "tracks", label: { en: "Tracks", fr: "Pistes" }, icon: "🗺️" },
   { id: "runs", label: { en: "Runs", fr: "Sessions" }, icon: "🏁" },
   { id: "engineer", label: { en: "Engineer", fr: "Ingénieur" }, icon: "🔧" },
-  { id: "social", label: { en: "Social", fr: "Social" }, icon: "👥" },
 ];
 
 function AppInner() {
@@ -60,53 +56,28 @@ function AppInner() {
     { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] } | undefined
   >();
   const [shChecked, setShChecked] = useState(false);
-  // social slice: share a payload, import/fork one, scan a QR, browse official tracks
-  const [shareTarget, setShareTarget] = useState<SharedPayload | null>(null);
-  const [importPayload, setImportPayload] = useState<SharedPayload | null>(null);
-  const [showScanner, setShowScanner] = useState(false);
-  const [showOfficial, setShowOfficial] = useState(false);
 
   const { garage, updateGarage } = useGarage();
   const { logbook, updateLogbook } = useLogbook();
   const { tracks, updateTracks } = useTracks();
   const { reports, addReport } = useReports();
-  const { candidacy, submit: submitCandidacy } = useCandidacy();
-  const { follows, follow, unfollow } = useFollows();
   const { account, setAccount, completeOnboarding } = useAccount();
 
-  // every shared payload is attributed to your @handle (provenance, D32+)
-  const withAuthor = useCallback(
-    (p: SharedPayload): SharedPayload =>
-      account?.handle ? { ...p, author: { handle: account.handle } } : p,
-    [account?.handle],
-  );
-
-  // direct tab entry resets every cross-tab intent (compare/settings/scanner
-  // close, no stale Speedhive prefill, engineer doesn't re-fire a report)
+  // direct tab entry resets every cross-tab intent (compare/settings close,
+  // no stale Speedhive prefill, engineer doesn't re-fire a report)
   const selectTab = useCallback((id: Tab) => {
     setRunsStartInForm(false);
     setEngineerRunId(undefined);
     setComparePair(null);
     setShowSettings(false);
     setShPrefill(undefined);
-    setShareTarget(null);
-    setImportPayload(null);
-    setShowScanner(false);
-    setShowOfficial(false);
     setTab(id);
   }, []);
 
-  // deep-link import: griplab://import?d=… (cold start + warm) opens the fork preview
-  const url = Linking.useURL();
   const txt = useT();
   useEffect(() => {
     initLang();
   }, []);
-  useEffect(() => {
-    if (!url) return;
-    const res = linkToPayload(url);
-    if (res.ok) setImportPayload(res.payload);
-  }, [url]);
 
   useEffect(() => {
     if (!garage || !logbook || shChecked) return;
@@ -129,7 +100,7 @@ function AppInner() {
     })();
   }, [garage, logbook, shChecked]);
 
-  if (!garage || !logbook || !tracks || !reports || !account || !candidacy || !follows) {
+  if (!garage || !logbook || !tracks || !reports || !account) {
     return (
       <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center" }]}>
         <ActivityIndicator color={colors.accent} size="large" />
@@ -155,15 +126,6 @@ function AppInner() {
       <View style={styles.header}>
         <BrandLockup size={30} fontSize={20} />
         <View style={styles.headerRight}>
-          <Pressable
-            onPress={() => setTab("social")}
-            hitSlop={10}
-            style={styles.avatarDisc}
-            accessibilityRole="button"
-            accessibilityLabel="Your profile"
-          >
-            <Text style={styles.avatarInitial}>{(account.handle ?? account.email ?? "?").charAt(0).toUpperCase()}</Text>
-          </Pressable>
           <Pressable
             onPress={() => setShowSettings(true)}
             hitSlop={14}
@@ -231,17 +193,12 @@ function AppInner() {
                 updateGarage={updateGarage}
                 focusCarId={sheetFocusCarId}
                 onClearFocus={() => setSheetFocusCarId(undefined)}
-                onShareSetup={(p) => setShareTarget(withAuthor(p))}
-                onScanImport={() => setShowScanner(true)}
               />
             )}
             {tab === "tracks" && (
               <TracksScreen
                 tracks={tracks}
                 updateTracks={updateTracks}
-                candidacy={candidacy}
-                onSubmitOfficial={(trackId) => submitCandidacy(trackId)}
-                onOpenOfficial={() => setShowOfficial(true)}
               />
             )}
             {tab === "runs" && (
@@ -260,7 +217,6 @@ function AppInner() {
                   setTab("engineer");
                 }}
                 onCompare={(a, b) => setComparePair({ a, b })}
-                onShareRun={(p) => setShareTarget(withAuthor(p))}
               />
             )}
             {tab === "engineer" && (
@@ -273,18 +229,6 @@ function AppInner() {
                 requestRunId={engineerRunId}
               />
             )}
-            {tab === "social" && (
-              <SocialScreen
-                account={account}
-                setAccount={setAccount}
-                garage={garage}
-                logbook={logbook}
-                follows={follows}
-                onFollow={follow}
-                onUnfollow={unfollow}
-                onFork={(p) => setImportPayload(p)}
-              />
-            )}
           </>
         )}
         <Overlay visible={showSettings}>
@@ -294,33 +238,6 @@ function AppInner() {
             logbook={logbook}
             onClose={() => setShowSettings(false)}
           />
-        </Overlay>
-        <Overlay visible={importPayload !== null}>
-          {importPayload && (
-            <ImportPreviewScreen
-              payload={importPayload}
-              garage={garage}
-              updateGarage={updateGarage}
-              onClose={() => setImportPayload(null)}
-              onDone={(carId) => {
-                setImportPayload(null);
-                setSheetFocusCarId(carId);
-                setTab("sheet");
-              }}
-            />
-          )}
-        </Overlay>
-        <Overlay visible={showScanner}>
-          <QrScanner
-            onScanned={(p) => {
-              setShowScanner(false);
-              setImportPayload(p);
-            }}
-            onClose={() => setShowScanner(false)}
-          />
-        </Overlay>
-        <Overlay visible={showOfficial}>
-          <OfficialTracksScreen tracks={tracks} candidacy={candidacy} onClose={() => setShowOfficial(false)} />
         </Overlay>
       </View>
 
@@ -343,8 +260,6 @@ function AppInner() {
           );
         })}
       </View>
-
-      <ShareSheet payload={shareTarget} onClose={() => setShareTarget(null)} />
     </SafeAreaView>
   );
 }
