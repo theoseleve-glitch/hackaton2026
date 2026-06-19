@@ -192,6 +192,45 @@ check(
     JSON.stringify(planRaceDay(raceDayInput, data)),
 );
 
+// ── 5. NEW CALL-SITE SWEEP: B1 (conditionsShift physics), B2 (readinessFacts
+//    data-quality) and E1 (retrieval symptom-frequency boost) must be pure too —
+//    same inputs → byte-identical, no clock/RNG/IO leaked into the new branches.
+{
+  // B1/B2: a hotter + rainy forecast with two runs exercises the mechanism
+  // clauses and the <3-run data-quality line.
+  const planA = buildRacePlan(bundle, runs, raceWindow, forecast, data);
+  const planB = buildRacePlan(bundle, runs, raceWindow, forecast, data);
+  check(
+    "D18: race-plan with B1/B2 branches is byte-identical across two calls",
+    JSON.stringify(planA) === JSON.stringify(planB),
+  );
+  check(
+    "D18: B1 mechanism clause is present (deterministically) on the hot shift",
+    planA.conditions_shift.some((l) => /grip|traction|brak/i.test(l)),
+    planA.conditions_shift.join(" | "),
+  );
+  check(
+    "D18: B2 data-quality line is present (deterministically)",
+    planA.readiness.some((l) => /^(Good|Limited|Single) data:/.test(l)),
+    planA.readiness.join(" | "),
+  );
+
+  // E1: a symptom tagged 3× exercises the frequency-boost branch in retrieve().
+  const multiTag: ContextBundle = {
+    ...bundle,
+    feedback: {
+      tags: [
+        { symptom: "understeer", phase: "corner_entry" },
+        { symptom: "understeer", phase: "mid_corner" },
+        { symptom: "understeer", phase: "corner_exit" },
+      ],
+    },
+  };
+  const e1a = JSON.stringify(buildReport(structuredClone(multiTag), data));
+  const e1b = JSON.stringify(buildReport(structuredClone(multiTag), data));
+  check("D18: E1 symptom-frequency boost path is byte-identical across two calls", e1a === e1b);
+}
+
 assert.equal(failures, 0, `${failures} D18 purity check(s) failed`);
 if (failures > 0) {
   process.exit(1);

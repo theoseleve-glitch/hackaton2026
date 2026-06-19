@@ -16,12 +16,31 @@ const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s) % 60).p
 export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy: () => void }) {
   const t = useT();
   const r = plan.report;
+  // C1: William's grounded forecast adjustments lead the verdict when present —
+  // they are the forecast-specific, KB-cited call; the full Theo report stays
+  // one fold below. Theo's report primary leads only when there is no adjustment.
+  const lead = plan.adjustments && plan.adjustments.length > 0 ? plan.adjustments[0] : undefined;
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       <Text style={styles.echo}>{r.conditions_echo}</Text>
 
-      {r.kind === "report" && r.primary ? (
+      {lead ? (
+        <View style={styles.verdictCard}>
+          <Text style={styles.kicker}>
+            {t({ en: "FORECAST ADJUSTMENT", fr: "AJUSTEMENT PRÉVISIONS" })} ·{" "}
+            {lead.setting.replace(/_/g, " ").toUpperCase()}
+          </Text>
+          <Text style={styles.verdict}>{lead.change}</Text>
+          <Text style={styles.mech}>{lead.mechanism}</Text>
+          <Text style={styles.note}>
+            {t({
+              en: "Full setup report below in “Full engineer report”.",
+              fr: "Rapport de réglage complet ci-dessous dans « Rapport complet de l’ingénieur ».",
+            })}
+          </Text>
+        </View>
+      ) : r.kind === "report" && r.primary ? (
         <View style={styles.verdictCard}>
           <Text style={styles.kicker}>
             {t({ en: "RACE-DAY CALL", fr: "CONSIGNE DU JOUR DE COURSE" })} ·{" "}
@@ -54,6 +73,40 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
         />
         <Tile value={String(plan.technique_tips.length)} label={t({ en: "drive tips", fr: "conseils pilotage" })} />
       </View>
+
+      {plan.adjustments && plan.adjustments.length > 0 && (
+        <Fold
+          title={t({ en: "Forecast adjustments", fr: "Ajustements prévisions" })}
+          badge={String(plan.adjustments.length)}
+        >
+          {plan.adjustments.map((adj, i) => (
+            <View key={i} style={styles.adjustment}>
+              <Text style={styles.adjustTrigger}>{adj.trigger}</Text>
+              <Text style={styles.adjustChange}>
+                {adj.setting.replace(/_/g, " ").toUpperCase()}: {adj.change}
+              </Text>
+              <Text style={styles.adjustMech}>{adj.mechanism}</Text>
+              <Text style={styles.adjustMeta}>
+                {t({ en: "revert", fr: "annuler" })}: {adj.revert} · {t({ en: "confidence", fr: "confiance" })}:{" "}
+                {adj.confidence} · {t({ en: "cites", fr: "cite" })} {adj.citations.join(", ")}
+              </Text>
+            </View>
+          ))}
+        </Fold>
+      )}
+
+      {plan.refusals && plan.refusals.length > 0 && (
+        <Fold
+          title={t({ en: "Ungrounded aspects", fr: "Aspects non couverts" })}
+          badge={String(plan.refusals.length)}
+        >
+          {plan.refusals.map((ref, i) => (
+            <Text key={i} style={styles.line}>
+              🚫 {ref.aspect.toUpperCase()}: {ref.message}
+            </Text>
+          ))}
+        </Fold>
+      )}
 
       <Pressable style={styles.strategyBtn} onPress={onStrategy}>
         <Text style={styles.strategyBtnText}>
@@ -128,4 +181,10 @@ const styles = StyleSheet.create({
   },
   strategyBtnText: { color: "#fff", fontWeight: "800", fontSize: 14 },
   line: { color: colors.text, fontSize: 13, lineHeight: 21 },
+  note: { color: colors.sub, fontSize: 11, fontStyle: "italic", marginTop: 8 },
+  adjustment: { borderLeftWidth: 3, borderLeftColor: colors.accent, paddingLeft: 10, marginBottom: 10 },
+  adjustTrigger: { color: colors.sub, fontSize: 11, fontWeight: "700", marginBottom: 3 },
+  adjustChange: { color: colors.text, fontSize: 14, fontWeight: "800", lineHeight: 19 },
+  adjustMech: { color: colors.text, fontSize: 12, marginTop: 4, lineHeight: 18 },
+  adjustMeta: { color: colors.sub, fontSize: 11, marginTop: 4 },
 });

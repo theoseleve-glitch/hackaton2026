@@ -110,6 +110,7 @@ const NON_FINITE_TOKENS = ["NaN", "Infinity", "-Infinity"];
 export function optionHasFiniteNumbers(option: RecommendationOption): boolean {
   const fields = [
     option.change,
+    option.magnitude,
     option.mechanism,
     option.expected_effect,
     option.revert,

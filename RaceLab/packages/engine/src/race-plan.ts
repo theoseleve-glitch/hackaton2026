@@ -163,15 +163,26 @@ function conditionsShift(runs: SelectedRunSummary[], forecast: Forecast | undefi
   } else {
     const practiceAvg = temps.reduce((sum, t) => sum + t, 0) / temps.length;
     const delta = Math.round(forecast.air_temp_c - practiceAvg);
-    lines.push(
-      delta === 0
-        ? `Race window at the same temperature as your practice data (~${Math.round(practiceAvg)}°C).`
-        : `Race window ~${Math.abs(delta)}°C ${delta > 0 ? "hotter" : "colder"} than your practice data (${forecast.air_temp_c}°C vs ~${Math.round(practiceAvg)}°C).`,
-    );
+    if (delta === 0) {
+      lines.push(`Race window at the same temperature as your practice data (~${Math.round(practiceAvg)}°C).`);
+    } else {
+      // B1: universal physics, NOT a KB rule — hotter air/track lowers grip;
+      // colder raises it. Pair the bare delta with what it does to the car.
+      const mechanism =
+        delta > 0
+          ? " Hotter air and track mean less grip — the car needs more rear traction to put the power down."
+          : " Colder air and track mean more grip but slower-warming tyres — expect a sharper front once they're in.";
+      lines.push(
+        `Race window ~${Math.abs(delta)}°C ${delta > 0 ? "hotter" : "colder"} than your practice data (${forecast.air_temp_c}°C vs ~${Math.round(practiceAvg)}°C).${mechanism}`,
+      );
+    }
   }
 
   if (forecast?.rain_risk_pct !== undefined && forecast.rain_risk_pct >= WET_FROM_PCT) {
-    lines.push(`Rain risk ${forecast.rain_risk_pct}% — your selected runs are all dry.`);
+    // B1: rain physics — less grip, longer braking. Universal, not a KB rule.
+    lines.push(
+      `Rain risk ${forecast.rain_risk_pct}% — your selected runs are all dry. Less grip and longer braking: brake earlier and straighter, and feed throttle later on exit.`,
+    );
   }
   return lines;
 }
@@ -200,13 +211,19 @@ function readinessFacts(sorted: SelectedRunSummary[]): string[] {
     }
   }
   if (best) {
-    lines.push(`Best average lap: ${bestAvg}s — ${best.track_name}, ${best.date}.`);
+    lines.push(`Best average lap: ${bestAvg.toFixed(2)}s — ${best.track_name}, ${best.date}.`);
   }
 
+  // B2: a data-quality signal so thin data is read as "be cautious", not fact.
   const grips: string[] = [];
   for (const r of sorted) if (!grips.includes(r.grip)) grips.push(r.grip);
+  const quality = sorted.length >= 3 ? "Good" : sorted.length === 2 ? "Limited" : "Single";
+  const caution =
+    sorted.length < 3
+      ? " — thin data, so expect the car to behave a little differently on race day."
+      : "";
   lines.push(
-    `${sorted.length} run${sorted.length === 1 ? "" : "s"} considered, grips: ${grips.join(", ")}.`,
+    `${quality} data: ${sorted.length} run${sorted.length === 1 ? "" : "s"} on grips ${grips.join(", ")}${caution}.`,
   );
   return lines;
 }

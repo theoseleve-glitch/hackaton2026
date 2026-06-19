@@ -20,9 +20,12 @@ export function ruleToOption(
   // M1-M3: a physical-risk rule's hard caveat rides verbatim into the change
   // text so the limit reaches the racer at the point of action — never buried.
   const dangerTxt = rule.danger ? ` ⚠️ SAFETY: ${rule.danger}` : "";
+  // D1: magnitude_guidance ("1mm at a time") is hoisted to its own field so the
+  // step size is never buried in prose. The ⚠️ SAFETY caveat stays on `change`.
   return {
     setting: rule.setting,
-    change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}${dangerTxt}`,
+    change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt}${dangerTxt}`,
+    magnitude: rule.magnitude_guidance ?? "",
     mechanism: `Per ${rule.sources[0]}: ${effects}.`,
     expected_effect: effects,
     confidence: rule.confidence,

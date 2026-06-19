@@ -22,6 +22,9 @@ export function RunReportCard({ report }: { report: EngineerReport }) {
         <View style={styles.verdictCard}>
           <Text style={styles.verdictKicker}>{report.primary.setting.replace(/_/g, " ").toUpperCase()}</Text>
           <Text style={styles.verdict}>{report.primary.change}</Text>
+          {report.primary.magnitude ? (
+            <Text style={styles.verdictMag}>{report.primary.magnitude}</Text>
+          ) : null}
           <Text style={styles.verdictMech}>{report.primary.mechanism}</Text>
           <Text style={styles.verdictRevert}>revert: {report.primary.revert}</Text>
         </View>
@@ -116,6 +119,7 @@ function OptionRow({ option }: { option: RecommendationOption }) {
   return (
     <View style={styles.option}>
       <Text style={styles.optionChange}>{option.change}</Text>
+      {option.magnitude ? <Text style={styles.optionMag}>{option.magnitude}</Text> : null}
       <Text style={styles.optionDetail}>{option.mechanism}</Text>
       <Text style={styles.optionMeta}>
         revert: {option.revert} · cites {option.citations.join(", ")}
@@ -149,6 +153,7 @@ const styles = StyleSheet.create({
   verdictRefusal: { borderColor: colors.warn },
   verdictKicker: { color: colors.sub, fontSize: 11, fontWeight: "800", letterSpacing: 1.5, marginBottom: 6 },
   verdict: { color: colors.accent, fontSize: 26, fontWeight: "900", lineHeight: 32 },
+  verdictMag: { color: colors.text, fontSize: 15, fontWeight: "800", lineHeight: 21, marginTop: 8 },
   verdictSmall: { color: colors.text, fontSize: 16, fontWeight: "700", lineHeight: 23 },
   verdictMech: { color: colors.text, fontSize: 13, lineHeight: 19, marginTop: 10 },
   verdictRevert: { color: colors.sub, fontSize: 11, fontStyle: "italic", marginTop: 6 },
@@ -182,6 +187,7 @@ const styles = StyleSheet.create({
   expect: { color: colors.good, fontSize: 13, fontWeight: "700", marginBottom: 6, lineHeight: 19 },
   option: { borderLeftWidth: 3, borderLeftColor: colors.border, paddingLeft: 10, marginTop: 8 },
   optionChange: { color: colors.text, fontSize: 14, fontWeight: "700" },
+  optionMag: { color: colors.text, fontSize: 13, fontWeight: "800", marginTop: 3 },
   optionDetail: { color: colors.text, fontSize: 12, marginTop: 4, lineHeight: 18 },
   optionMeta: { color: colors.sub, fontSize: 11, marginTop: 4 },
 });

@@ -115,6 +115,10 @@ export interface ContextBundle {
 export interface RecommendationOption {
   setting: string;
   change: string;
+  /** How much to move the lever, hoisted out of `change` so the step size is a
+   *  standalone, prominent line ("1mm at a time, identical left/right"). Empty
+   *  string when the rule carries no magnitude_guidance. */
+  magnitude: string;
   mechanism: string;
   expected_effect: string;
   confidence: Confidence;

@@ -79,7 +79,8 @@ type ViolationType =
   | "self_contradiction"
   | "setting_out_of_scope"
   | "recommended_and_do_not_touch"
-  | "nondeterministic";
+  | "nondeterministic"
+  | "magnitude_invariant";
 
 interface Violation {
   type: ViolationType;
@@ -129,6 +130,26 @@ function scanOption(label: string, o: RecommendationOption, bundleId: string): v
   scanString(`${label}.if_it_does_not_help`, o.if_it_does_not_help, bundleId);
   if (o.history_note !== undefined) scanString(`${label}.history_note`, o.history_note, bundleId);
   for (const c of o.citations) scanString(`${label}.citation`, c, bundleId);
+  // D1 magnitude invariant (test #2): magnitude is ALWAYS a string (possibly
+  // empty), never contains NaN, and is HOISTED out of `change` — the change
+  // text must no longer embed the cited rule's magnitude_guidance.
+  if (typeof o.magnitude !== "string") {
+    violate("magnitude_invariant", bundleId, `${label}.magnitude is not a string (${typeof o.magnitude})`);
+  } else {
+    // empty magnitude is legitimate (rule without magnitude_guidance); only flag bad tokens
+    scanString(`${label}.magnitude`, o.magnitude, bundleId, true);
+    for (const c of o.citations) {
+      const rule = ruleById.get(c);
+      const mg = rule?.magnitude_guidance;
+      if (mg && mg.trim() !== "" && o.change.includes(mg)) {
+        violate(
+          "magnitude_invariant",
+          bundleId,
+          `${label}.change still embeds magnitude_guidance of ${c} ("${mg.slice(0, 40)}") — should be hoisted to .magnitude`,
+        );
+      }
+    }
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -662,6 +683,7 @@ const ALL_TYPES: ViolationType[] = [
   "setting_out_of_scope",
   "recommended_and_do_not_touch",
   "nondeterministic",
+  "magnitude_invariant",
 ];
 
 console.log("\n══════════════════════════════════════════════════════════════════");
@@ -683,6 +705,7 @@ const INVARIANT_LABELS: Record<ViolationType, string> = {
   setting_out_of_scope: "Recommended setting within chassis scope",
   recommended_and_do_not_touch: "do_not_touch never overlaps a recommendation",
   nondeterministic: "Determinism: same bundle twice → byte-identical JSON",
+  magnitude_invariant: "magnitude is a string, NaN-free, hoisted out of change",
 };
 for (const t of ALL_TYPES) {
   const n = byType.get(t)?.length ?? 0;

@@ -55,7 +55,7 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
   }
   const notes: string[] = [
     `Full tank lasts ~${mmss(inputs.autonomy_s)} (${inputs.autonomy_s}s) at your ${inputs.avg_lap_s.toFixed(1)}s pace.`,
-    `Boxing every ${mmss(fuelCap)} (${fuelCap}s) keeps a ${margin}s fuel margin${inputs.margin_s === undefined ? " (one average lap, the default)" : ""}.`,
+    `Boxing every ${mmss(fuelCap)} (${fuelCap}s) — that's full autonomy minus a ${margin}s safety reserve${inputs.margin_s === undefined ? " (one average lap, the default)" : ""}, held back against fuel-test variance and slow stops.`,
   ];
 
   let cap = fuelCap;
@@ -70,7 +70,7 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
         cap = cliffTime;
         pitDriver = "tyre_cliff";
         notes.push(
-          `Tyres fall off a cliff after ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}, degrading ${cliff.degradation_s_per_lap.toFixed(2)}s/lap) — inside the ${fuelCap}s fuel window, so the tyres, not fuel, decide the pits.`,
+          `Tyres fall off a cliff after ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}, ~${cliff.degradation_s_per_lap.toFixed(2)}s/lap) — that's ${mmss(cliffTime)} vs the ${mmss(fuelCap)} fuel window, so tyres run out of grip first. Box every ${mmss(cliffTime)} to stay ahead of the cliff.`,
         );
       } else {
         notes.push(
@@ -156,7 +156,7 @@ function buildPlan(
   );
   if (stops > 0) {
     notes.push(
-      `Box at ${pit_at_s.map(mmss).join(", ")} on the race clock — stints of ${stints.map((s) => mmss(s.duration_s)).join(", ")}, none over the ${cap_s}s cap.`,
+      `Stints: ${stints.map((s) => mmss(s.duration_s)).join(", ")} (all under the ${mmss(cap_s)} cap). Box on the race clock at ${pit_at_s.map(mmss).join(", ")}.`,
     );
   }
 

@@ -139,8 +139,8 @@ const WORSE_301 = {
     promoted.changes[0].option.citations.includes("kb-diff-rear-thinner-005"),
   );
   check(
-    "promoted change carries the deterministic history note",
-    promoted.changes[0].option.history_note === "Rated better here last time — ranked up.",
+    "promoted change carries the deterministic history note (small-sample qualified)",
+    promoted.changes[0].option.history_note === "Rated better here last time (small sample) — ranked up.",
     promoted.changes[0].option.history_note,
   );
 
@@ -190,8 +190,8 @@ const WORSE_301 = {
     mixed.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
   );
   check(
-    "mixed history carries the tally note",
-    mixed.changes[0].option.history_note === "Tried here before: 1 better / 0 same / 1 worse.",
+    "mixed history carries the tally note (small-sample qualified)",
+    mixed.changes[0].option.history_note === "Tried here before (small sample): 1 better / 0 same / 1 worse.",
     mixed.changes[0].option.history_note,
   );
 }

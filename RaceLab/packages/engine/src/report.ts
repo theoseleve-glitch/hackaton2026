@@ -215,8 +215,14 @@ function buildRationale(bundle: ContextBundle, rule: KBRule): string {
   if (history.length > 0) {
     const better = history.filter((h) => h.outcome === "better").length;
     const worse = history.filter((h) => h.outcome === "worse").length;
+    // D2: evidence-strength tag — distinguish a 10–0 record from a 2–1 one, and
+    // be honest when the sample is thin (<3 rated). Pure, narrative-only.
+    let strength = "";
+    if (better >= 3 && worse === 0) strength = " Strong track record.";
+    else if (better === worse) strength = " Mixed track record.";
+    const sampleTag = history.length < 3 ? " (small sample)" : "";
     parts.push(
-      `Your log in similar conditions: ${better} run${better === 1 ? "" : "s"} rated better, ${worse} worse, of ${history.length} rated.`,
+      `Your log in similar conditions: ${better} run${better === 1 ? "" : "s"} rated better, ${worse} worse, of ${history.length} rated${sampleTag}.${strength}`,
     );
   } else {
     parts.push("No rated runs in similar conditions yet — rate this run afterwards and the next report gets smarter.");

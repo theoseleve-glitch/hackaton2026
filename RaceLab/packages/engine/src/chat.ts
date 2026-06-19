@@ -243,6 +243,7 @@ export class RaceEngineerChat {
     return [
       `${lead}${planTag}`,
       `🔧 ${o.change}`,
+      ...(o.magnitude ? [`   how much: ${o.magnitude}`] : []),
       `   why: ${o.mechanism}`,
       ...(o.history_note ? [`   📒 history: ${o.history_note}`] : []),
       `   revert: ${o.revert}  ·  confidence: ${o.confidence}  ·  source: ${o.citations.join(", ")}`,

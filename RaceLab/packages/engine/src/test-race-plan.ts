@@ -62,13 +62,13 @@ function dryRuns(): SelectedRunSummary[] {
     plan.readiness.join(" | "),
   );
   check(
-    "readiness names the best avg lap and its run/date",
-    plan.readiness.some((l) => l.includes("35.2s") && l.includes("2026-06-09")),
+    "readiness names the best avg lap (2dp) and its run/date",
+    plan.readiness.some((l) => l.includes("35.20s") && l.includes("2026-06-09")),
     plan.readiness.join(" | "),
   );
   check(
-    "readiness coverage line counts runs and distinct grips",
-    plan.readiness.some((l) => l.includes("2 runs considered, grips: medium, high")),
+    "readiness coverage line signals data quality + counts runs/grips",
+    plan.readiness.some((l) => l.includes("Limited data: 2 runs on grips medium, high")),
     plan.readiness.join(" | "),
   );
   check("race_avg_lap_s picks the minimum avg over selected runs", plan.race_avg_lap_s === 35.2, String(plan.race_avg_lap_s));
@@ -104,7 +104,7 @@ function dryRuns(): SelectedRunSummary[] {
   const plan = buildRacePlan(bundle(), runs, RACE, undefined, data);
   check("undefined forecast → race_day plan without condition shifts", /RACE DAY/.test(plan.report.conditions_echo));
   check("no avg laps → race_avg_lap_s undefined", plan.race_avg_lap_s === undefined, String(plan.race_avg_lap_s));
-  check("single run coverage line is singular", plan.readiness.some((l) => l.includes("1 run considered, grips: medium")), plan.readiness.join(" | "));
+  check("single run coverage line is singular + Single-data quality", plan.readiness.some((l) => l.includes("Single data: 1 run on grips medium")), plan.readiness.join(" | "));
 }
 
 // 5. A symptom followed chronologically by a 'better' run is NOT unresolved
@@ -140,6 +140,39 @@ function dryRuns(): SelectedRunSummary[] {
   const a = JSON.stringify(buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 32, rain_risk_pct: 70 }, data));
   const b = JSON.stringify(buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 32, rain_risk_pct: 70 }, data));
   check("plan is deterministic", a === b);
+}
+
+// 9. Planner clarity invariants (locks B1/B2)
+{
+  // +5°C hotter forecast (24 avg → 29) → conditions_shift pairs a mechanism clause.
+  const hotter = buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 29 }, data);
+  check(
+    "B1: hotter conditions_shift includes a mechanism clause (grip/traction/brake)",
+    hotter.conditions_shift.some((l) => /hotter/.test(l) && /grip|traction|brak/i.test(l)),
+    hotter.conditions_shift.join(" | "),
+  );
+  const wet = buildRacePlan(bundle(), dryRuns(), RACE, { rain_risk_pct: 70 }, data);
+  check(
+    "B1: rain conditions_shift tells you to brake earlier/straighter",
+    wet.conditions_shift.some((l) => /[Rr]ain risk/.test(l) && /brake earlier/i.test(l)),
+    wet.conditions_shift.join(" | "),
+  );
+  // <3 runs → readiness emits a Limited/Single data-quality line.
+  const thin = buildRacePlan(bundle(), dryRuns(), RACE, undefined, data); // 2 runs
+  check(
+    "B2: <3 runs emits a Limited/Single data-quality line",
+    thin.readiness.some((l) => /^(Limited|Single) data:/.test(l)),
+    thin.readiness.join(" | "),
+  );
+  // Unresolved symptom is listed BEFORE the best-pace line.
+  const ordered = buildRacePlan(bundle(), dryRuns(), RACE, undefined, data);
+  const unresolvedIdx = ordered.readiness.findIndex((l) => l.includes("Unresolved"));
+  const bestIdx = ordered.readiness.findIndex((l) => l.includes("Best average lap"));
+  check(
+    "B2: unresolved symptom precedes the best-pace line",
+    unresolvedIdx >= 0 && bestIdx >= 0 && unresolvedIdx < bestIdx,
+    `unresolved@${unresolvedIdx} best@${bestIdx} | ${ordered.readiness.join(" | ")}`,
+  );
 }
 
 if (failures > 0) {

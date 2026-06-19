@@ -48,7 +48,7 @@ check("endurance: pit_after true on all stints but the last", ep.stints.slice(0,
 check("endurance: pit_at_s cumulative incl. prior pit loss = 350,725,1100,1475", JSON.stringify(ep.pit_at_s) === "[350,725,1100,1475]", ep.pit_at_s.join(","));
 check("endurance: total 49 laps x 35 + 4 stops x 25 = 1815s", ep.total_time_s === 1815, `${ep.total_time_s}`);
 check("endurance: fuel decides, no cliff reported", ep.pit_driver === "fuel" && ep.cliff_lap === undefined);
-check("endurance: notes speak pilot time — tank ~7:00, boxing every 6:25, 35s margin", ep.notes.some((n) => n.includes("7:00")) && ep.notes.some((n) => n.includes("6:25")) && ep.notes.some((n) => n.includes("35s fuel margin")), ep.notes.join(" | "));
+check("endurance: notes speak pilot time — tank ~7:00, boxing every 6:25, 35s safety reserve", ep.notes.some((n) => n.includes("7:00")) && ep.notes.some((n) => n.includes("6:25")) && ep.notes.some((n) => n.includes("35s safety reserve")), ep.notes.join(" | "));
 check("endurance: notes total the pit loss (4 x 25s = 1:40)", ep.notes.some((n) => n.includes("1:40")), ep.notes.join(" | "));
 check("endurance: notes give the race-clock box moments", ep.notes.some((n) => n.includes("5:50") && n.includes("24:35")), ep.notes.join(" | "));
 
@@ -100,12 +100,32 @@ const cp = computePitPlan({ ...enduro, lap_times: cliffLaps });
 check("cliff plan: tyre_cliff drives, cliff_lap 8, stint_max_s 280", cp.pit_driver === "tyre_cliff" && cp.cliff_lap === 8 && cp.stint_max_s === 280, `${cp.pit_driver}/${cp.cliff_lap}/${cp.stint_max_s}`);
 check("cliff plan: 5 stops, six 280s stints, total 1805s", cp.stops === 5 && durationsOf(cp) === "280,280,280,280,280,280" && cp.total_time_s === 1805, `${cp.stops}/${durationsOf(cp)}/${cp.total_time_s}`);
 check("cliff plan: pit_at_s = 280,585,890,1195,1500", JSON.stringify(cp.pit_at_s) === "[280,585,890,1195,1500]", cp.pit_at_s.join(","));
-check("cliff plan: notes say the tyres, not fuel, decide", cp.notes.some((n) => n.includes("tyres, not fuel, decide the pits")), cp.notes.join(" | "));
+check("cliff plan: notes quantify cliff time vs fuel window, tyres decide", cp.notes.some((n) => n.includes("tyres run out of grip first") && n.includes("4:40") && n.includes("6:25")), cp.notes.join(" | "));
 check("cliff plan: cliff outside the fuel window leaves fuel in charge", (() => {
   const lateCliff = [36.8, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 36.2, 37.2, 38.2];
   const p = computePitPlan({ ...enduro, lap_times: lateCliff });
   return p.pit_driver === "fuel" && p.cliff_lap === 14 && p.stint_max_s === 385;
 })());
+
+// — text-clarity invariants (locks A1/A2/A3) ────────────────────────────────
+// A1: the margin note reads "safety reserve", never the legacy "fuel margin".
+check(
+  "A1: margin note uses 'safety reserve', not legacy 'fuel margin'",
+  ep.notes.some((n) => n.includes("safety reserve")) && !ep.notes.some((n) => /keeps a .* fuel margin/.test(n)),
+  ep.notes.join(" | "),
+);
+// A2: the cliff note is a time-vs-time comparison — BOTH mmss(cliffTime) and mmss(fuelCap).
+check(
+  "A2: cliff note compares cliff time vs fuel window (time-vs-time)",
+  cp.notes.some((n) => n.includes("4:40") && n.includes("6:25") && n.includes("vs")),
+  cp.notes.join(" | "),
+);
+// A3: the box note leads with stint durations before the race-clock box moments.
+check(
+  "A3: box note lists stint durations under the cap",
+  ep.notes.some((n) => n.startsWith("Stints:") && n.includes("under the") && n.includes("cap")),
+  ep.notes.join(" | "),
+);
 
 // — stretch options (hand-computed): 21-min race, margin 70s -> cap 350s
 //   (10 laps inside). clock(L) = 35L + (ceil(L/10)-1)*25: L=33: 1155 + 75

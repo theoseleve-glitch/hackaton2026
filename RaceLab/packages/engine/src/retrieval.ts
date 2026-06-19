@@ -30,6 +30,15 @@ export function retrieve(
   const presentSymptoms = new Set(bundle.feedback.tags.map((t) => t.symptom));
   const trackConditions = new Set(bundle.track.conditions);
 
+  // E1 (severity signal): how many times each symptom was reported. A symptom
+  // tagged across several phases/runs ("understeer, understeer, understeer") is
+  // more severe — rules that address it earn a small, bounded, integer boost so
+  // the engine prioritizes the persistent problem. Deterministic, no RNG/clock.
+  const symptomFreq = new Map<string, number>();
+  for (const tag of bundle.feedback.tags) {
+    symptomFreq.set(tag.symptom, (symptomFreq.get(tag.symptom) ?? 0) + 1);
+  }
+
   const scored: ScoredRule[] = [];
   for (const rule of rules) {
     // chassis scope filter: rule scope must intersect template scope
@@ -49,6 +58,18 @@ export function retrieve(
       }
     }
     if (score === 0) continue; // rule does not address any reported symptom
+
+    // E1: per DISTINCT symptom this rule addresses that was reported >1×, add a
+    // bounded integer (max +2 each, i.e. capped at "reported 3+ times").
+    const boostedSymptoms = new Set<string>();
+    for (const addr of rule.addresses) {
+      if (boostedSymptoms.has(addr.symptom)) continue;
+      const freq = symptomFreq.get(addr.symptom) ?? 0;
+      if (freq > 1) {
+        score += Math.min(freq - 1, 2);
+        boostedSymptoms.add(addr.symptom);
+      }
+    }
 
     for (const c of rule.conditions.amplified_on) if (trackConditions.has(c)) score += 1;
     for (const c of rule.conditions.reduced_on) if (trackConditions.has(c)) score -= 2;

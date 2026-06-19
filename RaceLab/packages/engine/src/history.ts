@@ -63,13 +63,15 @@ export function historyTier(h: RuleHistory | null | undefined): -1 | 0 | 1 {
 
 /** Deterministic template for the card text — never freeform. */
 export function historyNote(h: RuleHistory): string {
+  // D2: a small-sample qualifier so one rating isn't read as a verdict.
+  const sampleTag = h.better + h.same + h.worse < 3 ? " (small sample)" : "";
   if (h.net < 0) {
-    return "Rated worse here last time — ranked below untested options.";
+    return `Rated worse here last time${sampleTag} — ranked below untested options.`;
   }
   if (h.net > 0) {
-    return "Rated better here last time — ranked up.";
+    return `Rated better here last time${sampleTag} — ranked up.`;
   }
-  return `Tried here before: ${h.better} better / ${h.same} same / ${h.worse} worse.`;
+  return `Tried here before${sampleTag}: ${h.better} better / ${h.same} same / ${h.worse} worse.`;
 }
 
 /** Build engine history rows from schema learning tuples, KEEPING the rule-id
