@@ -12,6 +12,8 @@ export {
   FORECAST_HOURLY,
   ARCHIVE_HOURLY,
   HOURLY_NUMERIC_FIELDS,
+  DEFAULT_WEATHER_BASE_URLS,
+  DEFAULT_WEATHER_TIMEOUT_MS,
   buildForecastUrl,
   buildArchiveUrl,
   fetchOpenMeteo,
@@ -24,6 +26,8 @@ export {
 export type {
   ForecastOpts,
   IsoDateRange,
+  WeatherBaseUrls,
+  FetchWeatherConfig,
   FetchLike,
   FetchResponseLike,
   OpenMeteoHourly,

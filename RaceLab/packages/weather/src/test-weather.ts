@@ -136,6 +136,20 @@ console.log("\n— client: URL construction —");
   );
   check("forecast hourly list includes precipitation_probability", FORECAST_HOURLY.includes("precipitation_probability"));
   check("archive hourly list EXCLUDES precipitation_probability", !ARCHIVE_HOURLY.includes("precipitation_probability"));
+  // injectable base host (mock / future commercial endpoint) — swaps only the origin,
+  // leaving the query contract byte-identical.
+  check(
+    "buildForecastUrl honors an injected base (only the host swaps)",
+    buildForecastUrl(GPS, { past_days: 1 }, "https://mock.test/fc") ===
+      "https://mock.test/fc?latitude=45.18&longitude=5.72&hourly=temperature_2m,relative_humidity_2m,surface_pressure,precipitation,precipitation_probability,cloud_cover,wind_speed_10m,wind_direction_10m,weather_code&timezone=UTC&past_days=1",
+    buildForecastUrl(GPS, { past_days: 1 }, "https://mock.test/fc"),
+  );
+  check(
+    "buildArchiveUrl honors an injected base (only the host swaps)",
+    buildArchiveUrl(GPS, { start_date: "2026-06-01", end_date: "2026-06-01" }, "https://mock.test/ar") ===
+      "https://mock.test/ar?latitude=45.18&longitude=5.72&start_date=2026-06-01&end_date=2026-06-01&hourly=temperature_2m,relative_humidity_2m,surface_pressure,precipitation,cloud_cover,wind_speed_10m,wind_direction_10m,weather_code&timezone=UTC",
+    buildArchiveUrl(GPS, { start_date: "2026-06-01", end_date: "2026-06-01" }, "https://mock.test/ar"),
+  );
 }
 
 // ═══ payload validation ══════════════════════════════════════════════════════
@@ -191,6 +205,17 @@ console.log("\n— client: fetch wrappers —");
   const { fn: afn } = countingFetch(archiveFixtureJson);
   const aok = await fetchArchive(afn, GPS, { start_date: "2026-06-01", end_date: "2026-06-01" });
   check("fetchArchive happy path", aok.ok && aok.data.hourly.time.length === 24);
+  // cfg.baseUrls threads end-to-end: the URL the fetch fn actually receives starts
+  // at the injected host (so a mock server / future commercial endpoint is reachable
+  // without rebuilding URLs at the call site).
+  let seenFcUrl = "";
+  const spyFc: FetchLike = async (u) => { seenFcUrl = u; return { ok: true, status: 200, json: async () => forecastFixtureJson }; };
+  await fetchForecast(spyFc, GPS, undefined, { baseUrls: { forecast: "https://mock.test/fc", archive: "https://mock.test/ar" } });
+  check("fetchForecast cfg.baseUrls reaches the fetch fn", seenFcUrl.startsWith("https://mock.test/fc?latitude="));
+  let seenArUrl = "";
+  const spyAr: FetchLike = async (u) => { seenArUrl = u; return { ok: true, status: 200, json: async () => archiveFixtureJson }; };
+  await fetchArchive(spyAr, GPS, { start_date: "2026-06-01", end_date: "2026-06-01" }, { baseUrls: { forecast: "https://mock.test/fc", archive: "https://mock.test/ar" } });
+  check("fetchArchive cfg.baseUrls reaches the fetch fn", seenArUrl.startsWith("https://mock.test/ar?latitude="));
 }
 
 // ═══ WMO sky mapping ═════════════════════════════════════════════════════════

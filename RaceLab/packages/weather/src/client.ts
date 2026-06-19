@@ -48,18 +48,31 @@ export interface IsoDateRange {
   end_date: IsoDate; //   "YYYY-MM-DD", inclusive
 }
 
-export function buildForecastUrl(gps: Gps, opts?: ForecastOpts): string {
+/** Open-Meteo endpoint bases. Injectable (mirrors speedhive's baseUrls) so tests
+ *  can point at a mock host and — once William makes the Open-Meteo licensing call
+ *  (human-gated) — production can swap to a commercial endpoint without touching
+ *  call sites. Defaults to the public free hosts. */
+export interface WeatherBaseUrls {
+  forecast: string;
+  archive: string;
+}
+export const DEFAULT_WEATHER_BASE_URLS: WeatherBaseUrls = {
+  forecast: FORECAST_BASE,
+  archive: ARCHIVE_BASE,
+};
+
+export function buildForecastUrl(gps: Gps, opts?: ForecastOpts, base: string = FORECAST_BASE): string {
   let url =
-    `${FORECAST_BASE}?latitude=${String(gps.lat)}&longitude=${String(gps.lon)}` +
+    `${base}?latitude=${String(gps.lat)}&longitude=${String(gps.lon)}` +
     `&hourly=${FORECAST_HOURLY}&timezone=UTC`;
   if (opts?.past_days !== undefined) url += `&past_days=${String(opts.past_days)}`;
   if (opts?.forecast_days !== undefined) url += `&forecast_days=${String(opts.forecast_days)}`;
   return url;
 }
 
-export function buildArchiveUrl(gps: Gps, range: IsoDateRange): string {
+export function buildArchiveUrl(gps: Gps, range: IsoDateRange, base: string = ARCHIVE_BASE): string {
   return (
-    `${ARCHIVE_BASE}?latitude=${String(gps.lat)}&longitude=${String(gps.lon)}` +
+    `${base}?latitude=${String(gps.lat)}&longitude=${String(gps.lon)}` +
     `&start_date=${range.start_date}&end_date=${range.end_date}` +
     `&hourly=${ARCHIVE_HOURLY}&timezone=UTC`
   );
@@ -241,18 +254,31 @@ export async function fetchOpenMeteo(
   return { ok: true, data: checked.data };
 }
 
+/** Per-call overrides for the two fetch wrappers. All optional, all defaulted —
+ *  existing callers stay untouched. `baseUrls` lets a test point at a mock host
+ *  (or a future commercial Open-Meteo endpoint, once human-gated) without rebuilding
+ *  the URL by hand; `timeoutMs` overrides the per-request ceiling. */
+export interface FetchWeatherConfig {
+  baseUrls?: WeatherBaseUrls;
+  timeoutMs?: number;
+}
+
 export function fetchForecast(
   fetchFn: FetchLike,
   gps: Gps,
   opts?: ForecastOpts,
+  cfg?: FetchWeatherConfig,
 ): Promise<FetchWeatherResult> {
-  return fetchOpenMeteo(fetchFn, buildForecastUrl(gps, opts));
+  const base = cfg?.baseUrls?.forecast ?? FORECAST_BASE;
+  return fetchOpenMeteo(fetchFn, buildForecastUrl(gps, opts, base), cfg?.timeoutMs);
 }
 
 export function fetchArchive(
   fetchFn: FetchLike,
   gps: Gps,
   range: IsoDateRange,
+  cfg?: FetchWeatherConfig,
 ): Promise<FetchWeatherResult> {
-  return fetchOpenMeteo(fetchFn, buildArchiveUrl(gps, range));
+  const base = cfg?.baseUrls?.archive ?? ARCHIVE_BASE;
+  return fetchOpenMeteo(fetchFn, buildArchiveUrl(gps, range, base), cfg?.timeoutMs);
 }
