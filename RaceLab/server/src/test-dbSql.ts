@@ -52,6 +52,11 @@ console.log("— db SQL contract (owner-scoping + tables + isoOf) —");
   check("recordTrialStart: ON CONFLICT (id) DO UPDATE + COALESCE first-seen", /ON CONFLICT \(id\) DO UPDATE/.test(c.sql) && /COALESCE\(users\.trial_started_at/.test(c.sql));
   check("recordTrialStart: RETURNING trial_started_at", /RETURNING trial_started_at/.test(c.sql));
   check("recordTrialStart: normalizes pg-TEXT result to ISO", got === ISO_OF_PG);
+  check("recordTrialStart: tombstone guard folded into the statement (no TOCTOU)", /WHERE NOT EXISTS \(SELECT 1 FROM deletions WHERE user_id = \$1\)/.test(c.sql));
+  // a tombstoned id matches nothing -> 0 rows -> undefined (handler maps to 409)
+  const recEmpty = recorder([]);
+  const blocked = await makeSqlDb(recEmpty.fn).recordTrialStart("user_X", "2026-06-01T00:00:00.000Z", NOW);
+  check("recordTrialStart: 0 rows (tombstoned) -> undefined", blocked === undefined);
 }
 
 // getSubscription — MUST read stripe_subscriptions (NOT the dropped legacy table)

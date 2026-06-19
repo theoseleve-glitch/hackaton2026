@@ -47,7 +47,13 @@ export async function trialStart(ctx: ServerCtx, req: HttpRequest): Promise<Http
     }
   }
 
-  await ctx.db.ensureUser(auth.user_id, server_time);
+  // recordTrialStart materializes the users row itself (INSERT ... ON CONFLICT) under
+  // a single-statement tombstone guard — so no separate ensureUser (which would be an
+  // unguarded resurrection vector if a DELETE raced the pre-check above). A `undefined`
+  // return means the id was tombstoned (the race the pre-check can't catch): refuse.
   const stored = await ctx.db.recordTrialStart(auth.user_id, claimed, server_time);
+  if (stored === undefined) {
+    return { status: 409, json: { error: "trial_unavailable_deleted", server_time } };
+  }
   return { status: 200, json: { ok: true, trial_started_at: stored, server_time } };
 }

@@ -48,7 +48,10 @@ export interface Db {
   ensureUser(user_id: string, now_iso: string): Promise<void>;
   /** FIRST-SEEN trial start: sets it only when null, always returns the stored
    *  value — later device claims can never move it. */
-  recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string>;
+  /** Records the first-seen trial start, tombstone-guarded in one statement.
+   *  Returns the stored first-seen ISO, or `undefined` when the id is tombstoned
+   *  (deleted) — the caller maps undefined to 409 (no second trial, ever). */
+  recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string | undefined>;
   getSubscription(user_id: string): Promise<SubscriptionRow | null>;
   /** Idempotent on (user_id, entry_id): duplicates count as skipped. */
   insertBackupEntries(
@@ -78,15 +81,22 @@ export function makeSqlDb(query: QueryFn): Db {
     },
 
     async recordTrialStart(user_id, started_at_iso, now_iso) {
+      // Tombstone guard folded INTO the statement (single read+write, no TOCTOU):
+      // INSERT ... SELECT ... WHERE NOT EXISTS (deletions) means a deleted id never
+      // resurrects even if a DELETE interleaves after the handler's pre-check, AND
+      // any future direct caller is protected at the db layer (defense in depth).
+      // A tombstoned id matches nothing in the SELECT, so 0 rows return -> undefined,
+      // which the handler maps to 409.
       const { rows } = await query(
         `INSERT INTO users (id, created_at, trial_started_at)
-         VALUES ($1, $3::timestamptz, $2::timestamptz)
+         SELECT $1, $3::timestamptz, $2::timestamptz
+         WHERE NOT EXISTS (SELECT 1 FROM deletions WHERE user_id = $1)
          ON CONFLICT (id) DO UPDATE
            SET trial_started_at = COALESCE(users.trial_started_at, EXCLUDED.trial_started_at)
          RETURNING trial_started_at`,
         [user_id, started_at_iso, now_iso],
       );
-      return isoOf(rows[0]?.trial_started_at);
+      return rows.length === 0 ? undefined : isoOf(rows[0]?.trial_started_at);
     },
 
     async getSubscription(user_id) {

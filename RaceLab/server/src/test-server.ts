@@ -38,7 +38,9 @@ class FakeDb implements Db {
       this.users.set(user_id, { created_at: now_iso, trial_started_at: null });
     }
   }
-  async recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string> {
+  async recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string | undefined> {
+    // mirror the SQL WHERE NOT EXISTS (deletions) guard: a tombstoned id resurrects nothing
+    if (this.deletions.has(user_id)) return undefined;
     let u = this.users.get(user_id);
     if (u === undefined) {
       u = { created_at: now_iso, trial_started_at: null };
@@ -222,6 +224,17 @@ console.log("\n— trial first-seen —");
   // a genuinely different id (fresh Clerk account) is unaffected
   const tOther = await hTomb(req("POST", "/api/trial/start", { token: "tok-B" }));
   check("trial: a different (un-tombstoned) id still gets its trial", tOther.status === 200 && tOther.json.ok === true);
+
+  // ── TOCTOU race: a DELETE lands AFTER the handler's isTombstoned pre-check but
+  // before the write. The single-statement SQL guard (here: the fake's deletions
+  // check) blocks the write and returns undefined; the handler must still 409 and
+  // NOT resurrect the user. ──
+  const dbRace = new FakeDb();
+  dbRace.deletions.set("user_A", NOW); // tombstone present (the raced delete)
+  dbRace.isTombstoned = async () => false; // but the pre-check sees it too late (race window)
+  const hRace = makeHandler(app({ db: dbRace, verifier, now: () => NOW }));
+  const tRace = await hRace(req("POST", "/api/trial/start", { token: "tok-A" }));
+  check("trial: TOCTOU race (guard blocks the write) -> 409, no resurrection", tRace.status === 409 && tRace.json.error === "trial_unavailable_deleted" && !dbRace.users.has("user_A"));
 }
 
 // ═══ subscription status ═════════════════════════════════════════════════════
