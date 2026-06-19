@@ -1,0 +1,578 @@
+{
+  "rh-raise-hand": {
+    "rule": {
+      "fr": "Lève la main avant chaque prise de parole, et attends. Retour en CM2, et la maîtresse t'a dans le viseur.",
+      "en": "Raise your hand before speaking and wait to be picked. Year 7 rules. The teacher hates you."
+    },
+    "decoys": [
+      {
+        "fr": "Touche ta tête avant chaque question, pour vérifier que l'idée est bien là.",
+        "en": "Tap your head before every question, checking the idea's still in there."
+      },
+      {
+        "fr": "Pouce en l'air après chaque phrase, conviction de vendeur de voitures d'occasion.",
+        "en": "Thumbs-up after every sentence, used-car-dealer levels of confidence."
+      },
+      {
+        "fr": "Pince-toi le bras pour t'empêcher de rire. La douleur, c'est ta seule défense.",
+        "en": "Pinch your own arm to kill every laugh. Pain is your lawyer now."
+      },
+      {
+        "fr": "Hausse les sourcils façon telenovela à chaque surprise.",
+        "en": "Raise your eyebrows, full telenovela, at every surprise."
+      },
+      {
+        "fr": "Lève l'index quand t'es d'accord, comme pour enchérir aux enchères.",
+        "en": "Raise one finger when you agree, like you're bidding at an auction."
+      },
+      {
+        "fr": "Ferme les yeux à chaque question qu'on te pose. La réponse est à l'intérieur.",
+        "en": "Close your eyes whenever you're asked a question. The answer is within."
+      },
+      {
+        "fr": "Touche ton genou avant de répondre, comme un rituel de sportif blessé.",
+        "en": "Touch your knee before answering, injured-athlete superstition style."
+      }
+    ]
+  },
+  "rh-mirror-detective": {
+    "rule": {
+      "fr": "Copie la posture du détective en différé : bras, jambes, inclinaison. T'es son ombre, pas son fan.",
+      "en": "Copy the detective's posture on a delay: arms, legs, lean. You're their shadow, not their fan."
+    },
+    "decoys": [
+      {
+        "fr": "Copie la posture de ton voisin de gauche, sans jamais l'avouer.",
+        "en": "Mirror whoever sits on your left and deny it to the grave."
+      },
+      {
+        "fr": "Souris dès que quelqu'un parle au détective. Sourire d'indic, pas d'ami.",
+        "en": "Smile whenever anyone talks to the detective. Snitch smile, not a warm one."
+      },
+      {
+        "fr": "Fais un clin d'œil à la fin de chaque phrase. Oui, ça devient louche très vite.",
+        "en": "Wink at the end of every sentence. Yes, it gets creepy fast. Good."
+      },
+      {
+        "fr": "Penche-toi en arrière quand on te parle, comme si chaque question sentait l'ail.",
+        "en": "Lean back whenever someone talks to you, like every question has garlic breath."
+      },
+      {
+        "fr": "Tiens ton menton pendant que les autres parlent, l'air de préparer leur procès.",
+        "en": "Hold your chin while others talk, like you're drafting their indictment."
+      },
+      {
+        "fr": "Garde toujours le dos à moitié tourné au détective. Le respect, c'est de face.",
+        "en": "Keep your back half-turned to the detective at all times. Respect is face-on."
+      },
+      {
+        "fr": "Mains sur les hanches dès que t'es debout, comme si t'allais virer quelqu'un.",
+        "en": "Hands on hips whenever you stand, like you're about to fire somebody."
+      }
+    ]
+  },
+  "rh-cover-laugh": {
+    "rule": {
+      "fr": "Couvre ta bouche à deux mains dès que tu ris, comme si t'avais balancé un secret d'État.",
+      "en": "Cover your mouth with both hands when you laugh, like you just leaked state secrets."
+    },
+    "decoys": [
+      {
+        "fr": "Gratte-toi le nez quand quelqu'un rit. Discret. Délit d'initié.",
+        "en": "Scratch your nose whenever someone laughs. Quiet. Insider trading."
+      },
+      {
+        "fr": "Regarde le plafond quand tu ris, comme si Dieu venait de faire la blague.",
+        "en": "Look at the ceiling when you laugh, like God himself told the joke."
+      },
+      {
+        "fr": "Tape ta cuisse quand tu ris, façon daron devant un sketch de 1987.",
+        "en": "Slap your thigh when you laugh, like a dad rewatching a 1987 sitcom."
+      },
+      {
+        "fr": "Ris en silence total, épaules qui tremblent. Fou rire en milieu hostile.",
+        "en": "Laugh in dead silence, shoulders only. Giggling in enemy territory."
+      },
+      {
+        "fr": "Fais un signe de paix à quiconque te regarde plus de deux secondes.",
+        "en": "Flash a peace sign at anyone who looks at you for more than two seconds."
+      },
+      {
+        "fr": "Frotte-toi les mains à chaque question, comme si l'arnaque prenait forme.",
+        "en": "Rub your hands at every question, like the scam is finally coming together."
+      },
+      {
+        "fr": "Interdiction de toucher ton visage. Même pour une larme. Surtout pour une larme.",
+        "en": "Never touch your face. Not even for a tear. Especially not for a tear."
+      }
+    ]
+  },
+  "rh-thumbs-up": {
+    "rule": {
+      "fr": "Conclus chaque phrase d'un pouce en l'air. L'aplomb d'un type qui vient de vendre ta voiture.",
+      "en": "End every sentence with a thumbs-up, confident like a man who just sold your car without asking."
+    },
+    "decoys": [
+      {
+        "fr": "Fais un clin d'œil après chaque phrase, même les tristes. Surtout les tristes.",
+        "en": "Wink after every sentence, even the sad ones. Especially the sad ones."
+      },
+      {
+        "fr": "Montre tes paumes à chaque question. Rien dans les mains, tout dans le mytho.",
+        "en": "Show your open palms at every question. Nothing in the hands, all in the lies."
+      },
+      {
+        "fr": "Lève la main avant de parler et attends qu'on daigne te voir.",
+        "en": "Raise your hand before speaking and wait to be acknowledged."
+      },
+      {
+        "fr": "Fais OK avec les doigts quand on te remercie, comme un plongeur qui va remonter.",
+        "en": "Flash an OK sign whenever you're thanked, like a diver about to surface."
+      },
+      {
+        "fr": "Mets des guillemets avec les doigts sur chaque adjectif. Chaque. Adjectif.",
+        "en": "Air-quote every adjective with your fingers. Every. Single. One."
+      },
+      {
+        "fr": "Étire-toi dès qu'un chiffre est prononcé, comme si les maths te fatiguaient.",
+        "en": "Stretch whenever a number is said, like maths physically exhausts you."
+      },
+      {
+        "fr": "Tapote deux fois ta cuisse avant chaque prénom, comme pour appeler un chien.",
+        "en": "Tap your thigh twice before any name, like you're calling a dog over."
+      }
+    ]
+  },
+  "rh-wrist-watch": {
+    "rule": {
+      "fr": "Regarde ton poignet avant chaque réponse, montre ou pas. T'as un avion à rater.",
+      "en": "Check your wrist before every answer, watch or no watch. You have somewhere better to be."
+    },
+    "decoys": [
+      {
+        "fr": "Check un poing imaginaire après chaque blague. Ton seul pote est invisible.",
+        "en": "Fist-bump the air after every joke. Your only friend is imaginary."
+      },
+      {
+        "fr": "Touche ton genou avant de répondre. Le genou sait.",
+        "en": "Touch your knee before answering. The knee knows."
+      },
+      {
+        "fr": "Racle-toi la gorge avant chaque prise de parole, comme un notaire qui ouvre le testament.",
+        "en": "Clear your throat before speaking, like a lawyer about to read the will."
+      },
+      {
+        "fr": "Regarde la porte avant de répondre. Repère ta sortie. Toujours.",
+        "en": "Glance at the door before answering. Always know your exit."
+      },
+      {
+        "fr": "Ferme les yeux quand on te pose une question, le temps d'inventer ta version.",
+        "en": "Close your eyes at every question, just long enough to invent your version."
+      },
+      {
+        "fr": "Fais un petit coucou de la main avant chaque question. Service client.",
+        "en": "Give a tiny wave before asking anything. Customer-service energy."
+      },
+      {
+        "fr": "Inspire fort avant de répondre, comme si la question coûtait cher.",
+        "en": "Take a loud breath before answering, like the question costs you money."
+      }
+    ]
+  },
+  "rh-chin-philosopher": {
+    "rule": {
+      "fr": "Tiens ton menton dès que quelqu'un parle, l'air de juger sa thèse. Tu valides rien.",
+      "en": "Hold your chin whenever someone else talks, like their story is a thesis defence. It's failing."
+    },
+    "decoys": [
+      {
+        "fr": "Croise les mains dès que tu finis de parler, comme un banquier qui refuse un prêt.",
+        "en": "Fold your hands when you finish talking, banker-rejecting-your-loan style."
+      },
+      {
+        "fr": "Touche ton coude à chaque mot « détective ». Personne saura jamais pourquoi.",
+        "en": "Touch your elbow every time anyone says \"detective\". No one will ever know why."
+      },
+      {
+        "fr": "Regarde tes chaussures quand ton prénom sort. Elles, elles te jugent pas.",
+        "en": "Stare at your shoes when your name comes up. The shoes don't judge you."
+      },
+      {
+        "fr": "Fronce les sourcils à chaque question, comme si on insultait ta famille.",
+        "en": "Frown at every question like it insulted your whole family."
+      },
+      {
+        "fr": "Hausse les épaules à chaque chiffre. Les maths, c'est une opinion.",
+        "en": "Shrug at every number. Maths is just an opinion."
+      },
+      {
+        "fr": "Tapote ta tempe avant chaque avis, pour montrer d'où ça sort.",
+        "en": "Tap your temple before every opinion, to show where the genius lives."
+      },
+      {
+        "fr": "Croise les doigts dès qu'on parle de toi. T'as des choses à te reprocher.",
+        "en": "Cross your fingers whenever you're mentioned. You know what you did."
+      }
+    ]
+  },
+  "rh-salute-detective": {
+    "rule": {
+      "fr": "Salut militaire à chaque prénom de détective. C'est ton supérieur, et tu vas le trahir.",
+      "en": "Snap a military salute at every detective's name. They outrank you. You're still lying to them."
+    },
+    "decoys": [
+      {
+        "fr": "Pointe le sol quand t'es pas d'accord, comme si la vérité était enterrée là.",
+        "en": "Point at the floor when you disagree, like the truth is buried right there."
+      },
+      {
+        "fr": "Main sur le cœur à chaque « je te jure ». Plus c'est faux, plus t'appuies.",
+        "en": "Hand on heart every time you swear it's true. The bigger the lie, the harder you press."
+      },
+      {
+        "fr": "Lève ton verre, même vide, quand quelqu'un dit « détective ».",
+        "en": "Raise your cup, even empty, whenever anyone says \"detective\"."
+      },
+      {
+        "fr": "Tends les bras en croix à chaque surprise, façon gardien qui prend un but.",
+        "en": "Spread your arms wide at every surprise, like a keeper who just got chipped."
+      },
+      {
+        "fr": "Lève-toi à moitié quand quelqu'un dit « non », puis rassieds-toi, gêné.",
+        "en": "Half-stand whenever someone says \"no\", then sit back down, ashamed."
+      },
+      {
+        "fr": "Pointe-toi du pouce quand tu parles de toi. Quelqu'un doit le faire.",
+        "en": "Jab a thumb at yourself when you talk about yourself. Somebody has to."
+      },
+      {
+        "fr": "Fais une révérence à quiconque entre dans la pièce. Même s'il revient des toilettes.",
+        "en": "Bow to anyone entering the room. Yes, even back from the toilet."
+      }
+    ]
+  },
+  "rh-air-quotes": {
+    "rule": {
+      "fr": "Guillemets avec les doigts sur chaque adjectif. Tout est « relatif ». Tout est « négociable ».",
+      "en": "Finger air-quotes on every adjective. Everything is \"fine\". Everyone is \"happy\"."
+    },
+    "decoys": [
+      {
+        "fr": "Guillemets uniquement quand tu cites quelqu'un, mot pour mot, avec le ton.",
+        "en": "Air-quote only direct quotes, word for word, with the voice."
+      },
+      {
+        "fr": "Lève le poing quand on est d'accord avec toi. Une victoire est une victoire.",
+        "en": "Raise a fist whenever someone agrees with you. A win is a win."
+      },
+      {
+        "fr": "Assieds-toi toujours au bord du siège, prêt à fuir ou à témoigner.",
+        "en": "Sit on the very edge of your seat, ready to flee or to testify."
+      },
+      {
+        "fr": "Garde une main dans la poche en toutes circonstances. Elle protège un secret.",
+        "en": "Keep one hand in your pocket at all times. It's guarding something."
+      },
+      {
+        "fr": "Coudes collés au corps quand tu parles, comme dans un avion low cost.",
+        "en": "Elbows pinned to your sides while talking, budget-airline middle seat."
+      },
+      {
+        "fr": "Compte sur tes doigts dès que tu listes, même pour deux trucs.",
+        "en": "Count on your fingers whenever you list anything. Even two things."
+      },
+      {
+        "fr": "Tiens toujours un objet en main. Un homme avec un coussin a toujours un plan.",
+        "en": "Always hold an object. A person holding a cushion always has a plan."
+      }
+    ]
+  },
+  "rh-no-backrest": {
+    "rule": {
+      "fr": "Ton dos ne touche jamais un dossier, un mur, un coussin. La détente, c'est pour les innocents.",
+      "en": "Your back never touches a backrest, wall or cushion. Relaxing is for the innocent."
+    },
+    "decoys": [
+      {
+        "fr": "Lève-toi dès que le détective se lève. Par respect. Par peur, surtout.",
+        "en": "Stand whenever the detective stands. Out of respect. Mostly fear."
+      },
+      {
+        "fr": "Garde les deux pieds à plat au sol, vissés, comme à la douane.",
+        "en": "Keep both feet flat on the floor, planted, like you're at customs."
+      },
+      {
+        "fr": "Croise les jambes dès que tu t'assois, comme un psy qui facture l'heure.",
+        "en": "Cross your legs the second you sit, therapist-on-the-clock style."
+      },
+      {
+        "fr": "Talons décollés du sol quand t'es assis. Départ imminent.",
+        "en": "Heels off the floor whenever you sit. Ready to bolt."
+      },
+      {
+        "fr": "Penche la tête à chaque question, comme un chien qui entend « véto ».",
+        "en": "Tilt your head at every question, like a dog hearing the word \"vet\"."
+      },
+      {
+        "fr": "Fronce les sourcils pendant les histoires des autres. Aucune te convainc.",
+        "en": "Frown through other people's stories. None of them add up."
+      },
+      {
+        "fr": "Change de position dès que quelqu'un rit. Le confort attire les soupçons.",
+        "en": "Shift how you sit every time someone laughs. Comfort breeds suspicion."
+      }
+    ]
+  },
+  "rh-nose-scratch": {
+    "rule": {
+      "fr": "Gratte le bout de ton nez à chaque rire dans la pièce. Le bonheur des autres te démange.",
+      "en": "Scratch the tip of your nose every time anyone laughs. Other people's joy makes you itch."
+    },
+    "decoys": [
+      {
+        "fr": "Couvre ta bouche quand tu ris, comme si ton rire valait une amende.",
+        "en": "Cover your mouth when you laugh, like your laugh carries a fine."
+      },
+      {
+        "fr": "Articule en silence ce que disent les autres, en simultané. Flippant ? Oui.",
+        "en": "Silently mouth other people's words as they say them. Unsettling? Yes."
+      },
+      {
+        "fr": "Tape du pied dès qu'une conversation traîne. Ton temps vaut de l'or.",
+        "en": "Tap your foot when a conversation drags. Your time is billable."
+      },
+      {
+        "fr": "Tousse une fois à chaque « non ». Ton corps rejette le refus.",
+        "en": "Cough once at every \"no\". Your body rejects rejection."
+      },
+      {
+        "fr": "Recoiffe-toi dès qu'un téléphone sort. On sait jamais qui filme.",
+        "en": "Fix your hair the second a phone appears. You never know who's filming."
+      },
+      {
+        "fr": "Fais craquer tes doigts avant de te lever, comme avant un règlement de comptes.",
+        "en": "Crack your knuckles before standing up, like it's about to get personal."
+      },
+      {
+        "fr": "Roule des épaules à chaque silence. Quelqu'un doit briser la glace. Pas toi.",
+        "en": "Roll your shoulders in every silence. Someone should speak. Not you."
+      }
+    ]
+  },
+  "rh-ceiling-think": {
+    "rule": {
+      "fr": "Lève les yeux au plafond avant chaque réponse, comme si ton avocat était caché là-haut.",
+      "en": "Look up at the ceiling before every answer, like your lawyer is hiding up there."
+    },
+    "decoys": [
+      {
+        "fr": "Fixe tes chaussures avant de répondre. La réponse est en bas, quelque part.",
+        "en": "Stare at your shoes before answering. The answer is down there somewhere."
+      },
+      {
+        "fr": "Frotte-toi les yeux quand on répète une question. La fatigue du témoin.",
+        "en": "Rub your eyes whenever a question gets repeated. Witness fatigue."
+      },
+      {
+        "fr": "Cligne au ralenti quand on te fixe. Économise tes paupières.",
+        "en": "Blink in slow motion when stared at. Conserve the eyelids."
+      },
+      {
+        "fr": "Regarde ton poignet avant de répondre, montre ou pas.",
+        "en": "Check your wrist before every answer, watch or not."
+      },
+      {
+        "fr": "Main en visière pour chercher quelqu'un des yeux, façon vigie de pirates.",
+        "en": "Hand-visor whenever you scan the room, pirate-lookout style."
+      },
+      {
+        "fr": "Tape-toi le torse deux fois quand on te félicite. Champion du monde de rien.",
+        "en": "Thump your chest twice when praised. World champion of nothing."
+      },
+      {
+        "fr": "Regarde la fenêtre à chaque « je sais pas ». L'évasion se prépare.",
+        "en": "Look at the window every \"I don't know\". The escape plan is forming."
+      }
+    ]
+  },
+  "rh-thigh-tap-names": {
+    "rule": {
+      "fr": "Tapote deux fois ta cuisse avant chaque prénom, comme si tu rappelais un chien invisible.",
+      "en": "Tap your thigh twice before saying any name, like you're calling an invisible dog."
+    },
+    "decoys": [
+      {
+        "fr": "Épousette ton épaule après chaque bonne réponse. La modestie, connais pas.",
+        "en": "Brush your shoulder off after every good answer. Humility who?"
+      },
+      {
+        "fr": "Salut militaire à chaque prénom de détective prononcé.",
+        "en": "Military salute every time a detective's name is said."
+      },
+      {
+        "fr": "Touche ton coude quand tu parles d'un absent. On parle mal des absents ici.",
+        "en": "Touch your elbow when mentioning anyone absent. We slander the absent here."
+      },
+      {
+        "fr": "Trace des ronds dans l'air quand t'expliques. Ça aide personne. Continue.",
+        "en": "Draw circles in the air when explaining. It helps no one. Keep going."
+      },
+      {
+        "fr": "Compte tes arguments sur tes doigts, comme un avocat à 800 balles de l'heure.",
+        "en": "Count your points on your fingers, like a lawyer billing by the minute."
+      },
+      {
+        "fr": "Lève la main avant de parler. Attends rien. Personne t'interrogera.",
+        "en": "Raise your hand before speaking. Expect nothing. No one's calling on you."
+      },
+      {
+        "fr": "Claque des doigts quand tu te souviens d'un truc. Surtout d'un truc gênant.",
+        "en": "Snap your fingers when you remember something. Especially something incriminating."
+      }
+    ]
+  },
+  "rh-loud-stretch": {
+    "rule": {
+      "fr": "Étire-toi bruyamment, bras au ciel, à chaque chiffre prononcé. Les chiffres t'épuisent.",
+      "en": "Stretch loudly, arms to the sky, whenever a number is said. Numbers physically drain you."
+    },
+    "decoys": [
+      {
+        "fr": "Bâille poliment dès qu'on parle d'argent. T'en as trop pour t'intéresser.",
+        "en": "Yawn politely whenever money comes up. You have too much to care."
+      },
+      {
+        "fr": "Applaudis deux fois quand quelqu'un se lève. L'exploit du siècle.",
+        "en": "Clap twice whenever someone stands up. Achievement of the century."
+      },
+      {
+        "fr": "Pince tes doigts à chaque « un peu », comme un chef italien vexé.",
+        "en": "Pinch your fingers at every \"a little\", offended Italian chef style."
+      },
+      {
+        "fr": "Lève deux doigts quand tu donnes deux options. Pédagogie de daron.",
+        "en": "Hold up two fingers when offering two options. Dad-level pedagogy."
+      },
+      {
+        "fr": "Craque tes doigts avant chaque avis, comme si ton opinion allait cogner.",
+        "en": "Crack your knuckles before every opinion, like your take is about to throw hands."
+      },
+      {
+        "fr": "Masse-toi les tempes dès que ça devient sérieux. Le sérieux te donne mal.",
+        "en": "Massage your temples when things get serious. Seriousness hurts you."
+      },
+      {
+        "fr": "Tapote tes lèvres avant de donner un avis. Le suspense n'intéresse que toi.",
+        "en": "Tap your lips before giving an opinion. The suspense thrills only you."
+      }
+    ]
+  },
+  "rh-nod-detective": {
+    "rule": {
+      "fr": "Hoche la tête en continu quand un détective parle. Fan numéro un. Futur traître.",
+      "en": "Nod nonstop while a detective talks. Number one fan. Future traitor."
+    },
+    "decoys": [
+      {
+        "fr": "Ferme un œil quand tu cherches un souvenir. Ça vise mieux.",
+        "en": "Close one eye when digging for a memory. Better aim."
+      },
+      {
+        "fr": "Gratte ta nuque quand tu sèches. Le mensonge se prépare derrière.",
+        "en": "Scratch the back of your neck when stumped. The lie is loading."
+      },
+      {
+        "fr": "Regarde en haut à gauche avant chaque réponse, là où tu ranges tes mythos.",
+        "en": "Glance up and to the left before answering, where you store the fiction."
+      },
+      {
+        "fr": "Tiens ton menton quand un autre parle, l'air de noter ses erreurs.",
+        "en": "Hold your chin while others talk, mentally logging their mistakes."
+      },
+      {
+        "fr": "Fais non de la tête, tout doucement, quand un détective parle. Sabotage discret.",
+        "en": "Shake your head, very gently, whenever a detective talks. Quiet sabotage."
+      },
+      {
+        "fr": "Joins le bout de tes doigts, l'air calculateur, dès qu'on débat.",
+        "en": "Steeple your fingertips, looking calculating, whenever a debate starts."
+      },
+      {
+        "fr": "Prends des notes imaginaires pendant les débats. Le dossier s'épaissit.",
+        "en": "Scribble in an imaginary notebook during arguments. The file grows."
+      }
+    ]
+  },
+  "rh-superhero-hips": {
+    "rule": {
+      "fr": "Debout, mains sur les hanches, toujours. Super-héros d'un appartement de 30 m².",
+      "en": "Whenever you stand: hands on hips. Superhero of a one-bed flat."
+    },
+    "decoys": [
+      {
+        "fr": "Roulement de tambour sur tes genoux quand quelqu'un hésite. La pression monte.",
+        "en": "Drumroll on your knees whenever someone hesitates. Crank the pressure."
+      },
+      {
+        "fr": "Debout, bras croisés. Videur d'une boîte qui n'existe pas.",
+        "en": "When standing, arms crossed. Bouncer of a club that doesn't exist."
+      },
+      {
+        "fr": "Soulève un chapeau imaginaire après chaque bonne blague. L'élégance d'antan.",
+        "en": "Tip an imaginary hat after every good joke. Vintage class."
+      },
+      {
+        "fr": "Mets-toi sur la pointe des pieds quand t'attends une réponse. Le suspense te grandit.",
+        "en": "Go up on tiptoe while waiting for an answer. Suspense adds height."
+      },
+      {
+        "fr": "Mime une larme après chaque histoire touchante. L'émotion, version contrefaçon.",
+        "en": "Mime wiping a tear after touching stories. Counterfeit emotion."
+      },
+      {
+        "fr": "Reste debout tant que le détective est debout. Jamais plus bas que lui.",
+        "en": "Stand whenever the detective stands. Never be lower than the law."
+      },
+      {
+        "fr": "Tape deux fois dans tes mains quand quelqu'un se lève. Ça se fête.",
+        "en": "Clap twice when anyone stands up. Worth celebrating."
+      }
+    ]
+  },
+  "rh-fist-right-hand": {
+    "rule": {
+      "fr": "Main droite fermée en poing en permanence, l'air de rien. Elle tient le secret.",
+      "en": "Right hand balled in a casual fist at all times. It's holding the secret."
+    },
+    "decoys": [
+      {
+        "fr": "Fais tourner ton doigt « encore » après chaque anecdote. Personne veut la suite.",
+        "en": "Twirl an \"encore\" finger after every anecdote. Nobody wants more."
+      },
+      {
+        "fr": "Doigts croisés en permanence. Menteur prudent, menteur vivant.",
+        "en": "Fingers crossed at all times. Careful liars live longer."
+      },
+      {
+        "fr": "Ne touche jamais ton visage. Tes mains sont fichées.",
+        "en": "Never touch your face. Your hands are on file."
+      },
+      {
+        "fr": "Mains dans les poches dès que t'es debout. Décontracté. Suspect.",
+        "en": "Hands in your pockets whenever you stand. Casual. Suspicious."
+      },
+      {
+        "fr": "Téléphone main gauche uniquement. La droite a ses raisons.",
+        "en": "Phone in the left hand only. The right one has its reasons."
+      },
+      {
+        "fr": "Poing sur le cœur quand on te remercie, comme un gladiateur ému.",
+        "en": "Fist to your heart whenever thanked, like an emotional gladiator."
+      },
+      {
+        "fr": "Étouffe un bâillement dès qu'on te raconte une vie. La politesse a des limites.",
+        "en": "Stifle a yawn at every long story. Politeness has limits."
+      }
+    ]
+  }
+}
