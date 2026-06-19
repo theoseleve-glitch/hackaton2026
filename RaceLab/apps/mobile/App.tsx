@@ -12,6 +12,14 @@ import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { Overlay } from "./src/components/Overlay";
 import { TrialBanner } from "./src/components/TrialBanner";
 import { BrandLockup } from "./src/components/BrandMark";
+import {
+  TourProvider,
+  useTourTarget,
+  TOUR_STEPS,
+  TOUR_STEP_COUNT,
+  hasSeenTour,
+  markTourDone,
+} from "./src/components/Tour";
 import { initLang, useT } from "./src/i18n";
 import type { Phrase } from "./src/i18n";
 import { fetchRecentSessions } from "./src/speedhive";
@@ -56,6 +64,10 @@ function AppInner() {
     { created_at?: string; best_lap_s?: number; avg_lap_s?: number; laps_list?: number[] } | undefined
   >();
   const [shChecked, setShChecked] = useState(false);
+  // First-run coach-mark tour: index into TOUR_STEPS, or null when inactive.
+  // `tourChecked` guards the once-per-launch boot decision.
+  const [tourStep, setTourStep] = useState<number | null>(null);
+  const [tourChecked, setTourChecked] = useState(false);
 
   const { garage, updateGarage } = useGarage();
   const { logbook, updateLogbook } = useLogbook();
@@ -77,6 +89,45 @@ function AppInner() {
   const txt = useT();
   useEffect(() => {
     initLang();
+  }, []);
+
+  // --- First-run tour ------------------------------------------------------
+  // Start once, only after onboarding, only if the persisted flag is unset.
+  useEffect(() => {
+    if (tourChecked || !account || !account.onboarded) return;
+    setTourChecked(true);
+    void (async () => {
+      if (!(await hasSeenTour())) setTourStep(0);
+    })();
+  }, [tourChecked, account]);
+
+  // As a step shows, switch to its tab so the spotlight lands on the right
+  // screen. Welcome/Finale carry no tab and leave the current screen as-is.
+  useEffect(() => {
+    if (tourStep === null) return;
+    const target = TOUR_STEPS[tourStep]?.tab;
+    if (target) setTab(target);
+  }, [tourStep]);
+
+  const endTour = useCallback(() => {
+    setTourStep(null);
+    setTab("garage"); // ending always lands on Garage (the loop's start)
+    void markTourDone();
+  }, []);
+
+  const tourNext = useCallback(() => {
+    // last step (or any out-of-range) ends the tour; otherwise advance.
+    if (tourStep === null || tourStep >= TOUR_STEP_COUNT - 1) {
+      endTour();
+      return;
+    }
+    setTourStep(tourStep + 1);
+  }, [tourStep, endTour]);
+
+  const replayTour = useCallback(() => {
+    setShowSettings(false);
+    setTab("garage");
+    setTourStep(0);
   }, []);
 
   useEffect(() => {
@@ -123,6 +174,7 @@ function AppInner() {
   return (
     <SafeAreaView style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
+      <TourProvider step={tourStep} onNext={tourNext} onSkip={endTour}>
       <View style={styles.header}>
         <BrandLockup size={30} fontSize={20} />
         <View style={styles.headerRight}>
@@ -237,30 +289,57 @@ function AppInner() {
             setAccount={setAccount}
             logbook={logbook}
             onClose={() => setShowSettings(false)}
+            onReplayTour={replayTour}
           />
         </Overlay>
       </View>
 
       <View style={styles.tabbar}>
-        {TABS.map((t) => {
-          const active = tab === t.id;
-          return (
-            <Pressable
-              key={t.id}
-              style={styles.tab}
-              onPress={() => selectTab(t.id)}
-              accessibilityRole="tab"
-              accessibilityLabel={txt(t.label)}
-              accessibilityState={{ selected: active }}
-            >
-              {active && <View style={styles.tabIndicator} />}
-              <Text style={[styles.tabIcon, active && styles.tabActive]}>{t.icon}</Text>
-              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{txt(t.label)}</Text>
-            </Pressable>
-          );
-        })}
+        {TABS.map((t) => (
+          <TabButton
+            key={t.id}
+            id={t.id}
+            label={txt(t.label)}
+            icon={t.icon}
+            active={tab === t.id}
+            onPress={() => selectTab(t.id)}
+          />
+        ))}
       </View>
+      </TourProvider>
     </SafeAreaView>
+  );
+}
+
+/** One tab-bar button that also registers itself as a tour spotlight target. */
+function TabButton({
+  id,
+  label,
+  icon,
+  active,
+  onPress,
+}: {
+  id: Tab;
+  label: string;
+  icon: string;
+  active: boolean;
+  onPress: () => void;
+}) {
+  const target = useTourTarget(`tab-${id}`);
+  return (
+    <Pressable
+      ref={target.ref}
+      onLayout={target.onLayout}
+      style={styles.tab}
+      onPress={onPress}
+      accessibilityRole="tab"
+      accessibilityLabel={label}
+      accessibilityState={{ selected: active }}
+    >
+      {active && <View style={styles.tabIndicator} />}
+      <Text style={[styles.tabIcon, active && styles.tabActive]}>{icon}</Text>
+      <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{label}</Text>
+    </Pressable>
   );
 }
 

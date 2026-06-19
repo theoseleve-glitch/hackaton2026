@@ -7,6 +7,7 @@ import type { Account, ExperienceLevel, Lang, Units } from "../accountstore";
 import { setLang, useLang, useT } from "../i18n";
 import { ChipRow, KeyboardAwareForm, LabeledInput, Section } from "../components/forms";
 import { ProgressCard } from "../components/ProgressCard";
+import { resetTour } from "../components/Tour";
 import { colors, radius } from "../theme";
 
 /**
@@ -21,11 +22,13 @@ interface Props {
   setAccount: (patch: Partial<Account>) => void;
   logbook: LogbookState;
   onClose: () => void;
+  /** Clear the one-time tour flag and restart the coach-mark tour (closes Settings). */
+  onReplayTour: () => void;
 }
 
 const LANG_LABELS: Record<Lang, string> = { en: "English", fr: "Français" };
 
-export function SettingsScreen({ account, setAccount, logbook, onClose }: Props) {
+export function SettingsScreen({ account, setAccount, logbook, onClose, onReplayTour }: Props) {
   const t = useT();
   const lang = useLang();
   const LEVEL_LABELS_L: Record<ExperienceLevel, string> = {
@@ -178,6 +181,21 @@ export function SettingsScreen({ account, setAccount, logbook, onClose }: Props)
           <Text style={styles.hint}>{t({ en: "Cloud backup and the public track library ship with accounts.", fr: "La sauvegarde cloud et la bibliothèque de pistes publique arrivent avec les comptes." })}</Text>
         </Section>
 
+        <Section title={t({ en: "Help", fr: "Aide" })}>
+          <Pressable
+            style={styles.rowBtn}
+            onPress={() => {
+              void resetTour();
+              onReplayTour();
+            }}
+            accessibilityRole="button"
+            accessibilityLabel={t({ en: "Replay tour", fr: "Revoir le tutoriel" })}
+          >
+            <Text style={styles.rowBtnText}>{t({ en: "Replay tour", fr: "Revoir le tutoriel" })}</Text>
+            <Text style={styles.rowBtnChevron}>{t({ en: "Take the 60-second tour again ›", fr: "Refaire le tour de 60 secondes ›" })}</Text>
+          </Pressable>
+        </Section>
+
         <Section title={t({ en: "About", fr: "À propos" })}>
           <Text style={styles.bodyText}>{t({ en: "RaceLab 0.1.0 · made for the pit lane 🏁", fr: "RaceLab 0.1.0 · fait pour la voie des stands 🏁" })}</Text>
           <Text style={styles.hint}>{t({ en: "Every recommendation cites its source — grounded or silent.", fr: "Chaque recommandation cite sa source — fondée ou silencieuse." })}</Text>
@@ -265,4 +283,14 @@ const styles = StyleSheet.create({
   webBtnText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
   hint: { color: colors.sub, fontSize: 11, fontStyle: "italic", marginTop: 8, lineHeight: 16 },
   bodyText: { color: colors.text, fontSize: 13, lineHeight: 19 },
+  rowBtn: {
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+  },
+  rowBtnText: { color: colors.text, fontSize: 15, fontWeight: "700" },
+  rowBtnChevron: { color: colors.sub, fontSize: 12, marginTop: 2 },
 });

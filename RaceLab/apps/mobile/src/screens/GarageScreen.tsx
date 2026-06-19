@@ -12,6 +12,7 @@ import { NewCarForm } from "../components/NewCarForm";
 import { sheetsKeyForCar } from "../garagestore";
 import { colors, radius } from "../theme";
 import { useT } from "../i18n";
+import { useTourTarget } from "../components/Tour";
 
 /**
  * The garage is a pit wall (D22) — now multi-car (D26). Every car card
@@ -31,19 +32,38 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
   const t = useT();
   const [modal, setModal] = useState<null | "new" | { edit: CarEntity }>(null);
   const stats = seasonStats(logbook);
+  const isEmpty = garage.cars.length === 0;
+  // Tour spotlight: highlight the whole empty-state CARD for a fresh user — the
+  // ring then frames the entire "add your car" area, which is unambiguous and
+  // immune to sub-element mis-measurement (a single button rect measures stale/
+  // early after the tab+screen mount). When cars already exist (replayed tour),
+  // fall back to the header "+ Add car" button so there's still a target.
+  const addCarTarget = useTourTarget("add-car");
 
   return (
     <View style={{ flex: 1 }}>
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 16, paddingBottom: 30 }}>
       <View style={styles.headerRow}>
         <Text style={styles.h1}>{t({ en: "Garage", fr: "Garage" })}</Text>
-        <Pressable style={styles.addBtn} onPress={() => setModal("new")}>
+        <Pressable
+          ref={isEmpty ? undefined : addCarTarget.ref}
+          onLayout={isEmpty ? undefined : addCarTarget.onLayout}
+          style={styles.addBtn}
+          onPress={() => setModal("new")}
+        >
           <Text style={styles.addBtnText}>{t({ en: "＋ Add car", fr: "＋ Ajouter une voiture" })}</Text>
         </Pressable>
       </View>
 
-      {garage.cars.length === 0 && (
-        <View style={styles.card}>
+      {isEmpty && (
+        // Tour target on the EMPTY-STATE CARD (not the inner button): the ring
+        // frames the whole "add your car" card, unambiguous and robust to the
+        // sub-element measurement being stale right after the tab/screen mount.
+        <View
+          ref={addCarTarget.ref}
+          onLayout={addCarTarget.onLayout}
+          style={styles.card}
+        >
           <Text style={styles.emptyTitle}>{t({ en: "No car yet", fr: "Aucune voiture pour l’instant" })}</Text>
           <Text style={styles.meta}>
             {t({
