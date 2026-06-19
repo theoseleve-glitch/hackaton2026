@@ -33,6 +33,8 @@ import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
 import { useT } from "../i18n";
+import { useGate } from "../entitlements";
+import { usePaywall } from "../components/Paywall";
 
 /**
  * Run log v2 (D27): slim sortable recap; selection drives a floating action
@@ -77,6 +79,17 @@ export function RunsScreen(props: Props) {
   const [popup, setPopup] = useState<Popup>(null);
   const [sortKey, setSortKey] = useState<RunSortKey | "setup">("date");
   const [selected, setSelected] = useState<string[]>([]);
+  // multi_car gate (first car FREE, D18 #3): adding a NEW car from inside the
+  // run form is gated only once a car already exists.
+  const gateMultiCar = useGate("multi_car");
+  const paywall = usePaywall();
+  const requestNewCar = () => {
+    if (garage.cars.length >= 1) {
+      void gateMultiCar(() => setPopup("car"), paywall.open);
+    } else {
+      setPopup("car");
+    }
+  };
   // a saved run can earn a moment: podium position, or a new personal/track best
   const [celebration, setCelebration] = useState<{ position?: number; record?: Celebration } | null>(null);
 
@@ -189,7 +202,7 @@ export function RunsScreen(props: Props) {
           onSelectCar={(id) => setSel((p) => ({ ...p, car_id: id, setup_version_id: undefined }))}
           onSelectTrack={(id) => setSel((p) => ({ ...p, track_id: id }))}
           onSelectSetup={(id) => setSel((p) => ({ ...p, setup_version_id: id }))}
-          onRequestNewCar={() => setPopup("car")}
+          onRequestNewCar={requestNewCar}
           onRequestNewTrack={() => setPopup("track")}
           onRequestNewSetup={() => setPopup("setup")}
           fetchWeather={(track: Track, whenIso: string) =>

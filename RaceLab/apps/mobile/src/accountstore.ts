@@ -21,6 +21,13 @@ export interface Account {
   age?: number;
   country?: string;
   level?: ExperienceLevel;
+  /**
+   * COSMETIC ONLY (D18). Set at completeOnboarding for legacy display copy in
+   * SettingsScreen, but it MUST NOT drive any entitlement decision. The REAL
+   * trial lives in @racelab/account (key `racelab.account.v1`) and starts at the
+   * FIRST PREMIUM TOUCH via touchPremiumFeature — never at onboarding. All gates
+   * + the TrialBanner read the real effective status, not this field.
+   */
   trial_started_at?: string;
   onboarded: boolean;
   prefs?: Prefs;
@@ -39,7 +46,11 @@ const DEFAULT_ACCOUNT: Account = { onboarded: false };
 const MS_PER_DAY = 86_400_000;
 
 /** Days of trial remaining at `nowIso`. Full allowance before the trial has
- *  started, floored at 0 once it has run out. */
+ *  started, floored at 0 once it has run out.
+ *
+ *  COSMETIC ONLY (D18): derives from the legacy cosmetic `trial_started_at`.
+ *  Used solely for display copy in SettingsScreen — NEVER for gating. The real
+ *  trial countdown comes from @racelab/account (useEntitlement().trialDaysLeft). */
 export function trialDaysLeft(account: Account, nowIso: string): number {
   if (!account.trial_started_at) return PRICING.trial_days;
   const start = Date.parse(account.trial_started_at);

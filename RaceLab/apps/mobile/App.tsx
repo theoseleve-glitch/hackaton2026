@@ -28,9 +28,12 @@ import { useGarage } from "./src/garagestore";
 import { useLogbook } from "./src/logstore";
 import { useTracks } from "./src/trackstore";
 import { useReports } from "./src/reportstore";
-import { trialDaysLeft, useAccount } from "./src/accountstore";
+import { useAccount } from "./src/accountstore";
 import { colors } from "./src/theme";
 import { RepoProvider, useReposReady } from "./src/storage/RepoProvider";
+import { AnonymousAuthProvider } from "./src/auth";
+import { EntitlementProvider, useEntitlement, useGate } from "./src/entitlements";
+import { PaywallProvider, usePaywall } from "./src/components/Paywall";
 
 // SOCIAL HIDDEN FOR LAUNCH: every social entry point (the Social tab, share
 // sheet, QR scan, deep-link import/fork, official-tracks browser) is unwired
@@ -160,8 +163,6 @@ function AppInner() {
     );
   }
 
-  const daysLeft = trialDaysLeft(account, new Date().toISOString());
-
   if (!account.onboarded) {
     return (
       <SafeAreaView style={styles.root}>
@@ -171,9 +172,22 @@ function AppInner() {
     );
   }
 
+  const openSpeedhiveRun = (run: SpeedhiveSession) => {
+    setShPrefill({
+      created_at: run.date_iso,
+      best_lap_s: run.best_lap_s,
+      avg_lap_s: run.avg_lap_s,
+      laps_list: run.laps,
+    });
+    setPendingRun(null);
+    setRunsStartInForm(true);
+    setTab("runs");
+  };
+
   return (
     <SafeAreaView style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
+      <PaywallProvider>
       <TourProvider step={tourStep} onNext={tourNext} onSkip={endTour}>
       <View style={styles.header}>
         <BrandLockup size={30} fontSize={20} />
@@ -188,29 +202,9 @@ function AppInner() {
           </Pressable>
         </View>
       </View>
-      <TrialBanner daysLeft={daysLeft} />
+      <TrialBannerLive />
       {pendingRun !== null && (
-        <Pressable
-          style={styles.shBanner}
-          onPress={() => {
-            setShPrefill({
-              created_at: pendingRun.date_iso,
-              best_lap_s: pendingRun.best_lap_s,
-              avg_lap_s: pendingRun.avg_lap_s,
-              laps_list: pendingRun.laps,
-            });
-            setPendingRun(null);
-            setRunsStartInForm(true);
-            setTab("runs");
-          }}
-        >
-          <Text style={styles.shBannerTitle}>🏁 NEW RUN DETECTED</Text>
-          <Text style={styles.shBannerSub}>
-            Speedhive · {pendingRun.date_iso.slice(0, 16).replace("T", " ")}
-            {pendingRun.best_lap_s !== undefined ? ` · best ${pendingRun.best_lap_s.toFixed(2)}s` : ""} — tap to
-            log it
-          </Text>
-        </Pressable>
+        <SpeedhiveBanner pendingRun={pendingRun} onOpen={() => openSpeedhiveRun(pendingRun)} />
       )}
 
       <View style={styles.body}>
@@ -307,7 +301,42 @@ function AppInner() {
         ))}
       </View>
       </TourProvider>
+      </PaywallProvider>
     </SafeAreaView>
+  );
+}
+
+/**
+ * Trial/billing banner driven by the REAL entitlement status (not the cosmetic
+ * accountstore.trial_started_at). Tapping it opens the paywall. The advisor is
+ * never affected — this only nudges toward Pro. We read `multi_car` purely to
+ * observe the shared billing snapshot (status + trialDaysLeft); the feature
+ * choice is immaterial since every non-free feature shares one cache.
+ */
+function TrialBannerLive() {
+  const ent = useEntitlement("multi_car");
+  const paywall = usePaywall();
+  return (
+    <TrialBanner status={ent.status} trialDaysLeft={ent.trialDaysLeft} onPress={() => paywall.open(ent.reason)} />
+  );
+}
+
+/**
+ * Speedhive "new run" banner — tapping it imports the detected session, which
+ * is a PREMIUM feature (speedhive_import). The gate starts the trial on first
+ * touch; on denial it opens the paywall instead of importing.
+ */
+function SpeedhiveBanner({ pendingRun, onOpen }: { pendingRun: SpeedhiveSession; onOpen: () => void }) {
+  const gate = useGate("speedhive_import");
+  const paywall = usePaywall();
+  return (
+    <Pressable style={styles.shBanner} onPress={() => void gate(onOpen, paywall.open)}>
+      <Text style={styles.shBannerTitle}>🏁 NEW RUN DETECTED</Text>
+      <Text style={styles.shBannerSub}>
+        Speedhive · {pendingRun.date_iso.slice(0, 16).replace("T", " ")}
+        {pendingRun.best_lap_s !== undefined ? ` · best ${pendingRun.best_lap_s.toFixed(2)}s` : ""} — tap to log it
+      </Text>
+    </Pressable>
   );
 }
 
@@ -360,10 +389,18 @@ function AppGate() {
 }
 
 export default function App() {
+  // Provider order (D18): auth (anonymous-forever) → repos → entitlements →
+  // gate. The Clerk activation block in src/auth.tsx documents where a
+  // ClerkProvider would sit OUTSIDE this — always rendering children, never
+  // gating. Nothing here blocks launch on auth or the network.
   return (
-    <RepoProvider>
-      <AppGate />
-    </RepoProvider>
+    <AnonymousAuthProvider>
+      <RepoProvider>
+        <EntitlementProvider>
+          <AppGate />
+        </EntitlementProvider>
+      </RepoProvider>
+    </AnonymousAuthProvider>
   );
 }
 

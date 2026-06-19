@@ -11,6 +11,8 @@ import { useT } from "../i18n";
 import { loadCarSheets, useCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { SheetEditorScreen } from "./SheetEditorScreen";
+import { useGate } from "../entitlements";
+import { usePaywall } from "../components/Paywall";
 
 /**
  * Sheet section (D26): entered from the tab bar → list of cars (name +
@@ -184,6 +186,11 @@ function SetupList({
   onOpenVersion: (id: string) => void;
 }) {
   const t = useT();
+  // full_version_history gate: the working draft + the LATEST saved version stay
+  // free; opening/restoring OLDER saved versions is premium (D18). First touch
+  // starts the trial; denial opens the paywall.
+  const gateHistory = useGate("full_version_history");
+  const paywall = usePaywall();
   const shareVersion = (v: SheetsState["versions"][number]) => {
     if (!onShareSetup) return;
     const labels = carLabels(car);
@@ -200,6 +207,15 @@ function SetupList({
   const edits = draftDiff(state).length;
   const base = getVersion(state, state.draft_base_id);
   const versions = [...state.versions].reverse();
+  // The newest saved version (first after reverse) is FREE; older ones are gated.
+  const latestSavedId = versions[0]?.id;
+  const openVersion = (id: string) => {
+    if (id === latestSavedId) {
+      onOpenVersion(id);
+    } else {
+      void gateHistory(() => onOpenVersion(id), paywall.open);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
@@ -217,7 +233,7 @@ function SetupList({
 
       <Text style={styles.listSection}>{t({ en: `Saved setups · ${versions.length}`, fr: `Réglages enregistrés · ${versions.length}` })}</Text>
       {versions.map((v) => (
-        <Pressable key={v.id} style={styles.verRow} onPress={() => onOpenVersion(v.id)}>
+        <Pressable key={v.id} style={styles.verRow} onPress={() => openVersion(v.id)}>
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
               <Text style={styles.verName}>{v.name}</Text>

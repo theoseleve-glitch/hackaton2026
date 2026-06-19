@@ -13,6 +13,8 @@ import { sheetsKeyForCar } from "../garagestore";
 import { colors, radius } from "../theme";
 import { useT } from "../i18n";
 import { useTourTarget } from "../components/Tour";
+import { useGate } from "../entitlements";
+import { usePaywall } from "../components/Paywall";
 
 /**
  * The garage is a pit wall (D22) — now multi-car (D26). Every car card
@@ -33,6 +35,18 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
   const [modal, setModal] = useState<null | "new" | { edit: CarEntity }>(null);
   const stats = seasonStats(logbook);
   const isEmpty = garage.cars.length === 0;
+  // multi_car gate: the FIRST car is FREE (D18 #3); only the 2nd+ is gated. When
+  // the garage is empty we open the form directly; otherwise the gate starts the
+  // trial on first touch and opens the paywall on denial.
+  const gateMultiCar = useGate("multi_car");
+  const paywall = usePaywall();
+  const requestNewCar = () => {
+    if (garage.cars.length >= 1) {
+      void gateMultiCar(() => setModal("new"), paywall.open);
+    } else {
+      setModal("new");
+    }
+  };
   // Tour spotlight: highlight the whole empty-state CARD for a fresh user — the
   // ring then frames the entire "add your car" area, which is unambiguous and
   // immune to sub-element mis-measurement (a single button rect measures stale/
@@ -49,7 +63,7 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
           ref={isEmpty ? undefined : addCarTarget.ref}
           onLayout={isEmpty ? undefined : addCarTarget.onLayout}
           style={styles.addBtn}
-          onPress={() => setModal("new")}
+          onPress={requestNewCar}
         >
           <Text style={styles.addBtnText}>{t({ en: "＋ Add car", fr: "＋ Ajouter une voiture" })}</Text>
         </Pressable>
@@ -73,7 +87,7 @@ export function GarageScreen({ garage, updateGarage, logbook, onOpenSheet, onLog
           </Text>
           <Pressable
             style={[styles.btn, styles.btnPrimary, styles.emptyCta]}
-            onPress={() => setModal("new")}
+            onPress={requestNewCar}
             accessibilityRole="button"
             accessibilityLabel={t({ en: "Add your first car", fr: "Ajouter ta première voiture" })}
           >

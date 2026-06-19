@@ -18,6 +18,8 @@ import { FeelingSlider } from "./FeelingSlider";
 import { ChipRow, LabeledInput, MultiChipRow, Section, num } from "./forms";
 import { LapListInput } from "./LapListInput";
 import { useT } from "../i18n";
+import { useGate } from "../entitlements";
+import { usePaywall } from "./Paywall";
 
 /**
  * Run Form v2 (D27) — THE core data-capture surface. Controlled selectors:
@@ -170,6 +172,10 @@ function sessionIdFor(iso: string): MakeRunInput["session_id"] {
 
 export function RunFormV2(props: RunFormV2Props) {
   const t = useT();
+  // auto_weather gate: fetching weather from the track GPS is premium; MANUAL
+  // weather entry (the editable fields below) stays free.
+  const gateWeather = useGate("auto_weather");
+  const paywall = usePaywall();
   const { cars, tracks, setupsForCar, selection } = props;
   const car = cars.find((c) => c.id === selection.car_id);
   const track = tracks.find((t) => t.id === selection.track_id);
@@ -228,7 +234,7 @@ export function RunFormV2(props: RunFormV2Props) {
     setAutoTagged(true);
   };
 
-  const doFetchWeather = async () => {
+  const runFetchWeather = async () => {
     if (!track || fetching) return;
     setFetching(true);
     setWxMiss(false);
@@ -255,6 +261,10 @@ export function RunFormV2(props: RunFormV2Props) {
       return next;
     });
   };
+
+  // premium gate: starts the trial on first touch, opens the paywall on denial;
+  // manual weather entry remains available regardless.
+  const doFetchWeather = () => void gateWeather(() => void runFetchWeather(), paywall.open);
 
   const touchWx = (key: WxKey) =>
     setWx((prev) => ({ ...prev, [key]: { ...prev[key], auto: false, touched: true } }));

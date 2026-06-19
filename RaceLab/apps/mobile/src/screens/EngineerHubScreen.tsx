@@ -22,6 +22,8 @@ import { sharePng } from "../share";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
 import { useT } from "../i18n";
+import { useGate } from "../entitlements";
+import { usePaywall } from "../components/Paywall";
 
 /**
  * Engineer hub (D28): report-first. You see past reports, you generate a new
@@ -100,10 +102,17 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
   const t = useT();
   const [view, setView] = useState<ViewState>({ k: "list" });
   const [busy, setBusy] = useState(false);
+  // Premium gates. The SETUP ENGINEER (the "new_report" card + generating/reading
+  // the report) is FREE FOREVER (D18 #1) and is NEVER gated. Only the race
+  // planner / pit strategy (strategy_planner) and the PDF/poster share
+  // (pdf_export) are gated here.
+  const paywall = usePaywall();
+  const gateStrategy = useGate("strategy_planner");
+  const gatePdf = useGate("pdf_export");
   // share the engineer report as a PNG poster (off-screen SVG → toDataURL)
   const reportCardRef = useRef<Svg>(null);
   const [sharingReport, setSharingReport] = useState(false);
-  const shareReport = () => {
+  const doShareReport = () => {
     const svg = reportCardRef.current;
     if (!svg) return;
     setSharingReport(true);
@@ -111,6 +120,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
       void sharePng(b64, "engineer-report").finally(() => setSharingReport(false));
     });
   };
+  const shareReport = () => void gatePdf(doShareReport, paywall.open);
 
   // one-shot auto-generation when the run log handed us a run
   const [consumedRequest, setConsumedRequest] = useState<string | undefined>();
@@ -432,7 +442,7 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
             en: "Pick your race track, compound your training runs there with the race-day forecast into a final-hours plan.",
             fr: "Choisis ta piste de course, combine tes sessions d'entraînement avec les prévisions du jour de course en un plan des dernières heures.",
           })}
-          onPress={() => setView({ k: "plan_form" })}
+          onPress={() => void gateStrategy(() => setView({ k: "plan_form" }), paywall.open)}
         />
         <FeatureCard
           icon="⛽"
@@ -442,7 +452,15 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
             fr: "Quand t'arrêter et pourquoi — tes essais d'autonomie enregistrés et tes temps au tour préremplissent les chiffres.",
           })}
           onPress={() =>
-            setView(logbook.runs.length > 0 ? { k: "strategy_pick" } : { k: "strategy_form", prefill: {}, runIds: [] })
+            void gateStrategy(
+              () =>
+                setView(
+                  logbook.runs.length > 0
+                    ? { k: "strategy_pick" }
+                    : { k: "strategy_form", prefill: {}, runIds: [] },
+                ),
+              paywall.open,
+            )
           }
         />
 

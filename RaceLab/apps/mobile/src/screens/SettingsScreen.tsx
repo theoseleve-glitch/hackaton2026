@@ -9,6 +9,8 @@ import { ChipRow, KeyboardAwareForm, LabeledInput, Section } from "../components
 import { ProgressCard } from "../components/ProgressCard";
 import { resetTour } from "../components/Tour";
 import { colors, radius } from "../theme";
+import { buildSubscribeUrl, SUBSCRIBE_WEB_BASE } from "@racelab/account";
+import { useTokenProvider } from "../auth";
 
 /**
  * Settings (Théo's test pass): driver profile with the bragging numbers
@@ -31,6 +33,7 @@ const LANG_LABELS: Record<Lang, string> = { en: "English", fr: "Français" };
 export function SettingsScreen({ account, setAccount, logbook, onClose, onReplayTour }: Props) {
   const t = useT();
   const lang = useLang();
+  const tokens = useTokenProvider();
   const LEVEL_LABELS_L: Record<ExperienceLevel, string> = {
     beginner: t({ en: "beginner", fr: "débutant" }),
     club: t({ en: "club racer", fr: "pilote club" }),
@@ -137,7 +140,9 @@ export function SettingsScreen({ account, setAccount, logbook, onClose, onReplay
             <Pressable
               style={styles.webBtn}
               onPress={() => {
-                Linking.openURL("https://racelabrc.app").catch(() => {});
+                // External web checkout, tagged with the user id when signed in
+                // (anonymous → no query param; the user signs in on the web page).
+                Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, tokens.userId() ?? undefined)).catch(() => {});
               }}
             >
               <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelabrc.app ↗", fr: "Gérer l’abonnement sur racelabrc.app ↗" })}</Text>
