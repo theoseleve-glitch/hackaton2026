@@ -10,7 +10,7 @@ THE source of truth for every domain shape: branded ids, Théo's logbook vocabul
 
 ## `storage/` — D11 storage core (D39)
 
-Injected drivers (AsyncStorage-shaped KV / SQL executor / device-only expo-sqlite glue), typed repos for every schema entity, **every mutation journals one OutboxEntry in the same logical transaction**, all reads parse-validated with quarantine-never-wipe, deterministic idempotent legacy-blob migration (never deletes the originals). The outbox is the future backup protocol. `npm test` = 137 checks incl. fault-injection sweeps at every write offset.
+Injected drivers (AsyncStorage-shaped KV / SQL executor / device-only expo-sqlite glue), typed repos for every schema entity, **every mutation journals one OutboxEntry in the same logical transaction**, all reads parse-validated with quarantine-never-wipe, deterministic idempotent legacy-blob migration (never deletes the originals). The outbox is the future backup protocol. `npm test` = 150 checks incl. fault-injection sweeps at every write offset.
 
 ## `weather/` — Open-Meteo adapter (B3, Tier B)
 
@@ -26,7 +26,7 @@ Client: 15-day once-ever offline-capable trial, tamper-guarded clock, advisor st
 
 ## `kb/src/` — KB data validators (B10)
 
-`parseChassisRegistry`/`parseClassDecl` gates over `kb/chassis/registry.json` (11-entry 1/8 TT competition buggy class, identity-facts-only `pending_pdf` entries with provenance) and `kb/classes/1-8-tt-buggy.json`. Malformed KB data is a build error. Canonical facet vocabulary (`offroad`/`1/8`/`buggy`) lives here. `npm test` = 93 checks.
+`parseChassisRegistry`/`parseClassDecl` gates over `kb/chassis/registry.json` (**237-entry registry** — the full competitive scene, 1 full template / 236 identity-facts-only `pending_pdf` entries with provenance, D47) and the `kb/classes/*.json` class declarations (incl. `1-8-tt-buggy.json`). Malformed KB data is a build error. Canonical facet vocabulary (`offroad`/`1/8`/`buggy`) lives here. `npm test` = 93 checks.
 
 ## `sessions/` — Race log + learning loop (D32, William's run-log model; see `logbook/` for Théo's live app model)
 
@@ -68,7 +68,7 @@ Finding: only ~49 of the MP11 sheet's visual boxes are real form fields — the 
 The AI race engineer's brain (docs/04 §3). Pure data, reviewed by William, ships inside the app bundle for the offline path (D13).
 
 - `taxonomy.yaml` — feedback-tag taxonomy (symptom × phase × evolution), condition vocabulary, and the engine-scope refusal keywords/text (D13)
-- `rules/*.yaml` — **63 cause→effect tuning rules**, every one sourced from the HUDY Off-Road Set-Up Book (page-cited) with effects, conditions, counter-indications, magnitude guidance, reversal cost and confidence
+- `rules/*.yaml` — **413 live cause→effect tuning rules** across 8 Tier-A categories, grounded on real off-road (HUDY) **and** on-road (XRAY NT1, AE Cheat Sheets) sources (D55), page-cited as INTERNAL provenance (D53), with effects, conditions, counter-indications, magnitude guidance, reversal cost and confidence
 - `chassis/inferno-mp11.json` — machine-readable MP11 template (canonical setting ids + legal values); **the template IS the guard layer's bounds database**
 
 Adding a rule = adding YAML; the engine validates every rule against the taxonomy at load time (unknown symptom/condition = hard error).
@@ -94,16 +94,16 @@ npm run chat                # interactive chatbot REPL (talk to your race engine
 npm run chat -- scenarios/01-push-mid-corner-low-grip.json   # with that session context
 npm run cli -- scenarios/01-push-mid-corner-low-grip.json    # one-shot card
 npm run bundle              # recompile packages/kb/bundle.json (run after ANY KB change)
-npm test                    # NLU cases + scripted conversations + 10 eval scenarios
+npm test                    # NLU cases + scripted conversations + 26 eval scenarios + validate-live grounding gate
 ```
 
 **Architecture (since the app refactor):** the core (`index.ts` surface — chat, engineer, nlu, retrieval, guard, offline, data) is pure data + pure functions with zero node built-ins, so it bundles into React Native unchanged. All knowledge is injected as `KBData`; node tooling loads it via `node-kb.ts` (fs/yaml/zod live only there), the app imports the pre-compiled `packages/kb/bundle.json`.
 
 ### Status
 
-- ✅ **NLU 19/19** pit-lane phrasings parsed ("loose under braking" ≠ "loose on power")
+- ✅ **NLU 20/20** pit-lane phrasings parsed ("loose under braking" ≠ "loose on power")
 - ✅ **Conversation tests green**: clarifying question, outcome loop (worse → revert + next), race-day mode, engine-question refusal, new-problem interrupt
-- ✅ **Eval 10/10** (8 real scenarios + 2 nitro-engine traps)
+- ✅ **Eval 26/26** (real symptom→fix scenarios across all 8 Tier-A categories + nitro-engine traps + history/conflict/model-gating cases), all deterministic, no API
 - ✅ Citations valid by construction — the card IS the retrieved rule, rendered
 - 🗃 An LLM-backed variant existed and was removed per D18 (git `d8a8b81`) — possible V2 premium prose layer, never a dependency
 - ⏳ Next (Gate A): run the same scenarios against So Dialed's AI Mechanic and compare
