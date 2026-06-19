@@ -2,18 +2,29 @@
  * Entitlement bridge (app layer). Wires @racelab/account's never-throw,
  * offline-first entitlement math into React.
  *
+ * BILLING IS NOW IN-APP PURCHASES (RevenueCat / Google Play Billing). The paid
+ * signal source is RevenueCat's `customerInfo.entitlements.active['pro']`, read
+ * via src/iap.ts — NOT the server `validateSubscription` path. The entitlement
+ * MATH (checkEntitlement / effectiveSubscriptionStatus on the cached
+ * AccountState) is unchanged; only the source that flips the cached
+ * subscription to "active" changed (server → IAP). The local 15-day trial is
+ * untouched. The web-Stripe server endpoints + the racelab://subscribe deep
+ * link are now dead code on this rail and left dormant in @racelab/account.
+ *
  * D18 invariants honored here:
  *  - The ADVISOR (FREE_FEATURES) is allowed SYNCHRONOUSLY with zero I/O and
  *    without subscribing to the controller (useEntitlement short-circuits).
  *  - App launch is NEVER gated: the provider mounts immediately, seeds its
- *    cache asynchronously, and every entitlement decision is computed from the
- *    in-memory cached AccountState (fail-closed initAccount() until seeded).
- *    No render path awaits the network.
+ *    cache asynchronously, fires configureIap() + a first syncIap() WITHOUT
+ *    awaiting, and every entitlement decision is computed from the in-memory
+ *    cached AccountState (fail-closed initAccount() until seeded). No render
+ *    path awaits RevenueCat init or the network.
  *  - The real trial STARTS at first premium touch via ensure() →
  *    touchPremiumFeature (NOT at onboarding).
- *  - validateSubscription is opportunistic: it only runs when tokens.userId()
- *    is non-null (so it is a structural no-op while anonymous) and never clears
- *    the cache on failure (offline grace).
+ *  - syncIap() is offline-grace-safe and never throws: iap.readEntitlement()
+ *    returns {active:false} on any failure, and a non-active read NEVER clears a
+ *    cached ever-paid/grace subscription (same non-destructive guard the server
+ *    validate path used).
  */
 
 import React, {
@@ -24,16 +35,13 @@ import React, {
   useRef,
   useSyncExternalStore,
 } from "react";
-import { AppState, Linking } from "react-native";
+import { AppState } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  ANONYMOUS_TOKENS,
-  SUBSCRIBE_WEB_BASE,
-  buildSubscribeUrl,
   guardedNow,
   loadAccount,
+  saveAccount,
   touchPremiumFeature,
-  validateSubscription,
 } from "@racelab/account";
 import type {
   AccountState,
@@ -43,7 +51,6 @@ import type {
   FetchLike,
   KV,
   SubscriptionStatus,
-  TokenProvider,
 } from "@racelab/account";
 import {
   FREE_FEATURES,
@@ -51,14 +58,18 @@ import {
   effectiveSubscriptionStatus,
   initAccount,
 } from "@racelab/schema";
-import { API_BASE } from "./config";
-import { useTokenProvider } from "./auth";
+import type { Subscription } from "@racelab/schema";
+import {
+  configureIap,
+  onEntitlementChange,
+  purchasePlan,
+  readEntitlement,
+  restore as restoreIap,
+} from "./iap";
 
 const DAY_MS = 86_400_000;
-/** Debounce window for the foreground re-validate trigger. */
+/** Debounce window for the foreground re-sync trigger. */
 const FOREGROUND_DEBOUNCE_MS = 60_000;
-/** Deep-link return from web checkout (the Stripe webhook → DB write lags). */
-const SUBSCRIBE_RETURN_URL = "racelab://subscribe/return";
 
 // ── injected capability adapters ──────────────────────────────────────────────
 
@@ -72,7 +83,9 @@ const STORE: KV = {
 /** Device wall clock — never trusted raw; guardedNow applies the tamper floor. */
 const NOW: Clock = () => new Date().toISOString();
 
-/** The global fetch, typed structurally as FetchLike (null if unavailable). */
+/** The global fetch, typed structurally as FetchLike (null if unavailable).
+ *  DORMANT on the IAP rail: kept only so touchPremiumFeature's deps shape is
+ *  satisfied (its server-sync arm is a no-op while anonymous). */
 const FETCH: FetchLike | null =
   typeof fetch === "function"
     ? (url, init) => fetch(url, init as RequestInit) as Promise<{ ok: boolean; status: number; json(): Promise<unknown> }>
@@ -99,8 +112,6 @@ class EntitlementController {
   private store = STORE;
   private now = NOW;
   private fetchFn = FETCH;
-  private apiBase = API_BASE;
-  private tokens: TokenProvider = ANONYMOUS_TOKENS;
 
   private account: AccountState = initAccount();
   private nowIso: string = new Date().toISOString();
@@ -110,14 +121,9 @@ class EntitlementController {
   };
 
   private listeners = new Set<() => void>();
-  /** Single-flight latch for validateNow(). */
-  private validating: Promise<void> | null = null;
-  private lastForegroundValidate = 0;
-
-  /** Swap in the live tokens from the auth provider (called by the provider). */
-  setTokens(tokens: TokenProvider): void {
-    this.tokens = tokens;
-  }
+  /** Single-flight latch for syncIap(). */
+  private syncing: Promise<void> | null = null;
+  private lastForegroundSync = 0;
 
   subscribe = (cb: () => void): (() => void) => {
     this.listeners.add(cb);
@@ -143,78 +149,99 @@ class EntitlementController {
   }
 
   /**
-   * Opportunistic server re-validation. No-ops while anonymous (userId null) or
-   * without a fetch transport. On {ok:true} swaps the cache; on {ok:false}
-   * KEEPS the cache (offline grace). Single-flight.
+   * Pull the current RevenueCat "pro" entitlement (src/iap.ts) and reconcile it
+   * into the cached AccountState. Single-flight, never throws.
+   *
+   * ACTIVE → merge a paid {status:"active", source:"iap", validated_at:<guarded
+   * now>, expires_at} into the cached subscription and persist. INACTIVE → mirror
+   * the offline-grace guard: a cached EVER-PAID/grace sub is kept untouched (so
+   * local expiry math in checkEntitlement drives grace→expired deterministically
+   * without a destructive write); only a never-paid account is set to a bare
+   * {status:"none", source:"iap"}. Then reload() so checkEntitlement recomputes.
    */
-  validateNow(): Promise<void> {
-    if (this.validating) return this.validating;
-    this.validating = this.runValidate().finally(() => {
-      this.validating = null;
+  syncIap(): Promise<void> {
+    if (this.syncing) return this.syncing;
+    this.syncing = this.runSyncIap().finally(() => {
+      this.syncing = null;
     });
-    return this.validating;
+    return this.syncing;
   }
 
-  private async runValidate(): Promise<void> {
-    if (this.fetchFn === null) return;
-    if (this.tokens.userId() === null) return; // anonymous → structural no-op
-    let token: string | null;
-    try {
-      token = await this.tokens.getToken();
-    } catch {
-      token = null;
+  private async runSyncIap(): Promise<void> {
+    const ent = await readEntitlement(); // never throws → {active:false} on failure
+    const nowIso = await guardedNow({ store: this.store, now: this.now });
+    const loaded = await loadAccount(this.store, nowIso);
+    if (!loaded.ok) return; // store error → keep in-memory cache (offline grace)
+    const account = loaded.account;
+
+    let next: AccountState | null = null;
+    if (ent.active) {
+      // paid signal from the store: stamp evidence + expiry into the cache.
+      const subscription: Subscription = {
+        status: "active",
+        source: "iap",
+        validated_at: nowIso,
+        ...(ent.expires_at !== null ? { expires_at: ent.expires_at } : {}),
+      };
+      next = { ...account, subscription };
+    } else {
+      // OFFLINE-GRACE GUARD (same as the old server validate path): a non-active
+      // read must NOT erase paid evidence or the grace window. If the cached
+      // account was EVER paid, keep it untouched — local expiry math flips it to
+      // grace/expired deterministically. Only a never-paid account accepts the
+      // bare {status:"none", source:"iap"}.
+      const cached = account.subscription;
+      const everPaid =
+        cached.validated_at !== undefined ||
+        cached.status === "active" ||
+        cached.status === "grace";
+      if (!everPaid && (cached.status !== "none" || cached.source !== "iap")) {
+        next = { ...account, subscription: { status: "none", source: "iap" } };
+      }
     }
-    if (token === null) return;
-    const res = await validateSubscription(
-      { fetchFn: this.fetchFn, store: this.store, now: this.now, apiBase: this.apiBase },
-      token,
-    );
-    if (res.ok) {
-      this.account = res.account;
-      this.nowIso = await guardedNow({ store: this.store, now: this.now });
-      this.notify();
-    }
-    // res.ok === false → keep the cache (offline grace); never clear.
+
+    if (next !== null) await saveAccount(this.store, next);
+    await this.reload();
   }
 
-  /** Debounced foreground re-validate (AppState → active). */
-  validateOnForeground(): void {
+  /** Debounced foreground re-sync (AppState → active). */
+  syncOnForeground(): void {
     const t = Date.now();
-    if (t - this.lastForegroundValidate < FOREGROUND_DEBOUNCE_MS) return;
-    this.lastForegroundValidate = t;
-    void this.validateNow();
-  }
-
-  /**
-   * Poll validateNow a few times with backoff after the web-checkout return —
-   * the Stripe webhook → DB write lags the redirect, so the first GET may still
-   * report the old status.
-   */
-  async validateAfterReturn(): Promise<void> {
-    const delays = [0, 2_000, 5_000];
-    for (const d of delays) {
-      if (d > 0) await new Promise((r) => setTimeout(r, d));
-      await this.validateNow();
-    }
+    if (t - this.lastForegroundSync < FOREGROUND_DEBOUNCE_MS) return;
+    this.lastForegroundSync = t;
+    void this.syncIap();
   }
 
   /** STARTS the local trial on first premium touch, then re-checks. */
   async touchFeature(feature: Feature): Promise<EntitlementResult> {
+    // Pure-local trial start: the server-sync arm of touchPremiumFeature is a
+    // structural no-op while anonymous (no tokens passed), so this only ever
+    // mutates local trial state — billing lives on the IAP rail (syncIap).
     const result = await touchPremiumFeature(feature, {
       store: this.store,
       fetchFn: this.fetchFn,
       now: this.now,
-      tokens: this.tokens,
-      apiBase: this.apiBase,
     });
     await this.reload();
     return result;
   }
 
-  /** Open the external web checkout, tagged with the user id when known. */
-  openSubscribe(): void {
-    const uid = this.tokens.userId() ?? undefined;
-    void Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, uid)).catch(() => {});
+  /**
+   * Present the native purchase sheet for a plan, then re-sync. Returns true if
+   * the user is now entitled (purchase completed), false on cancel/failure.
+   */
+  async purchase(plan: "monthly" | "annual"): Promise<boolean> {
+    const outcome = await purchasePlan(plan);
+    if ("cancelled" in outcome) return false;
+    await this.syncIap();
+    return outcome.active;
+  }
+
+  /** Restore prior purchases, then re-sync. Returns true if now entitled. */
+  async restore(): Promise<boolean> {
+    const ent = await restoreIap();
+    await this.syncIap();
+    return ent.active;
   }
 }
 
@@ -228,37 +255,28 @@ export function EntitlementProvider({ children }: { children: React.ReactNode })
   if (ref.current === null) ref.current = new EntitlementController();
   const controller = ref.current;
 
-  // keep the controller's tokens in sync with the auth provider. The in-render
-  // assignment is an idempotent write to the ref-held controller (no React
-  // state, no re-render) so the boot effect's validateNow() below already sees
-  // the current tokens; the effect mirrors it for later token changes (e.g.
-  // sign-in once Clerk is wired). Anonymous-default tokens make this a no-op.
-  const tokens = useTokenProvider();
-  controller.setTokens(tokens);
   useEffect(() => {
-    controller.setTokens(tokens);
-  }, [controller, tokens]);
-
-  useEffect(() => {
-    // boot once: seed cache from storage, then an opportunistic validate
+    // boot once: configure RevenueCat (idempotent, Expo-Go-safe, never throws),
+    // seed the cache from storage, then an opportunistic IAP sync. NONE of this
+    // is awaited on the render path — launch is never gated on RevenueCat init.
+    configureIap();
     void controller.reload();
-    void controller.validateNow();
+    void controller.syncIap();
 
+    // re-sync when the app returns to the foreground (debounced) — picks up a
+    // subscription bought/renewed/expired while backgrounded.
     const sub = AppState.addEventListener("change", (state) => {
-      if (state === "active") controller.validateOnForeground();
+      if (state === "active") controller.syncOnForeground();
     });
 
-    const onUrl = ({ url }: { url: string }) => {
-      if (url.startsWith(SUBSCRIBE_RETURN_URL)) void controller.validateAfterReturn();
-    };
-    const linkSub = Linking.addEventListener("url", onUrl);
-    void Linking.getInitialURL().then((url) => {
-      if (url !== null && url.startsWith(SUBSCRIBE_RETURN_URL)) void controller.validateAfterReturn();
+    // push updates from RevenueCat (renewals, restores, cross-device changes).
+    const unsubscribe = onEntitlementChange(() => {
+      void controller.syncIap();
     });
 
     return () => {
       sub.remove();
-      linkSub.remove();
+      unsubscribe();
     };
   }, [controller]);
 
@@ -279,10 +297,11 @@ export interface UseEntitlement {
   via?: "free" | "trial" | "subscription" | "grace";
   /** Starts the trial on first premium touch, then returns the fresh result. */
   ensure: () => Promise<EntitlementResult>;
-  /** Open the external web checkout. */
-  openSubscribe: () => void;
-  /** Opportunistic server re-validation (e.g. "I already paid — refresh"). */
-  validateNow: () => Promise<void>;
+  /** Present the native Google Play purchase sheet for a plan; resolves true if
+   *  the user is now entitled, false on cancel/failure. */
+  purchase: (plan: "monthly" | "annual") => Promise<boolean>;
+  /** Restore prior store purchases; resolves true if now entitled. */
+  restore: () => Promise<boolean>;
   /** Effective subscription status for banner/paywall copy. */
   status: SubscriptionStatus;
   /** Days left in trial, or null when not in trial. */
@@ -310,16 +329,16 @@ export function useEntitlement(feature: Feature): UseEntitlement {
 
   return useMemo<UseEntitlement>(() => {
     const ensure = () => controller.touchFeature(feature);
-    const openSubscribe = () => controller.openSubscribe();
-    const validateNow = () => controller.validateNow();
+    const purchase = (plan: "monthly" | "annual") => controller.purchase(plan);
+    const restore = () => controller.restore();
 
     if (isFree) {
       return {
         allowed: true,
         via: "free",
         ensure,
-        openSubscribe,
-        validateNow,
+        purchase,
+        restore,
         status: "none",
         trialDaysLeft: null,
       };
@@ -332,8 +351,8 @@ export function useEntitlement(feature: Feature): UseEntitlement {
       allowed: result.allowed,
       ...(result.allowed ? { via: result.via } : { reason: result.reason }),
       ensure,
-      openSubscribe,
-      validateNow,
+      purchase,
+      restore,
       status,
       trialDaysLeft: trialDaysLeftFrom(account, nowIso),
     };

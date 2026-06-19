@@ -47,7 +47,7 @@ import { WEATHER_DERIVED_FIELDS, WEATHER_NUMERIC_FIELDS, WEATHER_SOURCES, hasExp
 import type { WeatherObservation } from "./weather";
 import { OUTBOX_DOMAINS, OUTBOX_OPS } from "./outbox";
 import type { OutboxState } from "./outbox";
-import { SUBSCRIPTION_STATUSES } from "./account";
+import { SUBSCRIPTION_SOURCES, SUBSCRIPTION_STATUSES } from "./account";
 import type { AccountState } from "./account";
 
 export type ParseResult<T> = { ok: true; value: T } | { ok: false; reason: string };
@@ -402,7 +402,7 @@ export function parseAccountState(value: unknown): ParseResult<AccountState> {
   const s = value.subscription;
   if (!isRecord(s)) return no("subscription");
   if (!inEnum(SUBSCRIPTION_STATUSES, s.status)) return no("subscription.status");
-  if (s.source !== "web") return no("subscription.source");
+  if (!inEnum(SUBSCRIPTION_SOURCES, s.source)) return no("subscription.source");
   if (!opt(s.validated_at, isoDateTime)) return no("subscription.validated_at");
   if (!opt(s.expires_at, isoDateTime)) return no("subscription.expires_at");
   return { ok: true, value: deepFreeze(value) as unknown as AccountState };

@@ -60,9 +60,12 @@ export function makeDriverProfile(
 export const SUBSCRIPTION_STATUSES = ["none", "trial", "active", "expired", "grace"] as const;
 export type SubscriptionStatus = (typeof SUBSCRIPTION_STATUSES)[number];
 
+export const SUBSCRIPTION_SOURCES = ["web", "iap"] as const;
+export type SubscriptionSource = (typeof SUBSCRIPTION_SOURCES)[number];
+
 export interface Subscription {
   status: SubscriptionStatus; // server-asserted fact; effective status vs `now` is COMPUTED
-  source: "web"; // web purchase only (no store accounts yet)
+  source: SubscriptionSource; // "web" = Stripe web checkout; "iap" = Play/App-Store in-app purchase
   validated_at?: IsoDateTime;
   expires_at?: IsoDateTime;
 }

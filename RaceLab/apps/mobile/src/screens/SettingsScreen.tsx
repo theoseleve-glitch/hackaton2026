@@ -9,14 +9,17 @@ import { ChipRow, KeyboardAwareForm, LabeledInput, Section } from "../components
 import { ProgressCard } from "../components/ProgressCard";
 import { resetTour } from "../components/Tour";
 import { colors, radius } from "../theme";
-import { buildSubscribeUrl, SUBSCRIBE_WEB_BASE } from "@racelab/account";
-import { useTokenProvider, useAuthState } from "../auth";
+
+/** Google Play's subscription-management screen — where paid users change /
+ *  cancel an active in-app subscription (billing now goes through Google Play
+ *  Billing / RevenueCat; see src/iap.ts). */
+const PLAY_SUBSCRIPTIONS_URL = "https://play.google.com/store/account/subscriptions";
 
 /**
  * Settings (Théo's test pass): driver profile with the bragging numbers
- * (year + career, straight from the log), account & billing (web-first —
- * the subscription lives on racelabrc.app, never in-app), preferences, and
- * the on-device data promise.
+ * (year + career, straight from the log), account & billing (in-app purchase —
+ * subscriptions are bought in the app via Google Play and managed in the Play
+ * Store), preferences, and the on-device data promise.
  */
 
 interface Props {
@@ -33,8 +36,6 @@ const LANG_LABELS: Record<Lang, string> = { en: "English", fr: "Français" };
 export function SettingsScreen({ account, setAccount, logbook, onClose, onReplayTour }: Props) {
   const t = useT();
   const lang = useLang();
-  const tokens = useTokenProvider();
-  const { signedIn } = useAuthState();
   const LEVEL_LABELS_L: Record<ExperienceLevel, string> = {
     beginner: t({ en: "beginner", fr: "débutant" }),
     club: t({ en: "club racer", fr: "pilote club" }),
@@ -134,27 +135,19 @@ export function SettingsScreen({ account, setAccount, logbook, onClose, onReplay
             </Text>
             <Text style={styles.billingMeta}>
               {t({
-                en: `${PRICING.monthly_eur}€/month or ${PRICING.annual_eur}€/year. Subscriptions live on the website — web billing skips app-store fees, so the same plan costs less there.`,
-                fr: `${PRICING.monthly_eur}€/mois ou ${PRICING.annual_eur}€/an. Les abonnements se gèrent sur le site — la facturation web évite les frais des stores, donc le même forfait y coûte moins cher.`,
+                en: `${PRICING.monthly_eur}€/month or ${PRICING.annual_eur}€/year, billed through Google Play. Manage or cancel an active subscription from the Play Store.`,
+                fr: `${PRICING.monthly_eur}€/mois ou ${PRICING.annual_eur}€/an, facturés via Google Play. Gère ou résilie un abonnement actif depuis le Play Store.`,
               })}
             </Text>
-            {signedIn ? (
-              <Pressable
-                style={styles.webBtn}
-                onPress={() => {
-                  // External web checkout/portal, tagged with the verified user id.
-                  Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, tokens.userId() ?? undefined)).catch(() => {});
-                }}
-              >
-                <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelabrc.app ↗", fr: "Gérer l’abonnement sur racelabrc.app ↗" })}</Text>
-              </Pressable>
-            ) : (
-              // No in-app session to redeem a purchase yet (anonymous build) — do
-              // not link to a checkout that can't unlock here. See Paywall.tsx.
-              <Text style={styles.billingMeta}>
-                {t({ en: "Subscriptions open very soon. Your trial is active now.", fr: "Les abonnements ouvrent très bientôt. Ton essai est actif." })}
-              </Text>
-            )}
+            <Pressable
+              style={styles.webBtn}
+              onPress={() => {
+                // Google Play subscriptions screen — manage/cancel an active sub.
+                Linking.openURL(PLAY_SUBSCRIPTIONS_URL).catch(() => {});
+              }}
+            >
+              <Text style={styles.webBtnText}>{t({ en: "Manage subscription in Google Play ↗", fr: "Gérer l’abonnement dans Google Play ↗" })}</Text>
+            </Pressable>
           </View>
         </Section>
 
