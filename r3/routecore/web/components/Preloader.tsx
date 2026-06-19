@@ -3,32 +3,31 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
-// The preloader is a brief ceremony: a Clay Red route draws itself across a
-// cream field while a 0–100 counter runs, then the whole overlay lifts away to
+// The preloader is a brief ceremony: a Clay Red route draws itself under the
+// wordmark while a 0–100 counter runs, then the whole overlay lifts away to
 // reveal the page. Reduced-motion users skip it entirely (no scroll lock).
+//
+// IMPORTANT: the overlay must render from the first commit so its refs exist
+// when the effect runs — otherwise the timeline never starts and it sticks.
 
 const DRAW_MS = 1500;
 const HOLD_MS = 250;
 
 export default function Preloader() {
   const reduced = useReducedMotion();
-  // Start "done" on the server / reduced-motion so nothing covers the page and
-  // there is no scroll lock. The client effect re-arms the ceremony when motion
-  // is allowed.
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const overlayRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (reduced) {
+    const path = pathRef.current;
+    const overlay = overlayRef.current;
+
+    if (reduced || !path || !overlay) {
       setActive(false);
       return;
     }
-    setActive(true);
-    const path = pathRef.current;
-    const overlay = overlayRef.current;
-    if (!path || !overlay) return;
 
     // Lock scroll during the ceremony.
     const prevOverflow = document.body.style.overflow;
@@ -81,31 +80,48 @@ export default function Preloader() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 28,
+        gap: 22,
       }}
     >
-      <svg width="180" height="120" viewBox="0 0 180 120" fill="none" aria-hidden>
+      <span
+        style={{
+          fontFamily: "Fraunces, Georgia, serif",
+          fontSize: "clamp(34px, 7vw, 64px)",
+          fontWeight: 600,
+          color: "var(--brown)",
+          letterSpacing: "-0.01em",
+          lineHeight: 1,
+        }}
+      >
+        L&rsquo;Échappée
+      </span>
+
+      <svg width="200" height="64" viewBox="0 0 200 64" fill="none" aria-hidden>
+        {/* faint straight reference line (the motorway) */}
+        <line x1="14" y1="50" x2="186" y2="50" stroke="var(--border)" strokeWidth="2" strokeDasharray="2 7" strokeLinecap="round" />
+        {/* the échappée — a calm wandering detour that draws itself */}
         <path
           ref={pathRef}
-          d="M20 96 C 60 96, 50 30, 96 36 S 150 96, 160 28"
+          d="M14 50 C 56 50, 60 16, 100 16 S 144 50, 186 22"
           stroke="var(--clay)"
-          strokeWidth="4"
+          strokeWidth="3.5"
           strokeLinecap="round"
           fill="none"
         />
-        <circle cx="20" cy="96" r="5" fill="var(--olive)" />
-        <circle cx="160" cy="28" r="5" fill="var(--clay)" />
+        <circle cx="14" cy="50" r="4.5" fill="var(--olive)" />
+        <circle cx="186" cy="22" r="4.5" fill="var(--clay)" />
       </svg>
+
       <span
         style={{
-          fontFamily: "Fraunces, serif",
-          fontSize: 18,
+          fontFamily: "Inter, system-ui, sans-serif",
+          fontSize: 13,
           color: "var(--taupe)",
-          letterSpacing: "0.04em",
+          letterSpacing: "0.08em",
         }}
       >
         <span ref={counterRef}>0</span>
-        <span> %</span>
+        <span>&nbsp;%</span>
       </span>
     </div>
   );
