@@ -175,6 +175,67 @@ function dryRuns(): SelectedRunSummary[] {
   );
 }
 
+// 10. R2-1: race-type differentiation (sprint vs endurance briefing)
+{
+  const sprint = buildRacePlan(bundle(), dryRuns(), { ...RACE, type: "sprint", length_s: 600 }, undefined, data);
+  check(
+    "R2-1: sprint race_type_note biases toward one-lap pace + few changes",
+    /sprint/i.test(sprint.race_type_note) && /one-lap pace/i.test(sprint.race_type_note) && /fewest changes|first corner/i.test(sprint.race_type_note),
+    sprint.race_type_note,
+  );
+  const endurance = buildRacePlan(bundle(), dryRuns(), { ...RACE, type: "endurance", length_s: 1800 }, undefined, data);
+  check(
+    "R2-1: endurance race_type_note biases toward consistency + tyre/fuel preservation",
+    /endurance/i.test(endurance.race_type_note) && /consistency/i.test(endurance.race_type_note) && /tyre|fuel/i.test(endurance.race_type_note),
+    endurance.race_type_note,
+  );
+  check(
+    "R2-1: sprint and endurance notes are different",
+    sprint.race_type_note !== endurance.race_type_note,
+  );
+  check(
+    "R2-1: race_type_note states the window length in minutes",
+    /10 min/.test(sprint.race_type_note) && /30 min/.test(endurance.race_type_note),
+    `${sprint.race_type_note} || ${endurance.race_type_note}`,
+  );
+}
+
+// 11. R2-2: forecast-vs-practice comparison stated scientifically + race-type weighted
+{
+  // +8°C hotter (24 avg → 32) on an ENDURANCE race → compounding-grip weighting.
+  const endHot = buildRacePlan(bundle(), dryRuns(), { ...RACE, type: "endurance", length_s: 1800 }, { air_temp_c: 32 }, data);
+  check(
+    "R2-2: big hotter delta on endurance says the grip loss compounds over the run",
+    endHot.conditions_shift.some((l) => /hotter/.test(l) && /compounds/i.test(l) && /matter more than .* in practice/i.test(l)),
+    endHot.conditions_shift.join(" | "),
+  );
+  // Same delta on a SPRINT → single-window weighting, still flags it matters more.
+  const sprHot = buildRacePlan(bundle(), dryRuns(), { ...RACE, type: "sprint", length_s: 600 }, { air_temp_c: 32 }, data);
+  check(
+    "R2-2: big hotter delta on sprint frames it as a one-lap window, still matters more than practice",
+    sprHot.conditions_shift.some((l) => /sprint/i.test(l) && /matter more than .* in practice/i.test(l)),
+    sprHot.conditions_shift.join(" | "),
+  );
+  check(
+    "R2-2: sprint vs endurance forecast-shift wording differs",
+    JSON.stringify(endHot.conditions_shift) !== JSON.stringify(sprHot.conditions_shift),
+  );
+  // Small delta (≤4°C) → no race-type weighting clause (just the base mechanism).
+  const small = buildRacePlan(bundle(), dryRuns(), { ...RACE, type: "endurance", length_s: 1800 }, { air_temp_c: 27 }, data);
+  check(
+    "R2-2: small delta does NOT add a compounding/sprint weighting clause",
+    small.conditions_shift.some((l) => /hotter/.test(l)) && !small.conditions_shift.some((l) => /compounds|one-lap sprint window/i.test(l)),
+    small.conditions_shift.join(" | "),
+  );
+  // Wet forecast over dry practice → states it's an untested condition (no reference).
+  const wet = buildRacePlan(bundle(), dryRuns(), RACE, { rain_risk_pct: 70 }, data);
+  check(
+    "R2-2: wet over dry practice is flagged as an untested condition (no reference)",
+    wet.conditions_shift.some((l) => /[Rr]ain risk/.test(l) && /no wet reference/i.test(l)),
+    wet.conditions_shift.join(" | "),
+  );
+}
+
 if (failures > 0) {
   console.error(`\n${failures} race-plan test(s) failed`);
   process.exit(1);

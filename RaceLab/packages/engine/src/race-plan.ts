@@ -52,6 +52,9 @@ export interface RacePlan {
   technique_tips: string[];
   readiness: string[];
   race_avg_lap_s?: number;
+  /** R2-1 — sprint-vs-endurance mindset line, grounded in universal race-craft
+   *  (no KB citation). Always present so the briefing names the race type. */
+  race_type_note: string;
   /** NEW — William's grounded, cited forecast adjustments (when `william` supplied). */
   adjustments?: PlannedAdjustment[];
   /** NEW — grounded-or-silent gaps the KB cannot cover (when `william` supplied). */
@@ -84,7 +87,6 @@ export function buildRacePlan(
       "Race planning needs at least one selected run — log a practice run and select it first.",
     );
   }
-  void race; // part of the planner contract; no race-window-specific rule yet
 
   // Theo half (unchanged): forecast-shifted flat report + technique tips + readiness
   const shifted = applyForecast(bundle, forecast);
@@ -117,10 +119,11 @@ export function buildRacePlan(
 
   return {
     report: buildReport(shifted, data),
-    conditions_shift: conditionsShift(runs, forecast),
+    conditions_shift: conditionsShift(runs, forecast, race),
     technique_tips: drivingTips(shifted),
     readiness: readinessFacts(sorted),
     race_avg_lap_s: avgLaps.length > 0 ? Math.min(...avgLaps) : undefined,
+    race_type_note: raceTypeNote(race),
     ...(adjustments ? { adjustments } : {}),
     ...(refusals && refusals.length > 0 ? { refusals } : {}),
   };
@@ -152,7 +155,11 @@ function applyForecast(bundle: ContextBundle, forecast: Forecast | undefined): C
 /** Human lines: what the race window changes vs the SELECTED practice data.
  *  Temperature compares against the average air_temp_c of runs that have one;
  *  a missing-temp side (runs or forecast) always yields an explicit line. */
-function conditionsShift(runs: SelectedRunSummary[], forecast: Forecast | undefined): string[] {
+function conditionsShift(
+  runs: SelectedRunSummary[],
+  forecast: Forecast | undefined,
+  race: RaceWindow,
+): string[] {
   const lines: string[] = [];
   const temps = runs.map((r) => r.air_temp_c).filter((v): v is number => v !== undefined);
 
@@ -172,19 +179,49 @@ function conditionsShift(runs: SelectedRunSummary[], forecast: Forecast | undefi
         delta > 0
           ? " Hotter air and track mean less grip — the car needs more rear traction to put the power down."
           : " Colder air and track mean more grip but slower-warming tyres — expect a sharper front once they're in.";
+      // R2-2: forecast-vs-practice delta, stated scientifically with a race-type
+      // weighting. A temperature gap is universal physics (no KB citation): a
+      // big delta means the grip is meaningfully different from what you tuned
+      // in, and the rear-traction adjustments matter MORE in the race than they
+      // did in practice. Endurance compounds it (a stint-long drift), sprint is
+      // a single window.
+      const big = Math.abs(delta) >= 5;
+      const weight =
+        big && delta > 0
+          ? race.type === "endurance"
+            ? " Over a long run that grip loss compounds, so the rear-traction adjustments matter more than they did in practice."
+            : " On a one-lap sprint window the rear-traction adjustments matter more than they did in practice — get them right before the run."
+          : big && delta < 0
+            ? " The extra grip is more than your practice saw, so expect the car to turn in sharper than you tuned for."
+            : "";
       lines.push(
-        `Race window ~${Math.abs(delta)}°C ${delta > 0 ? "hotter" : "colder"} than your practice data (${forecast.air_temp_c}°C vs ~${Math.round(practiceAvg)}°C).${mechanism}`,
+        `Race window ~${Math.abs(delta)}°C ${delta > 0 ? "hotter" : "colder"} than your practice data (${forecast.air_temp_c}°C vs ~${Math.round(practiceAvg)}°C).${mechanism}${weight}`,
       );
     }
   }
 
   if (forecast?.rain_risk_pct !== undefined && forecast.rain_risk_pct >= WET_FROM_PCT) {
     // B1: rain physics — less grip, longer braking. Universal, not a KB rule.
+    // R2-2: the selected practice ran dry, so the wet is an UNTESTED condition —
+    // say so plainly so the racer knows they have no reference for it.
     lines.push(
-      `Rain risk ${forecast.rain_risk_pct}% — your selected runs are all dry. Less grip and longer braking: brake earlier and straighter, and feed throttle later on exit.`,
+      `Rain risk ${forecast.rain_risk_pct}% — your selected runs are all dry, so you have no wet reference here. Less grip and longer braking: brake earlier and straighter, and feed throttle later on exit.`,
     );
   }
   return lines;
+}
+
+/** R2-1 — sprint vs endurance mindset. Universal race-craft, not a KB tuning
+ *  rule (so no citation): sprints reward one-lap pace and a clean, committed
+ *  first corner with the setup locked; endurance rewards consistency and tyre/
+ *  fuel preservation, favouring changes that hold up over a long run. */
+function raceTypeNote(race: RaceWindow): string {
+  const minutes = Math.round(race.length_s / 60);
+  const lengthTxt = minutes >= 1 ? ` (~${minutes} min)` : "";
+  if (race.type === "sprint") {
+    return `Sprint${lengthTxt}: it's won on one-lap pace and a clean, committed first corner — qualify well, lock the setup, and make the fewest changes you can.`;
+  }
+  return `Endurance${lengthTxt}: it's won on consistency and looking after the tyres and fuel — favour changes that stay good lap after lap over a quick one-lap gain.`;
 }
 
 /** Facts from the selected runs (chronologically sorted): unresolved symptoms

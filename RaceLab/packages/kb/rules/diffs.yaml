@@ -88,8 +88,12 @@
 - id: kb-diff-rear-thinner-005
   setting: rear_diff_oil
   direction: decrease
+  # R2-3 example, NEEDS WILLIAM to author the rest of the rules' values:
+  # one-line physics for why thinner rear diff oil adds mid-corner rotation.
+  mechanism_brief: "Thinner rear-diff oil lets the inside rear spin up more freely, so the diff transfers less torque and the rear rotates into the corner instead of pushing."
   effects:
-    - { axis: cornering_traction, change: more }
+    # R2-3 example magnitude_estimate (NEEDS WILLIAM for the rest):
+    - { axis: cornering_traction, change: more, magnitude_estimate: "noticeably more rear bite, ~one tyre-width tighter line" }
     - { axis: steering_into_corner, change: more }
   addresses:
     - { symptom: understeer, phase: corner_entry }
@@ -100,6 +104,9 @@
     reduced_on: []
   counter_indications: []
   magnitude_guidance: "One step at a time (e.g. 4000 → 3000 cSt)."
+  # R2-3 example lap_time_impact_s (NEEDS WILLIAM for the rest). SURFACE-ONLY this
+  # round — shown in the rationale, never used to reorder retrieval.
+  lap_time_impact_s: 0.2
   reversal_cost_minutes: 12
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]
@@ -165,8 +172,10 @@
 - id: kb-clutch-springs-softer-009
   setting: clutch_spring
   direction: decrease
+  # R2-3 example, NEEDS WILLIAM to author the rest of the rules' values:
+  mechanism_brief: "A softer clutch spring engages earlier and more progressively, so torque builds smoothly instead of spiking the rear loose when grip is scarce."
   effects:
-    - { axis: clutch_engagement, change: earlier_gradual }
+    - { axis: clutch_engagement, change: earlier_gradual, magnitude_estimate: "engages a few hundred rpm earlier, smoother power pickup" }
     - { axis: drivability_low_grip, change: easier }
   addresses:
     - { symptom: no_forward_bite, phase: corner_exit }
@@ -176,6 +185,8 @@
     reduced_on: [high_grip]
   counter_indications: []
   magnitude_guidance: "One spring step softer (e.g. 1.00 → 0.95). Earlier, more gradual engagement — easier to drive on low grip."
+  # R2-3 example lap_time_impact_s (NEEDS WILLIAM for the rest). SURFACE-ONLY.
+  lap_time_impact_s: 0.15
   reversal_cost_minutes: 15
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.34 §2.0.1"]

@@ -9,7 +9,7 @@ import {
   raceDayFilter,
   sanitizeBundle,
 } from "./guard";
-import { conditionsEcho, filterToTemplate, ruleToOption } from "./offline";
+import { conditionsEcho, effectsText, filterToTemplate, ruleToOption } from "./offline";
 import { retrieve } from "./retrieval";
 import type { Confidence, ContextBundle, KBRule, RecommendationOption } from "./types";
 
@@ -193,9 +193,11 @@ function buildDiagnosis(bundle: ContextBundle): string {
   return parts.join(" ");
 }
 
-/** 5. Expected behavior — the primary rule's effects, in plain words. */
+/** 5. Expected behavior — the primary rule's effects, in plain words.
+ *  R2-3: effectsText appends each effect's quantified magnitude_estimate when
+ *  the KB rule carries one (e.g. "steering response: faster [±5-8%]"). */
 function expectedBehavior(rule: KBRule): string {
-  const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
+  const effects = effectsText(rule);
   // M1-M3: surface the hard safety caveat in the expected-behavior section too.
   const danger = rule.danger ? ` ⚠️ SAFETY: ${rule.danger}` : "";
   return `After the change: ${effects}. ${rule.magnitude_guidance}${danger}`;
@@ -204,6 +206,14 @@ function expectedBehavior(rule: KBRule): string {
 /** 8. Why — citations + condition match + the driver's own history. */
 function buildRationale(bundle: ContextBundle, rule: KBRule): string {
   const parts: string[] = [`Grounded on ${rule.id} (${rule.sources.join("; ")}).`];
+
+  // R2-3: SURFACE-ONLY estimated lap-time gain when the rule carries one. The
+  // value is validated positive+finite by the KB schema; the isFiniteNumber
+  // guard is belt-and-braces so a bad value never renders "NaN"/"Infinity".
+  // This does NOT change retrieval order (ROI-ranking is deferred to R3).
+  if (isFiniteNumber(rule.lap_time_impact_s)) {
+    parts.push(`Estimated upside ~${rule.lap_time_impact_s.toFixed(1)}s/lap potential (rough; depends on track and driver).`);
+  }
 
   const trackConditions = new Set(bundle.track.conditions);
   const amplifiers = rule.conditions.amplified_on.filter((c) => trackConditions.has(c));
@@ -224,8 +234,27 @@ function buildRationale(bundle: ContextBundle, rule: KBRule): string {
     parts.push(
       `Your log in similar conditions: ${better} run${better === 1 ? "" : "s"} rated better, ${worse} worse, of ${history.length} rated${sampleTag}.${strength}`,
     );
+    // R2-4: confidence CALIBRATION — the `confidence` enum still mirrors the
+    // rule's static confidence (adversarial checks the enum), but the WORDING
+    // here tempers it to evidence strength. A high-confidence KB rule with thin
+    // or mixed history on YOUR car is honestly "high in theory, unproven on your
+    // car" rather than flatly "high". Pure language, no enum change.
+    const thin = history.length < 3;
+    const mixed = worse >= better && worse > 0;
+    if (rule.confidence === "high" && (thin || mixed)) {
+      parts.push(
+        mixed
+          ? "Confidence is high on the bench science, but your own runs are mixed — treat it as a test, not a certainty."
+          : "Confidence is high on the bench science, but there's limited data on YOUR car yet — verify it on track.",
+      );
+    }
   } else {
     parts.push("No rated runs in similar conditions yet — rate this run afterwards and the next report gets smarter.");
+    // R2-4: high-confidence rule, zero history → say the confidence is from the
+    // verified KB science, not yet from the driver's own car. Language only.
+    if (rule.confidence === "high") {
+      parts.push("That confidence is from the verified set-up science — you've no rated runs on your car to confirm it here yet.");
+    }
   }
   return parts.join(" ");
 }

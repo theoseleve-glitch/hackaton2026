@@ -17,7 +17,17 @@ const RuleSchema = z.object({
   id: z.string().regex(/^kb-[a-z0-9-]+$/),
   setting: z.string(),
   direction: z.string(),
-  effects: z.array(z.object({ axis: z.string(), change: z.string() })).min(1),
+  // R2-3: magnitude_estimate is OPTIONAL on an effect — validated-if-present
+  // (must be a non-empty string), absent is fine (current behaviour).
+  effects: z
+    .array(
+      z.object({
+        axis: z.string(),
+        change: z.string(),
+        magnitude_estimate: z.string().min(1).optional(),
+      }),
+    )
+    .min(1),
   addresses: z.array(z.object({ symptom: z.string(), phase: z.string().optional() })).default([]),
   conditions: z.object({
     amplified_on: z.array(z.string()).default([]),
@@ -27,6 +37,11 @@ const RuleSchema = z.object({
   magnitude_guidance: z.string(),
   // M1-M3: optional hard-safety caveat surfaced verbatim into rendered advice.
   danger: z.string().optional(),
+  // R2-3: OPTIONAL quantification fields — validated-if-present, absent → current
+  // behaviour. mechanism_brief is a one-line physics string; lap_time_impact_s is
+  // a positive, finite estimated lap-time gain (SURFACE-ONLY, never reorders).
+  mechanism_brief: z.string().min(1).optional(),
+  lap_time_impact_s: z.number().positive().finite().optional(),
   reversal_cost_minutes: z.number().positive(),
   confidence: z.enum(["high", "medium", "low"]),
   sources: z.array(z.string()).min(1),

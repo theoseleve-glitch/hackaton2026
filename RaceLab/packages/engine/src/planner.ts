@@ -1,6 +1,6 @@
 import type { KBData } from "./data";
-import { raceDayFilter } from "./guard";
-import { humanize } from "./offline";
+import { raceDayFilter, isFiniteNumber } from "./guard";
+import { effectsText, humanize } from "./offline";
 import type { Confidence, KBRule } from "./types";
 import type { LearningTuple } from "../../schema/src/runs";
 import { RAIN_RISK_THRESHOLD_PCT, deriveSky } from "../../schema/src/weather";
@@ -229,13 +229,22 @@ function toAdjustment(
 ): PlannedAdjustment {
   const current = input.current_setup?.[rule.setting];
   const currentTxt = current !== undefined ? ` (currently ${current})` : "";
-  const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
+  // R2-3: effectsText appends each effect's quantified magnitude_estimate when
+  // present; mechanism_brief leads the line when present; lap_time_impact_s is
+  // surfaced (SURFACE-ONLY — never reorders). All OPTIONAL, absent → current.
+  const effects = effectsText(rule);
+  const lapTxt = isFiniteNumber(rule.lap_time_impact_s)
+    ? ` ~${rule.lap_time_impact_s.toFixed(1)}s/lap potential.`
+    : "";
+  const mechanism = rule.mechanism_brief
+    ? `${rule.mechanism_brief} This produces: ${effects}.${lapTxt}`
+    : `Per ${rule.sources[0]}: ${effects}.${lapTxt}`;
   return {
     trigger,
     condition_tag: tag,
     setting: rule.setting,
     change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}`,
-    mechanism: `Per ${rule.sources[0]}: ${effects}.`,
+    mechanism,
     confidence: rule.confidence,
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,

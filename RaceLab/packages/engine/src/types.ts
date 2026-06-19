@@ -3,6 +3,10 @@ export type Confidence = "high" | "medium" | "low";
 export interface KBEffect {
   axis: string;
   change: string;
+  /** R2-3 — OPTIONAL quantified magnitude of this effect ("±5-8% steering
+   *  response"). Surfaced into expected-behavior WHEN present; absent → current
+   *  behaviour. Author per high-confidence rule (NEEDS WILLIAM for the rest). */
+  magnitude_estimate?: string;
 }
 
 export interface KBAddress {
@@ -22,6 +26,16 @@ export interface KBRule {
   /** Hard safety limit / physical-harm caveat for this change, surfaced verbatim
    *  into the rendered advice (M1-M3). Present only on physical-risk rules. */
   danger?: string;
+  /** R2-3 — OPTIONAL one-line physics explanation of WHY the lever works
+   *  ("raising the front downstop stiffens the front and shifts weight rearward
+   *  at entry"). When present, the mechanism line reads "<mechanism_brief>. This
+   *  produces: <effects>." instead of the terse "Per <source>: <effects>.";
+   *  absent → current behaviour. NEEDS WILLIAM to author the rest. */
+  mechanism_brief?: string;
+  /** R2-3 — OPTIONAL estimated lap-time gain in seconds ("~0.2s/lap potential").
+   *  SURFACE-ONLY this round: shown in the rationale when present; it does NOT
+   *  influence retrieval order (ROI-ranking is deferred to R3). NEEDS WILLIAM. */
+  lap_time_impact_s?: number;
   reversal_cost_minutes: number;
   confidence: Confidence;
   sources: string[];

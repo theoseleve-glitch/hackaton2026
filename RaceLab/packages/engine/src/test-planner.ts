@@ -136,6 +136,23 @@ const baseInput: RaceDayInput = {
       wet.some((a) => a.change.includes("(currently 1)")),
       JSON.stringify(wet.map((a) => a.change)),
     );
+    // R2-3: the wet rule kb-clutch-springs-softer-009 is example-seeded with
+    // mechanism_brief + magnitude_estimate + lap_time_impact_s — they surface.
+    check(
+      "R2-3: wet adjustment mechanism leads with mechanism_brief ('This produces:')",
+      wet.some((a) => a.citations.includes("kb-clutch-springs-softer-009") && a.mechanism.includes("This produces:")),
+      JSON.stringify(wet.map((a) => a.mechanism)),
+    );
+    check(
+      "R2-3: wet adjustment surfaces the magnitude_estimate bracket",
+      wet.some((a) => /engages a few hundred rpm earlier/.test(a.mechanism)),
+      JSON.stringify(wet.map((a) => a.mechanism)),
+    );
+    check(
+      "R2-3: wet adjustment surfaces lap_time_impact_s (~0.2s/lap potential), NaN-free",
+      wet.some((a) => /s\/lap potential/.test(a.mechanism)) && !wet.some((a) => /NaN|Infinity/.test(a.mechanism)),
+      JSON.stringify(wet.map((a) => a.mechanism)),
+    );
     check(
       "practice read keeps the better-rated change",
       plan.practice_read.some((l) => l.startsWith("keep: rear_diff_oil") && l.includes("kb-diff-rear-thinner-005")),

@@ -16,7 +16,9 @@ export function ruleToOption(
   // M5: never render a non-finite "(currently NaN)"; omit the value instead.
   const showCurrent = current !== undefined && (typeof current !== "number" || isFiniteNumber(current));
   const currentTxt = showCurrent ? ` (currently ${current})` : "";
-  const effects = rule.effects.map((e) => `${humanize(e.axis)}: ${humanize(e.change)}`).join("; ");
+  // R2-3: effects render their OPTIONAL quantified magnitude when present
+  // ("steering response: faster [±5-8%]"); absent → terse current form.
+  const effects = effectsText(rule);
   // M1-M3: a physical-risk rule's hard caveat rides verbatim into the change
   // text so the limit reaches the racer at the point of action — never buried.
   const dangerTxt = rule.danger ? ` ⚠️ SAFETY: ${rule.danger}` : "";
@@ -26,7 +28,11 @@ export function ruleToOption(
     setting: rule.setting,
     change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt}${dangerTxt}`,
     magnitude: rule.magnitude_guidance ?? "",
-    mechanism: `Per ${rule.sources[0]}: ${effects}.`,
+    // R2-3: when a rule carries a physics one-liner, lead with it ("<brief>. This
+    // produces: <effects>.") instead of the terse "Per <source>: <effects>.".
+    mechanism: rule.mechanism_brief
+      ? `${rule.mechanism_brief} This produces: ${effects}.`
+      : `Per ${rule.sources[0]}: ${effects}.`,
     expected_effect: effects,
     confidence: rule.confidence,
     citations: [rule.id],
@@ -34,6 +40,18 @@ export function ruleToOption(
     if_it_does_not_help: "Revert, then re-test — the cause is likely the next-ranked option below, or tires for this surface.",
     ...(history ? { history_note: historyNote(history) } : {}),
   };
+}
+
+/** R2-3 — effects line, appending each effect's OPTIONAL quantified magnitude
+ *  estimate when the KB rule carries one. Shared by ruleToOption and the
+ *  report's expected-behavior so quantification surfaces consistently. */
+export function effectsText(rule: KBRule): string {
+  return rule.effects
+    .map((e) => {
+      const mag = e.magnitude_estimate ? ` [${e.magnitude_estimate}]` : "";
+      return `${humanize(e.axis)}: ${humanize(e.change)}${mag}`;
+    })
+    .join("; ");
 }
 
 /**

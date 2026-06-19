@@ -74,6 +74,9 @@ export function RacePlanView({ plan, onStrategy }: { plan: RacePlan; onStrategy:
         <Tile value={String(plan.technique_tips.length)} label={t({ en: "drive tips", fr: "conseils pilotage" })} />
       </View>
 
+      {/* R2-1: sprint-vs-endurance mindset — universal race-craft, always shown. */}
+      <Text style={styles.raceType}>🏁 {plan.race_type_note}</Text>
+
       {plan.adjustments && plan.adjustments.length > 0 && (
         <Fold
           title={t({ en: "Forecast adjustments", fr: "Ajustements prévisions" })}
@@ -181,6 +184,7 @@ const styles = StyleSheet.create({
   },
   strategyBtnText: { color: "#fff", fontWeight: "800", fontSize: 14 },
   line: { color: colors.text, fontSize: 13, lineHeight: 21 },
+  raceType: { color: colors.text, fontSize: 13, lineHeight: 20, fontWeight: "700", marginBottom: 10 },
   note: { color: colors.sub, fontSize: 11, fontStyle: "italic", marginTop: 8 },
   adjustment: { borderLeftWidth: 3, borderLeftColor: colors.accent, paddingLeft: 10, marginBottom: 10 },
   adjustTrigger: { color: colors.sub, fontSize: 11, fontWeight: "700", marginBottom: 3 },
