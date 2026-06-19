@@ -711,15 +711,23 @@ export function conditionsToTags(c: RunConditions): readonly string[] {
 export function surfaceToTags(surface: string): readonly string[] {
   const s = surface.toLowerCase();
   const tags: string[] = [];
+  // Surface FAMILY is single-valued: a surface is clay OR loose-dirt OR carpet…, never
+  // two at once. Evaluate most-specific first and STOP at the first family match, so a
+  // compound id like "loamy_clay" resolves to ONE family (clay) instead of emitting two
+  // contradictory ones ([clay, loose_dirt]) that would fire a clay rule AND a
+  // loose-surface rule on the same pick — the exact quiet-wrong-advice failure the tag
+  // pipeline exists to avoid.
   if (/clay/.test(s)) tags.push("clay");
-  if (/blue_groove/.test(s)) tags.push("blue_groove");
+  else if (/blue_groove/.test(s)) tags.push("blue_groove");
+  else if (/(astro|hockey_turf)/.test(s)) tags.push("astroturf");
+  else if (/carpet/.test(s)) tags.push("carpet");
+  else if (/(asphalt|tarmac|concrete|parking)/.test(s)) tags.push("asphalt");
   // NB: decomposed_granite + fire_road are hard-packed/high-grip dirt, NOT loose —
-  // they intentionally fall through to [] so the grip field (not a loose_dirt tag)
-  // carries them, rather than firing loose-surface rules that would mislead.
-  if (/(loose|loam|sugar_dirt|sand|gravel|rally_mix)/.test(s)) tags.push("loose_dirt");
-  if (/(astro|hockey_turf)/.test(s)) tags.push("astroturf");
-  if (/carpet/.test(s)) tags.push("carpet");
-  if (/(asphalt|tarmac|concrete|parking)/.test(s)) tags.push("asphalt");
+  // they intentionally fall through to no family so the grip field (not a loose_dirt
+  // tag) carries them, rather than firing loose-surface rules that would mislead.
+  else if (/(loose|loam|sugar_dirt|sand|gravel|rally_mix)/.test(s)) tags.push("loose_dirt");
+  // wet is an ORTHOGONAL condition, not a family — a watered clay track is clay + wet —
+  // so it stays additive alongside whatever family (if any) matched above.
   if (/(mud|water_crossing|wet_drift|snow|ice)/.test(s)) tags.push("wet");
   return Object.freeze([...new Set(tags)]);
 }

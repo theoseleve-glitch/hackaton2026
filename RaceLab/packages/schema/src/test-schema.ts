@@ -527,6 +527,9 @@ check("conditionsToTags: hot track temp alone triggers hot", JSON.stringify(cond
 check("surfaceToTags: astroturf id → astroturf family", JSON.stringify(surfaceToTags("astroturf")) === '["astroturf"]');
 check("surfaceToTags: loose loam → loose_dirt", JSON.stringify(surfaceToTags("loose_dirt_loam")) === '["loose_dirt"]');
 check("surfaceToTags: grip-carried surface (hard_packed_dirt) → [] (grip field carries it)", JSON.stringify(surfaceToTags("hard_packed_dirt")) === "[]");
+check("surfaceToTags: compound id resolves ONE family — loamy_clay → clay (not [clay,loose_dirt])", JSON.stringify(surfaceToTags("loamy_clay")) === '["clay"]');
+check("surfaceToTags: at most one of {clay,loose_dirt,astroturf,carpet,asphalt,blue_groove} per surface", ["loamy_clay","loose_dirt_loam","astroturf","carpet_onroad","asphalt_high_grip","blue_groove_rubber","watered_tacky_clay"].every((id) => surfaceToTags(id).filter((t) => ["clay","loose_dirt","astroturf","carpet","asphalt","blue_groove"].includes(t)).length <= 1));
+check("surfaceToTags: wet stays additive on a family (mud_clay → clay+wet)", JSON.stringify([...surfaceToTags("mud_clay")].sort()) === JSON.stringify(["clay","wet"].sort()));
 check("powerTypeToTags: nitro → nitro_power", JSON.stringify(powerTypeToTags("nitro")) === '["nitro_power"]');
 check("powerTypeToTags: brushless DEFAULTS to stock_blinky (D13-safe)", JSON.stringify(powerTypeToTags("brushless")) === '["stock_blinky"]');
 // the assembler unions all three, deduped — this IS what the app assigns to bundle.track.conditions
