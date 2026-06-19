@@ -2,8 +2,8 @@
   "expo": {
     "name": "RaceLab",
     "slug": "racelab",
-    "version": "0.1.0",
-    "scheme": "griplab",
+    "version": "1.0.0",
+    "scheme": "racelab",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -19,6 +19,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "app.racelab",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#0B0C0E",
         "foregroundImage": "./assets/android-icon-foreground.png",

@@ -12,8 +12,9 @@
  */
 
 /** Set false to hit the real Speedhive backend. true returns a deterministic
- *  fake session whenever the network is unreachable (dev/offline/demo). */
-const SPEEDHIVE_MOCK = true;
+ *  fake session whenever the network is unreachable (dev/offline/demo).
+ *  PRODUCTION: false — never surface fake sessions to real users (v1 ship). */
+const SPEEDHIVE_MOCK = false;
 
 const BASE = "https://practice-api.speedhive.com";
 /** practice-api returns 401 Bearer WITHOUT this header — it gates on Origin. */
