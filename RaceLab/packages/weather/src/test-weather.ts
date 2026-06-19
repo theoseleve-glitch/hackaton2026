@@ -565,6 +565,16 @@ console.log("\n— service: autoFillSession —");
   check("second call inside TTL → cache, no second network call", r2.ok && r2.from === "cache" && !r2.stale && state.calls === 1);
   check("fresh cache hit reports its age (age_ms = 0 at the same instant)", r2.ok && r2.age_ms === 0 && r2.fetch_failure === undefined);
 
+  // D62 reachability: WeatherDeps.baseUrls must reach the actual request (mock host /
+  // future commercial endpoint swap without touching call sites).
+  {
+    const mock = memDriver();
+    const { fn: mockFn, state: mockState } = countingFetch(forecastFixtureJson);
+    const mockDeps = { fetchFn: mockFn, driver: mock.driver, now_ms: T_NOW, baseUrls: { forecast: "https://mock.test/fc", archive: "https://mock.test/ar" } };
+    await autoFillSession(mockDeps, GPS, sessionStart);
+    check("autoFillSession honors WeatherDeps.baseUrls (request hits the injected host)", mockState.urls[0].startsWith("https://mock.test/fc?latitude="));
+  }
+
   const later = { fetchFn: offlineFetch, driver, now_ms: T_NOW + 2 * 60 * MIN };
   const r3 = await autoFillSession(later, GPS, "2026-06-11T11:30:00.000Z");
   if (!r3.ok) fatal("stale-if-offline through the service failed");

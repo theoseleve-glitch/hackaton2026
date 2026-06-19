@@ -11,7 +11,7 @@
 
 import type { Gps, IsoDate, IsoDateTime, RunConditions, ResolvedRunConditions, WeatherObservation } from "../../schema/src/index";
 import { resolveConditions, weatherAtTime } from "../../schema/src/index";
-import type { FetchFailure, FetchLike, OpenMeteoResponse } from "./client";
+import type { FetchFailure, FetchLike, OpenMeteoResponse, WeatherBaseUrls } from "./client";
 import { buildArchiveUrl, buildForecastUrl, fetchOpenMeteo, payloadDayComplete } from "./client";
 import type { KeyValueDriver } from "./cache";
 import {
@@ -35,6 +35,13 @@ export interface WeatherDeps {
   now_ms: number;
   forecast_ttl_ms?: number; // default DEFAULT_FORECAST_TTL_MS (30 min)
   archive_ttl_ms?: number; //  default DEFAULT_ARCHIVE_TTL_MS (30 days)
+  /** Optional Open-Meteo host override (mirrors speedhive's injectable baseUrls).
+   *  Lets a test point the service at a mock host and — once the commercial-licensing
+   *  call is made (human-gated) — production swap endpoints WITHOUT touching call sites.
+   *  Undefined → the public free hosts (the D62 builder defaults). */
+  baseUrls?: WeatherBaseUrls;
+  /** Optional per-request timeout override (ms). Undefined → DEFAULT_WEATHER_TIMEOUT_MS. */
+  timeoutMs?: number;
 }
 
 // ── results ──────────────────────────────────────────────────────────────────
@@ -188,7 +195,7 @@ export async function autoFillSession(
   if (Number.isNaN(start_ms)) {
     return { ok: false, reason: "invalid_input", detail: `unparseable sessionStartIso '${sessionStartIso}'` };
   }
-  const url = buildForecastUrl(gps, forecastWindow(deps.now_ms, start_ms));
+  const url = buildForecastUrl(gps, forecastWindow(deps.now_ms, start_ms), deps.baseUrls?.forecast);
   const res = await fetchWithCache(
     {
       driver: deps.driver,
@@ -201,7 +208,7 @@ export async function autoFillSession(
     },
     forecastCacheKey(gps, deps.now_ms),
     forecastLatestKey(gps),
-    () => fetchOpenMeteo(deps.fetchFn, url),
+    () => fetchOpenMeteo(deps.fetchFn, url, deps.timeoutMs),
   );
   return finish(res, mapForecastResponse, sessionStartIso);
 }
@@ -228,7 +235,7 @@ export async function backfillSession(
     return { ok: false, reason: "invalid_input", detail: `dateIso must be YYYY-MM-DD, got '${dateIso}'` };
   }
   const range = { start_date: dateIso, end_date: dateIso };
-  const url = buildArchiveUrl(gps, range);
+  const url = buildArchiveUrl(gps, range, deps.baseUrls?.archive);
   const res = await fetchWithCache(
     {
       driver: deps.driver,
@@ -243,7 +250,7 @@ export async function backfillSession(
     },
     archiveCacheKey(gps, range),
     undefined, // range IS the identity — no rotating bucket, no pointer needed
-    () => fetchOpenMeteo(deps.fetchFn, url),
+    () => fetchOpenMeteo(deps.fetchFn, url, deps.timeoutMs),
   );
   return finish(res, mapArchiveResponse);
 }
