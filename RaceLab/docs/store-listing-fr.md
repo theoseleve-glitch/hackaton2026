@@ -30,7 +30,7 @@ Enregistre une session en moins de 10 secondes, à la piste, hors ligne. Attache
 
 Nitro ou électrique, tout-terrain ou piste — la fiche s'adapte à ta voiture.
 
-**Essai gratuit de 15 jours.** Ensuite 9,99 €/mois ou 99,99 €/an. Crée ton compte sur racelab.app — c'est moins cher (pas de commission des stores).
+**Essai gratuit de 15 jours.** Ensuite 9,99 €/mois ou 99,99 €/an. Crée ton compte sur racelabrc.app — c'est moins cher (pas de commission des stores).
 
 Fait par des pilotes, pour la pit lane. 🏁
 

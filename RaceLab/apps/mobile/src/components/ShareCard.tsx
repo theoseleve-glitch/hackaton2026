@@ -82,7 +82,7 @@ export const ShareCard = React.forwardRef<Svg, { payload: SharedPayload }>(({ pa
         RaceLab
       </SvgText>
       <SvgText x={W - 64} y={H - 52} fill={colors.sub} fontSize={30} textAnchor="end">
-        racelab.app
+        racelabrc.app
       </SvgText>
     </Svg>
   );

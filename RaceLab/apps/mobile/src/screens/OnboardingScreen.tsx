@@ -82,8 +82,8 @@ export function OnboardingScreen({ onDone }: Props) {
               <Text style={styles.webCardTitle}>{t({ en: "Cheaper on the web", fr: "Moins cher sur le web" })}</Text>
               <Text style={styles.webCardText}>
                 {t({
-                  en: "Create your account on the website — racelab.app. Web subscriptions skip store fees, so the same plan costs less there.",
-                  fr: "Crée ton compte sur le site web — racelab.app. Les abonnements web évitent les frais des stores, donc la même formule coûte moins cher là-bas.",
+                  en: "Create your account on the website — racelabrc.app. Web subscriptions skip store fees, so the same plan costs less there.",
+                  fr: "Crée ton compte sur le site web — racelabrc.app. Les abonnements web évitent les frais des stores, donc la même formule coûte moins cher là-bas.",
                 })}
               </Text>
             </View>

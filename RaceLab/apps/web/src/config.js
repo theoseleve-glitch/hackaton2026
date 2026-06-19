@@ -2,8 +2,8 @@
 // Copy is French (register "tu", to match the app). Structure/prices/hrefs unchanged.
 export const BRAND = "RaceLab"; // public name (GripLab was a placeholder, dropped 2026-06-17)
 export const LINKS = {
-  trial: "https://racelab.app",
-  account: "https://racelab.app",
+  trial: "https://racelabrc.app",
+  account: "https://racelabrc.app",
 };
 export const NAV = [
   { label: "Comment ça marche", href: "#tune" },
@@ -117,7 +117,7 @@ export const FOOTER = {
   links: [
     { label: "Comment ça marche", href: "#tune" },
     { label: "Tarifs", href: "#pricing" },
-    { label: "racelab.app", href: LINKS.trial },
+    { label: "racelabrc.app", href: LINKS.trial },
   ],
   legal: "Avant-lancement.",
 };

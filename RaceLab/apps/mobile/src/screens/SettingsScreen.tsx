@@ -13,7 +13,7 @@ import { colors, radius } from "../theme";
 /**
  * Settings (Théo's test pass): driver profile with the bragging numbers
  * (year + career, straight from the log), account & billing (web-first —
- * the subscription lives on racelab.app, never in-app), preferences, and
+ * the subscription lives on racelabrc.app, never in-app), preferences, and
  * the on-device data promise.
  */
 
@@ -137,10 +137,10 @@ export function SettingsScreen({ account, setAccount, logbook, onClose, onReplay
             <Pressable
               style={styles.webBtn}
               onPress={() => {
-                Linking.openURL("https://racelab.app").catch(() => {});
+                Linking.openURL("https://racelabrc.app").catch(() => {});
               }}
             >
-              <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelab.app ↗", fr: "Gérer l’abonnement sur racelab.app ↗" })}</Text>
+              <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelabrc.app ↗", fr: "Gérer l’abonnement sur racelabrc.app ↗" })}</Text>
             </Pressable>
           </View>
         </Section>

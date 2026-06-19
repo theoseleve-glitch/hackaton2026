@@ -3,7 +3,7 @@
 The app is release-ready (config below). The build + signing + upload need **your** accounts — steps are spelled out.
 
 ## App-side config (done)
-- `apps/mobile/app.json`: name **RaceLab**, version **1.0.0**, `android.package` **app.racelab** (PERMANENT — reverse-DNS of racelab.app), `android.versionCode` **1**, scheme **racelab**, dark UI, R-plate icon + adaptive icon + carbon splash.
+- `apps/mobile/app.json`: name **RaceLab**, version **1.0.0**, `android.package` **app.racelab** (PERMANENT — reverse-DNS of racelabrc.app), `android.versionCode` **1**, scheme **racelab**, dark UI, R-plate icon + adaptive icon + carbon splash.
 - `apps/mobile/eas.json`: `production` profile builds an **AAB** (app-bundle, what Play Store wants).
 - `SPEEDHIVE_MOCK = false` (no fake sessions in production). Social features removed for v1.
 - Engine advice **safety-audited + hardened** (0 adversarial violations, CI gate `npm run test:safety`). ⚠ Provisional KB bounds (rear-camber −1.5°, centre-diff floor) await William's ratification — safe regardless via runtime guards.

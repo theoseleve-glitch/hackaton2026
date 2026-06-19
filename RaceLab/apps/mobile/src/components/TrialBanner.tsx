@@ -17,8 +17,8 @@ export function TrialBanner({ daysLeft, onPress }: { daysLeft: number; onPress?:
     >
       <Text style={[styles.text, urgent && styles.textUrgent]}>
         {t({
-          en: `Trial · ${daysLeft} ${daysLeft === 1 ? "day" : "days"} left · subscribe on racelab.app`,
-          fr: `Essai · ${daysLeft} ${daysLeft === 1 ? "jour" : "jours"} restant${daysLeft === 1 ? "" : "s"} · abonne-toi sur racelab.app`,
+          en: `Trial · ${daysLeft} ${daysLeft === 1 ? "day" : "days"} left · subscribe on racelabrc.app`,
+          fr: `Essai · ${daysLeft} ${daysLeft === 1 ? "jour" : "jours"} restant${daysLeft === 1 ? "" : "s"} · abonne-toi sur racelabrc.app`,
         })}
       </Text>
     </Pressable>

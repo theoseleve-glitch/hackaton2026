@@ -155,7 +155,7 @@ Key decisions: **setup sheets are schema-driven JSON**, one schema per chassis t
 ### Phase 0 — Validate the bet (Weeks 1–2)
 | William | Théo |
 |---|---|
-| ⚠️ **Name check (blocker)**: racelab.app collision — clear it or switch to backup name before any more branding | ✅ **DONE — advisor prototype built** (`packages/engine`): 63 KB rules (HUDY-sourced), deterministic NLU + chatbot, eval 10/10 + NLU 19/19 + dialogue tests green, zero APIs (D18) |
+| ⚠️ **Name check (blocker)**: racelabrc.app collision — clear it or switch to backup name before any more branding | ✅ **DONE — advisor prototype built** (`packages/engine`): 63 KB rules (HUDY-sourced), deterministic NLU + chatbot, eval 10/10 + NLU 19/19 + dialogue tests green, zero APIs (D18) |
 | First **30 KB rules** + the 5-scenario So Dialed benchmark (install Premium, feed it real scenarios, save answers) | Eval harness (runs the scenario set against the prototype; lives on in CI) |
 | Recruit **2 club fast-guys** as eval reviewers / founding creators | Repo + Expo skeleton; **create Apple & Google developer accounts** (lead times start now — D17) |
 | Design system + core screens (sheet editor first) | Schema-driven sheet renderer PoC (JSON template → form UI) |
@@ -216,7 +216,7 @@ Rationale: free tier is genuinely useful (better retention than So Dialed's), bu
 | Chassis template treadmill (So Dialed has 600+) | 6–8 at launch (D14); templates AI-extracted + reviewed; schema-driven = data, not code; community templates V2 |
 | Two-person bandwidth / unproven velocity | Week-1 calibration gate; hard phase gates; pre-agreed cut order (social → faithful PDFs → …, never the AI) |
 | Store review surprises (UGC, AI advice, IAP) | Accounts week 1, Play 14-day test from week 4, compliance built in Phase 2, payments deferred to V1.1 (D16/D17) |
-| Name collision (racelab.app exists in sim racing) | This-week blocker: clear or rename before more branding (D1 escalation) |
+| Name collision (racelabrc.app exists in sim racing) | This-week blocker: clear or rename before more branding (D1 escalation) |
 | So Dialed copies condition-aware AI | Our moat is the per-user learning loop + KB quality — data they don't have |
 
 ---
@@ -231,7 +231,7 @@ Rationale: free tier is genuinely useful (better retention than So Dialed's), bu
 
 ## 12. Immediate Next Actions (this week)
 
-**Blocker (both): name decision.** racelab.app already exists in sim racing — clear it or pick the backup name now, before another asset is made.
+**Blocker (both): name decision.** racelabrc.app already exists in sim racing — clear it or pick the backup name now, before another asset is made.
 
 **William:**
 1. Install So Dialed Premium → feed its AI Mechanic 5 real tuning scenarios, save the answers (the benchmark Gate A must beat)

@@ -9,7 +9,7 @@ import { payloadToLink, serializePayload } from "../../../packages/social/src";
 /**
  * Sharing IO (offline slice): wraps the OS share sheet, clipboard, file export
  * and PNG export around a packages/social SharedPayload. The deep link is the
- * growth primitive (D10) — it upgrades to a hosted racelab.app/s/<id> URL once
+ * growth primitive (D10) — it upgrades to a hosted racelabrc.app/s/<id> URL once
  * the backend lands; nothing here touches the advice path (D18).
  */
 
