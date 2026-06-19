@@ -53,6 +53,7 @@ export async function stripeWebhook(ctx: ServerCtx, req: HttpRequest): Promise<H
     write.status,
     write.expires_at,
     write.stripe_customer_id,
+    write.event_at,
     now,
   );
   return { status: 200, json: { received: true, applied: true } };

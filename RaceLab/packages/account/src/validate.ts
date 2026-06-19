@@ -75,6 +75,21 @@ export async function validateSubscription(deps: ValidateDeps, token: string): P
   const loaded = await loadAccount(deps.store, nowIso);
   if (!loaded.ok) return { ok: false, reason: "store_error" };
 
+  // OFFLINE-GRACE GUARD: a transient server "none" (webhook lag, a missing /
+  // read-replica row, a brief gap right after renewal) must NOT erase paid
+  // evidence or the grace window. If the cached account was EVER paid, keep it
+  // untouched — local expiry math (expires_at + GRACE_DAYS in checkEntitlement)
+  // flips it to grace/expired deterministically without a destructive write.
+  // Only a never-paid account accepts the bare {status:"none"} below.
+  if (status === "none") {
+    const cached = loaded.account.subscription;
+    const everPaid =
+      cached.validated_at !== undefined || cached.status === "active" || cached.status === "grace";
+    if (everPaid) {
+      return { ok: true, status: "none", account: loaded.account };
+    }
+  }
+
   const validated_at = serverTime ?? nowIso;
   const subscription: Subscription =
     status === "none"

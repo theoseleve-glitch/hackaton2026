@@ -47,6 +47,9 @@ export interface StripeEventObject {
 
 export interface StripeEvent {
   type: string;
+  /** Unix seconds the event was created — the monotonic ordering key (Stripe
+   *  delivery is unordered + at-least-once). */
+  created?: number;
   data: { object: StripeEventObject };
 }
 
@@ -63,6 +66,10 @@ export interface SubscriptionWrite {
   expires_at: string | null;
   /** Stripe customer id, when the event carried one (null = leave existing). */
   stripe_customer_id: string | null;
+  /** ISO of the event's `created` time — the upsert applies only if this is at
+   *  or after the stored watermark, so a stale/replayed delivery can't regress
+   *  a paying user. null when absent (then it applies unconditionally). */
+  event_at: string | null;
 }
 
 /** Event types that move entitlement state. Everything else is acked + ignored. */
@@ -98,20 +105,24 @@ export function mapEvent(event: StripeEvent): SubscriptionWrite | null {
       : null;
   const stripe_customer_id =
     typeof obj.customer === "string" && obj.customer !== "" ? obj.customer : null;
+  const event_at =
+    typeof event.created === "number" && Number.isFinite(event.created)
+      ? new Date(event.created * 1000).toISOString()
+      : null;
 
   if (event.type === "customer.subscription.deleted") {
-    return { user_id, status: "expired", expires_at, stripe_customer_id };
+    return { user_id, status: "expired", expires_at, stripe_customer_id, event_at };
   }
 
   switch (obj.status) {
     case "active":
     case "trialing":
     case "past_due":
-      return { user_id, status: "active", expires_at, stripe_customer_id };
+      return { user_id, status: "active", expires_at, stripe_customer_id, event_at };
     case "canceled":
     case "unpaid":
     case "incomplete_expired":
-      return { user_id, status: "canceled", expires_at, stripe_customer_id };
+      return { user_id, status: "canceled", expires_at, stripe_customer_id, event_at };
     default:
       return null; // incomplete / paused / undefined — no change
   }

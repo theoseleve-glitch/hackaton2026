@@ -237,6 +237,19 @@ console.log("\n— validateSubscription + offline grace —");
   const cached = parseAccountState(JSON.parse(kv.map.get(STORAGE_KEYS.account) ?? "null"));
   check("validate: cache persisted with validated_at (parseAccountState round-trip)", cached.ok && cached.value.subscription.status === "active" && cached.value.subscription.validated_at === T0 && cached.value.subscription.expires_at === E);
 
+  // OFFLINE-GRACE GUARD: a transient server "none" (webhook lag / missing row)
+  // must NOT erase the cached PAID subscription.
+  const vTransientNone = await validateSubscription(
+    { fetchFn: makeFetch(() => ({ status: 200, json: { status: "none", server_time: T0 } })), store: kv, now: () => device, apiBase: "https://api.test" },
+    "tok-user_A",
+  );
+  check(
+    "validate: transient 'none' over a PAID sub is non-destructive",
+    vTransientNone.ok && vTransientNone.account.subscription.status === "active" && vTransientNone.account.subscription.validated_at === T0 && vTransientNone.account.subscription.expires_at === E,
+  );
+  const afterNone = parseAccountState(JSON.parse(kv.map.get(STORAGE_KEYS.account) ?? "null"));
+  check("validate: paid evidence survives the 'none' in storage", afterNone.ok && afterNone.value.subscription.status === "active" && afterNone.value.subscription.validated_at === T0);
+
   // now fully offline (fetchFn never consulted by canUse)
   const offlineDeps = { store: kv, now: () => device };
   device = day(29);

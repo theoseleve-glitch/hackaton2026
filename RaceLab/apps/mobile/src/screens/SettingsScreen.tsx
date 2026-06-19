@@ -10,7 +10,7 @@ import { ProgressCard } from "../components/ProgressCard";
 import { resetTour } from "../components/Tour";
 import { colors, radius } from "../theme";
 import { buildSubscribeUrl, SUBSCRIBE_WEB_BASE } from "@racelab/account";
-import { useTokenProvider } from "../auth";
+import { useTokenProvider, useAuthState } from "../auth";
 
 /**
  * Settings (Théo's test pass): driver profile with the bragging numbers
@@ -34,6 +34,7 @@ export function SettingsScreen({ account, setAccount, logbook, onClose, onReplay
   const t = useT();
   const lang = useLang();
   const tokens = useTokenProvider();
+  const { signedIn } = useAuthState();
   const LEVEL_LABELS_L: Record<ExperienceLevel, string> = {
     beginner: t({ en: "beginner", fr: "débutant" }),
     club: t({ en: "club racer", fr: "pilote club" }),
@@ -137,16 +138,23 @@ export function SettingsScreen({ account, setAccount, logbook, onClose, onReplay
                 fr: `${PRICING.monthly_eur}€/mois ou ${PRICING.annual_eur}€/an. Les abonnements se gèrent sur le site — la facturation web évite les frais des stores, donc le même forfait y coûte moins cher.`,
               })}
             </Text>
-            <Pressable
-              style={styles.webBtn}
-              onPress={() => {
-                // External web checkout, tagged with the user id when signed in
-                // (anonymous → no query param; the user signs in on the web page).
-                Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, tokens.userId() ?? undefined)).catch(() => {});
-              }}
-            >
-              <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelabrc.app ↗", fr: "Gérer l’abonnement sur racelabrc.app ↗" })}</Text>
-            </Pressable>
+            {signedIn ? (
+              <Pressable
+                style={styles.webBtn}
+                onPress={() => {
+                  // External web checkout/portal, tagged with the verified user id.
+                  Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, tokens.userId() ?? undefined)).catch(() => {});
+                }}
+              >
+                <Text style={styles.webBtnText}>{t({ en: "Manage subscription on racelabrc.app ↗", fr: "Gérer l’abonnement sur racelabrc.app ↗" })}</Text>
+              </Pressable>
+            ) : (
+              // No in-app session to redeem a purchase yet (anonymous build) — do
+              // not link to a checkout that can't unlock here. See Paywall.tsx.
+              <Text style={styles.billingMeta}>
+                {t({ en: "Subscriptions open very soon. Your trial is active now.", fr: "Les abonnements ouvrent très bientôt. Ton essai est actif." })}
+              </Text>
+            )}
           </View>
         </Section>
 

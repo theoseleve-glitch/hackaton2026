@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
   status             TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
   expires_at         TIMESTAMPTZ,                          -- null = lifetime/manual
   stripe_customer_id TEXT,                                 -- Stripe customer ("cus_…"); set by the webhook, read by the Portal
+  last_event_at      TIMESTAMPTZ,                          -- Stripe event.created watermark; upsert ignores older deliveries (unordered/at-least-once)
   source             TEXT NOT NULL DEFAULT 'web',
   updated_at         TIMESTAMPTZ NOT NULL DEFAULT now()
 );

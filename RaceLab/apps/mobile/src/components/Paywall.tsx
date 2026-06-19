@@ -16,6 +16,7 @@ import { useT } from "../i18n";
 import type { Phrase } from "../i18n";
 import { useEntitlement } from "../entitlements";
 import type { DenialReason } from "../entitlements";
+import { useAuthState } from "../auth";
 
 /** The premium feature list shown in the sheet (advisor is FREE — not listed). */
 const PREMIUM_LINES: Phrase[] = [
@@ -26,6 +27,13 @@ const PREMIUM_LINES: Phrase[] = [
   { en: "Full setup version history", fr: "Historique complet des versions de réglages" },
   { en: "PDF / poster export of reports", fr: "Export PDF / poster des rapports" },
 ];
+
+/** Sub-copy when there is no in-app session to redeem a purchase (anonymous
+ *  build) — we describe the trial, not a buy flow that can't unlock. */
+const SUB_TRIAL_ONLY: Phrase = {
+  en: "RaceLab Pro unlocks the features below. The setup engineer is always free.",
+  fr: "RaceLab Pro débloque les fonctions ci-dessous. L'ingénieur de réglages est toujours gratuit.",
+};
 
 interface PaywallCtx {
   open: (reason?: DenialReason) => void;
@@ -95,6 +103,12 @@ function PaywallSheet({ reason, onClose }: { reason?: DenialReason; onClose: () 
   // any non-free feature exposes the same openSubscribe/validateNow; multi_car
   // is a stable representative (never advisor — that would short-circuit).
   const ent = useEntitlement("multi_car");
+  // SAFETY (pay-without-unlock): only OFFER the web subscription when an in-app
+  // session exists to redeem it. Anonymous builds (no Clerk) can't authenticate
+  // as the Clerk user the web checkout attributes the purchase to, so a payment
+  // could never unlock here — we must not sell it. signedIn is false until Clerk
+  // is wired (src/auth.tsx); the buy CTAs light up automatically once it is.
+  const { signedIn } = useAuthState();
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -112,7 +126,7 @@ function PaywallSheet({ reason, onClose }: { reason?: DenialReason; onClose: () 
       <ScrollView contentContainerStyle={{ padding: spacing.xl }}>
         <Text style={styles.kicker}>{t({ en: "RACELAB PRO", fr: "RACELAB PRO" })}</Text>
         <Text style={styles.headline}>{t(headlineFor(reason))}</Text>
-        <Text style={styles.sub}>{t(subFor(reason))}</Text>
+        <Text style={styles.sub}>{t(signedIn ? subFor(reason) : SUB_TRIAL_ONLY)}</Text>
 
         <View style={styles.list}>
           {PREMIUM_LINES.map((line, i) => (
@@ -123,23 +137,37 @@ function PaywallSheet({ reason, onClose }: { reason?: DenialReason; onClose: () 
           ))}
         </View>
 
-        <Text style={styles.webNote}>
-          {t({
-            en: "Web billing skips app-store fees — the same plan costs less there.",
-            fr: "La facturation web évite les frais des stores — le même forfait y coûte moins cher.",
-          })}
-        </Text>
-
-        <Pressable style={[styles.btn, styles.btnPrimary]} onPress={ent.openSubscribe}>
-          <Text style={styles.btnPrimaryText}>{t({ en: "Subscribe on the web ↗", fr: "S'abonner sur le web ↗" })}</Text>
-        </Pressable>
-        <Pressable style={[styles.btn, styles.btnGhost]} onPress={() => void onRefresh()} disabled={refreshing}>
-          <Text style={styles.btnGhostText}>
-            {refreshing
-              ? t({ en: "Checking…", fr: "Vérification…" })
-              : t({ en: "I already paid — refresh", fr: "J'ai déjà payé — actualiser" })}
-          </Text>
-        </Pressable>
+        {signedIn ? (
+          <>
+            <Text style={styles.webNote}>
+              {t({
+                en: "Web billing skips app-store fees — the same plan costs less there.",
+                fr: "La facturation web évite les frais des stores — le même forfait y coûte moins cher.",
+              })}
+            </Text>
+            <Pressable style={[styles.btn, styles.btnPrimary]} onPress={ent.openSubscribe}>
+              <Text style={styles.btnPrimaryText}>{t({ en: "Subscribe on the web ↗", fr: "S'abonner sur le web ↗" })}</Text>
+            </Pressable>
+            <Pressable style={[styles.btn, styles.btnGhost]} onPress={() => void onRefresh()} disabled={refreshing}>
+              <Text style={styles.btnGhostText}>
+                {refreshing
+                  ? t({ en: "Checking…", fr: "Vérification…" })
+                  : t({ en: "I already paid — refresh", fr: "J'ai déjà payé — actualiser" })}
+              </Text>
+            </Pressable>
+          </>
+        ) : (
+          // Anonymous build: no redeemable identity yet — show the trial state,
+          // never a buy button that can't unlock (pay-without-unlock guard).
+          <View style={styles.soon}>
+            <Text style={styles.soonText}>
+              {t({
+                en: "Paid subscriptions are coming very soon. Until then your premium trial is active — enjoy it, and the setup engineer stays free forever.",
+                fr: "Les abonnements payants arrivent très bientôt. En attendant, ton essai premium est actif — profites-en, et l'ingénieur de réglages reste gratuit pour toujours.",
+              })}
+            </Text>
+          </View>
+        )}
         <Pressable style={styles.closeBtn} onPress={onClose} hitSlop={10}>
           <Text style={styles.closeText}>{t({ en: "Not now", fr: "Plus tard" })}</Text>
         </Pressable>
@@ -171,6 +199,15 @@ const styles = StyleSheet.create({
   check: { color: colors.good, fontSize: 14, fontWeight: "900", marginTop: 1 },
   listText: { color: colors.text, fontSize: 14, lineHeight: 19, flex: 1 },
   webNote: { color: colors.sub, fontSize: 12, fontStyle: "italic", lineHeight: 17, marginBottom: spacing.lg },
+  soon: {
+    backgroundColor: colors.cardAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    padding: spacing.lg,
+    marginBottom: spacing.md,
+  },
+  soonText: { color: colors.text, fontSize: 13, lineHeight: 19 },
   btn: { borderRadius: radius.md, paddingVertical: 14, alignItems: "center", marginBottom: spacing.md },
   btnPrimary: { backgroundColor: colors.accent },
   btnPrimaryText: { color: colors.onAccent, fontWeight: "800", fontSize: 15 },

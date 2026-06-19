@@ -51,12 +51,16 @@ export interface Db {
   getSubscription(user_id: string): Promise<SubscriptionRow | null>;
   /** Upsert the subscription row from a verified Stripe webhook (the only
    *  writer). expires_at null = lifetime/manual; stripe_customer_id null keeps
-   *  any existing value (so an event without a customer never erases it). */
+   *  any existing value (so an event without a customer never erases it).
+   *  event_at is the Stripe event.created watermark: a strictly-OLDER event is
+   *  ignored (no-op) so an out-of-order / replayed delivery can never regress a
+   *  paying user. null event_at applies unconditionally. */
   upsertSubscription(
     user_id: string,
     status: "active" | "canceled" | "expired",
     expires_at: string | null,
     stripe_customer_id: string | null,
+    event_at: string | null,
     updated_at_iso: string,
   ): Promise<void>;
   /** Idempotent on (user_id, entry_id): duplicates count as skipped. */
@@ -111,17 +115,22 @@ export function makeSqlDb(query: QueryFn): Db {
       };
     },
 
-    async upsertSubscription(user_id, status, expires_at, stripe_customer_id, updated_at_iso) {
+    async upsertSubscription(user_id, status, expires_at, stripe_customer_id, event_at, updated_at_iso) {
       await query(
-        `INSERT INTO subscriptions (user_id, status, expires_at, stripe_customer_id, source, updated_at)
-         VALUES ($1, $2, $3::timestamptz, $4, 'web', $5::timestamptz)
+        `INSERT INTO subscriptions (user_id, status, expires_at, stripe_customer_id, last_event_at, source, updated_at)
+         VALUES ($1, $2, $3::timestamptz, $4, $5::timestamptz, 'web', $6::timestamptz)
          ON CONFLICT (user_id) DO UPDATE
            SET status = EXCLUDED.status,
                expires_at = EXCLUDED.expires_at,
                -- never erase a known customer with a null from a later event
                stripe_customer_id = COALESCE(EXCLUDED.stripe_customer_id, subscriptions.stripe_customer_id),
-               updated_at = EXCLUDED.updated_at`,
-        [user_id, status, expires_at, stripe_customer_id, updated_at_iso],
+               last_event_at = COALESCE(EXCLUDED.last_event_at, subscriptions.last_event_at),
+               updated_at = EXCLUDED.updated_at
+           -- monotonic: skip strictly-older (out-of-order / replayed) deliveries
+           WHERE subscriptions.last_event_at IS NULL
+              OR EXCLUDED.last_event_at IS NULL
+              OR EXCLUDED.last_event_at >= subscriptions.last_event_at`,
+        [user_id, status, expires_at, stripe_customer_id, event_at, updated_at_iso],
       );
     },
 

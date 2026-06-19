@@ -54,13 +54,20 @@ class FakeDb implements Db {
   async getSubscription(user_id: string): Promise<SubscriptionRow | null> {
     return this.subs.get(user_id) ?? null;
   }
+  subEventAt = new Map<string, string>(); // last-applied Stripe event watermark (ISO)
   async upsertSubscription(
     user_id: string,
     status: "active" | "canceled" | "expired",
     expires_at: string | null,
     stripe_customer_id: string | null,
+    event_at: string | null,
     _updated_at_iso: string,
   ): Promise<void> {
+    const watermark = this.subEventAt.get(user_id);
+    // monotonic guard (mirrors the SQL WHERE): drop strictly-older deliveries
+    if (watermark !== undefined && event_at !== null && Date.parse(event_at) < Date.parse(watermark)) {
+      return;
+    }
     const existing = this.subs.get(user_id);
     // mirror the SQL COALESCE: a null customer never erases a known one
     this.subs.set(user_id, {
@@ -68,6 +75,7 @@ class FakeDb implements Db {
       expires_at,
       stripe_customer_id: stripe_customer_id ?? existing?.stripe_customer_id ?? null,
     });
+    if (event_at !== null) this.subEventAt.set(user_id, event_at);
   }
   async insertBackupEntries(
     user_id: string,
@@ -99,6 +107,7 @@ class FakeDb implements Db {
   async deleteUserData(user_id: string, requested_at_iso: string): Promise<void> {
     this.users.delete(user_id);
     this.subs.delete(user_id);
+    this.subEventAt.delete(user_id);
     this.backups.delete(user_id);
     if (!this.deletions.has(user_id)) this.deletions.set(user_id, requested_at_iso); // first wins
   }
@@ -272,9 +281,10 @@ console.log("\n— stripe webhook —");
   // Build a customer.subscription.* event object the mapper reads.
   const subEvent = (
     type: string,
-    o: { user_id?: string; cref?: string; status?: string; cpe?: string; customer?: string },
+    o: { user_id?: string; cref?: string; status?: string; cpe?: string; customer?: string; createdAt?: string },
   ): Record<string, unknown> => ({
     type,
+    ...(o.createdAt !== undefined ? { created: unix(o.createdAt) } : {}),
     data: {
       object: {
         ...(o.user_id !== undefined ? { metadata: { user_id: o.user_id } } : {}),
@@ -337,7 +347,18 @@ console.log("\n— stripe webhook —");
   const incomplete = await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_B", status: "incomplete", cpe: day(30) }), "valid"));
   check("webhook: 'incomplete' status -> no entitlement change", incomplete.json.applied === false);
 
+  // out-of-order / replayed delivery must never regress a paying user
   db.subs.delete("user_A");
+  db.subEventAt.delete("user_A");
+  await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "active", cpe: day(60), customer: "cus_A", createdAt: day(10) }), "valid"));
+  check("order: newer event sets expires_at", db.subs.get("user_A")?.expires_at === day(60));
+  await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "active", cpe: day(20), customer: "cus_A", createdAt: day(5) }), "valid"));
+  check("order: STALE older event does NOT regress expires_at", db.subs.get("user_A")?.expires_at === day(60));
+  await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "active", cpe: day(90), customer: "cus_A", createdAt: day(20) }), "valid"));
+  check("order: a genuinely newer event DOES advance expires_at", db.subs.get("user_A")?.expires_at === day(90));
+
+  db.subs.delete("user_A");
+  db.subEventAt.delete("user_A");
   db.subs.delete("user_B");
 }
 
