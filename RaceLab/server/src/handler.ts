@@ -53,6 +53,15 @@ const RATE_POLICY: Record<string, RatePolicy> = {
   "POST /api/me/export": { surface: "export_create", limit: 10, window_ms: MIN },
   "GET /api/backup/restore": { surface: "backup_restore", limit: 60, window_ms: MIN },
   "POST /api/trial/start": { surface: "trial_start", limit: 30, window_ms: MIN },
+  // auth-free surfaces — uncapped before (audit P2). share/get is a token-probing /
+  // scrape vector; content/* mints an EdDSA signature per cold-cache hit (a distributed
+  // signing-oracle / CPU burn). Per-IP caps bound abuse without hurting legit fork/update.
+  "GET /api/share/get": { surface: "share_get", limit: 120, window_ms: MIN },
+  "GET /api/content/rcdata": { surface: "content_get", limit: 60, window_ms: MIN },
+  "GET /api/content/kb": { surface: "content_get", limit: 60, window_ms: MIN },
+  // bearer-gated storage/quota writers — cap the storage-growth path too.
+  "POST /api/share/publish": { surface: "share_publish", limit: 30, window_ms: MIN },
+  "POST /api/media/upload-url": { surface: "media_upload_url", limit: 60, window_ms: MIN },
 };
 
 const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {

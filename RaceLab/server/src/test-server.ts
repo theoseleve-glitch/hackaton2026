@@ -517,6 +517,16 @@ console.log("\n— rate limiting —");
   // a DIFFERENT IP has its own fresh bucket (per-IP isolation).
   const otherIp = await rlHandle(ipReq("2.2.2.2"));
   check("rate: a different IP has its own budget (not 429)", otherIp.status !== 429);
+  // audit P2: the auth-free surfaces that were UNCAPPED are now policy'd.
+  const contentReq = (ip: string): HttpRequest => ({ method: "GET", path: "/api/content/rcdata", headers: {}, query: {}, body: undefined, ip });
+  for (let i = 0; i < 60; i++) await rlHandle(contentReq("9.9.9.9")); // content_get policy = 60/min
+  const cOver = await rlHandle(contentReq("9.9.9.9"));
+  check("rate: auth-free content GET is now capped — 61st from one IP -> 429 (signing-oracle bounded)", cOver.status === 429 && cOver.json.error === "rate_limited");
+  const shareReq = (ip: string): HttpRequest => ({ method: "GET", path: "/api/share/get", headers: {}, query: { token: "x" }, body: undefined, ip });
+  for (let i = 0; i < 120; i++) await rlHandle(shareReq("8.8.8.8")); // share_get policy = 120/min
+  const sOver = await rlHandle(shareReq("8.8.8.8"));
+  check("rate: auth-free share/get is now capped — 121st from one IP -> 429 (scrape bounded)", sOver.status === 429 && sOver.json.error === "rate_limited");
+
   // an UN-wired ctx (no rateStore) never rate-limits — the default everywhere.
   let none: HttpResponse = { status: 0, json: {} };
   for (let i = 0; i < 100; i++) none = await handle(req("GET", "/api/entitlement", { token: "tok-A" }));
