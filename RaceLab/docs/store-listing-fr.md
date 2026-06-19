@@ -26,11 +26,10 @@ Enregistre une session en moins de 10 secondes, à la piste, hors ligne. Attache
 - 🗺️ **Pistes & conditions.** Virage par virage, surfaces, météo, records au tour.
 - 📊 **Compare deux sessions** côte à côte : réglage vs conditions vs pneus.
 - 🏁 **Plan de course au temps.** Fenêtres de stand calculées en minutes, pas en tours.
-- 👥 **Le côté social.** Partage un réglage par lien, QR ou fichier ; les autres le forkent. Classements au tour par piste et par catégorie.
 
 Nitro ou électrique, tout-terrain ou piste — la fiche s'adapte à ta voiture.
 
-**Essai gratuit de 15 jours.** Ensuite 9,99 €/mois ou 99,99 €/an. Crée ton compte sur racelabrc.app — c'est moins cher (pas de commission des stores).
+**L'ingénieur de réglages est gratuit, pour toujours.** Essai premium gratuit de 15 jours (préparateur de course, stratégie d'arrêts, météo auto, import Speedhive, historique complet, export). Ensuite **9,99 €/mois ou 99,99 €/an, facturés via Google Play**. Résilie quand tu veux depuis le Play Store.
 
 Fait par des pilotes, pour la pit lane. 🏁
 
@@ -45,3 +44,6 @@ RC, voiture radiocommandée, réglage, setup, course, piste, ingénieur, tour, c
 ## Notes
 - Captures d'écran, URL store réelles et visuels restent à fournir (TODO marketing).
 - Version EN équivalente à dériver de ce fichier si une fiche bilingue est requise.
+- **Social retiré de la fiche v1** (fonctions sociales masquées dans l'app v1 — ne pas annoncer ce qui n'est pas livré).
+- **Abonnements = Google Play Billing (IAP)** : ne JAMAIS orienter vers un paiement web dans la fiche/app (violation des règles Play). Gestion/résiliation via le Play Store.
+- Politique de confidentialité : `apps/web/privacy/` → https://racelabrc.app/privacy (URL requise par Play). Déclaration data-safety : `docs/play-data-safety.md`.
