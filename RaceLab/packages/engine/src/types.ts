@@ -59,6 +59,9 @@ export interface ChassisTemplate {
       range?: [number, number];
       step?: number;
       of?: string[];
+      /** Kit baseline value a setup sheet is a delta from (D65). `null`/absent =
+       *  unspecified. KB-validated to fit the field (validateTemplateFields). */
+      kit_default?: string | number | null;
       [k: string]: unknown;
     }
   >;

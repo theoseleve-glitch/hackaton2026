@@ -19,7 +19,7 @@ import {
   sectionApplies,
 } from "../../schema/src/index";
 import type { ChassisRegistryEntry } from "../../schema/src/index";
-import { FACET_CATEGORIES, FACET_SCALES, FACET_TYPES, parseChassisRegistry, parseClassDecl } from "./index";
+import { FACET_CATEGORIES, FACET_SCALES, FACET_TYPES, parseChassisRegistry, parseClassDecl, validateTemplateFields } from "./index";
 import type { KbChassisRegistryEntry, KbClassDecl } from "./index";
 
 let failures = 0;
@@ -303,7 +303,8 @@ console.log("\n— compiled bundle —");
 const bundle = bundleJson as unknown as {
   rules: unknown[];
   taxonomy: unknown;
-  templates: Record<string, { template_id?: unknown }>;
+  templates: Record<string, { template_id?: unknown; fields?: unknown }>;
+  categoryTemplates?: Record<string, { template_id?: unknown; fields?: unknown }>;
   registry?: { chassis_id?: unknown }[];
   classes?: Record<string, { class_id?: unknown }>;
 };
@@ -324,6 +325,32 @@ check(
   "bundle ships the class declaration keyed by class_id",
   bundle.classes !== undefined && bundle.classes["1-8-tt-buggy"]?.class_id === "1-8-tt-buggy",
 );
+
+// ═══ setup-sheet template fields (D65 foundation: kit_default must fit its field) ══
+console.log("\n— template fields (validateTemplateFields) —");
+{
+  const allTemplates = { ...(bundle.templates ?? {}), ...(bundle.categoryTemplates ?? {}) };
+  let firstBad: string | null = null;
+  let n = 0;
+  for (const [id, t] of Object.entries(allTemplates)) {
+    n++;
+    const r = validateTemplateFields(t.fields);
+    if (!r.ok && firstBad === null) firstBad = `${id}: ${r.reason}`;
+  }
+  check(`every bundled template (${n}) passes validateTemplateFields`, firstBad === null, firstBad ?? "");
+  // MP11 carries real kit defaults — they must validate AND actually sit in their options
+  const mp11Fields = (bundle.templates["kyosho-inferno-mp11"] as { fields?: Record<string, { kit_default?: unknown; options?: unknown[] }> }).fields ?? {};
+  check("MP11 front_diff_oil kit_default (8000) is within its cSt option list", mp11Fields.front_diff_oil?.kit_default === 8000 && Array.isArray(mp11Fields.front_diff_oil?.options) && mp11Fields.front_diff_oil.options.includes(8000));
+
+  // negative fixtures — a malformed field MUST be rejected (build error, not silent)
+  check("rejects a number kit_default OUTSIDE its options", !validateTemplateFields({ x: { type: "number", options: [100, 200], kit_default: 150 } }).ok);
+  check("rejects a number kit_default OUTSIDE its range (no options)", !validateTemplateFields({ x: { type: "number", range: [0, 10], kit_default: 99 } }).ok);
+  check("rejects an enum kit_default NOT in options", !validateTemplateFields({ x: { type: "enum", options: ["a", "b"], kit_default: "c" } }).ok);
+  check("rejects an unknown field type", !validateTemplateFields({ x: { type: "wombat" } }).ok);
+  check("rejects an alias pointing at a non-existent sibling", !validateTemplateFields({ x: { type: "alias", of: ["ghost"] } }).ok);
+  check("accepts a valid kit_default in options", validateTemplateFields({ x: { type: "number", options: [100, 200], kit_default: 200 } }).ok);
+  check("accepts kit_default: null (intentionally unspecified)", validateTemplateFields({ x: { type: "string", kit_default: null } }).ok);
+}
 
 // ═══ verdict ═════════════════════════════════════════════════════════════════
 

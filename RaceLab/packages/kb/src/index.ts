@@ -212,3 +212,68 @@ export function parseClassDecl(value: unknown): KbParseResult<KbClassDecl> {
   if (value.notes !== undefined && typeof value.notes !== "string") return no("notes");
   return { ok: true, value: deepFreeze(value) as unknown as KbClassDecl };
 }
+
+// ── setup-sheet template fields (the parametric record a setup sheet is built on) ──
+
+/** Field-shape vocabulary for a chassis/category template's `fields` map.
+ *  number = numeric (optional `options` whitelist and/or `range`); enum/choice = a
+ *  fixed option list; string/text = free text; alias/derived just reference other
+ *  fields and carry no value of their own. */
+export const TEMPLATE_FIELD_TYPES = ["number", "enum", "choice", "string", "text", "alias", "derived"] as const;
+
+export interface TemplateFieldDef {
+  type: string;
+  unit?: string;
+  options?: (string | number)[];
+  range?: [number, number];
+  step?: number;
+  of?: string[];
+  /** The value the kit ships with — the baseline a setup sheet is a delta FROM
+   *  (D65 setup-sheet model). `null` = intentionally unspecified. When present it
+   *  MUST fit the field; a default outside its own options/range is a build error,
+   *  so the kit baseline can be trusted. */
+  kit_default?: string | number | null;
+  [k: string]: unknown;
+}
+
+/** Validates a template's `fields` map: every field has a known type, coherent
+ *  options/range, alias/derived reference real sibling fields, and — the foundation
+ *  guard — any `kit_default` actually fits the field it defaults. Returns the first
+ *  offending field as `invalid:field.<name>[.<aspect>]`. Pure; no I/O. */
+export function validateTemplateFields(fields: unknown): KbParseResult<true> {
+  if (!isRecord(fields)) return { ok: false, reason: "not_an_object" };
+  for (const [name, raw] of Object.entries(fields)) {
+    if (!isRecord(raw)) return no(`field.${name}`);
+    const f = raw as TemplateFieldDef;
+    if (!nonEmptyStr(f.type) || !(TEMPLATE_FIELD_TYPES as readonly string[]).includes(f.type)) return no(`field.${name}.type`);
+
+    if (f.type === "alias" || f.type === "derived") {
+      // reference-only: must point at real sibling fields, carries no value
+      if (!Array.isArray(f.of) || f.of.length === 0 || !f.of.every((x) => typeof x === "string" && x in fields)) {
+        return no(`field.${name}.of`);
+      }
+      continue;
+    }
+    if (f.range !== undefined) {
+      const r = f.range as unknown;
+      if (!Array.isArray(r) || r.length !== 2 || typeof r[0] !== "number" || typeof r[1] !== "number" || r[0] > r[1]) {
+        return no(`field.${name}.range`);
+      }
+    }
+    if (f.options !== undefined && (!Array.isArray(f.options) || f.options.length === 0)) return no(`field.${name}.options`);
+
+    const kd = f.kit_default;
+    if (kd !== undefined && kd !== null) {
+      if (f.type === "number") {
+        if (typeof kd !== "number" || !Number.isFinite(kd)) return no(`field.${name}.kit_default`);
+        if (Array.isArray(f.options) && !f.options.includes(kd)) return no(`field.${name}.kit_default`);
+        if (!Array.isArray(f.options) && Array.isArray(f.range) && (kd < f.range[0] || kd > f.range[1])) return no(`field.${name}.kit_default`);
+      } else if (f.type === "enum" || f.type === "choice") {
+        if (!Array.isArray(f.options) || !f.options.includes(kd as string | number)) return no(`field.${name}.kit_default`);
+      } else if (typeof kd !== "string") {
+        return no(`field.${name}.kit_default`); // string/text default must be a string
+      }
+    }
+  }
+  return { ok: true, value: true };
+}
