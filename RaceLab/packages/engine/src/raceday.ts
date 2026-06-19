@@ -3,7 +3,7 @@ import { templateExposes } from "./retrieval";
 import { raceDayFilter } from "./guard";
 import { humanize } from "./offline";
 import type { Confidence, KBRule } from "./types";
-import type { LearningTuple } from "../../schema/src/runs";
+import { surfaceToTags, type LearningTuple } from "../../schema/src/runs";
 import { RAIN_RISK_THRESHOLD_PCT, deriveSky } from "../../schema/src/weather";
 import type { WeatherObservation } from "../../schema/src/weather";
 import type { TrackSnapshot } from "../../schema/src/tracks";
@@ -176,6 +176,15 @@ export function planRaceDay(
   // e.g. hot wants front oil thicker, wet wants it thinner). Keeps the
   // one-change-at-a-time contract honest when conditions overlap.
   const predictedTags = new Set(predicted.keys());
+  // The track surface is fixed context (not a forecast tag), so derive its family tags
+  // and enforce forbidden_on as a HARD drop — mirroring the live retrieval path
+  // (retrieval.ts forbidden_on gate). Without this, the highest-stakes path could emit a
+  // rule whose own forbidden_on flags it WRONG for the surface (e.g. harder rear tyres on
+  // loose dirt because a hot forecast amplified it). forbidden_on is checked against BOTH
+  // the surface family and the forecast tags. (legal_in_power is intentionally NOT gated
+  // here: RaceDayInput carries no power input, so there is no power tag to test against —
+  // adding it would require a contract change, tracked separately.)
+  const surfaceTags = new Set(surfaceToTags(input.track.surface));
   const candidatesBySetting = new Map<string, RuleCandidate[]>();
   for (const [tag, trigger] of predicted) {
     const candidates = data.rules
@@ -186,6 +195,7 @@ export function planRaceDay(
           r.conditions.amplified_on.includes(tag) &&
           raceDayFilter(r).allowed &&
           !r.conditions.reduced_on.some((c) => predictedTags.has(c)) &&
+          !r.forbidden_on?.some((c) => surfaceTags.has(c) || predictedTags.has(c)) &&
           !avoidRuleIds.has(r.id),
       )
       .sort(
@@ -272,7 +282,8 @@ function toAdjustment(
     condition_tag: tag,
     setting: rule.setting,
     change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}`,
-    mechanism: `Per ${rule.sources[0] ?? "the KB"}: ${effects}.`,
+    // D53: clean advice, no citation chrome — provenance stays internal in citations[].
+    mechanism: `${effects}.`,
     confidence: rule.confidence,
     citations: [rule.id],
     revert: `Reverse the change; ~${rule.reversal_cost_minutes} min.`,

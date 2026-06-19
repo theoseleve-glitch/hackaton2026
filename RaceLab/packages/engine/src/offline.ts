@@ -109,7 +109,9 @@ export function ruleToOption(
   return {
     setting: rule.setting,
     change: `${humanize(rule.direction)} ${humanize(rule.setting)}${currentTxt} — ${rule.magnitude_guidance}`,
-    mechanism: `Per ${rule.sources[0]}: ${effects}.`,
+    // D53: the app gives clean advice with NO citation chrome — the physical effect IS
+    // the user-facing "why". Source provenance stays internal, in citations[] (rule.id).
+    mechanism: `${effects}.`,
     expected_effect: effects,
     confidence: rule.confidence,
     confidence_qualifier: confidenceDetail(rule, bundle, history).qualifier,

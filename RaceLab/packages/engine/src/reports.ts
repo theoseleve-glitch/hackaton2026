@@ -3,6 +3,7 @@ import { proposePlan } from "./plan";
 import { historyFromTuples } from "./history";
 import type { ContextBundle } from "./types";
 import {
+  buildConditionTags,
   conditionsToTags,
   effectiveTiming,
   lapStats,
@@ -304,7 +305,11 @@ function nextPlanSection(
       name: latest.track.name,
       surface: latest.track.surface,
       grip: latest.conditions.grip,
-      conditions: [...conditionsToTags(latest.conditions)],
+      // Union surface-family tags so this next-plan retrieval sees the same condition set
+      // the live advisor does — otherwise surface-amplified rules stay dark AND the
+      // forbidden_on hard-drop can't fire, letting analyzeRuns recommend a change that is
+      // wrong for the surface. (power isn't carried on RunEntry, so it's omitted here.)
+      conditions: [...buildConditionTags({ conditions: latest.conditions, surface: latest.track.surface })],
     },
     feedback: { tags: feedbackRun.feedback.tags.map((t) => ({ ...t })) },
     mode: opts?.mode ?? "practice",
