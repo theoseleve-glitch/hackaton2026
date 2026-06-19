@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { carLabels, powerLabel, sheetProfile } from "../../../../packages/garage/src";
 import type { CarEntity, GarageState } from "../../../../packages/garage/src";
 import { draftDiff, getVersion, kitVersionId, loadVersion, renameDraft } from "../../../../packages/sheets/src";
@@ -157,9 +157,6 @@ function CarSheets({
         <SetupList
           state={state}
           car={car}
-          // car.options removed in schema cutover (setup-sheet concern, B1a OUT-OF-SCOPE); options editing deferred
-          options={undefined}
-          onChangeOptions={() => {}}
           onShareSetup={onShareSetup}
           onOpenDraft={() => setMode("detail")}
           onOpenVersion={(id) => {
@@ -176,16 +173,12 @@ function CarSheets({
 function SetupList({
   state,
   car,
-  options,
-  onChangeOptions,
   onShareSetup,
   onOpenDraft,
   onOpenVersion,
 }: {
   state: SheetsState;
   car: CarEntity;
-  options?: string;
-  onChangeOptions: (text: string) => void;
   onShareSetup?: (p: SharedPayload) => void;
   onOpenDraft: () => void;
   onOpenVersion: (id: string) => void;
@@ -240,15 +233,10 @@ function SetupList({
           <Text style={styles.chev}>›</Text>
         </Pressable>
       ))}
-      <Text style={styles.listSection}>{t({ en: "Options installed", fr: "Options installées" })}</Text>
-      <TextInput
-        style={styles.optionsInput}
-        defaultValue={options ?? ""}
-        onEndEditing={(e) => onChangeOptions(e.nativeEvent.text.trim())}
-        placeholder={t({ en: "e.g. alu servo horn, HD diff cups", fr: "ex. palonnier servo alu, noix de diff HD" })}
-        placeholderTextColor={colors.sub}
-        multiline
-      />
+      {/* "Options installed" editor removed for v1: the schema `Car` has no
+          `options` field (Phase 2B cutover), so this control wrote nowhere —
+          shipping an inert input is worse than not shipping it.
+          TODO: options need a schema/sheets home (post-v1) */}
 
       <Text style={styles.listHint}>
         {t({
@@ -357,16 +345,4 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   listHint: { color: colors.sub, fontSize: 11, lineHeight: 16, marginTop: 10, fontStyle: "italic" },
-  optionsInput: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    color: colors.text,
-    paddingVertical: 9,
-    paddingHorizontal: 12,
-    fontSize: 13,
-    minHeight: 44,
-    textAlignVertical: "top",
-  },
 });

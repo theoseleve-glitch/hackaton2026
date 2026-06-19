@@ -40,6 +40,11 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [scale, setScale] = useState<string>(initLabels?.scale || "1/8");
   const [drivetrain, setDrivetrain] = useState<"4wd" | "2wd" | undefined>(initial?.drivetrain);
   const [power, setPower] = useState<PowerType>(initial ? powerLabel(initial) : "nitro");
+  // COSMETIC for v1: engine/motor/esc/battery are setup-sheet concerns (B1a), not
+  // Car identity facts — schema `Car` has no home for them, so `makeCar` below
+  // never reads these. Shown so the form reads complete; intentionally not
+  // persisted. (fuel_tank_cc + transponder_id below DO persist.)
+  // TODO: options need a schema/sheets home (post-v1)
   const [engine, setEngine] = useState("");
   const [motor, setMotor] = useState("");
   const [esc, setEsc] = useState("");
