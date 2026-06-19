@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>S'abonner — RaceLab</title>
+    <meta name="description" content="Passe à RaceLab Pro : ton ingénieur de course IA, sans limite. 9,99 €/mois ou 99,99 €/an (2 mois offerts)." />
+    <meta name="theme-color" content="#0B0C0E" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/assets/favicon.png" type="image/png" />
+
+    <!-- fonts (same families as the marketing site) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    />
+
+    <!-- reuse the global design system + the page-local partial -->
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/sections/subscribe.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#sub-main">Aller au contenu</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="sub-header">
+      <a class="sub-brand" href="/" aria-label="RaceLab — accueil">
+        <span class="sub-brand__mark" aria-hidden="true"></span>
+        <span class="sub-brand__word" data-brand>RaceLab</span>
+      </a>
+    </header>
+
+    <main id="sub-main" class="sub-main">
+      <section class="sub-card" aria-labelledby="sub-title">
+        <p class="eyebrow">RaceLab Pro</p>
+        <h1 id="sub-title" class="sub-title">Passe à RaceLab Pro</h1>
+        <p class="sub-sub">Ton ingénieur de course IA, sans limite. Annule quand tu veux.</p>
+
+        <!-- Signed-out: Clerk sign-in / sign-up mounts here -->
+        <div id="authView" hidden>
+          <p class="sub-hint">Connecte-toi ou crée ton compte pour t'abonner.</p>
+          <div id="authSlot" class="sub-auth-slot"></div>
+        </div>
+
+        <!-- Signed-in: plan toggle + actions -->
+        <div id="planView" hidden>
+          <fieldset class="plan-toggle" aria-label="Choisis ta formule">
+            <legend class="visually-hidden">Formule d'abonnement</legend>
+
+            <label class="plan-opt" for="plan-monthly">
+              <input type="radio" id="plan-monthly" name="plan" value="monthly" />
+              <span class="plan-opt__body">
+                <span class="plan-opt__name mono">Mensuel</span>
+                <span class="plan-opt__price">
+                  <span class="plan-opt__amount">9,99 €</span>
+                  <span class="plan-opt__per mono">/ mois</span>
+                </span>
+              </span>
+            </label>
+
+            <label class="plan-opt plan-opt--featured" for="plan-annual">
+              <input type="radio" id="plan-annual" name="plan" value="annual" checked />
+              <span class="plan-opt__badge">2 mois offerts</span>
+              <span class="plan-opt__body">
+                <span class="plan-opt__name mono">Annuel</span>
+                <span class="plan-opt__price">
+                  <span class="plan-opt__amount">99,99 €</span>
+                  <span class="plan-opt__per mono">/ an</span>
+                </span>
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="sub-actions">
+            <button id="subscribeBtn" type="button" class="btn btn--primary sub-btn">S'abonner</button>
+            <button id="manageBtn" type="button" class="btn btn--ghost sub-btn">Gérer mon abonnement</button>
+          </div>
+
+          <p class="sub-note">Crée ton compte sur le web — c'est moins cher (pas de commission des stores).</p>
+        </div>
+
+        <p id="subError" class="sub-error" role="alert" hidden></p>
+      </section>
+    </main>
+
+    <script type="module" src="../src/subscribe.js"></script>
+  </body>
+</html>

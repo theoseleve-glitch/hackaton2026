@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paiement confirmé — RaceLab</title>
+    <meta name="description" content="Paiement confirmé. Ton abonnement RaceLab est actif." />
+    <meta name="theme-color" content="#0B0C0E" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/assets/favicon.png" type="image/png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../styles/sections/subscribe.css" />
+  </head>
+
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="sub-header">
+      <a class="sub-brand" href="/" aria-label="RaceLab — accueil">
+        <span class="sub-brand__mark" aria-hidden="true"></span>
+        <span class="sub-brand__word">RaceLab</span>
+      </a>
+    </header>
+
+    <main class="sub-main">
+      <section class="sub-card sub-card--success" aria-labelledby="success-title">
+        <span class="sub-check" aria-hidden="true">✓</span>
+        <h1 id="success-title" class="sub-title">Paiement confirmé</h1>
+        <p class="sub-sub">Retourne dans l'app RaceLab, ton abonnement est actif.</p>
+
+        <div class="sub-actions sub-actions--center">
+          <a id="returnBtn" class="btn btn--primary sub-btn" href="racelab://subscribe/return?status=success">
+            Ouvrir l'app RaceLab
+          </a>
+        </div>
+
+        <p class="sub-note">Si l'app ne s'ouvre pas automatiquement, touche le bouton.</p>
+      </section>
+    </main>
+
+    <script>
+      // Deep link back into the app (scheme: racelab). On desktop / no app this
+      // navigation simply fails silently and the confirmation above stays visible.
+      (function () {
+        var DEEP_LINK = "racelab://subscribe/return?status=success";
+        try {
+          window.location.href = DEEP_LINK;
+        } catch (e) {
+          /* no handler for the scheme — fine, the page already confirms success */
+        }
+        var btn = document.getElementById("returnBtn");
+        if (btn) {
+          btn.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            window.location.href = DEEP_LINK;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

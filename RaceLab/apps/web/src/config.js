@@ -2,8 +2,9 @@
 // Copy is French (register "tu", to match the app). Structure/prices/hrefs unchanged.
 export const BRAND = "RaceLab"; // public name (GripLab was a placeholder, dropped 2026-06-17)
 export const LINKS = {
-  trial: "https://racelabrc.app",
-  account: "https://racelabrc.app",
+  // Conversion CTAs land on the hosted /subscribe checkout page (web-first, no store cut).
+  trial: "https://racelabrc.app/subscribe",
+  account: "https://racelabrc.app/subscribe",
 };
 export const NAV = [
   { label: "Comment ça marche", href: "#tune" },
@@ -120,4 +121,43 @@ export const FOOTER = {
     { label: "racelabrc.app", href: LINKS.trial },
   ],
   legal: "Avant-lancement.",
+};
+
+// RACELAB_WEB — runtime config for the hosted /subscribe checkout page.
+// BOTH values are placeholders set at deploy (NOT secrets, NOT committed real values):
+//   CLERK_PUBLISHABLE_KEY is a PUBLISHABLE Clerk key (safe in client code, swapped at deploy).
+//   API_BASE is the deployed server origin the page POSTs checkout/portal requests to.
+// No Stripe keys are ever present on the web side.
+export const RACELAB_WEB = {
+  CLERK_PUBLISHABLE_KEY: "pk_REPLACE_ME", // set at deploy — publishable (non-secret)
+  API_BASE: "https://racelab-api.vercel.app", // set at deploy — deployed server origin
+};
+
+// SUBSCRIBE — French copy for the /subscribe checkout page (single-sourced, "tu" register).
+export const SUBSCRIBE = {
+  title: "Passe à RaceLab Pro",
+  subtitle: "Ton ingénieur de course IA, sans limite. Annule quand tu veux.",
+  // Plan toggle — prices/labels mirror PRICING so 9,99 € / 99,99 € stay single-sourced.
+  plans: {
+    monthly: { id: "monthly", label: "Mensuel", price: "9,99 €", per: "/ mois", note: "" },
+    annual: { id: "annual", label: "Annuel", price: "99,99 €", per: "/ an", note: "2 mois offerts" },
+  },
+  subscribeCta: "S'abonner",
+  manageCta: "Gérer mon abonnement",
+  note: "Crée ton compte sur le web — c'est moins cher (pas de commission des stores).",
+  signedOutHint: "Connecte-toi ou crée ton compte pour t'abonner.",
+  errors: {
+    generic: "Oups — quelque chose a coincé. Réessaie dans un instant.",
+    needSignIn: "Connecte-toi pour continuer.",
+    noSubscription: "Tu n'as pas encore d'abonnement actif.",
+    config: "Le paiement n'est pas encore configuré. Reviens bientôt.",
+  },
+};
+
+// SUBSCRIBE_SUCCESS — French copy for the post-payment success page.
+export const SUBSCRIBE_SUCCESS = {
+  title: "Paiement confirmé ✓",
+  body: "Retourne dans l'app RaceLab, ton abonnement est actif.",
+  deepLinkCta: "Ouvrir l'app RaceLab",
+  hint: "Si l'app ne s'ouvre pas automatiquement, touche le bouton.",
 };
