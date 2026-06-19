@@ -6,7 +6,36 @@ import { computePitPlan, stretchOptions } from "../../../../packages/strategy/sr
 import type { PitPlan, StrategyInputs } from "../../../../packages/strategy/src";
 import { colors, radius } from "../theme";
 import { useT } from "../i18n";
+import type { Phrase } from "../i18n";
 import { ChipRow, LabeledInput, Section, num } from "./forms";
+
+// ——— F3 pit-traffic badge helpers ———
+
+type TrafficRisk = NonNullable<PitPlan["pit_traffic_risks"]>[number];
+
+/** Short pilot-facing label per risk kind. */
+function trafficLabel(kind: TrafficRisk["risk_type"], t: (p: Phrase) => string): string {
+  switch (kind) {
+    case "lapped_cars":
+      return t({ en: "LAPPED CARS", fr: "RETARDATAIRES" });
+    case "pack_rejoin":
+      return t({ en: "PACK", fr: "PELOTON" });
+    case "backmarker_zone":
+      return t({ en: "BACKMARKERS", fr: "FOND DE GRILLE" });
+    case "unknown":
+      return t({ en: "UNKNOWN", fr: "INCONNU" });
+    case "none":
+    default:
+      return t({ en: "CLEAR", fr: "DÉGAGÉ" });
+  }
+}
+
+/** Badge tint by severity (high = warn, medium = accent, else muted). */
+function trafficBadgeStyle(kind: TrafficRisk["risk_type"], severity: TrafficRisk["severity"]): { backgroundColor: string } {
+  if (kind === "unknown" || kind === "none") return { backgroundColor: colors.cardAlt };
+  if (severity === "high") return { backgroundColor: colors.warn };
+  return { backgroundColor: colors.accent };
+}
 
 /**
  * Race-plan rendering, the track-first run picker and the pit-strategy
@@ -222,6 +251,13 @@ export interface StrategyPrefill {
   lap_times?: number[];
   /** best logged autonomy test for the track context — greyed autofill, tap to override */
   autonomy?: { time_s: number; date: string };
+  /** F1 — consumption history (cc-per-lap mean/std) derived from the context
+   *  runs' fuel logs. Present only when runs carry fuel + laps. */
+  consumption?: { mean_cc_per_lap: number; std_dev_cc_per_lap: number; runs_sampled: number; tank_cc: number };
+  /** F3 — field size from the latest context run's result.entrants (if logged). */
+  entrants?: number;
+  /** F3 — your scored position from the latest context run (if logged). */
+  current_position?: number;
 }
 
 interface StrategyFormProps {
@@ -246,6 +282,8 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
   );
   const [pitLoss, setPitLoss] = useState("25");
   const [margin, setMargin] = useState<MarginChoice>("1 lap");
+  // F1 — default ON when the context runs gave us a consumption history.
+  const [useConsumption, setUseConsumption] = useState<boolean>(prefill.consumption !== undefined);
   const [error, setError] = useState<string | null>(null);
 
   const compute = () => {
@@ -265,6 +303,13 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
       pit_loss_s: num(pitLoss) ?? 25,
       margin_s: marginS,
       lap_times: prefill.lap_times,
+      // F1 — consumption history (range estimate) when present + opted in.
+      ...(prefill.consumption !== undefined
+        ? { consumption_based: prefill.consumption, use_consumption_estimate: useConsumption }
+        : {}),
+      // F3 — field size + position drive the pit-traffic warnings.
+      ...(prefill.entrants !== undefined ? { entrants: prefill.entrants } : {}),
+      ...(prefill.current_position !== undefined ? { current_position: prefill.current_position } : {}),
     };
     try {
       const plan = computePitPlan(inputs);
@@ -313,6 +358,27 @@ export function StrategyForm({ prefill, onResult, onCancel }: StrategyFormProps)
             onChangeText={(text) => setAutonomy({ text, auto: false })}
             placeholder={t({ en: "e.g. 6:30", fr: "ex. 6:30" })}
           />
+        )}
+        {prefill.consumption !== undefined && (
+          <Pressable
+            style={styles.toggleRow}
+            onPress={() => setUseConsumption((v) => !v)}
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: useConsumption }}
+          >
+            <View style={[styles.checkbox, useConsumption && styles.checkboxOn]}>
+              {useConsumption && <Text style={styles.checkboxTick}>✓</Text>}
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.toggleLabel}>{t({ en: "Use consumption history", fr: "Utiliser l’historique de consommation" })}</Text>
+              <Text style={styles.toggleHint}>
+                {t({
+                  en: `Estimate tank range from ${prefill.consumption.runs_sampled} logged run(s) (${prefill.consumption.mean_cc_per_lap.toFixed(1)}cc/lap) with a 2σ safety margin — blended with your tank test.`,
+                  fr: `Estime l’autonomie depuis ${prefill.consumption.runs_sampled} session(s) (${prefill.consumption.mean_cc_per_lap.toFixed(1)}cc/tour) avec une marge 2σ — combinée à ton test de plein.`,
+                })}
+              </Text>
+            </View>
+          </Pressable>
         )}
       </Section>
       <Section title={t({ en: "Pit", fr: "Stand" })}>
@@ -388,6 +454,38 @@ export function PitPlanView({ plan, options, inputs }: { plan: PitPlan; options:
                 fr: `⚠️ Tes pneus chutent brutalement vers le tour ${plan.cliff_lap} — ce sont les pneus, pas le carburant, qui décident quand tu passes au stand. Les relais sont raccourcis pour garder de l’avance.`,
               })}
             </Text>
+          </View>
+        )}
+
+        {/* F1 — consumption-derived tank range */}
+        {plan.autonomy_estimate !== undefined && (
+          <View style={styles.estimate}>
+            <Text style={styles.estimateText}>
+              {t({
+                en: `⛽ Tank range from ${plan.autonomy_estimate.derived_from_runs} logged run(s): ${fmtTime(plan.autonomy_estimate.mean_s)} mean · ${fmtTime(plan.autonomy_estimate.pessimistic_s)} with a 2σ margin. Planning conservatively on the safer figure.`,
+                fr: `⛽ Autonomie d’après ${plan.autonomy_estimate.derived_from_runs} session(s) : ${fmtTime(plan.autonomy_estimate.mean_s)} en moyenne · ${fmtTime(plan.autonomy_estimate.pessimistic_s)} avec une marge 2σ. Plan calculé sur le chiffre prudent.`,
+              })}
+            </Text>
+          </View>
+        )}
+
+        {/* F3 — pit-window-vs-traffic warnings, one badge per pit moment */}
+        {plan.pit_traffic_risks !== undefined && plan.pit_traffic_risks.some((r) => r.risk_type !== "none") && (
+          <View style={styles.traffic}>
+            <Text style={styles.trafficTitle}>{t({ en: "Pit traffic", fr: "Trafic au stand" })}</Text>
+            {plan.pit_traffic_risks.map((r, i) => (
+              <View key={i} style={styles.trafficRow}>
+                <View style={[styles.trafficBadge, trafficBadgeStyle(r.risk_type, r.severity)]}>
+                  <Text style={styles.trafficBadgeText}>{trafficLabel(r.risk_type, t)}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.trafficWhen}>
+                    {t({ en: `Stop at ${fmtTime(r.pit_at_s)} (lap ${r.pit_lap})`, fr: `Arrêt à ${fmtTime(r.pit_at_s)} (tour ${r.pit_lap})` })}
+                  </Text>
+                  {r.mitigation && <Text style={styles.trafficMitigation}>{r.mitigation}</Text>}
+                </View>
+              </View>
+            ))}
           </View>
         )}
 
@@ -467,6 +565,24 @@ const styles = StyleSheet.create({
   tlEndLabel: { color: colors.sub, fontSize: 11 },
   cliff: { borderWidth: 1, borderColor: colors.warn, borderRadius: radius.md, padding: 10, marginTop: 12 },
   cliffText: { color: colors.warn, fontSize: 13, lineHeight: 19, fontWeight: "600" },
+  // — F1 consumption estimate —
+  estimate: { borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, padding: 10, marginTop: 12, backgroundColor: colors.cardAlt },
+  estimateText: { color: colors.text, fontSize: 12, lineHeight: 18 },
+  // — F3 pit traffic —
+  traffic: { borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, padding: 10, marginTop: 12 },
+  trafficTitle: { color: colors.sub, fontSize: 11, fontWeight: "800", textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 8 },
+  trafficRow: { flexDirection: "row", gap: 8, alignItems: "flex-start", marginBottom: 8 },
+  trafficBadge: { borderRadius: radius.pill, paddingVertical: 3, paddingHorizontal: 8, minWidth: 64, alignItems: "center" },
+  trafficBadgeText: { color: "#fff", fontSize: 10, fontWeight: "800", letterSpacing: 0.5 },
+  trafficWhen: { color: colors.text, fontSize: 12, fontWeight: "700" },
+  trafficMitigation: { color: colors.sub, fontSize: 12, lineHeight: 17, marginTop: 2 },
+  // — F1 consumption toggle —
+  toggleRow: { flexDirection: "row", gap: 10, alignItems: "flex-start", marginTop: 10 },
+  checkbox: { width: 22, height: 22, borderRadius: 5, borderWidth: 1.5, borderColor: colors.border, alignItems: "center", justifyContent: "center", marginTop: 1 },
+  checkboxOn: { backgroundColor: colors.accent, borderColor: colors.accent },
+  checkboxTick: { color: "#fff", fontSize: 14, fontWeight: "900" },
+  toggleLabel: { color: colors.text, fontSize: 14, fontWeight: "700" },
+  toggleHint: { color: colors.sub, fontSize: 12, lineHeight: 17, marginTop: 2 },
   notesTitle: { color: colors.sub, fontSize: 11, fontWeight: "800", textTransform: "uppercase", letterSpacing: 0.8, marginTop: 14, marginBottom: 6 },
   noteRow: { flexDirection: "row", gap: 8, marginBottom: 6 },
   noteIcon: { color: colors.accent, fontSize: 13, lineHeight: 20 },

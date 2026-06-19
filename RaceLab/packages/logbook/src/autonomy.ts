@@ -1,5 +1,6 @@
-import { runAutonomy } from "./types";
+import { runAutonomy, runLapCount } from "./types";
 import type { RunEntry } from "./types";
+import { fuelStats } from "../../schema/src/index";
 
 /**
  * Race-strategy autonomy from logged run-until-dry tests (v3). A PRACTICE run
@@ -44,4 +45,53 @@ export function bestAutonomy(
 function sameTrack(run: RunEntry, opts: BestAutonomyOpts): boolean {
   if (opts.track_id !== undefined && run.track_id === opts.track_id) return true;
   return opts.track_name !== undefined && run.track.name === opts.track_name;
+}
+
+// ── F1 — consumption-history derivation (feeds strategy's consumption_based) ──
+
+/** Mean/std of fuel burn (cc-per-lap) across the selected runs, plus the tank
+ *  capacity to turn a rate into a range. Strategy's consumption_based input. */
+export interface ConsumptionHistory {
+  mean_cc_per_lap: number;
+  std_dev_cc_per_lap: number;
+  runs_sampled: number;
+  tank_cc: number;
+}
+
+/**
+ * F1 — derive a consumption estimate from a set of logged runs. Each run that
+ * carries BOTH a clean fuel log (consumed_cc) and a lap count yields one
+ * cc-per-lap sample via the schema `fuelStats` helper; the mean and population
+ * standard deviation are computed across those samples. The tank capacity is the
+ * most recent run's logged `fuel.tank_cc` (runs are oldest-first, so the last
+ * one with a tank is the freshest). Pure + deterministic; runs missing fuel or
+ * laps are silently dropped (never poison the estimate). Returns undefined when
+ * fewer than one clean sample, or no tank capacity, is available — the strategy
+ * then falls back to the single autonomy test.
+ */
+export function deriveConsumption(runs: readonly RunEntry[]): ConsumptionHistory | undefined {
+  const samples: number[] = [];
+  let tank_cc: number | undefined;
+  for (const r of runs) {
+    const laps = runLapCount(r);
+    const stats = fuelStats(r.fuel, laps);
+    if (stats.cc_per_lap !== undefined && Number.isFinite(stats.cc_per_lap) && stats.cc_per_lap > 0) {
+      samples.push(stats.cc_per_lap);
+    }
+    // freshest logged tank capacity wins (oldest-first order → last one is newest)
+    if (r.fuel?.tank_cc !== undefined && Number.isFinite(r.fuel.tank_cc) && r.fuel.tank_cc > 0) {
+      tank_cc = r.fuel.tank_cc;
+    }
+  }
+  if (samples.length < 1 || tank_cc === undefined) return undefined;
+  const mean = samples.reduce((a, b) => a + b, 0) / samples.length;
+  const variance = samples.reduce((a, b) => a + (b - mean) ** 2, 0) / samples.length;
+  const std = Math.sqrt(variance);
+  if (!Number.isFinite(mean) || !(mean > 0) || !Number.isFinite(std)) return undefined;
+  return {
+    mean_cc_per_lap: Math.round(mean * 100) / 100,
+    std_dev_cc_per_lap: Math.round(std * 100) / 100,
+    runs_sampled: samples.length,
+    tank_cc,
+  };
 }

@@ -26,8 +26,8 @@ export {
 export type { CarStatus, DriverStats, SeasonStats, RunRecords, Achievement } from "./insights";
 export { bundleFromRun, conditionTags, historyFromRuns } from "./bundle";
 export { lapStats } from "./laps";
-export { bestAutonomy } from "./autonomy";
-export type { BestAutonomyOpts } from "./autonomy";
+export { bestAutonomy, deriveConsumption } from "./autonomy";
+export type { BestAutonomyOpts, ConsumptionHistory } from "./autonomy";
 export { sortRuns, groupBySetup } from "./sort";
 export type { RunSortKey, SetupGroup } from "./sort";
 export {

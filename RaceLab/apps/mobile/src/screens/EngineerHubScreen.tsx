@@ -4,7 +4,7 @@ import type Svg from "react-native-svg";
 import { buildReport, buildRacePlan } from "../../../../packages/engine/src";
 import type { SelectedRunSummary } from "../../../../packages/engine/src";
 import type { GarageState } from "../../../../packages/garage/src";
-import { bestAutonomy, bundleFromRun, learningTuples, runAvgLap, runBestLap, runLapsList } from "../../../../packages/logbook/src";
+import { bestAutonomy, bundleFromRun, deriveConsumption, learningTuples, runAvgLap, runBestLap, runEntrants, runLapsList, runPosition } from "../../../../packages/logbook/src";
 import type { LearningTuple, LogbookState, OutcomeRecord, RunEntry } from "../../../../packages/logbook/src";
 import { getTrack, snapshotTrack } from "../../../../packages/tracks/src";
 import type { TracksState } from "../../../../packages/tracks/src";
@@ -239,12 +239,21 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
         autonomy = { time_s: best.time_s, date: src?.created_at.slice(0, 10) ?? "" };
       }
     }
+    // F1 — consumption history (cc-per-lap mean/std) from the context runs' fuel
+    // logs; undefined when none carry both fuel + laps.
+    const consumption = deriveConsumption(sorted);
+    // F3 — field size + position from the latest context run, when logged.
+    const entrants = latest !== undefined ? runEntrants(latest) : undefined;
+    const current_position = latest !== undefined ? runPosition(latest) : undefined;
     return {
       race_length_s: extra?.race_length_s,
       race_type: extra?.race_type,
       avg_lap_s: extra?.avg_lap_s ?? (avgs.length > 0 ? Math.min(...avgs) : undefined),
       lap_times: lapTimes,
       autonomy,
+      ...(consumption !== undefined ? { consumption } : {}),
+      ...(entrants !== undefined ? { entrants } : {}),
+      ...(current_position !== undefined ? { current_position } : {}),
     };
   };
 

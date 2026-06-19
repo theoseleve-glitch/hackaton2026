@@ -295,6 +295,208 @@ check("error: stretchOptions validates inputs too", throws(() => stretchOptions(
   check("R6-3: extremes are deterministic", JSON.stringify(veryLong) === JSON.stringify(computePitPlan({ race_length_s: 10800, race_type: "endurance", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25 })));
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// F1 — consumption-based range estimation
+// ═══════════════════════════════════════════════════════════════════════════
+// Base enduro reused: avg 35s, single autonomy test 420s, pit 25s, margin 35s.
+// Consumption: a 6000cc tank burning a clean ~110cc/lap.
+//   mean_s        = (6000 / 110) * 35 = 1909.09…s
+//   With σ=0: pessimistic_s = mean_s (rate = mean) = 1909.09…s
+//   effectiveAutonomy = min((mean_s + 420)/2, pessimistic_s)
+//                     = min(1164.5, 1909.1) = 1164.5  (the blend; floor doesn't bite)
+{
+  const cleanCons: StrategyInputs = {
+    ...enduro,
+    use_consumption_estimate: true,
+    consumption_based: { mean_cc_per_lap: 110, std_dev_cc_per_lap: 0, runs_sampled: 4, tank_cc: 6000 },
+  };
+  const cp1 = computePitPlan(cleanCons);
+  const meanS = (6000 / 110) * 35; // ~1909.09
+  check(
+    "F1: clean multi-run consumption → autonomy_estimate.mean_s ≈ (tank/mean_cc)*avg",
+    cp1.autonomy_estimate !== undefined && Math.abs(cp1.autonomy_estimate.mean_s - Math.round(meanS * 10) / 10) < 0.2,
+    `${cp1.autonomy_estimate?.mean_s} vs ${meanS}`,
+  );
+  check(
+    "F1: zero-variance consumption → pessimistic_s equals mean_s",
+    cp1.autonomy_estimate !== undefined && cp1.autonomy_estimate.pessimistic_s === cp1.autonomy_estimate.mean_s,
+    `${cp1.autonomy_estimate?.pessimistic_s} vs ${cp1.autonomy_estimate?.mean_s}`,
+  );
+  check("F1: derived_from_runs reflects runs_sampled", cp1.autonomy_estimate?.derived_from_runs === 4, `${cp1.autonomy_estimate?.derived_from_runs}`);
+  check(
+    "F1: note states the run-count + mean/2σ in mm:ss",
+    cp1.notes.some((n) => /Tank autonomy from 4 logged run/.test(n) && /2σ margin/.test(n)),
+    cp1.notes.join(" | "),
+  );
+  check("F1: estimate notes are NaN/undefined-free", cp1.notes.every((n) => !/NaN|Infinity|undefined/.test(n)));
+
+  // Pessimistic floor BITES: high mean but wide σ pulls the planning window down.
+  //   mean 130 ±25 → pessimistic rate 180 → pessimistic_s = (6000/180)*35 = 1166.7
+  //   mean_s = (6000/130)*35 = 1615.4 ; blend = (1615.4+420)/2 = 1017.7
+  //   effective = min(1017.7, 1166.7) = 1017.7 — but verify pessimistic < mean.
+  const varied: StrategyInputs = {
+    ...enduro,
+    use_consumption_estimate: true,
+    consumption_based: { mean_cc_per_lap: 130, std_dev_cc_per_lap: 25, runs_sampled: 5, tank_cc: 6000 },
+  };
+  const cp2 = computePitPlan(varied);
+  check(
+    "F1: with variance, pessimistic_s < mean_s (the 2σ envelope is conservative)",
+    cp2.autonomy_estimate !== undefined && cp2.autonomy_estimate.pessimistic_s < cp2.autonomy_estimate.mean_s,
+    `${cp2.autonomy_estimate?.pessimistic_s} vs ${cp2.autonomy_estimate?.mean_s}`,
+  );
+  check(
+    "F1: high variance (σ/mean > 15%) → a warning to log a clean fuel test",
+    cp2.notes.some((n) => /varies a lot/.test(n) && /run-until-dry/.test(n)),
+    cp2.notes.join(" | "),
+  );
+
+  // Mixed: consumption present but NOT opted in → behaves exactly as autonomy-only.
+  const optedOut: StrategyInputs = { ...cleanCons, use_consumption_estimate: false };
+  const cpOut = computePitPlan(optedOut);
+  const plain = computePitPlan(enduro);
+  check(
+    "F1: consumption present but use_consumption_estimate=false → identical to autonomy-only",
+    JSON.stringify(cpOut) === JSON.stringify(plain) && cpOut.autonomy_estimate === undefined,
+    `estimate=${cpOut.autonomy_estimate !== undefined}`,
+  );
+  check(
+    "F1: no consumption_based at all → no autonomy_estimate, plan unchanged",
+    plain.autonomy_estimate === undefined,
+  );
+
+  // Determinism.
+  check("F1: consumption plan is deterministic", JSON.stringify(cp1) === JSON.stringify(computePitPlan(cleanCons)));
+
+  // NaN-guard: garbage consumption fields are IGNORED, plan stays valid (autonomy-only).
+  const nanCases: StrategyInputs[] = [
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: NaN, std_dev_cc_per_lap: 5, runs_sampled: 3, tank_cc: 6000 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 110, std_dev_cc_per_lap: NaN, runs_sampled: 3, tank_cc: 6000 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 110, std_dev_cc_per_lap: 5, runs_sampled: 3, tank_cc: 0 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 0, std_dev_cc_per_lap: 5, runs_sampled: 3, tank_cc: 6000 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 110, std_dev_cc_per_lap: -5, runs_sampled: 3, tank_cc: 6000 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 110, std_dev_cc_per_lap: 5, runs_sampled: 0, tank_cc: 6000 } },
+    { ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: Infinity, std_dev_cc_per_lap: 5, runs_sampled: 3, tank_cc: 6000 } },
+  ];
+  check(
+    "F1: NaN-guard — any non-finite/insane consumption field → estimate dropped, plan == autonomy-only",
+    nanCases.every((c) => {
+      const p = computePitPlan(c);
+      return p.autonomy_estimate === undefined && JSON.stringify({ ...p, notes: 0, pit_traffic_risks: 0 }) === JSON.stringify({ ...plain, notes: 0, pit_traffic_risks: 0 });
+    }),
+  );
+  check(
+    "F1: NaN-guard cases never throw and never render NaN in notes",
+    nanCases.every((c) => {
+      const p = computePitPlan(c);
+      return p.notes.every((n) => !/NaN|Infinity|undefined/.test(n));
+    }),
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// F3 — pit-window-vs-traffic (RC-honest)
+// ═══════════════════════════════════════════════════════════════════════════
+
+// (a) Solo / tiny field → every pit moment is `none`.
+{
+  const solo = computePitPlan({ ...enduro, entrants: 1 });
+  check("F3: solo race → pit_traffic_risks all 'none'", solo.pit_traffic_risks !== undefined && solo.pit_traffic_risks.length === solo.pit_at_s.length && solo.pit_traffic_risks.every((r) => r.risk_type === "none"), JSON.stringify(solo.pit_traffic_risks?.map((r) => r.risk_type)));
+  check("F3: solo race risks carry pit_at_s + a sane pit_lap (>=1)", solo.pit_traffic_risks!.every((r) => r.pit_lap >= 1 && r.pit_at_s > 0));
+  check("F3: solo race note says clear air", solo.notes.some((n) => /no pack to rejoin into and no one to be lapped by/.test(n)), solo.notes.join(" | "));
+  const twoCar = computePitPlan({ ...enduro, entrants: 2 });
+  check("F3: 2-car field also all 'none'", twoCar.pit_traffic_risks!.every((r) => r.risk_type === "none"));
+}
+
+// (b) No field info → `unknown` (conservative — we never guess the field).
+{
+  const noField = computePitPlan({ ...enduro });
+  check("F3: no entrants → all risks 'unknown' (default field is not asserted)", noField.pit_traffic_risks !== undefined && noField.pit_traffic_risks.every((r) => r.risk_type === "unknown"), JSON.stringify(noField.pit_traffic_risks?.map((r) => r.risk_type)));
+  check("F3: unknown risks carry a 'log entrants' mitigation", noField.pit_traffic_risks!.every((r) => r.mitigation !== undefined && /entrants/.test(r.mitigation!)));
+  check("F3: unknown-field note tells the racer to log the field size", noField.notes.some((n) => /not enough field\/position data/.test(n)), noField.notes.join(" | "));
+}
+
+// (c) Leading + late lapped traffic → lapped_cars / high.
+//   Big field, you are P1, a long enduro so the late window has lapped cars.
+{
+  const leading = computePitPlan({ ...enduro, race_length_s: 3600, entrants: 12, current_position: 1 });
+  const hasLapped = leading.pit_traffic_risks!.some((r) => r.risk_type === "lapped_cars" && r.severity === "high");
+  check("F3: leading a big field, late stop → lapped_cars/high on at least one pit moment", hasLapped, JSON.stringify(leading.pit_traffic_risks?.map((r) => `${r.risk_type}/${r.severity}`)));
+  check("F3: lapped_cars carries a clear-air mitigation", leading.pit_traffic_risks!.some((r) => r.risk_type === "lapped_cars" && /clear air/.test(r.mitigation ?? "")));
+  check("F3: lapped-cars summary note mentions the cold out-lap", leading.notes.some((n) => /out-lap runs/.test(n) && /lapped cars/.test(n)), leading.notes.join(" | "));
+
+  // Same race but position UNKNOWN → we won't assert you're leading: late window stays 'unknown'.
+  const leadingNoPos = computePitPlan({ ...enduro, race_length_s: 3600, entrants: 12 });
+  check(
+    "F3: big field but no position → late-window risk is 'unknown', never asserted lapped_cars",
+    !leadingNoPos.pit_traffic_risks!.some((r) => r.risk_type === "lapped_cars"),
+    JSON.stringify(leadingNoPos.pit_traffic_risks?.map((r) => r.risk_type)),
+  );
+}
+
+// (d) Mid-field uniform pits → pack_rejoin / high + the ±1 lap mitigation.
+//   Mid-pack position (so NOT near the front → no lapped-car claim), field >= 4,
+//   a uniform stint cap shorter than the race → synced pit windows.
+{
+  const pack = computePitPlan({ ...enduro, entrants: 10, current_position: 6 });
+  const packRisk = pack.pit_traffic_risks!.find((r) => r.risk_type === "pack_rejoin");
+  check("F3: mid-field, synced uniform window → pack_rejoin/high", packRisk !== undefined && packRisk.severity === "high", JSON.stringify(pack.pit_traffic_risks?.map((r) => `${r.risk_type}/${r.severity}`)));
+  check("F3: pack_rejoin mitigation is the ±1 lap break-the-sync line", packRisk?.mitigation !== undefined && /±1 lap to break the sync/.test(packRisk.mitigation) && /doesn't cost a stop/.test(packRisk.mitigation), packRisk?.mitigation);
+  check("F3: pack summary note names the synced window + clear air", pack.notes.some((n) => /boxes together/.test(n) && /clear air/.test(n)), pack.notes.join(" | "));
+}
+
+// (e) No stops (one tank) → no pit_traffic_risks at all (nothing rejoins).
+{
+  const noStop = computePitPlan({ race_length_s: 300, race_type: "sprint", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25, entrants: 10 });
+  check("F3: a no-stop race has no pit_traffic_risks (no rejoin happens)", noStop.stops === 0 && noStop.pit_traffic_risks === undefined);
+}
+
+// (f) Determinism + NaN-guard on entrants/position.
+{
+  const ref = computePitPlan({ ...enduro, entrants: 10, current_position: 6 });
+  check("F3: traffic plan is deterministic", JSON.stringify(ref) === JSON.stringify(computePitPlan({ ...enduro, entrants: 10, current_position: 6 })));
+  const badEntrants: StrategyInputs[] = [
+    { ...enduro, entrants: NaN },
+    { ...enduro, entrants: Infinity },
+    { ...enduro, entrants: 8.5 },
+    { ...enduro, entrants: 0 },
+    { ...enduro, entrants: -3 },
+  ];
+  check(
+    "F3: NaN-guard — non-finite/non-integer/<1 entrants → 'unknown' (treated as no field), never throws",
+    badEntrants.every((c) => {
+      const p = computePitPlan(c);
+      return p.pit_traffic_risks !== undefined && p.pit_traffic_risks.every((r) => r.risk_type === "unknown");
+    }),
+  );
+  const badPos = computePitPlan({ ...enduro, race_length_s: 3600, entrants: 12, current_position: NaN });
+  check(
+    "F3: NaN position → never asserts lapped_cars (falls back to unknown in the late window)",
+    !badPos.pit_traffic_risks!.some((r) => r.risk_type === "lapped_cars"),
+    JSON.stringify(badPos.pit_traffic_risks?.map((r) => r.risk_type)),
+  );
+  check(
+    "F3: traffic notes/mitigations never render NaN/Infinity/undefined",
+    [ref, ...badEntrants.map(computePitPlan), badPos].every((p) =>
+      p.notes.every((n) => !/NaN|Infinity|undefined/.test(n)) &&
+      (p.pit_traffic_risks ?? []).every((r) => r.mitigation === undefined || !/NaN|Infinity|undefined/.test(r.mitigation)),
+    ),
+  );
+}
+
+// (g) F1 + F3 together — both attach, both NaN-free, deterministic.
+{
+  const both = computePitPlan({
+    ...enduro,
+    use_consumption_estimate: true,
+    consumption_based: { mean_cc_per_lap: 130, std_dev_cc_per_lap: 25, runs_sampled: 5, tank_cc: 6000 },
+    entrants: 10,
+    current_position: 6,
+  });
+  check("F1+F3: both autonomy_estimate and pit_traffic_risks present together", both.autonomy_estimate !== undefined && both.pit_traffic_risks !== undefined && both.pit_traffic_risks.length > 0);
+  check("F1+F3: combined plan deterministic + NaN-free", JSON.stringify(both) === JSON.stringify(computePitPlan({ ...enduro, use_consumption_estimate: true, consumption_based: { mean_cc_per_lap: 130, std_dev_cc_per_lap: 25, runs_sampled: 5, tank_cc: 6000 }, entrants: 10, current_position: 6 })) && both.notes.every((n) => !/NaN|Infinity|undefined/.test(n)));
+}
+
 if (failures > 0) {
   console.error(`\n${failures} strategy test(s) failed`);
   process.exit(1);

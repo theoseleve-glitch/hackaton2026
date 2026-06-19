@@ -26,6 +26,30 @@ export interface StrategyInputs {
    *  The math is unchanged, but the notes say so up front and tell the racer to
    *  log a real run, so the plan never implies false precision. */
   autonomy_estimated?: boolean;
+  /** F1 — consumption history across logged runs (cc burned per lap). When
+   *  `use_consumption_estimate` is on, a tank-range estimate is derived from it
+   *  with a pessimistic 2σ envelope and BLENDED with the single autonomy test.
+   *  Derived from real logs only (mean/std of fuel.consumed_cc / lap_count). */
+  consumption_based?: {
+    /** mean cc burned per lap across the sampled runs (> 0) */
+    mean_cc_per_lap: number;
+    /** standard deviation of cc-per-lap across the sampled runs (>= 0) */
+    std_dev_cc_per_lap: number;
+    /** how many runs contributed a clean cc-per-lap sample */
+    runs_sampled: number;
+    /** full-tank capacity in cc — turns cc-per-lap into a lap range */
+    tank_cc: number;
+  };
+  /** F1 — opt-in: use the consumption history above to estimate tank range.
+   *  Off (or no consumption data) → behaves exactly as before. */
+  use_consumption_estimate?: boolean;
+  /** F3 — field size the strategy is run against (RunEntry.result.entrants).
+   *  Drives the pit-traffic-vs-field estimate. Absent → assume a default field
+   *  (8) but flag the resulting risks conservatively as `unknown`. */
+  entrants?: number;
+  /** F3 — your end-of-race / scored position, when known. Refines the lapped-
+   *  car estimate; absent → the field-size heuristic alone. */
+  current_position?: number;
 }
 
 export interface Stint {
@@ -44,6 +68,28 @@ export interface PitPlan {
   total_time_s: number;
   pit_driver: "fuel" | "tyre_cliff";
   cliff_lap?: number;
+  /** F1 — tank range estimated from logged consumption (cc-per-lap), with a
+   *  pessimistic 2σ envelope. Present only when a consumption estimate was
+   *  used; absent → the plan ran on the single autonomy test alone. */
+  autonomy_estimate?: {
+    /** seconds a full tank lasts at the mean consumption rate */
+    mean_s: number;
+    /** seconds a full tank lasts at mean + 2σ consumption (conservative floor) */
+    pessimistic_s: number;
+    /** runs that contributed a clean cc-per-lap sample */
+    derived_from_runs: number;
+  };
+  /** F3 — per pit moment, the traffic risk of rejoining there (RC-honest:
+   *  computed from YOUR pace + field size only, never rival telemetry).
+   *  Conservative — `unknown` when data is missing, `none` solo/no-field.
+   *  Present only when there is a field to reason about. */
+  pit_traffic_risks?: Array<{
+    pit_at_s: number;
+    pit_lap: number;
+    risk_type: "lapped_cars" | "pack_rejoin" | "backmarker_zone" | "none" | "unknown";
+    severity: "low" | "medium" | "high";
+    mitigation?: string;
+  }>;
   /** plain-language reasoning — these ARE the product */
   notes: string[];
 }
@@ -51,13 +97,41 @@ export interface PitPlan {
 export function computePitPlan(inputs: StrategyInputs): PitPlan {
   validate(inputs);
   const margin = inputs.margin_s ?? inputs.avg_lap_s;
-  const fuelCap = inputs.autonomy_s - margin;
+
+  // F1 — consumption-based range estimate (pure, NaN-guarded). When opted in
+  // AND the consumption history is clean, derive tank range from cc-per-lap and
+  // BLEND it with the single autonomy test. The effective autonomy used to cap
+  // stints is FLOORED at the pessimistic (mean + 2σ) value so the plan stays
+  // conservative against fuel-test variance. No/dirty data → no change.
+  const est = consumptionEstimate(inputs);
+  const effectiveAutonomy =
+    est !== undefined
+      ? // blend the mean-rate range with the single measured test (simple
+        // average — both are equally valid signals), then floor by the
+        // pessimistic envelope so we never plan a window we can't guarantee.
+        Math.min((est.mean_s + inputs.autonomy_s) / 2, est.pessimistic_s)
+      : inputs.autonomy_s;
+
+  const fuelCap = effectiveAutonomy - margin;
   if (!(fuelCap > 0)) {
     throw new Error(
-      `stint_max_s = autonomy_s - margin_s = ${inputs.autonomy_s} - ${margin} = ${fuelCap}s — must be > 0: the safety margin eats the whole tank.`,
+      `stint_max_s = autonomy_s - margin_s = ${round1(effectiveAutonomy)} - ${margin} = ${round1(fuelCap)}s — must be > 0: the safety margin eats the whole tank.`,
     );
   }
   const notes: string[] = [];
+  // F1 — surface the consumption-derived range up front (before the fuel-window
+  // note) so the racer sees where the autonomy number came from. High variance
+  // → tell them to log a clean fuel test.
+  if (est !== undefined) {
+    notes.push(
+      `Tank autonomy from ${est.derived_from_runs} logged run(s): ${mmss(est.mean_s)} mean, ${mmss(est.pessimistic_s)} with a 2σ margin (~${est.mean_cc_per_lap.toFixed(1)}cc/lap${est.std_dev_cc_per_lap > 0 ? ` ±${est.std_dev_cc_per_lap.toFixed(1)}` : ""}). Planning on the conservative ${mmss(effectiveAutonomy)} window — blended with your ${mmss(inputs.autonomy_s)} tank test and floored at the 2σ figure.`,
+    );
+    if (est.high_variance) {
+      notes.push(
+        `Your logged fuel burn varies a lot run-to-run (±${est.std_dev_cc_per_lap.toFixed(1)}cc/lap, ~${Math.round(est.cv_pct)}% of the mean) — this range is rough. Log one clean run-until-dry on a full tank with a dialed tune for a tighter number.`,
+      );
+    }
+  }
   // R6-3 — no measured fuel run: say it's an estimate and what to log, BEFORE
   // any number, so the plan never implies false precision the racer didn't give.
   if (inputs.autonomy_estimated) {
@@ -114,6 +188,14 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
   }
 
   const plan = buildPlan(inputs, cap, pitDriver, cliffLap, notes);
+  // F1 — attach the consumption-derived range estimate (when one was used).
+  if (est !== undefined) {
+    plan.autonomy_estimate = {
+      mean_s: round1(est.mean_s),
+      pessimistic_s: round1(est.pessimistic_s),
+      derived_from_runs: est.derived_from_runs,
+    };
+  }
   // R6-3 — single-tank / no-pit race: a clear, dedicated line instead of the
   // fuel/tyre lever rationale (which only makes sense when you actually stop).
   if (plan.stops === 0) {
@@ -123,7 +205,170 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
   } else {
     plan.notes.push(...leverNotes);
   }
+  // F3 — pit-window-vs-traffic. RC-honest: per pit moment, estimate the rejoin
+  // traffic risk from YOUR pace + field size only. Conservative — flags
+  // `unknown` when data is missing, `none` solo/no-field. Adds its own notes.
+  const traffic = pitTrafficRisks(inputs, plan);
+  if (traffic !== undefined) {
+    plan.pit_traffic_risks = traffic.risks;
+    plan.notes.push(...traffic.notes);
+  }
   return plan;
+}
+
+// ── F3 — pit-window-vs-traffic (RC-honest) ───────────────────────────────────
+
+/**
+ * Per pit moment, the risk of rejoining into traffic, computed from YOUR pace +
+ * field size ONLY (RC has no rival telemetry — see the design's F2 skip). Pure,
+ * deterministic, conservative: missing/garbage field data → `unknown`, a solo
+ * race or a single-entry field → `none`. Returns undefined when there are no
+ * stops to reason about (no rejoin happens).
+ *
+ * Model:
+ *  - rejoin_s[i] = pit_at_s[i] + pit_loss_s (race-clock moment you re-enter)
+ *  - out-lap is slow: avg_lap_s * 1.05 (cold tyres, light/high-rev).
+ *  - leader_laps = race_length_s / avg_lap_s (rough leader lap count).
+ *  - backmarkers run fewer laps; a leader who is far enough ahead starts lapping
+ *    them late in the race. If your rejoin lands in that late window AND you are
+ *    near the front, flag `lapped_cars`.
+ *  - pack_rejoin: when a uniform fuel/tyre stint cap means most of the field
+ *    boxes around the same moment, rejoining stacks you into a pack.
+ */
+function pitTrafficRisks(
+  inputs: StrategyInputs,
+  plan: PitPlan,
+): { risks: NonNullable<PitPlan["pit_traffic_risks"]>; notes: string[] } | undefined {
+  if (plan.stops === 0 || plan.pit_at_s.length === 0) return undefined;
+
+  // Field size: entrants when given + finite, else the default 8 — but a
+  // defaulted field makes every risk `unknown` (we are guessing the field).
+  const entrantsGiven =
+    inputs.entrants !== undefined &&
+    isFiniteNum(inputs.entrants) &&
+    Number.isInteger(inputs.entrants) &&
+    inputs.entrants >= 1;
+  const entrants = entrantsGiven ? (inputs.entrants as number) : DEFAULT_ENTRANTS;
+  const fieldUnknown = !entrantsGiven;
+
+  // Lap you box on for each scheduled stop: cumulative laps through stints 0..i.
+  const pitLaps: number[] = [];
+  {
+    let cumDur = 0;
+    for (let i = 0; i < plan.stints.length; i++) {
+      cumDur += plan.stints[i].duration_s;
+      if (plan.stints[i].pit_after) pitLaps.push(Math.max(1, Math.round(cumDur / inputs.avg_lap_s)));
+    }
+  }
+  const pitLapAt = (i: number, pitAt: number): number =>
+    pitLaps[i] ?? Math.max(1, Math.round(pitAt / inputs.avg_lap_s));
+
+  // Solo / two-car field → nobody to be lapped by or packed with.
+  if (entrantsGiven && entrants <= 2) {
+    const risks = plan.pit_at_s.map((pitAt, i) => ({
+      pit_at_s: round1(pitAt),
+      pit_lap: pitLapAt(i, pitAt),
+      risk_type: "none" as const,
+      severity: "low" as const,
+    }));
+    return {
+      risks,
+      notes: [
+        `Pit traffic: a ${entrants}-car field — no pack to rejoin into and no one to be lapped by. Box on the fuel/tyre window; clear air either way.`,
+      ],
+    };
+  }
+
+  const outLap = inputs.avg_lap_s * 1.05;
+  const leaderLaps = inputs.race_length_s / inputs.avg_lap_s; // rough
+  // Backmarkers are roughly entrants/2 positions back; a clear leader catches
+  // them about (entrants/2) of their laps from the flag — i.e. the lapped-car
+  // zone opens in the final ~third of the race. Kept deliberately rough.
+  const lappedZoneStart = inputs.race_length_s * (2 / 3);
+  // Near the front? With a known position, "front" = top third. Unknown
+  // position → we cannot claim you are leading, so lapped-car risk stays
+  // `unknown` rather than asserted.
+  const positionGiven =
+    inputs.current_position !== undefined &&
+    isFiniteNum(inputs.current_position) &&
+    Number.isInteger(inputs.current_position) &&
+    inputs.current_position >= 1;
+  const nearFront = positionGiven && (inputs.current_position as number) <= Math.max(1, Math.ceil(entrants / 3));
+
+  // Pack-rejoin: a uniform stint cap syncs the field's pit windows. If everyone
+  // runs the same fuel/tyre math, you all box within a lap of each other and
+  // rejoin together. We flag it on every scheduled stop (the sync repeats).
+  const uniformCap = plan.stint_max_s; // the shared cap the whole field would run
+  const packLikely = entrants >= 4 && uniformCap > 0 && uniformCap < inputs.race_length_s;
+
+  const notes: string[] = [];
+  const risks = plan.pit_at_s.map((pitAt, i) => {
+    const rejoin = pitAt + inputs.pit_loss_s;
+    const pit_lap = pitLapAt(i, pitAt);
+    const base = { pit_at_s: round1(pitAt), pit_lap };
+
+    if (fieldUnknown) {
+      return {
+        ...base,
+        risk_type: "unknown" as const,
+        severity: "low" as const,
+        mitigation: "Log the field size (entrants) on your race runs and I can flag rejoin traffic for real.",
+      };
+    }
+
+    // Lapped cars: only in the late window, and only if we can place you near
+    // the front. Position unknown → `unknown` (we won't assert you're leading).
+    const inLappedZone = rejoin >= lappedZoneStart && leaderLaps >= entrants;
+    if (inLappedZone && nearFront) {
+      return {
+        ...base,
+        risk_type: "lapped_cars" as const,
+        severity: "high" as const,
+        mitigation: "On cold out-lap tyres you'll catch backmarkers — pit a lap earlier/later to rejoin in clear air, and be patient lapping them.",
+      };
+    }
+    if (inLappedZone && !positionGiven) {
+      return {
+        ...base,
+        risk_type: "unknown" as const,
+        severity: "low" as const,
+        mitigation: "Late-race rejoin could meet lapped cars — tell me your position and I'll know if you're the one lapping.",
+      };
+    }
+
+    // Pack rejoin from the synced uniform window.
+    if (packLikely) {
+      return {
+        ...base,
+        risk_type: "pack_rejoin" as const,
+        severity: "high" as const,
+        mitigation: "Pit ±1 lap to break the sync (only if it doesn't cost a stop) — rejoining a lap off the pack buys you clear air on the cold out-lap.",
+      };
+    }
+
+    return { ...base, risk_type: "none" as const, severity: "low" as const };
+  });
+
+  // One summary note in pilot language.
+  const kinds = new Set(risks.map((r) => r.risk_type));
+  if (kinds.has("lapped_cars")) {
+    notes.push(
+      `Pit traffic: your out-lap runs ~${mmss(outLap)} (cold tyres, ${(outLap - inputs.avg_lap_s).toFixed(1)}s off pace). A late stop can drop you among lapped cars — flagged below; pit a lap off to rejoin clear.`,
+    );
+  } else if (kinds.has("pack_rejoin")) {
+    notes.push(
+      `Pit traffic: a ${entrants}-car field on the same ${mmss(uniformCap)} window all boxes together — you risk rejoining into a pack on cold tyres. Breaking the pit sync by ±1 lap (when it's free) gets you clear air.`,
+    );
+  } else if (kinds.has("unknown")) {
+    notes.push(
+      `Pit traffic: not enough field/position data to call rejoin traffic — log entrants and your position and I'll flag it. Until then, assume clear air but watch your mirrors on the out-lap.`,
+    );
+  } else {
+    notes.push(
+      `Pit traffic: a ${entrants}-car field, but your stops don't line up with the lapped-car window or a synced pack — clean rejoins expected.`,
+    );
+  }
+  return { risks, notes };
 }
 
 /**
@@ -244,6 +489,74 @@ function mmss(s: number): string {
   const total = Math.round(s);
   const m = Math.floor(total / 60);
   return `${m}:${String(total - m * 60).padStart(2, "0")}`;
+}
+
+// ── F1/F3 small helpers ──────────────────────────────────────────────────────
+
+/** F3 — assumed field size when entrants is not logged (design default). */
+const DEFAULT_ENTRANTS = 8;
+/** A run's fuel burn is "high variance" when its 2σ cc/lap envelope exceeds
+ *  this fraction of the mean — the estimate is then too rough to trust. */
+const HIGH_VARIANCE_CV = 0.15; // coefficient of variation (σ/mean) threshold
+
+function isFiniteNum(x: unknown): x is number {
+  return typeof x === "number" && Number.isFinite(x);
+}
+
+/** One decimal, NaN-safe (used in pilot-facing numbers and thrown messages). */
+function round1(x: number): number {
+  return Math.round(x * 10) / 10;
+}
+
+interface ConsumptionEstimate {
+  mean_s: number;
+  pessimistic_s: number;
+  derived_from_runs: number;
+  mean_cc_per_lap: number;
+  std_dev_cc_per_lap: number;
+  high_variance: boolean;
+  cv_pct: number;
+}
+
+/**
+ * F1 — turn logged cc-per-lap consumption into a tank-range estimate, in
+ * seconds, with a pessimistic 2σ envelope. Returns undefined (→ no change to
+ * the plan) unless the racer opted in AND every input is finite and sane:
+ *   mean_s        = (tank_cc / mean_cc_per_lap) * avg_lap_s
+ *   pessimistic_s = (tank_cc / (mean_cc_per_lap + 2σ)) * avg_lap_s
+ * Pure + deterministic; any non-finite / non-positive field drops the estimate
+ * entirely (we never fabricate a range from garbage). The derivation of mean/σ
+ * across runs lives in the logbook (deriveConsumption) — here we only consume a
+ * pre-computed {mean, std, runs_sampled, tank_cc}.
+ */
+function consumptionEstimate(inputs: StrategyInputs): ConsumptionEstimate | undefined {
+  if (inputs.use_consumption_estimate !== true) return undefined;
+  const c = inputs.consumption_based;
+  if (c === undefined) return undefined;
+  const { mean_cc_per_lap, std_dev_cc_per_lap, runs_sampled, tank_cc } = c;
+  // NaN-guard every field; bail (no estimate) on anything non-finite or insane.
+  if (!isFiniteNum(mean_cc_per_lap) || !(mean_cc_per_lap > 0)) return undefined;
+  if (!isFiniteNum(std_dev_cc_per_lap) || std_dev_cc_per_lap < 0) return undefined;
+  if (!isFiniteNum(tank_cc) || !(tank_cc > 0)) return undefined;
+  if (!isFiniteNum(runs_sampled) || !Number.isInteger(runs_sampled) || runs_sampled < 1) return undefined;
+  if (!isFiniteNum(inputs.avg_lap_s) || !(inputs.avg_lap_s > 0)) return undefined;
+
+  const mean_s = (tank_cc / mean_cc_per_lap) * inputs.avg_lap_s;
+  const pessimisticRate = mean_cc_per_lap + 2 * std_dev_cc_per_lap;
+  const pessimistic_s = (tank_cc / pessimisticRate) * inputs.avg_lap_s;
+  if (!isFiniteNum(mean_s) || !isFiniteNum(pessimistic_s) || mean_s <= 0 || pessimistic_s <= 0) {
+    return undefined;
+  }
+  const cv = std_dev_cc_per_lap / mean_cc_per_lap; // coefficient of variation
+  return {
+    mean_s,
+    pessimistic_s,
+    derived_from_runs: runs_sampled,
+    mean_cc_per_lap,
+    std_dev_cc_per_lap,
+    high_variance: cv > HIGH_VARIANCE_CV,
+    cv_pct: cv * 100,
+  };
 }
 
 function validate(inputs: StrategyInputs): void {
