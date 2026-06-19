@@ -15,6 +15,10 @@ interface Scenario {
     primary_cites?: string;
     /** The primary must NOT cite this rule (history demotion scenarios). */
     primary_cites_not?: string;
+    /** R5-3 — on a refusal/do-nothing verdict, the user-facing message MUST contain
+     *  this substring. Locks the R5-2 HELPFUL clause (the "what to do" the racer
+     *  gets instead of a dead-end) so a future change can't silently strip it. */
+    message_includes?: string;
   };
   bundle: ContextBundle;
 }
@@ -41,6 +45,22 @@ for (const file of files) {
 
   if (rec.kind !== scenario.expect.kind) {
     problems.push(`expected kind=${scenario.expect.kind}, got ${rec.kind}`);
+  }
+
+  // R5-3 — refusal/do-nothing verdicts must carry a non-empty, HELPFUL message,
+  // and (when asserted) the specific R5-2 "what to do" clause. This locks the
+  // edge-case helpfulness so it can't silently regress to a bare dead-end.
+  if (rec.kind === "refusal" || rec.kind === "do_nothing") {
+    if (!rec.message || rec.message.trim().length === 0) {
+      problems.push(`${rec.kind} carries no message`);
+    } else if (
+      scenario.expect.message_includes &&
+      !rec.message.includes(scenario.expect.message_includes)
+    ) {
+      problems.push(
+        `${rec.kind} message must include "${scenario.expect.message_includes}"; got "${rec.message.slice(0, 100)}"`,
+      );
+    }
   }
 
   if (rec.kind === "recommendation") {

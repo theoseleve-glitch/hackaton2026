@@ -70,7 +70,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
       driving_tips: drivingTips(bundle),
       confidence: "none",
       rationale: "The chassis template is not in the verified knowledge base.",
-      message: `Chassis template '${bundle.chassis_template_id}' is not in the KB — no grounded report.`,
+      message: `Chassis template '${bundle.chassis_template_id}' is not in the KB, so I have no verified bounds for this car and won't guess. What to do: pick one of the supported chassis (the closest match works to start), then describe the symptom and I'll have grounded rules to work from.`,
     };
   }
 

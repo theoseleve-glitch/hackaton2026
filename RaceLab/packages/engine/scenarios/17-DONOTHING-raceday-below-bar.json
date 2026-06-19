@@ -1,0 +1,14 @@
+{
+  "name": "DO-NOTHING: race day, nothing clears the bar → kind do_nothing with a HELPFUL message (R5-3b)",
+  "expect": {
+    "kind": "do_nothing",
+    "message_includes": "high-confidence AND fast to reverse"
+  },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_shock_oil": 450, "rear_shock_oil": 400 },
+    "track": { "name": "Regional Main", "surface": "clay", "grip": "high", "conditions": ["high_grip", "bumpy"] },
+    "feedback": { "tags": [{ "symptom": "bouncy", "phase": "rough_section" }], "text": "pogoing over the bumps but 20 min to the main" },
+    "mode": "race_day"
+  }
+}

@@ -157,8 +157,20 @@ export function raceDayFilter(rule: Pick<KBRule, "confidence" | "reversal_cost_m
   return { allowed: true };
 }
 
+/**
+ * R5-2 — the "keep your setup" verdict made HELPFUL, not a dead-end. Explains the
+ * race-day BAR (a change has to be BOTH high-confidence AND fast to reverse to be
+ * worth the risk with the result on the line) and says what to do instead (test it
+ * in practice, where a wrong turn costs nothing). Pure constant string, NaN-free.
+ */
 export const DO_NOTHING_MESSAGE =
-  "Stick with what you have. No change clears the race-day bar (high confidence + fast to revert) for this symptom — protect the result and revisit it at the next practice.";
+  "Stick with what you have — that's the right call here, not a cop-out. On race day a change is only worth making if it's BOTH high-confidence AND fast to reverse, and nothing for this symptom clears that bar right now. Chasing it on the clock risks the result for an unproven gain. What to do: note the symptom, protect the finish, and test the fix in your next practice session where a wrong turn costs you nothing.";
 
+/**
+ * R5-2 — the out-of-KB refusal made HELPFUL. Says WHY (it's outside the verified
+ * knowledge base, and a guess could send you the wrong way) AND what the racer can
+ * do to get a real answer (log a run with the symptom + the exact conditions so
+ * there's something grounded to work from). Pure constant string, NaN-free.
+ */
 export const OUT_OF_KB_MESSAGE =
-  "I don't have a verified rule for that yet, so I won't guess.";
+  "I don't have a verified rule for that one, so I won't guess — a made-up setup change can easily send you the wrong way. What to do: log a run with exactly what the car is doing (the symptom, when in the corner) plus the surface and conditions, and I'll have something grounded to work from.";
