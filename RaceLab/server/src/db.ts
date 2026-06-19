@@ -39,6 +39,7 @@ export interface BackupRow extends BackupEntryInput {
 export interface SubscriptionRow {
   status: string; // raw platform fact: 'active' | 'canceled' | 'expired'
   expires_at: string | null;
+  stripe_customer_id: string | null; // for the Customer Portal lookup
 }
 
 export interface Db {
@@ -49,11 +50,13 @@ export interface Db {
   recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string>;
   getSubscription(user_id: string): Promise<SubscriptionRow | null>;
   /** Upsert the subscription row from a verified Stripe webhook (the only
-   *  writer). expires_at null = lifetime/manual. */
+   *  writer). expires_at null = lifetime/manual; stripe_customer_id null keeps
+   *  any existing value (so an event without a customer never erases it). */
   upsertSubscription(
     user_id: string,
     status: "active" | "canceled" | "expired",
     expires_at: string | null,
+    stripe_customer_id: string | null,
     updated_at_iso: string,
   ): Promise<void>;
   /** Idempotent on (user_id, entry_id): duplicates count as skipped. */
@@ -93,7 +96,7 @@ export function makeSqlDb(query: QueryFn): Db {
 
     async getSubscription(user_id) {
       const { rows } = await query(
-        `SELECT status, expires_at FROM subscriptions WHERE user_id = $1`,
+        `SELECT status, expires_at, stripe_customer_id FROM subscriptions WHERE user_id = $1`,
         [user_id],
       );
       if (rows.length === 0) return null;
@@ -101,18 +104,24 @@ export function makeSqlDb(query: QueryFn): Db {
       return {
         status: String(r.status),
         expires_at: r.expires_at === null || r.expires_at === undefined ? null : isoOf(r.expires_at),
+        stripe_customer_id:
+          r.stripe_customer_id === null || r.stripe_customer_id === undefined
+            ? null
+            : String(r.stripe_customer_id),
       };
     },
 
-    async upsertSubscription(user_id, status, expires_at, updated_at_iso) {
+    async upsertSubscription(user_id, status, expires_at, stripe_customer_id, updated_at_iso) {
       await query(
-        `INSERT INTO subscriptions (user_id, status, expires_at, source, updated_at)
-         VALUES ($1, $2, $3::timestamptz, 'web', $4::timestamptz)
+        `INSERT INTO subscriptions (user_id, status, expires_at, stripe_customer_id, source, updated_at)
+         VALUES ($1, $2, $3::timestamptz, $4, 'web', $5::timestamptz)
          ON CONFLICT (user_id) DO UPDATE
            SET status = EXCLUDED.status,
                expires_at = EXCLUDED.expires_at,
+               -- never erase a known customer with a null from a later event
+               stripe_customer_id = COALESCE(EXCLUDED.stripe_customer_id, subscriptions.stripe_customer_id),
                updated_at = EXCLUDED.updated_at`,
-        [user_id, status, expires_at, updated_at_iso],
+        [user_id, status, expires_at, stripe_customer_id, updated_at_iso],
       );
     },
 

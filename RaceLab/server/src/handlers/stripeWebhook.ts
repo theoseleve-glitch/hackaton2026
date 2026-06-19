@@ -48,6 +48,12 @@ export async function stripeWebhook(ctx: ServerCtx, req: HttpRequest): Promise<H
 
   const now = ctx.now();
   await ctx.db.ensureUser(write.user_id, now);
-  await ctx.db.upsertSubscription(write.user_id, write.status, write.expires_at, now);
+  await ctx.db.upsertSubscription(
+    write.user_id,
+    write.status,
+    write.expires_at,
+    write.stripe_customer_id,
+    now,
+  );
   return { status: 200, json: { received: true, applied: true } };
 }

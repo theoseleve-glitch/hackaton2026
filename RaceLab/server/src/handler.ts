@@ -12,6 +12,8 @@ import { backupPush } from "./handlers/backupPush";
 import { backupRestore } from "./handlers/backupRestore";
 import { accountDelete } from "./handlers/accountDelete";
 import { stripeWebhook } from "./handlers/stripeWebhook";
+import { stripeCheckout } from "./handlers/stripeCheckout";
+import { stripePortal } from "./handlers/stripePortal";
 
 type HandlerFn = (ctx: ServerCtx, req: HttpRequest) => Promise<HttpResponse>;
 
@@ -22,6 +24,8 @@ const ROUTES: Record<string, Partial<Record<string, HandlerFn>>> = {
   "/api/backup/restore": { GET: backupRestore },
   "/api/account": { DELETE: accountDelete },
   "/api/stripe/webhook": { POST: stripeWebhook },
+  "/api/stripe/checkout": { POST: stripeCheckout },
+  "/api/stripe/portal": { POST: stripePortal },
 };
 
 export function makeHandler(ctx: ServerCtx): (req: HttpRequest) => Promise<HttpResponse> {

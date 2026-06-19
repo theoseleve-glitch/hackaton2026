@@ -6,7 +6,13 @@
 
 import type { BackupEntryInput, BackupRow, Db, SubscriptionRow } from "./db";
 import type { TokenVerifier } from "./auth";
-import type { StripeEvent, StripeWebhookVerifier } from "./stripe";
+import type {
+  CheckoutSessionParams,
+  PortalSessionParams,
+  StripeBilling,
+  StripeEvent,
+  StripeWebhookVerifier,
+} from "./stripe";
 import type { HttpRequest, HttpResponse, ServerCtx } from "./types";
 import { makeHandler } from "./handler";
 import { MAX_PUSH_BATCH } from "./handlers/backupPush";
@@ -52,9 +58,16 @@ class FakeDb implements Db {
     user_id: string,
     status: "active" | "canceled" | "expired",
     expires_at: string | null,
+    stripe_customer_id: string | null,
     _updated_at_iso: string,
   ): Promise<void> {
-    this.subs.set(user_id, { status, expires_at });
+    const existing = this.subs.get(user_id);
+    // mirror the SQL COALESCE: a null customer never erases a known one
+    this.subs.set(user_id, {
+      status,
+      expires_at,
+      stripe_customer_id: stripe_customer_id ?? existing?.stripe_customer_id ?? null,
+    });
   }
   async insertBackupEntries(
     user_id: string,
@@ -121,9 +134,24 @@ const webhookVerifier: StripeWebhookVerifier = {
   },
 };
 
+// Fake Stripe billing capability: records the last params so tests can assert
+// the handler passed the VERIFIED user id (attribution) + chosen plan/customer.
+let lastCheckout: CheckoutSessionParams | null = null;
+let lastPortal: PortalSessionParams | null = null;
+const stripe: StripeBilling = {
+  createCheckoutSession: async (p) => {
+    lastCheckout = p;
+    return { url: `https://checkout.stripe.test/${p.plan}#${p.user_id}` };
+  },
+  createPortalSession: async (p) => {
+    lastPortal = p;
+    return { url: `https://portal.stripe.test/${p.customer}` };
+  },
+};
+
 const db = new FakeDb();
 let nowIso = NOW;
-const ctx: ServerCtx = { db, verifier, webhookVerifier, now: () => nowIso };
+const ctx: ServerCtx = { db, verifier, webhookVerifier, stripe, now: () => nowIso };
 const handle = makeHandler(ctx);
 
 function req(
@@ -179,7 +207,7 @@ console.log("— routing + auth —");
   throwingDb.getSubscription = async () => {
     throw new Error("db down");
   };
-  const h2 = makeHandler({ db: throwingDb, verifier, webhookVerifier, now: () => NOW });
+  const h2 = makeHandler({ db: throwingDb, verifier, webhookVerifier, stripe, now: () => NOW });
   const r500 = await h2(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("router: handler throw -> 500 internal_error (no leak)", r500.status === 500 && r500.json.error === "internal_error" && Object.keys(r500.json).length === 1);
 }
@@ -202,7 +230,7 @@ console.log("\n— trial first-seen —");
   check("trial: future claim clamped to server now", rFuture.status === 200 && rFuture.json.trial_started_at === NOW);
 
   const dbC = new FakeDb();
-  const hC = makeHandler({ db: dbC, verifier, webhookVerifier, now: () => NOW });
+  const hC = makeHandler({ db: dbC, verifier, webhookVerifier, stripe, now: () => NOW });
   const rNoBody = await hC(req("POST", "/api/trial/start", { token: "tok-A" }));
   check("trial: no body -> server now", rNoBody.status === 200 && rNoBody.json.trial_started_at === NOW);
   const rBad = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: { trial_started_at: "not-a-date" } }));
@@ -218,19 +246,19 @@ console.log("\n— subscription status —");
   const rNone = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: no row -> none", rNone.status === 200 && rNone.json.status === "none" && rNone.json.expires_at === undefined);
 
-  db.subs.set("user_A", { status: "active", expires_at: day(30) });
+  db.subs.set("user_A", { status: "active", expires_at: day(30), stripe_customer_id: null });
   const rActive = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: active before expiry -> active + expires_at", rActive.status === 200 && rActive.json.status === "active" && rActive.json.expires_at === day(30));
 
-  db.subs.set("user_A", { status: "canceled", expires_at: day(10) });
+  db.subs.set("user_A", { status: "canceled", expires_at: day(10), stripe_customer_id: null });
   const rCanceled = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: canceled but paid-through -> still active", rCanceled.json.status === "active");
 
-  db.subs.set("user_A", { status: "active", expires_at: day(-1) });
+  db.subs.set("user_A", { status: "active", expires_at: day(-1), stripe_customer_id: null });
   const rExpired = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: past expires_at -> expired (grace is client-side)", rExpired.json.status === "expired" && rExpired.json.expires_at === day(-1));
 
-  db.subs.set("user_A", { status: "active", expires_at: NOW });
+  db.subs.set("user_A", { status: "active", expires_at: NOW, stripe_customer_id: null });
   const rEdge = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: at the exact expiry instant -> active (t <= expires)", rEdge.json.status === "active");
   db.subs.delete("user_A");
@@ -244,7 +272,7 @@ console.log("\n— stripe webhook —");
   // Build a customer.subscription.* event object the mapper reads.
   const subEvent = (
     type: string,
-    o: { user_id?: string; cref?: string; status?: string; cpe?: string },
+    o: { user_id?: string; cref?: string; status?: string; cpe?: string; customer?: string },
   ): Record<string, unknown> => ({
     type,
     data: {
@@ -253,6 +281,7 @@ console.log("\n— stripe webhook —");
         ...(o.cref !== undefined ? { client_reference_id: o.cref } : {}),
         ...(o.status !== undefined ? { status: o.status } : {}),
         ...(o.cpe !== undefined ? { current_period_end: unix(o.cpe) } : {}),
+        ...(o.customer !== undefined ? { customer: o.customer } : {}),
       },
     },
   });
@@ -272,9 +301,10 @@ console.log("\n— stripe webhook —");
   const badSig = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30) }), "forged"));
   check("webhook: bad signature -> 400 (no row written)", badSig.status === 400 && badSig.json.error === "invalid_signature" && db.subs.get("user_A") === undefined);
 
-  const created = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30) }), "valid"));
+  const created = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30), customer: "cus_A" }), "valid"));
   check("webhook: created active -> applied + row upserted", created.status === 200 && created.json.applied === true && db.subs.get("user_A")?.status === "active" && db.subs.get("user_A")?.expires_at === day(30));
   check("webhook: ensured the user row exists", db.users.has("user_A"));
+  check("webhook: stripe_customer_id persisted for the portal", db.subs.get("user_A")?.stripe_customer_id === "cus_A");
 
   // end-to-end: the app's read endpoint now sees the subscription Stripe just wrote
   const e2e = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
@@ -285,6 +315,7 @@ console.log("\n— stripe webhook —");
 
   const cancelAtEnd = await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "canceled", cpe: day(40) }), "valid"));
   check("webhook: canceled w/ future period -> row 'canceled' but status reads active", cancelAtEnd.json.applied === true && db.subs.get("user_A")?.status === "canceled");
+  check("webhook: customer id preserved across an event without one (COALESCE)", db.subs.get("user_A")?.stripe_customer_id === "cus_A");
   const stillActive = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("webhook: canceled-but-paid-through still reads active to the app", stillActive.json.status === "active");
 
@@ -308,6 +339,57 @@ console.log("\n— stripe webhook —");
 
   db.subs.delete("user_A");
   db.subs.delete("user_B");
+}
+
+// ═══ stripe checkout + portal (create-session endpoints) ══════════════════════
+
+console.log("\n— stripe checkout + portal —");
+{
+  lastCheckout = null;
+  lastPortal = null;
+
+  const noTok = await handle(req("POST", "/api/stripe/checkout", { body: { plan: "monthly" } }));
+  check("checkout: no token -> 401", noTok.status === 401);
+
+  const annual = await handle(req("POST", "/api/stripe/checkout", { token: "tok-A", body: { plan: "annual" } }));
+  check("checkout: annual -> 200 with url", annual.status === 200 && typeof annual.json.url === "string");
+  check(
+    "checkout: plan forwarded + attribution = VERIFIED user (never a query param)",
+    lastCheckout !== null &&
+      (lastCheckout as CheckoutSessionParams).plan === "annual" &&
+      (lastCheckout as CheckoutSessionParams).user_id === "user_A" &&
+      (lastCheckout as CheckoutSessionParams).client_reference_id === "user_A",
+  );
+  check(
+    "checkout: https success/cancel urls set (deep-link via the success page)",
+    lastCheckout !== null &&
+      (lastCheckout as CheckoutSessionParams).success_url.startsWith("https://") &&
+      (lastCheckout as CheckoutSessionParams).cancel_url.startsWith("https://"),
+  );
+
+  const def = await handle(req("POST", "/api/stripe/checkout", { token: "tok-A", body: {} }));
+  check("checkout: missing plan defaults to monthly", def.status === 200 && lastCheckout !== null && (lastCheckout as CheckoutSessionParams).plan === "monthly");
+
+  const badPlan = await handle(req("POST", "/api/stripe/checkout", { token: "tok-A", body: { plan: "weekly" } }));
+  check("checkout: unknown plan -> 400 invalid_plan", badPlan.status === 400 && badPlan.json.error === "invalid_plan");
+
+  const badBody = await handle(req("POST", "/api/stripe/checkout", { token: "tok-A", body: [1, 2] }));
+  check("checkout: array body -> 400 invalid_body", badBody.status === 400 && badBody.json.error === "invalid_body");
+
+  const pNoTok = await handle(req("POST", "/api/stripe/portal", { body: {} }));
+  check("portal: no token -> 401", pNoTok.status === 401);
+
+  db.subs.delete("user_B");
+  const pNoCust = await handle(req("POST", "/api/stripe/portal", { token: "tok-B", body: {} }));
+  check("portal: no customer on file -> 409 no_subscription", pNoCust.status === 409 && pNoCust.json.error === "no_subscription");
+
+  db.subs.set("user_A", { status: "active", expires_at: day(30), stripe_customer_id: "cus_A" });
+  const pOk = await handle(req("POST", "/api/stripe/portal", { token: "tok-A", body: {} }));
+  check(
+    "portal: with customer -> 200 url, customer forwarded",
+    pOk.status === 200 && typeof pOk.json.url === "string" && lastPortal !== null && (lastPortal as PortalSessionParams).customer === "cus_A",
+  );
+  db.subs.delete("user_A");
 }
 
 // ═══ backup push (idempotency) ═══════════════════════════════════════════════
@@ -398,7 +480,7 @@ console.log("\n— backup restore —");
 
 console.log("\n— account delete —");
 {
-  db.subs.set("user_A", { status: "active", expires_at: day(30) });
+  db.subs.set("user_A", { status: "active", expires_at: day(30), stripe_customer_id: null });
   const d1 = await handle(req("DELETE", "/api/account", { token: "tok-A" }));
   check("delete: 200 with deleted flag", d1.status === 200 && d1.json.deleted === true);
   check("delete: user row gone", !db.users.has("user_A"));

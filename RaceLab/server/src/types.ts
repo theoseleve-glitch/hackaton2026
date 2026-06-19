@@ -7,7 +7,7 @@
 
 import type { Db } from "./db";
 import type { TokenVerifier } from "./auth";
-import type { StripeWebhookVerifier } from "./stripe";
+import type { StripeBilling, StripeWebhookVerifier } from "./stripe";
 
 export interface HttpRequest {
   method: string;
@@ -32,6 +32,9 @@ export interface ServerCtx {
   /** Stripe webhook signature verifier (injected: fake in tests, real SDK at
    *  deploy). Only /api/stripe/webhook consumes it. */
   webhookVerifier: StripeWebhookVerifier;
+  /** Stripe billing capability (Checkout + Customer Portal session creation;
+   *  injected: fake in tests, real SDK at deploy). */
+  stripe: StripeBilling;
   /** Server clock, injected (fixed in tests). Every response echoes it as
    *  server_time — the client uses it to raise its tamper-guard floor. */
   now: () => string;

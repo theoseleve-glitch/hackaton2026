@@ -25,7 +25,27 @@ export interface NodeLikeResponse {
 
 let handlerPromise: Promise<(req: HttpRequest) => Promise<HttpResponse>> | null = null;
 
+/** CORS for the browser checkout/portal calls from the marketing site. The RN
+ *  app doesn't need it; Stripe (webhook) is server-to-server. Origin-scoped to
+ *  WEB_ORIGIN (default racelabrc.app) — not a wildcard, since requests carry a
+ *  bearer. (Alternatively, front the API under the web domain via a Vercel
+ *  rewrite so calls are same-origin and this is a no-op.) */
+function applyCors(res: NodeLikeResponse): void {
+  const origin = process.env.WEB_ORIGIN ?? "https://racelabrc.app";
+  res.setHeader("access-control-allow-origin", origin);
+  res.setHeader("vary", "Origin");
+  res.setHeader("access-control-allow-methods", "GET, POST, OPTIONS");
+  res.setHeader("access-control-allow-headers", "authorization, content-type");
+  res.setHeader("access-control-max-age", "86400");
+}
+
 export async function runVercel(req: NodeLikeRequest, res: NodeLikeResponse): Promise<void> {
+  applyCors(res);
+  if ((req.method ?? "GET").toUpperCase() === "OPTIONS") {
+    res.statusCode = 204;
+    res.end();
+    return;
+  }
   let response: HttpResponse;
   try {
     if (handlerPromise === null) handlerPromise = getDeployCtx().then(makeHandler);

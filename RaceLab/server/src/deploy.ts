@@ -12,6 +12,9 @@
  *        CLERK_ISSUER          — https://<clerk-frontend-api>   (optional but recommended)
  *        STRIPE_SECRET_KEY     — Stripe secret key (sk_live_…)
  *        STRIPE_WEBHOOK_SECRET — signing secret of the racelabrc.app webhook endpoint (whsec_…)
+ *        PRICE_MONTHLY         — Stripe price id for 9,99€/mo (price_…)
+ *        PRICE_YEARLY          — Stripe price id for 99,99€/yr (price_…)
+ *        WEB_ORIGIN (optional) — CORS origin for the browser checkout/portal calls (default https://racelabrc.app)
  *  3. Apply db/schema.sql to the Neon database.
  *  4. `vercel deploy` from server/ — api/*.ts are the functions (vercel.json).
  *  5. Add a Stripe webhook → https://<deploy>/api/stripe/webhook for events
@@ -26,7 +29,7 @@
 import { makeSqlDb } from "./db";
 import type { ServerCtx } from "./types";
 import type { TokenVerifier } from "./auth";
-import type { StripeEvent, StripeWebhookVerifier } from "./stripe";
+import type { StripeBilling, StripeEvent, StripeWebhookVerifier } from "./stripe";
 
 export async function getDeployCtx(
   env: Record<string, string | undefined> = process.env,
@@ -36,6 +39,8 @@ export async function getDeployCtx(
   const issuer = env.CLERK_ISSUER;
   const stripeSecret = env.STRIPE_SECRET_KEY;
   const stripeWebhookSecret = env.STRIPE_WEBHOOK_SECRET;
+  const priceMonthly = env.PRICE_MONTHLY;
+  const priceYearly = env.PRICE_YEARLY;
   if (
     dbUrl === undefined ||
     dbUrl === "" ||
@@ -44,10 +49,14 @@ export async function getDeployCtx(
     stripeSecret === undefined ||
     stripeSecret === "" ||
     stripeWebhookSecret === undefined ||
-    stripeWebhookSecret === ""
+    stripeWebhookSecret === "" ||
+    priceMonthly === undefined ||
+    priceMonthly === "" ||
+    priceYearly === undefined ||
+    priceYearly === ""
   ) {
     throw new Error(
-      "server_misconfigured: DATABASE_URL, CLERK_JWKS_URL, STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET are required",
+      "server_misconfigured: DATABASE_URL, CLERK_JWKS_URL, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, PRICE_MONTHLY and PRICE_YEARLY are required",
     );
   }
 
@@ -114,7 +123,32 @@ export async function getDeployCtx(
     },
   };
 
-  return { db, verifier, webhookVerifier, now: () => new Date().toISOString() };
+  const stripe: StripeBilling = {
+    createCheckoutSession: async (p) => {
+      const session = await stripeClient.checkout.sessions.create({
+        mode: "subscription",
+        line_items: [{ price: p.plan === "annual" ? priceYearly : priceMonthly, quantity: 1 }],
+        client_reference_id: p.client_reference_id,
+        // Stripe copies subscription_data.metadata onto every
+        // customer.subscription.* event → the webhook attributes the sub.
+        subscription_data: { metadata: { user_id: p.user_id } },
+        success_url: p.success_url,
+        cancel_url: p.cancel_url,
+        allow_promotion_codes: true,
+        // NO trial — the app owns the 15-day local trial.
+      });
+      return { url: (session as { url?: string | null }).url ?? null };
+    },
+    createPortalSession: async (p) => {
+      const session = await stripeClient.billingPortal.sessions.create({
+        customer: p.customer,
+        return_url: p.return_url,
+      });
+      return { url: (session as { url: string }).url };
+    },
+  };
+
+  return { db, verifier, webhookVerifier, stripe, now: () => new Date().toISOString() };
 }
 
 /** The slice of the Stripe SDK we touch (avoids a committed type dependency). */
@@ -122,4 +156,6 @@ interface StripeClient {
   webhooks: {
     constructEventAsync(rawBody: string, signature: string, secret: string): Promise<unknown>;
   };
+  checkout: { sessions: { create(params: Record<string, unknown>): Promise<unknown> } };
+  billingPortal: { sessions: { create(params: Record<string, unknown>): Promise<unknown> } };
 }

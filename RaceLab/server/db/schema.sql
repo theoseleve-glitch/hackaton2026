@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS users (
 -- app — no IAP). status is the raw platform fact; the API computes
 -- active/expired against expires_at at read time.
 CREATE TABLE IF NOT EXISTS subscriptions (
-  user_id    TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-  status     TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
-  expires_at TIMESTAMPTZ,                                 -- null = lifetime/manual
-  source     TEXT NOT NULL DEFAULT 'web',
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  user_id            TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  status             TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
+  expires_at         TIMESTAMPTZ,                          -- null = lifetime/manual
+  stripe_customer_id TEXT,                                 -- Stripe customer ("cus_…"); set by the webhook, read by the Portal
+  source             TEXT NOT NULL DEFAULT 'web',
+  updated_at         TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 -- backup_entries: the synced outbox journal (packages/schema OutboxEntry).

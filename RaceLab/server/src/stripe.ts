@@ -40,6 +40,9 @@ export interface StripeEventObject {
   status?: string;
   /** Unix seconds — the paid-through instant. */
   current_period_end?: number;
+  /** Stripe customer id ("cus_…") — persisted so the Customer Portal can find
+   *  the customer (there is no customer→user table). */
+  customer?: string;
 }
 
 export interface StripeEvent {
@@ -58,6 +61,8 @@ export interface SubscriptionWrite {
   user_id: string;
   status: "active" | "canceled" | "expired";
   expires_at: string | null;
+  /** Stripe customer id, when the event carried one (null = leave existing). */
+  stripe_customer_id: string | null;
 }
 
 /** Event types that move entitlement state. Everything else is acked + ignored. */
@@ -91,21 +96,56 @@ export function mapEvent(event: StripeEvent): SubscriptionWrite | null {
     typeof obj.current_period_end === "number" && Number.isFinite(obj.current_period_end)
       ? new Date(obj.current_period_end * 1000).toISOString()
       : null;
+  const stripe_customer_id =
+    typeof obj.customer === "string" && obj.customer !== "" ? obj.customer : null;
 
   if (event.type === "customer.subscription.deleted") {
-    return { user_id, status: "expired", expires_at };
+    return { user_id, status: "expired", expires_at, stripe_customer_id };
   }
 
   switch (obj.status) {
     case "active":
     case "trialing":
     case "past_due":
-      return { user_id, status: "active", expires_at };
+      return { user_id, status: "active", expires_at, stripe_customer_id };
     case "canceled":
     case "unpaid":
     case "incomplete_expired":
-      return { user_id, status: "canceled", expires_at };
+      return { user_id, status: "canceled", expires_at, stripe_customer_id };
     default:
       return null; // incomplete / paused / undefined — no change
   }
+}
+
+// ── Billing capability (Checkout + Customer Portal) ──────────────────────────
+// Injected like StripeWebhookVerifier: fake in tests, the real Stripe SDK at
+// deploy (see src/deploy.ts). Plan→price resolution lives at the deploy
+// boundary (the price ids are env); handlers stay pure + testable.
+
+export interface CheckoutSessionParams {
+  plan: "monthly" | "annual";
+  /** Verified Clerk user id — written as client_reference_id AND
+   *  subscription_data.metadata.user_id so the webhook attributes the sub. */
+  client_reference_id: string;
+  user_id: string;
+  success_url: string;
+  cancel_url: string;
+}
+
+export interface PortalSessionParams {
+  customer: string;
+  return_url: string;
+}
+
+export interface StripeBilling {
+  createCheckoutSession(p: CheckoutSessionParams): Promise<{ url: string | null }>;
+  createPortalSession(p: PortalSessionParams): Promise<{ url: string }>;
+}
+
+/** Validate the requested plan. Absent/empty → "monthly" (default); a present
+ *  but unrecognized value → null (the handler 400s it). */
+export function parsePlan(raw: unknown): "monthly" | "annual" | null {
+  if (raw === undefined || raw === null || raw === "") return "monthly";
+  if (raw === "monthly" || raw === "annual") return raw;
+  return null;
 }
