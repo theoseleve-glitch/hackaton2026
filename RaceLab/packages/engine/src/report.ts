@@ -157,7 +157,14 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
   const [primaryEntry, secondaryEntry, ...parked] = distinct;
   const primaryRule = primaryEntry.rule;
   const primary = primaryEntry.option;
-  const secondary = secondaryEntry?.option;
+  // R6-2: the secondary is the FALLBACK. Re-frame its "if it doesn't help" so it
+  // reads as "only try this if the primary doesn't fully fix it — it's a
+  // different lever, so it stacks rather than fights the first change". Built
+  // purely from the two options' own settings; the original option is untouched
+  // (a fresh object), so primary/alternatives paths elsewhere stay as they were.
+  const secondary = secondaryEntry
+    ? { ...secondaryEntry.option, if_it_does_not_help: secondaryFallbackFraming(primary, secondaryEntry.option) }
+    : undefined;
 
   // R3-1: did lap-time impact DECIDE the primary? True only when the primary
   // carries a finite impact AND at least one OTHER retrieved candidate tied it on
@@ -506,6 +513,53 @@ function buildRationale(bundle: ContextBundle, rule: KBRule, impactDecidedPrimar
     }
   }
   return parts.join(" ");
+}
+
+/**
+ * R6-2 — the secondary change's "if it doesn't help" framing. The secondary is
+ * a FALLBACK, and it deliberately works a DIFFERENT lever from the primary so
+ * the two STACK (address the balance from two ends) rather than FIGHT (two
+ * cracks at the same lever, where the second just undoes the first). This makes
+ * both facts explicit: try it only if the primary doesn't fully fix it, and why
+ * it's a different lever. Pure + deterministic, grounded only in the two
+ * options' own settings (universal mechanical grouping, NOT a KB citation).
+ * Always a non-empty, NaN-free string.
+ */
+function secondaryFallbackFraming(primary: RecommendationOption, secondary: RecommendationOption): string {
+  const primaryFamily = leverFamily(primary.setting);
+  const secondaryFamily = leverFamily(secondary.setting);
+  const differentLever = primaryFamily !== secondaryFamily;
+  const leverClause = differentLever
+    ? `it works a different lever (${secondaryFamily} vs ${primaryFamily}), so it stacks with the first change rather than fighting it`
+    : `it comes at the same area from a different angle, so make the primary change first and judge it on its own before stacking this on top`;
+  return (
+    `Try this only if the primary (${humanize(primary.setting)}) doesn't fully fix it — ` +
+    `${leverClause}. ` +
+    `Make one change at a time so you can read each one's effect; if neither lands, revert both and the cause is likely the next-ranked option or tires for this surface.`
+  );
+}
+
+/**
+ * R6-2 — group a setting into its mechanical "lever family" so the secondary
+ * framing can say WHY it's a different lever in plain words. A fixed, total
+ * lookup over the KB's setting vocabulary; the default ("the chassis") keeps the
+ * sentence grammatical for any unrecognised setting (fail-safe, never throws).
+ * Pure universal mechanics — not a KB citation.
+ */
+function leverFamily(setting: string): string {
+  if (setting.includes("diff") || setting === "clutch_spring") return "the differentials / drivetrain";
+  if (setting.includes("sway_bar")) return "anti-roll stiffness";
+  if (setting.includes("spring") || setting.includes("shock") || setting === "ride_height" || setting === "ride_height_rake")
+    return "suspension / damping";
+  if (setting.includes("camber") || setting.includes("toe") || setting === "caster" || setting === "ackermann" ||
+      setting.includes("roll_center") || setting.includes("track_width") || setting === "wheelbase")
+    return "geometry";
+  if (setting.includes("wing")) return "aero";
+  if (setting === "gearing") return "gearing";
+  if (setting.includes("downstop") || setting.includes("anti_squat") || setting.includes("kickup") ||
+      setting === "shock_mounting_inclination")
+    return "weight-transfer geometry";
+  return "the chassis";
 }
 
 function humanize(id: string): string {

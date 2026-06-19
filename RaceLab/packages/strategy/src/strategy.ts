@@ -22,6 +22,10 @@ export interface StrategyInputs {
   margin_s?: number;
   /** endurance only: lap series for tyre-cliff detection */
   lap_times?: number[];
+  /** R6-3 — true when autonomy_s is an ESTIMATE, not a measured full-tank run.
+   *  The math is unchanged, but the notes say so up front and tell the racer to
+   *  log a real run, so the plan never implies false precision. */
+  autonomy_estimated?: boolean;
 }
 
 export interface Stint {
@@ -53,14 +57,26 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
       `stint_max_s = autonomy_s - margin_s = ${inputs.autonomy_s} - ${margin} = ${fuelCap}s — must be > 0: the safety margin eats the whole tank.`,
     );
   }
-  const notes: string[] = [
-    `Full tank lasts ~${mmss(inputs.autonomy_s)} (${inputs.autonomy_s}s) at your ${inputs.avg_lap_s.toFixed(1)}s pace.`,
+  const notes: string[] = [];
+  // R6-3 — no measured fuel run: say it's an estimate and what to log, BEFORE
+  // any number, so the plan never implies false precision the racer didn't give.
+  if (inputs.autonomy_estimated) {
+    notes.push(
+      `Heads up: no full-tank run is logged yet, so this assumes a fuel autonomy of ~${mmss(inputs.autonomy_s)} (${inputs.autonomy_s}s) — it's an ESTIMATE, not measured. Log one run-until-dry on a full tank and re-plan for a real number; until then treat the stop count as a rough guide and keep a lap of extra reserve.`,
+    );
+  }
+  notes.push(
+    `Full tank lasts ~${mmss(inputs.autonomy_s)} (${inputs.autonomy_s}s)${inputs.autonomy_estimated ? " (estimated)" : ""} at your ${inputs.avg_lap_s.toFixed(1)}s pace.`,
     `Boxing every ${mmss(fuelCap)} (${fuelCap}s) — that's full autonomy minus a ${margin}s safety reserve${inputs.margin_s === undefined ? " (one average lap, the default)" : ""}, held back against fuel-test variance and slow stops.`,
-  ];
+  );
 
   let cap = fuelCap;
   let pitDriver: PitPlan["pit_driver"] = "fuel";
   let cliffLap: number | undefined;
+  // R6-3 — defer the lever-rationale notes ("Fuel/Tyres set the stops") until we
+  // know the plan actually HAS stops: on a single-tank, no-pit race they'd be
+  // misleading. Collect them here and append only if stops > 0.
+  const leverNotes: string[] = [];
   if (inputs.race_type === "endurance" && inputs.lap_times !== undefined) {
     const cliff = detectTyreCliff(inputs.lap_times);
     cliffLap = cliff.cliff_lap;
@@ -69,21 +85,21 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
       if (cliffTime < fuelCap) {
         cap = cliffTime;
         pitDriver = "tyre_cliff";
-        notes.push(
+        leverNotes.push(
           `Tyres fall off a cliff after ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}, ~${cliff.degradation_s_per_lap.toFixed(2)}s/lap) — that's ${mmss(cliffTime)} vs the ${mmss(fuelCap)} fuel window, so tyres run out of grip first. Box every ${mmss(cliffTime)} to stay ahead of the cliff.`,
         );
         // R4-1: the tyres, not the tank, set the stops here — a bigger tank
         // wouldn't move them. Make that tradeoff explicit so nobody chases fuel.
-        notes.push(
+        leverNotes.push(
           `Tyres, not fuel, set the stops here: the cliff lands ${mmss(fuelCap - cliffTime)} (${Math.round(fuelCap - cliffTime)}s) BEFORE the tank runs low — a bigger tank wouldn't help, you'd box on grip anyway. Win the stops by making the tyres last, not by carrying more fuel.`,
         );
       } else {
-        notes.push(
+        leverNotes.push(
           `Tyre cliff at ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}) sits outside the ${fuelCap}s fuel window — fuel still decides the pits.`,
         );
         // R4-1: fuel sets the stops — the tyres outlast the tank, so the lever
         // that moves the stop count is tank size / consumption, not tyre life.
-        notes.push(
+        leverNotes.push(
           `Fuel, not tyres, sets the stops here: the tank runs low ${mmss(cliffTime - fuelCap)} (${Math.round(cliffTime - fuelCap)}s) BEFORE the tyres cliff — to cut a stop you need more range (bigger tank or leaner consumption), not more tyre life.`,
         );
       }
@@ -92,11 +108,22 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
   // R4-1: when fuel alone decides (sprint, or endurance with no cliff data),
   // still name the driver so the racer knows which lever moves the stop count.
   if (pitDriver === "fuel" && cliffLap === undefined) {
-    notes.push(
+    leverNotes.push(
       `Fuel sets the stops: the tank is the binding limit here (no tyre cliff in the window), so the lever that changes the stop count is range — a bigger tank or leaner consumption — not tyre life.`,
     );
   }
-  return buildPlan(inputs, cap, pitDriver, cliffLap, notes);
+
+  const plan = buildPlan(inputs, cap, pitDriver, cliffLap, notes);
+  // R6-3 — single-tank / no-pit race: a clear, dedicated line instead of the
+  // fuel/tyre lever rationale (which only makes sense when you actually stop).
+  if (plan.stops === 0) {
+    plan.notes.push(
+      `One tank covers the whole race — no stop needed. Just manage the tyres and bring it home; the fuel window (${mmss(fuelCap)}) is longer than the race, so the pit lane never comes into it.`,
+    );
+  } else {
+    plan.notes.push(...leverNotes);
+  }
+  return plan;
 }
 
 /**
@@ -183,7 +210,7 @@ function buildPlan(
   notes.push(
     `${mmss(inputs.race_length_s)} race and you finish the lap you're on: ~${laps} laps = ${mmss(laps * inputs.avg_lap_s)} (${laps * inputs.avg_lap_s}s) of driving.`,
     stops === 0
-      ? `The tank covers the whole race — no stop needed; total ~${mmss(total_time_s)} (${total_time_s}s).`
+      ? `Zero pit loss — you run flag to flag on one tank; total ~${mmss(total_time_s)} (${total_time_s}s).`
       : `${stops} stop(s) x ${inputs.pit_loss_s}s = ${mmss(stops * inputs.pit_loss_s)} (${stops * inputs.pit_loss_s}s) lost in the pits; total ~${mmss(total_time_s)} (${total_time_s}s).`,
   );
   if (stops > 0) {

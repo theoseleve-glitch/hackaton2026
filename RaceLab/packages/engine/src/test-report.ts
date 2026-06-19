@@ -470,6 +470,99 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
   check("R4-3: headline is deterministic", h1 === h2);
 }
 
+// 13. R6-1 driving-tips actionability — the symptom tips are SPECIFIC and
+//     BEHAVIORAL per symptom + corner phase, capped at 3, deterministic, NaN-free,
+//     universal technique (no KB citation), and tempered by scarce-grip conditions.
+{
+  // understeer-on-entry → the brake-earlier/finish-before-turn-in/no-trail-brake tip.
+  const usEntry = drivingTips(bundle({ track: { name: "T", surface: "clay", grip: "medium", conditions: [] }, feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }));
+  check(
+    "R6-1: understeer-entry tip is behavioral + phase-specific (brake earlier, before turn-in, no trail-braking)",
+    usEntry.some((t) => /brake a touch earlier/i.test(t) && /before you turn in/i.test(t) && /trail-brak/i.test(t)),
+    usEntry.join(" | "),
+  );
+
+  // oversteer-on-exit → the feed-don't-stab-the-throttle tip.
+  const osExit = drivingTips(bundle({ track: { name: "T", surface: "clay", grip: "medium", conditions: [] }, feedback: { tags: [{ symptom: "oversteer", phase: "corner_exit" }] } }));
+  check(
+    "R6-1: oversteer-exit tip is behavioral (feed the throttle progressively, squeeze not stab)",
+    osExit.some((t) => /feed the throttle in progressively/i.test(t) && /squeezing instead of stabbing/i.test(t) && /rear planted/i.test(t)),
+    osExit.join(" | "),
+  );
+
+  // The SAME symptom at a different phase yields a DIFFERENT tip (phase-specific,
+  // not one generic understeer line).
+  const usMid = drivingTips(bundle({ track: { name: "T", surface: "clay", grip: "medium", conditions: [] }, feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] } }));
+  check(
+    "R6-1: tip differs by corner phase (entry vs mid understeer are not identical)",
+    usEntry[0] !== usMid[0] && /Mid-corner understeer/i.test(usMid[0]),
+    `${usEntry[0]}\n   vs ${usMid[0]}`,
+  );
+
+  // Scarce-grip conditions temper the leading behavioral tip with a conservative coda.
+  const wet = drivingTips(bundle({ track: { name: "T", surface: "clay", grip: "green", conditions: ["wet"] }, feedback: { tags: [{ symptom: "oversteer", phase: "corner_exit" }] } }));
+  check("R6-1: wet conditions append a conservative coda to the behavioral tip", wet.some((t) => /wet surface, dial all of this back further/i.test(t)), wet.join(" | "));
+  const lowGrip = drivingTips(bundle({ track: { name: "T", surface: "clay", grip: "green", conditions: ["low_grip"] }, feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }));
+  check("R6-1: low-grip conditions append a 'leave more margin' coda", lowGrip.some((t) => /low-grip surface, leave a bit more margin/i.test(t)), lowGrip.join(" | "));
+
+  // Capped at 3 even when many triggers fire at once.
+  const loaded = drivingTips(
+    bundle({
+      tyres: { wear: "worn" },
+      track: { name: "T", surface: "clay", grip: "green", conditions: ["low_grip", "wet", "bumpy"], evolution: "degrading" },
+      feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }, { symptom: "oversteer", phase: "corner_exit" }] },
+    }),
+  );
+  check("R6-1: tips stay capped at 3 under many simultaneous triggers", loaded.length <= 3, String(loaded.length));
+
+  // Deterministic + NaN-free.
+  const t1 = drivingTips(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }));
+  const t2 = drivingTips(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }));
+  check("R6-1: driving tips are deterministic", JSON.stringify(t1) === JSON.stringify(t2));
+  check("R6-1: driving tips are NaN/undefined-free", [...usEntry, ...osExit, ...usMid, ...wet, ...lowGrip, ...loaded].every((t) => !/NaN|Infinity|undefined|\[object Object\]/.test(t)));
+}
+
+// 14. R6-2 secondary-change "why #2 + when" — the secondary option's
+//     `if_it_does_not_help` reads as the FALLBACK ("only if the primary doesn't
+//     fully fix it") and names WHY it's a DIFFERENT lever (stacks, not fights).
+//     The primary's own field stays the generic line. Grounded/pure/NaN-free.
+{
+  // A scenario that yields BOTH a primary and a secondary on different levers.
+  const r = buildReport(bundle(), data);
+  if (r.secondary) {
+    check(
+      "R6-2: secondary says try it ONLY IF the primary doesn't fully fix it",
+      /try this only if the primary/i.test(r.secondary.if_it_does_not_help) && r.secondary.if_it_does_not_help.includes(humanize(r.primary!.setting)),
+      r.secondary.if_it_does_not_help,
+    );
+    check(
+      "R6-2: secondary explains it works a DIFFERENT lever that STACKS rather than fights",
+      /different lever/i.test(r.secondary.if_it_does_not_help) && /stacks with the first change rather than fighting it/i.test(r.secondary.if_it_does_not_help),
+      r.secondary.if_it_does_not_help,
+    );
+    check(
+      "R6-2: secondary framing names BOTH lever families (vs)",
+      / vs /.test(r.secondary.if_it_does_not_help),
+      r.secondary.if_it_does_not_help,
+    );
+    check(
+      "R6-2: the PRIMARY option keeps the generic 'if it does not help' line (not the secondary framing)",
+      !/try this only if the primary/i.test(r.primary!.if_it_does_not_help),
+      r.primary!.if_it_does_not_help,
+    );
+    check("R6-2: secondary framing is NaN/undefined-free", !/NaN|Infinity|undefined|\[object Object\]/.test(r.secondary.if_it_does_not_help), r.secondary.if_it_does_not_help);
+    // Determinism of the secondary framing.
+    const r2 = buildReport(bundle(), data);
+    check("R6-2: secondary framing is deterministic", r2.secondary?.if_it_does_not_help === r.secondary.if_it_does_not_help);
+  } else {
+    check("R6-2: base scenario produced a secondary to frame", false, "no secondary on the base bundle");
+  }
+}
+
+function humanize(id: string): string {
+  return id.replace(/_/g, " ");
+}
+
 if (failures > 0) {
   console.error(`\n${failures} report test(s) failed`);
   process.exit(1);

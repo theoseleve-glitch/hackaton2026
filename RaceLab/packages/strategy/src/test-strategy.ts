@@ -222,6 +222,79 @@ check("error: the throw names stint_max_s", (() => {
 })());
 check("error: stretchOptions validates inputs too", throws(() => stretchOptions(ep, { ...enduro, autonomy_s: 0 })));
 
+// — R6-3 strategy edge cases ──────────────────────────────────────────────────
+// (a) No measured autonomy → the output SAYS it's an estimate and what to log,
+//     and the math is otherwise unchanged from the measured run.
+{
+  const estimated = computePitPlan({ ...enduro, autonomy_estimated: true });
+  const measured = computePitPlan({ ...enduro });
+  check(
+    "R6-3: estimated autonomy → notes say it's an ESTIMATE, not measured",
+    estimated.notes.some((n) => /no full-tank run is logged yet/i.test(n) && /it's an ESTIMATE, not measured/i.test(n)),
+    estimated.notes.join(" | "),
+  );
+  check(
+    "R6-3: estimated autonomy → notes tell the racer to log a run-until-dry for a real number",
+    estimated.notes.some((n) => /run-until-dry/i.test(n) && /re-plan for a real number/i.test(n)),
+    estimated.notes.join(" | "),
+  );
+  check(
+    "R6-3: estimated flag tags the full-tank line '(estimated)' (no false precision)",
+    estimated.notes.some((n) => /Full tank lasts/.test(n) && n.includes("(estimated)")),
+    estimated.notes.join(" | "),
+  );
+  check(
+    "R6-3: the estimate disclaimer comes FIRST (before any number)",
+    /no full-tank run is logged yet/i.test(estimated.notes[0]),
+    estimated.notes[0],
+  );
+  check(
+    "R6-3: estimate flag does NOT change the math (same stops/stints/total as measured)",
+    estimated.stops === measured.stops && durationsOf(estimated) === durationsOf(measured) && estimated.total_time_s === measured.total_time_s,
+    `${estimated.stops}/${durationsOf(estimated)} vs ${measured.stops}/${durationsOf(measured)}`,
+  );
+  // Without the flag, no estimate language leaks in.
+  check("R6-3: measured plan carries NO estimate disclaimer", !measured.notes.some((n) => /ESTIMATE|estimated/i.test(n)), measured.notes.join(" | "));
+  // NaN-free + deterministic.
+  check("R6-3: estimate notes are NaN/undefined-free", estimated.notes.every((n) => !/NaN|Infinity|undefined/.test(n)));
+  check("R6-3: estimate plan is deterministic", JSON.stringify(estimated) === JSON.stringify(computePitPlan({ ...enduro, autonomy_estimated: true })));
+}
+
+// (b) Single-stint / no-pit race → a clear "one tank covers it, no stop" line and
+//     NO misleading fuel/tyre lever rationale (which only applies when you stop).
+{
+  // 5-min sprint, full tank (420s) longer than the race → zero stops.
+  const single = computePitPlan({ race_length_s: 300, race_type: "sprint", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25 });
+  check("R6-3: single-tank race reports zero stops", single.stops === 0, String(single.stops));
+  check(
+    "R6-3: single-stint race says one tank covers it + manage the tyres (no odd empty pit list)",
+    single.notes.some((n) => /One tank covers the whole race — no stop needed/i.test(n) && /manage the tyres/i.test(n)),
+    single.notes.join(" | "),
+  );
+  check(
+    "R6-3: single-stint race does NOT emit the fuel/tyre 'sets the stops' lever rationale",
+    !single.notes.some((n) => /sets the stops/i.test(n)),
+    single.notes.join(" | "),
+  );
+  check("R6-3: single-stint race has an empty pit list + a single stint", single.pit_at_s.length === 0 && single.stints.length === 1);
+
+  // An endurance race that also fits one tank behaves the same (no cliff data).
+  const singleEnduro = computePitPlan({ race_length_s: 300, race_type: "endurance", avg_lap_s: 35, autonomy_s: 600, pit_loss_s: 25 });
+  check("R6-3: a one-tank endurance race is also a clean no-stop verdict", singleEnduro.stops === 0 && singleEnduro.notes.some((n) => /no stop needed/i.test(n)), singleEnduro.notes.join(" | "));
+}
+
+// (c) Extremes — sane output at both ends, no throw, NaN-free, deterministic.
+{
+  // Very short: a 60s race finishes the lap you're on, zero stops.
+  const veryShort = computePitPlan({ race_length_s: 60, race_type: "sprint", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25 });
+  check("R6-3: very short race → finishes the lap, zero stops, sensible total", veryShort.stops === 0 && veryShort.total_time_s > 0 && veryShort.stints.length === 1, `${veryShort.stops}/${veryShort.total_time_s}`);
+  // Very long: a 3-hour enduro yields many sane, even stints under the cap.
+  const veryLong = computePitPlan({ race_length_s: 10800, race_type: "endurance", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25 });
+  check("R6-3: very long race → many stops, every stint under the cap, total covers the race", veryLong.stops > 10 && veryLong.stints.every((s) => s.duration_s <= veryLong.stint_max_s) && veryLong.total_time_s >= 10800, `${veryLong.stops}/${veryLong.total_time_s}`);
+  check("R6-3: extremes are NaN/undefined-free in notes", [veryShort, veryLong].every((p) => p.notes.every((n) => !/NaN|Infinity|undefined/.test(n))));
+  check("R6-3: extremes are deterministic", JSON.stringify(veryLong) === JSON.stringify(computePitPlan({ race_length_s: 10800, race_type: "endurance", avg_lap_s: 35, autonomy_s: 420, pit_loss_s: 25 })));
+}
+
 if (failures > 0) {
   console.error(`\n${failures} strategy test(s) failed`);
   process.exit(1);
