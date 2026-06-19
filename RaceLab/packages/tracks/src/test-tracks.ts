@@ -75,6 +75,13 @@ s = upsertRecord(s, a1.track.id, { category: "1/8 buggy", conditions: "dry", lap
   check("upsertRecord keeps the record count when replacing", getTrack(s, a1.track.id)?.records.length === 2);
 }
 check("upsertRecord unknown track is a no-op (same reference)", upsertRecord(s, "nope", { category: "1/8 buggy", lap_s: 30 }) === s);
+// data-integrity: a NaN/garbage lap must NOT overwrite a valid record (would poison the whole blob on reload)
+{
+  const beforeNaN = getTrack(s, a1.track.id);
+  check("upsertRecord NaN lap is a no-op (record NOT poisoned)", upsertRecord(s, a1.track.id, { category: "1/8 buggy", conditions: "dry", lap_s: NaN }) === s);
+  check("upsertRecord existing record still valid after a NaN write attempt", getTrack(s, a1.track.id)?.records.find((r) => r.conditions === "dry")?.lap_s === beforeNaN?.records.find((r) => r.conditions === "dry")?.lap_s);
+  check("upsertRecord non-positive lap is a no-op", upsertRecord(s, a1.track.id, { category: "1/8 buggy", conditions: "dry", lap_s: 0 }) === s);
+}
 
 // — condition tags (bridge to the engine taxonomy)
 {

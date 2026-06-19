@@ -52,6 +52,11 @@ export function getTrack(state: TracksState, id: string): TrackEntity | undefine
 export function upsertRecord(state: TracksState, trackId: string, record: LapRecord): TracksState {
   const track = getTrack(state, trackId);
   if (!track) return state;
+  // Reject a non-finite/non-positive lap at WRITE time (mirrors sessions.addRun). A NaN
+  // lap_s makes the `>=` guard below false, so without this it would OVERWRITE a valid
+  // record with NaN; NaN then serializes to JSON null and fails isValidTrack on reload,
+  // quarantining the user's ENTIRE track library over one bad lap (never-wipe defeated).
+  if (!(Number.isFinite(record.lap_s) && record.lap_s > 0)) return state;
   const i = track.records.findIndex(
     (r) => r.category === record.category && r.conditions === record.conditions,
   );
