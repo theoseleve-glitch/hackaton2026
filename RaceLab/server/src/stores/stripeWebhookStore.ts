@@ -93,6 +93,11 @@ export interface StripeWebhookStore {
   /** Upsert the user's subscription truth. Caller has already confirmed this
    *  event is NEWER than the stored watermark (out-of-order guard). */
   upsertSubscription(userId: string, s: StripeSubscriptionUpsert): Promise<void>;
+  /** True if this user id has a GDPR-erasure tombstone (deletions row). The
+   *  webhook MUST NOT resurrect an erased id — upsertSubscription ensureUser's
+   *  the users row, so a redelivery / trailing event after an Art.17 delete
+   *  would re-create erased identity + a ghost subscription. */
+  isTombstoned(userId: string): Promise<boolean>;
 }
 
 export function makeSqlStripeWebhookStore(query: QueryFn): StripeWebhookStore {
@@ -122,6 +127,14 @@ export function makeSqlStripeWebhookStore(query: QueryFn): StripeWebhookStore {
       if (rows.length === 0) return null;
       const v = rows[0].event_created;
       return v === null || v === undefined ? null : Number(v);
+    },
+
+    async isTombstoned(userId) {
+      const { rows } = await query(
+        `SELECT 1 FROM deletions WHERE user_id = $1`,
+        [userId],
+      );
+      return rows.length > 0;
     },
 
     async upsertSubscription(userId, s) {

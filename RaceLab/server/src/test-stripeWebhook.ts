@@ -31,9 +31,13 @@ function check(label: string, ok: boolean, detail?: string): void {
 class FakeStore implements StripeWebhookStore {
   processed = new Map<string, string>(); // event_id -> processed_at
   subs = new Map<string, StripeSubscriptionUpsert>(); // user_id -> row
+  tombstoned = new Set<string>(); // user_ids with a GDPR deletions row
 
   async isProcessed(eventId: string): Promise<boolean> {
     return this.processed.has(eventId);
+  }
+  async isTombstoned(userId: string): Promise<boolean> {
+    return this.tombstoned.has(userId);
   }
   async markProcessed(eventId: string, atIso: string): Promise<void> {
     if (!this.processed.has(eventId)) this.processed.set(eventId, atIso); // idempotent
@@ -610,6 +614,22 @@ console.log("\n— raw_body_required (object body on raw route) —");
   const nullBody: HttpRequest = { method: "POST", path: "/api/webhooks/stripe", headers: {}, query: {}, body: undefined };
   const rNull = await stripeWebhook(cNull, nullBody);
   check("rawbody: undefined body -> 400 invalid_signature (empty wire, not misconfig)", rNull.status === 400 && rNull.json.error === "invalid_signature");
+}
+
+// ═══ GDPR Art.17: a tombstoned id is never resurrected ═══════════════════════
+{
+  const c = freshCtx();
+  store.tombstoned.add("user_A"); // user_A exercised account deletion
+  const e = evt({ id: "evt_after_delete", type: "customer.subscription.created", object: { client_reference_id: "user_A", status: "active" } });
+  const r = await stripeWebhook(c, sreq(e));
+  check("tombstone: subscription event for a deleted id -> 200 ignored:deleted", r.status === 200 && r.json.received === true && r.json.ignored === "deleted");
+  check("tombstone: NO subscription row written (erased id not resurrected)", store.subs.has("user_A") === false);
+  check("tombstone: event marked processed (Stripe stops retrying)", store.processed.has("evt_after_delete"));
+  // sanity: the same event for a NON-deleted id still writes
+  const c2 = freshCtx();
+  const e2 = evt({ id: "evt_live", type: "customer.subscription.created", object: { client_reference_id: "user_B", status: "active" } });
+  const r2 = await stripeWebhook(c2, sreq(e2));
+  check("tombstone: a live id is unaffected -> sub written", r2.status === 200 && store.subs.get("user_B")?.status === "active");
 }
 
 // ═══ verdict ═════════════════════════════════════════════════════════════════

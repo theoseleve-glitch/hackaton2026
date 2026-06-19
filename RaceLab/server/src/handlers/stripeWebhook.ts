@@ -109,6 +109,16 @@ export async function stripeWebhook(
       return { status: 200, json: { received: true, ignored: "bad_user", server_time } };
     }
 
+    // ── 3b) GDPR Art.17: never resurrect an erased id. upsertSubscription
+    // ensureUser's the users row, so a redelivery / trailing customer.subscription.*
+    // event arriving AFTER an account deletion would re-create erased identity and a
+    // ghost subscription. If the id is tombstoned, ack + mark processed (stop Stripe
+    // retrying) and write NOTHING.
+    if (await ctx.store.isTombstoned(user_id)) {
+      await ctx.store.markProcessed(event.id, server_time);
+      return { status: 200, json: { received: true, ignored: "deleted", server_time } };
+    }
+
     // ── map type -> intended subscription mutation (or note-only / ignore) ────
     const mapped = mapEvent(event.type, object);
 
