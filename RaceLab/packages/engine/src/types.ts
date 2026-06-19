@@ -32,9 +32,10 @@ export interface KBRule {
    *  produces: <effects>." instead of the terse "Per <source>: <effects>.";
    *  absent → current behaviour. NEEDS WILLIAM to author the rest. */
   mechanism_brief?: string;
-  /** R2-3 — OPTIONAL estimated lap-time gain in seconds ("~0.2s/lap potential").
-   *  SURFACE-ONLY this round: shown in the rationale when present; it does NOT
-   *  influence retrieval order (ROI-ranking is deferred to R3). NEEDS WILLIAM. */
+  /** R2-3/R3 — OPTIONAL estimated lap-time gain in seconds ("~0.2s/lap potential").
+   *  Shown in the rationale AND used as the ROI ranking tiebreaker (R3, retrieval.ts
+   *  impactDelta): among equally-grounded, equally-confident candidates, the higher
+   *  estimated gain becomes primary. Fallback to reversal-cost when absent. NEEDS WILLIAM. */
   lap_time_impact_s?: number;
   reversal_cost_minutes: number;
   confidence: Confidence;
