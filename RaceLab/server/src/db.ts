@@ -48,6 +48,14 @@ export interface Db {
    *  value — later device claims can never move it. */
   recordTrialStart(user_id: string, started_at_iso: string, now_iso: string): Promise<string>;
   getSubscription(user_id: string): Promise<SubscriptionRow | null>;
+  /** Upsert the subscription row from a verified Stripe webhook (the only
+   *  writer). expires_at null = lifetime/manual. */
+  upsertSubscription(
+    user_id: string,
+    status: "active" | "canceled" | "expired",
+    expires_at: string | null,
+    updated_at_iso: string,
+  ): Promise<void>;
   /** Idempotent on (user_id, entry_id): duplicates count as skipped. */
   insertBackupEntries(
     user_id: string,
@@ -94,6 +102,18 @@ export function makeSqlDb(query: QueryFn): Db {
         status: String(r.status),
         expires_at: r.expires_at === null || r.expires_at === undefined ? null : isoOf(r.expires_at),
       };
+    },
+
+    async upsertSubscription(user_id, status, expires_at, updated_at_iso) {
+      await query(
+        `INSERT INTO subscriptions (user_id, status, expires_at, source, updated_at)
+         VALUES ($1, $2, $3::timestamptz, 'web', $4::timestamptz)
+         ON CONFLICT (user_id) DO UPDATE
+           SET status = EXCLUDED.status,
+               expires_at = EXCLUDED.expires_at,
+               updated_at = EXCLUDED.updated_at`,
+        [user_id, status, expires_at, updated_at_iso],
+      );
     },
 
     async insertBackupEntries(user_id, entries, received_at_iso) {

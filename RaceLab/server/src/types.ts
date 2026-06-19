@@ -7,6 +7,7 @@
 
 import type { Db } from "./db";
 import type { TokenVerifier } from "./auth";
+import type { StripeWebhookVerifier } from "./stripe";
 
 export interface HttpRequest {
   method: string;
@@ -15,6 +16,9 @@ export interface HttpRequest {
   headers: Record<string, string | string[] | undefined>;
   query: Record<string, string | string[] | undefined>;
   body: unknown;
+  /** Exact request bytes, preserved ONLY for routes that need them (the Stripe
+   *  webhook signature). Undefined elsewhere — handlers read `body`. */
+  rawBody?: string;
 }
 
 export interface HttpResponse {
@@ -25,6 +29,9 @@ export interface HttpResponse {
 export interface ServerCtx {
   db: Db;
   verifier: TokenVerifier;
+  /** Stripe webhook signature verifier (injected: fake in tests, real SDK at
+   *  deploy). Only /api/stripe/webhook consumes it. */
+  webhookVerifier: StripeWebhookVerifier;
   /** Server clock, injected (fixed in tests). Every response echoes it as
    *  server_time — the client uses it to raise its tamper-guard floor. */
   now: () => string;

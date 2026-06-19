@@ -6,6 +6,7 @@
 
 import type { BackupEntryInput, BackupRow, Db, SubscriptionRow } from "./db";
 import type { TokenVerifier } from "./auth";
+import type { StripeEvent, StripeWebhookVerifier } from "./stripe";
 import type { HttpRequest, HttpResponse, ServerCtx } from "./types";
 import { makeHandler } from "./handler";
 import { MAX_PUSH_BATCH } from "./handlers/backupPush";
@@ -46,6 +47,14 @@ class FakeDb implements Db {
   }
   async getSubscription(user_id: string): Promise<SubscriptionRow | null> {
     return this.subs.get(user_id) ?? null;
+  }
+  async upsertSubscription(
+    user_id: string,
+    status: "active" | "canceled" | "expired",
+    expires_at: string | null,
+    _updated_at_iso: string,
+  ): Promise<void> {
+    this.subs.set(user_id, { status, expires_at });
   }
   async insertBackupEntries(
     user_id: string,
@@ -98,9 +107,23 @@ const verifier: TokenVerifier = {
   },
 };
 
+// Fake Stripe verifier: signature "valid" -> JSON.parse(rawBody) as the event;
+// anything else -> null (a real signature check failing). Lets tests drive any
+// event by varying the body, and exercise the bad/missing-signature paths.
+const webhookVerifier: StripeWebhookVerifier = {
+  verify: async (rawBody, signature) => {
+    if (signature !== "valid") return null;
+    try {
+      return JSON.parse(rawBody) as StripeEvent;
+    } catch {
+      return null;
+    }
+  },
+};
+
 const db = new FakeDb();
 let nowIso = NOW;
-const ctx: ServerCtx = { db, verifier, now: () => nowIso };
+const ctx: ServerCtx = { db, verifier, webhookVerifier, now: () => nowIso };
 const handle = makeHandler(ctx);
 
 function req(
@@ -156,7 +179,7 @@ console.log("— routing + auth —");
   throwingDb.getSubscription = async () => {
     throw new Error("db down");
   };
-  const h2 = makeHandler({ db: throwingDb, verifier, now: () => NOW });
+  const h2 = makeHandler({ db: throwingDb, verifier, webhookVerifier, now: () => NOW });
   const r500 = await h2(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("router: handler throw -> 500 internal_error (no leak)", r500.status === 500 && r500.json.error === "internal_error" && Object.keys(r500.json).length === 1);
 }
@@ -179,7 +202,7 @@ console.log("\n— trial first-seen —");
   check("trial: future claim clamped to server now", rFuture.status === 200 && rFuture.json.trial_started_at === NOW);
 
   const dbC = new FakeDb();
-  const hC = makeHandler({ db: dbC, verifier, now: () => NOW });
+  const hC = makeHandler({ db: dbC, verifier, webhookVerifier, now: () => NOW });
   const rNoBody = await hC(req("POST", "/api/trial/start", { token: "tok-A" }));
   check("trial: no body -> server now", rNoBody.status === 200 && rNoBody.json.trial_started_at === NOW);
   const rBad = await hC(req("POST", "/api/trial/start", { token: "tok-A", body: { trial_started_at: "not-a-date" } }));
@@ -211,6 +234,80 @@ console.log("\n— subscription status —");
   const rEdge = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
   check("subscription: at the exact expiry instant -> active (t <= expires)", rEdge.json.status === "active");
   db.subs.delete("user_A");
+}
+
+// ═══ stripe webhook (the web-billing keystone) ════════════════════════════════
+
+console.log("\n— stripe webhook —");
+{
+  const unix = (iso: string): number => Math.floor(Date.parse(iso) / 1000);
+  // Build a customer.subscription.* event object the mapper reads.
+  const subEvent = (
+    type: string,
+    o: { user_id?: string; cref?: string; status?: string; cpe?: string },
+  ): Record<string, unknown> => ({
+    type,
+    data: {
+      object: {
+        ...(o.user_id !== undefined ? { metadata: { user_id: o.user_id } } : {}),
+        ...(o.cref !== undefined ? { client_reference_id: o.cref } : {}),
+        ...(o.status !== undefined ? { status: o.status } : {}),
+        ...(o.cpe !== undefined ? { current_period_end: unix(o.cpe) } : {}),
+      },
+    },
+  });
+  const webhook = (body: unknown, signature?: string): HttpRequest => ({
+    method: "POST",
+    path: "/api/stripe/webhook",
+    headers: signature !== undefined ? { "stripe-signature": signature } : {},
+    query: {},
+    body: typeof body === "string" ? body : JSON.stringify(body),
+  });
+
+  db.subs.delete("user_A");
+
+  const noSig = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30) })));
+  check("webhook: missing signature -> 400", noSig.status === 400 && noSig.json.error === "missing_signature");
+
+  const badSig = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30) }), "forged"));
+  check("webhook: bad signature -> 400 (no row written)", badSig.status === 400 && badSig.json.error === "invalid_signature" && db.subs.get("user_A") === undefined);
+
+  const created = await handle(webhook(subEvent("customer.subscription.created", { user_id: "user_A", status: "active", cpe: day(30) }), "valid"));
+  check("webhook: created active -> applied + row upserted", created.status === 200 && created.json.applied === true && db.subs.get("user_A")?.status === "active" && db.subs.get("user_A")?.expires_at === day(30));
+  check("webhook: ensured the user row exists", db.users.has("user_A"));
+
+  // end-to-end: the app's read endpoint now sees the subscription Stripe just wrote
+  const e2e = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
+  check("webhook→status: full web-billing loop reads active", e2e.status === 200 && e2e.json.status === "active" && e2e.json.expires_at === day(30));
+
+  const pastDue = await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "past_due", cpe: day(40) }), "valid"));
+  check("webhook: past_due keeps access until period end (active)", pastDue.json.applied === true && db.subs.get("user_A")?.status === "active" && db.subs.get("user_A")?.expires_at === day(40));
+
+  const cancelAtEnd = await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_A", status: "canceled", cpe: day(40) }), "valid"));
+  check("webhook: canceled w/ future period -> row 'canceled' but status reads active", cancelAtEnd.json.applied === true && db.subs.get("user_A")?.status === "canceled");
+  const stillActive = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
+  check("webhook: canceled-but-paid-through still reads active to the app", stillActive.json.status === "active");
+
+  const deleted = await handle(webhook(subEvent("customer.subscription.deleted", { user_id: "user_A", status: "canceled", cpe: day(-1) }), "valid"));
+  check("webhook: deleted -> expired (period ended)", deleted.json.applied === true && db.subs.get("user_A")?.status === "expired");
+  const nowExpired = await handle(req("GET", "/api/subscription/status", { token: "tok-A" }));
+  check("webhook: after deletion the app reads expired", nowExpired.json.status === "expired");
+
+  // attribution + irrelevance: verified but no entitlement change -> 200 applied:false
+  const noUser = await handle(webhook(subEvent("customer.subscription.created", { status: "active", cpe: day(30) }), "valid"));
+  check("webhook: unattributable event (no user_id) -> 200 applied:false", noUser.status === 200 && noUser.json.applied === false);
+
+  const crefOnly = await handle(webhook(subEvent("customer.subscription.created", { cref: "user_B", status: "active", cpe: day(30) }), "valid"));
+  check("webhook: client_reference_id is a valid user_id fallback", crefOnly.json.applied === true && db.subs.get("user_B")?.status === "active");
+
+  const otherType = await handle(webhook(subEvent("invoice.paid", { user_id: "user_A", status: "active", cpe: day(30) }), "valid"));
+  check("webhook: unhandled event type -> 200 applied:false", otherType.status === 200 && otherType.json.applied === false);
+
+  const incomplete = await handle(webhook(subEvent("customer.subscription.updated", { user_id: "user_B", status: "incomplete", cpe: day(30) }), "valid"));
+  check("webhook: 'incomplete' status -> no entitlement change", incomplete.json.applied === false);
+
+  db.subs.delete("user_A");
+  db.subs.delete("user_B");
 }
 
 // ═══ backup push (idempotency) ═══════════════════════════════════════════════

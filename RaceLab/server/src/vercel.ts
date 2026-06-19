@@ -40,6 +40,48 @@ export async function runVercel(req: NodeLikeRequest, res: NodeLikeResponse): Pr
   res.end(JSON.stringify(response.json));
 }
 
+/** A request whose body may still be an unread stream (bodyParser disabled). */
+export interface RawReadableRequest extends NodeLikeRequest {
+  on?(event: "data" | "end" | "error", cb: (chunk?: unknown) => void): void;
+}
+
+/**
+ * Read the EXACT request bytes. The Stripe webhook entry disables Vercel's body
+ * parser, so the body arrives as a stream (or, on some runtimes, a pre-read
+ * string/Buffer). Stripe signature verification fails on a re-serialized body,
+ * so we must never JSON round-trip it.
+ */
+export async function readRawBody(req: RawReadableRequest): Promise<string> {
+  if (typeof req.body === "string") return req.body;
+  if (Buffer.isBuffer(req.body)) return req.body.toString("utf8");
+  if (typeof req.on !== "function") return "";
+  return await new Promise<string>((resolve) => {
+    const chunks: Buffer[] = [];
+    req.on!("data", (c) => chunks.push(Buffer.from(c as Buffer)));
+    req.on!("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+    req.on!("error", () => resolve(""));
+  });
+}
+
+/** Webhook entrypoint: reads raw bytes, threads them as rawBody for signature
+ *  verification, then runs the normal router. */
+export async function runVercelWebhook(req: RawReadableRequest, res: NodeLikeResponse): Promise<void> {
+  let response: HttpResponse;
+  try {
+    const raw = await readRawBody(req);
+    if (handlerPromise === null) handlerPromise = getDeployCtx().then(makeHandler);
+    const handle = await handlerPromise;
+    const httpReq = toHttpRequest({ ...req, body: undefined });
+    response = await handle({ ...httpReq, rawBody: raw });
+  } catch {
+    handlerPromise = null;
+    response = { status: 500, json: { error: "server_misconfigured" } };
+  }
+  res.statusCode = response.status;
+  res.setHeader("content-type", "application/json; charset=utf-8");
+  res.end(JSON.stringify(response.json));
+}
+
 export function toHttpRequest(req: NodeLikeRequest): HttpRequest {
   const url = new URL(req.url ?? "/", "http://internal");
   const query: Record<string, string> = {};
