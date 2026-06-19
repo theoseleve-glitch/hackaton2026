@@ -46,7 +46,7 @@ The app is release-ready (config below). The build + signing + upload need **you
 - Social (share/feed/follow/import) removed for v1 — code on disk, re-wire later.
 - `SheetScreen` setup-sheet "options" editing is inert post-migration (sheets-side field has no schema home yet) — see migration notes.
 - Only the **MP11** chassis has a tuned KB template; all other cars use the (now safety-remapped) `generic-offroad` template.
-- Backend sync / accounts not shipped — fully offline, web subscription link only.
+- Web subscriptions + the in-app sign-up wall are CODE-COMPLETE (server Checkout/Portal/webhook, web `/subscribe`, mobile paywall + 8 gates; see `docs/superpowers/plans/2026-06-19-web-subscription-live.md`). They activate only after you stand up Stripe/Clerk/Neon/Vercel (Part A) AND wire in-app Clerk (`src/auth.tsx`). Until then the app ships **trial-only**: the advisor is free, premium runs a 15-day trial, and the buy CTAs are gated off (no purchase that can't yet unlock). ⚠ Selling subs for in-app features via web-only checkout carries Google Play policy risk — verify on the Internal testing track first.
 
 ---
 
