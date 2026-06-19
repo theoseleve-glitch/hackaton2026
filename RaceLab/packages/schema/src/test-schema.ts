@@ -28,6 +28,9 @@ import {
   makeRun,
   positionDeltas,
   renderConditions,
+  surfaceToTags,
+  powerTypeToTags,
+  buildConditionTags,
   toEngineHistory,
   toLapSeries,
 } from "./runs";
@@ -519,6 +522,32 @@ check("conditionsToTags: blue groove maps alone", JSON.stringify(conditionsToTag
 check("conditionsToTags: medium bumpiness reads bumpy", JSON.stringify(conditionsToTags({ grip: "medium", bumpiness: "medium" })) === '["bumpy"]');
 check("conditionsToTags: cold air + high grip", JSON.stringify(conditionsToTags({ grip: "high", air_temp_c: 5 })) === '["high_grip","cold"]');
 check("conditionsToTags: hot track temp alone triggers hot", JSON.stringify(conditionsToTags({ grip: "medium", track_temp_c: 45 })) === '["hot"]');
+
+// ── tag producers + the single assembler (the bundle.track.conditions contract) ──
+check("surfaceToTags: astroturf id → astroturf family", JSON.stringify(surfaceToTags("astroturf")) === '["astroturf"]');
+check("surfaceToTags: loose loam → loose_dirt", JSON.stringify(surfaceToTags("loose_dirt_loam")) === '["loose_dirt"]');
+check("surfaceToTags: grip-carried surface (hard_packed_dirt) → [] (grip field carries it)", JSON.stringify(surfaceToTags("hard_packed_dirt")) === "[]");
+check("powerTypeToTags: nitro → nitro_power", JSON.stringify(powerTypeToTags("nitro")) === '["nitro_power"]');
+check("powerTypeToTags: brushless DEFAULTS to stock_blinky (D13-safe)", JSON.stringify(powerTypeToTags("brushless")) === '["stock_blinky"]');
+// the assembler unions all three, deduped — this IS what the app assigns to bundle.track.conditions
+check(
+  "buildConditionTags: unions conditions+surface+power, deduped",
+  JSON.stringify(buildConditionTags({ conditions: { grip: "high", air_temp_c: 32 }, surface: "astroturf", power: "nitro" })) ===
+    '["high_grip","hot","astroturf","nitro_power"]',
+);
+check(
+  "buildConditionTags: partial context (surface only) still yields the surface tag, no refuse",
+  JSON.stringify(buildConditionTags({ surface: "carpet_onroad" })) === '["carpet"]',
+);
+check(
+  "buildConditionTags: forgetting power/surface is no longer possible — empty input → [] (graceful, deterministic)",
+  JSON.stringify(buildConditionTags({})) === "[]",
+);
+check(
+  "buildConditionTags: a wet surface tag and a rain condition tag dedupe to one wet",
+  JSON.stringify(buildConditionTags({ conditions: { grip: "medium", sky: "raining" }, surface: "mud_pit" })) === '["wet"]',
+);
+check("buildConditionTags: result is frozen (no caller mutation of the contract)", Object.isFrozen(buildConditionTags({ surface: "astroturf" })));
 
 // ═══ bridge (one-shot lifts from the legacy models) ══════════════════════════
 

@@ -131,11 +131,13 @@ export {
   conditionsToTags,
   surfaceToTags,
   powerTypeToTags,
+  buildConditionTags,
   toEngineHistory,
   LAP_SOURCES,
 } from "./runs";
 export type {
   RunConditions,
+  ConditionTagInputs,
   TyreSet,
   RunResult,
   NonTimingResult,

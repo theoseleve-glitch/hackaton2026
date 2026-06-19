@@ -738,6 +738,37 @@ export function powerTypeToTags(power: PowerType): readonly string[] {
   return power === "nitro" ? Object.freeze(["nitro_power"]) : Object.freeze(["stock_blinky"]);
 }
 
+/** THE single assembler for an engine ContextBundle's `track.conditions`. Unions
+ *  all three tag producers — grip/bumps/dust/wet/temp from RunConditions, the
+ *  surface FAMILY from the picked surface id, and the power sub-class from the
+ *  car — into one deduped, frozen tag set. The app assigns the result straight
+ *  to `bundle.track.conditions`.
+ *
+ *  WHY this exists: the producers are independent, and a caller that wires only
+ *  conditionsToTags (the obvious one) silently leaves every surface-family rule
+ *  (`amplified_on:[astroturf]`, `forbidden_on:[loose_dirt]`) and every
+ *  power-gated rule (`legal_in_power`) DARK — the engine still answers, just
+ *  without the surface/power signal, which is the quiet failure mode that makes
+ *  the advisor feel generic. One call here removes that whole class of bug: you
+ *  cannot forget a producer you don't have to name.
+ *
+ *  Every input is OPTIONAL — partial context still yields every tag it can
+ *  (surface known but power unknown → surface + condition tags, no power tag),
+ *  so the engine degrades gracefully instead of refusing. Deterministic, no I/O,
+ *  off the advice path's network/clock concerns (pure tag math). */
+export interface ConditionTagInputs {
+  conditions?: RunConditions;
+  surface?: string;
+  power?: PowerType;
+}
+export function buildConditionTags(input: ConditionTagInputs): readonly string[] {
+  const tags = new Set<string>();
+  if (input.conditions) for (const t of conditionsToTags(input.conditions)) tags.add(t);
+  if (input.surface) for (const t of surfaceToTags(input.surface)) tags.add(t);
+  if (input.power) for (const t of powerTypeToTags(input.power)) tags.add(t);
+  return Object.freeze([...tags]);
+}
+
 /** Render change-bearing tuples into the engine's history shape. Bare run
  *  ratings are EXCLUDED (history rows describe a change tried). `limit` keeps
  *  the most recent N.
