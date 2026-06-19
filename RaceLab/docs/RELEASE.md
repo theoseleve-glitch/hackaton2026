@@ -47,3 +47,19 @@ The app is release-ready (config below). The build + signing + upload need **you
 - `SheetScreen` setup-sheet "options" editing is inert post-migration (sheets-side field has no schema home yet) — see migration notes.
 - Only the **MP11** chassis has a tuned KB template; all other cars use the (now safety-remapped) `generic-offroad` template.
 - Backend sync / accounts not shipped — fully offline, web subscription link only.
+
+---
+
+## Verification status — consolidated (2026-06-19)
+
+All green (exit-code verified):
+- engine: 18/18 eval scenarios · adversarial 3044 inputs → 0 violations · D18 purity · NLU 19/19
+- strategy: all (incl. consumption-range + pit-traffic features)
+- schema / storage (137) / account: all
+- app `tsc --noEmit`: 0 errors
+- create-flow integration (write→advice→relaunch) + migration never-wipe smoke: all
+- marketing config contract: 7/7
+
+Engineering features: safety-audited (0 adversarial violations, fail-closed guards, ⚠️ danger framing) + perfected over 6 rounds + 2 RC-honest pit-strategy features (consumption-range, pit-traffic; undercut/overcut intentionally omitted — no RC rival data).
+
+Working tree clean; `theo/racelab` is the release branch (push when ready). Remaining: your EAS build + Play Console (above), and William's `docs/KB-AUTHORING-BRIEF.md` (KB numbers + safety-bound ratification — advice is safe regardless via runtime guards).
