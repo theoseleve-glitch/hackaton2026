@@ -85,8 +85,37 @@ export function retrieve(
       historyTier(b.history) - historyTier(a.history) ||
       b.score - a.score ||
       confidenceRank[b.rule.confidence] - confidenceRank[a.rule.confidence] ||
+      // R3-1 ROI ranking — "the better-for-performance lever". Among already-valid
+      // candidates of EQUAL history-tier, EQUAL symptom-score AND EQUAL confidence,
+      // prefer the change that gains the MOST lap time. Placed AFTER confidence on
+      // purpose: confidence stays the higher-priority safety signal, impact only
+      // breaks a tie among equally-confident, equally-grounded rules — it takes the
+      // slot the reversal-cost tiebreaker used to own. Pure, bounded, deterministic
+      // comparison of injected data; runs AFTER the grounding/scope/counter-
+      // indication/score<=0 drop gates so it can never promote a rule the KB does
+      // not already ground. SAFE FALLBACK: it fires ONLY when BOTH candidates carry
+      // lap_time_impact_s; if either lacks it the comparator yields 0 and the
+      // EXISTING order (reversal-cost → id) decides — so the rules without numbers
+      // behave exactly as before.
+      impactDelta(a.rule.lap_time_impact_s, b.rule.lap_time_impact_s) ||
       a.rule.reversal_cost_minutes - b.rule.reversal_cost_minutes ||
       (a.rule.id < b.rule.id ? -1 : a.rule.id > b.rule.id ? 1 : 0),
   );
   return scored.slice(0, MAX_RULES);
+}
+
+/**
+ * R3-1 ROI tiebreaker. Returns a NEGATIVE number when `a` has the higher
+ * lap-time gain (so `a` sorts first), POSITIVE when `b` does, and 0 — the safe
+ * fallback — whenever either side lacks a finite impact. A NaN/Infinity guard
+ * (the schema already forbids them) makes the comparator total and pure so a bad
+ * value can never make the sort non-deterministic.
+ */
+function impactDelta(a: number | undefined, b: number | undefined): number {
+  const safe = (v: number | undefined): number | undefined =>
+    typeof v === "number" && Number.isFinite(v) ? v : undefined;
+  const ia = safe(a);
+  const ib = safe(b);
+  if (ia === undefined || ib === undefined) return 0;
+  return ib - ia; // higher impact first (descending)
 }

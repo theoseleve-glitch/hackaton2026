@@ -16,6 +16,10 @@
     reduced_on: []
   counter_indications: [no_forward_bite]
   magnitude_guidance: "One step at a time (e.g. 7000 → 5000 cSt). Too thin makes steering inconsistent and loses forward traction out of corners."
+  # R3 example lap_time_impact_s, NEEDS WILLIAM to author the rest of the rules'
+  # values. Lower than kb-diff-rear-thinner-005 (0.2) on purpose so the ROI sort
+  # has a clean two-impact-rule decision to make (rear-thinner gains more lap time).
+  lap_time_impact_s: 0.1
   reversal_cost_minutes: 12
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]

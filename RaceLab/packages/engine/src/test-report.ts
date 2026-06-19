@@ -206,6 +206,101 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
   );
 }
 
+// 9. R3-1 ROI ranking — when two equally-grounded rules both carry
+//    lap_time_impact_s, the higher-gain one becomes primary AND the rationale
+//    says WHY ("highest estimated lap-time gain"). The locking eval scenario
+//    (scenarios/15) covers the ordering; here we assert the rationale clause and
+//    that a single-impact-rule report does NOT over-claim.
+{
+  // kb-diff-rear-thinner-005 (0.2) vs kb-diff-front-thinner-001 (0.1): tied on
+  // history-tier + score, both rev=12, both high — impact decides. This mirrors
+  // eval scenario 15.
+  const roi = buildReport(
+    bundle({
+      setup: { front_diff_oil: 7000, rear_diff_oil: 4000 },
+      track: { name: "Club Track", surface: "clay", grip: "medium", conditions: [] },
+      feedback: {
+        tags: [
+          { symptom: "sluggish_steering", phase: "corner_entry" },
+          { symptom: "oversteer", phase: "mid_corner" },
+          { symptom: "understeer", phase: "corner_entry" },
+        ],
+      },
+    }),
+    data,
+  );
+  check("R3-1: ROI primary is the higher-gain rule (rear-thinner 0.2)", roi.primary?.citations[0] === "kb-diff-rear-thinner-005", roi.primary?.citations[0]);
+  check(
+    "R3-1: rationale states impact decided it ('highest estimated lap-time gain')",
+    /highest estimated lap-time gain/i.test(roi.rationale) && /~0\.2s\/lap/.test(roi.rationale),
+    roi.rationale,
+  );
+
+  // Single-impact-rule case: kb-diff-rear-thinner-005 is primary but no tied
+  // rival carries impact → it must NOT claim it was chosen FOR the gain; it shows
+  // the softer "estimated upside" line instead.
+  const single = buildReport(
+    bundle({
+      setup: { rear_diff_oil: 4000 },
+      track: { name: "T", surface: "clay", grip: "medium", conditions: [] },
+      feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] },
+    }),
+    data,
+  );
+  if (single.primary?.citations[0] === "kb-diff-rear-thinner-005") {
+    check(
+      "R3-1: lone impact rule does NOT over-claim 'chosen because highest gain'",
+      !/highest estimated lap-time gain/i.test(single.rationale) && /estimated upside/i.test(single.rationale),
+      single.rationale,
+    );
+  }
+  check("R3-1: rationale never renders NaN/Infinity", !/NaN|Infinity/.test(roi.rationale) && !/NaN|Infinity/.test(single.rationale));
+}
+
+// 10. R3-2 root-cause diagnosis — diagnosis explains the likely ROOT CAUSE, not
+//     just echoes the symptom. Grounded/universal chassis dynamics, deterministic.
+{
+  const understeerEntry = buildReport(
+    bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }),
+    data,
+  );
+  check(
+    "R3-2: understeer-on-entry diagnosis names the root cause (front not biting / weight to front)",
+    /isn't biting|front.*grip|weight.*front/i.test(understeerEntry.diagnosis),
+    understeerEntry.diagnosis,
+  );
+
+  const oversteerExit = buildReport(
+    bundle({ feedback: { tags: [{ symptom: "oversteer", phase: "corner_exit" }] } }),
+    data,
+  );
+  check(
+    "R3-2: oversteer-on-exit diagnosis names the root cause (rear losing grip / too much power)",
+    /rear.*grip|rear.*let go|too much.*power|rear steps/i.test(oversteerExit.diagnosis),
+    oversteerExit.diagnosis,
+  );
+
+  const bouncy = buildReport(
+    bundle({ feedback: { tags: [{ symptom: "bouncy" }] } }),
+    data,
+  );
+  check(
+    "R3-2: bouncing diagnosis names the root cause (damping / suspension not absorbing)",
+    /damp|absorb|spring|rebound/i.test(bouncy.diagnosis),
+    bouncy.diagnosis,
+  );
+
+  // The root-cause clause must NOT break determinism or emit NaN.
+  const d1 = buildReport(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }), data);
+  const d2 = buildReport(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }), data);
+  check("R3-2: diagnosis is deterministic", d1.diagnosis === d2.diagnosis);
+  check("R3-2: diagnosis is NaN-free", !/NaN|Infinity|undefined|\[object Object\]/.test(understeerEntry.diagnosis));
+
+  // No-symptom baseline must NOT fabricate a root cause.
+  const noSym = buildReport(bundle({ feedback: { tags: [] } }), data);
+  check("R3-2: no symptom → no fabricated root cause", /No symptom reported/.test(noSym.diagnosis), noSym.diagnosis);
+}
+
 if (failures > 0) {
   console.error(`\n${failures} report test(s) failed`);
   process.exit(1);
