@@ -21,9 +21,9 @@
  *   await Linking.openURL(buildSubscribeUrl(SUBSCRIBE_WEB_BASE, tokens.userId() ?? undefined));
  */
 
-/** PLACEHOLDER — the real domain is William's call (brand sign-off pending,
- *  GripLab D19). Single constant so the swap is one line. */
-export const SUBSCRIBE_WEB_BASE = "https://griplab.example.com";
+/** The RaceLab web checkout origin. buildSubscribeUrl appends "/subscribe".
+ *  Single constant so the domain is one line to change. */
+export const SUBSCRIBE_WEB_BASE = "https://racelabrc.app";
 
 /** Build the external checkout URL. user_id (Clerk id) lets the web platform
  *  attach the purchase to the account so /api/subscription/status sees it;

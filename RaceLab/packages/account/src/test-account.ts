@@ -309,10 +309,10 @@ console.log("\n— touchPremiumFeature —");
 
 console.log("\n— subscribe URL —");
 {
-  check("subscribe: placeholder base is https", SUBSCRIBE_WEB_BASE.startsWith("https://"));
+  check("subscribe: base is https", SUBSCRIBE_WEB_BASE.startsWith("https://"));
   check("subscribe: base only", buildSubscribeUrl(SUBSCRIBE_WEB_BASE) === `${SUBSCRIBE_WEB_BASE}/subscribe`);
-  check("subscribe: with user_id", buildSubscribeUrl("https://griplab.example.com", "user_2abc") === "https://griplab.example.com/subscribe?user_id=user_2abc");
-  check("subscribe: trailing slash normalized", buildSubscribeUrl("https://griplab.example.com/", "u1") === "https://griplab.example.com/subscribe?user_id=u1");
+  check("subscribe: with user_id", buildSubscribeUrl("https://racelabrc.app", "user_2abc") === "https://racelabrc.app/subscribe?user_id=user_2abc");
+  check("subscribe: trailing slash normalized", buildSubscribeUrl("https://racelabrc.app/", "u1") === "https://racelabrc.app/subscribe?user_id=u1");
   check("subscribe: user_id is URL-encoded", buildSubscribeUrl("https://x.test", "a b&c") === "https://x.test/subscribe?user_id=a%20b%26c");
   check("subscribe: empty user_id treated as absent", buildSubscribeUrl("https://x.test", "") === "https://x.test/subscribe");
 }
