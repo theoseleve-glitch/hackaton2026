@@ -1,0 +1,11 @@
+{
+  "name": "Nose-diving off the big double (practice)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["wing_angle", "ride_height_rake", "front_downstop"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "wing_angle": "flat", "wing_position": "forward" },
+    "track": { "name": "Outdoor GP Track", "surface": "clay", "grip": "medium", "conditions": ["big_jumps", "fast_open"] },
+    "feedback": { "tags": [{ "symptom": "nosedive_jumps", "phase": "jumps" }], "text": "car noses down hard off the double, landing on the front wheels" },
+    "mode": "practice"
+  }
+}

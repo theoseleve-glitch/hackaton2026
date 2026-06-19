@@ -1,0 +1,11 @@
+{
+  "name": "Traction rolling on blue-groove high grip (practice)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["ride_height", "front_track_width", "rear_track_width", "front_sway_bar", "front_spring", "rear_spring", "rear_roll_center", "front_roll_center"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_sway_bar": 2.3, "rear_sway_bar": 2.8, "front_spring": "navyblue-9-1.6-L72", "rear_spring": "brown-11-1.6-L86", "front_track_width": 0 },
+    "track": { "name": "Indoor Nats Track", "surface": "clay", "grip": "blue_groove", "conditions": ["high_grip", "blue_groove", "smooth"] },
+    "feedback": { "tags": [{ "symptom": "traction_roll", "phase": "mid_corner" }], "text": "rolled it twice in the sweeper once the groove came in" },
+    "mode": "practice"
+  }
+}

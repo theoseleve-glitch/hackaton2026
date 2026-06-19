@@ -1,0 +1,236 @@
+# Shock absorber rules — source: HUDY Off-Road Set-Up Book p.26-28 (§1.9)
+
+- id: kb-shock-front-softer-damping-101
+  setting: front_shock_oil
+  direction: decrease   # thinner oil and/or pistons with more/larger holes
+  effects:
+    - { axis: steering_low_grip, change: more }
+    - { axis: steering_response, change: slower }
+    - { axis: initial_steering_entry, change: less }
+    - { axis: oversteer_exit_accel, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One oil step (≈50-100 cSt) OR one piston-hole step — never both at once. Both front shocks identical."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.26 §1.9.1"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-front-harder-damping-102
+  setting: front_shock_oil
+  direction: increase   # thicker oil and/or fewer/smaller holes
+  effects:
+    - { axis: steering_response, change: faster }
+    - { axis: initial_steering_entry, change: more }
+    - { axis: understeer_exit_accel, change: more }
+    - { axis: steering_low_grip, change: less }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One oil step at a time. Both front shocks identical."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.26 §1.9.1"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-rear-softer-damping-103
+  setting: rear_shock_oil
+  direction: decrease
+  effects:
+    - { axis: rear_grip_exit_accel, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: []
+  counter_indications: []
+  magnitude_guidance: "One oil step at a time. Both rear shocks identical."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.26 §1.9.1"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-rear-harder-damping-104
+  setting: rear_shock_oil
+  direction: increase
+  effects:
+    - { axis: rear_grip_exit_accel, change: less }
+  addresses: []
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy]
+  counter_indications: [no_forward_bite, oversteer]
+  magnitude_guidance: "One oil step at a time."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.26 §1.9.1"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-pistons-smaller-holes-105
+  setting: shock_pistons
+  direction: smaller_or_fewer_holes   # more "pack"
+  effects:
+    - { axis: pack, change: more }
+    - { axis: flat_landing_jumps, change: better }
+    - { axis: bumpy_track_handling, change: worse }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+  conditions:
+    amplified_on: [big_jumps, smooth]
+    reduced_on: [bumpy]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "One hole-size step. More pack suits big-jump tracks with flat landings; slows compression AND rebound."
+  reversal_cost_minutes: 20
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27 (pack)"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-pistons-larger-holes-106
+  setting: shock_pistons
+  direction: larger_or_more_holes   # less "pack"
+  effects:
+    - { axis: pack, change: less }
+    - { axis: bumpy_track_handling, change: better }
+    - { axis: downramp_landings, change: better }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: bouncy, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, big_jumps]
+  counter_indications: []
+  magnitude_guidance: "One hole-size step. Faster compression and rebound — better where you land on down-ramps and over braking bumps."
+  reversal_cost_minutes: 20
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27 (pack)"]
+  scope: [1-8-offroad]
+
+- id: kb-spring-front-softer-107
+  setting: front_spring
+  direction: decrease
+  effects:
+    - { axis: chassis_roll, change: more }
+    - { axis: front_traction, change: more }
+    - { axis: bumpy_handling, change: better }
+    - { axis: bottoming_landings, change: more_likely }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll, bottoming]
+  magnitude_guidance: "One spring step softer; both fronts identical."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27 (Effects of Shock Spring Replacement)"]
+  scope: [1-8-offroad]
+
+- id: kb-spring-front-stiffer-108
+  setting: front_spring
+  direction: increase
+  effects:
+    - { axis: chassis_roll, change: less }
+    - { axis: responsiveness, change: more }
+    - { axis: front_traction, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: bottoming, phase: jumps }
+  conditions:
+    amplified_on: [smooth, high_grip, blue_groove]
+    reduced_on: [bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One spring step stiffer; both fronts identical."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27"]
+  scope: [1-8-offroad]
+
+- id: kb-spring-rear-softer-109
+  setting: rear_spring
+  direction: decrease
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: chassis_roll, change: more }
+    - { axis: bumpy_handling, change: better }
+  addresses:
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, low_grip]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll, bottoming]
+  magnitude_guidance: "One spring step softer; both rears identical. Often paired with more anti-squat if the rear squats too much (HUDY p.30)."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27"]
+  scope: [1-8-offroad]
+
+- id: kb-spring-rear-stiffer-110
+  setting: rear_spring
+  direction: increase
+  effects:
+    - { axis: rear_traction, change: less }
+    - { axis: responsiveness, change: more }
+    - { axis: chassis_roll, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip, blue_groove]
+    reduced_on: [bumpy]
+  counter_indications: [no_forward_bite, oversteer]
+  magnitude_guidance: "One spring step stiffer; both rears identical."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.27"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-more-inclined-111
+  setting: shock_mounting_inclination
+  direction: more_inclined   # in on tower and/or out on lower arm
+  effects:
+    - { axis: initial_damping, change: softer_progressive }
+    - { axis: lateral_traction, change: more }
+    - { axis: forgiveness, change: more }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: hard_to_drive }
+  conditions:
+    amplified_on: [high_grip, blue_groove]
+    reduced_on: []
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "One hole at a time, both sides. Slows the handling down — good when grip is high and the car is edgy."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.28 §1.9.3"]
+  scope: [1-8-offroad]
+
+- id: kb-shock-less-inclined-112
+  setting: shock_mounting_inclination
+  direction: less_inclined   # out on tower and/or in on lower arm
+  effects:
+    - { axis: damping, change: harder }
+    - { axis: responsiveness, change: more }
+    - { axis: lateral_traction, change: less }
+  addresses:
+    - { symptom: sluggish_steering }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: []
+  counter_indications: [twitchy]
+  magnitude_guidance: "One hole at a time, both sides."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources: ["HUDY Off-Road Set-Up Book p.28 §1.9.3"]
+  scope: [1-8-offroad]

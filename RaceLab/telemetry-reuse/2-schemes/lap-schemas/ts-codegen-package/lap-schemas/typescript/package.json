@@ -1,0 +1,21 @@
+{
+  "name": "@lap/schemas",
+  "version": "0.0.1",
+  "description": "TypeScript types generated from lap-schemas OpenAPI 3.1.",
+  "private": true,
+  "type": "module",
+  "types": "./generated/schema.d.ts",
+  "exports": {
+    ".": {
+      "types": "./generated/schema.d.ts"
+    }
+  },
+  "files": ["generated/"],
+  "scripts": {
+    "generate:ts": "openapi-typescript ../python/openapi.json --output generated/schema.d.ts",
+    "check:types": "tsc --noEmit --strict --moduleResolution bundler --target es2022 generated/schema.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.4.0"
+  }
+}

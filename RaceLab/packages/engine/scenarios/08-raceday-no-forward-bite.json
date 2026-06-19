@@ -1,0 +1,11 @@
+{
+  "name": "RACE DAY: no forward bite out of corners, 25 min to the main",
+  "expect": { "kind": "recommendation", "settings_any_of": ["rear_anti_squat", "rear_spring", "rear_shock_oil", "front_downstop", "rear_roll_center", "wheelbase", "gearing", "rear_diff_oil"], "max_reversal_minutes": 15 },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "rear_anti_squat": "bushing-B-neutral", "rear_spring": "brown-11-1.6-L86", "rear_diff_oil": 3000 },
+    "track": { "name": "Regional Round 3", "surface": "clay", "grip": "high", "conditions": ["high_grip", "smooth"] },
+    "feedback": { "tags": [{ "symptom": "no_forward_bite", "phase": "corner_exit" }], "text": "spinning up out of the infield corners, everyone drives away from me" },
+    "mode": "race_day"
+  }
+}

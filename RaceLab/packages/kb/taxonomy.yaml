@@ -1,0 +1,77 @@
+# RaceLab feedback-tag taxonomy (docs/04 §2)
+# A driver feedback tag = (symptom, phase?, evolution?)
+
+symptoms:
+  - id: understeer        # push — car won't rotate
+  - id: oversteer         # loose — rear steps out
+  - id: bouncy            # car bounces/pogos over bumps
+  - id: bottoming         # chassis slaps on landings/bumps
+  - id: traction_roll     # car rolls over in corners
+  - id: unstable_braking  # rear wanders/swaps under braking
+  - id: no_forward_bite   # wheelspin, poor drive out of corners
+  - id: sluggish_steering # slow/lazy steering response
+  - id: twitchy           # nervous, over-responsive, hard to drive
+  - id: nosedive_jumps    # noses down off jumps
+  - id: poor_bump_handling   # deflects/skips over rough sections
+  - id: hard_to_drive     # general: car wears the driver out
+
+phases:
+  - id: corner_entry
+  - id: mid_corner
+  - id: corner_exit
+  - id: on_power
+  - id: off_power
+  - id: braking
+  - id: jumps
+  - id: rough_section
+  - id: high_speed
+  - id: low_speed
+
+evolution:
+  - id: from_start
+  - id: as_tires_heat
+  - id: as_grip_comes_up
+  - id: when_pushing
+
+# Condition vocabulary used by rules (conditions.amplified_on / reduced_on)
+conditions:
+  - low_grip
+  - high_grip
+  - blue_groove
+  - dusty
+  - wet
+  - bumpy
+  - rough
+  - smooth
+  - technical_tight
+  - fast_open
+  - big_jumps
+  - hot
+  - cold
+
+# Engine-scope tags: any request matching these MUST get the canned refusal (D13)
+engine_scope_refusal:
+  keywords:
+    - needle
+    - hsn
+    - lsn
+    - idle screw
+    - carb
+    - carburetor
+    - glow plug
+    - plug temperature
+    - flameout
+    - flame out
+    - lean
+    - rich
+    - engine temp
+    - break-in
+    - break in
+    - fuel mixture
+    - nitro percentage
+  refusal: >-
+    Engine tuning (needles, plugs, mixture, temperatures) is out of my scope for
+    now — getting it wrong can destroy an engine, so I only advise on chassis
+    settings I have verified rules for. Refer to your engine manufacturer's
+    manual for factory needle baselines, and tune from rich to lean in small
+    steps with a temp gauge.

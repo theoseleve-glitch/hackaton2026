@@ -1,0 +1,11 @@
+{
+  "name": "Bouncy and deflecting over rough sections (practice)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["shock_pistons", "front_shock_oil", "rear_shock_oil", "front_spring", "rear_spring", "ride_height", "front_kickup", "rear_anti_squat"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": { "front_shock_oil": 550, "rear_shock_oil": 500, "front_spring": "navyblue-9-1.6-L72", "rear_spring": "brown-11-1.6-L86" },
+    "track": { "name": "Vieux Circuit", "surface": "hard-packed", "grip": "medium", "conditions": ["bumpy", "rough"] },
+    "feedback": { "tags": [{ "symptom": "bouncy", "phase": "rough_section" }, { "symptom": "poor_bump_handling", "phase": "rough_section" }], "text": "car pogos and skips over the braking bumps, can't keep it straight" },
+    "mode": "practice"
+  }
+}
