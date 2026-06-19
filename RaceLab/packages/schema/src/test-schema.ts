@@ -763,6 +763,15 @@ console.log("\n— parse —");
   check("parseCar: round-trip + power_type lie rejects", (() => { const okR = parseCar(json(car)); const j = json(car) as { power_type: string }; j.power_type = "steam"; const bad = parseCar(j); return okR.ok && okR.value.id === car.id && !bad.ok && bad.reason === "invalid:power_type"; })());
   check("parseOutcomeRecord: round-trips a real record (car_name required)", (() => { const r = parseOutcomeRecord(json(oc1)); const j = json(oc1) as Record<string, unknown>; delete j.car_name; return r.ok && r.value.car_name === "MP11 #1" && !parseOutcomeRecord(j).ok; })());
   check("parseAccountState: round-trip + status lie rejects", (() => { const okR = parseAccountState(json(acctActive)); const j = json(acctActive) as { subscription: { status: string } }; j.subscription.status = "vip"; return okR.ok && !parseAccountState(j).ok; })());
+  // BILLING SAFETY (IAP rail): a RevenueCat-shaped expires_at (ISO UTC "Z", with
+  // or without ms) MUST survive parseAccountState — else a paying user's blob
+  // would be stashed as corrupt → reset → silent lock-out. Pins expires_at to
+  // the permissive isoDateTime check (NOT the strict offset rule).
+  check("parseAccountState: IAP sub + RevenueCat expirationDate round-trips (no paid lock-out)", (() => {
+    const a = parseAccountState({ subscription: { status: "active", source: "iap", validated_at: T0, expires_at: "2026-07-19T12:00:00Z" } });
+    const b = parseAccountState({ subscription: { status: "active", source: "iap", validated_at: T0, expires_at: "2026-07-19T12:00:00.000Z" } });
+    return a.ok && a.value.subscription.source === "iap" && a.value.subscription.expires_at === "2026-07-19T12:00:00Z" && b.ok;
+  })());
   check("parseWeatherObservation: offset-less timestamp rejects on load too", !parseWeatherObservation({ observed_at: "2026-06-11T09:00", source: "auto" }).ok);
   check("parseOutboxState: round-trip + foreign domain rejects", (() => { const okR = parseOutboxState(json(ob)); const j = json(ob) as { entries: { domain: string }[] }; j.entries[0].domain = "garbage"; return okR.ok && !parseOutboxState(j).ok; })());
   check("parse: not_an_object on scalar garbage", (() => { const a = parseRunEntry("nope"); const b = parseTrack(42); return !a.ok && a.reason === "not_an_object" && !b.ok && b.reason === "not_an_object"; })());
