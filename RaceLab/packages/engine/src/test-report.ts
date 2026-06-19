@@ -301,6 +301,175 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
   check("R3-2: no symptom → no fabricated root cause", /No symptom reported/.test(noSym.diagnosis), noSym.diagnosis);
 }
 
+// 11. R4-2 multi/conflicting-symptom diagnosis — the diagnosis SYNTHESIZES the
+//     combined picture (a balance problem across the corner), names which end the
+//     engineer attacks first and WHY, and summarizes non-conflicting multi as a
+//     dominant theme. Grounded/universal, pure, deterministic, NaN-free.
+{
+  // Conflicting: understeer-entry + oversteer-exit → balance problem, entry first.
+  const conflict = buildReport(
+    bundle({
+      feedback: {
+        tags: [
+          { symptom: "understeer", phase: "corner_entry" },
+          { symptom: "oversteer", phase: "corner_exit" },
+        ],
+      },
+    }),
+    data,
+  );
+  check(
+    "R4-2: conflicting understeer+oversteer reads as a balance problem across the corner",
+    /balance problem across the corner/i.test(conflict.diagnosis),
+    conflict.diagnosis,
+  );
+  check(
+    "R4-2: conflict diagnosis prioritizes the EARLIER phase first (understeer/entry) and says why",
+    /fixes the understeer first/i.test(conflict.diagnosis) && /brake in before you power out/i.test(conflict.diagnosis),
+    conflict.diagnosis,
+  );
+
+  // Reversed phases: understeer-exit + oversteer-entry → oversteer (entry) first.
+  const reversed = buildReport(
+    bundle({
+      feedback: {
+        tags: [
+          { symptom: "understeer", phase: "corner_exit" },
+          { symptom: "oversteer", phase: "corner_entry" },
+        ],
+      },
+    }),
+    data,
+  );
+  check(
+    "R4-2: when oversteer is the earlier phase, IT is fixed first (phase-ordered, not list-ordered)",
+    /fixes the oversteer first/i.test(reversed.diagnosis),
+    reversed.diagnosis,
+  );
+
+  // Conflicting steering-response pair: twitchy + sluggish.
+  const steer = buildReport(
+    bundle({
+      feedback: {
+        tags: [
+          { symptom: "twitchy", phase: "high_speed" },
+          { symptom: "sluggish_steering", phase: "corner_entry" },
+        ],
+      },
+    }),
+    data,
+  );
+  check(
+    "R4-2: twitchy+sluggish reads as a steering-response balance problem",
+    /steering-response balance problem/i.test(steer.diagnosis),
+    steer.diagnosis,
+  );
+
+  // Non-conflicting multi → dominant theme + one-change-at-a-time discipline.
+  const multi = buildReport(
+    bundle({
+      feedback: {
+        tags: [
+          { symptom: "understeer", phase: "mid_corner" },
+          { symptom: "poor_bump_handling", phase: "rough_section" },
+        ],
+      },
+    }),
+    data,
+  );
+  check(
+    "R4-2: non-conflicting multi summarizes the dominant theme + one lever at a time",
+    /dominant thread/i.test(multi.diagnosis) && /one lever at a time/i.test(multi.diagnosis),
+    multi.diagnosis,
+  );
+
+  // Single symptom must STILL get the R3-2 lead root cause, not the synthesis.
+  const single = buildReport(
+    bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }] } }),
+    data,
+  );
+  check(
+    "R4-2: single symptom keeps the R3-2 root cause (no multi-synthesis leakage)",
+    !/balance problem across the corner/i.test(single.diagnosis) && /isn't biting|weight.*front/i.test(single.diagnosis),
+    single.diagnosis,
+  );
+
+  // Determinism + NaN-free for the synthesis path.
+  const m1 = buildReport(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }, { symptom: "oversteer", phase: "corner_exit" }] } }), data);
+  const m2 = buildReport(bundle({ feedback: { tags: [{ symptom: "understeer", phase: "corner_entry" }, { symptom: "oversteer", phase: "corner_exit" }] } }), data);
+  check("R4-2: multi-symptom diagnosis is deterministic", m1.diagnosis === m2.diagnosis);
+  check("R4-2: multi-symptom diagnosis NaN-free", !/NaN|Infinity|undefined|\[object Object\]/.test(conflict.diagnosis));
+}
+
+// 12. R4-3 plain-language headline — present on every verdict, matches the call,
+//     NaN-free. Built from primary change + confidence + (when present) gain.
+{
+  // Report verdict: headline names the primary action + confidence, no NaN.
+  const rep = buildReport(bundle(), data);
+  check("R4-3: report carries a non-empty headline", typeof rep.headline === "string" && rep.headline!.trim().length > 0, String(rep.headline));
+  check(
+    "R4-3: headline confidence matches the report verdict's confidence",
+    rep.headline!.toLowerCase().includes(`${rep.confidence} confidence`),
+    rep.headline,
+  );
+  check(
+    "R4-3: headline names the primary lever (setting words appear)",
+    rep.primary!.setting.split("_").every((w) => rep.headline!.toLowerCase().includes(w)),
+    `${rep.headline} | setting=${rep.primary!.setting}`,
+  );
+  check("R4-3: headline is NaN/undefined-free", !/NaN|Infinity|undefined|\[object Object\]/.test(rep.headline!), rep.headline);
+
+  // ROI report (primary carries lap_time_impact_s) → gain surfaces in headline.
+  const roi = buildReport(
+    bundle({
+      setup: { front_diff_oil: 7000, rear_diff_oil: 4000 },
+      track: { name: "Club Track", surface: "clay", grip: "medium", conditions: [] },
+      feedback: {
+        tags: [
+          { symptom: "sluggish_steering", phase: "corner_entry" },
+          { symptom: "oversteer", phase: "mid_corner" },
+          { symptom: "understeer", phase: "corner_entry" },
+        ],
+      },
+    }),
+    data,
+  );
+  if (roi.primary?.citations[0] === "kb-diff-rear-thinner-005") {
+    check(
+      "R4-3: when the primary carries lap-time impact, the headline surfaces ~Ns/lap",
+      /s\/lap on the table/.test(roi.headline!) && /~0\.2s\/lap/.test(roi.headline!),
+      roi.headline,
+    );
+  }
+
+  // Refusal verdict (engine scope) → headline summarizes "keep your setup", no advice.
+  const refusal = buildReport(bundle({ question: "should I lean the HSN a bit?" }), data);
+  check("R4-3: refusal carries a headline", typeof refusal.headline === "string" && refusal.headline!.trim().length > 0, String(refusal.headline));
+  check(
+    "R4-3: refusal headline says keep your current setup (no fabricated change)",
+    /keep your current setup/i.test(refusal.headline!),
+    refusal.headline,
+  );
+
+  // Do-nothing verdict (race day below the bar) → headline says keep setup + log a run.
+  const doNothing = buildReport(
+    bundle({ mode: "race_day", feedback: { tags: [{ symptom: "nosedive_jumps" }] } }),
+    data,
+  );
+  if (doNothing.kind === "do_nothing") {
+    check(
+      "R4-3: do-nothing headline says keep setup + log another run",
+      /keep your current setup/i.test(doNothing.headline!) && /log another run/i.test(doNothing.headline!),
+      doNothing.headline,
+    );
+  }
+
+  // Headline determinism.
+  const h1 = buildReport(bundle(), data).headline;
+  const h2 = buildReport(bundle(), data).headline;
+  check("R4-3: headline is deterministic", h1 === h2);
+}
+
 if (failures > 0) {
   console.error(`\n${failures} report test(s) failed`);
   process.exit(1);

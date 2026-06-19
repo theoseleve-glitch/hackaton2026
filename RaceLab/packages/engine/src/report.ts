@@ -12,7 +12,7 @@ import {
 import { conditionsEcho, effectsText, filterToTemplate, ruleToOption } from "./offline";
 import { retrieve, type ScoredRule } from "./retrieval";
 import { historyTier } from "./history";
-import type { Confidence, ContextBundle, KBRule, RecommendationOption } from "./types";
+import type { Confidence, ContextBundle, FeedbackTag, KBRule, RecommendationOption } from "./types";
 
 /**
  * Layer 3 — the structured engineer report (D22). Same deterministic pipeline
@@ -25,6 +25,12 @@ import type { Confidence, ContextBundle, KBRule, RecommendationOption } from "./
 export interface EngineerReport {
   kind: "report" | "do_nothing" | "refusal";
   conditions_echo: string;
+  /** R4-3 — a single plain-English sentence a club racer reads FIRST, summarizing
+   *  the whole call: the primary change + its confidence + (when present) the
+   *  estimated lap-time gain, or for refusal/do-nothing what to do instead.
+   *  Additive + optional (backward compatible); always a non-empty, NaN-free
+   *  string when set. Built purely from the report's own fields. */
+  headline?: string;
   /** 1. what the engineer believes is going on */
   diagnosis: string;
   /** 2. priority setup change */
@@ -58,6 +64,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
     return {
       kind: "refusal",
       conditions_echo: echo,
+      headline: verdictHeadline("refusal"),
       diagnosis,
       do_not_touch: [],
       driving_tips: drivingTips(bundle),
@@ -73,6 +80,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
     return {
       kind: "refusal",
       conditions_echo: echo,
+      headline: verdictHeadline("refusal"),
       diagnosis,
       do_not_touch: [],
       driving_tips: drivingTips(bundle),
@@ -96,6 +104,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
     return {
       kind: raceDay ? "do_nothing" : "refusal",
       conditions_echo: echo,
+      headline: verdictHeadline(raceDay ? "do_nothing" : "refusal"),
       diagnosis,
       do_not_touch: raceDay ? ["Everything — protect the result."] : [],
       driving_tips: drivingTips(bundle),
@@ -131,6 +140,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
     return {
       kind: raceDay ? "do_nothing" : "refusal",
       conditions_echo: echo,
+      headline: verdictHeadline(raceDay ? "do_nothing" : "refusal"),
       diagnosis,
       do_not_touch: raceDay ? ["Everything — protect the result."] : [],
       driving_tips: drivingTips(bundle),
@@ -167,6 +177,7 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
   return {
     kind: "report",
     conditions_echo: echo,
+    headline: reportHeadline(primaryRule, primary.confidence),
     diagnosis,
     primary,
     secondary,
@@ -176,6 +187,47 @@ export function buildReport(rawBundle: ContextBundle, data: KBData): EngineerRep
     confidence: primary.confidence,
     rationale: buildRationale(bundle, primaryRule, impactDecidedPrimary),
   };
+}
+
+/**
+ * R4-3 — the plain-English headline a club racer reads FIRST. ONE sentence built
+ * purely from the primary change + its confidence + (when finite) the rule's
+ * estimated lap-time gain. No KB prose, no numerics beyond the validated gain,
+ * so it is always a non-empty, NaN-free string. Pure + deterministic.
+ *
+ * Reads like: "Thin the rear diff oil — your biggest, lowest-risk gain right now
+ * (high confidence, ~0.2s/lap on the table)."
+ */
+function reportHeadline(rule: KBRule, confidence: Confidence): string {
+  const action = `${humanize(rule.direction)} ${humanize(rule.setting)}`;
+  // The risk framing tracks confidence: high → "lowest-risk", medium → "solid",
+  // low → an honest "worth a try". A danger caveat downgrades the risk framing
+  // so the headline never undersells a physical-risk change.
+  const risky = typeof rule.danger === "string" && rule.danger.trim() !== "";
+  let value: string;
+  if (risky) {
+    value = "the clearest single change to try — go gently, it has a safety limit";
+  } else if (confidence === "high") {
+    value = "your biggest, lowest-risk gain right now";
+  } else if (confidence === "medium") {
+    value = "the most promising single change to test next";
+  } else {
+    value = "worth a controlled test — low confidence, so verify it on track";
+  }
+  const gain = isFiniteNumber(rule.lap_time_impact_s)
+    ? `, ~${rule.lap_time_impact_s.toFixed(1)}s/lap on the table`
+    : "";
+  // Capitalize the action so the sentence reads as a sentence.
+  const verb = action.charAt(0).toUpperCase() + action.slice(1);
+  return `${verb} — ${value} (${confidence} confidence${gain}).`;
+}
+
+/** R4-3 — headline for the non-actionable verdicts (refusal / do-nothing), so the
+ *  racer still gets a one-line "what to do" at the top. Pure, non-empty, NaN-free. */
+function verdictHeadline(kind: "do_nothing" | "refusal"): string {
+  return kind === "do_nothing"
+    ? "No grounded change clears the bar for this — keep your current setup and log another run to learn more."
+    : "No grounded setup change for this one — keep your current setup; this is outside what the verified knowledge base can call.";
 }
 
 /** R3-1 — was the ROI tiebreaker the reason this rule is primary? Pure, total.
@@ -212,10 +264,19 @@ function buildDiagnosis(bundle: ContextBundle): string {
       .map((t) => `${humanize(t.symptom)}${t.phase ? ` (${humanize(t.phase)})` : ""}${t.evolution ? `, ${humanize(t.evolution)}` : ""}`)
       .join("; ");
     parts.push(`Reported: ${symptoms}.`);
-    // R3-2: root-cause chain for the LEAD (first) tag — the symptom→cause clause.
-    const lead = bundle.feedback.tags[0];
-    const cause = rootCause(lead.symptom, lead.phase);
-    if (cause) parts.push(cause);
+    // R4-2: when MULTIPLE distinct symptoms are reported, synthesize the combined
+    // picture (esp. conflicting pairs across a corner) BEFORE the single-symptom
+    // root cause — the engineer reads the whole car, not a list. Falls through to
+    // the lead-tag root cause when there's only one symptom (or no synthesis).
+    const synthesis = multiSymptomSynthesis(bundle.feedback.tags);
+    if (synthesis) {
+      parts.push(synthesis);
+    } else {
+      // R3-2: root-cause chain for the LEAD (first) tag — the symptom→cause clause.
+      const lead = bundle.feedback.tags[0];
+      const cause = rootCause(lead.symptom, lead.phase);
+      if (cause) parts.push(cause);
+    }
   } else if (bundle.feedback.text) {
     parts.push(`Reported: "${bundle.feedback.text}".`);
   } else {
@@ -275,6 +336,100 @@ function rootCause(symptom: string, phase?: string): string {
       return "The car skips and deflects over the rough — the suspension is too harsh or under-damped to keep the tyres tracking the ground.";
     default:
       return "";
+  }
+}
+
+/**
+ * R4-2 — synthesize a MULTI-symptom report into the combined chassis picture,
+ * not a list. Handles the common CONFLICTING pairs explicitly (a balance problem
+ * across the corner) and names which end the engineer attacks first and WHY; for
+ * non-conflicting multi-symptom it summarizes the dominant theme and the
+ * one-change-at-a-time discipline. Returns "" for single-symptom (the lead-tag
+ * root cause covers it) or symptom sets we won't editorialise on — so the
+ * diagnosis never fabricates a synthesis it can't stand behind.
+ *
+ * Pure + deterministic: a fixed read of the tag list, grounded in universal
+ * chassis dynamics (NOT a KB citation). NaN-free (no numerics).
+ */
+function multiSymptomSynthesis(tags: FeedbackTag[]): string {
+  // Distinct symptoms, first-seen order preserved (deterministic).
+  const order: string[] = [];
+  const bySymptom = new Map<string, FeedbackTag>();
+  for (const t of tags) {
+    if (!bySymptom.has(t.symptom)) {
+      bySymptom.set(t.symptom, t);
+      order.push(t.symptom);
+    }
+  }
+  if (order.length < 2) return ""; // single distinct symptom → lead root cause
+
+  const has = (s: string): boolean => bySymptom.has(s);
+
+  // — CONFLICTING pairs: opposite ends of the balance, often across a corner.
+  // understeer + oversteer = the classic balance problem. Prioritize the EARLIER
+  // phase: you brake INTO a corner before you power OUT, so fixing entry first
+  // settles the platform the exit depends on.
+  if (has("understeer") && has("oversteer")) {
+    const us = bySymptom.get("understeer")!;
+    const os = bySymptom.get("oversteer")!;
+    const entryFirst = phaseRank(us.phase) <= phaseRank(os.phase);
+    const first = entryFirst ? "the understeer" : "the oversteer";
+    return (
+      "Understeer and oversteer together is a balance problem across the corner, not two separate faults — " +
+      "the car is short on grip at one end and short on it at the other as the load moves, so chasing either alone just shifts the imbalance. " +
+      `The engineer fixes ${first} first — you meet the earlier phase of the corner before the later one (you brake in before you power out), and settling that end gives the rest of the corner a stable platform to build on.`
+    );
+  }
+
+  // twitchy (front over-loaded, over-rotates) + sluggish_steering (front slow to
+  // load) = a steering-response balance problem: too sharp in one place, too dull
+  // in another. Same entry-first logic applies.
+  if (has("twitchy") && has("sluggish_steering")) {
+    return (
+      "Twitchy in one place and sluggish in another is a steering-response balance problem, not two faults — " +
+      "the front is over-eager where it's loaded and slow where it isn't, so the fix is to even out how quickly the front builds grip, not to chase each symptom on its own. " +
+      "The engineer settles corner entry first, where the steering does its first work, then re-checks the rest."
+    );
+  }
+
+  // traction_roll (too much sudden lateral grip, tips the car) + no_forward_bite
+  // (not enough drive grip on power) = a grip-MANAGEMENT problem: the car makes
+  // more grip than it can stand up to in one place and can't use it in another.
+  if (has("traction_roll") && has("no_forward_bite")) {
+    return (
+      "Traction-rolling AND no forward bite together is a grip-management problem: the car generates more sudden lateral grip than it can stand up to, yet can't convert grip into drive on exit. " +
+      "The engineer prioritizes the traction roll first — it's the safety item (a roll ends the run), and calming how violently the car loads up usually frees the drive at the same time."
+    );
+  }
+
+  // — NON-conflicting multi-symptom: summarize the dominant theme (lead symptom),
+  // and hold the line on one-change-at-a-time so the racer doesn't shotgun it.
+  const lead = order[0];
+  return (
+    `Several symptoms at once (${order.map(humanize).join(" + ")}) — the engineer treats ${humanize(lead)} as the dominant thread and fixes one lever at a time, ` +
+    "so each change's effect on the whole car is legible before the next."
+  );
+}
+
+/** R4-2 — phase ordering within a corner for "fix the earlier phase first".
+ *  Lower = earlier in the corner. Unknown/absent phases sort last (neutral) so a
+ *  tagged phase always wins the tie-break. Pure + total. */
+function phaseRank(phase?: string): number {
+  switch (phase) {
+    case "braking":
+      return 0;
+    case "corner_entry":
+      return 1;
+    case "off_power":
+      return 2;
+    case "mid_corner":
+      return 3;
+    case "on_power":
+      return 4;
+    case "corner_exit":
+      return 5;
+    default:
+      return 6;
   }
 }
 

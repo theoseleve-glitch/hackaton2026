@@ -72,12 +72,29 @@ export function computePitPlan(inputs: StrategyInputs): PitPlan {
         notes.push(
           `Tyres fall off a cliff after ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}, ~${cliff.degradation_s_per_lap.toFixed(2)}s/lap) — that's ${mmss(cliffTime)} vs the ${mmss(fuelCap)} fuel window, so tyres run out of grip first. Box every ${mmss(cliffTime)} to stay ahead of the cliff.`,
         );
+        // R4-1: the tyres, not the tank, set the stops here — a bigger tank
+        // wouldn't move them. Make that tradeoff explicit so nobody chases fuel.
+        notes.push(
+          `Tyres, not fuel, set the stops here: the cliff lands ${mmss(fuelCap - cliffTime)} (${Math.round(fuelCap - cliffTime)}s) BEFORE the tank runs low — a bigger tank wouldn't help, you'd box on grip anyway. Win the stops by making the tyres last, not by carrying more fuel.`,
+        );
       } else {
         notes.push(
           `Tyre cliff at ~${mmss(cliffTime)} (lap ${cliff.cliff_lap}) sits outside the ${fuelCap}s fuel window — fuel still decides the pits.`,
         );
+        // R4-1: fuel sets the stops — the tyres outlast the tank, so the lever
+        // that moves the stop count is tank size / consumption, not tyre life.
+        notes.push(
+          `Fuel, not tyres, sets the stops here: the tank runs low ${mmss(cliffTime - fuelCap)} (${Math.round(cliffTime - fuelCap)}s) BEFORE the tyres cliff — to cut a stop you need more range (bigger tank or leaner consumption), not more tyre life.`,
+        );
       }
     }
+  }
+  // R4-1: when fuel alone decides (sprint, or endurance with no cliff data),
+  // still name the driver so the racer knows which lever moves the stop count.
+  if (pitDriver === "fuel" && cliffLap === undefined) {
+    notes.push(
+      `Fuel sets the stops: the tank is the binding limit here (no tyre cliff in the window), so the lever that changes the stop count is range — a bigger tank or leaner consumption — not tyre life.`,
+    );
   }
   return buildPlan(inputs, cap, pitDriver, cliffLap, notes);
 }
@@ -106,6 +123,21 @@ export function stretchOptions(plan: PitPlan, inputs: StrategyInputs): PitPlan[]
     if (saved <= 0) continue;
     option.notes.push(
       `Saves ${saved} stop(s) = ${saved * inputs.pit_loss_s}s of pit loss (${plan.stops} -> ${option.stops} stops); remaining margin: ${remaining}s of tank.`,
+    );
+    // R4-1: state WHY this stretch beats the base plan scientifically — the
+    // stop-count vs stint-length tradeoff, decided by where the tyre cliff is.
+    // base stint length vs this one (avg per stint, seconds), so the cost of the
+    // saved stop is legible: you carry the tyres ~Ns longer each stint.
+    const baseStint = plan.stint_max_s;
+    const longerBy = cap - baseStint;
+    const timeSaved = saved * inputs.pit_loss_s;
+    const cliffLate = plan.pit_driver === "fuel"; // fuel-bound base ⇒ no cliff inside the window
+    option.notes.push(
+      `Why it beats the ${plan.stops}-stop plan: one fewer trip down pit lane saves ${mmss(timeSaved)} (${timeSaved}s) of standing time, at the cost of running each stint ${mmss(longerBy)} (${Math.round(longerBy)}s) longer on the same tyres. ${
+        cliffLate
+          ? "Worth it here because there's no tyre cliff inside the fuel window — the rubber holds, so trading stops for stint length is a clean net gain."
+          : "Weigh it against the cliff: only take the stretch if the tyres still have grip that deep into the stint."
+      }`,
     );
     options.push(option);
   }

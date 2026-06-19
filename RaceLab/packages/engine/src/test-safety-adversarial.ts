@@ -232,6 +232,14 @@ function checkReport(bundleId: string, bundle: ContextBundle, rep: EngineerRepor
   scanString("report.conditions_echo", rep.conditions_echo, bundleId);
   scanString("report.diagnosis", rep.diagnosis, bundleId);
   scanString("report.rationale", rep.rationale, bundleId);
+  // R4-3 invariant: the headline is ALWAYS a present, non-empty, NaN-free string
+  // on EVERY verdict (report, do_nothing, refusal). The plain-English summary the
+  // racer reads first must never be missing or render NaN/undefined.
+  if (typeof rep.headline !== "string" || rep.headline.trim() === "") {
+    violate("bad_string", bundleId, `report.headline missing/empty (${JSON.stringify(rep.headline)})`);
+  } else {
+    scanString("report.headline", rep.headline, bundleId);
+  }
   if (rep.expected_behavior !== undefined) scanString("report.expected_behavior", rep.expected_behavior, bundleId);
   for (const t of rep.driving_tips) scanString("report.driving_tip", t, bundleId);
   for (const d of rep.do_not_touch) scanString("report.do_not_touch", d, bundleId);

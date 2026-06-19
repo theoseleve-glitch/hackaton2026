@@ -17,6 +17,9 @@ export function RunReportCard({ report }: { report: EngineerReport }) {
     <ScrollView style={styles.root} contentContainerStyle={{ padding: 14, paddingBottom: 30 }}>
       <Text style={styles.echo}>{report.conditions_echo}</Text>
 
+      {/* ——— plain-English headline: read this FIRST (R4-3) ——— */}
+      {report.headline ? <Text style={styles.headline}>{report.headline}</Text> : null}
+
       {/* ——— the verdict ——— */}
       {report.kind === "report" && report.primary ? (
         <View style={styles.verdictCard}>
@@ -142,6 +145,7 @@ export function confidenceColor(c: EngineerReport["confidence"]): string {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   echo: { color: colors.sub, fontSize: 12, fontStyle: "italic", marginBottom: 10 },
+  headline: { color: colors.text, fontSize: 17, fontWeight: "800", lineHeight: 23, marginBottom: 12 },
   verdictCard: {
     backgroundColor: colors.card,
     borderWidth: 1,

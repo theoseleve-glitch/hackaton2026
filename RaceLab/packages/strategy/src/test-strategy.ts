@@ -156,6 +156,56 @@ check("stretch: clamps to autonomy_s and dedupes to one option", copts.length ==
 check("stretch: clamped option still reduces stops (3 -> 2)", cbp.stops === 3 && copts[0].stops === 2);
 check("stretch: base plan untouched by stretchOptions", JSON.stringify(cbp) === JSON.stringify(computePitPlan(clampy)));
 
+// — R4-1 fuel-vs-tyre tradeoff depth ─────────────────────────────────────────
+// (a) cliff-driven plan: tyres set the stops, a bigger tank wouldn't help.
+check(
+  "R4-1: cliff plan states tyres (not fuel) set the stops — bigger tank wouldn't help",
+  cp.notes.some((n) => /Tyres, not fuel, set the stops/.test(n) && /bigger tank wouldn't help/.test(n)),
+  cp.notes.join(" | "),
+);
+check(
+  "R4-1: cliff plan quantifies how far BEFORE the fuel window the cliff lands (385-280=105s)",
+  cp.notes.some((n) => n.includes("105s") && n.includes("BEFORE the tank runs low")),
+  cp.notes.join(" | "),
+);
+// (b) fuel-driven enduro (no cliff data): fuel sets the stops, range is the lever.
+check(
+  "R4-1: fuel-bound enduro names fuel as the stop-setter and range as the lever",
+  ep.notes.some((n) => /Fuel sets the stops/.test(n) && /bigger tank or leaner consumption/.test(n)),
+  ep.notes.join(" | "),
+);
+// (c) late-cliff enduro: cliff is OUTSIDE the window → fuel decides, named + quantified.
+{
+  const lateCliff = [36.8, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 36.2, 37.2, 38.2];
+  const lp = computePitPlan({ ...enduro, lap_times: lateCliff });
+  check(
+    "R4-1: late-cliff plan states fuel (not tyres) sets the stops + names range as the lever",
+    lp.notes.some((n) => /Fuel, not tyres, sets the stops/.test(n) && /more range/.test(n)),
+    lp.notes.join(" | "),
+  );
+}
+// (d) stretch option explains WHY it beats the base plan: stops-vs-stint tradeoff.
+check(
+  "R4-1: stretch option states why it beats the base plan (one fewer stop vs longer stints)",
+  opts[0].notes.some((n) => /Why it beats the 3-stop plan/.test(n) && /one fewer trip down pit lane/.test(n) && /longer on the same tyres/.test(n)),
+  opts[0].notes.join(" | "),
+);
+check(
+  "R4-1: stretch tradeoff quantifies pit-time saved (25s) vs extra stint length (70s longer)",
+  opts[0].notes.some((n) => n.includes("(25s) of standing time") && n.includes("(70s) longer")),
+  opts[0].notes.join(" | "),
+);
+check(
+  "R4-1: fuel-bound stretch justifies itself by the absent cliff ('no tyre cliff inside the fuel window')",
+  opts[0].notes.some((n) => /no tyre cliff inside the fuel window/.test(n)),
+  opts[0].notes.join(" | "),
+);
+// R4-1 tradeoff lines are NaN-free everywhere they appear.
+check(
+  "R4-1: tradeoff notes never render NaN/Infinity/undefined",
+  [cp, ep, opts[0]].every((p) => p.notes.every((n) => !/NaN|Infinity|undefined/.test(n))),
+);
+
 // — error cases (clear messages, all four inputs guarded + margin sanity)
 check("error: autonomy_s <= 0 throws", throws(() => computePitPlan({ ...enduro, autonomy_s: 0 })));
 check("error: avg_lap_s <= 0 throws", throws(() => computePitPlan({ ...enduro, avg_lap_s: 0 })));
