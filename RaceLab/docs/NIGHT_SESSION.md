@@ -15,8 +15,8 @@ tested+pushed, no new models tonight unless flagged).
 - [x] **M1 — Competitive-racer advisor-quality audit** (running) — embody the named racers; judge the
   advisor against what a top driver actually needs (symptom→fix coverage, adjustment priority, race-day
   workflow, realism, missing levers). Produces suggestions + eval gaps.
-- [ ] **M2 — Whole-project failure re-audit** — re-scan code + docs for failures/regressions since D64; fix
-  in-zone P0–P2, log the rest.
+- [x] **M2 — Whole-project failure re-audit** — 17 findings, 7 fixed (2 P1 + 5 P2/P3), 4 in-zone queued, server+kb rate-limited.
+- [ ] **M2b — Re-run rate-limited server + kb audits** (the gap from M2 throttling).
 - [ ] **M3 — Wire the harvested data into flagship templates** — fold D66 catalog / D68 ranges / D69
   option-parts into the flagship category templates' option lists (D65 validator guards them).
 - [ ] **M4 — F1 + 1/12 pan rule packs** (the fast grounded coverage wins; templates+models already exist).
@@ -30,6 +30,15 @@ tested+pushed, no new models tonight unless flagged).
 - **M1 DONE** — competitive-racer audit: 41 suggestions logged below (33 in-zone, 5 theo-app, 3 human-gated).
 - **✅ FIX shipped (commit 3337364)** — authored 1/8 buggy+truggy **tyre rules** (the #1 off-road lever, was dark): 4 grounded rules mirroring the validated 1/10 family, 413→417 live rules, all validate-live gates pass, new eval scenario proves `tire_compound` now fires for a 1/8 buggy. **Resolves M1 suggestion #1** — the rest of the tyre cluster (on-road additive/insert, proactive race-day tyre read, tyre-first answer surface) stays in the suggestions list as it needs product/KB calls.
 - **M2 launched** — whole-project failure re-audit.
+- **✅ M2 — 7 in-zone fixes shipped** (17 confirmed findings; server+kb audits got rate-limited → re-run queued as M2b):
+  - **P1** `fix(strategy)` — `Infinity` race_length_s no longer hangs the pit planner (`Number.isFinite` guards). `commit`
+  - **P1** `fix(engine)` — race-day bar now applied to the full pool BEFORE the top-N slice (was post-slice → could starve eligible high-confidence rules into a false "do nothing"). regression test added. `commit`
+  - **P2** `fix(kb)` — MP11 flagship template now exposes `tire_compound`/`tire_insert` (alias) so the new 1/8 tyre rules reach it; eval 28.
+  - **P2** `fix(social)` — value-level validation on imported share payloads (untrusted deep-link/file injection guard).
+  - **P3** `fix(tracks,strategy)` — finite-guard the read paths (NaN lap can't silently poison the library / cliff).
+  - **P2/P3 docs** — de-lied stale counts (413→417, eval→28), CONTRACTS kit_default, AUDIT tracker #18-21.
+  - **Remaining in-zone (queued, next iteration):** #9 historyFromTuples sort-before-slice · #10 D13 refusal ordered before resolveTemplate · #13 shared nextId NaN-guard · #4 bridge surface-id family mapping.
+- **M2b launched** — re-run the rate-limited server + kb subsystem audits for full coverage.
 
 ---
 
