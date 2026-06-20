@@ -61,6 +61,7 @@ const RATE_POLICY: Record<string, RatePolicy> = {
   "GET /api/content/kb": { surface: "content_get", limit: 60, window_ms: MIN },
   // bearer-gated storage/quota writers — cap the storage-growth path too.
   "POST /api/share/publish": { surface: "share_publish", limit: 30, window_ms: MIN },
+  "POST /api/share/import": { surface: "share_import", limit: 60, window_ms: MIN },
   "POST /api/media/upload-url": { surface: "media_upload_url", limit: 60, window_ms: MIN },
 };
 
