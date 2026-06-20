@@ -1,0 +1,11 @@
+{
+  "name": "LIVE Kyosho MP11 (FULL per-model template): tyre rule now reaches the flagship via tire_compound alias",
+  "expect": { "kind": "recommendation", "settings_any_of": ["tire_compound", "tire_insert"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": {},
+    "track": { "name": "Cold Loose Outdoor", "surface": "loose dirt", "grip": "green", "conditions": ["loose_dirt", "low_grip", "cold"] },
+    "feedback": { "tags": [{ "symptom": "no_forward_bite", "phase": "corner_exit" }], "text": "the MP11 has no forward bite out of the corner on a cold loose track" },
+    "mode": "practice"
+  }
+}

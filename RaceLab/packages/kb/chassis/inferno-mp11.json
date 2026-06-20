@@ -46,6 +46,8 @@
     "tires_rear_brand": { "type": "string", "kit_default": null },
     "tires_rear_profile": { "type": "string", "kit_default": null },
     "tires_rear_compound": { "type": "string", "kit_default": null },
+    "tire_compound": { "type": "alias", "of": ["tires_front_compound", "tires_rear_compound"] },
+    "tire_insert": { "type": "text", "kit_default": null },
     "wing_position": { "type": "enum", "options": ["forward", "rearward"], "kit_default": "forward" },
     "wing_angle": { "type": "enum", "options": ["flat", "mid", "steep"], "kit_default": "mid" },
     "wing_height": { "type": "number", "unit": "mm", "range": [0, 10], "step": 2.5, "kit_default": 0, "note": "wing spacer mm" },
