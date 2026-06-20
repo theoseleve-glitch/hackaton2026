@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/8 buggy: no forward bite on a cold loose track → tyre lever now fires (was dark)",
+  "expect": { "kind": "recommendation", "settings_any_of": ["tire_compound", "tire_insert"] },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp10",
+    "setup": {},
+    "track": { "name": "Cold Loose Outdoor", "surface": "loose dirt", "grip": "green", "conditions": ["loose_dirt", "low_grip", "cold"] },
+    "feedback": { "tags": [{ "symptom": "no_forward_bite", "phase": "corner_exit" }], "text": "the 1/8 nitro buggy has no forward bite out of the corner on a cold loose track" },
+    "mode": "practice"
+  }
+}

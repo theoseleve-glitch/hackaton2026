@@ -1,0 +1,96 @@
+# 1/8 off-road tyres — buggy + truggy. The #1 off-road lever, previously dark for
+# these classes (only 1/10 + 1/8 GT had tyre rules). Mirrors the validated 1/10 2WD
+# tyre family (kb-2wd-reartire/insert-036..039) — the compound/insert physics is
+# scale-independent — using the field ids the 1/8 templates actually expose
+# (tire_compound / tire_insert, single not front/rear-split). Same AE Cheat Sheets +
+# Stevens citations already anchored for the 1/10 rules. (D69 night session, M1 fix.)
+
+- id: kb-8off-tire-softer-901
+  setting: tire_compound
+  direction: decrease   # softer compound
+  effects:
+    - { axis: mechanical_grip, change: more }
+    - { axis: forward_bite, change: more }
+    - { axis: wear_and_heat, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, cold, loose_dirt]
+    reduced_on: [high_grip, hot, dusty]
+  counter_indications: []
+  forbidden_on: [astroturf]   # a too-soft compound on high-bite astroturf overheats and goes greasy
+  magnitude_guidance: "Step one compound softer (or change tread to match the surface). A softer compound adds bite on low-grip/cold/loose tracks but overheats and wears fast on high-bite/hot ground — match compound to surface and temperature first."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets p.45 (Tyre Compound — softer compound for smoother surfaces; selecting a softer compound to find grip)"
+    - "Dave B Stevens — Essential Off-road RC Racer's Guide (28 pages on tyres) [section TBD]"
+  scope: [1-8-offroad, 1-8-truggy]
+
+- id: kb-8off-tire-harder-902
+  setting: tire_compound
+  direction: increase   # harder compound
+  effects:
+    - { axis: heat_resistance, change: more }
+    - { axis: wear_life, change: more }
+    - { axis: low_grip_bite, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }   # on high bite a too-soft tyre overheats and goes greasy/loose — a harder compound holds consistent grip
+  conditions:
+    amplified_on: [high_grip, hot, astroturf, dusty]
+    reduced_on: [low_grip, cold, loose_dirt]
+  counter_indications: [no_forward_bite]
+  forbidden_on: [loose_dirt]   # a hard compound never keys into fresh loose dirt
+  magnitude_guidance: "Step one compound harder. On high-bite/hot/abrasive surfaces a harder tyre stays cooler and keeps consistent grip where a soft tyre would grease over; useless on cold/loose tracks."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets p.45 (Tyre Compound — harder compound for bumpier surfaces, for grass and higher-wear conditions; stays consistent where a soft tyre would grease over)"
+    - "Dave B Stevens — Essential Off-road RC Racer's Guide (28 pages on tyres) [section TBD]"
+  scope: [1-8-offroad, 1-8-truggy]
+
+- id: kb-8off-insert-firmer-903
+  setting: tire_insert
+  direction: increase   # firmer insert
+  effects:
+    - { axis: sidewall_support, change: more }
+    - { axis: traction_roll_resistance, change: more }
+    - { axis: low_speed_conformity, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: oversteer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, astroturf, carpet, smooth]
+    reduced_on: [low_grip, bumpy, loose_dirt]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "Step one insert firmer. A firmer insert holds the carcass up under load to resist traction roll and fold on high bite; on rough/loose ground it stops the tyre conforming and loses grip."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets p.46 (Tyre Inserts, foam — harder insert: less rolling resistance, better cornering; too firm causes bounce / loss of traction)"
+    - "Dave B Stevens — Essential Off-road RC Racer's Guide (tyres / inserts) [section TBD]"
+  scope: [1-8-offroad, 1-8-truggy]
+
+- id: kb-8off-insert-softer-904
+  setting: tire_insert
+  direction: decrease   # softer insert
+  effects:
+    - { axis: carcass_conformity, change: more }
+    - { axis: mechanical_grip_rough, change: more }
+    - { axis: sidewall_support, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy, rough, loose_dirt]
+    reduced_on: [high_grip, astroturf, carpet, smooth]
+  counter_indications: [traction_roll]
+  forbidden_on: [astroturf]   # a soft insert folds and traction-rolls on high-bite astroturf
+  magnitude_guidance: "Step one insert softer. A softer insert lets the tyre wrap rough/loose ground for mechanical grip; on high bite it folds under load and traction-rolls."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets p.46 (Tyre Inserts, foam — softer insert: more traction, more drag; lets the tyre conform to the surface)"
+    - "Dave B Stevens — Essential Off-road RC Racer's Guide (tyres / inserts) [section TBD]"
+  scope: [1-8-offroad, 1-8-truggy]
