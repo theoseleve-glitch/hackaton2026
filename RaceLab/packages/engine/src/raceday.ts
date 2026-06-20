@@ -194,6 +194,12 @@ export function planRaceDay(
           templateExposes(template, r.setting) &&
           r.conditions.amplified_on.includes(tag) &&
           raceDayFilter(r).allowed &&
+          // The weather race-day planner proposes weather-driven CHASSIS/oil adjustments
+          // only. Tyre compound/insert is its own decision (a deliberate "tyre read" — see
+          // racer-audit suggestion #6) and is NOT mixed into the weather adjustments: it
+          // would crowd the per-tag cap (a lower-revert tyre rule could bump a shock-oil
+          // weather rule out) and conflate two axes. Tyre rules still fire on the symptom path.
+          !r.setting.startsWith("tire") &&
           !r.conditions.reduced_on.some((c) => predictedTags.has(c)) &&
           !r.forbidden_on?.some((c) => surfaceTags.has(c) || predictedTags.has(c)) &&
           !avoidRuleIds.has(r.id),

@@ -84,7 +84,7 @@
     - { symptom: poor_bump_handling, phase: rough_section }
   conditions:
     amplified_on: [low_grip, bumpy, rough, loose_dirt]
-    reduced_on: [high_grip, astroturf, carpet, smooth]
+    reduced_on: [high_grip, carpet, smooth]   # astroturf is in forbidden_on (a hard drop), so listing it here too is dead
   counter_indications: [traction_roll]
   forbidden_on: [astroturf]   # a soft insert folds and traction-rolls on high-bite astroturf
   magnitude_guidance: "Step one insert softer. A softer insert lets the tyre wrap rough/loose ground for mechanical grip; on high bite it folds under load and traction-rolls."
