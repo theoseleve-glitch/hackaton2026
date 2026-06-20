@@ -4,7 +4,6 @@ import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
-  raceDayFilter,
 } from "./guard";
 import { historyForRule, matchedSignalUsed } from "./history";
 import { conditionsEcho, ruleToOption } from "./offline";
@@ -78,11 +77,9 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
     };
   }
 
-  // 2. Deterministic retrieval + race-day filter (same pipeline as recommend())
-  let scored = retrieve(data.rules, bundle, template);
-  if (bundle.mode === "race_day") {
-    scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
-  }
+  // 2. Deterministic retrieval (race-day bar applied inside retrieve(), to the full pool
+  // before truncation — same pipeline as recommend())
+  const scored = retrieve(data.rules, bundle, template);
 
   if (scored.length === 0) {
     const raceDay = bundle.mode === "race_day";

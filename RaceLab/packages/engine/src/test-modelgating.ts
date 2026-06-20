@@ -113,6 +113,24 @@ check(
     retrieve([baseRule({ legal_in_power: ["stock_blinky", "modified_power"] })], bundle([...powerTypeToTags("nitro")]), tConcrete).length === 0,
 );
 
+// ── race-day bar is applied to the FULL pool BEFORE truncation (night M2 P1) ──
+// A race-day-INELIGIBLE rule (medium confidence) must be dropped by retrieve() in
+// race_day mode even though it matches and would otherwise rank — and an eligible
+// high-confidence rule must survive. (Previously the bar ran post-slice in the callers,
+// so ineligible rules could fill the top-N and starve eligible ones into a false "do nothing".)
+const rdEligible = baseRule({ id: "kb-rd-elig-001", setting: "front_shock_oil", confidence: "high", reversal_cost_minutes: 5 });
+const rdIneligible = baseRule({ id: "kb-rd-inelig-002", setting: "front_ride_height", confidence: "medium", reversal_cost_minutes: 5 });
+const raceDayBundle: ContextBundle = { ...bundle([]), mode: "race_day" };
+const practiceBundle: ContextBundle = bundle([]);
+check(
+  "race_day: retrieve drops the ineligible (medium) rule, keeps the eligible (high) one",
+  retrieve([rdIneligible, rdEligible], raceDayBundle, tConcrete).map((s) => s.rule.id).join() === "kb-rd-elig-001",
+);
+check(
+  "practice: both rules survive (race-day bar is off)",
+  retrieve([rdIneligible, rdEligible], practiceBundle, tConcrete).length === 2,
+);
+
 // ── resolveTemplate: full / pending→category / unknown ───────────────────────
 const catT = tmpl({ front_shock_oil: { type: "number" } });
 catT.template_id = "1_8_offroad_nitro";

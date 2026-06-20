@@ -4,7 +4,6 @@ import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
-  raceDayFilter,
 } from "./guard";
 import { conditionsEcho, humanize, ruleToOption } from "./offline";
 import { historyNote } from "./history";
@@ -73,13 +72,9 @@ export function proposePlan(
     return { kind: "refusal", source, changes: [], message: refusal, conditions_echo: echo };
   }
 
-  // 2. Deterministic retrieval (history re-ranking happens inside)
-  let scored = retrieve(data.rules, bundle, template);
-
-  // 3. Race-day mode: filter the candidate pool BEFORE ranking the plan
-  if (bundle.mode === "race_day") {
-    scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
-  }
+  // 2. Deterministic retrieval (history re-ranking + the race-day bar both happen inside
+  // retrieve(), the bar applied to the full pool BEFORE truncation — no starvation)
+  const scored = retrieve(data.rules, bundle, template);
 
   if (scored.length === 0) {
     const message =

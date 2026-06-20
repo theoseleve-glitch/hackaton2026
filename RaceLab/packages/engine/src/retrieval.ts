@@ -1,5 +1,6 @@
 import type { ChassisTemplate, ContextBundle, KBRule } from "./types";
 import { historyForRule, historyTier, type RuleHistory } from "./history";
+import { raceDayFilter } from "./guard";
 
 export interface ScoredRule {
   rule: KBRule;
@@ -95,5 +96,13 @@ export function retrieve(
       a.rule.reversal_cost_minutes - b.rule.reversal_cost_minutes ||
       (a.rule.id < b.rule.id ? -1 : a.rule.id > b.rule.id ? 1 : 0),
   );
-  return scored.slice(0, MAX_RULES);
+  // Race-day bar applied to the FULL ranked pool BEFORE the top-N truncation. Applying
+  // it post-slice (as the callers used to) could starve a valid high-confidence
+  // fast-revert rule out: history re-ranking can float ineligible (medium / slow-revert)
+  // rules into all N slots, the post-slice filter then drops them all, and the engine
+  // wrongly returns "do nothing" while eligible rules sat at rank N+1. Mirrors planRaceDay,
+  // which already filters inside its candidate loop. (No-op off race day.)
+  const pool =
+    bundle.mode === "race_day" ? scored.filter(({ rule }) => raceDayFilter(rule).allowed) : scored;
+  return pool.slice(0, MAX_RULES);
 }

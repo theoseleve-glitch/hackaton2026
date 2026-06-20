@@ -4,7 +4,6 @@ import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
-  raceDayFilter,
 } from "./guard";
 import { buildOfflineCard, conditionsEcho } from "./offline";
 import type { ContextBundle, Recommendation } from "./types";
@@ -36,13 +35,9 @@ export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
     return { kind: "refusal", source: "offline_deterministic", message: refusal, conditions_echo: echo };
   }
 
-  // 2. Deterministic retrieval
-  let scored = retrieve(data.rules, bundle, template);
-
-  // 3. Race-day mode: filter the candidate pool BEFORE choosing
-  if (bundle.mode === "race_day") {
-    scored = scored.filter(({ rule }) => raceDayFilter(rule).allowed);
-  }
+  // 2. Deterministic retrieval (retrieve() applies the race-day bar to the FULL pool
+  // BEFORE truncating to top-N, so an eligible rule is never starved behind ineligible ones)
+  const scored = retrieve(data.rules, bundle, template);
 
   if (scored.length === 0) {
     const message =
