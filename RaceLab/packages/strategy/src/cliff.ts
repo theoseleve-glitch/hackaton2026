@@ -21,6 +21,9 @@ export interface TyreCliffResult {
  * the threshold.
  */
 export function detectTyreCliff(lap_times: number[]): TyreCliffResult {
+  // Drop non-finite laps (a NaN/Infinity from a bad import would otherwise poison the
+  // slope + median and surface "degrading NaNs/lap" to the driver). Filter, don't reject.
+  lap_times = lap_times.filter(Number.isFinite);
   const degradation_s_per_lap = leastSquaresSlope(lap_times);
   if (lap_times.length < MIN_LAPS_FOR_CLIFF) return { degradation_s_per_lap };
 

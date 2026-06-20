@@ -84,7 +84,7 @@ function isValidTrack(t: TrackEntity): boolean {
     Array.isArray(t.records) &&
     t.records.every(
       (r) =>
-        typeof r === "object" && r !== null && typeof r.category === "string" && typeof r.lap_s === "number",
+        typeof r === "object" && r !== null && typeof r.category === "string" && Number.isFinite(r.lap_s),
     ) &&
     typeof t.created_at === "string"
   );
