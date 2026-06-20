@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 import { z } from "zod";
 import { assertValidKBData, type ChassisRegistryEntry, type KBClassDef, type KBData } from "./data";
+import { parseChassisRegistry } from "../../kb/src/index";
 import type { ChassisTemplate, KBRule, Taxonomy } from "./types";
 
 /**
@@ -37,22 +38,10 @@ export const RuleSchema = z.object({
 // for the REQUIRED fields; the KB builder's extra fields (power_types,
 // template_status, provenance, …) pass through untouched. Accepts a bare
 // array or { entries: [...] }.
-const RegistryEntrySchema = z
-  .object({
-    chassis_id: z.string().min(1),
-    template_id: z.string().min(1),
-    brand: z.string(),
-    model: z.string(),
-    category: z.string(),
-    scale: z.string(),
-    type: z.string(),
-    default_power_type: z.enum(["nitro", "brushless"]),
-  })
-  .passthrough();
-const RegistryFileSchema = z.union([
-  z.array(RegistryEntrySchema),
-  z.object({ entries: z.array(RegistryEntrySchema) }),
-]);
+// Registry validation uses the CANONICAL kb parseChassisRegistry (single source of truth)
+// rather than a thin local Zod schema — so the runtime/bundle load fails the build on the
+// exact same gate the kb test asserts (no drift where a malformed entry the test would
+// reject still loads at runtime).
 
 // kb/classes/*.json — tolerant: the engine only requires class_id; the rest of
 // the shape is owned by the KB builder and passes through untouched.
@@ -109,8 +98,9 @@ export function loadKBData(): KBData {
   let registry: ChassisRegistryEntry[] | undefined;
   const registryPath = join(chassisDir, "registry.json");
   if (existsSync(registryPath)) {
-    const raw = RegistryFileSchema.parse(JSON.parse(readFileSync(registryPath, "utf8")));
-    registry = (Array.isArray(raw) ? raw : raw.entries) as ChassisRegistryEntry[];
+    const parsed = parseChassisRegistry(JSON.parse(readFileSync(registryPath, "utf8")));
+    if (!parsed.ok) throw new Error(`registry.json failed kb validation: ${parsed.reason}`);
+    registry = parsed.value as unknown as ChassisRegistryEntry[];
   }
 
   // kb/classes/*.json — OPTIONAL (lands in parallel); validated when present
