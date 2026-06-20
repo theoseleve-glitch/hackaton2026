@@ -1,0 +1,767 @@
+{
+ "$comment": "D69 (2026-06-20): behaviour-affecting OPTION PARTS per EXISTING RaceLab chassis, scanned from EU+US competition retailers (KyoshoEurope, RSRC, RC-diffusion, AMain, petitRC, maker pages). TAXONOMY/FACTS only (D18/D53): part + the setup AXIS it adjusts + available variants. NOT cause->effect advice. Feeds the per-model template option catalogs (the options the D65 validateTemplateFields guard protects) + templateExposes capability gating. No new chassis models added.",
+ "models": {
+  "Kyosho Inferno MP10": [
+   {
+    "part": "IFW629B Aluminum Front Hub Carrier Set 22deg",
+    "adjusts": "caster",
+    "options": "22deg (vs kit composite blocks; alu 16deg IFW436B and 17.5deg IFW474 also exist in the Inferno hub-carrier line). L/R pair",
+    "category": "1/8 nitro buggy",
+    "source": "https://kyoshoamerica.com/aluminum-front-hub-carrier-set-l-r-22-gunmetallic-mp10-ifw629b.html ; https://www.amainhobbies.com/kyosho-mp10-aluminum-front-hub-carrier-gunmetal-22-2-kyoifw629b/p1488294"
+   },
+   {
+    "part": "MP10 Front/Rear Anti-Roll (Sway) Bar set + balance weights",
+    "adjusts": "sway bar / roll stiffness; ballast",
+    "options": "front bar 2.9mm among gauges; balance weights 10g / 20g front & rear",
+    "category": "1/8 nitro buggy",
+    "source": "https://blog.rcmart.com/rc-kyosho-new-option-parts-for-inferno-mp10-buggy-coming-soon/ ; https://www.rcmart.com/Kyosho-Inferno-MP9-MP10-Parts"
+   },
+   {
+    "part": "MP10 Worlds-Edition Front End Conversion Set",
+    "adjusts": "caster / front geometry (C-hub + stub axle)",
+    "options": "Worlds Edition limited front-end kit (C-hubs, stub axles, mounts)",
+    "category": "1/8 nitro buggy",
+    "source": "https://rsrc.biz/en/blog/front-end-conversion-set-mp10-worlds-edition-limited-n156"
+   }
+  ],
+  "Kyosho Inferno MP11": [
+   {
+    "part": "MP11 Aluminum Front Hub Carrier (18deg caster / 12deg kingpin)",
+    "adjusts": "caster + kingpin angle",
+    "options": "kit 18deg caster / 12deg kingpin; alu carrier options in the Inferno line",
+    "category": "1/8 nitro buggy",
+    "source": "https://rc.kyosho.com/en/mp11 ; https://kyoshoamerica.com/1-8-scale-radio-controlled-21-engine-powered-4wd-racing-buggy-inferno-mp11-33028.html"
+   },
+   {
+    "part": "IF742 5.8mm Sway Bar Ball Joints (3mm hole)",
+    "adjusts": "sway bar linkage",
+    "options": "5.8mm ball, 3mm hole, qty 4",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.amainhobbies.com/kyosho-inferno-mp11-5.8mm-sway-bar-ball-joints-3mm-hole-4-kyoif742/p1662346"
+   },
+   {
+    "part": "MP11 option-parts catalog (suspension mounts, shock towers, steering plates)",
+    "adjusts": "anti-squat / roll-centre / ackermann (arm mounts, towers, steering plates)",
+    "options": "full alu/graphite option range (rsrc.biz lists 333 MP11 options)",
+    "category": "1/8 nitro buggy",
+    "source": "https://rsrc.biz/en/888-mp11"
+   }
+  ],
+  "Mugen MBX8R": [
+   {
+    "part": "MBX8R Front Upper Arm Mount + pivot inserts",
+    "adjusts": "front roll centre / upper-arm pivot position",
+    "options": "7075-T6 alu upper arm mount + interchangeable pivot inserts",
+    "category": "1/8 nitro buggy/truggy",
+    "source": "https://www.rc-tworks.com/collections/option-parts/mugen-mbx8r"
+   },
+   {
+    "part": "MBX8R C & D Arm-Mount Delrin Inserts (Type A/B/C)",
+    "adjusts": "anti-squat / toe-in (rear C & D mounts)",
+    "options": "Type A / Type B / Type C (4pc each)",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.rc-tworks.com/collections/option-parts/mugen-mbx8r"
+   },
+   {
+    "part": "MBX8 Front/Rear Suspension sway-bar sets + collars",
+    "adjusts": "sway bar / roll stiffness",
+    "options": "front & rear sway-bar gauges + low-slop collars",
+    "category": "1/8 nitro buggy",
+    "source": "https://jennysrc.com/products/mbx8r-eco-front-suspension-set-sway-bulkhead-gear-box-arm-mounts-bumper-mugen-e2028 ; https://www.ebay.com/itm/372212002447"
+   },
+   {
+    "part": "MBX8R Wheel Hub Offsets + Track-Width Spacers",
+    "adjusts": "track width",
+    "options": "hub offset 0 / +1 / +2mm; track-width spacer 0.5mm & 0.75mm",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.rc-tworks.com/collections/option-parts/mugen-mbx8r"
+   }
+  ],
+  "Mugen MBX8R / MBX8TR": [
+   {
+    "part": "MBX8TR C & D mounts with square pills",
+    "adjusts": "toe-in + anti-squat",
+    "options": "square-pill inserts for C/D mounts",
+    "category": "1/8 nitro truggy",
+    "source": "https://www.liverc.com/news/new-mugen-seiki-mbx8tr-nitro-truggy-kit/"
+   }
+  ],
+  "Team Associated RC8B4 / RC8B4.1 / RC8T4": [
+   {
+    "part": "RC8B4 Caster Inserts (ASC81xxx)",
+    "adjusts": "caster",
+    "options": "0deg / +/-1deg / +/-2deg insert steps",
+    "category": "1/8 nitro buggy/truggy",
+    "source": "https://www.amainhobbies.com/team-associated-rc8b4-arm-mount-inserts-asc81520/p1405648 ; https://associatedelectrics.com/teamassociated/cars_and_trucks/RC8B4.1/Team/parts_accessories"
+   }
+  ],
+  "Team Associated RC8B4 / RC8B4e / RC8T4 / RC8T4e": [
+   {
+    "part": "RC8B4 Arm Mount Inserts ASC81520",
+    "adjusts": "anti-squat / kick-up / toe (suspension-mount pills)",
+    "options": "interchangeable insert positions (multi-axis pill set)",
+    "category": "1/8 nitro buggy/truggy",
+    "source": "https://www.amainhobbies.com/team-associated-rc8b4-arm-mount-inserts-asc81520/p1405648 ; https://www.ashfordhobby.com/p-19301-team-associated-rc8b4-arm-mount-inserts.aspx"
+   }
+  ],
+  "Team Associated RC8B4": [
+   {
+    "part": "RC8B4 Soft Front Upper Arms w/ wing insert",
+    "adjusts": "front-arm flex / downforce insert",
+    "options": "soft blend material; optional wing insert in/out",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.associatedelectrics.com/news/latest_products/2925-rc8t4-amp-rc8t4e-team-kit-with-gearbox-upgrade/ ; https://associatedelectrics.com/teamassociated/cars_and_trucks/RC8B4.1/Team/parts_accessories"
+   }
+  ],
+  "Team Associated RC8B4 / RC8T4": [
+   {
+    "part": "RC8 one-piece angled Anti-Roll-Bar link",
+    "adjusts": "sway-bar linkage",
+    "options": "one-piece in-line ARB link",
+    "category": "1/8 nitro buggy/truggy",
+    "source": "https://www.associatedelectrics.com/news/latest_products/2925-rc8t4-amp-rc8t4e-team-kit-with-gearbox-upgrade/"
+   }
+  ],
+  "XRAY XB8 (2024)": [
+   {
+    "part": "XB8'24 fully-adjustable suspension geometry hardware",
+    "adjusts": "caster, camber, toe, kick-up, anti-dive, anti-squat, ride height, downstops, track-width, roll centre (upper+lower), bump-steer, wheelbase, ackermann",
+    "options": "all listed axes adjustable via blocks/bushings/shims",
+    "category": "1/8 nitro buggy",
+    "source": "https://teamxray.com/xb8/2024/en/"
+   },
+   {
+    "part": "XB8'24 Anti-Roll-Bar sets (front 2.2 / rear 2.4 + options)",
+    "adjusts": "sway bar / roll stiffness",
+    "options": "kit front 2.2mm / rear 2.4mm + optional thicker/thinner wires",
+    "category": "1/8 nitro buggy",
+    "source": "https://teamxray.com/xb8/2024/en/"
+   },
+   {
+    "part": "XB8'24 3-in-1 shock caps + extra shock-position row",
+    "adjusts": "shock damping mode + shock geometry position",
+    "options": "caps: emulsion / rebound / zero-rebound; extra tower position row",
+    "category": "1/8 nitro buggy",
+    "source": "https://teamxray.com/xb8/2024/en/"
+   }
+  ],
+  "XRAY XB8 / XB8E": [
+   {
+    "part": "XB8 Caster Clips (front / behind upper arm)",
+    "adjusts": "caster",
+    "options": "clip in front vs behind upper arm; clip thickness set",
+    "category": "1/8 nitro/electric buggy",
+    "source": "https://teamxray.com/xb8e/2018/ ; https://www.teamxray.com/teamxray/products/product_main.php?kategoria=1181&catName=Option+Parts+-+XB8"
+   }
+  ],
+  "SWORKz S35-4 / S35-4E / S35-4 EVO": [
+   {
+    "part": "S35/350 Front Sway Bar Set",
+    "adjusts": "sway bar / roll stiffness (front)",
+    "options": "2.0 / 2.1 / 2.2 / 2.3 / 2.4 / 2.5 / 2.6 / 2.8 mm",
+    "category": "1/8 nitro/electric buggy",
+    "source": "https://www.manualslib.com/manual/3304339/Sworkz-S35-4-Evo.html ; https://answer-rc.com/895-s35-4-option-parts"
+   },
+   {
+    "part": "S35/350 Rear Sway Bar Set",
+    "adjusts": "sway bar / roll stiffness (rear)",
+    "options": "2.4mm (SW-115046) / 2.5 (SW-115047) / 2.6 (SW-115006) / 2.7 (SW-330499) / 2.8 (SW-115005) / 3.0 (SW-115007)",
+    "category": "1/8 nitro/electric buggy",
+    "source": "https://www.manualslib.com/manual/3304344/Sworkz-S35-4e-Evo.html ; https://answer-rc.com/1017-sworkz-s35-4e-evo-option-parts"
+   }
+  ],
+  "SWORKz S35-4": [
+   {
+    "part": "S35-4 Brass balance weights + upper-link balls/spacers",
+    "adjusts": "ballast (CG) + camber-link length (roll centre)",
+    "options": "brass weights 5g/10g/15g/20g/25g; upper-link ball + spacer sets",
+    "category": "1/8 nitro buggy",
+    "source": "https://answer-rc.com/895-s35-4-option-parts ; https://answer-rc.com/s35-4-option-parts/8707-rc-project-sworkz-s35-4-upper-link-balls-and-spacer.html"
+   }
+  ],
+  "Tekno NT48 / NT48 2.0 / NT48 2.2": [
+   {
+    "part": "NT48 Front Sway Bar Set TKR9485",
+    "adjusts": "sway bar / roll stiffness (front)",
+    "options": "2.1 / 2.2 / 2.3 / 2.4 / 2.5 mm (set); plus 3.0mm single (TKR5485)",
+    "category": "1/8 nitro truggy",
+    "source": "https://www.teknorc.com/shop/tkr9485-sway-bar-set-front-2-1-2-2-2-3-2-4-2-5-et-nt48-2-0/ ; https://www.teknorc.com/shop/tkr5485-sway-bar-front-3-0mm-et48-nt48/"
+   }
+  ],
+  "Tekno NT48 / NT48.3": [
+   {
+    "part": "NT48 V2 Hinge Pin Inserts TKR5165",
+    "adjusts": "anti-squat / kick-up / toe (hinge-pin geometry)",
+    "options": "V2 insert set (multiple positions in front & rear braces)",
+    "category": "1/8 nitro truggy",
+    "source": "https://jennysrc.com/products/copy-of-tekno-et48-rear-suspension-bag-d-e-sway-bar-gear-box-hinge-pin-braces-pins-tkr9600 ; https://www.teknorc.com/wp-content/uploads/2015/08/NT48.3instructions.pdf"
+   },
+   {
+    "part": "Tekno 1/8 molded shock pistons (16-dimple blank + drilled)",
+    "adjusts": "shock damping (piston port)",
+    "options": "drilled variants (replace TKR6138/6139/6131) + 16-dimple blank",
+    "category": "1/8 nitro truggy",
+    "source": "https://blog.teknorc.com/2025/02/25/new-option-parts-from-tekno-rc-4/"
+   }
+  ],
+  "Sparko F8 / F8e": [
+   {
+    "part": "Sparko F8 7075 Aluminum Caster Block (L/R, 17.5deg)",
+    "adjusts": "caster",
+    "options": "17.5deg L/R alu block",
+    "category": "1/8 nitro/electric buggy",
+    "source": "https://klinikrc.com/shop-1/ols/categories/sparko-upgrade-parts ; https://rsrc.biz/en/853-sparko-f8-nitro-option-parts"
+   },
+   {
+    "part": "Sparko F8 Front/Rear Sway Bar Sets + Arm Mount D (+0.5mm)",
+    "adjusts": "sway bar / roll stiffness; rear arm-mount position (anti-squat/roll centre)",
+    "options": "front & rear sway-bar thickness options; Arm Mount D +0.5mm",
+    "category": "1/8 nitro/electric buggy",
+    "source": "https://klinikrc.com/shop-1/ols/categories/sparko-upgrade-parts ; http://www.sparkoracing.com/product/accessories/spare-parts"
+   },
+   {
+    "part": "Sparko F8 Upper-Arm Linkage Conversion Kit + Steering System",
+    "adjusts": "upper roll centre (turnbuckle upper arm) + ackermann/steering geometry",
+    "options": "upper-arm linkage conversion; revised steering assembly",
+    "category": "1/8 nitro/electric buggy",
+    "source": "http://www.sparkoracing.com/news/sparko-f8-upper-arm-linkage-conversion-kit ; http://www.sparkoracing.com/news/introducing-sparko-f8-steering-system"
+   }
+  ],
+  "Agama A319 / A319e": [
+   {
+    "part": "Agama A319 A/B/C/D Suspension Mount Blocks (17.5deg caster block)",
+    "adjusts": "caster (17.5deg block) + anti-squat / roll centre (A/B/C/D mounts)",
+    "options": "17.5deg caster block; A / B / C / D mount blocks with revised RC & anti-squat positions",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.liverc.com/news/new-agama-a319-announcement-video/ ; https://fiercercsolutions.com/agama-a319-option-parts.html ; https://www.rc-tworks.com/collections/option-parts/agama-a319"
+   },
+   {
+    "part": "Agama A319 Shock Towers (multi shock-position) + Steering Top Plate",
+    "adjusts": "shock position (towers, rear wing-height holes) + steering-post position (ackermann/bump-steer)",
+    "options": "multi-hole towers + rear wing-height holes; alt steering-post positions on top plate",
+    "category": "1/8 nitro buggy",
+    "source": "https://www.liverc.com/news/new-agama-a319-announcement-video/ ; https://www.amainhobbies.com/agama-a319-1-8-4wd-offroad-nitro-buggy-kit-agma319/p999982"
+   }
+  ],
+  "AE B6/B6.1/B6.2": [
+   {
+    "part": "RC10 B6 Arm Mount Inserts (1/0.5 step)",
+    "adjusts": "anti-squat / rear toe",
+    "options": "1.0 and 0.5 step inserts (ASC92011)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amainhobbies.com/team-associated-rc10-b6-1-0.5-arm-mount-inserts-8-asc92011/p1216026"
+   }
+  ],
+  "AE B6.2 / B6.4": [
+   {
+    "part": "RC10B6.2 7075 Aluminum Arm Mounts (A/B/C/D) with anti-squat & toe inserts",
+    "adjusts": "roll centre / anti-squat / toe",
+    "options": "A/B/C/D mounts + multiple anti-squat/toe inserts",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://60years.associatedelectrics.com/rc10b6-2-team-kit/"
+   },
+   {
+    "part": "B6 Diff-Height / Bulkhead Inserts (0/1/2/3mm)",
+    "adjusts": "diff height / roll centre / CG",
+    "options": "0, 1, 2, 3mm inserts; laydown & layback transmissions",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://60years.associatedelectrics.com/rc10b6-2-team-kit/"
+   },
+   {
+    "part": "B6 Steel Chassis Weights (24g / 36g)",
+    "adjusts": "ballast / weight bias",
+    "options": "24g and 36g",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://60years.associatedelectrics.com/rc10b6-2-team-kit/"
+   }
+  ],
+  "AE B6.4 / B6.4D": [
+   {
+    "part": "RC10B6.4 -1mm Scrub Caster & Steering Blocks (Carbon)",
+    "adjusts": "caster / kingpin scrub / camber",
+    "options": "-1mm scrub (carbon); camber inserts (ASC91985)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amainhobbies.com/team-associated-rc10b6.4-1mm-scrub-caster-steering-blocks-carbon-asc91985/p1413719"
+   }
+  ],
+  "AE B6.2D / B6.4D": [
+   {
+    "part": "RC10B6.2D +1 Ackermann Plates",
+    "adjusts": "ackermann",
+    "options": "+1 plate (vs kit)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://60years.associatedelectrics.com/rc10b6-2-team-kit/"
+   },
+   {
+    "part": "B6.2D Gull-Wing Suspension Arms",
+    "adjusts": "roll centre / camber link",
+    "options": "gull-wing vs straight arms",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://60years.associatedelectrics.com/rc10b6-2-team-kit/"
+   }
+  ],
+  "AE B64 / B74.2": [
+   {
+    "part": "RC10B64 / B74.2 Arm Mount Blocks (A / C / LRC C Block)",
+    "adjusts": "anti-squat / wheelbase / roll centre",
+    "options": "A Block, C Block, LRC C Block; aluminum option (ASC92432)",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://pick1up.com/products/team-associated-b74-1-lrc-c-block-arm-mount"
+   }
+  ],
+  "AE B74.2": [
+   {
+    "part": "B74.2 9° Caster Blocks",
+    "adjusts": "caster",
+    "options": "9° (plus other-degree blocks in range)",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://pick1up.com/products/team-associated-b74-1-9-deg-caster-blocks"
+   }
+  ],
+  "AE T6.2 (stadium) / SC6.2": [
+   {
+    "part": "RC10T6.2 Gull-Wing Front & Rear Suspension Arms",
+    "adjusts": "roll centre / camber link",
+    "options": "front (71138) & rear (71140) gull-wing",
+    "category": "1/10 2WD stadium truck / short course",
+    "source": "https://www.amazon.com/Team-Associated-RC10T6-2-Suspension-ASC71140/dp/B08SJSKQBN"
+   }
+  ],
+  "TLR 22 5.0": [
+   {
+    "part": "TLR 22 5.0 Inner Rear Pivots (roll centre / track width / anti-squat / toe)",
+    "adjusts": "roll centre / track width / anti-squat / toe",
+    "options": "multi-position pivot set (DC ELITE)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.tlracing.com/shop-by-tlr-vehicle/tlr-22-5.0-dc-elite-parts/"
+   },
+   {
+    "part": "TLR 22 5.0 Eyelets / Spring Cups (-3 / 0 / +4mm offset)",
+    "adjusts": "ride height / spring perch",
+    "options": "-3mm, 0mm, +4mm spring-cup offsets",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.tlracing.com/shop-by-tlr-vehicle/tlr-22-5.0-dc-elite-parts/"
+   },
+   {
+    "part": "Vision Racing TLR 22 5.0 Aluminum Front Caster Block (0°)",
+    "adjusts": "caster",
+    "options": "0° aluminum (other degrees in range)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amainhobbies.com/vision-racing-tlr-22-5.0-aluminum-front-caster-block-0-degree-vrc00293/p1490471"
+   }
+  ],
+  "TLR 22 5.0 / 22X-4": [
+   {
+    "part": "TLR 22 5.0 Variable Height Axle (VHA) Rear Hubs",
+    "adjusts": "rear roll centre / axle height",
+    "options": "VHA multi-height hub",
+    "category": "1/10 off-road buggy",
+    "source": "https://www.tlracing.com/shop-by-tlr-vehicle/tlr-22-5.0-dc-elite-parts/"
+   }
+  ],
+  "TLR 22T / 22SCT": [
+   {
+    "part": "TLR 22T / 22SCT Aluminum Caster Blocks (5°)",
+    "adjusts": "caster",
+    "options": "5° (LTT19A01)",
+    "category": "1/10 2WD stadium truck / short course",
+    "source": "https://www.amazon.com/Racing-Aluminum-Castor-LTT19A01-Accessories/dp/B0BYF19FDX"
+   }
+  ],
+  "TLR 22X-4": [
+   {
+    "part": "TLR 22X-4 Adjustable Inner Pivots (front & rear)",
+    "adjusts": "anti-squat / kick-up / toe / pivot width / roll centre",
+    "options": "multi-position pivots; caster inserts; VHA hubs",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://tlracing.com/product/1-10-22x-4-2.0-dc-4wd-buggy-race-kit/TLR-1264.html"
+   }
+  ],
+  "TLR 22X-4 / 22 5.0": [
+   {
+    "part": "TLR 22X-4 Roll-Center Spacers (0.5mm front & rear)",
+    "adjusts": "roll centre",
+    "options": "0.5mm front, 0.5mm rear",
+    "category": "1/10 off-road buggy",
+    "source": "https://www.rc-tworks.com/collections/option-parts/tlr-22x-4"
+   }
+  ],
+  "Yokomo YZ-2 / DTM3": [
+   {
+    "part": "Yokomo YZ-2 Rear Anti-Roll (Sway) Bar Set",
+    "adjusts": "sway bar (rear roll stiffness)",
+    "options": "6 wires 1.5mm–2.0mm",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amazon.com/Yokomo-Z2-41RH2-YZ-2-Updated-Compatible/dp/B07DB6XJJY"
+   }
+  ],
+  "Yokomo YZ-2 DTM3 / CA L3": [
+   {
+    "part": "Yokomo YZ-2 Rear LD Stabilizer / Sway Bar Set",
+    "adjusts": "sway bar (rear roll stiffness)",
+    "options": "set of 6 wire gauges (YOKZ2-412R3A)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amainhobbies.com/yokomo-yz2-dtm-3-ca-l3-rear-ld-stabilizer-sway-bar-set-6-yokz2-412r3a/p995503"
+   }
+  ],
+  "Yokomo YZ-2 / YZ-4 SF2": [
+   {
+    "part": "Yokomo YZ-2 / YZ-4 Roll-Center Spacers (0.5mm)",
+    "adjusts": "roll centre",
+    "options": "0.5mm front & rear",
+    "category": "1/10 off-road buggy",
+    "source": "https://www.rcmart.com/Yokomo"
+   },
+   {
+    "part": "Yokomo YZ-2 / YZ-4 SF2 Graphite Rear Suspension Arms",
+    "adjusts": "arm flex / chassis stiffness",
+    "options": "graphite vs nylon",
+    "category": "1/10 off-road buggy",
+    "source": "https://rcpitlane.com/collections/yokomo-yz-4-sf2-option-parts"
+   }
+  ],
+  "XRAY XB2": [
+   {
+    "part": "XRAY XB2 Caster Blocks (Graphite / Medium / Hard / Aluminum) + caster bushings",
+    "adjusts": "caster / block stiffness",
+    "options": "graphite(kit), medium, hard, aluminum; caster 0° / 2.5° / 5° bushings",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://teamxray.com/xb2/2025/en/"
+   },
+   {
+    "part": "XRAY XB2 Lower Roll-Center Eccentric Inserts (9-position)",
+    "adjusts": "lower & upper roll centre",
+    "options": "9 eccentric positions; up/down + in/out shims",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://teamxray.com/xb2/2025/en/"
+   },
+   {
+    "part": "XRAY XB2 Aluminum Rear Anti-Roll-Bar Roll-Center Holder (7075)",
+    "adjusts": "roll centre / sway-bar mount",
+    "options": "3 positions (XRA323043)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.amainhobbies.com/xray-xb2-aluminum-rear-antiroll-bar-rollcenter-holder-xra323043/p1154060"
+   }
+  ],
+  "XRAY XB4": [
+   {
+    "part": "XRAY XB4 One-Piece Caster Blocks (6° / 9° / 12°)",
+    "adjusts": "caster / front roll centre",
+    "options": "6°, 9° (kit), 12°",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://www.rccaraction.com/xray-xb4-4wd-110-off-road-buggy/"
+   },
+   {
+    "part": "XRAY XB4 I.S.S. Eccentric Bushings (caster/anti-squat/wheelbase/track/roll-centre)",
+    "adjusts": "anti-squat / kick-up / wheelbase / track / roll centre",
+    "options": "eccentric bushing range",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://teamxray.com/x4/2025/en/"
+   },
+   {
+    "part": "XRAY XB4 Spring-Steel Anti-Roll (Sway) Bars",
+    "adjusts": "sway bar (roll stiffness)",
+    "options": "multiple thicknesses, stripe-coded",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://www.liverc.com/news/xray-releases-new-xb4-option-spring-steel-sway-bars/"
+   }
+  ],
+  "Schumacher Cougar LD3 (LD3M/S/D)": [
+   {
+    "part": "Schumacher Cougar LD3 Front 5° Caster Block",
+    "adjusts": "caster",
+    "options": "5° front block",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.racing-cars.com/new-products-1/cougar-ld3s-stock-spec-kit-k210"
+   }
+  ],
+  "Schumacher Cougar LD / KD / KC": [
+   {
+    "part": "Schumacher Cougar KD/KC/LD Front Roll (Sway) Bar Kit",
+    "adjusts": "sway bar (front roll stiffness)",
+    "options": "front roll-bar kit (U7072)",
+    "category": "1/10 2WD off-road buggy",
+    "source": "https://www.racing-cars.com/1-10th-2wd-buggy/cougar-laydown/front-roll-bar-kit-cougar-kd-kc-ld-u7072"
+   }
+  ],
+  "Schumacher CAT L1 / L1R": [
+   {
+    "part": "Schumacher CAT L1 Front Rake / Caster Blocks (8° / 10° / 12°) + Front Pivot Strap Inserts",
+    "adjusts": "caster (rake) / track width / sway bar",
+    "options": "8°,10°,12° rake; front track-width inserts; 1.4/1.8mm front + 1.8mm rear bars",
+    "category": "1/10 4WD off-road buggy",
+    "source": "https://www.racing-cars.com/1-10th-4wd-buggy/cat-l1/"
+   }
+  ],
+  "XRAY X4 (2022-2025 touring)": [
+   {
+    "part": "X4 Split / two-piece adjustable top deck (301072 / 301073, std 1.6mm 301071)",
+    "adjusts": "chassis flex / stiffness",
+    "options": "one-piece vs split; steel top-deck shims customizable front and rear deck",
+    "category": "1/10 electric touring",
+    "source": "https://teamxray.com/x4/2025/en/ ; https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained"
+   },
+   {
+    "part": "X4 3-Dot caster inserts (302312)",
+    "adjusts": "caster",
+    "options": "three-position (3-dot) inserts",
+    "category": "1/10 electric touring",
+    "source": "https://teamxray.com/x4/2025/en/ ; https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained"
+   },
+   {
+    "part": "X4 wire anti-roll bars front/rear (front 302821/302822/302823; rear 303822)",
+    "adjusts": "sway bar / anti-roll bar",
+    "options": "front 1.1 / 1.2 / 1.3mm; rear 1.2mm (and other diameters)",
+    "category": "1/10 electric touring",
+    "source": "https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained ; https://teamxray.com/x4/2025/en/"
+   },
+   {
+    "part": "X4 2-hole steering clamp horn (293406)",
+    "adjusts": "ackermann / steering",
+    "options": "23T / 24T / 25T",
+    "category": "1/10 electric touring",
+    "source": "https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained"
+   },
+   {
+    "part": "X4 low hexes / wheel hexes (305357)",
+    "adjusts": "ride height / track width",
+    "options": "-0.5mm offset",
+    "category": "1/10 electric touring",
+    "source": "https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained"
+   },
+   {
+    "part": "X4 aluminium T-brace (303768)",
+    "adjusts": "chassis flex / stiffness",
+    "options": "single aluminium variant (vs none)",
+    "category": "1/10 electric touring",
+    "source": "https://www.sodialed.com/rc-setup-tips/xray-x4-22-option-parts-explained"
+   }
+  ],
+  "XRAY X4 / X4F (2025 touring)": [
+   {
+    "part": "X4 chassis material options (Graphite / Flex-Aluminium / Solid-Aluminium; X4F flex 2.2mm graphite 301021)",
+    "adjusts": "chassis flex / layout",
+    "options": "graphite / flex-aluminium / solid-aluminium; X4F 2.2mm graphite",
+    "category": "1/10 electric touring",
+    "source": "https://www.amainhobbies.com/xray-x4f-2025-2.2mm-graphite-chassis-xra301021/p1586196 ; https://teamxray.com/x4f/2025/en/"
+   }
+  ],
+  "Awesomatix A800": [
+   {
+    "part": "A800 AM14-RC steering arm",
+    "adjusts": "ackermann / steering",
+    "options": "outside hole (standard) / inside hole (more ackermann)",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2025/05/awesomatix-a800-optional-parts/"
+   },
+   {
+    "part": "A800 AM19-RC upper arm holder",
+    "adjusts": "chassis flex / top-link",
+    "options": "new hole pattern (more flex) vs standard",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2025/05/awesomatix-a800-optional-parts/"
+   }
+  ],
+  "Awesomatix A800 / A800R": [
+   {
+    "part": "A800 carbon roll-center shim set (MAD Wurks 3mm; AT-series high RC shims)",
+    "adjusts": "roll centre",
+    "options": "3mm carbon shims (high roll-centre)",
+    "category": "1/10 electric touring",
+    "source": "https://madwurks.com/products/mad-wurks-carbon-roll-center-shim-set-3mm-schumacher-mi9-xray-x4-4 ; https://www.redrc.net/2025/05/awesomatix-a800-optional-parts/"
+   }
+  ],
+  "Awesomatix A800R": [
+   {
+    "part": "A800 AT143 ARB stiffeners",
+    "adjusts": "sway bar / anti-roll bar",
+    "options": "stiffener add-on (vs none)",
+    "category": "1/10 electric touring",
+    "source": "https://shop.awesomatix.com/index.php?categoryID=622 ; https://www.redrc.net/2025/05/awesomatix-a800-optional-parts/"
+   }
+  ],
+  "Awesomatix A800FX / A800FXR": [
+   {
+    "part": "A800 carbon front top deck",
+    "adjusts": "chassis flex / stiffness",
+    "options": "carbon (vs standard)",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2025/05/awesomatix-a800-optional-parts/"
+   }
+  ],
+  "Infinity IF14-2": [
+   {
+    "part": "IF14-2 front/rear wire sway bars (T060 front / T061 rear)",
+    "adjusts": "sway bar / anti-roll bar",
+    "options": "front T060-1.3 std; rear T061-1.2 std; other diameters optional",
+    "category": "1/10 electric touring",
+    "source": "https://wallacemotorsports.net/if14-spare-option-parts/ ; https://wallacemotorsports.net/blog/if142-option-parts-and-testing/"
+   },
+   {
+    "part": "IF14-2 PRS aluminium C-hub (caster block)",
+    "adjusts": "caster",
+    "options": "PRS -2deg aluminium C-hub",
+    "category": "1/10 electric touring",
+    "source": "https://infinityrccars.com/products/infinity-if14-2-team-edition-1-10-ep-touring-chassis-kit"
+   },
+   {
+    "part": "IF14-2 graphite suspension/steering plates + super-hard arms & steering block",
+    "adjusts": "roll centre / chassis flex / steering",
+    "options": "aluminium plates standard 0 (other heights optional); graphite super-hard arm & steering block",
+    "category": "1/10 electric touring",
+    "source": "https://wallacemotorsports.net/if14-spare-option-parts/ ; https://infinityrccars.com/products/infinity-if14-2-team-edition-1-10-ep-touring-chassis-kit"
+   }
+  ],
+  "Yokomo BD12": [
+   {
+    "part": "BD12 split front/rear upper decks + A.T.F. active top-deck flex",
+    "adjusts": "chassis flex / roll",
+    "options": "split decks; A.T.F. on/off; optional graphite rear upper deck (stiffer)",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2023/10/yokomo-bd12-optional-parts/"
+   },
+   {
+    "part": "BD12 2.4mm graphite front shock-tower stiffener",
+    "adjusts": "chassis flex / stiffness",
+    "options": "2.4mm graphite (vs none)",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2023/10/yokomo-bd12-optional-parts/"
+   },
+   {
+    "part": "BD12 graphite steering block arm L (2.4mm)",
+    "adjusts": "ackermann / steering / bump-steer",
+    "options": "2.4mm graphite, extended tie-rod position",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2023/10/yokomo-bd12-optional-parts/"
+   },
+   {
+    "part": "BD12 2.4mm graphite bumper support",
+    "adjusts": "chassis flex / stiffness",
+    "options": "2.4mm graphite",
+    "category": "1/10 electric touring",
+    "source": "https://www.redrc.net/2023/10/yokomo-bd12-optional-parts/"
+   }
+  ],
+  "Tamiya TRF421": [
+   {
+    "part": "TRF421 one-piece vs two-piece upper deck + 2mm slitted aluminium lower deck (42390)",
+    "adjusts": "chassis flex / layout",
+    "options": "one-piece (stiffer) / two-piece (more flex) upper deck; 2mm aluminium lower deck with slits",
+    "category": "1/10 electric touring",
+    "source": "https://www.tamiyausa.com/shop/option-parts/rc-trf421-aluminum-lower-deck/ ; https://www.thercracer.com/2024/12/42384-tamiya-trf421-build-review-and.html"
+   },
+   {
+    "part": "TRF421 caster blocks (marked 3/4/5deg)",
+    "adjusts": "caster",
+    "options": "3 / 4 (std) / 5 deg",
+    "category": "1/10 electric touring",
+    "source": "https://www.thercracer.com/2024/12/42384-tamiya-trf421-build-review-and.html"
+   },
+   {
+    "part": "TRF421 oil-filled gear-diff set (51745)",
+    "adjusts": "differential",
+    "options": "gear diff filled with selectable oil viscosity",
+    "category": "1/10 electric touring",
+    "source": "https://www.tamiyausa.com/shop/spare-parts/rc-trf421-gear-diff-set/"
+   }
+  ],
+  "XRAY GTX8 (1/8 GT)": [
+   {
+    "part": "GTX8 optional caster blocks + graphite steering plates",
+    "adjusts": "caster (plus roll centre / anti-dive / ackermann via geometry parts)",
+    "options": "various optional caster blocks",
+    "category": "1/8 GT nitro on-road",
+    "source": "https://teamxray.com/gtx8/2023/en/ ; https://www.amainhobbies.com/xray-gtx8-2024-1-8-gt-nitro-onroad-touring-car-kit-xra350505/p1580268"
+   },
+   {
+    "part": "GTX8 aluminium diff-height spacers + adjustable front/rear diffs",
+    "adjusts": "differential / drivetrain height",
+    "options": "diff-height spacers; adjustable front & rear diffs",
+    "category": "1/8 GT nitro on-road",
+    "source": "https://teamxray.com/gtx8/2023/en/"
+   }
+  ],
+  "Mugen MGT7 (1/8 GT)": [
+   {
+    "part": "MGT7 anti-roll bar set + kingpin ball spacers + upper-arm spacers",
+    "adjusts": "sway bar / roll centre / ride height",
+    "options": "ARB wire options; kingpin spacers upper & lower; upper-arm spacers; rebound/downstop",
+    "category": "1/8 GT nitro on-road",
+    "source": "https://www.mugenracing.com/mgt7-1-8-nitro-on-road-gt-car/ ; https://www.manualshelf.com/manual/mugen-seiki/mgt7-1-8-gt-nitro-on-road-touring-car-kit/mgt7-nitro-touring-car-setup-sheet-standard-setup/page-1.html"
+   }
+  ],
+  "Serpent SRX8 GT (1/8 GT)": [
+   {
+    "part": "SRX8 GT caster inserts",
+    "adjusts": "caster",
+    "options": "0 to 10 deg via inserts",
+    "category": "1/8 GT nitro on-road",
+    "source": "http://promo.serpent.com/srx8-gt/ ; https://www.manualslib.com/manual/2919592/Serpent-Srx8-Gt.html"
+   },
+   {
+    "part": "SRX8 GT roll-centre shims",
+    "adjusts": "roll centre",
+    "options": "1mm / 2mm off chassis plate",
+    "category": "1/8 GT nitro on-road",
+    "source": "http://promo.serpent.com/srx8-gt/"
+   },
+   {
+    "part": "SRX8 GT ball-raced wire anti-roll bars + diff-position / anti-squat / toe inserts",
+    "adjusts": "sway bar / anti-squat / rear toe / differential / ride height",
+    "options": "ARB wire diameters; anti-squat 1/1.5/2/2.5/3deg; toe 2/2.5/2.75/3/3.25/3.5/4deg; 4 diff positions",
+    "category": "1/8 GT nitro on-road",
+    "source": "http://promo.serpent.com/srx8-gt/ ; https://www.manualslib.com/manual/2919592/Serpent-Srx8-Gt.html"
+   }
+  ],
+  "Capricorn LAB GT2 (1/8 GT)": [
+   {
+    "part": "LAB GT2 caster-block bushings + roll-centre / ARB spares",
+    "adjusts": "caster / roll centre / sway bar",
+    "options": "caster-block bushing options; ARB and RC spares per catalog",
+    "category": "1/8 GT nitro on-road",
+    "source": "https://capricornrc.com/en/564-spares-lab-gt2 ; https://www.rc-tworks.com/collections/option-parts/"
+   }
+  ],
+  "XRAY NT1 (1/10 nitro on-road)": [
+   {
+    "part": "NT1 wire anti-roll bars front/rear (height + diameter adjustable)",
+    "adjusts": "sway bar / anti-roll bar",
+    "options": "multiple wire diameters; height adjustment via bearing positions",
+    "category": "1/10 nitro on-road",
+    "source": "https://teamxray.com/nt1/2023/en/ ; https://www.teamxray.com/teamxray/news/newsdesc.php?news_id=1124"
+   },
+   {
+    "part": "NT1 front upper-arm holder + rear roll-centre bridge",
+    "adjusts": "roll centre",
+    "options": "front 9 positions; rear 6 positions",
+    "category": "1/10 nitro on-road",
+    "source": "https://teamxray.com/nt1/2023/en/"
+   },
+   {
+    "part": "NT1 multi-flex pack (upper-bulkhead brace, rear graphite stiffener, multi-flex battery cover, flex radio-plate brace)",
+    "adjusts": "chassis flex / stiffness",
+    "options": "brace installed/removed; stiffener removable; intermediate link optional",
+    "category": "1/10 nitro on-road",
+    "source": "https://teamxray.com/nt1/2023/en/ ; https://www.teamxray.com/teamxray/news/newsdesc.php?news_id=1124"
+   }
+  ],
+  "Kyosho V-One R4 Evo.3 (1/10 nitro on-road)": [
+   {
+    "part": "V-One R4 Evo.3 rod-type front anti-roll bar set + revised front bulkhead",
+    "adjusts": "sway bar / anti-roll bar (+ chassis flex)",
+    "options": "rod-type front ARB, multiple wire diameters",
+    "category": "1/10 nitro on-road",
+    "source": "https://rc.kyosho.com/en/33204.html ; https://www.amainhobbies.com/kyosho-vone-r4-evo.3-4wd-1-10-nitro-onroad-touring-car-kit-kyo33217/p1559397"
+   }
+  ],
+  "Mugen MTX7 (1/10 nitro on-road)": [
+   {
+    "part": "MTX7 adjustable front caster + aluminium front uprights / servo-saver",
+    "adjusts": "caster (+ steering / sway bar)",
+    "options": "caster 6.4deg to 13.8deg; front ARB",
+    "category": "1/10 nitro on-road",
+    "source": "https://www.mugenracing.com/t2005-mtx7-1-10-nitro-touring-car-kit/ ; http://www.mugenseiki.com/mtx7_ope.htm"
+   }
+  ]
+ }
+}
