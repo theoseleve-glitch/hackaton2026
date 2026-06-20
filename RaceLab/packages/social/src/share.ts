@@ -97,6 +97,15 @@ function isPayloadShape(p: SharedPayload): boolean {
     typeof p.setup.template_id === "string" &&
     typeof p.setup.values === "object" &&
     p.setup.values !== null &&
+    // value-level validation: this is an account-FREE untrusted import (deep link / file),
+    // so enforce the declared Record<string, string|number> contract rather than trusting
+    // `typeof === object`. Reject arbitrary nested objects/arrays, non-finite numbers, and
+    // oversized strings/maps (storage-bloat / mis-render guard).
+    Object.keys(p.setup.values).length <= 256 &&
+    Object.values(p.setup.values as Record<string, unknown>).every(
+      (v) => (typeof v === "string" && v.length <= 200) || (typeof v === "number" && Number.isFinite(v)),
+    ) &&
+    p.setup.name.length <= 200 &&
     typeof p.car === "object" &&
     p.car !== null &&
     typeof p.car.brand === "string" &&
