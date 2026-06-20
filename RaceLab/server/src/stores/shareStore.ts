@@ -185,7 +185,7 @@ export const SHARE_SCHEMA_SQL = `
 -- owner_user_id is internal lineage and is NEVER exposed by the auth-free GET.
 CREATE TABLE IF NOT EXISTS share_snapshots (
   token         TEXT PRIMARY KEY,                          -- unguessable id ("s_...")
-  owner_user_id TEXT NOT NULL,                             -- publisher (internal; never leaked publicly)
+  owner_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, -- publisher (internal; never leaked publicly); FK matches db/schema.sql so a user wipe cascades
   kind          TEXT NOT NULL CHECK (kind IN ('track', 'setup')),
   payload       JSONB NOT NULL,                            -- public snapshot fields only
   artifacts     JSONB NOT NULL DEFAULT '{}'::jsonb,        -- { png_url?, pdf_url? } (D12 fill-never-redraw)
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS share_snapshots (
 -- immutable, so the imported copy lives in the importer's own garage/outbox.
 CREATE TABLE IF NOT EXISTS share_imports (
   token      TEXT NOT NULL,
-  user_id    TEXT NOT NULL,
+  user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, -- FK matches db/schema.sql
   created_at TIMESTAMPTZ NOT NULL,
   PRIMARY KEY (token, user_id)
 );

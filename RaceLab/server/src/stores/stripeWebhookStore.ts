@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS processed_stripe_events (
 );
 
 CREATE TABLE IF NOT EXISTS stripe_subscriptions (
-  user_id            TEXT PRIMARY KEY,                    -- Clerk user id ("user_...")
+  user_id            TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, -- Clerk user id ("user_..."); FK matches db/schema.sql
   status             TEXT NOT NULL CHECK (status IN ('active', 'canceled', 'expired')),
   current_period_end TIMESTAMPTZ,                         -- paid-through; null = no expiry asserted
   event_created      BIGINT NOT NULL,                     -- unix s of last applied event (out-of-order watermark)
