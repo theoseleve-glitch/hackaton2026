@@ -147,7 +147,11 @@ console.log("— routing + auth —");
   check("router: unknown path -> 404", r404.status === 404 && r404.json.error === "not_found");
   const r405 = await handle(req("POST", "/api/backup/restore", { token: "tok-A" }));
   check("router: wrong method -> 405 with allow list", r405.status === 405 && Array.isArray(r405.json.allow) && (r405.json.allow as string[]).includes("GET"));
-  const rTrail = await handle(req("DELETE", "/api/account/", { token: "tok-A" }));
+  // isolated db: a real account-deletion tombstones user_A, and the shared `db` is reused
+  // by the backup tests below — which now (correctly) refuse a tombstoned user's push.
+  const dbTrail = new FakeDb();
+  const hTrail = makeHandler(app({ db: dbTrail, verifier, now: () => NOW }));
+  const rTrail = await hTrail(req("DELETE", "/api/account/", { token: "tok-A" }));
   check("router: trailing slash normalized", rTrail.status === 200);
 
   for (const [method, path] of [
@@ -235,6 +239,15 @@ console.log("\n— trial first-seen —");
   const hRace = makeHandler(app({ db: dbRace, verifier, now: () => NOW }));
   const tRace = await hRace(req("POST", "/api/trial/start", { token: "tok-A" }));
   check("trial: TOCTOU race (guard blocks the write) -> 409, no resurrection", tRace.status === 409 && tRace.json.error === "trial_unavailable_deleted" && !dbRace.users.has("user_A"));
+
+  // ── backup/push refuses a tombstoned (deleted) account — no GDPR resurrection (M2b P1) ──
+  const dbBk = new FakeDb();
+  const hBk = makeHandler(app({ db: dbBk, verifier, now: () => NOW }));
+  const bk1 = await hBk(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [entry("ob-1")] } }));
+  check("backup: push works before deletion", bk1.status === 200);
+  await hBk(req("DELETE", "/api/account", { token: "tok-A" }));
+  const bk2 = await hBk(req("POST", "/api/backup/push", { token: "tok-A", body: { entries: [entry("ob-2")] } }));
+  check("backup: push AFTER account deletion -> 409 account_deleted (no resurrection)", bk2.status === 409 && bk2.json.error === "account_deleted" && !dbBk.users.has("user_A"));
 }
 
 // ═══ subscription status ═════════════════════════════════════════════════════

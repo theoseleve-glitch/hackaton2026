@@ -75,6 +75,14 @@ export async function backupPush(ctx: ServerCtx, req: HttpRequest): Promise<Http
     });
   }
 
+  // GDPR Art.17: never resurrect an erased account. A deleted user still holding a valid
+  // Clerk bearer (Clerk deletion is async/best-effort, and skipped entirely when
+  // CLERK_SECRET_KEY is unset) could otherwise re-create the users row via a background
+  // backup-sync retry. Refuse before any users-row materialization (mirrors trialStart).
+  if (await ctx.db.isTombstoned(auth.user_id)) {
+    return { status: 409, json: { error: "account_deleted", server_time } };
+  }
+
   // ensureUser BEFORE the empty-batch short-circuit (audit MED/LOW): an empty push
   // must still materialize the user row. Otherwise a client whose first contact is
   // an empty batch returns ok, the row never gets created, and the NEXT non-empty

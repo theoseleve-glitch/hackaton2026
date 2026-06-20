@@ -107,7 +107,12 @@ export function makeSqlShareStore(query: QueryFn): ShareStore {
       // user wipe cascades their published shares). Materialize the user row
       // first (idempotent) — a publish could be a user's first server write.
       await query(
-        `INSERT INTO users (id, created_at) VALUES ($1, $2::timestamptz)
+        // GDPR Art.17: WHERE NOT EXISTS (deletions) so a tombstoned id is NEVER
+        // resurrected by a publish/import retry (the downstream FK then protects
+        // share_snapshots/share_imports). Mirrors recordTrialStart's guarded insert.
+        `INSERT INTO users (id, created_at)
+         SELECT $1, $2::timestamptz
+         WHERE NOT EXISTS (SELECT 1 FROM deletions WHERE user_id = $1)
          ON CONFLICT (id) DO NOTHING`,
         [ownerUserId, atIso],
       );
@@ -149,7 +154,12 @@ export function makeSqlShareStore(query: QueryFn): ShareStore {
       // FK safety: share_imports.user_id now REFERENCES users(id). Ensure the
       // importer's row exists first (idempotent) so the import never FK-fails.
       await query(
-        `INSERT INTO users (id, created_at) VALUES ($1, $2::timestamptz)
+        // GDPR Art.17: WHERE NOT EXISTS (deletions) so a tombstoned id is NEVER
+        // resurrected by a publish/import retry (the downstream FK then protects
+        // share_snapshots/share_imports). Mirrors recordTrialStart's guarded insert.
+        `INSERT INTO users (id, created_at)
+         SELECT $1, $2::timestamptz
+         WHERE NOT EXISTS (SELECT 1 FROM deletions WHERE user_id = $1)
          ON CONFLICT (id) DO NOTHING`,
         [intoUserId, atIso],
       );
