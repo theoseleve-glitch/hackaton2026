@@ -19,6 +19,15 @@ export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
   // 0. Unknown chassis → refuse in-band (never throw on the data path), matching
   //    proposePlan/planRaceDay. The registry carries pending_pdf chassis, so the
   //    app can legitimately ask about one not yet extracted.
+  // 1. Engine-scope refusal (D13) — genuinely before anything else. It needs only the
+  //    question + taxonomy, NOT a resolved template, so a D13 engine/nitro question about a
+  //    pending/unknown chassis still gets the canned engine refusal rather than the generic
+  //    'no verified setup sheet' one (which would mis-describe why we refused).
+  const refusal = engineScopeViolation(bundle, data.taxonomy);
+  if (refusal) {
+    return { kind: "refusal", source: "offline_deterministic", message: refusal, conditions_echo: echo };
+  }
+
   const template = resolveTemplate(data, bundle.chassis_template_id);
   if (!template) {
     return {
@@ -27,12 +36,6 @@ export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
       message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
       conditions_echo: echo,
     };
-  }
-
-  // 1. Engine-scope refusal (D13) — before anything else
-  const refusal = engineScopeViolation(bundle, data.taxonomy);
-  if (refusal) {
-    return { kind: "refusal", source: "offline_deterministic", message: refusal, conditions_echo: echo };
   }
 
   // 2. Deterministic retrieval (retrieve() applies the race-day bar to the FULL pool

@@ -48,21 +48,9 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
   // 0. Unknown chassis → refuse in-band (never throw on the data path). The
   //    registry carries pending_pdf chassis, so the app can ask about one not
   //    yet extracted; that must be a clean refusal, not a crash at the border.
-  const template = resolveTemplate(data, bundle.chassis_template_id);
-  if (!template) {
-    return {
-      kind: "refusal",
-      conditions_echo: echo,
-      diagnosis,
-      do_not_touch: [],
-      driving_tips: drivingTips(bundle),
-      confidence: "none",
-      rationale: `Chassis template '${bundle.chassis_template_id}' is not in the KB.`,
-      message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
-    };
-  }
-
-  // 1. Engine-scope refusal (D13) — before anything else
+  // 1. Engine-scope refusal (D13) — genuinely before the template check (needs only the
+  //    question + taxonomy), so a D13 engine/nitro question about a pending/unknown chassis
+  //    gets the canned engine refusal, not the generic 'not in the KB' one.
   const refusal = engineScopeViolation(bundle, data.taxonomy);
   if (refusal) {
     return {
@@ -74,6 +62,20 @@ export function buildReport(bundle: ContextBundle, data: KBData): EngineerReport
       confidence: "none",
       rationale: "Engine tuning is outside the verified knowledge base (D13).",
       message: refusal,
+    };
+  }
+
+  const template = resolveTemplate(data, bundle.chassis_template_id);
+  if (!template) {
+    return {
+      kind: "refusal",
+      conditions_echo: echo,
+      diagnosis,
+      do_not_touch: [],
+      driving_tips: drivingTips(bundle),
+      confidence: "none",
+      rationale: `Chassis template '${bundle.chassis_template_id}' is not in the KB.`,
+      message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
     };
   }
 

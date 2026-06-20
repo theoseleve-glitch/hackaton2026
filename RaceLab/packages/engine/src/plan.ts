@@ -53,6 +53,14 @@ export function proposePlan(
   const echo = conditionsEcho(bundle);
   const source = "offline_deterministic" as const;
 
+  // 1. Engine-scope refusal (D13) — genuinely before the template check (needs only the
+  //    question + taxonomy), so a D13 engine/nitro question about a pending/unknown chassis
+  //    gets the canned engine refusal, not the generic 'not in the KB' one.
+  const refusal = engineScopeViolation(bundle, data.taxonomy);
+  if (refusal) {
+    return { kind: "refusal", source, changes: [], message: refusal, conditions_echo: echo };
+  }
+
   // 0. Unknown chassis template is an in-band refusal — never a throw across
   //    the package boundary.
   const template = resolveTemplate(data, bundle.chassis_template_id);
@@ -64,12 +72,6 @@ export function proposePlan(
       message: `Chassis template '${bundle.chassis_template_id}' is not in the KB — no grounded plan.`,
       conditions_echo: echo,
     };
-  }
-
-  // 1. Engine-scope refusal (D13) — before anything else
-  const refusal = engineScopeViolation(bundle, data.taxonomy);
-  if (refusal) {
-    return { kind: "refusal", source, changes: [], message: refusal, conditions_echo: echo };
   }
 
   // 2. Deterministic retrieval (history re-ranking + the race-day bar both happen inside
