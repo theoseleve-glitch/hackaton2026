@@ -53,6 +53,11 @@ export function carSubtitle(car: CarEntity): string {
 }
 
 function nextId(now: string): string {
-  const rand = Math.random().toString(36).slice(2, 10);
-  return `car-${Date.parse(now).toString(36)}-${rand}`;
+  // mirror the sessions discipline: throw on an unparseable clock (else Date.parse -> NaN
+  // mints colliding `car-NaN-…` ids), and build a guaranteed-8-char suffix.
+  const ts = Date.parse(now);
+  if (Number.isNaN(ts)) throw new Error(`nextId: invalid ISO timestamp '${now}'`);
+  let rand = "";
+  while (rand.length < 8) rand += Math.random().toString(36).slice(2);
+  return `car-${ts.toString(36)}-${rand.slice(0, 8)}`;
 }

@@ -70,6 +70,12 @@ export function upsertRecord(state: TracksState, trackId: string, record: LapRec
 }
 
 function nextId(now: string): string {
-  const rand = Math.random().toString(36).slice(2, 10);
-  return `track-${Date.parse(now).toString(36)}-${rand}`;
+  // mirror the sessions discipline: throw on an unparseable clock (else Date.parse -> NaN
+  // mints colliding `track-NaN-…` ids), and build a guaranteed-8-char suffix (a bare
+  // Math.random().toString(36).slice(2,10) can terminate early and collapse the space).
+  const ts = Date.parse(now);
+  if (Number.isNaN(ts)) throw new Error(`nextId: invalid ISO timestamp '${now}'`);
+  let rand = "";
+  while (rand.length < 8) rand += Math.random().toString(36).slice(2);
+  return `track-${ts.toString(36)}-${rand.slice(0, 8)}`;
 }
