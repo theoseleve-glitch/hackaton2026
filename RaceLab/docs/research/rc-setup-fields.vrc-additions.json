@@ -1,0 +1,119 @@
+{
+  "$comment": "D68 (2026-06-20): setup-field taxonomy additions harvested from the VRC PRO simulator manual (vrcworld V2.1 'Components properties and set-up options' table). These are REAL RC setup parameters VRC exposes that RaceLab's 176-field rc-setup-fields.json lacked. PROVENANCE = VRC manual TAXONOMY only (parameter name + unit + range). D18/D53: VRC is a sim model, NOT a citable advice source — these fields widen the SETUP-SHEET vocabulary/option bounds; they MUST NOT be used to author cited tuning rules. Ranges are VRC-documented bounds to seed template options, to be confirmed against real manufacturer sheets before any per-model use. sim_only fields (wheel rotational inertia, brushless rotor diameter) were deliberately NOT adopted (sim-physics constructs, not real setup-sheet fields) — see VRC_HARVEST.md.",
+  "additions": [
+    {
+      "id": "steering_angle",
+      "label": "Steering angle (total throw)",
+      "type": "number",
+      "unit": "deg",
+      "min": 22,
+      "max": 34,
+      "step": 1,
+      "applies_to": ["onroad", "offroad"],
+      "note": "Total steering throw. We had ackermann/bump_steer/toe but no field for absolute steering angle. VRC bounds it 22-34deg by class.",
+      "provenance": "VRC manual V2.1 properties table"
+    },
+    {
+      "id": "sway_bar_disconnect_front",
+      "label": "Front sway bar disconnect",
+      "type": "boolean",
+      "applies_to": ["offroad", "1_8_gt", "1_10_touring_electric"],
+      "note": "Per-end ARB disconnect (engaged/disconnected) — distinct from sway_bar_front stiffness.",
+      "provenance": "VRC manual V2.1 properties table"
+    },
+    {
+      "id": "sway_bar_disconnect_rear",
+      "label": "Rear sway bar disconnect",
+      "type": "boolean",
+      "applies_to": ["offroad", "1_8_gt", "1_10_touring_electric"],
+      "note": "Per-end ARB disconnect — distinct from sway_bar_rear stiffness.",
+      "provenance": "VRC manual V2.1 properties table"
+    },
+    {
+      "id": "head_shim",
+      "label": "Cylinder head shim (squish/compression)",
+      "type": "number",
+      "unit": "mm",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.05,
+      "applies_to": ["nitro"],
+      "note": "Nitro head-shim thickness = combustion squish/compression. We had needle_low/high and diff_height_shim (unrelated) but no head-shim/compression field.",
+      "provenance": "VRC manual V2.1 (nitro engine dialog, observed 0.1mm)"
+    },
+    {
+      "id": "idle_setting",
+      "label": "Idle setting",
+      "type": "number",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "applies_to": ["nitro"],
+      "note": "Dedicated idle/throttle-stop adjustment, separate from low/high-speed needles.",
+      "provenance": "VRC manual V2.1 (nitro engine dialog, observed 25%)"
+    },
+    {
+      "id": "esc_launch_pct",
+      "label": "ESC launch control (magnitude)",
+      "type": "number",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "applies_to": ["brushless"],
+      "note": "Launch-control magnitude as % of max throttle. esc_boost/esc_turbo/esc_profile existed; launch percent did not.",
+      "provenance": "VRC manual V2.1 (ESC dialog)"
+    },
+    {
+      "id": "esc_launch_duration_ms",
+      "label": "ESC launch duration",
+      "type": "number",
+      "unit": "ms",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "applies_to": ["brushless"],
+      "note": "Time-based launch ramp. No prior time dimension on the power profile.",
+      "provenance": "VRC manual V2.1 (ESC dialog, observed 150ms)"
+    },
+    {
+      "id": "esc_initial_brake_duration_ms",
+      "label": "ESC initial-brake duration",
+      "type": "number",
+      "unit": "ms",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "applies_to": ["brushless"],
+      "note": "Time dimension on the initial brake pulse. brake_setup had no duration axis.",
+      "provenance": "VRC manual V2.1 (ESC dialog, observed 100ms)"
+    },
+    {
+      "id": "esc_reverse",
+      "label": "ESC reverse enable",
+      "type": "boolean",
+      "applies_to": ["brushless"],
+      "note": "Reverse on/off (class-legal-dependent).",
+      "provenance": "VRC manual V2.1 (ESC dialog)"
+    },
+    {
+      "id": "drive_pulley_size",
+      "label": "Centre drive pulley (belt ratio)",
+      "type": "enum",
+      "options": ["pulley_4", "pulley_5"],
+      "applies_to": ["1_10_touring_electric", "1_10_nitro_onroad"],
+      "note": "Belt-drive centre ratio via selectable side-pulley size — distinct from belt_tension/center_drive.",
+      "provenance": "VRC manual V2.1 (drivetrain, 1/10 on-road)"
+    },
+    {
+      "id": "tire_profile",
+      "label": "Tyre profile / crown",
+      "type": "enum",
+      "options": ["flat", "round"],
+      "applies_to": ["onroad", "offroad", "oval"],
+      "note": "Tyre cross-section profile/crown as a setup axis (flat for smooth/on-road/oval, round for bumpy/off-road). We had tread/cut/type but no flat-vs-round profile.",
+      "provenance": "VRC manual V2.1 (tyre dialog)"
+    }
+  ]
+}
