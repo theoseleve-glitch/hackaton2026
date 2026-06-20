@@ -27,7 +27,9 @@ tested+pushed, no new models tonight unless flagged).
 ## LOG (what got done each iteration)
 
 - **2026-06-20 — Night session opened.** Scaffold created; M1 launched.
-- **M1 DONE** — competitive-racer audit: 41 suggestions logged below (33 in-zone, 5 theo-app, 3 human-gated). Top finding: 1/8 buggy/truggy tyre rules are dark (the #1 off-road lever). Building that fix now; launching M2 (failure re-audit).
+- **M1 DONE** — competitive-racer audit: 41 suggestions logged below (33 in-zone, 5 theo-app, 3 human-gated).
+- **✅ FIX shipped (commit 3337364)** — authored 1/8 buggy+truggy **tyre rules** (the #1 off-road lever, was dark): 4 grounded rules mirroring the validated 1/10 family, 413→417 live rules, all validate-live gates pass, new eval scenario proves `tire_compound` now fires for a 1/8 buggy. **Resolves M1 suggestion #1** — the rest of the tyre cluster (on-road additive/insert, proactive race-day tyre read, tyre-first answer surface) stays in the suggestions list as it needs product/KB calls.
+- **M2 launched** — whole-project failure re-audit.
 
 ---
 
