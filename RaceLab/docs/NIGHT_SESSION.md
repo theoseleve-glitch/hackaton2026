@@ -16,7 +16,7 @@ tested+pushed, no new models tonight unless flagged).
   advisor against what a top driver actually needs (symptom→fix coverage, adjustment priority, race-day
   workflow, realism, missing levers). Produces suggestions + eval gaps.
 - [x] **M2 — Whole-project failure re-audit** — 17 findings, 7 fixed (2 P1 + 5 P2/P3), 4 in-zone queued, server+kb rate-limited.
-- [ ] **M2b — Re-run rate-limited server + kb audits** (the gap from M2 throttling).
+- [x] **M2b — Re-run rate-limited server + kb audits** (the gap from M2 throttling).
 - [ ] **M3 — Wire the harvested data into flagship templates** — fold D66 catalog / D68 ranges / D69
   option-parts into the flagship category templates' option lists (D65 validator guards them).
 - [ ] **M4 — F1 + 1/12 pan rule packs** (the fast grounded coverage wins; templates+models already exist).
@@ -39,6 +39,13 @@ tested+pushed, no new models tonight unless flagged).
   - **P2/P3 docs** — de-lied stale counts (413→417, eval→28), CONTRACTS kit_default, AUDIT tracker #18-21.
   - **Remaining in-zone (queued, next iteration):** #9 historyFromTuples sort-before-slice · #10 D13 refusal ordered before resolveTemplate · #13 shared nextId NaN-guard · #4 bridge surface-id family mapping.
 - **M2b launched** — re-run the rate-limited server + kb subsystem audits for full coverage.
+- **✅ M2b — 4 in-zone fixes shipped** (10 confirmed findings):
+  - **P1** `fix(server)` — GDPR tombstone on **backup/push + share/import** (the two resurrection paths the trial/stripe fixes left open); deleted account can't be re-created by its own sync/fork retry. regression added.
+  - **P1** `fix(server)` — entitlement clamps token exp to the paid period **only when status==active** (a trial user with a stale canceled sub no longer gets an already-expired token). regression added.
+  - **P2** `fix(server)` — rate-limit `share/import` (sibling `publish` was capped, it wasn't).
+  - **P3** `fix(kb)` — tidied rule 904 (redundant `astroturf` in both forbidden_on + reduced_on).
+  - **Remaining (logged for review / next iteration):** #3 alert-metrics emitted by nothing (P2) · #5 39 ruleless models always-refuse (→ suggestion, same as M1 #10) · #6 store-SQL FK-cascade divergence (P3) · #7 ruleless-refusal test (P3) · #8 tyre-rule [section TBD] cite (→ William's book pass) · #10 registry load permissive vs kb gate (P3).
+- **⚠ SELF-CORRECTION (logged honestly):** the MP11 tyre-alias commit (98726e0) was pushed after running only `eval`, not the **full** engine suite — it broke `test-raceday` (the alias let the 1/8 tyre rules fire in the weather race-day planner, where the per-tag cap let a tyre rule crowd out a shock-oil weather adjustment). Caught + fixed (`cd6262d`): tyre settings are now excluded from the weather planner (they stay on the symptom path); HEAD green. **Process note: always run the full package suite, not just eval, before committing engine/kb.**
 
 ---
 
