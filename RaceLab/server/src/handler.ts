@@ -30,7 +30,7 @@ import { cronWorkers } from "./handlers/cron";
 import { health } from "./handlers/health";
 import { logLine, errFields } from "./log";
 import { rateLimit, compositeKey } from "./rateLimit";
-import { emitHttp5xx } from "./metrics";
+import { emitHttp5xx, emitAuthFail, emitStripeSignatureFail, emitStripeWebhookFail, emitBackupConflict } from "./metrics";
 
 type HandlerFn = (ctx: AppCtx, req: HttpRequest) => Promise<HttpResponse>;
 
@@ -187,7 +187,20 @@ export function makeHandler(ctx: AppCtx): (req: HttpRequest) => Promise<HttpResp
     }
 
     try {
-      return stamp(await fn(ctx, req));
+      const res = await fn(ctx, req);
+      // Central alert-catalog emission — the security alerts (auth-fail, forged Stripe
+      // signature, webhook failure, backup conflict) were DEFINED + tested but emitted by
+      // NOTHING. Keying off the handler's own response makes them actually fire, without
+      // threading a metrics sink into every handler.
+      if (ctx.metrics !== undefined) {
+        const m = ctx.metrics;
+        if (res.status === 401) emitAuthFail(m, path);
+        else if (path === "/api/webhooks/stripe") {
+          if (res.status === 400 && res.json.error === "invalid_signature") emitStripeSignatureFail(m);
+          else if (res.status >= 500) emitStripeWebhookFail(m);
+        } else if (path === "/api/backup/blob" && res.status === 409) emitBackupConflict(m);
+      }
+      return stamp(res);
     } catch (e) {
       // The client gets an opaque reason (no stack leak); the server gets the
       // only diagnostic trail. Never log bodies/tokens/PII (see log.ts).

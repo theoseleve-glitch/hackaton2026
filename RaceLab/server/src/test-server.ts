@@ -114,7 +114,7 @@ const ctx: ServerCtx = { db, verifier, now: () => nowIso };
 // test only asserts registration (status !== 404/405). Each module has its OWN
 // exhaustive suite (test-<module>.ts) with real fakes. healthz gets a working
 // ping+seams so the ops route can be asserted for real.
-const app = (base: ServerCtx): AppCtx =>
+const app = (base: ServerCtx & { metrics?: { increment: (name: string, tags?: Record<string, string | number>) => void } }): AppCtx =>
   ({ ...base, healthPing: async () => true, healthSeams: { stripe: false, signing: false, blob: false, render: false } } as unknown as AppCtx);
 const handle = makeHandler(app(ctx));
 
@@ -170,6 +170,17 @@ console.log("— routing + auth —");
   check("auth: throwing verifier -> 401 (not 500)", throwTok.status === 401);
   const noBearer = await handle({ ...req("GET", "/api/subscription/status"), headers: { authorization: "Basic abc" } });
   check("auth: non-Bearer scheme -> 401", noBearer.status === 401);
+
+  // alert-catalog metrics actually FIRE now (were defined+tested but emitted by NOTHING) (M2b #3)
+  {
+    const events: string[] = [];
+    const capMetrics = { increment: (name: string) => events.push(name) };
+    const hMet = makeHandler(app({ db: new FakeDb(), verifier, now: () => NOW, metrics: capMetrics }));
+    await hMet(req("GET", "/api/subscription/status")); // no token -> 401
+    check("alerts: a 401 emits the auth_fail catalog metric (central router emission)", events.includes("auth_fail"));
+    // (the stripe-signature / webhook-500 / backup-409 emissions ride the same central
+    //  response-status switch; the 400/500 webhook paths are covered by test-stripeWebhook.)
+  }
 
   const throwingDb = new FakeDb();
   throwingDb.getSubscription = async () => {
