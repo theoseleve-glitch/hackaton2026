@@ -190,6 +190,10 @@ export function historyFromTuples(
   if (filter?.car_id !== undefined) {
     rows = rows.filter((t) => t.car_id === filter.car_id);
   }
+  // Sort chronologically BEFORE taking the tail — "keep the most recent N" must not depend
+  // on caller-supplied ordering (mirrors raceday.ts's `at` comparator), and the returned
+  // history is then deterministically chronological.
+  rows = [...rows].sort((a, b) => (a.at < b.at ? -1 : a.at > b.at ? 1 : 0));
   if (filter?.limit !== undefined && filter.limit >= 0 && rows.length > filter.limit) {
     rows = rows.slice(rows.length - filter.limit);
   }
