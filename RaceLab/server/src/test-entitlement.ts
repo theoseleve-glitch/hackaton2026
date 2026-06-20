@@ -428,13 +428,26 @@ console.log("\n— exp cap (over-grant) —");
   const cNone = decode(rNone.json.token as string);
   check("cap: none (no cpe) -> exp == now + TTL (unchanged)", cNone.exp === (cNone.iat as number) + TTL);
 
-  // cap also bites on a non-active row whose cpe is sooner than the TTL
-  // (e.g. canceled but a near-future period_end is still on the row) — the cap is
-  // status-independent so a near cpe can never be over-granted via any path.
+  // A non-active row no longer caps exp to its cpe — the clamp is for the PAID period
+  // only (status active). For canceled/expired/none the full TTL window is correct
+  // (plan is null anyway, so there is no over-grant risk to cap against).
+  store.trials.clear();
   store.subs.set("user_A", { status: "canceled", current_period_end: soon });
   const rCancelSoon = await entitlement(ctx, req({ token: "tok-A" }));
   const cCancelSoon = decode(rCancelSoon.json.token as string);
-  check("cap: canceled+near cpe still caps exp to cpe_unix", cCancelSoon.exp === cpeUnixSoon);
+  check("cap: canceled+near cpe -> exp == TTL window (clamp is paid-period only)", cCancelSoon.exp === (cCancelSoon.iat as number) + TTL);
+
+  // REGRESSION (night M2b P1): a LIVE trial + a stale canceled row carrying a PAST cpe
+  // must NOT mint an already-expired token. Before the fix exp clamped to the past cpe,
+  // the offline verifier rejected it, and the valid trial grant collapsed.
+  store.trials.set("user_A", day(-3));
+  store.subs.set("user_A", { status: "canceled", current_period_end: day(-1) });
+  const rTrialPast = await entitlement(ctx, req({ token: "tok-A" }));
+  const cTrialPast = decode(rTrialPast.json.token as string);
+  check(
+    "entitlement: trial + stale past-cpe -> status trial AND exp == iat+TTL (not expired)",
+    cTrialPast.status === "trial" && cTrialPast.exp === (cTrialPast.iat as number) + TTL,
+  );
 }
 
 // ═══ POLISH #2: malformed current_period_end -> loud 500 (not silent expire) ══

@@ -117,7 +117,13 @@ export async function entitlement(ctx: EntitlementCtx, req: HttpRequest): Promis
   // When cpe is absent (lifetime / no expiry asserted) or far out, exp is the
   // full TOKEN_TTL_S window. (cpeMs is already guaranteed non-NaN above.)
   const ttlExp = nowUnix + TOKEN_TTL_S;
-  const exp = cpeMs !== null ? Math.min(ttlExp, Math.floor(cpeMs / 1000)) : ttlExp;
+  // Clamp exp to the paid period ONLY when the grant IS that paid period (status active).
+  // A trial/expired/none user can carry a stale subscription row with a PAST
+  // current_period_end (e.g. subscribe → cancel → still in trial); clamping then would
+  // mint an already-expired token that the offline verifier rejects, collapsing a valid
+  // trial grant. For non-active statuses the TTL window is the correct bound.
+  const exp =
+    status === "active" && cpeMs !== null ? Math.min(ttlExp, Math.floor(cpeMs / 1000)) : ttlExp;
   const claims: Record<string, unknown> = {
     sub: user_id,
     status,
