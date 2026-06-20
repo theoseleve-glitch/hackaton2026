@@ -141,6 +141,11 @@ check("error: autonomy_s <= 0 throws", throws(() => computePitPlan({ ...enduro, 
 check("error: avg_lap_s <= 0 throws", throws(() => computePitPlan({ ...enduro, avg_lap_s: 0 })));
 check("error: race_length_s <= 0 throws", throws(() => computePitPlan({ ...enduro, race_length_s: 0 })));
 check("error: pit_loss_s < 0 throws", throws(() => computePitPlan({ ...enduro, pit_loss_s: -1 })));
+// non-finite must THROW, never hang: Infinity passed the old `x > 0` guard and looped buildPlan forever
+check("error: race_length_s = Infinity throws (no infinite loop)", throws(() => computePitPlan({ ...enduro, race_length_s: Infinity })));
+check("error: avg_lap_s = NaN throws", throws(() => computePitPlan({ ...enduro, avg_lap_s: NaN })));
+check("error: autonomy_s = Infinity throws", throws(() => computePitPlan({ ...enduro, autonomy_s: Infinity })));
+check("error: pit_loss_s = Infinity throws", throws(() => computePitPlan({ ...enduro, pit_loss_s: Infinity })));
 check("error: margin eating the whole tank throws (stint_max_s <= 0)", throws(() => computePitPlan({ ...enduro, margin_s: 420 })));
 check("error: the throw names stint_max_s", (() => {
   try {

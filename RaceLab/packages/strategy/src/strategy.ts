@@ -188,18 +188,22 @@ function mmss(s: number): string {
 }
 
 function validate(inputs: StrategyInputs): void {
-  if (!(inputs.race_length_s > 0)) {
-    throw new Error(`race_length_s must be > 0 (got ${inputs.race_length_s}).`);
+  // Number.isFinite guards: a bare `x > 0` PASSES Infinity, and the lap-count loop in
+  // buildPlan (`while (clock(laps) < race_length_s) laps++`) never terminates against
+  // an infinite race length — a hard hang of the single JS thread (RN UI freeze). Reject
+  // non-finite at the boundary instead of looping.
+  if (!(Number.isFinite(inputs.race_length_s) && inputs.race_length_s > 0)) {
+    throw new Error(`race_length_s must be a finite > 0 (got ${inputs.race_length_s}).`);
   }
-  if (!(inputs.avg_lap_s > 0)) {
-    throw new Error(`avg_lap_s must be > 0 (got ${inputs.avg_lap_s}).`);
+  if (!(Number.isFinite(inputs.avg_lap_s) && inputs.avg_lap_s > 0)) {
+    throw new Error(`avg_lap_s must be a finite > 0 (got ${inputs.avg_lap_s}).`);
   }
-  if (!(inputs.autonomy_s > 0)) {
+  if (!(Number.isFinite(inputs.autonomy_s) && inputs.autonomy_s > 0)) {
     throw new Error(
-      `autonomy_s must be > 0 (got ${inputs.autonomy_s}) — measure it with a logbook run-until-dry test.`,
+      `autonomy_s must be a finite > 0 (got ${inputs.autonomy_s}) — measure it with a logbook run-until-dry test.`,
     );
   }
-  if (inputs.pit_loss_s < 0) {
-    throw new Error(`pit_loss_s must be >= 0 (got ${inputs.pit_loss_s}).`);
+  if (!(Number.isFinite(inputs.pit_loss_s) && inputs.pit_loss_s >= 0)) {
+    throw new Error(`pit_loss_s must be a finite >= 0 (got ${inputs.pit_loss_s}).`);
   }
 }
