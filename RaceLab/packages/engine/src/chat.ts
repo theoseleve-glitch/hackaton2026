@@ -253,7 +253,7 @@ export class RaceEngineerChat {
       `🔧 ${o.change}`,
       `   why: ${o.mechanism}`,
       ...(o.history_note ? [`   📒 history: ${o.history_note}`] : []),
-      `   revert: ${o.revert}  ·  confidence: ${o.confidence}  ·  source: ${o.citations.join(", ")}`,
+      `   revert: ${o.revert}  ·  confidence: ${o.confidence}${o.confidence_qualifier ? ` (${o.confidence_qualifier})` : ""}  ·  source: ${o.citations.join(", ")}`,
       `Run it, then tell me: better / same / worse?`,
     ];
   }
