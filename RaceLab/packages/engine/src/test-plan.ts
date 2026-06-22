@@ -107,24 +107,24 @@ function pushBundle(history?: ContextBundle["history"], trackId = "trk-here"): C
 
 // ── History read half: demotion / promotion / isolation / caps ────────────────
 const WORSE_301 = {
-  change: "front_sway_bar: softer",
+  change: "front_track_width: narrower",
   conditions: "grip green, dusty",
   outcome: "worse" as const,
-  citations: ["kb-swaybar-front-softer-301"],
+  citations: ["kb-trackwidth-front-narrower-212"],
   track_id: "trk-here",
 };
 {
   const clean = proposePlan(pushBundle(), data);
   check(
-    "baseline: sway bar rule ranks #1 without history",
-    clean.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
+    "baseline: track-width rule ranks #1 without history",
+    clean.changes[0].option.citations.includes("kb-trackwidth-front-narrower-212"),
   );
 
   const demoted = proposePlan(pushBundle([WORSE_301]), data);
   check(
     "past 'worse' here demotes the rule below every clean rule",
     demoted.kind === "plan" &&
-      !demoted.changes.some((c) => c.option.citations.includes("kb-swaybar-front-softer-301")),
+      !demoted.changes.some((c) => c.option.citations.includes("kb-trackwidth-front-narrower-212")),
     JSON.stringify(demoted.changes.map((c) => c.option.citations)),
   );
   check(
@@ -149,7 +149,7 @@ const WORSE_301 = {
   const otherTrack = proposePlan(pushBundle([{ ...WORSE_301, track_id: "trk-other" }]), data);
   check(
     "history from a DIFFERENT track does not bleed in",
-    otherTrack.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
+    otherTrack.changes[0].option.citations.includes("kb-trackwidth-front-narrower-212"),
   );
 
   // grounded-first cap: 'better' history can never promote a rule whose
@@ -169,17 +169,17 @@ const WORSE_301 = {
   const unattributed = proposePlan(noBundleTrack, data);
   check(
     "track-stamped rows are ignored when the bundle track is unidentified",
-    unattributed.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
+    unattributed.changes[0].option.citations.includes("kb-trackwidth-front-narrower-212"),
   );
 
   // legacy rows (schema ContextHistoryEntry shape: no citations) have no effect
   const legacy = proposePlan(
-    pushBundle([{ change: "front_sway_bar: softer", conditions: "grip green", outcome: "worse" }]),
+    pushBundle([{ change: "front_track_width: narrower", conditions: "grip green", outcome: "worse" }]),
     data,
   );
   check(
     "rows without citations never influence ranking (no rule id, no attribution)",
-    legacy.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
+    legacy.changes[0].option.citations.includes("kb-trackwidth-front-narrower-212"),
   );
 
   // mixed history → neutral tier, informational note
@@ -189,7 +189,7 @@ const WORSE_301 = {
   );
   check(
     "mixed better/worse → neutral tier (rule keeps its clean rank)",
-    mixed.changes[0].option.citations.includes("kb-swaybar-front-softer-301"),
+    mixed.changes[0].option.citations.includes("kb-trackwidth-front-narrower-212"),
   );
   check(
     "mixed history carries the tally note",
@@ -272,9 +272,9 @@ const WORSE_301 = {
 //    condition-segmentation picks the right signal per forecast, and a
 //    conflicting-only streak never leaks ──────────────────────────────────────
 {
-  const RULE = "kb-swaybar-front-softer-301";
+  const RULE = "kb-trackwidth-front-narrower-212";
   const baseTags = (outcome: "better" | "worse"): HistoryEntry => ({
-    change: "front_sway_bar: softer",
+    change: "front_track_width: narrower",
     conditions: "grip green, dusty",
     outcome,
     citations: [RULE],
@@ -317,7 +317,7 @@ const WORSE_301 = {
   check("trajectory: a 'worse' streak from ANOTHER track never bleeds in → null history", hOther === null && historyTier(hOther) === 0);
   const isolated = proposePlan(pushBundle(otherTrackStreak), data);
   check(
-    "trajectory: other-track streak leaves THIS track's ranking untouched (sway bar still #1)",
+    "trajectory: other-track streak leaves THIS track's ranking untouched (track-width still #1)",
     isolated.changes[0].option.citations.includes(RULE),
   );
 
@@ -504,9 +504,9 @@ const WORSE_301 = {
   check(
     "non-interference: plan citations & order are the known-good sequence (field is additive only)",
     JSON.stringify(citationOrder) === JSON.stringify([
-      "kb-swaybar-front-softer-301",
-      "kb-rideheight-rake-forward-208",
       "kb-trackwidth-front-narrower-212",
+      "kb-swaybar-front-softer-301",
+      "kb-spring-front-softer-107",
     ]),
     JSON.stringify(citationOrder),
   );

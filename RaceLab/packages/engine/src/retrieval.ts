@@ -69,13 +69,17 @@ export function retrieve(
 
     let score = 0;
     for (const tag of bundle.feedback.tags) {
+      // BEST address match for this tag (max, not sum): a rule that lists the same symptom
+      // under several phases must not out-score a tighter single-address rule merely for
+      // enumerating more phases — the phase list is metadata about WHEN a symptom shows,
+      // not a relevance signal. Distinct reported symptoms still accumulate below.
+      let best = 0;
       for (const addr of rule.addresses) {
         if (addr.symptom !== tag.symptom) continue;
-        if (addr.phase && tag.phase && addr.phase === tag.phase) score += 3;
-        else if (!addr.phase || !tag.phase) score += 2;
-        // symptom matches but phases differ: weak signal
-        else score += 1;
+        const s = addr.phase && tag.phase && addr.phase === tag.phase ? 3 : !addr.phase || !tag.phase ? 2 : 1;
+        if (s > best) best = s;
       }
+      score += best;
     }
     if (score === 0) continue; // rule does not address any reported symptom
 

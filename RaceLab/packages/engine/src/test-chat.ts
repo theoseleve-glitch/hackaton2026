@@ -245,7 +245,11 @@ function expect(label: string, lines: string[], pattern: RegExp): void {
   ];
   const chat = new RaceEngineerChat(bundle, data);
   const r = chat.handle("it pushes mid-corner everywhere");
-  expect("other-track history does not demote (sway bar stays #1)", r, /Try ONE change[\s\S]*source: kb-swaybar-front-softer-301/);
+  // other-track history must NOT perturb the ranking (history isolation). The #1 is
+  // front_track_width (the tightest mid-corner-understeer fix with the cheapest revert) —
+  // it was front_sway_bar before the best-per-tag ranking fix, which used to win only on a
+  // spurious score inflation from an irrelevant second phase-address.
+  expect("other-track history does not perturb ranking (#1 = front_track_width)", r, /Try ONE change[\s\S]*source: kb-trackwidth-front-narrower-212/);
   expect("other-track history shows no note", r, /^(?![\s\S]*📒)/);
 }
 

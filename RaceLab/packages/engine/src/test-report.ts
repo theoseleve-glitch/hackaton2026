@@ -45,12 +45,14 @@ function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
 // 2. History is surfaced in the rationale — but ONLY for THIS change (rows that
 //    cite the fired rule). Rows citing other levers must NOT be attributed here.
 {
-  // (a) rows citing the fired primary (kb-swaybar-front-softer-301) → counts surface
+  // (a) rows citing the fired primary (kb-trackwidth-front-narrower-212, the mid-corner
+  //     understeer #1 after the best-per-tag ranking fix) → counts surface. 1 better + 1
+  //     worse is net-neutral, so historyTier stays 0 and the rule remains primary.
   const cited = buildReport(
     bundle({
       history: [
-        { change: 'ran "Softer front bar"', conditions: "green grip clay", outcome: "better", citations: ["kb-swaybar-front-softer-301"] },
-        { change: 'ran "Softer front bar v2"', conditions: "green grip clay", outcome: "worse", citations: ["kb-swaybar-front-softer-301"] },
+        { change: 'ran "Narrower front track"', conditions: "green grip clay", outcome: "better", citations: ["kb-trackwidth-front-narrower-212"] },
+        { change: 'ran "Narrower front track v2"', conditions: "green grip clay", outcome: "worse", citations: ["kb-trackwidth-front-narrower-212"] },
       ],
     }),
     data,
