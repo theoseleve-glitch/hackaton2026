@@ -381,6 +381,7 @@ export type RunRejectReason =
   | "bad_lap_sequence" // empty laps, n not strictly increasing, or t_s <= 0
   | "unknown_turn" // per-turn feedback referencing a turn the snapshot doesn't have
   | "empty_turn_feedback" // TurnFeedback with neither tags nor text
+  | "empty_symptom" // a feedback tag with a blank symptom (parseRunEntry rejects it on reload)
   | "invalid_timestamp"; // weather observed_at unparseable or missing an explicit offset
 
 /** Build a frozen RunEntry. Everything passed in is COPIED (caller objects
@@ -438,6 +439,15 @@ export function makeRun(
       if (known !== undefined && known.length > 0 && !known.includes(tf.turn_n)) {
         return { ok: false, reason: "unknown_turn" };
       }
+    }
+  }
+
+  // Top-level feedback tags: symptom must be a non-empty string — exactly what
+  // parseRunEntry enforces on reload, so makeRun never writes a run the parser would
+  // reject (a write-accepts / read-rejects round-trip gap that would quarantine the run).
+  for (const tag of input.feedback.tags) {
+    if (typeof tag.symptom !== "string" || tag.symptom.trim() === "") {
+      return { ok: false, reason: "empty_symptom" };
     }
   }
 

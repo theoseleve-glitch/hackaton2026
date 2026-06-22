@@ -382,6 +382,7 @@ const run2 = sumRes.run;
 // makeRun guards
 check("makeRun rejects an empty setup_version_id", (() => { const r = makeRun({ ...RUN_BASE, setup_version_id: " " }, T1); return !r.ok && r.reason === "empty_setup_version"; })());
 check("makeRun rejects NaN air temp", (() => { const r = makeRun({ ...RUN_BASE, conditions: { grip: "medium", air_temp_c: NaN } }, T1); return !r.ok && r.reason === "non_finite_numeric"; })());
+check("makeRun rejects a blank feedback symptom (matches parseRunEntry, no write/read gap)", (() => { const r = makeRun({ ...RUN_BASE, feedback: { tags: [{ symptom: " " }] } }, T1); return !r.ok && r.reason === "empty_symptom"; })());
 check("makeRun clamps humidity to 100", (() => { const r = makeRun({ ...RUN_BASE, conditions: { grip: "medium", humidity_pct: 130 } }, T1); return r.ok && r.run.conditions.humidity_pct === 100; })());
 check("makeRun rejects negative tyre run_count", (() => { const r = makeRun({ ...RUN_BASE, tyres: { run_count: -1 } }, T1); return !r.ok && r.reason === "out_of_range"; })());
 check("makeRun rejects fractional tyre run_count", (() => { const r = makeRun({ ...RUN_BASE, tyres: { run_count: 2.5 } }, T1); return !r.ok && r.reason === "out_of_range"; })());
