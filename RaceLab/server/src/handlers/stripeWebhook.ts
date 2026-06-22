@@ -264,10 +264,11 @@ function mapEvent(type: string, object: Record<string, unknown>): Mapped {
  *  customer.subscription.created/updated — NOT checkout.session, which is handled
  *  separately above). Stripe statuses: active|trialing -> active; canceled ->
  *  canceled; everything else (past_due, unpaid, incomplete, incomplete_expired,
- *  paused) -> expired. A missing/non-string status defaults to active (a
- *  subscription object always carries one; this is only a defensive fallback). */
+ *  paused) -> expired. A missing/non-string status FAILS CLOSED to expired: a real
+ *  subscription object always carries a string status, so this only fires on a malformed
+ *  (though signature-valid) event — which must never silently GRANT Pro. */
 function mapObjectStatus(raw: unknown): StripeSubStatus {
-  if (typeof raw !== "string") return "active";
+  if (typeof raw !== "string") return "expired";
   switch (raw) {
     case "active":
     case "trialing":
