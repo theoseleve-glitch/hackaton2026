@@ -68,7 +68,7 @@ export function historyRowApplies(row: HistoryEntry, bundleTrackId: string | und
 
 /** The bundle's significant condition tags: the track's taxonomy tags plus
  *  hot/cold derived from the forecast — mirroring schema `conditionsToTags`
- *  EXACTLY (hot = air ≥ 30 OR track ≥ 40; cold = air ≤ 10) so a row tagged hot
+ *  EXACTLY (hot = air ≥ 30 OR track ≥ 40; cold = air ≤ 10 OR track ≤ 10) so a row tagged hot
  *  by track temperature isn't seen as conflicting by an air-only bundle. */
 function bundleSignificantTags(bundle: ContextBundle): Set<string> {
   const sig = new Set<string>();
@@ -76,7 +76,10 @@ function bundleSignificantTags(bundle: ContextBundle): Set<string> {
   const air = bundle.weather?.air_temp_c;
   const track = bundle.weather?.track_temp_c;
   if ((air !== undefined && air >= 30) || (track !== undefined && track >= 40)) sig.add("hot");
-  if (air !== undefined && air <= 10) sig.add("cold");
+  // cold mirrors conditionsToTags EXACTLY: air <= 10 OR track <= 10 (was air-only, so a
+  // cold-track-only run — IR gun, no air reading — was untagged here while the bundle's
+  // own condition tags called it cold, mis-segmenting history against opposite conditions).
+  if ((air !== undefined && air <= 10) || (track !== undefined && track <= 10)) sig.add("cold");
   return sig;
 }
 

@@ -56,9 +56,16 @@ export function loadKBData(): KBData {
   // test-bundle-fresh asserts a rule dropped in drafts/ never reaches the bundle.
   const rulesDir = join(KB_DIR, "rules");
   const rules: KBRule[] = [];
-  for (const file of readdirSync(rulesDir, { withFileTypes: true })) {
-    if (!file.isFile() || !file.name.endsWith(".yaml")) continue;
-    const docs = parse(readFileSync(join(rulesDir, file.name), "utf8")) as unknown[];
+  // SORT filenames before reading: readdir order is filesystem-dependent, so an unsorted
+  // load makes the bundled rule array (and thus any sort tie-break that falls through to
+  // rule id / array order) non-reproducible across machines. Matches the categoryTemplates
+  // loader below, which already sorts.
+  const ruleFiles = readdirSync(rulesDir, { withFileTypes: true })
+    .filter((f) => f.isFile() && f.name.endsWith(".yaml"))
+    .map((f) => f.name)
+    .sort();
+  for (const name of ruleFiles) {
+    const docs = parse(readFileSync(join(rulesDir, name), "utf8")) as unknown[];
     for (const doc of docs) rules.push(RuleSchema.parse(doc) as KBRule);
   }
 

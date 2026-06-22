@@ -66,7 +66,10 @@ export function buildRacePlan(
   void race; // part of the planner contract; no race-window-specific rule yet
 
   const shifted = applyForecast(bundle, forecast);
-  const sorted = [...runs].sort((a, b) => a.date.localeCompare(b.date));
+  // code-point comparator (not localeCompare): localeCompare is locale-sensitive, so the
+  // same runs could sort differently by environment locale — banned on the deterministic
+  // advice path. ISO dates compare correctly by code point.
+  const sorted = [...runs].sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   const avgLaps = runs
     .map((r) => r.avg_lap_s)
     .filter((v): v is number => v !== undefined);
