@@ -87,6 +87,26 @@ export function templateIdForCar(
   }
 }
 
+/** The car typology fields that determine its KB template. */
+export type CarTypology = Pick<CarEntity, "brand" | "model" | "category" | "scale" | "power" | "drivetrain">;
+
+/**
+ * The template_id to persist when saving a car. Re-derives from the CURRENT
+ * typology when the stored id is missing, the old `generic-offroad` sentinel, or
+ * itself a derivation of the car's PREVIOUS typology — so editing a car's
+ * category/scale/power follows through to the engine AND the setup sheet, never
+ * leaving an on-road car stuck on its old off-road template. Only a genuine
+ * NON-derivation override (an imported payload template, or a hand-set per-model
+ * id that no typology produces) is preserved.
+ */
+export function templateIdOnSave(prev: CarEntity | undefined, next: CarTypology): string {
+  const stored = prev?.template_id;
+  if (stored && stored !== "generic-offroad" && stored !== templateIdForCar(prev as CarTypology)) {
+    return stored;
+  }
+  return templateIdForCar(next);
+}
+
 /** Deterministic rules; badge order is fixed: scale, power, category, brand. */
 export function sheetProfile(car: CarEntity): SheetProfile {
   const hidden_sections: string[] = [];

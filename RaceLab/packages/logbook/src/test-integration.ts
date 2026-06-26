@@ -66,9 +66,14 @@ check("bundle carries the power tag (electric → stock_blinky)", touringBundle.
 const touringRuleId = primaryRuleId(touringBundle);
 check("on-road car gets a grounded plan", touringRuleId !== undefined);
 const touringRule = KB.rules.find((r) => r.id === touringRuleId);
+// NON-tautological: retrieve() already guarantees the rule intersects the touring
+// template scope, so asserting that proves nothing. Assert instead that the rule's
+// scope is DISJOINT from the off-road buggy template — i.e. it is a genuinely
+// on-road rule the off-road car could never be offered, so routing (not just the
+// scope filter) is what makes it reachable.
 check(
-  "on-road advice is grounded in an on-road-scoped rule (intersects the touring template scope)",
-  !!touringRule && !!touringTpl && touringRule.scope.some((s) => touringTpl.scope.includes(s)),
+  "on-road advice is a genuinely ON-ROAD rule — scope never intersects the off-road buggy template (routing gates it)",
+  !!touringRule && !!buggyTpl && !touringRule.scope.some((s) => buggyTpl.scope.includes(s)),
   JSON.stringify(touringRule?.scope),
 );
 

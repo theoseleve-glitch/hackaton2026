@@ -199,6 +199,36 @@ for (const scale of ["1/8", "1/10", "1/12", "1/5"]) {
   }
 }
 
+// — templateIdOnSave: heal a stale template on a typology edit (gate major) ────
+import { templateIdOnSave } from "./labels";
+const carWith = (over: Partial<CarEntity>): CarEntity => ({
+  id: "c", created_at: T0, name: "x", template_id: "kyosho-inferno-mp11",
+  brand: "Generic", model: "X", category: "buggy", scale: "1/8", power: "nitro", drivetrain: "4wd", ...over,
+});
+// new car (no prev) → derive from typology
+check("onSave: new car derives from typology", templateIdOnSave(undefined, tplCar({ category: "onroad", scale: "1/10", power: "electric" })) === "1_10_touring_electric");
+// THE BUG THE GATE CAUGHT: a car created off-road then edited to on-road must FOLLOW the edit
+{
+  const created = carWith({ template_id: "1_8_offroad_nitro", category: "buggy", scale: "1/8", power: "nitro" });
+  const editedTo = tplCar({ category: "onroad", scale: "1/10", power: "electric" });
+  check("onSave: typology edit off-road→on-road re-derives (no stale off-road template)", templateIdOnSave(created, editedTo) === "1_10_touring_electric", templateIdOnSave(created, editedTo));
+}
+// old pre-P1 generic-offroad sentinel still heals
+{
+  const legacy = carWith({ template_id: "generic-offroad", category: "onroad", scale: "1/10", power: "electric" });
+  check("onSave: legacy generic-offroad heals to the on-road template", templateIdOnSave(legacy, tplCar({ category: "onroad", scale: "1/10", power: "electric" })) === "1_10_touring_electric");
+}
+// a genuine non-derivation override (e.g. imported per-model id) is PRESERVED
+{
+  const imported = carWith({ template_id: "some-imported-per-model-id", category: "onroad", scale: "1/10", power: "electric" });
+  check("onSave: a non-derivation override is preserved (imports survive)", templateIdOnSave(imported, tplCar({ category: "onroad", scale: "1/10", power: "electric" })) === "some-imported-per-model-id");
+}
+// no-op edit (typology unchanged) stays put
+{
+  const stable = carWith({ template_id: "1_10_touring_electric", category: "onroad", scale: "1/10", power: "electric" });
+  check("onSave: unchanged typology keeps the same id", templateIdOnSave(stable, tplCar({ category: "onroad", scale: "1/10", power: "electric" })) === "1_10_touring_electric");
+}
+
 if (failures > 0) {
   console.error(`\n${failures} garage test(s) failed`);
   process.exit(1);

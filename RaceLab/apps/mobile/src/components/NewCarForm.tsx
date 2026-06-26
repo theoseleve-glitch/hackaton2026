@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import type { CarEntity, PowerType } from "../../../../packages/garage/src";
-import { templateIdForCar } from "../../../../packages/garage/src";
+import { templateIdOnSave } from "../../../../packages/garage/src";
 import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
 import { colors } from "../theme";
 import { AutofillInput } from "./AutofillInput";
@@ -41,23 +41,13 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [tank, setTank] = useState(initial?.fuel_tank_cl !== undefined ? String(initial.fuel_tank_cl) : "");
   const [transponder, setTransponder] = useState(initial?.transponder ?? "");
 
-  // template: a per-model template when we have one, else the engine-resolvable
-  // CATEGORY template for this typology (templateIdForCar) — so an on-road car
-  // is never routed to the off-road generic and fed off-road rules.
-  const templateFor = (): string =>
-    templateIdForCar({ brand, model, category, scale, power, drivetrain });
-
   const save = () => {
     if (!brand.trim() && !model.trim() && !name.trim()) return;
     onSave({
       name: name.trim() || `${brand.trim()} ${model.trim()}`.trim() || "My car",
-      // Heal mis-routed cars on save: a stored generic-offroad (the old default
-      // that put on-road cars on the off-road template) is re-derived from the
-      // current typology; any specific template already set is preserved.
-      template_id:
-        initial?.template_id && initial.template_id !== "generic-offroad"
-          ? initial.template_id
-          : templateFor(),
+      // Re-derive the template from the current typology (healing a stale off-road
+      // id on a typology edit); preserve only a genuine non-derivation override.
+      template_id: templateIdOnSave(initial, { brand, model, category, scale, power, drivetrain }),
       brand: brand.trim() || "—",
       model: model.trim() || "—",
       category,
