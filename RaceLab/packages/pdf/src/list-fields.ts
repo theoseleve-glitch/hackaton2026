@@ -4,7 +4,9 @@ import { fileURLToPath } from "node:url";
 import { PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup, PDFDropdown } from "pdf-lib";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const pdfPath = process.argv[2] ?? join(ROOT, "MP11_EditableSetupSheet.pdf");
+const pdfPath =
+  process.argv[2] ??
+  join(ROOT, "chassis", "1-8-nitro-buggy", "kyosho", "inferno_MP11", "MP11_EditableSetupSheet.pdf");
 
 const doc = await PDFDocument.load(readFileSync(pdfPath));
 const form = doc.getForm();

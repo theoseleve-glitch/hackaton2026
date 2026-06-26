@@ -4,7 +4,9 @@ import { fileURLToPath } from "node:url";
 import { PDFDocument, PDFTextField, PDFCheckBox } from "pdf-lib";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const doc = await PDFDocument.load(readFileSync(join(ROOT, "MP11_EditableSetupSheet.pdf")));
+const doc = await PDFDocument.load(
+  readFileSync(join(ROOT, "chassis", "1-8-nitro-buggy", "kyosho", "inferno_MP11", "MP11_EditableSetupSheet.pdf")),
+);
 const form = doc.getForm();
 
 for (const field of form.getFields()) {

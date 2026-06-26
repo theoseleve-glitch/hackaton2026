@@ -1,6 +1,6 @@
 {
   "template_id": "kyosho-inferno-mp11",
-  "pdf_source": "MP11_EditableSetupSheet.pdf",
+  "pdf_source": "chassis/1-8-nitro-buggy/kyosho/inferno_MP11/MP11_EditableSetupSheet.pdf",
   "mode": "acroform",
   "note": "Field names discovered via packages/pdf probe (src/probe.ts renders every field's own name onto the sheet; src/rects.ts dumps checkbox coordinates). Only ~49 of the sheet's visual boxes are real AcroForm fields — unmapped visual boxes need overlay mode (D12). 'session' entries come from the Session entity, 'setup' from the canonical setup sheet, 'parts' from free-text part fields.",
   "text": {
