@@ -206,8 +206,14 @@ export function RunFormV2(props: RunFormV2Props) {
     setFetching(true);
     setWxMiss(false);
     let fill: WeatherFill | null = null;
+    // Fetch weather for the RUN's instant, not "now" — a backfilled or
+    // Speedhive-imported run must read the temperature it actually ran in, or
+    // the engine reads the wrong hot/cold tag. Same instant the run is saved
+    // with (created_at below).
+    const runWhen = new Date(`${dateStr}T${timeStr.length === 5 ? timeStr : "12:00"}:00`);
+    const whenIso = Number.isFinite(runWhen.getTime()) ? runWhen.toISOString() : new Date().toISOString();
     try {
-      fill = (await props.fetchWeather(track, new Date().toISOString())) as WeatherFill | null;
+      fill = (await props.fetchWeather(track, whenIso)) as WeatherFill | null;
     } catch {
       fill = null; // offline / API error → manual entry, never a stuck spinner
     } finally {
