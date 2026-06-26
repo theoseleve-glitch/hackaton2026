@@ -117,3 +117,50 @@ _One-line verdict: a genuinely race-engineer-shaped tool for the 8 ruled classes
 - `M·M·human-gated` **22 LIVE rules carry # REVIEW flags where the cited book contradicts or only partially supports the stated effect** — Resolve the # REVIEW-flagged rules (e.g. kb-tc-shock-rear-thinner-403: NT1 says thinner rear oil increases braking grip but DECREASES corner-exit forward bite — the OPPOSITE of the rule's forward-bite address). Each flag is a rule whose use…
 - `M·L·in-zone` **Reduce single-source / # REVIEW rules on high-stakes settings** — Promote a second independent source onto the many rules that are single-source and carry '# REVIEW' flags where the cited book actually contradicts the stated effect (e.g. touring rear-shock-oil 403/404 where NT1 p.11 says the opposite of t…
 - `M·M·in-zone` **Broaden NLU vocabulary and add a clarify-on-ambiguity path** — Expand parseFeedback beyond ~12 symptoms and add disambiguation when free text is mixed/ambiguous instead of silently dropping to two tags (nlu.ts slices to 2 symptoms / 2 phases, returns empty on no-match → generic 'couldn't pin it down').…
+
+---
+
+## D71 — Discovery sweep (2026-06-20, 6-lens read-only workflow, 35 agents)
+
+A second night pass: a read-only fan-out over the zones NO prior audit had dug into (apps/web, packages/pdf,
+app-tier UX, doc-drift, launch-blockers, RC-world research), each finding skeptic-verified for real+novel
+against this list and STRENGTHEN. **26 confirmed-novel findings.** 6 in-zone ones already FIXED + committed
+this pass (✅); the rest are below for your review. **Read the 3 🚨 P1s first — two of them mean the 417-rule
+engine precision is DARK in the shipped app right now.**
+
+### 🚨 P1 launch-blockers (review FIRST)
+- `H·M·theo-app` 🚨 **On-road cars are silently given the OFF-ROAD generic template → off-road rules FIRE on a touring/GT car (mis-cited), and every D55 on-road rule is unreachable.** `NewCarForm.tsx:46-50 templateFor()` only matches 'mp11'/'inferno' by model and returns `generic-offroad` (scope `[1-8-offroad,1-10-offroad]`) for everything else; the user-picked `category` is captured but never consulted. retrieval.ts:53 intersects scope → off-road shock/camber rules pass for an on-road car while on-road-scoped rules go dark. **This is worse than silence: confidently wrong, off-road-book-cited advice on the most common path.** Fix: select the template from the picked category/scale/power (map to a categoryTemplate / registry id, let `resolveTemplate` finish). *(Already named as a Théo task in CLAUDE.md "Next" — this escalates it to P1 with the wrong-advice consequence.)*
+- `H·S·theo-app` 🚨 **Surface-family + power tags never reach the engine in the app → surface amplification dark, `forbidden_on` dark, EVERY `legal_in_power` rule dropped for all users.** The app's only tag producer is the hand-rolled `conditionTags()` in `logbook/src/bundle.ts:12-35` (emits grip/bump/dusty/wet/hot/cold only); `buildConditionTags`/`surfaceToTags`/`powerTypeToTags` (built D52/D57/D63) have ZERO callers in apps/mobile; retrieval reads only `bundle.track.conditions`. So a rule the KB flags WRONG-for-this-surface can still be offered, and all 38 live gearing/power-gated rules vanish. Fix: replace `conditionTags` with one `buildConditionTags(conditions, surface, powerType)` call. **Low effort, huge payoff — this lights up the bulk of the 417 rules.** *(Also a listed Théo task; escalated.)*
+- `S·human-gated` 🚨 **Every web CTA points at the unregistered placeholder `griplab.app` — the whole funnel dead-ends the moment the site is public.** `apps/web/src/config.js` LINKS.trial/account both = `https://griplab.app`; hero/nav/pricing/final/footer all resolve to it; `test/config.test.mjs` even asserts the placeholder. Don't deploy the public site until the domain/brand is ratified and repointed (depends on D19 brand + a real web-subscribe URL from server/).
+
+### ✅ Fixed + committed this pass (in-zone, reversible)
+- ✅ **`analyzeRuns` cross-track context-mix (#26)** — grounded the next-plan in the feedback run's OWN context; refuses when the complaint is from a different track than the latest run (was lighting wrong surface rules). `commit f36b395`
+- ✅ **Dead code removed (#24)** — `invalidCitations` + `RuleHistory.last`. `commit 5b22760`
+- ✅ **Doc de-lie** — CLAUDE.md current-state (frozen at D57 → D58-D71 bullet, 417 live, eval 28/28), FEATURES.md eval 10/10→28/28, CONTRACTS.md cold air-only→air OR track, BACKEND_STATUS.md 18→24 suites / 12→19 api. `commit 7e031c8`
+- ✅ **PDF PoC un-broke (#pdf_source)** — `pdf_source` + probe/rects/list-fields pointed at the moved chassis path; fill.ts runs again (51 fields). `commit 8098d77`
+
+### 🌐 apps/web (marketing site — Théo zone unless noted)
+- `L·theo-app` **100% of page copy is JS-injected via third-party CDN ESM (jsdelivr), no fallback** — a CDN outage/block → blank page; non-JS crawlers see empty `<main>` (OG tags ARE present, so share previews survive). Self-host three/gsap/lenis + add a static hero-copy fallback. (`index.html` empty section shells; `main.js:1-3` top-level CDN imports.)
+- `S·human-gated` **Sample report copy cites a fabricated 'HUDY rule 4.2'** (`config.js:49`) — contradicts D53 (citations internal) + its own 'every change cites a KB rule' line, and surfaces a competitor trademark as the authority. Replace with a non-fabricated, non-trademarked confidence line; William signs off any public HUDY mention.
+- `S·theo-app` **SEO/social meta gaps** — no Twitter card, no og:url/canonical, og:image root-relative, no robots.txt/sitemap.xml. One-time static edits.
+- `S·human-gated` **`<title>`/og:title ship the codename 'RaceLab'** while the funnel points at griplab.app — drive title from the BRAND token once brand is ratified (no codename in prod).
+
+### 📄 packages/pdf (export pipeline — in-zone, but precondition builds for app-wiring)
+- `M·in-zone` **fill path has zero error handling** — one missing/renamed field or oversized value aborts the whole export (probe.ts guards setText, fill.ts dropped it). Per-field try/catch → {field,reason} fill-report, continue.
+- `M·in-zone` **No importable API** — fill.ts is a hardcoded top-level-await demo; extract a pure `fillSheet(pdfBytes, map, values, checks): Promise<Uint8Array>` + add package main/exports. This is the real precondition for SheetEditor PDF export.
+- `M·in-zone` **Checkbox group resolution unimplemented** — keys encode `field=value` but fill.ts checks hardcoded boxes; a non-default option (e.g. diff_gear_front='12/18') matches nothing → silently exports a kit-default sheet (confidently wrong). Parse `field=value`, group, match the setup's value, flag unmatched.
+- `L·human-gated` **Coverage reality** — only MP11 has a pdf-map and only ~49 of its boxes are real AcroForm fields (the rest need an overlay mode that doesn't exist); 0/236 other models. Decide: build overlay mode, or gate export to mapped chassis + label the rest 'export coming'.
+
+### 📱 app-tier UX (Théo zone, flag-only — racer trackside friction)
+- `S·theo-app` **Run-form weather autofill fetches 'now', ignoring the run's date/time** (`RunFormV2.tsx:210`) — backfilled/Speedhive-imported runs get wrong air temp → engine reads the wrong hot/cold tag (silently wrong). Pass the run's chosen instant (weather pkg already accepts a historical whenIso).
+- `S·theo-app` **Track form silently defaults surface to 'clay' when none tapped** (`TrackForm.tsx:135`) — surface is THE grounding axis; an on-road/carpet racer who skips it ships a track tagged off-road dirt → wrong advice for the track's life. Require a surface (or derive from car category).
+- `M·theo-app` **Conditions not carried forward between consecutive runs** — every heat re-enters grip/weather/length/sky/bumpiness (`RunFormV2.tsx:163-168`). A 6-10-run club day = repeated friction that makes racers stop logging → starves the learning loop. Prefill (greyed/override) from the last run at this track.
+- `L·theo-app` **No path to apply an engineer recommendation to the sheet** — report says 'front shock oil 2 steps thicker', racer must remember + switch tabs + hand-edit. Add 'Apply to a new setup version' on grounded cards (preserves immutable-version model + makes it diffable for the next outcome rating).
+- `S·theo-app` **Sheet editor has no field search/filter** — finding one setting trackside = scrolling 6 sections (Starred only helps if pre-starred). Add a filter box over the field list.
+- `S·theo-app` **Run outcome (better/same/worse) never prompted after a setup-change run** — rating is a hidden post-hoc gesture (`RunsScreen.tsx:343-353`), so most runs ship outcome=undefined → the condition-segmented learning loop is starved of its #1 signal. Surface a one-tap prompt at save/celebration.
+
+### 🛞 RC-world coverage gaps (in-zone authoring — need grounding + a William scope call)
+- `M·in-zone` **Chassis flex (top-deck/stiffener) entirely absent** — not even a recordable field; it's a signature on-road grip lever (more flex = mechanical grip on low-bite, less = sharper on high-bite). Add `chassis_flex` to on-road templates + grounded rules (So Dialed / CompetitionX / rctech).
+- `M·in-zone` **No asymmetric-handling symptom or cross-weight (tweak) lever** — 'turns sharper one way' is unparseable; the `tweak` field has zero rules. Add NLU `asymmetric_handling` + a cross-weight rule (equalise toward ~50%). Distinct from the M5 per-corner data-model.
+- `P3·in-zone` **On-road template fields exposed-but-dark** — anti_dive, belt_tension_front/rear, body_mounting are recordable but have no rules. Either author thin grounded packs or mark record-only so the exposed-vs-ruled set stays honest.
+- `S·human-gated` **Drag brake (electric ESC) uncovered** — a daily corner-entry rotation lever for electric racers; sits near the D13 nitro/engine refuse boundary → needs a scope ruling (in like gearing, or canned refusal).
