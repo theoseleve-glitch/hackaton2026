@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "description": "RaceLab run log (Layer 1+2): runs with setup ref + conditions + tyres + result + driver feedback, run comparison, persistence. Pure functions, no I/O — bundles into the app unchanged.",
   "scripts": {
-    "test": "tsx src/test-logbook.ts",
+    "test": "tsx src/test-logbook.ts && tsx src/test-integration.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
