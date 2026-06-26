@@ -4,9 +4,14 @@
   "private": true,
   "type": "module",
   "description": "RaceLab PDF export — fill manufacturer AcroForm setup sheets from setup JSON (D12: fill, never redraw)",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
     "fields": "tsx src/list-fields.ts",
     "fill": "tsx src/fill.ts",
+    "test": "tsx src/test-pdf.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

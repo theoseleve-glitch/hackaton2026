@@ -1,21 +1,16 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PDFDocument } from "pdf-lib";
+import { fillSheet, type PdfMap } from "./sheet.js";
 
 /**
- * D12 reference implementation: fill the manufacturer's AcroForm sheet from
- * setup JSON via the chassis pdf_map. Fill, never redraw.
+ * D12 reference CLI: load the MP11 sheet + map + demo setup, call the pure
+ * `fillSheet` library (src/sheet.ts), write the result. The fill logic lives in
+ * sheet.ts so the app can import it; this file is just demo data + I/O.
  */
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..", "..");
-
-interface PdfMap {
-  pdf_source: string;
-  text: Record<string, string>;
-  checkbox: Record<string, string>;
-}
 
 const map = JSON.parse(
   readFileSync(join(ROOT, "packages", "kb", "chassis", "inferno-mp11.pdf-map.json"), "utf8"),
@@ -80,28 +75,17 @@ const checks = [
   "setup.wing_position=front",
 ];
 
-const doc = await PDFDocument.load(readFileSync(join(ROOT, map.pdf_source)));
-const form = doc.getForm();
-
-let filled = 0;
-for (const [canonical, fieldName] of Object.entries(map.text)) {
-  const value = values[canonical];
-  if (value === undefined) continue;
-  const field = form.getTextField(fieldName);
-  field.setFontSize(7);
-  field.setText(String(value));
-  filled++;
-}
-for (const key of checks) {
-  const fieldName = map.checkbox[key];
-  if (!fieldName) continue;
-  form.getCheckBox(fieldName).check();
-  filled++;
-}
-
-form.flatten(); // bake values in — the exported sheet is a document, not a form
+const { bytes, filled, skipped } = await fillSheet(
+  readFileSync(join(ROOT, map.pdf_source)),
+  map,
+  values,
+  checks,
+);
 
 mkdirSync(join(HERE, "..", "out"), { recursive: true });
 const outPath = join(HERE, "..", "out", "demo-setup.pdf");
-writeFileSync(outPath, await doc.save());
+writeFileSync(outPath, bytes);
 console.log(`filled ${filled} fields → ${outPath}`);
+if (skipped.length > 0) {
+  console.log(`skipped ${skipped.length}: ${skipped.map((s) => `${s.field} (${s.reason})`).join(", ")}`);
+}
