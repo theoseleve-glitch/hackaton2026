@@ -24,7 +24,7 @@ import type { Celebration } from "../components/PodiumSplash";
 import { RunFormV2 } from "../components/RunFormV2";
 import { TrackForm } from "../components/TrackForm";
 import { sheetsKeyForCar } from "../garagestore";
-import { KB } from "../kb";
+import { sheetTemplate } from "../kb";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { fetchWeather } from "../weather";
@@ -465,7 +465,7 @@ function NewSetupPopup({
       base = parsed.state;
     } else {
       // car never opened in the Sheet tab: start it from its kit baseline here
-      const template = KB.templates[templateId ?? ""] ?? KB.templates["generic-offroad"];
+      const template = sheetTemplate(templateId);
       base = initSheets(template, new Date().toISOString());
     }
     const renamed = renameDraft(base, name.trim() || "New setup");

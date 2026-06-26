@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 import { deserialize, initSheets, serialize } from "../../../packages/sheets/src";
 import type { SheetsState } from "../../../packages/sheets/src";
-import { KB } from "./kb";
+import { sheetTemplate } from "./kb";
 import { sheetsKeyForCar } from "./garagestore";
 
 /**
@@ -25,7 +25,7 @@ export function useCarSheets(
       setState(null);
       return;
     }
-    const template = KB.templates[templateId] ?? KB.templates["generic-offroad"];
+    const template = sheetTemplate(templateId);
     const key = sheetsKeyForCar(carId);
     let cancelled = false;
     setState(null);

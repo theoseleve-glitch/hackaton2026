@@ -17,7 +17,7 @@ import {
 import type { ChangedField, SheetsState } from "../../../../packages/sheets/src";
 import type { SharedPayload } from "../../../../packages/social/src";
 import { forkProvenanceLine } from "../../../../packages/social/src";
-import { KB, label } from "../kb";
+import { label, sheetTemplate } from "../kb";
 import { sheetsKeyForCar } from "../garagestore";
 import { loadCarSheets } from "../store";
 import { colors, radius } from "../theme";
@@ -94,7 +94,7 @@ export function ImportPreviewScreen({
       // build the forked version: kit baseline + the payload's values, named + provenance
       const key = sheetsKeyForCar(carId);
       const raw = await AsyncStorage.getItem(key);
-      const template = KB.templates[payload.setup.template_id] ?? KB.templates["generic-offroad"];
+      const template = sheetTemplate(payload.setup.template_id);
       let state: SheetsState;
       if (raw) {
         const parsed = deserialize(raw, JSON.parse(raw).state.template_id);

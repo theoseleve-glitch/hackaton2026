@@ -170,9 +170,20 @@ const cases: { label: string; car: Partial<CarEntity>; expect: string }[] = [
   { label: "1/8 electric buggy → 1/8 off-road electric", car: { category: "buggy", scale: "1/8", power: "electric" }, expect: "1_8_offroad_electric" },
   { label: "1/10 2wd buggy → 1/10 2wd off-road", car: { category: "buggy", scale: "1/10", drivetrain: "2wd" }, expect: "1_10_offroad_2wd" },
   { label: "1/10 4wd buggy → 1/10 4wd off-road", car: { category: "buggy", scale: "1/10", drivetrain: "4wd" }, expect: "1_10_offroad_4wd" },
+  // REGRESSION GUARD: drivetrain UNSET must NOT route to 4WD (phantom centre/front
+  // diff advice on a likely-2WD car). Unknown → 2WD scaffold (no phantom diffs).
+  { label: "1/10 buggy, drivetrain UNSET → 2WD (never phantom 4WD diffs)", car: { category: "buggy", scale: "1/10", drivetrain: undefined }, expect: "1_10_offroad_2wd" },
   { label: "truggy → 1/8 truggy", car: { category: "truggy" }, expect: "1_8_truggy" },
   { label: "stadium_truck → stadium truck", car: { category: "stadium_truck", scale: "1/10" }, expect: "stadium_truck" },
   { label: "sc → short course", car: { category: "sc", scale: "1/10" }, expect: "short_course" },
+  { label: "1/5 → large scale (own scaffold)", car: { category: "onroad", scale: "1/5" }, expect: "large_scale_1_5" },
+  // freeform categories must hit their OWN (zero-rule → clean refusal) template,
+  // never borrow off-road buggy rules.
+  { label: "crawler → crawler template", car: { category: "crawler", scale: "1/10" }, expect: "crawler" },
+  { label: "f1 → f1 template", car: { category: "f1", scale: "1/10" }, expect: "f1" },
+  { label: "rally → rally template", car: { category: "rally", scale: "1/10" }, expect: "rally" },
+  // an Inferno *GT* is on-road — the mp11 brand match must NOT override the category
+  { label: "Kyosho Inferno GT (on-road) → on-road template, NOT off-road MP11", car: { brand: "Kyosho", model: "Inferno GT3", category: "onroad", scale: "1/8" }, expect: "1_8_gt" },
 ];
 for (const c of cases) {
   const got = templateIdForCar(tplCar(c.car));

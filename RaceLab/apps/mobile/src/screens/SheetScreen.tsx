@@ -6,7 +6,7 @@ import { draftDiff, getVersion, kitVersionId, loadVersion, renameDraft } from ".
 import type { SheetsState } from "../../../../packages/sheets/src";
 import { buildSetupPayload } from "../../../../packages/social/src";
 import type { SharedPayload } from "../../../../packages/social/src";
-import { KB } from "../kb";
+import { sheetTemplate } from "../kb";
 import { loadCarSheets, useCarSheets } from "../store";
 import { colors, radius } from "../theme";
 import { SheetEditorScreen } from "./SheetEditorScreen";
@@ -113,7 +113,7 @@ function CarSheets({
 }) {
   const { state, update } = useCarSheets(car.id, car.template_id);
   const profile = sheetProfile(car);
-  const template = KB.templates[car.template_id] ?? KB.templates["generic-offroad"];
+  const template = sheetTemplate(car.template_id);
   const [mode, setMode] = useState<"list" | "detail">("list");
 
   const newSetup = () => {

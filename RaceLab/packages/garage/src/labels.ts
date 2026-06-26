@@ -36,28 +36,55 @@ const CATEGORY_BADGES: Record<string, string> = {
 export function templateIdForCar(
   car: Pick<CarEntity, "brand" | "model" | "category" | "scale" | "power" | "drivetrain">,
 ): string {
-  const m = `${car.brand} ${car.model}`.toLowerCase();
-  if (m.includes("mp11") || m.includes("inferno")) return "kyosho-inferno-mp11";
-
   const electric = car.power === "electric";
+  const onroad = car.category === "onroad";
 
-  // On-road: route by scale to the matching on-road category scaffold. Never
-  // off-road scope (the bug this function exists to kill).
-  if (car.category === "onroad") {
-    if (car.scale === "1/8") return "1_8_gt";
-    if (car.scale === "1/12") return "1_12_pan";
-    if (car.scale === "1/10") return electric ? "1_10_touring_electric" : "1_10_nitro_onroad";
-    return "1_10_touring_electric"; // default on-road
+  // Per-model FULL template only for the off-road MP11 it actually covers. Gate
+  // on NOT-on-road and match "mp11" only (not the bare "inferno" substring) — an
+  // Inferno GT is on-road and must follow its category, and an MP10 is not an
+  // MP11, so both fall through to category routing.
+  if (!onroad && `${car.brand} ${car.model}`.toLowerCase().includes("mp11")) {
+    return "kyosho-inferno-mp11";
   }
 
-  // Off-road by category, then scale/power/drivetrain.
-  if (car.category === "truggy") return "1_8_truggy";
-  if (car.category === "stadium_truck") return "stadium_truck";
-  if (car.category === "sc") return "short_course";
-  // buggy (and any other off-road category)
-  if (car.scale === "1/8") return electric ? "1_8_offroad_electric" : "1_8_offroad_nitro";
-  if (car.scale === "1/10") return car.drivetrain === "2wd" ? "1_10_offroad_2wd" : "1_10_offroad_4wd";
-  return "generic-offroad";
+  // Large scale has its own scaffold whatever the category.
+  if (car.scale === "1/5") return "large_scale_1_5";
+
+  switch (car.category) {
+    case "onroad":
+      if (car.scale === "1/8") return "1_8_gt";
+      if (car.scale === "1/12") return "1_12_pan";
+      return electric ? "1_10_touring_electric" : "1_10_nitro_onroad"; // 1/10 (+ default)
+    case "truggy":
+      return "1_8_truggy";
+    case "stadium_truck":
+      return "stadium_truck";
+    case "sc":
+      return "short_course";
+    case "crawler":
+      return "crawler";
+    case "monster_truck":
+    case "mt":
+      return "monster_truck";
+    case "rally":
+      return "rally";
+    case "f1":
+      return "f1";
+    case "buggy": {
+      if (car.scale === "1/8") return electric ? "1_8_offroad_electric" : "1_8_offroad_nitro";
+      // 1/10 buggy: route to the 4WD scaffold ONLY when drivetrain is explicitly
+      // 4wd. Unset/2wd → the 2WD template, which exposes no centre/front diff, so
+      // the worst case is a missing 4WD-specific rule — never recommending a part
+      // a 2WD car physically lacks (grounded or silent about hardware).
+      if (car.scale === "1/10") return car.drivetrain === "4wd" ? "1_10_offroad_4wd" : "1_10_offroad_2wd";
+      return "generic-offroad"; // other-scale buggy
+    }
+    default:
+      // Unknown/freeform off-road category: the drivetrain/scale-agnostic
+      // off-road scaffold (renderable; the known on/off-road categories above are
+      // all handled, so this only catches genuinely freeform input).
+      return "generic-offroad";
+  }
 }
 
 /** Deterministic rules; badge order is fixed: scale, power, category, brand. */

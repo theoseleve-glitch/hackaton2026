@@ -51,7 +51,13 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
     if (!brand.trim() && !model.trim() && !name.trim()) return;
     onSave({
       name: name.trim() || `${brand.trim()} ${model.trim()}`.trim() || "My car",
-      template_id: initial?.template_id ?? templateFor(),
+      // Heal mis-routed cars on save: a stored generic-offroad (the old default
+      // that put on-road cars on the off-road template) is re-derived from the
+      // current typology; any specific template already set is preserved.
+      template_id:
+        initial?.template_id && initial.template_id !== "generic-offroad"
+          ? initial.template_id
+          : templateFor(),
       brand: brand.trim() || "—",
       model: model.trim() || "—",
       category,

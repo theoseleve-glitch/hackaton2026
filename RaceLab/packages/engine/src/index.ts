@@ -13,6 +13,7 @@ export { parseFeedback } from "./nlu";
 export {
   assertValidKBData,
   getTemplate,
+  resolveTemplate,
   validateRulesAgainstTaxonomy,
   validateRegistryAndClasses,
 } from "./data";
