@@ -138,7 +138,7 @@ The autofill datasets are bundled, never fetched, so they don't break D18. Team:
 | **3 tools lead the UI as feature cards** (setup engineer / race planner / pit strategy) | ✅ | `EngineerHubScreen` FeatureCards |
 | **Past reports with a category tag, after the tools** | ✅ | tagged history (REPORT / RACE PLAN / STRATEGY) |
 | **New report = pick a run + optional notes** | ✅ | `RunPicker` |
-| **8-part deterministic report** (diagnosis→primary→secondary→don't-touch→expected→tips→confidence→why) | ✅ | `buildReport` in `packages/engine` (eval 10/10) |
+| **8-part deterministic report** (diagnosis→primary→secondary→don't-touch→expected→tips→confidence→why) | ✅ | `buildReport` in `packages/engine` (eval 28/28) |
 | **"Couldn't ground it → add more notes" ask** | ✅ | shown when the engine can't cite a rule |
 | **Iterative loop** (test → come back with 2 sessions → refine) | 🟡 | history accumulates + one-shot from a run; explicit multi-session refine flow not built |
 | **Pit Board report layout** — verdict-first, tiles, folds, colour/weight hierarchy | ✅ | `RunReportCard` (Théo's chosen architecture) |
@@ -215,7 +215,7 @@ The autofill datasets are bundled, never fetched, so they don't break D18. Team:
 - **D13** — engine/nitro-tuning questions are refused (canned), grounded-or-silent everywhere else.
 - **Pure-function packages** imported by relative path into the Expo SDK 56 app:
   `engine` · `logbook` · `sheets` · `garage` · `tracks` · `strategy` · `kb`. Each: `npm test` green,
-  corrupt-safe persistence with format migrations. Engine eval **10/10**.
+  corrupt-safe persistence with format migrations. Engine eval **28/28**.
 - **Stores** (`apps/mobile/src/*store.ts`): AsyncStorage, never-wipe `:backup` on corrupt blobs.
 
 ---
