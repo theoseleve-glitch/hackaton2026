@@ -320,6 +320,52 @@ check("report JSON-serializes cleanly (round-trip is identical)", deepEqual(roun
   const line = r.sections.find((s) => s.id === "next_plan")!.lines[0];
   check("no feedback tags → refusal (grounded or silent)", line.kind === "refusal");
 }
+{
+  // #26 regression: the complaint was logged at one track, the latest run is a
+  // feedback-less run at a DIFFERENT track. The next plan must NOT project the
+  // symptom onto the latest track (which would ground it against the wrong
+  // surface/conditions) — it refuses out loud instead of guessing.
+  const otherTrack: TrackSnapshot = {
+    track_id: makeId("trk", Date.parse(T0) + 99, rand),
+    name: "Astro Indoor Hall",
+    surface: "astroturf",
+    indoor: true,
+  };
+  const complaintAtClay = mustRun(
+    makeRun(
+      {
+        ...base,
+        type: "practice",
+        conditions: { grip: "green", dusty: true },
+        feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] },
+      },
+      T0,
+      rand,
+    ),
+  );
+  const latestAtAstro = mustRun(
+    makeRun(
+      {
+        ...base,
+        track: otherTrack,
+        type: "qualifier",
+        conditions: { grip: "high" },
+        feedback: { tags: [] },
+      },
+      "2026-06-10T15:00:00.000Z",
+      rand,
+    ),
+  );
+  const r = analyzeRuns([complaintAtClay, latestAtAstro], data);
+  const line = r.sections.find((s) => s.id === "next_plan")!.lines[0];
+  check(
+    "complaint at a different track than the latest run → cross-track refusal (no mixed context)",
+    line.kind === "refusal" &&
+      line.text.includes("MRT Club Track") &&
+      line.text.includes("Astro Indoor Hall"),
+    JSON.stringify(line),
+  );
+}
 
 // ── M2 dedicated cliff cases (isolated runs) ──────────────────────────────────
 function lapsTiming(times: number[]) {

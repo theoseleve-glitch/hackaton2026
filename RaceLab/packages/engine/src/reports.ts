@@ -276,13 +276,14 @@ function nextPlanSection(
   if (runs.length === 0) return refusal("No runs — nothing to ground a plan on.");
 
   const latest = runs[runs.length - 1];
-  if (!resolveTemplate(data, latest.car_template_id)) {
-    return refusal(
-      `Chassis template '${latest.car_template_id}' is not in the KB — no grounded plan (grounded or silent).`,
-    );
-  }
 
-  // most recent run that carries driver feedback tags grounds the plan
+  // The plan grounds on the most recent run that carries driver feedback tags —
+  // and it must reason in THAT run's own context. Sourcing the symptom from the
+  // feedback run but the conditions/surface/track from a later feedback-less run
+  // mixed two contexts: a complaint logged on cold astro could be evaluated
+  // against a hot-clay run's tags, lighting the wrong surface-amplified rules and
+  // misfiring the forbidden_on hard-drop. So every grounding axis below comes
+  // from feedbackRun, never `latest`.
   let feedbackRun: RunEntry | undefined;
   for (let i = runs.length - 1; i >= 0; i--) {
     if (runs[i].feedback.tags.length > 0) {
@@ -296,24 +297,42 @@ function nextPlanSection(
     );
   }
 
+  // When the complaint was logged at a DIFFERENT track than the latest run, the
+  // latest run's surface/conditions no longer describe where the symptom was
+  // seen, and a "next plan" for the latest track would be projecting a complaint
+  // onto a track it was never observed on. We won't guess across tracks.
+  if (feedbackRun.track_id !== latest.track_id) {
+    return refusal(
+      `The most recent driver complaint was logged at ${feedbackRun.track.name}, but the latest run was at ${latest.track.name} — I won't ground a next-track plan on a different track's complaint (grounded or silent).`,
+    );
+  }
+
+  if (!resolveTemplate(data, feedbackRun.car_template_id)) {
+    return refusal(
+      `Chassis template '${feedbackRun.car_template_id}' is not in the KB — no grounded plan (grounded or silent).`,
+    );
+  }
+
   const bundle: ContextBundle = {
-    chassis_template_id: latest.car_template_id,
+    chassis_template_id: feedbackRun.car_template_id,
     setup: opts?.current_setup ?? {},
+    // setup_version_id + current_setup are the setup the driver is on NOW (latest);
+    // grounding conditions are the feedback run's (same track, asserted above).
     setup_version_id: latest.setup_version_id,
     track: {
-      track_id: latest.track_id,
-      name: latest.track.name,
-      surface: latest.track.surface,
-      grip: latest.conditions.grip,
+      track_id: feedbackRun.track_id,
+      name: feedbackRun.track.name,
+      surface: feedbackRun.track.surface,
+      grip: feedbackRun.conditions.grip,
       // Union surface-family tags so this next-plan retrieval sees the same condition set
       // the live advisor does — otherwise surface-amplified rules stay dark AND the
       // forbidden_on hard-drop can't fire, letting analyzeRuns recommend a change that is
       // wrong for the surface. (power isn't carried on RunEntry, so it's omitted here.)
-      conditions: [...buildConditionTags({ conditions: latest.conditions, surface: latest.track.surface })],
+      conditions: [...buildConditionTags({ conditions: feedbackRun.conditions, surface: feedbackRun.track.surface })],
     },
     feedback: { tags: feedbackRun.feedback.tags.map((t) => ({ ...t })) },
     mode: opts?.mode ?? "practice",
-    history: historyFromTuples(tuples, { track_id: latest.track_id, limit: 50 }),
+    history: historyFromTuples(tuples, { track_id: feedbackRun.track_id, limit: 50 }),
   };
   const plan = proposePlan(bundle, data);
   if (plan.kind !== "plan") {
