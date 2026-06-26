@@ -128,6 +128,11 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
   };
 
   const save = () => {
+    // Surface is the engine's grounding axis — never silently default it to an
+    // off-road family (an on-road/carpet racer would get off-road advice for the
+    // life of the track). Save is blocked below until one is picked; this is the
+    // belt-and-braces guard.
+    if (surfaces.length === 0) return;
     const latN = num(lat);
     const lonN = num(lon);
     onSave({
@@ -180,6 +185,9 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
           onToggle={(s) => setSurfaces((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))}
           labelFor={(s) => SURFACE_LABEL.get(s) ?? s}
         />
+        {surfaces.length === 0 && (
+          <Text style={[styles.hint, { color: colors.warn }]}>Pick the surface — it drives the engine's advice.</Text>
+        )}
         <Text style={styles.hint}>Indoor / outdoor</Text>
         <ChipRow
           options={["outdoor", "indoor"] as const}
@@ -340,7 +348,12 @@ export function TrackForm({ initial, candidacyState = "none", onSubmitOfficial, 
         <Pressable style={[styles.btn, styles.btnGhost]} onPress={onCancel}>
           <Text style={styles.btnGhostText}>Cancel</Text>
         </Pressable>
-        <Pressable style={[styles.btn, styles.btnPrimary]} onPress={save}>
+        <Pressable
+          style={[styles.btn, styles.btnPrimary, surfaces.length === 0 && { opacity: 0.4 }]}
+          onPress={save}
+          disabled={surfaces.length === 0}
+          accessibilityState={{ disabled: surfaces.length === 0 }}
+        >
           <Text style={styles.btnPrimaryText}>{initial ? "Save track" : "Add track"}</Text>
         </Pressable>
       </View>
