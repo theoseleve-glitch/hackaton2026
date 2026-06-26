@@ -1,9 +1,4 @@
-import type {
-  ContextBundle,
-  KBRule,
-  RecommendationOption,
-  Taxonomy,
-} from "./types";
+import type { ContextBundle, KBRule, Taxonomy } from "./types";
 
 /** D13: engine/needle questions get a hard canned refusal — checked BEFORE anything else.
  *  Match keywords on WORD BOUNDARIES, not raw substrings: a substring `text.includes("lean")`
@@ -18,11 +13,6 @@ export function engineScopeViolation(bundle: ContextBundle, taxonomy: Taxonomy):
     if (new RegExp(`\\b${escaped}\\b`).test(text)) return taxonomy.engine_scope_refusal.refusal;
   }
   return null;
-}
-
-/** The LLM cannot cite a rule that wasn't retrieved (docs/04 §4). */
-export function invalidCitations(option: RecommendationOption, retrievedIds: Set<string>): string[] {
-  return option.citations.filter((c) => !retrievedIds.has(c));
 }
 
 export interface RaceDayVerdict {

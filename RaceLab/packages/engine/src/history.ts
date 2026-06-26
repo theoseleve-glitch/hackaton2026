@@ -45,9 +45,6 @@ export interface RuleHistory {
   same: number;
   worse: number;
   net: number;
-  /** Outcome of the most recent USABLE (matched or untagged) row; conflicting
-   *  rows never set it. */
-  last: "better" | "same" | "worse";
   /** Rows whose conditions MATCH the current bundle — the condition-specific
    *  signal. When matched_count > 0 the tier is driven by matched_net. */
   matched_better: number;
@@ -113,7 +110,6 @@ export function historyForRule(ruleId: string, bundle: ContextBundle): RuleHisto
   let mBetter = 0;
   let mSame = 0;
   let mWorse = 0;
-  let last: RuleHistory["last"] | null = null;
   for (const row of rows) {
     if (!row.citations || !row.citations.includes(ruleId)) continue;
     if (!historyRowApplies(row, bundle.track.track_id)) continue;
@@ -128,15 +124,15 @@ export function historyForRule(ruleId: string, bundle: ContextBundle): RuleHisto
       else if (row.outcome === "worse") worse++;
       else same++;
     }
-    last = row.outcome; // most recent usable (matched or untagged) row
   }
-  if (last === null) return null; // no usable history for the current condition
+  // No usable (non-conflicting) row attributed to this rule in the current
+  // condition → no signal.
+  if (better + same + worse + mBetter + mSame + mWorse === 0) return null;
   return {
     better,
     same,
     worse,
     net: better - worse,
-    last,
     matched_better: mBetter,
     matched_worse: mWorse,
     matched_same: mSame,
