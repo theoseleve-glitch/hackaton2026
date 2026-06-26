@@ -3,7 +3,7 @@
  *  override labels, badge the header). Pure data + pure functions: no fs,
  *  no network, no node built-ins — bundles into the app unchanged. */
 export { initGarage, addCar, updateCar, deleteCar, getCar, carSubtitle } from "./garage";
-export { sheetProfile } from "./labels";
+export { sheetProfile, templateIdForCar } from "./labels";
 export type { SheetProfile } from "./labels";
 export { serializeGarage, deserializeGarage, GARAGE_FORMAT_VERSION } from "./persist";
 export type { DeserializeGarageResult } from "./persist";

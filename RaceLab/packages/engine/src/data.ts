@@ -39,15 +39,18 @@ export interface KBData {
 
 /** Resolve a chassis id to the template the engineer reasons over: a bundled
  *  `full` per-model template by template_id, else (for a `pending_pdf` model)
- *  the category template named by its registry `category_template`. Returns
- *  undefined when neither resolves — the caller refuses in-band, never throws. */
+ *  the category template named by its registry `category_template`, else a
+ *  category-template id used DIRECTLY (the app routes a car with no per-model
+ *  template to its class scaffold — e.g. an on-road car to "1_8_gt" — so it gets
+ *  class-correct advice instead of the off-road generic). Returns undefined when
+ *  none resolve — the caller refuses in-band, never throws. */
 export function resolveTemplate(data: KBData, id: string): ChassisTemplate | undefined {
   const direct = data.templates[id];
   if (direct) return direct;
   const entry = data.registry?.find((e) => e.chassis_id === id || e.template_id === id);
   const ct = (entry as { category_template?: string } | undefined)?.category_template;
   if (ct && data.categoryTemplates) return data.categoryTemplates[ct];
-  return undefined;
+  return data.categoryTemplates?.[id];
 }
 
 export function getTemplate(data: KBData, templateId: string): ChassisTemplate {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import type { CarEntity, PowerType } from "../../../../packages/garage/src";
-import { KB } from "../kb";
+import { templateIdForCar } from "../../../../packages/garage/src";
 import { CAR_BRANDS, ELECTRIC, ENGINES, modelsForBrand } from "../rcdata";
 import { colors } from "../theme";
 import { AutofillInput } from "./AutofillInput";
@@ -41,13 +41,11 @@ export function NewCarForm({ initial, onSave, onCancel, onDelete }: Props) {
   const [tank, setTank] = useState(initial?.fuel_tank_cl !== undefined ? String(initial.fuel_tank_cl) : "");
   const [transponder, setTransponder] = useState(initial?.transponder ?? "");
 
-  // template: exact chassis template when we have one for this brand+model,
-  // generic-offroad otherwise (real templates land with KB releases)
-  const templateFor = (): string => {
-    const m = `${brand} ${model}`.toLowerCase();
-    if (m.includes("mp11") || m.includes("inferno")) return "kyosho-inferno-mp11";
-    return KB.templates["generic-offroad"] ? "generic-offroad" : "kyosho-inferno-mp11";
-  };
+  // template: a per-model template when we have one, else the engine-resolvable
+  // CATEGORY template for this typology (templateIdForCar) — so an on-road car
+  // is never routed to the off-road generic and fed off-road rules.
+  const templateFor = (): string =>
+    templateIdForCar({ brand, model, category, scale, power, drivetrain });
 
   const save = () => {
     if (!brand.trim() && !model.trim() && !name.trim()) return;

@@ -147,6 +147,47 @@ s = deleteCar(s, a1.car.id);
 check("deleteCar removes the car", s.cars.length === 1 && s.cars[0].id === a2.car.id);
 check("deleteCar unknown id is a no-op (same reference)", deleteCar(s, "nope") === s);
 
+// — templateIdForCar: typology → resolvable KB template id (P1 fix) ────────────
+// Cross-check every output against the REAL bundled KB so a typo or a renamed
+// category template fails here, not silently in the app.
+import { templateIdForCar } from "./labels";
+import bundle from "../../kb/bundle.json";
+const RESOLVABLE = new Set<string>([
+  ...Object.keys((bundle as { templates?: Record<string, unknown> }).templates ?? {}),
+  ...Object.keys((bundle as { categoryTemplates?: Record<string, unknown> }).categoryTemplates ?? {}),
+]);
+const tplCar = (over: Partial<CarEntity>): Pick<CarEntity, "brand" | "model" | "category" | "scale" | "power" | "drivetrain"> => ({
+  brand: "Generic", model: "X", category: "buggy", scale: "1/8", power: "nitro", drivetrain: "4wd", ...over,
+});
+
+const cases: { label: string; car: Partial<CarEntity>; expect: string }[] = [
+  { label: "MP11 keeps its full per-model template", car: { brand: "Kyosho", model: "Inferno MP11" }, expect: "kyosho-inferno-mp11" },
+  { label: "on-road 1/10 electric → touring (NOT off-road)", car: { category: "onroad", scale: "1/10", power: "electric" }, expect: "1_10_touring_electric" },
+  { label: "on-road 1/10 nitro → nitro on-road", car: { category: "onroad", scale: "1/10", power: "nitro" }, expect: "1_10_nitro_onroad" },
+  { label: "on-road 1/8 → GT", car: { category: "onroad", scale: "1/8" }, expect: "1_8_gt" },
+  { label: "on-road 1/12 → pan", car: { category: "onroad", scale: "1/12" }, expect: "1_12_pan" },
+  { label: "1/8 nitro buggy → 1/8 off-road nitro", car: { category: "buggy", scale: "1/8", power: "nitro" }, expect: "1_8_offroad_nitro" },
+  { label: "1/8 electric buggy → 1/8 off-road electric", car: { category: "buggy", scale: "1/8", power: "electric" }, expect: "1_8_offroad_electric" },
+  { label: "1/10 2wd buggy → 1/10 2wd off-road", car: { category: "buggy", scale: "1/10", drivetrain: "2wd" }, expect: "1_10_offroad_2wd" },
+  { label: "1/10 4wd buggy → 1/10 4wd off-road", car: { category: "buggy", scale: "1/10", drivetrain: "4wd" }, expect: "1_10_offroad_4wd" },
+  { label: "truggy → 1/8 truggy", car: { category: "truggy" }, expect: "1_8_truggy" },
+  { label: "stadium_truck → stadium truck", car: { category: "stadium_truck", scale: "1/10" }, expect: "stadium_truck" },
+  { label: "sc → short course", car: { category: "sc", scale: "1/10" }, expect: "short_course" },
+];
+for (const c of cases) {
+  const got = templateIdForCar(tplCar(c.car));
+  check(`templateIdForCar: ${c.label}`, got === c.expect, `got ${got}`);
+  check(`templateIdForCar: ${c.expect} resolves in the bundled KB`, RESOLVABLE.has(got), `${got} not in bundle`);
+}
+// the headline invariant: an on-road car must NEVER be routed to the off-road generic
+for (const scale of ["1/8", "1/10", "1/12", "1/5"]) {
+  for (const power of ["nitro", "electric"] as const) {
+    const got = templateIdForCar(tplCar({ category: "onroad", scale, power }));
+    check(`on-road ${scale}/${power} is never generic-offroad`, got !== "generic-offroad", got);
+    check(`on-road ${scale}/${power} resolves in the bundle`, RESOLVABLE.has(got), got);
+  }
+}
+
 if (failures > 0) {
   console.error(`\n${failures} garage test(s) failed`);
   process.exit(1);

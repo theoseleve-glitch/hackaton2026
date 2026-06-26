@@ -147,6 +147,7 @@ const data: KBData = {
 };
 check("resolveTemplate returns the full template directly", resolveTemplate(data, "kyosho-inferno-mp11") === fullT);
 check("resolveTemplate maps a pending chassis to its category template", resolveTemplate(data, "kyosho-inferno-mp10") === catT);
+check("resolveTemplate resolves a category-template id used directly (app routes a car to its class scaffold)", resolveTemplate(data, "1_8_offroad_nitro") === catT);
 check("resolveTemplate returns undefined for an unknown id", resolveTemplate(data, "ghost-9000") === undefined);
 
 // ── draft-staging: kb/rules/drafts/ is NEVER bundled (D18 safety net) ─────────
