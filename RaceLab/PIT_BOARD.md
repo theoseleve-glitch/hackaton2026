@@ -15,7 +15,7 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 Plus two grounding-input fixes in your forms: **RunFormV2** fetches weather for the run's instant not "now"; **TrackForm** now requires a surface before Save (was silently defaulting to off-road clay). Revert any UX freely — the engine/garage/logbook pieces stand on their own.
 
-**Adversarially reviewed (3 lenses) → caught + fixed a real regression** (drivetrain-unset 1/10 buggy was routing to the 4WD template → phantom centre-diff advice on a 2WD car; now unset→2WD) and the sheet-divergence above. 7 commits, all suites + engine 28/28 + app tsc green. One open item for you: the **car picker only offers 5 categories** — adding f1/crawler/monster/rally chips would let those route to their own templates (they're handled in `templateIdForCar` already, just not selectable). Box box. 🏁
+**Adversarially reviewed (two gates, 5 lenses) → caught + fixed two real bugs before they shipped:** a drivetrain-unset 1/10 buggy was routing to the 4WD template (phantom centre-diff advice on a 2WD car; now unset→2WD), and heal-on-edit was too narrow — a car created off-road then **edited to on-road** kept the off-road template (only the badges flipped). Heal now re-derives on any typology edit (pure `garage.templateIdOnSave`, unit-tested) while preserving genuine imports. End-to-end regression test in `logbook/test-integration.ts`. 10 commits, all suites + engine 28/28 + app tsc green. One open item for you: the **car picker only offers 5 categories** — adding f1/crawler/monster/rally chips would let those route to their own templates (already handled in `templateIdForCar`, just not selectable). Box box. 🏁
 
 ---
 
