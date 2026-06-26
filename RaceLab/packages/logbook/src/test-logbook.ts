@@ -100,6 +100,10 @@ check("compare: unresolvable setup degrades gracefully", cmpNoSetup.setup_change
 // — bundle bridge (Layer 1 → engine)
 const tags = conditionTags(s.runs[0]);
 check("conditionTags derives taxonomy vocabulary", ["low_grip", "dusty", "bumpy", "rough", "hot"].every((t) => tags.includes(t)), tags.join(","));
+check("conditionTags emits the surface FAMILY tag (clay) so surface rules fire", tags.includes("clay"), tags.join(","));
+check("conditionTags has NO power tag without a power class", !tags.includes("nitro_power") && !tags.includes("stock_blinky"));
+check("conditionTags(nitro) emits the nitro power tag (gearing rules can fire)", conditionTags(s.runs[0], "nitro").includes("nitro_power"));
+check("conditionTags(electric) emits the brushless power tag", conditionTags(s.runs[0], "electric").includes("stock_blinky"));
 const hist = historyFromRuns(s, s.runs[0]);
 check("history only includes RATED runs at same grip", hist.length === 1 && hist[0].outcome === "better");
 const bundle = bundleFromRun(s.runs[0], SETUPS["kyosho-inferno-mp11/kit"], s);

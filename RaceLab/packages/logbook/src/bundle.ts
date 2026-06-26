@@ -1,5 +1,6 @@
 import type { ContextBundle } from "../../engine/src/types";
 import type { SetupValues } from "../../sheets/src/sheets";
+import { surfaceToTags, powerTypeToTags } from "../../schema/src/runs";
 import type { LogbookState, RunEntry } from "./types";
 
 /**
@@ -8,8 +9,16 @@ import type { LogbookState, RunEntry } from "./types";
  * Pure mapping; taxonomy condition tags are derived deterministically.
  */
 
-/** Derive taxonomy condition tags (packages/kb/taxonomy.yaml vocabulary). */
-export function conditionTags(run: RunEntry): string[] {
+/** The car's power class (garage vocabulary). Optional — when present it unions
+ *  the power tag so legal_in_power-gated rules (gearing/timing) can fire; the
+ *  run itself does not carry power, so the caller threads it from the garage. */
+export type RunPower = "nitro" | "electric";
+
+/** Derive taxonomy condition tags (packages/kb/taxonomy.yaml vocabulary).
+ *  Grip/bumps/dusty/sky/temp from the run's conditions, the surface FAMILY from
+ *  the run's track surface (so surface-amplified rules fire and forbidden_on can
+ *  exclude), and the power tag when the car's power class is supplied. */
+export function conditionTags(run: RunEntry, power?: RunPower): string[] {
   const tags = new Set<string>();
   const c = run.conditions;
 
@@ -30,6 +39,12 @@ export function conditionTags(run: RunEntry): string[] {
   const temp = c.track_temp_c ?? c.air_temp_c;
   if (temp !== undefined && temp >= 30) tags.add("hot");
   if (temp !== undefined && temp <= 10) tags.add("cold");
+
+  // Surface family (clay / loose_dirt / carpet / astroturf / asphalt / …) — the
+  // grounding axis the bulk of the 417 rules amplify or forbid on.
+  for (const t of surfaceToTags(run.track.surface)) tags.add(t);
+  // Power class → power tag (garage "electric" maps to schema "brushless").
+  if (power) for (const t of powerTypeToTags(power === "nitro" ? "nitro" : "brushless")) tags.add(t);
 
   return [...tags];
 }
@@ -58,7 +73,7 @@ export function bundleFromRun(
   run: RunEntry,
   setup: SetupValues,
   state: LogbookState,
-  opts?: { mode?: ContextBundle["mode"]; question?: string },
+  opts?: { mode?: ContextBundle["mode"]; question?: string; power?: RunPower },
 ): ContextBundle {
   const c = run.conditions;
   return {
@@ -68,7 +83,7 @@ export function bundleFromRun(
       name: run.track.name,
       surface: run.track.surface,
       grip: c.grip,
-      conditions: conditionTags(run),
+      conditions: conditionTags(run, opts?.power),
       evolution: c.evolution,
     },
     weather: {

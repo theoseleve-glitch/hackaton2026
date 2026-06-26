@@ -95,7 +95,8 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     setBusy(true);
     try {
       const setup = await resolveSetup(run);
-      const bundle = bundleFromRun(run, setup, logbook);
+      const power = garage.cars.find((c) => c.id === run.car_id)?.power;
+      const bundle = bundleFromRun(run, setup, logbook, { power });
       if (notes.trim()) {
         bundle.feedback = {
           ...bundle.feedback,
@@ -122,7 +123,8 @@ export function EngineerHubScreen({ logbook, garage, tracks, reports, addReport,
     try {
       const latest = runs[runs.length - 1];
       const setup = await resolveSetup(latest);
-      const bundle = bundleFromRun(latest, setup, logbook);
+      const power = garage.cars.find((c) => c.id === latest.car_id)?.power;
+      const bundle = bundleFromRun(latest, setup, logbook, { power });
       const summaries: SelectedRunSummary[] = runs.map((r) => ({
         date: r.created_at,
         track_name: r.track.name,
