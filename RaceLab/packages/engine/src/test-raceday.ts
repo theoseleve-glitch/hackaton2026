@@ -442,5 +442,29 @@ const baseInput: RaceDayInput = {
   );
 }
 
+// ── Refusal honesty: hot AND cold both forecast → the temperature shock-oil rules
+//    mutually cancel (reduced_on). The refusal must SAY that, not the false
+//    "No KB rule covers hot/cold" (the rules exist — they were suppressed). ────────
+{
+  const hotCold = [
+    obs({ observed_at: "2026-06-14T07:00:00.000Z", source: "auto", air_temp_c: 4, wind_speed_kmh: 8 }),
+    obs({ observed_at: "2026-06-14T14:00:00.000Z", source: "auto", air_temp_c: 34, wind_speed_kmh: 8 }),
+  ];
+  const r = planRaceDay({ ...baseInput, practice: [], forecast: hotCold }, data);
+  check("hot+cold forecast → ok plan", r.ok);
+  if (r.ok) {
+    const tempRefusals = r.plan.refusals.filter((x) => x.aspect === "hot" || x.aspect === "cold");
+    check("hot+cold → a refusal on each temperature aspect", tempRefusals.length === 2, JSON.stringify(r.plan.refusals));
+    check(
+      "refusal is HONEST: names the cancellation, never the false 'No KB rule covers'",
+      tempRefusals.length === 2 &&
+        tempRefusals.every(
+          (x) => /cancelled because the opposite condition/.test(x.message) && !/No KB rule covers/.test(x.message),
+        ),
+      JSON.stringify(tempRefusals.map((x) => x.message)),
+    );
+  }
+}
+
 console.log(failures === 0 ? "\nPLANNER: all planRaceDay tests passed" : `\nPLANNER: ${failures} failures`);
 if (failures > 0) process.exit(1);

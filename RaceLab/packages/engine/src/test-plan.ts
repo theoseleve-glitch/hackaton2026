@@ -260,8 +260,16 @@ const WORSE_301 = {
   const minorOnly: HistoryEntry = { change: "x: y", conditions: "dusty", outcome: "worse", citations: [R], track_id: "T", condition_tags: ["dusty", "bumpy"] };
   check("condition-seg: minor-tag-only row matches generically (never splits the signal)", historyForRule(R, hist(["high_grip"], 34, [minorOnly]))?.matched_count === 1);
 
+  // A condition-NEUTRAL day (no significant tag) must NOT let a condition-specific
+  // row drive ranking or claim "in similar conditions": the hot/cold rows are a
+  // DIFFERENT context, excluded entirely → no signal (tier 0), not a generic match.
   const hNeutral = historyForRule(R, hist([], undefined));
-  check("condition-seg: neutral forecast → both rows generic-match → cancel to tier 0", historyTier(hNeutral) === 0);
+  check("condition-seg: neutral day → condition-specific rows excluded → no signal, tier 0", hNeutral === null && historyTier(hNeutral) === 0);
+  // finding-10 guard: full weather present but neutral (20C, neither hot nor cold) +
+  // a hot-tagged 'better' row must NOT bleed in (was promoting to primary + falsely
+  // claiming 'in similar conditions').
+  const hNeutralWeather = historyForRule(R, hist([], 20, [betterHot]));
+  check("condition-seg: hot 'better' row on a neutral 20C day → excluded (no cross-condition bleed)", hNeutralWeather === null);
 
   // backward compat: all-untagged history → all-rows fallback, identical to legacy
   const hLegacy = historyForRule(R, hist(["high_grip"], 34, [{ ...uW }, { ...uW }]));

@@ -84,15 +84,21 @@ type RowState = "untagged" | "match" | "conflict";
 
 /** Classify a row against the bundle's significant conditions:
  *  - untagged (no condition_tags) → legacy fallback bucket
- *  - match: shares a significant condition, OR either side has none (can't
- *    discriminate ⇒ generic)
- *  - conflict: both sides have significant conditions but they are DISJOINT
- *    (e.g. a 'cold' row vs a 'hot' forecast) → excluded entirely */
+ *  - match: shares a significant condition, OR the ROW is generic (no significant
+ *    tag ⇒ a usable prior in any condition)
+ *  - conflict: the row carries a significant condition that the current day does
+ *    NOT (a disjoint pair like cold-row vs hot-forecast, OR a condition-specific
+ *    row on a condition-neutral day) → excluded entirely so a wrong-condition
+ *    outcome can never re-rank or be claimed "in similar conditions" */
 function rowConditionState(row: HistoryEntry, bundleSig: Set<string>): RowState {
   if (!row.condition_tags || row.condition_tags.length === 0) return "untagged";
   const rowSig = new Set<string>();
   for (const t of row.condition_tags) if (SIGNIFICANT_CONDITIONS.has(t)) rowSig.add(t);
-  if (rowSig.size === 0 || bundleSig.size === 0) return "match"; // generic on one side
+  if (rowSig.size === 0) return "match"; // row is generic → a usable prior anywhere
+  // The current day carries NO significant condition but the row does → it is a
+  // DIFFERENT context (a hot-day 'better' must not re-rank a neutral-temp day, nor
+  // let the card claim "in similar conditions"). Exclude it, same as a disjoint row.
+  if (bundleSig.size === 0) return "conflict";
   for (const t of rowSig) if (bundleSig.has(t)) return "match"; // shared family
   return "conflict";
 }

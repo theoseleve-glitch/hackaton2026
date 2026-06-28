@@ -211,10 +211,35 @@ export function planRaceDay(
       )
       .slice(0, MAX_ADJUSTMENTS_PER_TAG);
     if (candidates.length === 0) {
-      refusals.push({
-        aspect: tag,
-        message: `No KB rule covers '${tag}' on ${input.track.surface} for this chassis — no recommendation (grounded or silent).`,
-      });
+      // Distinguish "genuinely no rule" from "rules exist but every one was dropped
+      // by reduced_on because the OPPOSITE extreme is ALSO forecast" (e.g. hot AND
+      // cold in the same window cancel the temperature shock-oil rules). Saying
+      // 'No KB rule covers <tag>' in the latter case is a false statement to the racer.
+      const suppressed = data.rules.filter(
+        (r) =>
+          r.scope.some((s) => template.scope.includes(s)) &&
+          templateExposes(template, r.setting) &&
+          r.conditions.amplified_on.includes(tag) &&
+          raceDayFilter(r).allowed &&
+          !r.setting.startsWith("tire") &&
+          !r.forbidden_on?.some((c) => surfaceTags.has(c) || predictedTags.has(c)) &&
+          !avoidRuleIds.has(r.id) &&
+          r.conditions.reduced_on.some((c) => predictedTags.has(c)),
+      );
+      if (suppressed.length > 0) {
+        const opposing = [
+          ...new Set(suppressed.flatMap((r) => r.conditions.reduced_on.filter((c) => predictedTags.has(c)))),
+        ].sort();
+        refusals.push({
+          aspect: tag,
+          message: `'${tag}' rules are cancelled because the opposite condition (${opposing.join(", ")}) is also forecast in this window — no single grounded call (grounded or silent); your decision on the day.`,
+        });
+      } else {
+        refusals.push({
+          aspect: tag,
+          message: `No KB rule covers '${tag}' on ${input.track.surface} for this chassis — no recommendation (grounded or silent).`,
+        });
+      }
       continue;
     }
     for (const rule of candidates) {
