@@ -1,14 +1,15 @@
-# RaceLab CI — green gate (B11). TEMPLATE, not yet active.
+# RaceLab CI — green gate (B11). ACTIVE.
 #
-# ACTIVATE: move this file to the REPO ROOT at .github/workflows/racelab-ci.yml
-# (GitHub only reads workflows from <repo-root>/.github/workflows). It is left
-# here under RaceLab/ci/ so it doesn't start running CI on the shared monorepo
-# (which also holds r2/ and SETUP_RC/) until William chooses to.
+# Activated 2026-06-29 (D74, William's call), moved here from RaceLab/ci/. Lives at
+# the monorepo root because GitHub only reads workflows from
+# <repo-root>/.github/workflows. Scoped to RaceLab/** so it never runs CI for the
+# sibling r2/ and SETUP_RC/ trees in this shared monorepo.
 #
 # What it does: on any push/PR touching RaceLab/**, run every package's test
-# suite + typecheck (the engine eval is part of `engine` npm test) and the app
-# typecheck. Red blocks the merge. Zero secrets — the whole tier is pure/offline
-# at test time (no DB, no network, no deploy).
+# suite + typecheck (the engine eval + validate-live grounding gate are part of
+# `engine` npm test), the server suite, and the app typecheck. Red blocks the
+# merge. Zero secrets — the whole tier is pure/offline at test time (no DB, no
+# network, no deploy).
 
 name: racelab-ci
 on:
