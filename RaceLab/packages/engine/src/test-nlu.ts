@@ -27,7 +27,43 @@ const CASES: Case[] = [
   { text: "it kicks sideways over the rough section", symptom: "poor_bump_handling", phase: "rough_section" },
   { text: "track is dusty and slippery and the car pushes", symptom: "understeer", conditions: ["dusty", "low_grip"] },
   { text: "blue groove came in and now it traction rolls", symptom: "traction_roll", conditions: ["blue_groove"] },
+  // ── hardening guards (engine-hardening sweep) ───────────────────────────────
+  // gerund / past forms of "steps out" (was unrecognized → false refusal)
+  { text: "rear's stepping out on exit", symptom: "oversteer", phase: "corner_exit" },
+  { text: "the back stepped out mid corner", symptom: "oversteer", phase: "mid_corner" },
+  // dropped-g colloquialisms for "pushing" (was unrecognized → false refusal)
+  { text: "car's pushin' like a pig mid-corner", symptom: "understeer", phase: "mid_corner" },
+  { text: "it's just pushin everywhere", symptom: "understeer" },
+  // rotation vocabulary (was unrecognized → false refusal)
+  { text: "car won't rotate in the hairpin", symptom: "understeer", phase: "low_speed" },
+  { text: "not enough rotation through the infield", symptom: "understeer" },
+  // rear traction loss is a SYMPTOM, not a low_grip TRACK read ("no grip" must not
+  // map to the low_grip condition any more)
+  { text: "rear has no grip on power", symptom: "no_forward_bite", phase: "on_power", conditions: [] },
+  { text: "no rear bite coming out of the slow stuff", symptom: "no_forward_bite" },
 ];
+
+// Multi-symptom clause binding: each symptom must bind to its OWN clause's phase,
+// never cross-product. "loose on entry but pushes on exit" must NOT assert
+// understeer@corner_entry (the opposite of what the driver said).
+{
+  const { tags } = parseFeedback("loose on entry but pushes on exit");
+  const has = (s: string, p: string) => tags.some((t) => t.symptom === s && t.phase === p);
+  const bad = has("understeer", "corner_entry") || has("oversteer", "corner_exit");
+  const good = has("oversteer", "corner_entry") && has("understeer", "corner_exit");
+  if (bad || !good) {
+    console.log(`✗ clause-binding: 'loose on entry but pushes on exit' → ${JSON.stringify(tags)}`);
+    process.exit(1);
+  }
+  // the INVERSE complaint must produce the INVERSE tags (not a byte-identical set)
+  const inv = parseFeedback("pushes on entry but loose on exit").tags;
+  const invGood = inv.some((t) => t.symptom === "understeer" && t.phase === "corner_entry") &&
+    inv.some((t) => t.symptom === "oversteer" && t.phase === "corner_exit");
+  if (!invGood) {
+    console.log(`✗ clause-binding inverse: 'pushes on entry but loose on exit' → ${JSON.stringify(inv)}`);
+    process.exit(1);
+  }
+}
 
 let passed = 0;
 const failures: string[] = [];

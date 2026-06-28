@@ -143,15 +143,19 @@ export class RaceEngineerChat {
 
   private onProblem(input: string): string[] {
     const parsed = parseFeedback(input);
-    if (parsed.conditions.length > 0) {
-      this.bundle.track.conditions = [
-        ...new Set([...this.bundle.track.conditions, ...parsed.conditions]),
-      ];
-    }
     if (parsed.tags.length === 0) {
+      // A turn we couldn't read must NOT mutate session state — merging conditions
+      // before this guard let a misparsed phrase (e.g. "rear has no grip" parsed as
+      // a low_grip TRACK reading) silently rewrite track.conditions and skew the
+      // next turn's grounded plan.
       return [
         "I couldn't pin the symptom down from that.",
         PROBLEM_PROMPT,
+      ];
+    }
+    if (parsed.conditions.length > 0) {
+      this.bundle.track.conditions = [
+        ...new Set([...this.bundle.track.conditions, ...parsed.conditions]),
       ];
     }
     const hasPhase = parsed.tags.some((t) => t.phase);

@@ -17,7 +17,7 @@ const SYMPTOM_PATTERNS: SymptomPattern[] = [
   {
     symptom: "unstable_braking",
     patterns: [
-      /(swaps?|wanders?|loose|unstable|nervous|steps? out).{0,30}(under |when |while )?brak/i,
+      /(swaps?|wanders?|loose|unstable|nervous|step(s|ping|ped)? out).{0,30}(under |when |while )?brak/i,
       /brak\w*.{0,30}(swaps?|wanders?|loose|unstable|nervous)/i,
     ],
   },
@@ -37,6 +37,9 @@ const SYMPTOM_PATTERNS: SymptomPattern[] = [
       /wheel.?spin/i,
       /can'?t (put|get) (the )?power down/i,
       /bogs? (down )?out of/i,
+      // rear traction loss on power ("rear has no grip on power", "no rear bite")
+      /(rear|back end) (has |got |with )?(no|lost|losing|loses?|lacks?) (grip|traction|bite)/i,
+      /(no|lost|losing|loses?|lacks?) (the )?(rear|back) (grip|traction|bite)/i,
     ],
   },
   {
@@ -63,8 +66,11 @@ const SYMPTOM_PATTERNS: SymptomPattern[] = [
     symptom: "understeer",
     patterns: [
       /understeer/i,
-      /push(es|ing|y)?\b/i,
+      /push(es|ing|in'?|y)?\b/i,
       /(won'?t|wont|doesn'?t|will not) turn/i,
+      // "won't rotate" / "not enough rotation" — insufficient/negated rotation only
+      // (a bare /rotat/ would mis-tag "rotates too much", which is oversteer)
+      /(won'?t|wont|doesn'?t|will not|not enough|no|lacks?|lacking|needs? more) rotat(e|ion|ing)/i,
       /wash(es)?( out)?/i,
       /plows?|ploughs?/i,
       /no steering/i,
@@ -77,9 +83,10 @@ const SYMPTOM_PATTERNS: SymptomPattern[] = [
     patterns: [
       /oversteer/i,
       /\bloose\b/i,
-      /steps? out/i,
+      /step(s|ping|ped)? out/i,
+      /(too much|excess(ive)?|loads of) rotat(e|ion|ing)/i,
       /kicks? (out|sideways)/i,
-      /rear (comes|came|steps|swings) (around|out|wide)/i,
+      /rear (comes|came|steps|stepping|stepped|swings|swinging) (around|out|wide)/i,
       /fish.?tails?/i,
       /spins? out/i,
       /back end (comes|snaps)/i,
@@ -114,7 +121,10 @@ const CONDITION_PATTERNS: { condition: string; patterns: RegExp[] }[] = [
   { condition: "wet", patterns: [/wet|rain|damp|moist/i] },
   { condition: "blue_groove", patterns: [/blue.?groove|grooved (up|in)|the groove/i] },
   { condition: "high_grip", patterns: [/high.?grip|hooked.?up|lots of grip|tons of grip/i] },
-  { condition: "low_grip", patterns: [/low.?grip|slippery|green track|no grip|loose dirt/i] },
+  // "no grip" is deliberately NOT a track signal: it almost always describes the
+  // car's balance ("no rear grip", "no front grip") — that path is a symptom, not a
+  // surface read. A driver describing the TRACK says "low grip"/"slippery"/"green".
+  { condition: "low_grip", patterns: [/low.?grip|slippery|green track|loose dirt/i] },
   { condition: "bumpy", patterns: [/bumpy|rough track|ruts|washboard/i] },
   { condition: "smooth", patterns: [/smooth/i] },
   { condition: "big_jumps", patterns: [/big (jump|double|triple)|huge jump/i] },
@@ -129,38 +139,83 @@ export interface NLUResult {
   conditions: string[];
 }
 
-export function parseFeedback(text: string): NLUResult {
+function detectSymptoms(text: string): string[] {
   const symptoms: string[] = [];
   for (const { symptom, patterns } of SYMPTOM_PATTERNS) {
     if (patterns.some((p) => p.test(text)) && !symptoms.includes(symptom)) {
       symptoms.push(symptom);
     }
   }
-
   // unstable_braking subsumes both the braking-phase oversteer reading AND the
   // generic "nervous" (twitchy) reading of the same words — "nervous under
   // braking" is one behaviour, not two unrelated symptoms pulling retrieval apart.
-  let filtered = symptoms;
   if (symptoms.includes("unstable_braking")) {
-    filtered = symptoms.filter((s) => s !== "oversteer" && s !== "twitchy");
+    return symptoms.filter((s) => s !== "oversteer" && s !== "twitchy");
   }
-  // twitchy's "can't hold it straight" overlaps poor_bump_handling wording only when bumps present
-  const phases = PHASE_PATTERNS.filter(({ patterns }) => patterns.some((p) => p.test(text))).map(
+  return symptoms;
+}
+
+function detectPhases(text: string): string[] {
+  return PHASE_PATTERNS.filter(({ patterns }) => patterns.some((p) => p.test(text))).map(
     (p) => p.phase,
   );
+}
+
+/** Split free text on coordinating conjunctions / punctuation into clauses and
+ *  bind each clause's symptom(s) to that clause's OWN phase(s). Returns bound tags
+ *  only when ≥2 clauses each carry a symptom (a genuine multi-symptom sentence);
+ *  otherwise null so the caller falls back to the global reading. Without this,
+ *  "loose on entry but pushes on exit" would cross-product to understeer@entry —
+ *  the exact opposite of what the driver said. */
+function parseClauseBound(text: string): FeedbackTag[] | null {
+  const clauses = text
+    .split(/\b(?:but|then|whereas|while|and)\b|[;,]/i)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (clauses.length < 2) return null;
+  const perClause = clauses.map((c) => ({ symptoms: detectSymptoms(c), phases: detectPhases(c) }));
+  if (perClause.filter((c) => c.symptoms.length > 0).length < 2) return null;
 
   const tags: FeedbackTag[] = [];
-  for (const symptom of filtered.slice(0, 2)) {
+  const seen = new Set<string>();
+  const add = (symptom: string, phase?: string) => {
+    const key = `${symptom}|${phase ?? ""}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    tags.push(phase ? { symptom, phase } : { symptom });
+  };
+  for (const { symptoms, phases } of perClause) {
+    for (const symptom of symptoms.slice(0, 2)) {
+      if (phases.length === 0) add(symptom);
+      else for (const phase of phases.slice(0, 2)) add(symptom, phase);
+    }
+  }
+  return tags.length > 0 ? tags : null;
+}
+
+export function parseFeedback(text: string): NLUResult {
+  const conditions = CONDITION_PATTERNS.filter(({ patterns }) =>
+    patterns.some((p) => p.test(text)),
+  ).map((c) => c.condition);
+
+  const symptoms = detectSymptoms(text);
+
+  // A genuine multi-symptom sentence ("X on entry but Y on exit") must bind each
+  // symptom to its own clause's phase, never cross-product all symptoms × all phases.
+  if (symptoms.length >= 2) {
+    const bound = parseClauseBound(text);
+    if (bound) return { tags: bound, conditions };
+  }
+
+  const phases = detectPhases(text);
+  const tags: FeedbackTag[] = [];
+  for (const symptom of symptoms.slice(0, 2)) {
     if (phases.length === 0) {
       tags.push({ symptom });
     } else {
       for (const phase of phases.slice(0, 2)) tags.push({ symptom, phase });
     }
   }
-
-  const conditions = CONDITION_PATTERNS.filter(({ patterns }) =>
-    patterns.some((p) => p.test(text)),
-  ).map((c) => c.condition);
 
   return { tags, conditions };
 }
