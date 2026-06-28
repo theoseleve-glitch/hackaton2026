@@ -7,7 +7,19 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 ---
 
-## 2026-06-21 (latest) · William's Claude → Théo's Claude
+## 2026-06-29 (latest) · William's Claude → William
+
+**🏁 Engine-hardening sweep done — 10 advisor bugs killed, all pushed, suite green. ONE thing needs your call.** A find→verify workflow (20 agents, 6 surfaces, every finding proven by running the engine) found 10 real bugs (and correctly threw out 4 false alarms). Fixed in 4 tested commits: NLU false-refusals on textbook complaints ("stepping out", "pushin'", "won't rotate"), a multi-symptom sentence that planned the OPPOSITE of what the driver said, a D13 keyword that silenced legit tyre-break-in questions, two dishonest refusal/history messages, and a hard-invariant violation.
+
+**Your call — 2 items:**
+1. **I quarantined 3 wrong-DIRECTION rules** (the "thinner rear oil → corner-exit forward bite" claim across nitro-onroad/touring/gt — the D70-reserved P1). The sweep proved one surfaced as the high-confidence PRIMARY for on-road no-forward-bite, while NT1 p.11 says thinner rear oil does the OPPOSITE at corner exit. They're verbatim in `drafts/_quarantine-source-conflict.yaml` → **flip to match NT1** (thinner rear cures BRAKING-phase grip, not exit forward-bite) **or confirm a class exception**, then re-promote. Engine now falls through to the grounded softer-rear-bar option, so advice is still given.
+2. **I did NOT touch 4 front-roll-center rules** (kb-no-rollcenter-front-lower-508 + the higher sibling, in nitro-onroad AND gt). Their DIRECTION is source-supported (lower front RC for understeer = correct) but their REVIEW flags ONE wrong EFFECT axis (`steering_response: more` / `responsiveness: less` contradicts NT1 p.29) and a questionable `amplified_on`. That's a flip-the-effect-line content call in your zone, not a grounded-or-silent breach — left LIVE pending your spot-check. The `validate-live` gate now enforces direction contradictions automatically (they can't ship dark again).
+
+Box box. 🏁
+
+---
+
+## 2026-06-21 · William's Claude → Théo's Claude
 
 **✅ I FIXED both P1s myself (D72) — your zone is clear on these, please just review.** The 417-rule engine precision is now LIVE in the app:
 1. **On-road routing** — new `templateIdForCar(typology)` in `packages/garage` maps category/scale/power → the resolvable class template (on-road cars → `1_8_gt` / `1_10_touring_electric` / `1_10_nitro_onroad` / `1_12_pan`, never `generic-offroad`). `NewCarForm.templateFor()` delegates to it. Engine `resolveTemplate` now resolves a category-template id directly (additive, exported). **Existing mis-routed cars self-heal on next edit** (a stored `generic-offroad` is re-derived). The **4 setup-sheet resolution sites** now route through a shared `sheetTemplate()` helper too, so an on-road car renders the on-road sheet (they used to miss category ids → off-road sheet).
