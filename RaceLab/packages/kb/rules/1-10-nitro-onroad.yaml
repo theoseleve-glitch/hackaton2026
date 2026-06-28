@@ -73,27 +73,6 @@
   sources: ["XRAY NT1 Set-Up Book p.10 (Effects of Shock Damping — Front, harder damping / thicker oil)"]
   scope: [1-10-nitro-onroad]
 
-- id: kb-no-shock-rear-thinner-503
-  setting: rear_shock_oil
-  direction: decrease          # thinner rear oil — faster rear shock action, more forward traction
-  effects:
-    - { axis: rear_shock_action, change: faster }
-    - { axis: rear_traction, change: more }
-    - { axis: bump_compliance, change: more }
-  addresses:
-    - { symptom: no_forward_bite, phase: corner_exit }
-    - { symptom: poor_bump_handling, phase: rough_section }
-  conditions:
-    amplified_on: [bumpy, low_grip, asphalt]
-    reduced_on: [smooth, high_grip]
-  counter_indications: [oversteer]
-  magnitude_guidance: "One oil step at a time, both rear shocks identical. HUDY: faster (softer) shock action keeps the tyre in contact with the surface, which produces the most grip (front & rear)."
-  reversal_cost_minutes: 15
-  confidence: high
-  # REVIEW: PARTIAL SUPPORT. NT1 p.11 says softer rear damping (thinner oil) "increases rear grip under BRAKING" but "DECREASES rear grip at corner exit/under acceleration" — the OPPOSITE of this rule's corner-exit forward-bite claim. NT1 supports thinner rear oil only for braking-phase grip; the "more rear traction / forward bite on corner_exit / on-power" address is NOT supported by NT1 (it is the HUDY 'soft damping = most grip' generalization). Keep for William's review.
-  sources: ["XRAY NT1 Set-Up Book p.11 (Effects of Shock Damping — Rear, softer damping / thinner oil)"]
-  scope: [1-10-nitro-onroad]
-
 - id: kb-no-shock-rear-thicker-504
   setting: rear_shock_oil
   direction: increase          # thicker rear oil — flatter on power, calmer at speed, less grip

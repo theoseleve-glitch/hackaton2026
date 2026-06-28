@@ -91,7 +91,12 @@ for (const r of data.rules) {
 //    confidence:high. Comments are stripped by the YAML parser, so scan raw text:
 //    a rule block (`- id:` … next `- id:`) carrying a contradiction marker AND
 //    `confidence: high` is a D18 violation (grounded advice that refutes its cite).
-const MARKERS = /DIRECTLY CONTRADICTS|INVERTED on NT1|appears inverted|REVIEW: CONFLICT/;
+// "the OPPOSITE of this rule['s ... claim]" is a self-contradiction marker: the
+// rule's own REVIEW says its recommended DIRECTION is the inverse of its cite (a
+// grounded-or-silent violation). Distinct from "the OPPOSITE of NT1 ... rule sides
+// with NT1" (a legitimate source-disagreement where the rule picks a side) — that
+// phrasing says "of NT1", not "of this rule", so it is NOT matched.
+const MARKERS = /DIRECTLY CONTRADICTS|INVERTED on NT1|appears inverted|REVIEW: CONFLICT|the OPPOSITE of this rule/;
 for (const file of readdirSync(liveDir).filter((f) => f.endsWith(".yaml"))) {
   const lines = readFileSync(join(liveDir, file), "utf8").split(/\r?\n/);
   let id: string | null = null, hasMarker = false, isHigh = false;
