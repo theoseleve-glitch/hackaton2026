@@ -108,8 +108,17 @@ engine_scope_refusal:
     - rich mixture
     - richen
     - engine temp
-    - break-in
-    - break in
+    # engine-qualified break-in only: a bare "break in"/"break-in" false-refused
+    # legitimate TYRE break-in questions ("break in my new tyres", "fresh break-in
+    # set"). Engine break-in stays refused; any missed engine phrasing degrades to
+    # the generic no-rule refusal, which is safe (the KB has no engine rules).
+    - engine break-in
+    - engine break in
+    - break in the engine
+    - break in my engine
+    - break in a new engine
+    - break in the motor
+    - heat cycle the engine
     - fuel mixture
     - nitro percentage
   refusal: >-

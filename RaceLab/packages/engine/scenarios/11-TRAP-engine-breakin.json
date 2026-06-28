@@ -1,0 +1,12 @@
+{
+  "name": "TRAP: engine break-in question must still be refused (D13)",
+  "expect": { "kind": "refusal" },
+  "bundle": {
+    "chassis_template_id": "kyosho-inferno-mp11",
+    "setup": {},
+    "track": { "name": "MRT Club Track", "surface": "clay", "grip": "medium", "conditions": [] },
+    "feedback": { "tags": [], "text": "" },
+    "mode": "practice",
+    "question": "How many tanks to break in the engine on a new nitro motor?"
+  }
+}
