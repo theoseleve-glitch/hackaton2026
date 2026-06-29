@@ -5,19 +5,169 @@
 # (recommendTires → top-2 distinct profiles). Kept ORTHOGONAL to the tuning rules bundle
 # (its own loader + grounding test) so it can't disturb the rules pipeline / validate-live.
 #
-# GROUNDED OR SILENT (D18/D53): every entry MUST carry a real published source in `sources`
-# (manufacturer tire-selection guide / named book / championship guide — internal provenance).
-# Entries are authored ONLY from the verified output of the `offroad-tire-selection-grounding`
-# research workflow (research → adversarial verify each mapping is source-stated). No guesses.
+# GROUNDED OR SILENT (D18/D53): every entry carries a real published source in `sources`
+# (manufacturer tire-selection guide / named book / race guide — internal provenance).
+# Entries were authored ONLY from the source-VERIFIED output of the
+# `offroad-tire-selection-grounding` research+adversarial-verify workflow (2026-06-29).
 #
-# Schema (see TireSelectionEntrySchema in tire-advisor.ts):
-# - id: tsel-<surface>-<tread>-<nnn>
-#   scope: [<off-road class tags>]
-#   match: { surface: <family tag>, grip: [low|medium|high], temp: [cold|mild|hot], wet: <bool?> }
-#   tread: <profile>   compound: <softness band>   examples: [<buy examples>]
-#   rationale: <one line>   sources: [<real source + statement>]   confidence: high|medium|low
-#
-# Surface family tags (from schema.surfaceToTags): loose_dirt | clay | blue_groove |
+# Surface families (from schema.surfaceToTags): loose_dirt | clay | blue_groove |
 # astroturf | carpet | wet. grip from low_grip/high_grip/blue_groove; temp from hot/cold.
 #
-# (Pending the grounding workflow — entries land here once source-verified.)
+# COVERAGE NOTE: clay was NOT authored — its research cluster's verify stage was
+# rate-limited, so under grounded-or-silent the advisor honestly refuses on clay until a
+# re-run verifies it. sand/grass have no distinct surface-family tag yet (sand folds into
+# loose_dirt, grass is unmapped) — deferred to a schema.surfaceToTags follow-up.
+
+# ── LOOSE / LOAMY DIRT — tread digs; compound by air temp (AKA ladder) ────────
+- id: tsel-loosedirt-spike-cold
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: loose_dirt, grip: [], temp: [cold] }
+  tread: spike
+  compound: super-soft
+  examples: ["JConcepts Goose Bumps (Green / super-soft)", "AKA super-soft"]
+  rationale: "On loose loam grip comes from the lug digging in — run a large-spike tread; cold/low-grip wants the softest compound."
+  sources:
+    - "JConcepts Tire Selection Guide (official PDF, horizonhobby/towerhobbies): 'tires with large spikes should be chosen for tracks with loamy, fluffy, or wet dirt'"
+    - "AKA Tire Compound Guide (RSRC reproduction): 'Below 5C or very low grip → Ultra Soft; 5-15C or low grip → Super Soft'"
+  confidence: high
+
+- id: tsel-loosedirt-spike-mild
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: loose_dirt, grip: [], temp: [mild] }
+  tread: spike
+  compound: soft
+  examples: ["JConcepts Goose Bumps (Blue / soft)", "AKA Soft"]
+  rationale: "Large-spike tread for loam; mild temps / medium grip take the Soft compound."
+  sources:
+    - "JConcepts Tire Selection Guide (official): large spikes for loamy/fluffy/wet dirt"
+    - "AKA Tire Compound Guide (RSRC): '15-25C or medium grip → Soft'"
+  confidence: high
+
+- id: tsel-loosedirt-spike-hot
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: loose_dirt, grip: [], temp: [hot] }
+  tread: spike
+  compound: medium
+  examples: ["JConcepts Goose Bumps (Yellow / medium)", "AKA Medium"]
+  rationale: "Keep the digging spike tread, but step UP to Medium in the heat / high grip so the tyre stays durable and doesn't grease over."
+  sources:
+    - "JConcepts Tire Selection Guide (official): 1/8 buggy large-spike patterns (Goose Bumps, Crowbars, Hit Men) rated Yellow/Medium = Excellent for Loamy"
+    - "AKA Tire Compound Guide (RSRC): 'high temperature or very high grip → Medium (hardest, most durable)'"
+  confidence: high
+
+- id: tsel-loosedirt-block-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: loose_dirt, grip: [], temp: [] }
+  tread: block/lug
+  compound: soft
+  examples: ["AKA Cross Brace (soft)", "Pro-Line Blockade SC (M3)"]
+  rationale: "A large square-pin + centre-bar block tread is the alternative loose-loam profile — puts power to the ground across loose-to-loamy going."
+  sources:
+    - "AKA Cross Brace (Horizon Hobby): 'really stands out in loose to loamy track conditions... larger square pins and center bars... deliver the power to the ground'"
+    - "Pro-Line Blockade SC (Pro-Line/retailers): 'from hard packed to blue-groove and loose to loamy'"
+  confidence: high
+
+# ── HARD-PACKED / BLUE-GROOVE — small pins, run high-grip ─────────────────────
+- id: tsel-bluegroove-minipin-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: blue_groove, grip: [high], temp: [] }
+  tread: mini-pin
+  compound: soft
+  examples: ["JConcepts small-pin patterns (soft)", "Pro-Line hard-pack mini-pin"]
+  rationale: "Hard-packed / blue-groove takes rubber, not lugs — a soft-compound small-pin (mini-pin) tread is the pick."
+  sources:
+    - "JConcepts Tire Selection Guide (official): 'Soft compound tires with small pins should be used for hard-packed, dusty, or slick tracks'"
+  confidence: high
+
+- id: tsel-bluegroove-dualpin-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: blue_groove, grip: [high], temp: [] }
+  tread: dual-stage pin
+  compound: medium
+  examples: ["Pro-Line Caliber (M3/M4)"]
+  rationale: "A dual-stage pin works when a hard-packed/blue-groove line carries a light loose top layer — base pin grips the groove, small top pin handles the dust."
+  sources:
+    - "Pro-Line Caliber (Pro-Line/AMain): 'small top pin for light to heavy loose dirt and a base pin that is extraordinary on hard-packed/blue-groove surfaces'"
+  confidence: high
+
+# ── ASTROTURF — spike (long pile) or pin (short/purpose-built) ────────────────
+- id: tsel-astro-spike-001
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: astroturf, grip: [], temp: [mild, hot] }
+  tread: spike
+  compound: medium
+  examples: ["Schumacher Mini Spike (Yellow / medium)"]
+  rationale: "Longer / shag astroturf pile needs a true spike to dig into the fibres; medium (Yellow) is the dry-weather default."
+  sources:
+    - "Robin Schumacher (LiveRC): 'A longer pile, more shag... requires an adequate spike to dig into the fibres'; 'Yellow... medium compound... most widely used for dry weather racing'"
+  confidence: high
+
+- id: tsel-astro-pin-001
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: astroturf, grip: [], temp: [mild, hot] }
+  tread: pin (pyramid)
+  compound: medium
+  examples: ["Pro-Line Pyramid Z3 (medium)", "JConcepts Lockness (Pink)"]
+  rationale: "Short-pile / purpose-built astro carcass runs a self-sharpening pyramid pin; medium compound for warm, higher-bite days."
+  sources:
+    - "Pro-Line Pyramid Z3/Z4 (Pro-Line): pyramid knife-edge pins, carcass 'optimized for the demands of Astro racing'; 'Z4... softer than Z3... colder temperatures'"
+  confidence: high
+
+- id: tsel-astro-spike-cold
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: astroturf, grip: [], temp: [cold] }
+  tread: spike
+  compound: super-soft
+  examples: ["Schumacher (Silver / super-soft)", "Pro-Line Pyramid Z4 (soft)"]
+  rationale: "Cold/wet astro: keep the spike tread but drop to the super-soft compound for grip."
+  sources:
+    - "Robin Schumacher (LiveRC): 'The much softer Silver compound works well in wet conditions'"
+    - "Pro-Line Z4 (Red RC): 'softer than the proven Z3 and will excel on less grippy tracks or in colder temperatures'"
+  confidence: high
+
+# ── OFF-ROAD CARPET — small pins ──────────────────────────────────────────────
+- id: tsel-carpet-minipin-001
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: carpet, grip: [], temp: [mild, hot] }
+  tread: mini-pin
+  compound: medium
+  examples: ["Schumacher Cactus (Yellow / medium)", "JConcepts Pin Downs (Pink)"]
+  rationale: "Carpet wants short pins, not long spikes; medium (Yellow) is the dry default, the Cactus pin balances grip and long life."
+  sources:
+    - "Robin Schumacher (LiveRC): 'Carpet tires require much shorter spikes... commonly referred to as pins'; Cactus 'optimized for modern carpet racing with a superior balance of grip and long life'"
+    - "JConcepts Pin Downs (blog 2016): 'work best on Carpet and Astroturf tracks where typically a small pin tire is working'; Pink = medium-soft"
+  confidence: high
+
+- id: tsel-carpet-pin-cold
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: carpet, grip: [], temp: [cold] }
+  tread: pin
+  compound: super-soft
+  examples: ["Schumacher (Silver / super-soft)"]
+  rationale: "Cold/wet carpet: same pin tread, super-soft (Silver) compound for grip."
+  sources:
+    - "Robin Schumacher (LiveRC): 'The much softer Silver compound works well in wet conditions'"
+  confidence: high
+
+# ── WET — profile depends on whether mud PACKS or the going is SOFT ────────────
+- id: tsel-wet-lowtread-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: wet, grip: [], temp: [], wet: true }
+  tread: low-profile (sheds packed mud)
+  compound: super-soft
+  examples: ["AKA P-One"]
+  rationale: "When wet mud PACKS into tall lugs the tyre goes slick — a lower-profile pattern sheds it; pair with the softest compound for the low grip."
+  sources:
+    - "AKA selection guide (RSRC): 'if the track is wet and the mud is sticking to the tyre, we will choose the P-one for its lower tread pattern'"
+  confidence: high
+
+- id: tsel-wet-stepbar-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: wet, grip: [], temp: [], wet: true }
+  tread: stepped tall-base bar
+  compound: super-soft
+  examples: ["JConcepts Subcultures (Green / super-soft)"]
+  rationale: "Wet AND soft going: a stepped, taller-base tread reaches through the soft surface; the green super-soft compound is best for wet dirt."
+  sources:
+    - "JConcepts Subcultures green release (blog 2010): 'excel on... wet or when traction is hard to come-by... the step base give the necessary height for wet and soft conditions'"
+  confidence: high

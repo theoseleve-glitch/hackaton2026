@@ -135,10 +135,23 @@ const baseCtx: TireContext = { scope: ["1-8-offroad"], surface: "loose_dirt", gr
     loadErr = (e as Error).message;
   }
   check("real selection KB loads without error", loadErr === "", loadErr);
+  const ANCHORS = ["JConcepts", "AKA", "Pro-Line", "Proline", "Schumacher", "Stevens", "HUDY", "LiveRC", "RSRC", "Red RC", "AMain", "Horizon"];
   for (const e of kb) {
     const r = TireSelectionEntrySchema.safeParse(e);
     check(`real entry ${e.id} is schema-valid`, r.success);
-    check(`real entry ${e.id} is grounded (≥1 source)`, e.sources.length > 0);
+    check(
+      `real entry ${e.id} is grounded (a recognized source)`,
+      e.sources.length > 0 && e.sources.some((s) => ANCHORS.some((a) => s.includes(a))),
+      JSON.stringify(e.sources),
+    );
+  }
+  // smoke: the real dataset drives the engine end-to-end for a common case.
+  if (kb.length > 0) {
+    const r = recommendTires({ scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false }, kb);
+    check("real KB: loam/low/cold → grounded recommendation", r.kind === "tire_selection" && (r.picks?.length ?? 0) >= 1, JSON.stringify(r));
+    check("real KB: every real pick is cited", (r.picks ?? []).every((p) => p.citations.length > 0));
+    const clay = recommendTires({ scope: ["1-8-offroad"], surface: "clay", grip: "high", temp: "mild", wet: false, dusty: false }, kb);
+    check("real KB: clay refuses (not yet grounded — grounded or silent)", clay.kind === "refusal");
   }
 }
 
