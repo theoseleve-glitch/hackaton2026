@@ -150,8 +150,12 @@ const baseCtx: TireContext = { scope: ["1-8-offroad"], surface: "loose_dirt", gr
     const r = recommendTires({ scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false }, kb);
     check("real KB: loam/low/cold → grounded recommendation", r.kind === "tire_selection" && (r.picks?.length ?? 0) >= 1, JSON.stringify(r));
     check("real KB: every real pick is cited", (r.picks ?? []).every((p) => p.citations.length > 0));
-    const clay = recommendTires({ scope: ["1-8-offroad"], surface: "clay", grip: "high", temp: "mild", wet: false, dusty: false }, kb);
-    check("real KB: clay refuses (not yet grounded — grounded or silent)", clay.kind === "refusal");
+    // high-bite clay is now grounded by race evidence (IFMAR 1/10 Worlds 2023) + manufacturer guides
+    const clay = recommendTires({ scope: ["1-10-2wd-offroad"], surface: "clay", grip: "high", temp: "mild", wet: false, dusty: false }, kb);
+    check("real KB: high-bite clay → grounded recommendation (race-evidence clay slick)", clay.kind === "tire_selection" && (clay.picks ?? []).some((p) => /slick/.test(p.tread)), JSON.stringify(clay.picks?.map((p) => p.tread)));
+    // grounded-or-silent still holds for an unspecified surface
+    const none = recommendTires({ scope: ["1-8-offroad"], surface: "", grip: "medium", temp: "mild", wet: false, dusty: false }, kb);
+    check("real KB: missing surface → refusal (grounded or silent)", none.kind === "refusal");
   }
 }
 

@@ -171,3 +171,28 @@
   sources:
     - "JConcepts Subcultures green release (blog 2010): 'excel on... wet or when traction is hard to come-by... the step base give the necessary height for wet and soft conditions'"
   confidence: high
+
+# ── CLAY — high-bite/prepped clay: clay compound, low tread (race-proven, D77) ─
+- id: tsel-clay-slick-110
+  scope: [1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: clay, grip: [high], temp: [] }
+  tread: slick / low-pin
+  compound: clay
+  examples: ["AKA clay-compound slick", "Pro-Line Positron / Electron (clay)"]
+  rationale: "On smooth, very high-bite clay the top 1/10 class runs a SLICK (or lowest-profile pin) in a clay compound — maximum rubber on the ground, grip from the compound not the lugs."
+  sources:
+    - "IFMAR 1/10 EP Off-Road Worlds 2023 (Hobby Action, Chandler — smooth high-bite indoor clay): AKA Clay-compound Slick was the CONTROL tyre run by the 2WD & 4WD A-mains (LiveRC spec-tyre announcement; JConcepts race report: 'AKA slicks... all the way around')"
+    - "Pro-Line Positron (teams.prolineracing.com): 'improved grip and corner speed on indoor clay tracks'"
+  confidence: high
+
+- id: tsel-clay-minipin-001
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad, 1-10-stadium, 1-10-shortcourse]
+  match: { surface: clay, grip: [], temp: [] }
+  tread: mini-pin
+  compound: clay
+  examples: ["Pro-Line Buck Shot (MC clay)", "JConcepts Gold/Silver (indoor clay)", "Matrix clay"]
+  rationale: "Prepped / high-bite clay runs a small directional mini-pin in a clay compound; the clay rubber keys into the tacky surface where bigger lugs grease over."
+  sources:
+    - "Pro-Line Buck Shot (Pro-Line/BigSquid): directional micro-pin for indoor high-bite clay; MC = ultra high-bite clay compound"
+    - "JConcepts Tire Selection Guide (official): indoor-clay compounds (Gold/Silver) for prepped clay"
+  confidence: high
