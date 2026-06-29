@@ -65,7 +65,7 @@ const FIXTURE: TireSelectionEntry[] = [
   },
 ];
 
-const baseCtx: TireContext = { scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false };
+const baseCtx: TireContext = { scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false, greasy: false };
 
 // ── ranking: most-specific grounded profile is the #1 pick ───────────────────
 {
@@ -154,25 +154,43 @@ const baseCtx: TireContext = { scope: ["1-8-offroad"], surface: "loose_dirt", gr
   }
   // smoke: the real dataset drives the engine end-to-end for a common case.
   if (kb.length > 0) {
-    const r = recommendTires({ scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false }, kb);
+    const r = recommendTires({ scope: ["1-8-offroad"], surface: "loose_dirt", grip: "low", temp: "cold", wet: false, dusty: false, greasy: false }, kb);
     check("real KB: loam/low/cold → grounded recommendation", r.kind === "tire_selection" && (r.picks?.length ?? 0) >= 1, JSON.stringify(r));
     check("real KB: every real pick is cited", (r.picks ?? []).every((p) => p.citations.length > 0));
     // high-bite clay is now grounded by race evidence (IFMAR 1/10 Worlds 2023) + manufacturer guides
-    const clay = recommendTires({ scope: ["1-10-2wd-offroad"], surface: "clay", grip: "high", temp: "mild", wet: false, dusty: false }, kb);
+    const clay = recommendTires({ scope: ["1-10-2wd-offroad"], surface: "clay", grip: "high", temp: "mild", wet: false, dusty: false, greasy: false }, kb);
     check("real KB: high-bite clay → grounded recommendation (race-evidence clay slick)", clay.kind === "tire_selection" && (clay.picks ?? []).some((p) => /slick/.test(p.tread)), JSON.stringify(clay.picks?.map((p) => p.tread)));
     // grounded-or-silent still holds for an unspecified surface
-    const none = recommendTires({ scope: ["1-8-offroad"], surface: "", grip: "medium", temp: "mild", wet: false, dusty: false }, kb);
+    const none = recommendTires({ scope: ["1-8-offroad"], surface: "", grip: "medium", temp: "mild", wet: false, dusty: false, greasy: false }, kb);
     check("real KB: missing surface → refusal (grounded or silent)", none.kind === "refusal");
 
     // ── 1/8 grip-STATE precision (D78): the tread changes with grip on dirt ──────
     const sc8 = ["1-8-offroad", "1-8-nitro-offroad", "1-8-e-offroad"];
-    const loamy = recommendTires({ scope: sc8, surface: "loose_dirt", grip: "low", temp: "mild", wet: false, dusty: false }, kb);
+    const loamy = recommendTires({ scope: sc8, surface: "loose_dirt", grip: "low", temp: "mild", wet: false, dusty: false, greasy: false }, kb);
     check("real KB 1/8: LOAMY (low grip) dirt → aggressive pin/spike", (loamy.picks ?? []).some((p) => /spike|pin/.test(p.tread)) && !(loamy.picks ?? []).some((p) => /web/.test(p.tread)), JSON.stringify(loamy.picks?.map((p) => p.tread)));
-    const groomed = recommendTires({ scope: sc8, surface: "loose_dirt", grip: "high", temp: "mild", wet: false, dusty: false }, kb);
+    const groomed = recommendTires({ scope: sc8, surface: "loose_dirt", grip: "high", temp: "mild", wet: false, dusty: false, greasy: false }, kb);
     check("real KB 1/8: GROOMED (high grip) dirt → web/pin-on-block, NOT the loamy spike", groomed.kind === "tire_selection" && (groomed.picks ?? []).some((p) => /web|pin-on-block/.test(p.tread)) && !(groomed.picks ?? []).some((p) => p.tread === "spike"), JSON.stringify(groomed.picks?.map((p) => p.tread)));
     check("real KB 1/8: groomed dirt runs a firmer (medium) compound, never super-soft", (groomed.picks ?? []).every((p) => p.compound !== "super-soft"), JSON.stringify(groomed.picks?.map((p) => p.compound)));
-    const astro8 = recommendTires({ scope: sc8, surface: "astroturf", grip: "medium", temp: "mild", wet: false, dusty: false }, kb);
+    const astro8 = recommendTires({ scope: sc8, surface: "astroturf", grip: "medium", temp: "mild", wet: false, dusty: false, greasy: false }, kb);
     check("real KB 1/8: astro now grounded (e-buggy) → clay-compound pin", astro8.kind === "tire_selection" && (astro8.picks ?? []).some((p) => /clay/.test(p.compound)), JSON.stringify(astro8.picks));
+
+    // ── GREASY partition (D79): the "greasy" tag selects greasy profiles, suppresses dry ──
+    const greasyCtx = tireContextFromTags(["loose_dirt", "greasy"], sc8);
+    check("real KB: 'greasy' tag sets ctx.greasy", greasyCtx.greasy === true);
+    const greasyR = recommendTires(greasyCtx, kb);
+    check(
+      "real KB: greasy track → fine/clay pin, soft compound (NOT the dry loamy spike)",
+      greasyR.kind === "tire_selection" &&
+        (greasyR.picks ?? []).some((p) => /fine|diamond|mini-pin/.test(p.tread)) &&
+        (greasyR.picks ?? []).every((p) => p.tread !== "spike" && p.compound !== "medium"),
+      JSON.stringify(greasyR.picks?.map((p) => `${p.tread}/${p.compound}`)),
+    );
+    const dryR = recommendTires(tireContextFromTags(["loose_dirt", "low_grip"], sc8), kb);
+    check(
+      "real KB: a NON-greasy dirt track is unaffected → still the dry pin (no greasy bleed)",
+      (dryR.picks ?? []).some((p) => /spike|pin/.test(p.tread)) && !(dryR.picks ?? []).some((p) => /diamond/.test(p.tread)),
+      JSON.stringify(dryR.picks?.map((p) => p.tread)),
+    );
   }
 }
 

@@ -259,3 +259,31 @@
   sources:
     - "Schumacher Mini Pin (racing-cars.com): 'one of the most popular tyres for 1/8th buggys on Astro and Grass surfaces ... ideal for Astro and Carpet tracks'"
   confidence: high
+
+# ── GREASY / SLICK low-grip film — grip from the COMPOUND, not lugs (fine pin + soft/clay).
+#    DORMANT until the app emits the "greasy" tag (see docs/TIRE_SIGNALS_SPEC.md): the engine
+#    partitions on greasy, so these fire ONLY on a greasy track and the dry-dirt entries are
+#    suppressed there (a slick film and dry dirt want opposite treads). William: greasy = A
+#    (slick low-grip film), D76.
+- id: tsel-greasy-finepin
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: loose_dirt, grip: [], temp: [], greasy: true }
+  tread: fine / diamond pin
+  compound: super-soft
+  examples: ["Matrix Nova (clay / ultra-soft)"]
+  rationale: "A greasy slick film gives no mechanical bite — a soft, fine diamond pin in the softest compound keys into the surface; bigger lugs just slide."
+  sources:
+    - "Matrix Nova (RSRC): 'the Nova will be the best choice on slippery tracks or when dirt really sticks to the tire in muddy conditions'; diamond pins, ultra-soft rubber"
+  confidence: high
+
+- id: tsel-greasy-minipin-clay
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad, 1-10-2wd-offroad, 1-10-4wd-offroad]
+  match: { surface: loose_dirt, grip: [], temp: [], greasy: true }
+  tread: mini-pin (clay)
+  compound: super-soft
+  examples: ["Schumacher Mini Pin (clay)", "JConcepts Green (super-soft)"]
+  rationale: "Alternative greasy pick: a clay-compound mini-pin / super-soft — the recognised low-mechanical-grip answer when the track goes slick."
+  sources:
+    - "JConcepts Green (super-soft): rated for 'minimum traction' surfaces"
+    - "Schumacher Mini Pin (racing-cars.com): green/medium clay-style compound 'works well in both wet and dry' on degraded low-grip surfaces"
+  confidence: medium

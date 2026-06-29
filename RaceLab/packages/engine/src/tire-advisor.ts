@@ -29,6 +29,10 @@ export const TireSelectionEntrySchema = z.object({
     grip: z.array(z.enum(["low", "medium", "high"])).default([]),
     temp: z.array(z.enum(["cold", "mild", "hot"])).default([]),
     wet: z.boolean().optional(),
+    // GREASY = a slick low-grip film (grip from compound, not lugs). Partitions the KB:
+    // greasy:true entries fire ONLY on a greasy track; all other (dry) entries are
+    // suppressed on a greasy track. Dormant until the app emits the "greasy" tag.
+    greasy: z.boolean().optional(),
   }),
   tread: z.string(),
   compound: z.string(),
@@ -48,6 +52,8 @@ export interface TireContext {
   temp: TempBand;
   wet: boolean;
   dusty: boolean;
+  /** slick low-grip film (NOT dusty, NOT wet/mud) — set when the app emits the "greasy" tag */
+  greasy: boolean;
 }
 
 export interface TireProfilePick {
@@ -82,12 +88,15 @@ export function tireContextFromTags(tags: readonly string[], scope: string[]): T
   const surface = ["loose_dirt", "clay", "blue_groove", "astroturf", "carpet", "wet"].find((s) => has(s)) ?? "";
   const grip: GripBand = has("high_grip") || has("blue_groove") ? "high" : has("low_grip") ? "low" : "medium";
   const temp: TempBand = has("hot") ? "hot" : has("cold") ? "cold" : "mild";
-  return { scope, surface, grip, temp, wet: has("wet"), dusty: has("dusty") };
+  return { scope, surface, grip, temp, wet: has("wet"), dusty: has("dusty"), greasy: has("greasy") };
 }
 
 function entryFits(e: TireSelectionEntry, ctx: TireContext): boolean {
   if (!e.scope.some((s) => ctx.scope.includes(s))) return false;
   if (e.match.surface !== ctx.surface) return false;
+  // Greasy partition: a greasy track gets ONLY greasy:true entries; a non-greasy track
+  // gets only the (dry) entries — a slick film and dry dirt want opposite treads.
+  if ((e.match.greasy === true) !== ctx.greasy) return false;
   if (e.match.grip.length > 0 && !e.match.grip.includes(ctx.grip)) return false;
   if (e.match.temp.length > 0 && !e.match.temp.includes(ctx.temp)) return false;
   if (e.match.wet !== undefined && e.match.wet !== ctx.wet) return false;
@@ -103,6 +112,7 @@ function score(e: TireSelectionEntry, ctx: TireContext): number {
 
 function fitText(e: TireSelectionEntry, ctx: TireContext): string {
   const parts = [ctx.surface.replace(/_/g, " ")];
+  if (e.match.greasy === true) parts.push("greasy/slick");
   if (e.match.grip.includes(ctx.grip)) parts.push(`${ctx.grip} grip`);
   if (e.match.temp.includes(ctx.temp)) parts.push(`${ctx.temp} temps`);
   if (e.match.wet === true) parts.push("wet");
@@ -114,7 +124,7 @@ function fitText(e: TireSelectionEntry, ctx: TireContext): string {
  * distinct (tread, compound) profiles; return the top 2 (or a refusal if none grounded).
  */
 export function recommendTires(ctx: TireContext, kb: TireSelectionEntry[]): TireSelectionResult {
-  const echo = `${ctx.surface || "unknown surface"} · ${ctx.grip} grip · ${ctx.temp}${ctx.wet ? " · wet" : ""}${ctx.dusty ? " · dusty" : ""}`;
+  const echo = `${ctx.surface || "unknown surface"} · ${ctx.grip} grip · ${ctx.temp}${ctx.greasy ? " · greasy" : ""}${ctx.wet ? " · wet" : ""}${ctx.dusty ? " · dusty" : ""}`;
 
   if (!ctx.surface) {
     return {
