@@ -24,7 +24,7 @@
   match: { surface: loose_dirt, grip: [], temp: [cold] }
   tread: spike
   compound: super-soft
-  examples: ["JConcepts Goose Bumps (Green / super-soft)", "AKA super-soft"]
+  examples: ["Pro-Line Hole Shot (M4)", "AKA Cross Brace (super-soft)", "JConcepts Goose Bumps (Green)"]
   rationale: "On loose loam grip comes from the lug digging in — run a large-spike tread; cold/low-grip wants the softest compound."
   sources:
     - "JConcepts Tire Selection Guide (official PDF, horizonhobby/towerhobbies): 'tires with large spikes should be chosen for tracks with loamy, fluffy, or wet dirt'"
@@ -36,7 +36,7 @@
   match: { surface: loose_dirt, grip: [], temp: [mild] }
   tread: spike
   compound: soft
-  examples: ["JConcepts Goose Bumps (Blue / soft)", "AKA Soft"]
+  examples: ["Pro-Line Hole Shot (M3)", "AKA Cross Brace (soft)", "JConcepts Falcon (Blue)"]
   rationale: "Large-spike tread for loam; mild temps / medium grip take the Soft compound."
   sources:
     - "JConcepts Tire Selection Guide (official): large spikes for loamy/fluffy/wet dirt"
@@ -195,4 +195,67 @@
   sources:
     - "Pro-Line Buck Shot (Pro-Line/BigSquid): directional micro-pin for indoor high-bite clay; MC = ultra high-bite clay compound"
     - "JConcepts Tire Selection Guide (official): indoor-clay compounds (Gold/Silver) for prepped clay"
+  confidence: high
+
+# ── 1/8 GROOMED / HIGH-GRIP dry dirt: the tread changes with GRIP (race-validated, D77/D78). ─
+# A 1/8 dirt track that rubbers/grooms in (high grip) wants a web-bar or pin-on-block, NOT the
+# aggressive loamy pin (which tears/balloons) — and a FIRMER (medium) compound. grip[high] so
+# these outscore the loamy temp-ladder spike when the track is high-grip; low/unset grip falls
+# back to the loamy spike.
+- id: tsel-18-groomed-web
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: loose_dirt, grip: [high], temp: [] }
+  tread: web / connected-bar
+  compound: medium
+  examples: ["JConcepts Ellipse", "JConcepts Dirt Web 2"]
+  rationale: "Once a 1/8 dirt track grooms in and rubbers up, a web / connected-bar tread gives forward bite + high-speed stability where an aggressive loamy pin tears and balloons; run a firmer (medium) compound, never super-soft on a blue-groove."
+  sources:
+    - "EFRA 1/8 IC Off-Road Euros 2024 (Sacile/OngaroRing, 23-27 Jul): winner Juan Carlos Canas ran the A-main on JConcepts Ellipse, qualifying on Dirt Web 2 + Ellipse as the track grooved in (blog.jconcepts.net)"
+    - "JConcepts Dirt Web 2: built for tracks that are 'smooth, rubber, or glue impregnated, making racing super high-speed and consistent'"
+  confidence: high
+
+- id: tsel-18-groomed-pinblock
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: loose_dirt, grip: [high], temp: [] }
+  tread: pin-on-block
+  compound: medium
+  examples: ["AKA Cityblock", "JetKo Block-In", "Pro-Line Caliber"]
+  rationale: "On hard, high-bite groomed / blue-groove dirt the pin-on-block locks the car in with side + forward bite while the underlying blocks add depth for hour-long mains — the lower-wear all-rounder vs a full web on abrasive grip."
+  sources:
+    - "AKA Cityblock (AMain): 'locks vehicle in with a high degree of traction and control on hard pack or blue groove tracks ... square mini pins ... superior grip on a hard-packed, high-traction racing surface'"
+  confidence: high
+
+- id: tsel-18-groomed-densepin
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: loose_dirt, grip: [high], temp: [hot] }
+  tread: dense pin (long-wear)
+  compound: medium
+  examples: ["Hot Race Sahara", "JetKo Lesnar", "AKA P1 / Double Down"]
+  rationale: "Baked, dry, dusty-but-high-bite dirt: a dense low pin in a medium / long-wear compound survives the abrasion + heat that grease over a soft loamy tyre."
+  sources:
+    - "IFMAR 1/8 E-Buggy Worlds 2025 (Barcelos, fresh high-grip dirt going dusty): winner Kaerup + TQ Boots ran Hot Race Sahara (redrc chassis-focus)"
+    - "IFMAR 1/8 IC Worlds 2024 (Redovan, firm high-grip dirt): Hot Race the single most-listed tyre brand among entrants"
+  confidence: high
+
+# ── 1/8 ASTRO (e-buggy on European astro/grass): clay-compound pin (closes the 1/8 astro gap) ─
+- id: tsel-18-astro-spacedpin
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: astroturf, grip: [], temp: [] }
+  tread: spaced pin (clay)
+  compound: clay
+  examples: ["Procircuit Stinger (front) + Grasshopper (rear), A2 Gold Dot", "Matrix Stardust"]
+  rationale: "1/8 e-buggy on astroturf / grass: a spaced clay-compound pin — the clay rubber keys into the synthetic fibres; spacing suits longer pile / grass."
+  sources:
+    - "Procircuit Stinger / Grasshopper (Aug 2025): launched specifically for the 1/8 EFRA e-buggy astro scene; A2 'Gold Dot' clay compound"
+  confidence: high
+
+- id: tsel-18-astro-minipin
+  scope: [1-8-offroad, 1-8-nitro-offroad, 1-8-e-offroad]
+  match: { surface: astroturf, grip: [], temp: [] }
+  tread: mini-pin (clay)
+  compound: clay
+  examples: ["Schumacher Mini Pin (1/8)", "Matrix Nova (clay, astro)"]
+  rationale: "Shorter-pile astro: a denser clay-compound mini-pin — the popular 1/8 astro/grass pin."
+  sources:
+    - "Schumacher Mini Pin (racing-cars.com): 'one of the most popular tyres for 1/8th buggys on Astro and Grass surfaces ... ideal for Astro and Carpet tracks'"
   confidence: high

@@ -90,6 +90,31 @@ Maximum rubber down; smallest lugs.
 - **Procircuit H-Block / Hot Dice → greasy**: cited source is loose-to-compacted *dry*; the
   greasy/blue-groove/astro copy that appears online belongs to a different product (HPI "HB Block").
 
+## 1/8 surface-STATE model (D78) — the priority class, race-validated + in the advisor
+A 10-agent workflow grounded the 1/8 OFF-ROAD model by surface STATE (verified; over-claims cut).
+The headline: on dirt the **tread changes with grip**, not just the compound — so the advisor now
+varies tread by grip band for 1/8.
+
+| 1/8 surface state | Signal (surface · grip) | Tread → compound | Examples | Grounding |
+|---|---|---|---|---|
+| **Loamy / loose / fresh** | loose_dirt · low | aggressive **pin / lug** → super-soft→soft (1 step harder hot) | Pro-Line Hole Shot, AKA Cross Brace, JConcepts Falcon/Relapse | EFRA 1/8 2024 loamy stage; AKA/PL/JC guides |
+| **Groomed / rubbered / blue-groove** | loose_dirt · high | **web / connected-bar** (or pin-on-block) → **medium**, never super-soft | JConcepts Ellipse, Dirt Web 2; AKA Cityblock | **EFRA 1/8 IC Euros 2024 — winner Canas ran Ellipse/Dirt-Web as it grooved in** |
+| **Dry dusty / abrasive / baked** | loose_dirt · high · hot | **dense pin (long-wear)** → medium/long-wear | Hot Race Sahara, AKA Double Down/P1, JetKo Lesnar | **IFMAR 1/8 E-Buggy Worlds 2025 — winner Kaerup + TQ Boots on Sahara**; Hot Race most-used at 2024 Worlds |
+| **Hard-pack / blue-groove** | blue_groove · high | mini-pin / **pin-on-block** / layered bar → soft→medium | AKA Cityblock, Pro-Line Caliber, JConcepts Overdose, Matrix Blackhole | 2024 Worlds Redovan firm high-grip |
+| **High-bite clay** | clay · high | mini-pin (1/10: + slick) → **clay** | Pro-Line Buck Shot (MC), JConcepts Gold | (D77 race + PL/JC) |
+| **Greasy / slick** ⚠ | *no signal yet* | fine pin / diamond → **clay / super-soft** (grip from compound) | Matrix Nova, JConcepts Green | converged across 3 maker guides — **awaiting the greasy signal** |
+| **Wet / mud** | wet | low-profile (packs) or tall step-bar → super-soft/clay | AKA P-One, JConcepts Subcultures, Matrix Nova/Neutron | AKA/JConcepts/Matrix |
+| **Astro / grass** (e-buggy) | astroturf | spaced pin / mini-pin → **clay** | **Procircuit Stinger+Grasshopper** (A2 Gold Dot), Schumacher Mini Pin, Matrix Stardust | Procircuit launched Aug 2025 *for the EFRA 1/8 e-buggy astro scene*; Schumacher |
+
+**1/8 compound rule (verified tendency):** run a step **firmer than the same call on 1/10** as
+grip rises — super-soft/soft loamy-cool, **medium** on groomed/blue-groove/hot (a soft compound
+"greases over and balloons" on a rubbered groove). The "1/8 = one step harder than 1/10" heuristic
+is convention (directionally supported by wear copy), not a single page-cited fact.
+
+**Shipped to the advisor (D78):** 1/8 grip-state `loose_dirt` entries (groomed → web/pin-on-block;
+dusty → dense pin), 1/8 astro (closes the refuse), 1/8 examples on the loamy entries. 21 KB entries,
+66 tire checks, eval 30/30.
+
 ## Follow-ups
 1. ✅ `greasy_dirt` = **A (slick low-grip film)** — confirmed (2026-06-29).
 2. **Fold dry-dirt / greasy / astro into the D75 selection KB** (currently keyed on
