@@ -7,9 +7,15 @@ mapped to the three surfaces that actually matter off-road (per the racer): **DR
 tire guides / race guides (internal provenance, D53); the skeptic pass cut every over-stated
 "greasy" claim (see Rejected).
 
-## ⚠ "Greasy" means two OPPOSITE things — needs William's call
-The research surfaced a hard ambiguity. RC racers use "greasy" for two low-mechanical-bite
-states that take **opposite** tread strategies:
+## ✅ "Greasy" RESOLVED (William, 2026-06-29) = **A: slick low-grip film**
+Canonical `greasy_dirt` = a slick, low-traction film where grip comes from the **compound,
+not the lugs** → soft/clay compound + a fine diamond/mini pin (e.g. Matrix Nova Clay,
+Schumacher Mini Pin). The "blue-groove / oiled clean line" (interpretation B below) is a
+**high-grip** state and is modelled separately (it is NOT `greasy_dirt`). Both kept below
+for reference; the advisor encodes **A**.
+
+The research surfaced this as two low-mechanical-bite states that take **opposite** tread
+strategies:
 
 | Interpretation | What it is | Tread strategy |
 |---|---|---|
@@ -85,8 +91,21 @@ Maximum rubber down; smallest lugs.
   greasy/blue-groove/astro copy that appears online belongs to a different product (HPI "HB Block").
 
 ## Follow-ups
-1. **William: confirm `greasy_dirt` = A (slick low-grip film) or B (blue-groove line).** Determines
-   the tread strategy the advisor encodes.
-2. Once confirmed, fold dry-dirt / greasy / astro into the D75 selection KB (currently keyed on
-   loose_dirt/blue_groove/astroturf/carpet/wet) — this research is the grounded source set for it.
+1. ✅ `greasy_dirt` = **A (slick low-grip film)** — confirmed (2026-06-29).
+2. **Fold dry-dirt / greasy / astro into the D75 selection KB** (currently keyed on
+   loose_dirt/blue_groove/astroturf/carpet/wet) using this grounded source set. **Blocked on a
+   SIGNAL gap** (below) — the engine can't yet tell dry vs greasy dirt, or long vs short astro pile.
 3. DB fix: re-tag Matrix Nova (astro → greasy/slick dirt) in `rcdata.json` (Théo's app data).
+
+## Signal gap (the dependency for full precision — Théo zone)
+The grounded knowledge above is richer than the inputs the engine currently receives. To USE it,
+the app needs to feed two signals it doesn't today (`surfaceToTags`/`conditionsToTags` only emit
+loose_dirt/clay/blue_groove/astroturf/carpet/wet + grip/temp):
+- **dry vs greasy dirt** — a `greasy`/`slick` track-condition flag (or surface state). Greasy =
+  low grip + a slick film; it is NOT `dusty` and NOT `wet`/mud. Without it, a greasy track reads
+  as generic loose_dirt and gets the dry-dirt pick.
+- **astro pile length** — long/shag vs short pile selects spike vs mini-pin. A surface sub-state
+  or a one-tap question would unlock it.
+
+Until those land, the advisor keeps the D75 coverage (loose_dirt temp ladder, blue_groove,
+astro, carpet, wet) and this doc is the ready-to-wire source set.
