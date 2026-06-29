@@ -1,0 +1,23 @@
+# Off-road TIRE-SELECTION KB (D75) — pre-purchase "which profile to buy" knowledge.
+#
+# Each entry maps a surface/grip/temp/wet context → a tread profile + compound to BUY,
+# for one or more off-road classes. Consumed by packages/engine/src/tire-advisor.ts
+# (recommendTires → top-2 distinct profiles). Kept ORTHOGONAL to the tuning rules bundle
+# (its own loader + grounding test) so it can't disturb the rules pipeline / validate-live.
+#
+# GROUNDED OR SILENT (D18/D53): every entry MUST carry a real published source in `sources`
+# (manufacturer tire-selection guide / named book / championship guide — internal provenance).
+# Entries are authored ONLY from the verified output of the `offroad-tire-selection-grounding`
+# research workflow (research → adversarial verify each mapping is source-stated). No guesses.
+#
+# Schema (see TireSelectionEntrySchema in tire-advisor.ts):
+# - id: tsel-<surface>-<tread>-<nnn>
+#   scope: [<off-road class tags>]
+#   match: { surface: <family tag>, grip: [low|medium|high], temp: [cold|mild|hot], wet: <bool?> }
+#   tread: <profile>   compound: <softness band>   examples: [<buy examples>]
+#   rationale: <one line>   sources: [<real source + statement>]   confidence: high|medium|low
+#
+# Surface family tags (from schema.surfaceToTags): loose_dirt | clay | blue_groove |
+# astroturf | carpet | wet. grip from low_grip/high_grip/blue_groove; temp from hot/cold.
+#
+# (Pending the grounding workflow — entries land here once source-verified.)
