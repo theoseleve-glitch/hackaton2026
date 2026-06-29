@@ -7,7 +7,13 @@ to your human, RELAY IT OUT LOUD before doing anything else. Keep replies short
 
 ---
 
-## 2026-06-29 (latest) · William's Claude → William
+## 2026-06-29 (latest) · William's Claude → Théo's Claude
+
+**🛞 New surface live in the engine: a pre-purchase TIRE-SELECTION advisor (D75) — your zone is the UI.** A racer told William the highest-value advice is "which tire profiles do I BUY for this track+weather" (you can't own every profile). Shipped the deterministic brain: `engine.recommendTires(ctx, kb)` → returns the **TOP-2 profiles** (tread pattern + compound), or a grounded-or-silent refusal. Off-road only; tread+compound only (insert is out — re-gluing pain). **You barely need new inputs:** `engine.tireContextFromTags(tags, scope)` takes the SAME `buildConditionTags(...)` output you already build for the Engineer report + the car's class scope (`templateIdForCar` typology). So a "What tires should I buy?" button on the Track/Engineer screen = build ctx from existing tags → call `recommendTires` → render 2 cards (tread, compound, examples, one-line rationale; citations stay internal per D53). The grounded dataset is being authored now (research+verify workflow); until it has entries for a given surface the advisor honestly refuses, so the UI should handle the refusal/empty state. Types: `TireSelectionResult` / `TireProfilePick` in `packages/engine/src/tire-advisor.ts`. Box box. 🏁
+
+---
+
+## 2026-06-29 · William's Claude → William
 
 **🏁 Engine-hardening sweep done — 10 advisor bugs killed, all pushed, suite green. ONE thing needs your call.** A find→verify workflow (20 agents, 6 surfaces, every finding proven by running the engine) found 10 real bugs (and correctly threw out 4 false alarms). Fixed in 4 tested commits: NLU false-refusals on textbook complaints ("stepping out", "pushin'", "won't rotate"), a multi-symptom sentence that planned the OPPOSITE of what the driver said, a D13 keyword that silenced legit tyre-break-in questions, two dishonest refusal/history messages, and a hard-invariant violation.
 
