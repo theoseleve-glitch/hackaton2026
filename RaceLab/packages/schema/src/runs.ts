@@ -32,6 +32,7 @@ import type {
   Grip,
   IsoDateTime,
   Outcome,
+  PowerType,
   Rating1to5,
   Rating1to10,
   RunType,
@@ -737,8 +738,64 @@ export function conditionsToTags(c: RunConditions): readonly string[] {
     (c.air_temp_c !== undefined && c.air_temp_c >= 30) ||
     (c.track_temp_c !== undefined && c.track_temp_c >= 40);
   if (hot) tags.push("hot");
-  if (c.air_temp_c !== undefined && c.air_temp_c <= 10) tags.push("cold");
+  // Cold is symmetric with hot: a frigid track (IR gun, no air reading — e.g. an
+  // indoor refrigerated or winter outdoor circuit) is cold even without air_temp.
+  const cold =
+    (c.air_temp_c !== undefined && c.air_temp_c <= 10) ||
+    (c.track_temp_c !== undefined && c.track_temp_c <= 10);
+  if (cold) tags.push("cold");
   return Object.freeze(tags);
+}
+
+/** Maps a track SURFACE id (the app's `rcdata.json` surfaces, e.g. "loose_dirt_loam",
+ *  "astroturf", "carpet_onroad", "asphalt_high_grip", "blue_groove") onto the engine's
+ *  surface-FAMILY condition tags (taxonomy.yaml: clay/loose_dirt/astroturf/carpet/
+ *  asphalt/blue_groove/wet). Surface FAMILY is single-valued (most-specific first, stop
+ *  at first match) so a compound id like "loamy_clay" resolves to ONE family, never two
+ *  contradictory ones. Unknown/edge surfaces map to [] (grip carries them). [merged from
+ *  William's engine — audit P1-B8/E1 tag reconciliation]. */
+export function surfaceToTags(surface: string): readonly string[] {
+  const s = surface.toLowerCase();
+  const tags: string[] = [];
+  if (/clay/.test(s)) tags.push("clay");
+  else if (/blue_groove/.test(s)) tags.push("blue_groove");
+  else if (/(astro|hockey_turf)/.test(s)) tags.push("astroturf");
+  else if (/carpet/.test(s)) tags.push("carpet");
+  else if (/(asphalt|tarmac|concrete|parking)/.test(s)) tags.push("asphalt");
+  // decomposed_granite + fire_road are hard-packed/high-grip dirt, NOT loose — they
+  // fall through to no family so the grip field (not a loose_dirt tag) carries them.
+  else if (/(loose|loam|sugar_dirt|sand|gravel|rally_mix)/.test(s)) tags.push("loose_dirt");
+  // wet is ORTHOGONAL — a watered clay track is clay + wet — additive alongside the family.
+  if (/(mud|water_crossing|wet_drift|snow|ice)/.test(s)) tags.push("wet");
+  return Object.freeze([...new Set(tags)]);
+}
+
+/** Maps a car's PowerType onto the engine's power sub-class condition tags
+ *  (taxonomy.yaml: stock_blinky / modified_power / nitro_power) that the KB's
+ *  `legal_in_power` gate keys off. nitro → nitro_power; brushless DEFAULTS to
+ *  stock_blinky (the D13-safe choice so a modified-only rule never auto-fires for a
+ *  car whose mod class is unknown). The app injects "modified_power" when the entrant
+ *  declares a mod class. */
+export function powerTypeToTags(power: PowerType): readonly string[] {
+  return power === "nitro" ? Object.freeze(["nitro_power"]) : Object.freeze(["stock_blinky"]);
+}
+
+/** THE single assembler for an engine ContextBundle's `track.conditions`. Unions all
+ *  three tag producers — grip/bumps/dust/wet/temp from RunConditions, the surface FAMILY
+ *  from the picked surface id, and the power sub-class from the car — into one deduped,
+ *  frozen tag set. Every input is OPTIONAL; partial context still yields every tag it can,
+ *  so the engine degrades gracefully instead of refusing. Deterministic, no I/O. */
+export interface ConditionTagInputs {
+  conditions?: RunConditions;
+  surface?: string;
+  power?: PowerType;
+}
+export function buildConditionTags(input: ConditionTagInputs): readonly string[] {
+  const tags = new Set<string>();
+  if (input.conditions) for (const t of conditionsToTags(input.conditions)) tags.add(t);
+  if (input.surface) for (const t of surfaceToTags(input.surface)) tags.add(t);
+  if (input.power) for (const t of powerTypeToTags(input.power)) tags.add(t);
+  return Object.freeze([...tags]);
 }
 
 /** Render change-bearing tuples into the engine's history shape. Bare run

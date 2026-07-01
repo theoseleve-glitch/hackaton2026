@@ -1,0 +1,399 @@
+{
+  "template_id": "short_course",
+  "template_version": 1,
+  "brand": "generic",
+  "model": "Short Course Truck (2WD/4WD)",
+  "category": "short_course",
+  "scope": [
+    "1-10-shortcourse"
+  ],
+  "source": "rc-setup-fields.json (+ the cited setup sheets)",
+  "template_status": "category_draft",
+  "fields": {
+    "front_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        500,
+        500000
+      ],
+      "step": 100
+    },
+    "center_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        500,
+        1000000
+      ],
+      "step": 100
+    },
+    "rear_diff_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        500,
+        500000
+      ],
+      "step": 100
+    },
+    "diff_type": {
+      "type": "enum",
+      "options": [
+        "gear",
+        "ball"
+      ]
+    },
+    "front_shock_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        100,
+        2000
+      ],
+      "step": 10
+    },
+    "rear_shock_oil": {
+      "type": "number",
+      "unit": "cst",
+      "range": [
+        100,
+        2000
+      ],
+      "step": 10
+    },
+    "front_spring": {
+      "type": "text"
+    },
+    "rear_spring": {
+      "type": "text"
+    },
+    "front_shock_piston": {
+      "type": "text"
+    },
+    "rear_shock_piston": {
+      "type": "text"
+    },
+    "shock_pistons": {
+      "type": "alias",
+      "of": [
+        "front_shock_piston",
+        "rear_shock_piston"
+      ]
+    },
+    "shock_position_front": {
+      "type": "text"
+    },
+    "shock_position_rear": {
+      "type": "text"
+    },
+    "shock_limiter_front": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0,
+        12
+      ],
+      "step": 0.5
+    },
+    "shock_limiter_rear": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0,
+        12
+      ],
+      "step": 0.5
+    },
+    "shock_build": {
+      "type": "enum",
+      "options": [
+        "bladder",
+        "emulsion"
+      ]
+    },
+    "front_ride_height": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        15,
+        50
+      ],
+      "step": 0.5
+    },
+    "rear_ride_height": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        15,
+        50
+      ],
+      "step": 0.5
+    },
+    "ride_height": {
+      "type": "alias",
+      "of": [
+        "front_ride_height",
+        "rear_ride_height"
+      ]
+    },
+    "ride_height_rake": {
+      "type": "derived",
+      "of": [
+        "front_ride_height",
+        "rear_ride_height"
+      ]
+    },
+    "front_downstop": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0,
+        50
+      ],
+      "step": 0.5
+    },
+    "rear_downstop": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0,
+        50
+      ],
+      "step": 0.5
+    },
+    "front_camber": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        6
+      ],
+      "step": 0.25
+    },
+    "rear_camber": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        6
+      ],
+      "step": 0.25
+    },
+    "front_toe": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -4,
+        4
+      ],
+      "step": 0.25
+    },
+    "rear_toe": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        0,
+        5
+      ],
+      "step": 0.25
+    },
+    "caster": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        0,
+        35
+      ],
+      "step": 0.5
+    },
+    "rear_anti_squat": {
+      "type": "number",
+      "unit": "deg",
+      "range": [
+        -1,
+        5
+      ],
+      "step": 0.25
+    },
+    "wheelbase": {
+      "type": "enum",
+      "options": [
+        "short",
+        "neutral",
+        "long"
+      ]
+    },
+    "front_roll_center": {
+      "type": "text"
+    },
+    "rear_roll_center": {
+      "type": "text"
+    },
+    "battery_position": {
+      "type": "enum",
+      "options": [
+        "front",
+        "middle",
+        "rear"
+      ]
+    },
+    "front_sway_bar": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0.8,
+        2.5
+      ],
+      "step": 0.1
+    },
+    "rear_sway_bar": {
+      "type": "number",
+      "unit": "mm",
+      "range": [
+        0.8,
+        2.5
+      ],
+      "step": 0.1
+    },
+    "transmission": {
+      "type": "enum",
+      "options": [
+        "3_gear",
+        "4_gear",
+        "mid_motor",
+        "direct"
+      ]
+    },
+    "slipper_setting": {
+      "type": "text"
+    },
+    "center_drive": {
+      "type": "enum",
+      "options": [
+        "shaft",
+        "belt"
+      ]
+    },
+    "tire_front_brand": {
+      "type": "text"
+    },
+    "tire_front_model": {
+      "type": "text"
+    },
+    "tire_front_compound": {
+      "type": "text"
+    },
+    "tire_front_insert": {
+      "type": "text"
+    },
+    "wheel_front": {
+      "type": "text"
+    },
+    "tire_rear_brand": {
+      "type": "text"
+    },
+    "tire_rear_model": {
+      "type": "text"
+    },
+    "tire_rear_compound": {
+      "type": "text"
+    },
+    "tire_rear_insert": {
+      "type": "text"
+    },
+    "wheel_rear": {
+      "type": "text"
+    },
+    "motor": {
+      "type": "text"
+    },
+    "motor_turns": {
+      "type": "number",
+      "unit": "T",
+      "range": [
+        2,
+        30
+      ],
+      "step": 0.5
+    },
+    "esc": {
+      "type": "text"
+    },
+    "esc_profile": {
+      "type": "text"
+    },
+    "battery_type": {
+      "type": "enum",
+      "options": [
+        "shorty",
+        "stick",
+        "saddle"
+      ]
+    },
+    "battery_cells": {
+      "type": "enum",
+      "options": [
+        "2S",
+        "3S",
+        "4S"
+      ]
+    },
+    "battery_capacity": {
+      "type": "number",
+      "unit": "mAh",
+      "range": [
+        1000,
+        10000
+      ],
+      "step": 100
+    },
+    "gear_pitch": {
+      "type": "enum",
+      "options": [
+        "48P",
+        "Mod1",
+        "32P"
+      ]
+    },
+    "pinion_teeth": {
+      "type": "number",
+      "unit": "T",
+      "range": [
+        12,
+        40
+      ],
+      "step": 1
+    },
+    "spur_teeth": {
+      "type": "number",
+      "unit": "T",
+      "range": [
+        50,
+        100
+      ],
+      "step": 1
+    },
+    "fdr": {
+      "type": "number",
+      "unit": "ratio",
+      "range": [
+        4,
+        20
+      ],
+      "step": 0.01
+    },
+    "steering_servo": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "chassis_weights": {
+      "type": "text"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

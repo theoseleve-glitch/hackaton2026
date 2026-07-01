@@ -39,7 +39,7 @@ export interface Account {
   classes?: string[];
 }
 
-export const PRICING = { monthly_eur: 9.99, annual_eur: 99.99, trial_days: 15 } as const;
+export const PRICING = { monthly_eur: 4.99, annual_eur: 39.99, trial_days: 15 } as const;
 
 const DEFAULT_ACCOUNT: Account = { onboarded: false };
 

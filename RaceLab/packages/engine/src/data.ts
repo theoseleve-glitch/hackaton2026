@@ -30,6 +30,24 @@ export interface KBData {
   registry?: ChassisRegistryEntry[];
   /** Car-class definitions keyed by class_id. */
   classes?: Record<string, KBClassDef>;
+  /** Category-template setup-page scaffolds (kb/chassis/categories/*.json),
+   *  keyed by template_id. A `pending_pdf` registry entry resolves to one of
+   *  these via its `category_template`; the engine gates advice on the resolved
+   *  template's fields — class-level precision until a per-model sheet exists. */
+  categoryTemplates?: Record<string, ChassisTemplate>;
+}
+
+/** Resolve a chassis id to the template the engineer reasons over: a bundled
+ *  `full` per-model template by template_id, else (for a `pending_pdf` model)
+ *  the category template named by its registry `category_template`. Returns
+ *  undefined when neither resolves — the caller refuses in-band, never throws. */
+export function resolveTemplate(data: KBData, id: string): ChassisTemplate | undefined {
+  const direct = data.templates[id];
+  if (direct) return direct;
+  const entry = data.registry?.find((e) => e.chassis_id === id || e.template_id === id);
+  const ct = (entry as { category_template?: string } | undefined)?.category_template;
+  if (ct && data.categoryTemplates) return data.categoryTemplates[ct];
+  return undefined;
 }
 
 export function getTemplate(data: KBData, templateId: string): ChassisTemplate {
@@ -47,18 +65,43 @@ export function validateRulesAgainstTaxonomy(rules: KBRule[], taxonomy: Taxonomy
   const phases = new Set(taxonomy.phases.map((p) => p.id));
   const conditions = new Set(taxonomy.conditions);
   const errors: string[] = [];
+  const scopes = taxonomy.scopes ? new Set(taxonomy.scopes) : undefined;
   for (const r of rules) {
     for (const a of r.addresses) {
       if (!symptoms.has(a.symptom)) errors.push(`${r.id}: unknown symptom '${a.symptom}'`);
       if (a.phase && !phases.has(a.phase)) errors.push(`${r.id}: unknown phase '${a.phase}'`);
     }
-    for (const c of [...r.conditions.amplified_on, ...r.conditions.reduced_on]) {
+    for (const c of [...r.conditions.amplified_on, ...r.conditions.reduced_on, ...(r.forbidden_on ?? [])]) {
       if (!conditions.has(c)) errors.push(`${r.id}: unknown condition '${c}'`);
+    }
+    for (const p of r.legal_in_power ?? []) {
+      if (!conditions.has(p)) errors.push(`${r.id}: unknown power tag '${p}'`);
     }
     for (const ci of r.counter_indications) {
       if (!symptoms.has(ci)) errors.push(`${r.id}: unknown counter-indication '${ci}'`);
     }
+    // scope tags must be drawn from the taxonomy vocabulary (no silent misfires)
+    if (scopes) for (const s of r.scope) {
+      if (!scopes.has(s)) errors.push(`${r.id}: unknown scope tag '${s}'`);
+    }
   }
+  return errors;
+}
+
+/** Every template/categoryTemplate scope tag must be a declared scope (so a rule
+ *  and a template can actually intersect). Only enforced once taxonomy.scopes
+ *  exists. */
+export function validateScopes(data: KBData): string[] {
+  const errors: string[] = [];
+  const scopes = data.taxonomy.scopes ? new Set(data.taxonomy.scopes) : undefined;
+  if (!scopes) return errors;
+  const check = (label: string, t: ChassisTemplate) => {
+    for (const s of t.scope ?? []) {
+      if (!scopes.has(s)) errors.push(`${label} '${t.template_id}': unknown scope tag '${s}'`);
+    }
+  };
+  for (const t of Object.values(data.templates)) check("template", t);
+  for (const t of Object.values(data.categoryTemplates ?? {})) check("categoryTemplate", t);
   return errors;
 }
 
@@ -78,6 +121,12 @@ export function validateRegistryAndClasses(data: KBData): string[] {
         errors.push(
           `registry: '${e.chassis_id}' claims a full template but '${e.template_id}' is not bundled`,
         );
+      }
+      // a non-full entry's setup-page scaffold must resolve to a bundled
+      // category template (only checked once category templates are bundled)
+      const catT = (e as { category_template?: unknown }).category_template;
+      if (typeof catT === "string" && data.categoryTemplates && !data.categoryTemplates[catT]) {
+        errors.push(`registry: '${e.chassis_id}' category_template '${catT}' is not bundled`);
       }
     }
   }
@@ -100,5 +149,6 @@ export function assertValidKBData(data: KBData): void {
     ids.add(r.id);
   }
   errors.push(...validateRegistryAndClasses(data));
+  errors.push(...validateScopes(data));
   if (errors.length > 0) throw new Error(`KB validation failed:\n${errors.join("\n")}`);
 }

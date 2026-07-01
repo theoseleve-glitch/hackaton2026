@@ -1,0 +1,96 @@
+# QUARANTINE — source-conflict rules pulled from LIVE (P0-2, 2026-06-17)
+# These rules' stated direction CONTRADICTS their own cited NT1 source (see each
+# REVIEW note). Per D18 "grounded or silent" they were removed from the live
+# bundle rather than shipped as advice that contradicts its citation. They are
+# preserved here verbatim for William to reconcile (flip to match NT1, or confirm
+# a class-specific exception) and re-promote. This file lives under drafts/ and is
+# NEVER bundled.
+
+# from 1-10-nitro-onroad.yaml
+- id: kb-no-rollcenter-rear-higher-511
+  setting: rear_roll_center
+  direction: higher            # higher rear RC — improves rotation & on-power steering (high grip)
+  effects:
+    - { axis: rotation, change: more }
+    - { axis: on_power_steering, change: more }
+    - { axis: rear_grip, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip, asphalt]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One camber-link step at a time, identical left/right; re-check rear camber after. HUDY: a higher rear roll centre improves rotation and increases on-power steering, recommended for high-traction tracks."
+  reversal_cost_minutes: 8
+  confidence: high
+  # REVIEW: CONFLICT. NT1 p.30 Rear RC HIGHER reads: "DECREASES on-throttle steering; increases front weight transfer but decreases grip; increases responsiveness; decreases chassis roll; use in high-grip to avoid traction rolling; better on chicane tracks." This DIRECTLY CONTRADICTS this rule's claim that a higher rear RC gives MORE on-power steering and rotation. Per NT1, a higher rear RC reduces on-throttle steering. Only the {rear_grip: less} effect and high_grip/carpet condition match NT1. Flag for William — the on-power-steering direction may be inverted for the nitro on-road class.
+  sources: ["XRAY NT1 Set-Up Book p.30 (Effects of Roll Center Adjustment — Rear Roll Center, Higher)"]
+  scope: [1-10-nitro-onroad]
+
+# from 1-8-gt.yaml
+- id: kb-gt-spring-front-stiffer-505
+  setting: front_spring
+  direction: stiffer
+  effects:
+    - { axis: steering_response, change: more }
+    - { axis: in_corner_steering, change: more }
+    - { axis: chassis_roll, change: less }
+    - { axis: braking_smoothness, change: more }
+  addresses:
+    - { symptom: sluggish_steering }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip, carpet]
+    reduced_on: [bumpy, low_grip]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One spring step at a time, left/right identical. HUDY: stiffer front springs increase steering response, in-corner and on-power steering, and are smoother under braking; suited to tight, high-traction, not-too-bumpy tracks."
+  reversal_cost_minutes: 10
+  confidence: high
+  # REVIEW: CONFLICT with NT1. NT1 p.8 Stiffer FRONT springs: "increases mid-corner and corner-exit UNDERSTEER, increases steering under braking, more responsive but more nervous." This rule uses stiffer front to ADDRESS understeer@mid_corner and sluggish steering — but per NT1 a stiffer front INCREASES mid-corner understeer (the opposite). NT1 supports only the responsiveness/less-roll/braking effects. The understeer-fix direction looks INVERTED on NT1's table (NT1 would cure mid-corner understeer with SOFTER front). Flag for William.
+  sources: ["XRAY NT1 Set-Up Book p.8 (Effects of Spring Rate Selection — Stiffer front springs)"]
+  scope: [1-8-gt]
+
+# from 1-8-gt.yaml
+- id: kb-gt-rollcenter-rear-higher-530
+  setting: rear_roll_center
+  direction: higher
+  effects:
+    - { axis: rotation, change: more }
+    - { axis: on_power_steering, change: more }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, carpet]
+    reduced_on: [low_grip, asphalt]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One link/shim position at a time, both sides equal; re-check rear camber after. HUDY: higher rear roll centre improves rotation and increases on-power steering; recommended for high-traction tracks."
+  reversal_cost_minutes: 8
+  confidence: high
+  # REVIEW: CONFLICT. NT1 p.30 Rear RC HIGHER: "DECREASES on-throttle steering; increases front weight transfer but decreases grip; increases responsiveness; decreases chassis roll; use in high-grip to avoid traction rolling; better on chicane tracks." This DIRECTLY CONTRADICTS this rule's claim that a higher rear RC gives MORE rotation / on-power steering — per NT1 a higher rear RC REDUCES on-throttle steering. Only the high_grip/carpet conditioning matches. Flag for William — on-power-steering/rotation direction may be inverted for this class.
+  sources: ["XRAY NT1 Set-Up Book p.30 (Effects of Roll Center Adjustment — Rear Roll Center, Higher)"]
+  scope: [1-8-gt]
+
+# from 1-8-gt.yaml
+- id: kb-gt-diff-rear-thicker-539
+  setting: rear_diff_oil
+  direction: increase          # thicker rear diff oil
+  effects:
+    - { axis: stability, change: more }
+    - { axis: on_power_steering, change: less }
+    - { axis: rear_traction, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_exit }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, carpet, asphalt]
+    reduced_on: [low_grip]
+  counter_indications: [understeer]
+  magnitude_guidance: "One viscosity step at a time. HUDY/AE: thicker rear diff oil adds stability and rear traction and reduces on-power/into-corner steering for high-traction conditions; smoother power delivery."
+  reversal_cost_minutes: 20
+  confidence: high
+  # REVIEW: CONFLICT on direction. NT1 p.34 REAR diff Heavier action/thicker oil: "increases on-throttle steering, better acceleration if track has good traction, more predictable, more turn-in understeer, more stable under braking." This rule instead claims thicker rear = LESS on-power steering. Per NT1 a thicker rear diff INCREASES on-throttle steering (the opposite). The stability + rear-traction direction matches NT1; the on-power-steering effect appears inverted vs NT1. Verify against AE p.22 (kept) and flag for William.
+  sources: ["XRAY NT1 Set-Up Book p.34 (Effects of Gear Differential Adjustment — Rear, Heavier diff action/thicker oil: increases on-throttle steering, more stable under braking, more predictable)", "Associated RC Cheat Sheets p.22 (Diff Fluid, Rear Diff, onroad)"]
+  scope: [1-8-gt]
+

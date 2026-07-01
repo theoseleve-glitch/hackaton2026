@@ -167,7 +167,7 @@ function PaywallSheet({ reason, onClose }: { reason?: DenialReason; onClose: () 
           <Text style={styles.btnPrimaryText}>
             {busy === "monthly"
               ? t({ en: "Opening Google Play…", fr: "Ouverture de Google Play…" })
-              : t({ en: "Subscribe — €9.99/month", fr: "S'abonner — 9,99 €/mois" })}
+              : t({ en: "Subscribe — €4.99/month", fr: "S'abonner — 4,99 €/mois" })}
           </Text>
         </Pressable>
         <Pressable
@@ -178,7 +178,7 @@ function PaywallSheet({ reason, onClose }: { reason?: DenialReason; onClose: () 
           <Text style={styles.btnPrimaryText}>
             {busy === "annual"
               ? t({ en: "Opening Google Play…", fr: "Ouverture de Google Play…" })
-              : t({ en: "Subscribe — €99.99/year (2 months free)", fr: "S'abonner — 99,99 €/an (2 mois offerts)" })}
+              : t({ en: "Subscribe — €39.99/year (4 months free)", fr: "S'abonner — 39,99 €/an (4 mois offerts)" })}
           </Text>
         </Pressable>
 

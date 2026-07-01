@@ -6,7 +6,7 @@ import { loadKBData } from "./node-kb";
 import { recommend } from "./engineer";
 import { buildReport } from "./report";
 import { buildRacePlan, type RaceWindow, type SelectedRunSummary, type Forecast } from "./race-plan";
-import { planRaceDay, type RaceDayInput } from "./planner";
+import { planRaceDay, type RaceDayInput } from "./raceday";
 import { RaceEngineerChat } from "./chat";
 import type { ContextBundle } from "./types";
 import type { LearningTuple } from "../../schema/src/runs";
@@ -47,6 +47,7 @@ const ADVICE_FILES = [
   "report.ts",
   "race-plan.ts",
   "planner.ts",
+  "raceday.ts",
   "reports.ts",
   "plan.ts",
   "chat.ts",
@@ -69,8 +70,13 @@ const FORBIDDEN: RegExp[] = [
   /AsyncStorage/,
 ];
 
+// Strip comments before the FORBIDDEN scan: a doc-comment that DOCUMENTS the
+// invariant ("No Math.random, no Date") must not false-positive — only real code
+// usage of a forbidden pattern should trip the guard.
+const stripComments = (s: string): string =>
+  s.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 for (const f of ADVICE_FILES) {
-  const src = read(f);
+  const src = stripComments(read(f));
   for (const re of FORBIDDEN) {
     check(`D18 static: ${f} has no ${re}`, !re.test(src), `matched ${re}`);
   }

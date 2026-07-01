@@ -147,8 +147,7 @@
   effects:
     - { axis: steering, change: more }
     - { axis: rear_traction, change: less }
-    # M3 — hardened from "more_likely" to a gated, named crash mode.
-    - { axis: nosedive_off_jumps, change: likely_if_big_jumps }
+    - { axis: nosedive_off_jumps, change: more_likely }
   addresses:
     - { symptom: understeer, phase: off_power }
     - { symptom: understeer, phase: mid_corner }
@@ -156,9 +155,7 @@
     amplified_on: []
     reduced_on: [big_jumps]
   counter_indications: [nosedive_jumps, oversteer]
-  magnitude_guidance: "0.5-1mm difference at a time, via preload. Lowering the nose pitches the car forward in the air, so it WILL tend to nose-dive off jumps — only for smooth/flat layouts."
-  # M3 — crash/chassis-break scope caveat. PROVISIONAL pending William ratification.
-  danger: "NOT recommended on tracks with big jumps — a lowered nose dives on landing (crash / broken chassis). Use only on smooth, flat layouts; if the track has big jumps, fix the understeer with a different lever (front camber, roll center, or diff)."
+  magnitude_guidance: "0.5-1mm difference at a time, via preload. May cause nose-diving off jumps."
   reversal_cost_minutes: 4
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.12 §1.2"]
@@ -194,12 +191,8 @@
   conditions:
     amplified_on: []
     reduced_on: []
-  # traction_roll: reducing rear negative camber raises grip and the roll-over
-  # risk on high-grip surfaces — never offer this when the car already rolls.
-  counter_indications: [traction_roll]
-  magnitude_guidance: "0.5° at a time, and re-test between steps. Past the critical angle the rear contact patch collapses suddenly (the shock arm approaches vertical) and the car snaps loose mid-corner — change in the smallest steps and stop the moment grip stops improving."
-  # M1 — physical-harm hard limit. PROVISIONAL bound pending William/domain ratification.
-  danger: "ABSOLUTE LIMIT: do not set rear camber less negative than -1.5°. Past this the rear lets go abruptly (sudden spin/crash). Start from the kit default and move toward 0 in 0.5° steps; if grip stops improving before -1.5°, stop there."
+  counter_indications: []
+  magnitude_guidance: "0.5° at a time. WARNING: if the shock gets too vertical and traction lets go, it lets go abruptly — don't go past ~-1°."
   reversal_cost_minutes: 5
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.14 §1.3"]
@@ -619,7 +612,7 @@
   conditions:
     amplified_on: [fast_open, bumpy]
     reduced_on: [technical_tight]
-  counter_indications: [understeer]   # entry push gets worse
+  counter_indications: []   # entry push caveat is carried by the address phase (corner_exit only)
   magnitude_guidance: "Move one shim at a time, both sides."
   reversal_cost_minutes: 8
   confidence: high

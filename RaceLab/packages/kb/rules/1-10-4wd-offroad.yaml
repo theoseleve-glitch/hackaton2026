@@ -1,0 +1,1304 @@
+# 1/10 4WD electric off-road buggy — DRAFT tuning rules
+#
+# STATUS: DRAFT. Not auto-shipped. Pending human citation sign-off before promotion
+#   out of rules/drafts/ into the live KB. Schema-validated against the live rule
+#   format (packages/kb/rules/geometry.yaml) and the category template
+#   (packages/kb/chassis/categories/1_10_offroad_4wd.json — every `setting:` here is a
+#   real key in that template's `fields`, so the engine capability gate passes).
+#
+# GROUNDING (D18 — grounded or silent). Every rule cites at least one REAL,
+#   page-cited off-road source. NO [TBD]. Two page-citable backbone PDFs were
+#   downloaded and read verbatim with pdftotext on 2026-06-16:
+#     - "AE RC Cheat Sheets (RC_CheatSheets.pdf)" — site.petitrc.com/reglages/RC_CheatSheets.pdf,
+#       114-page fixed-layout PDF, machine-text-extractable. Every page number below was
+#       confirmed by reading that exact page. The off-road effect tables explicitly use the
+#       Team Associated B44.1 4WD buggy as the worked example on pp.12/15/29/36/38/50.
+#     - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf)" — site.petitrc.com/reglages/BuggySetupGuide.pdf,
+#       4-page off-road buggy quick-reference (Steve Butts, Kyosho America team driver). Page
+#       map confirmed by reading: p1 tyres/springs/damping/caster, p2 ride-height/wheelbase/
+#       anti-squat/pistons/lower-shock-mount, p3 upper-shock-mount/roll-center-links/camber/toe,
+#       p4 anti-roll-bar/ackermann/travel-limiters/gearing.
+#   CORROBORATION (web, mutable — NEVER a sole cite, per D18): "CompetitionX RC Tuning Guide".
+#   Every rule carries at least one of the two page-cited PDFs above, so none rests on web alone.
+#
+# 4WD-SPECIFIC PHYSICS: the front axle is DRIVEN. The three diffs (front / centre / rear)
+#   are the extra lever a 2WD does not have, and they are the headline tuning tool — front-diff
+#   oil trades entry steering vs mid-corner stability, centre-diff oil trades drive/acceleration
+#   vs steering and push, rear-diff oil trades rotation vs on-power stability. A 4WD is more
+#   planted than a 2WD but PUSH-PRONE (the driven front resists rotation), so most of the
+#   steering-recovery levers (thinner front/centre diff, sway bars, weight balance) earn their keep.
+#   Surface flips several changes — high-bite changes carry forbidden_on:[loose_dirt].
+#
+# scope on every rule: [1-10-4wd-offroad, 1-10-offroad] — the 4WD-specific tag is listed
+#   FIRST so the draft validator's capability check resolves to the 4WD category template
+#   (which exposes the three diff-oil fields); both tags drive retrieval by set-intersection,
+#   so order is irrelevant at advice time.
+
+# ============================================================================
+# FAMILY: DIFFERENTIALS — front / centre / rear  (the 4WD headline lever)
+# ============================================================================
+
+- id: kb-4wd-frontdiff-thicker-001
+  setting: front_diff_oil
+  direction: increase   # thicker / heavier front diff oil
+  effects:
+    - { axis: corner_entry_steering, change: less }
+    - { axis: mid_corner_front_traction, change: more }
+    - { axis: on_power_stability, change: more }
+  addresses:
+    - { symptom: oversteer, phase: corner_entry }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [understeer]
+  magnitude_guidance: "One oil step (~few thousand cSt, or the next labelled grade) thicker at a time. A thicker front diff tightens the driven front to calm entry and add mid-corner front traction and on-power stability; too thick and the front pushes on entry."
+  reversal_cost_minutes: 25
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.19 Diff Fluid, Front Diff, off-road (thicker = less steering but more stability on power, for high-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Differential (corroboration: thicker front diff oil reduces corner-entry steering, adds mid-corner stability)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-frontdiff-thinner-002
+  setting: front_diff_oil
+  direction: decrease   # thinner / lighter front diff oil
+  effects:
+    - { axis: corner_entry_steering, change: more }
+    - { axis: mid_corner_front_traction, change: less }
+    - { axis: on_power_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: [oversteer, twitchy]
+  magnitude_guidance: "One oil step thinner at a time. A thinner front diff frees the driven front to differentiate for sharper corner-entry steering on low grip — the first lever against 4WD push; too thin makes the car darty and unstable on entry."
+  reversal_cost_minutes: 25
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.19 Diff Fluid, Front Diff, off-road (thinner = more steering but less stability, for low-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Differential (corroboration: thinner front diff oil frees entry steering on low grip)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-centerdiff-thicker-003
+  setting: center_diff_oil
+  direction: increase   # thicker / heavier centre diff oil
+  effects:
+    - { axis: forward_drive_acceleration, change: more }
+    - { axis: overall_steering, change: less }
+    - { axis: on_power_push, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf]
+    reduced_on: [low_grip, loose_dirt, bumpy]
+  counter_indications: [understeer]
+  forbidden_on: [loose_dirt]   # a locked centre on loose dirt just spins all four and pushes
+  magnitude_guidance: "One oil step (~5-10k cSt) thicker at a time. A thicker centre diff locks front-to-rear for harder drive off the corner on grip; it costs steering and adds push and gets worse in bumps, so don't chase it on loose/rough tracks."
+  reversal_cost_minutes: 25
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.18 Diff Fluid, Centre Diff, off-road (thicker = accelerates harder but worse in bumps, for smooth high-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Centre Differential (corroboration: thicker centre oil adds drive and push, reduces steering)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-centerdiff-thinner-004
+  setting: center_diff_oil
+  direction: decrease   # thinner / lighter centre diff oil
+  effects:
+    - { axis: overall_steering, change: more }
+    - { axis: smoothness_in_bumps, change: more }
+    - { axis: forward_drive_acceleration, change: less }
+  addresses:
+    - { symptom: understeer, phase: on_power }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy, rough]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "One oil step thinner at a time. A thinner centre diff frees rotation and steering and smooths acceleration over bumps for low-grip/rough tracks; too thin and the car loses drive off the corner on grip."
+  reversal_cost_minutes: 25
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.18 Diff Fluid, Centre Diff, off-road (thinner = smoother acceleration, better in bumps, for rough low-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Centre Differential (corroboration: thinner centre oil frees steering and rotation)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reardiff-thicker-005
+  setting: rear_diff_oil
+  direction: increase   # thicker / heavier rear diff oil
+  effects:
+    - { axis: rear_grip_on_power, change: less }
+    - { axis: on_power_stability, change: more }
+    - { axis: corner_rotation, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: oversteer, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [understeer]
+  magnitude_guidance: "One oil step (~1-2k cSt) thicker at a time. A thicker rear diff smooths power delivery and adds on-power stability so the rear stops stepping out; too thick and the car won't rotate and pushes."
+  reversal_cost_minutes: 22
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.21 Diff Fluid, Rear Diff, off-road (thicker = less grip but more stability on power, for high-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Differential (corroboration: thicker rear diff oil smooths power, adds stability, reduces rotation)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reardiff-thinner-006
+  setting: rear_diff_oil
+  direction: decrease   # thinner / lighter rear diff oil
+  effects:
+    - { axis: rear_grip_on_power, change: more }
+    - { axis: corner_rotation, change: more }
+    - { axis: on_power_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One oil step thinner at a time. A thinner rear diff lets the inside rear differentiate for more mechanical grip and rotation on low grip; too thin and the rear gets loose and unstable on power on high bite."
+  reversal_cost_minutes: 22
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.21 Diff Fluid, Rear Diff, off-road (thinner = more grip but less stability on power, for low-traction conditions)"
+    - "CompetitionX RC Tuning Guide — Differential (corroboration: thinner rear diff oil adds rear grip and rotation on low grip)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: SHOCK OIL  (front / rear damping rate)
+# ============================================================================
+
+- id: kb-4wd-shockoil-front-thicker-007
+  setting: front_shock_oil
+  direction: increase   # thicker front oil
+  effects:
+    - { axis: front_dive_braking, change: less }
+    - { axis: initial_steering_reaction, change: slower }
+    - { axis: front_bottoming, change: less }
+  addresses:
+    - { symptom: nosedive_jumps, phase: jumps }
+    - { symptom: twitchy, phase: braking }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough]
+  counter_indications: [sluggish_steering, understeer]
+  magnitude_guidance: "One oil step (~50-100 cSt / ~2.5wt) at a time, identical L/R. A heavier front slows dive into jumps and braking and resists bottoming; too thick makes the front skate over bumps and steering go lazy."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.39 Shock Fluid (thicker/heavier = less bottoming out)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Damping (Heavier Front: turn radius wider but smoother, the car doesn't hook suddenly, easier to drive)"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier oil less responsive, better for smooth tracks)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-shockoil-front-thinner-008
+  setting: front_shock_oil
+  direction: decrease   # thinner front oil
+  effects:
+    - { axis: front_compliance_over_bumps, change: more }
+    - { axis: initial_steering_reaction, change: faster }
+    - { axis: low_speed_front_grip, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip]
+    reduced_on: [smooth, high_grip, big_jumps]
+  counter_indications: [twitchy, nosedive_jumps]
+  magnitude_guidance: "One oil step (~50-100 cSt) thinner at a time. A lighter front follows rough ground and reacts quicker on turn-in for low-speed steering; too thin lets the front dive on braking and off jumps."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.39 Shock Fluid (thinner/lighter = faster rebound, for many small bumps)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Damping (Softer Front: steering reacts quicker, more and better low-speed steering)"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter oil more responsive, better for bumps)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-shockoil-rear-thicker-009
+  setting: rear_shock_oil
+  direction: increase   # thicker rear oil
+  effects:
+    - { axis: chassis_roll_on_power, change: less }
+    - { axis: landing_pack, change: more }
+    - { axis: low_speed_rear_compliance, change: less }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough, low_grip]
+  counter_indications: [no_forward_bite, poor_bump_handling]
+  magnitude_guidance: "One oil step (~50-100 cSt) at a time. A heavier rear holds the chassis flatter on power and gives pack for landings; too thick kills forward bite and traction over bumps."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.39 Shock Fluid (thicker = less bottoming out)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Damping (Heavier: more stable, handles smoothly, jumps and lands better)"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: heavier oil for smooth tracks, decreases responsiveness)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-shockoil-rear-thinner-010
+  setting: rear_shock_oil
+  direction: decrease   # thinner rear oil
+  effects:
+    - { axis: rear_compliance_over_bumps, change: more }
+    - { axis: forward_bite_rough, change: more }
+    - { axis: chassis_roll, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: bouncy, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, low_grip, loose_dirt]
+    reduced_on: [smooth, high_grip, big_jumps]
+  counter_indications: [oversteer, bottoming]
+  magnitude_guidance: "One oil step (~50-100 cSt) thinner at a time. A lighter rear reacts over bumps for forward bite and traction on rough/loose ground; too thin lets the rear roll and wallow and bottom on landings."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.39 Shock Fluid (thinner/lighter = faster rebound, for many small bumps)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Damping (Softer Rear: very easy to drive, can be thrown into turns, more rear traction while accelerating)"
+    - "CompetitionX RC Tuning Guide — Shock Oil (corroboration: lighter oil more responsive, better for bumps, allows more chassis roll)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: SHOCK PISTONS  (damping curve / pack, independent of oil)
+# ============================================================================
+
+- id: kb-4wd-piston-rear-more-holes-011
+  setting: rear_shock_piston
+  direction: increase   # more / larger bleed holes — freer, less pack
+  effects:
+    - { axis: rear_damping_pack, change: less }
+    - { axis: rear_compliance_over_bumps, change: more }
+    - { axis: rear_traction_rough, change: more }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: no_forward_bite, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt]
+    reduced_on: [smooth, high_grip, big_jumps]
+  counter_indications: [bottoming]
+  magnitude_guidance: "One piston step (one larger/extra hole) at a time; adapt oil to keep low-speed feel. Bigger holes mean less pack, so the rear soaks up sharp bumps and finds traction on rough/loose sections instead of being thrown up over them."
+  reversal_cost_minutes: 14
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.40 Shock Pistons (larger holes = less damping, for small bumps)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Shock Pistons (Bigger Holes: very good for bumpy tracks, more stable and more traction in bumpy sections)"
+    - "CompetitionX RC Tuning Guide — Pistons (corroboration: more/larger holes pass oil quicker = more responsive damping; rougher track = more holes)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-piston-rear-fewer-holes-012
+  setting: rear_shock_piston
+  direction: decrease   # fewer / smaller holes — more pack
+  effects:
+    - { axis: rear_damping_pack, change: more }
+    - { axis: high_speed_pack, change: more }
+    - { axis: landing_hold_up, change: more }
+  addresses:
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: bouncy, phase: jumps }
+  conditions:
+    amplified_on: [smooth, high_grip, big_jumps]
+    reduced_on: [bumpy, rough]
+  counter_indications: [poor_bump_handling, no_forward_bite]
+  magnitude_guidance: "One piston step (one smaller/fewer hole) at a time; one hole smaller feels like ~5wt thicker oil (Cheat Sheet p.40). Fewer holes add pack so the rear locks up over harsh landings and holds the jump line; too few deflects over chop."
+  reversal_cost_minutes: 14
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.40 Shock Pistons (smaller holes = more damping / more pack, improve jump lifts and landings, for smoother tracks)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Shock Pistons (Smaller Holes: more pack, good for smooth tracks with big jumps or harsh landings)"
+    - "CompetitionX RC Tuning Guide — Pistons (corroboration: fewer/smaller holes pass oil slower; smoother track = fewer holes)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: SPRINGS  (front / rear roll stiffness)
+# ============================================================================
+
+- id: kb-4wd-frontspring-softer-013
+  setting: front_spring
+  direction: decrease   # softer front spring
+  effects:
+    - { axis: front_grip, change: more }
+    - { axis: steering_mid_and_exit, change: more }
+    - { axis: front_dive_braking, change: more }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [low_grip, bumpy, loose_dirt]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll, twitchy]
+  magnitude_guidance: "One spring rate softer at a time. A softer front loads the front tyres for more mid/exit steering and bump compliance — the spring lever against 4WD push; too soft makes it hook, dive and traction-roll on bite."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Springs (Softer Front: more steering, especially mid and exit of the corner)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.41 Shock Springs (softer = more traction, best for small bumps)"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: softer end gains grip)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-frontspring-stiffer-014
+  setting: front_spring
+  direction: increase   # stiffer front spring
+  effects:
+    - { axis: front_roll, change: less }
+    - { axis: front_dive_braking, change: less }
+    - { axis: steering, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf]
+    reduced_on: [low_grip, loose_dirt, bumpy]
+  counter_indications: [understeer]
+  magnitude_guidance: "One spring rate stiffer at a time. A stiffer front cuts roll and dive and calms a darty/traction-rolling front on high bite; too stiff and the front pushes and loses low-speed steering."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Springs (Stiffer Front: less front traction and steering, jumps better; on high-grip tracks stiffen the front, makes the car easier to drive and faster)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.41 Shock Springs (stiffer = less traction, lifts higher off jumps, better suspension response)"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: stiffer end reduces roll, loses grip)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearspring-softer-015
+  setting: rear_spring
+  direction: decrease   # softer rear spring
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: forward_bite, change: more }
+    - { axis: rear_roll, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll, oversteer]
+  forbidden_on: [astroturf]   # very high bite astroturf: a softer rear adds roll and traction-rolls
+  magnitude_guidance: "One spring rate softer at a time. A softer rear lets the rear squat and load the tyres for forward bite and rough-track traction; on high bite it brings on traction roll."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Springs (Softer Rear: generally more rear traction, in turns as well as through bumps and while accelerating)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.41 Shock Springs (softer = more traction, great on rear for off-road)"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: softer end gains grip)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearspring-stiffer-016
+  setting: rear_spring
+  direction: increase   # stiffer rear spring
+  effects:
+    - { axis: rear_roll, change: less }
+    - { axis: steering_mid_and_exit, change: more }
+    - { axis: rear_traction, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf]
+    reduced_on: [low_grip, loose_dirt, bumpy]
+  counter_indications: [no_forward_bite, oversteer]
+  magnitude_guidance: "One spring rate stiffer at a time. A stiffer rear cuts rear roll/traction-roll and adds mid-and-exit steering on high bite (especially in long fast corners); too stiff and rear traction drops on low grip."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Springs (Stiffer Rear: more steering in the middle and exit of the turn, especially in long high-speed corners; rear traction reduced)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.41 Shock Springs (stiffer = creates less traction, better suspension response)"
+    - "CompetitionX RC Tuning Guide — Springs (corroboration: stiffer end reduces roll, loses grip)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: GEOMETRY — camber / caster / toe
+# ============================================================================
+
+- id: kb-4wd-frontcamber-more-neg-017
+  setting: front_camber
+  direction: decrease   # more negative front camber
+  effects:
+    - { axis: high_speed_cornering_grip, change: more }
+    - { axis: straight_line_acceleration, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip]
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.25-0.5deg more negative at a time (typical -1 to -2deg front; bumpy tracks up to -2 to -3deg). Loads the outer front tyre through the corner for more high-speed cornering traction; past that the straight gets nervous."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.12 Camber, front (more = more high-speed traction through turns; shown on the B44.1 4WD buggy)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Camber (on really bumpy tracks adding 2-3deg negative camber helps traction and reduces flipping)"
+    - "CompetitionX RC Tuning Guide — Camber (corroboration: more front camber = more cornering traction, less stable on the straight)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearcamber-more-neg-018
+  setting: rear_camber
+  direction: decrease   # more negative rear camber
+  effects:
+    - { axis: high_speed_cornering_grip, change: more }
+    - { axis: straight_line_acceleration, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [no_forward_bite]
+  magnitude_guidance: "0.25-0.5deg more negative at a time (typical -2deg rear). More rear camber adds mid-corner rear grip when the track grips and rolls; it costs straight-line forward acceleration, so don't chase it on loose dirt."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.15 Camber, rear (more negative = more high-speed traction through corners; shown on the B44.1 4WD buggy)"
+    - "CompetitionX RC Tuning Guide — Camber (corroboration: more rear camber = more cornering traction, less forward traction)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearcamber-less-neg-019
+  setting: rear_camber
+  direction: increase   # toward 0 / less negative rear camber
+  effects:
+    - { axis: straight_line_acceleration, change: more }
+    - { axis: high_speed_cornering_grip, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip]
+  counter_indications: [oversteer]
+  magnitude_guidance: "0.25-0.5deg toward 0 at a time; never go positive. Standing the rear tyres up puts more flat patch down for forward bite and acceleration; too little and mid-corner rear grip drops."
+  reversal_cost_minutes: 5
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.15 Camber, rear (less negative / 0deg = more straight-line acceleration)"
+    - "CompetitionX RC Tuning Guide — Camber (corroboration: less rear camber = more straight-line acceleration, less cornering traction)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-caster-more-020
+  setting: caster
+  direction: increase   # more caster — laid back
+  effects:
+    - { axis: straight_line_stability, change: more }
+    - { axis: on_power_steering_exit, change: more }
+    - { axis: bump_stability, change: more }
+    - { axis: off_power_steering_entry, change: less }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: oversteer, phase: corner_entry }
+  conditions:
+    amplified_on: [bumpy, rough]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [sluggish_steering, understeer]   # more caster REDUCES off-power turn-in
+  magnitude_guidance: "One caster-block step (~2-3deg) at a time. More caster aids straight-line and bump stability and adds on-power exit drive; it trades away off-power entry turn-in, so back off if the buggy already pushes into corners."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    # REVIEW: book (Caster, Effects of Caster Adjustment p.18) lists ONLY straight-line stability + off-power entry steering + bump stability for more caster. It does NOT state "on-power steering in mid-corner and corner exit" (on_power_steering_exit effect axis). Over-claim trimmed; that axis rests on the petitrc/AE corroborations, not the book.
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — more caster angle (more inclined): increases straight-line stability, decreases off-power steering at corner entry, makes the car more stable through bumpy track conditions)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Caster (corroboration: more caster aids stability and handling in bumpy sections)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration on stability)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-caster-less-021
+  setting: caster
+  direction: decrease   # less caster — more upright
+  effects:
+    - { axis: off_power_steering_entry, change: more }
+    - { axis: initial_turn_in, change: more }
+    - { axis: straight_line_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [smooth, high_grip]
+    reduced_on: [bumpy, rough]
+  counter_indications: [twitchy]
+  magnitude_guidance: "One caster-block step (~2-3deg) at a time. Less caster increases off-power turn-in drastically — the buggy turns tighter and faster INTO corners; it costs straight-line and bump stability, so avoid on rough tracks. The first lever against 4WD entry push on smooth tracks."
+  reversal_cost_minutes: 15
+  confidence: high
+  sources:
+    - "Hudy Setup Tips p.18 (Caster, Effects of Caster Adjustment — less caster angle (more vertical): decreases straight-line stability, increases off-power steering at corner entry, increases suspension efficiency)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Caster (corroboration: less caster increases steering drastically, the car turns tighter and faster)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.16 Caster, front (corroboration)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-fronttoe-out-022
+  setting: front_toe
+  direction: decrease   # toward toe-out
+  effects:
+    - { axis: turn_in_steering, change: more }
+    - { axis: straight_line_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: []
+    reduced_on: []
+  counter_indications: [twitchy]
+  magnitude_guidance: "0.25-0.5deg toward toe-out at a time, both sides equal; NEVER more than 2deg total front toe-out (Buggy Guide). Sharpens turn-in to fight 4WD push; too much makes the front wandery and unstable in bumps and on the straight."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Toe (Front Toe-out: increases turn-in steering a lot; never use more than 2 degrees)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.49 Toe-in/toe-out, front (toe-out = quicker corner turn-in, unstable in bumps and on slippery straights)"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: front toe-out = more initial turn-in)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-fronttoe-in-023
+  setting: front_toe
+  direction: increase   # toward toe-in
+  effects:
+    - { axis: straight_line_stability, change: more }
+    - { axis: exit_steering_smoothness, change: more }
+    - { axis: turn_in_steering, change: less }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: hard_to_drive, phase: corner_entry }
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "0.25-0.5deg toward toe-in at a time, both sides. Calms a nervous front and smooths exit steering and straight-line stability for an easier-to-drive car; too much dulls initial turn-in."
+  reversal_cost_minutes: 4
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Toe (Front Toe-in: stabilizes the car in the straights and coming out of turns, smoothes steering, very easy to drive)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.49 Toe-in/toe-out, front (0deg toe standard; toe-out is the unstable extreme, so toe-in calms it)"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: front toe-in adds straight-line stability)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reartoe-more-024
+  setting: rear_toe
+  direction: increase   # more rear toe-in
+  effects:
+    - { axis: rear_stability, change: more }
+    - { axis: forward_traction, change: more }
+    - { axis: corner_rotation, change: less }
+  addresses:
+    - { symptom: oversteer, phase: on_power }
+    - { symptom: oversteer, phase: mid_corner }
+    - { symptom: unstable_braking, phase: braking }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [understeer]
+  magnitude_guidance: "0.5deg more toe-in at a time (typical ~3deg total); rear NEVER runs toe-out. Adds rear stability and forward bite for low grip, but more toe-in makes the difference between sticking and breaking loose more abrupt (Buggy Guide) and slows rotation."
+  reversal_cost_minutes: 8
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Toe (Rear Toe-in: stabilizes the car greatly, makes the rear end 'stick'; more toe-in makes the difference between sticking and breaking loose bigger)"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: more rear toe-in = more forward traction, less rotation; best for low traction)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reartoe-less-025
+  setting: rear_toe
+  direction: decrease   # less rear toe-in (never below 0)
+  effects:
+    - { axis: corner_rotation, change: more }
+    - { axis: top_speed, change: more }
+    - { axis: rear_stability, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+    - { symptom: understeer, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [oversteer, unstable_braking]
+  magnitude_guidance: "0.5deg less toe-in at a time; never reach toe-out (Buggy Guide: rear toe-out makes the car very unstable). Frees rotation and top speed on high bite to fight 4WD push; costs rear stability, so back off on low grip."
+  reversal_cost_minutes: 8
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Toe (Rear Toe-in stabilizes and reduces rotation, so less toe-in frees rotation; Rear Toe-out is never used)"
+    - "CompetitionX RC Tuning Guide — Toe (corroboration: less rear toe-in = more rotation and top speed, for high-traction surfaces)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: RIDE HEIGHT
+# ============================================================================
+
+- id: kb-4wd-rideheight-lower-026
+  setting: ride_height
+  direction: decrease
+  effects:
+    - { axis: responsiveness, change: more }
+    - { axis: traction_roll_tendency, change: less }
+    - { axis: bump_jump_handling, change: worse }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: twitchy, phase: high_speed }
+  conditions:
+    amplified_on: [smooth, high_grip, astroturf, carpet]
+    reduced_on: [bumpy, rough, big_jumps]
+  counter_indications: [bottoming, poor_bump_handling]
+  magnitude_guidance: "1mm at a time via threaded collar/preload, keep front-rear rake intact. Lower feels more direct, corners a bit faster and is harder to flip on high bite; too low and it bottoms and skates over bumps."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Ride Height (Lower: feels more direct, can corner faster, harder to flip the car over)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.29-30 Ride Height front/rear (lower = less rear-end sliding / more push; shown on B44.1 4WD buggy)"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: lower = more responsive, worse for bumps/jumps)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rideheight-higher-027
+  setting: ride_height
+  direction: increase
+  effects:
+    - { axis: bump_jump_clearance, change: more }
+    - { axis: responsiveness, change: less }
+    - { axis: traction_roll_tendency, change: more }
+  addresses:
+    - { symptom: bottoming, phase: rough_section }
+    - { symptom: bottoming, phase: jumps }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, big_jumps, loose_dirt]
+    reduced_on: [smooth, high_grip, astroturf]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "1mm at a time via threaded collar/preload. Higher clears bumps and jumps better and adds acceleration in loose terrain; too high feels tippy and can flip in high-grip conditions, so don't over-raise on smooth high bite."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Ride Height (Higher: better in bumps, jumps better; can feel tippy or flip in high-grip conditions)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.30 Ride Height, rear (higher = better acceleration in loose terrain, better lift off jumps)"
+    - "CompetitionX RC Tuning Guide — Ride Height (corroboration: higher = better in bumps and jumps, less responsive)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: DROOP / DOWNSTOPS + internal travel limiters
+# ============================================================================
+
+- id: kb-4wd-frontdroop-more-028
+  setting: front_downstop
+  direction: increase   # more front droop / down-travel (fewer limiters)
+  effects:
+    - { axis: bumpy_traction, change: more }
+    - { axis: jump_landing, change: better }
+    - { axis: responsiveness, change: less }
+  addresses:
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: no_forward_bite, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "0.5-1mm more front down-travel (or one fewer internal limiter) at a time, identical L/R, keep front and rear droop about equal on low grip. More droop gives better handling and more consistent traction on bumpy/difficult tracks and lands jumps better; it makes the car less direct."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Internal Travel Limiters / Droop (Less (more droop): better handling on bumpy tracks, more consistent traction, lands better after jumps)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.42 Shock Travel Limiters (fewer limiters = for bumpy tracks)"
+    - "CompetitionX RC Tuning Guide — Droop (corroboration: more droop = more weight transfer, better over bumps, less responsive)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-frontdroop-less-029
+  setting: front_downstop
+  direction: decrease   # less front droop (more limiters)
+  effects:
+    - { axis: responsiveness, change: more }
+    - { axis: traction_roll_tendency, change: less }
+    - { axis: bumpy_traction, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [smooth, high_grip, astroturf]
+    reduced_on: [bumpy, rough, loose_dirt]
+  counter_indications: [poor_bump_handling]
+  magnitude_guidance: "0.5-1mm less front down-travel (or one more internal limiter) at a time, identical L/R. Less droop changes direction faster, corners flatter and is the most effective way to reduce traction rolls (Buggy Guide); only advisable on smooth tracks."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Internal Travel Limiters / Droop (More (less droop): changes direction faster, corners flatter, more responsive; adding limiters is the most effective way of reducing traction rolls)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.42 Shock Travel Limiters (more limiters used when the car leans too much in turns)"
+    - "CompetitionX RC Tuning Guide — Droop (corroboration: less droop = more responsive, less traction rolling)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reardroop-more-030
+  setting: rear_downstop
+  direction: increase   # more rear droop
+  effects:
+    - { axis: rear_traction_over_bumps, change: more }
+    - { axis: jump_landing, change: better }
+    - { axis: stability, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt]
+    reduced_on: [smooth, high_grip]
+  counter_indications: [unstable_braking, traction_roll]
+  magnitude_guidance: "0.5-1mm more rear down-travel (or one fewer limiter) at a time, identical L/R. More rear droop lets the rear extend to find grip over bumps for forward bite and better landings; the end with the LEAST droop feels most stable, so adding rear droop trades some stability."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Internal Travel Limiters / Droop (Less limiters/more droop: more consistent traction on difficult tracks, lands better; the end with the least downtravel feels the most stable)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.42 Shock Travel Limiters (fewer limiters = for bumpy tracks)"
+    - "CompetitionX RC Tuning Guide — Droop (corroboration: more rear droop = more stable over bumps)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reardroop-less-031
+  setting: rear_downstop
+  direction: decrease   # less rear droop
+  effects:
+    - { axis: stability, change: more }
+    - { axis: traction_roll_tendency, change: less }
+    - { axis: rear_traction_over_bumps, change: less }
+  addresses:
+    - { symptom: unstable_braking, phase: braking }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [smooth, high_grip, astroturf]
+    reduced_on: [bumpy, rough, loose_dirt]
+  counter_indications: [no_forward_bite, poor_bump_handling]
+  magnitude_guidance: "0.5-1mm less rear down-travel (or one more limiter) at a time, identical L/R. Less rear droop keeps the rear flat and direct for braking stability and traction-roll resistance on high bite; it costs rear traction over rough ground."
+  reversal_cost_minutes: 6
+  confidence: high
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Internal Travel Limiters / Droop (More limiters/less droop: corners flatter, more responsive; the end with least downtravel feels most stable and direct; most effective way to reduce traction rolls)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.42 Shock Travel Limiters (more limiters used when car leans too much in turns)"
+    - "CompetitionX RC Tuning Guide — Droop (corroboration: less rear droop = more stable under braking, less over bumps)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: ANTI-SQUAT
+# ============================================================================
+
+- id: kb-4wd-antisquat-more-032
+  setting: rear_anti_squat
+  direction: increase
+  effects:
+    - { axis: forward_traction_on_power, change: more }
+    - { axis: side_traction_in_corners, change: less }
+    - { axis: rear_lift_on_jumps, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: on_power }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [bumpy, rough, loose_dirt, dusty]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One shim/insert step (~1deg) at a time, both sides. More anti-squat makes the rear more throttle-sensitive for forward traction on high bite; a lot (4deg+) can make the rear break loose accelerating and lift more on jumps."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.8 Anti-squat, off-road (more anti-squat = less side traction in corners, more rear lift in jumps)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Anti-Squat (More: rear more sensitive to throttle, more powering out of corners on high traction; 4deg+ can make the rear break loose)"
+    - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: more anti-squat = more forward traction, more rear lift on jumps)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-antisquat-less-033
+  setting: rear_anti_squat
+  direction: decrease   # flatter rear arm
+  effects:
+    - { axis: side_traction_in_corners, change: more }
+    - { axis: rear_traction_bumpy, change: more }
+    - { axis: forward_traction_on_power, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+    - { symptom: oversteer, phase: on_power }
+  conditions:
+    amplified_on: [bumpy, rough, loose_dirt, dusty]
+    reduced_on: [high_grip, smooth]
+  counter_indications: []
+  magnitude_guidance: "One shim/insert step (~1deg) at a time, both sides. Less anti-squat gives more side-bite and more rear traction accelerating on slippery/dusty/bumpy tracks, and makes the rear feel very stable (power-sliding easier); it trades away some straight-line forward bite on high grip."
+  reversal_cost_minutes: 12
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.8 Anti-squat, off-road (less anti-squat = more side traction in corners, more rear traction for slick or bumpy surfaces)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Anti-Squat (Less: more rear traction accelerating on slippery/dusty tracks, more side-bite, accelerates better through bumpy sections; very little makes the rear very stable)"
+    - "CompetitionX RC Tuning Guide — Anti-Squat (corroboration: less anti-squat = more side traction, better on slick/bumpy)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: SWAY BARS (option-gated — refuse if the chassis has no bar mount)
+# ============================================================================
+
+- id: kb-4wd-frontbar-stiffer-034
+  setting: front_sway_bar
+  direction: increase   # thicker / stiffer front bar
+  effects:
+    - { axis: front_roll, change: less }
+    - { axis: rear_traction_in_turns, change: more }
+    - { axis: low_speed_steering, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: corner_entry }
+    - { symptom: oversteer, phase: corner_entry }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf, carpet]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [understeer]
+  forbidden_on: [loose_dirt]   # a stiffer front bar on loose dirt costs needed front bite
+  magnitude_guidance: "One wire size (~0.1mm) thicker at a time, ONLY if the chassis has a front bar mount (refuse otherwise and fall back to front spring). A stiffer front bar reduces front roll and 'hooking' and gives the rear more grip; it reduces low-speed steering, so avoid on loose/low-bite tracks."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Anti-Roll bar (Stiffer Front: reduces low-speed steering, reduces hooking by preventing front-end roll, more rear traction in turns; bars best on smooth high-traction tracks only)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.7 Anti-roll Bars (stiffer/thicker bars for high traction tracks; front bar helps a car that is oversteering)"
+    - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thicker front bar = less roll, more rear grip, for high-traction tracks)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-frontbar-softer-035
+  setting: front_sway_bar
+  direction: decrease   # thinner / softer / removed front bar
+  effects:
+    - { axis: front_roll, change: more }
+    - { axis: low_speed_steering, change: more }
+    - { axis: rear_traction_in_turns, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [low_grip, bumpy, loose_dirt]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "One wire size (~0.1mm) thinner at a time (or remove the bar; on a bumpy track use a very thin one). A softer/removed front bar adds front roll and low-speed steering to fight push on low-grip/rough tracks; on high bite it can bring on front traction roll."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Anti-Roll bar (stiffer front reduces low-speed steering, so softer/removed front adds it; bars reduce traction at that end; if you must use one on a bumpy track use a very thin one)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.7 Anti-roll Bars (softer/thinner bars for low and medium bite tracks)"
+    - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thinner front bar = more roll, for low-medium traction)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearbar-stiffer-036
+  setting: rear_sway_bar
+  direction: increase   # thicker / stiffer rear bar
+  effects:
+    - { axis: rear_roll, change: less }
+    - { axis: overall_steering, change: more }
+    - { axis: rear_side_traction, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: traction_roll, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf, carpet]
+    reduced_on: [low_grip, bumpy]
+  counter_indications: [no_forward_bite, oversteer]
+  forbidden_on: [loose_dirt]   # a stiffer rear bar on loose dirt costs the rear side-bite it can't spare
+  magnitude_guidance: "One wire size (~0.1mm) thicker at a time, ONLY if a rear bar mount exists (refuse otherwise, fall back to rear spring/shock position). A stiffer rear bar gives more steering (the car steers tighter, even at low speed) and resists traction roll; it costs rear side traction, so avoid on loose dirt."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Anti-Roll bar (Stiffer Rear: more steering, steers tighter also at low speed; bars best on smooth high-traction tracks only and reduce traction at that end)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.7 Anti-roll Bars (stiffer/thicker bars for high traction tracks)"
+    - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thicker rear bar = more on-power steering, less roll, for high-traction tracks)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearbar-softer-037
+  setting: rear_sway_bar
+  direction: decrease   # thinner / softer / removed rear bar
+  effects:
+    - { axis: rear_roll, change: more }
+    - { axis: rear_side_traction, change: more }
+    - { axis: overall_steering, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: oversteer, phase: corner_exit }
+  conditions:
+    amplified_on: [low_grip, bumpy, loose_dirt]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "One wire size (~0.1mm) thinner at a time (or remove). A softer/removed rear bar adds rear roll and side traction for low-grip/rough tracks; on high bite it can bring on traction roll."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.4 Anti-Roll bar (stiffer rear adds steering and reduces traction at the rear, so softer/removed adds rear traction; on bumpy tracks use a very thin bar or none)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.7 Anti-roll Bars (softer/thinner bars for low and medium bite tracks)"
+    - "CompetitionX RC Tuning Guide — Anti-Roll Bar (corroboration: thinner rear bar = more roll and rear grip, for low-medium traction)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: ROLL CENTRE / CAMBER LINKS
+# ============================================================================
+
+- id: kb-4wd-frontrc-lower-038
+  setting: front_roll_center
+  direction: decrease   # lower front roll centre (more washers under ballstud / longer link)
+  effects:
+    - { axis: front_roll_grip, change: more }
+    - { axis: mid_corner_steering, change: more }
+    - { axis: responsiveness, change: less }
+  addresses:
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip]
+  counter_indications: [twitchy, traction_roll]
+  magnitude_guidance: "One washer / one link step at a time; re-check front camber after. A lower front roll centre (or longer link) lets the front roll and dive more for more mid-corner steering and peak grip on smooth high-traction surfaces; it is less reactive. Watch the front/rear balance."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.31/34 Roll Centre (lower roll centre = leans more cornering, less responsive/more forgiving, for high-traction tracks)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Roll Center / Camber links (Longer Front: front rolls and dives more, lots of mid-corner steering)"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: lower roll centre = more roll, more grip, less responsive)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-frontrc-higher-039
+  setting: front_roll_center
+  direction: increase   # higher front roll centre (fewer washers / shorter link)
+  effects:
+    - { axis: responsiveness, change: more }
+    - { axis: turn_in_steering, change: more }
+    - { axis: mid_corner_steering, change: less }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [traction_roll]
+  magnitude_guidance: "One washer / one link step at a time; re-check front camber. A higher front roll centre (or shorter link) makes the front more reactive with more turn-in and stabilizes it in bumps; used when traction is low. It costs mid-corner steering."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.31/34 Roll Centre (higher roll centre = more responsive, for low-traction tracks)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Roll Center / Camber links (Shorter Front: front feels stable, a little more turn-in, less mid-corner steering)"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: higher roll centre = more responsive, less roll)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearrc-lower-040
+  setting: rear_roll_center
+  direction: decrease   # lower rear roll centre / longer rear link
+  effects:
+    - { axis: rear_traction_in_turns, change: more }
+    - { axis: rear_slide_progression, change: more }
+    - { axis: responsiveness, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }
+    - { symptom: no_forward_bite, phase: corner_exit }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip]
+  counter_indications: [traction_roll, understeer]
+  magnitude_guidance: "One washer / one link step at a time; keep enough rear camber or you lose rear traction (Buggy Guide), and re-check rear camber after. A lower rear roll centre (longer link) gives more rear traction in and out of turns with very progressive, predictable slide on high bite; less reactive."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Roll Center / Camber links (Longer Rear: more rear traction in turns and coming out of them, rear slide very progressive; make sure there's enough rear camber)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.31/34 Roll Centre (lower roll centre = more grip / leans more, for high-traction tracks)"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: lower rear roll centre = more rear grip and roll)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearrc-higher-041
+  setting: rear_roll_center
+  direction: increase   # higher rear roll centre / shorter rear link
+  effects:
+    - { axis: responsiveness, change: more }
+    - { axis: turn_in_steering, change: more }
+    - { axis: rear_traction_in_turns, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_entry }
+    - { symptom: sluggish_steering, phase: corner_entry }
+  conditions:
+    amplified_on: [low_grip, loose_dirt]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [oversteer]
+  magnitude_guidance: "One washer / one link step at a time; re-check rear camber. A higher rear roll centre (shorter link) makes the rear feel very stable and adds turn-in/steering and stabilizes it in bumps for low-traction tracks; the rear breaks later but more suddenly, and it costs some rear cornering traction."
+  reversal_cost_minutes: 12
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.3 Roll Center / Camber links (Shorter Rear: rear feels very stable, breaks out later and more suddenly, makes the front dive a little more = more steering)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.31/34 Roll Centre (higher roll centre = more responsive, for low-traction tracks)"
+    - "CompetitionX RC Tuning Guide — Roll Center (corroboration: higher rear roll centre = more responsive, less rear roll)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: WHEELBASE
+# ============================================================================
+
+- id: kb-4wd-wheelbase-shorter-042
+  setting: wheelbase
+  direction: decrease   # shorter wheelbase
+  effects:
+    - { axis: agility_turn_in, change: more }
+    - { axis: rear_traction, change: more }
+    - { axis: high_speed_stability, change: less }
+  addresses:
+    - { symptom: sluggish_steering, phase: corner_entry }
+    - { symptom: understeer, phase: corner_entry }
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open, bumpy, big_jumps]
+  counter_indications: [twitchy]
+  magnitude_guidance: "Move one shim, both sides. A shorter wheelbase makes the car nimble and quicker in tight turns and shifts weight back for more rear traction; it costs high-speed stability, so avoid it on wide/jumpy tracks."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Wheelbase (Shorter: very nimble, good in tight turns, for small tight tracks without big jumps or bumps)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.51 Wheelbase (shorter = more rear traction, weight shifted to back)"
+    - "CompetitionX RC Tuning Guide — Wheelbase (corroboration: shorter = more agility and rotation)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-wheelbase-longer-043
+  setting: wheelbase
+  direction: increase   # longer wheelbase
+  effects:
+    - { axis: high_speed_stability, change: more }
+    - { axis: bump_jump_handling, change: better }
+    - { axis: agility_turn_in, change: less }
+  addresses:
+    - { symptom: twitchy, phase: high_speed }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [fast_open, bumpy, big_jumps]
+    reduced_on: [technical_tight]
+  counter_indications: [sluggish_steering]
+  magnitude_guidance: "Move one shim, both sides. A longer wheelbase is a lot more stable and better in wide high-speed turns and over bumps/jumps; it makes turn-in slower, so avoid on tight tracks."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.2 Wheelbase (Longer: a lot more stable, better in wide high-speed turns, good on wide-open tracks)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.51 Wheelbase (longer = better stability, slightly more steering)"
+    - "CompetitionX RC Tuning Guide — Wheelbase (corroboration: longer = more high-speed and jump stability)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: WEIGHT BALANCE  (battery position)
+# ============================================================================
+
+- id: kb-4wd-battery-rear-044
+  setting: battery_position
+  direction: increase   # shift mass rearward
+  effects:
+    - { axis: rear_traction, change: more }
+    - { axis: stability_accel_braking, change: more }
+    - { axis: steering, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip, smooth]
+  counter_indications: [understeer]
+  magnitude_guidance: "Move the pack/weight one position rearward (or add a rear ballast weight) and re-check ride height after. Rearward bias adds rear traction and stability under acceleration and braking for low grip; it reduces steering and changes direction slower, so don't over-do it if the car already pushes."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.50 Weight Distribution (rear weight = less steering, more rear traction, more stable under acceleration and braking; B44.1 4WD buggy example)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.58 Battery Placement (battery is a large mass used to tune front/rear balance)"
+    - "CompetitionX RC Tuning Guide — Weight (corroboration: rearward bias adds forward bite, reduces steering)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-battery-front-045
+  setting: battery_position
+  direction: decrease   # shift mass forward
+  effects:
+    - { axis: steering, change: more }
+    - { axis: nose_down_jumping, change: more }
+    - { axis: rear_traction, change: less }
+  addresses:
+    - { symptom: understeer, phase: corner_exit }
+    - { symptom: understeer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, smooth]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [oversteer, nosedive_jumps]
+  magnitude_guidance: "Move the pack/weight one position forward and re-check ride height after. Forward bias adds steering while accelerating to fight 4WD push; it makes the car change direction slower in transitions, jump more nose-down, and reduces rear traction — so back off on loose/low-grip tracks."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.50 Weight Distribution (front weight = more steering while accelerating, changes direction slower, more nose-down jumping)"
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.58 Battery Placement (battery mass tunes front/rear balance)"
+    - "CompetitionX RC Tuning Guide — Weight (corroboration: forward bias adds steering, reduces rear traction)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: SLIPPER  (option-gated — refuse on direct/center-diff-only drivetrains)
+# ============================================================================
+
+- id: kb-4wd-slipper-looser-046
+  setting: slipper_setting
+  direction: decrease   # looser slipper
+  effects:
+    - { axis: forward_bite_low_grip, change: more }
+    - { axis: power_cushion, change: more }
+    - { axis: direct_acceleration, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, loose_dirt, bumpy]
+    reduced_on: [high_grip, smooth, astroturf]
+  counter_indications: []
+  magnitude_guidance: "1/8 turn looser at a time, ONLY if the car has a slipper (many 1/10 4WD use a centre diff instead — refuse and tune the centre diff there). A looser slipper cushions the power hit so the tyres hook up instead of spinning on low traction; too loose wastes acceleration and overheats."
+  reversal_cost_minutes: 6
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.43 Slipper Clutch (looser = for tracks with low traction, more traction exiting corner)"
+    - "CompetitionX RC Tuning Guide — Slipper (corroboration: looser slipper for low traction, cushions power)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-slipper-tighter-047
+  setting: slipper_setting
+  direction: increase   # tighter slipper
+  effects:
+    - { axis: direct_acceleration, change: more }
+    - { axis: corner_entry_smoothness, change: more }
+    - { axis: power_cushion, change: less }
+  addresses:
+    - { symptom: sluggish_steering, phase: on_power }
+  conditions:
+    amplified_on: [high_grip, smooth, astroturf, carpet]
+    reduced_on: [low_grip, loose_dirt]
+  counter_indications: [no_forward_bite]
+  forbidden_on: [loose_dirt]   # a tight slipper on loose dirt just spins the tyres up
+  magnitude_guidance: "1/8 turn tighter at a time, only if a slipper is fitted. A tighter slipper gives more instant acceleration and smoother corner entry on high bite; on low grip it lets the tyres spin, so loosen rather than tighten on loose/slick tracks."
+  reversal_cost_minutes: 6
+  confidence: low
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.43 Slipper Clutch (tighter = for high-bite tracks, more instant acceleration, smoother corner entry)"
+    - "CompetitionX RC Tuning Guide — Slipper (corroboration: tighter slipper = more direct drive on high bite)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: TYRES / INSERTS
+# ============================================================================
+
+- id: kb-4wd-reartire-softer-048
+  setting: tire_rear_compound
+  direction: decrease   # softer rear compound
+  effects:
+    - { axis: rear_mechanical_grip, change: more }
+    - { axis: forward_bite, change: more }
+    - { axis: wear_and_heat, change: more }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }
+    - { symptom: no_forward_bite, phase: on_power }
+  conditions:
+    amplified_on: [low_grip, cold, loose_dirt]
+    reduced_on: [high_grip, hot, dusty]
+  counter_indications: []
+  forbidden_on: [astroturf]   # a too-soft compound on high-bite astroturf overheats and goes greasy
+  magnitude_guidance: "Step one compound softer (or change tread to match the surface — tyres are the first thing to get right). Softer rears add forward bite on low-bite/cold surfaces but overheat on high bite/hot — match compound to surface and temperature first."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.45 Tyre Compound (softer compound for smoother surfaces and higher temperatures)"
+    - "petitrc Buggy Setup Guide (BuggySetupGuide.pdf) p.1 Tires (tyres are always the first element in setting up a car; if you've got the right tyres you're 90% there)"
+    - "CompetitionX RC Tuning Guide — Tyres (corroboration: softer compound adds grip on low bite, wears and heats faster)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-reartire-harder-049
+  setting: tire_rear_compound
+  direction: increase   # harder rear compound
+  effects:
+    - { axis: heat_resistance, change: more }
+    - { axis: wear_life, change: more }
+    - { axis: low_grip_bite, change: less }
+  addresses:
+    - { symptom: oversteer, phase: mid_corner }   # on high bite a too-soft rear overheats and goes greasy/loose; a harder compound holds consistent grip
+  conditions:
+    amplified_on: [high_grip, hot, dusty]
+    reduced_on: [low_grip, cold, loose_dirt]
+  counter_indications: [no_forward_bite]
+  forbidden_on: [loose_dirt]   # a hard compound never keys into fresh loose dirt
+  magnitude_guidance: "Step one compound harder. On high-bite/hot/abrasive surfaces a harder rear stays cooler and keeps consistent grip where a soft tyre would grease over; useless on cold/loose tracks. Bumpier and wet/grass surfaces also favour a harder compound (Cheat Sheet p.45)."
+  reversal_cost_minutes: 10
+  confidence: high
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.45 Tyre Compound (harder compound for bumpier surfaces, for grass, for wet conditions)"
+    - "CompetitionX RC Tuning Guide — Tyres (corroboration: harder compound for high-bite/abrasive/hot, lasts longer)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearinsert-firmer-050
+  setting: tire_rear_insert
+  direction: increase   # firmer rear insert
+  effects:
+    - { axis: cornering_support, change: more }
+    - { axis: rolling_resistance, change: less }
+    - { axis: low_speed_conformity, change: less }
+  addresses:
+    - { symptom: traction_roll, phase: mid_corner }
+    - { symptom: oversteer, phase: mid_corner }
+  conditions:
+    amplified_on: [high_grip, astroturf, carpet, smooth]
+    reduced_on: [low_grip, bumpy, loose_dirt]
+  counter_indications: [no_forward_bite, bouncy]
+  magnitude_guidance: "Step one insert firmer. A firmer insert holds the carcass up under load for less rolling resistance and better cornering support to resist traction roll on high bite; too firm causes the car to bounce and lose traction (Cheat Sheet p.46), and on rough/loose ground it stops the tyre conforming."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.46 Tyre Inserts (harder = less rolling resistance, better cornering; too firm an insert causes the car to bounce and lose traction)"
+    - "CompetitionX RC Tuning Guide — Inserts (corroboration: firmer insert adds support and steering on high bite)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-rearinsert-softer-051
+  setting: tire_rear_insert
+  direction: decrease   # softer rear insert
+  effects:
+    - { axis: rear_mechanical_grip, change: more }
+    - { axis: carcass_conformity, change: more }
+    - { axis: cornering_support, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: rough_section }
+    - { symptom: poor_bump_handling, phase: rough_section }
+  conditions:
+    amplified_on: [low_grip, bumpy, rough, loose_dirt]
+    reduced_on: [high_grip, astroturf, carpet, smooth]
+  counter_indications: [traction_roll]
+  forbidden_on: [astroturf]   # a soft insert folds and traction-rolls on high-bite astroturf
+  magnitude_guidance: "Step one insert softer. A softer insert gives more traction and lets the tyre wrap rough/loose ground for mechanical grip; too light a foam makes the car wander and become unstable (Cheat Sheet p.46), and on high bite it folds and traction-rolls."
+  reversal_cost_minutes: 10
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.46 Tyre Inserts (softer = more traction, more drag; too light a foam makes the car wander and be very unstable)"
+    - "CompetitionX RC Tuning Guide — Inserts (corroboration: softer insert conforms on rough/low-bite tracks)"
+  scope: [1-10-4wd-offroad]
+
+# ============================================================================
+# FAMILY: GEARING  (power-class gated)
+# ============================================================================
+
+- id: kb-4wd-gear-taller-052
+  setting: pinion_teeth
+  direction: increase   # bigger pinion / taller gearing
+  effects:
+    - { axis: top_speed, change: more }
+    - { axis: acceleration_punch, change: less }
+    - { axis: motor_temperature, change: more }
+  addresses:
+    - { symptom: sluggish_steering, phase: high_speed }   # 'won't pull on the straight' — geared too short and tops out early
+  conditions:
+    amplified_on: [fast_open]
+    reduced_on: [technical_tight]
+  counter_indications: []
+  legal_in_power: [stock_blinky, modified_power]
+  magnitude_guidance: "One pinion tooth at a time, then check motor temp after a run (keep well under the motor's limit). Taller gearing (more pinion teeth) adds top speed for long straights but pulls harder on the motor and runs hotter and uses more battery — back off if it runs hot."
+  reversal_cost_minutes: 8
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.28 Pinion Gear (more teeth = more top speed, less run time, gear ratio goes up)"
+    - "CompetitionX RC Tuning Guide — Gearing (corroboration: more pinion = more top speed, less acceleration, more heat)"
+  scope: [1-10-4wd-offroad]
+
+- id: kb-4wd-gear-shorter-053
+  setting: pinion_teeth
+  direction: decrease   # smaller pinion / shorter gearing
+  effects:
+    - { axis: acceleration_punch, change: more }
+    - { axis: top_speed, change: less }
+    - { axis: motor_temperature, change: less }
+  addresses:
+    - { symptom: no_forward_bite, phase: corner_exit }   # tight tracks: shorter gearing gives more punch off the corner
+  conditions:
+    amplified_on: [technical_tight]
+    reduced_on: [fast_open]
+  counter_indications: []
+  legal_in_power: [stock_blinky, modified_power]
+  magnitude_guidance: "One pinion tooth at a time. Shorter gearing (fewer pinion teeth) adds punch off slow corners on tight tracks, runs cooler and gives more run time; it tops out earlier, so don't over-gear-down for long straights."
+  reversal_cost_minutes: 8
+  confidence: medium
+  sources:
+    - "AE RC Cheat Sheets (RC_CheatSheets.pdf) p.28 Pinion Gear (fewer teeth = more acceleration, more run time, gear ratio goes down)"
+    - "CompetitionX RC Tuning Guide — Gearing (corroboration: fewer pinion teeth = more acceleration, less top speed, cooler)"
+  scope: [1-10-4wd-offroad]

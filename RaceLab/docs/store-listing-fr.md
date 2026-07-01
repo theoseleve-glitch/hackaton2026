@@ -29,7 +29,7 @@ Enregistre une session en moins de 10 secondes, à la piste, hors ligne. Attache
 
 Nitro ou électrique, tout-terrain ou piste — la fiche s'adapte à ta voiture.
 
-**L'ingénieur de réglages est gratuit, pour toujours.** Essai premium gratuit de 15 jours (préparateur de course, stratégie d'arrêts, météo auto, import Speedhive, historique complet, export). Ensuite **9,99 €/mois ou 99,99 €/an, facturés via Google Play**. Résilie quand tu veux depuis le Play Store.
+**L'ingénieur de réglages est gratuit, pour toujours.** Essai premium gratuit de 15 jours (préparateur de course, stratégie d'arrêts, météo auto, import Speedhive, historique complet, export). Ensuite **4,99 €/mois ou 39,99 €/an, facturés via Google Play**. Résilie quand tu veux depuis le Play Store.
 
 Fait par des pilotes, pour la pit lane. 🏁
 

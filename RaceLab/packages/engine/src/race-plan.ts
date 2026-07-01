@@ -1,7 +1,7 @@
 import type { KBData } from "./data";
 import { drivingTips } from "./driving-tips";
 import { buildReport, type EngineerReport } from "./report";
-import { planRaceDay, type PlannedAdjustment } from "./planner"; // William's race-day planner
+import { planRaceDay, type PlannedAdjustment } from "./raceday"; // William's race-day planner (main moved it to raceday.ts)
 import type { ContextBundle } from "./types";
 import type { LearningTuple } from "../../schema/src/runs";
 import type { WeatherObservation } from "../../schema/src/weather";

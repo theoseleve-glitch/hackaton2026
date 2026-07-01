@@ -1,16 +1,18 @@
-import type { KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { proposePlan } from "./plan";
 import { historyFromTuples } from "./history";
 import type { ContextBundle } from "./types";
 import {
+  buildConditionTags,
   conditionsToTags,
   effectiveTiming,
   lapStats,
   learningTuples,
   renderConditions,
 } from "../../schema/src/runs";
-import type { LearningTuple, OutcomeRecord, RunEntry } from "../../schema/src/runs";
+import type { LapTime, LearningTuple, OutcomeRecord, RunEntry } from "../../schema/src/runs";
 import { detectTyreCliff } from "../../schema/src/strategy";
+import type { TyreCliffReport } from "../../schema/src/strategy";
 
 /**
  * Run analysis — analyzeRuns turns a set of schema RunEntry rows (plus their
@@ -37,7 +39,7 @@ export interface ReportSection {
   lines: ReportLine[];
 }
 
-export interface EngineerReport {
+export interface RunAnalysisReport {
   kind: "engineer_report";
   source: "offline_deterministic";
   run_count: number;
@@ -61,7 +63,7 @@ export function analyzeRuns(
   runs: readonly RunEntry[],
   data: KBData,
   opts?: AnalyzeRunsOptions,
-): EngineerReport {
+): RunAnalysisReport {
   const sorted = [...runs].sort((a, b) =>
     a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : a.id < b.id ? -1 : 1,
   );
@@ -182,12 +184,30 @@ function paceSection(runs: readonly RunEntry[]): ReportSection {
 function tyresSection(runs: readonly RunEntry[]): ReportSection {
   const lines: ReportLine[] = [];
   runs.forEach((r, i) => {
+    // Grounded or silent: a cliff claim needs a real lap series. Summary-only or
+    // untimed runs carry no per-lap signal, so detectTyreCliff is never run on
+    // them and no cliff line is emitted (D18 — don't invent a cliff from a
+    // driver-entered best/avg).
     if (r.timing === undefined || r.timing.kind !== "laps") return;
     const report = detectTyreCliff(r.timing.laps);
     if (report.detected) {
       lines.push(
         obs(
           `Run ${i + 1} (${r.type}): tyre cliff from lap ${report.cliff_lap} — sustained drop-off, confidence ${report.confidence} (${report.evidence.length} laps of evidence).`,
+        ),
+      );
+      // Quantified observation + pit-timing recommendation. detectTyreCliff is
+      // strategy math over THIS run's lap series (not a KB rule), so both lines
+      // are framed as observations from the lap data — no fabricated KB citation.
+      const dropPct = cliffDropPct(r.timing.laps, report);
+      lines.push(
+        obs(
+          `Run ${i + 1} (${r.type}): tyres fell off ~lap ${report.cliff_lap} (pace dropped ${fmt(dropPct)}% vs the run's baseline) — plan a stop before it.`,
+        ),
+      );
+      lines.push(
+        cliffRec(
+          `Run ${i + 1} (${r.type}): your cliff lands ~lap ${report.cliff_lap} — size stints to pit a lap or two before it rather than running the tyres past the drop-off. (Observed from this run's lap times, not a KB rule.)`,
         ),
       );
     } else {
@@ -202,6 +222,27 @@ function tyresSection(runs: readonly RunEntry[]): ReportSection {
     lines.push(obs("No lap series logged — tyre life not assessable from this set."));
   }
   return { id: "tyres", title: "Tyre life", lines };
+}
+
+/** Average slowdown across the cliff suffix as a % of the run's baseline pace.
+ *  Reconstructs the baseline the detector used (lap_time − delta_s for the first
+ *  evidence lap) so the % is grounded in the same math, not a re-estimate. */
+function cliffDropPct(laps: readonly LapTime[], report: TyreCliffReport): number | undefined {
+  if (report.evidence.length === 0) return undefined;
+  const first = report.evidence[0];
+  const firstLap = laps.find((l) => l.n === first.lap_n);
+  if (firstLap === undefined) return undefined;
+  const baseline = firstLap.t_s - first.delta_s;
+  if (!(baseline > 0)) return undefined;
+  const avgDelta = report.evidence.reduce((a, e) => a + e.delta_s, 0) / report.evidence.length;
+  return Math.round((avgDelta / baseline) * 1000) / 10; // one decimal, e.g. 3.1
+}
+
+/** A pace/tyre-timing recommendation grounded in the run's own lap data rather
+ *  than a KB rule — so it carries no `citations` (a recommendation line that
+ *  cited a fake KB rule would violate grounded-or-silent). */
+function cliffRec(text: string): ReportLine {
+  return { kind: "recommendation", text };
 }
 
 function setupChangesSection(tuples: readonly LearningTuple[]): ReportSection {
@@ -235,7 +276,7 @@ function nextPlanSection(
   if (runs.length === 0) return refusal("No runs — nothing to ground a plan on.");
 
   const latest = runs[runs.length - 1];
-  if (!data.templates[latest.car_template_id]) {
+  if (!resolveTemplate(data, latest.car_template_id)) {
     return refusal(
       `Chassis template '${latest.car_template_id}' is not in the KB — no grounded plan (grounded or silent).`,
     );
@@ -264,7 +305,11 @@ function nextPlanSection(
       name: latest.track.name,
       surface: latest.track.surface,
       grip: latest.conditions.grip,
-      conditions: [...conditionsToTags(latest.conditions)],
+      // Union surface-family tags so this next-plan retrieval sees the same condition set
+      // the live advisor does — otherwise surface-amplified rules stay dark AND the
+      // forbidden_on hard-drop can't fire, letting analyzeRuns recommend a change that is
+      // wrong for the surface. (power isn't carried on RunEntry, so it's omitted here.)
+      conditions: [...buildConditionTags({ conditions: latest.conditions, surface: latest.track.surface })],
     },
     feedback: { tags: feedbackRun.feedback.tags.map((t) => ({ ...t })) },
     mode: opts?.mode ?? "practice",
@@ -283,7 +328,5 @@ function nextPlanSection(
 }
 
 function fmt(v: number | undefined): string {
-  // M5: a non-finite stat (NaN/Infinity, e.g. avg of an empty/garbage lap set)
-  // must never render as "NaN"/"Infinity"; show "?" instead.
-  return v === undefined || !Number.isFinite(v) ? "?" : String(v);
+  return v === undefined ? "?" : String(v);
 }

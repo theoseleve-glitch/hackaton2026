@@ -1,0 +1,21 @@
+{
+  "class_id": "1-8-tt-buggy",
+  "label": "1/8 TT Competition Buggy",
+  "category": "offroad",
+  "scale": "1/8",
+  "type": "buggy",
+  "power_types": ["nitro", "brushless"],
+  "sections": {
+    "common": [
+      "front_suspension",
+      "rear_suspension",
+      "diffs",
+      "tyres",
+      "geometry",
+      "electronics_radio"
+    ],
+    "nitro": ["engine", "clutch", "fuel_system", "exhaust"],
+    "brushless": ["esc", "motor", "gearing", "battery"]
+  },
+  "notes": "Section ids mirror packages/schema cars.ts COMMON_SECTIONS / NITRO_SECTIONS / BRUSHLESS_SECTIONS exactly - schema owns the section-id and ChassisRegistryEntry SHAPES; the class-facet VALUES are canonical HERE and in kb/chassis/registry.json (category=offroad, scale=1/8, type=buggy; exported as FACET_* constants from packages/kb/src/index.ts). The example facet values in schema cars.ts comments and its test fixture (buggy / offroad-competition) are placeholders, not vocabulary - sectionApplies matches raw strings and fails closed, so author section conditions against THIS vocabulary only. A chassis template's own category field (e.g. 1-8-nitro-buggy in inferno-mp11.json) is the chassis/<cat>/ extraction-directory name, a different fact, never a class facet. A car's visible sheet = common + sections for its power_type (sheetSections); class-facet conditions fail closed when labels are unknown. Chassis belonging to this class are listed in kb/chassis/registry.json with category/scale/type matching this file's facets."
+}

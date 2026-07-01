@@ -1,5 +1,5 @@
 import type { ContextBundle, HistoryEntry } from "./types";
-import { renderConditions } from "../../schema/src/runs";
+import { renderConditions, conditionsToTags } from "../../schema/src/runs";
 import type { LearningTuple } from "../../schema/src/runs";
 
 /**
@@ -11,16 +11,50 @@ import type { LearningTuple } from "../../schema/src/runs";
  * It can never resurrect a rule the KB wouldn't ground, and its influence is
  * bounded to one tier (+1 promoted / 0 clean / -1 demoted), so a 'better'
  * streak can't outrank the KB's own refusals.
+ *
+ * CONDITION-SEGMENTED — a change can rate better in one condition and worse in
+ * another (better-when-hot / worse-when-cold). Each cited+this-track row is
+ * classed against the CURRENT bundle's significant conditions:
+ *   - MATCHED   (tagged, no conflicting significant condition) → drives the tier
+ *   - CONFLICT  (tagged, opposite significant condition, e.g. a 'cold' row vs a
+ *               'hot' forecast) → EXCLUDED entirely; a wrong-condition outcome
+ *               must never re-rank or be claimed in the card (grounded-or-silent)
+ *   - UNTAGGED  (legacy/no condition_tags) → the all-rows FALLBACK signal
+ * The tier uses the matched signal when any matched row exists, else the
+ * untagged fallback. If every row conflicts (only opposite-condition history),
+ * there is NO usable signal → returns null. This is NOT a cold-start fix (it
+ * needs ≥1 same- or no-condition row); the cross-driver prior is a separate
+ * server-published data file, out of scope here.
  */
 
+/** Condition tags that meaningfully change tuning — only these gate a
+ *  "same conditions" match. Minor tags (dusty/bumpy/smooth/rough/…) don't
+ *  discriminate the learned prior, so they never split the signal. */
+const SIGNIFICANT_CONDITIONS: ReadonlySet<string> = new Set([
+  "low_grip",
+  "high_grip",
+  "blue_groove",
+  "hot",
+  "cold",
+  "wet",
+]);
+
 export interface RuleHistory {
+  /** Untagged/legacy rows only — the FALLBACK signal (used when no matched row). */
   better: number;
   same: number;
   worse: number;
-  /** better - worse. Positive ⇒ promote one tier, negative ⇒ demote one tier. */
   net: number;
-  /** Outcome of the most recent matching row (rows arrive oldest-first). */
+  /** Outcome of the most recent USABLE (matched or untagged) row; conflicting
+   *  rows never set it. */
   last: "better" | "same" | "worse";
+  /** Rows whose conditions MATCH the current bundle — the condition-specific
+   *  signal. When matched_count > 0 the tier is driven by matched_net. */
+  matched_better: number;
+  matched_worse: number;
+  matched_same: number;
+  matched_net: number;
+  matched_count: number;
 }
 
 /** Track-isolation rule for a history row (see HistoryEntry doc):
@@ -32,52 +66,119 @@ export function historyRowApplies(row: HistoryEntry, bundleTrackId: string | und
   return bundleTrackId !== undefined && row.track_id === bundleTrackId;
 }
 
+/** The bundle's significant condition tags: the track's taxonomy tags plus
+ *  hot/cold derived from the forecast — mirroring schema `conditionsToTags`
+ *  EXACTLY (hot = air ≥ 30 OR track ≥ 40; cold = air ≤ 10) so a row tagged hot
+ *  by track temperature isn't seen as conflicting by an air-only bundle. */
+function bundleSignificantTags(bundle: ContextBundle): Set<string> {
+  const sig = new Set<string>();
+  for (const t of bundle.track.conditions) if (SIGNIFICANT_CONDITIONS.has(t)) sig.add(t);
+  const air = bundle.weather?.air_temp_c;
+  const track = bundle.weather?.track_temp_c;
+  if ((air !== undefined && air >= 30) || (track !== undefined && track >= 40)) sig.add("hot");
+  if (air !== undefined && air <= 10) sig.add("cold");
+  return sig;
+}
+
+type RowState = "untagged" | "match" | "conflict";
+
+/** Classify a row against the bundle's significant conditions:
+ *  - untagged (no condition_tags) → legacy fallback bucket
+ *  - match: shares a significant condition, OR either side has none (can't
+ *    discriminate ⇒ generic)
+ *  - conflict: both sides have significant conditions but they are DISJOINT
+ *    (e.g. a 'cold' row vs a 'hot' forecast) → excluded entirely */
+function rowConditionState(row: HistoryEntry, bundleSig: Set<string>): RowState {
+  if (!row.condition_tags || row.condition_tags.length === 0) return "untagged";
+  const rowSig = new Set<string>();
+  for (const t of row.condition_tags) if (SIGNIFICANT_CONDITIONS.has(t)) rowSig.add(t);
+  if (rowSig.size === 0 || bundleSig.size === 0) return "match"; // generic on one side
+  for (const t of rowSig) if (bundleSig.has(t)) return "match"; // shared family
+  return "conflict";
+}
+
 /** Aggregate this-track history for one KB rule (matched by rule id in the
- *  row's citations). Returns null when no row attributes to the rule here. */
+ *  row's citations). Returns null when no USABLE (non-conflicting) row
+ *  attributes to the rule here. */
 export function historyForRule(ruleId: string, bundle: ContextBundle): RuleHistory | null {
   const rows = bundle.history;
   if (!rows || rows.length === 0) return null;
+  const bundleSig = bundleSignificantTags(bundle);
   let better = 0;
   let same = 0;
   let worse = 0;
+  let mBetter = 0;
+  let mSame = 0;
+  let mWorse = 0;
   let last: RuleHistory["last"] | null = null;
   for (const row of rows) {
     if (!row.citations || !row.citations.includes(ruleId)) continue;
     if (!historyRowApplies(row, bundle.track.track_id)) continue;
-    if (row.outcome === "better") better++;
-    else if (row.outcome === "worse") worse++;
-    else same++;
-    last = row.outcome;
+    const state = rowConditionState(row, bundleSig);
+    if (state === "conflict") continue; // wrong-condition outcome — excluded entirely
+    if (state === "match") {
+      if (row.outcome === "better") mBetter++;
+      else if (row.outcome === "worse") mWorse++;
+      else mSame++;
+    } else {
+      if (row.outcome === "better") better++;
+      else if (row.outcome === "worse") worse++;
+      else same++;
+    }
+    last = row.outcome; // most recent usable (matched or untagged) row
   }
-  if (last === null) return null;
-  return { better, same, worse, net: better - worse, last };
+  if (last === null) return null; // no usable history for the current condition
+  return {
+    better,
+    same,
+    worse,
+    net: better - worse,
+    last,
+    matched_better: mBetter,
+    matched_worse: mWorse,
+    matched_same: mSame,
+    matched_net: mBetter - mWorse,
+    matched_count: mBetter + mSame + mWorse,
+  };
 }
 
-/** Bounded influence: one tier up, one tier down, nothing else. */
+/** Whether the condition-matched signal (not the untagged fallback) drives the
+ *  ranking. historyTier + historyNote MUST agree on this so the card text can't
+ *  claim "in similar conditions" while the tier came from untagged rows. */
+export function matchedSignalUsed(h: RuleHistory): boolean {
+  return h.matched_count > 0;
+}
+
+/** Bounded influence: one tier up, one tier down, nothing else. Condition-
+ *  matched rows take priority over the untagged fallback; conflicting rows
+ *  never contribute. */
 export function historyTier(h: RuleHistory | null | undefined): -1 | 0 | 1 {
   if (!h) return 0;
-  if (h.net > 0) return 1;
-  if (h.net < 0) return -1;
+  const net = matchedSignalUsed(h) ? h.matched_net : h.net;
+  if (net > 0) return 1;
+  if (net < 0) return -1;
   return 0;
 }
 
-/** Deterministic template for the card text — never freeform. */
+/** Deterministic template for the card text — never freeform. Scoped to the
+ *  matched condition exactly when the matched signal drives the tier. */
 export function historyNote(h: RuleHistory): string {
-  // D2: a small-sample qualifier so one rating isn't read as a verdict.
-  const sampleTag = h.better + h.same + h.worse < 3 ? " (small sample)" : "";
-  if (h.net < 0) {
-    return `Rated worse here last time${sampleTag} — ranked below untested options.`;
-  }
-  if (h.net > 0) {
-    return `Rated better here last time${sampleTag} — ranked up.`;
-  }
-  return `Tried here before${sampleTag}: ${h.better} better / ${h.same} same / ${h.worse} worse.`;
+  const scoped = matchedSignalUsed(h);
+  const net = scoped ? h.matched_net : h.net;
+  const where = scoped ? "here in similar conditions" : "here";
+  if (net < 0) return `Rated worse ${where} last time — ranked below untested options.`;
+  if (net > 0) return `Rated better ${where} last time — ranked up.`;
+  const b = scoped ? h.matched_better : h.better;
+  const s = scoped ? h.matched_same : h.same;
+  const w = scoped ? h.matched_worse : h.worse;
+  return `Tried ${where} before: ${b} better / ${s} same / ${w} worse.`;
 }
 
 /** Build engine history rows from schema learning tuples, KEEPING the rule-id
- *  citations and track identity that schema's plain `toEngineHistory` drops —
- *  this is what the app should feed into ContextBundle.history. Bare run
- *  ratings (no change attached) are excluded; `limit` keeps the most recent N. */
+ *  citations, track identity AND condition tags that schema's plain
+ *  `toEngineHistory` drops — this is what the app should feed into
+ *  ContextBundle.history. Bare run ratings (no change attached) are excluded;
+ *  `limit` keeps the most recent N. */
 export function historyFromTuples(
   tuples: readonly LearningTuple[],
   filter?: { track_id?: string; car_id?: string; limit?: number },
@@ -98,5 +199,6 @@ export function historyFromTuples(
     outcome: t.outcome,
     citations: [...t.change!.citations],
     track_id: t.track.track_id,
+    condition_tags: conditionsToTags(t.conditions),
   }));
 }

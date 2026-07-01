@@ -17,7 +17,6 @@ import { loadKBData } from "./node-kb";
 import { recommend } from "./engineer";
 import { buildReport, type EngineerReport } from "./report";
 import { RaceEngineerChat } from "./chat";
-import { settingUnknownToTemplate } from "./guard";
 import { getTemplate } from "./data";
 import type { ContextBundle, FeedbackTag, KBRule, Recommendation, RecommendationOption } from "./types";
 
@@ -64,6 +63,20 @@ function directionSign(dir: string): 1 | -1 | 0 {
 
 function humanize(id: string): string {
   return id.replace(/_/g, " ");
+}
+
+/** Capability gate (mirrors retrieval.ts): a setting is "on the template" iff it
+ *  is a key in template.fields — the parts the car exposes. main's audit dropped
+ *  guard's old settingUnknownToTemplate as dead code, so this adversarial test
+ *  re-checks the invariant DIRECTLY against the same template.fields the engine's
+ *  model-capability gate uses. No fields / unknown template → not flagged here
+ *  (the throw + refusal checks cover unknown chassis separately). */
+function settingUnknownToTemplate(
+  setting: string,
+  template: { fields?: Record<string, unknown> } | undefined,
+): boolean {
+  const fields = template?.fields;
+  return fields !== undefined && !(setting in fields);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

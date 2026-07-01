@@ -1,9 +1,9 @@
-import { getTemplate, type KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { parseFeedback } from "./nlu";
 import { proposePlan } from "./plan";
 import { engineScopeViolation } from "./guard";
 import { conditionsEcho } from "./offline";
-import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types";
+import type { ChassisTemplate, ContextBundle, FeedbackTag, RecommendationOption } from "./types";
 
 /**
  * RaceLab's deterministic race-engineer chatbot (D18) — no API, no model.
@@ -16,52 +16,10 @@ import type { ContextBundle, FeedbackTag, RecommendationOption } from "./types";
 type State = "awaiting_problem" | "awaiting_phase" | "awaiting_outcome";
 
 const PHASE_QUESTION =
-  "When does it do that? Tell me where in the corner: entry / mid-corner / exit / on power / off power / braking — or jumps / bumps / high speed / low speed. That's what decides which lever fixes it.";
+  "When does it do that? (corner entry / mid-corner / exit / on power / off power / braking / jumps / bumps / high speed / low speed)";
 
 const PROBLEM_PROMPT =
-  'Describe what the car is doing — like you\'d tell your pit man: the symptom, when in the corner it happens, and the conditions. e.g. "it pushes mid-corner on the dusty low-grip stuff", "loose on power out of the infield", "bounces through the braking bumps".';
-
-/** R5-1 — the marker the rendered `change` text uses to carry a rule's hard
- *  safety caveat (M1-M3: " ⚠️ SAFETY: <danger>"). The chat splits on it so the
- *  danger note becomes its OWN prominent line, never buried at the end of the
- *  change text. */
-const SAFETY_MARKER = "⚠️ SAFETY:";
-
-/** R5-1 — split an option's `change` into the bare action and (when present) the
- *  hard danger note, so the chat can render the danger on its own ⚠️ line. The
- *  danger is the SAME advice path as the report's — surfacing it is mandatory.
- *  Pure string split; no new content, NaN-free. */
-function splitDanger(change: string): { action: string; danger: string | null } {
-  const i = change.indexOf(SAFETY_MARKER);
-  if (i === -1) return { action: change.trim(), danger: null };
-  return {
-    action: change.slice(0, i).trim(),
-    danger: change.slice(i + SAFETY_MARKER.length).trim(),
-  };
-}
-
-/** R5-1 — one plain-language framing line, the chat echo of the report's headline:
- *  what this change IS for the racer, keyed on confidence, with the danger framing
- *  taking precedence so a physical-risk change is never oversold. Pure + total. */
-function framing(confidence: RecommendationOption["confidence"], hasDanger: boolean): string {
-  if (hasDanger) return "the clearest single change to try here — go gently, it has a hard safety limit";
-  if (confidence === "high") return "your highest-confidence, lowest-risk change to try first";
-  if (confidence === "medium") return "the most promising single change to test next";
-  return "worth a controlled test — low confidence, so prove it on track before you trust it";
-}
-
-/** R5-1 — confidence in evidence-strength words, mirroring the report's calibrated
- *  wording: a verified-science 'high' is stated as exactly that. Pure + total. */
-function confidenceWording(confidence: RecommendationOption["confidence"]): string {
-  switch (confidence) {
-    case "high":
-      return "high — from the verified set-up science; rate the run and it gets confirmed on YOUR car";
-    case "medium":
-      return "medium — a solid lead, not a certainty; the run tells us";
-    default:
-      return "low — treat it as an experiment, not a fix";
-  }
-}
+  'Describe what the car is doing — like you\'d tell your pit man. e.g. "it pushes mid-corner", "loose on power out of the infield", "bounces through the braking bumps".';
 
 export interface OutcomeEvent {
   outcome: "better" | "same" | "worse";
@@ -91,21 +49,28 @@ export class RaceEngineerChat {
   private planSize = 0; // changes in the active plan (0 = no plan presented)
   private planPos = 0; //  1-based position of `current` within the plan
   private data: KBData;
-  private template;
+  private template: ChassisTemplate | undefined;
   private hooks: ChatHooks;
 
   constructor(bundle: ContextBundle, data: KBData, hooks: ChatHooks = {}) {
     this.bundle = bundle;
     this.data = data;
     this.hooks = hooks;
-    this.template = getTemplate(data, bundle.chassis_template_id);
+    // Never throw on an unknown chassis — proposePlan refuses in-band, and the
+    // greeting degrades to a refusal line below.
+    this.template = resolveTemplate(data, bundle.chassis_template_id);
   }
 
   greeting(): string[] {
+    if (!this.template) {
+      return [
+        `I don't have a verified setup sheet for this chassis yet, so I can't run the engineer here.`,
+        `Session: ${conditionsEcho(this.bundle)}.`,
+      ];
+    }
     return [
       `Race engineer ready — ${this.template.brand} ${this.template.model}.`,
       `Session: ${conditionsEcho(this.bundle)}.`,
-      "I read what the car is doing and give you ONE grounded chassis change at a time — the lever, how far to move it, what to expect, and how to undo it — all from verified set-up rules (no guessing, chassis only, not engine).",
       PROBLEM_PROMPT,
     ];
   }
@@ -127,14 +92,7 @@ export class RaceEngineerChat {
 
   handle(rawInput: string): string[] {
     const input = rawInput.trim();
-    if (!input) {
-      // R5-1: an empty turn gets a SPECIFIC ask, not a vague "I'm listening" —
-      // tell the racer exactly what three things to give me.
-      return [
-        "I'm listening — give me the symptom, when in the corner it happens, and the conditions.",
-        PROBLEM_PROMPT,
-      ];
-    }
+    if (!input) return ["I'm listening."];
 
     // global commands work in any state
     const cmd = this.handleCommand(input);
@@ -191,11 +149,9 @@ export class RaceEngineerChat {
       ];
     }
     if (parsed.tags.length === 0) {
-      // R5-1: a SPECIFIC clarification — name the grip-feel words I understand and
-      // the three things I need, so the racer knows exactly how to rephrase.
       return [
-        "I couldn't pin the symptom down from that. Tell me how the car FEELS in grip terms — does it push/understeer, go loose/oversteer, bounce, bottom out, traction-roll, or feel twitchy?",
-        "And WHEN it happens (corner entry / mid / exit, on or off power, braking, jumps, bumps) — that's what points to the right lever.",
+        "I couldn't pin the symptom down from that.",
+        PROBLEM_PROMPT,
       ];
     }
     const hasPhase = parsed.tags.some((t) => t.phase);
@@ -255,17 +211,10 @@ export class RaceEngineerChat {
       this.queue = [];
       this.planSize = 0;
       this.planPos = 0;
-      // R5-2: a "no grounded change" verdict in chat is HELPFUL, not a dead-end.
-      // Do-nothing carries the enriched race-day-bar explanation; the refusal
-      // says WHY there's no grounded change and what to do (and falls back to the
-      // plan's own enriched message when it has one, e.g. unknown template).
-      if (plan.kind === "do_nothing") {
-        return [`🤝 ${plan.message}`];
-      }
       return [
-        plan.message
-          ? `🚫 ${plan.message}`
-          : "🚫 I don't have a verified chassis rule for that one, and I won't guess. Before touching the chassis, check tyres/inserts for this surface — that's the usual cause when no rule matches. Or log a run with the symptom + conditions and I'll have more to work with.",
+        plan.kind === "do_nothing"
+          ? `🤝 ${plan.message}`
+          : "I don't have a verified chassis rule for that one. Before touching the chassis: check tires/inserts for this surface — that's the usual cause.",
       ];
     }
     this.queue = plan.changes.map((c) => c.option);
@@ -276,13 +225,7 @@ export class RaceEngineerChat {
       header.push(
         `Plan: ${this.planSize} grounded changes, ranked. ONE at a time — apply, run, rate, then we decide.`,
       );
-      // R5-1: in the scannable header, show the bare action + a compact ⚠️ flag for
-      // any change that carries a hard safety limit (the full caveat rides its own
-      // line when that change is actually presented). Keeps risk visible up front.
-      for (const c of plan.changes) {
-        const { action, danger } = splitDanger(c.option.change);
-        header.push(`  ${c.position}. ${action}${danger ? " ⚠️ (has a safety limit — details when we get to it)" : ""}`);
-      }
+      for (const c of plan.changes) header.push(`  ${c.position}. ${c.option.change}`);
     }
     return [...header, ...this.presentNext(true)];
   }
@@ -305,21 +248,12 @@ export class RaceEngineerChat {
     const o = this.current;
     const lead = first ? "Try ONE change:" : "Next on my list:";
     const planTag = this.planSize > 1 ? ` (change ${this.planPos} of ${this.planSize})` : "";
-    // R5-1: pull the hard safety caveat out of `change` onto its OWN ⚠️ line so it
-    // can't be buried — the chat MUST surface a recommended rule's danger. Then
-    // lead with a plain-language framing (the chat echo of the report headline)
-    // and state confidence in evidence-strength words.
-    const { action, danger } = splitDanger(o.change);
     return [
       `${lead}${planTag}`,
-      `🔧 ${action}`,
-      `   in plain terms: ${framing(o.confidence, danger !== null)}.`,
-      ...(o.magnitude ? [`   how much: ${o.magnitude}`] : []),
-      ...(danger ? [`   ⚠️ SAFETY: ${danger}`] : []),
+      `🔧 ${o.change}`,
       `   why: ${o.mechanism}`,
       ...(o.history_note ? [`   📒 history: ${o.history_note}`] : []),
-      `   confidence: ${confidenceWording(o.confidence)}`,
-      `   revert: ${o.revert}  ·  source: ${o.citations.join(", ")}`,
+      `   revert: ${o.revert}  ·  confidence: ${o.confidence}  ·  source: ${o.citations.join(", ")}`,
       `Run it, then tell me: better / same / worse?`,
     ];
   }

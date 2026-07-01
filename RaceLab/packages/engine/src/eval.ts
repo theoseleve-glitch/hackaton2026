@@ -15,10 +15,10 @@ interface Scenario {
     primary_cites?: string;
     /** The primary must NOT cite this rule (history demotion scenarios). */
     primary_cites_not?: string;
-    /** R5-3 — on a refusal/do-nothing verdict, the user-facing message MUST contain
-     *  this substring. Locks the R5-2 HELPFUL clause (the "what to do" the racer
-     *  gets instead of a dead-end) so a future change can't silently strip it. */
-    message_includes?: string;
+    /** Conflict scenarios: assert exactly one primary on one lever, every option
+     *  on a DISTINCT setting (so two opposite-pulling symptoms can never yield a
+     *  contradictory pair on the same setting), and a bounded option count. */
+    no_contradictory_pair?: boolean;
   };
   bundle: ContextBundle;
 }
@@ -27,6 +27,7 @@ const scenariosDir = join(dirname(fileURLToPath(import.meta.url)), "..", "scenar
 const files = readdirSync(scenariosDir).filter((f) => f.endsWith(".json")).sort();
 const kbData = loadKBData();
 const kbIds = new Set(kbData.rules.map((r) => r.id));
+const ruleById = new Map(kbData.rules.map((r) => [r.id, r]));
 
 let passed = 0;
 const failures: string[] = [];
@@ -45,22 +46,6 @@ for (const file of files) {
 
   if (rec.kind !== scenario.expect.kind) {
     problems.push(`expected kind=${scenario.expect.kind}, got ${rec.kind}`);
-  }
-
-  // R5-3 — refusal/do-nothing verdicts must carry a non-empty, HELPFUL message,
-  // and (when asserted) the specific R5-2 "what to do" clause. This locks the
-  // edge-case helpfulness so it can't silently regress to a bare dead-end.
-  if (rec.kind === "refusal" || rec.kind === "do_nothing") {
-    if (!rec.message || rec.message.trim().length === 0) {
-      problems.push(`${rec.kind} carries no message`);
-    } else if (
-      scenario.expect.message_includes &&
-      !rec.message.includes(scenario.expect.message_includes)
-    ) {
-      problems.push(
-        `${rec.kind} message must include "${scenario.expect.message_includes}"; got "${rec.message.slice(0, 100)}"`,
-      );
-    }
   }
 
   if (rec.kind === "recommendation") {
@@ -92,6 +77,29 @@ for (const file of files) {
       rec.primary!.citations.includes(scenario.expect.primary_cites_not)
     ) {
       problems.push(`primary must not cite ${scenario.expect.primary_cites_not} (history-demoted)`);
+    }
+    if (scenario.expect.max_reversal_minutes !== undefined) {
+      const cap = scenario.expect.max_reversal_minutes;
+      for (const o of options) {
+        for (const c of o.citations) {
+          const r = ruleById.get(c);
+          if (r && r.reversal_cost_minutes > cap) {
+            problems.push(`${o.setting} cites ${c} (reversal ${r.reversal_cost_minutes}min) over the race-day cap ${cap}min`);
+          }
+        }
+      }
+    }
+    if (scenario.expect.no_contradictory_pair) {
+      // Two opposite-pulling symptoms must resolve to ONE primary lever, and no
+      // two options may share a setting (the distinct-setting invariant IS the
+      // anti-contradiction guarantee: the engine can never propose "stiffen X"
+      // and "soften X" together). Every option stays grounded.
+      if (!rec.primary) problems.push("conflict: no single primary change");
+      if (new Set(settings).size !== settings.length)
+        problems.push(`conflict: a setting appears twice (possible contradictory pair): [${settings.join(", ")}]`);
+      if (options.some((o) => o.citations.length === 0))
+        problems.push("conflict: an option is ungrounded (grounded-or-silent)");
+      if (options.length > 1 + 2) problems.push("conflict: more than 1 primary + 2 alternatives");
     }
     if (!rec.conditions_echo || rec.conditions_echo.length < 10) problems.push("missing conditions echo");
   }

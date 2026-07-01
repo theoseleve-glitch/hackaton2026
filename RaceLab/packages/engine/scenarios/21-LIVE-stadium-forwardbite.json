@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 stadium truck: no forward bite on exit → grounded advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["slipper_setting", "rear_anti_squat", "rear_toe", "tire_rear_compound", "gearing", "rear_shock_oil", "ride_height"] },
+  "bundle": {
+    "chassis_template_id": "associated-t6-1",
+    "setup": {},
+    "track": { "name": "Dirt Track", "surface": "clay", "grip": "medium", "conditions": ["loose_dirt"] },
+    "feedback": { "tags": [{ "symptom": "no_forward_bite", "phase": "corner_exit" }], "text": "stadium truck spins up out of the corner, no drive" },
+    "mode": "practice"
+  }
+}

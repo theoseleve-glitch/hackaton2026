@@ -1,14 +1,9 @@
+import { getTemplate } from "./data";
 import { loadKBData } from "./node-kb";
-import { planRaceDay } from "./planner";
-import type { RaceDayInput } from "./planner";
-import { makeOutcomeRecord, learningTuples } from "../../schema/src/runs";
-import type { OutcomeRecord } from "../../schema/src/runs";
-import { makeWeatherObservation } from "../../schema/src/weather";
-import type { WeatherObservation } from "../../schema/src/weather";
-import { makeId } from "../../schema/src/ids";
-import type { TrackSnapshot } from "../../schema/src/tracks";
+import { buildRacePlan, type Forecast, type RaceWindow, type SelectedRunSummary } from "./planner";
+import type { ContextBundle } from "./types";
 
-/** planRaceDay — practice + forecast → KB-grounded adjustments (D18: pure). */
+/** Tests for the race planner (D30): practice log + forecast → race-day plan. */
 
 const data = loadKBData();
 
@@ -22,229 +17,133 @@ function check(label: string, ok: boolean, detail?: string): void {
   }
 }
 
-let seed = 7;
-const rand = () => {
-  seed = (seed * 1664525 + 1013904223) % 4294967296;
-  return seed / 4294967296;
-};
-
-const T0 = "2026-06-13T08:00:00.000Z";
-const session_id = makeId("ss", Date.parse(T0), rand);
-const car_id = makeId("car", Date.parse(T0), rand);
-const track: TrackSnapshot = {
-  track_id: makeId("trk", Date.parse(T0), rand),
-  name: "Nationals Track",
-  surface: "clay",
-  indoor: false,
-};
-const otherTrack: TrackSnapshot = {
-  track_id: makeId("trk", Date.parse(T0) + 1, rand),
-  name: "Somewhere Else",
-  surface: "astro",
-  indoor: false,
-};
-
-function obs(input: WeatherObservation): WeatherObservation {
-  const r = makeWeatherObservation(input);
-  if (!r.ok) {
-    console.log(`✗ FATAL: fixture weather rejected: ${r.reason}`);
-    process.exit(1);
-  }
-  return r.observation;
-}
-
-function oc(
-  trackSnap: TrackSnapshot,
-  setting: string,
-  change: string,
-  citations: string[],
-  outcome: "better" | "same" | "worse",
-  at: string,
-): OutcomeRecord {
-  const r = makeOutcomeRecord(
-    {
-      session_id,
-      car_id,
-      car_name: "MP11 #1",
-      setting,
-      change,
-      citations,
-      outcome,
-      setup_version_id: "sv-1",
-      setup_name: "Practice base",
-      track: trackSnap,
-      conditions: { grip: "medium" },
-    },
-    at,
-    rand,
-  );
-  if (!r.ok) {
-    console.log(`✗ FATAL: fixture outcome rejected: ${r.reason}`);
-    process.exit(1);
-  }
-  return r.record;
-}
-
-const practice = learningTuples(
-  [],
-  [
-    oc(track, "rear_diff_oil", "thinner 4000 → 3000", ["kb-diff-rear-thinner-005"], "better", "2026-06-13T09:00:00.000Z"),
-    oc(track, "clutch_spring", "stiffer 0.95 → 1.00", ["kb-clutch-springs-stiffer-010"], "worse", "2026-06-13T09:30:00.000Z"),
-    // different track — must NOT bleed into this plan
-    oc(otherTrack, "wing_angle", "steeper", ["kb-wing-steeper-307"], "worse", "2026-06-13T09:45:00.000Z"),
-  ],
-);
-
-const RAIN_FORECAST = [
-  obs({ observed_at: "2026-06-13T10:00:00.000Z", source: "auto", air_temp_c: 22, cloud_cover_pct: 40, wind_speed_kmh: 10 }),
-  obs({ observed_at: "2026-06-13T14:00:00.000Z", source: "auto", air_temp_c: 20, precipitation_probability_pct: 70, wind_speed_kmh: 12 }),
-];
-
-const baseInput: RaceDayInput = {
-  practice,
-  forecast: RAIN_FORECAST,
-  track,
-  chassis_template_id: "kyosho-inferno-mp11",
-  current_setup: { clutch_spring: 1.0 },
-};
-
-// ── Rain-incoming plan ────────────────────────────────────────────────────────
-{
-  const r = planRaceDay(baseInput, data);
-  check("rain forecast → ok plan", r.ok);
-  if (r.ok) {
-    const plan = r.plan;
-    check("kind/source stamped", plan.kind === "race_day_plan" && plan.source === "offline_deterministic");
-    check(
-      "forecast read predicts wet from rain probability",
-      plan.forecast_read.some((l) => l.startsWith("wet expected") && l.includes("rain risk 70%")),
-      JSON.stringify(plan.forecast_read),
-    );
-    const wet = plan.adjustments.filter((a) => a.condition_tag === "wet");
-    check("wet adjustment proposed", wet.length >= 1, JSON.stringify(plan.adjustments));
-    check(
-      "wet adjustment cites the clutch-softer rule (amplified_on wet)",
-      wet.some((a) => a.citations.includes("kb-clutch-springs-softer-009")),
-      JSON.stringify(wet),
-    );
-    check(
-      "every adjustment is cited + race-day safe",
-      plan.adjustments.every((a) => a.citations.length > 0 && a.confidence === "high"),
-    );
-    check(
-      "adjustment echoes the current setup value",
-      wet.some((a) => a.change.includes("(currently 1)")),
-      JSON.stringify(wet.map((a) => a.change)),
-    );
-    // R2-3: the wet rule kb-clutch-springs-softer-009 is example-seeded with
-    // mechanism_brief + magnitude_estimate + lap_time_impact_s — they surface.
-    check(
-      "R2-3: wet adjustment mechanism leads with mechanism_brief ('This produces:')",
-      wet.some((a) => a.citations.includes("kb-clutch-springs-softer-009") && a.mechanism.includes("This produces:")),
-      JSON.stringify(wet.map((a) => a.mechanism)),
-    );
-    check(
-      "R2-3: wet adjustment surfaces the magnitude_estimate bracket",
-      wet.some((a) => /engages a few hundred rpm earlier/.test(a.mechanism)),
-      JSON.stringify(wet.map((a) => a.mechanism)),
-    );
-    check(
-      "R2-3: wet adjustment surfaces lap_time_impact_s (~0.2s/lap potential), NaN-free",
-      wet.some((a) => /s\/lap potential/.test(a.mechanism)) && !wet.some((a) => /NaN|Infinity/.test(a.mechanism)),
-      JSON.stringify(wet.map((a) => a.mechanism)),
-    );
-    check(
-      "practice read keeps the better-rated change",
-      plan.practice_read.some((l) => l.startsWith("keep: rear_diff_oil") && l.includes("kb-diff-rear-thinner-005")),
-      JSON.stringify(plan.practice_read),
-    );
-    check(
-      "practice read flags the worse-rated change as avoid",
-      plan.practice_read.some((l) => l.startsWith("avoid: clutch_spring")),
-    );
-    check(
-      "other-track practice never bleeds in",
-      !plan.practice_read.some((l) => l.includes("wing_angle")),
-    );
-    check("assumptions echo the inputs", plan.assumptions.some((l) => l.includes("Nationals Track")));
-    const again = planRaceDay(baseInput, data);
-    check(
-      "deterministic: same input → identical plan",
-      again.ok && JSON.stringify(again.plan) === JSON.stringify(plan),
-    );
-  }
-}
-
-// ── Practice-worse excludes a rule → explicit refusal, not a guess ───────────
-{
-  const withAvoid = {
-    ...baseInput,
-    practice: learningTuples(
-      [],
-      [oc(track, "clutch_spring", "softer 1.00 → 0.95", ["kb-clutch-springs-softer-009"], "worse", "2026-06-13T09:00:00.000Z")],
-    ),
+function bundle(overrides: Partial<ContextBundle> = {}): ContextBundle {
+  return {
+    chassis_template_id: "kyosho-inferno-mp11",
+    setup: { front_diff_oil: 8000, center_diff_oil: 5000, rear_diff_oil: 3000, front_sway_bar: 2.3, rear_sway_bar: 2.8 },
+    track: { name: "Club Track", surface: "clay", grip: "green", conditions: ["low_grip", "dusty"] },
+    feedback: { tags: [{ symptom: "understeer", phase: "mid_corner" }] },
+    mode: "practice",
+    ...overrides,
   };
-  const r = planRaceDay(withAvoid, data);
-  check("avoid-rated wet rule → plan still ok", r.ok);
-  if (r.ok) {
-    check(
-      "rule rated worse here is excluded from adjustments",
-      !r.plan.adjustments.some((a) => a.citations.includes("kb-clutch-springs-softer-009")),
-    );
-    check(
-      "exclusion leaves wet ungrounded → explicit refusal",
-      r.plan.refusals.some((x) => x.aspect === "wet" && x.message.includes("grounded or silent")),
-      JSON.stringify(r.plan.refusals),
-    );
-  }
 }
 
-// ── Ungrounded aspects refuse explicitly ──────────────────────────────────────
-{
-  const cold = {
-    ...baseInput,
-    practice: [],
-    forecast: [
-      obs({ observed_at: "2026-06-13T07:00:00.000Z", source: "auto", air_temp_c: 5, wind_speed_kmh: 35 }),
-    ],
-  };
-  const r = planRaceDay(cold, data);
-  check("cold+wind forecast → ok plan", r.ok);
-  if (r.ok) {
-    check(
-      "no KB rule covers 'cold' → explicit refusal",
-      r.plan.refusals.some((x) => x.aspect === "cold" && x.message.includes("No KB rule covers 'cold'")),
-      JSON.stringify(r.plan.refusals),
-    );
-    check(
-      "wind has no taxonomy tag → explicit refusal, never an adjustment",
-      r.plan.refusals.some((x) => x.aspect === "wind") &&
-        !r.plan.adjustments.some((a) => a.condition_tag === "wind"),
-    );
-    check("cold yields zero adjustments (grounded or silent)", r.plan.adjustments.length === 0);
-    check(
-      "no practice at this track is said out loud",
-      r.plan.practice_read.some((l) => l.includes("no practice history at this track")),
-    );
-  }
+const RACE: RaceWindow = { start_iso: "2026-06-12T14:00:00.000Z", length_s: 600, type: "sprint" };
+
+function dryRuns(): SelectedRunSummary[] {
+  return [
+    { date: "2026-06-08T14:00:00.000Z", track_name: "Club Track", grip: "medium", surface: "clay", air_temp_c: 22, best_lap_s: 34.9, avg_lap_s: 36.1, symptoms: ["understeer"] },
+    { date: "2026-06-09T10:00:00.000Z", track_name: "Club Track", grip: "high", surface: "clay", air_temp_c: 26, best_lap_s: 34.1, avg_lap_s: 35.2, symptoms: ["understeer"], outcome: "same" },
+  ];
 }
 
-// ── Edge cases ────────────────────────────────────────────────────────────────
+// 1. Two dry practice runs + hot (32°C) rainy (70%) forecast
 {
-  const r = planRaceDay({ ...baseInput, practice: [], forecast: [] }, data);
-  check("empty practice + forecast → still a plan (offline-first)", r.ok);
-  if (r.ok) {
-    check(
-      "empty forecast is echoed honestly",
-      r.plan.forecast_read.some((l) => l.includes("no forecast provided")),
-    );
-  }
-  const bad = planRaceDay({ ...baseInput, chassis_template_id: "nope" }, data);
+  const input = bundle();
+  const forecast: Forecast = { air_temp_c: 32, rain_risk_pct: 70 };
+  const plan = buildRacePlan(input, dryRuns(), RACE, forecast, data);
+
+  check("mode forced to race_day, reflected in the report", /RACE DAY/.test(plan.report.conditions_echo), plan.report.conditions_echo);
+  check("forecast ≥30°C adds 'hot' to the echoed conditions", /\bhot\b/.test(plan.report.conditions_echo), plan.report.conditions_echo);
+  check("rain risk ≥50% adds 'wet' to the echoed conditions", /\bwet\b/.test(plan.report.conditions_echo), plan.report.conditions_echo);
   check(
-    "unknown template → discriminated failure, never a throw",
-    !bad.ok && bad.reason === "unknown_template",
+    "conditions_shift states the temperature delta (32 vs avg 24 → ~8°C hotter)",
+    plan.conditions_shift.some((l) => l.includes("~8°C hotter")),
+    plan.conditions_shift.join(" | "),
+  );
+  check(
+    "conditions_shift states the rain risk vs dry practice data",
+    plan.conditions_shift.some((l) => /[Rr]ain risk 70%/.test(l)),
+    plan.conditions_shift.join(" | "),
+  );
+  check(
+    "readiness flags the unresolved symptom (never followed by a 'better' run)",
+    plan.readiness.some((l) => l.includes("Unresolved") && l.includes("understeer")),
+    plan.readiness.join(" | "),
+  );
+  check(
+    "readiness names the best avg lap and its run/date",
+    plan.readiness.some((l) => l.includes("35.2s") && l.includes("2026-06-09")),
+    plan.readiness.join(" | "),
+  );
+  check(
+    "readiness coverage line counts runs and distinct grips",
+    plan.readiness.some((l) => l.includes("2 runs considered, grips: medium, high")),
+    plan.readiness.join(" | "),
+  );
+  check("race_avg_lap_s picks the minimum avg over selected runs", plan.race_avg_lap_s === 35.2, String(plan.race_avg_lap_s));
+  check("technique_tips fire from the shifted conditions", plan.technique_tips.length > 0 && plan.technique_tips.length <= 3, String(plan.technique_tips.length));
+  check(
+    "input bundle is never mutated",
+    input.mode === "practice" && input.track.conditions.length === 2 && input.weather === undefined,
   );
 }
 
-console.log(failures === 0 ? "\nPLANNER: all planRaceDay tests passed" : `\nPLANNER: ${failures} failures`);
-if (failures > 0) process.exit(1);
+// 2. Cold forecast (≤10°C) adds 'cold'
+{
+  const plan = buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 8 }, data);
+  check("forecast ≤10°C adds 'cold' to the echoed conditions", /\bcold\b/.test(plan.report.conditions_echo), plan.report.conditions_echo);
+}
+
+// 3. No temperature data on the selected runs → explicit line
+{
+  const runs = dryRuns().map((r) => ({ ...r, air_temp_c: undefined }));
+  const plan = buildRacePlan(bundle(), runs, RACE, { air_temp_c: 32 }, data);
+  check(
+    "no run temps → conditions_shift says the shift is unknown",
+    plan.conditions_shift.some((l) => /[Nn]o air temperature/.test(l)),
+    plan.conditions_shift.join(" | "),
+  );
+}
+
+// 4. No forecast at all — plan still works, mode still race_day
+{
+  const runs: SelectedRunSummary[] = [
+    { date: "2026-06-08T14:00:00.000Z", track_name: "Club Track", grip: "medium", surface: "clay", symptoms: [] },
+  ];
+  const plan = buildRacePlan(bundle(), runs, RACE, undefined, data);
+  check("undefined forecast → race_day plan without condition shifts", /RACE DAY/.test(plan.report.conditions_echo));
+  check("no avg laps → race_avg_lap_s undefined", plan.race_avg_lap_s === undefined, String(plan.race_avg_lap_s));
+  check("single run coverage line is singular", plan.readiness.some((l) => l.includes("1 run considered, grips: medium")), plan.readiness.join(" | "));
+}
+
+// 5. A symptom followed chronologically by a 'better' run is NOT unresolved
+{
+  const runs: SelectedRunSummary[] = [
+    { date: "2026-06-08T14:00:00.000Z", track_name: "Club Track", grip: "medium", surface: "clay", symptoms: ["oversteer"] },
+    { date: "2026-06-09T10:00:00.000Z", track_name: "Club Track", grip: "medium", surface: "clay", symptoms: [], outcome: "better" },
+  ];
+  const plan = buildRacePlan(bundle(), runs, RACE, undefined, data);
+  check("resolved symptom not flagged", !plan.readiness.some((l) => l.includes("oversteer")), plan.readiness.join(" | "));
+}
+
+// 6. Empty runs → planning refused with a clear error (product rule)
+{
+  let threw = false;
+  try {
+    buildRacePlan(bundle(), [], RACE, { air_temp_c: 32 }, data);
+  } catch (e) {
+    threw = e instanceof Error && /at least one selected run/.test(e.message);
+  }
+  check("empty runs throws a clear error", threw);
+}
+
+// 7. The generic chassis template resolves from the KB
+{
+  const t = getTemplate(data, "generic-offroad");
+  check("getTemplate resolves generic-offroad", t.template_id === "generic-offroad" && t.brand === "Generic");
+  check("generic template carries no kit defaults", Object.values(t.fields).every((f) => !("kit_default" in f)));
+}
+
+// 8. Determinism: same inputs → identical plan (D18)
+{
+  const a = JSON.stringify(buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 32, rain_risk_pct: 70 }, data));
+  const b = JSON.stringify(buildRacePlan(bundle(), dryRuns(), RACE, { air_temp_c: 32, rain_risk_pct: 70 }, data));
+  check("plan is deterministic", a === b);
+}
+
+if (failures > 0) {
+  console.error(`\n${failures} planner test(s) failed`);
+  process.exit(1);
+}
+console.log("\nAll planner tests passed");

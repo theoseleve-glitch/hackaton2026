@@ -1,16 +1,14 @@
 import { writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { loadKBData } from "./node-kb";
+import { loadKBData, serializeBundle, KB_BUNDLE_PATH } from "./node-kb";
 
 /** Compile the KB (yaml rules + taxonomy + chassis templates) into the single
- *  JSON bundle the app imports. Run after every KB change: npm run bundle */
+ *  JSON bundle the app imports. Run after every KB change: npm run bundle
+ *  (test-bundle-fresh.ts fails the suite if you forget). */
 const data = loadKBData();
-const out = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "kb", "bundle.json");
-writeFileSync(out, JSON.stringify(data));
+writeFileSync(KB_BUNDLE_PATH, serializeBundle(data));
 console.log(
   `bundled ${data.rules.length} rules, ${Object.keys(data.templates).length} template(s)` +
     `${data.registry ? `, ${data.registry.length} registry entr(ies)` : ""}` +
     `${data.classes ? `, ${Object.keys(data.classes).length} class(es)` : ""}` +
-    ` → ${out}`,
+    ` → ${KB_BUNDLE_PATH}`,
 );

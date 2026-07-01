@@ -1,0 +1,11 @@
+{
+  "name": "LIVE 1/10 short course: traction-roll on high grip → grounded advice",
+  "expect": { "kind": "recommendation", "settings_any_of": ["rear_camber", "front_camber", "front_sway_bar", "rear_sway_bar", "ride_height", "front_spring", "rear_spring", "tire_rear_insert"] },
+  "bundle": {
+    "chassis_template_id": "associated-sc6-1",
+    "setup": {},
+    "track": { "name": "High-bite Track", "surface": "clay", "grip": "high", "conditions": ["high_grip"] },
+    "feedback": { "tags": [{ "symptom": "traction_roll", "phase": "mid_corner" }], "text": "tall SC body wants to roll over in the high-grip corners" },
+    "mode": "practice"
+  }
+}

@@ -16,10 +16,6 @@
     reduced_on: []
   counter_indications: [no_forward_bite]
   magnitude_guidance: "One step at a time (e.g. 7000 → 5000 cSt). Too thin makes steering inconsistent and loses forward traction out of corners."
-  # R3 example lap_time_impact_s, NEEDS WILLIAM to author the rest of the rules'
-  # values. Lower than kb-diff-rear-thinner-005 (0.2) on purpose so the ROI sort
-  # has a clean two-impact-rule decision to make (rear-thinner gains more lap time).
-  lap_time_impact_s: 0.1
   reversal_cost_minutes: 12
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]
@@ -39,7 +35,7 @@
   conditions:
     amplified_on: [high_grip]
     reduced_on: [wet]
-  counter_indications: [understeer]   # if already pushing entry, thicker front makes entry worse
+  counter_indications: []   # entry-push caveat is carried by the address phase (corner_exit / on_power only)
   magnitude_guidance: "One step at a time (e.g. 5000 → 7000 cSt)."
   reversal_cost_minutes: 12
   confidence: high
@@ -60,10 +56,7 @@
     amplified_on: [rough, bumpy, low_grip]
     reduced_on: []
   counter_indications: []
-  magnitude_guidance: "One step at a time (e.g. 7000 → 5000 cSt) and re-test. Front wheels unload more during acceleration."
-  # M2 — overheat/mechanical-failure gate elevated from prose. PROVISIONAL bounds
-  # (floor + temp ceiling) pending William/domain ratification.
-  danger: "Thin centre-diff oil can overheat and seize the diff on a high-power engine — losing drive at speed. On high-power engines do NOT thin the centre diff below ~3000 cSt, and check the diff is not running hot (warm is fine, too-hot-to-touch is not) after each run. Low/mid-power engines have more margin but still re-test."
+  magnitude_guidance: "One step (e.g. 7000 → 5000 cSt). Front wheels unload more during acceleration; with a high-power engine very thin center oil can overheat ('cook')."
   reversal_cost_minutes: 10
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]
@@ -92,12 +85,8 @@
 - id: kb-diff-rear-thinner-005
   setting: rear_diff_oil
   direction: decrease
-  # R2-3 example, NEEDS WILLIAM to author the rest of the rules' values:
-  # one-line physics for why thinner rear diff oil adds mid-corner rotation.
-  mechanism_brief: "Thinner rear-diff oil lets the inside rear spin up more freely, so the diff transfers less torque and the rear rotates into the corner instead of pushing."
   effects:
-    # R2-3 example magnitude_estimate (NEEDS WILLIAM for the rest):
-    - { axis: cornering_traction, change: more, magnitude_estimate: "noticeably more rear bite, ~one tyre-width tighter line" }
+    - { axis: cornering_traction, change: more }
     - { axis: steering_into_corner, change: more }
   addresses:
     - { symptom: understeer, phase: corner_entry }
@@ -108,9 +97,6 @@
     reduced_on: []
   counter_indications: []
   magnitude_guidance: "One step at a time (e.g. 4000 → 3000 cSt)."
-  # R2-3 example lap_time_impact_s (NEEDS WILLIAM for the rest). SURFACE-ONLY this
-  # round — shown in the rationale, never used to reorder retrieval.
-  lap_time_impact_s: 0.2
   reversal_cost_minutes: 12
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.35"]
@@ -176,10 +162,8 @@
 - id: kb-clutch-springs-softer-009
   setting: clutch_spring
   direction: decrease
-  # R2-3 example, NEEDS WILLIAM to author the rest of the rules' values:
-  mechanism_brief: "A softer clutch spring engages earlier and more progressively, so torque builds smoothly instead of spiking the rear loose when grip is scarce."
   effects:
-    - { axis: clutch_engagement, change: earlier_gradual, magnitude_estimate: "engages a few hundred rpm earlier, smoother power pickup" }
+    - { axis: clutch_engagement, change: earlier_gradual }
     - { axis: drivability_low_grip, change: easier }
   addresses:
     - { symptom: no_forward_bite, phase: corner_exit }
@@ -189,8 +173,6 @@
     reduced_on: [high_grip]
   counter_indications: []
   magnitude_guidance: "One spring step softer (e.g. 1.00 → 0.95). Earlier, more gradual engagement — easier to drive on low grip."
-  # R2-3 example lap_time_impact_s (NEEDS WILLIAM for the rest). SURFACE-ONLY.
-  lap_time_impact_s: 0.15
   reversal_cost_minutes: 15
   confidence: high
   sources: ["HUDY Off-Road Set-Up Book p.34 §2.0.1"]

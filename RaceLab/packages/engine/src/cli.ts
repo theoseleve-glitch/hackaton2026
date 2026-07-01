@@ -27,7 +27,6 @@ function render(rec: Recommendation): void {
 function printOption(label: string, o: RecommendationOption): void {
   console.log(`── ${label} ─ ${o.setting} ─ confidence: ${o.confidence}`);
   console.log(`   change:  ${o.change}`);
-  if (o.magnitude) console.log(`   amount:  ${o.magnitude}`);
   console.log(`   why:     ${o.mechanism}`);
   console.log(`   expect:  ${o.expected_effect}`);
   console.log(`   revert:  ${o.revert}`);

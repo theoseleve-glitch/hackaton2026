@@ -2,15 +2,15 @@
 
 **The code is done** (`src/iap.ts`, `entitlements.tsx`, `Paywall.tsx`, `Settings`, schema `source:"iap"`; anonymous, advisor free, local 15-day trial, offline-grace; tsc + tests green; adversarially reviewed, 0 defects). These steps make purchases **real**. Everything below needs accounts you own — no secret goes in the app (only the public SDK keys).
 
-Products/IDs the code expects: entitlement **`pro`**, products **`racelab_pro_monthly`** (9,99 €/mo) + **`racelab_pro_annual`** (99,99 €/yr), an Offering whose `current` has a **monthly** + **annual** package.
+Products/IDs the code expects: entitlement **`pro`**, products **`racelab_pro_monthly`** (4,99 €/mo) + **`racelab_pro_annual`** (39,99 €/yr), an Offering whose `current` has a **monthly** + **annual** package.
 
 ---
 
 ## Part 1 — Google Play Console
 1. [ ] The **app** exists in Play Console (`app.racelab`) — same app you'd ship anyway.
 2. [ ] **Create 2 subscriptions** (Monetize → Products → Subscriptions → Create):
-   - Product ID `racelab_pro_monthly` → base plan **monthly**, price **9,99 €** (Play auto-converts currencies).
-   - Product ID `racelab_pro_annual` → base plan **yearly**, price **99,99 €**.
+   - Product ID `racelab_pro_monthly` → base plan **monthly**, price **4,99 €** (Play auto-converts currencies).
+   - Product ID `racelab_pro_annual` → base plan **yearly**, price **39,99 €**.
    - **No Play free-trial / intro offer** — the app runs its own 15-day local trial (adding a Play trial = double trial). *(If you'd rather Google manage the trial, add an intro offer and tell me — I'll drop the local trial.)*
    - **Activate** both.
 3. [ ] **License testers** (so you buy without real charges): Setup → License testing → add tester Google accounts (their purchases are test/refundable).

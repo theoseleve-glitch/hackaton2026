@@ -1,13 +1,12 @@
-import type { KBData } from "./data";
+import { type KBData, resolveTemplate } from "./data";
 import { retrieve } from "./retrieval";
 import {
   DO_NOTHING_MESSAGE,
   OUT_OF_KB_MESSAGE,
   engineScopeViolation,
   raceDayFilter,
-  sanitizeBundle,
 } from "./guard";
-import { buildOfflineCard, conditionsEcho, filterToTemplate } from "./offline";
+import { buildOfflineCard, conditionsEcho } from "./offline";
 import type { ContextBundle, Recommendation } from "./types";
 
 /**
@@ -15,19 +14,18 @@ import type { ContextBundle, Recommendation } from "./types";
  * scope check → deterministic retrieval → race-day filter → templated card.
  * Pure function of (bundle, data) — runs identically in node and in the app.
  */
-export function recommend(rawBundle: ContextBundle, data: KBData): Recommendation {
-  // M5: strip non-finite numerics at the boundary before anything is rendered.
-  const bundle = sanitizeBundle(rawBundle);
+export function recommend(bundle: ContextBundle, data: KBData): Recommendation {
   const echo = conditionsEcho(bundle);
 
-  // M4: unknown chassis template is an in-band refusal — NEVER a throw across
-  // the package boundary (mirrors proposePlan()).
-  const template = data.templates[bundle.chassis_template_id];
+  // 0. Unknown chassis → refuse in-band (never throw on the data path), matching
+  //    proposePlan/planRaceDay. The registry carries pending_pdf chassis, so the
+  //    app can legitimately ask about one not yet extracted.
+  const template = resolveTemplate(data, bundle.chassis_template_id);
   if (!template) {
     return {
       kind: "refusal",
       source: "offline_deterministic",
-      message: `Chassis template '${bundle.chassis_template_id}' is not in the KB, so I have no verified bounds for this car and won't guess. What to do: pick one of the supported chassis (the closest match works to start), then describe the symptom and I'll have grounded rules to work from.`,
+      message: `I don't have a verified setup sheet for this chassis yet, so I won't guess.`,
       conditions_echo: echo,
     };
   }
@@ -40,10 +38,6 @@ export function recommend(rawBundle: ContextBundle, data: KBData): Recommendatio
 
   // 2. Deterministic retrieval
   let scored = retrieve(data.rules, bundle, template);
-  const retrievedIds = new Set(scored.map(({ rule }) => rule.id));
-
-  // 2b. M6b: drop rules whose setting isn't on this template (grounded-or-silent).
-  scored = filterToTemplate(scored, template);
 
   // 3. Race-day mode: filter the candidate pool BEFORE choosing
   if (bundle.mode === "race_day") {
@@ -63,9 +57,8 @@ export function recommend(rawBundle: ContextBundle, data: KBData): Recommendatio
     };
   }
 
-  // 4. Templated card from the top-ranked rules (distinct settings). Each option
-  //    passes the fail-closed emittable gate (grounded + on-template + finite).
-  const card = buildOfflineCard(scored, bundle, template, retrievedIds);
+  // 4. Templated card from the top-ranked rules (distinct settings)
+  const card = buildOfflineCard(scored, bundle);
   if (!card) {
     return { kind: "refusal", source: "offline_deterministic", message: OUT_OF_KB_MESSAGE, conditions_echo: echo };
   }
